@@ -25,5 +25,6 @@ protocol BinaryCalculable: BasicCalculable {
     func nor()
     func not()
     func nand()
-    func shift()
+    func leftShift()
+    func rightShift()
 }
