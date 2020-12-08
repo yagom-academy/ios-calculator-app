@@ -1,5 +1,5 @@
 //
-//  CalculatorType.swift
+//  OperatorType.swift
 //  Calculator
 //
 //  Created by Wonhee on 2020/12/08.
@@ -7,13 +7,14 @@
 
 import Foundation
 
-enum CalculatorType: String {
-    case number
-    case plus = "+"
-    case minus = "-"
-    case multiple = "*"
+enum DecimalOperatorType: String, CaseIterable {
     case divide = "/"
-    case equal = "="
+    case multiple = "*"
+    case minus = "-"
+    case plus = "+"
+}
+
+enum BinaryOperatorType: String, CaseIterable {
     case leftShift = "<<"
     case rightShift = ">>"
     case or = "OR"
