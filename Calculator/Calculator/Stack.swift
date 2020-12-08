@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Stack<Element> {
+struct Stack<Element> {
     private var items: [Element] = []
     
     var top: Element? {
@@ -22,15 +22,15 @@ class Stack<Element> {
         return items.count > 0 ? true : false
     }
     
-    func push(_ item: Element) {
+    mutating func push(_ item: Element) {
         items.append(item)
     }
     
-    func pop() -> Element? {
+    mutating func pop() -> Element? {
         items.popLast()
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         items.removeAll()
     }
 }
