@@ -8,23 +8,23 @@
 import Foundation
 
 protocol BasicCalculable {
-    func add()
-    func subtract()
-    func multiply()
+    func add(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func subtract(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
     func clear()
 }
 
 protocol DecimalCalculable: BasicCalculable {
-    func divide()
+    func divide(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
 }
 
 protocol BinaryCalculable: BasicCalculable {
-    func and()
-    func or()
-    func xor()
-    func nor()
-    func not()
-    func nand()
-    func leftShift()
-    func rightShift()
+    func and(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func or(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func xor(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func nor(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func not(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func nand(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func leftShift(_ item: CalculatorData) -> CalculatorData
+    func rightShift(_ item: CalculatorData) -> CalculatorData
 }
