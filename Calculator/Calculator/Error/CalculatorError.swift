@@ -10,6 +10,7 @@ import Foundation
 enum CalculatorError: Error {
     case overFlow
     case divideByZero
+    case unknowned
 }
 
 extension CalculatorError : LocalizedError {
@@ -19,6 +20,8 @@ extension CalculatorError : LocalizedError {
             return "9자릿수까지 입력할 수 있습니다."
         case .divideByZero:
             return "0으로 나눌 수 없습니다.\n다시 시도해 주세요."
+        case .unknowned:
+            return "알 수 없는 오류가 발생했습니다.\n다시 시도해 주세요."
         }
     }
 }
