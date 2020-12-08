@@ -7,6 +7,19 @@
 
 import Foundation
 
-enum CalculatorType {
+enum CalculatorType: String {
     case number
+    case plus = "+"
+    case minus = "-"
+    case multiple = "*"
+    case divide = "/"
+    case equal = "="
+    case leftShift = "<<"
+    case rightShift = ">>"
+    case or = "OR"
+    case nor = "NOR"
+    case not = "NOT"
+    case and = "AND"
+    case nand = "NAND"
+    case xor = "XOR"
 }
