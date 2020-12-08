@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func DecimalComma() -> String? {
+    func decimalPutComma() -> String? {
         let numberStringArray = self.split(separator: ".").map { value -> String in
             return String(value)
         }
@@ -22,5 +22,9 @@ extension String {
         }
         
         return formattedNumber + (numberStringArray.last ?? "")
+    }
+    
+    func decimalRemoveComma() -> String {
+        return self.replacingOccurrences(of: ",", with: "")
     }
 }
