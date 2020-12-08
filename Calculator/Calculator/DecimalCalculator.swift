@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum DecimalCalculatorError: Error {
+    case emptyStack
+    case lackNumber
+    case stackItemError
+}
+
 class DecimalCalculator: BasicCalculable, DecimalCalculable {
     
     private var operatorStack: Stack<String> = Stack<String>()
@@ -133,6 +139,44 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
         }
         
         operatorStack.push("/")
+    }
+    
+    func equal() throws -> Double {
+        guard operatorStack.size > 0 && numberStack.size > 0 else {
+            throw DecimalCalculatorError.emptyStack
+        }
+        
+        if operatorStack.size == numberStack.size {
+            /// - TODO: 마지막에 입력한 숫자를 숫자 스택에 넣도록 변경
+            _ = operatorStack.pop()
+        }
+        
+        while operatorStack.top != nil {
+            let `operator` = operatorStack.pop()
+            guard let number1 = numberStack.pop(), let number2 = numberStack.pop() else {
+                throw DecimalCalculatorError.lackNumber
+            }
+            
+            switch `operator` {
+            case "+":
+                numberStack.push(number2 + number1)
+            case "-":
+                numberStack.push(number2 - number1)
+            case "*":
+                numberStack.push(number2 * number1)
+            case "/":
+                numberStack.push(number2 / number1)
+            default:
+                /// - TODO: 잘못된 연산자가 스택에 있을 경우에 대한 예외처리.
+                print("잘못된 연산자")
+            }
+        }
+        
+        guard let result = numberStack.pop() else {
+            throw DecimalCalculatorError.stackItemError
+        }
+        
+        return result
     }
     
     func check() {
