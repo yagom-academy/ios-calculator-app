@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+protocol BasicCalculable {
+    func add()
+    func subtract()
+    func multiply()
+    func clear()
+}
