@@ -14,7 +14,7 @@ enum Operator: Int {
     case not
 }
 
-enum DecimalOperator: String {
+enum DecimalOperatorType: String, CaseIterable {
     case add = "+"
     case subtract = "-"
     case multiple = "*"
@@ -30,7 +30,7 @@ enum DecimalOperator: String {
     }
 }
 
-enum Binaryoperator: String {
+enum BinaryoperatorType: String, CaseIterable {
     case leftShift = "<<"
     case rightShift = ">>"
     case and = "AND"
