@@ -23,12 +23,12 @@ protocol DecimalCalculable: BasicCalculable {
 
 protocol BinaryCalculable: BasicCalculable {
     func getOperatorType(_ item: String) throws -> BinaryOperatorType
-    func and(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func or(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func xor(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func nor(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func not(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func nand(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func and(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func or(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func xor(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func nor(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func not(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func nand(firstItem: CalculatorData, secondItem: CalculatorData) throws
     func leftShift(_ item: CalculatorData) -> CalculatorData
     func rightShift(_ item: CalculatorData) -> CalculatorData
 }

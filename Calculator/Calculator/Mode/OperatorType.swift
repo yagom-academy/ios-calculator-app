@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum Operator: Int {
-    case leftShift, rightShift = 1
-    case divide, multiple, and, nand
-    case add, subtract, or, nor, xor
-    case not
-}
-
 enum DecimalOperatorType: String, CaseIterable {
     case add = "+"
     case subtract = "-"
@@ -59,5 +52,13 @@ enum BinaryOperatorType: String, CaseIterable {
         case .not:
             return 0
         }
+    }
+    
+    func isPrecedence(compare: BinaryOperatorType) -> Bool {
+        let operatorPrecedence = self.precedence
+        let compareOperatorPrecedence = compare.precedence
+        
+        // compare의 우선순위가 self보다 높거나 같다면 true 낮다면 false
+        return (operatorPrecedence - compareOperatorPrecedence >= 0)
     }
 }
