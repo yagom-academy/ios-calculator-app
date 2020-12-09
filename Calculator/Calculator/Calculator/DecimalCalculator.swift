@@ -36,22 +36,27 @@ class DecimalCalculator: DecimalCalculable {
                       let firstItem = decimalStack.pop() else {
                     throw CalculatorError.calculator
                 }
+                var resultData: CalculatorData
                 switch formulaType {
                 case .add:
-                    try add(firstItem: firstItem, secondItem: secondItem)
+                    resultData = try add(firstItem: firstItem, secondItem: secondItem)
                 case .subtract:
-                    try subtract(firstItem: firstItem, secondItem: secondItem)
+                    resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
                 case .multiple:
-                    try multiply(firstItem: firstItem, secondItem: secondItem)
+                    resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
                 case .divide:
-                    try divide(firstItem: firstItem, secondItem: secondItem)
+                    resultData = try divide(firstItem: firstItem, secondItem: secondItem)
                 }
+                guard let result = resultData as? DecimalData else {
+                    throw CalculatorError.calculator
+                }
+                decimalStack.push(result)
             }
             
-            guard let resultData = decimalStack.pop() else {
+            guard let calculatorResultData = decimalStack.pop() else {
                 throw CalculatorError.calculator
             }
-            return resultData
+            return calculatorResultData
         } catch {
              throw error
         }
@@ -78,7 +83,7 @@ class DecimalCalculator: DecimalCalculable {
                             decimalStack.push(operatorData)
                             break
                         }
-                        postFixFormula.append(compareOperatorData)
+                        postFixFormula.append(compareOperatorData) 
                         decimalStack.pop()
                     }
                 }
@@ -107,40 +112,41 @@ class DecimalCalculator: DecimalCalculable {
         return DecimalData(value: item, type: operatorType)
     }
     
-    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws {
-        guard let firstNumber = Double(firstItem.value.decimalRemoveComma()),
-              let secondNumber = Double(secondItem.value.decimalRemoveComma()) else {
+    // TODO: VC에서 숫자 ,있는 상태로 받을지 결정 후 , remove 사용 확인하기
+    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        guard let firstNumber = Double(firstItem.value),
+              let secondNumber = Double(secondItem.value) else {
             throw CalculatorError.unknowned
         }
         let resultNumber = firstNumber / secondNumber
-        decimalStack.push(DecimalData(value: String(resultNumber), type: nil))
+        return DecimalData(value: String(resultNumber), type: nil)
     }
     
-    func add(firstItem: CalculatorData, secondItem: CalculatorData) throws {
-        guard let firstNumber = Double(firstItem.value.decimalRemoveComma()),
-              let secondNumber = Double(secondItem.value.decimalRemoveComma()) else {
+    func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        guard let firstNumber = Double(firstItem.value),
+              let secondNumber = Double(secondItem.value) else {
             throw CalculatorError.unknowned
         }
         let resultNumber = firstNumber + secondNumber
-        decimalStack.push(DecimalData(value: String(resultNumber), type: nil))
+        return DecimalData(value: String(resultNumber), type: nil)
     }
     
-    func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws {
+    func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
         guard let firstNumber = Double(firstItem.value),
               let secondNumber = Double(secondItem.value) else {
             throw CalculatorError.unknowned
         }
         let resultNumber = firstNumber - secondNumber
-        decimalStack.push(DecimalData(value: String(resultNumber), type: nil))
+        return DecimalData(value: String(resultNumber), type: nil)
     }
     
-    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws {
+    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
         guard let firstNumber = Double(firstItem.value),
               let secondNumber = Double(secondItem.value) else {
             throw CalculatorError.unknowned
         }
         let resultNumber = firstNumber * secondNumber
-        decimalStack.push(DecimalData(value: String(resultNumber), type: nil))
+        return DecimalData(value: String(resultNumber), type: nil)
     }
     
     func clear() {
