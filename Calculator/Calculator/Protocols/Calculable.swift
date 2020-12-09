@@ -8,17 +8,21 @@
 import Foundation
 
 protocol BasicCalculable {
-    func add(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func subtract(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
-    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func calculate(_ items: [String]) throws -> CalculatorData
+    func putFormula(_ items: [String]) throws -> [CalculatorData]
+    func add(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws
+    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws
     func clear()
 }
 
 protocol DecimalCalculable: BasicCalculable {
-    func divide(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
+    func getOperatorData(_ item: String) throws -> DecimalData
+    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws
 }
 
 protocol BinaryCalculable: BasicCalculable {
+    func getOperatorType(_ item: String) throws -> BinaryOperatorType
     func and(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
     func or(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData
     func xor(firstItem: CalculatorData, secondItem: CalculatorData) -> CalculatorData

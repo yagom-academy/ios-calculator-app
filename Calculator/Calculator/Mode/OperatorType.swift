@@ -28,9 +28,17 @@ enum DecimalOperatorType: String, CaseIterable {
             return 2
         }
     }
+    
+    func isPrecedence(compare: DecimalOperatorType) -> Bool {
+        let operatorPrecedence = self.precedence
+        let compareOperatorPrecedence = compare.precedence
+        
+        // compare의 우선순위가 self보다 높거나 같다면 true 낮다면 false
+        return (operatorPrecedence - compareOperatorPrecedence >= 0)
+    }
 }
 
-enum BinaryoperatorType: String, CaseIterable {
+enum BinaryOperatorType: String, CaseIterable {
     case leftShift = "<<"
     case rightShift = ">>"
     case and = "AND"

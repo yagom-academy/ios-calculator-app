@@ -7,37 +7,9 @@
 
 import Foundation
 
-class BinaryCalculator: BinaryCalculable {
-    func and() {
-    }
+class BinaryCalculator {
+    static let shared: BinaryCalculator = BinaryCalculator()
+    private init() {}
     
-    func or() {
-    }
-    
-    func xor() {
-    }
-    
-    func nor() {
-    }
-    
-    func not() {
-    }
-    
-    func nand() {
-    }
-    
-    func shift() {
-    }
-    
-    func add() {
-    }
-    
-    func subtract() {
-    }
-    
-    func multiply() {
-    }
-    
-    func clear() {
-    }
+    private var binaryStack = Stack<CalculatorData>()
 }
