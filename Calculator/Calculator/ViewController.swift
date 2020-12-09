@@ -5,7 +5,7 @@
 // 
 
 import UIKit
-
+// TODO: 이진 계산기에서 not, shift는 식에 넣을때 바로 변환해서 넣어주기?
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
