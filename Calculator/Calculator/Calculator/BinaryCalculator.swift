@@ -44,7 +44,7 @@ class BinaryCalculator: BinaryCalculable {
                 case .subtract:
                     resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
                 case .multiple:
-                    resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+                    resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
                 case .leftShift:
                     binaryStack.push(firstItem)
                     resultData = try leftShift(secondItem)
