@@ -15,9 +15,9 @@ enum DecimalOperatorType: String, CaseIterable {
     
     var precedence: Int {
         switch self {
-        case .add, .subtract:
-            return 3
         case .multiple, .divide:
+            return 1
+        case .add, .subtract:
             return 2
         }
     }
