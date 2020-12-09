@@ -5,4 +5,7 @@
 //  Created by Yeon on 2020/12/07.
 //
 
-import Foundation
+enum CalculatorMode {
+    case decimal
+    case binary
+}
