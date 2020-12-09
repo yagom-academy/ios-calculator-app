@@ -7,180 +7,181 @@
 
 import Foundation
 
-enum DecimalCalculatorError: Error {
+enum CalculatorError: Error {
+    case divisionByZero
     case emptyStack
     case lackNumber
     case stackItemError
 }
 
 class DecimalCalculator: BasicCalculable, DecimalCalculable {
+    struct Operator {
+        let symbol: String
+        let priority: Int
+        let operate: (Double, Double) -> Double
+        init(_ symbol: String, _ priority: Int, _ operate: @escaping (Double, Double) -> Double) {
+            self.symbol = symbol
+            self.priority = priority
+            self.operate = operate
+        }
+    }
     
-    private var operatorStack: Stack<String> = Stack<String>()
-    private var numberStack: Stack<Double> = Stack<Double>()
+    enum DecimalCalculatorOperator {
+        case add
+        case subtract
+        case multiply
+        case divide
+    }
+    
+    private var operatorStack: Stack<DecimalCalculatorOperator> = Stack<DecimalCalculatorOperator>()
+    private var operandStack: Stack<Double> = Stack<Double>()
+    private var operatorDetails: [DecimalCalculatorOperator: Operator] = [
+        .add: Operator("+", 4, {(operand1: Double, operand2: Double) in return operand1 + operand2}),
+        .subtract: Operator("-", 4, {(operand1: Double, operand2: Double) in return operand1 - operand2}),
+        .multiply: Operator("*", 3, {(operand1: Double, operand2: Double) in return operand1 * operand2}),
+        .divide: Operator("/", 3, {(operand1: Double, operand2: Double) in return operand2 / operand1})
+    ]
     
     func pushNumber(_ number: Double) {
-        numberStack.push(number)
+        operandStack.push(number)
     }
     
     /// - TODO: 연산자 2개이상이 연속으로 들어올경우에 대한 예외 처리.
+    /// - TODO: 연산 함수의 리턴값이 필요할거 같다.
     func add() {
-        guard numberStack.size > 0 else {
-            return
-        }
+        guard operandStack.size > 0 else { return }
         
-        while operatorStack.top != nil {
-            let `operator` = operatorStack.pop()
-            guard let number1 = numberStack.pop(), let number2 = numberStack.pop() else {
+        guard let addOperatorDetail = operatorDetails[.add] else { return }
+        
+        while let lastOperator = operatorStack.top {
+            guard let lastOperatorDetail = operatorDetails[lastOperator] else { return }
+            
+            if lastOperatorDetail.priority > addOperatorDetail.priority { break }
+            
+            _ = operatorStack.pop()
+            
+            guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
                 /// - TODO: numberStack size가 2보다 작을 경우에 대한 예외처리.
                 return
             }
             
-            switch `operator` {
-            case "+":
-                numberStack.push(number2 + number1)
-            case "-":
-                numberStack.push(number2 - number1)
-            case "*":
-                numberStack.push(number2 * number1)
-            case "/":
-                numberStack.push(number2 / number1)
-            default:
-                /// - TODO: 잘못된 연산자가 스택에 있을 경우에 대한 예외처리.
-                print("잘못된 연산자")
-            }
+            let resultByLastOperator = lastOperatorDetail.operate(operand1, operand2)
+            operandStack.push(resultByLastOperator)
         }
         
-        operatorStack.push("+")
+        operatorStack.push(.add)
     }
     
     func subtract() {
-        guard numberStack.size > 0 else {
-            return
-        }
+        guard operandStack.size > 0 else { return }
         
-        while operatorStack.top != nil {
-            let `operator` = operatorStack.pop()
-            guard let number1 = numberStack.pop(), let number2 = numberStack.pop() else {
+        guard let addOperatorDetail = operatorDetails[.subtract] else { return }
+        
+        while let lastOperator = operatorStack.top {
+            guard let lastOperatorDetail = operatorDetails[lastOperator] else { return }
+            
+            if lastOperatorDetail.priority > addOperatorDetail.priority { break }
+            
+            _ = operatorStack.pop()
+            
+            guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
                 /// - TODO: numberStack size가 2보다 작을 경우에 대한 예외처리.
                 return
             }
             
-            switch `operator` {
-            case "+":
-                numberStack.push(number2 + number1)
-            case "-":
-                numberStack.push(number2 - number1)
-            case "*":
-                numberStack.push(number2 * number1)
-            case "/":
-                numberStack.push(number2 / number1)
-            default:
-                /// - TODO: 잘못된 연산자가 스택에 있을 경우에 대한 예외처리.
-                print("잘못된 연산자")
-            }
+            let resultByLastOperator = lastOperatorDetail.operate(operand1, operand2)
+            operandStack.push(resultByLastOperator)
         }
         
-        operatorStack.push("-")
+        operatorStack.push(.subtract)
     }
     
     func multiply() {
-        guard numberStack.size > 0 else {
-            return
-        }
+        guard operandStack.size > 0 else { return }
         
-        while let top = operatorStack.top, top == "*" || top == "/" {
-            let `operator` = operatorStack.pop()
-            guard let number1 = numberStack.pop(), let number2 = numberStack.pop() else {
+        guard let addOperatorDetail = operatorDetails[.multiply] else { return }
+        
+        while let lastOperator = operatorStack.top {
+            guard let lastOperatorDetail = operatorDetails[lastOperator] else { return }
+            
+            if lastOperatorDetail.priority > addOperatorDetail.priority { break }
+            
+            _ = operatorStack.pop()
+            
+            guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
                 /// - TODO: numberStack size가 2보다 작을 경우에 대한 예외처리.
                 return
             }
             
-            switch `operator` {
-            case "*":
-                numberStack.push(number2 * number1)
-            case "/":
-                numberStack.push(number2 / number1)
-            default:
-                /// - TODO: 잘못된 연산자가 스택에 있을 경우에 대한 예외처리.
-                print("잘못된 연산자")
-            }
+            let resultByLastOperator = lastOperatorDetail.operate(operand1, operand2)
+            operandStack.push(resultByLastOperator)
         }
         
-        operatorStack.push("*")
+        operatorStack.push(.multiply)
     }
     
     func clear() {
         operatorStack.removeAll()
-        numberStack.removeAll()
+        operandStack.removeAll()
     }
     
     func divide() {
-        guard numberStack.size > 0 else {
-            return
-        }
+        guard operandStack.size > 0 else { return }
         
-        /// - TODO: divideByZero 에러 처리
-        while let top = operatorStack.top, top == "*" || top == "/" {
-            let `operator` = operatorStack.pop()
-            guard let number1 = numberStack.pop(), let number2 = numberStack.pop() else {
+        guard let addOperatorDetail = operatorDetails[.divide] else { return }
+        
+        while let lastOperator = operatorStack.top {
+            guard let lastOperatorDetail = operatorDetails[lastOperator] else { return }
+            
+            if lastOperatorDetail.priority > addOperatorDetail.priority { break }
+            
+            _ = operatorStack.pop()
+            
+            guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
                 /// - TODO: numberStack size가 2보다 작을 경우에 대한 예외처리.
                 return
             }
             
-            switch `operator` {
-            case "*":
-                numberStack.push(number2 * number1)
-            case "/":
-                numberStack.push(number2 / number1)
-            default:
-                /// - TODO: 잘못된 연산자가 스택에 있을 경우에 대한 예외처리.
-                print("잘못된 연산자")
-            }
+            let resultByLastOperator = lastOperatorDetail.operate(operand1, operand2)
+            operandStack.push(resultByLastOperator)
         }
         
-        operatorStack.push("/")
+        operatorStack.push(.divide)
     }
     
     func equal() throws -> Double {
-        guard operatorStack.size > 0 && numberStack.size > 0 else {
-            throw DecimalCalculatorError.emptyStack
+        guard operatorStack.size > 0 && operandStack.size > 0 else {
+            throw CalculatorError.emptyStack
         }
         
-        if operatorStack.size == numberStack.size {
+        if operatorStack.size == operandStack.size {
             /// - TODO: 마지막에 입력한 숫자를 숫자 스택에 넣도록 변경
             _ = operatorStack.pop()
         }
         
-        while operatorStack.top != nil {
-            let `operator` = operatorStack.pop()
-            guard let number1 = numberStack.pop(), let number2 = numberStack.pop() else {
-                throw DecimalCalculatorError.lackNumber
+        while let lastOperator = operatorStack.pop() {
+            guard let lastOperatorDetail = operatorDetails[lastOperator] else {
+                /// - TODO: 적당한 에러로 교체 필요.
+                throw CalculatorError.lackNumber
             }
             
-            switch `operator` {
-            case "+":
-                numberStack.push(number2 + number1)
-            case "-":
-                numberStack.push(number2 - number1)
-            case "*":
-                numberStack.push(number2 * number1)
-            case "/":
-                numberStack.push(number2 / number1)
-            default:
-                /// - TODO: 잘못된 연산자가 스택에 있을 경우에 대한 예외처리.
-                print("잘못된 연산자")
+            guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
+                throw CalculatorError.lackNumber
             }
+            
+            let resultByLastOperator = lastOperatorDetail.operate(operand1, operand2)
+            operandStack.push(resultByLastOperator)
         }
         
-        guard let result = numberStack.pop() else {
-            throw DecimalCalculatorError.stackItemError
+        guard let result = operandStack.pop() else {
+            throw CalculatorError.stackItemError
         }
         
         return result
     }
     
     func check() {
-        print(operatorStack, numberStack)
+        print(operatorStack, operandStack)
     }
     
 }
