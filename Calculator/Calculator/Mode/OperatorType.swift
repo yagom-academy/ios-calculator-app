@@ -46,14 +46,12 @@ enum BinaryOperatorType: String, CaseIterable {
     
     var precedence: Int {
         switch self {
-        case .leftShift, .rightShift:
+        case .leftShift, .rightShift, .not:
             return 1
         case .and, .nand, .multiple:
             return 2
-        case .or, .nor, .xor, .add, .subtract:
+        case .or, .nor, .add, .subtract, .xor:
             return 3
-        case .not:
-            return 0
         }
     }
     

@@ -44,7 +44,13 @@ class BinaryCalculator: BinaryCalculable {
                 case .subtract:
                     resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
                 case .multiple:
-                    resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
+                    resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+                case .leftShift:
+                    binaryStack.push(firstItem)
+                    resultData = try leftShift(secondItem)
+                case .rightShift:
+                    binaryStack.push(firstItem)
+                    resultData = try rightShift(secondItem)
                 case .and:
                     resultData = try and(firstItem: firstItem, secondItem: secondItem)
                 case .nand:
@@ -55,8 +61,9 @@ class BinaryCalculator: BinaryCalculable {
                     resultData = try nor(firstItem: firstItem, secondItem: secondItem)
                 case .xor:
                     resultData = try xor(firstItem: firstItem, secondItem: secondItem)
-                default:
-                    throw CalculatorError.calculator
+                case .not:
+                    binaryStack.push(firstItem)
+                    resultData = try not(secondItem)
                 }
                 guard let result = resultData as? BinaryData else {
                     throw CalculatorError.calculator
