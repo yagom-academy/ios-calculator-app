@@ -17,98 +17,90 @@ class BinaryCalculator: BinaryCalculable {
 
     func calculate(_ items: [String]) throws -> CalculatorData {
         // 후위표기식으로 바뀐 식 array
-        do {
-            guard binaryStack.isEmpty else {
-                throw CalculatorError.calculator
-            }
-            let postFixFormula = try putFormula(items).map({ data -> BinaryData in
-                guard let binaryData = data as? BinaryData else {
-                    throw CalculatorError.unknowned
-                }
-                return binaryData
-            })
-            for formula in postFixFormula {
-                // 숫자
-                guard let formulaType = formula.type else {
-                    binaryStack.push(formula)
-                    continue
-                }
-                guard let secondItem = binaryStack.pop(),
-                      let firstItem = binaryStack.pop() else {
-                    throw CalculatorError.calculator
-                }
-                var resultData: CalculatorData
-                switch formulaType {
-                case .add:
-                    resultData = try add(firstItem: firstItem, secondItem: secondItem)
-                case .subtract:
-                    resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
-                case .multiple:
-                    resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
-                case .leftShift:
-                    binaryStack.push(firstItem)
-                    resultData = try leftShift(secondItem)
-                case .rightShift:
-                    binaryStack.push(firstItem)
-                    resultData = try rightShift(secondItem)
-                case .and:
-                    resultData = try and(firstItem: firstItem, secondItem: secondItem)
-                case .nand:
-                    resultData = try nand(firstItem: firstItem, secondItem: secondItem)
-                case .or:
-                    resultData = try or(firstItem: firstItem, secondItem: secondItem)
-                case .nor:
-                    resultData = try nor(firstItem: firstItem, secondItem: secondItem)
-                case .xor:
-                    resultData = try xor(firstItem: firstItem, secondItem: secondItem)
-                case .not:
-                    binaryStack.push(firstItem)
-                    resultData = try not(secondItem)
-                }
-                guard let result = resultData as? BinaryData else {
-                    throw CalculatorError.calculator
-                }
-                binaryStack.push(result)
-            }
-            
-            guard let calculatorResultData = binaryStack.pop() else {
-                throw CalculatorError.calculator
-            }
-            return calculatorResultData
-        } catch {
-            throw error
+        guard binaryStack.isEmpty else {
+            throw CalculatorError.calculator
         }
+        let postFixFormula = try putFormula(items).map({ data -> BinaryData in
+            guard let binaryData = data as? BinaryData else {
+                throw CalculatorError.unknowned
+            }
+            return binaryData
+        })
+        for formula in postFixFormula {
+            // 숫자
+            guard let formulaType = formula.type else {
+                binaryStack.push(formula)
+                continue
+            }
+            guard let secondItem = binaryStack.pop(),
+                  let firstItem = binaryStack.pop() else {
+                throw CalculatorError.calculator
+            }
+            var resultData: CalculatorData
+            switch formulaType {
+            case .add:
+                resultData = try add(firstItem: firstItem, secondItem: secondItem)
+            case .subtract:
+                resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+            case .multiple:
+                resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
+            case .leftShift:
+                binaryStack.push(firstItem)
+                resultData = try leftShift(secondItem)
+            case .rightShift:
+                binaryStack.push(firstItem)
+                resultData = try rightShift(secondItem)
+            case .and:
+                resultData = try and(firstItem: firstItem, secondItem: secondItem)
+            case .nand:
+                resultData = try nand(firstItem: firstItem, secondItem: secondItem)
+            case .or:
+                resultData = try or(firstItem: firstItem, secondItem: secondItem)
+            case .nor:
+                resultData = try nor(firstItem: firstItem, secondItem: secondItem)
+            case .xor:
+                resultData = try xor(firstItem: firstItem, secondItem: secondItem)
+            case .not:
+                binaryStack.push(firstItem)
+                resultData = try not(secondItem)
+            }
+            guard let result = resultData as? BinaryData else {
+                throw CalculatorError.calculator
+            }
+            binaryStack.push(result)
+        }
+        
+        guard let calculatorResultData = binaryStack.pop() else {
+            throw CalculatorError.calculator
+        }
+        return calculatorResultData
     }
 
     func putFormula(_ items: [String]) throws -> [CalculatorData] {
         var postFixFormula: [CalculatorData] = []
         for item in items {
-            do {
-                // 연산자일 경우
-                if binaryOperator.contains(item) {
-                    let operatorData = try getOperatorData(item)
-                    while true {
-                        // 스택이 비어 있을때
-                        guard let compareOperatorData = binaryStack.peek() else {
-                            binaryStack.push(operatorData)
-                            break
-                        }
-                        guard let operatorType = operatorData.type,
-                              let compareOperatorType = compareOperatorData.type,
-                              operatorType.isPrecedence(compare: compareOperatorType) else {
-                            binaryStack.push(operatorData)
-                            break
-                        }
-                        postFixFormula.append(compareOperatorData)
-                        binaryStack.pop()
+            // 연산자일 경우
+            if binaryOperator.contains(item) {
+                let operatorData = try getOperatorData(item)
+                while true {
+                    // 스택이 비어 있을때
+                    guard let compareOperatorData = binaryStack.peek() else {
+                        binaryStack.push(operatorData)
+                        break
                     }
+                    guard let operatorType = operatorData.type,
+                          let compareOperatorType = compareOperatorData.type,
+                          operatorType.isPrecedence(compare: compareOperatorType) else {
+                        binaryStack.push(operatorData)
+                        break
+                    }
+                    postFixFormula.append(compareOperatorData)
+                    binaryStack.pop()
                 }
-                // 숫자일 경우
-                else {
-                    postFixFormula.append(BinaryData(value: item, type: nil))
-                }
-            } catch {
-                throw error
+            }
+            // 숫자일 경우
+            else {
+                postFixFormula.append(BinaryData(value: item, type: nil))
             }
         }
         while !binaryStack.isEmpty {
@@ -155,21 +147,13 @@ class BinaryCalculator: BinaryCalculable {
     }
 
     func nor(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        do {
-            let orData = try or(firstItem: firstItem, secondItem: secondItem)
-            return try not(orData)
-        } catch {
-            throw error
-        }
+        let orData = try or(firstItem: firstItem, secondItem: secondItem)
+        return try not(orData)
     }
 
     func nand(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        do {
-            let andData = try and(firstItem: firstItem, secondItem: secondItem)
-            return try not(andData)
-        } catch {
-            throw error
-        }
+        let andData = try and(firstItem: firstItem, secondItem: secondItem)
+        return try not(andData)
     }
     
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {

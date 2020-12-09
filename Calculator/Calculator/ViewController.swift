@@ -27,18 +27,30 @@ class ViewController: UIViewController {
             let result4 = try DecimalCalculator.shared.calculate(test4)
             print("10📚: \(result4.value)")
             
+            let test7 = ["2","-","4","+","-3","*","3","/","3"]
+            let result7 = try DecimalCalculator.shared.calculate(test7)
+            print("10📚: \(result7.value)")
+            
             let test5 = ["1011", "+", "1111", "*", "1111"]
             let result5 = try BinaryCalculator.shared.calculate(test5)
             print("2📚: \(result5.value)")
             
+            let test6 = ["1011", "+", "1111", "*", "1111", "NOT"]
+            let result6 = try BinaryCalculator.shared.calculate(test6)
+            print("2📚: \(result6.value)")
+            
             let s = "1011"
             let s1 = "1111"
             let s2 = "1111"
+            
             let a = Int(s, radix: 2)
             let a2 = Int(s1, radix: 2)
             let a3 = Int(s2, radix: 2)
-            var r = a2! * a3!
-            r = r + a!
+            let a4 = 0b1111
+            var r = ~a3!
+            var r2 = ~a4
+//            r = r * a2!
+//            r = r + a!
             print(r)
             print(String(r, radix: 2))
             
