@@ -62,6 +62,54 @@ class BinaryCalculator {
         return postfix
     }
     
+    func calculate(_ infix: [String]) throws -> String {
+        let formula: [String] = try transformToPostfix(infix)
+        for element in formula {
+            if binaryOperator.contains(element) {
+                let currentOperatorType = try getOperatorType(of: element)
+                if element == BinaryOperatorType.NOT.rawValue {
+                    if let firstNum = calculateStack.pop() {
+                        calculateStack.push(try not(first: firstNum))
+                    }
+                }
+                else {
+                    if let secondNum = calculateStack.pop(),
+                       let firstNum = calculateStack.pop() {
+                        switch currentOperatorType {
+                        case .plus:
+                            calculateStack.push(try add(first: firstNum, second: secondNum))
+                        case .minus:
+                            calculateStack.push(try subtract(first: firstNum, second: secondNum))
+                        case .AND:
+                            calculateStack.push(try and(first: firstNum, second: secondNum))
+                        case .OR:
+                            calculateStack.push(try or(first: firstNum, second: secondNum))
+                        case .XOR:
+                            calculateStack.push(try xor(first: firstNum, second: secondNum))
+                        case .NOR:
+                            calculateStack.push(try nor(first: firstNum, second: secondNum))
+                        case .NAND:
+                            calculateStack.push(try nand(first: firstNum, second: secondNum))
+                        case .LeftShift:
+                            calculateStack.push(try rightShift(first: firstNum, second: secondNum))
+                        case .RightShift:
+                            calculateStack.push(try leftShift(first: firstNum, second: secondNum))
+                        case .NOT:
+                            throw CalculatorError.unknown
+                        }
+                    }
+                }
+            }
+            else {
+                calculateStack.push(element)
+            }
+        }
+        guard let result = calculateStack.pop() else {
+            throw CalculatorError.unknown
+        }
+        return result
+    }
+    
     private func getOperatorType(of binaryOperator: String) throws -> BinaryOperatorType {
         guard let operatorType = BinaryOperatorType(rawValue: binaryOperator) else {
             throw CalculatorError.unknown
