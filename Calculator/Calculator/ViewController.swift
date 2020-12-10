@@ -35,21 +35,6 @@ class ViewController: UIViewController {
             let result6 = try BinaryCalculator.shared.calculate(test6)
             print("2📚: \(result6.value)")
             
-            let s = "1011"
-            let s1 = "1111"
-            let s2 = "1111"
-            
-            let a = Int(s, radix: 2)
-            let a2 = Int(s1, radix: 2)
-            let a3 = Int(s2, radix: 2)
-            let a4 = 0b1111
-            var r = ~a3!
-            var r2 = ~a4
-//            r = r * a2!
-//            r = r + a!
-            print(r)
-            print(String(r, radix: 2))
-            
         } catch {
             
         }
