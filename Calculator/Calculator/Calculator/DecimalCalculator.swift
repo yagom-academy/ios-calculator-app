@@ -97,7 +97,6 @@ class DecimalCalculator: DecimalCalculable {
         return DecimalData(value: item, type: operatorType)
     }
     
-    // TODO: VC에서 숫자 ,있는 상태로 받을지 결정 후 , remove 사용 확인하기
     func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
         guard let firstNumber = Double(firstItem.value),
               let secondNumber = Double(secondItem.value) else {
