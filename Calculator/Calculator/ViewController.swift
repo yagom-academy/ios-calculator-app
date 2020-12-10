@@ -5,7 +5,6 @@
 // 
 
 import UIKit
-// TODO: 이진 계산기에서 not, shift는 식에 넣을때 바로 변환해서 넣어주기?
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -38,6 +37,10 @@ class ViewController: UIViewController {
             let test6 = ["1011", "+", "1111", "AND", "1111", "NOT"]
             let result6 = try BinaryCalculator.shared.calculate(test6)
             print("2📚: \(result6.value)")
+            
+            let test9 = ["1111", "NOT"]
+            let result9 = try BinaryCalculator.shared.calculate(test9)
+            print("2📚: \(result9.value)")
             
         } catch {
             
