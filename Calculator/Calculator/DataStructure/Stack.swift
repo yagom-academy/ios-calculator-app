@@ -21,11 +21,10 @@ struct Stack<T> {
         return self.elements.last
     }
     
-    mutating func push(element: T) {
+    mutating func push(_ element: T) {
         self.elements.append(element)
     }
     
-    // 마지막 요소 반환하면서 삭제
     mutating func pop() -> T? {
         return self.elements.popLast()
     }
