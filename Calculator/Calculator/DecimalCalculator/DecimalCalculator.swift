@@ -11,7 +11,13 @@ class DecimalCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
     init() {}
-
+    
+    func getOperatorType(of decimalOperator: String) throws -> DecimalOperatorType {
+        guard let operatorType = DecimalOperatorType(rawValue: decimalOperator) else {
+            throw CalculatorError.unknown
+        }
+        return operatorType
+    }
 }
 
 extension DecimalCalculator: BasicCalculable {
