@@ -42,8 +42,6 @@ class BinaryCalculator: BinaryCalculable {
                 resultData = try add(firstItem: firstItem, secondItem: secondItem)
             case .subtract:
                 resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
-            case .multiple:
-                resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
             case .leftShift:
                 binaryStack.push(firstItem)
                 resultData = try leftShift(secondItem)
@@ -171,15 +169,6 @@ class BinaryCalculator: BinaryCalculable {
             throw CalculatorError.unknowned
         }
         let resultValue = firstValue - secondValue
-        return BinaryData(value: String(resultValue, radix: 2), type: nil)
-    }
-
-    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstValue = Int(firstItem.value, radix: 2),
-              let secondValue = Int(secondItem.value, radix: 2) else {
-            throw CalculatorError.unknowned
-        }
-        let resultValue = firstValue * secondValue
         return BinaryData(value: String(resultValue, radix: 2), type: nil)
     }
     

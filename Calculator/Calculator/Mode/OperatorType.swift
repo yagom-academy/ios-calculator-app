@@ -34,7 +34,6 @@ enum DecimalOperatorType: String, CaseIterable {
 enum BinaryOperatorType: String, CaseIterable {
     case add = "+"
     case subtract = "-"
-    case multiple = "*"
     case leftShift = "<<"
     case rightShift = ">>"
     case and = "AND"
@@ -48,7 +47,7 @@ enum BinaryOperatorType: String, CaseIterable {
         switch self {
         case .leftShift, .rightShift, .not:
             return 1
-        case .and, .nand, .multiple:
+        case .and, .nand:
             return 2
         case .or, .nor, .add, .subtract, .xor:
             return 3

@@ -12,12 +12,12 @@ protocol BasicCalculable {
     func putFormula(_ items: [String]) throws -> [CalculatorData]
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData
     func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData
-    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData
     func clear()
 }
 
 protocol DecimalCalculable: BasicCalculable {
     func getOperatorData(_ item: String) throws -> DecimalData
+    func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData
     func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData
 }
 

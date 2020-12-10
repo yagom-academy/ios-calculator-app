@@ -31,10 +31,6 @@ class ViewController: UIViewController {
             let result7 = try DecimalCalculator.shared.calculate(test7)
             print("10📚: \(result7.value)")
             
-            let test5 = ["1011", "+", "1111", "*", "1111"]
-            let result5 = try BinaryCalculator.shared.calculate(test5)
-            print("2📚: \(result5.value)")
-            
             let test6 = ["1011", "+", "1111", "*", "1111", "NOT"]
             let result6 = try BinaryCalculator.shared.calculate(test6)
             print("2📚: \(result6.value)")
