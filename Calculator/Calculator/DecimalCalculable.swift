@@ -8,5 +8,6 @@
 import Foundation
 
 protocol DecimalCalculable {
+    func multiply()
     func divide()
 }
