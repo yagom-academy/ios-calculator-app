@@ -10,11 +10,23 @@ import Foundation
 enum CalculatorError: Error {
     case divisionByZero
     case emptyStack
-    case lackNumber
+    case operandError
     case stackItemError
 }
 
 class DecimalCalculator: BasicCalculable, DecimalCalculable {
+    struct Operator {
+        let symbol: String
+        let priority: Int
+        let operate: (Double, Double) -> Double
+        
+        init(_ symbol: String, _ priority: Int, _ operate: @escaping (Double, Double) -> Double) {
+            self.symbol = symbol
+            self.priority = priority
+            self.operate = operate
+        }
+    }
+    
     enum DecimalCalculatorOperator {
         case add
         case subtract
