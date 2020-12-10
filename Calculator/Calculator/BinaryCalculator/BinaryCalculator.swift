@@ -67,30 +67,43 @@ class BinaryCalculator {
         for element in formula {
             if binaryOperator.contains(element) {
                 let currentOperatorType = try getOperatorType(of: element)
-                if let secondNum = calculateStack.pop(),
-                   let firstNum = calculateStack.pop() {
-                    switch currentOperatorType {
-                    case .plus:
-                        calculateStack.push(try add(first: firstNum, second: secondNum))
-                    case .minus:
-                        calculateStack.push(try subtract(first: firstNum, second: secondNum))
-                    case .AND:
-                        calculateStack.push(try and(first: firstNum, second: secondNum))
-                    case .OR:
-                        calculateStack.push(try or(first: firstNum, second: secondNum))
-                    case .XOR:
-                        calculateStack.push(try xor(first: firstNum, second: secondNum))
-                    case .NOR:
-                        calculateStack.push(try nor(first: firstNum, second: secondNum))
-                    case .NAND:
-                        calculateStack.push(try nand(first: firstNum, second: secondNum))
-                    case .LeftShift:
-                        calculateStack.push(try rightShift(first: firstNum, second: secondNum))
-                    case .RightShift:
-                        calculateStack.push(try leftShift(first: firstNum, second: secondNum))
-                    case .NOT:
-                        calculateStack.push(firstNum)
-                        calculateStack.push(try not(first: secondNum))
+                if element == BinaryOperatorType.NOT.rawValue {
+                    if let firstNum = calculateStack.pop() {
+                        calculateStack.push(try not(first: firstNum))
+                    }
+                } else if element == BinaryOperatorType.RightShift.rawValue {
+                    if let firstNum = calculateStack.pop() {
+                        calculateStack.push(try rightShift(first: firstNum))
+                    }
+                } else if element == BinaryOperatorType.LeftShift.rawValue {
+                    if let firstNum = calculateStack.pop() {
+                        calculateStack.push(try leftShift(first: firstNum))
+                    }
+                } else {
+                    if let secondNum = calculateStack.pop(),
+                       let firstNum = calculateStack.pop() {
+                        switch currentOperatorType {
+                        case .plus:
+                            calculateStack.push(try add(first: firstNum, second: secondNum))
+                        case .minus:
+                            calculateStack.push(try subtract(first: firstNum, second: secondNum))
+                        case .AND:
+                            calculateStack.push(try and(first: firstNum, second: secondNum))
+                        case .OR:
+                            calculateStack.push(try or(first: firstNum, second: secondNum))
+                        case .XOR:
+                            calculateStack.push(try xor(first: firstNum, second: secondNum))
+                        case .NOR:
+                            calculateStack.push(try nor(first: firstNum, second: secondNum))
+                        case .NAND:
+                            calculateStack.push(try nand(first: firstNum, second: secondNum))
+                        case .LeftShift:
+                            throw CalculatorError.unknown
+                        case .RightShift:
+                            throw CalculatorError.unknown
+                        case .NOT:
+                            throw CalculatorError.unknown
+                        }
                     }
                 }
             }
@@ -199,23 +212,21 @@ extension BinaryCalculator: BinaryCalculable {
         return String(result, radix: 2)
     }
     
-    func rightShift(first: String, second: String) throws -> String {
+    func rightShift(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second) else {
+        guard let firstNumber = Int(first, radix: 2) else {
             throw CalculatorError.unknown
         }
-        result = firstNumber >> secondNumber
+        result = firstNumber >> 1
         return String(result, radix: 2)
     }
     
-    func leftShift(first: String, second: String) throws -> String {
+    func leftShift(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second) else {
+        guard let firstNumber = Int(first, radix: 2) else {
             throw CalculatorError.unknown
         }
-        result = firstNumber << secondNumber
+        result = firstNumber << 1
         return String(result, radix: 2)
     }
 }
