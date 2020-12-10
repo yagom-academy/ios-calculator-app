@@ -6,8 +6,7 @@
 //
 
 protocol BasicCalculable {
-    func add(first: String, second: String) -> String
-    func subtract(first: String, second: String) -> String
-    func multiply(first: String, second: String) -> String
+    func add(first: String, second: String) throws -> String
+    func subtract(first: String, second: String) throws -> String
     func clear()
 }
