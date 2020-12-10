@@ -5,7 +5,7 @@
 //  Created by Yeon on 2020/12/09.
 //
 
-enum DecimalOperatorType: Character {
+enum DecimalOperatorType: String, CaseIterable {
     case plus = "+"
     case minus = "-"
     case multiplication = "*"
@@ -15,5 +15,4 @@ enum DecimalOperatorType: Character {
 enum DecimalOperatorPrecedence: Int {
     case high = 2
     case low = 1
-    case zero = 0
 }
