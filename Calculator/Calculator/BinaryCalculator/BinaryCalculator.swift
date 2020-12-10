@@ -12,6 +12,12 @@ class BinaryCalculator {
     var calculateStack: Stack = Stack<String>()
     init() {}
 
+    private func getOperatorType(of binaryOperator: String) throws -> BinaryOperatorType {
+        guard let operatorType = BinaryOperatorType(rawValue: binaryOperator) else {
+            throw CalculatorError.unknown
+        }
+        return operatorType
+    }
 }
 
 extension BinaryCalculator: BasicCalculable {
