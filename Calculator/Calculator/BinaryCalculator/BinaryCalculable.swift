@@ -10,8 +10,8 @@ protocol BinaryCalculable {
     func or(first: String, second: String) throws -> String
     func xor(first: String, second: String) throws -> String
     func nor(first: String, second: String) throws -> String
-    func not(value: String) throws -> String
+    func not(first: String) throws -> String
     func nand(first: String, second: String) throws -> String
-    func rightShift() throws
-    func leftShift() throws
+    func rightShift(first: String, second: String) throws -> String
+    func leftShift(first: String, second: String) throws -> String
 }
