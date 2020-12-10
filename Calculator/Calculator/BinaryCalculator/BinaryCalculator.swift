@@ -10,6 +10,7 @@ import Foundation
 class BinaryCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
+    let binaryOperator: [String] = BinaryOperatorType.allCases.map{ $0.rawValue }
     init() {}
     
     private func precedence(_ binaryOperator: BinaryOperatorType) -> Int {
@@ -26,7 +27,41 @@ class BinaryCalculator {
             return zero.rawValue
         }
     }
-
+    
+    private func transformToPostfix(_ infix: [String]) throws -> [String] {
+        var postfix = [String]()
+        for element in infix {
+            if binaryOperator.contains(element) {
+                if !postfixStack.isEmpty {
+                    if let top = postfixStack.peek() {
+                        var stackTopOperatorType = try getOperatorType(of: top)
+                        let currentOperatorType = try getOperatorType(of: element)
+                        while(!postfixStack.isEmpty &&
+                                precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
+                            guard let top = postfixStack.pop() else {
+                                throw CalculatorError.stackIsEmpty
+                            }
+                            postfix.append(top)
+                            if let topAfterPop = postfixStack.peek() {
+                                stackTopOperatorType = try getOperatorType(of: topAfterPop)
+                            }
+                        }
+                    }
+                }
+                postfixStack.push(element)
+            }
+            else {
+                postfix.append(element)
+            }
+        }
+        while !postfixStack.isEmpty {
+            if let top = postfixStack.pop() {
+                postfix.append(top)
+            }
+        }
+        return postfix
+    }
+    
     private func getOperatorType(of binaryOperator: String) throws -> BinaryOperatorType {
         guard let operatorType = BinaryOperatorType(rawValue: binaryOperator) else {
             throw CalculatorError.unknown
