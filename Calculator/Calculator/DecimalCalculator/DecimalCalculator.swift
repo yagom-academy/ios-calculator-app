@@ -59,6 +59,34 @@ class DecimalCalculator {
         return postfix
     }
     
+    func calculate(_ infix: [String]) throws -> String {
+        let formula: [String] = try transformToPostfix(infix)
+        for element in formula {
+            if decimalOperator.contains(element) {
+                let currentOperatorType = try getOperatorType(of: element)
+                if let secondNum = calculateStack.pop(), let firstNum = calculateStack.pop() {
+                    switch currentOperatorType {
+                    case .plus:
+                        calculateStack.push(try add(first: firstNum, second: secondNum))
+                    case .minus:
+                        calculateStack.push(try subtract(first: firstNum, second: secondNum))
+                    case .multiplication:
+                        calculateStack.push(try multiply(first: firstNum, second: secondNum))
+                    case .division:
+                        calculateStack.push(try divide(first: firstNum, second: secondNum))
+                    }
+                }
+            }
+            else {
+                calculateStack.push(element)
+            }
+        }
+        guard let result = calculateStack.pop() else {
+            throw CalculatorError.unknown
+        }
+        return result
+    }
+    
     func getOperatorType(of decimalOperator: String) throws -> DecimalOperatorType {
         guard let operatorType = DecimalOperatorType(rawValue: decimalOperator) else {
             throw CalculatorError.unknown
