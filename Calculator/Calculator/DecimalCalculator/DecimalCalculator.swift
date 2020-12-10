@@ -12,6 +12,18 @@ class DecimalCalculator {
     var calculateStack: Stack = Stack<String>()
     init() {}
     
+    private func precedence(_ decimalOperator: DecimalOperatorType) -> Int {
+        let high: DecimalOperatorPrecedence = .high
+        let low: DecimalOperatorPrecedence = .low
+        
+        switch decimalOperator {
+        case .multiplication, .division :
+            return high.rawValue
+        case .plus, .minus :
+            return low.rawValue
+        }
+    }
+    
     func getOperatorType(of decimalOperator: String) throws -> DecimalOperatorType {
         guard let operatorType = DecimalOperatorType(rawValue: decimalOperator) else {
             throw CalculatorError.unknown
