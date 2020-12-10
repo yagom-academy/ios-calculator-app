@@ -6,5 +6,6 @@
 //
 
 protocol DecimalCalculable {
+    func multiply(first: String, second: String) throws -> String
     func divide(first: String, second: String) throws -> String
 }
