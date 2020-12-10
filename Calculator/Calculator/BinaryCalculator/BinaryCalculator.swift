@@ -11,6 +11,21 @@ class BinaryCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
     init() {}
+    
+    private func precedence(_ binaryOperator: BinaryOperatorType) -> Int {
+        let high: BinaryOperatorPrecedence = .high
+        let low: BinaryOperatorPrecedence = .low
+        let zero: BinaryOperatorPrecedence = .zero
+        
+        switch binaryOperator {
+        case .NOT, .RightShift, .LeftShift:
+            return high.rawValue
+        case .AND, .NAND:
+            return low.rawValue
+        case .XOR, .NOR, .OR, .minus, .plus:
+            return zero.rawValue
+        }
+    }
 
     private func getOperatorType(of binaryOperator: String) throws -> BinaryOperatorType {
         guard let operatorType = BinaryOperatorType(rawValue: binaryOperator) else {
