@@ -26,7 +26,6 @@ enum DecimalOperatorType: String, CaseIterable {
         let operatorPrecedence = self.precedence
         let compareOperatorPrecedence = compare.precedence
         
-        // compare의 우선순위가 self보다 높거나 같다면 true 낮다면 false
         return (operatorPrecedence - compareOperatorPrecedence >= 0)
     }
 }
@@ -58,7 +57,6 @@ enum BinaryOperatorType: String, CaseIterable {
         let operatorPrecedence = self.precedence
         let compareOperatorPrecedence = compare.precedence
         
-        // compare의 우선순위가 self보다 높거나 같다면 true 낮다면 false
         return (operatorPrecedence - compareOperatorPrecedence >= 0)
     }
 }

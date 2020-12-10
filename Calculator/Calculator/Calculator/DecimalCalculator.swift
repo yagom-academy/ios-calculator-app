@@ -59,11 +59,9 @@ class DecimalCalculator: DecimalCalculable {
     func putFormula(_ items: [String]) throws -> [CalculatorData] {
         var postFixFormula: [CalculatorData] = []
         for item in items {
-            // 연산자일 경우
             if decimalOperator.contains(item) {
                 let operatorData = try getOperatorData(item)
                 while true {
-                    // 스택이 비어 있을때
                     guard let compareOperatorData = decimalStack.peek() else {
                         decimalStack.push(operatorData)
                         break
