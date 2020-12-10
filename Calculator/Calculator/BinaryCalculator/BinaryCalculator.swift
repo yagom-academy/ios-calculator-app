@@ -10,6 +10,7 @@ import Foundation
 class BinaryCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
+    let scale: Int = 2
     let binaryOperator: [String] = BinaryOperatorType.allCases.map{ $0.rawValue }
     init() {}
     
@@ -128,22 +129,22 @@ class BinaryCalculator {
 extension BinaryCalculator: BasicCalculable {
     func add(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber + secondNumber
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func subtract(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber - secondNumber
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func clear() {
@@ -155,78 +156,78 @@ extension BinaryCalculator: BasicCalculable {
 extension BinaryCalculator: BinaryCalculable {
     func and(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber & secondNumber
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func or(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber | secondNumber
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func xor(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber ^ secondNumber
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func nor(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = ~(firstNumber & secondNumber)
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func not(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = ~firstNumber
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func nand(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2),
-              let secondNumber = Int(second, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale),
+              let secondNumber = Int(second, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = ~(firstNumber & secondNumber)
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func rightShift(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber >> 1
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
     
     func leftShift(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: 2) else {
+        guard let firstNumber = Int(first, radix: scale) else {
             throw CalculatorError.unknown
         }
         result = firstNumber << 1
-        return String(result, radix: 2)
+        return String(result, radix: scale)
     }
 }
