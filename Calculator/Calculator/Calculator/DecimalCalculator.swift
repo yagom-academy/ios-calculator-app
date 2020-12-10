@@ -15,7 +15,6 @@ class DecimalCalculator: DecimalCalculable {
     private let decimalOperator: [String] = DecimalOperatorType.allCases.map { $0.rawValue }
     
     func calculate(_ items: [String]) throws -> CalculatorData {
-        // 후위표기식으로 바뀐 식 Array
         guard decimalStack.isEmpty else {
             throw CalculatorError.calculator
         }
@@ -26,7 +25,6 @@ class DecimalCalculator: DecimalCalculable {
             return decimalData
         })
         for formula in postFixFormula {
-            // 숫자
             guard let formulaType = formula.type else {
                 decimalStack.push(formula)
                 continue
@@ -58,8 +56,6 @@ class DecimalCalculator: DecimalCalculable {
         return calculatorResultData
     }
     
-    // 후위표기식으로 바꾸기
-    // 우선순위가 높거나 같은 것들을 빼고 자신을 스택에 담음
     func putFormula(_ items: [String]) throws -> [CalculatorData] {
         var postFixFormula: [CalculatorData] = []
         for item in items {
@@ -82,7 +78,6 @@ class DecimalCalculator: DecimalCalculable {
                     decimalStack.pop()
                 }
             }
-            // 숫자일 경우
             else {
                 postFixFormula.append(DecimalData(value: item, type: nil))
             }

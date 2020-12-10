@@ -16,7 +16,6 @@ class BinaryCalculator: BinaryCalculable {
     private let binaryOperator: [String] = BinaryOperatorType.allCases.map { $0.rawValue }
 
     func calculate(_ items: [String]) throws -> CalculatorData {
-        // 후위표기식으로 바뀐 식 array
         guard binaryStack.isEmpty else {
             throw CalculatorError.calculator
         }
@@ -27,7 +26,6 @@ class BinaryCalculator: BinaryCalculable {
             return binaryData
         })
         for formula in postFixFormula {
-            // 숫자
             guard let formulaType = formula.type else {
                 binaryStack.push(formula)
                 continue
@@ -77,11 +75,9 @@ class BinaryCalculator: BinaryCalculable {
     func putFormula(_ items: [String]) throws -> [CalculatorData] {
         var postFixFormula: [CalculatorData] = []
         for item in items {
-            // 연산자일 경우
             if binaryOperator.contains(item) {
                 let operatorData = try getOperatorData(item)
                 while true {
-                    // 스택이 비어 있을때
                     guard let compareOperatorData = binaryStack.peek() else {
                         binaryStack.push(operatorData)
                         break
@@ -96,7 +92,6 @@ class BinaryCalculator: BinaryCalculable {
                     binaryStack.pop()
                 }
             }
-            // 숫자일 경우
             else {
                 postFixFormula.append(BinaryData(value: item, type: nil))
             }
