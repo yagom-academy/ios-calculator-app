@@ -60,8 +60,7 @@ class DecimalCalculator: DecimalCalculable {
                     decimalStack.pop()
                 }
                 decimalStack.push(operatorData)
-            }
-            else {
+            } else {
                 postFixFormula.append(DecimalData(value: item, type: nil))
             }
         }

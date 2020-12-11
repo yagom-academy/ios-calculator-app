@@ -62,8 +62,7 @@ class BinaryCalculator: BinaryCalculable {
                     binaryStack.pop()
                 }
                 binaryStack.push(operatorData)
-            }
-            else {
+            } else {
                 postFixFormula.append(BinaryData(value: item, type: nil))
             }
         }
