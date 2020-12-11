@@ -12,12 +12,6 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         let symbol: String
         let priority: Int
         let operation: ((Int, Int) -> Int)?
-        
-        init(_ symbol: String, _ priority: Int, _ operate: ((Int, Int) -> Int)?) {
-            self.symbol = symbol
-            self.priority = priority
-            self.operation = operate
-        }
     }
     
     enum BinaryCalculatorOperator {
@@ -35,14 +29,14 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     private var operandStack: Stack<Int> = Stack<Int>()
     
     private var operatorDetails: [BinaryCalculatorOperator: OperatorDetail] = [
-        .add: OperatorDetail("+", 3, {(operand1: Int, operand2: Int) in return operand2 + operand1}),
-        .subtract: OperatorDetail("-", 3, {(operand1: Int, operand2: Int) in return operand2 - operand1}),
-        .and: OperatorDetail("&", 2, {(operand1: Int, operand2: Int) in return operand2 & operand1}),
-        .or: OperatorDetail("|", 3, {(operand1: Int, operand2: Int) in return operand2 | operand1}),
-        .xor: OperatorDetail("^", 3, {(operand1: Int, operand2: Int) in return operand2 ^ operand1}),
-        .nor: OperatorDetail("~|", 3, {(operand1: Int, operand2: Int) in return ~(operand2 | operand1)}),
-        .nand: OperatorDetail("~&", 2, {(operand1: Int, operand2: Int) in return ~(operand2 & operand1)}),
-        .equal: OperatorDetail("=", 5, nil)
+        .add: OperatorDetail(symbol: "+", priority: 3, operation: {$1 + $0}),
+        .subtract: OperatorDetail(symbol: "-", priority: 3, operation: {$1 - $0}),
+        .and: OperatorDetail(symbol: "&", priority: 2, operation: {$1 & $0}),
+        .or: OperatorDetail(symbol: "|", priority: 3, operation: {$1 | $0}),
+        .xor: OperatorDetail(symbol: "^", priority: 3, operation: {$1 ^ $0}),
+        .nor: OperatorDetail(symbol: "~|", priority: 3, operation: {~($1 | $0)}),
+        .nand: OperatorDetail(symbol: "~&", priority: 2, operation: {~($1 & $0)}),
+        .equal: OperatorDetail(symbol: "=", priority: 5, operation: nil)
     ]
     
     func clearBuffer() {
@@ -68,14 +62,12 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         guard numberAsciiValue >= zeroAsciiValue && Int(numberAsciiValue) <= oneAsciiValue else {
             throw CalculatorError.inputNumberError
         }
-        
-        operandBuffer += String(number)
-        
-        /// 버퍼값을 Int로 변환하여 유효한 값인지 확인.
-        guard let validOperand = Int(operandBuffer, radix: 2) else {
+
+        // 새로 입력된 값을 추가한 피연산자를 Int로 변환하여 유효여부를 확인하고, 유효하면 버퍼에 초기화
+        let newOperand = operandBuffer + String(number)
+        guard let validOperand = Int(newOperand, radix: 2) else {
             throw CalculatorError.inputNumberError
         }
-        
         operandBuffer = String(validOperand, radix: 2)
         
         isPushingOperatorJustBefore = false
@@ -85,13 +77,11 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     /// 사용자가 연산자를 입력하면, 버퍼에 저장되어있는 숫자들을 피연산자로서 스택에 푸쉬하기 위한 함수.
     func pushOperand() {
-        guard let operand: Int = Int(operandBuffer, radix: 2) else {
-            return
+        if let operand: Int = Int(operandBuffer, radix: 2) {
+            operandStack.push(operand)
+            
+            clearBuffer()
         }
-        
-        operandStack.push(operand)
-        
-        clearBuffer()
     }
     
     /// 사용자가 연산자를 입력(터치)하면 스택에 연산자를 푸쉬하기 위한 함수.
@@ -101,7 +91,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     /// - Throws:
     ///     - 0으로 나눌 경우, 'CalculatorError.divisionByZero'.
     ///     - 피연산자가 부족할 경우(잘못된 피연산자 입력), 'CalculatorError.operandError'.
-    private func pushOperater(_ `operator`: BinaryCalculatorOperator) throws {
+    private func pushOperator(_ `operator`: BinaryCalculatorOperator) throws {
         guard operandStack.size > 0 else { return }
         
         guard let pushedOperatorDetail = operatorDetails[`operator`] else { return }
@@ -139,192 +129,150 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     ///     - pushOperator함수에서 발생한 에러를 전달.
     /// - Returns: 스택의 가장 최근 피연산자 값을 문자열로 반환.
     func add() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.add)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.add)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.add)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func subtract() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.subtract)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.subtract)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.subtract)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func and() throws -> String{
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.and)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.and)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.and)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func or() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.or)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.or)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.or)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func xor() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.xor)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.xor)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.xor)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func nor() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.nor)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.nor)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.nor)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func nand() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.nand)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.nand)
+            } catch(let error) {
+                throw error
             }
-            
-            return String(lastOperand, radix: 2)
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.nand)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return String(lastOperand, radix: 2)
     }
     
     func not() throws -> String {
@@ -365,29 +313,23 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     }
     
     func equal() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
+        if !isPushingOperatorJustBefore {
+            pushOperand()
             
-            return String(lastOperand, radix: 2)
+            do {
+                try pushOperator(.equal)
+                
+                _ = operatorStack.pop()
+            } catch(let error) {
+                throw error
+            }
+        }
+                
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperater(.equal)
-            
-            _ = operatorStack.pop()
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return String(lastOperand, radix: 2)
-        } catch(let error) {
-            throw error
-        }
+        return String(lastOperand, radix: 2)
     }
     
     func clear() {
