@@ -16,6 +16,7 @@ protocol BasicCalculable {
 }
 
 protocol DecimalCalculable: BasicCalculable {
+    func getPostFixFormula(_ item: [String]) throws -> [DecimalData]
     func getOperatorData(_ item: String) throws -> DecimalData
     func choiceCalculation(operatorType: DecimalOperatorType) throws -> CalculatorData
     func stringToDouble(_ item: String) throws -> Double
@@ -24,6 +25,7 @@ protocol DecimalCalculable: BasicCalculable {
 }
 
 protocol BinaryCalculable: BasicCalculable {
+    func getPostFixFormula(_ item: [String]) throws -> [BinaryData]
     func getOperatorData(_ item: String) throws -> BinaryData
     func choiceCalculation(operatorType: BinaryOperatorType) throws -> CalculatorData
     func stringToInt(_ item: String) throws -> Int

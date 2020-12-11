@@ -22,12 +22,7 @@ class BinaryCalculator: BinaryCalculable {
         guard binaryStack.isEmpty else {
             throw CalculatorError.calculation
         }
-        let postFixFormula = try putFormula(items).map({ data -> BinaryData in
-            guard let binaryData = data as? BinaryData else {
-                throw CalculatorError.unknowned
-            }
-            return binaryData
-        })
+        let postFixFormula = try getPostFixFormula(items)
         for formula in postFixFormula {
             guard let formulaType = formula.type else {
                 binaryStack.push(formula)
@@ -44,6 +39,16 @@ class BinaryCalculator: BinaryCalculable {
             throw CalculatorError.calculation
         }
         return calculatorResultData
+    }
+    
+    func getPostFixFormula(_ items: [String]) throws -> [BinaryData] {
+        let postFixFormula = try putFormula(items).map({ data -> BinaryData in
+            guard let binaryData = data as? BinaryData else {
+                throw CalculatorError.unknowned
+            }
+            return binaryData
+        })
+        return postFixFormula
     }
 
     func putFormula(_ items: [String]) throws -> [CalculatorData] {

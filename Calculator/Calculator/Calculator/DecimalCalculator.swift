@@ -20,12 +20,7 @@ class DecimalCalculator: DecimalCalculable {
         guard decimalStack.isEmpty else {
             throw CalculatorError.calculation
         }
-        let postFixFormula = try putFormula(items).map({ data -> DecimalData in
-            guard let decimalData = data as? DecimalData else {
-                throw CalculatorError.unknowned
-            }
-            return decimalData
-        })
+        let postFixFormula = try getPostFixFormula(items)
         for formula in postFixFormula {
             guard let formulaType = formula.type else {
                 decimalStack.push(formula)
@@ -42,6 +37,16 @@ class DecimalCalculator: DecimalCalculable {
             throw CalculatorError.calculation
         }
         return calculatorResultData
+    }
+    
+    func getPostFixFormula(_ items: [String]) throws -> [DecimalData] {
+        let postFixFormula = try putFormula(items).map({ data -> DecimalData in
+            guard let decimalData = data as? DecimalData else {
+                throw CalculatorError.unknowned
+            }
+            return decimalData
+        })
+        return postFixFormula
     }
     
     func putFormula(_ items: [String]) throws -> [CalculatorData] {
