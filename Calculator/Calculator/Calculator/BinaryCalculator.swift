@@ -88,52 +88,64 @@ class BinaryCalculator: BinaryCalculable {
     }
     
     func choiceCalculation(operatorType: BinaryOperatorType) throws -> CalculatorData {
-        var resultData: CalculatorData? = nil
+        var resultData: CalculatorData?
         switch operatorType {
         case .leftShift, .rightShift, .not:
             guard let item = binaryStack.pop() else {
                 throw CalculatorError.calculation
             }
-            if operatorType == .leftShift {
-                resultData = try leftShift(item)
-            }
-            else if operatorType == .rightShift {
-                resultData = try rightShift(item)
-            }
-            else if operatorType == .not {
-                resultData = try not(item)
-            }
+            resultData = try calculationRelatedToShift(operatorType: operatorType, item: item)
         default:
             guard let secondItem = binaryStack.pop(),
                   let firstItem = binaryStack.pop() else {
                 throw CalculatorError.calculation
             }
-            if operatorType == .add {
-                resultData = try add(firstItem: firstItem, secondItem: secondItem)
-            }
-            else if operatorType == .subtract {
-                resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
-            }
-            else if operatorType == .and {
-                resultData = try and(firstItem: firstItem, secondItem: secondItem)
-            }
-            else if operatorType == .nand {
-                resultData = try nand(firstItem: firstItem, secondItem: secondItem)
-            }
-            else if operatorType == .or {
-                resultData = try or(firstItem: firstItem, secondItem: secondItem)
-            }
-            else if operatorType == .nor {
-                resultData = try nor(firstItem: firstItem, secondItem: secondItem)
-            }
-            else if operatorType == .xor {
-                resultData = try xor(firstItem: firstItem, secondItem: secondItem)
-            }
+            resultData = try calculationRelatedToLogicGate(operatorType: operatorType, firstItem: firstItem, secondItem: secondItem)
         }
-        guard let result = resultData else {
-            throw CalculatorError.calculation
+        guard let result = resultData as? BinaryData else {
+            throw CalculatorError.unknowned
         }
         return result
+    }
+    
+    func calculationRelatedToShift(operatorType: BinaryOperatorType, item: BinaryData) throws -> CalculatorData? {
+        var resultData: CalculatorData? = nil
+        if operatorType == .leftShift {
+            resultData = try leftShift(item)
+        }
+        else if operatorType == .rightShift {
+            resultData = try rightShift(item)
+        }
+        else if operatorType == .not {
+            resultData = try not(item)
+        }
+        return resultData
+    }
+    
+    func calculationRelatedToLogicGate(operatorType: BinaryOperatorType, firstItem: BinaryData, secondItem: BinaryData) throws -> CalculatorData? {
+        var resultData: CalculatorData? = nil
+        if operatorType == .add {
+            resultData = try add(firstItem: firstItem, secondItem: secondItem)
+        }
+        else if operatorType == .subtract {
+            resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+        }
+        else if operatorType == .and {
+            resultData = try and(firstItem: firstItem, secondItem: secondItem)
+        }
+        else if operatorType == .nand {
+            resultData = try nand(firstItem: firstItem, secondItem: secondItem)
+        }
+        else if operatorType == .or {
+            resultData = try or(firstItem: firstItem, secondItem: secondItem)
+        }
+        else if operatorType == .nor {
+            resultData = try nor(firstItem: firstItem, secondItem: secondItem)
+        }
+        else if operatorType == .xor {
+            resultData = try xor(firstItem: firstItem, secondItem: secondItem)
+        }
+        return resultData
     }
     
     func stringToInt(_ item: String) throws -> Int {
