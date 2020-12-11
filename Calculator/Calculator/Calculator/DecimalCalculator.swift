@@ -12,48 +12,41 @@ class DecimalCalculator: DecimalCalculable {
     private init() {}
     
     private var decimalStack = Stack<DecimalData>()
-    private let decimalOperator: [String] = DecimalOperatorType.allCases.map { $0.rawValue }
+    private let decimalOperator: [String] = DecimalOperatorType.allCases.map { decimalType -> String in
+        return decimalType.rawValue
+    }
     
     func calculate(_ items: [String]) throws -> CalculatorData {
         guard decimalStack.isEmpty else {
-            throw CalculatorError.calculator
+            throw CalculatorError.calculation
         }
+        let postFixFormula = try getPostFixFormula(items)
+        for formula in postFixFormula {
+            guard let formulaType = formula.type else {
+                decimalStack.push(formula)
+                continue
+            }
+            let resultData = try choiceCalculation(operatorType: formulaType)
+            guard let result = resultData as? DecimalData else {
+                throw CalculatorError.calculation
+            }
+            decimalStack.push(result)
+        }
+        
+        guard let calculatorResultData = decimalStack.pop() else {
+            throw CalculatorError.calculation
+        }
+        return calculatorResultData
+    }
+    
+    func getPostFixFormula(_ items: [String]) throws -> [DecimalData] {
         let postFixFormula = try putFormula(items).map({ data -> DecimalData in
             guard let decimalData = data as? DecimalData else {
                 throw CalculatorError.unknowned
             }
             return decimalData
         })
-        for formula in postFixFormula {
-            guard let formulaType = formula.type else {
-                decimalStack.push(formula)
-                continue
-            }
-            guard let secondItem = decimalStack.pop(),
-                  let firstItem = decimalStack.pop() else {
-                throw CalculatorError.calculator
-            }
-            var resultData: CalculatorData
-            switch formulaType {
-            case .add:
-                resultData = try add(firstItem: firstItem, secondItem: secondItem)
-            case .subtract:
-                resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
-            case .multiple:
-                resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
-            case .divide:
-                resultData = try divide(firstItem: firstItem, secondItem: secondItem)
-            }
-            guard let result = resultData as? DecimalData else {
-                throw CalculatorError.calculator
-            }
-            decimalStack.push(result)
-        }
-        
-        guard let calculatorResultData = decimalStack.pop() else {
-            throw CalculatorError.calculator
-        }
-        return calculatorResultData
+        return postFixFormula
     }
     
     func putFormula(_ items: [String]) throws -> [CalculatorData] {
@@ -61,26 +54,22 @@ class DecimalCalculator: DecimalCalculable {
         for item in items {
             if decimalOperator.contains(item) {
                 let operatorData = try getOperatorData(item)
-                while true {
-                    guard let compareOperatorData = decimalStack.peek() else {
-                        decimalStack.push(operatorData)
-                        break
-                    }
-                    guard let operatorType = operatorData.type,
+                while !decimalStack.isEmpty {
+                    guard let compareOperatorData = decimalStack.peek(),
+                          let operatorType = operatorData.type,
                           let compareOperatorType = compareOperatorData.type,
                           operatorType.isPrecedence(compare: compareOperatorType) else {
-                        decimalStack.push(operatorData)
                         break
                     }
                     postFixFormula.append(compareOperatorData)
                     decimalStack.pop()
                 }
-            }
-            else {
+                decimalStack.push(operatorData)
+            } else {
                 postFixFormula.append(DecimalData(value: item, type: nil))
             }
         }
-        while !decimalStack.isEmpty {
+        for _ in 0..<decimalStack.size {
             guard let operatorData = decimalStack.pop() else {
                 throw CalculatorError.unknowned
             }
@@ -97,41 +86,54 @@ class DecimalCalculator: DecimalCalculable {
         return DecimalData(value: item, type: operatorType)
     }
     
-    // TODO: VC에서 숫자 ,있는 상태로 받을지 결정 후 , remove 사용 확인하기
-    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
+    func choiceCalculation(operatorType: DecimalOperatorType) throws -> CalculatorData {
+        guard let secondItem = decimalStack.pop(),
+              let firstItem = decimalStack.pop() else {
+            throw CalculatorError.calculation
+        }
+        var resultData: CalculatorData
+        switch operatorType {
+        case .add:
+            resultData = try add(firstItem: firstItem, secondItem: secondItem)
+        case .subtract:
+            resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+        case .multiple:
+            resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
+        case .divide:
+            resultData = try divide(firstItem: firstItem, secondItem: secondItem)
+        }
+        
+        return resultData
+    }
+    
+    func stringToDouble(_ item: String) throws -> Double {
+        guard let doubleItem = Double(item) else {
             throw CalculatorError.unknowned
         }
-        let resultNumber = firstNumber / secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        return doubleItem
+    }
+    
+    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        guard try stringToDouble(secondItem.value) != 0 else {
+            throw CalculatorError.divideByZero
+        }
+        let resultValue = try (stringToDouble(firstItem.value) / stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
-            throw CalculatorError.unknowned
-        }
-        let resultNumber = firstNumber + secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        let resultValue = try (stringToDouble(firstItem.value) + stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
-            throw CalculatorError.unknowned
-        }
-        let resultNumber = firstNumber - secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        let resultValue = try (stringToDouble(firstItem.value) - stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
-            throw CalculatorError.unknowned
-        }
-        let resultNumber = firstNumber * secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        let resultValue = try (stringToDouble(firstItem.value) * stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func clear() {
