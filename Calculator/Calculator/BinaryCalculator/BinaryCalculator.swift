@@ -72,57 +72,75 @@ class BinaryCalculator {
     func calculate(_ infix: [String]) throws -> String {
         let formula: [String] = try transformToPostfix(infix)
         for element in formula {
-            if binaryOperators.contains(element) {
-                let currentOperatorType = try getOperatorType(of: element)
-                if element == BinaryOperatorType.NOT.rawValue {
-                    if let firstNum = calculateStack.pop() {
-                        calculateStack.push(try not(first: firstNum))
-                    }
-                } else if element == BinaryOperatorType.RightShift.rawValue {
-                    if let firstNum = calculateStack.pop() {
-                        calculateStack.push(try rightShift(first: firstNum))
-                    }
-                } else if element == BinaryOperatorType.LeftShift.rawValue {
-                    if let firstNum = calculateStack.pop() {
-                        calculateStack.push(try leftShift(first: firstNum))
-                    }
-                } else {
-                    if let secondNum = calculateStack.pop(),
-                       let firstNum = calculateStack.pop() {
-                        switch currentOperatorType {
-                        case .plus:
-                            calculateStack.push(try add(first: firstNum, second: secondNum))
-                        case .minus:
-                            calculateStack.push(try subtract(first: firstNum, second: secondNum))
-                        case .AND:
-                            calculateStack.push(try and(first: firstNum, second: secondNum))
-                        case .OR:
-                            calculateStack.push(try or(first: firstNum, second: secondNum))
-                        case .XOR:
-                            calculateStack.push(try xor(first: firstNum, second: secondNum))
-                        case .NOR:
-                            calculateStack.push(try nor(first: firstNum, second: secondNum))
-                        case .NAND:
-                            calculateStack.push(try nand(first: firstNum, second: secondNum))
-                        case .LeftShift:
-                            throw CalculatorError.unknown
-                        case .RightShift:
-                            throw CalculatorError.unknown
-                        case .NOT:
-                            throw CalculatorError.unknown
-                        }
-                    }
-                }
-            }
-            else {
+            guard binaryOperators.contains(element) else {
                 calculateStack.push(element)
+                continue
             }
+            let currentOperatorType = try getOperatorType(of: element)
+            guard let calculateResult = try selectCalculateTypeAndCalculate(operatorType: currentOperatorType) else {
+                throw CalculatorError.notDefinedOperator
+            }
+            calculateStack.push(calculateResult)
         }
         guard let result = calculateStack.pop() else {
-            throw CalculatorError.unknown
+            throw CalculatorError.stackIsEmpty
         }
         
         return result
+    }
+    
+    private func selectCalculateTypeAndCalculate(operatorType: BinaryOperatorType) throws -> String? {
+        switch operatorType {
+        case .plus:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try add(first: firstNumber, second: secondNumber)
+            }
+        case .minus:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try subtract(first: firstNumber, second: secondNumber)
+            }
+        case .AND:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try and(first: firstNumber, second: secondNumber)
+            }
+        case .NAND:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try nand(first: firstNumber, second: secondNumber)
+            }
+        case .OR:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try or(first: firstNumber, second: secondNumber)
+            }
+        case .NOR:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try nor(first: firstNumber, second: secondNumber)
+            }
+        case .XOR:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try xor(first: firstNumber, second: secondNumber)
+            }
+        case .LeftShift:
+            if let firstNumber = calculateStack.pop() {
+                return try leftShift(first: firstNumber)
+            }
+        case .RightShift:
+            if let firstNumber = calculateStack.pop() {
+                return try rightShift(first: firstNumber)
+            }
+        case .NOT:
+            if let firstNumber = calculateStack.pop() {
+                return try not(first: firstNumber)
+            }
+        }
+        
+        return nil
     }
     
     private func getOperatorType(of binaryOperator: String) throws -> BinaryOperatorType {

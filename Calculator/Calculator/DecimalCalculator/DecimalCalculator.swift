@@ -68,33 +68,51 @@ class DecimalCalculator {
     func calculate(_ infix: [String]) throws -> String {
         let formula: [String] = try transformToPostfix(infix)
         for element in formula {
-            if decimalOperators.contains(element) {
-                let currentOperatorType = try getOperatorType(of: element)
-                if let secondNum = calculateStack.pop(), let firstNum = calculateStack.pop() {
-                    switch currentOperatorType {
-                    case .plus:
-                        calculateStack.push(try add(first: firstNum, second: secondNum))
-                    case .minus:
-                        calculateStack.push(try subtract(first: firstNum, second: secondNum))
-                    case .multiplication:
-                        calculateStack.push(try multiply(first: firstNum, second: secondNum))
-                    case .division:
-                        calculateStack.push(try divide(first: firstNum, second: secondNum))
-                    }
-                }
-            }
-            else {
+            guard decimalOperators.contains(element) else {
                 calculateStack.push(element)
+                continue
             }
+            let currentOperatorType = try getOperatorType(of: element)
+            guard let calculateResult = try selectCalculatorTypeAndCalculate(operatorType: currentOperatorType) else {
+                throw CalculatorError.notDefinedOperator
+            }
+            calculateStack.push(calculateResult)
         }
         guard let result = calculateStack.pop() else {
-            throw CalculatorError.unknown
+            throw CalculatorError.stackIsEmpty
         }
         
         return result
     }
     
-    func getOperatorType(of decimalOperator: String) throws -> DecimalOperatorType {
+    private func selectCalculatorTypeAndCalculate(operatorType: DecimalOperatorType) throws -> String? {
+        switch operatorType {
+        case .plus:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try add(first: firstNumber, second: secondNumber)
+            }
+        case .minus:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try subtract(first: firstNumber, second: secondNumber)
+            }
+        case .multiplication:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try multiply(first: firstNumber, second: secondNumber)
+            }
+        case .division:
+            if let secondNumber = calculateStack.pop(),
+               let firstNumber = calculateStack.pop() {
+                return try divide(first: firstNumber, second: secondNumber)
+            }
+        }
+        
+        return nil
+    }
+    
+    private func getOperatorType(of decimalOperator: String) throws -> DecimalOperatorType {
         guard let operatorType = DecimalOperatorType(rawValue: decimalOperator) else {
             throw CalculatorError.notDefinedOperator
         }
