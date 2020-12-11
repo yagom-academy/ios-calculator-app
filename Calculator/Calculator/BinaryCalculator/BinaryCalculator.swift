@@ -11,7 +11,8 @@ class BinaryCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
     let scale: Int = 2
-    let binaryOperator: [String] = BinaryOperatorType.allCases.map{ $0.rawValue }
+    let binaryOperator: [String] = BinaryOperatorType.allCases.map({ (`operator`: BinaryOperatorType) -> String in
+                                                                        return `operator`.rawValue })
     init() {}
     
     private func precedence(_ binaryOperator: BinaryOperatorType) -> Int {
