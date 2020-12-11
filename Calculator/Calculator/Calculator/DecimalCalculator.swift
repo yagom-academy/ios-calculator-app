@@ -65,7 +65,7 @@ class DecimalCalculator: DecimalCalculable {
                 postFixFormula.append(DecimalData(value: item, type: nil))
             }
         }
-        while !decimalStack.isEmpty {
+        for _ in 0..<decimalStack.size {
             guard let operatorData = decimalStack.pop() else {
                 throw CalculatorError.unknowned
             }
@@ -102,38 +102,37 @@ class DecimalCalculator: DecimalCalculable {
         return resultData
     }
     
-    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
+    func stringToDouble(_ item: String) throws -> Double {
+        guard let doubleItem = Double(item) else {
             throw CalculatorError.unknowned
         }
+        return doubleItem
+    }
+    
+    func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        let firstNumber = try stringToDouble(firstItem.value)
+        let secondNumber = try stringToDouble(secondItem.value)
         let resultNumber = firstNumber / secondNumber
         return DecimalData(value: String(resultNumber), type: nil)
     }
     
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
-            throw CalculatorError.unknowned
-        }
+        let firstNumber = try stringToDouble(firstItem.value)
+        let secondNumber = try stringToDouble(secondItem.value)
         let resultNumber = firstNumber + secondNumber
         return DecimalData(value: String(resultNumber), type: nil)
     }
     
     func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
-            throw CalculatorError.unknowned
-        }
+        let firstNumber = try stringToDouble(firstItem.value)
+        let secondNumber = try stringToDouble(secondItem.value)
         let resultNumber = firstNumber - secondNumber
         return DecimalData(value: String(resultNumber), type: nil)
     }
     
     func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstNumber = Double(firstItem.value),
-              let secondNumber = Double(secondItem.value) else {
-            throw CalculatorError.unknowned
-        }
+        let firstNumber = try stringToDouble(firstItem.value)
+        let secondNumber = try stringToDouble(secondItem.value)
         let resultNumber = firstNumber * secondNumber
         return DecimalData(value: String(resultNumber), type: nil)
     }

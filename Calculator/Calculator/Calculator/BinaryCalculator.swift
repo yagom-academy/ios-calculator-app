@@ -131,82 +131,75 @@ class BinaryCalculator: BinaryCalculable {
         }
         return result
     }
-
-    func and(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstValue = Int(firstItem.value, radix: binaryScale),
-              let secondValue = Int(secondItem.value, radix: binaryScale) else {
+    
+    func stringToInt(_ item: String) throws -> Int {
+        guard let intItem = Int(item, radix: binaryScale) else {
             throw CalculatorError.unknowned
         }
+        return intItem
+    }
+
+    func and(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        let firstValue = try stringToInt(firstItem.value)
+        let secondValue = try stringToInt(secondItem.value)
         let resultValue = firstValue & secondValue
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
-
-    func or(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstValue = Int(firstItem.value, radix: binaryScale),
-              let secondValue = Int(secondItem.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
-        let resultValue = firstValue | secondValue
-        return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
+    
+    func nand(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        let andData = try and(firstItem: firstItem, secondItem: secondItem)
+        let nandData = try not(andData)
+        return nandData
     }
 
-    func xor(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstValue = Int(firstItem.value, radix: binaryScale),
-              let secondValue = Int(secondItem.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
-        let resultValue = firstValue ^ secondValue
+    func or(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        let firstValue = try stringToInt(firstItem.value)
+        let secondValue = try stringToInt(secondItem.value)
+        let resultValue = firstValue | secondValue
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 
     func nor(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
         let orData = try or(firstItem: firstItem, secondItem: secondItem)
-        return try not(orData)
+        let norData = try not(orData)
+        return norData
     }
-
-    func nand(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let andData = try and(firstItem: firstItem, secondItem: secondItem)
-        return try not(andData)
+    
+    func xor(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
+        let firstValue = try stringToInt(firstItem.value)
+        let secondValue = try stringToInt(secondItem.value)
+        let resultValue = firstValue ^ secondValue
+        return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
     
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstValue = Int(firstItem.value, radix: binaryScale),
-              let secondValue = Int(secondItem.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
+        let firstValue = try stringToInt(firstItem.value)
+        let secondValue = try stringToInt(secondItem.value)
         let resultValue = firstValue + secondValue
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 
     func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        guard let firstValue = Int(firstItem.value, radix: binaryScale),
-              let secondValue = Int(secondItem.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
+        let firstValue = try stringToInt(firstItem.value)
+        let secondValue = try stringToInt(secondItem.value)
         let resultValue = firstValue - secondValue
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
     
     func not(_ item: CalculatorData) throws -> CalculatorData {
-        guard let itemValue = Int(item.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
+        let itemValue = try stringToInt(item.value)
         let resultValue = ~itemValue
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 
     func leftShift(_ item: CalculatorData) throws -> CalculatorData {
-        guard let itemValue = Int(item.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
+        let itemValue = try stringToInt(item.value)
         let resultValue = itemValue << 1
         return BinaryData(value: String(resultValue, radix: 2), type: nil)
     }
 
     func rightShift(_ item: CalculatorData) throws -> CalculatorData {
-        guard let itemValue = Int(item.value, radix: binaryScale) else {
-            throw CalculatorError.unknowned
-        }
+        let itemValue = try stringToInt(item.value)
         let resultValue = itemValue >> 1
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
