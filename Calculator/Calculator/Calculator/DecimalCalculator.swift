@@ -12,7 +12,9 @@ class DecimalCalculator: DecimalCalculable {
     private init() {}
     
     private var decimalStack = Stack<DecimalData>()
-    private let decimalOperator: [String] = DecimalOperatorType.allCases.map { $0.rawValue }
+    private let decimalOperator: [String] = DecimalOperatorType.allCases.map { decimalType -> String in
+        return decimalType.rawValue
+    }
     
     func calculate(_ items: [String]) throws -> CalculatorData {
         guard decimalStack.isEmpty else {

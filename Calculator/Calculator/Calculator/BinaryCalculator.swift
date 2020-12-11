@@ -13,7 +13,9 @@ class BinaryCalculator: BinaryCalculable {
     private init() {}
 
     private var binaryStack = Stack<BinaryData>()
-    private let binaryOperator: [String] = BinaryOperatorType.allCases.map { $0.rawValue }
+    private let binaryOperator: [String] = BinaryOperatorType.allCases.map { binaryType -> String in
+        return binaryType.rawValue
+    }
     private let binaryScale = 2
 
     func calculate(_ items: [String]) throws -> CalculatorData {
