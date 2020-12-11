@@ -67,7 +67,7 @@ class BinaryCalculator: BinaryCalculable {
                 postFixFormula.append(BinaryData(value: item, type: nil))
             }
         }
-        while !binaryStack.isEmpty {
+        for _ in 0..<binaryStack.size {
             guard let operatorData = binaryStack.pop() else {
                 throw CalculatorError.unknowned
             }
