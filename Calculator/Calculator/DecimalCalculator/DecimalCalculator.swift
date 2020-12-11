@@ -95,7 +95,7 @@ class DecimalCalculator {
     
     func getOperatorType(of decimalOperator: String) throws -> DecimalOperatorType {
         guard let operatorType = DecimalOperatorType(rawValue: decimalOperator) else {
-            throw CalculatorError.unknown
+            throw CalculatorError.notDefinedOperator
         }
         return operatorType
     }

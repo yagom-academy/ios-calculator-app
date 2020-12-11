@@ -9,5 +9,6 @@ enum CalculatorError: Error {
     case overflow
     case divideByZero
     case stackIsEmpty
+    case notDefinedOperator
     case unknown
 }

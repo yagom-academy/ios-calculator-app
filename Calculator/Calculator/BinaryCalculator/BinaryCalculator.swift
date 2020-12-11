@@ -126,7 +126,7 @@ class BinaryCalculator {
     
     private func getOperatorType(of binaryOperator: String) throws -> BinaryOperatorType {
         guard let operatorType = BinaryOperatorType(rawValue: binaryOperator) else {
-            throw CalculatorError.unknown
+            throw CalculatorError.notDefinedOperator
         }
         return operatorType
     }
