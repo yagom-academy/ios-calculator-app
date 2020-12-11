@@ -56,6 +56,7 @@ class DecimalCalculator {
                 postfix.append(top)
             }
         }
+        
         return postfix
     }
     
@@ -84,6 +85,7 @@ class DecimalCalculator {
         guard let result = calculateStack.pop() else {
             throw CalculatorError.unknown
         }
+        
         return result
     }
     

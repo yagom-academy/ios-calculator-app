@@ -60,6 +60,7 @@ class BinaryCalculator {
                 postfix.append(top)
             }
         }
+        
         return postfix
     }
     
@@ -115,6 +116,7 @@ class BinaryCalculator {
         guard let result = calculateStack.pop() else {
             throw CalculatorError.unknown
         }
+        
         return result
     }
     
