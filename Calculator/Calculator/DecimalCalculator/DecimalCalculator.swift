@@ -95,22 +95,23 @@ class DecimalCalculator {
         }
         return operatorType
     }
+    
+    private func stringNumberToDoubleNumber(_ stringNumber: String) -> Double {
+        let doubleNumber: Double = (stringNumber as NSString).doubleValue
+        return doubleNumber
+    }
 }
 
 extension DecimalCalculator: BasicCalculable {
     func add(first: String, second: String) throws -> String {
         var result: Double
-        let firstNumber: Double = (first as NSString).doubleValue
-        let secondNumber: Double = (second as NSString).doubleValue
-        result = firstNumber + secondNumber
+        result = stringNumberToDoubleNumber(first) + stringNumberToDoubleNumber(second)
         return String(describing: result)
     }
     
     func subtract(first: String, second: String) throws -> String {
         var result: Double
-        let firstNumber: Double = (first as NSString).doubleValue
-        let secondNumber: Double = (second as NSString).doubleValue
-        result = firstNumber - secondNumber
+        result = stringNumberToDoubleNumber(first) - stringNumberToDoubleNumber(second)
         return String(describing: result)
     }
     
@@ -123,22 +124,18 @@ extension DecimalCalculator: BasicCalculable {
 extension DecimalCalculator: DecimalCalculable {
     func multiply(first: String, second: String) throws -> String {
         var result: Double
-        let firstNumber: Double = (first as NSString).doubleValue
-        let secondNumber: Double = (second as NSString).doubleValue
-        result = firstNumber * secondNumber
+        result = stringNumberToDoubleNumber(first) * stringNumberToDoubleNumber(second)
         return String(describing: result)
     }
     
     func divide(first: String, second: String) throws -> String {
         var result: Double
-        let firstNumber: Double = (first as NSString).doubleValue
-        let secondNumber: Double = (second as NSString).doubleValue
-        
-        if secondNumber == 0 {
+        let secondNumber = stringNumberToDoubleNumber(second)
+        guard secondNumber != 0 else {
             throw CalculatorError.divideByZero
-        } else {
-            result = firstNumber / secondNumber
         }
+        
+        result = stringNumberToDoubleNumber(first) / secondNumber
         return String(describing: result)
     }
 }
