@@ -144,9 +144,7 @@ class BinaryCalculator: BinaryCalculable {
     }
 
     func and(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstValue = try stringToInt(firstItem.value)
-        let secondValue = try stringToInt(secondItem.value)
-        let resultValue = firstValue & secondValue
+        let resultValue = try (stringToInt(firstItem.value) & stringToInt(secondItem.value))
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
     
@@ -157,9 +155,7 @@ class BinaryCalculator: BinaryCalculable {
     }
 
     func or(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstValue = try stringToInt(firstItem.value)
-        let secondValue = try stringToInt(secondItem.value)
-        let resultValue = firstValue | secondValue
+        let resultValue = try (stringToInt(firstItem.value) | stringToInt(secondItem.value))
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 
@@ -170,41 +166,32 @@ class BinaryCalculator: BinaryCalculable {
     }
     
     func xor(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstValue = try stringToInt(firstItem.value)
-        let secondValue = try stringToInt(secondItem.value)
-        let resultValue = firstValue ^ secondValue
+        let resultValue = try (stringToInt(firstItem.value) ^ stringToInt(secondItem.value))
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
     
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstValue = try stringToInt(firstItem.value)
-        let secondValue = try stringToInt(secondItem.value)
-        let resultValue = firstValue + secondValue
+        let resultValue = try (stringToInt(firstItem.value) + stringToInt(secondItem.value))
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 
     func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstValue = try stringToInt(firstItem.value)
-        let secondValue = try stringToInt(secondItem.value)
-        let resultValue = firstValue - secondValue
+        let resultValue = try (stringToInt(firstItem.value) - stringToInt(secondItem.value))
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
     
     func not(_ item: CalculatorData) throws -> CalculatorData {
-        let itemValue = try stringToInt(item.value)
-        let resultValue = ~itemValue
+        let resultValue = try (~stringToInt(item.value))
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 
     func leftShift(_ item: CalculatorData) throws -> CalculatorData {
-        let itemValue = try stringToInt(item.value)
-        let resultValue = itemValue << 1
+        let resultValue = try (stringToInt(item.value) << 1)
         return BinaryData(value: String(resultValue, radix: 2), type: nil)
     }
 
     func rightShift(_ item: CalculatorData) throws -> CalculatorData {
-        let itemValue = try stringToInt(item.value)
-        let resultValue = itemValue >> 1
+        let resultValue = try (stringToInt(item.value) >> 1)
         return BinaryData(value: String(resultValue, radix: binaryScale), type: nil)
     }
 

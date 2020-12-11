@@ -114,31 +114,26 @@ class DecimalCalculator: DecimalCalculable {
     }
     
     func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstNumber = try stringToDouble(firstItem.value)
-        let secondNumber = try stringToDouble(secondItem.value)
-        let resultNumber = firstNumber / secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        guard try stringToDouble(secondItem.value) != 0 else {
+            throw CalculatorError.divideByZero
+        }
+        let resultValue = try (stringToDouble(firstItem.value) / stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func add(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstNumber = try stringToDouble(firstItem.value)
-        let secondNumber = try stringToDouble(secondItem.value)
-        let resultNumber = firstNumber + secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        let resultValue = try (stringToDouble(firstItem.value) + stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func subtract(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstNumber = try stringToDouble(firstItem.value)
-        let secondNumber = try stringToDouble(secondItem.value)
-        let resultNumber = firstNumber - secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        let resultValue = try (stringToDouble(firstItem.value) - stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func multiply(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
-        let firstNumber = try stringToDouble(firstItem.value)
-        let secondNumber = try stringToDouble(secondItem.value)
-        let resultNumber = firstNumber * secondNumber
-        return DecimalData(value: String(resultNumber), type: nil)
+        let resultValue = try (stringToDouble(firstItem.value) * stringToDouble(secondItem.value))
+        return DecimalData(value: String(resultValue), type: nil)
     }
     
     func clear() {
