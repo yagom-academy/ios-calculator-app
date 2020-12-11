@@ -5,14 +5,18 @@
 // 
 
 import UIKit
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        do {
+            let test = ["2", "-", "4", "+", "-3", "*", "3", "/", "3"]
+            let result = try DecimalCalculator.shared.calculate(test)
+            print("10: \(result.value)")
+        } catch {
+            
+        }
     }
-
-
 }
 
