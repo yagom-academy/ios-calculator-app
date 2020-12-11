@@ -34,20 +34,23 @@ class BinaryCalculator {
         var postfix = [String]()
         for element in infix {
             if binaryOperator.contains(element) {
-                if !postfixStack.isEmpty {
-                    if let top = postfixStack.peek() {
-                        var stackTopOperatorType = try getOperatorType(of: top)
-                        let currentOperatorType = try getOperatorType(of: element)
-                        while(!postfixStack.isEmpty &&
-                                precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
-                            guard let top = postfixStack.pop() else {
-                                throw CalculatorError.stackIsEmpty
-                            }
-                            postfix.append(top)
-                            if let topAfterPop = postfixStack.peek() {
-                                stackTopOperatorType = try getOperatorType(of: topAfterPop)
-                            }
-                        }
+                guard !postfixStack.isEmpty else {
+                    postfixStack.push(element)
+                    continue
+                }
+                guard let top = postfixStack.peek() else {
+                    throw CalculatorError.stackIsEmpty
+                }
+                var stackTopOperatorType = try getOperatorType(of: top)
+                let currentOperatorType = try getOperatorType(of: element)
+                while(!postfixStack.isEmpty &&
+                        precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
+                    guard let top = postfixStack.pop() else {
+                        throw CalculatorError.stackIsEmpty
+                    }
+                    postfix.append(top)
+                    if let topAfterPop = postfixStack.peek() {
+                        stackTopOperatorType = try getOperatorType(of: topAfterPop)
                     }
                 }
                 postfixStack.push(element)
