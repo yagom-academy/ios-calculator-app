@@ -21,12 +21,6 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
         let symbol: String
         let priority: Int
         let operation: ((Double, Double) -> Double)?
-        
-        init(_ symbol: String, _ priority: Int, _ operation: ((Double, Double) -> Double)?) {
-            self.symbol = symbol
-            self.priority = priority
-            self.operation = operation
-        }
     }
     
     enum DecimalCalculatorOperator {
@@ -44,11 +38,11 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     private var operandStack: Stack<Double> = Stack<Double>()
     
     private var operatorDetails: [DecimalCalculatorOperator: OperatorDetail] = [
-        .add: OperatorDetail("+", 4, {(operand1: Double, operand2: Double) in return operand2 + operand1}),
-        .subtract: OperatorDetail("-", 4, {(operand1: Double, operand2: Double) in return operand2 - operand1}),
-        .multiply: OperatorDetail("*", 3, {(operand1: Double, operand2: Double) in return operand2 * operand1}),
-        .divide: OperatorDetail("/", 3, {(operand1: Double, operand2: Double) in return operand2 / operand1}),
-        .equal: OperatorDetail("=", 5, nil)
+        .add: OperatorDetail(symbol: "+", priority: 4, operation: {$1 + $0}),
+        .subtract: OperatorDetail(symbol: "-", priority: 4, operation: {$1 - $0}),
+        .multiply: OperatorDetail(symbol: "*", priority: 3, operation: {$1 * $0}),
+        .divide: OperatorDetail(symbol: "/", priority: 3, operation: {$1 / $0}),
+        .equal: OperatorDetail(symbol: "=", priority: 5, operation: nil)
     ]
     
     func clearBuffer() {
@@ -82,13 +76,11 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
             return operandBuffer
         }
         
-        operandBuffer += String(number)
-        
-        /// 버퍼값을 Double로 변환하여 유효한 값인지 확인.
-        guard let validOperand = Double(operandBuffer) else {
+        // 새로 입력된 값을 추가한 피연산자를 Double로 변환하여 유효여부를 확인하고, 유효하면 버퍼에 초기화
+        let newOperand = operandBuffer + String(number)
+        guard let validOperand = Double(newOperand) else {
             throw CalculatorError.inputNumberError
         }
-        
         operandBuffer = validOperand.toString
         
         isPushingOperatorJustBefore = false
@@ -98,15 +90,12 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     
     /// 사용자가 연산자를 입력하면, 버퍼에 저장되어있는 숫자들을 피연산자로서 스택에 푸쉬하기 위한 함수.
     private func pushOperand() {
-        guard let operand: Double = Double(operandBuffer) else {
-            return
+        if let operand: Double = Double(operandBuffer) {
+            operandStack.push(operand)
+            
+            clearBuffer()
         }
-        
-        operandStack.push(operand)
-        
-        clearBuffer()
     }
-    
     
     /// 사용자가 연산자를 입력(터치)하면 스택에 연산자를 푸쉬하기 위한 함수.
     /// 넣으려는 연산자보다 우선순위가 먼저인 연산자는 pop하여 연산한다.
@@ -157,112 +146,87 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     ///     - pushOperator함수에서 발생한 에러를 전달.
     /// - Returns: 스택의 가장 최근 피연산자 값을 문자열로 반환.
     func add() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.add)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.add)
+            } catch(let error) {
+                throw error
             }
-            
-            return lastOperand.toString
         }
         
-        /// 연산자가 입력되기 직전까지 버퍼에 저장된 숫자들을 피연산자 스택에 푸쉬.
-        pushOperand()
-        
-        do {
-            try pushOperator(.add)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return lastOperand.toString
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return lastOperand.toString
     }
     
     func subtract() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.subtract)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.subtract)
+            } catch(let error) {
+                throw error
             }
-            
-            return lastOperand.toString
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperator(.subtract)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return lastOperand.toString
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return lastOperand.toString
     }
     
     func multiply() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.multiply)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.multiply)
+            } catch(let error) {
+                throw error
             }
-            
-            return lastOperand.toString
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperator(.multiply)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return lastOperand.toString
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return lastOperand.toString
     }
     
     func divide() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
+        if isPushingOperatorJustBefore {
             _ = operatorStack.pop()
             operatorStack.push(.divide)
+        } else {
+            pushOperand()
             
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
+            do {
+                try pushOperator(.divide)
+            } catch(let error) {
+                throw error
             }
-            
-            return lastOperand.toString
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperator(.divide)
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return lastOperand.toString
-        } catch(let error) {
-            throw error
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
+        
+        return lastOperand.toString
     }
     
     func toggleSign() -> String {
@@ -281,29 +245,23 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     }
     
     func equal() throws -> String {
-        guard isPushingOperatorJustBefore != true else {
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
+        if !isPushingOperatorJustBefore {
+            pushOperand()
             
-            return lastOperand.toString
+            do {
+                try pushOperator(.equal)
+                
+                _ = operatorStack.pop()
+            } catch(let error) {
+                throw error
+            }
+        }
+                
+        guard let lastOperand = operandStack.top else {
+            throw CalculatorError.operandError
         }
         
-        pushOperand()
-        
-        do {
-            try pushOperator(.equal)
-            
-            _ = operatorStack.pop()
-            
-            guard let lastOperand = operandStack.top else {
-                throw CalculatorError.operandError
-            }
-            
-            return lastOperand.toString
-        } catch(let error) {
-            throw error
-        }
+        return lastOperand.toString
     }
     
     func clear() {
