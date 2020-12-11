@@ -126,26 +126,25 @@ class BinaryCalculator {
         }
         return operatorType
     }
+    
+    private func stringNumberToIntNumber(_ stringNumber: String) throws -> Int {
+        guard let intNumber = Int(stringNumber, radix: scale) else {
+            throw CalculatorError.unknown
+        }
+        return intNumber
+    }
 }
 
 extension BinaryCalculator: BasicCalculable {
     func add(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber + secondNumber
+        result = try stringNumberToIntNumber(first) + stringNumberToIntNumber(second)
         return String(result, radix: scale)
     }
     
     func subtract(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber - secondNumber
+        result = try stringNumberToIntNumber(first) - stringNumberToIntNumber(second)
         return String(result, radix: scale)
     }
     
@@ -158,78 +157,49 @@ extension BinaryCalculator: BasicCalculable {
 extension BinaryCalculator: BinaryCalculable {
     func and(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber & secondNumber
+        result = try stringNumberToIntNumber(first) & stringNumberToIntNumber(second)
         return String(result, radix: scale)
     }
     
     func or(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber | secondNumber
+        result = try stringNumberToIntNumber(first) | stringNumberToIntNumber(second)
         return String(result, radix: scale)
     }
     
     func xor(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber ^ secondNumber
+        result = try stringNumberToIntNumber(first) ^ stringNumberToIntNumber(second)
         return String(result, radix: scale)
     }
     
     func nor(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = ~(firstNumber & secondNumber)
+        result = try ~(stringNumberToIntNumber(first) | stringNumberToIntNumber(second))
         return String(result, radix: scale)
     }
     
     func not(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = ~firstNumber
+        result = try ~stringNumberToIntNumber(first)
         return String(result, radix: scale)
     }
     
     func nand(first: String, second: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale),
-              let secondNumber = Int(second, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = ~(firstNumber & secondNumber)
+        result = try ~(stringNumberToIntNumber(first) & stringNumberToIntNumber(second))
         return String(result, radix: scale)
     }
     
     func rightShift(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber >> 1
+        result = try stringNumberToIntNumber(first) >> 1
         return String(result, radix: scale)
     }
     
     func leftShift(first: String) throws -> String {
         var result: Int
-        guard let firstNumber = Int(first, radix: scale) else {
-            throw CalculatorError.unknown
-        }
-        result = firstNumber << 1
+        result = try stringNumberToIntNumber(first) << 1
         return String(result, radix: scale)
     }
 }
