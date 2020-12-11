@@ -39,8 +39,7 @@ class DecimalCalculator {
                 }
                 var stackTopOperatorType = try getOperatorType(of: top)
                 let currentOperatorType = try getOperatorType(of: element)
-                while(!postfixStack.isEmpty &&
-                        precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
+                while(!postfixStack.isEmpty && precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
                     guard let top = postfixStack.pop() else {
                         throw CalculatorError.stackIsEmpty
                     }
@@ -50,8 +49,7 @@ class DecimalCalculator {
                     }
                 }
                 postfixStack.push(element)
-            }
-            else {
+            } else {
                 postfix.append(element)
             }
         }
