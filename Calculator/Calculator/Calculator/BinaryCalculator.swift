@@ -91,20 +91,17 @@ class BinaryCalculator: BinaryCalculable {
         for item in items {
             if binaryOperator.contains(item) {
                 let operatorData = try getOperatorData(item)
-                while true {
-                    guard let compareOperatorData = binaryStack.peek() else {
-                        binaryStack.push(operatorData)
-                        break
-                    }
-                    guard let operatorType = operatorData.type,
+                while !binaryStack.isEmpty {
+                    guard let compareOperatorData = binaryStack.peek(),
+                          let operatorType = operatorData.type,
                           let compareOperatorType = compareOperatorData.type,
                           operatorType.isPrecedence(compare: compareOperatorType) else {
-                        binaryStack.push(operatorData)
                         break
                     }
                     postFixFormula.append(compareOperatorData)
                     binaryStack.pop()
                 }
+                binaryStack.push(operatorData)
             }
             else {
                 postFixFormula.append(BinaryData(value: item, type: nil))
