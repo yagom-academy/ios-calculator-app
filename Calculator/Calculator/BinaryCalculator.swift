@@ -18,10 +18,10 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         case add, subtract, and, or, xor, nor, nand, equal
     }
     
-    /// 사용자가 숫자를 터치하면 버퍼에 저장하고, 연산자를 터치하면 버퍼에 모인 숫자를 피연산자 스택에 저장하기 위함.
+    // 사용자가 숫자를 터치하면 버퍼에 저장하고, 연산자를 터치하면 버퍼에 모인 숫자를 피연산자 스택에 저장하기 위함.
     private var operandBuffer: String = "0"
     
-    /// 연산자가 바로 직전에 푸쉬됐는지 확인하여, 연산자가 여러개 푸쉬 되는 것을 방지.
+    // 연산자가 바로 직전에 푸쉬됐는지 확인하여, 연산자가 여러개 푸쉬 되는 것을 방지.
     private var isPushingOperatorJustBefore: Bool = false
     
     private var operatorStack: Stack<BinaryCalculatorOperator> = Stack<BinaryCalculatorOperator>()
@@ -39,30 +39,13 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         .equal: OperatorDetail(symbol: "=", priority: 5, operation: nil)
     ]
     
-    func clearBuffer() {
-        self.operandBuffer = "0"
-    }
-    
     /// 0 또는 1을 입력받아서 버퍼에 저장하는 함수.
     ///
     /// - Parameter number: 0 또는 1
     /// - Throws:
-    ///     - 아스키 값 얻는 것을 실패하면 'CalculatorError.asciiValueError'.
     ///     - 0 또는 1 이외의 값이 입력되면 'CalculatorError.inputNumberError'.
     /// - Returns: 현재 버퍼에 저장되어있는 문자열.
     func enterNumber(_ number: Character) throws -> String {
-        guard let numberAsciiValue = number.asciiValue else {
-            throw CalculatorError.asciiValueError
-        }
-        
-        guard let zeroAsciiValue = Character("0").asciiValue, let oneAsciiValue = Character("1").asciiValue else {
-            throw CalculatorError.asciiValueError
-        }
-        
-        guard numberAsciiValue >= zeroAsciiValue && Int(numberAsciiValue) <= oneAsciiValue else {
-            throw CalculatorError.inputNumberError
-        }
-
         // 새로 입력된 값을 추가한 피연산자를 Int로 변환하여 유효여부를 확인하고, 유효하면 버퍼에 초기화
         let newOperand = operandBuffer + String(number)
         guard let validOperand = Int(newOperand, radix: 2) else {
@@ -80,7 +63,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         if let operand: Int = Int(operandBuffer, radix: 2) {
             operandStack.push(operand)
             
-            clearBuffer()
+            self.operandBuffer = "0"
         }
     }
     
@@ -89,7 +72,6 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     ///
     /// - Parameter operator: 스텍에 넣을 연산자.
     /// - Throws:
-    ///     - 0으로 나눌 경우, 'CalculatorError.divisionByZero'.
     ///     - 피연산자가 부족할 경우(잘못된 피연산자 입력), 'CalculatorError.operandError'.
     private func pushOperator(_ `operator`: BinaryCalculatorOperator) throws {
         guard operandStack.size > 0 else { return }
@@ -98,22 +80,17 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         
         while let lastOperator = operatorStack.top {
             guard let lastOperatorDetail = operatorDetails[lastOperator] else { return }
-            
             if lastOperatorDetail.priority > pushedOperatorDetail.priority {
                 break
             }
             
-            _ = operatorStack.pop()
+            operatorStack.pop()
             
             guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
-                /// - TODO: numberStack size가 2보다 작을 경우에 대한 예외처리.
-                return
+                throw CalculatorError.operandError
             }
-            
             guard let operate = lastOperatorDetail.operation else { return }
-            
             let resultByLastOperator = operate(operand1, operand2)
-            
             operandStack.push(resultByLastOperator)
         }
         
@@ -130,7 +107,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     /// - Returns: 스택의 가장 최근 피연산자 값을 문자열로 반환.
     func add() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.add)
         } else {
             pushOperand()
@@ -151,7 +128,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     func subtract() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.subtract)
         } else {
             pushOperand()
@@ -172,7 +149,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     func and() throws -> String{
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.and)
         } else {
             pushOperand()
@@ -193,7 +170,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     func or() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.or)
         } else {
             pushOperand()
@@ -214,7 +191,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     func xor() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.xor)
         } else {
             pushOperand()
@@ -235,7 +212,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     func nor() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.nor)
         } else {
             pushOperand()
@@ -256,7 +233,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     func nand() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.nand)
         } else {
             pushOperand()
@@ -276,7 +253,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     }
     
     func not() throws -> String {
-        guard let operand: Int = Int(operandBuffer, radix: 2) else {
+        guard let operand = Int(operandBuffer, radix: 2) else {
             throw CalculatorError.operandError
         }
         
@@ -289,7 +266,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     
     
     func leftShift() throws -> String {
-        guard let operand: Int = Int(operandBuffer, radix: 2) else {
+        guard let operand = Int(operandBuffer, radix: 2) else {
             throw CalculatorError.operandError
         }
         
@@ -301,7 +278,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     }
     
     func rightShift() throws -> String {
-        guard let operand: Int = Int(operandBuffer, radix: 2) else {
+        guard let operand = Int(operandBuffer, radix: 2) else {
             throw CalculatorError.operandError
         }
         
@@ -313,13 +290,19 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     }
     
     func equal() throws -> String {
-        if !isPushingOperatorJustBefore {
+        guard isPushingOperatorJustBefore else {
             pushOperand()
             
             do {
                 try pushOperator(.equal)
                 
-                _ = operatorStack.pop()
+                operatorStack.pop()
+                
+                guard let lastOperand = operandStack.top else {
+                    throw CalculatorError.operandError
+                }
+                
+                return String(lastOperand, radix: 2)
             } catch(let error) {
                 throw error
             }
@@ -335,7 +318,7 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
     func clear() {
         operatorStack.removeAll()
         operandStack.removeAll()
-        clearBuffer()
+        self.operandBuffer = "0"
     }
     
 }

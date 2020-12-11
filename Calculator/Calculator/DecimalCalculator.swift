@@ -27,10 +27,10 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
         case add, subtract, multiply, divide, equal
     }
     
-    /// 사용자가 숫자를 터치하면 버퍼에 저장하고, 연산자를 터치하면 버퍼에 모인 숫자를 피연산자 스택에 저장하기 위함.
+    // 사용자가 숫자를 터치하면 버퍼에 저장하고, 연산자를 터치하면 버퍼에 모인 숫자를 피연산자 스택에 저장하기 위함.
     private var operandBuffer: String = "0"
     
-    /// 연산자가 바로 직전에 푸쉬됐는지 확인하여, 연산자가 여러개 푸쉬 되는 것을 방지.
+    // 연산자가 바로 직전에 푸쉬됐는지 확인하여, 연산자가 여러개 푸쉬 되는 것을 방지.
     private var isPushingOperatorJustBefore: Bool = false
     
     private var operatorStack: Stack<DecimalCalculatorOperator> = Stack<DecimalCalculatorOperator>()
@@ -45,37 +45,13 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
         .equal: OperatorDetail(symbol: "=", priority: 5, operation: nil)
     ]
     
-    func clearBuffer() {
-        self.operandBuffer = "0"
-    }
-    
     /// 숫자 또는 소수점을 입력받아서 버퍼에 저장하는 함수.
     ///
     /// - Parameter number: 0~9 값 또는 소수점(.).
     /// - Throws:
-    ///     - 아스키 값 얻는 것을 실패하면 'CalculatorError.asciiValueError'.
     ///     - 0~9 또는 소수점 이외의 값이 입력되면 'CalculatorError.inputNumberError'.
     /// - Returns: 현재 버퍼에 저장되어있는 문자열.
     func enterNumber(_ number: Character) throws -> String {
-        guard let numberAsciiValue = number.asciiValue else {
-            throw CalculatorError.asciiValueError
-        }
-        
-        guard let zeroAsciiValue = Character("0").asciiValue,
-              let nineAsciiValue = Character("9").asciiValue else {
-            throw CalculatorError.asciiValueError
-        }
-        
-        guard (numberAsciiValue >= zeroAsciiValue &&
-                numberAsciiValue <= nineAsciiValue) ||
-                number == "." else {
-            throw CalculatorError.inputNumberError
-        }
-        
-        if number == "." && operandBuffer.contains(".") {
-            return operandBuffer
-        }
-        
         // 새로 입력된 값을 추가한 피연산자를 Double로 변환하여 유효여부를 확인하고, 유효하면 버퍼에 초기화
         let newOperand = operandBuffer + String(number)
         guard let validOperand = Double(newOperand) else {
@@ -93,7 +69,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
         if let operand: Double = Double(operandBuffer) {
             operandStack.push(operand)
             
-            clearBuffer()
+            self.operandBuffer = "0"
         }
     }
     
@@ -109,28 +85,24 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
         
         guard let pushedOperatorDetail = operatorDetails[`operator`] else { return }
         
-        /// 넣을 연산자보다 우선순위가 먼저인 연산자를 pop하여 연산.
         while let lastOperator = operatorStack.top {
             guard let lastOperatorDetail = operatorDetails[lastOperator] else { return }
-            
             if lastOperatorDetail.priority > pushedOperatorDetail.priority {
                 break
             }
             
-            _ = operatorStack.pop()
+            operatorStack.pop()
             
             guard let operand1 = operandStack.pop(), let operand2 = operandStack.pop() else {
                 throw CalculatorError.operandError
             }
             
-            guard !(lastOperatorDetail.symbol == "/" && operand1 == 0) else {
+            if lastOperatorDetail.symbol == "/" && operand1 == 0 {
                 throw CalculatorError.divisionByZero
             }
             
             guard let operate = lastOperatorDetail.operation else { return }
-            
             let resultByLastOperator = operate(operand1, operand2)
-            
             operandStack.push(resultByLastOperator)
         }
         
@@ -147,7 +119,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     /// - Returns: 스택의 가장 최근 피연산자 값을 문자열로 반환.
     func add() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.add)
         } else {
             pushOperand()
@@ -168,7 +140,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     
     func subtract() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.subtract)
         } else {
             pushOperand()
@@ -189,7 +161,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     
     func multiply() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.multiply)
         } else {
             pushOperand()
@@ -210,7 +182,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     
     func divide() throws -> String {
         if isPushingOperatorJustBefore {
-            _ = operatorStack.pop()
+            operatorStack.pop()
             operatorStack.push(.divide)
         } else {
             pushOperand()
@@ -230,7 +202,9 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     }
     
     func toggleSign() -> String {
-        guard operandBuffer != "0" else { return "0" }
+        guard operandBuffer != "0" else {
+            return "0"
+        }
         
         let startIndex = operandBuffer.startIndex
         if operandBuffer[startIndex] == "-" {
@@ -245,13 +219,19 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     }
     
     func equal() throws -> String {
-        if !isPushingOperatorJustBefore {
+        guard isPushingOperatorJustBefore else {
             pushOperand()
             
             do {
                 try pushOperator(.equal)
                 
-                _ = operatorStack.pop()
+                operatorStack.pop()
+                
+                guard let lastOperand = operandStack.top else {
+                    throw CalculatorError.operandError
+                }
+                
+                return lastOperand.toString
             } catch(let error) {
                 throw error
             }
@@ -267,7 +247,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
     func clear() {
         operatorStack.removeAll()
         operandStack.removeAll()
-        clearBuffer()
+        self.operandBuffer = "0"
     }
     
 }
