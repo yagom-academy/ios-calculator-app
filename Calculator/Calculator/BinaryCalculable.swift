@@ -8,12 +8,12 @@
 import Foundation
 
 protocol BinaryCalculable {
-    func and()
-    func or()
-    func xor()
-    func nor()
-    func not()
-    func nand()
-    func leftShift()
-    func rightShift()
+    func and() throws -> String
+    func or() throws -> String
+    func xor() throws -> String
+    func nor() throws -> String
+    func not() throws -> String
+    func nand() throws -> String
+    func leftShift() throws -> String
+    func rightShift() throws -> String
 }
