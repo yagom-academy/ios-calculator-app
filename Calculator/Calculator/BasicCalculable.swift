@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BasicCalculable {
-    func add()
-    func subtract()
-    func clear()
+    func add() throws -> String
+    func subtract() throws -> String
+    func clear() 
 }
