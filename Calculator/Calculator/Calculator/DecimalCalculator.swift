@@ -61,20 +61,17 @@ class DecimalCalculator: DecimalCalculable {
         for item in items {
             if decimalOperator.contains(item) {
                 let operatorData = try getOperatorData(item)
-                while true {
-                    guard let compareOperatorData = decimalStack.peek() else {
-                        decimalStack.push(operatorData)
-                        break
-                    }
-                    guard let operatorType = operatorData.type,
+                while !decimalStack.isEmpty {
+                    guard let compareOperatorData = decimalStack.peek(),
+                          let operatorType = operatorData.type,
                           let compareOperatorType = compareOperatorData.type,
                           operatorType.isPrecedence(compare: compareOperatorType) else {
-                        decimalStack.push(operatorData)
                         break
                     }
                     postFixFormula.append(compareOperatorData)
                     decimalStack.pop()
                 }
+                decimalStack.push(operatorData)
             }
             else {
                 postFixFormula.append(DecimalData(value: item, type: nil))
