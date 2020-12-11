@@ -20,6 +20,6 @@ enum BinaryOperatorType: String, CaseIterable {
 
 enum BinaryOperatorPrecedence: Int {
     case high = 2
-    case low = 1
-    case zero = 0
+    case mid = 1
+    case low = 0
 }

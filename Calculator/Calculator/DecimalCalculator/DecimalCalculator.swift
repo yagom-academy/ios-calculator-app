@@ -14,14 +14,14 @@ class DecimalCalculator {
     init() {}
     
     private func precedence(_ decimalOperator: DecimalOperatorType) -> Int {
-        let high: DecimalOperatorPrecedence = .high
-        let low: DecimalOperatorPrecedence = .low
+        let highPrecedence: DecimalOperatorPrecedence = .high
+        let lowPrecedence: DecimalOperatorPrecedence = .low
         
         switch decimalOperator {
         case .multiplication, .division :
-            return high.rawValue
+            return highPrecedence.rawValue
         case .plus, .minus :
-            return low.rawValue
+            return lowPrecedence.rawValue
         }
     }
     

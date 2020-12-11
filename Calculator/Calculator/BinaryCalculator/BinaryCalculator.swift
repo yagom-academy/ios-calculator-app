@@ -15,17 +15,17 @@ class BinaryCalculator {
     init() {}
     
     private func precedence(_ binaryOperator: BinaryOperatorType) -> Int {
-        let high: BinaryOperatorPrecedence = .high
-        let low: BinaryOperatorPrecedence = .low
-        let zero: BinaryOperatorPrecedence = .zero
+        let highPrecedence: BinaryOperatorPrecedence = .high
+        let midPrecedence: BinaryOperatorPrecedence = .mid
+        let lowPrecedence: BinaryOperatorPrecedence = .low
         
         switch binaryOperator {
         case .NOT, .RightShift, .LeftShift:
-            return high.rawValue
+            return highPrecedence.rawValue
         case .AND, .NAND:
-            return low.rawValue
+            return midPrecedence.rawValue
         case .XOR, .NOR, .OR, .minus, .plus:
-            return zero.rawValue
+            return lowPrecedence.rawValue
         }
     }
     
