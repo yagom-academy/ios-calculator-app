@@ -35,31 +35,32 @@ class BinaryCalculator {
     private func transformToPostfix(_ infix: [String]) throws -> [String] {
         var postfix = [String]()
         for element in infix {
-            if binaryOperators.contains(element) {
-                guard !postfixStack.isEmpty else {
-                    postfixStack.push(element)
-                    continue
-                }
-                guard let top = postfixStack.peek() else {
+            guard binaryOperators.contains(element) else {
+                postfix.append(element)
+                continue
+            }
+            guard !postfixStack.isEmpty else {
+                postfixStack.push(element)
+                continue
+            }
+            guard let top = postfixStack.peek() else {
+                throw CalculatorError.stackIsEmpty
+            }
+            var stackTopOperatorType = try getOperatorType(of: top)
+            let currentOperatorType = try getOperatorType(of: element)
+            while(!postfixStack.isEmpty && precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
+                guard let top = postfixStack.pop() else {
                     throw CalculatorError.stackIsEmpty
                 }
-                var stackTopOperatorType = try getOperatorType(of: top)
-                let currentOperatorType = try getOperatorType(of: element)
-                while(!postfixStack.isEmpty && precedence(stackTopOperatorType) >= precedence(currentOperatorType)) {
-                    guard let top = postfixStack.pop() else {
-                        throw CalculatorError.stackIsEmpty
-                    }
-                    postfix.append(top)
-                    if let topAfterPop = postfixStack.peek() {
-                        stackTopOperatorType = try getOperatorType(of: topAfterPop)
-                    }
+                postfix.append(top)
+                if let topAfterPop = postfixStack.peek() {
+                    stackTopOperatorType = try getOperatorType(of: topAfterPop)
                 }
-                postfixStack.push(element)
-            } else {
-                postfix.append(element)
             }
+            postfixStack.push(element)
         }
-        while !postfixStack.isEmpty {
+        
+        for _ in 0..<postfixStack.size {
             if let top = postfixStack.pop() {
                 postfix.append(top)
             }
