@@ -11,8 +11,10 @@ class BinaryCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
     let scale: Int = 2
-    let binaryOperator: [String] = BinaryOperatorType.allCases.map({ (`operator`: BinaryOperatorType) -> String in
-                                                                        return `operator`.rawValue })
+    let binaryOperator = BinaryOperatorType.allCases
+    lazy var binaryOperators = binaryOperator.map({ (`operator`: BinaryOperatorType) -> String in
+        return `operator`.rawValue
+    })
     init() {}
     
     private func precedence(_ binaryOperator: BinaryOperatorType) -> Int {
@@ -33,7 +35,7 @@ class BinaryCalculator {
     private func transformToPostfix(_ infix: [String]) throws -> [String] {
         var postfix = [String]()
         for element in infix {
-            if binaryOperator.contains(element) {
+            if binaryOperators.contains(element) {
                 guard !postfixStack.isEmpty else {
                     postfixStack.push(element)
                     continue
@@ -69,7 +71,7 @@ class BinaryCalculator {
     func calculate(_ infix: [String]) throws -> String {
         let formula: [String] = try transformToPostfix(infix)
         for element in formula {
-            if binaryOperator.contains(element) {
+            if binaryOperators.contains(element) {
                 let currentOperatorType = try getOperatorType(of: element)
                 if element == BinaryOperatorType.NOT.rawValue {
                     if let firstNum = calculateStack.pop() {

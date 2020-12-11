@@ -10,8 +10,10 @@ import Foundation
 class DecimalCalculator {
     var postfixStack: Stack = Stack<String>()
     var calculateStack: Stack = Stack<String>()
-    let decimalOperator: [String] = DecimalOperatorType.allCases.map({ (`operator`: DecimalOperatorType) -> String in
-                                                                        return `operator`.rawValue })
+    let decimalOperator = DecimalOperatorType.allCases
+    lazy var decimalOperators = decimalOperator.map({ (`operator`: DecimalOperatorType) -> String in
+        return `operator`.rawValue
+    })
     init() {}
     
     private func precedence(_ decimalOperator: DecimalOperatorType) -> Int {
@@ -29,7 +31,7 @@ class DecimalCalculator {
     private func transformToPostfix(_ infix: [String]) throws -> [String] {
         var postfix = [String]()
         for element in infix {
-            if decimalOperator.contains(element) {
+            if decimalOperators.contains(element) {
                 guard !postfixStack.isEmpty else {
                     postfixStack.push(element)
                     continue
@@ -65,7 +67,7 @@ class DecimalCalculator {
     func calculate(_ infix: [String]) throws -> String {
         let formula: [String] = try transformToPostfix(infix)
         for element in formula {
-            if decimalOperator.contains(element) {
+            if decimalOperators.contains(element) {
                 let currentOperatorType = try getOperatorType(of: element)
                 if let secondNum = calculateStack.pop(), let firstNum = calculateStack.pop() {
                     switch currentOperatorType {
