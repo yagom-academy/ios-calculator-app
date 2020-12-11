@@ -31,49 +31,7 @@ class BinaryCalculator: BinaryCalculable {
                 binaryStack.push(formula)
                 continue
             }
-            
-            var resultData: CalculatorData? = nil
-            switch formulaType {
-            case .leftShift, .rightShift, .not:
-                guard let item = binaryStack.pop() else {
-                    throw CalculatorError.calculation
-                }
-                if formulaType == .leftShift {
-                    resultData = try leftShift(item)
-                }
-                else if formulaType == .rightShift {
-                    resultData = try rightShift(item)
-                }
-                else if formulaType == .not {
-                    resultData = try not(item)
-                }
-            default:
-                guard let secondItem = binaryStack.pop(),
-                      let firstItem = binaryStack.pop() else {
-                    throw CalculatorError.calculation
-                }
-                if formulaType == .add {
-                    resultData = try add(firstItem: firstItem, secondItem: secondItem)
-                }
-                else if formulaType == .subtract {
-                    resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
-                }
-                else if formulaType == .and {
-                    resultData = try and(firstItem: firstItem, secondItem: secondItem)
-                }
-                else if formulaType == .nand {
-                    resultData = try nand(firstItem: firstItem, secondItem: secondItem)
-                }
-                else if formulaType == .or {
-                    resultData = try or(firstItem: firstItem, secondItem: secondItem)
-                }
-                else if formulaType == .nor {
-                    resultData = try nor(firstItem: firstItem, secondItem: secondItem)
-                }
-                else if formulaType == .xor {
-                    resultData = try xor(firstItem: firstItem, secondItem: secondItem)
-                }
-            }
+            let resultData = try choiceCalculation(operatorType: formulaType)
             guard let result = resultData as? BinaryData else {
                 throw CalculatorError.calculation
             }
@@ -121,6 +79,55 @@ class BinaryCalculator: BinaryCalculable {
             throw CalculatorError.unknowned
         }
         return BinaryData(value: item, type: operatorType)
+    }
+    
+    func choiceCalculation(operatorType: BinaryOperatorType) throws -> CalculatorData {
+        var resultData: CalculatorData? = nil
+        switch operatorType {
+        case .leftShift, .rightShift, .not:
+            guard let item = binaryStack.pop() else {
+                throw CalculatorError.calculation
+            }
+            if operatorType == .leftShift {
+                resultData = try leftShift(item)
+            }
+            else if operatorType == .rightShift {
+                resultData = try rightShift(item)
+            }
+            else if operatorType == .not {
+                resultData = try not(item)
+            }
+        default:
+            guard let secondItem = binaryStack.pop(),
+                  let firstItem = binaryStack.pop() else {
+                throw CalculatorError.calculation
+            }
+            if operatorType == .add {
+                resultData = try add(firstItem: firstItem, secondItem: secondItem)
+            }
+            else if operatorType == .subtract {
+                resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+            }
+            else if operatorType == .and {
+                resultData = try and(firstItem: firstItem, secondItem: secondItem)
+            }
+            else if operatorType == .nand {
+                resultData = try nand(firstItem: firstItem, secondItem: secondItem)
+            }
+            else if operatorType == .or {
+                resultData = try or(firstItem: firstItem, secondItem: secondItem)
+            }
+            else if operatorType == .nor {
+                resultData = try nor(firstItem: firstItem, secondItem: secondItem)
+            }
+            else if operatorType == .xor {
+                resultData = try xor(firstItem: firstItem, secondItem: secondItem)
+            }
+        }
+        guard let result = resultData else {
+            throw CalculatorError.calculation
+        }
+        return result
     }
 
     func and(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {

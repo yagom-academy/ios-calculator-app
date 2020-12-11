@@ -29,21 +29,7 @@ class DecimalCalculator: DecimalCalculable {
                 decimalStack.push(formula)
                 continue
             }
-            guard let secondItem = decimalStack.pop(),
-                  let firstItem = decimalStack.pop() else {
-                throw CalculatorError.calculation
-            }
-            var resultData: CalculatorData
-            switch formulaType {
-            case .add:
-                resultData = try add(firstItem: firstItem, secondItem: secondItem)
-            case .subtract:
-                resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
-            case .multiple:
-                resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
-            case .divide:
-                resultData = try divide(firstItem: firstItem, secondItem: secondItem)
-            }
+            let resultData = try choiceCalculation(operatorType: formulaType)
             guard let result = resultData as? DecimalData else {
                 throw CalculatorError.calculation
             }
@@ -92,6 +78,26 @@ class DecimalCalculator: DecimalCalculable {
             throw CalculatorError.unknowned
         }
         return DecimalData(value: item, type: operatorType)
+    }
+    
+    func choiceCalculation(operatorType: DecimalOperatorType) throws -> CalculatorData {
+        guard let secondItem = decimalStack.pop(),
+              let firstItem = decimalStack.pop() else {
+            throw CalculatorError.calculation
+        }
+        var resultData: CalculatorData
+        switch operatorType {
+        case .add:
+            resultData = try add(firstItem: firstItem, secondItem: secondItem)
+        case .subtract:
+            resultData = try subtract(firstItem: firstItem, secondItem: secondItem)
+        case .multiple:
+            resultData = try multiply(firstItem: firstItem, secondItem: secondItem)
+        case .divide:
+            resultData = try divide(firstItem: firstItem, secondItem: secondItem)
+        }
+        
+        return resultData
     }
     
     func divide(firstItem: CalculatorData, secondItem: CalculatorData) throws -> CalculatorData {
