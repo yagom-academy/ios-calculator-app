@@ -16,7 +16,7 @@ class DecimalCalculator: DecimalCalculable {
     
     func calculate(_ items: [String]) throws -> CalculatorData {
         guard decimalStack.isEmpty else {
-            throw CalculatorError.calculator
+            throw CalculatorError.calculation
         }
         let postFixFormula = try putFormula(items).map({ data -> DecimalData in
             guard let decimalData = data as? DecimalData else {
@@ -31,7 +31,7 @@ class DecimalCalculator: DecimalCalculable {
             }
             guard let secondItem = decimalStack.pop(),
                   let firstItem = decimalStack.pop() else {
-                throw CalculatorError.calculator
+                throw CalculatorError.calculation
             }
             var resultData: CalculatorData
             switch formulaType {
@@ -45,13 +45,13 @@ class DecimalCalculator: DecimalCalculable {
                 resultData = try divide(firstItem: firstItem, secondItem: secondItem)
             }
             guard let result = resultData as? DecimalData else {
-                throw CalculatorError.calculator
+                throw CalculatorError.calculation
             }
             decimalStack.push(result)
         }
         
         guard let calculatorResultData = decimalStack.pop() else {
-            throw CalculatorError.calculator
+            throw CalculatorError.calculation
         }
         return calculatorResultData
     }

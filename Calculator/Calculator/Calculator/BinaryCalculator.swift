@@ -18,7 +18,7 @@ class BinaryCalculator: BinaryCalculable {
 
     func calculate(_ items: [String]) throws -> CalculatorData {
         guard binaryStack.isEmpty else {
-            throw CalculatorError.calculator
+            throw CalculatorError.calculation
         }
         let postFixFormula = try putFormula(items).map({ data -> BinaryData in
             guard let binaryData = data as? BinaryData else {
@@ -36,7 +36,7 @@ class BinaryCalculator: BinaryCalculable {
             switch formulaType {
             case .leftShift, .rightShift, .not:
                 guard let item = binaryStack.pop() else {
-                    throw CalculatorError.calculator
+                    throw CalculatorError.calculation
                 }
                 if formulaType == .leftShift {
                     resultData = try leftShift(item)
@@ -50,7 +50,7 @@ class BinaryCalculator: BinaryCalculable {
             default:
                 guard let secondItem = binaryStack.pop(),
                       let firstItem = binaryStack.pop() else {
-                    throw CalculatorError.calculator
+                    throw CalculatorError.calculation
                 }
                 if formulaType == .add {
                     resultData = try add(firstItem: firstItem, secondItem: secondItem)
@@ -75,13 +75,13 @@ class BinaryCalculator: BinaryCalculable {
                 }
             }
             guard let result = resultData as? BinaryData else {
-                throw CalculatorError.calculator
+                throw CalculatorError.calculation
             }
             binaryStack.push(result)
         }
         
         guard let calculatorResultData = binaryStack.pop() else {
-            throw CalculatorError.calculator
+            throw CalculatorError.calculation
         }
         return calculatorResultData
     }
