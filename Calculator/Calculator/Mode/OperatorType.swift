@@ -25,8 +25,9 @@ enum DecimalOperatorType: String, CaseIterable {
     func isPrecedence(compare: DecimalOperatorType) -> Bool {
         let operatorPrecedence = self.precedence
         let compareOperatorPrecedence = compare.precedence
+        let comparePrecedence = operatorPrecedence - compareOperatorPrecedence >= 0
         
-        return (operatorPrecedence - compareOperatorPrecedence >= 0)
+        return comparePrecedence
     }
 }
 
@@ -56,7 +57,8 @@ enum BinaryOperatorType: String, CaseIterable {
     func isPrecedence(compare: BinaryOperatorType) -> Bool {
         let operatorPrecedence = self.precedence
         let compareOperatorPrecedence = compare.precedence
+        let comparePrecedence = operatorPrecedence - compareOperatorPrecedence >= 0
         
-        return (operatorPrecedence - compareOperatorPrecedence >= 0)
+        return comparePrecedence
     }
 }
