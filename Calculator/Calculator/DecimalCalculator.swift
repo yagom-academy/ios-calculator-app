@@ -25,11 +25,16 @@ struct DecimalCalculator: BasicCalculatable {
     
     // 계산기 기능
     mutating func reset() {
-        <#code#>
+        numStack.elements = []
+        operatorStack.elements = []
+        current = 0
     }
     
     mutating func printResult() {
-        <#code#>
+        numStack.push(current)
+        useAllOperator()
+        
+        current = numStack.peek() ?? 0
     }
 }
 
