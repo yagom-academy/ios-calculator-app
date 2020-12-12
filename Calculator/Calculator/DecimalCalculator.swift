@@ -31,6 +31,10 @@ extension DecimalCalculator {
         let newValue: Double
         
         switch prevOperator {
+        case .plus:
+            newValue = old + new
+        case .minus:
+            newValue = old - new
         case .multiple:
             newValue = old * new
         case .divide:
@@ -39,10 +43,6 @@ extension DecimalCalculator {
                 return
             }
             newValue = old / new
-        case .plus:
-            newValue = old + new
-        case .minus:
-            newValue = old - new
         default:
             print("오류")
             return
@@ -62,5 +62,18 @@ extension DecimalCalculator {
             operatorStack.elements.last == .divide {
             operatePrev(operatorStack.pop() ?? .etc)
         }
+    }
+    
+    mutating func calculate(_ operator: Operator) {
+        numStack.push(current)
+        
+        switch `operator` {
+        case .plus, .minus: useAllOperator()
+        case .multiple, .divide: checkPrevOperator()
+        case .etc: print("오류")
+        }
+        
+        operatorStack.push(`operator`)
+        current = numStack.peek() ?? 0
     }
 }
