@@ -56,4 +56,11 @@ extension DecimalCalculator {
             operatePrev(operatorStack.pop() ?? .etc)
         }
     }
+    
+    func checkPrevOperator() {
+        if operatorStack.elements.last == .multiple ||
+            operatorStack.elements.last == .divide {
+            operatePrev(operatorStack.pop() ?? .etc)
+        }
+    }
 }
