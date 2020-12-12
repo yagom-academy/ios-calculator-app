@@ -6,19 +6,29 @@ struct DecimalCalculator: BasicCalculatable {
     
     var current: Double = 0
     
-    func plus() {
+    // 사칙연산
+    mutating func plus() {
+        calculate(.plus)
+    }
+    
+    mutating func minus() {
+        calculate(.minus)
+    }
+    
+    mutating func multiple() {
+        calculate(.multiple)
+    }
+    
+    mutating func divide() {
+        calculate(.divide)
+    }
+    
+    // 계산기 기능
+    mutating func reset() {
         <#code#>
     }
     
-    func minus() {
-        <#code#>
-    }
-    
-    func reset() {
-        <#code#>
-    }
-    
-    func printResult() {
+    mutating func printResult() {
         <#code#>
     }
 }

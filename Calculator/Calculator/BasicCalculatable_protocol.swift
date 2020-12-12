@@ -1,8 +1,8 @@
 
 protocol BasicCalculatable {
-    func plus()
-    func minus()
+    mutating func plus()
+    mutating func minus()
     
-    func reset()
-    func printResult()
+    mutating func reset()
+    mutating func printResult()
 }
