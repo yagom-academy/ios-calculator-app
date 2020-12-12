@@ -50,4 +50,10 @@ extension DecimalCalculator {
         
         numStack.push(newValue)
     }
+    
+    func useAllOperator() {
+        while !operatorStack.elements.isEmpty {
+            operatePrev(operatorStack.pop() ?? .etc)
+        }
+    }
 }
