@@ -64,4 +64,16 @@ extension BinaryCalculator {
             operatePrev(someOperator)
         }
     }
+    
+    mutating  func calculate(_ operator: BinaryOperator) {
+        numStack.push(current)
+        
+        switch `operator` {
+        case .and, .nand: checkPrevOperator()
+        default: useAllOperator()
+        }
+        
+        operatorStack.push(`operator`)
+        current = numStack.peek() ?? "0"
+    }
 }
