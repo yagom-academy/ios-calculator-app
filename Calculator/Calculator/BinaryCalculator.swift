@@ -7,19 +7,43 @@ struct BinaryCalculator: BasicCalculatable {
     var current: String = "0"
     
     mutating func plus() {
-        <#code#>
+        calculate(.plus)
     }
     
-    mutating func minus() {
-        <#code#>
+    mutating func  minus() {
+        calculate(.minus)
+    }
+    
+    mutating func and() {
+        calculate(.and)
+    }
+    
+    mutating func nand() {
+        calculate(.nand)
+    }
+    
+    mutating func or() {
+        calculate(.or)
+    }
+    
+    mutating func nor() {
+        calculate(.nor)
+    }
+    
+    mutating func xor() {
+        calculate(.xor)
     }
     
     mutating func reset() {
-        <#code#>
+        numStack.elements = []
+        operatorStack.elements = []
+        current = "0"
     }
     
     mutating func printResult() {
-        <#code#>
+        numStack.push(current)
+        useAllOperator()
+        current = numStack.peek() ?? "0"
     }
     
 }
