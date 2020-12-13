@@ -16,5 +16,4 @@ struct BinaryCalculator: BasicCalculatable {
         <#code#>
     }
     
-    
 }

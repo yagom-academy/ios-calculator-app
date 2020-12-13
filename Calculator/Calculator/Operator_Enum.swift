@@ -4,5 +4,4 @@ enum Operator {
     case divide
     case plus
     case minus
-    case etc
 }

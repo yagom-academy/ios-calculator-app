@@ -58,9 +58,6 @@ extension DecimalCalculator {
                 return
             }
             newValue = old / new
-        default:
-            print("오류")
-            return
         }
         
         numStack.push(newValue)
@@ -68,14 +65,22 @@ extension DecimalCalculator {
     
     func useAllOperator() {
         while !operatorStack.elements.isEmpty {
-            operatePrev(operatorStack.pop() ?? .etc)
+            guard let someOperator = operatorStack.pop() else {
+                print("오류")
+                return
+            }
+            operatePrev(someOperator)
         }
     }
     
     func checkPrevOperator() {
         if operatorStack.elements.last == .multiple ||
             operatorStack.elements.last == .divide {
-            operatePrev(operatorStack.pop() ?? .etc)
+            guard let someOperator = operatorStack.pop() else {
+                print("오류")
+                return
+            }
+            operatePrev(someOperator)
         }
     }
     
@@ -85,7 +90,6 @@ extension DecimalCalculator {
         switch `operator` {
         case .plus, .minus: useAllOperator()
         case .multiple, .divide: checkPrevOperator()
-        case .etc: print("오류")
         }
         
         operatorStack.push(`operator`)
