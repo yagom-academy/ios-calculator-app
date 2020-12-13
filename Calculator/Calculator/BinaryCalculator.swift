@@ -41,6 +41,28 @@ struct BinaryCalculator: BasicCalculatable {
         current = numStack.peek() ?? "0"
     }
     
+    mutating func shiftToLeft() {
+        var currentValue = current
+        if current.count == 9 {
+            currentValue.removeFirst()
+        }
+        current = currentValue + "0"
+        
+        if current == "000000000" {
+            current = "0"
+        }
+    }
+    
+    mutating func shiftToRight() {
+        if current == "0" {
+            return
+        }
+        
+        var currentValue = current
+        currentValue.removeLast()
+        current = currentValue
+    }
+    
     mutating func reset() {
         numStack.elements = []
         operatorStack.elements = []
