@@ -43,4 +43,25 @@ extension BinaryCalculator {
         
         numStack.push(String(newValue, radix: 2))
     }
+    
+    func useAllOperator() {
+        while !operatorStack.elements.isEmpty {
+            guard let someOperator = operatorStack.pop() else {
+                print("오류")
+                return
+            }
+            operatePrev(someOperator)
+        }
+    }
+    
+    func checkPrevOperator() {
+        if operatorStack.elements.last == .and ||
+            operatorStack.elements.last == .nand {
+            guard let someOperator = operatorStack.pop() else {
+                print("오류")
+                return
+            }
+            operatePrev(someOperator)
+        }
+    }
 }
