@@ -34,6 +34,13 @@ struct BinaryCalculator: BasicCalculatable {
         calculate(.xor)
     }
     
+    mutating func not() {
+        let invertedCurrent = ~(Int(current, radix: 2) ?? 0)
+        numStack.push(String(invertedCurrent, radix: 2))
+        
+        current = numStack.peek() ?? "0"
+    }
+    
     mutating func reset() {
         numStack.elements = []
         operatorStack.elements = []
