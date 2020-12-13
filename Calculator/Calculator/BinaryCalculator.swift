@@ -23,3 +23,24 @@ struct BinaryCalculator: BasicCalculatable {
     }
     
 }
+
+//  operator 관련 메서드
+extension BinaryCalculator {
+    func operatePrev(_ prevOperator: BinaryOperator) {
+        let newValue: Int
+        let new = Int(numStack.pop()  ?? "0", radix: 2) ?? 0
+        let old = Int(numStack.pop() ?? "0", radix: 2) ?? 0
+        
+        switch prevOperator {
+        case .plus: newValue = old + new
+        case .minus: newValue = old - new
+        case .and: newValue = old & new
+        case .nand: newValue = ~(old & new)
+        case .or: newValue = old | new
+        case .nor: newValue = ~(old | new)
+        case .xor: newValue = old ^ new
+        }
+        
+        numStack.push(String(newValue, radix: 2))
+    }
+}

@@ -6,3 +6,4 @@ protocol BasicCalculatable {
     mutating func reset()
     mutating func printResult()
 }
+
