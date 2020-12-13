@@ -11,14 +11,14 @@ private var decimalAdder = [Double]()
 private var binaryAdder = [Int]()
 
 protocol BasicCalculator {
-    var arithmeticOperators: Set<String> { get }
+    var operators: Set<String> { get }
     var displayedValue: String { get }
     func calculate(value: String, by tappedOperator: String)
     func reset()
 }
 
 struct DecimalCalculator: BasicCalculator {
-    let arithmeticOperators: Set<String> = ["+","-","*","/"]
+    let operators: Set<String> = ["+","-","*","/"]
     
     var displayedValue: String {
         get {
@@ -27,7 +27,7 @@ struct DecimalCalculator: BasicCalculator {
     }
     
     func calculate(value: String, by tappedOperator: String = "+") {
-        guard arithmeticOperators.contains(tappedOperator),
+        guard operators.contains(tappedOperator),
               let operand = Double(value) else {
             return
         }
@@ -56,10 +56,8 @@ struct DecimalCalculator: BasicCalculator {
 }
 
 struct BinaryCalculator: BasicCalculator {
-    let arithmeticOperators: Set<String> = ["+","-"]
-    let bitwiseOperators: Set<String> = ["NOT", "AND", "OR","NOR","NAND","XOR"]
-    let shiftOperators: Set<String> = ["<<",">>"]
-    
+    let operators: Set<String> = ["+","-","NOT", "AND", "OR","NOR","NAND","XOR","<<",">>"]
+  
     var displayedValue: String {
         get {
             return String(binaryAdder.reduce(0){$0 + $1})
@@ -71,7 +69,7 @@ struct BinaryCalculator: BasicCalculator {
             return
         }
         
-        if bitwiseOperators.contains(tappedOperator) {
+        if operators.contains(tappedOperator) {
             if let operatingValue = binaryAdder.popLast() {
                 switch tappedOperator {
                 case "+":
