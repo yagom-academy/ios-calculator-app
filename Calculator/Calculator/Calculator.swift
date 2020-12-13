@@ -11,14 +11,15 @@ private var decimalAdder = [Double]()
 private var binaryAdder = [Int]()
 
 protocol BasicCalculator {
-    var arithmeticOperatorSet: Set<String> { get }
+    var arithmeticOperators: Set<String> { get }
     var displayedValue: String { get }
     func calculate(value: String, by tappedOperator: String)
     func reset()
 }
 
 struct DecimalCalculator: BasicCalculator {
-    let arithmeticOperatorSet: Set<String> = ["+","-","*","/"]
+    let arithmeticOperators: Set<String> = ["+","-","*","/"]
+    
     var displayedValue: String {
         get {
             return String(decimalAdder.reduce(0){$0 + $1})
@@ -26,7 +27,7 @@ struct DecimalCalculator: BasicCalculator {
     }
     
     func calculate(value: String, by tappedOperator: String = "+") {
-        guard arithmeticOperatorSet.contains(tappedOperator),
+        guard arithmeticOperators.contains(tappedOperator),
               let operand = Double(value) else {
             return
         }
@@ -55,64 +56,47 @@ struct DecimalCalculator: BasicCalculator {
 }
 
 struct BinaryCalculator: BasicCalculator {
+    let arithmeticOperators: Set<String> = ["+","-"]
+    let bitwiseOperators: Set<String> = ["NOT", "AND", "OR","NOR","NAND","XOR"]
+    let shiftOperators: Set<String> = ["<<",">>"]
+    
     var displayedValue: String {
         get {
             return String(binaryAdder.reduce(0){$0 + $1})
         }
     }
-    let shiftOperatorSet: Set<String> = ["<<",">>"]
-    let arithmeticOperatorSet: Set<String> = ["+","-"]
-    let bitwiseOperatorSet: Set<String> = ["NOT", "AND", "OR","NOR","NAND","XOR"]
     
     func calculate(value: String, by tappedOperator: String = "+") {
         guard let operand = Int(value) else {
             return
         }
         
-        if shiftOperatorSet.contains(tappedOperator) {
-            switch tappedOperator {
-            case "<<":
-                    binaryAdder.append(operand << 1)
-            case ">>":
-                    binaryAdder.append(operand >> 1)
-            default:
-                return
-            }
-        } else if arithmeticOperatorSet.contains(tappedOperator) {
-            switch tappedOperator {
-            case "+":
-                binaryAdder.append(operand)
-            case "-":
-                binaryAdder.append(-operand)
-            default:
-                return
-            }
-        } else if bitwiseOperatorSet.contains(tappedOperator) {
-            switch tappedOperator {
-            case "NOT":
-                binaryAdder.append(~operand)
-            case "AND":
-                if let operatingValue = binaryAdder.popLast() {
+        if bitwiseOperators.contains(tappedOperator) {
+            if let operatingValue = binaryAdder.popLast() {
+                switch tappedOperator {
+                case "+":
+                    binaryAdder.append(operand)
+                case "-":
+                    binaryAdder.append(-operand)
+                case "NOT":
+                    binaryAdder.append(~operand)
+                case "AND":
                     binaryAdder.append(operatingValue & operand)
-                }
-            case "OR":
-                if let operatingValue = binaryAdder.popLast() {
-                    binaryAdder.append(operatingValue | operand )
-                }
-            case "NOR":
-                if let operatingValue = binaryAdder.popLast() {
-                    binaryAdder.append(~(operatingValue | operand) )
-                }
-            case "NAND":
-                if let operatingValue = binaryAdder.popLast() {
-                    binaryAdder.append(~(operatingValue & operand) )
-                }
-            case "XOR":
-                if let operatingValue = binaryAdder.popLast() {
+                case "OR":
+                    binaryAdder.append(operatingValue | operand)
+                case "NOR":
+                    binaryAdder.append(~(operatingValue | operand))
+                case "NAND":
+                    binaryAdder.append(~(operatingValue & operand))
+                case "XOR":
                     binaryAdder.append(operatingValue ^ operand)
+                case "<<":
+                    binaryAdder.append(operand << 1)
+                case ">>":
+                    binaryAdder.append(operand >> 1)
+                default:
+                    return
                 }
-            default:
-                return
             }
         }
     }
