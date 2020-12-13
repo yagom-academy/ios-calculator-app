@@ -2,7 +2,7 @@
 struct DecimalCalculator: BasicCalculatable {
     
     var numStack = Stack<Double>()
-    var operatorStack = Stack<Operator>()
+    var operatorStack = Stack<DecimalOperator>()
     
     var current: Double = 0
     
@@ -40,7 +40,7 @@ struct DecimalCalculator: BasicCalculatable {
 
 // operator 관련 기능
 extension DecimalCalculator {
-    func operatePrev(_ prevOperator: Operator) {
+    func operatePrev(_ prevOperator: DecimalOperator) {
         let new: Double = numStack.pop() ?? 0
         let old: Double = numStack.pop() ?? 0
         let newValue: Double
@@ -84,7 +84,7 @@ extension DecimalCalculator {
         }
     }
     
-    mutating func calculate(_ operator: Operator) {
+    mutating func calculate(_ operator: DecimalOperator) {
         numStack.push(current)
         
         switch `operator` {
