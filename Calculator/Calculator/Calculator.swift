@@ -4,5 +4,5 @@ protocol Calculator {
     func addition()
     func subtraction()
     func result()
-    func reset()
+    func clear()
 }
