@@ -49,15 +49,15 @@ class DecimalCalculate: DecimalCalculator {
     
     func checkOperator() {
         repeat {
-            var presentOperator = operatorSet.pop()
+            let presentOperator = operatorSet.pop()
             operate(presentOperator)
-        }while operatorSet.count != 0
-        operatorSet.push(element: .addition)
+            operatorSet.push(element: presentOperator)
+        } while operatorSet.count != 0
     }
     
     func operate(_ present: Operator) {
-        var backNumber: Double = decimalNumber.pop()
-        var frontNumber: Double = decimalNumber.pop()
+        let backNumber: Double = decimalNumber.pop()
+        let frontNumber: Double = decimalNumber.pop()
         
         switch present {
             case .addition:
