@@ -1,8 +1,8 @@
 import Foundation
 
-class DecimalCalculator: Calculator {
+class DecimalCalculate: DecimalCalculator {
     var decimalNumber = Stack<Double>()
-    var operatationNumber = Stack <Operator>()
+    var operatorSet = Stack<Operator>()
     var inputNumber: Double?
     var resultNumber: Double?
     
@@ -20,18 +20,18 @@ class DecimalCalculator: Calculator {
         return resultNumber as! Double
     }
     
-    func multiplication() -> Double {
+    func multiplication<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
         checkOperator()
         
-        return resultNumber!
+        return resultNumber as! Double
     }
     
-    func division() -> Double {
+    func division<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
         checkOperator()
         
-        return resultNumber!
+        return resultNumber as! Double
     }
     
     func result<Double>() -> Double {
@@ -43,16 +43,16 @@ class DecimalCalculator: Calculator {
     
     func clear() {
         decimalNumber.index = []
-        operatationNumber.index = []
+        operatorSet.index = []
         inputNumber = 0
     }
     
     func checkOperator() {
         repeat {
-            var presentOperator = operatationNumber.pop()
+            var presentOperator = operatorSet.pop()
             operate(presentOperator)
-        }while operatationNumber.count != 0
-        operatationNumber.push(element: .addition)
+        }while operatorSet.count != 0
+        operatorSet.push(element: .addition)
     }
     
     func operate(_ present: Operator) {
