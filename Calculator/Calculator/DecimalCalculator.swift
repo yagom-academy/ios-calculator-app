@@ -6,7 +6,7 @@ class DecimalCalculator: Calculator {
     var inputNumber: Double?
     var resultNumber: Double?
     
-    func addition() {
+    func addition() -> Double {
         decimalNumber.push(element: inputNumber!)
         
         while operatationNumber.count != 0 {
@@ -14,9 +14,10 @@ class DecimalCalculator: Calculator {
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .addition)
+        return resultNumber!
     }
     
-    func subtraction() {
+    func subtraction() -> Double {
         decimalNumber.push(element: inputNumber!)
         
         while operatationNumber.count != 0 {
@@ -24,9 +25,10 @@ class DecimalCalculator: Calculator {
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .subtraction)
+        return resultNumber!
     }
     
-    func multiplication() {
+    func multiplication() -> Double {
         decimalNumber.push(element: inputNumber!)
         
         while operatationNumber.count != 0 {
@@ -34,9 +36,10 @@ class DecimalCalculator: Calculator {
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .multiplication)
+        return resultNumber!
     }
     
-    func division() {
+    func division() -> Double {
         decimalNumber.push(element: inputNumber!)
         
         while operatationNumber.count != 0 {
@@ -44,15 +47,17 @@ class DecimalCalculator: Calculator {
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .division)
+        return resultNumber!
     }
     
-    func result() {
+    func result() -> Double {
         decimalNumber.push(element: inputNumber!)
         
         while operatationNumber.count != 0 {
             let presentOperator = operatationNumber.pop()
             operate(present: presentOperator)
         }
+        return resultNumber!
     }
     
     func clear() {

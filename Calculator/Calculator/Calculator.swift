@@ -1,8 +1,8 @@
 import Foundation
 
 protocol Calculator {
-    func addition()
-    func subtraction()
-    func result()
+    func addition<T>() -> T
+    func subtraction<T>() -> T
+    func result()<T>() -> T
     func clear()
 }
