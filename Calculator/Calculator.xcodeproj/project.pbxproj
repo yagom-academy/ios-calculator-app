@@ -42,6 +42,7 @@
 		41A1E9C025872AAB0048AAA3 /* Stack */ = {
 			isa = PBXGroup;
 			children = (
+				41A1E9C125872ABF0048AAA3 /* Stack.swift */,
 			);
 			path = Stack;
 			sourceTree = "<group>";
@@ -50,7 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				41A1E9C025872AAB0048AAA3 /* Stack */,
-				41A1E9C125872ABF0048AAA3 /* Stack.swift */,
 				C713D9402570E5EB001C3AFC /* Calculator */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
