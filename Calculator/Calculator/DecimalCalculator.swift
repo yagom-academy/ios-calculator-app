@@ -99,7 +99,7 @@ class DecimalCalculator: BasicCalculable, DecimalCalculable {
             
             guard let operate = lastOperatorDetail.operation else { return }
             let resultByLastOperator = operate(operand1, operand2)
-            operandStack.push(resultByLastOperator)
+            operandStack.push(resultByLastOperator.setPrecision())
         }
         
         operatorStack.push(`operator`)
