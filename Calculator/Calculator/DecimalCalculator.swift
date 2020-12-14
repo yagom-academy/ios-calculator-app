@@ -53,7 +53,7 @@ extension DecimalCalculator {
         case .multiple:
             newValue = old * new
         case .divide:
-            if new == 0 {
+            guard new != 0 else {
                 print("오류")
                 return
             }

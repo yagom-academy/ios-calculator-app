@@ -54,7 +54,7 @@ struct BinaryCalculator: BasicCalculatable {
     }
     
     mutating func shiftToRight() {
-        if current == "0" {
+        guard current != "0" else {
             return
         }
         
