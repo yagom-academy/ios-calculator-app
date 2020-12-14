@@ -3,72 +3,67 @@ import Foundation
 class DecimalCalculator: Calculator {
     var decimalNumber = Stack<Double>()
     var operatationNumber = Stack <Operator>()
-    var index: Double = 0
+    var inputNumber: Double?
+    var resultNumber: Double?
     
     func addition() {
-        decimalNumber.push(element: index)
+        decimalNumber.push(element: inputNumber!)
         
-        while !operatationNumber.index.isEmpty {
+        while operatationNumber.count != 0 {
             let presentOperator = operatationNumber.pop()
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .addition)
-        index = decimalNumber.peek()
     }
     
     func subtraction() {
-        decimalNumber.push(element: index)
+        decimalNumber.push(element: inputNumber!)
         
-        while !operatationNumber.index.isEmpty {
+        while operatationNumber.count != 0 {
             let presentOperator = operatationNumber.pop()
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .subtraction)
-        index = decimalNumber.peek()
     }
     
     func multiplication() {
-        decimalNumber.push(element: index)
+        decimalNumber.push(element: inputNumber!)
         
-        while !operatationNumber.index.isEmpty {
+        while operatationNumber.count != 0 {
             let presentOperator = operatationNumber.pop()
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .multiplication)
-        index = decimalNumber.peek()
     }
     
     func division() {
-        decimalNumber.push(element: index)
+        decimalNumber.push(element: inputNumber!)
         
-        while !operatationNumber.index.isEmpty {
+        while operatationNumber.count != 0 {
             let presentOperator = operatationNumber.pop()
             operate(present: presentOperator)
         }
         operatationNumber.push(element: .division)
-        index = decimalNumber.peek()
     }
     
     func result() {
-        decimalNumber.push(element: index)
+        decimalNumber.push(element: inputNumber!)
         
-        while !operatationNumber.index.isEmpty {
+        while operatationNumber.count != 0 {
             let presentOperator = operatationNumber.pop()
             operate(present: presentOperator)
         }
-        index = decimalNumber.peek()
     }
     
     func clear() {
         decimalNumber.index = []
         operatationNumber.index = []
-        index = 0
+        inputNumber = 0
     }
     
     func operate(present: Operator) {
-        var frontNumber: Double = decimalNumber.pop()
         var backNumber: Double = decimalNumber.pop()
-        var resultNumber: Double?
+        var frontNumber: Double = decimalNumber.pop()
         
         switch present {
             case .addition:
@@ -80,10 +75,8 @@ class DecimalCalculator: Calculator {
             case .division:
                 resultNumber = frontNumber / backNumber
             default:
-                print("error")
+                print("연산자가 잘못되었습니다.")
         }
         decimalNumber.push(element: resultNumber!)
     }
-    
-    
 }
