@@ -129,12 +129,14 @@ extension DecimalCalculator: BasicCalculable {
     func add(first: String, second: String) throws -> String {
         var result: Double
         result = stringNumberToDoubleNumber(first) + stringNumberToDoubleNumber(second)
+        result = result.setPrecision()
         return String(describing: result)
     }
     
     func subtract(first: String, second: String) throws -> String {
         var result: Double
         result = stringNumberToDoubleNumber(first) - stringNumberToDoubleNumber(second)
+        result = result.setPrecision()
         return String(describing: result)
     }
     
@@ -148,6 +150,7 @@ extension DecimalCalculator: DecimalCalculable {
     func multiply(first: String, second: String) throws -> String {
         var result: Double
         result = stringNumberToDoubleNumber(first) * stringNumberToDoubleNumber(second)
+        result = result.setPrecision()
         return String(describing: result)
     }
     
@@ -159,6 +162,7 @@ extension DecimalCalculator: DecimalCalculable {
         }
         
         result = stringNumberToDoubleNumber(first) / secondNumber
+        result = result.setPrecision()
         return String(describing: result)
     }
 }

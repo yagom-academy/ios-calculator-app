@@ -40,8 +40,8 @@ final class DecimalCalculatorTests: XCTestCase {
         XCTAssertEqual(result, "3.0")
     }
     func testSubtractWithDouble() throws {
-        let result = try decimalCalculator.subtract(first: "2.5", second: "2")
-        XCTAssertEqual(result, "0.5")
+        let result = try decimalCalculator.subtract(first: "2.6", second: "2.5")
+        XCTAssertEqual(result, "0.1")
     }
     func testSubtractWithNegative() throws {
         let result = try decimalCalculator.subtract(first: "2.0", second: "-2.5")
@@ -50,6 +50,10 @@ final class DecimalCalculatorTests: XCTestCase {
     func testSubtractWithDoubleNegative() throws {
         let result = try decimalCalculator.subtract(first: "-4.5", second: "-4")
         XCTAssertEqual(result, "-0.5")
+    }
+    func testSubTTT() throws {
+        let result = try decimalCalculator.subtract(first: "13.4", second: "5.8")
+        XCTAssertEqual(result, "7.6")
     }
     
     func testMultiply() throws {
@@ -87,6 +91,10 @@ final class DecimalCalculatorTests: XCTestCase {
     func testDivideWithDoubleNegative() throws {
         let result = try decimalCalculator.divide(first: "-2.87", second: "-0.2")
         XCTAssertEqual(result, "14.35")
+    }
+    
+    func testCalculate() throws {
+//        let result = try decimalCalculator
     }
     
     func testRemoveAll() throws {
