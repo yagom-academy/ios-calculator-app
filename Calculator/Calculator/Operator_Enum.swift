@@ -1,5 +1,7 @@
 
 enum DecimalOperator {
+    typealias RawValue = Int
+    
     case multiple
     case divide
     case plus

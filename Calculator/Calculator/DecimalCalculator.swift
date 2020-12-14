@@ -74,8 +74,7 @@ extension DecimalCalculator {
     }
     
     func checkPrevOperator() {
-        if operatorStack.elements.last == .multiple ||
-            operatorStack.elements.last == .divide {
+        if operatorStack.elements.last == .multiple || operatorStack.elements.last == .divide {
             guard let someOperator = operatorStack.pop() else {
                 print("오류")
                 return

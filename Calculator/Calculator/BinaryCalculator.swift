@@ -81,7 +81,7 @@ struct BinaryCalculator: BasicCalculatable {
 extension BinaryCalculator {
     func operatePrev(_ prevOperator: BinaryOperator) {
         let newValue: Int
-        let new = Int(numStack.pop()  ?? "0", radix: 2) ?? 0
+        let new = Int(numStack.pop() ?? "0", radix: 2) ?? 0
         let old = Int(numStack.pop() ?? "0", radix: 2) ?? 0
         
         switch prevOperator {
@@ -108,8 +108,7 @@ extension BinaryCalculator {
     }
     
     func checkPrevOperator() {
-        if operatorStack.elements.last == .and ||
-            operatorStack.elements.last == .nand {
+        if operatorStack.elements.last == .and || operatorStack.elements.last == .nand {
             guard let someOperator = operatorStack.pop() else {
                 print("오류")
                 return
@@ -130,3 +129,5 @@ extension BinaryCalculator {
         current = numStack.peek() ?? "0"
     }
 }
+
+
