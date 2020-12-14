@@ -48,10 +48,10 @@ class DecimalCalculator: Calculator {
     }
     
     func checkOperator() {
-        while operatationNumber.count != 0 {
+        repeat {
             var presentOperator = operatationNumber.pop()
             operate(presentOperator)
-        }
+        }while operatationNumber.count != 0
         operatationNumber.push(element: .addition)
     }
     
