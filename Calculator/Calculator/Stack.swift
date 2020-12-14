@@ -4,7 +4,7 @@ struct Stack<T> {
     var index = [T]()
     
     mutating func pop() -> T {
-        return self.index.popLast()
+        return self.index.popLast()!
     }
     
     mutating func push(element: T) {
@@ -12,14 +12,14 @@ struct Stack<T> {
     }
     
     func peek() -> T {
-        return self.index.last
+        return self.index.last!
     }
     
-    func var isEmpty: Bool {
+    func isEmpty() -> Bool {
         return self.index.isEmpty
     }
     
-    func var count: Int {
+    func count() -> Int {
         return self.index.count
     }
 }

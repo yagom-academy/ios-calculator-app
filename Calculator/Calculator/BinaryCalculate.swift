@@ -5,28 +5,28 @@ class BinaryCalculate: BinaryCalculator {
     var operatorSet = Stack<Operator>()
     var inputNumber: Int?
     var resultNumber: Int?
-    
+        
     func addition<Int>() -> Int {
         binaryNumber.push(element: inputNumber!)
         checkOperator()
-
+        
         return resultNumber as! Int
     }
-
+    
     func subtraction<Int>() -> Int {
         binaryNumber.push(element: inputNumber!)
         checkOperator()
 
         return resultNumber as! Int
     }
-
+    
     func and<Int>() -> Int {
         binaryNumber.push(element: inputNumber!)
         checkOperator()
 
         return resultNumber as! Int
     }
-
+    
     func nand<Int>() -> Int {
         binaryNumber.push(element: inputNumber!)
         checkOperator()
