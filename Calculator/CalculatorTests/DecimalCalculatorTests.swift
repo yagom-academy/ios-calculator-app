@@ -51,10 +51,6 @@ final class DecimalCalculatorTests: XCTestCase {
         let result = try decimalCalculator.subtract(first: "-4.5", second: "-4")
         XCTAssertEqual(result, "-0.5")
     }
-    func testSubTTT() throws {
-        let result = try decimalCalculator.subtract(first: "13.4", second: "5.8")
-        XCTAssertEqual(result, "7.6")
-    }
     
     func testMultiply() throws {
         let result = try decimalCalculator.multiply(first: "2", second: "4")
