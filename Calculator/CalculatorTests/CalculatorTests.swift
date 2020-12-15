@@ -112,6 +112,11 @@ final class BinaryCalculatorTests: XCTestCase {
         XCTAssertEqual(result, "-10000")
     }
     
+    func testCalculate() throws {
+        let result = try binaryCalculator.calculate(["1000", "&", "1001", "+", "11111", "~|", "1101", "^", "111", "<<"])
+        XCTAssertEqual(result, "-100010")
+    }
+    
     func testRemoveAll() throws {
         binaryCalculator.clear()
         XCTAssertTrue(binaryCalculator.postfixStack.isEmpty && binaryCalculator.calculateStack.isEmpty)
