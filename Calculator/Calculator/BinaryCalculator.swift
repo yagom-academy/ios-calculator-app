@@ -143,5 +143,20 @@ extension BinaryCalculator {
     }
 }
 
+// MARK: - 자릿수 9자리로 제한
+extension BinaryCalculator {
+    func checkDigits(_ num: String) -> String {
+        var currentString = num
+        
+        guard currentString.count > 9 else {
+            return currentString
+        }
+        
+        let surplus = currentString.count - 9
+        currentString.removeLast(surplus)
+        
+        return currentString
+    }
+}
 
 
