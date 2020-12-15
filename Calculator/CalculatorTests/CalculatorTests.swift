@@ -124,8 +124,8 @@ final class BinaryCalculatorTests: XCTestCase {
     
     // MARK: calculate func test code
     func testCalculate() throws {
-        let result = try binaryCalculator.calculate(["1000", "&", "1001", "+", "11111", "~|", "1101", "^", "111", "<<"])
-        XCTAssertEqual(result, "-100010")
+        let result = try binaryCalculator.calculate(["1000", "&", "1001", "+", "11111", "~|", "1101", "^", "111", "<<", "-", "1111", "|", "100", ">>", "~&", "1111", "+", "~", "10001"])
+        XCTAssertEqual(result, "-10011")
     }
     
     // MARK: stack remove func test code
