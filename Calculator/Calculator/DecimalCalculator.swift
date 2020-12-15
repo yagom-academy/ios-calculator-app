@@ -14,7 +14,7 @@ struct DecimalCalculator {
     mutating func calculate(_ operator: DecimalOperator) {
         saveCurrentStack()
         
-        numStack.push(current)
+        numStack.push(checkDigits(current))
         
         switch `operator` {
         case .plus, .minus: useAllOperator()
@@ -61,8 +61,7 @@ struct DecimalCalculator {
             newValue = old / new
         }
         
-        
-        numStack.push(String(newValue))
+        numStack.push(checkDigits(String(newValue)))
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
