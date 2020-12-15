@@ -9,80 +9,70 @@ class BinaryCalculate: BinaryCalculator {
     var presentOperator: Operator?
         
     func addition<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
         
         return resultNumber as! Int
     }
     
     func subtraction<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
     
     func and<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
     
     func nand<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
 
     func or<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
 
     func xor<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
 
     func nor<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
 
     func not<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
 
     func leftShift<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
     }
     
     func rightShift<Int>() -> Int {
-        operatorSet.push(element: inputOperator!)
-        binaryNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
 
         return resultNumber as! Int
@@ -99,6 +89,11 @@ class BinaryCalculate: BinaryCalculator {
         binaryNumber.index = []
         operatorSet.index = []
         inputNumber = 0
+    }
+    
+    func stackPush() {
+        operatorSet.push(element: inputOperator!)
+        binaryNumber.push(element: inputNumber!)
     }
     
     func verifyPriorityOperator() {
