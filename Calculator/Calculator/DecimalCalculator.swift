@@ -7,9 +7,18 @@ struct DecimalCalculator {
     var current: String = "0"
     
     /// 스택에서 이전 연산자를 꺼내어 연산
-    func operatePrev(_ prevOperator: DecimalOperator) {
-        let new: Double = Double(numStack.pop() ?? "0") ?? 0
-        let old: Double = Double(numStack.pop() ?? "0") ?? 0
+    mutating func operatePrev(_ prevOperator: DecimalOperator) {
+        guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
+            print("입력된 값이 없습니다.")
+            return
+        }
+        
+        guard let new: Double = Double(firstPop), let old: Double = Double(secondPop) else {
+            print("오류, 계산기가 초기화 됩니다.")
+            reset()
+            return
+        }
+        
         let newValue: Double
         
         switch prevOperator {
@@ -31,7 +40,7 @@ struct DecimalCalculator {
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
-    func useAllOperator() {
+    mutating func useAllOperator() {
         while !operatorStack.elements.isEmpty {
             guard let someOperator = operatorStack.pop() else {
                 print("오류")
@@ -42,7 +51,7 @@ struct DecimalCalculator {
     }
     
     /// 스택에서 이전 연산자를 확인 후, 연산을 결정
-    func checkPrevOperator() {
+    mutating func checkPrevOperator() {
         if operatorStack.elements.last == .multiple || operatorStack.elements.last == .divide {
             guard let someOperator = operatorStack.pop() else {
                 print("오류")
@@ -62,7 +71,12 @@ struct DecimalCalculator {
         }
         
         operatorStack.push(`operator`)
-        current = numStack.peek() ?? "0"
+        
+        guard let peekValue = numStack.peek() else {
+            print("오류")
+            return
+        }
+        current = peekValue
     }
 }
 
@@ -86,7 +100,11 @@ extension DecimalCalculator: BasicCalculatable {
         numStack.push(current)
         useAllOperator()
         
-        current = numStack.peek() ?? "0"
+        guard let peekValue = numStack.peek() else {
+            print("오류")
+            return
+        }
+        current = peekValue
     }
 }
 
