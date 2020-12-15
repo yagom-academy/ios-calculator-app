@@ -94,7 +94,7 @@ class BinaryCalculate: BinaryCalculator {
             let presentOperator = operatorSet.pop()
             operate(presentOperator)
             operatorSet.push(element: presentOperator)
-        } while operatorSet.count != 0
+        } while operatorSet.count() != 0
     }
 
     func operate(_ present: Operator) {

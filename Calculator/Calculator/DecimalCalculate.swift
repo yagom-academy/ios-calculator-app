@@ -5,38 +5,39 @@ class DecimalCalculate: DecimalCalculator {
     var operatorSet = Stack<Operator>()
     var inputNumber: Double?
     var resultNumber: Double?
+    var presentOperator: Operator?
     
     func addition<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
-        checkOperator()
+        verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func subtraction<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
-        checkOperator()
+        verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func multiplication<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
-        checkOperator()
+        verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func division<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
-        checkOperator()
+        verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func result<Double>() -> Double {
         decimalNumber.push(element: inputNumber!)
-        checkOperator()
+        verifyPriorityOperator()
         
         return resultNumber as! Double
     }
@@ -47,12 +48,19 @@ class DecimalCalculate: DecimalCalculator {
         inputNumber = 0
     }
     
-    func checkOperator() {
-        repeat {
-            let presentOperator = operatorSet.pop()
-            operate(presentOperator)
-            operatorSet.push(element: presentOperator)
-        } while operatorSet.count != 0
+    func verifyPriorityOperator() {
+        if operatorSet.peek() == .multiplication || operatorSet.peek() == .division {
+            presentOperator = operatorSet.pop()
+            operate(presentOperator!)
+            operatorSet.push(element: presentOperator!)
+        }
+        else {
+            repeat {
+            presentOperator = operatorSet.pop()
+            operate(presentOperator!)
+            operatorSet.push(element: presentOperator!)
+            } while operatorSet.count() != 0
+        }
     }
     
     func operate(_ present: Operator) {
