@@ -24,12 +24,12 @@ class DecimalCalculator {
         priority.stack = []
     }
     
-    func addtion(oldOperand: Double, newOperand: Double) -> Double {
+    func add(oldOperand: Double, newOperand: Double) -> Double {
         let result = oldOperand + newOperand
         return result
     }
     
-    func subtraction(oldOperand: Double, newOperand: Double) -> Double {
+    func subtract(oldOperand: Double, newOperand: Double) -> Double {
         let result = oldOperand - newOperand
         return result
     }

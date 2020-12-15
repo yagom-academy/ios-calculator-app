@@ -22,10 +22,10 @@ class CalculatorTests: XCTestCase {
     }
     //Addition subtraction multiplication division
     func testAdditionBasicFunction() {
-        XCTAssertEqual(systemUnderTest.addtion(oldOperand: 3, newOperand: 5), 8)
+        XCTAssertEqual(systemUnderTest.add(oldOperand: 3, newOperand: 5), 8)
     }
     
     func testSubtractionBasicFunction() {
-        XCTAssertEqual(systemUnderTest.subtraction(oldOperand: 40, newOperand: 13), 27)
+        XCTAssertEqual(systemUnderTest.subtract(oldOperand: 40, newOperand: 13), 27)
     }
 }
