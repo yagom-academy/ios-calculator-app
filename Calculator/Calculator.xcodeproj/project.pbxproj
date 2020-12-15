@@ -53,8 +53,7 @@
 				B46E600425877F5800E312F7 /* CalculateStack.swift */,
 				B46E5FFA2587467B00E312F7 /* OperatorType.swift */,
 				B46CB6C42585E9E900502F62 /* Protocols */,
-				B46E5FFD2587486500E312F7 /* DecimalCalculator.swift */,
-				B46E600125877DE700E312F7 /* BinaryCalculator.swift */,
+				B4F239692588F7860005DC76 /* Calculator */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -65,6 +64,15 @@
 				B46CB6C52585EA6400502F62 /* CalculatorFunctions.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B4F239692588F7860005DC76 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				B46E5FFD2587486500E312F7 /* DecimalCalculator.swift */,
+				B46E600125877DE700E312F7 /* BinaryCalculator.swift */,
+			);
+			path = Calculator;
 			sourceTree = "<group>";
 		};
 		C713D9352570E5EB001C3AFC = {
