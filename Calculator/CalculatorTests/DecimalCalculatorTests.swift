@@ -31,9 +31,11 @@ final class DecimalCalculatorTests: XCTestCase {
         //2. when
         let result = try! sut.equal()
         let expectedValue = "18"
+        let wrongValue = "17"
         
         //3. then
         XCTAssertEqual(result, expectedValue, "⚠️ add function int with int is wrong❗️")
+        XCTAssertNotEqual(result, wrongValue, "⚠️ add function int with int is wrong❗️")
     }
     
     func testAdditionDoubleWithDouble() throws {
@@ -183,9 +185,11 @@ final class DecimalCalculatorTests: XCTestCase {
         //2. when
         let result = try! sut.equal()
         let expectedValue = "2"
+        let wrongValue = "3"
         
         //3. then
         XCTAssertEqual(result, expectedValue, "⚠️ divide function int with int is wrong❗️")
+        XCTAssertNotEqual(result, wrongValue, "⚠️ divide function int with int is wrong❗️")
     }
     
     func testDivisionDoubleWithDouble() throws {
@@ -309,9 +313,11 @@ final class DecimalCalculatorTests: XCTestCase {
         //2. when
         let result = try! sut.equal()
         let expectedValue = "19.7"
+        let wrongValue = "20.1"
         
         //3. then
         XCTAssertEqual(result, expectedValue, "⚠️ fourRuleCalculation double Wrong❗️")
+        XCTAssertNotEqual(result, wrongValue, "⚠️ fourRuleCalculation double Wrong❗️")
     }
     
     func testFourRuleCalculationsDoubleWithToggleSign() throws {
@@ -386,8 +392,11 @@ final class DecimalCalculatorTests: XCTestCase {
         //2. when
         let result = try! sut.equal()
         let expectedValue = "1.5"
+        let wrongValue = "2.0"
         
         //3. then
         XCTAssertEqual(result, expectedValue, "⚠️ fourRuleCalculation int with double Wrong❗️")
+        XCTAssertNotEqual(result, wrongValue, "⚠️ fourRuleCalculation int with double Wrong❗️")
+    
     }
 }
