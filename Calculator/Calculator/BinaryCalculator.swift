@@ -7,10 +7,20 @@ struct BinaryCalculator {
     var current: String = "0"
     
     /// 스택에서 이전 연산자를 꺼내어 연산
-    func operatePrev(_ prevOperator: BinaryOperator) {
+    mutating func operatePrev(_ prevOperator: BinaryOperator) {
+
+        guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
+            print("입력된 값이 없습니다.")
+            return
+        }
+        
+        guard let new: Int = Int(firstPop, radix: 2), let old: Int = Int(secondPop, radix: 2) else {
+            print("오류, 계산기가 초기화 됩니다.")
+            reset()
+            return
+        }
+        
         let newValue: Int
-        let new = Int(numStack.pop() ?? "0", radix: 2) ?? 0
-        let old = Int(numStack.pop() ?? "0", radix: 2) ?? 0
         
         switch prevOperator {
         case .plus: newValue = old + new
@@ -26,7 +36,7 @@ struct BinaryCalculator {
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
-    func useAllOperator() {
+    mutating func useAllOperator() {
         while !operatorStack.elements.isEmpty {
             guard let someOperator = operatorStack.pop() else {
                 print("오류")
@@ -37,7 +47,7 @@ struct BinaryCalculator {
     }
     
     /// 스택에서 이전 연산자를 확인 후, 연산을 결정
-    func checkPrevOperator() {
+    mutating func checkPrevOperator() {
         if operatorStack.elements.last == .and || operatorStack.elements.last == .nand {
             guard let someOperator = operatorStack.pop() else {
                 print("오류")
@@ -57,7 +67,12 @@ struct BinaryCalculator {
         }
         
         operatorStack.push(`operator`)
-        current = numStack.peek() ?? "0"
+
+        guard let peekValue = numStack.peek() else {
+            print("오류")
+            return
+        }
+        current = peekValue
     }
 }
 
@@ -81,7 +96,12 @@ extension BinaryCalculator: BasicCalculatable {
     mutating func printResult() {
         numStack.push(current)
         useAllOperator()
-        current = numStack.peek() ?? "0"
+
+        guard let peekValue = numStack.peek() else {
+            print("오류")
+            return
+        }
+        current = peekValue
     }
     
 }
@@ -111,10 +131,19 @@ extension BinaryCalculator {
     
     // MARK: 단항 연산 (뷰컨트롤러로 옮겨질 예정)
     mutating func not() {
-        let invertedCurrent = ~(Int(current, radix: 2) ?? 0)
+        guard let convertedCurrent = Int(current, radix: 2) else {
+            print("오류")
+            return
+        }
+        
+        let invertedCurrent = ~(convertedCurrent)
         numStack.push(String(invertedCurrent, radix: 2))
         
-        current = numStack.peek() ?? "0"
+        guard let peekValue = numStack.peek() else {
+            print("오류")
+            return
+        }
+        current = peekValue
     }
     
     mutating func shiftToLeft() {
