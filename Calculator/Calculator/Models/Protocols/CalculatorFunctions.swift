@@ -5,6 +5,8 @@ protocol CommonCalculatorFunctions {
     func substract(lhs: String, rhs: String) throws -> String
     func clear()
     func calculate() throws -> String
+    func getOperator(_ inputOperator: String)
+    func getNumber(_ inputNumber: String)
 }
 
 protocol DecimalCalculatorFunctions: CommonCalculatorFunctions {
