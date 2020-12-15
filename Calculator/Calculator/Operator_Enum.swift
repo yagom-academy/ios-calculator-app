@@ -1,7 +1,5 @@
 
 enum DecimalOperator {
-    typealias RawValue = Int
-    
     case multiple
     case divide
     case plus
@@ -17,3 +15,4 @@ enum BinaryOperator {
     case nor
     case xor
 }
+

@@ -7,3 +7,4 @@ protocol BasicCalculatable {
     mutating func printResult()
 }
 
+
