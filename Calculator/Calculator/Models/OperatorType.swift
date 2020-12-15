@@ -24,6 +24,7 @@ enum BinaryOperatorType: String, CaseIterable {
     case or = "OR"
     case nor = "NOR"
     case xor = "XOR"
+    case not = "NOT"
     case leftShift = "<<"
     case rightShift = ">>"
     case equals = "="
