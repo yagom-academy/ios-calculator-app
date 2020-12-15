@@ -61,6 +61,8 @@ class BinaryCalculator: BinaryCalculatorFunctions {
     
     @discardableResult
     func calculate() -> String {
+        stringToInt()
+        
         switch operatorStack.pop() {
         case .add:
             numberStack.push(add())
@@ -76,6 +78,8 @@ class BinaryCalculator: BinaryCalculatorFunctions {
             numberStack.push(nor())
         case .xor:
             numberStack.push(xor())
+        case .not:
+            numberStack.push(not())
         case .leftShift:
             numberStack.push(leftShift())
         case .rightShift:
@@ -83,6 +87,8 @@ class BinaryCalculator: BinaryCalculatorFunctions {
         default:
             print("2진 연산자가 아닙니다!")
         }
+        
+        checkOverFlow()
         
         if let result = numberStack.top {
             return result
@@ -92,6 +98,10 @@ class BinaryCalculator: BinaryCalculatorFunctions {
     
     func getOperator(_ input: BinaryOperatorType) {
         if operatorStack.isEmpty {
+            if input == .not {
+                calculate()
+                return
+            }
             operatorStack.push(input)
         }
         else {
@@ -113,5 +123,16 @@ class BinaryCalculator: BinaryCalculatorFunctions {
         if let stringLHS = numberStack.pop(), let lhs = Int(stringLHS, radix: 2) {
             self.lhs = lhs
         }
+    }
+    
+    func checkOverFlow() {
+        guard var binaryNumber = numberStack.top else {
+            return
+        }
+        while binaryNumber.count > 9 {
+            binaryNumber.removeFirst()
+        }
+        numberStack.pop()
+        numberStack.push(binaryNumber)
     }
 }
