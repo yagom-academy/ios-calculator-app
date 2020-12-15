@@ -15,8 +15,7 @@ struct BinaryCalculator {
         }
         
         guard let new: Int = Int(firstPop, radix: 2), let old: Int = Int(secondPop, radix: 2) else {
-            print("오류, 계산기가 초기화 됩니다.")
-            reset()
+            current = "오류"
             return
         }
         

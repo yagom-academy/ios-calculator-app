@@ -14,8 +14,7 @@ struct DecimalCalculator {
         }
         
         guard let new: Double = Double(firstPop), let old: Double = Double(secondPop) else {
-            print("오류, 계산기가 초기화 됩니다.")
-            reset()
+            current = "오류"
             return
         }
         
@@ -30,7 +29,7 @@ struct DecimalCalculator {
             newValue = old * new
         case .divide:
             guard new != 0 else {
-                print("오류")
+                current = "오류"
                 return
             }
             newValue = old / new
