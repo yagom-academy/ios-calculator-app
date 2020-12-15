@@ -23,4 +23,9 @@ class DecimalCalculator {
         `operator`.stack = []
         priority.stack = []
     }
+    
+    func addtion(oldOperand: Double, newOperand: Double) -> Double {
+        let result = oldOperand + newOperand
+        return result
+    }
 }
