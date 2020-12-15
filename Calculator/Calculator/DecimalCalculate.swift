@@ -9,32 +9,28 @@ class DecimalCalculate: DecimalCalculator {
     var presentOperator: Operator?
     
     func addition<Double>() -> Double {
-        operatorSet.push(element: inputOperator!)
-        decimalNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func subtraction<Double>() -> Double {
-        operatorSet.push(element: inputOperator!)
-        decimalNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func multiplication<Double>() -> Double {
-        operatorSet.push(element: inputOperator!)
-        decimalNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
         
         return resultNumber as! Double
     }
     
     func division<Double>() -> Double {
-        operatorSet.push(element: inputOperator!)
-        decimalNumber.push(element: inputNumber!)
+        stackPush()
         verifyPriorityOperator()
         
         return resultNumber as! Double
@@ -51,6 +47,11 @@ class DecimalCalculate: DecimalCalculator {
         decimalNumber.index = []
         operatorSet.index = []
         inputNumber = 0
+    }
+    
+    func stackPush() {
+        operatorSet.push(element: inputOperator!)
+        decimalNumber.push(element: inputNumber!)
     }
     
     func verifyPriorityOperator() {

@@ -6,7 +6,7 @@ protocol Calculator {
     func result<T>() -> T
     func clear()
     func verifyPriorityOperator()
-    func operate()
+    func operate(_ present: Operator)
 }
 
 protocol DecimalCalculator: Calculator {
