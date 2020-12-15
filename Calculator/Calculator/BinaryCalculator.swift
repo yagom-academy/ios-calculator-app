@@ -289,6 +289,23 @@ class BianryCalculator: BasicCalculable, BinaryCalculable {
         return operandBuffer
     }
     
+    func toggleSign() -> String {
+        guard operandBuffer != "0" else {
+            return "0"
+        }
+        
+        let startIndex = operandBuffer.startIndex
+        if operandBuffer[startIndex] == "-" {
+            let startAfterIndex = operandBuffer.index(after: startIndex)
+            let operandBufferSubString = operandBuffer[startAfterIndex..<operandBuffer.endIndex]
+            operandBuffer = String(operandBufferSubString)
+        } else {
+            operandBuffer = "-\(operandBuffer)"
+        }
+        
+        return operandBuffer
+    }
+    
     func equal() throws -> String {
         guard isPushingOperatorJustBefore else {
             pushOperand()
