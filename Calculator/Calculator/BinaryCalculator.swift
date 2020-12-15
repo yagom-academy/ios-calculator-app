@@ -8,7 +8,7 @@ struct BinaryCalculator {
     
     /// 연산자가 입력되었을 때 공통으로 동작할 함수
     mutating  func calculate(_ operator: BinaryOperator) {
-        numStack.push(current)
+        numStack.push(checkDigits(current))
         
         switch `operator` {
         case .and, .nand: checkPrevOperator()
@@ -51,7 +51,7 @@ struct BinaryCalculator {
         case .xor: newValue = old ^ new
         }
         
-        numStack.push(String(newValue, radix: 2))
+        numStack.push(checkDigits(String(newValue, radix: 2)))
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
