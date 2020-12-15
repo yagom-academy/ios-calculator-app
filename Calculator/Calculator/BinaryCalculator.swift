@@ -11,7 +11,8 @@ struct BinaryCalculator {
     mutating func operatePrev(_ prevOperator: BinaryOperator) {
 
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
-            print("입력된 값이 없습니다.")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         
@@ -50,7 +51,8 @@ struct BinaryCalculator {
     mutating func checkPrevOperator() {
         if operatorStack.elements.last == .and || operatorStack.elements.last == .nand {
             guard let someOperator = operatorStack.pop() else {
-                print("오류")
+                print(Error.etc.rawValue + "계산기가 초기화됩니다.")
+                reset()
                 return
             }
             operatePrev(someOperator)
@@ -69,7 +71,8 @@ struct BinaryCalculator {
         operatorStack.push(`operator`)
 
         guard let peekValue = numStack.peek() else {
-            print("오류")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         current = peekValue
@@ -98,14 +101,11 @@ extension BinaryCalculator: BasicCalculatable {
         useAllOperator()
 
         guard let peekValue = numStack.peek() else {
-            print("오류")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         current = peekValue
-    }
-    
-    mutating func showErrorAlert() {
-        let alert = UIAlertController(title: <#T##String?#>, message: <#T##String?#>, preferredStyle: <#T##UIAlertController.Style#>)
     }
 }
 
@@ -143,7 +143,8 @@ extension BinaryCalculator {
         numStack.push(String(invertedCurrent, radix: 2))
         
         guard let peekValue = numStack.peek() else {
-            print("오류")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         current = peekValue

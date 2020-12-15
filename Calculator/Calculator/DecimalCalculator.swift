@@ -9,7 +9,8 @@ struct DecimalCalculator {
     /// 스택에서 이전 연산자를 꺼내어 연산
     mutating func operatePrev(_ prevOperator: DecimalOperator) {
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
-            print("입력된 값이 없습니다.")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         
@@ -53,7 +54,8 @@ struct DecimalCalculator {
     mutating func checkPrevOperator() {
         if operatorStack.elements.last == .multiple || operatorStack.elements.last == .divide {
             guard let someOperator = operatorStack.pop() else {
-                print("오류")
+                print(Error.etc.rawValue + "계산기가 초기화됩니다.")
+                reset()
                 return
             }
             operatePrev(someOperator)
@@ -72,7 +74,8 @@ struct DecimalCalculator {
         operatorStack.push(`operator`)
         
         guard let peekValue = numStack.peek() else {
-            print("오류")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         current = peekValue
@@ -100,7 +103,8 @@ extension DecimalCalculator: BasicCalculatable {
         useAllOperator()
         
         guard let peekValue = numStack.peek() else {
-            print("오류")
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
             return
         }
         current = peekValue

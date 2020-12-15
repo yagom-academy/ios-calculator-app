@@ -5,7 +5,6 @@ protocol BasicCalculatable {
 
     mutating func reset()
     mutating func printResult()
-    mutating func showErrorAlert()
 }
 
 
