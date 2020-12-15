@@ -1,7 +1,6 @@
 import Foundation
 
 protocol CommonCalculatorFunctions {
-    
     func add() -> String
     func substract() -> String
     func clear()
