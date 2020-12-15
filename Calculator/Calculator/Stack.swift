@@ -9,30 +9,30 @@ import Foundation
 
 struct Stack<T> {
     
-    fileprivate var array = [T]()
+    fileprivate var adder = [T]()
     
     var isEmpty: Bool {
-        return array.isEmpty
+        return adder.isEmpty
     }
     
     var count: Int {
-        return array.count
+        return adder.count
     }
     
     var top: T? {
-        return array.last
+        return adder.last
     }
     
     mutating func push(_ element: T) {
-        array.append(element)
+        adder.append(element)
     }
     
     mutating func pop() -> T? {
-        return array.popLast()
+        return adder.popLast()
     }
     
     mutating func removeAll() {
-        array.removeAll()
+        adder.removeAll()
     }
     
 }
