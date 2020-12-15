@@ -129,3 +129,40 @@ extension DecimalCalculator {
     }
 }
 
+// MARK: - 자릿수 9자리로 제한
+extension DecimalOperator {
+    func cutExtraDigits(_ num: inout String) {
+
+        if num.contains("-") && num.contains(".") {
+            let sulplus = num.count - 11
+            num.removeLast(sulplus)
+        } else if num.contains("-") || num.contains(".") {
+            let sulplus = num.count - 10
+            num.removeLast(sulplus)
+        } else if !num.contains("-") && num.contains(".") {
+            let sulplus = num.count - 9
+            num.removeLast(sulplus)
+        }
+    }
+    
+    func checkLast(_ num: inout String) {
+        if num.hasSuffix(".0") {
+            num.removeLast(2)
+        } else if num.contains(".") && num.last == "0" {
+            num.removeLast()
+        }
+    }
+    
+    func checkDigits(_ num: String) -> String {
+        var currentString = num
+        
+        guard currentString.count > 9 else {
+            checkLast(&currentString)
+            return currentString
+        }
+        cutExtraDigits(&currentString)
+        checkLast(&currentString)
+        
+        return currentString
+    }
+}
