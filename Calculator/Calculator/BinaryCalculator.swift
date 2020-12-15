@@ -37,12 +37,16 @@ struct BinaryCalculator {
     
     /// 스택에서 모든 연산자를 꺼내어 연산
     mutating func useAllOperator() {
-        while !operatorStack.elements.isEmpty {
-            guard let someOperator = operatorStack.pop() else {
-                print("오류")
-                return
-            }
-            operatePrev(someOperator)
+        guard !operatorStack.elements.isEmpty else {
+            return
+        }
+        
+        for _ in 1...operatorStack.count() {
+        guard let someOperator = operatorStack.pop() else {
+            return
+        }
+            
+        operatePrev(someOperator)
         }
     }
     

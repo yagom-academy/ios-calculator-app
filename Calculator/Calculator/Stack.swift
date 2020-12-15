@@ -13,5 +13,9 @@ class Stack<T> {
     func peek() -> T? {
         return self.elements.last
     }
+    
+    func count() -> Int {
+        return self.elements.count
+    }
 }
 
