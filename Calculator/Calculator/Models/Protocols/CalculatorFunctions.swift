@@ -28,4 +28,6 @@ protocol BinaryCalculatorFunctions: CommonCalculatorFunctions {
     func not() -> String
     func leftShift() -> String
     func rightShift() -> String
+    func checkOverFlow()
+    func stringToInt()
 }
