@@ -109,7 +109,7 @@ extension BinaryCalculator {
         calculate(.xor)
     }
     
-    // MARK: 단항 연산
+    // MARK: 단항 연산 (뷰컨트롤러로 옮겨질 예정)
     mutating func not() {
         let invertedCurrent = ~(Int(current, radix: 2) ?? 0)
         numStack.push(String(invertedCurrent, radix: 2))
