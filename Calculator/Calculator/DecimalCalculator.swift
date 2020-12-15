@@ -10,6 +10,27 @@ struct DecimalCalculator {
     
     var current: String = "0"
     
+    /// 연산자가 입력되었을 때 공통으로 동작할 함수
+    mutating func calculate(_ operator: DecimalOperator) {
+        saveCurrentStack()
+        
+        numStack.push(current)
+        
+        switch `operator` {
+        case .plus, .minus: useAllOperator()
+        case .multiple, .divide: checkPrevOperator()
+        }
+        
+        operatorStack.push(`operator`)
+        
+        guard let peekValue = numStack.peek() else {
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
+            return
+        }
+        current = peekValue
+    }
+    
     /// 스택에서 이전 연산자를 꺼내어 연산
     mutating func operatePrev(_ prevOperator: DecimalOperator) {
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
@@ -66,27 +87,6 @@ struct DecimalCalculator {
         }
     }
     
-    /// 연산자가 입력되었을 때 공통으로 동작할 함수
-    mutating func calculate(_ operator: DecimalOperator) {
-        saveCurrentStack()
-        
-        numStack.push(current)
-        
-        switch `operator` {
-        case .plus, .minus: useAllOperator()
-        case .multiple, .divide: checkPrevOperator()
-        }
-        
-        operatorStack.push(`operator`)
-        
-        guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
-            return
-        }
-        current = peekValue
-    }
-    
     // stack을 임시 보관, 꺼내오는 메서드.
     // 계산기에서 연산자를 +/-와 */를 섞어서 연속으로 입력할 경우 이전 버전의 스택으로 다시 돌아와야한다.
     mutating func saveCurrentStack() {
@@ -107,15 +107,8 @@ struct DecimalCalculator {
     }
 }
 
-// MARK: - BasicCalculatable
+// MARK: - 기타 메서드
 extension DecimalCalculator {
-    mutating func plus() {
-        calculate(.plus)
-    }
-    
-    mutating func minus() {
-        calculate(.minus)
-    }
     
     mutating func reset() {
         numStack.elements = []
@@ -136,13 +129,3 @@ extension DecimalCalculator {
     }
 }
 
-// MARK: - 10진 계산기에서만 가능한 연산
-extension DecimalCalculator {
-    mutating func multiple() {
-        calculate(.multiple)
-    }
-    
-    mutating func divide() {
-        calculate(.divide)
-    }
-}

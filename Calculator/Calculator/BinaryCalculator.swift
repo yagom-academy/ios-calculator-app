@@ -7,6 +7,25 @@ struct BinaryCalculator {
     
     var current: String = "0"
     
+    /// 연산자가 입력되었을 때 공통으로 동작할 함수
+    mutating  func calculate(_ operator: BinaryOperator) {
+        numStack.push(current)
+        
+        switch `operator` {
+        case .and, .nand: checkPrevOperator()
+        default: useAllOperator()
+        }
+        
+        operatorStack.push(`operator`)
+
+        guard let peekValue = numStack.peek() else {
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
+            return
+        }
+        current = peekValue
+    }
+    
     /// 스택에서 이전 연산자를 꺼내어 연산
     mutating func operatePrev(_ prevOperator: BinaryOperator) {
 
@@ -58,81 +77,11 @@ struct BinaryCalculator {
             operatePrev(someOperator)
         }
     }
-    
-    /// 연산자가 입력되었을 때 공통으로 동작할 함수
-    mutating  func calculate(_ operator: BinaryOperator) {
-        numStack.push(current)
-        
-        switch `operator` {
-        case .and, .nand: checkPrevOperator()
-        default: useAllOperator()
-        }
-        
-        operatorStack.push(`operator`)
-
-        guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
-            return
-        }
-        current = peekValue
-    }
 }
 
-// MARK: - BasicCalculatable
+// MARK: - 단항 연산
 extension BinaryCalculator {
 
-    mutating func plus() {
-        calculate(.plus)
-    }
-    
-    mutating func  minus() {
-        calculate(.minus)
-    }
-
-    mutating func reset() {
-        numStack.elements = []
-        operatorStack.elements = []
-        current = "0"
-    }
-    
-    mutating func printResult() {
-        numStack.push(current)
-        useAllOperator()
-
-        guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
-            return
-        }
-        current = peekValue
-    }
-}
-
-// MARK: - 2진 계산기에서만 가능한 연산
-extension BinaryCalculator {
-    
-    mutating func and() {
-        calculate(.and)
-    }
-    
-    mutating func nand() {
-        calculate(.nand)
-    }
-    
-    mutating func or() {
-        calculate(.or)
-    }
-    
-    mutating func nor() {
-        calculate(.nor)
-    }
-    
-    mutating func xor() {
-        calculate(.xor)
-    }
-    
-    // MARK: 단항 연산 (뷰컨트롤러로 옮겨질 예정)
     mutating func not() {
         guard let convertedCurrent = Int(current, radix: 2) else {
             print("오류")
@@ -173,6 +122,27 @@ extension BinaryCalculator {
     }
 }
 
+// MARK: - 기타 메서드
+extension BinaryCalculator {
+
+    mutating func reset() {
+        numStack.elements = []
+        operatorStack.elements = []
+        current = "0"
+    }
+    
+    mutating func printResult() {
+        numStack.push(current)
+        useAllOperator()
+
+        guard let peekValue = numStack.peek() else {
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
+            return
+        }
+        current = peekValue
+    }
+}
 
 
 
