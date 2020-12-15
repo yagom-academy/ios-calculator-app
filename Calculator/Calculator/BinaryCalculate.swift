@@ -5,6 +5,8 @@ class BinaryCalculate: BinaryCalculator {
     var operatorSet = Stack<Operator>()
     var inputNumber: Int?
     var resultNumber: Int?
+    var inputOperator: Operator?
+    var presentOperator: Operator?
         
     func addition<Int>() -> Int {
         binaryNumber.push(element: inputNumber!)
