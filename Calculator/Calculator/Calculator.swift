@@ -13,17 +13,6 @@ protocol BasicCalculator {
     mutating func result()
     mutating func reset()
 }
-extension BasicCalculator {
-    func trimmedValue(of originalValue: String) -> String {
-        let firstIndex = originalValue.index(originalValue.startIndex, offsetBy: 0)
-        let lastIndex = originalValue.index(originalValue.startIndex, offsetBy: 9)
-        
-        if originalValue.count > 9 {
-            return "\(originalValue[firstIndex..<lastIndex])"
-        }
-        return originalValue
-    }
-}
 
 struct DecimalCalculator: BasicCalculator {
     let operators: Set<String> = ["+","-","*","/"]
@@ -53,6 +42,7 @@ struct DecimalCalculator: BasicCalculator {
         }
     }
     
+
     mutating func result() {
         var result: Double = 0
         
@@ -154,5 +144,15 @@ struct BinaryCalculator: BasicCalculator {
         binaryAdder.removeAll()
     }
 }
-
-
+extension String {
+    var trimmed: String {
+        guard self.count > 9 else {
+            return self
+        }
+        
+        let firstIndex = self.index(self.startIndex, offsetBy: 0)
+        let lastIndex = self.index(self.startIndex, offsetBy: 9)
+        
+        return"\(self[firstIndex..<lastIndex])"
+    }
+}
