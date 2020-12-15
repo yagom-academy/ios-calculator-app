@@ -322,7 +322,7 @@ final class BinaryCalculatorTests: XCTestCase {
         let result = try! sut.equal()
 
         //3. then
-        XCTAssertEqual(result, "1001", "⚠️ not function is wrong❗️")
+        XCTAssertEqual(result, "1001", "⚠️ not function with toggleSign is wrong❗️")
     }
     
     func testRightShift() throws {
