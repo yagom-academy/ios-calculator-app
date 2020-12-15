@@ -1,0 +1,26 @@
+//
+//  DecimalCalculator.swift
+//  Calculator
+//
+//  Created by Jinho Choi on 2020/12/15.
+//
+
+import Foundation
+
+class DecimalCalculator {
+    var operand = Stack<String>()
+    var `operator` = Stack<String>()
+    var priority = Stack<Int>()
+    
+    func printStack() {
+        print("피연산자 배열: \(operand.stack)")
+        print("연산자 배열: \(`operator`.stack)")
+        print("우선순위 배열: \(priority.stack)")
+    }
+    
+    func resetStack() {
+        operand.stack = []
+        `operator`.stack = []
+        priority.stack = []
+    }
+}
