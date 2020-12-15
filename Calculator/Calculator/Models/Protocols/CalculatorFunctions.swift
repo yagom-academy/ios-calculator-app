@@ -1,26 +1,31 @@
 import Foundation
 
 protocol CommonCalculatorFunctions {
-    func add(lhs: String, rhs: String) throws -> String
-    func substract(lhs: String, rhs: String) throws -> String
+    
+    func add() -> String
+    func substract() -> String
     func clear()
-    func calculate() throws -> String
-    func getOperator(_ inputOperator: String)
-    func getNumber(_ inputNumber: String)
+    func calculate() -> String
+    func getOperator(_ input: DecimalOperatorType)
+    func getNumber(_ input: String)
 }
 
 protocol DecimalCalculatorFunctions: CommonCalculatorFunctions {
-    func multiply(lhs: String, rhs: String) throws -> String
-    func divide(lhs: String, rhs: String) throws -> String
+    var lhs: Double { get set }
+    var rhs: Double { get set }
+    func multiply() -> String
+    func divide() -> String
 }
 
 protocol BinaryCalculatorFunctions: CommonCalculatorFunctions {
-    func and(lhs: String, rhs: String) throws -> String
-    func nand(lhs: String, rhs: String) throws -> String
-    func or(lhs: String, rhs: String) throws -> String
-    func nor(lhs: String, rhs: String) throws -> String
-    func xor(lhs: String, rhs: String) throws -> String
-    func not(lhs: String) throws -> String
-    func leftShift(lhs: String, rhs: String) throws -> String
-    func rightShift(lhs: String, rhs: String) throws -> String
+    var lhs: Int? { get set }
+    var rhs: Int? { get set }
+    func and() -> String
+    func nand() -> String
+    func or() -> String
+    func nor() -> String
+    func xor() -> String
+    func not() -> String
+    func leftShift() -> String
+    func rightShift() -> String
 }
