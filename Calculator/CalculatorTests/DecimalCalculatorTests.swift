@@ -95,8 +95,8 @@ final class DecimalCalculatorTests: XCTestCase {
     
     // MARK: calculate func test code
     func testCalculate() throws {
-        let result = try decimalCalculator.calculate(["3", "+", "-2", "*", "4", "+", "2"])
-        XCTAssertEqual(result, "-3.0")
+        let result = try decimalCalculator.calculate(["3", "+", "-2", "*", "4", "+", "2", "-", "3", "/", "4", "-", "-5"])
+        XCTAssertEqual(result, "1.25")
     }
     
     func testRemoveAll() throws {
