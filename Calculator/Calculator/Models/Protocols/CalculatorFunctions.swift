@@ -6,20 +6,21 @@ protocol CommonCalculatorFunctions {
     func substract() -> String
     func clear()
     func calculate() -> String
-    func getOperator(_ input: DecimalOperatorType)
     func getNumber(_ input: String)
 }
 
 protocol DecimalCalculatorFunctions: CommonCalculatorFunctions {
     var lhs: Double { get set }
     var rhs: Double { get set }
+    func getOperator(_ input: DecimalOperatorType)
     func multiply() -> String
     func divide() -> String
 }
 
 protocol BinaryCalculatorFunctions: CommonCalculatorFunctions {
-    var lhs: Int? { get set }
-    var rhs: Int? { get set }
+    var lhs: Int { get set }
+    var rhs: Int { get set }
+    func getOperator(_ input: BinaryOperatorType)
     func and() -> String
     func nand() -> String
     func or() -> String
