@@ -5,9 +5,11 @@ class DecimalCalculate: DecimalCalculator {
     var operatorSet = Stack<Operator>()
     var inputNumber: Double?
     var resultNumber: Double?
+    var inputOperator: Operator?
     var presentOperator: Operator?
     
     func addition<Double>() -> Double {
+        operatorSet.push(element: inputOperator!)
         decimalNumber.push(element: inputNumber!)
         verifyPriorityOperator()
         
@@ -15,6 +17,7 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func subtraction<Double>() -> Double {
+        operatorSet.push(element: inputOperator!)
         decimalNumber.push(element: inputNumber!)
         verifyPriorityOperator()
         
@@ -22,6 +25,7 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func multiplication<Double>() -> Double {
+        operatorSet.push(element: inputOperator!)
         decimalNumber.push(element: inputNumber!)
         verifyPriorityOperator()
         
@@ -29,6 +33,7 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func division<Double>() -> Double {
+        operatorSet.push(element: inputOperator!)
         decimalNumber.push(element: inputNumber!)
         verifyPriorityOperator()
         
@@ -36,7 +41,7 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func result<Double>() -> Double {
-        decimalNumber.push(element: inputNumber!)
+        operatorSet.push(element: inputOperator!)
         verifyPriorityOperator()
         
         return resultNumber as! Double
@@ -49,17 +54,14 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func verifyPriorityOperator() {
-        if operatorSet.peek() == .multiplication || operatorSet.peek() == .division {
-            presentOperator = operatorSet.pop()
-            operate(presentOperator!)
-            operatorSet.push(element: presentOperator!)
+        if operatorSet.peek() == .multiplication || operatorSet.peek() == .division || operatorSet.peek() == .sum {
+            while operatorSet.count() != 0 {
+                presentOperator = operatorSet.pop()
+                operate(presentOperator!)
+            }
         }
         else {
-            repeat {
-            presentOperator = operatorSet.pop()
-            operate(presentOperator!)
             operatorSet.push(element: presentOperator!)
-            } while operatorSet.count() != 0
         }
     }
     

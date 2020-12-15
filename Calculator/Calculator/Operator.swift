@@ -5,6 +5,7 @@ enum Operator: String, CaseIterable {
     case subtraction = "-"
     case multiplication = "*"
     case division = "/"
+    case sum = "="
     case and = "&"
     case nand = "~&"
     case or = "|"
