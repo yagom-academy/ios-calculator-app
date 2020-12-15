@@ -5,6 +5,7 @@ protocol Calculator {
     func subtraction<T>() -> T
     func result<T>() -> T
     func clear()
+    func stackPush()
     func verifyPriorityOperator()
     func operate(_ present: Operator)
 }
