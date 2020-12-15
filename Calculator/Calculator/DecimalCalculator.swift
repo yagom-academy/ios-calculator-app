@@ -4,6 +4,10 @@ struct DecimalCalculator {
     var numStack = Stack<String>()
     var operatorStack = Stack<DecimalOperator>()
     
+    // 이전 연산자를 저장하는 스택
+    var prevNumberStack = [String]()
+    var prevOperatorStack = [DecimalOperator]()
+    
     var current: String = "0"
     
     /// 스택에서 이전 연산자를 꺼내어 연산
@@ -79,6 +83,16 @@ struct DecimalCalculator {
             return
         }
         current = peekValue
+    }
+    
+    mutating func saveCurrentStack() {
+        prevNumberStack = numStack.elements
+        prevOperatorStack = operatorStack.elements
+    }
+    
+    mutating func loadCurrentStack() {
+        numStack.elements = prevNumberStack
+        operatorStack.elements = prevOperatorStack
     }
 }
 
