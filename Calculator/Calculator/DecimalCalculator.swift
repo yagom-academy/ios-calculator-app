@@ -1,15 +1,15 @@
 
 struct DecimalCalculator {
     
-    var numStack = Stack<Double>()
+    var numStack = Stack<String>()
     var operatorStack = Stack<DecimalOperator>()
     
-    var current: Double = 0
+    var current: String = "0"
     
     /// 스택에서 이전 연산자를 꺼내어 연산
     func operatePrev(_ prevOperator: DecimalOperator) {
-        let new: Double = numStack.pop() ?? 0
-        let old: Double = numStack.pop() ?? 0
+        let new: Double = Double(numStack.pop() ?? "0") ?? 0
+        let old: Double = Double(numStack.pop() ?? "0") ?? 0
         let newValue: Double
         
         switch prevOperator {
@@ -27,7 +27,7 @@ struct DecimalCalculator {
             newValue = old / new
         }
         
-        numStack.push(newValue)
+        numStack.push(String(newValue))
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
@@ -62,7 +62,7 @@ struct DecimalCalculator {
         }
         
         operatorStack.push(`operator`)
-        current = numStack.peek() ?? 0
+        current = numStack.peek() ?? "0"
     }
 }
 
@@ -79,14 +79,14 @@ extension DecimalCalculator: BasicCalculatable {
     mutating func reset() {
         numStack.elements = []
         operatorStack.elements = []
-        current = 0
+        current = "0"
     }
     
     mutating func printResult() {
         numStack.push(current)
         useAllOperator()
         
-        current = numStack.peek() ?? 0
+        current = numStack.peek() ?? "0"
     }
 }
 
