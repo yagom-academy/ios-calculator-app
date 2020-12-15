@@ -108,9 +108,8 @@ struct DecimalCalculator {
 }
 
 // MARK: - BasicCalculatable
-extension DecimalCalculator: BasicCalculatable {
+extension DecimalCalculator {
     mutating func plus() {
-        
         calculate(.plus)
     }
     

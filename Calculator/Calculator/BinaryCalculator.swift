@@ -80,7 +80,7 @@ struct BinaryCalculator {
 }
 
 // MARK: - BasicCalculatable
-extension BinaryCalculator: BasicCalculatable {
+extension BinaryCalculator {
 
     mutating func plus() {
         calculate(.plus)
