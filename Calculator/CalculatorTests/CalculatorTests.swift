@@ -32,4 +32,12 @@ class CalculatorTests: XCTestCase {
     func testMultiplicationBasicFunction() {
         XCTAssertEqual(systemUnderTest.multiply(oldOperand: 2, newOperand: 3), 6)
     }
+    
+    func testDivisionBasicFunction() {
+        XCTAssertEqual(systemUnderTest.divide(oldOperand: 20, newOperand: 2), 10)
+    }
+    
+    func testDivisionAboutZero() {
+        XCTAssertEqual(systemUnderTest.divide(oldOperand: 2, newOperand: 0), Double.infinity)
+    }
 }

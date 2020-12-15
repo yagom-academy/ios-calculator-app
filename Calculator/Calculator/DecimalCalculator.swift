@@ -38,4 +38,12 @@ class DecimalCalculator {
         let result = oldOperand * newOperand
         return result
     }
+    
+    func divide(oldOperand: Double, newOperand: Double) -> Double {
+        guard newOperand != 0 else {
+            return Double.infinity
+        }
+        let result = oldOperand / newOperand
+        return result
+    }
 }
