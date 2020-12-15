@@ -79,7 +79,7 @@ class DecimalCalculate: DecimalCalculator {
             case .division:
                 resultNumber = frontNumber / backNumber
             default:
-                print("연산자가 잘못되었습니다.")
+                print("연산이 잘못되었습니다.")
         }
         decimalNumber.push(element: resultNumber!)
     }
