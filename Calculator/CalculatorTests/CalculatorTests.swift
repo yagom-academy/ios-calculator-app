@@ -13,13 +13,13 @@ final class BinaryCalculatorTests: XCTestCase {
     private var binaryCalculator: BinaryCalculator!
     
     override func setUp() {
-        binaryCalculator = BinaryCalculator()
         super.setUp()
+        binaryCalculator = BinaryCalculator()
     }
 
     override func tearDown() {
-        super.tearDown()
         binaryCalculator = nil
+        super.tearDown()
     }
     
     // MARK: add func test code

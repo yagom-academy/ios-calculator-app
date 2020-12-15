@@ -13,13 +13,13 @@ final class DecimalCalculatorTests: XCTestCase {
     private var decimalCalculator: DecimalCalculator!
     
     override func setUp() {
-        decimalCalculator = DecimalCalculator()
         super.setUp()
+        decimalCalculator = DecimalCalculator()
     }
 
     override func tearDown() {
-        super.tearDown()
         decimalCalculator = nil
+        super.tearDown()
     }
     
     // MARK: add func test code
