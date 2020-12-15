@@ -7,14 +7,11 @@
 
 import Foundation
 
-private var decimalAdder = [Double]()
-private var binaryAdder = [Int]()
-
 protocol BasicCalculator {
     var operators: Set<String> { get }
-    var displayedValue: String { get }
-    func calculate(value: String, by tappedOperator: String)
-    func reset()
+    mutating func calculate(value: String, by tappedOperator: String)
+    mutating func result()
+    mutating func reset()
 }
 extension BasicCalculator {
     func trimmedValue(of originalValue: String) -> String {
@@ -30,14 +27,9 @@ extension BasicCalculator {
 
 struct DecimalCalculator: BasicCalculator {
     let operators: Set<String> = ["+","-","*","/"]
+    private var decimalAdder = Stack<Double>()
     
-    var displayedValue: String {
-        get {
-            return trimmedValue(of: String(decimalAdder.reduce(0){$0 + $1}) )
-        }
-    }
-    
-    func calculate(value: String, by tappedOperator: String = "+") {
+    mutating func calculate(value: String, by tappedOperator: String) {
         guard operators.contains(tappedOperator),
               let operand = Double(value) else {
             return
@@ -45,72 +37,122 @@ struct DecimalCalculator: BasicCalculator {
         
         switch tappedOperator {
         case "+":
-            decimalAdder.append(operand)
+            decimalAdder.push(operand)
         case "-":
-            decimalAdder.append(-operand)
+            decimalAdder.push(-operand)
         case "*":
-            if let multiplicand = decimalAdder.popLast() {
-                decimalAdder.append(multiplicand * operand)
+            if let multiplicand = decimalAdder.pop() {
+                decimalAdder.push(multiplicand * operand)
             }
         case "/":
-            if let dividend = decimalAdder.popLast() {
-                decimalAdder.append(dividend / operand)
+            if let dividend = decimalAdder.pop() {
+                decimalAdder.push(dividend / operand)
             }
         default:
             return
         }
     }
     
-    func reset() {
-        decimalAdder = []
+    mutating func result() {
+        var result: Double = 0
+        
+        while !decimalAdder.isEmpty {
+            if let valueToAdd = decimalAdder.pop() {
+                result += valueToAdd
+            }
+        }
+        decimalAdder.push(result)
+    }
+    
+    mutating func reset() {
+            decimalAdder.removeAll()
     }
 }
 
 struct BinaryCalculator: BasicCalculator {
     let operators: Set<String> = ["+","-","NOT", "AND", "OR","NOR","NAND","XOR","<<",">>"]
-  
-    var displayedValue: String {
-        get {
-            return trimmedValue(of: String(decimalAdder.reduce(0){$0 + $1}) )
-        }
-    }
+    private var binaryAdder = Stack<Int>()
     
-    func calculate(value: String, by tappedOperator: String = "+") {
+    mutating func calculate(value: String, by tappedOperator: String) {
         guard let operand = Int(value) else {
             return
         }
         
         if operators.contains(tappedOperator) {
-            if let operatingValue = binaryAdder.popLast() {
-                switch tappedOperator {
-                case "+":
-                    binaryAdder.append(operand)
-                case "-":
-                    binaryAdder.append(-operand)
-                case "NOT":
-                    binaryAdder.append(~operand)
-                case "AND":
-                    binaryAdder.append(operatingValue & operand)
-                case "OR":
-                    binaryAdder.append(operatingValue | operand)
-                case "NOR":
-                    binaryAdder.append(~(operatingValue | operand))
-                case "NAND":
-                    binaryAdder.append(~(operatingValue & operand))
-                case "XOR":
-                    binaryAdder.append(operatingValue ^ operand)
-                case "<<":
-                    binaryAdder.append(operand << 1)
-                case ">>":
-                    binaryAdder.append(operand >> 1)
-                default:
-                    return
+            switch tappedOperator {
+            case "+":
+                binaryAdder.push(operand)
+            case "-":
+                binaryAdder.push(-operand)
+            case "NOT":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(~operatingValue)
                 }
+            case "AND":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(operatingValue & operand)
+                }
+            case "OR":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(operatingValue | operand)
+                }
+            case "NOR":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(~(operatingValue | operand))
+                }
+            case "NAND":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(~(operatingValue & operand))
+                }
+            case "XOR":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(operatingValue ^ operand)
+                }
+            case "<<":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(operatingValue << 1)
+                }
+            case ">>":
+                result()
+                if let operatingValue = binaryAdder.pop() {
+                    binaryAdder.push(operatingValue >> 1)
+                }
+            case "=":
+                var result: Int = 0
+                
+                while !binaryAdder.isEmpty {
+                    if let valueToAdd = binaryAdder.pop() {
+                        result += valueToAdd
+                    }
+                }
+                binaryAdder.push(result)
+            default:
+                return
             }
         }
     }
+ 
+    mutating func result() {
+        var result: Int = 0
+        
+        while !binaryAdder.isEmpty {
+            if let valueToAdd = binaryAdder.pop() {
+                result += valueToAdd
+            }
+        }
+        binaryAdder.push(result)
+    }
     
-    func reset() {
-        binaryAdder = []
+    mutating func reset() {
+        binaryAdder.removeAll()
     }
 }
+
+
