@@ -12,8 +12,8 @@ final class DecimalCalculatorTests: XCTestCase {
     private var sut: DecimalCalculator!
     
     override func setUp() {
-        sut = DecimalCalculator()
         super.setUp()
+        sut = DecimalCalculator()
     }
 
     override func tearDown() {

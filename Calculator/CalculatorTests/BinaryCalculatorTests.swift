@@ -12,8 +12,8 @@ final class BinaryCalculatorTests: XCTestCase {
     private var sut: BianryCalculator!
     
     override func setUp() {
-        sut = BianryCalculator()
         super.setUp()
+        sut = BianryCalculator()
     }
 
     override func tearDown() {
