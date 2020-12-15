@@ -12,6 +12,7 @@ enum DecimalOperatorType: String, CaseIterable {
     case substract = "-"
     case divide = "/"
     case multiply = "*"
+    case equals = "="
 }
 
 
@@ -25,4 +26,5 @@ enum BinaryOperatorType: String, CaseIterable {
     case xor = "XOR"
     case leftShift = "<<"
     case rightShift = ">>"
+    case equals = "="
 }
