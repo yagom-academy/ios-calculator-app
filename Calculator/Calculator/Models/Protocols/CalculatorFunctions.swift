@@ -14,6 +14,7 @@ protocol DecimalCalculatorFunctions: CommonCalculatorFunctions {
     func getOperator(_ input: DecimalOperatorType)
     func multiply() -> String
     func divide() -> String
+    func stringToDouble()
 }
 
 protocol BinaryCalculatorFunctions: CommonCalculatorFunctions {

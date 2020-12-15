@@ -49,7 +49,7 @@ class DecimalCalculator: DecimalCalculatorFunctions {
         case .multiply:
             numberStack.push(multiply())
         default:
-            print("10진수 계산이 아닙니다!")
+            return "10진수 계산이 아닙니다!"
         }
         
         if let result = numberStack.top {

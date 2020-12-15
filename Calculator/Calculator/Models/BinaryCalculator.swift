@@ -85,7 +85,7 @@ class BinaryCalculator: BinaryCalculatorFunctions {
         case .rightShift:
             numberStack.push(rightShift())
         default:
-            print("2진 연산자가 아닙니다!")
+            return "2진 연산자가 아닙니다!"
         }
         
         checkOverFlow()
