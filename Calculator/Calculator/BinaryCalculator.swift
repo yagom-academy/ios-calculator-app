@@ -1,3 +1,4 @@
+import UIKit
 
 struct BinaryCalculator {
     
@@ -103,6 +104,9 @@ extension BinaryCalculator: BasicCalculatable {
         current = peekValue
     }
     
+    mutating func showErrorAlert() {
+        let alert = UIAlertController(title: <#T##String?#>, message: <#T##String?#>, preferredStyle: <#T##UIAlertController.Style#>)
+    }
 }
 
 // MARK: - 2진 계산기에서만 가능한 연산
