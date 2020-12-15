@@ -5,6 +5,8 @@ protocol Calculator {
     func subtraction<T>() -> T
     func result<T>() -> T
     func clear()
+    func verifyPriorityOperator()
+    func operate()
 }
 
 protocol DecimalCalculator: Calculator {
