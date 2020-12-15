@@ -61,6 +61,7 @@ struct DecimalCalculator {
             newValue = old / new
         }
         
+        
         numStack.push(String(newValue))
     }
     
@@ -130,7 +131,7 @@ extension DecimalCalculator {
 }
 
 // MARK: - 자릿수 9자리로 제한
-extension DecimalOperator {
+extension DecimalCalculator {
     func cutExtraDigits(_ num: inout String) {
 
         if num.contains("-") && num.contains(".") {
