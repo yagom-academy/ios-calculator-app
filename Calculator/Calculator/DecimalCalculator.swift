@@ -33,4 +33,9 @@ class DecimalCalculator {
         let result = oldOperand - newOperand
         return result
     }
+    
+    func multiply(oldOperand: Double, newOperand: Double) -> Double {
+        let result = oldOperand * newOperand
+        return result
+    }
 }

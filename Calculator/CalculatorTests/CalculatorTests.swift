@@ -20,12 +20,16 @@ class CalculatorTests: XCTestCase {
         super.tearDown()
         systemUnderTest = nil
     }
-    //Addition subtraction multiplication division
+    
     func testAdditionBasicFunction() {
         XCTAssertEqual(systemUnderTest.add(oldOperand: 3, newOperand: 5), 8)
     }
     
     func testSubtractionBasicFunction() {
         XCTAssertEqual(systemUnderTest.subtract(oldOperand: 40, newOperand: 13), 27)
+    }
+    
+    func testMultiplicationBasicFunction() {
+        XCTAssertEqual(systemUnderTest.multiply(oldOperand: 2, newOperand: 3), 6)
     }
 }
