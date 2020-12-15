@@ -36,7 +36,17 @@ class DecimalCalculator: DecimalCalculable {
         guard let calculatorResultData = decimalStack.pop() else {
             throw CalculatorError.calculation
         }
-        return calculatorResultData
+        let presisionedResult = try setPrecisionOfCalculationResult(calculatorResultData)
+        
+        return presisionedResult
+    }
+    
+    private func setPrecisionOfCalculationResult(_ result: DecimalData) throws -> DecimalData {
+        let presisionedDoubleValue = try stringToDouble(result.value).setPrecision()
+        let presisionedStringValue = String(presisionedDoubleValue)
+        let presisionedResult = DecimalData(value: presisionedStringValue, type: nil)
+        
+        return presisionedResult
     }
     
     func getPostFixFormula(_ items: [String]) throws -> [DecimalData] {
