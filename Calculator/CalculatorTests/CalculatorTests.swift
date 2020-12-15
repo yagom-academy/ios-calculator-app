@@ -24,4 +24,8 @@ class CalculatorTests: XCTestCase {
     func testAdditionBasicFunction() {
         XCTAssertEqual(systemUnderTest.addtion(oldOperand: 3, newOperand: 5), 8)
     }
+    
+    func testSubtractionBasicFunction() {
+        XCTAssertEqual(systemUnderTest.subtraction(oldOperand: 40, newOperand: 13), 27)
+    }
 }

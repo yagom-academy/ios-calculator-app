@@ -28,4 +28,9 @@ class DecimalCalculator {
         let result = oldOperand + newOperand
         return result
     }
+    
+    func subtraction(oldOperand: Double, newOperand: Double) -> Double {
+        let result = oldOperand - newOperand
+        return result
+    }
 }
