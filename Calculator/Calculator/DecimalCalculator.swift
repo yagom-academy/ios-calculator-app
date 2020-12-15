@@ -88,7 +88,7 @@ struct DecimalCalculator {
     }
     
     // stack을 임시 보관, 꺼내오는 메서드.
-    // 계산기에서 연산자를 +-나 */를 섞어서 연속으로 입력할 경우 이전 버전의 스택으로 다시 돌아와야한다.
+    // 계산기에서 연산자를 +/-와 */를 섞어서 연속으로 입력할 경우 이전 버전의 스택으로 다시 돌아와야한다.
     mutating func saveCurrentStack() {
         prevNumberStack = numStack.elements
         prevOperatorStack = operatorStack.elements
