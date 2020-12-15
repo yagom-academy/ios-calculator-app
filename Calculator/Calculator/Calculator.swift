@@ -16,13 +16,24 @@ protocol BasicCalculator {
     func calculate(value: String, by tappedOperator: String)
     func reset()
 }
+extension BasicCalculator {
+    func trimmedValue(of originalValue: String) -> String {
+        let firstIndex = originalValue.index(originalValue.startIndex, offsetBy: 0)
+        let lastIndex = originalValue.index(originalValue.startIndex, offsetBy: 9)
+        
+        if originalValue.count > 9 {
+            return "\(originalValue[firstIndex..<lastIndex])"
+        }
+        return originalValue
+    }
+}
 
 struct DecimalCalculator: BasicCalculator {
     let operators: Set<String> = ["+","-","*","/"]
     
     var displayedValue: String {
         get {
-            return String(decimalAdder.reduce(0){$0 + $1})
+            return trimmedValue(of: String(decimalAdder.reduce(0){$0 + $1}) )
         }
     }
     
@@ -60,7 +71,7 @@ struct BinaryCalculator: BasicCalculator {
   
     var displayedValue: String {
         get {
-            return String(binaryAdder.reduce(0){$0 + $1})
+            return trimmedValue(of: String(decimalAdder.reduce(0){$0 + $1}) )
         }
     }
     
