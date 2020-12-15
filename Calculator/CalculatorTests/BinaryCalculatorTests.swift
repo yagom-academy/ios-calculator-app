@@ -33,9 +33,10 @@ final class BinaryCalculatorTests: XCTestCase {
         
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "1100"
         
         //3. then
-        XCTAssertEqual(result, "1100", " ⚠️ add function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, " ⚠️ add function is wrong❗️")
     }
     
     func testAdditionWithToggleSign() throws {
@@ -51,9 +52,10 @@ final class BinaryCalculatorTests: XCTestCase {
         
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "1000"
         
         //3. then
-        XCTAssertEqual(result, "1000", "⚠️ add function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ add function with toggleSign is wrong❗️")
     }
     
     func testSubtraction() throws {
@@ -72,9 +74,10 @@ final class BinaryCalculatorTests: XCTestCase {
         
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "10010"
         
         //3. then
-        XCTAssertEqual(result, "10010", "⚠️ subtract function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ subtract function is wrong❗️")
     }
     
     func testSubtractionWithToggleSign() throws {
@@ -94,9 +97,10 @@ final class BinaryCalculatorTests: XCTestCase {
         
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "110000"
         
         //3. then
-        XCTAssertEqual(result, "110000", "⚠️ subtract function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ subtract function with toggleSign is wrong❗️")
     }
     
     func testAnd() throws {
@@ -113,9 +117,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "1010"
         
         //3. then
-        XCTAssertEqual(result, "1010", "⚠️ and function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ and function is wrong❗️")
     }
     
     func testAndWithToggleSign() throws {
@@ -133,9 +138,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "0"
         
         //3. then
-        XCTAssertEqual(result, "0", "⚠️ and function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ and function with toggleSign is wrong❗️")
     }
     
     func testOr() throws {
@@ -152,9 +158,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "1111"
         
         //3. then
-        XCTAssertEqual(result, "1111", "⚠️ or function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ or function is wrong❗️")
     }
     
     func testOrWithToggleSign() throws {
@@ -172,9 +179,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-101"
         
         //3. then
-        XCTAssertEqual(result, "-101", "⚠️ or function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ or function with toggleSign is wrong❗️")
     }
     
     func testXor() throws {
@@ -191,9 +199,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "101"
         
         //3. then
-        XCTAssertEqual(result, "101", "⚠️ xor function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ xor function is wrong❗️")
     }
     
     func testXorWithToggleSign() throws {
@@ -211,9 +220,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-101"
         
         //3. then
-        XCTAssertEqual(result, "-101", "⚠️ xor function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ xor function with toggleSign is wrong❗️")
     }
     
     func testNor() throws {
@@ -230,9 +240,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-10000"
 
         //3. then
-        XCTAssertEqual(result, "-10000", "⚠️ nor function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ nor function is wrong❗️")
     }
     
     func testNorWithToggleSign() throws {
@@ -250,9 +261,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "100"
 
         //3. then
-        XCTAssertEqual(result, "100", "⚠️ nor function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ nor function with toggleSign is wrong❗️")
     }
     
     func testNand() throws {
@@ -269,9 +281,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-1011"
 
         //3. then
-        XCTAssertEqual(result, "-1011", "⚠️ nand function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ nand function is wrong❗️")
     }
     
     func testNandWithToggleSign() throws {
@@ -289,9 +302,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-1"
 
         //3. then
-        XCTAssertEqual(result, "-1", "⚠️ nand function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ nand function with toggleSign is wrong❗️")
     }
 
     func testNot() throws {
@@ -304,9 +318,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-1011"
 
         //3. then
-        XCTAssertEqual(result, "-1011", "⚠️ not function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ not function is wrong❗️")
     }
     
     func testNotWithToggleSign() throws {
@@ -320,9 +335,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "1001"
 
         //3. then
-        XCTAssertEqual(result, "1001", "⚠️ not function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ not function with toggleSign is wrong❗️")
     }
     
     func testRightShift() throws {
@@ -335,9 +351,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "101"
         
         //3. then
-        XCTAssertEqual(result, "101", "⚠️ rightShift function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ rightShift function is wrong❗️")
     }
     
     func testRightShiftWithToggleSign() throws {
@@ -351,9 +368,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-101"
         
         //3. then
-        XCTAssertEqual(result, "-101", "⚠️ rightShift function with togglSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ rightShift function with togglSign is wrong❗️")
     }
     
     func testLeftShift() throws {
@@ -366,9 +384,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "10100"
         
         //3. then
-        XCTAssertEqual(result, "10100", "⚠️ leftShift function is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ leftShift function is wrong❗️")
     }
     
     func testLeftShiftWithToggleSign() throws {
@@ -382,9 +401,10 @@ final class BinaryCalculatorTests: XCTestCase {
 
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-10100"
         
         //3. then
-        XCTAssertEqual(result, "-10100", "⚠️ leftShift function with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ leftShift function with toggleSign is wrong❗️")
     }
     
     func testBinaryCalculator() throws {
@@ -417,9 +437,10 @@ final class BinaryCalculatorTests: XCTestCase {
         
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "-100010"
         
         //3. then
-        XCTAssertEqual(result, "-100010", "⚠️ binaryCalculator is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ binaryCalculator is wrong❗️")
     }
     
     func testBinaryCalculatorWithToggleSign() throws {
@@ -454,9 +475,10 @@ final class BinaryCalculatorTests: XCTestCase {
         
         //2. when
         let result = try! sut.equal()
+        let expectedValue = "11100"
         
         //3. then
-        XCTAssertEqual(result, "11100", "⚠️ binaryCalculator with toggleSign is wrong❗️")
+        XCTAssertEqual(result, expectedValue, "⚠️ binaryCalculator with toggleSign is wrong❗️")
     }
     
 }
