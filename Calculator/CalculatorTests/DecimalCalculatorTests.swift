@@ -22,6 +22,7 @@ final class DecimalCalculatorTests: XCTestCase {
         decimalCalculator = nil
     }
     
+    // MARK: add func test code
     func testAdd() throws {
         let result = try decimalCalculator.add(first: "2", second: "3")
         XCTAssertEqual(result, "5.0")
@@ -35,6 +36,7 @@ final class DecimalCalculatorTests: XCTestCase {
         XCTAssertEqual(result, "-5.6")
     }
     
+    // MARK: subtract func test code
     func testSubtract() throws {
         let result = try decimalCalculator.subtract(first: "6", second: "3")
         XCTAssertEqual(result, "3.0")
@@ -52,6 +54,7 @@ final class DecimalCalculatorTests: XCTestCase {
         XCTAssertEqual(result, "-0.5")
     }
     
+    // MARK: multiply func test code
     func testMultiply() throws {
         let result = try decimalCalculator.multiply(first: "2", second: "4")
         XCTAssertEqual(result, "8.0")
@@ -69,6 +72,7 @@ final class DecimalCalculatorTests: XCTestCase {
         XCTAssertEqual(result, "6.0")
     }
     
+    // MARK: divide func test code
     func testDivide() throws {
         let result = try decimalCalculator.divide(first: "5.0", second: "2")
         XCTAssertEqual(result, "2.5")
@@ -89,6 +93,7 @@ final class DecimalCalculatorTests: XCTestCase {
         XCTAssertEqual(result, "14.35")
     }
     
+    // MARK: calculate func test code
     func testCalculate() throws {
         let result = try decimalCalculator.calculate(["3", "+", "-2", "*", "4", "+", "2"])
         XCTAssertEqual(result, "-3.0")
