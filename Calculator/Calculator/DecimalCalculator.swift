@@ -68,6 +68,8 @@ struct DecimalCalculator {
     
     /// 연산자가 입력되었을 때 공통으로 동작할 함수
     mutating func calculate(_ operator: DecimalOperator) {
+        saveCurrentStack()
+        
         numStack.push(current)
         
         switch `operator` {
@@ -85,6 +87,8 @@ struct DecimalCalculator {
         current = peekValue
     }
     
+    // stack을 임시 보관, 꺼내오는 메서드.
+    // 계산기에서 연산자를 +-나 */를 섞어서 연속으로 입력할 경우 이전 버전의 스택으로 다시 돌아와야한다.
     mutating func saveCurrentStack() {
         prevNumberStack = numStack.elements
         prevOperatorStack = operatorStack.elements
@@ -93,12 +97,20 @@ struct DecimalCalculator {
     mutating func loadCurrentStack() {
         numStack.elements = prevNumberStack
         operatorStack.elements = prevOperatorStack
+        
+        guard let peekValue = numStack.peek() else {
+            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
+            reset()
+            return
+        }
+        current = peekValue
     }
 }
 
 // MARK: - BasicCalculatable
 extension DecimalCalculator: BasicCalculatable {
     mutating func plus() {
+        
         calculate(.plus)
     }
     
