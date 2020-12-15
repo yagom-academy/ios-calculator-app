@@ -10,10 +10,23 @@ import Foundation
 
 struct CalculateStack<Element> {
     private var storage: [Element] = []
+
     public init() { }
+    
+    public var isEmpty: Bool {
+        return storage.isEmpty
+    }
+    
+    public var top: Element? {
+        return storage.last
+    }
     
     public mutating func push(_ element: Element) {
         storage.append(element)
+    }
+    
+    public mutating func removeAll() {
+        storage.removeAll()
     }
     
     @discardableResult
