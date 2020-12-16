@@ -52,25 +52,26 @@ struct BinaryCalculator {
     
     private func checkBinaryMaxLength(value: Int) -> Int {
         var newValue = value
-        let valueToString = String(value, radix: 2)
-        let valueLength = valueToString.count
         
         if (value > 0) {
             let positiveBinaryLimitSize = 9
-            if (getBinaryLengthSize(value) > positiveBinaryLimitSize) {
-                if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - positiveBinaryLimitSize)..<valueToString.endIndex]) {
-                    newValue = slicedValue
-                }
-            }
+            newValue = resizeBinaryLength(value, positiveBinaryLimitSize)
         } else if (value < 0) {
             let negativeBinaryLimitSize = 10
-            if (getBinaryLengthSize(value) > negativeBinaryLimitSize) {
-                if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - negativeBinaryLimitSize)..<valueToString.endIndex]) {
-                    newValue = slicedValue
-                }
+            newValue = resizeBinaryLength(value, negativeBinaryLimitSize)
+        }
+        
+        return newValue
+    }
+    
+    private func resizeBinaryLength(_ value: Int, _ limitLength: Int) -> Int {
+        var newValue = value
+        let valueToString = String(value, radix: 2)
+        let valueLength = valueToString.count
+        if (getBinaryLengthSize(value) > limitLength) {
+            if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex]) {
+                newValue = slicedValue
             }
-        } else {
-            newValue = value
         }
         
         return newValue
