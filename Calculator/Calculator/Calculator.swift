@@ -60,7 +60,8 @@ struct DecimalCalculator: BasicCalculator {
 }
 
 struct BinaryCalculator: BasicCalculator {
-    let operators: Set<String> = ["+","-","NOT", "AND", "OR","NOR","NAND","XOR","<<",">>"]
+    let operators: Set<String> = ["+","-","AND", "OR","NOR","NAND","XOR"]
+    let unaryOperators: Set<String> = ["NOT", "<<", ">>"]
     private var binaryAdder = Stack<Int>()
     
     mutating func calculate(by tappedOperator: String, of value: String) {
@@ -74,10 +75,6 @@ struct BinaryCalculator: BasicCalculator {
                 binaryAdder.push(operand)
             case "-":
                 binaryAdder.push(-operand)
-            case "NOT":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(~operatingValue)
-                }
             case "AND":
                 if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(operatingValue & operand)
@@ -97,6 +94,19 @@ struct BinaryCalculator: BasicCalculator {
             case "XOR":
                 if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(operatingValue ^ operand)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
+    mutating func calculate(by tappedOperator: String) {
+        if unaryOperators.contains(tappedOperator) {
+            switch tappedOperator {
+            case "NOT":
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                    binaryAdder.push(~operatingValue)
                 }
             case "<<":
                 var operatingValue = binaryAdder.pop() ?? 0
