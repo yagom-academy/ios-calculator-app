@@ -1,12 +1,12 @@
 import Foundation
 
 class BinaryCalculate: BinaryCalculator {
-    var binaryNumber = Stack<Int>()
-    var operatorSet = Stack<Operator>()
-    var inputNumber: Int?
-    var resultNumber: Int?
-    var inputOperator: Operator?
-    var presentOperator: Operator?
+    private var binaryNumber = Stack<Int>()
+    private var operatorSet = Stack<Operator>()
+    private var inputNumber: Int?
+    private var resultNumber: Int?
+    private var inputOperator: Operator?
+    private var presentOperator: Operator?
         
     func addition<Int>() -> Int {
         stackPush()
