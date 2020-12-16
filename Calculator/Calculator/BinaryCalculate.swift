@@ -1,6 +1,8 @@
 import Foundation
 
 class BinaryCalculate: BinaryCalculator {
+    typealias CalculatorType = Int
+    
     private var binaryNumber = Stack<Int>()
     private var operatorSet = Stack<Operator>()
     private var inputNumber: Int?
@@ -8,81 +10,81 @@ class BinaryCalculate: BinaryCalculator {
     private var inputOperator: Operator?
     private var presentOperator: Operator?
         
-    func addition<Int>() -> Int {
+    func addition() -> Int {
         stackPush()
         verifyPriorityOperator()
         
-        return resultNumber as! Int
+        return resultNumber!
     }
     
-    func subtraction<Int>() -> Int {
+    func subtraction() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
     
-    func and<Int>() -> Int {
+    func and() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
     
-    func nand<Int>() -> Int {
+    func nand() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
 
-    func or<Int>() -> Int {
+    func or() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
 
-    func xor<Int>() -> Int {
+    func xor() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
 
-    func nor<Int>() -> Int {
+    func nor() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
 
-    func not<Int>() -> Int {
+    func not() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
 
-    func leftShift<Int>() -> Int {
+    func leftShift() -> Int {
         stackPush()
         verifyPriorityOperator()
 
-        return resultNumber as! Int
-    }
-    
-    func rightShift<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
+        return resultNumber!
     }
     
-    func result<Int>() -> Int {
+    func rightShift() -> Int {
+        stackPush()
+        verifyPriorityOperator()
+
+        return resultNumber!
+    }
+    
+    func result() -> Int {
         operatorSet.push(element: inputOperator!)
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
     
     func clear() {

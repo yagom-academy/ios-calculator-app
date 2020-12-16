@@ -1,6 +1,8 @@
 import Foundation
 
 class DecimalCalculate: DecimalCalculator {
+    typealias CalculatorType = Double
+    
     private var decimalNumber = Stack<Double>()
     private var operatorSet = Stack<Operator>()
     private var inputNumber: Double?
@@ -8,39 +10,39 @@ class DecimalCalculate: DecimalCalculator {
     private var inputOperator: Operator?
     private var presentOperator: Operator?
     
-    func addition<Double>() -> Double {
+    func addition() -> Double {
         stackPush()
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
-    func subtraction<Double>() -> Double {
+    func subtraction() -> Double {
         stackPush()
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
-    func multiplication<Double>() -> Double {
+    func multiplication() -> Double {
         stackPush()
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
-    func division<Double>() -> Double {
+    func division() -> Double {
         stackPush()
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
-    func result<Double>() -> Double {
+    func result() -> Double {
         operatorSet.push(element: inputOperator!)
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
     func clear() {

@@ -1,9 +1,11 @@
 import Foundation
 
 protocol Calculator {
-    func addition<T>() -> T
-    func subtraction<T>() -> T
-    func result<T>() -> T
+    associatedtype CalculatorType
+    
+    func addition() -> CalculatorType
+    func subtraction() -> CalculatorType
+    func result() -> CalculatorType
     func clear()
     func stackPush()
     func verifyPriorityOperator()
@@ -11,18 +13,22 @@ protocol Calculator {
 }
 
 protocol DecimalCalculator: Calculator {
-    func multiplication<T>() -> T
-    func division<T>() -> T
+    associatedtype CalculatorType
+    
+    func multiplication() -> CalculatorType
+    func division() -> CalculatorType
 }
 
 protocol BinaryCalculator: Calculator {
-    func and<T>() -> T
-    func nand<T>() -> T
-    func or<T>() -> T
-    func xor<T>() -> T
-    func nor<T>() -> T
-    func not<T>() -> T
-    func leftShift<T>() -> T
-    func rightShift<T>() -> T
+    associatedtype CalculatorType
+    
+    func and() -> CalculatorType
+    func nand() -> CalculatorType
+    func or() -> CalculatorType
+    func xor() -> CalculatorType
+    func nor() -> CalculatorType
+    func not() -> CalculatorType
+    func leftShift() -> CalculatorType
+    func rightShift() -> CalculatorType
 }
 
