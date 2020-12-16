@@ -10,27 +10,43 @@ struct BinaryCalculator {
                 var intermediateCalculationToken: BinaryToken?
                 
                 if operatorToken.value == .bitwiseNOT {
-                    guard let firstToken = temporaryOperandStorage.pop() else { return nil }
-                    guard let singleOperand = firstToken as? BinaryOperand else { return nil }
+                    guard let firstToken = temporaryOperandStorage.pop() else {
+                        return nil
+                    }
+                    guard let singleOperand = firstToken as? BinaryOperand else {
+                        return nil
+                    }
                     let newValue = checkBinaryMaxLength(value: BinaryCalculation.calculate(singleOperand.value, 0, .bitwiseNOT))
                     intermediateCalculationToken = BinaryOperand(value: newValue)
                 } else {
-                    guard let secondToken = temporaryOperandStorage.pop() else { return nil }
-                    guard let firstToken = temporaryOperandStorage.pop() else { return nil }
-                    guard let secondOperand = secondToken as? BinaryOperand else { return nil }
-                    guard let firstOperand = firstToken as? BinaryOperand else { return nil }
+                    guard let secondToken = temporaryOperandStorage.pop() else {
+                        return nil
+                    }
+                    guard let firstToken = temporaryOperandStorage.pop() else {
+                        return nil
+                    }
+                    guard let secondOperand = secondToken as? BinaryOperand else {
+                        return nil
+                    }
+                    guard let firstOperand = firstToken as? BinaryOperand else {
+                        return nil
+                    }
                     let newValue = checkBinaryMaxLength(value: BinaryCalculation.calculate(firstOperand.value, secondOperand.value, operatorToken.value))
                     intermediateCalculationToken = BinaryOperand(value: newValue)
                 }
 
-                guard let intermediateCalculationResult = intermediateCalculationToken else { return nil }
+                guard let intermediateCalculationResult = intermediateCalculationToken else {
+                    return nil
+                }
                 temporaryOperandStorage.push(element: intermediateCalculationResult)
             default:
                 return nil
             }
         }
         
-        guard let calculationResultToken = temporaryOperandStorage.pop() else { return nil }
+        guard let calculationResultToken = temporaryOperandStorage.pop() else {
+            return nil
+        }
         return calculationResultToken
     }
     
