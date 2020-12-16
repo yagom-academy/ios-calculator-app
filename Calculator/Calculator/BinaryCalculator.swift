@@ -146,14 +146,13 @@ extension BinaryCalculator {
     func checkDigits(_ num: String) -> String {
         var currentString = num
         
-        guard currentString.count > 9 else {
+        if currentString.count > 9 {
+            let surplus = currentString.count - 9
+            currentString.removeLast(surplus)
+            return currentString
+        } else {
             return currentString
         }
-        
-        let surplus = currentString.count - 9
-        currentString.removeLast(surplus)
-        
-        return currentString
     }
 }
 

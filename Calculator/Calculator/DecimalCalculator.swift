@@ -154,13 +154,13 @@ extension DecimalCalculator {
     func checkDigits(_ num: String) -> String {
         var currentString = num
         
-        guard currentString.count > 9 else {
+        if currentString.count > 9 {
+            cutExtraDigits(&currentString)
+            checkLast(&currentString)
+            return currentString
+        } else {
             checkLast(&currentString)
             return currentString
         }
-        cutExtraDigits(&currentString)
-        checkLast(&currentString)
-        
-        return currentString
     }
 }
