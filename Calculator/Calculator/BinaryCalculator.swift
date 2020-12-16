@@ -60,8 +60,6 @@ struct BinaryCalculator {
             for _ in 1...operatorStack.count() {
                 operatePrev(someOperator)
             }
-        } else {
-            return
         }
     }
     
