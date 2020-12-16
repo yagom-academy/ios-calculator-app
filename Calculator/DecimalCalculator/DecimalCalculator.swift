@@ -70,7 +70,8 @@ struct DecimalCalculator {
         let valueLength = valueToString.count
         
         if (getIntegerLengthSize(value) > limitLength) {
-            if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex]){
+            let valueToStringSlicedIndexRange = valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex
+            if let slicedValue = Int(valueToString[valueToStringSlicedIndexRange]){
                 newValue = slicedValue
             }
         }
@@ -101,7 +102,8 @@ struct DecimalCalculator {
         
         if (getRealNumberLengthSize(value) > limitLength) {
             let valueToString = String(value)
-            if let slicedValue = Double(valueToString[valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: limitLength)]) {
+            let valueToStringSlicedIndexRange = valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: limitLength)
+            if let slicedValue = Double(valueToString[valueToStringSlicedIndexRange]) {
                 newValue = slicedValue
             }
         }
