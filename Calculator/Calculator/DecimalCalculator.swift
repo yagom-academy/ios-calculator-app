@@ -50,4 +50,8 @@ class DecimalCalculator {
     func pushOperandOnStack(_ operand: String) {
         self.operand.push(value: operand)
     }
+    
+    func pushOperatorOnStack(_ operator: Operator) {
+        self.`operator`.push(value: `operator`)
+    }
 }

@@ -46,4 +46,10 @@ class CalculatorTests: XCTestCase {
         systemUnderTest.pushOperandOnStack("10")
         XCTAssertEqual(systemUnderTest.operand.stack, ["3","10"])
     }
+    
+    func testPushToOperatorStack() {
+        systemUnderTest.pushOperatorOnStack(.addition)
+        systemUnderTest.pushOperatorOnStack(.multiplication)
+        XCTAssertEqual(systemUnderTest.`operator`.stack, [Calculator.Operator.addition, Calculator.Operator.multiplication])
+    }
 }
