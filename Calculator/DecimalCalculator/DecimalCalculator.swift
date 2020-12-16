@@ -66,10 +66,10 @@ struct DecimalCalculator {
     
     private func resizeIntegerLength(_ value: Int, _ limitLength: Int) -> Int {
         var newValue = value
-        let valueToString = String(value)
-        let valueLength = valueToString.count
-        
+    
         if (getIntegerLengthSize(value) > limitLength) {
+            let valueToString = String(value)
+            let valueLength = valueToString.count
             let valueToStringSlicedIndexRange = valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex
             if let slicedValue = Int(valueToString[valueToStringSlicedIndexRange]){
                 newValue = slicedValue
