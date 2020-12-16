@@ -70,9 +70,8 @@ struct DecimalCalculator {
         let valueLength = valueToString.count
         
         if (value > 0) {
-            let positiveIntegerLimitSize = 9
-            if (getIntegerLengthSize(value) > positiveIntegerLimitSize) {
-                if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - positiveIntegerLimitSize)..<valueToString.endIndex]){
+            if (getIntegerLengthSize(value) > limitLength) {
+                if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex]){
                     newValue = slicedValue
                 }
             }
@@ -90,22 +89,23 @@ struct DecimalCalculator {
         
         if (value > 0) {
             let positiveRealNumberLimitSize = 10
-            if (getRealNumberLengthSize(value) > positiveRealNumberLimitSize) {
-                let valueToString = String(value)
-                if let slicedValue = Double(valueToString[valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: positiveRealNumberLimitSize)]) {
-                    newValue = slicedValue
-                }
-            }
+            newValue = resizeRealNumberLength(value, positiveRealNumberLimitSize)
         } else if (value < 0) {
             let negativeIntegerLimitSize = 11
-            if (getRealNumberLengthSize(value) > negativeIntegerLimitSize) {
-                let valueToString = String(value)
-                if let slicedValue = Double(valueToString[valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: negativeIntegerLimitSize)]) {
-                    newValue = slicedValue
-                }
+            newValue = resizeRealNumberLength(value, negativeIntegerLimitSize)
+        }
+        
+        return newValue
+    }
+    
+    private func resizeRealNumberLength(_ value: Double, _ limitLength: Int) -> Double {
+        var newValue = value
+        
+        if (getRealNumberLengthSize(value) > limitLength) {
+            let valueToString = String(value)
+            if let slicedValue = Double(valueToString[valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: limitLength)]) {
+                newValue = slicedValue
             }
-        } else {
-            newValue = value
         }
         
         return newValue
