@@ -17,8 +17,8 @@ final class DecimalCalculatorTests: XCTestCase {
     }
 
     override func tearDown() {
-        super.tearDown()
         sut = nil
+        super.tearDown()
     }
 
     func testAdditionIntWithInt() throws {
