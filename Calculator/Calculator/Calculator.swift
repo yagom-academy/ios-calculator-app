@@ -65,73 +65,77 @@ struct BinaryCalculator: BasicCalculator {
     private var binaryAdder = Stack<Int>()
     
     mutating func calculate(by tappedOperator: String, of value: String) {
-        guard let operand = Int(value) else {
+        guard let operand = Int(value), operators.contains(tappedOperator) else {
             return
         }
         
-        if operators.contains(tappedOperator) {
-            switch tappedOperator {
-            case "+":
-                binaryAdder.push(operand)
-            case "-":
-                binaryAdder.push(-operand)
-            case "AND":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(operatingValue & operand)
-                }
-            case "OR":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(operatingValue | operand)
-                }
-            case "NOR":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(~(operatingValue | operand))
-                }
-            case "NAND":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(~(operatingValue & operand))
-                }
-            case "XOR":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(operatingValue ^ operand)
-                }
-            default:
-                return
+        switch tappedOperator {
+        case "+":
+            binaryAdder.push(operand)
+        case "-":
+            binaryAdder.push(-operand)
+        case "AND":
+            if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                binaryAdder.push(operatingValue & operand)
             }
+        case "OR":
+            if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                binaryAdder.push(operatingValue | operand)
+            }
+        case "NOR":
+            if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                binaryAdder.push(~(operatingValue | operand))
+            }
+        case "NAND":
+            if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                binaryAdder.push(~(operatingValue & operand))
+            }
+        case "XOR":
+            if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                binaryAdder.push(operatingValue ^ operand)
+            }
+        default:
+            return
         }
+        
     }
     
     mutating func calculate(by tappedOperator: String) {
-        if unaryOperators.contains(tappedOperator) {
-            switch tappedOperator {
-            case "NOT":
-                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
-                    binaryAdder.push(~operatingValue)
-                }
-            case "<<":
-                var operatingValue = binaryAdder.pop() ?? 0
-                operatingValue = operatingValue << 1
-                
-                if String(operatingValue,radix: 2).count > 9 {
-                    var convertedValue = String(operatingValue,radix: 2)
-                    convertedValue.removeFirst()
-                    operatingValue = Int(convertedValue, radix: 2) ?? 0
-                }
-                binaryAdder.push(operatingValue)
-            case ">>":
-                var operatingValue = binaryAdder.pop() ?? 0
-                operatingValue = operatingValue >> 1
-                
-                if String(operatingValue,radix: 2).count > 9 {
-                    var convertedValue = String(operatingValue,radix: 2)
-                    convertedValue.removeLast()
-                    operatingValue = Int(convertedValue, radix: 2) ?? 0
-                }
-                binaryAdder.push(operatingValue)
-            default:
-                return
-            }
+        guard unaryOperators.contains(tappedOperator) else {
+            return
         }
+        
+        switch tappedOperator {
+        case "NOT":
+            if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
+                binaryAdder.push(~operatingValue)
+            }
+        case "<<":
+            var operatingValue = binaryAdder.pop() ?? 0
+            operatingValue = operatingValue << 1
+            
+            if String(operatingValue,radix: 2).count > 9 {
+                var convertedValue = String(operatingValue,radix: 2)
+                convertedValue.removeFirst()
+                operatingValue = Int(convertedValue, radix: 2) ?? 0
+            }
+            
+            binaryAdder.push(operatingValue)
+        case ">>":
+            var operatingValue = binaryAdder.pop() ?? 0
+            operatingValue = operatingValue >> 1
+            
+            if String(operatingValue,radix: 2).count > 9 {
+                var convertedValue = String(operatingValue,radix: 2)
+                convertedValue.removeLast()
+                operatingValue = Int(convertedValue, radix: 2) ?? 0
+            }
+            
+            binaryAdder.push(operatingValue)
+        default:
+            return
+        }
+        
     }
     
     mutating func sumOfElementsInAdder() -> String {
@@ -145,7 +149,7 @@ struct BinaryCalculator: BasicCalculator {
         
         return String(result, radix:2).trimmed
     }
-
+    
     mutating func reset() {
         binaryAdder.removeAll()
     }
