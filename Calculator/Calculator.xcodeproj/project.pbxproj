@@ -145,8 +145,8 @@
 		41A1E9F025872D4E0048AAA3 /* BinaryOperation */ = {
 			isa = PBXGroup;
 			children = (
-				41A1E9F125872D5D0048AAA3 /* BinaryOperator.swift */,
 				41A1E9F425872D760048AAA3 /* BinaryOperatorPrecedence.swift */,
+				41A1E9F125872D5D0048AAA3 /* BinaryOperator.swift */,
 				41A1E9F725872D880048AAA3 /* BinaryOperand.swift */,
 			);
 			path = BinaryOperation;
