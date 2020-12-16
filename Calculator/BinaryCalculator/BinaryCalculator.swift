@@ -69,7 +69,8 @@ struct BinaryCalculator {
         let valueToString = String(value, radix: 2)
         let valueLength = valueToString.count
         if (getBinaryLengthSize(value) > limitLength) {
-            if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex]) {
+            let valueToStringSlicedIndexRange = valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex
+            if let slicedValue = Int(valueToString[valueToStringSlicedIndexRange]) {
                 newValue = slicedValue
             }
         }
