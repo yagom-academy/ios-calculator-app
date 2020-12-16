@@ -9,8 +9,8 @@ import Foundation
 
 protocol BasicCalculator {
     var operators: Set<String> { get }
-    mutating func calculate(value: String, by tappedOperator: String)
-    mutating func result()
+    mutating func calculate(by tappedOperator: String, of value: String)
+    mutating func showResult() -> String
     mutating func reset()
 }
 
@@ -18,7 +18,7 @@ struct DecimalCalculator: BasicCalculator {
     let operators: Set<String> = ["+","-","*","/"]
     private var decimalAdder = Stack<Double>()
     
-    mutating func calculate(value: String, by tappedOperator: String) {
+    mutating func calculate(by tappedOperator: String, of value: String) {
         guard operators.contains(tappedOperator),
               let operand = Double(value) else {
             return
@@ -42,8 +42,7 @@ struct DecimalCalculator: BasicCalculator {
         }
     }
     
-
-    mutating func result() {
+    mutating func showResult() -> String {
         var result: Double = 0
         
         while !decimalAdder.isEmpty {
@@ -51,11 +50,12 @@ struct DecimalCalculator: BasicCalculator {
                 result += valueToAdd
             }
         }
-        decimalAdder.push(result)
+        
+        return String(result).trimmed
     }
     
     mutating func reset() {
-            decimalAdder.removeAll()
+        decimalAdder.removeAll()
     }
 }
 
@@ -63,7 +63,7 @@ struct BinaryCalculator: BasicCalculator {
     let operators: Set<String> = ["+","-","NOT", "AND", "OR","NOR","NAND","XOR","<<",">>"]
     private var binaryAdder = Stack<Int>()
     
-    mutating func calculate(value: String, by tappedOperator: String) {
+    mutating func calculate(by tappedOperator: String, of value: String) {
         guard let operand = Int(value) else {
             return
         }
@@ -75,61 +75,56 @@ struct BinaryCalculator: BasicCalculator {
             case "-":
                 binaryAdder.push(-operand)
             case "NOT":
-                result()
-                if let operatingValue = binaryAdder.pop() {
+                if let operatingValue = Int(self.showResult(), radix: 2) {
                     binaryAdder.push(~operatingValue)
                 }
             case "AND":
-                result()
-                if let operatingValue = binaryAdder.pop() {
+                if let operatingValue = Int(self.showResult(), radix: 2) {
                     binaryAdder.push(operatingValue & operand)
                 }
             case "OR":
-                result()
-                if let operatingValue = binaryAdder.pop() {
+                if let operatingValue = Int(self.showResult(), radix: 2) {
                     binaryAdder.push(operatingValue | operand)
                 }
             case "NOR":
-                result()
-                if let operatingValue = binaryAdder.pop() {
+                if let operatingValue = Int(self.showResult(), radix: 2) {
                     binaryAdder.push(~(operatingValue | operand))
                 }
             case "NAND":
-                result()
-                if let operatingValue = binaryAdder.pop() {
+                if let operatingValue = Int(self.showResult(), radix: 2) {
                     binaryAdder.push(~(operatingValue & operand))
                 }
             case "XOR":
-                result()
-                if let operatingValue = binaryAdder.pop() {
+                if let operatingValue = Int(self.showResult(), radix: 2) {
                     binaryAdder.push(operatingValue ^ operand)
                 }
             case "<<":
-                result()
-                if let operatingValue = binaryAdder.pop() {
-                    binaryAdder.push(operatingValue << 1)
-                }
-            case ">>":
-                result()
-                if let operatingValue = binaryAdder.pop() {
-                    binaryAdder.push(operatingValue >> 1)
-                }
-            case "=":
-                var result: Int = 0
+                var operatingValue = binaryAdder.pop() ?? 0
+                operatingValue = operatingValue << 1
                 
-                while !binaryAdder.isEmpty {
-                    if let valueToAdd = binaryAdder.pop() {
-                        result += valueToAdd
-                    }
+                if String(operatingValue,radix: 2).count > 9 {
+                    var convertedValue = String(operatingValue,radix: 2)
+                    convertedValue.removeFirst()
+                    operatingValue = Int(convertedValue, radix: 2) ?? 0
                 }
-                binaryAdder.push(result)
+                binaryAdder.push(operatingValue)
+            case ">>":
+                var operatingValue = binaryAdder.pop() ?? 0
+                operatingValue = operatingValue >> 1
+                
+                if String(operatingValue,radix: 2).count > 9 {
+                    var convertedValue = String(operatingValue,radix: 2)
+                    convertedValue.removeLast()
+                    operatingValue = Int(convertedValue, radix: 2) ?? 0
+                }
+                binaryAdder.push(operatingValue)
             default:
                 return
             }
         }
     }
- 
-    mutating func result() {
+    
+    mutating func showResult() -> String {
         var result: Int = 0
         
         while !binaryAdder.isEmpty {
@@ -137,9 +132,10 @@ struct BinaryCalculator: BasicCalculator {
                 result += valueToAdd
             }
         }
-        binaryAdder.push(result)
+        
+        return String(result, radix:2).trimmed
     }
-    
+
     mutating func reset() {
         binaryAdder.removeAll()
     }
