@@ -21,6 +21,23 @@ final class BinaryCalculatorTests: XCTestCase {
         super.tearDown()
     }
     
+    func testEnterNumber() throws {
+        let defaultBufferValue = "0"
+        XCTAssertEqual(try! sut.equal(), defaultBufferValue, "⚠️ default buffer value is wrong❗️")
+        
+        //1. given (formal: 1)
+        try! sut.enterNumber("1")
+        
+        //2. when
+        let result = try! sut.equal()
+        let expectedValue = "1"
+        let wrongValue = "0"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ enterNumber function not works well❗️")
+        XCTAssertNotEqual(result, wrongValue, "⚠️ enterNumber function not works well❗️")
+    }
+    
     func testEqual() throws {
         //1. given (formal: )
         //2. when
@@ -367,11 +384,11 @@ final class BinaryCalculatorTests: XCTestCase {
         try! sut.enterNumber("0")
         try! sut.toggleSign()
         try! sut.not()
-
+        
         //2. when
         let result = try! sut.equal()
         let expectedValue = "1001"
-
+        
         //3. then
         XCTAssertEqual(result, expectedValue, "⚠️ not function with toggleSign is wrong❗️")
     }
@@ -383,7 +400,7 @@ final class BinaryCalculatorTests: XCTestCase {
         try! sut.enterNumber("1")
         try! sut.enterNumber("0")
         try! sut.rightShift()
-
+        
         //2. when
         let result = try! sut.equal()
         let expectedValue = "101"
@@ -400,7 +417,7 @@ final class BinaryCalculatorTests: XCTestCase {
         try! sut.enterNumber("0")
         try! sut.toggleSign()
         try! sut.rightShift()
-
+        
         //2. when
         let result = try! sut.equal()
         let expectedValue = "-101"
@@ -416,7 +433,7 @@ final class BinaryCalculatorTests: XCTestCase {
         try! sut.enterNumber("1")
         try! sut.enterNumber("0")
         try! sut.leftShift()
-
+        
         //2. when
         let result = try! sut.equal()
         let expectedValue = "10100"
@@ -433,7 +450,7 @@ final class BinaryCalculatorTests: XCTestCase {
         try! sut.enterNumber("0")
         try! sut.toggleSign()
         try! sut.leftShift()
-
+        
         //2. when
         let result = try! sut.equal()
         let expectedValue = "-10100"

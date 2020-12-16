@@ -21,6 +21,23 @@ final class DecimalCalculatorTests: XCTestCase {
         super.tearDown()
     }
     
+    func testEnterNumber() throws {
+        let defaultBufferValue = "0"
+        XCTAssertEqual(try! sut.equal(), defaultBufferValue, "⚠️ default buffer value is wrong❗️")
+        
+        //1. given (formal: 1)
+        try! sut.enterNumber("1")
+        
+        //2. when
+        let result = try! sut.equal()
+        let expectedValue = "1"
+        let wrongValue = "0"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ enterNumber function not works well❗️")
+        XCTAssertNotEqual(result, wrongValue, "⚠️ enterNumber function not works well❗️")
+    }
+    
     func testEqual() throws {
         //1. given (formal: )
         //2. when
