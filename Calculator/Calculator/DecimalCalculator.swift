@@ -10,29 +10,27 @@ struct DecimalCalculator {
     var current: String = "0"
     
     /// 연산자가 입력되었을 때 공통으로 동작할 함수
-    mutating func calculate(_ operator: DecimalOperator) {
+    mutating func calculate(_ operator: DecimalOperator) throws {
         saveCurrentStack()
         numStack.push(checkDigits(current))
         
         switch `operator` {
-        case .plus, .minus: useAllOperator()
-        case .multiple, .divide: checkPrevOperator()
+        case .plus, .minus: try useAllOperator()
+        case .multiple, .divide: try checkPrevOperator()
         }
         
         operatorStack.push(`operator`)
         
         guard let peekValue = numStack.peek() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         current = peekValue
     }
     
     /// 스택에서 이전 연산자를 꺼내어 연산
-    mutating func calculatePrevOperator(_ prevOperator: DecimalOperator) {
+    mutating func calculatePrevOperator(_ prevOperator: DecimalOperator) throws {
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         
         guard let new: Double = Double(firstPop), let old: Double = Double(secondPop) else {
@@ -61,22 +59,21 @@ struct DecimalCalculator {
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
-    mutating func useAllOperator() {
+    mutating func useAllOperator() throws {
         if let someOperator = operatorStack.pop() {
             for _ in 1...operatorStack.count() {
-                calculatePrevOperator(someOperator)
+                try calculatePrevOperator(someOperator)
             }
         }
     }
     
     /// 스택에서 이전 연산자를 확인 후, 연산을 결정
-    mutating func checkPrevOperator() {
+    mutating func checkPrevOperator() throws {
         if operatorStack.elements.last == .multiple || operatorStack.elements.last == .divide {
             guard let someOperator = operatorStack.pop() else {
-                handleError(errorCase: .etc)
-                return
+                throw CalculatorError.etc
             }
-            calculatePrevOperator(someOperator)
+            try calculatePrevOperator(someOperator)
         }
     }
     
@@ -87,13 +84,12 @@ struct DecimalCalculator {
         prevOperatorStack = operatorStack.elements
     }
     
-    mutating func loadCurrentStack() {
+    mutating func loadCurrentStack() throws {
         numStack.elements = prevNumberStack
         operatorStack.elements = prevOperatorStack
         
         guard let peekValue = numStack.peek() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         current = peekValue
     }
@@ -107,13 +103,13 @@ extension DecimalCalculator {
         current = "0"
     }
     
-    mutating func printResult() {
+    // 처리를 해줄건지.
+    mutating func printResult() throws {
         numStack.push(current)
-        useAllOperator()
-        
+        try useAllOperator()
+
         guard let peekValue = numStack.peek() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         current = peekValue
     }
@@ -153,13 +149,5 @@ extension DecimalCalculator {
             checkLast(&currentString)
             return currentString
         }
-    }
-}
-
-// MARK: - 에러 메서드
-extension DecimalCalculator {
-    mutating func handleError(errorCase: CalculatorError) {
-        print(errorCase.rawValue + "계산기를 초기화합니다.")
-        reset()
     }
 }
