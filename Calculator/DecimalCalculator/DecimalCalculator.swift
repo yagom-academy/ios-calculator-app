@@ -9,8 +9,12 @@ struct DecimalCalculator {
             case let realNumberOperandToken as RealNumberOperand:
                 temporaryOperandStorage.push(element: realNumberOperandToken)
             case let operatorToken as DecimalOperator:
-                guard let secondToken = temporaryOperandStorage.pop() else { return nil }
-                guard let firstToken = temporaryOperandStorage.pop() else { return nil }
+                guard let secondToken = temporaryOperandStorage.pop() else {
+                    return nil
+                }
+                guard let firstToken = temporaryOperandStorage.pop() else {
+                    return nil
+                }
                 var intermediateCalculationToken: DecimalToken?
                 
                 if let secondOperand = secondToken as? IntegerOperand {
@@ -31,14 +35,18 @@ struct DecimalCalculator {
                     }
                 }
                 
-                guard let intermediateCalculationResult = intermediateCalculationToken else { return nil }
+                guard let intermediateCalculationResult = intermediateCalculationToken else {
+                    return nil
+                }
                 temporaryOperandStorage.push(element: intermediateCalculationResult)
             default:
                 return nil
             }
         }
         
-        guard let calculationResultToken = temporaryOperandStorage.pop() else { return nil }
+        guard let calculationResultToken = temporaryOperandStorage.pop() else {
+            return nil
+        }
         return calculationResultToken
     }
     
