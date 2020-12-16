@@ -9,7 +9,7 @@ import Foundation
 
 class DecimalCalculator {
     var operand = Stack<String>()
-    var `operator` = Stack<String>()
+    var `operator` = Stack<Operator>()
     var priority = Stack<Int>()
     
     func printStack() {
