@@ -54,7 +54,7 @@ struct DecimalCalculator {
         case .multiple:
             newValue = old * new
         case .divide:
-            guard new != 0 else {
+            if new == 0 {
                 current = "오류"
                 return
             }
