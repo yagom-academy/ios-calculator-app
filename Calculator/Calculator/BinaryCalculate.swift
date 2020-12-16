@@ -110,31 +110,31 @@ class BinaryCalculate: BinaryCalculator {
     
     func operate(_ present: Operator) {
         let backNumber = String(binaryNumber.pop())
-        let binaryBackNumber = Int(backNumber, radix: 2)
+        guard let binaryBackNumber = Int(backNumber, radix: 2) else { return }
         let frontNumber = String(binaryNumber.pop())
-        let binaryFrontNumber = Int(frontNumber, radix: 2)
+        guard let binaryFrontNumber = Int(frontNumber, radix: 2) else { return }
 
         switch present {
             case .addition:
-                resultNumber = binaryFrontNumber! + binaryBackNumber!
+                resultNumber = binaryFrontNumber + binaryBackNumber
             case .subtraction:
-                resultNumber = binaryFrontNumber! - binaryBackNumber!
+                resultNumber = binaryFrontNumber - binaryBackNumber
             case .and:
-                resultNumber = binaryFrontNumber! & binaryBackNumber!
+                resultNumber = binaryFrontNumber & binaryBackNumber
             case .nand:
-                resultNumber = ~(binaryFrontNumber! & binaryBackNumber!)
+                resultNumber = ~(binaryFrontNumber & binaryBackNumber)
             case .or:
-                resultNumber = binaryFrontNumber! | binaryBackNumber!
+                resultNumber = binaryFrontNumber | binaryBackNumber
             case .xor:
-                resultNumber = binaryFrontNumber! ^ binaryBackNumber!
+                resultNumber = binaryFrontNumber ^ binaryBackNumber
             case .nor:
-                resultNumber = ~(binaryFrontNumber! | binaryBackNumber!)
+                resultNumber = ~(binaryFrontNumber | binaryBackNumber)
             case .not:
-                resultNumber = ~(binaryBackNumber!)
+                resultNumber = ~(binaryBackNumber)
             case .leftShift:
-                resultNumber = binaryBackNumber! << 1
+                resultNumber = binaryBackNumber << 1
             case .rightShift:
-                resultNumber = binaryBackNumber! << 1
+                resultNumber = binaryBackNumber << 1
             default:
                 print("연산자가 잘못되었습니다.")
         }
