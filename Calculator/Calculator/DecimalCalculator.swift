@@ -1,6 +1,5 @@
 
 struct DecimalCalculator {
-    
     var numStack = Stack<String>()
     var operatorStack = Stack<DecimalOperator>()
     
@@ -13,7 +12,6 @@ struct DecimalCalculator {
     /// 연산자가 입력되었을 때 공통으로 동작할 함수
     mutating func calculate(_ operator: DecimalOperator) {
         saveCurrentStack()
-        
         numStack.push(checkDigits(current))
         
         switch `operator` {
@@ -103,7 +101,6 @@ struct DecimalCalculator {
 
 // MARK: - 기타 메서드
 extension DecimalCalculator {
-    
     mutating func reset() {
         numStack.elements = []
         operatorStack.elements = []
@@ -125,7 +122,6 @@ extension DecimalCalculator {
 // MARK: - 자릿수 9자리로 제한
 extension DecimalCalculator {
     func cutExtraDigits(_ num: inout String) {
-
         if num.contains("-") && num.contains(".") {
             let sulplus = num.count - 11
             num.removeLast(sulplus)

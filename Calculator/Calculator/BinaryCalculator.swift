@@ -1,6 +1,5 @@
 
 struct BinaryCalculator {
-    
     var numStack = Stack<String>()
     var operatorStack = Stack<BinaryOperator>()
     
@@ -26,7 +25,6 @@ struct BinaryCalculator {
     
     /// 스택에서 이전 연산자를 꺼내어 연산
     mutating func calculatePrevOperator(_ prevOperator: BinaryOperator) {
-
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
             handleError(errorCase: .numStackisEmpty)
             return
@@ -75,7 +73,6 @@ struct BinaryCalculator {
 
 // MARK: - 단항 연산
 extension BinaryCalculator {
-
     mutating func not() {
         guard let convertedCurrent = Int(current, radix: 2) else {
             print("오류")
@@ -117,7 +114,6 @@ extension BinaryCalculator {
 
 // MARK: - 기타 메서드
 extension BinaryCalculator {
-
     mutating func reset() {
         numStack.elements = []
         operatorStack.elements = []
