@@ -1,12 +1,12 @@
 import Foundation
 
 class DecimalCalculate: DecimalCalculator {
-    var decimalNumber = Stack<Double>()
-    var operatorSet = Stack<Operator>()
-    var inputNumber: Double?
-    var resultNumber: Double?
-    var inputOperator: Operator?
-    var presentOperator: Operator?
+    private var decimalNumber = Stack<Double>()
+    private var operatorSet = Stack<Operator>()
+    private var inputNumber: Double?
+    private var resultNumber: Double?
+    private var inputOperator: Operator?
+    private var presentOperator: Operator?
     
     func addition<Double>() -> Double {
         stackPush()
