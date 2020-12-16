@@ -135,9 +135,9 @@
 		41A1E9E625872CED0048AAA3 /* BinaryAnalyzer */ = {
 			isa = PBXGroup;
 			children = (
+				41A1E9ED25872D300048AAA3 /* BinaryToken.swift */,
 				41A1E9E725872D010048AAA3 /* BinaryExpressionAnalyzer.swift */,
 				41A1E9EA25872D1C0048AAA3 /* BinaryTokenAnalyzer.swift */,
-				41A1E9ED25872D300048AAA3 /* BinaryToken.swift */,
 			);
 			path = BinaryAnalyzer;
 			sourceTree = "<group>";
