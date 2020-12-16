@@ -32,7 +32,7 @@ struct DecimalCalculator {
     }
     
     /// 스택에서 이전 연산자를 꺼내어 연산
-    mutating func operatePrev(_ prevOperator: DecimalOperator) {
+    mutating func calculatePrevOperator(_ prevOperator: DecimalOperator) {
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
             print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
             reset()
@@ -68,7 +68,7 @@ struct DecimalCalculator {
     mutating func useAllOperator() {
         if let someOperator = operatorStack.pop() {
             for _ in 1...operatorStack.count() {
-                operatePrev(someOperator)
+                calculatePrevOperator(someOperator)
             }
         }
     }
@@ -81,7 +81,7 @@ struct DecimalCalculator {
                 reset()
                 return
             }
-            operatePrev(someOperator)
+            calculatePrevOperator(someOperator)
         }
     }
     

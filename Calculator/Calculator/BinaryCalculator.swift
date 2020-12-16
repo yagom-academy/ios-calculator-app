@@ -26,7 +26,7 @@ struct BinaryCalculator {
     }
     
     /// 스택에서 이전 연산자를 꺼내어 연산
-    mutating func operatePrev(_ prevOperator: BinaryOperator) {
+    mutating func calculatePrevOperator(_ prevOperator: BinaryOperator) {
 
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
             print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
@@ -58,7 +58,7 @@ struct BinaryCalculator {
     mutating func useAllOperator() {
         if let someOperator = operatorStack.pop() {
             for _ in 1...operatorStack.count() {
-                operatePrev(someOperator)
+                calculatePrevOperator(someOperator)
             }
         }
     }
@@ -71,7 +71,7 @@ struct BinaryCalculator {
                 reset()
                 return
             }
-            operatePrev(someOperator)
+            calculatePrevOperator(someOperator)
         }
     }
 }
