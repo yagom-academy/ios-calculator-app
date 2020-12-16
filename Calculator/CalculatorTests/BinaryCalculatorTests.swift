@@ -20,6 +20,28 @@ final class BinaryCalculatorTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
+    
+    func testEqual() throws {
+        //1. given (formal: )
+        //2. when
+        var result = try! sut.equal()
+        var expectedValue = "0"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ equal function not works well❗️")
+        
+        //1. given (formal: 101)
+        try! sut.enterNumber("1")
+        try! sut.enterNumber("0")
+        try! sut.enterNumber("1")
+        
+        //2. when
+        result = try! sut.equal()
+        expectedValue = "101"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ equal function not works well❗️")
+    }
 
     func testAddition() throws {
         //1. given (formula : 1010 + 10)

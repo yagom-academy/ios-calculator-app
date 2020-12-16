@@ -20,6 +20,26 @@ final class DecimalCalculatorTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
+    
+    func testEqual() throws {
+        //1. given (formal: )
+        //2. when
+        var result = try! sut.equal()
+        var expectedValue = "0"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ equal function not works well❗️")
+        
+        //1. given (formal: 5)
+        try! sut.enterNumber("5")
+        
+        //2. when
+        result = try! sut.equal()
+        expectedValue = "5"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ equal function not works well❗️")
+    }
 
     func testAdditionIntWithInt() throws {
         //1. given (formual : 13 + 5)
