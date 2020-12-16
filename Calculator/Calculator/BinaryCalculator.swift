@@ -6,28 +6,26 @@ struct BinaryCalculator {
     var current: String = "0"
     
     /// 연산자가 입력되었을 때 공통으로 동작할 함수
-    mutating  func calculate(_ operator: BinaryOperator) {
+    mutating  func calculate(_ operator: BinaryOperator) throws {
         numStack.push(checkDigits(current))
         
         switch `operator` {
-        case .and, .nand: checkPrevOperator()
-        default: useAllOperator()
+        case .and, .nand: try checkPrevOperator()
+        default: try useAllOperator()
         }
         
         operatorStack.push(`operator`)
 
         guard let peekValue = numStack.peek() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         current = peekValue
     }
     
     /// 스택에서 이전 연산자를 꺼내어 연산
-    mutating func calculatePrevOperator(_ prevOperator: BinaryOperator) {
+    mutating func calculatePrevOperator(_ prevOperator: BinaryOperator) throws {
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         
         guard let new: Int = Int(firstPop, radix: 2), let old: Int = Int(secondPop, radix: 2) else {
@@ -51,40 +49,37 @@ struct BinaryCalculator {
     }
     
     /// 스택에서 모든 연산자를 꺼내어 연산
-    mutating func useAllOperator() {
+    mutating func useAllOperator() throws {
         if let someOperator = operatorStack.pop() {
             for _ in 1...operatorStack.count() {
-                calculatePrevOperator(someOperator)
+                try calculatePrevOperator(someOperator)
             }
         }
     }
     
     /// 스택에서 이전 연산자를 확인 후, 연산을 결정
-    mutating func checkPrevOperator() {
+    mutating func checkPrevOperator() throws {
         if operatorStack.elements.last == .and || operatorStack.elements.last == .nand {
             guard let someOperator = operatorStack.pop() else {
-                handleError(errorCase: .etc)
-                return
+                throw CalculatorError.etc
             }
-            calculatePrevOperator(someOperator)
+            try calculatePrevOperator(someOperator)
         }
     }
 }
 
 // MARK: - 단항 연산
 extension BinaryCalculator {
-    mutating func not() {
+    mutating func not() throws {
         guard let convertedCurrent = Int(current, radix: 2) else {
-            print("오류")
-            return
+            throw CalculatorError.etc
         }
         
         let invertedCurrent = ~(convertedCurrent)
         numStack.push(String(invertedCurrent, radix: 2))
         
         guard let peekValue = numStack.peek() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         current = peekValue
     }
@@ -120,13 +115,12 @@ extension BinaryCalculator {
         current = "0"
     }
     
-    mutating func printResult() {
+    mutating func printResult() throws {
         numStack.push(current)
-        useAllOperator()
+        try useAllOperator()
 
         guard let peekValue = numStack.peek() else {
-            handleError(errorCase: .numStackisEmpty)
-            return
+            throw CalculatorError.numStackisEmpty
         }
         current = peekValue
     }
@@ -144,14 +138,6 @@ extension BinaryCalculator {
         } else {
             return currentString
         }
-    }
-}
-
-// MARK: - 에러 메서드
-extension BinaryCalculator {
-    mutating func handleError(errorCase: CalculatorError) {
-        print(errorCase.rawValue + "계산기를 초기화합니다.")
-        reset()
     }
 }
 
