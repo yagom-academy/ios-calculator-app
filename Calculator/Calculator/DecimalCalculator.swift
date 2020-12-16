@@ -46,4 +46,8 @@ class DecimalCalculator {
         let result = oldOperand / newOperand
         return result
     }
+    
+    func pushOperandOnStack(_ operand: String) {
+        self.operand.push(value: operand)
+    }
 }

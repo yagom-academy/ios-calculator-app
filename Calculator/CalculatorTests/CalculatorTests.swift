@@ -12,13 +12,13 @@ class CalculatorTests: XCTestCase {
     private var systemUnderTest: DecimalCalculator!
     
     override func setUpWithError() throws {
-        systemUnderTest = DecimalCalculator()
         super.setUp()
+        systemUnderTest = DecimalCalculator()
     }
 
     override func tearDownWithError() throws {
-        super.tearDown()
         systemUnderTest = nil
+        super.tearDown()
     }
     
     func testAdditionBasicFunction() {
@@ -39,5 +39,11 @@ class CalculatorTests: XCTestCase {
     
     func testDivisionAboutZero() {
         XCTAssertEqual(systemUnderTest.divide(oldOperand: 2, newOperand: 0), Double.infinity)
+    }
+    
+    func testPushToOperandStack() {
+        systemUnderTest.pushOperandOnStack("3")
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertEqual(systemUnderTest.operand.stack, ["3","10"])
     }
 }
