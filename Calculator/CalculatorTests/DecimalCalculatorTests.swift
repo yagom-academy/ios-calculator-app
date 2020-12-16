@@ -40,6 +40,19 @@ final class DecimalCalculatorTests: XCTestCase {
         //3. then
         XCTAssertEqual(result, expectedValue, "⚠️ equal function not works well❗️")
     }
+    
+    func testClear() throws {
+        //1. given (formal: )
+        try! sut.enterNumber("5")
+        
+        //2. when
+        try! sut.clear()
+        let result = try! sut.equal()
+        let expectedValue = "0"
+        
+        //3. then
+        XCTAssertEqual(result, expectedValue, "⚠️ clear function not works well❗️")
+    }
 
     func testAdditionIntWithInt() throws {
         //1. given (formual : 13 + 5)
