@@ -10,7 +10,7 @@ import Foundation
 protocol BasicCalculator {
     var operators: Set<String> { get }
     mutating func calculate(by tappedOperator: String, of value: String)
-    mutating func showResult() -> String
+    mutating func sumOfElementsInAdder() -> String
     mutating func reset()
 }
 
@@ -42,7 +42,7 @@ struct DecimalCalculator: BasicCalculator {
         }
     }
     
-    mutating func showResult() -> String {
+    mutating func sumOfElementsInAdder() -> String {
         var result: Double = 0
         
         while !decimalAdder.isEmpty {
@@ -75,27 +75,27 @@ struct BinaryCalculator: BasicCalculator {
             case "-":
                 binaryAdder.push(-operand)
             case "NOT":
-                if let operatingValue = Int(self.showResult(), radix: 2) {
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(~operatingValue)
                 }
             case "AND":
-                if let operatingValue = Int(self.showResult(), radix: 2) {
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(operatingValue & operand)
                 }
             case "OR":
-                if let operatingValue = Int(self.showResult(), radix: 2) {
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(operatingValue | operand)
                 }
             case "NOR":
-                if let operatingValue = Int(self.showResult(), radix: 2) {
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(~(operatingValue | operand))
                 }
             case "NAND":
-                if let operatingValue = Int(self.showResult(), radix: 2) {
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(~(operatingValue & operand))
                 }
             case "XOR":
-                if let operatingValue = Int(self.showResult(), radix: 2) {
+                if let operatingValue = Int(sumOfElementsInAdder(), radix: 2) {
                     binaryAdder.push(operatingValue ^ operand)
                 }
             case "<<":
@@ -124,7 +124,7 @@ struct BinaryCalculator: BasicCalculator {
         }
     }
     
-    mutating func showResult() -> String {
+    mutating func sumOfElementsInAdder() -> String {
         var result: Int = 0
         
         while !binaryAdder.isEmpty {
