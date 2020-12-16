@@ -12,8 +12,10 @@ struct BinaryTokenAnalyzer {
                     temporaryOperatorStorage.push(element: operatorToken)
                 } else {
                     while let previousStoredOperatorToken = temporaryOperatorStorage.peek(), previousStoredOperatorToken >= operatorToken {
+                        guard let previousStoredOperatorToken = temporaryOperatorStorage.pop() else {
+                            return nil
+                        }
                         postfixExpression.append(previousStoredOperatorToken)
-                        _ = temporaryOperatorStorage.pop()
                     }
                     temporaryOperatorStorage.push(element: operatorToken)
                 }

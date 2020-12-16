@@ -9,8 +9,12 @@ struct DecimalCalculator {
             case let realNumberOperandToken as RealNumberOperand:
                 temporaryOperandStorage.push(element: realNumberOperandToken)
             case let operatorToken as DecimalOperator:
-                guard let secondToken = temporaryOperandStorage.pop() else { return nil }
-                guard let firstToken = temporaryOperandStorage.pop() else { return nil }
+                guard let secondToken = temporaryOperandStorage.pop() else {
+                    return nil
+                }
+                guard let firstToken = temporaryOperandStorage.pop() else {
+                    return nil
+                }
                 var intermediateCalculationToken: DecimalToken?
                 
                 if let secondOperand = secondToken as? IntegerOperand {
@@ -31,35 +35,44 @@ struct DecimalCalculator {
                     }
                 }
                 
-                guard let intermediateCalculationResult = intermediateCalculationToken else { return nil }
+                guard let intermediateCalculationResult = intermediateCalculationToken else {
+                    return nil
+                }
                 temporaryOperandStorage.push(element: intermediateCalculationResult)
             default:
                 return nil
             }
         }
         
-        guard let calculationResultToken = temporaryOperandStorage.pop() else { return nil }
+        guard let calculationResultToken = temporaryOperandStorage.pop() else {
+            return nil
+        }
         return calculationResultToken
     }
     
     private func checkIntegerMaxLength(value: Int) -> Int {
         var newValue = value
-        let valueToString = String(value)
-        let valueLength = valueToString.count
         
         if (value > 0) {
             let positiveIntegerLimitSize = 9
-            if (getIntegerLengthSize(value) > positiveIntegerLimitSize) {
-                if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - positiveIntegerLimitSize)..<valueToString.endIndex]){
-                    newValue = slicedValue
-                }
-            }
+            newValue = resizeIntegerLength(value, positiveIntegerLimitSize)
         } else if (value < 0) {
             let negativeIntegerLimitSize = 10
-            if (getIntegerLengthSize(value) > negativeIntegerLimitSize) {
-                if let slicedValue = Int(valueToString[valueToString.index(valueToString.startIndex, offsetBy: valueLength - negativeIntegerLimitSize)..<valueToString.endIndex]){
-                    newValue = slicedValue
-                }
+            newValue = resizeIntegerLength(value, negativeIntegerLimitSize)
+        }
+        
+        return newValue
+    }
+    
+    private func resizeIntegerLength(_ value: Int, _ limitLength: Int) -> Int {
+        var newValue = value
+    
+        if (getIntegerLengthSize(value) > limitLength) {
+            let valueToString = String(value)
+            let valueLength = valueToString.count
+            let valueToStringSlicedIndexRange = valueToString.index(valueToString.startIndex, offsetBy: valueLength - limitLength)..<valueToString.endIndex
+            if let slicedValue = Int(valueToString[valueToStringSlicedIndexRange]){
+                newValue = slicedValue
             }
         }
         
@@ -75,22 +88,24 @@ struct DecimalCalculator {
         
         if (value > 0) {
             let positiveRealNumberLimitSize = 10
-            if (getRealNumberLengthSize(value) > positiveRealNumberLimitSize) {
-                let valueToString = String(value)
-                if let slicedValue = Double(valueToString[valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: positiveRealNumberLimitSize)]) {
-                    newValue = slicedValue
-                }
-            }
+            newValue = resizeRealNumberLength(value, positiveRealNumberLimitSize)
         } else if (value < 0) {
             let negativeIntegerLimitSize = 11
-            if (getRealNumberLengthSize(value) > negativeIntegerLimitSize) {
-                let valueToString = String(value)
-                if let slicedValue = Double(valueToString[valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: negativeIntegerLimitSize)]) {
-                    newValue = slicedValue
-                }
+            newValue = resizeRealNumberLength(value, negativeIntegerLimitSize)
+        }
+        
+        return newValue
+    }
+    
+    private func resizeRealNumberLength(_ value: Double, _ limitLength: Int) -> Double {
+        var newValue = value
+        
+        if (getRealNumberLengthSize(value) > limitLength) {
+            let valueToString = String(value)
+            let valueToStringSlicedIndexRange = valueToString.startIndex..<valueToString.index(valueToString.startIndex, offsetBy: limitLength)
+            if let slicedValue = Double(valueToString[valueToStringSlicedIndexRange]) {
+                newValue = slicedValue
             }
-        } else {
-            newValue = value
         }
         
         return newValue

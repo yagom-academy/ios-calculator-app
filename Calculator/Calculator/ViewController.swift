@@ -7,11 +7,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let decimalExpressionAnalyzer = DecimalExpressionAnalyzer()
+    var decimalExpressionAnalyzer = DecimalExpressionAnalyzer()
     let decimalTokenAnalyzer = DecimalTokenAnalyzer()
     let decimalCalculator = DecimalCalculator()
     
-    let binaryExpressionAnalyzer = BinaryExpressionAnalyzer()
+    var binaryExpressionAnalyzer = BinaryExpressionAnalyzer()
     let binaryTokenAnalyzer = BinaryTokenAnalyzer()
     let binaryCalculator = BinaryCalculator()
 

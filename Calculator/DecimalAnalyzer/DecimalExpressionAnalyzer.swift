@@ -1,5 +1,7 @@
 struct DecimalExpressionAnalyzer {
-    func convertExpressionToToken(expression: String) -> [DecimalToken]? {
+    var tokenExpression = [DecimalToken]()
+    
+    mutating func convertExpressionToToken(expression: String) -> [DecimalToken]? {
         let splitString = expression.split(separator: " ")
         let arithmeticOperators: [String] = {
             var operatorRawValues = [String]()
@@ -8,7 +10,6 @@ struct DecimalExpressionAnalyzer {
             }
             return operatorRawValues
         }()
-        var tokenExpression = [DecimalToken]()
         
         for element in splitString {
             let stringElement = String(element)
@@ -17,13 +18,17 @@ struct DecimalExpressionAnalyzer {
             } else if let realNumber = Double(stringElement) {
                 tokenExpression.append(RealNumberOperand(value: realNumber))
             } else if arithmeticOperators.contains(stringElement) {
-                guard let arithmeticOperator = DecimalOperator.convertStringOperatorToArithmeticOperator(operator: stringElement) else {
-                    return nil
-                }
-                tokenExpression.append(DecimalOperator(value: arithmeticOperator, priority: DecimalOperator.getOperatorPrecedence(operator: arithmeticOperator)))
+                appendOperatorToken(stringElement)
             }
         }
         
         return tokenExpression
+    }
+    
+    mutating func appendOperatorToken(_ stringElement: String) {
+        guard let arithmeticOperator = DecimalOperator.convertStringOperatorToArithmeticOperator(operator: stringElement) else {
+            return
+        }
+        tokenExpression.append(DecimalOperator(value: arithmeticOperator, priority: DecimalOperator.getOperatorPrecedence(operator: arithmeticOperator)))
     }
 }
