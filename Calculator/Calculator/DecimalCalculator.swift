@@ -24,8 +24,7 @@ struct DecimalCalculator {
         operatorStack.push(`operator`)
         
         guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         current = peekValue
@@ -34,8 +33,7 @@ struct DecimalCalculator {
     /// 스택에서 이전 연산자를 꺼내어 연산
     mutating func calculatePrevOperator(_ prevOperator: DecimalOperator) {
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         
@@ -77,8 +75,7 @@ struct DecimalCalculator {
     mutating func checkPrevOperator() {
         if operatorStack.elements.last == .multiple || operatorStack.elements.last == .divide {
             guard let someOperator = operatorStack.pop() else {
-                print(Error.etc.rawValue + "계산기가 초기화됩니다.")
-                reset()
+                handleError(errorCase: .etc)
                 return
             }
             calculatePrevOperator(someOperator)
@@ -97,8 +94,7 @@ struct DecimalCalculator {
         operatorStack.elements = prevOperatorStack
         
         guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         current = peekValue
@@ -119,8 +115,7 @@ extension DecimalCalculator {
         useAllOperator()
         
         guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         current = peekValue
@@ -162,5 +157,13 @@ extension DecimalCalculator {
             checkLast(&currentString)
             return currentString
         }
+    }
+}
+
+// MARK: - 에러 메서드
+extension DecimalCalculator {
+    mutating func handleError(errorCase: CalculatorError) {
+        print(errorCase.rawValue + "계산기를 초기화합니다.")
+        reset()
     }
 }

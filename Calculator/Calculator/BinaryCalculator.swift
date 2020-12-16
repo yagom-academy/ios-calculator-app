@@ -18,8 +18,7 @@ struct BinaryCalculator {
         operatorStack.push(`operator`)
 
         guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         current = peekValue
@@ -29,8 +28,7 @@ struct BinaryCalculator {
     mutating func calculatePrevOperator(_ prevOperator: BinaryOperator) {
 
         guard let firstPop = numStack.pop(), let secondPop = numStack.pop() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         
@@ -67,8 +65,7 @@ struct BinaryCalculator {
     mutating func checkPrevOperator() {
         if operatorStack.elements.last == .and || operatorStack.elements.last == .nand {
             guard let someOperator = operatorStack.pop() else {
-                print(Error.etc.rawValue + "계산기가 초기화됩니다.")
-                reset()
+                handleError(errorCase: .etc)
                 return
             }
             calculatePrevOperator(someOperator)
@@ -89,8 +86,7 @@ extension BinaryCalculator {
         numStack.push(String(invertedCurrent, radix: 2))
         
         guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         current = peekValue
@@ -133,8 +129,7 @@ extension BinaryCalculator {
         useAllOperator()
 
         guard let peekValue = numStack.peek() else {
-            print(Error.numStackisEmpty.rawValue + "계산기가 초기화됩니다.")
-            reset()
+            handleError(errorCase: .numStackisEmpty)
             return
         }
         current = peekValue
@@ -156,5 +151,11 @@ extension BinaryCalculator {
     }
 }
 
-
+// MARK: - 에러 메서드
+extension BinaryCalculator {
+    mutating func handleError(errorCase: CalculatorError) {
+        print(errorCase.rawValue + "계산기를 초기화합니다.")
+        reset()
+    }
+}
 
