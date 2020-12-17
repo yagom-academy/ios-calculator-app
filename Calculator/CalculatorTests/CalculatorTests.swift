@@ -64,4 +64,13 @@ class CalculatorTests: XCTestCase {
         let expectedValue: Operator = .Nothing
         XCTAssertEqual(systemUnderTest.checkLastOperator(), expectedValue)
     }
+    
+    func testIsCalculable() {
+        XCTAssertFalse(systemUnderTest.isCalculable())
+        systemUnderTest.pushOperandOnStack("30")
+        XCTAssertFalse(systemUnderTest.isCalculable())
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertTrue(systemUnderTest.isCalculable())
+    }
+    
 }

@@ -61,4 +61,12 @@ class DecimalCalculator {
         }
         return lastOperator
     }
+    
+    func isCalculable() -> Bool {
+        if operand.stack.count >= 2 {
+            return true
+        } else {
+            return false
+        }
+    }
 }
