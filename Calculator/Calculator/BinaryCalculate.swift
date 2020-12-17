@@ -48,12 +48,12 @@ class BinaryCalculate: Calculator {
     }
     
     func operate(_ present: Operator) {
-        let backNumber = String(binaryNumber.pop())
+        let backNumber = String(binaryNumber.pop()!)
         guard let binaryBackNumber = Int(backNumber, radix: 2) else {
             print("이진수 오류")
             return
         }
-        let frontNumber = String(binaryNumber.pop())
+        let frontNumber = String(binaryNumber.pop()!)
         guard let binaryFrontNumber = Int(frontNumber, radix: 2) else {
             print("이진수 오류")
             return
