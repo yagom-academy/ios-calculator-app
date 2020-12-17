@@ -69,4 +69,20 @@ class DecimalCalculator {
             return false
         }
     }
+    
+    func arithmetic(type: Operator) -> Double? {
+        var result: Double? = 0
+        guard isCalculable() else {
+            print("계산할 수 없는 상태입니다. 스택을 확인해보세요")
+            printStack()
+            return nil
+        }
+        let newOperand = Double(operand.pop())
+        let oldOperand = Double(operand.pop())
+        
+        if type == .addition {
+            result = add(oldOperand: oldOperand ?? 0, newOperand: newOperand ?? 0)
+        }
+        return result
+    }
 }
