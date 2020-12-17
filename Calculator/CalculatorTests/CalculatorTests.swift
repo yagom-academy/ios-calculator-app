@@ -9,108 +9,108 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    private var systemUnderTest: DecimalCalculator!
+    private var sut: DecimalCalculator!
     
     override func setUpWithError() throws {
         super.setUp()
-        systemUnderTest = DecimalCalculator()
+        sut = DecimalCalculator()
     }
 
     override func tearDownWithError() throws {
-        systemUnderTest = nil
+        sut = nil
         super.tearDown()
     }
     
     func testAdditionBasicFunction() {
-        XCTAssertEqual(systemUnderTest.add(oldOperand: 3, newOperand: 5), 8)
+        XCTAssertEqual(sut.add(oldOperand: 3, newOperand: 5), 8)
     }
     
     func testSubtractionBasicFunction() {
-        XCTAssertEqual(systemUnderTest.subtract(oldOperand: 40, newOperand: 13), 27)
+        XCTAssertEqual(sut.subtract(oldOperand: 40, newOperand: 13), 27)
     }
     
     func testMultiplicationBasicFunction() {
-        XCTAssertEqual(systemUnderTest.multiply(oldOperand: 2, newOperand: 3), 6)
+        XCTAssertEqual(sut.multiply(oldOperand: 2, newOperand: 3), 6)
     }
     
     func testDivisionBasicFunction() {
-        XCTAssertEqual(systemUnderTest.divide(oldOperand: 20, newOperand: 2), 10)
+        XCTAssertEqual(sut.divide(oldOperand: 20, newOperand: 2), 10)
     }
     
     func testDivisionAboutZero() {
-        XCTAssertEqual(systemUnderTest.divide(oldOperand: 2, newOperand: 0), Double.infinity)
+        XCTAssertEqual(sut.divide(oldOperand: 2, newOperand: 0), Double.infinity)
     }
     
     func testPushToOperandStack() {
-        systemUnderTest.pushOperandOnStack("3")
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertEqual(systemUnderTest.operand.stack, ["3","10"])
+        sut.pushOperandOnStack("3")
+        sut.pushOperandOnStack("10")
+        XCTAssertEqual(sut.operand.stack, ["3","10"])
     }
     
     func testPushToOperatorStack() {
-        systemUnderTest.pushOperatorOnStack(.addition)
-        systemUnderTest.pushOperatorOnStack(.multiplication)
-        XCTAssertEqual(systemUnderTest.`operator`.stack, [Calculator.Operator.addition, Calculator.Operator.multiplication])
+        sut.pushOperatorOnStack(.addition)
+        sut.pushOperatorOnStack(.multiplication)
+        XCTAssertEqual(sut.`operator`.stack, [Calculator.Operator.addition, Calculator.Operator.multiplication])
     }
     
     func testCheckLastOperator() {
-        systemUnderTest.pushOperatorOnStack(.addition)
-        systemUnderTest.pushOperatorOnStack(.multiplication)
+        sut.pushOperatorOnStack(.addition)
+        sut.pushOperatorOnStack(.multiplication)
         let expectedValue: Operator = .multiplication
-        XCTAssertEqual(systemUnderTest.checkLastOperator(), expectedValue)
+        XCTAssertEqual(sut.checkLastOperator(), expectedValue)
     }
     
     func testOperatorStackStateIsInitial() {
         let expectedValue: Operator = .nothing
-        XCTAssertEqual(systemUnderTest.checkLastOperator(), expectedValue)
+        XCTAssertEqual(sut.checkLastOperator(), expectedValue)
     }
     
     func testIsCalculable() {
-        XCTAssertFalse(systemUnderTest.isCalculable())
-        systemUnderTest.pushOperandOnStack("30")
-        XCTAssertFalse(systemUnderTest.isCalculable())
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertTrue(systemUnderTest.isCalculable())
+        XCTAssertFalse(sut.isCalculable())
+        sut.pushOperandOnStack("30")
+        XCTAssertFalse(sut.isCalculable())
+        sut.pushOperandOnStack("10")
+        XCTAssertTrue(sut.isCalculable())
     }
     
     func testArithmeticAboutReturnType() {
-        let expectedNan = systemUnderTest.arithmetic(type: .addition)
+        let expectedNan = sut.arithmetic(type: .addition)
         XCTAssertFalse(expectedNan == .nan)
-        systemUnderTest.pushOperandOnStack("30")
-        systemUnderTest.pushOperandOnStack("30")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 60)
-        systemUnderTest.pushOperandOnStack("20.1")
-        systemUnderTest.pushOperandOnStack("20")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 40.1)
+        sut.pushOperandOnStack("30")
+        sut.pushOperandOnStack("30")
+        XCTAssertEqual(sut.arithmetic(type: .addition), 60)
+        sut.pushOperandOnStack("20.1")
+        sut.pushOperandOnStack("20")
+        XCTAssertEqual(sut.arithmetic(type: .addition), 40.1)
     }
     
     func testArithmeticByType() {
-        systemUnderTest.pushOperandOnStack("10")
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 20)
-        systemUnderTest.pushOperandOnStack("10")
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .subtraction), 0)
-        systemUnderTest.pushOperandOnStack("10")
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .multiplication), 100)
-        systemUnderTest.pushOperandOnStack("10")
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .division), 1)
-        systemUnderTest.pushOperandOnStack("0")
-        systemUnderTest.pushOperandOnStack("10")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .division), 0)
-        systemUnderTest.pushOperandOnStack("10")
-        systemUnderTest.pushOperandOnStack("0")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .division), Double.infinity)
+        sut.pushOperandOnStack("10")
+        sut.pushOperandOnStack("10")
+        XCTAssertEqual(sut.arithmetic(type: .addition), 20)
+        sut.pushOperandOnStack("10")
+        sut.pushOperandOnStack("10")
+        XCTAssertEqual(sut.arithmetic(type: .subtraction), 0)
+        sut.pushOperandOnStack("10")
+        sut.pushOperandOnStack("10")
+        XCTAssertEqual(sut.arithmetic(type: .multiplication), 100)
+        sut.pushOperandOnStack("10")
+        sut.pushOperandOnStack("10")
+        XCTAssertEqual(sut.arithmetic(type: .division), 1)
+        sut.pushOperandOnStack("0")
+        sut.pushOperandOnStack("10")
+        XCTAssertEqual(sut.arithmetic(type: .division), 0)
+        sut.pushOperandOnStack("10")
+        sut.pushOperandOnStack("0")
+        XCTAssertEqual(sut.arithmetic(type: .division), Double.infinity)
     }
     
     func testPushOperandAndOperator() {
-        systemUnderTest.pushOperandOnStack("4.4")
-        systemUnderTest.pushOperandOnStack("2.2")
-        systemUnderTest.pushOperatorOnStack(.addition)
-        let lastOperator = systemUnderTest.checkLastOperator()
-        let expectedAdd = systemUnderTest.arithmetic(type: lastOperator)
+        sut.pushOperandOnStack("4.4")
+        sut.pushOperandOnStack("2.2")
+        sut.pushOperatorOnStack(.addition)
+        let lastOperator = sut.checkLastOperator()
+        let expectedAdd = sut.arithmetic(type: lastOperator)
         let expectedValue: Double = 6.6
         XCTAssertEqual(expectedAdd, expectedValue, accuracy: 1e8)
     }
