@@ -74,7 +74,8 @@ class CalculatorTests: XCTestCase {
     }
     
     func testArithmeticAboutReturnType() {
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), nil)
+        let expectedNan = systemUnderTest.arithmetic(type: .addition)
+        XCTAssertFalse(expectedNan == .nan)
         systemUnderTest.pushOperandOnStack("30")
         systemUnderTest.pushOperandOnStack("30")
         XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 60)
@@ -102,5 +103,15 @@ class CalculatorTests: XCTestCase {
         systemUnderTest.pushOperandOnStack("10")
         systemUnderTest.pushOperandOnStack("0")
         XCTAssertEqual(systemUnderTest.arithmetic(type: .division), Double.infinity)
+    }
+    
+    func testPushOperandAndOperator() {
+        systemUnderTest.pushOperandOnStack("4.4")
+        systemUnderTest.pushOperandOnStack("2.2")
+        systemUnderTest.pushOperatorOnStack(.addition)
+        let lastOperator = systemUnderTest.checkLastOperator()
+        let expectedAdd = systemUnderTest.arithmetic(type: lastOperator)
+        let expectedValue: Double = 6.6
+        XCTAssertEqual(expectedAdd, expectedValue, accuracy: 1e8)
     }
 }

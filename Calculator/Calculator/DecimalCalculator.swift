@@ -70,21 +70,22 @@ class DecimalCalculator {
         }
     }
     
-    func arithmetic(type: Operator) -> Double? {
-        var result: Double?
+    func arithmetic(type: Operator) -> Double {
+        var result: Double
         guard isCalculable() else {
             print("계산할 수 없는 상태입니다. 스택을 확인해보세요")
             printStack()
-            return nil
+            return .nan
         }
         guard let newOperand = Double(operand.pop()),
               let oldOperand = Double(operand.pop()) else {
-            return nil
+            return .nan
         }
         
         switch type {
         case .addition:
             result = add(oldOperand: oldOperand, newOperand: newOperand)
+            print(result)
         case .subtraction:
             result = subtract(oldOperand: oldOperand, newOperand: newOperand)
         case .multiplication:
@@ -93,10 +94,10 @@ class DecimalCalculator {
             result = divide(oldOperand: oldOperand, newOperand: newOperand)
         case .nothing:
             print("연산자가 존재하지 않습니다.")
-            return nil
+            return .nan
         @unknown default:
             print("+,-,*,/ 가 아닌 다른 기호가 들어왔습니다.")
-            return nil
+            return .nan
         }
         return result
     }
