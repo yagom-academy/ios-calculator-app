@@ -77,11 +77,13 @@ class DecimalCalculator {
             printStack()
             return nil
         }
-        let newOperand = Double(operand.pop())
-        let oldOperand = Double(operand.pop())
+        guard let newOperand = Double(operand.pop()),
+              let oldOperand = Double(operand.pop()) else {
+            return nil
+        }
         
         if type == .addition {
-            result = add(oldOperand: oldOperand ?? 0, newOperand: newOperand ?? 0)
+            result = add(oldOperand: oldOperand, newOperand: newOperand)
         }
         return result
     }

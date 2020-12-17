@@ -73,14 +73,13 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(systemUnderTest.isCalculable())
     }
     
-    func testArithmeticAboutReturnType() throws {
+    func testArithmeticAboutReturnType() {
         XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), nil)
         systemUnderTest.pushOperandOnStack("30")
         systemUnderTest.pushOperandOnStack("30")
-        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), Optional(60.0))
-        systemUnderTest.pushOperandOnStack("30")
-        systemUnderTest.pushOperandOnStack("30")
-        let unwrapValue = try  XCTUnwrap(systemUnderTest.arithmetic(type: .addition))
-        XCTAssertEqual(unwrapValue, 60)
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 60)
+        systemUnderTest.pushOperandOnStack("20.1")
+        systemUnderTest.pushOperandOnStack("20")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 40.1)
     }
 }
