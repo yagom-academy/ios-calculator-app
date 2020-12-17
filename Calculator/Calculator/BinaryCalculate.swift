@@ -1,88 +1,27 @@
 import Foundation
 
-class BinaryCalculate: BinaryCalculator {
-    var binaryNumber = Stack<Int>()
-    var operatorSet = Stack<Operator>()
-    var inputNumber: Int?
-    var resultNumber: Int?
-    var inputOperator: Operator?
-    var presentOperator: Operator?
+class BinaryCalculate: Calculator {
+    typealias CalculatorType = Int
+    
+    private var binaryNumber = Stack<Int>()
+    private var operatorSet = Stack<Operator>()
+    private var inputNumber: Int?
+    private var resultNumber: Int?
+    private var inputOperator: Operator?
+    private var presentOperator: Operator?
+    
+    func getOperatorButton() -> Int {
+        stackPush()
+        verifyPriorityOperator()
         
-    func addition<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber as! Int
+        return resultNumber!
     }
     
-    func subtraction<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-    
-    func and<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-    
-    func nand<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-
-    func or<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-
-    func xor<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-
-    func nor<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-
-    func not<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-
-    func leftShift<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-    
-    func rightShift<Int>() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber as! Int
-    }
-    
-    func result<Int>() -> Int {
+    func result() -> Int {
         operatorSet.push(element: inputOperator!)
         verifyPriorityOperator()
 
-        return resultNumber as! Int
+        return resultNumber!
     }
     
     func clear() {
@@ -109,32 +48,38 @@ class BinaryCalculate: BinaryCalculator {
     }
     
     func operate(_ present: Operator) {
-        let backNumber = String(binaryNumber.pop())
-        let binaryBackNumber = Int(backNumber, radix: 2)
-        let frontNumber = String(binaryNumber.pop())
-        let binaryFrontNumber = Int(frontNumber, radix: 2)
+        let backNumber = String(binaryNumber.pop()!)
+        guard let binaryBackNumber = Int(backNumber, radix: 2) else {
+            print("이진수 오류")
+            return
+        }
+        let frontNumber = String(binaryNumber.pop()!)
+        guard let binaryFrontNumber = Int(frontNumber, radix: 2) else {
+            print("이진수 오류")
+            return
+        }
 
         switch present {
             case .addition:
-                resultNumber = binaryFrontNumber! + binaryBackNumber!
+                resultNumber = binaryFrontNumber + binaryBackNumber
             case .subtraction:
-                resultNumber = binaryFrontNumber! - binaryBackNumber!
+                resultNumber = binaryFrontNumber - binaryBackNumber
             case .and:
-                resultNumber = binaryFrontNumber! & binaryBackNumber!
+                resultNumber = binaryFrontNumber & binaryBackNumber
             case .nand:
-                resultNumber = ~(binaryFrontNumber! & binaryBackNumber!)
+                resultNumber = ~(binaryFrontNumber & binaryBackNumber)
             case .or:
-                resultNumber = binaryFrontNumber! | binaryBackNumber!
+                resultNumber = binaryFrontNumber | binaryBackNumber
             case .xor:
-                resultNumber = binaryFrontNumber! ^ binaryBackNumber!
+                resultNumber = binaryFrontNumber ^ binaryBackNumber
             case .nor:
-                resultNumber = ~(binaryFrontNumber! | binaryBackNumber!)
+                resultNumber = ~(binaryFrontNumber | binaryBackNumber)
             case .not:
-                resultNumber = ~(binaryBackNumber!)
+                resultNumber = ~(binaryBackNumber)
             case .leftShift:
-                resultNumber = binaryBackNumber! << 1
+                resultNumber = binaryBackNumber << 1
             case .rightShift:
-                resultNumber = binaryBackNumber! << 1
+                resultNumber = binaryBackNumber << 1
             default:
                 print("연산자가 잘못되었습니다.")
         }

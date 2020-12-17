@@ -1,46 +1,27 @@
 import Foundation
 
-class DecimalCalculate: DecimalCalculator {
-    var decimalNumber = Stack<Double>()
-    var operatorSet = Stack<Operator>()
-    var inputNumber: Double?
-    var resultNumber: Double?
-    var inputOperator: Operator?
-    var presentOperator: Operator?
+class DecimalCalculate: Calculator {
+    typealias CalculatorType = Double
     
-    func addition<Double>() -> Double {
+    private var decimalNumber = Stack<Double>()
+    private var operatorSet = Stack<Operator>()
+    private var inputNumber: Double?
+    private var resultNumber: Double?
+    private var inputOperator: Operator?
+    private var presentOperator: Operator?
+    
+    func getOperatorButton() -> Double {
         stackPush()
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
-    func subtraction<Double>() -> Double {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber as! Double
-    }
-    
-    func multiplication<Double>() -> Double {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber as! Double
-    }
-    
-    func division<Double>() -> Double {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber as! Double
-    }
-    
-    func result<Double>() -> Double {
+    func result() -> Double {
         operatorSet.push(element: inputOperator!)
         verifyPriorityOperator()
         
-        return resultNumber as! Double
+        return resultNumber!
     }
     
     func clear() {
@@ -67,8 +48,14 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func operate(_ present: Operator) {
-        let backNumber: Double = decimalNumber.pop()
-        let frontNumber: Double = decimalNumber.pop()
+        guard let backNumber: Double = decimalNumber.pop() else {
+            print("십진수 오류")
+            return
+        }
+        guard let frontNumber: Double = decimalNumber.pop() else {
+            print("십진수 오류")
+            return
+        }
         
         switch present {
             case .addition:
