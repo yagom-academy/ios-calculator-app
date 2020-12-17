@@ -52,4 +52,16 @@ class CalculatorTests: XCTestCase {
         systemUnderTest.pushOperatorOnStack(.multiplication)
         XCTAssertEqual(systemUnderTest.`operator`.stack, [Calculator.Operator.addition, Calculator.Operator.multiplication])
     }
+    
+    func testCheckLastOperator() {
+        systemUnderTest.pushOperatorOnStack(.addition)
+        systemUnderTest.pushOperatorOnStack(.multiplication)
+        let expectedValue: Operator = .multiplication
+        XCTAssertEqual(systemUnderTest.checkLastOperator(), expectedValue)
+    }
+    
+    func testOperatorStackStateIsInitial() {
+        let expectedValue: Operator = .Nothing
+        XCTAssertEqual(systemUnderTest.checkLastOperator(), expectedValue)
+    }
 }

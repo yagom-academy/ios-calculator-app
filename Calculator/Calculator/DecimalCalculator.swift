@@ -54,4 +54,11 @@ class DecimalCalculator {
     func pushOperatorOnStack(_ operator: Operator) {
         self.`operator`.push(value: `operator`)
     }
+    
+    func checkLastOperator() -> Operator {
+        guard let lastOperator = `operator`.peek() else {
+            return .Nothing
+        }
+        return lastOperator
+    }
 }
