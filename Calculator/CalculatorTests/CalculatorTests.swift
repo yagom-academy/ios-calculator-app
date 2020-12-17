@@ -114,4 +114,38 @@ class CalculatorTests: XCTestCase {
         let expectedValue: Double = 6.6
         XCTAssertEqual(expectedAdd, expectedValue, accuracy: 1e8)
     }
+    
+    func testArithmeticLogicByType() {
+        sut.pushOperandOnStack("6.2")
+        sut.pushOperandOnStack("0")
+        sut.pushOperatorOnStack(.addition)
+        var lastOperator = sut.checkLastOperator()
+        var testedValue = sut.arithmetic(type: lastOperator)
+        var expectedValue = 6.2
+        XCTAssertEqual(testedValue, expectedValue, accuracy: 1e8)
+        
+        sut.pushOperandOnStack("6.2")
+        sut.pushOperandOnStack("3.1")
+        sut.pushOperatorOnStack(.subtraction)
+        lastOperator = sut.checkLastOperator()
+        testedValue = sut.arithmetic(type: lastOperator)
+        expectedValue = 3.1
+        XCTAssertEqual(testedValue, expectedValue, accuracy: 1e8)
+        
+        sut.pushOperandOnStack("6.2")
+        sut.pushOperandOnStack("2.1")
+        sut.pushOperatorOnStack(.multiplication)
+        lastOperator = sut.checkLastOperator()
+        testedValue = sut.arithmetic(type: lastOperator)
+        expectedValue = 13.01
+        XCTAssertEqual(testedValue, expectedValue, accuracy: 1e8)
+        
+        sut.pushOperandOnStack("6.2")
+        sut.pushOperandOnStack("3.1")
+        sut.pushOperatorOnStack(.division)
+        lastOperator = sut.checkLastOperator()
+        testedValue = sut.arithmetic(type: lastOperator)
+        expectedValue = 2
+        XCTAssertEqual(testedValue, expectedValue, accuracy: 1e8)
+    }
 }
