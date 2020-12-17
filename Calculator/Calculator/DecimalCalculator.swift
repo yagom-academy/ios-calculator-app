@@ -57,7 +57,7 @@ class DecimalCalculator {
     
     func checkLastOperator() -> Operator {
         guard let lastOperator = `operator`.peek() else {
-            return .Nothing
+            return .nothing
         }
         return lastOperator
     }
@@ -71,7 +71,7 @@ class DecimalCalculator {
     }
     
     func arithmetic(type: Operator) -> Double? {
-        var result: Double? = 0
+        var result: Double?
         guard isCalculable() else {
             print("계산할 수 없는 상태입니다. 스택을 확인해보세요")
             printStack()
@@ -82,8 +82,21 @@ class DecimalCalculator {
             return nil
         }
         
-        if type == .addition {
+        switch type {
+        case .addition:
             result = add(oldOperand: oldOperand, newOperand: newOperand)
+        case .subtraction:
+            result = subtract(oldOperand: oldOperand, newOperand: newOperand)
+        case .multiplication:
+            result = multiply(oldOperand: oldOperand, newOperand: newOperand)
+        case .division:
+            result = divide(oldOperand: oldOperand, newOperand: newOperand)
+        case .nothing:
+            print("연산자가 존재하지 않습니다.")
+            return nil
+        @unknown default:
+            print("+,-,*,/ 가 아닌 다른 기호가 들어왔습니다.")
+            return nil
         }
         return result
     }

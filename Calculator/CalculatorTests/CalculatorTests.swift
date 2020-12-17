@@ -61,7 +61,7 @@ class CalculatorTests: XCTestCase {
     }
     
     func testOperatorStackStateIsInitial() {
-        let expectedValue: Operator = .Nothing
+        let expectedValue: Operator = .nothing
         XCTAssertEqual(systemUnderTest.checkLastOperator(), expectedValue)
     }
     
@@ -81,5 +81,26 @@ class CalculatorTests: XCTestCase {
         systemUnderTest.pushOperandOnStack("20.1")
         systemUnderTest.pushOperandOnStack("20")
         XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 40.1)
+    }
+    
+    func testArithmeticByType() {
+        systemUnderTest.pushOperandOnStack("10")
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .addition), 20)
+        systemUnderTest.pushOperandOnStack("10")
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .subtraction), 0)
+        systemUnderTest.pushOperandOnStack("10")
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .multiplication), 100)
+        systemUnderTest.pushOperandOnStack("10")
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .division), 1)
+        systemUnderTest.pushOperandOnStack("0")
+        systemUnderTest.pushOperandOnStack("10")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .division), 0)
+        systemUnderTest.pushOperandOnStack("10")
+        systemUnderTest.pushOperandOnStack("0")
+        XCTAssertEqual(systemUnderTest.arithmetic(type: .division), Double.infinity)
     }
 }
