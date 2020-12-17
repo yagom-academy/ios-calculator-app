@@ -1,6 +1,6 @@
 import Foundation
 
-class DecimalCalculate: DecimalCalculator {
+class DecimalCalculate: Calculator {
     typealias CalculatorType = Double
     
     private var decimalNumber = Stack<Double>()
@@ -10,28 +10,7 @@ class DecimalCalculate: DecimalCalculator {
     private var inputOperator: Operator?
     private var presentOperator: Operator?
     
-    func addition() -> Double {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber!
-    }
-    
-    func subtraction() -> Double {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber!
-    }
-    
-    func multiplication() -> Double {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber!
-    }
-    
-    func division() -> Double {
+    func getOperatorButton() -> Double {
         stackPush()
         verifyPriorityOperator()
         
@@ -69,8 +48,14 @@ class DecimalCalculate: DecimalCalculator {
     }
     
     func operate(_ present: Operator) {
-        let backNumber: Double = decimalNumber.pop()
-        let frontNumber: Double = decimalNumber.pop()
+        guard let backNumber: Double = decimalNumber.pop() else {
+            print("십진수 오류")
+            return
+        }
+        guard let frontNumber: Double = decimalNumber.pop() else {
+            print("십진수 오류")
+            return
+        }
         
         switch present {
             case .addition:

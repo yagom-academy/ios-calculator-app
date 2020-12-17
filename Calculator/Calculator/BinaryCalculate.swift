@@ -1,6 +1,6 @@
 import Foundation
 
-class BinaryCalculate: BinaryCalculator {
+class BinaryCalculate: Calculator {
     typealias CalculatorType = Int
     
     private var binaryNumber = Stack<Int>()
@@ -9,74 +9,11 @@ class BinaryCalculate: BinaryCalculator {
     private var resultNumber: Int?
     private var inputOperator: Operator?
     private var presentOperator: Operator?
+    
+    func getOperatorButton() -> Int {
+        stackPush()
+        verifyPriorityOperator()
         
-    func addition() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-        
-        return resultNumber!
-    }
-    
-    func subtraction() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-    
-    func and() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-    
-    func nand() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-
-    func or() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-
-    func xor() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-
-    func nor() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-
-    func not() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-
-    func leftShift() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
-        return resultNumber!
-    }
-    
-    func rightShift() -> Int {
-        stackPush()
-        verifyPriorityOperator()
-
         return resultNumber!
     }
     
