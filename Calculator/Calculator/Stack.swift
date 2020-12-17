@@ -21,4 +21,8 @@ class Stack<T> {
     func peek() -> T? {
         return stack.last
     }
+    
+    func isEmpty() -> Bool {
+        return stack.isEmpty
+    }
 }

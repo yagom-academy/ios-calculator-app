@@ -148,4 +148,30 @@ class CalculatorTests: XCTestCase {
         expectedValue = 2
         XCTAssertEqual(testedValue, expectedValue, accuracy: 1e8)
     }
+    
+    func testCheckPreviousOperator() {
+        var testedValue = sut.checkPreviousOperator()
+        var expectedValue: Operator = .nothing
+        XCTAssertEqual(testedValue, expectedValue)
+        
+        sut.pushOperatorOnStack(.subtraction)
+        testedValue = sut.checkPreviousOperator()
+        expectedValue = .subtraction
+        XCTAssertEqual(testedValue, expectedValue)
+        
+        sut.pushOperatorOnStack(.division)
+        testedValue = sut.checkPreviousOperator()
+        expectedValue = .division
+        XCTAssertEqual(testedValue, expectedValue)
+        
+        sut.pushOperatorOnStack(.multiplication)
+        testedValue = sut.checkPreviousOperator()
+        expectedValue = .multiplication
+        XCTAssertEqual(testedValue, expectedValue)
+        
+        sut.pushOperatorOnStack(.addition)
+        testedValue = sut.checkPreviousOperator()
+        expectedValue = .addition
+        XCTAssertEqual(testedValue, expectedValue)
+    }
 }

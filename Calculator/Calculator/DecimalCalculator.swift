@@ -85,7 +85,6 @@ class DecimalCalculator {
         switch type {
         case .addition:
             result = add(oldOperand: oldOperand, newOperand: newOperand)
-            print(result)
         case .subtraction:
             result = subtract(oldOperand: oldOperand, newOperand: newOperand)
         case .multiplication:
@@ -100,5 +99,15 @@ class DecimalCalculator {
             return .nan
         }
         return result
+    }
+    
+    func checkPreviousOperator() -> Operator {
+        guard !`operator`.isEmpty() else {
+            return .nothing
+        }
+        guard let lastOperator = `operator`.peek() else {
+            return .nothing
+        }
+        return lastOperator
     }
 }
