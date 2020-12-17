@@ -55,6 +55,14 @@ class DecimalCalculator {
         self.`operator`.push(value: `operator`)
     }
     
+    func popOperatorOnStack(_ operator: Operator) {
+        self.`operator`.pop()
+    }
+    
+    func convertDoubleToString(result: Double) -> String {
+        return String(result)
+    }
+    
     func checkLastOperator() -> Operator {
         guard let lastOperator = `operator`.peek() else {
             return .nothing

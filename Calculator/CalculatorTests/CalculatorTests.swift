@@ -148,7 +148,7 @@ class CalculatorTests: XCTestCase {
         expectedValue = 2
         XCTAssertEqual(testedValue, expectedValue, accuracy: 1e8)
     }
-    
+    // 연산자를 넣기전에 이전 연산자 체크
     func testCheckPreviousOperator() {
         var testedValue = sut.checkPreviousOperator()
         var expectedValue: Operator = .nothing
@@ -173,5 +173,37 @@ class CalculatorTests: XCTestCase {
         testedValue = sut.checkPreviousOperator()
         expectedValue = .addition
         XCTAssertEqual(testedValue, expectedValue)
+    }
+    // 이전 연산자가 곱셈, 나눗셈이면 연산해주고, 반환되는 결과 Double타입을 String으로 변환해서 푸쉬
+    func testWhenPreviousOperatorMultiplicationOrDivision() {
+        sut.pushOperandOnStack("4")
+        
+        var testedValue = sut.checkPreviousOperator()
+        XCTAssertEqual(testedValue, .nothing)
+        sut.pushOperatorOnStack(.subtraction)
+        sut.pushOperandOnStack("20")
+        
+        testedValue = sut.checkPreviousOperator()
+        XCTAssertEqual(testedValue, .subtraction)
+        sut.pushOperatorOnStack(.division)
+        sut.pushOperandOnStack("5")
+        
+        testedValue = sut.checkPreviousOperator()
+        XCTAssertEqual(testedValue, .division)
+        var calculatedValue = sut.arithmetic(type: testedValue)
+        XCTAssertEqual(calculatedValue, 4)
+        sut.popOperatorOnStack(testedValue)
+        sut.pushOperandOnStack(sut.convertDoubleToString(result: calculatedValue))
+        sut.pushOperatorOnStack(.multiplication)
+        sut.pushOperandOnStack("2")
+        
+        testedValue = sut.checkPreviousOperator()
+        XCTAssertEqual(testedValue, .multiplication)
+        calculatedValue = sut.arithmetic(type: testedValue)
+        XCTAssertEqual(calculatedValue, 8)
+        sut.popOperatorOnStack(testedValue)
+        sut.pushOperandOnStack(sut.convertDoubleToString(result: calculatedValue))
+        sut.pushOperatorOnStack(.addition)
+        sut.pushOperandOnStack("10")
     }
 }
