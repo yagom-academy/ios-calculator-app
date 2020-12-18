@@ -19,7 +19,7 @@ class Stack<T> {
     }
     
     func peek() -> T? {
-        return stack.last
+        return stack.last ?? nil
     }
     
     func isEmpty() -> Bool {

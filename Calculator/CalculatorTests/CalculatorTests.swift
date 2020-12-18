@@ -206,4 +206,39 @@ class CalculatorTests: XCTestCase {
         sut.pushOperatorOnStack(.addition)
         sut.pushOperandOnStack("10")
     }
+    
+    func testWhenPreviousOperatorAdditionOrSubtraction() {
+        sut.pushOperandOnStack("4")
+        XCTAssertEqual(sut.`operator`.stack.count, 0)
+        var lastOperator = sut.`operator`.peek()
+        XCTAssertEqual(lastOperator, nil)
+        
+        var testedValue: () = sut.calculate(userPickOperator: .subtraction)
+        var lastOperand = sut.operand.peek()
+        lastOperator = sut.`operator`.peek()
+        XCTAssertFalse(testedValue == nil)
+        XCTAssertEqual(lastOperator, .subtraction)
+        XCTAssertEqual(lastOperand, "4")
+        
+        sut.pushOperandOnStack("8")
+        testedValue = sut.calculate(userPickOperator: .addition)
+        lastOperand = sut.operand.peek()
+        lastOperator = sut.`operator`.peek()
+        XCTAssertEqual(lastOperator, .addition)
+        // 자리수에 대한 처리를 안해줘 "-4"값을 기대할 수 없음
+        XCTAssertEqual(lastOperand, "-4.0")
+        
+        sut.pushOperandOnStack("10")
+        testedValue = sut.calculate(userPickOperator: .subtraction)
+        lastOperand = sut.operand.peek()
+        lastOperator = sut.`operator`.peek()
+        XCTAssertEqual(lastOperator, .subtraction)
+        XCTAssertEqual(lastOperand, "6.0")
+        
+        sut.pushOperandOnStack("1")
+        lastOperand = sut.operand.peek()
+        lastOperator = sut.`operator`.peek()
+        XCTAssertEqual(lastOperator, .subtraction)
+        XCTAssertEqual(lastOperand, "1")
+    }
 }

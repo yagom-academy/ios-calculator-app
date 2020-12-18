@@ -113,9 +113,45 @@ class DecimalCalculator {
         guard !`operator`.isEmpty() else {
             return .nothing
         }
-        guard let lastOperator = `operator`.peek() else {
-            return .nothing
+        return checkLastOperator()
+    }
+    
+    func clearAllOperator() {
+        while `operator`.isEmpty() == false {
+            let lastOperator = checkPreviousOperator()
+            let result = arithmetic(type: lastOperator)
+            let convertedresult = convertDoubleToString(result: result)
+            pushOperandOnStack(convertedresult)
+            popOperatorOnStack(lastOperator)
         }
-        return lastOperator
+    }
+    
+    func calculate(userPickOperator: Operator) {
+        guard `operator`.stack.count != 0 else {
+            print("다음 연산자를 지켜보고 연산합니다.")
+            pushOperatorOnStack(userPickOperator)
+            return
+        }
+        let previousOperator = checkPreviousOperator()
+        
+        switch previousOperator {
+        case .addition, .subtraction:
+            switch userPickOperator {
+            case .addition, .subtraction:
+                clearAllOperator()
+                pushOperatorOnStack(userPickOperator)
+            case .multiplication, .division:
+                pushOperatorOnStack(userPickOperator)
+            default:
+                return
+            }
+        case .multiplication, .division:
+            let result = arithmetic(type: previousOperator)
+            let convertedresult = convertDoubleToString(result: result)
+            pushOperandOnStack(convertedresult)
+            popOperatorOnStack(previousOperator)
+        default:
+            return
+        }
     }
 }
