@@ -12,5 +12,6 @@ enum Operator {
     case subtraction
     case multiplication
     case division
+    case equal
     case nothing
 }

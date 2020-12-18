@@ -236,9 +236,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(lastOperand, "6.0")
         
         sut.pushOperandOnStack("1")
+        testedValue = sut.calculate(userPickOperator: .equal)
         lastOperand = sut.operand.peek()
         lastOperator = sut.`operator`.peek()
-        XCTAssertEqual(lastOperator, .subtraction)
-        XCTAssertEqual(lastOperand, "1")
+        XCTAssertEqual(lastOperator, nil)
+        XCTAssertEqual(lastOperand, "5.0")
     }
 }

@@ -132,6 +132,10 @@ class DecimalCalculator {
             pushOperatorOnStack(userPickOperator)
             return
         }
+        guard userPickOperator != .equal else {
+            clearAllOperator()
+            return
+        }
         let previousOperator = checkPreviousOperator()
         
         switch previousOperator {
