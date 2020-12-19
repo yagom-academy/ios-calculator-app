@@ -67,8 +67,7 @@ class DecimalCalculator: DecimalCalculatorFunctions {
                 numberStack.push("0")
             }
             operatorStack.push(input)
-        }
-        else {
+        } else {
             //연산자가 이미 있는 경우 연산 실행 후 연산자 push
             calculate()
             if input != .equals {

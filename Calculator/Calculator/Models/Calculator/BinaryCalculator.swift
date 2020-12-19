@@ -105,8 +105,7 @@ class BinaryCalculator: BinaryCalculatorFunctions {
                 return
             }
             operatorStack.push(input)
-        }
-        else {
+        } else {
             calculate()
             if input != .equals {
                 operatorStack.push(input)
