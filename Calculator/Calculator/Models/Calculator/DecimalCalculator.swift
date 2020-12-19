@@ -82,11 +82,10 @@ class DecimalCalculator: DecimalCalculatorFunctions {
     
     func stringToDouble() {
         //연산을 위해 String타입의 number를 Double타입으로 변경
-        if let stringRHS = numberStack.pop(), let rhs = Double(stringRHS) {
-            self.rhs = rhs
-        }
-        if let stringLHS = numberStack.pop(), let lhs = Double(stringLHS) {
-            self.lhs = lhs
+        if let stringRHS = numberStack.pop(),
+           let stringLHS = numberStack.pop() {
+            rhs = Double(stringRHS) ?? 0.0
+            lhs = Double(stringLHS) ?? 0.0
         }
     }
 }
