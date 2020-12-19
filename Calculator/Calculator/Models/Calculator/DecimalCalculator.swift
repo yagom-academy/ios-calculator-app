@@ -31,6 +31,8 @@ class DecimalCalculator: DecimalCalculatorFunctions {
     }
     
     func clear() {
+        lhs = 0.0
+        rhs = 0.0
         numberStack.removeAll()
         operatorStack.removeAll()
     }
@@ -65,8 +67,7 @@ class DecimalCalculator: DecimalCalculatorFunctions {
                 numberStack.push("0")
             }
             operatorStack.push(input)
-        }
-        else {
+        } else {
             //연산자가 이미 있는 경우 연산 실행 후 연산자 push
             calculate()
             if input != .equals {
@@ -81,11 +82,10 @@ class DecimalCalculator: DecimalCalculatorFunctions {
     
     func stringToDouble() {
         //연산을 위해 String타입의 number를 Double타입으로 변경
-        if let stringRHS = numberStack.pop(), let rhs = Double(stringRHS) {
-            self.rhs = rhs
-        }
-        if let stringLHS = numberStack.pop(), let lhs = Double(stringLHS) {
-            self.lhs = lhs
+        if let stringRHS = numberStack.pop(),
+           let stringLHS = numberStack.pop() {
+            rhs = Double(stringRHS) ?? 0.0
+            lhs = Double(stringLHS) ?? 0.0
         }
     }
 }

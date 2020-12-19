@@ -55,6 +55,8 @@ class BinaryCalculator: BinaryCalculatorFunctions {
     }
     
     func clear() {
+        lhs = 0
+        rhs = 0
         numberStack.removeAll()
         operatorStack.removeAll()
     }
@@ -103,8 +105,7 @@ class BinaryCalculator: BinaryCalculatorFunctions {
                 return
             }
             operatorStack.push(input)
-        }
-        else {
+        } else {
             calculate()
             if input != .equals {
                 operatorStack.push(input)
@@ -117,11 +118,10 @@ class BinaryCalculator: BinaryCalculatorFunctions {
     }
     
     func stringToInt() {
-        if let stringRHS = numberStack.pop(), let rhs = Int(stringRHS, radix: 2) {
-            self.rhs = rhs
-        }
-        if let stringLHS = numberStack.pop(), let lhs = Int(stringLHS, radix: 2) {
-            self.lhs = lhs
+        if let stringRHS = numberStack.pop(),
+           let stringLHS = numberStack.pop() {
+            rhs = Int(stringRHS, radix: 2) ?? 0
+            lhs = Int(stringLHS, radix: 2) ?? 0
         }
     }
     
