@@ -31,6 +31,8 @@ class DecimalCalculator: DecimalCalculatorFunctions {
     }
     
     func clear() {
+        lhs = 0.0
+        rhs = 0.0
         numberStack.removeAll()
         operatorStack.removeAll()
     }

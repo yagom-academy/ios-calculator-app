@@ -55,6 +55,8 @@ class BinaryCalculator: BinaryCalculatorFunctions {
     }
     
     func clear() {
+        lhs = 0
+        rhs = 0
         numberStack.removeAll()
         operatorStack.removeAll()
     }
