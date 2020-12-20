@@ -151,3 +151,18 @@ extension DecimalCalculator {
         }
     }
 }
+
+// test를 위한 메서드
+extension DecimalCalculator {
+    func getNumStack() -> [String] {
+        return numStack.elements
+    }
+    
+    func getOperatorStack() -> [DecimalOperator] {
+        return operatorStack.elements
+    }
+    
+    func getCurrent() -> String {
+        return current
+    }
+}

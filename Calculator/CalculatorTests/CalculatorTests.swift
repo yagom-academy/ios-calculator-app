@@ -12,5 +12,4 @@ class CalculatorTests: XCTestCase {
     override func tearDownWithError() throws {
         decimal = nil
     }
-
 }
