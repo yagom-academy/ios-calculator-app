@@ -108,4 +108,102 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(numArray, ["5", "7"])
         XCTAssertEqual(operatorArray, [.minus, .divide])
     }
+    
+    func testMultiplePlus() {
+        decimal.current = "3"
+        try! decimal.calculate(.multiple)
+        decimal.current = "8"
+        try! decimal.calculate(.plus)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["24"])
+        XCTAssertEqual(operatorArray, [.plus])
+    }
+    
+    func testMultipleMinus() {
+        decimal.current = "2"
+        try! decimal.calculate(.multiple)
+        decimal.current = "8"
+        try! decimal.calculate(.minus)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["16"])
+        XCTAssertEqual(operatorArray, [.minus])
+    }
+    
+    func testMultipleMultiple() {
+        decimal.current = "3"
+        try! decimal.calculate(.multiple)
+        decimal.current = "6"
+        try! decimal.calculate(.multiple)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["18"])
+        XCTAssertEqual(operatorArray, [.multiple])
+    }
+    
+    func testMultipleDivide() {
+        decimal.current = "3"
+        try! decimal.calculate(.multiple)
+        decimal.current = "4"
+        try! decimal.calculate(.divide)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["12"])
+        XCTAssertEqual(operatorArray, [.divide])
+    }
+    
+    func testDividePlus() {
+        decimal.current = "6"
+        try! decimal.calculate(.divide)
+        decimal.current = "2"
+        try! decimal.calculate(.plus)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["3"])
+        XCTAssertEqual(operatorArray, [.plus])
+    }
+    
+    func testDivideMinus() {
+        decimal.current = "6"
+        try! decimal.calculate(.divide)
+        decimal.current = "6"
+        try! decimal.calculate(.minus)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["1"])
+        XCTAssertEqual(operatorArray, [.minus])
+    }
+    
+    func testDivideMultiple() {
+        decimal.current = "6"
+        try! decimal.calculate(.divide)
+        decimal.current = "2"
+        try! decimal.calculate(.multiple)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["3"])
+        XCTAssertEqual(operatorArray, [.multiple])
+    }
+    
+    func testDivideDivde() {
+        decimal.current = "8"
+        try! decimal.calculate(.divide)
+        decimal.current = "4"
+        try! decimal.calculate(.divide)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["2"])
+        XCTAssertEqual(operatorArray, [.divide])
+    }
+    
+    
 }
