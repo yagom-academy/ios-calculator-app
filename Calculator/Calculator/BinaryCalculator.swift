@@ -51,7 +51,7 @@ struct BinaryCalculator {
     /// 스택에서 모든 연산자를 꺼내어 연산
     mutating func useAllOperator() throws {
         if let someOperator = operatorStack.pop() {
-            for _ in 1...operatorStack.count() {
+            for _ in 0...operatorStack.count() {
                 try calculatePrevOperator(someOperator)
             }
         }
