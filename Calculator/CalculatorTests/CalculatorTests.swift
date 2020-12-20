@@ -205,5 +205,25 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(operatorArray, [.divide])
     }
     
+    func testDivideZero() {
+        decimal.current = "8"
+        try! decimal.calculate(.divide)
+        decimal.current = "0"
+        try! decimal.calculate(.plus) // 여기서 에러
+        let getCurrent = decimal.getCurrent()
+        
+        XCTAssertEqual(getCurrent, "오류")
+    }
     
+    func testDivdeZeroPlus() {
+        decimal.current = "8"
+        try! decimal.calculate(.divide)
+        decimal.current = "0"
+        try! decimal.calculate(.plus) // 여기서 에러
+        decimal.current = "3"
+        try! decimal.printResult()
+        let getCurrent = decimal.getCurrent()
+
+        XCTAssertEqual(getCurrent, "오류")
+    }
 }

@@ -49,7 +49,7 @@ struct DecimalCalculator {
             newValue = old * new
         case .divide:
             if new == 0 {
-                current = "오류"
+                numStack.push("오류")
                 return
             }
             newValue = old / new
@@ -105,6 +105,11 @@ extension DecimalCalculator {
     
     // 처리를 해줄건지.
     mutating func printResult() throws {
+        if numStack.elements.contains("오류") {
+            current = "오류"
+            return
+        }
+        
         numStack.push(current)
         try useAllOperator()
 
@@ -139,6 +144,10 @@ extension DecimalCalculator {
     }
     
     func checkDigits(_ num: String) -> String {
+        if current == "오류" {
+            return "오류"
+        }
+        
         var currentString = num
         
         if currentString.count > 9 {
