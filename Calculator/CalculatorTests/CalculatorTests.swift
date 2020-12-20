@@ -226,4 +226,18 @@ class CalculatorTests: XCTestCase {
 
         XCTAssertEqual(getCurrent, "오류")
     }
+    
+    func testBigNumber() {
+        decimal.current = "1111111111"
+        try! decimal.calculate(.plus)
+        decimal.current = "12345678912"
+        try! decimal.calculate(.multiple)
+        
+        
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["111111111", "123456789"])
+        XCTAssertEqual(operatorArray, [.plus, .multiple])
+    }
 }

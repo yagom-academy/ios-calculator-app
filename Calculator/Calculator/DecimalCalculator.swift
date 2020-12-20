@@ -129,7 +129,7 @@ extension DecimalCalculator {
         } else if num.contains("-") || num.contains(".") {
             let sulplus = num.count - 10
             num.removeLast(sulplus)
-        } else if !num.contains("-") && num.contains(".") {
+        } else if !num.contains("-") && !num.contains(".") {
             let sulplus = num.count - 9
             num.removeLast(sulplus)
         }
