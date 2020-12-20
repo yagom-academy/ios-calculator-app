@@ -240,4 +240,106 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(numArray, ["111111111", "123456789"])
         XCTAssertEqual(operatorArray, [.plus, .multiple])
     }
+    
+    func testDoubleToInt() {
+        decimal.current = "8.3"
+        try! decimal.calculate(.plus)
+        decimal.current = "4.7"
+        try! decimal.printResult()
+        
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["13"])
+        XCTAssertEqual(operatorArray, [])
+    }
+    
+    func testBigDouble() {
+        decimal.current = "1253.393848"
+        try! decimal.calculate(.plus)
+        decimal.current = "32526242524.9"
+        try! decimal.calculate(.multiple)
+        
+        let numArray = decimal.getNumStack()
+        
+        XCTAssertEqual(numArray, ["1253.39384", "3252624252"])
+    }
+    
+    func testDoubleLastZero() {
+        decimal.current = "8.345"
+        try! decimal.calculate(.plus)
+        decimal.current = "4.725"
+        try! decimal.printResult()
+        
+        let numArray = decimal.getNumStack()
+        
+        XCTAssertEqual(numArray, ["13.07"])
+    }
+    
+    func testFirstPlus() {
+        try! decimal.calculate(.plus)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["0"])
+        XCTAssertEqual(operatorArray, [.plus])
+    }
+    
+    func testFirstMinus() {
+        try! decimal.calculate(.minus)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["0"])
+        XCTAssertEqual(operatorArray, [.minus])
+    }
+    
+    func testFirstMultiple() {
+        try! decimal.calculate(.multiple)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["0"])
+        XCTAssertEqual(operatorArray, [.multiple])
+    }
+    
+    func testFirstDivide() {
+        try! decimal.calculate(.divide)
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["0"])
+        XCTAssertEqual(operatorArray, [.divide])
+    }
+    
+    func testFirstPrintResult() {
+        try! decimal.printResult()
+        let numArray = decimal.getNumStack()
+        let operatorArray = decimal.getOperatorStack()
+        
+        XCTAssertEqual(numArray, ["0"])
+        XCTAssertEqual(operatorArray, [])
+    }
+    
+    func testBigNegativeNumber() {
+        decimal.current = "-2421242897242"
+        try! decimal.calculate(.plus)
+        decimal.current = "3"
+        try! decimal.calculate(.multiple) // 여기서 에러
+
+        let numArray = decimal.getNumStack()
+        
+        XCTAssertEqual(numArray, ["-242124289", "3"])
+    }
+    
+    func testBigNegativeDouble() {
+        decimal.current = "-242124.2897242"
+        try! decimal.calculate(.plus)
+        decimal.current = "3"
+        try! decimal.calculate(.multiple) // 여기서 에러
+
+        let numArray = decimal.getNumStack()
+        
+        XCTAssertEqual(numArray, ["-242124.289", "3"])
+    }
 }
