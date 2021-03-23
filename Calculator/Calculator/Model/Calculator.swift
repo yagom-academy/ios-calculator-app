@@ -77,40 +77,40 @@ class Calculator {
             stack.push(String(result))
         }
     }
-        
-        func pushOperatorInStack(_ input: String) {
-            stack.push(input)
-        }
-        
-        func popAllOperatorToList() {
-            for _ in Constant.zero..<stack.count {
-                guard let stackTop = stack.pop() else {
-                    return
-                }
-                postfix.append(stackTop)
-            }
-        }
-        
-        func popHigherPrioritythan(_ input: String) {
-            guard let inputPriority = OperatorType(rawValue: input)?.priority else {
+    
+    func pushOperatorInStack(_ input: String) {
+        stack.push(input)
+    }
+    
+    func popAllOperatorToList() {
+        for _ in Constant.zero..<stack.count {
+            guard let stackTop = stack.pop() else {
                 return
             }
-            
-            for _ in Constant.zero..<stack.count {
-                guard let stackTop = stack.top else {
+            postfix.append(stackTop)
+        }
+    }
+    
+    func popHigherPrioritythan(_ input: String) {
+        guard let inputPriority = OperatorType(rawValue: input)?.priority else {
+            return
+        }
+        
+        for _ in Constant.zero..<stack.count {
+            guard let stackTop = stack.top else {
+                return
+            }
+            guard let stackTopOperatorType = OperatorType(rawValue: stackTop) else {
+                return
+            }
+            if inputPriority < stackTopOperatorType.priority {
+                guard let value = stack.pop() else {
                     return
                 }
-                guard let stackTopOperatorType = OperatorType(rawValue: stackTop) else {
-                    return
-                }
-                if inputPriority < stackTopOperatorType.priority {
-                    guard let value = stack.pop() else {
-                        return
-                    }
-                    postfix.append(value)
-                } else {
-                    break
-                }
+                postfix.append(value)
+            } else {
+                break
             }
         }
     }
+}
