@@ -1,48 +1,102 @@
 //
-//  Binary.swift
+//  BinaryCalculator.swift
 //  Calculator
 //
-//  Created by 천수현 on 2021/03/23.
+//  Created by Neph on 2021/03/23.
 //
 
 import Foundation
 
 class BinaryCalculator: Computable, Resettable {
     
-    func add() {
-        
+    var stack = Stack.shared
+    func add(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first + second
+        return String(result, radix: 2)
     }
     
-    func subtract() {
-        
+    func subtract(firstNumber: String, secondNumber: String) -> String {
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first - second
+        return String(result, radix: 2)
     }
     
-    func AND() {
-        
+    func AND(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first & second
+        return String(result, radix: 2)
     }
     
-    func NAND() {
-        
+    func NAND(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = ~(first & second)
+        return String(result, radix: 2)
     }
     
-    func NOR() {
-        
+    func OR(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first | second
+        return String(result, radix: 2)
     }
     
-    func XOR() {
-        
+    func NOR(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = ~(first | second)
+        return String(result, radix: 2)
     }
     
-    func NOT() {
-        
+    func XOR(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first ^ second
+        return String(result, radix: 2)
     }
     
-    func shiftLeft() {
-        
+    func NOT(firstNumber: String) -> String{
+        guard let first = Int(firstNumber) else {
+            return ""
+        }
+        let result = ~first
+        return String(result, radix: 2)
     }
     
-    func shigtRight() {
-        
+    func shiftLeft(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first << second
+        return String(result, radix: 2)
+    }
+    
+    func shigtRight(firstNumber: String, secondNumber: String) -> String{
+        guard let first = Int(firstNumber),
+              let second = Int(secondNumber) else {
+            return ""
+        }
+        let result = first >> second
+        return String(result, radix: 2)
     }
     
     func reset() {

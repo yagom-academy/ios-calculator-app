@@ -9,16 +9,22 @@ import Foundation
 class Stack {
     
     static var shared = Stack()
-    private var stack = Array<Int>()
-    lazy private(set) var top = stack.last
-    lazy private(set) var bottom = stack.first
+    private var stack = Array<String>()
     
-    func push(_ newElement: Int) {
-        
+    var top: String? {
+        return stack.last
     }
     
-    func pop(_ newElement: Int) {
-        
+    var isEmpty: Bool {
+        return stack.isEmpty
+    }
+    
+    func push(_ newElement: String) {
+        stack.append(newElement)
+    }
+    
+    func pop() -> String? {
+        return stack.removeLast()
     }
     
 }

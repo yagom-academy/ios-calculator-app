@@ -8,8 +8,8 @@
 import Foundation
 
 protocol Computable {
-    func add()
-    func subtract()
+    func add(firstNumber: String, secondNumber: String) -> String
+    func subtract(firstNumber: String, secondNumber: String) -> String
 }
 
 protocol Resettable {
