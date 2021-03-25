@@ -9,8 +9,13 @@ import Foundation
 
 class DecimalCalculator: Computable, Resettable {
     
-    var stack = Stack.shared
-   
+    struct stackForDecimalCalculator {
+        var number: String
+        var operatorType: Operator
+    }
+    
+    var stack = Stack<stackForDecimalCalculator>()
+    
     func add(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Double(firstNumber),
               let second = Double(secondNumber) else {
@@ -48,7 +53,7 @@ class DecimalCalculator: Computable, Resettable {
     }
     
     func reset() {
-        
+        stack.reset()
     }
     
 }

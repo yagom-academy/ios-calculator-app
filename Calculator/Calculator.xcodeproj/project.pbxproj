@@ -66,12 +66,12 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				1C9C56332608F1DB003910F2 /* Protocols.swift */,
 				1C9C56362608F2F8003910F2 /* DecimalCalculator.swift */,
-				1C9C5647260C1EED003910F2 /* Operators.swift */,
 				1C9C563A2608F30B003910F2 /* BinaryCalculator.swift */,
+				1C9C5647260C1EED003910F2 /* Operators.swift */,
 				1C9C564126098A81003910F2 /* Stack.swift */,
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,

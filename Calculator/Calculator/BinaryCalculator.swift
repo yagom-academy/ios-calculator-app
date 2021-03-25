@@ -9,10 +9,20 @@ import Foundation
 
 class BinaryCalculator: Computable, Resettable {
     
-    var stack = Stack.shared
+    struct stackForBinaryCalculator {
+        var number: String
+        var operatorType: Operator
+    }
+    
+    var stack = Stack<stackForBinaryCalculator>()
+    
+    init() {
+        reset()
+    }
+    
     func add(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first + second
@@ -20,8 +30,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func subtract(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first - second
@@ -29,8 +39,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func AND(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first & second
@@ -38,8 +48,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func NAND(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = ~(first & second)
@@ -47,8 +57,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func OR(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first | second
@@ -56,8 +66,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func NOR(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = ~(first | second)
@@ -65,8 +75,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func XOR(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first ^ second
@@ -74,7 +84,7 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func NOT(firstNumber: String) -> String? {
-        guard let first = Int(firstNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2) else {
             return nil
         }
         let result = ~first
@@ -82,8 +92,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func shiftLeft(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first << second
@@ -91,8 +101,8 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func shigtRight(firstNumber: String, secondNumber: String) -> String? {
-        guard let first = Int(firstNumber),
-              let second = Int(secondNumber) else {
+        guard let first = UInt8(firstNumber, radix: 2),
+              let second = UInt8(secondNumber, radix: 2) else {
             return nil
         }
         let result = first >> second
@@ -100,7 +110,7 @@ class BinaryCalculator: Computable, Resettable {
     }
     
     func reset() {
-        
+        stack.reset()
     }
     
 }

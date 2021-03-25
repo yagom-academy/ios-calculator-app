@@ -6,12 +6,10 @@
 //
 
 import Foundation
-class Stack {
+class Stack<T> {
+    private var stack = Array<T>()
     
-    static var shared = Stack()
-    private var stack = Array<String>()
-    
-    var top: String? {
+    var top: T? {
         return stack.last
     }
     
@@ -19,12 +17,16 @@ class Stack {
         return stack.isEmpty
     }
     
-    func push(_ newElement: String) {
+    func push(_ newElement: T) {
         stack.append(newElement)
     }
     
-    func pop() -> String? {
+    func pop() -> T? {
         return stack.removeLast()
     }
     
+    func reset() {
+        stack.removeAll()
+    }
 }
+
