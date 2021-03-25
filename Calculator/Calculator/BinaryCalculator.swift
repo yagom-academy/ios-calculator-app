@@ -10,90 +10,90 @@ import Foundation
 class BinaryCalculator: Computable, Resettable {
     
     var stack = Stack.shared
-    func add(firstNumber: String, secondNumber: String) -> String{
+    func add(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first + second
         return String(result, radix: 2)
     }
     
-    func subtract(firstNumber: String, secondNumber: String) -> String {
+    func subtract(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first - second
         return String(result, radix: 2)
     }
     
-    func AND(firstNumber: String, secondNumber: String) -> String{
+    func AND(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first & second
         return String(result, radix: 2)
     }
     
-    func NAND(firstNumber: String, secondNumber: String) -> String{
+    func NAND(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = ~(first & second)
         return String(result, radix: 2)
     }
     
-    func OR(firstNumber: String, secondNumber: String) -> String{
+    func OR(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first | second
         return String(result, radix: 2)
     }
     
-    func NOR(firstNumber: String, secondNumber: String) -> String{
+    func NOR(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = ~(first | second)
         return String(result, radix: 2)
     }
     
-    func XOR(firstNumber: String, secondNumber: String) -> String{
+    func XOR(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first ^ second
         return String(result, radix: 2)
     }
     
-    func NOT(firstNumber: String) -> String{
+    func NOT(firstNumber: String) -> String? {
         guard let first = Int(firstNumber) else {
-            return ""
+            return nil
         }
         let result = ~first
         return String(result, radix: 2)
     }
     
-    func shiftLeft(firstNumber: String, secondNumber: String) -> String{
+    func shiftLeft(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first << second
         return String(result, radix: 2)
     }
     
-    func shigtRight(firstNumber: String, secondNumber: String) -> String{
+    func shigtRight(firstNumber: String, secondNumber: String) -> String? {
         guard let first = Int(firstNumber),
               let second = Int(secondNumber) else {
-            return ""
+            return nil
         }
         let result = first >> second
         return String(result, radix: 2)
