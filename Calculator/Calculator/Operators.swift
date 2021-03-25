@@ -12,7 +12,6 @@ struct Operator {
 }
 
 enum Operators {
-    static var shared = Stack<Operator>()
     static let addition = Operator(name: "+", precedence: 140)
     static let subtraction = Operator(name: "-", precedence: 140)
     static let multiplication = Operator(name: "*", precedence: 150)
