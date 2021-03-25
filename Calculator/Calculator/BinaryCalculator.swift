@@ -100,7 +100,7 @@ class BinaryCalculator: Computable, Resettable {
         return String(result, radix: 2)
     }
     
-    func shigtRight(firstNumber: String, secondNumber: String) -> String? {
+    func shiftRight(firstNumber: String, secondNumber: String) -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
             return nil
