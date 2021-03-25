@@ -5,7 +5,6 @@
 //  Created by Neph on 2021/03/23.
 //
 
-import Foundation
 
 class BinaryCalculator: Computable, Resettable {
     
@@ -20,91 +19,101 @@ class BinaryCalculator: Computable, Resettable {
         reset()
     }
     
-    func add(firstNumber: String, secondNumber: String) -> String? {
+    func add(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
-        let result = first + second
+        
+        let result = first &+ second
         return String(result, radix: 2)
     }
     
-    func subtract(firstNumber: String, secondNumber: String) -> String? {
+    func subtract(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
-        let result = first - second
+        
+        let result = first &- second
         return String(result, radix: 2)
     }
     
-    func AND(firstNumber: String, secondNumber: String) -> String? {
+    func AND(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = first & second
         return String(result, radix: 2)
     }
     
-    func NAND(firstNumber: String, secondNumber: String) -> String? {
+    func NAND(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = ~(first & second)
         return String(result, radix: 2)
     }
     
-    func OR(firstNumber: String, secondNumber: String) -> String? {
+    func OR(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = first | second
         return String(result, radix: 2)
     }
     
-    func NOR(firstNumber: String, secondNumber: String) -> String? {
+    func NOR(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = ~(first | second)
         return String(result, radix: 2)
     }
     
-    func XOR(firstNumber: String, secondNumber: String) -> String? {
+    func XOR(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = first ^ second
         return String(result, radix: 2)
     }
     
-    func NOT(firstNumber: String) -> String? {
+    func NOT(firstNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = ~first
         return String(result, radix: 2)
     }
     
-    func shiftLeft(firstNumber: String, secondNumber: String) -> String? {
+    func shiftLeft(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = first << second
         return String(result, radix: 2)
     }
     
-    func shiftRight(firstNumber: String, secondNumber: String) -> String? {
+    func shiftRight(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = UInt8(firstNumber, radix: 2),
               let second = UInt8(secondNumber, radix: 2) else {
-            return nil
+            throw CalculatorError.fatalError
         }
+        
         let result = first >> second
         return String(result, radix: 2)
     }

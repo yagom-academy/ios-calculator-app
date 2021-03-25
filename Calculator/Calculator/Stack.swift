@@ -5,8 +5,8 @@
 //  Created by 천수현 on 2021/03/23.
 //
 
-import Foundation
 class Stack<T> {
+    
     private var stack = Array<T>()
     
     var top: T? {
@@ -28,5 +28,6 @@ class Stack<T> {
     func reset() {
         stack.removeAll()
     }
+    
 }
 

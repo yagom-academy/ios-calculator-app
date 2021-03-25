@@ -5,7 +5,6 @@
 //  Created by 천수현 on 2021/03/25.
 //
 
-import Foundation
 
 struct Operator {
     let name: String
@@ -29,11 +28,7 @@ enum Operators {
     static let equal = Operator(name: "=", precedence: 90)
     
     func shouldPop(stack: Stack<Any>, topOfStack: Operator, currentOperator: Operator) -> Bool {
-        if stack.isEmpty {
-            return false
-        }
-        
-        if currentOperator.precedence > topOfStack.precedence {
+        if stack.isEmpty || currentOperator.precedence > topOfStack.precedence {
             return false
         } else {
             return true
