@@ -6,7 +6,7 @@
 //
 
 
-class BinaryCalculator: Computable, Resettable {
+final class BinaryCalculator: Computable, Resettable {
     
     struct stackForBinaryCalculator {
         var number: String
@@ -118,7 +118,7 @@ class BinaryCalculator: Computable, Resettable {
         return formattedResult(of: result)
     }
     
-    func formattedResult(of result: Int) -> String {
+    private func formattedResult(of result: Int) -> String {
         var result = result
         if result >= 256 {
             result %= 256

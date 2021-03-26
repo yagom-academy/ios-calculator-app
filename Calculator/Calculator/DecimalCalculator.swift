@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class DecimalCalculator: Computable, Resettable {
+final class DecimalCalculator: Computable, Resettable {
     
     struct stackForDecimalCalculator {
         var number: String

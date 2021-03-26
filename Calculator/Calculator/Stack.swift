@@ -5,7 +5,7 @@
 //  Created by 천수현 on 2021/03/23.
 //
 
-class Stack<T> {
+final class Stack<T> {
     
     private var stack = Array<T>()
     
