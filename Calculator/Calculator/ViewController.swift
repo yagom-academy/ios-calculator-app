@@ -27,42 +27,59 @@ class ViewController: UIViewController {
     @IBOutlet var divideBtn: UIButton!
     @IBOutlet var clearBtn: UIButton!
     @IBOutlet var equalBtn: UIButton!
+    var calculator = Calculator()
     
     @IBAction func numBtn(_ sender: UIButton) {
         switch sender {
+        case num0:
+            screenText.text = "\(num0.tag)"
+            calculator.receiveInput(buttonType: String(num0.tag))
         case num1:
             screenText.text = "\(num1.tag)"
+            calculator.receiveInput(buttonType: String(num1.tag))
         case num2:
             screenText.text = "\(num2.tag)"
+            calculator.receiveInput(buttonType: String(num2.tag))
         case num3:
             screenText.text = "\(num3.tag)"
+            calculator.receiveInput(buttonType: String(num3.tag))
         case num4:
             screenText.text = "\(num4.tag)"
+            calculator.receiveInput(buttonType: String(num4.tag))
         case num5:
             screenText.text = "\(num5.tag)"
+            calculator.receiveInput(buttonType: String(num5.tag))
         case num6:
             screenText.text = "\(num6.tag)"
+            calculator.receiveInput(buttonType: String(num6.tag))
         case num7:
             screenText.text = "\(num7.tag)"
+            calculator.receiveInput(buttonType: String(num7.tag))
         case num8:
             screenText.text = "\(num8.tag)"
+            calculator.receiveInput(buttonType: String(num8.tag))
         case num9:
             screenText.text = "\(num9.tag)"
+            calculator.receiveInput(buttonType: String(num9.tag))
         case dot:
-            screenText.text = "."
+            calculator.receiveInput(buttonType: ".")
         case plusBtn:
-            screenText.text = "+"
+            calculator.receiveInput(buttonType: "+")
         case minusBtn:
-            screenText.text = "-"
+            calculator.receiveInput(buttonType: "-")
         case multiplyBtn:
-            screenText.text = "*"
+            calculator.receiveInput(buttonType: "*")
         case divideBtn:
-            screenText.text = "/"
+            calculator.receiveInput(buttonType: "/")
         case equalBtn:
-            screenText.text = "="
+            calculator.receiveInput(buttonType: "=")
+        case clearBtn:
+            print("clear button")
+            calculator.receiveInput(buttonType: "c")
         default:
             break
         }
+        screenText.text = calculator.screenNumber
     }
     
     override func viewDidLoad() {
@@ -70,7 +87,6 @@ class ViewController: UIViewController {
         
         setup()
     }
-
 
     func setup() {
         screenText.text = "0"
