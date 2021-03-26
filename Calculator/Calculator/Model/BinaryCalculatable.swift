@@ -13,3 +13,4 @@ protocol BinaryCalculatable: Calculatable {
     func popAllOperatorToList()
     func popHigherPrioritythan(_ input: String)
 }
+
