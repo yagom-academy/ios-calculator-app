@@ -22,11 +22,15 @@ struct Stack {
         array.append(element)
     }
     
-    mutating func pop() -> String? {
+    @discardableResult mutating func pop() -> String? {
         return array.popLast()
     }
     
     var top: String? {
         return array.last
+    }
+    
+    mutating func popAll() {
+        array.removeAll()
     }
 }

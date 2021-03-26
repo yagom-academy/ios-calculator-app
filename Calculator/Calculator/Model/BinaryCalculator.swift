@@ -7,6 +7,6 @@
 
 import Foundation
 
-class BnaryCalculator: Calculator {
+class BnaryCalculator {
     
 }

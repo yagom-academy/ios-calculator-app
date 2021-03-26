@@ -20,6 +20,7 @@ enum OperatorType: String, CaseIterable {
     case not = "~"
     case leftShift = "<<"
     case rightShift = ">>"
+    case equal = "="
     
     var priority: Int {
         switch self {
@@ -35,6 +36,8 @@ enum OperatorType: String, CaseIterable {
             return 6
         case .or:
             return 5
+        default:
+            return 0
         }
     }
     
@@ -64,6 +67,8 @@ enum OperatorType: String, CaseIterable {
             return "<<"
         case .rightShift:
             return ">>"
+        case .equal:
+            return "="
         }
     }
 }
