@@ -54,6 +54,7 @@ struct Calculator {
     func andOperation() {
         binaryCalculator?.andOperation()
     }
+    
 }
 
 let calculator = Calculator(decimalCalculator: Operator())
