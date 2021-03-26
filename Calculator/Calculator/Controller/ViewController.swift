@@ -1,8 +1,9 @@
 //
-//  Calculator - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
+//  ViewController.swift
+//  Calculator
+//
+//  Created by 잼킹 on 2021/03/26.
+//
 
 import UIKit
 
