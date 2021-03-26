@@ -7,42 +7,42 @@
 
 import Foundation
 
-enum Operator: String, CaseIterable {
-    case plus = "+"
-    case subtrack = "-"
-    case multiple = "*"
+enum Operators: String, CaseIterable {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
     case divide = "/"
     case not = "~"
     case and = "&"
-    case notAnd = "~&"
+    case nand = "~&"
     case or = "|"
-    case notOr = "~|"
+    case nor = "~|"
     case xor = "^"
     case leftShift = "<<"
     case rightShift = ">>"
     case equal = "="
     
-    var kinds: CalculatorKinds {
+    var types: OperatorTypes {
         switch self {
-        case .plus, .subtrack:
+        case .add, .subtract, .equal:
             return .common
-        case .multiple, .divide:
+        case .multiply, .divide:
             return .decimal
         default:
             return .binary
         }
     }
-    
-    var priority: Int {
+
+    var precedence: Int {
         switch self {
-        case .multiple, .divide:
-            return 100
-        case .plus, .subtrack:
-            return 80
+        case .not, .multiply, .divide, .and, .nand:
+            return 160
+        case .leftShift, .rightShift:
+            return 140
+        case .add, .subtract, .or, .nor, .xor:
+            return 120
         case .equal:
             return 40
-        default:
-            return 60
         }
     }
 }

@@ -13,13 +13,11 @@
 		2708D10F260D682F00C3B02B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2708D10D260D682F00C3B02B /* Main.storyboard */; };
 		2708D111260D683100C3B02B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2708D110260D683100C3B02B /* Assets.xcassets */; };
 		2708D114260D683100C3B02B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2708D112260D683100C3B02B /* LaunchScreen.storyboard */; };
-		2708D121260D68B300C3B02B /* CalculatorKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D120260D68B300C3B02B /* CalculatorKinds.swift */; };
-		2708D124260D690400C3B02B /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D123260D690400C3B02B /* Calculator.swift */; };
-		2708D127260D691E00C3B02B /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D126260D691E00C3B02B /* Operator.swift */; };
+		2708D121260D68B300C3B02B /* OperatorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D120260D68B300C3B02B /* OperatorTypes.swift */; };
+		2708D127260D691E00C3B02B /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D126260D691E00C3B02B /* Operators.swift */; };
 		2708D12B260D693600C3B02B /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D12A260D693600C3B02B /* Stack.swift */; };
 		2708D12F260D695800C3B02B /* DecimalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D12E260D695800C3B02B /* DecimalCalculator.swift */; };
 		2708D133260D697600C3B02B /* BinaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2708D132260D697600C3B02B /* BinaryCalculator.swift */; };
-		482447CD260CB60A00E20B00 /* Calculators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482447CC260CB60A00E20B00 /* Calculators.swift */; };
 		48988CC0260D666600EC8CB4 /* Calculators2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48988CBF260D666600EC8CB4 /* Calculators2.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,13 +30,11 @@
 		2708D110260D683100C3B02B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2708D113260D683100C3B02B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2708D115260D683100C3B02B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2708D120260D68B300C3B02B /* CalculatorKinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorKinds.swift; sourceTree = "<group>"; };
-		2708D123260D690400C3B02B /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
-		2708D126260D691E00C3B02B /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		2708D120260D68B300C3B02B /* OperatorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTypes.swift; sourceTree = "<group>"; };
+		2708D126260D691E00C3B02B /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		2708D12A260D693600C3B02B /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		2708D12E260D695800C3B02B /* DecimalCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalCalculator.swift; sourceTree = "<group>"; };
 		2708D132260D697600C3B02B /* BinaryCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCalculator.swift; sourceTree = "<group>"; };
-		482447CC260CB60A00E20B00 /* Calculators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculators.swift; sourceTree = "<group>"; };
 		48988CBF260D666600EC8CB4 /* Calculators2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculators2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,8 +68,6 @@
 		2708D106260D682F00C3B02B /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				48988CBF260D666600EC8CB4 /* Calculators2.swift */,
-				482447CC260CB60A00E20B00 /* Calculators.swift */,
 				2708D11F260D689C00C3B02B /* Model */,
 				2708D11E260D688700C3B02B /* Storyboard */,
 				2708D11D260D687800C3B02B /* Controller */,
@@ -113,11 +107,11 @@
 		2708D11F260D689C00C3B02B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2708D123260D690400C3B02B /* Calculator.swift */,
+				48988CBF260D666600EC8CB4 /* Calculators2.swift */,
 				2708D12E260D695800C3B02B /* DecimalCalculator.swift */,
 				2708D132260D697600C3B02B /* BinaryCalculator.swift */,
-				2708D126260D691E00C3B02B /* Operator.swift */,
-				2708D120260D68B300C3B02B /* CalculatorKinds.swift */,
+				2708D126260D691E00C3B02B /* Operators.swift */,
+				2708D120260D68B300C3B02B /* OperatorTypes.swift */,
 				2708D12A260D693600C3B02B /* Stack.swift */,
 			);
 			path = Model;
@@ -194,16 +188,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				48988CC0260D666600EC8CB4 /* Calculators2.swift in Sources */,
-				482447CD260CB60A00E20B00 /* Calculators.swift in Sources */,
 				2708D10C260D682F00C3B02B /* ViewController.swift in Sources */,
-				2708D127260D691E00C3B02B /* Operator.swift in Sources */,
+				2708D127260D691E00C3B02B /* Operators.swift in Sources */,
 				2708D12B260D693600C3B02B /* Stack.swift in Sources */,
 				2708D12F260D695800C3B02B /* DecimalCalculator.swift in Sources */,
 				2708D133260D697600C3B02B /* BinaryCalculator.swift in Sources */,
 				2708D108260D682F00C3B02B /* AppDelegate.swift in Sources */,
 				2708D10A260D682F00C3B02B /* SceneDelegate.swift in Sources */,
-				2708D124260D690400C3B02B /* Calculator.swift in Sources */,
-				2708D121260D68B300C3B02B /* CalculatorKinds.swift in Sources */,
+				2708D121260D68B300C3B02B /* OperatorTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
