@@ -21,17 +21,6 @@ enum Operators: String, CaseIterable {
     case leftShift = "<<"
     case rightShift = ">>"
     case equal = "="
-    
-    var types: OperatorTypes {
-        switch self {
-        case .add, .subtract, .equal:
-            return .common
-        case .multiply, .divide:
-            return .decimal
-        default:
-            return .binary
-        }
-    }
 
     var precedence: Int {
         switch self {
@@ -46,3 +35,4 @@ enum Operators: String, CaseIterable {
         }
     }
 }
+
