@@ -7,4 +7,16 @@
 
 import Foundation
 
+protocol Addable {
+    associatedtype T
+    
+    func add(_ operatedNumber: T, and operatingNumber: T)
+}
+
+extension Addable {
+    func add(_ operatedNumber: T, and operatingNumber: T) {
+        
+    } 
+}
+
 

@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct Stack<T> {
+var decimalStack = Stack<Double>()
+var binaryStack = Stack<Int>()
+
+struct Stack<T: Numeric> {
     private(set) var list: [T] = []
     var isEmpty: Bool { return self.list.isEmpty }
     var top: T? { return self.list.last }
@@ -23,8 +26,16 @@ struct Stack<T> {
     mutating func reset() {
         self.list.removeAll()
     }
+    
+    mutating func sumAllElements() -> T {
+        var sumResult: T = 0
+        for element in self.list {
+            sumResult += element
+        }
+        
+        return sumResult
+    }
 }
-
 
 
 
