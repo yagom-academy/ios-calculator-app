@@ -16,7 +16,7 @@ protocol Addable {
 extension Addable {
     func add(_ operatedNumber: T, and operatingNumber: T) {
         
-    } 
+    }
 }
 
 
