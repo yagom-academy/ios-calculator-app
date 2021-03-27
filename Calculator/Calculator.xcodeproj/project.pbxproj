@@ -16,9 +16,12 @@
 		D0957998260DB9840068AE76 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0957997260DB9840068AE76 /* Stack.swift */; };
 		D095799F260DC1560068AE76 /* DecimalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D095799E260DC1560068AE76 /* DecimalCalculator.swift */; };
 		D09579A2260DC16A0068AE76 /* BinaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579A1260DC16A0068AE76 /* BinaryCalculator.swift */; };
-		D09579A6260DC1C70068AE76 /* AddableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579A5260DC1C70068AE76 /* AddableProtocol.swift */; };
-		D09579A9260DC1D90068AE76 /* SubtractableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579A8260DC1D90068AE76 /* SubtractableProtocol.swift */; };
-		D09579AC260DC1E70068AE76 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579AB260DC1E70068AE76 /* ResetableProtocol.swift */; };
+		D09579A6260DC1C70068AE76 /* Addable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579A5260DC1C70068AE76 /* Addable.swift */; };
+		D09579A9260DC1D90068AE76 /* Subtractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579A8260DC1D90068AE76 /* Subtractable.swift */; };
+		D09579B4260EBF6D0068AE76 /* Resetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579B3260EBF6D0068AE76 /* Resetable.swift */; };
+		D09579BA260EBFBE0068AE76 /* CalculationMethodSwitchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579B9260EBFBE0068AE76 /* CalculationMethodSwitchable.swift */; };
+		D09579BE260EBFCF0068AE76 /* TypeConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579BD260EBFCF0068AE76 /* TypeConvertible.swift */; };
+		D09579C3260EC0430068AE76 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09579C2260EC0430068AE76 /* Operator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +36,12 @@
 		D0957997260DB9840068AE76 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		D095799E260DC1560068AE76 /* DecimalCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalCalculator.swift; sourceTree = "<group>"; };
 		D09579A1260DC16A0068AE76 /* BinaryCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCalculator.swift; sourceTree = "<group>"; };
-		D09579A5260DC1C70068AE76 /* AddableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddableProtocol.swift; sourceTree = "<group>"; };
-		D09579A8260DC1D90068AE76 /* SubtractableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractableProtocol.swift; sourceTree = "<group>"; };
-		D09579AB260DC1E70068AE76 /* ResetableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetableProtocol.swift; sourceTree = "<group>"; };
+		D09579A5260DC1C70068AE76 /* Addable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addable.swift; sourceTree = "<group>"; };
+		D09579A8260DC1D90068AE76 /* Subtractable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtractable.swift; sourceTree = "<group>"; };
+		D09579B3260EBF6D0068AE76 /* Resetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resetable.swift; sourceTree = "<group>"; };
+		D09579B9260EBFBE0068AE76 /* CalculationMethodSwitchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationMethodSwitchable.swift; sourceTree = "<group>"; };
+		D09579BD260EBFCF0068AE76 /* TypeConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeConvertible.swift; sourceTree = "<group>"; };
+		D09579C2260EC0430068AE76 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,8 @@
 			isa = PBXGroup;
 			children = (
 				D09579B0260DC4F00068AE76 /* Model */,
+				D09579C2260EC0430068AE76 /* Operator.swift */,
+				D0957997260DB9840068AE76 /* Stack.swift */,
 				D09579B1260DC5D70068AE76 /* View */,
 				D09579AF260DC2000068AE76 /* ViewController */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
@@ -83,9 +91,11 @@
 		D09579AE260DC1EB0068AE76 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				D09579AB260DC1E70068AE76 /* ResetableProtocol.swift */,
-				D09579A8260DC1D90068AE76 /* SubtractableProtocol.swift */,
-				D09579A5260DC1C70068AE76 /* AddableProtocol.swift */,
+				D09579B3260EBF6D0068AE76 /* Resetable.swift */,
+				D09579A5260DC1C70068AE76 /* Addable.swift */,
+				D09579A8260DC1D90068AE76 /* Subtractable.swift */,
+				D09579B9260EBFBE0068AE76 /* CalculationMethodSwitchable.swift */,
+				D09579BD260EBFCF0068AE76 /* TypeConvertible.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -102,9 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				D09579AE260DC1EB0068AE76 /* Protocols */,
-				D0957997260DB9840068AE76 /* Stack.swift */,
-				D09579A1260DC16A0068AE76 /* BinaryCalculator.swift */,
-				D095799E260DC1560068AE76 /* DecimalCalculator.swift */,
+				D09579C0260EBFDE0068AE76 /* Calculators */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -115,6 +123,15 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D09579C0260EBFDE0068AE76 /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				D09579A1260DC16A0068AE76 /* BinaryCalculator.swift */,
+				D095799E260DC1560068AE76 /* DecimalCalculator.swift */,
+			);
+			path = Calculators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,14 +205,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D09579A2260DC16A0068AE76 /* BinaryCalculator.swift in Sources */,
-				D09579AC260DC1E70068AE76 /* ResetableProtocol.swift in Sources */,
+				D09579C3260EC0430068AE76 /* Operator.swift in Sources */,
 				D0957998260DB9840068AE76 /* Stack.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
-				D09579A9260DC1D90068AE76 /* SubtractableProtocol.swift in Sources */,
+				D09579A9260DC1D90068AE76 /* Subtractable.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				D09579BE260EBFCF0068AE76 /* TypeConvertible.swift in Sources */,
+				D09579BA260EBFBE0068AE76 /* CalculationMethodSwitchable.swift in Sources */,
+				D09579B4260EBF6D0068AE76 /* Resetable.swift in Sources */,
 				D095799F260DC1560068AE76 /* DecimalCalculator.swift in Sources */,
-				D09579A6260DC1C70068AE76 /* AddableProtocol.swift in Sources */,
+				D09579A6260DC1C70068AE76 /* Addable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

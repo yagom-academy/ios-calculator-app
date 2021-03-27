@@ -9,8 +9,8 @@ import Foundation
 
 struct Stack<T> {
     private(set) var list: [T] = []
-    private(set) var isEmpty: Bool { return self.list.isEmpty }
-    private(set) var top: T? { return self.list.last }
+    var isEmpty: Bool { return self.list.isEmpty }
+    var top: T? { return self.list.last }
     
     mutating func push(_ item: T) {
         self.list.append(item)
