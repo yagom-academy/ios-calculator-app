@@ -7,6 +7,17 @@
 
 import Foundation
 
-struct DecimalCalculator: Addable {
+struct DecimalCalculator: Addable, TypeConvertible {
     var stack = Stack<Double>()
+    var userInput: Double
+    
+    mutating func mutily (_ operatedNumber: T, and operatingNumber: T) {
+        
+        
+        
+        
+        stack.push(userInput)
+        
+    }
+    
 }
