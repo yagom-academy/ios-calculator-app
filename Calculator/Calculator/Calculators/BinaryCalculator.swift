@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct BinaryCalculator {
-    
+struct BinaryCalculator: Addable {
+    var stack = Stack<Int>()
 }
 
 

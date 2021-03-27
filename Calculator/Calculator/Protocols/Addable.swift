@@ -8,17 +8,16 @@
 import Foundation
 
 protocol Addable {
-    associatedtype T
+    associatedtype T: Numeric
     
-    func add(_ operatedNumber: T, and operatingNumber: T)
+    var stack: Stack<T> { get set }
+    mutating func add(_ operatedNumber: T, and operatingNumber: T)
 }
 
 extension Addable {
-    func add(_ operatedNumber: T, and operatingNumber: T) {
-        
+    mutating func add(_ operatedNumber: T, and operatingNumber: T) {
+        let sumResult = stack.sumAllElements()
+        stack.reset()
+        stack.push(sumResult)
     }
 }
-
-
-//
-

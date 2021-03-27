@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct DecimalCalculcutor {
-    
+struct DecimalCalculator: Addable {
+    var stack = Stack<Double>()
 }
