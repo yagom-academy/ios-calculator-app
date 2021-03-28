@@ -13,6 +13,7 @@
 		02C3A8242610145100826863 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8232610145100826863 /* Operand.swift */; };
 		02C3A828261014F500826863 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A827261014F500826863 /* Constant.swift */; };
 		02C3A83526101EE800826863 /* Binary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A83426101EE800826863 /* Binary.swift */; };
+		02C3A83826101F1C00826863 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A83726101F1C00826863 /* Calculator.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		02C3A8232610145100826863 /* Operand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand.swift; sourceTree = "<group>"; };
 		02C3A827261014F500826863 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		02C3A83426101EE800826863 /* Binary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binary.swift; sourceTree = "<group>"; };
+		02C3A83726101F1C00826863 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				02C3A83426101EE800826863 /* Binary.swift */,
+				02C3A83726101F1C00826863 /* Calculator.swift */,
 				02C3A8202610125700826863 /* CalculatingElement.swift */,
 				02C3A827261014F500826863 /* Constant.swift */,
 				02C3A8232610145100826863 /* Operand.swift */,
@@ -166,6 +169,7 @@
 				02C3A81A2610110E00826863 /* Stack.swift in Sources */,
 				02C3A83526101EE800826863 /* Binary.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				02C3A83826101F1C00826863 /* Calculator.swift in Sources */,
 				02C3A8212610125700826863 /* CalculatingElement.swift in Sources */,
 				02C3A828261014F500826863 /* Constant.swift in Sources */,
 				02C3A81E261011C900826863 /* Operator.swift in Sources */,
