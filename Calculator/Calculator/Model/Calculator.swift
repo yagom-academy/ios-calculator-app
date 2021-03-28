@@ -112,3 +112,32 @@ class DecimalCalculator: Calculator<Double> {
         return result.truncatingRemainder(dividingBy: Double(Double.maxByDigits) + 1).ceiledByDigits()
     }
 }
+
+class BinaryCalculator: Calculator<Binary> {
+    static let shared = BinaryCalculator()
+    
+    override func calculate(lhs: Binary, by infixOperator: InfixOperator, rhs: Binary) -> Binary {
+        switch infixOperator {
+        case .bitwiseLeftShift:
+            return lhs << rhs
+        case .bitwiseRightShift:
+            return lhs >> rhs
+        case .bitwiseAND:
+            return lhs & rhs
+        case .bitwiseNAND:
+            return lhs ~& rhs
+        case .add:
+            return lhs + rhs
+        case .subtract:
+            return lhs - rhs
+        case .bitwiseOR:
+            return lhs | rhs
+        case .bitwiseNOR:
+            return lhs ~| rhs
+        case .bitwiseXOR:
+            return lhs ^ rhs
+        default:
+            return Binary.zero
+        }
+    }
+}
