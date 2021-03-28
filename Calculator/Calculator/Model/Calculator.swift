@@ -89,3 +89,26 @@ class Calculator<OperandType: Operand> {
         operandStack.clear()
     }
 }
+
+class DecimalCalculator: Calculator<Double> {
+    static let shared = DecimalCalculator()
+    
+    override func calculate(lhs: Double, by infixOperator: InfixOperator, rhs: Double) -> Double {
+        var result: Double
+        
+        switch infixOperator {
+        case .multifly:
+            result = lhs * rhs
+        case .divide:
+            result = lhs / rhs
+        case .add:
+            result = lhs + rhs
+        case .subtract:
+            result = lhs - rhs
+        default:
+            return Double.zero
+        }
+        
+        return result.truncatingRemainder(dividingBy: Double(Double.maxByDigits) + 1).ceiledByDigits()
+    }
+}
