@@ -7,78 +7,57 @@
 
 import Foundation
 
+
+enum Operation {
+    case CommonOperation((Double, Double) -> Double)
+    case BinaryOperation((Int, Int) -> Int)
+    case BinaryUnaryOperation((Int) -> Int)
+    case DecimalOperation((Double, Double) -> Double)
+}
+
 protocol DecimalOperator {
-    func multiply(firstElement: Double, secondElement: Double) -> Double
-    func divide(firstElement: Double, secondElement: Double) -> Double
+    var decimalOperations: Dictionary<Operators, Operation> { get }
 }
 
 protocol BinaryOperator {
-    func andOperation(firstElement: Int, secondElement: Int) -> Int
-    func nandOperation(firstElement: Int, secondElement: Int) -> Int
-    func orOperation(firstElement: Int, secondElement: Int) -> Int
-    func norOperation(firstElement: Int, secondElement: Int) -> Int
-    func xorOperation(firstElement: Int, secondElement: Int) -> Int
-    func leftShift(element: Int) -> Int
-    func rightShift(element: Int) -> Int
-    func notOperation(element: Int) -> Int
+    var binaryOperations: Dictionary<String, Operation> { get }
+    var binaryUnaryOperations: Dictionary<String, Operation> { get }
 }
 
+
 class Calculator {
-    func add(firstElement: Double, secondElement: Double) -> Double {
-        return firstElement + secondElement
-    }
-    
-    func subtract(firstElement: Double, secondElement: Double) -> Double {
-        return firstElement - secondElement
-    }
-
-    func clear() {
-
-    }
+    var baseOperations: Dictionary<Operators, Operation> = [
+        .add : (Operation.CommonOperation({ $0 + $1 })),
+        .subtract : (Operation.CommonOperation({ $0 - $1 })),
+    ]
 }
 
 class DecimalCalculator: Calculator, DecimalOperator {
-    func multiply(firstElement: Double, secondElement: Double) -> Double {
-        return firstElement * secondElement
-    }
+    private var accummulater = 0.0
     
-    func divide(firstElement: Double, secondElement: Double) -> Double {
-        return firstElement / secondElement
-    }
+    var decimalOperations: Dictionary<Operators, Operation> = [
+        .multiply : (Operation.DecimalOperation({ $0 * $1 })),
+        .divide : (Operation.DecimalOperation({ $0 / $1 })), // 0으로 나눴을 때 오류처리
+        // 결과가 Int면 Int로 보여준다.
+    ]
 }
 
 class BinaryCalculator: Calculator, BinaryOperator {
-    func andOperation(firstElement: Int, secondElement: Int) -> Int {
-        return firstElement & secondElement
-    }
+    private var accumulator = 0
     
-    func nandOperation(firstElement: Int, secondElement: Int) -> Int {
-        return ~(firstElement & secondElement)
-    }
+    var binaryOperations: Dictionary<String, Operation> = [
+        "AND" : (Operation.BinaryOperation({ $0 & $1 })),
+        "NAND" : (Operation.BinaryOperation({ ~($0 & $1) })),
+        "OR" : (Operation.BinaryOperation({ $0 | $1 })),
+        "NOR" : (Operation.BinaryOperation({ ~($0 | $1) })),
+        "XOR" : (Operation.BinaryOperation({ $0 ^ $1 })),
+    ]
     
-    func orOperation(firstElement: Int, secondElement: Int) -> Int {
-        return firstElement | secondElement
-    }
-    
-    func norOperation(firstElement: Int, secondElement: Int) -> Int {
-        return ~(firstElement | secondElement)
-    }
-    
-    func xorOperation(firstElement: Int, secondElement: Int) -> Int {
-        return firstElement ^ secondElement
-    }
-    
-    func leftShift(element: Int) -> Int {
-        return element << 1
-    }
-    
-    func rightShift(element: Int) -> Int {
-        return element >> 1
-    }
-    
-    func notOperation(element: Int) -> Int {
-        return ~element
-    }
+    var binaryUnaryOperations: Dictionary<String, Operation> = [
+        "NOT" : (Operation.BinaryUnaryOperation({ ~$0 })),
+        "<<" : (Operation.BinaryUnaryOperation({ $0 << 1 })),
+        ">>" : (Operation.BinaryUnaryOperation({ $0 >> 1 }))
+    ]
 }
 
 

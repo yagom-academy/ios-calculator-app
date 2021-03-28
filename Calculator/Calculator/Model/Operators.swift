@@ -21,7 +21,7 @@ enum Operators: String, CaseIterable {
     case leftShift = "<<"
     case rightShift = ">>"
     case equal = "="
-
+    
     var precedence: Int {
         switch self {
         case .not, .multiply, .divide, .and, .nand:
@@ -36,3 +36,25 @@ enum Operators: String, CaseIterable {
     }
 }
 
+enum operatorPrecedenceTier: Int {
+    case topTier = 160
+    case secondTier = 140
+    case thirdTier = 120
+}
+
+struct OperatorPrecedenceTable {
+    let precedence: [String:Int] = [
+        "+" : operatorPrecedenceTier.thirdTier.rawValue,
+        "-" : operatorPrecedenceTier.thirdTier.rawValue,
+        "*" : operatorPrecedenceTier.topTier.rawValue,
+        "/" : operatorPrecedenceTier.topTier.rawValue,
+        "~" : operatorPrecedenceTier.topTier.rawValue,
+        "&" : operatorPrecedenceTier.topTier.rawValue,
+        "~&" : operatorPrecedenceTier.topTier.rawValue,
+        "|" : operatorPrecedenceTier.thirdTier.rawValue,
+        "~|" : operatorPrecedenceTier.thirdTier.rawValue,
+        "^" : operatorPrecedenceTier.thirdTier.rawValue,
+        "<<" : operatorPrecedenceTier.secondTier.rawValue,
+        ">>" : operatorPrecedenceTier.secondTier.rawValue,
+    ]
+}
