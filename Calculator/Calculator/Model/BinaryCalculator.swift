@@ -25,7 +25,8 @@ final class BinaryCalculator: BinaryCalculatable {
             operand = Constant.blank
             popAllOperatorToList()
             for _ in Constant.zero..<postfixNumbers.count {
-                calculate()
+                let postfixFirstOperator = postfixNumbers.removeFirst()
+                calculate(using: postfixFirstOperator)
             }
         } else if input == OperatorType.not.symbol {
             guard let binaryNumber = UInt8(operand, radix: Constant.binary) else { return }
@@ -40,10 +41,9 @@ final class BinaryCalculator: BinaryCalculatable {
         }
     }
     
-    func calculate() {
-        let postfixFirst = postfixNumbers.removeFirst()
-        if !operators.contains(postfixFirst) {
-            stack.push(postfixFirst)
+    func calculate(using operatorValue: String) {
+        if !operators.contains(operatorValue) {
+            stack.push(operatorValue)
             return
         }
         
@@ -53,7 +53,7 @@ final class BinaryCalculator: BinaryCalculatable {
         guard let stackSecond = stack.pop() else { return }
         guard let numberSecond = UInt8(stackSecond, radix: Constant.binary) else { return }
         
-        let result = infixCalculate(firstNumber: numberFirst, operatorSymbol: postfixFirst, secondNumber: numberSecond)
+        let result = infixCalculate(firstNumber: numberFirst, operatorSymbol: operatorValue, secondNumber: numberSecond)
         stack.push(result)
     }
     

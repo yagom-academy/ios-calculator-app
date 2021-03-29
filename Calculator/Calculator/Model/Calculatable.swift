@@ -15,4 +15,5 @@ protocol Calculatable {
     func reset()
     func input(_ input: String)
     func display() -> String?
+    func calculate(using operatorValue: String)
 }

@@ -62,12 +62,12 @@ final class DecimalCalculator: DecimalCalculatable {
         stack.push(input)
     }
     
-    func calculate(using stackTopOperator: String) {
+    func calculate(using operatorValue: String) {
         guard let first = postfixNumbers.popLast() else { return }
         guard let firstNumber = Double(first) else { return }
         guard let second = postfixNumbers.popLast() else { return }
         guard let secondNumber = Double(second) else { return }
-        let result = infixCalculate(firstNumber: firstNumber, operatorSymbol: stackTopOperator, secondNumber: secondNumber)
+        let result = infixCalculate(firstNumber: firstNumber, operatorSymbol: operatorValue, secondNumber: secondNumber)
         postfixNumbers.append(result)
     }
     
