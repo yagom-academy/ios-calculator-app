@@ -139,9 +139,27 @@ class Calculator {
                 tempNumber = ""
             case "c":
                 reset()
+            case "=":
+                guard let doubleValue = Double(tempNumber) else { return }
+                // 마지막 연산자
+                // 마지막 피연산자
+                operands.push(doubleValue)
+                if operands.count == operators.count {
+                // TODO: 마지막 입력이 연산자 이고 그 다음 "="을 눌렀을 때 마지막 피연산자와 연산자를 프로퍼티로 저장
+                    operands.push(doubleValue)
+                }
+                // TODO: "="을 계속 눌렀을 때 처리
+                while !operators.isEmpty() {
+                    calculateUntilSatisfiedCondition()
+                }
+                updateScreenNumber()
+                tempNumber = String(operands.top()!)
             default:
                 print("input error")
         }
+        print(operands)
+        print(operators)
+        print("tempNumber", tempNumber)
     }
 }
 
