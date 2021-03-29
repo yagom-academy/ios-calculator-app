@@ -14,8 +14,8 @@ struct Stack<Type> {
     }
     
     /// Removes and returns the last element of the stack.
-    mutating func pop() -> Type {
-        return items.removeLast()
+    mutating func pop() -> Type? {
+        return items.popLast()
     }
     
     /// Checks the last element of the stack.

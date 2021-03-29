@@ -10,13 +10,13 @@ import Foundation
 class Calculator<OperandType: Operand> {
     private var postfixedList = Array<CalculatingElement>()
     private var operandStack = Stack<OperandType>()
-    private var operatorStack = Stack<InfixOperator>()
+    private var infixOperatorStack = Stack<InfixOperator>()
     private(set) var lastOperand: OperandType?
     private(set) var lastOperator: InfixOperator?
     private(set) var calculated: OperandType? {
         didSet {
             guard let toPrint = calculated else { return }
-            print("calculated: \(toPrint), postfixedList: \(postfixedList), operandStack: \(operandStack), operatorStack: \(operatorStack)")
+            print("calculated: \(toPrint), postfixedList: \(postfixedList), operandStack: \(operandStack), operatorStack: \(infixOperatorStack)")
         }
     }
     
@@ -39,13 +39,14 @@ class Calculator<OperandType: Operand> {
     }
     
     func appendPostfixedList(_ infixOperator: InfixOperator) {
-        while operatorStack.isNotEmpty {
-            if operatorStack.peek()!.isPrecedence(over: infixOperator) {
-                postfixedList.append(operatorStack.pop())
+        while infixOperatorStack.isNotEmpty {
+            if infixOperatorStack.peek()!.isPrecedence(over: infixOperator) {
+                guard let infixOperator = infixOperatorStack.pop() else { return }
+                postfixedList.append(infixOperator)
                 operate()
             } else { break }
         }
-        operatorStack.push(infixOperator)
+        infixOperatorStack.push(infixOperator)
         lastOperator = infixOperator
     }
     
@@ -69,23 +70,25 @@ class Calculator<OperandType: Operand> {
                 operandStack.push(element as! OperandType)
             } else if element is InfixOperator {
                 let infixOperator = element as! InfixOperator
-                let rightOperand = operandStack.pop()
-                calculated = calculate(lhs: operandStack.pop(), by: infixOperator, rhs: rightOperand)
+                guard let rightOperand = operandStack.pop() else { return }
+                guard let leftOperand = operandStack.pop() else { return }
+                calculated = calculate(lhs: leftOperand, by: infixOperator, rhs: rightOperand)
                 operandStack.push(calculated!)
             }
         }
     }
     
     func equal() {
-        while operatorStack.isNotEmpty {
-            postfixedList.append(operatorStack.pop())
+        while infixOperatorStack.isNotEmpty {
+            guard let infixOperator = infixOperatorStack.pop() else { return }
+            postfixedList.append(infixOperator)
         }
         operate()
     }
     
     func clear() {
         postfixedList.removeAll()
-        operatorStack.clear()
+        infixOperatorStack.clear()
         operandStack.clear()
     }
 }
