@@ -40,26 +40,25 @@ class Calculator<OperandType: Operand> {
     
     func appendPostfixedList(_ infixOperator: InfixOperator) {
         while infixOperatorStack.isNotEmpty {
-            if infixOperatorStack.peek()!.isPrecedence(over: infixOperator) {
-                guard let infixOperator = infixOperatorStack.pop() else { return }
-                postfixedList.append(infixOperator)
-                operate()
-            } else { break }
+            if infixOperator.isPrecedence(over: infixOperatorStack.peek()!) { break }
+            guard let infixOperator = infixOperatorStack.pop() else { return }
+            
+            postfixedList.append(infixOperator)
+            operate()
         }
+        
         infixOperatorStack.push(infixOperator)
         lastOperator = infixOperator
     }
     
     func appendPostfixedList(contentsOf elements: String) {
         for element in elements.components(separatedBy: " ") {
-            for infixOperator in InfixOperator.allCases {
-                if(infixOperator.rawValue == element) {
-                    appendPostfixedList(infixOperator)
-                }
+            if let infixOperator = InfixOperator(rawValue: element) {
+                appendPostfixedList(infixOperator)
             }
-            
-            guard let operand = OperandType(element) else { continue }
-            appendPostfixedList(operand)
+            if let operand = OperandType(element) {
+                appendPostfixedList(operand)
+            }
         }
     }
     

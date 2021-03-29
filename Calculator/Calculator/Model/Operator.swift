@@ -26,7 +26,7 @@ enum InfixOperator: String, Operator, CaseIterable {
     }
     
     func isPrecedence(over anotherOperator: InfixOperator) -> Bool {
-        return false == (self.precedence < anotherOperator.precedence)
+        return self.precedence > anotherOperator.precedence
     }
 }
 
