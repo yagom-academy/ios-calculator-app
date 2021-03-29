@@ -13,12 +13,12 @@ final class DecimalCalculator: DecimalCalculatable {
     var stack: Stack = Stack<String>()
     var postfixNumbers = [String]()
     var operand = Constant.blank
-    let operatorArray = OperatorType.allCases.map{ $0.rawValue }
+    let operators = OperatorType.allCases.map{ $0.rawValue }
     
     private init() { }
 
     func input(_ input: String) {
-        if !operatorArray.contains(input) {
+        if !operators.contains(input) {
             operand = operand + input
         } else if input == OperatorType.equal.symbol {
             numberMoveToArray()

@@ -15,10 +15,10 @@ final class BinaryCalculator: BinaryCalculatable {
     var stack: Stack = Stack<String>()
     var postfixNumbers = [String]()
     var operand = Constant.blank
-    let operatorArray = OperatorType.allCases.map{ $0.rawValue }
+    let operators = OperatorType.allCases.map{ $0.rawValue }
     
     func input(_ input: String) {
-        if !operatorArray.contains(input) {
+        if !operators.contains(input) {
             operand = operand + input
         } else if input == OperatorType.equal.symbol {
             postfixNumbers.append(operand)
@@ -42,7 +42,7 @@ final class BinaryCalculator: BinaryCalculatable {
     
     func calculate() {
         let postfixFirst = postfixNumbers.removeFirst()
-        if !operatorArray.contains(postfixFirst) {
+        if !operators.contains(postfixFirst) {
             stack.push(postfixFirst)
             return
         }

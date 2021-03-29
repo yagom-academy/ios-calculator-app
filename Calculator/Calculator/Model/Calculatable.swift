@@ -10,7 +10,7 @@ protocol Calculatable {
     var stack: Stack<String> { get }
     var postfixNumbers: [String] { get }
     var operand: String { get }
-    var operatorArray: [String] { get }
+    var operators: [String] { get }
     
     func reset()
     func input(_ input: String)
