@@ -19,109 +19,111 @@ final class BinaryCalculator: Computable, Resettable {
         reset()
     }
     
-    func add(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
+    func convertToBinary(_ input: String) -> Int {
+        guard input.count <= 8,
+            var number = Int(input, radix: 2) else {
+            return -1
         }
         
-        let result = first &+ second
+        if number == 128 {
+            return -1
+        } else if number > 128 {
+            number -= 1
+            number ^= 255
+            number *= -1
+        }
+        
+        return number
+    }
+    
+    func add(firstNumber: String, secondNumber: String) throws -> String? {
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
+        
+        let result = first + second
+        
         return formattedResult(of: result)
     }
     
     func subtract(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = first &- second
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func AND(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = first & second
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func NAND(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = ~(first & second)
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func OR(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = first | second
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func NOR(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = ~(first | second)
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func XOR(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = first ^ second
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func NOT(firstNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
+        guard let first = Int(firstNumber) else {
+            return "-1"
         }
+        var result = ~first
         
-        let result = ~first
-        return formattedResult(of: result)
+        result ^= (~0 - 255)
+        
+        return String(result, radix: 2)
     }
     
     func shiftLeft(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = first << second
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func shiftRight(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2),
-              let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
+        let first = convertToBinary(firstNumber)
+        let second = convertToBinary(secondNumber)
         
         let result = first >> second
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
-    private func formattedResult(of result: Int) -> String {
+    func formattedResult(of result: Int) -> String {
         var result = result
-        if result >= 256 {
-            result %= 256
+        if result >= 128 {
+            result %= 128
         } else if result < 0 {
             result = 1 << 8 + result
         }
