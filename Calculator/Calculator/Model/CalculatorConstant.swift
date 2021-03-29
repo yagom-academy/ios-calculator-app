@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Constant {
+enum CalculatorConstant {
     static let blank = ""
     static let zero = 0
     static let doubleZero = 0.0

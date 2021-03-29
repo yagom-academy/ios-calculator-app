@@ -12,7 +12,7 @@ final class DecimalCalculator: DecimalCalculatable {
     
     var stack: Stack = Stack<String>()
     var postfixNumbers = [String]()
-    var operand = Constant.blank
+    var operand = CalculatorConstant.blank
     let operators = OperatorType.allCases.map{ $0.rawValue }
     
     private init() { }
@@ -22,7 +22,7 @@ final class DecimalCalculator: DecimalCalculatable {
             operand = operand + input
         } else if input == OperatorType.equal.symbol {
             numberMoveToArray()
-            for _ in Constant.zero..<stack.count {
+            for _ in CalculatorConstant.zero..<stack.count {
                 guard let stackTopOperator = stack.pop() else { return }
                 calculate(using: stackTopOperator)
             }
@@ -34,7 +34,7 @@ final class DecimalCalculator: DecimalCalculatable {
     }
     
     func infixCalculate(firstNumber: Double, operatorSymbol: String, secondNumber: Double) -> String {
-        var result = Constant.doubleZero
+        var result = CalculatorConstant.doubleZero
         let error: Error = CalculatorError.invalidOperator
         
         switch operatorSymbol {
@@ -55,7 +55,7 @@ final class DecimalCalculator: DecimalCalculatable {
     
     func numberMoveToArray() {
         postfixNumbers.append(operand)
-        operand = Constant.blank
+        operand = CalculatorConstant.blank
     }
     
     func pushOperatorInStack(_ input: String) {
@@ -80,7 +80,7 @@ final class DecimalCalculator: DecimalCalculatable {
             calculate(using: stackTopOperator)
             stack.pop()
         } else if inputPriority < stackTopOperatorPriority {
-            for _ in Constant.zero..<stack.count {
+            for _ in CalculatorConstant.zero..<stack.count {
                 guard let loopStackTopOperator = stack.pop() else { return }
                 calculate(using: loopStackTopOperator)
             }
@@ -94,9 +94,9 @@ final class DecimalCalculator: DecimalCalculatable {
     }
     
     private func extractInteger(number: String) -> String {
-        let array = number.components(separatedBy: Constant.dot)
+        let array = number.components(separatedBy: CalculatorConstant.dot)
         guard let primeNumber = array.last, let integerNumber = array.first else { return number }
-        if primeNumber.count == Constant.integerOne && primeNumber == Constant.stringOne {
+        if primeNumber.count == CalculatorConstant.integerOne && primeNumber == CalculatorConstant.stringOne {
             return integerNumber
         } else {
             return number
@@ -106,6 +106,6 @@ final class DecimalCalculator: DecimalCalculatable {
     func reset() {
         stack.removeAll()
         postfixNumbers.removeAll()
-        operand = Constant.blank
+        operand = CalculatorConstant.blank
     }
 }

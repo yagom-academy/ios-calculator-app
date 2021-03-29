@@ -14,7 +14,7 @@ final class BinaryCalculator: BinaryCalculatable {
     
     var stack: Stack = Stack<String>()
     var postfixNumbers = [String]()
-    var operand = Constant.blank
+    var operand = CalculatorConstant.blank
     let operators = OperatorType.allCases.map{ $0.rawValue }
     
     func input(_ input: String) {
@@ -22,20 +22,20 @@ final class BinaryCalculator: BinaryCalculatable {
             operand = operand + input
         } else if input == OperatorType.equal.symbol {
             postfixNumbers.append(operand)
-            operand = Constant.blank
+            operand = CalculatorConstant.blank
             moveAllToPostfixNumbers()
-            for _ in Constant.zero..<postfixNumbers.count {
+            for _ in CalculatorConstant.zero..<postfixNumbers.count {
                 let postfixFirstOperator = postfixNumbers.removeFirst()
                 calculate(using: postfixFirstOperator)
             }
         } else if input == OperatorType.not.symbol {
-            guard let binaryNumber = UInt8(operand, radix: Constant.binary) else { return }
+            guard let binaryNumber = UInt8(operand, radix: CalculatorConstant.binary) else { return }
             let result = ~binaryNumber
-            stack.push(String(result, radix: Constant.binary))
-            operand = Constant.blank
+            stack.push(String(result, radix: CalculatorConstant.binary))
+            operand = CalculatorConstant.blank
         } else {
             postfixNumbers.append(operand)
-            operand = Constant.blank
+            operand = CalculatorConstant.blank
             moveHigherPrioritythan(input)
             pushOperatorInStack(input)
         }
@@ -48,17 +48,17 @@ final class BinaryCalculator: BinaryCalculatable {
         }
         
         guard let stackFirst = stack.pop() else { return }
-        guard let numberFirst = UInt8(stackFirst, radix: Constant.binary) else { return }
+        guard let numberFirst = UInt8(stackFirst, radix: CalculatorConstant.binary) else { return }
         
         guard let stackSecond = stack.pop() else { return }
-        guard let numberSecond = UInt8(stackSecond, radix: Constant.binary) else { return }
+        guard let numberSecond = UInt8(stackSecond, radix: CalculatorConstant.binary) else { return }
         
         let result = infixCalculate(firstNumber: numberFirst, operatorSymbol: operatorValue, secondNumber: numberSecond)
         stack.push(result)
     }
     
     func infixCalculate(firstNumber: UInt8, operatorSymbol: String, secondNumber: UInt8) -> String {
-        var result: UInt8 = Constant.uInt8Zero
+        var result: UInt8 = CalculatorConstant.uInt8Zero
         let error: Error = CalculatorError.invalidOperator
         
         switch operatorSymbol {
@@ -84,7 +84,7 @@ final class BinaryCalculator: BinaryCalculatable {
             print(error.localizedDescription)
             fatalError()
         }
-        return String(result, radix: Constant.binary)
+        return String(result, radix: CalculatorConstant.binary)
     }
     
     func pushOperatorInStack(_ input: String) {
@@ -92,7 +92,7 @@ final class BinaryCalculator: BinaryCalculatable {
     }
     
     func moveAllToPostfixNumbers() {
-        for _ in Constant.zero..<stack.count {
+        for _ in CalculatorConstant.zero..<stack.count {
             guard let stackTop = stack.pop() else { return }
             postfixNumbers.append(stackTop)
         }
@@ -101,7 +101,7 @@ final class BinaryCalculator: BinaryCalculatable {
     func moveHigherPrioritythan(_ input: String) {
         guard let inputPriority = OperatorType(rawValue: input)?.priority else { return }
         
-        for _ in Constant.zero..<stack.count {
+        for _ in CalculatorConstant.zero..<stack.count {
             guard let stackTop = stack.peek else { return }
             guard let stackTopOperatorType = OperatorType(rawValue: stackTop) else { return }
             if inputPriority <= stackTopOperatorType.priority {
@@ -122,6 +122,6 @@ final class BinaryCalculator: BinaryCalculatable {
     func reset() {
         stack.removeAll()
         postfixNumbers.removeAll()
-        operand = Constant.blank
+        operand = CalculatorConstant.blank
     }
 }
