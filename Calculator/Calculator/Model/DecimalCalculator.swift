@@ -73,7 +73,7 @@ final class DecimalCalculator: DecimalCalculatable {
     
     func calculateHigherPrioritythan(_ input: String) {
         guard let inputPriority = OperatorType(rawValue: input)?.priority else { return }
-        guard let stackTopOperator = stack.top else { return }
+        guard let stackTopOperator = stack.peek else { return }
         guard let stackTopOperatorPriority = OperatorType(rawValue: stackTopOperator)?.priority else { return }
         
         if inputPriority == stackTopOperatorPriority {
@@ -104,7 +104,7 @@ final class DecimalCalculator: DecimalCalculatable {
     }
     
     func reset() {
-        stack.popAll()
+        stack.removeAll()
         postfix.removeAll()
         numberInput = Constant.blank
     }

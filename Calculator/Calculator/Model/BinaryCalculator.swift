@@ -102,7 +102,7 @@ final class BinaryCalculator: BinaryCalculatable {
         guard let inputPriority = OperatorType(rawValue: input)?.priority else { return }
         
         for _ in Constant.zero..<stack.count {
-            guard let stackTop = stack.top else { return }
+            guard let stackTop = stack.peek else { return }
             guard let stackTopOperatorType = OperatorType(rawValue: stackTop) else { return }
             if inputPriority <= stackTopOperatorType.priority {
                 guard let value = stack.pop() else { return }
@@ -115,12 +115,12 @@ final class BinaryCalculator: BinaryCalculatable {
     }
     
     func display() -> String? {
-        guard let last = stack.top else { return nil }
+        guard let last = stack.peek else { return nil }
         return last
     }
     
     func reset() {
-        stack.popAll()
+        stack.removeAll()
         postfix.removeAll()
         numberInput = Constant.blank
     }

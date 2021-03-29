@@ -26,11 +26,11 @@ struct Stack {
         return array.popLast()
     }
     
-    var top: String? {
+    var peek: String? {
         return array.last
     }
     
-    mutating func popAll() {
+    mutating func removeAll() {
         array.removeAll()
     }
 }
