@@ -5,15 +5,16 @@
 //  Created by Neph on 2021/03/23.
 //
 
+import Accelerate
 
 final class BinaryCalculator: Computable, Resettable {
     
-    struct stackForBinaryCalculator {
-        var number: String
-        var operatorType: Operator
+    struct StackForBinaryCalculator {
+        let number: String
+        let operatorType: Operator
     }
     
-    var stack = Stack<stackForBinaryCalculator>()
+    private(set) var stack = Stack<StackForBinaryCalculator>()
     
     init() {
         reset()
@@ -22,7 +23,7 @@ final class BinaryCalculator: Computable, Resettable {
     func add(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first &+ second
@@ -32,7 +33,7 @@ final class BinaryCalculator: Computable, Resettable {
     func subtract(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first &- second
@@ -42,7 +43,7 @@ final class BinaryCalculator: Computable, Resettable {
     func AND(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first & second
@@ -52,17 +53,17 @@ final class BinaryCalculator: Computable, Resettable {
     func NAND(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
-        
+ 
         let result = ~(first & second)
         return formattedResult(of: result)
     }
-    
+   
     func OR(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first | second
@@ -72,7 +73,7 @@ final class BinaryCalculator: Computable, Resettable {
     func NOR(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = ~(first | second)
@@ -82,7 +83,7 @@ final class BinaryCalculator: Computable, Resettable {
     func XOR(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first ^ second
@@ -91,7 +92,7 @@ final class BinaryCalculator: Computable, Resettable {
     
     func NOT(firstNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = ~first
@@ -101,7 +102,7 @@ final class BinaryCalculator: Computable, Resettable {
     func shiftLeft(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first << second
@@ -111,7 +112,7 @@ final class BinaryCalculator: Computable, Resettable {
     func shiftRight(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Int(firstNumber, radix: 2),
               let second = Int(secondNumber, radix: 2) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first >> second

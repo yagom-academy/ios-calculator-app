@@ -8,17 +8,17 @@ import Foundation
 
 final class DecimalCalculator: Computable, Resettable {
     
-    struct stackForDecimalCalculator {
+    struct StackForDecimalCalculator {
         var number: String
         var operatorType: Operator
     }
     
-    var stack = Stack<stackForDecimalCalculator>()
+    var stack = Stack<StackForDecimalCalculator>()
     
     func add(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Double(firstNumber),
               let second = Double(secondNumber) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first + second
@@ -28,7 +28,7 @@ final class DecimalCalculator: Computable, Resettable {
     func subtract(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Double(firstNumber),
               let second = Double(secondNumber) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first - second
@@ -38,7 +38,7 @@ final class DecimalCalculator: Computable, Resettable {
     func multiply(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Double(firstNumber),
               let second = Double(secondNumber) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first * second
@@ -48,7 +48,7 @@ final class DecimalCalculator: Computable, Resettable {
     func divide(firstNumber: String, secondNumber: String) throws -> String? {
         guard let first = Double(firstNumber),
               let second = Double(secondNumber) else {
-            throw CalculatorError.fatalError
+            throw CalculatorError.invalidInput
         }
         
         let result = first / second

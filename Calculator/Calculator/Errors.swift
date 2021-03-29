@@ -8,5 +8,6 @@
 import Foundation
 
 enum CalculatorError : Error {
-    case fatalError
+    case invalidInput
+    case outOfRangeInput
 }
