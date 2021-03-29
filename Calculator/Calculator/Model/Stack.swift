@@ -8,7 +8,7 @@
 import Foundation
 
 struct Stack {
-    var array = [String]()
+    private var array = [String]()
     
     var isEmpty: Bool {
         return array.isEmpty
