@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DecimalInputDataValidation: InputDataValidationProtocol{
+class DecimalInputDataValidation: InputDataValidatable{
     static let sharedInstance = DecimalInputDataValidation()
     var userInput:[String] = []
     let operators = ["*","/","+","-"]
@@ -20,13 +20,15 @@ class DecimalInputDataValidation: InputDataValidationProtocol{
             if operators.contains(currentData){
                 userInput.removeLast()
                 userInput.append(currentData)
-            } else {
+            }
+            else {
                 userInput.append(currentData)
             }
         case false :
             if operators.contains(currentData) {
                 userInput.append(currentData)
-            } else {
+            }
+            else {
                 userInput.removeLast()
                 userInput.append(previousData + currentData)
             }
@@ -36,7 +38,8 @@ class DecimalInputDataValidation: InputDataValidationProtocol{
     private func filterInitialIncomingData(_ inputData: String) {
         if operators.contains(inputData) {
             userInput = []
-        } else {
+        }
+        else {
             userInput.append(inputData)
         }
     }
@@ -52,16 +55,15 @@ class DecimalInputDataValidation: InputDataValidationProtocol{
     }
 }
 
-class DecimalCalculation: CalculationProtocol{
-    typealias precedence = Int
+class DecimalCalculation: Calculatable{
+    typealias Precedence = Int
     
-    let operatorPriority: [String : precedence] = ["*" : 3, "/" : 3, "+" : 2, "-" : 2, "(" : 1]
+    let operatorPriority: [String : Precedence] = ["*" : 3, "/" : 3, "+" : 2, "-" : 2, "(" : 1]
     var medianNotation: [String] = DecimalInputDataValidation.sharedInstance.userInput
     var postfixNotation: [String] = []
     var operatorStack = Stack<String>()
     var firstOperand = Double()
     var secondOperand = Double()
-    
     
     func convertToPostfixNotation() {
         if operatorPriority.keys.contains(medianNotation.last!) {
@@ -80,10 +82,13 @@ class DecimalCalculation: CalculationProtocol{
         for element in postfixNotation {
             if !operatorPriority.keys.contains(element) {
                 guard let numbers = Double(element) else { return }
+                
                 operandStack.push(numbers)
-            } else {
+            }
+            else {
                 guard let firstPoppedValue = operandStack.pop(),
                       let secondPoppedValue = operandStack.pop() else { return }
+                
                 firstOperand = firstPoppedValue.value
                 secondOperand = secondPoppedValue.value
                 
@@ -107,7 +112,8 @@ class DecimalCalculation: CalculationProtocol{
     private func distinguishOperatorFromOperand(_ element: String) {
         if operatorPriority.keys.contains(element) {
             pushPriorOperator(element)
-        } else {
+        }
+        else {
             postfixNotation.append(element)
         }
     }
@@ -115,10 +121,13 @@ class DecimalCalculation: CalculationProtocol{
     private func pushPriorOperator(_ element: String) {
         if operatorStack.isEmpty() {
             operatorStack.push(element)
-        } else {
+        }
+        else {
             guard let peeked = operatorStack.peek() else { return }
+            
             while operatorPriority[peeked.value]! >= operatorPriority[element]! {
                 guard let popped = operatorStack.pop() else { break }
+                
                 postfixNotation.append(popped.value)
             }
             operatorStack.push(element)

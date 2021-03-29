@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BinaryInputDataValidation: InputDataValidationProtocol{
+class BinaryInputDataValidation: InputDataValidatable{
     static let sharedInstance = BinaryInputDataValidation()
     var userInput:[String] = []
     let operators = ["&", "~&", "|", "~|", "^", "~", ">>", "<<", "+", "-"]
@@ -46,14 +46,16 @@ class BinaryInputDataValidation: InputDataValidationProtocol{
             filterInitialIncomingData(input)
         }
         guard let finalElement = userInput.last else { return }
+        
         filterAdditionalIncomingData(input, after: finalElement)
     }
 }
 
-class BinaryCalculation: CalculationProtocol {
-    typealias precedence = Int
+class BinaryCalculation: Calculatable {
     
-    let operatorPriority: [String : precedence] =
+    typealias Precedence = Int
+    
+    let operatorPriority: [String : Precedence] =
         [">>" : 4, "<<" : 4 ,"&" : 3, "~&" : 3, "|" : 2, "~|" : 2, "^" : 2, "+" : 2, "-" : 2, "~" : 1]
     let customOperatorGruop: [String] = ["~&", "~|"]
     var medianNotation: [String] = BinaryInputDataValidation.sharedInstance.userInput
@@ -64,6 +66,7 @@ class BinaryCalculation: CalculationProtocol {
     
     func convertToPostfixNotation() {
         guard let lastElement = medianNotation.last else { return }
+        
         if lastElement == "~" || !operatorPriority.keys.contains(lastElement) {
             for index in medianNotation {
                 distinguishOperatorFromOperand(index)
@@ -89,10 +92,12 @@ class BinaryCalculation: CalculationProtocol {
         for element in postfixNotation {
             if !operatorPriority.keys.contains(element) {
                 guard let numbers = Int(element) else { return }
+                
                 operandStack.push(numbers)
             }
             else if element == "~" {
                 guard let firstPoppedValue = operandStack.pop() else { return }
+                
                 firstOperand = firstPoppedValue.value
                 let binaryNumber = UInt8((firstOperand))
                 let resultNumber = Int(~binaryNumber)
@@ -100,6 +105,7 @@ class BinaryCalculation: CalculationProtocol {
             }
             else if customOperatorGruop.contains(element) {
                 guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else { return }
+                
                 firstOperand = firstPoppedValue.value
                 secondOperand = secondPoppedValue.value
                 let firstBinaryNumber = UInt8(firstOperand)
@@ -116,8 +122,10 @@ class BinaryCalculation: CalculationProtocol {
             }
             else {
                 guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else { return }
+                
                 firstOperand = firstPoppedValue.value
                 secondOperand = secondPoppedValue.value
+                
                 switch element {
                 case ">>" :
                     operandStack.push(firstOperand >> secondOperand)
@@ -139,6 +147,7 @@ class BinaryCalculation: CalculationProtocol {
             }
         }
         guard let result = operandStack.peek() else { return }
+        
         let binaryNumber = String(result.value, radix: 2)
         print(pad(string: binaryNumber, toSize: 8))
     }
@@ -156,6 +165,7 @@ class BinaryCalculation: CalculationProtocol {
             operatorStack.push(element)
         } else {
             guard let peeked = operatorStack.peek() else { return }
+            
             while operatorPriority[peeked.value]! >= operatorPriority[element]! {
                 guard let popped = operatorStack.pop() else { break }
                 postfixNotation.append(popped.value)

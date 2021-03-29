@@ -17,7 +17,7 @@ class Node<T> {
 }
 
 struct Stack<T> {
-    var head: Node<T>?
+    private var head: Node<T>?
     
     mutating func push(_ value: T) {
         let node = Node<T>(value: value)

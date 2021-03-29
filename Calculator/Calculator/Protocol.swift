@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol InputDataValidationProtocol {
+protocol InputDataValidatable {
     var userInput:[String] { get }
     var operators:[String] { get }
 
     func manageData(input: String)
 }
 
-protocol CalculationProtocol {
+protocol Calculatable {
 
     typealias precedence = Int
 
