@@ -9,7 +9,7 @@ import Foundation
 
 protocol BinaryCalculatable: Calculatable {
     func infixCalculate(firstNumber: UInt8, operatorSymbol: String, secondNumber: UInt8) -> String
-    func popAllOperatorToList()
-    func popHigherPrioritythan(_ input: String)
+    func moveAllToPostfixNumbers()
+    func moveHigherPrioritythan(_ input: String)
 }
 

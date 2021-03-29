@@ -23,7 +23,7 @@ final class BinaryCalculator: BinaryCalculatable {
         } else if input == OperatorType.equal.symbol {
             postfixNumbers.append(operand)
             operand = Constant.blank
-            popAllOperatorToList()
+            moveAllToPostfixNumbers()
             for _ in Constant.zero..<postfixNumbers.count {
                 let postfixFirstOperator = postfixNumbers.removeFirst()
                 calculate(using: postfixFirstOperator)
@@ -36,7 +36,7 @@ final class BinaryCalculator: BinaryCalculatable {
         } else {
             postfixNumbers.append(operand)
             operand = Constant.blank
-            popHigherPrioritythan(input)
+            moveHigherPrioritythan(input)
             pushOperatorInStack(input)
         }
     }
@@ -91,14 +91,14 @@ final class BinaryCalculator: BinaryCalculatable {
         stack.push(input)
     }
     
-    func popAllOperatorToList() {
+    func moveAllToPostfixNumbers() {
         for _ in Constant.zero..<stack.count {
             guard let stackTop = stack.pop() else { return }
             postfixNumbers.append(stackTop)
         }
     }
     
-    func popHigherPrioritythan(_ input: String) {
+    func moveHigherPrioritythan(_ input: String) {
         guard let inputPriority = OperatorType(rawValue: input)?.priority else { return }
         
         for _ in Constant.zero..<stack.count {
