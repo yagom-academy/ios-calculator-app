@@ -12,7 +12,7 @@ final class BinaryCalculator: BinaryCalculatable {
     
     private init() { }
     
-    var stack: Stack = Stack()
+    var stack: Stack = Stack<String>()
     var postfix = [String]()
     var numberInput = Constant.blank
     let operatorArray = OperatorType.allCases.map{ $0.rawValue }

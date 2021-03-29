@@ -7,7 +7,7 @@
 import Foundation
 
 protocol Calculatable {
-    var stack: Stack { get }
+    var stack: Stack<String> { get }
     var postfix: [String] { get }
     var numberInput: String { get }
     var operatorArray: [String] { get }

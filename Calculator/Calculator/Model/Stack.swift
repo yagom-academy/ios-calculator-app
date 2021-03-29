@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Stack {
-    private var array = [String]()
+struct Stack<T> {
+    private var array = [T]()
     
     var isEmpty: Bool {
         return array.isEmpty
@@ -18,15 +18,15 @@ struct Stack {
         return array.count
     }
     
-    mutating func push(_ element: String) {
+    mutating func push(_ element: T) {
         array.append(element)
     }
     
-    @discardableResult mutating func pop() -> String? {
+    @discardableResult mutating func pop() -> T? {
         return array.popLast()
     }
     
-    var peek: String? {
+    var peek: T? {
         return array.last
     }
     

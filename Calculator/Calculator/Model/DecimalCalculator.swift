@@ -10,7 +10,7 @@ import Foundation
 final class DecimalCalculator: DecimalCalculatable {
     static let shared = DecimalCalculator()
     
-    var stack: Stack = Stack()
+    var stack: Stack = Stack<String>()
     var postfix = [String]()
     var numberInput = Constant.blank
     let operatorArray = OperatorType.allCases.map{ $0.rawValue }
