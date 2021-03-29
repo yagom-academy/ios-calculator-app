@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet var divideBtn: UIButton!
     @IBOutlet var clearBtn: UIButton!
     @IBOutlet var equalBtn: UIButton!
+        
     var calculator = Calculator()
     
     @IBAction func numBtn(_ sender: UIButton) {
