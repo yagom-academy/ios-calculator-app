@@ -7,23 +7,13 @@
 
 import Foundation
 
-protocol Addable: TypeConvertible {
+protocol Addable {
     associatedtype T: Numeric
-    
-    var stack: Stack<T> { get set }
-    
-    mutating func add(_ operatedNumber: T, and operatingNumber: T)
+    mutating func add(_ operatedNumber: T, and operatingNumber: T) -> T
 }
 
 extension Addable {
-    
-    //
-    mutating func add(_ operatedNumber: T, and operatingNumber: T) {
-        let sumResult = stack.sumAllElements()
-        
-        stack.push(userInput)
-        stack.reset()
-        stack.push(sumResult)
-        
+    mutating func add(_ operatedNumber: T, and operatingNumber: T) -> T {
+        return operatedNumber + operatingNumber
     }
 }
