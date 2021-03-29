@@ -45,8 +45,10 @@ class DecimalInputDataValidation: InputDataValidationProtocol{
         if userInput.isEmpty {
             filterInitialIncomingData(input)
         }
-        guard let finalElement = userInput.last else { return }
-        filterAdditionalIncomingData(input, after: finalElement)
+        else {
+            guard let finalElement = userInput.last else { return }
+            filterAdditionalIncomingData(input, after: finalElement)
+        }
     }
 }
 
@@ -99,6 +101,7 @@ class DecimalCalculation: CalculationProtocol{
                 }
             }
         }
+        print(operandStack.peek()?.value)
     }
     
     private func distinguishOperatorFromOperand(_ element: String) {
