@@ -41,7 +41,7 @@ class Calculator {
     var operators = Stack<String>()
     var tempNumber = ""
     var screenNumber = "0"
-
+    let numberFormatter = NumberFormatter()
     var operationFunctions: [String : (Double, Double) -> Double] = [:]
 
     init() {
@@ -49,6 +49,9 @@ class Calculator {
         operationFunctions["-"] = { $0 - $1 }
         operationFunctions["*"] = { $0 * $1 }
         operationFunctions["/"] = { $0 / $1 }
+
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 9
     }
  
     private func calculateUntilSatisfiedCondition() {
@@ -69,17 +72,9 @@ class Calculator {
 
     private func updateScreenNumber() {
         guard let lastOperand = operands.top() else { return }
-        // let numberFormatter = NumberFormatter()
-        // numberFormatter.numberstyle = .decimal
-        
-        screenNumber = String(lastOperand)
+        screenNumber = numberFormatter.string(for: lastOperand)!
     }
 
-/* 채팅창
-hellooooo
-helloooo
-
-*/
     // 숫자나 점이 들어오면
     // 자리수를 먼저 확인
     // 소수점이 있는지 확인
@@ -126,7 +121,7 @@ helloooo
         switch buttonType {
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "." :
                 concatenateNumberOrDot(buttonType)
-                screenNumber = tempNumber
+                screenNumber = numberFormatter.string(for: Double(tempNumber))!
             case "+", "-", "*", "/":
                 guard let doubleValue = Double(tempNumber) else { return }
                 operands.push(doubleValue)
@@ -148,4 +143,12 @@ helloooo
                 print("input error")
         }
     }
+}
+
+extension Formatter {
+    static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
 }
