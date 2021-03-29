@@ -12,10 +12,10 @@ final class BinaryCalculator: BinaryCalculatable {
     
     private init() { }
     
-    var stack: Stack = Stack<String>()
-    var postfixNumbers = [String]()
-    var operand = CalculatorConstant.blank
-    let operators = OperatorType.allCases.map{ $0.rawValue }
+    private var stack: Stack = Stack<String>()
+    private var postfixNumbers = [String]()
+    private var operand = CalculatorConstant.blank
+    private let operators = OperatorType.allCases.map{ $0.rawValue }
     
     func input(_ input: String) {
         if !operators.contains(input) {
