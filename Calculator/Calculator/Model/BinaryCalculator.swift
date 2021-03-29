@@ -13,35 +13,35 @@ final class BinaryCalculator: BinaryCalculatable {
     private init() { }
     
     var stack: Stack = Stack<String>()
-    var postfix = [String]()
-    var numberInput = Constant.blank
+    var postfixNumbers = [String]()
+    var operand = Constant.blank
     let operatorArray = OperatorType.allCases.map{ $0.rawValue }
     
     func input(_ input: String) {
         if !operatorArray.contains(input) {
-            numberInput = numberInput + input
+            operand = operand + input
         } else if input == OperatorType.equal.symbol {
-            postfix.append(numberInput)
-            numberInput = Constant.blank
+            postfixNumbers.append(operand)
+            operand = Constant.blank
             popAllOperatorToList()
-            for _ in Constant.zero..<postfix.count {
+            for _ in Constant.zero..<postfixNumbers.count {
                 calculate()
             }
         } else if input == OperatorType.not.symbol {
-            guard let binaryNumber = UInt8(numberInput, radix: Constant.binary) else { return }
+            guard let binaryNumber = UInt8(operand, radix: Constant.binary) else { return }
             let result = ~binaryNumber
             stack.push(String(result, radix: Constant.binary))
-            numberInput = Constant.blank
+            operand = Constant.blank
         } else {
-            postfix.append(numberInput)
-            numberInput = Constant.blank
+            postfixNumbers.append(operand)
+            operand = Constant.blank
             popHigherPrioritythan(input)
             pushOperatorInStack(input)
         }
     }
     
     func calculate() {
-        let postfixFirst = postfix.removeFirst()
+        let postfixFirst = postfixNumbers.removeFirst()
         if !operatorArray.contains(postfixFirst) {
             stack.push(postfixFirst)
             return
@@ -94,7 +94,7 @@ final class BinaryCalculator: BinaryCalculatable {
     func popAllOperatorToList() {
         for _ in Constant.zero..<stack.count {
             guard let stackTop = stack.pop() else { return }
-            postfix.append(stackTop)
+            postfixNumbers.append(stackTop)
         }
     }
     
@@ -106,9 +106,9 @@ final class BinaryCalculator: BinaryCalculatable {
             guard let stackTopOperatorType = OperatorType(rawValue: stackTop) else { return }
             if inputPriority <= stackTopOperatorType.priority {
                 guard let value = stack.pop() else { return }
-                postfix.append(value)
+                postfixNumbers.append(value)
             } else {
-                postfix.append(input)
+                postfixNumbers.append(input)
                 break
             }
         }
@@ -121,7 +121,7 @@ final class BinaryCalculator: BinaryCalculatable {
     
     func reset() {
         stack.removeAll()
-        postfix.removeAll()
-        numberInput = Constant.blank
+        postfixNumbers.removeAll()
+        operand = Constant.blank
     }
 }

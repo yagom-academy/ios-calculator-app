@@ -8,8 +8,8 @@ import Foundation
 
 protocol Calculatable {
     var stack: Stack<String> { get }
-    var postfix: [String] { get }
-    var numberInput: String { get }
+    var postfixNumbers: [String] { get }
+    var operand: String { get }
     var operatorArray: [String] { get }
     
     func reset()

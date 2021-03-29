@@ -11,15 +11,15 @@ final class DecimalCalculator: DecimalCalculatable {
     static let shared = DecimalCalculator()
     
     var stack: Stack = Stack<String>()
-    var postfix = [String]()
-    var numberInput = Constant.blank
+    var postfixNumbers = [String]()
+    var operand = Constant.blank
     let operatorArray = OperatorType.allCases.map{ $0.rawValue }
     
     private init() { }
 
     func input(_ input: String) {
         if !operatorArray.contains(input) {
-            numberInput = numberInput + input
+            operand = operand + input
         } else if input == OperatorType.equal.symbol {
             numberMoveToArray()
             for _ in Constant.zero..<stack.count {
@@ -54,8 +54,8 @@ final class DecimalCalculator: DecimalCalculatable {
     }
     
     func numberMoveToArray() {
-        postfix.append(numberInput)
-        numberInput = Constant.blank
+        postfixNumbers.append(operand)
+        operand = Constant.blank
     }
     
     func pushOperatorInStack(_ input: String) {
@@ -63,12 +63,12 @@ final class DecimalCalculator: DecimalCalculatable {
     }
     
     func calculate(using stackTopOperator: String) {
-        guard let first = postfix.popLast() else { return }
+        guard let first = postfixNumbers.popLast() else { return }
         guard let firstNumber = Double(first) else { return }
-        guard let second = postfix.popLast() else { return }
+        guard let second = postfixNumbers.popLast() else { return }
         guard let secondNumber = Double(second) else { return }
         let result = infixCalculate(firstNumber: firstNumber, operatorSymbol: stackTopOperator, secondNumber: secondNumber)
-        postfix.append(result)
+        postfixNumbers.append(result)
     }
     
     func calculateHigherPrioritythan(_ input: String) {
@@ -88,7 +88,7 @@ final class DecimalCalculator: DecimalCalculatable {
     }
     
     func display() -> String? {
-        guard let postfixLastNumber = postfix.last else { return nil }
+        guard let postfixLastNumber = postfixNumbers.last else { return nil }
         let filteredNumber = extractInteger(number: postfixLastNumber)
         return filteredNumber
     }
@@ -105,7 +105,7 @@ final class DecimalCalculator: DecimalCalculatable {
     
     func reset() {
         stack.removeAll()
-        postfix.removeAll()
-        numberInput = Constant.blank
+        postfixNumbers.removeAll()
+        operand = Constant.blank
     }
 }
