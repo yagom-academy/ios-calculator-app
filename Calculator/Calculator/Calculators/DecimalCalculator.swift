@@ -40,7 +40,7 @@ struct DecimalCalculator: Addable, Subtractable, GetStack {
         stack.push(a)
     }
     
-    mutating func soltInput() {
+    mutating func executeCalculator() {
         userInputOperator()
         self.stack.push(temporaryDouble)
         switch temporaryString {
@@ -63,7 +63,7 @@ struct DecimalCalculator: Addable, Subtractable, GetStack {
     mutating func start() {
         userInputNumber()
         while temporaryString != "exit" {
-            soltInput()
+            executeCalculator()
         }
     }
 }
