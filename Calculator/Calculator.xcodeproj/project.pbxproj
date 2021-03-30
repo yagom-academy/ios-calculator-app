@@ -14,6 +14,7 @@
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		F7596928260D9CC9008E1FFD /* DimecalCalcultor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7596927260D9CC9008E1FFD /* DimecalCalcultor.swift */; };
+		FF1712E42612E54F00F7EBBE /* BinaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1712E32612E54F00F7EBBE /* BinaryCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7596927260D9CC9008E1FFD /* DimecalCalcultor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimecalCalcultor.swift; sourceTree = "<group>"; };
+		FF1712E32612E54F00F7EBBE /* BinaryCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				F7596927260D9CC9008E1FFD /* DimecalCalcultor.swift */,
+				FF1712E32612E54F00F7EBBE /* BinaryCalculator.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				FF1712E42612E54F00F7EBBE /* BinaryCalculator.swift in Sources */,
 				F7596928260D9CC9008E1FFD /* DimecalCalcultor.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,

@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     @IBOutlet var equalBtn: UIButton!
         
     var calculator = Calculator()
-    
+
     @IBAction func numBtn(_ sender: UIButton) {
         switch sender {
         case num0:
@@ -87,6 +87,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        
+        let test = BinaryCalculator()
+        test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "0")
+        test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "+")
+        test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "1")
     }
 
     func setup() {

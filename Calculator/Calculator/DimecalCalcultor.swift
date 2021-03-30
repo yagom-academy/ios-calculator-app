@@ -75,11 +75,7 @@ class Calculator {
         screenNumber = numberFormatter.string(for: lastOperand)!
     }
 
-    // 숫자나 점이 들어오면
-    // 자리수를 먼저 확인
-    // 소수점이 있는지 확인
     func isExistDemicalPoint(_ buttonType: String) -> Bool {
-        // .이 들어오고 .이 안에 없을 떄
         if buttonType == "." && tempNumber.contains(".") {
             return true 
         }
@@ -157,16 +153,13 @@ class Calculator {
             default:
                 print("input error")
         }
-        print(operands)
-        print(operators)
-        print("tempNumber", tempNumber)
     }
 }
 
-extension Formatter {
-    static let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-}
+// extension Formatter {
+//     static let numberFormatter: NumberFormatter = {
+//         let formatter = NumberFormatter()
+//         formatter.numberStyle = .decimal
+//         return formatter
+//     }()
+// }
