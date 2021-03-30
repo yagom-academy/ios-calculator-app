@@ -13,9 +13,9 @@ struct Binary: Operand {
     private(set) var value: Int
     private(set) var text: String
     static let zero: Self = Self.init(0)
-    static let max = Int(pow(Double(2), Double(Constant.numberOfDigits - 1)) - 1)
-    static let min = -Int(pow(Double(2), Double(Constant.numberOfDigits - 1)))
-    static let unsignedMax = Int(pow(2, Double(Constant.numberOfDigits))) - 1
+    static let max = Int(pow(Double(2), Double(Constant.maxDigitCount - 1)) - 1)
+    static let min = -Int(pow(Double(2), Double(Constant.maxDigitCount - 1)))
+    static let unsignedMax = Int(pow(2, Double(Constant.maxDigitCount))) - 1
     
     var description: String {
         return text
@@ -23,9 +23,9 @@ struct Binary: Operand {
     
     init?(_ text: String) {
         guard var value = Int(text, radix: 2) else { return nil }
-        guard text.count <= Constant.numberOfDigits else { return nil }
+        guard text.count <= Constant.maxDigitCount else { return nil }
         
-        if (text.count == Constant.numberOfDigits) && (text.first == "1") {
+        if (text.count == Constant.maxDigitCount) && (text.first == "1") {
             value = value - 1 - Self.unsignedMax
         }
         

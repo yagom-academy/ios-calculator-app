@@ -6,5 +6,5 @@
 //
 
 enum Constant {
-    static let numberOfDigits: Int = 9
+    static let maxDigitCount: Int = 9
 }
