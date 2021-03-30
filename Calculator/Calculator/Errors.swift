@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CalculatorError : Error {
+enum CalculatorError: Error {
     case invalidInput
     case outOfRangeInput
 }

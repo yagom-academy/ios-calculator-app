@@ -7,7 +7,7 @@
 
 final class Stack<T> {
     
-    private var stack = Array<T>()
+    private var stack = [T]()
     
     var top: T? {
         return stack.last
@@ -30,4 +30,3 @@ final class Stack<T> {
     }
     
 }
-

@@ -13,4 +13,3 @@ protocol Computable {
 protocol Resettable {
     func reset()
 }
-

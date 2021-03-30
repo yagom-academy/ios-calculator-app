@@ -5,7 +5,6 @@
 //  Created by Neph on 2021/03/23.
 //
 
-
 final class BinaryCalculator: Computable, Resettable {
     
     struct StackForBinaryCalculator {
