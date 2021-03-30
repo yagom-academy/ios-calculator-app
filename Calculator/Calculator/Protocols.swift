@@ -6,11 +6,20 @@
 //
 
 protocol Computable {
-    func add(firstNumber: String, secondNumber: String) throws -> String?
-    func subtract(firstNumber: String, secondNumber: String) throws -> String?
+    func add<T: SignedNumeric>(firstNumber: T, secondNumber: T) -> T
+    func subtract<T: SignedNumeric>(firstNumber: T, secondNumber: T) -> T
+}
+
+extension Computable {
+    func add<T: SignedNumeric>(firstNumber: T, secondNumber: T) -> T {
+        return firstNumber + secondNumber
+    }
+    
+    func subtract<T: SignedNumeric>(firstNumber: T, secondNumber: T) -> T {
+        return firstNumber - secondNumber
+    }
 }
 
 protocol Resettable {
     func reset()
 }
-

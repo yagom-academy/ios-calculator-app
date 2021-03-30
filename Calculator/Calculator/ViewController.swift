@@ -17,8 +17,4 @@ class ViewController: UIViewController {
     func getInput() {
         
     }
-    
-    
-
 }
-
