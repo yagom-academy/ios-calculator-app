@@ -21,8 +21,6 @@ import Foundation
 // }
 
 class BinaryCalculator {
-    
-    
     // var operators = Stack<BinaryOperator>() 
     // var operands = Stack<String>()
     var firstNumber: String = "" 
@@ -31,15 +29,14 @@ class BinaryCalculator {
     var screenNumber = "0"
     var lastOperator = ""
     
-    func binaryToInt(inputText: String) -> UInt8 {
-        if let binary = UInt8(inputText, radix: 2) {
-            return binary
-        } else {
-            return UInt8(inputText)!
+    func binaryToInt(_ inputText: String) -> UInt8 {
+        guard let intValue = UInt8(inputText, radix: 2) else {
+            return 0
         }
+        return intValue
     }
     
-    func intToBinary(inputInt: UInt8) -> String {
+    func intToBinary(_ inputInt: UInt8) -> String {
         return String(inputInt, radix: 2)
     }
     
@@ -82,12 +79,54 @@ class BinaryCalculator {
     func rightShiftCalculate(_ number: UInt8) -> UInt8 {
         return number >> 1 
     }
+    
+    func calculate(_ `operator`: String) -> UInt8 {
+        switch `operator` {
+        case "+":
+            return addCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "-":
+            return substractCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "&":
+            return andCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "~&":
+            return nandCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "|":
+            return orCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "~|":
+            return norCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "^":
+            return xorCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
+        case "~":
+            return notCalculate(binaryToInt(firstNumber))
+        case "<<":
+            return leftShiftCalculate(binaryToInt(firstNumber))
+        case ">>":
+            return rightShiftCalculate(binaryToInt(firstNumber))
+        default:
+            return 0
+        }
+    }
 
     func receiveInput(buttonType: String) {
+        // = 왔을 때 처리
+        if (buttonType == "=") {
+            screenNumber = intToBinary(calculate(lastOperator))
+            print(screenNumber)
+            return
+        }
+        
+        // 숫자가 왔을 때 처리
         if (buttonType == "0" || buttonType == "1") {
             tempNumber += buttonType
             return
         }
+        
+        // 연산자 처리
+        if "+-&|^~<<>>~&~|".contains(buttonType) {
+            lastOperator = buttonType
+            return
+        }
+        
         
 //        switch self {
 //            case "+", "-", "&", "~&", "|", "~|", "^", "~", "<<", ">>"

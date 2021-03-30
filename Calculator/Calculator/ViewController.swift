@@ -98,6 +98,7 @@ class ViewController: UIViewController {
         test.receiveInput(buttonType: "1")
         test.receiveInput(buttonType: "1")
         test.receiveInput(buttonType: "1")
+        test.receiveInput(buttonType: "=")
     }
 
     func setup() {
