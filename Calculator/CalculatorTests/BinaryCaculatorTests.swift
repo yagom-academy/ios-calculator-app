@@ -39,7 +39,20 @@ class BinaryCalculatorTests: XCTestCase {
     }
     
     func test_subtract() {
+        let result1 = try? binaryCalculatorTest?.subtract(firstNumber: "1010", secondNumber: "11")
+        XCTAssertEqual(result1, "111")
         
+        // 음수를 빼서 양수 결과가 나오는 경우
+        let result2 = try? binaryCalculatorTest?.subtract(firstNumber: "10", secondNumber: "11111110")
+        XCTAssertEqual(result2, "100")
+        
+        // 뺄셈의 결과가 음수인 경우
+        let result3 = try? binaryCalculatorTest?.subtract(firstNumber: "10", secondNumber: "11")
+        XCTAssertEqual(result3, "11111111")
+        
+        // 언더플로우 발생시 언더플로우 된 자릿수 버림
+        let result4 = try? binaryCalculatorTest?.subtract(firstNumber: "10000001", secondNumber: "10")
+        XCTAssertEqual(result4, "1111111")
     }
     
     func test_AND() {

@@ -19,7 +19,7 @@ final class BinaryCalculator: Computable, Resettable {
         reset()
     }
     
-    func convertToBinary(_ input: String) -> Int {
+    func convertBinaryToDecimal(_ input: String) -> Int {
         guard input.count <= 8,
             var number = Int(input, radix: 2) else {
             return -1
@@ -37,8 +37,8 @@ final class BinaryCalculator: Computable, Resettable {
     }
     
     func add(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first + second
         
@@ -46,51 +46,51 @@ final class BinaryCalculator: Computable, Resettable {
     }
     
     func subtract(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first &- second
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func AND(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first & second
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func NAND(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = ~(first & second)
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func OR(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first | second
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func NOR(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = ~(first | second)
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func XOR(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first ^ second
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func NOT(firstNumber: String) throws -> String? {
@@ -101,23 +101,23 @@ final class BinaryCalculator: Computable, Resettable {
         
         result ^= (~0 - 255)
         
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func shiftLeft(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first << second
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func shiftRight(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertToBinary(firstNumber)
-        let second = convertToBinary(secondNumber)
+        let first = convertBinaryToDecimal(firstNumber)
+        let second = convertBinaryToDecimal(secondNumber)
         
         let result = first >> second
-        return String(result, radix: 2)
+        return formattedResult(of: result)
     }
     
     func formattedResult(of result: Int) -> String {
