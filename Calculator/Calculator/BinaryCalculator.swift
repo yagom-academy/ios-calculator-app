@@ -19,7 +19,7 @@ final class BinaryCalculator: Computable, Resettable {
         reset()
     }
     
-    func convertBinaryToDecimal(_ input: String) -> Int {
+    private func convertBinaryToDecimal(_ input: String) -> Int {
         guard input.count <= 8,
             var number = Int(input, radix: 2) else {
             return -1
@@ -94,18 +94,25 @@ final class BinaryCalculator: Computable, Resettable {
     }
     
     func NOT(firstNumber: String) throws -> String? {
-        guard let first = Int(firstNumber) else {
-            return "-1"
+        guard let first = Int(firstNumber, radix: 2) else {
+            throw CalculatorError.invalidInput
         }
-        var result = ~first
         
-        result ^= (~0 - 255)
+        // 하위 8비트를 bitmask
+        let bitmasker = ~0 - (1<<8 - 1)
+        var result = ~(bitmasker ^ first)
+
+        if result >= 256 {
+            result %= 256
+        }
         
-        return formattedResult(of: result)
+        return String(result, radix: 2)
     }
     
     func shiftLeft(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
+        guard let first = Int(firstNumber, radix: 2) else {
+            throw CalculatorError.invalidInput
+        }
         let second = convertBinaryToDecimal(secondNumber)
         
         let result = first << second
@@ -113,14 +120,16 @@ final class BinaryCalculator: Computable, Resettable {
     }
     
     func shiftRight(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
+        guard let first = Int(firstNumber, radix: 2) else {
+            throw CalculatorError.invalidInput
+        }
         let second = convertBinaryToDecimal(secondNumber)
         
         let result = first >> second
         return formattedResult(of: result)
     }
     
-    func formattedResult(of result: Int) -> String {
+    private func formattedResult(of result: Int) -> String {
         var result = result
         if result >= 128 {
             result %= 128

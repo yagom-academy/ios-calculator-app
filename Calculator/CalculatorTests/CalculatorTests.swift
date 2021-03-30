@@ -101,6 +101,5 @@ class DecimalCalculatorTests: XCTestCase {
     func test_reset() {
         decimalCalculatorTest?.reset()
         XCTAssertTrue(decimalCalculatorTest?.stack.isEmpty == true)
-        
     }
 }

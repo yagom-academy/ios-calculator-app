@@ -56,39 +56,109 @@ class BinaryCalculatorTests: XCTestCase {
     }
     
     func test_AND() {
+        let result1 = try? binaryCalculatorTest?.AND(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "0")
         
+        let result2 = try? binaryCalculatorTest?.AND(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "0")
+        
+        let result3 = try? binaryCalculatorTest?.AND(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "0")
+        
+        let result4 = try? binaryCalculatorTest?.AND(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11")
     }
     
     func test_NAND() {
+        let result1 = try? binaryCalculatorTest?.NAND(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "11111111")
         
+        let result2 = try? binaryCalculatorTest?.NAND(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "11111111")
+        
+        let result3 = try? binaryCalculatorTest?.NAND(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "11111111")
+        
+        let result4 = try? binaryCalculatorTest?.NAND(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11111100")
     }
     
     func test_OR() {
+        let result1 = try? binaryCalculatorTest?.OR(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "0")
         
+        let result2 = try? binaryCalculatorTest?.OR(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "10")
+        
+        let result3 = try? binaryCalculatorTest?.OR(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "10")
+        
+        let result4 = try? binaryCalculatorTest?.OR(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11111111")
     }
     
     func test_NOR() {
+        let result1 = try? binaryCalculatorTest?.NOR(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "11111111")
         
+        let result2 = try? binaryCalculatorTest?.NOR(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "11111101")
+        
+        let result3 = try? binaryCalculatorTest?.NOR(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "11111101")
+        
+        let result4 = try? binaryCalculatorTest?.NOR(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "0")
     }
     
     func test_XOR() {
+        let result1 = try? binaryCalculatorTest?.XOR(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "0")
         
+        let result2 = try? binaryCalculatorTest?.XOR(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "10")
+        
+        let result3 = try? binaryCalculatorTest?.XOR(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "10")
+        
+        let result4 = try? binaryCalculatorTest?.XOR(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11111100")
     }
     
     func test_NOT() {
         let result1 = try? binaryCalculatorTest?.NOT(firstNumber: "00000001")
         XCTAssertEqual(result1, "11111110")
+        
+        let result2 = try? binaryCalculatorTest?.NOT(firstNumber: "11001100")
+        XCTAssertEqual(result2, "110011")
     }
     
     func test_shiftLeft() {
+        let result1 = try? binaryCalculatorTest?.shiftLeft(firstNumber: "11", secondNumber: "10")
+        XCTAssertEqual(result1, "1100")
         
+        let result2 = try? binaryCalculatorTest?.shiftLeft(firstNumber: "10000000", secondNumber: "11")
+        XCTAssertEqual(result2, "0")
+        
+        // secondNumber가 음수면 반대 방향으로 shift
+        let result3 = try? binaryCalculatorTest?.shiftLeft(firstNumber: "1100", secondNumber: "111111110")
+        XCTAssertEqual(result3, "110")
     }
     
     func test_shiftRight() {
+        let result1 = try? binaryCalculatorTest?.shiftRight(firstNumber: "11", secondNumber: "10")
+        XCTAssertEqual(result1, "0")
         
+        let result2 = try? binaryCalculatorTest?.shiftRight(firstNumber: "10000000", secondNumber: "11")
+        XCTAssertEqual(result2, "10000")
+        
+        // secondNumber가 음수면 반대 방향으로 shift
+        let result3 = try? binaryCalculatorTest?.shiftRight(firstNumber: "1100", secondNumber: "111111110")
+        XCTAssertEqual(result3, "11000")
     }
     
     func test_reset() {
-        
+        binaryCalculatorTest?.reset()
+        XCTAssertTrue(binaryCalculatorTest?.stack.isEmpty == true)
     }
 }
