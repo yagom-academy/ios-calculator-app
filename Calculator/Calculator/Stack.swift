@@ -21,17 +21,19 @@ struct Stack<T> {
     
     mutating func push(_ value: T) {
         let node = Node<T>(value: value)
+        
         if let nodeHead = head {
             node.next = nodeHead
             
             head = node
-        } else {
+        }
+        else {
             head = node
         }
     }
     
     mutating func pop() -> Node<T>? {
-        if let nodeHead = head{
+        if let nodeHead = head {
             let node = nodeHead
             head = nodeHead.next
             node.next = nil
@@ -39,9 +41,11 @@ struct Stack<T> {
         }
         return nil
     }
+    
     func isEmpty() -> Bool {
         return head == nil
     }
+    
     func peek() -> Node<T>? {
         return head
     }
