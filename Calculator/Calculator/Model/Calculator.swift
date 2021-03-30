@@ -5,8 +5,6 @@
 //  Created by 덕복 on 2021/03/27.
 //
 
-import Foundation
-
 class Calculator<OperandType: Operand, InfixOperatorType: InfixOperator, PrefixOperatorType: PrefixOpreator> {
     private var postfixedList = Array<CalculatingElement>()
     private var operandStack = Stack<OperandType>()
@@ -90,31 +88,32 @@ class Calculator<OperandType: Operand, InfixOperatorType: InfixOperator, PrefixO
     }
 }
 
-class DecimalCalculator: Calculator<Double, DecimalInfixOperator, DecimalPrefixOperator> {
+class DecimalCalculator: Calculator<Decimal, DecimalInfixOperator, DecimalPrefixOperator> {
     static let shared = DecimalCalculator()
     
-    override func calculate(by prefixOperator: DecimalPrefixOperator, x: Double) -> Double {
+    override func calculate(by prefixOperator: DecimalPrefixOperator, x: Decimal) -> Decimal {
+        let value = x.value
+        
         switch prefixOperator {
         case .unaryMinus:
-            return -x
+            return Decimal(-value)
         }
     }
     
-    override func calculate(lhs: Double, by infixOperator: DecimalInfixOperator, rhs: Double) -> Double {
-        let result: Double
+    override func calculate(lhs: Decimal, by infixOperator: DecimalInfixOperator, rhs: Decimal) -> Decimal {
+        let leftValue = lhs.value
+        let rightValue = rhs.value
         
         switch infixOperator {
         case .multifly:
-            result = lhs * rhs
+            return Decimal(leftValue * rightValue)
         case .divide:
-            result = lhs / rhs
+            return Decimal(leftValue / rightValue)
         case .add:
-            result = lhs + rhs
+            return Decimal(leftValue + rightValue)
         case .subtract:
-            result = lhs - rhs
+            return Decimal(leftValue - rightValue)
         }
-        
-        return result.truncatingRemainder(dividingBy: Double(Double.maxByDigits) + 1).ceiledByDigits()
     }
 }
 
@@ -122,7 +121,7 @@ class BinaryCalculator: Calculator<Binary, BinaryInfixOpeartor, BinaryPrefixOper
     static let shared = BinaryCalculator()
     
     override func calculate(by prefixOperator: BinaryPrefixOperator, x: Binary) -> Binary {
-        let value: Int = x.value
+        let value = x.value
         
         switch prefixOperator {
         case .bitwiseNOT:
@@ -133,8 +132,8 @@ class BinaryCalculator: Calculator<Binary, BinaryInfixOpeartor, BinaryPrefixOper
     }
     
     override func calculate(lhs: Binary, by infixOperator: BinaryInfixOpeartor, rhs: Binary) -> Binary {
-        let leftValue: Int = lhs.value
-        let rightValue: Int = rhs.value
+        let leftValue = lhs.value
+        let rightValue = rhs.value
         
         switch infixOperator {
         case .bitwiseLeftShift:
