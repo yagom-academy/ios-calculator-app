@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol Addable {
+protocol Subtractable {
     associatedtype T: Numeric
     
-    func add(_ operatedNumber: T, and operatingNumber: T)
+    func subtract(_ operatedNumber: T, and operatingNumber: T) -> T
 }
 
-extension Addable {
-    func add(_ operatedNumber: T, and operatingNumber: T) -> T {
+extension Subtractable {
+    func subtract(_ operatedNumber: T, and operatingNumber: T) -> T {
         return operatedNumber + operatingNumber
     }
 }
