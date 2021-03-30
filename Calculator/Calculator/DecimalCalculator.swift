@@ -23,12 +23,11 @@ final class DecimalCalculator: Computable, Resettable {
         return firstNumber / secondNumber
     }
     
-    func formatInput(_ userInput: String?) throws -> Double {
-        guard let input = userInput,
-              let castedInput = Double(input) else {
+    func formatInput(_ userInput: String) throws -> Double {
+        guard let input = Double(userInput) else {
             throw CalculatorError.formatError
         }
-        return castedInput
+        return input
     }
     
     func formatResult(of result: Double) throws -> String {
