@@ -19,5 +19,4 @@ enum Operator {
     case xorOperator
     case bitNotOperator
     case bitShiftOperator
-    
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 protocol Addable {
-    associatedtype T = Numeric
+    associatedtype T: Numeric
     
-    func add(_ operatedNumber: T, and operatingNumber: T)
+    func add(_ operatedNumber: T, and operatingNumber: T) -> T
 }
 
 extension Addable {
