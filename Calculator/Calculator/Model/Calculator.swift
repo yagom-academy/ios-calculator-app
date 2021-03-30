@@ -7,12 +7,12 @@
 
 import Foundation
 
-class Calculator<OperandType: Operand> {
+class Calculator<OperandType: Operand, InfixOperatorType: InfixOperator, PrefixOperatorType: PrefixOpreator> {
     private var postfixedList = Array<CalculatingElement>()
     private var operandStack = Stack<OperandType>()
-    private var infixOperatorStack = Stack<InfixOperator>()
+    private var infixOperatorStack = Stack<InfixOperatorType>()
     private(set) var lastOperand: OperandType?
-    private(set) var lastOperator: InfixOperator?
+    private(set) var lastOperator: InfixOperatorType?
     private(set) var calculated: OperandType? {
         didSet {
             guard let toPrint = calculated else { return }
@@ -22,15 +22,12 @@ class Calculator<OperandType: Operand> {
     
     fileprivate init() { }
     
-    fileprivate func calculate(lhs: OperandType, by infixOperator: InfixOperator, rhs: OperandType) -> OperandType {
-        switch infixOperator {
-        case .add:
-            return lhs + rhs
-        case .subtract:
-            return lhs - rhs
-        default:
-            return OperandType.zero
-        }
+    fileprivate func calculate(by prefixOperator: PrefixOperatorType, x: OperandType) -> OperandType {
+        return OperandType.zero
+    }
+    
+    fileprivate func calculate(lhs: OperandType, by infixOperator: InfixOperatorType, rhs: OperandType) -> OperandType {
+        return OperandType.zero
     }
     
     func appendPostfixedList(_ operand: OperandType) {
@@ -38,7 +35,7 @@ class Calculator<OperandType: Operand> {
         lastOperand = operand
     }
     
-    func appendPostfixedList(_ infixOperator: InfixOperator) {
+    func appendPostfixedList(_ infixOperator: InfixOperatorType) {
         while infixOperatorStack.isNotEmpty {
             if infixOperator.isPrecedence(over: infixOperatorStack.peek()!) { break }
             guard let infixOperator = infixOperatorStack.pop() else { return }
@@ -53,7 +50,7 @@ class Calculator<OperandType: Operand> {
     
     func appendPostfixedList(contentsOf elements: String) {
         for element in elements.components(separatedBy: " ") {
-            if let infixOperator = InfixOperator(rawValue: element) {
+            if let infixOperator = InfixOperatorType(rawValue: element) {
                 appendPostfixedList(infixOperator)
             }
             if let operand = OperandType(element) {
@@ -67,8 +64,9 @@ class Calculator<OperandType: Operand> {
             let element = postfixedList.removeFirst()
             if element is OperandType {
                 operandStack.push(element as! OperandType)
-            } else if element is InfixOperator {
-                let infixOperator = element as! InfixOperator
+            }
+            if element is InfixOperatorType {
+                let infixOperator = element as! InfixOperatorType
                 guard let rightOperand = operandStack.pop() else { return }
                 guard let leftOperand = operandStack.pop() else { return }
                 calculated = calculate(lhs: leftOperand, by: infixOperator, rhs: rightOperand)
@@ -92,11 +90,18 @@ class Calculator<OperandType: Operand> {
     }
 }
 
-class DecimalCalculator: Calculator<Double> {
+class DecimalCalculator: Calculator<Double, DecimalInfixOperator, DecimalPrefixOperator> {
     static let shared = DecimalCalculator()
     
-    override func calculate(lhs: Double, by infixOperator: InfixOperator, rhs: Double) -> Double {
-        var result: Double
+    override func calculate(by prefixOperator: DecimalPrefixOperator, x: Double) -> Double {
+        switch prefixOperator {
+        case .unaryMinus:
+            return -x
+        }
+    }
+    
+    override func calculate(lhs: Double, by infixOperator: DecimalInfixOperator, rhs: Double) -> Double {
+        let result: Double
         
         switch infixOperator {
         case .multifly:
@@ -107,39 +112,49 @@ class DecimalCalculator: Calculator<Double> {
             result = lhs + rhs
         case .subtract:
             result = lhs - rhs
-        default:
-            return Double.zero
         }
         
         return result.truncatingRemainder(dividingBy: Double(Double.maxByDigits) + 1).ceiledByDigits()
     }
 }
 
-class BinaryCalculator: Calculator<Binary> {
+class BinaryCalculator: Calculator<Binary, BinaryInfixOpeartor, BinaryPrefixOperator> {
     static let shared = BinaryCalculator()
     
-    override func calculate(lhs: Binary, by infixOperator: InfixOperator, rhs: Binary) -> Binary {
+    override func calculate(by prefixOperator: BinaryPrefixOperator, x: Binary) -> Binary {
+        let value: Int = x.value
+        
+        switch prefixOperator {
+        case .bitwiseNOT:
+            return Binary(~value)
+        case .unaryMinus:
+            return Binary(-value)
+        }
+    }
+    
+    override func calculate(lhs: Binary, by infixOperator: BinaryInfixOpeartor, rhs: Binary) -> Binary {
+        let leftValue: Int = lhs.value
+        let rightValue: Int = rhs.value
+        
         switch infixOperator {
         case .bitwiseLeftShift:
-            return lhs << rhs
+            return Binary(leftValue << rightValue)
         case .bitwiseRightShift:
-            return lhs >> rhs
+            return Binary(leftValue >> rightValue)
         case .bitwiseAND:
-            return lhs & rhs
+            return Binary(leftValue & rightValue)
         case .bitwiseNAND:
-            return lhs ~& rhs
+            return Binary(~leftValue | ~rightValue)
         case .add:
-            return lhs + rhs
+            return Binary(leftValue + rightValue)
         case .subtract:
-            return lhs - rhs
+            return Binary(leftValue - rightValue)
         case .bitwiseOR:
-            return lhs | rhs
+            return Binary(leftValue | rightValue)
         case .bitwiseNOR:
-            return lhs ~| rhs
+            return Binary(~leftValue & ~rightValue)
         case .bitwiseXOR:
-            return lhs ^ rhs
-        default:
-            return Binary.zero
+            return Binary(leftValue ^ rightValue)
         }
     }
 }

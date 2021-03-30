@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        testDecimalCalculator(by: "99999 * 99999")
+        testBinaryCalculator(by: "1011 << 11111111 | 100011")
     }
     
     func testDecimalCalculator(by text: String) {

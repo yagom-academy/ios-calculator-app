@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol Operand: CalculatingElement, AdditiveArithmetic, CustomStringConvertible {
+protocol Operand: CalculatingElement, CustomStringConvertible {
+    static var zero: Self { get }
     static var maxByDigits: Int { get }
     
     init?(_ text: String)

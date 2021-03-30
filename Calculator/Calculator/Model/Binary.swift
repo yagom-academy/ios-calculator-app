@@ -7,11 +7,17 @@
 
 import Foundation
 
-struct Binary {
+struct Binary: Operand {
     private(set) var value: Int
     private(set) var text: String
+    static var zero: Self = Self.init(0)
+    static let maxByDigits: Int = Int(pow(2, Double(Constant.numberOfDigits))) - 1
     static let max = Int(pow(Double(2), Double(Constant.numberOfDigits - 1)) - 1)
     static let min = -Int(pow(Double(2), Double(Constant.numberOfDigits - 1)))
+    
+    var description: String {
+        return text
+    }
     
     init?(_ text: String) {
         guard let value = Int(text, radix: 2) else { return nil }
@@ -33,61 +39,5 @@ struct Binary {
     
     static func twosComplement(for number: Int) -> String {
         return number < 0 ? String(UInt(Self.maxByDigits + Int(number) + 1), radix:2) : String(number, radix:2)
-    }
-}
-
-infix operator ~& : MultiplicationPrecedence
-infix operator ~| : AdditionPrecedence
-
-extension Binary: Operand {
-    static var zero: Self = Self.init(0)
-    static let maxByDigits: Int = Int(pow(2, Double(Constant.numberOfDigits))) - 1
-    
-    prefix static func ~ (x: Self) -> Self {
-        return self.init(~x.value)
-    }
-    
-    prefix static func - (x: Self) -> Self {
-        return self.init(-x.value)
-    }
-    
-    static func << (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value << rhs.value)
-    }
-    
-    static func >> (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value >> rhs.value)
-    }
-    
-    static func & (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value & rhs.value)
-    }
-    
-    static func ~& (lhs: Self, rhs: Self) -> Self {
-        return self.init( ~(lhs.value & rhs.value))
-    }
-    
-    static func + (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value + rhs.value)
-    }
-    
-    static func - (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value - rhs.value)
-    }
-    
-    static func | (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value | rhs.value)
-    }
-    
-    static func ~| (lhs: Self, rhs: Self) -> Self {
-        return self.init(~(lhs.value | rhs.value))
-    }
-    
-    static func ^ (lhs: Self, rhs: Self) -> Self {
-        return self.init(lhs.value ^ rhs.value)
-    }
-    
-    var description: String {
-        return text
     }
 }
