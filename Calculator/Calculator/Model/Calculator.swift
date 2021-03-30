@@ -85,6 +85,9 @@ class Calculator<OperandType: Operand, InfixOperatorType: InfixOperator, PrefixO
         postfixedList.removeAll()
         infixOperatorStack.clear()
         operandStack.clear()
+        lastOperand = nil
+        lastOperator = nil
+        calculated = nil
     }
 }
 
