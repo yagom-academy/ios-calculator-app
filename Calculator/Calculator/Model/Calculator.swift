@@ -20,7 +20,7 @@ class Calculator<OperandType: Operand, InfixOperatorType: InfixOperator, PrefixO
     
     fileprivate init() { }
     
-    fileprivate func calculate(by prefixOperator: PrefixOperatorType, x: OperandType) -> OperandType {
+    func calculate(by prefixOperator: PrefixOperatorType, x: OperandType) -> OperandType {
         return OperandType.zero
     }
     
