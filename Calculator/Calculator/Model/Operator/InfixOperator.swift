@@ -5,13 +5,15 @@
 //  Created by 덕복 on 2021/03/30.
 //
 
-protocol InfixOperator: Operator {
+protocol InfixOperator: CalculatingElement, CaseIterable {
     var precedence: Int { get }
+    
+    init?(rawValue: String)
 }
 
 extension InfixOperator {
     func isPrecedence(over anotherOperator: Self) -> Bool {
-    return self.precedence > anotherOperator.precedence
+        return self.precedence > anotherOperator.precedence
     }
 }
 

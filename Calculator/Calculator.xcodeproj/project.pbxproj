@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		02C3A81A2610110E00826863 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8192610110E00826863 /* Stack.swift */; };
-		02C3A81E261011C900826863 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A81D261011C900826863 /* Operator.swift */; };
 		02C3A8212610125700826863 /* CalculatingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8202610125700826863 /* CalculatingElement.swift */; };
 		02C3A8242610145100826863 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8232610145100826863 /* Operand.swift */; };
 		02C3A828261014F500826863 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A827261014F500826863 /* Constant.swift */; };
@@ -27,7 +26,6 @@
 
 /* Begin PBXFileReference section */
 		02C3A8192610110E00826863 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
-		02C3A81D261011C900826863 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		02C3A8202610125700826863 /* CalculatingElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatingElement.swift; sourceTree = "<group>"; };
 		02C3A8232610145100826863 /* Operand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand.swift; sourceTree = "<group>"; };
 		02C3A827261014F500826863 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 		02F9155A2612D02B00767989 /* Operator */ = {
 			isa = PBXGroup;
 			children = (
-				02C3A81D261011C900826863 /* Operator.swift */,
 				02F9154C2612BC1700767989 /* PrefixOperator.swift */,
 				02F915492612BC1000767989 /* InfixOperator.swift */,
 			);
@@ -200,7 +197,6 @@
 				02F9154D2612BC1700767989 /* PrefixOperator.swift in Sources */,
 				02C3A8212610125700826863 /* CalculatingElement.swift in Sources */,
 				02C3A828261014F500826863 /* Constant.swift in Sources */,
-				02C3A81E261011C900826863 /* Operator.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				02C3A8242610145100826863 /* Operand.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,

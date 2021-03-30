@@ -10,9 +10,9 @@ import Foundation
 struct Binary: Operand {
     typealias ValueType = Int
     
-    private(set) var value: Int
+    private(set) var value: ValueType
     private(set) var text: String
-    static let zero: Self = Self.init(0)
+    static let zero = Self(0)
     static let max = Int(pow(Double(2), Double(Constant.maxDigitCount - 1)) - 1)
     static let min = -Int(pow(Double(2), Double(Constant.maxDigitCount - 1)))
     static let unsignedMax = Int(pow(2, Double(Constant.maxDigitCount))) - 1

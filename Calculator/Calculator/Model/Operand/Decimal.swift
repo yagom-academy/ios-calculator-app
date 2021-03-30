@@ -12,9 +12,9 @@ struct Decimal: Operand {
     
     private(set) var value: ValueType
     private(set) var text: String
-    static let zero: Self = Self.init(0)
-    static var max: ValueType = pow(10, Double(Constant.maxDigitCount)) - 1
-    static var min: ValueType = -(pow(10, Double(Constant.maxDigitCount)) - 1)
+    static let zero = Self(0)
+    static let max = pow(10, Double(Constant.maxDigitCount)) - 1
+    static let min = -(pow(10, Double(Constant.maxDigitCount)) - 1)
 
     var description: String {
         return text
