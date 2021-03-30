@@ -34,7 +34,7 @@ struct Decimal: Operand {
     init(_ value: Double) {
         var formattedValue: Double = value.truncatingRemainder(dividingBy: Double(Self.max) + 1)
         let count: Int = Constant.maxDigitCount - String(Int(formattedValue)).count
-        formattedValue = ceil(formattedValue * pow(10, Double(count))) / pow(10, Double(count))
+        formattedValue = round(formattedValue * pow(10, Double(count))) / pow(10, Double(count))
         
         self.value = formattedValue
         self.text = formattedValue.truncatingRemainder(dividingBy: 1.0) == 0.0 ? String(Int(self.value)) : String(self.value)
