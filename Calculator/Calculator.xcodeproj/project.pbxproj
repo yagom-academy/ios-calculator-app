@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C1E64A02611B725008BE828 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E649F2611B725008BE828 /* CalculatorTests.swift */; };
+		1C1E64A02611B725008BE828 /* DecimalCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E649F2611B725008BE828 /* DecimalCalculatorTests.swift */; };
 		1C1E64A92611B736008BE828 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C56332608F1DB003910F2 /* Protocols.swift */; };
 		1C1E64AA2611B737008BE828 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C564B260CD90E003910F2 /* Errors.swift */; };
 		1C1E64AB2611B739008BE828 /* DecimalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C56362608F2F8003910F2 /* DecimalCalculator.swift */; };
@@ -49,7 +49,7 @@
 		18F8B5FF81937AFF58C510F4 /* Pods_Calculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC55F930431343E091EED14 /* Pods-Calculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calculator.debug.xcconfig"; path = "Target Support Files/Pods-Calculator/Pods-Calculator.debug.xcconfig"; sourceTree = "<group>"; };
 		1C1E649D2611B725008BE828 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C1E649F2611B725008BE828 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		1C1E649F2611B725008BE828 /* DecimalCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalCalculatorTests.swift; sourceTree = "<group>"; };
 		1C1E64A12611B725008BE828 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C1E64B62611B772008BE828 /* BinaryCaculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCaculatorTests.swift; sourceTree = "<group>"; };
 		1C74FAE52612EF24007277D5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -96,8 +96,8 @@
 		1C1E649E2611B725008BE828 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				1C1E649F2611B725008BE828 /* DecimalCalculatorTests.swift */,
 				1C1E64B62611B772008BE828 /* BinaryCaculatorTests.swift */,
-				1C1E649F2611B725008BE828 /* CalculatorTests.swift */,
 				1C1E64A12611B725008BE828 /* Info.plist */,
 			);
 			path = CalculatorTests;
@@ -334,7 +334,7 @@
 			files = (
 				1C1E64B32611B746008BE828 /* ViewController.swift in Sources */,
 				1C1E64B12611B742008BE828 /* AppDelegate.swift in Sources */,
-				1C1E64A02611B725008BE828 /* CalculatorTests.swift in Sources */,
+				1C1E64A02611B725008BE828 /* DecimalCalculatorTests.swift in Sources */,
 				1C1E64B22611B744008BE828 /* SceneDelegate.swift in Sources */,
 				1C1E64B72611B772008BE828 /* BinaryCaculatorTests.swift in Sources */,
 				1C1E64AE2611B73C008BE828 /* BinaryCalculator.swift in Sources */,

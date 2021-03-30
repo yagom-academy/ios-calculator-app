@@ -10,4 +10,5 @@ import Foundation
 enum CalculatorError: Error {
     case invalidInput
     case outOfRangeInput
+    case formatError
 }

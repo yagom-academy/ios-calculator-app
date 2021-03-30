@@ -15,48 +15,25 @@ final class DecimalCalculator: Computable, Resettable {
     
     var stack = Stack<StackForDecimalCalculator>()
     
-    func add(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Double(firstNumber),
-              let second = Double(secondNumber) else {
-            throw CalculatorError.invalidInput
-        }
-        
-        let result = first + second
-        return formattedResult(of: result)
+    func multiply(firstNumber: Double, secondNumber: Double) -> Double {
+        return firstNumber * secondNumber
     }
     
-    func subtract(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Double(firstNumber),
-              let second = Double(secondNumber) else {
-            throw CalculatorError.invalidInput
-        }
-        
-        let result = first - second
-        return formattedResult(of: result)
+    func divide(firstNumber: Double, secondNumber: Double) -> Double {
+        return firstNumber / secondNumber
     }
     
-    func multiply(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Double(firstNumber),
-              let second = Double(secondNumber) else {
-            throw CalculatorError.invalidInput
+    func formatInput(_ userInput: String?) throws -> Double {
+        guard let input = userInput,
+              let castedInput = Double(input) else {
+            throw CalculatorError.formatError
         }
-        
-        let result = first * second
-        return formattedResult(of: result)
+        return castedInput
     }
     
-    func divide(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Double(firstNumber),
-              let second = Double(secondNumber) else {
-            throw CalculatorError.invalidInput
-        }
-        
-        let result = first / second
-        return formattedResult(of: result)
-    }
-    
-    private func formattedResult(of result: Double) -> String? {
+    func formatResult(of result: Double) throws -> String {
         var result = result
+        
         if result >= 1e9 {
             result = result.truncatingRemainder(dividingBy: 1e9)
         }
@@ -65,7 +42,11 @@ final class DecimalCalculator: Computable, Resettable {
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 9
         
-        return formatter.string(from: NSNumber(value: result))
+        guard let formattedResult = formatter.string(from: NSNumber(value: result)) else {
+            throw CalculatorError.formatError
+        }
+        
+        return formattedResult
     }
     
     func reset() {

@@ -18,15 +18,54 @@ final class BinaryCalculator: Computable, Resettable {
         reset()
     }
     
-    private func convertBinaryToDecimal(_ input: String) -> Int {
-        guard input.count <= 8,
-            var number = Int(input, radix: 2) else {
-            return -1
+    func AND(firstNumber: Int, secondNumber: Int) -> Int {
+        return firstNumber & secondNumber
+    }
+    
+    func NAND(firstNumber: Int, secondNumber: Int) -> Int {
+        return ~(firstNumber & secondNumber)
+    }
+    
+    func OR(firstNumber: Int, secondNumber: Int) -> Int {
+        return firstNumber | secondNumber
+    }
+    
+    func NOR(firstNumber: Int, secondNumber: Int) -> Int {
+        return ~(firstNumber | secondNumber)
+    }
+    
+    func XOR(firstNumber: Int, secondNumber: Int) -> Int {
+        return firstNumber ^ secondNumber
+    }
+    
+    func NOT(firstNumber: Int) -> Int {
+        
+        // 하위 8비트를 bitmask
+        let bitmasker = ~0 - (1<<8 - 1)
+        var result = ~(bitmasker ^ firstNumber)
+
+        if result >= 256 {
+            result %= 256
         }
         
-        if number == 128 {
-            return -1
-        } else if number > 128 {
+        return result
+    }
+    
+    func shiftLeft(firstNumber: Int, secondNumber: Int) -> Int {
+        return firstNumber << secondNumber
+    }
+    
+    func shiftRight(firstNumber: Int, secondNumber: Int) -> Int {
+        return firstNumber >> secondNumber
+    }
+    
+    func formatInput(_ input: String) throws -> Int {
+        guard input.count <= 8,
+            var number = Int(input, radix: 2) else {
+            throw CalculatorError.outOfRangeInput
+        }
+        
+        if number > 128 {
             number -= 1
             number ^= 255
             number *= -1
@@ -35,100 +74,7 @@ final class BinaryCalculator: Computable, Resettable {
         return number
     }
     
-    func add(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first + second
-        
-        return formattedResult(of: result)
-    }
-    
-    func subtract(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first &- second
-        return formattedResult(of: result)
-    }
-    
-    func AND(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first & second
-        return formattedResult(of: result)
-    }
-    
-    func NAND(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = ~(first & second)
-        return formattedResult(of: result)
-    }
-    
-    func OR(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first | second
-        return formattedResult(of: result)
-    }
-    
-    func NOR(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = ~(first | second)
-        return formattedResult(of: result)
-    }
-    
-    func XOR(firstNumber: String, secondNumber: String) throws -> String? {
-        let first = convertBinaryToDecimal(firstNumber)
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first ^ second
-        return formattedResult(of: result)
-    }
-    
-    func NOT(firstNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
-        
-        // 하위 8비트를 bitmask
-        let bitmasker = ~0 - (1<<8 - 1)
-        var result = ~(bitmasker ^ first)
-
-        if result >= 256 {
-            result %= 256
-        }
-        
-        return String(result, radix: 2)
-    }
-    
-    func shiftLeft(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first << second
-        return formattedResult(of: result)
-    }
-    
-    func shiftRight(firstNumber: String, secondNumber: String) throws -> String? {
-        guard let first = Int(firstNumber, radix: 2) else {
-            throw CalculatorError.invalidInput
-        }
-        let second = convertBinaryToDecimal(secondNumber)
-        
-        let result = first >> second
-        return formattedResult(of: result)
-    }
-    
-    private func formattedResult(of result: Int) -> String {
+    func formatResult(of result: Int) -> String {
         var result = result
         if result >= 128 {
             result %= 128
