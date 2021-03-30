@@ -1,5 +1,5 @@
 //
-//  Subtractable.swift
+//  Addable.swift
 //  Calculator
 //
 //  Created by 김찬우 on 2021/03/30.
@@ -18,3 +18,4 @@ extension Addable {
         return operatedNumber + operatingNumber
     }
 }
+
