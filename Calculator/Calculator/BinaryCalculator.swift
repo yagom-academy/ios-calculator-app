@@ -81,6 +81,7 @@ class BinaryCalculator {
     }
     
     func calculate(_ `operator`: String) -> UInt8 {
+        print("operator", `operator`)
         switch `operator` {
         case "+":
             return addCalculate(binaryToInt(firstNumber), binaryToInt(secondNumber))
@@ -108,21 +109,33 @@ class BinaryCalculator {
     }
     
     func receiveInput(buttonType: String) {
+        // 초기화
+        if buttonType == "c" {
+            firstNumber = ""
+            secondNumber = ""
+            tempNumber = ""
+            return
+        }
+        
         // = 왔을 때 처리
-        if (buttonType == "=") {
+        if buttonType == "=" {
+            secondNumber = tempNumber
+            print("first", firstNumber, " second", secondNumber)
             screenNumber = intToBinary(calculate(lastOperator))
             print(screenNumber)
             return
         }
         
         // 숫자가 왔을 때 처리
-        if (buttonType == "0" || buttonType == "1") {
+        if buttonType == "0" || buttonType == "1" {
             tempNumber += buttonType
             return
         }
         
         // 연산자 처리
         if "+-&|^~<<>>~&~|".contains(buttonType) {
+            firstNumber = tempNumber
+            tempNumber = ""
             lastOperator = buttonType
             return
         }

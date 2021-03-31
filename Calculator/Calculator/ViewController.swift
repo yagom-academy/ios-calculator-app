@@ -94,7 +94,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func binaryBtn(_ sender: UIButton) {
-        print(sender.titleLabel?.text!)
+        print((sender.titleLabel?.text!)!)
         switch sender {
         case binaryClear:
             binaryCalculrator.receiveInput(buttonType: "c")
