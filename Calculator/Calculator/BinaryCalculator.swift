@@ -5,18 +5,14 @@
 //  Created by Neph on 2021/03/23.
 //
 
-final class BinaryCalculator: Computable, Resettable {
-    
+final class BinaryCalculator: Calculator {
+
     struct StackForBinaryCalculator {
         var number: String
         var operatorType: Operator
     }
     
     var stack = Stack<StackForBinaryCalculator>()
-    
-    init() {
-        reset()
-    }
     
     func AND(firstNumber: Int, secondNumber: Int) -> Int {
         return firstNumber & secondNumber
@@ -39,16 +35,7 @@ final class BinaryCalculator: Computable, Resettable {
     }
     
     func NOT(firstNumber: Int) -> Int {
-        
-        // 하위 8비트를 bitmask
-        let bitmasker = ~0 - (1<<8 - 1)
-        var result = ~(bitmasker ^ firstNumber)
-
-        if result >= 256 {
-            result %= 256
-        }
-        
-        return result
+        return ~firstNumber
     }
     
     func shiftLeft(firstNumber: Int, secondNumber: Int) -> Int {
@@ -74,10 +61,10 @@ final class BinaryCalculator: Computable, Resettable {
         return number
     }
     
-    func formatResult(of result: Int) -> String {
+    func formatResult(of result: Int) throws -> String {
         var result = result
         if result >= 128 {
-            result %= 128
+            throw CalculatorError.outOfRangeInput
         } else if result < 0 {
             result = 1 << 8 + result
         }

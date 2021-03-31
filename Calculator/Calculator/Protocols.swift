@@ -22,6 +22,6 @@ extension Computable {
     }
 }
 
-protocol Resettable {
+protocol Calculator: Computable {
     func reset()
 }

@@ -22,7 +22,7 @@ final class Stack<T> {
     }
     
     func pop() -> T? {
-        return stack.removeLast()
+        return stack.isEmpty ? nil : stack.removeLast()
     }
     
     func reset() {
