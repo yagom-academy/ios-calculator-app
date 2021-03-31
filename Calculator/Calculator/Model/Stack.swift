@@ -1,8 +1,8 @@
 //
-//  Stack.swift
-//  Calculator
+//  CalculatorStack.swift
+//  codingTest
 //
-//  Created by 이영우 on 2021/03/22.
+//  Created by 윤재웅 on 2021/03/30.
 //
 
 import Foundation
@@ -22,15 +22,15 @@ struct Stack<T> {
         array.append(element)
     }
     
-    @discardableResult mutating func pop() -> T? {
+    mutating func pop() -> T? {
         return array.popLast()
+    }
+    
+    mutating func reset() {
+        array.removeAll()
     }
     
     var peek: T? {
         return array.last
-    }
-    
-    mutating func removeAll() {
-        array.removeAll()
     }
 }

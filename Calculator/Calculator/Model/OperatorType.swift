@@ -1,47 +1,37 @@
 //
 //  OperatorType.swift
-//  Calculator
+//  codingTest
 //
-//  Created by 이영우 on 2021/03/23.
+//  Created by 윤재웅 on 2021/03/30.
 //
 
 import Foundation
 
-enum OperatorType: String, CaseIterable {
+enum resetType {
+    static let reset = "c"
+}
+
+enum DecimalOperatorType: String, CaseIterable {
     case add = "+"
     case subtract = "-"
     case multiple = "*"
     case divide = "/"
-    case and = "&"
-    case nand = "~&"
-    case or = "|"
-    case nor = "~|"
-    case xor = "^"
-    case not = "~"
-    case leftShift = "<<"
-    case rightShift = ">>"
     case equal = "="
     
-    var priority: Int {
+    var priority: Bool {
         switch self {
-        case .multiple, .divide, .not, .nand, .nor:
-            return 10
         case .add, .subtract:
-            return 9
-        case .leftShift, .rightShift:
-            return 8
-        case .and:
-            return 7
-        case .xor:
-            return 6
-        case .or:
-            return 5
-        default:
-            return 0
+            return false
+        case .multiple, .divide:
+            return true
+        case .equal:
+            return true
         }
     }
-    
-    var symbol: String {
+}
+
+extension DecimalOperatorType: CustomStringConvertible {
+    var description: String {
         switch self {
         case .add:
             return "+"
@@ -51,6 +41,27 @@ enum OperatorType: String, CaseIterable {
             return "*"
         case .divide:
             return "/"
+        case .equal:
+            return "="
+        }
+    }
+}
+
+enum BinaryOperatorType: String, CaseIterable {
+    case and = "&"
+    case nand = "~&"
+    case or = "|"
+    case nor = "~|"
+    case xor = "^"
+    case not = "~"
+    case leftShift = "<<"
+    case rightShift = ">>"
+    case equal = "="
+}
+
+extension BinaryOperatorType: CustomStringConvertible {
+    var description: String {
+        switch self {
         case .and:
             return "&"
         case .nand:
@@ -59,14 +70,14 @@ enum OperatorType: String, CaseIterable {
             return "|"
         case .nor:
             return "~|"
-        case .xor:
-            return "^"
         case .not:
             return "~"
         case .leftShift:
             return "<<"
         case .rightShift:
             return ">>"
+        case .xor:
+            return "^"
         case .equal:
             return "="
         }
