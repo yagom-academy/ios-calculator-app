@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B480D7A9260D946E00A42064 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480D7A8260D946E00A42064 /* Stack.swift */; };
+		B480D7AC260D94A000A42064 /* GeneralCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480D7AB260D94A000A42064 /* GeneralCalculator.swift */; };
+		B480D7B8260F03E700A42064 /* BinaryCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480D7B7260F03E700A42064 /* BinaryCalculation.swift */; };
+		B480D7BB260F040600A42064 /* CustomPrecedenceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480D7BA260F040600A42064 /* CustomPrecedenceGroup.swift */; };
+		B480D7BF260F04BC00A42064 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480D7BE260F04BC00A42064 /* Protocol.swift */; };
+		B493460C26133AAF0047C30D /* DecimalCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493460B26133AAF0047C30D /* DecimalCalculation.swift */; };
+		B493461026133D560047C30D /* InputDataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493460F26133D560047C30D /* InputDataValidation.swift */; };
+		B493461326133D850047C30D /* Precedence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493461226133D850047C30D /* Precedence.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -16,6 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B480D7A8260D946E00A42064 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		B480D7AB260D94A000A42064 /* GeneralCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralCalculator.swift; sourceTree = "<group>"; };
+		B480D7B7260F03E700A42064 /* BinaryCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCalculation.swift; sourceTree = "<group>"; };
+		B480D7BA260F040600A42064 /* CustomPrecedenceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPrecedenceGroup.swift; sourceTree = "<group>"; };
+		B480D7BE260F04BC00A42064 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		B493460B26133AAF0047C30D /* DecimalCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalCalculation.swift; sourceTree = "<group>"; };
+		B493460F26133D560047C30D /* InputDataValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidation.swift; sourceTree = "<group>"; };
+		B493461226133D850047C30D /* Precedence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precedence.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +79,14 @@
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
+				B480D7A8260D946E00A42064 /* Stack.swift */,
+				B480D7AB260D94A000A42064 /* GeneralCalculator.swift */,
+				B480D7B7260F03E700A42064 /* BinaryCalculation.swift */,
+				B480D7BA260F040600A42064 /* CustomPrecedenceGroup.swift */,
+				B480D7BE260F04BC00A42064 /* Protocol.swift */,
+				B493460B26133AAF0047C30D /* DecimalCalculation.swift */,
+				B493460F26133D560047C30D /* InputDataValidation.swift */,
+				B493461226133D850047C30D /* Precedence.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -137,8 +161,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B493460C26133AAF0047C30D /* DecimalCalculation.swift in Sources */,
+				B493461026133D560047C30D /* InputDataValidation.swift in Sources */,
+				B480D7A9260D946E00A42064 /* Stack.swift in Sources */,
+				B480D7BB260F040600A42064 /* CustomPrecedenceGroup.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				B480D7BF260F04BC00A42064 /* Protocol.swift in Sources */,
+				B493461326133D850047C30D /* Precedence.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				B480D7AC260D94A000A42064 /* GeneralCalculator.swift in Sources */,
+				B480D7B8260F03E700A42064 /* BinaryCalculation.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,14 +318,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Calculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.Calculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -305,7 +341,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BFFWUZ89CF;
 				INFOPLIST_FILE = Calculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
