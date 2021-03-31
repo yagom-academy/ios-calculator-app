@@ -131,9 +131,10 @@ class BinaryCalculatorTests: XCTestCase {
         let result4 = try? binaryCalculatorTest?.formatResult(of: 18)
         XCTAssertEqual(result4, "10010")
         
-        // 양수의 최대 표현범위는 127까지이므로 그 이상의 입력이 들어오면 max값으로 표현
-        let result5 = try? binaryCalculatorTest?.formatResult(of: 1023)
-        XCTAssertEqual(result5, nil)
+        // 양수의 최대 표현범위는 127까지이므로 그 이상의 입력이 들어오면 error를 throw
+        XCTAssertThrowsError(try binaryCalculatorTest?.formatResult(of: 1023)) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.outOfRangeInput)
+        }
     }
 
     func test_reset() {

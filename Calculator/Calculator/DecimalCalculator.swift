@@ -16,11 +16,11 @@ final class DecimalCalculator: Calculator {
     var stack = Stack<StackForDecimalCalculator>()
     
     func multiply(firstNumber: Double, secondNumber: Double) -> Double {
-        return round(Double(firstNumber * secondNumber)*1e9)/1e9
+        return round(Double(firstNumber * secondNumber) * 1e9) / 1e9
     }
     
     func divide(firstNumber: Double, secondNumber: Double) -> Double {
-        return round(Double(firstNumber / secondNumber)*1e9)/1e9
+        return round(Double(firstNumber / secondNumber) * 1e9) / 1e9
     }
     
     func formatInput(_ userInput: String) throws -> Float {
