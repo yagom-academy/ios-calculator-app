@@ -106,7 +106,7 @@ class BinaryCalculator {
             return 0
         }
     }
-
+    
     func receiveInput(buttonType: String) {
         // = 왔을 때 처리
         if (buttonType == "=") {
