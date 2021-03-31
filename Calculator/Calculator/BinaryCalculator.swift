@@ -109,7 +109,6 @@ class BinaryCalculator {
     }
     
     func receiveInput(buttonType: String) {
-        // 초기화
         if buttonType == "c" {
             firstNumber = ""
             secondNumber = ""
@@ -117,7 +116,6 @@ class BinaryCalculator {
             return
         }
         
-        // = 왔을 때 처리
         if buttonType == "=" {
             secondNumber = tempNumber
             print("first", firstNumber, " second", secondNumber)
@@ -126,64 +124,16 @@ class BinaryCalculator {
             return
         }
         
-        // 숫자가 왔을 때 처리
         if buttonType == "0" || buttonType == "1" {
             tempNumber += buttonType
             return
         }
-        
-        // 연산자 처리
+      
         if "+-&|^~<<>>~&~|".contains(buttonType) {
             firstNumber = tempNumber
             tempNumber = ""
             lastOperator = buttonType
             return
         }
-        
-        
-//        switch self {
-//            case "+", "-", "&", "~&", "|", "~|", "^", "~", "<<", ">>"
-//                if firstNumber == "" {
-//                    firstNumber = tempNumber
-//                } else {
-//                    secondNumber = tempNumber
-//                }
-//                lastOperator = buttonType
-//        }
-        
-//        if buttonType == "=" {
-//
-//        }
-
-        // switch buttonType {
-        // case "+":
-        //     lastOperator = "+"
-        //     // if secondNumber == nil {
-        //     //     return
-        //     // } else if secondNumber != nil {
-        //     // let intFirstNumber = binaryToInt(firstNumber)
-        //     // let intSecondNumber = binaryToInt(secondNumber)
-        //     // let calcResult = addCalculate(intFirstNumber, intSecondNumber)
-        //     // let result = intToBinary(calcResult)
-        //     // tempNumber = result
-        //     // }
-        // case "-":
-        //     lastOperator = "-"
-        // case "&":
-        // case "~&":
-        // case "|":
-        // case "~|":
-        // case "^":
-            
-        // case "~":
-        //     // firstnum 연산
-        // case "<<":
-        //     // firstnum 연산
-        // case ">>":
-        //     // firstnum 연산
-        
-        // case "=":
-        //     print(result)
-        // }
     }
 }

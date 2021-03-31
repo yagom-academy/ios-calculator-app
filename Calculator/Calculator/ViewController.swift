@@ -46,9 +46,8 @@ class ViewController: UIViewController {
     @IBOutlet var binaryPlus: UIButton!
     @IBOutlet var binaryEqual: UIButton!
     
-    let calculator = Calculator()
+    let calculator = DemicalCalculator()
     let binaryCalculrator = BinaryCalculator()
-    
     
     @IBAction func numBtn(_ sender: UIButton) {
         switch sender {
@@ -127,7 +126,6 @@ class ViewController: UIViewController {
         default:
             break
         }
-
     }
     
     @IBAction func changeBtn(_ sender: UIButton) {
@@ -138,7 +136,6 @@ class ViewController: UIViewController {
             decimalView.isHidden = false
             binaryView.isHidden = true
         }
-        
     }
     
     override func viewDidLoad() {
@@ -179,11 +176,6 @@ class ViewController: UIViewController {
         num0.setTitleColor(.white, for: .normal)
         num0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
-    
-    func binarySetup() {
-        
-    }
-    
 }
 
 extension UIButton {

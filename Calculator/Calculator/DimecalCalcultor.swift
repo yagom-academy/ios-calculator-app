@@ -2,7 +2,7 @@
 //  DimecalCalcultor.swift
 //  Calculator
 //
-//  Created by handsome s on 2021/03/26.
+//  Created by handsome steven on 2021/03/26.
 //
 
 import Foundation
@@ -35,8 +35,7 @@ struct Stack<T> {
     }
 }
 
-
-class Calculator {
+class DemicalCalculator {
     var operands = Stack<Double>()
     var operators = Stack<String>()
     var tempNumber = ""
@@ -51,14 +50,14 @@ class Calculator {
         operationFunctions["/"] = { $0 / $1 }
 
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 9
+        numberFormatter.maximumSignificantDigits = 8
     }
  
     private func calculateUntilSatisfiedCondition() {
-        guard let operatorSign = operators.pop() else { return }
-        guard let operationFunction = operationFunctions[operatorSign] else { return }
-        guard let secondOperand = operands.pop() else { return }
-        guard let firstOperand = operands.pop() else { return }
+        guard let operatorSign = operators.pop(),
+            let operationFunction = operationFunctions[operatorSign],
+            let secondOperand = operands.pop(),
+            let firstOperand = operands.pop() else { return }
         let result: Double = operationFunction(firstOperand, secondOperand)
         operands.push(result)
     }
@@ -117,6 +116,7 @@ class Calculator {
         switch buttonType {
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "." :
                 concatenateNumberOrDot(buttonType)
+                print(tempNumber)
                 screenNumber = numberFormatter.string(for: Double(tempNumber))!
             case "+", "-", "*", "/":
                 guard let doubleValue = Double(tempNumber) else { return }
@@ -137,8 +137,6 @@ class Calculator {
                 reset()
             case "=":
                 guard let doubleValue = Double(tempNumber) else { return }
-                // 마지막 연산자
-                // 마지막 피연산자
                 operands.push(doubleValue)
                 if operands.count == operators.count {
                 // TODO: 마지막 입력이 연산자 이고 그 다음 "="을 눌렀을 때 마지막 피연산자와 연산자를 프로퍼티로 저장
@@ -155,11 +153,3 @@ class Calculator {
         }
     }
 }
-
-// extension Formatter {
-//     static let numberFormatter: NumberFormatter = {
-//         let formatter = NumberFormatter()
-//         formatter.numberStyle = .decimal
-//         return formatter
-//     }()
-// }
