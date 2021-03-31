@@ -1,8 +1,8 @@
 //
-//  Constant.swift
-//  Calculator
+//  CalculatorConstant.swift
+//  codingTest
 //
-//  Created by 이영우 on 2021/03/23.
+//  Created by 윤재웅 on 2021/03/30.
 //
 
 import Foundation
@@ -16,4 +16,5 @@ enum CalculatorConstant {
     static let dot = "."
     static let integerOne = 1
     static let stringOne = "1"
+    static let stringZero = "0"
 }
