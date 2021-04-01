@@ -44,8 +44,8 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         }
     }
     
-    mutating func calculate(operatedNumber: Double, operatingNumber: Double) -> Double {
-        switch convertType(inputOperator: "+") {
+    mutating func calculate(operateSign: String?, operatedNumber: Double, operatingNumber: Double) -> Double {
+        switch convertType(inputOperator: operateSign) {
         case .addition:
            return add(operatedNumber, and: operatingNumber)
         case .subtraction:
@@ -58,12 +58,20 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         }
     }
     
-    mutating func executeOperate() {
-        stack.push(convertType(inputNumber: readLine()))
+    mutating func executeOperate(of inputNumber: String?) {
+        stack.push(convertType(inputNumber: inputNumber))
         
         for _ in 1...10 {
-            stack.push(calculate(operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
+            stack.push(calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
         } 
+    }
+    
+    func showTopOfStack() {
+        if stack.top! / 1000000000.0 >= 1 {
+            print(stack.top!.truncatingRemainder(dividingBy: 1000000000.0) )
+        } else {
+            print(stack.top!)
+        }
     }
 }
 
