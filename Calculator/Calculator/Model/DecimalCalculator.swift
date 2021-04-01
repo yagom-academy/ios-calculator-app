@@ -94,7 +94,7 @@ class DecimalCalculator {
     
     func output() {
         guard let outputValue = operandStack.peek() else { return }
-        print(convertInteger(value: String(outputValue)))
+        print("디스플레이 출력 :", convertInteger(value: String(outputValue)))
     }
     
     func reset() {

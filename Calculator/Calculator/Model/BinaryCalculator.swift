@@ -111,7 +111,8 @@ final class BinaryCalculator: Calculatable {
     }
     
     func output() {
-        
+        guard let top = stack.peek() else { return }
+        print("디스플레이 출력 :", top)
     }
     
     func reset() {
