@@ -11,5 +11,5 @@ protocol TypeConvertible {
     associatedtype T
     
     func inputAndConvertTypeOfNumber() -> T
-    func inputAndConvertTypeOfOperator() -> Operator
+    func inputAndConvertTypeOfOperator() -> String
 }
