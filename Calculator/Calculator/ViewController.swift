@@ -32,10 +32,10 @@ class ViewController: UIViewController {
         //중위표현식(InputDataValidation의 manageData메서드를 통해 입력받은 String을 중위표현식 순서의 배열로 변환)
         print(data.medianNotation)
         
-        //일반계산기 인스턴스
-       let generalCalculator: GeneralCalculator = GeneralCalculator()
+        //일반계산기 인스턴스let generalCalculator: GeneralCalculator = GeneralCalculator()
+        let generalCalculator = GeneralCalculator()
         
-       generalCalculator.convertToPostfixNotation(inputDataValidation)
+        generalCalculator.convertToPostfixNotation(inputDataValidation)
     
         //2진계산기 결과
         binaryCalculator.calculatePostfixNotation(inputDataValidation)
