@@ -7,14 +7,23 @@
 
 import Foundation
 
-enum CalculatorConstant {
+extension String {
+    static let zero = "0"
+    static let one = "1"
     static let blank = ""
-    static let zero = 0
-    static let doubleZero = 0.0
-    static let binary = 2
-    static let uInt8Zero: UInt8 = 0
     static let dot = "."
-    static let integerOne = 1
-    static let stringOne = "1"
-    static let stringZero = "0"
+}
+
+extension Int {
+    static let zero = 0
+    static let one = 1
+    static let binary = 2
+}
+
+extension Double {
+    static let zero = 0.0
+}
+
+extension UInt8 {
+    static let uInt8Zero: UInt8 = 0
 }

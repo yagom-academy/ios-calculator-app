@@ -48,6 +48,8 @@ extension DecimalOperatorType: CustomStringConvertible {
 }
 
 enum BinaryOperatorType: String, CaseIterable {
+    case add = "+"
+    case subtract = "-"
     case and = "&"
     case nand = "~&"
     case or = "|"
@@ -57,11 +59,32 @@ enum BinaryOperatorType: String, CaseIterable {
     case leftShift = "<<"
     case rightShift = ">>"
     case equal = "="
-}
 
-extension BinaryOperatorType: CustomStringConvertible {
-    var description: String {
+    var priority: Int {
         switch self {
+        case .not:
+            return 10
+        case .add, .subtract:
+            return 9
+        case .leftShift, .rightShift:
+            return 8
+        case .and, .nand:
+            return 7
+        case .xor:
+            return 6
+        case .or, .nor:
+            return 5
+        case .equal:
+            return 4
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .add:
+            return "+"
+        case .subtract:
+            return "-"
         case .and:
             return "&"
         case .nand:
@@ -70,14 +93,14 @@ extension BinaryOperatorType: CustomStringConvertible {
             return "|"
         case .nor:
             return "~|"
+        case .xor:
+            return "^"
         case .not:
             return "~"
         case .leftShift:
             return "<<"
         case .rightShift:
             return ">>"
-        case .xor:
-            return "^"
         case .equal:
             return "="
         }

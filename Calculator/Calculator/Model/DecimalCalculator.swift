@@ -11,8 +11,8 @@ final class DecimalCalculator: Calculatable {
     private var lowOperatorStack = Stack<DecimalOperatorType>()
     private var highOperatorStack = Stack<DecimalOperatorType>()
     private var operandStack = Stack<Double>()
-    private var operand = CalculatorConstant.blank
-    private var outputValue = CalculatorConstant.doubleZero
+    private var operand = String.blank
+    private var outputValue = Double.zero
     private let operators = DecimalOperatorType.allCases.map { $0.description }
     private var preOperand: Double?
     private var preOperator: DecimalOperatorType?
@@ -23,6 +23,9 @@ final class DecimalCalculator: Calculatable {
     
     func input(_ inputValue: String) {
         if operators.contains(inputValue) == false {
+            if operand.contains(String.dot) ? operand.count == 10 : operand.count == 9 {
+                return
+            }
             operand += inputValue
         } else if inputValue == DecimalOperatorType.equal.description {
             if isEqual == true {
@@ -36,9 +39,12 @@ final class DecimalCalculator: Calculatable {
             reset()
             return
         } else {
+            if operandStack.count == lowOperatorStack.count + highOperatorStack.count {
+                return
+            }
             isEqual = false
             moveToOperandStack(operand)
-            operand = CalculatorConstant.blank
+            operand = String.blank
             preOperator = DecimalOperatorType(rawValue: inputValue)
             if moveToOperatorStack(inputValue) == false {
                 calculate(currentOperator: inputValue)
@@ -54,7 +60,7 @@ final class DecimalCalculator: Calculatable {
             return
         }
         
-        if currentOperator == DecimalOperatorType.equal.rawValue { // "=",
+        if currentOperator == DecimalOperatorType.equal.rawValue {
             if lowOperatorStack.count + highOperatorStack.count == 2 && operandStack.count == 1 && isLastEquals == false {
                 if isFirstEquals == false {
                     isFirstEquals = true
@@ -128,7 +134,6 @@ final class DecimalCalculator: Calculatable {
                     singleValue /= preOperand!
                     print(convertInteger(value: String(singleValue)))
                     operandStack.push(singleValue)
-                    
                 default:
                     fatalError()
                 }
@@ -210,7 +215,7 @@ final class DecimalCalculator: Calculatable {
             }
         }
         else {
-            if operatiorPriority == true { // high
+            if operatiorPriority == true {
                 guard let highOperatiorValue = highOperatorStack.pop(),
                       let result = pickCalulation(operatorType: highOperatiorValue) else {
                     
@@ -269,7 +274,7 @@ final class DecimalCalculator: Calculatable {
     func reset() {
         lowOperatorStack.reset()
         highOperatorStack.reset()
-        operand = CalculatorConstant.blank
+        operand = String.blank
     }
     
     private func pickCalulation(operatorType: DecimalOperatorType) -> Double? {
@@ -316,10 +321,10 @@ final class DecimalCalculator: Calculatable {
             
             return value
         }
-        if primeNumber.count == CalculatorConstant.integerOne && primeNumber == CalculatorConstant.stringZero {
-            return integerNumber
+        if primeNumber.count == Int.one && primeNumber == String.zero {
+            return String(integerNumber.prefix(9))
         } else {
-            return value
+            return value.contains(".") ? String(value.prefix(10)) : String(value.prefix(9))
         }
     }
     
