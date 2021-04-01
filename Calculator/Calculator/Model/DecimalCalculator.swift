@@ -6,28 +6,62 @@
 //
 import Foundation
 
-final class DecimalCalculator: Calculator {
+final class DecimalCalculator: Computable {
     
-    var numberStack = Stack<Double>()
-    var operatorStack = Stack<Operator>()
-    static var shared = DecimalCalculator()
-    
-    func multiply(firstNumber: Double, secondNumber: Double) -> Double {
-        return round(Double(firstNumber * secondNumber) * 1e9) / 1e9
+    static func add(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = round(Double(first + second) * 1e9) / 1e9
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func divide(firstNumber: Double, secondNumber: Double) -> Double {
-        return round(Double(firstNumber / secondNumber) * 1e9) / 1e9
+    static func subtract(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = round(Double(first - second) * 1e9) / 1e9
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func formatInput(_ userInput: String) throws -> Double {
+    static func multiply(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = round(Double(first * second) * 1e9) / 1e9
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
+    }
+    
+    static func divide(firstNumber: String, secondNumber: String) -> String {
+        
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = round(Double(first / second) * 1e9) / 1e9
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
+        
+    }
+    
+    static func formatInput(_ userInput: String) throws -> Double {
         guard let input = Double(userInput) else {
             throw CalculatorError.formatError
         }
         return input
     }
     
-    func formatResult(of result: Double) throws -> String {
+    static func formatResult(of result: Double) throws -> String {
         var result = result
         
         if result >= 1e9 {
@@ -43,11 +77,6 @@ final class DecimalCalculator: Calculator {
         }
 
         return formattedResult
-    }
-    
-    func reset() {
-        numberStack.reset()
-        operatorStack.reset()
     }
     
 }

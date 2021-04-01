@@ -4,46 +4,122 @@
 //
 //  Created by Neph on 2021/03/23.
 //
+import Foundation
 
-final class BinaryCalculator: Calculator {
-
-    var numberStack = Stack<Int>()
-    var operatorStack = Stack<Operator>()
-    static var shared = BinaryCalculator()
+final class BinaryCalculator: Computable {
     
-    func AND(firstNumber: Int, secondNumber: Int) -> Int {
-        return firstNumber & secondNumber
+    static func add(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first + second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func NAND(firstNumber: Int, secondNumber: Int) -> Int {
-        return ~(firstNumber & secondNumber)
+    static func subtract(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first - second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func OR(firstNumber: Int, secondNumber: Int) -> Int {
-        return firstNumber | secondNumber
+    static func AND(firstNumber: String, secondNumber: String) -> String {
+        
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first & second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
+        
     }
     
-    func NOR(firstNumber: Int, secondNumber: Int) -> Int {
-        return ~(firstNumber | secondNumber)
+    static func NAND(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = ~(first & second)
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func XOR(firstNumber: Int, secondNumber: Int) -> Int {
-        return firstNumber ^ secondNumber
+    static func OR(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first | second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func NOT(firstNumber: Int) -> Int {
-        return ~firstNumber
+    static func NOR(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = ~(first | second)
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func shiftLeft(firstNumber: Int, secondNumber: Int) -> Int {
-        return firstNumber << secondNumber
+    static func XOR(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first ^ second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func shiftRight(firstNumber: Int, secondNumber: Int) -> Int {
-        return firstNumber >> secondNumber
+    static func NOT(firstNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let result = ~first
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
     }
     
-    func formatInput(_ input: String) throws -> Int {
+    static func shiftLeft(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first << second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
+    }
+    
+    static func shiftRight(firstNumber: String, secondNumber: String) -> String {
+        do {
+            let first = try formatInput(firstNumber)
+            let second = try formatInput(secondNumber)
+            let result = first >> second
+            return try formatResult(of: result)
+        } catch {
+            return "-1"
+        }
+    }
+    
+    static func formatInput(_ input: String) throws -> Int {
         guard input.count <= 8,
             var number = Int(input, radix: 2) else {
             throw CalculatorError.outOfRangeInput
@@ -58,7 +134,7 @@ final class BinaryCalculator: Calculator {
         return number
     }
     
-    func formatResult(of result: Int) throws -> String {
+    static func formatResult(of result: Int) throws -> String {
         var result = result
         if result >= 128 {
             throw CalculatorError.outOfRangeInput
@@ -66,11 +142,6 @@ final class BinaryCalculator: Calculator {
             result = 1 << 8 + result
         }
         return String(result, radix: 2)
-    }
-    
-    func reset() {
-        operatorStack.reset()
-        numberStack.reset()
     }
     
 }

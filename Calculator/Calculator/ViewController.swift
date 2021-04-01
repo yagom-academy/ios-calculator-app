@@ -52,42 +52,60 @@ class ViewController: UIViewController {
     @IBOutlet var toggledSwitch: OperatorButton?
     private var decimalCalculator = DecimalCalculator()
     private var binaryCalculator = BinaryCalculator()
+    private var numberStack = Stack<String>()
+    private var operatorStack = Stack<Operator>()
     
     @IBAction func touchUpNumber(_ sender: NumberButton) {
         if isOperatorOn {
-            do {
-                // 현재 on 돼있는 연산자와 숫자를 operator stack에 push
-                decimalCalculator.numberStack.push(try decimalCalculator.formatInput(numberField.text!))
-                decimalCalculator.operatorStack.push(toggledSwitch!.operatorType)
-                toggledSwitch = nil
-            } catch {
-                return // error 처리
-            }
+            // 화면에 있던 것 stack에 push
+            numberStack.push(numberField.text!)
+            operatorStack.push(toggledSwitch!.operatorType)
             
-            numberField.text?.removeAll()
-            numberField.text?.append(sender.currentTitle!)
+            // 기타 작업들
+            isOperatorOn = false
+            toggledSwitch!.isOn = false
+            toggledSwitch = nil
+            numberField.text!.removeAll()
+            
+            // 새로 입력받은 숫자 출력하기
+            numberField.text = sender.currentTitle
         } else {
-            numberField.text?.append(sender.currentTitle!)
+            // 그냥 계속 이어서 숫자 입력
+            numberField.text!.append(sender.currentTitle!)
         }
     }
     
     @IBAction func touchUpOperator(_ sender: OperatorButton) {
-        if decimalCalculator.operatorStack.isEmpty {
-            sender.isOn.toggle()
-            toggledSwitch?.isOn.toggle()
-            toggledSwitch = sender
-        } else {
-            if sender.operatorType.precedence > decimalCalculator.operatorStack.top!.precedence {
-                sender.isOn.toggle()
+        if operatorStack.isEmpty {
+            // 숫자 입력 대기
+            if isOperatorOn {
+                // 우선 기존에 켜져있던 operator 꺼줌
+                toggledSwitch?.isOn = false
+                // toggledSwitch에 이번에 누른 버튼을 할당
                 toggledSwitch = sender
-                return
+                // toggledSwitch의 isOn 켜줌
+                toggledSwitch!.isOn = true
+            } else {
+                sender.isOn = true
+                toggledSwitch = sender
+                isOperatorOn = true
             }
-            while sender.operatorType.precedence <= decimalCalculator.operatorStack.top!.precedence {
-                let secondNumber = decimalCalculator.numberStack.pop()
-                let firstNumber = decimalCalculator.numberStack.pop()
-                let operatorType = decimalCalculator.operatorStack.pop()?.function
-                operatorType!(firstNumber!, secondNumber!)
-                //pop 하면서 연산 진행
+        } else {
+            if sender.operatorType.precedence > operatorStack.top!.precedence {
+                // 다음 숫자 입력 대기
+                toggledSwitch = sender
+                toggledSwitch!.isOn = true
+                isOperatorOn = true
+            }
+            while sender.operatorType.precedence <= operatorStack.top!.precedence {
+                do {
+                    let secondNumber = numberStack.pop()!
+                    let firstNumber = numberStack.pop()!
+                    let operateFunction = operatorStack.pop()!.function
+                    let result = operateFunction(firstNumber, secondNumber)
+                } catch {
+                    return
+                }
             }
         }
     }
@@ -95,11 +113,11 @@ class ViewController: UIViewController {
     @IBAction func touchUpToggleSign(_ sender: Any) {
         do {
             if decimalMode {
-                let minusedInput = try decimalCalculator.formatInput(numberField.text!) * -1
-                numberField.text = try decimalCalculator.formatResult(of: minusedInput)
+                let minusedInput = try DecimalCalculator.formatInput(numberField.text!) * -1
+                numberField.text = try DecimalCalculator.formatResult(of: minusedInput)
             } else {
-                let minusedInput = try binaryCalculator.formatInput(numberField.text!) * -1
-                numberField.text = try binaryCalculator.formatResult(of: minusedInput)
+                let minusedInput = try BinaryCalculator.formatInput(numberField.text!) * -1
+                numberField.text = try BinaryCalculator.formatResult(of: minusedInput)
             }
         } catch {
             return
@@ -109,8 +127,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpToggleMode(_ sender: Any) {
         decimalMode.toggle()
         clearButton(sender)
-        binaryCalculator.reset()
-        decimalCalculator.reset()
+        reset()
         decimalNumberButtons.forEach({ $0.isHidden.toggle() })
         decimalOperatorButtons.forEach({ $0.isHidden.toggle() })
         binaryOperatorButtons.forEach({ $0.isHidden.toggle() })
@@ -129,20 +146,10 @@ class ViewController: UIViewController {
         initializeOperators()
     }
     
+    func reset() {
+        
+    }
     func initializeOperators() {
         
-        addForDecimalButton.operatorType = Operators.additionForDecimal
-        subtractForBinaryButton.operatorType = Operators.subtractionForDecimal
-        multiplyButton.operatorType = Operators.multiplication
-        divideButton.operatorType = Operators.division
-        
-        addForBinaryButton.operatorType = Operators.additionForBinary
-        subtractForBinaryButton.operatorType = Operators.subtractionForBinary
-        ANDButton.operatorType = Operators.AND
-        NANDButton.operatorType = Operators.NAND
-        ORButton.operatorType = Operators.OR
-        XORButton.operatorType = Operators.XOR
-        NORButton.operatorType = Operators.NOR
-        NOTButton.operatorType = Operators.NOT
     }
 }
