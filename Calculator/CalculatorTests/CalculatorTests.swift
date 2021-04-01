@@ -23,6 +23,7 @@ class CalculatorTests: XCTestCase {
     func testExample() throws {
         test_devide_한자리정수_두개()
         test_multiply_한자리정수_두개()
+        test_inputAndConvertTypeOfNumber_일을입력했을때_return값확인()
     }
     
     func test_devide_한자리정수_두개() {
@@ -31,6 +32,10 @@ class CalculatorTests: XCTestCase {
     
     func test_multiply_한자리정수_두개() {
         XCTAssertEqual(testDecimalCalculator.multiply(1, by: 2), 2)
+    }
+    
+    func test_inputAndConvertTypeOfNumber_일을입력했을때_return값확인() {
+        XCTAssertEqual(testDecimalCalculator.inputAndConvertTypeOfNumber(a: Optional(1)), 1)
     }
     
 }

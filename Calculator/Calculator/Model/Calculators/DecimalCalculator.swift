@@ -12,7 +12,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     typealias T = Double
     var stack = Stack<Double>()
     var userInputNumber: Double = 0
-    var userInputOperator: String = Operator.addition
+    var userInputOperator: Operator = .addition
     
     func divide(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
         return operatedNumber / operatingNumber
@@ -22,34 +22,32 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return operatedNumber * operatingNumber
     } 
     
-    func inputAndConvertTypeOfNumber() -> Double {
-        guard let number = readLine() else { return 0 }
+    func inputAndConvertTypeOfNumber(a: String?) -> Double {
+        guard let number = a else { return 0 }
         guard let userInputNumber = Double(number) else { return 0 }
         return userInputNumber
     }
     
-    func inputAndConvertTypeOfOperator() -> String {
-        guard let inputOperator = readLine() else { return "연산자를 입력해주세요." }
-        var userInputOperator = inputOperator
-        
+    func inputAndConvertTypeOfOperator() -> Operator {
+        guard let userInputOperator = readLine() else { fatalError() }
         switch userInputOperator {
         case "+":
-            return userInputOperator = Operator.addition
+            return Operator.addition
         case "-":
-            return userInputOperator = Operator.subtraction
+            return Operator.subtraction
         case "*":
-            return userInputOperator = Operator.multiplication
+            return Operator.multiplication
         case "/":
-            return userInputOperator = Operator.division
+            return Operator.division
         default:
-            return "연산자를 입력해주세요."
+            fatalError()
         }
         
         
     }
     
     mutating func eachOperator(operatedNumber: Double, operatingNumber: Double) -> Double {
-        switch userInputOperator {
+        switch inputAndConvertTypeOfOperator() {
         case .addition:
            return add(operatedNumber, and: operatingNumber)
         case .subtraction:
