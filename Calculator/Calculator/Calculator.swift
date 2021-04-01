@@ -19,7 +19,7 @@ class Calculator {
     print("You chose the \(numeralSystem)")
     print("숫자와 연산자를 입력해 주세요...")
     
-    repeat {
+    while isRepeat {
       let inputString = readLine()!
       
       if inputString.count > 9 {
@@ -39,8 +39,7 @@ class Calculator {
         // 이진수 연산 미구현
 //        stackBinaryNumber(inputString)
       }
-      
-    } while isRepeat
+    }
     
     print(result)
   }
@@ -52,19 +51,18 @@ class Calculator {
     case .Plus, .Minus, .Multiplication, .Divide:
       if operators.isEmpty() {
         operators.push(inputString)
-        return
-      }
-      
-      guard let preOperator = DecimalOperators(rawValue: operators.peek()!) else {
-        operators.push(inputString)
-        return
-      }
-      if preOperator > .Plus {
-        let intermediateCalculationNumber = operateDecimalNumber.calculate(operands, operators)
-        operands.push(intermediateCalculationNumber)
-      }
+      } else {
+        guard let preOperator = DecimalOperators(rawValue: operators.peek()!) else {
+          operators.push(inputString)
+          return
+        }
+        if preOperator > .Plus {
+          let intermediateCalculationNumber = operateDecimalNumber.calculate(operands, operators)
+          operands.push(intermediateCalculationNumber)
+        }
 
-      operators.push(inputString)
+        operators.push(inputString)
+      }
     default:
       let inputInteger = Int(inputString)!
       operands.push(inputInteger)

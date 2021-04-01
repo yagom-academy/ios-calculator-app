@@ -12,7 +12,7 @@ class CalculateBinaryNumber: CalculateNumber {
                                     _ firstOperand: Int,
                                     _ secondOperand: Int = 0) throws -> Int {
     guard let binaryOperator = BinaryOperators(rawValue: `operator`) else {
-      throw CalculateByOperatorError.cantNotMatchStrinngToBinaryOperators
+      throw CalculateByOperatorError.cantNotMatchStringToBinaryOperators
     }
 
     switch binaryOperator {

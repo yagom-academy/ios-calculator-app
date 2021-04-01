@@ -12,7 +12,7 @@ class CalculateDecimalNumber: CalculateNumber {
                                     _ firstOperand: Int,
                                     _ secondOperand: Int) throws -> Int {
     guard let decimalOperator = DecimalOperators(rawValue: `operator`) else {
-      throw CalculateByOperatorError.cantNotMatchStrinngToDecimalOperators
+      throw CalculateByOperatorError.cantNotMatchStringToDecimalOperators
     }
     
     switch decimalOperator {
