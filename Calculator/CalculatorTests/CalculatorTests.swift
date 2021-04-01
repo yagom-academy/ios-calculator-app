@@ -22,10 +22,15 @@ class CalculatorTests: XCTestCase {
     
     func testExample() throws {
         test_devide_한자리정수_두개()
+        test_multiply_한자리정수_두개()
     }
     
     func test_devide_한자리정수_두개() {
         XCTAssertEqual(testDecimalCalculator.divide(1, by: 2), 0.5)
+    }
+    
+    func test_multiply_한자리정수_두개() {
+        XCTAssertEqual(testDecimalCalculator.multiply(1, by: 2), 2)
     }
     
 }
