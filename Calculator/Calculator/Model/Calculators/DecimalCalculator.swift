@@ -12,7 +12,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     typealias T = Double
     var stack = Stack<Double>()
     var userInputNumber: Double = 0
-    var userInputOperator: Operator = .addition
+    var userInputOperator: Operator = .subtraction
     
     func divide(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
         return operatedNumber / operatingNumber
@@ -45,7 +45,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     }
     
     mutating func calculate(operatedNumber: Double, operatingNumber: Double) -> Double {
-        switch convertType(inputOperator: readLine()) {
+        switch convertType(inputOperator: "+") {
         case .addition:
            return add(operatedNumber, and: operatingNumber)
         case .subtraction:

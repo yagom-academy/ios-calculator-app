@@ -6,7 +6,9 @@
 //
 
 import XCTest
+//@testable import net.yagom.Calculator
 @testable import Calculator
+
 class CalculatorTests: XCTestCase {
     
     var testDecimalCalculator = DecimalCalculator()
@@ -23,8 +25,9 @@ class CalculatorTests: XCTestCase {
     func testExample() throws {
         test_devide_한자리정수_두개()
         test_multiply_한자리정수_두개()
-        test_inputAndConvertTypeOfNumber_일을입력했을때_return값확인()
-        test_inputAndConvertTypeOfOperator_플러스를입력했을때_return값확인()
+        test_convertType_일을입력했을때_return값확인()
+        test_convertType_플러스를입력했을때_return값확인()
+        test_calculate_플러스를입력했을때_return값확인()
     }
     
     func test_devide_한자리정수_두개() {
@@ -35,11 +38,20 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(testDecimalCalculator.multiply(1, by: 2), 2)
     }
     
-    func test_inputAndConvertTypeOfNumber_일을입력했을때_return값확인() {
-        XCTAssertEqual(testDecimalCalculato.inputAndConvertTypeOfNumber(a: Optional(1)), 1)
+    func test_convertType_일을입력했을때_return값확인() {
+        XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "1"), 1)
     }
     
-    func test_inputAndConvertTypeOfOperator_플러스를입력했을때_return값확인() {
-        XCTAssertEqual(testDecimalCalculato.inputAndConvertTypeOfOperator())
+    func test_convertType_플러스를입력했을때_return값확인() {
+        XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "+"), .addition)
+    }
+    
+    func test_calculate_플러스를입력했을때_return값확인() {
+        XCTAssertEqual(testDecimalCalculator.calculate(operatedNumber: 1, operatingNumber: 1), 2)
+        // I think this is just a stop-gap 미봉책
+        // calculate method does not work as we intended originally
+        // Now we can calculate only for addition.
+        
     }
 }
+
