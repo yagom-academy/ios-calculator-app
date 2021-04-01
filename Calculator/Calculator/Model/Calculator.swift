@@ -28,31 +28,34 @@ class Calculator<OperandType: Operand, InfixOperatorType: InfixOperator, PrefixO
         return OperandType.zero
     }
     
-    func appendPostfixedList(_ operand: OperandType) {
+    private func inputPoppedInfixOperator() {
+        guard let poppedInfixOperator = infixOperatorStack.pop() else { return }
+        
+        postfixedList.append(poppedInfixOperator)
+        operate()
+    }
+    
+    func input(_ operand: OperandType) {
         postfixedList.append(operand)
         lastOperand = operand
     }
     
-    func appendPostfixedList(_ infixOperator: InfixOperatorType) {
+    func input(_ infixOperator: InfixOperatorType) {
         while infixOperatorStack.isNotEmpty {
             if infixOperator.isPrecedence(over: infixOperatorStack.peek()!) { break }
-            guard let infixOperator = infixOperatorStack.pop() else { return }
-            
-            postfixedList.append(infixOperator)
-            operate()
+            inputPoppedInfixOperator()
         }
-        
         infixOperatorStack.push(infixOperator)
         lastOperator = infixOperator
     }
     
-    func appendPostfixedList(contentsOf elements: String) {
+    func input(contentsOf elements: String) {
         for element in elements.components(separatedBy: " ") {
             if let infixOperator = InfixOperatorType(rawValue: element) {
-                appendPostfixedList(infixOperator)
+                input(infixOperator)
             }
             if let operand = OperandType(element) {
-                appendPostfixedList(operand)
+                input(operand)
             }
         }
     }

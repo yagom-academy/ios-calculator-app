@@ -18,13 +18,13 @@ class ViewController: UIViewController {
     
     func testDecimalCalculator(by text: String) {
         print("----Decimal----")
-        decimalCalculator.appendPostfixedList(contentsOf: text)
+        decimalCalculator.input(contentsOf: text)
         decimalCalculator.equal()
     }
     
     func testBinaryCalculator(by text: String) {
         print("----Binary----")
-        binaryCalculator.appendPostfixedList(contentsOf: text)
+        binaryCalculator.input(contentsOf: text)
         binaryCalculator.equal()
     }
 }
