@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
-    
-}
+//struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
+//    
+//}

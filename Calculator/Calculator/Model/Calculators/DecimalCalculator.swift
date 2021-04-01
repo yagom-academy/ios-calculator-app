@@ -22,23 +22,32 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return operatedNumber * operatingNumber
     }
     
-    func inputAndConvertType() -> Double {
+    mutating func inputAndConvertType() -> Double {
         guard let number = readLine() else { return 0 }
         guard let userInputNumber = Double(number) else { return 0 }
         return userInputNumber
     }
     
-    mutating func eachOperator() {
+    mutating func eachOperator(operatedNumber: Double, operatingNumber: Double) -> Double {
         switch userInputOperator {
         case .addition:
-            add(userInputNumber, and: <#T##Numeric#>)
-        case .subtraction: <#code#>
-        case .multiplication: <#code#>
-        case .division: <#code#>
-        default:
+           return add(operatedNumber, and: operatingNumber)
+        case .subtraction:
+            return subtract(operatedNumber, and: operatingNumber)
+        case .multiplication:
+            return multiply(operatedNumber, by: operatingNumber)
+        case .division:
+            return divide(operatedNumber, by: operatingNumber)
+        default: return 0
         }
+    }
+    
+    mutating func executeOperate() {
+        for i in 1...10 {
+        stack.push(inputAndConvertType())
+            stack.push(eachOperator(operatedNumber: stack.pop()!, operatingNumber: inputAndConvertType()))
+        } 
     }
 }
 
-// 헤헤 만만한거 제가 다 했지롱
-// 기능이 생각 안난다면 명세서로
+
