@@ -17,13 +17,14 @@ class CalculatorTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is caled after the invocation of each test method in the class.
     }
     
     func testExample() throws {
         test_devide_한자리정수_두개()
         test_multiply_한자리정수_두개()
         test_inputAndConvertTypeOfNumber_일을입력했을때_return값확인()
+        test_inputAndConvertTypeOfOperator_플러스를입력했을때_return값확인()
     }
     
     func test_devide_한자리정수_두개() {
@@ -35,7 +36,10 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_inputAndConvertTypeOfNumber_일을입력했을때_return값확인() {
-        XCTAssertEqual(testDecimalCalculator.inputAndConvertTypeOfNumber(a: Optional(1)), 1)
+        XCTAssertEqual(testDecimalCalculato.inputAndConvertTypeOfNumber(a: Optional(1)), 1)
     }
     
+    func test_inputAndConvertTypeOfOperator_플러스를입력했을때_return값확인() {
+        XCTAssertEqual(testDecimalCalculato.inputAndConvertTypeOfOperator())
+    }
 }

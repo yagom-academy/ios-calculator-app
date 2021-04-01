@@ -61,9 +61,9 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     }
     
     mutating func executeOperate() {
-        for i in 1...10 {
-        stack.push(inputAndConvertTypeOfNumber())
-            stack.push(eachOperator(operatedNumber: stack.pop()!, operatingNumber: inputAndConvertTypeOfNumber()))
+        for _ in 1...10 {
+            stack.push(inputAndConvertTypeOfNumber(a: Optional("1")))
+            stack.push(eachOperator(operatedNumber: stack.pop()!, operatingNumber: inputAndConvertTypeOfNumber(a: Optional("1"))))
         } 
     }
 }
