@@ -7,35 +7,54 @@
 
 import Foundation
 
+extension StringProtocol  {
+    var digits: [Int] { compactMap(\.wholeNumberValue) }
+}
+
 class CalculateBinaryNumber: CalculateNumber {
+  var result = 0
+  
   override func calculateByOperator(_ operator: String,
                                     _ firstOperand: Int,
                                     _ secondOperand: Int = 0) throws -> Int {
     guard let binaryOperator = BinaryOperators(rawValue: `operator`) else {
       throw CalculateByOperatorError.cantNotMatchStringToBinaryOperators
     }
+    
+    // 다른방법 없을지 붱이에게 질문하자
+    let firstOperands = Stack<Int>()
+    let firstOperandArray = "\(firstOperand)".digits
+    for firstOperandNumber in firstOperandArray {
+      firstOperands.push(firstOperandNumber)
+    }
+    
+    let secondOperands = Stack<Int>()
+    let secondOperandArray = "\(secondOperand)".digits
+    for secondOperandNumber in secondOperandArray {
+      secondOperands.push(secondOperandNumber)
+    }
 
     switch binaryOperator {
     case .Plus:
-      return plus(firstOperand, secondOperand)
+      return plus(firstOperands, secondOperands)
     case .Minus:
-      return minus(firstOperand, secondOperand)
+      return minus(firstOperands, secondOperands)
     case .AND:
-      return AND(firstOperand, secondOperand)
+      return AND(firstOperands, secondOperands)
     case .NAND:
-      return NAND(firstOperand, secondOperand)
+      return NAND(firstOperands, secondOperands)
     case .OR:
-      return OR(firstOperand, secondOperand)
+      return OR(firstOperands, secondOperands)
     case .NOR:
-      return NOR(firstOperand, secondOperand)
+      return NOR(firstOperands, secondOperands)
     case .XOR:
-      return XOR(firstOperand, secondOperand)
+      return XOR(firstOperands, secondOperands)
     case .NOT:
-      return NOT(firstOperand)
+      return NOT(firstOperands)
     case .LeftShift:
-      return leftShift(firstOperand)
+      return leftShift(firstOperands)
     case .RightShift:
-      return rightShift(firstOperand)
+      return rightShift(firstOperands)
     }
   }
 }

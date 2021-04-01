@@ -27,12 +27,17 @@ class CalculateNumber {
         break
       }
       operands.pop()
-      // 단항연산자 예외처리
+      
       guard let secondOperand = operands.peek()  else {
         isRepeat = false
         break
       }
-      operands.pop()
+      
+      if `operator` != BinaryOperators.NOT.rawValue
+      && `operator` != BinaryOperators.LeftShift.rawValue
+      && `operator` != BinaryOperators.RightShift.rawValue {
+        operands.pop()
+      }
       
       do {
         result = try calculateByOperator(`operator`, firstOperand, secondOperand)

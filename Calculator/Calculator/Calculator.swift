@@ -27,17 +27,22 @@ class Calculator {
         continue
       }
       
-      if inputString == "=" {
-        result = CalculateDecimalNumber().calculate(operands, operators)
-        isRepeat = false
-        break
-      }
-      
       if numeralSystem == .Decimal {
+        if inputString == "=" {
+          result = CalculateDecimalNumber().calculate(operands, operators)
+          isRepeat = false
+          break
+        }
+        
         stackDecimalNumber(inputString)
       } else {
-        // 이진수 연산 미구현
-//        stackBinaryNumber(inputString)
+        if inputString == "=" {
+          result = CalculateBinaryNumber().calculate(operands, operators)
+          isRepeat = false
+          break
+        }
+        
+        stackBinaryNumber(inputString)
       }
     }
     
@@ -56,8 +61,33 @@ class Calculator {
           operators.push(inputString)
           return
         }
-        if preOperator > .Plus {
+        if preOperator > DecimalOperators(rawValue: inputString)! {
           let intermediateCalculationNumber = operateDecimalNumber.calculate(operands, operators)
+          operands.push(intermediateCalculationNumber)
+        }
+
+        operators.push(inputString)
+      }
+    default:
+      let inputInteger = Int(inputString)!
+      operands.push(inputInteger)
+    }
+  }
+  
+  private func stackBinaryNumber(_ inputString: String) {
+    let operateBinaryNumber = CalculateBinaryNumber()
+    
+    switch BinaryOperators(rawValue: inputString) {
+    case .Plus, .Minus, .AND, .NAND, .OR, .NOR, .XOR, .NOT, .LeftShift, .RightShift:
+      if operators.isEmpty() {
+        operators.push(inputString)
+      } else {
+        guard let preOperator = BinaryOperators(rawValue: operators.peek()!) else {
+          operators.push(inputString)
+          return
+        }
+        if preOperator > BinaryOperators(rawValue: inputString)! {
+          let intermediateCalculationNumber = operateBinaryNumber.calculate(operands, operators)
           operands.push(intermediateCalculationNumber)
         }
 
