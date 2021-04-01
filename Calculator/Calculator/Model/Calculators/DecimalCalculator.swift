@@ -22,14 +22,14 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return operatedNumber * operatingNumber
     } 
     
-    func inputAndConvertTypeOfNumber(a: String?) -> Double {
-        guard let number = a else { return 0 }
+    func convertType(inputNumber: String?) -> Double {
+        guard let number = inputNumber else { return 0 }
         guard let userInputNumber = Double(number) else { return 0 }
         return userInputNumber
     }
     
-    func inputAndConvertTypeOfOperator() -> Operator {
-        guard let userInputOperator = readLine() else { fatalError() }
+    func convertType(inputOperator: String?) -> Operator {
+        guard let userInputOperator = inputOperator else { fatalError() }
         switch userInputOperator {
         case "+":
             return Operator.addition
@@ -42,12 +42,10 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         default:
             fatalError()
         }
-        
-        
     }
     
-    mutating func eachOperator(operatedNumber: Double, operatingNumber: Double) -> Double {
-        switch inputAndConvertTypeOfOperator() {
+    mutating func calculate(operatedNumber: Double, operatingNumber: Double) -> Double {
+        switch convertType(inputOperator: readLine()) {
         case .addition:
            return add(operatedNumber, and: operatingNumber)
         case .subtraction:
@@ -61,9 +59,10 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     }
     
     mutating func executeOperate() {
+        stack.push(convertType(inputNumber: readLine()))
+        
         for _ in 1...10 {
-            stack.push(inputAndConvertTypeOfNumber(a: Optional("1")))
-            stack.push(eachOperator(operatedNumber: stack.pop()!, operatingNumber: inputAndConvertTypeOfNumber(a: Optional("1"))))
+            stack.push(calculate(operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
         } 
     }
 }
