@@ -10,5 +10,6 @@ import Foundation
 protocol TypeConvertible {
     associatedtype T
     
-    mutating func inputAndConvertType() -> T
+    func inputAndConvertTypeOfNumber() -> T
+    func inputAndConvertTypeOfOperator() -> Operator
 }

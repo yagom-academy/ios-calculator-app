@@ -22,10 +22,15 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return operatedNumber * operatingNumber
     } 
     
-    mutating func inputAndConvertType() -> Double {
+    func inputAndConvertTypeOfNumber() -> Double {
         guard let number = readLine() else { return 0 }
         guard let userInputNumber = Double(number) else { return 0 }
         return userInputNumber
+    }
+    
+    func inputAndConvertTypeOfOperator() -> String {
+        guard let _operator = readLine() else { fatalError() }
+        return _operator
     }
     
     mutating func eachOperator(operatedNumber: Double, operatingNumber: Double) -> Double {
@@ -44,8 +49,8 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     
     mutating func executeOperate() {
         for i in 1...10 {
-        stack.push(inputAndConvertType())
-            stack.push(eachOperator(operatedNumber: stack.pop()!, operatingNumber: inputAndConvertType()))
+        stack.push(inputAndConvertTypeOfNumber())
+            stack.push(eachOperator(operatedNumber: stack.pop()!, operatingNumber: inputAndConvertTypeOfNumber()))
         } 
     }
 }
