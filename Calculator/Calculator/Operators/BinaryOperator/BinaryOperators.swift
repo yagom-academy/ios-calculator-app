@@ -32,8 +32,44 @@ enum BinaryOperators: String, Comparable {
 
 extension CalculateBinaryNumber {
   func plus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    var results:[Int] = []
+    var carry = 0
+    var isRepeat = true
     
-    // result = 여기에 결과 값을 넣어주세요
+    while isRepeat {
+      if firstOperands.isEmpty() && secondOperands.isEmpty() {
+        isRepeat = false
+        break
+      }
+      
+      var firstOperand = 0
+      if !firstOperands.isEmpty() {
+        firstOperand = firstOperands.peek()!
+        firstOperands.pop()
+      }
+      
+      var secondOperand = 0
+      if !secondOperands.isEmpty() {
+        secondOperand = secondOperands.peek()!
+        secondOperands.pop()
+      }
+      
+      var sum = firstOperand ^ secondOperand
+      sum ^= carry
+      results.insert(sum, at: 0)
+      
+      if firstOperand == 1 && secondOperand == 1 {
+        carry = 1
+      } else {
+        carry = 0
+      }
+    }
+    
+    // convert integer array to an integer
+    var resultString = ""
+    _ = results.map{ resultString = resultString + "\($0)" }
+    result = Int(resultString)!
+
     return result
   }
   

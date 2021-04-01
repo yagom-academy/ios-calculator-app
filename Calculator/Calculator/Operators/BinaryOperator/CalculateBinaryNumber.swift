@@ -21,7 +21,7 @@ class CalculateBinaryNumber: CalculateNumber {
       throw CalculateByOperatorError.cantNotMatchStringToBinaryOperators
     }
     
-    // 다른방법 없을지 붱이에게 질문하자
+    // 다른 처리방법 없을지 질문
     let firstOperands = Stack<Int>()
     let firstOperandArray = "\(firstOperand)".digits
     for firstOperandNumber in firstOperandArray {
