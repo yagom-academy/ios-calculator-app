@@ -20,7 +20,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     
     func multiply(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
         return operatedNumber * operatingNumber
-    }
+    } 
     
     mutating func inputAndConvertType() -> Double {
         guard let number = readLine() else { return 0 }
