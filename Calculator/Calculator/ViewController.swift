@@ -60,7 +60,7 @@ class ViewController: UIViewController {
             // 화면에 있던 것 stack에 push
             numberStack.push(numberField.text!)
             operatorStack.push(toggledSwitch!.operatorType)
-            
+            dump(operatorStack)
             // 기타 작업들
             isOperatorOn = false
             toggledSwitch!.isOn = false
@@ -85,7 +85,8 @@ class ViewController: UIViewController {
                 toggledSwitch = sender
                 // toggledSwitch의 isOn 켜줌
                 toggledSwitch!.isOn = true
-            } else {
+            }
+            else {
                 sender.isOn = true
                 toggledSwitch = sender
                 isOperatorOn = true
@@ -97,16 +98,17 @@ class ViewController: UIViewController {
                 toggledSwitch!.isOn = true
                 isOperatorOn = true
             }
-            while sender.operatorType.precedence <= operatorStack.top!.precedence {
-                do {
-                    let secondNumber = numberStack.pop()!
-                    let firstNumber = numberStack.pop()!
-                    let operateFunction = operatorStack.pop()!.function
-                    let result = operateFunction(firstNumber, secondNumber)
-                } catch {
-                    return
-                }
+            while operatorStack.isEmpty == false && sender.operatorType.precedence <= operatorStack.top!.precedence {
+                numberStack.push(numberField.text!)
+                let secondNumber = numberStack.pop()!
+                let firstNumber = numberStack.pop()!
+                dump(operatorStack)
+                
+                let operateFunction = operatorStack.pop()!.function
+                let result = operateFunction(firstNumber, secondNumber)
+                numberStack.push(result)
             }
+            numberField.text = numberStack.top!
         }
     }
     
@@ -142,14 +144,25 @@ class ViewController: UIViewController {
        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        initializeOperators()
+    func initializeButton() {
+        addForDecimalButton.operatorType = Operators.additionForDecimal
+        subtractForDecimalButton.operatorType = Operators.subtractionForDecimal
+        multiplyButton.operatorType = Operators.multiplication
+        divideButton.operatorType = Operators.division
+        
+        addForBinaryButton.operatorType = Operators.additionForBinary
+        subtractForBinaryButton.operatorType = Operators.subtractionForBinary
+        ANDButton.operatorType = Operators.AND
+        NANDButton.operatorType = Operators.NAND
+        ORButton.operatorType = Operators.OR
+        XORButton.operatorType = Operators.XOR
+        NORButton.operatorType = Operators.NOR
+        //NOTButton.operatorType = Operators.NOT
     }
     
     func reset() {
-        
+        numberStack.reset()
+        operatorStack.reset()
     }
-    func initializeOperators() {
-        
-    }
+    
 }

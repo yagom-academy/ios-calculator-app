@@ -124,6 +124,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1CC168A52616558E0099A991 /* CustomUIButton */ = {
+			isa = PBXGroup;
+			children = (
+				1C5F9AC826157EB500A1CAB6 /* CaculatorButton.swift */,
+				1C2BA23C2615E690001ED161 /* OperatorButton.swift */,
+				1C2BA2402615E69B001ED161 /* FunctionButton.swift */,
+				1C2BA2442615E6A1001ED161 /* NumberButton.swift */,
+			);
+			path = CustomUIButton;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -148,15 +159,12 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				1CC168A52616558E0099A991 /* CustomUIButton */,
 				1C5F9A902614BDAC00A1CAB6 /* Model */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				1C5F9AC826157EB500A1CAB6 /* CaculatorButton.swift */,
-				1C2BA23C2615E690001ED161 /* OperatorButton.swift */,
-				1C2BA2402615E69B001ED161 /* FunctionButton.swift */,
-				1C2BA2442615E6A1001ED161 /* NumberButton.swift */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,

@@ -255,7 +255,7 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="-"/>
                                                 <connections>
-                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yae-c3-I0e"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TiP-hl-FBq"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -314,7 +314,7 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="+"/>
                                                 <connections>
-                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eCp-eM-NTE"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wtY-yL-z9v"/>
                                                 </connections>
                                             </button>
                                         </subviews>

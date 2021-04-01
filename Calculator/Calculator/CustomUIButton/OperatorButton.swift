@@ -8,6 +8,7 @@
 import UIKit
 
 class OperatorButton: CaculatorButton {
+    
     var isOn: Bool = false {
         didSet {
             if self.isOn {

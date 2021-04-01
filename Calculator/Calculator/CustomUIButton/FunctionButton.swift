@@ -8,7 +8,6 @@
 import UIKit
 
 class FunctionButton: CaculatorButton {
-
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -16,5 +15,4 @@ class FunctionButton: CaculatorButton {
         tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
    
-
 }
