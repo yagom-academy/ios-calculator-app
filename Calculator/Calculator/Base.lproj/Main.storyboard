@@ -29,7 +29,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qDp-cz-iVa" userLabel="top line">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="77.666666666666671"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG5-q6-lyu" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yG5-q6-lyu" customClass="FunctionButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="77.666666666666671"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="yG5-q6-lyu" secondAttribute="height" multiplier="1:1" id="nvJ-Jh-oUH"/>
@@ -40,7 +40,7 @@
                                                     <action selector="clearButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RRl-m6-Uln"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCe-a9-G7K" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCe-a9-G7K" customClass="FunctionButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="85.666666666666671" y="0.0" width="78.000000000000014" height="77.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="+/-"/>
@@ -48,7 +48,7 @@
                                                     <action selector="touchUpToggleSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dho-WB-f9V"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR4-HP-Cjy" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR4-HP-Cjy" customClass="FunctionButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="171.66666666666666" y="0.0" width="77.666666666666657" height="77.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="2/10"/>
@@ -56,14 +56,14 @@
                                                     <action selector="touchUpToggleMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ojI-H8-9uT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAM-iQ-Wrn" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAM-iQ-Wrn" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="257.33333333333331" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" image="divide" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nuL-Ue-gMs"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A8w-gV-AKD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -71,7 +71,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AXm-SI-ZVe" userLabel="7 8 9 X">
                                         <rect key="frame" x="0.0" y="87.666666666666686" width="335" height="77.666666666666686"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQe-VR-F3h" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQe-VR-F3h" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="77.666666666666671"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="OQe-VR-F3h" secondAttribute="height" multiplier="1:1" id="2dO-la-6Zx"/>
@@ -79,40 +79,78 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="7"/>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MFf-Qr-bMl"/>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ouz-02-lCe"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ei-gP-2h8" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDg-ga-8TI" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="81.666666666666671" y="0.0" width="78.000000000000014" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="RDg-ga-8TI" secondAttribute="height" multiplier="1:1" id="DHu-dj-X8x"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="OR"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2gC-Eu-zjN"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ei-gP-2h8" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="85.666666666666671" y="0.0" width="78.000000000000014" height="77.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="8"/>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j7l-tk-KmA"/>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="326-01-Ohu"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJX-zd-uPx" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45q-xo-zeC" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="167.66666666666666" y="0.0" width="77.666666666666657" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="45q-xo-zeC" secondAttribute="height" multiplier="1:1" id="VUD-ft-IlK"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="NOR"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aNE-J9-50u"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJX-zd-uPx" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="171.66666666666666" y="0.0" width="77.666666666666657" height="77.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="9"/>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YcQ-YL-glU"/>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OWr-DE-2Zx"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-uE-FLi" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aT-VE-F4Y" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="253.33333333333329" y="0.0" width="77.666666666666657" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="8aT-VE-F4Y" secondAttribute="height" multiplier="1:1" id="Zgn-P3-6Gs"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="NOT"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gel-XX-NWU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-uE-FLi" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="257.33333333333331" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
                                                 <state key="normal" image="multiply" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lQI-Vj-vOI"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1e-2G-QaS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="8aT-VE-F4Y" firstAttribute="width" secondItem="8aT-VE-F4Y" secondAttribute="height" multiplier="1:1" id="6es-C5-bXm"/>
+                                            <constraint firstItem="45q-xo-zeC" firstAttribute="width" secondItem="45q-xo-zeC" secondAttribute="height" multiplier="1:1" id="G1T-FT-cfU"/>
+                                            <constraint firstItem="RDg-ga-8TI" firstAttribute="width" secondItem="RDg-ga-8TI" secondAttribute="height" multiplier="1:1" id="vjq-5E-t6e"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-8k-3Jh" userLabel="4 5 6 -">
                                         <rect key="frame" x="0.0" y="175.33333333333337" width="335" height="78"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCm-hG-LGs" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCm-hG-LGs" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="77.666666666666671" height="78"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KCm-hG-LGs" secondAttribute="height" multiplier="1:1" id="40S-z3-anv"/>
@@ -120,35 +158,72 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="4"/>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kWS-bB-JvE"/>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vng-lz-YeZ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEy-xi-joo" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLo-ow-HUc" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="81.666666666666671" y="0.0" width="78.000000000000014" height="78"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="yLo-ow-HUc" secondAttribute="height" multiplier="1:1" id="IsD-Wn-U4f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="AND"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Oj-x4-NGC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEy-xi-joo" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="85.666666666666671" y="0.0" width="78.000000000000014" height="78"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="5"/>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="maN-QG-myp"/>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cd4-UF-QTg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwH-jG-z4a" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e24-oc-x9d" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="167.66666666666666" y="0.0" width="77.666666666666657" height="78"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="e24-oc-x9d" secondAttribute="height" multiplier="1:1" id="2Cj-52-WOg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="NAND"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3gM-jz-q9b"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwH-jG-z4a" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="171.66666666666666" y="0.0" width="77.666666666666657" height="78"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="6"/>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ide-hs-fNb"/>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P5f-lG-UeY"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vE4-Mr-gK3" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9E-D9-Lfy" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="253.33333333333329" y="0.0" width="77.666666666666657" height="78"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="o9E-D9-Lfy" secondAttribute="height" multiplier="1:1" id="egR-1m-dbP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="XOR"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t7X-aY-ZXK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vE4-Mr-gK3" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="257.33333333333331" y="0.0" width="77.666666666666686" height="78"/>
                                                 <state key="normal" image="minus" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Dz-9c-3Ui"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qqQ-HF-EKP"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="e24-oc-x9d" firstAttribute="width" secondItem="e24-oc-x9d" secondAttribute="height" multiplier="1:1" id="6OD-Tc-yoe"/>
+                                            <constraint firstItem="o9E-D9-Lfy" firstAttribute="width" secondItem="o9E-D9-Lfy" secondAttribute="height" multiplier="1:1" id="Sll-s2-swk"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="72d-68-mOe" userLabel="1 2 3 +">
                                         <rect key="frame" x="0.0" y="263.33333333333331" width="335" height="77.666666666666686"/>
@@ -156,39 +231,39 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="WA6-nX-eRn" userLabel="1 2 3">
                                                 <rect key="frame" x="0.0" y="0.0" width="249.33333333333334" height="77.666666666666671"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODd-ka-JFh" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODd-ka-JFh" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="78.333333333333329" height="77.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                         <state key="normal" title="1"/>
                                                         <connections>
-                                                            <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sMm-38-HSC"/>
+                                                            <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zXS-QJ-bFq"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDH-Yv-tAc" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDH-Yv-tAc" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="85.333333333333314" y="0.0" width="78.666666666666686" height="77.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                         <state key="normal" title="2"/>
                                                         <connections>
-                                                            <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8kg-8W-l3a"/>
+                                                            <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MYp-xo-UOb"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfp-eM-N5E" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfp-eM-N5E" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="171" y="0.0" width="78.333333333333314" height="77.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                         <state key="normal" title="3"/>
                                                         <connections>
-                                                            <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Li-LY-ms5"/>
+                                                            <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WYe-ih-nJr"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWZ-w3-Ury" userLabel="+" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWZ-w3-Ury" userLabel="+" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="257.33333333333331" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
                                                 <state key="normal" image="plus" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UHD-dw-Blv"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dCT-Tt-ZrQ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -199,31 +274,31 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="VOq-0O-aoi" userLabel="0 .">
                                                 <rect key="frame" x="0.0" y="0.0" width="249.33333333333334" height="77.666666666666671"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-No-nib" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-No-nib" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="164" height="77.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                         <state key="normal" title="0"/>
                                                         <connections>
-                                                            <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UQn-WT-I1e"/>
+                                                            <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A9i-VY-Uns"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN4-UX-Mov" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WN4-UX-Mov" customClass="NumberButton" customModule="Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="171" y="0.0" width="78.333333333333314" height="77.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                         <state key="normal" title="."/>
                                                         <connections>
-                                                            <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K2L-eq-k6I"/>
+                                                            <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XMk-A5-5us"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi4-uG-6aN" userLabel="=" customClass="CaculatorButton" customModule="Calculator" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi4-uG-6aN" userLabel="=" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="257.33333333333331" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
                                                 <state key="normal" image="equal" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpNumberOrOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TES-ML-BC5"/>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H87-AX-BW7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -249,6 +324,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ANDButton" destination="yLo-ow-HUc" id="Xdj-hi-KCz"/>
+                        <outlet property="NANDButton" destination="e24-oc-x9d" id="O59-N6-rxQ"/>
+                        <outlet property="NORButton" destination="45q-xo-zeC" id="qbd-LW-kpj"/>
+                        <outlet property="NOTButton" destination="8aT-VE-F4Y" id="OEk-F7-0RE"/>
+                        <outlet property="ORButton" destination="RDg-ga-8TI" id="fwQ-Ut-JdP"/>
+                        <outlet property="XORButton" destination="o9E-D9-Lfy" id="n7s-oj-8uL"/>
                         <outlet property="addButton" destination="BWZ-w3-Ury" id="noL-e6-X9D"/>
                         <outlet property="clearButton" destination="yG5-q6-lyu" id="Hhc-iW-R2V"/>
                         <outlet property="divideButton" destination="zAM-iQ-Wrn" id="vp2-6u-hZF"/>
@@ -269,6 +350,21 @@
                         <outlet property="threeButton" destination="pfp-eM-N5E" id="Ngb-aw-COo"/>
                         <outlet property="twoButton" destination="cDH-Yv-tAc" id="VQb-0U-Lvf"/>
                         <outlet property="zeroButton" destination="rVP-No-nib" id="s4o-fK-c7u"/>
+                        <outletCollection property="binaryOperatorButtons" destination="RDg-ga-8TI" collectionClass="NSMutableArray" id="3x5-Vy-CQr"/>
+                        <outletCollection property="binaryOperatorButtons" destination="45q-xo-zeC" collectionClass="NSMutableArray" id="xd6-Ix-rrM"/>
+                        <outletCollection property="binaryOperatorButtons" destination="8aT-VE-F4Y" collectionClass="NSMutableArray" id="yez-v2-S8C"/>
+                        <outletCollection property="binaryOperatorButtons" destination="yLo-ow-HUc" collectionClass="NSMutableArray" id="hK1-4w-dSq"/>
+                        <outletCollection property="binaryOperatorButtons" destination="e24-oc-x9d" collectionClass="NSMutableArray" id="UQp-0J-8f3"/>
+                        <outletCollection property="binaryOperatorButtons" destination="o9E-D9-Lfy" collectionClass="NSMutableArray" id="xge-qU-yKT"/>
+                        <outletCollection property="decimalNumberButtons" destination="cDH-Yv-tAc" collectionClass="NSMutableArray" id="fB8-R4-bu7"/>
+                        <outletCollection property="decimalNumberButtons" destination="pfp-eM-N5E" collectionClass="NSMutableArray" id="TQt-AY-AMi"/>
+                        <outletCollection property="decimalNumberButtons" destination="KCm-hG-LGs" collectionClass="NSMutableArray" id="5rp-lc-eaH"/>
+                        <outletCollection property="decimalNumberButtons" destination="CEy-xi-joo" collectionClass="NSMutableArray" id="H7G-Rt-IE0"/>
+                        <outletCollection property="decimalNumberButtons" destination="pwH-jG-z4a" collectionClass="NSMutableArray" id="oBs-oc-LNc"/>
+                        <outletCollection property="decimalNumberButtons" destination="OQe-VR-F3h" collectionClass="NSMutableArray" id="fMq-ey-hs7"/>
+                        <outletCollection property="decimalNumberButtons" destination="3ei-gP-2h8" collectionClass="NSMutableArray" id="jwI-5Q-biu"/>
+                        <outletCollection property="decimalNumberButtons" destination="mJX-zd-uPx" collectionClass="NSMutableArray" id="tvJ-vD-ecJ"/>
+                        <outletCollection property="decimalNumberButtons" destination="WN4-UX-Mov" collectionClass="NSMutableArray" id="hN3-hs-L05"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -279,6 +375,12 @@
     <designables>
         <designable name="3ei-gP-2h8">
             <size key="intrinsicContentSize" width="30" height="47"/>
+        </designable>
+        <designable name="45q-xo-zeC">
+            <size key="intrinsicContentSize" width="66" height="47"/>
+        </designable>
+        <designable name="8aT-VE-F4Y">
+            <size key="intrinsicContentSize" width="62" height="47"/>
         </designable>
         <designable name="BWZ-w3-Ury">
             <size key="intrinsicContentSize" width="22" height="22"/>
@@ -295,11 +397,17 @@
         <designable name="OQe-VR-F3h">
             <size key="intrinsicContentSize" width="30" height="47"/>
         </designable>
+        <designable name="RDg-ga-8TI">
+            <size key="intrinsicContentSize" width="44" height="47"/>
+        </designable>
         <designable name="WN4-UX-Mov">
             <size key="intrinsicContentSize" width="30" height="47"/>
         </designable>
         <designable name="cDH-Yv-tAc">
             <size key="intrinsicContentSize" width="30" height="47"/>
+        </designable>
+        <designable name="e24-oc-x9d">
+            <size key="intrinsicContentSize" width="84" height="47"/>
         </designable>
         <designable name="eVY-uE-FLi">
             <size key="intrinsicContentSize" width="19" height="22"/>
@@ -312,6 +420,9 @@
         </designable>
         <designable name="mJX-zd-uPx">
             <size key="intrinsicContentSize" width="30" height="47"/>
+        </designable>
+        <designable name="o9E-D9-Lfy">
+            <size key="intrinsicContentSize" width="62" height="47"/>
         </designable>
         <designable name="pfp-eM-N5E">
             <size key="intrinsicContentSize" width="30" height="47"/>
@@ -330,6 +441,9 @@
         </designable>
         <designable name="yG5-q6-lyu">
             <size key="intrinsicContentSize" width="30" height="47"/>
+        </designable>
+        <designable name="yLo-ow-HUc">
+            <size key="intrinsicContentSize" width="63" height="47"/>
         </designable>
         <designable name="zAM-iQ-Wrn">
             <size key="intrinsicContentSize" width="22" height="35"/>

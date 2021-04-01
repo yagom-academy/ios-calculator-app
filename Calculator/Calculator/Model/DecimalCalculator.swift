@@ -8,12 +8,8 @@ import Foundation
 
 final class DecimalCalculator: Calculator {
     
-    struct StackForDecimalCalculator {
-        var number: String
-        var operatorType: Operator
-    }
-    
-    var stack = Stack<StackForDecimalCalculator>()
+    var numberStack = Stack<Double>()
+    var operatorStack = Stack<Operator>()
     
     func multiply(firstNumber: Double, secondNumber: Double) -> Double {
         return round(Double(firstNumber * secondNumber) * 1e9) / 1e9
@@ -49,7 +45,8 @@ final class DecimalCalculator: Calculator {
     }
     
     func reset() {
-        stack.reset()
+        numberStack.reset()
+        operatorStack.reset()
     }
     
 }

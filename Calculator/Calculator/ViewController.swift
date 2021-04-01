@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var clearButton: CaculatorButton!
     @IBOutlet weak var signToggleButton: CaculatorButton!
     @IBOutlet weak var modeToggleButton: CaculatorButton!
@@ -24,32 +24,59 @@ class ViewController: UIViewController {
     @IBOutlet weak var eightButton: CaculatorButton!
     @IBOutlet weak var nineButton: CaculatorButton!
     
-    @IBOutlet weak var equalButton: CaculatorButton!
-    @IBOutlet weak var subtractButton: CaculatorButton!
-    @IBOutlet weak var divideButton: CaculatorButton!
-    @IBOutlet weak var multiplyButton: CaculatorButton!
-    @IBOutlet weak var addButton: CaculatorButton!
-
+    @IBOutlet weak var equalButton: OperatorButton!
+    @IBOutlet weak var subtractButton: OperatorButton!
+    @IBOutlet weak var divideButton: OperatorButton!
+    @IBOutlet weak var multiplyButton: OperatorButton!
+    @IBOutlet weak var addButton: OperatorButton!
+    
+    @IBOutlet weak var ANDButton: OperatorButton!
+    @IBOutlet weak var NANDButton: OperatorButton!
+    @IBOutlet weak var XORButton: OperatorButton!
+    @IBOutlet weak var ORButton: OperatorButton!
+    @IBOutlet weak var NORButton: OperatorButton!
+    @IBOutlet weak var NOTButton: OperatorButton!
+  
+    @IBOutlet var binaryOperatorButtons: [OperatorButton]!
+    @IBOutlet var decimalNumberButtons: [NumberButton]!
     private var decimalMode = true
+    private var isOperatorOn = false
     private var decimalCalculator = DecimalCalculator()
     private var binaryCalculator = BinaryCalculator()
     
     @IBOutlet weak var numberField: UILabel!
     
-    @IBAction func touchUpNumberOrOperator(_ sender: CaculatorButton) {
-
-        switch sender.customButtonType {
-        case .numberButton:
+    @IBAction func touchUpNumber(_ sender: NumberButton) {
+        if isOperatorOn {
+            
+            do {
+                decimalCalculator.numberStack.push(try decimalCalculator.formatInput(numberField.text!))
+                // 현재 on 돼있는 연산자를 operator stack에 push
+            } catch {
+                return // error 처리
+            }
+            
+            numberField.text?.removeAll()
             numberField.text?.append(sender.currentTitle!)
-        case .operatorButton:
-            sender.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            sender.tintColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-        default:
-            return
+        } else {
+            numberField.text?.append(sender.currentTitle!)
         }
-        
     }
-
+    
+    @IBAction func touchUpOperator(_ sender: OperatorButton) {
+        if decimalCalculator.operatorStack.isEmpty {
+            sender.isOn.toggle()
+        } else {
+            if sender.precedence > decimalCalculator.operatorStack.top!.precedence {
+                sender.isOn.toggle()
+                return
+            }
+            while sender.precedence <= decimalCalculator.operatorStack.top!.precedence {
+                //pop 하면서 연산 진행
+            }
+        }
+    }
+    
     @IBAction func touchUpToggleSign(_ sender: Any) {
         do {
             if decimalMode {
@@ -67,31 +94,10 @@ class ViewController: UIViewController {
     @IBAction func touchUpToggleMode(_ sender: Any) {
         decimalMode.toggle()
         clearButton(sender)
-        twoButton.isHidden.toggle()
-        threeButton.isHidden.toggle()
-        dotButton.isHidden.toggle()
-        if decimalMode {
-            fourButton.setTitle("4", for: .normal)
-            fiveButton.setTitle("5", for: .normal)
-            sixButton.setTitle("6", for: .normal)
-            sevenButton.setTitle("7", for: .normal)
-            eightButton.setTitle("8", for: .normal)
-            nineButton.setTitle("9", for: .normal)
-        } else {
-            fourButton.customButtonType = .operatorButton
-            fiveButton.customButtonType = .operatorButton
-            sixButton.customButtonType = .operatorButton
-            sevenButton.customButtonType = .operatorButton
-            eightButton.customButtonType = .operatorButton
-            nineButton.customButtonType = .operatorButton
-            fourButton.setTitle("AND", for: .normal)
-            fiveButton.setTitle("NAND", for: .normal)
-            sixButton.setTitle("XOR", for: .normal)
-            sevenButton.setTitle("OR", for: .normal)
-            eightButton.setTitle("NOR", for: .normal)
-            nineButton.setTitle("NOT", for: .normal)
-        }
         
+        decimalNumberButtons.forEach({ $0.isHidden.toggle() })
+        
+        binaryOperatorButtons.forEach({ $0.isHidden.toggle() })
     }
     
     @IBAction func clearButton(_ sender: Any) {
@@ -103,14 +109,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        clearButton.customButtonType = .functionButton
-        signToggleButton.customButtonType = .functionButton
-        modeToggleButton.customButtonType = .functionButton
-        divideButton.customButtonType = .operatorButton
-        multiplyButton.customButtonType = .operatorButton
-        subtractButton.customButtonType = .operatorButton
-        addButton.customButtonType = .operatorButton
-        equalButton.customButtonType = .operatorButton
+        
     }
     
 }
