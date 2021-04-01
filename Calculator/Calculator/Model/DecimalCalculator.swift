@@ -23,8 +23,8 @@ final class DecimalCalculator: Calculator {
         return round(Double(firstNumber / secondNumber) * 1e9) / 1e9
     }
     
-    func formatInput(_ userInput: String) throws -> Float {
-        guard let input = Float(userInput) else {
+    func formatInput(_ userInput: String) throws -> Double {
+        guard let input = Double(userInput) else {
             throw CalculatorError.formatError
         }
         return input
