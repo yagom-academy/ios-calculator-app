@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		859740762615EDF8009FC2C7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740752615EDF8009FC2C7 /* main.swift */; };
+		859740792615EE17009FC2C7 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740782615EE17009FC2C7 /* Error.swift */; };
+		8597407D2615EE22009FC2C7 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8597407C2615EE22009FC2C7 /* Stack.swift */; };
+		859740812615EECA009FC2C7 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740802615EECA009FC2C7 /* Calculator.swift */; };
+		859740892615EF10009FC2C7 /* CalculateNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740882615EF10009FC2C7 /* CalculateNumber.swift */; };
+		859740B92615F4DB009FC2C7 /* CalculateDecimalNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740B82615F4DB009FC2C7 /* CalculateDecimalNumber.swift */; };
+		859740BC2615F4F2009FC2C7 /* DecimalOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740BB2615F4F2009FC2C7 /* DecimalOperators.swift */; };
+		859740C02615F515009FC2C7 /* BinaryOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740BF2615F515009FC2C7 /* BinaryOperators.swift */; };
+		859740C32615F52B009FC2C7 /* CalculateBinaryNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859740C22615F52B009FC2C7 /* CalculateBinaryNumber.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -16,6 +25,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		859740752615EDF8009FC2C7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		859740782615EE17009FC2C7 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		8597407C2615EE22009FC2C7 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		859740802615EECA009FC2C7 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		859740882615EF10009FC2C7 /* CalculateNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateNumber.swift; sourceTree = "<group>"; };
+		859740B82615F4DB009FC2C7 /* CalculateDecimalNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateDecimalNumber.swift; sourceTree = "<group>"; };
+		859740BB2615F4F2009FC2C7 /* DecimalOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalOperators.swift; sourceTree = "<group>"; };
+		859740BF2615F515009FC2C7 /* BinaryOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryOperators.swift; sourceTree = "<group>"; };
+		859740C22615F52B009FC2C7 /* CalculateBinaryNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateBinaryNumber.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +55,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		859740872615EF02009FC2C7 /* Operators */ = {
+			isa = PBXGroup;
+			children = (
+				8597408F2615EF62009FC2C7 /* BinaryOperator */,
+				8597408E2615EF5A009FC2C7 /* DecimalOperator */,
+				859740882615EF10009FC2C7 /* CalculateNumber.swift */,
+			);
+			path = Operators;
+			sourceTree = "<group>";
+		};
+		8597408E2615EF5A009FC2C7 /* DecimalOperator */ = {
+			isa = PBXGroup;
+			children = (
+				859740B82615F4DB009FC2C7 /* CalculateDecimalNumber.swift */,
+				859740BB2615F4F2009FC2C7 /* DecimalOperators.swift */,
+			);
+			path = DecimalOperator;
+			sourceTree = "<group>";
+		};
+		8597408F2615EF62009FC2C7 /* BinaryOperator */ = {
+			isa = PBXGroup;
+			children = (
+				859740BF2615F515009FC2C7 /* BinaryOperators.swift */,
+				859740C22615F52B009FC2C7 /* CalculateBinaryNumber.swift */,
+			);
+			path = BinaryOperator;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +102,14 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				859740872615EF02009FC2C7 /* Operators */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+				859740752615EDF8009FC2C7 /* main.swift */,
+				859740782615EE17009FC2C7 /* Error.swift */,
+				8597407C2615EE22009FC2C7 /* Stack.swift */,
+				859740802615EECA009FC2C7 /* Calculator.swift */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
@@ -138,8 +189,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				859740892615EF10009FC2C7 /* CalculateNumber.swift in Sources */,
+				859740C32615F52B009FC2C7 /* CalculateBinaryNumber.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				859740812615EECA009FC2C7 /* Calculator.swift in Sources */,
+				859740762615EDF8009FC2C7 /* main.swift in Sources */,
+				859740792615EE17009FC2C7 /* Error.swift in Sources */,
+				8597407D2615EE22009FC2C7 /* Stack.swift in Sources */,
+				859740BC2615F4F2009FC2C7 /* DecimalOperators.swift in Sources */,
+				859740C02615F515009FC2C7 /* BinaryOperators.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				859740B92615F4DB009FC2C7 /* CalculateDecimalNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
