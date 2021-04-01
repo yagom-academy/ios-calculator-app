@@ -109,6 +109,7 @@ class BinaryCalculator {
     }
     
     func receiveInput(buttonType: String) {
+        print("binary input", buttonType)
         if buttonType == "c" {
             firstNumber = ""
             secondNumber = ""

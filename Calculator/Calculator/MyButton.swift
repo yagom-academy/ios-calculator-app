@@ -13,12 +13,9 @@ class MyButton: UIButton {
     override func draw(_ rect: CGRect) {
         layer.cornerRadius = rect.height / 2
         clipsToBounds = true
-        // 글씨가 안짤리게 하는것
         UIView.setAnimationsEnabled(false)
         
         let vc = ViewController()
         addTarget(vc, action: #selector(vc.updateScreenNumber), for: .touchUpInside)
     }
-    
-    
 }

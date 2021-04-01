@@ -12,7 +12,6 @@ class DecimalCalculator {
     var operators = Stack<String>()
     var tempNumber = ""
     var screenNumber = "0"
-    let numberFormatter = NumberFormatter()
     var operationFunctions: [String : (Double, Double) -> Double] = [:]
 
     init() {
@@ -20,12 +19,9 @@ class DecimalCalculator {
         operationFunctions["-"] = { $0 - $1 }
         operationFunctions["x"] = { $0 * $1 }
         operationFunctions["/"] = { $0 / $1 }
-
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 9
     }
  
-    private func calculateUntilSatisfiedCondition() {
+    private func calculate() {
         guard let operatorSign = operators.pop(),
             let operationFunction = operationFunctions[operatorSign],
             let secondOperand = operands.pop(),
@@ -34,7 +30,7 @@ class DecimalCalculator {
         operands.push(result)
     }
 
-    private func reset() {
+    func reset() {
         operands.clear()
         operators.clear()
         tempNumber = ""
@@ -43,7 +39,7 @@ class DecimalCalculator {
 
     private func updateScreenNumber() {
         guard let lastOperand = operands.top() else { return }
-        screenNumber = numberFormatter.string(for: lastOperand)!
+        screenNumber = String(lastOperand)
     }
 
     func isExistDecimalPoint(_ buttonType: String) -> Bool {
@@ -84,26 +80,25 @@ class DecimalCalculator {
         tempNumber += buttonType
     }
 
-    func receiveInput(buttonType: String) {
-        switch buttonType {
+    func inputMathematicsSign(buttonText: String) {
+        switch buttonText {
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "." :
-                concatenateNumberOrDot(buttonType)
-                print(tempNumber)
-                screenNumber = numberFormatter.string(for: Double(tempNumber))!
+                concatenateNumberOrDot(buttonText)
+                screenNumber = (Double(tempNumber)?.applyNumberFormatter())!
             case "+", "-", "x", "/":
                 guard let doubleValue = Double(tempNumber) else { return }
                 operands.push(doubleValue)
-                if buttonType == "+" || buttonType == "-" {
+                if buttonText == "+" || buttonText == "-" {
                     while !operators.isEmpty() {
-                        calculateUntilSatisfiedCondition()
+                        calculate()
                     }
-                } else if buttonType == "x" || buttonType == "/" {
+                } else if buttonText == "x" || buttonText == "/" {
                     while operators.top() == "x" || operators.top() == "/" {
-                        calculateUntilSatisfiedCondition()
+                        calculate()
                     }
                 }
                 updateScreenNumber()
-                operators.push(buttonType)
+                operators.push(buttonText)
                 tempNumber = ""
             case "c":
                 reset()
@@ -116,12 +111,21 @@ class DecimalCalculator {
                 }
                 // TODO: "="을 계속 눌렀을 때 처리
                 while !operators.isEmpty() {
-                    calculateUntilSatisfiedCondition()
+                    calculate()
                 }
                 updateScreenNumber()
                 tempNumber = String(operands.top()!)
             default:
                 print("input error")
         }
+    }
+}
+
+extension Double {
+    func applyNumberFormatter()-> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 9
+        return numberFormatter.string(for: self)!
     }
 }

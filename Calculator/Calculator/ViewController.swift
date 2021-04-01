@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     }
 
     var mode: CalculatorMode = .decimal
-    let calculator = DecimalCalculator()
-    let binaryCalculrator = BinaryCalculator()
+    let decimalCalculator = DecimalCalculator()
+    let binaryCalculator = BinaryCalculator()
     
     @IBOutlet var zeroButton: MyButton!
     @IBOutlet var oneButton: MyButton!
@@ -41,109 +41,131 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @objc func updateScreenNumber() {
-        screenText.text = calculator.screenNumber
+    @objc func updateScreenNumber(_ sender: MyButton) {
+        if mode == .decimal {
+            screenText.text = decimalCalculator.screenNumber
+        } else if mode == .binary {
+            screenText.text = binaryCalculator.screenNumber
+        }
     }
     
     @IBAction func zeroNumber(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "0")
+        if mode == .decimal {
+            decimalCalculator.inputMathematicsSign(buttonText: "0")
+        } else {
+            binaryCalculator.receiveInput(buttonType: "0")
+        }
     }
     
     @IBAction func oneNumber(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "1")
+        if mode == .decimal {
+            decimalCalculator.inputMathematicsSign(buttonText: "1")
+        } else {
+            binaryCalculator.receiveInput(buttonType: "1")
+        }
     }
     
     @IBAction func twoNumber(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "2")
+        decimalCalculator.inputMathematicsSign(buttonText: "2")
     }
     
     @IBAction func threeNumber(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "3")
+        decimalCalculator.inputMathematicsSign(buttonText: "3")
     }
     
     @IBAction func fourNumberOrAndSign(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "4")
+            decimalCalculator.inputMathematicsSign(buttonText: "4")
         } else {
-            calculator.receiveInput(buttonType: "&")
+            binaryCalculator.receiveInput(buttonType: "&")
         }
     }
     
     @IBAction func fiveNumberOrNandSign(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "5")
+            decimalCalculator.inputMathematicsSign(buttonText: "5")
         } else {
-            calculator.receiveInput(buttonType: "~&")
+            binaryCalculator.receiveInput(buttonType: "~&")
         }
     }
     
     @IBAction func sixNumberOrXorSign(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "6")
+            decimalCalculator.inputMathematicsSign(buttonText: "6")
         } else {
-            calculator.receiveInput(buttonType: "^")
+            binaryCalculator.receiveInput(buttonType: "^")
         }
     }
     
     @IBAction func sevenNumberOrOrButton(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "7")
+            decimalCalculator.inputMathematicsSign(buttonText: "7")
         } else {
-            calculator.receiveInput(buttonType: "|")
+            binaryCalculator.receiveInput(buttonType: "|")
         }
     }
     
     @IBAction func eightNumberOrNor(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "8")
+            decimalCalculator.inputMathematicsSign(buttonText: "8")
         } else {
-            calculator.receiveInput(buttonType: "~|")
+            binaryCalculator.receiveInput(buttonType: "~|")
         }
     }
     
     @IBAction func nineNumberOrNot(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "9")
+            decimalCalculator.inputMathematicsSign(buttonText: "9")
         } else {
-            calculator.receiveInput(buttonType: "~")
+            binaryCalculator.receiveInput(buttonType: "~")
         }
     }
     
     @IBAction func dotSign(_ sender: MyButton) {
-       calculator.receiveInput(buttonType: ".") 
+       decimalCalculator.inputMathematicsSign(buttonText: ".") 
     }
     
     @IBAction func equalSign(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "=")
+        if mode == .decimal {
+        decimalCalculator.inputMathematicsSign(buttonText: "=")
+        } else {
+            binaryCalculator.receiveInput(buttonType: "=")
+        }
     }
     
     @IBAction func plusSign(_ sender: MyButton) {
-       calculator.receiveInput(buttonType: "+") 
+       if mode == .decimal {
+        decimalCalculator.inputMathematicsSign(buttonText: "+")
+        } else {
+            binaryCalculator.receiveInput(buttonType: "+")
+        }
     }
     
     @IBAction func minusSign(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "-")
+        if mode == .decimal {
+        decimalCalculator.inputMathematicsSign(buttonText: "-")
+        } else {
+            binaryCalculator.receiveInput(buttonType: "-")
+        }
     }
     
     @IBAction func multiplySign(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "x")
+            decimalCalculator.inputMathematicsSign(buttonText: "x")
         } else {
-            calculator.receiveInput(buttonType: ">>")
+            binaryCalculator.receiveInput(buttonType: ">>")
         }
     }
     
     @IBAction func divideSign(_ sender: MyButton) {
         if mode == .decimal {
-            calculator.receiveInput(buttonType: "/")
+            decimalCalculator.inputMathematicsSign(buttonText: "/")
         } else {
-            calculator.receiveInput(buttonType: "<<")
+            binaryCalculator.receiveInput(buttonType: "<<")
         }
     }
     
     @IBAction func changeCalculatorMode(_ sender: MyButton) {
-        screenText.text = "0"
-        
         if mode == .decimal {
             decimalMode()
         } else {
@@ -156,11 +178,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearSign(_ sender: MyButton) {
-        calculator.receiveInput(buttonType: "c")
+        if mode == .decimal {
+            decimalCalculator.inputMathematicsSign(buttonText: "c")
+        } else {
+            binaryCalculator.receiveInput(buttonType: "c")
+        }
     }
     
     func decimalMode() {
         mode = .binary
+        decimalCalculator.reset()
         dotButton.isHidden = true
         twoButton.isHidden = true
         threeButton.isHidden = true
@@ -197,8 +224,8 @@ class ViewController: UIViewController {
         eightNorButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
         nineNotButton.setTitle("9", for: .normal)
         nineNotButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
-        divideButton.setTitle("/", for: .normal)
-        multiplyButton.setTitle("x", for: .normal)
+        divideButton.setTitle("÷", for: .normal)
+        multiplyButton.setTitle("×", for: .normal)
         
     }
 }
