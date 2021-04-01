@@ -8,21 +8,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var clearButton: CaculatorButton!
-    @IBOutlet weak var signToggleButton: CaculatorButton!
-    @IBOutlet weak var modeToggleButton: CaculatorButton!
+    @IBOutlet weak var clearButton: FunctionButton!
+    @IBOutlet weak var signToggleButton: FunctionButton!
+    @IBOutlet weak var modeToggleButton: FunctionButton!
     
-    @IBOutlet weak var zeroButton: CaculatorButton!
-    @IBOutlet weak var dotButton: CaculatorButton!
-    @IBOutlet weak var oneButton: CaculatorButton!
-    @IBOutlet weak var twoButton: CaculatorButton!
-    @IBOutlet weak var threeButton: CaculatorButton!
-    @IBOutlet weak var fourButton: CaculatorButton!
-    @IBOutlet weak var fiveButton: CaculatorButton!
-    @IBOutlet weak var sixButton: CaculatorButton!
-    @IBOutlet weak var sevenButton: CaculatorButton!
-    @IBOutlet weak var eightButton: CaculatorButton!
-    @IBOutlet weak var nineButton: CaculatorButton!
+    @IBOutlet weak var zeroButton: NumberButton!
+    @IBOutlet weak var dotButton: NumberButton!
+    @IBOutlet weak var oneButton: NumberButton!
+    @IBOutlet weak var twoButton: NumberButton!
+    @IBOutlet weak var threeButton: NumberButton!
+    @IBOutlet weak var fourButton: NumberButton!
+    @IBOutlet weak var fiveButton: NumberButton!
+    @IBOutlet weak var sixButton: NumberButton!
+    @IBOutlet weak var sevenButton: NumberButton!
+    @IBOutlet weak var eightButton: NumberButton!
+    @IBOutlet weak var nineButton: NumberButton!
     
     @IBOutlet weak var equalButton: OperatorButton!
     @IBOutlet weak var subtractButton: OperatorButton!
@@ -36,19 +36,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var ORButton: OperatorButton!
     @IBOutlet weak var NORButton: OperatorButton!
     @IBOutlet weak var NOTButton: OperatorButton!
-  
+    
+    @IBOutlet weak var shiftLeftButton: OperatorButton!
+    @IBOutlet weak var shiftRightButton: OperatorButton!
     @IBOutlet var binaryOperatorButtons: [OperatorButton]!
     @IBOutlet var decimalNumberButtons: [NumberButton]!
+    @IBOutlet var decimalOperatorButtons: [OperatorButton]!
+    @IBOutlet weak var numberField: UILabel!
+    
     private var decimalMode = true
     private var isOperatorOn = false
     private var decimalCalculator = DecimalCalculator()
     private var binaryCalculator = BinaryCalculator()
     
-    @IBOutlet weak var numberField: UILabel!
-    
     @IBAction func touchUpNumber(_ sender: NumberButton) {
         if isOperatorOn {
-            
             do {
                 decimalCalculator.numberStack.push(try decimalCalculator.formatInput(numberField.text!))
                 // 현재 on 돼있는 연산자를 operator stack에 push
@@ -94,9 +96,10 @@ class ViewController: UIViewController {
     @IBAction func touchUpToggleMode(_ sender: Any) {
         decimalMode.toggle()
         clearButton(sender)
-        
+        binaryCalculator.reset()
+        decimalCalculator.reset()
         decimalNumberButtons.forEach({ $0.isHidden.toggle() })
-        
+        decimalOperatorButtons.forEach({ $0.isHidden.toggle() })
         binaryOperatorButtons.forEach({ $0.isHidden.toggle() })
     }
     

@@ -66,7 +66,22 @@
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A8w-gV-AKD"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqB-eZ-ffT" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="339" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="UqB-eZ-ffT" secondAttribute="height" multiplier="1:1" id="3wA-0i-DHj"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="&lt;&lt;"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kol-yr-afR"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="UqB-eZ-ffT" firstAttribute="width" secondItem="UqB-eZ-ffT" secondAttribute="height" multiplier="1:1" id="Koe-Mp-HqT"/>
+                                            <constraint firstItem="UqB-eZ-ffT" firstAttribute="width" secondItem="UqB-eZ-ffT" secondAttribute="height" multiplier="1:1" id="grP-0t-JSy"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AXm-SI-ZVe" userLabel="7 8 9 X">
                                         <rect key="frame" x="0.0" y="87.666666666666686" width="335" height="77.666666666666686"/>
@@ -140,10 +155,23 @@
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1e-2G-QaS"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mN9-zg-TZr" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="339" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="mN9-zg-TZr" secondAttribute="height" multiplier="1:1" id="Wwh-sf-wLi"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="&gt;&gt;"/>
+                                                <connections>
+                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I9E-sl-FY7"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="8aT-VE-F4Y" firstAttribute="width" secondItem="8aT-VE-F4Y" secondAttribute="height" multiplier="1:1" id="6es-C5-bXm"/>
                                             <constraint firstItem="45q-xo-zeC" firstAttribute="width" secondItem="45q-xo-zeC" secondAttribute="height" multiplier="1:1" id="G1T-FT-cfU"/>
+                                            <constraint firstItem="mN9-zg-TZr" firstAttribute="width" secondItem="mN9-zg-TZr" secondAttribute="height" multiplier="1:1" id="cCT-3K-xTf"/>
+                                            <constraint firstItem="mN9-zg-TZr" firstAttribute="width" secondItem="mN9-zg-TZr" secondAttribute="height" multiplier="1:1" id="t04-gP-xK4"/>
                                             <constraint firstItem="RDg-ga-8TI" firstAttribute="width" secondItem="RDg-ga-8TI" secondAttribute="height" multiplier="1:1" id="vjq-5E-t6e"/>
                                         </constraints>
                                     </stackView>
@@ -344,6 +372,8 @@
                         <outlet property="numberField" destination="Y5Q-qG-dt2" id="Lc0-Yy-ixh"/>
                         <outlet property="oneButton" destination="ODd-ka-JFh" id="rZQ-RD-cgK"/>
                         <outlet property="sevenButton" destination="OQe-VR-F3h" id="RxG-tW-zk7"/>
+                        <outlet property="shiftLeftButton" destination="UqB-eZ-ffT" id="O48-Tt-uo6"/>
+                        <outlet property="shiftRightButton" destination="mN9-zg-TZr" id="rAm-M3-7aa"/>
                         <outlet property="signToggleButton" destination="mCe-a9-G7K" id="vWT-gf-GDP"/>
                         <outlet property="sixButton" destination="pwH-jG-z4a" id="bIc-Er-iz2"/>
                         <outlet property="subtractButton" destination="vE4-Mr-gK3" id="azN-Oj-7Qz"/>
@@ -365,6 +395,10 @@
                         <outletCollection property="decimalNumberButtons" destination="3ei-gP-2h8" collectionClass="NSMutableArray" id="jwI-5Q-biu"/>
                         <outletCollection property="decimalNumberButtons" destination="mJX-zd-uPx" collectionClass="NSMutableArray" id="tvJ-vD-ecJ"/>
                         <outletCollection property="decimalNumberButtons" destination="WN4-UX-Mov" collectionClass="NSMutableArray" id="hN3-hs-L05"/>
+                        <outletCollection property="decimalOperatorButtons" destination="zAM-iQ-Wrn" collectionClass="NSMutableArray" id="swP-Pa-y7s"/>
+                        <outletCollection property="decimalOperatorButtons" destination="eVY-uE-FLi" collectionClass="NSMutableArray" id="dsJ-YE-NPl"/>
+                        <outletCollection property="binaryOperatorButtons" destination="mN9-zg-TZr" collectionClass="NSMutableArray" id="QcW-Mf-70M"/>
+                        <outletCollection property="binaryOperatorButtons" destination="UqB-eZ-ffT" collectionClass="NSMutableArray" id="W2n-QG-LDY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -400,6 +434,9 @@
         <designable name="RDg-ga-8TI">
             <size key="intrinsicContentSize" width="44" height="47"/>
         </designable>
+        <designable name="UqB-eZ-ffT">
+            <size key="intrinsicContentSize" width="36" height="47"/>
+        </designable>
         <designable name="WN4-UX-Mov">
             <size key="intrinsicContentSize" width="30" height="47"/>
         </designable>
@@ -420,6 +457,9 @@
         </designable>
         <designable name="mJX-zd-uPx">
             <size key="intrinsicContentSize" width="30" height="47"/>
+        </designable>
+        <designable name="mN9-zg-TZr">
+            <size key="intrinsicContentSize" width="36" height="47"/>
         </designable>
         <designable name="o9E-D9-Lfy">
             <size key="intrinsicContentSize" width="62" height="47"/>

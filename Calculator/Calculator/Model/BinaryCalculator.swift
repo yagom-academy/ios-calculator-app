@@ -7,12 +7,8 @@
 
 final class BinaryCalculator: Calculator {
 
-    struct StackForBinaryCalculator {
-        var number: String
-        var operatorType: Operator
-    }
-    
-    var stack = Stack<StackForBinaryCalculator>()
+    var numberStack = Stack<Int>()
+    var operatorStack = Stack<Operator>()
     
     func AND(firstNumber: Int, secondNumber: Int) -> Int {
         return firstNumber & secondNumber
@@ -72,7 +68,8 @@ final class BinaryCalculator: Calculator {
     }
     
     func reset() {
-        stack.reset()
+        operatorStack.reset()
+        numberStack.reset()
     }
     
 }
