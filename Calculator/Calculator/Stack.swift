@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Stack {
-  private var array: [Int] = []
+class Stack<T> {
+  private var array: [T] = []
   
   private func checkCount() throws {
     if array.endIndex >= 10
@@ -17,7 +17,7 @@ class Stack {
     }
   }
   
-  func peek() -> Int? {
+  func peek() -> T? {
     if array.endIndex < 1 {
       return nil
     } else {
@@ -25,7 +25,7 @@ class Stack {
     }
   }
   
-  func push(number: Int) throws {
+  func push(number: T) throws {
     try checkCount()
     
     array.append(number)
