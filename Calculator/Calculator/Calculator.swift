@@ -8,105 +8,66 @@
 import Foundation
 
 class Calculator {
-  private let firstOperands = Stack<Int>()
-  private let secondOperands = Stack<Int>()
-
+  private let operands = Stack<Int>()
+  private let operators = Stack<String>()
+  
   func run(_ numeralSystem: NumeralSystem) {
-    var result: [Int] = []
+    var result: Int = 0
     var isRepeat = true
-    var operands = firstOperands
-    var opertor: Operators = .Plus
     
     print()
+    print("You chose the \(numeralSystem)")
     print("숫자와 연산자를 입력해 주세요...")
     
     repeat {
       let inputString = readLine()!
       
-      switch(inputString) {
-      case "=":
-        result = calculate(operator: opertor)
-        isRepeat = false
-      case "+":
-        opertor = .Plus
-        operands = secondOperands
-      case "-":
-        opertor = .Minus
-        operands = secondOperands
-      case "*":
-        opertor = .Multiplication
-        operands = secondOperands
-      case "/":
-        opertor = .Divide
-        operands = secondOperands
-      case "&":
-        opertor = .AND
-        operands = secondOperands
-      case "~&":
-        opertor = .NAND
-        operands = secondOperands
-      case "|":
-        opertor = .OR
-        operands = secondOperands
-      case "~|":
-        opertor = .NOR
-        operands = secondOperands
-      case "^":
-        opertor = .XOR
-        operands = secondOperands
-      case "~":
-        opertor = .NOT
-        operands = secondOperands
-      case "<<":
-        opertor = .LeftShift
-        operands = secondOperands
-      case ">>":
-        opertor = .RightShift
-        operands = secondOperands
-      default:
-        let inputInteger = Int(inputString)!
-        
-        do {
-          try operands.push(number: inputInteger)
-        } catch {
-          print(error)
-        }
+      if inputString.count > 9 {
+        print("9자리 까지만 입력이 가능합니다. 다시 입력해주세요.")
+        continue
       }
+      
+      if inputString == "=" {
+        result = CalculateDecimalNumber().calculate(operands, operators)
+        isRepeat = false
+        break
+      }
+      
+      if numeralSystem == .Decimal {
+        stackDecimalNumber(inputString)
+      } else {
+        // 이진수 연산 미구현
+//        stackBinaryNumber(inputString)
+      }
+      
     } while isRepeat
     
     print(result)
   }
   
-  private func calculate(operator: Operators) -> [Int] {
-    let proceedOperation = Operator()
+  private func stackDecimalNumber(_ inputString: String) {
+    let operateDecimalNumber = CalculateDecimalNumber()
     
-    switch `operator` {
-    case .Plus:
-      return proceedOperation.plus(firstOperands, secondOperands)
-    case .Minus:
-      return proceedOperation.Minus(firstOperands, secondOperands)
-    case .Multiplication:
-      return proceedOperation.Multiplication(firstOperands, secondOperands)
-    case .Divide:
-      return proceedOperation.Divide(firstOperands, secondOperands)
-    case .AND:
-      return proceedOperation.AND(firstOperands, secondOperands)
-    case .NAND:
-      return proceedOperation.NAND(firstOperands, secondOperands)
-    case .OR:
-      return proceedOperation.OR(firstOperands, secondOperands)
-    case .NOR:
-      return proceedOperation.NOR(firstOperands, secondOperands)
-    case .XOR:
-      return proceedOperation.XOR(firstOperands, secondOperands)
-    case .NOT:
-      return proceedOperation.NOT(firstOperands, secondOperands)
-    case .LeftShift:
-      return proceedOperation.LeftShift(firstOperands, secondOperands)
-    case .RightShift:
-      return proceedOperation.RightShift(firstOperands, secondOperands)
+    switch DecimalOperators(rawValue: inputString) {
+    case .Plus, .Minus, .Multiplication, .Divide:
+      if operators.isEmpty() {
+        operators.push(inputString)
+        return
+      }
+      
+      guard let preOperator = DecimalOperators(rawValue: operators.peek()!) else {
+        operators.push(inputString)
+        return
+      }
+      if preOperator > .Plus {
+        let intermediateCalculationNumber = operateDecimalNumber.calculate(operands, operators)
+        operands.push(intermediateCalculationNumber)
+      }
+
+      operators.push(inputString)
     default:
-      return [0]
+      let inputInteger = Int(inputString)!
+      operands.push(inputInteger)
     }
   }
 }

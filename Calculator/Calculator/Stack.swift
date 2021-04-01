@@ -10,34 +10,31 @@ import Foundation
 class Stack<T> {
   private var array: [T] = []
   
-  private func checkCount() throws {
-    if array.endIndex >= 10
-    || array.endIndex < 0 {
-      throw StackError.exceedRangeOfStack
-    }
-  }
-  
   func peek() -> T? {
-    if array.endIndex < 1 {
+    if array.isEmpty {
       return nil
     } else {
       return array[array.endIndex - 1]
     }
   }
   
-  func push(number: T) throws {
-    try checkCount()
-    
-    array.append(number)
+  func push(_ element: T) {
+    array.append(element)
   }
   
-  func pop() throws {
-    try checkCount()
-    
+  func pop() {
     array.removeLast()
   }
   
-  func Initialization() {
+  func popAllElements() {
     array.removeAll()
+  }
+  
+  func isEmpty() -> Bool {
+    if array.isEmpty {
+      return true
+    } else {
+      return false
+    }
   }
 }
