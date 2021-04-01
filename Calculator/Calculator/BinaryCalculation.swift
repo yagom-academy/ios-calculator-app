@@ -8,10 +8,10 @@
 import Foundation
 
 class BinaryCalculation: Calculatable {
-    var firstOperand = Int()
-    var secondOperand = Int()
+    var firstOperand = UInt8()
+    var secondOperand = UInt8()
     
-    func pad(string : String, toSize: Int) -> String {
+    private func pad(string : String, toSize: Int) -> String {
         var padded = string
         for _ in 0..<(toSize - string.count) {
             padded = "0" + padded
@@ -19,43 +19,20 @@ class BinaryCalculation: Calculatable {
         return padded
     }
     
-    func calculatePostfixNotation() {
-        var operandStack = Stack<Int>()
+    func calculatePostfixNotation(_ input: InputDataValidator) {
+        var operandStack = Stack<UInt8>()
         
-        for element in Data.postfixNotation {
+        for element in input.data.postfixNotation {
             if !Operators.list.contains(element) {
-                guard let numbers = Int(element) else { return }
+                guard let numbers = UInt8(element, radix: 2) else { return }
                 
                 operandStack.push(numbers)
             }
-            else if element == "~" {
-                guard let firstPoppedValue = operandStack.pop() else { return }
+            else if element == Operators.NOT.rawValue {
+                guard let popped = operandStack.pop() else { return }
                 
-                firstOperand = firstPoppedValue.value
-                let binaryNumber = UInt8((firstOperand))
-                let resultNumber = Int(~binaryNumber)
-                operandStack.push(resultNumber)
-            }
-            else if element == "~&" || element == "~|" || element == "+" || element == "-" {
-                guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else { return }
-                
-                firstOperand = firstPoppedValue.value
-                secondOperand = secondPoppedValue.value
-                let firstBinaryNumber = UInt8(firstOperand)
-                let secondBinaryNumber = UInt8(secondOperand)
-                
-                switch element {
-                case "~&" :
-                    operandStack.push(Int(firstBinaryNumber ~& secondBinaryNumber))
-                case "~|" :
-                    operandStack.push(Int(firstBinaryNumber ~| secondBinaryNumber))
-                case "+" :
-                    operandStack.push(Int(firstBinaryNumber &+ secondBinaryNumber))
-                case "-" :
-                    operandStack.push(Int(secondBinaryNumber &- firstBinaryNumber))
-                default :
-                    return
-                }
+                firstOperand = popped.value
+                operandStack.push(~firstOperand)
             }
             else {
                 guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else { return }
@@ -74,6 +51,14 @@ class BinaryCalculation: Calculatable {
                     operandStack.push(secondOperand | firstOperand)
                 case "^" :
                     operandStack.push(secondOperand ^ firstOperand)
+                case "~&" :
+                    operandStack.push(firstOperand ~& secondOperand)
+                case "~|" :
+                    operandStack.push(firstOperand ~| secondOperand)
+                case "+" :
+                    operandStack.push(firstOperand &+ secondOperand)
+                case "-" :
+                    operandStack.push(secondOperand &- firstOperand)
                 default:
                     return
                 }

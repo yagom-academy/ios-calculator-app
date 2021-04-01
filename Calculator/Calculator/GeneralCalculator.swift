@@ -7,26 +7,19 @@
 
 import Foundation
 
-class Data {
-    static var medianNotation: [String] = []
-    static var postfixNotation: [String] = []
-}
-
 class GeneralCalculator {
-    var decimalCalcualtion = DecimalCalculation()
-    var binaryCalculation = BinaryCalculation()
     var operatorStack = Stack<String>()
     
-    private func distinguishOperatorFromOperand(_ element: String) {
+    private func distinguishOperatorFromOperand(_ element: String, _ input: InputDataValidator) {
         if Operators.list.contains(element) {
-            pushPriorOperator(element)
+            pushPriorOperator(element, input)
         }
         else {
-            Data.postfixNotation.append(element)
+            input.data.postfixNotation.append(element)
         }
     }
     
-    private func pushPriorOperator(_ element: String) {
+    private func pushPriorOperator(_ element: String, _ input : InputDataValidator) {
         if operatorStack.isEmpty() {
             operatorStack.push(element)
         }
@@ -38,40 +31,28 @@ class GeneralCalculator {
             while incomingOperator.precedence < stackedOperator.precedence || incomingOperator.precedence == stackedOperator.precedence {
                 guard let popped = operatorStack.pop() else { break }
                 
-                Data.postfixNotation.append(popped.value)
+                input.data.postfixNotation.append(popped.value)
             }
                 operatorStack.push(element)
         }
     }
     
-    private func appendRemainingOperators() {
+    private func appendRemainingOperators(_ input: InputDataValidator) {
         while !operatorStack.isEmpty() {
             guard let remainder = operatorStack.pop()?.value else { return }
             
-            Data.postfixNotation.append(remainder)
+            input.data.postfixNotation.append(remainder)
         }
     }
     
-    func executeDecimalCalculation() {
-        if Operators.list.contains(Data.medianNotation.last!) {
-            Data.medianNotation.removeLast()
+    func convertToPostfixNotation(_ input: InputDataValidator) {
+        if Operators.list.contains(input.data.medianNotation.last!) {
+            input.data.medianNotation.removeLast()
         }
-        for element in Data.medianNotation {
-            distinguishOperatorFromOperand(element)
+        for element in input.data.medianNotation {
+            distinguishOperatorFromOperand(element, input)
         }
-        appendRemainingOperators()
-        decimalCalcualtion.calculatePostfixNotation()
-    }
-    
-    func executeBinaryCalculation() {
-        if Operators.list.contains(Data.medianNotation.last!) {
-            Data.medianNotation.removeLast()
-        }
-        for element in Data.medianNotation {
-            distinguishOperatorFromOperand(element)
-        }
-        appendRemainingOperators()
-        binaryCalculation.calculatePostfixNotation()
+        appendRemainingOperators(input)
     }
 }
 

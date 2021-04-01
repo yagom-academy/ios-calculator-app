@@ -10,11 +10,11 @@ import Foundation
 class DecimalCalculation: Calculatable {
     var firstOperand = Double()
     var secondOperand = Double()
-    
-    func calculatePostfixNotation() {
+   
+    func calculatePostfixNotation(_ input: InputDataValidator) {
         var operandStack = Stack<Double>()
-
-        for element in Data.postfixNotation {
+        
+        for element in input.data.postfixNotation {
             if !Operators.list.contains(element) {
                 guard let numbers = Double(element) else { return }
                 
@@ -41,5 +41,7 @@ class DecimalCalculation: Calculatable {
                 }
             }
         }
+        guard let peek = operandStack.peek() else { return }
+        print(peek.value)
     }
 }
