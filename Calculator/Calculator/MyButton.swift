@@ -14,5 +14,6 @@ class MyButton: UIButton {
         layer.cornerRadius = rect.height / 2
         clipsToBounds = true
         // 글씨가 안짤리게 하는것
+        
     }
 }

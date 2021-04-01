@@ -50,7 +50,7 @@ class DemicalCalculator {
         operationFunctions["/"] = { $0 / $1 }
 
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 8
+        numberFormatter.maximumSignificantDigits = 9
     }
  
     private func calculateUntilSatisfiedCondition() {
@@ -118,15 +118,15 @@ class DemicalCalculator {
                 concatenateNumberOrDot(buttonType)
                 print(tempNumber)
                 screenNumber = numberFormatter.string(for: Double(tempNumber))!
-            case "+", "-", "*", "/":
+            case "+", "-", "x", "/":
                 guard let doubleValue = Double(tempNumber) else { return }
                 operands.push(doubleValue)
                 if buttonType == "+" || buttonType == "-" {
                     while !operators.isEmpty() {
                         calculateUntilSatisfiedCondition()
                     }
-                } else if buttonType == "*" || buttonType == "/" {
-                    while operators.top() == "*" || operators.top() == "/" {
+                } else if buttonType == "x" || buttonType == "/" {
+                    while operators.top() == "x" || operators.top() == "/" {
                         calculateUntilSatisfiedCondition()
                     }
                 }

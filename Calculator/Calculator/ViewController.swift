@@ -7,194 +7,111 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+    enum CalculatorMode {
+        case decimal
+        case binary
+    }
+    var mode: CalculatorMode = .decimal
     @IBOutlet var screenText: UILabel!
     
-    @IBOutlet var dot: UIButton!
-    @IBOutlet var num0: UIButton!
-    @IBOutlet var num1: UIButton!
-    @IBOutlet var num2: UIButton!
-    @IBOutlet var num3: UIButton!
-    @IBOutlet var num4: UIButton!
-    @IBOutlet var num5: UIButton!
-    @IBOutlet var num6: UIButton!
-    @IBOutlet var num7: UIButton!
-    @IBOutlet var num8: UIButton!
-    @IBOutlet var num9: UIButton!
-    @IBOutlet var plusBtn: UIButton!
-    @IBOutlet var minusBtn: UIButton!
-    @IBOutlet var multiplyBtn: UIButton!
-    @IBOutlet var divideBtn: UIButton!
-    @IBOutlet var clearBtn: UIButton!
-    @IBOutlet var equalBtn: UIButton!
+    @IBAction func changeMode(_ sender: MyButton) {
+        if mode == .decimal {
+            mode = .binary
+            dot.isHidden = true
+            num2.isHidden = true
+            num3.isHidden = true
+            num4.setTitle("&", for: .normal)
+            num5.setTitle("~&", for: .normal)
+            num6.setTitle("^", for: .normal)
+            num7.setTitle("|", for: .normal)
+            num8.setTitle("~|", for: .normal)
+            num9.setTitle("~", for: .normal)
+            divideBtn.setTitle("<<", for: .normal)
+            multiplyBtn.setTitle(">>", for: .normal)
+        } else {
+            mode = .decimal
+            dot.isHidden = false
+            num2.isHidden = false
+            num3.isHidden = false
+            num4.setTitle("4", for: .normal)
+            num5.setTitle("5", for: .normal)
+            num6.setTitle("6", for: .normal)
+            num7.setTitle("7", for: .normal)
+            num8.setTitle("8", for: .normal)
+            num9.setTitle("9", for: .normal)
+            divideBtn.setTitle("/", for: .normal)
+            multiplyBtn.setTitle("x", for: .normal)
+        }
+    }
     
-    @IBOutlet var decimalView: UIView!
-    @IBOutlet var binaryView: UIView!
-    
-    @IBOutlet var binaryClear: UIButton!
-    @IBOutlet var binaryNum0: UIButton!
-    @IBOutlet var binaryNum1: UIButton!
-    @IBOutlet var binaryOR: UIButton!
-    @IBOutlet var binaryNOR: UIButton!
-    @IBOutlet var binaryNOT: UIButton!
-    @IBOutlet var binaryAND: UIButton!
-    @IBOutlet var binaryNAND: UIButton!
-    @IBOutlet var binaryXOR: UIButton!
-    @IBOutlet var binaryLeftShift: UIButton!
-    @IBOutlet var binaryRightShift: UIButton!
-    @IBOutlet var binaryMinus: UIButton!
-    @IBOutlet var binaryPlus: UIButton!
-    @IBOutlet var binaryEqual: UIButton!
+    @IBOutlet var dot: MyButton!
+    @IBOutlet var num0: MyButton!
+    @IBOutlet var num1: MyButton!
+    @IBOutlet var num2: MyButton!
+    @IBOutlet var num3: MyButton!
+    @IBOutlet var num4: MyButton!
+    @IBOutlet var num5: MyButton!
+    @IBOutlet var num6: MyButton!
+    @IBOutlet var num7: MyButton!
+    @IBOutlet var num8: MyButton!
+    @IBOutlet var num9: MyButton!
+    @IBOutlet var plusBtn: MyButton!
+    @IBOutlet var minusBtn: MyButton!
+    @IBOutlet var multiplyBtn: MyButton!
+    @IBOutlet var divideBtn: MyButton!
+    @IBOutlet var clearBtn: MyButton!
+    @IBOutlet var equalBtn: MyButton!
+    @IBOutlet var decimalBinaryModeBtn: MyButton!
+    @IBOutlet var plusMinusBtn: MyButton!
     
     let calculator = DemicalCalculator()
     let binaryCalculrator = BinaryCalculator()
     
-    @IBAction func numBtn(_ sender: UIButton) {
+    @IBAction func numBtn(_ sender: MyButton) {
         switch sender {
         case num0:
-            calculator.receiveInput(buttonType: String(num0.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num1:
-            calculator.receiveInput(buttonType: String(num1.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num2:
-            calculator.receiveInput(buttonType: String(num2.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num3:
-            calculator.receiveInput(buttonType: String(num3.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num4:
-            calculator.receiveInput(buttonType: String(num4.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num5:
-            calculator.receiveInput(buttonType: String(num5.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num6:
-            calculator.receiveInput(buttonType: String(num6.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num7:
-            calculator.receiveInput(buttonType: String(num7.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num8:
-            calculator.receiveInput(buttonType: String(num8.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case num9:
-            calculator.receiveInput(buttonType: String(num9.tag))
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case dot:
-            calculator.receiveInput(buttonType: ".")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case plusBtn:
-            calculator.receiveInput(buttonType: "+")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case minusBtn:
-            calculator.receiveInput(buttonType: "-")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case multiplyBtn:
-            calculator.receiveInput(buttonType: "*")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case divideBtn:
-            calculator.receiveInput(buttonType: "/")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case equalBtn:
-            calculator.receiveInput(buttonType: "=")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         case clearBtn:
             print("clear button")
-            calculator.receiveInput(buttonType: "c")
+            calculator.receiveInput(buttonType: (sender.titleLabel?.text)!)
         default:
             break
         }
         screenText.text = calculator.screenNumber
     }
     
-    @IBAction func binaryBtn(_ sender: UIButton) {
-        print((sender.titleLabel?.text!)!)
-        switch sender {
-        case binaryClear:
-            binaryCalculrator.receiveInput(buttonType: "c")
-        case binaryNum0:
-            binaryCalculrator.receiveInput(buttonType: "0")
-        case binaryNum1:
-            binaryCalculrator.receiveInput(buttonType: "1")
-        case binaryOR:
-            binaryCalculrator.receiveInput(buttonType: "|")
-        case binaryNOR:
-            binaryCalculrator.receiveInput(buttonType: "~|")
-        case binaryNOT:
-            binaryCalculrator.receiveInput(buttonType: "~")
-        case binaryAND:
-            binaryCalculrator.receiveInput(buttonType: "&")
-        case binaryNAND:
-            binaryCalculrator.receiveInput(buttonType: "~&")
-        case binaryXOR:
-            binaryCalculrator.receiveInput(buttonType: "^")
-        case binaryLeftShift:
-            binaryCalculrator.receiveInput(buttonType: "<<")
-        case binaryRightShift:
-            binaryCalculrator.receiveInput(buttonType: ">>")
-        case binaryMinus:
-            binaryCalculrator.receiveInput(buttonType: "-")
-        case binaryPlus:
-            binaryCalculrator.receiveInput(buttonType: "+")
-        case binaryEqual:
-            binaryCalculrator.receiveInput(buttonType: "=")
-        default:
-            break
-        }
-    }
-    
-    @IBAction func changeBtn(_ sender: UIButton) {
-        if decimalView.isHidden == false {
-            decimalView.isHidden = true
-            binaryView.isHidden = false
-        } else {
-            decimalView.isHidden = false
-            binaryView.isHidden = true
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setup()
-        binaryView.isHidden = true
     }
-    
-    func setup() {
-        screenText.text = "0"
-        
-        num1.calcBtn()
-        num2.calcBtn()
-        num3.calcBtn()
-        num4.calcBtn()
-        num5.calcBtn()
-        num6.calcBtn()
-        num7.calcBtn()
-        num8.calcBtn()
-        num9.calcBtn()
-        dot.calcBtn()
-        
-        plusBtn.operatorBtn()
-        minusBtn.operatorBtn()
-        multiplyBtn.operatorBtn()
-        divideBtn.operatorBtn()
-        clearBtn.operatorBtn()
-        equalBtn.operatorBtn()
-        
-        dot.setTitle(".", for: .normal)
-        
-        num0.setTitle("0", for: .normal)
-        num0.frame.size.width = 170
-        num0.frame.size.height = 60
-        num0.layer.cornerRadius = 30
-        num0.backgroundColor = .systemGray
-        num0.setTitleColor(.white, for: .normal)
-        num0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-    }
-}
 
-extension UIButton {
-    func calcBtn() {
-        self.setTitle("\(self.tag)", for: .normal)
-        self.frame.size.width = 60
-        self.frame.size.height = 60
-        self.layer.cornerRadius = self.frame.width / 2
-        self.setTitleColor(.white, for: .normal)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        self.backgroundColor = .systemGray
-    }
-    
-    func operatorBtn() {
-        self.frame.size.width = 60
-        self.frame.size.height = 60
-        self.layer.cornerRadius = self.frame.width / 2
-        self.setTitleColor(.white, for: .normal)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        self.backgroundColor = .systemOrange
-    }
 }
