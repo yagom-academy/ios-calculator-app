@@ -7,6 +7,13 @@
 
 import Foundation
 
-enum StackError: Error {
+enum StackError: Error, CustomStringConvertible {
   case exceedRangeOfStack
+  
+  var description: String {
+    switch self {
+    case .exceedRangeOfStack:
+      return "Stack의 범위를 초과하였습니다."
+    }
+  }
 }
