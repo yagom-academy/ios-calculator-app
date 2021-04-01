@@ -6,19 +6,19 @@
 //
 import Foundation
 protocol Computable {
-    func add<T: BinaryFloatingPoint>(firstNumber: T, secondNumber: T) -> T
-    func subtract<T: BinaryFloatingPoint>(firstNumber: T, secondNumber: T) -> T
+    func add(firstNumber: Double, secondNumber: Double) -> Double
+    func subtract(firstNumber: Double, secondNumber: Double) -> Double
 }
 
 extension Computable {
-    func add<T: BinaryFloatingPoint>(firstNumber: T, secondNumber: T) -> T {
+    func add(firstNumber: Double, secondNumber: Double) -> Double {
         let result = firstNumber + secondNumber
-        return T(round(result * 1e9) / 1e9)
+        return Double(round(result * 1e9) / 1e9)
     }
     
-    func subtract<T: BinaryFloatingPoint>(firstNumber: T, secondNumber: T) -> T {
+    func subtract(firstNumber: Double, secondNumber: Double) -> Double {
         let result = firstNumber - secondNumber
-        return T(round(result * 1e9) / 1e9)
+        return Double(round(result * 1e9) / 1e9)
     }
 }
 

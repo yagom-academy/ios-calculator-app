@@ -24,36 +24,42 @@ class ViewController: UIViewController {
     @IBOutlet weak var eightButton: NumberButton!
     @IBOutlet weak var nineButton: NumberButton!
     
-    @IBOutlet weak var equalButton: OperatorButton!
-    @IBOutlet weak var subtractButton: OperatorButton!
-    @IBOutlet weak var divideButton: OperatorButton!
+    @IBOutlet weak var addForDecimalButton: OperatorButton!
+    @IBOutlet weak var subtractForDecimalButton: OperatorButton!
     @IBOutlet weak var multiplyButton: OperatorButton!
-    @IBOutlet weak var addButton: OperatorButton!
+    @IBOutlet weak var divideButton: OperatorButton!
+    @IBOutlet weak var equalButton: OperatorButton!
     
+    @IBOutlet weak var addForBinaryButton: OperatorButton!
+    @IBOutlet weak var subtractForBinaryButton: OperatorButton!
     @IBOutlet weak var ANDButton: OperatorButton!
     @IBOutlet weak var NANDButton: OperatorButton!
     @IBOutlet weak var XORButton: OperatorButton!
     @IBOutlet weak var ORButton: OperatorButton!
     @IBOutlet weak var NORButton: OperatorButton!
     @IBOutlet weak var NOTButton: OperatorButton!
-    
     @IBOutlet weak var shiftLeftButton: OperatorButton!
     @IBOutlet weak var shiftRightButton: OperatorButton!
+    
     @IBOutlet var binaryOperatorButtons: [OperatorButton]!
     @IBOutlet var decimalNumberButtons: [NumberButton]!
     @IBOutlet var decimalOperatorButtons: [OperatorButton]!
+    
     @IBOutlet weak var numberField: UILabel!
     
     private var decimalMode = true
     private var isOperatorOn = false
+    @IBOutlet var toggledSwitch: OperatorButton?
     private var decimalCalculator = DecimalCalculator()
     private var binaryCalculator = BinaryCalculator()
     
     @IBAction func touchUpNumber(_ sender: NumberButton) {
         if isOperatorOn {
             do {
+                // 현재 on 돼있는 연산자와 숫자를 operator stack에 push
                 decimalCalculator.numberStack.push(try decimalCalculator.formatInput(numberField.text!))
-                // 현재 on 돼있는 연산자를 operator stack에 push
+                decimalCalculator.operatorStack.push(toggledSwitch!.operatorType)
+                toggledSwitch = nil
             } catch {
                 return // error 처리
             }
@@ -68,12 +74,19 @@ class ViewController: UIViewController {
     @IBAction func touchUpOperator(_ sender: OperatorButton) {
         if decimalCalculator.operatorStack.isEmpty {
             sender.isOn.toggle()
+            toggledSwitch?.isOn.toggle()
+            toggledSwitch = sender
         } else {
-            if sender.precedence > decimalCalculator.operatorStack.top!.precedence {
+            if sender.operatorType.precedence > decimalCalculator.operatorStack.top!.precedence {
                 sender.isOn.toggle()
+                toggledSwitch = sender
                 return
             }
-            while sender.precedence <= decimalCalculator.operatorStack.top!.precedence {
+            while sender.operatorType.precedence <= decimalCalculator.operatorStack.top!.precedence {
+                let secondNumber = decimalCalculator.numberStack.pop()
+                let firstNumber = decimalCalculator.numberStack.pop()
+                let operatorType = decimalCalculator.operatorStack.pop()?.function
+                operatorType!(firstNumber!, secondNumber!)
                 //pop 하면서 연산 진행
             }
         }
@@ -109,10 +122,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        initializeOperators()
     }
     
+    func initializeOperators() {
+        
+        addForDecimalButton.operatorType = Operators.additionForDecimal
+        subtractForBinaryButton.operatorType = Operators.subtractionForDecimal
+        multiplyButton.operatorType = Operators.multiplication
+        divideButton.operatorType = Operators.division
+        
+        addForBinaryButton.operatorType = Operators.additionForBinary
+        subtractForBinaryButton.operatorType = Operators.subtractionForBinary
+        ANDButton.operatorType = Operators.AND
+        NANDButton.operatorType = Operators.NAND
+        ORButton.operatorType = Operators.OR
+        XORButton.operatorType = Operators.XOR
+        NORButton.operatorType = Operators.NOR
+        NOTButton.operatorType = Operators.NOT
+    }
 }

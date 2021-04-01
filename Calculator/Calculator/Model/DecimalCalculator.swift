@@ -10,6 +10,7 @@ final class DecimalCalculator: Calculator {
     
     var numberStack = Stack<Double>()
     var operatorStack = Stack<Operator>()
+    static var shared = DecimalCalculator()
     
     func multiply(firstNumber: Double, secondNumber: Double) -> Double {
         return round(Double(firstNumber * secondNumber) * 1e9) / 1e9

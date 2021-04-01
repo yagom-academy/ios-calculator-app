@@ -247,9 +247,21 @@
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qqQ-HF-EKP"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imc-9r-WuI" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="339" y="0.0" width="77.666666666666686" height="78"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="imc-9r-WuI" secondAttribute="height" multiplier="1:1" id="crP-63-VfN"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="-"/>
+                                                <connections>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yae-c3-I0e"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="e24-oc-x9d" firstAttribute="width" secondItem="e24-oc-x9d" secondAttribute="height" multiplier="1:1" id="6OD-Tc-yoe"/>
+                                            <constraint firstItem="imc-9r-WuI" firstAttribute="width" secondItem="imc-9r-WuI" secondAttribute="height" multiplier="1:1" id="BrT-lx-raf"/>
                                             <constraint firstItem="o9E-D9-Lfy" firstAttribute="width" secondItem="o9E-D9-Lfy" secondAttribute="height" multiplier="1:1" id="Sll-s2-swk"/>
                                         </constraints>
                                     </stackView>
@@ -294,7 +306,21 @@
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dCT-Tt-ZrQ"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6S9-q4-7tf" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="339" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="6S9-q4-7tf" secondAttribute="height" multiplier="1:1" id="KgG-RO-ae8"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <state key="normal" title="+"/>
+                                                <connections>
+                                                    <action selector="touchUpNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eCp-eM-NTE"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="6S9-q4-7tf" firstAttribute="width" secondItem="6S9-q4-7tf" secondAttribute="height" multiplier="1:1" id="dNb-NN-fg2"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UAF-KT-MKa" userLabel="0 . =">
                                         <rect key="frame" x="0.0" y="351.00000000000006" width="335" height="77.666666666666686"/>
@@ -322,6 +348,9 @@
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hi4-uG-6aN" userLabel="=" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="257.33333333333331" y="0.0" width="77.666666666666686" height="77.666666666666671"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="hi4-uG-6aN" secondAttribute="height" multiplier="1:1" id="n6n-ZM-ie6"/>
+                                                </constraints>
                                                 <state key="normal" image="equal" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                                 </state>
@@ -334,7 +363,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="BWZ-w3-Ury" firstAttribute="leading" secondItem="vE4-Mr-gK3" secondAttribute="leading" id="LvI-U1-82I"/>
-                                    <constraint firstItem="hi4-uG-6aN" firstAttribute="leading" secondItem="BWZ-w3-Ury" secondAttribute="leading" id="nPa-hW-vYw"/>
+                                    <constraint firstItem="rVP-No-nib" firstAttribute="trailing" secondItem="ODd-ka-JFh" secondAttribute="trailing" priority="250" id="O3z-Ue-DFp"/>
+                                    <constraint firstItem="hi4-uG-6aN" firstAttribute="leading" secondItem="BWZ-w3-Ury" secondAttribute="leading" id="Zhf-dd-MdK"/>
                                     <constraint firstItem="rVP-No-nib" firstAttribute="trailing" secondItem="cDH-Yv-tAc" secondAttribute="trailing" id="uFL-Fx-3CM"/>
                                 </constraints>
                             </stackView>
@@ -358,7 +388,8 @@
                         <outlet property="NOTButton" destination="8aT-VE-F4Y" id="OEk-F7-0RE"/>
                         <outlet property="ORButton" destination="RDg-ga-8TI" id="fwQ-Ut-JdP"/>
                         <outlet property="XORButton" destination="o9E-D9-Lfy" id="n7s-oj-8uL"/>
-                        <outlet property="addButton" destination="BWZ-w3-Ury" id="noL-e6-X9D"/>
+                        <outlet property="addForBinaryButton" destination="6S9-q4-7tf" id="tJM-Qk-Znq"/>
+                        <outlet property="addForDecimalButton" destination="BWZ-w3-Ury" id="noL-e6-X9D"/>
                         <outlet property="clearButton" destination="yG5-q6-lyu" id="Hhc-iW-R2V"/>
                         <outlet property="divideButton" destination="zAM-iQ-Wrn" id="vp2-6u-hZF"/>
                         <outlet property="dotButton" destination="WN4-UX-Mov" id="GM1-B1-bYY"/>
@@ -376,7 +407,8 @@
                         <outlet property="shiftRightButton" destination="mN9-zg-TZr" id="rAm-M3-7aa"/>
                         <outlet property="signToggleButton" destination="mCe-a9-G7K" id="vWT-gf-GDP"/>
                         <outlet property="sixButton" destination="pwH-jG-z4a" id="bIc-Er-iz2"/>
-                        <outlet property="subtractButton" destination="vE4-Mr-gK3" id="azN-Oj-7Qz"/>
+                        <outlet property="subtractForBinaryButton" destination="imc-9r-WuI" id="dHk-Bf-4OB"/>
+                        <outlet property="subtractForDecimalButton" destination="vE4-Mr-gK3" id="azN-Oj-7Qz"/>
                         <outlet property="threeButton" destination="pfp-eM-N5E" id="Ngb-aw-COo"/>
                         <outlet property="twoButton" destination="cDH-Yv-tAc" id="VQb-0U-Lvf"/>
                         <outlet property="zeroButton" destination="rVP-No-nib" id="s4o-fK-c7u"/>
@@ -399,6 +431,10 @@
                         <outletCollection property="decimalOperatorButtons" destination="eVY-uE-FLi" collectionClass="NSMutableArray" id="dsJ-YE-NPl"/>
                         <outletCollection property="binaryOperatorButtons" destination="mN9-zg-TZr" collectionClass="NSMutableArray" id="QcW-Mf-70M"/>
                         <outletCollection property="binaryOperatorButtons" destination="UqB-eZ-ffT" collectionClass="NSMutableArray" id="W2n-QG-LDY"/>
+                        <outletCollection property="binaryOperatorButtons" destination="imc-9r-WuI" collectionClass="NSMutableArray" id="BPN-OJ-hCr"/>
+                        <outletCollection property="binaryOperatorButtons" destination="6S9-q4-7tf" collectionClass="NSMutableArray" id="Soa-8p-1rJ"/>
+                        <outletCollection property="decimalOperatorButtons" destination="vE4-Mr-gK3" collectionClass="NSMutableArray" id="tQQ-o0-o4V"/>
+                        <outletCollection property="decimalOperatorButtons" destination="BWZ-w3-Ury" collectionClass="NSMutableArray" id="7TS-rq-lKV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -412,6 +448,9 @@
         </designable>
         <designable name="45q-xo-zeC">
             <size key="intrinsicContentSize" width="66" height="47"/>
+        </designable>
+        <designable name="6S9-q4-7tf">
+            <size key="intrinsicContentSize" width="30" height="47"/>
         </designable>
         <designable name="8aT-VE-F4Y">
             <size key="intrinsicContentSize" width="62" height="47"/>
@@ -451,6 +490,9 @@
         </designable>
         <designable name="hi4-uG-6aN">
             <size key="intrinsicContentSize" width="19.666666666666668" height="22"/>
+        </designable>
+        <designable name="imc-9r-WuI">
+            <size key="intrinsicContentSize" width="30" height="47"/>
         </designable>
         <designable name="mCe-a9-G7K">
             <size key="intrinsicContentSize" width="40" height="47"/>

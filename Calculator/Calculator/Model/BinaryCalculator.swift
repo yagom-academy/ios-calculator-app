@@ -9,6 +9,7 @@ final class BinaryCalculator: Calculator {
 
     var numberStack = Stack<Int>()
     var operatorStack = Stack<Operator>()
+    static var shared = BinaryCalculator()
     
     func AND(firstNumber: Int, secondNumber: Int) -> Int {
         return firstNumber & secondNumber
