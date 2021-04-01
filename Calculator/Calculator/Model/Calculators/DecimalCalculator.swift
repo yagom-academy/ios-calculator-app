@@ -66,11 +66,11 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         } 
     }
     
-    func showTopOfStack() {
+    func showTopOfStack() -> Double {
         if stack.top! / 1000000000.0 >= 1 {
-            print(stack.top!.truncatingRemainder(dividingBy: 1000000000.0) )
+            return stack.top!.truncatingRemainder(dividingBy: 1000000000.0)
         } else {
-            print(stack.top!)
+            return stack.top!
         }
     }
 }

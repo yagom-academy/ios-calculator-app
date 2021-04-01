@@ -8,7 +8,7 @@
 import Foundation
 
 struct Stack<T> {
-    var list: [T] = []
+    var list: [T]
     var top: T? {
         return self.list.last
     }
@@ -26,5 +26,9 @@ struct Stack<T> {
     
     mutating func reset() {
         self.list.removeAll()
+    }
+    
+    init(list: [T] = []) {
+        self.list = list
     }
 }
