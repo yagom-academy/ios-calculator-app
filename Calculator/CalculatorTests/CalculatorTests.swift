@@ -47,11 +47,9 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_calculate_플러스를입력했을때_return값확인() {
-        XCTAssertEqual(testDecimalCalculator.calculate(operatedNumber: 1, operatingNumber: 1), 2)
-        // I think this is just a stop-gap 미봉책
-        // calculate method does not work as we intended originally
-        // Now we can calculate only for addition.
-        
+        XCTAssertEqual(testDecimalCalculator.calculate(operateSign: "+", operatedNumber: 1, operatingNumber: 1), 2)
     }
+    
+
 }
 
