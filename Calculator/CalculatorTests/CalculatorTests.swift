@@ -33,12 +33,12 @@ class CalculatorTests: XCTestCase {
     
     func test_divide_한자리정수_두개() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.divide(1, by: 2), 0.5)
+        XCTAssertEqual(testDecimalCalculator.divide(1, by: 2), 0)
     }
     
     func test_divide_소수를_영으로나누기() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.divide(1.23, by: 0), 0.5)
+        XCTAssertEqual(testDecimalCalculator.divide(1.23, by: 0), 0)
     }
     
     func test_multiply_한자리정수_두개() {
@@ -56,6 +56,11 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "+"), .addition)
     }
     
+    func test_convertType_아무기호입력() {
+        testDecimalCalculator = DecimalCalculator()
+        XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "="), nil)
+    }
+    
     func test_calculate_덧셈_소수두개() {
         testDecimalCalculator = DecimalCalculator()
         XCTAssertEqual(testDecimalCalculator.calculate(operateSign: "+", operatedNumber: 12.34, operatingNumber: 56.78), 69.12)
@@ -67,4 +72,9 @@ class CalculatorTests: XCTestCase {
 //        testDecimalCalculator = DecimalCalculator(list: [10e9])
         XCTAssertEqual(testDecimalCalculator.showTopOfStack(), 0)
     }
+    
+    
 }
+
+// cmd u 눌렀더니 저래됐지요
+

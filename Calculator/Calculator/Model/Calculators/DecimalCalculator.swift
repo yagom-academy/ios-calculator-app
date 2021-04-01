@@ -30,7 +30,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return userInputNumber
     }
     
-    func convertType(inputOperator: String?) -> Operator {
+    func convertType(inputOperator: String?) -> Operator? {
         guard let userInputOperator = inputOperator else { fatalError() }
         switch userInputOperator {
         case "+":
@@ -42,7 +42,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         case "/":
             return Operator.division
         default:
-            fatalError()
+            return nil // 짜자잔~
         }
     }
     
