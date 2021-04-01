@@ -22,7 +22,7 @@ class DecimalCalculator {
             
             if operandStack.count > (highOperatorStack.count + lowOperatorStack.count) {
                 _ = moveToOperatorStack(lastOperator)
-                guard let topNumberOperandStack = operandStack.peek else { return }
+                guard let topNumberOperandStack = operandStack.peek() else { return }
                 lastOperand = topNumberOperandStack
                 calculate(currentOperator: inputValue)
             } else if operandStack.count == Int.one {
@@ -36,12 +36,12 @@ class DecimalCalculator {
             return
         } else {
             moveToOperandStack(operandBuffer)
-            guard let topNumberOperandStack = operandStack.peek else { return }
+            guard let topNumberOperandStack = operandStack.peek() else { return }
             lastOperand = topNumberOperandStack
             lastOperator = inputValue
             if moveToOperatorStack(inputValue) == false {
                 calculate(currentOperator: inputValue)
-                guard let topNumberOperandStack = operandStack.peek else { return }
+                guard let topNumberOperandStack = operandStack.peek() else { return }
                 lastOperand = topNumberOperandStack
             } else {
                 return
@@ -93,7 +93,7 @@ class DecimalCalculator {
     }
     
     func output() {
-        guard let outputValue = operandStack.peek else { return }
+        guard let outputValue = operandStack.peek() else { return }
         print(convertInteger(value: String(outputValue)))
     }
     

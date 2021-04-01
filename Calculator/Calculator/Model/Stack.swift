@@ -30,7 +30,7 @@ struct Stack<T> {
         array.removeAll()
     }
     
-    var peek: T? {
+    func peek() -> T? {
         return array.last
     }
 }

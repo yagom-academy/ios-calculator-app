@@ -98,7 +98,7 @@ final class BinaryCalculator: Calculatable {
         guard let inputPriority = BinaryOperatorType(rawValue: input)?.priority else { return }
         
         for _ in Int.zero..<stack.count {
-            guard let stackTop = stack.peek else { return }
+            guard let stackTop = stack.peek() else { return }
             guard let stackTopOperatorType = BinaryOperatorType(rawValue: stackTop) else { return }
             if inputPriority <= stackTopOperatorType.priority {
                 guard let value = stack.pop() else { return }
