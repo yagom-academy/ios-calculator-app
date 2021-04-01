@@ -111,8 +111,7 @@ final class BinaryCalculator: Calculatable {
     }
     
     func output() {
-//        guard let last = stack.peek else { return nil }
-//        return last
+        
     }
     
     func reset() {

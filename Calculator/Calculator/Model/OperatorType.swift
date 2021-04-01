@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum resetType {
+enum ResetType {
     static let reset = "c"
 }
 

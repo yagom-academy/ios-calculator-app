@@ -1,284 +1,110 @@
-//
-//  DecimalCalculator.swift
-//
-//  Created by 윤재웅 on 2021/03/30.
-//
-
 import Foundation
 
-
-final class DecimalCalculator: Calculatable {
+class DecimalCalculator {
     private var lowOperatorStack = Stack<DecimalOperatorType>()
     private var highOperatorStack = Stack<DecimalOperatorType>()
     private var operandStack = Stack<Double>()
-    private var operand = String.blank
+    private var operandBuffer = String.blank
     private var outputValue = Double.zero
     private let operators = DecimalOperatorType.allCases.map { $0.description }
-    private var preOperand: Double?
-    private var preOperator: DecimalOperatorType?
-    private var isEqual = false
-    private var isFirstEquals = false
-    private var isLastEquals = false
-    private var ismidleEquls = false
+    private var lastOperand = Double.zero
+    private var lastOperator = DecimalOperatorType.add.description
     
     func input(_ inputValue: String) {
         if operators.contains(inputValue) == false {
-            if operand.contains(String.dot) ? operand.count == 10 : operand.count == 9 {
-                return
-            }
-            operand += inputValue
+            operandBuffer += inputValue
         } else if inputValue == DecimalOperatorType.equal.description {
-            if isEqual == true {
-                calculate(currentOperator: inputValue)
-                return
+            if operandBuffer.count != Int.zero {
+                moveToOperandStack(operandBuffer)
+            } else if operandBuffer.count == Int.zero {
+                moveToOperandStack(String(lastOperand))
             }
-            isEqual = true
-            moveToOperandStack(operand)
-            calculate(currentOperator: inputValue)
-        } else if inputValue == resetType.reset {
+            
+            if operandStack.count > (highOperatorStack.count + lowOperatorStack.count) {
+                _ = moveToOperatorStack(lastOperator)
+                guard let topNumberOperandStack = operandStack.peek else { return }
+                lastOperand = topNumberOperandStack
+                calculate(currentOperator: inputValue)
+            } else if operandStack.count == Int.one {
+                _ = moveToOperatorStack(lastOperator)
+                calculate(currentOperator: inputValue)
+            } else {
+                calculate(currentOperator: inputValue)
+            }
+        } else if inputValue == ResetType.reset {
             reset()
             return
         } else {
-            if operandStack.count == lowOperatorStack.count + highOperatorStack.count {
-                return
-            }
-            isEqual = false
-            moveToOperandStack(operand)
-            operand = String.blank
-            preOperator = DecimalOperatorType(rawValue: inputValue)
+            moveToOperandStack(operandBuffer)
+            guard let topNumberOperandStack = operandStack.peek else { return }
+            lastOperand = topNumberOperandStack
+            lastOperator = inputValue
             if moveToOperatorStack(inputValue) == false {
                 calculate(currentOperator: inputValue)
+                guard let topNumberOperandStack = operandStack.peek else { return }
+                lastOperand = topNumberOperandStack
             } else {
                 return
             }
         }
     }
     
-    func calculate(currentOperator: String) {
-        guard let currentOperatorValue = DecimalOperatorType(rawValue: currentOperator)?.rawValue,
-              let operatiorPriority = DecimalOperatorType(rawValue: currentOperator)?.priority else {
-            return
-        }
-        
-        if currentOperator == DecimalOperatorType.equal.rawValue {
-            if lowOperatorStack.count + highOperatorStack.count == 2 && operandStack.count == 1 && isLastEquals == false {
-                if isFirstEquals == false {
-                    isFirstEquals = true
-                    preOperand = operandStack.peek!
-                }
-                guard var singleValue = operandStack.pop() else {
-                    return
-                }
-                switch preOperator {
-                case .add:
-                    singleValue += preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .subtract:
-                    singleValue += preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .multiple:
-                    singleValue *= preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .divide:
-                    singleValue /= preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                    
-                default:
-                    fatalError()
-                }
-                return
-            } else if lowOperatorStack.count + highOperatorStack.count == 2 && operandStack.count == 2 && ismidleEquls == false {
-                if isLastEquals == false {
-                    isLastEquals = true
-                    guard let fakelastValue = operandStack.peek else {
-                        return
-                    }
-                    operandStack.push(fakelastValue)
-                    guard let lastOperator = highOperatorStack.pop(), let value = pickCalulation(operatorType: lastOperator) else {
-                        return
-                    }
-                    
-                    operandStack.push(value)
-                    guard let lastOperatorValue = lowOperatorStack.pop(), let lastValue = pickCalulation(operatorType: lastOperatorValue) else {
-                        return
-                    }
-                    preOperand = fakelastValue
-                    preOperator = lastOperator
-                    print(convertInteger(value: String(lastValue)))
-                    operandStack.push(lastValue)
-                    return
-                }
-                
-            } else if lowOperatorStack.count + highOperatorStack.count == 0 && operandStack.count == 1 && ismidleEquls == false {
-                guard var singleValue = operandStack.pop() else {
-                    return
-                }
-                switch preOperator {
-                case .add:
-                    singleValue += preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .subtract:
-                    singleValue += preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .multiple:
-                    singleValue *= preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .divide:
-                    singleValue /= preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                default:
-                    fatalError()
-                }
-                return
-            } else if lowOperatorStack.count + highOperatorStack.count == 1 && operandStack.count == 1 {
-                if ismidleEquls == false {
-                    ismidleEquls = true
-                    guard let operandValue = operandStack.peek else {
-                        return
-                    }
-                    preOperand = operandValue
-                    
-                    if highOperatorStack.isEmpty == true {
-                        guard let operatorValue = lowOperatorStack.peek else {
-                            return
-                        }
-                        preOperator = operatorValue
-                    } else {
-                        guard let operatorValue = highOperatorStack.peek else {
-                            return
-                        }
-                        preOperator = operatorValue
-                    }
-                }
-                guard var singleValue = operandStack.pop() else {
-                    return
-                }
-                
-                switch preOperator {
-                case .add:
-                    singleValue += preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .subtract:
-                    singleValue += preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .multiple:
-                    singleValue *= preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                case .divide:
-                    singleValue /= preOperand!
-                    print(convertInteger(value: String(singleValue)))
-                    operandStack.push(singleValue)
-                    
-                default:
-                    fatalError()
-                }
-                return
-            }
-            
-            if currentOperator == DecimalOperatorType.equal.rawValue {
-                if lowOperatorStack.isEmpty == true && highOperatorStack.isEmpty == false {
-                    guard let OperatiorValue = highOperatorStack.pop(),
-                          let result = pickCalulation(operatorType: OperatiorValue) else {
-                        return
-                    }
-                    print(convertInteger(value: String(result)))
-                } else if lowOperatorStack.isEmpty == false && highOperatorStack.isEmpty == true {
-                    guard let OperatiorValue = lowOperatorStack.pop(),
-                          let result = pickCalulation(operatorType: OperatiorValue) else {
-                        return
-                    }
-                    print(convertInteger(value: String(result)))
-                } else if lowOperatorStack.isEmpty == false && highOperatorStack.isEmpty == false {
-                    guard let OperatiorValue = highOperatorStack.pop(),
-                          let result = pickCalulation(operatorType: OperatiorValue) else {
-                        return
-                    }
-                    operandStack.push(result)
-                    guard let preOperatiorValue = lowOperatorStack.pop(),
-                          let totalResult = pickCalulation(operatorType: preOperatiorValue) else {
-                        return
-                    }
-                    print(convertInteger(value: String(totalResult)))
-                    operandStack.push(totalResult)
-                }
-            }
-        }
-        else {
-            if operatiorPriority == true {
-                guard let highOperatiorValue = highOperatorStack.pop(),
-                      let result = pickCalulation(operatorType: highOperatiorValue) else {
-                    
-                    return
-                }
-                print(convertInteger(value: String(result)))
+    private func calculate(currentOperator: String) {
+        if lowOperatorStack.isEmpty {
+            guard let highOperator = highOperatorStack.pop() else { return }
+            guard let result = pickCalculation(operatorType: highOperator) else { return }
+            operandStack.push(result)
+            if currentOperator == DecimalOperatorType.equal.description { return }
+            _ = moveToOperatorStack(currentOperator)
+        } else if highOperatorStack.isEmpty {
+            if currentOperator == DecimalOperatorType.add.description || currentOperator == DecimalOperatorType.subtract.description {
+                guard let lowOperator = lowOperatorStack.pop() else { return }
+                guard let result = pickCalculation(operatorType: lowOperator) else { return }
                 operandStack.push(result)
-            } else { // low
-                if operandStack.count < 3 {
-                    guard let currentOperatorValue = DecimalOperatorType(rawValue: currentOperator) else {
-                        return
-                    }
-                    if highOperatorStack.isEmpty == true {
-                        guard let lowOperatiorValue = lowOperatorStack.pop(),
-                              let result = pickCalulation(operatorType: lowOperatiorValue) else {
-                            return
-                        }
-                        print(convertInteger(value: String(result)))
-                        lowOperatorStack.push(currentOperatorValue)
-                        operandStack.push(result)
-                    } else {
-                        guard let highOperatiorValue = highOperatorStack.pop(),
-                              let result = pickCalulation(operatorType: highOperatiorValue) else {
-                            return
-                        }
-                        print(convertInteger(value: String(result)))
-                        lowOperatorStack.push(currentOperatorValue)
-                        operandStack.push(result)
-                    }
-                    return
-                }
-                
-                guard let lowOperatiorValue = highOperatorStack.pop(),
-                      let result = pickCalulation(operatorType: lowOperatiorValue) else {
-                    return
-                }
+                _ = moveToOperatorStack(currentOperator)
+            } else if currentOperator == DecimalOperatorType.equal.description {
+                guard let lowOperator = lowOperatorStack.pop() else { return }
+                guard let result = pickCalculation(operatorType: lowOperator) else { return }
                 operandStack.push(result)
-                
-                guard let currentOperatorValue = DecimalOperatorType(rawValue: currentOperator),
-                      let totalReuslt = pickCalulation(operatorType: currentOperatorValue) else {
-                    return
-                }
-                print(convertInteger(value: String(totalReuslt)))
-                operandStack.push(totalReuslt)
-                lowOperatorStack.push(currentOperatorValue)
             }
-            
-            operatiorPriority == true ? highOperatorStack.push(DecimalOperatorType(rawValue: currentOperatorValue)!) : lowOperatorStack.push(DecimalOperatorType(rawValue: currentOperatorValue)!)
+        } else {
+            if currentOperator == DecimalOperatorType.add.description || currentOperator == DecimalOperatorType.subtract.description {
+                guard let highOperator = highOperatorStack.pop() else { return }
+                guard let result = pickCalculation(operatorType: highOperator) else { return }
+                operandStack.push(result)
+                guard let lowOperator = lowOperatorStack.pop() else { return }
+                guard let secondResult = pickCalculation(operatorType: lowOperator) else { return }
+                operandStack.push(secondResult)
+                _ = moveToOperatorStack(currentOperator)
+            } else if currentOperator == DecimalOperatorType.multiple.description || currentOperator == DecimalOperatorType.divide.description {
+                guard let highOperator = highOperatorStack.pop() else { return }
+                guard let result = pickCalculation(operatorType: highOperator) else { return }
+                operandStack.push(result)
+                _ = moveToOperatorStack(currentOperator)
+            } else if currentOperator == DecimalOperatorType.equal.description {
+                guard let highOperator = highOperatorStack.pop() else { return }
+                guard let result = pickCalculation(operatorType: highOperator) else { return }
+                operandStack.push(result)
+                guard let lowOperator = lowOperatorStack.pop() else { return }
+                guard let secondResult = pickCalculation(operatorType: lowOperator) else { return }
+                operandStack.push(secondResult)
+            }
         }
     }
     
     func output() {
-        
+        guard let outputValue = operandStack.peek else { return }
+        print(convertInteger(value: String(outputValue)))
     }
     
     func reset() {
         lowOperatorStack.reset()
         highOperatorStack.reset()
-        operand = String.blank
+        operandBuffer = String.blank
     }
     
-    private func pickCalulation(operatorType: DecimalOperatorType) -> Double? {
-        guard let second = operandStack.pop(), let first = operandStack.pop() else { fatalError() }
+    private func pickCalculation(operatorType: DecimalOperatorType) -> Double? {
+        guard let first = operandStack.pop(), let second = operandStack.pop() else { fatalError() }
         switch operatorType {
         case .add:
             return Double(add(first: first, second: second))
@@ -295,36 +121,36 @@ final class DecimalCalculator: Calculatable {
     
     // MARK: - Operation
     private func add(first: Double, second: Double) -> String {
-        return String(first + second)
+        let result = convertInteger(value: String(second + first))
+        return result
     }
     
     private func subtract(first: Double, second: Double) -> String {
-        return String(first - second)
+        let result = convertInteger(value: String(second - first))
+        return result
     }
     
     private func multiple(first: Double, second: Double) -> String {
-        return String(first * second)
+        let result = convertInteger(value: String(second * first))
+        return result
     }
     
     private func divide(first: Double, second: Double) -> String {
-        if second == 0 {
-            fatalError()
-        }
-        return String(first / second)
+        let result = convertInteger(value: String(second / first))
+        return result
     }
     
     // MARK: - Divide Integer, Primes
     private func convertInteger(value: String) -> String {
-        let integerPrimes = value.components(separatedBy: ".")
+        let integerPrimes = value.components(separatedBy: String.dot)
         guard let primeNumber = integerPrimes.last,
               let integerNumber = integerPrimes.first else {
-            
             return value
         }
         if primeNumber.count == Int.one && primeNumber == String.zero {
             return String(integerNumber.prefix(9))
         } else {
-            return value.contains(".") ? String(value.prefix(10)) : String(value.prefix(9))
+            return value.contains(String.dot) ? String(value.prefix(10)) : String(value.prefix(9))
         }
     }
     
@@ -334,6 +160,7 @@ final class DecimalCalculator: Calculatable {
             return
         }
         operandStack.push(numberValue)
+        operandBuffer = String.blank
     }
     
     private func moveToOperatorStack(_ operatorValue: String) -> Bool {
@@ -345,8 +172,8 @@ final class DecimalCalculator: Calculatable {
             return pushLowPriority(operatorType)
         case .multiple, .divide :
             return pushHighPriority(operatorType)
-        case .equal:
-            return false
+        default:
+            fatalError()
         }
     }
     
@@ -377,5 +204,4 @@ final class DecimalCalculator: Calculatable {
             return false
         }
     }
-    
 }
