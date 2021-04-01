@@ -9,5 +9,7 @@ import Foundation
 
 enum DecimalCalculatorError: Error {
     case divideFailed
+    case otherOperators
 }
+
 

@@ -20,19 +20,6 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         throw DecimalCalculatorError.divideFailed
     }
     
-    func errorMessage() {
-        do {
-            try divide(operateNumber, operatingNumber)
-        } catch {
-            switch error {
-            case DecimalCalculatorError.divideFailed:
-                print("나누기 에러")
-            default:
-                print("알 수 없는 에러")
-            }
-        }
-    }
-    
     func multiply(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
         return operatedNumber * operatingNumber
     } 
@@ -68,7 +55,12 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         case .multiplication:
             return multiply(operatedNumber, by: operatingNumber)
         case .division:
-            return try divide(operatedNumber, by: operatingNumber)
+            do {
+             return try divide(operatedNumber, by: operatingNumber)
+            } catch {
+                print("0으로 나눌 수 없습니다.")
+                return 0
+            }
         default: return 0
         }
     }
@@ -77,7 +69,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         stack.push(convertType(inputNumber: inputNumber))
         
         for _ in 1...10 {
-            stack.push(calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
+                stack.push(calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
         } 
     }
     
@@ -88,6 +80,19 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
             return stack.top!
         }
     }
+    
+//    do {
+//     try executeOperate
+//    } catch {
+//        switch error {
+//        case DecimalCalculatorError.divideFailed:
+//            print("0으로는 나눌 수가 없습니다.")
+//        case DecimalCalculatorError.otherOperators:
+//            print("사칙연산자를 제외한 연산자는 사용할 수 없습니다.")
+//        default:
+//            print("알 수 없는 에러 입니다.")
+//        }
+//    }
 }
 
 
