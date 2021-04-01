@@ -6,23 +6,26 @@
 //
 
 import XCTest
-@testable import DecimalCalculator
+@testable import Calculator
 class CalculatorTests: XCTestCase {
-
+    
+    var testDecimalCalculator = DecimalCalculator()
+    
     override func setUpWithError() throws {
-        calculatorTest = DecimalCalculator()
-        
+        testDecimalCalculator = DecimalCalculator()
+        try super.setUpWithError()
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
     
-
+    func testExample() throws {
+        test_devide_한자리정수_두개()
+    }
+    
+    func test_devide_한자리정수_두개() {
+        XCTAssertEqual(testDecimalCalculator.divide(1, by: 2), 0.5)
+    }
+    
 }
