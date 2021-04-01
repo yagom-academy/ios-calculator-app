@@ -28,7 +28,7 @@ class CalculatorTests: XCTestCase {
         test_convertType_한자리정수입력()
         test_convertType_덧셈기호입력()
         test_calculate_덧셈_소수두개()
-        test_showTopOfStack_열자리수입력했을때_확인()
+        test_showTopOfStack_최대자리수_입력했을때_확인()
     }
     
     func test_divide_한자리정수_두개() {
@@ -36,10 +36,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(testDecimalCalculator.divide(1, by: 2), 0.5)
     }
     
-//    func test_divide_소수를_영으로나누기() {
-//        testDecimalCalculator = DecimalCalculator()
-//        XCTAssertEqual(testDecimalCalculator.divide(1.23, by: 0), 0.5)
-//    }
+    func test_divide_소수를_영으로나누기() {
+        testDecimalCalculator = DecimalCalculator()
+        XCTAssertEqual(testDecimalCalculator.divide(1.23, by: 0), 0.5)
+    }
     
     func test_multiply_한자리정수_두개() {
         testDecimalCalculator = DecimalCalculator()
@@ -61,11 +61,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(testDecimalCalculator.calculate(operateSign: "+", operatedNumber: 12.34, operatingNumber: 56.78), 69.12)
     }
     
-    func test_showTopOfStack_열자리수입력했을때_확인() {
+    func test_showTopOfStack_최대자리수_입력했을때_확인() {
         testDecimalCalculator = DecimalCalculator()
         testDecimalCalculator.stack.push(10e9)
-        //testDecimalCalculator = DecimalCalculator(list: [10e9])
+//        testDecimalCalculator = DecimalCalculator(list: [10e9])
         XCTAssertEqual(testDecimalCalculator.showTopOfStack(), 0)
     }
 }
-

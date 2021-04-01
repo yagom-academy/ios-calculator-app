@@ -7,15 +7,30 @@
 
 import Foundation
 
-
 struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     typealias T = Double
     var stack = Stack<Double>()
     var userInputNumber: Double = 0
     var userInputOperator: Operator = .subtraction
     
-    func divide(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
-        return operatedNumber / operatingNumber
+    func divide(_ operatedNumber: Double, by operatingNumber: Double) throws -> Double {
+        if operatingNumber != 0 {
+            return operatedNumber / operatingNumber
+        }
+        throw DecimalCalculatorError.divideFailed
+    }
+    
+    func errorMessage() {
+        do {
+            try divide(operateNumber, operatingNumber)
+        } catch {
+            switch error {
+            case DecimalCalculatorError.divideFailed:
+                print("나누기 에러")
+            default:
+                print("알 수 없는 에러")
+            }
+        }
     }
     
     func multiply(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
@@ -53,7 +68,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         case .multiplication:
             return multiply(operatedNumber, by: operatingNumber)
         case .division:
-            return divide(operatedNumber, by: operatingNumber)
+            return try divide(operatedNumber, by: operatingNumber)
         default: return 0
         }
     }
