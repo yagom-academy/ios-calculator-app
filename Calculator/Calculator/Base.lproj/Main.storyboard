@@ -30,7 +30,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XB1-tk-eYl"/>
+                                                    <action selector="clearSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xhb-LP-38v"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBb-fY-GSh" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -38,18 +38,21 @@
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="+/-">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="plusMinusSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WM6-Rg-NIo"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84m-Wy-QxC" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="192" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="2/10">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="changeMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X7n-7z-UW6"/>
+                                                    <action selector="changeCalculatorMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fna-Zw-mJz"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlj-88-IsO" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -63,7 +66,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nag-CE-L4e"/>
+                                                    <action selector="divideSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3h5-Ko-Cby"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -74,34 +77,34 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZN-qY-oL1" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="7">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wB4-3m-7tS"/>
+                                                    <action selector="sevenNumberOrOrButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wzm-Kc-Sv0"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZ5-jV-DUn" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="96" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="8">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eAX-yi-DHJ"/>
+                                                    <action selector="eightNumberOrNor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DSc-O3-oEi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg7-ne-e8Y" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="192" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="9">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kqd-eS-js8"/>
+                                                    <action selector="nineNumberOrNot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ek-7k-Vv2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEL-Xt-w8S" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -115,7 +118,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RQV-Hi-WdR"/>
+                                                    <action selector="multiplySign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1a4-me-aRs"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -126,34 +129,34 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckh-Kl-Jay" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="4">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aE5-a1-gfa"/>
+                                                    <action selector="fourNumberOrAndSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fua-if-KTq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SxK-e5-eaV" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="96" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="5">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ejf-Q4-aVB"/>
+                                                    <action selector="fiveNumberOrNandSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t1T-Qf-LFj"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4l-ON-JLe" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="192" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="6">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="abR-vs-RUG"/>
+                                                    <action selector="sixNumberOrXorSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZvG-6C-frm"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNb-7d-x1x" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -167,7 +170,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ALR-BA-KY3"/>
+                                                    <action selector="minusSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JKU-Mf-cbf"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -178,34 +181,34 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3TN-hT-oOj" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VDK-fT-tn6"/>
+                                                    <action selector="oneNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RCk-62-caV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIA-cl-s0g" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="96" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="2">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b9y-cZ-L8G"/>
+                                                    <action selector="twoNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Gy-eL-SCH"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i1-qc-xzI" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="192" y="0.0" width="86" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="3">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qOd-32-epi"/>
+                                                    <action selector="threeNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZqN-bK-c8V"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7P-Yb-SbP" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -219,7 +222,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kwg-ed-M5M"/>
+                                                    <action selector="plusSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rmd-hc-0Xd"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -230,12 +233,12 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wq7-6s-QyI" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="182" height="86"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Y6-w0-HhG"/>
+                                                    <action selector="zeroNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8UB-ER-PDL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5J1-Rq-6Cm" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -246,7 +249,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KxE-Nc-XRa"/>
+                                                    <action selector="dotSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="avs-4F-XI8"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwl-IN-ITa" customClass="MyButton" customModule="Calculator" customModuleProvider="target">
@@ -260,7 +263,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x9l-eU-Y6u"/>
+                                                    <action selector="equalSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RQJ-a9-F3m"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -294,26 +297,26 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="clearBtn" destination="nOB-o1-qOI" id="KEb-r1-FLK"/>
-                        <outlet property="decimalBinaryModeBtn" destination="84m-Wy-QxC" id="xkn-Ib-UGL"/>
-                        <outlet property="divideBtn" destination="vlj-88-IsO" id="CNZ-0I-rsj"/>
-                        <outlet property="dot" destination="5J1-Rq-6Cm" id="vUB-C6-0bQ"/>
-                        <outlet property="equalBtn" destination="Wwl-IN-ITa" id="UEr-Si-ey6"/>
-                        <outlet property="minusBtn" destination="SNb-7d-x1x" id="A6w-Dj-XFD"/>
-                        <outlet property="multiplyBtn" destination="BEL-Xt-w8S" id="a6l-o3-wwX"/>
-                        <outlet property="num0" destination="Wq7-6s-QyI" id="JzX-7I-HP4"/>
-                        <outlet property="num1" destination="3TN-hT-oOj" id="3fB-nb-Y4O"/>
-                        <outlet property="num2" destination="oIA-cl-s0g" id="6QX-Sh-Ewr"/>
-                        <outlet property="num3" destination="8i1-qc-xzI" id="Ddb-9N-aGK"/>
-                        <outlet property="num4" destination="ckh-Kl-Jay" id="nK6-Hk-RI7"/>
-                        <outlet property="num5" destination="SxK-e5-eaV" id="aTp-Rg-ugU"/>
-                        <outlet property="num6" destination="l4l-ON-JLe" id="Zw5-3b-bzA"/>
-                        <outlet property="num7" destination="yZN-qY-oL1" id="ijH-4M-ONz"/>
-                        <outlet property="num8" destination="rZ5-jV-DUn" id="ADz-8b-ho4"/>
-                        <outlet property="num9" destination="tg7-ne-e8Y" id="qwj-Cf-mRK"/>
-                        <outlet property="plusBtn" destination="d7P-Yb-SbP" id="red-Bj-Lyp"/>
-                        <outlet property="plusMinusBtn" destination="pBb-fY-GSh" id="zaM-46-pLN"/>
-                        <outlet property="screenText" destination="mjD-o3-1qP" id="Ttq-qd-KrP"/>
+                        <outlet property="clearButton" destination="nOB-o1-qOI" id="uOI-iJ-sbN"/>
+                        <outlet property="decimalBinaryModeButton" destination="84m-Wy-QxC" id="tK2-6e-WN7"/>
+                        <outlet property="divideButton" destination="vlj-88-IsO" id="FcI-md-xOI"/>
+                        <outlet property="dotButton" destination="5J1-Rq-6Cm" id="U1M-jV-2H6"/>
+                        <outlet property="eightNorButton" destination="rZ5-jV-DUn" id="uZG-I4-BvZ"/>
+                        <outlet property="equalButton" destination="Wwl-IN-ITa" id="y5f-OL-dW1"/>
+                        <outlet property="fiveNandButton" destination="SxK-e5-eaV" id="e2U-al-GqE"/>
+                        <outlet property="fourAndButton" destination="ckh-Kl-Jay" id="h6c-Ud-g23"/>
+                        <outlet property="minusButton" destination="SNb-7d-x1x" id="OQI-5c-2m9"/>
+                        <outlet property="multiplyButton" destination="BEL-Xt-w8S" id="5un-Ab-Vs7"/>
+                        <outlet property="nineNotButton" destination="tg7-ne-e8Y" id="lGg-Pc-kjb"/>
+                        <outlet property="oneButton" destination="3TN-hT-oOj" id="lnj-yG-jQJ"/>
+                        <outlet property="plusButton" destination="d7P-Yb-SbP" id="qHq-U9-LOS"/>
+                        <outlet property="plusMinusButton" destination="pBb-fY-GSh" id="pAW-H8-W0B"/>
+                        <outlet property="screenText" destination="mjD-o3-1qP" id="lf0-E3-9Wp"/>
+                        <outlet property="sevenOrButton" destination="yZN-qY-oL1" id="hQh-1s-SYD"/>
+                        <outlet property="sixXorButton" destination="l4l-ON-JLe" id="h1y-kO-uC8"/>
+                        <outlet property="threeButton" destination="8i1-qc-xzI" id="N4R-My-16h"/>
+                        <outlet property="twoButton" destination="oIA-cl-s0g" id="cpL-qn-dLg"/>
+                        <outlet property="zeroButton" destination="Wq7-6s-QyI" id="gNj-ho-aiu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -1,5 +1,5 @@
 //
-//  DimecalCalcultor.swift
+//  DecimalCalcultor.swift
 //  Calculator
 //
 //  Created by handsome steven on 2021/03/26.
@@ -7,35 +7,7 @@
 
 import Foundation
 
-struct Stack<T> {
-    private var storage = Array<T>()
-    
-    var count: Int {
-        return storage.count
-    }
-    
-    mutating func push(_ T: T) {
-        storage.append(T)
-    }
-    
-    mutating func pop() -> T? {
-        return storage.popLast()
-    }
-    
-    mutating func clear() {
-        storage.removeAll()
-    }
-    
-    func top() -> T? {
-        return storage.last
-    }
-    
-    func isEmpty() -> Bool {
-        return storage.isEmpty
-    }
-}
-
-class DemicalCalculator {
+class DecimalCalculator {
     var operands = Stack<Double>()
     var operators = Stack<String>()
     var tempNumber = ""
@@ -46,7 +18,7 @@ class DemicalCalculator {
     init() {
         operationFunctions["+"] = { $0 + $1 }
         operationFunctions["-"] = { $0 - $1 }
-        operationFunctions["*"] = { $0 * $1 }
+        operationFunctions["x"] = { $0 * $1 }
         operationFunctions["/"] = { $0 / $1 }
 
         numberFormatter.numberStyle = .decimal
@@ -74,7 +46,7 @@ class DemicalCalculator {
         screenNumber = numberFormatter.string(for: lastOperand)!
     }
 
-    func isExistDemicalPoint(_ buttonType: String) -> Bool {
+    func isExistDecimalPoint(_ buttonType: String) -> Bool {
         if buttonType == "." && tempNumber.contains(".") {
             return true 
         }
@@ -99,7 +71,7 @@ class DemicalCalculator {
         if isOverFlowedNineDigits(buttonType) {
             return
         } 
-        if isExistDemicalPoint(buttonType) {
+        if isExistDecimalPoint(buttonType) {
             return
         }
         if tempNumber == "0" && buttonType != "." {
