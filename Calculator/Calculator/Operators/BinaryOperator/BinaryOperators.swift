@@ -122,8 +122,42 @@ extension CalculateBinaryNumber {
   }
   
   func OR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    var arr: Array<String> = []
+    var stringResult = String()
     
-    // result = 여기에 결과 값을 넣어주세요
+    while !firstOperands.isEmpty() || !secondOperands.isEmpty() {
+      if !firstOperands.isEmpty() && !secondOperands.isEmpty() {
+        if firstOperands.peek()! == 1 || secondOperands.peek()! == 1 {
+          arr.insert("1", at: 0)
+          firstOperands.pop()
+          secondOperands.pop()
+        } else {
+          arr.insert("0", at: 0)
+          firstOperands.pop()
+          secondOperands.pop()
+        }
+      } else if !firstOperands.isEmpty() {
+        if firstOperands.peek() == 1 {
+          arr.insert("1", at: 0)
+          firstOperands.pop()
+        } else if firstOperands.peek() == 0 {
+          arr.insert("0", at: 0)
+          firstOperands.pop()
+        }
+      } else if !secondOperands.isEmpty() {
+        if secondOperands.peek() == 1 {
+          arr.insert("1", at: 0)
+          secondOperands.pop()
+        } else if secondOperands.peek() == 0 {
+          arr.insert("0", at: 0)
+          secondOperands.pop()
+        }
+      }
+    }
+    for element in arr {
+      stringResult += element
+    }
+    result = Int(stringResult)!
     return result
   }
   
