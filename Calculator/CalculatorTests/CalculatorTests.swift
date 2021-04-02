@@ -28,7 +28,7 @@ class CalculatorTests: XCTestCase {
         test_convertType_한자리양의정수_입력()
         test_convertType_한자리음의정수_입력()
         test_convertType_덧셈기호입력()
-        test_convertType_지정되지않은입력()
+        test_convertType_의도하지않은입력()
         test_calculate_덧셈_소수두개()
         test_showTopOfStack_최대자리수_입력했을때_확인()
     }
@@ -60,17 +60,18 @@ class CalculatorTests: XCTestCase {
     
     func test_convertType_덧셈기호입력() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "+"), .addition)
+        XCTAssertEqual(try testDecimalCalculator.convertType(inputOperator: "+"), .addition)
     }
     
-    func test_convertType_지정되지않은입력() {
+    func test_convertType_의도하지않은입력() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "="), nil)
+        XCTAssertEqual(try testDecimalCalculator.convertType(inputOperator: "="), "계산을 할 수 없습니다.")
+
     }
     
     func test_calculate_덧셈_소수두개() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.calculate(operateSign: "+", operatedNumber: 12.34, operatingNumber: 56.78), 69.12)
+        XCTAssertEqual(try testDecimalCalculator.calculate(operateSign: "+", operatedNumber: 12.34, operatingNumber: 56.78), 69.12)
     }
     
     func test_showTopOfStack_최대자리수_입력했을때_확인() {
