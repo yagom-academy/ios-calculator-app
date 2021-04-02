@@ -147,8 +147,27 @@ extension CalculateBinaryNumber {
   }
   
   func XOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    var results:[String] = []
     
-    // result = 여기에 결과 값을 넣어주세요
+    for _ in 1...9 {
+      var firstOperand = 0
+      if !firstOperands.isEmpty() {
+        firstOperand = firstOperands.peek()!
+        firstOperands.pop()
+      }
+      
+      var secondOperand = 0
+      if !secondOperands.isEmpty() {
+        secondOperand = secondOperands.peek()!
+        secondOperands.pop()
+      }
+      
+      results.insert("\(firstOperand ^ secondOperand)", at: 0)
+    }
+    
+    let resultString = results.joined()
+    result = Int(resultString)!
+
     return result
   }
   
