@@ -121,11 +121,46 @@ extension CalculateBinaryNumber {
     return result
   }
   
-  func OR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
-    
-    // result = 여기에 결과 값을 넣어주세요
-    return result
-  }
+    func OR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+       var arr: Array<String> = []
+       var stringResult = String()
+       
+       while firstOperands.count() != 0 || secondOperands.count() != 0 {
+           if firstOperands.count() > 0 && secondOperands.count() > 0 {
+               if firstOperands.peek()! == 1 || secondOperands.peek()! == 1 {
+                   arr.insert("1", at: 0)
+                   firstOperands.pop()
+                   secondOperands.pop()
+               } else {
+                   arr.insert("0", at: 0)
+                   firstOperands.pop()
+                   secondOperands.pop()
+               }
+           } else if firstOperands.count() > 0 {
+               if firstOperands.peek() == 1 {
+                   arr.insert("1", at: 0)
+                   firstOperands.pop()
+               } else if firstOperands.peek() == 0 {
+                   arr.insert("0", at: 0)
+                   firstOperands.pop()
+               }
+           } else if secondOperands.count() > 0 {
+               if secondOperands.peek() == 1 {
+                   arr.insert("1", at: 0)
+                   secondOperands.pop()
+               } else if secondOperands.peek() == 0 {
+                   arr.insert("0", at: 0)
+                   secondOperands.pop()
+               }
+           }
+       }
+       for element in arr {
+           stringResult += element
+       }
+       result = Int(stringResult)!
+       return result
+     }
+
   
   func NOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     let firstOperandAfterNotOperator = NOT(firstOperands)

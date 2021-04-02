@@ -22,6 +22,10 @@ class Stack<T> {
     array.append(element)
   }
   
+    func count() -> Int {
+        return array.count
+    }
+    
   func pop() {
     array.removeLast()
   }
