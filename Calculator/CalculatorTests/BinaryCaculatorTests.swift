@@ -89,7 +89,6 @@ class BinaryCalculatorTests: XCTestCase {
         let shiftZero = sut?.shiftLeft(firstNumber: 0, secondNumber: 2)
         XCTAssertEqual(shiftZero, 0)
         
-        // 부호를 유지한 채로 bit shift 진행 (shift logically)
         let shiftNegativeNumber = sut?.shiftLeft(firstNumber: -8, secondNumber: 2)
         XCTAssertEqual(shiftNegativeNumber, -32)
     }
@@ -100,8 +99,7 @@ class BinaryCalculatorTests: XCTestCase {
         
         let shiftZero = sut?.shiftRight(firstNumber: 0, secondNumber: 2)
         XCTAssertEqual(shiftZero, 0)
-        
-        // 부호를 유지한 채로 bit shift 진행 (shift logically)
+
         let shiftNegativeNumber = sut?.shiftRight(firstNumber: -8, secondNumber: 2)
         XCTAssertEqual(shiftNegativeNumber, -2)
     }
@@ -115,14 +113,12 @@ class BinaryCalculatorTests: XCTestCase {
         let negativeResult = try? sut?.formatResult(of: -1)
         XCTAssertEqual(negativeResult, "11111111")
         
-        // MSB(8개의 비트 중 가장 왼쪽의 비트)를 Sign-Bit로 사용
         let minimumResult = try? sut?.formatResult(of: -128)
         XCTAssertEqual(minimumResult, "10000000")
 
         let positiveResult = try? sut?.formatResult(of: 18)
         XCTAssertEqual(positiveResult, "10010")
         
-        // 양수의 최대 표현범위는 127까지이므로 그 이상의 입력이 들어오면 error를 throw
         XCTAssertThrowsError(try sut?.formatResult(of: 1023)) { error in
             XCTAssertEqual(error as? CalculatorError, CalculatorError.outOfRangeInput)
         }
