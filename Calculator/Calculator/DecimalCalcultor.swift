@@ -39,7 +39,7 @@ class DecimalCalculator {
     
     private func updateScreenNumber() {
         guard let lastOperand = operands.top() else { return }
-        screenNumber = String(lastOperand)
+        screenNumber = lastOperand.applyNumberFormatter()
     }
     
     func isExistDecimalPoint(_ buttonType: String) -> Bool {
