@@ -22,22 +22,21 @@ class CalculateNumber {
         break
       }
       operators.pop()
-      guard let firstOperand = operands.peek() else {
+      guard let secondOperand = operands.peek() else {
         isRepeat = false
         break
       }
-      operands.pop()
-      
-      guard let secondOperand = operands.peek()  else {
-        isRepeat = false
-        break
-      }
-      
       if `operator` != BinaryOperators.NOT.rawValue
       && `operator` != BinaryOperators.LeftShift.rawValue
       && `operator` != BinaryOperators.RightShift.rawValue {
         operands.pop()
       }
+      
+      guard let firstOperand = operands.peek()  else {
+        isRepeat = false
+        break
+      }
+      operands.pop()
       
       do {
         result = try calculateByOperator(`operator`, firstOperand, secondOperand)
