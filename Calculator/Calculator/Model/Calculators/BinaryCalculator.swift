@@ -47,53 +47,53 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
     }
     
     func andOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
-       return init(operatedNumber & operatingNumber, radix: 2)
+        return operatedNumber & operatingNumber
+    }
+    
+    func nandOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
+        return ~(operatedNumber & operatingNumber)
+    }
+    
+    func orOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
+        return operatedNumber | operatingNumber
     }
     
     
-    
-    
-    
-    
-    // 한숨 노노
-    // 머선 한숨29
-    
-    
-    mutating func calculate(operateSign: String?, operatedNumber: Int, operatingNumber: Int) throws -> Int {
-        switch try convertType(inputOperator: operateSign) {
-        case .addition:
-            return add(operatedNumber, and: operatingNumber)
-        case .subtraction:
-            return subtract(operatedNumber, and: operatingNumber)
-        case .andOperator:
-            return andOperate(with: operatedNumber, and: operatingNumber)
-        case .nandOperator:
-            return nandOperate(with: operatedNumber, and: operatingNumber)
-        case .orOperator:
-            return orOperate(with: operatedNumber, and: operatingNumber)
-        case .norOperator:
-            return norOperate(with: operatedNumber, and: operatingNumber)
-        case .xorOperator:
-            return xorOperate(with: operatedNumber, and: operatingNumber)
-        case .bitNotOperator:
-            return bitNotOperate(for: operatedNumber)
-        case .bitShiftOperator:
-            return bitShiftOperate(for: operatedNumber, isRight: Bool)
-        default:
-            throw BinaryCalculatorError.notAvailableOperator
-        }
-    }
-    
-    mutating func executeOperate(of inputNumber: String?) {
-        do {
-            try stack.push(convertType(inputNumber: inputNumber))
-            for _ in 1...10 {
-                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
-            }
-        } catch {
-            print(error)
-        }
-    }
+//    mutating func calculate(operateSign: String?, operatedNumber: Int, operatingNumber: Int) throws -> Int {
+//        switch try convertType(inputOperator: operateSign) {
+//        case .addition:
+//            return add(operatedNumber, and: operatingNumber)
+//        case .subtraction:
+//            return subtract(operatedNumber, and: operatingNumber)
+//        case .andOperator:
+//            return andOperate(with: operatedNumber, and: operatingNumber)
+//        case .nandOperator:
+//            return nandOperate(with: operatedNumber, and: operatingNumber)
+//        case .orOperator:
+//            return orOperate(with: operatedNumber, and: operatingNumber)
+//        case .norOperator:
+//            return norOperate(with: operatedNumber, and: operatingNumber)
+//        case .xorOperator:
+//            return xorOperate(with: operatedNumber, and: operatingNumber)
+//        case .bitNotOperator:
+//            return bitNotOperate(for: operatedNumber)
+//        case .bitShiftOperator:
+//            return bitShiftOperate(for: operatedNumber, isRight: Bool)
+//        default:
+//            throw BinaryCalculatorError.notAvailableOperator
+//        }
+//    }
+//
+//    mutating func executeOperate(of inputNumber: String?) {
+//        do {
+//            try stack.push(convertType(inputNumber: inputNumber))
+//            for _ in 1...10 {
+//                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
+//            }
+//        } catch {
+//            print(error)
+//        }
+//    }
     
     func showTopOfStack() -> Int {
         if stack.top! / 0b1000000000 >= 1 {

@@ -67,7 +67,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     
     mutating func executeOperate(of inputNumber: String?) {
         do {
-            try stack.push(convertType(inputNumber: inputNumber))
+           stack.push(try convertType(inputNumber: inputNumber))
             for _ in 1...10 {
                 stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
             }
