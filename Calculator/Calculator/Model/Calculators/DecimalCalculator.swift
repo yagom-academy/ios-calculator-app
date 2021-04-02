@@ -17,7 +17,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         if operatingNumber != 0 {
             return operatedNumber / operatingNumber
         }
-        throw DecimalCalculatorError.divideFailed
+        throw DecimalCalculatorError.divisionByZero
     }
     
     func multiply(_ operatedNumber: Double, by operatingNumber: Double) -> Double {
@@ -57,7 +57,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         case .division:
             return try divide(operatedNumber, by: operatingNumber)
         default:
-            print("알 수 없는 에러입니다.")
+            throw DecimalCalculatorError.cannotCalculate
         }
     }
     
@@ -68,21 +68,9 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
             do {
                 stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
             } catch {
-                switch error {
-                case .divisionByZero:
-                    print("0ㅇㅡ로 나눌 수 없습니다")
-                case .notAvailableOperator:
-                    print()
-                case .notNumber:
-                    print()
-                case .nilInputFoundWhileConvertingTypeOfOperator:
-                    print()
-                default:
-                    print()
-                }
+                print(error)
             }
-                
-        } 
+        }
     }
     
     func showTopOfStack() -> Double {
