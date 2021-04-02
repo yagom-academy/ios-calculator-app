@@ -96,33 +96,33 @@ extension CalculateBinaryNumber {
     return plus(firstOperands, secondOperandsComplements)
   }
   
-    func AND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
-            let resultStack = Stack<Int>()
-            var resultString = ""
-            
-            while !firstOperands.isEmpty() || !secondOperands.isEmpty() {
-                if (firstOperands.peek() == 1) && (secondOperands.peek() == 1) {
-                    resultStack.push(1)
-                } else {
-                    resultStack.push(0)
-                }
-                
-                if firstOperands.isEmpty() {
-                    firstOperands.push(0)
-                } else {
-                    secondOperands.push(0)
-                }
-                firstOperands.pop()
-                secondOperands.pop()
-          }
-            
-            while !resultStack.isEmpty() {
-                resultString += "\(resultStack.peek()!)"
-                resultStack.pop()
-             }
-            
-            return Int(resultString)!
-     }
+  func AND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    let resultStack = Stack<Int>()
+    var resultString = ""
+    
+    while !firstOperands.isEmpty() || !secondOperands.isEmpty() {
+      if (firstOperands.peek() == 1) && (secondOperands.peek() == 1) {
+        resultStack.push(1)
+      } else {
+        resultStack.push(0)
+      }
+      
+      if firstOperands.isEmpty() {
+        firstOperands.push(0)
+      } else {
+        secondOperands.push(0)
+      }
+      firstOperands.pop()
+      secondOperands.pop()
+    }
+    
+    while !resultStack.isEmpty() {
+      resultString += "\(resultStack.peek()!)"
+      resultStack.pop()
+    }
+    
+    return Int(resultString)!
+  }
   
   func NAND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     let firstOperandAfterNotOperator = NOT(firstOperands)
