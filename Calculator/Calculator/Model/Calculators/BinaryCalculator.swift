@@ -17,7 +17,7 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
         guard let number = inputNumber else {
             throw BinaryCalculatorError.nilInputFoundWhileConvertingTypeOfNumber }
         guard let userInputNumber = Int(number, radix: 2) else { throw  BinaryCalculatorError.notIntNumber }
-        return userInputNumber
+        return userInputNumber % 1024
     }
 
     func convertType(inputOperator: String?) throws -> Operator {
@@ -47,33 +47,38 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
     }
     
     func andOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
-        return operatedNumber & operatingNumber
+        return (operatedNumber & operatingNumber) % 1024
     }
     
     func nandOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
-        return ~(operatedNumber & operatingNumber)
+        return ~(operatedNumber & operatingNumber) % 1024
     }
     
     func orOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
-        return operatedNumber | operatingNumber
+        return (operatedNumber | operatingNumber) % 1024
     }
     
     func norOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
-        return ~(operatedNumber | operatingNumber)
+        return ~(operatedNumber | operatingNumber) % 1024
     }
     
     func xorOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
-        return operatedNumber ^ operatingNumber
+        return (operatedNumber ^ operatingNumber) % 1024
     }
     
     func bitNotOperate(for operatedNumber: Int) -> Int {
-        return ~operatedNumber
+        return ~operatedNumber % 1024
     }
     
     func bitShiftOperate(for operatedNumber: Int, isRight: Bool) -> Int {
-        return operatedNumber
+        if isRight == true {
+            return (operatedNumber >> 1) % 1024
+        } else {
+            return (operatedNumber << 1) % 1024
+        }
+        
     }
-    
+
 //    mutating func calculate(operateSign: String?, operatedNumber: Int, operatingNumber: Int) throws -> Int {
 //        switch try convertType(inputOperator: operateSign) {
 //        case .addition:
@@ -112,7 +117,7 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
     
     func showTopOfStack() -> Int {
         if stack.top! / 0b1000000000 >= 1 {
-            return stack.top! % 0b1000000000 // >>? 다시한번 생각. 나누면 뭐가나와요?
+            return stack.top! % 0b1000000000
         } else {
             return stack.top!
         }
