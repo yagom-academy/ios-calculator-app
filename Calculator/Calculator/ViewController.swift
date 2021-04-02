@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     @IBOutlet var decimalOperatorButtons: [OperatorButton]!
     
     @IBOutlet weak var numberField: UILabel!
-    @IBOutlet var toggledSwitch: OperatorButton?
+    @IBOutlet var currentOperatorButton: OperatorButton?
     
     private var decimalMode = true
     private var isOperatorOn = false
@@ -60,17 +60,17 @@ class ViewController: UIViewController {
     @IBAction func touchUpNumber(_ sender: NumberButton) {
         if isOperatorOn {
             numberStack.push(numberField.text!)
-            operatorStack.push(toggledSwitch!.operatorType)
+            operatorStack.push(currentOperatorButton!.operatorType)
             
             isOperatorOn = false
-            toggledSwitch!.isOn = false
-            toggledSwitch = nil
+            currentOperatorButton?.isOn = false
+            currentOperatorButton = nil
             numberField.text!.removeAll()
             
             numberField.text = sender.currentTitle
         } else {
             if numberField.text == "0" {
-                numberField.text?.removeAll()
+                numberField.text!.removeAll()
             }
             numberField.text!.append(sender.currentTitle!)
         }
@@ -140,9 +140,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearButton(_ sender: Any) {
-        numberField.text?.removeAll()
-        toggledSwitch?.isOn = false
-        toggledSwitch = nil
+        numberField.text!.removeAll()
+        currentOperatorButton?.isOn = false
+        currentOperatorButton = nil
         isOperatorOn = false
         reset()
     }
@@ -153,16 +153,18 @@ class ViewController: UIViewController {
     }
     
     func toggleOperator(_ sender: OperatorButton) {
-        toggledSwitch?.isOn = false
-        toggledSwitch = sender
-        toggledSwitch!.isOn = true
+        currentOperatorButton?.isOn = false
+        currentOperatorButton = sender
+        currentOperatorButton!.isOn = true
         isOperatorOn = true
     }
     
     func calculate() {
-        let secondNumber = numberStack.pop()!
-        let firstNumber = numberStack.pop()!
-        let operateFunction = operatorStack.pop()!.function
+        guard let secondNumber = numberStack.pop(),
+              let firstNumber = numberStack.pop(),
+              let operateFunction = operatorStack.pop()?.function else {
+            return
+        }
         let result = operateFunction(firstNumber, secondNumber)
         numberStack.push(result)
     }
