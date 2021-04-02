@@ -14,15 +14,6 @@ enum Precedence {
 }
 
 extension Precedence: Comparable {
-    static func > (lhs: Precedence, rhs: Precedence) -> Bool {
-        switch (lhs, rhs) {
-        case (.bitwisePrecedence, .multiplicationPrecedence), (.bitwisePrecedence, .additionPrecedence), (.multiplicationPrecedence, .additionPrecedence):
-            return true
-        default:
-            return false
-        }
-    }
-
     static func < (lhs: Precedence, rhs: Precedence) -> Bool {
         switch (lhs, rhs) {
         case (.bitwisePrecedence, .multiplicationPrecedence), (.bitwisePrecedence, .additionPrecedence), (.multiplicationPrecedence, .additionPrecedence):
