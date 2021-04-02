@@ -72,7 +72,7 @@ class ViewController: UIViewController {
             
             numberField.text = sender.currentTitle
         } else {
-            if numberField.text == "0" {
+            if numberField.text == "0" && sender.currentTitle != "." {
                 numberField.text!.removeAll()
             }
             numberField.text!.append(sender.currentTitle!)
@@ -108,6 +108,7 @@ class ViewController: UIViewController {
         }
         numberField.text = numberStack.top!
     }
+    
     @IBAction func touchUpNOTButton(_ sender: OperatorButton) {
         if numberField.text == "" {
             sender.isOn = false
