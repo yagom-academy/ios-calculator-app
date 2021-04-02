@@ -25,10 +25,10 @@ class CalculatorTests: XCTestCase {
     func testExample() throws {
         test_divide_한자리정수_두개()
         test_multiply_한자리정수_두개()
-        test_convertType_한자리정수입력()
-        test_convertType_한자리음수입력()
+        test_convertType_한자리양의정수_입력()
+        test_convertType_한자리음의정수_입력()
         test_convertType_덧셈기호입력()
-        test_convertType_아무기호입력()
+        test_convertType_지정되지않은입력()
         test_calculate_덧셈_소수두개()
         test_showTopOfStack_최대자리수_입력했을때_확인()
     }
@@ -48,12 +48,12 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(testDecimalCalculator.multiply(1, by: 2), 2)
     }
     
-    func test_convertType_한자리정수입력() {
+    func test_convertType_한자리양의정수_입력() {
         testDecimalCalculator = DecimalCalculator()
         XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "1"), 1)
     }
     
-    func test_convertType_한자리음수입력() {
+    func test_convertType_한자리음의정수_입력() {
         testDecimalCalculator = DecimalCalculator()
         XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "-1"), -1)
     }
@@ -63,7 +63,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "+"), .addition)
     }
     
-    func test_convertType_아무기호입력() {
+    func test_convertType_지정되지않은입력() {
         testDecimalCalculator = DecimalCalculator()
         XCTAssertEqual(testDecimalCalculator.convertType(inputOperator: "="), nil)
     }

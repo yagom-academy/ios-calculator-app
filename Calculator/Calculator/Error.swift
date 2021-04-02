@@ -7,9 +7,20 @@
 
 import Foundation
 
-enum DecimalCalculatorError: Error {
-    case divideFailed
-    case otherOperators
+enum DecimalCalculatorError: Error, CustomStringConvertible {
+    case divisionByZero
+    case notAvailableOperator
+    case notNumber
+    case nilInputFoundWhileConvertingTypeOfOperator
+    
+    var description: String {
+        switch self {
+        case :
+            
+        default:
+            <#code#>
+        }
+    }
 }
 
 

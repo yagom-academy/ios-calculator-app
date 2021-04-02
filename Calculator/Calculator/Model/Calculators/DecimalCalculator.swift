@@ -30,8 +30,8 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return userInputNumber
     }
     
-    func convertType(inputOperator: String?) -> Operator? {
-        guard let userInputOperator = inputOperator else { fatalError() }
+    func convertType(inputOperator: String?) throws -> Operator {
+        guard let userInputOperator = inputOperator else { throw DecimalCalculatorError.nilInputFoundWhileConvertingTypeOfOperator }
         switch userInputOperator {
         case "+":
             return Operator.addition
@@ -42,26 +42,22 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         case "/":
             return Operator.division
         default:
-            return nil
+            throw DecimalCalculatorError.notAvailableOperator
         }
     }
     
-    mutating func calculate(operateSign: String?, operatedNumber: Double, operatingNumber: Double) -> Double {
-        switch convertType(inputOperator: operateSign) {
+    mutating func calculate(operateSign: String?, operatedNumber: Double, operatingNumber: Double) throws -> Double {
+        switch try convertType(inputOperator: operateSign) {
         case .addition:
-           return add(operatedNumber, and: operatingNumber)
+            return add(operatedNumber, and: operatingNumber)
         case .subtraction:
             return subtract(operatedNumber, and: operatingNumber)
         case .multiplication:
             return multiply(operatedNumber, by: operatingNumber)
         case .division:
-            do {
-             return try divide(operatedNumber, by: operatingNumber)
-            } catch {
-                print("0으로 나눌 수 없습니다.")
-                return 0
-            }
-        default: return 0
+            return try divide(operatedNumber, by: operatingNumber)
+        default:
+            print("알 수 없는 에러입니다.")
         }
     }
     
@@ -69,7 +65,23 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         stack.push(convertType(inputNumber: inputNumber))
         
         for _ in 1...10 {
-                stack.push(calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
+            do {
+                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
+            } catch {
+                switch error {
+                case .divisionByZero:
+                    print("0ㅇㅡ로 나눌 수 없습니다")
+                case .notAvailableOperator:
+                    print()
+                case .notNumber:
+                    print()
+                case .nilInputFoundWhileConvertingTypeOfOperator:
+                    print()
+                default:
+                    print()
+                }
+            }
+                
         } 
     }
     
