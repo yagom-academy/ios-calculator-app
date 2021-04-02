@@ -50,12 +50,12 @@ class CalculatorTests: XCTestCase {
     
     func test_convertType_한자리양의정수_입력() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "1"), 1)
+        XCTAssertEqual(try testDecimalCalculator.convertType(inputNumber: "1"), 1)
     }
     
     func test_convertType_한자리음의정수_입력() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "-1"), -1)
+        XCTAssertEqual(try testDecimalCalculator.convertType(inputNumber: "-1"), -1)
     }
     
     func test_convertType_덧셈기호입력() {

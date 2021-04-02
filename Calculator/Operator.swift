@@ -18,5 +18,7 @@ enum Operator {
     case norOperator
     case xorOperator
     case bitNotOperator
-    case bitShiftOperator
+    case rightBitShiftOperator
+    case leftBitShiftOperator
+    
 }

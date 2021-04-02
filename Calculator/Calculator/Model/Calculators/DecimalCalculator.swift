@@ -7,11 +7,10 @@
 
 import Foundation
 
-struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
+struct DecimalCalculator: Addable, Subtractable, TypeConvertible, MaximumDigitLimitable {
     typealias T = Double
     var stack = Stack<Double>()
-    var userInputNumber: Double = 0
-    var userInputOperator: Operator = .subtraction
+    var maximumDigit: Double = pow(10, 10)
     
     func divide(_ operatedNumber: Double, by operatingNumber: Double) throws -> Double {
         if operatingNumber != 0 {
@@ -53,13 +52,13 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
     mutating func calculate(operateSign: String?, operatedNumber: Double, operatingNumber: Double) throws -> Double {
         switch try convertType(inputOperator: operateSign) {
         case .addition:
-            return add(operatedNumber, and: operatingNumber)
+            return add(operatedNumber, and: operatingNumber).truncatingRemainder(dividingBy: maximumDigit)
         case .subtraction:
-            return subtract(operatedNumber, and: operatingNumber)
+            return subtract(operatedNumber, and: operatingNumber).truncatingRemainder(dividingBy: maximumDigit)
         case .multiplication:
-            return multiply(operatedNumber, by: operatingNumber)
+            return multiply(operatedNumber, by: operatingNumber).truncatingRemainder(dividingBy: maximumDigit)
         case .division:
-            return try divide(operatedNumber, by: operatingNumber)
+            return try divide(operatedNumber, by: operatingNumber).truncatingRemainder(dividingBy: maximumDigit)
         default:
             throw DecimalCalculatorError.cannotCalculate
         }
