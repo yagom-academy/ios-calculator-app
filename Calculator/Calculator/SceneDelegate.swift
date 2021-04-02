@@ -1,7 +1,7 @@
 //
 //  Calculator - SceneDelegate.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
+//  Created by Neph.
+//  Copyright © Neph. All rights reserved.
 // 
 
 import UIKit

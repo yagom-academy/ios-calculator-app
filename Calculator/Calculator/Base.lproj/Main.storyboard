@@ -144,6 +144,7 @@
                                                 <state key="normal" title="NOT"/>
                                                 <connections>
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gel-XX-NWU"/>
+                                                    <action selector="touchUpUnaryOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XWH-Oz-wDT"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-uE-FLi" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">

@@ -2,7 +2,7 @@
 //  CaculatorButton.swift
 //  Calculator
 //
-//  Created by 천수현 on 2021/04/01.
+//  Created by Neph on 2021/04/01.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  Stack.swift
 //  Calculator
 //
-//  Created by 천수현 on 2021/03/23.
+//  Created by Neph on 2021/03/23.
 //
 
 final class Stack<T> {
