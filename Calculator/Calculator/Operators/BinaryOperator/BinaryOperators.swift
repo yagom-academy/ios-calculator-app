@@ -196,15 +196,44 @@ extension CalculateBinaryNumber {
     return result
   }
   
-  func leftShift(_ operand: Stack<Int>) -> Int {
+  func leftShift(_ operands: Stack<Int>) -> Int {
+    var results:[String] = []
     
-    // result = 여기에 결과 값을 넣어주세요
+    results.insert("0", at: 0)
+    for _ in 1...8 {
+      var operand = 0
+      if !operands.isEmpty() {
+        operand = operands.peek()!
+        operands.pop()
+      }
+      
+      results.insert("\(operand)", at: 0)
+    }
+    
+    let resultString = results.joined()
+    result = Int(resultString)!
+
     return result
   }
   
-  func rightShift(_ operand: Stack<Int>) -> Int {
+  func rightShift(_ operands: Stack<Int>) -> Int {
+    var results:[String] = []
     
-    // result = 여기에 결과 값을 넣어주세요
+    for _ in 1...9 {
+      var operand = 0
+      if !operands.isEmpty() {
+        operand = operands.peek()!
+        operands.pop()
+      }
+      
+      results.insert("\(operand)", at: 0)
+    }
+    results.removeLast()
+    results.insert("0", at: 0)
+    
+    let resultString = results.joined()
+    result = Int(resultString)!
+
     return result
   }
 }
