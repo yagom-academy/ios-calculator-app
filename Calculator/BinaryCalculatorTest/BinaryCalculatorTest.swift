@@ -21,15 +21,15 @@ class BinaryCalculatorTest: XCTestCase {
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        test_convertType_11_입력()
+        test_convertType_음수_11_입력()
     }
     
     func test_convertType_11_입력() {
-        XCTAssertEqual(binaryCalculator.convertType(inputNumber: "11"), 3)
+        XCTAssertEqual(try binaryCalculator.convertType(inputNumber: "11"), 3)
     }
     
     func test_convertType_음수_11_입력() {
-        XCTAssertEqual(binaryCalculator.convertType(inputNumber: "-11"), -3)
+        XCTAssertEqual(try binaryCalculator.convertType(inputNumber: "-11"), -3)
     }
 }

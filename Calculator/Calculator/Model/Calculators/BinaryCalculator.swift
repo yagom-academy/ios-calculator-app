@@ -16,23 +16,55 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
     func convertType(inputNumber: String?) throws -> Int {
         guard let number = inputNumber else {
             throw BinaryCalculatorError.nilInputFoundWhileConvertingTypeOfNumber }
-        guard let userInputNumber = Int(number, radix: 2) else { throw BinaryCalculatorError.nilInputFoundWhileConvertingTypeOfNumber }
+        guard let userInputNumber = Int(number, radix: 2) else { throw  BinaryCalculatorError.notIntNumber }
         return userInputNumber
     }
 
     func convertType(inputOperator: String?) throws -> Operator {
-        guard let userInputOperator = inputOperator else { throw DecimalCalculatorError.nilInputFoundWhileConvertingTypeOfOperator }
+        guard let userInputOperator = inputOperator else { throw BinaryCalculatorError.nilInputFoundWhileConvertingTypeOfOperator }
         switch userInputOperator {
-        case "+":
-            return Operator.addition
-        case "-":
-            return Operator.subtraction
-        case "*":
-            return Operator.multiplication
-        case "/":
-            return Operator.division
+        case "and":
+            return Operator.andOperator
+        case "nand":
+            return Operator.nandOperator
+        case "or":
+            return Operator.orOperator
+        case "nor":
+            return Operator.norOperator
+        case "xor":
+            return Operator.xorOperator
+        case "bitNot":
+            return Operator.bitNotOperator
+        case "bitShift":
+            return Operator.bitShiftOperator
         default:
-            throw DecimalCalculatorError.notAvailableOperator
+            throw BinaryCalculatorError.notAvailableOperator
+        }
+    }
+    
+    mutating func convertType(operateSign: String?, operatedNumber: Int, operatingNumber: Int) throws -> Int {
+        switch try convertType(inputOperator: operateSign) {
+        case .addition:
+            return add(operatedNumber, and: operatingNumber)
+        case .subtraction:
+            return add(operatedNumber, and: operatingNumber)
+        case .andOperator:
+            return add(operatedNumber, and: operatingNumber)
+        case .nandOperator:
+            return add(operatedNumber, and: operatingNumber)
+        case .orOperator:
+            return add(operatedNumber, and: operatingNumber)
+        case .norOperator:
+            return add(operatedNumber, and: operatingNumber)
+        case .xorOperator:
+            return add(operatedNumber, and: operatingNumber)
+        case .bitNotOperator:
+            return add(for: operatedNumber)
+        case .bitShiftOperator:
+            return add(for: operatedNumber, isRight: Bool)
+        default:
+            throw BinaryCalculatorError.notAvailableOperator
         }
     }
 }
+

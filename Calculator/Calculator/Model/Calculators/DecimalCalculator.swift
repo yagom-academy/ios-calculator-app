@@ -24,9 +24,13 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         return operatedNumber * operatingNumber
     } 
     
-    func convertType(inputNumber: String?) -> Double {
-        guard let number = inputNumber else { return 0 }
-        guard let userInputNumber = Double(number) else { return 0 }
+    func convertType(inputNumber: String?) throws -> Double {
+        guard let number = inputNumber else { throw
+            DecimalCalculatorError.nilInputFoundWhileConvertingTypeOfNumber
+        }
+        guard let userInputNumber = Double(number) else { throw
+            DecimalCalculatorError.notDoubleNumber
+        }
         return userInputNumber
     }
     
