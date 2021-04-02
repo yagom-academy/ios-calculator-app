@@ -36,21 +36,21 @@ class CalculateBinaryNumber: CalculateNumber {
 
     switch binaryOperator {
     case .Plus:
-      return plus(firstOperands, secondOperands)
+      return binaryPlus(firstOperands, secondOperands)
     case .Minus:
-      return minus(firstOperands, secondOperands)
+      return binaryMinus(firstOperands, secondOperands)
     case .AND:
-      return AND(firstOperands, secondOperands)
+      return binaryAND(firstOperands, secondOperands)
     case .NAND:
-      return NAND(firstOperands, secondOperands)
+      return binaryNAND(firstOperands, secondOperands)
     case .OR:
-      return OR(firstOperands, secondOperands)
+      return binaryOR(firstOperands, secondOperands)
     case .NOR:
-      return NOR(firstOperands, secondOperands)
+      return binaryNOR(firstOperands, secondOperands)
     case .XOR:
-      return XOR(firstOperands, secondOperands)
+      return binaryXOR(firstOperands, secondOperands)
     case .NOT:
-      return NOT(firstOperands)
+      return binaryNOT(firstOperands)
     case .LeftShift:
       return leftShift(firstOperands)
     case .RightShift:

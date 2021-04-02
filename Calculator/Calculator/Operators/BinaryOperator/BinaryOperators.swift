@@ -31,7 +31,7 @@ enum BinaryOperators: String, Comparable {
 }
 
 extension CalculateBinaryNumber {
-  func plus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+  func binaryPlus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     var results:[String] = []
     var carry = 0
     
@@ -71,9 +71,9 @@ extension CalculateBinaryNumber {
     return result
   }
   
-  func minus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+  func binaryMinus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     // secondOperands의 보수 구하기: 1. "~"연산을 진행한다
-    let secondOperandAfterNotOperator = NOT(secondOperands)
+    let secondOperandAfterNotOperator = binaryNOT(secondOperands)
     let secondOperandsAfterNotOperator = Stack<Int>()
     let secondOperandAfterNotOperatorArray = "\(secondOperandAfterNotOperator)".digits
     for secondOperandNumber in secondOperandAfterNotOperatorArray {
@@ -84,7 +84,7 @@ extension CalculateBinaryNumber {
     let stackForPlusOne = Stack<Int>()
     stackForPlusOne.push(1)
     
-    let secondOperandAfterPlusOne = plus(secondOperandsAfterNotOperator, stackForPlusOne)
+    let secondOperandAfterPlusOne = binaryPlus(secondOperandsAfterNotOperator, stackForPlusOne)
     
     // firstOperands와 secondOperands의 보수를 더한다
     let secondOperandsComplements = Stack<Int>()
@@ -93,10 +93,10 @@ extension CalculateBinaryNumber {
       secondOperandsComplements.push(secondOperandNumber)
     }
     
-    return plus(firstOperands, secondOperandsComplements)
+    return binaryPlus(firstOperands, secondOperandsComplements)
   }
   
-  func AND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+  func binaryAND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     let resultStack = Stack<Int>()
     var resultString = ""
     
@@ -124,26 +124,26 @@ extension CalculateBinaryNumber {
     return Int(resultString)!
   }
   
-  func NAND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
-    let firstOperandAfterNotOperator = NOT(firstOperands)
+  func binaryNAND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    let firstOperandAfterNotOperator = binaryNOT(firstOperands)
     let firstOperandsAfterNotOperator = Stack<Int>()
     let firstOperandAfterNotOperatorArray = "\(firstOperandAfterNotOperator)".digits
     for firstOperandNumber in firstOperandAfterNotOperatorArray {
       firstOperandsAfterNotOperator.push(firstOperandNumber)
     }
     
-    let secondOperandAfterNotOperator = NOT(secondOperands)
+    let secondOperandAfterNotOperator = binaryNOT(secondOperands)
     let secondOperandsAfterNotOperator = Stack<Int>()
     let secondOperandAfterNotOperatorArray = "\(secondOperandAfterNotOperator)".digits
     for secondOperandNumber in secondOperandAfterNotOperatorArray {
       secondOperandsAfterNotOperator.push(secondOperandNumber)
     }
     
-    result = AND(firstOperandsAfterNotOperator, secondOperandsAfterNotOperator)
+    result = binaryAND(firstOperandsAfterNotOperator, secondOperandsAfterNotOperator)
     return result
   }
   
-  func OR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+  func binaryOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     var arr: Array<String> = []
     var stringResult = String()
     
@@ -183,26 +183,26 @@ extension CalculateBinaryNumber {
     return result
   }
   
-  func NOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
-    let firstOperandAfterNotOperator = NOT(firstOperands)
+  func binaryNOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    let firstOperandAfterNotOperator = binaryNOT(firstOperands)
     let firstOperandsAfterNotOperator = Stack<Int>()
     let firstOperandAfterNotOperatorArray = "\(firstOperandAfterNotOperator)".digits
     for firstOperandNumber in firstOperandAfterNotOperatorArray {
       firstOperandsAfterNotOperator.push(firstOperandNumber)
     }
     
-    let secondOperandAfterNotOperator = NOT(secondOperands)
+    let secondOperandAfterNotOperator = binaryNOT(secondOperands)
     let secondOperandsAfterNotOperator = Stack<Int>()
     let secondOperandAfterNotOperatorArray = "\(secondOperandAfterNotOperator)".digits
     for secondOperandNumber in secondOperandAfterNotOperatorArray {
       secondOperandsAfterNotOperator.push(secondOperandNumber)
     }
     
-    result = OR(firstOperandsAfterNotOperator, secondOperandsAfterNotOperator)
+    result = binaryOR(firstOperandsAfterNotOperator, secondOperandsAfterNotOperator)
     return result
   }
   
-  func XOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+  func binaryXOR(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
     var results:[String] = []
     
     for _ in 1...9 {
@@ -227,7 +227,7 @@ extension CalculateBinaryNumber {
     return result
   }
   
-  func NOT(_ operands: Stack<Int>) -> Int {
+  func binaryNOT(_ operands: Stack<Int>) -> Int {
     var results:[String] = []
         
     for _ in 1...9 {
