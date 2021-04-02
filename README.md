@@ -44,7 +44,8 @@ SJ, Steven, Kio
 
 ### 계산기
 - 2개의 숫자 연산   
-![image](https://user-images.githubusercontent.com/35272802/113389970-dd936280-93cb-11eb-988b-cf9fc0adc01a.png)
+![image](https://user-images.githubusercontent.com/35272802/113390333-77f3a600-93cc-11eb-9b90-da8da3e8ca73.png)
+
 
 - 10진수/2진수 토글 기능
 - 사칙연산(+, -, /, *) 우선순위에 따른 연산이 가능
