@@ -8,47 +8,62 @@
 import Foundation
 
 class BinaryCalculation: Calculatable {
-    
-    var rightOperand = UInt8()
-    var leftOperand = UInt8()
-    var operand = UInt8()
-    
-    private func pad(string : String, toSize: Int) -> String {
-        var padded = string
-        for _ in 0..<(toSize - string.count) {
+
+    var rightOperand = UInt()
+    var leftOperand = UInt()
+    var operand = UInt()
+    var numberFormatter = NumberFormatter()
+
+    private func pad(number : String, toSize: Int) -> String {
+        var padded = number
+
+        for _ in 0..<(toSize - padded.count) {
             padded = "0" + padded
         }
         return padded
     }
-    
+
+    func filterResult(_ input: UInt) -> String {
+        let binaryResult = String(input, radix: 2)
+        if binaryResult.count > 9 {
+            return "000000000"
+        }
+        else {
+            return pad(number: binaryResult, toSize: 9)
+        }
+    }
+
     @discardableResult
     func calculatePostfixNotation(_ input: InputDataValidator) -> Result<String, Error> {
-        var operandStack = Stack<UInt8>()
-        
+        var operandStack = Stack<UInt>()
+
         for element in input.data.postfixNotation {
             if !Operators.list.contains(element) {
-                guard let numbers = UInt8(element, radix: 2) else {
+                
+                guard let number = UInt(element, radix: 2) else {
                     return .failure(.invalidAccess)
                 }
                 
-                operandStack.push(numbers)
+                operandStack.push(number)
             }
             else if element == Operators.NOT.rawValue {
+                
                 guard let popped = operandStack.pop() else {
                     return .failure(.invalidAccess)
                 }
-                
+
                 operand = (popped.value)
                 operandStack.push(~operand)
             }
             else {
+                
                 guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else {
                     return .failure(.invalidAccess)
                 }
-                
+
                 rightOperand = firstPoppedValue.value
                 leftOperand = secondPoppedValue.value
-                
+
                 switch element {
                 case ">>" :
                     operandStack.push(leftOperand >> rightOperand)
@@ -76,9 +91,7 @@ class BinaryCalculation: Calculatable {
         guard let result = operandStack.peek() else {
             return .failure(.invalidAccess)
         }
-        
-        let binaryNumber = String(result.value, radix: 2)
-        return .success(pad(string: binaryNumber, toSize: 8))
+        return .success(filterResult(result.value))
     }
 }
 

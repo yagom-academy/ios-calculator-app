@@ -11,11 +11,11 @@ import Foundation
 infix operator ~& : MultiplicationPrecedence
 infix operator ~| : AdditionPrecedence
 
-func ~& (lhs: UInt8, rhs: UInt8) -> UInt8 {
+func ~& (lhs: UInt, rhs: UInt) -> UInt {
     return ~lhs | ~rhs
 }
 
-func ~| (lhs: UInt8, rhs: UInt8) -> UInt8 {
+func ~| (lhs: UInt, rhs: UInt) -> UInt {
     return ~lhs & ~rhs
 }
 

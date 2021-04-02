@@ -55,62 +55,62 @@ class CalculatorTests: XCTestCase {
     
     func test_binaryCalculation_addition() {
         sut_inputDataValidator.data.postfixNotation = ["0101", "~", "1111", "+"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("00001001"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000001001"))
     }
     
     func test_binaryCalculation_subtraction() {
         sut_inputDataValidator.data.postfixNotation = ["0101", "~", "1111", "-"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("11101011"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000000000"))
     }
     
     func test_binaryCalculation_overflowTest() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "10", "+"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("00000001"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("100000001"))
     }
     
     func test_binaryCalculation_underflowTest() {
         sut_inputDataValidator.data.postfixNotation = ["00000000", "10", "-"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("11111110"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000000000"))
     }
     
     func test_binaryCalculation_AND_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "10001000", "&"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("10001000"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("010001000"))
     }
     
     func test_binaryCalculation_NAND_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "10001000", "~&"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("01110111"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000000000"))
     }
     
     func test_binaryCalculation_OR_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "10001000", "|"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("11111111"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("011111111"))
     }
     
     func test_binaryCalculation_NOR_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "10001000", "~|"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("00000000"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000000000"))
     }
     
     func test_binaryCalculation_XOR_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "10001000", "^"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("01110111"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("001110111"))
     }
     
     func test_binaryCalculation_NOT_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["1010", "~"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("11110101"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000000000"))
     }
     
     func test_binaryCalculation_right_Shift_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["11111111", "00000011", ">>"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("00011111"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000011111"))
     }
     
     func test_binaryCalculation_left_Shift_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["00000111", "00000010", "<<"]
-        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("00011100"))
+        XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000011100"))
     }
     
     // MARK: Decimal Calculation Test
