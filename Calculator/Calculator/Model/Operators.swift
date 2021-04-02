@@ -22,4 +22,6 @@ enum Operators {
     static let OR = Operator(function: BinaryCalculator.OR, precedence: 150)
     static let XOR = Operator(function: BinaryCalculator.XOR, precedence: 150)
     static let NOR = Operator(function: BinaryCalculator.NOR, precedence: 150)
+    static let shiftLeft = Operator(function: BinaryCalculator.shiftLeft, precedence: 150)
+    static let shiftRight = Operator(function: BinaryCalculator.shiftRight, precedence: 150)
 }

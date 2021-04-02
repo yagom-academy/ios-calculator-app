@@ -175,6 +175,8 @@ class ViewController: UIViewController {
         ORButton.operatorType = Operators.OR
         XORButton.operatorType = Operators.XOR
         NORButton.operatorType = Operators.NOR
+        shiftLeftButton.operatorType = Operators.shiftLeft
+        shiftRightButton.operatorType = Operators.shiftRight
     }
     
     func reset() {
