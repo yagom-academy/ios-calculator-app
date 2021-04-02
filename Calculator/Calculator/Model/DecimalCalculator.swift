@@ -15,6 +15,7 @@ final class DecimalCalculator: Computable {
             let result = round(Double(first + second) * 1e9) / 1e9
             return try formatResult(of: result)
         } catch {
+            //FIXME: 에러 받으면? 어떻게 할건지
             return "-1"
         }
     }

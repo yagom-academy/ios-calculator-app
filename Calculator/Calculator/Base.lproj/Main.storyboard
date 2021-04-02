@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-qG-dt2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-qG-dt2">
                                 <rect key="frame" x="20" y="147" width="335" height="162.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="75"/>
@@ -143,8 +143,8 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 <state key="normal" title="NOT"/>
                                                 <connections>
+                                                    <action selector="touchUpNOTButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XWH-Oz-wDT"/>
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gel-XX-NWU"/>
-                                                    <action selector="touchUpUnaryOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XWH-Oz-wDT"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-uE-FLi" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
@@ -356,7 +356,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H87-AX-BW7"/>
+                                                    <action selector="touchUpResultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="00f-vb-yz2"/>
                                                 </connections>
                                             </button>
                                         </subviews>

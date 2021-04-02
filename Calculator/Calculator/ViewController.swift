@@ -46,12 +46,14 @@ class ViewController: UIViewController {
     @IBOutlet var decimalOperatorButtons: [OperatorButton]!
     
     @IBOutlet weak var numberField: UILabel!
+    @IBOutlet var toggledSwitch: OperatorButton?
     
     private var decimalMode = true
     private var isOperatorOn = false
-    @IBOutlet var toggledSwitch: OperatorButton?
+    
     private var decimalCalculator = DecimalCalculator()
     private var binaryCalculator = BinaryCalculator()
+    
     private var numberStack = Stack<String>()
     private var operatorStack = Stack<Operator>()
     
@@ -59,7 +61,7 @@ class ViewController: UIViewController {
         if isOperatorOn {
             numberStack.push(numberField.text!)
             operatorStack.push(toggledSwitch!.operatorType)
-
+            
             isOperatorOn = false
             toggledSwitch!.isOn = false
             toggledSwitch = nil
@@ -67,55 +69,43 @@ class ViewController: UIViewController {
             
             numberField.text = sender.currentTitle
         } else {
+            if numberField.text == "0" {
+                numberField.text?.removeAll()
+            }
             numberField.text!.append(sender.currentTitle!)
         }
     }
     
     @IBAction func touchUpOperator(_ sender: OperatorButton) {
         if isOperatorOn {
-            toggledSwitch?.isOn = false
-            toggledSwitch = sender
-            toggledSwitch!.isOn = true
+            toggleOperator(sender)
         }
-        //FIXME: 숫자 입력 안된 상태에서 연산자 누르면 에러
         if operatorStack.isEmpty {
-            if isOperatorOn {
-                toggledSwitch?.isOn = false
-                toggledSwitch = sender
-                toggledSwitch!.isOn = true
-            } else {
-                sender.isOn = true
-                toggledSwitch = sender
-                isOperatorOn = true
-            }
+            toggleOperator(sender)
         } else {
             if sender.operatorType.precedence > operatorStack.top!.precedence {
-                toggledSwitch = sender
-                toggledSwitch!.isOn = true
-                isOperatorOn = true
+                toggleOperator(sender)
             } else {
                 if isOperatorOn == false {
                     numberStack.push(numberField.text!)
                 }
                 while operatorStack.isEmpty == false && sender.operatorType.precedence <= operatorStack.top!.precedence {
-                    
-                    let secondNumber = numberStack.pop()!
-                    let firstNumber = numberStack.pop()!
-                    
-                    let operateFunction = operatorStack.pop()!.function
-                    let result = operateFunction(firstNumber, secondNumber)
-                    numberStack.push(result)
+                    calculate()
                 }
-                
-                toggledSwitch = sender
-                toggledSwitch!.isOn = true
-                isOperatorOn = true
+                toggleOperator(sender)
                 numberField.text = numberStack.top!
             }
         }
     }
-      
-    @IBAction func touchUpUnaryOperator(_ sender: OperatorButton) {
+    
+    @IBAction func touchUpResultButton(_ sender: OperatorButton) {
+        numberStack.push(numberField.text!)
+        while operatorStack.isEmpty == false {
+            calculate()
+        }
+        numberField.text = numberStack.top!
+    }
+    @IBAction func touchUpNOTButton(_ sender: OperatorButton) {
         if numberField.text == "" {
             sender.isOn = false
             return
@@ -159,7 +149,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       initializeButtons()
+        initializeButtons()
+    }
+    
+    func toggleOperator(_ sender: OperatorButton) {
+        toggledSwitch?.isOn = false
+        toggledSwitch = sender
+        toggledSwitch!.isOn = true
+        isOperatorOn = true
+    }
+    
+    func calculate() {
+        let secondNumber = numberStack.pop()!
+        let firstNumber = numberStack.pop()!
+        let operateFunction = operatorStack.pop()!.function
+        let result = operateFunction(firstNumber, secondNumber)
+        numberStack.push(result)
     }
     
     func initializeButtons() {
@@ -180,6 +185,7 @@ class ViewController: UIViewController {
     }
     
     func reset() {
+        numberField.text = "0"
         numberStack.reset()
         operatorStack.reset()
     }
