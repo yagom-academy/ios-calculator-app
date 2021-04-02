@@ -11,5 +11,8 @@ protocol TypeConvertible {
     associatedtype T
     
     func convertType(inputNumber: String?) -> T
-    func convertType(inputOperator: String?) -> Operator
+    func convertType(inputOperator: String?) -> Operator?
 }
+
+
+//서머가 하면 최고죠

@@ -26,19 +26,21 @@ class CalculatorTests: XCTestCase {
         test_divide_한자리정수_두개()
         test_multiply_한자리정수_두개()
         test_convertType_한자리정수입력()
+        test_convertType_한자리음수입력()
         test_convertType_덧셈기호입력()
+        test_convertType_아무기호입력()
         test_calculate_덧셈_소수두개()
         test_showTopOfStack_최대자리수_입력했을때_확인()
     }
     
     func test_divide_한자리정수_두개() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.divide(1, by: 2), 0)
+        XCTAssertEqual(try? testDecimalCalculator.divide(1, by: 2), 0.5)
     }
     
     func test_divide_소수를_영으로나누기() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.divide(1.23, by: 0), 0)
+        XCTAssertEqual(try? testDecimalCalculator.divide(1.23, by: 0), nil)
     }
     
     func test_multiply_한자리정수_두개() {
@@ -49,6 +51,11 @@ class CalculatorTests: XCTestCase {
     func test_convertType_한자리정수입력() {
         testDecimalCalculator = DecimalCalculator()
         XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "1"), 1)
+    }
+    
+    func test_convertType_한자리음수입력() {
+        testDecimalCalculator = DecimalCalculator()
+        XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "-1"), -1)
     }
     
     func test_convertType_덧셈기호입력() {
@@ -77,4 +84,4 @@ class CalculatorTests: XCTestCase {
 }
 
 // cmd u 눌렀더니 저래됐지요
-
+//

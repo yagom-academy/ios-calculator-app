@@ -42,7 +42,7 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
         case "/":
             return Operator.division
         default:
-            return nil // 짜자잔~
+            return nil
         }
     }
     
