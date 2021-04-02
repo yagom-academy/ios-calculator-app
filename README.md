@@ -44,27 +44,27 @@ SJ, Steven, Kio
 
 ### 계산기
 - 2개의 숫자 연산   
-![image](https://user-images.githubusercontent.com/35272802/113390333-77f3a600-93cc-11eb-9b90-da8da3e8ca73.png)
+![기본 연산](https://user-images.githubusercontent.com/35272802/113390534-e6d0ff00-93cc-11eb-818b-ad963817231d.gif)
+- 10진수/2진수 토글 기능   
+![toggle](https://user-images.githubusercontent.com/35272802/113391066-e5540680-93cd-11eb-81eb-beeb196366de.gif)
 
-
-- 10진수/2진수 토글 기능
 - 사칙연산(+, -, /, *) 우선순위에 따른 연산이 가능
     ```
     // 상황별 예시 
     5 x 6 + 2 = 32
     5 + 6 x 2 = 17
     ```
+    ![기본 사칙연산](https://user-images.githubusercontent.com/35272802/113393255-5d6ffb80-93d1-11eb-9830-9de5889ec0a6.gif)
 - 사칙연산(+, -, /, *)을 눌렀을 때 연산된 값에 대해 화면 출력
     ```
     // 상황별 예시 
     5 x 6 x → 30
     5 + 6 + → 11
     ```
-- NumberFormatter() 적용하며 3자리 숫자마다 콤마 적용
+- 3자리 숫자마다 콤마 적용
+- 입력 자릿수가 많아지면 화면크기에 맞게 숫자크기 조절
     - 그림
 - 점을 여러번 눌러도 한번만 적용
-    - 그림
-- 입력 자릿수가 많아지면 화면크기에 맞게 글자크기 조절
     - 그림
 
 <br>
