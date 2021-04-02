@@ -12,6 +12,7 @@ import XCTest
 class CalculatorTests: XCTestCase {
     
     var testDecimalCalculator = DecimalCalculator()
+    var testBinaryCalculator = BinaryCalculator()
     
     override func setUpWithError() throws {
        
@@ -50,7 +51,9 @@ class CalculatorTests: XCTestCase {
     
     func test_convertType_한자리양의정수_입력() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "1"), 1)
+        XCTAssertEqual(testDecimalCalculator.convertType(inputNumber: "1"), 1) 
+        testBinaryCalculator = BinaryCalculator()
+        XCTAssertEqual(testBinaryCalculator.convertType(inputNumber: "0b00000010"), 10)
     }
     
     func test_convertType_한자리음의정수_입력() {

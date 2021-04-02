@@ -80,19 +80,6 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible {
             return stack.top!
         }
     }
-    
-//    do {
-//     try executeOperate
-//    } catch {
-//        switch error {
-//        case DecimalCalculatorError.divideFailed:
-//            print("0으로는 나눌 수가 없습니다.")
-//        case DecimalCalculatorError.otherOperators:
-//            print("사칙연산자를 제외한 연산자는 사용할 수 없습니다.")
-//        default:
-//            print("알 수 없는 에러 입니다.")
-//        }
-//    }
 }
 
 
