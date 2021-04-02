@@ -32,15 +32,11 @@ enum BinaryOperators: String, Comparable {
 
 extension CalculateBinaryNumber {
   func plus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
-    var results:[Int] = []
+    var results:[String] = []
     var carry = 0
-    var isRepeat = true
     
-    while isRepeat {
-      if firstOperands.isEmpty() && secondOperands.isEmpty() {
-        isRepeat = false
-        break
-      }
+    for _ in 1...9 {
+      var isCarryOccur = false
       
       var firstOperand = 0
       if !firstOperands.isEmpty() {
@@ -55,28 +51,49 @@ extension CalculateBinaryNumber {
       }
       
       var sum = firstOperand ^ secondOperand
+      if (firstOperand == 1 && secondOperand == 1)
+      || (sum == 1 && carry == 1){
+        isCarryOccur = true
+      }
       sum ^= carry
-      results.insert(sum, at: 0)
       
-      if firstOperand == 1 && secondOperand == 1 {
+      if isCarryOccur {
         carry = 1
       } else {
         carry = 0
       }
+      results.insert("\(sum)", at: 0)
     }
     
-    // convert integer array to an integer
-    var resultString = ""
-    _ = results.map{ resultString = resultString + "\($0)" }
+    let resultString = results.joined()
     result = Int(resultString)!
 
     return result
   }
   
   func minus(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
+    // secondOperands의 보수 구하기: 1. "~"연산을 진행한다
+    let secondOperandAfterNotOperator = NOT(secondOperands)
+    let secondOperandsAfterNotOperator = Stack<Int>()
+    let secondOperandAfterNotOperatorArray = "\(secondOperandAfterNotOperator)".digits
+    for secondOperandNumber in secondOperandAfterNotOperatorArray {
+      secondOperandsAfterNotOperator.push(secondOperandNumber)
+    }
+        
+    // secondOperands의 보수 구하기: 2. "+1"연산을 진행한다
+    let stackForPlusOne = Stack<Int>()
+    stackForPlusOne.push(1)
     
-    // result = 여기에 결과 값을 넣어주세요
-    return result
+    let secondOperandAfterPlusOne = plus(secondOperandsAfterNotOperator, stackForPlusOne)
+    
+    // firstOperands와 secondOperands의 보수를 더한다
+    let secondOperandsComplements = Stack<Int>()
+    let secondOperandAfterNOTOperatorArray = "\(secondOperandAfterPlusOne)".digits
+    for secondOperandNumber in secondOperandAfterNOTOperatorArray {
+      secondOperandsComplements.push(secondOperandNumber)
+    }
+    
+    return plus(firstOperands, secondOperandsComplements)
   }
   
   func AND(_ firstOperands: Stack<Int>, _ secondOperands: Stack<Int>) -> Int {
@@ -109,9 +126,28 @@ extension CalculateBinaryNumber {
     return result
   }
   
-  func NOT(_ operand: Stack<Int>) -> Int {
+  func NOT(_ operands: Stack<Int>) -> Int {
+    var results:[String] = []
+        
+    for _ in 1...9 {
+      var operand = 0
+      if !operands.isEmpty() {
+        operand = operands.peek()!
+        operands.pop()
+      }
+            
+      if operand == 0 {
+        operand = 1
+      } else {
+        operand = 0
+      }
+
+      results.insert("\(operand)", at: 0)
+    }
     
-    // result = 여기에 결과 값을 넣어주세요
+    let resultString = results.joined()
+    result = Int(resultString)!
+
     return result
   }
   

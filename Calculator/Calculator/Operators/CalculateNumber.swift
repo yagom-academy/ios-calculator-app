@@ -22,13 +22,13 @@ class CalculateNumber {
         break
       }
       operators.pop()
-      guard let firstOperand = operands.peek() else {
+      guard let secondOperand = operands.peek() else {
         isRepeat = false
         break
       }
       operands.pop()
       
-      guard let secondOperand = operands.peek()  else {
+      guard let firstOperand = operands.peek()  else {
         isRepeat = false
         break
       }
