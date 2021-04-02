@@ -8,40 +8,71 @@
 import Foundation
 
 class DecimalCalculation: Calculatable {
-    var firstOperand = Double()
-    var secondOperand = Double()
+    var rightOperand = Double()
+    var leftOperand = Double()
+    let numberFormatter = NumberFormatter()
+
+    private func dropDigits(_ input: Double) -> String {
+        if input >= 1 {
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.roundingMode = .floor
+            numberFormatter.maximumSignificantDigits = 9
+            return numberFormatter.string(for: input)!
+        }
+        else if input < 0 {
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.roundingMode = .ceiling
+            numberFormatter.maximumSignificantDigits = 9
+            return numberFormatter.string(for: input)!
+        }
+        else {
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.roundingMode = .floor
+            numberFormatter.maximumSignificantDigits = 8
+            return numberFormatter.string(for: input)!
+        }
+    }
    
-    func calculatePostfixNotation(_ input: InputDataValidator) {
+    @discardableResult
+    func calculatePostfixNotation(_ input: InputDataValidator) -> Result <String, Error> {
         var operandStack = Stack<Double>()
         
         for element in input.data.postfixNotation {
             if !Operators.list.contains(element) {
-                guard let numbers = Double(element) else { return }
+                guard let numbers = Double(element) else {
+                    return .failure(.invalidAccess)
+                    
+                }
                 
                 operandStack.push(numbers)
             }
             else {
                 guard let firstPoppedValue = operandStack.pop(),
-                      let secondPoppedValue = operandStack.pop() else { return }
+                      let secondPoppedValue = operandStack.pop() else {
+                    return .failure(.invalidAccess)
+                }
                 
-                firstOperand = firstPoppedValue.value
-                secondOperand = secondPoppedValue.value
+                rightOperand = firstPoppedValue.value
+                leftOperand = secondPoppedValue.value
                 
                 switch element {
                 case "*" :
-                    operandStack.push(secondOperand * firstOperand)
+                    operandStack.push(leftOperand * rightOperand)
                 case "/" :
-                    operandStack.push(secondOperand / firstOperand)
+                    operandStack.push(leftOperand / rightOperand)
                 case "+" :
-                    operandStack.push(secondOperand + firstOperand)
+                    operandStack.push(leftOperand + rightOperand)
                 case "-" :
-                    operandStack.push(secondOperand - firstOperand)
+                    operandStack.push(leftOperand - rightOperand)
                 default:
-                    return
+                    return .failure(.invalidOperation)
                 }
             }
         }
-        guard let peek = operandStack.peek() else { return }
-        print(peek.value)
+        guard let peek = operandStack.peek() else {
+            return .failure(.invalidAccess)
+        }
+        return .success((dropDigits(peek.value)))
     }
+    
 }

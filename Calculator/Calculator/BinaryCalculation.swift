@@ -7,9 +7,11 @@
 
 import Foundation
 
-class BinaryCalculation: Calculatable {
-    var firstOperand = UInt8()
-    var secondOperand = UInt8()
+class BinaryCalculation {
+    
+    var rightOperand = UInt8()
+    var leftOperand = UInt8()
+    var operand = UInt8()
     
     private func pad(string : String, toSize: Int) -> String {
         var padded = string
@@ -18,56 +20,64 @@ class BinaryCalculation: Calculatable {
         }
         return padded
     }
-    
-    func calculatePostfixNotation(_ input: InputDataValidator) {
+    @discardableResult
+    func calculatePostfixNotation(_ input: InputDataValidator) -> Result<String, Error> {
         var operandStack = Stack<UInt8>()
         
         for element in input.data.postfixNotation {
             if !Operators.list.contains(element) {
-                guard let numbers = UInt8(element, radix: 2) else { return }
+                guard let numbers = UInt8(element, radix: 2) else {
+                    return .failure(.invalidAccess)
+                }
                 
                 operandStack.push(numbers)
             }
             else if element == Operators.NOT.rawValue {
-                guard let popped = operandStack.pop() else { return }
+                guard let popped = operandStack.pop() else {
+                    return .failure(.invalidAccess)
+                }
                 
-                firstOperand = popped.value
-                operandStack.push(~firstOperand)
+                operand = (popped.value)
+                operandStack.push(~operand)
             }
             else {
-                guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else { return }
+                guard let firstPoppedValue = operandStack.pop(), let secondPoppedValue = operandStack.pop() else {
+                    return .failure(.invalidAccess)
+                }
                 
-                firstOperand = firstPoppedValue.value
-                secondOperand = secondPoppedValue.value
+                rightOperand = firstPoppedValue.value
+                leftOperand = secondPoppedValue.value
                 
                 switch element {
                 case ">>" :
-                    operandStack.push(secondOperand >> firstOperand)
+                    operandStack.push(leftOperand >> rightOperand)
                 case "<<" :
-                    operandStack.push(firstOperand << secondOperand)
+                    operandStack.push(leftOperand << rightOperand)
                 case "&" :
-                    operandStack.push(secondOperand & firstOperand)
+                    operandStack.push(leftOperand & rightOperand)
                 case "|" :
-                    operandStack.push(secondOperand | firstOperand)
+                    operandStack.push(leftOperand | rightOperand)
                 case "^" :
-                    operandStack.push(secondOperand ^ firstOperand)
+                    operandStack.push(leftOperand ^ rightOperand)
                 case "~&" :
-                    operandStack.push(firstOperand ~& secondOperand)
+                    operandStack.push(leftOperand ~& rightOperand)
                 case "~|" :
-                    operandStack.push(firstOperand ~| secondOperand)
+                    operandStack.push(leftOperand ~| rightOperand)
                 case "+" :
-                    operandStack.push(firstOperand &+ secondOperand)
+                    operandStack.push(leftOperand &+ rightOperand)
                 case "-" :
-                    operandStack.push(secondOperand &- firstOperand)
+                    operandStack.push(leftOperand &- rightOperand)
                 default:
-                    return
+                    return .failure(.invalidOperation)
                 }
             }
         }
-        guard let result = operandStack.peek() else { return }
+        guard let result = operandStack.peek() else {
+            return .failure(.invalidAccess)
+        }
         
         let binaryNumber = String(result.value, radix: 2)
-        print(pad(string: binaryNumber, toSize: 8))
+        return .success(pad(string: binaryNumber, toSize: 8))
     }
 }
 
