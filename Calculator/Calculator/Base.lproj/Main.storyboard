@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-qG-dt2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-qG-dt2">
                                 <rect key="frame" x="20" y="147" width="335" height="162.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="70"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="75"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -214,7 +214,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="e24-oc-x9d" secondAttribute="height" multiplier="1:1" id="2Cj-52-WOg"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
                                                 <state key="normal" title="NAND"/>
                                                 <connections>
                                                     <action selector="touchUpOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3gM-jz-q9b"/>
@@ -484,7 +484,7 @@
             <size key="intrinsicContentSize" width="30" height="47"/>
         </designable>
         <designable name="e24-oc-x9d">
-            <size key="intrinsicContentSize" width="84" height="47"/>
+            <size key="intrinsicContentSize" width="76" height="44"/>
         </designable>
         <designable name="eVY-uE-FLi">
             <size key="intrinsicContentSize" width="19" height="22"/>

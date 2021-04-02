@@ -77,7 +77,7 @@ class ViewController: UIViewController {
             toggledSwitch = sender
             toggledSwitch!.isOn = true
         }
-        
+        //FIXME: 숫자 입력 안된 상태에서 연산자 누르면 에러
         if operatorStack.isEmpty {
             if isOperatorOn {
                 toggledSwitch?.isOn = false
