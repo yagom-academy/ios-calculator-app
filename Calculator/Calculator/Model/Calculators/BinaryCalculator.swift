@@ -58,6 +58,21 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible {
         return operatedNumber | operatingNumber
     }
     
+    func norOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
+        return ~(operatedNumber | operatingNumber)
+    }
+    
+    func xorOperate(with operatedNumber: Int, and operatingNumber: Int) -> Int {
+        return operatedNumber ^ operatingNumber
+    }
+    
+    func bitNotOperate(for operatedNumber: Int) -> Int {
+        return ~operatedNumber
+    }
+    
+    func bitShiftOperate(for operatedNumber: Int, isRight: Bool) -> Int {
+        return operatedNumber
+    }
     
 //    mutating func calculate(operateSign: String?, operatedNumber: Int, operatingNumber: Int) throws -> Int {
 //        switch try convertType(inputOperator: operateSign) {
