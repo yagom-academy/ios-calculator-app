@@ -15,7 +15,7 @@ final class BinaryCalculator: Computable {
             let result = first + second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -26,7 +26,7 @@ final class BinaryCalculator: Computable {
             let result = first - second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -38,7 +38,7 @@ final class BinaryCalculator: Computable {
             let result = first & second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
         
     }
@@ -50,7 +50,7 @@ final class BinaryCalculator: Computable {
             let result = ~(first & second)
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -61,7 +61,7 @@ final class BinaryCalculator: Computable {
             let result = first | second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -72,7 +72,7 @@ final class BinaryCalculator: Computable {
             let result = ~(first | second)
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -83,7 +83,7 @@ final class BinaryCalculator: Computable {
             let result = first ^ second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -93,7 +93,7 @@ final class BinaryCalculator: Computable {
             let result = ~first
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -104,7 +104,7 @@ final class BinaryCalculator: Computable {
             let result = first << second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     
@@ -115,7 +115,7 @@ final class BinaryCalculator: Computable {
             let result = first >> second
             return try formatResult(of: result)
         } catch {
-            return "-1"
+            return "FormatFailed"
         }
     }
     

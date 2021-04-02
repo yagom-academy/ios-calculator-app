@@ -1,144 +1,153 @@
-//
-//  BinaryCalculatorTests.swift
-//  CalculatorTests
-//
-//  Created by 천수현 on 2021/03/29.
-//
-
 import XCTest
 
 class BinaryCalculatorTests: XCTestCase {
     private var binaryCalculatorTest: BinaryCalculator?
-    
     override func setUpWithError() throws {
         binaryCalculatorTest = BinaryCalculator()
     }
-
+    
     override func tearDownWithError() throws {
         binaryCalculatorTest = nil
     }
-
+    
     func test_add() {
-        let result1 = binaryCalculatorTest?.add(firstNumber: 1, secondNumber: 2)
-        XCTAssertEqual(result1, 3)
-
-        let result2 = binaryCalculatorTest?.add(firstNumber: 100, secondNumber: 12)
-        XCTAssertEqual(result2, 112)
+        let result1 =  BinaryCalculator.add(firstNumber: "1010", secondNumber: "11")
+        XCTAssertEqual(result1, "1101")
+        
+        // 음수를 더하여 0이 되는 case
+        let result2 =  BinaryCalculator.add(firstNumber: "10", secondNumber: "11111110")
+        XCTAssertEqual(result2, "0")
+        
+        // 음수를 덧셈할 경우 음수 결과가 8bit 이진수로 표현됨 (MSB가 Sign-Bit)
+        let result3 =  BinaryCalculator.add(firstNumber: "10", secondNumber: "11111101")
+        XCTAssertEqual(result3, "11111111")
+        
+        // 오버플로우 발생시 오버플로우 된 자릿수 버림
+        let result4 =  BinaryCalculator.add(firstNumber: "11110000", secondNumber: "10001000")
+        XCTAssertEqual(result4, "1111000")
+        
+        // 오버플로우 발생시
+        
+        let result5 =  BinaryCalculator.add(firstNumber: "01110000", secondNumber: "01001000")
+        XCTAssertEqual(result5, "111000")
     }
-
+    
     func test_subtract() {
-        let result1 = binaryCalculatorTest?.subtract(firstNumber: 1, secondNumber: 2)
-        XCTAssertEqual(result1, -1)
-
-        let result2 = binaryCalculatorTest?.subtract(firstNumber: 100, secondNumber: 12)
-        XCTAssertEqual(result2, 88)
+        let result1 =  BinaryCalculator.subtract(firstNumber: "1010", secondNumber: "11")
+        XCTAssertEqual(result1, "111")
+        
+        // 음수를 빼서 양수 결과가 나오는 경우
+        let result2 =  BinaryCalculator.subtract(firstNumber: "10", secondNumber: "11111110")
+        XCTAssertEqual(result2, "100")
+        
+        // 뺄셈의 결과가 음수인 경우
+        let result3 =  BinaryCalculator.subtract(firstNumber: "10", secondNumber: "11")
+        XCTAssertEqual(result3, "11111111")
+        
+        // 언더플로우 발생시 언더플로우 된 자릿수 버림
+        let result4 =  BinaryCalculator.subtract(firstNumber: "10000001", secondNumber: "10")
+        XCTAssertEqual(result4, "1111111")
     }
-
+    
     func test_AND() {
-        let result1 = binaryCalculatorTest?.AND(firstNumber: 8, secondNumber: 7)
-        XCTAssertEqual(result1, 0)
-
-        let result2 = binaryCalculatorTest?.AND(firstNumber: 8, secondNumber: 9)
-        XCTAssertEqual(result2, 8)
+        let result1 =  BinaryCalculator.AND(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "0")
+        
+        let result2 =  BinaryCalculator.AND(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "0")
+        
+        let result3 =  BinaryCalculator.AND(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "0")
+        
+        let result4 =  BinaryCalculator.AND(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11")
     }
-
+    
     func test_NAND() {
-        let result1 = binaryCalculatorTest?.NAND(firstNumber: 8, secondNumber: Int.max)
-        XCTAssertEqual(result1, -9)
-        
-        let result2 = binaryCalculatorTest?.NAND(firstNumber: 13, secondNumber: Int.max)
-        XCTAssertEqual(result2, -14)
-    }
-
-    func test_OR() {
-        let result1 = binaryCalculatorTest?.OR(firstNumber: 8, secondNumber: 7)
-        XCTAssertEqual(result1, 15)
-        
-        let result2 = binaryCalculatorTest?.OR(firstNumber: 0, secondNumber: 11)
-        XCTAssertEqual(result2, 11)
-    }
-
-    func test_NOR() {
-        let result1 = binaryCalculatorTest?.NOR(firstNumber: 8, secondNumber: 7)
-        XCTAssertEqual(result1, -16)
-        
-        let result2 = binaryCalculatorTest?.NOR(firstNumber: 0, secondNumber: 11)
-        XCTAssertEqual(result2, -12)
-        
-        let result3 = binaryCalculatorTest?.NOR(firstNumber: -8, secondNumber: -7)
-        XCTAssertEqual(result3, 6)
-    }
-
-    func test_XOR() {
-        let result1 = binaryCalculatorTest?.XOR(firstNumber: 8, secondNumber: 7)
-        XCTAssertEqual(result1, 15)
-        
-        let result2 = binaryCalculatorTest?.XOR(firstNumber: 0, secondNumber: 130)
-        XCTAssertEqual(result2, 130)
-        
-        let result3 = binaryCalculatorTest?.XOR(firstNumber: -8, secondNumber: -7)
-        XCTAssertEqual(result3, 1)
-    }
-
-    func test_NOT() {
-        let result1 = binaryCalculatorTest?.NOT(firstNumber: -1)
-        XCTAssertEqual(result1, 0)
-        
-        let result2 = binaryCalculatorTest?.NOT(firstNumber: 8)
-        XCTAssertEqual(result2, -9)
-    }
-
-    func test_shiftLeft() {
-        let result1 = binaryCalculatorTest?.shiftLeft(firstNumber: 8, secondNumber: 2)
-        XCTAssertEqual(result1, 32)
-        
-        let result2 = binaryCalculatorTest?.shiftLeft(firstNumber: 0, secondNumber: 2)
-        XCTAssertEqual(result2, 0)
-        
-        // 부호를 유지한 채로 bit shift 진행 (shift logically)
-        let result3 = binaryCalculatorTest?.shiftLeft(firstNumber: -8, secondNumber: 2)
-        XCTAssertEqual(result3, -32)
-    }
-
-    func test_shiftRight() {
-        let result1 = binaryCalculatorTest?.shiftRight(firstNumber: 8, secondNumber: 2)
-        XCTAssertEqual(result1, 2)
-        
-        let result2 = binaryCalculatorTest?.shiftRight(firstNumber: 0, secondNumber: 2)
-        XCTAssertEqual(result2, 0)
-        
-        // 부호를 유지한 채로 bit shift 진행 (shift logically)
-        let result3 = binaryCalculatorTest?.shiftRight(firstNumber: -8, secondNumber: 2)
-        XCTAssertEqual(result3, -2)
-    }
-    
-    func test_formatInput() {
-        let result1 = try? binaryCalculatorTest?.formatInput("1010")
-        XCTAssertEqual(result1, 10)
-    }
-    
-    func test_formatResult() {
-        let result1 = try? binaryCalculatorTest?.formatResult(of: -1)
+        let result1 =  BinaryCalculator.NAND(firstNumber: "0", secondNumber: "0")
         XCTAssertEqual(result1, "11111111")
         
-        // MSB(8개의 비트 중 가장 왼쪽의 비트)를 Sign-Bit로 사용
-        let result2 = try? binaryCalculatorTest?.formatResult(of: -128)
-        XCTAssertEqual(result2, "10000000")
+        let result2 =  BinaryCalculator.NAND(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "11111111")
         
-        let result3 = try? binaryCalculatorTest?.formatResult(of: -13)
-        XCTAssertEqual(result3, "11110011")
+        let result3 =  BinaryCalculator.NAND(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "11111111")
         
-        let result4 = try? binaryCalculatorTest?.formatResult(of: 18)
-        XCTAssertEqual(result4, "10010")
-        
-        // 양수의 최대 표현범위는 127까지이므로 그 이상의 입력이 들어오면 error를 throw
-        XCTAssertThrowsError(try binaryCalculatorTest?.formatResult(of: 1023)) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.outOfRangeInput)
-        }
+        let result4 =  BinaryCalculator.NAND(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11111100")
     }
-
-    func test_reset() {
-        binaryCalculatorTest?.reset()
-        XCTAssertTrue(binaryCalculatorTest?.stack.isEmpty == true)
+    
+    func test_OR() {
+        let result1 =  BinaryCalculator.OR(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "0")
+        
+        let result2 =  BinaryCalculator.OR(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "10")
+        
+        let result3 =  BinaryCalculator.OR(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "10")
+        
+        let result4 =  BinaryCalculator.OR(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11111111")
+    }
+    
+    func test_NOR() {
+        let result1 =  BinaryCalculator.NOR(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "11111111")
+        
+        let result2 =  BinaryCalculator.NOR(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "11111101")
+        
+        let result3 =  BinaryCalculator.NOR(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "11111101")
+        
+        let result4 =  BinaryCalculator.NOR(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "0")
+    }
+    
+    func test_XOR() {
+        let result1 =  BinaryCalculator.XOR(firstNumber: "0", secondNumber: "0")
+        XCTAssertEqual(result1, "0")
+        
+        let result2 =  BinaryCalculator.XOR(firstNumber: "0", secondNumber: "10")
+        XCTAssertEqual(result2, "10")
+        
+        let result3 =  BinaryCalculator.XOR(firstNumber: "10", secondNumber: "0")
+        XCTAssertEqual(result3, "10")
+        
+        let result4 =  BinaryCalculator.XOR(firstNumber: "11", secondNumber: "11111111")
+        XCTAssertEqual(result4, "11111100")
+    }
+    
+    func test_NOT() {
+        let result1 =  BinaryCalculator.NOT(firstNumber: "00000001")
+        XCTAssertEqual(result1, "11111110")
+        
+        let result2 =  BinaryCalculator.NOT(firstNumber: "11001100")
+        XCTAssertEqual(result2, "110011")
+    }
+    
+    func test_shiftLeft() {
+        let result1 =  BinaryCalculator.shiftLeft(firstNumber: "11", secondNumber: "10")
+        XCTAssertEqual(result1, "1100")
+        
+        let result2 =  BinaryCalculator.shiftLeft(firstNumber: "10000000", secondNumber: "11")
+        XCTAssertEqual(result2, "0")
+        
+        // secondNumber가 음수면 반대 방향으로 shift
+        let result3 =  BinaryCalculator.shiftLeft(firstNumber: "1100", secondNumber: "111111110")
+        XCTAssertEqual(result3, "110")
+    }
+    
+    func test_shiftRight() {
+        let result1 =  BinaryCalculator.shiftRight(firstNumber: "11", secondNumber: "10")
+        XCTAssertEqual(result1, "0")
+        
+        let result2 =  BinaryCalculator.shiftRight(firstNumber: "10000000", secondNumber: "11")
+        XCTAssertEqual(result2, "10000")
+        
+        // secondNumber가 음수면 반대 방향으로 shift
+        let result3 =  BinaryCalculator.shiftRight(firstNumber: "1100", secondNumber: "111111110")
+        XCTAssertEqual(result3, "11000")
     }
 }

@@ -59,8 +59,11 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpNumber(_ sender: NumberButton) {
         if isOperatorOn {
+            guard let operatorToPush = currentOperatorButton?.operatorType else {
+                return
+            }
             numberStack.push(numberField.text!)
-            operatorStack.push(currentOperatorButton!.operatorType)
+            operatorStack.push(operatorToPush)
             
             isOperatorOn = false
             currentOperatorButton?.isOn = false
@@ -155,7 +158,7 @@ class ViewController: UIViewController {
     func toggleOperator(_ sender: OperatorButton) {
         currentOperatorButton?.isOn = false
         currentOperatorButton = sender
-        currentOperatorButton!.isOn = true
+        currentOperatorButton?.isOn = true
         isOperatorOn = true
     }
     
