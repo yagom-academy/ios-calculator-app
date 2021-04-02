@@ -65,8 +65,9 @@ class CalculatorTests: XCTestCase {
     
     func test_convertType_의도하지않은입력() {
         testDecimalCalculator = DecimalCalculator()
-        XCTAssertEqual(try testDecimalCalculator.convertType(inputOperator: "="), "계산을 할 수 없습니다.")
-
+        XCTAssertThrowsError(try testDecimalCalculator.convertType(inputOperator: "=")) { (error) in
+            XCTAssertEqual(error as! DecimalCalculatorError, DecimalCalculatorError.notAvailableOperator)
+        }
     }
     
     func test_calculate_덧셈_소수두개() {
@@ -77,12 +78,7 @@ class CalculatorTests: XCTestCase {
     func test_showTopOfStack_최대자리수_입력했을때_확인() {
         testDecimalCalculator = DecimalCalculator()
         testDecimalCalculator.stack.push(10e9)
-//        testDecimalCalculator = DecimalCalculator(list: [10e9])
         XCTAssertEqual(testDecimalCalculator.showTopOfStack(), 0)
     }
-    
-    
 }
 
-// cmd u 눌렀더니 저래됐지요
-//
