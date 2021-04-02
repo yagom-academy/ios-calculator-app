@@ -8,8 +8,7 @@
 import Foundation
 
 protocol Calculatable {
-    
-//    @discardableResult
-//    func calculatePostfixNotation(_ input: InputDataValidator) -> Result<String, Error>
+    @discardableResult
+    func calculatePostfixNotation(_ input: InputDataValidator) -> Result<String, Error>
 }
 

@@ -13,24 +13,18 @@ class DecimalCalculation: Calculatable {
     let numberFormatter = NumberFormatter()
 
     private func dropDigits(_ input: Double) -> String {
-        if input >= 1 {
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.roundingMode = .floor
-            numberFormatter.maximumSignificantDigits = 9
-            return numberFormatter.string(for: input)!
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .floor
+        numberFormatter.maximumSignificantDigits = 9
+        
+        if input >= 0 && input < 1 {
+            numberFormatter.maximumSignificantDigits = 8
         }
         else if input < 0 {
-            numberFormatter.numberStyle = .decimal
             numberFormatter.roundingMode = .ceiling
-            numberFormatter.maximumSignificantDigits = 9
-            return numberFormatter.string(for: input)!
         }
-        else {
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.roundingMode = .floor
-            numberFormatter.maximumSignificantDigits = 8
-            return numberFormatter.string(for: input)!
-        }
+        
+        return numberFormatter.string(for: input)!
     }
    
     @discardableResult
@@ -41,9 +35,8 @@ class DecimalCalculation: Calculatable {
             if !Operators.list.contains(element) {
                 guard let numbers = Double(element) else {
                     return .failure(.invalidAccess)
-                    
                 }
-                
+            
                 operandStack.push(numbers)
             }
             else {
@@ -74,5 +67,4 @@ class DecimalCalculation: Calculatable {
         }
         return .success((dropDigits(peek.value)))
     }
-    
 }

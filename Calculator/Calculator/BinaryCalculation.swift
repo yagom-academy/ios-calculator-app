@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BinaryCalculation {
+class BinaryCalculation: Calculatable {
     
     var rightOperand = UInt8()
     var leftOperand = UInt8()
@@ -20,6 +20,7 @@ class BinaryCalculation {
         }
         return padded
     }
+    
     @discardableResult
     func calculatePostfixNotation(_ input: InputDataValidator) -> Result<String, Error> {
         var operandStack = Stack<UInt8>()

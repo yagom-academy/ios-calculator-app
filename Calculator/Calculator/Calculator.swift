@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GeneralCalculator {
+class Calculator {
     var operatorStack = Stack<String>()
     
     private func distinguishOperatorFromOperand(_ element: String, _ input: InputDataValidator) {

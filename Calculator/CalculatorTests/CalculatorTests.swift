@@ -7,14 +7,16 @@
 
 import XCTest
 @testable import Calculator
+
 class CalculatorTests: XCTestCase {
     private var sut_inputDataValidator: InputDataValidator!
-    private var sut_generalCalculator: GeneralCalculator!
+    private var sut_calculator: Calculator!
     private var sut_decimalCalculation: DecimalCalculation!
     private var sut_binaryCalcualtion: BinaryCalculation!
+    
     override func setUpWithError() throws {
         sut_inputDataValidator = InputDataValidator()
-        sut_generalCalculator = GeneralCalculator()
+        sut_calculator = Calculator()
         sut_decimalCalculation = DecimalCalculation()
         sut_binaryCalcualtion = BinaryCalculation()
         
@@ -24,11 +26,13 @@ class CalculatorTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut_inputDataValidator = nil
-        sut_generalCalculator = nil
+        sut_calculator = nil
         sut_binaryCalcualtion = nil
         sut_decimalCalculation = nil
     }
+    
     // MARK: Binary Calculation Test
+    
     func test_elements_of_medianNotation() throws {
         sut_inputDataValidator.validateData(input: "0")
         sut_inputDataValidator.validateData(input: "1")
@@ -45,7 +49,7 @@ class CalculatorTests: XCTestCase {
     
     func test_binaryNumbers_convert_to_postNotation() {
         sut_inputDataValidator.data.medianNotation = ["~", "0101","+", "1111"]
-        sut_generalCalculator.convertToPostfixNotation(sut_inputDataValidator)
+        sut_calculator.convertToPostfixNotation(sut_inputDataValidator)
         XCTAssertEqual(sut_inputDataValidator.data.postfixNotation, ["0101", "~", "1111", "+"])
     }
     
@@ -113,7 +117,7 @@ class CalculatorTests: XCTestCase {
     
     func test_decimalNumbers_convert_to_postNotation() {
         sut_inputDataValidator.data.medianNotation = ["24.1324521","+", "1323.23124", "*", "2", "-", "63"]
-        sut_generalCalculator.convertToPostfixNotation(sut_inputDataValidator)
+        sut_calculator.convertToPostfixNotation(sut_inputDataValidator)
         XCTAssertEqual(sut_inputDataValidator.data.postfixNotation, ["24.1324521", "1323.23124", "2", "*", "+", "63", "-"])
     }
     

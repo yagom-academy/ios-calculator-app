@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         print(data.medianNotation)
         
         //일반계산기 인스턴스let generalCalculator: GeneralCalculator = GeneralCalculator()
-        let generalCalculator = GeneralCalculator()
+        let generalCalculator = Calculator()
         
         generalCalculator.convertToPostfixNotation(inputDataValidation)
     
