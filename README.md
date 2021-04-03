@@ -250,6 +250,8 @@ enum Operators: String, CaseIterable {
 
 #### [Step1] 2번째 피드백:
 
+![image](https://user-images.githubusercontent.com/56648865/113473579-4bf82380-94a5-11eb-822f-6897622941ef.png)
+
 - 타입 프로퍼티 사용의 문제점 [Data 클래스 내의 static 변수 사용]
 - 구체 타입 사용의 문제점 [단위 테스트가 불가능해 지는 문제]
 - 프로토콜 생성 및 활용 [계산기들의 공통된 부분을 프로토콜에 의지하도록 개선]
