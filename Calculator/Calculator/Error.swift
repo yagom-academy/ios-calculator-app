@@ -35,6 +35,19 @@ enum DecimalCalculatorError: Error, CustomStringConvertible {
     }
 }
 
+enum StackError: Error, CustomStringConvertible {
+    case poppedItemIsNil
+    
+    var description: String {
+        switch self {
+        case .poppedItemIsNil:
+            return "숫자가 nil입니다."
+        default:
+            return "알 수 없는 에러입니다."
+        }
+    }
+}
+
 enum BinaryCalculatorError: Error, CustomStringConvertible {
     case divisionByZero
     case notAvailableOperator

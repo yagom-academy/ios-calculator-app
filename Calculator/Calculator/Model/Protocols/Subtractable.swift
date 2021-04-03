@@ -15,6 +15,6 @@ protocol Subtractable {
 
 extension Subtractable {
     func subtract(_ operatedNumber: T, and operatingNumber: T) -> T {
-        return operatedNumber + operatingNumber
+        return operatedNumber - operatingNumber
     }
 }

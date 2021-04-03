@@ -64,22 +64,24 @@ struct DecimalCalculator: Addable, Subtractable, TypeConvertible, MaximumDigitLi
         }
     }
     
-    mutating func executeOperate(of inputNumber: String?) {
-        do {
-           stack.push(try convertType(inputNumber: inputNumber))
-            for _ in 1...10 {
-                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
-            }
-        } catch {
-            print(error)
+    func returnTopOfStack() throws -> Double {
+        if try stack.top() / maximumDigit >= 1 {
+            return try stack.top().truncatingRemainder(dividingBy: maximumDigit) 
+        } else {
+            return try stack.top()
         }
     }
     
-    func showTopOfStack() -> Double {
-        if stack.top! / 1000000000.0 >= 1 {
-            return stack.top!.truncatingRemainder(dividingBy: 1000000000.0)
-        } else {
-            return stack.top!
+    mutating func executeOperate(of inputNumber: String?) {
+        do {
+            try stack.push(convertType(inputNumber: inputNumber))
+            
+            for _ in 1...10 {
+                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop(), operatingNumber: convertType(inputNumber: readLine())))
+                print(try returnTopOfStack())
+            }
+        } catch {
+            print(error)
         }
     }
 }

@@ -20,5 +20,4 @@ enum Operator {
     case bitNotOperator
     case rightBitShiftOperator
     case leftBitShiftOperator
-    
 }
