@@ -8,7 +8,7 @@
 
 <img width="828" alt="2021-03-24_5 00 46" src="https://user-images.githubusercontent.com/55218398/112719014-d8509680-8f39-11eb-92a4-c239d3c5a2c4.png">
 
-#### [Step 1]
+#### [Step 1] 설계 및 모델 구현
 
 계산기를 먼저 구현하기 전에 계산기모델을 설계하는 것이 중요하다는 생각이 들어서 위와 같이 간단한 UML을 만들어보았습니다.<br>
 저희가 생각한 모델은 Calculator프로토콜을 만든 뒤 모든 Calculator의 공통기능을 가진 메서드를 구현한 다음 2진법계산기클래스와 10진법계산기클래스가 해당 프로토콜을 채택하여 계산기로서의 기능을 부여받도록 설계하였습니다. <br>
@@ -245,3 +245,257 @@ enum Operators: String, CaseIterable {
 ### 해결되지 않은 부분
 
 - 2진수는 8자리 밖에 없는데 계산기프로젝트는 9자리를 요구합니다....
+
+
+
+#### [Step1] 2번째 피드백:
+
+- 타입 프로퍼티 사용의 문제점 [Data 클래스 내의 static 변수 사용]
+- 구체 타입 사용의 문제점 [단위 테스트가 불가능해 지는 문제]
+- 프로토콜 생성 및 활용 [계산기들의 공통된 부분을 프로토콜에 의지하도록 개선]
+
+### 개선 내용
+
+1. Data 클래스의 변수를 매개변수로서 활용하도록 수정하였습니다.
+
+Static 변수를 사용하면 단위 테스트 병렬적으로 진행을 할 때 지속적으로 같은 주소를 가진 프로퍼티를 참조하게 되고 이는 데이터 충돌까지 이어질 수 있다. 따라서 static 변수가 편리하긴 했지만 수정이 불가피했습니다. 따라서 아래와 같이 데이터구조를 다시 수정하였습니다.
+
+```swift
+class Data {
+    var medianNotation: [String] = []
+    var postfixNotation: [String] = []
+}
+```
+
+2. 구체타입을 클래스 내 인스턴스로 사용할 경우 각 클래스를 분리하여 단위테스트를 진행할 수 없습니다. 이와 같은 불상사를 막기위해 클래스를 적절히 분리하였습니다.
+
+```swift
+class InputDataValidator {
+  var data = Data()
+}
+```
+
+```swift
+class Calculator {
+  func convertToPostfixNotation(_ input: InputDataValidator) {
+        if Operators.list.contains(input.data.medianNotation.last!) {
+            input.data.medianNotation.removeLast()
+        }
+        for element in input.data.medianNotation {
+            distinguishOperatorFromOperand(element, input)
+        }
+        appendRemainingOperators(input)
+    }
+}
+```
+
+```swift
+class DecimalCalculation: Calculatable {
+  @discardableResult
+  func calculatePostfixNotation(_ input: InputDataValidator) -> Result <String, Error> {
+    var operandStack = Stack<Double>()
+
+    for element in input.data.postfixNotation {
+      if !Operators.list.contains(element) {
+        guard let numbers = Double(element) else {
+          return .failure(.invalidAccess)
+        }
+
+        operandStack.push(numbers)
+      }
+      else {
+        guard let firstPoppedValue = operandStack.pop(),
+        			let secondPoppedValue = operandStack.pop() else {
+          return .failure(.invalidAccess)
+        }
+
+        rightOperand = firstPoppedValue.value
+        leftOperand = secondPoppedValue.value
+
+        switch element {
+          case "*" :
+          	operandStack.push(leftOperand * rightOperand)
+          case "/" :
+          	operandStack.push(leftOperand / rightOperand)
+          case "+" :
+          	operandStack.push(leftOperand + rightOperand)
+          case "-" :
+          	operandStack.push(leftOperand - rightOperand)
+          default:
+          return .failure(.invalidOperation)
+        }
+      }
+    }
+    guard let peek = operandStack.peek() else {
+      return .failure(.invalidAccess)
+    }
+    return .success((dropDigits(peek.value)))
+  }
+```
+
+클래스 내에 구체타입을 생성하지 않았습니다. 대신 연산값을 가지고 있는 데이터를 각 클래스의 메서드에서 인자값으로 받아 연산처리를 하도록 설계를 수정하였습니다.
+
+
+
+3. 프로토콜 수정
+
+저희가 받은 피드백 중 "10진/2진에서 공통된 기능을 프로토콜로 추상화하고...이 프로토콜에만 의존한 상태에서 적절한 메서드로 명령을 내리도록 만들면 좋을 것 같습니다" 와 같은 피드백이 있었습니다.
+
+```swift
+protocol Calculatable {
+	func calculatePostfixNotation(_ input: InputDataValidator)
+}
+
+class DecimalCalculation: Calculatable
+class BinaryCalculation: Calculatable
+```
+
+2진계산 모듈과 10진계산 모듈 둘 다 `Calculatable` 프로토콜을 채택하도록 하였습니다. 두 class는 해당 프로토콜을 의존한 상태에서 연산작업을 실행합니다.
+
+
+
+4. 9자리 제한 설정
+
+저희가 만들 계산기에서 입력값이 9자리를 넘지 않게 설정한다는 가정하에  연산후 표출되는 값이 9자리가 넘지 않도록 제한설정을 하였습니다.
+
+**10진수에서 아래와 같은 메서드를 활용하여 자리수 제한 설정을 하였습니다.**
+
+```swift
+let numberFormatter = NumberFormatter()
+
+private func dropDigits(_ input: Double) -> String {
+  numberFormatter.numberStyle = .decimal
+  numberFormatter.roundingMode = .floor
+  numberFormatter.maximumSignificantDigits = 9
+
+  if input >= 0 && input < 1 {
+    numberFormatter.maximumSignificantDigits = 8
+  }
+  else if input < 0 {
+    numberFormatter.roundingMode = .ceiling
+  }
+
+  return numberFormatter.string(for: input)!
+    }
+```
+
+`NumberFormatter`클래스를 활용하여 10진수처리와 소숫점 처리를 하였습니다. 그리고 `maximumSignificantDigit`메서드를 활용하여 각 조건에 맞게 9자리수 제한 설정을 하였습니다.
+
+
+
+**2진수에서는 조금 더 복잡한 방법을 활용하여 자리수 제한 설정을 하였습니다**
+
+받은 피연산자값을 UInt타입으로 변환을 하여 필요한 연산을 모두 진행 한 뒤 나온 결과값을 `filterResult`와 `pad`를 통해 Uint8타입으로 변환하며 자릿수를 9자리로 제한하였습니다.
+
+```swift
+private func pad(number : String, toSize: Int) -> String {
+  var padded = number
+
+  for _ in 0..<(toSize - padded.count) {
+    padded = "0" + padded
+  }
+  return padded
+}
+
+func filterResult(_ input: UInt) -> String {
+  let binaryResult = String(input, radix: 2)
+  if binaryResult.count > 9 {
+    return "000000000"
+  }
+  else {
+    return pad(number: binaryResult, toSize: 9)
+  }
+}
+```
+
+### TroubleShooting
+
+**10진수 [9자리 제한 문제]**
+
+NumberFormatter를 활용하여 자릿수 제한을 설정하였습니다. 제한이 잘 구현되었는지 아이폰 계산기를 활용하여 테스트를 동시에 진행하였는데 음수에서는 결과값이 아이폰 계산기와 다른 것을 확인하였습니다.  [공식문서](https://developer.apple.com/documentation/foundation/numberformatter/roundingmode)를 확인 해 보니 `.ceiling` 은 양수방향으로 반올림을 진행하는 Constant이고 `.floor`는 음수방향으로 반올림은 진행하는 `Constant`인 것을 알게 되었습니다. 아이폰 계산기 같은 경우 음수 소숫점이 9자리를 넘어갈 경우 양수방향으로 반올림이 되는 것을 확인 하였습니다. 그래서 기존에는 `.floor`로 반올림을 모든 조건에서 진행하였으나 이 부분을 확인한 뒤 조건에 맞게 반올림 방법에 변경을 주었습니다.
+
+```swift
+if input >= 0 && input < 1 {
+  numberFormatter.maximumSignificantDigits = 8
+}
+else if input < 0 {
+  numberFormatter.roundingMode = .ceiling
+}
+```
+
+
+
+**2진수 [9자리 제한 문제]**
+
+기존에 8자리의 String타입 숫자를 받아 `UInt8`로 변환을 한 뒤 계산을 하는 방식으로 진행을 하였습니다. 혹시나 하는 마음에 9자리 String을 `UInt8`로 변환을 하려니 오류가 뜨면서 진행이 되지 않았습니다. 이를 해결하기 위해 많은 시간을 고민하였고 여러가지 방법을 활용한 뒤 내린 해결책은 아래와 같습니다.
+
+```swift
+var test1 = "100000000"
+var test2 = UInt(test1, radix: 2)
+var test3 = "1111111101"
+var test4 = UInt(test3, radix: 2)
+
+let result = test2! + test4!
+let test5 = String(result, radix: 2)
+
+print(test5) // "10011111101"
+```
+
+8자리가넘어가는 String타입의 값을 바로 UInt타입으로 변환은되지 않습니다만 `test2` 그리고 `test4`와 같은 방법을 활용하면 `UInt8`타입이 아닌 `Uint` 타입을 가진 2진수로 변환할 수 있습니다. 
+
+`UInt8`은 제한 숫자가 255이기 때문에 8자리 이상의 2진수를 구현할 수 없습니다만 `UInt`는 모든 양의 정수를 취급할 수 있으니 9자리이상의 2진수를 구현할 수 있는 것 입니다!! 😂
+
+그렇기에 `UInt`타입으로 데이터를 받아서 연산을 진행하고 아래와 같은 코드를 활용하여 9자리 제한을 구현하였습니다.
+
+```swift
+func filterResult(_ input: UInt) -> String {
+  let binaryResult = String(input, radix: 2)
+  if binaryResult.count > 9 {
+    return "000000000"
+  }
+  else {
+    return pad(number: binaryResult, toSize: 9)
+  }
+}
+```
+
+조금 특별한 부분이라면 저희는 2진수 길이가 9자리를 넘어갈 경우 오버플로우가 되었다고 가정하고 `000000000`을 반환하도록 하면서 오버플로우 처리를 하였습니다.
+
+
+
+#### [Step2] 유닛테스트:
+
+### 테스트 내용
+
+```swift
+// MARK: MedianNotation → PostFixNotation
+func test_binaryNumbers_convert_to_postNotation() {
+  sut_inputDataValidator.data.medianNotation = ["~", "0101","+", "1111"]
+  sut_calculator.convertToPostfixNotation(sut_inputDataValidator)
+  XCTAssertEqual(sut_inputDataValidator.data.postfixNotation, ["0101", "~", "1111", "+"])
+}
+
+// MARK: Binary Calculation Test 
+func test_binaryCalculation_addition() {
+ sut_inputDataValidator.data.postfixNotation = ["0101", "~", "1111", "+"]
+ XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("000001001"))
+}
+func test_binaryCalculation_AND_calculation_Test() {
+ sut_inputDataValidator.data.postfixNotation = ["11111111", "10001000", "&"]
+ XCTAssertEqual(sut_binaryCalcualtion.calculatePostfixNotation(sut_inputDataValidator), .success("010001000"))
+}
+
+// MARK: Decimal Calculation Test 
+func test_decimalNumbers_convert_to_postNotation() {
+  sut_inputDataValidator.data.medianNotation = ["24.1324521","+", "1323.23124", "*", "2", "-", "63"]
+  sut_calculator.convertToPostfixNotation(sut_inputDataValidator)
+  XCTAssertEqual(sut_inputDataValidator.data.postfixNotation, ["24.1324521", "1323.23124", "2", "*", "+", "63", "-"])
+}
+func test_decimalCalculation_addition_calculation_Test() {
+	sut_inputDataValidator.data.postfixNotation = ["1234.23439", "2342.23118", "+"]
+ XCTAssertEqual(sut_decimalCalculation.calculatePostfixNotation(sut_inputDataValidator), .success("3,576.46557"))
+}
+```
+
+위와 같이 각 계산기 클래스의 핵심 메서드의 테스트 진행을 하였습니다 😃
+
