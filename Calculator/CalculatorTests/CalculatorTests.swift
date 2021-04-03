@@ -14,7 +14,7 @@ class CalculatorTests: XCTestCase {
     var testDecimalCalculator = DecimalCalculator()
     
     override func setUpWithError() throws {
-       
+        
         try super.setUpWithError()
     }
     

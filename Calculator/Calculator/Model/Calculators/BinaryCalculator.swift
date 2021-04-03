@@ -18,7 +18,7 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible, MaximumDigitLim
         guard let userInputNumber = Int(number, radix: 2) else { throw  BinaryCalculatorError.notIntNumber }
         return userInputNumber % maximumDigit
     }
-
+    
     func convertType(inputOperator: String?) throws -> Operator {
         guard let userInputOperator = inputOperator else { throw BinaryCalculatorError.nilInputFoundWhileConvertingTypeOfOperator }
         switch userInputOperator {
@@ -78,7 +78,7 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible, MaximumDigitLim
             return (operatedNumber << 1) % maximumDigit
         }
     }
-
+    
     mutating func calculate(operateSign: String?, operatedNumber: Int, operatingNumber: Int) throws -> Int {
         switch try convertType(inputOperator: operateSign) {
         case .addition:
@@ -99,27 +99,31 @@ struct BinaryCalculator: Subtractable, Addable, TypeConvertible, MaximumDigitLim
             return bitNotOperate(for: operatedNumber)
         case .rightBitShiftOperator:
             return bitShiftOperate(for: operatedNumber, isRight: true)
+        case .leftBitShiftOperator:
+            return bitShiftOperate(for: operatedNumber, isRight: false)
         default:
             throw BinaryCalculatorError.notAvailableOperator
         }
     }
-
-    mutating func executeOperate(of inputNumber: String?) {
-        do {
-            try stack.push(convertType(inputNumber: inputNumber))
-            for _ in 1...10 {
-                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop()!, operatingNumber: convertType(inputNumber: readLine())))
-            }
-        } catch {
-            print(error)
+    
+    func returnTopOfStack() throws -> Int {
+        if try stack.top() / maximumDigit >= 1 {
+            return try stack.top() % maximumDigit
+        } else {
+            return try stack.top()
         }
     }
     
-    func showTopOfStack() -> Int {
-        if stack.top! / 0b1000000000 >= 1 {
-            return stack.top! % 0b1000000000
-        } else {
-            return stack.top!
+    mutating func executeOperate(of inputNumber: String?) {
+        do {
+            try stack.push(convertType(inputNumber: inputNumber))
+            
+            for _ in 1...10 {
+                stack.push(try calculate(operateSign: readLine(), operatedNumber: stack.pop(), operatingNumber: convertType(inputNumber: readLine())))
+                print(try returnTopOfStack())
+            }
+        } catch {
+            print(error)
         }
     }
 }

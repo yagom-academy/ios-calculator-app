@@ -8,18 +8,18 @@
 import XCTest
 @testable import Calculator
 class BinaryCalculatorTest: XCTestCase {
-
+    
     var binaryCalculator = BinaryCalculator()
     
     override func setUpWithError() throws {
-      binaryCalculator = BinaryCalculator()
-      try super.setUpWithError()
+        binaryCalculator = BinaryCalculator()
+        try super.setUpWithError()
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testExample() throws {
         test_convertType_11_입력()
         test_convertType_음수_11_입력()
@@ -30,6 +30,7 @@ class BinaryCalculatorTest: XCTestCase {
         test_xorOperate_양의정수_두개()
         test_bitNotOperate_양의정수_한개()
         test_bitShiftOperate_양의정수_한개()
+        test_calculate()
     }
     
     func test_convertType_11_입력() {
@@ -66,6 +67,20 @@ class BinaryCalculatorTest: XCTestCase {
     
     func test_bitShiftOperate_양의정수_한개() {
         XCTAssertEqual(binaryCalculator.bitShiftOperate(for: -127, isRight: false), -254)
+    }
+    
+    func test_calculate() {
+        binaryCalculator = BinaryCalculator()
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "+", operatedNumber: 0b10101, operatingNumber: 2), 23)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "-", operatedNumber: 1, operatingNumber: 1), 0)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "&", operatedNumber: 0b10101, operatingNumber: 2), 0)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "~&", operatedNumber: 0b10101, operatingNumber: 2), -1)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "|", operatedNumber: 0b10101, operatingNumber: 2), 23)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "~|", operatedNumber: 0b10101, operatingNumber: 2), -24)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "^|", operatedNumber: 0b10101, operatingNumber: 2), 23)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "~", operatedNumber: 0b10101, operatingNumber: 2), -22)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: ">>", operatedNumber: 0b10101, operatingNumber: 2), 10)
+        XCTAssertEqual(try binaryCalculator.calculate(operateSign: "<<", operatedNumber: 0b10101, operatingNumber: 2), 42)
     }
 }
 
