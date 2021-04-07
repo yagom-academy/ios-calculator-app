@@ -9,6 +9,6 @@ import Foundation
 
 protocol Calculatable {
     @discardableResult
-    func calculatePostfixNotation(_ input: Data) -> Result<String, CalculationError>
+    func calculate(_ input: Data) -> Result<String, CalculationError>
 }
 

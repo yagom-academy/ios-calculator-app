@@ -8,7 +8,6 @@
 import Foundation
 
 class BinaryCalculation: Calculatable {
-
     var rightOperand = UInt()
     var leftOperand = UInt()
     var operand = UInt()
@@ -23,8 +22,9 @@ class BinaryCalculation: Calculatable {
         return padded
     }
 
-    func filterResult(_ input: UInt) -> String {
+    private func filterResult(_ input: UInt) -> String {
         let binaryResult = String(input, radix: 2)
+        
         if binaryResult.count > 9 {
             return "000000000"
         }
@@ -33,7 +33,7 @@ class BinaryCalculation: Calculatable {
         }
     }
 
-    func calculatePostfixNotation(_ input: Data) -> Result<String, CalculationError> {
+    func calculate(_ input: Data) -> Result<String, CalculationError> {
         var operandStack = Stack<UInt>()
 
         for element in input.postfixNotation {

@@ -31,18 +31,18 @@ class ViewController: UIViewController {
         //중위표현식(InputDataValidation의 manageData메서드를 통해 입력받은 String을 중위표현식 순서의 배열로 변환)
         print(inputDataValidator.data.medianNotation)
         
-        //일반계산기 인스턴스let generalCalculator: GeneralCalculator = GeneralCalculator()
-        let generalCalculator = Calculator()
+        //일반계산기 인스턴스
+        let calculator = Calculator(binaryCalculation: BinaryCalculation(), decimalCalculation: DecimalCalculation())
         
-        generalCalculator.convertToPostfixNotation(&inputDataValidator.data)
+        calculator.convertToPostfixNotation(&inputDataValidator.data)
     
         //2진계산기 결과
-        binaryCalculator.calculatePostfixNotation(inputDataValidator.data)
+        print(calculator.binaryCalculation.calculate(inputDataValidator.data))
         
         //10진계산기 결과
-        //decimalCalculator.calculatePostfixNotation(inputdatavalidation)
+        print(calculator.decimalCalculation.calculate(inputDataValidator.data))
         
-
+        // 후위표기법
         print(inputDataValidator.data.postfixNotation)
     }
 }

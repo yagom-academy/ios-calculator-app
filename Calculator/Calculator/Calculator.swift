@@ -9,6 +9,13 @@ import Foundation
 
 class Calculator {
     var operatorStack = Stack<String>()
+    var binaryCalculation: Calculatable
+    var decimalCalculation: Calculatable
+    
+    init(binaryCalculation: Calculatable, decimalCalculation: Calculatable) {
+        self.binaryCalculation = binaryCalculation
+        self.decimalCalculation = decimalCalculation
+    }
     
     private func distinguishOperatorFromOperand(_ element: String, _ input: inout Data) {
         if Operators.list.contains(element) {

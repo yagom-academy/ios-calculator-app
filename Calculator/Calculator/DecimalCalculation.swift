@@ -27,7 +27,7 @@ class DecimalCalculation: Calculatable {
         return numberFormatter.string(for: input)!
     }
    
-    func calculatePostfixNotation(_ input: Data) -> Result <String, CalculationError> {
+    func calculate(_ input: Data) -> Result <String, CalculationError> {
         var operandStack = Stack<Double>()
         
         for element in input.postfixNotation {
