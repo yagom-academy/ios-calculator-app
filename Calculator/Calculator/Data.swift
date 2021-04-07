@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Data {
+class Data {
     var medianNotation: [String] = []
     var postfixNotation: [String] = []
 }
