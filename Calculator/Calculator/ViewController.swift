@@ -37,10 +37,10 @@ class ViewController: UIViewController {
         calculator.convertToPostfixNotation(&inputDataValidator.data)
     
         //2진계산기 결과
-        print(calculator.binaryCalculation.calculate(inputDataValidator.data))
+        print(calculator.executeBinaryCalculation(inputDataValidator.data))
         
         //10진계산기 결과
-        print(calculator.decimalCalculation.calculate(inputDataValidator.data))
+        print(calculator.executeDecimalCalculation(inputDataValidator.data))
         
         // 후위표기법
         print(inputDataValidator.data.postfixNotation)

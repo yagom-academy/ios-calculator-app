@@ -61,5 +61,13 @@ class Calculator {
         }
         appendRemainingOperators(&input)
     }
+    
+    func executeBinaryCalculation(_ input: Data) -> Result<String, CalculationError> {
+        binaryCalculation.calculate(input)
+    }
+    
+    func executeDecimalCalculation(_ input: Data) -> Result<String, CalculationError> {
+        decimalCalculation.calculate(input)
+    }
 }
 

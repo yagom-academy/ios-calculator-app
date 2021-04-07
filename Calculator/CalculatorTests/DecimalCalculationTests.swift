@@ -36,26 +36,26 @@ class DecimalCalculationTests: XCTestCase {
     
     func test_decimalCalculation_addition_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["1234.23439", "2342.23118", "+"]
-        XCTAssertEqual(sut_calculator.decimalCalculation.calculate(sut_inputDataValidator.data), .success("3,576.46557"))
+        XCTAssertEqual(sut_calculator.executeDecimalCalculation(sut_inputDataValidator.data), .success("3,576.46557"))
     }
     
     func test_decimalCalculation_subtraction_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["1234.23439", "2342.23118", "-"]
-        XCTAssertEqual(sut_calculator.decimalCalculation.calculate(sut_inputDataValidator.data), .success("-1,107.99679"))
+        XCTAssertEqual(sut_calculator.executeDecimalCalculation(sut_inputDataValidator.data), .success("-1,107.99679"))
     }
     
     func test_decimalCalculation_division_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["1234.23439", "2342.23118", "/"]
-        XCTAssertEqual(sut_calculator.decimalCalculation.calculate(sut_inputDataValidator.data), .success("0.52694815"))
+        XCTAssertEqual(sut_calculator.executeDecimalCalculation(sut_inputDataValidator.data), .success("0.52694815"))
     }
     
     func test_decimalCalculation_multiplication_calculation_Test() {
         sut_inputDataValidator.data.postfixNotation = ["1234.23439", "2342.23118", "*"]
-        XCTAssertEqual(sut_calculator.decimalCalculation.calculate(sut_inputDataValidator.data), .success("2,890,862.27"))
+        XCTAssertEqual(sut_calculator.executeDecimalCalculation(sut_inputDataValidator.data), .success("2,890,862.27"))
     }
     
     func test_opratorPrecedence_calculation() {
         sut_inputDataValidator.data.postfixNotation = ["24.1324521", "1323.23124", "2", "*", "+", "63", "-"]
-        XCTAssertEqual(sut_calculator.decimalCalculation.calculate(sut_inputDataValidator.data), .success("2,607.59493"))
+        XCTAssertEqual(sut_calculator.executeDecimalCalculation(sut_inputDataValidator.data), .success("2,607.59493"))
     }
 }
