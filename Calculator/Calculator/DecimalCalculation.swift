@@ -27,11 +27,10 @@ class DecimalCalculation: Calculatable {
         return numberFormatter.string(for: input)!
     }
    
-    @discardableResult
-    func calculatePostfixNotation(_ input: InputDataValidator) -> Result <String, Error> {
+    func calculatePostfixNotation(_ input: Data) -> Result <String, CalculationError> {
         var operandStack = Stack<Double>()
         
-        for element in input.data.postfixNotation {
+        for element in input.postfixNotation {
             if !Operators.list.contains(element) {
                 guard let numbers = Double(element) else {
                     return .failure(.invalidAccess)

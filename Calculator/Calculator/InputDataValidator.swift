@@ -44,7 +44,7 @@ class InputDataValidator {
         }
     }
     
-    func validateData(input: String) {
+    func validate(input: String) {
         if data.medianNotation.isEmpty {
             filterInitialIncomingData(input)
         }

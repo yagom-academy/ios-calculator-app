@@ -33,11 +33,10 @@ class BinaryCalculation: Calculatable {
         }
     }
 
-    @discardableResult
-    func calculatePostfixNotation(_ input: InputDataValidator) -> Result<String, Error> {
+    func calculatePostfixNotation(_ input: Data) -> Result<String, CalculationError> {
         var operandStack = Stack<UInt>()
 
-        for element in input.data.postfixNotation {
+        for element in input.postfixNotation {
             if !Operators.list.contains(element) {
                 
                 guard let number = UInt(element, radix: 2) else {

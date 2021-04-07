@@ -22,7 +22,9 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
-		EA943E842616DF21000D4813 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA943E832616DF21000D4813 /* CalculatorTests.swift */; };
+		EA01FA05261D78E600027995 /* BinaryCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01FA04261D78E600027995 /* BinaryCalculationTests.swift */; };
+		EA01FA0F261D7B9F00027995 /* InputDataValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA01FA0E261D7B9F00027995 /* InputDataValidatorTests.swift */; };
+		EA943E842616DF21000D4813 /* DecimalCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA943E832616DF21000D4813 /* DecimalCalculationTests.swift */; };
 		EA943E962616FA73000D4813 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA943E952616FA73000D4813 /* ErrorHandling.swift */; };
 		EA943E972616FA73000D4813 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA943E952616FA73000D4813 /* ErrorHandling.swift */; };
 /* End PBXBuildFile section */
@@ -55,8 +57,10 @@
 		C713D94A2570E5ED001C3AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA01FA04261D78E600027995 /* BinaryCalculationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCalculationTests.swift; sourceTree = "<group>"; };
+		EA01FA0E261D7B9F00027995 /* InputDataValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidatorTests.swift; sourceTree = "<group>"; };
 		EA943E812616DF21000D4813 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA943E832616DF21000D4813 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		EA943E832616DF21000D4813 /* DecimalCalculationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalCalculationTests.swift; sourceTree = "<group>"; };
 		EA943E852616DF21000D4813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA943E952616FA73000D4813 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,9 +113,9 @@
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				B480D7A8260D946E00A42064 /* Stack.swift */,
 				B480D7AB260D94A000A42064 /* Calculator.swift */,
-				B480D7B7260F03E700A42064 /* BinaryCalculation.swift */,
 				B480D7BA260F040600A42064 /* CustomPrecedenceGroup.swift */,
 				B480D7BE260F04BC00A42064 /* Protocol.swift */,
+				B480D7B7260F03E700A42064 /* BinaryCalculation.swift */,
 				B493460B26133AAF0047C30D /* DecimalCalculation.swift */,
 				B493460F26133D560047C30D /* InputDataValidator.swift */,
 				B493461226133D850047C30D /* Precedence.swift */,
@@ -124,7 +128,9 @@
 		EA943E822616DF21000D4813 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				EA943E832616DF21000D4813 /* CalculatorTests.swift */,
+				EA943E832616DF21000D4813 /* DecimalCalculationTests.swift */,
+				EA01FA04261D78E600027995 /* BinaryCalculationTests.swift */,
+				EA01FA0E261D7B9F00027995 /* InputDataValidatorTests.swift */,
 				EA943E852616DF21000D4813 /* Info.plist */,
 			);
 			path = CalculatorTests;
@@ -250,8 +256,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA943E842616DF21000D4813 /* CalculatorTests.swift in Sources */,
+				EA943E842616DF21000D4813 /* DecimalCalculationTests.swift in Sources */,
 				EA943E972616FA73000D4813 /* ErrorHandling.swift in Sources */,
+				EA01FA05261D78E600027995 /* BinaryCalculationTests.swift in Sources */,
+				EA01FA0F261D7B9F00027995 /* InputDataValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

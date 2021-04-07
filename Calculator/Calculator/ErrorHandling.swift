@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Error: Swift.Error {
+enum CalculationError: Swift.Error {
     case invalidAccess
     case invalidOperation
 }

@@ -10,16 +10,16 @@ import Foundation
 class Calculator {
     var operatorStack = Stack<String>()
     
-    private func distinguishOperatorFromOperand(_ element: String, _ input: InputDataValidator) {
+    private func distinguishOperatorFromOperand(_ element: String, _ input: inout Data) {
         if Operators.list.contains(element) {
-            pushPriorOperator(element, input)
+            pushPriorOperator(element, &input)
         }
         else {
-            input.data.postfixNotation.append(element)
+            input.postfixNotation.append(element)
         }
     }
     
-    private func pushPriorOperator(_ element: String, _ input : InputDataValidator) {
+    private func pushPriorOperator(_ element: String, _ input : inout Data) {
         if operatorStack.isEmpty() {
             operatorStack.push(element)
         }
@@ -31,28 +31,28 @@ class Calculator {
             while incomingOperator.precedence < stackedOperator.precedence || incomingOperator.precedence == stackedOperator.precedence {
                 guard let popped = operatorStack.pop() else { break }
                 
-                input.data.postfixNotation.append(popped.value)
+                input.postfixNotation.append(popped.value)
             }
                 operatorStack.push(element)
         }
     }
     
-    private func appendRemainingOperators(_ input: InputDataValidator) {
+    private func appendRemainingOperators(_ input: inout Data) {
         while !operatorStack.isEmpty() {
             guard let remainder = operatorStack.pop()?.value else { return }
             
-            input.data.postfixNotation.append(remainder)
+            input.postfixNotation.append(remainder)
         }
     }
     
-    func convertToPostfixNotation(_ input: InputDataValidator) {
-        if Operators.list.contains(input.data.medianNotation.last!) {
-            input.data.medianNotation.removeLast()
+    func convertToPostfixNotation(_ input: inout Data) {
+        if Operators.list.contains(input.medianNotation.last!) {
+            input.medianNotation.removeLast()
         }
-        for element in input.data.medianNotation {
-            distinguishOperatorFromOperand(element, input)
+        for element in input.medianNotation {
+            distinguishOperatorFromOperand(element, &input)
         }
-        appendRemainingOperators(input)
+        appendRemainingOperators(&input)
     }
 }
 
