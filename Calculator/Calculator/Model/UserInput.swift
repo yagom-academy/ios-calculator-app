@@ -33,12 +33,27 @@ class UserInput {
         if isEmptyOperators() {
             operatorsStack.append(index)
         } else {
-            comparePriority()
+            comparePriority(stack: operatorsStack, index: index)
         }
     }
     
-    func comparePriority() {
-        //연산자 비교 
+    func comparePriority(stack:[String], index: String) {
+        let tt = stack.last
+        
+        if tt == "+" || tt == "-" {
+            operatorsStack.append(index)
+        }else {
+            if index == "+" || index == "-" {
+                while !operatorsStack.isEmpty {
+                    //addToPostfix()
+                    postfix.append(operatorsStack.removeLast())
+                }
+                operatorsStack.append(index)
+            } else {
+                postfix.append(operatorsStack.removeLast())
+                operatorsStack.append(index)
+            }
+        }
     }
 }
 
