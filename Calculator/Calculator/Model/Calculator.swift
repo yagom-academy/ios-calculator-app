@@ -1,5 +1,5 @@
 import Foundation
-
+//
 struct Calculator {
     let numberFormatter = NumberFormatter()
     
@@ -11,8 +11,8 @@ struct Calculator {
             numberFormatter.locale = NSLocale(localeIdentifier: USLocale) as Locale
         }
     }
-    
-    enum ErrorCase: Error {
+
+	enum ErrorCase: Error {
         case dividedByZero
     }
     
@@ -24,43 +24,44 @@ struct Calculator {
         return numberFormatter.string(from: NSNumber(value: number))
     }
     
-    func plus(prev: Int, next: Int) -> String? {
-        return  formatting(number: prev + next)
+    func plus(prev: Int, next: Int) -> Int {
+        return prev + next
     }
     
-    func minus(prev: Int, next: Int) -> String? {
-        return formatting(number: prev - next)
+    func minus(prev: Int, next: Int) -> Int {
+        return prev - next
     }
     
-    func multiply(prev: Int, next: Int) -> String? {
-        return formatting(number: prev * next)
+    func multiply(prev: Int, next: Int) -> Int {
+        return prev * next
     }
     
-    func divide(value: Int, by: Int) throws -> String? {
+    func divide(value: Int, by: Int) throws -> Double {
         if by == 0 {
             throw ErrorCase.dividedByZero
         } else {
-            return formatting(number: Double(value) / Double(by))
-        }
+            return Double(value) / Double(by)
+			
+		}
     }
     
-    func plus(prev: Double, next: Double) -> String? {
-        return formatting(number: prev + next)
+    func plus(prev: Double, next: Double) -> Double {
+        return prev + next
     }
     
-    func minus(prev: Double, next: Double) -> String? {
-        return formatting(number: prev - next)
+    func minus(prev: Double, next: Double) -> Double {
+        return prev - next
     }
     
-    func multiply(prev: Double, next: Double) -> String? {
-        return formatting(number: prev * next)
+    func multiply(prev: Double, next: Double) -> Double {
+        return prev * next
     }
     
-    func divide(value: Double, by: Double) throws -> String? {
+    func divide(value: Double, by: Double) throws -> Double {
         if by == 0 {
             throw ErrorCase.dividedByZero
         } else {
-            return formatting(number: value / by)
+            return value / by
         }
     }
     
