@@ -29,8 +29,12 @@ class UserInput {
         //postfix에 값추가
     }
     
-    func addToOperators() {
-        //operators에 값추가
+    func addToOperators(of index: String) {
+        if isEmptyOperators() {
+            operatorsStack.append(index)
+        } else {
+            comparePriority()
+        }
     }
     
     func comparePriority() {
