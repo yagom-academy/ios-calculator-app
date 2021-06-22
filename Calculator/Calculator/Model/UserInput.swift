@@ -7,19 +7,22 @@
 
 import Foundation
 
-//let test = ["+","-","×","÷"]
+let operators = ["+","-","×","÷"]
 
 class UserInput {
     var infix: Array<String> = []
     var postfix: Array<String> = []
-    var operators: Array<String> = []
+    var operatorsStack: Array<String> = []
     
-    func separateNumberAndOperator() {
-        //숫자냐 연산자냐???
+    func separateNumberAndOperator(from infix: Array<String>) {
+
     }
     
-    func isEmptyOperators() {
-        //operator배열에 값이 있냐 없냐?
+    func isEmptyOperators() -> Bool {
+        if operatorsStack.isEmpty {
+            return true
+        }
+        return false
     }
     
     func addToPostfix() {
