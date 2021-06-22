@@ -24,3 +24,8 @@ class Stack {
         return stack.removeLast()
     }
 }
+
+let stack = Stack()
+stack.push(element: "지원")
+let a = stack.top()
+print(a)
