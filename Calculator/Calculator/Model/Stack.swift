@@ -20,7 +20,7 @@ struct Stack<T> {
         top = top + 1
     }
     
-    mutating func pop() throws -> T {
+    @discardableResult mutating func pop() throws -> T {
         guard !isEmpty() else {
             throw StackError.stackIsEmpty
         }
