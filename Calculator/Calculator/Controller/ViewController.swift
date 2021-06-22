@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         print(inputs.infix)
     }
     
+    @IBAction func equalButtonDidTap(_ sender: UIButton) {
+        inputs.infix.append(displayUserInputNumber.text!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
