@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     
     var userInput: Bool = false
     
+    var inputs = UserInput()
+    
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
         if userInput {
             let currentDisplay = displayUserInputNumber.text!
@@ -22,7 +24,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
-        
+        inputs.infix.append(displayUserInputNumber.text!)
+        inputs.infix.append(sender.currentTitle!)
+        userInput = false
+        print(inputs.infix)
     }
     
     override func viewDidLoad() {
