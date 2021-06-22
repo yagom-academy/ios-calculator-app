@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Operators {
+    enum Operators: String, CaseIterable {
+        case plus = "+"
+        case minus = "-"
+        case multiply = "×"
+        case divide = "÷"
+    }
+}
