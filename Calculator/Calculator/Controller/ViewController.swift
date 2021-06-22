@@ -32,7 +32,9 @@ class ViewController: UIViewController {
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
         inputs.infix.append(displayUserInputNumber.text!)
+        print(inputs.infix)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
