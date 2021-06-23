@@ -9,6 +9,7 @@ import Foundation
 
 struct Calculator {
     var stack = Stack<String>()
+    var infix: [Computable]
     
     mutating func convertToPostFix(from infix: [String]) -> [String] {
         var postFixArray:[String] = []
