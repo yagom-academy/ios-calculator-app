@@ -16,11 +16,10 @@ class ViewController: UIViewController {
 	}
 	
 	func updateChangableOperator(with: String) {
-		guard let currentElementType = try? calculator.convertToComponentType(from: with),
-			  let lastElement = inputStorage.last,
-			  let lastElementType = try? calculator.convertToComponentType(from: lastElement),
-			  lastElementType == currentElementType else {
-			
+		guard let lastElement = inputStorage.last,
+			  let lastType = try? calculator.convertToComponentType(from: lastElement),
+              lastType == .operator else {
+            inputStorage.append(with)
 			return
 		}
 		
@@ -96,14 +95,13 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpEqualButton(_ sender: UIButton) {
-		print(inputStorage)
 		var postfix = [String]()
 		var numberString = ""
 		var stack = Stack()
-		print("?")
+        
 		for currentElement in inputStorage {
 			let currentType = try? calculator.convertToComponentType(from: currentElement)
-			
+            			
 			if currentType == .number {
 				numberString += currentElement
 			} else {
@@ -112,6 +110,7 @@ class ViewController: UIViewController {
 				
 				if let checkedElement = stack.peek(),
 				   let lastElement = stack.pop() {
+                    
 					if ["*", "/"].contains(lastElement) {
 						postfix.append(lastElement)
 						stack.push(element: currentElement)
@@ -120,6 +119,7 @@ class ViewController: UIViewController {
 							postfix.append(lastElement)
 							stack.push(element: currentElement)
 						} else {
+                            stack.push(element: lastElement)
 							stack.push(element: currentElement)
 						}
 					}
@@ -128,15 +128,18 @@ class ViewController: UIViewController {
 				}
 			}
 		}
-		print("?")
-		
+        
+        
+        
+        postfix.append(numberString)
+        
+        numberString = ""
+        
 		while stack.peek() != nil {
 			if let element = stack.pop() {
 				postfix.append(element)
 			}
 		}
-		print("?")
-		print(postfix)
 	}
 	
 	@IBAction func touchUpAllClearButton(_ sender: UIButton) {
