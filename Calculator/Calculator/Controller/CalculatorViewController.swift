@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -11,9 +11,11 @@ class CalculatorViewController: UIViewController {
     @IBOutlet var operatorInputLabel: UILabel!
     @IBOutlet weak var CalculationStackView: UIStackView!
     @IBOutlet weak var CalculationStackScrollView: UIScrollView!
+    var calculator = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         print(CalculationStackView.arrangedSubviews.count)
         
         for stackView in CalculationStackView.arrangedSubviews {
@@ -23,12 +25,14 @@ class CalculatorViewController: UIViewController {
     
     //FIXME: scrollview scroll : 최하단으로 내려가질 않음.
     private func addEntry() {
+        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { return }
+        calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
         let nextEntryIndex = CalculationStackView.arrangedSubviews.count
         let newEntryView = createEntryView()
         
         CalculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
         CalculationStackScrollView.setContentOffset(CGPoint(x: 0, y: CalculationStackScrollView.contentSize.height-CalculationStackScrollView.bounds.height), animated: true)
-        
+
         resetInputLabelsToDefault()
     }
     
@@ -43,17 +47,21 @@ class CalculatorViewController: UIViewController {
         newStackView.spacing = 8
         
         let operatorLabel = UILabel()
-        operatorLabel.text = inputNumber
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorLabel.textColor = UIColor.white
+        if CalculationStackView.arrangedSubviews.count == 0 {
+            operatorLabel.text = ""
+        } else {
+            operatorLabel.text = inputOperator
+            operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+            operatorLabel.textColor = UIColor.white
+        }
         
         let numberLabel = UILabel()
-        numberLabel.text = inputOperator
+        numberLabel.text = inputNumber
         numberLabel.textColor = UIColor.white
         numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        newStackView.addArrangedSubview(numberLabel)
         newStackView.addArrangedSubview(operatorLabel)
+        newStackView.addArrangedSubview(numberLabel)
         
         return newStackView
     }
@@ -79,10 +87,10 @@ class CalculatorViewController: UIViewController {
             }
         }
     }
+    
     func resetInputLabelsToDefault(){
         numberInputLabel.text = "0"
     }
-    // depth 고민
     func addNumberToNumberInputLabel(number: NumberButton) {
         // 숫자 20자리 넘어가면 더이상 추가하지 않음.
         if numberInputLabel.text == "0" {
@@ -130,33 +138,38 @@ class CalculatorViewController: UIViewController {
     @IBAction func clickDotButton(_ sender: UIButton) {
     }
     
-    // Operator
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
-        operatorInputLabel.text = "+"
         if numberInputLabel.text != "0"{
             addEntry()
         }
+        operatorInputLabel.text = "+"
     }
     @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
-        operatorInputLabel.text = "-"
         if numberInputLabel.text != "0"{
             addEntry()
         }
+        operatorInputLabel.text = "-"
     }
     @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
-        operatorInputLabel.text = "x"
         if numberInputLabel.text != "0"{
             addEntry()
         }
+        operatorInputLabel.text = "×"
     }
     @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
-        operatorInputLabel.text = "÷"
         if numberInputLabel.text != "0"{
             addEntry()
         }
+        operatorInputLabel.text = "÷"
     }
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
+        if numberInputLabel.text != "0"{
+            addEntry()
+        }
         operatorInputLabel.text = ""
+        let postfixExpression = calculator.convertExpressionToPostfix()
+        print(calculator.calculate(input: postfixExpression))
+        
         // 후위 연산 작업
         
         // 0으로 나누는 것은 "NaN" 출력
@@ -170,6 +183,7 @@ class CalculatorViewController: UIViewController {
         for stackView in CalculationStackView.arrangedSubviews {
             stackView.removeFromSuperview()
         }
+        calculator.allClear()
     }
     
     @IBAction func clickClearEntryButton(_ sender: UIButton) {

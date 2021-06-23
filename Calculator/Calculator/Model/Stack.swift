@@ -10,7 +10,10 @@ import Foundation
 struct Stack<Element> {
     var items = [Element]()
     var top: Element? {
-        return items.isEmpty ? nil : items.last
+        return items.last
+    }
+    var isEmpty: Bool {
+        return items.isEmpty
     }
     
     mutating func push(item: Element) {
@@ -19,12 +22,5 @@ struct Stack<Element> {
     
     mutating func pop() -> Element? {
         return items.popLast()
-    }
-    
-//    func peek() -> Element? {
-//        return items.last
-//    }
-    func isEmpty() -> Bool {
-        return items.isEmpty
     }
 }
