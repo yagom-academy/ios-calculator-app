@@ -14,6 +14,38 @@ struct Calculator {
 
 	enum ErrorCase: Error {
         case dividedByZero
+        case unknownInputCase
+    }
+    
+    enum Component {
+        case number
+        case `operator`
+        case equalSign
+        case allClear
+        case clearEntry
+        case signConverter
+        case dot
+    }
+    
+    func convertToComponentType(from userInput: String) throws -> Component {
+        switch userInput {
+        case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "00" :
+            return .number
+        case "/", "*", "+", "-" :
+            return .operator
+        case "=" :
+            return .equalSign
+        case "AC" :
+            return .allClear
+        case "CE" :
+            return .clearEntry
+        case "⁺⁄₋" :
+            return .signConverter
+        case "." :
+            return .dot
+        default:
+            throw ErrorCase.unknownInputCase
+        }
     }
     
     func formatting(number: Int) -> String? {
