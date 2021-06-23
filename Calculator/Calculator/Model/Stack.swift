@@ -27,6 +27,7 @@ struct Stack<T> {
         
         let target = stack[top-1]
         stack.remove(at: top-1)
+        top = top - 1
         return target
     }
     

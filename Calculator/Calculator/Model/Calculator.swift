@@ -8,28 +8,28 @@
 import Foundation
 
 struct Calculator {
-    var stack = Stack<String>()
     var infix: [Computable]
     
-    mutating func convertToPostFix(from infix: [String]) -> [String] {
-        var postFixArray:[String] = []
-        do {
-            for character in infix {
-                if character == "(" {
-                    stack.push(object: character)
-                } else if character == ")" {
-                    while try stack.peek() != "(" {
-                        postFixArray.append(try stack.peek())
-                        try stack.pop()
-                    }
-                } else if character == "*" || character == "/" {
-                    
+    mutating func convertToPostFix() throws -> [Computable] {
+        var postfix: [Computable] = []
+        var operatorStack = Stack<Operator>()
+        
+        for character in infix {
+            if let value = character as? Operand {
+                postfix.append(value)
+            } else if let value = character as? Operator {
+                while try !operatorStack.isEmpty() && value < operatorStack.peek() {
+                    try postfix.append(operatorStack.pop())
                 }
+                operatorStack.push(object: value)
             }
-        } catch {
-            
         }
-        return postFixArray
+        
+        while !operatorStack.isEmpty() {
+            try postfix.append(operatorStack.pop())
+        }
+        
+        return postfix
     }
     
     mutating func pushToInfix(with inputNotation: [String]) {
