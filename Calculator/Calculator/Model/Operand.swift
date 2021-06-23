@@ -14,7 +14,7 @@ class Operand: Computable {
         self.operandValue = operand
     }
     
-    static func checkOperandType(operand: String) -> Operandable {
+    static func checkType(of operand: String) -> Operandable {
         return 1
     }
 }

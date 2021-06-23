@@ -31,4 +31,16 @@ struct Calculator {
         }
         return postFixArray
     }
+    
+    mutating func pushToInfix(with inputNotation: [String]) {
+        for value in inputNotation {
+            if let operatorValue = Operator(rawValue: value) {
+                infix.append(operatorValue)
+            } else {
+                let number = Operand.checkType(of: value)
+                let operandValue = Operand(operand: number)
+                infix.append(operandValue)
+            }
+        }
+    }
 }
