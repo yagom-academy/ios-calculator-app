@@ -26,3 +26,4 @@ struct Stack<T> {
         return stack.last
     }
 }
+
