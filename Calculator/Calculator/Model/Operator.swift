@@ -7,8 +7,11 @@
 
 import Foundation
 
-enum Operator {
-    case add, subtract, multiply, divide
+enum Operator: String {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
+    case divide = "/"
     
     var priority: Int {
         switch self {
@@ -21,5 +24,9 @@ enum Operator {
     
     func isHigherPriority(than operator: Operator) -> Bool {
         return self.priority > `operator`.priority
+    }
+    
+    static func obtainOperator(from target: String) -> Operator {
+        return Operator(rawValue: target) ?? Operator.add
     }
 }
