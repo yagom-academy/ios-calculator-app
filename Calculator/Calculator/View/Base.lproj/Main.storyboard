@@ -243,7 +243,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpOneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5TW-0J-d5x"/>
                                                     <action selector="touchUpTwoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zqh-oc-VND"/>
                                                 </connections>
                                             </button>
@@ -294,7 +293,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="touchUpDoubleZeroButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mN7-yO-xrU"/>
-                                                    <action selector="touchUpZeroButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mYC-Wk-gHP"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
