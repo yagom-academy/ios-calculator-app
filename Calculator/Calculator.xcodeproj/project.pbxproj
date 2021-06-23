@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27A52D8026831AF600FE720E /* Calculable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A52D7F26831AF600FE720E /* Calculable.swift */; };
+		27A52D82268325BD00FE720E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A52D81268325BD00FE720E /* Calculator.swift */; };
 		C46E3CC5268316DD0093854C /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E3CC4268316DD0093854C /* Stack.swift */; };
 		C46E3CC826831DD80093854C /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E3CC726831DD80093854C /* CalculatorError.swift */; };
 		C46E3CCA26831F1A0093854C /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E3CC926831F190093854C /* Operator.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		27A52D7F26831AF600FE720E /* Calculable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Calculable.swift; path = Calculator/Calculable.swift; sourceTree = SOURCE_ROOT; };
+		27A52D81268325BD00FE720E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Calculator.swift; path = Calculator/Calculator.swift; sourceTree = SOURCE_ROOT; };
 		C46E3CC4268316DD0093854C /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		C46E3CC726831DD80093854C /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		C46E3CC926831F190093854C /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				C46E3CC4268316DD0093854C /* Stack.swift */,
 				C46E3CC926831F190093854C /* Operator.swift */,
+				27A52D81268325BD00FE720E /* Calculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				C46E3CC826831DD80093854C /* CalculatorError.swift in Sources */,
 				27A52D8026831AF600FE720E /* Calculable.swift in Sources */,
 				C46E3CCA26831F1A0093854C /* Operator.swift in Sources */,
+				27A52D82268325BD00FE720E /* Calculator.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
