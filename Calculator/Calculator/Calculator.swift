@@ -35,8 +35,29 @@ enum Operator {
 class Calculator {
     func calculate(infix: [String]) throws -> String {
         var result: String = ""
-        let postfix: [String] = try changeToPostfix(infix: infix)
+        var postfix: [String] = try changeToPostfix(infix: infix)
+        calculatePostfix(postfix: &postfix)
         return result
+    }
+    
+    func calculatePostfix(postfix: inout [String]) {
+        var tempNumberStack = Stack<String>()
+        for element in postfix {
+            if let _ = Double(element) {
+                tempNumberStack.push(element)
+            } else {
+                if let firstNumber = tempNumberStack.pop(),
+                   let secondNumber = tempNumberStack.pop() {
+                    let operation = firstNumber + element + secondNumber
+                    let convertToEquation = NSExpression(format: operation)
+                    if let result: Double = convertToEquation.expressionValue(with: nil, context: nil) as? Double {
+                        let strResult = String(result)
+                        tempNumberStack.push(strResult)
+                    }
+                }
+            }
+        }
+        print(tempNumberStack.pop()!)
     }
 
     func convertToOperator(string: String) throws -> Operator {
@@ -45,9 +66,9 @@ class Calculator {
             return .plus
         case "-":
             return .minus
-        case "×":
+        case "*":
             return .multiply
-        case "÷":
+        case "/":
             return .divide
         default:
             throw OperatorError.unknownOperator
