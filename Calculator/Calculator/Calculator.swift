@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum CalculationResult {
+    case success(Double)
+    case failure
+}
+
 class Calculator {
     private var stack = Stack<String>()
     private var infix = Array<String>()
@@ -56,7 +61,35 @@ extension Calculator {
         }
     }
     
-    func evaluate() {
-        
+    func evaluatePostfix() -> CalculationResult {
+        for element in postfix {
+            if Double(element) != nil {
+                stack.push(element: element)
+            }else {
+                guard let firstValue = stack.pop(), let secondValue = stack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue) else {
+                    return .failure
+                }
+                let `operator` = Operator.obtainOperator(from: element)
+                switch `operator` {
+                case .add:
+                    stack.push(element: String(add(lhs: lhsValue, rhs: rhsValue)))
+                case .subtract:
+                    stack.push(element: String(subtract(lhs: lhsValue, rhs: rhsValue)))
+                case .multiply:
+                    stack.push(element: String(multiply(lhs: lhsValue, rhs: rhsValue)))
+                case .divide:
+                    do {
+                        let result = try divide(lhs: lhsValue, rhs: rhsValue)
+                        stack.push(element: String(result))
+                    }catch {
+                        return .failure
+                    }
+                }
+            }
+        }
+        guard let lastValue = stack.pop(), let result = Double(lastValue) else {
+            return .failure
+        }
+        return .success(result)
     }
 }
