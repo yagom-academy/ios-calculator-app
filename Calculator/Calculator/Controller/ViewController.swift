@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
     var userInput: Bool = false
     
-    var inputs = UserInput()
+    var inputs = Infix()
     
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
         if userInput {

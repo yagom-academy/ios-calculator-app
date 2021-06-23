@@ -9,13 +9,16 @@ import Foundation
 
 let operators = ["+","-","×","÷"]
 
-class UserInput {
+public class Infix {
     var infix: Array<String> = []
+}
+
+private class Postfix {
     var postfix: Array<String> = []
     var operatorsStack: Array<String> = []
     
     func separateNumberAndOperator(from infix: Array<String>) {
-
+        
     }
     
     func isEmptyOperators() -> Bool {
@@ -56,4 +59,3 @@ class UserInput {
         }
     }
 }
-
