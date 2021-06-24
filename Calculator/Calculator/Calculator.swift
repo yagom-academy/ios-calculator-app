@@ -39,22 +39,22 @@ extension Calculator {
         infix.append(input)
     }
     
-    func changeToPosfix() {
+    func changeToPosfix() throws {
         for element in infix {
             if Double(element) != nil {
                 postfix.append(element)
             } else {
-                
+                let presentOperator = try Operator.obtainOperator(from: element)
                 while true {
-                    guard let topOfStack = stack.peek() else {
-                        break
+                    guard let topOfStack = stack.peek(), let stackOperator = try? Operator.obtainOperator(from: topOfStack) else {
+                        throw CalculatorError.unknown
                     }
-                    if stack.isEmpty || Operator.obtainOperator(from: element).isHigherPriority(than: Operator.obtainOperator(from: topOfStack)) {
+                    if stack.isEmpty || presentOperator.isHigherPriority(than: stackOperator) {
                         stack.push(element: element)
                         break
                     } else {
                         guard let `operator` = stack.pop() else {
-                            
+                            throw CalculatorError.unknown
                         }
                         postfix.append(`operator`)
                     }
@@ -63,7 +63,7 @@ extension Calculator {
         }
         while !stack.isEmpty {
             guard let `operator` = stack.pop() else {
-                <#statements#>
+                throw CalculatorError.unknown
             }
             postfix.append(`operator`)
         }
@@ -74,10 +74,9 @@ extension Calculator {
             if Double(element) != nil {
                 stack.push(element: element)
             } else {
-                guard let firstValue = stack.pop(), let secondValue = stack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue) else {
+                guard let firstValue = stack.pop(), let secondValue = stack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let `operator` = try? Operator.obtainOperator(from: element) else {
                     return .failure(.unknown)
                 }
-                let `operator` = Operator.obtainOperator(from: element)
                 switch `operator` {
                 case .add:
                     stack.push(element: String(add(lhs: lhsValue, rhs: rhsValue)))
