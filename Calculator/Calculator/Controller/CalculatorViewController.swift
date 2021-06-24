@@ -28,11 +28,13 @@ class CalculatorViewController: UIViewController {
             }
         }
     }
-    
     var calculator = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        numberInputLabel.text = "0"
+        operatorInputLabel.text = ""
+        
         for stackView in CalculationStackView.arrangedSubviews {
             stackView.removeFromSuperview()
         }
@@ -81,25 +83,25 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0"{
+        if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "+"
     }
     @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0"{
+        if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "-"
     }
     @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0" {
+        if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "×"
     }
     @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0" {
+        if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "÷"
@@ -195,11 +197,16 @@ extension CalculatorViewController {
         return newStackView
     }
     
-    func resetInputLabelsToDefault(){
+    private func resetInputLabelsToDefault() {
         numberInputLabel.text = "0"
     }
     
-    func addNumberToNumberInputLabel(number: NumberButton) {
+    private func isInputValid() -> Bool {
+        return numberInputLabel.text != "0"
+    }
+    
+    
+    private func addNumberToNumberInputLabel(number: NumberButton) {
         if numberInputLabel.text == "0" {
             if number != .doubleZero {
                 numberInputLabel.text? = "\(number)"
