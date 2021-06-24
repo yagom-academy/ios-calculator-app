@@ -46,10 +46,14 @@ extension Calculator {
             } else {
                 let presentOperator = try Operator.obtainOperator(from: element)
                 while true {
+                    if stack.isEmpty {
+                        stack.push(element: element)
+                        break
+                    }
                     guard let topOfStack = stack.peek(), let stackOperator = try? Operator.obtainOperator(from: topOfStack) else {
                         throw CalculatorError.unknown
                     }
-                    if stack.isEmpty || presentOperator.isHigherPriority(than: stackOperator) {
+                    if presentOperator.isHigherPriority(than: stackOperator) {
                         stack.push(element: element)
                         break
                     } else {
