@@ -37,9 +37,7 @@ class Calculator {
         for value in inputNotation {
             if let operatorValue = Operator(rawValue: value) {
                 infix.append(operatorValue)
-            } else {
-                let number = Operand.checkType(of: value)
-                let operandValue = Operand(operand: number)
+            } else if let operandValue = Operand(operand: value) {
                 infix.append(operandValue)
             }
         }

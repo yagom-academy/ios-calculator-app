@@ -15,11 +15,14 @@ extension Double: Operandable { }
 class Operand: Computable {
     var operandValue: Operandable
     
-    init(operand: Operandable) {
-        self.operandValue = operand
+    init?(operand: String) {
+        guard let operandValue = Operand.conversionOperandable(of: operand) else {
+            return nil
+        }
+        self.operandValue = operandValue
     }
     
-    static func checkType(of operand: String) -> Operandable {
-        return 1
+    private static func conversionOperandable(of operand: String) -> Operandable? {
+        return Int(1)
     }
 }
