@@ -9,9 +9,10 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var displayUserInputNumber: UILabel!
     
-    var userInput: Bool = false
-    var input = Infix()
-    var postfix = Postfix()
+    private var userInput: Bool = false
+    private var input = Infix()
+    private var postfix = Postfix()
+    private var calculator = Calculator()
     
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
         if userInput {
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
         postfix.separateNumberAndOperator(from: input.infix)
         print(postfix.postfix)
         print(postfix.operatorsStack)
+        print(calculator.calculatePostfix())
     }
     
     override func viewDidLoad() {

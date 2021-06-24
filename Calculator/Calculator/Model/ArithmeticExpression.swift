@@ -82,7 +82,4 @@ class Postfix {
             postfix.append(operatorsStack.removeLast())
         }
     }
-
-    func calculatePostfix() {
-    }
 }
