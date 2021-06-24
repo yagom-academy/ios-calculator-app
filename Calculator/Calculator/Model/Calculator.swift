@@ -10,6 +10,16 @@ import Foundation
 struct Calculator {
     private var infixQueue = Queue<String>()
     
+    private mutating func checkOperatorsInStack(_ object: String,
+                                   operatorStack: inout Stack<String>,
+                                   postfix: inout Queue<String>) {
+        while let topOperator = operatorStack.top,
+              (topOperator <=> object) || (topOperator >>> object) {
+            postfix.enqueue(operatorStack.pop())
+        }
+        operatorStack.push(object)
+    }
+    
     private mutating func transformInfixToPostfix() -> Queue<String> {
         var postfixQueue = Queue<String>()
         var operatorStack = Stack<String>()
