@@ -46,22 +46,22 @@ class Postfix {
         operatorsStack.append(index)
     }
     
-    func changeToOperatorsEnum(_ item: String) -> Operators {
+    func changeToOperatorsEnum(_ item: String) -> Operator {
         let lastStackOperator = item
         
         switch lastStackOperator {
         case "+":
-            return Operators.plus
+            return Operator.plus
         case "−":
-            return Operators.minus
+            return Operator.minus
         case "×":
-            return Operators.multiply
+            return Operator.multiply
         default:
-            return Operators.divide
+            return Operator.divide
         }
     }
     
-    func compareAndDecidePriority(lastStack: Operators, with input: Operators) {
+    func compareAndDecidePriority(lastStack: Operator, with input: Operator) {
         if lastStack < input {
             addToOperatorStack(of: input.operatorSymbol)
         } else if lastStack == input {
