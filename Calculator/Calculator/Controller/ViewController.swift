@@ -8,8 +8,8 @@ import UIKit
 
 class ViewController: UIViewController {
 	
-	let calculator = Calculator()
-	var inputStorage: [String] = []
+    let calculator: CalculatorDelegate = Calculator()
+    var inputStorage: [String] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -95,53 +95,8 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpEqualButton(_ sender: UIButton) {
-		var postfix = [String]()
-		var numberString = ""
-		var stack = Stack()
-        
-		for currentElement in inputStorage {
-			let currentType = try? calculator.convertToComponentType(from: currentElement)
-            			
-			if currentType == .number {
-				numberString += currentElement
-			} else {
-				postfix.append(numberString)
-				numberString = ""
-				
-				if let checkedElement = stack.peek(),
-				   let lastElement = stack.pop() {
-                    
-					if ["*", "/"].contains(lastElement) {
-						postfix.append(lastElement)
-						stack.push(element: currentElement)
-					} else {
-						if ["+", "-"].contains(currentElement) {
-							postfix.append(lastElement)
-							stack.push(element: currentElement)
-						} else {
-                            stack.push(element: lastElement)
-							stack.push(element: currentElement)
-						}
-					}
-				} else {
-					stack.push(element: currentElement)
-				}
-			}
-		}
-        
-        
-        
-        postfix.append(numberString)
-        
-        numberString = ""
-        
-		while stack.peek() != nil {
-			if let element = stack.pop() {
-				postfix.append(element)
-			}
-		}
-	}
 	
+    }
 	@IBAction func touchUpAllClearButton(_ sender: UIButton) {
 		inputStorage.removeAll()
 	}

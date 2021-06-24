@@ -1,33 +1,97 @@
 import Foundation
 //
-struct Calculator {
-	let numberFormatter = NumberFormatter()
+struct Calculator: CalculatorDelegate {
+    
+    enum ErrorCase: Error {
+        case dividedByZero
+        case unknownInputCase
+    }
+    
+    let numberFormatter = NumberFormatter()
+    
+    init() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumSignificantDigits = 20
+        if let USLocale = NSLocale().displayName(forKey: .countryCode, value: "en_US") {
+            numberFormatter.locale = NSLocale(localeIdentifier: USLocale) as Locale
+        }
+    }
+    
+ 
+    
+    func convertToPostfixExpression(fromInfix input: [String]) -> [String] {
+        var postfix = [String]()
+        var numberString = ""
+        var stack = Stack()
+        
+        for currentElement in input {
+            let currentType = try? convertToComponentType(from: currentElement)
+                        
+            if currentType == .number {
+                numberString += currentElement
+            } else {
+                postfix.append(numberString)
+                numberString = ""
+                
+                if let checkedElement = stack.peek(),
+                   let lastElement = stack.pop() {
+                    
+                    if ["*", "/"].contains(lastElement) {
+                        postfix.append(lastElement)
+                        stack.push(element: currentElement)
+                    } else {
+                        if ["+", "-"].contains(currentElement) {
+                            postfix.append(lastElement)
+                            stack.push(element: currentElement)
+                        } else {
+                            stack.push(element: lastElement)
+                            stack.push(element: currentElement)
+                        }
+                    }
+                } else {
+                    stack.push(element: currentElement)
+                }
+            }
+        }
+        
+        postfix.append(numberString)
+        
+        numberString = ""
+        
+        while stack.peek() != nil {
+            if let element = stack.pop() {
+                postfix.append(element)
+            }
+        }
+        
+        return postfix
+    }
+    
+    
+    func calculatePostfixExpression(postfix: [String]) -> NSNumber {
+        var result = [String]()
+        var stack = Stack()
+        for element in postfix {
+            let elementType = try? convertToComponentType(from: element)
+            switch elementType {
+            case .operator:
+//                if let next = stack.pop(),
+//                   let prev = stack.pop() {
+//                    if element == "+" {
+//                      stack.push(element: (Double(prev) + Double(next))
+//                                    }
+               
+            default:
+                stack.push(element: element)
+            }
+        }
+    }
+    
+
+
 	
-	init() {
-		numberFormatter.numberStyle = .decimal
-		numberFormatter.roundingMode = .halfUp
-		numberFormatter.maximumSignificantDigits = 20
-		if let USLocale = NSLocale().displayName(forKey: .countryCode, value: "en_US") {
-			numberFormatter.locale = NSLocale(localeIdentifier: USLocale) as Locale
-		}
-	}
-	
-	enum ErrorCase: Error {
-		case dividedByZero
-		case unknownInputCase
-	}
-	
-	enum Component {
-		case number
-		case `operator`
-		case equalSign
-		case allClear
-		case clearEntry
-		case signConverter
-		case dot
-	}
-	
-	func convertToComponentType(from userInput: String) throws -> Component {
+	func convertToComponentType(from userInput: String) throws -> CalculatorComponent {
 		switch userInput {
 		case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "00" :
 			return .number
