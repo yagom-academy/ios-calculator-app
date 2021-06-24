@@ -24,5 +24,20 @@ struct Calculator {
             postfixQueue.enqueue(top)
         }
     }
-    
+    mutating func makeCalculation() -> String {
+        var operandStack = Stack<String>()
+        
+        while let dequeueElement = postfixQueue.dequeue() {
+            if let _ = Int(dequeueElement) {
+                operandStack.push(dequeueElement)
+            } else {
+                let firstPop = operandStack.pop()
+                let secondPop = operandStack.pop()
+                
+                //let calculatedNumber = calculate()
+                //연산결과 스택에 푸쉬
+            }
+        }
+        return operandStack.pop()
+    }
 }
