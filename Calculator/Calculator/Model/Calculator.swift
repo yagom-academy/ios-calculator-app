@@ -2,16 +2,16 @@
 //  Calculator.swift
 //  Calculator
 //
-//  Created by 이예원 on 2021/06/24.
+//  Created by Marco, Charlotte on 2021/06/24.
 //
 
 import Foundation
 
 struct Calculator {
     private var infixQueue = Queue<String>()
-    private var postfixQueue = Queue<String>()
     
-    mutating func transformInfixToPostfix() {
+    private mutating func transformInfixToPostfix() -> Queue<String> {
+        var postfixQueue = Queue<String>()
         var operatorStack = Stack<String>()
         while let dequeueElement = infixQueue.dequeue() {
             if let _ = Int(dequeueElement) {
@@ -23,21 +23,31 @@ struct Calculator {
         while let top = operatorStack.pop() {
             postfixQueue.enqueue(top)
         }
+        return postfixQueue
     }
-    mutating func makeCalculation() -> String {
+    mutating func makeCalculation() throws -> String {
+        var postfix = transformInfixToPostfix()
+        
         var operandStack = Stack<String>()
         
-        while let dequeueElement = postfixQueue.dequeue() {
+        while let dequeueElement = postfix.dequeue() {
             if let _ = Int(dequeueElement) {
                 operandStack.push(dequeueElement)
             } else {
-                let firstPop = operandStack.pop()
-                let secondPop = operandStack.pop()
+                guard let firstOperand = operandStack.pop() else {
+                    throw StackError.underflow
+                }
+                guard let secondOperand = operandStack.pop() else {
+                    throw StackError.underflow
+                }
                 
                 //let calculatedNumber = calculate()
                 //연산결과 스택에 푸쉬
             }
         }
-        return operandStack.pop()
+        guard let result = operandStack.pop() else {
+            throw StackError.underflow
+        }
+        return result
     }
 }

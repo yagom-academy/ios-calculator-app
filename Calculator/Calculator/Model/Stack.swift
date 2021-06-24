@@ -2,10 +2,14 @@
 //  Stack.swift
 //  Calculator
 //
-//  Created by 이예원 on 2021/06/24.
+//  Created by Marco, Charlotte on 2021/06/24.
 //
 
 import Foundation
+
+enum StackError: Error {
+    case underflow
+}
 
 struct Stack<T> {
     private var stack = Array<T>()

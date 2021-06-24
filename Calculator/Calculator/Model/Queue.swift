@@ -2,7 +2,7 @@
 //  Queue.swift
 //  Calculator
 //
-//  Created by Yongwoo Marco on 2021/06/24.
+//  Created by Marco, Charlotte on 2021/06/24.
 //
 
 import Foundation
