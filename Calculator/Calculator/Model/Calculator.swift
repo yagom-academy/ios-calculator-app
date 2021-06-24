@@ -14,8 +14,20 @@ extension Double {
 }
 
 struct Calculator {
+    
+    enum Operations: String {
+        case plus = "+"
+        case minus = "-"
+        case multiply = "×"
+        case divide = "÷"
+        
+        var description: String {
+            return self.rawValue
+        }
+    }
+    
     var expressionEntry = [String]()
-
+    
     mutating func enterExpression(operation: String, inputNumber: String) {
         if expressionEntry.isEmpty {
             expressionEntry.append(inputNumber)
@@ -32,41 +44,39 @@ struct Calculator {
     
     func isOperator(item: String) -> Bool {
         switch item {
-        case "+", "-", "x", "÷":
+        case "+", "-", "×", "÷":
             return true
         default:
             return false
         }
     }
     
-    private func isNewEntryProceed(stackTop op1: String,newEntry op2: String) -> Bool {
+    private func isNewEntryProceed(stackTop op1: Operations, newEntry op2: Operations) -> Bool {
         switch op1 {
-        case "x", "÷":
-            return (op2 == "x" || op2 == "÷") ? true : false
-        case "+", "-":
-            return true
-
-        default:
-            return true
+        case .multiply, .divide:
+            return false
+        case .plus, .minus:
+            return (op2 == .multiply || op2 == .divide) ? true : false
         }
     }
     
     func convertExpressionToPostfix() -> [String] {
         var result = [String]()
-        var operationStack = Stack<String>()
+        var operationStack = Stack<Operations>()
         
         for item in expressionEntry {
             if isOperator(item: item) {
+                guard let newOperation = Operations.init(rawValue: item) else { return [] }
                 while true {
                     guard let stackTop = operationStack.top else {
-                        operationStack.push(item: item)
+                        operationStack.push(item: newOperation)
                         break
                     }
-                    if isNewEntryProceed(stackTop: stackTop, newEntry: item) {
-                        operationStack.push(item: item)
+                    if isNewEntryProceed(stackTop: stackTop, newEntry: newOperation) {
+                        operationStack.push(item: newOperation)
                         break
                     } else {
-                        result.append(stackTop)
+                        result.append(stackTop.description)
                         operationStack.pop()
                     }
                 }
@@ -76,7 +86,7 @@ struct Calculator {
         }
         while !operationStack.isEmpty {
             guard let operation = operationStack.pop() else { break }
-            result.append(operation)
+            result.append(operation.description)
         }
         print(result)
         return result
@@ -89,8 +99,8 @@ struct Calculator {
         while !entry.isEmpty {
             let firstValue = entry.removeFirst()
             if isOperator(item: firstValue) {
-                guard let secondOperand = calculationStack.pop() else {return "1"}
-                guard let firstOperand = calculationStack.pop() else {return "2"}
+                guard let secondOperand = calculationStack.pop() else { return "1" }
+                guard let firstOperand = calculationStack.pop() else { return "2" }
                 let outCome = performOperation(firstOperand: firstOperand, secondOperand: secondOperand, operation: firstValue)
                 
                 calculationStack.push(item: outCome)
@@ -110,11 +120,10 @@ struct Calculator {
             return firstOperand + secondOperand
         case "-":
             return firstOperand - secondOperand
-        case "x":
+        case "×":
             return firstOperand * secondOperand
         case "÷":
             return firstOperand / secondOperand
-        
         default:
             return 0.0
         }

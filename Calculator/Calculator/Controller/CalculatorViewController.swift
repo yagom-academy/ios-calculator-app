@@ -7,65 +7,6 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    @IBOutlet var numberInputLabel: UILabel!
-    @IBOutlet var operatorInputLabel: UILabel!
-    @IBOutlet weak var CalculationStackView: UIStackView!
-    @IBOutlet weak var CalculationStackScrollView: UIScrollView!
-    var calculator = Calculator()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        print(CalculationStackView.arrangedSubviews.count)
-        
-        for stackView in CalculationStackView.arrangedSubviews {
-            stackView.removeFromSuperview()
-        }
-    }
-    
-    //FIXME: scrollview scroll : 최하단으로 내려가질 않음.
-    private func addEntry() {
-        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { return }
-        calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
-        let nextEntryIndex = CalculationStackView.arrangedSubviews.count
-        let newEntryView = createEntryView()
-        
-        CalculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
-        CalculationStackScrollView.setContentOffset(CGPoint(x: 0, y: CalculationStackScrollView.contentSize.height-CalculationStackScrollView.bounds.height), animated: true)
-
-        resetInputLabelsToDefault()
-    }
-    
-    private func createEntryView() -> UIView {
-        let inputNumber = numberInputLabel.text
-        let inputOperator = operatorInputLabel.text
-        
-        let newStackView = UIStackView()
-        newStackView.axis = .horizontal
-        newStackView.alignment = .trailing
-        newStackView.distribution = .fill
-        newStackView.spacing = 8
-        
-        let operatorLabel = UILabel()
-        if CalculationStackView.arrangedSubviews.count == 0 {
-            operatorLabel.text = ""
-        } else {
-            operatorLabel.text = inputOperator
-            operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-            operatorLabel.textColor = UIColor.white
-        }
-        
-        let numberLabel = UILabel()
-        numberLabel.text = inputNumber
-        numberLabel.textColor = UIColor.white
-        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        newStackView.addArrangedSubview(operatorLabel)
-        newStackView.addArrangedSubview(numberLabel)
-        
-        return newStackView
-    }
-    
     
     enum NumberButton: CustomStringConvertible {
         case one, two, three, four, five, six, seven,
@@ -88,19 +29,20 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func resetInputLabelsToDefault(){
-        numberInputLabel.text = "0"
-    }
-    func addNumberToNumberInputLabel(number: NumberButton) {
-        // 숫자 20자리 넘어가면 더이상 추가하지 않음.
-        if numberInputLabel.text == "0" {
-            if number != .doubleZero {
-                numberInputLabel.text? = "\(number)"
-            }
-        } else {
-            numberInputLabel.text? += "\(number)"
+    var calculator = Calculator()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        for stackView in CalculationStackView.arrangedSubviews {
+            stackView.removeFromSuperview()
         }
     }
+    
+    // MARK: UIItems
+    @IBOutlet var numberInputLabel: UILabel!
+    @IBOutlet var operatorInputLabel: UILabel!
+    @IBOutlet weak var CalculationStackView: UIStackView!
+    @IBOutlet weak var CalculationStackScrollView: UIScrollView!
     
     @IBAction func clickNumberOneButton(_ sender: UIButton) {
         addNumberToNumberInputLabel(number: .one)
@@ -151,34 +93,31 @@ class CalculatorViewController: UIViewController {
         operatorInputLabel.text = "-"
     }
     @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0"{
+        if numberInputLabel.text != "0" {
             addEntry()
         }
         operatorInputLabel.text = "×"
     }
     @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0"{
+        if numberInputLabel.text != "0" {
             addEntry()
         }
         operatorInputLabel.text = "÷"
     }
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
-        if numberInputLabel.text != "0"{
+        if numberInputLabel.text != "0" {
             addEntry()
         }
         operatorInputLabel.text = ""
         let postfixExpression = calculator.convertExpressionToPostfix()
-        print(calculator.calculate(input: postfixExpression))
-        
+        numberInputLabel.text = calculator.calculate(input: postfixExpression)
+        calculator.allClear()
         // 후위 연산 작업
-        
         // 0으로 나누는 것은 "NaN" 출력
-        
         // 결과를 20자리 이상 넘어가지 않도록 함.
     }
     
     @IBAction func clickAllClearButton(_ sender: UIButton) {
-
         numberInputLabel.text = "0"
         for stackView in CalculationStackView.arrangedSubviews {
             stackView.removeFromSuperview()
@@ -200,3 +139,67 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+// MARK:- Calculator functions
+extension CalculatorViewController {
+    
+
+    
+    private func addEntry() {
+        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { return }
+        calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
+        let nextEntryIndex = CalculationStackView.arrangedSubviews.count
+        let newEntryView = createEntryView()
+        
+        CalculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
+        CalculationStackScrollView.setContentOffset(CGPoint(x: 0, y: CalculationStackScrollView.contentSize.height-CalculationStackScrollView.bounds.height), animated: true)
+        
+        resetInputLabelsToDefault()
+    }
+    
+    private func createEntryView() -> UIView {
+        let inputNumber = numberInputLabel.text
+        let inputOperator = operatorInputLabel.text
+        
+        let newStackView = UIStackView()
+        newStackView.axis = .horizontal
+        newStackView.alignment = .trailing
+        newStackView.distribution = .fill
+        newStackView.spacing = 8
+        
+        let operatorLabel = UILabel()
+        if CalculationStackView.arrangedSubviews.count == 0 {
+            operatorLabel.text = ""
+        } else {
+            operatorLabel.text = inputOperator
+            operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+            operatorLabel.textColor = UIColor.white
+        }
+        
+        let numberLabel = UILabel()
+        numberLabel.text = inputNumber
+        numberLabel.textColor = UIColor.white
+        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        newStackView.addArrangedSubview(operatorLabel)
+        newStackView.addArrangedSubview(numberLabel)
+        
+        return newStackView
+    }
+    
+ 
+    
+    func resetInputLabelsToDefault(){
+        numberInputLabel.text = "0"
+    }
+    
+    func addNumberToNumberInputLabel(number: NumberButton) {
+        // 숫자 20자리 넘어가면 더이상 추가하지 않음.
+        if numberInputLabel.text == "0" {
+            if number != .doubleZero {
+                numberInputLabel.text? = "\(number)"
+            }
+        } else {
+            numberInputLabel.text? += "\(number)"
+        }
+    }
+}
