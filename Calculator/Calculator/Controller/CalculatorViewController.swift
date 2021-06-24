@@ -82,46 +82,51 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
         if numberInputLabel.text != "0"{
-            addEntry()
+            try? addEntry()
         }
         operatorInputLabel.text = "+"
     }
     @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
         if numberInputLabel.text != "0"{
-            addEntry()
+            try? addEntry()
         }
         operatorInputLabel.text = "-"
     }
     @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
         if numberInputLabel.text != "0" {
-            addEntry()
+            try? addEntry()
         }
         operatorInputLabel.text = "×"
     }
     @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
         if numberInputLabel.text != "0" {
-            addEntry()
+            try? addEntry()
         }
         operatorInputLabel.text = "÷"
     }
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
-        var postfixExpression: [String] = []
-        if numberInputLabel.text != "0" {
-            addEntry()
+        do {
+            try addEntry()
+        } catch CalculatorError.DivideByZero {
+            numberInputLabel.text = "NaN"
+            operatorInputLabel.text = ""
+            calculator.allClear()
+            return
+        } catch {
+            print("Unknown Error")
         }
         operatorInputLabel.text = ""
         
         do {
-            postfixExpression = try calculator.convertExpressionToPostfix()
+            numberInputLabel.text = try calculator.calculate()
+        } catch CalculatorError.FailToTypeCasting {
+            print("Type Casting Error")
+        } catch CalculatorError.FailToPopFromCalculationStack {
+            print("Stack Pop Error")
         } catch {
-            
+            print("Unknown Error")
         }
-        
-        numberInputLabel.text = try? calculator.calculate(input: postfixExpression)
         calculator.allClear()
-        // 후위 연산 작업
-        // 0으로 나누는 것은 "NaN" 출력
-        // 결과를 20자리 이상 넘어가지 않도록 함.
     }
     
     @IBAction func clickAllClearButton(_ sender: UIButton) {
@@ -148,18 +153,15 @@ class CalculatorViewController: UIViewController {
 
 // MARK:- Calculator functions
 extension CalculatorViewController {
-    
-    
-    
-    private func addEntry() {
-        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { return }
+    private func addEntry() throws {
+        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { throw CalculatorError.InValidInput }
+        guard (inputNumber == "0" && inputOperator == "÷") == false else{ throw CalculatorError.DivideByZero }
         calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
         let nextEntryIndex = CalculationStackView.arrangedSubviews.count
         let newEntryView = createEntryView()
         
         CalculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
         CalculationStackScrollView.setContentOffset(CGPoint(x: 0, y: CalculationStackScrollView.contentSize.height-CalculationStackScrollView.bounds.height), animated: true)
-        
         resetInputLabelsToDefault()
     }
     
@@ -193,14 +195,11 @@ extension CalculatorViewController {
         return newStackView
     }
     
-    
-    
     func resetInputLabelsToDefault(){
         numberInputLabel.text = "0"
     }
     
     func addNumberToNumberInputLabel(number: NumberButton) {
-        // 숫자 20자리 넘어가면 더이상 추가하지 않음.
         if numberInputLabel.text == "0" {
             if number != .doubleZero {
                 numberInputLabel.text? = "\(number)"

@@ -9,17 +9,18 @@ import Foundation
 
 struct Stack<Element> {
     var items = [Element]()
-    var top: Element? {
-        return items.last
-    }
     var isEmpty: Bool {
         return items.isEmpty
+    }
+    
+    func peek() -> Element? {
+        return items.last
     }
     
     mutating func push(item: Element) {
         items.append(item)
     }
-    
+    @discardableResult
     mutating func pop() -> Element? {
         return items.popLast()
     }

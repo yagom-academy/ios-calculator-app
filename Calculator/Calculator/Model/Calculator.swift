@@ -16,12 +16,13 @@ extension Double {
 enum CalculatorError: Error {
     case FailToPopFromCalculationStack
     case FailToTypeCasting
-    case InValidError
+    case InValidInput
+    case DivideByZero
 }
 
 struct Calculator {
     
-    enum Operations: String {
+    private enum Operations: String {
         case plus = "+"
         case minus = "-"
         case multiply = "×"
@@ -32,7 +33,7 @@ struct Calculator {
         }
     }
     
-    var expressionEntry = [String]()
+    private var expressionEntry = [String]()
     
     mutating func enterExpression(operation: String, inputNumber: String) {
         if expressionEntry.isEmpty {
@@ -48,7 +49,7 @@ struct Calculator {
         expressionEntry.removeAll()
     }
     
-    func isOperator(item: String) -> Bool {
+    private func isOperator(item: String) -> Bool {
         switch item {
         case "+", "-", "×", "÷":
             return true
@@ -57,7 +58,7 @@ struct Calculator {
         }
     }
     
-    private func isNewEntryProceed(stackTop op1: Operations, newEntry op2: Operations) -> Bool {
+    private func isNewOperatorProceed(stackTop op1: Operations, newEntry op2: Operations) -> Bool {
         switch op1 {
         case .multiply, .divide:
             return false
@@ -66,7 +67,7 @@ struct Calculator {
         }
     }
     
-    func convertExpressionToPostfix() throws -> [String] {
+    private func convertExpressionToPostfix() throws -> [String] {
         var result = [String]()
         var operationStack = Stack<Operations>()
         
@@ -74,11 +75,11 @@ struct Calculator {
             if isOperator(item: item) {
                 guard let newOperation = Operations.init(rawValue: item) else { throw CalculatorError.FailToTypeCasting }
                 while true {
-                    guard let stackTop = operationStack.top else {
+                    guard let stackTop = operationStack.peek() else {
                         operationStack.push(item: newOperation)
                         break
                     }
-                    if isNewEntryProceed(stackTop: stackTop, newEntry: newOperation) {
+                    if isNewOperatorProceed(stackTop: stackTop, newEntry: newOperation) {
                         operationStack.push(item: newOperation)
                         break
                     } else {
@@ -98,9 +99,9 @@ struct Calculator {
         return result
     }
     
-    func calculate(input: [String]) throws -> String {
+    func calculate() throws -> String {
+        var entry = try convertExpressionToPostfix() 
         var calculationStack = Stack<Double>()
-        var entry = input
         
         while !entry.isEmpty {
             let firstValue = entry.removeFirst()
@@ -120,7 +121,7 @@ struct Calculator {
         return finalResult.toString()
     }
     
-    func performOperation(firstOperand: Double, secondOperand: Double, operation: String) -> Double {
+    private func performOperation(firstOperand: Double, secondOperand: Double, operation: String) -> Double {
         switch operation {
         case "+":
             return firstOperand + secondOperand
@@ -135,3 +136,4 @@ struct Calculator {
         }
     }
 }
+
