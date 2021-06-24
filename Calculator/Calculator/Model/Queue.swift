@@ -17,7 +17,7 @@ struct Queue<T> {
     mutating func enqueue(_ value: T) {
         queue.append(value)
     }
-    mutating func dequeue() -> T {
-        return queue.removeFirst()
+    mutating func dequeue() -> T? {
+        return queue.isEmpty ? nil : queue.removeFirst()
     }
 }
