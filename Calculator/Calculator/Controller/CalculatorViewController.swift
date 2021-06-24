@@ -105,12 +105,19 @@ class CalculatorViewController: UIViewController {
         operatorInputLabel.text = "÷"
     }
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
+        var postfixExpression: [String] = []
         if numberInputLabel.text != "0" {
             addEntry()
         }
         operatorInputLabel.text = ""
-        let postfixExpression = calculator.convertExpressionToPostfix()
-        numberInputLabel.text = calculator.calculate(input: postfixExpression)
+        
+        do {
+            postfixExpression = try calculator.convertExpressionToPostfix()
+        } catch {
+            
+        }
+        
+        numberInputLabel.text = try? calculator.calculate(input: postfixExpression)
         calculator.allClear()
         // 후위 연산 작업
         // 0으로 나누는 것은 "NaN" 출력
@@ -142,7 +149,7 @@ class CalculatorViewController: UIViewController {
 // MARK:- Calculator functions
 extension CalculatorViewController {
     
-
+    
     
     private func addEntry() {
         guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { return }
@@ -186,7 +193,7 @@ extension CalculatorViewController {
         return newStackView
     }
     
- 
+    
     
     func resetInputLabelsToDefault(){
         numberInputLabel.text = "0"

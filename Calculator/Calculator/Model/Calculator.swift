@@ -13,6 +13,12 @@ extension Double {
     }
 }
 
+enum CalculatorError: Error {
+    case FailToPopFromCalculationStack
+    case FailToTypeCasting
+    case InValidError
+}
+
 struct Calculator {
     
     enum Operations: String {
@@ -60,13 +66,13 @@ struct Calculator {
         }
     }
     
-    func convertExpressionToPostfix() -> [String] {
+    func convertExpressionToPostfix() throws -> [String] {
         var result = [String]()
         var operationStack = Stack<Operations>()
         
         for item in expressionEntry {
             if isOperator(item: item) {
-                guard let newOperation = Operations.init(rawValue: item) else { return [] }
+                guard let newOperation = Operations.init(rawValue: item) else { throw CalculatorError.FailToTypeCasting }
                 while true {
                     guard let stackTop = operationStack.top else {
                         operationStack.push(item: newOperation)
@@ -92,25 +98,25 @@ struct Calculator {
         return result
     }
     
-    func calculate(input: [String]) -> String {
+    func calculate(input: [String]) throws -> String {
         var calculationStack = Stack<Double>()
         var entry = input
         
         while !entry.isEmpty {
             let firstValue = entry.removeFirst()
             if isOperator(item: firstValue) {
-                guard let secondOperand = calculationStack.pop() else { return "1" }
-                guard let firstOperand = calculationStack.pop() else { return "2" }
+                guard let secondOperand = calculationStack.pop(), let firstOperand = calculationStack.pop() else { throw CalculatorError.FailToPopFromCalculationStack }
+                
                 let outCome = performOperation(firstOperand: firstOperand, secondOperand: secondOperand, operation: firstValue)
                 
                 calculationStack.push(item: outCome)
             } else {
-                guard let operand = Double(firstValue) else { return "3" }
+                guard let operand = Double(firstValue) else { throw CalculatorError.FailToTypeCasting }
                 
                 calculationStack.push(item: operand)
             }
         }
-        guard let finalResult = calculationStack.pop() else { return "444" }
+        guard let finalResult = calculationStack.pop() else { throw CalculatorError.FailToPopFromCalculationStack }
         return finalResult.toString()
     }
     
