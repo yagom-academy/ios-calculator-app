@@ -1,17 +1,17 @@
 import Foundation
 
 class Calculator {
-    var currentInput = ""
-    var infixNotation = [String]()
+    private var currentInput = ""
+    private var infixNotation = [String]()
     
-    func isPriorOperator(this first: String, to second: String) -> Bool {
+    private func isPriorOperator(this first: String, to second: String) -> Bool {
         let highPriorityOperator = Set(["*", "/"])
         let lowPriorityOperator = Set(["+", "-"])
         return highPriorityOperator.contains(first) && lowPriorityOperator.contains(second)
     }
     
-    func moveNonPriorOperator(from stack: Stack, to postfix: inout [String], than element: String) {
-        while let top = stack.top(), !isPriorOperator(this: element, to: top) {
+    private func moveNonPriorOperator(than element: String, from stack: inout Stack, to postfix: inout [String]) {
+        while let top = stack.top, !isPriorOperator(this: element, to: top) {
             guard let top = stack.pop() else {
                 continue
             }
@@ -19,8 +19,8 @@ class Calculator {
         }
     }
 
-    func convertToPosfix() -> [String] {
-        let tempStack = Stack()
+    func convertToPostfix() -> [String] {
+        var tempStack = Stack()
         var postfix = [String]()
 
         for element in infixNotation {
@@ -28,7 +28,7 @@ class Calculator {
                 postfix.append(element)
                 continue
             }
-            moveNonPriorOperator(from: tempStack, to: &postfix, than: element)
+            moveNonPriorOperator(than: element, from: &tempStack, to: &postfix)
             tempStack.push(element: element)
         }
         while let top = tempStack.pop() {
@@ -37,19 +37,17 @@ class Calculator {
         return postfix
     }
 
-    func calculatePosfix() throws -> String? {
-        let postfix = convertToPosfix()
-        let tempStack = Stack()
+    func calculatePostfix() throws -> String? {
+        let postfix = convertToPostfix()
+        var tempStack = Stack()
 
         for element in postfix {
             if let _  = Double(element) {
                 tempStack.push(element: element)
                 continue
             }
-			guard let operand2 = tempStack.pop(), let operand1 = tempStack.pop() else {
-				continue
-			}
-			if let operand2 = Double(operand2), let operand1 = Double(operand1) {
+			if let operand2String = tempStack.pop(), let operand1String = tempStack.pop(),
+               let operand2 = Double(operand2String), let operand1 = Double(operand1String) {
                 var result: Double?
                 switch element {
                 case "+":
