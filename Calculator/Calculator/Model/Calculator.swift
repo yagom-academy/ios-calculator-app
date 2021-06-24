@@ -33,6 +33,22 @@ class Calculator {
         return postfix
     }
     
+    func evaluate(postfix: [Computable]) throws -> Operand? {
+        let operandStack = Stack<Operand>()
+        
+        for postfixItem in postfix {
+            if let operandValue = postfixItem as? Operand {
+                operandStack.push(object: operandValue)
+            } else if let operatorValue = postfixItem as? Operator,
+                      let rhs = operandStack.pop(),
+                      let lhs = operandStack.pop() {
+                let result = try operatorValue.calculate(lhs, with: rhs)
+                operandStack.push(object: Operand(operand: result))
+            }
+        }
+        return operandStack.pop()
+    }
+    
     func pushToInfix(with inputNotation: [String]) {
         for value in inputNotation {
             if let operatorValue = Operator(rawValue: value) {

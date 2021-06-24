@@ -8,5 +8,5 @@
 import Foundation
 
 enum CalculatorError: Error {
-    case error
+    case dividedByZero
 }

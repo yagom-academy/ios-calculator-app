@@ -7,22 +7,40 @@
 
 import Foundation
 
-protocol Operandable { }
-
-extension Int: Operandable { }
-extension Double: Operandable { }
-
 class Operand: Computable {
-    var operandValue: Operandable
+   private var operandValue: Double
+    var getOperandValue: Double {
+        return operandValue
+    }
     
     init?(operand: String) {
-        guard let operandValue = Operand.conversionOperandable(of: operand) else {
+        guard let operandValue = Double(operand) else {
             return nil
         }
         self.operandValue = operandValue
     }
     
-    private static func conversionOperandable(of operand: String) -> Operandable? {
-        return Int(1)
+    init(operand: Double) {
+        self.operandValue = operand
+    }
+    
+    func plus(with rhs: Operand) -> Double {
+        return self.operandValue + rhs.getOperandValue
+    }
+    
+    func minus(with rhs: Operand) -> Double {
+        return self.operandValue - rhs.getOperandValue
+    }
+    
+    func multiple(with rhs: Operand) -> Double {
+        return self.operandValue * rhs.getOperandValue
+    }
+    
+    func divide(by rhs: Operand) throws -> Double {
+        let invalidRhsValue: Double = 0
+        guard rhs.getOperandValue != invalidRhsValue else {
+            throw CalculatorError.dividedByZero
+        }
+        return self.operandValue / rhs.getOperandValue
     }
 }
