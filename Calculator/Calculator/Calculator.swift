@@ -7,8 +7,10 @@
 
 import Foundation
 
-enum OperatorError: Error {
+enum CalculatorError: Error {
     case unknownOperator
+    case divideByZero(description: String)
+    case invalidEquation
 }
 
 enum Operator {
@@ -32,32 +34,57 @@ enum Operator {
     }
 }
 
-class Calculator {
+struct Calculator {
     func calculate(infix: [String]) throws -> String {
         var result: String = ""
-        var postfix: [String] = try changeToPostfix(infix: infix)
-        calculatePostfix(postfix: &postfix)
+        let postfix: [String] = try changeToPostfix(infix: infix)
+        let operationResult = try calculatePostfix(postfix: postfix)
+        print(operationResult)
         return result
     }
-    
-    func calculatePostfix(postfix: inout [String]) {
-        var tempNumberStack = Stack<String>()
+
+    func calculatePostfix(postfix: [String]) throws {
+        var temporaryNumberStack = Stack<String>()
         for element in postfix {
             if let _ = Double(element) {
-                tempNumberStack.push(element)
+                temporaryNumberStack.push(element)
             } else {
-                if let firstNumber = tempNumberStack.pop(),
-                   let secondNumber = tempNumberStack.pop() {
-                    let operation = firstNumber + element + secondNumber
-                    let convertToEquation = NSExpression(format: operation)
-                    if let result: Double = convertToEquation.expressionValue(with: nil, context: nil) as? Double {
-                        let strResult = String(result)
-                        tempNumberStack.push(strResult)
-                    }
-                }
+                try calculateToValue(operator: element,
+                                     tempNumberStack: &temporaryNumberStack
+                )
             }
         }
-        print(tempNumberStack.pop()!)
+        print(temporaryNumberStack.pop()!)
+    }
+    
+    func calculateToValue(operator: String,
+                          tempNumberStack: inout Stack<String>
+    ) throws {
+        guard let firstOperand = tempNumberStack.pop(),
+              let secondOperand = tempNumberStack.pop()
+        else {
+            return
+        }
+        try checkDivisionError(operator: `operator`, secondOperand: secondOperand)
+        let equation = firstOperand + `operator` + secondOperand
+        let operationResult = try solve(equation: equation)
+        tempNumberStack.push(operationResult)
+    }
+    
+    func checkDivisionError(operator: String, secondOperand: String) throws {
+        if `operator` == "/" && secondOperand == "0" {
+            throw CalculatorError.divideByZero(description: "NaN")
+        }
+    }
+    
+    func solve(equation: String) throws -> String {
+        let expression = NSExpression(format: equation)
+        guard let operationResult = expression.expressionValue(
+                with: nil, context: nil
+        ) as? Double else {
+            throw CalculatorError.invalidEquation
+        }
+        return String(operationResult)
     }
 
     func convertToOperator(string: String) throws -> Operator {
@@ -71,7 +98,7 @@ class Calculator {
         case "/":
             return .divide
         default:
-            throw OperatorError.unknownOperator
+            throw CalculatorError.unknownOperator
         }
     }
     
@@ -100,7 +127,7 @@ class Calculator {
         return currentOperator > thanOperator
     }
     
-    func popAndAppend( sign: String, from temporarySignStack: inout Stack<String>, to postfix: inout [String]) throws {
+    func popAndAppend(sign: String, from temporarySignStack: inout Stack<String>, to postfix: inout [String]) throws {
         while let topOfTemporarySignStcak = temporarySignStack.top,
               try !hasHigherPriority(this: sign, than: topOfTemporarySignStcak) {
             if let poppedSign = temporarySignStack.pop() {
