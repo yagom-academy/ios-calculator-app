@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Stack<T> {
+class Stack<T> {
     enum StackError: Error {
         case stackIsEmpty
     }
@@ -15,14 +15,14 @@ struct Stack<T> {
     private var stack: [T] = []
     private var top: Int = 0
     
-    mutating func push(object: T) {
+    func push(object: T) {
         stack.append(object)
         top = top + 1
     }
     
-    @discardableResult mutating func pop() throws -> T {
+    @discardableResult func pop() -> T? {
         guard !isEmpty() else {
-            throw StackError.stackIsEmpty
+            return nil
         }
         
         let target = stack[top-1]
@@ -31,15 +31,15 @@ struct Stack<T> {
         return target
     }
     
-    func peek() throws -> T {
+    func peek() -> T? {
         guard !isEmpty() else {
-            throw StackError.stackIsEmpty
+            return nil
         }
         
         return stack[top-1]
     }
     
-    mutating func clear() {
+    func clear() {
         stack.removeAll()
         top = 0
     }
@@ -52,5 +52,4 @@ struct Stack<T> {
         return top
     }
 }
-
 

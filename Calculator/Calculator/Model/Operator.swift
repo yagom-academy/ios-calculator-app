@@ -14,10 +14,6 @@ enum Operator: String, Computable, Comparable {
     case multiply = "*"
     
     static func < (lhs: Operator, rhs: Operator) -> Bool {
-        if (rhs == .divide || rhs == .multiply) && (lhs == .minus || lhs == .plus) {
-            return true
-        } else {
-            return false
-        }
+        return (rhs == .divide || rhs == .multiply) && (lhs == .minus || lhs == .plus)
     }
 }
