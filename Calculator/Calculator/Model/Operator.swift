@@ -26,7 +26,10 @@ enum Operator: String {
         return self.priority > `operator`.priority
     }
     
-    static func obtainOperator(from target: String) -> Operator {
-        return Operator(rawValue: target) ?? Operator.add
+    static func obtainOperator(from target: String) throws -> Operator {
+        guard let `operator` = Operator(rawValue: target) else {
+            throw CalculatorError.invalidOperator
+        }
+        return `operator`
     }
 }
