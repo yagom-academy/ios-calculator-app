@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class Calculator {
     var numberStack = [String]()
     var result = ""
@@ -22,25 +21,11 @@ class Calculator {
         return true
     }
     
-    func calculatePostfix() -> [String] {
-        for item in postfix.postfix {
-            if isNumberInPostfix(item: item) {
-                numberStack.append(item)
-            }else {
-                let second = numberStack.removeLast()
-                let first = numberStack.removeLast()
-                let calculateResult = realCalculator(first: first, second: second, oper: item)
-                numberStack.append(String(calculateResult))
-            }
-        }
-        return numberStack
-    }
-    
-    func realCalculator(first: String, second: String, oper: String) -> Double {
+    func calculatePostfix(first: String, second: String, arithmethicOperator: String) -> Double {
         guard let first = Double(first) , let second = Double(second) else {
-            return  10000000
+            return 10000000
         }
-        switch oper {
+        switch arithmethicOperator {
         case "+":
             return first + second
         case "−":
@@ -53,4 +38,50 @@ class Calculator {
             return 10000000
         }
     }
+    
+    func returnCalculationResult() -> String {
+        for item in postfix.postfix {
+            if isNumberInPostfix(item: item) {
+                numberStack.append(item)
+            }else {
+                let second = numberStack.removeLast()
+                let first = numberStack.removeLast()
+                let calculateResult = calculatePostfix(first: first, second: second, arithmethicOperator: item)
+                numberStack.append(String(calculateResult))
+            }
+        }
+        return numberStack.removeLast()
+    }
+//    func calculatePostfix(first: String, second: String, oper: String) -> Result<Double, Error> {
+//        guard let first = Double(first) , let second = Double(second) else {
+//            return .failure(CalculatorError.unknown)
+//        }
+//
+//        switch oper {
+//        case "+":
+//            return .success(first + second)
+//        case "−":
+//            return .success(first - second)
+//        case "×":
+//            return .success(first * second)
+//        case "÷":
+//            return .success(first / second)
+//        default:
+//            return .failure(CalculatorError.unknown)
+//        }
+//    }
+//
+//    func returnCalculationResult() -> String {
+//        for item in postfix.postfix {
+//            if isNumberInPostfix(item: item) {
+//                numberStack.append(item)
+//            } else {
+//                let second = numberStack.removeLast()
+//                let first = numberStack.removeLast()
+//                let calculateResult = calculatePostfix(first: first, second: second, oper: item)
+//                numberStack.append(String(calculateResult))
+//            }
+//        }
+//        return numberStack.removeLast()
+//    }
 }
