@@ -35,8 +35,6 @@ class ViewController: UIViewController {
         print(input.infix)
         postfix.separateNumberAndOperator(from: input.infix)
         print(postfix.postfix)
-        print(postfix.operatorsStack)
-        print(calculator.calculatePostfix())
     }
     
     override func viewDidLoad() {

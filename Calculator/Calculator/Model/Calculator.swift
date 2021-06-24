@@ -1,9 +1,3 @@
-//
-//  Calculator.swift
-//  Calculator
-//
-//  Created by Ellen on 2021/06/24.
-//
 
 import Foundation
 

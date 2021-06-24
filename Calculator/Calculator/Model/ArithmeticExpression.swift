@@ -1,9 +1,3 @@
-//
-//  UserInput.swift
-//  Calculator
-//
-//  Created by Nala on 2021/06/22.
-//
 
 import Foundation
 
