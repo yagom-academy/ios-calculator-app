@@ -11,7 +11,7 @@ public class Infix {
     var infix: Array<String> = []
 }
 
-private class Postfix {
+class Postfix {
     var postfix: Array<String> = []
     var operatorsStack: Array<String> = []
     
@@ -24,13 +24,14 @@ private class Postfix {
             } else if operatorsStack.isEmpty {
                 addToOperatorStack(of: item)
             } else {
-                compareAndDecidePriority(lastStack: <#T##Operators#>, with: <#T##Operators#>)
+                compareAndDecidePriority(lastStack: changeToOperatorsEnum(operatorsStack.last!),
+                                            with: changeToOperatorsEnum(item))
             }
         }
     }
     
     func isNumberInInfix(item: String) -> Bool {
-        let operators = ["+","-","×","÷"]
+        let operators = ["+","−","×","÷"]
         
         if operators.contains(item) {
             return false
@@ -46,13 +47,13 @@ private class Postfix {
         operatorsStack.append(index)
     }
     
-    func changeToOperatorsEnum() -> Operators {
-        let lastStackOperator = operatorsStack.last
+    func changeToOperatorsEnum(_ item: String) -> Operators {
+        let lastStackOperator = item
         
         switch lastStackOperator {
         case "+":
             return Operators.plus
-        case "-":
+        case "−":
             return Operators.minus
         case "×":
             return Operators.multiply
@@ -65,27 +66,21 @@ private class Postfix {
     // while문 반복해서 2가지 경우로 변형!
     func compareAndDecidePriority(lastStack: Operators, with input: Operators) {
         if lastStack < input {
-            operatorsStack.append(input.operatorSymbol)
-        } else {
+            addToOperatorStack(of: input.operatorSymbol)
+        } else if lastStack == input {
             addToPostfix(member: lastStack.operatorSymbol)
-            // remove lastStack
-            // append -> operatorsStack[0] = input.operatorSymbol
+            operatorsStack.removeLast()
+            addToOperatorStack(of: input.operatorSymbol)
+        } else {
+            while !operatorsStack.isEmpty {
+                addToPostfix(member: lastStack.operatorSymbol)
+                operatorsStack.removeLast()
+            }
+            addToOperatorStack(of: input.operatorSymbol)
         }
     }
-    
-    // 스택이 비었는지 확인하고 다 꺼내주는 메서드
-    func checkAndEmptyStack() {
-        // 스택에 여러개 있는 경우로 변형해야함~
-        for i in operatorsStack {
-            addToPostfix(member: operatorsStack[0])
-        }
-    }
-    
+
     // 후위표기식 계산
     func calculatePostfix() {
-        
     }
 }
-
-
-

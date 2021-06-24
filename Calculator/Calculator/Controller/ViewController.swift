@@ -10,8 +10,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayUserInputNumber: UILabel!
     
     var userInput: Bool = false
-    
-    var inputs = Infix()
+    var input = Infix()
+    var postfix = Postfix()
     
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
         if userInput {
@@ -24,17 +24,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
-        inputs.infix.append(displayUserInputNumber.text!)
-        inputs.infix.append(sender.currentTitle!)
+        input.infix.append(displayUserInputNumber.text!)
+        input.infix.append(sender.currentTitle!)
         userInput = false
-        print(inputs.infix)
     }
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
-        inputs.infix.append(displayUserInputNumber.text!)
-        print(inputs.infix)
+        input.infix.append(displayUserInputNumber.text!)
+        print(input.infix)
+        postfix.separateNumberAndOperator(from: input.infix)
+        print(postfix.postfix)
+        print(postfix.operatorsStack)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

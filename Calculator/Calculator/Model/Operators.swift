@@ -9,7 +9,7 @@ import Foundation
 
 enum Operators: String, Comparable {
     case plus = "+"
-    case minus = "-"
+    case minus = "−"
     case multiply = "×"
     case divide = "÷"
     
@@ -30,3 +30,4 @@ enum Operators: String, Comparable {
         lhs.priority < rhs.priority
     }
 }
+
