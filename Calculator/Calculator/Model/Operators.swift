@@ -29,5 +29,9 @@ enum Operators: String, Comparable {
     static func < (lhs: Operators, rhs: Operators) -> Bool {
         lhs.priority < rhs.priority
     }
+    
+    static func == (lhs: Operators, rhs: Operators) -> Bool {
+        lhs.priority == rhs.priority
+    }
 }
 

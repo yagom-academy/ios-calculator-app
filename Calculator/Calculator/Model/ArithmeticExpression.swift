@@ -16,9 +16,7 @@ class Postfix {
     var operatorsStack: Array<String> = []
     
     func separateNumberAndOperator(from infix: Array<String>) {
-        // i 이름 바꾸기
         for item in infix {
-            // 메서드로 바꾸기
             if isNumberInInfix(item: item) {
                 addToPostfix(member: item)
             } else if operatorsStack.isEmpty {
@@ -28,6 +26,7 @@ class Postfix {
                                             with: changeToOperatorsEnum(item))
             }
         }
+        processLeftOperatorStack()
     }
     
     func isNumberInInfix(item: String) -> Bool {
@@ -57,13 +56,11 @@ class Postfix {
             return Operators.minus
         case "×":
             return Operators.multiply
-        // 나누기 디폴트로 안하면 어떻게 해야할지 모르겠어요😭
         default:
             return Operators.divide
         }
     }
     
-    // while문 반복해서 2가지 경우로 변형!
     func compareAndDecidePriority(lastStack: Operators, with input: Operators) {
         if lastStack < input {
             addToOperatorStack(of: input.operatorSymbol)
@@ -79,8 +76,13 @@ class Postfix {
             addToOperatorStack(of: input.operatorSymbol)
         }
     }
+    
+    func processLeftOperatorStack() {
+        while !operatorsStack.isEmpty {
+            postfix.append(operatorsStack.removeLast())
+        }
+    }
 
-    // 후위표기식 계산
     func calculatePostfix() {
     }
 }
