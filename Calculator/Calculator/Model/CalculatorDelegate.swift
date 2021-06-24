@@ -13,5 +13,5 @@ enum CalculatorComponent {
 protocol CalculatorDelegate {
     func convertToPostfixExpression(fromInfix input: [String]) -> [String]
     func convertToComponentType(from userInput: String) throws -> CalculatorComponent
-    func calculatePostfixExpression(postfix: [String]) -> NSNumber
+    func calculatePostfixExpression(postfix: [String]) throws -> Double
 }

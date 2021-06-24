@@ -95,8 +95,14 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpEqualButton(_ sender: UIButton) {
-	
+		let postfix = calculator.convertToPostfixExpression(fromInfix: inputStorage)
+		if let result = try? String(calculator.calculatePostfixExpression(postfix: postfix)) {
+			print(result)
+		} else {
+			print("NaN")
+		}
     }
+	
 	@IBAction func touchUpAllClearButton(_ sender: UIButton) {
 		inputStorage.removeAll()
 	}
