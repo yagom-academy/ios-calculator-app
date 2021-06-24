@@ -49,15 +49,28 @@ extension Calculator {
             if Double(element) != nil {
                 postfix.append(element)
             } else {
+                
                 while true {
-                    if stack.isEmpty || Operator.obtainOperator(from: element).isHigherPriority(than: Operator.obtainOperator(from: stack.peek() ?? "+")) {
+                    guard let topOfStack = stack.peek() else {
+                        break
+                    }
+                    if stack.isEmpty || Operator.obtainOperator(from: element).isHigherPriority(than: Operator.obtainOperator(from: topOfStack)) {
                         stack.push(element: element)
                         break
                     } else {
-                        postfix.append(stack.pop() ?? "+")
+                        guard let `operator` = stack.pop() else {
+                            
+                        }
+                        postfix.append(`operator`)
                     }
                 }
             }
+        }
+        while !stack.isEmpty {
+            guard let `operator` = stack.pop() else {
+                <#statements#>
+            }
+            postfix.append(`operator`)
         }
     }
     
@@ -65,7 +78,7 @@ extension Calculator {
         for element in postfix {
             if Double(element) != nil {
                 stack.push(element: element)
-            }else {
+            } else {
                 guard let firstValue = stack.pop(), let secondValue = stack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue) else {
                     return .failure
                 }
@@ -81,7 +94,7 @@ extension Calculator {
                     do {
                         let result = try divide(lhs: lhsValue, rhs: rhsValue)
                         stack.push(element: String(result))
-                    }catch {
+                    } catch {
                         return .failure
                     }
                 }
