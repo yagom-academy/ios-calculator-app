@@ -9,14 +9,15 @@ import Foundation
 
 enum CalculatorError: Error {
     case unknownOperator
-    case divideByZero(description: String)
+    case divisionByZero(description: String)
     case invalidEquation
+    case vacantEquation
 }
 
 enum Operator {
-    static let lowPriority = 1
-    static let highPriority = 2
-    
+    private static let lowPriority = 1
+    private static let highPriority = 2
+
     case plus, minus
     case multiply, divide
 
@@ -36,14 +37,14 @@ enum Operator {
 
 struct Calculator {
     func calculate(infix: [String]) throws -> String {
-        var result: String = ""
         let postfix: [String] = try changeToPostfix(infix: infix)
         let operationResult = try calculatePostfix(postfix: postfix)
         print(operationResult)
-        return result
+        let finalResult: String = ""
+        return finalResult
     }
 
-    func calculatePostfix(postfix: [String]) throws {
+    private func calculatePostfix(postfix: [String]) throws -> String {
         var temporaryNumberStack = Stack<String>()
         for element in postfix {
             if let _ = Double(element) {
@@ -54,10 +55,13 @@ struct Calculator {
                 )
             }
         }
-        print(temporaryNumberStack.pop()!)
+        guard let result = temporaryNumberStack.pop() else {
+            throw CalculatorError.vacantEquation
+        }
+        return result
     }
     
-    func calculateToValue(operator: String,
+    private func calculateToValue(operator: String,
                           tempNumberStack: inout Stack<String>
     ) throws {
         guard let firstOperand = tempNumberStack.pop(),
@@ -70,14 +74,14 @@ struct Calculator {
         let operationResult = try solve(equation: equation)
         tempNumberStack.push(operationResult)
     }
-    
-    func checkDivisionError(operator: String, secondOperand: String) throws {
+
+    private func checkDivisionError(operator: String, secondOperand: String) throws {
         if `operator` == "/" && secondOperand == "0" {
-            throw CalculatorError.divideByZero(description: "NaN")
+            throw CalculatorError.divisionByZero(description: "NaN")
         }
     }
-    
-    func solve(equation: String) throws -> String {
+
+    private func solve(equation: String) throws -> String {
         let expression = NSExpression(format: equation)
         guard let operationResult = expression.expressionValue(
                 with: nil, context: nil
@@ -87,7 +91,7 @@ struct Calculator {
         return String(operationResult)
     }
 
-    func convertToOperator(string: String) throws -> Operator {
+    private func convertToOperator(string: String) throws -> Operator {
         switch string {
         case "+":
             return .plus
@@ -101,8 +105,8 @@ struct Calculator {
             throw CalculatorError.unknownOperator
         }
     }
-    
-    func changeToPostfix(infix: [String]) throws -> [String] {
+
+    private func changeToPostfix(infix: [String]) throws -> [String] {
         var temporarySignStack = Stack<String>()
         var postfix: [String] = []
         for element in infix {
@@ -113,23 +117,33 @@ struct Calculator {
                 temporarySignStack.push(element)
             }
         }
-
-        while !temporarySignStack.isEmpty {
-            let poppedSign = temporarySignStack.pop()
-            postfix.append(poppedSign!)
-        }
+        try popAndAppendLeftovers(from: &temporarySignStack, to: &postfix)
         return postfix
     }
 
-    func hasHigherPriority(this: String, than: String) throws -> Bool {
+    private func hasHigherPriority(this: String, than: String) throws -> Bool {
         let currentOperator: Operator = try convertToOperator(string: this)
         let thanOperator: Operator = try convertToOperator(string: than)
         return currentOperator > thanOperator
     }
     
-    func popAndAppend(sign: String, from temporarySignStack: inout Stack<String>, to postfix: inout [String]) throws {
-        while let topOfTemporarySignStcak = temporarySignStack.top,
-              try !hasHigherPriority(this: sign, than: topOfTemporarySignStcak) {
+    private func popAndAppend(
+        sign: String, from temporarySignStack: inout Stack<String>,
+        to postfix: inout [String]
+    ) throws {
+        while let topOfTemporarySignStack = temporarySignStack.top,
+              try !hasHigherPriority(this: sign, than: topOfTemporarySignStack) {
+            if let poppedSign = temporarySignStack.pop() {
+                postfix.append(poppedSign)
+            }
+        }
+    }
+
+    private func popAndAppendLeftovers(
+        from temporarySignStack: inout Stack<String>,
+        to postfix: inout [String]
+    ) throws{
+        while let _ = temporarySignStack.top {
             if let poppedSign = temporarySignStack.pop() {
                 postfix.append(poppedSign)
             }
