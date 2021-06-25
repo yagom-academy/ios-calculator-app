@@ -36,35 +36,56 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var CalculationStackScrollView: UIScrollView!
     
     @IBAction func clickNumberOneButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .one)
     }
     @IBAction func clickNumberTwoButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .two)
     }
     @IBAction func clickNumberThreeButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .three)
     }
     @IBAction func clickNumberFourButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .four)
     }
     @IBAction func clickNumberFiveButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .five)
     }
     @IBAction func clickNumberSixButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .six)
     }
     @IBAction func clickNumberSevenButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .seven)
     }
     @IBAction func clickNumberEightButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .eight)
     }
     @IBAction func clickNumberNineButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .nine)
     }
     @IBAction func clickNumberZeroButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .zero)
     }
     @IBAction func clickNumberDoubleZeroButton(_ sender: UIButton) {
+        addNumberToNumberInputLabel(number: .doubleZero)
     }
     @IBAction func clickDotButton(_ sender: UIButton) {
     }
-
+    
+    func addNumberToNumberInputLabel(number: NumberButton) {
+        if numberInputLabel.text == "0" {
+            if number != .doubleZero {
+                numberInputLabel.text? = "\(number)"
+            }
+        } else {
+            numberInputLabel.text? += "\(number)"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
     }
     @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
