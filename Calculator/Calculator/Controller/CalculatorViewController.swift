@@ -35,6 +35,16 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var CalculationStackView: UIStackView!
     @IBOutlet weak var CalculationStackScrollView: UIScrollView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        numberInputLabel.text = "0"
+        operatorInputLabel.text = ""
+        
+        for stackView in CalculationStackView.arrangedSubviews {
+            stackView.removeFromSuperview()
+        }
+    }
+    
     @IBAction func clickNumberOneButton(_ sender: UIButton) {
         addNumberToNumberInputLabel(number: .one)
     }
@@ -71,6 +81,76 @@ class CalculatorViewController: UIViewController {
     @IBAction func clickDotButton(_ sender: UIButton) {
     }
     
+    @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "+"
+    }
+    @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "-"
+    }
+    @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "×"
+    }
+    @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "÷"
+    }
+    @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
+        do {
+            try addEntry()
+        } catch CalculatorError.DivideByZero {
+            numberInputLabel.text = "NaN"
+            operatorInputLabel.text = ""
+            calculator.allClear()
+            return
+        } catch {
+            print("Unknown Error")
+        }
+        operatorInputLabel.text = ""
+        
+        do {
+            numberInputLabel.text = try calculator.calculate()
+        } catch CalculatorError.FailToTypeCasting {
+            print("Type Casting Error")
+        } catch CalculatorError.FailToPopFromCalculationStack {
+            print("Stack Pop Error")
+        } catch {
+            print("Unknown Error")
+        }
+        calculator.allClear()
+    }
+    
+    @IBAction func clickAllClearButton(_ sender: UIButton) {
+        numberInputLabel.text = "0"
+        for stackView in CalculationStackView.arrangedSubviews {
+            stackView.removeFromSuperview()
+        }
+        calculator.allClear()
+    }
+    
+    @IBAction func clickClearEntryButton(_ sender: UIButton) {
+        numberInputLabel.text = "0"
+    }
+    
+    @IBAction func clickToggleSignButton(_ sender: UIButton) {
+        guard let inputNumber = numberInputLabel.text else { return }
+        if inputNumber.first == "-" {
+            numberInputLabel.text?.removeFirst()
+        } else if inputNumber.first != "0" {
+            numberInputLabel.text? = "-\(inputNumber)"
+        }
+    }
+    
     private func createEntryView() -> UIView {
         let inputNumber = numberInputLabel.text
         let inputOperator = operatorInputLabel.text
@@ -100,56 +180,8 @@ class CalculatorViewController: UIViewController {
         
         return newStackView
     }
-    
-    
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        numberInputLabel.text = "0"
-        operatorInputLabel.text = ""
-        
-        for stackView in CalculationStackView.arrangedSubviews {
-            stackView.removeFromSuperview()
-        }
-    }
-    
-    @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "+"
-    }
-    @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "-"
-    }
-    @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "×"
-    }
-    @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "÷"
-    }
-    @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
-    }
-    
-    @IBAction func clickAllClearButton(_ sender: UIButton) {
-    }
-    
-    @IBAction func clickClearEntryButton(_ sender: UIButton) {
-    }
-    
-    @IBAction func clickToggleSignButton(_ sender: UIButton) {
-    }
 }
+
 // MARK:- Calculator functions
 extension CalculatorViewController {
     private func addEntry() throws {
@@ -164,7 +196,6 @@ extension CalculatorViewController {
         resetInputLabelsToDefault()
     }
     
-        
     private func resetInputLabelsToDefault() {
         numberInputLabel.text = "0"
     }
