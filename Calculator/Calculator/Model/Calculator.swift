@@ -20,7 +20,7 @@ class Calculator {
     }
 
     func convertToPostfix() -> [String] {
-        var tempStack = Stack<String>()
+        var operatorStack = Stack<String>()
         var postfix = [String]()
 
         for element in infixNotation {
@@ -28,10 +28,10 @@ class Calculator {
                 postfix.append(element)
                 continue
             }
-            moveNonPriorOperator(than: element, from: &tempStack, to: &postfix)
-            tempStack.push(element)
+            moveNonPriorOperator(than: element, from: &operatorStack, to: &postfix)
+            operatorStack.push(element)
         }
-        while let top = tempStack.pop() {
+        while let top = operatorStack.pop() {
             postfix.append(top)
         }
         return postfix
@@ -39,22 +39,22 @@ class Calculator {
 
     func calculatePostfix() throws -> Double? {
         let postfix = convertToPostfix()
-        var tempStack = Stack<Double>()
+        var numberStack = Stack<Double>()
 
         for element in postfix {
             if let number = Double(element) {
-                tempStack.push(number)
+                numberStack.push(number)
                 continue
             }
-            guard let rhs = tempStack.pop(), let lhs = tempStack.pop() else {
+            guard let rhs = numberStack.pop(), let lhs = numberStack.pop() else {
                 throw ErrorCases.emptyStackAccess
             }
             guard let `operator` = Operator(rawValue: element) else {
                 throw ErrorCases.invalidElement
             }
             let result = try `operator`.calculate(lhs: lhs, rhs: rhs)
-            tempStack.push(result)
+            numberStack.push(result)
         }
-        return tempStack.pop()
+        return numberStack.pop()
     }
 }
