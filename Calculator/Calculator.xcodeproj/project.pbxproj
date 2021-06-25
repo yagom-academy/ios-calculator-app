@@ -123,8 +123,8 @@
 			children = (
 				89EB7F182686247A0003E24A /* Controller */,
 				89EB7F19268624900003E24A /* View */,
-				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				89EB7F1C268624AF0003E24A /* Model */,
+				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
