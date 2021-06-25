@@ -34,6 +34,39 @@ struct Calculator {
     mutating func allClear() {
         expressionEntry.removeAll()
     }
-
+    
+    private func isOperator(item: String) -> Bool {
+        switch item {
+        case "+", "-", "×", "÷":
+            return true
+        default:
+            return false
+        }
+    }
+    
+    private func performOperation(firstOperand: Double, secondOperand: Double, operation: String) -> Double {
+        switch operation {
+        case "+":
+            return firstOperand + secondOperand
+        case "-":
+            return firstOperand - secondOperand
+        case "×":
+            return firstOperand * secondOperand
+        case "÷":
+            return firstOperand / secondOperand
+        default:
+            return 0.0
+        }
+    }
+    
+    private func isNewOperatorProceed(stackTop op1: Operations, newEntry op2: Operations) -> Bool {
+        switch op1 {
+        case .multiply, .divide:
+            return false
+        case .plus, .minus:
+            return (op2 == .multiply || op2 == .divide) ? true : false
+        }
+    }
+    
 }
 
