@@ -10,7 +10,7 @@ class Calculator {
         return highPriorityOperator.contains(first) && lowPriorityOperator.contains(second)
     }
     
-    private func moveNonPriorOperator(than element: String, from stack: inout Stack, to postfix: inout [String]) {
+    private func moveNonPriorOperator(than element: String, from stack: inout Stack<String>, to postfix: inout [String]) {
         while let top = stack.top, !isPriorOperator(this: element, to: top) {
             guard let top = stack.pop() else {
                 continue
@@ -20,7 +20,7 @@ class Calculator {
     }
 
     func convertToPostfix() -> [String] {
-        var tempStack = Stack()
+        var tempStack = Stack<String>()
         var postfix = [String]()
 
         for element in infixNotation {
@@ -29,7 +29,7 @@ class Calculator {
                 continue
             }
             moveNonPriorOperator(than: element, from: &tempStack, to: &postfix)
-            tempStack.push(element: element)
+            tempStack.push(element)
         }
         while let top = tempStack.pop() {
             postfix.append(top)
@@ -39,11 +39,11 @@ class Calculator {
 
     func calculatePostfix() throws -> String? {
         let postfix = convertToPostfix()
-        var tempStack = Stack()
+        var tempStack = Stack<String>()
 
         for element in postfix {
             if let _  = Double(element) {
-                tempStack.push(element: element)
+                tempStack.push(element)
                 continue
             }
 			if let operand2String = tempStack.pop(), let operand1String = tempStack.pop(),
@@ -65,7 +65,7 @@ class Calculator {
                     break
                 }
                 if let result = result {
-                    tempStack.push(element: String(result))
+                    tempStack.push(String(result))
                 }
             }
         }

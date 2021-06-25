@@ -5,20 +5,20 @@ enum ErrorCases: Error {
     case dividedByZero
 }
 
-struct Stack {
-    private var stack: [String] = []
+struct Stack<T> {
+    private var stack: [T] = []
     var isEmpty: Bool {
         return stack.isEmpty
     }
-    var top: String? {
+    var top: T? {
         return stack.last
     }
     
-    mutating func push(element: String) {
+    mutating func push(_ element: T) {
         stack.append(element)
     }
     
-    mutating func pop() -> String? {
+    mutating func pop() -> T? {
         return stack.popLast()
     }
 }
