@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String {
+enum Operator: String, Equatable, Comparable {
     case plus = "+"
     case minus = "-"
     case multiplication = "*"
@@ -21,6 +21,14 @@ enum Operator: String {
             return OperatorPriority.high.rawValue
         }
     }
+    
+    static func < (lhs: Operator, rhs: Operator) -> Bool {
+        lhs.priority < rhs.priority
+    }
+    
+    static func == (lhs: Operator, rhs: Operator) -> Bool {
+        lhs.priority == rhs.priority
+    }
 }
 
 enum OperatorPriority: Int {
@@ -29,5 +37,10 @@ enum OperatorPriority: Int {
 }
 
 class Calculator {
+    var infixArray: Array<Any> = []
+    var stack = Stack<Any>()
+    var postArray: Array<Any> = []
     
+    
+
 }
