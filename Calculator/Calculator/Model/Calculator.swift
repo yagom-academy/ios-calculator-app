@@ -3,7 +3,18 @@ import Foundation
 class Calculator {
     private var currentInput = ""
     private var infixNotation = [String]()
-    
+
+    private func moveNonPrecedentOperator(than currentOperator: Operator,
+                                      from operatorStack: inout Stack<Operator>,
+                                      to postfix: inout [String]) throws{
+        while let top = operatorStack.top, currentOperator <= top {
+            guard let top = operatorStack.pop() else {
+                throw ErrorCases.emptyStackAccess
+            }
+            postfix.append(top.rawValue)
+        }
+    }
+
     private func convertToPostfix() throws -> [String] {
         var operatorStack = Stack<Operator>()
         var postfix = [String]()
@@ -16,12 +27,7 @@ class Calculator {
             guard let currentOperator = Operator(rawValue: element) else {
                 throw ErrorCases.invalidElement
             }
-            while let top = operatorStack.top, currentOperator <= top {
-                guard let top = operatorStack.pop() else {
-                    throw ErrorCases.emptyStackAccess
-                }
-                postfix.append(top.rawValue)
-            }
+            try moveNonPrecedentOperator(than: currentOperator, from: &operatorStack, to: &postfix)
             operatorStack.push(currentOperator)
         }
         while let top = operatorStack.pop() {

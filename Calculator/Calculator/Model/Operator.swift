@@ -12,9 +12,9 @@ enum Operator: String, Comparable {
         
         switch self {
         case .plus, .minus:
-        return higherPrecedence
-        case .times, .divide:
         return lowerPrecedence
+        case .times, .divide:
+        return higherPrecedence
         }
     }
     
