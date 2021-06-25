@@ -13,15 +13,24 @@ enum Operator: String, Computable {
     case divide = "/"
     case multiply = "*"
     
+    func getPriority() -> Int {
+        switch self {
+        case .plus: return 1
+        case .minus: return 1
+        case .multiply: return 10
+        case .divide: return 10
+        }
+    }
+    
     func isLowerPriority(than rhs: Operator) -> Bool {
-        return (rhs == .divide || rhs == .multiply) && (self == .minus || self == .plus)
+        return rhs.getPriority() >= self.getPriority()
     }
     
     func calculate(_ lhs: Operand, with rhs: Operand) throws -> Double {
         switch self {
         case .plus:
             return lhs.plus(with: rhs)
-        case  .minus:
+        case .minus:
             return lhs.minus(with: rhs)
         case .multiply:
             return lhs.multiple(with: rhs)
