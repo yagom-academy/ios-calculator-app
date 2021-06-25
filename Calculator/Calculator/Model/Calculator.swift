@@ -6,8 +6,14 @@
 
 import Foundation
 
+enum CalculatorError: Error {
+    case FailToPopFromCalculationStack
+    case FailToTypeCasting
+    case InValidInput
+    case DivideByZero
+}
+
 struct Calculator {
-    
     private enum Operations: String {
         case plus = "+"
         case minus = "-"
@@ -68,5 +74,35 @@ struct Calculator {
         }
     }
     
+    private func convertExpressionToPostfix() throws -> [String] {
+        var result = [String]()
+        var operationStack = Stack<Operations>()
+        
+        for item in expressionEntry {
+            if isOperator(item: item) {
+                guard let newOperation = Operations.init(rawValue: item) else { throw CalculatorError.FailToTypeCasting }
+                while true {
+                    guard let stackTop = operationStack.peek() else {
+                        operationStack.push(item: newOperation)
+                        break
+                    }
+                    if isNewOperatorProceed(stackTop: stackTop, newEntry: newOperation) {
+                        operationStack.push(item: newOperation)
+                        break
+                    } else {
+                        result.append(stackTop.description)
+                        operationStack.pop()
+                    }
+                }
+            } else {
+                result.append(item)
+            }
+        }
+        while !operationStack.isEmpty {
+            guard let operation = operationStack.pop() else { break }
+            result.append(operation.description)
+        }
+        print(result)
+        return result
+    }
 }
-
