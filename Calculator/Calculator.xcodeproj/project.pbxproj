@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3FC2E8042681CEE500E55A0B /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2E8032681CEE500E55A0B /* Calculator.swift */; };
 		3FC2E8072681D66800E55A0B /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2E8062681D66800E55A0B /* Operator.swift */; };
-		3FC2E80A2681D82200E55A0B /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2E8092681D82200E55A0B /* CalculatorError.swift */; };
 		4386650A26831BA600CACF2F /* Computable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386650926831BA600CACF2F /* Computable.swift */; };
 		4386650E26831C0F00CACF2F /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386650D26831C0F00CACF2F /* Operand.swift */; };
 		79B5BC7A2681BADB00D7324A /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B5BC792681BADB00D7324A /* Stack.swift */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		3FC2E8032681CEE500E55A0B /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		3FC2E8062681D66800E55A0B /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
-		3FC2E8092681D82200E55A0B /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		4386650926831BA600CACF2F /* Computable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computable.swift; sourceTree = "<group>"; };
 		4386650D26831C0F00CACF2F /* Operand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand.swift; sourceTree = "<group>"; };
 		79B5BC792681BADB00D7324A /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 				3FC2E8032681CEE500E55A0B /* Calculator.swift */,
 				3FC2E8062681D66800E55A0B /* Operator.swift */,
 				4386650D26831C0F00CACF2F /* Operand.swift */,
-				3FC2E8092681D82200E55A0B /* CalculatorError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,7 +191,6 @@
 				3FC2E8042681CEE500E55A0B /* Calculator.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				4386650E26831C0F00CACF2F /* Operand.swift in Sources */,
-				3FC2E80A2681D82200E55A0B /* CalculatorError.swift in Sources */,
 				4386650A26831BA600CACF2F /* Computable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

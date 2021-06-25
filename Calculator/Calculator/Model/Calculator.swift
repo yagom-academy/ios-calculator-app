@@ -7,10 +7,19 @@
 
 import Foundation
 
+enum CalculatorError: Error {
+    case dividedByZero
+}
+
 class Calculator {
-    var infix: [Computable] = []
     
-    func convertToPostFix() -> [Computable] {
+    private var inputNotation: [String] = []
+    
+    init(inputNotation: [String]) {
+        self.inputNotation = inputNotation
+    }
+    
+    private func convertToPostFix(infix: [Computable]) -> [Computable] {
         var postfix: [Computable] = []
         let operatorStack = Stack<Operator>()
         
@@ -18,7 +27,9 @@ class Calculator {
             if let value = character as? Operand {
                 postfix.append(value)
             } else if let value = character as? Operator {
-                while !operatorStack.isEmpty(), let postfixItem = operatorStack.peek(), value < postfixItem {
+                while !operatorStack.isEmpty(),
+                      let postfixItem = operatorStack.peek(),
+                      value.isLowerPriority(than: postfixItem) {
                     postfix.append(postfixItem)
                     operatorStack.pop()
                 }
@@ -33,7 +44,7 @@ class Calculator {
         return postfix
     }
     
-    func evaluate(postfix: [Computable]) throws -> Operand? {
+    private func evaluate(postfix: [Computable]) throws -> Operand? {
         let operandStack = Stack<Operand>()
         
         for postfixItem in postfix {
@@ -49,7 +60,8 @@ class Calculator {
         return operandStack.pop()
     }
     
-    func pushToInfix(with inputNotation: [String]) {
+    private func pushToInfix(with inputNotation: [String]) -> [Computable] {
+        var infix: [Computable] = []
         for value in inputNotation {
             if let operatorValue = Operator(rawValue: value) {
                 infix.append(operatorValue)
@@ -57,7 +69,17 @@ class Calculator {
                 infix.append(operandValue)
             }
         }
+        return infix
+    }
+    
+    func runCalculator() throws -> Double {
+        let infix = pushToInfix(with: self.inputNotation)
+        let postfix = convertToPostFix(infix: infix)
+        
+        guard let result = try evaluate(postfix: postfix) else {
+            throw StackError.stackIsEmpty
+        }
+        
+        return result.getOperandValue
     }
 }
-
-

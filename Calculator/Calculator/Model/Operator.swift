@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum Operator: String, Computable, Comparable {
+enum Operator: String, Computable {
     case plus = "+"
     case minus = "-"
     case divide = "/"
     case multiply = "*"
     
-    static func < (lhs: Operator, rhs: Operator) -> Bool {
-        return (rhs == .divide || rhs == .multiply) && (lhs == .minus || lhs == .plus)
+    func isLowerPriority(than rhs: Operator) -> Bool {
+        return (rhs == .divide || rhs == .multiply) && (self == .minus || self == .plus)
     }
     
     func calculate(_ lhs: Operand, with rhs: Operand) throws -> Double {

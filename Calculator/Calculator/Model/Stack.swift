@@ -7,10 +7,11 @@
 
 import Foundation
 
+enum StackError: Error {
+    case stackIsEmpty
+}
+
 class Stack<T> {
-    enum StackError: Error {
-        case stackIsEmpty
-    }
     
     private var stack: [T] = []
     private var top: Int = 0
