@@ -6,6 +6,12 @@
 
 import Foundation
 
+extension Double {
+    func toString() -> String {
+        return String(format: "%f", self)
+    }
+}
+
 enum CalculatorError: Error {
     case FailToPopFromCalculationStack
     case FailToTypeCasting
@@ -105,4 +111,27 @@ struct Calculator {
         print(result)
         return result
     }
+    
+    func calculate() throws -> String {
+        var entry = try convertExpressionToPostfix()
+        var calculationStack = Stack<Double>()
+        
+        while !entry.isEmpty {
+            let firstValue = entry.removeFirst()
+            if isOperator(item: firstValue) {
+                guard let secondOperand = calculationStack.pop(), let firstOperand = calculationStack.pop() else { throw CalculatorError.FailToPopFromCalculationStack }
+                
+                let outCome = performOperation(firstOperand: firstOperand, secondOperand: secondOperand, operation: firstValue)
+                
+                calculationStack.push(item: outCome)
+            } else {
+                guard let operand = Double(firstValue) else { throw CalculatorError.FailToTypeCasting }
+                
+                calculationStack.push(item: operand)
+            }
+        }
+        guard let finalResult = calculationStack.pop() else { throw CalculatorError.FailToPopFromCalculationStack }
+        return finalResult.toString()
+    }
+    
 }
