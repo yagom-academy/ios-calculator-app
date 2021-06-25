@@ -1,10 +1,5 @@
 import Foundation
 
-enum ErrorCases: Error {
-    case emptyStackAccess
-    case dividedByZero
-}
-
 struct Stack<T> {
     private var stack: [T] = []
     var isEmpty: Bool {

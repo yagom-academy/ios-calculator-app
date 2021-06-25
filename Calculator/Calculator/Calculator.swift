@@ -37,37 +37,23 @@ class Calculator {
         return postfix
     }
 
-    func calculatePostfix() throws -> String? {
+    func calculatePostfix() throws -> Double? {
         let postfix = convertToPostfix()
-        var tempStack = Stack<String>()
+        var tempStack = Stack<Double>()
 
         for element in postfix {
-            if let _  = Double(element) {
-                tempStack.push(element)
+            if let number = Double(element) {
+                tempStack.push(number)
                 continue
             }
-			if let operand2String = tempStack.pop(), let operand1String = tempStack.pop(),
-               let operand2 = Double(operand2String), let operand1 = Double(operand1String) {
-                var result: Double?
-                switch element {
-                case "+":
-                    result = operand1 + operand2
-                case "-":
-                    result = operand1 - operand2
-                case "*":
-                    result = operand1 * operand2
-                case "/":
-					if operand2 == 0 {
-						throw ErrorCases.dividedByZero
-					}
-                    result = operand1 / operand2
-                default:
-                    break
-                }
-                if let result = result {
-                    tempStack.push(String(result))
-                }
+            guard let rhs = tempStack.pop(), let lhs = tempStack.pop() else {
+                throw ErrorCases.emptyStackAccess
             }
+            guard let `operator` = Operator(rawValue: element) else {
+                throw ErrorCases.invalidElement
+            }
+            let result = try `operator`.calculate(lhs: lhs, rhs: rhs)
+            tempStack.push(result)
         }
         return tempStack.pop()
     }

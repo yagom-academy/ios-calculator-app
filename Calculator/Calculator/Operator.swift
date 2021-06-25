@@ -18,7 +18,23 @@ enum Operator: String, Comparable {
         }
     }
     
-    static func < (left: Operator, right: Operator) -> Bool {
-        return left.precedence < right.precedence
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
+        switch self {
+        case .plus:
+            return lhs + rhs
+        case .minus:
+            return lhs - rhs
+        case .times:
+            return lhs * rhs
+        case .divide:
+            if rhs == 0 {
+                throw ErrorCases.dividedByZero
+            }
+            return lhs / rhs
+        }
+    }
+    
+    static func < (lhs: Operator, rhs: Operator) -> Bool {
+        return lhs.precedence < rhs.precedence
     }
 }
