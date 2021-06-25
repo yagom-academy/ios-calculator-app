@@ -102,15 +102,7 @@ class CalculatorViewController: UIViewController {
     }
     
     
-    func addNumberToNumberInputLabel(number: NumberButton) {
-        if numberInputLabel.text == "0" {
-            if number != .doubleZero {
-                numberInputLabel.text? = "\(number)"
-            }
-        } else {
-            numberInputLabel.text? += "\(number)"
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,12 +115,28 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "+"
     }
     @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "-"
     }
     @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "×"
     }
     @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = "÷"
     }
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
     }
@@ -140,5 +148,38 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickToggleSignButton(_ sender: UIButton) {
+    }
+}
+// MARK:- Calculator functions
+extension CalculatorViewController {
+    private func addEntry() throws {
+        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { throw CalculatorError.InValidInput }
+        guard (inputNumber == "0" && inputOperator == "÷") == false else{ throw CalculatorError.DivideByZero }
+        calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
+        let nextEntryIndex = CalculationStackView.arrangedSubviews.count
+        let newEntryView = createEntryView()
+        
+        CalculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
+        CalculationStackScrollView.setContentOffset(CGPoint(x: 0, y: CalculationStackScrollView.contentSize.height-CalculationStackScrollView.bounds.height), animated: true)
+        resetInputLabelsToDefault()
+    }
+    
+        
+    private func resetInputLabelsToDefault() {
+        numberInputLabel.text = "0"
+    }
+    
+    private func isInputValid() -> Bool {
+        return numberInputLabel.text != "0"
+    }
+    
+    func addNumberToNumberInputLabel(number: NumberButton) {
+        if numberInputLabel.text == "0" {
+            if number != .doubleZero {
+                numberInputLabel.text? = "\(number)"
+            }
+        } else {
+            numberInputLabel.text? += "\(number)"
+        }
     }
 }
