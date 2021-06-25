@@ -71,6 +71,37 @@ class CalculatorViewController: UIViewController {
     @IBAction func clickDotButton(_ sender: UIButton) {
     }
     
+    private func createEntryView() -> UIView {
+        let inputNumber = numberInputLabel.text
+        let inputOperator = operatorInputLabel.text
+        
+        let newStackView = UIStackView()
+        newStackView.axis = .horizontal
+        newStackView.alignment = .trailing
+        newStackView.distribution = .fill
+        newStackView.spacing = 8
+        
+        let operatorLabel = UILabel()
+        if CalculationStackView.arrangedSubviews.count == 0 {
+            operatorLabel.text = ""
+        } else {
+            operatorLabel.text = inputOperator
+            operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+            operatorLabel.textColor = UIColor.white
+        }
+        
+        let numberLabel = UILabel()
+        numberLabel.text = inputNumber
+        numberLabel.textColor = UIColor.white
+        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        newStackView.addArrangedSubview(operatorLabel)
+        newStackView.addArrangedSubview(numberLabel)
+        
+        return newStackView
+    }
+    
+    
     func addNumberToNumberInputLabel(number: NumberButton) {
         if numberInputLabel.text == "0" {
             if number != .doubleZero {
@@ -83,7 +114,12 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        numberInputLabel.text = "0"
+        operatorInputLabel.text = ""
+        
+        for stackView in CalculationStackView.arrangedSubviews {
+            stackView.removeFromSuperview()
+        }
     }
     
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
