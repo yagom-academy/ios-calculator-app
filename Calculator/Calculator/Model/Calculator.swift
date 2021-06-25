@@ -8,56 +8,66 @@
 import Foundation
 
 struct Calculator {
-    private var infixQueue = Queue<String>()
+    private var infixQueue = Queue<ArithmeticSign>()
     
-    private mutating func checkOperatorsInStack(_ object: String,
-                                   operatorStack: inout Stack<String>,
-                                   postfix: inout Queue<String>) {
-        while let topOperator = operatorStack.top,
-              (topOperator <=> object) || (topOperator >>> object) {
+    private mutating func compareOperators(_ operator: ArithmeticSign,
+                                                _ operatorStack: inout Stack<ArithmeticSign>,
+                                                _ postfix: inout Queue<ArithmeticSign>) {
+        while let top = operatorStack.top,
+              (top.priority == `operator`.priority) || (top.priority > `operator`.priority) {
             postfix.enqueue(operatorStack.pop())
         }
-        operatorStack.push(object)
+        operatorStack.push(`operator`)
     }
-    
-    private mutating func transformInfixToPostfix() -> Queue<String> {
-        var postfixQueue = Queue<String>()
-        var operatorStack = Stack<String>()
-        while let dequeueElement = infixQueue.dequeue() {
-            if let _ = Int(dequeueElement) {
+    private mutating func transformInfixToPostfix() -> Queue<ArithmeticSign> {
+        var postfixQueue = Queue<ArithmeticSign>()
+        var operatorStack = Stack<ArithmeticSign>()
+        
+        while !infixQueue.isEmpty {
+            let dequeueElement = infixQueue.dequeue()
+            switch dequeueElement {
+            case .number(_):
                 postfixQueue.enqueue(dequeueElement)
-            } else {
-                // 스택에 탑과 현재 연산자 우선순위 비교 함수
+            default:
+                compareOperators(dequeueElement, &operatorStack, &postfixQueue)
             }
         }
-        while let top = operatorStack.pop() {
+        while !operatorStack.isEmpty {
+            let top = operatorStack.pop()
             postfixQueue.enqueue(top)
         }
         return postfixQueue
     }
-    mutating func makeCalculation() throws -> String {
+}
+
+extension Calculator {
+    mutating func pushNumberOrOperator(_ sign: ArithmeticSign) {
+        infixQueue.enqueue(sign)
+    }
+    mutating func makeCalculation() -> String {
         var postfix = transformInfixToPostfix()
+        var operandStack = Stack<ArithmeticSign>()
         
-        var operandStack = Stack<String>()
-        
-        while let dequeueElement = postfix.dequeue() {
-            if let _ = Int(dequeueElement) {
+        while !postfix.isEmpty {
+            let dequeueElement = postfix.dequeue()
+            switch dequeueElement {
+            case .number(_):
                 operandStack.push(dequeueElement)
-            } else {
-                guard let firstOperand = operandStack.pop() else {
-                    throw StackError.underflow
-                }
-                guard let secondOperand = operandStack.pop() else {
-                    throw StackError.underflow
+            default:
+                let rhs = operandStack.pop()
+                let lhs = operandStack.pop()
+                
+                if dequeueElement == .division, rhs.extracted == 0 {
+                    return "NaN"
                 }
                 
-                //let calculatedNumber = calculate()
-                //연산결과 스택에 푸쉬
+                let computedNumber = dequeueElement.computeNumber(lhs.extracted, rhs.extracted)
+                let wrappingNumber = ArithmeticSign.number(computedNumber)
+                operandStack.push(wrappingNumber)
             }
         }
-        guard let result = operandStack.pop() else {
-            throw StackError.underflow
-        }
-        return result
+        let resultDouble = operandStack.pop().extracted
+        return String(resultDouble)
     }
 }
+

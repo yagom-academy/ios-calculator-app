@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A92A4CD22684B2C50004469B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92A4CD12684B2C50004469B /* Queue.swift */; };
+		A9430E6726856D4500821165 /* ArithmeticSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9430E6626856D4500821165 /* ArithmeticSign.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		A92A4CD12684B2C50004469B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		A9430E6626856D4500821165 /* ArithmeticSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticSign.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				F9C282D32684B0BA00FD007A /* Stack.swift */,
 				A92A4CD12684B2C50004469B /* Queue.swift */,
 				F9C282D52684B38200FD007A /* Calculator.swift */,
+				A9430E6626856D4500821165 /* ArithmeticSign.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				A9430E6726856D4500821165 /* ArithmeticSign.swift in Sources */,
 				F9C282D62684B38200FD007A /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
