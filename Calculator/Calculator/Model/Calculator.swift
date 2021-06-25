@@ -4,23 +4,8 @@ class Calculator {
     private var currentInput = ""
     private var infixNotation = [String]()
     
-    private func isPriorOperator(this first: String, to second: String) -> Bool {
-        let highPriorityOperator = Set(["*", "/"])
-        let lowPriorityOperator = Set(["+", "-"])
-        return highPriorityOperator.contains(first) && lowPriorityOperator.contains(second)
-    }
-    
-    private func moveNonPriorOperator(than element: String, from stack: inout Stack<String>, to postfix: inout [String]) {
-        while let top = stack.top, !isPriorOperator(this: element, to: top) {
-            guard let top = stack.pop() else {
-                continue
-            }
-            postfix.append(top)
-        }
-    }
-
-    func convertToPostfix() -> [String] {
-        var operatorStack = Stack<String>()
+    private func convertToPostfix() throws -> [String] {
+        var operatorStack = Stack<Operator>()
         var postfix = [String]()
 
         for element in infixNotation {
@@ -28,17 +13,25 @@ class Calculator {
                 postfix.append(element)
                 continue
             }
-            moveNonPriorOperator(than: element, from: &operatorStack, to: &postfix)
-            operatorStack.push(element)
+            guard let currentOperator = Operator(rawValue: element) else {
+                throw ErrorCases.invalidElement
+            }
+            while let top = operatorStack.top, currentOperator <= top {
+                guard let top = operatorStack.pop() else {
+                    throw ErrorCases.emptyStackAccess
+                }
+                postfix.append(top.rawValue)
+            }
+            operatorStack.push(currentOperator)
         }
         while let top = operatorStack.pop() {
-            postfix.append(top)
+            postfix.append(top.rawValue)
         }
         return postfix
     }
 
     func calculatePostfix() throws -> Double? {
-        let postfix = convertToPostfix()
+        let postfix = try convertToPostfix()
         var numberStack = Stack<Double>()
 
         for element in postfix {
