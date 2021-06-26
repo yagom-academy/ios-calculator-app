@@ -38,40 +38,37 @@ enum CalculatorError: Error {
 }
 
 class Calculator {
-    var infixArray: Array<Any> = []
-    var stack = Stack<Any>()
-    var postArray: Array<Any> = []
+    private var infixArray: Array<String> = []
+    private var stack = Stack<String>()
+    private var postfixArray: Array<String> = []
     
-    func converToPosifixNotation(of originArray: Array<Any>) -> Array<Any> {
+    func converToPosifixNotation(of originArray: Array<String>) -> Array<String> {
         for item in originArray {
-            switch item {
-            case _ as Double:
-                postArray.append(item)
-            case let someOperator as Operator:
+            if Double(item) != nil {
+                postfixArray.append(item)
+            } else {
                 if stack.isEmpty {
-                    stack.push(element: someOperator)
-                    print(stack)
+                    stack.push(element: item)
                 } else {
-                    guard let topOfStack = stack.top as? Operator else { return [1] }
+                    guard let topOfStack = stack.top else { return ["1"] }
                     
-                    if topOfStack >= someOperator {
-                        guard let topOfStack2 = stack.pop() as? Operator else { return [2] }
-                        postArray.append(topOfStack2)
-                        stack.push(element: someOperator)
+                    if topOfStack >= item {
+                        guard let topOfStack2 = stack.pop() else { return ["2"] }
+                        postfixArray.append(topOfStack2)
+                        stack.push(element: item)
                     } else {
-                        stack.push(element: someOperator)
+                        stack.push(element: item)
                     }
                 }
-            default: return [3]
             }
         }
         while stack.isEmpty == false {
             guard let topOfStack = stack.pop() else {
-                return [5]
+                return ["5"]
             }
-            postArray.append(topOfStack)
+            postfixArray.append(topOfStack)
         }
-        return postArray
+        return postfixArray
     }
     
     func checkOperator(_ input: String) throws -> Operator {
@@ -82,18 +79,16 @@ class Calculator {
     }
     
     func calculatePostfix() throws -> Double {
-        for item in postArray {
+        for item in postfixArray {
             if let item = item as? Double {
                 stack.push(element: item)
             } else {
                 guard let firstElement = stack.pop(), let secondElement = stack.pop() else { return 0.0}
                 guard let firstNumber = firstElement as? Double,
                       let secondNumber = secondElement as? Double else { return 0.0 }
-//                do {
-                    let `operator` = try? checkOperator(item as? String ?? "")
-//                } catch {
-//                    CalculatorError.unknown
-//                }
+                
+                let `operator` = try? checkOperator(item as? String ?? "")
+                
                 switch `operator` {
                 case .plus:
                     stack.push(element: add(firstNumber, secondNumber))
@@ -140,7 +135,6 @@ extension Calculator: Calculatable {
 
 func main() {
     let c = Calculator()
-    let a = c.converToPosifixNotation(of: [5.0, Operator.plus, 2.0, Operator.division, 7.0, Operator.multiplication, 3.0])
+    let a = c.converToPosifixNotation(of: ["5.0", Operator.plus.rawValue, "2.0", Operator.division.rawValue, "7.0", Operator.multiplication.rawValue, "3.0"])
     print(a)
-    
 }
