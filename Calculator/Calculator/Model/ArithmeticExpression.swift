@@ -11,6 +11,10 @@ public class Infix {
     var infix: Array<String> = []
 }
 
+func addTwoNumbers<T: Numeric>(first: T, second: T) -> T {
+    return first + second
+}
+
 class Postfix {
     var postfix: Array<String> = []
     var operatorsStack: Array<String> = []

@@ -10,9 +10,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayUserInputNumber: UILabel!
     
     private var userInput: Bool = false
-    private var input = Infix()
-    private var postfix = Postfix()
-    private var calculator = Calculator()
+    private let input = Infix()
+    private let postfix = Postfix()
+    private let calculator = Calculator()
     
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
         if userInput {
