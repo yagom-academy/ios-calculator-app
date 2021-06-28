@@ -64,7 +64,7 @@ extension Calculator {
         }
     }
     
-    func changeToPostfixExpression() throws {
+    private func changeToPostfixExpression() throws {
         for element in infixExpression {
             if isNumber(element) {
                 postfixExpression.append(element)
@@ -75,34 +75,49 @@ extension Calculator {
         try sendOperatorsToPostfixFromStack()
     }
     
-    func evaluatePostfixExpression() -> Result<Double, CalculatorError> {
+    private func extractOperandsFromStack() throws -> (lhsValue: Double, rhsValue: Double) {
+        guard let firstValue = equationStack.pop(),
+              let secondValue = equationStack.pop(),
+              let lhsValue = Double(secondValue),
+              let rhsValue = Double(firstValue) else {
+            throw CalculatorError.unknown
+        }
+        return (lhsValue, rhsValue)
+    }
+    
+    private func calculate(by element: String, lhsValue: Double, rhsValue: Double) throws {
+        guard let operatorSymbol = try? Operator.obtainOperator(from: element) else {
+            throw CalculatorError.unknown
+        }
+        switch operatorSymbol {
+        case .add:
+            equationStack.push(String(add(lhs: lhsValue, rhs: rhsValue)))
+        case .subtract:
+            equationStack.push(String(subtract(lhs: lhsValue, rhs: rhsValue)))
+        case .multiply:
+            equationStack.push(String(multiply(lhs: lhsValue, rhs: rhsValue)))
+        case .divide:
+            let result = try divide(lhs: lhsValue, rhs: rhsValue)
+            equationStack.push(String(result))
+        }
+    }
+    
+    private func findOutTheLastValue() throws -> Double {
+        guard let lastValue = equationStack.pop(), let result = Double(lastValue) else {
+            throw CalculatorError.unknown
+        }
+        return result
+    }
+    
+    private func evaluatePostfixExpression() throws -> Double {
         for element in postfixExpression {
-            if Double(element) != nil {
+            if isNumber(element) {
                 equationStack.push(element)
             } else {
-                guard let firstValue = equationStack.pop(), let secondValue = equationStack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let operatorSymbol = try? Operator.obtainOperator(from: element) else {
-                    return .failure(.unknown)
-                }
-                switch operatorSymbol {
-                case .add:
-                    equationStack.push(String(add(lhs: lhsValue, rhs: rhsValue)))
-                case .subtract:
-                    equationStack.push(String(subtract(lhs: lhsValue, rhs: rhsValue)))
-                case .multiply:
-                    equationStack.push(String(multiply(lhs: lhsValue, rhs: rhsValue)))
-                case .divide:
-                    do {
-                        let result = try divide(lhs: lhsValue, rhs: rhsValue)
-                        equationStack.push(String(result))
-                    } catch {
-                        return .failure(.divideByZero)
-                    }
-                }
+                let (lhs, rhs) = try extractOperandsFromStack()
+                try calculate(by: element, lhsValue: lhs, rhsValue: rhs)
             }
         }
-        guard let lastValue = equationStack.pop(), let result = Double(lastValue) else {
-            return .failure(.unknown)
-        }
-        return .success(result)
+        return try findOutTheLastValue()
     }
 }
