@@ -4,15 +4,20 @@ class Calculator {
     private var currentInput = ""
     private var infixNotation = [String]()
 
-    private func moveNonPrecedentOperator(than currentOperator: Operator,
-                                      from operatorStack: inout Stack<Operator>,
-                                      to postfix: inout [String]) throws{
+    private func moveNonPrecedentOperator(
+        than currentOperator: Operator,
+        from operatorStack: Stack<Operator>,
+        to postfix: [String]) throws -> (Stack<Operator>, [String])
+    {
+        var operatorStack = operatorStack
+        var postfix = postfix
         while let top = operatorStack.top, currentOperator <= top {
             guard let top = operatorStack.pop() else {
-                throw ErrorCases.emptyStackAccess
+                throw CalculatorError.emptyStackAccess
             }
             postfix.append(top.rawValue)
         }
+        return (operatorStack, postfix)
     }
 
     private func convertToPostfix() throws -> [String] {
@@ -25,9 +30,9 @@ class Calculator {
                 continue
             }
             guard let currentOperator = Operator(rawValue: element) else {
-                throw ErrorCases.invalidElement
+                throw CalculatorError.invalidElement
             }
-            try moveNonPrecedentOperator(than: currentOperator, from: &operatorStack, to: &postfix)
+            (operatorStack, postfix) = try moveNonPrecedentOperator(than: currentOperator, from: operatorStack, to: postfix)
             operatorStack.push(currentOperator)
         }
         while let top = operatorStack.pop() {
@@ -46,12 +51,12 @@ class Calculator {
                 continue
             }
             guard let rhs = numberStack.pop(), let lhs = numberStack.pop() else {
-                throw ErrorCases.emptyStackAccess
+                throw CalculatorError.emptyStackAccess
             }
-            guard let `operator` = Operator(rawValue: element) else {
-                throw ErrorCases.invalidElement
+            guard let currentOperator = Operator(rawValue: element) else {
+                throw CalculatorError.invalidElement
             }
-            let result = try `operator`.calculate(lhs: lhs, rhs: rhs)
+            let result = try currentOperator.calculate(leftOperand: lhs, rightOperand: rhs)
             numberStack.push(result)
         }
         return numberStack.pop()

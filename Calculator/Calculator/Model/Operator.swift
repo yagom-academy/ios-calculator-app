@@ -18,23 +18,27 @@ enum Operator: String, Comparable {
         }
     }
     
-    func calculate(lhs: Double, rhs: Double) throws -> Double {
+    func calculate(leftOperand: Double, rightOperand: Double) throws -> Double {
         switch self {
         case .plus:
-            return lhs + rhs
+            return leftOperand + rightOperand
         case .minus:
-            return lhs - rhs
+            return leftOperand - rightOperand
         case .times:
-            return lhs * rhs
+            return leftOperand * rightOperand
         case .divide:
-            if rhs == 0 {
-                throw ErrorCases.dividedByZero
+            if rightOperand == 0 {
+                throw CalculatorError.dividedByZero
             }
-            return lhs / rhs
+            return leftOperand / rightOperand
         }
     }
     
     static func < (lhs: Operator, rhs: Operator) -> Bool {
         return lhs.precedence < rhs.precedence
+    }
+    
+    static func == (lhs: Operator, rhs: Operator) -> Bool {
+        return lhs.precedence == rhs.precedence
     }
 }

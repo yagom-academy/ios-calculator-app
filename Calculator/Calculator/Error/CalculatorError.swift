@@ -1,6 +1,6 @@
 import Foundation
 
-enum ErrorCases: Error {
+enum CalculatorError: Error {
     case emptyStackAccess
     case dividedByZero
     case invalidElement
