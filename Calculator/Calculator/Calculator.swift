@@ -36,19 +36,19 @@ extension Calculator {
                         equationStack.push(element: element)
                         break
                     } else {
-                        guard let `operator` = equationStack.pop() else {
+                        guard let operatorSymbol = equationStack.pop() else {
                             throw CalculatorError.unknown
                         }
-                        postfixExpression.append(`operator`)
+                        postfixExpression.append(operatorSymbol)
                     }
                 }
             }
         }
         while !equationStack.isEmpty {
-            guard let `operator` = equationStack.pop() else {
+            guard let operatorSymbol = equationStack.pop() else {
                 throw CalculatorError.unknown
             }
-            postfixExpression.append(`operator`)
+            postfixExpression.append(operatorSymbol)
         }
     }
     
@@ -57,10 +57,10 @@ extension Calculator {
             if Double(element) != nil {
                 equationStack.push(element: element)
             } else {
-                guard let firstValue = equationStack.pop(), let secondValue = equationStack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let `operator` = try? Operator.obtainOperator(from: element) else {
+                guard let firstValue = equationStack.pop(), let secondValue = equationStack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let operatorSymbol = try? Operator.obtainOperator(from: element) else {
                     return .failure(.unknown)
                 }
-                switch `operator` {
+                switch operatorSymbol {
                 case .add:
                     equationStack.push(element: String(add(lhs: lhsValue, rhs: rhsValue)))
                 case .subtract:

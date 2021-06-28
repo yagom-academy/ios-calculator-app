@@ -27,9 +27,9 @@ enum Operator: String {
     }
     
     static func obtainOperator(from target: String) throws -> Operator {
-        guard let `operator` = Operator(rawValue: target) else {
+        guard let operatorSymbol = Operator(rawValue: target) else {
             throw CalculatorError.invalidOperator
         }
-        return `operator`
+        return operatorSymbol
     }
 }
