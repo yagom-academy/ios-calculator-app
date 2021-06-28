@@ -1,7 +1,7 @@
 import Foundation
 
 struct Stack {
-    var storedValue: [String] = []
+    private var storedValue: [String] = []
     
     mutating func pop() -> String? {
         guard let popedValue = self.storedValue.popLast() else {
