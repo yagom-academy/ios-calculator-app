@@ -1,5 +1,9 @@
 import Foundation
 
+enum CalculatorError: Error {
+    case dividedByZero
+}
+
 class Calculator {
     var numberStack = [String]()
     var result = ""
@@ -8,13 +12,17 @@ class Calculator {
     func isNumberInPostfix(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
         
-        if operators.contains(item) {
-            return false
-        }
-        return true
+        return !operators.contains(item)
     }
     
-    func calculatePostfix(first: String, second: String, arithmethicOperator: String) -> Double {
+    func checkDividedNumber(second: Double) throws {
+        let invalidNumber = Double(0)
+        guard second != invalidNumber else {
+            throw CalculatorError.dividedByZero
+        }
+    }
+    
+    func calculatePostfix(first: String, second: String, arithmethicOperator: String) throws -> Double {
         guard let first = Double(first) , let second = Double(second) else {
             return 10000000
         }
@@ -26,20 +34,21 @@ class Calculator {
         case "×":
             return first * second
         case "÷":
+            try checkDividedNumber(second: second)
             return first / second
         default:
             return 10000000
         }
     }
     
-    func returnCalculationResult() -> String {
+    func returnCalculationResult() throws -> String {
         for item in postfix.postfix {
             if isNumberInPostfix(item: item) {
                 numberStack.append(item)
             }else {
                 let second = numberStack.removeLast()
                 let first = numberStack.removeLast()
-                let calculateResult = calculatePostfix(first: first, second: second, arithmethicOperator: item)
+                let calculateResult = try calculatePostfix(first: first, second: second, arithmethicOperator: item)
                 numberStack.append(String(calculateResult))
             }
         }
