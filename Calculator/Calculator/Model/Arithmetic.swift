@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum ArithmeticError: Error {
-    case downCastingError
-}
-
 protocol Arithmetic {
 
 }

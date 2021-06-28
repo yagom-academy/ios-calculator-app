@@ -6,10 +6,6 @@
 
 import UIKit
 
-enum CalculatorError: Error {
-    case zeroDivisor
-}
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

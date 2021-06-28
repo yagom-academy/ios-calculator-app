@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum StackError: Error {
-    case underflow
-}
-
 struct Stack<T> {
     private var stack = Array<T>()
     
