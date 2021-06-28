@@ -42,6 +42,10 @@ class Calculator {
     private var stack = Stack<String>()
     private var postfixArray = [String]()
     
+    func putInto(_ value: [String]) {
+        infixArray.append(contentsOf: value)
+    }
+    
     func converToPostfixNotation() -> [String] {
         for item in infixArray {
             if let _ = Double(item) {
@@ -129,6 +133,18 @@ extension Calculator: Calculatable {
             throw CalculatorError.dividedByZero
         }
         return firstNumber / secondNumber
+    }
+}
+
+// MARK: - Calculator Unit Test 함수
+extension Calculator {
+    func calculate(with str: [String]) -> Result<Double, CalculatorError> {
+       putInto(str)
+        converToPostfixNotation()
+        guard let result = try? calculatePostfix() else {
+            return .failure(.unknown)
+        }
+        return .success(result)
     }
 }
 
