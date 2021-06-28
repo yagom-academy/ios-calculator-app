@@ -41,7 +41,7 @@ class Calculator {
         return postfix
     }
 
-    func calculatePostfix() throws -> Double? {
+    func calculate() throws -> Double? {
         let postfix = try convertToPostfix()
         var numberStack = Stack<Double>()
 
