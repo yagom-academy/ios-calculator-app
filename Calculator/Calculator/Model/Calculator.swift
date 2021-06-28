@@ -6,7 +6,7 @@ class Calculator {
     var postfix = Postfix()
     
     func isNumberInPostfix(item: String) -> Bool {
-        let operators = ["+","−","×","÷"]
+        let operators = ["+", "−", "×", "÷"]
         
         if operators.contains(item) {
             return false

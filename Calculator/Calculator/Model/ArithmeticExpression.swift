@@ -1,11 +1,7 @@
 import Foundation
 
-public class Infix {
+class Infix {
     var infix: Array<String> = []
-}
-
-func addTwoNumbers<T: Numeric>(first: T, second: T) -> T {
-    return first + second
 }
 
 class Postfix {
@@ -27,7 +23,7 @@ class Postfix {
     }
     
     func isNumberInInfix(item: String) -> Bool {
-        let operators = ["+","−","×","÷"]
+        let operators = ["+", "−", "×", "÷"]
         
         if operators.contains(item) {
             return false
