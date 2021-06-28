@@ -44,7 +44,7 @@ class Calculator {
     func calculate() throws -> Double? {
         let postfix = try convertToPostfix()
         var numberStack = Stack<Double>()
-
+        
         for element in postfix {
             if let number = Double(element) {
                 numberStack.push(number)
@@ -60,6 +60,17 @@ class Calculator {
             numberStack.push(result)
         }
         return numberStack.pop()
+    }
+    
+    func formatResult() throws -> String {
+        do {
+            guard let result = try calculate() else {
+                throw CalculatorError.invalidResult
+            }
+            return String(result)
+        } catch CalculatorError.dividedByZero {
+            return "NaN"
+        }
     }
     
     func replaceInfix(with infix: [String]) {
