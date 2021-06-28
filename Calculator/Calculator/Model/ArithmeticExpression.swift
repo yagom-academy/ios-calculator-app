@@ -59,8 +59,8 @@ class Postfix {
             addToOperatorStack(item: input.operatorSymbol)
         } else {
             while !operatorsStack.isEmpty {
-                addToPostfix(item: lastOfOperatorStack.operatorSymbol)
-                operatorsStack.removeLast()
+                let lastItem = operatorsStack.removeLast()
+                addToPostfix(item: lastItem)
             }
             addToOperatorStack(item: input.operatorSymbol)
         }
