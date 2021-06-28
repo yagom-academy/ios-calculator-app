@@ -8,32 +8,26 @@
 import Foundation
 
 struct Calculator {
-    private var infixQueue = Queue<ArithmeticSign>()
+    private var infixQueue = Queue<Arithmetic>()
     
-    private mutating func compareOperators(_ operator: ArithmeticSign,
-                                                _ operatorStack: inout Stack<ArithmeticSign>,
-                                                _ postfix: inout Queue<ArithmeticSign>) {
-        while let top = operatorStack.top,
-              (top.priority == `operator`.priority) || (top.priority > `operator`.priority) {
-            postfix.enqueue(operatorStack.pop())
-        }
-        operatorStack.push(`operator`)
-    }
-    private mutating func transformInfixToPostfix() -> Queue<ArithmeticSign> {
-        var postfixQueue = Queue<ArithmeticSign>()
-        var operatorStack = Stack<ArithmeticSign>()
-        
-        while !infixQueue.isEmpty {
-            let dequeueElement = infixQueue.dequeue()
-            switch dequeueElement {
-            case .number(_):
+    private mutating func transformInfixToPostfix() -> Queue<Arithmetic> {
+        var postfixQueue = Queue<Arithmetic>()
+        var operatorStack = Stack<Arithmetic>()
+        while let dequeueElement = infixQueue.dequeue() {
+            if let `operator` = dequeueElement as? Operator {
+                if let top = operatorStack.top as? Operator,
+                      (top == `operator`) || (top > `operator`),
+                      let pop = operatorStack.pop() {
+                    postfixQueue.enqueue(pop)
+                    infixQueue.enqueueInFront(`operator`)
+                    continue
+                }
+                operatorStack.push(`operator`)
+            } else {
                 postfixQueue.enqueue(dequeueElement)
-            default:
-                compareOperators(dequeueElement, &operatorStack, &postfixQueue)
             }
         }
-        while !operatorStack.isEmpty {
-            let top = operatorStack.pop()
+        while let top = operatorStack.pop() {
             postfixQueue.enqueue(top)
         }
         return postfixQueue
@@ -41,33 +35,34 @@ struct Calculator {
 }
 
 extension Calculator {
-    mutating func pushNumberOrOperator(_ sign: ArithmeticSign) {
+    mutating func pushNumberOrOperator(_ sign: Arithmetic) {
         infixQueue.enqueue(sign)
     }
-    mutating func makeCalculation() -> String {
+    mutating func makeCalculation() throws -> String {
         var postfix = transformInfixToPostfix()
-        var operandStack = Stack<ArithmeticSign>()
+        var operandStack = Stack<Arithmetic>()
         
-        while !postfix.isEmpty {
-            let dequeueElement = postfix.dequeue()
-            switch dequeueElement {
-            case .number(_):
-                operandStack.push(dequeueElement)
-            default:
-                let rhs = operandStack.pop()
-                let lhs = operandStack.pop()
+        while let dequeueElement = postfix.dequeue() {
+            if let `operator` = dequeueElement as? Operator {
+                guard let rhs = operandStack.pop() else { throw StackError.underflow }
+                guard let castedRhs = rhs as? Operand else { throw ArithmeticError.downCastingError }
+                guard let lhs = operandStack.pop() else { throw StackError.underflow }
+                guard let castedLhs = lhs as? Operand else { throw ArithmeticError.downCastingError }
                 
-                if dequeueElement == .division, rhs.extracted == 0 {
-                    return "NaN"
+                if `operator`.type == .division, castedRhs.value == 0 {
+                    throw CalculatorError.zeroDivisor
                 }
                 
-                let computedNumber = dequeueElement.computeNumber(lhs.extracted, rhs.extracted)
-                let wrappingNumber = ArithmeticSign.number(computedNumber)
+                let computedNumber = `operator`.computeNumber(castedLhs.value, castedRhs.value)
+                let wrappingNumber = Operand(computedNumber)
                 operandStack.push(wrappingNumber)
+            } else {
+                operandStack.push(dequeueElement)
             }
         }
-        let resultDouble = operandStack.pop().extracted
-        return String(resultDouble)
+        guard let upcastingResult = operandStack.pop()  else { throw StackError.underflow }
+        guard let result = upcastingResult as? Operand else { throw ArithmeticError.downCastingError }
+        return String(result.value)
     }
 }
 
