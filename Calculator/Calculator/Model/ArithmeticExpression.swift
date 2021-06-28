@@ -11,9 +11,9 @@ class Postfix {
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
             if isNumberInInfix(item: $0) {
-                addToPostfix(member: $0)
+                addToPostfix(item: $0)
             } else if operatorsStack.isEmpty {
-                addToOperatorStack(of: $0)
+                addToOperatorStack(item: $0)
             } else {
                 comparePriority(lastOfOperatorStack: changeToOperatorsEnum(operatorsStack.last!),
                                             with: changeToOperatorsEnum($0))
@@ -27,12 +27,12 @@ class Postfix {
         return !operators.contains(item)
     }
     
-    func addToPostfix(member: String) {
-        postfix.append(member)
+    func addToPostfix(item: String) {
+        postfix.append(item)
     }
     
-    func addToOperatorStack(of index: String) {
-        operatorsStack.append(index)
+    func addToOperatorStack(item: String) {
+        operatorsStack.append(item)
     }
     
     func changeToOperatorsEnum(_ item: String) -> Operator {
@@ -52,17 +52,17 @@ class Postfix {
     
     func comparePriority(lastOfOperatorStack: Operator, with input: Operator) {
         if lastOfOperatorStack < input {
-            addToOperatorStack(of: input.operatorSymbol)
+            addToOperatorStack(item: input.operatorSymbol)
         } else if lastOfOperatorStack == input {
-            addToPostfix(member: lastOfOperatorStack.operatorSymbol)
+            addToPostfix(item: lastOfOperatorStack.operatorSymbol)
             operatorsStack.removeLast()
-            addToOperatorStack(of: input.operatorSymbol)
+            addToOperatorStack(item: input.operatorSymbol)
         } else {
             while !operatorsStack.isEmpty {
-                addToPostfix(member: lastOfOperatorStack.operatorSymbol)
+                addToPostfix(item: lastOfOperatorStack.operatorSymbol)
                 operatorsStack.removeLast()
             }
-            addToOperatorStack(of: input.operatorSymbol)
+            addToOperatorStack(item: input.operatorSymbol)
         }
     }
     
