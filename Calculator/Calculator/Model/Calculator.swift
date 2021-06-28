@@ -11,6 +11,11 @@ enum CalculatorError: Error {
     case dividedByZero
 }
 
+protocol Computable { }
+
+extension Operator: Computable {}
+extension Operand: Computable {}
+
 class Calculator {
     
     private var inputNotation: [String] = []
@@ -19,6 +24,9 @@ class Calculator {
         self.inputNotation = inputNotation
     }
     
+    /// 전위식을 후위식으로 변경
+    /// convertToPostFix(infix: [Operand("1"), .plus, Operand("2")])
+    /// -> [Operand("1"), Operand("2"), .plus]
     private func convertToPostFix(infix: [Computable]) -> [Computable] {
         var postfix: [Computable] = []
         let operatorStack = Stack<Operator>()
@@ -44,6 +52,7 @@ class Calculator {
         return postfix
     }
     
+    /// evaluate(postfix: [Operand("1"), Operand("2"), .plus]) -> Operand(3)
     private func evaluate(postfix: [Computable]) throws -> Operand? {
         let operandStack = Stack<Operand>()
         
@@ -60,6 +69,7 @@ class Calculator {
         return operandStack.pop()
     }
     
+    /// pushToInfix(with: ["1", "+", "2"]) -> [Operand("1"), .plus, Operand("2")]
     private func pushToInfix(with inputNotation: [String]) -> [Computable] {
         var infix: [Computable] = []
         for value in inputNotation {

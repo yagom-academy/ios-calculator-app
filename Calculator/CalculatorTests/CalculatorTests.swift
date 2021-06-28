@@ -45,7 +45,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(Double(4), try sut.runCalculator())
     }
     
-    func test_1_mutipuly_3_plus_2_divide_0_equal_4() {
+    func test_1_multiply_3_plus_2_divide_0_equal_error() {
         let testcase = ["1","*","3","+","2","/","0"]
         let sut: Calculator = Calculator(inputNotation: testcase)
         XCTAssertThrowsError(try sut.runCalculator()) { (error) in

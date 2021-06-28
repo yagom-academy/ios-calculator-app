@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String, Computable {
+enum Operator: String {
     case plus = "+"
     case minus = "-"
     case divide = "/"
@@ -22,8 +22,8 @@ enum Operator: String, Computable {
         }
     }
     
-    func isLowerPriority(than rhs: Operator) -> Bool {
-        return rhs.getPriority() >= self.getPriority()
+    func isLowerPriority(than operatorCase: Operator) -> Bool {
+        return operatorCase.getPriority() >= self.getPriority()
     }
     
     func calculate(_ lhs: Operand, with rhs: Operand) throws -> Double {
