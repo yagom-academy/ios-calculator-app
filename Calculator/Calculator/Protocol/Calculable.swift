@@ -8,27 +8,27 @@
 import Foundation
 
 protocol Calculable {
-    func add(lhs: Double, rhs: Double) -> Double
-    func subtract(lhs: Double, rhs: Double) -> Double
-    func multiply(lhs: Double, rhs: Double) -> Double
-    func divide(lhs: Double, rhs: Double) throws -> Double
+    func add<T>(lhs: T, rhs: T) -> T where T: Numeric
+    func subtract<T>(lhs: T, rhs: T) -> T where T: Numeric
+    func multiply<T>(lhs: T, rhs: T) -> T where T: Numeric
+    func divide<T>(lhs: T, rhs: T) throws -> T where T: FloatingPoint
 }
 
 extension Calculable {
-    func add(lhs: Double, rhs: Double) -> Double {
+    func add<T>(lhs: T, rhs: T) -> T where T: Numeric {
         return lhs + rhs
     }
     
-    func subtract(lhs: Double, rhs: Double) -> Double {
+    func subtract<T>(lhs: T, rhs: T) -> T where T: Numeric {
         return lhs - rhs
     }
     
-    func multiply(lhs: Double, rhs: Double) -> Double {
+    func multiply<T>(lhs: T, rhs: T) -> T where T: Numeric {
         return lhs * rhs
     }
     
-    func divide(lhs: Double, rhs: Double) throws -> Double {
-        if rhs == 0.0 {
+    func divide<T>(lhs: T, rhs: T) throws -> T where T: FloatingPoint {
+        if rhs == .zero {
             throw CalculatorError.divideByZero
         }
         return lhs / rhs
