@@ -5,6 +5,6 @@ enum CalculatorError: Error {
     case dividedByZero
     case invalidElement
     case invalidResult
-    
+    case failedToFormat
     
 }

@@ -41,7 +41,7 @@ class Calculator {
         return postfix
     }
 
-    func calculate() throws -> Double? {
+    private func calculate() throws -> Double? {
         let postfix = try convertToPostfix()
         var numberStack = Stack<Double>()
         
@@ -62,12 +62,19 @@ class Calculator {
         return numberStack.pop()
     }
     
-    func formatResult() throws -> String {
+    func calculateAndFormat() throws -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 5
+        
         do {
             guard let result = try calculate() else {
                 throw CalculatorError.invalidResult
             }
-            return String(result)
+            guard let formattedAnswer = numberFormatter.string(for: result) else {
+                throw CalculatorError.failedToFormat
+            }
+            return formattedAnswer
         } catch CalculatorError.dividedByZero {
             return "NaN"
         }
