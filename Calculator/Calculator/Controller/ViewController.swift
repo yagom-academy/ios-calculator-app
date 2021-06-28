@@ -1,9 +1,3 @@
-//
-//  Calculator - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -35,10 +29,5 @@ class ViewController: UIViewController {
         print(input.infix)
         postfix.separateNumberAndOperator(from: input.infix)
         print(postfix.postfix)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 }
