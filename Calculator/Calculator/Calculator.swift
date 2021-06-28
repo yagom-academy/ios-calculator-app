@@ -7,98 +7,77 @@
 
 import Foundation
 
-class Calculator {
-    private var stack = Stack<String>()
-    private var infix = Array<String>()
-    private var postfix = Array<String>()
-}
-
-extension Calculator: Calculable {
-    func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
-    }
-    
-    func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
-    }
-    
-    func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
-    }
-    
-    func divide(lhs: Double, rhs: Double) throws -> Double {
-        if rhs == 0.0 {
-            throw CalculatorError.divideByZero
-        }
-        return lhs / rhs
-    }
+class Calculator: Calculable {
+    private var equationStack = Stack<String>()
+    private var infixExpression = Array<String>()
+    private var postfixExpression = Array<String>()
 }
 
 extension Calculator {
     func putIntoInfix(of input: String) {
-        infix.append(input)
+        infixExpression.append(input)
     }
     
-    func changeToPosfix() throws {
-        for element in infix {
+    func changeToPostfixExpression() throws {
+        for element in infixExpression {
             if Double(element) != nil {
-                postfix.append(element)
+                postfixExpression.append(element)
             } else {
                 let presentOperator = try Operator.obtainOperator(from: element)
                 while true {
-                    if stack.isEmpty {
-                        stack.push(element: element)
+                    if equationStack.isEmpty {
+                        equationStack.push(element: element)
                         break
                     }
-                    guard let topOfStack = stack.peek(), let stackOperator = try? Operator.obtainOperator(from: topOfStack) else {
+                    guard let topOfStack = equationStack.peek(), let stackOperator = try? Operator.obtainOperator(from: topOfStack) else {
                         throw CalculatorError.unknown
                     }
                     if presentOperator.isHigherPriority(than: stackOperator) {
-                        stack.push(element: element)
+                        equationStack.push(element: element)
                         break
                     } else {
-                        guard let `operator` = stack.pop() else {
+                        guard let `operator` = equationStack.pop() else {
                             throw CalculatorError.unknown
                         }
-                        postfix.append(`operator`)
+                        postfixExpression.append(`operator`)
                     }
                 }
             }
         }
-        while !stack.isEmpty {
-            guard let `operator` = stack.pop() else {
+        while !equationStack.isEmpty {
+            guard let `operator` = equationStack.pop() else {
                 throw CalculatorError.unknown
             }
-            postfix.append(`operator`)
+            postfixExpression.append(`operator`)
         }
     }
     
-    func evaluatePostfix() -> Result<Double, CalculatorError> {
-        for element in postfix {
+    func evaluatePostfixExpression() -> Result<Double, CalculatorError> {
+        for element in postfixExpression {
             if Double(element) != nil {
-                stack.push(element: element)
+                equationStack.push(element: element)
             } else {
-                guard let firstValue = stack.pop(), let secondValue = stack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let `operator` = try? Operator.obtainOperator(from: element) else {
+                guard let firstValue = equationStack.pop(), let secondValue = equationStack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let `operator` = try? Operator.obtainOperator(from: element) else {
                     return .failure(.unknown)
                 }
                 switch `operator` {
                 case .add:
-                    stack.push(element: String(add(lhs: lhsValue, rhs: rhsValue)))
+                    equationStack.push(element: String(add(lhs: lhsValue, rhs: rhsValue)))
                 case .subtract:
-                    stack.push(element: String(subtract(lhs: lhsValue, rhs: rhsValue)))
+                    equationStack.push(element: String(subtract(lhs: lhsValue, rhs: rhsValue)))
                 case .multiply:
-                    stack.push(element: String(multiply(lhs: lhsValue, rhs: rhsValue)))
+                    equationStack.push(element: String(multiply(lhs: lhsValue, rhs: rhsValue)))
                 case .divide:
                     do {
                         let result = try divide(lhs: lhsValue, rhs: rhsValue)
-                        stack.push(element: String(result))
+                        equationStack.push(element: String(result))
                     } catch {
                         return .failure(.divideByZero)
                     }
                 }
             }
         }
-        guard let lastValue = stack.pop(), let result = Double(lastValue) else {
+        guard let lastValue = equationStack.pop(), let result = Double(lastValue) else {
             return .failure(.unknown)
         }
         return .success(result)
