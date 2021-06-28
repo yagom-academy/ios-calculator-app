@@ -61,4 +61,8 @@ class Calculator {
         }
         return numberStack.pop()
     }
+    
+    func replaceInfix(with infix: [String]) {
+        infixNotation = infix
+    }
 }
