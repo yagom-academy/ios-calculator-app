@@ -14,42 +14,65 @@ class Calculator: Calculable {
 }
 
 extension Calculator {
-    func putIntoInfix(of input: String) {
+    func putIntoInfixExpression(of input: String) {
         infixExpression.append(input)
     }
     
-    func changeToPostfixExpression() throws {
-        for element in infixExpression {
-            if Double(element) != nil {
-                postfixExpression.append(element)
+    private func isNumber(_ value: String) -> Bool {
+        return Double(value) != nil
+    }
+    
+    private func isHigherPriority(of infixOperator: String,than stackOperator: String) throws -> Bool {
+        guard let presentOperator = try? Operator.obtainOperator(from: infixOperator),
+              let stackOperator = try? Operator.obtainOperator(from: stackOperator) else {
+            throw CalculatorError.unknown
+        }
+        return presentOperator.isHigherPriority(than: stackOperator)
+    }
+    
+    private func isNecessaryToPutInStackNow(about element: String) throws -> Bool {
+        if equationStack.isEmpty {
+            return true
+        } else if let topOfStack = equationStack.peek(),
+                  (try? isHigherPriority(of: element, than: topOfStack)) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func handle(operator element: String) throws {
+        while true {
+            if try isNecessaryToPutInStackNow(about: element) {
+                equationStack.push(element: element)
+                break
             } else {
-                let presentOperator = try Operator.obtainOperator(from: element)
-                while true {
-                    if equationStack.isEmpty {
-                        equationStack.push(element: element)
-                        break
-                    }
-                    guard let topOfStack = equationStack.peek(), let stackOperator = try? Operator.obtainOperator(from: topOfStack) else {
-                        throw CalculatorError.unknown
-                    }
-                    if presentOperator.isHigherPriority(than: stackOperator) {
-                        equationStack.push(element: element)
-                        break
-                    } else {
-                        guard let operatorSymbol = equationStack.pop() else {
-                            throw CalculatorError.unknown
-                        }
-                        postfixExpression.append(operatorSymbol)
-                    }
+                guard let operatorSymbol = equationStack.pop() else {
+                    throw CalculatorError.unknown
                 }
+                postfixExpression.append(operatorSymbol)
             }
         }
+    }
+    
+    private func sendOperatorsToPostfixFromStack() throws {
         while !equationStack.isEmpty {
             guard let operatorSymbol = equationStack.pop() else {
                 throw CalculatorError.unknown
             }
             postfixExpression.append(operatorSymbol)
         }
+    }
+    
+    func changeToPostfixExpression() throws {
+        for element in infixExpression {
+            if isNumber(element) {
+                postfixExpression.append(element)
+            } else {
+                try handle(operator: element)
+            }
+        }
+        try sendOperatorsToPostfixFromStack()
     }
     
     func evaluatePostfixExpression() -> Result<Double, CalculatorError> {
