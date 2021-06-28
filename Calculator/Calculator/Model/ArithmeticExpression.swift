@@ -9,14 +9,14 @@ class Postfix {
     var operatorsStack: [String] = []
     
     func separateInfix(from infix: Array<String>) {
-        for item in infix {
-            if isNumberInInfix(item: item) {
-                addToPostfix(member: item)
+        infix.forEach {
+            if isNumberInInfix(item: $0) {
+                addToPostfix(member: $0)
             } else if operatorsStack.isEmpty {
-                addToOperatorStack(of: item)
+                addToOperatorStack(of: $0)
             } else {
                 comparePriority(lastOfOperatorStack: changeToOperatorsEnum(operatorsStack.last!),
-                                            with: changeToOperatorsEnum(item))
+                                            with: changeToOperatorsEnum($0))
             }
         }
         processLeftOperatorStack()
@@ -24,11 +24,7 @@ class Postfix {
     
     func isNumberInInfix(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
-        
-        if operators.contains(item) {
-            return false
-        }
-        return true
+        return !operators.contains(item)
     }
     
     func addToPostfix(member: String) {
