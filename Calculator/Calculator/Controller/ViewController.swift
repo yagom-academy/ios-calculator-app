@@ -3,29 +3,34 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var displayUserInputNumber: UILabel!
     
-    private var userInput: Bool = false
+    private var isInUserInput: Bool = false
     private let input = Infix()
     private let postfix = Postfix()
     private let calculator = Calculator()
     
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
-        if userInput {
-            let currentDisplay = displayUserInputNumber.text!
-            displayUserInputNumber.text = currentDisplay + sender.currentTitle!
+        guard let unwrappedUserInputNumber = displayUserInputNumber.text else { return }
+        guard let unwrappedcurrentTitle = sender.currentTitle else { return }
+        if isInUserInput {
+            let currentDisplay = unwrappedUserInputNumber
+            displayUserInputNumber.text = currentDisplay + unwrappedcurrentTitle
         } else {
-            displayUserInputNumber.text = sender.currentTitle!
+            displayUserInputNumber.text = unwrappedcurrentTitle
         }
-        userInput = true
+        isInUserInput = true
     }
     
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
-        input.infix.append(displayUserInputNumber.text!)
-        input.infix.append(sender.currentTitle!)
-        userInput = false
+        guard let unwrappedUserInputNumber = displayUserInputNumber.text else { return }
+        guard let unwrappedcurrentTitle = sender.currentTitle else { return }
+        input.infix.append(unwrappedUserInputNumber)
+        input.infix.append(unwrappedcurrentTitle)
+        isInUserInput = false
     }
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
-        input.infix.append(displayUserInputNumber.text!)
+        guard let unwrappedUserInputNumber = displayUserInputNumber.text else { return }
+        input.infix.append(unwrappedUserInputNumber)
         print(input.infix)
         postfix.separateInfix(from: input.infix)
         print(postfix.postfix)

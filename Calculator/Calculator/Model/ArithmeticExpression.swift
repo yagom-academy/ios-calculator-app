@@ -15,8 +15,9 @@ class Postfix {
             } else if operatorsStack.isEmpty {
                 addToOperatorStack(item: $0)
             } else {
-                comparePriority(lastOfOperatorStack: changeToOperatorsEnum(operatorsStack.last!),
-                                            with: changeToOperatorsEnum($0))
+                guard let unwrappedOperatrosStack = operatorsStack.last else { return }
+                comparePriority(lastOfOperatorStack: changeToOperatorsEnum(unwrappedOperatrosStack),
+                                with: changeToOperatorsEnum($0))
             }
         }
         processLeftOperatorStack()
@@ -35,7 +36,7 @@ class Postfix {
         operatorsStack.append(item)
     }
     
-    func changeToOperatorsEnum(_ item: String) -> Operator {
+    func changeToOperatorsEnum(_ item: String) -> Operator? {
         let lastStackOperator = item
         
         switch lastStackOperator {
@@ -45,24 +46,27 @@ class Postfix {
             return Operator.minus
         case "×":
             return Operator.multiply
-        default:
+        case "÷":
             return Operator.divide
+        default:
+            return nil
         }
     }
     
-    func comparePriority(lastOfOperatorStack: Operator, with input: Operator) {
-        if lastOfOperatorStack < input {
-            addToOperatorStack(item: input.operatorSymbol)
-        } else if lastOfOperatorStack == input {
-            addToPostfix(item: lastOfOperatorStack.operatorSymbol)
+    func comparePriority(lastOfOperatorStack: Operator?, with input: Operator?) {
+        guard let unwrappedLastOfOperatorStack = lastOfOperatorStack, let unwrappedInput = input else { return }
+        if unwrappedLastOfOperatorStack < unwrappedInput {
+            addToOperatorStack(item: unwrappedInput.operatorSymbol)
+        } else if unwrappedLastOfOperatorStack == unwrappedInput {
+            addToPostfix(item: unwrappedLastOfOperatorStack.operatorSymbol)
             operatorsStack.removeLast()
-            addToOperatorStack(item: input.operatorSymbol)
+            addToOperatorStack(item: unwrappedInput.operatorSymbol)
         } else {
             while !operatorsStack.isEmpty {
                 let lastItem = operatorsStack.removeLast()
                 addToPostfix(item: lastItem)
             }
-            addToOperatorStack(item: input.operatorSymbol)
+            addToOperatorStack(item: unwrappedInput.operatorSymbol)
         }
     }
     
