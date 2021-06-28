@@ -2,5 +2,4 @@
 
 ### 계산기 프로젝트 저장소
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
-
+![Flow_Chart](https://cdn.discordapp.com/attachments/856388606880645161/856827006695374848/unknown.png)
