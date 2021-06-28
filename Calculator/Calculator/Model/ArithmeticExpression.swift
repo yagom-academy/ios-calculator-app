@@ -8,14 +8,14 @@ class Postfix {
     var postfix: [String] = []
     var operatorsStack: [String] = []
     
-    func separateNumberAndOperator(from infix: Array<String>) {
+    func separateInfix(from infix: Array<String>) {
         for item in infix {
             if isNumberInInfix(item: item) {
                 addToPostfix(member: item)
             } else if operatorsStack.isEmpty {
                 addToOperatorStack(of: item)
             } else {
-                compareAndDecidePriority(lastStack: changeToOperatorsEnum(operatorsStack.last!),
+                comparePriority(lastOfOperatorStack: changeToOperatorsEnum(operatorsStack.last!),
                                             with: changeToOperatorsEnum(item))
             }
         }
@@ -54,16 +54,16 @@ class Postfix {
         }
     }
     
-    func compareAndDecidePriority(lastStack: Operator, with input: Operator) {
-        if lastStack < input {
+    func comparePriority(lastOfOperatorStack: Operator, with input: Operator) {
+        if lastOfOperatorStack < input {
             addToOperatorStack(of: input.operatorSymbol)
-        } else if lastStack == input {
-            addToPostfix(member: lastStack.operatorSymbol)
+        } else if lastOfOperatorStack == input {
+            addToPostfix(member: lastOfOperatorStack.operatorSymbol)
             operatorsStack.removeLast()
             addToOperatorStack(of: input.operatorSymbol)
         } else {
             while !operatorsStack.isEmpty {
-                addToPostfix(member: lastStack.operatorSymbol)
+                addToPostfix(member: lastOfOperatorStack.operatorSymbol)
                 operatorsStack.removeLast()
             }
             addToOperatorStack(of: input.operatorSymbol)

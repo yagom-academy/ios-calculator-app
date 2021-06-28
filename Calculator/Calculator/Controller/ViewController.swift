@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
         input.infix.append(displayUserInputNumber.text!)
         print(input.infix)
-        postfix.separateNumberAndOperator(from: input.infix)
+        postfix.separateInfix(from: input.infix)
         print(postfix.postfix)
     }
 }
