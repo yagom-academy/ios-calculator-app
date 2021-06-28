@@ -19,6 +19,21 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.calculate(with: ["1", "+", "2", "+", "3"]),.success(6.0))
     }
     
+    func test_1곱하기2곱하기3의결과는_6이다() {
+        XCTAssertEqual(sut.calculate(with: ["1", "*", "2", "*", "3"]), .success(6.0))
+    }
+    
+    func test_1빼기2빼기3의결과는_마이너스4이다() {
+        XCTAssertEqual(sut.calculate(with: ["1", "-", "2", "-", "3"]), .success(-4.0))
+    }
+    
+    func test_1나누기2나누기3의결과는_0쩜16667이다() {
+        XCTAssertEqual(sut.calculate(with: ["1", "/", "2", "/", "3"]), .success(0.16667))
+    }
+    
+    func test_1나누기2의결과는_0쩜5이다() {
+    XCTAssertEqual(sut.calculate(with: ["1", "/", "2"]), .success(0.5))
+    }
     
     override func tearDownWithError() throws {
   

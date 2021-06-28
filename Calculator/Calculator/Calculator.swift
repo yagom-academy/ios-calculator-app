@@ -97,7 +97,7 @@ class Calculator {
                 case .plus:
                     stack.push(element: String(add(firstNumber, secondNumber)))
                 case .minus:
-                    stack.push(element: String(substract(firstNumber, secondNumber)))
+                    stack.push(element: String(substract(secondNumber, firstNumber)))
                 case .multiplication:
                     stack.push(element: String(multiply(firstNumber, secondNumber)))
                 case .division:
@@ -136,26 +136,38 @@ extension Calculator: Calculatable {
     }
 }
 
+extension Calculator {
+    func formattingNumber(value: Double) -> Double {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 5
+        numberFormatter.roundingMode = .halfUp
+        guard let result = numberFormatter.string(for: value), let doubleValue = Double(result) else {
+            return 0.0
+        }
+        return doubleValue
+    }
+}
+
 // MARK: - Calculator Unit Test 함수
 extension Calculator {
     func calculate(with str: [String]) -> Result<Double, CalculatorError> {
-       putInto(str)
+        putInto(str)
         converToPostfixNotation()
-        guard let result = try? calculatePostfix() else {
+        guard var result = try? calculatePostfix() else {
             return .failure(.unknown)
         }
-        return .success(result)
+        return .success(formattingNumber(value:result))
     }
 }
 
 //MARK: - 테스트를 위한 메인함수
 //func main() {
 //    let c = Calculator()
-//    let a = c.converToPosifixNotation(of: ["5.0", Operator.plus.rawValue, "2.0", Operator.division.rawValue, "7.0", Operator.multiplication.rawValue, "3.0"])
+//    c.putInto(["1.0", Operator.division.rawValue, "2.0", Operator.division.rawValue, "3.0"])
+//    let a = c.converToPostfixNotation()
 //    do {
-//      let d = try? c.calculatePostfix()
-//    print(d)
+//        let d = try? c.calculatePostfix()
+//        print(d)
 //    }
-//
 //    print(a)
 //}
