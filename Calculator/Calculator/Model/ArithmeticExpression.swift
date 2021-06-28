@@ -1,12 +1,12 @@
 import Foundation
 
 class Infix {
-    var infix: Array<String> = []
+    var infix: [String] = []
 }
 
 class Postfix {
-    var postfix: Array<String> = []
-    var operatorsStack: Array<String> = []
+    var postfix: [String] = []
+    var operatorsStack: [String] = []
     
     func separateNumberAndOperator(from infix: Array<String>) {
         for item in infix {
