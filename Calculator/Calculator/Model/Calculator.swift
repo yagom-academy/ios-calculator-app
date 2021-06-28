@@ -6,15 +6,22 @@
 
 import Foundation
 
+extension Formatter {
+    static let number = NumberFormatter()
+}
+
 extension Double {
-    func toString() -> String {
-        return String(format: "%f", self)
+    func fractionDigits(min: Int = 0, max: Int = 20) -> String {
+        Formatter.number.minimumFractionDigits = min
+        Formatter.number.maximumFractionDigits = max
+        return Formatter.number.string(for: self) ?? "NaN"
     }
 }
 
 enum CalculatorError: Error {
     case FailToPopFromCalculationStack
     case FailToTypeCasting
+    case FailToOperandTypeCasting
     case InValidInput
     case DivideByZero
 }
@@ -34,6 +41,7 @@ struct Calculator {
     private var expressionEntry = [String]()
     
     mutating func enterExpression(operation: String, inputNumber: String) {
+        guard operation != "=" else { return }
         if expressionEntry.isEmpty {
             expressionEntry.append(inputNumber)
         } else {
@@ -120,18 +128,15 @@ struct Calculator {
             let firstValue = entry.removeFirst()
             if isOperator(item: firstValue) {
                 guard let secondOperand = calculationStack.pop(), let firstOperand = calculationStack.pop() else { throw CalculatorError.FailToPopFromCalculationStack }
-                
+                if secondOperand == 0 && firstValue == "÷" { return "NaN" }
                 let outCome = performOperation(firstOperand: firstOperand, secondOperand: secondOperand, operation: firstValue)
-                
                 calculationStack.push(item: outCome)
             } else {
-                guard let operand = Double(firstValue) else { throw CalculatorError.FailToTypeCasting }
-                
+                guard let operand = Double(firstValue) else { throw CalculatorError.FailToOperandTypeCasting }
                 calculationStack.push(item: operand)
             }
         }
         guard let finalResult = calculationStack.pop() else { throw CalculatorError.FailToPopFromCalculationStack }
-        return finalResult.toString()
+        return finalResult.fractionDigits()
     }
-    
 }
