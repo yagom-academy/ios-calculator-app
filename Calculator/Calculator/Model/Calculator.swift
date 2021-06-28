@@ -34,7 +34,8 @@ extension Calculator {
         if equationStack.isEmpty {
             return true
         } else if let topOfStack = equationStack.peek(),
-                  (try? isHigherPriority(of: element, than: topOfStack)) != nil {
+                  let isPreceded = try? isHigherPriority(of: element, than: topOfStack),
+                  isPreceded == true {
             return true
         } else {
             return false
