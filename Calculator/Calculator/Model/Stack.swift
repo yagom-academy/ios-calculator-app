@@ -16,7 +16,7 @@ struct Stack<Element> {
         storage.count
     }
     
-    mutating func push(element: Element) {
+    mutating func push(_ element: Element) {
         storage.append(element)
     }
     

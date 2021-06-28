@@ -44,7 +44,7 @@ extension Calculator {
     private func handle(operator element: String) throws {
         while true {
             if try isNecessaryToPutInStackNow(about: element) {
-                equationStack.push(element: element)
+                equationStack.push(element)
                 break
             } else {
                 guard let operatorSymbol = equationStack.pop() else {
@@ -78,22 +78,22 @@ extension Calculator {
     func evaluatePostfixExpression() -> Result<Double, CalculatorError> {
         for element in postfixExpression {
             if Double(element) != nil {
-                equationStack.push(element: element)
+                equationStack.push(element)
             } else {
                 guard let firstValue = equationStack.pop(), let secondValue = equationStack.pop(), let rhsValue = Double(firstValue), let lhsValue = Double(secondValue), let operatorSymbol = try? Operator.obtainOperator(from: element) else {
                     return .failure(.unknown)
                 }
                 switch operatorSymbol {
                 case .add:
-                    equationStack.push(element: String(add(lhs: lhsValue, rhs: rhsValue)))
+                    equationStack.push(String(add(lhs: lhsValue, rhs: rhsValue)))
                 case .subtract:
-                    equationStack.push(element: String(subtract(lhs: lhsValue, rhs: rhsValue)))
+                    equationStack.push(String(subtract(lhs: lhsValue, rhs: rhsValue)))
                 case .multiply:
-                    equationStack.push(element: String(multiply(lhs: lhsValue, rhs: rhsValue)))
+                    equationStack.push(String(multiply(lhs: lhsValue, rhs: rhsValue)))
                 case .divide:
                     do {
                         let result = try divide(lhs: lhsValue, rhs: rhsValue)
-                        equationStack.push(element: String(result))
+                        equationStack.push(String(result))
                     } catch {
                         return .failure(.divideByZero)
                     }
