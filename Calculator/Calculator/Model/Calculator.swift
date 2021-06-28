@@ -120,4 +120,16 @@ extension Calculator {
         }
         return try findOutTheLastValue()
     }
+    
+    func deriveEquationValue() -> Result<Double, CalculatorError> {
+        do {
+            try changeToPostfixExpression()
+            let result = try evaluatePostfixExpression()
+            return .success(result)
+        } catch let error as CalculatorError {
+            return .failure(error)
+        } catch {
+            return .failure(.unknown)
+        }
+    }
 }
