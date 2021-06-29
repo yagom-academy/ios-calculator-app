@@ -11,7 +11,6 @@ class ViewController: UIViewController {
 	private let calculator: Calculatorable = Calculator()
 	private let zero = "0"
 	private var inputStorage: [String] = []
-	private var numberString = ""
 		
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,57 +28,13 @@ class ViewController: UIViewController {
 				let lastIndex = inputStorage.count-1
 				inputStorage[lastIndex] = with
 			} else if lastType == .number {
-				inputStorage.append(numberString)
 				inputStorage.append(with)
-				numberString = ""
 			}
 		}
 	}
-	
-	@IBAction func touchUpZeroButton(_ sender: UIButton) {
-		numberString += "0"
-	}
-	
-	@IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-		numberString += "00"
-	}
-	
-	@IBAction func touchUpOneButton(_ sender: UIButton) {
-		numberString += "1"
-	}
-	
-	@IBAction func touchUpTwoButton(_ sender: UIButton) {
-		numberString += "2"
-	}
-	
-	@IBAction func touchUpThreeButton(_ sender: UIButton) {
-		numberString += "3"
-	}
-	
-	@IBAction func touchUpFourButton(_ sender: UIButton) {
-		numberString += "4"
-	}
-	
-	@IBAction func touchUpFiveButton(_ sender: UIButton) {
-		numberString += "5"
-	}
-	
-	@IBAction func touchUpSixButton(_ sender: UIButton) {
-		numberString += "6"
-	}
-	
-	@IBAction func touchUpSevenButton(_ sender: UIButton) {
-		numberString += "7"
-	}
-	
-	@IBAction func touchUpEightButton(_ sender: UIButton) {
-		numberString += "8"
-	}
-	
-	@IBAction func touchUpNineButton(_ sender: UIButton) {
-		numberString += "9"
-	}
-	
+    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+        inputStorage.append("\(sender.tag)")
+    }
 	@IBAction func touchUpDotButton(_ sender: UIButton) {
 		numberString += "."
 	}

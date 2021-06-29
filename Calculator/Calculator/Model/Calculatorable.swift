@@ -47,23 +47,39 @@ extension Calculatorable {
         return false
     }
     
+    func makeInfixExpression(from userInput: [String]) -> [String] {
+        var infixExpression = [String]()
+        var infixNumberString = ""
+        
+        for userInput in userInput {
+            let userInputType = try? CalculatorComponent.convertToComponentType(from: userInput)
+            
+            switch userInputType {
+            case .number:
+                infixNumberString += userInput
+            case .operator:
+                infixExpression.append(infixNumberString)
+                infixExpression.append(userInput)
+                infixNumberString = ""
+            default:
+                ErrorCase.unknownInputCase
+            }
+        }
+        
+        return infixExpression
+    }
+    
     func convertToPostfixExpression(fromInfix input: [String]) -> [String] {
         var postfix = [String]()
-        var numberString = ""
         var stack = Stack()
         
         for currentElement in input {
             let currentType = try? CalculatorComponent.convertToComponentType(from: currentElement)
             
             if currentType == .number {
-                numberString += currentElement
+                postfix.append(currentElement)
             } else {
-                postfix.append(numberString)
-                numberString = ""
-                
-                if let checkedElement = stack.peek(),
-                   let lastElement = stack.pop() {
-                    
+                if let lastElement = stack.pop() {
                     if checkPriority(A: lastElement, isLowerThenB: currentElement) {
                         stack.push(element: lastElement)
                         stack.push(element: currentElement)
@@ -77,10 +93,6 @@ extension Calculatorable {
                 }
             }
         }
-        
-        postfix.append(numberString)
-        
-        numberString = ""
         
         while stack.peek() != nil {
             if let element = stack.pop() {
