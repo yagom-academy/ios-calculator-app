@@ -70,7 +70,6 @@ struct Calculator {
         }
         return result
     }
-    
     private func calculateToValue(operator: String, tempNumberStack: inout Stack<Double>) throws {
         guard let firstOperand = tempNumberStack.pop(),
               let secondOperand = tempNumberStack.pop()
@@ -84,12 +83,12 @@ struct Calculator {
     }
 
     private func checkDivisionError(operator: String, secondOperand: Double) throws {
-        if `operator` == "/" && secondOperand == 0 {
+        if `operator` == "/" && secondOperand == 0.0 {
             throw CalculatorError.divisionByZero(description: "NaN")
         }
     }
 
-    private func solve(equation: String) throws -> Double {
+    func solve(equation: String) throws -> Double {
         let expression = NSExpression(format: equation)
         guard let operationResult = expression.expressionValue(
                 with: nil, context: nil
