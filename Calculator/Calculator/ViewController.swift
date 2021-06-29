@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     }
     
     private func reset() {
+        currentValue = "0"
         currentValueLabel.text = "0"
         currentOperatorLabel.text = ""
         infixNotation = [String]()
@@ -28,16 +29,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func acDidTap(_ sender: UIButton) {
-        
+        reset()
     }
     @IBAction func ceDidTap(_ sender: UIButton) {
+        currentValue = "0"
+        currentValueLabel.text = "0"
     }
     @IBAction func switchSignDidTap(_ sender: UIButton) {
+        guard currentValue != "0" else { return }
+        if let firstCharacter = currentValue.first, firstCharacter == "-" {
+            currentValue.removeFirst()
+        } else {
+            currentValue = "-" + currentValue
+        }
+        updateCurrentValueLabel()
     }
     @IBAction func operatorDidTap(_ sender: UIButton) {
         //×÷
-        
-        
     }
     @IBAction func equalDidTap(_ sender: UIButton) {
     }
