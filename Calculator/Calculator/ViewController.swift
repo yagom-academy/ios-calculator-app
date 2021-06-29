@@ -1,6 +1,18 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var currentValue = "0"
+    
+    @IBOutlet weak var currentValueLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateCurrentValueLabel()
+    }
+    
+    private func updateCurrentValueLabel() {
+        currentValueLabel.text = currentValue
+    }
     
     @IBAction func acDidTap(_ sender: UIButton) {
     }
@@ -20,16 +32,16 @@ class ViewController: UIViewController {
     }
     @IBAction func dotDidTap(_ sender: UIButton) {
     }
-    @IBAction func doubleZeroDidTap(_ sender: UIButton) {
-    }
     
     @IBAction func numberDidTap(_ sender: UIButton) {
+        guard let input = sender.titleLabel?.text else { return }
+        
+        if currentValue == "0" {
+            guard input != "0" && input != "00" else { return }
+                currentValue = input
+        } else {
+            currentValue = currentValue + input
+        }
+        updateCurrentValueLabel()
     }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-
 }
