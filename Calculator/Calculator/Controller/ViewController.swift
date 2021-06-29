@@ -31,14 +31,17 @@ class ViewController: UIViewController {
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
         guard let unwrappedUserInputNumber = displayUserInputNumber.text else { return }
         input.infix.append(unwrappedUserInputNumber)
-        print(input.infix)
         postfix.separateInfix(from: input.infix)
-        print(postfix.postfix)
+
         do {
-            try calculator.returnCalculationResult(postfix: postfix.postfix)
-            displayUserInputNumber.text = try! calculator.returnCalculationResult(postfix: postfix.postfix)
+            let result = try calculator.returnCalculationResult(postfix: postfix.postfix)
+            displayUserInputNumber.text = result
+            print(input.infix)
+            print(postfix.postfix)
+            print(result)
         } catch {
             displayUserInputNumber.text = "NaN"
+            print("NaN")
         }
     }
 }
