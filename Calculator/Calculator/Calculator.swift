@@ -39,15 +39,21 @@ enum Operator {
 struct Calculator {
     func calculate(infix: [String]) throws -> String {
         let postfix: [String] = try changeToPostfixNotation(infix: infix)
-        let operationResult = try calculatePostfix(postfix: postfix)
-        let finalResult: String = try format(number: operationResult)
-        return finalResult
+        do {
+            let operationResult = try calculatePostfix(postfix: postfix)
+            let finalResult: String = try format(number: operationResult)
+            return finalResult
+        } catch CalculatorError.divisionByZero(let message){
+            return message
+        } catch {
+            return ""
+        }
     }
-    
+
     private func format(number: Double) throws -> String {
         let formatter: NumberFormatter = {
             let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
+            formatter.usesSignificantDigits = true
             return formatter
         }()
         guard let result = formatter.string(from: NSNumber(value: number)) else {
@@ -70,15 +76,14 @@ struct Calculator {
         }
         return result
     }
+    
     private func calculateToValue(operator: String, tempNumberStack: inout Stack<Double>) throws {
-        guard let firstOperand = tempNumberStack.pop(),
-              let secondOperand = tempNumberStack.pop()
+        guard let secondOperand = tempNumberStack.pop(),
+              let firstOperand = tempNumberStack.pop()
         else {
             return
         }
-        try checkDivisionError(operator: `operator`, secondOperand: secondOperand)
-        let equation = String(firstOperand) + `operator` + String(secondOperand)
-        let operationResult = try solve(equation: equation)
+        let operationResult = try solve(firstOperand: firstOperand, secondOperand: secondOperand, operator: `operator`)
         tempNumberStack.push(operationResult)
     }
 
@@ -88,14 +93,20 @@ struct Calculator {
         }
     }
 
-    func solve(equation: String) throws -> Double {
-        let expression = NSExpression(format: equation)
-        guard let operationResult = expression.expressionValue(
-                with: nil, context: nil
-        ) as? Double else {
-            throw CalculatorError.invalidEquation
+    private func solve(firstOperand: Double, secondOperand: Double, `operator`: String) throws -> Double {
+        switch `operator` {
+        case "+":
+            return firstOperand + secondOperand
+        case "-":
+            return firstOperand - secondOperand
+        case "*":
+            return firstOperand * secondOperand
+        case "/":
+            try checkDivisionError(operator: "/", secondOperand: secondOperand)
+            return firstOperand / secondOperand
+        default:
+            throw CalculatorError.unknownOperator
         }
-        return operationResult
     }
 
     private func convertToOperator(string: String) throws -> Operator {

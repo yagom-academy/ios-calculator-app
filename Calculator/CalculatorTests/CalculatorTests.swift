@@ -20,23 +20,22 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_minus() {
-        XCTAssertEqual(try sut.calculate(infix: ["1", "-", "5", "+", "1", "-", "2"]), "-4")
+        XCTAssertEqual(try sut.calculate(infix: ["1", "-", "2", "-", "3"]), "-4")
     }
     
     func test_divide() {
         XCTAssertEqual(try sut.calculate(infix: ["1", "/", "2"]), "0.5")
     }
     
-    func test_solve_multiply() {
-        XCTAssertEqual(try sut.solve(equation: "1*2*3"), 6.0)
+    func test_complex1() {
+        XCTAssertEqual(try sut.calculate(infix: ["1", "*", "3", "+", "2", "/", "2"]), "4")
     }
     
-    func test_solve_minus() {
-        XCTAssertEqual(try sut.solve(equation: "1-5+1-2"), -5.0)
+    func test_complex2() {
+        XCTAssertEqual(try sut.calculate(infix: ["1", "*", "3", "+", "2", "/", "0"]), "NaN")
     }
     
-    func test_solve_divide() {
-        XCTAssertEqual(try sut.solve(equation: "2/10"), 0.2)
+    func test_complex3() {
+        XCTAssertEqual(try sut.calculate(infix: ["10.1", "+", "12.5", "/", "125", "+", "8", "-", "100", "*", "13.8"]), "-1361.8")
     }
-    
 }
