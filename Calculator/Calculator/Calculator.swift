@@ -8,12 +8,13 @@
 import Foundation
 
 enum Operator: String {
+    
     case plus = "+"
     case minus = "-"
     case multiplication = "*"
     case division = "/"
     
-    var priority: Int {
+    fileprivate var priority: Int {
         switch self {
         case .plus, .minus:
             return OperatorPriority.low.rawValue
@@ -28,83 +29,95 @@ enum Operator: String {
 }
 
 enum OperatorPriority: Int {
+    
     case low = 0
     case high = 1
 }
 
 enum CalculatorError: Error {
+    
     case unknown
     case dividedByZero
 }
 
-class Calculator {
-    private var infixArray = [String]()
-    private var stack = Stack<String>()
-    private var postfixArray = [String]()
+extension String {
     
-    func converToPostfixNotation() -> [String] {
-        for item in infixArray {
-            if let _ = Double(item) {
-                postfixArray.append(item)
+    func toDouble() -> Bool {
+        if let _ = Double(self) {
+            return true
+        }
+        return false
+    }
+}
+
+class Calculator {
+    
+    private var infixNotation = [String]()
+    private var postfixNotation = [String]()
+    private var OperandAndOperatorStack = Stack<String>()
+    
+    func converToPostfixNotation() throws -> [String] {
+        itemsLoop: for item in infixNotation {
+            if item.toDouble() {
+                postfixNotation.append(item)
+                continue itemsLoop
+            }
+            if OperandAndOperatorStack.isEmpty {
+                OperandAndOperatorStack.push(item)
+                continue itemsLoop
+            }
+            
+            guard let topOfStack = OperandAndOperatorStack.top else { throw CalculatorError.unknown }
+            guard let currentOperator = try? checkOperator(item) else { throw CalculatorError.unknown }
+            guard let stackOperator = try? checkOperator(topOfStack) else { throw CalculatorError.unknown }
+            
+            if stackOperator.priority >= currentOperator.priority {
+                guard let poppedValue = OperandAndOperatorStack.pop() else { throw CalculatorError.unknown }
+                postfixNotation.append(poppedValue)
+                OperandAndOperatorStack.push(item)
             } else {
-                if stack.isEmpty {
-                    stack.push(element: item)
-                } else {
-                    guard let topOfStack = stack.top else { return ["Error"] }
-                    
-                    if topOfStack >= item {
-                        guard let poppedValue = stack.pop() else { return ["Error"] }
-                        postfixArray.append(poppedValue)
-                        stack.push(element: item)
-                    } else {
-                        stack.push(element: item)
-                    }
-                }
+                OperandAndOperatorStack.push(item)
             }
         }
-        while stack.isEmpty == false {
-            guard let topOfStack = stack.pop() else {
-                return ["Error"]
-            }
-            postfixArray.append(topOfStack)
+        while OperandAndOperatorStack.isEmpty == false {
+            guard let topOfStack = OperandAndOperatorStack.pop() else { throw CalculatorError.unknown }
+            postfixNotation.append(topOfStack)
         }
-        return postfixArray
+        return postfixNotation
     }
     
     func checkOperator(_ input: String) throws -> Operator {
-        guard let `operator` = Operator(rawValue: input) else {
-            throw CalculatorError.unknown
-        }
-        return `operator`
+        guard let acquiredOperator = Operator(rawValue: input) else { throw CalculatorError.unknown }
+        return acquiredOperator
     }
     
     func calculatePostfix() throws -> Double {
-        for item in postfixArray {
-            if let _ = Double(item) {
-                stack.push(element: item)
+        for item in postfixNotation {
+            if item.toDouble() {
+                OperandAndOperatorStack.push(item)
             } else {
-                guard let firstElement = stack.pop(), let secondElement = stack.pop() else { return 0.0 }
-                guard let firstNumber = Double(firstElement),
-                      let secondNumber = Double(secondElement) else { return 0.0 }
+                guard let firstElement = OperandAndOperatorStack.pop(), let secondElement = OperandAndOperatorStack.pop() else { throw CalculatorError.unknown }
+                guard let firstOperand = Double(firstElement),
+                      let secondOperand = Double(secondElement) else { throw CalculatorError.unknown }
                 
-                let `operator` = try? checkOperator(item)
+                let acquiredOperator = try? checkOperator(item)
                 
-                switch `operator` {
+                switch acquiredOperator {
                 case .plus:
-                    stack.push(element: String(add(firstNumber, secondNumber)))
+                    OperandAndOperatorStack.push(String(add(firstOperand, secondOperand)))
                 case .minus:
-                    stack.push(element: String(substract(firstNumber, secondNumber)))
+                    OperandAndOperatorStack.push(String(substract(secondOperand, firstOperand)))
                 case .multiplication:
-                    stack.push(element: String(multiply(firstNumber, secondNumber)))
+                    OperandAndOperatorStack.push(String(multiply(firstOperand, secondOperand)))
                 case .division:
-                    let result = try divide(secondNumber, firstNumber)
-                    stack.push(element: String(result))
+                    let result = try divide(secondOperand, firstOperand)
+                    OperandAndOperatorStack.push(String(result))
                 default:
-                    break
+                    throw CalculatorError.unknown
                 }
             }
         }
-        guard let lastElement = stack.pop(), let result = Double(lastElement) else {
+        guard let lastElement = OperandAndOperatorStack.pop(), let result = Double(lastElement) else {
             throw CalculatorError.unknown
         }
         return result
@@ -112,34 +125,33 @@ class Calculator {
 }
 
 extension Calculator: Calculatable {
-    func add(_ firstNumber: Double, _ secondNumber: Double) -> Double {
-        return firstNumber + secondNumber
+    
+    func add(_ firstOperand: Double, _ secondOperand: Double) -> Double {
+        return firstOperand + secondOperand
     }
     
-    func substract(_ firstNumber: Double, _ secondNumber: Double) -> Double {
-        return firstNumber - secondNumber
+    func substract(_ firstOperand: Double, _ secondOperand: Double) -> Double {
+        return firstOperand - secondOperand
     }
     
-    func multiply(_ firstNumber: Double, _ secondNumber: Double) -> Double {
-        return firstNumber * secondNumber
+    func multiply(_ firstOperand: Double, _ secondOperand: Double) -> Double {
+        return firstOperand * secondOperand
     }
     
-    func divide(_ firstNumber: Double, _ secondNumber: Double) throws -> Double {
-        if secondNumber == 0 {
+    func divide(_ firstOperand: Double, _ secondOperand: Double) throws -> Double {
+        if secondOperand == 0 {
             throw CalculatorError.dividedByZero
         }
-        return firstNumber / secondNumber
+        return firstOperand / secondOperand
     }
 }
 
 //MARK: - 테스트를 위한 메인함수
 //func main() {
+//    
 //    let c = Calculator()
-//    let a = c.converToPosifixNotation(of: ["5.0", Operator.plus.rawValue, "2.0", Operator.division.rawValue, "7.0", Operator.multiplication.rawValue, "3.0"])
-//    do {
-//      let d = try? c.calculatePostfix()
-//    print(d)
-//    }
-//
+//    let a = try? c.converToPostfixNotation()
 //    print(a)
+//    let d = try? c.calculatePostfix()
+//    print(d)
 //}

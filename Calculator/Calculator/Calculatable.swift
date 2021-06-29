@@ -8,8 +8,8 @@
 import Foundation
 
 protocol Calculatable {
-    func add(_ firstNumber: Double, _ secondNumber: Double) -> Double
-    func substract(_ firstNumber: Double, _ secondNumber: Double) -> Double
-    func multiply(_ firstNumber: Double, _ secondNumber: Double) -> Double
-    func divide(_ firstNumber: Double, _ secondNumber: Double) throws -> Double
+    func add(_ firstOperand: Double, _ secondOperand: Double) -> Double
+    func substract(_ firstOperand: Double, _ secondOperand: Double) -> Double
+    func multiply(_ firstOperand: Double, _ secondOperand: Double) -> Double
+    func divide(_ firstOperand: Double, _ secondOperand: Double) throws -> Double
 }
