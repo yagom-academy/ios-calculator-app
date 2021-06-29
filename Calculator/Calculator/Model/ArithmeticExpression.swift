@@ -5,7 +5,7 @@ class Infix {
 }
 
 class Postfix {
-    var postfix = Stack<String>()
+    var postfix: [String] = []
     var operatorsStack = Stack<String>()
     
     func separateInfix(from infix: Array<String>) {
@@ -29,7 +29,7 @@ class Postfix {
     }
     
     func addToPostfix(item: String) {
-        postfix.push(item: item)
+        postfix.append(item)
     }
     
     func addToOperatorStack(item: String) {
@@ -77,7 +77,7 @@ class Postfix {
             guard let leftItem = operatorsStack.pop() else {
                 return
             }
-            postfix.push(item: leftItem)
+            postfix.append(leftItem)
         }
     }
 }
