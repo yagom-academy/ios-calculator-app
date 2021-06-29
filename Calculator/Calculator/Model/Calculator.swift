@@ -2,6 +2,8 @@ import Foundation
 
 enum CalculatorError: Error {
     case dividedByZero
+    case invalidNumber
+    case invalidOperator
 }
 
 class Calculator {
@@ -24,7 +26,7 @@ class Calculator {
     
     func calculatePostfix(first: String, second: String, arithmethicOperator: String) throws -> Double {
         guard let first = Double(first) , let second = Double(second) else {
-            return 10000000
+            throw CalculatorError.invalidNumber
         }
         switch arithmethicOperator {
         case "+":
@@ -37,7 +39,7 @@ class Calculator {
             try checkDividedNumber(second: second)
             return first / second
         default:
-            return 10000000
+            throw CalculatorError.invalidOperator
         }
     }
     
@@ -49,7 +51,7 @@ class Calculator {
                 let second = numberStack.pop()
                 let first = numberStack.pop()
                 guard let first = first, let second = second else {
-                    return ""
+                    throw CalculatorError.invalidNumber
                 }
                 let calculateResult = try calculatePostfix(first: first, second: second, arithmethicOperator: item)
                 numberStack.push(item: String(calculateResult))
