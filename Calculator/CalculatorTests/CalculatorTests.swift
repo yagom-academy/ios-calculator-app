@@ -35,6 +35,18 @@ class CalculatorTests: XCTestCase {
     XCTAssertEqual(sut.calculate(with: ["1", "/", "2"]), .success(0.5))
     }
     
+    func test_1곱하기3더하기2나누기2는_4다() {
+    XCTAssertEqual(sut.calculate(with: ["1", "*", "3", "+", "2", "/", "2"]), .success(4))
+    }
+    
+    func test_1곱하기3더하기2나누기0은_NaN이다() {
+        XCTAssertEqual(sut.calculate(with: ["1", "*", "3", "+", "2", "/", "0"]), .failure(.dividedByZero))
+    }
+    
+    func test_10쩜1더하기12쩜5나누기125더하기8빼기100곱하기13쩜8은_마이너스1361쩜8() {
+        XCTAssertEqual(sut.calculate(with: ["10.1", "+", "12.5", "/", "125", "+", "8", "-", "100", "*", "13.8"]), .success(-1361.8))
+    }
+    
     override func tearDownWithError() throws {
   
     }

@@ -25,6 +25,7 @@ enum Operator: String {
     static func < (lhs: Operator, rhs: Operator) -> Bool {
         lhs.priority < rhs.priority
     }
+    
 }
 
 enum OperatorPriority: Int {
@@ -46,7 +47,7 @@ class Calculator {
         infixArray.append(contentsOf: value)
     }
     
-    func converToPostfixNotation() -> [String] {
+    func converToPostfixNotation() throws -> [String] {
         for item in infixArray {
             if let _ = Double(item) {
                 postfixArray.append(item)
@@ -55,8 +56,10 @@ class Calculator {
                     stack.push(element: item)
                 } else {
                     guard let topOfStack = stack.top else { return ["Error"] }
+                    guard let currentOperator = try? checkOperator(item) else { throw CalculatorError.unknown}
+                    guard let stackOperator = try? checkOperator(topOfStack) else { throw CalculatorError.unknown }
                     
-                    if topOfStack >= item {
+                    if stackOperator.priority >= currentOperator.priority {
                         guard let poppedValue = stack.pop() else { return ["Error"] }
                         postfixArray.append(poppedValue)
                         stack.push(element: item)
@@ -64,7 +67,9 @@ class Calculator {
                         stack.push(element: item)
                     }
                 }
+                
             }
+            print("여기", stack)
         }
         while stack.isEmpty == false {
             guard let topOfStack = stack.pop() else {
@@ -152,22 +157,22 @@ extension Calculator {
 extension Calculator {
     func calculate(with str: [String]) -> Result<Double, CalculatorError> {
         putInto(str)
-        converToPostfixNotation()
-        guard var result = try? calculatePostfix() else {
-            return .failure(.unknown)
+        try? converToPostfixNotation()
+        guard let result = try? calculatePostfix() else {
+            return .failure(.dividedByZero)
         }
         return .success(formattingNumber(value:result))
     }
 }
 
 //MARK: - 테스트를 위한 메인함수
-//func main() {
-//    let c = Calculator()
-//    c.putInto(["1.0", Operator.division.rawValue, "2.0", Operator.division.rawValue, "3.0"])
-//    let a = c.converToPostfixNotation()
-//    do {
-//        let d = try? c.calculatePostfix()
-//        print(d)
-//    }
-//    print(a)
-//}
+func main() {
+    let c = Calculator()
+    c.putInto(["10.1", Operator.plus.rawValue, "12.5", Operator.division.rawValue, "125", Operator.plus.rawValue, "8", Operator.minus.rawValue, "100", Operator.multiplication.rawValue, "13.8"])
+    let a = try? c.converToPostfixNotation()
+    do {
+        let d = try? c.calculatePostfix()
+        print(d)
+    }
+    print(a)
+}
