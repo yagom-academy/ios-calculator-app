@@ -35,8 +35,13 @@ class ViewController: UIViewController {
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         inputStorage.append("\(sender.tag)")
     }
-	@IBAction func touchUpDotButton(_ sender: UIButton) {
-		numberString += "."
+    
+    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+        inputStorage.append("00")
+    }
+    
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        inputStorage.append(".")
 	}
 	
 	@IBAction func touchUpDivideButton(_ sender: UIButton) {
@@ -56,7 +61,11 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpEqualButton(_ sender: UIButton) {
-		let postfix = calculator.convertToPostfixExpression(fromInfix: inputStorage)
+        guard let infix = try? calculator.makeInfixExpression(from: inputStorage) else {
+            return
+        }
+        
+		let postfix = calculator.convertToPostfixExpression(fromInfix: infix)
 		if let result = try? String(calculator.calculatePostfixExpression(postfix: postfix)) {
 			print(result)
 		} else {
@@ -83,8 +92,6 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpConvertSignButton(_ sender: UIButton) {
-		// 1. 분기처리하기
-		// 2. 버튼을 누르면 * -1 를 넣기 ->
 		
 		inputStorage.append("⁺⁄₋")
 	}
