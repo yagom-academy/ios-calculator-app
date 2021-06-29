@@ -34,5 +34,11 @@ class ViewController: UIViewController {
         print(input.infix)
         postfix.separateInfix(from: input.infix)
         print(postfix.postfix)
+        do {
+            try calculator.returnCalculationResult(postfix: postfix.postfix)
+            displayUserInputNumber.text = try! calculator.returnCalculationResult(postfix: postfix.postfix)
+        } catch {
+            displayUserInputNumber.text = "NaN"
+        }
     }
 }

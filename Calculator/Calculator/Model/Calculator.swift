@@ -41,8 +41,8 @@ class Calculator {
         }
     }
     
-    func returnCalculationResult() throws -> String {
-        for item in postfix.postfix {
+    func returnCalculationResult(postfix: [String]) throws -> String {
+        for item in postfix {
             if isNumberInPostfix(item: item) {
                 numberStack.append(item)
             }else {
