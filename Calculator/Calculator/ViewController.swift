@@ -21,37 +21,34 @@ enum Numbers: String {
     case dot = "."
 }
 
-
-
 class ViewController: UIViewController {
     let calculator = Calculator()
     
     @IBOutlet weak var calculationCurentAndResultLabel: UILabel!
     
-    
-    
     @IBAction func touchUPInsideNumberButton(_ sender: UIButton) {
+//        calculator.numbers.append(String(sender.tag)) // TO-DO guard let
         switch sender.tag {
-        case 0:
-            calculator.numbers.append(Numbers.zero.rawValue)
-        case 1:
-            calculator.numbers.append(Numbers.one.rawValue)
-        case 2:
-            calculator.numbers.append(Numbers.two.rawValue)
-        case 3:
-            calculator.numbers.append(Numbers.three.rawValue)
-        case 4:
-            calculator.numbers.append(Numbers.four.rawValue)
-        case 5:
-            calculator.numbers.append(Numbers.five.rawValue)
-        case 6:
-            calculator.numbers.append(Numbers.six.rawValue)
-        case 7:
-            calculator.numbers.append(Numbers.seven.rawValue)
-        case 8:
-            calculator.numbers.append(Numbers.eight.rawValue)
-        case 9:
-            calculator.numbers.append(Numbers.nine.rawValue)
+        case 0...9:
+            calculator.numbers.append(String(sender.tag)) // TO-DO sender에 title
+//        case 1:
+//            calculator.numbers.append(Numbers.one.rawValue)
+//        case 2:
+//            calculator.numbers.append(Numbers.two.rawValue)
+//        case 3:
+//            calculator.numbers.append(Numbers.three.rawValue)
+//        case 4:
+//            calculator.numbers.append(Numbers.four.rawValue)
+//        case 5:
+//            calculator.numbers.append(Numbers.five.rawValue)
+//        case 6:
+//            calculator.numbers.append(Numbers.six.rawValue)
+//        case 7:
+//            calculator.numbers.append(Numbers.seven.rawValue)
+//        case 8:
+//            calculator.numbers.append(Numbers.eight.rawValue)
+//        case 9:
+//            calculator.numbers.append(Numbers.nine.rawValue)
         case 100:
             calculator.numbers.append(Numbers.hundred.rawValue)
         case 101:
@@ -85,22 +82,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpInsideAllClearButton(_ sender: UIButton) {
-       let result = calculator.allClear()
+        let result = calculator.allClear()
         calculationCurentAndResultLabel?.text = "\(result)"
     }
     
     @IBAction func touchUpInsideClearEntryButton(_ sender: UIButton) {
-        
+        let result = calculator.clearEntry()
+        calculationCurentAndResultLabel?.text = "\(result)"
     }
+    
     @IBAction func touchUpInsideToggleNegativeButton(_ sender: UIButton) {
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //테스트 함수 실행을 위한 호출
-        main()
+//        main()
     }
 }
 

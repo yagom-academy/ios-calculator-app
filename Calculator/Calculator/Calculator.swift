@@ -51,6 +51,11 @@ class Calculator {
         return result
     }
     
+    func clearEntry() -> Int {
+        numbers.removeAll()
+        return 0
+    }
+    
     func putInto(_ value: [String]) {
         infixArray.append(contentsOf: value)
     }
@@ -174,13 +179,13 @@ extension Calculator {
 }
 
 //MARK: - 테스트를 위한 메인함수
-func main() {
-    let c = Calculator()
-    c.putInto(["10.1", Operator.plus.rawValue, "12.5", Operator.division.rawValue, "125", Operator.plus.rawValue, "8", Operator.minus.rawValue, "100", Operator.multiplication.rawValue, "13.8"])
-    let a = try? c.converToPostfixNotation()
-    do {
-        let d = try? c.calculatePostfix()
-        print(d)
-    }
-    print(a)
-}
+//func main() {
+//    let c = Calculator()
+//    c.putInto(["10.1", Operator.plus.rawValue, "12.5", Operator.division.rawValue, "125", Operator.plus.rawValue, "8", Operator.minus.rawValue, "100", Operator.multiplication.rawValue, "13.8"])
+//    let a = try? c.converToPostfixNotation()
+//    do {
+//        let d = try? c.calculatePostfix()
+//        print(d)
+//    }
+//    print(a)
+//}
