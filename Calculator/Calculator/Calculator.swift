@@ -42,6 +42,14 @@ class Calculator {
     private var infixArray = [String]()
     private var stack = Stack<String>()
     private var postfixArray = [String]()
+    var numbers = [String]()
+    
+    func allClear() -> Int {
+        infixArray.removeAll()
+        postfixArray.removeAll()
+        let result = stack.removeAll()
+        return result
+    }
     
     func putInto(_ value: [String]) {
         infixArray.append(contentsOf: value)

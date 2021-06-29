@@ -21,6 +21,10 @@ struct Stack<T> {
     mutating func pop() -> T? {
         return stack.popLast()
     }
+    mutating func removeAll() -> Int {
+        stack.removeAll()
+        return 0
+    }
     var top: T? {
         return stack.last
     }
