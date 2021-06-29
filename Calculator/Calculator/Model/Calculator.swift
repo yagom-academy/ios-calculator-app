@@ -27,14 +27,23 @@ enum CalculatorError: Error {
 }
 
 struct Calculator {
-    private enum Operations: String {
+    private enum Operations: String, CustomStringConvertible {
         case plus = "+"
         case minus = "-"
         case multiply = "×"
         case divide = "÷"
         
         var description: String {
-            return self.rawValue
+            switch self {
+            case .plus:
+                return "+"
+            case .minus:
+                return "-"
+            case .multiply:
+                return "×"
+            case .divide:
+                return "÷"
+            }
         }
     }
     
