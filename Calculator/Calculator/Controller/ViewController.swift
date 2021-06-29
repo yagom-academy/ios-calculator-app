@@ -92,7 +92,6 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpConvertSignButton(_ sender: UIButton) {
-		
 		inputStorage.append("⁺⁄₋")
 	}
 	

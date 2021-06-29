@@ -81,8 +81,7 @@ extension Calculatorable {
         }
         
         infixExpression.append(infixNumberString)
-        print(from)
-        print(infixExpression)
+        
         return infixExpression
     }
     
@@ -91,7 +90,6 @@ extension Calculatorable {
         var stack = Stack()
         
         for currentElement in input {
-            
             if let isNumber = Double(currentElement) {
                 postfix.append(currentElement)
             } else {
@@ -161,6 +159,7 @@ struct Calculator: Calculatorable {
 			case .divide:
 				let next = popedValueFromStack
 				let prev = popedValueFromStack
+                
 				if next == .zero {
 					throw ErrorCase.dividedByZero
 				} else {
