@@ -42,8 +42,12 @@ extension Calculator {
         }
     }
     
+    private func isEqualSign(of element: String) -> Bool {
+        return element == "="
+    }
+    
     private func handle(operator element: String) throws {
-        while true {
+        while !isEqualSign(of: element) {
             if try isNecessaryToPutInStackNow(about: element) {
                 equationStack.push(element)
                 break
