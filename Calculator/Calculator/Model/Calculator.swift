@@ -1,5 +1,7 @@
 import Foundation
 
+let zero = "0"
+
 enum ErrorCase: Error {
     case unknownInputCase
     case dividedByZero
@@ -36,15 +38,18 @@ enum CalculatorComponent {
             throw ErrorCase.unknownInputCase
         }
     }
-    
 }
 
 protocol Calculatorable {
-    func convertToPostfixExpression(fromInfix input: [String]) -> [String]
-    func calculatePostfixExpression(postfix: [String]) throws -> Double
+	func calculate(input: [String]) -> String?
 }
 
-extension Calculatorable {
+protocol CalculatorablePostfix {
+	func convertToPostfixExpression(fromInfix input: [String]) -> [String]
+	func calculatePostfixExpression(postfix: [String]) throws -> Double
+}
+
+extension CalculatorablePostfix {
     private func checkPriority(A a: String, isLowerThenB b: String) -> Bool {
         if ["+", "-"].contains(a), ["*", "/"].contains(b) {
             return true
@@ -116,24 +121,6 @@ extension Calculatorable {
         
         return postfix
     }
-}
-
-
-struct Calculator: Calculatorable {
-	
-	private let numberFormatter = NumberFormatter()
-	private let zero = "0"
-	private let maximumSignificantDigits = 20
-	private let currentLocale = "en_US"
-	
-	init() {
-		numberFormatter.numberStyle = .decimal
-		numberFormatter.roundingMode = .halfUp
-		numberFormatter.maximumSignificantDigits = maximumSignificantDigits
-		if let USLocale = NSLocale().displayName(forKey: .countryCode, value: currentLocale) {
-			numberFormatter.locale = NSLocale(localeIdentifier: USLocale) as Locale
-		}
-	}
 	
 	func calculatePostfixExpression(postfix: [String]) throws -> Double {
 		var stack = Stack()
@@ -159,7 +146,7 @@ struct Calculator: Calculatorable {
 			case .divide:
 				let next = popedValueFromStack
 				let prev = popedValueFromStack
-                
+				
 				if next == .zero {
 					throw ErrorCase.dividedByZero
 				} else {
@@ -172,8 +159,56 @@ struct Calculator: Calculatorable {
 		
 		return popedValueFromStack
 	}
+}
+
+struct Calculator: Calculatorable, CalculatorablePostfix {
+	private let numberFormatter = NumberFormatter()
+	private let maximumSignificantDigits = 20
+	private let currentLocale = "en_US"
+	
+	init() {
+		numberFormatter.numberStyle = .decimal
+		numberFormatter.roundingMode = .halfUp
+		numberFormatter.maximumSignificantDigits = maximumSignificantDigits
+		if let USLocale = NSLocale().displayName(forKey: .countryCode, value: currentLocale) {
+			numberFormatter.locale = NSLocale(localeIdentifier: USLocale) as Locale
+		}
+	}
 	
 	func formatting(number: Double) -> String? {
 		return numberFormatter.string(from: NSNumber(value: number))
 	}
+	
+	func castToIntFrom(double: Double) -> Int? {
+		if double.truncatingRemainder(dividingBy: 1) == 0 {
+			return Int(double)
+		} else {
+			return nil
+		}
+	}
+	
+	func castToStringFrom(number: Double) -> String {
+		let castedValue = castToIntFrom(double: number)
+		
+		if let intValue = castedValue {
+			return String(intValue)
+		} else {
+			return String(number)
+		}
+	}
+	
+	func calculate(input: [String]) -> String? {
+		guard let infix = try? makeInfixExpression(from: input) else {
+			return nil
+		}
+		
+		let postfix = convertToPostfixExpression(fromInfix: infix)
+		
+		guard let calculatedValue = try? calculatePostfixExpression(postfix: postfix) else {
+			return "NaN"
+		}
+		
+		return castToStringFrom(number: calculatedValue)
+	}
+	
 }
