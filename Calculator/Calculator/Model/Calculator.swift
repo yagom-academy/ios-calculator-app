@@ -5,7 +5,7 @@ enum CalculatorError: Error {
 }
 
 class Calculator {
-    var numberStack = [String]()
+    var numberStack = Stack<String>()
     var result = ""
     var postfix = Postfix()
     
@@ -41,17 +41,20 @@ class Calculator {
         }
     }
     
-    func returnCalculationResult(postfix: [String]) throws -> String {
+    func returnCalculationResult(postfix: [String]) throws -> String? {
         for item in postfix {
             if isNumberInPostfix(item: item) {
-                numberStack.append(item)
+                numberStack.push(item: item)
             }else {
-                let second = numberStack.removeLast()
-                let first = numberStack.removeLast()
+                let second = numberStack.pop()
+                let first = numberStack.pop()
+                guard let first = first, let second = second else {
+                    return ""
+                }
                 let calculateResult = try calculatePostfix(first: first, second: second, arithmethicOperator: item)
-                numberStack.append(String(calculateResult))
+                numberStack.push(item: String(calculateResult))
             }
         }
-        return numberStack.removeLast()
+        return numberStack.pop()
     }
 }

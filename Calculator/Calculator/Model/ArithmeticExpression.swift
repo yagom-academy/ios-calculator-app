@@ -5,17 +5,17 @@ class Infix {
 }
 
 class Postfix {
-    var postfix: [String] = []
-    var operatorsStack: [String] = []
+    var postfix = Stack<String>()
+    var operatorsStack = Stack<String>()
     
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
             if isNumberInInfix(item: $0) {
                 addToPostfix(item: $0)
-            } else if operatorsStack.isEmpty {
+            } else if operatorsStack.isEmpty() {
                 addToOperatorStack(item: $0)
             } else {
-                guard let unwrappedOperatrosStack = operatorsStack.last else { return }
+                guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
                 comparePriority(lastOfOperatorStack: changeToOperatorsEnum(unwrappedOperatrosStack),
                                 with: changeToOperatorsEnum($0))
             }
@@ -29,11 +29,11 @@ class Postfix {
     }
     
     func addToPostfix(item: String) {
-        postfix.append(item)
+        postfix.push(item: item)
     }
     
     func addToOperatorStack(item: String) {
-        operatorsStack.append(item)
+        operatorsStack.push(item: item)
     }
     
     func changeToOperatorsEnum(_ item: String) -> Operator? {
@@ -59,11 +59,13 @@ class Postfix {
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
         } else if unwrappedLastOfOperatorStack == unwrappedInput {
             addToPostfix(item: unwrappedLastOfOperatorStack.operatorSymbol)
-            operatorsStack.removeLast()
+            operatorsStack.pop()
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
         } else {
-            while !operatorsStack.isEmpty {
-                let lastItem = operatorsStack.removeLast()
+            while !operatorsStack.isEmpty() {
+                guard let lastItem = operatorsStack.pop() else {
+                    return
+                }
                 addToPostfix(item: lastItem)
             }
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
@@ -71,8 +73,11 @@ class Postfix {
     }
     
     func processLeftOperatorStack() {
-        while !operatorsStack.isEmpty {
-            postfix.append(operatorsStack.removeLast())
+        while !operatorsStack.isEmpty() {
+            guard let leftItem = operatorsStack.pop() else {
+                return
+            }
+            postfix.push(item: leftItem)
         }
     }
 }
