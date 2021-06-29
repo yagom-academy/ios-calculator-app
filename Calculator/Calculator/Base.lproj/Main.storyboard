@@ -215,9 +215,6 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="minusDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3uc-GG-vUY"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -363,7 +360,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="Jsz-18-1iD"/>
                         <outlet property="currentValueLabel" destination="Lwz-OF-XHD" id="0Fp-oR-GR5"/>
+                        <outlet property="historyStackView" destination="XRe-QE-UJf" id="QOl-Gw-x1T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
