@@ -3,7 +3,7 @@ import Foundation
 enum Operator: String, Comparable {
     case plus = "+"
     case minus = "-"
-    case times = "*"
+    case multiply = "*"
     case divide = "/"
     
     var precedence: Int {
@@ -13,7 +13,7 @@ enum Operator: String, Comparable {
         switch self {
         case .plus, .minus:
         return lowerPrecedence
-        case .times, .divide:
+        case .multiply, .divide:
         return higherPrecedence
         }
     }
@@ -24,7 +24,7 @@ enum Operator: String, Comparable {
             return leftOperand + rightOperand
         case .minus:
             return leftOperand - rightOperand
-        case .times:
+        case .multiply:
             return leftOperand * rightOperand
         case .divide:
             if rightOperand == 0 {
