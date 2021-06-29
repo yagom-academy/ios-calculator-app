@@ -9,6 +9,7 @@ import Foundation
 
 struct Calculator {
     private var infixQueue = Queue<Arithmetic>()
+//    private var currentType = .integer .double
     
     private mutating func transformInfixToPostfix() -> Queue<Arithmetic> {
         var postfixQueue = Queue<Arithmetic>()
@@ -38,7 +39,7 @@ extension Calculator {
     mutating func pushNumberOrOperator(_ sign: Arithmetic) {
         infixQueue.enqueue(sign)
     }
-    mutating func makeCalculation() throws -> String {
+    mutating func makeCalculation() throws -> Double {
         var postfix = transformInfixToPostfix()
         var operandStack = Stack<Arithmetic>()
         
@@ -53,7 +54,14 @@ extension Calculator {
                     throw CalculatorError.zeroDivisor
                 }
                 
+                //                if computedNumber.isSignalingNaN {
+                //                    throw CalculatorError.zeroDivisor
+                //                }
+                
                 let computedNumber = `operator`.computeNumber(castedLhs.value, castedRhs.value)
+                
+
+                
                 let wrappingNumber = Operand(computedNumber)
                 operandStack.push(wrappingNumber)
             } else {
@@ -62,7 +70,9 @@ extension Calculator {
         }
         guard let upcastingResult = operandStack.pop()  else { throw StackError.underflow }
         guard let result = upcastingResult as? Operand else { throw ArithmeticError.downCastingError }
-        return String(result.value)
+        return result.value
     }
 }
 
+// numberFormatter
+// Int 냐 Double
