@@ -9,6 +9,8 @@ import Foundation
 
 enum CalculatorError: Error {
     case dividedByZero
+    case stackError
+    case unknownError
 }
 
 protocol Computable { }
@@ -17,12 +19,6 @@ extension Operator: Computable {}
 extension Operand: Computable {}
 
 class Calculator {
-    
-    private var inputNotation: [String] = []
-    
-    init(inputNotation: [String]) {
-        self.inputNotation = inputNotation
-    }
     
     /// 전위식을 후위식으로 변경
     /// convertToPostFix(infix: [Operand("1"), .plus, Operand("2")])
@@ -82,14 +78,23 @@ class Calculator {
         return infix
     }
     
-    func runCalculator() throws -> Double {
-        let infix = pushToInfix(with: self.inputNotation)
-        let postfix = convertToPostFix(infix: infix)
-        
-        guard let result = try evaluate(postfix: postfix) else {
-            throw StackError.stackIsEmpty
+    func runCalculator(on inputNotation: [String]) -> Result<Double, CalculatorError> {
+        do {
+            let infix = pushToInfix(with: inputNotation)
+            let postfix = convertToPostFix(infix: infix)
+            
+            guard let result = try evaluate(postfix: postfix) else {
+                throw StackError.stackIsEmpty
+            }
+            
+            return .success(result.getOperandValue)
+        } catch CalculatorError.dividedByZero {
+            return .failure(CalculatorError.dividedByZero)
+        } catch StackError.stackIsEmpty {
+            return .failure(CalculatorError.stackError)
+        } catch {
+            return .failure(CalculatorError.unknownError)
         }
-        
-        return result.getOperandValue
     }
 }
+
