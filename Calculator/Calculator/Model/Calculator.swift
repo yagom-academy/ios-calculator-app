@@ -61,8 +61,7 @@ extension Calculator {
                 let computedNumber = `operator`.computeNumber(castedLhs.value, castedRhs.value)
                 
 
-                
-                let wrappingNumber = Operand(computedNumber)
+                let wrappingNumber = Operand(value: computedNumber)
                 operandStack.push(wrappingNumber)
             } else {
                 operandStack.push(dequeueElement)

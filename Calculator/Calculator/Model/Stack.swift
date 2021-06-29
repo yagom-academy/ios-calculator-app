@@ -21,6 +21,6 @@ struct Stack<T> {
         stack.append(value)
     }
     mutating func pop() -> T? {
-        return stack.isEmpty ? nil : stack.removeLast()
+        return stack.popLast()
     }
 }
