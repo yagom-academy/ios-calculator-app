@@ -7,17 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var btnZero: UIButton!
-    @IBOutlet weak var btnOne: UIButton!
-    @IBOutlet weak var btnTwo: UIButton!
-    @IBOutlet weak var btnThree: UIButton!
-    @IBOutlet weak var btnFour: UIButton!
-    @IBOutlet weak var btnFive: UIButton!
-    @IBOutlet weak var btnSix: UIButton!
-    @IBOutlet weak var btnSeven: UIButton!
-    @IBOutlet weak var btnEight: UIButton!
-    @IBOutlet weak var btnNine: UIButton!
-    @IBOutlet weak var btnDoubleZero: UIButton!
     @IBOutlet weak var mainStackView: UILabel!
     @IBOutlet weak var btnDot: UIButton!
     @IBOutlet weak var btnEquality: UIButton!
@@ -27,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnDivision: UIButton!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    var calculate = Calculator()
+    var calculator = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +37,38 @@ class ViewController: UIViewController {
             if !currentText.contains(text){
                 mainStackView.text = currentText + text
             }
-        case btnAddition:
-            operatorLabel.text = text
         default:
             mainStackView.text = currentText + text
-            calculate.pushNumberOrOperator(Operand(value: Double(text)!))
+            calculator.pushNumberOrOperator(Operand(value: Double(text)!))
+        }
+    }
+    
+    @IBAction func pushOperatorButton(_ sender: UIButton) {
+        guard let titleLabel = sender.titleLabel else {
+            return
+        }
+        guard let text = titleLabel.text else {
+            return
+        }
+        switch sender {
+        case btnEquality:
+            do {
+                let result = try calculator.makeCalculation()
+            } catch {
+                
+            }
+           
+        default:
+            operatorLabel.text = text
+        }
+    }
+    
+    @IBAction func pushChangingUIButton() {
+        switch <#value#> {
+        case <#pattern#>:
+            <#code#>
+        default:
+            <#code#>
         }
     }
 }
