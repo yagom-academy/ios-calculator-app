@@ -15,7 +15,7 @@ enum CalculatorError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .divideByZero:
-            return "0으로 나눌 수 없습니다."
+            return "NaN"
         case .invalidOperator:
             return "존재하지 않는 연산자입니다."
         case .unknown:

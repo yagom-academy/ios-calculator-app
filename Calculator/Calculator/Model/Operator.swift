@@ -7,29 +7,25 @@
 
 import Foundation
 
-enum Operator: String {
+enum Operator: String, OperatorConvertible {
     case add = "+"
     case subtract = "-"
     case multiply = "*"
     case divide = "/"
     
-    var priority: Int {
+    private static let lowPriority = 50
+    private static let highPriority = 100
+    
+    private var priority: Int {
         switch self {
         case .add, .subtract:
-            return 50
+            return Operator.lowPriority
         case .multiply, .divide:
-            return 100
+            return Operator.highPriority
         }
     }
     
-    func isHigherPriority(than operator: Operator) -> Bool {
-        return self.priority > `operator`.priority
-    }
-    
-    static func obtainOperator(from target: String) throws -> Operator {
-        guard let `operator` = Operator(rawValue: target) else {
-            throw CalculatorError.invalidOperator
-        }
-        return `operator`
+    func isHigherPriority(than anotherOperator: Operator) -> Bool {
+        return self.priority > anotherOperator.priority
     }
 }
