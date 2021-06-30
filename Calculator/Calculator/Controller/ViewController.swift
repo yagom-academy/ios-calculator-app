@@ -35,7 +35,33 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
+        guard let dotButtonText = sender.titleLabel?.text else {
+            return
+        }
         
+        if inputNotation.components(separatedBy: "").contains(".") {
+            return
+        }
+        
+        inputNotation = "\(inputNotation)\(dotButtonText)"
+    }
+    
+    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        let calculator = Calculator()
+        let result = calculator.runCalculator(on: notation)
+        
+        if case .success(let resultValue) = result {
+            print(resultValue)
+        } else if case .failure(let errorCase) = result {
+            switch errorCase {
+            case .dividedByZero:
+                print(errorCase)
+            case .stackError:
+                print(errorCase)
+            case .unknownError:
+                print(errorCase)
+            }
+        }
     }
 }
 
