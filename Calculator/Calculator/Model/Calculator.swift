@@ -7,10 +7,23 @@
 
 import Foundation
 
+enum CalculatorError: Error {
+    case dividedByZero
+    case stackError
+    case unknownError
+}
+
+protocol Computable { }
+
+extension Operator: Computable {}
+extension Operand: Computable {}
+
 class Calculator {
-    var infix: [Computable] = []
     
-    func convertToPostFix() -> [Computable] {
+    /// 전위식을 후위식으로 변경
+    /// convertToPostFix(infix: [Operand("1"), .plus, Operand("2")])
+    /// -> [Operand("1"), Operand("2"), .plus]
+    private func convertToPostFix(infix: [Computable]) -> [Computable] {
         var postfix: [Computable] = []
         let operatorStack = Stack<Operator>()
         
@@ -18,7 +31,9 @@ class Calculator {
             if let value = character as? Operand {
                 postfix.append(value)
             } else if let value = character as? Operator {
-                while !operatorStack.isEmpty(), let postfixItem = operatorStack.peek(), value < postfixItem {
+                while !operatorStack.isEmpty(),
+                      let postfixItem = operatorStack.peek(),
+                      value.isLowerPriority(than: postfixItem) {
                     postfix.append(postfixItem)
                     operatorStack.pop()
                 }
@@ -33,7 +48,8 @@ class Calculator {
         return postfix
     }
     
-    func evaluate(postfix: [Computable]) throws -> Operand? {
+    /// evaluate(postfix: [Operand("1"), Operand("2"), .plus]) -> Operand(3)
+    private func evaluate(postfix: [Computable]) throws -> Operand? {
         let operandStack = Stack<Operand>()
         
         for postfixItem in postfix {
@@ -49,7 +65,9 @@ class Calculator {
         return operandStack.pop()
     }
     
-    func pushToInfix(with inputNotation: [String]) {
+    /// pushToInfix(with: ["1", "+", "2"]) -> [Operand("1"), .plus, Operand("2")]
+    private func pushToInfix(with inputNotation: [String]) -> [Computable] {
+        var infix: [Computable] = []
         for value in inputNotation {
             if let operatorValue = Operator(rawValue: value) {
                 infix.append(operatorValue)
@@ -57,7 +75,26 @@ class Calculator {
                 infix.append(operandValue)
             }
         }
+        return infix
+    }
+    
+    func runCalculator(on inputNotation: [String]) -> Result<Double, CalculatorError> {
+        do {
+            let infix = pushToInfix(with: inputNotation)
+            let postfix = convertToPostFix(infix: infix)
+            
+            guard let result = try evaluate(postfix: postfix) else {
+                throw StackError.stackIsEmpty
+            }
+            
+            return .success(result.getOperandValue)
+        } catch CalculatorError.dividedByZero {
+            return .failure(CalculatorError.dividedByZero)
+        } catch StackError.stackIsEmpty {
+            return .failure(CalculatorError.stackError)
+        } catch {
+            return .failure(CalculatorError.unknownError)
+        }
     }
 }
-
 

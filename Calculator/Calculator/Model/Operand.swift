@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Operand: Computable {
+class Operand {
    private var operandValue: Double
     var getOperandValue: Double {
         return operandValue
@@ -24,23 +24,23 @@ class Operand: Computable {
         self.operandValue = operand
     }
     
-    func plus(with rhs: Operand) -> Double {
-        return self.operandValue + rhs.getOperandValue
+    func plus(with operand: Operand) -> Double {
+        return self.operandValue + operand.getOperandValue
     }
     
-    func minus(with rhs: Operand) -> Double {
-        return self.operandValue - rhs.getOperandValue
+    func minus(with operand: Operand) -> Double {
+        return self.operandValue - operand.getOperandValue
     }
     
-    func multiple(with rhs: Operand) -> Double {
-        return self.operandValue * rhs.getOperandValue
+    func multiple(with operand: Operand) -> Double {
+        return self.operandValue * operand.getOperandValue
     }
     
-    func divide(by rhs: Operand) throws -> Double {
+    func divide(by operand: Operand) throws -> Double {
         let invalidRhsValue: Double = 0
-        guard rhs.getOperandValue != invalidRhsValue else {
+        guard operand.getOperandValue != invalidRhsValue else {
             throw CalculatorError.dividedByZero
         }
-        return self.operandValue / rhs.getOperandValue
+        return self.operandValue / operand.getOperandValue
     }
 }

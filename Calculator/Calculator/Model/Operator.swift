@@ -7,21 +7,30 @@
 
 import Foundation
 
-enum Operator: String, Computable, Comparable {
+enum Operator: String {
     case plus = "+"
     case minus = "-"
     case divide = "/"
     case multiply = "*"
     
-    static func < (lhs: Operator, rhs: Operator) -> Bool {
-        return (rhs == .divide || rhs == .multiply) && (lhs == .minus || lhs == .plus)
+    func getPriority() -> Int {
+        switch self {
+        case .plus: return 1
+        case .minus: return 1
+        case .multiply: return 10
+        case .divide: return 10
+        }
+    }
+    
+    func isLowerPriority(than operatorCase: Operator) -> Bool {
+        return operatorCase.getPriority() >= self.getPriority()
     }
     
     func calculate(_ lhs: Operand, with rhs: Operand) throws -> Double {
         switch self {
         case .plus:
             return lhs.plus(with: rhs)
-        case  .minus:
+        case .minus:
             return lhs.minus(with: rhs)
         case .multiply:
             return lhs.multiple(with: rhs)

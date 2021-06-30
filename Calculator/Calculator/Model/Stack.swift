@@ -7,28 +7,23 @@
 
 import Foundation
 
+enum StackError: Error {
+    case stackIsEmpty
+}
+
 class Stack<T> {
-    enum StackError: Error {
-        case stackIsEmpty
-    }
     
     private var stack: [T] = []
-    private var top: Int = 0
     
     func push(object: T) {
         stack.append(object)
-        top = top + 1
     }
     
     @discardableResult func pop() -> T? {
         guard !isEmpty() else {
             return nil
         }
-        
-        let target = stack[top-1]
-        stack.remove(at: top-1)
-        top = top - 1
-        return target
+        return stack.popLast()
     }
     
     func peek() -> T? {
@@ -36,20 +31,19 @@ class Stack<T> {
             return nil
         }
         
-        return stack[top-1]
+        return stack.last
     }
     
     func clear() {
         stack.removeAll()
-        top = 0
     }
     
     func isEmpty() -> Bool {
-        return top == 0
+        return stack.count == 0
     }
     
     func getLength() -> Int {
-        return top
+        return stack.count
     }
 }
 
