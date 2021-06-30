@@ -34,12 +34,14 @@ class ViewController: UIViewController {
         }
         switch sender {
         case btnDot:
-            if !currentText.contains(text){
-                mainStackView.text = currentText + text
-            }
+            // addDot() - 소수점을 레이블에 추가
+//            if !currentText.contains(text){
+//                mainStackView.text = currentText + text
+//            }
         default:
-            mainStackView.text = currentText + text
-            calculator.pushNumberOrOperator(Operand(value: Double(text)!))
+            // addNumber() - 숫자를 레이블에 추가
+//            mainStackView.text = currentText + text
+//            calculator.pushNumberOrOperator(Operand(value: Double(text)!))
         }
     }
     
@@ -52,23 +54,44 @@ class ViewController: UIViewController {
         }
         switch sender {
         case btnEquality:
-            do {
-                let result = try calculator.makeCalculation()
-            } catch {
-                
-            }
-           
+            addDot()
+            //  등호버튼 눌렸을때 동작
+//            do {
+//                let result = try calculator.makeCalculation()
+//                mainStackView.text = String(result)
+//            } catch {
+//
+//            }
         default:
-            operatorLabel.text = text
+            // 연산자가 추가될때 동작 - text
+//            operatorLabel.text = text
+//            switch sender {
+//            case btnAddition:
+//                calculator.pushNumberOrOperator(Operator(type: .addition))
+//            case btnSubtraction:
+//                calculator.pushNumberOrOperator(Operator(type: .subtraction))
+//            case btnMultiplication:
+//                calculator.pushNumberOrOperator(Operator(type: .mulitplication))
+//            case btnDivision:
+//                calculator.pushNumberOrOperator(Operator(type: .division))
+//            default:
+//                <#code#>
+//            }
         }
     }
     
-    @IBAction func pushChangingUIButton() {
-        switch <#value#> {
-        case <#pattern#>:
-            <#code#>
-        default:
-            <#code#>
-        }
+    @IBAction func pushChangingUIButton(_ sender: UIButton) {
+//        switch <#value#> {
+//        case <#pattern#>:
+//            <#code#>
+//        default:
+//            <#code#>
+//        }
+    }
+}
+
+extension ViewController {
+    func addDot() {
+        
     }
 }
