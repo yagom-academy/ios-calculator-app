@@ -21,37 +21,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainStackView: UILabel!
     
     @IBOutlet weak var btnDot: UIButton!
-    let calculate = Calculator()
+    var calculate = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func pushNumberButton(_ sender: UIButton) {
+        guard let titleLabel = sender.titleLabel else {
+            return
+        }
+        guard let text = titleLabel.text else {
+            return
+        }
+        guard let currentText = mainStackView.text else {
+            return
+        }
         switch sender {
-        case btnDoubleZero:
-            mainStackView.text! += "00"
-            calculate.pushNumberOrOperator(Operand(value: Double("00")))
-        case btnZero:
-            
-        case btnOne:
-            
-        case btnTwo:
-            
-        case btnThree:
-            
-        case btnFour:
-            
-        case btnFive:
-            
-        case btnSix:
-            
-        case btnSeven:
-            
-        case btnNine:
-            
+        case btnDot:
+            if currentText.contains(text){
+                
+            } else {
+                
+            }
+        
         default:
-            <#code#>
+            mainStackView.text = currentText + text
+            calculate.pushNumberOrOperator(Operand(value: Double(text)!))
         }
     }
 }
