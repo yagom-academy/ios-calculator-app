@@ -15,9 +15,7 @@ class Postfix {
             } else if operatorsStack.isEmpty() {
                 addToOperatorStack(item: $0)
             } else {
-                guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
-                comparePriority(lastOfOperatorStack: changeToOperatorsEnum(unwrappedOperatrosStack),
-                                with: changeToOperatorsEnum($0))
+                comparePriority(with: changeToOperatorsEnum($0))
             }
         }
         processLeftOperatorStack()
@@ -53,7 +51,9 @@ class Postfix {
         }
     }
     
-    func comparePriority(lastOfOperatorStack: Operator?, with input: Operator?) {
+    func comparePriority(with input: Operator?) {
+        guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
+        let lastOfOperatorStack = changeToOperatorsEnum(unwrappedOperatrosStack)
         guard let unwrappedLastOfOperatorStack = lastOfOperatorStack, let unwrappedInput = input else { return }
         if unwrappedLastOfOperatorStack < unwrappedInput {
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
