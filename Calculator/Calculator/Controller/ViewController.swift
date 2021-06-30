@@ -15,19 +15,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnFive: UIButton!
     @IBOutlet weak var btnSix: UIButton!
     @IBOutlet weak var btnSeven: UIButton!
-    @IBOutlet weak var btnEigth: UIButton!
+    @IBOutlet weak var btnEight: UIButton!
     @IBOutlet weak var btnNine: UIButton!
     @IBOutlet weak var btnDoubleZero: UIButton!
     @IBOutlet weak var mainStackView: UILabel!
-    
     @IBOutlet weak var btnDot: UIButton!
+    @IBOutlet weak var btnEquality: UIButton!
+    @IBOutlet weak var btnAddition: UIButton!
+    @IBOutlet weak var btnSubtraction: UIButton!
+    @IBOutlet weak var btnMultiplication: UIButton!
+    @IBOutlet weak var btnDivision: UIButton!
+    @IBOutlet weak var operatorLabel: UILabel!
+    
     var calculate = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func pushNumberButton(_ sender: UIButton) {
+    @IBAction func pushButton(_ sender: UIButton) {
         guard let titleLabel = sender.titleLabel else {
             return
         }
@@ -39,12 +45,11 @@ class ViewController: UIViewController {
         }
         switch sender {
         case btnDot:
-            if currentText.contains(text){
-                
-            } else {
-                
+            if !currentText.contains(text){
+                mainStackView.text = currentText + text
             }
-        
+        case btnAddition:
+            operatorLabel.text = text
         default:
             mainStackView.text = currentText + text
             calculate.pushNumberOrOperator(Operand(value: Double(text)!))

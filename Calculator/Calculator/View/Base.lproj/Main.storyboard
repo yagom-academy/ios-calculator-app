@@ -121,6 +121,9 @@
                                                 <state key="normal" title="7">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W6t-Ad-awn"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -129,6 +132,9 @@
                                                 <state key="normal" title="8">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H9j-XJ-Sex"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -137,6 +143,9 @@
                                                 <state key="normal" title="9">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kH1-oF-Un8"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -158,6 +167,9 @@
                                                 <state key="normal" title="4">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tgy-u1-xaL"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -166,6 +178,9 @@
                                                 <state key="normal" title="5">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ke-hm-Baa"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -174,6 +189,9 @@
                                                 <state key="normal" title="6">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ydX-Hx-NAn"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -195,6 +213,9 @@
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mtD-h5-HdF"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -203,6 +224,9 @@
                                                 <state key="normal" title="2">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A2Y-wm-VKS"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -211,6 +235,9 @@
                                                 <state key="normal" title="3">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lVf-i1-qM8"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -232,6 +259,9 @@
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xha-c8-zEv"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -240,6 +270,9 @@
                                                 <state key="normal" title="00">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfv-la-bnb"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -248,6 +281,9 @@
                                                 <state key="normal" title=".">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pushButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o4L-Hz-SKd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -303,19 +339,25 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnAddition" destination="sbh-wC-koF" id="Lhh-7L-Ws7"/>
+                        <outlet property="btnDivision" destination="Tfz-eM-jll" id="7vi-yc-WtZ"/>
                         <outlet property="btnDot" destination="h8q-5h-bnb" id="kTD-WI-bhn"/>
                         <outlet property="btnDoubleZero" destination="sH6-8l-kje" id="iZT-W4-aYU"/>
-                        <outlet property="btnEigth" destination="xgT-2D-A49" id="13e-dF-3fO"/>
+                        <outlet property="btnEight" destination="xgT-2D-A49" id="13e-dF-3fO"/>
+                        <outlet property="btnEquality" destination="Daw-iX-Owl" id="e1M-9Z-hgB"/>
                         <outlet property="btnFive" destination="vpW-df-OLm" id="mGk-Fj-7J0"/>
                         <outlet property="btnFour" destination="hQm-yz-XvG" id="Xy6-5K-xOC"/>
+                        <outlet property="btnMultiplication" destination="811-Pz-An6" id="Q9s-jH-emt"/>
                         <outlet property="btnNine" destination="zcj-xJ-ruw" id="DNt-Vm-5fg"/>
                         <outlet property="btnOne" destination="nCE-qB-NiN" id="ArN-Bu-fwv"/>
                         <outlet property="btnSeven" destination="L6z-2G-Gar" id="Vuq-zE-lGG"/>
                         <outlet property="btnSix" destination="OaY-Mw-CPv" id="d8c-R7-53j"/>
+                        <outlet property="btnSubtraction" destination="nTe-Sn-Pvd" id="hcg-mA-Ew2"/>
                         <outlet property="btnThree" destination="X8H-iH-tSd" id="aid-1v-Jrh"/>
                         <outlet property="btnTwo" destination="Rif-2S-UU2" id="cHW-ZG-wFT"/>
                         <outlet property="btnZero" destination="mSz-Y3-r5Z" id="QMO-7C-eoo"/>
                         <outlet property="mainStackView" destination="Lwz-OF-XHD" id="iCY-jY-UzT"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Nw3-XU-Aue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
