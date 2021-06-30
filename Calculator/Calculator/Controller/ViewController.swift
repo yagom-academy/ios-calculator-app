@@ -8,13 +8,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var notation: [String] = []
+    var notations: [String] = []
     var inputNotation: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        notation = []
+        notations = []
     }
 
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
@@ -29,8 +29,8 @@ class ViewController: UIViewController {
         guard let operatorCase = sender.titleLabel?.text else {
             return
         }
-        notation.append(inputNotation)
-        notation.append(operatorCase)
+        notations.append(inputNotation)
+        notations.append(operatorCase)
         inputNotation = ""
     }
     
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
         let calculator = Calculator()
-        let result = calculator.runCalculator(on: notation)
+        let result = calculator.runCalculator(on: notations)
         
         if case .success(let resultValue) = result {
             print(resultValue)
