@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String {
+enum Operator: String, CaseIterable {
     
     case plus = "+"
     case minus = "-"
@@ -56,17 +56,19 @@ class Calculator {
     private var infixNotation = [String]()
     private var postfixNotation = [String]()
     private var OperandAndOperatorStack = Stack<String>()
-    var numbers = [String]()
+    var userInput = [String]()
     let initializedNumber: [String] = ["0"]
     var currentNumbers: [String]
     
     init() {
         self.currentNumbers = initializedNumber
+        self.userInput = initializedNumber
     }
     
-//    func concatNumbers() -> String {
-//        var covertedNumber = currentNumbers.joined()
-//    }
+    func concatNumbers() -> String {
+        let covertedNumber = currentNumbers.joined()
+        return covertedNumber
+    }
     
     func allClear() -> Int {
         infixNotation.removeAll()
@@ -77,7 +79,7 @@ class Calculator {
     }
     
     func clearEntry() -> Int {
-        numbers.removeAll()
+        userInput.removeAll()
         currentNumbers = initializedNumber
         return 0
     }

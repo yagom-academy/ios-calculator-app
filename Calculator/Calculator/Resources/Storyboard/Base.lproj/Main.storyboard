@@ -118,7 +118,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpInsideDivisionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eg0-8V-wKn"/>
+                                                    <action selector="touchUpInsideOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eg0-8V-wKn"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -167,7 +167,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpInsideMultiplicationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1ux-5d-lIW"/>
+                                                    <action selector="touchUpInsideOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g95-Aa-eSH"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -216,7 +216,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpInsideMinusButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M7C-zC-5tO"/>
+                                                    <action selector="touchUpInsideOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Ha-un-Qaw"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -265,7 +265,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpInsidePlusButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EF8-GY-Kfa"/>
+                                                    <action selector="touchUpInsideOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kum-57-3b3"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -364,6 +364,10 @@
                     </view>
                     <connections>
                         <outlet property="calculationCurentAndResultLabel" destination="Lwz-OF-XHD" id="tpu-43-HLG"/>
+                        <outlet property="divisionButton" destination="Tfz-eM-jll" id="raf-Cf-shJ"/>
+                        <outlet property="minusButton" destination="nTe-Sn-Pvd" id="ob7-0V-WLX"/>
+                        <outlet property="multiplicationButton" destination="811-Pz-An6" id="dqU-2c-dUo"/>
+                        <outlet property="plusButton" destination="sbh-wC-koF" id="lmO-rO-xb3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

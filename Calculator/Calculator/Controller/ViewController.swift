@@ -24,7 +24,39 @@ enum Numbers: String {
 class ViewController: UIViewController {
     let calculator = Calculator()
     
+    func inputOperator(_ currentOperator: String) {
+        var isAvailableAddingOperator = false
+        //userInput은 ["0"]
+        //currentOperator = "-"
+        //처음 아이템은 .plus
+        //처음의 inputLast는 "0"
+        
+        //userInput은 ["0", ""]
+        //currentOperator = "-"
+        //처음 아이템은 .plus
+        //처음의 inputLast는 "0"
+        for item in Operator.allCases {
+            if let inputLast =  calculator.userInput.last, inputLast != item.rawValue {
+                isAvailableAddingOperator = true
+            }
+            if item.rawValue.contains(userInfputLast) == false {
+                calculator.userInput.removeLast()
+                calculator.userInput.append(calculator.concatNumbers())
+                calculator.currentNumbers = calculator.initializedNumber
+                calculator.userInput.append(currentOperator)
+                print(calculator.userInput)
+            } else {
+                calculator.userInput.removeLast()
+                calculator.userInput.append(currentOperator)
+            }
+        }
+    }
+    
     @IBOutlet weak var calculationCurentAndResultLabel: UILabel!
+    @IBOutlet weak var divisionButton: UIButton!
+    @IBOutlet weak var multiplicationButton: UIButton!
+    @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var plusButton: UIButton!
     
     @IBAction func touchUPInsideNumberButton(_ sender: UIButton) {
         //        calculator.numbers.append(String(sender.tag)) // TO-DO guard let
@@ -57,24 +89,67 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpInsideDivisionButton(_ sender: UIButton) {
-        calculator.numbers.append(Operator.division.rawValue)
+    @IBAction func touchUpInsideOperatorButton(_ sender: UIButton) {
+        switch sender {
+        case plusButton:
+            inputOperator(Operator.plus.rawValue)
+        case minusButton:
+            inputOperator(Operator.minus.rawValue)
+        case multiplicationButton:
+            inputOperator(Operator.multiplication.rawValue)
+        case divisionButton:
+            inputOperator(Operator.division.rawValue)
+        default: break
+        }
     }
     
-    @IBAction func touchUpInsideMultiplicationButton(_ sender: UIButton) {
-        calculator.numbers.append(Operator.multiplication.rawValue)
-    }
-    
-    @IBAction func touchUpInsideMinusButton(_ sender: UIButton) {
-        calculator.numbers.append(Operator.minus.rawValue)
-    }
-    
-    @IBAction func touchUpInsidePlusButton(_ sender: UIButton) {
-        calculator.numbers.append(Operator.plus.rawValue)
-    }
+//    @IBAction func touchUpInsideMultiplicationButton(_ sender: UIButton) {
+//        for item in Operator.allCases {
+//            guard let userInfputLast = calculator.userInput.last else { return }
+//            if item.rawValue.contains(userInfputLast) == false {
+//                calculator.userInput.append(calculator.concatNumbers())
+//                calculator.currentNumbers = calculator.initializedNumber
+//                calculator.userInput.append(Operator.division.rawValue)
+//                print(calculator.userInput)
+//            } else {
+//                calculator.userInput.removeLast()
+//                calculator.userInput.append(Operator.division.rawValue)
+//            }
+//        }
+//    }
+//
+//    @IBAction func touchUpInsideMinusButton(_ sender: UIButton) {
+//        for item in Operator.allCases {
+//            guard let userInfputLast = calculator.userInput.last else { return }
+//            if item.rawValue.contains(userInfputLast) == false {
+//                calculator.userInput.append(calculator.concatNumbers())
+//                calculator.currentNumbers = calculator.initializedNumber
+//                calculator.userInput.append(Operator.division.rawValue)
+//                print(calculator.userInput)
+//            } else {
+//                calculator.userInput.removeLast()
+//                calculator.userInput.append(Operator.division.rawValue)
+//            }
+//        }
+//    }
+//
+//    @IBAction func touchUpInsidePlusButton(_ sender: UIButton) {
+//        for item in Operator.allCases {
+//            guard let userInfputLast = calculator.userInput.last else { return }
+//            if item.rawValue.contains(userInfputLast) == false {
+//                calculator.userInput.append(calculator.concatNumbers())
+//                calculator.currentNumbers = calculator.initializedNumber
+//                calculator.userInput.append(Operator.division.rawValue)
+//                print(calculator.userInput)
+//            } else {
+//                calculator.userInput.removeLast()
+//                calculator.userInput.append(Operator.division.rawValue)
+//            }
+//        }
+//    }
     
     @IBAction func touchUpInsideCalculateButton(_ sender: UIButton) {
-        calculator.putInto(calculator.numbers)
+        calculator.putInto(calculator.userInput)
         try? calculator.converToPostfixNotation()
         let result = try? calculator.calculatePostfix()
         print(result)
