@@ -8,7 +8,6 @@ class Postfix {
     var postfix: [String] = []
     var operatorsStack = Stack<String>()
     var numberStack = Stack<String>()
-    let calculator = Calculator()
     
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
@@ -86,7 +85,7 @@ class Postfix {
                 guard let first = numberStack.pop(), let second = numberStack.pop() else {
                     throw CalculatorError.invalidNumber
                 }
-                let calculateResult = try calculator.determineCalculationWay(first: first, second: second, arithmethicOperator: item)
+                let calculateResult = try Calculator.determineCalculationWay(first: first, second: second, arithmethicOperator: item)
                 numberStack.push(item: String(calculateResult))
             }
         }

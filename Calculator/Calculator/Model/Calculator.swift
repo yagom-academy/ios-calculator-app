@@ -11,14 +11,14 @@ class Calculator {
     var result = ""
     let postfix = Postfix()
     
-    func checkDividedNumber(second: Double) throws {
+    static func checkDividedNumber(second: Double) throws {
         let invalidNumber = Double(0)
         guard second != invalidNumber else {
             throw CalculatorError.dividedByZero
         }
     }
     
-    func determineCalculationWay(first: String, second: String, arithmethicOperator: String) throws -> Double {
+    static func determineCalculationWay(first: String, second: String, arithmethicOperator: String) throws -> Double {
         guard let first = Double(first) , let second = Double(second) else {
             throw CalculatorError.invalidNumber
         }
