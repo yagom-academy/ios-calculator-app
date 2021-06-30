@@ -11,7 +11,7 @@ class Calculator {
     var result = ""
     var postfix = Postfix()
     
-    func isNumberInPostfix(item: String) -> Bool {
+    func isOperatorInPostfix(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
         
         return !operators.contains(item)
@@ -45,12 +45,10 @@ class Calculator {
     
     func returnCalculationResult(postfix: [String]) throws -> String? {
         for item in postfix {
-            if isNumberInPostfix(item: item) {
+            if isOperatorInPostfix(item: item) {
                 numberStack.push(item: item)
-            }else {
-                let second = numberStack.pop()
-                let first = numberStack.pop()
-                guard let first = first, let second = second else {
+            } else {
+                guard let first = numberStack.pop(), let second = numberStack.pop() else {
                     throw CalculatorError.invalidNumber
                 }
                 let calculateResult = try calculatePostfix(first: first, second: second, arithmethicOperator: item)
