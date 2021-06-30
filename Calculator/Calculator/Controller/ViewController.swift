@@ -34,12 +34,10 @@ class ViewController: UIViewController {
         }
         switch sender {
         case btnDot:
-            // addDot() - 소수점을 레이블에 추가
-//            if !currentText.contains(text){
-//                mainStackView.text = currentText + text
-//            }
+            addDot()
         default:
-            // addNumber() - 숫자를 레이블에 추가
+            addNumber(text)
+        // addNumber() - 숫자를 레이블에 추가
 //            mainStackView.text = currentText + text
 //            calculator.pushNumberOrOperator(Operand(value: Double(text)!))
         }
@@ -52,31 +50,23 @@ class ViewController: UIViewController {
         guard let text = titleLabel.text else {
             return
         }
-        switch sender {
-        case btnEquality:
-            addDot()
-            //  등호버튼 눌렸을때 동작
-//            do {
-//                let result = try calculator.makeCalculation()
-//                mainStackView.text = String(result)
-//            } catch {
-//
-//            }
+        operatorLabel.text = value
+        switch value {
+        case "+":
+            calculator.pushNumberOrOperator(Operator(type: .addition))
+        case "−":
+            calculator.pushNumberOrOperator(Operator(type: .subtraction))
+        case "×":
+            calculator.pushNumberOrOperator(Operator(type: .mulitplication))
+        case "÷":
+            calculator.pushNumberOrOperator(Operator(type: .division))
         default:
-            // 연산자가 추가될때 동작 - text
-//            operatorLabel.text = text
-//            switch sender {
-//            case btnAddition:
-//                calculator.pushNumberOrOperator(Operator(type: .addition))
-//            case btnSubtraction:
-//                calculator.pushNumberOrOperator(Operator(type: .subtraction))
-//            case btnMultiplication:
-//                calculator.pushNumberOrOperator(Operator(type: .mulitplication))
-//            case btnDivision:
-//                calculator.pushNumberOrOperator(Operator(type: .division))
-//            default:
-//                <#code#>
-//            }
+            do {
+                let result = try calculator.makeCalculation()
+                mainStackView.text = String(result)
+            } catch {
+                
+            }
         }
     }
     
@@ -92,6 +82,33 @@ class ViewController: UIViewController {
 
 extension ViewController {
     func addDot() {
+        if !currentText.contains(text){
+            mainStackView.text = currentText + text
+        }
+    }
+    
+    func addNumber(_ value: String) {
         
+    }
+    
+    func pushOperator(_ value: String) {
+        operatorLabel.text = value
+        switch value {
+        case "+":
+            calculator.pushNumberOrOperator(Operator(type: .addition))
+        case "−":
+            calculator.pushNumberOrOperator(Operator(type: .subtraction))
+        case "×":
+            calculator.pushNumberOrOperator(Operator(type: .mulitplication))
+        case "÷":
+            calculator.pushNumberOrOperator(Operator(type: .division))
+        default:
+            do {
+                let result = try calculator.makeCalculation()
+                mainStackView.text = String(result)
+            } catch {
+                
+            }
+        }
     }
 }
