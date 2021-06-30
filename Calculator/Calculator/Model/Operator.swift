@@ -18,7 +18,7 @@ enum Operator: String, Comparable {
         }
     }
     
-    func calculate(leftOperand: Double, rightOperand: Double) throws -> Double {
+    func calculate(leftOperand: Double, rightOperand: Double) -> Double {
         switch self {
         case .plus:
             return leftOperand + rightOperand
@@ -28,7 +28,7 @@ enum Operator: String, Comparable {
             return leftOperand * rightOperand
         case .divide:
             if rightOperand == 0 {
-                throw CalculatorError.dividedByZero
+                return Double.nan
             }
             return leftOperand / rightOperand
         }

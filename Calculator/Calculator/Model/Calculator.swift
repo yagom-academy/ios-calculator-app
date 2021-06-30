@@ -41,7 +41,7 @@ class Calculator {
         return postfix
     }
 
-    private func calculate() throws -> Double? {
+    func calculate() throws -> Double? {
         let postfix = try convertToPostfix()
         var numberStack = Stack<Double>()
         
@@ -56,28 +56,24 @@ class Calculator {
             guard let currentOperator = Operator(rawValue: element) else {
                 throw CalculatorError.invalidElement
             }
-            let result = try currentOperator.calculate(leftOperand: lhs, rightOperand: rhs)
+            let result = currentOperator.calculate(leftOperand: lhs, rightOperand: rhs)
             numberStack.push(result)
         }
         return numberStack.pop()
     }
     
-    func calculateAndFormat() throws -> String {
+    func format(for number: Double?) throws -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 5
         
-        do {
-            guard let result = try calculate() else {
-                throw CalculatorError.invalidResult
-            }
-            guard let formattedAnswer = numberFormatter.string(for: result) else {
-                throw CalculatorError.failedToFormat
-            }
-            return formattedAnswer
-        } catch CalculatorError.dividedByZero {
-            return "NaN"
+        guard let result = number else {
+            throw CalculatorError.invalidInput
         }
+        guard let formattedAnswer = numberFormatter.string(for: result) else {
+            throw CalculatorError.failedToFormat
+        }
+        return formattedAnswer
     }
     
     func replaceInfix(with infix: [String]) {
