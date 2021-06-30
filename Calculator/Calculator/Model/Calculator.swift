@@ -57,16 +57,28 @@ class Calculator {
     private var postfixNotation = [String]()
     private var OperandAndOperatorStack = Stack<String>()
     var numbers = [String]()
+    let initializedNumber: [String] = ["0"]
+    var currentNumbers: [String]
+    
+    init() {
+        self.currentNumbers = initializedNumber
+    }
+    
+//    func concatNumbers() -> String {
+//        var covertedNumber = currentNumbers.joined()
+//    }
     
     func allClear() -> Int {
         infixNotation.removeAll()
         postfixNotation.removeAll()
+        currentNumbers = initializedNumber
         let result = OperandAndOperatorStack.removeAll()
         return result
     }
     
     func clearEntry() -> Int {
         numbers.removeAll()
+        currentNumbers = initializedNumber
         return 0
     }
     
@@ -177,6 +189,13 @@ extension Calculator {
         return doubleValue
     }
 }
+
+// Todo +- 변환 함수
+//extension Calculator {
+//    func togglePositiveNegative() {
+//        if numbers =
+//    }
+//}
 
 // MARK: - Calculator Unit Test 함수
 extension Calculator {

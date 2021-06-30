@@ -27,32 +27,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculationCurentAndResultLabel: UILabel!
     
     @IBAction func touchUPInsideNumberButton(_ sender: UIButton) {
-//        calculator.numbers.append(String(sender.tag)) // TO-DO guard let
+        //        calculator.numbers.append(String(sender.tag)) // TO-DO guard let
         switch sender.tag {
-        case 0...9:
-            calculator.numbers.append(String(sender.tag)) // TO-DO sender에 title
-//        case 1:
-//            calculator.numbers.append(Numbers.one.rawValue)
-//        case 2:
-//            calculator.numbers.append(Numbers.two.rawValue)
-//        case 3:
-//            calculator.numbers.append(Numbers.three.rawValue)
-//        case 4:
-//            calculator.numbers.append(Numbers.four.rawValue)
-//        case 5:
-//            calculator.numbers.append(Numbers.five.rawValue)
-//        case 6:
-//            calculator.numbers.append(Numbers.six.rawValue)
-//        case 7:
-//            calculator.numbers.append(Numbers.seven.rawValue)
-//        case 8:
-//            calculator.numbers.append(Numbers.eight.rawValue)
-//        case 9:
-//            calculator.numbers.append(Numbers.nine.rawValue)
+        case 0:
+            if calculator.currentNumbers != ["0"] {
+                calculator.currentNumbers.append(String(sender.tag))
+            }
+            print(calculator.currentNumbers)
+        // TO-DO sender에 title
+        case 1...9:
+            if calculator.currentNumbers == ["0"] {
+                calculator.currentNumbers = [String(sender.tag)]
+            } else {
+                calculator.currentNumbers.append(String(sender.tag))
+            }
+            print(calculator.currentNumbers)
         case 100:
-            calculator.numbers.append(Numbers.hundred.rawValue)
+            if calculator.currentNumbers != ["0"] {
+                calculator.currentNumbers.append(Numbers.hundred.rawValue)
+            }
+            print(calculator.currentNumbers)
         case 101:
-            calculator.numbers.append(Numbers.dot.rawValue)
+            if calculator.currentNumbers.contains(".") == false {
+                calculator.currentNumbers.append(Numbers.dot.rawValue)
+            }
+            print(calculator.currentNumbers)
         default:
             break
         }
@@ -97,8 +96,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //테스트 함수 실행을 위한 호출
-//        main()
+        let initializedNumber = 0
+        calculationCurentAndResultLabel?.text = String(initializedNumber)
     }
 }
 
