@@ -9,13 +9,7 @@ enum CalculatorError: Error {
 class Calculator {
     var numberStack = Stack<String>()
     var result = ""
-    var postfix = Postfix()
-    
-    func isOperatorInPostfix(item: String) -> Bool {
-        let operators = ["+", "−", "×", "÷"]
-        
-        return !operators.contains(item)
-    }
+    let postfix = Postfix()
     
     func checkDividedNumber(second: Double) throws {
         let invalidNumber = Double(0)
@@ -24,7 +18,7 @@ class Calculator {
         }
     }
     
-    func calculatePostfix(first: String, second: String, arithmethicOperator: String) throws -> Double {
+    func determineCalculationWay(first: String, second: String, arithmethicOperator: String) throws -> Double {
         guard let first = Double(first) , let second = Double(second) else {
             throw CalculatorError.invalidNumber
         }
@@ -43,18 +37,8 @@ class Calculator {
         }
     }
     
-    func returnCalculationResult(postfix: [String]) throws -> String? {
-        for item in postfix {
-            if isOperatorInPostfix(item: item) {
-                numberStack.push(item: item)
-            } else {
-                guard let first = numberStack.pop(), let second = numberStack.pop() else {
-                    throw CalculatorError.invalidNumber
-                }
-                let calculateResult = try calculatePostfix(first: first, second: second, arithmethicOperator: item)
-                numberStack.push(item: String(calculateResult))
-            }
-        }
-        return numberStack.pop()
+    func returnCalculationResult() throws -> String? {
+        let calculateResult = try postfix.calculatePostfix()
+        return calculateResult
     }
 }
