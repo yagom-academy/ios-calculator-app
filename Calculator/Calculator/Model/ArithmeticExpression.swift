@@ -10,7 +10,7 @@ class Postfix {
     
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
-            if isNumberInInfix(item: $0) {
+            if isOperator(item: $0) {
                 addToPostfix(item: $0)
             } else if operatorsStack.isEmpty() {
                 addToOperatorStack(item: $0)
@@ -23,7 +23,7 @@ class Postfix {
         processLeftOperatorStack()
     }
     
-    func isNumberInInfix(item: String) -> Bool {
+    func isOperator(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
         return !operators.contains(item)
     }
@@ -62,12 +62,7 @@ class Postfix {
             operatorsStack.pop()
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
         } else {
-            while !operatorsStack.isEmpty() {
-                guard let lastItem = operatorsStack.pop() else {
-                    return
-                }
-                addToPostfix(item: lastItem)
-            }
+            processLeftOperatorStack()
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
         }
     }
