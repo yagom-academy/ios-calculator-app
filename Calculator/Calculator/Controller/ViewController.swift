@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet private weak var operandInputLabel: UILabel!
     @IBOutlet weak var operatorInputLabel: UILabel!
-    private var currentNumber = "0" {
+    private var currentNumber: String = .zero {
         didSet {
             operandInputLabel.text = currentNumber
         }
@@ -45,7 +45,7 @@ extension ViewController {
     
     @IBAction func didTapDotButton(_ sender: UIButton) {
         if !isCurrentNumberFloatingPoint() {
-            currentNumber.append(".")
+            currentNumber.append(.dot)
         }
     }
     
@@ -68,18 +68,18 @@ extension ViewController {
 
 extension ViewController {
     private func resetOperandInputLabel() {
-        currentNumber = "0"
+        currentNumber = .zero
     }
     
     private func resetOperatorInputLabel() {
-        operatorInputLabel.text = ""
+        operatorInputLabel.text = .empty
     }
     
     private func isCurrentNumberZero() -> Bool {
-        currentNumber == "0"
+        currentNumber == .zero
     }
     
     private func isCurrentNumberFloatingPoint() -> Bool {
-        currentNumber.contains(".")
+        currentNumber.contains(String.dot)
     }
 }
