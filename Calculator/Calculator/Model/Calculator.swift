@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Calculator: Calculable {
+class Calculator: NSObject, Calculable {
     private var equationStack = Stack<String>()
-    private var infixExpression = Array<String>()
+    @objc dynamic private(set) var infixExpression = Array<String>()
     private var postfixExpression = Array<String>()
 }
 

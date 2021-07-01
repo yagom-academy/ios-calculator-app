@@ -363,6 +363,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="equalSignButton" destination="Daw-iX-Owl" id="nl5-dA-Ka4"/>
                         <outlet property="operandInputLabel" destination="Lwz-OF-XHD" id="wBt-Zg-Nch"/>
                         <outlet property="operatorInputLabel" destination="HPC-iy-qdm" id="ctf-1a-FPw"/>
                     </connections>

@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet private weak var operandInputLabel: UILabel!
     @IBOutlet weak var operatorInputLabel: UILabel!
+    @IBOutlet weak var equalSignButton: UIButton!
     private var currentNumber: String = .zero {
         didSet {
             operandInputLabel.text = currentNumber
@@ -20,11 +21,36 @@ class ViewController: UIViewController {
         }
     }
     let calculator = Calculator()
+    var observerContainer: NSKeyValueObservation?
+    let operatorButtonColor = #colorLiteral(red: 0.8941176471, green: 0.5725490196, blue: 0.231372549, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetOperandInputLabel()
         resetOperatorInputLabel()
+        addObserver()
+    }
+    
+    deinit {
+        removeObserver()
+    }
+}
+
+extension ViewController {
+    private func addObserver() {
+        observerContainer = calculator.observe(\.infixExpression,
+                                               options: [.new, .initial]) { [weak self] _, change in
+            guard let infixExpresionLength = change.newValue?.count else {
+                return
+            }
+            let needToEnable = infixExpresionLength > 0
+            self?.equalSignButton.isEnabled = needToEnable
+            self?.equalSignButton.backgroundColor = needToEnable ? self?.operatorButtonColor : .gray
+        }
+    }
+    
+    private func removeObserver() {
+        observerContainer = nil
     }
 }
 
@@ -105,7 +131,7 @@ extension ViewController {
     }
     
     private func resetOperatorInputLabel() {
-        operatorInputLabel.text = .empty
+        currentOperator = .empty
     }
     
     private func isCurrentNumberZero() -> Bool {
