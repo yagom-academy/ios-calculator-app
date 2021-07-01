@@ -7,9 +7,8 @@ enum CalculatorError: Error {
 }
 
 class Calculator {
-    var numberStack = Stack<String>()
     var result = ""
-    let postfix = Postfix()
+    private let postfix = Postfix()
     
     static func checkDividedNumber(second: Double) throws {
         let invalidNumber = Double(0)

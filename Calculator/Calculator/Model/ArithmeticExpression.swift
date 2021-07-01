@@ -1,13 +1,13 @@
 import Foundation
 
 class Infix {
-    var infix: [String] = []
+    private var infix: [String] = []
 }
 
 class Postfix {
-    var postfix: [String] = []
-    var operatorsStack = Stack<String>()
-    var numberStack = Stack<String>()
+    private var postfix: [String] = []
+    private var operatorsStack = Stack<String>()
+    private var numberStack = Stack<String>()
     
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
@@ -22,20 +22,20 @@ class Postfix {
         processLeftOperatorStack()
     }
     
-    func isOperator(item: String) -> Bool {
+    private func isOperator(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
         return !operators.contains(item)
     }
     
-    func addToPostfix(item: String) {
+    private func addToPostfix(item: String) {
         postfix.append(item)
     }
     
-    func addToOperatorStack(item: String) {
+    private func addToOperatorStack(item: String) {
         operatorsStack.push(item: item)
     }
     
-    func changeToOperatorsEnum(_ item: String) -> Operator? {
+    private func changeToOperatorsEnum(_ item: String) -> Operator? {
         let lastStackOperator = item
         
         switch lastStackOperator {
@@ -52,7 +52,7 @@ class Postfix {
         }
     }
     
-    func comparePriority(with input: Operator?) {
+    private func comparePriority(with input: Operator?) {
         guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
         let lastOfOperatorStack = changeToOperatorsEnum(unwrappedOperatrosStack)
         guard let unwrappedLastOfOperatorStack = lastOfOperatorStack, let unwrappedInput = input else { return }
@@ -68,7 +68,7 @@ class Postfix {
         }
     }
     
-    func processLeftOperatorStack() {
+    private func processLeftOperatorStack() {
         while !operatorsStack.isEmpty() {
             guard let leftItem = operatorsStack.pop() else {
                 return
