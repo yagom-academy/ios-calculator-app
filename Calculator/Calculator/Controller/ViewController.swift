@@ -12,7 +12,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        resetOperandInputLabel()
+        resetOperatorInputLabel()
     }
 }
 
@@ -38,3 +39,12 @@ extension ViewController {
     }
 }
 
+extension ViewController {
+    private func resetOperandInputLabel() {
+        operandInputLabel.text = "0"
+    }
+    
+    private func resetOperatorInputLabel() {
+        operatorInputLabel.text = ""
+    }
+}
