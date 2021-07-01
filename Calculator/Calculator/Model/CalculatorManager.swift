@@ -60,11 +60,7 @@ class CalculatorManager {
     
     /// 초기 값 상태에서 .을 눌렀을때, 0.으로 만들기
     static func pasteZeroInFrontOfDot(notation: String) -> String {
-        if notation == "." {
-            return "0."
-        }
-        
-        return notation
+        return isInitialValue(notation: notation) ? "0" : notation
     }
     
     /// .이 이미 눌려졌는지 확인하기

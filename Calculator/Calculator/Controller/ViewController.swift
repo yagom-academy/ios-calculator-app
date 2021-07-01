@@ -17,36 +17,43 @@ class ViewController: UIViewController {
         notations = []
     }
 
+    func updateLabel() {
+        print(inputNotation)
+        print(notations)
+    }
+    //,  CalculatorManager.checkZeroButtonIsPressedInInitalValue(notation: inputNotation, buttonText: operandButtonNumber)
+    
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let operandButtonNumber = sender.titleLabel?.text else {
+        guard let operandButtonNumber = sender.titleLabel?.text, !CalculatorManager.checkZeroButtonIsPressedInInitalValue(notation: inputNotation, buttonText: operandButtonNumber) else {
             return
         }
         
         inputNotation = "\(inputNotation)\(operandButtonNumber)"
+        updateLabel()
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         // TODO - 현재 숫자입력이 없는 상태인 0에서는 연산자의 종류만 변경 처리하기.
-        // TODO 현재 숫자입력이 없는 상태인 0에서는 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다. (ok)
+        // TODO -  현재 숫자입력이 없는 상태인 0에서는 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다. (ok)
         guard let operatorCase = sender.titleLabel?.text else {
             return
         }
         notations.append(inputNotation)
         notations.append(operatorCase)
-        // TODO 숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력
+        // TODO - 숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력
         inputNotation = ""
+        updateLabel()
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        guard let dotButtonText = sender.titleLabel?.text else {
+        guard let dotButtonText = sender.titleLabel?.text,
+              !CalculatorManager.hasAlreadyDot(notation: inputNotation) else {
             return
         }
         
-        if inputNotation.components(separatedBy: "").contains(".") {
-            return
-        }
+        inputNotation = "\(CalculatorManager.pasteZeroInFrontOfDot(notation: inputNotation))\(dotButtonText)"
         
-        inputNotation = "\(inputNotation)\(dotButtonText)"
+        updateLabel()
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -66,6 +73,7 @@ class ViewController: UIViewController {
                 print(errorCase)
             }
         }
+        updateLabel()
     }
 }
 
