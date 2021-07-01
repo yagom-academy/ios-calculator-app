@@ -13,6 +13,9 @@ struct Queue<T> {
     var isEmpty: Bool {
         return queue.isEmpty
     }
+    mutating func removeAll() {
+        queue.removeAll()
+    }
     mutating func enqueue(_ value: T) {
         queue.append(value)
     }

@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         }
     }
 }
-
+// MARK : --- Perform functions
 extension ViewController {
     func addDot(_ dot: String) {
         guard let currentText = userInputDigitsLabel.text else {
@@ -76,47 +76,60 @@ extension ViewController {
         guard !currentText.contains(dot) else {
             return
         }
-        userInputDigitsLabel.text = currentText + dot
+        updateUIDigitsLabel(currentText + dot)
     }
     func addNumber(_ digit: String) {
         guard let currentText = userInputDigitsLabel.text else {
             return
         }
         if currentText == "0" || currentText == "NaN" {
-            userInputDigitsLabel.text = (digit == "00" ? "0" : digit)
+            let text = (digit == "00" ? "0" : digit)
+            updateUIDigitsLabel(text)
         } else {
-            userInputDigitsLabel.text = currentText + digit
+            updateUIDigitsLabel(currentText + digit)
         }
     }
     
     func allClear() {
-        userInputDigitsLabel.text = "0"
+        calculator.removeAllInfix()
+        updateUIDigitsLabel()
+        updateUIOperatorLabel()
     }
-    
     func clearEntry() {
-        userInputDigitsLabel.text = "0"
+        updateUIDigitsLabel()
     }
-    
     func changePostiveOrNegativeSymbol() {
         guard var currentText = userInputDigitsLabel.text else {
             return
         }
         guard let firstItem = currentText.first,
-              firstItem != "0",
-              firstItem != "N"
-              else {
+              firstItem != "N" else {
             return
         }
+        guard let doubleNumber = Double(currentText),
+              doubleNumber != 0 else {
+            return
+        }
+
         if firstItem == "-" {
             currentText.removeFirst()
-            userInputDigitsLabel.text = currentText
+            updateUIDigitsLabel(currentText)
         } else {
-            userInputDigitsLabel.text = "-" + currentText
+            updateUIDigitsLabel("-" + currentText)
         }
     }
     
     func pushOperator(_ type: OperatorType) {
     }
     func performCalculation() {
+    }
+}
+// MARK : --- Update UI Funtions
+extension ViewController {
+    func updateUIDigitsLabel(_ text: String = "0") {
+        userInputDigitsLabel.text = text
+    }
+    func updateUIOperatorLabel(_ text: String = "") {
+        userInputOperatorLabel.text = text
     }
 }

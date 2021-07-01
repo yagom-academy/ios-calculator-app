@@ -36,6 +36,9 @@ struct Calculator {
 }
 
 extension Calculator {
+    mutating func removeAllInfix() {
+        infixQueue.removeAll()
+    }
     mutating func pushNumberOrOperator(_ sign: Arithmetic) {
         infixQueue.enqueue(sign)
     }
