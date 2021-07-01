@@ -9,6 +9,11 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet private weak var operandInputLabel: UILabel!
     @IBOutlet weak var operatorInputLabel: UILabel!
+    private var currentNumber = "0" {
+        didSet {
+            operandInputLabel.text = currentNumber
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +23,22 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
-    @IBAction func didTapOperandButton(_ sender: UIButton) {
+    @IBAction func didTapNumberButton(_ sender: UIButton) {
+        guard let number = sender.currentTitle else {
+            return
+        }
+        if currentNumber == "0" {
+            currentNumber = number
+        } else {
+            currentNumber.append(number)
+        }
+    }
+    
+    @IBAction func didTapHundredButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func didTapDotButton(_ sender: UIButton) {
         
     }
     
@@ -41,7 +61,7 @@ extension ViewController {
 
 extension ViewController {
     private func resetOperandInputLabel() {
-        operandInputLabel.text = "0"
+        currentNumber = "0"
     }
     
     private func resetOperatorInputLabel() {
