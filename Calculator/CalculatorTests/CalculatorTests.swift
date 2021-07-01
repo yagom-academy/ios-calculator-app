@@ -13,9 +13,44 @@ class CalculatorTests: XCTestCase {
     var sut = Postfix()
     var sut2 = Calculator()
     
+    override func setUpWithError() throws {
+        sut = Postfix()
+        sut2 = Calculator()
+    }
+    
     func test_덧셈만_입력했을때_결과를_반환한다() {
         let testcase = ["1", "+", "2", "+", "3"]
         sut.separateInfix(from: testcase)
         XCTAssertEqual(try sut2.returnCalculationResult(), Optional("6"))
+    }
+
+    func test_곱셈만_입력했을때_결과를_반환한다() {
+        let testcase = ["1", "×", "2", "×", "3"]
+        sut.separateInfix(from: testcase)
+        XCTAssertEqual(try sut2.returnCalculationResult(), Optional("6"))
+    }
+    
+    func test_뺄셈만_입력했을때_결과를_반환한다() {
+        let testcase = ["1", "−", "2", "−", "3"]
+        sut.separateInfix(from: testcase)
+        XCTAssertEqual(try sut2.returnCalculationResult(), Optional("-4"))
+    }
+    
+    func test_나눗셈만_입력했을때_결과를_반환한다() {
+        let testcase = ["1", "÷", "2"]
+        sut.separateInfix(from: testcase)
+        XCTAssertEqual(try sut2.returnCalculationResult(), Optional("0.5"))
+    }
+    
+    func test_나눗셈_곱셈_덧셈_입력했을때_결과를_반환한다() {
+        let testcase = ["1", "×", "3", "+", "2", "÷", "2"]
+        sut.separateInfix(from: testcase)
+        XCTAssertEqual(try sut2.returnCalculationResult(), Optional("4"))
+    }
+    
+    func test_0으로_나누기_시도중_오류를_반환한다() {
+        let testcase = ["1", "×", "3", "+", "2", "÷", "0"]
+        sut.separateInfix(from: testcase)
+        XCTAssertEqual(try sut2.returnCalculationResult(), Optional("NaN"))
     }
 }

@@ -24,14 +24,14 @@ class Calculator {
         }
         switch arithmethicOperator {
         case "+":
-            return first + second
+            return second + first
         case "−":
-            return first - second
+            return second - first
         case "×":
-            return first * second
+            return second * first
         case "÷":
-            try checkDividedNumber(second: second)
-            return first / second
+            try checkDividedNumber(second: first)
+            return second / first
         default:
             throw CalculatorError.invalidOperator
         }
