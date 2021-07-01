@@ -78,8 +78,15 @@ extension ViewController {
         }
         userInputDigitsLabel.text = currentText + dot
     }
-    
-    func addNumber(_ value: String) {
+    func addNumber(_ digit: String) {
+        guard let currentText = userInputDigitsLabel.text else {
+            return
+        }
+        if currentText == "0" || currentText == "NaN" {
+            userInputDigitsLabel.text = (digit == "00" ? "0" : digit)
+        } else {
+            userInputDigitsLabel.text = currentText + digit
+        }
     }
     
     func allClear() {
