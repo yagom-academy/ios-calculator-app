@@ -19,7 +19,7 @@ extension Calculator {
     }
     
     private func isNumber(_ value: String) -> Bool {
-        return Double(value) != nil
+        Double(value) != nil
     }
     
     private func isHigherPriority(of infixOperator: String,than stackOperator: String) throws -> Bool {
@@ -43,7 +43,7 @@ extension Calculator {
     }
     
     private func isEqualSign(of element: String) -> Bool {
-        return element == "="
+        element == "="
     }
     
     private func handle(operator element: String) throws {

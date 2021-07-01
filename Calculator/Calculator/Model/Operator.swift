@@ -26,6 +26,6 @@ enum Operator: String, OperatorConvertible {
     }
     
     func isHigherPriority(than anotherOperator: Operator) -> Bool {
-        return self.priority > anotherOperator.priority
+        self.priority > anotherOperator.priority
     }
 }
