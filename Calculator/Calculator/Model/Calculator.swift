@@ -9,7 +9,6 @@ import Foundation
 
 struct Calculator {
     private var infixQueue = Queue<Arithmetic>()
-//    private var currentType = .integer .double
     
     private mutating func transformInfixToPostfix() -> Queue<Arithmetic> {
         var postfixQueue = Queue<Arithmetic>()
@@ -57,11 +56,7 @@ extension Calculator {
                 if `operator`.type == .division, castedRhs.value == 0 {
                     throw CalculatorError.zeroDivisor
                 }
-                
-                //                if computedNumber.isSignalingNaN {
-                //                    throw CalculatorError.zeroDivisor
-                //                }
-                
+
                 let computedNumber = `operator`.computeNumber(castedLhs.value, castedRhs.value)
                 
                 let wrappingNumber = Operand(value: computedNumber)
@@ -70,8 +65,12 @@ extension Calculator {
                 operandStack.push(dequeueElement)
             }
         }
-        guard let upcastingResult = operandStack.pop()  else { throw StackError.underflow }
-        guard let result = upcastingResult as? Operand else { throw ArithmeticError.downCastingError }
+        guard let upcastingResult = operandStack.pop()  else {
+            throw StackError.underflow
+        }
+        guard let result = upcastingResult as? Operand else {
+            throw ArithmeticError.downCastingError
+        }
         return result.value
     }
 }
