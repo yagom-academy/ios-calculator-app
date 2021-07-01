@@ -90,10 +90,29 @@ extension ViewController {
     }
     
     func allClear() {
+        userInputDigitsLabel.text = "0"
     }
+    
     func clearEntry() {
+        userInputDigitsLabel.text = "0"
     }
+    
     func changePostiveOrNegativeSymbol() {
+        guard var currentText = userInputDigitsLabel.text else {
+            return
+        }
+        guard let firstItem = currentText.first,
+              firstItem != "0",
+              firstItem != "N"
+              else {
+            return
+        }
+        if firstItem == "-" {
+            currentText.removeFirst()
+            userInputDigitsLabel.text = currentText
+        } else {
+            userInputDigitsLabel.text = "-" + currentText
+        }
     }
     
     func pushOperator(_ type: OperatorType) {
