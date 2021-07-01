@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
-    @IBAction func didTapNumberButton(_ sender: UIButton) {
+    @IBAction func tapNumberButton(_ sender: UIButton) {
         guard let number = sender.currentTitle else {
             return
         }
@@ -35,7 +35,7 @@ extension ViewController {
         }
     }
     
-    @IBAction func didTapHundredButton(_ sender: UIButton) {
+    @IBAction func tapHundredButton(_ sender: UIButton) {
         guard let doubleZero = sender.currentTitle else {
             return
         }
@@ -44,21 +44,21 @@ extension ViewController {
         }
     }
     
-    @IBAction func didTapDotButton(_ sender: UIButton) {
+    @IBAction func tapDotButton(_ sender: UIButton) {
         if !isCurrentNumberFloatingPoint() {
             currentNumber.append(.dot)
         }
     }
     
-    @IBAction func didTapOperatorButton(_ sender: UIButton) {
+    @IBAction func tapOperatorButton(_ sender: UIButton) {
         
     }
     
-    @IBAction func didTapCalculateButton(_ sender: UIButton) {
+    @IBAction func tapCalculateButton(_ sender: UIButton) {
         
     }
     
-    @IBAction func didTapClearButton(_ sender: UIButton) {
+    @IBAction func tapClearButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else {
             return
         }
@@ -74,8 +74,15 @@ extension ViewController {
         }
     }
     
-    @IBAction func didTapChangeSignButton(_ sender: UIButton) {
-        
+    @IBAction func tapChangeSignButton(_ sender: UIButton) {
+        guard currentNumber != .zero else {
+            return
+        }
+        if !isCurrentNumberNegative() {
+            currentNumber = .negativeSign + currentNumber
+        } else {
+            currentNumber.removeFirst()
+        }
     }
 }
 
@@ -94,5 +101,9 @@ extension ViewController {
     
     private func isCurrentNumberFloatingPoint() -> Bool {
         currentNumber.contains(String.dot)
+    }
+    
+    private func isCurrentNumberNegative() -> Bool {
+        currentNumber.hasPrefix(.negativeSign)
     }
 }

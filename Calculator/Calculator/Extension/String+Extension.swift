@@ -14,4 +14,5 @@ extension String {
     static let allClear = "AC"
     static let clearEntry = "CE"
     static let equalSign = "="
+    static let negativeSign = "-"
 }
