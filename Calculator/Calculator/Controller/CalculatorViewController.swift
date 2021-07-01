@@ -79,6 +79,14 @@ class CalculatorViewController: UIViewController {
         addNumberToNumberInputLabel(number: .doubleZero)
     }
     @IBAction func clickDotButton(_ sender: UIButton) {
+        guard let label = numberInputLabel.text else { return }
+        if label.contains("."){
+            if label.last == "." {
+                numberInputLabel.text?.removeLast()
+            }
+        } else {
+            numberInputLabel.text? += "."
+        }
     }
     
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
