@@ -10,14 +10,6 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     var calculator = Calculator()
-    
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     func test_계산기에_1더하기2더하기3연산시_6이나온다() throws {
         //give
@@ -129,12 +121,5 @@ class CalculatorTests: XCTestCase {
         print(calculationResult)
         let expectedResult = "-1361.8"
         XCTAssertTrue(calculationResult == expectedResult)
-    }
-    
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 }
