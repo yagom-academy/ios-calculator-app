@@ -48,12 +48,24 @@ class CalculatorManager {
     
     /// +/-버튼이 눌렸는지 확인 후, 최종 결과를 알려주기
     static func applyNotationSign(notation: String, isMinus: Bool) -> String {
-        guard !isInitialValue(notation: notation) else {
+        guard !isInitialValue(notation: notation), notation != "0" else {
             return notation
         }
         
         let notationSign = isMinus ? "-" : ""
         return "\(notationSign)\(notation)"
+    }
+    
+    static func changeMultipleAndDivideText(operatorText: String) -> String {
+        if operatorText == "×" {
+            return "*"
+        }
+        
+        if operatorText == "÷" {
+            return "/"
+        }
+        
+        return operatorText
     }
     
 // MARK: - touchUpDotButton Helper

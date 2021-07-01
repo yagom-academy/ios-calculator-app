@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     
     @IBOutlet weak var notationUILabel: UILabel!
     
@@ -17,7 +16,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetNotation()
+        resetCalculator()
     }
     
     func resetNotation() {
@@ -49,15 +48,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        // TODO - 현재 숫자입력이 없는 상태인 0에서는 연산자의 종류만 변경 처리하기.
+        
         // TODO -  현재 숫자입력이 없는 상태인 0에서는 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다. (ok)
-        guard let operatorCase = sender.titleLabel?.text else {
+        guard let operatorText = sender.titleLabel?.text else {
             return
         }
-        notations.append(inputNotation)
-        notations.append(operatorCase)
-        // TODO - 숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력
-        inputNotation = ""
+        
+        let operatorCase = CalculatorManager.changeMultipleAndDivideText(operatorText: operatorText)
+        
+        if notations.isEmpty && CalculatorManager.isInitialValue(notation: inputNotation) {
+            inputNotation = "0"
+        }
+        
+        // 현재 숫자입력이 없는 상태인 0에서는 연산자의 종류만 변경 처리하기. (ok)
+        if CalculatorManager.isInitialValue(notation: inputNotation) {
+            notations.removeLast()
+            notations.append(operatorCase)
+        } else {
+            let signedNotion = CalculatorManager.applyNotationSign(notation: inputNotation, isMinus: minusFlag)
+            let removedZeroNotion = CalculatorManager.removeZerosAfterDecimal(notation: signedNotion)
+            notations.append(removedZeroNotion)
+            notations.append(operatorCase)
+        }
+        
+        // TODO - 숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력 (ok)
+        resetNotation()
         updateLabel()
     }
     
@@ -74,11 +89,17 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
         // TODO = 버튼을 눌러 연산을 마친 후 다시 =을 눌러도 이전 연산을 다시 연산하지 않습니다
+        
+        // TODO Change Valid inputNotation
+        let infix = CalculatorManager.getFinalInfixResult(validNotation: inputNotation, notations: notations)
+        
+//        print("touchUpEqualButton()")
+//        print(infix)
         let calculator = Calculator()
-        let result = calculator.runCalculator(on: notations)
+        let result = calculator.runCalculator(on: infix)
         
         if case .success(let resultValue) = result {
-            print(resultValue)
+            inputNotation = String(resultValue)
         } else if case .failure(let errorCase) = result {
             switch errorCase {
             case .dividedByZero:
@@ -89,6 +110,7 @@ class ViewController: UIViewController {
                 print(errorCase)
             }
         }
+        
         updateLabel()
     }
     
