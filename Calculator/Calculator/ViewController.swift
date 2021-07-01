@@ -108,8 +108,10 @@ class ViewController: UIViewController {
         pushToHistoryStackView(currentOperator: previousOperator, currentOperand: currentValue ?? "0")
         calculator.replaceInfix(with: infixNotation)
         do {
-            currentValue = String(try calculator.calculate()!)
-            currentValueLabel.text = try calculator.calculateAndFormat()
+            let result = try calculator.calculate()
+            currentValueLabel.text = try calculator.format(for: result)
+            guard let calculatedResult = result else { return }
+            currentValue = String(calculatedResult)
         } catch {
             print("에러발생")
         }
