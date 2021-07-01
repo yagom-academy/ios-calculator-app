@@ -53,9 +53,10 @@ extension Calculator {
     }
     
     mutating func makeCalculation() throws -> Double {
+print("infix \(displayInfix())")
         var postfix = transformInfixToPostfix()
         var operandStack = Stack<Arithmetic>()
-        
+print("postfix \(postfix)")
         while let dequeueElement = postfix.dequeueInfront() {
             if let `operator` = dequeueElement as? Operator {
                 guard let rhs = operandStack.pop(),

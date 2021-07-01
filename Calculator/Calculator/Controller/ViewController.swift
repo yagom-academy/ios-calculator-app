@@ -146,11 +146,10 @@ print(calculator.displayInfix())
         guard let doubleNumber = Double(currentText) else {
             return
         }
-        guard let currentOperator =  userInputOperatorLabel.text else {
+        guard let currentOperator = userInputOperatorLabel.text else {
             return
         }
         calculator.dequeBehind()
-        
         switch currentOperator {
         case "+":
             calculator.enqueBehindNumberOrOperator(Operator(type: .addition))
@@ -168,11 +167,12 @@ print(calculator.displayInfix())
             let result = try calculator.makeCalculation()
             updateUIDigitsLabel(String(result))
             updateUIOperatorLabel()
+        } catch CalculatorError.zeroDivisor {
+            updateUIDigitsLabel("NaN")
+            updateUIOperatorLabel()
         } catch {
             
         }
-        
-        
     }
 }
 // MARK : --- Update UI Funtions

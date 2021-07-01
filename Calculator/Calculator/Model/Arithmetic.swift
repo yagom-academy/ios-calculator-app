@@ -24,7 +24,7 @@ enum OperatorType: CustomStringConvertible {
         case .addition:
             return "+"
         case .subtraction:
-            return "-"
+            return "−"
         case .mulitplication:
             return "×"
         case .division:
