@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         guard let titleLabelText = titleLabel.text else {
             return
         }
+print("--> touchUpInside : \(titleLabelText)")
         switch sender {
         case dotButton:
             addDot(titleLabelText)
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
         guard let titleLabelText = titleLabel.text else {
             return
         }
+print("--> touchUpInside : \(titleLabelText)")
         switch titleLabelText {
         case "+":
             pushOperator(.addition)
@@ -94,9 +96,11 @@ extension ViewController {
         calculator.removeAllInfix()
         updateUIDigitsLabel()
         updateUIOperatorLabel()
+print("--> allClear()")
     }
     func clearEntry() {
         updateUIDigitsLabel()
+print("--> clearEntry()")
     }
     func changePostiveOrNegativeSymbol() {
         guard var currentText = userInputDigitsLabel.text else {
@@ -117,9 +121,23 @@ extension ViewController {
         } else {
             updateUIDigitsLabel("-" + currentText)
         }
+print("--> changeSymbol()")
     }
     
     func pushOperator(_ type: OperatorType) {
+        guard let currentText = userInputDigitsLabel.text else {
+            return
+        }
+        guard let doubleNumber = Double(currentText) else {
+            return
+        }
+        if doubleNumber != 0 {
+            calculator.pushNumberOrOperator(Operand(value: doubleNumber))
+            calculator.pushNumberOrOperator(Operator(type: type))
+            updateUIDigitsLabel()
+        }
+        updateUIOperatorLabel(type.description)
+print(calculator.displayInfix())
     }
     func performCalculation() {
     }

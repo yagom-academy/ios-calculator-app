@@ -13,11 +13,24 @@ protocol Arithmetic {
 struct Operand: Arithmetic {
     let value: Double
 }
-enum OperatorType {
+enum OperatorType: CustomStringConvertible {
     case addition
     case subtraction
     case mulitplication
     case division
+    
+    var description: String {
+        switch self {
+        case .addition:
+            return "+"
+        case .subtraction:
+            return "-"
+        case .mulitplication:
+            return "×"
+        case .division:
+            return "÷"
+        }
+    }
 }
 struct Operator: Arithmetic, Equatable, Comparable {
     static let higher: Array<OperatorType> = [.mulitplication, .division]

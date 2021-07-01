@@ -8,39 +8,45 @@
 import Foundation
 
 struct Calculator {
-    private var infixQueue = Deque<Arithmetic>()
-//    private var currentType = .integer .double
+    private var infixDeque = Deque<Arithmetic>()
     
     private mutating func transformInfixToPostfix() -> Deque<Arithmetic> {
-        var postfixQueue = Deque<Arithmetic>()
+        var postfixDeque = Deque<Arithmetic>()
         var operatorStack = Stack<Arithmetic>()
-        while let dequeueElement = infixQueue.dequeueInfront() {
+        while let dequeueElement = infixDeque.dequeueInfront() {
             if let `operator` = dequeueElement as? Operator {
                 if let top = operatorStack.top as? Operator,
                       (top == `operator`) || (top > `operator`),
                       let pop = operatorStack.pop() {
-                    postfixQueue.enqueueBehind(pop)
-                    infixQueue.enqueueInfront(`operator`)
+                    postfixDeque.enqueueBehind(pop)
+                    infixDeque.enqueueInfront(`operator`)
                     continue
                 }
                 operatorStack.push(`operator`)
             } else {
-                postfixQueue.enqueueBehind(dequeueElement)
+                postfixDeque.enqueueBehind(dequeueElement)
             }
         }
         while let top = operatorStack.pop() {
-            postfixQueue.enqueueBehind(top)
+            postfixDeque.enqueueBehind(top)
         }
-        return postfixQueue
+        return postfixDeque
     }
 }
 
 extension Calculator {
+    // TestCode
+    func displayInfix() -> Deque<Arithmetic> {
+        return infixDeque
+    }
+    
+    
+    
     mutating func removeAllInfix() {
-        infixQueue.removeAll()
+        infixDeque.removeAll()
     }
     mutating func pushNumberOrOperator(_ sign: Arithmetic) {
-        infixQueue.enqueueBehind(sign)
+        infixDeque.enqueueBehind(sign)
     }
     mutating func makeCalculation() throws -> Double {
         var postfix = transformInfixToPostfix()
@@ -61,10 +67,6 @@ extension Calculator {
                     throw CalculatorError.zeroDivisor
                 }
                 
-                //                if computedNumber.isSignalingNaN {
-                //                    throw CalculatorError.zeroDivisor
-                //                }
-                
                 let computedNumber = `operator`.computeNumber(castedLhs.value, castedRhs.value)
                 
 
@@ -79,6 +81,3 @@ extension Calculator {
         return result.value
     }
 }
-
-// numberFormatter
-// Int 냐 Double

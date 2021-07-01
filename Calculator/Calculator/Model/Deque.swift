@@ -13,6 +13,9 @@ struct Deque<T> {
     mutating func removeAll() {
         deque.removeAll()
     }
+    mutating func dequeueBehind() -> T? {
+        return deque.popLast()
+    }
     mutating func enqueueBehind(_ value: T) {
         deque.append(value)
     }
@@ -22,7 +25,5 @@ struct Deque<T> {
     mutating func enqueueInfront(_ value: T) {
         deque.insert(value, at: 0)
     }
-    mutating func dequeueBehind() -> T? {
-        return deque.popLast()
-    }
+    
 }
