@@ -4,6 +4,7 @@ enum CalculatorError: Error {
     case dividedByZero
     case invalidNumber
     case invalidOperator
+    case noResult
 }
 
 class Calculator {
@@ -34,6 +35,11 @@ class Calculator {
         default:
             throw CalculatorError.invalidOperator
         }
+    }
+    
+    func checkDecimal(number: String?) throws -> Bool {
+        guard let number = number else { throw CalculatorError.noResult }
+        return number.split(separator: ".").last.map{ String($0) } == "0"
     }
     
     func returnCalculationResult() throws -> String? {
