@@ -70,7 +70,15 @@ class ViewController: UIViewController {
 
 extension ViewController {
     func addDot(_ dot: String) {
+        guard let currentText = userInputDigitsLabel.text else {
+            return
+        }
+        guard !currentText.contains(dot) else {
+            return
+        }
+        userInputDigitsLabel.text = currentText + dot
     }
+    
     func addNumber(_ value: String) {
     }
     
