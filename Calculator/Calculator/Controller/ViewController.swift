@@ -27,7 +27,7 @@ extension ViewController {
         guard let number = sender.currentTitle else {
             return
         }
-        if currentNumber == "0" {
+        if isCurrentNumberZero() {
             currentNumber = number
         } else {
             currentNumber.append(number)
@@ -35,11 +35,18 @@ extension ViewController {
     }
     
     @IBAction func didTapHundredButton(_ sender: UIButton) {
-        
+        guard let doubleZero = sender.currentTitle else {
+            return
+        }
+        if !isCurrentNumberZero() {
+            currentNumber.append(doubleZero)
+        }
     }
     
     @IBAction func didTapDotButton(_ sender: UIButton) {
-        
+        if !isCurrentNumberFloatingPoint() {
+            currentNumber.append(".")
+        }
     }
     
     @IBAction func didTapOperatorButton(_ sender: UIButton) {
@@ -66,5 +73,13 @@ extension ViewController {
     
     private func resetOperatorInputLabel() {
         operatorInputLabel.text = ""
+    }
+    
+    private func isCurrentNumberZero() -> Bool {
+        currentNumber == "0"
+    }
+    
+    private func isCurrentNumberFloatingPoint() -> Bool {
+        currentNumber.contains(".")
     }
 }
