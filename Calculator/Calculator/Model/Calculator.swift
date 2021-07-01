@@ -15,7 +15,9 @@ class Calculator: Calculable {
 
 extension Calculator {
     func putIntoInfixExpression(of input: String) {
-        infixExpression.append(input)
+        if !input.isEmpty {
+            infixExpression.append(input)
+        }
     }
     
     func deriveEquationValue() -> Result<Double, CalculatorError> {

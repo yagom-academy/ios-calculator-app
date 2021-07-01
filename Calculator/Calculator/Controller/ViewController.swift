@@ -14,6 +14,11 @@ class ViewController: UIViewController {
             operandInputLabel.text = currentNumber
         }
     }
+    private var currentOperator: String = .empty {
+        didSet {
+            operatorInputLabel.text = currentOperator
+        }
+    }
     let calculator = Calculator()
     
     override func viewDidLoad() {
@@ -51,7 +56,15 @@ extension ViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        
+        guard let operatorSymbol = sender.currentTitle else {
+            return
+        }
+        if !isCurrentNumberZero() {
+            calculator.putIntoInfixExpression(of: currentOperator)
+            calculator.putIntoInfixExpression(of: currentNumber)
+            resetOperandInputLabel()
+        }
+        currentOperator = operatorSymbol
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
