@@ -11,10 +11,11 @@ import XCTest
 class CalculatorTests: XCTestCase {
     
     var sut = Postfix()
+    var sut2 = Calculator()
     
     func test_덧셈만_입력했을때_결과를_반환한다() {
         let testcase = ["1", "+", "2", "+", "3"]
         sut.separateInfix(from: testcase)
-        XCTAssertEqual(try sut.calculatePostfix() , Optional("6"))
+        XCTAssertEqual(try sut2.returnCalculationResult(), Optional("6"))
     }
 }

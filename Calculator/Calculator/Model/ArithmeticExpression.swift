@@ -5,13 +5,13 @@ class Infix {
 }
 
 class Postfix {
-    private var postfix: [String] = []
+    private static var postfix: [String] = []
     private var operatorsStack = Stack<String>()
-    private var numberStack = Stack<String>()
+    private static var numberStack = Stack<String>()
     
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
-            if isOperator(item: $0) {
+            if Postfix.isOperator(item: $0) {
                 addToPostfix(item: $0)
             } else if operatorsStack.isEmpty() {
                 addToOperatorStack(item: $0)
@@ -22,13 +22,13 @@ class Postfix {
         processLeftOperatorStack()
     }
     
-    private func isOperator(item: String) -> Bool {
+    private static func isOperator(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
         return !operators.contains(item)
     }
     
     private func addToPostfix(item: String) {
-        postfix.append(item)
+        Postfix.postfix.append(item)
     }
     
     private func addToOperatorStack(item: String) {
@@ -73,11 +73,11 @@ class Postfix {
             guard let leftItem = operatorsStack.pop() else {
                 return
             }
-            postfix.append(leftItem)
+            Postfix.postfix.append(leftItem)
         }
     }
     
-    func calculatePostfix() throws -> String? {
+    static func calculatePostfix() throws -> String? {
         for item in postfix {
             if isOperator(item: item) {
                 numberStack.push(item: item)
