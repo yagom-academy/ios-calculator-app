@@ -64,7 +64,7 @@ extension CalculatorablePostfix {
 		
 		for userInput in from {
 			let userInputType = try? CalculatorComponent.convertToComponentType(from: userInput)
-			
+            
 			switch userInputType {
 			case .number:
 				infixNumberString += userInput
@@ -81,7 +81,11 @@ extension CalculatorablePostfix {
 					infixNumberString.remove(at: infixNumberString.startIndex)
 				}
 			default:
-				throw ErrorCase.unknownInputCase
+                if let _ = Double(userInput) {
+                    infixNumberString += userInput
+                } else {
+                    throw ErrorCase.unknownInputCase
+                }
 			}
 		}
 		
@@ -193,10 +197,12 @@ struct Calculator: Calculatorable, CalculatorablePostfix {
 		if let intValue = castedValue {
 			return String(intValue)
 		} else {
-			return String(number)
+            let double = round(number * 100) / 100
+			return String(double)
 		}
 	}
 	
+    
 	func calculate(input: [String]) -> String {
 		let notANumber = "NaN"
 		
