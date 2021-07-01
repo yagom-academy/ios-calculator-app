@@ -105,6 +105,7 @@ class ViewController: UIViewController {
               let previousOperator = currentOperatorLabel.text else { return }
         infixNotation.append(parse(from: previousOperator))
         infixNotation.append(currentValue ?? "0")
+        pushToHistoryStackView(currentOperator: previousOperator, currentOperand: currentValue ?? "0")
         calculator.replaceInfix(with: infixNotation)
         do {
             currentValue = String(try calculator.calculate()!)
