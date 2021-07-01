@@ -160,7 +160,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func createEntryView() -> UIView {
-        let inputNumber = numberInputLabel.text
+        var inputNumber = numberInputLabel.text
+        inputNumber = inputNumber?.trimmingCharacters(in: ["."])
         let inputOperator = operatorInputLabel.text
         
         let newStackView = UIStackView()
@@ -193,7 +194,8 @@ class CalculatorViewController: UIViewController {
 // MARK:- Calculator functions
 extension CalculatorViewController {
     private func addEntry() throws {
-        guard let inputNumber = numberInputLabel.text, let inputOperator = operatorInputLabel.text else { throw CalculatorError.InValidInput }
+        let inputValue = numberInputLabel.text?.components(separatedBy: ",").joined()
+        guard let inputNumber = inputValue, let inputOperator = operatorInputLabel.text else { throw CalculatorError.InValidInput }
         guard (inputNumber == "0" && inputOperator == "÷") == false else{ throw CalculatorError.DivideByZero }
         calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
         let nextEntryIndex = CalculationStackView.arrangedSubviews.count
@@ -211,14 +213,23 @@ extension CalculatorViewController {
     private func isInputValid() -> Bool {
         return numberInputLabel.text != "0"
     }
-    
+
     func addNumberToNumberInputLabel(number: NumberButton) {
-        if numberInputLabel.text == "0" {
+        let maxLength = 20
+        guard var numberValue = numberInputLabel.text else { return }
+        let numberLength = numberValue.components(separatedBy: ",").joined().count
+        guard numberLength < maxLength else { return }
+        if numberValue == "0" {
             if number != .doubleZero {
-                numberInputLabel.text? = "\(number)"
+                numberValue = "\(number)"
             }
         } else {
-            numberInputLabel.text? += "\(number)"
+            if numberLength == maxLength - 1 && number == .doubleZero { return }
+            numberValue += "\(number)"
         }
+        numberValue = numberValue.components(separatedBy: ",").joined()
+        guard let doubleType = Double(numberValue) else { return }
+        
+        numberInputLabel.text? = doubleType.fractionDigits()
     }
 }
