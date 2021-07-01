@@ -7,6 +7,14 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    var isNumberInputable: Bool = true
+    
+    func stateON() {
+        isNumberInputable = true
+    }
+    func stateOff() {
+        isNumberInputable = false
+    }
     
     enum NumberButton: CustomStringConvertible {
         case one, two, three, four, five, six, seven,
@@ -59,6 +67,7 @@ class CalculatorViewController: UIViewController {
     }
     @IBAction func clickNumberFiveButton(_ sender: UIButton) {
         addNumberToNumberInputLabel(number: .five)
+        
     }
     @IBAction func clickNumberSixButton(_ sender: UIButton) {
         addNumberToNumberInputLabel(number: .six)
@@ -79,6 +88,7 @@ class CalculatorViewController: UIViewController {
         addNumberToNumberInputLabel(number: .doubleZero)
     }
     @IBAction func clickDotButton(_ sender: UIButton) {
+        guard isNumberInputable else { return }
         guard let label = numberInputLabel.text else { return }
         if label.contains("."){
             if label.last == "." {
@@ -90,36 +100,42 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
+        stateON()
         if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "+"
     }
     @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
+        stateON()
         if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "-"
     }
     @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
+        stateON()
         if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "×"
     }
     @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
+        stateON()
         if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = "÷"
     }
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
+        guard isNumberInputable else { return }
         do {
             try addEntry()
         } catch CalculatorError.DivideByZero {
             numberInputLabel.text = "NaN"
             operatorInputLabel.text = ""
             calculator.allClear()
+            stateOff()
             return
         } catch {
             print("Unknown Error")
@@ -136,9 +152,11 @@ class CalculatorViewController: UIViewController {
             print("Unknown Error")
         }
         calculator.allClear()
+        stateOff()
     }
     
     @IBAction func clickAllClearButton(_ sender: UIButton) {
+        stateON()
         numberInputLabel.text = "0"
         for stackView in CalculationStackView.arrangedSubviews {
             stackView.removeFromSuperview()
@@ -147,10 +165,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickClearEntryButton(_ sender: UIButton) {
+        stateON()
         numberInputLabel.text = "0"
     }
     
     @IBAction func clickToggleSignButton(_ sender: UIButton) {
+        guard isNumberInputable else { return }
         guard let inputNumber = numberInputLabel.text else { return }
         if inputNumber.first == "-" {
             numberInputLabel.text?.removeFirst()
@@ -215,6 +235,8 @@ extension CalculatorViewController {
     }
 
     func addNumberToNumberInputLabel(number: NumberButton) {
+        guard isNumberInputable else { return }
+        
         let maxLength = 20
         guard var numberValue = numberInputLabel.text else { return }
         let numberLength = numberValue.components(separatedBy: ",").joined().count
