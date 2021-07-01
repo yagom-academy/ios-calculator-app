@@ -14,6 +14,7 @@ class ViewController: UIViewController {
             operandInputLabel.text = currentNumber
         }
     }
+    let calculator = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,19 @@ extension ViewController {
     }
     
     @IBAction func didTapClearButton(_ sender: UIButton) {
-        
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
+        switch buttonTitle {
+        case .allClear:
+            resetOperandInputLabel()
+            resetOperatorInputLabel()
+            calculator.clearAll()
+        case .clearEntry:
+            resetOperandInputLabel()
+        default:
+            break
+        }
     }
     
     @IBAction func didTapChangeSignButton(_ sender: UIButton) {

@@ -30,6 +30,12 @@ extension Calculator {
         }
     }
     
+    func clearAll() {
+        equationStack.reset()
+        infixExpression.removeAll()
+        postfixExpression.removeAll()
+    }
+    
     private func isNumber(_ value: String) -> Bool {
         Double(value) != nil
     }
@@ -53,7 +59,7 @@ extension Calculator {
     }
     
     private func isEqualSign(of element: String) -> Bool {
-        element == "="
+        element == .equalSign
     }
     
     private func handle(operator element: String) throws {

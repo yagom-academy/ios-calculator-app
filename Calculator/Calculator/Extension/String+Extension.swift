@@ -8,13 +8,10 @@
 import Foundation
 
 extension String {
-    static var zero: String {
-        "0"
-    }
-    static var empty: String {
-        ""
-    }
-    static var dot: String {
-        "."
-    }
+    static let zero = "0"
+    static let empty = ""
+    static let dot = "."
+    static let allClear = "AC"
+    static let clearEntry = "CE"
+    static let equalSign = "="
 }
