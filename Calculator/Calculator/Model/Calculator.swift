@@ -64,12 +64,9 @@ class Calculator {
     func format(for number: Double?) throws -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 5
+        numberFormatter.maximumSignificantDigits = 20
         
-        guard let result = number else {
-            throw CalculatorError.invalidInput
-        }
-        guard let formattedAnswer = numberFormatter.string(for: result) else {
+        guard let formattedAnswer = numberFormatter.string(for: number) else {
             throw CalculatorError.failedToFormat
         }
         return formattedAnswer

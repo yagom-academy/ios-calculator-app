@@ -4,6 +4,7 @@ class ViewController: UIViewController {
     private var currentValue: String?
     private var infixNotation = [String]()
     private let calculator = Calculator()
+    private var dotPressed = false
     
     @IBOutlet weak var historyStackView: UIStackView!
     @IBOutlet weak var currentValueLabel: UILabel!
@@ -13,6 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         reset()
     }
+    
     private func parse(from currentOperator: String) -> String {
         switch currentOperator {
         case "×":
@@ -54,7 +56,6 @@ class ViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [signLabel,numberLabel])
         stackView.spacing = 8
         historyStackView.addArrangedSubview(stackView)
-        
     }
     
     private func updateCurrentValueLabel() {
@@ -62,7 +63,19 @@ class ViewController: UIViewController {
             currentValueLabel.text = "0"
             return
         }
-        currentValueLabel.text = currentValue
+        guard let currentDoubleValue = Double(currentValue), currentDoubleValue != 0 else {
+            currentValueLabel.text = currentValue
+            return
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        let toNum = numberFormatter.number(from: currentValue)
+        currentValueLabel.text = numberFormatter.string(for: toNum)
+        if dotPressed {
+            currentValueLabel.text! += "."
+        }
+        dotPressed = false
     }
     
     @IBAction func acDidTap(_ sender: UIButton) {
@@ -86,7 +99,6 @@ class ViewController: UIViewController {
     @IBAction func operatorDidTap(_ sender: UIButton) {
         guard let input = sender.titleLabel?.text,
               let previousOperator = currentOperatorLabel.text else { return }
-        
         if let currentValue = currentValue {
             if previousOperator == "" {
                 infixNotation.append(currentValue)
@@ -122,6 +134,7 @@ class ViewController: UIViewController {
     @IBAction func dotDidTap(_ sender: UIButton) {
         guard let currentValue = currentValue, !currentValue.contains(".") else { return }
         self.currentValue = currentValue + "."
+        dotPressed = true
         updateCurrentValueLabel()
     }
     
