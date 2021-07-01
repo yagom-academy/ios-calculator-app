@@ -18,6 +18,18 @@ extension Calculator {
         infixExpression.append(input)
     }
     
+    func deriveEquationValue() -> Result<Double, CalculatorError> {
+        do {
+            try changeToPostfixExpression()
+            let result = try evaluatePostfixExpression()
+            return .success(result)
+        } catch let error as CalculatorError {
+            return .failure(error)
+        } catch {
+            return .failure(.unknown)
+        }
+    }
+    
     private func isNumber(_ value: String) -> Bool {
         Double(value) != nil
     }
@@ -121,17 +133,5 @@ extension Calculator {
             }
         }
         return try findOutTheLastValue()
-    }
-    
-    func deriveEquationValue() -> Result<Double, CalculatorError> {
-        do {
-            try changeToPostfixExpression()
-            let result = try evaluatePostfixExpression()
-            return .success(result)
-        } catch let error as CalculatorError {
-            return .failure(error)
-        } catch {
-            return .failure(.unknown)
-        }
     }
 }
