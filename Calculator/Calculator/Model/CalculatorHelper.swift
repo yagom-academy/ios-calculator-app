@@ -12,7 +12,7 @@ class CalculatorHelper {
 
     /// 초기 값 상태에서  0 또는 00 버튼이 눌린 경우 무시
     static func checkZeroButtonIsPressedInInitalValue(notation: String, buttonText: String) -> Bool {
-        return notation == "" && (buttonText == "0" || buttonText == "00")
+        return isInitialValue(notation: notation) && (buttonText == "0" || buttonText == "00")
     }
 
 // MARK: - touchUpOperatorButton Helper
@@ -41,9 +41,9 @@ class CalculatorHelper {
         return convertedNotation
     }
     
-    /// notation이 초기 값 상태일때, operator는 허용하지 않기
+    /// notation이 초기 값 상태인지 확인
     static func isInitialValue(notation: String) -> Bool {
-        return false
+       return notation == ""
     }
     
     /// +/-버튼이 눌렸는지 확인 후, 최종 결과를 알려주기
@@ -71,10 +71,18 @@ class CalculatorHelper {
     }
     
 // MARK: - updateLabel Helper
-
+    
     /// 3자리 콤마 적용하기
-    static func applyCommaOnThreeDigits(notation: String) -> String {
-        return notation
+    static func applyCommaOnThreeDigits(notation: String) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let doubleNotation = Double(notation)
+        
+        guard let convertedNotaion = numberFormatter.string(for: doubleNotation) else {
+            return nil
+        }
+        
+        return convertedNotaion
     }
     
     /// 실제 레이블에 그려질 notation 값
