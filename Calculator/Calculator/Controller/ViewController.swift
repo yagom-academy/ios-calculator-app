@@ -8,20 +8,36 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet weak var notationUILabel: UILabel!
+    
     var notations: [String] = []
     var inputNotation: String = ""
+    var minusFlag: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        notations = []
+        resetNotation()
+    }
+    
+    func resetNotation() {
+        self.inputNotation = ""
+        self.minusFlag = false
+    }
+    
+    func resetCalculator() {
+        self.notations = []
+        resetNotation()
     }
 
     func updateLabel() {
         print(inputNotation)
         print(notations)
+        guard let notationText = CalculatorManager.getTextToBeDrawnToUILabel(notation: inputNotation, isMinus: minusFlag) else {
+            return
+        }
+        notationUILabel.text = notationText
     }
-    //,  CalculatorManager.checkZeroButtonIsPressedInInitalValue(notation: inputNotation, buttonText: operandButtonNumber)
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let operandButtonNumber = sender.titleLabel?.text, !CalculatorManager.checkZeroButtonIsPressedInInitalValue(notation: inputNotation, buttonText: operandButtonNumber) else {
@@ -73,6 +89,11 @@ class ViewController: UIViewController {
                 print(errorCase)
             }
         }
+        updateLabel()
+    }
+    
+    @IBAction func touchUpACButton(_ sender: UIButton) {
+        resetCalculator()
         updateLabel()
     }
 }
