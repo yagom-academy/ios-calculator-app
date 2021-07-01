@@ -48,10 +48,10 @@ class CalculatorTests: XCTestCase {
 		XCTAssertEqual(result, "NaN")
 	}
 
-//	func test_10점1더하기12점5나누기125더하기8빼기100곱하기13점8등호를입력하면_마이너스1361점8이나온다() {
-//		let input = ["1", "0", ".", "1", "+", "1", "2", ".", "5", "/", "1", "2", "5", "+", "8", "-", "1", "0", "0", "*", "1", "3", ".", "8"]
-//		let result = sut.calculate(input: input)
-//		XCTAssertEqual(result, "-1361.8")
-//	}
+	func test_10점1더하기12점5나누기125더하기8빼기100곱하기13점8등호를입력하면_마이너스1361점8이나온다() {
+		let input = ["10.1", "+", "12.5", "/", "125", "+", "8", "-", "100", "*", "13.8"]
+		let result = sut.calculate(input: input)
+		XCTAssertEqual(result, "-1361.8")
+	}
 	
 }
