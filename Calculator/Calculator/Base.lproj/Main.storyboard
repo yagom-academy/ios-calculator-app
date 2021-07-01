@@ -118,7 +118,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="divideDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZcF-Vb-GWB"/>
+                                                    <action selector="operatorDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QPr-bq-DqP"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -167,7 +167,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="multiplyDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WnF-lW-WPx"/>
+                                                    <action selector="operatorDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EqP-VM-t6V"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -215,6 +215,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ajz-xL-fsf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -262,7 +265,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="plusDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="60x-r4-Pij"/>
+                                                    <action selector="operatorDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hrm-xb-VnJ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
