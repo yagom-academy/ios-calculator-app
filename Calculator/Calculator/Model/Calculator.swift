@@ -45,9 +45,13 @@ extension Calculator {
     mutating func removeAllInfix() {
         infixDeque.removeAll()
     }
-    mutating func pushNumberOrOperator(_ sign: Arithmetic) {
+    mutating func enqueBehindNumberOrOperator(_ sign: Arithmetic) {
         infixDeque.enqueueBehind(sign)
     }
+    mutating func dequeBehind() {
+        _ = infixDeque.dequeueBehind()
+    }
+    
     mutating func makeCalculation() throws -> Double {
         var postfix = transformInfixToPostfix()
         var operandStack = Stack<Arithmetic>()

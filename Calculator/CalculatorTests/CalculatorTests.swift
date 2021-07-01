@@ -16,15 +16,15 @@ class CalculatorTests: XCTestCase {
         for i in arr {
             switch i {
             case "+":
-                sut.pushNumberOrOperator(Operator(type: .addition))
+                sut.enqueBehindNumberOrOperator(Operator(type: .addition))
             case "-":
-                sut.pushNumberOrOperator(Operator(type: .subtraction))
+                sut.enqueBehindNumberOrOperator(Operator(type: .subtraction))
             case "*":
-                sut.pushNumberOrOperator(Operator(type: .mulitplication))
+                sut.enqueBehindNumberOrOperator(Operator(type: .mulitplication))
             case "/":
-                sut.pushNumberOrOperator(Operator(type: .division))
+                sut.enqueBehindNumberOrOperator(Operator(type: .division))
             default:
-                sut.pushNumberOrOperator(Operand(value: Double(i)!))
+                sut.enqueBehindNumberOrOperator(Operand(value: Double(i)!))
             }
         }
     }

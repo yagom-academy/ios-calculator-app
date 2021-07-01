@@ -132,14 +132,47 @@ print("--> changeSymbol()")
             return
         }
         if doubleNumber != 0 {
-            calculator.pushNumberOrOperator(Operand(value: doubleNumber))
-            calculator.pushNumberOrOperator(Operator(type: type))
+            calculator.enqueBehindNumberOrOperator(Operand(value: doubleNumber))
+            calculator.enqueBehindNumberOrOperator(Operator(type: type))
             updateUIDigitsLabel()
         }
         updateUIOperatorLabel(type.description)
 print(calculator.displayInfix())
     }
     func performCalculation() {
+        guard let currentText = userInputDigitsLabel.text else {
+            return
+        }
+        guard let doubleNumber = Double(currentText) else {
+            return
+        }
+        guard let currentOperator =  userInputOperatorLabel.text else {
+            return
+        }
+        calculator.dequeBehind()
+        
+        switch currentOperator {
+        case "+":
+            calculator.enqueBehindNumberOrOperator(Operator(type: .addition))
+        case "−":
+            calculator.enqueBehindNumberOrOperator(Operator(type: .subtraction))
+        case "×":
+            calculator.enqueBehindNumberOrOperator(Operator(type: .mulitplication))
+        case "÷":
+            calculator.enqueBehindNumberOrOperator(Operator(type: .division))
+        default:
+           break
+        }
+        calculator.enqueBehindNumberOrOperator(Operand(value: doubleNumber))
+        do {
+            let result = try calculator.makeCalculation()
+            updateUIDigitsLabel(String(result))
+            updateUIOperatorLabel()
+        } catch {
+            
+        }
+        
+        
     }
 }
 // MARK : --- Update UI Funtions
