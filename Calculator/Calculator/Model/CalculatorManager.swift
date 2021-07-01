@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculatorHelper {
+class CalculatorManager {
 // MARK: - touchUpOperandButton Helper
 
     /// 초기 값 상태에서  0 또는 00 버튼이 눌린 경우 무시
@@ -19,15 +19,15 @@ class CalculatorHelper {
     
     /// 소수 점 뒤 0제거
     static func removeZerosAfterDecimal(notation: String) -> String {
-        guard notation.contains(".") else {
+        guard hasAlreadyDot(notation: notation) else {
             return notation
         }
         
         var convertedNotation: String = ""
         let stackNotation: Stack<String> = Stack<String>()
 
-        for value in notation.components(separatedBy: "") {
-            stackNotation.push(object: value)
+        for value in notation {
+            stackNotation.push(object: String(value))
         }
 
         while let lastNumber = stackNotation.peek(), lastNumber == "0" {
@@ -69,14 +69,24 @@ class CalculatorHelper {
     
     /// .이 이미 눌려졌는지 확인하기
     static func hasAlreadyDot(notation: String) -> Bool {
-        return false
+        return notation.contains(".")
     }
     
 // MARK: - touchUpEqualButton Helper
     
-    /// 유효한 중위식인지 확인하기
-    static func isVaildInfix(notation: String, notations: [String]) -> Bool {
-        return false
+    /// 최종 중위식 결과를 반환
+    static func getFinalInfixResult(validNotation: String, notations: [String]) -> [String] {
+        var convertedNotation: [String] = notations
+        
+        if isInitialValue(notation: validNotation),
+           let lastNotation = notations.last,
+           let _ = Operator(rawValue: lastNotation) {
+            convertedNotation.append("0")
+            return convertedNotation
+        }
+
+        convertedNotation.append(validNotation)
+        return convertedNotation
     }
     
 // MARK: - updateLabel Helper
@@ -96,6 +106,11 @@ class CalculatorHelper {
     
     /// 실제 레이블에 그려질 notation 값
     static func getTextToBeDrawnToUILabel(notation: String, isMinus: Bool) -> String {
+        // 소수 점 뒤 0제거
+        // 3자리 콤마 적용하기
+        // +/-버튼이 눌렸는지 확인 후, 최종 결과를 알려주기
+        // TODO 숫자는 최대 20자리까지만 표현합니다
+        // TODO 0으로 나누기에 대해서는 결과값을 NaN으로 표기합니다
         return notation
     }
 }
