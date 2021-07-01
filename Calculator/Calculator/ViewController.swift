@@ -12,15 +12,48 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         reset()
     }
+    private func parse(from currentOperator: String) -> String {
+        switch currentOperator {
+        case "×":
+            return "*"
+        case "÷":
+            return "/"
+        case "−":
+            return "-"
+        default:
+            return currentOperator
+        }
+    }
     
-    private func reset() {
+    private func resetCurrentValueAndLabel() {
         currentValue = nil
         updateCurrentValueLabel()
+    }
+    
+    private func reset() {
+        resetCurrentValueAndLabel()
         currentOperatorLabel.text = ""
         infixNotation = [String]()
         for history in historyStackView.arrangedSubviews {
             history.removeFromSuperview()
         }
+    }
+    
+    private func pushToHistoryStackView(currentOperator: String, currentOperand: String) {
+        let signLabel = UILabel()
+        let numberLabel = UILabel()
+        
+        signLabel.text = currentOperator
+        signLabel.textColor = .white
+        signLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        numberLabel.text = currentOperand
+        numberLabel.textColor = .white
+        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        let stackView = UIStackView(arrangedSubviews: [signLabel,numberLabel])
+        stackView.spacing = 8
+        historyStackView.addArrangedSubview(stackView)
+        
     }
     
     private func updateCurrentValueLabel() {
@@ -36,8 +69,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func ceDidTap(_ sender: UIButton) {
-        currentValue = "0"
-        currentValueLabel.text = "0"
+        resetCurrentValueAndLabel()
     }
     
     @IBAction func switchSignDidTap(_ sender: UIButton) {
@@ -51,7 +83,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorDidTap(_ sender: UIButton) {
-        //×÷
+        guard let input = sender.titleLabel?.text,
+              let previousOperator = currentOperatorLabel.text else { return }
+        
+        if let currentValue = currentValue {
+            if previousOperator == "" {
+                infixNotation.append(currentValue)
+            } else {
+                infixNotation.append(parse(from: previousOperator))
+                infixNotation.append(currentValue)
+            }
+            pushToHistoryStackView(currentOperator: previousOperator, currentOperand: currentValue)
+        }
+        currentOperatorLabel.text = input
+        resetCurrentValueAndLabel()
     }
     
     @IBAction func equalDidTap(_ sender: UIButton) {
