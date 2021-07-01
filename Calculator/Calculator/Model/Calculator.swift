@@ -8,28 +8,28 @@
 import Foundation
 
 struct Calculator {
-    private var infixQueue = Queue<Arithmetic>()
+    private var infixQueue = Deque<Arithmetic>()
 //    private var currentType = .integer .double
     
-    private mutating func transformInfixToPostfix() -> Queue<Arithmetic> {
-        var postfixQueue = Queue<Arithmetic>()
+    private mutating func transformInfixToPostfix() -> Deque<Arithmetic> {
+        var postfixQueue = Deque<Arithmetic>()
         var operatorStack = Stack<Arithmetic>()
-        while let dequeueElement = infixQueue.dequeue() {
+        while let dequeueElement = infixQueue.dequeueInfront() {
             if let `operator` = dequeueElement as? Operator {
                 if let top = operatorStack.top as? Operator,
                       (top == `operator`) || (top > `operator`),
                       let pop = operatorStack.pop() {
-                    postfixQueue.enqueue(pop)
-                    infixQueue.enqueueInFront(`operator`)
+                    postfixQueue.enqueueBehind(pop)
+                    infixQueue.enqueueInfront(`operator`)
                     continue
                 }
                 operatorStack.push(`operator`)
             } else {
-                postfixQueue.enqueue(dequeueElement)
+                postfixQueue.enqueueBehind(dequeueElement)
             }
         }
         while let top = operatorStack.pop() {
-            postfixQueue.enqueue(top)
+            postfixQueue.enqueueBehind(top)
         }
         return postfixQueue
     }
@@ -40,13 +40,13 @@ extension Calculator {
         infixQueue.removeAll()
     }
     mutating func pushNumberOrOperator(_ sign: Arithmetic) {
-        infixQueue.enqueue(sign)
+        infixQueue.enqueueBehind(sign)
     }
     mutating func makeCalculation() throws -> Double {
         var postfix = transformInfixToPostfix()
         var operandStack = Stack<Arithmetic>()
         
-        while let dequeueElement = postfix.dequeue() {
+        while let dequeueElement = postfix.dequeueInfront() {
             if let `operator` = dequeueElement as? Operator {
                 guard let rhs = operandStack.pop(),
                       let lhs = operandStack.pop() else {

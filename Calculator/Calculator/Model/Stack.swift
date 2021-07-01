@@ -9,10 +9,7 @@ import Foundation
 
 struct Stack<T> {
     private var stack = Array<T>()
-    
-    var isEmpty: Bool {
-        return stack.isEmpty
-    }
+
     var top: T? {
         return stack.last
     }
