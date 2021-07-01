@@ -3,6 +3,7 @@ import UIKit
 class ViewController: UIViewController {
     private var currentValue: String?
     private var infixNotation = [String]()
+    private let calculator = Calculator()
     
     @IBOutlet weak var historyStackView: UIStackView!
     @IBOutlet weak var currentValueLabel: UILabel!
@@ -100,6 +101,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equalDidTap(_ sender: UIButton) {
+        guard !infixNotation.isEmpty,
+              let previousOperator = currentOperatorLabel.text else { return }
+        infixNotation.append(parse(from: previousOperator))
+        infixNotation.append(currentValue ?? "0")
+        calculator.replaceInfix(with: infixNotation)
+        do {
+            currentValue = String(try calculator.calculate()!)
+            currentValueLabel.text = try calculator.calculateAndFormat()
+        } catch {
+            print("에러발생")
+        }
+        infixNotation.removeAll()
+        currentOperatorLabel.text = ""
     }
     
     @IBAction func dotDidTap(_ sender: UIButton) {

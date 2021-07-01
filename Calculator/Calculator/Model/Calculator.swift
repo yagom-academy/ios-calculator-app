@@ -1,7 +1,6 @@
 import Foundation
 
 class Calculator {
-    private var currentInput = ""
     private var infixNotation = [String]()
 
     private func moveNonPrecedentOperator(
