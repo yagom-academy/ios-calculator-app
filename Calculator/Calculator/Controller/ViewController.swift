@@ -7,18 +7,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var mainStackView: UILabel!
-    @IBOutlet weak var btnDot: UIButton!
-    @IBOutlet weak var btnEquality: UIButton!
-    @IBOutlet weak var btnAddition: UIButton!
-    @IBOutlet weak var btnSubtraction: UIButton!
-    @IBOutlet weak var btnMultiplication: UIButton!
-    @IBOutlet weak var btnDivision: UIButton!
- 
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var userInputDigitsLabel: UILabel!
+    @IBOutlet weak var userInputOperatorLabel: UILabel!
     
-    @IBOutlet weak var btnAC: UIButton!
-    @IBOutlet weak var btnCE: UIButton!    
+    @IBOutlet weak var dotButton: UIButton!
+    @IBOutlet weak var equalButton: UIButton!
+    
+    @IBOutlet weak var allClearButton: UIButton!
+    @IBOutlet weak var clearEntryButton: UIButton!    
     
     var calculator = Calculator()
     
@@ -34,13 +30,22 @@ class ViewController: UIViewController {
             return
         }
         switch sender {
-        case btnDot:
+        case dotButton:
             addDot(titleLabelText)
         default:
             addNumber(titleLabelText)
         }
     }
-    
+    @IBAction func touchUpChangingUIButton(_ sender: UIButton) {
+            switch sender {
+            case allClearButton:
+                allClear()
+            case clearEntryButton:
+                clearEntry()
+            default:
+                changePostiveOrNegativeSymbol()
+            }
+        }
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let titleLabel = sender.titleLabel else {
             return
@@ -61,32 +66,23 @@ class ViewController: UIViewController {
            performCalculation()
         }
     }
-    
-    @IBAction func pushChangingUIButton(_ sender: UIButton) {
-        switch sender {
-        case btnAC:
-            mainStackView.text = "0"
-        case btnCE:
-            mainStackView.text = "0"
-        default:
-            mainStackView.text = "0"
-        }
-    }
 }
 
 extension ViewController {
     func addDot(_ dot: String) {
-        
     }
-    
     func addNumber(_ value: String) {
     }
     
-    func pushOperator(_ type: OperatorType) {
-  
+    func allClear() {
+    }
+    func clearEntry() {
+    }
+    func changePostiveOrNegativeSymbol() {
     }
     
+    func pushOperator(_ type: OperatorType) {
+    }
     func performCalculation() {
-        
     }
 }

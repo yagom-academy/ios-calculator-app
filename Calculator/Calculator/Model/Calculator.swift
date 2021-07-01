@@ -45,10 +45,14 @@ extension Calculator {
         
         while let dequeueElement = postfix.dequeue() {
             if let `operator` = dequeueElement as? Operator {
-                guard let rhs = operandStack.pop() else { throw StackError.underflow }
-                guard let castedRhs = rhs as? Operand else { throw ArithmeticError.downCastingError }
-                guard let lhs = operandStack.pop() else { throw StackError.underflow }
-                guard let castedLhs = lhs as? Operand else { throw ArithmeticError.downCastingError }
+                guard let rhs = operandStack.pop(),
+                      let lhs = operandStack.pop() else {
+                    throw StackError.underflow
+                }
+                guard let castedRhs = rhs as? Operand,
+                      let castedLhs = lhs as? Operand else {
+                    throw ArithmeticError.downCastingError
+                }
                 
                 if `operator`.type == .division, castedRhs.value == 0 {
                     throw CalculatorError.zeroDivisor
