@@ -48,13 +48,22 @@ class CalculatorHelper {
     
     /// +/-버튼이 눌렸는지 확인 후, 최종 결과를 알려주기
     static func applyNotationSign(notation: String, isMinus: Bool) -> String {
-        return notation
+        guard !isInitialValue(notation: notation) else {
+            return notation
+        }
+        
+        let notationSign = isMinus ? "-" : ""
+        return "\(notationSign)\(notation)"
     }
     
 // MARK: - touchUpDotButton Helper
     
     /// 초기 값 상태에서 .을 눌렀을때, 0.으로 만들기
     static func pasteZeroInFrontOfDot(notation: String) -> String {
+        if notation == "." {
+            return "0."
+        }
+        
         return notation
     }
     

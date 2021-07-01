@@ -23,3 +23,4 @@ class CalculatorHelperTests: XCTestCase {
         XCTAssertEqual(expectedResult, result)
     }
 }
+
