@@ -1,7 +1,6 @@
 import Foundation
 
 class Calculator {
-    private var currentInput = ""
     private var infixNotation = [String]()
 
     private func moveNonPrecedentOperator(
@@ -41,7 +40,7 @@ class Calculator {
         return postfix
     }
 
-    private func calculate() throws -> Double? {
+    func calculate() throws -> Double? {
         let postfix = try convertToPostfix()
         var numberStack = Stack<Double>()
         
