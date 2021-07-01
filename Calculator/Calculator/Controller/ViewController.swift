@@ -18,9 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     @IBOutlet weak var btnAC: UIButton!
-    @IBOutlet weak var btnCE: UIButton!
-    @IBOutlet weak var btnSign: UIButton!
-    
+    @IBOutlet weak var btnCE: UIButton!    
     
     var calculator = Calculator()
     
@@ -28,32 +26,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func pushButton(_ sender: UIButton) {
+    @IBAction func touchUpDigitButton(_ sender: UIButton) {
         guard let titleLabel = sender.titleLabel else {
             return
         }
-        guard let text = titleLabel.text else {
-            return
-        }
-        guard let currentText = mainStackView.text else {
+        guard let titleLabelText = titleLabel.text else {
             return
         }
         switch sender {
         case btnDot:
-            addDot(btnDot)
-        case btnSign:
-            if currentText == "0" {
-                mainStackView.text = "0"
-            } else {
-                mainStackView.text = "-" + currentText
-            }
-            
+            addDot(titleLabelText)
         default:
-            addNumber(text)
-            mainStackView.text = currentText + text
-        // addNumber() - 숫자를 레이블에 추가
-//
-//            calculator.pushNumberOrOperator(Operand(value: Double(text)!))
+            addNumber(titleLabelText)
         }
     }
     
@@ -97,43 +81,14 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
-    func addDot(_ sender: UIButton) {
-        guard let titleLabel = sender.titleLabel else {
-            return
-        }
-        guard let text = titleLabel.text else {
-            return
-        }
-        guard let currentText = mainStackView.text else {
-            return
-        }
-        if !currentText.contains(text){
-            mainStackView.text = currentText + text
-        }
+    func addDot(_ dot: String) {
+        
     }
     
     func addNumber(_ value: String) {
-        //if mainStackView.is
     }
     
     func pushOperator(_ value: String) {
-        operatorLabel.text = value
-        switch value {
-        case "+":
-            calculator.pushNumberOrOperator(Operator(type: .addition))
-        case "−":
-            calculator.pushNumberOrOperator(Operator(type: .subtraction))
-        case "×":
-            calculator.pushNumberOrOperator(Operator(type: .mulitplication))
-        case "÷":
-            calculator.pushNumberOrOperator(Operator(type: .division))
-        default:
-            do {
-                let result = try calculator.makeCalculation()
-                mainStackView.text = String(result)
-            } catch {
-                
-            }
-        }
+  
     }
 }
