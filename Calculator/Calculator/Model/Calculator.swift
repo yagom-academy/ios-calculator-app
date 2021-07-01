@@ -14,6 +14,7 @@ extension Double {
     func fractionDigits(min: Int = 0, max: Int = 20) -> String {
         Formatter.number.minimumFractionDigits = min
         Formatter.number.maximumFractionDigits = max
+        Formatter.number.numberStyle = .decimal
         return Formatter.number.string(for: self) ?? "NaN"
     }
 }
