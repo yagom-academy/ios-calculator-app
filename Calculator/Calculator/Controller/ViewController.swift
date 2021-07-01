@@ -41,30 +41,24 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func pushOperatorButton(_ sender: UIButton) {
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let titleLabel = sender.titleLabel else {
             return
         }
-        guard let text = titleLabel.text else {
+        guard let titleLabelText = titleLabel.text else {
             return
         }
-        let value = operatorLabel.text
-        switch value {
+        switch titleLabelText {
         case "+":
-            calculator.pushNumberOrOperator(Operator(type: .addition))
+            pushOperator(.addition)
         case "−":
-            calculator.pushNumberOrOperator(Operator(type: .subtraction))
+            pushOperator(.subtraction)
         case "×":
-            calculator.pushNumberOrOperator(Operator(type: .mulitplication))
+            pushOperator(.mulitplication)
         case "÷":
-            calculator.pushNumberOrOperator(Operator(type: .division))
+            pushOperator(.division)
         default:
-            do {
-                let result = try calculator.makeCalculation()
-                mainStackView.text = String(Double(result))
-            } catch {
-                
-            }
+           performCalculation()
         }
     }
     
@@ -88,7 +82,11 @@ extension ViewController {
     func addNumber(_ value: String) {
     }
     
-    func pushOperator(_ value: String) {
+    func pushOperator(_ type: OperatorType) {
   
+    }
+    
+    func performCalculation() {
+        
     }
 }
