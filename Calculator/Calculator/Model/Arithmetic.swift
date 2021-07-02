@@ -10,20 +10,29 @@ import Foundation
 protocol Arithmetic {
 
 }
-class Operand: Arithmetic {
+struct Operand: Arithmetic {
     let value: Double
-    
-    init(_ value: Double) {
-        self.value = value
-    }
 }
-enum OperatorType {
+enum OperatorType: CustomStringConvertible {
     case addition
     case subtraction
     case mulitplication
     case division
+    
+    var description: String {
+        switch self {
+        case .addition:
+            return "+"
+        case .subtraction:
+            return "−"
+        case .mulitplication:
+            return "×"
+        case .division:
+            return "÷"
+        }
+    }
 }
-class Operator: Arithmetic, Equatable, Comparable {
+struct Operator: Arithmetic, Equatable, Comparable {
     static let higher: Array<OperatorType> = [.mulitplication, .division]
     static let lower: Array<OperatorType> = [.addition, .subtraction]
     static func == (lhs: Operator, rhs: Operator) -> Bool {
@@ -37,10 +46,7 @@ class Operator: Arithmetic, Equatable, Comparable {
     }
     
     let type: OperatorType
-    
-    init(_ type: OperatorType) {
-        self.type = type
-    }
+
     func computeNumber(_ lhs: Double, _ rhs: Double) -> Double {
         switch type {
         case .addition:

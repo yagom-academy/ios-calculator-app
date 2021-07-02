@@ -9,10 +9,7 @@ import Foundation
 
 struct Stack<T> {
     private var stack = Array<T>()
-    
-    var isEmpty: Bool {
-        return stack.isEmpty
-    }
+
     var top: T? {
         return stack.last
     }
@@ -21,6 +18,6 @@ struct Stack<T> {
         stack.append(value)
     }
     mutating func pop() -> T? {
-        return stack.isEmpty ? nil : stack.removeLast()
+        return stack.popLast()
     }
 }
