@@ -15,10 +15,6 @@ struct Stack<T> {
         return stack.isEmpty
     }
     
-    var count: Int {
-        return stack.count
-    }
-    
     mutating func push(_ element: T) {
         stack.append(element)
     }

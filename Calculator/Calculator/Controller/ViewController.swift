@@ -6,7 +6,9 @@
 
 import UIKit
 
+// MARK: - Enumerations 타입 정의
 enum Numbers: String {
+    
     case zero = "0"
     case one = "1"
     case two = "2"
@@ -42,7 +44,6 @@ class ViewController: UIViewController {
     
     //MARK: - IBAction
     @IBAction func touchUPInsideNumberButton(_ sender: UIButton) {
-        
         switch sender.tag {
         case 0:
             if calculator.currentNumbers != ["0"] {
@@ -92,7 +93,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpInsideCalculateButton(_ sender: UIButton) {
         calculator.putInto(calculator.userInput)
         let _ = try? calculator.converToPostfixNotation()
-        let result = try? calculator.calculatePostfix()
+        guard let result = try? calculator.calculatePostfix() else { return }
         print(result)
     }
     
@@ -107,7 +108,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpInsideToggleNegativeButton(_ sender: UIButton) {
-        
     }
 }
 

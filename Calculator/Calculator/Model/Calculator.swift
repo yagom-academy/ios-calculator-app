@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Enumerations 타입 정의
 enum Operator: String, CaseIterable {
     
     case plus = "+"
@@ -26,7 +27,6 @@ enum Operator: String, CaseIterable {
     static func < (lhs: Operator, rhs: Operator) -> Bool {
         lhs.priority < rhs.priority
     }
-    
 }
 
 enum OperatorPriority: Int {
@@ -41,17 +41,8 @@ enum CalculatorError: Error {
     case dividedByZero
 }
 
-extension String {
-    
-    func toDouble() -> Bool {
-        if let _ = Double(self) {
-            return true
-        }
-        return false
-    }
-}
-
-class Calculator {
+// MARK: - Calculator 클래스 정의
+class Calculator: Calculatable {
     
     private var infixNotation = [String]()
     private var postfixNotation = [String]()
@@ -65,11 +56,13 @@ class Calculator {
         self.currentNumbers = initializedNumber
     }
     
+    // currentNumbers에 들어있는 배열을 합쳐 하나의 숫자로 만든다.
     func concatNumbers() -> String {
         let covertedNumber = currentNumbers.joined()
         return covertedNumber
     }
     
+    // AC 버튼을 눌렀을 때 데이터들을 지워준다.
     func allClear() -> Int {
         infixNotation.removeAll()
         postfixNotation.removeAll()
@@ -78,16 +71,19 @@ class Calculator {
         return result
     }
     
+    // CE 버튼을 눌렀을 때 currentNumbers의 데이터를 지워준다.
     func clearEntry() -> Int {
         userInput.removeAll()
         currentNumbers = initializedNumber
         return 0
     }
     
+    // 중위연산자 배열에 값을 추가한다.
     func putInto(_ value: [String]) {
         infixNotation.append(contentsOf: value)
     }
     
+    // 중위연산자 배열을 후위연산자 배열로 반환해준다.
     func converToPostfixNotation() throws -> [String] {
         itemsLoop: for item in infixNotation {
             if item.toDouble() {
@@ -119,11 +115,13 @@ class Calculator {
         return postfixNotation
     }
     
+    // String 타입의 파라미터가 Operator 타입인지 확인하여 Operator로 반환한다.
     func checkOperator(_ input: String) throws -> Operator {
         guard let acquiredOperator = Operator(rawValue: input) else { throw CalculatorError.unknown }
         return acquiredOperator
     }
     
+    // 후위연산자 배열을 계산하여 결과값을 Double로 반환한다.
     func calculatePostfix() throws -> Double {
         for item in postfixNotation {
             if item.toDouble() {
@@ -156,6 +154,7 @@ class Calculator {
         return result
     }
     
+    // 연산자 버튼을 눌렀을 때 userInput 배열에 연산자를 추가한다.
     func inputOperator(_ currentOperator: String) {
         var isAvailableAddingOperator = [Bool]()
         for item in Operator.allCases {
@@ -179,7 +178,18 @@ class Calculator {
     }
 }
 
-extension Calculator: Calculatable {
+// MARK: - Extension 정의
+extension String {
+    
+    func toDouble() -> Bool {
+        if let _ = Double(self) {
+            return true
+        }
+        return false
+    }
+}
+
+extension Calculatable {
     
     func add(_ firstOperand: Double, _ secondOperand: Double) -> Double {
         return firstOperand + secondOperand
@@ -202,6 +212,7 @@ extension Calculator: Calculatable {
 }
 
 extension Calculator {
+    
     func formattingNumber(value: Double) -> Double {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 5
@@ -213,18 +224,12 @@ extension Calculator {
     }
 }
 
-// Todo +- 변환 함수
-//extension Calculator {
-//    func togglePositiveNegative() {
-//        if numbers =
-//    }
-//}
-
 // MARK: - Calculator Unit Test 함수
 extension Calculator {
+    
     func calculate(with str: [String]) -> Result<Double, CalculatorError> {
         putInto(str)
-        try? converToPostfixNotation()
+        let _ = try? converToPostfixNotation()
         guard let result = try? calculatePostfix() else {
             return .failure(.dividedByZero)
         }
