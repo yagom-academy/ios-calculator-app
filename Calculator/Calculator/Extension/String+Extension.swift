@@ -18,4 +18,5 @@ extension String {
     static let minusSign = "−"
     static let multiplicationSign = "×"
     static let divisionSign = "÷"
+    static let notANumber = "NaN"
 }

@@ -21,6 +21,8 @@ class ViewController: UIViewController {
         }
     }
     let calculator = Calculator()
+    var isInNaNState = false
+    let maximumInputLength = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,9 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction func tapNumberButton(_ sender: UIButton) {
-        guard let number = sender.currentTitle else {
+        guard !isInNaNState,
+              let number = sender.currentTitle,
+              currentNumber.count <= maximumInputLength else {
             return
         }
         if isCurrentNumberZero() {
@@ -42,7 +46,8 @@ extension ViewController {
     }
     
     @IBAction func tapHundredButton(_ sender: UIButton) {
-        guard let doubleZero = sender.currentTitle else {
+        guard !isInNaNState,
+              let doubleZero = sender.currentTitle else {
             return
         }
         if !isCurrentNumberZero() {
@@ -51,13 +56,14 @@ extension ViewController {
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
-        if !isCurrentNumberFloatingPoint() {
+        if !isInNaNState && !isCurrentNumberFloatingPoint() {
             currentNumber.append(.dot)
         }
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard let operatorSymbol = sender.currentTitle else {
+        guard !isInNaNState,
+              let operatorSymbol = sender.currentTitle else {
             return
         }
         if !isCurrentNumberZero() {
@@ -69,17 +75,18 @@ extension ViewController {
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
-        guard calculator.isAbleToCalculate else {
+        guard !isInNaNState,
+              calculator.isAbleToCalculate else {
             return
         }
         calculator.putIntoInfixExpression(of: currentOperator)
         calculator.putIntoInfixExpression(of: currentNumber)
-        let result = calculator.deriveEquationValue()
-        switch result {
-        case .success(let result):
-            currentNumber = String(result)  //NumberFormatter
+        let calculationResult = calculator.deriveEquationValue()
+        switch calculationResult {
+        case .success(let numberResult):
+            process(numberResult)
         case .failure(let error):
-            currentNumber = error.localizedDescription  //NaN은 띄워지는게 맞으나, 
+            process(error)
         }
         resetOperatorInputLabel()
         calculator.clearAll()
@@ -99,10 +106,12 @@ extension ViewController {
         default:
             break
         }
+        isInNaNState = false
     }
     
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
-        guard currentNumber != .zero else {
+        guard !isInNaNState,
+              currentNumber != .zero else {
             return
         }
         if !isCurrentNumberNegative() {
@@ -132,5 +141,45 @@ extension ViewController {
     
     private func isCurrentNumberNegative() -> Bool {
         currentNumber.hasPrefix(.hyphenMinus)
+    }
+}
+
+extension ViewController {
+    private func process(_ numberResult: Double) {
+        currentNumber = String(numberResult)
+        operandInputLabel.text = expressInThousands(of: numberResult)
+    }
+    
+    private func process(_ error: CalculatorError) {
+        let message = error.localizedDescription
+        switch error {
+        case .divideByZero:
+            currentNumber = message
+            isInNaNState = true
+        default:
+            presentAlert(with: message)
+            resetOperandInputLabel()
+        }
+    }
+    
+    private func expressInThousands(of number: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = maximumInputLength
+        numberFormatter.maximumIntegerDigits = maximumInputLength
+        numberFormatter.numberStyle = .decimal
+        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) else {
+            return String(number)
+        }
+        return formattedNumber
+    }
+    
+    private func presentAlert(with message: String) {
+        let title = "오류 발생"
+        let confirm = "확인"
+        let errorAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let confirmAlertAction = UIAlertAction(title: confirm, style: .default, handler: nil)
+        errorAlertController.addAction(confirmAlertAction)
+        self.present(errorAlertController, animated: true, completion: nil)
     }
 }
