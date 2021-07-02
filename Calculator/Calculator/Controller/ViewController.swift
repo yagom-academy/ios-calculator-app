@@ -24,24 +24,27 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        numberFormatter.minimumFractionDigits = 0
-        
+        numberFormatter.minimumFractionDigits = 0
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
     }
     
-    @IBAction func touchUpDigitButton(_ sender: UIButton) {
+    @IBAction func touchUpDigitButton(_ sender: UIButton)  {
         guard let titleLabel = sender.titleLabel else {
             return
         }
         guard let titleLabelText = titleLabel.text else {
             return
         }
-        switch sender {
-        case dotButton:
-            addDot(titleLabelText)
-        default:
-            addNumber(titleLabelText)
+        do {
+            switch sender {
+            case dotButton:
+                try addDot(titleLabelText)
+            default:
+                try addNumber(titleLabelText)
+            }
+        } catch {
+            print("unExpectedError : \(error)")
         }
     }
     @IBAction func touchUpChangingUIButton(_ sender: UIButton) {
@@ -51,7 +54,11 @@ class ViewController: UIViewController {
             case clearEntryButton:
                 clearEntry()
             default:
-                changePostiveOrNegativeSymbol()
+                do {
+                    try changePostiveOrNegativeSymbol()
+                } catch {
+                    print("unExpectedError : \(error)")
+                }
             }
         }
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -61,34 +68,38 @@ class ViewController: UIViewController {
         guard let titleLabelText = titleLabel.text else {
             return
         }
-        switch titleLabelText {
-        case "+":
-            pushOperator(.addition)
-        case "−":
-            pushOperator(.subtraction)
-        case "×":
-            pushOperator(.mulitplication)
-        case "÷":
-            pushOperator(.division)
-        default:
-           performCalculation()
+        do {
+            switch titleLabelText {
+            case "+":
+                try pushOperator(.addition)
+            case "−":
+                try pushOperator(.subtraction)
+            case "×":
+                try pushOperator(.mulitplication)
+            case "÷":
+                try pushOperator(.division)
+            default:
+                try performCalculation()
+            }
+        } catch {
+            print("unExpectedError : \(error)")
         }
     }
 }
 // MARK : --- Perform functions
 extension ViewController {
-    func addDot(_ dot: String) {
+    func addDot(_ dot: String) throws {
         guard let currentText = userInputDigitsLabel.text else {
-            return
+            throw CalculatorViewControllerError.emptyUIDigitsLabel
         }
         guard !currentText.contains(dot) else {
-            return
+            throw CalculatorViewControllerError.alreadyHaveADot
         }
         updateUIDigitsLabel(currentText + dot)
     }
-    func addNumber(_ digit: String) {
+    func addNumber(_ digit: String) throws {
         guard let currentText = userInputDigitsLabel.text else {
-            return
+            throw CalculatorViewControllerError.emptyUIDigitsLabel
         }
         let text = (digit == "00" ? "0" : digit)
         if currentText == "0" || currentText == "NaN" {
@@ -107,17 +118,17 @@ extension ViewController {
     func clearEntry() {
         updateUIDigitsLabel()
     }
-    func changePostiveOrNegativeSymbol() {
+    func changePostiveOrNegativeSymbol() throws {
         guard var currentText = userInputDigitsLabel.text else {
-            return
+            throw CalculatorViewControllerError.emptyUIDigitsLabel
         }
         guard let firstItem = currentText.first,
               firstItem != "N" else {
-            return
+            throw CalculatorViewControllerError.couldNotChangeSymbolCauseNaN
         }
         guard let doubleNumber = Double(currentText),
               doubleNumber != 0 else {
-            return
+            throw CalculatorViewControllerError.couldNotChangeSymbolCauseZero
         }
 
         if firstItem == "-" {
@@ -128,66 +139,67 @@ extension ViewController {
         }
     }
     
-    func pushOperator(_ type: OperatorType) {
+    func pushOperator(_ type: OperatorType) throws {
         guard let currentText = userInputDigitsLabel.text else {
-            return
+            throw CalculatorViewControllerError.emptyUIDigitsLabel
         }
         guard let doubleNumber = Double(currentText) else {
-            return
+            throw CalculatorViewControllerError.couldNotConvertToDouble
         }
+        
         if userInputOperatorLabel.text == "" {
             removeSubview()
         }
         
-        if let lastOperator = calculator.infixLastOperatorItem() {
+        if let lastOperator = calculator.getLastOperatorItemFromInfix() {
             addSubview(operand: currentText, operator: lastOperator.type.description)
         } else {
             addSubview(operand: currentText, operator: "")
         }
-        
-        if doubleNumber != 0 {
-            calculator.enqueBehindNumberOrOperator(Operand(value: doubleNumber))
-            calculator.enqueBehindNumberOrOperator(Operator(type: type))
-            updateUIDigitsLabel()
-        }
+        calculator.enqueueBehindNumberOrOperator(Operand(value: doubleNumber))
+        calculator.enqueueBehindNumberOrOperator(Operator(type: type))
+        updateUIDigitsLabel()
         updateUIOperatorLabel(type.description)
     }
-    func performCalculation() {
+    func performCalculation() throws {
         guard let currentText = userInputDigitsLabel.text else {
-            return
+            throw CalculatorViewControllerError.emptyUIDigitsLabel
         }
         guard let doubleNumber = Double(currentText) else {
-            return
+            throw CalculatorViewControllerError.couldNotConvertToDouble
         }
         guard let currentOperator = userInputOperatorLabel.text,
               currentOperator != "" else {
-            return
+            throw CalculatorViewControllerError.alreadyPerformedCalculation
         }
         
-        calculator.dequeBehind()
+        calculator.dequeueBehind()
+        
         switch currentOperator {
         case "+":
-            calculator.enqueBehindNumberOrOperator(Operator(type: .addition))
+            calculator.enqueueBehindNumberOrOperator(Operator(type: .addition))
         case "−":
-            calculator.enqueBehindNumberOrOperator(Operator(type: .subtraction))
+            calculator.enqueueBehindNumberOrOperator(Operator(type: .subtraction))
         case "×":
-            calculator.enqueBehindNumberOrOperator(Operator(type: .mulitplication))
+            calculator.enqueueBehindNumberOrOperator(Operator(type: .mulitplication))
         case "÷":
-            calculator.enqueBehindNumberOrOperator(Operator(type: .division))
+            calculator.enqueueBehindNumberOrOperator(Operator(type: .division))
         default:
            break
         }
-        calculator.enqueBehindNumberOrOperator(Operand(value: doubleNumber))
+        calculator.enqueueBehindNumberOrOperator(Operand(value: doubleNumber))
         do {
             let result = try calculator.makeCalculation()
-            guard let convertedResult = numberFormatter.string(from: NSNumber(value: result)) else {
-                return
+            let resultNSNumber = NSNumber(value: result)
+            guard let convertedResult = numberFormatter.string(from: resultNSNumber) else {
+                throw CalculatorViewControllerError.couldNotConvertToStringFromNumberFormatter
             }
             updateUIDigitsLabel(convertedResult)
         } catch CalculatorError.zeroDivisor {
             updateUIDigitsLabel("NaN")
+            print("expectedError : \(CalculatorError.zeroDivisor)")
         } catch {
-            
+            print("unExpectedError : \(error)")
         }
         updateUIOperatorLabel()
         addSubview(operand: currentText, operator: currentOperator)
@@ -196,18 +208,23 @@ extension ViewController {
 // MARK : --- Update UI Funtions
 extension ViewController {
     func addSubview(operand: String, operator: String) {
+        var checkHavingDotOperand = operand
+        if let last = checkHavingDotOperand.last,
+           last == "." {
+            checkHavingDotOperand.removeLast()
+        }
         let subview = UIStackView()
-        let operatorLabel = UILabel()
         let operandLabel = UILabel()
+        let operatorLabel = UILabel()
         
-        operatorLabel.text = operand
-        operatorLabel.textColor = .white
         operandLabel.text = `operator`
         operandLabel.textColor = .white
+        operatorLabel.text = checkHavingDotOperand
+        operatorLabel.textColor = .white
         
         subview.addArrangedSubview(operandLabel)
         subview.addArrangedSubview(operatorLabel)
-        
+        subview.spacing = 4.0
         scrollStackView.addArrangedSubview(subview)
     }
     func removeSubview() {

@@ -18,3 +18,13 @@ enum StackError: Error {
 enum CalculatorError: Error {
     case zeroDivisor
 }
+
+enum CalculatorViewControllerError: Error {    
+    case emptyUIDigitsLabel
+    case alreadyHaveADot
+    case couldNotConvertToDouble
+    case couldNotChangeSymbolCauseNaN
+    case couldNotChangeSymbolCauseZero
+    case alreadyPerformedCalculation
+    case couldNotConvertToStringFromNumberFormatter
+}
