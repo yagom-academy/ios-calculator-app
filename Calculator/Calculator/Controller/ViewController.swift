@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var notationUILabel: UILabel!
+    @IBOutlet weak var notaionStackView: UIStackView!
     
     var notations: [String] = []
     var inputNotation: String = ""
@@ -36,6 +37,20 @@ class ViewController: UIViewController {
             return
         }
         notationUILabel.text = notationText
+    }
+    
+    func addNotaionStackViewItem(operatorText: String, operandText: String) {
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        operatorLabel.text = operatorText
+        operandLabel.text = operandText
+        operatorLabel.textColor = .white
+        operandLabel.textColor = .white
+        
+        let arrangedStackViewLabels: [UIView] = [operatorLabel, operandLabel]
+        let stackViewItem: UIStackView = UIStackView(arrangedSubviews: arrangedStackViewLabels)
+        notaionStackView.addArrangedSubview(stackViewItem)
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
@@ -72,6 +87,9 @@ class ViewController: UIViewController {
         } else {
             let signedNotion = CalculatorManager.applyNotationSign(notation: inputNotation, isMinus: minusFlag)
             let removedZeroNotion = CalculatorManager.removeZerosAfterDecimal(notation: signedNotion)
+            
+            addNotaionStackViewItem(operatorText: notations.last ?? "", operandText: removedZeroNotion)
+            
             notations.append(removedZeroNotion)
             notations.append(operatorCase)
         }
@@ -101,6 +119,7 @@ class ViewController: UIViewController {
         let result = calculator.runCalculator(on: infix)
         
         if case .success(let resultValue) = result {
+            addNotaionStackViewItem(operatorText: notations.last ?? "", operandText: inputNotation)
             inputNotation = String(resultValue)
         } else if case .failure(let errorCase) = result {
             switch errorCase {

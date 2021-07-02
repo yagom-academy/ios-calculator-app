@@ -360,6 +360,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="notaionStackView" destination="XRe-QE-UJf" id="Ees-wm-WtO"/>
                         <outlet property="notationUILabel" destination="Lwz-OF-XHD" id="UXS-mX-sGL"/>
                     </connections>
                 </viewController>
