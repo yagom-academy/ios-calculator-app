@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String, OperatorConvertible {
+enum Operator: String, OperatorConvertible, CustomStringConvertible {
     case add = "+"
     case subtract = "-"
     case multiply = "*"
@@ -23,6 +23,10 @@ enum Operator: String, OperatorConvertible {
         case .multiply, .divide:
             return Operator.highPriority
         }
+    }
+    
+    var description: String {
+        self.rawValue
     }
     
     func isHigherPriority(than anotherOperator: Operator) -> Bool {

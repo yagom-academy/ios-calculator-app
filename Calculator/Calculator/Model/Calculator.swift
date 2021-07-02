@@ -7,16 +7,20 @@
 
 import Foundation
 
-class Calculator: NSObject, Calculable {
+class Calculator: Calculable {
     private var equationStack = Stack<String>()
-    @objc dynamic private(set) var infixExpression = Array<String>()
+    private var infixExpression = Array<String>()
     private var postfixExpression = Array<String>()
 }
 
 extension Calculator {
+    var isAbleToCalculate: Bool {
+        infixExpression.count > 0
+    }
+    
     func putIntoInfixExpression(of input: String) {
         if !input.isEmpty {
-            infixExpression.append(input)
+            infixExpression.append(process(input))
         }
     }
     
@@ -36,6 +40,19 @@ extension Calculator {
         equationStack.reset()
         infixExpression.removeAll()
         postfixExpression.removeAll()
+    }
+    
+    private func process(_ inputValue: String) -> String {
+        switch inputValue {
+        case .minusSign:
+            return String(describing: Operator.subtract)
+        case .multiplicationSign:
+            return String(describing: Operator.multiply)
+        case .divisionSign:
+            return String(describing: Operator.divide)
+        default:
+            return inputValue
+        }
     }
     
     private func isNumber(_ value: String) -> Bool {

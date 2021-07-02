@@ -21,36 +21,11 @@ class ViewController: UIViewController {
         }
     }
     let calculator = Calculator()
-    var observerContainer: NSKeyValueObservation?
-    let operatorButtonColor = #colorLiteral(red: 0.8941176471, green: 0.5725490196, blue: 0.231372549, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetOperandInputLabel()
         resetOperatorInputLabel()
-        addObserver()
-    }
-    
-    deinit {
-        removeObserver()
-    }
-}
-
-extension ViewController {
-    private func addObserver() {
-        observerContainer = calculator.observe(\.infixExpression,
-                                               options: [.new, .initial]) { [weak self] _, change in
-            guard let infixExpresionLength = change.newValue?.count else {
-                return
-            }
-            let needToEnable = infixExpresionLength > 0
-            self?.equalSignButton.isEnabled = needToEnable
-            self?.equalSignButton.backgroundColor = needToEnable ? self?.operatorButtonColor : .gray
-        }
-    }
-    
-    private func removeObserver() {
-        observerContainer = nil
     }
 }
 
@@ -94,7 +69,20 @@ extension ViewController {
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
-        
+        guard calculator.isAbleToCalculate else {
+            return
+        }
+        calculator.putIntoInfixExpression(of: currentOperator)
+        calculator.putIntoInfixExpression(of: currentNumber)
+        let result = calculator.deriveEquationValue()
+        switch result {
+        case .success(let result):
+            currentNumber = String(result)  //NumberFormatter
+        case .failure(let error):
+            currentNumber = error.localizedDescription  //NaN은 띄워지는게 맞으나, 
+        }
+        resetOperatorInputLabel()
+        calculator.clearAll()
     }
     
     @IBAction func tapClearButton(_ sender: UIButton) {
@@ -118,7 +106,7 @@ extension ViewController {
             return
         }
         if !isCurrentNumberNegative() {
-            currentNumber = .negativeSign + currentNumber
+            currentNumber = .hyphenMinus + currentNumber
         } else {
             currentNumber.removeFirst()
         }
@@ -143,6 +131,6 @@ extension ViewController {
     }
     
     private func isCurrentNumberNegative() -> Bool {
-        currentNumber.hasPrefix(.negativeSign)
+        currentNumber.hasPrefix(.hyphenMinus)
     }
 }
