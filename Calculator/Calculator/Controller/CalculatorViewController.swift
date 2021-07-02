@@ -16,9 +16,18 @@ class CalculatorViewController: UIViewController {
         isNumberInputable = false
     }
     
-    enum NumberButton: CustomStringConvertible {
-        case one, two, three, four, five, six, seven,
-             eight, nine, zero, doubleZero
+    enum NumberButton: String, CustomStringConvertible {
+        case one = "1"
+        case two = "2"
+        case three = "3"
+        case four = "4"
+        case five = "5"
+        case six = "6"
+        case seven = "7"
+        case eight = "8"
+        case nine = "9"
+        case zero = "0"
+        case doubleZero = "00"
         
         var description: String {
             switch self {
@@ -53,40 +62,20 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func clickNumberOneButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .one)
+    @IBAction func clickNumberButton(_ sender: UIButton) {
+        guard let _number = sender.titleLabel?.text, let number = NumberButton.init(rawValue: _number) else { return }
+        addNumberToNumberInputLabel(number: number)
     }
-    @IBAction func clickNumberTwoButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .two)
+    
+    @IBAction func clickArithmeticButton(_ sender: UIButton) {
+        guard let operation = sender.titleLabel?.text else { return }
+        stateON()
+        if isInputValid() {
+            try? addEntry()
+        }
+        operatorInputLabel.text = operation
     }
-    @IBAction func clickNumberThreeButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .three)
-    }
-    @IBAction func clickNumberFourButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .four)
-    }
-    @IBAction func clickNumberFiveButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .five)
-        
-    }
-    @IBAction func clickNumberSixButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .six)
-    }
-    @IBAction func clickNumberSevenButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .seven)
-    }
-    @IBAction func clickNumberEightButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .eight)
-    }
-    @IBAction func clickNumberNineButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .nine)
-    }
-    @IBAction func clickNumberZeroButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .zero)
-    }
-    @IBAction func clickNumberDoubleZeroButton(_ sender: UIButton) {
-        addNumberToNumberInputLabel(number: .doubleZero)
-    }
+    
     @IBAction func clickDotButton(_ sender: UIButton) {
         guard isNumberInputable else { return }
         guard let label = numberInputLabel.text else { return }
@@ -98,35 +87,7 @@ class CalculatorViewController: UIViewController {
             numberInputLabel.text? += "."
         }
     }
-    
-    @IBAction func clickPlusOperatorButton(_ sender: UIButton) {
-        stateON()
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "+"
-    }
-    @IBAction func clickMinusOperatorButton(_ sender: UIButton) {
-        stateON()
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "-"
-    }
-    @IBAction func clickMultiplyOperatorButton(_ sender: UIButton) {
-        stateON()
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "×"
-    }
-    @IBAction func clickDivideOperatorButton(_ sender: UIButton) {
-        stateON()
-        if isInputValid() {
-            try? addEntry()
-        }
-        operatorInputLabel.text = "÷"
-    }
+
     @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
         guard isNumberInputable else { return }
         do {
