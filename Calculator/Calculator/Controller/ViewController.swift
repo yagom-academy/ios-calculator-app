@@ -10,6 +10,8 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operandInputLabel: UILabel!
     @IBOutlet weak var operatorInputLabel: UILabel!
     @IBOutlet weak var equalSignButton: UIButton!
+    @IBOutlet weak var equationsStackView: UIStackView!
+    @IBOutlet weak var equationScrollView: UIScrollView!
     private var currentNumber: String = .zero {
         didSet {
             operandInputLabel.text = currentNumber
@@ -69,6 +71,7 @@ extension ViewController {
         if !isCurrentNumberZero() {
             calculator.putIntoInfixExpression(of: currentOperator)
             calculator.putIntoInfixExpression(of: currentNumber)
+            addOperatorAndOperandToEquationsStackView()
             resetOperandInputLabel()
         }
         currentOperator = operatorSymbol
@@ -81,6 +84,7 @@ extension ViewController {
         }
         calculator.putIntoInfixExpression(of: currentOperator)
         calculator.putIntoInfixExpression(of: currentNumber)
+        addOperatorAndOperandToEquationsStackView()
         let calculationResult = calculator.deriveEquationValue()
         switch calculationResult {
         case .success(let numberResult):
@@ -100,6 +104,7 @@ extension ViewController {
         case .allClear:
             resetOperandInputLabel()
             resetOperatorInputLabel()
+            removeAllEquationStackView()
             calculator.clearAll()
         case .clearEntry:
             resetOperandInputLabel()
@@ -181,5 +186,30 @@ extension ViewController {
         let confirmAlertAction = UIAlertAction(title: confirm, style: .default, handler: nil)
         errorAlertController.addAction(confirmAlertAction)
         self.present(errorAlertController, animated: true, completion: nil)
+    }
+    
+    private func addOperatorAndOperandToEquationsStackView() {
+        let equationStackView = UIStackView()
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        operatorLabel.text = currentOperator
+        operatorLabel.textColor = .white
+        operandLabel.text = currentNumber
+        operandLabel.textColor = .white
+        equationStackView.addArrangedSubview(operatorLabel)
+        equationStackView.addArrangedSubview(operandLabel)
+        equationsStackView.spacing = 8
+        equationsStackView.addArrangedSubview(equationStackView)
+        var bottomOffset = CGPoint(x: 0, y: equationScrollView.contentSize.height - equationScrollView.bounds.height + equationScrollView.contentInset.bottom)
+        bottomOffset.y += bottomOffset.y > 0 ? view.safeAreaInsets.bottom : 0
+        equationScrollView.setContentOffset(bottomOffset, animated: true)
+    }
+    
+    private func removeAllEquationStackView() {
+        equationsStackView.arrangedSubviews.enumerated().forEach { index, stackView in
+            if index != 0 {
+                stackView.removeFromSuperview()
+            }
+        }
     }
 }
