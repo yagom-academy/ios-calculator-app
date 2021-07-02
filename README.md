@@ -20,7 +20,7 @@
 후위연산식 계산을 검증하는 Unit Test 메소드 구현(calculate), CalculatorTests.swift 파일 추가
 
 ### 배운 키워드
-Stack 자료구조의 이해와 구현
-    - 숫자와 연산자 입력에 스택 활용
-Unit Test 구현
-계산기 UI 연동
+1. Stack 자료구조의 이해와 구현
+2. 숫자와 연산자 입력에 스택 활용
+3. Unit Test 구현
+4. 계산기 UI 연동
