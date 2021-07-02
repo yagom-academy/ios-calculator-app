@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     var notations: [String] = []
     var inputNotation: String = ""
+    var resultNotation: String = ""
     var minusFlag: Bool = false
     
     override func viewDidLoad() {
@@ -26,18 +27,40 @@ class ViewController: UIViewController {
         self.minusFlag = false
     }
     
-    func resetCalculator() {
+    func resetExceptStackView() {
         self.notations = []
         resetNotation()
+        updateSignUILabel(labelText: "")
+    }
+    
+    func resetCalculator() {
+        resetExceptStackView()
+        resetNotationStackView()
+        self.resultNotation = ""
+    }
+    
+    func resetNotationStackView() {
+        for view in notaionStackView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        let arrangedStackViewLabels: [UIView] = [operatorLabel, operandLabel]
+        let stackViewItem: UIStackView = UIStackView(arrangedSubviews: arrangedStackViewLabels)
+        notaionStackView.addArrangedSubview(stackViewItem)
     }
 
     func updateLabel() {
-        print(inputNotation)
-        print(notations)
         guard let notationText = CalculatorManager.getTextToBeDrawnToUILabel(notation: inputNotation, isMinus: minusFlag) else {
             return
         }
         notationUILabel.text = notationText
+    }
+    
+    func updateSignUILabel(labelText: String) {
+        signUILabel.text = labelText
     }
     
     func addNotaionStackViewItem(operatorText: String, operandText: String) {
@@ -64,6 +87,10 @@ class ViewController: UIViewController {
             return
         }
         
+        if notations.isEmpty && CalculatorManager.isInitialValue(notation: inputNotation) {
+            resetNotationStackView()
+        }
+        
         inputNotation = "\(inputNotation)\(operandButtonNumber)"
         updateLabel()
     }
@@ -74,9 +101,17 @@ class ViewController: UIViewController {
             return
         }
         
+//        if notations.isEmpty && CalculatorManager.isInitialValue(notation: inputNotation) && resultNotation != "" {
+//            return
+//        }
+        
         let operatorCase = CalculatorManager.changeMultipleAndDivideText(operatorText: operatorText)
         
         if notations.isEmpty && CalculatorManager.isInitialValue(notation: inputNotation) {
+            guard resultNotation == "" else {
+                return
+            }
+            resetNotationStackView()
             inputNotation = "0"
         }
         
@@ -93,7 +128,8 @@ class ViewController: UIViewController {
             notations.append(operatorCase)
         }
         
-        signUILabel.text = CalculatorManager.restoreMultipleAndDivide(operatorText: operatorText)
+        let labelText = CalculatorManager.restoreMultipleAndDivide(operatorText: operatorText)
+        updateSignUILabel(labelText: labelText)
         
         resetNotation()
         updateLabel()
@@ -111,9 +147,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        // TODO = 버튼을 눌러 연산을 마친 후 다시 =을 눌러도 이전 연산을 다시 연산하지 않습니다
-        // TODO 0으로 나누기에 대해서는 결과값을 NaN으로 표기합니다
-        // TODO Change Valid inputNotation
         let infix = CalculatorManager.getFinalInfixResult(validNotation: inputNotation, notations: notations)
         let calculator = Calculator()
         let result = calculator.runCalculator(on: infix)
@@ -121,22 +154,29 @@ class ViewController: UIViewController {
         if case .success(let resultValue) = result {
             addNotaionStackViewItem(operatorText: notations.last ?? "", operandText: inputNotation)
             inputNotation = String(resultValue)
+            resultNotation = inputNotation
         } else if case .failure(let errorCase) = result {
             switch errorCase {
             case .dividedByZero:
-                print(errorCase)
+                inputNotation = "NaN"
             case .stackError:
-                print(errorCase)
+                inputNotation = "Error"
             case .unknownError:
-                print(errorCase)
+                inputNotation = "System Error"
             }
         }
         
         updateLabel()
+        resetExceptStackView()
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         resetCalculator()
+        updateLabel()
+    }
+    
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        resetNotation()
         updateLabel()
     }
 }

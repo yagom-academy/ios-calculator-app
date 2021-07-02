@@ -38,6 +38,10 @@ class CalculatorManager {
             convertedNotation = lastNumber + convertedNotation
         }
         
+        if convertedNotation.last == "." {
+            convertedNotation.removeLast()
+        }
+        
         return convertedNotation
     }
     
@@ -125,10 +129,10 @@ class CalculatorManager {
     
     /// 실제 레이블에 그려질 notation 값
     static func getTextToBeDrawnToUILabel(notation: String, isMinus: Bool) -> String? {
-        //TODO: 20자리 제한 적용하기
-        guard let appliedCommaNotation = applyCommaOnThreeDigits(notation: notation) else {
-            return nil
-        }
+        let appliedCommaNotation = notation
+//        guard let appliedCommaNotation = applyCommaOnThreeDigits(notation: notation) else {
+//            return nil
+//        }
         
         let signedNotation = applyNotationSign(notation: appliedCommaNotation, isMinus: isMinus)
         return isInitialValue(notation: signedNotation) ? "0" : signedNotation
