@@ -19,7 +19,7 @@ enum CalculatorError: Error {
 class Calculator {
     private var infix: [String] = []
     private var postfix: [String] = []
-    var numberStack = Stack<String>()
+    private var numberStack = Stack<String>()
     private var operatorsStack = Stack<String>()
     
     func changeToPostfix(from infix: Array<String>) {
@@ -35,7 +35,7 @@ class Calculator {
         processLeftOperatorStack()
     }
     
-    func isOperator(item: String) -> Bool {
+    private func isOperator(item: String) -> Bool {
         let operators = ["+", "−", "×", "÷"]
         return !operators.contains(item)
     }
@@ -81,14 +81,14 @@ class Calculator {
         }
     }
     
-    func checkDividedNumber(second: Double) throws {
+    private func checkDividedNumber(second: Double) throws {
         let invalidNumber = Double(0)
         guard second != invalidNumber else {
             throw CalculatorError.dividedByZero
         }
     }
     
-    func determineCalculationWay(first: String, second: String, arithmethicOperator: String) throws -> Double {
+    private func determineCalculationWay(first: String, second: String, arithmethicOperator: String) throws -> Double {
         guard let first = Double(first) , let second = Double(second) else {
             throw CalculatorError.invalidNumber
         }
@@ -116,14 +116,14 @@ class Calculator {
         }
     }
     
-    func checkInteger(number: String?) throws -> Bool {
+    private func checkInteger(number: String?) throws -> Bool {
         guard let unwrappedNumber = number else {
             throw CalculatorError.noResult
         }
         return unwrappedNumber.split(separator: ".").last.map{ String($0) } == "0"
     }
     
-    func roundDown(number: String?, decimalPlace: Int) throws -> String? {
+    private func roundDown(number: String?, decimalPlace: Int) throws -> String? {
         guard let unwrappedNumber = number, let convertedNumber = Double(unwrappedNumber) else {
             throw CalculatorError.invalidNumber
         }
@@ -133,7 +133,7 @@ class Calculator {
         return roundDownResult
     }
     
-    func calculatePostfix() throws -> String? {
+    private func calculatePostfix() throws -> String? {
         for item in postfix {
             if isOperator(item: item) {
                 numberStack.push(item: item)
