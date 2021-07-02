@@ -2,7 +2,7 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by tae hoon park on 2021/06/28.
+//  Created by Sanchez, Hosinging, Soll on 2021/06/28.
 //
 
 import XCTest

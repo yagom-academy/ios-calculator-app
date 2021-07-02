@@ -2,7 +2,7 @@
 //  Calculatable.swift
 //  Calculator
 //
-//  Created by tae hoon park on 2021/06/25.
+//  Created by Sanchez, Hosinging, Soll on 2021/06/25.
 //
 
 import Foundation

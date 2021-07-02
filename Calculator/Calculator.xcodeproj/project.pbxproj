@@ -17,8 +17,6 @@
 		4DC9E594268C562600EBE6D8 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9E592268C562600EBE6D8 /* Stack.swift */; };
 		4DC9E596268C563600EBE6D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9E595268C563600EBE6D8 /* ViewController.swift */; };
 		4DC9E59D268C584700EBE6D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC9E589268C55C100EBE6D8 /* LaunchScreen.storyboard */; };
-		4DC9E59F268C590B00EBE6D8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DC9E578268C553000EBE6D8 /* Info.plist */; };
-		4DC9E5A0268C592100EBE6D8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DC9E59A268C57F700EBE6D8 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,8 +230,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DC9E5A0268C592100EBE6D8 /* Info.plist in Resources */,
-				4DC9E59F268C590B00EBE6D8 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

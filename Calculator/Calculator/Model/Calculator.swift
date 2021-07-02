@@ -2,7 +2,7 @@
 //  Calculator.swift
 //  Calculator
 //
-//  Created by tae hoon park on 2021/06/25.
+//  Created by Sanchez, Hosinging, Soll on 2021/06/25.
 //
 
 import Foundation
@@ -59,10 +59,10 @@ class Calculator {
     var userInput = [String]()
     let initializedNumber: [String] = ["0"]
     var currentNumbers: [String]
+    var currentOperatorCheck: String = "0"
     
     init() {
         self.currentNumbers = initializedNumber
-        self.userInput = initializedNumber
     }
     
     func concatNumbers() -> String {
@@ -109,7 +109,6 @@ class Calculator {
                 OperandAndOperatorStack.push(item)
             } else {
                 OperandAndOperatorStack.push(item)
-
             }
             
         }
@@ -155,6 +154,28 @@ class Calculator {
             throw CalculatorError.unknown
         }
         return result
+    }
+    
+    func inputOperator(_ currentOperator: String) {
+        var isAvailableAddingOperator = [Bool]()
+        for item in Operator.allCases {
+            if currentOperatorCheck != item.rawValue {
+                isAvailableAddingOperator.append(true)
+            } else {
+                isAvailableAddingOperator.append(false)
+            }
+        }
+        if isAvailableAddingOperator.filter({!$0}).isEmpty {
+            userInput.append(concatNumbers())
+            currentNumbers = initializedNumber
+            currentOperatorCheck = currentOperator
+            userInput.append(currentOperator)
+        } else {
+            currentOperatorCheck = currentOperator
+            userInput.removeLast()
+            userInput.append(currentOperator)
+        }
+        print(userInput)
     }
 }
 
