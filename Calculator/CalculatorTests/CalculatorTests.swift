@@ -69,11 +69,12 @@ class CalculatorTests: XCTestCase {
 
     func test_1빼기2빼기3이_준비되어서_runCalculator메서드가_호출되었을때_마이너스4가_된다() {
         // given
-        let testcase = ["1","-","2","-","3"]
+//        let testcase = ["1","-","2","-","3"]
+        let testcase = ["9","-","6"]
         
         // when
         let result = sut.runCalculator(on: testcase)
-        let expectedResult: Double = -4
+        let expectedResult: Double = 3
         
         // then
         XCTAssertEqual(result, .success(expectedResult))

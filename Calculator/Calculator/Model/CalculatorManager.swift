@@ -115,7 +115,7 @@ class CalculatorManager {
     
 // MARK: - updateLabel Helper
     
-    /// 3자리 콤마 적용하기
+    /// 3자리 콤마 적용하기 (기능 문제로인하여 미사용)
     static func applyCommaOnThreeDigits(notation: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -130,10 +130,6 @@ class CalculatorManager {
     /// 실제 레이블에 그려질 notation 값
     static func getTextToBeDrawnToUILabel(notation: String, isMinus: Bool) -> String? {
         let appliedCommaNotation = notation
-//        guard let appliedCommaNotation = applyCommaOnThreeDigits(notation: notation) else {
-//            return nil
-//        }
-        
         let signedNotation = applyNotationSign(notation: appliedCommaNotation, isMinus: isMinus)
         return isInitialValue(notation: signedNotation) ? "0" : signedNotation
     }

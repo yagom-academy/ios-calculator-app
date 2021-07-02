@@ -43,16 +43,9 @@ class ViewController: UIViewController {
         for view in notaionStackView.subviews {
             view.removeFromSuperview()
         }
-        
-        let operatorLabel = UILabel()
-        let operandLabel = UILabel()
-        
-        let arrangedStackViewLabels: [UIView] = [operatorLabel, operandLabel]
-        let stackViewItem: UIStackView = UIStackView(arrangedSubviews: arrangedStackViewLabels)
-        notaionStackView.addArrangedSubview(stackViewItem)
     }
 
-    func updateLabel() {
+    func updateNotationLabel() {
         guard let notationText = CalculatorManager.getTextToBeDrawnToUILabel(notation: inputNotation, isMinus: minusFlag) else {
             return
         }
@@ -67,7 +60,7 @@ class ViewController: UIViewController {
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
         
-        operatorLabel.text = operatorText
+        operatorLabel.text = ("\(operatorText)  ")
         operandLabel.text = operandText
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
@@ -79,7 +72,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
         minusFlag.toggle()
-        updateLabel()
+        updateNotationLabel()
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
@@ -92,7 +85,7 @@ class ViewController: UIViewController {
         }
         
         inputNotation = "\(inputNotation)\(operandButtonNumber)"
-        updateLabel()
+        updateNotationLabel()
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -100,10 +93,6 @@ class ViewController: UIViewController {
         guard let operatorText = sender.titleLabel?.text else {
             return
         }
-        
-//        if notations.isEmpty && CalculatorManager.isInitialValue(notation: inputNotation) && resultNotation != "" {
-//            return
-//        }
         
         let operatorCase = CalculatorManager.changeMultipleAndDivideText(operatorText: operatorText)
         
@@ -132,7 +121,7 @@ class ViewController: UIViewController {
         updateSignUILabel(labelText: labelText)
         
         resetNotation()
-        updateLabel()
+        updateNotationLabel()
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
@@ -143,7 +132,7 @@ class ViewController: UIViewController {
         
         inputNotation = "\(CalculatorManager.pasteZeroInFrontOfDot(notation: inputNotation))\(dotButtonText)"
         
-        updateLabel()
+        updateNotationLabel()
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -166,18 +155,18 @@ class ViewController: UIViewController {
             }
         }
         
-        updateLabel()
+        updateNotationLabel()
         resetExceptStackView()
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         resetCalculator()
-        updateLabel()
+        updateNotationLabel()
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
         resetNotation()
-        updateLabel()
+        updateNotationLabel()
     }
 }
 
