@@ -15,7 +15,6 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
-		DF4909FF26817FA900938336 /* ArithmeticExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4909FE26817FA900938336 /* ArithmeticExpression.swift */; };
 		DF490A032681815600938336 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF490A022681815600938336 /* Operator.swift */; };
 		DFC1B67C268AC7620020A739 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC1B67B268AC7620020A739 /* Stack.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +42,6 @@
 		C713D94A2570E5ED001C3AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DF4909FE26817FA900938336 /* ArithmeticExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticExpression.swift; sourceTree = "<group>"; };
 		DF490A022681815600938336 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		DFC1B67B268AC7620020A739 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				DFC1B67B268AC7620020A739 /* Stack.swift */,
-				DF4909FE26817FA900938336 /* ArithmeticExpression.swift */,
 				DF490A022681815600938336 /* Operator.swift */,
 				7E7354872683F9AC00763EFA /* Calculator.swift */,
 			);
@@ -246,7 +243,6 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				DF490A032681815600938336 /* Operator.swift in Sources */,
 				DFC1B67C268AC7620020A739 /* Stack.swift in Sources */,
-				DF4909FF26817FA900938336 /* ArithmeticExpression.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				7E7354882683F9AC00763EFA /* Calculator.swift in Sources */,

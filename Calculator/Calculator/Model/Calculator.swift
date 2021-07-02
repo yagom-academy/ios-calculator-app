@@ -5,6 +5,15 @@ enum CalculatorError: Error {
     case invalidNumber
     case invalidOperator
     case noResult
+    
+    var errorMessage: String {
+        switch self {
+        case .dividedByZero:
+            return "NaN"
+        default:
+            return "Error발생"
+        }
+    }
 }
 
 class Calculator {
@@ -141,10 +150,14 @@ class Calculator {
     }
     
     func returnCalculationResult() throws -> String? {
-        let calculateResult = try calculatePostfix()
-        if try checkInteger(number: calculateResult) {
-            return try roundDown(number: calculateResult, decimalPlace: 0)
-        }
-        return calculateResult
+        do {
+            let calculateResult = try calculatePostfix()
+            if try checkInteger(number: calculateResult) {
+                return try roundDown(number: calculateResult, decimalPlace: 0)
+            }
+            return calculateResult
+        } catch CalculatorError.dividedByZero {
+            return CalculatorError.dividedByZero.errorMessage
+        } 
     }
 }
