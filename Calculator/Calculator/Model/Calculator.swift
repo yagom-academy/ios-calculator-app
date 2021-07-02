@@ -12,7 +12,6 @@ class Calculator {
     private var postfix: [String] = []
     var numberStack = Stack<String>()
     private var operatorsStack = Stack<String>()
-    var result = ""
     
     func separateInfix(from infix: Array<String>) {
         infix.forEach {
@@ -40,6 +39,23 @@ class Calculator {
         postfix.append(item)
     }
     
+    private func comparePriority(with input: Operator?) {
+        // 상수명 바꾸기? lastOperatorInStack? 오타도 있당 unwrappedOperat"ro"sStack
+        guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
+        let lastOfOperatorStack = changeOperatorType(unwrappedOperatrosStack)
+        guard let unwrappedLastOfOperatorStack = lastOfOperatorStack, let unwrappedInput = input else { return }
+        if unwrappedLastOfOperatorStack < unwrappedInput {
+            addToOperatorStack(item: unwrappedInput.operatorSymbol)
+        } else if unwrappedLastOfOperatorStack == unwrappedInput {
+            addToPostfix(item: unwrappedLastOfOperatorStack.operatorSymbol)
+            operatorsStack.pop()
+            addToOperatorStack(item: unwrappedInput.operatorSymbol)
+        } else {
+            processLeftOperatorStack()
+            addToOperatorStack(item: unwrappedInput.operatorSymbol)
+        }
+    }
+    
     private func changeOperatorType(_ item: String) -> Operator? {
         let lastStackOperator = item
         
@@ -54,23 +70,6 @@ class Calculator {
             return Operator.divide
         default:
             return nil
-        }
-    }
-    
-    
-    private func comparePriority(with input: Operator?) {
-        guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
-        let lastOfOperatorStack = changeOperatorType(unwrappedOperatrosStack)
-        guard let unwrappedLastOfOperatorStack = lastOfOperatorStack, let unwrappedInput = input else { return }
-        if unwrappedLastOfOperatorStack < unwrappedInput {
-            addToOperatorStack(item: unwrappedInput.operatorSymbol)
-        } else if unwrappedLastOfOperatorStack == unwrappedInput {
-            addToPostfix(item: unwrappedLastOfOperatorStack.operatorSymbol)
-            operatorsStack.pop()
-            addToOperatorStack(item: unwrappedInput.operatorSymbol)
-        } else {
-            processLeftOperatorStack()
-            addToOperatorStack(item: unwrappedInput.operatorSymbol)
         }
     }
     

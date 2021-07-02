@@ -1,11 +1,9 @@
 import Foundation
 
-enum Priority {
+enum Operator: String, Comparable {
     static let lowPriority = 10
     static let highPriority = 100
-}
-
-enum Operator: String, Comparable {
+    
     case plus = "+"
     case minus = "−"
     case multiply = "×"
@@ -18,9 +16,9 @@ enum Operator: String, Comparable {
     var priority: Int {
         switch self {
         case .plus, .minus:
-            return Priority.lowPriority
+            return Operator.lowPriority
         case .multiply, .divide:
-            return Priority.highPriority
+            return Operator.highPriority
         }
     }
     
@@ -32,4 +30,3 @@ enum Operator: String, Comparable {
         lhs.priority == rhs.priority
     }
 }
-
