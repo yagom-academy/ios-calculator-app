@@ -38,6 +38,11 @@ class ViewController: UIViewController {
         notationUILabel.text = notationText
     }
     
+    @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+        minusFlag.toggle()
+        updateLabel()
+    }
+    
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let operandButtonNumber = sender.titleLabel?.text, !CalculatorManager.checkZeroButtonIsPressedInInitalValue(notation: inputNotation, buttonText: operandButtonNumber) else {
             return
@@ -92,9 +97,6 @@ class ViewController: UIViewController {
         
         // TODO Change Valid inputNotation
         let infix = CalculatorManager.getFinalInfixResult(validNotation: inputNotation, notations: notations)
-        
-//        print("touchUpEqualButton()")
-//        print(infix)
         let calculator = Calculator()
         let result = calculator.runCalculator(on: infix)
         
