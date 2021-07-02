@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var notationUILabel: UILabel!
     @IBOutlet weak var notaionStackView: UIStackView!
+    @IBOutlet weak var signUILabel: UILabel!
     
     var notations: [String] = []
     var inputNotation: String = ""
@@ -69,7 +70,6 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         
-        // TODO -  현재 숫자입력이 없는 상태인 0에서는 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다. (ok)
         guard let operatorText = sender.titleLabel?.text else {
             return
         }
@@ -80,7 +80,6 @@ class ViewController: UIViewController {
             inputNotation = "0"
         }
         
-        // 현재 숫자입력이 없는 상태인 0에서는 연산자의 종류만 변경 처리하기. (ok)
         if CalculatorManager.isInitialValue(notation: inputNotation) {
             notations.removeLast()
             notations.append(operatorCase)
@@ -94,7 +93,8 @@ class ViewController: UIViewController {
             notations.append(operatorCase)
         }
         
-        // TODO - 숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력 (ok)
+        signUILabel.text = CalculatorManager.restoreMultipleAndDivide(operatorText: operatorText)
+        
         resetNotation()
         updateLabel()
     }

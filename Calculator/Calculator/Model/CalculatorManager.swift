@@ -68,6 +68,18 @@ class CalculatorManager {
         return operatorText
     }
     
+    static func restoreMultipleAndDivide(operatorText: String) -> String {
+        if operatorText == "*" {
+            return "x"
+        }
+        
+        if operatorText == "/" {
+            return "÷"
+        }
+        
+        return operatorText
+    }
+    
 // MARK: - touchUpDotButton Helper
     
     /// 초기 값 상태에서 .을 눌렀을때, 0.으로 만들기
