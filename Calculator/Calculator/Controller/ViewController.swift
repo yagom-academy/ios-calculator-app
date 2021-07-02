@@ -94,7 +94,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
         // TODO = 버튼을 눌러 연산을 마친 후 다시 =을 눌러도 이전 연산을 다시 연산하지 않습니다
-        
+        // TODO 0으로 나누기에 대해서는 결과값을 NaN으로 표기합니다
         // TODO Change Valid inputNotation
         let infix = CalculatorManager.getFinalInfixResult(validNotation: inputNotation, notations: notations)
         let calculator = Calculator()

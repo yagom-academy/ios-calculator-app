@@ -104,7 +104,6 @@ class CalculatorManager {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         let doubleNotation = Double(notation)
-        
         guard let convertedNotaion = numberFormatter.string(for: doubleNotation) else {
             return nil
         }
@@ -114,11 +113,12 @@ class CalculatorManager {
     
     /// 실제 레이블에 그려질 notation 값
     static func getTextToBeDrawnToUILabel(notation: String, isMinus: Bool) -> String? {
-        // 소수 점 뒤 0제거
-        // 3자리 콤마 적용하기
-        // +/-버튼이 눌렸는지 확인 후, 최종 결과를 알려주기
-        // TODO 숫자는 최대 20자리까지만 표현합니다
-        // TODO 0으로 나누기에 대해서는 결과값을 NaN으로 표기합니다
-        return isInitialValue(notation: notation) ? "0" : notation
+        //TODO: 20자리 제한 적용하기
+        guard let appliedCommaNotation = applyCommaOnThreeDigits(notation: notation) else {
+            return nil
+        }
+        
+        let signedNotation = applyNotationSign(notation: appliedCommaNotation, isMinus: isMinus)
+        return isInitialValue(notation: signedNotation) ? "0" : signedNotation
     }
 }
