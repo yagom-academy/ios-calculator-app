@@ -10,6 +10,12 @@ import Foundation
 struct Deque<T> {
     private var deque = Array<T>()
  
+    var last: T? {
+        return deque.last
+    }
+    var isEmpty: Bool {
+        return deque.isEmpty
+    }
     mutating func removeAll() {
         deque.removeAll()
     }

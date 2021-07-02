@@ -35,13 +35,15 @@ struct Calculator {
 }
 
 extension Calculator {
-    // TestCode
-    func displayInfix() -> Deque<Arithmetic> {
-        return infixDeque
+    func infixIsEmpty() -> Bool {
+        return infixDeque.isEmpty
     }
-    
-    
-    
+    func infixLastOperatorItem() -> Operator? {
+        guard let lastOperator = infixDeque.last as? Operator else {
+            return nil
+        }
+        return lastOperator
+    }
     mutating func removeAllInfix() {
         infixDeque.removeAll()
     }
@@ -53,10 +55,8 @@ extension Calculator {
     }
     
     mutating func makeCalculation() throws -> Double {
-print("infix \(displayInfix())")
         var postfix = transformInfixToPostfix()
         var operandStack = Stack<Arithmetic>()
-print("postfix \(postfix)")
         while let dequeueElement = postfix.dequeueInfront() {
             if let `operator` = dequeueElement as? Operator {
                 guard let rhs = operandStack.pop(),
