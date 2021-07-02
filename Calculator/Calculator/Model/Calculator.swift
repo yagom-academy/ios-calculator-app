@@ -22,7 +22,7 @@ class Calculator {
     var numberStack = Stack<String>()
     private var operatorsStack = Stack<String>()
     
-    func separateInfix(from infix: Array<String>) {
+    func changeToPostfix(from infix: Array<String>) {
         infix.forEach {
             if isOperator(item: $0) {
                 addToPostfix(item: $0)
@@ -49,9 +49,8 @@ class Calculator {
     }
     
     private func comparePriority(with input: Operator?) {
-        // 상수명 바꾸기? lastOperatorInStack? 오타도 있당 unwrappedOperat"ro"sStack
-        guard let unwrappedOperatrosStack = operatorsStack.top() else { return }
-        let lastOfOperatorStack = changeOperatorType(unwrappedOperatrosStack)
+        guard let unwrappedLastOperator = operatorsStack.top() else { return }
+        let lastOfOperatorStack = changeOperatorType(unwrappedLastOperator)
         guard let unwrappedLastOfOperatorStack = lastOfOperatorStack, let unwrappedInput = input else { return }
         if unwrappedLastOfOperatorStack < unwrappedInput {
             addToOperatorStack(item: unwrappedInput.operatorSymbol)
