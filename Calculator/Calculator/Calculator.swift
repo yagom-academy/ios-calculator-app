@@ -12,6 +12,7 @@ enum CalculatorError: Error {
     case divisionByZero(description: String)
     case invalidEquation
     case vacantEquation
+    case unknownError
 }
 
 enum Operator {
@@ -38,16 +39,34 @@ enum Operator {
 struct Calculator {
     func calculate(infix: [String]) throws -> String {
         let postfix: [String] = try changeToPostfixNotation(infix: infix)
-        let operationResult = try calculatePostfix(postfix: postfix)
-        let finalResult: String = ""
-        return finalResult
+        do {
+            let operationResult = try calculatePostfix(postfix: postfix)
+            let finalResult: String = try format(number: operationResult)
+            return finalResult
+        } catch CalculatorError.divisionByZero(let message){
+            return message
+        } catch {
+            return ""
+        }
     }
 
-    private func calculatePostfix(postfix: [String]) throws -> String {
-        var temporaryNumberStack = Stack<String>()
+    private func format(number: Double) throws -> String {
+        let formatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.usesSignificantDigits = true
+            return formatter
+        }()
+        guard let result = formatter.string(from: NSNumber(value: number)) else {
+            throw CalculatorError.unknownError
+        }
+        return result
+    }
+
+    private func calculatePostfix(postfix: [String]) throws -> Double {
+        var temporaryNumberStack = Stack<Double>()
         for element in postfix {
-            if Double(element) != nil {
-                temporaryNumberStack.push(element)
+            if let number = Double(element) {
+                temporaryNumberStack.push(number)
             } else {
                 try calculateToValue(operator: element, tempNumberStack: &temporaryNumberStack)
             }
@@ -58,32 +77,36 @@ struct Calculator {
         return result
     }
     
-    private func calculateToValue(operator: String, tempNumberStack: inout Stack<String>) throws {
-        guard let firstOperand = tempNumberStack.pop(),
-              let secondOperand = tempNumberStack.pop()
+    private func calculateToValue(operator: String, tempNumberStack: inout Stack<Double>) throws {
+        guard let secondOperand = tempNumberStack.pop(),
+              let firstOperand = tempNumberStack.pop()
         else {
             return
         }
-        try checkDivisionError(operator: `operator`, secondOperand: secondOperand)
-        let equation = firstOperand + `operator` + secondOperand
-        let operationResult = try solve(equation: equation)
+        let operationResult = try solve(firstOperand: firstOperand, secondOperand: secondOperand, operator: `operator`)
         tempNumberStack.push(operationResult)
     }
 
-    private func checkDivisionError(operator: String, secondOperand: String) throws {
-        if `operator` == "/" && secondOperand == "0" {
+    private func checkDivisionError(operator: String, secondOperand: Double) throws {
+        if `operator` == "/" && secondOperand == 0.0 {
             throw CalculatorError.divisionByZero(description: "NaN")
         }
     }
 
-    private func solve(equation: String) throws -> String {
-        let expression = NSExpression(format: equation)
-        guard let operationResult = expression.expressionValue(
-                with: nil, context: nil
-        ) as? Double else {
-            throw CalculatorError.invalidEquation
+    private func solve(firstOperand: Double, secondOperand: Double, `operator`: String) throws -> Double {
+        switch `operator` {
+        case "+":
+            return firstOperand + secondOperand
+        case "-":
+            return firstOperand - secondOperand
+        case "*":
+            return firstOperand * secondOperand
+        case "/":
+            try checkDivisionError(operator: "/", secondOperand: secondOperand)
+            return firstOperand / secondOperand
+        default:
+            throw CalculatorError.unknownOperator
         }
-        return String(operationResult)
     }
 
     private func convertToOperator(string: String) throws -> Operator {
