@@ -7,16 +7,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    var isNumberInputable: Bool = true
-    
-    func stateON() {
-        isNumberInputable = true
-    }
-    func stateOff() {
-        isNumberInputable = false
-    }
-    
-    enum NumberButton: String, CustomStringConvertible {
+    private enum NumberButton: String, CustomStringConvertible {
         case one = "1"
         case two = "2"
         case three = "3"
@@ -45,38 +36,51 @@ class CalculatorViewController: UIViewController {
             }
         }
     }
-    var calculator = Calculator()
     
-    @IBOutlet var numberInputLabel: UILabel!
-    @IBOutlet var operatorInputLabel: UILabel!
-    @IBOutlet weak var CalculationStackView: UIStackView!
-    @IBOutlet weak var CalculationStackScrollView: UIScrollView!
+    private enum CalculatorState {
+        case on, off
+    }
+    
+    private var isNumberInputable: Bool = true
+    private var calculator = Calculator()
+    
+    @IBOutlet private var numberInputLabel: UILabel!
+    @IBOutlet private var operatorInputLabel: UILabel!
+    @IBOutlet private weak var calculationStackView: UIStackView!
+    @IBOutlet private weak var calculationStackScrollView: UIScrollView!
+    
+    private func stateToggle(to state: CalculatorState){
+        if state == .on {
+            isNumberInputable = true
+        } else if state == .off {
+            isNumberInputable = false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         numberInputLabel.text = "0"
         operatorInputLabel.text = ""
-        
-        for stackView in CalculationStackView.arrangedSubviews {
+        for stackView in calculationStackView.arrangedSubviews {
             stackView.removeFromSuperview()
         }
     }
     
-    @IBAction func clickNumberButton(_ sender: UIButton) {
+    @IBAction private func clickNumberButton(_ sender: UIButton) {
         guard let _number = sender.titleLabel?.text, let number = NumberButton.init(rawValue: _number) else { return }
         addNumberToNumberInputLabel(number: number)
     }
     
-    @IBAction func clickArithmeticButton(_ sender: UIButton) {
+    @IBAction private func clickArithmeticButton(_ sender: UIButton) {
         guard let operation = sender.titleLabel?.text else { return }
-        stateON()
+        stateToggle(to: CalculatorState.on)
         if isInputValid() {
             try? addEntry()
         }
         operatorInputLabel.text = operation
     }
     
-    @IBAction func clickDotButton(_ sender: UIButton) {
+    @IBAction private func clickDotButton(_ sender: UIButton) {
         guard isNumberInputable else { return }
         guard let label = numberInputLabel.text else { return }
         if label.contains("."){
@@ -88,7 +92,7 @@ class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func clickEqualOperatorButton(_ sender: UIButton) {
+    @IBAction private func clickEqualOperatorButton(_ sender: UIButton) {
         guard isNumberInputable else { return }
         do {
             try addEntry()
@@ -96,7 +100,7 @@ class CalculatorViewController: UIViewController {
             numberInputLabel.text = "NaN"
             operatorInputLabel.text = ""
             calculator.allClear()
-            stateOff()
+            stateToggle(to: CalculatorState.off)
             return
         } catch {
             print("Unknown Error")
@@ -113,24 +117,24 @@ class CalculatorViewController: UIViewController {
             print("Unknown Error")
         }
         calculator.allClear()
-        stateOff()
+        stateToggle(to: CalculatorState.off)
     }
     
-    @IBAction func clickAllClearButton(_ sender: UIButton) {
-        stateON()
+    @IBAction private func clickAllClearButton(_ sender: UIButton) {
+        stateToggle(to: CalculatorState.on)
         numberInputLabel.text = "0"
-        for stackView in CalculationStackView.arrangedSubviews {
+        for stackView in calculationStackView.arrangedSubviews {
             stackView.removeFromSuperview()
         }
         calculator.allClear()
     }
     
-    @IBAction func clickClearEntryButton(_ sender: UIButton) {
-        stateON()
+    @IBAction private func clickClearEntryButton(_ sender: UIButton) {
+        stateToggle(to: CalculatorState.on)
         numberInputLabel.text = "0"
     }
     
-    @IBAction func clickToggleSignButton(_ sender: UIButton) {
+    @IBAction private func clickToggleSignButton(_ sender: UIButton) {
         guard isNumberInputable else { return }
         guard let inputNumber = numberInputLabel.text else { return }
         if inputNumber.first == "-" {
@@ -152,7 +156,7 @@ class CalculatorViewController: UIViewController {
         newStackView.spacing = 8
         
         let operatorLabel = UILabel()
-        if CalculationStackView.arrangedSubviews.count == 0 {
+        if calculationStackView.arrangedSubviews.count == 0 {
             operatorLabel.text = ""
         } else {
             operatorLabel.text = inputOperator
@@ -179,11 +183,11 @@ extension CalculatorViewController {
         guard let inputNumber = inputValue, let inputOperator = operatorInputLabel.text else { throw CalculatorError.InValidInput }
         guard (inputNumber == "0" && inputOperator == "÷") == false else{ throw CalculatorError.DivideByZero }
         calculator.enterExpression(operation: inputOperator, inputNumber: inputNumber)
-        let nextEntryIndex = CalculationStackView.arrangedSubviews.count
+        let nextEntryIndex = calculationStackView.arrangedSubviews.count
         let newEntryView = createEntryView()
         
-        CalculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
-        CalculationStackScrollView.setContentOffset(CGPoint(x: 0, y: CalculationStackScrollView.contentSize.height-CalculationStackScrollView.bounds.height), animated: true)
+        calculationStackView.insertArrangedSubview(newEntryView, at: nextEntryIndex )
+        calculationStackScrollView.setContentOffset(CGPoint(x: 0, y: calculationStackScrollView.contentSize.height-calculationStackScrollView.bounds.height), animated: true)
         resetInputLabelsToDefault()
     }
     
@@ -195,7 +199,7 @@ extension CalculatorViewController {
         return numberInputLabel.text != "0"
     }
 
-    func addNumberToNumberInputLabel(number: NumberButton) {
+    private func addNumberToNumberInputLabel(number: NumberButton) {
         guard isNumberInputable else { return }
         
         let maxLength = 20

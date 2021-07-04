@@ -7,7 +7,7 @@
 
 import Foundation
 struct Stack<Element> {
-    var items = [Element]()
+    private var items = [Element]()
     var isEmpty: Bool {
         return items.isEmpty
     }
