@@ -32,6 +32,7 @@ class ViewController: UIViewController {
 			}
 		}
 	}
+	
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         inputStorage.append("\(sender.tag)")
     }
@@ -61,16 +62,7 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func touchUpEqualButton(_ sender: UIButton) {
-        guard let infix = try? calculator.makeInfixExpression(from: inputStorage) else {
-            return
-        }
-        
-		let postfix = calculator.convertToPostfixExpression(fromInfix: infix)
-		if let result = try? String(calculator.calculatePostfixExpression(postfix: postfix)) {
-			print(result)
-		} else {
-			print("NaN")
-		}
+		let result = calculator.calculate(input: inputStorage)
 	}
 	
 	@IBAction func touchUpAllClearButton(_ sender: UIButton) {
