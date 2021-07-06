@@ -14,23 +14,58 @@ class Calculator: Calculable {
 }
 
 extension Calculator {
+    var isAbleToCalculate: Bool {
+        infixExpression.count > 0
+    }
+    
     func putIntoInfixExpression(of input: String) {
-        infixExpression.append(input)
+        if !input.isEmpty {
+            infixExpression.append(process(input))
+        }
+    }
+    
+    func deriveEquationValue() -> Result<Double, CalculatorError> {
+        do {
+            try changeToPostfixExpression()
+            let result = try evaluatePostfixExpression()
+            return .success(result)
+        } catch let error as CalculatorError {
+            return .failure(error)
+        } catch {
+            return .failure(.unknown)
+        }
+    }
+    
+    func clearAll() {
+        equationStack.reset()
+        infixExpression.removeAll()
+        postfixExpression.removeAll()
+    }
+    
+    private func process(_ inputValue: String) -> String {
+        switch inputValue {
+        case .minusSign:
+            return String(describing: Operator.subtract)
+        case .multiplicationSign:
+            return String(describing: Operator.multiply)
+        case .divisionSign:
+            return String(describing: Operator.divide)
+        default:
+            return inputValue
+        }
     }
     
     private func isNumber(_ value: String) -> Bool {
-        return Double(value) != nil
+        Double(value) != nil
     }
     
     private func isHigherPriority(of infixOperator: String,than stackOperator: String) throws -> Bool {
-        guard let presentOperator = try? Operator.obtainOperator(from: infixOperator),
-              let stackOperator = try? Operator.obtainOperator(from: stackOperator) else {
-            throw CalculatorError.unknown
-        }
+        let presentOperator = try Operator.obtainOperator(from: infixOperator)
+        let stackOperator = try Operator.obtainOperator(from: stackOperator)
         return presentOperator.isHigherPriority(than: stackOperator)
     }
     
-    private func isNecessaryToPutInStackNow(about element: String) throws -> Bool {
+    private func isNecessaryToPutInStackNow(about element: String) -> Bool {
         if equationStack.isEmpty {
             return true
         } else if let topOfStack = equationStack.peek(),
@@ -43,17 +78,17 @@ extension Calculator {
     }
     
     private func isEqualSign(of element: String) -> Bool {
-        return element == "="
+        element == .equalSign
     }
     
     private func handle(operator element: String) throws {
         while !isEqualSign(of: element) {
-            if try isNecessaryToPutInStackNow(about: element) {
+            if isNecessaryToPutInStackNow(about: element) {
                 equationStack.push(element)
                 break
             } else {
                 guard let operatorSymbol = equationStack.pop() else {
-                    throw CalculatorError.unknown
+                    throw CalculatorError.stackIsEmpty
                 }
                 postfixExpression.append(operatorSymbol)
             }
@@ -63,7 +98,7 @@ extension Calculator {
     private func sendOperatorsToPostfixFromStack() throws {
         while !equationStack.isEmpty {
             guard let operatorSymbol = equationStack.pop() else {
-                throw CalculatorError.unknown
+                throw CalculatorError.stackIsEmpty
             }
             postfixExpression.append(operatorSymbol)
         }
@@ -85,15 +120,14 @@ extension Calculator {
               let secondValue = equationStack.pop(),
               let lhsValue = Double(secondValue),
               let rhsValue = Double(firstValue) else {
-            throw CalculatorError.unknown
+            throw CalculatorError.failedToObtainNumber
         }
         return (lhsValue, rhsValue)
     }
     
     private func calculate(by element: String, lhsValue: Double, rhsValue: Double) throws {
-        guard let operatorSymbol = try? Operator.obtainOperator(from: element) else {
-            throw CalculatorError.unknown
-        }
+        let operatorSymbol = try Operator.obtainOperator(from: element)
+        
         switch operatorSymbol {
         case .add:
             equationStack.push(String(add(lhs: lhsValue, rhs: rhsValue)))
@@ -109,7 +143,7 @@ extension Calculator {
     
     private func findOutTheLastValue() throws -> Double {
         guard let lastValue = equationStack.pop(), let result = Double(lastValue) else {
-            throw CalculatorError.unknown
+            throw CalculatorError.failedToObtainNumber
         }
         return result
     }
@@ -124,17 +158,5 @@ extension Calculator {
             }
         }
         return try findOutTheLastValue()
-    }
-    
-    func deriveEquationValue() -> Result<Double, CalculatorError> {
-        do {
-            try changeToPostfixExpression()
-            let result = try evaluatePostfixExpression()
-            return .success(result)
-        } catch let error as CalculatorError {
-            return .failure(error)
-        } catch {
-            return .failure(.unknown)
-        }
     }
 }

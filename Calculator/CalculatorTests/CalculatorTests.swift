@@ -9,14 +9,10 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    let sut = Calculator()
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    var sut: Calculator!
+    
+    override func setUp() {
+        sut = Calculator()
     }
     
     func test_1더하기2더하기3을_중위표현식배열에넣고계산한뒤에_6과같은지비교한다() {

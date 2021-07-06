@@ -16,15 +16,15 @@ protocol Calculable {
 
 extension Calculable {
     func add<T>(lhs: T, rhs: T) -> T where T: Numeric {
-        return lhs + rhs
+        lhs + rhs
     }
     
     func subtract<T>(lhs: T, rhs: T) -> T where T: Numeric {
-        return lhs - rhs
+        lhs - rhs
     }
     
     func multiply<T>(lhs: T, rhs: T) -> T where T: Numeric {
-        return lhs * rhs
+        lhs * rhs
     }
     
     func divide<T>(lhs: T, rhs: T) throws -> T where T: FloatingPoint {
