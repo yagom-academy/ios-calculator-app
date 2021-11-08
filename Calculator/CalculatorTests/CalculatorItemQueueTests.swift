@@ -58,5 +58,12 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, nil)
     }
+    
+    func test_dequeue_enqueue후dequeue하면_값이나온다() {
+        sut.enqueue("23")
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, "23")
+    }
 
 }
