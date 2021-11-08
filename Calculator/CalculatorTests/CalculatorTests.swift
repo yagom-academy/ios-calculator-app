@@ -10,13 +10,14 @@ import XCTest
 class CalculatorTests: XCTestCase {
     
     func test_빈_큐에_1을_삽입하면_1이_남는다() {
-        let queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Int>()
         queue.enQueue(1)
         XCTAssertEqual(queue.returnQueue(), [1])
     }
     
     func test_1이_있는_큐에_2를_삽입하면_1과_2가_남는다() {
-        let queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Int>()
+        queue.enQueue(1)
         queue.enQueue(2)
         XCTAssertEqual(queue.returnQueue(), [1, 2])
     }

@@ -9,12 +9,45 @@ import Foundation
 
 struct CalculatorItemQueue<T> {
 
-    func enQueue(_ data: T?) {
+    var front: Node<T>?
+    
+    init(front: Node<T>? = nil) {
+        self.front = front
+    }
+    
+    mutating func enQueue(_ data: T?) {
+        if front == nil {
+            front = Node(data: data)
+            return
+        }
+        
+        var node = front
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data: data)
+    }
+    
+    func deQueue() {
         
     }
     
-    func returnQueue() -> Array<T> {
+    func removeAll() {
+        
+    }
+    
+    mutating func returnQueue() -> Array<T> {
         var queue: Array<T> = []
+        
+        var node = front
+        while node?.data != nil {
+            guard let data = node?.data else {
+                return []
+            }
+            queue.append(data)
+            node = node?.next
+        }
+        
         
         return queue
     }
