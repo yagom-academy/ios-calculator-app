@@ -39,3 +39,20 @@ class Node {
         self.pointer = pointer
     }
 }
+    
+class LinkedList {
+    var head: Node?
+    
+    func enQueue(value: Int) {
+        if head == nil {
+            head = Node(value: value, pointer: nil)
+            return
+        }
+        
+        var finderNodeOfEndNode = head
+        while finderNodeOfEndNode?.pointer == nil {
+            finderNodeOfEndNode = finderNodeOfEndNode?.pointer
+        }
+        finderNodeOfEndNode?.pointer = Node(value: value, pointer: nil)
+    }
+}
