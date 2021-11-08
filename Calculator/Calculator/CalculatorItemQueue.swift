@@ -17,21 +17,20 @@ class Node<T> {
     }
 }
 
-class LinkedList<T> {
-    var head: Node<T>?
+class LinkedList<String> {
+    var head: Node<String>?
     
-    init(head: Node<T> ) {
+    init(head: Node<String> ) {
         self.head = head
     }
     
-    func hasEmpty(head: Node<T>?) ->Bool {
+    func hasEmpty(head: Node<String>?) ->Bool {
         return head?.pointer == nil ? true : false
     }
     
     func enqueue(in node: Node<String>) {
-        
-        if head == nil {
-            
+        if hasEmpty(head: head){
+            head = node
         }
     }
     
