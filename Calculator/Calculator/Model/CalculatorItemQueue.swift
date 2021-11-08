@@ -7,30 +7,36 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    private(set) var items = [T]()
+struct CalculatorItemQueue<Element>: CalculateItem {
+    private(set) var inBox = [Element]()
+    private(set) var outBox = [Element]()
     
     var count: Int {
-        return items.count
+        return inBox.count + outBox.count
     }
     
     var isEmpty: Bool {
-        return items.isEmpty
+        return inBox.isEmpty && outBox.isEmpty
     }
     
-    mutating func enqueue(_ item: T) {
-        items.append(item)
+    mutating func enqueue(_ item: Element) {
+        inBox.append(item)
     }
     
     @discardableResult
-    mutating func dequeue() -> T? {
-        if items.isEmpty {
-            return nil
+    mutating func dequeue() -> Element? {
+        if outBox.isEmpty && inBox.isEmpty { return nil }
+        
+        if outBox.isEmpty {
+            outBox = inBox.reversed()
+            inBox.removeAll()
         }
-        return items.removeFirst()
+        
+        return outBox.removeLast()
     }
     
     mutating func clear() {
-        items.removeAll()
+        inBox.removeAll()
+        outBox.removeAll()
     }
 }

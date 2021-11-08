@@ -26,7 +26,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         sut.enqueue(input)
         
-        XCTAssertEqual(sut.items, ["37"])
+        XCTAssertEqual(sut.inBox, ["37"])
     }
     
     func test_enqueue_여러개추가하기() {
@@ -34,7 +34,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("3.5")
         sut.enqueue("10.8")
         
-        XCTAssertEqual(sut.items, ["6","3.5","10.8"])
+        XCTAssertEqual(sut.inBox, ["6","3.5","10.8"])
     }
     
     func test_dequeue_빈큐를dequeue를하면_nil이나온다() {
@@ -57,7 +57,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         sut.clear()
         
-        XCTAssertEqual(true, sut.items.isEmpty)
+        XCTAssertEqual(true, sut.inBox.isEmpty && sut.outBox.isEmpty)
     }
     
     func test_count() {
