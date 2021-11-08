@@ -99,6 +99,10 @@ final class LinkedList<T> {
         assert(!isEmpty)
         return remove(node: last!)
     }
+    
+    func removeAll() {
+        head = nil
+    }
 }
 
 class LinkedListTests: XCTestCase {
@@ -253,6 +257,20 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(node == 34)
         XCTAssertTrue(list.last?.value == 22)
         XCTAssertNotNil(list.last)
+    }
+    
+    func test_모든요소_지우기() {
+        let list = LinkedList<Int>()
+        let numbers = [13, 22, 34]
+        for number in numbers {
+            list.append(number)
+        }
+        
+        list.removeAll()
+        
+        XCTAssertEqual(list.count, 0)
+        XCTAssertNil(list.last)
+        XCTAssertNil(list.first)
     }
     
 }
