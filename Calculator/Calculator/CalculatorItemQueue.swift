@@ -14,9 +14,11 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         inbox.append(element)
     }
     
-    mutating func dequeue() -> [Element] {
-        inbox.removeFirst()
+    mutating func dequeue() -> Element? {
+        if inbox.isEmpty {
+            return nil
+        }
         
-        return inbox
+        return inbox.removeFirst()
     }
 }
