@@ -59,6 +59,20 @@ final class LinkedList<T> {
             head = newNode
         }
     }
+    
+    func node(at index: Int) -> Node<T> {
+        if index == 0 {
+            return head!
+        } else {
+            var node = head!.next
+            for _ in 1..<index {
+                node = node?.next
+                if node == nil { break }
+            }
+            return node!
+        }
+    }
+    
 }
 
 class LinkedListTests: XCTestCase {
@@ -137,5 +151,27 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(second!.next === list.last)
         XCTAssertTrue(list.last!.prev === second)
         XCTAssertNil(list.last!.next)
+    }
+    
+    func test_nodeIndex() {
+        let list = LinkedList<Int>()
+        list.append(123)
+        
+        let node = list.node(at: 0)
+        XCTAssertNotNil(node)
+        XCTAssertEqual(node.value, 123)
+        XCTAssertTrue(node === list.head)
+    }
+    
+    func test_nodeIndex가_2인경우() {
+        let list = LinkedList<Int>()
+        list.append(123)
+        list.append(456)
+        list.append(789)
+        
+        let node = list.node(at: 2)
+        XCTAssertNotNil(node)
+        XCTAssertEqual(node.value, 789)
+        XCTAssertTrue(node === list.last)
     }
 }
