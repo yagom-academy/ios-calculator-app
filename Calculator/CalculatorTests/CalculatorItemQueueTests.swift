@@ -21,6 +21,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
         return items.removeFirst()
     }
+    
+    mutating func clear() {
+        items.removeAll()
+    }
 }
 
 class CalculatorItemQueueTests: XCTestCase {
@@ -64,6 +68,16 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = sut.dequeue()
         
         XCTAssertEqual(result, "23")
+    }
+    
+    func test_clear() {
+        sut.enqueue("45")
+        sut.enqueue("54")
+        sut.enqueue("2")
+        
+        sut.clear()
+        
+        XCTAssertEqual(true, sut.items.isEmpty)
     }
 
 }
