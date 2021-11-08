@@ -8,13 +8,17 @@
 import Foundation
 
 class CalculatorItemQueue<T> {
-    var itemQueue = [T]
+    var itemQueue = [T]()
     
-    func putToQueue<T>(_ value: T) {
+    init(itemQueue: [T]) {
+        self.itemQueue = itemQueue
+    }
+    
+    func putToQueue(_ value: T) {
         itemQueue.append(value)
     }
     
-    func getFromQueue<T>(_ value: T) {
-        itemQueue.removeFirst()
+    func getFromQueue() {
+        itemQueue.removeLast()
     }
 }
