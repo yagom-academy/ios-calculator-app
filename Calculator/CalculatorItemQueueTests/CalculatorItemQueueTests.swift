@@ -70,4 +70,10 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    func test_inbox와outbox둘다비어있을때_True를반환하는지() {
+        let result = queue.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
 }
