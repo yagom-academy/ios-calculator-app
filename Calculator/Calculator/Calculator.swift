@@ -11,6 +11,6 @@ class CalculatorItemQueue<T> {
     var itemQueue = [T]
     
     func putToQueue<T>(_ value: T) {
-        
+        itemQueue.append(value)
     }
 }
