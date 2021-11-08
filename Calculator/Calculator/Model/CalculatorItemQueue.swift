@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T>: CalculateItem {
 
     var front: Node<T>?
     
@@ -16,12 +16,13 @@ struct CalculatorItemQueue<T> {
     }
     
     mutating func enQueue(_ data: T?) {
-        if front == nil {
+        var node = front
+        
+        if node == nil {
             front = Node(data: data)
             return
         }
         
-        var node = front
         while node?.next != nil {
             node = node?.next
         }
