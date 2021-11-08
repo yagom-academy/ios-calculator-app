@@ -1,6 +1,4 @@
-## iOS 커리어 스타터 캠프
 
-### 계산기 프로젝트 저장소
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
 
+![image](https://user-images.githubusercontent.com/39155090/140710968-d6bbcf29-d85e-470a-96e8-a0cb7617726b.png)
