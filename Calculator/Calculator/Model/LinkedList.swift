@@ -4,11 +4,10 @@
 //
 //  Created by Jun Bang on 2021/11/09.
 //
-
 import Foundation
 
 protocol CalculateItem {
-    
+    var zero: Int { get }
 }
 
 class Node {
@@ -34,5 +33,11 @@ struct LinkedList {
         } else {
             head = newNode
         }
+    }
+}
+
+extension Int: CalculateItem {
+    var zero: Int {
+        return 0
     }
 }
