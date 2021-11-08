@@ -36,5 +36,13 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(sut.items, ["37"])
     }
+    
+    func test_enqueue_여러개추가하기() {
+        sut.enqueue("6")
+        sut.enqueue("3.5")
+        sut.enqueue("10.8")
+        
+        XCTAssertEqual(sut.items, ["6","3.5","10.8"])
+    }
 
 }
