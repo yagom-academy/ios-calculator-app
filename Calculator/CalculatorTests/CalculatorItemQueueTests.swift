@@ -7,34 +7,6 @@
 
 import XCTest
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    private(set) var items = [T]()
-    
-    var count: Int {
-        return items.count
-    }
-    
-    var isEmpty: Bool {
-        return items.isEmpty
-    }
-    
-    mutating func enqueue(_ item: T) {
-        items.append(item)
-    }
-    
-    @discardableResult
-    mutating func dequeue() -> T? {
-        if items.isEmpty {
-            return nil
-        }
-        return items.removeFirst()
-    }
-    
-    mutating func clear() {
-        items.removeAll()
-    }
-}
-
 class CalculatorItemQueueTests: XCTestCase {
 
     var sut: CalculatorItemQueue<String>!
