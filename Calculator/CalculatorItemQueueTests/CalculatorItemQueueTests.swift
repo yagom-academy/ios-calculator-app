@@ -51,7 +51,7 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.outbox.append("2")
         let result = queue.front
         
-        XCTAssertEqual(queue.outbox.last, "2")
+        XCTAssertEqual(queue.outbox.last, result)
     }
     
     func test_outbox배열이비어있을때false를반환하는지() {

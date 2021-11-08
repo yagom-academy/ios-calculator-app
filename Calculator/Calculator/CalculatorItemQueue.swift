@@ -12,7 +12,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     var outbox = [Element]()
     
     var front: Element? {
-        return nil
+        return outbox.last ?? inbox.first
     }
     
     var isEmpty: Bool {
