@@ -7,35 +7,6 @@
 
 import XCTest
 
-struct LinkedListQueue<T> {
-    private var list = LinkedList<T>()
-    
-    var count: Int {
-        return list.count
-    }
-    
-    var isEmpty: Bool {
-        return list.isEmpty
-    }
-    
-    var front: T? {
-        return list.first?.value
-    }
-    
-    func enqueue(_ element: T) {
-        list.append(element)
-    }
-    
-    func dequeue() -> T? {
-        if list.isEmpty { return nil }
-        return list.remove(at: 0)
-    }
-    
-    func clear() {
-        list.removeAll()
-    }
-    
-}
 
 class LinkedListQueueTests: XCTestCase {
     
