@@ -63,19 +63,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_dequeue_and_calculate_값이_2개인_배열에서_실패하는지() {
-        sut.enqueue(10)
-        sut.enqueue(+)
-        
-        guard sut.dequeueNumber() != nil,
-              sut.dequeueOperator() != nil,
-              sut.dequeueNumber() != nil else {
-                  return
-              }
-        
-        XCTFail()
-    }
-    
     func test_calculateAll_0으로_나누기() {
         sut.enqueue(20)
         sut.enqueue(/)
@@ -109,6 +96,8 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = sut.calculateAll()
         
         XCTAssertEqual(result, 60)
+        XCTAssertTrue(sut.numbers.isEmpty)
+        XCTAssertTrue(sut.operators.isEmpty)
     }
     
     func test_calculateAll_queue가_비었을_때_0을_반환() {
