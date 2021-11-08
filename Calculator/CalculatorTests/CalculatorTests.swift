@@ -22,17 +22,26 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(queue.returnQueue(), [1, 2])
     }
     
-//    func test_1이_있는_큐를_삭제하면_빈_큐가_된다() {
-//        let queue = CalculatorItemQueue()
-//        queue.deQueue()
-//        //XCTAssertTrue(stack.items.isEmpty)
-//    }
-//
-//    func test_1과2가_있는_큐를_삭제하면_2가_남는다() {
-//        let queue = CalculatorItemQueue()
-//        queue.deQueue()
-//        //XCTAssertEqual(stack.items, [1])
-//    }
+    func test_비어있는_큐를_삭제하면_삭제되지_않는다() {
+        var queue = CalculatorItemQueue<Int>()
+        queue.deQueue()
+        XCTAssertEqual(queue.returnQueue(), [])
+    }
+    
+    func test_데이터가_1개_있는_큐를_삭제하면_빈_큐가_된다() {
+        var queue = CalculatorItemQueue<Int>()
+        queue.enQueue(1)
+        queue.deQueue()
+        XCTAssertEqual(queue.returnQueue(), [])
+    }
+
+    func test_데이터가_2개_있는_큐를_삭제하면_한개가_남는다() {
+        var queue = CalculatorItemQueue<Int>()
+        queue.enQueue(1)
+        queue.enQueue(2)
+        queue.deQueue()
+        XCTAssertEqual(queue.returnQueue(), [1])
+    }
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
