@@ -49,6 +49,16 @@ final class LinkedList<T> {
         }
         return count
     }
+    
+    func append(_ value: T) {
+        let newNode = Node(value: value)
+        if let lastNode = last {
+            newNode.prev = last
+            lastNode.next = newNode
+        } else {
+            head = newNode
+        }
+    }
 }
 
 class LinkedListTests: XCTestCase {
@@ -61,5 +71,25 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(list.first)
         XCTAssertNil(list.last)
     }
-
+    
+    func test_한개의요소() {
+        let list = LinkedList<Int>()
+        list.append(123)
+        
+        XCTAssertFalse(list.isEmpty)
+        XCTAssertEqual(list.count, 1)
+        
+        XCTAssertNotNil(list.first)
+        XCTAssertNil(list.head!.prev)
+        XCTAssertNil(list.head!.next)
+        XCTAssertEqual(list.head!.value, 123)
+        
+        XCTAssertNotNil(list.last)
+        XCTAssertNil(list.last!.prev)
+        XCTAssertNil(list.last!.next)
+        XCTAssertEqual(list.last!.value, 123)
+        
+        XCTAssertTrue(list.head === list.last)
+    }
+    
 }
