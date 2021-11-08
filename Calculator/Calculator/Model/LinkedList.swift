@@ -19,7 +19,7 @@ final class LinkedList<Element> {
         }
     }
 
-    var head: Node<Element>?
+    private(set) var head: Node<Element>?
     
     var first: Node<Element>? {
         return head
