@@ -7,6 +7,16 @@
 
 import Foundation
 
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue<Element>: CalculateItem {
+    private(set) var inbox = [Element]()
     
+    mutating func enqueue(_ element: Element) {
+        inbox.append(element)
+    }
+    
+    mutating func dequeue() -> [Element] {
+        inbox.removeFirst()
+        
+        return inbox
+    }
 }
