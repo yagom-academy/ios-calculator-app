@@ -116,4 +116,19 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 0)
     }
+    
+    func test_calculateAll_계산후_큐가_비는지_확인() {
+        sut.enqueue(10)
+        sut.enqueue(+)
+        sut.enqueue(20)
+        sut.enqueue(+)
+        sut.enqueue(30)
+        sut.enqueue(+)
+        
+        let result = sut.calculateAll()
+        
+        XCTAssertEqual(result, 60)
+        XCTAssertTrue(sut.numbers.isEmpty)
+        XCTAssertTrue(sut.operators.isEmpty)
+    }
 }
