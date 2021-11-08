@@ -11,6 +11,10 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     private(set) var inBox = [Element]()
     private(set) var outBox = [Element]()
     
+    var front: Element? {
+        return outBox.last ?? inBox.first
+    }
+    
     var count: Int {
         return inBox.count + outBox.count
     }
