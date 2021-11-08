@@ -35,14 +35,14 @@ class CalculatorItemQueueTests: XCTestCase {
                   return
               }
         
-        let temp = calculation.operation(leftValue.value, rightValue.value)
+        let temp = calculation.operation(leftValue, rightValue)
         
         guard let calculation2 = sut.dequeueOperator(),
               let rightValue2 = sut.dequeueNumber() else {
                   return
               }
         
-        let result = calculation2.operation(temp, rightValue2.value)
+        let result = calculation2.operation(temp, rightValue2)
         
         XCTAssertEqual(result, 60)
     }
@@ -58,7 +58,7 @@ class CalculatorItemQueueTests: XCTestCase {
                   return
               }
         
-        let result = calculation.operation(leftValue.value, rightValue.value)
+        let result = calculation.operation(leftValue, rightValue)
         
         XCTAssertEqual(result, 2)
     }
@@ -83,7 +83,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         let result = sut.calculateAll()
         
-        XCTAssertTrue(result.isInfinite)
+        XCTAssertTrue(result.value.isInfinite)
     }
     
     func test_calculateAll_더하기() {
