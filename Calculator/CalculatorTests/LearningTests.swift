@@ -13,4 +13,5 @@ import XCTest
 
 class LearningTests: XCTestCase {
     // 코드 입력
+    // .gitignore Test
 }
