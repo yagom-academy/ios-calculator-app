@@ -62,5 +62,12 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    func test_outbox배열이비어있지않을때true를반환하는지() {
+        queue.outbox.append("2")
+        
+        let result = queue.isEmpty
+        
+        XCTAssertTrue(result)
+    }
     
 }
