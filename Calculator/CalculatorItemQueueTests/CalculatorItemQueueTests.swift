@@ -45,4 +45,13 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNil(result)
     }
+    
+    func test_outbox배열에값이있을때_첫번째요소를반환하는지() {
+        queue.enqueue("2")
+        queue.outbox = queue.inbox.reversed()
+        
+        let result = queue.front
+        
+        XCTAssertEqual(queue.outbox.last, result)
+    }
 }

@@ -9,6 +9,11 @@ import Foundation
 
 struct CalculatorItemQueue<Element>: CalculateItem {
     private(set) var inbox = [Element]()
+    var outbox = [Element]()
+    
+    var front: Element? {
+        return outbox.last ?? inbox.first
+    }
     
     mutating func enqueue(_ element: Element) {
         inbox.append(element)
