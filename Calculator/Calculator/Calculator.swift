@@ -1,25 +1,13 @@
 import Foundation
 
 class CalculatorItemQueue<T>: ManageLinkedList<T> {
-    var itemQueue = [T]()
-    
-    init(itemQueue: [T]) {
-        self.itemQueue = itemQueue
-    }
-    
-    var isEmpty: Bool {
-        itemQueue.isEmpty
-    }
-    
+
     func putToQueue(_ value: T) {
-        itemQueue.append(value)
+        enQueue(value: value)
     }
     
     func getFromQueue() {
-        guard isEmpty == false else {
-           return print("Error: Queue가 비어있습니다.")
-        }
-        itemQueue.removeFirst()
+        deQueue()
     }
 }
 
@@ -35,18 +23,20 @@ class Node<T> {
     
 class ManageLinkedList<T> {
     var head: Node<T>?
+    var lastNode: Node<T>?
     
     func enQueue(value: T) {
         if head == nil {
             head = Node(value: value, pointer: nil)
+            lastNode = head
             return
         }
         
-        var finderNodeOfEndNode = head
-        while finderNodeOfEndNode?.pointer == nil {
-            finderNodeOfEndNode = finderNodeOfEndNode?.pointer ?? nil
+        lastNode = head
+        while lastNode?.pointer != nil {
+            lastNode = lastNode?.pointer
         }
-        finderNodeOfEndNode?.pointer = Node(value: value, pointer: nil)
+        lastNode?.pointer = Node(value: value, pointer: nil)
     }
     
     func deQueue() {
