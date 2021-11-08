@@ -98,6 +98,12 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
+    func test_count가_0을반환하는지확인() {
+        let result = sut.count
+        
+        XCTAssertEqual(result, 0)
+    }
+    
     func test_isEmpty() {
         XCTAssertTrue(sut.isEmpty)
         sut.enqueue("2")
