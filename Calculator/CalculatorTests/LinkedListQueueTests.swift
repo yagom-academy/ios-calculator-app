@@ -31,6 +31,10 @@ struct LinkedListQueue<T> {
         return list.remove(at: 0)
     }
     
+    func clear() {
+        list.removeAll()
+    }
+    
 }
 
 class LinkedListQueueTests: XCTestCase {
@@ -67,6 +71,21 @@ class LinkedListQueueTests: XCTestCase {
         
         let result2 = queue.dequeue()
         XCTAssertEqual(result2, 456)
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertEqual(queue.count, 0)
+        XCTAssertEqual(queue.front, nil)
+    }
+    
+    func test_요소가두개일때_clear호출() {
+        let queue = LinkedListQueue<Int>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 2)
+        XCTAssertEqual(queue.front, 123)
+        
+        queue.clear()
         XCTAssertTrue(queue.isEmpty)
         XCTAssertEqual(queue.count, 0)
         XCTAssertEqual(queue.front, nil)
