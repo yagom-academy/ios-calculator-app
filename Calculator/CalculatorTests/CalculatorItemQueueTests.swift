@@ -10,6 +10,10 @@ import XCTest
 struct CalculatorItemQueue<T>: CalculateItem {
     private(set) var items = [T]()
     
+    var count: Int {
+        return items.count
+    }
+    
     mutating func enqueue(_ item: T) {
         items.append(item)
     }
@@ -78,6 +82,16 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.clear()
         
         XCTAssertEqual(true, sut.items.isEmpty)
+    }
+    
+    func test_count() {
+        sut.enqueue("3")
+        sut.enqueue("6")
+        sut.enqueue("10.3")
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, 3)
     }
 
 }
