@@ -146,19 +146,19 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(node == 14)
     }
     
-    func test_마지막요소_지우기() {
+    func test_첫번째요소_지우기() {
         let list = LinkedList<Int>()
         let numbers = [13, 22, 34]
         for number in numbers {
             list.append(number)
         }
         
-        let node = list.removeLast()
+        let node = list.removeFirst()
         
         XCTAssertEqual(list.count, 2)
-        XCTAssertTrue(node == 34)
-        XCTAssertTrue(list.last?.value == 22)
-        XCTAssertNotNil(list.last)
+        XCTAssertTrue(node == 13)
+        XCTAssertTrue(list.first?.value == 22)
+        XCTAssertNotNil(list.first)
     }
     
     func test_모든요소_지우기() {
