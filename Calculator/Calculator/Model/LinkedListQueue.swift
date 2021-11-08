@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
-struct LinkedListQueue<T> {
-    private(set) var list = LinkedList<T>()
+struct LinkedListQueue<Element> {
+    private(set) var list = LinkedList<Element>()
     
     var count: Int {
         return list.count
@@ -18,16 +19,16 @@ struct LinkedListQueue<T> {
         return list.isEmpty
     }
     
-    var front: T? {
+    var front: Element? {
         return list.first?.value
     }
     
-    func enqueue(_ element: T) {
+    func enqueue(_ element: Element) {
         list.append(element)
     }
     
     @discardableResult
-    func dequeue() -> T? {
+    func dequeue() -> Element? {
         if list.isEmpty { return nil }
         return list.removeFirst()
     }
