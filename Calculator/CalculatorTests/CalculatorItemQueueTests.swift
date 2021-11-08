@@ -14,6 +14,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return items.count
     }
     
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+    
     mutating func enqueue(_ item: T) {
         items.append(item)
     }
@@ -92,6 +96,12 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = sut.count
         
         XCTAssertEqual(result, 3)
+    }
+    
+    func test_isEmpty() {
+        XCTAssertTrue(sut.isEmpty)
+        sut.enqueue("2")
+        XCTAssertFalse(sut.isEmpty)
     }
 
 }
