@@ -1,6 +1,6 @@
 import Foundation
 
-class CalculatorItemQueue<T> {
+class CalculatorItemQueue<T>: ManageLinkedList<T> {
     var itemQueue = [T]()
     
     init(itemQueue: [T]) {
@@ -23,20 +23,20 @@ class CalculatorItemQueue<T> {
     }
 }
 
-class Node {
-    let value: Int
+class Node<T> {
+    let value: T
     var pointer: Node?
     
-    init(value: Int, pointer: Node?) {
+    init(value: T, pointer: Node?) {
         self.value = value
         self.pointer = pointer
     }
 }
     
-class ManageLinkedList {
-    var head: Node?
+class ManageLinkedList<T> {
+    var head: Node<T>?
     
-    func enQueue(value: Int) {
+    func enQueue(value: T) {
         if head == nil {
             head = Node(value: value, pointer: nil)
             return
@@ -44,7 +44,7 @@ class ManageLinkedList {
         
         var finderNodeOfEndNode = head
         while finderNodeOfEndNode?.pointer == nil {
-            finderNodeOfEndNode = finderNodeOfEndNode?.pointer
+            finderNodeOfEndNode = finderNodeOfEndNode?.pointer ?? nil
         }
         finderNodeOfEndNode?.pointer = Node(value: value, pointer: nil)
     }
