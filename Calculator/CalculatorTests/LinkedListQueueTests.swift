@@ -50,4 +50,26 @@ class LinkedListQueueTests: XCTestCase {
         XCTAssertEqual(queue.front, nil)
     }
     
+    func test_요소가두개일때() {
+        let queue = LinkedListQueue<Int>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 2)
+        XCTAssertEqual(queue.front, 123)
+        
+        let result1 = queue.dequeue()
+        XCTAssertEqual(result1, 123)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 1)
+        XCTAssertEqual(queue.front, 456)
+        
+        let result2 = queue.dequeue()
+        XCTAssertEqual(result2, 456)
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertEqual(queue.count, 0)
+        XCTAssertEqual(queue.front, nil)
+    }
+    
 }
