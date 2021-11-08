@@ -13,6 +13,14 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func enqueue(_ item: T) {
         items.append(item)
     }
+    
+    @discardableResult
+    mutating func dequeue() -> T? {
+        if items.isEmpty {
+            return nil
+        }
+        return items.removeFirst()
+    }
 }
 
 class CalculatorItemQueueTests: XCTestCase {
@@ -43,6 +51,12 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("10.8")
         
         XCTAssertEqual(sut.items, ["6","3.5","10.8"])
+    }
+    
+    func test_dequeue_빈큐를dequeue를하면_nil이나온다() {
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, nil)
     }
 
 }
