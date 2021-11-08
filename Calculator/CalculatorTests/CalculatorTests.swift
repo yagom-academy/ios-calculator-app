@@ -9,7 +9,7 @@ class CalculatorTests: XCTestCase {
     }
         
     func test_1이_있는_큐에_2를_put하면_1과_2가_남는다() {
-        let queue = CalculatorItemQueue<Int>(head: Node(value: 1))
+        let queue = CalculatorItemQueue<Int>(head: Node(1))
         queue.putToQueue(2)
         XCTAssertEqual(queue.head?.value, Optional(1))
         XCTAssertEqual(queue.head?.pointer?.value, Optional(2))
@@ -17,13 +17,13 @@ class CalculatorTests: XCTestCase {
     }
 
     func test_1만_있는_큐에_get을_하면_빈_큐가_된다() {
-        let queue = CalculatorItemQueue<Int>(head: Node(value: 1))
+        let queue = CalculatorItemQueue<Int>(head: Node(1))
         queue.getFromQueue()
         XCTAssertNil(queue.head?.value)
     }
 
     func test_1과_2가_있는_큐에_get을_하면_2가_남는다() {
-        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, pointer: Node(value: 2)))
+        let queue = CalculatorItemQueue<Int>(head: Node(1, pointer: Node(2)))
         queue.getFromQueue()
         XCTAssertEqual(queue.head?.value, Optional(2))
         XCTAssertNil(queue.head?.pointer)

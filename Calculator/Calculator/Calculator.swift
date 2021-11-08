@@ -7,7 +7,7 @@ protocol CalculateItem {
 
 class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
     func putToQueue(_ value: T) {
-        addNewNode(value: value)
+        addNewNode(value)
     }
     
     func getFromQueue() {
@@ -20,7 +20,7 @@ class Node<T> {
     let value: T
     var pointer: Node?
     
-    init(value: T, pointer: Node? = nil) {
+    init(_ value: T, pointer: Node? = nil) {
         self.value = value
         self.pointer = pointer
     }
@@ -33,16 +33,16 @@ class LinkedListManager<T> {
         self.head = head
     }
     
-    func addNewNode(value: T) {
+    func addNewNode(_ value: T) {
         if head == nil {
-            head = Node(value: value)
+            head = Node(value)
             return
         }
         var finderToLastNode: Node<T>? = head
         while finderToLastNode?.pointer != nil {
             finderToLastNode = finderToLastNode?.pointer
         }
-        finderToLastNode?.pointer = Node(value: value)
+        finderToLastNode?.pointer = Node(value)
     }
     
     func deleteFirstNode() {
