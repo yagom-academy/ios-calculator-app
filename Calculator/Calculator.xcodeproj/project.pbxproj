@@ -13,7 +13,7 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
-		ED00CF3B27397DA40081B9F3 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00CF3A27397DA40081B9F3 /* CalculatorTests.swift */; };
+		ED00CF3B27397DA40081B9F3 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00CF3A27397DA40081B9F3 /* LinkedListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +26,7 @@
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED00CF3827397DA40081B9F3 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED00CF3A27397DA40081B9F3 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		ED00CF3A27397DA40081B9F3 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		ED00CF3C27397DA40081B9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 		ED00CF3927397DA40081B9F3 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				ED00CF3A27397DA40081B9F3 /* CalculatorTests.swift */,
+				ED00CF3A27397DA40081B9F3 /* LinkedListTests.swift */,
 				ED00CF3C27397DA40081B9F3 /* Info.plist */,
 			);
 			path = CalculatorTests;
@@ -197,7 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED00CF3B27397DA40081B9F3 /* CalculatorTests.swift in Sources */,
+				ED00CF3B27397DA40081B9F3 /* LinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
