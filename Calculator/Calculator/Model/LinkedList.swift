@@ -95,7 +95,8 @@ final class LinkedList<T> {
         return remove(node: node)
     }
     
-    @discardableResult func removeLast() -> T {
+    @discardableResult
+    func removeLast() -> T {
         assert(!isEmpty)
         return remove(node: last!)
     }

@@ -134,7 +134,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(list.last)
     }
     
-    func test_여러요소가있는리스트를_인덱스로_골라지우기() { //[1, 5, 14, 9, 6, 4]
+    func test_여러요소가있는리스트를_인덱스로_골라지우기() {
         let list = LinkedList<Int>()
         for number in numbers {
             list.append(number)
