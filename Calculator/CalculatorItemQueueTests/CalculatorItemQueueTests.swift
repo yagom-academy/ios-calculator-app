@@ -97,4 +97,23 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 60)
     }
+    
+    func test_calculateAll_숫자가_부족할때_마지막_연산_생략() {
+        sut.enqueue(10)
+        sut.enqueue(+)
+        sut.enqueue(20)
+        sut.enqueue(+)
+        sut.enqueue(30)
+        sut.enqueue(+)
+        
+        let result = sut.calculateAll()
+        
+        XCTAssertEqual(result, 60)
+    }
+    
+    func test_calculateAll_queue가_비었을_때_0을_반환() {
+        let result = sut.calculateAll()
+        
+        XCTAssertEqual(result, 0)
+    }
 }
