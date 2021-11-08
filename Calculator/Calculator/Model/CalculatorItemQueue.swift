@@ -11,10 +11,6 @@ struct CalculatorItemQueue {
         self.queue = []
     }
     
-    func clear() {
-        //TODO: -
-    }
-    
     func calculate() -> Double {
         var result: Double = 0
         
