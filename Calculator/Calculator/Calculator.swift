@@ -1,5 +1,9 @@
 import Foundation
 
+protocol CalculateItem {
+    
+}
+
 class Node<T> {
     let value: T
     var pointer: Node?
@@ -19,7 +23,7 @@ class LinkedListManager<T> {
     
     func addNewNode(value: T) {
         if head == nil {
-            head = Node(value: value, pointer: nil)
+            head = Node(value: value)
             return
         }
         var finderToLastNode: Node<T>? = head
@@ -35,7 +39,7 @@ class LinkedListManager<T> {
     }
 }
 
-class CalculatorItemQueue<T>: LinkedListManager<T> {
+class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
     func putToQueue(_ value: T) {
         addNewNode(value: value)
     }
