@@ -40,7 +40,7 @@ class CalculatorTests: XCTestCase {
         queue.enQueue(1)
         queue.enQueue(2)
         queue.deQueue()
-        XCTAssertEqual(queue.returnQueue(), [1])
+        XCTAssertEqual(queue.returnQueue(), [2])
     }
     
     override func setUpWithError() throws {

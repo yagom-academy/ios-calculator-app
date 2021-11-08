@@ -28,8 +28,11 @@ struct CalculatorItemQueue<T> {
         node?.next = Node(data: data)
     }
     
-    func deQueue() {
-        
+    mutating func deQueue() {
+        if front == nil {
+            return
+        }
+        front = front?.next
     }
     
     func removeAll() {
@@ -38,8 +41,8 @@ struct CalculatorItemQueue<T> {
     
     mutating func returnQueue() -> Array<T> {
         var queue: Array<T> = []
-        
         var node = front
+        
         while node?.data != nil {
             guard let data = node?.data else {
                 return []
@@ -47,8 +50,6 @@ struct CalculatorItemQueue<T> {
             queue.append(data)
             node = node?.next
         }
-        
-        
         return queue
     }
 }
