@@ -14,26 +14,54 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue_type() {
+    func test_enqueue_type_두가지_모두_성공하는지() {
         sut.enqueue(NumberItem(value: 10))
-        sut.enqueue(OperatorItem(value: +))
+        sut.enqueue(OperatorItem(operation: +))
         sut.enqueue(NumberItem(value: 20))
         XCTAssertEqual(sut.array.count, 3)
     }
     
-    func test_dequeue_and_calculate() {
+    func test_dequeue_and_calculate_addition() {
         sut.enqueue(NumberItem(value: 10))
-        sut.enqueue(OperatorItem(value: +))
+        sut.enqueue(OperatorItem(operation: +))
         sut.enqueue(NumberItem(value: 20))
         
         guard let leftValue = sut.dequeue() as? NumberItem,
-              let calculate = sut.dequeue() as? OperatorItem,
+              let calculation = sut.dequeue() as? OperatorItem,
               let rightValue = sut.dequeue() as? NumberItem else {
                   return
               }
         
-        let result = calculate.value(leftValue.value, rightValue.value)
+        let result = calculation.operation(leftValue.value, rightValue.value)
         
         XCTAssertEqual(result, 30)
+    }
+    
+    func test_dequeue_and_calculate_division() {
+        sut.enqueue(NumberItem(value: 20))
+        sut.enqueue(OperatorItem(operation: /))
+        sut.enqueue(NumberItem(value: 10))
+        
+        guard let leftValue = sut.dequeue() as? NumberItem,
+              let calculation = sut.dequeue() as? OperatorItem,
+              let rightValue = sut.dequeue() as? NumberItem else {
+                  return
+              }
+        
+        let result = calculation.operation(leftValue.value, rightValue.value)
+        
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_dequeue_and_calculate_값이_2개인_배열에서_실패하는지() {
+        sut.enqueue(NumberItem(value: 10))
+        sut.enqueue(OperatorItem(operation: +))
+        
+        guard let leftValue = sut.dequeue() as? NumberItem,
+              let calculation = sut.dequeue() as? OperatorItem,
+              let rightValue = sut.dequeue() as? NumberItem else {
+                  return
+              }
+        XCTFail()
     }
 }

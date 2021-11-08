@@ -21,5 +21,5 @@ struct NumberItem: CalculateItem {
 }
 
 struct OperatorItem: CalculateItem {
-    var value: (Double, Double) -> Double
+    var operation: (Double, Double) -> Double
 }
