@@ -1,16 +1,5 @@
 import Foundation
 
-class CalculatorItemQueue<T>: ManageLinkedList<T> {
-    func putToQueue(_ value: T) {
-        enQueue(value: value)
-    }
-    
-    func getFromQueue() {
-        guard self.head?.value != nil else { return }
-        deQueue()
-    }
-}
-
 class Node<T> {
     let value: T
     var pointer: Node?
@@ -46,5 +35,14 @@ class ManageLinkedList<T> {
     }
 }
 
-
+class CalculatorItemQueue<T>: ManageLinkedList<T> {
+    func putToQueue(_ value: T) {
+        enQueue(value: value)
+    }
+    
+    func getFromQueue() {
+        guard self.head?.value != nil else { return }
+        deQueue()
+    }
+}
 
