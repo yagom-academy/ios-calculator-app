@@ -10,7 +10,7 @@ class Node<T> {
     }
 }
     
-class ManageLinkedList<T> {
+class LinkedListManager<T> {
     var head: Node<T>?
     
     init(head: Node<T>?) {
@@ -35,7 +35,7 @@ class ManageLinkedList<T> {
     }
 }
 
-class CalculatorItemQueue<T>: ManageLinkedList<T> {
+class CalculatorItemQueue<T>: LinkedListManager<T> {
     func putToQueue(_ value: T) {
         addNewNode(value: value)
     }
