@@ -75,4 +75,26 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTFail()
     }
+    
+    func test_calculateAll_0으로_나누기() {
+        sut.enqueue(20)
+        sut.enqueue(/)
+        sut.enqueue(0)
+        
+        let result = sut.calculateAll()
+        
+        XCTAssertTrue(result.isInfinite)
+    }
+    
+    func test_calculateAll_더하기() {
+        sut.enqueue(10)
+        sut.enqueue(+)
+        sut.enqueue(20)
+        sut.enqueue(+)
+        sut.enqueue(30)
+        
+        let result = sut.calculateAll()
+        
+        XCTAssertEqual(result, 60)
+    }
 }
