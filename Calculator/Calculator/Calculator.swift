@@ -1,10 +1,3 @@
-//
-//  Calculator.swift
-//  Calculator
-//
-//  Created by 서녕 on 2021/11/08.
-//
-
 import Foundation
 
 class CalculatorItemQueue<T> {
@@ -55,4 +48,11 @@ class ManageLinkedList {
         }
         finderNodeOfEndNode?.pointer = Node(value: value, pointer: nil)
     }
+    
+    func deQueue() {
+        head = head?.pointer
+    }
+    
 }
+
+
