@@ -1,7 +1,19 @@
 import Foundation
 
+
 protocol CalculateItem {
     
+}
+
+class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
+    func putToQueue(_ value: T) {
+        addNewNode(value: value)
+    }
+    
+    func getFromQueue() {
+        guard self.head?.value != nil else { return }
+        deleteFirstNode()
+    }
 }
 
 class Node<T> {
@@ -29,7 +41,6 @@ class LinkedListManager<T> {
         var finderToLastNode: Node<T>? = head
         while finderToLastNode?.pointer != nil {
             finderToLastNode = finderToLastNode?.pointer
-            
         }
         finderToLastNode?.pointer = Node(value: value)
     }
@@ -38,15 +49,3 @@ class LinkedListManager<T> {
         head = head?.pointer
     }
 }
-
-class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
-    func putToQueue(_ value: T) {
-        addNewNode(value: value)
-    }
-    
-    func getFromQueue() {
-        guard self.head?.value != nil else { return }
-        deleteFirstNode()
-    }
-}
-
