@@ -15,8 +15,14 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_빈_노드에_헤드추가() {
-        sut.enqueue("1")
-        XCTAssertEqual(head.value, ["1"])
+//    func test_빈_노드에_헤드추가() {
+//        sut.enqueue("1")
+//        XCTAssertEqual(head.value, ["1"])
+//    }
+    
+    func test_헤드가_비었는지() {
+        var boolean: Bool = sut.hasEmpty(head: nil)
+        
+        XCTAssertTrue(boolean)
     }
 }
