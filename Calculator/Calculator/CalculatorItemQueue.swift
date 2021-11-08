@@ -12,7 +12,11 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     var outbox = [Element]()
     
     var front: Element? {
-        return outbox.last ?? inbox.first
+        return nil
+    }
+    
+    var isEmpty: Bool {
+        return inbox.isEmpty && outbox.isEmpty
     }
     
     mutating func enqueue(_ element: Element) {
@@ -23,6 +27,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         if inbox.isEmpty {
             return nil
         }
+            
         
         return inbox.removeFirst()
     }
