@@ -1,10 +1,3 @@
-//
-//  CalculatorTests.swift
-//  CalculatorTests
-//
-//  Created by 장영우 on 2021/11/08.
-//
-
 import XCTest
 
 @testable import Calculator
