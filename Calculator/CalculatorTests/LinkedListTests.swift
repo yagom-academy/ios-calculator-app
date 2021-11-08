@@ -73,6 +73,27 @@ final class LinkedList<T> {
         }
     }
     
+    func remove(node: Node<T>) -> T {
+        let prev = node.prev
+        let next = node.next
+        
+        if let prev = prev {
+            prev.next = next
+        } else {
+            head = next
+        }
+        next?.prev = prev
+        
+        node.prev = nil
+        node.next = nil
+        
+        return node.value
+    }
+    
+    func remove(at index: Int) -> T {
+        let node = self.node(at: index)
+        return remove(node: node)
+    }
 }
 
 class LinkedListTests: XCTestCase {
@@ -174,4 +195,44 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(node.value, 789)
         XCTAssertTrue(node === list.last)
     }
+    
+    func test_node를지우기() {
+        let list = LinkedList<Int>()
+        list.append(123)
+        let node = list.head!
+        
+        let value = list.remove(node: node)
+        
+        XCTAssertEqual(value, 123)
+        XCTAssertTrue(list.isEmpty)
+        XCTAssertEqual(list.count, 0)
+        XCTAssertNil(list.first)
+        XCTAssertNil(list.last)
+    }
+    
+    func test_node를_인덱스로지우기() {
+        let list = LinkedList<Int>()
+        list.append(123)
+        
+        let value = list.remove(at: 0)
+        
+        XCTAssertEqual(value, 123)
+        XCTAssertTrue(list.isEmpty)
+        XCTAssertEqual(list.count, 0)
+        XCTAssertNil(list.first)
+        XCTAssertNil(list.last)
+    }
+    
+    func test_여러요소가있는리스트를_인덱스로_골라지우기() { //[1, 5, 14, 9, 6, 4]
+        let list = LinkedList<Int>()
+        for number in numbers {
+            list.append(number)
+        }
+        
+        let node = list.remove(at: 2)
+        
+        XCTAssertEqual(list.count, 5)
+        XCTAssertTrue(node == 14)
+    }
+    
 }
