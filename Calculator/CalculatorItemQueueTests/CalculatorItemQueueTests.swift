@@ -14,7 +14,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue_type_두가지_모두_성공하는지() {
+    func test_enqueue_type_두가지_타입으로_성공하는지() {
         sut.enqueue(10)
         sut.enqueue(+)
         sut.enqueue(20)
@@ -26,6 +26,8 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(10)
         sut.enqueue(+)
         sut.enqueue(20)
+        sut.enqueue(+)
+        sut.enqueue(30)
         
         guard let leftValue = sut.dequeueNumber(),
               let calculation = sut.dequeueOperator(),
@@ -33,9 +35,16 @@ class CalculatorItemQueueTests: XCTestCase {
                   return
               }
         
-        let result = calculation.operation(leftValue.value, rightValue.value)
+        let temp = calculation.operation(leftValue.value, rightValue.value)
         
-        XCTAssertEqual(result, 30)
+        guard let calculation2 = sut.dequeueOperator(),
+              let rightValue2 = sut.dequeueNumber() else {
+                  return
+              }
+        
+        let result = calculation2.operation(temp, rightValue2.value)
+        
+        XCTAssertEqual(result, 60)
     }
     
     func test_dequeue_and_calculate_division() {
