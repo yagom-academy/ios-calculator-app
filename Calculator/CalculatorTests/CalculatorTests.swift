@@ -12,54 +12,54 @@ import XCTest
 class CalculatorTests: XCTestCase {
     
     func testSumCase() {
-        let testQueue = CalCulatorItemQueue()
+        var testQueue = CalculatorItemQueue()
         
         for iterator in (1...10) {
-            testQueue.enqueue(Adder(iterator))
+            testQueue.enqueue(Adder(value: Double(iterator)))
         }
         
         XCTAssertEqual(testQueue.calculate(), 55)
     }
     
     func testSubtractCase() {
-        let testQueue = CalCulatorItemQueue()
+        var testQueue = CalculatorItemQueue()
         
         for iterator in (1...10) {
-            testQueue.enqueue(Subtractor(iterator))
+            testQueue.enqueue(Subtractor(value: Double(iterator)))
         }
         
         XCTAssertEqual(testQueue.calculate(), -55)
     }
     
     func testMultiplyCase() {
-        let testQueue = CalCulatorItemQueue()
+        var testQueue = CalculatorItemQueue()
         
-        testQueue.enqueue(Adder(100))
+        testQueue.enqueue(Adder(value: 100))
         for iterator in (1...3) {
-            testQueue.enqueue(Multiplier(iterator))
+            testQueue.enqueue(Multiplier(value: Double(iterator)))
         }
         
         XCTAssertEqual(testQueue.calculate(), 600)
     }
     
     func testDivideCase() {
-        let testQueue = CalCulatorItemQueue()
+        var testQueue = CalculatorItemQueue()
         
-        testQueue.enqueue(Adder(60))
+        testQueue.enqueue(Adder(value: 60))
         for iterator in (1...3) {
-            testQueue.enqueue(Divider(iterator))
+            testQueue.enqueue(Divider(value: Double(iterator)))
         }
         
         XCTAssertEqual(testQueue.calculate(), 10)
     }
     
     func testClearCase() {
-        let testQueue = CalCulatorItemQueue()
+        var testQueue = CalculatorItemQueue()
         
-        testQueue.enqueue(Adder(10))
-        testQueue.enqueue(Divider(9))
-        testQueue.enqueue(Multiplier(8))
-        testQueue.enqueue(Divider(2))
+        testQueue.enqueue(Adder(value: 10))
+        testQueue.enqueue(Divider(value: 5))
+        testQueue.enqueue(Multiplier(value: 20))
+        testQueue.enqueue(Divider(value: 2))
         
         testQueue.allClear()
         

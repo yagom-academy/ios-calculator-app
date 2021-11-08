@@ -10,11 +10,11 @@ import Foundation
 struct CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
-    func enqueue(_ item: CalculateItem) {
+    mutating func enqueue(_ item: CalculateItem) {
         queue.append(item)
     }
     
-    func allClear() {
+    mutating func allClear() {
         self.queue = []
     }
     
