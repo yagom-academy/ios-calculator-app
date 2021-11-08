@@ -6,24 +6,26 @@
 //
 
 import Foundation
+import Metal
 
-final class LinkedList<T> {
-    final class Node<T> {
-        var value: T
-        var next: Node?
-        var prev: Node?
+final class LinkedList<Element> {
+    final class Node<Element> {
+        var value: Element
+        var next: Node<Element>?
+        var prev: Node<Element>?
         
-        init(value: T) {
+        init(value: Element) {
             self.value = value
         }
     }
-    var head: Node<T>?
+
+    var head: Node<Element>?
     
-    var first: Node<T>? {
+    var first: Node<Element>? {
         return head
     }
     
-    var last: Node<T>? {
+    var last: Node<Element>? {
         guard var node = head else {
             return nil
         }
@@ -50,7 +52,7 @@ final class LinkedList<T> {
         return count
     }
     
-    func append(_ value: T) {
+    func append(_ value: Element) {
         let newNode = Node(value: value)
         if let lastNode = last {
             newNode.prev = last
@@ -60,7 +62,7 @@ final class LinkedList<T> {
         }
     }
     
-    func node(at index: Int) -> Node<T> {
+    func node(at index: Int) -> Node<Element> {
         if index == 0 {
             return head!
         } else {
@@ -73,7 +75,7 @@ final class LinkedList<T> {
         }
     }
     
-    func remove(node: Node<T>) -> T {
+    func remove(node: Node<Element>) -> Element {
         let prev = node.prev
         let next = node.next
         
@@ -90,13 +92,13 @@ final class LinkedList<T> {
         return node.value
     }
     
-    func remove(at index: Int) -> T {
+    func remove(at index: Int) -> Element {
         let node = self.node(at: index)
         return remove(node: node)
     }
     
     @discardableResult
-    func removeFirst() -> T? {
+    func removeFirst() -> Element? {
         if isEmpty { return nil }
         return remove(at: 0)
     }
