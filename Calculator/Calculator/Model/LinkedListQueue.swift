@@ -29,7 +29,7 @@ struct LinkedListQueue<T> {
     @discardableResult
     func dequeue() -> T? {
         if list.isEmpty { return nil }
-        return list.remove(at: 0)
+        return list.removeFirst()
     }
     
     func clear() {
