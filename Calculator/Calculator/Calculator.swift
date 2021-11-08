@@ -29,3 +29,13 @@ class CalculatorItemQueue<T> {
         itemQueue.removeLast()
     }
 }
+
+class Node {
+    let value: Int
+    var pointer: Node?
+    
+    init(value: Int, pointer: Node?) {
+        self.value = value
+        self.pointer = pointer
+    }
+}
