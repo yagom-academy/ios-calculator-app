@@ -19,10 +19,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(queue.itemQueue, [])
     }
     
-    func test_1과_2가_있는_큐에_get을_하면_1이_남는다() {
+    func test_1과_2가_있는_큐에_get을_하면_2가_남는다() {
         var queue = CalculatorItemQueue<Int>(itemQueue: [1, 2])
         queue.getFromQueue()
-        XCTAssertEqual(queue.itemQueue, [1])
+        XCTAssertEqual(queue.itemQueue, [2])
     }
     
     func test_비어있는_큐에는_getFromQueue_함수를_쓰더라도_아무변화가_없다() {

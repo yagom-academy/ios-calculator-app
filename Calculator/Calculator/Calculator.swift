@@ -26,7 +26,7 @@ class CalculatorItemQueue<T> {
         guard isEmpty == false else {
            return print("Error: Queue가 비어있습니다.")
         }
-        itemQueue.removeLast()
+        itemQueue.removeFirst()
     }
 }
 
@@ -40,7 +40,7 @@ class Node {
     }
 }
     
-class LinkedList {
+class ManageLinkedList {
     var head: Node?
     
     func enQueue(value: Int) {
