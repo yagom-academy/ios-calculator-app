@@ -1,5 +1,3 @@
-import UIKit
-
 protocol CalculateItem { }
 
 struct NumberItem: CalculateItem {
@@ -21,8 +19,8 @@ struct CalculatorItemQueue {
         
         for `operator` in operators {
             guard let value = dequeueNumber() else {
-                      break
-                  }
+                break
+            }
             result = `operator`.operation(result, value)
         }
         
