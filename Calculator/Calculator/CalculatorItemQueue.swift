@@ -13,17 +13,14 @@ struct CalculatorItemQueue {
     var operators: [OperatorItem] = []
     
     mutating func calculateAll() -> NumberItem {
-        guard var result = dequeueNumber() else {
-            return NumberItem(value: 0)
-        }
+        var result = dequeueNumber() ?? 0
         
-        for `operator` in operators {
+        while let `operator` = dequeueOperator() {
             guard let value = dequeueNumber() else {
                 break
             }
             result = `operator`.operation(result, value)
         }
-        
         return result
     }
     
@@ -31,8 +28,8 @@ struct CalculatorItemQueue {
         numbers.append(value)
     }
     
-    mutating func enqueue(_ value: OperatorItem) {
-        operators.append(value)
+    mutating func enqueue(_ operator: OperatorItem) {
+        operators.append(`operator`)
     }
     
     mutating func dequeueNumber() -> NumberItem? {
@@ -51,23 +48,23 @@ struct CalculatorItemQueue {
 }
 
 extension CalculatorItemQueue {
-    mutating func enqueue(_ value: @escaping (NumberItem, NumberItem) -> NumberItem) {
-        let item = OperatorItem(operation: value)
-        operators.append(item)
+    mutating func enqueue(_ item: @escaping (NumberItem, NumberItem) -> NumberItem) {
+        let item = OperatorItem(operation: item)
+        enqueue(item)
     }
 }
 
-extension NumberItem: Equatable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral {
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.value == rhs.value
-    }
-    
+extension NumberItem: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
     init(floatLiteral value: FloatLiteralType) {
         self.value = value
     }
     
     init(integerLiteral value: IntegerLiteralType) {
         self.value = Double(value)
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.value == rhs.value
     }
     
     static func + (lhs: Self, rhs: Self) -> Self {
