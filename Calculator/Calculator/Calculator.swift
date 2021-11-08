@@ -17,7 +17,7 @@ class ManageLinkedList<T> {
         self.head = head
     }
     
-    func enQueue(value: T) {
+    func addNewNode(value: T) {
         if head == nil {
             head = Node(value: value, pointer: nil)
             return
@@ -30,19 +30,19 @@ class ManageLinkedList<T> {
         finderToLastNode?.pointer = Node(value: value)
     }
     
-    func deQueue() {
+    func deleteFirstNode() {
         head = head?.pointer
     }
 }
 
 class CalculatorItemQueue<T>: ManageLinkedList<T> {
     func putToQueue(_ value: T) {
-        enQueue(value: value)
+        addNewNode(value: value)
     }
     
     func getFromQueue() {
         guard self.head?.value != nil else { return }
-        deQueue()
+        deleteFirstNode()
     }
 }
 
