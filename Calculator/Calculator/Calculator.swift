@@ -13,4 +13,8 @@ class CalculatorItemQueue<T> {
     func putToQueue<T>(_ value: T) {
         itemQueue.append(value)
     }
+    
+    func getFromQueue<T>(_ value: T) {
+        itemQueue.removeFirst()
+    }
 }
