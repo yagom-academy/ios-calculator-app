@@ -14,6 +14,21 @@ struct CalculatorItemQueue {
     var numbers: [NumberItem] = []
     var operators: [OperatorItem] = []
     
+    mutating func calculateAll() -> Double {
+        guard var result = dequeueNumber()?.value else {
+            return 0
+        }
+        
+        for `operator` in operators {
+            guard let value = dequeueNumber() else {
+                      break
+                  }
+            result = `operator`.operation(result, value.value)
+        }
+        
+        return result
+    }
+    
     mutating func enqueue(_ value: NumberItem) {
         numbers.append(value)
     }
@@ -39,10 +54,12 @@ struct CalculatorItemQueue {
 
 extension CalculatorItemQueue {
     mutating func enqueue(_ value: Double) {
-        numbers.append(NumberItem(value: value))
+        let item = NumberItem(value: value)
+        numbers.append(item)
     }
     
     mutating func enqueue(_ value: @escaping (Double, Double) -> Double) {
-        operators.append(OperatorItem(operation: value))
+        let item = OperatorItem(operation: value)
+        operators.append(item)
     }
 }
