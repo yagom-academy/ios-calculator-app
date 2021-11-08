@@ -113,4 +113,29 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(list.last!.next)
     }
     
+    func test_세개의요소() {
+        let list = LinkedList<Int>()
+        list.append(123)
+        list.append(456)
+        list.append(789)
+        
+        XCTAssertEqual(list.count, 3)
+        
+        XCTAssertNotNil(list.first)
+        XCTAssertEqual(list.head!.value, 123)
+        
+        let second = list.head!.next
+        XCTAssertNotNil(second)
+        XCTAssertEqual(second!.value, 456)
+        
+        XCTAssertNotNil(list.last)
+        XCTAssertEqual(list.last!.value, 789)
+        
+        XCTAssertNil(list.head!.prev)
+        XCTAssertTrue(list.head!.next === second)
+        XCTAssertTrue(second!.prev === list.head)
+        XCTAssertTrue(second!.next === list.last)
+        XCTAssertTrue(list.last!.prev === second)
+        XCTAssertNil(list.last!.next)
+    }
 }
