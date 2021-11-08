@@ -35,8 +35,8 @@ struct CalculatorItemQueue<T> {
         front = front?.next
     }
     
-    func removeAll() {
-        
+    mutating func removeAll() {
+        front = nil
     }
     
     mutating func returnQueue() -> Array<T> {
