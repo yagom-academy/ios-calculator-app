@@ -15,20 +15,21 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue_type_두가지_모두_성공하는지() {
-        sut.enqueue(NumberItem(value: 10))
-        sut.enqueue(OperatorItem(operation: +))
-        sut.enqueue(NumberItem(value: 20))
-        XCTAssertEqual(sut.array.count, 3)
+        sut.enqueue(10)
+        sut.enqueue(+)
+        sut.enqueue(20)
+        XCTAssertEqual(sut.numbers.count, 2)
+        XCTAssertEqual(sut.operators.count, 1)
     }
     
     func test_dequeue_and_calculate_addition() {
-        sut.enqueue(NumberItem(value: 10))
-        sut.enqueue(OperatorItem(operation: +))
-        sut.enqueue(NumberItem(value: 20))
+        sut.enqueue(10)
+        sut.enqueue(+)
+        sut.enqueue(20)
         
-        guard let leftValue = sut.dequeue() as? NumberItem,
-              let calculation = sut.dequeue() as? OperatorItem,
-              let rightValue = sut.dequeue() as? NumberItem else {
+        guard let leftValue = sut.dequeueNumber(),
+              let calculation = sut.dequeueOperator(),
+              let rightValue = sut.dequeueNumber() else {
                   return
               }
         
@@ -38,13 +39,13 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue_and_calculate_division() {
-        sut.enqueue(NumberItem(value: 20))
-        sut.enqueue(OperatorItem(operation: /))
-        sut.enqueue(NumberItem(value: 10))
+        sut.enqueue(20)
+        sut.enqueue(/)
+        sut.enqueue(10)
         
-        guard let leftValue = sut.dequeue() as? NumberItem,
-              let calculation = sut.dequeue() as? OperatorItem,
-              let rightValue = sut.dequeue() as? NumberItem else {
+        guard let leftValue = sut.dequeueNumber(),
+              let calculation = sut.dequeueOperator(),
+              let rightValue = sut.dequeueNumber() else {
                   return
               }
         
@@ -54,14 +55,15 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue_and_calculate_값이_2개인_배열에서_실패하는지() {
-        sut.enqueue(NumberItem(value: 10))
-        sut.enqueue(OperatorItem(operation: +))
+        sut.enqueue(10)
+        sut.enqueue(+)
         
-        guard let leftValue = sut.dequeue() as? NumberItem,
-              let calculation = sut.dequeue() as? OperatorItem,
-              let rightValue = sut.dequeue() as? NumberItem else {
+        guard sut.dequeueNumber() != nil,
+              sut.dequeueOperator() != nil,
+              sut.dequeueNumber() != nil else {
                   return
               }
+        
         XCTFail()
     }
 }
