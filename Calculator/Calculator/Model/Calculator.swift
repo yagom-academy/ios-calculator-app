@@ -29,3 +29,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         array = reversedArray.reversed()
     }
 }
+
+class OperatorsItemQueue {
+    var operators = CalculatorItemQueue<Character>()
+}
