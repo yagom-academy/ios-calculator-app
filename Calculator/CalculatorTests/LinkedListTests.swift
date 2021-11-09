@@ -48,7 +48,7 @@ class LinkedListTests: XCTestCase {
     
     func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastItem() {
         let newItems = [1, 2, 3, 4]
-        let lastItem = newItems.last
+        let lastItem = newItems[newItems.count-1]
         appendContents(of: newItems, to: &sut)
         XCTAssertTrue(hasEqualItems(node: sut.last, item: lastItem))
     }

@@ -24,6 +24,10 @@ struct LinkedList<T> {
         return head
     }
     
+    var last: Node<T>? {
+        return tail
+    }
+    
     var isNotEmpty: Bool {
         return head != nil
     }
