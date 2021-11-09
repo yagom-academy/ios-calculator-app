@@ -12,6 +12,10 @@ protocol CalculateItem { }
 struct CalculatorItemQueue<Element> {
     var item: LinkedList<Element>
     
+    var front: Element? {
+        self.item[0]
+    }
+    
     init() {
         self.item = LinkedList()
     }
