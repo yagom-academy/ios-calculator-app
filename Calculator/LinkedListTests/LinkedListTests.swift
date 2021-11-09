@@ -30,4 +30,11 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(sut.front, node)
     }
+    
+    func test_LinkedList의add함수의전달인자로value를넣어주고frontNode의value와같은지() {
+        let value = 5
+        sut.add(value: value)
+        
+        XCTAssertEqual(sut.front?.value, value)
+    }
 }
