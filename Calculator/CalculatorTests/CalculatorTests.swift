@@ -30,14 +30,17 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(in: "2")
         XCTAssertEqual(sut.head?.pointer?.data, Optional("2"))
     }
+    
     func test_첫번째_노드를_Dequeue() {
-        sut.dequeue()
+         sut.dequeue()
         XCTAssertNil(sut.head?.pointer)
     }
+    
     func test_Head만_있는_노드에_하나추가_후_dequeue() {
         sut.enqueue(in: "1")
         XCTAssertNil(sut.head?.pointer?.pointer)
     }
+    
     func test_1과2가_있는_노드에서_dequeue하면_2가남는다() {
         sut = CalculatorItemQueue(head: Node(data: "1", pointer: Node(data: "2", pointer: nil)))
         sut.dequeue()
