@@ -31,6 +31,6 @@ struct LinkedList<Element> {
     }
     
     func removeFirst() -> Element? {
-        return nil
+        return head?.value
     }
 }
