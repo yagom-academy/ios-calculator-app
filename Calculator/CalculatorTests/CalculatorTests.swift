@@ -90,5 +90,34 @@ class CalculatorTests: XCTestCase {
         let isDeleteSuccess = (deleteResult == item)
         XCTAssertTrue(isDeleteSuccess)
     }
+    
+    func testIsEmptyPropertyIsTrueWhenQueueDidNothing() {
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func testIsEmptyPropertyIsFalseWhenInsertMethodCalledOnce() {
+        sut.insert(6)
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func testIsEmptyPropertyIsFalseWhenInsertMethodCalledFiveTimesAndDeleteMethodCalledThreeTimes() {
+        [3,6,9,-6,2].forEach { insertNumber in
+            sut.insert(insertNumber)
+        }
+        (0..<3).forEach { _ in
+            sut.delete()
+        }
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func testIsEmptyPropertyIsTrueWhenInsertMethodCalledFiveTimesAndDeleteMethodCalledSixTimes() {
+        [3,6,9,-6,2].forEach { insertNumber in
+            sut.insert(insertNumber)
+        }
+        (0..<6).forEach { _ in
+            sut.delete()
+        }
+        XCTAssertTrue(sut.isEmpty)
+    }
 
 }
