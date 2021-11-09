@@ -9,10 +9,14 @@ import Foundation
 
 struct CalculatorItemQueue<Element>: CalculateItem {
     private(set) var inbox = [Element]()
-    var outbox = [Element]()
+    private(set) var outbox = [Element]()
     
     var front: Element? {
         return outbox.last ?? inbox.first
+    }
+    
+    var count: Int {
+        return outbox.count
     }
     
     var isEmpty: Bool {
@@ -23,7 +27,12 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         inbox.append(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> Element? {
+        if inbox.isEmpty && outbox.isEmpty {
+            return nil
+        }
+        
         if outbox.isEmpty {
             outbox = inbox.reversed()
             inbox.removeAll()
