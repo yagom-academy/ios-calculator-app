@@ -36,7 +36,6 @@ struct LinkedList<T> {
         tail = tail?.next
     }
     
-    @discardableResult
     mutating func pop() -> T? {
         if isEmpty {
             return nil
@@ -49,7 +48,6 @@ struct LinkedList<T> {
         return result.data
     }
     
-    @discardableResult
     mutating func removeLast() -> T? {
         guard let head = head else {
             return nil
