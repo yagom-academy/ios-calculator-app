@@ -15,17 +15,17 @@ class LinkedListTests: XCTestCase {
         try super.setUpWithError()
         sut = LinkedList()
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         measure {
@@ -37,5 +37,21 @@ class LinkedListTests: XCTestCase {
         let newItem = 10
         sut.append(newItem)
         XCTAssertTrue(sut.isNotEmpty)
+    }
+    
+    func testLinkedListAppend_givenNewIntegers_expectHeadEqualtoFirstItem() {
+        let newItems = [1, 2]
+        let firstItem = newItems[0]
+        for item in newItems {
+            sut.append(item)
+        }
+        XCTAssertTrue(hasEqualItems(node: sut.first, item: firstItem))
+    }
+    
+    private func hasEqualItems(node: Node?, item: Int) -> Bool {
+        guard let node = node else {
+            return false
+        }
+        return node.item == item
     }
 }
