@@ -19,6 +19,7 @@
 - TDD 방식으로 프로그래밍을 진행했다. XCTest를 통해 Test Case를 작성하여 테스트를 실행했다.
 
 ### UML
+![Calculator_STEP1_211109 drawio](https://user-images.githubusercontent.com/70856586/140907304-a4874c4e-8925-4ccb-9110-16b0c0974c94.png)
 
 ### 고려사항
 * 기능
