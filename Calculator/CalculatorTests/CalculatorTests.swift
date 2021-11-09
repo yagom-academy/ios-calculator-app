@@ -120,4 +120,12 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
 
+    func testClearMethodExcutedProperlyAfterInsertMethodCalledFiveTimes() {
+        [3,6,9,-6,2].forEach { insertNumber in
+            sut.insert(insertNumber)
+        }
+        sut.clear()
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
 }
