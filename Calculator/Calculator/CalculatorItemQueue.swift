@@ -39,6 +39,14 @@ class LinkedList<T> {
         finderToTail?.next = Node(value: value)
     }
     
+    func removeFirst() -> T? {
+        if isEmpty { return nil }
+        
+        let removedValue: T? = head?.value
+        head = head?.next
+        return removedValue
+    }
+    
     func scanAllValue() -> [T] {
         var scanResult: [T] = []
 
