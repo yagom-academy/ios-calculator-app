@@ -15,3 +15,27 @@ class Node<T> {
         self.next = next
     }
 }
+
+class LinkedList<T> {
+    var head: Node<T>?
+    var isEmpty: Bool {
+        return head == nil
+    }
+
+    init(head: Node<T>?) {
+        self.head = head
+    }
+    
+    func append(value: T) {
+        if isEmpty {
+            head = Node(value: value)
+            return
+        }
+        
+        var finderToTail: Node<T>? = head
+        while finderToTail?.next != nil {
+            finderToTail = finderToTail?.next
+        }
+        finderToTail?.next = Node(value: value)
+    }
+}
