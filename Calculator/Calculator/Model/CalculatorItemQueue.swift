@@ -19,6 +19,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return items.count
     }
     
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+    
     var front: T? {
         return items.first
     }
