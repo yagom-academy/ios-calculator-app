@@ -56,11 +56,16 @@ class CalculatorTests: XCTestCase {
     }
     
     func testQueueRemove() {
-        XCTAssertEqual(queue.remove(), "1")
+        
+        guard let removedItem = queue.remove() else {
+            return
+        }
+        
+        XCTAssertEqual(removedItem, "1")
     }
     
     func testEmptyQueueRemove() {
         queue.remove()
-        XCTAssertEqual(queue.remove(), "1")
+        XCTAssertEqual(queue.remove(), nil)
     }
 }

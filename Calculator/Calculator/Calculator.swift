@@ -17,7 +17,10 @@ struct CalculatorItemQueue {
         queueList.append(item)
     }
     
-    mutating func remove() -> String {
+    mutating func remove() -> String? {
+        guard queueList == [] else {
+            return nil
+        }
         let removedItem = queueList.removeFirst()
         
         return removedItem
