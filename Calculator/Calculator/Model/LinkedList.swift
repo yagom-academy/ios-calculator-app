@@ -13,6 +13,7 @@ protocol CalculateItem {
 class Node {
     var item: CalculateItem
     var next: Node?
+    var previous: Node?
     
     init(item: CalculateItem) {
         self.item = item
@@ -21,6 +22,7 @@ class Node {
 
 struct LinkedList {
     private var head: Node?
+    private var tail: Node?
     
     var isNotEmpty: Bool {
         return head != nil
@@ -28,8 +30,10 @@ struct LinkedList {
 
     mutating func append(_ item: CalculateItem) {
         let newNode = Node(item: item)
-        if let head = head {
-            head.next = newNode
+        if let tailNode = tail {
+            newNode.previous = tailNode
+            tailNode.next = newNode
+            tail = newNode
         } else {
             head = newNode
         }
