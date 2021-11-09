@@ -19,6 +19,14 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return items.count
     }
     
+    var front: T? {
+        return items.first
+    }
+    
+    var rear: T? {
+        return items.last
+    }
+    
     init() {
         self.items = List<T>()
     }
