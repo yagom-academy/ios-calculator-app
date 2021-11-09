@@ -15,7 +15,7 @@ struct CalculatorItemQueue {
     var operationStorage: [CalculatorItem] = []
     
     mutating func enqueue(item: CalculatorItem) {
-  
+        operationStorage.append(item)
     }
     
     func dequeue() -> CalculatorItem {
