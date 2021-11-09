@@ -7,5 +7,15 @@
 
 import Foundation
 
-struct CalculateItemQueue {
+struct CalculateItemQueue<T: Equatable> {
+    private(set) var items: [T] = []
+    
+    mutating func enqueue(_ item: T) {
+    }
+
+    mutating func dequeue() {
+    }
+    
+    mutating func clean() {
+    }
 }
