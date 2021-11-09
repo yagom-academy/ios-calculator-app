@@ -11,9 +11,9 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue {
-    var calculatorItems = [Int]()
-    mutating func push(_ item: Int) -> [Int] {
+class CalculatorItemQueue<T> {
+    var calculatorItems = [T]()
+    func push(_ item: T) -> [T] {
         calculatorItems.append(item)
         return calculatorItems
     }
