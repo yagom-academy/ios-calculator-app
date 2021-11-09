@@ -14,7 +14,9 @@ struct CalculateItemQueue<T> {
        items.append(element)
    }
    mutating func dequeue() -> T? {
-       if items.isEmpty { return nil }
+       if items.isEmpty {
+           return nil
+       }
        return items.removeFirst()
    }
 }
