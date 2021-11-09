@@ -9,6 +9,9 @@ import Foundation
 
 struct CalculatorItemQueue {
     let queueList: [String] = ["1"]
-
+    
+    func append(item: String) {
+        
+    }
     
 }

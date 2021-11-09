@@ -9,6 +9,8 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
+    
+    let queue: CalculatorItemQueue = CalculatorItemQueue()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -31,9 +33,7 @@ class CalculatorTests: XCTestCase {
     }
     
     func testQueueListisnotEmpty() {
-        let queue: CalculatorItemQueue = CalculatorItemQueue()
-        
         XCTAssertEqual(queue.queueList.isEmpty, false)
     }
-
+    
 }
