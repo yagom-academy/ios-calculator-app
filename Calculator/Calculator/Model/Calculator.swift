@@ -14,8 +14,18 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<Element>: CalculateItem {
     var array: [Element] = []
+    var reversedArray: [Element] = []
     
     mutating func appendItem(_ item: Element) {
         array.append(item)
+    }
+    
+    mutating func removeItem() throws {
+        if array.isEmpty {
+            throw QueueError.emptyArray
+        }
+        reversedArray = array.reversed()
+        reversedArray.removeLast()
+        array = reversedArray.reversed()
     }
 }
