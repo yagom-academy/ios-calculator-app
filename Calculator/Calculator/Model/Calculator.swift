@@ -13,18 +13,18 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue: CalculateItem {
-    var number = CalculatorQueue<Double>().queue
-    var `operator` = CalculatorQueue<String>().queue
+    var numbers = CalculatorQueue<Double>().queue
+    var operators = CalculatorQueue<String>().queue
     
     mutating func appendItem<T>(_ input: T) {
         if input is Double {
-            number.append(input as! Double)
+            numbers.append(input as! Double)
         } else if input is String {
-            `operator`.append(input as! String)
+            operators.append(input as! String)
         } else if input is Int {
             let intInput = input as! Int
             
-            number.append(intInput.doubleValue)
+            numbers.append(intInput.doubleValue)
         }
     }
 }
