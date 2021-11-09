@@ -77,6 +77,18 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.front, sut.rear)
     }
     
+    func testFrontAndRearIsDifferentWhenQueueCountIsMoreThanTwo() {
+        sut.insert(3)
+        sut.insert(5)
+        
+        XCTAssertNotEqual(sut.front, sut.rear)
+        
+        sut.insert(7)
+        sut.insert(9)
+        
+        XCTAssertNotEqual(sut.front, sut.rear)
+    }
+    
     func testDeleteItemFailedWhenQueueIsEmpty() {
         let result = sut.delete()
         let isFail = (result == nil)
