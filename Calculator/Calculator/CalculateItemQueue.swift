@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculateItemQueue<T> {
+struct CalculateItemQueue<T>: CalculateItem {
    var items: [T] = []
    
    mutating func enqueue(element: T) {
