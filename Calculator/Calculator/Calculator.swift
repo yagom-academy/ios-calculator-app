@@ -18,6 +18,10 @@ struct CalculatorItemQueue {
         if let number = item as? NumberItem {
             queueList.append(number)
         }
+        
+        if let opearator = item as? OperatorItem {
+            queueList.append(opearator)
+        }
     }
     
     mutating func remove() -> CalcultorItem? {
