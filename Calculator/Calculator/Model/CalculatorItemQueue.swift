@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element> {
-    var list: [Element] = []
+struct CalculatorItemQueue<Item> {
+    var list: [Item] = []
     
-    mutating func enqueue(_ item: Element) {
+    mutating func enqueue(_ item: Item) {
         list.append(item)
     }
 }
