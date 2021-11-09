@@ -44,7 +44,7 @@ struct LinkedList {
         return removedData
     }
     
-    func clear() {
+    mutating func clear() {
         self.head = nil
     }
     
@@ -91,7 +91,7 @@ struct CalculatorItemQueue {
         return removedItem
     }
 
-    mutating func clearList() {
+    mutating func clearQueue() {
         queueList.clear()
     }
 }

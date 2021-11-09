@@ -61,7 +61,7 @@ class CalculatorTests: XCTestCase {
     }
 
     func testQueueListClear() {
-        queue.clearList()
+        queue.clearQueue()
 
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
     }
