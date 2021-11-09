@@ -34,7 +34,20 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_연산큐에_데이터가_존재할때_dequeue_기능이_잘_되는가() {
+        let calculatorItemQueue = CalculatorItemQueue()
         
+        calculatorItemQueue.enqueue(1.0, "+")
+        calculatorItemQueue.enqueue(2.0, "-")
+        calculatorItemQueue.enqueue(3.0, "/")
+        
+        let firstDequeued = calculatorItemQueue.dequeue()
+        
+        
+        XCTAssertEqual(1.0, firstDequeued.0)
+        XCTAssertEqual("+", firstDequeued.1)
+        
+        XCTAssertEqual(2.0, calculatorItemQueue.computingValueList.first?.value)
+        XCTAssertEqual("-", calculatorItemQueue.operatorList.first?.value)
     }
     
     func test_연산큐에_있는_모든_데이터를_지우는_기능이_잘_되는가() {
