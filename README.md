@@ -39,7 +39,7 @@ func test_insert후test_Elements에값을그대로반환되는지() {
 ### 2. Linked List
 value와 next로 이루어진 노드가 연결되어 있는 자료구조이며, 자료의 추가나 삭제에 유리하다는 장점을 가지고 있다.
   
-![](https://commons.wikimedia.org/wiki/File:Single_linked_list.png)
+![](https://i.esdrop.com/d/ib27zr706hw4/nkLEcjayke.png)
   
 ```swift
 class Node {
@@ -56,7 +56,7 @@ class Node {
 ### 3. Queue
 FIFO(First In First Out) 구조로 데이터를 저장하는 자료구조이다.
 
-![](https://imgur.com/ngYHRKF)
+![](https://i.esdrop.com/d/ib27zr706hw4/rLhqox7jJJ.png)
 
 </div>
 </details>
