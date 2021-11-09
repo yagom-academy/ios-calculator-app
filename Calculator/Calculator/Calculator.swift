@@ -32,6 +32,10 @@ struct LinkedList {
         }
         node?.next = Node(data: data)
     }
+    
+    func searchAll() {
+        
+    }
 }
 
 struct CalculatorItemQueue {
