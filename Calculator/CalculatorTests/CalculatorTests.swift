@@ -68,4 +68,10 @@ class CalculatorTests: XCTestCase {
         queue.remove()
         XCTAssertEqual(queue.remove(), nil)
     }
+    
+    func testQueueListClear() {
+        queue.clearList()
+        
+        XCTAssertEqual(queue.queueList, [])
+    }
 }

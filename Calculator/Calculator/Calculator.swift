@@ -26,4 +26,8 @@ struct CalculatorItemQueue {
         return removedItem
     }
     
+    mutating func clearList() {
+ 
+    }
+    
 }
