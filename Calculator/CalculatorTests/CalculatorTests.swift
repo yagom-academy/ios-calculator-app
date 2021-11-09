@@ -21,5 +21,12 @@ class CalculatorTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func testInsertAndDeleteItem() {
+        let item = 6
+        sut.insert(6)
+        let result = sut.delete()
+        XCTAssertEqual(result, item)
+    }
 
 }

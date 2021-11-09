@@ -22,7 +22,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     func insert(_ item: T) {
     }
     
-    func delete() {
-        
+    func delete() -> T? {
+        return nil
     }
 }
