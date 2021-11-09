@@ -34,6 +34,7 @@ class LinkedList {
         rear = rear?.next
     }
     
+    @discardableResult
     func removeFront() -> Node? {
         guard front != nil else { return nil }
         let tempNode = front
