@@ -10,3 +10,7 @@ import Foundation
 protocol CalculateItem {
     
 }
+
+struct CalculatorItemQueue<Element>: CalculateItem {
+
+}
