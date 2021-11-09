@@ -120,8 +120,8 @@
 			children = (
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				A63C2EDD27394C7900B89DE8 /* Controller */,
 				A63C2EDE27394C8700B89DE8 /* Model */,
+				A63C2EDD27394C7900B89DE8 /* Controller */,
 				A63C2EDC27394C6400B89DE8 /* Protocol */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
