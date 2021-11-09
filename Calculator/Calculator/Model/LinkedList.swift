@@ -103,6 +103,8 @@ final class LinkedList<Element> {
     }
     
     func removeAll() {
+        head?.prev = nil
+        head?.next = nil
         head = nil
     }
 }
