@@ -9,48 +9,17 @@ struct OperatorItem: CalculateItem {
 }
 
 struct CalculatorItemQueue {
-    var numbers: [NumberItem] = []
-    var operators: [OperatorItem] = []
+    var items: [CalculateItem] = []
     
-    mutating func calculateAll() -> NumberItem {
-        var result = dequeueNumber() ?? 0
-        
-        while let `operator` = dequeueOperator() {
-            guard let value = dequeueNumber() else {
-                break
-            }
-            result = `operator`.operation(result, value)
-        }
-        return result
+    mutating func enqueue(item: CalculateItem) {
+        items.append(item)
     }
     
-    mutating func enqueue(_ value: NumberItem) {
-        numbers.append(value)
-    }
-    
-    mutating func enqueue(_ operator: OperatorItem) {
-        operators.append(`operator`)
-    }
-    
-    mutating func dequeueNumber() -> NumberItem? {
-        if numbers.isEmpty {
+    mutating func dequeue() -> CalculateItem? {
+        if items.isEmpty {
             return nil
         }
-        return numbers.removeFirst()
-    }
-    
-    mutating func dequeueOperator() -> OperatorItem? {
-        if operators.isEmpty {
-            return nil
-        }
-        return operators.removeFirst()
-    }
-}
-
-extension CalculatorItemQueue {
-    mutating func enqueue(_ item: @escaping (NumberItem, NumberItem) -> NumberItem) {
-        let item = OperatorItem(operation: item)
-        enqueue(item)
+        return items.removeFirst()
     }
 }
 
