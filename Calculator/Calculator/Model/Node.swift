@@ -7,6 +7,11 @@
 
 import Foundation
 
-class Node {
+class Node<Value> {
+    var value: Value
+    var next: Node?
     
+    init(_ value: Value) {
+        self.value = value
+    }
 }
