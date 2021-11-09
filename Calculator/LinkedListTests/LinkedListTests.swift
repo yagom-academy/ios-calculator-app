@@ -39,8 +39,8 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_LinkedList의add함수에값을2개넣으면_순서대로front_rear가들어가는지() {
-        let value1 = 5
-        let value2 = 5
+        let value1 = 1
+        let value2 = 2
         sut.add(value: value1)
         sut.add(value: value2)
         

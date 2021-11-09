@@ -13,7 +13,7 @@ class Node: Equatable {
     }
     
     var value: Int
-    
+    weak var nextNode: Node?
     init(value: Int = 5) {
         self.value = value
     }

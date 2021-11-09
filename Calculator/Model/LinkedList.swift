@@ -9,10 +9,17 @@ import Foundation
 
 class LinkedList {
     var front: Node?
+    var rear: Node?
     
     func add(value: Int) {
         let node = Node(value: value)
         
-        self.front = node
+        if self.front == nil {
+            front = node
+            rear = node
+        }
+        
+        self.rear?.nextNode = node
+        self.rear = node
     }
 }
