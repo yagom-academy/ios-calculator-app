@@ -15,7 +15,7 @@ class LinkedList {
         return front == nil
     }
     
-    func addFront(_ value: Int) {
+    private func addFront(_ value: Int) {
         front = Node.init(value: value, next: front)
         
         if rear == nil {
@@ -36,7 +36,10 @@ class LinkedList {
     
     @discardableResult
     func removeFront() -> Node? {
-        guard front != nil else { return nil }
+        guard front != nil else {
+            return nil
+        }
+        
         let tempNode = front
         front = front?.next
         
