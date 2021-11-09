@@ -7,8 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem { }
-
 class Node<T> {
     var item: T
     var next: Node?
@@ -34,7 +32,7 @@ class Node<T> {
 }
 
 class LinkedList<Element> {
-    var head: Node<Element>?
+    private var head: Node<Element>?
     
     func append(_ item: Element) {
         guard head != nil else {

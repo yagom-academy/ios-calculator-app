@@ -1,13 +1,13 @@
 //
-//  CalculatorTests.swift
-//  CalculatorTests
+//  LinkedListTests.swift
+//  LinkedListTests
 //
 //  Created by JeongTaek Han on 2021/11/09.
 //
 
 import XCTest
 
-class CalculatorTests: XCTestCase {
+class LinkedListTests: XCTestCase {
 
     func test_Node에Double타입_3을넣으면_item으로3을반환하는가() {
         // given
@@ -79,13 +79,6 @@ class CalculatorTests: XCTestCase {
         let result = list.remove(at: -1)
         // then
         XCTAssertEqual(result, nil)
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }
