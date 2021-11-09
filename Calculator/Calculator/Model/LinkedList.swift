@@ -9,19 +9,24 @@ import Foundation
 
 struct LinkedList<Element> {
     var head: Node<Element>?
-    
-    mutating func append(_ item: Element) {
-        let newNode = Node(item)
-        
+    var tail: Node<Element>? {
         guard var node = head else {
-            head = newNode
-            return
+            return nil
         }
         
         while let currentNode = node.next {
             node = currentNode
         }
+        return node
+    }
+    
+    mutating func append(_ item: Element) {
+        let newNode = Node(item)
         
-        node.next = newNode
+        guard let lastNode = tail else {
+            head = newNode
+            return
+        }
+        lastNode.next = newNode
     }
 }
