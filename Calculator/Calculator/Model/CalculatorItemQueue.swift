@@ -8,9 +8,13 @@
 import Foundation
 
 struct CalculatorItemQueue<Item> {
-    var list: [Item] = []
+    var list = [Item]()
     
     mutating func enqueue(_ item: Item) {
         list.append(item)
+    }
+    
+    mutating func dequeue() -> Item? {
+        return list.removeFirst()
     }
 }

@@ -32,4 +32,12 @@ class CauculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, [4])
     }
 
+    func test_dequeue호출시_빈배열일시_nil을반환하는지() {
+        // given
+        sut = CalculatorItemQueue(list: [])
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, nil)
+    }
 }
