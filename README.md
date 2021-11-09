@@ -43,7 +43,7 @@
 ![](https://i.imgur.com/pwLcl0n.jpg)
 
 ## 1-1 고민했던 것
-- Queue를 DoubleStack과 LinkedList를 이용하여 두가지를 구현해보았다. 배열로도 구현할 수 있지만 enqueue 작업이 시간복잡도가 O(1)이 걸려서 비효율적이다. 
+- Queue를 DoubleStack과 LinkedList를 이용하여 두가지를 구현해보았다. 배열로도 구현할 수 있지만 denqueue 작업이 시간복잡도가 O(1)이 걸려서 비효율적이다. 
 - Generic타입을 사용할 때 Element로 명시해주었다. 이유는 T로 명시해줄 수도 있지만 어떤 타입이 들어갈지 명확하지 않기 때문에 좀더 직관적으로 보일 수 있도록 요소라는 뜻을 담은 Element를 명시했다. 
 
 ## 1-2 의문점
