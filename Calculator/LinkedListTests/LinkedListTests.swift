@@ -21,6 +21,7 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
+    // MARK:- append() tests
     func test_빈리스트에서append호출시_4를전달하면_headvalue에4가할당되는지() {
         //given
         //when
@@ -36,5 +37,17 @@ class LinkedListTests: XCTestCase {
         sut.append(7)
         //then
         XCTAssertEqual(sut.head?.next?.value, 7)
+    }
+    
+    // MARK:- removeFirst() tests
+    func test_4가있는List에서_removeFirst호출시_4가반환되고head와tail이nil되는지() {
+        //given
+        sut.append(4)
+        //when
+        let result = sut.removeFirst()
+        //then
+        XCTAssertEqual(result, 4)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
 }
