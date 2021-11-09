@@ -8,7 +8,6 @@
 import Foundation
 
 struct CalculatorItemQueue: CalculateItem {
-    
     let computingValueList = LinkedList<Double>()
     let operatorList = LinkedList<String>()
     
@@ -17,4 +16,13 @@ struct CalculatorItemQueue: CalculateItem {
         operatorList.append(`operator`)
     }
     
+    func dequeue() -> (Double, String) {
+        guard let dequeuedValue = computingValueList.removeFirst(),
+              let dequeuedOperator = operatorList.removeFirst() else {
+            return (0, "")
+        }
+        
+        return (dequeuedValue.value, dequeuedOperator.value)
+        
+    }
 }
