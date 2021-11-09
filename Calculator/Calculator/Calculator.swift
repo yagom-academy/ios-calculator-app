@@ -10,11 +10,11 @@ import Foundation
 struct CalculatorItemQueue {
     var queueList: [String] = ["1"]
     
-    mutating func append(item: String) {
-        if item != "" {
-            queueList.append(item)
+    mutating func append(item: String?) {
+        guard let item = item else {
+            return
         }
-        
+        queueList.append(item)
     }
     
 }
