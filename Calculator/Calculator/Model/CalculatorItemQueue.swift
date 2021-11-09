@@ -9,7 +9,7 @@ import Foundation
 
 protocol CalculateItem { }
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element> where Element: CalculateItem {
     var item: LinkedList<Element>
     
     var count: Int {
