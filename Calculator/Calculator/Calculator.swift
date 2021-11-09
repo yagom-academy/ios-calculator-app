@@ -33,18 +33,34 @@ struct LinkedList {
         node?.next = Node(data: data)
     }
     
+    mutating func removeFrist() -> CalcultorItem? {
+        if head == nil { return nil }
+        
+        var removedData: CalcultorItem? = nil
+        if head?.next == nil {
+            removedData = head?.data
+            head = head?.next
+        }
+        return removedData
+    }
+    
+    var isEmpty: Bool {
+        if head == nil { return true }
+        return false
+    }
+    
     func searchAll() -> [CalcultorItem] {
         var searchedList:[CalcultorItem] = []
         if head == nil { return [] }
         
         var node = head
-        if let nodeData = node?.data as? CalcultorItem {
+        if let nodeData = node?.data {
             searchedList.append(nodeData)
         }
         
         while node?.next != nil {
             node = node?.next
-            if let nodeData = node?.data as? CalcultorItem {
+            if let nodeData = node?.data {
                 searchedList.append(nodeData)
             }
         }
@@ -69,18 +85,18 @@ struct CalculatorItemQueue {
         }
     }
     
-//    mutating func dequeue() -> CalcultorItem? {
-//        if queueList.isEmpty {
-//            return nil
-//        }
-//        let removedItem = queueList.removeFirst()
-//
-//        return removedItem
-//    }
-//
-//    mutating func clearList() {
-//        self.queueList = []
-//    }
+    mutating func dequeue() -> CalcultorItem? {
+        if queueList.isEmpty {
+            return nil
+        }
+        let removedItem = queueList.removeFrist()
+
+        return removedItem
+    }
+
+    mutating func clearList() {
+        
+    }
 }
 
 struct NumberItem: CalcultorItem {

@@ -17,10 +17,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["1"])
     }
 
-//    func testQueueListisnotEmpty() {
-//        XCTAssertEqual(convertList(list: queue.queueList).isEmpty, true)
-//    }
-//
+    func testQueueListisnotEmpty() {
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()).isEmpty, true)
+    }
+
 
     func testQueueSort() {
         queue.enqueue(item: NumberItem(data: 2))
@@ -34,69 +34,63 @@ class CalculatorTests: XCTestCase {
 
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
     }
-//
-//    func testQueueRemove() {
-//
-//        guard let removedItem = queue.dequeue() else {
-//            return
-//        }
-//        var data = ""
-//        if let number = removedItem as? NumberItem {
-//            data = number.dataToString
-//        }
-//
-//        XCTAssertEqual(data, "1")
-//    }
-//
-//    func testEmptyQueueRemove() {
-//        let data1 = queue.dequeue()
-//        let data2 = queue.dequeue()
-//
-//        var data: String?
-//        if let number = data2 as? NumberItem {
-//            data = number.dataToString
-//        }
-//
-//        XCTAssertEqual(data, nil)
-//    }
-//
-//    func testQueueListClear() {
-//        queue.clearList()
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), [])
-//    }
-//
-//    func testQueueListappendOperatorItem() {
-//        queue.enqueue(item: OperatorItem.add)
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), ["+"])
-//    }
-//
-//    func testQueueListAppendOperatorAndNumber() {
-//        queue.enqueue(item: OperatorItem.add)
-//        queue.enqueue(item: OperatorItem.divide)
-//        queue.enqueue(item: NumberItem(data: 2))
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), ["+","/","2"])
-//    }
-//
-//    func testCalculatorQueueInit() {
-//        let queue: CalculatorItemQueue = CalculatorItemQueue(queueList: [NumberItem(data: 3)])
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), ["3"])
-//    }
-//
-//    func testAnotherCalculatorQueueInit() {
-//        var calculatorQueue: CalculatorItemQueue = CalculatorItemQueue(queueList: [NumberItem(data: 3)])
-//        var preparedCalculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
-//
-//        calculatorQueue.enqueue(item: OperatorItem.add)
-//        preparedCalculatorQueue.enqueue(item: NumberItem(data: 3))
-//
-//        XCTAssertEqual(convertList(list: calculatorQueue.queueList), ["3","+"])
-//        XCTAssertEqual(convertList(list: preparedCalculatorQueue.queueList), ["3"])
-//    }
-//
+
+    func testQueueRemove() {
+
+        guard let removedItem = queue.dequeue() else {
+            return
+        }
+        var data = ""
+        if let number = removedItem as? NumberItem {
+            data = number.dataToString
+        }
+
+        XCTAssertEqual(data, "1")
+    }
+
+    func testEmptyQueueRemove() {
+        let data1 = queue.dequeue()
+        let data2 = queue.dequeue()
+
+        var data: String?
+        if let number = data2 as? NumberItem {
+            data = number.dataToString
+        }
+
+        XCTAssertEqual(data, nil)
+    }
+
+    func testQueueListClear() {
+        queue.clearList()
+
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
+    }
+
+    func testQueueListappendOperatorItem() {
+        queue.enqueue(item: OperatorItem.add)
+
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+"])
+    }
+
+    func testQueueListAppendOperatorAndNumber() {
+        queue.enqueue(item: OperatorItem.add)
+        queue.enqueue(item: OperatorItem.divide)
+        queue.enqueue(item: NumberItem(data: 2))
+
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+","/","2"])
+    }
+
+    func testAnotherCalculatorQueueInit() {
+        var calculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
+        var preparedCalculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
+
+        calculatorQueue.enqueue(item: OperatorItem.add)
+        preparedCalculatorQueue.enqueue(item: NumberItem(data: 3))
+
+        XCTAssertEqual(convertList(list: calculatorQueue.queueList.searchAll()), ["+"])
+        XCTAssertEqual(convertList(list: preparedCalculatorQueue.queueList.searchAll()), ["3"])
+    }
+
     func convertList(list: [CalcultorItem]) -> [String] {
         var compareList:[String] = []
         for item in list {
