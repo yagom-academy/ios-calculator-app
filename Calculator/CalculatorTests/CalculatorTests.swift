@@ -6,27 +6,26 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class CalculatorTests: XCTestCase {
+    var calculatorItemQueue: CalculatorItemQueue!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        calculatorItemQueue = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        calculatorItemQueue = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_enqueue호출시_queue에_1을_추가한다() {
+        //expectation
+        calculatorItemQueue.enqueue(1)
+        
+        //result
+        XCTAssertNotNil(calculatorItemQueue.queue)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

@@ -18,3 +18,13 @@ enum Operator: CalculateItem {
 struct Number: CalculateItem {
     let num: Double
 }
+
+struct CalculatorItemQueue {
+    var queue: [CalculateItem] = []
+    
+    mutating func enqueue(_ item: Int) {
+        if let item = item as? CalculateItem {
+        queue.append(item)
+        }
+    }
+}
