@@ -29,5 +29,6 @@ struct CalculatorItemQueue {
     mutating func clearList() {
         queueList = []
     }
-    
 }
+
+protocol CalcultorItem { }
