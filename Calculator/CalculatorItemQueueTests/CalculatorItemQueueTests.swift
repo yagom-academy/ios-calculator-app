@@ -76,4 +76,33 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
+    func test_outbox가비어있을때_dequeue를호출하면_inbox가outbox에저장되는지() {
+        queue.enqueue("2")
+        queue.outbox = []
+        let result = queue.dequeue()
+        
+        XCTAssertEqual(result, queue.inbox[0])
+        
+    }
+    
+    func test_outbox가비어있을때_dequeue를호출하면reverse된inbox의첫번째요소가outbox에정상적으로저장되는지() {
+        queue.enqueue("2")
+        queue.outbox = []
+        let result = queue.dequeue()
+        
+        XCTAssertEqual(result, queue.inbox.first)
+    }
+    
+    func test_outbox가비어있을때_dequeue를호출하면reverse된inbox의전체가outbox에정상적으로저장되는지() {
+        queue.enqueue("2")
+        queue.enqueue("3")
+        queue.enqueue("4")
+        
+        queue.outbox = []
+        
+        let result = queue.dequeue()
+            
+        XCTAssertEqual(result, "4")
+    }
+    
 }

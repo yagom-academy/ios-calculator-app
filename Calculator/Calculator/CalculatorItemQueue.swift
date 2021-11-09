@@ -24,11 +24,10 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     }
     
     mutating func dequeue() -> Element? {
-        if inbox.isEmpty {
-            return nil
+        if outbox.isEmpty {
+            outbox = inbox.reversed()
         }
             
-        
         return inbox.removeFirst()
     }
 }
