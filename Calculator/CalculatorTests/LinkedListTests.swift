@@ -72,6 +72,12 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.convertedToCharacterArray, newItems)
     }
     
+    func testLinkedListAppend_givenMixedElements_expectSameElements() {
+        let newItems: [Any] = [10, Operator.plus, 20, Operator.division, 2]
+        appendContents(of: newItems, to: &sut)
+        XCTAssertEqual(sut.convertedToArray, newItems)
+    }
+    
     private func hasEqualItems(node: Node<Any>?, item: Int) -> Bool {
         guard let node = node else {
             return false
