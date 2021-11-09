@@ -34,6 +34,19 @@ class Node<T> {
 class LinkedList<Element> {
     private var head: Node<Element>?
     
+    var count: Int {
+        guard self.head != nil else {
+            return 0
+        }
+        var nodes = 1
+        var ptr = head
+        while ptr?.next != nil {
+            ptr = ptr?.next
+            nodes += 1
+        }
+        return nodes
+    }
+    
     func append(_ item: Element) {
         guard head != nil else {
             self.head = Node(item)
