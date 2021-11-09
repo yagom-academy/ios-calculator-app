@@ -1,13 +1,3 @@
-protocol CalculateItem { }
-
-struct NumberItem: CalculateItem {
-    var value: Double
-}
-
-struct OperatorItem: CalculateItem {
-    var operation: (NumberItem, NumberItem) -> NumberItem
-}
-
 struct CalculatorItemQueue {
     private(set) var items: LinkedList<CalculateItem> = LinkedList()
     
@@ -23,56 +13,14 @@ struct CalculatorItemQueue {
     }
 }
 
-extension NumberItem: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
-    init(floatLiteral value: FloatLiteralType) {
-        self.value = value
-    }
-    
-    init(integerLiteral value: IntegerLiteralType) {
-        self.value = Double(value)
-    }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.value == rhs.value
-    }
-    
-    static func + (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value + rhs.value
-        return Self(value: result)
-    }
-    
-    static func - (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value - rhs.value
-        return Self(value: result)
-    }
-    
-    static func / (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value / rhs.value
-        return Self(value: result)
-    }
-    
-    static func * (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value * rhs.value
-        return Self(value: result)
-    }
+protocol CalculateItem { }
+
+struct NumberItem: CalculateItem {
+    var value: Double
 }
 
-extension LinkedList {
-    class Node<T> {
-        var value: T
-        var next: Node<T>?
-        
-        init(_ value: T) {
-            self.value = value
-        }
-        
-        convenience init?(_ value: T?) {
-            guard let value = value else {
-                return nil
-            }
-            self.init(value)
-        }
-    }
+struct OperatorItem: CalculateItem {
+    var operation: (NumberItem, NumberItem) -> NumberItem
 }
 
 class LinkedList<T> {
@@ -134,5 +82,57 @@ class LinkedList<T> {
         }
         
         return result
+    }
+}
+
+extension LinkedList {
+    class Node<T> {
+        var value: T
+        var next: Node<T>?
+        
+        init(_ value: T) {
+            self.value = value
+        }
+        
+        convenience init?(_ value: T?) {
+            guard let value = value else {
+                return nil
+            }
+            self.init(value)
+        }
+    }
+}
+
+extension NumberItem: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
+    init(floatLiteral value: FloatLiteralType) {
+        self.value = value
+    }
+    
+    init(integerLiteral value: IntegerLiteralType) {
+        self.value = Double(value)
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.value == rhs.value
+    }
+    
+    static func + (lhs: Self, rhs: Self) -> Self {
+        let result = lhs.value + rhs.value
+        return Self(value: result)
+    }
+    
+    static func - (lhs: Self, rhs: Self) -> Self {
+        let result = lhs.value - rhs.value
+        return Self(value: result)
+    }
+    
+    static func / (lhs: Self, rhs: Self) -> Self {
+        let result = lhs.value / rhs.value
+        return Self(value: result)
+    }
+    
+    static func * (lhs: Self, rhs: Self) -> Self {
+        let result = lhs.value * rhs.value
+        return Self(value: result)
     }
 }
