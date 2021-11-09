@@ -8,5 +8,8 @@
 import Foundation
 
 struct LinkedList<Element> {
+    var head: Node<Element>?
     
+    func append(_ item: Element) {
+    }
 }
