@@ -13,7 +13,7 @@ class CalculatorItemQueueTest: XCTestCase {
         queue.enqueue(3.5)
         queue.enqueue("+")
         queue.enqueue(4.5)
-        XCTAssertEqual(2, queue.items.count)
+        XCTAssertEqual(3, queue.items.count)
     }
     
     func test_dequeue_in_empty_queue() {
@@ -28,7 +28,8 @@ class CalculatorItemQueueTest: XCTestCase {
         queue.enqueue("+")
         queue.enqueue(4.5)
         queue.dequeue()
-        XCTAssertEqual(3.5, queue.items.first?.value as? Double)
+        queue.dequeue()
+        XCTAssertEqual(4.5, queue.items.first?.value as? Double)
     }
     
     func test_dequeue_in_not_empty_queue_with_return_value() {
@@ -38,7 +39,7 @@ class CalculatorItemQueueTest: XCTestCase {
         queue.enqueue(4.5)
         queue.dequeue()
         let value = queue.dequeue()
-        XCTAssertEqual("+", value)
+        XCTAssertEqual("+", value as? String)
     }
     
     func test_removeAll_in_queue() {
