@@ -7,15 +7,15 @@
 
 import Foundation
 
-class LinkedList {
-    var front: Node?
-    var rear: Node?
+class LinkedList<T> {
+    var front: Node<T>?
+    var rear: Node<T>?
     
     var isEmpty: Bool {
         return front == nil
     }
     
-    private func addFront(_ value: Int) {
+    private func addFront(_ value: T) {
         front = Node.init(value: value, next: front)
         
         if rear == nil {
@@ -23,7 +23,7 @@ class LinkedList {
         }
     }
     
-    func addRear(value: Int) {
+    func addRear(value: T) {
         guard !isEmpty else {
             addFront(value)
             return
@@ -35,7 +35,7 @@ class LinkedList {
     }
     
     @discardableResult
-    func removeFront() -> Node? {
+    func removeFront() -> Node<T>? {
         guard front != nil else {
             return nil
         }

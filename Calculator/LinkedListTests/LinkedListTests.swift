@@ -8,10 +8,10 @@
 import XCTest
 
 class LinkedListTests: XCTestCase {
-    var sut: LinkedList!
+    var sut: LinkedList<Int>!
     
     override func setUpWithError() throws {
-        sut = LinkedList()
+        sut = LinkedList<Int>()
     }
 
     override func tearDownWithError() throws {
@@ -25,10 +25,10 @@ class LinkedListTests: XCTestCase {
     }
 
     func test_LinkedList에_Node를_추가해서_front에_nil이_안나오게() {
-        let node = Node()
+        let node = Node<Int>(value: 5)
         sut.addRear(value: node.value)
         
-        XCTAssertEqual(sut.front, node)
+        XCTAssertNotNil(sut.front)
     }
     
     func test_LinkedList의_add함수에_전달인자로_value를_넣어주고_frontNode의_value와같은지() {
