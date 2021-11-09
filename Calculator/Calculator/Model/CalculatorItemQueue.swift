@@ -15,15 +15,16 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T>: CalculateItem {
     private var items: List<T>
     
+    
     init() {
         self.items = List<T>()
     }
     
-    mutating func insert(_ item: T) -> Bool {
+    mutating func insert(_ item: T) {
         self.items.append(item)
-        return true
     }
     
+    @discardableResult
     mutating func delete() -> T? {
         guard items.isEmpty == false else { return nil }
         return items.removeFirst()
