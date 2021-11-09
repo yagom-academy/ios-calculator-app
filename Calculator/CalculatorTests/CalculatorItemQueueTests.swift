@@ -15,7 +15,7 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.enqueue(1.0, "+")
         
         XCTAssertEqual((1.0, "+"), (calculatorItemQueue.computingValueList.first,
-                                    calculatorItemQueue.computingValueList.first))
+                                    calculatorItemQueue.operatorsList.first))
     }
     
     func test_기존_연산큐에_데이터가_있을때_제대로_쌓이는가() {
