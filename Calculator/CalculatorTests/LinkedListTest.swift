@@ -10,50 +10,55 @@ import XCTest
 class LinkedListTest: XCTestCase {
     func test_first_element_in_linkedList() {
         let list = LinkedList<Any>()
-        list.append(3)
-        list.append(4)
-        XCTAssertEqual(3, list.first)
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.appendNewNode(value: 4)
+        XCTAssertEqual(3, list.first?.value as? Int)
     }
     
     func test_last_element_in_linkedList() {
         let list = LinkedList<Any>()
-        list.append(3)
-        list.append(4)
-        XCTAssertEqual(4, list.last)
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.appendNewNode(value: 4)
+        XCTAssertEqual(4, list.last?.value as? Int)
     }
     
     func test_next_element_in_linkedList() {
         let list = LinkedList<Any>()
-        list.append(3)
-        list.append(4)
-        XCTAssertEqual(4, list.head?.next?.value)
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.appendNewNode(value: 4)
+        XCTAssertEqual("+", list.head?.next?.value as? String)
     }
     
     func test_linkedList_is_empty() {
         let list = LinkedList<Any>()
-        list.append(4)
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.appendNewNode(value: 4)
         XCTAssertEqual(false, list.isEmpty)
     }
     
     func test_append_linkedList() {
         let list = LinkedList<Any>()
-        list.append(3)
-        list.append(4)
-        list.append("TEST")
-        XCTAssertEqual(2, list.count)
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.appendNewNode(value: 4)
+        XCTAssertEqual(3, list.count)
     }
     
     func test_remove_in_empty_linkedList() {
         let list = LinkedList<Any>()
-        list.remove(at: 0)
-        XCTAssertEqual(nil, list.first)
+        list.removeFirstNode()
+        XCTAssertEqual(nil, list.head?.value as? Int)
     }
     
     func test_remove_in_not_empty_linkedList() {
         let list = LinkedList<Any>()
-        list.append(3)
-        list.append("123")
-        list.remove(at: 0)
-        XCTAssertEqual("123", list.first)
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.removeFirstNode()
+        XCTAssertEqual("+", list.first?.value as? String)
     }
 }

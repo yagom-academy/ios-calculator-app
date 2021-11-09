@@ -15,6 +15,7 @@
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		C9F7BCD7273919470076ED33 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCD6273919470076ED33 /* LinkedListTest.swift */; };
 		C9F7BCEB273A1F1E0076ED33 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCEA273A1F1E0076ED33 /* LinkedList.swift */; };
+		C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCEA273A1F1E0076ED33 /* LinkedList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCD7273919470076ED33 /* LinkedListTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
