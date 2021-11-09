@@ -17,4 +17,9 @@ class CalculatorItemQueue<T> {
         calculatorItems.append(item)
         return calculatorItems
     }
+    
+    func pop() -> [T] {
+        calculatorItems.removeFirst()
+        return calculatorItems
+    }
 }

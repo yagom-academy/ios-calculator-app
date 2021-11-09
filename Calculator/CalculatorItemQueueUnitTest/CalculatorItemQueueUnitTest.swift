@@ -31,4 +31,10 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         let result = sut.push(input)
         XCTAssertEqual(result, [1,2])
     }
+    
+    func test_1과_2와_3이_있는_큐를_pop하면_2와_3이_남는다() {
+        sut.calculatorItems = [1, 2, 3]
+        let result = sut.pop()
+        XCTAssertEqual(result, [2,3])
+    }
 }
