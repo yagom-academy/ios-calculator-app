@@ -14,11 +14,17 @@ class Node<T> {
     var next: Node?
     var prev: Node?
     
-    init(_ item: T) {
-        self.item = item
-    }
-    init(_ item: T, _ next: Node) {
+    init(_ item: T, _ next: Node?, _ prev: Node?) {
         self.item = item
         self.next = next
+        self.prev = prev
+    }
+    
+    convenience init(_ item: T, _ next: Node) {
+        self.init(item, next, nil)
+    }
+    
+    convenience init(_ item: T) {
+        self.init(item, nil, nil)
     }
 }
