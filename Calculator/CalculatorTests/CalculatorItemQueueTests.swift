@@ -20,6 +20,21 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(node1 == node2)
     }
     
+    func test_count() {
+        var queue = CalculatorItemQueue<Int>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        
+        XCTAssertEqual(queue.count, 2)
+
+        queue.dequeue()
+        XCTAssertEqual(queue.count, 1)
+        
+        queue.dequeue()
+        XCTAssertEqual(queue.count, 0)
+    }
+    
     func test_요소가한개일때() {
         var queue = CalculatorItemQueue<Int>()
         
