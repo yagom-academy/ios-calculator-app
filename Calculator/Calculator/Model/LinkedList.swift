@@ -59,7 +59,7 @@ class LinkedList<Element> {
     func appendNewNode(value: Element) {
         let newNode = Node(value: value)
         
-        guard var lastNode = last else {
+        guard let lastNode = last else {
             head = newNode
             return
         }
