@@ -63,7 +63,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertNoThrow(calculatorItemQueue.dequeue())
     }
     
-    func test_removeAllQueue호출시_queue는_빈배열이된다() {
+    func test_removeAllItems호출시_queue는_빈배열이된다() {
         //expectation
         calculatorItemQueue.enqueue(1)
         calculatorItemQueue.enqueue(Operator.minus)
@@ -71,5 +71,13 @@ class CalculatorTests: XCTestCase {
         
         //result
         XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
+    }
+    
+    func test_queue가_빈배열일때_removeAllItems호출시_오류가발생하지않는다() {
+        //expectation
+        calculatorItemQueue.removeAllItems()
+        
+        //result
+        XCTAssertNoThrow(calculatorItemQueue.removeAllItems())
     }
 }
