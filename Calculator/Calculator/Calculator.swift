@@ -11,7 +11,10 @@ struct CalculatorItemQueue {
     var queueList: [String] = ["1"]
     
     mutating func append(item: String) {
-        queueList.append(item)
+        if item != "" {
+            queueList.append(item)
+        }
+        
     }
     
 }
