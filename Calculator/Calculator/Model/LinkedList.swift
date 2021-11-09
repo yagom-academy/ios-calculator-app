@@ -56,7 +56,7 @@ struct LinkedList<T> {
         front = nil
     }
     
-    mutating func returnQueue() -> Array<T> {
+    mutating func returnList() -> Array<T> {
         var queue: Array<T> = []
         var node = front
         

@@ -27,6 +27,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func returnQueue() -> Array<T> {
-        return queue.returnQueue()
+        return queue.returnList()
     }
 }
