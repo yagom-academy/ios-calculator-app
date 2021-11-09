@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		332FE41E273A908A00E42C8D /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE41D273A908A00E42C8D /* CalculatorItemQueue.swift */; };
+		332FE41F273A90F100E42C8D /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE41D273A908A00E42C8D /* CalculatorItemQueue.swift */; };
 		33306F33273A682900737205 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306F32273A682900737205 /* CalculatorTests.swift */; };
 		33306F3C273A68A000737205 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306F3B273A68A000737205 /* List.swift */; };
 		33306F47273A829300737205 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306F46273A829300737205 /* ListTests.swift */; };
@@ -30,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		332FE41D273A908A00E42C8D /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		33306F30273A682900737205 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33306F32273A682900737205 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		33306F34273A682900737205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				33306F3B273A68A000737205 /* List.swift */,
+				332FE41D273A908A00E42C8D /* CalculatorItemQueue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,6 +220,7 @@
 			files = (
 				33306F33273A682900737205 /* CalculatorTests.swift in Sources */,
 				33306F47273A829300737205 /* ListTests.swift in Sources */,
+				332FE41F273A90F100E42C8D /* CalculatorItemQueue.swift in Sources */,
 				33306F48273A84FE00737205 /* List.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				332FE41E273A908A00E42C8D /* CalculatorItemQueue.swift in Sources */,
 				33306F3C273A68A000737205 /* List.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
