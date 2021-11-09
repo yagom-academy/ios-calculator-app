@@ -42,11 +42,14 @@ struct LinkedList<T> {
         node?.next = Node(data: data)
     }
     
-    mutating func deQueue() {
+    mutating func deQueue() -> T? {
+        let data = front?.data
+        
         if isEmpty() {
-            return
+            return nil
         }
         front = front?.next
+        return data
     }
     
     mutating func removeAll() {

@@ -10,12 +10,16 @@ import Foundation
 struct CalculatorItemQueue<T>: CalculateItem {
     var queue = LinkedList<T>()
     
+    var isEmpty: Bool {
+        return queue.isEmpty()
+    }
+    
     mutating func enQueue(_ data: T?) {
         queue.append(data)
     }
     
-    mutating func deQueue() {
-        queue.deQueue()
+    mutating func deQueue() -> T? {
+        return queue.deQueue()
     }
     
     mutating func removeAll() {
