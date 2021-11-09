@@ -7,21 +7,34 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculatorItem> {
     var items: LinkedList<T>
     var isEmpty: Bool {
         return items.isEmpty
     }
     
-    func enqueue(_ item: T) {
-        
+    init() {
+        items = LinkedList<T>()
     }
     
-    func dequeue() {
-        
+    mutating func enqueue(_ item: T) {
+        items.append(item)
     }
     
-    func removeLast() {
-        
+    @discardableResult
+    mutating func dequeue() -> T? {
+        if isEmpty {
+            return nil
+        }
+        return items.pop()
+    }
+    
+    @discardableResult
+    mutating func removeLast() -> T? {
+        if isEmpty {
+            return nil
+        }
+        return items.removeLast()
     }
 }
+
