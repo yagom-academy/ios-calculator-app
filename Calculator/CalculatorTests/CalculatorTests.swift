@@ -17,14 +17,14 @@ class CalculatorTests: XCTestCase {
     }
     
     func testQueueListappend() {
-        queue.append(item: NumberItem(data: "1"))
+        queue.append(item: NumberItem(data: 1))
         
         XCTAssertEqual(convertList(list: queue.queueList), ["1"])
     }
     
     func testQueueSort() {
-        queue.append(item: NumberItem(data: "2"))
-        queue.append(item: NumberItem(data: "1"))
+        queue.append(item: NumberItem(data: 2))
+        queue.append(item: NumberItem(data: 1))
 
         XCTAssertEqual(convertList(list: queue.queueList), ["2","1"])
     }
@@ -42,7 +42,7 @@ class CalculatorTests: XCTestCase {
         }
         var data = ""
         if let number = removedItem as? NumberItem {
-            data = number.data
+            data = number.dataToString
         }
         
         XCTAssertEqual(data, "1")
@@ -54,9 +54,8 @@ class CalculatorTests: XCTestCase {
         
         var data: String?
         if let number = data2 as? NumberItem {
-            data = number.data
+            data = number.dataToString
         }
-        
         
         XCTAssertEqual(data, nil)
     }
@@ -73,11 +72,19 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(convertList(list: queue.queueList), ["+"])
     }
     
+    func testQueueListAppendOperatorAndNumber() {
+        queue.append(item: OperatorItem.add)
+        queue.append(item: OperatorItem.divide)
+        queue.append(item: NumberItem(data: 2))
+        
+        XCTAssertEqual(convertList(list: queue.queueList), ["+","/","2"])
+    }
+    
     func convertList(list: [CalcultorItem]) -> [String] {
         var compareList:[String] = []
         for item in list {
             if let number = item as? NumberItem {
-                compareList.append(number.data)
+                compareList.append(number.dataToString)
             }
             if let operatorItem = item as? OperatorItem {
                 compareList.append(operatorItem.rawValue)

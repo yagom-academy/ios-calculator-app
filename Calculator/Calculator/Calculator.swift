@@ -39,7 +39,11 @@ struct CalculatorItemQueue {
 }
 
 struct NumberItem: CalcultorItem {
-    let data: String
+    let data: Int
+    
+    var dataToString: String {
+        return String(describing: self.data)
+    }
 }
 
 enum OperatorItem: String, CalcultorItem {
