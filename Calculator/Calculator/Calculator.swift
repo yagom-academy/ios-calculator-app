@@ -10,7 +10,7 @@ import Foundation
 struct CalculatorItemQueue {
     var queueList: [CalcultorItem] = []
     
-    mutating func append(item: CalcultorItem?) {
+    mutating func enqueue(item: CalcultorItem?) {
         guard let item = item else {
             return
         }
@@ -24,7 +24,7 @@ struct CalculatorItemQueue {
         }
     }
     
-    mutating func remove() -> CalcultorItem? {
+    mutating func dequeue() -> CalcultorItem? {
         if queueList.isEmpty {
             return nil
         }
