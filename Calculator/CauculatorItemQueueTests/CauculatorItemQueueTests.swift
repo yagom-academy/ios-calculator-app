@@ -8,13 +8,28 @@
 import XCTest
 
 class CauculatorItemQueueTests: XCTestCase {
+    var sut: CalculatorItemQueue<Int>!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = CalculatorItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_enqueue호출시_4를전달하면_list에4가추가되는지() {
+        //given
+        let input = 4
+        
+        //when
+        sut.enqueue(input)
+        let result = sut.list
+        
+        //then
+        XCTAssertEqual(result, [4])
     }
 
 }
