@@ -54,7 +54,7 @@ class CalculatorTests: XCTestCase {
         // when
         list.remove(at: 0)
         // then
-        XCTAssertTrue(list[0] == 2)
+        XCTAssertEqual(list[0], 2)
     }
 
     func testPerformanceExample() throws {
