@@ -53,6 +53,12 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(hasEqualItems(node: sut.last, item: lastInsertedItem))
     }
     
+    func testLinkedListAppend_givenNewIntegers_expectSameElements() {
+        let newItems = [1,2,3,4,5,6,7,8,9,10]
+        appendContents(of: newItems, to: &sut)
+        XCTAssertEqual(sut.convertStoredElementsToArray(), newItems)
+    }
+    
     private func hasEqualItems(node: Node<Any>?, item: Int) -> Bool {
         guard let node = node else {
             return false
