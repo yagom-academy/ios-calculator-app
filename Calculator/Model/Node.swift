@@ -13,8 +13,9 @@ class Node: Equatable {
     }
     
     var value: Int
-    weak var nextNode: Node?
-    init(value: Int = 5) {
+    var next: Node?
+    init(value: Int = 5, next: Node? = nil) {
         self.value = value
+        self.next = next
     }
 }

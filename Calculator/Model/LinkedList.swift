@@ -11,23 +11,34 @@ class LinkedList {
     var front: Node?
     var rear: Node?
     
-    func add(value: Int) {
-        let node = Node(value: value)
+    var isEmpty: Bool {
+        return front == nil
+    }
+    
+    func addFront(_ value: Int) {
+        front = Node.init(value: value, next: front)
         
-        if self.front == nil {
-            front = node
-            rear = node
+        if rear == nil {
+            rear = front
+        }
+    }
+    
+    func addRear(value: Int) {
+        guard !isEmpty else {
+            addFront(value)
+            return
         }
         
-        self.rear?.nextNode = node
-        self.rear = node
+        rear?.next = Node.init(value: value)
+        
+        rear = rear?.next
     }
     
     func removeFront() -> Node? {
         let tempFront = self.front
         
-        self.front = self.front?.nextNode
-        self.front?.nextNode = nil
+        self.front = self.front?.next
+        self.front?.next = nil
         
         return tempFront
     }

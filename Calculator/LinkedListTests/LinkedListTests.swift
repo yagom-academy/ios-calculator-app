@@ -26,14 +26,14 @@ class LinkedListTests: XCTestCase {
 
     func test_LinkedList에Node를추가해서front에nil이안나오게() {
         let node = Node()
-        sut.add(value: node.value)
+        sut.addRear(value: node.value)
         
         XCTAssertEqual(sut.front, node)
     }
     
     func test_LinkedList의add함수의전달인자로value를넣어주고frontNode의value와같은지() {
         let value = 5
-        sut.add(value: value)
+        sut.addRear(value: value)
         
         XCTAssertEqual(sut.front?.value, value)
     }
@@ -41,8 +41,8 @@ class LinkedListTests: XCTestCase {
     func test_LinkedList의add함수에값을2개넣으면_순서대로front_rear가들어가는지() {
         let value1 = 1
         let value2 = 2
-        sut.add(value: value1)
-        sut.add(value: value2)
+        sut.addRear(value: value1)
+        sut.addRear(value: value2)
         
         XCTAssertEqual(sut.front?.value, value1)
         XCTAssertEqual(sut.rear?.value, value2)
@@ -53,9 +53,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.add(value: value1)
-        sut.add(value: value2)
-        sut.add(value: value3)
+        sut.addRear(value: value1)
+        sut.addRear(value: value2)
+        sut.addRear(value: value3)
         
         XCTAssertEqual(sut.front?.value, value1)
         XCTAssertEqual(sut.rear?.value, value3)
@@ -66,9 +66,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.add(value: value1)
-        sut.add(value: value2)
-        sut.add(value: value3)
+        sut.addRear(value: value1)
+        sut.addRear(value: value2)
+        sut.addRear(value: value3)
         
         let result = sut.removeFront()
         
@@ -80,9 +80,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.add(value: value1)
-        sut.add(value: value2)
-        sut.add(value: value3)
+        sut.addRear(value: value1)
+        sut.addRear(value: value2)
+        sut.addRear(value: value3)
         
         let result1 = sut.removeFront()
         let result2 = sut.removeFront()
