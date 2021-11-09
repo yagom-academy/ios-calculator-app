@@ -29,4 +29,8 @@ struct LinkedList<Element> {
         }
         lastNode.next = newNode
     }
+    
+    func removeFirst() -> Element? {
+        return nil
+    }
 }
