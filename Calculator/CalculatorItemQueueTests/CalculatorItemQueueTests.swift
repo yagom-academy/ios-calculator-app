@@ -121,5 +121,17 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = calculatorNumber.queue.dequeue()
         XCTAssertEqual(result, -123)
     }
+    
+    func test_연산자_queue가_비어있을때_dequeue시_nil_반환() {
+        var calculatorOperator = OperatorQueue()
+        let result = calculatorOperator.queue.dequeue()
+        XCTAssertNil(result)
+    }
+    
+    func test_숫자_queue가_비어있을때_dequeue시_nil_반환() {
+        var calculatorNumber = NumberQueue()
+        let result = calculatorNumber.queue.dequeue()
+        XCTAssertNil(result)
+    }
 
 }
