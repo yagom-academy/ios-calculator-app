@@ -3,7 +3,7 @@ import Foundation
 protocol CalculateItem {
 }
 
-class CalculatorItemQueue: CalculateItem {
+class CalculatorItemQueue<T>: LinkedList<T>, CalculateItem {
 }
 
 class Node<T> {
