@@ -27,7 +27,7 @@ struct CalculatorItemQueue {
     }
     
     mutating func clearList() {
- 
+        queueList = []
     }
     
 }
