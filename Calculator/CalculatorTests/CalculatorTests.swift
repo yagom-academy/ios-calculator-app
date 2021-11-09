@@ -62,4 +62,14 @@ class CalculatorTests: XCTestCase {
         //result
         XCTAssertNoThrow(calculatorItemQueue.dequeue())
     }
+    
+    func test_removeAllQueue호출시_queue는_빈배열이된다() {
+        //expectation
+        calculatorItemQueue.enqueue(1)
+        calculatorItemQueue.enqueue(Operator.minus)
+        calculatorItemQueue.removeAllItems()
+        
+        //result
+        XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
+    }
 }

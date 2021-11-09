@@ -37,4 +37,8 @@ struct CalculatorItemQueue {
         }
        queue.removeFirst()
     }
+    
+    mutating func removeAllItems() {
+        queue.removeAll()
+    }
 }
