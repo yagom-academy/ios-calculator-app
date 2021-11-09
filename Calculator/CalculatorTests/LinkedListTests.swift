@@ -8,6 +8,13 @@
 import XCTest
 @testable import Calculator
 
+enum Operator: Character {
+    case plus = "+"
+    case minus = "-"
+    case multiply = "*"
+    case division = "/"
+}
+
 class LinkedListTests: XCTestCase {
     var sut: LinkedList<Any>!
     
@@ -60,7 +67,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func testLinkedListAppend_givenNewOperators_expectSameElements() {
-        let newItems: [Character] = ["+", "-", "/", "*"]
+        let newItems: [Operator] = [.plus, .minus, .multiply, .division]
         appendContents(of: newItems, to: &sut)
         XCTAssertEqual(sut.convertedToCharacterArray, newItems)
     }
@@ -92,11 +99,11 @@ extension LinkedList {
         return listContents
     }
     
-    var convertedToCharacterArray: [Character] {
+    var convertedToCharacterArray: [Operator] {
         var pointer = head
-        var listContents: [Character] = []
+        var listContents: [Operator] = []
         while pointer != nil {
-            if let node = pointer, let value = node.item as? Character {
+            if let node = pointer, let value = node.item as? Operator {
                 listContents.append(value)
                 pointer = node.next
             }
