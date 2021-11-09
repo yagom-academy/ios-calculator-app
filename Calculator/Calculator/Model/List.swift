@@ -72,3 +72,20 @@ struct LinkedList<T> {
     }
 }
 
+extension Node: CustomStringConvertible {
+    var description: String {
+        guard let next = next else {
+            return "\(data)"
+        }
+        return "[\(data), " + "\(next)" + " ]"
+    }
+}
+
+extension LinkedList: CustomStringConvertible {
+    var description: String {
+        guard let head = head else {
+            return "Queue is Empty"
+        }
+        return "\(head)"
+    }
+}

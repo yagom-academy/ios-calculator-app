@@ -36,5 +36,12 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         }
         return items.removeLast()
     }
+    
+}
+
+extension CalculatorItemQueue: CustomStringConvertible {
+    var description: String {
+        return items.description
+    }
 }
 
