@@ -59,6 +59,12 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.convertedToIntArray, newItems)
     }
     
+    func testLinkedListAppend_givenNewOperators_expectSameElements() {
+        let newItems = ["+", "-", "/", "*"]
+        appendContents(of: newItems, to: &sut)
+        XCTAssertEqual(sut.convertedToCharacterArray, newItems)
+    }
+    
     private func hasEqualItems(node: Node<Any>?, item: Int) -> Bool {
         guard let node = node else {
             return false
