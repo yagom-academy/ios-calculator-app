@@ -16,6 +16,7 @@
 		EA9C47E9273A559D001676F8 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C47E8273A559D001676F8 /* CalculatorItemQueue.swift */; };
 		EA9C47F1273A58EE001676F8 /* CalculatorItemQueueUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C47F0273A58EE001676F8 /* CalculatorItemQueueUnitTest.swift */; };
 		EA9C47F5273A58FA001676F8 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C47E8273A559D001676F8 /* CalculatorItemQueue.swift */; };
+		EA9C47F7273A725E001676F8 /* CalculatorItemQueueUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C47F0273A58EE001676F8 /* CalculatorItemQueueUnitTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9C47F7273A725E001676F8 /* CalculatorItemQueueUnitTest.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				EA9C47E9273A559D001676F8 /* CalculatorItemQueue.swift in Sources */,

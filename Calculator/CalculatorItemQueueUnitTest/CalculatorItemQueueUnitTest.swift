@@ -8,25 +8,21 @@
 import XCTest
 
 class CalculatorItemQueueUnitTest: XCTestCase {
-
+    var sut: CalculatorItemQueue!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_큐에_1을_넣었을때_1이_잘들어가는지() {
+        let input = 1
+        let result = sut.push(input)
+        XCTAssertEqual(result, [1])
     }
 
 }
