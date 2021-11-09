@@ -26,8 +26,14 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     mutating func dequeue() -> Element? {
         if outbox.isEmpty {
             outbox = inbox.reversed()
+            inbox.removeAll()
         }
             
-        return inbox.removeFirst()
+        return outbox.removeLast()
+    }
+    
+    mutating func clear() {
+        inbox.removeAll()
+        outbox.removeAll()
     }
 }
