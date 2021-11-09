@@ -33,8 +33,22 @@ struct LinkedList {
         node?.next = Node(data: data)
     }
     
-    func searchAll() {
+    func searchAll() -> [CalcultorItem] {
+        var searchedList:[CalcultorItem] = []
+        if head == nil { return [] }
         
+        var node = head
+        if let nodeData = node?.data as? CalcultorItem {
+            searchedList.append(nodeData)
+        }
+        
+        while node?.next != nil {
+            if let nodeData = node?.data as? CalcultorItem {
+                searchedList.append(nodeData)
+            }
+            node = node?.next
+        }
+        return searchedList
     }
 }
 
