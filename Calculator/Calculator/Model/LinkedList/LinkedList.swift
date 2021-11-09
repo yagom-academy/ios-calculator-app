@@ -52,7 +52,10 @@ class LinkedList<T> {
             head = head?.next
             return firstNod
         }
-        
+    }
+    
+    func removeAll() {
+        head = nil
     }
     
 }
