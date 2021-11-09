@@ -44,4 +44,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         guard items.isEmpty == false else { return nil }
         return items.removeFirst()
     }
+    
+    mutating func clear() {
+        items.removeAll()
+    }
 }
