@@ -26,15 +26,15 @@ class CauculatorItemQueueTests: XCTestCase {
         
         //when
         sut.enqueue(input)
-        let result = sut.list
+        let result = sut.front
         
         //then
-        XCTAssertEqual(result, [4])
+        XCTAssertEqual(result, 4)
+        XCTAssertEqual(sut.count, 1)
     }
 
     func test_dequeue호출시_빈배열일시_nil을반환하는지() {
         // given
-        sut = CalculatorItemQueue(list: [])
         //when
         let result = sut.dequeue()
         //then
@@ -43,12 +43,12 @@ class CauculatorItemQueueTests: XCTestCase {
     
     func test_4가있는큐에서_dequeue호출시_4를반환하고_list가비워지는지() {
         //given
-        sut = CalculatorItemQueue(list: [4])
+        sut.enqueue(4)
         //when
         let result = sut.dequeue()
         //then
         XCTAssertEqual(result, 4)
-        XCTAssertTrue(sut.list.isEmpty)
+        XCTAssertTrue(sut.isEmpty)
     }
     
     func test_4와7이있는큐에서_dequeue호출시_4를반환하고_list에7이남는지() {
@@ -59,6 +59,6 @@ class CauculatorItemQueueTests: XCTestCase {
         let result = sut.dequeue()
         //then
         XCTAssertEqual(result, 4)
-        XCTAssertEqual(sut.list, [7])
+        XCTAssertTrue(sut.count == 1 && sut.front == 7)
     }
 }

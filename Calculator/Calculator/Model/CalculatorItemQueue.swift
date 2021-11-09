@@ -8,7 +8,16 @@
 import Foundation
 
 struct CalculatorItemQueue<Item> {
-    var list = [Item]()
+    private var list = [Item]()
+    var isEmpty: Bool {
+        list.isEmpty
+    }
+    var front: Item? {
+        list.first
+    }
+    var count: Int {
+        list.count
+    }
     
     mutating func enqueue(_ item: Item) {
         list.append(item)
