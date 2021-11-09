@@ -17,9 +17,9 @@ class CalculatorTests: XCTestCase {
     }
     
     func testQueueListappend() {
-        queue.append(item: "2")
+        queue.append(item: numberItem(number: "1"))
         
-        XCTAssertEqual(queue.queueList, ["1","2"])
+        XCTAssertEqual(queue.queueList, [])
     }
     
     func testQueueSort() {

@@ -29,6 +29,10 @@ struct CalculatorItemQueue {
     mutating func clearList() {
         queueList = []
     }
+    
+    func returnQueueList() -> [CalcultorItem] {
+        return queueList
+    }
 }
 
 struct numberItem: CalcultorItem {
