@@ -29,6 +29,7 @@ class LinkedList<T> {
             return nil
         }
         return headValue
+        return head
     }
     
     var last: Node<T>? {
