@@ -21,15 +21,15 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func testEnqueueAndDequeue() {
-        XCTAssertEqual(try queue.dequeue()!, 1.0)
-        XCTAssertEqual(try queue.dequeue()!, 2.0)
-        XCTAssertEqual(try queue.dequeue()!, 13.5)
+        XCTAssertEqual(try queue.dequeue(), 1.0)
+        XCTAssertEqual(try queue.dequeue(), 2.0)
+        XCTAssertEqual(try queue.dequeue(), 13.5)
     }
     
     func testEnqueueAndRemoveLast() {
         XCTAssertEqual(queue.removeLast(), 13.5)
-        XCTAssertEqual(queue.removeLast()!, 2.0)
-        XCTAssertEqual(queue.removeLast()!, 1.0)
+        XCTAssertEqual(queue.removeLast(), 2.0)
+        XCTAssertEqual(queue.removeLast(), 1.0)
     }
 }
 

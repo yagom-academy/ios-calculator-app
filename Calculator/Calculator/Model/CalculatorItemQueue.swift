@@ -28,9 +28,9 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         return items.pop()
     }
     
-    mutating func removeLast() -> T? {
+    mutating func removeLast() throws -> T? {
         if isEmpty {
-            return nil
+            throw ListError.isEmpty
         }
         return items.removeLast()
     }
