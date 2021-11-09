@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue<Element>: CalculateItem {
-    private(set) var inBox = [Element]()
-    private(set) var outBox = [Element]()
+    private var inBox = [Element]()
+    private var outBox = [Element]()
     
     var front: Element? {
         return outBox.last ?? inBox.first

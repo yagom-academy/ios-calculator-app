@@ -8,7 +8,7 @@
 import Foundation
 
 struct LinkedListQueue<Element> {
-    private(set) var list = LinkedList<Element>()
+    private var list = LinkedList<Element>()
     
     var count: Int {
         return list.count
