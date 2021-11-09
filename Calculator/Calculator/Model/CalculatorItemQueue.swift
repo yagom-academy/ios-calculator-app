@@ -12,6 +12,10 @@ protocol CalculateItem { }
 struct CalculatorItemQueue<Element> {
     var item: LinkedList<Element>
     
+    var count: Int {
+        self.item.count
+    }
+    
     var front: Element? {
         self.item[0]
     }
