@@ -60,7 +60,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func testLinkedListAppend_givenNewOperators_expectSameElements() {
-        let newItems = ["+", "-", "/", "*"]
+        let newItems: [Character] = ["+", "-", "/", "*"]
         appendContents(of: newItems, to: &sut)
         XCTAssertEqual(sut.convertedToCharacterArray, newItems)
     }
@@ -85,6 +85,18 @@ extension LinkedList {
         var listContents: [Int] = []
         while pointer != nil {
             if let node = pointer, let value = node.item as? Int {
+                listContents.append(value)
+                pointer = node.next
+            }
+        }
+        return listContents
+    }
+    
+    var convertedToCharacterArray: [Character] {
+        var pointer = head
+        var listContents: [Character] = []
+        while pointer != nil {
+            if let node = pointer, let value = node.item as? Character {
                 listContents.append(value)
                 pointer = node.next
             }
