@@ -41,5 +41,13 @@ class CalculatorItemQueueTests: XCTestCase {
         calculatorOperator.queue.enqueue(.multiply)
         XCTAssertEqual(calculatorOperator.queue.inbox, [.add, .multiply])
     }
+    
+    func test_연산자_inbox에_add_multiply_추가_첫번째_요소_제거_및_확인() {
+        var calculatorOperator = OperatorQueue()
+        calculatorOperator.queue.enqueue(.add)
+        calculatorOperator.queue.enqueue(.multiply)
+        let result = calculatorOperator.queue.dequeue()
+        XCTAssertEqual(result, .add)
+    }
 
 }
