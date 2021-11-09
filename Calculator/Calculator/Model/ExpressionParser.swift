@@ -8,13 +8,16 @@
 import Foundation
 
 enum ExpressionParser {
+    case a
     
-//    func parse(from input: String) -> Formula {
-//
-//    }
+    func parse(from input: String) -> Formula {
+        let operands = CalculatorItemQueue<Double>()
+        let operators = CalculatorItemQueue<Character>()
+        
+        return Formula(operands: operands, operators: operators)
+    }
     
     private func componentsByOperators(from input: String) -> [String] {
-        
-        return []
+        return input.components(separatedBy: " ")
     }
 }
