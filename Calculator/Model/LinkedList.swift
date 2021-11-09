@@ -9,4 +9,8 @@ import Foundation
 
 class LinkedList {
     var front: Node?
+    
+    func add(front: Node) {
+        self.front = front
+    }
 }

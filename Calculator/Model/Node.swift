@@ -12,5 +12,9 @@ class Node: Equatable {
         return lhs.value == rhs.value
     }
     
-    var value: Int = 0
+    var value: Int
+    
+    init(value: Int = 5) {
+        self.value = value
+    }
 }
