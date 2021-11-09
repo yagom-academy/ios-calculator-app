@@ -20,15 +20,15 @@ class CalculatorQueueTests: XCTestCase {
     }
 
     func test_calculatorItemQueue_item이_들어올경우_내부저장소에_저장이되는지() {
-        sut.enqueue(item: "+")
+        sut.enqueue(operation: "+")
         let operationCount = sut.operationStorage.count
 
         XCTAssertEqual(operationCount, 1)
     }
     
     func test_calculatorItemQueue_item이_2개_또는_그이상이_들어올경우_내부저장소에_저장이되는지() {
-        sut.enqueue(item: "-")
-        sut.enqueue(item: "+")
+        sut.enqueue(operation: "-")
+        sut.enqueue(operation: "+")
         let operationCount = sut.operationStorage.count
 
         XCTAssertEqual(operationCount, 2)
