@@ -13,4 +13,7 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<Element>: CalculateItem {
 
+    var inbox: [Element] = []
+    var outbox: [Element] = []
+    
 }
