@@ -11,8 +11,18 @@ enum ExpressionParser {
     case a
     
     func parse(from input: String) -> Formula {
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<Character>()
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Character>()
+        
+        let inputString = componentsByOperators(from: input)
+        
+        for string in inputString {
+            if let operandForQueue = Double(string) {
+                operands.enQueue(operandForQueue)
+            } else {
+                operators.enQueue(Character(string))
+            }
+        }
         
         return Formula(operands: operands, operators: operators)
     }
