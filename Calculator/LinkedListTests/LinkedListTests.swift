@@ -20,4 +20,12 @@ class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_append호출시_4를전달하면_headvalue에4가할당되는지() {
+        //given
+        //when
+        sut.append(4)
+        //then
+        XCTAssertEqual(sut.head?.value, 4)
+    }
 }
