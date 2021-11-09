@@ -20,6 +20,9 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func deQueue() -> T? {
+        if enQueueArray.isEmpty && deQueueArray.isEmpty {
+            return nil
+        }
         if deQueueArray.isEmpty {
             deQueueArray = enQueueArray.reversed()
             enQueueArray.removeAll()
