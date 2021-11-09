@@ -57,18 +57,27 @@ extension NumberItem: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Eq
     }
 }
 
-class Node<T> {
-    var value: T
-    var next: Node<T>?
-    
-    init(_ value: T) {
-        self.value = value
+extension LinkedList {
+    class Node<T> {
+        var value: T
+        var next: Node<T>?
+        
+        init(_ value: T) {
+            self.value = value
+        }
+        
+        convenience init?(_ value: T?) {
+            guard let value = value else {
+                return nil
+            }
+            self.init(value)
+        }
     }
 }
 
 class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -93,11 +102,7 @@ class LinkedList<T> {
     }
     
     convenience init(value: T? = nil) {
-        if let value = value {
-            self.init(head: Node(value))
-        } else {
-            self.init(head: nil)
-        }
+        self.init(head: Node(value))
     }
     
     private func append(_ newNode: Node<T>) {
@@ -122,9 +127,8 @@ class LinkedList<T> {
     func removeFirst() -> T? {
         let result = head?.value
         
-        if head === tail {
-            head = nil
-            tail = nil
+        if count == 1 {
+            removeAll()
         } else {
             head = head?.next
         }
