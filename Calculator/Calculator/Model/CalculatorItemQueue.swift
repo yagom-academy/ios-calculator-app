@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
-
 struct CalculatorItemQueue<T>: CalculateItem {
     typealias List = Array
     
