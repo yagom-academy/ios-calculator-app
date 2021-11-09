@@ -50,8 +50,12 @@ class CalculatorTests: XCTestCase {
     }
     
     func testQueueAppendnil() {
-        queue.append(item: "")
+        queue.append(item: nil)
         
         XCTAssertEqual(queue.queueList, ["1"])
+    }
+    
+    func testQueueRemove() {
+        XCTAssertEqual(queue.remove(), "1")
     }
 }

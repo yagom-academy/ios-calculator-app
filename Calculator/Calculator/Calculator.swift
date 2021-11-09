@@ -17,4 +17,8 @@ struct CalculatorItemQueue {
         queueList.append(item)
     }
     
+    mutating func remove() -> String {
+        return ""
+    }
+    
 }
