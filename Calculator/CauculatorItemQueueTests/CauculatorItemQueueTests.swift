@@ -50,4 +50,15 @@ class CauculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 4)
         XCTAssertTrue(sut.list.isEmpty)
     }
+    
+    func test_4와7이있는큐에서_dequeue호출시_4를반환하고_list에7이남는지() {
+        //given
+        sut.enqueue(4)
+        sut.enqueue(7)
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, 4)
+        XCTAssertEqual(sut.list, [7])
+    }
 }
