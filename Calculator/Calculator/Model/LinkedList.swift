@@ -7,7 +7,7 @@
 import Foundation
 
 protocol CalculateItem {
-    var zero: Int { get }
+    
 }
 
 class Node {
@@ -37,7 +37,5 @@ struct LinkedList {
 }
 
 extension Int: CalculateItem {
-    var zero: Int {
-        return 0
-    }
+    
 }
