@@ -22,6 +22,17 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
+    func testCountIsZeroWhenQueueDidNothing() {
+        let expectedCount = 0
+        XCTAssertEqual(sut.count, expectedCount)
+    }
+    
+    func testCountIsOneAfterInsertMethodCalledOnce() {
+        sut.insert(1)
+        let expectedCount = 1
+        XCTAssertEqual(sut.count, expectedCount)
+    }
+    
     func testDeleteItemFailedWhenQueueIsEmpty() {
         let result = sut.delete()
         let isFail = (result == nil)
