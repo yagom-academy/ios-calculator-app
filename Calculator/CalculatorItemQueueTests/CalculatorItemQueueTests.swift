@@ -28,3 +28,24 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 20)
     }
 }
+
+extension CalculatorItemQueueTests {
+    func test_node_init() {
+        let node = Node(1)
+        node.next = Node(2)
+        XCTAssertEqual(node.next?.value, 2)
+    }
+    
+    func test_node_deinit() {
+        var node: Node? = Node(1)
+        node?.next = Node(2)
+        weak var result = node?.next
+        node = nil
+        XCTAssertNil(result)
+    }
+    
+    func test_empty_LinkedList_init() {
+        let list: LinkedList<Int> = LinkedList()
+        XCTAssertTrue(list.isEmpty)
+    }
+}
