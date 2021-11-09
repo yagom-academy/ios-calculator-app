@@ -40,4 +40,14 @@ class CauculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertEqual(result, nil)
     }
+    
+    func test_4가있는큐에서_dequeue호출시_4를반환하고_list가비워지는지() {
+        //given
+        sut = CalculatorItemQueue(list: [4])
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, 4)
+        XCTAssertTrue(sut.list.isEmpty)
+    }
 }
