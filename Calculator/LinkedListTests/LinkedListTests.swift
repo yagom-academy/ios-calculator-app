@@ -21,7 +21,13 @@ class LinkedListTests: XCTestCase {
     func test_LinkedList의front가nil인지() {
         let front = sut.front
         
-        XCTAssertEqual(front, nil)
+        XCTAssertNil(front)
     }
 
+    func test_LinkedList에Node를추가해서front에nil이안나오게() {
+        let node = Node()
+        sut.add(node)
+        
+        XCTAssertEqual(sut.front, node)
+    }
 }
