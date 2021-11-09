@@ -38,11 +38,7 @@ class LinkedList<Element> {
     }
     
     var isEmpty: Bool {
-        guard head == nil else {
-            return true
-        }
-        
-        return false
+        return head == nil 
     }
     
     var count: Int {
