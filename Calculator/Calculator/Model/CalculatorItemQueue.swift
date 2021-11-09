@@ -13,14 +13,15 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    private let items: List<T>
+    private var items: List<T>
     
     init() {
         self.items = List<T>()
     }
     
-    func insert(_ item: T) -> Bool {
-        return false
+    mutating func insert(_ item: T) -> Bool {
+        self.items.append(item)
+        return true
     }
     
     func delete() -> T? {
