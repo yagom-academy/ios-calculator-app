@@ -22,4 +22,9 @@ class LinkedList {
         self.rear?.nextNode = node
         self.rear = node
     }
+    
+    func removeFront() -> Node? {
+        
+        return nil
+    }
 }
