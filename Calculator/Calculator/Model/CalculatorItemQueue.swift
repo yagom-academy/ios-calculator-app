@@ -7,12 +7,12 @@
 
 import Foundation
 
-typealias List = Array
-
 protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T>: CalculateItem {
+    typealias List = Array
+    
     private var items: List<T>
     
     var count: Int {
