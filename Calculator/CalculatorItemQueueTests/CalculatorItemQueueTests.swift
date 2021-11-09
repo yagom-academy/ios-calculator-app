@@ -41,6 +41,24 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(queue.inbox.isEmpty)
     }
     
+    func test_outbox가비어있을때_dequeue를호출하면reverse된inbox의첫번째요소가outbox에정상적으로저장되는지() {
+        queue.enqueue("2")
+        
+        let result = queue.dequeue()
+        
+        XCTAssertEqual(result, "2")
+    }
+    
+    func test_dequeue호출시_정상적으로첫번째요소가빠져나오는지() {
+        queue.enqueue("2")
+        queue.enqueue("3")
+        queue.enqueue("4")
+        
+        let result = queue.dequeue()
+            
+        XCTAssertEqual(result, "2")
+    }
+    
     func test_배열이비어있을떄_dequeue호출시_nil이반환되는지() {
         let result = queue.dequeue()
 
@@ -85,25 +103,7 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue("3")
         queue.dequeue()
         
-        XCTAssertEqual(queue.outbox.count, 1)
-    }
-    
-    func test_outbox가비어있을때_dequeue를호출하면reverse된inbox의첫번째요소가outbox에정상적으로저장되는지() {
-        queue.enqueue("2")
-        
-        let result = queue.dequeue()
-        
-        XCTAssertEqual(result, "2")
-    }
-    
-    func test_dequeue호출시_정상적으로첫번째요소가빠져나오는지() {
-        queue.enqueue("2")
-        queue.enqueue("3")
-        queue.enqueue("4")
-        
-        let result = queue.dequeue()
-            
-        XCTAssertEqual(result, "2")
+        XCTAssertEqual(queue.count, 1)
     }
     
     func test_clear호출시_두배열모두초기화되는지() {
@@ -115,6 +115,4 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(queue.inbox.isEmpty)
         XCTAssertTrue(queue.inbox.isEmpty)
     }
-    
-    
 }
