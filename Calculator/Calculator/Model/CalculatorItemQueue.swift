@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T: CalculateItem> {
     typealias List = Array
     
     private var items: List<T>
