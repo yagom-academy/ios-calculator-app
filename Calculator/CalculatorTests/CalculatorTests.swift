@@ -28,4 +28,12 @@ class CalculatorTests: XCTestCase {
         //result
         XCTAssertNotNil(calculatorItemQueue.queue)
     }
+    
+    func test_enqueue호출시_queue에_plus를_추가한다() {
+        //expectation
+        calculatorItemQueue.enqueue(Operator.plus)
+        
+        //result
+        XCTAssertNotNil(calculatorItemQueue.queue)
+    }
 }

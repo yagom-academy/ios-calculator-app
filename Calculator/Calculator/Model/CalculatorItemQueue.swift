@@ -22,9 +22,12 @@ struct Number: CalculateItem {
 struct CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
-    mutating func enqueue(_ item: Int) {
-        if let item = item as? CalculateItem {
+    mutating func enqueue(_ item: Double) {
+        let num = Number(num: item)
+        queue.append(num)
+    }
+    
+    mutating func enqueue(_ item: Operator) {
         queue.append(item)
-        }
     }
 }
