@@ -18,7 +18,9 @@ struct CalculatorItemQueue {
     }
     
     mutating func remove() -> String {
-        return ""
+        let removedItem = queueList.removeFirst()
+        
+        return removedItem
     }
     
 }
