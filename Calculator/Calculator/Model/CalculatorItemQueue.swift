@@ -33,14 +33,14 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         
         if outBox.isEmpty {
             outBox = inBox.reversed()
-            inBox.removeAll()
+            inBox = []
         }
         
         return outBox.removeLast()
     }
     
     mutating func clear() {
-        inBox.removeAll()
-        outBox.removeAll()
+        inBox = []
+        outBox = []
     }
 }
