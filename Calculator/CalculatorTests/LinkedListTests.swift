@@ -23,7 +23,7 @@ class LinkedListTests: XCTestCase {
         linkedList.append(1.0)
         linkedList.append(2.0)
         
-        linkedList.remove(linkedList.first!)
+        linkedList.removeFirst()
         
         XCTAssertEqual(2.0, linkedList.first!.value)
     }
@@ -34,7 +34,7 @@ class LinkedListTests: XCTestCase {
         
         linkedList.append(1.0)
         
-        linkedList.remove(linkedList.first!)
+        linkedList.removeFirst()
         
         XCTAssertEqual(true, linkedList.isEmpty)
     }

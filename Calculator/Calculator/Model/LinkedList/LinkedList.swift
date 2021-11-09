@@ -44,12 +44,15 @@ class LinkedList<T> {
     }
     
     @discardableResult
-    func remove(_ deletingNode: Node<T>) -> T {
-        let next = deletingNode.next
+    func removeFirst() -> Node<T>? {
+        if head == nil {
+            return nil
+        } else {
+            let firstNod = head
+            head = head?.next
+            return firstNod
+        }
         
-        self.head = next
-
-        return deletingNode.value
     }
     
 }
