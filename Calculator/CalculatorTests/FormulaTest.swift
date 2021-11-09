@@ -16,10 +16,24 @@ class FormulaTest: XCTestCase {
         var formula = Formula(operands: operands, operators: operators)
         
         formula.operands.enQueue(1)
-        formula.operators.enQueue("-")
+        formula.operators.enQueue("+")
         formula.operands.enQueue(2)
         
-        XCTAssertEqual(formula.result(), -1)
+        XCTAssertEqual(formula.result(), 3)
+    }
+    
+    func test_1더하기_2나누기3은_1이다() {
+        let operators = CalculatorItemQueue<Character>()
+        let operands = CalculatorItemQueue<Double>()
+        var formula = Formula(operands: operands, operators: operators)
+        
+        formula.operands.enQueue(1)
+        formula.operators.enQueue("+")
+        formula.operands.enQueue(2)
+        formula.operators.enQueue("/")
+        formula.operands.enQueue(3)
+        
+        XCTAssertEqual(formula.result(), 1)
     }
 
     override func setUpWithError() throws {
