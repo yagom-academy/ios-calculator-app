@@ -24,7 +24,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return true
     }
     
-    func delete() -> T? {
-        return nil
+    mutating func delete() -> T? {
+        guard items.isEmpty == false else { return nil }
+        return items.removeFirst()
     }
 }
