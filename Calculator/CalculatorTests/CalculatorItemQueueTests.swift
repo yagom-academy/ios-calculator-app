@@ -8,7 +8,18 @@
 import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
-
+    
+    func test_첫번째요소() {
+        var queue = CalculatorItemQueue<Int>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        let node1 = queue.front
+        let node2 = queue.dequeue()
+        
+        XCTAssertTrue(node1 == node2)
+    }
+    
     func test_요소가한개일때() {
         var queue = CalculatorItemQueue<Int>()
         
