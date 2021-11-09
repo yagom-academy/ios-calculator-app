@@ -16,31 +16,24 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["1"])
     }
-    
-//    var queue: CalculatorItemQueue = CalculatorItemQueue()
-//
+
 //    func testQueueListisnotEmpty() {
 //        XCTAssertEqual(convertList(list: queue.queueList).isEmpty, true)
 //    }
 //
-//    func testQueueListappend() {
-//        queue.enqueue(item: NumberItem(data: 1))
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), ["1"])
-//    }
-//
-//    func testQueueSort() {
-//        queue.enqueue(item: NumberItem(data: 2))
-//        queue.enqueue(item: NumberItem(data: 1))
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), ["2","1"])
-//    }
-//
-//    func testQueueAppendnil() {
-//        queue.enqueue(item: nil)
-//
-//        XCTAssertEqual(convertList(list: queue.queueList), [])
-//    }
+
+    func testQueueSort() {
+        queue.enqueue(item: NumberItem(data: 2))
+        queue.enqueue(item: NumberItem(data: 1))
+
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["2","1"])
+    }
+
+    func testQueueAppendnil() {
+        queue.enqueue(item: nil)
+
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
+    }
 //
 //    func testQueueRemove() {
 //

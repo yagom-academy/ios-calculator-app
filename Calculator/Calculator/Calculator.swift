@@ -43,10 +43,10 @@ struct LinkedList {
         }
         
         while node?.next != nil {
+            node = node?.next
             if let nodeData = node?.data as? CalcultorItem {
                 searchedList.append(nodeData)
             }
-            node = node?.next
         }
         return searchedList
     }
