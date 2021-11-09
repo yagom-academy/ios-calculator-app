@@ -61,4 +61,12 @@ class LinkedListTest: XCTestCase {
         list.removeFirstNode()
         XCTAssertEqual("+", list.first?.value as? String)
     }
+    
+    func test_remove_all_nodes_in_linkedList() {
+        let list = LinkedList<Any>()
+        list.appendNewNode(value: 3)
+        list.appendNewNode(value: "+")
+        list.removeAllNodes()
+        XCTAssertEqual(0, list.count)
+    }
 }
