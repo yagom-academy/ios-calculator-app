@@ -50,7 +50,24 @@ struct LinkedList<T> {
     
     @discardableResult
     mutating func removeLast() -> T? {
-        return nil
+        guard let head = head else {
+            return nil
+        }
+        if head.next == nil {
+            return pop()
+        }
+        
+        var prev = head
+        var cur = head
+        
+        while let next = cur.next {
+            prev = cur
+            cur = next
+        }
+        prev.next = nil
+        tail = prev
+
+        return cur.data
     }
 }
 
