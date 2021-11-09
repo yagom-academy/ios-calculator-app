@@ -26,14 +26,14 @@ class LinkedListTests: XCTestCase {
 
     func test_LinkedList에Node를추가해서front에nil이안나오게() {
         let node = Node()
-        sut.add(front: node)
+        sut.addFront(value: node.value)
         
         XCTAssertEqual(sut.front, node)
     }
     
     func test_LinkedList의add함수의전달인자로value를넣어주고frontNode의value와같은지() {
         let value = 5
-        sut.add(value: value)
+        sut.addFront(value: value)
         
         XCTAssertEqual(sut.front?.value, value)
     }
