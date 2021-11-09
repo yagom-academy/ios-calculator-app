@@ -36,4 +36,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(queue.queueList.isEmpty, false)
     }
     
+    func testQueueListappend() {
+        queue.append(item: "2")
+        
+        XCTAssertEqual(queue.queueList, ["1","2"])
+    }
+    
 }
