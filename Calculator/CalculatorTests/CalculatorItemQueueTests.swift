@@ -8,7 +8,6 @@
 import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
-
     
     func testEnqueueAndDequeue() {
         var queue = CalculatorItemQueue<Double>()
@@ -33,7 +32,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(queue.removeLast()!, 1.0)
         print("queue: \(queue)")
     }
-    
 }
 
 extension Double: CalculatorItem {
