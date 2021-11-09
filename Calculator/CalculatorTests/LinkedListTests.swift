@@ -42,9 +42,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedListAppend_givenNewIntegers_expectHeadEqualtoFirstItem() {
         let newItems = [1, 2]
         let firstItem = newItems[0]
-        for item in newItems {
-            sut.append(item)
-        }
+        appendContents(of: newItems, to: &sut)
         XCTAssertTrue(hasEqualItems(node: sut.first, item: firstItem))
     }
     
@@ -53,5 +51,11 @@ class LinkedListTests: XCTestCase {
             return false
         }
         return node.item as? Int == item
+    }
+    
+    private func appendContents(of items: [Any], to linkedList: inout LinkedList<Any>) {
+        for item in items {
+            linkedList.append(item)
+        }
     }
 }
