@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Metal
 
 final class LinkedList<Element> {
     final class Node<Element> {

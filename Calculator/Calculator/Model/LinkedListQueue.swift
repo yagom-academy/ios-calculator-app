@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct LinkedListQueue<Element> {
     private(set) var list = LinkedList<Element>()
