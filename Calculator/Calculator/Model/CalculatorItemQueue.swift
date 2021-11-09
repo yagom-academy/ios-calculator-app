@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculatorItem> {
-    var items: LinkedList<T>
+    private var items: LinkedList<T>
     var isEmpty: Bool {
         return items.isEmpty
     }
