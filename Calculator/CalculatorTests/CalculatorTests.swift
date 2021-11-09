@@ -22,11 +22,6 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func testInsertItemSucceeded() {
-        let isSuccess = sut.insert(1)
-        XCTAssertTrue(isSuccess)
-    }
-    
     func testDeleteItemFailedWhenQueueIsEmpty() {
         let result = sut.delete()
         let isFail = (result == nil)
@@ -35,8 +30,7 @@ class CalculatorTests: XCTestCase {
     
     func testInsertAndDeleteItemSucceeded() {
         let item = 6
-        let isInsertSuccess = sut.insert(item)
-        XCTAssertTrue(isInsertSuccess)
+        sut.insert(item)
         let deleteResult = sut.delete()
         let isDeleteSuccess = (deleteResult == item)
         XCTAssertTrue(isDeleteSuccess)
