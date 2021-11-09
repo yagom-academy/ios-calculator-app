@@ -10,7 +10,12 @@ import XCTest
 class CalculatorTests: XCTestCase {
 
     func test_기존_연산큐에_데이터가_없을때_계산기가_입력받은_1와_더하기_연산자는_연산큐에_쌓이는가() {
+        let calculatorItemQueue = CalculatorItemQueue()
         
+        calculatorItemQueue.enqueue(1.0, "+")
+        
+        XCTAssertEqual((1.0, "+"), (calculatorItemQueue.computingValueList.first,
+                                    calculatorItemQueue.computingValueList.first))
     }
     
     func test_기존_연산큐에_데이터가_있을때_제대로_쌓이는가() {
