@@ -1,48 +1,42 @@
-//
-//  CalculatorItemQueue.swift
-//  Calculator
-//
-//  Created by 임지성 on 2021/11/08.
-//
 
 import Foundation
 
 struct CalculatorItemQueue<Element>: CalculateItem {
-    private(set) var inbox = [Element]()
-    private(set) var outbox = [Element]()
+    private(set) var inBox = [Element]()
+    private(set) var outBox = [Element]()
     
     var front: Element? {
-        return outbox.last ?? inbox.first
+        return outBox.last ?? inBox.first
     }
     
     var count: Int {
-        return outbox.count
+        return outBox.count
     }
     
     var isEmpty: Bool {
-        return inbox.isEmpty && outbox.isEmpty
+        return inBox.isEmpty && outBox.isEmpty
     }
     
     mutating func enqueue(_ element: Element) {
-        inbox.append(element)
+        inBox.append(element)
     }
     
     @discardableResult
     mutating func dequeue() -> Element? {
-        if inbox.isEmpty && outbox.isEmpty {
+        if inBox.isEmpty && outBox.isEmpty {
             return nil
         }
         
-        if outbox.isEmpty {
-            outbox = inbox.reversed()
-            inbox.removeAll()
+        if outBox.isEmpty {
+            outBox = inBox.reversed()
+            inBox.removeAll()
         }
             
-        return outbox.removeLast()
+        return outBox.removeLast()
     }
     
     mutating func clear() {
-        inbox.removeAll()
-        outbox.removeAll()
+        inBox.removeAll()
+        outBox.removeAll()
     }
 }
