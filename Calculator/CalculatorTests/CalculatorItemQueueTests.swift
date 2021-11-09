@@ -16,10 +16,22 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(2.0)
         queue.enqueue(13.5)
         print("queue: \(queue)")
+        XCTAssertEqual(queue.dequeue()!, 1.0)
+        XCTAssertEqual(queue.dequeue()!, 2.0)
+        XCTAssertEqual(queue.dequeue()!, 13.5)
+        print("queue: \(queue)")
     }
     
     func test_enqueueAndRemoveLast() {
-        
+        var queue = CalculatorItemQueue<Double>()
+        queue.enqueue(1.0)
+        queue.enqueue(2.0)
+        queue.enqueue(13.5)
+        print("queue: \(queue)")
+        XCTAssertEqual(queue.removeLast(), 13.5)
+        XCTAssertEqual(queue.removeLast()!, 2.0)
+        XCTAssertEqual(queue.removeLast()!, 1.0)
+        print("queue: \(queue)")
     }
     
 }
