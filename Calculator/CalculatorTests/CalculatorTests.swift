@@ -65,6 +65,42 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
+    func test_숫자배열이_비어있을때_deQueue메서드로_nil반환되는지() {
+        var calculatorTest = CalculatorItemQueue()
+        
+        let result = calculatorTest.deQueueNumberArray()
+        
+        XCTAssertNil(result)
+    }
+    
+    func test_숫자배열에_원소있을때_deQueue메서드로_뽑히는지() {
+        var calculatorTest = CalculatorItemQueue()
+        calculatorTest.enQueueNumberArray(item: 100)
+        
+        let expectation: Double = 100
+        let result = calculatorTest.deQueueNumberArray()
+        
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_연산자배열이_비어있을때_deQueue메서드로_nil반환되는지() {
+        var calculatorTest = CalculatorItemQueue()
+        
+        let result = calculatorTest.deQueueMathOperatorArray()
+        
+        XCTAssertNil(result)
+    }
+    
+    func test_연산자배열에_원소있을때_deQueue메서드로_뽑히는지() {
+        var calculatorTest = CalculatorItemQueue()
+        calculatorTest.enQueueMathOperator(item: .multiply)
+        
+        let expectation: MathOperator = .multiply
+        let result = calculatorTest.deQueueMathOperatorArray()
+        
+        XCTAssertEqual(expectation, result)
+    }
+    
     func test_두배열이_모두_비워지는지() {
         var calculatorTest = CalculatorItemQueue()
         
