@@ -19,26 +19,26 @@ struct Number: CalculateItem {
     let num: Double
 }
 
-struct CalculatorItemQueue {
+class CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
-    mutating func enqueue(_ item: Double) {
+    func enqueue(_ item: Double) {
         let num = Number(num: item)
         queue.append(num)
     }
     
-    mutating func enqueue(_ item: Operator) {
+    func enqueue(_ item: Operator) {
         queue.append(item)
     }
     
-    mutating func dequeue() {
+    func dequeue() {
         guard queue.count != 0 else {
             return 
         }
-       queue.removeFirst()
+        queue.removeFirst()
     }
     
-    mutating func removeAllItems() {
+    func removeAllItems() {
         queue.removeAll()
     }
 }
