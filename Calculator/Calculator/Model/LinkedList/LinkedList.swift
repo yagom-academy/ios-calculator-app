@@ -25,10 +25,6 @@ class LinkedList<T> {
     }
     
     var first: Node<T>? {
-        guard let headValue = head else {
-            return nil
-        }
-        return headValue
         return head
     }
     
@@ -45,6 +41,15 @@ class LinkedList<T> {
             head = newNode
         }
         self.tail = newNode
+    }
+    
+    @discardableResult
+    func remove(_ deletingNode: Node<T>) -> T {
+        let next = deletingNode.next
+        
+        self.head = next
+
+        return deletingNode.value
     }
     
 }
