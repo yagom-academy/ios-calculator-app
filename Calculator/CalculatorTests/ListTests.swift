@@ -13,8 +13,15 @@ class ListTest: XCTestCase {
         var list = LinkedList<Int>()
         list.append(1)
         list.append(2)
-        XCTAssertEqual(list.head?.data, nil)
-        XCTAssertEqual(list.tail?.data, nil)
+        XCTAssertEqual(list.head?.data!, 1)
+        XCTAssertEqual(list.tail?.data!, 2)
+        XCTAssertEqual(list.pop()!, 1)
+        XCTAssertEqual(list.head?.data!, 2)
+        XCTAssertEqual(list.tail?.data!, 2)
+        XCTAssertEqual(list.pop()!, 2)
+        XCTAssertTrue(list.isEmpty)
+        XCTAssertNil(list.head?.data!)
+        XCTAssertNil(list.tail?.data!)
     }
     
     func test_emptyAfterRemoveLast() {

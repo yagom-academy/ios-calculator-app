@@ -41,11 +41,12 @@ struct LinkedList<T> {
         if isEmpty {
             return nil
         }
+        guard let result: Node = head else { return nil }
         head = head?.next
         if isEmpty {
             tail = nil
         }
-        return head?.data
+        return result.data
     }
     
     @discardableResult
