@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import Calculator
 
 class CalculatorDataStructureTest: XCTestCase {
     var sut: LinkedList!
