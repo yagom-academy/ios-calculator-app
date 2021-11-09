@@ -67,6 +67,12 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(convertList(list: queue.queueList), [])
     }
     
+    func testQueueListappendOperatorItem() {
+        queue.append(item: OperatorItem.add)
+        
+        XCTAssertEqual(convertList(list: queue.queueList), ["+"])
+    }
+    
     func convertList(list: [CalcultorItem]) -> [String] {
         var compareList:[String] = []
         for item in list {
