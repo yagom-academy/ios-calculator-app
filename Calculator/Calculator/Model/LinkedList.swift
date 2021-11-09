@@ -72,9 +72,9 @@ class LinkedList<Element> {
         if head == nil {
             return nil
         } else {
-            let firstElement = head
+            let firstNode = head
             head = head?.next
-            return firstElement
+            return firstNode
         }
     }
     
