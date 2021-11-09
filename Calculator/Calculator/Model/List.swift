@@ -8,8 +8,8 @@
 import Foundation
 
 class Node<T> {
-    var data: T?
-    var next: Node?
+    fileprivate var data: T?
+    fileprivate var next: Node?
     
     init(data: T?, next: Node? = nil) {
         self.data = data
@@ -18,8 +18,8 @@ class Node<T> {
 }
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     init() {}
     var isEmpty: Bool {
         return head == nil
