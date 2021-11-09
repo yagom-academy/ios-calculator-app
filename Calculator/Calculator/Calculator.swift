@@ -38,4 +38,11 @@ struct NumberItem: CalcultorItem {
     let data: String
 }
 
+enum OperatorItem: CalcultorItem {
+    case add
+    case substract
+    case multiple
+    case divide
+}
+
 protocol CalcultorItem { }
