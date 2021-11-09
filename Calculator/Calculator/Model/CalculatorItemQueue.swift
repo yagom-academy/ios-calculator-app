@@ -23,6 +23,10 @@ struct CalculatorItemQueue: CalculateItem {
         }
         
         return (dequeuedValue.value, dequeuedOperator.value)
-        
+    }
+    
+    func cleanQueue() {
+        computingValueList.removeAll()
+        operatorList.removeAll()
     }
 }
