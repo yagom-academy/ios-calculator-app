@@ -49,12 +49,17 @@ class LinkedList<Element> {
     }
     
     func remove(at index: Int) -> Element? {
+        guard head != nil else { return nil }
+        
         var ptr = head
-        for _ in 0..<index {
-            ptr = ptr?.next
+        if index == 0 {
+            let oldValue = head?.item
+            ptr = head?.next
+            ptr?.prev = nil
+            head = ptr
+            return oldValue
         }
-        let previous = ptr?.prev
-        previous?.next = ptr?.next
+        
         return ptr?.item
     }
     
