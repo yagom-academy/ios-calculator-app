@@ -28,7 +28,9 @@ struct LinkedListQueue<Element> {
     
     @discardableResult
     func dequeue() -> Element? {
-        if list.isEmpty { return nil }
+        if list.isEmpty {
+            return nil
+        }
         return list.removeFirst()
     }
     

@@ -29,7 +29,9 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     
     @discardableResult
     mutating func dequeue() -> Element? {
-        guard (outBox.isEmpty && inBox.isEmpty) == false else { return nil }
+        guard (outBox.isEmpty && inBox.isEmpty) == false else {
+            return nil
+        }
         
         if outBox.isEmpty {
             outBox = inBox.reversed()

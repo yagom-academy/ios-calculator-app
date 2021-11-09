@@ -17,7 +17,7 @@ final class LinkedList<Element> {
             self.value = value
         }
     }
-
+    
     private(set) var head: Node<Element>?
     
     var first: Node<Element>? {
@@ -68,7 +68,9 @@ final class LinkedList<Element> {
             var node = head!.next
             for _ in 1..<index {
                 node = node?.next
-                if node == nil { break }
+                if node == nil {
+                    break
+                }
             }
             return node!
         }
@@ -98,7 +100,9 @@ final class LinkedList<Element> {
     
     @discardableResult
     func removeFirst() -> Element? {
-        if isEmpty { return nil }
+        if isEmpty {
+            return nil
+        }
         return remove(at: 0)
     }
     
