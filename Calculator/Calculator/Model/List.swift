@@ -56,17 +56,17 @@ struct LinkedList<T> {
             return pop()
         }
         
-        var prev = head
-        var cur = head
+        var previousNode = head
+        var currrentNode = head
         
-        while let next = cur.next {
-            prev = cur
-            cur = next
+        while let next = currrentNode.next {
+            previousNode = currrentNode
+            currrentNode = next
         }
-        prev.next = nil
-        tail = prev
+        previousNode.next = nil
+        tail = previousNode
 
-        return cur.data
+        return currrentNode.data
     }
 }
 
