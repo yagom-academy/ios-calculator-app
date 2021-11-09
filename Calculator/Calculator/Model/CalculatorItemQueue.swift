@@ -10,3 +10,11 @@ import Foundation
 protocol CalculateItem {
     
 }
+
+enum Operator: CalculateItem {
+    case plus, minus, multiply, divide, equal
+}
+
+struct Number: CalculateItem {
+    let num: Double
+}
