@@ -33,3 +33,5 @@ struct CalculatorItemQueue<Element> where Element: CalculateItem {
         return self.item.remove(at: 0)
     }
 }
+
+extension Int: CalculateItem { }
