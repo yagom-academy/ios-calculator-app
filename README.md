@@ -1,6 +1,8 @@
 ## iOS 커리어 스타터 캠프
 
-### 계산기 프로젝트 저장소
+### 계산기 프로젝트
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
+### Queue Model UML Diagram
+
+![Queue Diagram drawio-2](https://user-images.githubusercontent.com/25794814/140848478-bd1a34c3-9375-4885-aac0-56993857fde3.png)
 
