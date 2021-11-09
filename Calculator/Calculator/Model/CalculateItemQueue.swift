@@ -11,11 +11,15 @@ struct CalculateItemQueue<T: Equatable> {
     private(set) var items: [T] = []
     
     mutating func enqueue(_ item: T) {
+        items.append(item)
     }
-
-    mutating func dequeue() {
+    
+    @discardableResult
+    mutating func dequeue() -> T? {
+        return items.isEmpty ? nil : items.removeFirst()
     }
     
     mutating func clean() {
+        items.removeAll()
     }
 }
