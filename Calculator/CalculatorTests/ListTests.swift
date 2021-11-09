@@ -8,11 +8,18 @@
 import XCTest
 
 class ListTest: XCTestCase {
-
-    func testEmptyAfterPop() {
-        var list = LinkedList<Int>()
+    var list = LinkedList<Int>()
+    
+    override func setUp() {
         list.append(1)
         list.append(2)
+    }
+    
+    override func tearDown() {
+        list = LinkedList<Int>()
+    }
+
+    func testEmptyAfterPop() {
         XCTAssertEqual(list.head?.data!, 1)
         XCTAssertEqual(list.tail?.data!, 2)
         XCTAssertEqual(list.pop()!, 1)
@@ -25,9 +32,6 @@ class ListTest: XCTestCase {
     }
     
     func testEmptyAfterRemoveLast() {
-        var list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
         XCTAssertEqual(list.removeLast()!, 2)
         XCTAssertEqual(list.removeLast()!, 1)
         XCTAssertTrue(list.isEmpty)
