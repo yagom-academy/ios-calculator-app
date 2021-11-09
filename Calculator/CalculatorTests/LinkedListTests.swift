@@ -80,5 +80,26 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, nil)
     }
+    
+    func test_1_2_3이들어있는리스트에서노드개수3개반환() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        // when
+        let result = list.count
+        // then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_비어있는경우노드개수0개반환() {
+        // given
+        let list = LinkedList<Int>()
+        // when
+        let result = list.count
+        // then
+        XCTAssertEqual(result, 0)
+    }
 
 }
