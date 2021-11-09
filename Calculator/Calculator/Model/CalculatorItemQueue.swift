@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    var numberArray: [Double] = []
-    var mathOperatorArray: [MathOperator] = []
+    private(set) var numberArray: [Double] = []
+    private(set) var mathOperatorArray: [MathOperator] = []
 
     mutating func enQueueNumberArray(item: Double) {
         numberArray.append(item)
