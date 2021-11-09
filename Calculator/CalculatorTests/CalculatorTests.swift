@@ -57,7 +57,7 @@ class CalculatorTests: XCTestCase {
     
     func test_연산자배열에_add케이스_넣어지는지() {
         var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueMathOperator(item: .add)
+        calculatorTest.enQueueMathOperatorArray(item: .add)
         
         let expectation: MathOperator = .add
         let result = calculatorTest.mathOperatorArray[0]
@@ -93,7 +93,7 @@ class CalculatorTests: XCTestCase {
     
     func test_연산자배열에_원소있을때_deQueue메서드로_뽑히는지() {
         var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueMathOperator(item: .multiply)
+        calculatorTest.enQueueMathOperatorArray(item: .multiply)
         
         let expectation: MathOperator = .multiply
         let result = calculatorTest.deQueueMathOperatorArray()
@@ -109,10 +109,10 @@ class CalculatorTests: XCTestCase {
         calculatorTest.enQueueNumberArray(item: 3.3)
         calculatorTest.enQueueNumberArray(item: 0)
         
-        calculatorTest.enQueueMathOperator(item: .add)
-        calculatorTest.enQueueMathOperator(item: .subtract)
-        calculatorTest.enQueueMathOperator(item: .multiply)
-        calculatorTest.enQueueMathOperator(item: .divide)
+        calculatorTest.enQueueMathOperatorArray(item: .add)
+        calculatorTest.enQueueMathOperatorArray(item: .subtract)
+        calculatorTest.enQueueMathOperatorArray(item: .multiply)
+        calculatorTest.enQueueMathOperatorArray(item: .divide)
         
         calculatorTest.clearBothArrays()
         

@@ -15,7 +15,7 @@ struct CalculatorItemQueue {
         numberArray.append(item)
     }
     
-    mutating func enQueueMathOperator(item: MathOperator) {
+    mutating func enQueueMathOperatorArray(item: MathOperator) {
         mathOperatorArray.append(item)
     }
     
