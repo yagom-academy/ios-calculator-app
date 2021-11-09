@@ -14,11 +14,22 @@ class CalculatorTests: XCTestCase {
         
         calculatorItemQueue.enqueue(1.0, "+")
         
-        XCTAssertEqual((1.0, "+"), (calculatorItemQueue.computingValueList.first,
-                                    calculatorItemQueue.operatorsList.first))
+        XCTAssertEqual(1.0, calculatorItemQueue.computingValueList.first?.value)
+        XCTAssertEqual("+", calculatorItemQueue.operatorList.first?.value)
     }
     
     func test_기존_연산큐에_데이터가_있을때_제대로_쌓이는가() {
+        let calculatorItemQueue = CalculatorItemQueue()
+        
+        calculatorItemQueue.enqueue(1.0, "+")
+        calculatorItemQueue.enqueue(2.0, "-")
+        calculatorItemQueue.enqueue(3.0, "/")
+        
+        XCTAssertEqual(1.0, calculatorItemQueue.computingValueList.first?.value)
+        XCTAssertEqual("+", calculatorItemQueue.operatorList.first?.value)
+        
+        XCTAssertEqual(3.0, calculatorItemQueue.computingValueList.last?.value)
+        XCTAssertEqual("/", calculatorItemQueue.operatorList.last?.value)
         
     }
     
