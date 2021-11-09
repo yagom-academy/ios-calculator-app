@@ -43,20 +43,20 @@ class LinkedListTests: XCTestCase {
         let newItems = [1, 2]
         let firstInsertedItem = newItems[0]
         appendContents(of: newItems, to: &sut)
-        XCTAssertTrue(hasEqualItems(node: sut.first, item: firstInsertedItem))
+        XCTAssertTrue(hasEqualItems(node: sut.head, item: firstInsertedItem))
     }
     
     func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastItem() {
         let newItems = [1, 2, 3, 4]
         let lastInsertedItem = newItems[newItems.count-1]
         appendContents(of: newItems, to: &sut)
-        XCTAssertTrue(hasEqualItems(node: sut.last, item: lastInsertedItem))
+        XCTAssertTrue(hasEqualItems(node: sut.tail, item: lastInsertedItem))
     }
     
     func testLinkedListAppend_givenNewIntegers_expectSameElements() {
         let newItems = [1,2,3,4,5,6,7,8,9,10]
         appendContents(of: newItems, to: &sut)
-        XCTAssertEqual(sut.convertStoredElementsToArray(), newItems)
+        XCTAssertEqual(sut.convertedToIntArray, newItems)
     }
     
     private func hasEqualItems(node: Node<Any>?, item: Int) -> Bool {
@@ -70,5 +70,19 @@ class LinkedListTests: XCTestCase {
         for item in items {
             linkedList.append(item)
         }
+    }
+}
+
+extension LinkedList {
+    var convertedToIntArray: [Int] {
+        var pointer = head
+        var listContents: [Int] = []
+        while pointer != nil {
+            if let node = pointer, let value = node.item as? Int {
+                listContents.append(value)
+                pointer = node.next
+            }
+        }
+        return listContents
     }
 }
