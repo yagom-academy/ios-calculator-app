@@ -15,6 +15,9 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T>: CalculateItem {
     private var items: List<T>
     
+    var count: Int {
+        return items.count
+    }
     
     init() {
         self.items = List<T>()
