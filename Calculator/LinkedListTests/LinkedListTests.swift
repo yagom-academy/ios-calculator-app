@@ -6,16 +6,22 @@
 //
 
 import XCTest
-@testable import UnitTestSample
 
 class LinkedListTests: XCTestCase {
-
+    var sut: LinkedList!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+    }
+    
+    func test_LinkedList의front가nil인지() {
+        let front = sut.front
+        
+        XCTAssertEqual(front, nil)
     }
 
 }
