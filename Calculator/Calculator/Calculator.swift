@@ -34,7 +34,7 @@ struct CalculatorItemQueue {
     }
     
     mutating func clearList() {
-        queueList = []
+        self.queueList = []
     }
 }
 
@@ -46,11 +46,24 @@ struct NumberItem: CalcultorItem {
     }
 }
 
-enum OperatorItem: String, CalcultorItem {
-    case add = "+"
-    case substract = "-"
-    case multiple = "*"
-    case divide = "/"
+enum OperatorItem: CalcultorItem, CustomStringConvertible {
+    case add
+    case substract
+    case multiple
+    case divide
+    
+    var description: String {
+        switch self {
+        case .add:
+            return "+"
+        case .substract:
+            return "-"
+        case .multiple:
+            return "*"
+        case .divide:
+            return "/"
+        }
+    }
 }
 
 protocol CalcultorItem { }
