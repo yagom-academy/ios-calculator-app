@@ -1,7 +1,7 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: LinkedList<T> {
+class CalculatorItemQueue<T>: LinkedList<T>, CalculateItem {
 
   
 }
@@ -45,11 +45,6 @@ class LinkedList<T> {
     func dequeue() {
         guard isEmpty else { return }
         
-        var finderForDelete: Node<T>?
-        
-        while finderForDelete?.pointer?.pointer != nil {
-            finderForDelete = finderForDelete?.pointer
-        }
-        finderForDelete?.pointer = n
+        head = head?.pointer
     }
 }

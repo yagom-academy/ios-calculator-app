@@ -2,5 +2,6 @@
 import Foundation
 
 protocol CalculateItem {
-    
+   
 }
+
