@@ -24,7 +24,8 @@ struct CalculatorItemQueue<Element> {
         self.item.append(item)
     }
     
+    @discardableResult
     func dequeue() -> Element? {
-        return nil
+        return self.item.remove(at: 0)
     }
 }
