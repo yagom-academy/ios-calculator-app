@@ -44,6 +44,18 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertTrue(list[1] == nil)
     }
+    
+    func test_1_2_3이들어있는리스트에서0번인덱스를제거하면첫원소로2가되는가() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        // when
+        list.remove(at: 0)
+        // then
+        XCTAssertTrue(list[0] == 2)
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
