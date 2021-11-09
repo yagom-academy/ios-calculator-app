@@ -30,4 +30,8 @@ struct CalculatorItemQueue {
     mutating func enqueue(_ item: Operator) {
         queue.append(item)
     }
+    
+    mutating func dequeue() -> CalculateItem {
+        queue.removeFirst()
+    }
 }

@@ -45,4 +45,13 @@ class CalculatorTests: XCTestCase {
         //result
         XCTAssertEqual(calculatorItemQueue.queue.count, 2)
     }
+    
+    func test_dequeue호출시_queue의첫번째원소가_삭제된다() {
+        //expectation
+        calculatorItemQueue.enqueue(1)
+        calculatorItemQueue.dequeue()
+        
+        //result
+        XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
+    }
 }
