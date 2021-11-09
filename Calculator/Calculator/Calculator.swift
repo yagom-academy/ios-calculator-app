@@ -7,3 +7,7 @@
 
 import Foundation
 
+struct CalculatorItemQueue {
+    let queueList: [String]
+    
+}
