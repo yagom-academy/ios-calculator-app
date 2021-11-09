@@ -10,11 +10,11 @@ import XCTest
 class LinkedListTests: XCTestCase {
 
     func test_리스트에_노드_추가가_되는가() {
-        var linkedList: LinkedList = LinkedList()
+        let linkedList: LinkedList = LinkedList<Double>()
         
         linkedList.append(1.0)
         
-        XCTAssertEqual(1.0, linkedList.first)
+        XCTAssertEqual(1.0, linkedList.first?.value)
     }
         
     func test_리스트_삭제시_head만_삭제되고_next가_head가_되는가() {
