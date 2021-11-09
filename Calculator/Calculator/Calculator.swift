@@ -7,8 +7,35 @@
 
 import Foundation
 
+class Node {
+    var data: CalcultorItem?
+    var next: Node?
+    
+    init(data: CalcultorItem?, next: Node? = nil) {
+        self.data = data
+        self.next = next
+    }
+}
+
+struct LinkedList {
+    private var head: Node?
+    
+    mutating func append(data: CalcultorItem?) {
+        if head == nil {
+            self.head = Node(data: data)
+            return
+        }
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data: data)
+    }
+}
+
 struct CalculatorItemQueue {
-    var queueList: [CalcultorItem] = []
+    var queueList: LinkedList = LinkedList()
     
     mutating func enqueue(item: CalcultorItem?) {
         guard let item = item else {
@@ -16,26 +43,26 @@ struct CalculatorItemQueue {
         }
         
         if let number = item as? NumberItem {
-            queueList.append(number)
+            queueList.append(data: number)
         }
         
         if let operatorItem = item as? OperatorItem {
-            queueList.append(operatorItem)
+            queueList.append(data: operatorItem)
         }
     }
     
-    mutating func dequeue() -> CalcultorItem? {
-        if queueList.isEmpty {
-            return nil
-        }
-        let removedItem = queueList.removeFirst()
-        
-        return removedItem
-    }
-    
-    mutating func clearList() {
-        self.queueList = []
-    }
+//    mutating func dequeue() -> CalcultorItem? {
+//        if queueList.isEmpty {
+//            return nil
+//        }
+//        let removedItem = queueList.removeFirst()
+//
+//        return removedItem
+//    }
+//
+//    mutating func clearList() {
+//        self.queueList = []
+//    }
 }
 
 struct NumberItem: CalcultorItem {
