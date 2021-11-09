@@ -19,8 +19,8 @@ struct CalculatorItemQueue {
             queueList.append(number)
         }
         
-        if let opearator = item as? OperatorItem {
-            queueList.append(opearator)
+        if let operatorItem = item as? OperatorItem {
+            queueList.append(operatorItem)
         }
     }
     
@@ -42,11 +42,11 @@ struct NumberItem: CalcultorItem {
     let data: String
 }
 
-enum OperatorItem: CalcultorItem {
-    case add
-    case substract
-    case multiple
-    case divide
+enum OperatorItem: String, CalcultorItem {
+    case add = "+"
+    case substract = "-"
+    case multiple = "*"
+    case divide = "/"
 }
 
 protocol CalcultorItem { }

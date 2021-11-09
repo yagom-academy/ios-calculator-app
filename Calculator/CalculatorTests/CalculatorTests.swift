@@ -79,6 +79,9 @@ class CalculatorTests: XCTestCase {
             if let number = item as? NumberItem {
                 compareList.append(number.data)
             }
+            if let operatorItem = item as? OperatorItem {
+                compareList.append(operatorItem.rawValue)
+            }
         }
         return compareList
     }
