@@ -32,6 +32,13 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(try queue.removeLast(), 1.0)
     }
     
+    func testThrowError() {
+        XCTAssertEqual(try queue.removeLast(), 13.5)
+        XCTAssertEqual(try queue.removeLast(), 2.0)
+        XCTAssertEqual(try queue.removeLast(), 1.0)
+        XCTAssertThrowsError(try queue.dequeue())
+        XCTAssertThrowsError(try queue.removeLast())
+    }
     
 }
 
