@@ -21,7 +21,7 @@ struct CalculatorItemQueue<Element> {
     }
     
     func enqueue(_ item: Element) {
-        
+        self.item.append(item)
     }
     
     func dequeue() -> Element? {
