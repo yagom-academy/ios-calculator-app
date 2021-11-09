@@ -39,9 +39,13 @@ struct LinkedList {
         var removedData: CalcultorItem? = nil
         if head?.next == nil {
             removedData = head?.data
-            head = head?.next
+            self.head = head?.next
         }
         return removedData
+    }
+    
+    func clear() {
+        self.head = nil
     }
     
     var isEmpty: Bool {
@@ -75,14 +79,7 @@ struct CalculatorItemQueue {
         guard let item = item else {
             return
         }
-        
-        if let number = item as? NumberItem {
-            queueList.append(data: number)
-        }
-        
-        if let operatorItem = item as? OperatorItem {
-            queueList.append(data: operatorItem)
-        }
+        queueList.append(data: item)
     }
     
     mutating func dequeue() -> CalcultorItem? {
@@ -95,7 +92,7 @@ struct CalculatorItemQueue {
     }
 
     mutating func clearList() {
-        
+        queueList.clear()
     }
 }
 
@@ -107,13 +104,13 @@ struct NumberItem: CalcultorItem {
     }
 }
 
-enum OperatorItem: CalcultorItem, CustomStringConvertible {
+enum OperatorItem: CalcultorItem {
     case add
     case substract
     case multiple
     case divide
     
-    var description: String {
+    var operatorSymbol: String {
         switch self {
         case .add:
             return "+"

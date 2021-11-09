@@ -98,7 +98,7 @@ class CalculatorTests: XCTestCase {
                 compareList.append(number.dataToString)
             }
             if let operatorItem = item as? OperatorItem {
-                compareList.append(operatorItem.description)
+                compareList.append(operatorItem.operatorSymbol)
             }
         }
         return compareList
