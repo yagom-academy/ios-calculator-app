@@ -77,7 +77,7 @@ extension Node: CustomStringConvertible {
         guard let next = next else {
             return "\(data)"
         }
-        return "[\(data), " + "\(next)" + " ]"
+        return "\(data)" + ", " + "\(next)"
     }
 }
 
@@ -86,6 +86,6 @@ extension LinkedList: CustomStringConvertible {
         guard let head = head else {
             return "Queue is Empty"
         }
-        return "\(head)"
+        return "[" + "\(head)" + "]"
     }
 }
