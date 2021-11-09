@@ -48,6 +48,7 @@ class LinkedList<Element> {
         }
     }
     
+    @discardableResult
     func remove(at index: Int) -> Element? {
         guard head != nil else { return nil }
         

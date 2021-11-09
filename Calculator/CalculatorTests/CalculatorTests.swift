@@ -56,6 +56,18 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(list[0], 2)
     }
+    
+    func test_1_2_3이들어있는리스트에서1번인덱스를제거하면두번째원소로3이되는가() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        // when
+        list.remove(at: 1)
+        // then
+        XCTAssertEqual(list[1], 3)
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
