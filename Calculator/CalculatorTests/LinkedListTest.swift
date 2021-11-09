@@ -29,7 +29,7 @@ class LinkedListTest: XCTestCase {
         list.appendNewNode(value: 3)
         list.appendNewNode(value: "+")
         list.appendNewNode(value: 4)
-        XCTAssertEqual("+", list.head?.next?.value as? String)
+        XCTAssertEqual("+", list.first?.next?.value as? String)
     }
     
     func test_linkedList_is_empty() {
@@ -51,7 +51,7 @@ class LinkedListTest: XCTestCase {
     func test_remove_in_empty_linkedList() {
         let list = LinkedList<Any>()
         list.removeFirstNode()
-        XCTAssertEqual(nil, list.head?.value as? Int)
+        XCTAssertEqual(nil, list.first?.value as? Int)
     }
     
     func test_remove_in_not_empty_linkedList() {
