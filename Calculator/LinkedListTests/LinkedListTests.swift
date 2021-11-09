@@ -18,27 +18,27 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_LinkedList의front가nil인지() {
+    func test_LinkedList의_front가_nil인지() {
         let front = sut.front
         
         XCTAssertNil(front)
     }
 
-    func test_LinkedList에Node를추가해서front에nil이안나오게() {
+    func test_LinkedList에_Node를_추가해서_front에_nil이_안나오게() {
         let node = Node()
         sut.addRear(value: node.value)
         
         XCTAssertEqual(sut.front, node)
     }
     
-    func test_LinkedList의add함수의전달인자로value를넣어주고frontNode의value와같은지() {
+    func test_LinkedList의_add함수에_전달인자로_value를_넣어주고_frontNode의_value와같은지() {
         let value = 5
         sut.addRear(value: value)
         
         XCTAssertEqual(sut.front?.value, value)
     }
     
-    func test_LinkedList의add함수에값을2개넣으면_순서대로front_rear가들어가는지() {
+    func test_LinkedList의_add함수에_값을_2개넣으면_순서대로_front_rear가_들어가는지() {
         let value1 = 1
         let value2 = 2
         sut.addRear(value: value1)
@@ -48,7 +48,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.rear?.value, value2)
     }
     
-    func test_LinkedList의add함수에값을3개넣으면_순서대로front_rear가들어가는지() {
+    func test_LinkedList의_add함수에_값을_3개넣으면_순서대로_front_rear가_들어가는지() {
         let value1 = 1
         let value2 = 2
         let value3 = 3
@@ -61,7 +61,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.rear?.value, value3)
     }
     
-    func test_LinkedList의front를제거하면처음넣어준Node가나오는지() {
+    func test_LinkedList의_front를_제거하면_처음_넣어준_Node가_나오는지() {
         let value1 = 1
         let value2 = 2
         let value3 = 3
