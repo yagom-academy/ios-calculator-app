@@ -19,7 +19,7 @@ class LinkedList<Element> {
     
     typealias Node = ListNode<Element>
     
-    var head: Node?
+    private var head: Node?
     
     var first: Node? {
         return head
