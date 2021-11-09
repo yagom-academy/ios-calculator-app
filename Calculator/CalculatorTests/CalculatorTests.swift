@@ -27,7 +27,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(isSuccess)
     }
     
-    func testDeleteItemFailed() {
+    func testDeleteItemFailedWhenQueueIsEmpty() {
         let result = sut.delete()
         let isFail = (result == nil)
         XCTAssertTrue(isFail)
