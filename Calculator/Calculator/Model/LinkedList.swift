@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct LinkedList {
+struct LinkedList<Element> {
     
 }

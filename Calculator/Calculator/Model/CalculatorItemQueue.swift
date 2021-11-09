@@ -7,23 +7,23 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Item> {
-    private var list = [Item]()
+struct CalculatorItemQueue<Element> {
+    private var list = [Element]()
     var isEmpty: Bool {
         list.isEmpty
     }
-    var front: Item? {
+    var front: Element? {
         list.first
     }
     var count: Int {
         list.count
     }
     
-    mutating func enqueue(_ item: Item) {
+    mutating func enqueue(_ item: Element) {
         list.append(item)
     }
     
-    mutating func dequeue() -> Item? {
+    mutating func dequeue() -> Element? {
         if list.isEmpty {
             return nil
         }
