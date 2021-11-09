@@ -49,5 +49,18 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = calculatorOperator.queue.dequeue()
         XCTAssertEqual(result, .add)
     }
+    
+    func test_숫자_inbox에_123추가() {
+        var calculatorNumber = NumberQueue()
+        calculatorNumber.queue.enqueue(123)
+        XCTAssertEqual(calculatorNumber.queue.inbox, [123])
+    }
+    
+    func test_숫자_inbox에_123_124_추가() {
+        var calculatorNumber = NumberQueue()
+        calculatorNumber.queue.enqueue(123)
+        calculatorNumber.queue.enqueue(124)
+        XCTAssertEqual(calculatorNumber.queue.inbox, [123, 124])
+    }
 
 }
