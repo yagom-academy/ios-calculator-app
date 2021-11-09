@@ -1,7 +1,7 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: LinkedList<T>{
+class CalculatorItemQueue<T>: LinkedList<T> {
 
   
 }
@@ -17,21 +17,33 @@ class Node<T> {
     }
 }
 
-class LinkedList<String> {
-    var head: Node<String>?
+class LinkedList<T> {
+    var head: Node<T>?
+    var isEmpty: Bool {
+        return head == nil
+    }
     
-    init(head: Node<String> ) {
+    init(head: Node<T>) {
         self.head = head
     }
     
-    func hasEmpty(head: Node<String>?) ->Bool {
-        return head?.pointer == nil ? true : false
+    func enqueue(in data: T) {
+        var finderForLast: Node<T>?
+        
+        guard isEmpty == false else {
+            head = Node(data: data, pointer: nil)
+            return
+        }
+        
+        finderForLast = head
+        while finderForLast?.pointer != nil {
+            finderForLast = finderForLast?.pointer
+        }
+        finderForLast?.pointer = Node(data: data, pointer: nil)
     }
     
-    func enqueue(in node: Node<String>) {
-        if hasEmpty(head: head){
-            head = node
-        }
+    func dequeue() {
+        
     }
     
 }
