@@ -21,7 +21,6 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         items.append(item)
     }
     
-    @discardableResult
     mutating func dequeue() -> T? {
         if isEmpty {
             return nil
@@ -29,14 +28,12 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         return items.pop()
     }
     
-    @discardableResult
     mutating func removeLast() -> T? {
         if isEmpty {
             return nil
         }
         return items.removeLast()
     }
-    
 }
 
 extension CalculatorItemQueue: CustomStringConvertible {
