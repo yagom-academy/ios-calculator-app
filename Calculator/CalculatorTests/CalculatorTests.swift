@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class CalculatorTests: XCTestCase {
 
@@ -27,6 +28,12 @@ class CalculatorTests: XCTestCase {
         measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testQueueListisnotEmpty() {
+        let queue: CalculatorItemQueue = CalculatorItemQueue()
+        
+        XCTAssertEqual(queue.queueList.isEmpty, false)
     }
 
 }
