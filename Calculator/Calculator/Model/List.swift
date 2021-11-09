@@ -7,25 +7,25 @@
 
 import Foundation
 
-class Node<T> {
-    var data: T?
+class Node<Element> {
+    var data: Element?
     var next: Node?
     
-    init(data: T?, next: Node? = nil) {
+    init(data: Element?, next: Node? = nil) {
         self.data = data
         self.next = next
     }
 }
 
-struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+struct LinkedList<Element> {
+    var head: Node<Element>?
+    var tail: Node<Element>?
     init() {}
     var isEmpty: Bool {
         return head == nil
     }
     
-    mutating func append(_ data: T?) {
+    mutating func append(_ data: Element?) {
         if isEmpty {
             head = Node(data: data)
             tail = head
@@ -36,7 +36,7 @@ struct LinkedList<T> {
         tail = tail?.next
     }
     
-    mutating func pop() -> T? {
+    mutating func pop() -> Element? {
         if isEmpty {
             return nil
         }
@@ -48,7 +48,7 @@ struct LinkedList<T> {
         return result.data
     }
     
-    mutating func removeLast() -> T? {
+    mutating func removeLast() -> Element? {
         guard let head = head else {
             return nil
         }

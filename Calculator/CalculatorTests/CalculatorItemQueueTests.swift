@@ -27,10 +27,12 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func testEnqueueAndRemoveLast() {
-        XCTAssertEqual(queue.removeLast(), 13.5)
-        XCTAssertEqual(queue.removeLast(), 2.0)
-        XCTAssertEqual(queue.removeLast(), 1.0)
+        XCTAssertEqual(try queue.removeLast(), 13.5)
+        XCTAssertEqual(try queue.removeLast(), 2.0)
+        XCTAssertEqual(try queue.removeLast(), 1.0)
     }
+    
+    
 }
 
 extension Double: CalculatorItem {
