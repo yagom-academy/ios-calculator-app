@@ -74,4 +74,20 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(result?.value, value1)
     }
+    
+    func test_LinkedList의_front를_두번_제거하면_순서대로_Node가_나오는지() {
+        let value1 = 1
+        let value2 = 2
+        let value3 = 3
+        
+        sut.add(value: value1)
+        sut.add(value: value2)
+        sut.add(value: value3)
+        
+        let result1 = sut.removeFront()
+        let result2 = sut.removeFront()
+        
+        XCTAssertEqual(result1?.value, value1)
+        XCTAssertEqual(result2?.value, value2)
+    }
 }
