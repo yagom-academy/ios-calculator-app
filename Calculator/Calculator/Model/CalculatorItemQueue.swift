@@ -32,3 +32,11 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     }
     
 }
+
+struct OperatorQueue {
+    var queue = CalculatorItemQueue<Operator>()
+}
+
+struct NumberQueue {
+    var queue = CalculatorItemQueue<Double>()
+}
