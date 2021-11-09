@@ -28,4 +28,13 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(sut.head?.value, 4)
     }
+    
+    func test_4가있는리스트에서append호출시_7을전달하면_headnextvalue에7이할당되는지() {
+        //given
+        sut.append(4)
+        //when
+        sut.append(7)
+        //then
+        XCTAssertEqual(sut.head?.next?.value, 7)
+    }
 }
