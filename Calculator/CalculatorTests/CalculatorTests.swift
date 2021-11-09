@@ -9,6 +9,22 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     
+    func test_숫자배열이_초기화_직후_비어있는지() {
+        let calculatorTest = CalculatorItemQueue()
+        
+        let result = calculatorTest.numberArray.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_연산자배열이_초기화_직후_비어있는지() {
+        let calculatorTest = CalculatorItemQueue()
+        
+        let result = calculatorTest.mathOperatorArray.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
     func test_숫자배열에_넣는_5가_Double_타입인지() {
         var calculatorTest = CalculatorItemQueue()
         calculatorTest.enQueueNumberArray(item: 5)
