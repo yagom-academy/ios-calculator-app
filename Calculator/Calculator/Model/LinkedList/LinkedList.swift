@@ -35,6 +35,15 @@ class LinkedList<T> {
         return tail
     }
     
-    
+    func append(_ value: T) {
+        let newNode = Node(value: value)
+        
+        if let tailNode = tail {
+            tailNode.next = newNode
+        } else {
+            head = newNode
+        }
+        self.tail = newNode
+    }
     
 }
