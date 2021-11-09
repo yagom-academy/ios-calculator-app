@@ -15,6 +15,9 @@ struct CalculatorItemQueue<Item> {
     }
     
     mutating func dequeue() -> Item? {
+        if list.isEmpty {
+            return nil
+        }
         return list.removeFirst()
     }
 }
