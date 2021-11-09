@@ -9,7 +9,7 @@ import XCTest
 
 class ListTest: XCTestCase {
 
-    func test_emptyAfterPop() {
+    func testEmptyAfterPop() {
         var list = LinkedList<Int>()
         list.append(1)
         list.append(2)
@@ -24,7 +24,7 @@ class ListTest: XCTestCase {
         XCTAssertNil(list.tail?.data!)
     }
     
-    func test_emptyAfterRemoveLast() {
+    func testEmptyAfterRemoveLast() {
         var list = LinkedList<Int>()
         list.append(1)
         list.append(2)

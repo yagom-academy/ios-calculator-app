@@ -10,7 +10,7 @@ import XCTest
 class CalculatorItemQueueTests: XCTestCase {
 
     
-    func test_enqueueAndDequeue() {
+    func testEnqueueAndDequeue() {
         var queue = CalculatorItemQueue<Double>()
         queue.enqueue(1.0)
         queue.enqueue(2.0)
@@ -22,7 +22,7 @@ class CalculatorItemQueueTests: XCTestCase {
         print("queue: \(queue)")
     }
     
-    func test_enqueueAndRemoveLast() {
+    func testEnqueueAndRemoveLast() {
         var queue = CalculatorItemQueue<Double>()
         queue.enqueue(1.0)
         queue.enqueue(2.0)
