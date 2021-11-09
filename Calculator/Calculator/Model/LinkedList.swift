@@ -77,4 +77,8 @@ class LinkedList<Element> {
             return firstElement
         }
     }
+    
+    func removeAllNodes() {
+        head = nil
+    }
 }
