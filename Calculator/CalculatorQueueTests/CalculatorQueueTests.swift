@@ -8,26 +8,21 @@
 import XCTest
 @testable import Calculator
 class CalculatorQueueTests: XCTestCase {
-    var sut: ViewController!
+    var sut: CalculatorItemQueue!
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+        try super.setUpWithError()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func test_calculatorItemQueue_item이_들어올경우_내부저장소에_저장이되는지() {
+        sut.enqueue(item: "+")
+        let operationCount = sut.operationStorage.count
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertEqual(operationCount, 1)
     }
-
 }

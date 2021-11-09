@@ -6,3 +6,24 @@
 //
 
 import Foundation
+
+protocol CalculatorItem {
+    
+}
+
+struct CalculatorItemQueue {
+    var operationStorage: [CalculatorItem] = []
+    
+    mutating func enqueue(item: CalculatorItem) {
+  
+    }
+    
+    func dequeue() -> CalculatorItem {
+        return ""
+    }
+}
+
+extension String: CalculatorItem {
+
+}
+
