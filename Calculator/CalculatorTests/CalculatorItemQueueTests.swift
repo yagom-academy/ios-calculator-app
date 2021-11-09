@@ -45,5 +45,26 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, 2)
     }
+    
+    func test_비어있는큐에1_2_3넣고count하면3반환() throws {
+        // given
+        let queue = CalculatorItemQueue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        // when
+        let result = queue.count
+        // then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_비어있는큐에count하면0반환() throws {
+        // given
+        let queue = CalculatorItemQueue<Int>()
+        // when
+        let result = queue.count
+        // then
+        XCTAssertEqual(result, 0)
+    }
 
 }
