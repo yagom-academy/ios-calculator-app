@@ -9,7 +9,7 @@ struct OperatorItem: CalculateItem {
 }
 
 struct CalculatorItemQueue {
-    private(set) var items: [CalculateItem] = []
+    private(set) var items: LinkedList<CalculateItem> = LinkedList()
     
     mutating func enqueue(item: CalculateItem) {
         items.append(item)
