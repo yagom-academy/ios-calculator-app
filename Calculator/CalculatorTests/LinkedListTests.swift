@@ -38,4 +38,15 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(true, linkedList.isEmpty)
     }
+    
+    func test_리스트에_있는_모든_노드가_지워지는가() {
+        let linkedList: LinkedList = LinkedList<Double>()
+        
+        linkedList.append(1.0)
+        linkedList.append(2.0)
+         
+        linkedList.removeAll()
+        
+        XCTAssertEqual(true, linkedList.isEmpty)
+    }
 }
