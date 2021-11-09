@@ -38,4 +38,18 @@ class LinkedList<T> {
         }
         finderToTail?.next = Node(value: value)
     }
+    
+    func scanAllValue() -> [T] {
+        var scanResult: [T] = []
+
+        guard var finderToTail: Node<T> = head else { return scanResult }
+        scanResult.append(finderToTail.value)
+        
+        guard let nextNode = finderToTail.next else { return scanResult }
+        while finderToTail.next != nil {
+            finderToTail = nextNode
+            scanResult.append(finderToTail.value)
+        }
+        return scanResult
+    }
 }
