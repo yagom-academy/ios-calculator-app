@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class CauculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
