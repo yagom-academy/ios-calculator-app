@@ -80,6 +80,23 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(convertList(list: queue.queueList), ["+","/","2"])
     }
     
+    func testCalculatorQueueInit() {
+        let queue: CalculatorItemQueue = CalculatorItemQueue(queueList: [NumberItem(data: 3)])
+        
+        XCTAssertEqual(convertList(list: queue.queueList), ["3"])
+    }
+    
+    func testAnotherCalculatorQueueInit() {
+        var calculatorQueue: CalculatorItemQueue = CalculatorItemQueue(queueList: [NumberItem(data: 3)])
+        var preparedCalculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
+        
+        calculatorQueue.append(item: OperatorItem.add)
+        preparedCalculatorQueue.append(item: NumberItem(data: 3))
+        
+        XCTAssertEqual(convertList(list: calculatorQueue.queueList), ["3","+"])
+        XCTAssertEqual(convertList(list: preparedCalculatorQueue.queueList), ["3"])
+    }
+    
     func convertList(list: [CalcultorItem]) -> [String] {
         var compareList:[String] = []
         for item in list {
