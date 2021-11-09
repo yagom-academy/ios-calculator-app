@@ -18,19 +18,18 @@ class LinkedListTests: XCTestCase {
     }
         
     func test_리스트_삭제시_head만_삭제되고_next가_head가_되는가() {
-        var linkedList: LinkedList = LinkedList()
+        let linkedList: LinkedList = LinkedList<Double>()
         
         linkedList.append(1.0)
         linkedList.append(2.0)
         
-        linkedList.remove(linkedList.head)
+        linkedList.remove(linkedList.first!)
         
-        XCTAssertEqual(2.0, linkedList.first)
+        XCTAssertEqual(2.0, linkedList.first!.value)
     }
         
     func test_빈_리스트인지_확인이_되는가() {
-        var linkedList: LinkedList = LinkedList()
-        
+        var linkedList: LinkedList = LinkedList<Double>()
         linkedList.append(1.0)
         
         linkedList.remove(linkedList.head)
