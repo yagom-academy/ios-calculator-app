@@ -8,6 +8,7 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    let queueList: [String] = []
+    let queueList: [String] = ["1"]
+
     
 }
