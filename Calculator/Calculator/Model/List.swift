@@ -72,6 +72,9 @@ struct LinkedList<T> {
 
 extension Node: CustomStringConvertible {
     var description: String {
+        guard let data = data else {
+            return ""
+        }
         guard let next = next else {
             return "\(data)"
         }
