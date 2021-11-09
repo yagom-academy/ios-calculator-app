@@ -20,10 +20,34 @@ class Node<T> {
 struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
-    init() { }
+    init() {}
     var isEmpty: Bool {
         return head == nil
     }
+    
+    mutating func append(_ data: T?) {
+        if isEmpty {
+            head = Node(data: data)
+            tail = head
+            return
+        }
+        
+        tail?.next = Node(data: data)
+        tail = tail?.next
+    }
+    
+    @discardableResult
+    mutating func pop() -> T? {
+        if isEmpty {
+            return nil
+        }
+        head = head?.next
+        if isEmpty {
+            tail = nil
+        }
+        return head?.data
+    }
+    
 
 }
 
