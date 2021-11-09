@@ -59,4 +59,26 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertThrowsError(QueueError.emptyArray)
     }
+    
+    func test_배열에_Character_값이_3개_들어있을_때_removeAllItem을_하면_빈_배열로_되는지() {
+        var queue = CalculatorItemQueue<Character>()
+        queue.appendItem("강")
+        queue.appendItem("아")
+        queue.appendItem("지")
+        
+        queue.removeAllItem()
+        
+        XCTAssertEqual(queue.array, [])
+    }
+    
+    func test_배열에_Double_값이_3개_들어있을_때_removeAllItem을_하면_빈_배열로_되는지() {
+        var queue = CalculatorItemQueue<Double>()
+        queue.appendItem(1)
+        queue.appendItem(2)
+        queue.appendItem(3)
+        
+        queue.removeAllItem()
+        
+        XCTAssertEqual(queue.array, [])
+    }
 }

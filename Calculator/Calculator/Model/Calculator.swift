@@ -28,6 +28,10 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         reversedArray.removeLast()
         array = reversedArray.reversed()
     }
+    
+    mutating func removeAllItem() {
+        array.removeAll()
+    }
 }
 
 class OperatorsItemQueue {
