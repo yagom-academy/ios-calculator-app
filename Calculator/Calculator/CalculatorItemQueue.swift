@@ -12,16 +12,18 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var queue: [T] = []
+    var enQueueArray: [T] = []
+    var deQueueArray: [T] = []
     
     mutating func enQueue(_ element: T) {
-        queue.append(element)
+        enQueueArray.append(element)
     }
     
     mutating func deQueue() -> T? {
-        if queue.isEmpty {
-            return nil
+        if deQueueArray.isEmpty {
+            deQueueArray = enQueueArray.reversed()
+            enQueueArray.removeAll()
         }
-        return queue.removeFirst()
+        return deQueueArray.removeLast()
     }
 }
