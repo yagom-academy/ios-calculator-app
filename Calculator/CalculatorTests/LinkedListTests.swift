@@ -39,18 +39,18 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isNotEmpty)
     }
     
-    func testLinkedListAppend_givenNewIntegers_expectHeadEqualtoFirstItem() {
+    func testLinkedListAppend_givenNewIntegers_expectHeadEqualToFirstItem() {
         let newItems = [1, 2]
-        let firstItem = newItems[0]
+        let firstInsertedItem = newItems[0]
         appendContents(of: newItems, to: &sut)
-        XCTAssertTrue(hasEqualItems(node: sut.first, item: firstItem))
+        XCTAssertTrue(hasEqualItems(node: sut.first, item: firstInsertedItem))
     }
     
     func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastItem() {
         let newItems = [1, 2, 3, 4]
-        let lastItem = newItems[newItems.count-1]
+        let lastInsertedItem = newItems[newItems.count-1]
         appendContents(of: newItems, to: &sut)
-        XCTAssertTrue(hasEqualItems(node: sut.last, item: lastItem))
+        XCTAssertTrue(hasEqualItems(node: sut.last, item: lastInsertedItem))
     }
     
     private func hasEqualItems(node: Node<Any>?, item: Int) -> Bool {
