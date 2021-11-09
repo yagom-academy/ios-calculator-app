@@ -51,6 +51,23 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_연산큐에_있는_모든_데이터를_지우는_기능이_잘_되는가() {
+        let calculatorItemQueue = CalculatorItemQueue()
+        
+        calculatorItemQueue.enqueue(1.0, "+")
+        calculatorItemQueue.enqueue(2.0, "-")
+        calculatorItemQueue.enqueue(3.0, "/")
+        
+        XCTAssertEqual(1.0, calculatorItemQueue.computingValueList.first?.value)
+        XCTAssertEqual("+", calculatorItemQueue.operatorList.first?.value)
+        XCTAssertEqual(3.0, calculatorItemQueue.computingValueList.last?.value)
+        XCTAssertEqual("/", calculatorItemQueue.operatorList.last?.value)
+        
+        calculatorItemQueue.cleanQueue()
+        
+        XCTAssertEqual(nil, calculatorItemQueue.computingValueList.first?.value)
+        XCTAssertEqual(nil, calculatorItemQueue.operatorList.first?.value)
+        XCTAssertEqual(nil, calculatorItemQueue.computingValueList.last?.value)
+        XCTAssertEqual(nil, calculatorItemQueue.operatorList.last?.value)
         
     }
     
