@@ -54,4 +54,12 @@ class CalculatorTests: XCTestCase {
         //result
         XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
     }
+    
+    func test_queue가_빈배열일때_dequeue는_실행되지않는다() {
+        //expectation
+        calculatorItemQueue.dequeue()
+        
+        //result
+        XCTAssertNoThrow(calculatorItemQueue.dequeue())
+    }
 }

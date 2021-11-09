@@ -31,7 +31,10 @@ struct CalculatorItemQueue {
         queue.append(item)
     }
     
-    mutating func dequeue() -> CalculateItem {
-        queue.removeFirst()
+    mutating func dequeue() {
+        guard queue.count != 0 else {
+            return 
+        }
+       queue.removeFirst()
     }
 }
