@@ -1,5 +1,5 @@
 //
-//  Calculator.swift
+//  LinkedList.swift
 //  Calculator
 //
 //  Created by 이호영 on 2021/11/09.
@@ -71,57 +71,3 @@ struct LinkedList {
         return searchedList
     }
 }
-
-struct CalculatorItemQueue {
-    var queueList: LinkedList = LinkedList()
-    
-    mutating func enqueue(item: CalcultorItem?) {
-        guard let item = item else {
-            return
-        }
-        queueList.append(data: item)
-    }
-    
-    mutating func dequeue() -> CalcultorItem? {
-        if queueList.isEmpty {
-            return nil
-        }
-        let removedItem = queueList.removeFrist()
-
-        return removedItem
-    }
-
-    mutating func clearQueue() {
-        queueList.clear()
-    }
-}
-
-struct NumberItem: CalcultorItem {
-    let data: Int
-    
-    var dataToString: String {
-        return String(describing: self.data)
-    }
-}
-
-enum OperatorItem: CalcultorItem {
-    case add
-    case substract
-    case multiple
-    case divide
-    
-    var operatorSymbol: String {
-        switch self {
-        case .add:
-            return "+"
-        case .substract:
-            return "-"
-        case .multiple:
-            return "*"
-        case .divide:
-            return "/"
-        }
-    }
-}
-
-protocol CalcultorItem { }
