@@ -1,8 +1,6 @@
 import Foundation
 
 protocol CalculateItem {
-    var value: Double { get }
-    func calculate(originalValue: Double) -> Double
 }
 
 struct Adder: CalculateItem {
