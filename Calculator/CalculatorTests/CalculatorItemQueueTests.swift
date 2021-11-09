@@ -35,6 +35,27 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(queue.count, 0)
     }
     
+    func test_isEmpty() {
+        var queue = CalculatorItemQueue<Int>()
+        
+        XCTAssertTrue(queue.isEmpty)
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        
+        queue.dequeue()
+        XCTAssertFalse(queue.isEmpty)
+
+        queue.dequeue()
+        XCTAssertTrue(queue.isEmpty)
+        
+        queue.enqueue(123)
+        XCTAssertFalse(queue.isEmpty)
+        
+        queue.clear()
+        XCTAssertTrue(queue.isEmpty)        
+    }
+    
     func test_요소가한개일때() {
         var queue = CalculatorItemQueue<Int>()
         
