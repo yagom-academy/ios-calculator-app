@@ -20,11 +20,39 @@ class Node<T> {
         self.prev = prev
     }
     
-    convenience init(_ item: T, _ next: Node) {
+    convenience init(_ item: T, next: Node?) {
         self.init(item, next, nil)
+    }
+    
+    convenience init(_ item: T, prev: Node?) {
+        self.init(item, nil, prev)
     }
     
     convenience init(_ item: T) {
         self.init(item, nil, nil)
+    }
+}
+
+class LinkedList<Element> {
+    var head: Node<Element>?
+    
+    func append(_ item: Element) {
+        if head == nil {
+            self.head = Node(item)
+        } else {
+            var ptr = head
+            while ptr?.next != nil {
+                ptr = ptr?.next
+            }
+            ptr?.next = Node(item, prev: ptr)
+        }
+    }
+    
+    subscript(_ index: Int) -> Element? {
+        var ptr = head
+        for _ in 0..<index {
+            ptr = ptr?.next
+        }
+        return ptr?.item
     }
 }

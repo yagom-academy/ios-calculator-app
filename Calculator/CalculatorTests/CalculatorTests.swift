@@ -34,7 +34,6 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertTrue(list[0] == 1)
     }
-    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
