@@ -12,7 +12,6 @@ enum Operator {
     case subtract
     case multiply
     case divide
-    case equal
     
     var sign: String {
         switch self {
@@ -20,7 +19,6 @@ enum Operator {
         case .subtract: return "-"
         case .multiply: return "×"
         case .divide: return "/"
-        case .equal: return "="
         }
     }
 }
