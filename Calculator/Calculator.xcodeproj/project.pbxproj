@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3324AC05273ADA05003F9865 /* ListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE4454273AD5ED00DAC16B /* ListError.swift */; };
 		332FE41E273A908A00E42C8D /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE41D273A908A00E42C8D /* CalculatorItemQueue.swift */; };
 		332FE41F273A90F100E42C8D /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE41D273A908A00E42C8D /* CalculatorItemQueue.swift */; };
 		332FE421273A93A300E42C8D /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE420273A93A300E42C8D /* CalculatorItem.swift */; };
@@ -237,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				332FE424273A96BE00E42C8D /* CalculatorItem.swift in Sources */,
+				3324AC05273ADA05003F9865 /* ListError.swift in Sources */,
 				33306F33273A682900737205 /* CalculatorTests.swift in Sources */,
 				33306F47273A829300737205 /* ListTests.swift in Sources */,
 				332FE41F273A90F100E42C8D /* CalculatorItemQueue.swift in Sources */,

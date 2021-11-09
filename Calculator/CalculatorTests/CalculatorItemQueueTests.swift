@@ -15,9 +15,9 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(2.0)
         queue.enqueue(13.5)
         print("queue: \(queue)")
-        XCTAssertEqual(queue.dequeue()!, 1.0)
-        XCTAssertEqual(queue.dequeue()!, 2.0)
-        XCTAssertEqual(queue.dequeue()!, 13.5)
+        XCTAssertEqual(try queue.dequeue()!, 1.0)
+        XCTAssertEqual(try queue.dequeue()!, 2.0)
+        XCTAssertEqual(try queue.dequeue()!, 13.5)
         print("queue: \(queue)")
     }
     
