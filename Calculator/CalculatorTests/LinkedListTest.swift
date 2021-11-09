@@ -37,7 +37,8 @@ class LinkedListTest: XCTestCase {
         list.appendNewNode(value: 3)
         list.appendNewNode(value: "+")
         list.appendNewNode(value: 4)
-        XCTAssertEqual(false, list.isEmpty)
+        let isEmpty = list.isEmpty
+        XCTAssertEqual(false, isEmpty)
     }
     
     func test_append_linkedList() {
