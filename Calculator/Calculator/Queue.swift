@@ -52,16 +52,23 @@ class LinkedList<Element> {
     func remove(at index: Int) -> Element? {
         guard head != nil else { return nil }
         
-        var ptr = head
         if index == 0 {
+            var ptr = head
             let oldValue = head?.item
             ptr = head?.next
             ptr?.prev = nil
             head = ptr
             return oldValue
+        } else {
+            var ptr = head
+            for _ in 0..<index {
+                ptr = ptr?.next
+            }
+            var prev = ptr?.prev
+            prev?.next = ptr?.next
+            ptr?.next?.prev = prev
+            return ptr?.item
         }
-        
-        return ptr?.item
     }
     
     subscript(_ index: Int) -> Element? {
