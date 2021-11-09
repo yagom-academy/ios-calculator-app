@@ -56,6 +56,7 @@ class LinkedList<T> {
     
     func removeAll() {
         head = nil
+        tail = nil
     }
     
 }
