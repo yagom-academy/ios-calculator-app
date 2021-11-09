@@ -16,3 +16,14 @@ class Node<T> {
         self.next = next
     }
 }
+
+struct LinkedList<T> {
+    var head: Node<T>?
+    var tail: Node<T>?
+    init() { }
+    var isEmpty: Bool {
+        return head == nil
+    }
+
+}
+
