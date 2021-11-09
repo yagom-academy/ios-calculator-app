@@ -10,7 +10,7 @@ import Foundation
 class LinkedList {
     var front: Node?
     
-    func addFront(value: Int) {
+    func add(value: Int) {
         let node = Node(value: value)
         
         self.front = node
