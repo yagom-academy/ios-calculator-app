@@ -29,10 +29,12 @@ class LinkedListTests: XCTestCase {
     }
         
     func test_빈_리스트인지_확인이_되는가() {
-        var linkedList: LinkedList = LinkedList<Double>()
+        let linkedList: LinkedList = LinkedList<Double>()
+        XCTAssertEqual(true, linkedList.isEmpty)
+        
         linkedList.append(1.0)
         
-        linkedList.remove(linkedList.head)
+        linkedList.remove(linkedList.first!)
         
         XCTAssertEqual(true, linkedList.isEmpty)
     }
