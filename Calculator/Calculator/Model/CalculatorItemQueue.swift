@@ -19,8 +19,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     @discardableResult
-    mutating func deQueue() -> T? {
-        return queue.deQueue()
+    mutating func deQueue() -> T {
+        guard let dataOfDeQueue = queue.deQueue() else {
+            return 1 as! T
+        }
+        return dataOfDeQueue
     }
     
     mutating func removeAll() {

@@ -16,10 +16,10 @@ class FormulaTest: XCTestCase {
         var formula = Formula(operands: operands, operators: operators)
         
         formula.operands.enQueue(1)
-        formula.operators.enQueue("+")
+        formula.operators.enQueue("-")
         formula.operands.enQueue(2)
         
-        XCTAssertEqual(formula.result(), 3.0)
+        XCTAssertEqual(formula.result(), -1)
     }
 
     override func setUpWithError() throws {

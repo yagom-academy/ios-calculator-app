@@ -11,8 +11,11 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Character>
     
-    func result() -> Double {
+    mutating func result() -> Double {
+        guard let result = Operator(rawValue: operators.deQueue())?.calculate(lhs: operands.deQueue(), rhs: operands.deQueue()) else {
+            return 1.0
+        }
         
-        return 0.0
+        return result
     }
 }
