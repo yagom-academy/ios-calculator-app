@@ -50,7 +50,7 @@ class LinkedList<Element> {
     
     @discardableResult
     func remove(at index: Int) -> Element? {
-        guard head != nil else { return nil }
+        guard head != nil, index >= 0 else { return nil }
         
         if index == 0 {
             var ptr = head
@@ -64,7 +64,7 @@ class LinkedList<Element> {
             for _ in 0..<index {
                 ptr = ptr?.next
             }
-            var prev = ptr?.prev
+            let prev = ptr?.prev
             prev?.next = ptr?.next
             ptr?.next?.prev = prev
             return ptr?.item

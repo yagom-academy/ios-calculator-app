@@ -68,6 +68,18 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(list[1], 3)
     }
+    
+    func test_1_2_3이들어있는리스트에서음수인덱스제거시도하면nil처리() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(1)
+        list.append(2)
+        list.append(3)
+        // when
+        let result = list.remove(at: -1)
+        // then
+        XCTAssertEqual(result, nil)
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
