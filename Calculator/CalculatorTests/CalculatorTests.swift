@@ -25,6 +25,16 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertTrue(node?.item == Double(3.0))
     }
+    
+    func test_비어있는LinkedList에1을추가했을때0번인덱스에1이존재하는가() {
+        // given
+        var list = LinkedList<Int>()
+        // when
+        list.append(1)
+        // then
+        XCTAssertTrue(list[0] == 1)
+    }
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
