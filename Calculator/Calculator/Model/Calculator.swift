@@ -21,10 +21,20 @@ struct CalculatorItemQueue: CalculateItem {
             number.append(input as! Double)
         } else if input is String {
             `operator`.append(input as! String)
+        } else if input is Int {
+            let intInput = input as! Int
+            
+            number.append(intInput.doubleValue)
         }
     }
 }
 
 struct CalculatorQueue<Element>: CalculateItem {
     var queue: [Element] = []
+}
+
+extension Int {
+    var doubleValue: Double {
+        return round(Double(self))
+    }
 }

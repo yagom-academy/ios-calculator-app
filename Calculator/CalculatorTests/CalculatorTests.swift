@@ -19,4 +19,10 @@ class CalculatorTests: XCTestCase {
         queue.appendItem("+")
         XCTAssertEqual(queue.operator, ["+"])
     }
+    
+    func test_빈_숫자배열에서_1을_append하면_Double로_변환_후_숫자배열에_잘_들어가는지() {
+        var queue = CalculatorItemQueue()
+        queue.appendItem(1)
+        XCTAssertEqual(queue.number.first, 1)
+    }
 }
