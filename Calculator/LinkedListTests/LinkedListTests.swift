@@ -21,7 +21,7 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_append호출시_4를전달하면_headvalue에4가할당되는지() {
+    func test_빈리스트에서append호출시_4를전달하면_headvalue에4가할당되는지() {
         //given
         //when
         sut.append(4)

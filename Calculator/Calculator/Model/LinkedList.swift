@@ -10,6 +10,12 @@ import Foundation
 struct LinkedList<Element> {
     var head: Node<Element>?
     
-    func append(_ item: Element) {
+    mutating func append(_ item: Element) {
+        let newNode = Node(item)
+        
+        guard head != nil else {
+            head = newNode
+            return
+        }
     }
 }
