@@ -1,5 +1,5 @@
 //
-//  Queue.swift
+//  LinkedList.swift
 //  Calculator.swift
 //
 //  Created by JeongTaek Han on 2021/11/09.
@@ -37,30 +37,30 @@ class LinkedList<Element> {
     var head: Node<Element>?
     
     func append(_ item: Element) {
-        if head == nil {
+        guard head != nil else {
             self.head = Node(item)
-        } else {
-            var ptr = head
-            while ptr?.next != nil {
-                ptr = ptr?.next
-            }
-            ptr?.next = Node(item, prev: ptr)
+            return
         }
+        
+        var ptr = head
+        while ptr?.next != nil {
+            ptr = ptr?.next
+        }
+        ptr?.next = Node(item, prev: ptr)
     }
     
     @discardableResult
     func remove(at index: Int) -> Element? {
         guard head != nil, index >= 0 else { return nil }
         
+        var ptr = head
         if index == 0 {
-            var ptr = head
             let oldValue = head?.item
             ptr = head?.next
             ptr?.prev = nil
             head = ptr
             return oldValue
         } else {
-            var ptr = head
             for _ in 0..<index {
                 ptr = ptr?.next
             }

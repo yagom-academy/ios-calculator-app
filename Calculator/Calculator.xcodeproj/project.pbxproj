@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C105A3C1273A11CC00719B73 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C0273A11CC00719B73 /* CalculatorTests.swift */; };
-		C105A3C8273A123900719B73 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C7273A123900719B73 /* Queue.swift */; };
-		C105A3C9273A123900719B73 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C7273A123900719B73 /* Queue.swift */; };
+		C105A3C8273A123900719B73 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C7273A123900719B73 /* LinkedList.swift */; };
+		C105A3C9273A123900719B73 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C7273A123900719B73 /* LinkedList.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		C105A3BE273A11CC00719B73 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C105A3C0273A11CC00719B73 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
-		C105A3C7273A123900719B73 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		C105A3C7273A123900719B73 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +68,14 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
+		C1A21774273A93C8002472CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C105A3C7273A123900719B73 /* LinkedList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +97,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				C1A21774273A93C8002472CA /* Model */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
@@ -96,7 +105,6 @@
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
-				C105A3C7273A123900719B73 /* Queue.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -202,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C105A3C1273A11CC00719B73 /* CalculatorTests.swift in Sources */,
-				C105A3C9273A123900719B73 /* Queue.swift in Sources */,
+				C105A3C9273A123900719B73 /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +221,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
-				C105A3C8273A123900719B73 /* Queue.swift in Sources */,
+				C105A3C8273A123900719B73 /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
