@@ -14,7 +14,10 @@ struct CalculatorItemQueue {
         guard let item = item else {
             return
         }
-        queueList.append(item)
+        
+        if let number = item as? NumberItem {
+            queueList.append(number)
+        }
     }
     
     mutating func remove() -> CalcultorItem? {
@@ -29,14 +32,10 @@ struct CalculatorItemQueue {
     mutating func clearList() {
         queueList = []
     }
-    
-    func returnQueueList() -> [CalcultorItem] {
-        return queueList
-    }
 }
 
-struct numberItem: CalcultorItem {
-    let number: String
+struct NumberItem: CalcultorItem {
+    let data: String
 }
 
 protocol CalcultorItem { }

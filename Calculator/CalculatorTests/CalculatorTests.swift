@@ -13,26 +13,26 @@ class CalculatorTests: XCTestCase {
     var queue: CalculatorItemQueue = CalculatorItemQueue()
     
     func testQueueListisnotEmpty() {
-        XCTAssertEqual(queue.queueList.isEmpty, false)
+        XCTAssertEqual(convertList(list: queue.queueList).isEmpty, true)
     }
     
     func testQueueListappend() {
-        queue.append(item: numberItem(number: "1"))
+        queue.append(item: NumberItem(data: "1"))
         
-        XCTAssertEqual(queue.queueList, [])
+        XCTAssertEqual(convertList(list: queue.queueList), ["1"])
     }
     
     func testQueueSort() {
-        queue.append(item: "2")
-        queue.append(item: "1")
-        
-        XCTAssertEqual(queue.queueList, ["1","2","1"])
+        queue.append(item: NumberItem(data: "2"))
+        queue.append(item: NumberItem(data: "1"))
+
+        XCTAssertEqual(convertList(list: queue.queueList), ["2","1"])
     }
     
     func testQueueAppendnil() {
         queue.append(item: nil)
         
-        XCTAssertEqual(queue.queueList, ["1"])
+        XCTAssertEqual(convertList(list: queue.queueList), [])
     }
     
     func testQueueRemove() {
@@ -40,18 +40,40 @@ class CalculatorTests: XCTestCase {
         guard let removedItem = queue.remove() else {
             return
         }
+        var data = ""
+        if let number = removedItem as? NumberItem {
+            data = number.data
+        }
         
-        XCTAssertEqual(removedItem, "1")
+        XCTAssertEqual(data, "1")
     }
     
     func testEmptyQueueRemove() {
-        queue.remove()
-        XCTAssertEqual(queue.remove(), nil)
+        let data1 = queue.remove()
+        let data2 = queue.remove()
+        
+        var data: String?
+        if let number = data2 as? NumberItem {
+            data = number.data
+        }
+        
+        
+        XCTAssertEqual(data, nil)
     }
     
     func testQueueListClear() {
         queue.clearList()
         
-        XCTAssertEqual(queue.queueList, [])
+        XCTAssertEqual(convertList(list: queue.queueList), [])
+    }
+    
+    func convertList(list: [CalcultorItem]) -> [String] {
+        var compareList:[String] = []
+        for item in list {
+            if let number = item as? NumberItem {
+                compareList.append(number.data)
+            }
+        }
+        return compareList
     }
 }
