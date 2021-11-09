@@ -26,10 +26,17 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.head?.pointer?.data, Optional("1"))
     }
     
-//    func test_LinkedList의_새로운_노드_추가() {
-//        sut.enqueue(in: "2")
-//        XCTAssertEqual(<#T##expression1: Equatable##Equatable#>, <#T##expression2: Equatable##Equatable#>)
-//    }
-//
+    func test_LinkedList의_새로운_노드_추가() {
+        sut.enqueue(in: "2")
+        XCTAssertEqual(sut.head?.pointer?.data, Optional("2"))
+    }
+    func test_마지막_입력노드를_Dequeue() {
+        sut.dequeue()
+        XCTAssertNil(sut.head?.pointer)
+    }
+    func test_Head만_있는_노드에_하나추가_후_dequeue() {
+        sut.enqueue(in: "1")
+        XCTAssertNil(sut.head?.pointer?.pointer)
+    }
 }
 

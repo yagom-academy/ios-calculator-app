@@ -43,7 +43,13 @@ class LinkedList<T> {
     }
     
     func dequeue() {
+        guard isEmpty else { return }
         
+        var finderForDelete: Node<T>?
+        
+        while finderForDelete?.pointer?.pointer != nil {
+            finderForDelete = finderForDelete?.pointer
+        }
+        finderForDelete?.pointer = n
     }
-    
 }
