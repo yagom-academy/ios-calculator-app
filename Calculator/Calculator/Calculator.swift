@@ -8,17 +8,17 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    var queueList: [String] = ["1"]
+    var queueList: [CalcultorItem] = []
     
-    mutating func append(item: String?) {
+    mutating func append(item: CalcultorItem?) {
         guard let item = item else {
             return
         }
         queueList.append(item)
     }
     
-    mutating func remove() -> String? {
-        guard queueList == [] else {
+    mutating func remove() -> CalcultorItem? {
+        if queueList.isEmpty {
             return nil
         }
         let removedItem = queueList.removeFirst()
@@ -29,6 +29,10 @@ struct CalculatorItemQueue {
     mutating func clearList() {
         queueList = []
     }
+}
+
+struct numberItem: CalcultorItem {
+    let number: String
 }
 
 protocol CalcultorItem { }
