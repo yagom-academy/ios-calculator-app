@@ -35,11 +35,14 @@ class LinkedList {
     }
     
     func removeFront() -> Node? {
-        let tempFront = self.front
+        guard front != nil else { return nil }
+        let tempNode = front
+        front = front?.next
         
-        self.front = self.front?.next
-        self.front?.next = nil
+        if isEmpty {
+            rear = nil
+        }
         
-        return tempFront
+        return tempNode
     }
 }
