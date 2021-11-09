@@ -16,4 +16,8 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     var inbox: [Element] = []
     var outbox: [Element] = []
     
+    mutating func enqueue(_ item: Element) {
+        inbox.append(item)
+    }
+    
 }
