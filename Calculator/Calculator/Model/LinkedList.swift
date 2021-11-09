@@ -67,6 +67,7 @@ class LinkedList<Element> {
         lastNode.next = newNode
     }
     
+    @discardableResult
     func removeFirstNode() -> Node? {
         if head == nil {
             return nil
