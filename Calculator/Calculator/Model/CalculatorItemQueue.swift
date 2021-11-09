@@ -15,6 +15,10 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T>: CalculateItem {
     private let items: List<T>
     
+    init() {
+        self.items = List<T>()
+    }
+    
     func insert(_ item: T) {
     }
     
