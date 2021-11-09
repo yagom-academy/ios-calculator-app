@@ -21,9 +21,9 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         items.append(item)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() throws -> T? {
         if isEmpty {
-            return nil
+            throw ListError.isEmpty
         }
         return items.pop()
     }
