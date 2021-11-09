@@ -123,5 +123,6 @@ class LinkedListTests: XCTestCase {
         sut.removeFront()
         
         XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.rear)
     }
 }
