@@ -48,6 +48,9 @@ struct LinkedList<T> {
         return head?.data
     }
     
-
+    @discardableResult
+    mutating func removeLast() -> T? {
+        return nil
+    }
 }
 
