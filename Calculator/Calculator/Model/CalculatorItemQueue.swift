@@ -1,7 +1,7 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: LinkedList<T>, CalculateItem {
+class CalculatorItemQueue<T>: LinkedList<T> {
 
   
 }
@@ -43,8 +43,9 @@ class LinkedList<T> {
     }
     
     func dequeue() {
-        guard isEmpty else { return }
+        guard isEmpty == false else { return }
         
         head = head?.pointer
     }
 }
+

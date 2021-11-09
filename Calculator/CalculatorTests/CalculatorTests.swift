@@ -38,5 +38,10 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(in: "1")
         XCTAssertNil(sut.head?.pointer?.pointer)
     }
+    func test_1과2가_있는_노드에서_dequeue하면_2가남는다() {
+        sut = CalculatorItemQueue(head: Node(data: "1", pointer: Node(data: "2", pointer: nil)))
+        sut.dequeue()
+        XCTAssertEqual(sut.head?.data, Optional("2"))
+        XCTAssertNil(sut.head?.pointer)
+    }
 }
-

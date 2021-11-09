@@ -70,6 +70,32 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
+		1853C3E0273A6A4D00CB3E33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1852752127393D4D0070A2D5 /* CalculatorItemQueue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1853C3E1273A6A6500CB3E33 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				1852752327393D630070A2D5 /* CalculateItem.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		1853C3E2273A6A7D00CB3E33 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -91,11 +117,9 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				1852752327393D630070A2D5 /* CalculateItem.swift */,
-				1852752127393D4D0070A2D5 /* CalculatorItemQueue.swift */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+				1853C3E1273A6A6500CB3E33 /* Protocol */,
+				1853C3E0273A6A4D00CB3E33 /* Model */,
+				1853C3E2273A6A7D00CB3E33 /* Controller */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
