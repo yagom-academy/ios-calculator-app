@@ -9,6 +9,19 @@ import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
     
+    func test_enqueue() {
+        var queue = CalculatorItemQueue<Int>()
+        
+        queue.enqueue(123)
+        XCTAssertEqual(queue.count, 1)
+        
+        queue.enqueue(456)
+        XCTAssertEqual(queue.count, 2)
+        
+        queue.enqueue(789)
+        XCTAssertEqual(queue.count, 3)
+    }
+    
     func test_첫번째요소() {
         var queue = CalculatorItemQueue<Int>()
         
@@ -53,7 +66,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(queue.isEmpty)
         
         queue.clear()
-        XCTAssertTrue(queue.isEmpty)        
+        XCTAssertTrue(queue.isEmpty)
     }
     
     func test_요소가한개일때() {
