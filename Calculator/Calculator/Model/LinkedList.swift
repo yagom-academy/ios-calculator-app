@@ -13,9 +13,15 @@ struct LinkedList<Element> {
     mutating func append(_ item: Element) {
         let newNode = Node(item)
         
-        guard head != nil else {
+        guard var node = head else {
             head = newNode
             return
         }
+        
+        while let currentNode = node.next {
+            node = currentNode
+        }
+        
+        node.next = newNode
     }
 }
