@@ -19,7 +19,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         self.items = List<T>()
     }
     
-    func insert(_ item: T) {
+    func insert(_ item: T) -> Bool {
+        return false
     }
     
     func delete() -> T? {

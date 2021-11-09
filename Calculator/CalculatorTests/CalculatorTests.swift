@@ -22,11 +22,24 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func testInsertAndDeleteItem() {
-        let item = 6
-        sut.insert(6)
+    func testInsertItemSucceeded() {
+        let isSuccess = sut.insert(1)
+        XCTAssertTrue(isSuccess)
+    }
+    
+    func testDeleteItemFailed() {
         let result = sut.delete()
-        XCTAssertEqual(result, item)
+        let isFail = (result == nil)
+        XCTAssertTrue(isFail)
+    }
+    
+    func testInsertAndDeleteItemSucceeded() {
+        let item = 6
+        let isInsertSuccess = sut.insert(item)
+        XCTAssertTrue(isInsertSuccess)
+        let deleteResult = sut.delete()
+        let isDeleteSuccess = (deleteResult == item)
+        XCTAssertTrue(isDeleteSuccess)
     }
 
 }
