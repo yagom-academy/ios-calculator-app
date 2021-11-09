@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTests: XCTestCase {
-    var sut: LinkedList!
+    var sut: LinkedList<Any>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -48,10 +48,10 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(hasEqualItems(node: sut.first, item: firstItem))
     }
     
-    private func hasEqualItems(node: Node?, item: Int) -> Bool {
+    private func hasEqualItems(node: Node<Any>?, item: Int) -> Bool {
         guard let node = node else {
             return false
         }
-        return node.item == item
+        return node.item as? Int == item
     }
 }
