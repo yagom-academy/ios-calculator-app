@@ -18,6 +18,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         queue.append(data)
     }
     
+    @discardableResult
     mutating func deQueue() -> T? {
         return queue.deQueue()
     }

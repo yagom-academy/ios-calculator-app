@@ -19,9 +19,11 @@ class Node<T> {
 
 struct LinkedList<T> {
     var front: Node<T>?
+    var rear: Node<T>?
     
     init(front: Node<T>? = nil) {
         self.front = front
+        self.rear = front
     }
     
     func isEmpty() -> Bool {
@@ -31,15 +33,11 @@ struct LinkedList<T> {
     mutating func append(_ data: T?) {
         if isEmpty() {
             front = Node(data: data)
+            rear = front
             return
         }
-        
-        var node = front
-        
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: data)
+        rear?.next = Node(data: data)
+        rear = rear?.next
     }
     
     mutating func deQueue() -> T? {
