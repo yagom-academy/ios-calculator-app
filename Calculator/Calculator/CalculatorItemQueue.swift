@@ -11,7 +11,11 @@ protocol CalculateItem {
     
 }
 
-extension Int : CalculateItem {
+extension Int: CalculateItem {
+    
+}
+
+extension Character: CalculateItem {
     
 }
 
