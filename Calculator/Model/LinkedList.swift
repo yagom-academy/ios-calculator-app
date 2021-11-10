@@ -49,4 +49,9 @@ class LinkedList<T> {
         
         return tempNode
     }
+    
+    func removeAll() {
+        front = nil
+        rear = nil
+    }
 }

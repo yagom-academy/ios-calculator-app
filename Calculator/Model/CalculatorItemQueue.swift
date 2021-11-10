@@ -28,6 +28,6 @@ struct CalculatorItemQueue<T> {
     }
     
     func clear() {
-        
+        items.removeAll()
     }
 }
