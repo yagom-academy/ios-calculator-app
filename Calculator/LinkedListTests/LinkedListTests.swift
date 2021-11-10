@@ -125,4 +125,19 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
         XCTAssertNil(sut.rear)
     }
+    
+    func test_LinkedList의_removeAll함수실행시_빈_LinkedList가_나오는지() {
+        let value1 = 1
+        let value2 = 2
+        let value3 = 3
+        
+        sut.addRear(value1)
+        sut.addRear(value2)
+        sut.addRear(value3)
+        
+        sut.removeAll()
+        
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.rear)
+    }
 }
