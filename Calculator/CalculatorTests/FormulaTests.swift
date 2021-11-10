@@ -249,4 +249,15 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(result, 0.5)
     }
+    
+    func test_나눗셈연산해보기_0을나눌때() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("/")
+        formula.operands.enqueue(0)
+        let result = formula.result()
+        
+        XCTAssertTrue(result.isNaN)
+    }
 }
