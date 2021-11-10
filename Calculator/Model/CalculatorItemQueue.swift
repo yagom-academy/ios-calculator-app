@@ -11,7 +11,7 @@ struct CalculatorItemQueue<T> {
     let items: LinkedList<T> = LinkedList<T>()
     
     var isEmpty: Bool {
-        return false
+        return items.isEmpty
     }
     
     func enqueue(value: T) {
