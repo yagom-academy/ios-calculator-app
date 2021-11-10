@@ -7,6 +7,9 @@
 
 import XCTest
 
+extension Double: CalculateItem { }
+extension String: CalculateItem { }
+
 class CalculatorTests: XCTestCase {
 
     func test_기존_연산큐에_데이터가_없을때_계산기가_입력받은_1와_더하기_연산자는_연산큐에_쌓이는가() {
