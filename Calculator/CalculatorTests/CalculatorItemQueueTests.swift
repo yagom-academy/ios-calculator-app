@@ -67,19 +67,19 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func appendContents(of sequence: [Any], to queue: inout CalculatorItemQueue<Any>) {
+    private func appendContents(of sequence: [Any], to queue: inout CalculatorItemQueue<Any>) {
         for item in sequence {
             queue.enqueue(item)
         }
     }
     
-    func isSameSequence(sequence: [Any], otherSequence: [Any]) -> Bool {
+    private func isSameSequence(sequence: [Any], otherSequence: [Any]) -> Bool {
         let firstConvertedSequence = convertToTestableType(sequence: sequence)
         let secondConvertedSequence = convertToTestableType(sequence: otherSequence)
         return firstConvertedSequence == secondConvertedSequence
     }
     
-    func convertToTestableType(sequence: [Any]) -> [LinkedListItem] {
+    private func convertToTestableType(sequence: [Any]) -> [LinkedListItem] {
         var testableList: [LinkedListItem] = []
         for item in sequence {
             if let convertedItem = convertToLinkedListItem(value: item) {
