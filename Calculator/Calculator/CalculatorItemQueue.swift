@@ -19,14 +19,14 @@ class Node<T> {
 class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>? {
-        if isEmpty {
+        guard var finderToTail = head else {
             return nil
         }
         
-        while head?.next != nil {
-            head = head?.next
+        while let nextNode = finderToTail.next {
+            finderToTail = nextNode
         }
-        return head
+        return finderToTail
     }
     var isEmpty: Bool {
         return head == nil
@@ -63,10 +63,9 @@ class LinkedList<T> {
         guard var finderToTail: Node<T> = head else { return scanResult }
         scanResult.append(finderToTail.value)
         
-        guard let nextNode = finderToTail.next else { return scanResult }
-        while finderToTail.next != nil {
+        while let nextNode = finderToTail.next {
+            scanResult.append(nextNode.value)
             finderToTail = nextNode
-            scanResult.append(finderToTail.value)
         }
         return scanResult
     }
