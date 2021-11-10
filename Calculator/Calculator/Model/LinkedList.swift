@@ -30,7 +30,11 @@ struct LinkedList<Element> {
         lastNode.next = newNode
     }
     
-    func removeFirst() -> Element? {
-        return head?.value
+    mutating func removeFirst() -> Element? {
+        let removedNodeValue = head?.value
+        let nextHeadNode = head?.next
+    
+        head = nextHeadNode
+        return removedNodeValue
     }
 }
