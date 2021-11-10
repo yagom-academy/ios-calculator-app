@@ -98,12 +98,13 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func testLinkedListRemove_givenIndexOfNodeFromMixedElements_expectCorrectItem() {
+    func testLinkedListRemoveHead_givenRemoveAtIndexFromMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
         appendContents(of: newItems, to: &sut)
-        let removedNode = sut.remove(at: 1)
-        let itemAtFirstIndex = convertToLinkedListItem(value: newItems[1])
-        XCTAssertTrue(hasEqualItems(node: removedNode, item: itemAtFirstIndex))
+        let _ = sut.removeNode(at: 1)
+        let expectedItems: [Any] = [20, 20, "-", 2]
+        let convertedExepectedItems = convertToLinkedListArray(from: expectedItems)
+        XCTAssertEqual(sut.convertedToLinkedListArray, convertedExepectedItems)
     }
     
     func testLinkedListRemoveAll_givenRemoveAllFromElements_expectIsEmpty() {
@@ -178,17 +179,12 @@ extension LinkedList {
         return listContents
     }
     
-    func getNode(at index: Int) -> Node<T>? {
-        guard isNotEmpty else {
+    mutating func removeNode(at index: Int) -> Node<T>? {
+        guard let toBeRemovedNode = getNode(at: index) else {
             return nil
         }
-        var currentNode = head
-        for _ in 0..<index {
-            if let node = currentNode {
-                currentNode = node.next
-            }
-        }
-        return currentNode
+        let removedNode = remove(node: toBeRemovedNode)
+        return removedNode
     }
 }
 
