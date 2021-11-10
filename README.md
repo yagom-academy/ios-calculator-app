@@ -66,7 +66,7 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 
 <img width="500" alt="image" src="./image/queue_doubleStack.png">
 
-**Queue**를 하나의 **Array**로 만든다면, 첫번째 요소를 제거하려 ```removeFirst()```를 호출할텐데 공식문서를 보면 **시간복잡도가 O(n)**인 모습을 볼수 있다.</br>
+**Queue**를 하나의 **Array**로 만든다면, 첫번째 요소를 제거하려 ```removeFirst()```를 호출할텐데 공식문서를 보면 **시간복잡도가 O(n)** 인 모습을 볼수 있다.</br>
 
 <img width="795" alt="image" src="https://user-images.githubusercontent.com/70251136/141065484-4a565fb2-e6a5-4fe3-a3da-615198ef476e.png">
 
