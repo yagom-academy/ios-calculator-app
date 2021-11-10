@@ -66,5 +66,31 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, 0)
     }
+    
+    func test_비어있는큐에더블타입10넣고제거하면부동소수점10반환() {
+        // given
+        let queue = CalculatorItemQueue<Double>()
+        queue.enqueue(10)
+        // when
+        let result = queue.dequeue()
+        // then
+        XCTAssertEqual(result, 10.0)
+    }
+    
+    func test_비어있는큐에문자덧셈기호넣고제거하면덧셈기호반환() {
+        // given
+        let queue = CalculatorItemQueue<Character>()
+        queue.enqueue(Character("+"))
+        // when
+        let result = queue.dequeue()
+        // then
+        XCTAssertEqual(result, Character("+"))
+    }
 
 }
+
+extension Int: CalculateItem { }
+
+extension Character: CalculateItem { }
+
+extension Double: CalculateItem { }
