@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue: CalculateItem {
-    let computingValueList = LinkedList<Double>()
-    let operatorList = LinkedList<String>()
+struct CalculatorItemQueue<T: CalculateItem> {
+    let linkedList = LinkedList<T>()
     
     func enqueue(_ computingValue: Double, _ operator: String) {
         computingValueList.append(computingValue)
