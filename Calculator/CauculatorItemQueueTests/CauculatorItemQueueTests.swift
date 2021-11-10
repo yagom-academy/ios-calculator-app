@@ -76,4 +76,33 @@ class CauculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
+    
+    // MARK:- front tests
+    func test_빈큐에서_front를요청하면_nil반환하는지() {
+        //given
+        guard sut.isEmpty else {
+            return
+        }
+        //when
+        let result = sut.front
+        //then
+        XCTAssertNil(result)
+    }
+    func test_4추가한큐에서_front를요청하면_4반환하는지() {
+        //given
+        sut.enqueue(4)
+        //when
+        let result = sut.front
+        //then
+        XCTAssertEqual(result, 4)
+    }
+    func test_4와7추가한큐에서_front를요청하면_4반환하는지() {
+        //given
+        sut.enqueue(4)
+        sut.enqueue(7)
+        //when
+        let result = sut.front
+        //then
+        XCTAssertEqual(result, 4)
+    }
 }
