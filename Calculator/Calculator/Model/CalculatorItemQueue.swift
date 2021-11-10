@@ -23,14 +23,14 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     
     mutating func dequeue() throws -> Element? {
         if isEmpty {
-            throw ListError.isEmpty
+            throw QueueError.isEmpty
         }
         return items.pop()
     }
     
     mutating func removeLast() throws -> Element? {
         if isEmpty {
-            throw ListError.isEmpty
+            throw QueueError.isEmpty
         }
         return items.removeLast()
     }

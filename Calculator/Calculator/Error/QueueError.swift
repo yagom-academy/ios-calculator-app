@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ListError: Error {
+enum QueueError: Error {
     case isEmpty
 }
 
-extension ListError: LocalizedError {
+extension QueueError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .isEmpty:
