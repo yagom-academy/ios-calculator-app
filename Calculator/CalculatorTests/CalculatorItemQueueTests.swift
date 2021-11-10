@@ -31,9 +31,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let newData = 10
         sut.enqueue(newData)
         let removedItem = sut.dequeue()
-        guard let removedItem = removedItem as? Int else {
-            return
-        }
+        guard let removedItem = removedItem as? Int else { return }
         XCTAssertEqual(removedItem, newData)
     }
     
@@ -41,9 +39,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let newData = "+"
         sut.enqueue(newData)
         let removedItem = sut.dequeue()
-        guard let removedItem = removedItem as? String else {
-            return
-        }
+        guard let removedItem = removedItem as? String else { return }
         XCTAssertEqual(removedItem, newData)
     }
     
@@ -76,6 +72,7 @@ class CalculatorItemQueueTests: XCTestCase {
     private func isEqualSequence(sequence: [Any], otherSequence: [Any]) -> Bool {
         let firstConvertedSequence = convertToTestableType(sequence: sequence)
         let secondConvertedSequence = convertToTestableType(sequence: otherSequence)
+        
         return firstConvertedSequence == secondConvertedSequence
     }
     

@@ -83,6 +83,7 @@ struct LinkedList<T> {
         guard isNotEmpty else {
             return nil
         }
+        
         var currentNode = head
         for _ in 0..<index {
             if let node = currentNode {
