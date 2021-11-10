@@ -29,6 +29,10 @@ class Node<T> {
     convenience init(_ item: T) {
         self.init(item, nil, nil)
     }
+    
+    deinit {
+        print("\(self)가 제거되었습니다")
+    }
 }
 
 final class LinkedList<Element> {
@@ -36,7 +40,7 @@ final class LinkedList<Element> {
     private var tail: Node<Element>?
     
     var count: Int {
-        guard self.head != nil else {
+        guard !isEmpty else {
             return 0
         }
         var nodes = 1
@@ -49,15 +53,19 @@ final class LinkedList<Element> {
     }
     
     var first: Element? {
-        self.head?.item
+        head?.item
     }
     
     var last: Element? {
-        self.tail?.item
+        tail?.item
+    }
+    
+    var isEmpty: Bool {
+        head == nil && tail == nil
     }
     
     func append(_ item: Element) {
-        guard head != nil else {
+        guard !isEmpty else {
             self.head = Node(item)
             self.tail = self.head
             return
@@ -67,30 +75,21 @@ final class LinkedList<Element> {
     }
     
     @discardableResult
-    func remove(at index: Int) -> Element? {
-        guard head != nil, index >= 0 else { return nil }
-        
-        var ptr = head
-        if index == 0 {
-            let oldValue = head?.item
-            ptr = head?.next
-            ptr?.prev = nil
-            head = ptr
-            return oldValue
-        } else {
-            for _ in 0..<index {
-                ptr = ptr?.next
-            }
-            let prev = ptr?.prev
-            prev?.next = ptr?.next
-            ptr?.next?.prev = prev
-            return ptr?.item
-        }
-    }
-    
-    @discardableResult
     func removeFirst() -> Element? {
-        self.remove(at: 0)
+        guard !isEmpty else {
+            return nil
+        }
+        
+        let item = head?.item
+        if head?.next == nil {
+            head = nil
+            tail = nil
+        } else {
+            head = head?.next
+            head?.prev = nil
+        }
+        
+        return item
     }
     
     subscript(_ index: Int) -> Element? {

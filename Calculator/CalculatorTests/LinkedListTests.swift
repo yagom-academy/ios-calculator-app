@@ -45,42 +45,6 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(list[1] == nil)
     }
     
-    func test_1_2_3이들어있는리스트에서0번인덱스를제거하면첫원소로2가되는가() {
-        // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
-        list.append(3)
-        // when
-        list.remove(at: 0)
-        // then
-        XCTAssertEqual(list[0], 2)
-    }
-    
-    func test_1_2_3이들어있는리스트에서1번인덱스를제거하면두번째원소로3이되는가() {
-        // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
-        list.append(3)
-        // when
-        list.remove(at: 1)
-        // then
-        XCTAssertEqual(list[1], 3)
-    }
-    
-    func test_1_2_3이들어있는리스트에서음수인덱스제거시도하면nil처리() {
-        // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
-        list.append(3)
-        // when
-        let result = list.remove(at: -1)
-        // then
-        XCTAssertEqual(result, nil)
-    }
-    
     func test_1_2_3이들어있는리스트에서노드개수3개반환() {
         // given
         let list = LinkedList<Int>()
