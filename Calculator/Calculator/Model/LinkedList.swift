@@ -47,6 +47,10 @@ final class LinkedList<Element> {
         return nodes
     }
     
+    var first: Element? {
+        self.head?.item
+    }
+    
     func append(_ item: Element) {
         guard head != nil else {
             self.head = Node(item)

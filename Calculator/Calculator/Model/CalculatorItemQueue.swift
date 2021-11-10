@@ -17,7 +17,7 @@ struct CalculatorItemQueue<Element> where Element: CalculateItem {
     }
     
     var front: Element? {
-        self.item[0]
+        self.item.first
     }
     
     init() {
@@ -30,6 +30,6 @@ struct CalculatorItemQueue<Element> where Element: CalculateItem {
     
     @discardableResult
     func dequeue() -> Element? {
-        return self.item.remove(at: 0)
+        self.item.remove(at: 0)
     }
 }
