@@ -6,11 +6,11 @@ protocol CalculateItem {
 }
 
 class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
-    func putToQueue(_ putValue: T) {
-        addNewNode(putValue)
+    func insertToQueue(_ insertValue: T) {
+        addNewNode(insertValue)
     }
     
-    func getFromQueue() {
+    func deleteFromQueue() {
         guard self.head?.nodeValue != nil else { return }
         deleteFirstNode()
     }
