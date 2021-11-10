@@ -7,5 +7,9 @@
 import Foundation
 
 struct CalculatorItemQueue {
+    private var nodes: [Int] = []
     
+    func bringNodes() -> [Int] {
+        nodes
+    }
 }
