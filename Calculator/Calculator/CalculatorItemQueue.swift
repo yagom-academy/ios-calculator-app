@@ -17,14 +17,17 @@ extension Int : CalculateItem {
 
 class CalculatorItemQueue<T: CalculateItem> {
     var calculatorItems = [T]()
+    var temporaryItems = [T]()
     
-    func push(_ item: T) -> [T] {
+    func enqueue(_ item: T) -> [T] {
         calculatorItems.append(item)
         return calculatorItems
     }
     
-    func pop() -> [T] {
-        calculatorItems.removeFirst()
+    func dequeue() -> [T] {
+        temporaryItems = calculatorItems.reversed()
+        temporaryItems.removeLast()
+        calculatorItems = temporaryItems.reversed()
         return calculatorItems
     }
 }
