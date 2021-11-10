@@ -31,7 +31,7 @@ class Node<T> {
     }
 }
 
-class LinkedList<Element> {
+final class LinkedList<Element> {
     private var head: Node<Element>?
     
     var count: Int {
@@ -88,5 +88,14 @@ class LinkedList<Element> {
             ptr = ptr?.next
         }
         return ptr?.item
+    }
+    
+    deinit {
+        var ptr = head
+        while ptr?.next != nil {
+            ptr?.prev = nil
+            ptr = ptr?.next
+            ptr?.prev = nil
+        }
     }
 }
