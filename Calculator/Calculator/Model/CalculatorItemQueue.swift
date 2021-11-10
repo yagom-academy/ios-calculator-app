@@ -30,7 +30,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     @discardableResult
     mutating func dequeue() throws -> Element {
         guard (outBox.isEmpty && inBox.isEmpty) == false else {
-            throw CalculatorError.notFound
+            throw CalculatorError.queueNotFound
         }
         
         if outBox.isEmpty {
