@@ -96,4 +96,16 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(result, 0.0)
     }
+    
+    func test_더하기연산해보기_피연산자두개() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("+")
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("+")
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 4.0)
+    }
 }
