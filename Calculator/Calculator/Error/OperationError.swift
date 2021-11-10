@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum OeprationError: Error {
+enum OperationError: Error {
     case devidedByZero
 }
 
-extension OeprationError: LocalizedError {
+extension OperationError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .devidedByZero:
