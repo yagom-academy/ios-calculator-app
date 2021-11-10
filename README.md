@@ -12,7 +12,7 @@
 
 
 ### UML
-![Calculator_Model_UML_1](https://user-images.githubusercontent.com/45652743/140879022-2b667e5b-7d49-49dd-8f1a-951211ea8223.png)
+![CalculatorUML](https://user-images.githubusercontent.com/45652743/141072217-badda911-4d21-476f-bab8-a91dcab94259.png)
 
 ### 고민된 점 및 해결 방법
 
