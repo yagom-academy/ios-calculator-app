@@ -18,6 +18,8 @@
 		9A52A61427394DD900178B77 /* LinkedListQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52A61327394DD900178B77 /* LinkedListQueue.swift */; };
 		9A52A6162739691A00178B77 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52A60027392AA700178B77 /* CalculatorItemQueue.swift */; };
 		9A52A617273A016400178B77 /* LinkedListQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A52A61327394DD900178B77 /* LinkedListQueue.swift */; };
+		9AAC3F98273BF042005D1CE6 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAC3F97273BF041005D1CE6 /* QueueError.swift */; };
+		9AAC3F99273BF042005D1CE6 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAC3F97273BF041005D1CE6 /* QueueError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -45,6 +47,7 @@
 		9A52A60B2739495900178B77 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		9A52A61127394A1900178B77 /* LinkedListQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListQueueTests.swift; sourceTree = "<group>"; };
 		9A52A61327394DD900178B77 /* LinkedListQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListQueue.swift; sourceTree = "<group>"; };
+		9AAC3F97273BF041005D1CE6 /* QueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +82,7 @@
 				9A52A60027392AA700178B77 /* CalculatorItemQueue.swift */,
 				9A52A60B2739495900178B77 /* LinkedList.swift */,
 				9A52A61327394DD900178B77 /* LinkedListQueue.swift */,
+				9AAC3F97273BF041005D1CE6 /* QueueError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,6 +257,7 @@
 			files = (
 				9A52A60727393E4C00178B77 /* LinkedListTests.swift in Sources */,
 				9A52A60D2739495900178B77 /* LinkedList.swift in Sources */,
+				9AAC3F99273BF042005D1CE6 /* QueueError.swift in Sources */,
 				9A52A617273A016400178B77 /* LinkedListQueue.swift in Sources */,
 				9A52A6162739691A00178B77 /* CalculatorItemQueue.swift in Sources */,
 				9A52A61227394A1900178B77 /* LinkedListQueueTests.swift in Sources */,
@@ -267,6 +272,7 @@
 			files = (
 				9A52A60C2739495900178B77 /* LinkedList.swift in Sources */,
 				9A52A5FE273924DA00178B77 /* CalculateItem.swift in Sources */,
+				9AAC3F98273BF042005D1CE6 /* QueueError.swift in Sources */,
 				9A52A61427394DD900178B77 /* LinkedListQueue.swift in Sources */,
 				9A52A60127392AA700178B77 /* CalculatorItemQueue.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,

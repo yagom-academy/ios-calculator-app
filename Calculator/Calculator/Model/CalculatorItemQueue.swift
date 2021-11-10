@@ -28,9 +28,9 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     }
     
     @discardableResult
-    mutating func dequeue() -> Element? {
+    mutating func dequeue() throws -> Element {
         guard (outBox.isEmpty && inBox.isEmpty) == false else {
-            return nil
+            throw CalculatorError.notFound
         }
         
         if outBox.isEmpty {
