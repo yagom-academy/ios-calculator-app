@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items = LinkedList<Element>()
     
     func enqueue(_ value: Element) {
