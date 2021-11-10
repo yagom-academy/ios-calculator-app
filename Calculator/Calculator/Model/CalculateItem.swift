@@ -14,6 +14,5 @@ enum Operator: CalculateItem {
     case plus, minus, multiply, divide, equal
 }
 
-struct Number: CalculateItem {
-    let num: Double
+extension Double: CalculateItem {
 }

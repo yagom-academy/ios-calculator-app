@@ -11,8 +11,7 @@ class CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
     func enqueue(_ item: Double) {
-        let num = Number(num: item)
-        queue.append(num)
+        queue.append(item)
     }
     
     func enqueue(_ item: Operator) {
