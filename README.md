@@ -20,5 +20,5 @@
 
 ### Model UML Diagram
 
-![Queue Diagram drawio-2](https://user-images.githubusercontent.com/25794814/140848478-bd1a34c3-9375-4885-aac0-56993857fde3.png)
+![newQueueModel drawio](https://user-images.githubusercontent.com/25794814/141070733-5d60ea76-d0ab-45b6-92a4-397f68a7c192.png)
 
