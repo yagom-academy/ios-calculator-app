@@ -66,7 +66,11 @@ class CalculatorTests: XCTestCase {
         queue.appendItem("아")
         queue.appendItem("지")
         
-        queue.removeAllItem()
+        do {
+            try queue.removeAllItems()
+        } catch {
+            return
+        }
         
         XCTAssertEqual(queue.array, [])
     }
@@ -77,7 +81,11 @@ class CalculatorTests: XCTestCase {
         queue.appendItem(2)
         queue.appendItem(3)
         
-        queue.removeAllItem()
+        do {
+            try queue.removeAllItems()
+        } catch {
+            return
+        }
         
         XCTAssertEqual(queue.array, [])
     }
