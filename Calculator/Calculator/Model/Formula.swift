@@ -30,7 +30,11 @@ struct Formula {
             guard let currentOperand = try operands.dequeue() else {
                 throw QueueError.isEmpty
             }
-            currentValue = currentOperator.calculate(lhs: currentValue, rhs: currentOperand)
+            do {
+            currentValue = try currentOperator.calculate(lhs: currentValue, rhs: currentOperand)
+            } catch let error {
+                print(error.localizedDescription)
+            }
         }
         
         return currentValue
