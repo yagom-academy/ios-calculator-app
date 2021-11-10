@@ -21,7 +21,7 @@ struct CalculatorItemQueue <T> where T: CalculatorItem {
     }
     
     mutating func dequeue() -> T? {
-        if self.isEmpty {
+        if self.isEmpty || operationStorage.isEmpty {
             return nil
         }
         
