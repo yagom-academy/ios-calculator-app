@@ -35,7 +35,3 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.first, testableItem)
     }
 }
-
-extension Int: CalculateItem {
-    
-}
