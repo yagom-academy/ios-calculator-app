@@ -98,6 +98,14 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
+    func testLinkedListRemove_givenIndexOfNodeFromMixedElements_expectCorrectItem() {
+        let newItems: [Any] = [20, "+", 20, "-", 2]
+        appendContents(of: newItems, to: &sut)
+        let removedNode = sut.remove(at: 1)
+        let itemAtFirstIndex = convertToLinkedListItem(value: newItems[1])
+        XCTAssertTrue(hasEqualItems(node: removedNode, item: itemAtFirstIndex))
+    }
+    
     func testLinkedListRemoveAll_givenRemoveAllFromElements_expectIsEmpty() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
         appendContents(of: newItems, to: &sut)
