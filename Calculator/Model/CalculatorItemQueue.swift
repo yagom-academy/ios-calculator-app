@@ -10,10 +10,15 @@ import Foundation
 struct CalculatorItemQueue<T> {
     let items: LinkedList<T> = LinkedList<T>()
     
+    var isEmpty: Bool {
+        return false
+    }
+    
     func enqueue(value: T) {
         self.items.addRear(value)
     }
     
+    @discardableResult
     func dequeue() -> T? {
         guard let node = self.items.removeFront() else {
             return nil

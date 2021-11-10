@@ -73,4 +73,17 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result1, item1)
         XCTAssertEqual(result2, item2)
     }
+    
+    func test_CalculatorItemQueue에_값을넣고_모두빼내면_빈Queue를_반환하는지() {
+        let item1 = 1
+        let item2 = 2
+        
+        sut.enqueue(value: item1)
+        sut.enqueue(value: item2)
+        
+        sut.dequeue()
+        sut.dequeue()
+        
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
