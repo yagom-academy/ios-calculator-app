@@ -47,8 +47,8 @@ class OperatorTests: XCTestCase {
             return
         }
         
-        let firstCalculatedAnswer = firstOperator.calculate(lhs: firstOperand, rhs: secondOperand)
-        let finalCalculatedAnswer = secondOperator.calculate(lhs: firstCalculatedAnswer, rhs: thirdOperand)
+        let firstCalculatedAnswer = try! firstOperator.calculate(lhs: firstOperand, rhs: secondOperand)
+        let finalCalculatedAnswer = try! secondOperator.calculate(lhs: firstCalculatedAnswer, rhs: thirdOperand)
         
         XCTAssertEqual(firstCalculatedAnswer, 3.7 + 4.3)
         XCTAssertEqual(finalCalculatedAnswer, 3.7 + 4.3 - 11.8)
@@ -79,8 +79,8 @@ class OperatorTests: XCTestCase {
             return
         }
         
-        let firstCalculatedAnswer = firstOperator.calculate(lhs: firstOperand, rhs: secondOperand)
-        let finalCalculatedAnswer = secondOperator.calculate(lhs: firstCalculatedAnswer, rhs: thirdOperand)
+        let firstCalculatedAnswer = try! firstOperator.calculate(lhs: firstOperand, rhs: secondOperand)
+        let finalCalculatedAnswer = try! secondOperator.calculate(lhs: firstCalculatedAnswer, rhs: thirdOperand)
         
         XCTAssertEqual(firstCalculatedAnswer, 3.7 / 4.3)
         XCTAssertEqual(finalCalculatedAnswer, 3.7 / 4.3 * 11.8)
@@ -115,6 +115,21 @@ class FormulaTests: XCTestCase {
             print(QueueError.isEmpty.localizedDescription)
         } catch OperationError.devidedByZero {
             print(OperationError.devidedByZero)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func testCalculateResultWhereDevideByZero() throws {
+        formula.operators.enqueue(.add)
+        formula.operators.enqueue(.devide)
+        formula.operators.enqueue(.subtract)
+        formula.operators.enqueue(.multiply)
+        
+        do {
+            let result = try formula.result()
+        } catch OperationError.devidedByZero {
+            XCTAssertThrowsError(OperationError.devidedByZero)
         } catch {
             print(error.localizedDescription)
         }
