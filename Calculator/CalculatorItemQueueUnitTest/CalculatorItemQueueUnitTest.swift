@@ -49,4 +49,8 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         let result = sut.dequeue()
         XCTAssertEqual(result, [])
     }
+    
+    func test_1과_2가_있는_큐의_모든_요소를_제거하면_빈_큐가_된다() {
+        sut.removeAll()
+    }
 }

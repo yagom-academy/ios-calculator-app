@@ -11,10 +11,6 @@ protocol CalculateItem {
     
 }
 
-extension Int: CalculateItem {
-    
-}
-
 extension Character: CalculateItem {
     
 }
@@ -38,5 +34,9 @@ class CalculatorItemQueue<T: CalculateItem> {
         temporaryItems.removeAll()
         
         return calculatorItems
+    }
+    
+    func removeAll() {
+        calculatorItems.removeAll()
     }
 }
