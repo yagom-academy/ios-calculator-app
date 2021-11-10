@@ -10,7 +10,7 @@ import XCTest
 
 enum LinkedListItem: Equatable {
     case number(value: Int)
-    case symbol(value: Character)
+    case symbol(value: String)
 }
 
 class LinkedListTests: XCTestCase {
@@ -59,7 +59,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func testLinkedListNode_givenNewCharacter_expectHeadEqualToItem() {
-        let newCharacter: Character = "+"
+        let newCharacter = "+"
         let newItem = LinkedListItem.symbol(value: newCharacter)
         sut.append(newCharacter)
         XCTAssertTrue(hasEqualItems(node: sut.head, item: newItem))
@@ -73,16 +73,17 @@ class LinkedListTests: XCTestCase {
     }
     
     func testLinkedListAppend_givenNewOperators_expectSameElements() {
-        let newItems: [Character] = ["+", "-", "*", "/"]
+        let newItems = ["+", "-", "*", "/"]
         let convertedItems = convertToLinkedListArray(from: newItems)
         appendContents(of: newItems, to: &sut)
         XCTAssertEqual(sut.convertedToLinkedListArray, convertedItems)
     }
     
     func testLinkedListAppend_givenMixedElements_expectSameElements() {
-        let newItems: [LinkedListItem] = [.number(value: 10), .symbol(value: "+"), .number(value: 20), .symbol(value: "/"), .number(value: 2)]
+        let newItems: [Any] = [20, "+", 20, "-", 2]
+        let convertedItems: [LinkedListItem] = convertToLinkedListArray(from: newItems)
         appendContents(of: newItems, to: &sut)
-        XCTAssertEqual(sut.convertedToLinkedListArray, newItems)
+        XCTAssertEqual(sut.convertedToLinkedListArray, convertedItems)
     }
     
     private func hasEqualItems(node: Node<Any>?, item: LinkedListItem) -> Bool {
@@ -106,7 +107,7 @@ class LinkedListTests: XCTestCase {
         if let value = value as? Int {
             return LinkedListItem.number(value: value)
         }
-        if let value = value as? Character {
+        if let value = value as? String {
             return LinkedListItem.symbol(value: value)
         }
         return nil
@@ -150,7 +151,7 @@ extension Node {
         if let number = item as? Int {
             return LinkedListItem.number(value: number)
         }
-        if let symbol = item as? Character {
+        if let symbol = item as? String {
             return LinkedListItem.symbol(value: symbol)
         }
         return nil
