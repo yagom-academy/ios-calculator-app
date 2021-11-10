@@ -19,3 +19,10 @@
     - 카르마 스타일에 따라 제목 + 본문 까지 적어보기
 - 커밋 단위
     - 함수 단위
+
+## STEP 1
+
+### STEP 1 UML
+
+![STEP 1](https://user-images.githubusercontent.com/27428188/141055192-cf5f942b-de94-4366-8ae5-87cb73d50236.png)
+
