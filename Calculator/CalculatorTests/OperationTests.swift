@@ -7,7 +7,7 @@
 
 import XCTest
 
-class OperatorTests: XCTestCase {
+class OperationTests: XCTestCase {
     var operands: CalculatorItemQueue = CalculatorItemQueue<Double>()
     var operators: CalculatorItemQueue = CalculatorItemQueue<Operator>()
     
