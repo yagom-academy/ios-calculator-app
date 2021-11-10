@@ -101,5 +101,17 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, 0)
     }
+    
+    func test_큐에0삽입후removeFirst가정상동작하는가() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(0)
+        // when
+        let result = list.first?.removeFirst()
+        // then
+        XCTAssertEqual(result, 0)
+    }
+
+    
 
 }
