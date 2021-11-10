@@ -12,11 +12,6 @@ class Node<Value> {
     var next: Node?
     
     init(_ value: Value) {
-        print(value, "init")
         self.value = value
-    }
-    
-    deinit {
-        print(value, "deinit")
     }
 }
