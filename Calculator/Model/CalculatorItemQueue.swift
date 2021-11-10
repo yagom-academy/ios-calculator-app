@@ -11,6 +11,6 @@ struct CalculatorItemQueue<T> {
     let items: LinkedList<T> = LinkedList<T>()
     
     func enqueue(value: T) {
-        items.addRear(value: value)
+        items.addRear(value)
     }
 }

@@ -27,10 +27,20 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_CalculatorItemQueue에enqueue했을때_Items이_비어있지않는지() {
         let item = 1
         
-        sut.enqueue(item: item)
+        sut.enqueue(value: item)
         
         let result = sut.items.isEmpty
         
         XCTAssertFalse(result)
+    }
+    
+    func test_CalculatorItemQueue에_enqueue한_값이_입력한_값과_같은지() {
+        let item = 1
+        
+        sut.enqueue(value: item)
+        
+        let result = sut.items.front?.value
+        
+        XCTAssertEqual(result, item)
     }
 }
