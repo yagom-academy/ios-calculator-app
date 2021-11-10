@@ -49,7 +49,17 @@ struct LinkedList {
     }
     
     mutating func clear() {
-        self.head = nil
+        if head == nil {
+            return
+        }
+        
+        var node = head
+        
+        while node?.next != nil {
+            let nextNode = node?.next
+            node = nextNode
+        }
+        node = nil
     }
     
     var isEmpty: Bool {

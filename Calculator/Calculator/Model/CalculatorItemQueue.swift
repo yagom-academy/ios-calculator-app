@@ -32,5 +32,3 @@ extension CalculatorItemQueue {
         return self.queueList
     }
 }
-
-
