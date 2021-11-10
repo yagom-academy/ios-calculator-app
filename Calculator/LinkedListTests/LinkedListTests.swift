@@ -78,4 +78,32 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
+    //MARK:- first tests
+    func test_빈List에_first를요청하면_nil반환() {
+        //given
+        guard sut.isEmpty else { return }
+        //when
+        let result = sut.first
+        //then
+        XCTAssertNil(result)
+    }
+    func test_4가있는List에_first를요청하면_4반환() {
+        //given
+        sut.append(4)
+        //when
+        let result = sut.first
+        //then
+        XCTAssertEqual(result, 4)
+    }
+    func test_4와9를추가한List에_first를요청하면_4반환() {
+        //given
+        sut.append(4)
+        sut.append(9)
+        //when
+        let result = sut.first
+        //then
+        XCTAssertEqual(result, 4)
+    }
 }
+
+
