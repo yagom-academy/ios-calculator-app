@@ -27,7 +27,7 @@ struct CalculatorItemQueue <T> where T: CalculatorItem {
         return operation
     }
     
-    mutating func removeAll() {
+    mutating func removeAllItem() {
         operationStorage.removeAll()
     }
 }

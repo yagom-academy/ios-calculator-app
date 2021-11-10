@@ -77,14 +77,14 @@ class CalculatorQueueTests: XCTestCase {
     func test_calculatorItemQueue_item이_한번에_제거되는지() {
         sut.operationStorage.append("+")
         sut.operationStorage.append("=")
-        sut.removeAll()
+        sut.removeAllItem()
         let operationCount = sut.operationStorage.count
         
         XCTAssertEqual(operationCount, 0)
     }
     
     func test_calculatorItemQueue가_빈경우에_모두_제거할경우_정상작동하는지() {
-        sut.removeAll()
+        sut.removeAllItem()
         let operationRemoveAllTest = sut.operationStorage.count
         
         XCTAssertEqual(operationRemoveAllTest, 0)
