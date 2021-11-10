@@ -59,4 +59,18 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNil(result)
     }
+    
+    func test_CalculatorItemQueue에_값을2번_enqueue하고_dequeue했을때_순서대로나오는지() {
+        let item1 = 1
+        let item2 = 2
+        
+        sut.enqueue(value: item1)
+        sut.enqueue(value: item2)
+        
+        let result1 = sut.dequeue()
+        let result2 = sut.dequeue()
+        
+        XCTAssertEqual(result1, item1)
+        XCTAssertEqual(result2, item2)
+    }
 }
