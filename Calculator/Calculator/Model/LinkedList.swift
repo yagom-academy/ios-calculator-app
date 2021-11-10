@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LinkedList<Element> {
+class LinkedList<Element> {
     var head: Node<Element>?
     var tail: Node<Element>? {
         guard var node = head else {
@@ -38,7 +38,7 @@ struct LinkedList<Element> {
         return nodeCount
     }
     
-    mutating func append(_ item: Element) {
+    func append(_ item: Element) {
         let newNode = Node(item)
         
         guard let lastNode = tail else {
@@ -48,7 +48,7 @@ struct LinkedList<Element> {
         lastNode.next = newNode
     }
     
-    mutating func removeFirst() -> Element? {
+    func removeFirst() -> Element? {
         let removedNodeValue = head?.value
         let nextHeadNode = head?.next
     
