@@ -26,4 +26,8 @@ struct CalculatorItemQueue<T> {
         
         return node.value
     }
+    
+    func clear() {
+        
+    }
 }

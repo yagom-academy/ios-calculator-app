@@ -98,4 +98,16 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertFalse(sut.isEmpty)
     }
+    
+    func test_CalculatorItemQueue에서_clear함수를_실행하면_빈Queue를_반환하는지() {
+        let item1 = 1
+        let item2 = 2
+        
+        sut.enqueue(value: item1)
+        sut.enqueue(value: item2)
+        
+        sut.clear()
+        
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
