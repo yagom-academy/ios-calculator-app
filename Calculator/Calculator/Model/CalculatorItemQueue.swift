@@ -9,6 +9,11 @@ import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
     let linkedList = LinkedList<T>()
+    private let linkedList = LinkedList<T>()
+    
+    var queue: LinkedList<T> {
+        linkedList
+    }
     
     func enqueue(_ value: T) {
         linkedList.append(value)
