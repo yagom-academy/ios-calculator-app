@@ -32,9 +32,4 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(try queue.removeLast(), 1.0)
     }
     
-    
-}
-
-extension Double: CalculatorItem {
-    
 }
