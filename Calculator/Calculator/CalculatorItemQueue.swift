@@ -6,20 +6,21 @@
 //
 
 import Foundation
+import Metal
 
 protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    var enQueueArray: [T] = []
-    var deQueueArray: [T] = []
+struct CalculatorItemQueue<Element>: CalculateItem {
+    var enQueueArray: [Element] = []
+    var deQueueArray: [Element] = []
     
-    mutating func enQueue(_ element: T) {
+    mutating func enQueue(_ element: Element) {
         enQueueArray.append(element)
     }
     
-    mutating func deQueue() -> T? {
+    mutating func deQueue() -> Element? {
         if enQueueArray.isEmpty && deQueueArray.isEmpty {
             return nil
         }
