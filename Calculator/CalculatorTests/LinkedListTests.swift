@@ -90,7 +90,7 @@ class LinkedListTests: XCTestCase {
         let newItems: [Any] = [20, "+", 20, "-", 2]
         let firstItem = LinkedListItem.number(value: 20)
         appendContents(of: newItems, to: &sut)
-        let removedNode = sut.removeFront()
+        let removedNode = sut.removeHead()
         XCTAssertTrue(hasEqualItems(node: removedNode, item: firstItem))
     }
     

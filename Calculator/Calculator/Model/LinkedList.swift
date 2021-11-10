@@ -35,11 +35,8 @@ struct LinkedList<T> {
         tail = newNode
     }
     
-    mutating func removeFront() -> Node<T>? {
-        guard isNotEmpty else {
-            return nil
-        }
-        guard let oldHead = head else {
+    mutating func removeHead() -> Node<T>? {
+        guard isNotEmpty, let oldHead = head else {
             return nil
         }
         guard let newHead = oldHead.next else {
