@@ -8,7 +8,7 @@
 1. TDD를 활용해 **Red - Green - Refactor** 과정을 반복하여 `CalculatorItemQueue` 타입을 구현한다.
 	- 큐 타입을 배열을 통해 구현하면 `dequeue`할 때 시간복잡도 이슈가 있지만, 우선 구현 가능한 가장 간단한 방법인 배열을 통해 큐타입을 구현한다.
 	- 배열을 활용한 큐 타입을 UML로 아래와 같이 표현해 보았다.<br/><br/>
-![ArrayQueueUML](./image/ArrayQueueUML.png)<br/><br/>
+<img src="/image/ArrayQueueUML.png" width="250" height="200"> <br/><br/>
 	- 구현 후, 예외가 될 수 있는 test case를 추가로 작성하여 Unit Test를 진행한다.<br/><br/>
 
 2. 큐 타입에서 **배열 대신 Linked List**를 사용하기 위해서 TDD를 활용해 `LinkedList` 타입을 구현
@@ -18,13 +18,15 @@
 3. `LinkedList` 타입 구현이 끝났다면 기존의 `CalculatorItemQueue` 타입에서 배열로 구현된 부분을 **2** 에서 만든 `LinkedList`로 대체한다. 
 	- 큐 타입에서 기존 배열에다가 요구하던 기능을 `LinkedList`에서 그대로 구현했기 때문에, 이 과정은 **단 한 줄만 고치면 될 것**이다. 
 	- Linked List를 활용한 큐 타입을 UML로 아래와 같이 표현해 보았다.<br/><br/>
-![ArrayQueueUML](./image/LinkedListQueueUML.png)<br/><br/><br/><br/>
+<img src="/image/LinkedListQueueUML.png" width="430" height="300"> <br/>
+**!!LinkedList타입은 UML 작성 이후에 class타입으로 변경하였고, 그로 인해 메서드는 mutating이 아니게 변경 되었음**
+<br/><br/>
 
 4. `Linked List`로의 대체가 끝났다면 성공적으로 리팩토링 되었는지 확인하기 위해 **1** 에서 만들어 놓은 `CalculatorItemQueue`에 대한 Unit Test 를 다시 한 번 실행한다.<br/><br/>
 
 
 > 위 과정을 거치며 TDD 방식의 코드 작성을 경험해 보고, TDD와 Unit Test의 이점을 느낄 수 있었다. 
-> 특히, **4** 에서 기존 코드를 리팩토링하였을 때 테스트만 다시 돌려보면 정상 작동 여부를 바로 파악할 수 있었기에 Unit Test가 코드의 유지보수에 큰 도움이 된다는 것을 경험했다.
+> 특히, **4** 에서 기존 코드를 리팩토링하였을 때 테스트만 다시 돌려보면 정상 작동 여부를 바로 파악할 수 있었기에 **Unit Test가 코드의 유지보수에 큰 도움이 된다는 것을 경험했다.**
 <br/>
 
 <br/>
@@ -55,7 +57,6 @@
 
 <br/>
 <br/>
----
 <br/>
 
 ### Trouble Shooting
@@ -160,13 +161,15 @@ sut.removeFirst()
 2. 된다면 `nil`을 할당해줘야만 `deinit`되는건지, 아니면 `head`에 다른 인스턴스를 할당해주기만 해도 되는지<br/>
 를 알아보고자 한다.
 
-먼저, `head`에 `nil`을 할당한 출력 결과는 다음과 같았다.<br/>
-![Nil](./image/nil.png)<br/>
+먼저, `head`에 `nil`을 할당한 출력 결과는 다음과 같았다.<br/><br/>
+<img src="/image/nil.png" width="250" height="200">
+<br/><br/>
 처음 `head`에 있던 노드에 `nil`을 할당해주자 곧바로 `deinit`이 된 것을 확인할 수 있다.
 
 그리고 `nil`을 따로 할당해주지 않고(`head = nil`을 주석처리함) 
-곧바로 새로운 인스턴스를 할당해 주었을 때의 출력 결과는 <br/>
-![NewNode](./image/newNode.png)<br/>
+곧바로 새로운 인스턴스를 할당해 주었을 때의 출력 결과는 <br/><br/>
+<img src="/image/newNode.png" width="250" height="200">
+<br/><br/>
 이와 같았다. 새로운 인스턴스를 할당만 해 주어도 메모리에서 해제된 것을 확인할 수 있었다.
 
 > #### 결론
