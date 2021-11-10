@@ -155,18 +155,4 @@ extension Node {
         }
         return nil
     }
-    
-    var convertToInt: Int? {
-        guard let value = item as? Int else {
-            return nil
-        }
-        return value
-    }
-    
-    var convertToCharacter: Character? {
-        guard let value = item as? Character else {
-            return nil
-        }
-        return value
-    }
 }
