@@ -56,7 +56,7 @@ class LinkedList<Element> {
         return count
     }
     
-    func appendNewNode(value: Element) {
+    func appendNode(value: Element) {
         let newNode = Node(value: value)
         
         guard let lastNode = last else {

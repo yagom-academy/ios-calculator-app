@@ -11,7 +11,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     var items = LinkedList<Element>()
     
     func enqueue(_ value: Element) {
-        items.appendNewNode(value: value)
+        items.appendNode(value: value)
     }
     
     @discardableResult
