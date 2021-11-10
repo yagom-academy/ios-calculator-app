@@ -43,4 +43,14 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, item)
     }
+    
+    func test_CalculatorItemQueue에서_dequeue했을때_enqueue한_값과_같은지() {
+        let item = 1
+        
+        sut.enqueue(value: item)
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, item)
+    }
 }

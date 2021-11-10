@@ -13,4 +13,8 @@ struct CalculatorItemQueue<T> {
     func enqueue(value: T) {
         items.addRear(value)
     }
+    
+    func dequeue() -> T? {
+        return "asdf" as? T
+    }
 }
