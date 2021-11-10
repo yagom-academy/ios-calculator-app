@@ -70,7 +70,21 @@ struct Formula {
         } catch {
             print(error.localizedDescription)
         }
-
+        guard operands.isEmpty == false else {
+            return result
+        }
+        repeat {
+            do {
+                result = try calculateFromThrSecond(lhs: result)
+            } catch let error as CalculatorError {
+                print(error.description)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } while operands.isEmpty == false
+        if operators.isEmpty == false {
+            operators.clear()
+        }
         return result
     }
     
@@ -80,6 +94,15 @@ struct Formula {
             throw CalculatorError.wrongOperator
         }
         let lhs = try operands.dequeue()
+        let rhs = try operands.dequeue()
+        return `operator`.calculate(lhs: lhs, rhs: rhs)
+    }
+    
+    private mutating func calculateFromThrSecond(lhs: Double) throws -> Double {
+        let element = try operators.dequeue()
+        guard let `operator` = Operator(rawValue: element) else {
+            throw CalculatorError.wrongOperator
+        }
         let rhs = try operands.dequeue()
         return `operator`.calculate(lhs: lhs, rhs: rhs)
     }
@@ -107,5 +130,18 @@ class FormulaTests: XCTestCase {
         let result = formula.result()
         
         XCTAssertEqual(result, 4.0)
+    }
+    
+    func test_더하기연산해보기_피연산자세개() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("+")
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("+")
+        formula.operands.enqueue(2.0)
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 6.0)
     }
 }
