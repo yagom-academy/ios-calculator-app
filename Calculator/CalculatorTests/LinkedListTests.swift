@@ -150,6 +150,13 @@ class LinkedListTests: XCTestCase {
 }
 
 extension LinkedList {
+    var first: T? {
+        guard let head = head else {
+            return nil
+        }
+        return head.item
+    }
+    
     var length: Int {
         var pointer = head
         var count = 0
@@ -175,7 +182,7 @@ extension LinkedList {
     }
     
     mutating func removeNode(at index: Int) -> Node<T>? {
-        guard let toBeRemovedNode = getNode(at: index) else {
+        guard let toBeRemovedNode = retrieveNode(at: index) else {
             return nil
         }
         let removedNode = remove(node: toBeRemovedNode)

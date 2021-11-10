@@ -20,13 +20,6 @@ struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     
-    var first: T? {
-        guard let head = head else {
-            return nil
-        }
-        return head.item
-    }
-    
     var isEmpty: Bool {
         return head == nil
     }
@@ -54,7 +47,7 @@ struct LinkedList<T> {
     }
     
     mutating func removeHead() -> Node<T>? {
-        guard isNotEmpty, let nodeToBeRemoved = getNode(at:0) else {
+        guard isNotEmpty, let nodeToBeRemoved = retrieveNode(at:0) else {
             return nil
         }
         return remove(node: nodeToBeRemoved)
@@ -86,7 +79,7 @@ struct LinkedList<T> {
         return node
     }
     
-    func getNode(at index: Int) -> Node<T>? {
+    func retrieveNode(at index: Int) -> Node<T>? {
         guard isNotEmpty else {
             return nil
         }

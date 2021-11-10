@@ -114,7 +114,7 @@ extension CalculatorItemQueue {
     var convertToArray: [Any] {
         var convertedArray: [Any] = []
         for i in 0..<length {
-            if let node = list.getNode(at: i) {
+            if let node = list.retrieveNode(at: i) {
                 convertedArray.append(node.item)
             }
         }
