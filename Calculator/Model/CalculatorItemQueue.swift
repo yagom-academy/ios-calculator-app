@@ -11,10 +11,14 @@ struct CalculatorItemQueue<T> {
     let items: LinkedList<T> = LinkedList<T>()
     
     func enqueue(value: T) {
-        items.addRear(value)
+        self.items.addRear(value)
     }
     
     func dequeue() -> T? {
-        return "asdf" as? T
+        guard let node = self.items.removeFront() else {
+            return nil
+        }
+        
+        return node.value
     }
 }
