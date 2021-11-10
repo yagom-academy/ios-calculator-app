@@ -28,10 +28,11 @@ struct CalculatorItemQueue {
         }
     }
     
-    func isEmpty() -> Bool {
-        nodes.isEmpty
-    }
     func calculatorSize() -> Int {
         nodes.count
+    }
+    
+    func isEmpty() -> Bool {
+        nodes.isEmpty
     }
 }

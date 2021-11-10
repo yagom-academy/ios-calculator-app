@@ -92,6 +92,7 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
+    
     func test_nodes의_값이_비어있을경우() {
         //given
         let result: Int? = nil
@@ -106,6 +107,7 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, nodes)
     }
+    
     func test_nodes의_프로퍼티의_값이_deleteRear통해_삭제되는지여부() {
         //given
         let result = [1,2,3]
@@ -136,4 +138,3 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, counterNumber)
     }
 }
-
