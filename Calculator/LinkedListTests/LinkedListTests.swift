@@ -130,6 +130,35 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(result, 2)
     }
+    
+    // MARK:- tail tests
+    func test_빈List에_tail요청하면_nil반환하는지() {
+        //given
+        guard sut.isEmpty else {
+            return
+        }
+        //when
+        let result = sut.tail
+        //then
+        XCTAssertNil(result)
+    }
+    func test_4추가한List에서_tail를요청하면_value4반환하는지() {
+        //given
+        sut.append(4)
+        //when
+        let result = sut.tail?.value
+        //then
+        XCTAssertEqual(result, 4)
+    }
+    func test_4와7추가한List에서_tail를요청하면_value7반환하는지() {
+        //given
+        sut.append(4)
+        sut.append(7)
+        //when
+        let result = sut.tail?.value
+        //then
+        XCTAssertEqual(result, 7)
+    }
 }
 
 
