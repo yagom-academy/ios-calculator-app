@@ -11,6 +11,11 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
+    init(){
+        operands = CalculatorItemQueue()
+        operators = CalculatorItemQueue()
+    }
+    
     func result() -> Double {
         return 0.0
     }
