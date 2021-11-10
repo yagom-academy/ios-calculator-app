@@ -20,11 +20,10 @@ class CalculatorTests: XCTestCase {
     }
     
     //MARK: - dequeue
-    func test_빈배열일때_dequeue메서드를호출하면_nil을반환하는지() {
+    func test_빈배열일때_dequeue메서드를호출하면_에러를던지는지() {
         var calculateQueue = CalculateItemQueue<Int>()
-        let result = calculateQueue.dequeue()
         
-        XCTAssertNil(result)
+        XCTAssertThrowsError(try calculateQueue.dequeue())
     }
     
     func test_enqueue메서드로_1_2_3을더했을때_dequeue메서드를호출하면_1을반환하는지() {
@@ -33,8 +32,6 @@ class CalculatorTests: XCTestCase {
         calculateQueue.enqueue(element: 2)
         calculateQueue.enqueue(element: 3)
         
-        if let output = calculateQueue.dequeue() {
-            XCTAssertEqual(output, 1)
-        }
+        XCTAssertEqual(try calculateQueue.dequeue(), 1)
     }
 }

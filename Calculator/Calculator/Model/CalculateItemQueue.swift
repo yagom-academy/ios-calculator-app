@@ -15,9 +15,9 @@ struct CalculateItemQueue<T>: CalculateItem {
         enqueueStack.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() throws -> T {
         if enqueueStack.isEmpty, dequeueStack.isEmpty {
-            return nil
+            throw CalculatorError.isEmptyStack
         }
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
