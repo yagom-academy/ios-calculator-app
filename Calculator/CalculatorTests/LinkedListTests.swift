@@ -94,6 +94,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(hasEqualItems(node: removedNode, item: firstItem))
     }
     
+    func testLinkedListRemove_givenRemovedFront_expectCorrectElements() {
+        let newItems: [Any] = [20, "+", 20, "-", 2]
+        appendContents(of: newItems, to: &sut)
+        let _ = sut.removeHead()
+        let exepectedItems: [Any] = ["+", 20, "-", 2]
+        let convertedExpectedItems: [LinkedListItem] = convertToLinkedListArray(from: exepectedItems)
+        XCTAssertEqual(sut.convertedToLinkedListArray, convertedExpectedItems)
+    }
+    
     private func hasEqualItems(node: Node<Any>?, item: LinkedListItem) -> Bool {
         guard let node = node else {
             return false
