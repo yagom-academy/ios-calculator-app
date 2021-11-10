@@ -20,24 +20,24 @@ class CalculatorQueueTests: XCTestCase {
     }
 
     func test_calculatorItemQueue_item이_들어올경우_내부저장소에_저장이되는지() {
-        sut.enqueue(operation: "+")
+        sut.enQueue(operation: "+")
         let operationCount = sut.operationStorage.count
 
         XCTAssertEqual(operationCount, 1)
     }
     
     func test_calculatorItemQueue_item이_2개_또는_그이상이_들어올경우_내부저장소에_저장이되는지() {
-        sut.enqueue(operation: "-")
-        sut.enqueue(operation: "+")
+        sut.enQueue(operation: "-")
+        sut.enQueue(operation: "+")
         let operationCount = sut.operationStorage.count
 
         XCTAssertEqual(operationCount, 2)
     }
     
     func test_calculatorItemQueue_item이_내부저장소에_순서대로_저장되는지() {
-        sut.enqueue(operation: "-")
-        sut.enqueue(operation: "+")
-        sut.enqueue(operation: "=")
+        sut.enQueue(operation: "-")
+        sut.enQueue(operation: "+")
+        sut.enQueue(operation: "=")
         
         var testArr: [String] = []
         testArr.append(sut.operationStorage.removeFirst())
@@ -46,30 +46,30 @@ class CalculatorQueueTests: XCTestCase {
     }
     
     func test_calculatorItemQueue_item을_내부저장소에서_제대로_반환하는지() {
-        sut.enqueue(operation: "-")
-        let operationData = sut.dequeue()
+        sut.enQueue(operation: "-")
+        let operationData = sut.deQueue()
         
         XCTAssertEqual(operationData, "-")
     }
     
     func test_calculatorItemQueue_item이_2개_또는_그이상이_들어올경우_먼저온순서대로_반환하는지() {
-        sut.enqueue(operation: "+")
-        sut.enqueue(operation: "-")
-        let operationData = sut.dequeue()
+        sut.enQueue(operation: "+")
+        sut.enQueue(operation: "-")
+        let operationData = sut.deQueue()
         
         XCTAssertEqual(operationData, "+")
     }
     
     func test_calculatorItemQueue_item이_비어있을경우_nil_반환하는지() {
-        let operationData = sut.dequeue()
+        let operationData = sut.deQueue()
         
         XCTAssertNil(operationData)
     }
     
     func test_calculatorItemQueue_item이_추가되었다가_다빠질경우_nil_반환하는지() {
-        sut.enqueue(operation: "+")
-        sut.dequeue()
-        let operationData = sut.dequeue()
+        sut.enQueue(operation: "+")
+        sut.deQueue()
+        let operationData = sut.deQueue()
         
         XCTAssertNil(operationData)
     }
