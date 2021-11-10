@@ -44,4 +44,36 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(nodes, result)
     }
+    
+    func test_nodes프로퍼티의값이_push메서드와_deleteFront메서드기능이_적용되는지_여부() {
+        // given
+        let result = [3,4,5]
+        // when
+        calculatorItemQueue.push(1)
+        calculatorItemQueue.push(2)
+        calculatorItemQueue.push(3)
+        calculatorItemQueue.push(4)
+        calculatorItemQueue.push(5)
+        calculatorItemQueue.deleteFront()
+        calculatorItemQueue.deleteFront()
+        let nodes = calculatorItemQueue.bringNodes()
+        // then
+        XCTAssertEqual(nodes, result)
+    }
+    
+    func test_nodes에_값을push한후_deleteFront했을때_값이있는지_여부() {
+        //given
+        for _ in 1...5 {
+            var counterNumber = 1
+            calculatorItemQueue.push(counterNumber)
+            counterNumber += 1
+        }
+        for _ in 1...5 {
+            calculatorItemQueue.deleteFront()
+        }
+        //when
+        let result = calculatorItemQueue.isEmpty()
+        //then
+        XCTAssertTrue(result)
+    }
 }

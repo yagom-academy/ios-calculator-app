@@ -12,11 +12,15 @@ struct CalculatorItemQueue {
     func bringNodes() -> [Int] {
         nodes
     }
+    
     mutating func push(_ item: Int) {
         nodes.append(item)
     }
-    
     mutating func deleteFront() {
         nodes.removeFirst()
+    }
+    
+    func isEmpty() -> Bool {
+        nodes.isEmpty
     }
 }
