@@ -13,15 +13,13 @@ protocol CalculatorItem {
 
 struct CalculatorItemQueue <T> where T: CalculatorItem {
     var operationStorage: [T] = []
-    var isEmpty: Bool = true
     
     mutating func enQueue(operation: T) {
         operationStorage.append(operation)
-        self.isEmpty = false
     }
     
     mutating func deQueue() -> T? {
-        if self.isEmpty || operationStorage.isEmpty {
+        if operationStorage.isEmpty {
             return nil
         }
         
