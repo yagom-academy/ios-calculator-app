@@ -7,6 +7,13 @@
 
 import Foundation
 
-enum CalculatorError: Error {
+enum CalculatorError: Error, CustomStringConvertible {
     case emptyQueue
+    
+    var description: String {
+        switch self {
+        case .emptyQueue:
+            return "Queue is Empty"
+        }
+    }
 }
