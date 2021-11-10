@@ -21,15 +21,16 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue = nil
     }
 
-    func test_enqueue호출시_queue에_1을_추가한다() {
+    func test_enqueue호출시_queue는_첫번째요소로_1을_저장하는배열이된다() {
         //expectation
-        calculatorItemQueue.enqueue(1)
+        calculatorItemQueue.enqueue(1.0)
         
         //result
         XCTAssertNotNil(calculatorItemQueue.queue)
+        XCTAssertEqual(calculatorItemQueue.queue[0] as! Double, 1.0)
     }
     
-    func test_enqueue호출시_queue에_plus를_추가한다() {
+    func test_enqueue호출시_queue는_첫번째요소로_plus를_저장하는배열이된다() {
         //expectation
         calculatorItemQueue.enqueue(Operator.plus)
         
@@ -37,16 +38,18 @@ class CalculatorTests: XCTestCase {
         XCTAssertNotNil(calculatorItemQueue.queue)
     }
     
-    func test_enqueue호출시_queue에_1과plus를_추가한다() {
+    func test_enqueue호출시_queue는_1과_plus를_저장하는배열이된다() {
         //expctation
         calculatorItemQueue.enqueue(1)
         calculatorItemQueue.enqueue(Operator.plus)
         
         //result
         XCTAssertEqual(calculatorItemQueue.queue.count, 2)
+        XCTAssertEqual(calculatorItemQueue.queue[0] as! Double, 1.0)
+        XCTAssertEqual(calculatorItemQueue.queue[1] as! Operator, Operator.plus)
     }
     
-    func test_dequeue호출시_queue의첫번째원소가_삭제된다() {
+    func test_dequeue호출시_queue는_빈배열이된다() {
         //expectation
         calculatorItemQueue.enqueue(1)
         calculatorItemQueue.dequeue()
@@ -73,7 +76,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
     }
     
-    func test_queue가_빈배열일때_removeAllItems호출시_오류가발생하지않는다() {
+    func test_queue가_빈배열일때_removeAllItems호출하면_오류를던지지않는다() {
         //expectation
         calculatorItemQueue.removeAllItems()
         
