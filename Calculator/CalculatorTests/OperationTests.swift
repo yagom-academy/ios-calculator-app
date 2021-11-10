@@ -104,9 +104,9 @@ class FormulaTests: XCTestCase {
     
     func testCalculateResult() throws {
         formula.operators.enqueue(.add)
+        formula.operators.enqueue(.subtract)
         formula.operators.enqueue(.devide)
         formula.operators.enqueue(.multiply)
-        formula.operators.enqueue(.subtract)
         
         do {
             let result = try formula.result()
