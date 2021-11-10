@@ -86,6 +86,25 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, Character("+"))
     }
+    
+    func test_비어있는큐에isEmpty호출시true반환() {
+        // given
+        let queue = CalculatorItemQueue<Character>()
+        // when
+        let result = queue.isEmpty
+        // then
+        XCTAssertEqual(result, true)
+    }
+    
+    func test_비어있는큐에isEmpty호출시false반환() {
+        // given
+        let queue = CalculatorItemQueue<Character>()
+        queue.enqueue("+")
+        // when
+        let result = queue.isEmpty
+        // then
+        XCTAssertEqual(result, false)
+    }
 
 }
 
