@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    private(set) var queueList: LinkedList = LinkedList()
+    private var queueList: LinkedList = LinkedList()
     
     mutating func enqueue(item: CalcultorItem?) {
         guard let item = item else {
@@ -23,6 +23,12 @@ struct CalculatorItemQueue {
 
     mutating func clearQueue() {
         queueList.clear()
+    }
+}
+
+extension CalculatorItemQueue {
+    var queueListForTest: LinkedList {
+        return self.queueList
     }
 }
 

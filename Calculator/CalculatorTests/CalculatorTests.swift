@@ -13,33 +13,33 @@ class CalculatorTests: XCTestCase {
     
     // MARK: QueueList isEmpty test
     func test_QueueListisnotEmpty() {
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()).isEmpty, true)
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()).isEmpty, true)
     }
     
     // MARK: CalculatorItemQueue enqueue test
     func test_QueueListEnqueue() {
         queue.enqueue(item: NumberItem(data: 1))
         
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["1"])
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["1"])
     }
     
     func test_QueueListSort() {
         queue.enqueue(item: NumberItem(data: 2))
         queue.enqueue(item: NumberItem(data: 1))
 
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["2","1"])
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["2","1"])
     }
 
     func test_QueueListEnqueueNil() {
         queue.enqueue(item: nil)
 
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), [])
     }
     
     func test_QueueListEnqueueOperatorItem() {
         queue.enqueue(item: OperatorItem.add)
 
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+"])
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["+"])
     }
 
     func test_QueueListEnqueueOperatorAndNumber() {
@@ -47,7 +47,7 @@ class CalculatorTests: XCTestCase {
         queue.enqueue(item: OperatorItem.divide)
         queue.enqueue(item: NumberItem(data: 2))
 
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+","/","2"])
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["+","/","2"])
     }
     
     // MARK: CalculatorItemQueue dequeue test
@@ -80,7 +80,7 @@ class CalculatorTests: XCTestCase {
     func test_QueueListClear() {
         queue.clearQueue()
 
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
+        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), [])
     }
 
     // MARK: CalculatorItemQueue Several Queue test
@@ -91,8 +91,8 @@ class CalculatorTests: XCTestCase {
         calculatorQueue.enqueue(item: OperatorItem.add)
         preparedCalculatorQueue.enqueue(item: NumberItem(data: 3))
 
-        XCTAssertEqual(convertList(list: calculatorQueue.queueList.searchAll()), ["+"])
-        XCTAssertEqual(convertList(list: preparedCalculatorQueue.queueList.searchAll()), ["3"])
+        XCTAssertEqual(convertList(list: calculatorQueue.queueListForTest.searchAll()), ["+"])
+        XCTAssertEqual(convertList(list: preparedCalculatorQueue.queueListForTest.searchAll()), ["3"])
     }
 }
 
