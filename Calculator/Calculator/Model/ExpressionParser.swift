@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    func parase(from input: String) -> Formula {
+    static func parase(from input: String) -> Formula {
         return Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     }
     
