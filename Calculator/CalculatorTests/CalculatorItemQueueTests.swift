@@ -62,7 +62,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(3.0, calculatorItemQueue.computingValueList.last?.value)
         XCTAssertEqual("/", calculatorItemQueue.operatorList.last?.value)
         
-        calculatorItemQueue.cleanQueue()
+        calculatorItemQueue.resetQueue()
         
         XCTAssertEqual(nil, calculatorItemQueue.computingValueList.first?.value)
         XCTAssertEqual(nil, calculatorItemQueue.operatorList.first?.value)
