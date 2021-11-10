@@ -28,7 +28,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         array = reversedArray.reversed()
     }
     
-    mutating func removeAllItem() {
+    mutating func removeAllItems() {
         array.removeAll()
     }
 }
