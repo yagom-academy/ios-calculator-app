@@ -10,26 +10,30 @@ import Foundation
 protocol CalculateItem { }
 
 struct CalculatorItemQueue<Element> where Element: CalculateItem {
-    private(set) var item: LinkedList<Element>
+    private(set) var items: LinkedList<Element>
     
     var count: Int {
-        self.item.count
+        items.count
+    }
+    
+    var isEmpty: Bool {
+        items.isEmpty
     }
     
     var front: Element? {
-        self.item.first
+        items.first
     }
     
     init() {
-        self.item = LinkedList()
+        items = LinkedList()
     }
     
     func enqueue(_ item: Element) {
-        self.item.append(item)
+        self.items.append(item)
     }
     
     @discardableResult
     func dequeue() -> Element? {
-        self.item.removeFirst()
+        items.removeFirst()
     }
 }
