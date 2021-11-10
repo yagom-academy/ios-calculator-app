@@ -8,11 +8,6 @@
 import XCTest
 @testable import Calculator
 
-enum LinkedListItem: Equatable, CalculateItem {
-    case number(value: Int)
-    case symbol(value: String)
-}
-
 class LinkedListTests: XCTestCase {
     var sut: LinkedList<Any>!
     
@@ -35,21 +30,21 @@ class LinkedListTests: XCTestCase {
     func testLinkedListAppend_givenNewIntegers_expectHeadEqualToFirstInsertedItem() {
         let newItems = [1, 2]
         appendContents(of: newItems, to: &sut)
-        let firstInsertedItem = LinkedListItem.number(value: newItems[0])
+        let firstInsertedItem = DummyItem.number(value: newItems[0])
         XCTAssertTrue(hasEqualItems(node: sut.head, item: firstInsertedItem))
     }
     
     func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastInsertedItem() {
         let newItems = [1, 2, 3, 4]
         appendContents(of: newItems, to: &sut)
-        let lastInsertedItem = LinkedListItem.number(value: newItems[newItems.count-1])
+        let lastInsertedItem = DummyItem.number(value: newItems[newItems.count-1])
         XCTAssertTrue(hasEqualItems(node: sut.tail, item: lastInsertedItem))
     }
     
     func testLinkedListNode_givenNewOperator_expectHeadEqualToInsertedItem() {
         let newCharacter = "+"
         sut.append(newCharacter)
-        let newInsertedItem = LinkedListItem.symbol(value: newCharacter)
+        let newInsertedItem = DummyItem.symbol(value: newCharacter)
         XCTAssertTrue(hasEqualItems(node: sut.head, item: newInsertedItem))
     }
     
@@ -70,7 +65,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedListAppend_givenMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
-        let convertedNewItems = convertToLinkedListArray(from: newItems) as [LinkedListItem]
+        let convertedNewItems = convertToLinkedListArray(from: newItems) as [DummyItem]
         XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
     }
     
@@ -78,7 +73,7 @@ class LinkedListTests: XCTestCase {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
         let removedNode = sut.removeHead()
-        let firstInsertedItem = LinkedListItem.number(value: 20)
+        let firstInsertedItem = DummyItem.number(value: 20)
         XCTAssertTrue(hasEqualItems(node: removedNode, item: firstInsertedItem))
     }
     
@@ -87,7 +82,7 @@ class LinkedListTests: XCTestCase {
         appendContents(of: newItems, to: &sut)
         let _ = sut.removeHead()
         let exepectedItems: [Any] = ["+", 30, "-", 2]
-        let convertedExpectedItems = convertToLinkedListArray(from: exepectedItems) as [LinkedListItem]
+        let convertedExpectedItems = convertToLinkedListArray(from: exepectedItems) as [DummyItem]
         XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExpectedItems)
     }
     
@@ -114,15 +109,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    private func hasEqualItems(node: Node<Any>?, item: LinkedListItem) -> Bool {
+    private func hasEqualItems(node: Node<Any>?, item: DummyItem) -> Bool {
         guard let node = node else {
             return false
         }
         return node.convertToLinkedListItem == item
     }
     
-    private func convertToLinkedListArray(from sequence: [Any]) -> [LinkedListItem] {
-        var linkedListItemArray: [LinkedListItem] = []
+    private func convertToLinkedListArray(from sequence: [Any]) -> [DummyItem] {
+        var linkedListItemArray: [DummyItem] = []
         for item in sequence {
             if let convertedItem = convertToLinkedListItem(value: item) {
                 linkedListItemArray.append(convertedItem)
@@ -131,12 +126,12 @@ class LinkedListTests: XCTestCase {
         return linkedListItemArray
     }
     
-    private func convertToLinkedListItem(value: Any) -> LinkedListItem? {
+    private func convertToLinkedListItem(value: Any) -> DummyItem? {
         if let value = value as? Int {
-            return LinkedListItem.number(value: value)
+            return DummyItem.number(value: value)
         }
         if let value = value as? String {
-            return LinkedListItem.symbol(value: value)
+            return DummyItem.symbol(value: value)
         }
         return nil
     }
@@ -167,9 +162,9 @@ extension LinkedList {
         return count
     }
     
-    var convertedToLinkedListItemArray: [LinkedListItem] {
+    var convertedToLinkedListItemArray: [DummyItem] {
         var pointer = head
-        var listContents: [LinkedListItem] = []
+        var listContents: [DummyItem] = []
         while pointer != nil {
             if let node = pointer, let value = node.convertToLinkedListItem {
                 listContents.append(value)
@@ -189,12 +184,12 @@ extension LinkedList {
 }
 
 extension Node {
-    var convertToLinkedListItem: LinkedListItem? {
+    var convertToLinkedListItem: DummyItem? {
         if let number = item as? Int {
-            return LinkedListItem.number(value: number)
+            return DummyItem.number(value: number)
         }
         if let symbol = item as? String {
-            return LinkedListItem.symbol(value: symbol)
+            return DummyItem.symbol(value: symbol)
         }
         return nil
     }

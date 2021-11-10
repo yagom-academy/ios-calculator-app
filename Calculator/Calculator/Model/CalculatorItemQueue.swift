@@ -30,7 +30,7 @@ struct CalculatorItemQueue<T> {
         guard list.isNotEmpty else {
             return nil
         }
-        return list.getHead()
+        return list.retrieveHeadValue()
     }
     
     mutating func removeAll() {

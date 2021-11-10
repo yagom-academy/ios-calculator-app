@@ -46,7 +46,7 @@ struct LinkedList<T> {
         tail = newNode
     }
     
-    mutating func getHead() -> T? {
+    mutating func retrieveHeadValue() -> T? {
         if let removedHead = removeHead(){
             return removedHead.item
         }

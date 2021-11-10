@@ -50,7 +50,7 @@ class CalculatorItemQueueTests: XCTestCase {
     func testCalculatorItemQueueEnqueue_givenMultipleMixedItems_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
-        XCTAssertTrue(isSameSequence(sequence: sut.convertToArray, otherSequence: newItems))
+        XCTAssertTrue(isEqualSequence(sequence: sut.convertToArray, otherSequence: newItems))
     }
     
     func testCalculatorQueueDequeue_givenRemoveAllOfMultipleMixedItems_expectIsEmpty() {
@@ -73,14 +73,14 @@ class CalculatorItemQueueTests: XCTestCase {
         }
     }
     
-    private func isSameSequence(sequence: [Any], otherSequence: [Any]) -> Bool {
+    private func isEqualSequence(sequence: [Any], otherSequence: [Any]) -> Bool {
         let firstConvertedSequence = convertToTestableType(sequence: sequence)
         let secondConvertedSequence = convertToTestableType(sequence: otherSequence)
         return firstConvertedSequence == secondConvertedSequence
     }
     
-    private func convertToTestableType(sequence: [Any]) -> [LinkedListItem] {
-        var testableList: [LinkedListItem] = []
+    private func convertToTestableType(sequence: [Any]) -> [DummyItem] {
+        var testableList: [DummyItem] = []
         for item in sequence {
             if let convertedItem = convertToLinkedListItem(value: item) {
                 testableList.append(convertedItem)
@@ -89,12 +89,12 @@ class CalculatorItemQueueTests: XCTestCase {
         return testableList
     }
     
-    private func convertToLinkedListItem(value: Any) -> LinkedListItem? {
+    private func convertToLinkedListItem(value: Any) -> DummyItem? {
         if let value = value as? Int {
-            return LinkedListItem.number(value: value)
+            return DummyItem.number(value: value)
         }
         if let value = value as? String {
-            return LinkedListItem.symbol(value: value)
+            return DummyItem.symbol(value: value)
         }
         return nil
     }
@@ -111,8 +111,8 @@ extension CalculatorItemQueue {
         return list.length
     }
     
-    var convertToArray: [T] {
-        var convertedArray: [T] = []
+    var convertToArray: [Any] {
+        var convertedArray: [Any] = []
         for i in 0..<length {
             if let node = list.getNode(at: i) {
                 convertedArray.append(node.item)
