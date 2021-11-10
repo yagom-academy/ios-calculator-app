@@ -97,7 +97,7 @@ class CalculatorTests: XCTestCase {
 }
 
 extension CalculatorTests {
-    func convertList(list: [CalcultorItem]) -> [String] {
+    func convertList(list: [CalculateItem]) -> [String] {
         var compareList:[String] = []
         
         for item in list {

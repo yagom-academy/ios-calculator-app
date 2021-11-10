@@ -8,8 +8,8 @@
 import Foundation
 
 extension LinkedList {
-    func searchAll() -> [CalcultorItem] {
-        var searchedList:[CalcultorItem] = []
+    func searchAll() -> [CalculateItem] {
+        var searchedList:[CalculateItem] = []
         if headForTest == nil {
             return []
         }

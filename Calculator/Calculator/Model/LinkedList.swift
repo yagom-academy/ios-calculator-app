@@ -8,10 +8,10 @@
 import Foundation
 
 class Node {
-    var data: CalcultorItem?
+    var data: CalculateItem?
     var next: Node?
     
-    init(data: CalcultorItem?, next: Node? = nil) {
+    init(data: CalculateItem?, next: Node? = nil) {
         self.data = data
         self.next = next
     }
@@ -20,7 +20,7 @@ class Node {
 struct LinkedList {
     private var head: Node?
     
-    mutating func append(data: CalcultorItem?) {
+    mutating func append(data: CalculateItem?) {
         if head == nil {
             self.head = Node(data: data)
             return
@@ -33,12 +33,12 @@ struct LinkedList {
         node?.next = Node(data: data)
     }
     
-    mutating func removeFrist() -> CalcultorItem? {
+    mutating func removeFrist() -> CalculateItem? {
         if head == nil {
             return nil
         }
         
-        var removedData: CalcultorItem? = nil
+        var removedData: CalculateItem? = nil
         
         if head?.next == nil {
             removedData = head?.data

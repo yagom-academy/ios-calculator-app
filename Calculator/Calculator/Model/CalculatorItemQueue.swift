@@ -10,7 +10,7 @@ import Foundation
 struct CalculatorItemQueue {
     private var queueList: LinkedList = LinkedList()
     
-    mutating func enqueue(item: CalcultorItem?) {
+    mutating func enqueue(item: CalculateItem?) {
         guard let item = item else {
             print("noValueToEnqueue")
             return
@@ -18,7 +18,7 @@ struct CalculatorItemQueue {
         queueList.append(data: item)
     }
     
-    mutating func dequeue() -> CalcultorItem? {
+    mutating func dequeue() -> CalculateItem? {
         return queueList.isEmpty ? nil : queueList.removeFrist()
     }
 

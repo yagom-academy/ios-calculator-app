@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct NumberItem: CalcultorItem {
+struct NumberItem: CalculateItem {
     let data: Int
 }
 
-enum OperatorItem: CalcultorItem {
+enum OperatorItem: CalculateItem {
     case add
     case substract
     case multiple
     case divide
 }
 
-protocol CalcultorItem { }
+protocol CalculateItem { }
 
