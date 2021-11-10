@@ -9,10 +9,6 @@ import Foundation
 
 struct NumberItem: CalcultorItem {
     let data: Int
-    
-    var dataToString: String {
-        return String(describing: self.data)
-    }
 }
 
 enum OperatorItem: CalcultorItem {
@@ -20,7 +16,17 @@ enum OperatorItem: CalcultorItem {
     case substract
     case multiple
     case divide
-    
+}
+
+protocol CalcultorItem { }
+
+extension NumberItem {
+    var dataToString: String {
+        return String(describing: self.data)
+    }
+}
+
+extension OperatorItem {
     var operatorSymbol: String {
         switch self {
         case .add:
@@ -34,5 +40,3 @@ enum OperatorItem: CalcultorItem {
         }
     }
 }
-
-protocol CalcultorItem { }

@@ -54,7 +54,9 @@ struct LinkedList {
     var isEmpty: Bool {
         return head == nil ? true : false 
     }
-    
+}
+
+extension LinkedList {
     func searchAll() -> [CalcultorItem] {
         var searchedList:[CalcultorItem] = []
         if head == nil {

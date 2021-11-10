@@ -94,7 +94,9 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(convertList(list: calculatorQueue.queueList.searchAll()), ["+"])
         XCTAssertEqual(convertList(list: preparedCalculatorQueue.queueList.searchAll()), ["3"])
     }
+}
 
+extension CalculatorTests {
     func convertList(list: [CalcultorItem]) -> [String] {
         var compareList:[String] = []
         
