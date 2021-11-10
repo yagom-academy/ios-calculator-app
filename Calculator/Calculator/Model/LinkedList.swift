@@ -50,4 +50,9 @@ struct LinkedList<T> {
         head = newHead
         return oldHead
     }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
