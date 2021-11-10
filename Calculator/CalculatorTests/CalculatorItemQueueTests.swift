@@ -39,7 +39,6 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(3.0, operands.queue.last?.value)
         XCTAssertEqual("/", operators.queue.last?.value)
     }
-    
 
     func test_연산큐에_데이터가_존재할때_dequeue_기능이_잘_되는가() {
         let operands = CalculatorItemQueue<Double>()
@@ -87,11 +86,4 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(nil, operators.queue.first?.value)
 
     }
-    
-
-
-
-    
-    
-    
 }
