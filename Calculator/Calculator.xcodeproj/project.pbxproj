@@ -28,6 +28,7 @@
 		3383F51F273BF6CC00C13A81 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F510273BBAF400C13A81 /* Operator.swift */; };
 		3383F521273BF77F00C13A81 /* OperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F520273BF77F00C13A81 /* OperationTests.swift */; };
 		3383F523273C071B00C13A81 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F522273C071B00C13A81 /* OperationError.swift */; };
+		3383F524273C150000C13A81 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F522273C071B00C13A81 /* OperationError.swift */; };
 		33AE4455273AD5ED00DAC16B /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE4454273AD5ED00DAC16B /* QueueError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
@@ -261,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3383F51E273BF6C800C13A81 /* ExpressionParser.swift in Sources */,
+				3383F524273C150000C13A81 /* OperationError.swift in Sources */,
 				3383F521273BF77F00C13A81 /* OperationTests.swift in Sources */,
 				332FE424273A96BE00E42C8D /* CalculatorItem.swift in Sources */,
 				3324AC05273ADA05003F9865 /* QueueError.swift in Sources */,
