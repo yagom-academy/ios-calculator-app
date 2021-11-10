@@ -85,5 +85,30 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(firstCalculatedAnswer, 3.7 / 4.3)
         XCTAssertEqual(finalCalculatedAnswer, 3.7 / 4.3 * 11.8)
     }
+}
 
+class FormulaTests: XCTestCase {
+    var formula: Formula = Formula()
+    
+    override func setUp() {
+        formula.operands.enqueue(3.7)
+        formula.operands.enqueue(4.9)
+        formula.operands.enqueue(0.0)
+        formula.operands.enqueue(12.4)
+        formula.operands.enqueue(-342.6)
+    }
+    
+    override func tearDown() {
+        formula = Formula()
+    }
+    
+    func testCalculateResult() {
+        formula.operators.enqueue(.add)
+        formula.operators.enqueue(.devide)
+        formula.operators.enqueue(.multiply)
+        formula.operators.enqueue(.subtract)
+        
+        let result = formula.result()
+        XCTAssertEqual(result, ((3.7 + 4.9) - 0.0) / 12.4 * -342.6)
+    }
 }
