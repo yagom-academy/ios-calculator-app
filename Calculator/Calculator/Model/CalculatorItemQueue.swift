@@ -25,7 +25,7 @@ struct CalculatorItemQueue: CalculateItem {
         return (dequeuedValue.value, dequeuedOperator.value)
     }
     
-    func cleanQueue() {
+    func resetQueue() {
         computingValueList.removeAll()
         operatorList.removeAll()
     }
