@@ -106,7 +106,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedListRemove_givenMultipleRemovedFront_expectIsEmpty() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
         appendContents(of: newItems, to: &sut)
-        removeFrontUntilEmpty()
+        removeHeadUntilEmpty(from: &sut)
         XCTAssertTrue(sut.isEmpty)
     }
     
@@ -140,6 +140,12 @@ class LinkedListTests: XCTestCase {
     private func appendContents(of items: [Any], to linkedList: inout LinkedList<Any>) {
         for item in items {
             linkedList.append(item)
+        }
+    }
+    
+    private func removeHeadUntilEmpty(from linkedList: inout LinkedList<Any>) {
+        while linkedList.isNotEmpty {
+            let _ = linkedList.removeHead()
         }
     }
 }
