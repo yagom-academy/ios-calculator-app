@@ -60,4 +60,8 @@ class LinkedList<T> {
         }
         return scanResult
     }
+    
+    func removeAll() {
+        head = nil
+    }
 }

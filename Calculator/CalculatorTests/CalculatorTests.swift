@@ -33,4 +33,10 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(queue.scanAllValue(), [2, 3])
         XCTAssertEqual(removedValue, 1)
     }
+    
+    func test_1과2가_있는_큐를_removeAll하면_빈_큐가된다() {
+        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, next: Node(value: 2)))
+        queue.removeAll()
+        XCTAssertNil(queue.head)
+    }
 }
