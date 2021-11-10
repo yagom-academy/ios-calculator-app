@@ -7,8 +7,19 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+protocol CalculateItem {
+    
+}
+
+struct CalculatorItemQueue<T: CalculateItem> {
     var list = LinkedList<T>()
+    
+    var first: T? {
+        guard let firstItem = list.first else {
+            return nil
+        }
+        return firstItem
+    }
     
     var isNotEmpty: Bool {
         return list.isNotEmpty

@@ -20,6 +20,13 @@ struct LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     
+    var first: T? {
+        guard let head = head else {
+            return nil
+        }
+        return head.item
+    }
+    
     var isEmpty: Bool {
         return head == nil
     }
