@@ -29,7 +29,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertNil(queue.head?.pointer)
     }
 
-    func deleteFromQueue() {
+    func test_비어있는_큐에는_getFromQueue_함수를_쓰더라도_아무변화가_없다() {
         let queue = CalculatorItemQueue<Int>(head: nil)
         queue.deleteFromQueue()
         XCTAssertNil(queue.head?.nodeValue)

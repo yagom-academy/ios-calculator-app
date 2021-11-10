@@ -7,12 +7,12 @@ protocol CalculateItem {
 
 class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
     func insertToQueue(_ insertValue: T) {
-        addNewNode(insertValue)
+        super.addNewNode(insertValue)
     }
     
     func deleteFromQueue() {
         guard self.head?.nodeValue != nil else { return }
-        deleteFirstNode()
+        super.deleteFirstNode()
     }
 }
 
