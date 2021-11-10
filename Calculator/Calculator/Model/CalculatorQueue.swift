@@ -19,7 +19,7 @@ struct CalculatorItemQueue <T> where T: CalculatorItem {
     }
     
     mutating func dequeue() -> T? {
-        let operation = operationStorage.removeLast()
+        let operation = operationStorage.removeFirst()
         return operation
     }
 }
