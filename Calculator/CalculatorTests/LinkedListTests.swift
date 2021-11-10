@@ -103,6 +103,13 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.convertedToLinkedListArray, convertedExpectedItems)
     }
     
+    func testLinkedListRemove_givenMultipleRemovedFront_expectIsEmpty() {
+        let newItems: [Any] = [20, "+", 20, "-", 2]
+        appendContents(of: newItems, to: &sut)
+        removeFrontUntilEmpty()
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
     private func hasEqualItems(node: Node<Any>?, item: LinkedListItem) -> Bool {
         guard let node = node else {
             return false
