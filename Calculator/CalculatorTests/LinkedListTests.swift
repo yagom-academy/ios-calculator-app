@@ -105,14 +105,6 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func testLinkedListRemoveAll_givenRemoveAllFromElements_expectCleanMemory() {
-        let newItems: [Any] = [20, "+", 20, "-", 2]
-        appendContents(of: newItems, to: &sut)
-        let secondNode = sut.getNode(at: 1)
-        sut.removeAll()
-        XCTAssertEqual(secondNode, nil)
-    }
-    
     private func hasEqualItems(node: Node<Any>?, item: LinkedListItem) -> Bool {
         guard let node = node else {
             return false
@@ -176,6 +168,19 @@ extension LinkedList {
             }
         }
         return listContents
+    }
+    
+    func getNode(at index: Int) -> Node<T>? {
+        guard isNotEmpty else {
+            return nil
+        }
+        var currentNode = head
+        for _ in 0..<index {
+            if let node = currentNode {
+                currentNode = node.next
+            }
+        }
+        return currentNode
     }
 }
 
