@@ -82,6 +82,13 @@ class CalculatorQueueTests: XCTestCase {
         
         XCTAssertEqual(operationCount, 0)
     }
+    
+    func test_calculatorItemQueue가_빈경우에_모두_제거할경우_정상작동하는지() {
+        sut.removeAll()
+        let operationRemoveAllTest = sut.operationStorage.count
+        
+        XCTAssertEqual(operationRemoveAllTest, 0)
+    }
 }
 
 extension String: CalculatorItem { }
