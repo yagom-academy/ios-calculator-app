@@ -12,7 +12,6 @@ struct CalculatorItemQueue {
     
     mutating func enqueue(item: CalculateItem?) {
         guard let item = item else {
-            print("noValueToEnqueue")
             return
         }
         queueList.append(data: item)
