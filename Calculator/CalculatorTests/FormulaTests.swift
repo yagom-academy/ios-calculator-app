@@ -214,4 +214,39 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(result, 8.0)
     }
+    
+    func test_나눗셈연산해보기_피연산자한개() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("/")
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_나눗셈연산해보기_피연산자두개_연산자두개() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("/")
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("/")
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 1.0)
+    }
+    
+    func test_나눗셈연산해보기_피연산자세개() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("/")
+        formula.operands.enqueue(2.0)
+        formula.operators.enqueue("/")
+        formula.operands.enqueue(2.0)
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 0.5)
+    }
 }
