@@ -40,14 +40,14 @@ class LinkedList<T> {
             return nil
         }
         
-        let tempNode = front
+        let resultNode = front
         front = front?.next
         
         if isEmpty {
             rear = nil
         }
         
-        return tempNode
+        return resultNode
     }
     
     func removeAll() {
