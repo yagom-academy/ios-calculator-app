@@ -15,6 +15,9 @@ struct CalculatorItemQueue<Element> {
     var front: Element? {
         list.first
     }
+    var rear: Element? {
+        list.tail?.value
+    }
     var count: Int {
         list.count
     }
