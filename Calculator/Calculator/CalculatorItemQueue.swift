@@ -44,16 +44,15 @@ class LinkedList<T> {
         return count
     }
     
-    private init(head: Node<T>?) {
-        self.head = head
-        self.tail = head
+    init(value: T? = nil) {
+        let value = Node(value)
+        self.head = value
+        self.tail = value
+        
     }
     
-    convenience init(value: T? = nil) {
-        self.init(head: Node(value))
-    }
-    
-    private func append(_ newNode: Node<T>) {
+    func append(_ value: T) {
+        let newNode = Node(value)
         if let tail = tail {
             tail.next = newNode
             self.tail = tail.next
@@ -61,10 +60,6 @@ class LinkedList<T> {
             self.head = newNode
             self.tail = newNode
         }
-    }
-    
-    func append(_ value: T) {
-        append(Node(value))
     }
     
     func removeAll() {
