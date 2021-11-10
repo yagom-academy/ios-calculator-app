@@ -97,4 +97,23 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, 2)
     }
+    
+    func test_연결리스트비어있때isEmpty가true반환() {
+        // given
+        let list = LinkedList<Int>()
+        // when
+        let result = list.isEmpty
+        // then
+        XCTAssertEqual(result, true)
+    }
+    
+    func test_연결리스트안비어있때isEmpty가true반환() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(2)
+        // when
+        let result = list.isEmpty
+        // then
+        XCTAssertEqual(result, false)
+    }
 }

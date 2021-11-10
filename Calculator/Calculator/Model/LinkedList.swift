@@ -29,10 +29,6 @@ class Node<T> {
     convenience init(_ item: T) {
         self.init(item, nil, nil)
     }
-    
-    deinit {
-        print("\(self)가 제거되었습니다")
-    }
 }
 
 final class LinkedList<Element> {
@@ -87,6 +83,24 @@ final class LinkedList<Element> {
         } else {
             head = head?.next
             head?.prev = nil
+        }
+        
+        return item
+    }
+    
+    @discardableResult
+    func removeLast() -> Element? {
+        guard !isEmpty else {
+            return nil
+        }
+        
+        let item = tail?.item
+        if tail?.prev == nil {
+            head = nil
+            tail = nil
+        } else {
+            tail = tail?.prev
+            tail?.next = nil
         }
         
         return item
