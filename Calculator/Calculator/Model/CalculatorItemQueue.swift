@@ -21,4 +21,11 @@ struct CalculatorItemQueue<T> {
     mutating func enqueue(_ item: T) {
         list.append(item)
     }
+    
+    mutating func dequeue() -> T? {
+        guard list.isNotEmpty else {
+            return nil
+        }
+        return list.getHead()
+    }
 }

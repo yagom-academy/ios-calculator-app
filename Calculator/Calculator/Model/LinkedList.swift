@@ -46,6 +46,13 @@ struct LinkedList<T> {
         tail = newNode
     }
     
+    mutating func getHead() -> T? {
+        if let removedHead = removeHead(){
+            return removedHead.item
+        }
+        return nil
+    }
+    
     mutating func removeHead() -> Node<T>? {
         guard isNotEmpty, let oldHead = head else {
             return nil

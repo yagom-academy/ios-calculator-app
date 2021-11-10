@@ -31,6 +31,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let newData = 10
         sut.enqueue(newData)
         let removedItem = sut.dequeue()
+        guard let removedItem = removedItem as? Int else {
+            return
+        }
         XCTAssertEqual(removedItem, newData)
     }
 }
