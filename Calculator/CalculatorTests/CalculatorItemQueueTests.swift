@@ -53,6 +53,13 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(isSameSequence(sequence: sut.convertToArray, otherSequence: newItems))
     }
     
+    func testCalculatorQueueDequeue_givenRemoveAllOfMultipleMixedItems_expectIsEmpty() {
+        let newItems: [Any] = [20, "+", 30, "-", 2]
+        appendContents(of: newItems, to: &sut)
+        sut.removeAll()
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
     func appendContents(of sequence: [Any], to queue: inout CalculatorItemQueue<Any>) {
         for item in sequence {
             queue.enqueue(item)
