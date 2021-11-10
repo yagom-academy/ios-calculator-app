@@ -102,13 +102,21 @@ class FormulaTests: XCTestCase {
         formula = Formula()
     }
     
-    func testCalculateResult() {
+    func testCalculateResult() throws {
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.devide)
         formula.operators.enqueue(.multiply)
         formula.operators.enqueue(.subtract)
         
-        let result = formula.result()
-        XCTAssertEqual(result, ((3.7 + 4.9) - 0.0) / 12.4 * -342.6)
+        do {
+            let result = try formula.result()
+            XCTAssertEqual(result, ((3.7 + 4.9) - 0.0) / 12.4 * -342.6)
+        } catch QueueError.isEmpty {
+            print(QueueError.isEmpty.localizedDescription)
+        } catch OperationError.devidedByZero {
+            print(OperationError.devidedByZero)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
