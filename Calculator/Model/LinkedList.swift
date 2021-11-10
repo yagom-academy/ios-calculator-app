@@ -23,7 +23,7 @@ class LinkedList<T> {
         }
     }
     
-    func addRear(value: T) {
+    func addRear(_ value: T) {
         guard !isEmpty else {
             addFront(value)
             return

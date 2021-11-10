@@ -26,14 +26,14 @@ class LinkedListTests: XCTestCase {
 
     func test_LinkedList에_Node를_추가해서_front에_nil이_안나오게() {
         let node = Node<Int>(value: 5)
-        sut.addRear(value: node.value)
+        sut.addRear(node.value)
         
         XCTAssertNotNil(sut.front)
     }
     
     func test_LinkedList의_add함수에_전달인자로_value를_넣어주고_frontNode의_value와같은지() {
         let value = 5
-        sut.addRear(value: value)
+        sut.addRear(value)
         
         XCTAssertEqual(sut.front?.value, value)
     }
@@ -41,8 +41,8 @@ class LinkedListTests: XCTestCase {
     func test_LinkedList의_add함수에_값을_2개넣으면_순서대로_front_rear가_들어가는지() {
         let value1 = 1
         let value2 = 2
-        sut.addRear(value: value1)
-        sut.addRear(value: value2)
+        sut.addRear(value1)
+        sut.addRear(value2)
         
         XCTAssertEqual(sut.front?.value, value1)
         XCTAssertEqual(sut.rear?.value, value2)
@@ -53,9 +53,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.addRear(value: value1)
-        sut.addRear(value: value2)
-        sut.addRear(value: value3)
+        sut.addRear(value1)
+        sut.addRear(value2)
+        sut.addRear(value3)
         
         XCTAssertEqual(sut.front?.value, value1)
         XCTAssertEqual(sut.rear?.value, value3)
@@ -66,9 +66,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.addRear(value: value1)
-        sut.addRear(value: value2)
-        sut.addRear(value: value3)
+        sut.addRear(value1)
+        sut.addRear(value2)
+        sut.addRear(value3)
         
         let result = sut.removeFront()
         
@@ -80,9 +80,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.addRear(value: value1)
-        sut.addRear(value: value2)
-        sut.addRear(value: value3)
+        sut.addRear(value1)
+        sut.addRear(value2)
+        sut.addRear(value3)
         
         let result1 = sut.removeFront()
         let result2 = sut.removeFront()
@@ -96,9 +96,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.addRear(value: value1)
-        sut.addRear(value: value2)
-        sut.addRear(value: value3)
+        sut.addRear(value1)
+        sut.addRear(value2)
+        sut.addRear(value3)
         
         let result1 = sut.removeFront()
         let result2 = sut.removeFront()
@@ -114,9 +114,9 @@ class LinkedListTests: XCTestCase {
         let value2 = 2
         let value3 = 3
         
-        sut.addRear(value: value1)
-        sut.addRear(value: value2)
-        sut.addRear(value: value3)
+        sut.addRear(value1)
+        sut.addRear(value2)
+        sut.addRear(value3)
         
         sut.removeFront()
         sut.removeFront()
