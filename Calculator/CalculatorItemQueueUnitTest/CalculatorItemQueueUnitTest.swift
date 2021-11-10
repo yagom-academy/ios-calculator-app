@@ -16,6 +16,7 @@ class CalculatorItemQueueUnitTest: XCTestCase {
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
 

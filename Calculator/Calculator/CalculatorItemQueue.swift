@@ -11,8 +11,13 @@ protocol CalculateItem {
     
 }
 
-class CalculatorItemQueue<T> {
+extension Int : CalculateItem {
+    
+}
+
+class CalculatorItemQueue<T: CalculateItem> {
     var calculatorItems = [T]()
+    
     func push(_ item: T) -> [T] {
         calculatorItems.append(item)
         return calculatorItems
