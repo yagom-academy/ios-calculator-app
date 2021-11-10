@@ -65,6 +65,14 @@ class CalculatorQueueTests: XCTestCase {
         
         XCTAssertNil(operationData)
     }
+    
+    func test_calculatorItemQueue_item이_추가되었다가_다빠질경우_nil_반환하는지() {
+        sut.enqueue(operation: "+")
+        sut.dequeue()
+        let operationData = sut.dequeue()
+        
+        XCTAssertNil(operationData)
+    }
 }
 
 extension String: CalculatorItem { }
