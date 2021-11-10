@@ -15,7 +15,7 @@ class CalculatorTests: XCTestCase {
         calculateQueue.enqueue(element: 2)
         calculateQueue.enqueue(element: 3)
         
-        let resultArray = calculateQueue.enqueueArray
+        let resultArray = calculateQueue.enqueueStack
         XCTAssertEqual(resultArray, [1, 2, 3])
     }
     
