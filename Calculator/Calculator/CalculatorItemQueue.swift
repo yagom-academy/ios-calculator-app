@@ -37,16 +37,12 @@ class LinkedList<T> {
     }
     
     func append(value: T) {
+        let newNode: Node<T> = Node(value: value)
         if isEmpty {
-            head = Node(value: value)
+            head = newNode
             return
         }
-        
-        var finderToTail: Node<T>? = head
-        while finderToTail?.next != nil {
-            finderToTail = finderToTail?.next
-        }
-        finderToTail?.next = Node(value: value)
+        tail?.next = newNode
     }
     
     func removeFirst() -> T? {
