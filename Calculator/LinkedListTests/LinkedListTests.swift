@@ -50,4 +50,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
         XCTAssertNil(sut.tail)
     }
+    
+    func test_빈List에서_removeFirst호출시_에러없이nil반환되는지() {
+        //given
+        guard sut.isEmpty else {
+            return
+        }
+        //when
+        let result = sut.removeFirst()
+        //then
+        XCTAssertNil(result)
+    }
 }
