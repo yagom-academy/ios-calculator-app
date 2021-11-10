@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculateItemQueue<T>: CalculateItem {
-    var enqueueStack: [T] = []
-    var dequeueStack: [T] = []
+    private(set) var enqueueStack: [T] = []
+    private(set) var dequeueStack: [T] = []
     
     mutating func enqueue(element: T) {
         enqueueStack.append(element)
