@@ -26,5 +26,9 @@ struct CalculatorItemQueue <T> where T: CalculatorItem {
         let operation = operationStorage.removeFirst()
         return operation
     }
+    
+    func removeAll() {
+        
+    }
 }
 
