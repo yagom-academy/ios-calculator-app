@@ -6,4 +6,4 @@
 
 ### UML
 
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/40068674/140855212-e303ec54-a858-4848-b772-cea87640a2f2.png)
+![Calculator_UML](https://user-images.githubusercontent.com/40068674/141048166-f808a8d5-67f7-41fa-8d4f-7021bddb0b84.png)
