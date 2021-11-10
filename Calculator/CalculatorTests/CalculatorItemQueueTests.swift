@@ -9,7 +9,7 @@ import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
 
-    func test_비어있는큐에1_2_3넣으면첫번째위치로1반환() throws {
+    func test_비어있는큐에1_2_3넣으면첫번째위치로1반환() {
         // given
         let queue = CalculatorItemQueue<Int>()
         queue.enqueue(1)
@@ -21,7 +21,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_비어있는큐에1_2_3넣고dequeue하면1반환() throws {
+    func test_비어있는큐에1_2_3넣고dequeue하면1반환() {
         // given
         let queue = CalculatorItemQueue<Int>()
         queue.enqueue(1)
@@ -33,7 +33,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_비어있는큐에1_2_3넣고dequeue하면맨앞에2반환() throws {
+    func test_비어있는큐에1_2_3넣고dequeue하면맨앞에2반환() {
         // given
         let queue = CalculatorItemQueue<Int>()
         queue.enqueue(1)
@@ -46,7 +46,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_비어있는큐에1_2_3넣고count하면3반환() throws {
+    func test_비어있는큐에1_2_3넣고count하면3반환() {
         // given
         let queue = CalculatorItemQueue<Int>()
         queue.enqueue(1)
@@ -58,7 +58,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_비어있는큐에count하면0반환() throws {
+    func test_비어있는큐에count하면0반환() {
         // given
         let queue = CalculatorItemQueue<Int>()
         // when
