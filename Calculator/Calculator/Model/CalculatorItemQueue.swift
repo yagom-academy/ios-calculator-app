@@ -19,7 +19,7 @@ class CalculatorItemQueue {
     }
     
     func dequeue() {
-        guard queue.count != 0 else {
+        guard queue.count > 0 else {
             return 
         }
         queue.removeFirst()
