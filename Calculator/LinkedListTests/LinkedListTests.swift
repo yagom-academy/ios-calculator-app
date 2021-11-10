@@ -78,7 +78,7 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
-    //MARK:- first tests
+    // MARK:- first tests
     func test_빈List에_first를요청하면_nil반환() {
         //given
         guard sut.isEmpty else { return }
@@ -104,6 +104,33 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(result, 4)
     }
+    // MARK:- count tests
+    func test_빈List에_count를요청하면_0반환() {
+        //given
+        guard sut.isEmpty else { return }
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 0)
+    }
+    func test_4가있는List에_count요청하면_1반환() {
+        //given
+        sut.append(4)
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    func test_4와9가있는List에_count요청하면_2반환() {
+        //given
+        sut.append(4)
+        sut.append(9)
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 2)
+    }
 }
+
 
 
