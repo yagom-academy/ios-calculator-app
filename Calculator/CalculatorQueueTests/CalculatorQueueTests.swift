@@ -44,6 +44,13 @@ class CalculatorQueueTests: XCTestCase {
         
         XCTAssertEqual(testArr[0], "-")
     }
+    
+    func test_calculatorItemQueue_item을_내부저장소에서_제대로_반환하는지() {
+        sut.enqueue(operation: "-")
+        let operationData = sut.dequeue()
+        
+        XCTAssertEqual(operationData, "-")
+    }
 }
 
 extension String: CalculatorItem { }

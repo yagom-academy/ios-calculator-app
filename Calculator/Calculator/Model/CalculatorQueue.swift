@@ -18,8 +18,8 @@ struct CalculatorItemQueue <T> where T: CalculatorItem {
         operationStorage.append(operation)
     }
     
-    mutating func dequeue() -> T {
-        return operationStorage.removeFirst()
+    mutating func dequeue() -> T? {
+        return nil
     }
 }
 
