@@ -18,6 +18,16 @@ class Node<T> {
 
 class LinkedList<T> {
     var head: Node<T>?
+    var tail: Node<T>? {
+        if isEmpty {
+            return nil
+        }
+        
+        while head?.next != nil {
+            head = head?.next
+        }
+        return head
+    }
     var isEmpty: Bool {
         return head == nil
     }
