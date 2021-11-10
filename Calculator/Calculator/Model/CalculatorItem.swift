@@ -20,23 +20,3 @@ enum OperatorItem: CalcultorItem {
 
 protocol CalcultorItem { }
 
-extension NumberItem {
-    var dataToString: String {
-        return String(describing: self.data)
-    }
-}
-
-extension OperatorItem {
-    var operatorSymbol: String {
-        switch self {
-        case .add:
-            return "+"
-        case .substract:
-            return "-"
-        case .multiple:
-            return "*"
-        case .divide:
-            return "/"
-        }
-    }
-}

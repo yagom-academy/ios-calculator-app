@@ -57,23 +57,7 @@ struct LinkedList {
 }
 
 extension LinkedList {
-    func searchAll() -> [CalcultorItem] {
-        var searchedList:[CalcultorItem] = []
-        if head == nil {
-            return []
-        }
-        
-        var node = head
-        if let nodeData = node?.data {
-            searchedList.append(nodeData)
-        }
-        
-        while node?.next != nil {
-            node = node?.next
-            if let nodeData = node?.data {
-                searchedList.append(nodeData)
-            }
-        }
-        return searchedList
+    var headForTest: Node? {
+        return self.head
     }
 }
