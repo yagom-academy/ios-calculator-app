@@ -36,4 +36,14 @@ class CalculatorItemQueueTests: XCTestCase {
         }
         XCTAssertEqual(removedItem, newData)
     }
+    
+    func testCalculatorItemQueueDequeue_givenNewOperator_expectFirstItemEqualToInsertedItem() {
+        let newData = "+"
+        sut.enqueue(newData)
+        let removedItem = sut.dequeue()
+        guard let removedItem = removedItem as? String else {
+            return
+        }
+        XCTAssertEqual(removedItem, newData)
+    }
 }
