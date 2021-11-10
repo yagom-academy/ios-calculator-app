@@ -98,6 +98,13 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
+    func testLinkedListRemoveAll_givenRemoveAllFromElements_expectIsEmpty() {
+        let newItems: [Any] = [20, "+", 20, "-", 2]
+        appendContents(of: newItems, to: &sut)
+        sut.removeAll()
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
     private func hasEqualItems(node: Node<Any>?, item: LinkedListItem) -> Bool {
         guard let node = node else {
             return false
