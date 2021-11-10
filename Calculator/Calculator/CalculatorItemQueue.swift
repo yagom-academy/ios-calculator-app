@@ -20,9 +20,9 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         enQueueElements.append(element)
     }
     
-    mutating func deQueueFirstElement() -> Element? {
+    mutating func deQueueFirstElement() throws -> Element? {
         if enQueueElements.isEmpty && deQueueElements.isEmpty {
-            return nil
+            throw CalculatorError.emptyQueue
         }
         if deQueueElements.isEmpty {
             deQueueElements = enQueueElements.reversed()
