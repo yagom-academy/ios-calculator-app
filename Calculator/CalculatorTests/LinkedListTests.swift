@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-enum LinkedListItem: Equatable {
+enum LinkedListItem: Equatable, CalculateItem {
     case number(value: Int)
     case symbol(value: String)
 }

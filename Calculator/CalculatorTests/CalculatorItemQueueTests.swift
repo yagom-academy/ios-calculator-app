@@ -26,4 +26,10 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(newData)
         XCTAssertTrue(sut.isNotEmpty)
     }
+    
+    func testCalculatorItemQueueEnqueue_givenNewInteger_expectFirstItemEqualToInsertedItem() {
+        let newData = 10
+        sut.enqueue(newData)
+        XCTAssertEqual(sut.first, newData)
+    }
 }
