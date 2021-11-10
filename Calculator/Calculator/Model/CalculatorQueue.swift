@@ -11,19 +11,15 @@ protocol CalculatorItem {
     
 }
 
-struct CalculatorItemQueue {
-    var operationStorage: [CalculatorItem] = []
+struct CalculatorItemQueue <T> where T: CalculatorItem {
+    var operationStorage: [T] = []
     
-    mutating func enqueue(operation: CalculatorItem) {
+    mutating func enqueue(operation: T) {
         operationStorage.append(operation)
     }
     
-    func dequeue() -> CalculatorItem {
-        return ""
+    mutating func dequeue() -> T {
+        return operationStorage.removeFirst()
     }
-}
-
-extension String: CalculatorItem {
-
 }
 

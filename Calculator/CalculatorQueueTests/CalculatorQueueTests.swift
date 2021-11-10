@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 class CalculatorQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<String>!
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
@@ -33,4 +33,17 @@ class CalculatorQueueTests: XCTestCase {
 
         XCTAssertEqual(operationCount, 2)
     }
+    
+    func test_calculatorItemQueue_item이_내부저장소에_순서대로_저장되는지() {
+        sut.enqueue(operation: "-")
+        sut.enqueue(operation: "+")
+        sut.enqueue(operation: "=")
+        
+        var testArr: [String] = []
+        testArr.append(sut.operationStorage.removeFirst())
+        
+        XCTAssertEqual(testArr[0], "-")
+    }
 }
+
+extension String: CalculatorItem { }
