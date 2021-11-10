@@ -26,84 +26,72 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
     func testLinkedListAppend_givenNewNode_expectNotEmpty() {
         let newItem = 10
         sut.append(newItem)
         XCTAssertTrue(sut.isNotEmpty)
     }
     
-    func testLinkedListAppend_givenNewIntegers_expectHeadEqualToFirstItem() {
+    func testLinkedListAppend_givenNewIntegers_expectHeadEqualToFirstInsertedItem() {
         let newItems = [1, 2]
-        let firstInsertedItem = LinkedListItem.number(value: newItems[0])
         appendContents(of: newItems, to: &sut)
+        let firstInsertedItem = LinkedListItem.number(value: newItems[0])
         XCTAssertTrue(hasEqualItems(node: sut.head, item: firstInsertedItem))
     }
     
-    func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastItem() {
+    func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastInsertedItem() {
         let newItems = [1, 2, 3, 4]
-        let lastInsertedItem = LinkedListItem.number(value: newItems[newItems.count-1])
         appendContents(of: newItems, to: &sut)
+        let lastInsertedItem = LinkedListItem.number(value: newItems[newItems.count-1])
         XCTAssertTrue(hasEqualItems(node: sut.tail, item: lastInsertedItem))
     }
     
-    func testLinkedListNode_givenNewCharacter_expectHeadEqualToItem() {
+    func testLinkedListNode_givenNewOperator_expectHeadEqualToInsertedItem() {
         let newCharacter = "+"
-        let newItem = LinkedListItem.symbol(value: newCharacter)
         sut.append(newCharacter)
-        XCTAssertTrue(hasEqualItems(node: sut.head, item: newItem))
+        let newInsertedItem = LinkedListItem.symbol(value: newCharacter)
+        XCTAssertTrue(hasEqualItems(node: sut.head, item: newInsertedItem))
     }
     
-    func testLinkedListAppend_givenNewIntegers_expectSameElements() {
+    func testLinkedListAppend_givenNewIntegers_expectCorrectSequence() {
         let newItems = [1,2,3,4,5,6,7,8,9,10]
-        let convertedItems = convertToLinkedListArray(from: newItems)
         appendContents(of: newItems, to: &sut)
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedItems)
+        let convertedNewItems = convertToLinkedListArray(from: newItems)
+        XCTAssertEqual(sut.convertedToLinkedListArray, convertedNewItems)
     }
     
-    func testLinkedListAppend_givenNewOperators_expectSameElements() {
+    func testLinkedListAppend_givenNewOperators_expectCorrectSequence() {
         let newItems = ["+", "-", "*", "/"]
-        let convertedItems = convertToLinkedListArray(from: newItems)
         appendContents(of: newItems, to: &sut)
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedItems)
+        let convertedNewItems = convertToLinkedListArray(from: newItems)
+        XCTAssertEqual(sut.convertedToLinkedListArray, convertedNewItems)
     }
     
-    func testLinkedListAppend_givenMixedElements_expectSameElements() {
+    func testLinkedListAppend_givenMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
-        let convertedItems: [LinkedListItem] = convertToLinkedListArray(from: newItems)
         appendContents(of: newItems, to: &sut)
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedItems)
+        let convertedNewItems = convertToLinkedListArray(from: newItems) as [LinkedListItem]
+        XCTAssertEqual(sut.convertedToLinkedListArray, convertedNewItems)
     }
     
-    func testLinkedListRemove_givenRemovedFront_expectCorrectElement() {
+    func testLinkedListRemove_givenRemovedHeadFromMixedElements_expectRemovedHeadEqualToFirstInsertedItem() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
-        let firstItem = LinkedListItem.number(value: 20)
         appendContents(of: newItems, to: &sut)
         let removedNode = sut.removeHead()
-        XCTAssertTrue(hasEqualItems(node: removedNode, item: firstItem))
+        let firstInsertedItem = LinkedListItem.number(value: 20)
+        XCTAssertTrue(hasEqualItems(node: removedNode, item: firstInsertedItem))
     }
     
-    func testLinkedListRemove_givenRemovedFront_expectCorrectElements() {
+    func testLinkedListRemove_givenRemovedHeadFromMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
         appendContents(of: newItems, to: &sut)
         let _ = sut.removeHead()
         let exepectedItems: [Any] = ["+", 20, "-", 2]
-        let convertedExpectedItems: [LinkedListItem] = convertToLinkedListArray(from: exepectedItems)
+        let convertedExpectedItems = convertToLinkedListArray(from: exepectedItems) as [LinkedListItem]
         XCTAssertEqual(sut.convertedToLinkedListArray, convertedExpectedItems)
     }
     
-    func testLinkedListRemove_givenMultipleRemovedFront_expectIsEmpty() {
+    func testLinkedListRemove_givenMultipleRemovedHeadFromMixedElements_expectIsEmpty() {
         let newItems: [Any] = [20, "+", 20, "-", 2]
         appendContents(of: newItems, to: &sut)
         removeHeadUntilEmpty(from: &sut)
