@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
-    
+struct CalculatorItemQueue<T> {
+    let items: LinkedList<T> = LinkedList<T>()
 }
