@@ -19,6 +19,23 @@ struct LinkedList<Element> {
         }
         return node
     }
+    var isEmpty: Bool {
+        head == nil ? true : false
+    }
+    var first: Element? {
+        head?.value
+    }
+    var count: Int {
+        var nodeCount = 0
+        guard var node = head else {
+            return nodeCount
+        }
+        while let currentNode = node.next {
+            nodeCount += 1
+            node = currentNode
+        }
+        return nodeCount
+    }
     
     mutating func append(_ item: Element) {
         let newNode = Node(item)
