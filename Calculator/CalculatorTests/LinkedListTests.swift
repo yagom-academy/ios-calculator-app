@@ -111,7 +111,15 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, 0)
     }
-
     
-
+    func test_큐에1_2넣고마지막원소찾으면2반환() {
+        // given
+        let list = LinkedList<Int>()
+        list.append(1)
+        list.append(2)
+        // when
+        let result = list.last
+        // then
+        XCTAssertEqual(result, 2)
+    }
 }
