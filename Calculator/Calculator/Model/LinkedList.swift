@@ -19,18 +19,19 @@ class Node {
 
 struct LinkedList {
     private var head: Node?
+    private var tail: Node?
     
     mutating func append(data: CalculateItem?) {
-        if head == nil {
-            self.head = Node(data: data)
-            return
-        }
+        let newNode = Node(data: data)
         
-        var node = head
-        while node?.next != nil {
-            node = node?.next
+        if tail != nil {
+            tail?.next = newNode
         }
-        node?.next = Node(data: data)
+        tail = newNode
+        
+        if head == nil {
+            self.head = tail
+        }
     }
     
     mutating func removeFrist() -> CalculateItem? {
