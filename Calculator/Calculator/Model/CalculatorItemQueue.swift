@@ -8,7 +8,7 @@
 import Foundation
 
 class CalculatorItemQueue {
-    var queue: [CalculateItem] = []
+    private var queue: [CalculateItem] = []
     
     func enqueue(_ item: Double) {
         queue.append(item)
