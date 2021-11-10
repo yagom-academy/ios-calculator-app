@@ -30,6 +30,7 @@ struct LinkedList<Element> {
         guard var node = head else {
             return nodeCount
         }
+        nodeCount += 1
         while let currentNode = node.next {
             nodeCount += 1
             node = currentNode
