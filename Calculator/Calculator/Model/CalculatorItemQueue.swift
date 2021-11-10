@@ -14,6 +14,10 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T> {
     var list = LinkedList<T>()
     
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+    
     var isNotEmpty: Bool {
         return list.isNotEmpty
     }
@@ -27,5 +31,9 @@ struct CalculatorItemQueue<T> {
             return nil
         }
         return list.getHead()
+    }
+    
+    mutating func removeAll() {
+        list.removeAll()
     }
 }
