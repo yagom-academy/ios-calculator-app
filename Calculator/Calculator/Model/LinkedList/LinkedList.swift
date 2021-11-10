@@ -40,7 +40,7 @@ class LinkedList<T> {
         } else {
             head = newNode
         }
-        self.tail = newNode
+        tail = newNode
     }
     
     @discardableResult
