@@ -14,13 +14,6 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T> {
     var list = LinkedList<T>()
     
-//    var first: CalculateItem? {
-//        guard let firstItem = list.first else {
-//            return nil
-//        }
-//        return firstItem
-//    }
-    
     var isNotEmpty: Bool {
         return list.isNotEmpty
     }
