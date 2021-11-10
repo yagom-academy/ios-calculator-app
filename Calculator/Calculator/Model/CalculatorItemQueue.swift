@@ -20,7 +20,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         enQueueElements.append(element)
     }
     
-    mutating func deQueueFirstElement() throws -> Element? {
+    mutating func deQueueFirstElement() throws -> Element {
         if enQueueElements.isEmpty && deQueueElements.isEmpty {
             throw CalculatorError.emptyQueue
         }

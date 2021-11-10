@@ -26,19 +26,17 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(queue.enQueueElements, [1, 2, 3])
     }
     
-    func test_deQueue를_실행했을때_빈배열이면_nil을_반환하는지() {
+    func test_deQueue를_실행했을때_빈배열이면_에러를던지는지() {
         var queue = CalculatorItemQueue<Int>()
-        queue.deQueueFirstElement()
-        
-        XCTAssertNil(queue.deQueueFirstElement())
+       
+        XCTAssertThrowsError(try queue.deQueueFirstElement())
     }
     
     func test_enQueue에_요소한개를_추가하고_deQueue했을때_빠지는지() {
         var queue = CalculatorItemQueue<Int>()
         queue.enQueueElement(1)
-        queue.deQueueFirstElement()
         
-        XCTAssertNil(queue.deQueueFirstElement())
+        XCTAssertThrowsError(try queue.deQueueFirstElement())
     }
     
     func test_enQueue에_요소여러개를_추가하고_deQueue했을때_마지막요소가_빠지는지() {
@@ -47,8 +45,6 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enQueueElement(2)
         queue.enQueueElement(3)
         
-        if let result = queue.deQueueFirstElement() {
-            XCTAssertEqual(result, 1)
-        }
+        XCTAssertEqual(try queue.deQueueFirstElement(), 1)
     }
 }
