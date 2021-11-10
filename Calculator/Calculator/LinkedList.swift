@@ -34,7 +34,9 @@ struct LinkedList {
     }
     
     mutating func removeFrist() -> CalcultorItem? {
-        if head == nil { return nil }
+        if head == nil {
+            return nil
+        }
         
         var removedData: CalcultorItem? = nil
         if head?.next == nil {
@@ -49,13 +51,17 @@ struct LinkedList {
     }
     
     var isEmpty: Bool {
-        if head == nil { return true }
+        if head == nil {
+            return true
+        }
         return false
     }
     
     func searchAll() -> [CalcultorItem] {
         var searchedList:[CalcultorItem] = []
-        if head == nil { return [] }
+        if head == nil {
+            return []
+        }
         
         var node = head
         if let nodeData = node?.data {

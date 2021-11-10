@@ -11,31 +11,47 @@ import XCTest
 class CalculatorTests: XCTestCase {
     var queue: CalculatorItemQueue = CalculatorItemQueue()
     
-    func testQueueListappend() {
+    // MARK: QueueList isEmpty test
+    func test_QueueListisnotEmpty() {
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()).isEmpty, true)
+    }
+    
+    // MARK: CalculatorItemQueue enqueue test
+    func test_QueueListEnqueue() {
         queue.enqueue(item: NumberItem(data: 1))
         
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["1"])
     }
-
-    func testQueueListisnotEmpty() {
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()).isEmpty, true)
-    }
-
-
-    func testQueueSort() {
+    
+    func test_QueueListSort() {
         queue.enqueue(item: NumberItem(data: 2))
         queue.enqueue(item: NumberItem(data: 1))
 
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["2","1"])
     }
 
-    func testQueueAppendnil() {
+    func test_QueueListEnqueueNil() {
         queue.enqueue(item: nil)
 
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
     }
+    
+    func test_QueueListEnqueueOperatorItem() {
+        queue.enqueue(item: OperatorItem.add)
 
-    func testQueueRemove() {
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+"])
+    }
+
+    func test_QueueListEnqueueOperatorAndNumber() {
+        queue.enqueue(item: OperatorItem.add)
+        queue.enqueue(item: OperatorItem.divide)
+        queue.enqueue(item: NumberItem(data: 2))
+
+        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+","/","2"])
+    }
+    
+    // MARK: CalculatorItemQueue dequeue test
+    func test_QueueListDequeue() {
 
         guard let removedItem = queue.dequeue() else {
             return
@@ -48,8 +64,8 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(data, "1")
     }
 
-    func testEmptyQueueRemove() {
-        let data1 = queue.dequeue()
+    func test_EmptyQueueListDequeue() {
+        _ = queue.dequeue()
         let data2 = queue.dequeue()
 
         var data: String?
@@ -59,28 +75,16 @@ class CalculatorTests: XCTestCase {
 
         XCTAssertEqual(data, nil)
     }
-
-    func testQueueListClear() {
+    
+    // MARK: CalculatorItemQueue clearQueue test
+    func test_QueueListClear() {
         queue.clearQueue()
 
         XCTAssertEqual(convertList(list: queue.queueList.searchAll()), [])
     }
 
-    func testQueueListappendOperatorItem() {
-        queue.enqueue(item: OperatorItem.add)
-
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+"])
-    }
-
-    func testQueueListAppendOperatorAndNumber() {
-        queue.enqueue(item: OperatorItem.add)
-        queue.enqueue(item: OperatorItem.divide)
-        queue.enqueue(item: NumberItem(data: 2))
-
-        XCTAssertEqual(convertList(list: queue.queueList.searchAll()), ["+","/","2"])
-    }
-
-    func testAnotherCalculatorQueueInit() {
+    // MARK: CalculatorItemQueue Several Queue test
+    func test_AnotherQueueListInit() {
         var calculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
         var preparedCalculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
 
@@ -93,6 +97,7 @@ class CalculatorTests: XCTestCase {
 
     func convertList(list: [CalcultorItem]) -> [String] {
         var compareList:[String] = []
+        
         for item in list {
             if let number = item as? NumberItem {
                 compareList.append(number.dataToString)
@@ -101,6 +106,7 @@ class CalculatorTests: XCTestCase {
                 compareList.append(operatorItem.operatorSymbol)
             }
         }
+        
         return compareList
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    var queueList: LinkedList = LinkedList()
+    private(set) var queueList: LinkedList = LinkedList()
     
     mutating func enqueue(item: CalcultorItem?) {
         guard let item = item else {
