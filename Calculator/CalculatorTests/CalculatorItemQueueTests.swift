@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<LinkedListItem>!
+    var sut: CalculatorItemQueue<Any>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -23,15 +23,14 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func testCalculatorItemQueueEnqueue_givenNewInteger_expectNotEmpty() {
         let newData = 10
-        let testableItem = LinkedListItem.number(value: newData)
-        sut.enqueue(testableItem)
+        sut.enqueue(newData)
         XCTAssertTrue(sut.isNotEmpty)
     }
     
-    func testCalculatorItemQueueEnqueue_givenNewInteger_expectFirstItemEqualToInsertedItem() {
+    func testCalculatorItemQueueDequeue_givenNewInteger_expectFirstItemEqualToInsertedItem() {
         let newData = 10
-        let testableItem = LinkedListItem.number(value: newData)
-        sut.enqueue(testableItem)
-        XCTAssertEqual(sut.first, testableItem)
+        sut.enqueue(newData)
+        let removedItem = sut.dequeue()
+        XCTAssertEqual(removedItem, newData)
     }
 }

@@ -57,21 +57,21 @@ class LinkedListTests: XCTestCase {
         let newItems = [1,2,3,4,5,6,7,8,9,10]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems)
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedNewItems)
+        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
     }
     
     func testLinkedListAppend_givenNewOperators_expectCorrectSequence() {
         let newItems = ["+", "-", "*", "/"]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems)
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedNewItems)
+        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
     }
     
     func testLinkedListAppend_givenMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems) as [LinkedListItem]
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedNewItems)
+        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
     }
     
     func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectRemovedHeadEqualToFirstInsertedItem() {
@@ -88,7 +88,7 @@ class LinkedListTests: XCTestCase {
         let _ = sut.removeHead()
         let exepectedItems: [Any] = ["+", 30, "-", 2]
         let convertedExpectedItems = convertToLinkedListArray(from: exepectedItems) as [LinkedListItem]
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedExpectedItems)
+        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExpectedItems)
     }
     
     func testLinkedListRemoveHead_givenMultipleRemovedHeadFromMixedElements_expectIsEmpty() {
@@ -104,7 +104,7 @@ class LinkedListTests: XCTestCase {
         let _ = sut.removeNode(at: 1)
         let expectedItems: [Any] = [20, 30, "-", 2]
         let convertedExepectedItems = convertToLinkedListArray(from: expectedItems)
-        XCTAssertEqual(sut.convertedToLinkedListArray, convertedExepectedItems)
+        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExepectedItems)
     }
     
     func testLinkedListRemoveAll_givenRemoveAllFromElements_expectIsEmpty() {
@@ -167,7 +167,7 @@ extension LinkedList {
         return count
     }
     
-    var convertedToLinkedListArray: [LinkedListItem] {
+    var convertedToLinkedListItemArray: [LinkedListItem] {
         var pointer = head
         var listContents: [LinkedListItem] = []
         while pointer != nil {
