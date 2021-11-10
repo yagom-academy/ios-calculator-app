@@ -54,15 +54,10 @@ struct LinkedList<T> {
     }
     
     mutating func removeHead() -> Node<T>? {
-        guard isNotEmpty, let oldHead = head else {
+        guard isNotEmpty, let nodeToBeRemoved = getNode(at:0) else {
             return nil
         }
-        guard let newHead = oldHead.next else {
-            head = nil
-            return oldHead
-        }
-        head = newHead
-        return oldHead
+        return remove(node: nodeToBeRemoved)
     }
     
     mutating func removeAll() {
