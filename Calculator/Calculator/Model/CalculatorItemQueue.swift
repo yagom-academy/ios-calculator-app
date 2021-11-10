@@ -7,26 +7,20 @@
 
 import Foundation
 
-struct CalculatorItemQueue: CalculateItem {
 struct CalculatorItemQueue<T: CalculateItem> {
     let linkedList = LinkedList<T>()
     
-    func enqueue(_ computingValue: Double, _ operator: String) {
-        computingValueList.append(computingValue)
-        operatorList.append(`operator`)
+    func enqueue(_ value: T) {
+        linkedList.append(value)
     }
     
-    func dequeue() -> (Double, String) {
-        guard let dequeuedValue = computingValueList.removeFirst(),
-              let dequeuedOperator = operatorList.removeFirst() else {
-            return (0, "")
-        }
+    func dequeue() -> T? {
+        let node = linkedList.removeFirst()
         
-        return (dequeuedValue.value, dequeuedOperator.value)
+        return node?.value
     }
     
     func resetQueue() {
-        computingValueList.removeAll()
-        operatorList.removeAll()
+        linkedList.removeAll()
     }
 }
