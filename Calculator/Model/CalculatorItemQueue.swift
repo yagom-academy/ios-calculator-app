@@ -9,4 +9,8 @@ import Foundation
 
 struct CalculatorItemQueue<T> {
     let items: LinkedList<T> = LinkedList<T>()
+    
+    func enqueue(item: T) {
+        
+    }
 }

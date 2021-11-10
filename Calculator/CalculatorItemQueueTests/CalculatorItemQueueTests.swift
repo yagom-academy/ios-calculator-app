@@ -23,4 +23,14 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertTrue(isEmpty)
     }
+    
+    func test_CalculatorItemQueue에enqueue했을때_Items이_비어있지않는지() {
+        let item = 1
+        
+        sut.enqueue(item: item)
+        
+        let result = sut.items.isEmpty
+        
+        XCTAssertFalse(result)
+    }
 }
