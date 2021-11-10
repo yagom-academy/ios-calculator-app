@@ -45,4 +45,8 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         XCTAssertEqual(result, ["+"])
     }
     
+    func test_빈_큐에_pop을_하면_에러가_난다() {
+        let result = sut.dequeue()
+        XCTAssertEqual(result, [])
+    }
 }

@@ -29,9 +29,14 @@ class CalculatorItemQueue<T: CalculateItem> {
     }
     
     func dequeue() -> [T] {
+        guard calculatorItems.isEmpty == false else {
+            return calculatorItems
+        }
         temporaryItems = calculatorItems.reversed()
         temporaryItems.removeLast()
         calculatorItems = temporaryItems.reversed()
+        temporaryItems.removeAll()
+        
         return calculatorItems
     }
 }
