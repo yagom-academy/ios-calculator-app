@@ -3,10 +3,14 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
+    var testQueue: CalculatorItemQueue!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        testQueue = CalculatorItemQueue()
+    }
     
     func testSumCase() {
-        var testQueue = CalculatorItemQueue()
-        
         for iterator in (1...10) {
             testQueue.enqueue(Adder(value: Double(iterator)))
         }
@@ -15,8 +19,6 @@ class CalculatorTests: XCTestCase {
     }
     
     func testSubtractCase() {
-        var testQueue = CalculatorItemQueue()
-        
         for iterator in (1...10) {
             testQueue.enqueue(Subtractor(value: Double(iterator)))
         }
@@ -25,8 +27,6 @@ class CalculatorTests: XCTestCase {
     }
     
     func testMultiplyCase() {
-        var testQueue = CalculatorItemQueue()
-        
         testQueue.enqueue(Adder(value: 100))
         for iterator in (1...3) {
             testQueue.enqueue(Multiplier(value: Double(iterator)))
@@ -36,8 +36,6 @@ class CalculatorTests: XCTestCase {
     }
     
     func testDivideCase() {
-        var testQueue = CalculatorItemQueue()
-        
         testQueue.enqueue(Adder(value: 60))
         for iterator in (1...3) {
             testQueue.enqueue(Divider(value: Double(iterator)))
@@ -47,8 +45,6 @@ class CalculatorTests: XCTestCase {
     }
     
     func testClearCase() {
-        var testQueue = CalculatorItemQueue()
-        
         testQueue.enqueue(Adder(value: 10))
         testQueue.enqueue(Divider(value: 5))
         testQueue.enqueue(Multiplier(value: 20))
@@ -57,5 +53,15 @@ class CalculatorTests: XCTestCase {
         testQueue.allClear()
         
         XCTAssertEqual(testQueue.calculate(), 0)
+    }
+    
+    func testDividedZero() {
+        testQueue.enqueue(Adder(value: 10))
+        testQueue.enqueue(Divider(value: 5))
+        testQueue.enqueue(Divider(value: 0))
+        testQueue.enqueue(Adder(value: 10))
+        testQueue.enqueue(Divider(value: 2))
+        
+        XCTAssertEqual(testQueue.calculate().isInfinite, true)
     }
 }
