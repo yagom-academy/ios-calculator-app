@@ -31,4 +31,17 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, nodes)
     }
+    
+    func test_nodes프로퍼티에_push메서드로값을넣어_값이_확인되는지_여부() {
+        //given
+        let result = [2]
+        //when
+        calculatorItemQueue.push(1)
+        calculatorItemQueue.push(2)
+        calculatorItemQueue.deleteFront()
+        
+        let nodes = calculatorItemQueue.bringNodes()
+        //then
+        XCTAssertEqual(nodes, result)
+    }
 }
