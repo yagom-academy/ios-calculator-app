@@ -53,5 +53,37 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(firstCalculatedAnswer, 3.7 + 4.3)
         XCTAssertEqual(finalCalculatedAnswer, 3.7 + 4.3 - 11.8)
     }
+    
+    func testDevideAndMultiply() {
+        guard let solidus = Operator(rawValue: "/") else {
+            return
+        }
+        guard let star = Operator(rawValue: "*") else {
+            return
+        }
+        operators.enqueue(solidus)
+        operators.enqueue(star)
+        guard let firstOperator = try? operators.dequeue() else {
+            return
+        }
+        guard let secondOperator = try? operators.dequeue() else {
+            return
+        }
+        guard let firstOperand = try? operands.dequeue() else {
+            return
+        }
+        guard let secondOperand = try? operands.dequeue() else {
+            return
+        }
+        guard let thirdOperand = try? operands.dequeue() else {
+            return
+        }
+        
+        let firstCalculatedAnswer = firstOperator.calculate(lhs: firstOperand, rhs: secondOperand)
+        let finalCalculatedAnswer = secondOperator.calculate(lhs: firstCalculatedAnswer, rhs: thirdOperand)
+        
+        XCTAssertEqual(firstCalculatedAnswer, 3.7 / 4.3)
+        XCTAssertEqual(finalCalculatedAnswer, 3.7 / 4.3 * 11.8)
+    }
 
 }
