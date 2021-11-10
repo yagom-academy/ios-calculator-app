@@ -51,6 +51,14 @@ class CalculatorQueueTests: XCTestCase {
         
         XCTAssertEqual(operationData, "-")
     }
+    
+    func test_calculatorItemQueue_item이_2개_또는_그이상이_들어올경우_먼저온순서대로_반환하는지() {
+        sut.enqueue(operation: "+")
+        sut.enqueue(operation: "-")
+        let operationData = sut.dequeue()
+        
+        XCTAssertEqual(operationData, "+")
+    }
 }
 
 extension String: CalculatorItem { }
