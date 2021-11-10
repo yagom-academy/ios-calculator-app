@@ -86,6 +86,11 @@ final class LinkedList<Element> {
         }
     }
     
+    @discardableResult
+    func removeFirst() -> Element? {
+        self.remove(at: 0)
+    }
+    
     subscript(_ index: Int) -> Element? {
         var ptr = head
         for _ in 0..<index {

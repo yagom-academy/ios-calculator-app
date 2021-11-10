@@ -107,7 +107,7 @@ class LinkedListTests: XCTestCase {
         let list = LinkedList<Int>()
         list.append(0)
         // when
-        let result = list.first?.removeFirst()
+        let result = list.removeFirst()
         // then
         XCTAssertEqual(result, 0)
     }
