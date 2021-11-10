@@ -39,6 +39,7 @@ struct LinkedList {
         }
         
         var removedData: CalcultorItem? = nil
+        
         if head?.next == nil {
             removedData = head?.data
             self.head = head?.next
@@ -51,10 +52,7 @@ struct LinkedList {
     }
     
     var isEmpty: Bool {
-        if head == nil {
-            return true
-        }
-        return false
+        return head == nil ? true : false 
     }
     
     func searchAll() -> [CalcultorItem] {

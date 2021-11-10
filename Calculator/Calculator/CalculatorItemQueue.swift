@@ -18,12 +18,7 @@ struct CalculatorItemQueue {
     }
     
     mutating func dequeue() -> CalcultorItem? {
-        if queueList.isEmpty {
-            return nil
-        }
-        let removedItem = queueList.removeFrist()
-
-        return removedItem
+        return queueList.isEmpty ? nil : queueList.removeFrist()
     }
 
     mutating func clearQueue() {
