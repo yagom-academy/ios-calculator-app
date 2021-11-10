@@ -98,6 +98,12 @@ class CalculatorItemQueueTests: XCTestCase {
         }
         return nil
     }
+    
+    private func removeAll(of queue: inout CalculatorItemQueue<Any>) {
+        while queue.isNotEmpty {
+            let _ = queue.dequeue()
+        }
+    }
 }
 
 extension CalculatorItemQueue {
