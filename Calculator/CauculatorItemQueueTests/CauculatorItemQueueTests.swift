@@ -105,4 +105,33 @@ class CauculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertEqual(result, 4)
     }
+    
+    // MARK:- count tests
+    func test_빈큐에서_count를요청하면_0반환하는지() {
+        //given
+        guard sut.isEmpty else {
+            return
+        }
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 0)
+    }
+    func test_4추가한큐에서_count요청하면_1반환하는지() {
+        //given
+        sut.enqueue(4)
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    func test_4와7추가한큐에서_count요청하면_2반환하는지() {
+        //given
+        sut.enqueue(4)
+        sut.enqueue(7)
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 2)
+    }
 }
