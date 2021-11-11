@@ -8,8 +8,8 @@
 import Foundation
 
 class LinkedList<T> {
-    var front: Node<T>?
-    var rear: Node<T>?
+    private(set) var front: Node<T>?
+    private(set) var rear: Node<T>?
     
     var isEmpty: Bool {
         return front == nil
