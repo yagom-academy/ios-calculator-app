@@ -10,20 +10,20 @@ import Foundation
 protocol CalculateItem {
 }
 
-class Node {
-    let value: String
+class Node<T> {
+    let value: T?
     var next: Node?
     
-    init(value: String, next: Node?) {
+    init(value: T?, next: Node?) {
         self.value = value
         self.next = next
     }
 }
 
-class LinkedList {
-    var head: Node?
+class LinkedList<T: Equatable> {
+    var head: Node<T>?
     
-    func insert(_ value: String) {
+    func insert(_ value: T?) {
         if head == nil {
             head = Node(value: value, next: nil)
             return
@@ -37,12 +37,12 @@ class LinkedList {
         current?.next = Node(value: value, next: nil)
     }
     
-    func delete(_ value: String) {
+    func delete(_ value: T?) {
         if head?.value == value {
             head = head?.next
         }
         
-        var previous: Node?
+        var previous: Node<T>?
         var current = head
         
         while current != nil && current?.value != value {
@@ -53,11 +53,11 @@ class LinkedList {
         previous?.next = current?.next
     }
     
-    func test_Elements() -> [String] {
-        var listItems = [String]()
+    func test_Elements() -> [T] {
+        var listItems = [T]()
         var current = head
-        while current != nil {
-            listItems.append(current?.value ?? "")
+        while let currentValue = current?.value {
+            listItems.append(currentValue)
             current = current?.next
         }
         

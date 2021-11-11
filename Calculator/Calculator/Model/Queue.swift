@@ -7,10 +7,10 @@
 
 import Foundation
 
-class Queue: LinkedList {
-    let linkedList = LinkedList()
+class Queue<T: Equatable> {
+    var linkedList = LinkedList<T>()
     
-    func enqueue(_ value: String) {
+    func enqueue(_ value: T) {
         linkedList.insert(value)
     }
     
@@ -20,7 +20,7 @@ class Queue: LinkedList {
         }
     }
     
-    override func test_Elements() -> [String] {
-        super.test_Elements()
+    func test_Elements() -> [T] {
+        linkedList.test_Elements()
     }
 }
