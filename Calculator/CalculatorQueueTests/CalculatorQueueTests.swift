@@ -39,10 +39,9 @@ class CalculatorQueueTests: XCTestCase {
         sut.enQueue(operation: "+")
         sut.enQueue(operation: "=")
         
-        var testArr: [String] = []
-        testArr.append(sut.operationStorage.removeFirst())
+        let testArr: [String] = ["-", "+", "="]
         
-        XCTAssertEqual(testArr[0], "-")
+        XCTAssertEqual(testArr, sut.operationStorage)
     }
     
     func test_calculatorItemQueue_item을_내부저장소에서_제대로_반환하는지() {
