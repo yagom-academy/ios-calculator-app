@@ -11,6 +11,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var inBox = [Element]()
     private var outBox = [Element]()
     
+    init(_ items: [Element]) {
+        self.inBox = items
+    }
+    
     var front: Element? {
         return outBox.last ?? inBox.first
     }

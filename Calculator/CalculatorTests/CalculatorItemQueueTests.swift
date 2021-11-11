@@ -10,7 +10,7 @@ import XCTest
 class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         XCTAssertEqual(queue.count, 1)
@@ -23,7 +23,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         XCTAssertEqual(queue.count, 1)
@@ -38,12 +38,12 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_첫번째요소() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         queue.enqueue(456)
         let node1 = queue.front
-        let node2: Int
+        let node2: Double
         do {
             node2 = try queue.dequeue()
             XCTAssertTrue(node1 == node2)
@@ -53,7 +53,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_count() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         queue.enqueue(456)
@@ -68,7 +68,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_isEmpty() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         XCTAssertTrue(queue.isEmpty)
         
@@ -89,13 +89,13 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_요소가한개일때() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         XCTAssertFalse(queue.isEmpty)
         XCTAssertEqual(queue.count, 1)
         
-        var result: Int = 0
+        var result: Double = 0
         do {
             result = try queue.dequeue()
             XCTAssertEqual(result, 123)
@@ -112,13 +112,13 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_요소가두개일때() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         queue.enqueue(456)
         XCTAssertFalse(queue.isEmpty)
         XCTAssertEqual(queue.count, 2)
-        let result1: Int
+        let result1: Double
         do {
             result1 = try queue.dequeue()
             XCTAssertEqual(result1, 123)
@@ -128,7 +128,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(queue.isEmpty)
         XCTAssertEqual(queue.count, 1)
         
-        let result2: Int
+        let result2: Double
         do {
             result2 = try queue.dequeue()
             XCTAssertEqual(result2, 456)
@@ -140,7 +140,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_요소가두개일때_clear호출() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>([])
         
         queue.enqueue(123)
         queue.enqueue(456)
