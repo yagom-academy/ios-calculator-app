@@ -15,13 +15,13 @@ final class LinkedList<Element> {
         if isEmpty {
             return 0
         } else {
-            var nodes = 1
+            var nodeCount = 1
             var currentPosition = head
             while currentPosition?.next != nil {
                 currentPosition = currentPosition?.next
-                nodes += 1
+                nodeCount += 1
             }
-            return nodes
+            return nodeCount
         }
     }
     
@@ -42,7 +42,7 @@ final class LinkedList<Element> {
             head = Node(item)
             tail = head
         } else {
-            tail?.next = Node(item, prev: tail)
+            tail?.next = Node(item, previous: tail)
             tail = tail?.next
         }
     }
@@ -51,7 +51,7 @@ final class LinkedList<Element> {
     func removeFirst() -> Element? {
         if isEmpty { return nil }
         
-        let item = head?.item
+        let firstItem = head?.item
         if head?.next == nil {
             head = nil
             tail = nil
@@ -60,14 +60,14 @@ final class LinkedList<Element> {
             head?.previous = nil
         }
         
-        return item
+        return firstItem
     }
     
     @discardableResult
     func removeLast() -> Element? {
         if isEmpty { return nil }
         
-        let item = tail?.item
+        let lastItem = tail?.item
         if tail?.previous == nil {
             head = nil
             tail = nil
@@ -76,7 +76,7 @@ final class LinkedList<Element> {
             tail?.next = nil
         }
         
-        return item
+        return lastItem
     }
     
     subscript(_ index: Int) -> Element? {
