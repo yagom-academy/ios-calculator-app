@@ -30,10 +30,8 @@ struct CalculatorItemQueue {
     mutating func clearQueue() {
         queueList.clear()
     }
-}
-
-extension CalculatorItemQueue {
-    var queueListForTest: LinkedList {
+    
+    func getQueueList() -> LinkedList {
         return self.queueList
     }
 }
