@@ -8,15 +8,6 @@
 import XCTest
 
 class LinkedListTests: XCTestCase {
-
-    func test_Node에Double타입_3을넣으면_item으로3을반환하는가() {
-        // given
-        var node: Node<Double>?
-        // when
-        node = Node<Double>(3.0)
-        // then
-        XCTAssertTrue(node?.item == Double(3.0))
-    }
     
     func test_비어있는LinkedList에1을추가했을때0번인덱스에1이존재하는가() {
         // given
