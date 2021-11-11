@@ -107,24 +107,4 @@ extension NumberItem: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Eq
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.value == rhs.value
     }
-    
-    static func + (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value + rhs.value
-        return Self(value: result)
-    }
-    
-    static func - (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value - rhs.value
-        return Self(value: result)
-    }
-    
-    static func / (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value / rhs.value
-        return Self(value: result)
-    }
-    
-    static func * (lhs: Self, rhs: Self) -> Self {
-        let result = lhs.value * rhs.value
-        return Self(value: result)
-    }
 }
