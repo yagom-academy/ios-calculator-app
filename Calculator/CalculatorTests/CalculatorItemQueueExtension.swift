@@ -8,22 +8,19 @@
 import Foundation
 
 extension LinkedList {
-    func searchAll() -> [CalculateItem] {
-        var searchedList: [CalculateItem] = []
-        if headForTest == nil {
+    func searchAll() -> [CalculateItem?] {
+        var searchedList: [CalculateItem?] = []
+        if front() == nil {
             return []
         }
         
-        var node = headForTest
-        if let nodeData = node?.data {
-            searchedList.append(nodeData)
-        }
+        var node = front()
+        searchedList.append(node?.data)
+        
         
         while node?.next != nil {
             node = node?.next
-            if let nodeData = node?.data {
-                searchedList.append(nodeData)
-            }
+            searchedList.append(node?.data)
         }
         return searchedList
     }

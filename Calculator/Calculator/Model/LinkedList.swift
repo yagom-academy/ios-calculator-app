@@ -53,10 +53,8 @@ struct LinkedList {
         head = nil
         tail = nil
     }
-}
-
-extension LinkedList {
-    var headForTest: Node? {
+    
+    func front() -> Node? {
         return self.head
     }
 }

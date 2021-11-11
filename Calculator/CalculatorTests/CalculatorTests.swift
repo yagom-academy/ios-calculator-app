@@ -48,14 +48,9 @@ class CalculatorTests: XCTestCase {
     func test_QueueList에_Dequeue_정상동작한다() {
         queue.enqueue(item: NumberItem(data: 1))
         
-        guard let removedItem = queue.dequeue() else { return }
-        
-        var data = ""
-        if let number = removedItem as? NumberItem {
-            data = number.dataToString
-        }
+        let removedItem = queue.dequeue()
 
-        XCTAssertEqual(data, "1")
+        XCTAssertEqual(convertItem(item: removedItem), "1")
     }
     
     func test_QueueList에_Dequeue_2번이상실행해도_정상동작한다() {
@@ -102,7 +97,7 @@ class CalculatorTests: XCTestCase {
 }
 
 extension CalculatorTests {
-    func convertList(list: [CalculateItem]) -> [String?] {
+    func convertList(list: [CalculateItem?]) -> [String?] {
         var compareList: [String?] = []
         
         for item in list {
