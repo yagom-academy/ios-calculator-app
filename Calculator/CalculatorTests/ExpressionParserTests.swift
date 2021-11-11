@@ -18,6 +18,17 @@ class ExpressionParserTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testSplitByStringExtension() {
+        let string = "1+2+3+5"
+        XCTAssertEqual(string.split(with: "+"), ["1", "2", "3", "5"])
+    }
+    
+    func testComponentsByOperators() {
+        let string = "1.7+4.5-8.9/16.4*28.0"
+        XCTAssertEqual(ExpressionParser.componentsByOperators(from: string),
+                       ["1.7", "4.5", "8.9", "16.4", "28.0"])
+    }
 
     func testParsingFromString() {
         sampleString = "1.7+3.8-21.9/41.0*310.7"
