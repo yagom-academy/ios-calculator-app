@@ -72,7 +72,6 @@ struct LinkedList<T> {
         } else {
             head = head?.next
         }
-        
         return result
     }
 }
