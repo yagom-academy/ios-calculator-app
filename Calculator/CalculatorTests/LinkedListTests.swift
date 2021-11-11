@@ -149,25 +149,12 @@ class LinkedListTests: XCTestCase {
     }
 }
 
-extension LinkedList {
+private extension LinkedList {
     var first: T? {
         guard let head = head else {
             return nil
         }
         return head.item
-    }
-    
-    var length: Int {
-        var pointer = head
-        var count = 0
-        
-        while pointer != nil {
-            if let node = pointer {
-                pointer = node.next
-                count += 1
-            }
-        }
-        return count
     }
     
     var convertedToLinkedListItemArray: [DummyItem] {
@@ -192,7 +179,7 @@ extension LinkedList {
     }
 }
 
-extension Node {
+private extension Node {
     var convertToLinkedListItem: DummyItem? {
         if let number = item as? Int {
             return DummyItem.number(value: number)

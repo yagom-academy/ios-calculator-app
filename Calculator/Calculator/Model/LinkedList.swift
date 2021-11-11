@@ -40,14 +40,14 @@ struct LinkedList<T> {
     }
     
     mutating func retrieveHeadValue() -> T? {
-        if let removedHead = removeHead(){
+        if let removedHead = removeHead() {
             return removedHead.item
         }
         return nil
     }
     
     mutating func removeHead() -> Node<T>? {
-        guard isNotEmpty, let nodeToBeRemoved = retrieveNode(at:0) else {
+        guard isNotEmpty, let nodeToBeRemoved = retrieveNode(at: 0) else {
             return nil
         }
         return remove(node: nodeToBeRemoved)
@@ -75,7 +75,7 @@ struct LinkedList<T> {
         }
         node.previous = nil
         node.next = nil
-
+        
         return node
     }
     
