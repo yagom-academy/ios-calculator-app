@@ -9,131 +9,131 @@ import XCTest
 
 class LinkedListTests: XCTestCase {
     
-    func test_비어있는LinkedList에1을추가했을때0번인덱스에1이존재하는가() {
-        // given
-        let list = LinkedList<Int>()
-        // when
-        list.append(1)
-        // then
-        XCTAssertTrue(list[0] == 1)
+    var sutIntLinkedList: LinkedList<Int>?
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sutIntLinkedList = LinkedList()
     }
     
-    func test_비어있는LinkedList의0번인덱스에접근하면nil을반환하는가() {
-        // given
-        let list = LinkedList<Int>()
-        // when
-        // emptylist
-        // then
-        XCTAssertTrue(list[0] == nil)
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sutIntLinkedList = nil
     }
     
-    func test_1만들어있는list에1번인덱스에접근하면nil반환하는가() {
+    func test_빈_LinkedList에_1을_append_했을때_0번_인덱스에_1이_존재하는가() {
         // given
-        let list = LinkedList<Int>()
+        sutIntLinkedList?.append(1)
         // when
-        list.append(1)
+        let result = sutIntLinkedList?[0]
         // then
-        XCTAssertTrue(list[1] == nil)
+        XCTAssertEqual(result, 1)
     }
     
-    func test_1_2_3이들어있는리스트에서노드개수3개반환() {
+    func test_빈_LinkedList의_0번_인덱스에_접근하면_nil을_반환하는가() {
         // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
-        list.append(3)
         // when
-        let result = list.count
+        let result = sutIntLinkedList?[0]
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_1만_들어있는_LinkedList의_1번_인덱스에_접근하면_nil을_반환하는가() {
+        // given
+        sutIntLinkedList?.append(1)
+        // when
+        let result = sutIntLinkedList?[1]
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_1_2_3만_들어있는_LinkedList의_count는_3을_반환하는가() {
+        // given
+        sutIntLinkedList?.append(1)
+        sutIntLinkedList?.append(2)
+        sutIntLinkedList?.append(3)
+        // when
+        let result = sutIntLinkedList?.count
         // then
         XCTAssertEqual(result, 3)
     }
     
-    func test_비어있는경우노드개수0개반환() {
+    func test_빈_LinkedList의_count는_0을_반환하는가() {
         // given
-        let list = LinkedList<Int>()
         // when
-        let result = list.count
+        let result = sutIntLinkedList?.count
         // then
         XCTAssertEqual(result, 0)
     }
     
-    func test_큐에0삽입후removeFirst가정상동작하는가() {
+    func test_0만_들어있는_LinkedList의_removeFirst가_0을_반환하는가() {
         // given
-        let list = LinkedList<Int>()
-        list.append(0)
+        sutIntLinkedList?.append(0)
         // when
-        let result = list.removeFirst()
+        let result = sutIntLinkedList?.removeFirst()
         // then
         XCTAssertEqual(result, 0)
     }
     
-    func test_큐에1_2넣고마지막원소찾으면2반환() {
+    func test_빈_LinkedList에서_removeFirst하면_nil을_반환하는가() {
         // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
         // when
-        let result = list.last
+        let result = sutIntLinkedList?.removeFirst()
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_1_2만_들어있는_LinkedList의_removelast가_2를_반환하는가() {
+        // given
+        sutIntLinkedList?.append(1)
+        sutIntLinkedList?.append(2)
+        // when
+        let result = sutIntLinkedList?.removeLast()
         // then
         XCTAssertEqual(result, 2)
     }
     
-    func test_큐에1_2넣고마지막원소제거하면2반환() {
+    func test_1만_담겨있는_LinkedList에서_removeLast하면_1을_반환하는가() {
         // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        list.append(2)
+        sutIntLinkedList?.append(1)
         // when
-        let result = list.removeLast()
+        let result = sutIntLinkedList?.removeLast()
         // then
-        XCTAssertEqual(result, 2)
+        XCTAssertEqual(result, 1)
     }
     
-    func test_연결리스트비어있때isEmpty가true반환() {
+    func test_빈_LinkedList에서_removeLast하면_nil을_반환하는가() {
         // given
-        let list = LinkedList<Int>()
         // when
-        let result = list.isEmpty
+        let result = sutIntLinkedList?.removeLast()
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_빈_LinkedList의_isEmpty가_true를_반환하는가() {
+        // given
+        // when
+        let result = sutIntLinkedList?.isEmpty
         // then
         XCTAssertEqual(result, true)
     }
     
-    func test_연결리스트안비어있때isEmpty가true반환() {
+    func test_2만_들어있는_LinkedList의_isEmpty가_false를_반환하는가() {
         // given
-        let list = LinkedList<Int>()
-        list.append(2)
+        sutIntLinkedList?.append(2)
         // when
-        let result = list.isEmpty
+        let result = sutIntLinkedList?.isEmpty
         // then
         XCTAssertEqual(result, false)
     }
     
-    func test_연결리스트_비어있을때_removeFirst시_nil반환() {
+    func test_1_2만_들어있는_LinkedList의_last가_2를_반환하는가() {
         // given
-        let list = LinkedList<Int>()
+        sutIntLinkedList?.append(1)
+        sutIntLinkedList?.append(2)
         // when
-        let result = list.removeFirst()
+        let result = sutIntLinkedList?.last
         // then
-        XCTAssertNil(result)
+        XCTAssertEqual(result, 2)
     }
-    
-    func test_연결리스트_비어있을때_removeLast시_nil반환() {
-        // given
-        let list = LinkedList<Int>()
-        // when
-        let result = list.removeLast()
-        // then
-        XCTAssertNil(result)
-    }
-    
-    func test_연결리스트_1_담겨있을때_removeLast시_1반환() {
-        // given
-        let list = LinkedList<Int>()
-        list.append(1)
-        // when
-        let result = list.removeLast()
-        // then
-        XCTAssertEqual(result, 1)
-    }
-
 }
