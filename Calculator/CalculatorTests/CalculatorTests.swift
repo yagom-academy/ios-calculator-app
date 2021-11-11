@@ -64,6 +64,22 @@ class CalculatorTests: XCTestCase {
 
         XCTAssertEqual(data, "1")
     }
+    
+    func test_QueueList에_Dequeue_2번이상실행해도_정상동작한다() {
+        queue.enqueue(item: NumberItem(data: 2))
+        queue.enqueue(item: NumberItem(data: 1))
+        queue.enqueue(item: NumberItem(data: 3))
+        
+        guard let removedItem = queue.dequeue() else {
+            return
+        }
+        var data = ""
+        if let number = removedItem as? NumberItem {
+            data = number.dataToString
+        }
+
+        XCTAssertEqual(data, "2")
+    }
 
     func test_빈QueueList_Dequeue_nil을_반환한다() {
         _ = queue.dequeue()

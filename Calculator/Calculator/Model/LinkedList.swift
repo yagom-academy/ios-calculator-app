@@ -43,12 +43,9 @@ struct LinkedList {
             return nil
         }
         
-        var removedData: CalculateItem? = nil
-        
-        if head?.next == nil {
-            removedData = head?.data
-            self.head = head?.next
-        }
+        let removedData = head?.data
+        self.head = head?.next
+      
         return removedData
     }
     
