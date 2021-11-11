@@ -54,7 +54,6 @@ struct LinkedList<T> {
         return nil
     }
     
-    @discardableResult
     private mutating func removeHead() -> Node<T>? {
         guard let oldHead = head else {
             return nil
