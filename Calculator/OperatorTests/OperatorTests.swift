@@ -36,4 +36,20 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, -5.0)
     }
+    func test_4에서9를뺐을때마이너스5가나오는지() {
+        //given
+        sut = Operator.subtract
+        //when
+        let result = sut.calculate(lhs: 4.0, rhs: 9.0)
+        //then
+        XCTAssertEqual(result, -5.0)
+    }
+    func test_4에서마이너스9를뺐을때13이나오는지() {
+        //given
+        sut = Operator.subtract
+        //when
+        let result = sut.calculate(lhs: 4.0, rhs: -9.0)
+        //then
+        XCTAssertEqual(result, 13.0)
+    }
 }
