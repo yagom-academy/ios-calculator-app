@@ -2,12 +2,13 @@ import Foundation
 
 struct CalculatorItemQueue {
     var firstNode: LinkedListNode?
-    var lastNode: LinkedListNode?
+    weak var lastNode: LinkedListNode?
     
     mutating func enqueue(_ item: CalculateItem) {
         if let backupOfLastNode = self.lastNode {
-            self.lastNode = LinkedListNode(value: item)
-            backupOfLastNode.nextNode = self.lastNode
+            let newLastNode = LinkedListNode(value: item)
+            backupOfLastNode.nextNode = newLastNode
+            self.lastNode = newLastNode
         } else {
             self.firstNode = LinkedListNode(value: item)
             self.lastNode = self.firstNode
