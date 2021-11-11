@@ -9,9 +9,17 @@ import XCTest
 
 class FormulaTests: XCTestCase {
     
+    var formula: Formula!
+    
+    override func setUpWithError() throws {
+        formula = Formula()
+    }
+    
+    override func tearDownWithError() throws {
+        formula = nil
+    }
+    
     func test_피연산자한개뿐일때_0을반환한다() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         let result = try? formula.result()
         
@@ -19,8 +27,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_연산자한개뿐일때_에러를반환한다() {
-        var formula = Formula()
-        
         formula.operators.enqueue(.add)
         
         do {
@@ -29,22 +35,18 @@ class FormulaTests: XCTestCase {
         } catch { }
         
     }
-
-
+    
+    
     func test_더하기연산해보기_피연산자한개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
-
+        
         let result = try? formula.result()
         
         XCTAssertEqual(result, 0.0)
     }
     
     func test_더하기연산해보기_피연산자두개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
@@ -55,8 +57,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_더하기연산해보기_피연산자세개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
@@ -68,8 +68,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_빼기연산해보기_피연산자한개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
         let result = try? formula.result()
@@ -78,8 +76,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_빼기연산해보기_피연산자두개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
@@ -90,8 +86,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_빼기연산해보기_피연산자세개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
@@ -103,8 +97,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_곱셈연산해보기_피연산자한개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
         let result = try? formula.result()
@@ -113,8 +105,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_곱셈연산해보기_피연산자두개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
@@ -125,8 +115,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_곱셈연산해보기_피연산자세개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
@@ -138,8 +126,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_피연산자한개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
         let result = try? formula.result()
@@ -148,8 +134,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_피연산자두개_연산자두개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
@@ -160,8 +144,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_피연산자세개() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
@@ -173,8 +155,6 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_0을나눌때() {
-        var formula = Formula()
-        
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
         formula.operands.enqueue(0)
