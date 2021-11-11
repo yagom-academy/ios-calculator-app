@@ -9,29 +9,16 @@ import XCTest
 
 extension String {
     func split(with target: Character = " ") -> [String] {
-        var result = [String]()
-        var number = ""
-        self.forEach{ element in
-            let isNotDouble: Bool = element.isNumber == false && element != "."
-            if isNotDouble {
-                result.append(number.description)
-                number = ""
-            } else {
-                number += element.description
-            }
-        }
-        result.append(number.description)
-        return result
+        return self.split(separator: target).map{ String($0) }
     }
 }
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operands = componentsByOperators(from: input)
-                        .map { Double($0)! }
+                        .compactMap{ Double($0) }
         let operators = input.map{ $0 }
-                        .filter{ Operator(rawValue: $0) != nil }
-                        .map{ Operator(rawValue: $0)! }
+                        .compactMap{ Operator(rawValue: $0) }
         return Formula(operands: CalculatorItemQueue(operands),
                        operators: CalculatorItemQueue(operators))
     }
@@ -46,35 +33,35 @@ enum ExpressionParser {
 class ExpressionParserTests: XCTestCase {
 
     func test_연산자와숫자가_한개씩() {
-        let input = ExpressionParser.parse(from: "12+!@#")
+        let input = ExpressionParser.parse(from: "12 + !@#")
 
         XCTAssertTrue(input.operands.count == 1)
         XCTAssertTrue(input.operators.count == 1)
     }
     
     func test_연산자와숫자가_두개씩() {
-        let input = ExpressionParser.parse(from: "12+12+!@#$")
+        let input = ExpressionParser.parse(from: "12 + 12 + !@#$")
 
         XCTAssertTrue(input.operators.count == 2)
         XCTAssertTrue(input.operators.count == 2)
     }
     
     func test_연산자와숫자가_세개씩() {
-        let input = ExpressionParser.parse(from: "12.123+12+12+")
+        let input = ExpressionParser.parse(from: "12.123 + 12 + 12 + ")
         
         XCTAssertTrue(input.operands.count == 3)
         XCTAssertTrue(input.operators.count == 3)
     }
     
     func test_연산자와숫자가_두개세개() {
-        let input = ExpressionParser.parse(from: "12+12.123+12")
+        let input = ExpressionParser.parse(from: "12 + 12.123 + 12")
         
         XCTAssertTrue(input.operands.count == 3)
         XCTAssertTrue(input.operators.count == 2)
     }
     
     func test_연산자와숫자가_네개다섯개() {
-        let input = ExpressionParser.parse(from: "12+12+12+12.123123123+12")
+        let input = ExpressionParser.parse(from: "12 + 12 + 12 + 12.123123123 + 12")
         
         XCTAssertTrue(input.operands.count == 5)
         XCTAssertTrue(input.operators.count == 4)
