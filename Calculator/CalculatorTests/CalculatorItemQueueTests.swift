@@ -42,12 +42,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(removedItem, newData)
     }
     
-    func testCalculatorItemQueueEnqueue_givenMultipleMixedItems_expectCorrectSequence() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
-        appendContents(of: newItems, to: &sut)
-        XCTAssertTrue(isEqualSequence(sequence: sut.convertToArray, otherSequence: newItems))
-    }
-    
     func testCalculatorQueueDequeue_givenRemoveAllOfMultipleMixedItems_expectIsEmpty() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
@@ -114,21 +108,5 @@ fileprivate extension LinkedList {
             }
         }
         return count
-    }
-}
-
-fileprivate extension CalculatorItemQueue {
-    var length: Int {
-        return list.length
-    }
-    
-    var convertToArray: [Any] {
-        var convertedArray: [Any] = []
-        for i in 0..<length {
-            if let node = list.retrieveNode(at: i) {
-                convertedArray.append(node.item)
-            }
-        }
-        return convertedArray
     }
 }

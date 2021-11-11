@@ -12,7 +12,7 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T> {
-    var list = LinkedList<T>()
+    private var list = LinkedList<T>()
     
     var isEmpty: Bool {
         return list.isEmpty
