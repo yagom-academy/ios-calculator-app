@@ -1,3 +1,5 @@
+import Foundation
+
 class Node<Element> {
     let nodeValue: Element
     var pointer: Node?

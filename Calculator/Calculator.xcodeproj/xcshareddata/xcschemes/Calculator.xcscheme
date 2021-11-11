@@ -38,6 +38,26 @@
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "481FCCB3273CF14D00349B74"
+               BuildableName = "LinkedListTests.xctest"
+               BlueprintName = "LinkedListTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48DAB5F0273CF3AD00CB4A34"
+               BuildableName = "CalculatorTests2.xctest"
+               BlueprintName = "CalculatorTests2"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
