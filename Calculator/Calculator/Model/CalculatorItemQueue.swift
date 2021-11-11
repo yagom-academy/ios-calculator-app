@@ -20,7 +20,7 @@ class CalculatorItemQueue<T: Equatable, CalculateItem> {
         }
     }
     
-    func test_Elements() -> [T] {
-        linkedList.Elements()
+    func elements() -> [T] {
+        linkedList.elements()
     }
 }

@@ -50,7 +50,7 @@ class LinkedList<T: Equatable> {
         previous?.next = current?.next
     }
     
-    func Elements() -> [T] {
+    func elements() -> [T] {
         var listItems = [T]()
         var current = head
         while let currentValue = current?.value {

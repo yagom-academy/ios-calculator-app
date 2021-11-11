@@ -25,7 +25,7 @@ class CalculatorDataStructureTest: XCTestCase {
         
         sut.insert(value)
         
-        XCTAssertEqual(sut.Elements(), [value])
+        XCTAssertEqual(sut.elements(), [value])
     }
     
     func test_insert와_delete를거치면_Elements가_nil배열을반환하는지() {
@@ -33,7 +33,7 @@ class CalculatorDataStructureTest: XCTestCase {
         
         sut.delete("3")
         
-        XCTAssertEqual(sut.Elements(), [])
+        XCTAssertEqual(sut.elements(), [])
     }
     
     func test_연결리스트에숫자_1_2_3을넣고_2를_delete했을때연결리스트가_1_3을가지는지() {
@@ -43,6 +43,6 @@ class CalculatorDataStructureTest: XCTestCase {
         
         sut.delete("2")
         
-        XCTAssertEqual(sut.Elements(), ["1", "3"])
+        XCTAssertEqual(sut.elements(), ["1", "3"])
     }
 }

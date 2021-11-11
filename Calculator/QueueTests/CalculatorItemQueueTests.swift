@@ -21,11 +21,11 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue로_value를넣고_dequeue를호출했을때_test_Elements가_nil배열을반환하는지() {
+    func test_enqueue로_value를넣고_dequeue를호출했을때_elements가_nil배열을반환하는지() {
         sut.enqueue("6")
         
         sut.dequeue()
         
-        XCTAssertEqual(sut.test_Elements(), [])
+        XCTAssertEqual(sut.elements(), [])
     }
 }
