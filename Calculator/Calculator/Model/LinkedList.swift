@@ -10,13 +10,16 @@ import Foundation
 class LinkedList<Element> {
     private(set) var head: Node<Element>?
     private(set) var tail: Node<Element>?
+    private(set) var count = 0
     var isEmpty: Bool {
         head == nil ? true : false
     }
     var first: Element? {
         head?.value
     }
-    private(set) var count = 0
+    var last: Element? {
+        tail?.value
+    }
     
     func append(_ item: Element) {
         let newNode = Node(item)
