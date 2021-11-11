@@ -25,7 +25,7 @@ class CalculatorTests: XCTestCase {
     func test_비어있는_큐를_deQueue하면_deQueueFailed에러_발생한다() throws {
         var queue = CalculatorItemQueue<Int>()
         //XCTAssertEqual(queue.returnQueue(), nil)
-        XCTAssertThrowsError(try queue.deQueue()){ error in XCTAssertEqual(error as? CalculateError, CalculateError.deQueueFailed)}
+        XCTAssertThrowsError(try queue.deQueue()){ error in XCTAssertEqual(error as? QueueError, QueueError.deQueueFailed)}
     }
     
     func test_빈_큐에_1을_enqueue_후에_큐를_dequeue하면_빈_큐가_된다() throws {
