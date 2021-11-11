@@ -53,10 +53,6 @@ struct LinkedList {
         head = nil
         tail = nil
     }
-    
-    var isEmpty: Bool {
-        return head == nil ? true : false 
-    }
 }
 
 extension LinkedList {
