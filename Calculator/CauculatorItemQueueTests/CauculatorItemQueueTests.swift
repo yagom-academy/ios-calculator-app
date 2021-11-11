@@ -34,7 +34,6 @@ class CauculatorItemQueueTests: XCTestCase {
     
     // MARK:- dequeue() tests
     func test_dequeue호출시_빈배열일시_nil을반환하는지() {
-        // given
         //when
         let result = sut.dequeue()
         //then
@@ -63,7 +62,6 @@ class CauculatorItemQueueTests: XCTestCase {
     
     // MARK:- isEmpty tests
     func test_빈큐에서_isEmpty를요청하면_true반환하는지() {
-        //given
         //when
         let result = sut.isEmpty
         //then

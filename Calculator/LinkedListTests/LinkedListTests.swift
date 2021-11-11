@@ -23,7 +23,6 @@ class LinkedListTests: XCTestCase {
     
     // MARK:- append() tests
     func test_빈리스트에서append호출시_4를전달하면_headvalue에4가할당되는지() {
-        //given
         //when
         sut.append(4)
         //then
