@@ -5,16 +5,21 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<T>: CalculateItem {
     var items: LinkedList<T> = LinkedList<T>(head: nil)
-    
+
     mutating func enqueue(value: T) {
         items.append(value: value)
     }
-    
+
     mutating func dequeue() -> T? {
-        let removedItem = items.removeFirst()
-        return removedItem
+        let removedValue: T? = items.removeFirst()
+        return removedValue
     }
-    
+
+    mutating func scanAllValues() -> [T] {
+        let allValues: [T] = items.scanAllValues()
+        return allValues
+    }
+
     mutating func allClear() {
         items.removeAll()
     }
@@ -67,7 +72,7 @@ class LinkedList<T> {
         return removedValue
     }
     
-    func scanAllValue() -> [T] {
+    func scanAllValues() -> [T] {
         var scanResult: [T] = []
 
         guard var finderToTail: Node<T> = head else { return scanResult }
