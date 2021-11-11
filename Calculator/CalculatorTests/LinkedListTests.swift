@@ -137,6 +137,14 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
+    func test_빈_LinkedList의_last가_nil를_반환하는가() {
+        // given
+        // when
+        let result = sutIntLinkedList?.last
+        // then
+        XCTAssertNil(result)
+    }
+    
     func test_1_2만_들어있는_LinkedList의_first가_1을_반환하는가() {
         // given
         sutIntLinkedList?.append(1)
@@ -145,14 +153,6 @@ class LinkedListTests: XCTestCase {
         let result = sutIntLinkedList?.first
         // then
         XCTAssertEqual(result, 1)
-    }
-    
-    func test_빈_LinkedList의_last가_nil를_반환하는가() {
-        // given
-        // when
-        let result = sutIntLinkedList?.last
-        // then
-        XCTAssertNil(result)
     }
     
     func test_빈_LinkedList의_first가_nil를_반환하는가() {
