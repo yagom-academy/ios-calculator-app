@@ -10,12 +10,12 @@ import Foundation
 class Node<T> {
     var item: T
     var next: Node?
-    var prev: Node?
+    var previous: Node?
     
     init(_ item: T, _ next: Node?, _ prev: Node?) {
         self.item = item
         self.next = next
-        self.prev = prev
+        self.previous = prev
     }
     
     convenience init(_ item: T, prev: Node?) {
@@ -36,9 +36,9 @@ final class LinkedList<Element> {
             return 0
         } else {
             var nodes = 1
-            var ptr = head
-            while ptr?.next != nil {
-                ptr = ptr?.next
+            var currentPosition = head
+            while currentPosition?.next != nil {
+                currentPosition = currentPosition?.next
                 nodes += 1
             }
             return nodes
@@ -77,7 +77,7 @@ final class LinkedList<Element> {
             tail = nil
         } else {
             head = head?.next
-            head?.prev = nil
+            head?.previous = nil
         }
         
         return item
@@ -88,11 +88,11 @@ final class LinkedList<Element> {
         if isEmpty { return nil }
         
         let item = tail?.item
-        if tail?.prev == nil {
+        if tail?.previous == nil {
             head = nil
             tail = nil
         } else {
-            tail = tail?.prev
+            tail = tail?.previous
             tail?.next = nil
         }
         
@@ -100,19 +100,19 @@ final class LinkedList<Element> {
     }
     
     subscript(_ index: Int) -> Element? {
-        var ptr = head
+        var currentPosition = head
         for _ in 0..<index {
-            ptr = ptr?.next
+            currentPosition = currentPosition?.next
         }
-        return ptr?.item
+        return currentPosition?.item
     }
     
     deinit {
-        var ptr = head
-        while ptr?.next != nil {
-            ptr?.prev = nil
-            ptr = ptr?.next
-            ptr?.prev = nil
+        var currentPosition = head
+        while currentPosition?.next != nil {
+            currentPosition?.previous = nil
+            currentPosition = currentPosition?.next
+            currentPosition?.previous = nil
         }
     }
 }
