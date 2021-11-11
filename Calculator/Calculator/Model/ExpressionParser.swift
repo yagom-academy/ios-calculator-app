@@ -13,6 +13,9 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        return []
+        let operators = Operator.allCases.map({ String($0.rawValue) }).reduce("", { $0 + $1 })
+        let result = input.components(separatedBy: operators)
+        
+        return result
     }
 }
