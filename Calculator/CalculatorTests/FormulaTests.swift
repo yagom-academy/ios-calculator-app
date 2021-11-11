@@ -4,11 +4,38 @@ import XCTest
 @testable import Calculator
 
 class FormulaTests: XCTestCase {
+    
+    var formula: Formula!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.formula = Formula()
+    }
+    
+    func insertInputArrayToFormula(operands: [Double], operators: [Operator]) {
+        for operand in operands {
+            self.formula.operands.enqueue(operand)
+        }
+        for `operator` in operators {
+            self.formula.operators.enqueue(`operator`)
+        }
     }
 
+    func test_calculationAccuracy() {
+        let inputOperands: [Double] = [5,5,5,5,5]
+        let inputOperators: [Operator] = [.add,.add,.add,.divide]
+        
+        insertInputArrayToFormula(operands: inputOperands, operators: inputOperators)
+        
+        XCTAssertEqual(self.formula.result(), 4)
+    }
     
+    func test_dividedZero() {
+        let inputOperands: [Double] = [5,5,5,0,5]
+        let inputOperators: [Operator] = [.add,.add,.divide,.add]
+        
+        insertInputArrayToFormula(operands: inputOperands, operators: inputOperators)
+        
+        XCTAssertEqual(self.formula.result(), Double.infinity)
+    }
 
 }
