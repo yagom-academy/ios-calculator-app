@@ -2,14 +2,16 @@ protocol CalculateItem {
     
 }
 
-class CalculatorItemQueue<Element>: LinkedListManager<Element>, CalculateItem {
+struct CalculatorItemQueue<Element>: CalculateItem {
+    var linkedList = LinkedListManager<Element>(head: nil)
+    
     func insertToQueue(_ insertValue: Element) {
-        super.addNewNode(insertValue)
+        linkedList.addNewNode(insertValue)
     }
     
     func deleteFromQueue() {
-        guard self.head?.nodeValue != nil else { return }
-        super.deleteFirstNode()
+        guard linkedList.head?.nodeValue != nil else { return }
+        linkedList.deleteFirstNode()
     }
 }
 
