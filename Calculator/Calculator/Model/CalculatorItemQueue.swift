@@ -1,4 +1,3 @@
-//
 //  CalculatorItemQueue.swift
 //  Calculator
 //
@@ -6,33 +5,42 @@
 
 import Foundation
 
-struct CalculatorItemQueue: CalculatorItem {
-    private var nodes: [Int] = []
+struct CalculatorItemQueue<T>: CalculatorItem {
+    private var nodes: [T] = []
     
-    func bringNodes() -> [Int] {
+    var bringNodes: [T] {
         nodes
     }
     
-    mutating func push(_ item: Int) {
+    mutating func push(_ item: T) {
         nodes.append(item)
     }
     
-    mutating func deleteFront() {
-        nodes.removeFirst()
+    mutating func deleteFront() -> T? {
+        if isEmpty {
+            return nil
+        } else {
+            return nodes.removeFirst()
+        }
     }
-    mutating func deleteRear() -> Int? {
-        if isEmpty() {
+    
+    mutating func deleteRear() -> T? {
+        if isEmpty {
             return nil
         } else {
             return nodes.removeLast()
         }
     }
     
-    func calculatorSize() -> Int {
-        nodes.count
+    mutating func deleteAll() {
+        nodes.removeAll()
     }
     
-    func isEmpty() -> Bool {
+    var nodesSize: T {
+        nodes.count as! T
+    }
+    
+    var isEmpty: Bool {
         nodes.isEmpty
     }
 }

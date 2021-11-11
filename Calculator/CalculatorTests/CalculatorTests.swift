@@ -7,21 +7,21 @@
 import XCTest
 
 class CalculatorTests: XCTestCase {
-    var calculatorItemQueue: CalculatorItemQueue!
+    var calculatorItemQueue = CalculatorItemQueue<Int>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        calculatorItemQueue = CalculatorItemQueue()
+        calculatorItemQueue = CalculatorItemQueue<Int>()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        calculatorItemQueue = nil
+        calculatorItemQueue.deleteAll()
     }
     
     func test_nodes프로퍼티의값이_순서대로정렬_되는지_여부() {
         //given
         let nodes = [1,2,3,4,5]
-        var result = calculatorItemQueue.bringNodes()
+        var result = calculatorItemQueue.bringNodes
         //when
         result.append(1)
         result.append(2)
@@ -40,7 +40,7 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.push(2)
         calculatorItemQueue.deleteFront()
         
-        let nodes = calculatorItemQueue.bringNodes()
+        let nodes = calculatorItemQueue.bringNodes
         //then
         XCTAssertEqual(nodes, result)
     }
@@ -56,7 +56,7 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.push(5)
         calculatorItemQueue.deleteFront()
         calculatorItemQueue.deleteFront()
-        let nodes = calculatorItemQueue.bringNodes()
+        let nodes = calculatorItemQueue.bringNodes
         // then
         XCTAssertEqual(nodes, result)
     }
@@ -72,7 +72,7 @@ class CalculatorTests: XCTestCase {
             calculatorItemQueue.deleteFront()
         }
         //when
-        let result = calculatorItemQueue.isEmpty()
+        let result = calculatorItemQueue.isEmpty
         //then
         XCTAssertTrue(result)
     }
@@ -88,7 +88,7 @@ class CalculatorTests: XCTestCase {
             calculatorItemQueue.deleteFront()
         }
         //when
-        let result = calculatorItemQueue.isEmpty()
+        let result = calculatorItemQueue.isEmpty
         //then
         XCTAssertFalse(result)
     }
@@ -120,7 +120,7 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.deleteRear()
         calculatorItemQueue.deleteRear()
         
-        let nodes = calculatorItemQueue.bringNodes()
+        let nodes = calculatorItemQueue.bringNodes
         //then
         XCTAssertEqual(result, nodes)
     }
@@ -133,8 +133,12 @@ class CalculatorTests: XCTestCase {
             counterNumber += 1
         }
         //when
-        let result = calculatorItemQueue.calculatorSize()
+        let result = calculatorItemQueue.nodesSize
         //then
         XCTAssertEqual(result, counterNumber)
+    }
+    
+    func test_첫번째칸삭제메서드_nil일경우_확인() {
+        calculatorItemQueue.deleteFront()
     }
 }
