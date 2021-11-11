@@ -1,28 +1,28 @@
 
 import Foundation
 
-class Node<T> {
-    var data: T
+class Node<Element> {
+    var data: Element
     var pointer: Node?
     
-    init(data: T, pointer:Node? = nil) {
+    init(data: Element, pointer:Node? = nil) {
         self.data = data
         self.pointer = pointer
     }
 }
 
-class LinkedList<T> {
-    var head: Node<T>?
+class LinkedList<Element> {
+    var head: Node<Element>?
     var isEmpty: Bool {
         return head == nil
     }
     
-    init(head: Node<T>) {
+    init(head: Node<Element>) {
         self.head = head
     }
     
-    func enqueue(in data: T) {
-        var finderForLast: Node<T>?
+    func enqueue(in data: Element) {
+        var finderForLast: Node<Element>?
         
         guard isEmpty == false else {
             head = Node(data: data, pointer: nil)
