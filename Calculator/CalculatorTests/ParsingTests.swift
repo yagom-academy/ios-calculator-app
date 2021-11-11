@@ -20,8 +20,8 @@ class ParsingTests: XCTestCase {
     }
     
     func testSplitByStringExtension() {
-        let string = "1 + 2 + 3 + 5"
-        XCTAssertEqual(string.split(with: "+"), ["1", "2", "3", "5"])
+        let string = "1 + 2 - 3 * 5"
+        XCTAssertEqual(string.split(with: " "), ["1", "+" , "2", "-", "3", "*", "5"])
     }
 
     func testParsingFromString() {
