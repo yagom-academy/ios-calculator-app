@@ -41,8 +41,4 @@ class CalculatorItemQueue<T: CalculateItem> {
     func removeAll() {
         calculatorItems.removeAll()
     }
-    
-    func showCurrentItems() -> [T] {
-        return calculatorItems
-    }
 }
