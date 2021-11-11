@@ -4,6 +4,7 @@ enum ExpressionParserError: Error {
     case includingIncorrectLetter
     case firstOrLastLetterIsNotNumber
     case incorrectCountOfNumbersAndOperators
+    case failedToInitializeFormulaInstance
 }
 
 enum ExpressionParser {
@@ -32,9 +33,11 @@ enum ExpressionParser {
             return .failure(.incorrectCountOfNumbersAndOperators)
         }
         
-        //TODO: Formula must be from computed operands and operators
-        return .success(Formula(operands: operands, operators: operators))
-
+        guard let formula = Formula(operands: operands, operators: operators) else {
+            return .failure(.failedToInitializeFormulaInstance)
+        }
+        
+        return .success(formula)
     }
     
     private func componentsByOperators(from input: String) -> [String] {
