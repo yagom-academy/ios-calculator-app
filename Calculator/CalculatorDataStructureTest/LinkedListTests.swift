@@ -35,4 +35,14 @@ class CalculatorDataStructureTest: XCTestCase {
         
         XCTAssertEqual(sut.Elements(), [])
     }
+    
+    func test_연결리스트에숫자_1_2_3을넣고_2를_delete했을때연결리스트가_1_3을가지는지() {
+        sut.insert("1")
+        sut.insert("2")
+        sut.insert("3")
+        
+        sut.delete("2")
+        
+        XCTAssertEqual(sut.Elements(), ["1", "3"])
+    }
 }
