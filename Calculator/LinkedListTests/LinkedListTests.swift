@@ -40,17 +40,6 @@ class LinkedListTests: XCTestCase {
     }
     
     // MARK:- removeFirst() tests
-    func test_4가있는List에서_removeFirst호출시_4가반환되고head와tail이nil되는지() {
-        //given
-        sut.append(4)
-        //when
-        let result = sut.removeFirst()
-        //then
-        XCTAssertEqual(result, 4)
-        XCTAssertNil(sut.head)
-        XCTAssertNil(sut.tail)
-    }
-    
     func test_빈List에서_removeFirst호출시_에러없이nil반환되는지() {
         //given
         guard sut.isEmpty else {
@@ -61,6 +50,40 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertNil(result)
     }
+    func test_4가있는List에서_removeFirst호출시_4가반환되고head와tail이nil되는지() {
+        //given
+        sut.append(4)
+        //when
+        let result = sut.removeFirst()
+        //then
+        XCTAssertEqual(result, 4)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+    }
+    func test_4와7추가한List에서_removeFirst호출시_4가반환되고head와tail이7되는지() {
+        //given
+        sut.append(4)
+        sut.append(7)
+        //when
+        let result = sut.removeFirst()
+        //then
+        XCTAssertEqual(result, 4)
+        XCTAssertEqual(sut.head?.value, 7)
+        XCTAssertEqual(sut.tail?.value, 7)
+    }
+    func test_4와7과9추가한List에서_removeFirst호출시_4가반환되고head7tail9되는지() {
+        //given
+        sut.append(4)
+        sut.append(7)
+        sut.append(9)
+        //when
+        let result = sut.removeFirst()
+        //then
+        XCTAssertEqual(result, 4)
+        XCTAssertEqual(sut.head?.value, 7)
+        XCTAssertEqual(sut.tail?.value, 9)
+    }
+
     
     // MARK:- isEmpty tests
     func test_빈List에_isEmpty를요청하면_true반환() {
