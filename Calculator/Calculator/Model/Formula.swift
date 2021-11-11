@@ -19,7 +19,7 @@ struct Formula {
         }
         var result: Double = 0
         do {
-            result = try firstToCalculate()
+            result = try calculateFirst()
         } catch let error as CalculatorError {
             print(error.description)
         } catch {
@@ -30,7 +30,7 @@ struct Formula {
         }
         repeat {
             do {
-                result = try calculateFromThrSecond(lhs: result)
+                result = try calculateFromTheSecond(lhs: result)
             } catch let error as CalculatorError {
                 print(error.description)
             } catch {
@@ -43,14 +43,14 @@ struct Formula {
         return result
     }
     
-    private mutating func firstToCalculate() throws -> Double {
+    private mutating func calculateFirst() throws -> Double {
         let element = try operators.dequeue()
         let lhs = try operands.dequeue()
         let rhs = try operands.dequeue()
         return element.calculate(lhs: lhs, rhs: rhs)
     }
     
-    private mutating func calculateFromThrSecond(lhs: Double) throws -> Double {
+    private mutating func calculateFromTheSecond(lhs: Double) throws -> Double {
         let element = try operators.dequeue()
         let rhs = try operands.dequeue()
         return element.calculate(lhs: lhs, rhs: rhs)
