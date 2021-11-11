@@ -72,25 +72,9 @@ class LinkedListTests: XCTestCase {
     func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectRemovedHeadEqualsFirstInsertedItem() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
-        let removedNode = sut.removeHead()
+        let removedValue = sut.retrieveHeadValue()
         let firstInsertedItem = DummyItem.number(value: 20)
-        XCTAssertTrue(hasEqualItems(node: removedNode, item: firstInsertedItem))
-    }
-    
-    func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectCorrectSequence() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
-        appendContents(of: newItems, to: &sut)
-        sut.removeHead()
-        let exepectedItems: [Any] = ["+", 30, "-", 2]
-        let convertedExpectedItems = convertToLinkedListArray(from: exepectedItems) as [DummyItem]
-        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExpectedItems)
-    }
-    
-    func testLinkedListRemoveHead_givenMultipleRemovedHeadFromMixedElements_expectIsEmpty() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
-        appendContents(of: newItems, to: &sut)
-        removeHeadUntilEmpty(from: &sut)
-        XCTAssertTrue(sut.isEmpty)
+        XCTAssertEqual(convertToLinkedListItem(value: removedValue as Any), firstInsertedItem)
     }
     
     func testLinkedListRemoveAll_givenRemoveAllFromElements_expectIsEmpty() {
@@ -130,12 +114,6 @@ class LinkedListTests: XCTestCase {
     private func appendContents(of items: [Any], to linkedList: inout LinkedList<Any>) {
         for item in items {
             linkedList.append(item)
-        }
-    }
-    
-    private func removeHeadUntilEmpty(from linkedList: inout LinkedList<Any>) {
-        while linkedList.isNotEmpty {
-            linkedList.removeHead()
         }
     }
 }
