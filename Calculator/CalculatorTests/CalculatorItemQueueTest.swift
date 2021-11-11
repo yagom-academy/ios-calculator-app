@@ -24,7 +24,7 @@ class CalculatorItemQueueTest: XCTestCase {
         let queue = CalculatorItemQueue<Double>()
         queue.enqueue(3.5)
         queue.enqueue(4.5)
-        queue.dequeue()
+        try queue.dequeue()
         XCTAssertEqual(4.5, queue.items.first?.value)
     }
     
@@ -32,7 +32,7 @@ class CalculatorItemQueueTest: XCTestCase {
         let queue = CalculatorItemQueue<Double>()
         queue.enqueue(3.5)
         queue.enqueue(4.5)
-        let value = queue.dequeue()
+        let value = try queue.dequeue()
         XCTAssertEqual(3.5, value)
         XCTAssertEqual(1, queue.items.count)
     }
