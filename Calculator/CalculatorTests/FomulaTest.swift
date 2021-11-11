@@ -8,12 +8,10 @@
 import XCTest
 
 class FomulaTest: XCTestCase {
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
-    var formula = Formula(operands: operands, operators: operators)
+    var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     
     override func setUp() {
-        formula = Formula(operands: operands, operators: operators)
+        formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     }
     
     override func tearDown() {
@@ -38,11 +36,11 @@ class FomulaTest: XCTestCase {
                 return
             }
             
-            formula.operands.enqueue(arithmetic)
+            formula.operators.enqueue(arithmetic)
         }
         
         let calculationResult = formula.result()
-        XCTAssertEqual(-14.0, calculationResult)
+        XCTAssertEqual(16.0, calculationResult)
     }
     
     func test_3개의_수를_뺄셈만_하는_경우_정상적으로_연산되는지() {
@@ -57,7 +55,7 @@ class FomulaTest: XCTestCase {
                 return
             }
             
-            formula.operands.enqueue(arithmetic)
+            formula.operators.enqueue(arithmetic)
         }
         
         let calculationResult = formula.result()
@@ -76,7 +74,7 @@ class FomulaTest: XCTestCase {
                 return
             }
             
-            formula.operands.enqueue(arithmetic)
+            formula.operators.enqueue(arithmetic)
         }
         
         let calculationResult = formula.result()
@@ -84,7 +82,7 @@ class FomulaTest: XCTestCase {
     }
     
     func test_3개의_수를_나눗셈만_하는_경우_정상적으로_연산되는지() {
-        [15.0, 3.0, -2.0,].forEach { number in
+        [15.0, 3.0, -2.0].forEach { number in
             formula.operands.enqueue(number)
         }
         
@@ -95,7 +93,7 @@ class FomulaTest: XCTestCase {
                 return
             }
             
-            formula.operands.enqueue(arithmetic)
+            formula.operators.enqueue(arithmetic)
         }
         
         let calculationResult = formula.result()
@@ -103,7 +101,7 @@ class FomulaTest: XCTestCase {
     }
     
     func test_0으로_나누는_경우가_포함되어있는_경우_최종_연산결과가_nan인지() {
-        [15.0, 3.0, 0.0, -2.0,].forEach { number in
+        [15.0, 3.0, 0.0, -2.0].forEach { number in
             formula.operands.enqueue(number)
         }
         
@@ -114,7 +112,7 @@ class FomulaTest: XCTestCase {
                 return
             }
             
-            formula.operands.enqueue(arithmetic)
+            formula.operators.enqueue(arithmetic)
         }
         
         let calculationResult = formula.result()
@@ -122,7 +120,7 @@ class FomulaTest: XCTestCase {
     }
     
     func test_일반적인_우선순위가_아닌_연산자의_순서에_따라_값이_연산되는지() {
-        [15.0, 3.0, -2.0,].forEach { number in
+        [15.0, 3.0, -2.0].forEach { number in
             formula.operands.enqueue(number)
         }
         
@@ -133,10 +131,29 @@ class FomulaTest: XCTestCase {
                 return
             }
             
-            formula.operands.enqueue(arithmetic)
+            formula.operators.enqueue(arithmetic)
         }
         
         let calculationResult = formula.result()
         XCTAssertEqual(-36.0, calculationResult)
+    }
+    
+    func test_연산자를_마지막으로_입력한_경우_해당_연산자는_사용되지_않고_이전까지의_결과를_반환하는지() {
+        [15.0, 3.0].forEach { number in
+            formula.operands.enqueue(number)
+        }
+        
+        let operators: [Character] = ["+", "*"]
+        
+        operators.forEach { arithmetic in
+            guard let arithmetic = Operator(rawValue: arithmetic) else {
+                return
+            }
+            
+            formula.operators.enqueue(arithmetic)
+        }
+        
+        let calculationResult = formula.result()
+        XCTAssertEqual(18.0, calculationResult)
     }
 }
