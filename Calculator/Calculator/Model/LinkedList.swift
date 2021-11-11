@@ -32,16 +32,17 @@ final class LinkedList<Element> {
     private var tail: Node<Element>?
     
     var count: Int {
-        guard !isEmpty else {
+        if isEmpty {
             return 0
+        } else {
+            var nodes = 1
+            var ptr = head
+            while ptr?.next != nil {
+                ptr = ptr?.next
+                nodes += 1
+            }
+            return nodes
         }
-        var nodes = 1
-        var ptr = head
-        while ptr?.next != nil {
-            ptr = ptr?.next
-            nodes += 1
-        }
-        return nodes
     }
     
     var first: Element? {
