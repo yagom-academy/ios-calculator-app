@@ -24,6 +24,17 @@ struct Formula {
             print(error.description)
         } catch {
             print(error.localizedDescription)
+    init() {
+        self.operands = CalculatorItemQueue<Double>()
+        self.operators = CalculatorItemQueue<Operator>()
+    }
+    
+    init(opreands: CalculatorItemQueue<Double>,
+         operators: CalculatorItemQueue<Operator>) {
+        self.operands = opreands
+        self.operators = operators
+    }
+    
         }
         guard operands.isEmpty == false else {
             return result

@@ -10,7 +10,7 @@ import XCTest
 class FormulaTests: XCTestCase {
 
     func test_더하기연산해보기_피연산자한개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
@@ -20,7 +20,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_더하기연산해보기_피연산자두개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
@@ -32,7 +32,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_더하기연산해보기_피연산자세개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
@@ -45,7 +45,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_빼기연산해보기_피연산자한개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
@@ -55,7 +55,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_빼기연산해보기_피연산자두개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
@@ -67,7 +67,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_빼기연산해보기_피연산자세개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
@@ -80,7 +80,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_곱셈연산해보기_피연산자한개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
@@ -90,7 +90,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_곱셈연산해보기_피연산자두개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
@@ -102,7 +102,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_곱셈연산해보기_피연산자세개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
@@ -115,7 +115,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_피연산자한개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
@@ -125,7 +125,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_피연산자두개_연산자두개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
@@ -137,7 +137,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_피연산자세개() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
@@ -150,7 +150,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_나눗셈연산해보기_0을나눌때() {
-        var formula = Formula(operands: CalculatorItemQueue<Double>([]), operators: CalculatorItemQueue<Operator>([]))
+        var formula = Formula()
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
