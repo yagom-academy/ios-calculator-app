@@ -85,9 +85,7 @@ final class LinkedList<Element> {
     
     @discardableResult
     func removeLast() -> Element? {
-        guard !isEmpty else {
-            return nil
-        }
+        if isEmpty { return nil }
         
         let item = tail?.item
         if tail?.prev == nil {
