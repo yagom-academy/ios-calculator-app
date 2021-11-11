@@ -12,37 +12,37 @@ class CalculatorTests: XCTestCase {
     var queue: CalculatorItemQueue = CalculatorItemQueue()
     
     // MARK: QueueList isEmpty test
-    func test_QueueListisnotEmpty() {
+    func test_QueueList는_초기에_empty값을_갖는다() {
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()).isEmpty, true)
     }
     
     // MARK: CalculatorItemQueue enqueue test
-    func test_QueueListEnqueue() {
+    func test_QueueList_enqueue_정상동작한다() {
         queue.enqueue(item: NumberItem(data: 1))
         
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["1"])
     }
     
-    func test_QueueListSort() {
+    func test_QueueList는_순서를_갖지않는다() {
         queue.enqueue(item: NumberItem(data: 2))
         queue.enqueue(item: NumberItem(data: 1))
 
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["2","1"])
     }
 
-    func test_QueueListEnqueueNil() {
+    func test_QueueList_Enqueue에_nil값을_넣으면_변화가없다() {
         queue.enqueue(item: nil)
 
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), [])
     }
     
-    func test_QueueListEnqueueOperatorItem() {
+    func test_QueueList_Enqueue에_opreratorItem을_넣으면_정상동작한다() {
         queue.enqueue(item: OperatorItem.add)
 
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["+"])
     }
 
-    func test_QueueListEnqueueOperatorAndNumber() {
+    func test_QueueList_Enqueue_OperatorItem과NumberItem을_넣으면_정상동작한다() {
         queue.enqueue(item: OperatorItem.add)
         queue.enqueue(item: OperatorItem.divide)
         queue.enqueue(item: NumberItem(data: 2))
@@ -51,8 +51,9 @@ class CalculatorTests: XCTestCase {
     }
     
     // MARK: CalculatorItemQueue dequeue test
-    func test_QueueListDequeue() {
-
+    func test_QueueList에_Dequeue_정상동작한다() {
+        queue.enqueue(item: NumberItem(data: 1))
+        
         guard let removedItem = queue.dequeue() else {
             return
         }
@@ -64,7 +65,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(data, "1")
     }
 
-    func test_EmptyQueueListDequeue() {
+    func test_빈QueueList_Dequeue_nil을_반환한다() {
         _ = queue.dequeue()
         let data2 = queue.dequeue()
 
@@ -77,14 +78,18 @@ class CalculatorTests: XCTestCase {
     }
     
     // MARK: CalculatorItemQueue clearQueue test
-    func test_QueueListClear() {
+    func test_QueueList_안의_데이터를_모두_지운다() {
+        queue.enqueue(item: OperatorItem.add)
+        queue.enqueue(item: OperatorItem.divide)
+        queue.enqueue(item: NumberItem(data: 2))
+        
         queue.clearQueue()
 
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), [])
     }
 
     // MARK: CalculatorItemQueue Several Queue test
-    func test_AnotherQueueListInit() {
+    func test_여러개의_QueueList_생성한다() {
         var calculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
         var preparedCalculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
 
