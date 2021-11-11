@@ -9,12 +9,20 @@ import XCTest
 
 class ExpressionParserTest: XCTestCase {
 
-    func test_문자열_1_더하기_2를_입력시_result는_3이다() {
-        let inputString = "1 + 2"
+    func test_문자열_1_더하기_2는_3이다() {
+        let inputString = "1 + 4"
         
         var parser = ExpressionParser.parse(from: inputString)
         
-        try XCTAssertEqual(parser.result(), 3)
+        try XCTAssertEqual(parser.result(), 5)
+    }
+    
+    func test_문자열_1_더하기_2_나누기_3_더하기_4는_5이다() {
+        let inputString = "1 + 2 / 3 + 4"
+        
+        var parser = ExpressionParser.parse(from: inputString)
+        
+        try XCTAssertEqual(parser.result(), 5)
     }
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -14,9 +14,9 @@ struct Formula {
     mutating func result() throws -> Double {
         var result = try operands.deQueue()
         
-        while !operators.isEmpty {
-            let aa = try operators.deQueue()
-            result = try aa.calculate(lhs: result, rhs: try operands.deQueue())
+        while operators.isEmpty == false {
+            let operatorOfDeQueue = try operators.deQueue()
+            result = try operatorOfDeQueue.calculate(lhs: result, rhs: try operands.deQueue())
         }
         return result
     }
