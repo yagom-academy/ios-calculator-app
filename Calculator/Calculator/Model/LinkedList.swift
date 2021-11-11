@@ -37,6 +37,7 @@ class LinkedList<T: Equatable> {
     func delete(_ value: T?) {
         if head?.value == value {
             head = head?.next
+            return
         }
         
         var previous: Node<T>?
