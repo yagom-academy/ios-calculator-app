@@ -13,8 +13,8 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<Element>: CalculateItem {
-    var enQueueElements: [Element] = []
-    var deQueueElements: [Element] = []
+    private(set) var enQueueElements: [Element] = []
+    private(set) var deQueueElements: [Element] = []
     
     mutating func enQueueElement(_ element: Element) {
         enQueueElements.append(element)
