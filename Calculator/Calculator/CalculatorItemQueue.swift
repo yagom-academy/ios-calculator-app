@@ -12,7 +12,7 @@ struct CalculatorItemQueue {
 
 protocol CalculateItem { }
 
-struct NumberItem: CalculateItem {
+struct NumberItem: CalculateItem, Equatable {
     var value: Double
 }
 
@@ -94,16 +94,14 @@ extension LinkedList {
     }
 }
 
-extension NumberItem: ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Equatable {
+extension NumberItem: ExpressibleByFloatLiteral {
     init(floatLiteral value: FloatLiteralType) {
         self.value = value
     }
-    
+}
+
+extension NumberItem: ExpressibleByIntegerLiteral {
     init(integerLiteral value: IntegerLiteralType) {
         self.value = Double(value)
-    }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.value == rhs.value
     }
 }
