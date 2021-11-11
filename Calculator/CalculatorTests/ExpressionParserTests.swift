@@ -7,11 +7,6 @@
 
 import XCTest
 
-extension String {
-    func split(with target: Character = " ") -> [String] {
-        return self.split(separator: target).map{ String($0) }
-    }
-}
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
