@@ -19,34 +19,50 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_operandsQueueing() {
+        var poppedItems: [CalculateItem?] = []
+        
         testQueue.enqueue(1)
         testQueue.enqueue(2)
         testQueue.enqueue(3)
         testQueue.enqueue(4)
         testQueue.enqueue(5)
-        testQueue.dequeue()
-        testQueue.dequeue()
-        testQueue.dequeue()
+        poppedItems.append(testQueue.dequeue())
+        poppedItems.append(testQueue.dequeue())
+        poppedItems.append(testQueue.dequeue())
         
-        let operands = testQueue.allItems().map {
+        let leftOperands = testQueue.allItems().map {
+            return $0 as? Double
+        }
+        let poppedOperands = poppedItems.map {
             return $0 as? Double
         }
         
-        XCTAssertEqual(operands, [4,5])
+        let isRightLeftOperands = (leftOperands == [4,5]) ? true : false
+        let isRightPoppedOperands = (poppedOperands == [1,2,3]) ? true : false
+
+        XCTAssertTrue(isRightLeftOperands && isRightPoppedOperands)
     }
     
     func test_operatorsQueueing() {
+        var poppedItems: [CalculateItem?] = []
+        
         testQueue.enqueue(Operator.add)
         testQueue.enqueue(Operator.subtract)
         testQueue.enqueue(Operator.divide)
         testQueue.enqueue(Operator.multiply)
-        testQueue.dequeue()
+        poppedItems.append(testQueue.dequeue())
         testQueue.enqueue(Operator.add)
         
-        let operators = testQueue.allItems().map {
+        let leftOperators = testQueue.allItems().map {
+            return $0 as? Operator
+        }
+        let poppedOperators = poppedItems.map {
             return $0 as? Operator
         }
         
-        XCTAssertEqual(operators, [.subtract,.divide,.multiply,.add])
+        let isRightLeftOperators = (leftOperators == [.subtract,.divide,.multiply,.add]) ? true : false
+        let isRightPoppedOperators = (poppedOperators == [.add]) ? true : false
+
+        XCTAssertTrue(isRightLeftOperators && isRightPoppedOperators)
     }
 }
