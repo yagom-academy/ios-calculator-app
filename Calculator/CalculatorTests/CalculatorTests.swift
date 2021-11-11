@@ -6,8 +6,8 @@ class CalculatorTests: XCTestCase {
         XCTAssertNil(queue.head)
     }
     
-    func test_1과2와3이_있는_큐의_head의_value는_1이다() {
-        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, next: Node(value: 2, next: Node(value: 3))))
+    func test_1과2와3과4가_있는_큐의_head의_value는_1이다() {
+        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, next: Node(value: 2, next: Node(value: 3, next: Node(value: 4)))))
         XCTAssertEqual(queue.head?.value, 1)
     }
     
@@ -16,9 +16,20 @@ class CalculatorTests: XCTestCase {
         XCTAssertNil(queue.tail)
     }
     
-    func test_1과2와3이_있는_큐의_tail의_value는_3이다() {
-        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, next: Node(value: 2, next: Node(value: 3))))
-        XCTAssertEqual(queue.tail?.value, 3)
+    func test_1과2와3과4가_있는_큐의_tail의_value는_3이다() {
+        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, next: Node(value: 2, next: Node(value: 3, next: Node(value: 4)))))
+        XCTAssertEqual(queue.tail?.value, 4)
+    }
+    
+    func test_빈_큐의_isEmpty는_true이다() {
+        let queue = CalculatorItemQueue<Int>(head: nil)
+        XCTAssertTrue(queue.isEmpty)
+    }
+    
+    func test_1이_있는_큐의_isEmpty는_false이다() {
+        let queue = CalculatorItemQueue<Int>(head: Node(value: 1))
+        queue.append(value: 2)
+        XCTAssertFalse(queue.isEmpty)
     }
     
     func test_빈_큐에_1을_append하면_1이_남는다() {
@@ -28,8 +39,7 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_1이_있는_큐에_2를_append하면_1과2가_남는다() {
-        let queue = CalculatorItemQueue<Int>(head: Node(value: 1))
-        queue.append(value: 2)
+        let queue = CalculatorItemQueue<Int>(head: Node(value: 1, next: Node(value: 2)))
         XCTAssertEqual(queue.scanAllValue(), [1, 2])
     }
     
