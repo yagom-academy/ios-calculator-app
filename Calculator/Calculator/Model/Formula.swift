@@ -43,7 +43,7 @@ struct Formula {
             }
         }
         
-        guard operands.isEmpty && operators.isEmpty else {
+        guard operators.isEmpty else {
             throw OperationError.invalidFormula
         }
         
