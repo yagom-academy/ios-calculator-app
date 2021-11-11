@@ -52,4 +52,11 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(input.operands.count == 1)
         XCTAssertTrue(input.operators.count == 1)
     }
+    
+    func test_연산자와숫자가_두개씩() {
+        let input = ExpressionParser.parse(from: "12+12+!@#$")
+
+        XCTAssertTrue(input.operators.count == 2)
+        XCTAssertTrue(input.operators.count == 2)
+    }
 }
