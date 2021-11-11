@@ -111,8 +111,8 @@
 			children = (
 				C9F7BCD6273919470076ED33 /* LinkedListTest.swift */,
 				C9F7BCED273A3C990076ED33 /* CalculatorItemQueueTest.swift */,
-				C9F7BCD8273919470076ED33 /* Info.plist */,
 				C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */,
+				C9F7BCD8273919470076ED33 /* Info.plist */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
