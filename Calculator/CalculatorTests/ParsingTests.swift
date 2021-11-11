@@ -50,14 +50,18 @@ class ParsingTests: XCTestCase {
         sampleString = "1.7 + 3.8 - 21.9 / 41.0 * * * 310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         
-        XCTAssertThrowsError(try formula.result())
+        XCTAssertThrowsError(try formula.result()) { error in
+            print(error)
+        }
     }
     
     func testParsingWithEmptyQueue() {
         sampleString = ""
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         
-        XCTAssertThrowsError(try formula.result())
+        XCTAssertThrowsError(try formula.result()) { error in
+            print(error)
+        }
     }
     
     func testParsingWithOnlyFirstOperand() {
