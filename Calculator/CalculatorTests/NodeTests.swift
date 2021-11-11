@@ -8,14 +8,30 @@
 import XCTest
 
 class NodeTests: XCTestCase {
+    
+    var sutDoubleNode: Node<Double>?
+    var sutIntNode: Node<Int>?
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sutDoubleNode = nil
+        sutIntNode = nil
+    }
 
-    func test_Node에Double타입_3을넣으면_item으로3을반환하는가() {
+    func test_Node에_Double_타입_3을_넣으면_item으로_3을_반환하는가() {
         // given
-        var node: Node<Double>?
         // when
-        node = Node<Double>(3.0)
+        sutDoubleNode = Node<Double>(3.0)
         // then
-        XCTAssertTrue(node?.item == Double(3.0))
+        XCTAssertTrue(sutDoubleNode?.item == 3.0)
+    }
+    
+    func test_Node에_Int_타입_3을_넣으면_item으로_3을_반환하는가() {
+        // given
+        // when
+        sutIntNode = Node<Int>(3)
+        // then
+        XCTAssertEqual(sutIntNode?.item, 3)
     }
 
 }
