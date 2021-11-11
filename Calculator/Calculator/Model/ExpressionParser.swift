@@ -8,13 +8,17 @@
 import Foundation
 
 enum ExpressionParser {
+    static let operatorSet = Operator.allCases.map({ String($0.rawValue) }).reduce("", { $0 + $1 })
+    
     static func parase(from input: String) -> Formula {
+        let operands = ExpressionParser.componentsByOperators(from: input)
+        let operators = input.filter { operatorSet.contains($0) }.map({ String($0) })
+        
         return Formula()
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.map({ String($0.rawValue) }).reduce("", { $0 + $1 })
-        let result = input.components(separatedBy: CharacterSet.init(charactersIn: operators))
+    private static func componentsByOperators(from input: String) -> [String] {
+        let result = input.components(separatedBy: CharacterSet.init(charactersIn: operatorSet))
         
         return result
     }
