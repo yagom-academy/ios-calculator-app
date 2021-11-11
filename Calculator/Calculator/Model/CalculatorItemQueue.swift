@@ -10,10 +10,18 @@ import Foundation
 struct CalculatorItemQueue {
     private var queueList: LinkedList = LinkedList()
     
-    mutating func enqueue(item: CalculateItem) {
+    private mutating func enqueue(item: CalculateItem) {
         queueList.append(data: item)
     }
     
+    mutating func enqueue(number: Int) {
+        self.enqueue(item: NumberItem(data: number))
+    }
+    
+    mutating func enqueue(operatorItem: OperatorItem) {
+        self.enqueue(item: operatorItem)
+    }
+
     @discardableResult
     mutating func dequeue() -> CalculateItem? {
         return queueList.removeFrist()
