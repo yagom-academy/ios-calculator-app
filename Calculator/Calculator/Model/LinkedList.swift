@@ -69,9 +69,7 @@ final class LinkedList<Element> {
     
     @discardableResult
     func removeFirst() -> Element? {
-        guard !isEmpty else {
-            return nil
-        }
+        if isEmpty { return nil }
         
         let item = head?.item
         if head?.next == nil {
