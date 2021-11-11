@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack = [Element]()
     private var outputStack = [Element]()
     
