@@ -10,14 +10,6 @@ import XCTest
 class ParsingTests: XCTestCase {
     var sampleString: String = ""
     
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-    
     func testSplitByStringExtension() {
         let string = "1 + 2 - 3 * 5 / 4"
         XCTAssertEqual(string.split(with: " "), ["1", "+" , "2", "-", "3", "*", "5", "/", "4"])
@@ -59,5 +51,19 @@ class ParsingTests: XCTestCase {
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         
         XCTAssertThrowsError(try formula.result())
+    }
+    
+    func testParsingWithEmptyQueue() {
+        sampleString = ""
+        var formula: Formula = ExpressionParser.parse(from: sampleString)
+        
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func testParsingWithOnlyFirstOperand() {
+        sampleString = "1"
+        var formula: Formula = ExpressionParser.parse(from: sampleString)
+        
+        XCTAssertEqual(try formula.result(), 1)
     }
 }
