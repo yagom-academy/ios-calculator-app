@@ -52,21 +52,21 @@ class LinkedListTests: XCTestCase {
         let newItems = [1,2,3,4,5,6,7,8,9,10]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems)
-        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
+        XCTAssertEqual(sut.convertedToDummyItemArray, convertedNewItems)
     }
     
     func testLinkedListAppend_givenNewOperators_expectCorrectSequence() {
         let newItems = ["+", "-", "*", "/"]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems)
-        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
+        XCTAssertEqual(sut.convertedToDummyItemArray, convertedNewItems)
     }
     
     func testLinkedListAppend_givenMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems) as [DummyItem]
-        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
+        XCTAssertEqual(sut.convertedToDummyItemArray, convertedNewItems)
     }
     
     func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectRemovedHeadEqualsFirstInsertedItem() {
@@ -88,7 +88,7 @@ class LinkedListTests: XCTestCase {
         guard let node = node else {
             return false
         }
-        return node.convertToLinkedListItem == item
+        return node.convertToDummyItem == item
     }
     
     private func convertToLinkedListArray(from sequence: [Any]) -> [DummyItem] {
@@ -119,12 +119,12 @@ class LinkedListTests: XCTestCase {
 }
 
 fileprivate extension LinkedList {
-    var convertedToLinkedListItemArray: [DummyItem] {
+    var convertedToDummyItemArray: [DummyItem] {
         var pointer = first
         var listContents: [DummyItem] = []
 
         while pointer != nil {
-            if let node = pointer, let value = node.convertToLinkedListItem {
+            if let node = pointer, let value = node.convertToDummyItem {
                 listContents.append(value)
                 pointer = node.next
             }
@@ -134,7 +134,7 @@ fileprivate extension LinkedList {
 }
 
 fileprivate extension Node {
-    var convertToLinkedListItem: DummyItem? {
+    var convertToDummyItem: DummyItem? {
         if let number = item as? Int {
             return DummyItem.number(value: number)
         }

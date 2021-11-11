@@ -63,23 +63,23 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     private func isEqualSequence(sequence: [Any], otherSequence: [Any]) -> Bool {
-        let firstConvertedSequence = convertToTestableType(sequence: sequence)
-        let secondConvertedSequence = convertToTestableType(sequence: otherSequence)
+        let firstConvertedSequence = convertToDummyItemArray(sequence: sequence)
+        let secondConvertedSequence = convertToDummyItemArray(sequence: otherSequence)
         
         return firstConvertedSequence == secondConvertedSequence
     }
     
-    private func convertToTestableType(sequence: [Any]) -> [DummyItem] {
+    private func convertToDummyItemArray(sequence: [Any]) -> [DummyItem] {
         var testableList: [DummyItem] = []
         for item in sequence {
-            if let convertedItem = convertToLinkedListItem(value: item) {
+            if let convertedItem = convertToDummyItem(value: item) {
                 testableList.append(convertedItem)
             }
         }
         return testableList
     }
     
-    private func convertToLinkedListItem(value: Any) -> DummyItem? {
+    private func convertToDummyItem(value: Any) -> DummyItem? {
         if let value = value as? Int {
             return DummyItem.number(value: value)
         }
