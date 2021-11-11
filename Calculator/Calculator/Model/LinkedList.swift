@@ -9,16 +9,7 @@ import Foundation
 
 class LinkedList<Element> {
     var head: Node<Element>?
-    var tail: Node<Element>? {
-        guard var node = head else {
-            return nil
-        }
-        
-        while let currentNode = node.next {
-            node = currentNode
-        }
-        return node
-    }
+    var tail: Node<Element>?
     var isEmpty: Bool {
         head == nil ? true : false
     }
@@ -41,11 +32,14 @@ class LinkedList<Element> {
     func append(_ item: Element) {
         let newNode = Node(item)
         
-        guard let lastNode = tail else {
+        guard let node = tail else {
             head = newNode
+            tail = newNode
             return
         }
-        lastNode.next = newNode
+        
+        node.next = newNode
+        tail = newNode
     }
     
     func removeFirst() -> Element? {
@@ -53,6 +47,7 @@ class LinkedList<Element> {
         let nextHeadNode = head?.next
     
         head = nextHeadNode
+        tail = head == nil ? head: tail
         return removedNodeValue
     }
 }
