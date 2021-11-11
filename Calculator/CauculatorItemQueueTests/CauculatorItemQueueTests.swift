@@ -34,6 +34,11 @@ class CauculatorItemQueueTests: XCTestCase {
     
     // MARK:- dequeue() tests
     func test_dequeue호출시_빈배열일시_nil을반환하는지() {
+        //given
+        guard sut.isEmpty else {
+            XCTFail()
+            return
+        }
         //when
         let result = sut.dequeue()
         //then
@@ -62,6 +67,11 @@ class CauculatorItemQueueTests: XCTestCase {
     
     // MARK:- isEmpty tests
     func test_빈큐에서_isEmpty를요청하면_true반환하는지() {
+        //given
+        guard sut.isEmpty else {
+            XCTFail()
+            return
+        }
         //when
         let result = sut.isEmpty
         //then
@@ -80,6 +90,7 @@ class CauculatorItemQueueTests: XCTestCase {
     func test_빈큐에서_front를요청하면_nil반환하는지() {
         //given
         guard sut.isEmpty else {
+            XCTFail()
             return
         }
         //when
@@ -109,6 +120,7 @@ class CauculatorItemQueueTests: XCTestCase {
     func test_빈큐에서_count를요청하면_0반환하는지() {
         //given
         guard sut.isEmpty else {
+            XCTFail()
             return
         }
         //when
@@ -138,6 +150,7 @@ class CauculatorItemQueueTests: XCTestCase {
     func test_빈큐에서_rear를요청하면_nil반환하는지() {
         //given
         guard sut.isEmpty else {
+            XCTFail()
             return
         }
         //when

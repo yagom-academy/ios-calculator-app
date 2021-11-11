@@ -42,6 +42,7 @@ class LinkedListTests: XCTestCase {
     func test_빈List에서_removeFirst호출시_에러없이nil반환되는지() {
         //given
         guard sut.isEmpty else {
+            XCTFail()
             return
         }
         //when
@@ -85,7 +86,6 @@ class LinkedListTests: XCTestCase {
 
     // MARK:- isEmpty tests
     func test_빈List에_isEmpty를요청하면_true반환() {
-        //given
         //when
         let result = sut.isEmpty
         //then
@@ -103,7 +103,10 @@ class LinkedListTests: XCTestCase {
     // MARK:- first tests
     func test_빈List에_first를요청하면_nil반환() {
         //given
-        guard sut.isEmpty else { return }
+        guard sut.isEmpty else {
+            XCTFail()
+            return
+        }
         //when
         let result = sut.first
         //then
@@ -130,7 +133,10 @@ class LinkedListTests: XCTestCase {
     // MARK:- count tests
     func test_빈List에_count를요청하면_0반환() {
         //given
-        guard sut.isEmpty else { return }
+        guard sut.isEmpty else {
+            XCTFail()
+            return
+        }
         //when
         let result = sut.count
         //then
@@ -158,6 +164,7 @@ class LinkedListTests: XCTestCase {
     func test_빈List에_tail요청하면_nil반환하는지() {
         //given
         guard sut.isEmpty else {
+            XCTFail()
             return
         }
         //when
