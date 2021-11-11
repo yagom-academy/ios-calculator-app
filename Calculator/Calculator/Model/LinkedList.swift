@@ -52,5 +52,9 @@ class LinkedList<Element> {
         head = head?.pointer
         return dataOfDequeueNode
     }
+    
+    func cleanQueue() {
+        head = nil
+    }
 }
 

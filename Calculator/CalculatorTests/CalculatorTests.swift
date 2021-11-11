@@ -65,6 +65,11 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(dataOfdefaultHead, "0")
         XCTAssertNil(sut.dequeueWithData())
     }
+    
+    func test_값이_존재하는_Queue의_head를_끊어서_초기화() {
+        sut.cleanQueue()
+        XCTAssertNil(sut.head?.data)
+    }
 
    }
 
