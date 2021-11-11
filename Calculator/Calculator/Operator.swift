@@ -1,21 +1,21 @@
-import UIKit
+import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
-    case add
-    case subtract
-    case divide
-    case multiply
+    case add = "+"
+    case subtract = "-"
+    case divide = "/"
+    case multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
-            add(lhs: lhs, rhs: rhs)
+            return add(lhs: lhs, rhs: rhs)
         case .subtract:
-            subtract(lhs: lhs, rhs: rhs)
+            return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            divide(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
-            multiply(lhs: lsh, rhs: rhs)
+            return multiply(lhs: lhs, rhs: rhs)
         }
     }
     private func add(lhs: Double, rhs: Double) -> Double {

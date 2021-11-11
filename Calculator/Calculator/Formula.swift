@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 struct Formula {
     var operands = CalculatorItemQueue<Element>()
