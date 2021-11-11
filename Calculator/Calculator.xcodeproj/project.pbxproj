@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A6B59B8273D1D4400C0347B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B59B7273D1D4400C0347B /* LinkedList.swift */; };
 		3AAEDBA327391B5F00E52E01 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAEDBA227391B5F00E52E01 /* CalculatorItemQueue.swift */; };
 		3AAEDBAB27391BDA00E52E01 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAEDBAA27391BDA00E52E01 /* CalculatorItemQueueTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A6B59B7273D1D4400C0347B /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		3AAEDBA227391B5F00E52E01 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		3AAEDBA827391BDA00E52E01 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AAEDBAA27391BDA00E52E01 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				3AAEDBA227391B5F00E52E01 /* CalculatorItemQueue.swift */,
+				3A6B59B7273D1D4400C0347B /* LinkedList.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				3A6B59B8273D1D4400C0347B /* LinkedList.swift in Sources */,
 				3AAEDBA327391B5F00E52E01 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
