@@ -5,8 +5,8 @@ protocol CalculateItem {
     
 }
 
-class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
-    func insertToQueue(_ insertValue: T) {
+class CalculatorItemQueue<Element>: LinkedListManager<Element>, CalculateItem {
+    func insertToQueue(_ insertValue: Element) {
         super.addNewNode(insertValue)
     }
     
@@ -16,29 +16,29 @@ class CalculatorItemQueue<T>: LinkedListManager<T>, CalculateItem {
     }
 }
 
-class Node<T> {
-    let nodeValue: T
+class Node<Element> {
+    let nodeValue: Element
     var pointer: Node?
     
-    init(_ nodeValue: T, pointer: Node? = nil) {
+    init(_ nodeValue: Element, pointer: Node? = nil) {
         self.nodeValue = nodeValue
         self.pointer = pointer
     }
 }
     
-class LinkedListManager<T> {
-    var head: Node<T>?
+class LinkedListManager<Element> {
+    var head: Node<Element>?
     
-    init(head: Node<T>?) {
+    init(head: Node<Element>?) {
         self.head = head
     }
     
-    func addNewNode(_ nodeValue: T) {
+    func addNewNode(_ nodeValue: Element) {
         if head == nil {
             head = Node(nodeValue)
             return
         }
-        var finderToLastNode: Node<T>? = head
+        var finderToLastNode: Node<Element>? = head
         while finderToLastNode?.pointer != nil {
             finderToLastNode = finderToLastNode?.pointer
         }
