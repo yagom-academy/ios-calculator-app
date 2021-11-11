@@ -3,7 +3,8 @@ import Foundation
 protocol CalculateItem {
 }
 
-class CalculatorItemQueue<T>: LinkedList<T>, CalculateItem {
+struct CalculatorItemQueue<T>: CalculateItem {
+    var items: LinkedList<T> = LinkedList<T>(head: nil)
 }
 
 class Node<T> {
