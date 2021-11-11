@@ -9,7 +9,7 @@ import Foundation
 
 extension LinkedList {
     func searchAll() -> [CalculateItem] {
-        var searchedList:[CalculateItem] = []
+        var searchedList: [CalculateItem] = []
         if headForTest == nil {
             return []
         }

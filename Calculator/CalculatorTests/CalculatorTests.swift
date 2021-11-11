@@ -114,7 +114,7 @@ class CalculatorTests: XCTestCase {
 
 extension CalculatorTests {
     func convertList(list: [CalculateItem]) -> [String] {
-        var compareList:[String] = []
+        var compareList: [String] = []
         
         for item in list {
             if let number = item as? NumberItem {
