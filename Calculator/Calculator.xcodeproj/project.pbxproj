@@ -21,6 +21,8 @@
 		C9F7BCF3273A44E20076ED33 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF1273A44480076ED33 /* CalculatorItemQueue.swift */; };
 		C9F7BCF5273A48650076ED33 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF4273A48650076ED33 /* CalculateItem.swift */; };
 		C9F7BCF6273A4F1F0076ED33 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF4273A48650076ED33 /* CalculateItem.swift */; };
+		C9F7BCF9273CC0890076ED33 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */; };
+		C9F7BCFA273CC0CA0076ED33 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,7 @@
 		C9F7BCED273A3C990076ED33 /* CalculatorItemQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTest.swift; sourceTree = "<group>"; };
 		C9F7BCF1273A44480076ED33 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		C9F7BCF4273A48650076ED33 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
+		C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				C9F7BCF7273CC0760076ED33 /* Extension */,
 				C9F7BCE9273A1F070076ED33 /* Model */,
 				C9F7BCDF2739195E0076ED33 /* View */,
 				C9F7BCE0273919620076ED33 /* Controller */,
@@ -136,6 +140,14 @@
 				C9F7BCF1273A44480076ED33 /* CalculatorItemQueue.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C9F7BCF7273CC0760076ED33 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F7BCF9273CC0890076ED33 /* Extension+Double.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C9F7BCF5273A48650076ED33 /* CalculateItem.swift in Sources */,
 				C9F7BCF2273A44480076ED33 /* CalculatorItemQueue.swift in Sources */,
@@ -251,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F7BCFA273CC0CA0076ED33 /* Extension+Double.swift in Sources */,
 				C9F7BCF6273A4F1F0076ED33 /* CalculateItem.swift in Sources */,
 				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
