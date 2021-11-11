@@ -28,7 +28,7 @@ class CalculatorDataStructureTest: XCTestCase {
         XCTAssertEqual(sut.elements(), [value])
     }
     
-    func test_insert와_delete를거치면_Elements가_nil배열을반환하는지() {
+    func test_insert와_delete에_각각하나의값만넣었을때_elements가_nil배열을반환하는지() {
         sut.insert("3")
         
         sut.delete("3")
