@@ -65,6 +65,58 @@ class CauculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.count == 1 && sut.front == 7)
     }
     
+    // MARK:- removeAll() tests
+    func test_4와7과9추가한List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        sut.enqueue(4)
+        sut.enqueue(7)
+        sut.enqueue(9)
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.front)
+        XCTAssertNil(sut.rear)
+        XCTAssertEqual(sut.count, 0)
+    }
+    func test_4와7추가한List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        sut.enqueue(4)
+        sut.enqueue(7)
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.front)
+        XCTAssertNil(sut.rear)
+        XCTAssertEqual(sut.count, 0)
+    }
+    func test_4추가한List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        sut.enqueue(4)
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.front)
+        XCTAssertNil(sut.rear)
+        XCTAssertEqual(sut.count, 0)
+    }
+    func test_빈List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        guard sut.isEmpty else {
+            XCTFail()
+            return
+        }
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.front)
+        XCTAssertNil(sut.rear)
+        XCTAssertEqual(sut.count, 0)
+    }
+    
     // MARK:- isEmpty tests
     func test_빈큐에서_isEmpty를요청하면_true반환하는지() {
         //given

@@ -40,13 +40,11 @@ class LinkedList<Element> {
         let removedNodeValue = head?.value
         let nextHeadNode = head?.next
         
-        if isEmpty {
-            head = nextHeadNode
-            tail = head
-        } else {
-            head = nextHeadNode
-            count -= 1
-        }
+        count = isEmpty ? count : count - 1
+        
+        head = nextHeadNode
+        tail = isEmpty ? head : tail
+        
         return removedNodeValue
     }
     

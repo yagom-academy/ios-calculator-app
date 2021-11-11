@@ -32,4 +32,7 @@ struct CalculatorItemQueue<Element> {
         }
         return list.removeFirst()
     }
+    mutating func removeAll() {
+        list.removeAll()
+    }
 }

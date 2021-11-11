@@ -58,6 +58,7 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertEqual(result, 4)
         XCTAssertNil(sut.head)
+        XCTAssertEqual(sut.tail?.value, nil)
         XCTAssertNil(sut.tail)
     }
     func test_4와7추가한List에서_removeFirst호출시_4가반환되고head와tail이7되는지() {
