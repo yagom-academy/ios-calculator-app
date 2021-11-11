@@ -24,16 +24,29 @@ struct CalculatorItemQueue {
         return firstNodeValue
     }
     
-    func allItems() -> [CalculateItem] {
-        var allItems: [CalculateItem] = []
+    func allOperands() -> [Double] {
+        var allOperands: [Double] = []
         
         var currentNode = self.firstNode
         
-        while let currentValue = currentNode?.value {
-            allItems.append(currentValue)
+        while let operand = currentNode?.value as? Double {
+            allOperands.append(operand)
             currentNode = currentNode?.nextNode
         }
         
-        return allItems
+        return allOperands
+    }
+    
+    func allOperators() -> [Operator] {
+        var allOperators: [Operator] = []
+        
+        var currentNode = self.firstNode
+        
+        while let operand = currentNode?.value as? Operator {
+            allOperators.append(operand)
+            currentNode = currentNode?.nextNode
+        }
+        
+        return allOperators
     }
 }

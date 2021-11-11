@@ -30,9 +30,8 @@ class CalcualtorItemQueueTests: XCTestCase {
         poppedItems.append(testQueue.dequeue())
         poppedItems.append(testQueue.dequeue())
         
-        let leftOperands = testQueue.allItems().map {
-            return $0 as? Double
-        }
+        let leftOperands = testQueue.allOperands()
+        
         let poppedOperands = poppedItems.map {
             return $0 as? Double
         }
@@ -53,9 +52,8 @@ class CalcualtorItemQueueTests: XCTestCase {
         poppedItems.append(testQueue.dequeue())
         testQueue.enqueue(Operator.add)
         
-        let leftOperators = testQueue.allItems().map {
-            return $0 as? Operator
-        }
+        let leftOperators = testQueue.allOperators()
+        
         let poppedOperators = poppedItems.map {
             return $0 as? Operator
         }
