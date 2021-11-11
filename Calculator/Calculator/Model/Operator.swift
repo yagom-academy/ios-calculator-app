@@ -27,15 +27,27 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        lhs + rhs
+        if lhs.isNaN || rhs.isNaN {
+            return Double.nan
+        }
+        return lhs + rhs
     }
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        lhs - rhs
+        if lhs.isNaN || rhs.isNaN {
+            return Double.nan
+        }
+        return lhs - rhs
     }
     private func divide(lhs: Double, rhs: Double) -> Double {
-        lhs / rhs
+        if rhs == 0 || lhs.isNaN || rhs.isNaN {
+            return Double.nan
+        }
+        return lhs / rhs
     }
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        lhs * rhs
+        if lhs.isNaN || rhs.isNaN {
+            return Double.nan
+        }
+        return lhs * rhs
     }
 }
