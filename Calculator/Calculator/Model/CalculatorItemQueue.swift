@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Queue<T: Equatable> {
+class CalculatorItemQueue<T: Equatable> {
     var linkedList = LinkedList<T>()
     
     func enqueue(_ value: T) {

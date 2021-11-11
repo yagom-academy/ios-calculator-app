@@ -7,12 +7,12 @@
 
 import XCTest
 
-class QueueTests: XCTestCase {
-    var sut: Queue<String>!
+class CalculatorItemQueueTests: XCTestCase {
+    var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Queue()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
