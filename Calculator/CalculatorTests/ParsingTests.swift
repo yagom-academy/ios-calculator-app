@@ -36,11 +36,11 @@ class ParsingTests: XCTestCase {
     }
     
     func testParsingWithNegative() {
-        sampleString = "1.7 + 3.8 - 21.9 / 41.0 * -310.7"
+        sampleString = "1.7 + -3.8 - -21.9 / -41.0 * -310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
             let result = try formula.result()
-            XCTAssertEqual(result, ((1.7 + 3.8) - 21.9) / 41.0 * -310.7 )
+            XCTAssertEqual(result, ((1.7 + -3.8) - -21.9) / -41.0 * -310.7 )
         } catch let error {
             print(error.localizedDescription)
             XCTFail()
