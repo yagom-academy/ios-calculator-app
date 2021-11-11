@@ -8,7 +8,7 @@
 import XCTest
 
 extension String {
-    func split(with target: Character) -> [String] {
+    func split(with target: Character = " ") -> [String] {
         var result = [String]()
         var number = ""
         self.forEach{ element in
@@ -38,7 +38,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let sliceInput = input.split(with: "+")
+        let sliceInput = input.split()
         let operands = sliceInput.filter { Double($0.description) != nil }
         return operands
     }
