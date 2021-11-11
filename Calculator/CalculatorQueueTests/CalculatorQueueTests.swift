@@ -20,31 +20,31 @@ class CalculatorQueueTests: XCTestCase {
     }
 
     func test_calculatorItemQueue_item이_들어올경우_내부저장소에_저장이되는지() {
-        sut.enQueue(operation: "+")
+        sut.enqueue(operation: "+")
         let operationCount = sut.countAllItem()
 
         XCTAssertEqual(operationCount, 1)
     }
     
     func test_calculatorItemQueue_item이_2개_들어올경우_내부저장소에_저장이되는지() {
-        sut.enQueue(operation: "-")
-        sut.enQueue(operation: "+")
+        sut.enqueue(operation: "-")
+        sut.enqueue(operation: "+")
         let operationCount = sut.countAllItem()
 
         XCTAssertEqual(operationCount, 2)
     }
     
     func test_calculatorItemQueue_item이_내부저장소에_순서대로_저장되는지() {
-        sut.enQueue(operation: "-")
-        sut.enQueue(operation: "+")
-        sut.enQueue(operation: "=")
+        sut.enqueue(operation: "-")
+        sut.enqueue(operation: "+")
+        sut.enqueue(operation: "=")
         
         let testArray: [String] = ["-", "+", "="]
         var operationDequeueArray: [String] = []
         let operationStorageCount = sut.countAllItem()
         
         for _ in 1...operationStorageCount {
-            guard let operation = sut.deQueue() else {
+            guard let operation = sut.dequeue() else {
                 return
             }
             
@@ -55,37 +55,37 @@ class CalculatorQueueTests: XCTestCase {
     }
     
     func test_calculatorItemQueue_item을_내부저장소에서_제대로_반환하는지() {
-        sut.enQueue(operation: "-")
-        let operationData = sut.deQueue()
+        sut.enqueue(operation: "-")
+        let operationData = sut.dequeue()
         
         XCTAssertEqual(operationData, "-")
     }
     
     func test_calculatorItemQueue_item이_2개_들어올경우_먼저온순서대로_반환하는지() {
-        sut.enQueue(operation: "+")
-        sut.enQueue(operation: "-")
-        let operationData = sut.deQueue()
+        sut.enqueue(operation: "+")
+        sut.enqueue(operation: "-")
+        let operationData = sut.dequeue()
         
         XCTAssertEqual(operationData, "+")
     }
     
     func test_calculatorItemQueue_item이_비어있을경우_nil_반환하는지() {
-        let operationData = sut.deQueue()
+        let operationData = sut.dequeue()
         
         XCTAssertNil(operationData)
     }
     
     func test_calculatorItemQueue_item이_추가되었다가_다빠질경우_nil_반환하는지() {
-        sut.enQueue(operation: "+")
-        sut.deQueue()
-        let operationData = sut.deQueue()
+        sut.enqueue(operation: "+")
+        sut.dequeue()
+        let operationData = sut.dequeue()
         
         XCTAssertNil(operationData)
     }
     
     func test_calculatorItemQueue_item이_한번에_제거되는지() {
-        sut.enQueue(operation: "+")
-        sut.enQueue(operation: "=")
+        sut.enqueue(operation: "+")
+        sut.enqueue(operation: "=")
         sut.removeAllItem()
         let operationCount = sut.countAllItem()
         

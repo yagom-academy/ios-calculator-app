@@ -14,11 +14,11 @@ protocol CalculatorItem {
 struct CalculatorItemQueue <T> where T: CalculatorItem {
     private var operationStorage: [T] = []
     
-    mutating func enQueue(operation: T) {
+    mutating func enqueue(operation: T) {
         operationStorage.append(operation)
     }
     
-    mutating func deQueue() -> T? {
+    mutating func dequeue() -> T? {
         if operationStorage.isEmpty {
             return nil
         }
