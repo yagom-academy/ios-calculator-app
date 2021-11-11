@@ -35,3 +35,5 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(try calculateQueue.dequeue(), 1)
     }
 }
+
+extension Int: CalculateItem { }
