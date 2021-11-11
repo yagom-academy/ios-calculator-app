@@ -102,7 +102,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
 }
 
-private extension LinkedList {
+fileprivate extension LinkedList {
     var length: Int {
         var pointer = head
         var count = 0
@@ -117,7 +117,7 @@ private extension LinkedList {
     }
 }
 
-private extension CalculatorItemQueue {
+fileprivate extension CalculatorItemQueue {
     var length: Int {
         return list.length
     }

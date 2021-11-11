@@ -149,7 +149,7 @@ class LinkedListTests: XCTestCase {
     }
 }
 
-private extension LinkedList {
+fileprivate extension LinkedList {
     var first: T? {
         guard let head = head else {
             return nil
@@ -179,7 +179,7 @@ private extension LinkedList {
     }
 }
 
-private extension Node {
+fileprivate extension Node {
     var convertToLinkedListItem: DummyItem? {
         if let number = item as? Int {
             return DummyItem.number(value: number)
