@@ -43,6 +43,10 @@ struct Formula {
             }
         }
         
+        guard operands.isEmpty && operators.isEmpty else {
+            throw OperationError.invalidFormula
+        }
+        
         return currentValue
     }
 }
