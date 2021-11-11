@@ -94,7 +94,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = try calculator.calculate(lhs: 3.0, rhs: 1.5)
+        let result = calculator.calculate(lhs: 3.0, rhs: 1.5)
         XCTAssertEqual(2.0, result)
     }
     
