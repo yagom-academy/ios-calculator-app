@@ -36,6 +36,13 @@ class LinkedListTest: XCTestCase {
         let isEmpty = list.isEmpty
         XCTAssertEqual(false, isEmpty)
     }
+    
+    func test_링크드리스트가_비어있는_경우에_데이터를_추출하면_nil이_나오는지() {
+        let list = LinkedList<Double>()
+        let isEmpty = list.isEmpty
+        XCTAssertEqual(true, isEmpty)
+        XCTAssertNil(list.first?.value)
+    }
 
     func test_링크드리스트에_데이터를_추가한_후_개수가_맞는지() {
         let list = LinkedList<Double>()
