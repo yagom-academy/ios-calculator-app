@@ -19,23 +19,19 @@ extension String {
 
 
 enum ExpressionParser {
-    static let operatorEnumArray = Operator.allCases.map { String($0.rawValue) }
-    
     func parse(from input: String) -> Formula {
-        var formula = Formula()
-        
+        let operatorEnumArray = Operator.allCases.map { String($0.rawValue) }
         let inputCharacters = Array(input).map { String($0) }
-        let operandsArray = componentsByOperators(from: input)
-        let operatorArray = inputCharacters.filter { ExpressionParser.operatorEnumArray.contains($0) == true }
+        let inputOperands = componentsByOperators(from: input)
+        let inputOperator = inputCharacters.filter { operatorEnumArray.contains($0) == true }
         
-        for operandIndex in 0...operandsArray.count {
-            formula.operands.insertToQueue(Double(operandsArray[operandIndex]) ?? 0)
+        let formula = Formula()
+        for operandIndex in 0...inputOperands.count {
+            formula.operands.insertToQueue(Double(inputOperands[operandIndex]) ?? 0)
         }
-        
-        for operatorIndex in 0...operatorArray.count {
-            formula.operators.insertToQueue(operatorArray[operatorIndex])
+        for operatorIndex in 0...inputOperator.count {
+            formula.operators.insertToQueue(inputOperator[operatorIndex])
         }
-         //입력받은 값 피연산자or연산자를 두개의 큐 중 적절한 큐에 저장
         return formula
     }
 
