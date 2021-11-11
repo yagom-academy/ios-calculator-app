@@ -40,11 +40,9 @@ struct LinkedList<T> {
         rear = rear?.next
     }
     
-    mutating func deQueue() -> T? {
-        let data = front?.data
-        
-        if isEmpty() {
-            return nil
+    mutating func deQueue() throws -> T {
+        guard let data = front?.data else {
+            throw CalculateError.deQueueFailed
         }
         front = front?.next
         return data
