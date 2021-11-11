@@ -3,7 +3,7 @@ import Foundation
 protocol CalculateItem {
 }
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T: CalculateItem> {
     var items: LinkedList<T> = LinkedList<T>(head: nil)
 
     mutating func enqueue(value: T) {
