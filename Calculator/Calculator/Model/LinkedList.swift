@@ -37,9 +37,20 @@ class LinkedList<Element> {
     }
     
     func dequeue() {
+        
         guard isEmpty == false else { return }
         
         head = head?.pointer
+    }
+    
+    func dequeueWithData() -> Element? {
+
+        guard isEmpty == false else { return nil }
+        
+        let dataOfDequeueNode = head?.data
+        
+        head = head?.pointer
+        return dataOfDequeueNode
     }
 }
 

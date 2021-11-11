@@ -54,6 +54,17 @@ class CalculatorTests: XCTestCase {
            sut.dequeue()
            XCTAssertNil(sut.head?.data)
        }
+    
+    func test_dequeueWithdata_실행시_0이_제대로_나오는지() {
+        var dataOfdeque = sut.dequeueWithData()
+        XCTAssertEqual(dataOfdeque, "0")
+    }
+    
+    func test_빈_리스트에_dequeueWithData_를_하면_nil이_나오는지() {
+        var dataOfdefaultHead = sut.dequeueWithData()
+        XCTAssertEqual(dataOfdefaultHead, "0")
+        XCTAssertNil(sut.dequeueWithData())
+    }
 
    }
 
