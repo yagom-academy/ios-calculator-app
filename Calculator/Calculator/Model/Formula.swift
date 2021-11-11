@@ -16,7 +16,7 @@ struct Formula {
         var result = try operands.deQueue()
         
         while !operators.isEmpty {
-            guard let unitResult = Operator(rawValue: try operators.deQueue())?.calculate(lhs: result, rhs: try operands.deQueue()) else {
+            guard let unitResult = try Operator(rawValue: try operators.deQueue())?.calculate(lhs: result, rhs: try operands.deQueue()) else {
                 throw CalculateError.calculateFailed
             }
             result = unitResult

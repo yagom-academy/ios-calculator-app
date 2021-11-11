@@ -10,5 +10,5 @@ import Foundation
 enum CalculateError: Error {
     case deQueueFailed
     case calculateFailed
-    
+    case NotANumber
 }
