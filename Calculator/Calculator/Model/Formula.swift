@@ -9,7 +9,7 @@ import Foundation
 
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Character>()
+    var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
         guard operands.count > 1, operands.front != nil else {
@@ -45,20 +45,14 @@ struct Formula {
     
     private mutating func firstToCalculate() throws -> Double {
         let element = try operators.dequeue()
-        guard let `operator` = Operator(rawValue: element) else {
-            throw CalculatorError.wrongOperator
-        }
         let lhs = try operands.dequeue()
         let rhs = try operands.dequeue()
-        return `operator`.calculate(lhs: lhs, rhs: rhs)
+        return element.calculate(lhs: lhs, rhs: rhs)
     }
     
     private mutating func calculateFromThrSecond(lhs: Double) throws -> Double {
         let element = try operators.dequeue()
-        guard let `operator` = Operator(rawValue: element) else {
-            throw CalculatorError.wrongOperator
-        }
         let rhs = try operands.dequeue()
-        return `operator`.calculate(lhs: lhs, rhs: rhs)
+        return element.calculate(lhs: lhs, rhs: rhs)
     }
 }

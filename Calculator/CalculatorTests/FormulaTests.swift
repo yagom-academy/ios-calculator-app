@@ -19,7 +19,7 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("+")
+        formula.operators.enqueue(.add)
         let result = formula.result()
         
         XCTAssertEqual(result, 0.0)
@@ -29,9 +29,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("+")
+        formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("+")
+        formula.operators.enqueue(.add)
         let result = formula.result()
         
         XCTAssertEqual(result, 4.0)
@@ -41,9 +41,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("+")
+        formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("+")
+        formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
         let result = formula.result()
         
@@ -54,7 +54,7 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("-")
+        formula.operators.enqueue(.subtract)
         let result = formula.result()
         
         XCTAssertEqual(result, 0)
@@ -64,9 +64,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("-")
+        formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("-")
+        formula.operators.enqueue(.subtract)
         let result = formula.result()
         
         XCTAssertEqual(result, 0.0)
@@ -76,9 +76,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("-")
+        formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("-")
+        formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
         let result = formula.result()
         
@@ -89,7 +89,7 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("*")
+        formula.operators.enqueue(.multiply)
         let result = formula.result()
         
         XCTAssertEqual(result, 0)
@@ -99,9 +99,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("*")
+        formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("*")
+        formula.operators.enqueue(.multiply)
         let result = formula.result()
         
         XCTAssertEqual(result, 4.0)
@@ -111,9 +111,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("*")
+        formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("*")
+        formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
         let result = formula.result()
         
@@ -124,7 +124,7 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.divide)
         let result = formula.result()
         
         XCTAssertEqual(result, 0)
@@ -134,9 +134,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.divide)
         let result = formula.result()
         
         XCTAssertEqual(result, 1.0)
@@ -146,9 +146,9 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
         let result = formula.result()
         
@@ -159,7 +159,7 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         
         formula.operands.enqueue(2.0)
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.divide)
         formula.operands.enqueue(0)
         let result = formula.result()
         

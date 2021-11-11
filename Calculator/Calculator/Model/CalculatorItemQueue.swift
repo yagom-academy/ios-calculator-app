@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var inBox = [Element]()
     private var outBox = [Element]()
     
