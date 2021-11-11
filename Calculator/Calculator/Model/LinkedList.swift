@@ -15,6 +15,10 @@ class Node {
         self.data = data
         self.next = next
     }
+    
+    deinit {
+        print(self.data)
+    }
 }
 
 struct LinkedList {
@@ -49,19 +53,8 @@ struct LinkedList {
     }
     
     mutating func clear() {
-        if head == nil {
-            return
-        }
-        
-        var node = head
         head = nil
         tail = nil
-        
-        while node?.next != nil {
-            let nextNode = node?.next
-            node = nextNode
-        }
-        node = nil
     }
     
     var isEmpty: Bool {

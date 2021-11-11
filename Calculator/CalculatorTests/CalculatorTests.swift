@@ -81,6 +81,7 @@ class CalculatorTests: XCTestCase {
     func test_QueueList_안의_데이터를_모두_지운다() {
         queue.enqueue(item: OperatorItem.add)
         queue.enqueue(item: OperatorItem.divide)
+        queue.enqueue(item: NumberItem(data: 1))
         queue.enqueue(item: NumberItem(data: 2))
         
         queue.clearQueue()
