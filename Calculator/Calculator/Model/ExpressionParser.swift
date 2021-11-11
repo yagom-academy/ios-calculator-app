@@ -25,4 +25,11 @@ enum ExpressionParser {
         
         return result
     }
+    
+    private static func convertToDouble(from string: String) -> Double? {
+        guard let result = Double(string) else {
+            return nil
+        }
+        return result
+    }
 }
