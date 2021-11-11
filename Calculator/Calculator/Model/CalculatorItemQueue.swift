@@ -10,7 +10,7 @@ import Foundation
 protocol CalculateItem { }
 
 struct CalculatorItemQueue<Element> where Element: CalculateItem {
-    private(set) var items: LinkedList<Element>
+    private var items: LinkedList<Element>
     
     var count: Int {
         items.count
