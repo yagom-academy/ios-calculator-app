@@ -14,7 +14,8 @@ class FormulaTests: XCTestCase {
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
-        let result = formula.result()
+
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 0.0)
     }
@@ -26,7 +27,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 4.0)
     }
@@ -39,7 +40,7 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.add)
         formula.operands.enqueue(2.0)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 6.0)
     }
@@ -49,7 +50,7 @@ class FormulaTests: XCTestCase {
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 0)
     }
@@ -61,7 +62,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 0.0)
     }
@@ -74,7 +75,7 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.subtract)
         formula.operands.enqueue(2.0)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, -2.0)
     }
@@ -84,7 +85,7 @@ class FormulaTests: XCTestCase {
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 0)
     }
@@ -96,7 +97,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 4.0)
     }
@@ -109,7 +110,7 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.multiply)
         formula.operands.enqueue(2.0)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 8.0)
     }
@@ -119,7 +120,7 @@ class FormulaTests: XCTestCase {
         
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 0)
     }
@@ -131,7 +132,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 1.0)
     }
@@ -144,7 +145,7 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
         formula.operands.enqueue(2.0)
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(result, 0.5)
     }
@@ -155,8 +156,13 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(.divide)
         formula.operands.enqueue(0)
-        let result = formula.result()
+        do {
+            let result = try formula.result()
+            
+            XCTAssertTrue(result.isNaN)
+        } catch {
+            print("error")
+        }
         
-        XCTAssertTrue(result.isNaN)
     }
 }

@@ -11,19 +11,6 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    mutating func result() -> Double {
-        guard operands.count > 1, operands.front != nil else {
-            operators.clear()
-            operands.clear()
-            return 0.0
-        }
-        var result: Double = 0
-        do {
-            result = try calculateFirst()
-        } catch let error as CalculatorError {
-            print(error.description)
-        } catch {
-            print(error.localizedDescription)
     init() {
         self.operands = CalculatorItemQueue<Double>()
         self.operators = CalculatorItemQueue<Operator>()
@@ -35,35 +22,26 @@ struct Formula {
         self.operators = operators
     }
     
+    mutating func result() throws -> Double {
+        guard let firstOperand = operands.dequeue() else {
+            throw CalculatorError.queueNotFound
         }
+        var currentOperand = firstOperand
         guard operands.isEmpty == false else {
-            return result
+            return 0
         }
-        repeat {
-            do {
-                result = try calculateFromTheSecond(lhs: result)
-            } catch let error as CalculatorError {
-                print(error.description)
-            } catch {
-                print(error.localizedDescription)
+        while operands.isEmpty == false {
+            guard let currentOperator = operators.dequeue() else {
+                throw CalculatorError.wrongOperator
             }
-        } while operands.isEmpty == false
+            guard let rightOperand = operands.dequeue() else {
+                throw CalculatorError.wrongOperand
+            }
+            currentOperand = currentOperator.calculate(lhs: currentOperand, rhs: rightOperand)
+        }
         if operators.isEmpty == false {
             operators.clear()
         }
-        return result
-    }
-    
-    private mutating func calculateFirst() throws -> Double {
-        let element = try operators.dequeue()
-        let lhs = try operands.dequeue()
-        let rhs = try operands.dequeue()
-        return element.calculate(lhs: lhs, rhs: rhs)
-    }
-    
-    private mutating func calculateFromTheSecond(lhs: Double) throws -> Double {
-        let element = try operators.dequeue()
-        let rhs = try operands.dequeue()
-        return element.calculate(lhs: lhs, rhs: rhs)
+        return currentOperand
     }
 }

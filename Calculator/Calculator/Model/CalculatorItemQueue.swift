@@ -11,7 +11,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var inBox = [Element]()
     private var outBox = [Element]()
     
-    init(_ items: [Element]) {
+    init(_ items: [Element] = []) {
         self.inBox = items
     }
     
@@ -32,16 +32,14 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     @discardableResult
-    mutating func dequeue() throws -> Element {
+    mutating func dequeue() -> Element? {
         guard (outBox.isEmpty && inBox.isEmpty) == false else {
-            throw CalculatorError.queueNotFound
+            return nil
         }
-        
         if outBox.isEmpty {
             outBox = inBox.reversed()
             inBox = []
         }
-        
         return outBox.removeLast()
     }
     
