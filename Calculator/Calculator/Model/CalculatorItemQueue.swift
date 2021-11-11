@@ -15,14 +15,14 @@ extension Character: CalculateItem {
     
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T: CalculateItem> {
     private var calculatorItems = [T]()
     
-    func enqueue(_ item: T) {
+    mutating func enqueue(_ item: T) {
         calculatorItems.append(item)
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         guard calculatorItems.isEmpty == false else {
             return nil
         }
@@ -35,7 +35,7 @@ class CalculatorItemQueue<T: CalculateItem> {
         return firstItem
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         calculatorItems.removeAll()
     }
 }
