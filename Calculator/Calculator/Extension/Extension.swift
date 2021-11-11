@@ -13,8 +13,10 @@ extension Double: CalculateItem {
 
 extension String {
     func split(with target: Character) -> [String] {
-        
-
-        return []
+        let string = self.split(separator: target)
+        guard let aa = string as? [String] else {
+            return []
+        }
+        return aa
     }
 }
