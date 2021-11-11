@@ -16,7 +16,7 @@ extension Character: CalculateItem {
 }
 
 class CalculatorItemQueue<T: CalculateItem> {
-    var calculatorItems = [T]()
+    private var calculatorItems = [T]()
     
     func enqueue(_ item: T) {
         calculatorItems.append(item)
