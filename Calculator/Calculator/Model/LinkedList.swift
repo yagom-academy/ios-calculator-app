@@ -42,7 +42,7 @@ struct LinkedList<T> {
     
     mutating func deQueue() throws -> T {
         guard let data = front?.data else {
-            throw CalculateError.deQueueFailed
+            throw QueueError.deQueueFailed
         }
         front = front?.next
         return data
