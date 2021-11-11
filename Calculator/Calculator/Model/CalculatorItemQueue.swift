@@ -14,6 +14,7 @@ struct CalculatorItemQueue {
         queueList.append(data: item)
     }
     
+    @discardableResult
     mutating func dequeue() -> CalculateItem? {
         return queueList.removeFrist()
     }
