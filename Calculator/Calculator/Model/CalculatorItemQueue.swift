@@ -17,22 +17,25 @@ extension Character: CalculateItem {
 
 class CalculatorItemQueue<T: CalculateItem> {
     var calculatorItems = [T]()
-    var temporaryItems = [T]()
     
     func enqueue(_ item: T) {
         calculatorItems.append(item)
     }
     
-    func dequeue() -> [T] {
+    func dequeue() -> T? {
+        var temporaryItems = [T]()
+        
         guard calculatorItems.isEmpty == false else {
-            return calculatorItems
+            return nil
         }
         temporaryItems = calculatorItems.reversed()
         temporaryItems.removeLast()
         calculatorItems = temporaryItems.reversed()
         temporaryItems.removeAll()
         
-        return calculatorItems
+        let firstItem = temporaryItems.last
+        
+        return firstItem
     }
     
     func removeAll() {
