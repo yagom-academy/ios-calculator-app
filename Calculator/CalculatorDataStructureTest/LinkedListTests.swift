@@ -20,19 +20,19 @@ class CalculatorDataStructureTest: XCTestCase {
         sut = nil
     }
     
-    func test_insert후test_Elements에값을그대로반환되는지() {
+    func test_insert후Elements가값을그대로반환되는지() {
         let value = "5"
         
         sut.insert(value)
         
-        XCTAssertEqual(sut.test_Elements(), [value])
+        XCTAssertEqual(sut.Elements(), [value])
     }
     
-    func test_insert와_delete를거치면_test_Elements가_nil배열을반환하는지() {
+    func test_insert와_delete를거치면_Elements가_nil배열을반환하는지() {
         sut.insert("3")
         
         sut.delete("3")
         
-        XCTAssertEqual(sut.test_Elements(), [])
+        XCTAssertEqual(sut.Elements(), [])
     }
 }

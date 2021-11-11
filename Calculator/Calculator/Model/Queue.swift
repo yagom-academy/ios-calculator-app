@@ -21,6 +21,6 @@ class Queue<T: Equatable> {
     }
     
     func test_Elements() -> [T] {
-        linkedList.test_Elements()
+        linkedList.Elements()
     }
 }
