@@ -12,7 +12,7 @@ protocol CalculatorItem {
 }
 
 struct CalculatorItemQueue <T> where T: CalculatorItem {
-    var operationStorage: [T] = []
+    private var operationStorage: [T] = []
     
     mutating func enQueue(operation: T) {
         operationStorage.append(operation)
@@ -30,5 +30,10 @@ struct CalculatorItemQueue <T> where T: CalculatorItem {
     mutating func removeAllItem() {
         operationStorage.removeAll()
     }
+    
+    func countAllItem() -> Int {
+        return operationStorage.count
+    }
 }
+
 

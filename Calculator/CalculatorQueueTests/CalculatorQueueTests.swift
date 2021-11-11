@@ -21,7 +21,7 @@ class CalculatorQueueTests: XCTestCase {
 
     func test_calculatorItemQueue_item이_들어올경우_내부저장소에_저장이되는지() {
         sut.enQueue(operation: "+")
-        let operationCount = sut.operationStorage.count
+        let operationCount = sut.countAllItem()
 
         XCTAssertEqual(operationCount, 1)
     }
@@ -29,7 +29,7 @@ class CalculatorQueueTests: XCTestCase {
     func test_calculatorItemQueue_item이_2개_들어올경우_내부저장소에_저장이되는지() {
         sut.enQueue(operation: "-")
         sut.enQueue(operation: "+")
-        let operationCount = sut.operationStorage.count
+        let operationCount = sut.countAllItem()
 
         XCTAssertEqual(operationCount, 2)
     }
@@ -39,9 +39,19 @@ class CalculatorQueueTests: XCTestCase {
         sut.enQueue(operation: "+")
         sut.enQueue(operation: "=")
         
-        let testArr: [String] = ["-", "+", "="]
+        let testArray: [String] = ["-", "+", "="]
+        var operationDequeueArray: [String] = []
+        let operationStorageCount = sut.countAllItem()
         
-        XCTAssertEqual(testArr, sut.operationStorage)
+        for _ in 1...operationStorageCount {
+            guard let operation = sut.deQueue() else {
+                return
+            }
+            
+            operationDequeueArray.append(operation)
+        }
+    
+        XCTAssertEqual(testArray.count, operationDequeueArray.count)
     }
     
     func test_calculatorItemQueue_item을_내부저장소에서_제대로_반환하는지() {
@@ -74,17 +84,17 @@ class CalculatorQueueTests: XCTestCase {
     }
     
     func test_calculatorItemQueue_item이_한번에_제거되는지() {
-        sut.operationStorage.append("+")
-        sut.operationStorage.append("=")
+        sut.enQueue(operation: "+")
+        sut.enQueue(operation: "=")
         sut.removeAllItem()
-        let operationCount = sut.operationStorage.count
+        let operationCount = sut.countAllItem()
         
         XCTAssertEqual(operationCount, 0)
     }
     
-    func test_calculatorItemQueue가_빈경우에_모두_제거할경우_정상작동하는지() {
+    func test_calculatorItemQueue가_이미_빈경우에_제거요청시_정상작동하는지() {
         sut.removeAllItem()
-        let operationRemoveAllTest = sut.operationStorage.count
+        let operationRemoveAllTest = sut.countAllItem()
         
         XCTAssertEqual(operationRemoveAllTest, 0)
     }
