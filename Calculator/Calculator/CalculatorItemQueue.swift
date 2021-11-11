@@ -6,9 +6,6 @@ struct CalculatorItemQueue {
     }
     
     mutating func dequeue() -> CalculateItem? {
-        if items.isEmpty {
-            return nil
-        }
         return items.removeFirst()
     }
 }
