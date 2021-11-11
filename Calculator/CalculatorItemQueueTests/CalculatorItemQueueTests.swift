@@ -9,7 +9,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         queue.enqueue(input)
         
-        XCTAssertEqual(queue.inBox, ["2"])
+        XCTAssertEqual(queue.inputStack, ["2"])
     }
     
     func test_enqueue를여러번호출시_배열이차례대로들어가는지() {
@@ -22,7 +22,7 @@ class CalculatorItemQueueTests: XCTestCase {
         input = "5"
         queue.enqueue(input)
        
-        XCTAssertEqual(queue.inBox, ["2","3","4","5"])
+        XCTAssertEqual(queue.inputStack, ["2","3","4","5"])
     }
     
     func test_enqueue를호출해값을넣고_dequeue호출시_배열에값이정상적으로빠지는지() {
@@ -31,7 +31,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         queue.dequeue()
         
-        XCTAssertTrue(queue.inBox.isEmpty)
+        XCTAssertTrue(queue.inputStack.isEmpty)
     }
     
     func test_outbox가비어있을때_dequeue를호출하면reverse된inbox의첫번째요소가outbox에정상적으로저장되는지() {
@@ -104,7 +104,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         queue.clear()
         
-        XCTAssertTrue(queue.inBox.isEmpty)
-        XCTAssertTrue(queue.outBox.isEmpty)
+        XCTAssertTrue(queue.inputStack.isEmpty)
+        XCTAssertTrue(queue.outputStack.isEmpty)
     }
 }

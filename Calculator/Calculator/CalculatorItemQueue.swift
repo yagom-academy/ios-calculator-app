@@ -2,41 +2,41 @@
 import Foundation
 
 struct CalculatorItemQueue<Element>: CalculateItem {
-    private var inBox = [Element]()
-    private var outBox = [Element]()
+    private var inputStack = [Element]()
+    private var outputStack = [Element]()
     
     var front: Element? {
-        return outBox.last ?? inBox.first
+        return outputStack.last ?? inputStack.first
     }
     
     var count: Int {
-        return outBox.count
+        return outputStack.count
     }
     
     var isEmpty: Bool {
-        return inBox.isEmpty && outBox.isEmpty
+        return inputStack.isEmpty && outputStack.isEmpty
     }
     
     mutating func enqueue(_ element: Element) {
-        inBox.append(element)
+        inputStack.append(element)
     }
     
     @discardableResult
     mutating func dequeue() -> Element? {
-        if inBox.isEmpty && outBox.isEmpty {
+        if inputStack.isEmpty && outputStack.isEmpty {
             return nil
         }
         
-        if outBox.isEmpty {
-            outBox = inBox.reversed()
-            inBox.removeAll()
+        if outputStack.isEmpty {
+            outputStack = inputStack.reversed()
+            inputStack.removeAll()
         }
             
-        return outBox.removeLast()
+        return outputStack.removeLast()
     }
     
     mutating func clear() {
-        inBox.removeAll()
-        outBox.removeAll()
+        inputStack.removeAll()
+        outputStack.removeAll()
     }
 }
