@@ -25,20 +25,16 @@ struct CalculatorItemQueue {
         return firstNodeValue
     }
     
-    func printAllItems() {
-        print("PrintAllItems() - start")
+    func allItems() -> [CalculateItem] {
+        var allItems: [CalculateItem] = []
+        
         var currentNode = self.firstNode
         
-        while currentNode != nil {
-            if let `operand` = currentNode?.value as? Double {
-                print(`operand`)
-            }
-            else if let `operator` = currentNode?.value as? Operator {
-                print(`operator`.rawValue)
-            }
-            
+        while let currentValue = currentNode?.value {
+            allItems.append(currentValue)
             currentNode = currentNode?.nextNode
         }
-        print("PrintAllItems() - end")
+        
+        return allItems
     }
 }
