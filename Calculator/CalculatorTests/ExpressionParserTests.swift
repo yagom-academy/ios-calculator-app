@@ -66,4 +66,11 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(input.operands.count == 3)
         XCTAssertTrue(input.operators.count == 3)
     }
+    
+    func test_연산자와숫자가_두개세개() {
+        let input = ExpressionParser.parse(from: "12+12.123+12")
+        
+        XCTAssertTrue(input.operands.count == 3)
+        XCTAssertTrue(input.operators.count == 2)
+    }
 }
