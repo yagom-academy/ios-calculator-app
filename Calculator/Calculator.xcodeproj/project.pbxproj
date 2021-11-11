@@ -23,6 +23,7 @@
 		C9F7BCF6273A4F1F0076ED33 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF4273A48650076ED33 /* CalculateItem.swift */; };
 		C9F7BCF9273CC0890076ED33 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */; };
 		C9F7BCFA273CC0CA0076ED33 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */; };
+		C9F7BCFE273CEA330076ED33 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		C9F7BCF1273A44480076ED33 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		C9F7BCF4273A48650076ED33 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
+		C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				C9F7BCD6273919470076ED33 /* LinkedListTest.swift */,
 				C9F7BCED273A3C990076ED33 /* CalculatorItemQueueTest.swift */,
 				C9F7BCD8273919470076ED33 /* Info.plist */,
+				C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
 				C9F7BCF3273A44E20076ED33 /* CalculatorItemQueue.swift in Sources */,
+				C9F7BCFE273CEA330076ED33 /* OperatorTest.swift in Sources */,
 				C9F7BCD7273919470076ED33 /* LinkedListTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
