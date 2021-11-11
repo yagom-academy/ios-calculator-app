@@ -1,6 +1,10 @@
-import Foundation
+import UIKit
 
 protocol CalculateItem {
+    
+}
+
+extension Double: CalculateItem {
     
 }
 

@@ -1,5 +1,6 @@
 import XCTest
 
+
 class CalculatorTests: XCTestCase {
     func test_빈_큐에_1을_put하면_1이_남는다() {
         let queue = CalculatorItemQueue<Int>(head: nil)
