@@ -12,10 +12,9 @@ extension String {
         var result = [String]()
         var number = ""
         self.forEach{ element in
-            let isOperator: Bool = element.isNumber == false && element != "."
-            if isOperator {
+            let isNotDouble: Bool = element.isNumber == false && element != "."
+            if isNotDouble {
                 result.append(String(number))
-                result.append(String(element))
                 number = ""
             } else {
                 number += String(element)
