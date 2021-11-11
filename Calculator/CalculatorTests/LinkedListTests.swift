@@ -125,4 +125,14 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_연결리스트_비어있을때_removeLast시_nil반환() {
+        // given
+        let list = LinkedList<Int>()
+        // when
+        let result = list.removeLast()
+        // then
+        XCTAssertNil(result)
+    }
+
 }
