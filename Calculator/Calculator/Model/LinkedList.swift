@@ -42,7 +42,7 @@ class LinkedList<T: Equatable> {
         var previous: Node<T>?
         var current = head
         
-        while current != nil && current?.value != value {
+        while current?.value != value {
             previous = current
             current = current?.next
         }
