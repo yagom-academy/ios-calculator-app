@@ -54,6 +54,8 @@ struct LinkedList {
         }
         
         var node = head
+        head = nil
+        tail = nil
         
         while node?.next != nil {
             let nextNode = node?.next
