@@ -14,7 +14,10 @@ enum ExpressionParser {
         let operands = ExpressionParser.componentsByOperators(from: input)
         let operators = input.filter { operatorSet.contains($0) }.map({ String($0) })
         
-        return Formula()
+        var operandsQueue = CalculatorItemQueue<Double>()
+        var opratorsQueue = CalculatorItemQueue<Operator>()
+        
+        return Formula(operands: operandsQueue, operators: opratorsQueue)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
