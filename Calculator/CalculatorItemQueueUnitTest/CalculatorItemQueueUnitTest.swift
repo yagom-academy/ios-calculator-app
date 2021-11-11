@@ -22,14 +22,16 @@ class CalculatorItemQueueUnitTest: XCTestCase {
 
     func test_빈_큐에_1을_push하면_1이_남는다() {
         let input: Character = "1"
-        let result = sut.enqueue(input)
+        sut.enqueue(input)
+        let result = sut.showCurrentItems()
         XCTAssertEqual(result, ["1"])
     }
     
     func test_1이_있는_큐에_2를_push하면_1과_2가_남는다() {
         sut.calculatorItems = ["1"]
         let input: Character = "2"
-        let result = sut.enqueue(input)
+        sut.enqueue(input)
+        let result = sut.showCurrentItems()
         XCTAssertEqual(result, ["1", "2"])
     }
     
@@ -41,7 +43,8 @@ class CalculatorItemQueueUnitTest: XCTestCase {
     
     func test_빈_큐에_더하기를_push하면_더하기가_남는다() {
         let input: Character = "+"
-        let result = sut.enqueue(input)
+        sut.enqueue(input)
+        let result = sut.showCurrentItems()
         XCTAssertEqual(result, ["+"])
     }
     

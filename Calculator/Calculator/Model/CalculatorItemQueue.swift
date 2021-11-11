@@ -19,9 +19,8 @@ class CalculatorItemQueue<T: CalculateItem> {
     var calculatorItems = [T]()
     var temporaryItems = [T]()
     
-    func enqueue(_ item: T) -> [T] {
+    func enqueue(_ item: T) {
         calculatorItems.append(item)
-        return calculatorItems
     }
     
     func dequeue() -> [T] {
@@ -38,5 +37,9 @@ class CalculatorItemQueue<T: CalculateItem> {
     
     func removeAll() {
         calculatorItems.removeAll()
+    }
+    
+    func showCurrentItems() -> [T] {
+        return calculatorItems
     }
 }
