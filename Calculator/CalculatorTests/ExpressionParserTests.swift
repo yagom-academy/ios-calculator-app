@@ -14,13 +14,13 @@ extension String {
         self.forEach{ element in
             let isNotDouble: Bool = element.isNumber == false && element != "."
             if isNotDouble {
-                result.append(String(number))
+                result.append(number.description)
                 number = ""
             } else {
-                number += String(element)
+                number += element.description
             }
         }
-        result.append(String(number))
+        result.append(number.description)
         return result
     }
 }
