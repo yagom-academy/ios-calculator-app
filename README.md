@@ -18,7 +18,7 @@
 3. `LinkedList` 타입 구현이 끝났다면 기존의 `CalculatorItemQueue` 타입에서 배열로 구현된 부분을 **2** 에서 만든 `LinkedList`로 대체한다. 
 	- 큐 타입에서 기존 배열에다가 요구하던 기능을 `LinkedList`에서 그대로 구현했기 때문에, 이 과정은 **단 한 줄만 고치면 될 것**이다. 
 	- Linked List를 활용한 큐 타입을 UML로 아래와 같이 표현해 보았다.<br/><br/>
-<img src="/image/LinkedListQueueUML.png" width="430" height="300"> <br/>
+<img src="/image/LinkedListQueueUML_Revised" width="430" height="300"> <br/>
 **!!LinkedList타입은 UML 작성 이후에 class타입으로 변경하였고, 그로 인해 메서드는 mutating이 아니게 변경 되었음**
 <br/><br/>
 
