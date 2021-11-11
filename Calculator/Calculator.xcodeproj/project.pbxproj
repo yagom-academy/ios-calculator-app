@@ -29,6 +29,7 @@
 		25303D4E273CF23D001E47C3 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D4D273CF23D001E47C3 /* QueueError.swift */; };
 		25303D4F273CF244001E47C3 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D4D273CF23D001E47C3 /* QueueError.swift */; };
 		25303D66273D2D03001E47C3 /* StringError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D65273D2D03001E47C3 /* StringError.swift */; };
+		25303D67273D87AC001E47C3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D3B273A7EC0001E47C3 /* Extension.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -293,6 +294,7 @@
 				25303D42273A8B2A001E47C3 /* FormulaTest.swift in Sources */,
 				25303D38273A711F001E47C3 /* Operator.swift in Sources */,
 				25303D2727397146001E47C3 /* CalculatorTests.swift in Sources */,
+				25303D67273D87AC001E47C3 /* Extension.swift in Sources */,
 				25303D4A273CE4BF001E47C3 /* CalculateError.swift in Sources */,
 				25303D44273A8E15001E47C3 /* ExpressionParser.swift in Sources */,
 				25303D3527398E2C001E47C3 /* CalculateItem.swift in Sources */,

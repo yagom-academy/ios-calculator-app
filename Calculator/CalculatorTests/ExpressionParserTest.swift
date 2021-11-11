@@ -9,7 +9,7 @@ import XCTest
 
 class ExpressionParserTest: XCTestCase {
 
-    func test_문자열_1_더하기_2를_입력시_result는_3이다() throws {
+    func test_문자열_1_더하기_2를_입력시_result는_3이다() {
         let inputString = "1 + 2"
         
         var parser = ExpressionParser.a.parse(from: inputString)

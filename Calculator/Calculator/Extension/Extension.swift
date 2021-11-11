@@ -12,11 +12,7 @@ extension Double: CalculateItem {
 }
 
 extension String {
-    func split(with target: Character) throws-> [String] {
-        let splitedString = self.split(separator: target)
-        guard let returnArrayOfString = splitedString as? [String] else {
-            throw StringError.splitStringFailed
-        }
-        return returnArrayOfString
+    func split(with target: Character) -> [String] {        
+        return self.split(separator: target).compactMap{ String($0) }
     }
 }

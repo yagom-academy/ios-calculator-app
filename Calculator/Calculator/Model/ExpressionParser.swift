@@ -13,31 +13,21 @@ enum ExpressionParser {
     func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Character>()
+        let inputOperators = componentsByOperators(from: input)
+        let inputOperands = input.split(with: " ")
         
-        let inputoperators = componentsByOperators(from: input)
-        let inputoperands = input.components(separatedBy: " ")
-        inputoperators.forEach { string in
-            operators.enQueue(Character(string))
+        inputOperators.forEach { inputOperator in
+            operators.enQueue(Character(inputOperator))
         }
-        for string in inputoperands {
-            if let operandForQueue = Double(string) {
-                operands.enQueue(operandForQueue)
-            }
-        }
+        inputOperands.compactMap{ Double($0) }.forEach { operand in
+            operands.enQueue(operand) }
         
         return Formula(operands: operands, operators: operators)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
-        var separator: [String] = []
-        
-        Operator.allCases.forEach {
-            separator.append(String($0.rawValue))
-        }
-        
-        let array = input.map { String($0) }
-        let OperatorArray = array.filter { separator.contains($0) }
+    private func componentsByOperators(from input: String) -> [String] {    
+        let operators = Operator.allCases.filter { input.contains($0.rawValue) }
      
-        return OperatorArray
+        return operators.map { String($0.rawValue) }
     }
 }
