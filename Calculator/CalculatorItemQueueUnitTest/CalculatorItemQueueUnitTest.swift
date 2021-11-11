@@ -1,9 +1,3 @@
-//
-//  CalculatorItemQueueUnitTest.swift
-//  CalculatorItemQueueUnitTest
-//
-//  Created by si won kim on 2021/11/09.
-//
 
 import XCTest
 
