@@ -18,7 +18,7 @@ class Node<T> {
 }
 
 class LinkedList<T: Equatable> {
-    var head: Node<T>?
+    private(set) var head: Node<T>?
     
     func insert(_ value: T?) {
         if head == nil {
