@@ -7,12 +7,6 @@
 
 import XCTest
 
-extension String {
-    func split(with target: Character) -> [String] {
-        self.split(separator: target).map { String($0) } + [String(target)]
-    }
-}
-
 class FormulaTests: XCTestCase {
 
     func test_더하기연산해보기_피연산자한개() {
