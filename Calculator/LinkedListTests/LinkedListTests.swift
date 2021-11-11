@@ -84,6 +84,57 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.tail?.value, 9)
     }
 
+    // MARK:- removeAll() tests
+    func test_4와7과9추가한List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        sut.append(4)
+        sut.append(7)
+        sut.append(9)
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+        XCTAssertEqual(sut.count, 0)
+    }
+    func test_4와7추가한List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        sut.append(4)
+        sut.append(7)
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+        XCTAssertEqual(sut.count, 0)
+    }
+    func test_4추가한List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        sut.append(4)
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+        XCTAssertEqual(sut.count, 0)
+    }
+    func test_빈List에서_removeAll호출시_isEmpty가true되는지() {
+        //given
+        guard sut.isEmpty else {
+            XCTFail()
+            return
+        }
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+        XCTAssertEqual(sut.count, 0)
+    }
     // MARK:- isEmpty tests
     func test_빈List에_isEmpty를요청하면_true반환() {
         //when

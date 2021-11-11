@@ -39,11 +39,20 @@ class LinkedList<Element> {
     func removeFirst() -> Element? {
         let removedNodeValue = head?.value
         let nextHeadNode = head?.next
-    
-        count = isEmpty ? count : count - 1
         
-        head = nextHeadNode
-        tail = isEmpty ? head : tail
+        if isEmpty {
+            head = nextHeadNode
+            tail = head
+        } else {
+            head = nextHeadNode
+            count -= 1
+        }
         return removedNodeValue
+    }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
+        count = 0
     }
 }
