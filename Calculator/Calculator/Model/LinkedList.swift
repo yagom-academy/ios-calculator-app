@@ -11,7 +11,7 @@ class Node<T> {
     let value: T?
     var next: Node?
     
-    init(value: T?, next: Node?) {
+    init(value: T?, next: Node? = nil) {
         self.value = value
         self.next = next
     }
@@ -22,7 +22,7 @@ class LinkedList<T: Equatable> {
     
     func insert(_ value: T?) {
         if head == nil {
-            head = Node(value: value, next: nil)
+            head = Node(value: value)
             return
         }
         
@@ -31,7 +31,7 @@ class LinkedList<T: Equatable> {
             current = current?.next
         }
         
-        current?.next = Node(value: value, next: nil)
+        current?.next = Node(value: value)
     }
     
     func delete(_ value: T?) {
