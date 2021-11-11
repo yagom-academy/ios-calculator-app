@@ -8,12 +8,12 @@
 import Foundation
 
 enum ExpressionParser {
-    static let operatorSet = Operator.allCases.map({ String($0.rawValue) }).reduce("", { $0 + $1 })
+    static let operatorSet = Operator.allCases.map({ String($0.rawValue) })
     
     static func parse(from input: String) -> Formula {
         let operationComponents: [String] = ExpressionParser.componentsByOperators(from: input)
         let operands = operationComponents.compactMap { convertToDouble(from:$0) }
-        let operators = operationComponents.reduce("", { $0 + $1 } ).compactMap { Operator(rawValue: $0) }
+        let operators = operationComponents.filter { operatorSet.contains($0) }.reduce("", { $0 + $1 }).compactMap { Operator(rawValue: $0) }
         
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
