@@ -16,7 +16,7 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(2)
         queue.enqueue(3)
         // when
-        let result = queue.front
+        let result = queue.first
         // then
         XCTAssertEqual(result, 1)
     }
@@ -41,7 +41,7 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(3)
         // when
         queue.dequeue()
-        let result = queue.front
+        let result = queue.first
         // then
         XCTAssertEqual(result, 2)
     }

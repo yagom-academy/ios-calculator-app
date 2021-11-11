@@ -20,7 +20,7 @@ struct CalculatorItemQueue<Element> where Element: CalculateItem {
         items.isEmpty
     }
     
-    var front: Element? {
+    var first: Element? {
         items.first
     }
     
