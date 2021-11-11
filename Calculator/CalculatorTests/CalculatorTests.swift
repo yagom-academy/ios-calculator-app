@@ -48,9 +48,8 @@ class CalculatorTests: XCTestCase {
     func test_QueueList에_Dequeue_정상동작한다() {
         queue.enqueue(item: NumberItem(data: 1))
         
-        guard let removedItem = queue.dequeue() else {
-            return
-        }
+        guard let removedItem = queue.dequeue() else { return }
+        
         var data = ""
         if let number = removedItem as? NumberItem {
             data = number.dataToString
@@ -64,27 +63,17 @@ class CalculatorTests: XCTestCase {
         queue.enqueue(item: NumberItem(data: 1))
         queue.enqueue(item: NumberItem(data: 3))
         
-        guard let removedItem = queue.dequeue() else {
-            return
-        }
-        var data = ""
-        if let number = removedItem as? NumberItem {
-            data = number.dataToString
-        }
+        let firstRemovedItem = queue.dequeue()
+        let secodeRemovedItem = queue.dequeue()
 
-        XCTAssertEqual(data, "2")
+        XCTAssertEqual(convertItem(item: firstRemovedItem), "2")
+        XCTAssertEqual(convertItem(item: secodeRemovedItem), "1")
     }
 
     func test_빈QueueList_Dequeue_nil을_반환한다() {
-        _ = queue.dequeue()
-        let data2 = queue.dequeue()
+        let item = queue.dequeue()
 
-        var data: String?
-        if let number = data2 as? NumberItem {
-            data = number.dataToString
-        }
-
-        XCTAssertEqual(data, nil)
+        XCTAssertEqual(convertItem(item: item), nil)
     }
     
     // MARK: CalculatorItemQueue clearQueue test
@@ -113,18 +102,26 @@ class CalculatorTests: XCTestCase {
 }
 
 extension CalculatorTests {
-    func convertList(list: [CalculateItem]) -> [String] {
-        var compareList: [String] = []
+    func convertList(list: [CalculateItem]) -> [String?] {
+        var compareList: [String?] = []
         
         for item in list {
-            if let number = item as? NumberItem {
-                compareList.append(number.dataToString)
-            }
-            if let operatorItem = item as? OperatorItem {
-                compareList.append(operatorItem.operatorSymbol)
-            }
+            compareList.append(convertItem(item: item))
+        }
+        return compareList
+    }
+    
+    func convertItem(item: CalculateItem?) -> String? {
+        guard let item = item else {
+            return nil
         }
         
-        return compareList
+        if let number = item as? NumberItem {
+            return number.dataToString
+        }
+        if let operatorItem = item as? OperatorItem {
+            return operatorItem.operatorSymbol
+        }
+        return nil
     }
 }
