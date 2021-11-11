@@ -126,12 +126,6 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(.subtract)
         formula.operators.enqueue(.multiply)
         
-        do {
-            let result = try formula.result()
-        } catch OperationError.devidedByZero {
-            XCTAssertThrowsError(OperationError.devidedByZero)
-        } catch {
-            print(error.localizedDescription)
-        }
+        XCTAssertThrowsError(try formula.result())
     }
 }
