@@ -101,11 +101,10 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_clear호출시_두배열모두초기화되는지() {
         queue.enqueue("2")
-        queue.dequeue()
         
         queue.clear()
         
         XCTAssertTrue(queue.inBox.isEmpty)
-        XCTAssertTrue(queue.inBox.isEmpty)
+        XCTAssertTrue(queue.outBox.isEmpty)
     }
 }
