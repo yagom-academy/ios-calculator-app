@@ -8,7 +8,6 @@
 import XCTest
 
 class ParsingTests: XCTestCase {
-
     var sampleString: String = ""
     
     override func setUpWithError() throws {
@@ -36,7 +35,7 @@ class ParsingTests: XCTestCase {
         }
     }
     
-    func testParsingFromStringWithMinus() {
+    func testParsingFromStringWithNegative() {
         sampleString = "1.7 + 3.8 - 21.9 / 41.0 * -310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
@@ -48,7 +47,6 @@ class ParsingTests: XCTestCase {
         }
     }
     
-    
     func testParsingFromInvaildString() {
         sampleString = "1.7 + 3.8 - 21.9 / 41.0 * * 310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
@@ -59,6 +57,4 @@ class ParsingTests: XCTestCase {
             print(error.localizedDescription)
         }
     }
-    
-
 }
