@@ -29,12 +29,6 @@ class CalculatorTests: XCTestCase {
 
         XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), ["2","1"])
     }
-
-    func test_QueueList_Enqueue에_nil값을_넣으면_변화가없다() {
-        queue.enqueue(item: nil)
-
-        XCTAssertEqual(convertList(list: queue.queueListForTest.searchAll()), [])
-    }
     
     func test_QueueList_Enqueue에_opreratorItem을_넣으면_정상동작한다() {
         queue.enqueue(item: OperatorItem.add)
