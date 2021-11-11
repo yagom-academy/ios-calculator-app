@@ -9,6 +9,7 @@ import Foundation
 
 enum OperationError: Error {
     case devidedByZero
+    case invalidFormula
 }
 
 extension OperationError: LocalizedError {
@@ -16,6 +17,8 @@ extension OperationError: LocalizedError {
         switch self {
         case .devidedByZero:
             return "0으로 나눌 수 없습니다."
+        case .invalidFormula:
+            return "잘못된 계산식입니다."
         }
     }
 }
