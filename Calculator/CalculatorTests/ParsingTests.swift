@@ -20,12 +20,12 @@ class ParsingTests: XCTestCase {
     }
     
     func testSplitByStringExtension() {
-        let string = "1+2+3+5"
+        let string = "1 + 2 + 3 + 5"
         XCTAssertEqual(string.split(with: "+"), ["1", "2", "3", "5"])
     }
 
     func testParsingFromString() {
-        sampleString = "1.7+3.8-21.9/41.0*310.7"
+        sampleString = "1.7 + 3.8 - 21.9 / 41.0 * 310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
             let result = try formula.result()
@@ -37,7 +37,7 @@ class ParsingTests: XCTestCase {
     }
     
     func testParsingFromStringWithMinus() {
-        sampleString = "1.7+3.8-21.9/41.0*-310.7"
+        sampleString = "1.7 + 3.8 - 21.9 / 41.0 * -310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
             let result = try formula.result()
@@ -50,7 +50,7 @@ class ParsingTests: XCTestCase {
     
     
     func testParsingFromInvaildString() {
-        sampleString = "+1.7+3.8-21.9/41.0**310.7"
+        sampleString = "1.7 + 3.8 - 21.9 / 41.0 * * 310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
             let result = try formula.result()
