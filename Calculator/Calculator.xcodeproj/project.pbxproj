@@ -25,6 +25,7 @@
 		C9F7BCFA273CC0CA0076ED33 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */; };
 		C9F7BCFE273CEA330076ED33 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */; };
 		C9F7BD00273CF0400076ED33 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFF273CF0400076ED33 /* Operator.swift */; };
+		C9F7BD01273CF2350076ED33 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFF273CF0400076ED33 /* Operator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,6 +277,7 @@
 				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
 				C9F7BCF3273A44E20076ED33 /* CalculatorItemQueue.swift in Sources */,
+				C9F7BD01273CF2350076ED33 /* Operator.swift in Sources */,
 				C9F7BCFE273CEA330076ED33 /* OperatorTest.swift in Sources */,
 				C9F7BCD7273919470076ED33 /* LinkedListTest.swift in Sources */,
 			);

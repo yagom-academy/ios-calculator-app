@@ -23,7 +23,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
             return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
-        }    
+        }        
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
