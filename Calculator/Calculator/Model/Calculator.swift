@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element> {
     var array: [Element] = []
     var reversedArray: [Element] = []
     

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Metal
 
 protocol CalculateItem {
     
