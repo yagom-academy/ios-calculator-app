@@ -26,6 +26,7 @@
 		C9F7BCFE273CEA330076ED33 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */; };
 		C9F7BD00273CF0400076ED33 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFF273CF0400076ED33 /* Operator.swift */; };
 		C9F7BD01273CF2350076ED33 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCFF273CF0400076ED33 /* Operator.swift */; };
+		C9F7BD05273CFD1E0076ED33 /* FomulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD04273CFD1E0076ED33 /* FomulaTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		C9F7BCF8273CC0890076ED33 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 		C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTest.swift; sourceTree = "<group>"; };
 		C9F7BCFF273CF0400076ED33 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		C9F7BD04273CFD1E0076ED33 /* FomulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FomulaTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				C9F7BCD6273919470076ED33 /* LinkedListTest.swift */,
 				C9F7BCED273A3C990076ED33 /* CalculatorItemQueueTest.swift */,
 				C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */,
+				C9F7BD04273CFD1E0076ED33 /* FomulaTest.swift */,
 				C9F7BCD8273919470076ED33 /* Info.plist */,
 			);
 			path = CalculatorTests;
@@ -277,6 +280,7 @@
 				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
 				C9F7BCF3273A44E20076ED33 /* CalculatorItemQueue.swift in Sources */,
+				C9F7BD05273CFD1E0076ED33 /* FomulaTest.swift in Sources */,
 				C9F7BD01273CF2350076ED33 /* Operator.swift in Sources */,
 				C9F7BCFE273CEA330076ED33 /* OperatorTest.swift in Sources */,
 				C9F7BCD7273919470076ED33 /* LinkedListTest.swift in Sources */,
