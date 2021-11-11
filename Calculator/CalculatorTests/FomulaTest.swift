@@ -20,7 +20,7 @@ class FomulaTest: XCTestCase {
     }
     
     func test_피연산자와_연산자가_없는_경우_0을_반환하는지() {
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(0.0, calculationResult)
     }
     
@@ -39,7 +39,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(16.0, calculationResult)
     }
     
@@ -58,7 +58,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(-10.0, calculationResult)
     }
     
@@ -77,7 +77,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(-90.0, calculationResult)
     }
     
@@ -96,7 +96,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(-2.5, calculationResult)
     }
     
@@ -115,7 +115,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertTrue(calculationResult.isNaN)
     }
     
@@ -134,7 +134,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(-36.0, calculationResult)
     }
     
@@ -153,7 +153,7 @@ class FomulaTest: XCTestCase {
             formula.operators.enqueue(arithmetic)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         XCTAssertEqual(18.0, calculationResult)
     }
 }
