@@ -7,7 +7,7 @@
 
 import XCTest
 
-class ExpressionParserTests: XCTestCase {
+class ParsingTests: XCTestCase {
 
     var sampleString: String = ""
     
