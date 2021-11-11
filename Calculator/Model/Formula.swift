@@ -8,10 +8,10 @@
 import Foundation
 
 struct Formula {
-    let operands: CalculatorItemQueue
-    let operators: CalculatorItemQueue
+    let operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
+    let operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
     
     func result() -> Double {
-        return 0
+        return self.operands.dequeue() ?? 0
     }
 }
