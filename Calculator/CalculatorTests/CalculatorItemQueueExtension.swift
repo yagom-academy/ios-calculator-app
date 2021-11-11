@@ -10,13 +10,13 @@ import Foundation
 extension LinkedList {
     func searchAll() -> [CalculateItem?] {
         var searchedList: [CalculateItem?] = []
+        
         if front() == nil {
             return []
         }
         
         var node = front()
         searchedList.append(node?.data)
-        
         
         while node?.next != nil {
             node = node?.next

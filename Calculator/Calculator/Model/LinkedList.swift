@@ -15,10 +15,6 @@ class Node {
         self.data = data
         self.next = next
     }
-    
-    deinit {
-        print(self.data)
-    }
 }
 
 struct LinkedList {
