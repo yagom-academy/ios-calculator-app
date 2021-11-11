@@ -26,7 +26,7 @@ class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(operationCount, 1)
     }
     
-    func test_calculatorItemQueue_item이_2개_또는_그이상이_들어올경우_내부저장소에_저장이되는지() {
+    func test_calculatorItemQueue_item이_2개_들어올경우_내부저장소에_저장이되는지() {
         sut.enQueue(operation: "-")
         sut.enQueue(operation: "+")
         let operationCount = sut.operationStorage.count
