@@ -10,7 +10,7 @@ import XCTest
 
 class FormulaTest: XCTestCase {
     
-    func test_큐에_1_더하기_2_순서로_enqueue하면_result는_3이다() {
+    func test_큐에_1_더하기_2_순서로_enqueue하면_result는_3이다() throws {
         let operators = CalculatorItemQueue<Character>()
         let operands = CalculatorItemQueue<Double>()
         var formula = Formula(operands: operands, operators: operators)
@@ -19,10 +19,10 @@ class FormulaTest: XCTestCase {
         formula.operators.enQueue("+")
         formula.operands.enQueue(2)
         
-        XCTAssertEqual(formula.result(), 3)
+        try XCTAssertEqual(formula.result(), 3)
     }
     
-    func test_큐에_1_더하기_2_나누기_3의_순서로_enqueue하면_result는_1이다() {
+    func test_큐에_1_더하기_2_나누기_3의_순서로_enqueue하면_result는_1이다() throws {
         let operators = CalculatorItemQueue<Character>()
         let operands = CalculatorItemQueue<Double>()
         var formula = Formula(operands: operands, operators: operators)
@@ -33,7 +33,7 @@ class FormulaTest: XCTestCase {
         formula.operators.enQueue("/")
         formula.operands.enQueue(3)
         
-        XCTAssertEqual(formula.result(), 1)
+        try XCTAssertEqual(formula.result(), 1)
     }
 
     override func setUpWithError() throws {

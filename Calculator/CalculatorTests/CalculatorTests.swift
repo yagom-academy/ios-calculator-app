@@ -22,24 +22,24 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(queue.returnQueue(), [1, 2])
     }
     
-    func test_비어있는_큐를_deQueue하면_deQueue되지_않는다() {
+    func test_비어있는_큐를_deQueue하면_deQueueFailed에러_발생한다() throws {
         var queue = CalculatorItemQueue<Int>()
-        queue.deQueue()
-        XCTAssertEqual(queue.returnQueue(), [])
+        //XCTAssertEqual(queue.returnQueue(), nil)
+        XCTAssertThrowsError(try queue.deQueue()){ error in XCTAssertEqual(error as? CalculateError, CalculateError.deQueueFailed)}
     }
     
-    func test_빈_큐에_1을_enqueue_후에_큐를_dequeue하면_빈_큐가_된다() {
+    func test_빈_큐에_1을_enqueue_후에_큐를_dequeue하면_빈_큐가_된다() throws {
         var queue = CalculatorItemQueue<Int>()
         queue.enQueue(1)
-        queue.deQueue()
+        try queue.deQueue()
         XCTAssertEqual(queue.returnQueue(), [])
     }
 
-    func test_데이터가_2개_있는_큐를_삭제하면_한개가_남는다() {
+    func test_데이터가_2개_있는_큐를_삭제하면_한개가_남는다() throws {
         var queue = CalculatorItemQueue<Int>()
         queue.enQueue(1)
         queue.enQueue(2)
-        queue.deQueue()
+        try queue.deQueue()
         XCTAssertEqual(queue.returnQueue(), [2])
     }
     
