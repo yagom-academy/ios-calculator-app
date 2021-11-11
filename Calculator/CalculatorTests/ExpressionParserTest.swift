@@ -10,11 +10,11 @@ import XCTest
 class ExpressionParserTest: XCTestCase {
 
     func test_문자열_1_더하기_2는_3이다() {
-        let inputString = "1 + 4"
+        let inputString = "1 + 2"
         
         var parser = ExpressionParser.parse(from: inputString)
         
-        try XCTAssertEqual(parser.result(), 5)
+        try XCTAssertEqual(parser.result(), 3)
     }
     
     func test_문자열_1_더하기_2_나누기_3_더하기_4는_5이다() {
