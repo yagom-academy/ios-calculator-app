@@ -102,8 +102,8 @@
 				33306F46273A829300737205 /* ListTests.swift */,
 				332FE422273A969C00E42C8D /* CalculatorItemQueueTests.swift */,
 				3383F520273BF77F00C13A81 /* OperationTests.swift */,
-				33306F34273A682900737205 /* Info.plist */,
 				33FCCFD7273CA96F001FF7AD /* ParsingTests.swift */,
+				33306F34273A682900737205 /* Info.plist */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
