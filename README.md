@@ -50,7 +50,9 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 ## 🤔 Step1 고민했던 점
 
 - 큐 타입을 만들고 다음 스텝에서 구현할 Queue에 만들어놓은 Queue를 써주려했다. 숫자와 연산자의 Queue가 필요하다고 생각하였는데 그러러면 각 타입이 Int, String이여야 했고, 이를 위해 각 타입별 Queue를 만드는 것은 굉장히 비효율적이라고 생각하여 **타입에 제한을 두지않고 재사용하여 코드의 중복도 줄일 수 있는 Generic**을 활용해 Queue 타입을 생성
+
 - Queue 타입은 **구조체**를 택했습니다. 그 이유는 프로토콜만 채택하고, 굳이 상속할 필요도 없고 또한 상속 받을 것도 없었기때문에 이 점때문에라도 클래스를 굳이 택할 이유가 없지않나? 하고 결정
+
 - Generic 타입 파라미터명을 뭐라고 해야하는지 고민되었다. 해당 파라미터명은 보통 T, U, V같은 하나의 대문자를 사용하지만, Array의 경우 Element(요소)와 연관된 의미와 규칙이 있으므로, 명확함을 주기위해 사용된다고 [공식문서]([https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID183](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID183))에서 보았다. 현재 프로젝트에서 생성한 Queue 또한 Element와 관련이 있다고 생각하여 타입 파라미터명을 Element로 지정해주었다.
 
 ## 🙇‍♂️ Step1 배운 점
@@ -64,7 +66,7 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 
 <img width="500" alt="image" src="./image/queue_doubleStack.png">
 
-**Queue**를 하나의 **Array**로 만든다면, 첫번째 요소를 제거하려 ```removeFirst()```를 호출할텐데 공식문서를 보면 **시간복잡도가 O(n)**인 모습을 볼수 있다.</br>
+**Queue**를 하나의 **Array**로 만든다면, 첫번째 요소를 제거하려 ```removeFirst()```를 호출할텐데 공식문서를 보면 **시간복잡도가 O(n)** 인 모습을 볼수 있다.</br>
 
 <img width="795" alt="image" src="https://user-images.githubusercontent.com/70251136/141065484-4a565fb2-e6a5-4fe3-a3da-615198ef476e.png">
 
