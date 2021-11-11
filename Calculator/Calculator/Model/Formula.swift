@@ -4,6 +4,11 @@ struct Formula {
     var operands: CalculatorItemQueue
     var operators: CalculatorItemQueue
     
+    init() {
+        self.operands = CalculatorItemQueue()
+        self.operators = CalculatorItemQueue()
+    }
+    
     init?(operands: [String], operators: [String]) {
         self.operands = CalculatorItemQueue()
         self.operators = CalculatorItemQueue()
