@@ -47,7 +47,7 @@ struct LinkedList<T> {
     }
     
     mutating func removeHead() -> Node<T>? {
-        guard isNotEmpty, let nodeToBeRemoved = retrieveNode(at: 0) else {
+        guard let nodeToBeRemoved = retrieveNode(at: 0) else {
             return nil
         }
         return remove(node: nodeToBeRemoved)

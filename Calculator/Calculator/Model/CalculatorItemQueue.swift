@@ -27,9 +27,6 @@ struct CalculatorItemQueue<T> {
     }
     
     mutating func dequeue() -> T? {
-        guard list.isNotEmpty else {
-            return nil
-        }
         return list.retrieveHeadValue()
     }
     
