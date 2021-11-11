@@ -69,33 +69,33 @@ extension CalculatorItemQueueTests {
     }
     
     func test_LinkedList_count_2() {
-        let list = LinkedList(value: 1)
+        var list = LinkedList(value: 1)
         list.append(2)
         let count = list.count
         XCTAssertEqual(count, 2)
     }
     
     func test_LinkedList_append_빈_리스트_생성후_append() {
-        let list: LinkedList<Int> = LinkedList()
+        var list: LinkedList<Int> = LinkedList()
         list.append(1)
         XCTAssertIdentical(list.head, list.tail)
     }
     
     func test_LinkedList_append_빈_리스트_생성후_append_두번() {
-        let list: LinkedList<Int> = LinkedList()
+        var list: LinkedList<Int> = LinkedList()
         list.append(1)
         list.append(2)
         XCTAssertIdentical(list.head?.next, list.tail)
     }
     
     func test_LinkedList_append_빈_리스트_생성후_removeFirst() {
-        let list: LinkedList<Int> = LinkedList()
+        var list: LinkedList<Int> = LinkedList()
         let result = list.removeFirst()
         XCTAssertNil(result)
     }
     
     func test_LinkedList_append_값이_1개인_리스트_생성후_removeFirst() {
-        let list: LinkedList<Int> = LinkedList(value: 1)
+        var list: LinkedList<Int> = LinkedList(value: 1)
         let result = list.removeFirst()
         XCTAssertEqual(result, 1)
     }

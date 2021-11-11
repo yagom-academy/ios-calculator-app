@@ -23,7 +23,7 @@ struct OperatorItem: CalculateItem {
     var operation: (NumberItem, NumberItem) -> NumberItem
 }
 
-class LinkedList<T> {
+struct LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     
@@ -51,7 +51,7 @@ class LinkedList<T> {
         
     }
     
-    func append(_ value: T) {
+    mutating func append(_ value: T) {
         let newNode = Node(value)
         if let tail = tail {
             tail.next = newNode
@@ -62,12 +62,12 @@ class LinkedList<T> {
         }
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }
     
-    func removeFirst() -> T? {
+    mutating func removeFirst() -> T? {
         let result = head?.value
         
         if count == 1 {
