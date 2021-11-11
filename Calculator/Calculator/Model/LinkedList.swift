@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
-
 class Node<T> {
     let value: T?
     var next: Node?
