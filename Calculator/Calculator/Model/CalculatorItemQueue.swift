@@ -29,7 +29,7 @@ struct CalculatorItemQueue<Element> where Element: CalculateItem {
     }
     
     func enqueue(_ item: Element) {
-        self.items.append(item)
+        items.append(item)
     }
     
     @discardableResult
