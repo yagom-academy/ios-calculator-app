@@ -8,15 +8,15 @@
 import Foundation
 
 class LinkedList<Element> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     var isEmpty: Bool {
         head == nil ? true : false
     }
     var first: Element? {
         head?.value
     }
-    var count = 0
+    private(set) var count = 0
     
     func append(_ item: Element) {
         let newNode = Node(item)
