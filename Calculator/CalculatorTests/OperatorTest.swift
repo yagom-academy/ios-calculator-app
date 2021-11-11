@@ -116,7 +116,7 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(2.0, result)
     }
     
-    func test_0으로_값을_나누는_경우_값이_nan인지g() {
+    func test_0으로_값을_나누는_경우_값이_nan인지() {
         guard let calculator = Operator(rawValue: "/") else {
             return
         }
