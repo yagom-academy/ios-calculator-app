@@ -58,13 +58,13 @@ final class LinkedList<Element> {
     }
     
     func append(_ item: Element) {
-        guard !isEmpty else {
+        if isEmpty {
             self.head = Node(item)
             self.tail = self.head
-            return
+        } else {
+            self.tail?.next = Node(item, prev: self.tail)
+            self.tail = self.tail?.next
         }
-        self.tail?.next = Node(item, prev: self.tail)
-        self.tail = self.tail?.next
     }
     
     @discardableResult
