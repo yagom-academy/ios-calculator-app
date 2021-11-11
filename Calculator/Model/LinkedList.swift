@@ -16,7 +16,7 @@ class LinkedList<T> {
     }
     
     private func addFront(_ value: T) {
-        front = Node.init(value: value, next: front)
+        front = Node(value: value, next: front)
         
         if rear == nil {
             rear = front
@@ -29,7 +29,7 @@ class LinkedList<T> {
             return
         }
         
-        rear?.next = Node.init(value: value)
+        rear?.next = Node(value: value)
         
         rear = rear?.next
     }
