@@ -30,12 +30,4 @@ enum ExpressionParser {
 
         return result.compactMap { Double($0) }
     }
-    
-    private static func convertToDouble(from string: String) -> Double? {
-        guard let result = Double(string) else {
-            return nil
-        }
-        
-        return result
-    }
 }
