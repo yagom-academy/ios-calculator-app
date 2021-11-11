@@ -59,11 +59,11 @@ final class LinkedList<Element> {
     
     func append(_ item: Element) {
         if isEmpty {
-            self.head = Node(item)
-            self.tail = self.head
+            head = Node(item)
+            tail = head
         } else {
-            self.tail?.next = Node(item, prev: self.tail)
-            self.tail = self.tail?.next
+            tail?.next = Node(item, prev: tail)
+            tail = tail?.next
         }
     }
     
