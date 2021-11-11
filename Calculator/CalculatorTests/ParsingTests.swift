@@ -19,11 +19,11 @@ class ParsingTests: XCTestCase {
     }
     
     func testSplitByStringExtension() {
-        let string = "1 + 2 - 3 * 5"
-        XCTAssertEqual(string.split(with: " "), ["1", "+" , "2", "-", "3", "*", "5"])
+        let string = "1 + 2 - 3 * 5 / 4"
+        XCTAssertEqual(string.split(with: " "), ["1", "+" , "2", "-", "3", "*", "5", "/", "4"])
     }
 
-    func testParsingFromString() {
+    func testParsing() {
         sampleString = "1.7 + 3.8 - 21.9 / 41.0 * 310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
@@ -35,7 +35,7 @@ class ParsingTests: XCTestCase {
         }
     }
     
-    func testParsingFromStringWithNegative() {
+    func testParsingWithNegative() {
         sampleString = "1.7 + 3.8 - 21.9 / 41.0 * -310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
@@ -45,6 +45,13 @@ class ParsingTests: XCTestCase {
             print(error.localizedDescription)
             XCTFail()
         }
+    }
+    
+    func testParsingWithDevidedByZero() {
+        sampleString = "1.7 + 3.8 - 21.9 / 0.0 * -310.7"
+        var formula: Formula = ExpressionParser.parse(from: sampleString)
+        
+        XCTAssertThrowsError(try formula.result())
     }
     
     func testParsingFromInvaildString() {
