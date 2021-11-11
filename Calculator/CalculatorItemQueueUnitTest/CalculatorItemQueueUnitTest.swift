@@ -20,7 +20,7 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         sut = nil
     }
 
-    func test_빈_큐에_1을_push하면_1이_남는다() {
+    func test_빈_큐에_1을_enqueue하면_1이_남는다() {
         //given
         let input: Character = "1"
         
@@ -48,7 +48,7 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         XCTAssertEqual(secondResult, "2")
     }
     
-    func test_빈_큐에_더하기를_push하면_더하기가_남는다() {
+    func test_빈_큐에_더하기를_enqueue하면_더하기가_남는다() {
         //given
         let input: Character = "+"
         
@@ -60,7 +60,7 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         XCTAssertEqual(result, "+")
     }
     
-    func test_1과_2와_3이_있는_큐를_pop하면_1이_나온다() {
+    func test_1과_2와_3이_있는_큐를_dequeue하면_1이_나온다() {
         //given
         let firstInput: Character = "1"
         let secondInput: Character = "2"
@@ -76,7 +76,7 @@ class CalculatorItemQueueUnitTest: XCTestCase {
         XCTAssertEqual(result, "1")
     }
     
-    func test_빈_큐에_pop을_하면_에러가_난다() {
+    func test_빈_큐에_dequeue을_하면_에러가_난다() {
         //when
         let result = sut.dequeue()
         
