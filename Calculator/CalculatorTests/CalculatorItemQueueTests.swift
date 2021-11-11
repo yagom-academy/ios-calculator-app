@@ -21,6 +21,12 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(value: 2)
         XCTAssertEqual(queue.scanAllValues(), [1, 2])
     }
+    
+    func test_빈_큐를_dequeue하면_Nil을_반환한다() {
+        let removedValue = queue.dequeue()
+        XCTAssertTrue(queue.scanAllValues().isEmpty)
+        XCTAssertNil(removedValue)
+    }
 
     func test_1이_있는_큐를_dequeue하면_빈_큐가되고_제거한값을_반환한다() {
         queue.enqueue(value: 1)
