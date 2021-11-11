@@ -57,6 +57,7 @@ class CauculatorItemQueueTests: XCTestCase {
         let result = sut.dequeue()
         //then
         XCTAssertEqual(result, 4)
+        XCTAssertEqual(sut.count, 1)
         XCTAssertTrue(sut.count == 1 && sut.front == 7)
     }
     

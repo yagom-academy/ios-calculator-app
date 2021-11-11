@@ -16,18 +16,7 @@ class LinkedList<Element> {
     var first: Element? {
         head?.value
     }
-    var count: Int {
-        var nodeCount = 0
-        guard var node = head else {
-            return nodeCount
-        }
-        nodeCount += 1
-        while let currentNode = node.next {
-            nodeCount += 1
-            node = currentNode
-        }
-        return nodeCount
-    }
+    var count = 0
     
     func append(_ item: Element) {
         let newNode = Node(item)
@@ -35,19 +24,23 @@ class LinkedList<Element> {
         guard let node = tail else {
             head = newNode
             tail = newNode
+            count += 1
             return
         }
         
         node.next = newNode
         tail = newNode
+        count += 1
     }
     
     func removeFirst() -> Element? {
         let removedNodeValue = head?.value
         let nextHeadNode = head?.next
     
+        count = isEmpty ? count : count - 1
+        
         head = nextHeadNode
-        tail = head == nil ? head: tail
+        tail = isEmpty ? head : tail
         return removedNodeValue
     }
 }
