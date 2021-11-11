@@ -2,7 +2,7 @@ import XCTest
 
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalcualtorItemQueueTests: XCTestCase {
     var testQueue: CalculatorItemQueue!
     
     override func setUpWithError() throws {
@@ -66,3 +66,5 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(isRightLeftOperators && isRightPoppedOperators)
     }
 }
+
+
