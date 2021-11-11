@@ -12,11 +12,11 @@ extension Double: CalculateItem {
 }
 
 extension String {
-    func split(with target: Character) -> [String] {
-        let string = self.split(separator: target)
-        guard let aa = string as? [String] else {
-            return []
+    func split(with target: Character) throws-> [String] {
+        let splitedString = self.split(separator: target)
+        guard let returnArrayOfString = splitedString as? [String] else {
+            throw StringError.splitStringFailed
         }
-        return aa
+        return returnArrayOfString
     }
 }
