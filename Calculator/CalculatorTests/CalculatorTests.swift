@@ -14,8 +14,7 @@ class CalculatorTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-    
-    func test_헤드가_비었는지() {
+        func test_헤드가_비었는지() {
         let boolean = sut.isEmpty
         
         XCTAssertFalse(boolean)
@@ -47,4 +46,15 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.head?.data, Optional("2"))
         XCTAssertNil(sut.head?.pointer)
     }
-}
+    
+    func test_Head인0만있는_리스트에_dequeue_2번() {
+           XCTAssertEqual(sut.head?.data, "0")
+           sut.dequeue()
+           XCTAssertNil(sut.head?.data)
+           sut.dequeue()
+           XCTAssertNil(sut.head?.data)
+       }
+
+   }
+
+
