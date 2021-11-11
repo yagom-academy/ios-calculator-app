@@ -17,10 +17,8 @@ struct CalculatorItemQueue {
     mutating func dequeue() -> CalculateItem? {
         guard let firstNodeValue = self.firstNode?.value else { return nil }
         
-        if self.firstNode === self.lastNode {
-            self.lastNode = nil
-        }
-        self.firstNode = nil
+        let secondNode = self.firstNode?.nextNode
+        self.firstNode = secondNode
         
         return firstNodeValue
     }
