@@ -17,6 +17,7 @@
 		DEB4E0A0273A5CAB0067135B /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB4E09E273A5B840067135B /* QueueError.swift */; };
 		DEB4E0B5273D1F630067135B /* CalculateItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB4E0B4273D1F630067135B /* CalculateItemProtocol.swift */; };
 		DEB4E0C5273D59A70067135B /* CalculateItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB4E0B4273D1F630067135B /* CalculateItemProtocol.swift */; };
+		DEB4E0C7273D5EA80067135B /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB4E0C6273D5EA80067135B /* OperatorTests.swift */; };
 		DEC57EC62738ED7300B8E582 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC57EC52738ED7300B8E582 /* CalculatorTests.swift */; };
 		DEC57ED02739548900B8E582 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC57ECF2739548900B8E582 /* Calculator.swift */; };
 		DEC57ED12739548900B8E582 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC57ECF2739548900B8E582 /* Calculator.swift */; };
@@ -43,6 +44,7 @@
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEB4E09E273A5B840067135B /* QueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
 		DEB4E0B4273D1F630067135B /* CalculateItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemProtocol.swift; sourceTree = "<group>"; };
+		DEB4E0C6273D5EA80067135B /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		DEC57EC32738ED7300B8E582 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC57EC52738ED7300B8E582 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		DEC57ECF2739548900B8E582 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				DEC57EC52738ED7300B8E582 /* CalculatorTests.swift */,
+				DEB4E0C6273D5EA80067135B /* OperatorTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				DEB4E0A0273A5CAB0067135B /* QueueError.swift in Sources */,
 				DEB4E0C5273D59A70067135B /* CalculateItemProtocol.swift in Sources */,
 				DEC57EC62738ED7300B8E582 /* CalculatorTests.swift in Sources */,
+				DEB4E0C7273D5EA80067135B /* OperatorTests.swift in Sources */,
 				DEC57ED12739548900B8E582 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
