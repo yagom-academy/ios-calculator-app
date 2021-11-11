@@ -52,13 +52,14 @@ final class LinkedList<Element> {
         if isEmpty { return nil }
         
         let firstItem = head?.item
-        if head?.next == nil {
-            head = nil
+        
+        guard let nextPosition = head?.next else {
             tail = nil
-        } else {
-            head = head?.next
-            head?.previous = nil
+            return firstItem
         }
+        
+        head = nextPosition
+        head?.previous = nil
         
         return firstItem
     }
@@ -68,13 +69,14 @@ final class LinkedList<Element> {
         if isEmpty { return nil }
         
         let lastItem = tail?.item
-        if tail?.previous == nil {
+        
+        guard let previousPosition = tail?.previous else {
             head = nil
-            tail = nil
-        } else {
-            tail = tail?.previous
-            tail?.next = nil
+            return lastItem
         }
+        
+        tail = previousPosition
+        tail?.next = nil
         
         return lastItem
     }

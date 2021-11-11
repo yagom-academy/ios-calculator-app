@@ -25,4 +25,8 @@ class Node<T> {
     convenience init(_ item: T) {
         self.init(item, nil, nil)
     }
+    
+    deinit {
+        print("\(item) 소멸중")
+    }
 }
