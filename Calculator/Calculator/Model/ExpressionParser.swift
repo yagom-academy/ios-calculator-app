@@ -8,9 +8,8 @@
 import Foundation
 
 enum ExpressionParser {
-    case test
     
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Character>()
         let inputOperators = componentsByOperators(from: input)
@@ -25,7 +24,7 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {    
+    private static func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.filter { input.contains($0.rawValue) }
      
         return operators.map { String($0.rawValue) }
