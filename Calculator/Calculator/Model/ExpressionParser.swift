@@ -11,14 +11,13 @@ enum ExpressionParser {
     static let operatorSet = Operator.allCases.map { String($0.rawValue) }
     
     static func parse(from input: String) -> Formula {
-        let operationComponents: [String] = ExpressionParser.componentsByOperators(from: input)
-        let operands = operationComponents.compactMap { convertToDouble(from: $0) }
-        let operators = operationComponents.filter { operatorSet.contains($0) }
-            .reduce("", { $0 + $1 } )
-            .compactMap { Operator(rawValue: $0) }
-        
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
+        
+        let operands = componentsByOperators(from: input)
+        let operators = input.split(with: " ")
+                .filter { operatorSet.contains($0) }
+                .compactMap { Operator(rawValue: Character($0)) }
 
         operands.forEach { operandsQueue.enqueue($0) }
         operators.forEach { operatorsQueue.enqueue($0) }
@@ -26,16 +25,17 @@ enum ExpressionParser {
         return Formula(operands: operandsQueue, operators: operatorsQueue)
     }
     
-    private static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [Double] {
         let result = input.split(with: " ")
-        
-        return result
+
+        return result.compactMap { Double($0) }
     }
     
     private static func convertToDouble(from string: String) -> Double? {
         guard let result = Double(string) else {
             return nil
         }
+        
         return result
     }
 }
