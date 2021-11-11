@@ -80,7 +80,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
-        let _ = sut.removeHead()
+        sut.removeHead()
         let exepectedItems: [Any] = ["+", 30, "-", 2]
         let convertedExpectedItems = convertToLinkedListArray(from: exepectedItems) as [DummyItem]
         XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExpectedItems)
@@ -96,7 +96,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedListRemoveHead_givenRemoveAtIndexFromMixedElements_expectCorrectSequence() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
-        let _ = sut.removeNode(at: 1)
+        sut.removeNode(at: 1)
         let expectedItems: [Any] = [20, 30, "-", 2]
         let convertedExepectedItems = convertToLinkedListArray(from: expectedItems)
         XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExepectedItems)
@@ -144,7 +144,7 @@ class LinkedListTests: XCTestCase {
     
     private func removeHeadUntilEmpty(from linkedList: inout LinkedList<Any>) {
         while linkedList.isNotEmpty {
-            let _ = linkedList.removeHead()
+            linkedList.removeHead()
         }
     }
 }
@@ -170,6 +170,7 @@ fileprivate extension LinkedList {
         return listContents
     }
     
+    @discardableResult
     mutating func removeNode(at index: Int) -> Node<T>? {
         guard let toBeRemovedNode = retrieveNode(at: index) else {
             return nil

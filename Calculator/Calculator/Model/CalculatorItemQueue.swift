@@ -26,6 +26,7 @@ struct CalculatorItemQueue<T> {
         list.append(item)
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         return list.retrieveHeadValue()
     }

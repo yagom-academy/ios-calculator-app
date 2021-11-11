@@ -97,7 +97,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     private func removeAll(of queue: inout CalculatorItemQueue<Any>) {
         while queue.isNotEmpty {
-            let _ = queue.dequeue()
+            queue.dequeue()
         }
     }
 }
