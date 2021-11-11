@@ -31,21 +31,21 @@ class LinkedListTests: XCTestCase {
         let newItems = [1, 2]
         appendContents(of: newItems, to: &sut)
         let firstInsertedItem = DummyItem.number(value: newItems[0])
-        XCTAssertTrue(hasEqualItems(node: sut.head, item: firstInsertedItem))
+        XCTAssertTrue(hasEqualItems(node: sut.first, item: firstInsertedItem))
     }
     
     func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastInsertedItem() {
         let newItems = [1, 2, 3, 4]
         appendContents(of: newItems, to: &sut)
         let lastInsertedItem = DummyItem.number(value: newItems[newItems.count-1])
-        XCTAssertTrue(hasEqualItems(node: sut.tail, item: lastInsertedItem))
+        XCTAssertTrue(hasEqualItems(node: sut.last, item: lastInsertedItem))
     }
-    
+
     func testLinkedListNode_givenNewOperator_expectHeadEqualToInsertedItem() {
         let newCharacter = "+"
         sut.append(newCharacter)
         let newInsertedItem = DummyItem.symbol(value: newCharacter)
-        XCTAssertTrue(hasEqualItems(node: sut.head, item: newInsertedItem))
+        XCTAssertTrue(hasEqualItems(node: sut.first, item: newInsertedItem))
     }
     
     func testLinkedListAppend_givenNewIntegers_expectCorrectSequence() {
@@ -69,7 +69,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedNewItems)
     }
     
-    func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectRemovedHeadEqualToFirstInsertedItem() {
+    func testLinkedListRemoveHead_givenRemovedHeadFromMixedElements_expectRemovedHeadEqualsFirstInsertedItem() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
         let removedNode = sut.removeHead()
@@ -141,17 +141,10 @@ class LinkedListTests: XCTestCase {
 }
 
 fileprivate extension LinkedList {
-    var first: T? {
-        guard let head = head else {
-            return nil
-        }
-        return head.item
-    }
-    
     var convertedToLinkedListItemArray: [DummyItem] {
-        var pointer = head
+        var pointer = first
         var listContents: [DummyItem] = []
-        
+
         while pointer != nil {
             if let node = pointer, let value = node.convertToLinkedListItem {
                 listContents.append(value)

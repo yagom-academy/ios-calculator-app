@@ -17,8 +17,16 @@ class Node<T> {
 }
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    
+    var first: Node<T>? {
+        return head
+    }
+    
+    var last: Node<T>? {
+        return tail
+    }
     
     var isEmpty: Bool {
         return head == nil

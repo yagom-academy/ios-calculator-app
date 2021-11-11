@@ -95,18 +95,3 @@ class CalculatorItemQueueTests: XCTestCase {
         }
     }
 }
-
-fileprivate extension LinkedList {
-    var length: Int {
-        var pointer = head
-        var count = 0
-        
-        while pointer != nil {
-            if let node = pointer {
-                pointer = node.next
-                count += 1
-            }
-        }
-        return count
-    }
-}
