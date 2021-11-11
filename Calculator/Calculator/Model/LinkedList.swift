@@ -18,10 +18,6 @@ class Node<T> {
         self.prev = prev
     }
     
-    convenience init(_ item: T, next: Node?) {
-        self.init(item, next, nil)
-    }
-    
     convenience init(_ item: T, prev: Node?) {
         self.init(item, nil, prev)
     }
