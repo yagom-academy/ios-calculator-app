@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481FCCAA273CE96000349B74 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481FCCA9273CE96000349B74 /* LinkedList.swift */; };
 		48C16C4527391173006E1BBC /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C16C4427391173006E1BBC /* CalculatorTests.swift */; };
 		48C16C4F27391F63006E1BBC /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C16C4D273916BC006E1BBC /* Calculator.swift */; };
 		48C16C5227393B66006E1BBC /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C16C4D273916BC006E1BBC /* Calculator.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		481FCCA9273CE96000349B74 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		48C16C4227391173006E1BBC /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C16C4427391173006E1BBC /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		48C16C4D273916BC006E1BBC /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				48C16C4D273916BC006E1BBC /* Calculator.swift */,
+				481FCCA9273CE96000349B74 /* LinkedList.swift */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
@@ -212,6 +215,7 @@
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				48C16C5227393B66006E1BBC /* Calculator.swift in Sources */,
+				481FCCAA273CE96000349B74 /* LinkedList.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
