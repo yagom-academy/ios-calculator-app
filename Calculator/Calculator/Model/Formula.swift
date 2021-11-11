@@ -12,7 +12,6 @@ struct Formula {
     var operators: CalculatorItemQueue<Character>
     
     mutating func result() throws -> Double {
-        
         var result = try operands.deQueue()
         
         while !operators.isEmpty {

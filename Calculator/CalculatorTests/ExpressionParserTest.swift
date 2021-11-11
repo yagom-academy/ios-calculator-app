@@ -12,7 +12,7 @@ class ExpressionParserTest: XCTestCase {
     func test_문자열_1_더하기_2를_입력시_result는_3이다() {
         let inputString = "1 + 2"
         
-        var parser = ExpressionParser.a.parse(from: inputString)
+        var parser = ExpressionParser.test.parse(from: inputString)
         
         try XCTAssertEqual(parser.result(), 3)
     }

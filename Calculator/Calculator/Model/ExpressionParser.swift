@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    case a
+    case test
     
     func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
