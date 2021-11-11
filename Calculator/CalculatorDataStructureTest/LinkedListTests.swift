@@ -8,7 +8,7 @@
 import XCTest
 
 class CalculatorDataStructureTest: XCTestCase {
-    var sut: LinkedList!
+    var sut: LinkedList<String>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()

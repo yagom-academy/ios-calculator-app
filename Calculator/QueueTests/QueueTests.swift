@@ -8,7 +8,7 @@
 import XCTest
 
 class QueueTests: XCTestCase {
-    var sut: Queue!
+    var sut: Queue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
