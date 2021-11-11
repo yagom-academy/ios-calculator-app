@@ -93,15 +93,6 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func testLinkedListRemoveHead_givenRemoveAtIndexFromMixedElements_expectCorrectSequence() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
-        appendContents(of: newItems, to: &sut)
-        sut.removeNode(at: 1)
-        let expectedItems: [Any] = [20, 30, "-", 2]
-        let convertedExepectedItems = convertToLinkedListArray(from: expectedItems)
-        XCTAssertEqual(sut.convertedToLinkedListItemArray, convertedExepectedItems)
-    }
-    
     func testLinkedListRemoveAll_givenRemoveAllFromElements_expectIsEmpty() {
         let newItems: [Any] = [20, "+", 30, "-", 2]
         appendContents(of: newItems, to: &sut)
@@ -168,15 +159,6 @@ fileprivate extension LinkedList {
             }
         }
         return listContents
-    }
-    
-    @discardableResult
-    mutating func removeNode(at index: Int) -> Node<T>? {
-        guard let toBeRemovedNode = retrieveNode(at: index) else {
-            return nil
-        }
-        let removedNode = remove(node: toBeRemovedNode)
-        return removedNode
     }
 }
 

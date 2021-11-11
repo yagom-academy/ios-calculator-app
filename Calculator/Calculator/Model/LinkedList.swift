@@ -48,49 +48,15 @@ struct LinkedList<T> {
     
     @discardableResult
     mutating func removeHead() -> Node<T>? {
-        guard let nodeToBeRemoved = retrieveNode(at: 0) else {
+        guard let oldHead = head else {
             return nil
         }
-        return remove(node: nodeToBeRemoved)
+        head = oldHead.next
+        return oldHead
     }
     
     mutating func removeAll() {
         head = nil
         tail = nil
-    }
-    
-    mutating func remove(node: Node<T>) -> Node<T> {
-        let previousNode = node.previous
-        let nextNode = node.next
-        
-        if let previousNode = previousNode {
-            previousNode.next = nextNode
-        } else {
-            head = nextNode
-        }
-        
-        if let nextNode = nextNode {
-            nextNode.previous = previousNode
-        } else {
-            tail = previousNode
-        }
-        node.previous = nil
-        node.next = nil
-        
-        return node
-    }
-    
-    func retrieveNode(at index: Int) -> Node<T>? {
-        guard isNotEmpty else {
-            return nil
-        }
-        
-        var currentNode = head
-        for _ in 0..<index {
-            if let node = currentNode {
-                currentNode = node.next
-            }
-        }
-        return currentNode
     }
 }
