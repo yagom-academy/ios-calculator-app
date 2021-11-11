@@ -27,10 +27,11 @@ struct Formula {
             throw CalculatorError.queueNotFound
         }
         var currentOperand = firstOperand
-        guard operands.isEmpty == false else {
+        let canBeCalculated = (operands.isEmpty == false) && (operators.isEmpty == false)
+        guard canBeCalculated else {
             return 0
         }
-        while operands.isEmpty == false {
+        repeat {
             guard let currentOperator = operators.dequeue() else {
                 throw CalculatorError.wrongOperator
             }
@@ -38,7 +39,7 @@ struct Formula {
                 throw CalculatorError.wrongOperand
             }
             currentOperand = currentOperator.calculate(lhs: currentOperand, rhs: rightOperand)
-        }
+        } while operands.isEmpty == false
         if operators.isEmpty == false {
             operators.clear()
         }

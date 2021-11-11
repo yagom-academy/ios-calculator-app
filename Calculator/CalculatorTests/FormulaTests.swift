@@ -8,6 +8,28 @@
 import XCTest
 
 class FormulaTests: XCTestCase {
+    
+    func test_피연산자한개뿐일때_0을반환한다() {
+        var formula = Formula()
+        
+        formula.operands.enqueue(2.0)
+        let result = try? formula.result()
+        
+        XCTAssertTrue(result == 0)
+    }
+    
+    func test_연산자한개뿐일때_에러를반환한다() {
+        var formula = Formula()
+        
+        formula.operators.enqueue(.add)
+        
+        do {
+            let result = try formula.result()
+            XCTAssertThrowsError(result)
+        } catch { }
+        
+    }
+
 
     func test_더하기연산해보기_피연산자한개() {
         var formula = Formula()
