@@ -25,7 +25,7 @@ class FormulaTests: XCTestCase {
         // when
         sut.operands.enqueue(value: input)
         
-        let result = sut.result()
+        let result = try! sut.result()
                 
         // then
         XCTAssertEqual(result, input)
@@ -43,7 +43,7 @@ class FormulaTests: XCTestCase {
         
         sut.operators.enqueue(value: `operator`)
         
-        let result = sut.result()
+        let result = try! sut.result()
                 
         // then
         XCTAssertEqual(result, number1 + number2)
@@ -74,9 +74,16 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(value: operator3)
         sut.operators.enqueue(value: operator4)
         
-        let result = sut.result()
+        let result = try! sut.result()
                 
         // then
         XCTAssertEqual(result, 5.0)
+    }
+    
+    func test_숫자를_입력하지_않고_result함수를_호출하면_에러를_던지는지() {
+        // then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? QueueError, .queueIsEmpty)
+        }
     }
 }

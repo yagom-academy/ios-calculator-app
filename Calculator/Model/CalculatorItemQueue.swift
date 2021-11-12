@@ -19,9 +19,9 @@ struct CalculatorItemQueue<T> {
     }
     
     @discardableResult
-    func dequeue() -> T? {
+    func dequeue() throws -> T {
         guard let node = self.items.removeFront() else {
-            return nil
+            throw QueueError.queueIsEmpty
         }
         
         return node.value

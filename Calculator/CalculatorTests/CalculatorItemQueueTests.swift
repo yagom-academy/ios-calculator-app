@@ -59,18 +59,17 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
         sut.enqueue(value: item)
         
-        let result = sut.dequeue()
+        let result = try! sut.dequeue()
         
         // then
         XCTAssertEqual(result, item)
     }
     
-    func test_CalculatorItemQueue가_비어있는경우_dequeue했을때_nil을반환하는지() {
-        // given, when
-        let result = sut.dequeue()
-        
+    func test_CalculatorItemQueue가_비어있는경우_dequeue했을때_에러를_던지는지() {
         // then
-        XCTAssertNil(result)
+        XCTAssertThrowsError(try sut.dequeue()) { error in
+            XCTAssertEqual(error as? QueueError, .queueIsEmpty)
+        }
     }
     
     func test_CalculatorItemQueue에_값을2번_enqueue하고_dequeue했을때_순서대로나오는지() {
@@ -82,8 +81,8 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(value: item1)
         sut.enqueue(value: item2)
         
-        let result1 = sut.dequeue()
-        let result2 = sut.dequeue()
+        let result1 = try! sut.dequeue()
+        let result2 = try! sut.dequeue()
         
         // then
         XCTAssertEqual(result1, item1)
@@ -99,8 +98,8 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(value: item1)
         sut.enqueue(value: item2)
         
-        sut.dequeue()
-        sut.dequeue()
+        try! sut.dequeue()
+        try! sut.dequeue()
         
         // then
         XCTAssertTrue(sut.isEmpty)
@@ -115,7 +114,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(value: item1)
         sut.enqueue(value: item2)
         
-        sut.dequeue()
+        try! sut.dequeue()
         
         // then
         XCTAssertFalse(sut.isEmpty)
