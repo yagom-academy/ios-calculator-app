@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalculatorItemQueueTests: XCTestCase {
     
     var queue: CalculatorItemQueue = CalculatorItemQueue()
     

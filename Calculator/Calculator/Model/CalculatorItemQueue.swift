@@ -14,11 +14,11 @@ struct CalculatorItemQueue {
         queueList.append(data: item)
     }
     
-    mutating func enqueue(number: Int) {
-        enqueue(item: NumberItem(data: number))
+    mutating func enqueue(number: Double) {
+        enqueue(item: number)
     }
     
-    mutating func enqueue(operatorItem: OperatorItem) {
+    mutating func enqueue(operatorItem: Operator) {
         enqueue(item: operatorItem)
     }
 

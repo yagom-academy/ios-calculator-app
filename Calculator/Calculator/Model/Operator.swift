@@ -16,23 +16,23 @@ enum Operator: Character, CaseIterable, CalculateItem {
 }
 
 extension Operator {
-    func calculate(lhs: Double, rehs: Double) {
+    func calculate(lhs: Double, rhs: Double) {
         
     }
     
-    func add(lhs: Double, rehs: Double) {
+    private func add(lhs: Double, rhs: Double) {
         
     }
     
-    func substract(lhs: Double, rehs: Double) {
+    private func substract(lhs: Double, rhs: Double) {
         
     }
     
-    func divide(lhs: Double, rehs: Double) {
+    private func divide(lhs: Double, rhs: Double) {
         
     }
     
-    func multiply(lhs: Double, rehs: Double) {
+    private func multiply(lhs: Double, rhs: Double) {
         
     }
 }
