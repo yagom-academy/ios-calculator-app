@@ -10,6 +10,7 @@ import XCTest
 
 class OperatorDivideTests: XCTestCase {
     var sut: Operator!
+    
     override func setUpWithError() throws {
         sut = Operator.divide
     }

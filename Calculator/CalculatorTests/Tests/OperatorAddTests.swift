@@ -10,6 +10,7 @@ import XCTest
 
 class OperatorAddTests: XCTestCase {
     var sut: Operator!
+    
     override func setUpWithError() throws {
         sut = Operator.add
     }
