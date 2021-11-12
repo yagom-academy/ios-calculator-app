@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var list = LinkedList<Element>()
     var isEmpty: Bool {
         list.isEmpty
