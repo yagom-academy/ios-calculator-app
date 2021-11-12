@@ -9,13 +9,13 @@ import Foundation
 
 struct CalculatorItemQueue {
     private(set) var numberArray: [Double] = []
-    private(set) var mathOperatorArray: [MathOperator] = []
+    private(set) var mathOperatorArray: [Operator] = []
 
     mutating func enQueueNumberArray(item: Double) {
         numberArray.append(item)
     }
     
-    mutating func enQueueMathOperatorArray(item: MathOperator) {
+    mutating func enQueueMathOperatorArray(item: Operator) {
         mathOperatorArray.append(item)
     }
     
@@ -28,7 +28,7 @@ struct CalculatorItemQueue {
         }
     }
     
-    mutating func deQueueMathOperatorArray() -> MathOperator? {
+    mutating func deQueueMathOperatorArray() -> Operator? {
         switch mathOperatorArray.isEmpty {
         case true:
             return nil
