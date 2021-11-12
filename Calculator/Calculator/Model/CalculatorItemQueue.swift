@@ -1,5 +1,20 @@
 import Foundation
 
+enum ExpressionParser {
+    static func componentsByOperators(from input: String) -> [String] {
+        var components: [String] = []
+        var inputWithSpace: String = input
+        let operatorSymbols: [String] = Operator.allCases.map { String($0.rawValue) }
+        
+        for operatorSymbol in operatorSymbols {
+            inputWithSpace = inputWithSpace.replacingOccurrences(of: String(operatorSymbol), with: " \(operatorSymbol) ")
+        }
+        
+        components = inputWithSpace.split(with: " ").filter { operatorSymbols.contains($0) == false }
+        return components
+    }
+}
+
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
