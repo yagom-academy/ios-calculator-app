@@ -8,7 +8,7 @@ enum ExpressionParserError: Error {
 }
 
 enum ExpressionParser {
-    func parse(from input: String) -> Result<Formula, ExpressionParserError> {
+    static func parse(from input: String) -> Result<Formula, ExpressionParserError> {
         guard input.hasOnlyNumberOrOperator() == true else {
             return .failure(.includingIncorrectLetter)
         }
@@ -17,7 +17,7 @@ enum ExpressionParser {
             return .failure(.firstOrLastLetterIsNotNumber)
         }
         
-        let separatedInput = componentsByOperators(from: input)
+        let separatedInput = ExpressionParser.componentsByOperators(from: input)
         
         var operands: [String] = []
         var operators: [String] = []
@@ -40,13 +40,13 @@ enum ExpressionParser {
         return .success(formula)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
-        let modifiedInput = spacingByOperators(from: input)
+    static private func componentsByOperators(from input: String) -> [String] {
+        let modifiedInput = ExpressionParser.spacingByOperators(from: input)
         
         return modifiedInput.split(with: " ")
     }
     
-    private func spacingByOperators(from input: String) -> String {
+    static private func spacingByOperators(from input: String) -> String {
         var modifiedInput = input
         for `operator` in Operator.allCases {
             modifiedInput = modifiedInput.replacingOccurrences(of: String(`operator`.rawValue), with: " \(`operator`.rawValue) ")

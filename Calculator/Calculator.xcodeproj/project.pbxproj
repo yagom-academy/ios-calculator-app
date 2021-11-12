@@ -18,6 +18,7 @@
 		609545A5273D08E400C3263D /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609545A4273D08E400C3263D /* Formula.swift */; };
 		609545A7273D5FEE00C3263D /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609545A6273D5FEE00C3263D /* ExpressionParser.swift */; };
 		609545A9273D74F900C3263D /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609545A8273D74F900C3263D /* StringTests.swift */; };
+		609545AB273E0F2D00C3263D /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609545AA273E0F2D00C3263D /* ExpressionParserTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		609545A4273D08E400C3263D /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		609545A6273D5FEE00C3263D /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		609545A8273D74F900C3263D /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		609545AA273E0F2D00C3263D /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				6095457027390BB400C3263D /* CalcualtorItemQueueTests.swift */,
 				609545A2273D087000C3263D /* FormulaTests.swift */,
 				609545A8273D74F900C3263D /* StringTests.swift */,
+				609545AA273E0F2D00C3263D /* ExpressionParserTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			files = (
 				609545A3273D087000C3263D /* FormulaTests.swift in Sources */,
 				609545A9273D74F900C3263D /* StringTests.swift in Sources */,
+				609545AB273E0F2D00C3263D /* ExpressionParserTests.swift in Sources */,
 				6095457127390BB400C3263D /* CalcualtorItemQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
