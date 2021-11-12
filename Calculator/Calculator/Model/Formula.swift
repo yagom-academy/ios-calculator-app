@@ -25,11 +25,11 @@ struct Formula {
                 throw QueueError.queueIsEmpty
             }
             
-            guard let nextArithmetic = operators.dequeue() else {
+            guard let nextOperator = operators.dequeue() else {
                 throw QueueError.queueIsEmpty
             }
             
-            let nextCalculationResult = nextArithmetic.calculate(lhs: calculationResult, rhs: nextOperand)
+            let nextCalculationResult = nextOperator.calculate(lhs: calculationResult, rhs: nextOperand)
             
             if nextCalculationResult.isNaN {
                 return .nan
