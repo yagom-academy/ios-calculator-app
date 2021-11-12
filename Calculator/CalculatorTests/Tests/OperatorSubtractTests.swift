@@ -18,7 +18,7 @@ class OperatorSubtractTests: XCTestCase {
         sut = nil
     }
     
-    func testCalculate_givenDouble20andDouble10_expectDouble10() {
+    func testCalculate_givenDecimal20andDecimal10_expectDecimal10() {
         XCTAssertEqual(sut.calculate(lhs: 20.0, rhs: 10.0), 10.0)
     }
 }
