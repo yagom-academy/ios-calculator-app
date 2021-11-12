@@ -43,7 +43,7 @@ struct Formula {
         while try operators.takeOutItem().isEmpty == false {
             do {
                 let nextOperand = try operands.takeOutItem()
-                let nextOperator = try operators.takeOutItem()
+                let nextOperator = operators.array
                 if nextOperand == [] {
                     throw QueueError.emptyArray
                 }
