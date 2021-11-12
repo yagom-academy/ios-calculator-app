@@ -81,5 +81,11 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(try sut.result(), 3)
     }
     
-    
+    func test_연산자_1개_숫자_2개가_있을_경우_곱하기_계산이_잘_되는지() {
+        sut.operands.appendItem(2)
+        sut.operands.appendItem(4)
+        sut.operators.appendItem(.multiply)
+        
+        XCTAssertEqual(try sut.result(), 8)
+    }
 }
