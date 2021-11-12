@@ -32,6 +32,6 @@ struct CalculatorItemQueue {
     }
     
     func getQueueList() -> LinkedList {
-        return self.queueList
+        return queueList
     }
 }
