@@ -5,6 +5,7 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
     
     func result() -> Double {
-        return 0.1
+        //Operator의 연산자 함수들을 사용하여 계산결과 도출하기
+        return 9
     }
 }
