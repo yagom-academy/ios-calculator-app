@@ -9,7 +9,6 @@ import Foundation
 class Node<T> {
     var item: T
     var next: Node?
-    var previous: Node?
     
     init(item: T) {
         self.item = item
@@ -39,7 +38,6 @@ struct LinkedList<T> {
     mutating func append(_ item: T) {
         let newNode = Node(item: item)
         if let tailNode = tail {
-            newNode.previous = tailNode
             tailNode.next = newNode
         } else {
             head = newNode
@@ -64,6 +62,5 @@ struct LinkedList<T> {
     
     mutating func removeAll() {
         head = nil
-        tail = nil
     }
 }
