@@ -10,5 +10,5 @@ extension String {
     }
 }
 
-extension Double {
+extension Double: CalculateItem {
 }
