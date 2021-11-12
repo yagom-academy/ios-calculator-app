@@ -8,7 +8,7 @@
 import XCTest
 
 class FormulaTests: XCTestCase {
-    var formula: Formula = Formula()
+    var formula: Formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     
     override func setUp() {
         formula.operands.enqueue(3.7)
@@ -19,7 +19,7 @@ class FormulaTests: XCTestCase {
     }
     
     override func tearDown() {
-        formula = Formula()
+        formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     }
     
     func testCalculateResult() throws {
