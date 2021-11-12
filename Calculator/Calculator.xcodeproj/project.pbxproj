@@ -94,12 +94,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0D175C092739A32D008B2577 /* CalculatorDataStructureTest */ = {
+		0D175C092739A32D008B2577 /* LinkedListTest */ = {
 			isa = PBXGroup;
 			children = (
 				0D175C0A2739A32D008B2577 /* LinkedListTests.swift */,
 			);
-			path = CalculatorDataStructureTest;
+			path = LinkedListTest;
 			sourceTree = "<group>";
 		};
 		0D175C182739AF74008B2577 /* QueueTests */ = {
@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9402570E5EB001C3AFC /* Calculator */,
-				0D175C092739A32D008B2577 /* CalculatorDataStructureTest */,
+				0D175C092739A32D008B2577 /* LinkedListTest */,
 				0D175C182739AF74008B2577 /* QueueTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
