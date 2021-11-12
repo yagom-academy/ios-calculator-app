@@ -9,6 +9,9 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return []
+        
+        let result = self.filter { $0 != target }
+        
+        return [String(target),result]
     }
 }
