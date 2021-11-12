@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class OperatorDivideTests: XCTestCase {
+class OperatorMultiplyTests: XCTestCase {
     var sut: Operator!
     override func setUpWithError() throws {
         sut = Operator.multiply
@@ -19,6 +19,6 @@ class OperatorDivideTests: XCTestCase {
     }
     
     func testCalculate_givenDecimal20andDecimal10_expectDecimal200() {
-        XCTAssertEqual(sut.calculate(lhs: 20.0, rhs: 10.0), 2.0)
+        XCTAssertEqual(sut.calculate(lhs: 20.0, rhs: 10.0), 200.0)
     }
 }

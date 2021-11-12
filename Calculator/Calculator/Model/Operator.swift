@@ -15,6 +15,7 @@ enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
     case divide = "/"
+    case multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double? {
         switch self {
@@ -31,6 +32,8 @@ enum Operator: Character, CaseIterable {
                 print("알 수 없는 오류가 발생했습니다.")
             }
             return nil
+        case .multiply:
+            return multiply(lhs: lhs, rhs: rhs)
         }
     }
     
@@ -47,5 +50,9 @@ enum Operator: Character, CaseIterable {
             throw CalculationError.zeroDivision
         }
         return lhs / rhs
+    }
+    
+    private func multiply(lhs: Double, rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
