@@ -35,9 +35,11 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual((1.0 + 32.4 - (-3.2)) / 4.0 * 7.2, try formula.result())
     }
     
-    func test_0으로_중간에_나누는_경우_nan이_연산결과로_반환되는지() {
+    func test_0으로_중간에_나누는_경우_에러가_반환되는지() {
         let divideByZeroExpression = "1.0 + 32.4 - -3.2 / 0.0 * 7.2"
         let formula = ExpressionParser.parse(from: divideByZeroExpression)
-        XCTAssertTrue(try formula.result().isNaN)
+        XCTAssertThrowsError(try formula.result()) { error in
+            XCTAssertEqual(error as? OperationError, OperationError.diviedByZero)
+        }
     }
 }
