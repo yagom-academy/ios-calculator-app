@@ -20,7 +20,7 @@ struct Formula {
             let `operator` = try operators.dequeue()
             let number = try operands.dequeue()
 
-            result = `operator`.calculate(lhs: result, rhs: number)
+            result = try `operator`.calculate(lhs: result, rhs: number)
         }
          
         return result

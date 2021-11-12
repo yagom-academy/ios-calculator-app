@@ -86,4 +86,23 @@ class FormulaTests: XCTestCase {
             XCTAssertEqual(error as? QueueError, .queueIsEmpty)
         }
     }
+    
+    func test_0으로_나눴을때_에러를_던지는지() {
+        // given
+        let number1 = 2.0
+        let number2 = 0.0
+        
+        let operator1: Operator = .divide
+        
+        // when
+        sut.operands.enqueue(value: number1)
+        sut.operands.enqueue(value: number2)
+                
+        sut.operators.enqueue(value: operator1)
+                
+        // then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? OperatorError, .divideToZero)
+        }
+    }
 }
