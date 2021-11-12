@@ -101,7 +101,7 @@ class FomulaTest: XCTestCase {
         XCTAssertEqual(-2.5, calculationResult)
     }
     
-    func test_0으로_나누는_경우가_포함되어있는_경우_최종_연산결과가_nan인지() throws {
+    func test_0으로_나누는_경우가_포함되어있는_경우_에러가_반환되는지() throws {
         [15.0, 3.0, 0.0, -2.0].forEach { number in
             formula.operands.enqueue(number)
         }
@@ -117,7 +117,9 @@ class FomulaTest: XCTestCase {
         }
         
         let calculationResult = try formula.result()
-        XCTAssertTrue(calculationResult.isNaN)
+        XCTAssertThrowsError(calculationResult) { error in
+            XCTAssertEqual(error as? OperationError, OperationError.diviedByZero)
+        }
     }
     
     func test_일반적인_우선순위가_아닌_연산자의_순서에_따라_값이_연산되는지() throws {
