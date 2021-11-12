@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculatorItemQueue {
+struct CalculatorItemQueue {
     private var queue: [CalculateItem] = []
     var testableQueue: [CalculateItem] {
         get {
@@ -15,18 +15,18 @@ class CalculatorItemQueue {
         }
     }
     
-    func enqueue<Item: CalculateItem>(_ item: Item) {
+    mutating func enqueue<Item: CalculateItem>(_ item: Item) {
         queue.append(item)
     }
     
-    func dequeue() {
+    mutating func dequeue() {
         guard queue.count > 0 else {
             return
         }
         queue.removeFirst()
     }
     
-    func removeAllItems() {
+    mutating func removeAllItems() {
         queue.removeAll()
     }
 }
