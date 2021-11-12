@@ -41,5 +41,13 @@ class StringTests: XCTestCase {
         
         XCTAssertEqual(result, ["-","157.123"])
     }
+    
+    func test_부호가없는string값을_character를_가지고_split하면_String배열로_반환한다() {
+        let stringValue:String = "157.123"
+        
+        let result = stringValue.split(with: "-")
+        
+        XCTAssertEqual(result, ["157.123"])
+    }
 
 }
