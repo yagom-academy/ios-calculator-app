@@ -11,7 +11,16 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    func result() -> Double {
-        return Double()
+    mutating func result() -> Double {
+        guard var combinedResult = operands.dequeue() else { return 0.0 }
+
+        while let nextOperator = operators.dequeue(),
+              let nextOperand = operands.dequeue() {
+            let partialResult = nextOperator.calculate(lhs: combinedResult,
+                                                       rhs: nextOperand)
+            combinedResult = partialResult
+        }
+        
+        return combinedResult
     }
 }

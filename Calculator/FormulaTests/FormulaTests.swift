@@ -78,7 +78,7 @@ class FormulaTests: XCTestCase {
         operandQueue.enqueue(0.05)
         
         sut = Formula(operands: operandQueue, operators: operatorQueue)
-        let expectedResult: Double = 12 + (-3) / (-2) - 0.05
+        let expectedResult: Double = (12 + (-3)) / (-2) - 0.05
         //when
         let result = sut.result()
         //then
@@ -100,11 +100,10 @@ class FormulaTests: XCTestCase {
         operandQueue.enqueue(0.05)
         
         sut = Formula(operands: operandQueue, operators: operatorQueue)
-        let expectedResult: Double = 3 / 0 * 3 * (-5) - 0.05
         //when
         let result = sut.result()
         //then
-        XCTAssertEqual(result, expectedResult)
+        XCTAssertTrue(result.isNaN)
     }
     func test_result호출시_5번수식에대해서_올바른결과가나오는지() {
         //given
@@ -124,7 +123,7 @@ class FormulaTests: XCTestCase {
         operandQueue.enqueue(-0.05)
         
         sut = Formula(operands: operandQueue, operators: operatorQueue)
-        let expectedResult: Double = 132.0 + 43.0 / (-42.0) * 3.0 - 56.0 * (-0.05)
+        let expectedResult: Double = ((132.0 + 43.0) / (-42.0) * 3.0 - 56.0) * (-0.05)
         //when
         let result = sut.result()
         //then
