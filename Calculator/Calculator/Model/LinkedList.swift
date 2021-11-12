@@ -37,12 +37,6 @@ struct LinkedList<T> {
     
     mutating func append(_ item: T) {
         let newNode = Node(item: item)
-//        if let tailNode = tail {
-//            tailNode.next = newNode
-//        } else {
-//            head = newNode
-//        }
-//        tail = newNode
         if isEmpty {
             head = newNode
         } else {
