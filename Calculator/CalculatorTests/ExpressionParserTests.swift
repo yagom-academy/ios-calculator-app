@@ -20,6 +20,11 @@ class ExpressionParserTests: XCTestCase {
         let fomula: Formula = ep.parse("1 + 2")
         XCTAssertEqual(3.0, try ExpressionParser.parse(from: "1 + 2").result())
     }
+    
+    func test_9_나누기_3의_결과가_3인가() {
+        
+        XCTAssertEqual(3.0, try ExpressionParser.parse(from: "9 / 3").result())
+    }
         
         XCTAssertEqual(3.0, fomula.result())
     }
