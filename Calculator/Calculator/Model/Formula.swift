@@ -28,7 +28,7 @@ struct Formula {
         
         var currentValue: Double = firstOperand
         
-        while operands.isEmpty == false {
+        while !operands.isEmpty {
             guard let currentOperator = try operators.dequeue() else {
                 throw QueueError.isEmpty
             }
