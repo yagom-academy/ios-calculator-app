@@ -27,6 +27,6 @@ class OperatorDivideTests: XCTestCase {
     }
     
     func testCalculate_given10and0_expectError() {
-        XCTAssertThrowsError(sut.calculate(lhs: 10, rhs: 0))
+        XCTAssertEqual(sut.calculate(lhs: 10, rhs: 0), nil)
     }
 }
