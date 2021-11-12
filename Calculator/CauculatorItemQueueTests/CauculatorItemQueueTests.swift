@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CauculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
@@ -23,7 +23,7 @@ class CauculatorItemQueueTests: XCTestCase {
     // MARK:- enqueue(_ item:) tests
     func test_enqueue호출시_4를전달하면_list에4가추가되는지() {
         //given
-        let input = 4
+        let input = 4.0
         //when
         sut.enqueue(input)
         let result = sut.front
