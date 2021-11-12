@@ -85,5 +85,15 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 2.0)
     }
     
+    func test_Operator가substract일때_calculate호출시_계산값이정상적으로나오는지() {
+        // Given
+        sut = .substract
+        
+        // When
+        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        
+        // Then
+        XCTAssertEqual(result, 1.0)
+    }
     
 }
