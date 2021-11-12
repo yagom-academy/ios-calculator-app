@@ -9,11 +9,14 @@ import Foundation
 
 enum Operator: Character, CaseIterable {
     case add = "+"
+    case subtract = "-"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
             return lhs + rhs
+        case .subtract:
+            return lhs - rhs
         }
     }
 }
