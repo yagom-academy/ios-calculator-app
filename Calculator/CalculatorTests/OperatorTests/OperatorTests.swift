@@ -118,4 +118,16 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 1.5)
     }
     
+    func test_Operator가divide일때_값을0으로나눌시_nan이출력되는지() {
+        // Given
+        sut = .divide
+        var flag = true
+        
+        // When
+        let result = sut.calculate(lhs: 6.0, rhs: 0.0)
+        if result.isNaN { flag = false }
+        
+        // Then
+        XCTAssertFalse(flag)
+    }
 }
