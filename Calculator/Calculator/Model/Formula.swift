@@ -33,7 +33,6 @@ struct Formula {
             do {
             currentValue = try currentOperator.calculate(lhs: currentValue, rhs: currentOperand)
             } catch let error {
-                print(error.localizedDescription)
                 throw error
             }
         }

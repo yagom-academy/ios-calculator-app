@@ -31,8 +31,8 @@ class FormulaTests: XCTestCase {
         do {
             let result = try formula.result()
             XCTAssertEqual(result, ((3.7 + 4.9) - 0.0) / 12.4 * -342.6)
-        } catch QueueError.isEmpty {
-            print(QueueError.isEmpty.localizedDescription)
+        } catch QueueError.EmptyQueue {
+            print(QueueError.EmptyQueue.localizedDescription)
         } catch OperationError.devidedByZero {
             print(OperationError.devidedByZero)
         } catch {
