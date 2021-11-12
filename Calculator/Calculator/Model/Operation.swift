@@ -27,3 +27,4 @@ func divide(lhs: Double, rhs: Double) -> Double { lhs / rhs }
 func multifly(lhs: Double, rhs: Double) -> Double { lhs * rhs }
 }
 
+

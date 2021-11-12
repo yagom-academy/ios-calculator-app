@@ -7,6 +7,10 @@ extension Double {
 
 extension String {
     func split(with target: Character) -> [String] {
-        self.components(separatedBy: String(target)).map{ String($0) }
+        let targetPlusEmptySpace = self.replacingOccurrences(of: String(target), with: " \(target) ")
+        return targetPlusEmptySpace.components(separatedBy: " ").map{ String($0) }
     }
 }
+
+
+
