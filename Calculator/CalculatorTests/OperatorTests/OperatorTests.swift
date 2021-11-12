@@ -20,9 +20,57 @@ class OperatorTests: XCTestCase {
     }
 
     func test_calculate호출시_값을정상적으로반환하는지() {
-        let result = sut.calculate(lhs: 0, rhs: 0)
+        // Given
+        let input = 0.0
         
+        // When
+        let result = sut.calculate(lhs: input, rhs: input)
+        
+        // Then
         XCTAssertNotNil(result)
     }
-
+    
+    func test_Operator를add로한후_calculate호출시_add가호출되어_반환값이있는지() {
+        // Given
+        sut = .add
+        
+        // When
+        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        
+        // Then
+        XCTAssertNotNil(result)
+    }
+    
+    func test_Operator를substract로한후_calculate호출시_substract가호출되어_반환값이있는지() {
+        // Given
+        sut = .substract
+        
+        // When
+        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        
+        // Then
+        XCTAssertNotNil(result)
+    }
+    
+    func test_Operator를multiply로한후_calculate호출시_multiply가호출되어_반환값이있는지() {
+        // Given
+        sut = .substract
+        
+        // When
+        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        
+        // Then
+        XCTAssertNotNil(result)
+    }
+    
+    func test_Operator를divide로한후_calculate호출시_divide가호출되어_반환값이있는지() {
+        // Given
+        sut = .divide
+        
+        // When
+        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        
+        // Then
+        XCTAssertNotNil(result)
+    }
 }
