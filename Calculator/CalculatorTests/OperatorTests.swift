@@ -1,6 +1,6 @@
 import XCTest
 
-class ExtensionsTests: XCTestCase {
+class OperatorTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -9,9 +9,12 @@ class ExtensionsTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func test_String에_split을_호출하면() {
-        // ...
+    
+    func test_Operator의_add_case에_1과2를_넣으면_3이_반환된다() {
+        let calculator = Operator(rawValue: "+")
+        let result = calculator?.calculate(lhs: 1, rhs: 2)
+        XCTAssertEqual(result, 3)
     }
+
 
 }
