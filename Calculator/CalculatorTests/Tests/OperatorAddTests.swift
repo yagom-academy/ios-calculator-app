@@ -25,4 +25,8 @@ class OperatorAddTests: XCTestCase {
     func testCalculate_givenDouble10andDouble10_expectInt20() {
         XCTAssertEqual(sut.calculate(lhs: 10.0, rhs: 10.0), 20)
     }
+    
+    func testCalculate_givenInt10andInt10_expectInt20() {
+        XCTAssertEqual(sut.calculate(lhs: 10, rhs: 10), 20)
+    }
 }
