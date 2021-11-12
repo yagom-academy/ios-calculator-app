@@ -18,7 +18,15 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let sliceInputValue = input.split()
+        let operatros = Operator.allCases.map{ $0.rawValue }
+        var convertValue = ""
+        input.forEach{ element in
+            let isOperator = operatros.contains(element)
+            if isOperator {
+                convertValue = input.replacingOccurrences(of: element.description, with: " \(element) ")
+            }
+        }
+        let sliceInputValue = convertValue.split()
         let operands = sliceInputValue.filter { Double($0.description) != nil }
         return operands
     }
