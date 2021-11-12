@@ -3,35 +3,57 @@ import XCTest
 @testable import Calculator
 
 class StringTests: XCTestCase {
+    
+    var testCases: [String] = []
 
-    func test_splitting() {
-        let testString = "+123+123+123+"
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         
-        XCTAssertEqual(testString.split(with: "+"), ["123","123","123"])
+        testCases.append("+123+123+123+")
+        testCases.append("*12+/123--")
+        testCases.append("")
+        testCases.append("1")
+        testCases.append("1/3")
+        testCases.append("123z")
+    }
+    
+    func test_splitting() {
+        let answerList = [ ["123","123","123"],
+                           ["*12","/123--"],
+                           [],
+                           ["1"],
+                           ["1/3"],
+                           ["123z"] ]
+        
+        for index in 0..<testCases.count {
+            XCTAssertEqual(testCases[index].split(with: "+"), answerList[index], "test: \(index) was failed")
+        }
     }
 
     func test_hasOnlyNumberOrOperator() {
-        let testString1 = "*12+/123--"
-        let testString2 = ""
-        let testString3 = "1"
+        let answerList = [ true,
+                           true,
+                           true,
+                           true,
+                           true,
+                           false ]
         
-        let result = testString1.hasOnlyNumberOrOperator()
-                        && testString2.hasOnlyNumberOrOperator()
-                        && testString3.hasOnlyNumberOrOperator()
-        
-        XCTAssertEqual(result, true)
+        for index in 0..<testCases.count {
+            XCTAssertEqual(testCases[index].hasOnlyNumberOrOperator(), answerList[index], "test: \(index) was failed")
+        }
     }
     
     func test_firstAndLastLetterAreNumbers() {
-        let testString1 = "1"
-        let testString2 = "1/3"
-        let testString3 = "123"
+        let answerList = [ false,
+                           false,
+                           false,
+                           true,
+                           true,
+                           false ]
         
-        let result = testString1.firstAndLastLetterAreNumbers()
-                        && testString2.firstAndLastLetterAreNumbers()
-                        && testString3.firstAndLastLetterAreNumbers()
-        
-        XCTAssertEqual(result, true)
+        for index in 0..<testCases.count {
+            XCTAssertEqual(testCases[index].firstAndLastLetterAreNumbers(), answerList[index], "test: \(index) was failed")
+        }
     }
     
 }
