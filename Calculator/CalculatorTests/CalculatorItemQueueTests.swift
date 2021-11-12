@@ -98,7 +98,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
 }
 
-extension CalculatorTests {
+extension CalculatorItemQueueTests {
     func convertList(list: [CalculateItem?]) -> [String?] {
         var compareList: [String?] = []
         
@@ -113,11 +113,11 @@ extension CalculatorTests {
             return nil
         }
         
-        if let number = item as? NumberItem {
-            return number.dataToString
+        if let number = item as? Double {
+            return String(number)
         }
-        if let operatorItem = item as? OperatorItem {
-            return operatorItem.operatorSymbol
+        if let operatorItem = item as? Operator {
+            return String(operatorItem.rawValue)
         }
         return nil
     }
