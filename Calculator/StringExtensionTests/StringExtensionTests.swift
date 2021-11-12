@@ -6,17 +6,19 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class StringExtensionTests: XCTestCase {
-    var sut: String.Type!
+    var sut: String!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = String.self
+        sut = String()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
+    
 }
