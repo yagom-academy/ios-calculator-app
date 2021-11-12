@@ -18,15 +18,15 @@ class OperatorAddTests: XCTestCase {
         sut = nil
     }
     
-    func testCalculate_givenDouble10andDouble10_expectDouble20() {
+    func testCalculate_givenDecimal10andDecimal10_expectDecimal20() {
         XCTAssertEqual(sut.calculate(lhs: 10.0, rhs: 10.0), 20.0)
     }
     
-    func testCalculate_givenDouble10andDouble10_expectInt20() {
+    func testCalculate_givenDecimal10andDecimal10_expectNoDecimal20() {
         XCTAssertEqual(sut.calculate(lhs: 10.0, rhs: 10.0), 20)
     }
     
-    func testCalculate_givenInt10andInt10_expectInt20() {
+    func testCalculate_givenNoDecimal10andNoDecimal10_expectNoDecimal20() {
         XCTAssertEqual(sut.calculate(lhs: 10, rhs: 10), 20)
     }
 }
