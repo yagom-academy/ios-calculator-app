@@ -32,14 +32,19 @@ struct Formula {
         }
     }
     
-    mutating func result() -> Double {
-        var result = operands.dequeue() as? Double ?? 0
+    func result() -> Double {
+        let operandsArray: [Double] = operands.allOperands()
+        let operatorsArray: [Operator] = operators.allOperators()
         
-        while let `operator` = operators.dequeue() as? Operator,
-              let operand = operands.dequeue() as? Double {
-            result = `operator`.calculate(lhs: result, rhs: operand)
+        guard operandsArray.count > 0 else {
+            return 0
         }
         
+        var result = operandsArray[0]
+        for index in 0..<operatorsArray.count {
+            result = operatorsArray[index].calculate(lhs: result, rhs: operandsArray[index+1])
+        }
+
         return result
     }
 }
