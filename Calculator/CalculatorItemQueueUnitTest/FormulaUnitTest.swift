@@ -3,10 +3,12 @@ import XCTest
 class FormulaUnitTest: XCTestCase {
     var numbers: CalculatorItemQueue<Double>!
     var operators: CalculatorItemQueue<Operator>!
+//    var formula: Formula!
     
     override func setUpWithError() throws {
         numbers = CalculatorItemQueue<Double>()
         operators = CalculatorItemQueue<Operator>()
+//        formula = Formula(operands: numbers, operators: operators)
     }
 
     override func tearDownWithError() throws {
@@ -22,10 +24,10 @@ class FormulaUnitTest: XCTestCase {
         operators.enqueue(.add)
         operators.enqueue(.add)
 
-        var firstFormula = Formula(operands: numbers, operators: operators)
+        var formula = Formula(operands: numbers, operators: operators)
 
         //when
-        let result = firstFormula.result()
+        let result = formula.result()
 
         //then
         XCTAssertEqual(result, 5)
@@ -41,10 +43,10 @@ class FormulaUnitTest: XCTestCase {
         operators.enqueue(.add)
         operators.enqueue(.add)
 
-        var secondFormula = Formula(operands: numbers, operators: operators)
+        var formula = Formula(operands: numbers, operators: operators)
 
         //when
-        let result = secondFormula.result()
+        let result = formula.result()
 
         //then
         XCTAssertEqual(result, 9)
@@ -62,14 +64,52 @@ class FormulaUnitTest: XCTestCase {
         operators.enqueue(.add)
         operators.enqueue(.subtract)
 
-        var thirdFormula = Formula(operands: numbers, operators: operators)
+        var formula = Formula(operands: numbers, operators: operators)
 
         //when
-        let result = thirdFormula.result()
+        let result = formula.result()
 
         //then
         XCTAssertEqual(result, 6)
 
+    }
+    
+    func test_2더하기_3곱하기_4의_결과는_9가_나온다() {
+        numbers.enqueue(2)
+        numbers.enqueue(3)
+        numbers.enqueue(4)
+        
+        operators.enqueue(.add)
+        operators.enqueue(.add)
+        operators.enqueue(.multiply)
+        
+        var formula = Formula(operands: numbers, operators: operators)
+        
+        //when
+        let result = formula.result()
+
+        //then
+        XCTAssertEqual(result, 20)
+    }
+    
+    func test_2더하기_3곱하기_4빼기_5의_결과는_15가_나온다() {
+        numbers.enqueue(2)
+        numbers.enqueue(3)
+        numbers.enqueue(4)
+        numbers.enqueue(5)
+        
+        operators.enqueue(.add)
+        operators.enqueue(.add)
+        operators.enqueue(.multiply)
+        operators.enqueue(.subtract)
+        
+        var formula = Formula(operands: numbers, operators: operators)
+        
+        //when
+        let result = formula.result()
+
+        //then
+        XCTAssertEqual(result, 15)
     }
 
 }
