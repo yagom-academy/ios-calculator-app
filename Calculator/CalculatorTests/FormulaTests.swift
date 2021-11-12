@@ -11,11 +11,14 @@ import XCTest
 class FormulaTests: XCTestCase {
 
     func test_1_더하기_2의_결과가_3인가() {
-        var formula = Formula()
+        let formula = Formula()
+        
         formula.operands.enqueue(1.0)
+        formula.operands.enqueue(2.0)
         formula.operators.enqueue(Operator.add)
         
-        var calculationResult = formula.result()
+        let calculationResult = formula.result()
+        print(calculationResult)
         
         XCTAssertEqual(3.0, calculationResult)
     }
