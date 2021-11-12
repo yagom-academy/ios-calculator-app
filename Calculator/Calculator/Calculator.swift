@@ -4,7 +4,7 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element> {
     var linkedList = LinkedListManager<Element>(head: nil)
     
     func insertToQueue(_ insertValue: Element) {
