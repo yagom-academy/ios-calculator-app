@@ -20,9 +20,10 @@ extension String {
 
 enum ExpressionParser {
     func parse(from input: String) -> Formula {
+        let inputOperands = componentsByOperators(from: input)
+        
         let operatorEnumArray = Operator.allCases.map { String($0.rawValue) }
         let inputCharacters = Array(input).map { String($0) }
-        let inputOperands = componentsByOperators(from: input)
         let inputOperator = inputCharacters.filter { operatorEnumArray.contains($0) == true }
         
         let formula = Formula()
@@ -36,8 +37,14 @@ enum ExpressionParser {
     }
 
     private func componentsByOperators(from input: String) -> [String] {
-        return input.components(separatedBy: ["+","-","/","*"])
-        
+        var splitedWithTarget: [String]
+        var joinedString = input
+        for operatorCase in Operator.allCases {
+            splitedWithTarget = joinedString.split(with: operatorCase.rawValue)
+            joinedString = splitedWithTarget.joined(separator: " ")
+        }
+        let inputOperands = joinedString.components(separatedBy: " ")
+        return inputOperands
     }
 }
 
