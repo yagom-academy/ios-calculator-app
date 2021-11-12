@@ -15,14 +15,11 @@ extension String {
     }
     
     func firstAndLastLetterAreNumbers() -> Bool {
-        guard let firstLetterIsNumber = self.first?.isNumber else {
+        guard let firstLetter = self.first,
+              let lastLetter = self.last else {
             return false
         }
         
-        guard let lastLetterIsNumber = self.last?.isNumber else {
-            return false
-        }
-        
-        return firstLetterIsNumber && lastLetterIsNumber
+        return firstLetter.isNumber && lastLetter.isNumber
     }
 }
