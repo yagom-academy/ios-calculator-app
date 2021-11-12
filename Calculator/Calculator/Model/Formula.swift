@@ -8,10 +8,14 @@
 import Foundation
 
 struct Formula {
+    enum FormulaErro: Error {
+        case NaN
+    }
+    
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    func result() -> Double {
+    func result() throws -> Double {
         var result: Double = 0.0
         guard let initialValue = operands.dequeue() else {
             return 0.0
@@ -25,6 +29,10 @@ struct Formula {
             }
             guard let calculatingOperand = operands.dequeue() else {
                 return 0.0
+            }
+            
+            if currentOperator == .divide && calculatingOperand == 0.0 {
+                throw FormulaErro.NaN
             }
             
             result = currentOperator.calculate(lhs: result, rhs: calculatingOperand)
