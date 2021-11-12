@@ -1,6 +1,6 @@
 struct LinkedList<T> {
-    private(set) var head: Node<T>?
-    private(set) var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -51,10 +51,24 @@ struct LinkedList<T> {
         }
         return result
     }
+    
+    func makeArray() -> [T] {
+        var result: [T] = []
+        guard var node = head else {
+            return result
+        }
+        
+        result.append(node.value)
+        while let next = node.next {
+            result.append(next.value)
+            node = next
+        }
+        return result
+    }
 }
 
 extension LinkedList {
-    class Node<T> {
+    final private class Node<T> {
         var value: T
         var next: Node<T>?
         
