@@ -22,17 +22,15 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "✖️"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
-        switch self.rawValue {
-        case "➕":
+        switch self {
+        case .add:
             return add(lhs: lhs, rhs: rhs)
-        case "➖":
+        case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
-        case "➗":
+        case .divide:
             return divide(lhs: lhs, rhs: rhs)
-        case "✖️":
+        case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
-        default:
-            return 0
         }
     }
     

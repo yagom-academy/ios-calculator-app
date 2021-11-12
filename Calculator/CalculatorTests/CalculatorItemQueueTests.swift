@@ -15,29 +15,32 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_빈_배열에서_Character타입_더하기를_append하면_연산자배열에_더하기가_생성되는지() {
-        var queue = CalculatorItemQueue<Character>()
-        queue.appendItem("+")
-        XCTAssertEqual(queue.array, ["+"])
-    }
-    
-    func test_배열에서_removeItem을_하면_배열의_첫번째_값이_빠지는지() {
-        var queue = CalculatorItemQueue<Int>()
-        queue.appendItem(1)
-        queue.appendItem(2)
-        queue.appendItem(3)
-        
-        XCTAssertEqual(try queue.takeOutItem(), [2, 3])
+        var queue = CalculatorItemQueue<Operator>()
+        queue.appendItem(.add)
+        XCTAssertEqual(queue.array, [.add])
     }
     
     func test_배열에_값이_하나_들어있을_경우_removeItem을_하면_빈_배열로_되는지() {
-        var queue = CalculatorItemQueue<Int>()
-        queue.appendItem(1)
+        var queue = CalculatorItemQueue<Operator>()
+        queue.appendItem(.add)
         
         XCTAssertEqual(try queue.takeOutItem(), [])
     }
     
-    func test_빈_배열에_removeItem을_하면_오류를_뱉는지() {
-        var queue = CalculatorItemQueue<Int>()
+    func test_빈_Double배열에_removeItem을_하면_오류를_뱉는지() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        do {
+            try queue.takeOutItem()
+        } catch {
+            return
+        }
+        
+        XCTAssertThrowsError(QueueError.emptyArray)
+    }
+    
+    func test_빈_Operator배열에_removeItem을_하면_오류를_뱉는지() {
+        var queue = CalculatorItemQueue<Double>()
         
         do {
             try queue.takeOutItem()
@@ -49,10 +52,10 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_배열에_Character_값이_3개_들어있을_때_removeAllItem을_하면_빈_배열로_되는지() {
-        var queue = CalculatorItemQueue<Character>()
-        queue.appendItem("강")
-        queue.appendItem("아")
-        queue.appendItem("지")
+        var queue = CalculatorItemQueue<Operator>()
+        queue.appendItem(.add)
+        queue.appendItem(.divide)
+        queue.appendItem(.multiply)
         
         do {
             try queue.removeAllItems()
