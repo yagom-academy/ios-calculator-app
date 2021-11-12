@@ -10,14 +10,9 @@ import Foundation
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
-    
-    init() {
-        self.operands = CalculatorItemQueue<Double>()
-        self.operators = CalculatorItemQueue<Operator>()
-    }
-    
-    init(opreands: CalculatorItemQueue<Double>,
-         operators: CalculatorItemQueue<Operator>) {
+
+    init(opreands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(),
+         operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()) {
         self.operands = opreands
         self.operators = operators
     }
