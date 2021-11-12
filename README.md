@@ -2,8 +2,11 @@
 
 ## 목차 
 - [Step 1](#step-1)
-  - [UML](#uml) 
-  - [고민된 점 및 해결 방법](#고민된-점-및-해결-방법)
+  - [UML](#1-uml) 
+  - [고민된 점 및 해결 방법](#2-고민된-점-및-해결-방법)
+- [Step 2](#step-2)
+  - [UML 분석](#1-uml-분석) 
+  - [고민된 점 및 해결 방법](#2-고민된-점-및-해결-방법)
 
 ## Step 1 
 
@@ -11,10 +14,10 @@
 
 
 
-### UML
+### 1. UML
 ![CalculatorUML](https://user-images.githubusercontent.com/45652743/141072217-badda911-4d21-476f-bab8-a91dcab94259.png)
 
-### 고민된 점 및 해결 방법
+### 2. 고민된 점 및 해결 방법 
 
 > 1. 타입 명시에 관한 부분 
 
@@ -35,3 +38,50 @@ Queue를 구현하기 위해 어떠한 자료구조를 써야할지 고민을 �
 > 3. TDD에 대하여 
 
 TDD 기반으로 프로젝트를 진행해보고자 테스트 코드를 우선적으로 작성하였습니다. 테스트 코드를 짤 때 미세하게 놓친 부분들이 실제 프로덕션 코드를 구현할 때 생각이 나기도 했고 이를 수정해가며 테스트를 통과할 수 있는 코드를 작성해봤습니다. 테스트 실행 이후 code coverage를 살펴보며 커버되지 않는 부분이 있는지 스스로 피드백하며 테스트를 진행해봤습니다. 
+
+
+## Step 2
+
+구현 기간: 2021.11.10 ~ 12
+
+### 1. UML 분석 
+
+- `ExpressionPaser`
+	- 연산식에서 피연산자와 연산자를 분리하는 역할과 책임을 갖는 타입이라고 생각했습니다. 
+	- `parse`: 연산식에서 피연산자/연산자를 분리하고 이를 활용하여 `Formula` 인스턴스를 만들어 반환
+	- `componentsByOperators`: 연산자를 제외한 연산자 배열만 반환하는 기능
+- `String`
+	- `split`: 특정 구분자를 갖고 연산식을 피연산자/연산자와 분리허는 기능
+- `Operator`
+	- 연산을 담당하는 타입 
+	- 연산자 케이스와 각 케이스에 맞는 연산 로직 매칭 담당
+- `Formula`
+	- 최종 연산자/피연산자로 구성된 queue를 각각 가지고 있다.
+	- 이를 통해 result 메서드를 사용하여 최종 연산 결과를 얻어내는 역할을 한다.
+
+
+`Double`이나 `Operator`가 빈 프로토콜인 `CalculateItem`를 채택하는 이유는 `CalculatoritemQueue`가 다루는 요소가 `CalculateItem`를 채택하기 때문에 이들 또한 채택해야 요소로서 사용할 수 있을 것이라 생각했습니다. 
+
+
+### 2. 고민된 점 및 해결 방법
+
+> 1. guard 문 
+
+```swift
+while  operands.items.count  >  0  &&  operators.items.count  >  0 {
+    guard let nextOperand = operands.dequeue() else {
+        throw QueueError.queueIsEmpty
+    }
+    ...
+}
+```
+이렇게 사전에 조건을 달아줌에 따라 요소가 있는 것을 확인해주는 역할을 하지만, 최대한 안정성을 추구하고자 내부에서 dequeue할 때 강제 언래핑이 아닌 옵셔널 바인딩을 사용했습니다. 
+
+
+
+### Set 과 array
+
+`Operator`인지 여부를 파악하기 위해 filter하는 부분에서 `Operator`의 `allCases`를 `Array`가 아닌 `Set`으로 두었습니다. 
+그 이유는 `Set`의 `.contains` 시간 복잡도는 `O(1)`이고, `Array`의 `.contains`가 `O(n)`이어서 더 빠른 `Set`으로 구현하였습니다. 
+
+
