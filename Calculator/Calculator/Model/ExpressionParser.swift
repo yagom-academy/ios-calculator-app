@@ -14,7 +14,6 @@ enum ExpressionParser {
         var operatorQueue = CalculatorItemQueue<Operator>()
         input.filter { operatorRawValues.contains($0) }.forEach {
             guard let operatorItem = Operator(rawValue: $0) else { return }
-            print(operatorItem, "enqueued")
             operatorQueue.enqueue(operatorItem)
         }
 
