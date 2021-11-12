@@ -16,7 +16,7 @@ enum Operator: CalculateItem {
     var sign: String {
         switch self {
         case .add: return "+"
-        case .subtract: return "-"
+        case .subtract: return "_"
         case .multiply: return "×"
         case .divide: return "/"
         }
