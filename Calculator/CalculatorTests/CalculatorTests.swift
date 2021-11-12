@@ -9,115 +9,97 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     
-    func test_숫자배열이_초기화_직후_비어있는지() {
-        let calculatorTest = CalculatorItemQueue()
-        
-        let result = calculatorTest.numberArray.isEmpty
-        
+    func test_큐타입_제네릭에_Double타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
+        var operands = CalculatorItemQueue<Double>()
+        let result = operands.queueArray.isEmpty
         XCTAssertTrue(result)
     }
     
-    func test_연산자배열이_초기화_직후_비어있는지() {
-        let calculatorTest = CalculatorItemQueue()
-        
-        let result = calculatorTest.mathOperatorArray.isEmpty
-        
+    func test_큐타입_제네릭에_Operator타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
+        var operators = CalculatorItemQueue<Operator>()
+        let result = operators.queueArray.isEmpty
         XCTAssertTrue(result)
     }
     
     func test_숫자배열에_넣는_5가_Double_타입인지() {
-        var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueNumberArray(item: 5)
-        
+        var operands = CalculatorItemQueue<Double>()
+        operands.enqueue(element: 5)
         let expectation: Double = 5
-        let result = calculatorTest.numberArray[0]
-        
+        let result = operands.queueArray[0]
         XCTAssertEqual(expectation, result)
     }
     
     func test_숫자배열에_넣는_음수가_Double_타입인지() {
-        var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueNumberArray(item: -2)
-        
+        var operands = CalculatorItemQueue<Double>()
+        operands.enqueue(element: -2)
         let expectation: Double = -2
-        let result = calculatorTest.numberArray[0]
-        
+        let result = operands.queueArray[0]
         XCTAssertEqual(expectation, result)
     }
     
     func test_숫자배열에_넣는_0이_Double_타입인지() {
-        var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueNumberArray(item: 0)
-        
+        var operands = CalculatorItemQueue<Double>()
+        operands.enqueue(element: 0)
         let expectation: Double = 0
-        let result = calculatorTest.numberArray[0]
-        
+        let result = operands.queueArray[0]
         XCTAssertEqual(expectation, result)
     }
     
     func test_연산자배열에_add케이스_넣어지는지() {
-        var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueMathOperatorArray(item: .add)
-        
-        let expectation: MathOperator = .add
-        let result = calculatorTest.mathOperatorArray[0]
-        
+        var operators = CalculatorItemQueue<Operator>()
+        operators.enqueue(element: .add)
+        let expectation: Operator = .add
+        let result = operators.queueArray[0]
         XCTAssertEqual(expectation, result)
     }
     
-    func test_숫자배열이_비어있을때_deQueue메서드로_nil반환되는지() {
-        var calculatorTest = CalculatorItemQueue()
-        
-        let result = calculatorTest.deQueueNumberArray()
-        
+    func test_숫자배열이_비어있을때_dequeue메서드로_nil_반환되는지() {
+        var operands = CalculatorItemQueue<Double>()
+        let result = operands.dequeue()
         XCTAssertNil(result)
     }
     
-    func test_숫자배열에_원소있을때_deQueue메서드로_뽑히는지() {
-        var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueNumberArray(item: 100)
-        
+    func test_숫자배열에_원소있을때_dequeue메서드로_반환되는지() {
+        var operands = CalculatorItemQueue<Double>()
+        operands.enqueue(element: 100)
         let expectation: Double = 100
-        let result = calculatorTest.deQueueNumberArray()
-        
+        let result = operands.dequeue()
         XCTAssertEqual(expectation, result)
     }
     
-    func test_연산자배열이_비어있을때_deQueue메서드로_nil반환되는지() {
-        var calculatorTest = CalculatorItemQueue()
-        
-        let result = calculatorTest.deQueueMathOperatorArray()
-        
+    func test_연산자배열이_비어있을때_dequeue메서드로_nil_반환되는지() {
+        var operators = CalculatorItemQueue<Operator>()
+        let result = operators.dequeue()
         XCTAssertNil(result)
     }
     
-    func test_연산자배열에_원소있을때_deQueue메서드로_뽑히는지() {
-        var calculatorTest = CalculatorItemQueue()
-        calculatorTest.enQueueMathOperatorArray(item: .multiply)
-        
-        let expectation: MathOperator = .multiply
-        let result = calculatorTest.deQueueMathOperatorArray()
-        
+    func test_연산자배열에_원소있을때_dequeue메서드로_반환되는지() {
+        var operators = CalculatorItemQueue<Operator>()
+        operators.enqueue(element: .multiply)
+        let expectation: Operator = .multiply
+        let result = operators.dequeue()
         XCTAssertEqual(expectation, result)
     }
     
-    func test_두배열이_모두_비워지는지() {
-        var calculatorTest = CalculatorItemQueue()
-        
-        calculatorTest.enQueueNumberArray(item: 1)
-        calculatorTest.enQueueNumberArray(item: -2)
-        calculatorTest.enQueueNumberArray(item: 3.3)
-        calculatorTest.enQueueNumberArray(item: 0)
-        
-        calculatorTest.enQueueMathOperatorArray(item: .add)
-        calculatorTest.enQueueMathOperatorArray(item: .subtract)
-        calculatorTest.enQueueMathOperatorArray(item: .multiply)
-        calculatorTest.enQueueMathOperatorArray(item: .divide)
-        
-        calculatorTest.clearBothArrays()
-        
-        let result = calculatorTest.numberArray.isEmpty && calculatorTest.mathOperatorArray.isEmpty
-        
+    func test_숫자배열에_원소있을때_clearQueueArray메서드로_비워지는지() {
+        var operands = CalculatorItemQueue<Double>()
+        operands.enqueue(element: 23.222221)
+        operands.enqueue(element: 1.5)
+        operands.enqueue(element: -2)
+        operands.enqueue(element: 2425623)
+        operands.clearQueueArray()
+        let result = operands.queueArray.isEmpty
+        XCTAssertTrue(result)
+    }
+    
+    func test_연산자배열에_원소있을때_clearQueueArray메서드로_비워지는지() {
+        var operators = CalculatorItemQueue<Operator>()
+        operators.enqueue(element: .add)
+        operators.enqueue(element: .subtract)
+        operators.enqueue(element: .multiply)
+        operators.enqueue(element: .divide)
+        operators.clearQueueArray()
+        let result = operators.queueArray.isEmpty
         XCTAssertTrue(result)
     }
 }
