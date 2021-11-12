@@ -13,7 +13,7 @@ class CalcualtorItemQueueTests: XCTestCase {
     func test_basicOperandQueueing() {
         testQueue.enqueue(1)
         
-        let firstOperand = testQueue.firstNode?.value as? Double
+        let firstOperand = testQueue.dequeue() as? Double
         
         XCTAssertEqual(firstOperand, 1)
     }

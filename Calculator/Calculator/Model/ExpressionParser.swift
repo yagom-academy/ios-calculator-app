@@ -1,12 +1,12 @@
-enum ExpressionParserError: Error {
-    case includingIncorrectLetter
-    case firstOrLastLetterIsNotNumber
-    case incorrectCountOfNumbersAndOperators
-    case failedToInitializeFormulaInstance
-}
-
 enum ExpressionParser {
-    static func parse(from input: String) -> Result<Formula, ExpressionParserError> {
+    enum PaserError: Error {
+        case includingIncorrectLetter
+        case firstOrLastLetterIsNotNumber
+        case incorrectCountOfNumbersAndOperators
+        case failedToInitializeFormulaInstance
+    }
+    
+    static func parse(from input: String) -> Result<Formula, ExpressionParser.PaserError> {
         guard input.hasOnlyNumberOrOperator() == true else {
             return .failure(.includingIncorrectLetter)
         }

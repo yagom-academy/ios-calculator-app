@@ -21,7 +21,7 @@ class ExpressionParserTests: XCTestCase {
     }
     
     func test_failureCase() {
-        let failureAnswerList: [ExpressionParserError] = [.firstOrLastLetterIsNotNumber,
+        let failureAnswerList: [ExpressionParser.PaserError] = [.firstOrLastLetterIsNotNumber,
                                                           .firstOrLastLetterIsNotNumber,
                                                           .includingIncorrectLetter,
                                                           .incorrectCountOfNumbersAndOperators]
