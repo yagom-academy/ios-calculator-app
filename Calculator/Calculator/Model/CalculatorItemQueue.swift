@@ -9,6 +9,11 @@ import Foundation
 
 class CalculatorItemQueue {
     private var queue: [CalculateItem] = []
+    var testableQueue: [CalculateItem] {
+        get {
+            return queue
+        }
+    }
     
     func enqueue(_ item: Double) {
         queue.append(item)
