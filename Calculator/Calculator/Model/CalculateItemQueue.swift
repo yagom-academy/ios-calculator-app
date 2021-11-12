@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct CalculateItemQueue<T: Equatable>: CalculateItem {
-    private(set) var items: [T] = []
+struct CalculateItemQueue<Element: CalculateItem> {
+    private(set) var items: [Element] = []
     
-    mutating func enqueue(_ item: T) {
+    mutating func enqueue(_ item: Element) {
         items.append(item)
     }
     
     @discardableResult
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return items.isEmpty ? nil : items.removeFirst()
     }
     
