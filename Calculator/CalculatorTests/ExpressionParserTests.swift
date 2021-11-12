@@ -9,6 +9,10 @@ import XCTest
 @testable import Calculator
 
 class ExpressionParserTests: XCTestCase {
+    
+    func test_split_함수의_결과_확인() {
+        XCTAssertEqual(["a", "b"], "a b".split(with: " "))
+    }
 
     func test_1_더하기_2의_결과가_3인가() {
         let ep = ExpressionParser()
