@@ -72,4 +72,17 @@ class ExperssionParserTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1.6)
     }
+    
+    func test_수식중에_0으로_나누는곳이_있다면_divideToZero를_던지는가() {
+        // given
+        let input = "1+2−1/0*5"
+        
+        // when
+        let formula = sut.parse(form: input)
+        
+        // then
+        XCTAssertThrowsError(try formula.result()) { error in
+            XCTAssertEqual(error as? OperatorError, .divideToZero)
+        }
+    }
 }
