@@ -9,15 +9,15 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
 
-    var queue: CalculatorItemQueue?
-    
-    override func setUpWithError() throws {
-        queue = CalculatorItemQueue()
-    }
-
-    override func tearDownWithError() throws {
-        queue = nil
-    }
+//    var queue: CalculatorItemQueue?
+//
+//    override func setUpWithError() throws {
+//        queue = CalculatorItemQueue()
+//    }
+//
+//    override func tearDownWithError() throws {
+//        queue = nil
+//    }
 
     func testExample() throws {
         // This is an example of a functional test case.

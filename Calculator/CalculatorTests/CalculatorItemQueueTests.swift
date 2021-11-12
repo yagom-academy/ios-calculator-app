@@ -19,20 +19,20 @@ class CalculatorItemQueueTests: XCTestCase {
     
     // MARK: CalculatorItemQueue enqueue test
     func test_QueueList_enqueue_정상동작한다() {
-        queue.enqueue(number: 1)
+        queue.enqueue(number: 1.0)
         
-        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["1"])
+        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["1.0"])
     }
     
     func test_QueueList는_순서를_갖지않는다() {
-        queue.enqueue(number: 2)
-        queue.enqueue(number: 1)
+        queue.enqueue(number: 2.0)
+        queue.enqueue(number: 1.0)
 
-        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["2","1"])
+        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["2.0","1.0"])
     }
     
     func test_QueueList_Enqueue에_opreratorItem을_넣으면_정상동작한다() {
-        queue.enqueue(operatorItem: .add)
+        queue.enqueue(operatorItem: Operator.add)
 
         XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["+"])
     }
@@ -42,7 +42,7 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(operatorItem: .divide)
         queue.enqueue(number: 2)
 
-        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["+","/","2"])
+        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["+","/","2.0"])
     }
     
     // MARK: CalculatorItemQueue dequeue test
@@ -51,7 +51,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         let removedItem = queue.dequeue()
 
-        XCTAssertEqual(convertItem(item: removedItem), "1")
+        XCTAssertEqual(convertItem(item: removedItem), "1.0")
     }
     
     func test_QueueList에_Dequeue_하고_남은item_계속들어있다() {
@@ -62,9 +62,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let firstRemovedItem = queue.dequeue()
         let secodeRemovedItem = queue.dequeue()
 
-        XCTAssertEqual(convertItem(item: firstRemovedItem), "2")
-        XCTAssertEqual(convertItem(item: secodeRemovedItem), "1")
-        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["3"])
+        XCTAssertEqual(convertItem(item: firstRemovedItem), "2.0")
+        XCTAssertEqual(convertItem(item: secodeRemovedItem), "1.0")
+        XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["3.0"])
     }
 
     func test_빈QueueList_Dequeue_nil을_반환한다() {
@@ -94,7 +94,7 @@ class CalculatorItemQueueTests: XCTestCase {
         preparedCalculatorQueue.enqueue(number: 3)
 
         XCTAssertEqual(convertList(list: calculatorQueue.getQueueList().searchAll()), ["+"])
-        XCTAssertEqual(convertList(list: preparedCalculatorQueue.getQueueList().searchAll()), ["3"])
+        XCTAssertEqual(convertList(list: preparedCalculatorQueue.getQueueList().searchAll()), ["3.0"])
     }
 }
 
