@@ -8,12 +8,11 @@
 import Foundation
 
 enum ExpressionParser {
-    func parse(from input: String) {
+    static func parse(from input: String) {
         
     }
     
-    func componentByOperators(from input: String) {
+    private static func componentByOperators(from input: String) {
         
     }
-    
 }
