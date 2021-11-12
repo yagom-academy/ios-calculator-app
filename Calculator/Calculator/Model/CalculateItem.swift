@@ -1,4 +1,2 @@
-import Foundation
-
 protocol CalculateItem {
 }

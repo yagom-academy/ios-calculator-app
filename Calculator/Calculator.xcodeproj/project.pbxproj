@@ -93,6 +93,9 @@
 		609545792739213800C3263D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				60954598273CF22D00C3263D /* Double.swift */,
+				6095459A273CF26A00C3263D /* String.swift */,
+				6095459C273CF72B00C3263D /* Operator.swift */,
 				6095457A2739219300C3263D /* CalculatorItemQueue.swift */,
 				609545A6273D5FEE00C3263D /* ExpressionParser.swift */,
 				6095457C273921C200C3263D /* CalculateItem.swift */,
@@ -126,9 +129,6 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				60954598273CF22D00C3263D /* Double.swift */,
-				6095459A273CF26A00C3263D /* String.swift */,
-				6095459C273CF72B00C3263D /* Operator.swift */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,

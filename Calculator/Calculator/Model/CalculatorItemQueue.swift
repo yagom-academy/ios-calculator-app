@@ -1,5 +1,3 @@
-import Foundation
-
 struct CalculatorItemQueue {
     var firstNode: LinkedListNode?
     weak var lastNode: LinkedListNode?

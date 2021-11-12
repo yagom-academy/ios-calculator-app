@@ -1,5 +1,3 @@
-import Foundation
-
 enum ExpressionParserError: Error {
     case includingIncorrectLetter
     case firstOrLastLetterIsNotNumber
