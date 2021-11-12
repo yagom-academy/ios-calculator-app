@@ -4,7 +4,7 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var items: LinkedList<T> = LinkedList<T>(head: nil)
+    private(set) var items: LinkedList<T> = LinkedList<T>(head: nil)
 
     mutating func enqueue(value: T) {
         items.append(value: value)
