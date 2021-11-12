@@ -1,17 +1,31 @@
 import XCTest
 
 class ExtensionsTests: XCTestCase {
+    var sut: String!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = ""
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
-    func test_String에_split을_호출하면() {
-        // ...
+    func test_123더하기456을_더하기기호로_split하면_배열이_반환된다() {
+        sut = "123+456"
+        let result = sut.split(with: "+")
+        XCTAssertEqual(result, ["123", "456"])
     }
-
+    
+    func test_1더하기2더하기3더하기4를_더하기기호로_split하면_배열이_반환된다() {
+        sut = "1+2+3+4"
+        let result = sut.split(with: "+")
+        XCTAssertEqual(result, ["1", "2", "3", "4"])
+    }
+    
+    func test_sampleString을_슬래쉬기호로_split하면_배열이_반환된다() {
+        sut = "1/2-3*4"
+        let result = sut.split(with: "/")
+        XCTAssertEqual(result, ["1", "2-3*4"])
+    }
 }

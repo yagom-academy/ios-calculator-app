@@ -1,14 +1,13 @@
 import Foundation
 
 extension String {
-    static func split(with target: Character) -> [String] {
-        var result: [String] = []
-        
-        // ...
-        
-        return result
+    func split(with target: Character) -> [String] {
+        let splitedString: [String] = self.split(separator: target).map { String($0) }
+        return splitedString
     }
 }
 
 extension Double: CalculateItem {
 }
+
+
