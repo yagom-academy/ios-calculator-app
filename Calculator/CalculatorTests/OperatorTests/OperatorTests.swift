@@ -107,4 +107,15 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 8.0)
     }
     
+    func test_Operator가divide일때_calculate호출시_계산값이정상적으로나오는지() {
+        // Given
+        sut = .divide
+        
+        // When
+        let result = sut.calculate(lhs: 6.0, rhs: 4.0)
+        
+        // Then
+        XCTAssertEqual(result, 1.5)
+    }
+    
 }
