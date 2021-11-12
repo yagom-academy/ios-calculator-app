@@ -8,9 +8,10 @@
 import XCTest
 
 class ExpressionParserTests: XCTestCase {
-
+    var sut: ExpressionParser.Type!
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = ExpressionParser.self
     }
 
     override func tearDownWithError() throws {

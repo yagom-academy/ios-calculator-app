@@ -5,6 +5,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack = [Element]()
     private var outputStack = [Element]()
     
+    init(_ items: [Element] = []) {
+        self.inputStack = items
+    }
+    
     var front: Element? {
         return outputStack.last ?? inputStack.first
     }
