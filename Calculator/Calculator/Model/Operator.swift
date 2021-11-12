@@ -7,18 +7,9 @@
 
 import Foundation
 
-enum Operator: CalculateItem {
-    case add
-    case subtract
-    case multiply
-    case divide
-    
-    var sign: String {
-        switch self {
-        case .add: return "+"
-        case .subtract: return "_"
-        case .multiply: return "×"
-        case .divide: return "/"
-        }
-    }
+enum Operator: Character, CaseIterable, CalculateItem {
+    case add = "+"
+    case subtract = "_"
+    case multiply = "×"
+    case divide = "/"
 }
