@@ -15,10 +15,10 @@ enum Operator: Character, CaseIterable {
 
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
-        case .add: return add(lhs: 0.0, rhs: 0.0)
-        case .divide: return substract(lhs: 0.0, rhs: 0.0)
-        case .multiply: return multiply(lhs: 0.0, rhs: 0.0)
-        case .substract: return substract(lhs: 0.0, rhs: 0.0)
+        case .add: return add(lhs: lhs, rhs: rhs)
+        case .divide: return substract(lhs: lhs, rhs: rhs)
+        case .multiply: return multiply(lhs: lhs, rhs: rhs)
+        case .substract: return substract(lhs: lhs, rhs: rhs)
         }
     }
 
