@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element> where Element: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var items: LinkedList<Element>
     
     var count: Int {
