@@ -13,7 +13,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: 4.5)
+        let result = try calculator.calculate(lhs: 3.0, rhs: 4.5)
         XCTAssertEqual(7.5, result)
     }
     
@@ -22,7 +22,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: -4.5)
+        let result = try calculator.calculate(lhs: 3.0, rhs: -4.5)
         XCTAssertEqual(-1.5, result)
     }
     
@@ -31,7 +31,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: -3.0, rhs: -4.5)
+        let result = try calculator.calculate(lhs: -3.0, rhs: -4.5)
         XCTAssertEqual(-7.5, result)
     }
     
@@ -40,7 +40,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: 4.5)
+        let result = try calculator.calculate(lhs: 3.0, rhs: 4.5)
         XCTAssertEqual(-1.5, result)
     }
     
@@ -49,7 +49,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: -4.5)
+        let result = try calculator.calculate(lhs: 3.0, rhs: -4.5)
         XCTAssertEqual(7.5, result)
     }
     
@@ -58,7 +58,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: -3.0, rhs: -4.5)
+        let result = try calculator.calculate(lhs: -3.0, rhs: -4.5)
         XCTAssertEqual(1.5, result)
     }
     
@@ -67,7 +67,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: 4.0)
+        let result = try calculator.calculate(lhs: 3.0, rhs: 4.0)
         XCTAssertEqual(12.0, result)
     }
     
@@ -76,7 +76,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: -4.0)
+        let result = try calculator.calculate(lhs: 3.0, rhs: -4.0)
         XCTAssertEqual(-12.0, result)
     }
     
@@ -85,7 +85,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: -3.0, rhs: -4.0)
+        let result = try calculator.calculate(lhs: -3.0, rhs: -4.0)
         XCTAssertEqual(12.0, result)
     }
     
@@ -94,7 +94,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: 3.0, rhs: 1.5)
+        let result = try calculator.calculate(lhs: 3.0, rhs: 1.5)
         XCTAssertEqual(2.0, result)
     }
     
@@ -103,7 +103,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: -3.0, rhs: 1.5)
+        let result = try calculator.calculate(lhs: -3.0, rhs: 1.5)
         XCTAssertEqual(-2.0, result)
     }
     
@@ -112,7 +112,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: -3.0, rhs: -1.5)
+        let result = try calculator.calculate(lhs: -3.0, rhs: -1.5)
         XCTAssertEqual(2.0, result)
     }
     
@@ -121,7 +121,7 @@ class OperatorTest: XCTestCase {
             return
         }
         
-        let result = calculator.calculate(lhs: -3.0, rhs: 0.0)
+        let result = try calculator.calculate(lhs: -3.0, rhs: 0.0)
         XCTAssertTrue(result.isNaN)
     }
 }
