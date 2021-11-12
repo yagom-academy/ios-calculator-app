@@ -122,3 +122,22 @@ extension CalculatorItemQueueTests {
         return nil
     }
 }
+
+fileprivate extension LinkedList {
+    func searchAll() -> [CalculateItem?] {
+        var searchedList: [CalculateItem?] = []
+        
+        if front() == nil {
+            return []
+        }
+        
+        var node = front()
+        searchedList.append(node?.data)
+        
+        while node?.next != nil {
+            node = node?.next
+            searchedList.append(node?.data)
+        }
+        return searchedList
+    }
+}
