@@ -21,4 +21,8 @@ class OperatorDivideTests: XCTestCase {
     func testCalculate_givenDecimal20andDecimal10_expectDecimal2() {
         XCTAssertEqual(sut.calculate(lhs: 20.0, rhs: 10.0), 2.0)
     }
+    
+    func testCalculate_given20and3_expectDecimal6Point3() {
+        XCTAssertNotEqual(sut.calculate(lhs: 20, rhs: 3), 6.6)
+    }
 }
