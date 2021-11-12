@@ -17,10 +17,7 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(2.0)
         formula.operators.enqueue(Operator.add)
         
-        let calculationResult = formula.result()
-        print(calculationResult)
-        
-        XCTAssertEqual(3.0, calculationResult)
+        XCTAssertEqual(3.0, try formula.result())
     }
     
     func test_1_더하기_2_더하기_3의_결과가_6인가() {
@@ -32,9 +29,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(Operator.add)
         formula.operators.enqueue(Operator.add)
         
-        let calculationResult = formula.result()
-        
-        XCTAssertEqual(6.0, calculationResult)
+        XCTAssertEqual(6.0, try formula.result())
     }
     
     func test_2_더하기_3_곱하기_3_빼기_1의_결과가_14인가() {
@@ -48,9 +43,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(Operator.multiply)
         formula.operators.enqueue(Operator.substract)
         
-        let calculationResult = formula.result()
-        
-        XCTAssertEqual(14.0, calculationResult)
+        XCTAssertEqual(14.0, try formula.result())
     }
     
     func test_3_나누기_3_더하기_2_빼기_1의_결과가_2인가() {
@@ -64,9 +57,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(Operator.add)
         formula.operators.enqueue(Operator.substract)
         
-        let calculationResult = formula.result()
-        
-        XCTAssertEqual(2.0, calculationResult)
+        XCTAssertEqual(2.0, try formula.result())
     }
     
     func test_1_더하기_2_빼기_3_곱하기_2_빼기_3_나누기_6의_결과가_마이너스0점5인가() {
@@ -84,10 +75,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue(Operator.substract)
         formula.operators.enqueue(Operator.divide)
         
-        
-        let calculationResult = formula.result()
-        
-        XCTAssertEqual(-0.5, calculationResult)
+        XCTAssertEqual(-0.5, try formula.result())
     }
     
 }
