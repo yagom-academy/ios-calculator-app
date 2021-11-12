@@ -1,6 +1,6 @@
 struct CalculatorItemQueue {
-    var firstNode: LinkedListNode?
-    weak var lastNode: LinkedListNode?
+    private var firstNode: LinkedListNode?
+    private weak var lastNode: LinkedListNode?
     
     mutating func enqueue(_ item: CalculateItem) {
         if let backupOfLastNode = self.lastNode {
