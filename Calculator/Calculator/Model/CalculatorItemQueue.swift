@@ -7,38 +7,24 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
-    private(set) var numberArray: [Double] = []
-    private(set) var mathOperatorArray: [Operator] = []
+struct CalculatorItemQueue<Element> {
+    
+    private(set) var queueArray: [Element] = []
 
-    mutating func enQueueNumberArray(item: Double) {
-        numberArray.append(item)
+    mutating func enqueue(element: Element) {
+        queueArray.append(element)
     }
     
-    mutating func enQueueMathOperatorArray(item: Operator) {
-        mathOperatorArray.append(item)
-    }
-    
-    mutating func deQueueNumberArray() -> Double? {
-        switch numberArray.isEmpty {
+    mutating func dequeue() -> Element? {
+        switch queueArray.isEmpty {
         case true:
             return nil
         case false:
-            return numberArray.removeFirst()
+            return queueArray.removeFirst()
         }
     }
     
-    mutating func deQueueMathOperatorArray() -> Operator? {
-        switch mathOperatorArray.isEmpty {
-        case true:
-            return nil
-        case false:
-            return mathOperatorArray.removeFirst()
-        }
-    }
-    
-    mutating func clearBothArrays() {
-        numberArray.removeAll()
-        mathOperatorArray.removeAll()
+    mutating func clearQueueArray() {
+        queueArray.removeAll()
     }
 }
