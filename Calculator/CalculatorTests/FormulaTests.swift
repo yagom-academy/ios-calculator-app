@@ -27,4 +27,41 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(try sut.result(), 3)
     }
+    
+    func test_연산자_1개_숫자_1개가_있을_경우_제대로_오류를_뱉는지() {
+        sut.operands.appendItem(1)
+        sut.operators.appendItem(.add)
+        
+        do {
+            try sut.result()
+        } catch {
+            return
+        }
+        
+        XCTAssertThrowsError(QueueError.emptyArray)
+    }
+    
+    func test_연산자_1개만_있을_경우_제대로_오류를_뱉는지() {
+        sut.operators.appendItem(.add)
+        
+        do {
+            try sut.result()
+        } catch {
+            return
+        }
+        
+        XCTAssertThrowsError(QueueError.emptyArray)
+    }
+    
+    func test_숫자_1개만_있을_경우_제대로_오류를_뱉는지() {
+        sut.operands.appendItem(1)
+        
+        do {
+            try sut.result()
+        } catch {
+            return
+        }
+        
+        XCTAssertThrowsError(QueueError.emptyArray)
+    }
 }
