@@ -15,17 +15,10 @@ enum ExpressionParser {
             return .failure(.firstOrLastLetterIsNotNumber)
         }
         
-        let separatedInput = ExpressionParser.componentsByOperators(from: input)
+        let inputComponents = ExpressionParser.componentsByOperators(from: input)
         
-        var operands: [String] = []
-        var operators: [String] = []
-        for element in separatedInput {
-            if ["+","-","/","*"].contains(element) {
-                operators.append(element)
-            } else {
-                operands.append(element)
-            }
-        }
+        let (operands, operators) = separateOperandsAndOperatorsFromSingleStringArray(stringArray: inputComponents)
+        
         
         guard operands.count == operators.count + 1 else {
             return .failure(.incorrectCountOfNumbersAndOperators)
@@ -39,17 +32,32 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let modifiedInput = ExpressionParser.spacingByOperators(from: input)
+        let modifiedInput = ExpressionParser.insertEmptySpaceByOperators(from: input)
         
         return modifiedInput.split(with: " ")
     }
     
-    static private func spacingByOperators(from input: String) -> String {
+    static private func insertEmptySpaceByOperators(from input: String) -> String {
         var modifiedInput = input
         for `operator` in Operator.allCases {
             modifiedInput = modifiedInput.replacingOccurrences(of: String(`operator`.rawValue), with: " \(`operator`.rawValue) ")
         }
         
         return modifiedInput
+    }
+    
+    static private func separateOperandsAndOperatorsFromSingleStringArray(stringArray: [String]) -> ([String], [String]) {
+        var operands: [String] = []
+        var operators: [String] = []
+        
+        for component in stringArray {
+            if ["+","-","/","*"].contains(component) {
+                operators.append(component)
+            } else {
+                operands.append(component)
+            }
+        }
+        
+        return (operands, operators)
     }
 }
