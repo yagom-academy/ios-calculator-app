@@ -17,6 +17,7 @@
 		C917CD52273E06ED00E0F939 /* StringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD51273E06ED00E0F939 /* StringTest.swift */; };
 		C917CD54273E083700E0F939 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD53273E083700E0F939 /* Extension+String.swift */; };
 		C917CD55273E086D00E0F939 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD53273E083700E0F939 /* Extension+String.swift */; };
+		C917CD57273E09BA00E0F939 /* ExpressionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD56273E09BA00E0F939 /* ExpressionParserTest.swift */; };
 		C9F7BCD7273919470076ED33 /* LinkedListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCD6273919470076ED33 /* LinkedListTest.swift */; };
 		C9F7BCEB273A1F1E0076ED33 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCEA273A1F1E0076ED33 /* LinkedList.swift */; };
 		C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BCEA273A1F1E0076ED33 /* LinkedList.swift */; };
@@ -57,6 +58,7 @@
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C917CD51273E06ED00E0F939 /* StringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTest.swift; sourceTree = "<group>"; };
 		C917CD53273E083700E0F939 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		C917CD56273E09BA00E0F939 /* ExpressionParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTest.swift; sourceTree = "<group>"; };
 		C9F7BCD4273919470076ED33 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F7BCD6273919470076ED33 /* LinkedListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTest.swift; sourceTree = "<group>"; };
 		C9F7BCD8273919470076ED33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				C9F7BCFD273CEA330076ED33 /* OperatorTest.swift */,
 				C9F7BD04273CFD1E0076ED33 /* FomulaTest.swift */,
 				C917CD51273E06ED00E0F939 /* StringTest.swift */,
+				C917CD56273E09BA00E0F939 /* ExpressionParserTest.swift */,
 				C9F7BCD8273919470076ED33 /* Info.plist */,
 			);
 			path = CalculatorTests;
@@ -305,6 +308,7 @@
 				C9F7BCFA273CC0CA0076ED33 /* Extension+Double.swift in Sources */,
 				C9F7BCF6273A4F1F0076ED33 /* CalculateItem.swift in Sources */,
 				C917CD52273E06ED00E0F939 /* StringTest.swift in Sources */,
+				C917CD57273E09BA00E0F939 /* ExpressionParserTest.swift in Sources */,
 				C917CD50273E01FE00E0F939 /* QueueError.swift in Sources */,
 				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
