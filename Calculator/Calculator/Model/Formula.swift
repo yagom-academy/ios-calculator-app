@@ -16,11 +16,6 @@ struct Formula {
         self.operators = operators
     }
     
-    init() {
-        self.operands = CalculatorItemQueue<Double>()
-        self.operators = CalculatorItemQueue<Operator>()
-    }
-    
     mutating func result() throws -> Double {
         guard let firstOperand = try operands.dequeue() else {
             throw QueueError.isEmpty
