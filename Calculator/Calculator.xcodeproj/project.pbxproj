@@ -22,6 +22,7 @@
 		ED1A7A71273E3B6A002B36CE /* OperatorAddTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A70273E3B6A002B36CE /* OperatorAddTests.swift */; };
 		ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A74273E3FCC002B36CE /* Operator.swift */; };
 		ED1A7A7B273E456F002B36CE /* OperatorSubtractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7A273E456F002B36CE /* OperatorSubtractTests.swift */; };
+		ED1A7A7D273E496B002B36CE /* OperatorDivideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		ED1A7A70273E3B6A002B36CE /* OperatorAddTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorAddTests.swift; sourceTree = "<group>"; };
 		ED1A7A74273E3FCC002B36CE /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		ED1A7A7A273E456F002B36CE /* OperatorSubtractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorSubtractTests.swift; sourceTree = "<group>"; };
+		ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorDivideTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				ED1A7A66273E245C002B36CE /* FormulaTests.swift */,
 				ED1A7A70273E3B6A002B36CE /* OperatorAddTests.swift */,
 				ED1A7A7A273E456F002B36CE /* OperatorSubtractTests.swift */,
+				ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				ED00CF4A273BA1E80081B9F3 /* CalculatorItemQueueTests.swift in Sources */,
 				ED1A7A67273E245C002B36CE /* FormulaTests.swift in Sources */,
 				ED00CF3B27397DA40081B9F3 /* LinkedListTests.swift in Sources */,
+				ED1A7A7D273E496B002B36CE /* OperatorDivideTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
