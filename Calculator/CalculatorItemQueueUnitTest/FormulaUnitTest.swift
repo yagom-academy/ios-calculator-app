@@ -20,7 +20,7 @@ class FormulaUnitTest: XCTestCase {
         operators.enqueue(.add)
         operators.enqueue(.add)
         
-        let firstFormula = Formula(operands: numbers, operators: operators)
+        var firstFormula = Formula(operands: numbers, operators: operators)
         
         //when
         let result = firstFormula.result()
