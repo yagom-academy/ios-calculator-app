@@ -73,4 +73,17 @@ class OperatorTests: XCTestCase {
         // Then
         XCTAssertNotNil(result)
     }
+    
+    func test_Operator가add일때_calculate호출시_계산값이정상적으로나오는지() {
+        // Given
+        sut = .add
+        
+        // When
+        let result = sut.calculate(lhs: 1.0, rhs: 1.0)
+        
+        // Then
+        XCTAssertEqual(result, 2.0)
+    }
+    
+    
 }
