@@ -11,13 +11,13 @@ class CalculatorTests: XCTestCase {
     
     func test_큐타입_제네릭에_Double타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
         var operands = CalculatorItemQueue<Double>()
-        let result = operands.queueArray.isEmpty
+        let result = operands.queue.isEmpty
         XCTAssertTrue(result)
     }
     
     func test_큐타입_제네릭에_Operator타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
         var operators = CalculatorItemQueue<Operator>()
-        let result = operators.queueArray.isEmpty
+        let result = operators.queue.isEmpty
         XCTAssertTrue(result)
     }
     
@@ -25,7 +25,7 @@ class CalculatorTests: XCTestCase {
         var operands = CalculatorItemQueue<Double>()
         operands.enqueue(element: 5)
         let expectation: Double = 5
-        let result = operands.queueArray[0]
+        let result = operands.queue[0]
         XCTAssertEqual(expectation, result)
     }
     
@@ -33,7 +33,7 @@ class CalculatorTests: XCTestCase {
         var operands = CalculatorItemQueue<Double>()
         operands.enqueue(element: -2)
         let expectation: Double = -2
-        let result = operands.queueArray[0]
+        let result = operands.queue[0]
         XCTAssertEqual(expectation, result)
     }
     
@@ -41,7 +41,7 @@ class CalculatorTests: XCTestCase {
         var operands = CalculatorItemQueue<Double>()
         operands.enqueue(element: 0)
         let expectation: Double = 0
-        let result = operands.queueArray[0]
+        let result = operands.queue[0]
         XCTAssertEqual(expectation, result)
     }
     
@@ -49,7 +49,7 @@ class CalculatorTests: XCTestCase {
         var operators = CalculatorItemQueue<Operator>()
         operators.enqueue(element: .add)
         let expectation: Operator = .add
-        let result = operators.queueArray[0]
+        let result = operators.queue[0]
         XCTAssertEqual(expectation, result)
     }
     
@@ -88,7 +88,7 @@ class CalculatorTests: XCTestCase {
         operands.enqueue(element: -2)
         operands.enqueue(element: 2425623)
         operands.clearQueueArray()
-        let result = operands.queueArray.isEmpty
+        let result = operands.queue.isEmpty
         XCTAssertTrue(result)
     }
     
@@ -99,7 +99,7 @@ class CalculatorTests: XCTestCase {
         operators.enqueue(element: .multiply)
         operators.enqueue(element: .divide)
         operators.clearQueueArray()
-        let result = operators.queueArray.isEmpty
+        let result = operators.queue.isEmpty
         XCTAssertTrue(result)
     }
 }

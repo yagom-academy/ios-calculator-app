@@ -8,22 +8,22 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var queueArray: [Element] = []
+    private(set) var queue: [Element] = []
 
     mutating func enqueue(element: Element) {
-        queueArray.append(element)
+        queue.append(element)
     }
     
     mutating func dequeue() -> Element? {
-        switch queueArray.isEmpty {
+        switch queue.isEmpty {
         case true:
             return nil
         case false:
-            return queueArray.removeFirst()
+            return queue.removeFirst()
         }
     }
     
     mutating func clearQueueArray() {
-        queueArray.removeAll()
+        queue.removeAll()
     }
 }
