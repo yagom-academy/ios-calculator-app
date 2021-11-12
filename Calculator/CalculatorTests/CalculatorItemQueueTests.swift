@@ -26,19 +26,19 @@ class CalculatorItemQueueTests: XCTestCase {
         operatorQueue = CalculatorItemQueue<Operator>()
     }
     
-    func testEnqueueOperandAndDequeue() {
+    func testDequeueOperand() {
         XCTAssertEqual(try operandQueue.dequeue(), 1.0)
         XCTAssertEqual(try operandQueue.dequeue(), 2.0)
         XCTAssertEqual(try operandQueue.dequeue(), 13.5)
     }
     
-    func testEnqueueOperandAndRemoveLast() {
+    func testRemoveLastOperand() {
         XCTAssertEqual(try operandQueue.removeLast(), 13.5)
         XCTAssertEqual(try operandQueue.removeLast(), 2.0)
         XCTAssertEqual(try operandQueue.removeLast(), 1.0)
     }
     
-    func testEnqueueOperatorAndDequeue() {
+    func testDequeueOperator() {
         XCTAssertEqual(try operatorQueue.dequeue(), .add)
         XCTAssertEqual(try operatorQueue.dequeue(), .subtract)
         XCTAssertEqual(try operatorQueue.dequeue(), .devide)
@@ -53,7 +53,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertThrowsError(try operandQueue.removeLast())
     }
     
-    func testEnqueueOperatorAndRemoveLast() {
+    func testRemoveLastOperator() {
         XCTAssertEqual(try operatorQueue.removeLast(), .multiply)
         XCTAssertEqual(try operatorQueue.removeLast(), .devide)
         XCTAssertEqual(try operatorQueue.removeLast(), .subtract)
