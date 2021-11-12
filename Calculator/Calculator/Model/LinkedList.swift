@@ -45,6 +45,10 @@ struct LinkedList<T> {
         tail = newNode
     }
     
+    mutating func removeAll() {
+        head = nil
+    }
+    
     mutating func retrieveHeadValue() -> T? {
         let removedHead = removeHead()
         return removedHead?.item
@@ -54,9 +58,5 @@ struct LinkedList<T> {
         let oldHead = head
         head = oldHead?.next
         return oldHead
-    }
-    
-    mutating func removeAll() {
-        head = nil
     }
 }
