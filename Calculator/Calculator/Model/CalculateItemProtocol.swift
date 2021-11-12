@@ -52,3 +52,11 @@ enum Operator: Character, CaseIterable, CalculateItem {
         return lhs * rhs
     }
 }
+
+//extension String {
+//    func split(with target: Character) -> [String] {
+//        
+//    }
+//}
+
+

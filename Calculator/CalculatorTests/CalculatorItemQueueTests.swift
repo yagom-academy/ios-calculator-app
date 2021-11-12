@@ -26,33 +26,21 @@ class CalculatorTests: XCTestCase {
         queue.appendItem(2)
         queue.appendItem(3)
         
-        do {
-            try queue.removeItem()
-        } catch {
-            return
-        }
-        
-        XCTAssertEqual(queue.array, [2, 3])
+        XCTAssertEqual(try queue.takeOutItem(), [2, 3])
     }
     
     func test_배열에_값이_하나_들어있을_경우_removeItem을_하면_빈_배열로_되는지() {
         var queue = CalculatorItemQueue<Int>()
         queue.appendItem(1)
         
-        do {
-            try queue.removeItem()
-        } catch {
-            return
-        }
-        
-        XCTAssertEqual(queue.array, [])
+        XCTAssertEqual(try queue.takeOutItem(), [])
     }
     
     func test_빈_배열에_removeItem을_하면_오류를_뱉는지() {
         var queue = CalculatorItemQueue<Int>()
         
         do {
-            try queue.removeItem()
+            try queue.takeOutItem()
         } catch {
             return
         }

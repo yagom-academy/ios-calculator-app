@@ -15,13 +15,15 @@ struct CalculatorItemQueue<Element> {
         array.append(item)
     }
     
-    mutating func removeItem() throws {
+    mutating func takeOutItem() throws -> [Element] {
         if array.isEmpty {
             throw QueueError.emptyArray
         }
         reversedArray = array.reversed()
         reversedArray.removeLast()
         array = reversedArray.reversed()
+        
+        return array
     }
     
     mutating func removeAllItems() throws {
@@ -32,10 +34,4 @@ struct CalculatorItemQueue<Element> {
     }
 }
 
-class OperatorsItemQueue {
-    var operators = CalculatorItemQueue<Character>()
-}
 
-class OperandsItemQueue {
-    var operands = CalculatorItemQueue<Double>()
-}
