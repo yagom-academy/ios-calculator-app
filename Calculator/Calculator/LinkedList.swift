@@ -23,7 +23,6 @@ struct LinkedList<T> {
         let value = Node(value)
         self.head = value
         self.tail = value
-        
     }
     
     mutating func append(_ value: T) {
