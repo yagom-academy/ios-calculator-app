@@ -23,7 +23,7 @@ enum ExpressionParser {
         input.forEach{ element in
             let isOperator = operatros.contains(element)
             if isOperator {
-                convertValue = input.replacingOccurrences(of: element.description, with: " \(element) ")
+                convertValue = input.replacingOccurrences(of: element.description, with: " ")
             }
         }
         let sliceInputValue = convertValue.split()
