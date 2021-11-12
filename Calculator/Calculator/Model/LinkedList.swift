@@ -8,10 +8,10 @@
 import Foundation
 
 class Node {
-    var data: CalculateItem?
+    var data: CalculateItem
     var next: Node?
     
-    init(data: CalculateItem?, next: Node? = nil) {
+    init(data: CalculateItem, next: Node? = nil) {
         self.data = data
         self.next = next
     }
@@ -21,7 +21,7 @@ struct LinkedList {
     private var head: Node?
     private var tail: Node?
     
-    mutating func append(data: CalculateItem?) {
+    mutating func append(data: CalculateItem) {
         let newNode = Node(data: data)
         
         if tail != nil {
