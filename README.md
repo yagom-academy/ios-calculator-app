@@ -28,7 +28,11 @@
 - `Queue` `Stack`
 - `Generic` `Element`
 - `TDD` `Unit Test`
-- `Assert`
+- `map` `filter` `split` `compactMap`
+- `UML`
+- `FloatingPoint` `Numeric`
+- `protocol` `extension`
+- `attribute`
 
 # Reviewers
 
