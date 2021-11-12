@@ -29,7 +29,7 @@ struct Formula {
                 throw QueueError.queueIsEmpty
             }
             
-            let nextCalculationResult = nextOperator.calculate(lhs: calculationResult, rhs: nextOperand)
+            let nextCalculationResult = try nextOperator.calculate(lhs: calculationResult, rhs: nextOperand)
             
             if nextCalculationResult.isNaN {
                 return .nan
