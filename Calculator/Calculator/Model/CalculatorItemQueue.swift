@@ -11,7 +11,7 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
 
     private(set) var inbox: [Element] = []
     private(set) var outbox: [Element] = []
@@ -33,10 +33,3 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     
 }
 
-struct OperatorQueue {
-    var queue = CalculatorItemQueue<Operator>()
-}
-
-struct NumberQueue {
-    var queue = CalculatorItemQueue<Double>()
-}
