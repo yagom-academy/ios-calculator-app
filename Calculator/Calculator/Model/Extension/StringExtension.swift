@@ -8,4 +8,7 @@
 import Foundation
 
 extension String {
+    func split(with targert: Character) -> [String] {
+        self.split(separator: targert).map { String($0) }
+    }
 }
