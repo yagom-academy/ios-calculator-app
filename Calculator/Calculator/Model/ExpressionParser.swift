@@ -9,4 +9,7 @@ import Foundation
 
 enum ExpressionParser {
     
+    static private func componentsByOperators(from input: String) -> [String] {
+        input.split(with: " ")
+    }
 }
