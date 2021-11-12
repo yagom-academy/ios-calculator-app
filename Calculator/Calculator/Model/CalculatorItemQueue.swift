@@ -8,7 +8,6 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    
     private(set) var queueArray: [Element] = []
 
     mutating func enqueue(element: Element) {
