@@ -43,4 +43,19 @@ class ExperssionParserTests: XCTestCase {
         // then
         XCTAssertEqual(result, [1, 2, 3, 4, 5])
     }
+    
+    func test_수식을_입력했을때_Formula_operators큐에_올바르게_들어가는가() {
+        let input = "1+2−3*4/5"
+        
+        // when
+        let formula = sut.parse(form: input)
+        var result: [Operator] = []
+        while formula.operators.isEmpty == false {
+            let `operator` = try! formula.operators.dequeue()
+            result.append(`operator`)
+        }
+        
+        // then
+        XCTAssertEqual(result, [.add, .subtract, .multiply, .divide])
+    }
 }

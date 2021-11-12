@@ -13,9 +13,11 @@ enum ExpressionParser {
         
         let numbers = componentsByOperators(form: input).compactMap { Double($0) }
         
-        numbers.forEach {
-            formula.operands.enqueue(value: $0)
-        }
+        numbers.forEach { formula.operands.enqueue(value: $0) }
+        
+        let operators = input.filter { Double($0.description) == nil }.compactMap { Operator.init(rawValue: $0) }
+        
+        operators.forEach { formula.operators.enqueue(value: $0) }
         
         return formula
     }
