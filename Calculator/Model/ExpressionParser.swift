@@ -12,7 +12,13 @@ enum ExpressionParser {
         return Formula()
     }
     
-    static private func componentsByOperators(form input: String) -> [String] {
-        return []
+    static func componentsByOperators(form input: String) -> [String] {
+        var result = input
+        
+        Operator.allCases.forEach { `operator` in
+            result = result.replacingOccurrences(of: `operator`.rawValue.description, with: " ")
+        }
+        
+        return result.split(with: " ")
     }
 }
