@@ -19,9 +19,10 @@ class FomulaTest: XCTestCase {
         formula.operators.removeAll()
     }
     
-    func test_피연산자와_연산자가_없는_경우_0을_반환하는지() throws {
-        let calculationResult = try formula.result()
-        XCTAssertEqual(0.0, calculationResult)
+    func test_처음_연산할_때_피연산자가_없는_상태인_경우_에러를_반환하는지() throws {
+        XCTAssertThrowsError(try formula.result()) { error in
+            XCTAssertEqual(error as? QueueError, QueueError.queueIsEmpty)
+        }
     }
     
     func test_3개의_수를_덧셈만_하는_경우_정상적으로_연산되는지() throws {
