@@ -46,17 +46,13 @@ struct LinkedList<T> {
     }
     
     mutating func retrieveHeadValue() -> T? {
-        if let removedHead = removeHead() {
-            return removedHead.item
-        }
-        return nil
+        let removedHead = removeHead()
+        return removedHead?.item
     }
     
     private mutating func removeHead() -> Node<T>? {
-        guard let oldHead = head else {
-            return nil
-        }
-        head = oldHead.next
+        let oldHead = head
+        head = oldHead?.next
         return oldHead
     }
     
