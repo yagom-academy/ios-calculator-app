@@ -25,5 +25,13 @@ class OperatorTests: XCTestCase {
         
         XCTAssertEqual(sum, lhs + rhs)
     }
+    
+    func test_subtract호출시_lhs_빼기_rhs를_반환한다(){
+        let lhs = 30.0
+        let rhs = 10.0
+        let result = Operator.subtract.subtract(lhs: lhs, rhs: rhs)
+        
+        XCTAssertEqual(result, lhs - rhs)
+    }
 
 }

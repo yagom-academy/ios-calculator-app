@@ -16,4 +16,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
     func add(lhs: Double, rhs: Double) -> Double {
         lhs + rhs
     }
+    
+    func subtract(lhs: Double, rhs: Double) -> Double {
+        lhs - rhs
+    }
 }
