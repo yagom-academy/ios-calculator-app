@@ -21,12 +21,12 @@ class FormulaTests: XCTestCase {
     }
 
     func test_calculationAccuracy() {
-        let inputOperands: [Double] = [5,5,5,5,5]
-        let inputOperators: [Operator] = [.add,.add,.add,.divide]
+        let inputOperands: [Double] = [5,5,5,5,5,5]
+        let inputOperators: [Operator] = [.add, .add,.subtract,.multiply,.divide]
         
         insertInputArrayToFormula(operands: inputOperands, operators: inputOperators)
         
-        XCTAssertEqual(self.formula.result(), 4)
+        XCTAssertEqual(self.formula.result(), 10)
     }
     
     func test_dividedZero() {

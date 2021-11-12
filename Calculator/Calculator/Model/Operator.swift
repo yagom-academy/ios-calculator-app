@@ -9,7 +9,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
-            return divide(lhs: lhs, rhs: rhs)
+            return subtract(lhs: lhs, rhs: rhs)
         case .divide:
             return divide(lhs: lhs, rhs: rhs)
         case .multiply:
