@@ -96,4 +96,15 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
+    func test_Operator가multiply일때_calculate호출시_계산값이정상적으로나오는지() {
+        // Given
+        sut = .multiply
+        
+        // When
+        let result = sut.calculate(lhs: 2.0, rhs: 4.0)
+        
+        // Then
+        XCTAssertEqual(result, 8.0)
+    }
+    
 }
