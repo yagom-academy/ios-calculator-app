@@ -18,6 +18,8 @@ class ExpressionParserTests: XCTestCase {
         let ep = ExpressionParser()
         
         let fomula: Formula = ep.parse("1 + 2")
+        XCTAssertEqual(3.0, try ExpressionParser.parse(from: "1 + 2").result())
+    }
         
         XCTAssertEqual(3.0, fomula.result())
     }
