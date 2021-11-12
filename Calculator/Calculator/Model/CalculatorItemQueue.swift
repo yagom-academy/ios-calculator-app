@@ -15,11 +15,7 @@ class CalculatorItemQueue {
         }
     }
     
-    func enqueue(_ item: Double) {
-        queue.append(item)
-    }
-    
-    func enqueue(_ item: Operator) {
+    func enqueue<Item: CalculateItem>(_ item: Item) {
         queue.append(item)
     }
     
