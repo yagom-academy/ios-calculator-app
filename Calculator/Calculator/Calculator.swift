@@ -15,9 +15,12 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         linkedList.addNewNode(insertValue)
     }
     
-    func deleteFromQueue() {
-        guard linkedList.head?.nodeValue != nil else { return }
+    func deleteFromQueue() -> Element {
+        guard let deletedValue = linkedList.head?.nodeValue else {
+            return fatalError() as! Element   // 에러처리 구문 추가할 때 수정 예정
+        }
         linkedList.deleteFirstNode()
+        return deletedValue
     }
 }
 

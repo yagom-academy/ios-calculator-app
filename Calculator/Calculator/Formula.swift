@@ -4,10 +4,9 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<String>()
     
-//    func result() -> Double {
-//
-//
-//    }
+    func result() -> Double {
+
+    }
 }
 
 extension String {
@@ -20,11 +19,10 @@ extension String {
 
 enum ExpressionParser {
     func parse(from input: String) -> Formula {
-        let inputOperands = componentsByOperators(from: input)
-        
         let operatorEnumArray = Operator.allCases.map { String($0.rawValue) }
         let inputCharacters = Array(input).map { String($0) }
         let inputOperator = inputCharacters.filter { operatorEnumArray.contains($0) == true }
+        let inputOperands = componentsByOperators(from: input)
         
         let formula = Formula()
         for operandIndex in 0...inputOperands.count {
