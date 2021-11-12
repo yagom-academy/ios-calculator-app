@@ -5,7 +5,7 @@ class Node<Element> {
     var data: Element
     var pointer: Node?
     
-    init(data: Element, pointer:Node? = nil) {
+    init(data: Element, pointer: Node? = nil) {
         self.data = data
         self.pointer = pointer
     }
@@ -24,7 +24,7 @@ class LinkedList<Element> {
     func enqueue(in data: Element) {
         var finderForLast: Node<Element>?
         
-        guard isEmpty == false else {
+        guard !isEmpty else {
             head = Node(data: data, pointer: nil)
             return
         }
@@ -37,15 +37,13 @@ class LinkedList<Element> {
     }
     
     func dequeue() {
-        
-        guard isEmpty == false else { return }
+        guard !isEmpty else { return }
         
         head = head?.pointer
     }
     
     func dequeueWithData() -> Element? {
-
-        guard isEmpty == false else { return nil }
+        guard !isEmpty else { return nil }
         
         let dataOfDequeueNode = head?.data
         
