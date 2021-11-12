@@ -12,6 +12,10 @@ extension String {
         
         let result = self.filter { $0 != target }
         
+        if result == self {
+            return [result]
+        }
+        
         return [String(target),result]
     }
 }
