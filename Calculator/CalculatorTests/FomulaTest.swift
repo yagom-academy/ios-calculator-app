@@ -115,9 +115,8 @@ class FomulaTest: XCTestCase {
             
             formula.operators.enqueue(arithmetic)
         }
-        
-        let calculationResult = try formula.result()
-        XCTAssertThrowsError(calculationResult) { error in
+                
+        XCTAssertThrowsError(try formula.result()) { error in
             XCTAssertEqual(error as? OperationError, OperationError.diviedByZero)
         }
     }
