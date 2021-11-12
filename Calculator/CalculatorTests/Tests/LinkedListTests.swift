@@ -37,10 +37,10 @@ class LinkedListTests: XCTestCase {
     func testLinkedListAppend_givenNewIntegers_expectTailEqualToLastInsertedItem() {
         let newItems = [1, 2, 3, 4]
         appendContents(of: newItems, to: &sut)
-        let lastInsertedItem = DummyItem.number(value: newItems[newItems.count-1])
+        let lastInsertedItem = DummyItem.number(value: newItems[newItems.count - 1])
         XCTAssertTrue(hasEqualItems(node: sut.last, item: lastInsertedItem))
     }
-
+    
     func testLinkedListNode_givenNewOperator_expectHeadEqualToInsertedItem() {
         let newCharacter = "+"
         sut.append(newCharacter)
@@ -49,7 +49,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func testLinkedListAppend_givenNewIntegers_expectCorrectSequence() {
-        let newItems = [1,2,3,4,5,6,7,8,9,10]
+        let newItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         appendContents(of: newItems, to: &sut)
         let convertedNewItems = convertToLinkedListArray(from: newItems)
         XCTAssertEqual(sut.convertedToDummyItemArray, convertedNewItems)
