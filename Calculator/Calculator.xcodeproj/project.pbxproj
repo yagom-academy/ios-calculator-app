@@ -107,19 +107,11 @@
 			path = Calculator;
 			sourceTree = "<group>";
 		};
-		F36666A0273E18A1003EC4C2 /* CalculatorItemQueueTest */ = {
+		F3955A0C273A1FD0004E6163 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
 				F3955A0D273A1FD0004E6163 /* CalculatorItemQueueTests.swift */,
 				F3E87F1E273B6B43000C83CA /* CalculatorItemQueueExtension.swift */,
-			);
-			path = CalculatorItemQueueTest;
-			sourceTree = "<group>";
-		};
-		F3955A0C273A1FD0004E6163 /* CalculatorTests */ = {
-			isa = PBXGroup;
-			children = (
-				F36666A0273E18A1003EC4C2 /* CalculatorItemQueueTest */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
