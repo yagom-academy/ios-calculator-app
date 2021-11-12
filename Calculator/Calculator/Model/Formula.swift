@@ -31,10 +31,6 @@ struct Formula {
             
             let nextCalculationResult = try nextOperator.calculate(lhs: calculationResult, rhs: nextOperand)
             
-            if nextCalculationResult.isNaN {
-                return .nan
-            }
-            
             calculationResult = nextCalculationResult
         }
         
