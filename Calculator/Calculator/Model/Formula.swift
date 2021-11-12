@@ -23,8 +23,14 @@ struct Formula {
         result = result + initialValue
         
         while operands.queue.first != nil {
-            result = operators.dequeue()?.calculate(lhs: result,
-                                                     rhs: operands.dequeue() ?? 0.0) ?? 0.0
+            guard let currentOperator = operators.dequeue() else {
+                return 0.0
+            }
+            guard let calculatingOperand = operands.dequeue() else {
+                return 0.0
+            }
+            
+            result = currentOperator.calculate(lhs: result, rhs: calculatingOperand)
         }
         
         return result
