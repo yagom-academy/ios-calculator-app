@@ -15,11 +15,11 @@ struct CalculatorItemQueue {
     }
     
     mutating func enqueue(number: Int) {
-        self.enqueue(item: NumberItem(data: number))
+        enqueue(item: NumberItem(data: number))
     }
     
     mutating func enqueue(operatorItem: OperatorItem) {
-        self.enqueue(item: operatorItem)
+        enqueue(item: operatorItem)
     }
 
     @discardableResult
