@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     let items: LinkedList<T> = LinkedList<T>()
     
     var isEmpty: Bool {

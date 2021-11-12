@@ -80,14 +80,14 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 5.0)
     }
     
-    func test_숫자를_입력하지_않고_result함수를_호출하면_에러를_던지는지() {
+    func test_숫자를_입력하지_않고_result함수를_호출하면_queueIsEmpty에러를_던지는지() {
         // then
         XCTAssertThrowsError(try sut.result()) { error in
             XCTAssertEqual(error as? QueueError, .queueIsEmpty)
         }
     }
     
-    func test_0으로_나눴을때_에러를_던지는지() {
+    func test_0으로_나눴을때_divideToZero에러를_던지는지() {
         // given
         let number1 = 2.0
         let number2 = 0.0

@@ -73,7 +73,7 @@ class ExperssionParserTests: XCTestCase {
         XCTAssertEqual(result, 1.6)
     }
     
-    func test_수식중에_0으로_나누는곳이_있다면_divideToZero를_던지는가() {
+    func test_수식중에_0으로_나누는곳이_있다면_divideToZero에러를_던지는가() {
         // given
         let input = "1+2−1/0*5"
         
