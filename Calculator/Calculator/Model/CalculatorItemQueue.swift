@@ -23,4 +23,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
     mutating func removeAll() {
         calculatorItems.removeAll()
     }
+    
+    func countItems() -> Int {
+        return calculatorItems.count
+    }
 }
