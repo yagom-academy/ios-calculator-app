@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator {
+enum Operator: CalculateItem {
     case add
     case subtract
     case divide
