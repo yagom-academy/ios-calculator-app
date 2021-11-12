@@ -44,9 +44,6 @@ struct Formula {
             do {
                 let nextOperand = try operands.takeOutItem()
                 let nextOperator = operators.array
-                if nextOperand == [] {
-                    throw QueueError.emptyArray
-                }
                 if nextOperator == [] {
                     throw QueueError.emptyArray
                 }
