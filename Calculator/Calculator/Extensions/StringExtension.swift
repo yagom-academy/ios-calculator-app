@@ -9,7 +9,6 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-    
-        return [String]()
+        self.split(separator: target).map { String($0) }
     }
 }
