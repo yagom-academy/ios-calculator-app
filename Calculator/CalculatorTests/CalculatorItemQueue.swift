@@ -29,18 +29,18 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue호출시_queue는_첫번째요소로_plus를_저장하는배열이된다() {
-        calculatorItemQueue.enqueue(Operator.plus)
+        calculatorItemQueue.enqueue(Operator.add)
 
         XCTAssertNotNil(calculatorItemQueue.testableQueue)
     }
 
     func test_enqueue호출시_queue는_1과_plus를_저장하는배열이된다() {
         calculatorItemQueue.enqueue(1)
-        calculatorItemQueue.enqueue(Operator.plus)
+        calculatorItemQueue.enqueue(Operator.add)
 
         XCTAssertEqual(calculatorItemQueue.testableQueue.count, 2)
         XCTAssertEqual(calculatorItemQueue.testableQueue[0] as! Double, 1.0)
-        XCTAssertEqual(calculatorItemQueue.testableQueue[1] as! Operator, Operator.plus)
+        XCTAssertEqual(calculatorItemQueue.testableQueue[1] as! Operator, Operator.add)
     }
 
     func test_dequeue호출시_queue는_빈배열이된다() {
@@ -58,7 +58,7 @@ class CalculatorItemQueueTests: XCTestCase {
 
     func test_removeAllItems호출시_queue는_빈배열이된다() {
         calculatorItemQueue.enqueue(1)
-        calculatorItemQueue.enqueue(Operator.minus)
+        calculatorItemQueue.enqueue(Operator.subtract)
         calculatorItemQueue.removeAllItems()
 
         XCTAssertTrue(calculatorItemQueue.testableQueue.isEmpty)
