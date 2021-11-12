@@ -8,11 +8,11 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) {
+    static func parse(from input: String) -> Formula {
         
     }
     
-    private static func componentByOperators(from input: String) {
-        
+    private static func componentByOperators(from input: String) -> [String] {
+        return input.split(with: Operator.substract.rawValue)
     }
 }
