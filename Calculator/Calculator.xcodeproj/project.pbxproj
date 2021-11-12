@@ -20,6 +20,7 @@
 		ED00CF4E273BC4A50081B9F3 /* DummyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00CF4D273BC4A50081B9F3 /* DummyItem.swift */; };
 		ED1A7A67273E245C002B36CE /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A66273E245C002B36CE /* FormulaTests.swift */; };
 		ED1A7A71273E3B6A002B36CE /* OperatorAddTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A70273E3B6A002B36CE /* OperatorAddTests.swift */; };
+		ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A74273E3FCC002B36CE /* Operator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		ED00CF4D273BC4A50081B9F3 /* DummyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyItem.swift; sourceTree = "<group>"; };
 		ED1A7A66273E245C002B36CE /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		ED1A7A70273E3B6A002B36CE /* OperatorAddTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorAddTests.swift; sourceTree = "<group>"; };
+		ED1A7A74273E3FCC002B36CE /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				ED00CF41273982370081B9F3 /* LinkedList.swift */,
 				ED00CF4B273BA29A0081B9F3 /* CalculatorItemQueue.swift */,
+				ED1A7A74273E3FCC002B36CE /* Operator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */,
 				ED00CF4C273BA29A0081B9F3 /* CalculatorItemQueue.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				ED00CF42273982370081B9F3 /* LinkedList.swift in Sources */,

@@ -6,9 +6,10 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class OperatorAddTests: XCTestCase {
-    var sut: Operator
+    var sut: Operator!
     override func setUpWithError() throws {
         sut = Operator.add
     }
@@ -17,7 +18,7 @@ class OperatorAddTests: XCTestCase {
         sut = nil
     }
     
-    func testCalculate_given10and10_expect20() {
-        XCTAssertEqual(sut.calculate(), 20)
+    func testCalculate_givenDouble10andDouble10_expectDouble20() {
+        XCTAssertEqual(sut.calculate(lhs: 10.0, rhs: 10.0), 20.0)
     }
 }
