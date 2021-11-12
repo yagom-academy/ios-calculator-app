@@ -30,6 +30,7 @@ class ExperssionParserTests: XCTestCase {
     }
     
     func test_수식을_입력했을때_Formula_operands큐에_올바르게_들어가는가() {
+        // given
         let input = "1+2−3*4/5"
         
         // when
@@ -45,6 +46,7 @@ class ExperssionParserTests: XCTestCase {
     }
     
     func test_수식을_입력했을때_Formula_operators큐에_올바르게_들어가는가() {
+        // given
         let input = "1+2−3*4/5"
         
         // when
@@ -57,5 +59,17 @@ class ExperssionParserTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, [.add, .subtract, .multiply, .divide])
+    }
+    
+    func test_수식을_입력했을때_Formula_result함수의_결과가_올바르게_나오는가() {
+        // given
+        let input = "1+2−1*4/5"
+        
+        // when
+        let formula = sut.parse(form: input)
+        let result = try! formula.result()
+        
+        // then
+        XCTAssertEqual(result, 1.6)
     }
 }
