@@ -4,10 +4,6 @@ protocol CalculateItem {
     
 }
 
-extension Double: CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<Element>: CalculateItem {
     var linkedList = LinkedListManager<Element>(head: nil)
     
@@ -23,5 +19,3 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         return deletedValue
     }
 }
-
-
