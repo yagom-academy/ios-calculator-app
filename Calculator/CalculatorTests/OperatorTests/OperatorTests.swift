@@ -8,25 +8,21 @@
 import XCTest
 
 class OperatorTests: XCTestCase {
-
+    var sut: Operator!
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = .add
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_calculate호출시_값을정상적으로반환하는지() {
+        let result = sut.calculate(lhs: 0, rhs: 0)
+        
+        XCTAssertNotNil(result)
     }
 
 }
