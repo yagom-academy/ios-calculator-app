@@ -17,17 +17,17 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        guard let firstOperand = try operands.dequeue() else {
+        guard let firstOperand = operands.dequeue() else {
             throw QueueError.operandQueueIsEmpty
         }
         
         var currentValue: Double = firstOperand
         
         while !operands.isEmpty {
-            guard let currentOperator = try operators.dequeue() else {
+            guard let currentOperator = operators.dequeue() else {
                 throw QueueError.operatorQueueIsEmpty
             }
-            guard let currentOperand = try operands.dequeue() else {
+            guard let currentOperand = operands.dequeue() else {
                 throw QueueError.operandQueueIsEmpty
             }
             do {
