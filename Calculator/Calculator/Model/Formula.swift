@@ -16,10 +16,8 @@ struct Formula {
 
         while let nextOperator = operators.dequeue(),
               let nextOperand = operands.dequeue() {
-            let partialResult = nextOperator.calculate(lhs: combinedResult,
-                                                       rhs: nextOperand)
-            combinedResult = partialResult
-        }
+            combinedResult = nextOperator.calculate(lhs: combinedResult, rhs: nextOperand)
+            }
         
         return combinedResult
     }
