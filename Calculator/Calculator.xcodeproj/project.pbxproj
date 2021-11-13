@@ -10,7 +10,6 @@
 		C16704A62738EC5900E8E237 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704A52738EC5900E8E237 /* CalculatorTests.swift */; };
 		C16704AF2739106100E8E237 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704AE2739106100E8E237 /* CalculatorItemQueue.swift */; };
 		C16704B02739106100E8E237 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704AE2739106100E8E237 /* CalculatorItemQueue.swift */; };
-		C16704B827391E5500E8E237 /* LearningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704B527391D3F00E8E237 /* LearningTests.swift */; };
 		C16704BA273A7FA200E8E237 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704B9273A7FA200E8E237 /* Operator.swift */; };
 		C16704BB273A7FAA00E8E237 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704B9273A7FA200E8E237 /* Operator.swift */; };
 		C16704BD273A813500E8E237 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704BC273A813500E8E237 /* CalculateItem.swift */; };
@@ -266,7 +265,6 @@
 			files = (
 				C16704E8273FA32300E8E237 /* Double+extension.swift in Sources */,
 				C16704BE273A813500E8E237 /* CalculateItem.swift in Sources */,
-				C16704B827391E5500E8E237 /* LearningTests.swift in Sources */,
 				C16704B02739106100E8E237 /* CalculatorItemQueue.swift in Sources */,
 				C16704A62738EC5900E8E237 /* CalculatorTests.swift in Sources */,
 				C16704BB273A7FAA00E8E237 /* Operator.swift in Sources */,
