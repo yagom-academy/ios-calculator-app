@@ -26,4 +26,16 @@ class CalculateItemTests: XCTestCase {
         let result = `operator`.calculate(lhs: 3, rhs: 2)
         XCTAssertEqual(result, 6)
     }
+    
+    func test_Operator_zero_division() {
+        let `operator` = Operator.divide
+        let result = `operator`.calculate(lhs: 3, rhs: 0)
+        XCTAssertTrue(result.isNaN)
+    }
+    
+    func test_Operator_not_zero_division() {
+        let `operator` = Operator.divide
+        let result = `operator`.calculate(lhs: 0, rhs: 3)
+        XCTAssertFalse(result.isNaN)
+    }
 }
