@@ -1,5 +1,13 @@
 struct CalculatorItemQueue {
-    private(set) var items: LinkedList<CalculateItem> = LinkedList()
+    private var items: LinkedList<CalculateItem> = LinkedList()
+    
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+    
+    var count: Int {
+        return items.count
+    }
     
     mutating func enqueue(_ item: CalculateItem) {
         items.append(item)

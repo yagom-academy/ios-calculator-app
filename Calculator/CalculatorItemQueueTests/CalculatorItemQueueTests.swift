@@ -16,13 +16,13 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue_Int() {
         sut.enqueue(20)
-        let result = sut.items.count
+        let result = sut.count
         XCTAssertEqual(result, 1)
     }
     
     func test_enqueue_Double() {
         sut.enqueue(20.0)
-        let result = sut.items.count
+        let result = sut.count
         XCTAssertEqual(result, 1)
     }
     
