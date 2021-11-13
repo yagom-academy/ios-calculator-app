@@ -1,6 +1,10 @@
 struct CalculatorItemQueue {
     private var items: LinkedList<CalculateItem> = LinkedList()
     
+    init(_ items: [CalculateItem] = []) {
+        items.forEach{ enqueue($0) }
+    }
+    
     var isEmpty: Bool {
         return items.isEmpty
     }
