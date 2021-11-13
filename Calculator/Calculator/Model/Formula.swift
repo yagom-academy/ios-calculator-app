@@ -1,6 +1,6 @@
 import Foundation
 
-struct Formula: {
+struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(calculatorItems: [])
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(calculatorItems: [])
     
@@ -11,8 +11,14 @@ struct Formula: {
             guard let rhs = operands.dequeue() else { return nil }
             
             let `operator` = operators.dequeue()
-            guard let calculateResult = `operator`?.calculate(lhs: lhs, rhs: rhs) else { return nil }
-            result = calculateResult
+            do {
+                let calculateResult =  try `operator`?.calculate(lhs: lhs, rhs: rhs)
+                result = calculateResult ?? 0
+            } catch {
+                print("0으로 나눌 수 없음")
+            }
+           
+            
         }
         
         print(result)

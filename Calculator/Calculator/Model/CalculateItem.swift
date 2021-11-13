@@ -1,5 +1,9 @@
 import Foundation
 
+enum OperatorError: Error {
+    case divideError
+}
+
 protocol CalculateItem {
     
 }
@@ -15,14 +19,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "*"
     
     //연산 케이스에 따라 두 숫자를 받아서 함수를 실행하는 함수
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
+            return try divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -36,7 +40,10 @@ enum Operator: Character, CaseIterable, CalculateItem {
         return lhs - rhs
     }
     
-    func divide(lhs: Double, rhs: Double) -> Double {
+    func divide(lhs: Double, rhs: Double) throws -> Double {
+        if rhs == 0 {
+            throw OperatorError.divideError
+        }
         return lhs / rhs
     }
     

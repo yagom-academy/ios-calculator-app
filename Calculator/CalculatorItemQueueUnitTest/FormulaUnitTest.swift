@@ -93,6 +93,7 @@ class FormulaUnitTest: XCTestCase {
     }
     
     func test_2더하기_3곱하기_4빼기_5의_결과는_15가_나온다() {
+        //given
         numbers.enqueue(2)
         numbers.enqueue(3)
         numbers.enqueue(4)
@@ -111,7 +112,25 @@ class FormulaUnitTest: XCTestCase {
         //then
         XCTAssertEqual(result, 15)
     }
-
+    
+    func test_2더하기_3나누기_0은_에러가_난다() {
+        //given
+        numbers.enqueue(2)
+        numbers.enqueue(3)
+        numbers.enqueue(0)
+        
+        operators.enqueue(.add)
+        operators.enqueue(.add)
+        operators.enqueue(.divide)
+        
+        var formula = Formula(operands: numbers, operators: operators)
+        
+        //when
+        let result = formula.result()
+        
+        //then
+        XCTAssertNoThrow(result)
+    }
 }
 
 
