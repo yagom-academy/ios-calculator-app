@@ -10,13 +10,13 @@ import XCTest
 class CalculatorTests: XCTestCase {
     
     func test_큐타입_제네릭에_Double타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
-        var operands = CalculatorItemQueue<Double>()
+        let operands = CalculatorItemQueue<Double>()
         let result = operands.queue.isEmpty
         XCTAssertTrue(result)
     }
     
     func test_큐타입_제네릭에_Operator타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
-        var operators = CalculatorItemQueue<Operator>()
+        let operators = CalculatorItemQueue<Operator>()
         let result = operators.queue.isEmpty
         XCTAssertTrue(result)
     }
