@@ -9,4 +9,12 @@ import Foundation
 
 enum ExpressionParser {
     
+    private static func componentsByOneOperator(from input: [String], with target: Character) -> [String] {
+        var result: [String] = []
+        for formula in input {
+            result += formula.split(with: target)
+        }
+        return result
+    }
+    
 }
