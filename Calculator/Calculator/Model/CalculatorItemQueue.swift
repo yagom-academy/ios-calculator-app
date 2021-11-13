@@ -23,7 +23,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         }
     }
     
-    mutating func clearQueueArray() {
+    mutating func clearQueue() {
         queue.removeAll()
     }
 }
