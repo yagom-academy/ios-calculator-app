@@ -1,7 +1,7 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var calculatorItems = [T]()
+    var calculatorItems: [T]
     
     mutating func enqueue(_ item: T) {
         calculatorItems.append(item)

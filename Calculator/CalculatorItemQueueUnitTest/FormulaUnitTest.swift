@@ -6,8 +6,8 @@ class FormulaUnitTest: XCTestCase {
 //    var formula: Formula!
     
     override func setUpWithError() throws {
-        numbers = CalculatorItemQueue<Double>()
-        operators = CalculatorItemQueue<Operator>()
+        numbers = CalculatorItemQueue<Double>(calculatorItems: [])
+        operators = CalculatorItemQueue<Operator>(calculatorItems: [])
 //        formula = Formula(operands: numbers, operators: operators)
     }
 

@@ -1,8 +1,8 @@
 import Foundation
 
-struct Formula {
-    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
-    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
+struct Formula: {
+    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(calculatorItems: [])
+    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(calculatorItems: [])
     
     mutating func result() -> Double? {
         var result: Double = 0

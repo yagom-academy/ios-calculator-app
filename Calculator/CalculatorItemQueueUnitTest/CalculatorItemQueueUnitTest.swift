@@ -7,8 +7,8 @@ class CalculatorItemQueueUnitTest: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Double>()
-        sut2 = CalculatorItemQueue<Operator>()
+        sut = CalculatorItemQueue<Double>(calculatorItems: [])
+        sut2 = CalculatorItemQueue<Operator>(calculatorItems: [])
     }
 
     override func tearDownWithError() throws {
