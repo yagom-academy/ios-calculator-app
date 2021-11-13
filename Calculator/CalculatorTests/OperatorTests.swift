@@ -29,7 +29,7 @@ class OperatorTests: XCTestCase {
     }
     
     // MARK:- Test subtract
-    func test_subtract호출시_lhs_빼기_rhs를_반환한다() {
+    func test_lhs가_양수이고_rhs도_양수일때_subtract호출시_lhs_빼기_rhs를_반환한다() {
         let lhs = 30.0
         let rhs = 10.0
         let result = Operator.subtract.subtract(lhs: lhs, rhs: rhs)
@@ -37,7 +37,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, lhs - rhs)
     }
     
-    func test_rhs가_음수일때_subract호출시_lhs와_rhs의_합을_반환한다() {
+    func test_lhs가_양수이고_rhs는_음수일때_subract호출시_lhs와_rhs의_합을_반환한다() {
         let lhs = 5000.0
         let rhs = -555.5
         let result = Operator.subtract.subtract(lhs: lhs, rhs: rhs)
@@ -46,7 +46,7 @@ class OperatorTests: XCTestCase {
     }
     
     // MARK:- Test divide
-    func test_divide호출시_1hs를_2hs로_나눈몫을_반환한다() {
+    func test_lhs가_양수이고_rhs도_양수일때_divide호출시_1hs를_2hs로_나눈몫을_반환한다() {
         let lhs = 100.00
         let rhs = 2.0
   
@@ -60,7 +60,7 @@ class OperatorTests: XCTestCase {
         XCTAssertThrowsError(try Operator.divide.divide(lhs: lhs, rhs: rhs)) { error in XCTAssertEqual(error as? CalculatorError, .incomputableDivdie) }
     }
     
-    func test_lhs가_음수일때_divide호출시_1hs를_2hs로_나눈몫을_반환한다() {
+    func test_lhs가_음수이고_rhs는_양수일때_divide호출시_1hs를_2hs로_나눈몫을_반환한다() {
         let lhs = -100.0
         let rhs = 2.0
   
