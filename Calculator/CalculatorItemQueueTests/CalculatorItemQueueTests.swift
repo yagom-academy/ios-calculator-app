@@ -15,13 +15,13 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue_Int() {
-        sut.enqueue(item: NumberItem(20))
+        sut.enqueue(20)
         let result = sut.items.count
         XCTAssertEqual(result, 1)
     }
     
     func test_enqueue_Double() {
-        sut.enqueue(item: NumberItem(20.0))
+        sut.enqueue(20.0)
         let result = sut.items.count
         XCTAssertEqual(result, 1)
     }
@@ -32,8 +32,8 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue_and_type_casting() {
-        sut.enqueue(item: NumberItem(20))
-        guard let result = sut.dequeue() as? NumberItem else {
+        sut.enqueue(20)
+        guard let result = sut.dequeue() as? Double else {
             return
         }
         XCTAssertEqual(result, 20)
