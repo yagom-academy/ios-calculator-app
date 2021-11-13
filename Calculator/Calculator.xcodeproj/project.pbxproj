@@ -15,6 +15,7 @@
 		C16704BB273A7FAA00E8E237 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704B9273A7FA200E8E237 /* Operator.swift */; };
 		C16704BD273A813500E8E237 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704BC273A813500E8E237 /* CalculateItem.swift */; };
 		C16704BE273A813500E8E237 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704BC273A813500E8E237 /* CalculateItem.swift */; };
+		C16704E5273F9FC900E8E237 /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704E4273F9FC900E8E237 /* Double+extension.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
@@ -40,6 +41,7 @@
 		C16704B527391D3F00E8E237 /* LearningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTests.swift; sourceTree = "<group>"; };
 		C16704B9273A7FA200E8E237 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		C16704BC273A813500E8E237 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
+		C16704E4273F9FC900E8E237 /* Double+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extension.swift"; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		C16704E3273F9EDB00E8E237 /* extension */ = {
 			isa = PBXGroup;
 			children = (
+				C16704E4273F9FC900E8E237 /* Double+extension.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				C16704BA273A7FA200E8E237 /* Operator.swift in Sources */,
+				C16704E5273F9FC900E8E237 /* Double+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
