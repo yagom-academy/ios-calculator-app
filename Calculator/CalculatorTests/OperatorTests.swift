@@ -41,4 +41,12 @@ class OperatorTests: XCTestCase {
         
         XCTAssertEqual(result, lhs - rhs)
     }
+    
+    func test_divide호출시_1hs를_2hs로_나눈몫을_반환한다() {
+    let lhs = 100.00
+    let rhs = 2.0
+    let result = Operator.divide.divide(lhs: lhs, rhs: rhs)
+        
+    XCTAssertEqual(result, lhs/rhs)
+    }
 }
