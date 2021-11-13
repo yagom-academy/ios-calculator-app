@@ -62,5 +62,11 @@ class ExpressionParserTest: XCTestCase {
         let result = ExpressionParser.componentsByOperators(from: testAry)
         XCTAssertEqual(result, ["2.22", "-3.33", "67", "1.2", "-466", "99"])
     }
+    
+    func test_복합수식_숫자분리() {
+        let testAry = "11+1.2_13×14.990/15+16_-17×1.8/19.999"
+        let result = ExpressionParser.componentsByOperators(from: testAry)
+        XCTAssertEqual(result, ["11", "1.2", "13", "14.990", "15", "16", "-17", "1.8", "19.999"])
+    }
 
 }
