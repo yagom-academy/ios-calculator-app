@@ -31,19 +31,19 @@ class OperatorTests: XCTestCase {
         }
         operators.enqueue(plus)
         operators.enqueue(minus)
-        guard let firstOperator = try? operators.dequeue() else {
+        guard let firstOperator = operators.dequeue() else {
             return
         }
-        guard let secondOperator = try? operators.dequeue() else {
+        guard let secondOperator = operators.dequeue() else {
             return
         }
-        guard let firstOperand = try? operands.dequeue() else {
+        guard let firstOperand = operands.dequeue() else {
             return
         }
-        guard let secondOperand = try? operands.dequeue() else {
+        guard let secondOperand = operands.dequeue() else {
             return
         }
-        guard let thirdOperand = try? operands.dequeue() else {
+        guard let thirdOperand = operands.dequeue() else {
             return
         }
         
@@ -63,19 +63,19 @@ class OperatorTests: XCTestCase {
         }
         operators.enqueue(solidus)
         operators.enqueue(star)
-        guard let firstOperator = try? operators.dequeue() else {
+        guard let firstOperator = operators.dequeue() else {
             return
         }
-        guard let secondOperator = try? operators.dequeue() else {
+        guard let secondOperator = operators.dequeue() else {
             return
         }
-        guard let firstOperand = try? operands.dequeue() else {
+        guard let firstOperand = operands.dequeue() else {
             return
         }
-        guard let secondOperand = try? operands.dequeue() else {
+        guard let secondOperand = operands.dequeue() else {
             return
         }
-        guard let thirdOperand = try? operands.dequeue() else {
+        guard let thirdOperand = operands.dequeue() else {
             return
         }
         

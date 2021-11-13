@@ -27,28 +27,35 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func testDequeueOperand() {
-        XCTAssertEqual(try operandQueue.dequeue(), 1.0)
-        XCTAssertEqual(try operandQueue.dequeue(), 2.0)
-        XCTAssertEqual(try operandQueue.dequeue(), 13.5)
+        XCTAssertEqual(operandQueue.dequeue(), 1.0)
+        XCTAssertEqual(operandQueue.dequeue(), 2.0)
+        XCTAssertEqual(operandQueue.dequeue(), 13.5)
     }
     
     func testRemoveLastOperand() {
-        XCTAssertEqual(try operandQueue.removeLast(), 13.5)
-        XCTAssertEqual(try operandQueue.removeLast(), 2.0)
-        XCTAssertEqual(try operandQueue.removeLast(), 1.0)
+        XCTAssertEqual(operandQueue.removeLast(), 13.5)
+        XCTAssertEqual(operandQueue.removeLast(), 2.0)
+        XCTAssertEqual(operandQueue.removeLast(), 1.0)
     }
     
     func testDequeueOperator() {
-        XCTAssertEqual(try operatorQueue.dequeue(), .add)
-        XCTAssertEqual(try operatorQueue.dequeue(), .subtract)
-        XCTAssertEqual(try operatorQueue.dequeue(), .devide)
-        XCTAssertEqual(try operatorQueue.dequeue(), .multiply)
+        XCTAssertEqual(operatorQueue.dequeue(), .add)
+        XCTAssertEqual(operatorQueue.dequeue(), .subtract)
+        XCTAssertEqual(operatorQueue.dequeue(), .devide)
+        XCTAssertEqual(operatorQueue.dequeue(), .multiply)
     }
     
     func testRemoveLastOperator() {
-        XCTAssertEqual(try operatorQueue.removeLast(), .multiply)
-        XCTAssertEqual(try operatorQueue.removeLast(), .devide)
-        XCTAssertEqual(try operatorQueue.removeLast(), .subtract)
-        XCTAssertEqual(try operatorQueue.removeLast(), .add)
+        XCTAssertEqual(operatorQueue.removeLast(), .multiply)
+        XCTAssertEqual(operatorQueue.removeLast(), .devide)
+        XCTAssertEqual(operatorQueue.removeLast(), .subtract)
+        XCTAssertEqual(operatorQueue.removeLast(), .add)
+    }
+    
+    func testDequeueWhenEmpty(){
+        operandQueue.dequeue()
+        operandQueue.dequeue()
+        operandQueue.dequeue()
+        XCTAssertEqual(operandQueue.dequeue(), nil)
     }
 }
