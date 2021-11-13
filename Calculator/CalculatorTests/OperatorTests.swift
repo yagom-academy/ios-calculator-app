@@ -25,7 +25,6 @@ class OperatorTests: XCTestCase {
         sut = .add
         let result = sut.calculate(lhs: 15, rhs: 5)
         XCTAssertEqual(result, 20)
-        
     }
     
     func test_subtract케이스일때_15와_5를입력하면_10이나오는지() {
