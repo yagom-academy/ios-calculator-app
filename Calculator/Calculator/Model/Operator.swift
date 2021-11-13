@@ -28,4 +28,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
         return lhs / rhs
     }
     
+    func multiply(lhs: Double, rhs: Double) -> Double {
+        lhs * rhs
+    }
+    
 }
