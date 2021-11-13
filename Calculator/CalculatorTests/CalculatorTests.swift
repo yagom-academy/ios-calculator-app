@@ -103,4 +103,36 @@ class CalculatorTests: XCTestCase {
         let result = operators.queue.isEmpty
         XCTAssertTrue(result)
     }
+    
+    // MARK: - Operator 열거형의 계산 메서드 테스트 케이스
+
+    func test_add_케이스에서_calculate메서드_계산_확인() {
+        let result = Operator.add.calculate(20.5, -10.5)
+        let expectation: Double = 10
+        XCTAssertEqual(result, expectation)
+    }
+
+    func test_subtract_케이스에서_calculate메서드_계산_확인() {
+        let result = Operator.subtract.calculate(15.5, -0.5)
+        let expectation: Double = 16
+        XCTAssertEqual(result, expectation)
+    }
+
+    func test_multiply_케이스에서_calculate메서드_계산_확인() {
+        let result = Operator.multiply.calculate(3, -3)
+        let expectation: Double = -9
+        XCTAssertEqual(result, expectation)
+    }
+
+    func test_divide_케이스에서_calculate메서드_계산_확인() {
+        let result = Operator.divide.calculate(1.5, 0.5)
+        let expectation: Double = 3
+        XCTAssertEqual(result, expectation)
+    }
+
+    func test_divide_케이스에서_0으로_나눌때_에러처리() {
+        let result = Operator.divide.calculate(5, 0)
+        let expectation = "NaN"
+        XCTAssertEqual(result, expectation)
+    }
 }
