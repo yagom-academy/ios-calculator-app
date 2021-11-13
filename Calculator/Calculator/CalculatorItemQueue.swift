@@ -14,7 +14,7 @@ protocol CalculateItem { }
 
 extension Double: CalculateItem { }
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "÷"
@@ -46,6 +46,7 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
+        // TODO: 0으로 나눌때 에러
         return lhs / rhs
     }
 }
