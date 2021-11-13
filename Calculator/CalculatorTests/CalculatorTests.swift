@@ -130,9 +130,8 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_divide_케이스에서_0으로_나눌때_에러처리() {
+    func test_divide_케이스에서_0으로_나눌때_에러던지기() {
         let result = Operator.divide.calculate(5, 0)
-        let expectation = "NaN"
-        XCTAssertEqual(result, expectation)
+        XCTAssertThrowsError(result)
     }
 }
