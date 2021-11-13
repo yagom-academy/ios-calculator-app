@@ -34,7 +34,10 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        // TODO: 0으로 나눌때 에러
-        return lhs / rhs
+        if rhs == 0 {
+            return .nan
+        } else {
+            return lhs / rhs
+        }
     }
 }
