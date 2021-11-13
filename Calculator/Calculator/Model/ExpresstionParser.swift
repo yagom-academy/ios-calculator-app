@@ -9,16 +9,17 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        
+
     }
-    
+
     static private func componentsByOperators(from input: String) -> [String] {
-        
+
     }
 }
 
 extension String {
     func split(with target: Character) -> [String] {
-        
+        let result = self.split(separator: target).map{ String($0) }
+        return result
     }
 }
