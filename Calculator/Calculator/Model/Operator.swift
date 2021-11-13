@@ -9,7 +9,7 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case substract = "-"
+    case substract = "_"
     case divide = "/"
     case multiply = "×"
 

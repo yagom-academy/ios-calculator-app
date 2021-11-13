@@ -8,25 +8,33 @@
 import XCTest
 
 class FormulaTests: XCTestCase {
-
+    var sut: Formula!
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = Formula()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_result호출시_Operand가모두양수일때_값이정상적으로나오는지() {
+        let input = "121/11+1+1×3_1"
+        sut = ExpressionParser.parse(from: input)
+         let result = sut.result()
+        XCTAssertEqual(result, 38.0)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_result호출시_Operand에음수포함되있을때_값이정상적으로나오는지() {
+        let input = "121/-11+1+-1×3_1"
+        sut = ExpressionParser.parse(from: input)
+         let result = sut.result()
+        XCTAssertEqual(result, -34.0)
     }
-
+    
+    func test_result호출시_Operand가모두음수일때_값이정상적으로나오는지() {
+        let input = "-121/-11+-1+-1×-3_1"
+        sut = ExpressionParser.parse(from: input)
+         let result = sut.result()
+        XCTAssertEqual(result, -28.0)
+    }
 }
