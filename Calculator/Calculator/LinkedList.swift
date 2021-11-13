@@ -53,12 +53,11 @@ struct LinkedList<T> {
     }
     
     func makeArray() -> [T] {
-        var result: [T] = []
         guard var node = head else {
-            return result
+            return []
         }
         
-        result.append(node.value)
+        var result: [T] = [node.value]
         while let next = node.next {
             result.append(next.value)
             node = next
