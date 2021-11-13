@@ -39,6 +39,11 @@ enum Operator: CalculateItem {
     }
     
     private func divide(_ lhs: Double, _ rhs: Double) -> Double {
+        switch rhs {
+        case 0:
+            return Double.nan
+        default:
             return lhs / rhs
+        }
     }
 }
