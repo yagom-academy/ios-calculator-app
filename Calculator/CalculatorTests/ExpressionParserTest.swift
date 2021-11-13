@@ -57,4 +57,10 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual(result, ["2.22", "-3.33", "1.2", "-466"])
     }
     
+    func test_정수_음수_실수_각1개_연산자_2개인_배열_2개_숫자분리() {
+        let testAry = ["2.22×-3.33×67", "1.2×-466×99"]
+        let result = componentsByOneOperator(input: testAry, sign: Operator.multiply.rawValue)
+        XCTAssertEqual(result, ["2.22", "-3.33", "67", "1.2", "-466", "99"])
+    }
+
 }
