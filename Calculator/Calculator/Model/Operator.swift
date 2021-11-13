@@ -21,8 +21,11 @@ enum Operator: Character, CalculateItem, CaseIterable {
         lhs - rhs
     }
     
-    func divide(lhs: Double, rhs: Double) -> Double {
-        lhs / rhs
+    func divide(lhs: Double, rhs: Double) throws -> Double {
+        guard rhs != 0 else {
+            throw CalculatorError.incomputableDivdie
+        }
+        return lhs / rhs
     }
     
 }
