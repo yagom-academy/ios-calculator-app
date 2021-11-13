@@ -21,6 +21,9 @@ enum ExpressionParser {
             guard let tempNumberResult = numberResult.split(with: $0.rawValue).first else {return}
             numberResult = tempNumberResult
         }
-        return [numberResult]
+        
+        let numberResultInArray = numberResult.components(separatedBy: " ")
+        
+        return numberResultInArray
     }
 }

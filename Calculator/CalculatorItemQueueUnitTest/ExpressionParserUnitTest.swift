@@ -26,6 +26,6 @@ class ExpressionParserUnitTest: XCTestCase {
         let inputString = "1+2-3*4/5"
         let result = ExpressionParser.componentsByOperators(from: inputString)
         
-        XCTAssertEqual(result, ["1 2 3 4 5"])
+        XCTAssertEqual(result, ["1","2","3","4","5"])
     }
 }
