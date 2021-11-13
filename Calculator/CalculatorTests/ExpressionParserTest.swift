@@ -33,4 +33,28 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual(result, ["2", "3", "12", "466"])
     }
     
+    func test_음수_실수_각1개_add연산자_1개인_배열_2개_숫자분리() {
+        let testAry = ["2.22+-3.33", "1.2+-466"]
+        let result = componentsByOneOperator(input: testAry, sign: Operator.add.rawValue)
+        XCTAssertEqual(result, ["2.22", "-3.33", "1.2", "-466"])
+    }
+    
+    func test_음수_실수_각1개_subtract연산자_1개인_배열_2개_숫자분리() {
+        let testAry = ["2.22_-3.33", "1.2_-466"]
+        let result = componentsByOneOperator(input: testAry, sign: Operator.subtract.rawValue)
+        XCTAssertEqual(result, ["2.22", "-3.33", "1.2", "-466"])
+    }
+
+    func test_음수_실수_각1개_divide연산자_1개인_배열_2개_숫자분리() {
+        let testAry = ["2.22/-3.33", "1.2/-466"]
+        let result = componentsByOneOperator(input: testAry, sign: Operator.divide.rawValue)
+        XCTAssertEqual(result, ["2.22", "-3.33", "1.2", "-466"])
+    }
+    
+    func test_음수_실수_각1개_multiply연산자_1개인_배열_2개_숫자분리() {
+        let testAry = ["2.22×-3.33", "1.2×-466"]
+        let result = componentsByOneOperator(input: testAry, sign: Operator.multiply.rawValue)
+        XCTAssertEqual(result, ["2.22", "-3.33", "1.2", "-466"])
+    }
+    
 }
