@@ -51,19 +51,6 @@ struct LinkedList<T> {
         }
         return result
     }
-    
-    func makeArray() -> [T] {
-        guard var node = head else {
-            return []
-        }
-        
-        var result: [T] = [node.value]
-        while let next = node.next {
-            result.append(next.value)
-            node = next
-        }
-        return result
-    }
 }
 
 extension LinkedList {

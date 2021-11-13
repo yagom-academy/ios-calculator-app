@@ -46,25 +46,11 @@ extension CalculatorItemQueueTests {
         XCTAssertTrue(list.isEmpty)
     }
     
-    func test_empty_LinkedList_makeArray() {
-        let list: LinkedList<Int> = LinkedList()
-        let result = list.makeArray()
-        XCTAssertEqual(result, [])
-    }
-    
     func test_LinkedList_count_2() {
         var list = LinkedList(value: 1)
         list.append(2)
         let count = list.count
         XCTAssertEqual(count, 2)
-    }
-    
-    func test_LinkedList_append_빈_리스트_생성후_append_두번하고_배열과_비교() {
-        var list: LinkedList<Int> = LinkedList()
-        list.append(1)
-        list.append(2)
-        let result: [Int] = list.makeArray()
-        XCTAssertEqual(result, [1, 2])
     }
     
     func test_LinkedList_append_빈_리스트_생성후_removeFirst() {

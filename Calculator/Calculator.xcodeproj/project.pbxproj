@@ -76,10 +76,10 @@
 		3AAEDBA927391BDA00E52E01 /* CalculatorItemQueueTests */ = {
 			isa = PBXGroup;
 			children = (
-				3AC451E5273F8C6E00DA18E2 /* ExpressionParserTests.swift */,
 				3AC451D4273F7F6B00DA18E2 /* FormulaTests.swift */,
 				3AC451CC273F763200DA18E2 /* CalculateItemTests.swift */,
 				3AAEDBAA27391BDA00E52E01 /* CalculatorItemQueueTests.swift */,
+				3AC451E5273F8C6E00DA18E2 /* ExpressionParserTests.swift */,
 			);
 			path = CalculatorItemQueueTests;
 			sourceTree = "<group>";
