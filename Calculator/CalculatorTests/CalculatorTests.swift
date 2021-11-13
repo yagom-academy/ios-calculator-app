@@ -132,7 +132,6 @@ class CalculatorTests: XCTestCase {
 
     func test_divide_케이스에서_0으로_나누면_Double타입의_nan_반환() {
         let result = Operator.divide.calculate(5, 0)
-        let expectation: Double = .nan
-        XCTAssertEqual(result, expectation)
+        XCTAssertTrue(result.isNaN)
     }
 }
