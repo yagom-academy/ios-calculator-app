@@ -1,8 +1,23 @@
 import Foundation
 
 enum ExpressionParser {
+    static func parse(from input: String) -> Formula {
+        var formula = Formula()
+        
+        let componentsOfOperands = componentsByOperators(from: input)
+        let _ = componentsOfOperands.map { formula.operands.enqueue(value: Double($0)!) }
+        
+        for characterOfInput in input {
+            if let symbol = Operator(rawValue: characterOfInput) {
+                formula.operators.enqueue(value: symbol)
+            }
+        }
+        
+        return formula
+    }
+    
     static func componentsByOperators(from input: String) -> [String] {
-        var components: [String] = []
+        var componentsOfOperands: [String] = [] 
         var inputWithSpace: String = input
         let operatorSymbols: [String] = Operator.allCases.map { String($0.rawValue) }
         
@@ -10,14 +25,14 @@ enum ExpressionParser {
             inputWithSpace = inputWithSpace.replacingOccurrences(of: String(operatorSymbol), with: " \(operatorSymbol) ")
         }
         
-        components = inputWithSpace.split(with: " ").filter { operatorSymbols.contains($0) == false }
-        return components
-    }
+        componentsOfOperands = inputWithSpace.split(with: " ").filter { operatorSymbols.contains($0) == false }
+        return componentsOfOperands
+    } 
 }
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
+    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
 //    mutating func result() -> Double { // = 을 눌렀을 때 최종 결과값을 구해줌
 //        var result: Double = 0 // ???
