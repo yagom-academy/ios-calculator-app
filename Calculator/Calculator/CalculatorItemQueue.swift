@@ -1,7 +1,7 @@
 struct CalculatorItemQueue {
     private(set) var items: LinkedList<CalculateItem> = LinkedList()
     
-    mutating func enqueue(item: CalculateItem) {
+    mutating func enqueue(_ item: CalculateItem) {
         items.append(item)
     }
     
