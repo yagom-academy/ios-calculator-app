@@ -5,44 +5,66 @@ class CalculatorItemQueueTests: XCTestCase {
     var queue = CalculatorItemQueue<Double>()
         
     func test_enqueue호출시_배열에값이정상적으로들어가는지() {
+        // Given
         let input = 2.0
         
+        // When
         queue.enqueue(input)
         
+        // Then
         let result = queue.dequeue()
         
         XCTAssertEqual(result, 2)
     }
     
     func test_enqueue를여러번호출시_배열이차례대로들어가는지() {
+        // Given
         var input = 2.0
-        queue.enqueue(input)
-        input = 3
-        queue.enqueue(input)
-        input = 4
-        queue.enqueue(input)
-        input = 5
+        
+        // When
         queue.enqueue(input)
         
+        // Given
+        input = 3
+        
+        // When
+        queue.enqueue(input)
+        
+        // Given
+        input = 4
+        
+        // When
+        queue.enqueue(input)
+        
+        // Given
+        input = 5
+        
+        // When
+        queue.enqueue(input)
+        
+        // Then
         var result = queue.dequeue()
         XCTAssertEqual(result, 2)
+        
         result = queue.dequeue()
-       
         XCTAssertEqual(result, 3)
+        
         result = queue.dequeue()
-       
         XCTAssertEqual(result, 4)
+        
         result = queue.dequeue()
-       
         XCTAssertEqual(result, 5)
     }
     
     func test_enqueue를호출해값을넣고_dequeue호출시_배열에값이정상적으로빠지는지() {
+        // Given
         let input = 2.0
-        queue.enqueue(input)
         
+        // When
+        queue.enqueue(input)
         queue.dequeue()
         
+        // Then
         XCTAssertTrue(queue.isEmpty)
     }
     
