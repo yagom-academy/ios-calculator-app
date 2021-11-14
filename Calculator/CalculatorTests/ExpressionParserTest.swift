@@ -68,5 +68,11 @@ class ExpressionParserTest: XCTestCase {
         let result = ExpressionParser.parse(from: testAry).operands.inbox
         XCTAssertEqual(result, [11, 1.2, 13, 14.990, 15, 16, -17, 1.8, 19.999])
     }
+    
+    func test_복합수식_연산자분리() {
+        let testAry = "11+1.2_13×14.990/15+16_-17×1.8/19.999"
+        let result = ExpressionParser.parse(from: testAry).operators.inbox
+        XCTAssertEqual(result, [Operator.add, Operator.subtract, Operator.multiply, Operator.divide, Operator.add, Operator.subtract, Operator.multiply, Operator.divide])
+    }
 
 }
