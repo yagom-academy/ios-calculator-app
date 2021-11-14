@@ -24,6 +24,7 @@
 		ED1A7A7B273E456F002B36CE /* OperatorSubtractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7A273E456F002B36CE /* OperatorSubtractTests.swift */; };
 		ED1A7A7D273E496B002B36CE /* OperatorDivideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */; };
 		ED1A7A7F273E62ED002B36CE /* OperatorMultipyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7E273E62ED002B36CE /* OperatorMultipyTests.swift */; };
+		ED1A7A822740E12C002B36CE /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A812740E12C002B36CE /* Formula.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		ED1A7A7A273E456F002B36CE /* OperatorSubtractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorSubtractTests.swift; sourceTree = "<group>"; };
 		ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorDivideTests.swift; sourceTree = "<group>"; };
 		ED1A7A7E273E62ED002B36CE /* OperatorMultipyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorMultipyTests.swift; sourceTree = "<group>"; };
+		ED1A7A812740E12C002B36CE /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				ED00CF41273982370081B9F3 /* LinkedList.swift */,
 				ED00CF4B273BA29A0081B9F3 /* CalculatorItemQueue.swift */,
 				ED1A7A74273E3FCC002B36CE /* Operator.swift */,
+				ED1A7A812740E12C002B36CE /* Formula.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				ED1A7A822740E12C002B36CE /* Formula.swift in Sources */,
 				ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */,
 				ED00CF4C273BA29A0081B9F3 /* CalculatorItemQueue.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
