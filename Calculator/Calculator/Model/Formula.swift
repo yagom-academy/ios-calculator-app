@@ -5,8 +5,6 @@
 //  Created by 양호준 on 2021/11/12.
 //
 
-import Foundation
-
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>

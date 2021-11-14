@@ -5,8 +5,6 @@
 //  Created by 양호준 on 2021/11/08.
 //
 
-import Foundation
-
 struct CalculatorItemQueue<Element: CalculateItem> {
     var items: [Element] = []
     var reversedItems: [Element] = []

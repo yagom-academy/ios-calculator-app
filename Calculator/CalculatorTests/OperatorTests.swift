@@ -47,6 +47,11 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(value, 10)
     }
     
+    func test_소수_간의_덧셈도_잘_계산되는지() {
+        let value = try! add.calculate(lhs: 0.5, rhs: 0.3)
+        XCTAssertEqual(value, 0.8)
+    }
+    
     func test_빼기일때_뺄셈이_잘_계산되는지() {
         let value = try! subtract.calculate(lhs: 10, rhs: 5)
         XCTAssertEqual(value, 5)
