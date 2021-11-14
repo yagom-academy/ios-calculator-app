@@ -25,21 +25,21 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func testFormulaResult_given30Plus20Subtract10_expect40() {
+    func testFormulaResult_given30Add20Subtract10_expect40() {
         let testOperands: [Double] = [30, 20, 10]
         let testOperators: [Operator] = [.add, .subtract]
         setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), 40)
     }
     
-    func testFormulaResult_givenNoNumberAndPlus_expectNaN() {
+    func testFormulaResult_givenNoNumberAndAdd_expectNaN() {
         let testOperands: [Double] = []
         let testOperators: [Operator] = [.add]
         setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertTrue(sut.result().isNaN)
     }
     
-    func testFormulaResult_given30Plus20Subtract10Divide20_expect2() {
+    func testFormulaResult_given30Add20Subtract10Divide20_expect2() {
         let testOperands: [Double] = [30, 20, 10, 20]
         let testOperators: [Operator] = [.add, .subtract, .divide]
         setup(formula: &sut, with: testOperands, and: testOperators)
@@ -53,28 +53,28 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 0.3)
     }
     
-    func testFormulaResult_given30multiply20multiply10_expect6000() {
+    func testFormulaResult_given30Multiply20Multiply10_expect6000() {
         let testOperands: [Double] = [30, 20, 10]
         let testOperators: [Operator] = [.multiply, .multiply]
         setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), 6000)
     }
     
-    func testFormulaResult_given100divide0_expectNaN() {
+    func testFormulaResult_given100Divide0_expectNaN() {
         let testOperands: [Double] = [100, 0]
         let testOperators: [Operator] = [.divide]
         setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertTrue(sut.result().isNaN)
     }
     
-    func testFormulaResult_given2Plus3Multiply3Subtract1_expect14() {
+    func testFormulaResult_given2Add3Multiply3Subtract1_expect14() {
         let testOperands: [Double] = [2, 3, 3, 1]
         let testOperators: [Operator] = [.add, .multiply, .subtract]
         setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), 14)
     }
     
-    func testFormulaResult_given3Divide3Plus2Subtract1_expect2() {
+    func testFormulaResult_given3Divide3Add2Subtract1_expect2() {
         let testOperands: [Double] = [3, 3, 2, 1]
         let testOperators: [Operator] = [.divide, .add, .subtract]
         setup(formula: &sut, with: testOperands, and: testOperators)
