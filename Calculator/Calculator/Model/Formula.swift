@@ -8,7 +8,7 @@
 import Foundation
 
 struct Formula {
-    enum FormulaErro: Error {
+    enum FormulaError: Error {
         case NaN
     }
     
@@ -32,7 +32,7 @@ struct Formula {
             }
             
             if currentOperator == .divide && calculatingOperand == 0.0 {
-                throw FormulaErro.NaN
+                throw FormulaError.NaN
             }
             
             result = currentOperator.calculate(lhs: result, rhs: calculatingOperand)
