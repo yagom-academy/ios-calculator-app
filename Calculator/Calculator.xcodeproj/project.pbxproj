@@ -25,6 +25,7 @@
 		ED1A7A7D273E496B002B36CE /* OperatorDivideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */; };
 		ED1A7A7F273E62ED002B36CE /* OperatorMultipyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A7E273E62ED002B36CE /* OperatorMultipyTests.swift */; };
 		ED1A7A822740E12C002B36CE /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A812740E12C002B36CE /* Formula.swift */; };
+		ED1A7A8427413056002B36CE /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8327413056002B36CE /* ExpressionParserTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorDivideTests.swift; sourceTree = "<group>"; };
 		ED1A7A7E273E62ED002B36CE /* OperatorMultipyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorMultipyTests.swift; sourceTree = "<group>"; };
 		ED1A7A812740E12C002B36CE /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		ED1A7A8327413056002B36CE /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				ED1A7A7A273E456F002B36CE /* OperatorSubtractTests.swift */,
 				ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */,
 				ED1A7A7E273E62ED002B36CE /* OperatorMultipyTests.swift */,
+				ED1A7A8327413056002B36CE /* ExpressionParserTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				ED1A7A7F273E62ED002B36CE /* OperatorMultipyTests.swift in Sources */,
 				ED1A7A71273E3B6A002B36CE /* OperatorAddTests.swift in Sources */,
+				ED1A7A8427413056002B36CE /* ExpressionParserTests.swift in Sources */,
 				ED1A7A7B273E456F002B36CE /* OperatorSubtractTests.swift in Sources */,
 				ED00CF4E273BC4A50081B9F3 /* DummyItem.swift in Sources */,
 				ED00CF4A273BA1E80081B9F3 /* CalculatorItemQueueTests.swift in Sources */,
