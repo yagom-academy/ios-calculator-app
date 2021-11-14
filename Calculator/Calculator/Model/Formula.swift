@@ -18,16 +18,16 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        if operands.array == [] {
+        if operands.items == [] {
             operands.appendItem(0)
         }
         
-        if operators.array == [] {
+        if operators.items == [] {
             throw QueueError.emptyArray
         }
         
-        let firstOperand = operands.array[0]
-        let firstOperator = operators.array[0]
+        let firstOperand = operands.items[0]
+        let firstOperator = operators.items[0]
         var result = 0.0
         
         do {
@@ -43,7 +43,7 @@ struct Formula {
         while try operators.removeItem().isEmpty == false {
             do {
                 let nextOperand = try operands.removeItem()
-                let nextOperator = operators.array
+                let nextOperator = operators.items
                 if nextOperator == [] {
                     throw QueueError.emptyArray
                 }
