@@ -125,8 +125,13 @@ class FormulaTests: XCTestCase {
        }
     
     func test_빈_formula가_0을_반환하는가() {
+        // given
         let formula = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
+        
+        // when
         let result = formula.result()
+        
+        // then
         XCTAssertEqual(result, 0.0)
     }
 }
