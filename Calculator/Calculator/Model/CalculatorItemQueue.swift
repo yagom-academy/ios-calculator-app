@@ -35,3 +35,11 @@ struct CalculatorItemQueue<T> {
         list.removeAll()
     }
 }
+
+extension CalculatorItemQueue {
+    init(elements: [T]) {
+        for element in elements {
+            enqueue(element)
+        }
+    }
+}

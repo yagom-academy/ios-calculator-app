@@ -12,8 +12,9 @@ class ExpressionParserTests: XCTestCase {
     func testExpressionParserParse_givenMixedExpression_expectCorrectFormula() {
         let testOperands: [Double] = [10, 23, 4]
         let testOperators: [Operator] = [.add, .divide]
-        let mockFormula = Formula(operands: createQueue(with: testOperands), operators: createQueue(with: testOperators))
-        XCTAssertTrue(isSameFormula(formula: ExpressionParser.parse(from: "10+23/4"), otherFormula: mockFormula))
+        var mockFormula = Formula(operands: createQueue(with: testOperands), operators: createQueue(with: testOperators))
+        var resultFormula = ExpressionParser.parse(from: "10+23/4")
+        XCTAssertTrue(isSameFormula(formula: &resultFormula, otherFormula: &mockFormula))
     }
     
     private func createQueue<T>(with elements: [T]) -> CalculatorItemQueue<T> {
@@ -27,8 +28,8 @@ class ExpressionParserTests: XCTestCase {
     private func isSameFormula(formula: inout Formula, otherFormula: inout Formula) -> Bool {
         let firstFormulaOperands = convertToArray(from: &formula.operands)
         let firstFormulaOperators = convertToArray(from: &formula.operators)
-        let secondFormulaOperands = convertToArray(from: &formula.operands)
-        let secondFormulaOperators = convertToArray(from: &formula.operators)
+        let secondFormulaOperands = convertToArray(from: &otherFormula.operands)
+        let secondFormulaOperators = convertToArray(from: &otherFormula.operators)
         return firstFormulaOperands == secondFormulaOperands && firstFormulaOperators == secondFormulaOperators
     }
     
