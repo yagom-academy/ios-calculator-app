@@ -26,18 +26,18 @@ class FormulaTests: XCTestCase {
     }
     
     func testFormulaResult_given30Plus20Minus10_expect40() {
-        let testOperators: [Operator] = [.add, .subtract]
-        setup(queue: &sut.operators, with: testOperators)
         let testOperands: [Double] = [30, 20, 10]
         setup(queue: &sut.operands, with: testOperands)
+        let testOperators: [Operator] = [.add, .subtract]
+        setup(queue: &sut.operators, with: testOperators)
         XCTAssertEqual(sut.result(), 40)
     }
     
     func testFormulaResult_givenNoNumberAndPlus_expectNaN() {
-        let testOperators: [Operator] = [.add]
-        setup(queue: &sut.operators, with: testOperators)
         let testOperands: [Double] = []
         setup(queue: &sut.operands, with: testOperands)
+        let testOperators: [Operator] = [.add]
+        setup(queue: &sut.operators, with: testOperators)
         let test = sut.result()
         XCTAssertTrue(test.isNaN)
     }
