@@ -11,15 +11,20 @@ extension String {
     func split(with target: Character) -> [String] {
         
         var seperatedValue: [String] = []
-        
         var valueToSeperate: String = self
-        if let targetIndex:String.Index = valueToSeperate.firstIndex(of: target) {
-            let targetBeforeValue = valueToSeperate[..<targetIndex]
-            let targetAfterValue = valueToSeperate[index(after: targetIndex)...]
-            
-            seperatedValue.append(String(targetBeforeValue))
-            seperatedValue.append(String(target))
-            valueToSeperate = String(targetAfterValue)
+        
+        while true {
+            if let targetIndex:String.Index = valueToSeperate.firstIndex(of: target) {
+                let targetBeforeValue = valueToSeperate[..<targetIndex]
+                let targetAfterValue = valueToSeperate[index(after: targetIndex)...]
+                
+                seperatedValue.append(String(targetBeforeValue))
+                seperatedValue.append(String(target))
+                
+                valueToSeperate = String(targetAfterValue)
+            } else {
+                break
+            }
         }
         seperatedValue.append(valueToSeperate)
         
