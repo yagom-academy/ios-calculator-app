@@ -1,6 +1,7 @@
 import XCTest
 
 class ExpressionParserUnitTest: XCTestCase {
+    var sut: ExpressionParser.Type! = ExpressionParser.self
     
     override func setUpWithError() throws {
         

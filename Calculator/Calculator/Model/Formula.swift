@@ -17,11 +17,8 @@ struct Formula {
             } catch {
                 print("0으로 나눌 수 없음")
             }
-           
-            
         }
         
-        print(result)
         return result
     }
 }
