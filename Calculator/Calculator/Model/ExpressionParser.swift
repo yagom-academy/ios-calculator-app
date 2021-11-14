@@ -11,11 +11,10 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let formula = Formula()
         
-        componentsByOperators(from: input).compactMap { Double($0) }
-                                          .forEach { formula.operands.enqueue($0) }
+        let componentedInput = componentsByOperators(from: input)
         
-        componentsByOperators(from: input).compactMap { Operator(rawValue: Character($0)) }
-                                          .forEach { formula.operators.enqueue($0) }
+        componentedInput.compactMap { Double($0) }.forEach { formula.operands.enqueue($0) }
+        componentedInput.compactMap { Operator(rawValue: Character($0)) }.forEach { formula.operators.enqueue($0) }
         
         return formula
     }
