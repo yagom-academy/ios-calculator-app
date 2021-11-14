@@ -53,6 +53,13 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 0.3)
     }
     
+    func testFormulaResult_given30multiply20multiply10_expect6000() {
+        let testOperands: [Double] = [30, 20, 10]
+        let testOperators: [Operator] = [.multiply, .multiply]
+        setup(formula: &sut, with: testOperands, and: testOperators)
+        XCTAssertEqual(sut.result(), 6000)
+    }
+    
     private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
         insert(contentsOf: operands, into: &formula.operands)
         insert(contentsOf: operators, into: &formula.operators)
