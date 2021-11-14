@@ -28,6 +28,6 @@ class OperatorDivideTests: XCTestCase {
     }
     
     func testCalculate_given10and0_expectNAN() {
-        XCTAssertEqual(sut.calculate(lhs: 10, rhs: 0), Double.nan)
+        XCTAssertTrue(sut.calculate(lhs: 10, rhs: 0).isNaN)
     }
 }
