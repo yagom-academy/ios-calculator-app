@@ -13,8 +13,8 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<Element: CalculateItem> {
 
-    private(set) var inbox: [Element] = []
-    private(set) var outbox: [Element] = []
+    private(set) var inbox: [Element]
+    private(set) var outbox: [Element]
     
     mutating func enqueue(_ item: Element) {
         inbox.append(item)
@@ -29,6 +29,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
             inbox.removeAll()
         }
         return outbox.removeLast()
+    }
+    
+    init(inbox: [Element] = [], outbox: [Element] = []) {
+        self.inbox = inbox
+        self.outbox = outbox
     }
     
 }
