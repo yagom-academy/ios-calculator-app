@@ -14,7 +14,7 @@ enum ExpressionParser {
         
         let operatorComponents = components.filter { operatorRawValues.contains($0) }.map { Character($0) }
         let operandComponents = components.filter { !operatorRawValues.contains($0) }
-        let formula = Formula()
+        var formula = Formula()
         
         operatorComponents.forEach { operatorComponent in
             guard let enumOperator = Operator(rawValue: operatorComponent) else { return }
