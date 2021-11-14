@@ -9,9 +9,19 @@ import XCTest
 @testable import Calculator
 
 class FormulaTests: XCTestCase {
+    var mockOperandCalculatorItemQueue!
+    var mockOperatorCalculatorItemQueue!
+    var sut: Formula!
+    
     override func setUpWithError() throws {
+        mockOperandCalculatorItemQueue = CalculatorItemQueue<Double>()
+        mockOperatorCalculatorItemQueue = CalculatorItemQueue<Operator>()
+        sut = Formula()
     }
 
     override func tearDownWithError() throws {
+        mockOperandCalculatorItemQueue = nil
+        mockOperatorCalculatorItemQueue = nil
+        sut = nil
     }
 }
