@@ -88,6 +88,13 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), -0.5)
     }
     
+    func testFormulaResult_given0Point123Divide1Point22340000_expect1Point2234() {
+        let testOperands: [Double] = [0.123, 1.22340000]
+        let testOperators: [Operator] = [.divide]
+        setup(formula: &sut, with: testOperands, and: testOperators)
+        XCTAssertEqual(sut.result(), 0.10053948013732221)
+    }
+    
     private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
         insert(contentsOf: operands, into: &formula.operands)
         insert(contentsOf: operators, into: &formula.operators)
