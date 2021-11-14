@@ -18,6 +18,10 @@
 		1853C3E9273AF04400CB3E33 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853C3E7273AEB7200CB3E33 /* ErrorHandling.swift */; };
 		1882E5582740F50C00473FC4 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E5572740F50C00473FC4 /* ExpressionParserTests.swift */; };
 		1882E55E2740F54900473FC4 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FFA273E500A0050F48E /* ExpressionParser.swift */; };
+		1882E55F274180A500473FC4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FEA273E31A60050F48E /* Extension.swift */; };
+		1882E561274185FF00473FC4 /* TestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E560274185FE00473FC4 /* TestInterface.swift */; };
+		1882E5622741867900473FC4 /* TestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E560274185FE00473FC4 /* TestInterface.swift */; };
+		1882E563274186EB00473FC4 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operation.swift */; };
 		189C4FE9273E292A0050F48E /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operation.swift */; };
 		189C4FEB273E31A60050F48E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FEA273E31A60050F48E /* Extension.swift */; };
 		189C4FF3273E4E970050F48E /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FF2273E4E970050F48E /* ExtensionTests.swift */; };
@@ -65,6 +69,7 @@
 		1853C3E7273AEB7200CB3E33 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		1882E5552740F50C00473FC4 /* ExpressionParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1882E5572740F50C00473FC4 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		1882E560274185FE00473FC4 /* TestInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInterface.swift; sourceTree = "<group>"; };
 		189C4FE8273E292A0050F48E /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		189C4FEA273E31A60050F48E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		189C4FF0273E4E970050F48E /* ExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +177,7 @@
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
+				1882E560274185FE00473FC4 /* TestInterface.swift */,
 				C713D9402570E5EB001C3AFC /* Calculator */,
 				1852752A27393DB00070A2D5 /* CalculatorTests */,
 				189C4FF1273E4E970050F48E /* ExtensionTests */,
@@ -377,8 +383,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1882E55F274180A500473FC4 /* Extension.swift in Sources */,
 				1882E55E2740F54900473FC4 /* ExpressionParser.swift in Sources */,
 				1882E5582740F50C00473FC4 /* ExpressionParserTests.swift in Sources */,
+				1882E563274186EB00473FC4 /* Operation.swift in Sources */,
+				1882E5622741867900473FC4 /* TestInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +415,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				1882E561274185FF00473FC4 /* TestInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
