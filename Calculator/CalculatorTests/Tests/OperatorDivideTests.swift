@@ -28,6 +28,7 @@ class OperatorDivideTests: XCTestCase {
     }
     
     func testCalculate_given10and0_expectNAN() {
-        XCTAssertTrue(sut.calculate(lhs: 10, rhs: 0).isNaN)
+        let result = sut.calculate(lhs: 10, rhs: 0)
+        XCTAssertTrue(result.isNaN)
     }
 }

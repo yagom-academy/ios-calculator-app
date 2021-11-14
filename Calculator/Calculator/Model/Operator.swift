@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum CalculationError: Error {
-    case zeroDivision
-}
-
 enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
@@ -24,14 +20,7 @@ enum Operator: Character, CaseIterable {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            do {
-                return try divide(lhs: lhs, rhs: rhs)
-            } catch CalculationError.zeroDivision {
-                print("0으로 나누면 안됩니다.")
-            } catch {
-                print("알 수 없는 오류가 발생했습니다.")
-            }
-            return Double.nan
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -45,9 +34,9 @@ enum Operator: Character, CaseIterable {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) throws -> Double {
+    private func divide(lhs: Double, rhs: Double) -> Double {
         if rhs == 0 {
-            throw CalculationError.zeroDivision
+            return Double.nan
         }
         return lhs / rhs
     }
