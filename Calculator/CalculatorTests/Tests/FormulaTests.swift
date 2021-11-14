@@ -60,6 +60,13 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 6000)
     }
     
+    func testFormulaResult_given100divide0_expectNaN() {
+        let testOperands: [Double] = [100, 0]
+        let testOperators: [Operator] = [.divide]
+        setup(formula: &sut, with: testOperands, and: testOperators)
+        XCTAssertTrue(sut.result().isNaN)
+    }
+    
     private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
         insert(contentsOf: operands, into: &formula.operands)
         insert(contentsOf: operators, into: &formula.operators)
