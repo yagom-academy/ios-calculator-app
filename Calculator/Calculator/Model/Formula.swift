@@ -8,5 +8,6 @@
 import Foundation
 
 struct Formula {
-    
+    var operands: CalculateItemQueue<Double>
+    var operators: CalculateItemQueue<Operator>
 }

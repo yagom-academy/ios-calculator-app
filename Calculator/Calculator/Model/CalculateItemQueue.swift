@@ -11,6 +11,10 @@ struct CalculateItemQueue<T: CalculateItem> {
     private var enqueueStack: [T] = []
     private var dequeueStack: [T] = []
     
+    init(enqueueStack: [T]) {
+        self.enqueueStack = enqueueStack
+    }
+    
     mutating func enqueue(element: T) {
         enqueueStack.append(element)
     }
@@ -26,3 +30,5 @@ struct CalculateItemQueue<T: CalculateItem> {
         return dequeueStack.removeLast()
     }
 }
+
+extension Double: CalculateItem { }
