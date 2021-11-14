@@ -102,6 +102,16 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
+    func test_1만_담겨있는_LinkedList에서_removeLast하면_11을_반환하는가() {
+        // given
+        sutIntLinkedList.append(1)
+        // when
+        sutIntLinkedList.removeLast()
+        let result = sutIntLinkedList.removeLast()
+        // then
+        XCTAssertEqual(result, nil)
+    }
+    
     func test_빈_LinkedList에서_removeLast하면_nil을_반환하는가() {
         // given
         // when

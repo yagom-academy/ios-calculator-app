@@ -8,3 +8,7 @@
 import Foundation
 
 protocol CalculateItem { }
+
+extension Operator: CalculateItem { }
+
+extension Double: CalculateItem { }

@@ -53,5 +53,3 @@ enum Operator: Character {
 }
 
 extension Operator: CaseIterable { }
-
-extension Operator: CalculateItem { }

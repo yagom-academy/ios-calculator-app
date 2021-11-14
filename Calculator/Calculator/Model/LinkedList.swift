@@ -54,6 +54,7 @@ final class LinkedList<Element> {
         let firstItem = head?.item
         
         guard let nextPosition = head?.next else {
+            head = nil
             tail = nil
             return firstItem
         }
@@ -72,6 +73,7 @@ final class LinkedList<Element> {
         
         guard let previousPosition = tail?.previous else {
             head = nil
+            tail = nil
             return lastItem
         }
         

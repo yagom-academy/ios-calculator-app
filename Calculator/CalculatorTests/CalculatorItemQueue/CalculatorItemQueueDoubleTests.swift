@@ -28,5 +28,3 @@ class CalculatorItemQueueDoubleTests: XCTestCase {
         XCTAssertEqual(result, 10.0)
     }
 }
-
-extension Double: CalculateItem { }
