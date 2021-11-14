@@ -19,7 +19,7 @@ enum ExpressionParser {
 
         componentsByOperators(from: input).forEach {
             guard let converted = Double($0) else { return }
-            operandQueue.enqueue( converted )
+            operandQueue.enqueue(converted)
         }
         
         return Formula(operands: operandQueue, operators: operatorQueue)
