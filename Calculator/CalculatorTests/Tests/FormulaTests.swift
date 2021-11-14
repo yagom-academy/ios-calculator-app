@@ -74,6 +74,13 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 14)
     }
     
+    func testFormulaResult_given3Divide3Plus2Subtract1_expect2() {
+        let testOperands: [Double] = [3, 3, 2, 1]
+        let testOperators: [Operator] = [.divide, .add, .subtract]
+        setup(formula: &sut, with: testOperands, and: testOperators)
+        XCTAssertEqual(sut.result(), 2)
+    }
+    
     private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
         insert(contentsOf: operands, into: &formula.operands)
         insert(contentsOf: operators, into: &formula.operators)
