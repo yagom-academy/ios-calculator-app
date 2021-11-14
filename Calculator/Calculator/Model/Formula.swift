@@ -24,18 +24,18 @@ struct Formula {
         result = result + initialValue
         
         while !operands.queue.isEmpty {
-            guard let currentOperator = operators.dequeue() else {
+            guard let `operator` = operators.dequeue() else {
                 return 0.0
             }
-            guard let calculatingOperand = operands.dequeue() else {
+            guard let operand = operands.dequeue() else {
                 return 0.0
             }
             
-            if currentOperator == .divide && calculatingOperand == 0.0 {
+            if `operator` == .divide && operand == 0.0 {
                 throw FormulaError.NaN
             }
             
-            result = currentOperator.calculate(lhs: result, rhs: calculatingOperand)
+            result = `operator`.calculate(lhs: result, rhs: operand)
         }
         
         return result
