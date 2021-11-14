@@ -130,8 +130,55 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_divide_케이스에서_0으로_나누면_Double타입의_nan_반환() {
+    func test_divide_케이스에서_0으로_나누면_Double타입의_NaN_반환() {
         let result = Operator.divide.calculate(5, 0)
         XCTAssertTrue(result.isNaN)
+    }
+    
+    // MARK: - Formula 구조체의 result() 메서드 테스트 케이스
+    
+    func test_result메서드_0으로_나누면_Double타입의_NaN_반환() {
+        var formula = Formula()
+        formula.operands.enqueue(element: 10)
+        formula.operands.enqueue(element: 0)
+        formula.operators.enqueue(element: .divide)
+        let result = formula.result()
+        XCTAssertTrue(result.isNaN)
+    }
+    
+    func test_result메서드_연산자_1개일때_계산_확인() {
+        var formula = Formula()
+        formula.operands.enqueue(element: 2.5)
+        formula.operands.enqueue(element: -2.5)
+        formula.operators.enqueue(element: .subtract)
+        let result = formula.result()
+        let expectation: Double = 5
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result메서드_연산자_2개일때_계산_확인() {
+        var formula = Formula()
+        formula.operands.enqueue(element: 10)
+        formula.operands.enqueue(element: -2.5)
+        formula.operands.enqueue(element: -4)
+        formula.operators.enqueue(element: .divide)
+        formula.operators.enqueue(element: .multiply)
+        let result = formula.result()
+        let expectation: Double = 16
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result메서드_연산자_3개일때_계산_확인() {
+        var formula = Formula()
+        formula.operands.enqueue(element: 2)
+        formula.operands.enqueue(element: -4)
+        formula.operands.enqueue(element: 1.5)
+        formula.operands.enqueue(element: 10)
+        formula.operators.enqueue(element: .subtract)
+        formula.operators.enqueue(element: .divide)
+        formula.operators.enqueue(element: .multiply)
+        let result = formula.result()
+        let expectation: Double = 40
+        XCTAssertEqual(result, expectation)
     }
 }
