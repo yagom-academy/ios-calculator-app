@@ -1,24 +1,5 @@
 import Foundation
 
-struct Formula {
-    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
-    
-//    mutating func result() -> Double { // = 을 눌렀을 때 최종 결과값을 구해줌
-//        var result: Double = 0 // ???
-//
-//        var removedFromOperands = operands.dequeue()
-//        var removedFromOperators = operators.dequeue()
-//
-//        // while문으로 먼저 해보고
-//        // 클로저 안에 reduce로 구현해보기
-////        result = operands.scanAllValues().reduce(0, { operators.dequeue()?.calculate(lhs: <#T##Double#>, rhs: <#T##Double#>)
-////
-////        })
-//        return result
-//    }
-}
-
 protocol CalculateItem {
 }
 
