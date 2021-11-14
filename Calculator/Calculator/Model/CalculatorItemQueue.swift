@@ -17,17 +17,19 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        var componentsOfOperands: [String] = [] 
-        var inputWithSpace: String = input
-        let operatorSymbols: [String] = Operator.allCases.map { String($0.rawValue) }
+        var components: [String] = [input]
+        var temporaryArray: [String] = []
         
-        for operatorSymbol in operatorSymbols {
-            inputWithSpace = inputWithSpace.replacingOccurrences(of: String(operatorSymbol), with: " \(operatorSymbol) ")
+        for operatorSymbol in Operator.allCases {
+            for element in components {
+                temporaryArray += element.split(with: operatorSymbol.rawValue)
+            }
+            components = temporaryArray
+            temporaryArray = []
         }
         
-        componentsOfOperands = inputWithSpace.split(with: " ").filter { operatorSymbols.contains($0) == false }
-        return componentsOfOperands
-    } 
+        return components
+    }
 }
 
 struct Formula {
@@ -45,7 +47,7 @@ struct Formula {
 ////        result = operands.scanAllValues().reduce(0, { operators.dequeue()?.calculate(lhs: <#T##Double#>, rhs: <#T##Double#>)
 ////
 ////        })
-//
+//        return result
 //    }
 }
 
