@@ -24,9 +24,8 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(3.0, try ExpressionParser.parse(from: "9 / 3").result())
     }
     
-    func test_9_나누기0의_결과가_3인가() {
+    func test_0으로_나눌경우_오류처리가_되는가() {
         XCTAssertThrowsError(try ExpressionParser.parse(from: "9 / 0").result()) { error in
-            XCTAssertEqual(error as? Formula.FormulaErro, Formula.FormulaErro.NaN)
             XCTAssertEqual(error as? Formula.FormulaError, Formula.FormulaError.NaN)
         }
         
