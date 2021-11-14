@@ -12,8 +12,8 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(input)
         
         // Then
-        let result = queue.dequeue()
-        
+        let result = try? queue.dequeue()
+        XCTAssertNil(result)
         XCTAssertEqual(result, 2)
     }
     
@@ -43,26 +43,26 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(input)
         
         // Then
-        var result = queue.dequeue()
+        var result = try! queue.dequeue()
         XCTAssertEqual(result, 2)
         
-        result = queue.dequeue()
+        result = try! queue.dequeue()
         XCTAssertEqual(result, 3)
         
-        result = queue.dequeue()
+        result = try! queue.dequeue()
         XCTAssertEqual(result, 4)
         
-        result = queue.dequeue()
+        result = try! queue.dequeue()
         XCTAssertEqual(result, 5)
     }
     
     func test_enqueue를호출해값을넣고_dequeue호출시_배열에값이정상적으로빠지는지() {
         // Given
         let input = 2.0
-        
+                
         // When
         queue.enqueue(input)
-        queue.dequeue()
+        try! queue.dequeue()
         
         // Then
         XCTAssertTrue(queue.isEmpty)
@@ -71,7 +71,7 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_outbox가비어있을때_dequeue를호출하면reverse된inbox의첫번째요소가outbox에정상적으로저장되는지() {
         queue.enqueue(2)
         
-        let result = queue.dequeue()
+        let result = try! queue.dequeue()
         
         XCTAssertEqual(result, 2)
     }
@@ -81,21 +81,19 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(3)
         queue.enqueue(4)
         
-        let result = queue.dequeue()
+        let result = try! queue.dequeue()
             
         XCTAssertEqual(result, 2)
     }
     
-    func test_배열이비어있을떄_dequeue호출시_nil이반환되는지() {
-        let result = queue.dequeue()
-
-        XCTAssertNil(result)
+    func test_배열이비어있을떄_dequeue호출시_에러가반환되는지() {
+        XCTAssertThrowsError(try queue.dequeue())
     }
     
     func test_outbox배열에값이있을때_첫번째요소를반환하는지() {
         queue.enqueue(2)
         queue.enqueue(3)
-        queue.dequeue()
+        try! queue.dequeue()
         
         let result = queue.front
         
@@ -112,7 +110,7 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_inbox에값이있고_outbox배열에도값이있을때False를반환하는지() {
         queue.enqueue(2)
         queue.enqueue(2)
-        queue.dequeue()
+        try! queue.dequeue()
         
         let result = queue.isEmpty
         
@@ -128,7 +126,7 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue호출후_dequeue호출시_outbox에정상적으로저장되는지() {
         queue.enqueue(2)
         queue.enqueue(2)
-        queue.dequeue()
+        try! queue.dequeue()
         
         XCTAssertEqual(queue.count, 1)
     }

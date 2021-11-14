@@ -10,28 +10,16 @@ struct Formula {
         self.operands = operands
     }
     
-    mutating func result() -> Double {
-        var result = 0.0
-        let operand = operands.dequeue()
+    mutating func result() throws -> Double {
+        let firstOperand = try operands.dequeue()
+        var result = firstOperand
         
-        guard var operandSlice = operand else {
-            return 1.0
-        }
-        
-        repeat {
-            let `operator` = operators.dequeue()
-            guard let operatorCase = `operator` else {
-                return 0.0
-            }
+        while operators.isEmpty == false {
+            let `operator` = try operators.dequeue()
             
-            Operator.allCases.forEach { op in
-                if operatorCase == op {
-                    result = 0.0
-                    result += operatorCase.calculate(lhs: operandSlice , rhs: operands.dequeue()!)
-                    operandSlice = result
-                }
-            }
-        } while operators.isEmpty == false
+            let operand = try operands.dequeue()
+            result = `operator`.calculate(lhs: result, rhs: operand)
+        }
         return result
     }
 }
