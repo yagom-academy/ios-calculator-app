@@ -15,7 +15,7 @@ enum ExpressionParser {
                                           .forEach { formula.operands.enqueue($0) }
         
         componentsByOperators(from: input).compactMap { Operator(rawValue: Character($0)) }
-                                              .forEach { formula.operators.enqueue($0) }
+                                          .forEach { formula.operators.enqueue($0) }
         
         return formula
     }
