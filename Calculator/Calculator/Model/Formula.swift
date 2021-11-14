@@ -19,11 +19,7 @@ struct Formula {
         while let number = operands.dequeue(),
               let operatorInstance = operators.dequeue()
         {
-            do {
-                result = try operatorInstance.calculate(lhs: result, rhs: number)
-            } catch {
-                print(error)
-            }
+            result = operatorInstance.calculate(lhs: result, rhs: number)
         }
         
         return result

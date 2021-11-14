@@ -13,14 +13,14 @@ enum Operator: Character {
     case divide = "*"
     case multiply = "/"
     
-    func calculate(lhs: Double, rhs: Double) throws -> Double {
+    func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return try divide(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -36,8 +36,8 @@ enum Operator: Character {
         return result.doubleValue
     }
     
-    private func divide(lhs: Double, rhs: Double) throws -> Double {
-        if rhs == 0.0 { throw CalculateError.notANumber }
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        if rhs == .zero { return .nan }
         let result = Decimal(lhs) / Decimal(rhs)
         return result.doubleValue
     }
@@ -45,10 +45,6 @@ enum Operator: Character {
     private func multiply(lhs: Double, rhs: Double) -> Double {
         let result = Decimal(lhs) * Decimal(rhs)
         return result.doubleValue
-    }
-    
-    enum CalculateError: Error {
-        case notANumber
     }
 }
 
