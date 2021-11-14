@@ -6,9 +6,7 @@ enum ExpressionParser {
         let operands = componentsByOperators(from: input)
                         .compactMap{ Double($0) }
         
-        let operators = input.filter{ inputSlice in
-            Double(inputSlice.description) == nil
-        }.compactMap{ Operator(rawValue: $0) }
+        let operators = input.compactMap{ Operator(rawValue: $0) }
         
         return Formula(operators: CalculatorItemQueue(operators), operands: CalculatorItemQueue(operands))
     }

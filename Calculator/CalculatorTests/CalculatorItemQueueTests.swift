@@ -13,7 +13,6 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // Then
         let result = try? queue.dequeue()
-        XCTAssertNil(result)
         XCTAssertEqual(result, 2)
     }
     
