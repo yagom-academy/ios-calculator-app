@@ -7,7 +7,7 @@
 
 enum ExpressionParser {
     
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.map { $0.rawValue }
         var operands: [String] = []
         var convertInput = input
