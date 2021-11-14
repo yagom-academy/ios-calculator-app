@@ -14,7 +14,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "2+3−4+5"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, 6.0)
@@ -26,7 +26,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "2+3*3−1"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, 14.0)
@@ -38,7 +38,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "3/3+2−1"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, 2.0)
@@ -50,7 +50,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "1+2−3*2−3/6"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, -0.5)
@@ -62,7 +62,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "1+2−-3*2−3/6"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, 9.0/6.0)
@@ -74,7 +74,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "1+-2−3*2−3/6"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, -11.0/6.0)
@@ -86,7 +86,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "1+2−3*-2−3/6"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, -3.0/6.0)
@@ -98,7 +98,7 @@ class ExpressionParserTests: XCTestCase {
         let form = "1+2−3*2−3/-6"
         
         // when
-        let result = ExpressionParser.parse(from: form)
+        let result = ExpressionParser.parse(from: form).result()
         
         // then
         XCTAssertEqual(result, 3.0/6.0)

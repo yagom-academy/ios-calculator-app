@@ -14,18 +14,26 @@ enum ExpressionParser {
         
         let splittedInput = componentsByOperators(from: input)
         
-        for each in splittedInput {
-            if let convertedNumber = Double(each) {
-                operands.enqueue(convertedNumber)
-            } else {
-                operators.enqueue(each)
+        splittedInput
+            .compactMap { Double($0) }
+            .forEach {
+                operands.enqueue($0)
             }
-        }
+        
+        splittedInput
+            .compactMap { Operator(rawValue: $0) }
+            .forEach {
+                operators.enqueue($0)
+            }
         
         return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        input.split(with: " ")
+        var operators = ""
+        Operator.allCases.forEach {
+            operators.append($0.rawValue)
+        }
+        return input.components(separatedBy: operators)
     }
 }
