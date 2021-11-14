@@ -20,4 +20,12 @@ class AddOperatorTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func testAddTwoNumbers() {
+        let firstNumber = 3.0
+        let secondNumber = 6.0
+        
+        let calculatedResult = sut.calculate(lhs: firstNumber, rls: secondNumber)
+        XCTAssertEqual(calculatedResult, firstNumber + secondNumber)
+    }
 }
