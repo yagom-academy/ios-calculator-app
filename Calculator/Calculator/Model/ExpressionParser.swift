@@ -20,11 +20,12 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let operatorCharacters = Operator.allCases.compactMap { $0.rawValue }
-        let inputArray = input.map { String($0) }
-        return operatorCharacters.reduce(inputArray) { (array: [String], operatorCharacter: Character) in
+        let separators = CharacterSet(charactersIn: "+-*/")
+        let inputArray = input.components(separatedBy: separators).map { String($0) }
+        let temp = operatorCharacters.reduce(inputArray) { (array: [String], operatorCharacter: Character) in
             array.flatMap {$0.split(with: operatorCharacter)}
         }
-        
+        return temp
     }
 }
 
