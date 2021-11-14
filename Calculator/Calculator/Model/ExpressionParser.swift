@@ -13,14 +13,19 @@ enum ExpressionParser {
         
         for operand in operators {
             let inputsCount = inputs.count
-            let indexOfFilteredByOperand: [Int] = ((0..<inputsCount).map{ inputs[$0].contains(operand) ? $0 : nil}).compactMap{ $0 }
-            let filteredInputsByOperand: [String] = inputs.filter{ $0.contains(operand) }
+            let indexOfFilteredByOperand: [Int] = ((0..<inputsCount).map { inputs[$0].contains(operand) ? $0 : nil}).compactMap { $0 }
+            let filteredInputsByHavingOperand: [String] = inputs.filter { $0.contains(operand) }
+            
             for index in indexOfFilteredByOperand {
-                let splitedByOperand = filteredInputsByOperand[index].split(with: operand)
-                inputs[indexOfFilteredByOperand[index]] = splitedByOperand.reduce(" ", { $0 + $1 })
+                let notSplitedIndex = indexOfFilteredByOperand[index]
+                let splitedByOperand = filteredInputsByHavingOperand[index].split(with: operand)
+                inputs.insert(contentsOf: splitedByOperand.flatMap{ $0 }, at: notSplitedIndex)
+                inputs.remove(at: notSplitedIndex + splitedByOperand.count)
             }
         }
         
         return inputs
     }
 }
+
+
