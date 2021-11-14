@@ -35,7 +35,7 @@ struct Formula {
             if nextOperand == [] {
                 throw QueueError.emptyItem
             }
-            result = firstOperator.calculate(lhs: firstOperand, rhs: nextOperand[0])
+            result = try firstOperator.calculate(lhs: firstOperand, rhs: nextOperand[0])
         } catch {
             throw QueueError.emptyItem
         }
@@ -47,7 +47,7 @@ struct Formula {
                 if nextOperator == [] {
                     throw QueueError.emptyItem
                 }
-                result = nextOperator[0].calculate(lhs: result, rhs: nextOperand[0])
+                result = try nextOperator[0].calculate(lhs: result, rhs: nextOperand[0])
             } catch {
                 throw QueueError.emptyItem
             }
