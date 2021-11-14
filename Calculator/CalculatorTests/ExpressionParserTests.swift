@@ -20,4 +20,18 @@ class ExpressionParserTests: XCTestCase {
 //    func test_다양한_수에_다양한_연산자가_있을_경우_잘_분리되는지() {
 //        XCTAssertEqual(ExpressionParser.componentsByOperators(from: "1+3-4/1*3"), ["1", "3", "4", "1", "3"])
 //    }
+    
+    var sut: Formula!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        
+        sut = Formula(operands: CalculatorItemQueue(), operators: <#T##CalculatorItemQueue<Operator>#>)
+    }
+    
+    func test_빈_String_일_경우_각각_빈_배열로_생성되는지() {
+        ExpressionParser.parse(from: "")
+        
+        XCTAssertEqual(Formula, <#T##expression2: Equatable##Equatable#>)
+    }
 }
