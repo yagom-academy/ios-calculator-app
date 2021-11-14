@@ -8,15 +8,13 @@
 import XCTest
 @testable import Calculator
 
-extension Int: CalculateItem {}
-
 class CalculatorItemQueueTests: XCTestCase {
     
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -49,7 +47,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         func repeatInsert(times: Int) {
             for _ in 0..<times {
-                let randomNumber = Int.random(in: 0...259)
+                let randomNumber = Double.random(in: 0...259)
                 insertCount += 1
                 sut.insert(randomNumber)
             }
@@ -64,7 +62,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func testInsertItemSucceeded() {
-        let insertItem = 6
+        let insertItem: Double = 6
         sut.insert(insertItem)
         let isSuccess = sut.front == insertItem
         XCTAssertTrue(isSuccess)
@@ -73,7 +71,7 @@ class CalculatorItemQueueTests: XCTestCase {
     func testFrontAndRearIsSameWhenQueueIsEmtyOrQueueCountIsOne() {
         XCTAssertEqual(sut.front, sut.rear)
         
-        let insertItem = 66
+        let insertItem: Double = 66
         sut.insert(insertItem)
         
         XCTAssertEqual(sut.front, sut.rear)
@@ -98,7 +96,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func testInsertAndDeleteItemSucceeded() {
-        let item = 6
+        let item: Double = 6
         sut.insert(item)
         let deleteResult = sut.delete()
         let isDeleteSuccess = (deleteResult == item)
