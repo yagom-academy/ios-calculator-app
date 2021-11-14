@@ -21,7 +21,8 @@ enum ExpressionParser {
             }
         
         splittedInput
-            .compactMap { Operator(rawValue: $0) }
+            .filter { Double($0) == nil }
+            .compactMap { Operator(rawValue: Character($0)) }
             .forEach {
                 operators.enqueue($0)
             }
@@ -30,10 +31,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var operators = ""
-        Operator.allCases.forEach {
-            operators.append($0.rawValue)
-        }
-        return input.components(separatedBy: operators)
+        input.split(with: " ")
     }
 }
+

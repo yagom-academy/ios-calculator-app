@@ -83,8 +83,12 @@ class OperatorTests: XCTestCase {
         let rightOperand = 0.0
         
         // when
+        let result = sutDivideOperator.calculate(lhs: leftOperand, rhs: rightOperand)
+        
+        print(result)
+        
         // then
-        XCTAssertThrowsError(sutDivideOperator.calculate(lhs: leftOperand, rhs: rightOperand))
+        XCTAssertTrue(result.isNaN)
     }
     
     func test_Double형_80와_Double형_10을_multiply_operator로_연산하면_Double형_800점0가_반환되는가() {
