@@ -24,4 +24,12 @@ class FormulaTests: XCTestCase {
         mockOperatorCalculatorItemQueue = nil
         sut = nil
     }
+    
+    func testFormulaResult_given30Plus20Minus10_expect40() {
+        let testOperators: [Operator] = [.add, .subtract]
+        setup(sut.operators, with: testOperators)
+        let testOperands: [Double] = [30, 20, 10]
+        setup(sut.operands, with: testOperands)
+        XCTAssertEqual(sut.result(), 40)
+    }
 }
