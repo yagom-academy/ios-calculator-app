@@ -28,18 +28,6 @@ class OperatorTests: XCTestCase {
         sutMultiplyOperator = nil
     }
 
-    func test_Double형_11점0과_Double형_9점99를_add_operator로_연산하면_Double형_20점99이_반환되는가() throws {
-        // given
-        let leftOperand = 11.00
-        let rightOperand = 9.99
-
-        // when
-        let result = try sutAddOperator.calculate(lhs: leftOperand, rhs: rightOperand)
-
-        // then
-        XCTAssertEqual(result, 20.99)
-    }
-
     func test_Double형_0점2와_Double형_0점1을_add_operator로_연산하면_Double형_0점3이_반환되는가() throws {
         // given
         let leftOperand = 0.2
@@ -95,10 +83,8 @@ class OperatorTests: XCTestCase {
         let rightOperand = 0.0
         
         // when
-        let result = try sutDivideOperator.calculate(lhs: leftOperand, rhs: rightOperand)
-        
         // then
-        XCTAssertThrowsError(result)
+        XCTAssertThrowsError(try sutDivideOperator.calculate(lhs: leftOperand, rhs: rightOperand))
     }
     
     func test_Double형_80와_Double형_10을_multiply_operator로_연산하면_Double형_800점0가_반환되는가() throws {
