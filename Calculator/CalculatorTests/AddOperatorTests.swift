@@ -28,4 +28,15 @@ class AddOperatorTests: XCTestCase {
         let calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         XCTAssertEqual(calculatedResult, firstNumber + secondNumber)
     }
+    
+    func testAddThreeNumbers() {
+        let firstNumber = 6.0
+        let secondNumber = 9.0
+        let thirdNumber = 96.0
+        
+        var calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
+        calculatedResult = sut.calculate(lhs: calculatedResult, rhs: thirdNumber)
+        
+        XCTAssertEqual(calculatedResult, firstNumber + secondNumber + thirdNumber)
+    }
 }
