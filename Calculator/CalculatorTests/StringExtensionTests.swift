@@ -11,12 +11,12 @@ class StringExtensionTests: XCTestCase {
     func test_String을_String배열로_잘_쪼개는지() {
         let sut = "1+2+3"
         
-        XCTAssertEqual(sut.split(with: Character("+")), ["1", "2", "3"])
+        XCTAssertEqual(sut.split(with: "+"), ["1", "2", "3"])
     }
     
     func test_String을_띄어쓰기만_한_String으로_String배열로_잘_쪼개는지() {
         let sut = "1 + 2 + 3"
         
-        XCTAssertEqual(sut.split(with: Character(" ")), ["1", "+", "2", "+", "3"])
+        XCTAssertEqual(sut.split(with: " "), ["1", "+", "2", "+", "3"])
     }
 }
