@@ -25,7 +25,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func testFormulaResult_given30Plus20Minus10_expect40() {
+    func testFormulaResult_given30Plus20Subtract10_expect40() {
         let testOperands: [Double] = [30, 20, 10]
         let testOperators: [Operator] = [.add, .subtract]
         setup(formula: &sut, with: testOperands, and: testOperators)
@@ -39,7 +39,7 @@ class FormulaTests: XCTestCase {
         XCTAssertTrue(sut.result().isNaN)
     }
     
-    func testFormulaResult_given30Plus20Minus10Divide20_expect2() {
+    func testFormulaResult_given30Plus20Subtract10Divide20_expect2() {
         let testOperands: [Double] = [30, 20, 10, 20]
         let testOperators: [Operator] = [.add, .subtract, .divide]
         setup(formula: &sut, with: testOperands, and: testOperators)
