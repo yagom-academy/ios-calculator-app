@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum CalculatorError: LocalizedError {
+    case emptyQueue
+}
