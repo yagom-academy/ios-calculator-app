@@ -23,7 +23,7 @@ struct Formula {
         
         result = result + initialValue
         
-        while operands.queue.first != nil {
+        while !operands.queue.isEmpty {
             guard let currentOperator = operators.dequeue() else {
                 return 0.0
             }
