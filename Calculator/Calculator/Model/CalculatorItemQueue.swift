@@ -15,7 +15,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         array.append(item)
     }
     
-    mutating func takeOutItem() throws -> [Element] {
+    mutating func removeItem() throws -> [Element] {
         if array.isEmpty {
             throw QueueError.emptyArray
         }

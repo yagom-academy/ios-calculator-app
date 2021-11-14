@@ -31,7 +31,7 @@ struct Formula {
         var result = 0.0
         
         do {
-            let nextOperand = try operands.takeOutItem()
+            let nextOperand = try operands.removeItem()
             if nextOperand == [] {
                 throw QueueError.emptyArray
             }
@@ -40,9 +40,9 @@ struct Formula {
             throw QueueError.emptyArray
         }
         
-        while try operators.takeOutItem().isEmpty == false {
+        while try operators.removeItem().isEmpty == false {
             do {
-                let nextOperand = try operands.takeOutItem()
+                let nextOperand = try operands.removeItem()
                 let nextOperator = operators.array
                 if nextOperator == [] {
                     throw QueueError.emptyArray

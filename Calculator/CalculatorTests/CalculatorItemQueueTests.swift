@@ -24,14 +24,14 @@ class CalculatorTests: XCTestCase {
         var queue = CalculatorItemQueue<Operator>()
         queue.appendItem(.add)
         
-        XCTAssertEqual(try queue.takeOutItem(), [])
+        XCTAssertEqual(try queue.removeItem(), [])
     }
     
     func test_빈_Double배열에_removeItem을_하면_오류를_뱉는지() {
         var queue = CalculatorItemQueue<Double>()
         
         do {
-            try queue.takeOutItem()
+            try queue.removeItem()
         } catch {
             return
         }
@@ -43,7 +43,7 @@ class CalculatorTests: XCTestCase {
         var queue = CalculatorItemQueue<Double>()
         
         do {
-            try queue.takeOutItem()
+            try queue.removeItem()
         } catch {
             return
         }
