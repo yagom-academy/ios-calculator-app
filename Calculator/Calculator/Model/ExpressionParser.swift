@@ -16,7 +16,7 @@ enum ExpressionParser {
         inputArrayInString = inputArrayInString.filter {!numberArrayInString.contains($0)}
         
         let numberArrayInDouble = numberArrayInString.map {Double($0) ?? 0 }
-        let operatorArrayInOperator = inputArrayInString.map {Operator(rawValue: Character($0))!}
+        let operatorArrayInOperator = inputArrayInString.compactMap {Operator(rawValue: Character($0))}
         
         let operands = CalculatorItemQueue<Double>(calculatorItems: numberArrayInDouble)
         let operators = CalculatorItemQueue<Operator>(calculatorItems: operatorArrayInOperator)

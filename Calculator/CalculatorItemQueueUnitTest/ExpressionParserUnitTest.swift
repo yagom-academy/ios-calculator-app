@@ -38,7 +38,7 @@ class ExpressionParserUnitTest: XCTestCase {
     }
     
     func test_더하기_빼기_곱하기_나누기가_있는_문자열에서_연산자만_뽑아지는지() {
-        let inputString = "1+2-3*4/5"
+        let inputString = "1+2_3*4/5"
         let result = ExpressionParser.parse(from: inputString)
         
         let resultCount = result.countOperands()
