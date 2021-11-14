@@ -82,7 +82,7 @@ class FormulaTests: XCTestCase {
     }
     
     func testFormulaResult_given1Add2Subtract3Multiply2Subtract3Divide6_expectNegativeZeroPoint5() {
-        let testOperands: [Double] = [1, 2, 3, 2, -3, 6]
+        let testOperands: [Double] = [1, 2, 3, 2, 3, 6]
         let testOperators: [Operator] = [.add, .subtract, .multiply, .subtract, .divide]
         setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), -0.5)
