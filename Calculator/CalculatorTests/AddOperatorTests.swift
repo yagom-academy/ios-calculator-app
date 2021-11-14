@@ -25,7 +25,7 @@ class AddOperatorTests: XCTestCase {
         let firstNumber = 3.0
         let secondNumber = 6.0
         
-        let calculatedResult = sut.calculate(lhs: firstNumber, rls: secondNumber)
+        let calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         XCTAssertEqual(calculatedResult, firstNumber + secondNumber)
     }
 }
