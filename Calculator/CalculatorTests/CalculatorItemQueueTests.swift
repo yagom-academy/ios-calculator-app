@@ -8,40 +8,54 @@
 import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
-    var queue = CalculatorItemQueue<Double>()
+    var operandQueue = CalculatorItemQueue<Double>()
+    var operatorQueue = CalculatorItemQueue<Operator>()
     
     override func setUp() {
-        queue.enqueue(1.0)
-        queue.enqueue(2.0)
-        queue.enqueue(13.5)
+        operandQueue.enqueue(1.0)
+        operandQueue.enqueue(2.0)
+        operandQueue.enqueue(13.5)
+        operatorQueue.enqueue(.add)
+        operatorQueue.enqueue(.subtract)
+        operatorQueue.enqueue(.devide)
+        operatorQueue.enqueue(.multiply)
     }
     
     override func tearDown() {
-        queue = CalculatorItemQueue<Double>()
+        operandQueue = CalculatorItemQueue<Double>()
+        operatorQueue = CalculatorItemQueue<Operator>()
     }
     
-    func testEnqueueAndDequeue() {
-        XCTAssertEqual(try queue.dequeue(), 1.0)
-        XCTAssertEqual(try queue.dequeue(), 2.0)
-        XCTAssertEqual(try queue.dequeue(), 13.5)
+    func testDequeueOperand() {
+        XCTAssertEqual(operandQueue.dequeue(), 1.0)
+        XCTAssertEqual(operandQueue.dequeue(), 2.0)
+        XCTAssertEqual(operandQueue.dequeue(), 13.5)
     }
     
-    func testEnqueueAndRemoveLast() {
-        XCTAssertEqual(try queue.removeLast(), 13.5)
-        XCTAssertEqual(try queue.removeLast(), 2.0)
-        XCTAssertEqual(try queue.removeLast(), 1.0)
+    func testRemoveLastOperand() {
+        XCTAssertEqual(operandQueue.removeLast(), 13.5)
+        XCTAssertEqual(operandQueue.removeLast(), 2.0)
+        XCTAssertEqual(operandQueue.removeLast(), 1.0)
     }
     
-    func testThrowError() {
-        XCTAssertEqual(try queue.removeLast(), 13.5)
-        XCTAssertEqual(try queue.removeLast(), 2.0)
-        XCTAssertEqual(try queue.removeLast(), 1.0)
-        XCTAssertThrowsError(try queue.dequeue())
-        XCTAssertThrowsError(try queue.removeLast())
+    func testDequeueOperator() {
+        XCTAssertEqual(operatorQueue.dequeue(), .add)
+        XCTAssertEqual(operatorQueue.dequeue(), .subtract)
+        XCTAssertEqual(operatorQueue.dequeue(), .devide)
+        XCTAssertEqual(operatorQueue.dequeue(), .multiply)
     }
     
-}
-
-extension Double: CalculatorItem {
+    func testRemoveLastOperator() {
+        XCTAssertEqual(operatorQueue.removeLast(), .multiply)
+        XCTAssertEqual(operatorQueue.removeLast(), .devide)
+        XCTAssertEqual(operatorQueue.removeLast(), .subtract)
+        XCTAssertEqual(operatorQueue.removeLast(), .add)
+    }
     
+    func testDequeueWhenEmpty(){
+        operandQueue.dequeue()
+        operandQueue.dequeue()
+        operandQueue.dequeue()
+        XCTAssertEqual(operandQueue.dequeue(), nil)
+    }
 }
