@@ -9,4 +9,5 @@ import Foundation
 
 enum QueueError: Error {
     case emptyItem
+    case wrongCalculation
 }
