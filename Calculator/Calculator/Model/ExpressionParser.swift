@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         let components = componentsByOperators(from: input)
         let operatorRawValues = Operator.allCases.map { String($0.rawValue) }
         
@@ -29,7 +29,7 @@ enum ExpressionParser {
         return formula
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         let operatorRawValues = Operator.allCases.map{ $0.rawValue }
         
         let trimmedInput = input.trimmingCharacters(in: .whitespacesAndNewlines)
