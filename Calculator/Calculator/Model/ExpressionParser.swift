@@ -8,6 +8,8 @@
 import Foundation
 
 enum ExpressionParser {
+    static let separator: Character = " "
+    
     static func parse(from input: String) -> Formula {
         let formula = Formula()
         
@@ -20,6 +22,6 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        input.split(with: " ")
+        input.split(with: separator)
     }
 }
