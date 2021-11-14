@@ -9,10 +9,11 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) {
-        
+        componentByOperators(from: input)
     }
     
     private static func componentByOperators(from input: String) -> [String] {
-        return input.split(with: Operator.substract.rawValue)
+        return Operator.allCases.map{ $0.rawValue }.reduce([input]) { (result,`operator`) in
+            result.flatMap { $0.split(with: `operator` )} }
     }
 }
