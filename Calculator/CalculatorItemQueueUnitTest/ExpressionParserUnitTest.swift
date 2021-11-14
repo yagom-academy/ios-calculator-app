@@ -37,11 +37,12 @@ class ExpressionParserUnitTest: XCTestCase {
         XCTAssertEqual(result, (["1","2","-3","4","5"]))
     }
     
-//    func test_더하기_빼기_곱하기_나누기가_있는_문자열에서_연산자만_뽑아지는지() {
-//        let inputString = "1+2-3*4/5"
-//        let result = ExpressionParser.parse(from: inputString)
-//
-//        XCTAssertEqual(result, Formula(operands: CalculatorItemQueue<Double>(calculatorItems: [1,2,3,4,5]), operators: CalculatorItemQueue<Operator>(calculatorItems: [.add,.subtract,.multiply,.divide])))
-//    }
+    func test_더하기_빼기_곱하기_나누기가_있는_문자열에서_연산자만_뽑아지는지() {
+        let inputString = "1+2-3*4/5"
+        let result = ExpressionParser.parse(from: inputString)
+        
+        let resultCount = result.countOperands()
+        XCTAssertEqual(resultCount, 5)
+    }
 
 }

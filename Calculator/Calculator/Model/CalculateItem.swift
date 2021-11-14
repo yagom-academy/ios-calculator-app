@@ -18,7 +18,6 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multiply = "*"
     
-    //연산 케이스에 따라 두 숫자를 받아서 함수를 실행하는 함수
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:

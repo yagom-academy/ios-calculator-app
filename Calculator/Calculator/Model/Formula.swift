@@ -1,8 +1,13 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(calculatorItems: [])
-    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(calculatorItems: [])
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
+    
+    init(operands:CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(calculatorItems: []), operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(calculatorItems: [])) {
+        self.operands = operands
+        self.operators = operators
+    }
     
     mutating func result() -> Double? {
         var result: Double = 0
@@ -20,5 +25,9 @@ struct Formula {
         }
         
         return result
+    }
+    
+    func countOperands() -> Int {
+        return operands.calculatorItems.count
     }
 }
