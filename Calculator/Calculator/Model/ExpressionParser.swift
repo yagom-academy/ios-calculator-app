@@ -13,11 +13,13 @@ enum ExpressionParser {
     }
     
     private func componentsByOperators(from input: String) -> [String] {
-        let operatorCharacters = Operator.allCases.map{ $0.rawValue }
+        let operatorRawValues = Operator.allCases.map{ $0.rawValue }
         
-        let components = operatorCharacters.reduce([input]) {
-            (result: [String], operatorCharacter: Character) in
-            return result.flatMap { $0.split(with: operatorCharacter) }
+        let trimmedInput = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let components = operatorRawValues.reduce([trimmedInput]) {
+            (result: [String], operatorRawValue: Character) in
+            return result.flatMap { $0.split(with: operatorRawValue) }
         }
         return components
     }
