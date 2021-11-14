@@ -12,3 +12,9 @@ extension Decimal {
         return NSDecimalNumber(decimal: self).doubleValue
     }
 }
+
+extension String {
+    func split(with target: Character) -> [String] {
+        components(separatedBy: String(target))
+    }
+}
