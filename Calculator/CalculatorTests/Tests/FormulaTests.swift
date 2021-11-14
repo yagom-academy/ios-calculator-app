@@ -33,6 +33,15 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 40)
     }
     
+    func testFormulaResult_givenNoNumberAndPlus_expectNaN() {
+        let testOperators: [Operator] = [.add]
+        setup(queue: &sut.operators, with: testOperators)
+        let testOperands: [Double] = []
+        setup(queue: &sut.operands, with: testOperands)
+        let test = sut.result()
+        XCTAssertTrue(test.isNaN)
+    }
+    
     private func setup<T>(queue: inout CalculatorItemQueue<T>, with testData: [T]) {
         for data in testData {
             queue.enqueue(data)
