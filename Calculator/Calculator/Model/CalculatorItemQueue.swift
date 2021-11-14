@@ -20,9 +20,9 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         inbox.append(item)
     }
     
-    mutating func dequeue() -> Element? {
+    mutating func dequeue() throws -> Element {
         if inbox.isEmpty && outbox.isEmpty {
-            return nil
+            throw CalculatorError.emptyQueue
         }
         if outbox.isEmpty {
             outbox = inbox.reversed()
