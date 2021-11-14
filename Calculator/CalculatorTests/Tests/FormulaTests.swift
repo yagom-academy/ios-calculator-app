@@ -27,38 +27,38 @@ class FormulaTests: XCTestCase {
     
     func testFormulaResult_given30Plus20Minus10_expect40() {
         let testOperands: [Double] = [30, 20, 10]
-        setup(queue: &sut.operands, with: testOperands)
         let testOperators: [Operator] = [.add, .subtract]
-        setup(queue: &sut.operators, with: testOperators)
+        setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), 40)
     }
     
     func testFormulaResult_givenNoNumberAndPlus_expectNaN() {
         let testOperands: [Double] = []
-        setup(queue: &sut.operands, with: testOperands)
         let testOperators: [Operator] = [.add]
-        setup(queue: &sut.operators, with: testOperators)
-        let test = sut.result()
-        XCTAssertTrue(test.isNaN)
+        setup(formula: &sut, with: testOperands, and: testOperators)
+        XCTAssertTrue(sut.result().isNaN)
     }
     
     func testFormulaResult_given30Plus20Minus10Divide20_expect2() {
         let testOperands: [Double] = [30, 20, 10, 20]
-        setup(queue: &sut.operands, with: testOperands)
         let testOperators: [Operator] = [.add, .subtract, .divide]
-        setup(queue: &sut.operators, with: testOperators)
+        setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), 2)
     }
     
     func testFormulaResult_given30Divide10Divide10_expectOpoint3() {
         let testOperands: [Double] = [30, 10, 10]
-        setup(queue: &sut.operands, with: testOperands)
         let testOperators: [Operator] = [.divide, .divide]
-        setup(queue: &sut.operators, with: testOperators)
+        setup(formula: &sut, with: testOperands, and: testOperators)
         XCTAssertEqual(sut.result(), 0.3)
     }
     
-    private func setup<T>(queue: inout CalculatorItemQueue<T>, with testData: [T]) {
+    private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
+        insert(contentsOf: operands, into: &formula.operands)
+        insert(contentsOf: operators, into: &formula.operators)
+    }
+    
+    private func insert<T>(contentsOf testData: [T], into queue: inout CalculatorItemQueue<T>) {
         for data in testData {
             queue.enqueue(data)
         }
