@@ -21,8 +21,6 @@ struct Formula {
         {
             do {
                 result = try operatorInstance.calculate(lhs: result, rhs: number)
-                operands.dequeue()
-                print("\(result), \(operatorInstance)")
             } catch {
                 print(error)
             }
