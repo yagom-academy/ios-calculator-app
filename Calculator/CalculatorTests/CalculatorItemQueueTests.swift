@@ -10,7 +10,7 @@ import XCTest
 
 extension Int: CalculateItem {}
 
-class CalculatorTests: XCTestCase {
+class CalculatorItemQueueTests: XCTestCase {
     
     var sut: CalculatorItemQueue<Int>!
     
