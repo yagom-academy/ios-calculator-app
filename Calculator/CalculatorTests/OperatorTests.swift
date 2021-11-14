@@ -10,7 +10,6 @@ import XCTest
 
 class OperatorTests: XCTestCase {
     
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -50,14 +49,15 @@ class OperatorTests: XCTestCase {
         let lhs = 100.00
         let rhs = 2.0
   
-        XCTAssertEqual(try Operator.divide.divide(lhs: lhs, rhs: rhs), lhs/rhs)
+        XCTAssertEqual(Operator.divide.divide(lhs: lhs, rhs: rhs), lhs/rhs)
     }
     
-    func test_rhs가_0일때_divide호출시_계산오류를_반환한다() {
+    func test_rhs가_0일때_divide호출시_NaN을_반환한다() {
         let lhs = 12345.6789
         let rhs = 0.0
+        let result = Operator.divide.divide(lhs: lhs, rhs: rhs)
         
-        XCTAssertThrowsError(try Operator.divide.divide(lhs: lhs, rhs: rhs)) { error in XCTAssertEqual(error as? CalculatorError, .incomputableDivdie) }
+        XCTAssertTrue(result.isNaN)
     }
     
     func test_lhs가_음수이고_rhs는_양수일때_divide호출시_1hs를_2hs로_나눈몫을_반환한다() {
