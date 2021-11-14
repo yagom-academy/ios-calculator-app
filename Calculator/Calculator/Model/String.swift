@@ -10,12 +10,19 @@ import Foundation
 extension String {
     func split(with target: Character) -> [String] {
         
-        let result = self.filter { $0 != target }
+        var seperatedValue: [String] = []
         
-        if result == self {
-            return [result]
+        var valueToSeperate: String = self
+        if let targetIndex:String.Index = valueToSeperate.firstIndex(of: target) {
+            let targetBeforeValue = valueToSeperate[..<targetIndex]
+            let targetAfterValue = valueToSeperate[index(after: targetIndex)...]
+            
+            seperatedValue.append(String(targetBeforeValue))
+            seperatedValue.append(String(target))
+            valueToSeperate = String(targetAfterValue)
         }
+        seperatedValue.append(valueToSeperate)
         
-        return [String(target),result]
+        return seperatedValue
     }
 }

@@ -10,12 +10,27 @@ import XCTest
 
 class StringTests: XCTestCase {
     
-    func test_음수string값을_character를_가지고_split하면_String배열로_반환한다() {
+    func test_플러스_character를_가지고_split하면_플러스기준으로_앞뒤_String을_배열로_반환한다() {
         let stringValue: String = "15*-1+0.4"
         
-        let result = stringValue.split(with: "*")
+        let result = stringValue.split(with: Operator.add.rawValue)
         
-        XCTAssertEqual(result, ["15","*","-1","+","0.4"])
+        XCTAssertEqual(result, ["15*-1","+","0.4"])
     }
-
+    
+    func test_마이너스_character를_가지고_split하면_마이너스기준으로_앞뒤_String을_배열로_반환한다() {
+        let stringValue: String = "15−-1+0.4"
+        
+        let result = stringValue.split(with: Operator.substract.rawValue)
+        
+        XCTAssertEqual(result, ["15","−","-1+0.4"])
+    }
+    
+    func test_두개의마이너스를_가진_string을_split하면_모든마이너스기준으로_앞뒤_String을_배열로_반환한다() {
+        let stringValue: String = "15−-1+0.4−8"
+        
+        let result = stringValue.split(with: Operator.substract.rawValue)
+        
+        XCTAssertEqual(result, ["15","−","-1+0.4","−","8"])
+    }
 }
