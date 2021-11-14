@@ -89,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A634AFFE2740CB360050CBFC /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				A634AFFB2740B06A0050CBFC /* CalculateError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		A63C2EDC27394C6400B89DE8 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,7 +168,7 @@
 			children = (
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				A634AFFB2740B06A0050CBFC /* CalculateError.swift */,
+				A634AFFE2740CB360050CBFC /* Error */,
 				A6825FF7273D2853001FFD9B /* Model */,
 				A63C2EDD27394C7900B89DE8 /* Controller */,
 				A63C2EDC27394C6400B89DE8 /* Protocol */,
