@@ -38,7 +38,7 @@ class FormulaTests: XCTestCase {
             return
         }
         
-        XCTAssertThrowsError(QueueError.emptyArray)
+        XCTAssertThrowsError(QueueError.emptyItem)
     }
     
     func test_연산자_1개만_있을_경우_제대로_오류를_뱉는지() {
@@ -50,7 +50,7 @@ class FormulaTests: XCTestCase {
             return
         }
         
-        XCTAssertThrowsError(QueueError.emptyArray)
+        XCTAssertThrowsError(QueueError.emptyItem)
     }
     
     func test_숫자_1개만_있을_경우_제대로_오류를_뱉는지() {
@@ -62,7 +62,7 @@ class FormulaTests: XCTestCase {
             return
         }
         
-        XCTAssertThrowsError(QueueError.emptyArray)
+        XCTAssertThrowsError(QueueError.emptyItem)
     }
     
     func test_연산자_1개_숫자_2개가_있을_경우_빼기_계산이_잘_되는지() {

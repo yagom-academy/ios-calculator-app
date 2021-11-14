@@ -17,7 +17,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     mutating func removeItem() throws -> [Element] {
         if items.isEmpty {
-            throw QueueError.emptyArray
+            throw QueueError.emptyItem
         }
         reversedItems = items.reversed()
         reversedItems.removeLast()
@@ -28,7 +28,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     mutating func removeAllItems() throws {
         if items.isEmpty {
-            throw QueueError.emptyArray
+            throw QueueError.emptyItem
         }
         items.removeAll()
     }

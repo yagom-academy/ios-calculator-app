@@ -8,5 +8,5 @@
 import Foundation
 
 enum QueueError: Error {
-    case emptyArray
+    case emptyItem
 }

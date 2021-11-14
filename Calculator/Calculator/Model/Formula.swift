@@ -23,7 +23,7 @@ struct Formula {
         }
         
         if operators.items == [] {
-            throw QueueError.emptyArray
+            throw QueueError.emptyItem
         }
         
         let firstOperand = operands.items[0]
@@ -33,11 +33,11 @@ struct Formula {
         do {
             let nextOperand = try operands.removeItem()
             if nextOperand == [] {
-                throw QueueError.emptyArray
+                throw QueueError.emptyItem
             }
             result = firstOperator.calculate(lhs: firstOperand, rhs: nextOperand[0])
         } catch {
-            throw QueueError.emptyArray
+            throw QueueError.emptyItem
         }
         
         while try operators.removeItem().isEmpty == false {
@@ -45,11 +45,11 @@ struct Formula {
                 let nextOperand = try operands.removeItem()
                 let nextOperator = operators.items
                 if nextOperator == [] {
-                    throw QueueError.emptyArray
+                    throw QueueError.emptyItem
                 }
                 result = nextOperator[0].calculate(lhs: result, rhs: nextOperand[0])
             } catch {
-                throw QueueError.emptyArray
+                throw QueueError.emptyItem
             }
         }
         
