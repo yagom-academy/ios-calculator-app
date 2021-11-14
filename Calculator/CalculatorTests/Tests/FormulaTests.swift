@@ -42,6 +42,14 @@ class FormulaTests: XCTestCase {
         XCTAssertTrue(test.isNaN)
     }
     
+    func testFormulaResult_given30Plus20Minus10Divide20_expect2() {
+        let testOperands: [Double] = [30, 20, 10, 20]
+        setup(queue: &sut.operands, with: testOperands)
+        let testOperators: [Operator] = [.add, .subtract, .divide]
+        setup(queue: &sut.operators, with: testOperators)
+        XCTAssertEqual(sut.result(), 2)
+    }
+    
     private func setup<T>(queue: inout CalculatorItemQueue<T>, with testData: [T]) {
         for data in testData {
             queue.enqueue(data)
