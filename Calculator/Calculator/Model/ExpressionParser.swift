@@ -7,15 +7,18 @@
 
 enum ExpressionParser {
     
-    
-    func componentsByOperators(from input: String) -> [String] {
+    static func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.map { $0.rawValue }
         var operands: [String] = []
+        var convertInput = input
         
-        for `operator` in operators {
-            operands = input.split(with: `operator`)
+        for operatorElement in operators {
+            convertInput = convertInput.replacingOccurrences(of: String(operatorElement), with: " ")
+            operands = convertInput.split(with: " ")
         }
         
         return operands
     }
 }
+
+
