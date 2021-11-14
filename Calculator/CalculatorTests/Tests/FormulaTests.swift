@@ -67,6 +67,13 @@ class FormulaTests: XCTestCase {
         XCTAssertTrue(sut.result().isNaN)
     }
     
+    func testFormulaResult_given2Plus3Multiply3Subtract1_expect14() {
+        let testOperands: [Double] = [2, 3, 3, 1]
+        let testOperators: [Operator] = [.add, .multiply, .subtract]
+        setup(formula: &sut, with: testOperands, and: testOperators)
+        XCTAssertEqual(sut.result(), -0.5)
+    }
+    
     private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
         insert(contentsOf: operands, into: &formula.operands)
         insert(contentsOf: operators, into: &formula.operators)
