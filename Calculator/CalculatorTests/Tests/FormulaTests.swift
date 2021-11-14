@@ -71,7 +71,7 @@ class FormulaTests: XCTestCase {
         let testOperands: [Double] = [2, 3, 3, 1]
         let testOperators: [Operator] = [.add, .multiply, .subtract]
         setup(formula: &sut, with: testOperands, and: testOperators)
-        XCTAssertEqual(sut.result(), -0.5)
+        XCTAssertEqual(sut.result(), 14)
     }
     
     private func setup(formula: inout Formula, with operands: [Double], and operators: [Operator]) {
