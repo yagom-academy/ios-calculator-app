@@ -21,17 +21,18 @@ class ExpressionParserTests: XCTestCase {
 //        XCTAssertEqual(ExpressionParser.componentsByOperators(from: "1+3-4/1*3"), ["1", "3", "4", "1", "3"])
 //    }
     
-    var sut: Formula!
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    func test_다양한_String_일_경우_각각_빈_배열로_생성되는지() {
+        let sut = ExpressionParser.parse(from: "1+2+32-12")
         
-        sut = Formula(operands: CalculatorItemQueue(), operators: <#T##CalculatorItemQueue<Operator>#>)
+        XCTAssertEqual(sut.operators.items, [Operator.add, Operator.add, Operator.subtract])
+        XCTAssertEqual(sut.operands.items, [1, 2, 32, 12] )
     }
     
-    func test_빈_String_일_경우_각각_빈_배열로_생성되는지() {
-        ExpressionParser.parse(from: "")
+    func test_빈_String일_경우_각각_빈_배열로_생성되는지() {
+        let sut = ExpressionParser.parse(from: "")
         
-        XCTAssertEqual(Formula, <#T##expression2: Equatable##Equatable#>)
+        XCTAssertEqual(sut.operands.items, [])
+        XCTAssertEqual(sut.operators.items, [])
     }
 }
