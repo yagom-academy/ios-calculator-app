@@ -50,6 +50,14 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 2)
     }
     
+    func testFormulaResult_given30Divide10Divide10_expectOpoint3() {
+        let testOperands: [Double] = [30, 10, 10]
+        setup(queue: &sut.operands, with: testOperands)
+        let testOperators: [Operator] = [.divide, .divide]
+        setup(queue: &sut.operators, with: testOperators)
+        XCTAssertEqual(sut.result(), 0.3)
+    }
+    
     private func setup<T>(queue: inout CalculatorItemQueue<T>, with testData: [T]) {
         for data in testData {
             queue.enqueue(data)
