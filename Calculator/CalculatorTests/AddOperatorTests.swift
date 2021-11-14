@@ -13,7 +13,7 @@ class AddOperatorTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Operator(rawValue: "+")
+        sut = .add
     }
     
     override func tearDownWithError() throws {
