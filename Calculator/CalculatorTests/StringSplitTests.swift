@@ -30,9 +30,3 @@ class StringSplitTests: XCTestCase {
         XCTAssertEqual(splited, expectedResult)
     }
 }
-
-extension String {
-    func split(with target: Character) -> [String] {
-        return self.split(separator: target).map{ String($0) }
-    }
-}
