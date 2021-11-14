@@ -10,6 +10,7 @@
 		C105A3C1273A11CC00719B73 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C0273A11CC00719B73 /* LinkedListTests.swift */; };
 		C105A3C8273A123900719B73 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C7273A123900719B73 /* LinkedList.swift */; };
 		C105A3C9273A123900719B73 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C105A3C7273A123900719B73 /* LinkedList.swift */; };
+		C11511652740C26E00AD339A /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11511642740C26E00AD339A /* OperatorTests.swift */; };
 		C11AA0A6273CDE6B0003E802 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11AA0A5273CDE6B0003E802 /* CalculateItem.swift */; };
 		C11AA0A7273CDE6B0003E802 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11AA0A5273CDE6B0003E802 /* CalculateItem.swift */; };
 		C11AA0A9273CDEAF0003E802 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11AA0A8273CDEAF0003E802 /* NodeTests.swift */; };
@@ -42,6 +43,7 @@
 		C105A3BE273A11CC00719B73 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C105A3C0273A11CC00719B73 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		C105A3C7273A123900719B73 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		C11511642740C26E00AD339A /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		C11AA0A5273CDE6B0003E802 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		C11AA0A8273CDEAF0003E802 /* NodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		C11AA0AA273CEA420003E802 /* CalculatorItemQueueDoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueDoubleTests.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				C11AA0AC273CEB200003E802 /* CalculatorItemQueue */,
 				C105A3C0273A11CC00719B73 /* LinkedListTests.swift */,
 				C11AA0A8273CDEAF0003E802 /* NodeTests.swift */,
+				C11511642740C26E00AD339A /* OperatorTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				C1A21777273A9477002472CA /* CalculatorItemQueue.swift in Sources */,
 				C11AA0A7273CDE6B0003E802 /* CalculateItem.swift in Sources */,
 				C1E41FC1273CD328005A5174 /* Node.swift in Sources */,
+				C11511652740C26E00AD339A /* OperatorTests.swift in Sources */,
 				C11AA0AE273CEB7E0003E802 /* CalculatorItemQueueCharacterTests.swift in Sources */,
 				C11AA0AB273CEA420003E802 /* CalculatorItemQueueDoubleTests.swift in Sources */,
 				C105A3C1273A11CC00719B73 /* LinkedListTests.swift in Sources */,
