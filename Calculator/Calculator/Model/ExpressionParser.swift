@@ -20,7 +20,8 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let separators = CharacterSet(charactersIn: "+-*/")
-        let separatedInputArray = input.components(separatedBy: separators).map { String($0) }
+        let separatedInputArray = input.components(separatedBy: separators)
+            .map { String($0) }
         let operatorRawValues = Operator.allCases.compactMap { $0.rawValue }
         let operandStringArray = operatorRawValues.reduce(separatedInputArray) { (array: [String], operatorCharacter: Character) in
             array.flatMap { $0.split(with: operatorCharacter) }
@@ -31,7 +32,7 @@ enum ExpressionParser {
 
 extension String {
     func split(with target: Character) -> [String] {
-        self.split(separator: target)
+        return self.split(separator: target)
             .compactMap { String($0) }
     }
 }
