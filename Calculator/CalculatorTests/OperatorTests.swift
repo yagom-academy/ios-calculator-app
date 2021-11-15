@@ -46,4 +46,9 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(Decimal(result), -2.0)
     }
     
+    func test_마이너스일_나누기_이_계산하면_삼을_반환한다() {
+        let result = Operator.divide.calculate(lhs: -1.0, rhs: 0.0)
+        
+        XCTAssertEqual(Decimal(result).isNaN, true)
+    }
 }

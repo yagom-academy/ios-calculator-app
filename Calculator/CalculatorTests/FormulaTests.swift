@@ -38,4 +38,9 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(formula?.result(), 0.2)
     }
 
+    func test_formula내_0으로나누는_연산이_포함되는_계산식은_nan결과를_나타낸다() {
+        formula = ExpressionParser.parse(from: "15*-1/0.0")
+        
+        XCTAssertEqual(formula?.result().isNaN, true)
+    }
 }
