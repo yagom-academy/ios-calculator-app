@@ -2,16 +2,10 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by yeha on 2021/11/09.
+//  Created by yeha on 2021/11/15.
 //
 
 import Foundation
-
-struct Formula {
-    mutating func result() -> Double {
-        return 1.1
-    }
-}
 
 struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items: [Element]
