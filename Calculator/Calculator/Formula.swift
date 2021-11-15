@@ -8,7 +8,7 @@ struct Formula {
         guard var tempValue = try? operands.deleteFromQueue() else {
             throw ErrorCase.emptyQueue
         }
-        while operands.linkedList.head == nil {
+        while operands.linkedList.head != nil {
             if let currentOperand = try? operands.deleteFromQueue(),
                let currentOperator = try? operators.deleteFromQueue() {
                 let operatorCase = Operator(rawValue: currentOperator)

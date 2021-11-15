@@ -3,7 +3,7 @@ import XCTest
 class FormulaTests: XCTestCase {
     var sut: ExpressionParser.Type! = ExpressionParser.self
     
-    func 일_더하기_이를_입력하면_삼_반환() {
+    func test_일_더하기_이를_입력하면_삼_반환() {
         var formula = Formula()
         formula = sut.parse(from: "1+2")
         let result = try? formula.result()
@@ -19,5 +19,6 @@ class FormulaTests: XCTestCase {
         }
     }
     
+
 
 }
