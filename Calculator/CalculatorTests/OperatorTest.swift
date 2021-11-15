@@ -28,4 +28,24 @@ class OperatorTest: XCTestCase {
         let result = Operator.multiply.calculate(lhs: 4, rhs: 2)
         XCTAssertEqual(result, 8)
     }
+    
+    func test_실수_음수_각1개_add연산자_계산() {
+        let result = Operator.add.calculate(lhs: 2.5, rhs: -4.5)
+        XCTAssertEqual(result, -2)
+    }
+    
+    func test_실수_음수_각1개_subtract연산자_계산() {
+        let result = Operator.subtract.calculate(lhs: 2.5, rhs: -4.5)
+        XCTAssertEqual(result, 7)
+    }
+    
+    func test_실수_음수_각1개_divide연산자_계산() {
+        let result = Operator.divide.calculate(lhs: 2.5, rhs: -5)
+        XCTAssertEqual(result, -0.5)
+    }
+    
+    func test_실수_음수_각1개_multiply연산자_계산() {
+        let result = Operator.multiply.calculate(lhs: 2.5, rhs: -4.5)
+        XCTAssertEqual(result, -11.25)
+    }
 }
