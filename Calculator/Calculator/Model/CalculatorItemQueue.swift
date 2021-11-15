@@ -8,11 +8,22 @@
 import Foundation
 
 struct CalculatorItemQueue {
+    
+    // MARK: property
     private var queueList: LinkedList = LinkedList()
+    
+}
+
+// MARK: private method
+extension CalculatorItemQueue {
     
     private mutating func enqueue(item: CalculateItem) {
         queueList.append(data: item)
     }
+}
+
+// MARK: internal method
+extension CalculatorItemQueue {
     
     mutating func enqueue(number: Double) {
         enqueue(item: number)
