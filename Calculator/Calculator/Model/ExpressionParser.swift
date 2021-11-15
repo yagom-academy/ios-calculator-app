@@ -23,7 +23,6 @@ enum ExpressionParser {
         var convertInput = input
         
         for operatorElement in operators {
-            
             convertInput = convertInput.replacingOccurrences(of: String(operatorElement), with: " ")
             operands = convertInput.split(with: " ")
         }
