@@ -1,5 +1,5 @@
 //
-//  CalculateItemQueue.swift
+//  CalculatorItemQueue.swift
 //  Calculator
 //
 //  Created by yeha on 2021/11/09.
@@ -13,7 +13,7 @@ struct Formula {
     }
 }
 
-struct CalculateItemQueue<Element: CalculateItem> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items: [Element] = []
     
     mutating func enqueue(_ item: Element) {
