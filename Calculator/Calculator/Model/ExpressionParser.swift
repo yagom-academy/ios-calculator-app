@@ -9,13 +9,13 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operatorRawValues = Operator.allCases
+        let operatorCharacters = Operator.allCases
             .compactMap { $0.rawValue }
         let operators = input
-            .filter { operatorRawValues.contains($0) }
+            .filter { operatorCharacters.contains($0) }
             .compactMap{ Operator(rawValue: $0)}
-        let operatorQueue = CalculatorItemQueue(elements: operators)
         let operands = componentsByOperators(from: input).compactMap { Double($0) }
+        let operatorQueue = CalculatorItemQueue(elements: operators)
         let operandQueue = CalculatorItemQueue(elements: operands)
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
