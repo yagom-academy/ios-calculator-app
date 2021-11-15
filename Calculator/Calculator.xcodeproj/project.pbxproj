@@ -16,6 +16,7 @@
 		F31B4EED273EDD5400BBA0D9 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31B4EEC273EDD5400BBA0D9 /* StringTests.swift */; };
 		F34BEDE3273AB76100F1A00A /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BEDE2273AB76100F1A00A /* LinkedList.swift */; };
 		F34BEDE5273AB79700F1A00A /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BEDE4273AB79700F1A00A /* Operator.swift */; };
+		F353BA4B27424B6E0043C09C /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353BA4A27424B6E0043C09C /* OperatorTests.swift */; };
 		F3666696273E02C5003EC4C2 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3666695273E02C5003EC4C2 /* CalculateItem.swift */; };
 		F3666698273E0E15003EC4C2 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3666697273E0E15003EC4C2 /* Double.swift */; };
 		F366669A273E0E6F003EC4C2 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3666699273E0E6F003EC4C2 /* String.swift */; };
@@ -49,6 +50,7 @@
 		F31B4EEC273EDD5400BBA0D9 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		F34BEDE2273AB76100F1A00A /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		F34BEDE4273AB79700F1A00A /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		F353BA4A27424B6E0043C09C /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		F3666695273E02C5003EC4C2 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		F3666697273E0E15003EC4C2 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		F3666699273E0E6F003EC4C2 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				F36666A1273E3924003EC4C2 /* FormulaTests.swift */,
 				F36666A3273E4347003EC4C2 /* ExpressionParserTests.swift */,
 				F31B4EEC273EDD5400BBA0D9 /* StringTests.swift */,
+				F353BA4A27424B6E0043C09C /* OperatorTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				F3955A0E273A1FD0004E6163 /* CalculatorItemQueueTests.swift in Sources */,
 				F36666A2273E3924003EC4C2 /* FormulaTests.swift in Sources */,
 				F31B4EED273EDD5400BBA0D9 /* StringTests.swift in Sources */,
+				F353BA4B27424B6E0043C09C /* OperatorTests.swift in Sources */,
 				F36666A4273E4347003EC4C2 /* ExpressionParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,19 +30,31 @@ extension Operator {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let decimalResult: Decimal = Decimal(lhs) + Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
     
     private func substract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let decimalResult: Decimal = Decimal(lhs) - Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        return lhs / rhs
+        let decimalResult: Decimal = Decimal(lhs) / Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let decimalResult: Decimal = Decimal(lhs) * Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
 }
 
