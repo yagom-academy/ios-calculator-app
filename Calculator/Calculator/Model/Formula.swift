@@ -4,7 +4,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    init(operands:CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(calculatorItems: []), operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(calculatorItems: [])) {
+    init(operands:CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(calculatorItems: []), operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(calculatorItems: [.add])) {
         self.operands = operands
         self.operators = operators
     }

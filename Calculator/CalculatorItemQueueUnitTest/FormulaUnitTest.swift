@@ -19,7 +19,6 @@ class FormulaUnitTest: XCTestCase {
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.add)
 
-
         //when
         let result = formula.result()
 
@@ -37,8 +36,6 @@ class FormulaUnitTest: XCTestCase {
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.add)
 
-//        var formula = Formula(operands: numbers, operators: operators)
-
         //when
         let result = formula.result()
 
@@ -55,10 +52,7 @@ class FormulaUnitTest: XCTestCase {
 
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.add)
-        formula.operators.enqueue(.add)
         formula.operators.enqueue(.subtract)
-
-//        var formula = Formula(operands: numbers, operators: operators)
 
         //when
         let result = formula.result()
@@ -74,10 +68,7 @@ class FormulaUnitTest: XCTestCase {
         formula.operands.enqueue(4)
 
         formula.operators.enqueue(.add)
-        formula.operators.enqueue(.add)
         formula.operators.enqueue(.multiply)
-
-//        var formula = Formula(operands: numbers, operators: operators)
 
         //when
         let result = formula.result()
@@ -94,11 +85,8 @@ class FormulaUnitTest: XCTestCase {
         formula.operands.enqueue(5)
 
         formula.operators.enqueue(.add)
-        formula.operators.enqueue(.add)
         formula.operators.enqueue(.multiply)
         formula.operators.enqueue(.subtract)
-
-//        var formula = Formula(operands: numbers, operators: operators)
 
         //when
         let result = formula.result()
@@ -114,10 +102,7 @@ class FormulaUnitTest: XCTestCase {
         formula.operands.enqueue(0)
 
         formula.operators.enqueue(.add)
-        formula.operators.enqueue(.add)
         formula.operators.enqueue(.divide)
-
-//        var formula = Formula(operands: numbers, operators: operators)
 
         //when
         let result = formula.result()

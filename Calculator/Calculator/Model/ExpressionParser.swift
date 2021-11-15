@@ -19,7 +19,6 @@ enum ExpressionParser {
         
         let operands = CalculatorItemQueue<Double>(calculatorItems: numberArrayInDouble)
         var operators = CalculatorItemQueue<Operator>(calculatorItems: operatorArrayInOperator)
-//        operators.enqueue(.add)
         
         let formula = Formula(operands: operands, operators: operators)
 
