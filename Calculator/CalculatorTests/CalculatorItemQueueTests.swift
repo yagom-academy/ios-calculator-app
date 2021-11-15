@@ -8,7 +8,6 @@
 import XCTest
 
 class CalculatorTests: XCTestCase {
-    // MARK: - CalculatorItemQueue 구조체의 테스트 케이스
     
     func test_큐타입_제네릭에_Double타입을_넣어서_만든_배열이_초기화_직후_비어있는지() {
         let operands = CalculatorItemQueue<Double>()
