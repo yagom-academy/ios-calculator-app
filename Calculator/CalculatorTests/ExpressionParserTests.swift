@@ -50,5 +50,8 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(input.operands.count == 2)
         XCTAssertTrue(input.operators.count == 2)
         XCTAssertEqual(input.operators.dequeue(), .subtract)
+        input.operands.dequeue()
+        XCTAssertEqual(input.operands.dequeue(), -12.0)
+
     }
 }
