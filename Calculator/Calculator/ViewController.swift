@@ -60,4 +60,8 @@ extension ViewController {
         
         operandLabel.text = "0"
     }
+    
+    func initformulaeStackView() {
+        formulaeStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
+    }
 }
