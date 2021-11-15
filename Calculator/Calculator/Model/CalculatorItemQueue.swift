@@ -14,6 +14,9 @@ struct CalculatorItemQueue {
             return queue
         }
     }
+    var itemCount: Int {
+        return queue.count
+    }
     
     init(_ items: [CalculateItem] = []) {
         for item in items {

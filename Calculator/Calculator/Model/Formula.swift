@@ -17,11 +17,12 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        let calculateCount = operators.testableQueue.count
+        let CalculationTrial = operators.itemCount
         var result = operands.dequeue() as! Double
-        for _ in 1...calculateCount {
-            let rhs: Double = operands.dequeue() as! Double
-            let operation: Operator = operators.dequeue() as! Operator
+        
+        for _ in 1...CalculationTrial {
+            let rhs = operands.dequeue() as! Double
+            let operation = operators.dequeue() as! Operator
         result = operation.calculate(lhs: result, rhs: rhs)
         }
         return result
