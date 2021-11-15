@@ -26,7 +26,19 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
+        guard let currentOperandLabelTitle = operandLabel.text else {
+            return
+        }
         
+        guard let currentOperandButtonTitle = sender.currentTitle else {
+            return
+        }
+    
+        if currentOperandLabelTitle == "0" {
+            operandLabel.text = currentOperandButtonTitle
+        } else {
+            operandLabel.text = currentOperandLabelTitle + currentOperandButtonTitle
+        }
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
