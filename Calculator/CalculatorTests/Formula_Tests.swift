@@ -10,8 +10,8 @@ import XCTest
 
 class Formula_Tests: XCTestCase {
     var sut: Formula!
-    var operandsQueue = CalculatorItemQueue()
-    var operatorsQueue = CalculatorItemQueue()
+//    var operandsQueue = CalculatorItemQueue()
+//    var operatorsQueue = CalculatorItemQueue()
     let testOperands: [Double] = [1.0, 2.0, -3.0, 4.0, 5.0]
     let testOperators: [Operator] = [.add, .subtract, .divide, .multiply]
     

@@ -15,7 +15,13 @@ struct CalculatorItemQueue {
         }
     }
     
-    mutating func enqueue<Item: CalculateItem>(_ item: Item) {
+    init(_ items: [CalculateItem] = []) {
+        for item in items {
+            self.enqueue(item)
+        }
+    }
+    
+    mutating func enqueue(_ item: CalculateItem) {
         queue.append(item)
     }
     
