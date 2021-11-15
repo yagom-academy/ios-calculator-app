@@ -2,8 +2,8 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue<Character>
-    var oprators: CalculatorItemQueue<Double>
+    var operands = CalculatorItemQueue<Double>()
+    var oprators = CalculatorItemQueue<Character>()
     
     func result() -> Double {
         

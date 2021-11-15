@@ -17,7 +17,7 @@ class LinkedList<Element> {
         return head == nil
     }
     
-    init(head: Node<Element>) {
+    init(head: Node<Element>? = nil) {
         self.head = head
     }
     
