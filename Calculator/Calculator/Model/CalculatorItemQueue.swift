@@ -16,8 +16,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var inbox: [Element]
     private(set) var outbox: [Element]
     
-    private var CheckDequeuePossible: Bool {
-        return !inbox.isEmpty && !outbox.isEmpty
+    private var CheckDequeueImpossible: Bool {
+        return inbox.isEmpty && outbox.isEmpty
     }
     
     mutating func enqueue(_ item: Element) {
@@ -25,7 +25,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() throws -> Element {
-        guard CheckDequeuePossible else {
+        if CheckDequeueImpossible {
             throw CalculatorError.emptyQueue
         }
         if outbox.isEmpty {
