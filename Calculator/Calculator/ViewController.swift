@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         
         initDisplayOperand()
         initDisplayOperator()
-        initFormulasStackView()
+        initDisplayFormulas()
     }
 }
 
@@ -141,14 +141,14 @@ extension ViewController {
         displayOperand = "0"
     }
     
-    func initFormulasStackView() {
+    func initDisplayFormulas() {
         formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
     }
     
     func initAllDisplay() {
         initDisplayOperator()
         initDisplayOperand()
-        initFormulasStackView()
+        initDisplayFormulas()
     }
     
     func appendFormulaToformulas(`operator`: String, operand: String) {
