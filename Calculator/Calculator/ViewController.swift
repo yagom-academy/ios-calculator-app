@@ -76,4 +76,10 @@ extension ViewController {
     func initformulaeStackView() {
         formulaeStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
     }
+    
+    func initAllDisplay() {
+        initOperatorLabel()
+        initOperandLabel()
+        initformulaeStackView()
+    }
 }
