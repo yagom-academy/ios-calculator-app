@@ -19,16 +19,16 @@ enum ExpressionParser {
             inputOperator in
                 operators.enQueue(Operator(rawValue: Character(inputOperator)))
         }
-        operandsOfInputString.compactMap{ Double($0) }.forEach {
+        operandsOfInputString.compactMap { (operands: String) -> Double? in return Double(operands) }.forEach {
             inputOperand in operands.enQueue(inputOperand)
         }
         return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let availableOperators = Operator.allCases.map { String($0.rawValue) }
+        let availableOperators = Operator.allCases.map { (availableOperator: Operator) -> String in return  String(availableOperator.rawValue) }
         let operatorsOfInputString = input.split(with: " ")
-                .filter{ availableOperators.contains($0) }
+            .filter{ (value: String) -> Bool in return availableOperators.contains(value) == true }
      
         return operatorsOfInputString
     }

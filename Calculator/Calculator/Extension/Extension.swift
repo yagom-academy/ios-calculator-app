@@ -13,6 +13,6 @@ extension Double: CalculateItem {
 
 extension String {
     func split(with target: Character) -> [String] {        
-        return self.split(separator: target).compactMap{ String($0) }
+        return self.split(separator: target).map { (splitedString: Substring) -> String in return String(splitedString) }
     }
 }
