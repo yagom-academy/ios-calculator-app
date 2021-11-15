@@ -17,4 +17,13 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testInputTwoPlusThreeWithEmptySpaceIsFive() throws {
+        let input = "2 + 3"
+        var formula = ExpressionParser.parse(from: input)
+        let calculatedResult = try formula.result()
+        let expectedResult: Double = 5
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
 }

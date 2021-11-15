@@ -16,10 +16,6 @@ enum ExpressionParser {
         let operandComponents = components.filter { !operatorRawValues.contains($0) }
         var formula = Formula()
         
-        print(components)
-        print(operatorComponents)
-        print(operandComponents)
-        
         operatorComponents.forEach { operatorComponent in
             guard let enumOperator = Operator(rawValue: operatorComponent) else { return }
             formula.operators.insert(enumOperator)
