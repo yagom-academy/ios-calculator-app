@@ -16,8 +16,8 @@ enum ExpressionParser {
         }
         
         let inputComponents = ExpressionParser.componentsByOperators(from: input)
-        
-        let (operands, operators) = separateOperandsAndOperatorsFromSingleStringArray(stringArray: inputComponents)
+                   
+        let (operands, operators) = separateOperandsAndOperators(fromSingleStringArray: inputComponents)
         
         
         guard operands.count == operators.count + 1 else {
@@ -46,11 +46,11 @@ enum ExpressionParser {
         return modifiedInput
     }
     
-    static private func separateOperandsAndOperatorsFromSingleStringArray(stringArray: [String]) -> ([String], [String]) {
+    static private func separateOperandsAndOperators(fromSingleStringArray: [String]) -> ([String], [String]) {
         var operands: [String] = []
         var operators: [String] = []
         
-        for component in stringArray {
+        for component in fromSingleStringArray {
             if ["+","-","/","*"].contains(component) {
                 operators.append(component)
             } else {

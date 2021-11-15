@@ -20,15 +20,15 @@ struct Formula {
         }
         
         for `operator` in operators {
-            guard let `operator` = `operator`.first else {
+            guard `operator`.count == 1 else {
                 return nil
             }
             
-            guard let `operator` = Operator(rawValue: `operator`) else {
+            guard let _operator = Operator(rawValue: Character(`operator`)) else {
                 return nil
             }
             
-            self.operators.enqueue(`operator`)
+            self.operators.enqueue(_operator)
         }
     }
     
