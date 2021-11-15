@@ -8,25 +8,38 @@
 import XCTest
 
 class ExpressionParserTests: XCTestCase {
-
+    var sut: ExpressionParser.Type!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = ExpressionParser.self
+        
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    //MARK: - componentsByOperators()
+    func test_split_string_by_operators() {
+        let input = "1+2*3"
+        let result = sut.componentsByOperators(from: input)
+        
+        XCTAssertEqual(result, ["1", "2", "3"])
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_정수와_음수가있는_문자열일때() {
+        let input = "1+-3/4*-100"
+        let result = sut.componentsByOperators(from: input)
+        
+        XCTAssertEqual(result, ["1", "-3", "4", "-100"])
     }
-
+    
+    func test_마이너스와_음수문자_구별하는지() {
+        let input = "-3_-7_-9_5"
+        let result = sut.componentsByOperators(from: input)
+        
+        XCTAssertEqual(result, ["-3", "-7", "-9", "5"])
+    }
 }
