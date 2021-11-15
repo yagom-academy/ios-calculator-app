@@ -8,9 +8,9 @@ struct Formula {
         var result: Double
         guard let removedOperand = operands.dequeue() else { return 0.0 } // throw 처리 필요
         
-        result = operators.scanAllValues().reduce(removedOperand) { result, operatorSymbol in
+        result = operators.scanAllValues().reduce(removedOperand) { 
             guard let nextOperand = operands.dequeue() else { return 0.0 } // throw 처리 필요
-            return operatorSymbol.calculate(lhs: result, rhs: nextOperand)
+            return $1.calculate(lhs: $0, rhs: nextOperand)
         }
         
         return result
