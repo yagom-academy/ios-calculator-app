@@ -8,6 +8,7 @@
 import Foundation
 
 struct Formula {
+    
     // MARK: property
     var operands: CalculatorItemQueue?
     var operators: CalculatorItemQueue?

@@ -11,7 +11,6 @@ struct CalculatorItemQueue {
     
     // MARK: private property
     private var queueList: LinkedList = LinkedList()
-    
 }
 
 // MARK: private method

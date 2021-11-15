@@ -12,12 +12,10 @@ class CalculatorItemQueueTests: XCTestCase {
     
     var queue: CalculatorItemQueue = CalculatorItemQueue()
     
-    // MARK: QueueList isEmpty test
     func test_QueueList는_초기에_empty값을_갖는다() {
         XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()).isEmpty, true)
     }
     
-    // MARK: CalculatorItemQueue enqueue test
     func test_QueueList_enqueue_정상동작한다() {
         queue.enqueue(number: 1.0)
         
@@ -45,7 +43,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), ["+","/","2.0"])
     }
     
-    // MARK: CalculatorItemQueue dequeue test
     func test_QueueList에_Dequeue_정상동작한다() {
         queue.enqueue(number: 1)
         
@@ -73,7 +70,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(convertItem(item: item), nil)
     }
     
-    // MARK: CalculatorItemQueue clearQueue test
     func test_QueueList_안의_데이터를_모두_지운다() {
         queue.enqueue(operatorItem: .add)
         queue.enqueue(operatorItem: .divide)
@@ -85,7 +81,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(convertList(list: queue.getQueueList().searchAll()), [])
     }
 
-    // MARK: CalculatorItemQueue Several Queue test
     func test_여러개의_QueueList_생성한다() {
         var calculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
         var preparedCalculatorQueue: CalculatorItemQueue = CalculatorItemQueue()
