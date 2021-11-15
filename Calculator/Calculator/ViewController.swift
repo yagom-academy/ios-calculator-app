@@ -83,8 +83,28 @@ extension ViewController {
         operandLabel.text = convertedOperand
     }
     
-    @IBAction private func touchUPEqualSign(_ sender: UIButton) {
+    @IBAction private func touchUpEqualSign(_ sender: UIButton) {
+        guard let currentOperatorLabelTitle = operatorLabel.text else {
+            return
+        }
         
+        guard let currentOperandLabelTitle = operandLabel.text else {
+            return
+        }
+        
+        appendFormulaToformulas(operator: currentOperatorLabelTitle,
+                                operand: currentOperandLabelTitle)
+        
+        let formulaString: String = assembleFormula()
+        var formula: Formula = ExpressionParser.parse(from: formulaString)
+        
+        do {
+            operandLabel.text = String(try formula.result())
+        } catch OperationError.devidedByZero {
+            operandLabel.text = "NaN"
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
