@@ -29,6 +29,7 @@
 		ED1A7A862741445C002B36CE /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A852741445C002B36CE /* ExpressionParser.swift */; };
 		ED1A7A89274285A9002B36CE /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A88274285A9002B36CE /* String+Extensions.swift */; };
 		ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */; };
+		ED1A7A9027429023002B36CE /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8F27429023002B36CE /* CalculateItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		ED1A7A852741445C002B36CE /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		ED1A7A88274285A9002B36CE /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		ED1A7A8F27429023002B36CE /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				ED1A7A8727428592002B36CE /* Extensions */,
 				ED00CF40273982130081B9F3 /* Model */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
+				ED1A7A8E27429010002B36CE /* Protocols */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -190,6 +193,14 @@
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		ED1A7A8E27429010002B36CE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				ED1A7A8F27429023002B36CE /* CalculateItem.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				ED00CF42273982370081B9F3 /* LinkedList.swift in Sources */,
 				ED1A7A862741445C002B36CE /* ExpressionParser.swift in Sources */,
+				ED1A7A9027429023002B36CE /* CalculateItem.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
