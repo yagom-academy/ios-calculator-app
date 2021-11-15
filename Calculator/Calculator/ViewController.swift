@@ -95,7 +95,7 @@ extension ViewController {
     }
     
     @IBAction private func touchUpSignConversion(_ sender: UIButton) {
-        guard displayOperand != "0" else {
+        guard Double(displayOperand) != 0.0 else {
             return
         }
         
