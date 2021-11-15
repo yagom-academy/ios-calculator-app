@@ -4,7 +4,6 @@ extension String {
     func split(with target: Character) -> [String] {
         let splitedArray = self.replacingOccurrences(of: target.description, with: " ")
         return [splitedArray]
-        
     }
 }
 
@@ -15,7 +14,7 @@ enum ExpressionParser {
         
         inputArrayInString = inputArrayInString.filter {!numberArrayInString.contains($0)}
         
-        let numberArrayInDouble = numberArrayInString.map {Double($0) ?? 0 }
+        let numberArrayInDouble = numberArrayInString.map {Double($0) ?? 0}
         let operatorArrayInOperator = inputArrayInString.compactMap {Operator(rawValue: Character($0))}
         
         let operands = CalculatorItemQueue<Double>(calculatorItems: numberArrayInDouble)
