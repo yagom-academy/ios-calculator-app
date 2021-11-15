@@ -16,10 +16,10 @@ class ExpressionParserTests: XCTestCase {
         var operators = ExpressionParser.parse(from: String).operators
         
         let firstOperator = operators.dequeue() as? Operator
-        XCTAssertEqual(firstOperator?.rawValue, "+")
+        XCTAssertEqual(firstOperator?.rawValue, "*")
         
         let secondOperator = operators.dequeue() as? Operator
-        XCTAssertEqual(secondOperator?.rawValue, "*")
+        XCTAssertEqual(secondOperator?.rawValue, "+")
         
         var operands = ExpressionParser.parse(from: String).operands
         
