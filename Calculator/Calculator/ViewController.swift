@@ -97,6 +97,24 @@ extension ViewController {
         initformulaeStackView()
     }
     
+    func appendFormulaToFormulae(`operator`: String, operand: String) {
+        let formulaStackView: UIStackView = UIStackView()
+        let operatorLabel: UILabel = UILabel()
+        let operandLabel: UILabel = UILabel()
+        
+        operatorLabel.text = `operator`
+        operandLabel.text = operand
+        
+        formulaStackView.axis = .horizontal
+        formulaStackView.alignment = .fill
+        formulaStackView.spacing = 8
+        
+        formulaStackView.addSubview(operatorLabel)
+        formulaStackView.addSubview(operandLabel)
+        
+        formulaeStackView.addSubview(formulaStackView)
+    }
+    
     func convertSign(from operand: String) -> String {
         guard let sign = operand.first, sign == "-" else {
             return "-" + operand
