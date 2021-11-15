@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var enQueueElements: [Element] = []
     private(set) var deQueueElements: [Element] = []
     
@@ -24,5 +24,9 @@ struct CalculatorItemQueue<Element>: CalculateItem {
             enQueueElements.removeAll()
         }
         return deQueueElements.removeLast()
+    }
+    
+    init(_ enQueueElements: [Element] = []) {
+        self.enQueueElements = enQueueElements
     }
 }
