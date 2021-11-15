@@ -11,6 +11,7 @@
 		84756DEC273A701A00131DA0 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84756DEB273A701A00131DA0 /* CalculateItem.swift */; };
 		84756DF5273A738200131DA0 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84756DF4273A738200131DA0 /* CalculatorTests.swift */; };
 		84756DFE273A745100131DA0 /* CalculateItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84756DE8273A700C00131DA0 /* CalculateItemQueue.swift */; };
+		8476CE2527422F83009DB750 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE2427422F83009DB750 /* FormulaTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 		84756DF2273A738200131DA0 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84756DF4273A738200131DA0 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		84756DF6273A738200131DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8476CE2427422F83009DB750 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				84756DF4273A738200131DA0 /* CalculatorTests.swift */,
 				84756DF6273A738200131DA0 /* Info.plist */,
+				8476CE2427422F83009DB750 /* FormulaTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84756DF5273A738200131DA0 /* CalculatorTests.swift in Sources */,
+				8476CE2527422F83009DB750 /* FormulaTests.swift in Sources */,
 				84756DFE273A745100131DA0 /* CalculateItemQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

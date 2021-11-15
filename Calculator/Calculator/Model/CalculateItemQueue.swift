@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct Formula {
+    mutating func result() -> Double {
+        return 1.1
+    }
+}
+
 struct CalculateItemQueue<Element: CalculateItem> {
     private(set) var items: [Element] = []
     
