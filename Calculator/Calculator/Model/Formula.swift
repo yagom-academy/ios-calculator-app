@@ -14,7 +14,9 @@ struct Formula {
                 throw FormulaError.queueIsEmpty
             }
             
-            guard $1 != .divide, nextOperand != 0 else {
+            print("*** $1 : \($1), nextOperand : \(nextOperand)")
+            
+            if $1 == .divide, nextOperand == 0 {
                 throw FormulaError.dividedByZero
             }
             
