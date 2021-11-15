@@ -9,7 +9,12 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        let splittedSubstrings = self.split(separator: target)
-        return splittedSubstrings.map { String($0) }
+        let targetString = String(target)
+        let splittedStrings = self.components(separatedBy: targetString)
+                                  .flatMap { [$0, targetString] }
+                                  .dropLast()
+                                  .filter { !$0.isEmpty }
+                                  .map { String($0) }
+        return splittedStrings
     }
 }
