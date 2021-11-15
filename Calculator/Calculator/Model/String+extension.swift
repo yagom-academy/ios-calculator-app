@@ -13,18 +13,14 @@ extension String {
         var seperatedValue: [String] = []
         var valueToSeperate: String = self
         
-        while true {
-            if let targetIndex:String.Index = valueToSeperate.firstIndex(of: target) {
-                let targetBeforeValue = valueToSeperate[..<targetIndex]
-                let targetAfterValue = valueToSeperate[index(after: targetIndex)...]
-                
-                seperatedValue.append(String(targetBeforeValue))
-                seperatedValue.append(String(target))
-                
-                valueToSeperate = String(targetAfterValue)
-            } else {
-                break
-            }
+        while let targetIndex:String.Index = valueToSeperate.firstIndex(of: target) {
+            let targetBeforeValue = valueToSeperate[..<targetIndex]
+            let targetAfterValue = valueToSeperate[index(after: targetIndex)...]
+            
+            seperatedValue.append(String(targetBeforeValue))
+            seperatedValue.append(String(target))
+            
+            valueToSeperate = String(targetAfterValue)
         }
         seperatedValue.append(valueToSeperate)
         
