@@ -30,5 +30,3 @@ enum ExpressionParser {
         return operands
     }
 }
-
-
