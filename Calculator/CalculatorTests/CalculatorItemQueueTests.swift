@@ -122,16 +122,14 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, -123)
     }
     
-    func test_연산자_queue가_비어있을때_dequeue시_nil_반환() {
-        var formula = Formula()
-        let result = try! formula.operators.dequeue()
-        XCTAssertNil(result)
+    func test_연산자_queue가_비어있을때_dequeue시_Error_Throw() {
+        var formula = Formula.init()
+        XCTAssertThrowsError(try formula.operands.dequeue())
     }
     
-    func test_숫자_queue가_비어있을때_dequeue시_nil_반환() {
-        var formula = Formula()
-        let result = try! formula.operators.dequeue()
-        XCTAssertNil(result)
+    func test_숫자_queue가_비어있을때_dequeue시_Error_Throw() {
+        var formula = Formula.init()
+        XCTAssertThrowsError(try formula.operands.dequeue())
     }
 
 }
