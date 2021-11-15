@@ -13,7 +13,7 @@ class Formula_Tests: XCTestCase {
     var testOperands: [Double] = []
     var testOperators: [Operator] = []
     
-    func test_reult호출시_연산결과를_반환한다() {
+    func test_result호출시_연산결과를_반환한다() {
         testOperands = [1.0, 2.0, -3.0, 4.0, 5.0]
         testOperators = [.add, .subtract, .divide, .multiply]
         let operands = CalculatorItemQueue(testOperands)
@@ -22,5 +22,16 @@ class Formula_Tests: XCTestCase {
         let result = sut.result()
         
         XCTAssertEqual(result, 7.5)
+    }
+    
+    func test_result호출시_연산과정중_NaN이나오면_NaN을_반환한다() {
+        testOperands = [1.0, 2.0, -3.0, 0.0, 5.0]
+        testOperators = [.add, .subtract, .divide, .multiply]
+        let operands = CalculatorItemQueue(testOperands)
+        let operators = CalculatorItemQueue(testOperators)
+        sut = Formula(operands: operands, operators: operators)
+        let result = sut.result()
+        
+        XCTAssertTrue(result.isNaN)
     }
 }
