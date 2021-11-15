@@ -10,6 +10,10 @@ import Foundation
 struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items = LinkedList<Element>()
     
+    var isEmpty: Bool {
+        return self.items.isEmpty
+    }
+    
     func enqueue(_ value: Element) {
         items.appendNode(value: value)
     }
