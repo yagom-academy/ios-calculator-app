@@ -42,7 +42,11 @@ extension ViewController {
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
+        guard let currentOperandButtionTitle = sender.currentTitle else {
+            return
+        }
         
+        operatorLabel.text = currentOperandButtionTitle
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
