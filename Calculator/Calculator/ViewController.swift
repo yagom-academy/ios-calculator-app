@@ -56,6 +56,9 @@ extension ViewController {
         }
     
         if displayOperand == "0" {
+            guard currentOperandButtonTitle != "00" else {
+                return
+            }
             displayOperand = currentOperandButtonTitle
         } else {
             displayOperand = displayOperand + currentOperandButtonTitle
