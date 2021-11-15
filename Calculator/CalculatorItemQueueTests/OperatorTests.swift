@@ -8,25 +8,40 @@
 import XCTest
 
 class OperatorTests: XCTestCase {
-
+    var sut: Operator!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = Operator(rawValue: "+")
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_when_case_is_add() {
+        sut = .add
+        
+        XCTAssertEqual(try sut.calculate(lhs: 10, rhs: 4), 14)
     }
+    
+    func test_when_case_is_subtract() {
+        sut = .subtract
+        
+        XCTAssertEqual(try sut.calculate(lhs: 10, rhs: 4), 6)
+    }
+    
+    func test_when_case_is_divide() {
+        sut = .divide
+        
+        XCTAssertEqual(try sut.calculate(lhs: 10, rhs: 4), 2.5)
+    }
+    
+    func test_when_case_is_multiply() {
+        sut = .multiply
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertEqual(try sut.calculate(lhs: 10, rhs: 4), 40)
     }
 
 }
