@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     private let calculatorManager = CalculatorManager(isCalculating: false)
     
     @IBOutlet weak var formulaeScrollView: UIScrollView!
-    @IBOutlet weak var formulaeStackView: UIStackView!
+    @IBOutlet weak var formulasStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     
@@ -100,7 +100,7 @@ extension ViewController {
     }
     
     func initformulaeStackView() {
-        formulaeStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
+        formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
     }
     
     func initAllDisplay() {
@@ -127,7 +127,7 @@ extension ViewController {
         formulaRowStackView.addArrangedSubview(operatorLabel)
         formulaRowStackView.addArrangedSubview(operandLabel)
         
-        formulaeStackView.addArrangedSubview(formulaRowStackView)
+        formulasStackView.addArrangedSubview(formulaRowStackView)
     }
     
     func convertSign(from operand: String) -> String {
