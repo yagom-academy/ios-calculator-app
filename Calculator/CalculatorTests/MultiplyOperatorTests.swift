@@ -21,21 +21,21 @@ class MultiplyOperatorTests: XCTestCase {
         sut = nil
     }
     
-    func testMultiplyTwoNumbers() {
+    func testMultiplyTwoNumbers() throws {
         let firstNumber = 3.0
         let secondNumber = 6.0
         
-        let calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
+        let calculatedResult = try sut.calculate(lhs: firstNumber, rhs: secondNumber)
         XCTAssertEqual(calculatedResult, firstNumber * secondNumber)
     }
     
-    func testMultiplyThreeNumbers() {
+    func testMultiplyThreeNumbers() throws {
         let firstNumber = 6.0
         let secondNumber = 9.0
         let thirdNumber = 96.0
         
-        var calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
-        calculatedResult = sut.calculate(lhs: calculatedResult, rhs: thirdNumber)
+        var calculatedResult = try sut.calculate(lhs: firstNumber, rhs: secondNumber)
+        calculatedResult = try sut.calculate(lhs: calculatedResult, rhs: thirdNumber)
         
         XCTAssertEqual(calculatedResult, firstNumber * secondNumber * thirdNumber)
     }

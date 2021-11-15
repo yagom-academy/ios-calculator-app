@@ -21,31 +21,31 @@ class DivideOperatorTests: XCTestCase {
         sut = nil
     }
     
-    func testDivideTwoNumbers() {
+    func testDivideTwoNumbers() throws {
         let firstNumber = 3.0
         let secondNumber = 6.0
         
-        let calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
+        let calculatedResult = try sut.calculate(lhs: firstNumber, rhs: secondNumber)
         XCTAssertEqual(calculatedResult, firstNumber / secondNumber)
     }
     
-    func testDivideThreeNumbers() {
+    func testDivideThreeNumbers() throws {
         let firstNumber = 6.0
         let secondNumber = 9.0
         let thirdNumber = 96.0
         
-        var calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
-        calculatedResult = sut.calculate(lhs: calculatedResult, rhs: thirdNumber)
+        var calculatedResult = try sut.calculate(lhs: firstNumber, rhs: secondNumber)
+        calculatedResult = try sut.calculate(lhs: calculatedResult, rhs: thirdNumber)
         
         XCTAssertEqual(calculatedResult, firstNumber / secondNumber / thirdNumber)
     }
     
-    func testDivideUsingOne() {
+    func testDivideUsingOne() throws {
         let firstNumber = 36.0
         let secondNumber = 0.0
         
-        var calculatedResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
-        
-        XCTAssertThrowsError(calculatedResult)
+        XCTAssertThrowsError(try sut.calculate(lhs: firstNumber, rhs: secondNumber)) { error in
+            XCTAssertEqual(error as? OperatorError, OperatorError.divisionByZero)
+        }
     }
 }
