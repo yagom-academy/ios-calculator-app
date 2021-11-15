@@ -51,46 +51,33 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
-        guard let currentOperandLabelTitle = operandLabel.text else {
-            return
-        }
-        
         guard let currentOperandButtonTitle = sender.currentTitle else {
             return
         }
     
-        if currentOperandLabelTitle == "0" {
-            operandLabel.text = currentOperandButtonTitle
+        if displayOperand == "0" {
+            displayOperand = currentOperandButtonTitle
         } else {
-            operandLabel.text = currentOperandLabelTitle + currentOperandButtonTitle
+            displayOperand = displayOperand + currentOperandButtonTitle
         }
     }
     
     @IBAction private func touchUpDecimalPoint(_ sender: UIButton) {
-        guard let currentOperandLabelTitle = operandLabel.text else {
-            return
-        }
-        
         guard let decimalPointButtonTitle = sender.currentTitle else {
             return
         }
         
-        guard !currentOperandLabelTitle.contains(".") else { return }
+        guard !displayOperand.contains(".") else { return }
         
-        operandLabel.text = currentOperandLabelTitle + decimalPointButtonTitle
+        displayOperand = displayOperand + decimalPointButtonTitle
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
-        guard let currentOperandLabelTitle = operandLabel.text else {
-            return
-        }
-        
         guard let currentOperandButtionTitle = sender.currentTitle else {
             return
         }
         
-        appendFormulaToformulas(operator: displayOperator,
-                                operand: currentOperandLabelTitle)
+        appendFormulaToformulas(operator: displayOperator, operand: displayOperand)
         
         displayOperator = currentOperandButtionTitle
         initOperandLabel()
@@ -105,33 +92,24 @@ extension ViewController {
     }
     
     @IBAction private func touchUpSignConversion(_ sender: UIButton) {
-        guard let currentOperandLabelTitle = operandLabel.text else {
+        guard displayOperand != "0" else {
             return
         }
         
-        guard currentOperandLabelTitle != "0" else {
-            return
-        }
-        
-        let convertedOperand = convertSign(from: currentOperandLabelTitle)
-        operandLabel.text = convertedOperand
+        let convertedOperand = convertSign(from: displayOperand)
+        displayOperand = convertedOperand
     }
     
     @IBAction private func touchUpEqualSign(_ sender: UIButton) {
-        guard let currentOperandLabelTitle = operandLabel.text else {
-            return
-        }
-        
-        appendFormulaToformulas(operator: displayOperator,
-                                operand: currentOperandLabelTitle)
+        appendFormulaToformulas(operator: displayOperator, operand: displayOperand)
         
         let formulaString: String = assembleFormula()
         var formula: Formula = ExpressionParser.parse(from: formulaString)
         
         do {
-            operandLabel.text = String(try formula.result())
+            displayOperand = String(try formula.result())
         } catch OperationError.devidedByZero {
-            operandLabel.text = "NaN"
+            displayOperand = "NaN"
         } catch {
             print(error.localizedDescription)
         }
@@ -146,7 +124,7 @@ extension ViewController {
     }
     
     func initOperandLabel() {
-        operandLabel.text = "0"
+        displayOperand = "0"
     }
     
     func initformulasStackView() {
