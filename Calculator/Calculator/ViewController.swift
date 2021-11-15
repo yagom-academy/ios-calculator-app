@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initOperandAndOperatorLabel()
     }
 }
 
@@ -42,5 +44,14 @@ extension ViewController {
     
     @IBAction private func touchUPEqualSign(_ sender: UIButton) {
         
+    }
+}
+
+// MARK: - private Methods
+
+extension ViewController {
+    func initOperandAndOperatorLabel() {
+        operatorLabel.text = ""
+        operandLabel.text = "0"
     }
 }
