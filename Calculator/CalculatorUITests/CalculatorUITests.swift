@@ -9,12 +9,14 @@ import XCTest
 
 class CalculatorUITests: XCTestCase {
 
+    let app = XCUIApplication()
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
+        app.launch()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
@@ -32,21 +34,28 @@ class CalculatorUITests: XCTestCase {
     }
     
     func test_숫자버튼_누르면_inputedOperandLabel_에_추가된다() {
-        let app = XCUIApplication()
-        app.launch()
-        
-        app/*@START_MENU_TOKEN@*/.staticTexts["1"]/*[[".buttons[\"1\"].staticTexts[\"1\"]",".staticTexts[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["2"]/*[[".buttons[\"2\"].staticTexts[\"2\"]",".staticTexts[\"2\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["3"]/*[[".buttons[\"3\"].staticTexts[\"3\"]",".staticTexts[\"3\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["4"]/*[[".buttons[\"4\"].staticTexts[\"4\"]",".staticTexts[\"4\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["5"]/*[[".buttons[\"5\"].staticTexts[\"5\"]",".staticTexts[\"5\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["1"].tap()
+        app.buttons["2"].tap()
+        app.buttons["3"].tap()
+        app.buttons["4"].tap()
+        app.buttons["5"].tap()
         app.buttons["6"].tap()
         app.buttons["7"].tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["8"]/*[[".buttons[\"8\"].staticTexts[\"8\"]",".staticTexts[\"8\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["9"]/*[[".buttons[\"9\"].staticTexts[\"9\"]",".staticTexts[\"9\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["8"].tap()
+        app.buttons["9"].tap()
         app.buttons["0"].tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["00"]/*[[".buttons[\"00\"].staticTexts[\"00\"]",".staticTexts[\"00\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.staticTexts["."].tap()
+        app.buttons["00"].tap()
+        app.buttons["."].tap()
+        
+    }
+    
+    func test_연산자버튼_누르면_스크롤뷰로_올라간다() {
+        app.buttons["1"].tap()
+        app.buttons["2"].tap()
+        app.buttons["×"].tap()
+        app.buttons["4"].tap()
+        app.buttons["2"].tap()
+        
     }
 
     func testLaunchPerformance() throws {
