@@ -11,14 +11,12 @@ import XCTest
 class OperatorTests: XCTestCase {
 
     func test_영점일_더하기_영점이_계산하면_영점삼을_반환한다() {
-        
         let result = Operator.add.calculate(lhs: 0.1, rhs: 0.2)
         
         XCTAssertEqual(Decimal(result), 0.3)
     }
     
     func test_일_더하기_이_계산하면_삼을_반환한다() {
-        
         let result = Operator.add.calculate(lhs: 1.0, rhs: 2.0)
         
         XCTAssertEqual(Decimal(result), 3.0)
@@ -30,11 +28,22 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(Decimal(result), -0.8565)
     }
     
-    func test_일_곱하기_이_계산하면_삼을_반환한다() {
+    func test_일_빼기_이_계산하면_삼을_반환한다() {
+        let result = Operator.substract.calculate(lhs: 1.0, rhs: 2.0)
         
+        XCTAssertEqual(Decimal(result), -1.0)
+    }
+    
+    func test_일_곱하기_이_계산하면_삼을_반환한다() {
         let result = Operator.multiply.calculate(lhs: 1.0, rhs: 2.0)
         
         XCTAssertEqual(Decimal(result), 2.0)
+    }
+    
+    func test_마이너스일_곱하기_이_계산하면_삼을_반환한다() {
+        let result = Operator.multiply.calculate(lhs: -1.0, rhs: 2.0)
+        
+        XCTAssertEqual(Decimal(result), -2.0)
     }
     
 }
