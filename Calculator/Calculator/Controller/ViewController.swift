@@ -49,6 +49,26 @@ class ViewController: UIViewController {
         inputedOperandLabel.text = operand
     }
     
+    @IBAction private func operatorDidTap(_ sender: UIButton) {
+        operand = ""
+        inputedOperatorLabel.text = operators(for: sender)
+    }
+    
+    private func operators(for buttton: UIButton) -> String {
+        switch buttton {
+        case addButton:
+            return "+"
+        case subtractButton:
+            return "-"
+        case divideButton:
+            return "/"
+        case multiplyButton:
+            return "*"
+        default:
+            return ""
+        }
+    }
+    
     private func operands(for button: UIButton) -> String {
         switch button {
         case inputDotButton:
