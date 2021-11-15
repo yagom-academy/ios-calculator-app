@@ -27,5 +27,27 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operands.dequeue() as? Double, -1.0)
         XCTAssertEqual(operands.dequeue() as? Double, 0.4)
     }
+    
+    func test_마이너스를_포함한_계산식을_넣으면_연산자가_구분되어_반환한다() {
+        let String = "15*-1+0.462−53"
+        
+        var operators = ExpressionParser.parse(from: String).operators
+        
+        let firstOperator = operators.dequeue() as? Operator
+        XCTAssertEqual(firstOperator?.rawValue, "*")
+        
+        let secondOperator = operators.dequeue() as? Operator
+        XCTAssertEqual(secondOperator?.rawValue, "+")
+        
+        let thirdOperator = operators.dequeue() as? Operator
+        XCTAssertEqual(thirdOperator?.rawValue, "−")
+        
+        var operands = ExpressionParser.parse(from: String).operands
+        
+        XCTAssertEqual(operands.dequeue() as? Double, 15.0)
+        XCTAssertEqual(operands.dequeue() as? Double, -1.0)
+        XCTAssertEqual(operands.dequeue() as? Double, 0.462)
+        XCTAssertEqual(operands.dequeue() as? Double, 53.0)
+    }
 
 }
