@@ -36,6 +36,6 @@ extension ViewController {
     }
     
     @IBAction private func touchUPEqualSign(_ sender: UIButton) {
-        print(1 + 3)
+        
     }
 }
