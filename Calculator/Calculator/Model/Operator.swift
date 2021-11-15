@@ -12,7 +12,6 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case substract = "−"
     case divide = "/"
     case multiply = "*"
-    
 }
 
 extension Operator {
@@ -57,6 +56,3 @@ extension Operator {
         return result
     }
 }
-
-
-

@@ -12,7 +12,6 @@ struct Formula {
     var operators: CalculatorItemQueue?
     
     mutating func result() -> Double {
-        
         guard var leftOperand = operands?.dequeue() as? Double else {
             return Double.zero
         }
