@@ -21,6 +21,18 @@ class ViewController: UIViewController {
         }
     }
     
+    private var displayOperand: String {
+        get {
+            guard let operand = operandLabel.text else {
+                return ""
+            }
+            return operand
+        }
+        set {
+            operandLabel.text = newValue
+        }
+    }
+    
     @IBOutlet weak var formulasScrollView: UIScrollView!
     @IBOutlet weak var formulasStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
