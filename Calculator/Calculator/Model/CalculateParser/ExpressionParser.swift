@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) -> Formula {
+    static func parse(from input: String) throws -> Formula {
         let operands = CalculatorItemQueue<Double>()
         let operators = CalculatorItemQueue<Operator>()
         
@@ -20,9 +20,14 @@ enum ExpressionParser {
                 operands.enqueue($0)
             }
         
-        splittedInput
+        try splittedInput
             .filter { Double($0) == nil }
-            .compactMap { Operator(rawValue: Character($0)) }
+            .map {
+                guard let newOperator = Operator(rawValue: Character($0)) else {
+                    throw CalculatorError.unknownOperator
+                }
+                return newOperator
+            }
             .forEach {
                 operators.enqueue($0)
             }

@@ -8,17 +8,32 @@
 import XCTest
 
 class ExpressionParserTests: XCTestCase {
+    
+    var sutResult: Double!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sutResult = 0.0
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sutResult = nil
+    }
 
     func test_2_더하기_3_빼기_4_더하기_5의_parse_result로_6을_반환하는가() {
         // given
         let form = "2 + 3 − 4 + 5"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, 6.0)
-        
+        XCTAssertEqual(sutResult, 6.0)
     }
     
     func test_2_더하기_3_곱하기_3_빼기_1의_result로_14를_반환하는가() {
@@ -26,10 +41,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "2 + 3 × 3 − 1"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, 14.0)
+        XCTAssertEqual(sutResult, 14.0)
         
     }
     
@@ -38,10 +57,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "3 ÷ 3 + 2 − 1"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, 2.0)
+        XCTAssertEqual(sutResult, 2.0)
         
     }
     
@@ -50,10 +73,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "1 + 2 − 3 × 2 − 3 ÷ 6"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, -0.5)
+        XCTAssertEqual(sutResult, -0.5)
         
     }
     
@@ -62,10 +89,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "1 + 2 − -3 × 2 − 3 ÷ 6"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, 9.0/6.0)
+        XCTAssertEqual(sutResult, 9.0/6.0)
         
     }
     
@@ -74,10 +105,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "1 + -2 − 3 × 2 − 3 ÷ 6"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, -11.0/6.0)
+        XCTAssertEqual(sutResult, -11.0/6.0)
         
     }
     
@@ -86,10 +121,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "1 + 2 − 3 × -2 − 3 ÷ 6"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, -3.0/6.0)
+        XCTAssertEqual(sutResult, -3.0/6.0)
         
     }
     
@@ -98,10 +137,14 @@ class ExpressionParserTests: XCTestCase {
         let form = "1 + 2 − 3 × 2 − 3 ÷ -6"
         
         // when
-        let result = ExpressionParser.parse(from: form).result()
+        do {
+            sutResult = try ExpressionParser.parse(from: form).result()
+        } catch {
+            XCTAssertTrue(false)
+        }
         
         // then
-        XCTAssertEqual(result, 3.0/6.0)
+        XCTAssertEqual(sutResult, 3.0/6.0)
         
     }
     
@@ -111,7 +154,7 @@ class ExpressionParserTests: XCTestCase {
         
         // when
         // then
-        XCTAssertThrowsError(ExpressionParser.parse(from: form))
+        XCTAssertThrowsError(try ExpressionParser.parse(from: form))
         
     }
 }
