@@ -25,6 +25,14 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(isSameFormula(formula: &resultFormula, otherFormula: &mockFormula))
     }
     
+    func testExpressionParserParse_givenOnlyOperators_expectCorrectFormula() {
+        let testOperands: [Double] = []
+        let testOperators: [Operator] = [.add, .divide, .subtract, .multiply]
+        var mockFormula = Formula(operands: createQueue(with: testOperands), operators: createQueue(with: testOperators))
+        var resultFormula = ExpressionParser.parse(from: "+/-*")
+        XCTAssertTrue(isSameFormula(formula: &resultFormula, otherFormula: &mockFormula))
+    }
+    
     private func createQueue<T>(with elements: [T]) -> CalculatorItemQueue<T> {
         var queue = CalculatorItemQueue<T>()
         for element in elements {
