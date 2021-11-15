@@ -46,12 +46,25 @@ class ViewController: UIViewController {
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
         operand += operands(for: sender)
-        inputedOperandLabel.text = operand
+        inputedOperandLabel.text = numberFormatter(inputOperand: operand)
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
-        operand = ""
-        inputedOperatorLabel.text = operators(for: sender)
+    }
+    
+    private func numberFormatter(inputOperand: String) -> String? {
+        guard let operand = Double(inputOperand) else {
+            return ""
+        }
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        //numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximum = 20
+        
+        return numberFormatter.string(for: operand)
     }
     
     private func operators(for buttton: UIButton) -> String {
