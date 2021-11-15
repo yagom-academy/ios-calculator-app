@@ -11,6 +11,10 @@ struct CalculateItemQueue<T: CalculateItem> {
     private var enqueueStack: [T] = []
     private var dequeueStack: [T] = []
     
+    var isEmpty: Bool {
+        enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
+    
     init(enqueueStack: [T]) {
         self.enqueueStack = enqueueStack
     }
