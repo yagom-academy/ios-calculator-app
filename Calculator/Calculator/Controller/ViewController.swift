@@ -11,6 +11,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
+    var isCalculated: Bool {
+        operandLabel.text != "0"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpFormulaLabel()
@@ -28,7 +32,7 @@ class ViewController: UIViewController {
         guard Int(operandLabel.text!) != Int(currentOperandButtonText) else {
             return
         }
-        guard operandLabel.text != "0" else {
+        guard isCalculated else {
             operandLabel.text! = currentOperandButtonText
             return
         }
@@ -36,7 +40,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard operandLabel.text != "0" else {
+        guard isCalculated else {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
