@@ -104,4 +104,14 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, 3.0/6.0)
         
     }
+    
+    func test_잘못된_연산자를_포함하여_1_더하기_2_빼기_3_곱하기_2_빼기_3_나누기_음수6_의_result로_오류를_반환하는가() {
+        // given
+        let form = "1 + 2 − 3 * 2 − 3 / -6"
+        
+        // when
+        // then
+        XCTAssertThrowsError(ExpressionParser.parse(from: form))
+        
+    }
 }
