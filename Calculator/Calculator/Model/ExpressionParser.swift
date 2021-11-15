@@ -32,9 +32,9 @@ enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
         let operatorRawValues = Operator.allCases.map{ $0.rawValue }
         
-        let trimmedInput = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        let inputWithoutWhitespace = input.components(separatedBy: .whitespacesAndNewlines).joined()
         
-        let components = operatorRawValues.reduce([trimmedInput]) {
+        let components = operatorRawValues.reduce([inputWithoutWhitespace]) {
             (result: [String], operatorRawValue: Character) in
             return result.flatMap { $0.split(with: operatorRawValue) }
         }
