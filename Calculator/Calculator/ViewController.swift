@@ -46,7 +46,7 @@ extension ViewController {
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
-        
+        initAllDisplay()
     }
     
     @IBAction private func touchUpClearError(_ sender: UIButton) {
