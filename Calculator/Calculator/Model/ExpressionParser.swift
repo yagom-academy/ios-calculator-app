@@ -31,10 +31,3 @@ enum ExpressionParser {
     }
 }
 
-extension String {
-    func split(with target: Character) -> [String] {
-        return self
-            .split(separator: target)
-            .compactMap { String($0) }
-    }
-}
