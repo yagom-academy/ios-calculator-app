@@ -20,18 +20,18 @@ struct Formula {
         
         calculationResult = firstOperand
         
-        while operands.items.count > 0 && operators.items.count > 0 {
-            guard let nextOperand = operands.dequeue() else {
+        while operands.hasOneOrMoreItems && operators.hasOneOrMoreItems {
+            guard let operand = operands.dequeue() else {
                 throw QueueError.queueIsEmpty
             }
             
-            guard let nextOperator = operators.dequeue() else {
+            guard let `operator` = operators.dequeue() else {
                 throw QueueError.queueIsEmpty
             }
             
-            let nextCalculationResult = try nextOperator.calculate(lhs: calculationResult, rhs: nextOperand)
+            let newCalculationResult = try `operator`.calculate(lhs: calculationResult, rhs: operand)
             
-            calculationResult = nextCalculationResult
+            calculationResult = newCalculationResult
         }
         
         return calculationResult
