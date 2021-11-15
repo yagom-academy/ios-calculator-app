@@ -7,7 +7,12 @@
 
 import Foundation
 
-enum ExpressionParser {
+enum ExpressionParser { }
+
+// MARK: static method
+extension ExpressionParser {
+    
+    // MARK: internal
     static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue()
         var operators = CalculatorItemQueue()
@@ -18,6 +23,7 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
+    // MARK: private
     private static func componentByOperators(from input: String) -> [String] {
         return Operator.allCases.reduce([input]) { (result,`operator`) in
             result.flatMap { $0.split(with: `operator`.rawValue )} }
