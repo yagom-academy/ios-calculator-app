@@ -13,7 +13,7 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
-		C917CD50273E01FE00E0F939 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD0D273D73090076ED33 /* QueueError.swift */; };
+		C917CD50273E01FE00E0F939 /* DataExtractionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD0D273D73090076ED33 /* DataExtractionError.swift */; };
 		C917CD52273E06ED00E0F939 /* StringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD51273E06ED00E0F939 /* StringTest.swift */; };
 		C917CD54273E083700E0F939 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD53273E083700E0F939 /* Extension+String.swift */; };
 		C917CD55273E086D00E0F939 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD53273E083700E0F939 /* Extension+String.swift */; };
@@ -38,7 +38,7 @@
 		C9F7BD05273CFD1E0076ED33 /* FomulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD04273CFD1E0076ED33 /* FomulaTest.swift */; };
 		C9F7BD07273D068C0076ED33 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD06273D068C0076ED33 /* Formula.swift */; };
 		C9F7BD08273D08EE0076ED33 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD06273D068C0076ED33 /* Formula.swift */; };
-		C9F7BD0E273D73090076ED33 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD0D273D73090076ED33 /* QueueError.swift */; };
+		C9F7BD0E273D73090076ED33 /* DataExtractionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F7BD0D273D73090076ED33 /* DataExtractionError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +77,7 @@
 		C9F7BCFF273CF0400076ED33 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		C9F7BD04273CFD1E0076ED33 /* FomulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FomulaTest.swift; sourceTree = "<group>"; };
 		C9F7BD06273D068C0076ED33 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
-		C9F7BD0D273D73090076ED33 /* QueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
+		C9F7BD0D273D73090076ED33 /* DataExtractionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtractionError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,7 @@
 		C9F7BD0C273D72FD0076ED33 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				C9F7BD0D273D73090076ED33 /* QueueError.swift */,
+				C9F7BD0D273D73090076ED33 /* DataExtractionError.swift */,
 				C917CD5B273E412D00E0F939 /* OperationError.swift */,
 			);
 			path = Error;
@@ -301,7 +301,7 @@
 				C9F7BCF2273A44480076ED33 /* CalculatorItemQueue.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C9F7BD00273CF0400076ED33 /* Operator.swift in Sources */,
-				C9F7BD0E273D73090076ED33 /* QueueError.swift in Sources */,
+				C9F7BD0E273D73090076ED33 /* DataExtractionError.swift in Sources */,
 				C917CD54273E083700E0F939 /* Extension+String.swift in Sources */,
 				C9F7BCEB273A1F1E0076ED33 /* LinkedList.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
@@ -319,7 +319,7 @@
 				C9F7BCF6273A4F1F0076ED33 /* CalculateItem.swift in Sources */,
 				C917CD52273E06ED00E0F939 /* StringTest.swift in Sources */,
 				C917CD57273E09BA00E0F939 /* ExpressionParserTest.swift in Sources */,
-				C917CD50273E01FE00E0F939 /* QueueError.swift in Sources */,
+				C917CD50273E01FE00E0F939 /* DataExtractionError.swift in Sources */,
 				C9F7BCEC273A3A0F0076ED33 /* LinkedList.swift in Sources */,
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
 				C9F7BCF3273A44E20076ED33 /* CalculatorItemQueue.swift in Sources */,
