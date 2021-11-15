@@ -18,10 +18,12 @@ class ViewController: UIViewController {
         
         initOperandLabel()
         initOperatorLabel()
+        initformulaeStackView()
     }
 }
 
 // MARK: - Actions
+
 extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
         
@@ -52,12 +54,10 @@ extension ViewController {
 
 extension ViewController {
     func initOperatorLabel() {
-        
         operatorLabel.text = ""
     }
     
     func initOperandLabel() {
-        
         operandLabel.text = "0"
     }
     
