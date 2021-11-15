@@ -21,7 +21,7 @@ class FomulaTest: XCTestCase {
     
     func test_처음_연산할_때_피연산자가_없는_상태인_경우_에러를_반환하는지() throws {
         XCTAssertThrowsError(try formula.result()) { error in
-            XCTAssertEqual(error as? QueueError, QueueError.queueIsEmpty)
+            XCTAssertEqual(error as? DataExtractionError, DataExtractionError.hasNoElement)
         }
     }
     
