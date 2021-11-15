@@ -9,11 +9,11 @@ struct Formula {
         self.operators = operators
     }
     
-    mutating func result() -> Double? {
+    mutating func result() -> Double {
         var result: Double = 0
-        for _ in 0...operands.countItems()-1 {
+        for _ in 0...operands.countItems-1 {
             let lhs = result
-            guard let rhs = operands.dequeue() else { return nil }
+            guard let rhs = operands.dequeue() else { return 0 }
             
             let `operator` = operators.dequeue()
             do {
