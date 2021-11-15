@@ -26,7 +26,7 @@ fileprivate extension String {
             if char == target {
                 result.append(number)
                 result.append(String(char))
-                number = ""
+                number.removeAll()
             } else {
                 number += String(char)
             }
