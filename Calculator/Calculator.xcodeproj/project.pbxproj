@@ -112,6 +112,15 @@
 			path = Calculator;
 			sourceTree = "<group>";
 		};
+		F353BA4E274267970043C09C /* LinkedList */ = {
+			isa = PBXGroup;
+			children = (
+				F353BA4C274267120043C09C /* Node.swift */,
+				F34BEDE2273AB76100F1A00A /* LinkedList.swift */,
+			);
+			path = LinkedList;
+			sourceTree = "<group>";
+		};
 		F3955A0C273A1FD0004E6163 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,15 +146,14 @@
 		F3E87F18273B60F8000C83CA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F353BA4E274267970043C09C /* LinkedList */,
 				F3955A14273A202E004E6163 /* CalculatorItemQueue.swift */,
-				F34BEDE2273AB76100F1A00A /* LinkedList.swift */,
 				F3666695273E02C5003EC4C2 /* CalculateItem.swift */,
 				F34BEDE4273AB79700F1A00A /* Operator.swift */,
 				F3666697273E0E15003EC4C2 /* Double+extension.swift */,
 				F3666699273E0E6F003EC4C2 /* String+extension.swift */,
 				F366669B273E1201003EC4C2 /* ExpressionParser.swift */,
 				F366669D273E129C003EC4C2 /* Formula.swift */,
-				F353BA4C274267120043C09C /* Node.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
