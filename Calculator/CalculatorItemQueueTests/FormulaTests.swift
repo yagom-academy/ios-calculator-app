@@ -8,25 +8,63 @@
 import XCTest
 
 class FormulaTests: XCTestCase {
-
+    var operands: CalculatorItemQueue<Double>!
+    var operators: CalculatorItemQueue<Operator>!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        operands = CalculatorItemQueue<Double>()
+        operators = CalculatorItemQueue<Operator>()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        operands = nil
+        operators = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_result메서드를_호출했을때_더하기가_잘되는지() {
+        operands.enQueueElement(1994)
+        operands.enQueueElement(1004)
+        operators.enQueueElement(Operator.add)
+        var formula = Formula(operands: operands, operators: operators)
+        
+        XCTAssertEqual(try formula.result(), 2998)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_result메서드를_호출했을때_빼기가_잘되는지() {
+        operands.enQueueElement(1994)
+        operands.enQueueElement(1004)
+        operators.enQueueElement(Operator.subtract)
+        var formula = Formula(operands: operands, operators: operators)
+        
+        XCTAssertEqual(try formula.result(), 990)
     }
-
+    
+    func test_result메서드를_호출했을때_곱하기가_잘되는지() {
+        operands.enQueueElement(10)
+        operands.enQueueElement(4)
+        operators.enQueueElement(Operator.multiply)
+        var formula = Formula(operands: operands, operators: operators)
+        
+        XCTAssertEqual(try formula.result(), 40)
+    }
+    
+    func test_result메서드를_호출했을때_나누기가_잘되는지() {
+        operands.enQueueElement(10)
+        operands.enQueueElement(4)
+        operators.enQueueElement(Operator.divide)
+        var formula = Formula(operands: operands, operators: operators)
+        
+        XCTAssertEqual(try formula.result(), 2.5)
+    }
+   
+    func test_0으로_나누려고할때_에러를_던지는지() {
+        operands.enQueueElement(10)
+        operands.enQueueElement(0)
+        operators.enQueueElement(Operator.divide)
+        var formula = Formula(operands: operands, operators: operators)
+        
+        XCTAssertThrowsError(try formula.result())
+    }
 }
