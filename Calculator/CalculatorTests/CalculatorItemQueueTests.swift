@@ -1,5 +1,5 @@
 //
-//  CalculatorTests.swift
+//  CalculatorItemQueueTests.swift
 //  CalculatorTests
 //
 //  Created by 예거 on 2021/11/08.
@@ -82,7 +82,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_숫자배열에_원소있을때_clearQueueArray메서드로_비워지는지() {
+    func test_숫자배열에_원소있을때_clear메서드로_비워지는지() {
         var operands = CalculatorItemQueue<Double>()
         operands.enqueue(element: 23.222221)
         operands.enqueue(element: 1.5)
@@ -93,7 +93,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_연산자배열에_원소있을때_clearQueueArray메서드로_비워지는지() {
+    func test_연산자배열에_원소있을때_clear메서드로_비워지는지() {
         var operators = CalculatorItemQueue<Operator>()
         operators.enqueue(element: .add)
         operators.enqueue(element: .subtract)
@@ -102,83 +102,5 @@ class CalculatorTests: XCTestCase {
         operators.clear()
         let result = operators.queue.isEmpty
         XCTAssertTrue(result)
-    }
-    
-    // MARK: - Operator 열거형의 계산 메서드 테스트 케이스
-
-    func test_add_케이스에서_calculate메서드_계산_확인() {
-        let result = Operator.add.calculate(20.5, -10.5)
-        let expectation: Double = 10
-        XCTAssertEqual(result, expectation)
-    }
-
-    func test_subtract_케이스에서_calculate메서드_계산_확인() {
-        let result = Operator.subtract.calculate(15.5, -0.5)
-        let expectation: Double = 16
-        XCTAssertEqual(result, expectation)
-    }
-
-    func test_multiply_케이스에서_calculate메서드_계산_확인() {
-        let result = Operator.multiply.calculate(3, -3)
-        let expectation: Double = -9
-        XCTAssertEqual(result, expectation)
-    }
-
-    func test_divide_케이스에서_calculate메서드_계산_확인() {
-        let result = Operator.divide.calculate(1.5, 0.5)
-        let expectation: Double = 3
-        XCTAssertEqual(result, expectation)
-    }
-
-    func test_divide_케이스에서_0으로_나누면_Double타입의_NaN_반환() {
-        let result = Operator.divide.calculate(5, 0)
-        XCTAssertTrue(result.isNaN)
-    }
-    
-    // MARK: - Formula 구조체의 result() 메서드 테스트 케이스
-    
-    func test_result메서드_0으로_나누면_Double타입의_NaN_반환() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 10)
-        formula.operands.enqueue(element: 0)
-        formula.operators.enqueue(element: .divide)
-        let result = formula.result()
-        XCTAssertTrue(result.isNaN)
-    }
-    
-    func test_result메서드_연산자_1개일때_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 2.5)
-        formula.operands.enqueue(element: -2.5)
-        formula.operators.enqueue(element: .subtract)
-        let result = formula.result()
-        let expectation: Double = 5
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_result메서드_연산자_2개일때_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 10)
-        formula.operands.enqueue(element: -2.5)
-        formula.operands.enqueue(element: -4)
-        formula.operators.enqueue(element: .divide)
-        formula.operators.enqueue(element: .multiply)
-        let result = formula.result()
-        let expectation: Double = 16
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_result메서드_연산자_3개일때_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 2)
-        formula.operands.enqueue(element: -4)
-        formula.operands.enqueue(element: 1.5)
-        formula.operands.enqueue(element: 10)
-        formula.operators.enqueue(element: .subtract)
-        formula.operators.enqueue(element: .divide)
-        formula.operators.enqueue(element: .multiply)
-        let result = formula.result()
-        let expectation: Double = 40
-        XCTAssertEqual(result, expectation)
     }
 }
