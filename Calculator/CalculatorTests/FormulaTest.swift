@@ -4,5 +4,8 @@
 //
 //  Created by Seul Mac on 2021/11/15.
 //
+import XCTest
 
-import Foundation
+class FormulaTest: XCTestCase {
+
+}
