@@ -30,7 +30,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         linkedList.removeAll()
     }
     
-    mutating func returnQueue() -> Array<T> {
-        return linkedList.returnList()
+    mutating func convertArray() -> Array<T> {
+        return linkedList.convertArray()
     }
 }
