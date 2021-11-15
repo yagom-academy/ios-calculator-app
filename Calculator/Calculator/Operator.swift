@@ -13,10 +13,13 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            guard let result = try? divide(lhs: lhs, rhs: rhs) else {
+            do {
+                let result = try divide(lhs: lhs, rhs: rhs)
+                return result
+            } catch {
                 return .nan
             }
-            return result
+            
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
