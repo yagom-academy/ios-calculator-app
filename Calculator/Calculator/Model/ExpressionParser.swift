@@ -16,7 +16,9 @@ enum ExpressionParser {
         let separatedInput = componentsByOperators(from: input)
         
         separatedInput.compactMap { Double($0) }.forEach { formula.operands.enqueue($0) }
-        separatedInput.compactMap { Operator(rawValue: Character($0)) }.forEach { formula.operators.enqueue($0) }
+        
+        separatedInput.compactMap { Operator(rawValue: Character($0)) }
+                      .forEach { formula.operators.enqueue($0) }
         
         return formula
     }
