@@ -14,7 +14,10 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "*"
 }
 
+// MARK: method
 extension Operator {
+    
+    // MARK: public
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
@@ -28,6 +31,7 @@ extension Operator {
         }
     }
     
+    // MARK: private
     private func add(lhs: Double, rhs: Double) -> Double {
         let decimalResult: Decimal = Decimal(lhs) + Decimal(rhs)
         let result = Double(truncating: decimalResult as NSNumber)
