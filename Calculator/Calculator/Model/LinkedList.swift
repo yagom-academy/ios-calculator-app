@@ -40,12 +40,12 @@ struct LinkedList<T> {
         rear = rear?.next
     }
     
-    mutating func removeLast() throws -> T {
-        guard let data = front?.data else {
-            throw QueueError.deQueueFailed
-        }
+    mutating func removeFirst() -> T? {
+        let dataOfRemove = front?.data
+        
         front = front?.next
-        return data
+        
+        return dataOfRemove
     }
     
     mutating func removeAll() {
