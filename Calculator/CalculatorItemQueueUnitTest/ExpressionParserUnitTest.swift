@@ -1,15 +1,6 @@
 import XCTest
 
 class ExpressionParserUnitTest: XCTestCase {
-    var sut: ExpressionParser.Type! = ExpressionParser.self
-    
-    override func setUpWithError() throws {
-        
-    }
-
-    override func tearDownWithError() throws {
-        
-    }
     
     func test_더하기_연산자_기준으로_잘_나눠지는지() {
         let splitedArray = "1+2+3".split(with: "+")

@@ -26,8 +26,4 @@ struct Formula {
         
         return result
     }
-    
-    func countOperands() -> Int {
-        return operands.calculatorItems.count
-    }
 }
