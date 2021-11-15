@@ -12,23 +12,21 @@ struct Formula {
     var operators: CalculatorItemQueue?
     
     mutating func result() -> Double {
-        var result = 0.0
         
-        guard var operand1 = operands?.dequeue() as? Double else {
-            return 0.0
+        guard var leftOperand = operands?.dequeue() as? Double else {
+            return Double.zero
         }
         
         while true {
-            guard let operand2 = operands?.dequeue() as? Double else {
+            guard let rightOperand = operands?.dequeue() as? Double else {
                 break
             }
         
             if let `operator` = operators?.dequeue() as? Operator {
-                result = `operator`.calculate(lhs: operand1, rhs: operand2)
+                leftOperand = `operator`.calculate(lhs: leftOperand, rhs: rightOperand)
             }
-            operand1 = result
         }
         
-        return result
+        return leftOperand
     }
 }
