@@ -17,6 +17,8 @@ extension String {
             return components(separatedBy: "/")
         } else if target == Operator.multiply.rawValue {
             return components(separatedBy: "*")
+        } else if target == " " {
+            return components(separatedBy: "")
         }
         return ["0.0"]
     }

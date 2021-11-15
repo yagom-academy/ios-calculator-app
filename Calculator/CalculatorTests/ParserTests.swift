@@ -6,8 +6,28 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class ExpressionParserTests: XCTestCase {
+    var sut: ExpressionParser.Type!
+    
+    override func setUp() {
+        super.setUp()
+        sut = ExpressionParser.self
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        sut = nil
+    }
+    
+    func test_연산자_파싱() {
+        let input = "1.1+2.2-3.3"
+        let result = sut.parse(from: input)
+        let expectedResult: Operator = .subtract
+        XCTAssertEqual(result, expectedResult)
+        
+    }
 }
 
 class StringExtensionParserTests: XCTestCase {
