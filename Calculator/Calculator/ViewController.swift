@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initOperandAndOperatorLabel()
+        initOperandLabel()
+        initOperatorLabel()
     }
 }
 
@@ -50,8 +51,13 @@ extension ViewController {
 // MARK: - private Methods
 
 extension ViewController {
-    func initOperandAndOperatorLabel() {
+    func initOperatorLabel() {
+        
         operatorLabel.text = ""
+    }
+    
+    func initOperandLabel() {
+        
         operandLabel.text = "0"
     }
 }
