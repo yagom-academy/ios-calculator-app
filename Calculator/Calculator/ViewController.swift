@@ -58,7 +58,16 @@ extension ViewController {
     }
     
     @IBAction private func touchUpSignConversion(_ sender: UIButton) {
+        guard let currentOperandLabelTitle = operandLabel.text else {
+            return
+        }
         
+        guard currentOperandLabelTitle != "0" else {
+            return
+        }
+        
+        let convertedOperand = convertSign(from: currentOperandLabelTitle)
+        operandLabel.text = convertedOperand
     }
     
     @IBAction private func touchUPEqualSign(_ sender: UIButton) {
@@ -85,5 +94,13 @@ extension ViewController {
         initOperatorLabel()
         initOperandLabel()
         initformulaeStackView()
+    }
+    
+    func convertSign(from operand: String) -> String {
+        guard let sign = operand.first, sign == "-" else {
+            return "-" + operand
+        }
+        let signIndex: String.Index = operand.index(operand.startIndex, offsetBy: 1)
+        return String(operand[signIndex...])
     }
 }
