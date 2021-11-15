@@ -46,5 +46,12 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func clearButtonTapped(_ sender: UIButton) {
+        guard isCalculated else {
+            return
+        }
+        operandLabel.text = "0"
+    }
+    
 }
 
