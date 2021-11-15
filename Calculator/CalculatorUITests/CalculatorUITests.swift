@@ -33,7 +33,7 @@ class CalculatorUITests: XCTestCase {
     
     func test_숫자버튼_누르면_inputedOperandLabel_에_추가된다() {
         let app = XCUIApplication()
-        let sut = ViewController()
+        app.launch()
         
         app/*@START_MENU_TOKEN@*/.staticTexts["1"]/*[[".buttons[\"1\"].staticTexts[\"1\"]",".staticTexts[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app/*@START_MENU_TOKEN@*/.staticTexts["2"]/*[[".buttons[\"2\"].staticTexts[\"2\"]",".staticTexts[\"2\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
@@ -47,8 +47,6 @@ class CalculatorUITests: XCTestCase {
         app.buttons["0"].tap()
         app/*@START_MENU_TOKEN@*/.staticTexts["00"]/*[[".buttons[\"00\"].staticTexts[\"00\"]",".staticTexts[\"00\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.staticTexts["."].tap()
-        
-        XCTAssertEqual(sut.inputedOperandLabel.text, "123456789000.")
     }
 
     func testLaunchPerformance() throws {
