@@ -125,6 +125,8 @@ extension ViewController {
         } catch {
             print(error.localizedDescription)
         }
+        
+        initOperatorLabel()
     }
 }
 
