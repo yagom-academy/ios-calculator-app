@@ -16,6 +16,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var inbox: [Element]
     private(set) var outbox: [Element]
     
+    init(inbox: [Element] = [], outbox: [Element] = []) {
+        self.inbox = inbox
+        self.outbox = outbox
+    }
+    
     private var CheckDequeueImpossible: Bool {
         return inbox.isEmpty && outbox.isEmpty
     }
@@ -33,11 +38,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
             inbox.removeAll()
         }
         return outbox.removeLast()
-    }
-    
-    init(inbox: [Element] = [], outbox: [Element] = []) {
-        self.inbox = inbox
-        self.outbox = outbox
     }
     
 }

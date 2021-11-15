@@ -14,7 +14,10 @@ enum ExpressionParser {
         let operands = componentsByOperators(from: input).compactMap { Double($0) }
         let operators = input.compactMap { Operator(rawValue: $0) }
         
-        return Formula(operands: CalculatorItemQueue(inbox: operands), operators: CalculatorItemQueue(inbox: operators))
+        return Formula(
+            operands: CalculatorItemQueue(inbox: operands),
+            operators: CalculatorItemQueue(inbox: operators)
+        )
     }
     
     static func componentsByOperators(from input: String) -> [String] {
