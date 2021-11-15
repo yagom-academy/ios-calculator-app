@@ -17,18 +17,7 @@ class ExperssionParserTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-    
-    func test_수식을_입력했을때_componentsByOperators함수에서_숫자만_반환하는가() {
-        // given
-        let input = "1+2−3*4/5"
         
-        // when
-        let result = sut.componentsByOperators(form: input)
-        
-        // then
-        XCTAssertEqual(result, ["1", "2", "3", "4", "5"])
-    }
-    
     func test_수식을_입력했을때_Formula_operands큐에_올바르게_들어가는가() {
         // given
         let input = "1+2−3*4/5"
