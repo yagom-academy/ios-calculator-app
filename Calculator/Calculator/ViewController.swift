@@ -59,6 +59,7 @@ extension ViewController {
                                 operand: currentOperandLabelTitle)
         
         operatorLabel.text = currentOperandButtionTitle
+        initOperandLabel()
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
@@ -125,7 +126,6 @@ extension ViewController {
         
         formulaStackView.addArrangedSubview(operatorLabel)
         formulaStackView.addArrangedSubview(operandLabel)
-        print("a")
         
         formulaeStackView.addArrangedSubview(formulaStackView)
     }
