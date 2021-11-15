@@ -19,11 +19,9 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let separators = CharacterSet(charactersIn: "+-*/")
-        let separatedInputArray = input.components(separatedBy: separators)
-            .map { String($0) }
-        let operatorRawValues = Operator.allCases.compactMap { $0.rawValue }
-        let operandStringArray = operatorRawValues.reduce(separatedInputArray) { (array: [String], operatorCharacter: Character) in
+        let operatorCharacters = Operator.allCases.compactMap { $0.rawValue }
+        let initialArray = [input]
+        let operandStringArray = operatorCharacters.reduce(initialArray) { (array: [String], operatorCharacter: Character) in
             array.flatMap { $0.split(with: operatorCharacter) }
         }
         return operandStringArray
