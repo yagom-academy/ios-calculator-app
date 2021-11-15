@@ -8,60 +8,67 @@
 import XCTest
 
 class FormulaTests: XCTestCase {
-    var sut: Formula!
+    var operands: CalculateItemQueue<Double>!
+    var operators: CalculateItemQueue<Operator>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Formula()
+        operands = CalculateItemQueue<Double>(enqueueStack: [])
+        operators = CalculateItemQueue<Operator>(enqueueStack: [])
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
+        operands = nil
+        operators = nil
     }
 
     func test_2더하기3의결과가_5인지() {
-        sut.operands.enqueue(element: 2)
-        sut.operands.enqueue(element: 3)
-        sut.operators.enqueue(element: .add)
+        operands.enqueue(element: 2)
+        operands.enqueue(element: 3)
+        operators.enqueue(element: .add)
+        var formula = Formula(operands: operands, operators: operators)
         
-        XCTAssertEqual(try sut.result(), 5)
+        XCTAssertEqual(try formula.result(), 5)
     }
     
     func test_2더하기3_곱하기4의결과가_20인지() {
-        sut.operands.enqueue(element: 2)
-        sut.operands.enqueue(element: 3)
-        sut.operands.enqueue(element: 4)
-        sut.operators.enqueue(element: .add)
-        sut.operators.enqueue(element: .multiply)
+        operands.enqueue(element: 2)
+        operands.enqueue(element: 3)
+        operands.enqueue(element: 4)
+        operators.enqueue(element: .add)
+        operators.enqueue(element: .multiply)
+        var formula = Formula(operands: operands, operators: operators)
         
-        XCTAssertEqual(try sut.result(), 20)
+        XCTAssertEqual(try formula.result(), 20)
     }
     
     func test_2더하기3_곱하기4_빼기10의결과가_10인지() {
-        sut.operands.enqueue(element: 2)
-        sut.operands.enqueue(element: 3)
-        sut.operands.enqueue(element: 4)
-        sut.operands.enqueue(element: 10)
-        sut.operators.enqueue(element: .add)
-        sut.operators.enqueue(element: .multiply)
-        sut.operators.enqueue(element: .subtract)
+        operands.enqueue(element: 2)
+        operands.enqueue(element: 3)
+        operands.enqueue(element: 4)
+        operands.enqueue(element: 10)
+        operators.enqueue(element: .add)
+        operators.enqueue(element: .multiply)
+        operators.enqueue(element: .subtract)
+        var formula = Formula(operands: operands, operators: operators)
         
-        XCTAssertEqual(try sut.result(), 10)
+        XCTAssertEqual(try formula.result(), 10)
     }
     
     func test_2더하기3_곱하기4_빼기10_나누기5의결과가_2인지() {
-        sut.operands.enqueue(element: 2)
-        sut.operands.enqueue(element: 3)
-        sut.operands.enqueue(element: 4)
-        sut.operands.enqueue(element: 10)
-        sut.operands.enqueue(element: 5)
-        sut.operators.enqueue(element: .add)
-        sut.operators.enqueue(element: .multiply)
-        sut.operators.enqueue(element: .subtract)
-        sut.operators.enqueue(element: .divide)
+        operands.enqueue(element: 2)
+        operands.enqueue(element: 3)
+        operands.enqueue(element: 4)
+        operands.enqueue(element: 10)
+        operands.enqueue(element: 5)
+        operators.enqueue(element: .add)
+        operators.enqueue(element: .multiply)
+        operators.enqueue(element: .subtract)
+        operators.enqueue(element: .divide)
+        var formula = Formula(operands: operands, operators: operators)
         
-        XCTAssertEqual(try sut.result(), 2)
+        XCTAssertEqual(try formula.result(), 2)
     }
     
     func test_0_으로나눴을때_에러가발생하는지() {

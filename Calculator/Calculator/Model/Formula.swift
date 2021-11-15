@@ -11,12 +11,6 @@ struct Formula {
     var operands: CalculateItemQueue<Double>
     var operators: CalculateItemQueue<Operator>
     
-    init(operands: CalculateItemQueue<Double> = CalculateItemQueue<Double>(enqueueStack: []),
-         operators: CalculateItemQueue<Operator> = CalculateItemQueue<Operator>(enqueueStack: [])) {
-        self.operands = operands
-        self.operators = operators
-    }
-    
     mutating func result() throws -> Double {
         var result = Double()
         
