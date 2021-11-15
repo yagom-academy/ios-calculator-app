@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private let calculatorManager = CalculatorManager(isCalculating: false)
     
     @IBOutlet weak var formulaeScrollView: UIScrollView!
     @IBOutlet weak var formulaeStackView: UIStackView!
