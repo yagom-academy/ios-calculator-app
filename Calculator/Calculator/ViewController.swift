@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private let calculatorManager = CalculatorManager(isCalculating: false)
+    private var calculatorManager = CalculatorManager(isCalculating: false)
     
     private var displayOperator: String {
         get {
@@ -77,6 +77,11 @@ extension ViewController {
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
         guard let currentOperandButtionTitle = sender.currentTitle else {
+            return
+        }
+        
+        guard Double(displayOperand) != 0.0 else {
+            displayOperator = currentOperandButtionTitle
             return
         }
         
