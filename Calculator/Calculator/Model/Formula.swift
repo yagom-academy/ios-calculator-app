@@ -23,12 +23,12 @@ struct Formula {
         let lhs = try operands.dequeue()
         let rhs = try operands.dequeue()
         let `operator` = try operators.dequeue()
-        result = `operator`.calculate(lhs: lhs, rhs: rhs)
+        result = try `operator`.calculate(lhs: lhs, rhs: rhs)
         
         while operands.isEmpty == false {
             let rhs = try operands.dequeue()
             let `operator` = try operators.dequeue()
-            result = `operator`.calculate(lhs: result, rhs: rhs)
+            result = try `operator`.calculate(lhs: result, rhs: rhs)
         }
         return result
     }

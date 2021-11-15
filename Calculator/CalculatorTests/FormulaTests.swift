@@ -63,4 +63,25 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(try sut.result(), 2)
     }
+    
+    func test_0_으로나눴을때_에러가발생하는지() {
+        let input = "2/0"
+        var formula = ExpressionParser.parse(from: input)
+        
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func test_parse와_result메서드호출시_원하는연산결과를_내는지() {
+        let input = "3.5+15.5_21/8*2"
+        var formula =  ExpressionParser.parse(from: input)
+        
+        XCTAssertEqual(-0.5, try formula.result())
+    }
+    
+    func test_음수와_빼기연산자가존재할때_원하는연산결과를_내는지() {
+        let input = "12.3+4.2_-1.1/8*2"
+        var formula =  ExpressionParser.parse(from: input)
+        
+        XCTAssertEqual(4.4, try formula.result())
+    }
 }
