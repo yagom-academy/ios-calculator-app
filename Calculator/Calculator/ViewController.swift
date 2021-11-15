@@ -109,6 +109,10 @@ extension ViewController {
     }
     
     @IBAction private func touchUpEqualSign(_ sender: UIButton) {
+        guard displayOperator != "" && displayOperand != "" else {
+            return
+        }
+        
         appendFormulaToformulas(operator: displayOperator, operand: displayOperand)
         
         let formulaString: String = assembleFormula()
