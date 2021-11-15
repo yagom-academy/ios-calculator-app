@@ -81,10 +81,6 @@ extension ViewController {
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
-        guard let currentOperatorLabelTitle = operatorLabel.text else {
-            return
-        }
-        
         guard let currentOperandLabelTitle = operandLabel.text else {
             return
         }
@@ -93,10 +89,10 @@ extension ViewController {
             return
         }
         
-        appendFormulaToformulas(operator: currentOperatorLabelTitle,
+        appendFormulaToformulas(operator: displayOperator,
                                 operand: currentOperandLabelTitle)
         
-        operatorLabel.text = currentOperandButtionTitle
+        displayOperator = currentOperandButtionTitle
         initOperandLabel()
     }
     
@@ -122,15 +118,11 @@ extension ViewController {
     }
     
     @IBAction private func touchUpEqualSign(_ sender: UIButton) {
-        guard let currentOperatorLabelTitle = operatorLabel.text else {
-            return
-        }
-        
         guard let currentOperandLabelTitle = operandLabel.text else {
             return
         }
         
-        appendFormulaToformulas(operator: currentOperatorLabelTitle,
+        appendFormulaToformulas(operator: displayOperator,
                                 operand: currentOperandLabelTitle)
         
         let formulaString: String = assembleFormula()
@@ -150,7 +142,7 @@ extension ViewController {
 
 extension ViewController {
     func initOperatorLabel() {
-        operatorLabel.text = ""
+        displayOperator = ""
     }
     
     func initOperandLabel() {
