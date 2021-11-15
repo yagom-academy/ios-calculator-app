@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var formulaeScrollView: UIScrollView!
-    @IBOutlet weak var formulaeStakcView: UIStackView!
+    @IBOutlet weak var formulaeStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     
