@@ -41,8 +41,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initOperandLabel()
-        initOperatorLabel()
+        initDisplayOperand()
+        initDisplayOperator()
         initFormulasStackView()
     }
 }
@@ -88,7 +88,7 @@ extension ViewController {
         appendFormulaToformulas(operator: displayOperator, operand: displayOperand)
         
         displayOperator = currentOperandButtionTitle
-        initOperandLabel()
+        initDisplayOperand()
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
@@ -126,18 +126,18 @@ extension ViewController {
             print(error.localizedDescription)
         }
         
-        initOperatorLabel()
+        initDisplayOperator()
     }
 }
 
 // MARK: - private Methods
 
 extension ViewController {
-    func initOperatorLabel() {
+    func initDisplayOperator() {
         displayOperator = ""
     }
     
-    func initOperandLabel() {
+    func initDisplayOperand() {
         displayOperand = "0"
     }
     
@@ -146,8 +146,8 @@ extension ViewController {
     }
     
     func initAllDisplay() {
-        initOperatorLabel()
-        initOperandLabel()
+        initDisplayOperator()
+        initDisplayOperand()
         initFormulasStackView()
     }
     
