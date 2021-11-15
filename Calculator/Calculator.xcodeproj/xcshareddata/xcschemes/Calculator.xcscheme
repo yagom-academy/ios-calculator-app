@@ -68,6 +68,16 @@
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4825E8D0273ED74C00E2CD09"
+               BuildableName = "Formula.xctest"
+               BlueprintName = "Formula"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -36,7 +36,11 @@ class CalculatorTests: XCTestCase {
     func test_빈큐에_deleteFromQueue하면_emptyQueue오류발생() {
         let queue = CalculatorItemQueue<Int>()
         XCTAssertNil(queue.linkedList.head?.nodeValue)
-        try? queue.deleteFromQueue()
-        XCTAssertThrowsError(ErrorCase.emptyQueue)
+        
+        do {
+            try? queue.deleteFromQueue()
+        } catch ErrorCase.emptyQueue {
+            XCTAssertThrowsError(ErrorCase.emptyQueue)
+        }
     }
 }
