@@ -71,7 +71,7 @@ class ExperssionParserTests: XCTestCase {
         
         // then
         XCTAssertThrowsError(try formula.result()) { error in
-            XCTAssertEqual(error as? OperatorError, .divideToZero)
+            XCTAssertEqual(error as? OperatorError, .divideByZero)
         }
     }
 }

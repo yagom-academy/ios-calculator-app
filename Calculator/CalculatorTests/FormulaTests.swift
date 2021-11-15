@@ -102,7 +102,7 @@ class FormulaTests: XCTestCase {
                 
         // then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? OperatorError, .divideToZero)
+            XCTAssertEqual(error as? OperatorError, .divideByZero)
         }
     }
 }

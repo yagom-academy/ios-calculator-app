@@ -8,5 +8,5 @@
 import Foundation
 
 enum OperatorError: Error {
-    case divideToZero
+    case divideByZero
 }

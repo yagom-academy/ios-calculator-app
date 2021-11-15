@@ -36,7 +36,7 @@ enum Operator: Character {
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         guard rhs != 0 else {
-            throw OperatorError.divideToZero
+            throw OperatorError.divideByZero
         }
         
         return lhs / rhs
