@@ -24,7 +24,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return node?.value
     }
     
-    func resetQueue() {
+    func reset() {
         linkedList.removeAll()
+    }
+    
+    func isEmpty() -> Bool {
+        linkedList.isEmpty
     }
 }
