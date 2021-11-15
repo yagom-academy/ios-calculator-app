@@ -32,11 +32,11 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(sut.result(), 40)
     }
     
-    func testFormulaResult_givenNoNumberAndAdd_expectNaN() {
+    func testFormulaResult_givenNoNumberAndAdd_expectZero() {
         let testOperands: [Double] = []
         let testOperators: [Operator] = [.add]
         setup(formula: &sut, with: testOperands, and: testOperators)
-        XCTAssertTrue(sut.result().isNaN)
+        XCTAssertTrue(sut.result().isZero)
     }
     
     func testFormulaResult_given30Add20Subtract10Divide20_expect2() {
