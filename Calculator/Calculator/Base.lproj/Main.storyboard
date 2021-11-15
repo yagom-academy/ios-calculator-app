@@ -362,6 +362,12 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="formulaeScrollView" destination="BOT-7g-vxv" id="j88-YC-pVQ"/>
+                        <outlet property="formulaeStakcView" destination="XRe-QE-UJf" id="zNR-gJ-TF7"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="uG3-zn-fBF"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="POj-EQ-E3A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
