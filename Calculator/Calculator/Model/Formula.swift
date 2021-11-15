@@ -5,12 +5,11 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() throws -> Double { // TODO: do-catch 구문 필요
-        var result: Double
         guard let removedOperand = operands.dequeue() else {
             throw FormulaError.queueIsEmpty
         }
         
-        result = try operators.scanAllValues().reduce(removedOperand) {
+        let result: Double = try operators.scanAllValues().reduce(removedOperand) {
             guard let nextOperand = operands.dequeue() else {
                 throw FormulaError.queueIsEmpty
             }
