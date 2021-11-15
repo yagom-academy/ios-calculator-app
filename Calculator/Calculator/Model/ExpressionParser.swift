@@ -24,7 +24,7 @@ extension ExpressionParser {
         componentByOperators(from: input)
             .compactMap{ $0.first }
             .compactMap{ Operator(rawValue: $0)}
-            .forEach { operators.enqueue(operatorItem: $0)}
+            .forEach { operators.enqueue(operatorItem: $0) }
         
         return Formula(operands: operands, operators: operators)
     }
@@ -32,6 +32,6 @@ extension ExpressionParser {
     // MARK: private
     private static func componentByOperators(from input: String) -> [String] {
         return Operator.allCases
-            .reduce([input]) { (result,`operator`) in result.flatMap { $0.split(with: `operator`.rawValue )} }
+            .reduce([input]) { (result, `operator`) in result.flatMap { $0.split(with: `operator`.rawValue)} }
     }
 }
