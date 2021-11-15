@@ -13,6 +13,11 @@ struct Formula {
             guard let nextOperand = operands.dequeue() else {
                 throw FormulaError.queueIsEmpty
             }
+            
+            guard $1 != .divide, nextOperand != 0 else {
+                throw FormulaError.dividedByZero
+            }
+            
             return $1.calculate(lhs: $0, rhs: nextOperand)
         }
         
@@ -22,11 +27,14 @@ struct Formula {
 
 enum FormulaError: Error, LocalizedError {
     case queueIsEmpty
+    case dividedByZero
     
     var description: String {
         switch self {
         case .queueIsEmpty:
             return "Dequeue 할 값이 존재하지 않습니다"
+        case .dividedByZero:
+            return "NaN"
         }
     }
 }
