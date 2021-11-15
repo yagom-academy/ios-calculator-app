@@ -88,7 +88,7 @@ class CalculatorTests: XCTestCase {
         operands.enqueue(element: 1.5)
         operands.enqueue(element: -2)
         operands.enqueue(element: 2425623)
-        operands.clearQueue()
+        operands.clear()
         let result = operands.queue.isEmpty
         XCTAssertTrue(result)
     }
@@ -99,7 +99,7 @@ class CalculatorTests: XCTestCase {
         operators.enqueue(element: .subtract)
         operators.enqueue(element: .multiply)
         operators.enqueue(element: .divide)
-        operators.clearQueue()
+        operators.clear()
         let result = operators.queue.isEmpty
         XCTAssertTrue(result)
     }
