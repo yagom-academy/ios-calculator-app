@@ -35,5 +35,12 @@ class ViewController: UIViewController {
         operandLabel.text! += currentOperandButtonText
     }
     
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard operandLabel.text != "0" else {
+            operatorLabel.text = sender.titleLabel?.text
+            return
+        }
+    }
+    
 }
 
