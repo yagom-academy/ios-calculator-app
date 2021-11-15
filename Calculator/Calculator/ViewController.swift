@@ -9,6 +9,18 @@ import UIKit
 class ViewController: UIViewController {
     private let calculatorManager = CalculatorManager(isCalculating: false)
     
+    private var displayOperator: String {
+        get {
+            guard let `operator` = operatorLabel.text else {
+                return ""
+            }
+            return `operator`
+        }
+        set {
+            operatorLabel.text = newValue
+        }
+    }
+    
     @IBOutlet weak var formulasScrollView: UIScrollView!
     @IBOutlet weak var formulasStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
