@@ -25,11 +25,12 @@ struct CalculatorItemQueue {
         queue.append(item)
     }
     
-    mutating func dequeue() {
+    @discardableResult
+    mutating func dequeue() -> CalculateItem? {
         guard queue.count > 0 else {
-            return
+            return nil
         }
-        queue.removeFirst()
+        return queue.removeFirst()
     }
     
     mutating func removeAllItems() {
