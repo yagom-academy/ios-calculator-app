@@ -10,8 +10,8 @@ import Foundation
 struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items = LinkedList<Element>()
     
-    var hasOneOrMoreItems: Bool {
-        return self.items.count > 0
+    var isEmpty: Bool {
+        return self.items.isEmpty
     }
     
     func enqueue(_ value: Element) {

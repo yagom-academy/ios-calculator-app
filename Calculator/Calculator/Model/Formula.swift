@@ -20,7 +20,7 @@ struct Formula {
         
         calculationResult = firstOperand
         
-        while operands.hasOneOrMoreItems && operators.hasOneOrMoreItems {
+        while !operands.isEmpty && !operators.isEmpty {
             guard let operand = operands.dequeue() else {
                 throw CalculationItemQueueError.hasNoElement
             }
