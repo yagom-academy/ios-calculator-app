@@ -17,14 +17,9 @@ struct Formula {
             return Double.zero
         }
         
-        while true {
-            guard let rightOperand = operands?.dequeue() as? Double else {
-                break
-            }
-        
-            if let `operator` = operators?.dequeue() as? Operator {
-                leftOperand = `operator`.calculate(lhs: leftOperand, rhs: rightOperand)
-            }
+        while let rightOperand = operands?.dequeue() as? Double,
+              let calculateOperator = operators?.dequeue() as? Operator {
+            leftOperand = calculateOperator.calculate(lhs: leftOperand, rhs: rightOperand)
         }
         
         return leftOperand
