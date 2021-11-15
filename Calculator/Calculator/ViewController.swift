@@ -96,7 +96,7 @@ extension ViewController {
     }
     
     @IBAction private func touchUpClearError(_ sender: UIButton) {
-        
+        initDisplayOperand()
     }
     
     @IBAction private func touchUpSignConversion(_ sender: UIButton) {
