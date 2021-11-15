@@ -8,10 +8,10 @@ enum ExpressionParser {
         let inputOperands = componentsByOperators(from: input)
         
         let formula = Formula()
-        for operandIndex in 0...inputOperands.count - 1 {
+        for operandIndex in 0..<inputOperands.count {
             formula.operands.insertToQueue(Double(inputOperands[operandIndex]) ?? 0)
         }
-        for operatorIndex in 0...inputOperator.count - 1 {
+        for operatorIndex in 0..<inputOperator.count {
             formula.operators.insertToQueue(Character(inputOperator[operatorIndex]))
         }
         return formula

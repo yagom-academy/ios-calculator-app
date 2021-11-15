@@ -10,15 +10,11 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
         
-    func test_나누기0을_하면_divideByZero에러_throw() {
+    func test_나누기0을_하면_nan_반환() {
         var formula = Formula()
-        do {
-            try formula = sut.parse(from: "1+2/0")
-        } catch ErrorCase.divideByZero {
-            XCTAssertThrowsError(ErrorCase.divideByZero)
-        }
+        formula = sut.parse(from: "4*2/0")
+        let result = try? formula.result()
+        XCTAssertEqual(result, .nan)
     }
     
-
-
 }
