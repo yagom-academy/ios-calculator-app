@@ -23,10 +23,13 @@ enum ExpressionParser {
         var convertInput = input
         
         for operatorElement in operators {
+            
             convertInput = convertInput.replacingOccurrences(of: String(operatorElement), with: " ")
             operands = convertInput.split(with: " ")
         }
         
-        return operands
+        let convertOperands = operands.map { $0.replacingOccurrences(of: "−", with: "-") }
+        
+        return convertOperands
     }
 }
