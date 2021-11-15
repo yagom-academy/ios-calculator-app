@@ -8,9 +8,13 @@
 import Foundation
 
 struct Formula {
+    // MARK: property
     var operands: CalculatorItemQueue?
     var operators: CalculatorItemQueue?
-    
+}
+
+// MARK: method
+extension Formula {
     mutating func result() -> Double {
         guard var leftOperand = operands?.dequeue() as? Double else {
             return Double.zero
