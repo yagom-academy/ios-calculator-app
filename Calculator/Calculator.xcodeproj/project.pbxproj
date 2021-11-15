@@ -111,8 +111,8 @@
 			children = (
 				4714EFB1273A0B9000A0A974 /* CalculatorItemQueue.swift */,
 				47C5F263274103FC0047D57F /* Formula.swift */,
-				4714EFC4273A4A6F00A0A974 /* Operator.swift */,
 				47C5F26027400F7B0047D57F /* ExpressionParser.swift */,
+				4714EFC4273A4A6F00A0A974 /* Operator.swift */,
 				4792A8BE27414F74007F5421 /* CalculatorError.swift */,
 			);
 			path = Model;
