@@ -7,16 +7,10 @@
 
 import XCTest
 
-//class FormulaTests: XCTestCase {
-//    func test_Formula_생성() {
-//        var formula = Formula()
-//        let result = formula.result()
-//        XCTAssertEqual(result, 1.1)
-//    }
-//
-//    func test_result_반환() {
-//        var formula = Formula()
-//        let result = formula.result()
-//        XCTAssertEqual(result, 2.2)
-//    }
-//}
+class FormulaTests: XCTestCase {
+    func test_result_반환() {
+        var formula = Formula()
+        let result = formula.result()
+        XCTAssertEqual(result, 1.1)
+    }
+}
