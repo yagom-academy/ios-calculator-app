@@ -17,15 +17,21 @@ extension ExpressionParser {
         var operands = CalculatorItemQueue()
         var operators = CalculatorItemQueue()
         
-        componentByOperators(from: input).compactMap{ Double($0) }.forEach { operands.enqueue(number: $0) }
-        componentByOperators(from: input).compactMap{ $0.first }.compactMap{ Operator(rawValue: $0)}.forEach { operators.enqueue(operatorItem: $0)}
+        componentByOperators(from: input)
+            .compactMap{ Double($0) }
+            .forEach { operands.enqueue(number: $0) }
+        
+        componentByOperators(from: input)
+            .compactMap{ $0.first }
+            .compactMap{ Operator(rawValue: $0)}
+            .forEach { operators.enqueue(operatorItem: $0)}
         
         return Formula(operands: operands, operators: operators)
     }
     
     // MARK: private
     private static func componentByOperators(from input: String) -> [String] {
-        return Operator.allCases.reduce([input]) { (result,`operator`) in
-            result.flatMap { $0.split(with: `operator`.rawValue )} }
+        return Operator.allCases
+            .reduce([input]) { (result,`operator`) in result.flatMap { $0.split(with: `operator`.rawValue )} }
     }
 }
