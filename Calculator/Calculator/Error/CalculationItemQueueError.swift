@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum DataExtractionError: Error {
+enum CalculationItemQueueError: Error {
     case hasNoElement
 }
 
-extension DataExtractionError: LocalizedError {
+extension CalculationItemQueueError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .hasNoElement:

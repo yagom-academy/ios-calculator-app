@@ -15,18 +15,18 @@ struct Formula {
         var calculationResult: Double = 0.0
         
         guard let firstOperand = operands.dequeue() else {
-            throw DataExtractionError.hasNoElement
+            throw CalculationItemQueueError.hasNoElement
         }
         
         calculationResult = firstOperand
         
         while operands.hasOneOrMoreItems && operators.hasOneOrMoreItems {
             guard let operand = operands.dequeue() else {
-                throw DataExtractionError.hasNoElement
+                throw CalculationItemQueueError.hasNoElement
             }
             
             guard let `operator` = operators.dequeue() else {
-                throw DataExtractionError.hasNoElement
+                throw CalculationItemQueueError.hasNoElement
             }
             
             let newCalculationResult = try `operator`.calculate(lhs: calculationResult, rhs: operand)
