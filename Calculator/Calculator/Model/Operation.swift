@@ -19,12 +19,12 @@ enum Operation: Character, CaseIterable {
             return self.multifly(lhs: lhs, rhs: rhs)
         }
         
-        }
-
-func add(lhs: Double, rhs: Double) -> Double { lhs + rhs }
-func substract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
-func divide(lhs: Double, rhs: Double) -> Double { lhs / rhs }
-func multifly(lhs: Double, rhs: Double) -> Double { lhs * rhs }
+    }
+    
+    private func add(lhs: Double, rhs: Double) -> Double { lhs + rhs }
+    private func substract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
+    private func divide(lhs: Double, rhs: Double) -> Double { lhs / rhs }
+    private func multifly(lhs: Double, rhs: Double) -> Double { lhs * rhs }
 }
 
 
