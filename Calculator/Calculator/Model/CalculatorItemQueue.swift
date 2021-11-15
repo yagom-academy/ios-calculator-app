@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var inBox = [Element]()
     private var outBox = [Element]()
+    
+    init(_ items: [Element] = []) {
+        self.inBox = items
+    }
     
     var front: Element? {
         return outBox.last ?? inBox.first
@@ -32,12 +36,10 @@ struct CalculatorItemQueue<Element>: CalculateItem {
         guard (outBox.isEmpty && inBox.isEmpty) == false else {
             return nil
         }
-        
         if outBox.isEmpty {
             outBox = inBox.reversed()
             inBox = []
         }
-        
         return outBox.removeLast()
     }
     

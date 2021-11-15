@@ -10,7 +10,7 @@ import XCTest
 class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         XCTAssertEqual(queue.count, 1)
@@ -23,7 +23,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         XCTAssertEqual(queue.count, 1)
@@ -43,7 +43,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_첫번째요소() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         queue.enqueue(456)
@@ -54,7 +54,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_count() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         queue.enqueue(456)
@@ -69,7 +69,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_isEmpty() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         XCTAssertTrue(queue.isEmpty)
         
@@ -90,7 +90,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_요소가한개일때() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         XCTAssertFalse(queue.isEmpty)
@@ -103,7 +103,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_요소가두개일때() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         queue.enqueue(456)
@@ -122,7 +122,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_요소가두개일때_clear호출() {
-        var queue = CalculatorItemQueue<Int>()
+        var queue = CalculatorItemQueue<Double>()
         
         queue.enqueue(123)
         queue.enqueue(456)
