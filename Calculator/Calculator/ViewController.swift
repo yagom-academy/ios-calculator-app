@@ -110,7 +110,7 @@ extension ViewController {
     }
     
     func appendFormulaToFormulae(`operator`: String, operand: String) {
-        let formulaStackView: UIStackView = UIStackView()
+        let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
         
@@ -120,14 +120,14 @@ extension ViewController {
         operandLabel.textColor = .white
         
         
-        formulaStackView.axis = .horizontal
-        formulaStackView.alignment = .fill
-        formulaStackView.spacing = 8
+        formulaRowStackView.axis = .horizontal
+        formulaRowStackView.alignment = .fill
+        formulaRowStackView.spacing = 8
         
-        formulaStackView.addArrangedSubview(operatorLabel)
-        formulaStackView.addArrangedSubview(operandLabel)
+        formulaRowStackView.addArrangedSubview(operatorLabel)
+        formulaRowStackView.addArrangedSubview(operandLabel)
         
-        formulaeStackView.addArrangedSubview(formulaStackView)
+        formulaeStackView.addArrangedSubview(formulaRowStackView)
     }
     
     func convertSign(from operand: String) -> String {
