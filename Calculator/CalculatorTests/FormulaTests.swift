@@ -53,4 +53,17 @@ class FormulaTests: XCTestCase {
         let expectation: Double = 40
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_result메서드_연산자_3개인데_중간에_0으로_나뉘는_경우의_계산_확인() {
+        var formula = Formula()
+        formula.operands.enqueue(element: 2)
+        formula.operands.enqueue(element: -4)
+        formula.operands.enqueue(element: 0)
+        formula.operands.enqueue(element: 10)
+        formula.operators.enqueue(element: .subtract)
+        formula.operators.enqueue(element: .divide)
+        formula.operators.enqueue(element: .multiply)
+        let result = formula.result()
+        XCTAssertTrue(result.isNaN)
+    }
 }
