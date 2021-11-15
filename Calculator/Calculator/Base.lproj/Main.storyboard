@@ -303,7 +303,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpDigit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXT-cP-1dy"/>
+                                                    <action selector="touchUpDecimalPoint:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXT-sd-oqm"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -317,7 +317,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUPEqualSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vtx-M0-zJ5"/>
+                                                    <action selector="touchUpEqualSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="auG-o9-SHs"/>
                                                 </connections>
                                             </button>
                                         </subviews>

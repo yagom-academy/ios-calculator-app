@@ -42,6 +42,20 @@ extension ViewController {
         }
     }
     
+    @IBAction private func touchUpDecimalPoint(_ sender: UIButton) {
+        guard let currentOperandLabelTitle = operandLabel.text else {
+            return
+        }
+        
+        guard let decimalPointButtonTitle = sender.currentTitle else {
+            return
+        }
+        
+        guard !currentOperandLabelTitle.contains(".") else { return }
+        
+        operandLabel.text = currentOperandLabelTitle + decimalPointButtonTitle
+    }
+    
     @IBAction private func touchUpOperator(_ sender: UIButton) {
         guard let currentOperatorLabelTitle = operatorLabel.text else {
             return
