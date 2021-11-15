@@ -15,4 +15,15 @@ struct Formula {
         self.operands = operands
         self.operators = operators
     }
+    
+    mutating func result() -> Double {
+        let calculateCount = operators.testableQueue.count
+        var result = operands.dequeue() as! Double
+        for _ in 1...calculateCount {
+            let rhs: Double = operands.dequeue() as! Double
+            let operation: Operator = operators.dequeue() as! Operator
+        result = operation.calculate(lhs: result, rhs: rhs)
+        }
+        return result
+    }
 }

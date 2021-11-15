@@ -10,16 +10,17 @@ import XCTest
 
 class Formula_Tests: XCTestCase {
     var sut: Formula!
-//    var operandsQueue = CalculatorItemQueue()
-//    var operatorsQueue = CalculatorItemQueue()
-    let testOperands: [Double] = [1.0, 2.0, -3.0, 4.0, 5.0]
-    let testOperators: [Operator] = [.add, .subtract, .divide, .multiply]
+    var testOperands: [Double] = []
+    var testOperators: [Operator] = []
     
-    override func setUpWithError() throws {
+    func test_reult호출시_연산결과를_반환한다() {
+        testOperands = [1.0, 2.0, -3.0, 4.0, 5.0]
+        testOperators = [.add, .subtract, .divide, .multiply]
+        let operands = CalculatorItemQueue(testOperands)
+        let operators = CalculatorItemQueue(testOperators)
+        sut = Formula(operands: operands, operators: operators)
+        let result = sut.result()
+        
+        XCTAssertEqual(result, 7.5)
     }
-    
-    override func tearDownWithError() throws {
-    }
-    
-    
 }
