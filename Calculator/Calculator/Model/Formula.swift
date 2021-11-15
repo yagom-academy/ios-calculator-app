@@ -20,7 +20,7 @@ struct Formula {
             return 0.0
         }
         
-        while !operands.queue.isEmpty {
+        while !operands.isEmpty() {
             guard let `operator` = operators.dequeue() else {
                 return 0.0
             }
