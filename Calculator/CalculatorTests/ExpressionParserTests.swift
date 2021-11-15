@@ -10,20 +10,22 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
 
-//    var queue: CalculatorItemQueue?
-//
-//    override func setUpWithError() throws {
-//        queue = CalculatorItemQueue()
-//    }
-//
-//    override func tearDownWithError() throws {
-//        queue = nil
-//    }
-
-    func test_tt() {
+    func test_계산식을_넣으면_연산자가_구분되어_반환한다() {
         let String = "15*-1+0.4"
         
-        ExpressionParser.parse(from: String)
+        var operators = ExpressionParser.parse(from: String).operators
+        
+        let firstOperator = operators.dequeue() as? Operator
+        XCTAssertEqual(firstOperator?.rawValue, "+")
+        
+        let secondOperator = operators.dequeue() as? Operator
+        XCTAssertEqual(secondOperator?.rawValue, "*")
+        
+        var operands = ExpressionParser.parse(from: String).operands
+        
+        XCTAssertEqual(operands.dequeue() as? Double, 15.0)
+        XCTAssertEqual(operands.dequeue() as? Double, -1.0)
+        XCTAssertEqual(operands.dequeue() as? Double, 0.4)
     }
 
 }
