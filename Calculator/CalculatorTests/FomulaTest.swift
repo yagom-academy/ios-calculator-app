@@ -117,7 +117,7 @@ class FomulaTest: XCTestCase {
         }
                 
         XCTAssertThrowsError(try formula.result()) { error in
-            XCTAssertEqual(error as? OperationError, OperationError.diviedByZero)
+            XCTAssertEqual(error as? OperationError, OperationError.dividedByZero)
         }
     }
     

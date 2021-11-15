@@ -39,7 +39,7 @@ class ExpressionParserTest: XCTestCase {
         let divideByZeroExpression = "1.0 + 32.4 - -3.2 / 0.0 * 7.2"
         let formula = ExpressionParser.parse(from: divideByZeroExpression)
         XCTAssertThrowsError(try formula.result()) { error in
-            XCTAssertEqual(error as? OperationError, OperationError.diviedByZero)
+            XCTAssertEqual(error as? OperationError, OperationError.dividedByZero)
         }
     }
 }

@@ -122,7 +122,7 @@ class OperatorTest: XCTestCase {
         }
                 
         XCTAssertThrowsError(try calculator.calculate(lhs: -3.0, rhs: 0.0)) { error in
-            XCTAssertEqual(error as? OperationError, OperationError.diviedByZero)
+            XCTAssertEqual(error as? OperationError, OperationError.dividedByZero)
         }
     }
 }
