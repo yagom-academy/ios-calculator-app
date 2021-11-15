@@ -8,26 +8,26 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var queue = LinkedList<T>()
+    var linkeList = LinkedList<T>()
     
     var isEmpty: Bool {
-        return queue.isEmpty()
+        return linkeList.isEmpty()
     }
     
     mutating func enQueue(_ data: T?) {
-        queue.append(data)
+        linkeList.append(data)
     }
     
     @discardableResult
     mutating func deQueue() throws -> T {
-        return try queue.deQueue()
+        return try linkeList.removeLast()
     }
     
     mutating func removeAll() {
-        queue.removeAll()
+        linkeList.removeAll()
     }
     
     mutating func returnQueue() -> Array<T> {
-        return queue.returnList()
+        return linkeList.returnList()
     }
 }

@@ -8,6 +8,5 @@
 import Foundation
 
 enum CalculateError: Error {
-    case calculateFailed
     case NotANumber
 }

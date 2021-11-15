@@ -40,7 +40,7 @@ struct LinkedList<T> {
         rear = rear?.next
     }
     
-    mutating func deQueue() throws -> T {
+    mutating func removeLast() throws -> T {
         guard let data = front?.data else {
             throw QueueError.deQueueFailed
         }
