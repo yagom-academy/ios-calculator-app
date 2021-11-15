@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum QueueError: Error {
-    case queueIsEmpty
+enum DataExtractionError: Error {
+    case hasNoElement
 }
 
-extension QueueError: LocalizedError {
+extension DataExtractionError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .queueIsEmpty:
-            return "queue에 요소가 없습니다."
+        case .hasNoElement:
+            return "데이터가 없습니다."
         }
     }
 }
