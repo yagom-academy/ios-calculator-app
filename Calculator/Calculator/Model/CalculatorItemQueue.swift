@@ -9,7 +9,7 @@ import Foundation
 
 struct CalculatorItemQueue {
     
-    // MARK: property
+    // MARK: private property
     private var queueList: LinkedList = LinkedList()
     
 }

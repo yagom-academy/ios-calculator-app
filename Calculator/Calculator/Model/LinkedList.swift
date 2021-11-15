@@ -7,19 +7,15 @@
 
 import Foundation
 
-class Node {
-    var data: CalculateItem
-    var next: Node?
-    
-    init(data: CalculateItem, next: Node? = nil) {
-        self.data = data
-        self.next = next
-    }
-}
-
 struct LinkedList {
+    
+    // MARK: private property
     private var head: Node?
     private var tail: Node?
+}
+
+// MARK: internal method
+extension LinkedList {
     
     mutating func append(data: CalculateItem) {
         let newNode = Node(data: data)
