@@ -34,7 +34,7 @@ class OperatorTests: XCTestCase {
         let rightOperand = 0.1
 
         // when
-        let result = sutAddOperator.calculate(lhs: leftOperand, rhs: rightOperand)
+        let result = try sutAddOperator.calculate(lhs: leftOperand, rhs: rightOperand)
 
         // then
         XCTAssertEqual(result, 0.3)
