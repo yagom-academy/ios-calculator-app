@@ -45,4 +45,10 @@ class CalculatorItemQueueTest: XCTestCase {
         queue.removeAll()
         XCTAssertEqual(0, queue.items.count)
     }
+    
+    func test_큐의_데이터_개수가_1개_이상인지() {
+        let queue = CalculatorItemQueue<Double>()
+        queue.enqueue(4.5)
+        XCTAssertTrue(queue.hasOneOrMoreItems)
+    }
 }
