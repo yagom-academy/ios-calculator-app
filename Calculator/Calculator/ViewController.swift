@@ -43,9 +43,20 @@ extension ViewController {
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
+        guard let currentOperatorLabelTitle = operatorLabel.text else {
+            return
+        }
+        
+        guard let currentOperandLabelTitle = operandLabel.text else {
+            return
+        }
+        
         guard let currentOperandButtionTitle = sender.currentTitle else {
             return
         }
+        
+        appendFormulaToFormulae(operator: currentOperatorLabelTitle,
+                                operand: currentOperandLabelTitle)
         
         operatorLabel.text = currentOperandButtionTitle
     }
@@ -104,15 +115,19 @@ extension ViewController {
         
         operatorLabel.text = `operator`
         operandLabel.text = operand
+        operatorLabel.textColor = .white
+        operandLabel.textColor = .white
+        
         
         formulaStackView.axis = .horizontal
         formulaStackView.alignment = .fill
         formulaStackView.spacing = 8
         
-        formulaStackView.addSubview(operatorLabel)
-        formulaStackView.addSubview(operandLabel)
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(operandLabel)
+        print("a")
         
-        formulaeStackView.addSubview(formulaStackView)
+        formulaeStackView.addArrangedSubview(formulaStackView)
     }
     
     func convertSign(from operand: String) -> String {
