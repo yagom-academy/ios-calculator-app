@@ -35,14 +35,49 @@ class ViewController: UIViewController {
     @IBOutlet weak var cleanEntry: UIButton!
     @IBOutlet weak var convertPositiveOrNegativeNumber: UIButton!
     
+    var fomula: String = ""
+    var operand: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        inputedOperandLabel.text = ""
     }
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
-        //inputedOperandLabel.text += operands(for: sender)
+        operand += operands(for: sender)
+        inputedOperandLabel.text = operand
+    }
+    
+    private func operands(for button: UIButton) -> String {
+        switch button {
+        case inputDotButton:
+            return "."
+        case inputZeroButton:
+            return "0"
+        case inputZeroZeroButton:
+            return "00"
+        case inputOneButton:
+            return "1"
+        case inputTwoButton:
+            return "2"
+        case inputThreeButton:
+            return "3"
+        case inputFourButton:
+            return "4"
+        case inputFiveButton:
+            return "5"
+        case inputSixButton:
+            return "6"
+        case inputSevenButton:
+            return "7"
+        case inputEightButton:
+            return "8"
+        case inputNineButton:
+            return "9"
+        default:
+            return ""
+        }
     }
 }
 
