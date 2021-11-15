@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     private let calculatorManager = CalculatorManager(isCalculating: false)
     
-    @IBOutlet weak var formulaeScrollView: UIScrollView!
+    @IBOutlet weak var formulasScrollView: UIScrollView!
     @IBOutlet weak var formulasStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         initOperandLabel()
         initOperatorLabel()
-        initformulaeStackView()
+        initformulasStackView()
     }
 }
 
@@ -55,7 +55,7 @@ extension ViewController {
             return
         }
         
-        appendFormulaToFormulae(operator: currentOperatorLabelTitle,
+        appendFormulaToformulas(operator: currentOperatorLabelTitle,
                                 operand: currentOperandLabelTitle)
         
         operatorLabel.text = currentOperandButtionTitle
@@ -99,17 +99,17 @@ extension ViewController {
         operandLabel.text = "0"
     }
     
-    func initformulaeStackView() {
+    func initformulasStackView() {
         formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
     }
     
     func initAllDisplay() {
         initOperatorLabel()
         initOperandLabel()
-        initformulaeStackView()
+        initformulasStackView()
     }
     
-    func appendFormulaToFormulae(`operator`: String, operand: String) {
+    func appendFormulaToformulas(`operator`: String, operand: String) {
         let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
