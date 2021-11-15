@@ -99,6 +99,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		6B3F68F82742DCBF00BBD390 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		6B471727273A60F00012D081 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				6B2FCE04273A040500205344 /* Model */,
+				6B3F68F82742DCBF00BBD390 /* Error */,
 				6B471727273A60F00012D081 /* Protocol */,
 				6B3F68DD2741331000BBD390 /* Extension */,
 				6B95977D27390EBC00C705D1 /* ViewController */,
