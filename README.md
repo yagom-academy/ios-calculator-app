@@ -26,6 +26,7 @@
 - TDD 방식으로 프로그래밍을 진행했다. XCTest를 통해 Test Case를 작성하여 테스트를 실행했다.
 
 ### UML
+![image](https://user-images.githubusercontent.com/70856586/141853112-7f49d618-7d68-415b-aa86-b94b6f6bcc11.png)
 
 ### 고려사항
 * 기능
@@ -60,6 +61,7 @@
 - Queue의 숫자/연산자를 차례로 꺼내어 사칙연산을 처리한다. (이번 프로젝트에서 연산자 우선순위는 무시한다.)
 
 ### UML
+![image](https://user-images.githubusercontent.com/70856586/141853001-fb1b7991-cea1-44f6-9413-da746e641ee7.png)
 
 ### 고려사항
 * 기능
