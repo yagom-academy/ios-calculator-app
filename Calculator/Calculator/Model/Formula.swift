@@ -13,11 +13,11 @@ struct Formula {
     
     mutating func result() throws -> Double {
         var result = try operands.dequeue()
-        while !operators.inbox.isEmpty {
+        repeat {
             result = try operators.dequeue().calculate(
                 lhs: result,
                 rhs: try operands.dequeue())
-        }
+        } while !operators.outbox.isEmpty
         return result
     }
 }
