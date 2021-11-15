@@ -12,7 +12,7 @@ extension String {
         if target == Operator.add.rawValue {
             return components(separatedBy: "+")
         } else if target == Operator.subtract.rawValue {
-            return components(separatedBy: "-")
+            return components(separatedBy: "")
         } else if target == Operator.divide.rawValue {
             return components(separatedBy: "/")
         } else if target == Operator.multiply.rawValue {

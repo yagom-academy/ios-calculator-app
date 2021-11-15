@@ -16,7 +16,18 @@ struct Formula {
         self.operators = CalculatorItemQueue<Operator>()
     }
 
-    mutating func result() -> Double {
-        return 1.1
-    }
+//    mutating func result() -> Double {
+//        var inputString: String = "1.1+1.1"
+//        let addCharacter: Character = "+"
+//        inputString.split(separator: addCharacter)
+//
+//        let operatorEnum = Operator(rawValue: addCharacter)
+//        var result: Double?
+//
+//        operands.enqueue(inputString[)
+//        operands.enqueue(inputString[1])
+//
+//        result = operatorEnum?.calculate(operands.dequeue() ?? 0.0, operands.dequeue() ?? 0.0)
+//        return result ?? 0.0
+//    }
 }
