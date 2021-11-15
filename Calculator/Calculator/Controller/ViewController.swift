@@ -52,6 +52,11 @@ class ViewController: UIViewController {
     @IBAction private func operatorDidTap(_ sender: UIButton) {
     }
     
+    @IBAction func cleanEntryDidTap(_ sender: UIButton) {
+        operand = ""
+        inputedOperandLabel.text = operand
+    }
+    
     private func numberFormatter(inputOperand: String) -> String? {
         guard let operand = Double(inputOperand) else {
             return ""
