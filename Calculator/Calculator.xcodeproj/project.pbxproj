@@ -121,10 +121,10 @@
 		4714EFB8273A0CE100A0A974 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				4714EFB9273A0CE100A0A974 /* CalculatorItemQueueTests.swift */,
 				47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */,
 				47C5F259273EA96F0047D57F /* OperatorTest.swift */,
 				47C5F25B273EACC50047D57F /* ExpressionParserTest.swift */,
+				4714EFB9273A0CE100A0A974 /* CalculatorItemQueueTests.swift */,
 				4792A8BC27414CCB007F5421 /* LearningTest.swift */,
 			);
 			path = CalculatorTests;
