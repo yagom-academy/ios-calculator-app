@@ -14,7 +14,11 @@ struct Formula {
 }
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var items: [Element] = []
+    private(set) var items: [Element]
+    
+    init(_ item: [Element] = []) {
+        self.items = item
+    }
     
     mutating func enqueue(_ item: Element) {
         items.append(item)
