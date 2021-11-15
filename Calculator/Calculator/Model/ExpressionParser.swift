@@ -3,9 +3,17 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) {
-    
+        let operators = Operation.allCases.map { String($0.rawValue) }
+        var splitedByOperators = componentsByOperators(from: input)
+        var operatorsInInput: [String] = []
+        var OperandsInInput: [String] = []
+        
+        splitedByOperators.forEach{
+            operators.contains($0) ? operatorsInInput.append($0) : OperandsInInput.append($0)
+        }
+//        return Formula(operands: <#T##CalculatorItemQueue<Character>#>, oprators: <#T##CalculatorItemQueue<Double>#>)
     }
-    func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
        let operators = Operation.allCases.map{ $0.rawValue }
        var inputs: [String] = [input]
        
