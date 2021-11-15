@@ -15,6 +15,7 @@
 		4792A8BD27414CCB007F5421 /* LearningTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8BC27414CCB007F5421 /* LearningTest.swift */; };
 		4792A8BF27414F74007F5421 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8BE27414F74007F5421 /* CalculatorError.swift */; };
 		4792A8C027414F74007F5421 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8BE27414F74007F5421 /* CalculatorError.swift */; };
+		4792A8C227422E64007F5421 /* FormulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8C127422E64007F5421 /* FormulaTest.swift */; };
 		47C5F255273E15630047D57F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F254273E15630047D57F /* Double+Extension.swift */; };
 		47C5F256273E62F90047D57F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F254273E15630047D57F /* Double+Extension.swift */; };
 		47C5F258273EA6BF0047D57F /* StringExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */; };
@@ -51,6 +52,7 @@
 		4714EFC4273A4A6F00A0A974 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4792A8BC27414CCB007F5421 /* LearningTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTest.swift; sourceTree = "<group>"; };
 		4792A8BE27414F74007F5421 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
+		4792A8C127422E64007F5421 /* FormulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTest.swift; sourceTree = "<group>"; };
 		47C5F254273E15630047D57F /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTest.swift; sourceTree = "<group>"; };
 		47C5F259273EA96F0047D57F /* OperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTest.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */,
 				47C5F259273EA96F0047D57F /* OperatorTest.swift */,
 				47C5F25B273EACC50047D57F /* ExpressionParserTest.swift */,
+				4792A8C127422E64007F5421 /* FormulaTest.swift */,
 				4714EFB9273A0CE100A0A974 /* CalculatorItemQueueTests.swift */,
 				4792A8BC27414CCB007F5421 /* LearningTest.swift */,
 			);
@@ -275,6 +278,7 @@
 				4792A8BD27414CCB007F5421 /* LearningTest.swift in Sources */,
 				47C5F25C273EACC50047D57F /* ExpressionParserTest.swift in Sources */,
 				4714EFC6273A4D6800A0A974 /* Operator.swift in Sources */,
+				4792A8C227422E64007F5421 /* FormulaTest.swift in Sources */,
 				47C5F256273E62F90047D57F /* Double+Extension.swift in Sources */,
 				47C5F265274103FC0047D57F /* Formula.swift in Sources */,
 				4792A8C027414F74007F5421 /* CalculatorError.swift in Sources */,
