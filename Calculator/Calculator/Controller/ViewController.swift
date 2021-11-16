@@ -68,24 +68,6 @@ class ViewController: UIViewController {
         label.adjustsFontForContentSizeCategory = true
     }
     
-    private func pullOutTheFormula() -> String {
-        var inputValues = [String]()
-        calculatorStackView.arrangedSubviews.forEach{ view in
-            guard let subview = view as? UIStackView else {
-                return
-            }
-            subview.arrangedSubviews.forEach{ view in
-                guard let label = view as? UILabel else {
-                    return
-                }
-                guard let input = label.text else {
-                    return
-                }
-                inputValues.append(input)
-            }
-        }
-        return inputValues.joined(separator: " ")
-    }
     
     private func setUpNumberFormat(for value: Double) -> String {
         let numberFormatter = NumberFormatter()
@@ -171,7 +153,7 @@ extension ViewController {
         }
         let formulaStackView = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
         calculatorStackView.addArrangedSubview(formulaStackView)
-        var formula = ExpressionParser.parse(from: pullOutTheFormula())
+        var formula = ExpressionParser.parse(from: calculatorStackView.toString)
         do {
             let calcuatorResult = try formula.result()
             operandLabel.text = setUpNumberFormat(for: calcuatorResult)
@@ -181,5 +163,25 @@ extension ViewController {
             print(error.localizedDescription)
         }
         operatorLabel.text = ""
+    }
+}
+extension UIStackView {
+    var toString: String {
+        var inputValues = [String]()
+        self.arrangedSubviews.forEach{ view in
+            guard let subview = view as? UIStackView else {
+                return
+            }
+            subview.arrangedSubviews.forEach{ view in
+                guard let label = view as? UILabel else {
+                    return
+                }
+                guard let input = label.text else {
+                    return
+                }
+                inputValues.append(input)
+            }
+        }
+        return inputValues.joined(separator: " ")
     }
 }
