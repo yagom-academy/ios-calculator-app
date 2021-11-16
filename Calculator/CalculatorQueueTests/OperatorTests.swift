@@ -32,4 +32,10 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 4)
     }
 
+    func test_Operator_multiply에_2에서_0점2를_곱하면_0점4가_나오는지() {
+        sut = .multiply
+        let result = sut.calculate(lhs: 2, rhs: 0.2)
+        
+        XCTAssertEqual(result, 0.4)
+    }
 }
