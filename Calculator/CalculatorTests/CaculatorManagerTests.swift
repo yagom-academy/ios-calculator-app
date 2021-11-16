@@ -8,25 +8,32 @@
 import XCTest
 
 class CaculatorManagerTests: XCTestCase {
+    
+    private let calculatorManager = CalculatorManager(isCalculating: false)
+    private var numberToConvert: String = ""
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testConvertToDecimalStyleWhereNumberIsInt() {
+        numberToConvert = "1234"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testConvertToDecimalStyleWhereNumberIsNegativeInt() {
+        numberToConvert = "-1234"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testConvertToDecimalStyleWhereNumberIsDouble() {
+        numberToConvert = "1234.01234"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testConvertToDecimalStyleWhereNumberIsNegativeDouble() {
+        numberToConvert = "-1234.01234"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
     }
-
+    
+    func testConvertToDecimalStyleWhereNumberIsZero() {
+        numberToConvert = "0.0"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.0")
+    }
 }
