@@ -36,6 +36,9 @@ class CalculatorViewController: UIViewController {
         if operandLabelText == "0" {
             if tapedNumber == "0" || tapedNumber == "00" {
                 return
+            } else {
+                operandLabel.text = tapedNumber
+                return
             }
         }
         
