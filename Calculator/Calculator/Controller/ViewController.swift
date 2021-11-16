@@ -128,6 +128,19 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func touchUpACButton(_ sender: Any) {
+        finalExpression = ""
+        currentOperator = ""
+        currentOperand = ""
+        
+        expression.text = "0"
+        arithmetic.text = ""
+        
+        calculationHistoryStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+    }
+    
     private func matchOperatorButton(sender: UIButton) -> String? {
         switch sender {
         case addButton:
