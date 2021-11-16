@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         removeFormulaView()
     }
 }
-
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
@@ -144,7 +143,6 @@ extension ViewController {
         view.setContentOffset(bottomOffset, animated: false)
     }
 }
-
 // MARK: Label Initialization Related
 extension ViewController {
     private func removeFormulaView() {
@@ -158,7 +156,6 @@ extension ViewController {
         operatorLabel.text = ""
     }
 }
-
 // MARK: Calculation Result Related
 extension ViewController {
     private func setUpNumberFormat(for value: Double) -> String {
