@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         guard let currentOperatorButtonText = sender.titleLabel?.text else {
             return
         }
-        let formula = addFormula(operand: operandLabel.text!, operator: currentOperatorButtonText)
+        let formula = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
         calculatorStackView.addArrangedSubview(formula)
         operandLabel.text = "0"
         operatorLabel.text = currentOperatorButtonText
