@@ -80,7 +80,9 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: true)
         
-        guard !displayOperand.contains(".") else { return }
+        guard !displayOperand.contains(".") else {
+            return
+        }
         
         displayOperand = displayOperand + decimalPointButtonTitle
     }
