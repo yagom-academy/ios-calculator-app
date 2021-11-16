@@ -1,3 +1,4 @@
+# Calculator
 ## 목차
 ---
 
@@ -9,7 +10,7 @@
 - 프로젝트 기간: 2021.11.08 - 2021.11.19
 - 커밋 기준: 기능 단위 (카르마 규칙 준수)
     - Step1: #1(Model), #2(Error), #3(Read Me), #4(Refactoring)
-    - Step2: 
+    - Step2: #5(Model), #6(Read Me), #7(Test), #8(Refactoring)
     - Step3:
 
 ### 🗝️ 키워드 
@@ -17,11 +18,14 @@
 - `Array` `시간복잡도`
 - `Queue`
 - `Generic` `T` `Element`
-- `TDD` `UnitTest`'
+- `TDD` `UnitTest`
 - `UML`
+- `map` `compactMap`
+- `split` `components`
 
 ### 🖌️ UML 
-![](https://i.imgur.com/6O4ojGl.png)
+![](https://i.imgur.com/YOL74g2.png)
+
 
 ## 1️⃣ Step 1
 ---
@@ -81,5 +85,72 @@ Array를 Queue 방식을 통해 값을 빼준다면 제일 처음 들어온 값�
 
 (이 과정에서 Linked List에 대해 알게 되었는데 이에 대해 추가적인 학습이 필요함을 느꼈습니다)
 
-### Step 1에서 보완한 부분 
+---
+### ⭐️ Step 1에서 보완한 부분 및 새롭게 안 내용
+---
+#### 1. 프로젝트 미니멈 타겟이 iOS 14.1로 되어있는데 현재 아이폰 사용자의 OS 점유율은 어떨까?
+현재 85%의 기기가 iOS 14를 사용하고 있으며, 4년 동안 도입된 기기의 90%가 iOS 14를 사용 중입니다.
+이는 해당 [링크](https://developer.apple.com/kr/support/app-store/)에서 확인할 수 있습니다. 
+버전에 따라 제공되는 기능에 차이가 있기 때문에 버전을 수정할 때는 항상 side effect를 고려해야 합니다. 
+
+#### 2. Queue를 담는 배열의 네이밍 수정 
+기존에는 단순히 array라는 이름을 사용했습니다. 
+하지만 Swift의 [API design Guidelines](https://www.swift.org/documentation/api-design-guidelines/#naming)를 보면 `Name variables, parameters, and associated types according to their roles, rather than their type constraints.` 이런 문장이 있습니다. 
+
+즉, 타입 명을 직접 언급하는 것보단 역할에 대해 작성해야 한다고 판단했습니다. 
+
+그래서 연산자와 피연산자의 items라는 네이밍으로 수정했습니다. 특히 배열의 경우 공식문서에서 복수로 표현하고있어 `items`로 정했습니다.
+
+#### 3. Unit Test의 네이밍에 대해 고민했습니다. 
+테스트가 하나의 코드의 스펙 정의 문서가 될 수 있다고 생각하기 때문에 그 코드를 많이 볼 사람들에 맞춰 네이밍을 하는 것이 가장 좋지 않을까 생각했습니다. 
+(정말 글로벌하게 협업을 한다면 영어로 네이밍하는 것이 더 적합하다고 판단했습니다. 다만 협업 대상이 한국인에 한정된 경우 한글로 사용하는 것이 오히려 나을 수 있다고 생각합니다)
+
+테스트 명의 경우 Naming을 하면서 간략한 것보다 구체적이 좋다는 Guideline을 보고 '최대한 구체적으로 적어서 네이밍만 보더라도 어떤 테스트인지 알 수 있는 것이 좋지 않을까?'' 라고 생각해서 최대한 구체적으로 표현하려고 했습니다.
+
+#### 4. removeAllItem의 함수명 수정 
+all 뒤에는 복수형이 붙는 것이 영어 문법 상 맞는 표현이라 removeAllItems로 수정했습니다. 
+
+<br/>
+
+
+## 2️⃣ Step 2
+---
+### 🤔 Step 2에서 고민했던 부분 
 ___
+#### 1. `CalculateItem` 프로토콜을 어디에 채택하면 좋을지 고민했습니다. 
+`CalculatorItemQueue`의 제네릭 타입에 프로토콜을 채택하는 것이 가장 적합하다고 생각했습니다. 타입에 채택을 하게 되면 타입에는 `Operator` 열거형과 `Double`만 들어올 수 있게 되고 다른 타입의 인스턴스를 생성할 수 없어 가장 타당하다고 판단했습니다. 
+
+#### 2. `ExpressionParser`가 왜 케이스가 없이 구현된 것인지 고민했습니다. 
+열거형을 싱글톤처럼 사용하기 위함이라 생각합니다. 열거형의 경우 따로 인스턴스를 생성할 수 없습니다. 
+따라서 함수를 `static`으로 타입 메서드를 생성하면 파일 전체에서 연산자와 피연산자를 분리하는 `parse` 메서드를 싱글톤처럼 호출할 수 있기 때문에 타입 메서드로 구현했습니다. 
+```swift=
+static func parse(from input: String) -> Formula {
+    var formula = Formula()
+    let operandsItems = componentsByOperators(from: input).compactMap { Double($0) }
+    let operatorsItems = input.compactMap { Operator(rawValue: $0) }
+        
+    formula.operands.items = operandsItems
+    formula.operators.items = operatorsItems
+        
+    return formula
+}
+```
+
+#### 3. 연산자 배열과 피연산자 배열을 어떻게 분리할 지 고민했습니다. 
+피연산자 배열의 경우 `Double` 배열, 연산자 배열의 경우 `Operator` 타입의 배열로 생성해야했습니다.
+또한 음수의 경우 마이너스를 연산자가 아닌 피연산자로 인식해야 했습니다. 
+
+먼저 operandsItems의 경우 `String`을 `Double`로 변환해야 했습니다. 이 때 `map`을 사용하게 되면 변환이 되면서 옵셔널 Double 타입으로 변환이 되기 때문에 `compactMap`을 사용했습니다. 
+
+또한 operatorsItems의 경우 `String`을 `Operator`로 변환해야 했습니다. 또한 Operator 열거형의 rawValue에 해당하는 값만 꺼내와야 했기에 `let operatorsItems = input.compactMap { Operator(rawValue: $0) }` 이렇게 구현했습니다. 
+변환이 되지 않아 nil로 된 값은 제거해줘야 했기에 `compactMap`을 사용했습니다. 
+
+
+또한 음수와 연산자를 구분하기 위해 연산 가능한 minus와 연산이 불가능한 minus를 나눠서 String으로 값을 받도록 했습니다.
+먼저 `.replacingOccurrences`메서드를 활용해 연산자를 `" "`로 수정해줬고 이를 토대로 extension으로 구현한 `split` 메서드를 활용해 쪼갠 뒤 map을 활용해 연산이 안되는 minus를 연산 가능한 minus로 수정했습니다. 
+
+`let convertOperands = operands.map { $0.replacingOccurrences(of: "−", with: "-") }`
+
+---
+### ⭐️ Step 2에서 보완한 부분 및 새롭게 안 내용
+---
