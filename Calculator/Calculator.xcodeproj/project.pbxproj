@@ -80,7 +80,7 @@
 		4825E8A8273EB68D00E2CD09 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		4825E8BD273EC72100E2CD09 /* ExpressionParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4825E8BF273EC72100E2CD09 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
-		4825E8D1273ED74C00E2CD09 /* Formula.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Formula.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4825E8D1273ED74C00E2CD09 /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4825E8D3273ED74C00E2CD09 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		48B95108273D1A5B0009B8E3 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		48C16C4D273916BC006E1BBC /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 				C713D93E2570E5EB001C3AFC /* Calculator.app */,
 				4825E8A6273EB68D00E2CD09 /* CalculatorTests.xctest */,
 				4825E8BD273EC72100E2CD09 /* ExpressionParserTests.xctest */,
-				4825E8D1273ED74C00E2CD09 /* Formula.xctest */,
+				4825E8D1273ED74C00E2CD09 /* FormulaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,9 +232,9 @@
 			productReference = 4825E8BD273EC72100E2CD09 /* ExpressionParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4825E8D0273ED74C00E2CD09 /* Formula */ = {
+		4825E8D0273ED74C00E2CD09 /* FormulaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4825E8D7273ED74C00E2CD09 /* Build configuration list for PBXNativeTarget "Formula" */;
+			buildConfigurationList = 4825E8D7273ED74C00E2CD09 /* Build configuration list for PBXNativeTarget "FormulaTests" */;
 			buildPhases = (
 				4825E8CD273ED74C00E2CD09 /* Sources */,
 				4825E8CE273ED74C00E2CD09 /* Frameworks */,
@@ -245,9 +245,9 @@
 			dependencies = (
 				4825E8D6273ED74C00E2CD09 /* PBXTargetDependency */,
 			);
-			name = Formula;
+			name = FormulaTests;
 			productName = Formula;
-			productReference = 4825E8D1273ED74C00E2CD09 /* Formula.xctest */;
+			productReference = 4825E8D1273ED74C00E2CD09 /* FormulaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C713D93D2570E5EB001C3AFC /* Calculator */ = {
@@ -274,7 +274,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					4825E8A5273EB68D00E2CD09 = {
 						CreatedOnToolsVersion = 13.0;
@@ -309,7 +309,7 @@
 				C713D93D2570E5EB001C3AFC /* Calculator */,
 				4825E8A5273EB68D00E2CD09 /* CalculatorTests */,
 				4825E8BC273EC72100E2CD09 /* ExpressionParserTests */,
-				4825E8D0273ED74C00E2CD09 /* Formula */,
+				4825E8D0273ED74C00E2CD09 /* FormulaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -658,7 +658,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -784,7 +784,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4825E8D7273ED74C00E2CD09 /* Build configuration list for PBXNativeTarget "Formula" */ = {
+		4825E8D7273ED74C00E2CD09 /* Build configuration list for PBXNativeTarget "FormulaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4825E8D8273ED74C00E2CD09 /* Debug */,

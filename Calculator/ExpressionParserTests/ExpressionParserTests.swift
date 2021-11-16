@@ -12,7 +12,7 @@ class ExpressionParserTests: XCTestCase {
         formulaQueueArr.append(formula.operands.linkedList.head!.pointer!.nodeValue)
         formulaQueueArr.append(formula.operands.linkedList.head!.pointer!.pointer!.nodeValue)
         
-        var testArr: [Double] = [1, 2, 3]
+        let testArr: [Double] = [1, 2, 3]
         XCTAssertEqual(formulaQueueArr, testArr)
     }
     
@@ -24,7 +24,7 @@ class ExpressionParserTests: XCTestCase {
         formulaQueueArr.append(formula.operators.linkedList.head!.nodeValue)
         formulaQueueArr.append(formula.operators.linkedList.head!.pointer!.nodeValue)
 
-        var testArr: [Character] = ["+", "*"]
+        let testArr: [Character] = ["+", "*"]
         XCTAssertEqual(formulaQueueArr, testArr)
     }
 
