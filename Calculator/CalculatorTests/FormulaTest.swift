@@ -68,7 +68,7 @@ class FormulaTest: XCTestCase {
             formula.operands.enqueue(number)
         }
         
-        let operators: [Character] = ["*", "*"]
+        let operators: [Character] = ["×", "×"]
         
         operators.forEach { arithmetic in
             guard let arithmetic = Operator(rawValue: arithmetic) else {
@@ -87,7 +87,7 @@ class FormulaTest: XCTestCase {
             formula.operands.enqueue(number)
         }
         
-        let operators: [Character] = ["/", "/"]
+        let operators: [Character] = ["÷", "÷"]
         
         operators.forEach { arithmetic in
             guard let arithmetic = Operator(rawValue: arithmetic) else {
@@ -106,7 +106,7 @@ class FormulaTest: XCTestCase {
             formula.operands.enqueue(number)
         }
         
-        let operators: [Character] = ["/", "/", "+"]
+        let operators: [Character] = ["÷", "÷", "+"]
         
         operators.forEach { arithmetic in
             guard let arithmetic = Operator(rawValue: arithmetic) else {
@@ -126,7 +126,7 @@ class FormulaTest: XCTestCase {
             formula.operands.enqueue(number)
         }
         
-        let operators: [Character] = ["+", "*"]
+        let operators: [Character] = ["+", "×"]
         
         operators.forEach { arithmetic in
             guard let arithmetic = Operator(rawValue: arithmetic) else {
@@ -145,7 +145,7 @@ class FormulaTest: XCTestCase {
             formula.operands.enqueue(number)
         }
         
-        let operators: [Character] = ["+", "*"]
+        let operators: [Character] = ["+", "×"]
         
         operators.forEach { arithmetic in
             guard let arithmetic = Operator(rawValue: arithmetic) else {
