@@ -58,13 +58,13 @@ enum ExpressionParser {
             (result: [String], operatorSymbol: Character) in
             return result
                         .flatMap { component -> [String] in
-                            guard let firstCharacter = component.first else { return [component] }
-                            let result = signs.contains(firstCharacter)
-                                            && component.count > 1
-                                            && component.filter { allOperatorSymbols.contains($0) }.count == 1
-                                                ? [component]
-                                                : component.split(with: operatorSymbol)
-                            return result
+                            let splittedComponents = component.split(with: operatorSymbol)
+                            guard let firstString = splittedComponents.first, firstString.count == 1, splittedComponents.count > 1 else { return splittedComponents }
+                            let firstCharacter = Character(firstString)
+                            guard signs.contains(firstCharacter) else { return splittedComponents }
+                            let firstOpponent = "\(firstString)\(splittedComponents[1])"
+                            guard splittedComponents.count > 2 else { return [firstOpponent] }
+                            return ([firstOpponent] + Array(splittedComponents[2...]))
                         }
         }
         
