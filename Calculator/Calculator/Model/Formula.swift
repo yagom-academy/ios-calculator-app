@@ -9,7 +9,7 @@ import Foundation
 
 struct Formula {
     
-    // MARK: - property
+    // MARK: property
     
     var operands: CalculatorItemQueue?
     var operators: CalculatorItemQueue?
