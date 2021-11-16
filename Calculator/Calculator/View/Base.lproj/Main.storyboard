@@ -17,39 +17,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
-                                <rect key="frame" x="16" y="227.5" width="382" height="45"/>
+                                <rect key="frame" x="16" y="222.5" width="382" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-Ld-ZGi">
-                                                <rect key="frame" x="267" y="0.0" width="115" height="20.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7v-6K-W40">
-                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGo-LN-bKL">
-                                                        <rect key="frame" x="16" y="0.0" width="99" height="20.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-iL-eIa">
-                                                <rect key="frame" x="267" y="24.5" width="115" height="20.5"/>
+                                                <rect key="frame" x="274" y="0.0" width="108" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alw-Zd-2pT">
-                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alw-Zd-2pT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcb-r0-27f">
-                                                        <rect key="frame" x="16" y="0.0" width="99" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcb-r0-27f">
+                                                        <rect key="frame" x="58" y="0.0" width="50" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -108,6 +91,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H6e-kd-Jpv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -154,6 +140,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oYL-O0-YmF"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -200,6 +189,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hdn-Mi-V4r"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -246,6 +238,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WSJ-oC-Q0T"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -306,14 +301,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2pK-nQ-lxl">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPC-iy-qdm">
-                                                <rect key="frame" x="0.0" y="0.0" width="19.5" height="50"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPC-iy-qdm">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD">
-                                                <rect key="frame" x="27.5" y="0.0" width="354.5" height="50"/>
+                                                <rect key="frame" x="58" y="0.0" width="324" height="50"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -339,16 +334,22 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="sbh-wC-koF" id="P8G-Wv-j0G"/>
+                        <outlet property="arithmetic" destination="HPC-iy-qdm" id="SQw-2B-xgQ"/>
+                        <outlet property="calculationHistoryStackView" destination="XRe-QE-UJf" id="YaP-Vk-zal"/>
+                        <outlet property="divideButton" destination="Tfz-eM-jll" id="Eby-R6-qUz"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="yVt-p8-CfJ"/>
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="XDJ-mo-lkN"/>
                         <outlet property="eightButton" destination="xgT-2D-A49" id="obA-QF-8Be"/>
                         <outlet property="expression" destination="Lwz-OF-XHD" id="fNO-rD-AFe"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="MRV-tz-l8X"/>
                         <outlet property="fourButton" destination="hQm-yz-XvG" id="TBc-iu-aIm"/>
+                        <outlet property="multiplyButton" destination="811-Pz-An6" id="jzE-R8-ehQ"/>
                         <outlet property="nineButton" destination="zcj-xJ-ruw" id="zqw-Dw-YAJ"/>
                         <outlet property="oneButton" destination="nCE-qB-NiN" id="IEx-1k-yPH"/>
                         <outlet property="sevenButton" destination="L6z-2G-Gar" id="Obj-lh-ZW6"/>
                         <outlet property="sixButton" destination="OaY-Mw-CPv" id="SM9-PX-hlk"/>
+                        <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="x1B-sv-ckr"/>
                         <outlet property="threeButton" destination="X8H-iH-tSd" id="kTq-ST-GTh"/>
                         <outlet property="twoButton" destination="Rif-2S-UU2" id="WMr-WX-xGw"/>
                         <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="KNP-Ol-Bin"/>

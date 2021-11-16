@@ -21,8 +21,16 @@ class ViewController: UIViewController {
     @IBOutlet private weak var eightButton: UIButton!
     @IBOutlet private weak var nineButton: UIButton!
     
+    
+    @IBOutlet weak var divideButton: UIButton!
+    @IBOutlet weak var multiplyButton: UIButton!
+    @IBOutlet weak var subtractButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    
+    @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet private weak var expression: UILabel!
-
+    @IBOutlet weak var arithmetic: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,7 +47,38 @@ class ViewController: UIViewController {
         
         expression.text?.append(operand)
     }
-
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let `operator` = matchOperatorButton(sender: sender) else {
+            return
+        }
+        
+        let sign = UILabel()
+        sign.textColor = .white
+        sign.text = arithmetic.text
+        
+        let history = UILabel()
+        history.text = expression.text
+        history.textColor = .white
+        
+        let newHistory = UIStackView(arrangedSubviews: [sign, history])
+        
+        guard expression.text != "" else {
+            arithmetic.text = `operator`
+            return
+        }
+        
+        calculationHistoryStackView.addArrangedSubview(newHistory)
+        
+        newHistory.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            newHistory.trailingAnchor.constraint(equalTo: calculationHistoryStackView.trailingAnchor, constant: 10.0)
+        ])
+        
+        expression.text = ""
+        arithmetic.text = `operator`
+    }
+    
     private func matchOperandButton(sender: UIButton) -> String? {
         switch sender {
         case zeroButton:
@@ -70,7 +109,20 @@ class ViewController: UIViewController {
             return nil
         }
     }
-
-
+    
+    private func matchOperatorButton(sender: UIButton) -> String? {
+        switch sender {
+        case addButton:
+            return "+"
+        case subtractButton:
+            return "−"
+        case divideButton:
+            return "÷"
+        case multiplyButton:
+            return "×"
+        default:
+            return nil
+        }
+    }
 }
 
