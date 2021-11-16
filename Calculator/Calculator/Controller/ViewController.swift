@@ -66,6 +66,13 @@ class ViewController: UIViewController {
         inputedOperatorLabel.text = operators(for: sender)
     }
     
+    @IBAction func convertPositiveOrNegative(_ sender: UIButton) {
+        if let doubleOperand = Double(operand), doubleOperand != 0 {
+            operand = String(doubleOperand * -1)
+        }
+        inputedOperandLabel.text = operand
+    }
+    
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
