@@ -65,11 +65,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpAllClear(_ sender: UIButton) {
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         reset()
     }
     
-    @IBAction func touchUpClearEntry(_ sender: UIButton) {
+    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         clearEntry()
     }
     
