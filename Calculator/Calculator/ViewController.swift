@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     private var calculatorManager = CalculatorManager(calculatingFinish: false, isTypingOperand: false)
+//    private var formulasStackViewIsEmpty: Bool = true
     
     private var displayOperator: String {
         get {
@@ -178,6 +179,11 @@ extension ViewController {
     }
     
     private func addFormulaToFormulas(`operator`: String, operand: String) {
+        guard operand != "NaN" else {
+            displayOperand = "0"
+            return
+        }
+        
         let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
