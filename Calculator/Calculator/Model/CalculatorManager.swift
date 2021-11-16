@@ -8,11 +8,14 @@
 import Foundation
 
 struct CalculatorManager {
-    var isCalculating : Bool
+    var calculatingFisnish : Bool
+    var isTypingOperand : Bool
+    
     private let numberFormatter = NumberFormatter()
 
-    init(isCalculating: Bool){
-        self.isCalculating = isCalculating
+    init(calculatingFisnish: Bool, isTypingOperand: Bool){
+        self.calculatingFisnish = calculatingFisnish
+        self.isTypingOperand = isTypingOperand
     }
     
     func format(of numberExpression: String) -> String {
