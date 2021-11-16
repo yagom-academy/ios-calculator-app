@@ -98,7 +98,7 @@ extension ViewController {
             return
         }
         
-        guard Double(displayOperand) != 0.0 else {
+        guard Double(displayOperand) != 0.0 || formulasStackViewIsEmpty else {
             displayOperator = currentOperandButtionTitle
             return
         }
@@ -164,6 +164,7 @@ extension ViewController {
     
     private func initDisplayFormulas() {
         formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
+        formulasStackViewIsEmpty = true
     }
     
     private func initAllDisplay() {
@@ -203,6 +204,8 @@ extension ViewController {
         formulaRowStackView.addArrangedSubview(operandLabel)
         
         formulasStackView.addArrangedSubview(formulaRowStackView)
+        
+        formulasStackViewIsEmpty = false
     }
     
     private func convertSign(from operand: String) -> String {
