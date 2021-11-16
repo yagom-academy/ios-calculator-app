@@ -25,8 +25,10 @@ enum Operator: Character, CaseIterable, CalculatorItem {
         case .multiply:
             calculateResult = multiply(lhs: lhs, rhs: rhs)
         }
+        
         return calculateResult
     }
+    
     private func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
     }

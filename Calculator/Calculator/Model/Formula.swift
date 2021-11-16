@@ -29,6 +29,7 @@ struct Formula {
             
             resultOfCaculate = try `operator`.calculate(lhs: resultOfCaculate, rhs: nextOperand)
         }
+        
         return resultOfCaculate
     }
 }
