@@ -9,9 +9,6 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Operator {
-//        let filtered: (String) -> Bool = { $0.contains("+") }
-//        return filtered(input)
-        
         let operatorRawValues = Operator.allCases.map { $0.rawValue }
         var testResult: Operator = .subtract
 //        var operatorQueue = CalculatorItemQueue<Operator>()
@@ -24,9 +21,13 @@ enum ExpressionParser {
         return testResult
 //        return operatorQueue
     }
-
-    private static func componentsByOperators(from input: String) -> [String] {
-        let result = input.split(with: " ")
-        return result
+    
+    static func componentsByOperators(from input: String) -> [String] {
+        var operands: [String] = []
+        
+        operands = Operator.allCases.reduce([input]) { (splitInput, operatorInInput) in
+            splitInput.flatMap { $0.split(with: operatorInInput.rawValue)}
+        }
+        return operands
     }
 }
