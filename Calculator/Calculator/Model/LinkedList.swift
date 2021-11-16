@@ -40,31 +40,29 @@ struct LinkedList<T> {
         rear = rear?.next
     }
     
-    mutating func deQueue() -> T? {
-        let data = front?.data
+    mutating func removeFirst() -> T? {
+        let dataOfRemove = front?.data
         
-        if isEmpty() {
-            return nil
-        }
         front = front?.next
-        return data
+        
+        return dataOfRemove
     }
     
     mutating func removeAll() {
         front = nil
     }
     
-    mutating func returnList() -> Array<T> {
-        var queue: Array<T> = []
+    mutating func convertArray() -> Array<T> {
+        var dataList: Array<T> = []
         var node = front
         
         while node?.data != nil {
             guard let data = node?.data else {
                 return []
             }
-            queue.append(data)
+            dataList.append(data)
             node = node?.next
         }
-        return queue
+        return dataList
     }
 }
