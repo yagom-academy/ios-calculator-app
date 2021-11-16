@@ -5,7 +5,7 @@
 //  Created by Jae-hoon Sim on 2021/11/16.
 //
 
-import UIKit
+import Foundation
 
 struct OperandEntry {
     var currentOperand: String {

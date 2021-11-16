@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
     }
     @IBAction func equalsButtonDidTap(_ sender: UIButton) {
+        //
     }
     
     func clearLabels() {
