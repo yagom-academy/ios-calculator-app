@@ -54,5 +54,10 @@ class ViewController: UIViewController {
         operatorLabel.text = ""
     }
     
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+    }
+    
 }
 
