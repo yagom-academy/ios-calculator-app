@@ -47,5 +47,21 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(120, calculationResult)
     }
+    
+    func test_숫자_4개의_뺼셈을_잘_수행하는지() throws {
+        [10, 5, -2, 1].forEach { number in
+            formula.operands.enqueue(operation: number)
+        }
+        
+        for _ in 1...3 {
+            formula.operators.enqueue(operation: .subtract)
+        }
+        
+        let calculationResult = try formula.result()
+        
+        XCTAssertEqual(6, calculationResult)
+    }
+    
+
 }
 
