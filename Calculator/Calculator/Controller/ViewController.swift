@@ -71,28 +71,30 @@ class ViewController: UIViewController {
     
     func addFormula(operand: String, operator: String) -> UIStackView {
         let formulaStackView = UIStackView()
-        let operatorLabel = UILabel()
         let operandLabel = UILabel()
-        
+        operandLabel.text = operand
+        guard calculatorStackView.subviews.count > 0 else {
+            setUpFormulaLabel(of: operandLabel)
+            formulaStackView.addArrangedSubview(operandLabel)
+            return formulaStackView
+        }
+        let operatorLabel = UILabel()
+        operatorLabel.text = `operator`
+        setUpFormulaLabel(of: operatorLabel)
+        setUpFormulaLabel(of: operandLabel)
         formulaStackView.axis = .horizontal
         formulaStackView.alignment = .fill
         formulaStackView.distribution = .fill
         formulaStackView.spacing = 8
-        
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorLabel.textColor = .white
-        operatorLabel.text = `operator`
-        operatorLabel.adjustsFontForContentSizeCategory = true
-        
-        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operandLabel.textColor = .white
-        operandLabel.text = operand
-        operandLabel.adjustsFontForContentSizeCategory = true
-        
         formulaStackView.addArrangedSubview(operatorLabel)
         formulaStackView.addArrangedSubview(operandLabel)
-        
         return formulaStackView
+    }
+    
+    func setUpFormulaLabel(of label: UILabel) {
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.adjustsFontForContentSizeCategory = true
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
