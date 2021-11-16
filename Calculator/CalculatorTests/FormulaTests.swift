@@ -70,4 +70,14 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testDivideUsingZero() throws {
+        sut.operands.insert(6)
+        sut.operators.insert(.divide)
+        sut.operands.insert(0)
+        
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? OperatorError, OperatorError.divisionByZero)
+        }
+    }
 }
