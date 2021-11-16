@@ -52,7 +52,8 @@ class ViewController: UIViewController {
         
         currentOperand += operand
         
-        expression.text = currentOperand
+        let trimmedOperand = currentOperand.replacingOccurrences(of: "^0+", with: "", options: .regularExpression)
+        expression.text = trimmedOperand == "" ? "0" : trimmedOperand
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
