@@ -117,6 +117,8 @@ class ViewController: UIViewController {
             expression.text = result.description
             arithmetic.text = ""
         } catch OperationError.dividedByZero {
+            expression.text = "NaN"
+            arithmetic.text = ""
             print(OperationError.dividedByZero.localizedDescription)
         } catch CalculationItemQueueError.hasNoElement {
             print(CalculationItemQueueError.hasNoElement.localizedDescription)
