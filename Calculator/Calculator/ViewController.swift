@@ -101,7 +101,6 @@ extension ViewController {
         }
         
         addFormulaToFormulas(operator: displayOperator, operand: displayOperand)
-        
         displayOperator = currentOperandButtionTitle
         initDisplayOperand()
         scrollToBottom(in: formulasScrollView)
@@ -121,6 +120,7 @@ extension ViewController {
         }
         
         let convertedOperand = convertSign(from: displayOperand)
+        
         displayOperand = convertedOperand
     }
     
@@ -201,7 +201,9 @@ extension ViewController {
         guard let sign = operand.first, sign == "-" else {
             return "-" + operand
         }
+        
         let signIndex: String.Index = operand.index(operand.startIndex, offsetBy: 1)
+        
         return String(operand[signIndex...])
     }
     
@@ -212,12 +214,15 @@ extension ViewController {
             let smallStackView = $0 as? UIStackView
             smallStackView?.arrangedSubviews.forEach {
                 let label = $0 as? UILabel
-                guard let text = label?.text, text != "" else { return }
+                
+                guard let text = label?.text, text != "" else {
+                    return
+                }
+                
                 result.append(text)
             }
         }
         
         return result.joined(separator: " ")
     }
-    
 }
