@@ -31,4 +31,12 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(exampleOperator, testData)
     }
+    
+    func test_정상적인_연산을_하는지() throws {
+        exampleData = "12 * -3 + 5 ₋ 4 / 5"
+        
+        var testFormula = ExpressionParser.parse(from: exampleData)
+        
+        XCTAssertEqual(-7, try testFormula.result())
+    }
 }
