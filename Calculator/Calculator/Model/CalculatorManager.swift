@@ -8,13 +8,13 @@
 import Foundation
 
 struct CalculatorManager {
-    var calculatingFisnish : Bool
+    var calculatingFinish : Bool
     var isTypingOperand : Bool
     
     private let numberFormatter = NumberFormatter()
 
     init(calculatingFisnish: Bool, isTypingOperand: Bool){
-        self.calculatingFisnish = calculatingFisnish
+        self.calculatingFinish = calculatingFisnish
         self.isTypingOperand = isTypingOperand
     }
     
@@ -26,8 +26,11 @@ struct CalculatorManager {
         }
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumSignificantDigits = 1
         numberFormatter.maximumSignificantDigits = 20
+        
+        if calculatingFinish {
+            numberFormatter.minimumSignificantDigits = 1
+        }
         
         guard let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) else {
             return "0"
