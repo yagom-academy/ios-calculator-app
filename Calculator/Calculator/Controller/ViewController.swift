@@ -6,8 +6,8 @@
 
 import UIKit
 
+// MARK: Property and LifeCycle
 class ViewController: UIViewController {
-    
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
@@ -33,41 +33,6 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
-    
-    private func scrollToBottom(_ view: UIScrollView) {
-        calculatorScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
-        view.setContentOffset(bottomOffset, animated: false)
-    }
-    
-    private func addFormula(operand: String, operator: String) -> UIStackView {
-        let formulaStackView = UIStackView()
-        let operandLabel = UILabel()
-        operandLabel.text = operand
-        guard calculatorStackView.subviews.count > 0 else {
-            setUpFormulaLabel(of: operandLabel)
-            formulaStackView.addArrangedSubview(operandLabel)
-            return formulaStackView
-        }
-        let operatorLabel = UILabel()
-        operatorLabel.text = `operator`
-        setUpFormulaLabel(of: operatorLabel)
-        setUpFormulaLabel(of: operandLabel)
-        formulaStackView.axis = .horizontal
-        formulaStackView.alignment = .fill
-        formulaStackView.distribution = .fill
-        formulaStackView.spacing = 8
-        formulaStackView.addArrangedSubview(operatorLabel)
-        formulaStackView.addArrangedSubview(operandLabel)
-        return formulaStackView
-    }
-    
-    private func setUpFormulaLabel(of label: UILabel) {
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        label.adjustsFontForContentSizeCategory = true
-    }
-    
     
     private func setUpNumberFormat(for value: Double) -> String {
         let numberFormatter = NumberFormatter()
@@ -163,6 +128,42 @@ extension ViewController {
             print(error.localizedDescription)
         }
         operatorLabel.text = ""
+    }
+}
+// MARK: Formula Stack View Related
+extension ViewController {
+    private func addFormula(operand: String, operator: String) -> UIStackView {
+        let formulaStackView = UIStackView()
+        let operandLabel = UILabel()
+        operandLabel.text = operand
+        guard calculatorStackView.subviews.count > 0 else {
+            setUpFormulaLabel(of: operandLabel)
+            formulaStackView.addArrangedSubview(operandLabel)
+            return formulaStackView
+        }
+        let operatorLabel = UILabel()
+        operatorLabel.text = `operator`
+        setUpFormulaLabel(of: operatorLabel)
+        setUpFormulaLabel(of: operandLabel)
+        formulaStackView.axis = .horizontal
+        formulaStackView.alignment = .fill
+        formulaStackView.distribution = .fill
+        formulaStackView.spacing = 8
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(operandLabel)
+        return formulaStackView
+    }
+    
+    private func setUpFormulaLabel(of label: UILabel) {
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.adjustsFontForContentSizeCategory = true
+    }
+    
+    private func scrollToBottom(_ view: UIScrollView) {
+        calculatorScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
+        view.setContentOffset(bottomOffset, animated: false)
     }
 }
 extension UIStackView {
