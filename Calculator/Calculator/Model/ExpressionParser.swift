@@ -32,7 +32,6 @@ extension ExpressionParser {
 // MARK: - private static method
 
 extension ExpressionParser {
-    
     private static func componentByOperators(from input: String) -> [String] {
         return Operator.allCases
             .reduce([input]) { (result, `operator`) in result.flatMap { $0.split(with: `operator`.rawValue)} }

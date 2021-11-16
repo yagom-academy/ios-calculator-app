@@ -14,14 +14,6 @@ struct CalculatorItemQueue {
     private var queueList: LinkedList = LinkedList()
 }
 
-// MARK: - private method
-
-extension CalculatorItemQueue {
-    private mutating func enqueue(item: CalculateItem) {
-        queueList.append(data: item)
-    }
-}
-
 // MARK: - internal method
 
 extension CalculatorItemQueue {
@@ -44,5 +36,13 @@ extension CalculatorItemQueue {
     
     func getQueueList() -> LinkedList {
         return queueList
+    }
+}
+
+// MARK: - private method
+
+extension CalculatorItemQueue {
+    private mutating func enqueue(item: CalculateItem) {
+        queueList.append(data: item)
     }
 }

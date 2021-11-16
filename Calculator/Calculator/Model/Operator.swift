@@ -14,7 +14,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "*"
 }
 
-// MARK: - public method
+// MARK: - internal method
 
 extension Operator {
     func calculate(lhs: Double, rhs: Double) -> Double {
