@@ -10,7 +10,7 @@ class ExpressionParserTests: XCTestCase {
                               operators: CalculatorItemQueue(operators))
         let input = "1+2-3*4/5"
         var formulaFromText = ExpressionParser.parse(from: input)
-        XCTAssertEqual(formulaFromText.result(), formula.result())
+        XCTAssertEqual(try? formulaFromText.result(), try? formula.result())
     }
     
     func test_parse_남는_숫자는_무시() {
@@ -20,6 +20,6 @@ class ExpressionParserTests: XCTestCase {
                               operators: CalculatorItemQueue(operators))
         let input = "1+2-3*4/5"
         var formulaFromText = ExpressionParser.parse(from: input)
-        XCTAssertEqual(formulaFromText.result(), formula.result())
+        XCTAssertEqual(try? formulaFromText.result(), try? formula.result())
     }
 }

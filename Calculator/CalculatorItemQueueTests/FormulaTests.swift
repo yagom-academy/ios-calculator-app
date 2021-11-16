@@ -15,7 +15,7 @@ class FormulaTests: XCTestCase {
     }
     
     func test_Formula_빈_result() {
-        let result = sut.result()
+        let result = try? sut.result()
         XCTAssertEqual(result, 0)
     }
     
@@ -24,7 +24,7 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.add)
         sut.operands.enqueue(2)
         
-        let result = sut.result()
+        let result = try? sut.result()
         XCTAssertEqual(result, 3)
     }
     
@@ -34,7 +34,7 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         sut.operators.enqueue(Operator.add)
         
-        let result = sut.result()
+        let result = try? sut.result()
         XCTAssertEqual(result, 3)
     }
     
@@ -42,7 +42,7 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(1)
         sut.operands.enqueue(2)
         
-        let result = sut.result()
+        let result = try? sut.result()
         XCTAssertEqual(result, 1)
     }
 }
