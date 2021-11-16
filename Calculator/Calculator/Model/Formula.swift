@@ -11,11 +11,6 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
-        self.operands = operands
-        self.operators = operators
-    }
-    
     func result() -> Double {
         let operatorsCount = operators.queue.count
         
