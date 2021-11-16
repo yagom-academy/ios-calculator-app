@@ -11,7 +11,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     
-    private var inputFormula: String = ""
+    private var entry = OperandEntry()
+    private var formula: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +21,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func allClearButtonDidTap(_ sender: UIButton) {
+        entry.clear()
+        updateOperandLabel()
     }
     @IBAction func clearEntryButtonDidTap(_ sender: UIButton) {
+        entry.clear()
+        updateOperandLabel()
     }
     @IBAction func toggleSignButtonDidTap(_ sender: UIButton) {
+        entry.toggleSign()
+        updateOperandLabel()
     }
-    @IBAction func operandButtonDidTap(_ sender: UIButton) {
+    @IBAction func numberButtonDidTap(_ sender: UIButton) {
+        guard let numer = sender.titleLabel?.text else { return }
+        entry.append(numer)
+        updateOperandLabel()
     }
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
     }
@@ -39,6 +49,14 @@ class ViewController: UIViewController {
         currentOperatorLabel.text = blank
         currentOperandLabel.text = zero
         verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func updateOperandLabel() {
+        currentOperandLabel.text = entry.currentOperand
+    }
+    
+    func updateOperatorLabel(by operator: String) {
+        currentOperatorLabel.text = `operator`
     }
 }
 
