@@ -31,39 +31,14 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let allOperatorSymbols = Operator.allCases.map { $0.rawValue }
-        let signs = [Operator.add.rawValue, Operator.subtract.rawValue]
-        let emptySpace = Character(" ")
-        
-        let allOperatorSymbolsWithSign = allOperatorSymbols.flatMap { operatorSymbol in
-            signs.map { sign in "\(operatorSymbol)\(sign)" }
-        }
         
         let inputWithoutWhitespace = input.components(separatedBy: .whitespacesAndNewlines).joined()
         
-        var components = allOperatorSymbolsWithSign.reduce([inputWithoutWhitespace]) {
-            (result: [String], operatorSymbolWithSign: String) in
-            guard let operatorSymbol = operatorSymbolWithSign.first else { return result }
-            guard let sign = operatorSymbolWithSign.last else { return result }
-            let operatorSymbolWithEmptySpaceAndSign = "\(emptySpace)\(operatorSymbol)\(emptySpace)\(sign)"
-            
-            return result
-                        .map {
-                            $0.replacingOccurrences(of: operatorSymbolWithSign, with: operatorSymbolWithEmptySpaceAndSign)
-                        }
-                        .flatMap { $0.components(separatedBy: "\(emptySpace)") }
-        }
-        
-        components = allOperatorSymbols.reduce(components) {
+        let components = allOperatorSymbols.reduce([inputWithoutWhitespace]) {
             (result: [String], operatorSymbol: Character) in
             return result
                 .flatMap { component -> [String] in
-                    guard let firstCharacter = component.first else { return [component] }
-                    let result = signs.contains(firstCharacter)
-                                    && component.count > 1
-                                    && component.filter { allOperatorSymbols.contains($0) }.count == 1
-                                        ? [component]
-                                        : component.split(with: operatorSymbol)
-                    return result
+                    return component.split(with: operatorSymbol)
                 }
         }
         
