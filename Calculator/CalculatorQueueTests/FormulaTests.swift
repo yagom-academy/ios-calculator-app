@@ -33,5 +33,19 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(100, calculationResult)
     }
+    
+    func test_숫자_4개의_곱셉을_잘_수행하는지() throws {
+        [2, 3, 4, 5].forEach { number in
+            formula.operands.enqueue(operation: number)
+        }
+        
+        for _ in 1...3 {
+            formula.operators.enqueue(operation: .multiply)
+        }
+        
+        let calculationResult = try formula.result()
+        
+        XCTAssertEqual(120, calculationResult)
+    }
 }
 
