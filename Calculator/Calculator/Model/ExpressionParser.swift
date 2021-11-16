@@ -24,7 +24,9 @@ enum ExpressionParser {
             return firstCharacter.isNumber && lastCharacter.isNumber
         }
     }
-    
+}
+
+extension ExpressionParser {
     static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
         guard StringChecker.hasOnlyNumberOrOperator(from: input) else {
             return .failure(.includingIncorrectCharacter)
