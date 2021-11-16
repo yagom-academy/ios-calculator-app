@@ -11,8 +11,6 @@ class CalculatorController: UIViewController {
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    private var isDotExist: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -43,9 +41,7 @@ extension CalculatorController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        if isDotExist == false {
-            isDotExist = true
-            
+        if numberLabel.text?.contains(".") == false {
             let currentText = numberLabel.text ?? "0"
             guard let operand = sender.currentTitle else { return }
             
@@ -59,4 +55,5 @@ extension CalculatorController {
         operatorLabel.text = `operator`
     }
         
+    
 }
