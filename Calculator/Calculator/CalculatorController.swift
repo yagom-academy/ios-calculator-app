@@ -11,13 +11,13 @@ class CalculatorController: UIViewController {
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    private var expressionInput: String?
+    private var expressionInput: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func changeNumberLabel(text: String) {
+    private func changeNumberLabel(text: String) {
         let currentText = numberLabel.text ?? "0"
         
         guard currentText != "0" ||
@@ -30,6 +30,19 @@ class CalculatorController: UIViewController {
         } else {
             numberLabel.text = currentText + text
         }
+    }
+    
+    private func appendExpression() {
+        guard let number = numberLabel.text,
+              let `operator` = operatorLabel.text else {
+                  return
+              }
+        
+        expressionInput.append(number + `operator`)
+    }
+    
+    private func resetNumberLabel() {
+        numberLabel.text = "0"
     }
 }
 
@@ -56,6 +69,9 @@ extension CalculatorController {
         guard let `operator` = sender.currentTitle else { return }
         
         operatorLabel.text = `operator`
+        
+        appendExpression()
+        resetNumberLabel()
     }
 
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
