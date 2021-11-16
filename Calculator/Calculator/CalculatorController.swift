@@ -9,7 +9,7 @@ import UIKit
 class CalculatorController: UIViewController {
 
     @IBOutlet weak private var numberLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak private var operatorLabel: UILabel!
     
     private var expressionInput: String = ""
     
@@ -89,6 +89,10 @@ extension CalculatorController {
         }
         
         numberLabel.text = currentText
+    }
+    
+    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
+        resetNumberLabel()
     }
     
 }
