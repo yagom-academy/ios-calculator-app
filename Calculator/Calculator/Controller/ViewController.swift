@@ -59,5 +59,16 @@ class ViewController: UIViewController {
         operatorLabel.text = ""
     }
     
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        let hasDotNotIncluded = operandLabel.text?.contains(".") == false
+        guard hasDotNotIncluded else {
+            return
+        }
+        guard let currentOperandButtonText = sender.titleLabel?.text else {
+            return
+        }
+        operandLabel.text! += currentOperandButtonText
+    }
+    
 }
 
