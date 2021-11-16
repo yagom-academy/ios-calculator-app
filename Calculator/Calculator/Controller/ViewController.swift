@@ -22,18 +22,6 @@ class ViewController: UIViewController {
         removeFormulaLabel()
         removeFormulaView()
     }
-    
-    private func removeFormulaView() {
-        calculatorStackView.subviews.forEach{
-            $0.removeFromSuperview()
-        }
-    }
-    
-    private func removeFormulaLabel() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-    }
-    
     private func setUpNumberFormat(for value: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -166,6 +154,21 @@ extension ViewController {
         view.setContentOffset(bottomOffset, animated: false)
     }
 }
+
+// MARK: Label Initialization Related
+extension ViewController {
+    private func removeFormulaView() {
+        calculatorStackView.subviews.forEach{
+            $0.removeFromSuperview()
+        }
+    }
+    
+    private func removeFormulaLabel() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+    }
+}
+
 extension UIStackView {
     var toString: String {
         var inputValues = [String]()
