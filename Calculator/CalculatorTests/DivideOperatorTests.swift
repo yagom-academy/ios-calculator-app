@@ -40,7 +40,7 @@ class DivideOperatorTests: XCTestCase {
         XCTAssertEqual(calculatedResult, firstNumber / secondNumber / thirdNumber)
     }
     
-    func testDivideUsingOne() throws {
+    func testDivideUsingZero() throws {
         let firstNumber = 36.0
         let secondNumber = 0.0
         
