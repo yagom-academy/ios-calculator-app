@@ -9,7 +9,8 @@ import XCTest
 
 class CaculatorManagerTests: XCTestCase {
     
-    private let calculatorManager = CalculatorManager(isCalculating: false)
+    private let calculatorManager = CalculatorManager(calculatingFisnish: false,
+                                                      isTypingOperand: false)
     private var numberToConvert: String = ""
 
     func testConvertToDecimalStyleWhereNumberIsInt() {
@@ -35,5 +36,15 @@ class CaculatorManagerTests: XCTestCase {
     func testConvertToDecimalStyleWhereNumberIsZero() {
         numberToConvert = "0.0"
         XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0")
+    }
+    
+    func testConvertToSginificantWhereTailedByMeaninglessZero() {
+        numberToConvert = "0.12345789700000000"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.123457897")
+    }
+    
+    func testConvertToMaximumSginificantWhereExceedMaximum() {
+        numberToConvert = "0.123457897115615616513334"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.12345789711561561651")
     }
 }
