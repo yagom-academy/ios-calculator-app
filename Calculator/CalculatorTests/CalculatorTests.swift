@@ -38,7 +38,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertNil(queue.linkedList.head?.nodeValue)
         
         do {
-            try? queue.deleteFromQueue()
+            try queue.deleteFromQueue()
         } catch ErrorCase.emptyQueue {
             XCTAssertThrowsError(ErrorCase.emptyQueue)
         }
