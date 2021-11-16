@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputedOperatorLabel: UILabel!
     @IBOutlet weak var inputedOperandLabel: UILabel!
     @IBOutlet weak var toBeCalculateFormulaStackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var inputDotButton: UIButton!
     @IBOutlet weak var inputZeroZeroButton: UIButton!
@@ -50,6 +51,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
+        let operatorLabelText = inputedOperatorLabel.text
+        let operandLabelText = numberFormatter(inputOperand: operand)
+        let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+        
+        toBeCalculateFormulaStackView.addArrangedSubview(stackView)
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+        inputedOperatorLabel.text = operators(for: sender)
+    }
+    
+    func makeStackView(operatorLabelText: String?, operandLabelText: String?) -> UIStackView {
+        let stackView = UIStackView()
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        
+        operandLabel.text = operandLabelText
+        operatorLabel.text = operatorLabelText
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        
+        return stackView
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {
@@ -62,7 +87,6 @@ class ViewController: UIViewController {
             return ""
         }
         let numberFormatter = NumberFormatter()
-        
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
 
@@ -76,9 +100,9 @@ class ViewController: UIViewController {
         case subtractButton:
             return "-"
         case divideButton:
-            return "/"
+            return "÷"
         case multiplyButton:
-            return "*"
+            return "×"
         default:
             return ""
         }
