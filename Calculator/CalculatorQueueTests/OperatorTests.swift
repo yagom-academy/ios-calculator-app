@@ -45,4 +45,11 @@ class OperatorTests: XCTestCase {
         
         XCTAssertEqual(result, 2)
     }
+    
+    func test_Operator_divide에서_0으로_나눴을때_에러가_발생하는지() {
+        sut = .divide
+        let result = sut.calculate(lhs: 4, rhs: 0)
+        
+        XCTAssertThrowsError(result)
+    }
 }
