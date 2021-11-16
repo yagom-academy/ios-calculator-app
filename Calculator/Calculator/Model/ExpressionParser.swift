@@ -55,19 +55,16 @@ enum ExpressionParser {
         
         components = allOperatorSymbols.reduce(components) {
             (result: [String], operatorSymbol: Character) in
-            let operatorSymbolWithEmptySpace = "\(emptySpace)\(operatorSymbol)"
             return result
-                        .map {
-                            $0.replacingOccurrences(of: "\(operatorSymbol)", with: operatorSymbolWithEmptySpace)
-                        }
-                        .flatMap { $0.split(separator: emptySpace).map { String($0) } }
-                        .flatMap { component -> [String] in
-                            guard let firstCharacter = component.first else { return [component] }
-                            let result = signs.contains(firstCharacter) && component.count > 1
-                                                ? [component]
-                                                : component.split(with: operatorSymbol)
-                            return result
-                        }
+                .flatMap { component -> [String] in
+                    guard let firstCharacter = component.first else { return [component] }
+                    let result = signs.contains(firstCharacter)
+                                    && component.count > 1
+                                    && component.filter { allOperatorSymbols.contains($0) }.count == 1
+                                        ? [component]
+                                        : component.split(with: operatorSymbol)
+                    return result
+                }
         }
         
         return components
