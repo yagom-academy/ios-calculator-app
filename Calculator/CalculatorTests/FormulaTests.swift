@@ -31,4 +31,17 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testSixSubtractNineMultiplyEight() throws {
+        sut.operands.insert(6)
+        sut.operands.insert(9)
+        sut.operands.insert(8)
+        sut.operators.insert(.subtract)
+        sut.operators.insert(.multiply)
+        
+        let calculatedResult = try sut.result()
+        let expectedResult: Double = -24
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
 }
