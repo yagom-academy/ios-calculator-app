@@ -8,5 +8,16 @@
 import Foundation
 
 enum CalculateError: Error {
-    case NotANumber
+    case notANumber
 }
+
+extension CalculateError {
+    var message: String? {
+        switch self {
+        case .notANumber:
+            return "NaN"
+        }
+    }
+}
+
+
