@@ -91,17 +91,11 @@ class ViewController: UIViewController {
             return
         }
         
-        if currentNumber.isSameAfterRounded() {
-            let formatter = NumberFormatter()
-            formatter.maximumFractionDigits = 0
-            guard let operand = formatter.string(from: NSNumber(value: currentNumber)) else {
-                return
-            }
-            
-            addCalculationHistory(operandsText: operand, operatorText: currentOperator)
-        } else {
-            addCalculationHistory(operandsText: String(currentNumber), operatorText: currentOperator)
+        guard let operandText = String(currentNumber).addCommaOnEveryThreeDigits() else {
+            return
         }
+        
+        addCalculationHistory(operandsText: operandText, operatorText: currentOperator)
         
         currentOperand = ""
         currentOperator = `operator`
