@@ -17,13 +17,6 @@ class CalculatorViewController: UIViewController {
         reset()
     }
     
-    func reset() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-        allClear()
-    }
-    }
-    
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else {
             return
