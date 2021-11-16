@@ -11,8 +11,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        addFormulaLine(operator: "-", operand: "1234567890")
     }
-    
+}
+
+// MARK:- Adding Formula Line To StackView
+extension ViewController {
     private func addFormulaLine(operator: String, operand: String) {
         let operatorLabel = makeFormulaLabel(with: `operator`)
         let operandLabel = makeFormulaLabel(with: operand)
@@ -44,4 +48,3 @@ class ViewController: UIViewController {
         return horizontal
     }
 }
-
