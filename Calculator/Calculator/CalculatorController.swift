@@ -41,11 +41,12 @@ extension CalculatorController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        if numberLabel.text?.contains(".") == false {
+        guard let dot = sender.currentTitle else { return }
+        
+        if numberLabel.text?.contains(dot) == false {
             let currentText = numberLabel.text ?? "0"
-            guard let operand = sender.currentTitle else { return }
             
-            numberLabel.text = currentText + operand
+            numberLabel.text = currentText + dot
         }
     }
     

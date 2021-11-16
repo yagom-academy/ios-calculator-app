@@ -356,6 +356,7 @@
                     </view>
                     <connections>
                         <outlet property="numberLabel" destination="Lwz-OF-XHD" id="uCg-CR-V9y"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="XHv-1x-Oem"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
