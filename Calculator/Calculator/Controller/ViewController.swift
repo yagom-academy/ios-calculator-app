@@ -56,8 +56,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
-        if operand == StringOfInitialize.toEmptyString { return }
-
+        if operand == StringOfInitialize.toEmptyString {
+            inputedOperatorLabel.text = operators(for: sender)
+            return
+        }
+        
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
