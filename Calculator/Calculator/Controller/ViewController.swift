@@ -57,19 +57,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
-        guard let operand = expression.text else {
-            return
-        }
-        
-        guard let currentNumber = Double(operand), !currentNumber.isZero else {
+        guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
             return
         }
             
         if currentNumber.rounded() == currentNumber {
-            expression.text = String(Int(currentNumber) * -1)
+            currentOperand = String(Int(currentNumber) * -1)
         } else {
-            expression.text = String(currentNumber * -1)
+            currentOperand = String(currentNumber * -1)
         }
+        
+        expression.text = currentOperand
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
