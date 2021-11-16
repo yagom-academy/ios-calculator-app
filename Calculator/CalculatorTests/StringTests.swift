@@ -52,7 +52,7 @@ class StringTests: XCTestCase {
                            false ]
         
         for index in 0..<testCases.count {
-            XCTAssertEqual(testCases[index].firstAndLastLetterAreNumbers(), answerList[index], "test: \(index) was failed")
+            XCTAssertEqual(testCases[index].firstAndLastCharacterAreNumbers(), answerList[index], "test: \(index) was failed")
         }
     }
     

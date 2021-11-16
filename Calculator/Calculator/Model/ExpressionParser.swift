@@ -1,18 +1,18 @@
 enum ExpressionParser {
     enum ParserError: Error {
-        case includingIncorrectLetter
-        case firstOrLastLetterIsNotNumber
+        case includingIncorrectCharacter
+        case firstOrLastCharacterIsNotNumber
         case incorrectCountOfNumbersAndOperators
         case failedToInitializeFormulaInstance
     }
     
     static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
         guard input.hasOnlyNumberOrOperator() == true else {
-            return .failure(.includingIncorrectLetter)
+            return .failure(.includingIncorrectCharacter)
         }
         
-        guard input.firstAndLastLetterAreNumbers() == true else {
-            return .failure(.firstOrLastLetterIsNotNumber)
+        guard input.firstAndLastCharacterAreNumbers() == true else {
+            return .failure(.firstOrLastCharacterIsNotNumber)
         }
         
         let inputComponents = ExpressionParser.componentsByOperators(from: input)
