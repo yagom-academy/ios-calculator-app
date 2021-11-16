@@ -18,38 +18,37 @@ class OperatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_Operator_add에_0점4_0점1을_더하면_0점5가_되는지 () {
+    func test_Operator_add에_0점4_0점1을_더하면_0점5가_되는지() throws {
         sut = .add
-        let result = sut.calculate(lhs: 0.4, rhs: 0.1)
+        let result = try sut.calculate(lhs: 0.4, rhs: 0.1)
         
         XCTAssertEqual(result, 0.5)
     }
     
-    func test_Operator_subtract에_5에서_1을_빼면_4가_나오는지() {
+    func test_Operator_subtract에_5에서_1을_빼면_4가_나오는지() throws {
         sut = .subtract
-        let result = sut.calculate(lhs: 5, rhs: 1)
+        let result = try sut.calculate(lhs: 5, rhs: 1)
         
         XCTAssertEqual(result, 4)
     }
 
-    func test_Operator_multiply에_2에서_0점2를_곱하면_0점4가_나오는지() {
+    func test_Operator_multiply에_2에서_0점2를_곱하면_0점4가_나오는지() throws {
         sut = .multiply
-        let result = sut.calculate(lhs: 2, rhs: 0.2)
+        let result = try sut.calculate(lhs: 2, rhs: 0.2)
         
         XCTAssertEqual(result, 0.4)
     }
     
-    func test_Operator_divide에_4에서_2를_나누면_2가_나오는지() {
+    func test_Operator_divide에_4에서_2를_나누면_2가_나오는지() throws {
         sut = .divide
-        let result = sut.calculate(lhs: 4, rhs: 2)
+        let result = try sut.calculate(lhs: 4, rhs: 2)
         
         XCTAssertEqual(result, 2)
     }
     
-    func test_Operator_divide에서_0으로_나눴을때_에러가_발생하는지() {
+    func test_Operator_divide에서_0으로_나눴을때_에러가_발생하는지() throws  {
         sut = .divide
-        let result = sut.calculate(lhs: 4, rhs: 0)
         
-        XCTAssertThrowsError(result)
+        XCTAssertThrowsError(try sut.calculate(lhs: 4, rhs: 0))
     }
 }
