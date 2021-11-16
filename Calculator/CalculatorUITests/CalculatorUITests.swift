@@ -56,6 +56,14 @@ class CalculatorUITests: XCTestCase {
         app.buttons["4"].tap()
         app.buttons["2"].tap()
     }
+    
+    func test_1_2_곱하기_4_2_이퀄_버튼을_차례대로_탭하면_504가_출력된다() {
+        app.buttons["1"].tap()
+        app.buttons["2"].tap()
+        app.buttons["×"].tap()
+        app.buttons["4"].tap()
+        app.buttons["2"].tap()
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
