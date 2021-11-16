@@ -49,6 +49,19 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = sender.titleLabel?.text
         operandLabel.text = "0"
     }
+    @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
+        if var operand = operandLabel.text {
+            if operand == "0" {
+                return
+            }
+            if operand.contains("-") {
+                operand.remove(at: operand.startIndex)
+            } else {
+                operand.insert("-", at: operand.startIndex)
+            }
+            operandLabel.text = operand
+        }
+    }
     
     @IBAction func touchUpAllClear(_ sender: UIButton) {
         reset()
