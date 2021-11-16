@@ -41,6 +41,8 @@ class CalculatorTests: XCTestCase {
             try queue.deleteFromQueue()
         } catch ErrorCase.emptyQueue {
             XCTAssertThrowsError(ErrorCase.emptyQueue)
+        } catch {
+            return
         }
     }
 }
