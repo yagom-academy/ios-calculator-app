@@ -8,11 +8,14 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
 
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
+    }
 }
 
