@@ -24,7 +24,7 @@ class CaculatorManagerTests: XCTestCase {
     
     func testConvertToDecimalStyleWhereNumberIsDouble() {
         numberToConvert = "1234.01234"
-        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "-1,234.1234")
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234.01234")
     }
     
     func testConvertToDecimalStyleWhereNumberIsNegativeDouble() {
@@ -34,6 +34,6 @@ class CaculatorManagerTests: XCTestCase {
     
     func testConvertToDecimalStyleWhereNumberIsZero() {
         numberToConvert = "0.0"
-        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.0")
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0")
     }
 }
