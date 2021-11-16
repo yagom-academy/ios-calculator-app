@@ -39,13 +39,14 @@ class ViewController: UIViewController {
     let initializeOperandLabelText = "0"
     let initializeOperatorLabelText = ""
     let initializeToEmptyString = ""
+    let notANumber = "NaN"
     
     var fomula: String = ""
     var operand: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         inputedOperandLabel.text = initializeOperandLabelText
     }
     
@@ -55,9 +56,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
-        if operand == "" {
-            return
-        }
+        if operand == initializeToEmptyString { return }
+        
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
@@ -87,16 +87,14 @@ class ViewController: UIViewController {
         if let doubleOperand = Double(operand), doubleOperand != 0 {
             operand = String(doubleOperand * -1)
         }
+        
         inputedOperandLabel.text = operand
     }
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
-        if inputedOperandLabel.text == "" || inputedOperatorLabel.text == "" {
-            return
-        }
-        guard let operatorLabelText = inputedOperatorLabel.text else {
-            return
-        }
+        if inputedOperandLabel.text == initializeOperandLabelText || inputedOperatorLabel.text == initializeOperatorLabelText { return }
+        
+        guard let operatorLabelText = inputedOperatorLabel.text else { return }
         let operandLabelText = numberFormatterFor(numberForCalculate: operand)
         let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
         
@@ -115,7 +113,7 @@ class ViewController: UIViewController {
         do{
             inputedOperandLabel.text = numberFormatterFor(numberForCalculate: try String(parser.result()))
         } catch CalculateError.NotANumber {
-            inputedOperandLabel.text = "NaN"
+            inputedOperandLabel.text = notANumber
         } catch let error {
             print(error)
         }
@@ -127,7 +125,6 @@ class ViewController: UIViewController {
         let operandLabel = UILabel()
         
         stackView.spacing = 8
-        
         operandLabel.text = operandLabelText
         operatorLabel.text = operatorLabelText
         
@@ -138,18 +135,17 @@ class ViewController: UIViewController {
     }
     
     func removeSubView(from stackView: UIStackView) {
-        for view in stackView.subviews {
-            view.removeFromSuperview()
-        }
+        stackView.subviews.forEach { view in view.removeFromSuperview() }
     }
     
     @IBAction func allClearDidTap(_ sender: UIButton) {
         fomula = initializeToEmptyString
         operand = initializeToEmptyString
+        
         inputedOperatorLabel.text = initializeOperatorLabelText
         inputedOperandLabel.text = initializeOperandLabelText
-        removeSubView(from: toBeCalculateFormulaStackView
-        )
+        
+        removeSubView(from: toBeCalculateFormulaStackView)
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {
@@ -162,6 +158,7 @@ class ViewController: UIViewController {
             return ""
         }
         let numberFormatter = NumberFormatter()
+        
         numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
@@ -174,6 +171,7 @@ class ViewController: UIViewController {
             return ""
         }
         let numberFormatter = NumberFormatter()
+        
         numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
