@@ -141,7 +141,7 @@ extension ViewController {
             displayOperand = "NaN"
             calculatorManager.setCalculatingFinishStatus(to: true)
         } catch {
-            print(error.localizedDescription)
+            
         }
         
         initDisplayOperator()
@@ -172,7 +172,6 @@ extension ViewController {
     private func scrollToBottom(in scrollView: UIScrollView) {
         let bottomOffset = CGPoint(x: 0,y: scrollView.contentSize.height
                                     - scrollView.bounds.size.height)
-        print(bottomOffset)
         scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
