@@ -1,24 +1,24 @@
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
+    var operandQueue: CalculatorItemQueue
+    var operatorQueue: CalculatorItemQueue
     
     init(operands: [CalculateItem], operators: [CalculateItem]) {
-        self.operands = CalculatorItemQueue(operands)
-        self.operators = CalculatorItemQueue(operators)
+        self.operandQueue = CalculatorItemQueue(operands)
+        self.operatorQueue = CalculatorItemQueue(operators)
     }
     
     init() {
-        self.operands = CalculatorItemQueue()
-        self.operators = CalculatorItemQueue()
+        self.operandQueue = CalculatorItemQueue()
+        self.operatorQueue = CalculatorItemQueue()
     }
     
     mutating func result() throws -> Double {
-        guard var result = operands.dequeue() as? Double else {
+        guard var result = operandQueue.dequeue() as? Double else {
             return 0
         }
         
-        while let `operator` = operators.dequeue() as? Operator,
-              let operand = operands.dequeue() as? Double{
+        while let `operator` = operatorQueue.dequeue() as? Operator,
+              let operand = operandQueue.dequeue() as? Double{
             result = try `operator`.calculate(lhs: result, rhs: operand)
         }
         return result
