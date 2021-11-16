@@ -16,18 +16,19 @@ enum Operator: Character, CaseIterable {
         case .divide:
             return self.divide(lhs: lhs, rhs: rhs)
         case .multiply:
-            return self.multifly(lhs: lhs, rhs: rhs)
+            return self.multiply(lhs: lhs, rhs: rhs)
         }
-        
     }
     
     private func add(lhs: Double, rhs: Double) -> Double { lhs + rhs }
     private func substract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
+    
     private func divide(lhs: Double, rhs: Double) -> Double {
         let isBothZero: Bool = (lhs == .zero && rhs == .zero)
         return isBothZero ? .nan : lhs/rhs
     }
-    private func multifly(lhs: Double, rhs: Double) -> Double { lhs * rhs }
+    
+    private func multiply(lhs: Double, rhs: Double) -> Double { lhs * rhs }
 }
 
 

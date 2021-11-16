@@ -2,6 +2,7 @@
 import Foundation
 
 enum ExpressionParser {
+    
     static func parse(from input: String) -> Formula {
         let operators = Operator.allCases.map { String($0.rawValue) }
         let splitedByOperators = componentsByOperators(from: input)
@@ -13,10 +14,10 @@ enum ExpressionParser {
         }
         let formula = Formula()
         let operatorsInputWithoutNil = operatorsInInput.compactMap { Operator(rawValue: Character($0)) }
-        operatorsInputWithoutNil.forEach{
+        operatorsInputWithoutNil.forEach {
             formula.oprators.linkedList.enqueue(in: $0.rawValue )
         }
-        operandsInInput.forEach{
+        operandsInInput.forEach {
             formula.operands.linkedList.enqueue(in: Double($0) ?? .zero)
         }
         

@@ -4,7 +4,7 @@ import Foundation
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var oprators = CalculatorItemQueue<Operator.RawValue>()
-    let operations = Operator.allCases.map{ $0.rawValue }
+    let operations = Operator.allCases.map { $0.rawValue }
     
     func result() throws -> Double {
         var value = 0.0
