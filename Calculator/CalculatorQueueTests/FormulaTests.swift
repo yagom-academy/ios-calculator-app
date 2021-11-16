@@ -87,5 +87,13 @@ class FormulaTests: XCTestCase {
   
         XCTAssertThrowsError(try formula.result())
     }
+    
+    func test_연산자만_들어올경우_오류를_검출하는지() throws {
+        for _ in 1...3 {
+            formula.operators.enqueue(operation: .divide)
+        }
+  
+        XCTAssertThrowsError(try formula.result())
+    }
 }
 
