@@ -52,6 +52,39 @@ class ViewController: UIViewController {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
+        guard let currentOperatorButtonText = sender.titleLabel?.text else {
+            return
+        }
+        let formula = addFormula(operand: operandLabel.text!, operator: currentOperatorButtonText)
+        formulaStackView.addArrangedSubview(formula)
+        operandLabel.text = "0"
+        operatorLabel.text = currentOperatorButtonText
+    }
+    
+    func addFormula(operand: String, operator: String) -> UIStackView {
+        let formulaStackView = UIStackView()
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        formulaStackView.axis = .horizontal
+        formulaStackView.alignment = .firstBaseline
+        formulaStackView.distribution = .fill
+        formulaStackView.spacing = 8
+        
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.textColor = .white
+        operatorLabel.text = `operator`
+        operatorLabel.adjustsFontForContentSizeCategory = true
+        
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandLabel.textColor = .white
+        operandLabel.text = operand
+        operandLabel.adjustsFontForContentSizeCategory = true
+        
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(operandLabel)
+        
+        return formulaStackView
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
