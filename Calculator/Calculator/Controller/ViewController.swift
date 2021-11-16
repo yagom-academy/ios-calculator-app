@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         guard let currentOperandButtonText = sender.titleLabel?.text else {
             return
         }
-        guard Int(operandLabel.text!) != Int(currentOperandButtonText) else {
+        guard operandLabel.text! != "0" || currentOperandButtonText != "00" else {
             return
         }
         guard isCalculated else {
