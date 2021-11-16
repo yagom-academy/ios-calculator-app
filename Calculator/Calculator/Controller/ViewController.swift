@@ -18,6 +18,16 @@ class ViewController: UIViewController {
         verticalStackView.addArrangedSubview(horizontalStackView)
     }
     
+    private func makeFormulaLabel(with text: String) -> UILabel {
+        let label = UILabel()
+        
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.text = text
+        
+        return label
+    }
+    
     private func makeHorizontalStackView(operator: UILabel, operand: UILabel) -> UIStackView {
         let horizontal = UIStackView()
         let defaultSpacing: CGFloat = 8
@@ -30,6 +40,5 @@ class ViewController: UIViewController {
         
         return horizontal
     }
-    
 }
 
