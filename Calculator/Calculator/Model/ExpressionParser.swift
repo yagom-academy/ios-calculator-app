@@ -24,7 +24,7 @@ enum ExpressionParser {
             return .failure(.incorrectCountOfNumbersAndOperators)
         }
         
-        guard let formula = Formula(operands: operands, operators: operators) else {
+        guard let formula = makeFormula(operands: operands, operators: operators) else {
             return .failure(.failedToInitializeFormulaInstance)
         }
         
@@ -61,5 +61,32 @@ enum ExpressionParser {
         }
         
         return (operands, operators)
+    }
+    
+    static private func makeFormula(operands: [String], operators: [String]) -> Formula? {
+        
+        var formula = Formula()
+        
+        for operand in operands {
+            guard let operand = Double(operand) else {
+                return nil
+            }
+            
+            formula.operands.enqueue(operand)
+        }
+        
+        for `operator` in operators {
+            guard `operator`.count == 1 else {
+                return nil
+            }
+            
+            guard let _operator = Operator(rawValue: Character(`operator`)) else {
+                return nil
+            }
+            
+            formula.operators.enqueue(_operator)
+        }
+        
+        return formula
     }
 }

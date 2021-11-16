@@ -1,37 +1,7 @@
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
-    
-    init() {
-        self.operands = CalculatorItemQueue()
-        self.operators = CalculatorItemQueue()
-    }
-    
-    init?(operands: [String], operators: [String]) {
-        self.operands = CalculatorItemQueue()
-        self.operators = CalculatorItemQueue()
-        
-        for operand in operands {
-            guard let operand = Double(operand) else {
-                return nil
-            }
-            
-            self.operands.enqueue(operand)
-        }
-        
-        for `operator` in operators {
-            guard `operator`.count == 1 else {
-                return nil
-            }
-            
-            guard let _operator = Operator(rawValue: Character(`operator`)) else {
-                return nil
-            }
-            
-            self.operators.enqueue(_operator)
-        }
-    }
-    
+    var operands = CalculatorItemQueue()
+    var operators = CalculatorItemQueue()
+
     func result() -> Double {
         let operandsArray: [Double] = operands.allOperands()
         let operatorsArray: [Operator] = operators.allOperators()
