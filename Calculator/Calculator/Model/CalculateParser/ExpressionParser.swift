@@ -14,26 +14,30 @@ enum ExpressionParser {
         
         let parsedInput = try componentsByOperators(from: input)
         
-        parsedInput[0]
-            .split(with: " ")
-            .compactMap { Double($0) }
-            .forEach {
-                operands.enqueue($0)
-            }
+        parsedInput
+            .compactMap({ (each: String) -> Double? in
+                return Double(each)
+            })
+            .forEach({ (each: Double) -> Void in
+                operands.enqueue(each)
+            })
         
-        parsedInput[1]
-            .split(with: " ")
-            .compactMap { Operator(rawValue: Character($0)) }
-            .forEach {
-                operators.enqueue($0)
-            }
+        parsedInput
+            .filter({ (each: String) -> Bool in
+                return Double(each) == nil
+            })
+            .compactMap({ (each: String) -> Operator? in
+                return Operator(rawValue: Character(each))
+            })
+            .forEach({ (each: Operator) -> Void in
+                operators.enqueue(each)
+            })
         
         return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) throws -> [String] {
-        var operands: [String] = []
-        var operators: [String] = []
+        var splittedMathExpression: [String] = []
         
         var defaultOperators: Set<String> = []
         Operator.allCases.forEach { (each: Operator) -> Void in
@@ -47,7 +51,7 @@ enum ExpressionParser {
             // 마지막이라면
             if input.last == eachCharacter {
                 temporaryOperand += convertedCharacter
-                operands.append(temporaryOperand)
+                splittedMathExpression.append(temporaryOperand)
                 continue
             }
             
@@ -59,8 +63,8 @@ enum ExpressionParser {
             
             // 연산자에 해당된다면
             if defaultOperators.contains(convertedCharacter) {
-                operands.append(temporaryOperand)
-                operators.append(convertedCharacter)
+                splittedMathExpression.append(temporaryOperand)
+                splittedMathExpression.append(convertedCharacter)
                 temporaryOperand = ""
                 continue
             }
@@ -68,7 +72,7 @@ enum ExpressionParser {
             throw CalculatorError.unknownOperator
         }
         
-        return [operands.joined(separator: " "), operators.joined(separator: " ")]
+        return splittedMathExpression
     }
 }
 
