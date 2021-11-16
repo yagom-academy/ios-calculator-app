@@ -38,6 +38,7 @@ class CalculatorViewController: UIViewController {
         
         operandLabel.text = operandLabelText + tapedNumber
     }
+    
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
@@ -49,6 +50,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = sender.titleLabel?.text
         operandLabel.text = "0"
     }
+    
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
         if var operand = operandLabel.text {
             if operand == "0" {
