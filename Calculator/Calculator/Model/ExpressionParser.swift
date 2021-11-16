@@ -20,6 +20,10 @@ enum ExpressionParser {
             .forEach { formula.operands.enqueue($0) }
         
         separatedInput
+            .filter {
+                Operator.allCases
+                    .map { String($0.rawValue) }.contains($0)
+            }
             .compactMap { Operator(rawValue: Character($0)) }
             .forEach { formula.operators.enqueue($0) }
         
