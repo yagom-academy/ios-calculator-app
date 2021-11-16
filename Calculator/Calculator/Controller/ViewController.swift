@@ -54,9 +54,9 @@ class ViewController: UIViewController {
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
         operand += operands(for: sender)
+        
         do {
-            inputedOperandLabel.text = try
-            numberFormatterFor(inputOperand: operand)
+            inputedOperandLabel.text = try numberFormatterFor(inputOperand: operand)
         } catch let error {
             print(error)
         }
@@ -68,9 +68,7 @@ class ViewController: UIViewController {
             return
         }
         
-        guard let operatorLabelText = inputedOperatorLabel.text else {
-            return
-        }
+        guard let operatorLabelText = inputedOperatorLabel.text else { return }
         
         do {
             let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
@@ -81,11 +79,10 @@ class ViewController: UIViewController {
             print(error)
         }
         
-        fomula += operand
-        fomula += " \(operatorLabelText) "
+        fomula += operand + " " + operatorLabelText + " "
         operand = initializeToEmptyString
+        
         inputedOperandLabel.text = initializeOperandLabelText
-
         inputedOperatorLabel.text = operators(for: sender)
         
         scrollToBottom()
@@ -121,8 +118,7 @@ class ViewController: UIViewController {
             print(error)
         }
         
-        fomula += " \(operatorLabelText) "
-        fomula += operand
+        fomula += " " + operatorLabelText + " " + operand
         operand = initializeToEmptyString
         inputedOperatorLabel.text = initializeOperatorLabelText
         
@@ -181,7 +177,6 @@ class ViewController: UIViewController {
         }
         let numberFormatter = NumberFormatter()
         
-        numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = maximumFractionDigits
         
