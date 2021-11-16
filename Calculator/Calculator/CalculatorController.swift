@@ -11,7 +11,7 @@ class CalculatorController: UIViewController {
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak private var operatorLabel: UILabel!
     
-    private var expressionInput: String = ""
+    private var expressionInput: String = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,10 @@ class CalculatorController: UIViewController {
     
     private func resetNumberLabel() {
         numberLabel.text = "0"
+    }
+    
+    private func resetExpressionInput() {
+        expressionInput = String()
     }
 }
 
@@ -95,4 +99,9 @@ extension CalculatorController {
         resetNumberLabel()
     }
     
+    
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+        resetNumberLabel()
+        resetExpressionInput()
+    }
 }
