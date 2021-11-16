@@ -24,8 +24,8 @@ class ViewController: UIViewController {
     }
     
     private func removeFormulaView() {
-        formulaStackView.subviews.forEach{ view in
-            view.removeFromSuperview()
+        formulaStackView.subviews.forEach{
+            $0.removeFromSuperview()
         }
     }
     
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         let operandLabel = UILabel()
         
         formulaStackView.axis = .horizontal
-        formulaStackView.alignment = .firstBaseline
+        formulaStackView.alignment = .fill
         formulaStackView.distribution = .fill
         formulaStackView.spacing = 8
         
