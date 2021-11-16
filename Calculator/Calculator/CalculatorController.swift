@@ -9,6 +9,7 @@ import UIKit
 class CalculatorController: UIViewController {
 
     @IBOutlet weak private var numberLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     
     private var isDotExist: Bool = false
     
@@ -51,4 +52,11 @@ extension CalculatorController {
             numberLabel.text = currentText + operand
         }
     }
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let `operator` = sender.currentTitle else { return }
+        
+        operatorLabel.text = `operator`
+    }
+        
 }
