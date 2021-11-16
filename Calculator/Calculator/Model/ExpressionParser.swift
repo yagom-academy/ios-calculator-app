@@ -6,12 +6,34 @@ enum ExpressionParser {
         case failedToInitializeFormulaInstance
     }
     
+    enum StringChecker {
+        static func hasOnlyNumberOrOperator(from input: String) -> Bool {
+            for character in input {
+                if character.isNotNumber
+                    && Operator.allCharacterCases.contains(character) == false {
+                    return false
+                }
+            }
+            
+            return true
+        }
+        
+        static func firstAndLastCharacterAreNumbers(from input: String) -> Bool {
+            guard let firstCharacter = input.first,
+                  let lastCharacter = input.last else {
+                return false
+            }
+            
+            return firstCharacter.isNumber && lastCharacter.isNumber
+        }
+    }
+    
     static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
-        guard input.hasOnlyNumberOrOperator() else {
+        guard StringChecker.hasOnlyNumberOrOperator(from: input) else {
             return .failure(.includingIncorrectCharacter)
         }
         
-        guard input.firstAndLastCharacterAreNumbers() else {
+        guard StringChecker.firstAndLastCharacterAreNumbers(from: input) else {
             return .failure(.firstOrLastCharacterIsNotNumber)
         }
         

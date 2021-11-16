@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		60222047274361BD002F20D3 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60222046274361BD002F20D3 /* Character.swift */; };
+		6022204E274392F7002F20D3 /* StringCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6022204D274392F7002F20D3 /* StringCheckerTests.swift */; };
 		6095457127390BB400C3263D /* CalcualtorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095457027390BB400C3263D /* CalcualtorItemQueueTests.swift */; };
 		6095457B2739219300C3263D /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095457A2739219300C3263D /* CalculatorItemQueue.swift */; };
 		6095457D273921C200C3263D /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095457C273921C200C3263D /* CalculateItem.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		60222046274361BD002F20D3 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		6022204D274392F7002F20D3 /* StringCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCheckerTests.swift; sourceTree = "<group>"; };
 		6095456E27390BB400C3263D /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6095457027390BB400C3263D /* CalcualtorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcualtorItemQueueTests.swift; sourceTree = "<group>"; };
 		6095457A2739219300C3263D /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				609545A2273D087000C3263D /* FormulaTests.swift */,
 				609545A8273D74F900C3263D /* StringTests.swift */,
 				609545AA273E0F2D00C3263D /* ExpressionParserTests.swift */,
+				6022204D274392F7002F20D3 /* StringCheckerTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			files = (
 				609545A3273D087000C3263D /* FormulaTests.swift in Sources */,
 				609545A9273D74F900C3263D /* StringTests.swift in Sources */,
+				6022204E274392F7002F20D3 /* StringCheckerTests.swift in Sources */,
 				609545AB273E0F2D00C3263D /* ExpressionParserTests.swift in Sources */,
 				6095457127390BB400C3263D /* CalcualtorItemQueueTests.swift in Sources */,
 			);

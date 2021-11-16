@@ -29,31 +29,4 @@ class StringTests: XCTestCase {
             XCTAssertEqual(testCases[index].split(with: "+"), answerList[index], "test: \(index) was failed")
         }
     }
-
-    func test_hasOnlyNumberOrOperator() {
-        let answerList = [ true,
-                           true,
-                           true,
-                           true,
-                           true,
-                           false ]
-        
-        for index in 0..<testCases.count {
-            XCTAssertEqual(testCases[index].hasOnlyNumberOrOperator(), answerList[index], "test: \(index) was failed")
-        }
-    }
-    
-    func test_firstAndLastLetterAreNumbers() {
-        let answerList = [ false,
-                           false,
-                           false,
-                           true,
-                           true,
-                           false ]
-        
-        for index in 0..<testCases.count {
-            XCTAssertEqual(testCases[index].firstAndLastCharacterAreNumbers(), answerList[index], "test: \(index) was failed")
-        }
-    }
-    
 }
