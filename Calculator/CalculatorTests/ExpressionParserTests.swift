@@ -14,7 +14,7 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(["a", "b"], "a b".split(with: " "))
     }
 
-    func test_1_더하기_2의_결과가_3인가() {
+    func test_13_더하기_20의_결과가_33인가() {
         
         XCTAssertEqual(33.0, try ExpressionParser.parse(from: "13 + 20").result())
     }
