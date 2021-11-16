@@ -8,27 +8,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var zeroButton: UIButton!
-    @IBOutlet weak var doubleZeroButton: UIButton!
-    @IBOutlet weak var dotButton: UIButton!
-    @IBOutlet weak var oneButton: UIButton!
-    @IBOutlet weak var twoButton: UIButton!
-    @IBOutlet weak var threeButton: UIButton!
-    @IBOutlet weak var fourButton: UIButton!
-    @IBOutlet weak var fiveButton: UIButton!
-    @IBOutlet weak var sixButton: UIButton!
-    @IBOutlet weak var sevenButton: UIButton!
-    @IBOutlet weak var eightButton: UIButton!
-    @IBOutlet weak var nineButton: UIButton!
+    @IBOutlet private weak var zeroButton: UIButton!
+    @IBOutlet private weak var doubleZeroButton: UIButton!
+    @IBOutlet private weak var dotButton: UIButton!
+    @IBOutlet private weak var oneButton: UIButton!
+    @IBOutlet private weak var twoButton: UIButton!
+    @IBOutlet private weak var threeButton: UIButton!
+    @IBOutlet private weak var fourButton: UIButton!
+    @IBOutlet private weak var fiveButton: UIButton!
+    @IBOutlet private weak var sixButton: UIButton!
+    @IBOutlet private weak var sevenButton: UIButton!
+    @IBOutlet private weak var eightButton: UIButton!
+    @IBOutlet private weak var nineButton: UIButton!
     
-    @IBOutlet weak var expression: UILabel!
+    @IBOutlet private weak var expression: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-    @IBAction func touchUpOperandButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperandButton(_ sender: UIButton) {
         guard let operand = matchOperandButton(sender: sender) else {
             return
         }
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         expression.text?.append(operand)
     }
 
-    func matchOperandButton(sender: UIButton) -> String? {
+    private func matchOperandButton(sender: UIButton) -> String? {
         switch sender {
         case zeroButton:
             return "0"
