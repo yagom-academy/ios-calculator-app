@@ -42,18 +42,21 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
-        guard let operand = matchOperandButton(sender: sender) else {
+        guard let operand = sender.titleLabel?.text else {
             return
         }
-        
+                
         guard operand != "." || !currentOperand.contains(".") else {
             return
         }
         
-        currentOperand += operand == "." ? "0." : operand
-        
+        if operand == "." && currentOperand.isEmpty {
+            currentOperand += "0."
+        } else {
+            currentOperand += operand
+        }
+                
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
-        print(currentOperand)
         expression.text = currentOperand
     }
     
@@ -98,37 +101,6 @@ class ViewController: UIViewController {
         
         expression.text = "0"
         arithmetic.text = `operator`
-    }
-    
-    private func matchOperandButton(sender: UIButton) -> String? {
-        switch sender {
-        case zeroButton:
-            return "0"
-        case doubleZeroButton:
-            return "00"
-        case dotButton:
-            return "."
-        case oneButton:
-            return "1"
-        case twoButton:
-            return "2"
-        case threeButton:
-            return "3"
-        case fourButton:
-            return "4"
-        case fiveButton:
-            return "5"
-        case sixButton:
-            return "6"
-        case sevenButton:
-            return "7"
-        case eightButton:
-            return "8"
-        case nineButton:
-            return "9"
-        default:
-            return nil
-        }
     }
     
     private func matchOperatorButton(sender: UIButton) -> String? {
