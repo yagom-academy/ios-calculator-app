@@ -50,7 +50,7 @@ class ViewController: UIViewController {
             return
         }
         
-        currentOperand += operand
+        currentOperand += operand == "." ? "0." : operand
         
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
         print(currentOperand)
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
             addCalculationHistory(operandsText: String(currentNumber), operatorText: currentOperator)
         }
         
-        currentOperand = "0"
+        currentOperand = ""
         currentOperator = `operator`
         
         expression.text = "0"
