@@ -39,7 +39,7 @@ enum ExpressionParser {
     
     static private func insertEmptySpaceByOperators(from input: String) -> String {
         var modifiedInput = input
-        let allTargets = Operator.allCases.map { String($0.rawValue) }
+        let allTargets = Operator.allStringCases
         
         allTargets.forEach {
             modifiedInput = modifiedInput.replacingOccurrences(of: $0, with: " \($0) ")
@@ -53,7 +53,7 @@ enum ExpressionParser {
         var operators: [String] = []
         
         for component in fromSingleStringArray {
-            if ["+","-","/","*"].contains(component) {
+            if Operator.allStringCases.contains(component) {
                 operators.append(component)
             } else {
                 operands.append(component)

@@ -4,6 +4,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multiply = "*"
     
+    static var allCharacterCases: [Character] {
+        return Self.allCases.map { $0.rawValue }
+    }
+    
+    static var allStringCases: [String] {
+        return Self.allCases.map { String($0.rawValue) }
+    }
+    
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
