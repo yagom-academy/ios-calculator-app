@@ -9,11 +9,34 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        componentsByOperators(from: input)
-        return Formula()
+        var calculateFormula: Formula = Formula()
+        componentsByOperators(from: input).forEach {
+            guard let operation = Double($0) else {
+                return
+            }
+        
+            calculateFormula.operands.enqueue(operation: operation)
+        }
+        
+        let operators: [Character] = input.filter { "+/*₋".contains($0) }
+        
+        operators.forEach { `operator` in
+            guard let arithmetic = Operator(rawValue: `operator`) else {
+                return
+            }
+            
+            calculateFormula.operators.enqueue(operation: arithmetic)
+        }
+        
+        return calculateFormula
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return [String]()
+        var resultOfReplacing = input.replacingOccurrences(of: String(Operator.add.rawValue), with: " ")
+        resultOfReplacing = resultOfReplacing.replacingOccurrences(of: "₋", with: " ")
+        resultOfReplacing = resultOfReplacing.replacingOccurrences(of: "/", with: " ")
+        resultOfReplacing = resultOfReplacing.replacingOccurrences(of: "*", with: " ")
+        
+        return resultOfReplacing.split(with: " ")
     }
 }
