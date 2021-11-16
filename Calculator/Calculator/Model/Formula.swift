@@ -11,9 +11,9 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
 
-    init() {
-        self.operands = CalculatorItemQueue<Double>()
-        self.operators = CalculatorItemQueue<Operator>()
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
     }
 
     mutating func result() -> Double {
