@@ -22,16 +22,6 @@ class ViewController: UIViewController {
         removeFormulaLabel()
         removeFormulaView()
     }
-    private func setUpNumberFormat(for value: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .up
-        guard let formatterNumber = numberFormatter.string(for: value) else {
-            return value.description
-        }
-        return formatterNumber
-    }
 }
 
 // MARK: IBAction method
@@ -166,6 +156,20 @@ extension ViewController {
     private func removeFormulaLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
+    }
+}
+
+// MARK: Calculation Result Related
+extension ViewController {
+    private func setUpNumberFormat(for value: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        guard let formatterNumber = numberFormatter.string(for: value) else {
+            return value.description
+        }
+        return formatterNumber
     }
 }
 
