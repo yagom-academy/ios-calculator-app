@@ -20,7 +20,7 @@ class FormulaTests: XCTestCase {
         formula.operands.removeAllItem()
     }
     
-    func test_숫자_4개의_덧셈을_잘_수행하는지() {
+    func test_숫자_4개의_덧셈을_잘_수행하는지() throws {
         [10, 20, 30, 40].forEach { number in
             formula.operands.enqueue(operation: number)
         }
@@ -29,7 +29,7 @@ class FormulaTests: XCTestCase {
             formula.operators.enqueue(operation: .add)
         }
         
-        let calculationResult = formula.result()
+        let calculationResult = try formula.result()
         
         XCTAssertEqual(100, calculationResult)
     }
