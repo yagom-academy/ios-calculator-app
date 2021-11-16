@@ -38,6 +38,9 @@ class CalculatorViewController: UIViewController {
         
         operandLabel.text = operandLabelText + tapedNumber
     }
+    @IBAction func touchUpAllClear(_ sender: UIButton) {
+        reset()
+    }
     
     func reset() {
         operandLabel.text = "0"
@@ -69,5 +72,17 @@ class CalculatorViewController: UIViewController {
         
         calculationHistoryStackView.addArrangedSubview(stackView)
     }
+    
+    func allClear() {
+        for subview in calculationHistoryStackView.subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
+    func clearEntry() {
+        operandLabel.text = "0"
+    }
+    
+    
 }
 
