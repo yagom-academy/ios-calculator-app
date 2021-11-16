@@ -34,7 +34,8 @@ class ViewController: UIViewController {
     private var finalExpression: String = ""
     private var currentOperand: String = ""
     private var currentOperator: String = ""
-    
+    private var isCalculated: Bool = false
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.expression.text = "0"
@@ -108,11 +109,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: Any) {
+        guard !isCalculated else {
+            return
+        }
+        
         addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
         
         finalExpression += currentOperand
         
         let formula = ExpressionParser.parse(from: finalExpression)
+        
+        isCalculated = true
         
         do {
             let calculationResult = try formula.result()
@@ -132,6 +139,8 @@ class ViewController: UIViewController {
         finalExpression = ""
         currentOperator = ""
         currentOperand = ""
+        
+        isCalculated = false
         
         expression.text = "0"
         arithmetic.text = ""
