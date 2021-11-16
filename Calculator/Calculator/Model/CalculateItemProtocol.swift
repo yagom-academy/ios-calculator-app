@@ -8,7 +8,3 @@
 protocol CalculateItem {
     
 }
-
-
-
-
