@@ -19,31 +19,23 @@ struct Formula {
         }
         
         let firstOperand = operands.items[0]
-        let firstOperator = operators.items[0]
-        var result = 0.0
+        var `operator` = operators.items
+        var result = firstOperand
         
-        do {
-            let nextOperand = try operands.removeItem()
-            if nextOperand == [] {
-                throw QueueError.emptyItem
-            }
-            result = firstOperator.calculate(lhs: firstOperand, rhs: nextOperand[0])
-        } catch {
-            throw QueueError.emptyItem
-        }
-        
-        while try operators.removeItem().isEmpty == false {
+         repeat {
             do {
                 let nextOperand = try operands.removeItem()
-                let nextOperator = operators.items
-                if nextOperator == [] {
+                if nextOperand == [] {
                     throw QueueError.emptyItem
                 }
-                result = nextOperator[0].calculate(lhs: result, rhs: nextOperand[0])
+
+                result = `operator`[0].calculate(lhs: result, rhs: nextOperand[0])
+                `operator` = try operators.removeItem()
             } catch {
                 throw QueueError.emptyItem
             }
-        }
+        } while `operator`.count >= 1
+        
         
         return result
     }
