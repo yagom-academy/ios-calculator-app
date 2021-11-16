@@ -21,7 +21,7 @@ enum ExpressionParser {
             .forEach({ (each: Double) -> Void in
                 operands.enqueue(each)
             })
-        
+
         parsedInput
             .filter({ (each: String) -> Bool in
                 return Double(each) == nil
@@ -37,42 +37,32 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) throws -> [String] {
-        var splittedMathExpression: [String] = []
+        let defaultOperators = Set<Character>(Operator.allCases.map({ (each: Operator) -> Character in
+            return each.rawValue
+        }))
         
-        var defaultOperators: Set<String> = []
-        Operator.allCases.forEach { (each: Operator) -> Void in
-            defaultOperators.insert(String(each.rawValue))
-        }
+        let operators = input
+            .filter({ (each: Character) -> Bool in
+                return defaultOperators.contains(each)
+            })
+            .map({ (each: Character) -> String in
+                return String(each)
+            })
         
-        var temporaryOperand = ""
-        for eachCharacter in input {
-            let convertedCharacter = String(eachCharacter)
-            
-            // 마지막이라면
-            if input.last == eachCharacter {
-                temporaryOperand += convertedCharacter
-                splittedMathExpression.append(temporaryOperand)
-                continue
-            }
-            
-            // 피연산자에 해당된다면
-            if Double(convertedCharacter) != nil || convertedCharacter == "-" {
-                temporaryOperand += convertedCharacter
-                continue
-            }
-            
-            // 연산자에 해당된다면
-            if defaultOperators.contains(convertedCharacter) {
-                splittedMathExpression.append(temporaryOperand)
-                splittedMathExpression.append(convertedCharacter)
-                temporaryOperand = ""
-                continue
-            }
-            
-            throw CalculatorError.unknownOperator
-        }
         
-        return splittedMathExpression
+        let operands = try input
+            .map({ (each: Character) -> String in
+                return defaultOperators.contains(each) ? " " : String(each)
+            })
+            .joined().components(separatedBy: " ")
+            .map { (each: String) -> String in
+                guard let _ = Double(each) else {
+                    throw CalculatorError.unknownOperator
+                }
+                return each
+            }
+        
+        return operands + operators
     }
 }
 
