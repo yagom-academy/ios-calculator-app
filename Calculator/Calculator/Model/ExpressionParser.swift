@@ -14,7 +14,7 @@ enum ExpressionParser {
         let formula = Formula()
         let operatorsInputWithoutNil = operatorsInInput.compactMap { Operator(rawValue: Character($0)) }
         operatorsInputWithoutNil.forEach{
-            formula.oprators.linkedList.enqueue(in: $0 )
+            formula.oprators.linkedList.enqueue(in: $0.rawValue )
         }
         operandsInInput.forEach{
             formula.operands.linkedList.enqueue(in: Double($0) ?? .zero)
@@ -36,7 +36,7 @@ enum ExpressionParser {
            for index in indexOfFilteredByOperand {
                splitedCount += 1
                let splitedByOperand = filteredInputsByHavingOperand[splitedCount - 1 ].split(with: operand)
-               inputs.insert(contentsOf: splitedByOperand.flatMap{ $0 }, at: index)
+               inputs.insert(contentsOf: splitedByOperand.flatMap { $0 }, at: index)
                inputs.remove(at: index + splitedByOperand.count)
            }
        }
