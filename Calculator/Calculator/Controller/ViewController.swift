@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearButtonTapped(_ sender: UIButton) {
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         guard isCalculated || operatorLabel.text != "" else {
             return
         }
