@@ -72,14 +72,13 @@ class ViewController: UIViewController {
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
             return
         }
-            
-        if currentNumber.isSameAfterRounded() {
-            currentOperand = String(Int(currentNumber) * -1)
-        } else {
-            currentOperand = String(currentNumber * -1)
+        
+        guard let operandText = String(currentNumber * -1).addCommaOnEveryThreeDigits() else {
+            return
         }
         
-        expression.text = currentOperand
+        currentOperand = String(currentNumber * -1)
+        expression.text = operandText
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
