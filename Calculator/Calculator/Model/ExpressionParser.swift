@@ -3,8 +3,8 @@ enum ExpressionParser {
         let splitInput = componentsByOperators(from: input)
         let operands = splitInput.compactMap { Double($0) }
         let operators = splitInput.compactMap { Operator(rawValue: Character($0)) }
-        let formula = Formula(operands: CalculatorItemQueue(operands),
-                              operators: CalculatorItemQueue(operators))
+        let formula = Formula(operands: operands,
+                              operators: operators)
         return formula
     }
 
