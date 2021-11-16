@@ -24,5 +24,12 @@ class OperatorTests: XCTestCase {
         
         XCTAssertEqual(result, 0.5)
     }
+    
+    func test_Operator_subtract에_5에서_1을_빼면_4가_나오는지() {
+        sut = .subtract
+        let result = sut.calculate(lhs: 5, rhs: 1)
+        
+        XCTAssertEqual(result, 4)
+    }
 
 }
