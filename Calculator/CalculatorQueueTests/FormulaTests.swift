@@ -62,6 +62,18 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(6, calculationResult)
     }
     
-
+    func test_숫자_4개의_나눗셈을_잘_수행하는지() throws {
+        [100, 5, -2, 5].forEach { number in
+            formula.operands.enqueue(operation: number)
+        }
+        
+        for _ in 1...3 {
+            formula.operators.enqueue(operation: .divide)
+        }
+        
+        let calculationResult = try formula.result()
+        
+        XCTAssertEqual(-2, calculationResult)
+    }
 }
 
