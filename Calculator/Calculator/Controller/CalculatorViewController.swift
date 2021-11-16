@@ -44,5 +44,30 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
         allClear()
     }
+    
+    func addFormula() {
+        let stackView = UIStackView()
+        
+        if let `operator` = operatorLabel.text {
+            let insultingoperatingLable = UILabel()
+            insultingoperatingLable.textColor = UIColor.white
+            insultingoperatingLable.text = `operator`
+            
+            stackView.addArrangedSubview(insultingoperatingLable)
+        }
+        
+        guard let operand = operandLabel.text else {
+            return
+        }
+        
+        let insultinOperandLabel = UILabel()
+        insultinOperandLabel.textColor = UIColor.white
+        insultinOperandLabel.text = operand
+        
+        
+        stackView.addArrangedSubview(insultinOperandLabel)
+        
+        calculationHistoryStackView.addArrangedSubview(stackView)
+    }
 }
 
