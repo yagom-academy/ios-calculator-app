@@ -63,8 +63,14 @@ class ViewController: UIViewController {
         inputedOperandLabel.text = ""
         
         toBeCalculateFormulaStackView.addArrangedSubview(stackView)
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
         inputedOperatorLabel.text = operators(for: sender)
+        
+        scrollToBottom()
+    }
+    
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     @IBAction func convertPositiveOrNegative(_ sender: UIButton) {
