@@ -31,8 +31,13 @@ class ViewController: UIViewController {
     @IBOutlet private weak var expression: UILabel!
     @IBOutlet private weak var arithmetic: UILabel!
     
+    private var finalExpression: String = ""
+    private var currentOperand: String = ""
+    private var currentOperator: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.expression.text = "0"
         // Do any additional setup after loading the view.
     }
 
@@ -41,11 +46,13 @@ class ViewController: UIViewController {
             return
         }
         
-        guard operand != "." || expression.text?.contains(".") == false else {
+        guard operand != "." || !currentOperand.contains(".") else {
             return
         }
         
-        expression.text?.append(operand)
+        currentOperand += operand
+        
+        expression.text = currentOperand
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
@@ -79,6 +86,7 @@ class ViewController: UIViewController {
         addCalculationHistory()
         
         expression.text = ""
+        currentOperand = ""
         arithmetic.text = `operator`
     }
     
