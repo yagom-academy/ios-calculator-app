@@ -16,7 +16,10 @@ class CalculatorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+}
+
+// MARK: - Method
+extension CalculatorController {
     private func changeNumberLabel(text: String) {
         let currentText = numberLabel.text ?? "0"
         
