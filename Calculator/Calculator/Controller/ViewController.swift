@@ -55,6 +55,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
+        if operand == "" {
+            return
+        }
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
