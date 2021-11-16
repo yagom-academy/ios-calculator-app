@@ -8,6 +8,8 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var verticalStackView: UIStackView!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
