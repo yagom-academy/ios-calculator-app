@@ -15,7 +15,7 @@ struct Formula {
         }
         
         if operators.items == [] {
-            throw QueueError.emptyItem
+            throw QueueError.emptyOperatorItem
         }
         
         let firstOperand = operands.items[0]
@@ -25,14 +25,20 @@ struct Formula {
         repeat {
             do {
                 let nextOperand = try operands.removeItem()
+                
                 if nextOperand == [] {
-                    throw QueueError.emptyItem
+                    throw QueueError.emptyOperandItem
                 }
                 
                 result = `operator`[0].calculate(lhs: result, rhs: nextOperand[0])
+            } catch {
+                throw QueueError.emptyOperandItem
+            }
+            
+            do {
                 `operator` = try operators.removeItem()
             } catch {
-                throw QueueError.emptyItem
+                throw QueueError.emptyOperatorItem
             }
         } while `operator`.count >= 1
         

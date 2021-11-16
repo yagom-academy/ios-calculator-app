@@ -7,4 +7,6 @@
 
 enum QueueError: Error {
     case emptyItem
+    case emptyOperatorItem
+    case emptyOperandItem
 }
