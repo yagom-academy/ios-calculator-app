@@ -10,59 +10,44 @@ import XCTest
 class FormulaTests: XCTestCase {
     
     func test_result메서드_0으로_나누면_Double타입의_NaN_반환() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 10)
-        formula.operands.enqueue(element: 0)
-        formula.operators.enqueue(element: .divide)
+        let operands = CalculatorItemQueue(queue: [10, 0])
+        let operators = CalculatorItemQueue(queue: [Operator.divide])
+        let formula = Formula(operands: operands, operators: operators)
         let result = formula.result()
         XCTAssertTrue(result.isNaN)
     }
     
     func test_result메서드_연산자_1개일때_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 2.5)
-        formula.operands.enqueue(element: -2.5)
-        formula.operators.enqueue(element: .subtract)
+        let operands = CalculatorItemQueue(queue: [2.5, -2.5])
+        let operators = CalculatorItemQueue(queue: [Operator.subtract])
+        let formula = Formula(operands: operands, operators: operators)
         let result = formula.result()
         let expectation: Double = 5
         XCTAssertEqual(result, expectation)
     }
     
     func test_result메서드_연산자_2개일때_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 10)
-        formula.operands.enqueue(element: -2.5)
-        formula.operands.enqueue(element: -4)
-        formula.operators.enqueue(element: .divide)
-        formula.operators.enqueue(element: .multiply)
+        let operands = CalculatorItemQueue(queue: [10, -2.5, -4])
+        let operators = CalculatorItemQueue(queue: [Operator.divide, Operator.multiply])
+        let formula = Formula(operands: operands, operators: operators)
         let result = formula.result()
         let expectation: Double = 16
         XCTAssertEqual(result, expectation)
     }
     
     func test_result메서드_연산자_3개일때_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 2)
-        formula.operands.enqueue(element: -4)
-        formula.operands.enqueue(element: 1.5)
-        formula.operands.enqueue(element: 10)
-        formula.operators.enqueue(element: .subtract)
-        formula.operators.enqueue(element: .divide)
-        formula.operators.enqueue(element: .multiply)
+        let operands = CalculatorItemQueue(queue: [2, -4, 1.5, 10])
+        let operators = CalculatorItemQueue(queue: [Operator.subtract, Operator.divide, Operator.multiply])
+        let formula = Formula(operands: operands, operators: operators)
         let result = formula.result()
         let expectation: Double = 40
         XCTAssertEqual(result, expectation)
     }
     
     func test_result메서드_연산자_3개인데_중간에_0으로_나뉘는_경우의_계산_확인() {
-        var formula = Formula()
-        formula.operands.enqueue(element: 2)
-        formula.operands.enqueue(element: -4)
-        formula.operands.enqueue(element: 0)
-        formula.operands.enqueue(element: 10)
-        formula.operators.enqueue(element: .subtract)
-        formula.operators.enqueue(element: .divide)
-        formula.operators.enqueue(element: .multiply)
+        let operands = CalculatorItemQueue(queue: [2, -4, 0, 10])
+        let operators = CalculatorItemQueue(queue: [Operator.subtract, Operator.divide, Operator.multiply])
+        let formula = Formula(operands: operands, operators: operators)
         let result = formula.result()
         XCTAssertTrue(result.isNaN)
     }

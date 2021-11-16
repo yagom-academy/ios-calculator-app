@@ -9,10 +9,17 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
     
-    func test_componentsByOperators메서드가_String에서_연산자만_필터링하는지() {
+    func test_parse메서드_String에서_연산자_필터링_기능_확인() {
         let input = "123.3 × -12.233 ÷ 10 + -152.25 - -0.1"
-        let result = ExpressionParser.componentsByOperators(from: input)
-        let expectation = ["×", "÷", "+", "-"]
+        let result = ExpressionParser.parse(from: input).operators.queue
+        let expectation: [Operator] = [.multiply, .divide, .add, .subtract]
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_parse메서드_String에서_숫자_필터링_기능_확인() {
+        let input = "123.3 × -12.233 ÷ 10 + -152.25 - -0.1"
+        let result = ExpressionParser.parse(from: input).operands.queue
+        let expectation: [Double] = [123.3, -12.233, 10, -152.25, -0.1]
         XCTAssertEqual(result, expectation)
     }
 }
