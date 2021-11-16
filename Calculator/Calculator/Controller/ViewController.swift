@@ -14,6 +14,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        addFormulaLine(operator: "-", operand: "1234567890")
+        clearLabels()
+    }
+    
+    func clearLabels() {
+        let blank = ""
+        let zero = "0"
+        
+        currentOperatorLabel.text = blank
+        currentOperandLabel.text = zero
+        verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
