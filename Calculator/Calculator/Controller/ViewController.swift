@@ -51,9 +51,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
-        let operatorLabelText = inputedOperatorLabel.text
+        guard let operatorLabelText = inputedOperatorLabel.text else {
+            return
+        }
         let operandLabelText = numberFormatter(inputOperand: operand)
         let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+        
+        fomula += operand
+        fomula += " \(operatorLabelText) "
+        operand = ""
         
         toBeCalculateFormulaStackView.addArrangedSubview(stackView)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
@@ -75,6 +81,21 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(operandLabel)
         
         return stackView
+    }
+    
+    func removeSubView(from stackView: UIStackView) {
+        for view in stackView.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    @IBAction func allClearDidTap(_ sender: UIButton) {
+        fomula = ""
+        operand = ""
+        inputedOperatorLabel.text = ""
+        inputedOperandLabel.text = operand
+        removeSubView(from: toBeCalculateFormulaStackView
+        )
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {

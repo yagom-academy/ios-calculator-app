@@ -55,7 +55,6 @@ class CalculatorUITests: XCTestCase {
         app.buttons["×"].tap()
         app.buttons["4"].tap()
         app.buttons["2"].tap()
-        
     }
 
     func testLaunchPerformance() throws {
