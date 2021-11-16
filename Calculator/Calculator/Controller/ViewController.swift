@@ -8,8 +8,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var formulaScrollView: UIScrollView!
-    @IBOutlet weak var formulaStackView: UIStackView!
+    @IBOutlet weak var calculatorScrollView: UIScrollView!
+    @IBOutlet weak var calculatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     }
     
     private func removeFormulaView() {
-        formulaStackView.subviews.forEach{
+        calculatorStackView.subviews.forEach{
             $0.removeFromSuperview()
         }
     }
@@ -62,11 +62,11 @@ class ViewController: UIViewController {
             return
         }
         let formula = addFormula(operand: operandLabel.text!, operator: currentOperatorButtonText)
-        formulaStackView.addArrangedSubview(formula)
+        calculatorStackView.addArrangedSubview(formula)
         operandLabel.text = "0"
         operatorLabel.text = currentOperatorButtonText
         
-        scrollToBottom(formulaScrollView)
+        scrollToBottom(calculatorScrollView)
     }
     
     func addFormula(operand: String, operator: String) -> UIStackView {
