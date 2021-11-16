@@ -52,29 +52,13 @@ class ViewController: UIViewController {
         guard let `operator` = matchOperatorButton(sender: sender) else {
             return
         }
-        
-        let sign = UILabel()
-        sign.textColor = .white
-        sign.text = arithmetic.text
-        
-        let history = UILabel()
-        history.text = expression.text
-        history.textColor = .white
-        
-        let newHistory = UIStackView(arrangedSubviews: [sign, history])
-        
+    
         guard expression.text != "" else {
             arithmetic.text = `operator`
             return
         }
         
-        calculationHistoryStackView.addArrangedSubview(newHistory)
-        
-        newHistory.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            newHistory.trailingAnchor.constraint(equalTo: calculationHistoryStackView.trailingAnchor, constant: 10.0)
-        ])
-        
+        addCalculationHistory()
         expression.text = ""
         arithmetic.text = `operator`
     }
@@ -123,6 +107,31 @@ class ViewController: UIViewController {
         default:
             return nil
         }
+    }
+    
+    private func addCalculationHistory() {
+        let sign = UILabel()
+        sign.textColor = .white
+        sign.text = arithmetic.text
+        sign.font = UIFont(name: "Helvetica", size: 24)
+        
+        let history = UILabel()
+        history.text = expression.text
+        history.textColor = .white
+        history.font = UIFont(name: "Helvetica", size: 24)
+        
+        let newHistoryStackView = UIStackView(arrangedSubviews: [sign, history])
+        
+        newHistoryStackView.axis = .horizontal
+        newHistoryStackView.spacing = 10
+        
+        calculationHistoryStackView.addArrangedSubview(newHistoryStackView)
+        
+        newHistoryStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            newHistoryStackView.trailingAnchor.constraint(equalTo: calculationHistoryStackView.trailingAnchor, constant: 10.0)
+        ])
     }
 }
 
