@@ -54,6 +54,10 @@ class CalculatorViewController: UIViewController {
         reset()
     }
     
+    @IBAction func touchUpClearEntry(_ sender: UIButton) {
+        clearEntry()
+    }
+    
     func reset() {
         operandLabel.text = "0"
         operatorLabel.text = ""
