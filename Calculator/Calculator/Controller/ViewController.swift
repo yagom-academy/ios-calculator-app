@@ -69,12 +69,15 @@ class ViewController: UIViewController {
             return
         }
     
-        guard expression.text != "" else {
+        guard let number = expression.text,
+              let currentNumber = Double(number),
+              !currentNumber.isZero else {
             arithmetic.text = `operator`
             return
         }
         
         addCalculationHistory()
+        
         expression.text = ""
         arithmetic.text = `operator`
     }
