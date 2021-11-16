@@ -8,7 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     private var calculatorManager = CalculatorManager(calculatingFinish: false, isTypingOperand: false)
-//    private var formulasStackViewIsEmpty: Bool = true
+    private var formulasStackViewIsEmpty: Bool = true
     
     private var displayOperator: String {
         get {
