@@ -19,13 +19,11 @@ enum ExpressionParser {
     }
 
     private static func componentsByOperators(from input: String) -> [String] {
-        var arrayOfBeingSplit: [String]
-        var stringOfSplitTarget = input
+        var stringOfSplitTarget = [input]
         for operatorCase in Operator.allCases {
-            arrayOfBeingSplit = stringOfSplitTarget.split(with: operatorCase.rawValue)
-            stringOfSplitTarget = arrayOfBeingSplit.joined(separator: " ")
+            stringOfSplitTarget = stringOfSplitTarget.flatMap{ $0.split(with: operatorCase.rawValue)}
         }
-        let inputOperands = stringOfSplitTarget.components(separatedBy: " ")
+        let inputOperands = stringOfSplitTarget
         return inputOperands
     }
 }
