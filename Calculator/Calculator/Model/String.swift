@@ -5,7 +5,7 @@ extension String {
     
     func hasOnlyNumberOrOperator() -> Bool {
         for character in self {
-            if character.isNumber == false
+            if character.isNotNumber
                 && ["+","-","/","*"].contains(character) == false {
                 return false
             }

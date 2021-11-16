@@ -7,11 +7,11 @@ enum ExpressionParser {
     }
     
     static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
-        guard input.hasOnlyNumberOrOperator() == true else {
+        guard input.hasOnlyNumberOrOperator() else {
             return .failure(.includingIncorrectCharacter)
         }
         
-        guard input.firstAndLastCharacterAreNumbers() == true else {
+        guard input.firstAndLastCharacterAreNumbers() else {
             return .failure(.firstOrLastCharacterIsNotNumber)
         }
         
