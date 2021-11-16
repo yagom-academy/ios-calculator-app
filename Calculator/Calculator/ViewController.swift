@@ -51,13 +51,20 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
+        if calculatorManager.calculatingFinish {
+            initDisplayFormulas()
+            addFormulaToFormulas(operator: displayOperator, operand: displayOperand)
+            initDisplayOperand()
+            calculatorManager.setCalculatingFinishStatus(to: false)
+        }
+        
         guard let currentOperandButtonTitle = sender.currentTitle else {
             return
         }
         
         calculatorManager.setIsTypingOperandStatus(to: true)
         
-        if displayOperand == "0" || calculatorManager.calculatingFinish {
+        if displayOperand == "0" {
             guard currentOperandButtonTitle != "00" else {
                 return
             }
