@@ -148,13 +148,19 @@ class ExpressionParserTests: XCTestCase {
         
     }
     
-    func test_잘못된_연산자를_포함하여_1_더하기_2_빼기_3_곱하기_2_빼기_3_나누기_음수6_의_result로_오류를_반환하는가() {
+    func test_잘못된_연산자를_포함하여_1_더하기_2_빼기_3_곱하기_2_빼기_3_나누기_음수6_의_result로_unknownOperator_오류를_반환해야한다() {
         // given
         let form = "1+2−3*2−3/-6"
         
         // when
-        // then
-        XCTAssertThrowsError(try ExpressionParser.parse(from: form))
+        do {
+            let result = try ExpressionParser.parse(from: form)
+            print(result)
+        } catch CalculatorError.unknownOperator {
+            XCTAssertTrue(true)
+        } catch {
+            XCTAssertTrue(false)
+        }
         
     }
 }

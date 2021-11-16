@@ -97,7 +97,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(sutDouble, 8.0)
     }
     
-    func test_Double형_80와_Double형_0점0을_divide_operator로_연산하면_notANumber오류가_반환되는가() {
+    func test_Double형_80와_Double형_0점0을_divide_operator로_연산하면_divideByZero_오류가_반환되어야한다() {
         // given
         let leftOperand = 80.0
         let rightOperand = 0.0
