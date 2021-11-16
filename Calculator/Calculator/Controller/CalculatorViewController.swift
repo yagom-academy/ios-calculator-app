@@ -56,6 +56,7 @@ class CalculatorViewController: UIViewController {
             if operand == "0" {
                 return
             }
+            
             if operand.contains("-") {
                 operand.remove(at: operand.startIndex)
             } else {
