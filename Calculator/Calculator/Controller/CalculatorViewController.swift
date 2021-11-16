@@ -39,6 +39,18 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = operandLabelText + tapedNumber
     }
     
+    @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
+        guard let operand = operandLabel.text else {
+            return
+        }
+        
+        guard !operand.contains(".") else {
+            return
+        }
+        
+        operandLabel.text = operand + "."
+    }
+    
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
