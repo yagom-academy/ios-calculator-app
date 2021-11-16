@@ -33,7 +33,8 @@ struct CalculatorManager {
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp
         
-        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) else {
+        guard let formattedNumber = numberFormatter
+                .string(from: NSNumber(value: round(number))) else {
             return "0"
         }
         
@@ -46,5 +47,18 @@ struct CalculatorManager {
     
     mutating func setIsTypingOperandStatus(to status: Bool) {
         isTypingOperand = status
+    }
+    
+    private func round(_ number: Double) -> Double {
+        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 15,
+                                                   raiseOnExactness: false,
+                                                   raiseOnOverflow: false,
+                                                   raiseOnUnderflow: false,
+                                                   raiseOnDivideByZero: false)
+        
+        let roundedNumber = NSDecimalNumber(value: number)
+                            .rounding(accordingToBehavior: roundBehavior)
+        
+        return Double(truncating: roundedNumber)
     }
 }
