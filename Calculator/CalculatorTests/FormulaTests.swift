@@ -13,16 +13,15 @@ class FormulaTests: XCTestCase {
     
     func insertInputArrayToFormula(operands: [Double], operators: [Operator]) {
         for operand in operands {
-            self.formula.operandsQueue.enqueue(operand)
+            self.formula.enqueueToOperandsQueue(operand)
         }
         for `operator` in operators {
-            self.formula.operatorsQueue.enqueue(`operator`)
+            self.formula.enqueueToOperatorsQueue(`operator`)
         }
     }
     
     func test_emptyCalculatorItemQueue() {
-        self.formula.operandsQueue = CalculatorItemQueue()
-        self.formula.operatorsQueue = CalculatorItemQueue()
+        self.formula = Formula()
         
         XCTAssertEqual(self.formula.result(), 0)
     }

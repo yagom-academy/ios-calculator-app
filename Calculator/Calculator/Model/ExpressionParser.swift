@@ -99,10 +99,10 @@ enum ExpressionParser {
         }
         
         filteredOperands.forEach {
-            formula.operandsQueue.enqueue($0)
+            formula.enqueueToOperandsQueue($0)
         }
         filteredOperators.forEach {
-            formula.operatorsQueue.enqueue($0)
+            formula.enqueueToOperatorsQueue($0)
         }
         
         return formula

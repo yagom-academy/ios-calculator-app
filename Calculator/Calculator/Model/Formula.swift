@@ -1,6 +1,22 @@
 struct Formula {
-    var operandsQueue = CalculatorItemQueue()
-    var operatorsQueue = CalculatorItemQueue()
+    private(set) var operandsQueue = CalculatorItemQueue()
+    private(set) var operatorsQueue = CalculatorItemQueue()
+    
+    mutating func enqueueToOperandsQueue(_ item: Double) {
+        operandsQueue.enqueue(item)
+    }
+    
+    mutating func dequeueFromOperandsQueue() -> CalculateItem? {
+        return operandsQueue.dequeue()
+    }
+    
+    mutating func enqueueToOperatorsQueue(_ item: Operator) {
+        operatorsQueue.enqueue(item)
+    }
+    
+    mutating func dequeueFromOperatorsQueue() -> CalculateItem? {
+        return operatorsQueue.dequeue()
+    }
 
     func result() -> Double {
         let operands: [Double] = operandsQueue.allOperands()

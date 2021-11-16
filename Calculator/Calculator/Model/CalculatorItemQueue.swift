@@ -5,7 +5,7 @@ struct CalculatorItemQueue {
     mutating func enqueue(_ item: CalculateItem) {
         if let backupOfLastNode = self.lastNode {
             let newLastNode = LinkedListNode(value: item)
-            backupOfLastNode.nextNode = newLastNode
+            backupOfLastNode.link(nextNode: newLastNode)
             self.lastNode = newLastNode
         } else {
             self.firstNode = LinkedListNode(value: item)
