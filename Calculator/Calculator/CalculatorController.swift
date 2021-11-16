@@ -11,6 +11,8 @@ class CalculatorController: UIViewController {
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
+    private var expressionInput: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -57,6 +59,10 @@ extension CalculatorController {
     }
 
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+        guard numberLabel.text != "0" else {
+            return
+        }
+        
         var currentText = numberLabel.text ?? "0"
         let minusSign = "-"
         
