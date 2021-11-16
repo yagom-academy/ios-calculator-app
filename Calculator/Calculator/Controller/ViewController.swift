@@ -7,19 +7,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    var isCalculated: Bool {
+    private var isCalculated: Bool {
         operandLabel.text != "0"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpFormulaLabel()
+        removeFormulaLabel()
         removeFormulaView()
     }
     
@@ -29,48 +29,18 @@ class ViewController: UIViewController {
         }
     }
     
-    private func setUpFormulaLabel() {
+    private func removeFormulaLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
     
-    @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard let currentOperandButtonText = sender.titleLabel?.text else {
-            return
-        }
-        guard operandLabel.text! != "0" || currentOperandButtonText != "00" else {
-            return
-        }
-        guard isCalculated else {
-            operandLabel.text! = currentOperandButtonText
-            return
-        }
-        operandLabel.text! += currentOperandButtonText
-    }
-    
-    func scrollToBottom(_ view: UIScrollView) {
+    private func scrollToBottom(_ view: UIScrollView) {
         calculatorScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
         view.setContentOffset(bottomOffset, animated: false)
     }
     
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard isCalculated else {
-            operatorLabel.text = sender.titleLabel?.text
-            return
-        }
-        guard let currentOperatorButtonText = sender.titleLabel?.text else {
-            return
-        }
-        let formula = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
-        calculatorStackView.addArrangedSubview(formula)
-        operandLabel.text = "0"
-        operatorLabel.text = currentOperatorButtonText
-        
-        scrollToBottom(calculatorScrollView)
-    }
-    
-    func addFormula(operand: String, operator: String) -> UIStackView {
+    private func addFormula(operand: String, operator: String) -> UIStackView {
         let formulaStackView = UIStackView()
         let operandLabel = UILabel()
         operandLabel.text = operand
@@ -92,10 +62,73 @@ class ViewController: UIViewController {
         return formulaStackView
     }
     
-    func setUpFormulaLabel(of label: UILabel) {
+    private func setUpFormulaLabel(of label: UILabel) {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
+    }
+    
+    private func pullOutTheFormula() -> String {
+        var inputValues = [String]()
+        calculatorStackView.arrangedSubviews.forEach{ view in
+            guard let subview = view as? UIStackView else {
+                return
+            }
+            subview.arrangedSubviews.forEach{ view in
+                guard let label = view as? UILabel else {
+                    return
+                }
+                guard let input = label.text else {
+                    return
+                }
+                inputValues.append(input)
+            }
+        }
+        return inputValues.joined(separator: " ")
+    }
+    
+    private func setUpNumberFormat(for value: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        guard let formatterNumber = numberFormatter.string(for: value) else {
+            return value.description
+        }
+        return formatterNumber
+    }
+}
+
+// MARK: IBAction method
+extension ViewController {
+    @IBAction func operandButtonTapped(_ sender: UIButton) {
+        guard let currentOperandButtonText = sender.titleLabel?.text else {
+            return
+        }
+        guard operandLabel.text! != "0" || currentOperandButtonText != "00" else {
+            return
+        }
+        guard isCalculated else {
+            operandLabel.text! = currentOperandButtonText
+            return
+        }
+        operandLabel.text! += currentOperandButtonText
+    }
+    
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard isCalculated else {
+            operatorLabel.text = sender.titleLabel?.text
+            return
+        }
+        guard let currentOperatorButtonText = sender.titleLabel?.text else {
+            return
+        }
+        let formula = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
+        calculatorStackView.addArrangedSubview(formula)
+        operandLabel.text = "0"
+        operatorLabel.text = currentOperatorButtonText
+        
+        scrollToBottom(calculatorScrollView)
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
@@ -152,35 +185,4 @@ class ViewController: UIViewController {
         }
         operatorLabel.text = ""
     }
-    
-    func pullOutTheFormula() -> String {
-        var inputValues = [String]()
-        calculatorStackView.arrangedSubviews.forEach{ view in
-            guard let subview = view as? UIStackView else {
-                return
-            }
-            subview.arrangedSubviews.forEach{ view in
-                guard let label = view as? UILabel else {
-                    return
-                }
-                guard let input = label.text else {
-                    return
-                }
-                inputValues.append(input)
-            }
-        }
-        return inputValues.joined(separator: " ")
-    }
-    
-    func setUpNumberFormat(for value: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .up
-        guard let formatterNumber = numberFormatter.string(for: value) else {
-            return value.description
-        }
-        return formatterNumber
-    }
 }
-
