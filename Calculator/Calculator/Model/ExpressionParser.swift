@@ -3,19 +3,20 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operators = Operation.allCases.map { String($0.rawValue) }
+        let operators = Operator.allCases.map { String($0.rawValue) }
         let splitedByOperators = componentsByOperators(from: input)
         var operatorsInInput: [String] = []
-        var OperandsInInput: [String] = []
+        var operandsInInput: [String] = []
         
         splitedByOperators.forEach{
-            operators.contains($0) ? operatorsInInput.append($0) : OperandsInInput.append($0)
+            operators.contains($0) ? operatorsInInput.append($0) : operandsInInput.append($0)
         }
         let formula = Formula()
-        operatorsInInput.forEach{
-            formula.oprators.linkedList.enqueue(in: Character($0))
+        let operatorsInputWithoutNil = operatorsInInput.compactMap { Operator(rawValue: Character($0)) }
+        operatorsInputWithoutNil.forEach{
+            formula.oprators.linkedList.enqueue(in: $0 )
         }
-        OperandsInInput.forEach{
+        operandsInInput.forEach{
             formula.operands.linkedList.enqueue(in: Double($0) ?? .zero)
         }
         
@@ -23,7 +24,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-       let operators = Operation.allCases.map{ $0.rawValue }
+       let operators = Operator.allCases.map{ $0.rawValue }
        var inputs: [String] = [input]
        
        for operand in operators {

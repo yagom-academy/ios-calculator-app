@@ -42,8 +42,8 @@ class LinkedList<Element> {
         head = head?.pointer
     }
     
-    func dequeueWithData() -> Element? {
-        guard !isEmpty else { return nil }
+    func dequeueWithData() throws -> Element? {
+        guard !isEmpty else { throw QueueError.EmptyInLinkedList }
         
         let dataOfDequeueNode = head?.data
         

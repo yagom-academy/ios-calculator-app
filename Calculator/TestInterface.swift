@@ -3,7 +3,7 @@
 import Foundation
 
  func testcomponentsByOperators(from input: String) -> [String] {
-    let operators = Operation.allCases.map{ $0.rawValue }
+    let operators = Operator.allCases.map{ $0.rawValue }
     var inputs: [String] = [input]
     
     for operand in operators {
@@ -23,3 +23,4 @@ import Foundation
     return inputs
 
  }
+

@@ -1,7 +1,7 @@
 
 import Foundation
 
-enum Operation: Character, CaseIterable {
+enum Operator: Character, CaseIterable {
     case add = "+"
     case substract = "-"
     case divide = "/"
