@@ -60,6 +60,7 @@ class ViewController: UIViewController {
         fomula += operand
         fomula += " \(operatorLabelText) "
         operand = ""
+        inputedOperandLabel.text = ""
         
         toBeCalculateFormulaStackView.addArrangedSubview(stackView)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
@@ -91,11 +92,13 @@ class ViewController: UIViewController {
     
     func showCalculateResult() {
         var parser = ExpressionParser.parse(from: fomula)
-   
+        
         do{
-            inputedOperandLabel.text = "\(try parser.result())"
-        } catch {
-            
+            inputedOperandLabel.text = numberFormatter(inputOperand: try String(parser.result()))
+        } catch CalculateError.NotANumber {
+            inputedOperandLabel.text = "NaN"
+        } catch let error {
+            print(error)
         }
     }
     
@@ -104,12 +107,11 @@ class ViewController: UIViewController {
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
         
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
         stackView.spacing = 8
         
         operandLabel.text = operandLabelText
         operatorLabel.text = operatorLabelText
+        
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         
