@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var subtractButton: UIButton!
     @IBOutlet private weak var addButton: UIButton!
     
+    @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     @IBOutlet private weak var calculationHistoryStackView: UIStackView!
     @IBOutlet private weak var expression: UILabel!
     @IBOutlet private weak var arithmetic: UILabel!
@@ -209,6 +210,14 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             newHistoryStackView.trailingAnchor.constraint(equalTo: calculationHistoryStackView.trailingAnchor, constant: 10.0)
         ])
+        
+        autoScrollToBottom()
+    }
+    
+    private func autoScrollToBottom() {
+        UIView.animate(withDuration: 0.1) {
+        self.calculationHistoryScrollView.contentOffset = CGPoint(x: 0, y: self.calculationHistoryScrollView.frame.origin.y * 100)
+        }
     }
 }
 
