@@ -111,7 +111,9 @@ class ViewController: UIViewController {
             return
         }
         
-        addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
+        if !currentOperand.isEmpty && !currentOperator.isEmpty {
+            addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
+        }        
         
         finalExpression += currentOperand
         
