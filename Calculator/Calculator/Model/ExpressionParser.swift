@@ -15,7 +15,7 @@ enum ExpressionParser {
         let formula = Formula()
         let operatorsInputWithoutNil = operatorsInInput.compactMap { Operator(rawValue: Character($0)) }
         operatorsInputWithoutNil.forEach {
-            formula.oprators.linkedList.enqueue(in: $0.rawValue )
+            formula.operators.linkedList.enqueue(in: $0.rawValue )
         }
         operandsInInput.forEach {
             formula.operands.linkedList.enqueue(in: Double($0) ?? .zero)
