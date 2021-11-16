@@ -8,14 +8,11 @@ enum ExpressionParser {
     
     enum StringChecker {
         static func hasOnlyNumberOrOperator(from input: String) -> Bool {
-            for character in input {
-                if character.isNotNumber
-                    && Operator.allCharacterCases.contains(character) == false {
-                    return false
-                }
+            let filteredCharacters = input.filter {
+                return $0.isNumber || Operator.allCharacterCases.contains($0)
             }
             
-            return true
+            return input.count == filteredCharacters.count
         }
         
         static func firstAndLastCharacterAreNumbers(from input: String) -> Bool {
@@ -40,7 +37,6 @@ enum ExpressionParser {
         let inputComponents = ExpressionParser.componentsByOperators(from: input)
                    
         let (operands, operators) = separateOperandsAndOperators(from: inputComponents)
-        
         
         guard operands.count == operators.count + 1 else {
             return .failure(.incorrectCountOfNumbersAndOperators)
@@ -74,11 +70,11 @@ enum ExpressionParser {
         var operands: [String] = []
         var operators: [String] = []
         
-        for component in components {
-            if Operator.allStringCases.contains(component) {
-                operators.append(component)
+        components.forEach {
+            if Operator.allStringCases.contains($0) {
+                operators.append($0)
             } else {
-                operands.append(component)
+                operands.append($0)
             }
         }
         
