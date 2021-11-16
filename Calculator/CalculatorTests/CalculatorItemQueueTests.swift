@@ -30,25 +30,13 @@ class CalculatorTests: XCTestCase {
     func test_빈_Double배열에_removeItem을_하면_오류를_뱉는지() {
         var queue = CalculatorItemQueue<Double>()
         
-        do {
-            try queue.removeItem()
-        } catch {
-            return
-        }
-        
-        XCTAssertThrowsError(QueueError.emptyItem)
+        XCTAssertThrowsError(try queue.removeItem())
     }
     
     func test_빈_Operator배열에_removeItem을_하면_오류를_뱉는지() {
         var queue = CalculatorItemQueue<Double>()
         
-        do {
-            try queue.removeItem()
-        } catch {
-            return
-        }
-        
-        XCTAssertThrowsError(QueueError.emptyItem)
+        XCTAssertThrowsError(try queue.removeItem())
     }
     
     func test_배열에_Character_값이_3개_들어있을_때_removeAllItem을_하면_빈_배열로_되는지() {
