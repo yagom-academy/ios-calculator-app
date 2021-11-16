@@ -42,12 +42,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        inputedOperandLabel.text = ""
+        inputedOperandLabel.text = "0"
     }
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
         operand += operands(for: sender)
-        inputedOperandLabel.text = operand
+        inputedOperandLabel.text = numberFormatter(inputOperand: operand)
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         fomula += operand
         fomula += " \(operatorLabelText) "
         operand = ""
-        inputedOperandLabel.text = ""
+        inputedOperandLabel.text = "0"
         
         toBeCalculateFormulaStackView.addArrangedSubview(stackView)
         inputedOperatorLabel.text = operators(for: sender)
@@ -69,7 +69,10 @@ class ViewController: UIViewController {
     }
     
     func scrollToBottom() {
+        scrollView.layoutIfNeeded()
+        
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
+        
         scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
@@ -134,14 +137,14 @@ class ViewController: UIViewController {
         fomula = ""
         operand = ""
         inputedOperatorLabel.text = ""
-        inputedOperandLabel.text = operand
+        inputedOperandLabel.text = "0"
         removeSubView(from: toBeCalculateFormulaStackView
         )
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {
         operand = ""
-        inputedOperandLabel.text = operand
+        inputedOperandLabel.text = "0"
     }
     
     private func numberFormatter(inputOperand: String) -> String? {
@@ -149,6 +152,7 @@ class ViewController: UIViewController {
             return ""
         }
         let numberFormatter = NumberFormatter()
+        numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
 
