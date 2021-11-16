@@ -42,29 +42,40 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        inputedOperandLabel.text = StringOfInitialize.OperandLabelText
+        inputedOperandLabel.text = StringOfInitialize.operandLabelText
     }
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
         operand += operands(for: sender)
-        inputedOperandLabel.text = numberFormatterFor(inputOperand: operand)
+        do {
+            inputedOperandLabel.text = try
+            numberFormatterFor(inputOperand: operand)
+        } catch let error {
+            print(error)
+        }
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
         if operand == StringOfInitialize.toEmptyString { return }
-        
+
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
-        let operandLabelText = numberFormatterFor(numberForCalculate: operand)
-        let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+        
+        do {
+            let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
+            let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+            
+            toBeCalculateFormulaStackView.addArrangedSubview(stackView)
+        } catch let error {
+            print(error)
+        }
         
         fomula += operand
         fomula += " \(operatorLabelText) "
         operand = StringOfInitialize.toEmptyString
-        inputedOperandLabel.text = StringOfInitialize.OperandLabelText
-        
-        toBeCalculateFormulaStackView.addArrangedSubview(stackView)
+        inputedOperandLabel.text = StringOfInitialize.operandLabelText
+
         inputedOperatorLabel.text = operators(for: sender)
         
         scrollToBottom()
@@ -90,15 +101,21 @@ class ViewController: UIViewController {
         if operand == StringOfInitialize.toEmptyString { return }
         
         guard let operatorLabelText = inputedOperatorLabel.text else { return }
-        let operandLabelText = numberFormatterFor(numberForCalculate: operand)
-        let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+        
+        do {
+            let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
+            let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+            
+            toBeCalculateFormulaStackView.addArrangedSubview(stackView)
+        } catch let error {
+            print(error)
+        }
         
         fomula += " \(operatorLabelText) "
         fomula += operand
         operand = StringOfInitialize.toEmptyString
-        inputedOperatorLabel.text = StringOfInitialize.OperatorLabelText
+        inputedOperatorLabel.text = StringOfInitialize.operatorLabelText
         
-        toBeCalculateFormulaStackView.addArrangedSubview(stackView)
         showCalculateResult()
     }
     
@@ -106,7 +123,7 @@ class ViewController: UIViewController {
         var parser = ExpressionParser.parse(from: fomula)
         
         do{
-            inputedOperandLabel.text = numberFormatterFor(numberForCalculate: try String(parser.result()))
+            inputedOperandLabel.text = try numberFormatterFor(numberForCalculate: try String(parser.result()))
         } catch CalculateError.notANumber {
             inputedOperandLabel.text = CalculateError.notANumber.message
         } catch let error {
@@ -137,20 +154,20 @@ class ViewController: UIViewController {
         fomula = StringOfInitialize.toEmptyString
         operand = StringOfInitialize.toEmptyString
         
-        inputedOperatorLabel.text = StringOfInitialize.OperatorLabelText
-        inputedOperandLabel.text = StringOfInitialize.OperandLabelText
+        inputedOperatorLabel.text = StringOfInitialize.operatorLabelText
+        inputedOperandLabel.text = StringOfInitialize.operandLabelText
         
         removeSubView(from: toBeCalculateFormulaStackView)
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {
         operand = StringOfInitialize.toEmptyString
-        inputedOperandLabel.text = StringOfInitialize.OperandLabelText
+        inputedOperandLabel.text = StringOfInitialize.operandLabelText
     }
     
-    private func numberFormatterFor(numberForCalculate: String) -> String? {
+    private func numberFormatterFor(numberForCalculate: String) throws -> String? {
         guard let numberForCalculate = Double(numberForCalculate) else {
-            return ""
+            throw NumberFormatterError.dataTypeCastingFailed
         }
         let numberFormatter = NumberFormatter()
         
@@ -161,9 +178,9 @@ class ViewController: UIViewController {
         return numberFormatter.string(for: numberForCalculate)
     }
     
-    private func numberFormatterFor(inputOperand: String) -> String? {
+    private func numberFormatterFor(inputOperand: String) throws -> String? {
         guard let operand = Double(inputOperand) else {
-            return ""
+            throw NumberFormatterError.dataTypeCastingFailed
         }
         let numberFormatter = NumberFormatter()
         

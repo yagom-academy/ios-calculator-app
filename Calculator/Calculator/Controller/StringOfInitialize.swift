@@ -8,7 +8,7 @@
 import Foundation
 
 enum StringOfInitialize {
-    static let OperandLabelText = "0"
-    static let OperatorLabelText = ""
+    static let operandLabelText = "0"
+    static let operatorLabelText = ""
     static let toEmptyString = ""
 }

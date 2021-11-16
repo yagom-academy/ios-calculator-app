@@ -49,6 +49,9 @@
 		25303DCA27441EEC001E47C3 /* StringOfInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DC927441EEC001E47C3 /* StringOfInitialize.swift */; };
 		25303DCB27441EEC001E47C3 /* StringOfInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DC927441EEC001E47C3 /* StringOfInitialize.swift */; };
 		25303DCC27441EEC001E47C3 /* StringOfInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DC927441EEC001E47C3 /* StringOfInitialize.swift */; };
+		25303DCE27442704001E47C3 /* NumberFormatterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DCD27442704001E47C3 /* NumberFormatterError.swift */; };
+		25303DCF27442704001E47C3 /* NumberFormatterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DCD27442704001E47C3 /* NumberFormatterError.swift */; };
+		25303DD027442704001E47C3 /* NumberFormatterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DCD27442704001E47C3 /* NumberFormatterError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -94,6 +97,7 @@
 		25303DB227426E92001E47C3 /* CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITests.swift; sourceTree = "<group>"; };
 		25303DB427426E92001E47C3 /* CalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		25303DC927441EEC001E47C3 /* StringOfInitialize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringOfInitialize.swift; sourceTree = "<group>"; };
+		25303DCD27442704001E47C3 /* NumberFormatterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				25303D48273CDC6C001E47C3 /* CalculateError.swift */,
 				25303D4D273CF23D001E47C3 /* QueueError.swift */,
 				25303D65273D2D03001E47C3 /* StringError.swift */,
+				25303DCD27442704001E47C3 /* NumberFormatterError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25303DCF27442704001E47C3 /* NumberFormatterError.swift in Sources */,
 				25303DC427436602001E47C3 /* StringError.swift in Sources */,
 				25303D4C273CEF9C001E47C3 /* OperatorError.swift in Sources */,
 				25303D322739723B001E47C3 /* LinkedList.swift in Sources */,
@@ -399,6 +405,7 @@
 				25303DC527436602001E47C3 /* StringError.swift in Sources */,
 				25303DCC27441EEC001E47C3 /* StringOfInitialize.swift in Sources */,
 				25303DC0274365CB001E47C3 /* LinkedList.swift in Sources */,
+				25303DD027442704001E47C3 /* NumberFormatterError.swift in Sources */,
 				25303DC82743660E001E47C3 /* CalculateError.swift in Sources */,
 				25303DC2274365ED001E47C3 /* Formula.swift in Sources */,
 				25303DB327426E92001E47C3 /* CalculatorUITests.swift in Sources */,
@@ -413,6 +420,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				25303D3E273A7FDA001E47C3 /* ExpressionParser.swift in Sources */,
 				25303D49273CDC6C001E47C3 /* CalculateError.swift in Sources */,
+				25303DCE27442704001E47C3 /* NumberFormatterError.swift in Sources */,
 				25303D3427398E2C001E47C3 /* CalculateItem.swift in Sources */,
 				25303D312739723B001E47C3 /* LinkedList.swift in Sources */,
 				25303D66273D2D03001E47C3 /* StringError.swift in Sources */,
