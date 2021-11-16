@@ -9,8 +9,13 @@ import Foundation
 
 struct CalculatorManager {
     var isCalculating : Bool
-    
+    private let numberFormatter = NumberFormatter()
+
     init(isCalculating: Bool){
         self.isCalculating = isCalculating
+    }
+    
+    func format(of number: String) -> String {
+        return ""
     }
 }
