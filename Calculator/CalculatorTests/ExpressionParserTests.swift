@@ -46,10 +46,10 @@ class ExpressionParserTests: XCTestCase {
     }
     
     func testInputFourPlusSixMulutiplyThreeMinusThreeIsNineteen() throws {
-        let input = "-4+6*3-3"
+        let input = "4+6*3-3"
         var formula = ExpressionParser.parse(from: input)
         let calculatedResult = try formula.result()
-        let expectedResult: Double = 3
+        let expectedResult: Double = 27
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
