@@ -23,7 +23,10 @@ enum Operator: Character, CaseIterable {
     
     private func add(lhs: Double, rhs: Double) -> Double { lhs + rhs }
     private func substract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
-    private func divide(lhs: Double, rhs: Double) -> Double { lhs / rhs }
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        let isBothZero: Bool = (lhs == .zero && rhs == .zero)
+        return isBothZero ? .nan : lhs/rhs
+    }
     private func multifly(lhs: Double, rhs: Double) -> Double { lhs * rhs }
 }
 
