@@ -66,6 +66,32 @@ class ViewController: UIViewController {
         inputedOperatorLabel.text = operators(for: sender)
     }
     
+    @IBAction func equalButtonDidTap(_ sender: UIButton) {
+        guard let operatorLabelText = inputedOperatorLabel.text else {
+            return
+        }
+        let operandLabelText = numberFormatter(inputOperand: operand)
+        let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+        
+        fomula += " \(operatorLabelText) "
+        fomula += operand
+        operand = ""
+        inputedOperatorLabel.text = ""
+        
+        toBeCalculateFormulaStackView.addArrangedSubview(stackView)
+        showCalculateResult()
+    }
+    
+    func showCalculateResult() {
+        var parser = ExpressionParser.parse(from: fomula)
+   
+        do{
+            inputedOperandLabel.text = "\(try parser.result())"
+        } catch {
+            
+        }
+    }
+    
     func makeStackView(operatorLabelText: String?, operandLabelText: String?) -> UIStackView {
         let stackView = UIStackView()
         let operatorLabel = UILabel()
