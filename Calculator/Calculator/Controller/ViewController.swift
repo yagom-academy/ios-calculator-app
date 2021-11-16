@@ -108,13 +108,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: Any) {
+        addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
+        
         finalExpression += currentOperand
         
         let formula = ExpressionParser.parse(from: finalExpression)
         
         do {
-            let result = try formula.result()
-            expression.text = result.description
+            let calculationResult = try formula.result()
+            expression.text = calculationResult.description
             arithmetic.text = ""
         } catch OperationError.dividedByZero {
             expression.text = "NaN"
