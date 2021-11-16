@@ -224,7 +224,6 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				E9052A4A2743F6E1009C9D9C /* OperandEntry.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,6 +238,7 @@
 				E9B23A4D273CFE14007E42A9 /* Operator.swift */,
 				E9B23A75273D7689007E42A9 /* Formula.swift */,
 				E9B23AB7273E769C007E42A9 /* ExpressionParser.swift */,
+				E9052A4A2743F6E1009C9D9C /* OperandEntry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
