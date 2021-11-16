@@ -3,7 +3,7 @@
 import XCTest
 
 class CalculatorTests: XCTestCase {
-
+    
     func test_헤드가_비었는지() {
         let sut = CalculatorItemQueue<String>()
         sut.linkedList.enqueue(in: "0")

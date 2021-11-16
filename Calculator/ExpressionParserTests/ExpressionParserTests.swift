@@ -31,5 +31,5 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result[2], "")
         XCTAssertEqual(result[3], "-")
     }
-
+    
 }
