@@ -10,7 +10,8 @@ class CalculatorViewController: UIViewController {
 
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var calculationHistory: UIStackView!
+    @IBOutlet weak var calculationHistoryStackView: UIStackView!
+    @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

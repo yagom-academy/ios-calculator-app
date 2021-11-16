@@ -337,6 +337,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculationHistoryScrollView" destination="BOT-7g-vxv" id="262-5C-gla"/>
+                        <outlet property="calculationHistoryStackView" destination="XRe-QE-UJf" id="Uhe-mU-T4k"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="j80-dt-QeF"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="nVk-Ga-Wtb"/>
                     </connections>
