@@ -134,5 +134,53 @@ class ViewController: UIViewController {
         }
         operandLabel.text = "-" + operandLabel.text!
     }
+    
+    @IBAction func equalButtonTapped(_ sender: UIButton) {
+        guard operatorLabel.text != "" else {
+            return
+        }
+        let formulaStackView = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
+        calculatorStackView.addArrangedSubview(formulaStackView)
+        var formula = ExpressionParser.parse(from: pullOutTheFormula())
+        do {
+            let calcuatorResult = try formula.result()
+            operandLabel.text = setUpNumberFormat(for: calcuatorResult)
+        } catch let error as CalculatorError {
+            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        operatorLabel.text = ""
+    }
+    
+    func pullOutTheFormula() -> String {
+        var inputValues = [String]()
+        calculatorStackView.arrangedSubviews.forEach{ view in
+            guard let subview = view as? UIStackView else {
+                return
+            }
+            subview.arrangedSubviews.forEach{ view in
+                guard let label = view as? UILabel else {
+                    return
+                }
+                guard let input = label.text else {
+                    return
+                }
+                inputValues.append(input)
+            }
+        }
+        return inputValues.joined(separator: " ")
+    }
+    
+    func setUpNumberFormat(for value: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        guard let formatterNumber = numberFormatter.string(for: value) else {
+            return value.description
+        }
+        return formatterNumber
+    }
 }
 
