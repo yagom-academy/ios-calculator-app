@@ -9,9 +9,13 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
+        return makeOperationQueue(from: input)
+    }
+    
+    private static func makeOperationQueue(from input: String) -> Formula {
         let operatorQueue = insertOperatorsToQueue(from: input)
         let operandQueue = insertOperandsToQueue(from: input)
-
+        
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
