@@ -38,6 +38,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         if rhs == 0 {
             throw CalculateError.notANumber
         }
+        
         return lhs / rhs
     }
     

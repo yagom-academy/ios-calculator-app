@@ -22,6 +22,7 @@ enum ExpressionParser {
         operandsOfInputString.compactMap { (operands: String) -> Double? in return Double(operands) }.forEach {
             inputOperand in operands.enQueue(inputOperand)
         }
+        
         return Formula(operands: operands, operators: operators)
     }
     

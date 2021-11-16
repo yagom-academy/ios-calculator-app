@@ -19,6 +19,7 @@ struct Formula {
             
             result = try operatorOfDeQueue.calculate(lhs: result, rhs: try operands.deQueue())
         }
+        
         return result
     }
 }

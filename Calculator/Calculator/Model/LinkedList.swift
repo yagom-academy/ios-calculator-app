@@ -36,6 +36,7 @@ struct LinkedList<T> {
             rear = front
             return
         }
+        
         rear?.next = Node(data: data)
         rear = rear?.next
     }
@@ -60,9 +61,11 @@ struct LinkedList<T> {
             guard let data = node?.data else {
                 return []
             }
+            
             dataList.append(data)
             node = node?.next
         }
+        
         return dataList
     }
 }
