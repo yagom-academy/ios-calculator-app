@@ -100,10 +100,9 @@ class ViewController: UIViewController {
         finalExpression += currentOperand
         finalExpression += " \(`operator`) "
         
-        currentOperand = ""
-        currentOperator = `operator`
+        resetCurrentOperand()
         
-        expression.text = "0"
+        currentOperator = `operator`
         arithmetic.text = `operator`
     }
     
@@ -134,19 +133,35 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpACButton(_ sender: Any) {
+    @IBAction private func touchUpACButton(_ sender: Any) {
+        resetToInitialState()
+    }
+    
+    private func resetToInitialState() {
         finalExpression = ""
         currentOperator = ""
-        currentOperand = ""
-        
+        arithmetic.text = ""
         isCalculated = false
         
-        expression.text = "0"
-        arithmetic.text = ""
+        resetCurrentOperand()
         
         calculationHistoryStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
+    }
+
+    private func resetCurrentOperand() {
+        currentOperand = ""
+        expression.text = "0"
+    }
+
+    @IBAction private func touchUpCEButton(_ sender: Any) {
+        guard !isCalculated else {
+            resetToInitialState()
+            return
+        }
+        
+        resetCurrentOperand()
     }
     
     private func matchOperatorButton(sender: UIButton) -> String? {
