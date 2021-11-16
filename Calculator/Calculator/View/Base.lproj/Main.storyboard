@@ -302,6 +302,20 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dotButton" destination="h8q-5h-bnb" id="yVt-p8-CfJ"/>
+                        <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="XDJ-mo-lkN"/>
+                        <outlet property="eightButton" destination="xgT-2D-A49" id="obA-QF-8Be"/>
+                        <outlet property="fiveButton" destination="vpW-df-OLm" id="MRV-tz-l8X"/>
+                        <outlet property="fourButton" destination="hQm-yz-XvG" id="TBc-iu-aIm"/>
+                        <outlet property="nineButton" destination="zcj-xJ-ruw" id="zqw-Dw-YAJ"/>
+                        <outlet property="oneButton" destination="nCE-qB-NiN" id="IEx-1k-yPH"/>
+                        <outlet property="sevenButton" destination="L6z-2G-Gar" id="Obj-lh-ZW6"/>
+                        <outlet property="sixButton" destination="OaY-Mw-CPv" id="SM9-PX-hlk"/>
+                        <outlet property="threeButton" destination="X8H-iH-tSd" id="kTq-ST-GTh"/>
+                        <outlet property="twoButton" destination="Rif-2S-UU2" id="WMr-WX-xGw"/>
+                        <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="KNP-Ol-Bin"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
