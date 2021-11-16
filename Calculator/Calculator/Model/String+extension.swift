@@ -13,7 +13,7 @@ extension String {
         var seperatedValue: [String] = []
         var valueToSeperate: String = self
         
-        while let targetIndex:String.Index = valueToSeperate.firstIndex(of: target) {
+        while let targetIndex: String.Index = valueToSeperate.firstIndex(of: target) {
             let targetBeforeValue = valueToSeperate[..<targetIndex]
             let targetAfterValue = valueToSeperate[index(after: targetIndex)...]
             
