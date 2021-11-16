@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var formulaStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -47,6 +48,11 @@ class ViewController: UIViewController {
         operandLabel.text! += currentOperandButtonText
     }
     
+    func scrollToBottom(_ view: UIScrollView) {
+        let bottomOffset = CGPoint(x: 0, y: formulaScrollView.contentSize.height)
+        formulaScrollView.setContentOffset(bottomOffset, animated: false)
+    }
+    
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard isCalculated else {
             operatorLabel.text = sender.titleLabel?.text
@@ -59,6 +65,8 @@ class ViewController: UIViewController {
         formulaStackView.addArrangedSubview(formula)
         operandLabel.text = "0"
         operatorLabel.text = currentOperatorButtonText
+        
+        scrollToBottom(formulaScrollView)
     }
     
     func addFormula(operand: String, operator: String) -> UIStackView {

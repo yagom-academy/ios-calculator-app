@@ -361,6 +361,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="h1o-7U-g74"/>
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="hTN-cV-uEw"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="xAN-GU-Llj"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="53O-RS-0mU"/>
