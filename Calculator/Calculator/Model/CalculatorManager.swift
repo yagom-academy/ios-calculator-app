@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorManager {
-    var calculatingFinish : Bool
-    var isTypingOperand : Bool
+    private (set) var calculatingFinish : Bool
+    private (set) var isTypingOperand : Bool
     
     private let numberFormatter = NumberFormatter()
 
@@ -37,5 +37,13 @@ struct CalculatorManager {
         }
         
         return formattedNumber
+    }
+    
+    mutating func setCalculatingFinishStatus(to status: Bool) {
+        calculatingFinish = status
+    }
+    
+    mutating func setIsTypingOperandStatus(to status: Bool) {
+        isTypingOperand = status
     }
 }
