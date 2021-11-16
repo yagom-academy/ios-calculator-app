@@ -6,13 +6,15 @@ struct Formula {
         let operands: [Double] = operandsQueue.allOperands()
         let operators: [Operator] = operatorsQueue.allOperators()
         
-        guard operands.count > 0 else {
+        guard var result = operands.first else {
             return 0
         }
         
-        var result = operands[0]
-        for index in 0..<operators.count {
-            result = operators[index].calculate(lhs: result, rhs: operands[index+1])
+        for (index, `operator`) in operators.enumerated() {
+            guard index+1 < operands.count else { break }
+            
+            let operand = operands[index+1]
+            result = `operator`.calculate(lhs: result, rhs: operand)
         }
 
         return result
