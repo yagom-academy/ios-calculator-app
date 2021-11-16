@@ -97,11 +97,32 @@ class ViewController: UIViewController {
         
         addCalculationHistory(operandsText: operandText, operatorText: currentOperator)
         
+        finalExpression += currentOperand
+        finalExpression += " \(`operator`) "
+        
         currentOperand = ""
         currentOperator = `operator`
         
         expression.text = "0"
         arithmetic.text = `operator`
+    }
+    
+    @IBAction func touchUpEqualButton(_ sender: Any) {
+        finalExpression += currentOperand
+        
+        let formula = ExpressionParser.parse(from: finalExpression)
+                
+        do {
+            let result = try formula.result()
+            expression.text = result.description
+            arithmetic.text = ""
+        } catch OperationError.dividedByZero {
+            print(OperationError.dividedByZero.localizedDescription)
+        } catch CalculationItemQueueError.hasNoElement {
+            print(CalculationItemQueueError.hasNoElement.localizedDescription)
+        } catch {
+            print(error)
+        }
     }
     
     private func matchOperatorButton(sender: UIButton) -> String? {
