@@ -53,4 +53,13 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testInput() throws {
+        let input = "4+6*3-3"
+        var formula = ExpressionParser.parse(from: input)
+        let calculatedResult = try formula.result()
+        let expectedResult: Double = 19
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
 }
