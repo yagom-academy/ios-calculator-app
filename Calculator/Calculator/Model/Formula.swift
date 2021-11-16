@@ -38,6 +38,9 @@ struct Formula {
         if operators.isEmpty == false {
             operators.clear()
         }
+        guard currentOperand.isNaN == false else {
+            throw CalculatorError.notNumber
+        }
         return currentOperand
     }
 }
