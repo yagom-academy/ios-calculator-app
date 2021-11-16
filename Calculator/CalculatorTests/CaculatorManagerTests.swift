@@ -9,7 +9,7 @@ import XCTest
 
 class CaculatorManagerTests: XCTestCase {
     
-    private let calculatorManager = CalculatorManager(calculatingFisnish: false,
+    private let calculatorManager = CalculatorManager(calculatingFinish: false,
                                                       isTypingOperand: false)
     private var numberToConvert: String = ""
 

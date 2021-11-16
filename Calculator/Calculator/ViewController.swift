@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var calculatorManager = CalculatorManager(calculatingFisnish: false, isTypingOperand: false)
+    private var calculatorManager = CalculatorManager(calculatingFinish: false, isTypingOperand: false)
     
     private var displayOperator: String {
         get {

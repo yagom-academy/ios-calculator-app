@@ -13,8 +13,8 @@ struct CalculatorManager {
     
     private let numberFormatter = NumberFormatter()
 
-    init(calculatingFisnish: Bool, isTypingOperand: Bool){
-        self.calculatingFinish = calculatingFisnish
+    init(calculatingFinish: Bool, isTypingOperand: Bool){
+        self.calculatingFinish = calculatingFinish
         self.isTypingOperand = isTypingOperand
     }
     
