@@ -12,7 +12,6 @@ class ExpressionParserTests: XCTestCase {
         
     override func setUpWithError() throws {
         try super.setUpWithError()
-        exampleData = "12 * -3 + -3 / 9 ₋ 30 + 12"
     }
 
     override func tearDownWithError() throws {
@@ -20,4 +19,16 @@ class ExpressionParserTests: XCTestCase {
         exampleData = " "
     }
 
+    func test_연산자와_피연산자를_각각_다른_큐에_담는지() throws {
+        exampleData = "12 * -3"
+        
+        var testFormula = ExpressionParser.parse(from: exampleData)
+        let exampleOperator: Operator = .multiply
+        
+        guard let testData = testFormula.operators.dequeue() else {
+            throw OperatorQueueError.NoElement
+        }
+        
+        XCTAssertEqual(exampleOperator, testData)
+    }
 }
