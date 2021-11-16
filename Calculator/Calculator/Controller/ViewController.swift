@@ -36,13 +36,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var cleanEntry: UIButton!
     @IBOutlet weak var convertPositiveOrNegativeNumber: UIButton!
     
+    let initializeOperandLabelText = "0"
+    let initializeOperatorLabelText = ""
+    let initializeToEmptyString = ""
+    
     var fomula: String = ""
     var operand: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        inputedOperandLabel.text = "0"
+        inputedOperandLabel.text = initializeOperandLabelText
     }
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
@@ -59,8 +63,8 @@ class ViewController: UIViewController {
         
         fomula += operand
         fomula += " \(operatorLabelText) "
-        operand = ""
-        inputedOperandLabel.text = "0"
+        operand = initializeToEmptyString
+        inputedOperandLabel.text = initializeOperandLabelText
         
         toBeCalculateFormulaStackView.addArrangedSubview(stackView)
         inputedOperatorLabel.text = operators(for: sender)
@@ -84,6 +88,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
+        if inputedOperandLabel.text == "" || inputedOperatorLabel.text == "" {
+            return
+        }
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
@@ -92,8 +99,8 @@ class ViewController: UIViewController {
         
         fomula += " \(operatorLabelText) "
         fomula += operand
-        operand = ""
-        inputedOperatorLabel.text = ""
+        operand = initializeToEmptyString
+        inputedOperatorLabel.text = initializeOperatorLabelText
         
         toBeCalculateFormulaStackView.addArrangedSubview(stackView)
         showCalculateResult()
@@ -134,17 +141,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func allClearDidTap(_ sender: UIButton) {
-        fomula = ""
-        operand = ""
-        inputedOperatorLabel.text = ""
-        inputedOperandLabel.text = "0"
+        fomula = initializeToEmptyString
+        operand = initializeToEmptyString
+        inputedOperatorLabel.text = initializeOperatorLabelText
+        inputedOperandLabel.text = initializeOperandLabelText
         removeSubView(from: toBeCalculateFormulaStackView
         )
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {
-        operand = ""
-        inputedOperandLabel.text = "0"
+        operand = initializeToEmptyString
+        inputedOperandLabel.text = initializeOperandLabelText
     }
     
     private func numberFormatterFor(numberForCalculate: String) -> String? {
