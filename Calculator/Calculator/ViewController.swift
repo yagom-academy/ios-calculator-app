@@ -89,6 +89,7 @@ extension ViewController {
         
         displayOperator = currentOperandButtionTitle
         initDisplayOperand()
+        scrollToBottom(in: formulasScrollView)
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
@@ -149,6 +150,13 @@ extension ViewController {
         initDisplayOperator()
         initDisplayOperand()
         initDisplayFormulas()
+    }
+    
+    func scrollToBottom(in scrollView: UIScrollView) {
+        let bottomOffset = CGPoint(x: 0,y: scrollView.contentSize.height
+                                    - scrollView.bounds.size.height)
+        print(bottomOffset)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     func appendFormulaToformulas(`operator`: String, operand: String) {
