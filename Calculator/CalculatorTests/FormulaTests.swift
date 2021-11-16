@@ -86,4 +86,36 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(try sut?.result(), 6)
     }
+    
+    func test_음수가_섞인_다양한_연산자와_숫자가_있을_경우_계산이_잘_되는지() {
+        sut?.operands.appendItem(3)
+        sut?.operands.appendItem(-2)
+        sut?.operands.appendItem(2)
+        sut?.operands.appendItem(2)
+        sut?.operands.appendItem(3)
+        sut?.operands.appendItem(-2)
+        sut?.operators.appendItem(.add)
+        sut?.operators.appendItem(.multiply)
+        sut?.operators.appendItem(.divide)
+        sut?.operators.appendItem(.add)
+        sut?.operators.appendItem(.subtract)
+        
+        XCTAssertEqual(try sut?.result(), 6)
+    }
+    
+    func test_다양한_연산자와_음수가_있을_경우_계산이_잘_되는지() {
+        sut?.operands.appendItem(-3)
+        sut?.operands.appendItem(-2)
+        sut?.operands.appendItem(-2)
+        sut?.operands.appendItem(-2)
+        sut?.operands.appendItem(-3)
+        sut?.operands.appendItem(-2)
+        sut?.operators.appendItem(.add)
+        sut?.operators.appendItem(.multiply)
+        sut?.operators.appendItem(.divide)
+        sut?.operators.appendItem(.add)
+        sut?.operators.appendItem(.subtract)
+        
+        XCTAssertEqual(try sut?.result(), -6)
+    }
 }
