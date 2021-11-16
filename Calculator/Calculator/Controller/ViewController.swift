@@ -135,13 +135,11 @@ extension ViewController {
         guard isCalculated || operatorLabel.text != "" else {
             return
         }
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        removeFormulaLabel()
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        removeFormulaLabel()
         removeFormulaView()
     }
     
