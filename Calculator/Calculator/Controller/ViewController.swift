@@ -81,7 +81,13 @@ class ViewController: UIViewController {
         }
         
         if currentNumber.isSameAfterRounded() {
-            addCalculationHistory(operandsText: String(Int(currentNumber)), operatorText: currentOperator)
+            let formatter = NumberFormatter()
+            formatter.maximumFractionDigits = 0
+            guard let operand = formatter.string(from: NSNumber(value: currentNumber)) else {
+                return
+            }
+            
+            addCalculationHistory(operandsText: operand, operatorText: currentOperator)
         } else {
             addCalculationHistory(operandsText: String(currentNumber), operatorText: currentOperator)
         }
