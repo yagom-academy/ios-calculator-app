@@ -57,7 +57,7 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: true)
         
-        if displayOperand == "0" {
+        if displayOperand == "0" || calculatorManager.calculatingFinish {
             guard currentOperandButtonTitle != "00" else {
                 return
             }
@@ -125,8 +125,10 @@ extension ViewController {
         
         do {
             displayOperand = String(try formula.result())
+            calculatorManager.setCalculatingFinishStatus(to: true)
         } catch OperationError.devidedByZero {
             displayOperand = "NaN"
+            calculatorManager.setCalculatingFinishStatus(to: true)
         } catch {
             print(error.localizedDescription)
         }
@@ -164,6 +166,11 @@ extension ViewController {
     }
     
     private func addFormulaToFormulas(`operator`: String, operand: String) {
+        if calculatorManager.calculatingFinish {
+            initDisplayFormulas()
+            calculatorManager.setCalculatingFinishStatus(to: false)
+        }
+        
         let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
