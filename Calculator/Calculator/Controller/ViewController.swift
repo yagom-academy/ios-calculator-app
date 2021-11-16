@@ -70,5 +70,16 @@ class ViewController: UIViewController {
         operandLabel.text! += currentOperandButtonText
     }
     
+    @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
+        guard isCalculated else {
+            return
+        }
+        let hasMinusNotIncluded = operandLabel.text!.contains("-") == false
+        guard hasMinusNotIncluded else {
+            operandLabel.text!.remove(at: operandLabel.text!.startIndex)
+            return
+        }
+        operandLabel.text = "-" + operandLabel.text!
+    }
 }
 
