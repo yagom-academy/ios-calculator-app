@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             return operand
         }
         set {
-            operandLabel.text = newValue
+            operandLabel.text = calculatorManager.format(of: newValue)
         }
     }
     
@@ -54,7 +54,9 @@ extension ViewController {
         guard let currentOperandButtonTitle = sender.currentTitle else {
             return
         }
-    
+        
+        calculatorManager.setIsTypingOperandStatus(to: true)
+        
         if displayOperand == "0" {
             guard currentOperandButtonTitle != "00" else {
                 return
@@ -69,6 +71,8 @@ extension ViewController {
         guard let decimalPointButtonTitle = sender.currentTitle else {
             return
         }
+        
+        calculatorManager.setIsTypingOperandStatus(to: true)
         
         guard !displayOperand.contains(".") else { return }
         
@@ -164,11 +168,12 @@ extension ViewController {
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
         
+        calculatorManager.setIsTypingOperandStatus(to: false)
+        
         operatorLabel.text = `operator`
-        operandLabel.text = operand
+        operandLabel.text = calculatorManager.format(of: operand)
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
-        
         
         formulaRowStackView.axis = .horizontal
         formulaRowStackView.alignment = .fill

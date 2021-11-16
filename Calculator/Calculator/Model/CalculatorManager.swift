@@ -19,6 +19,10 @@ struct CalculatorManager {
     }
     
     func format(of numberExpression: String) -> String {
+        if self.isTypingOperand {
+            return numberExpression
+        }
+        
         let numberExpressionWithoutDecimal = numberExpression
             .replacingOccurrences(of: ",", with: "")
         guard let number = Double(numberExpressionWithoutDecimal) else {
@@ -27,10 +31,6 @@ struct CalculatorManager {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
-        
-        if calculatingFinish {
-            numberFormatter.minimumSignificantDigits = 1
-        }
         
         guard let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) else {
             return "0"
