@@ -53,4 +53,13 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testInputMinusFourPlusEightMultiplyMinusThreeIsMinusTwelve() throws {
+        let input = "-4+8*-3"
+        var formula = ExpressionParser.parse(from: input)
+        let calculatedResult = try formula.result()
+        let expectedResult: Double = -12
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
 }
