@@ -27,6 +27,15 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(calculatedResult, expectedResult)
     }
     
+    func testInputMinusThreeMinusFiveIsMinusEight() throws {
+        let input = "-3-5"
+        var formula = ExpressionParser.parse(from: input)
+        let calculatedResult = try formula.result()
+        let expectedResult: Double = -8
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
+    
     func testInputTwoPlusThreeMinusSixIsMinusOne() throws {
         let input = "2+3-6"
         var formula = ExpressionParser.parse(from: input)
