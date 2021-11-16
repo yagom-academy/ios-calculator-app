@@ -18,6 +18,18 @@ class ViewController: UIViewController {
         verticalStackView.addArrangedSubview(horizontalStackView)
     }
     
+    private func makeHorizontalStackView(operator: UILabel, operand: UILabel) -> UIStackView {
+        let horizontal = UIStackView()
+        let defaultSpacing: CGFloat = 8
+        
+        horizontal.axis = .horizontal
+        horizontal.translatesAutoresizingMaskIntoConstraints = false
+        horizontal.addArrangedSubview(`operator`)
+        horizontal.addArrangedSubview(operand)
+        horizontal.spacing = defaultSpacing
+        
+        return horizontal
+    }
     
 }
 
