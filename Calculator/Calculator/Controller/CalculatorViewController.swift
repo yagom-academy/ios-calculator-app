@@ -38,6 +38,18 @@ class CalculatorViewController: UIViewController {
         
         operandLabel.text = operandLabelText + tapedNumber
     }
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        
+        if operandLabel.text == "0" {
+            operatorLabel.text = sender.titleLabel?.text
+            return
+        }
+        
+        addFormula()
+        operatorLabel.text = sender.titleLabel?.text
+        operandLabel.text = "0"
+    }
+    
     @IBAction func touchUpAllClear(_ sender: UIButton) {
         reset()
     }
@@ -71,6 +83,7 @@ class CalculatorViewController: UIViewController {
         stackView.addArrangedSubview(insultinOperandLabel)
         
         calculationHistoryStackView.addArrangedSubview(stackView)
+        autoScrollDown()
     }
     
     func allClear() {
@@ -83,6 +96,17 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
     }
     
+    func autoScrollDown() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1 ) {
+            self.calculationHistoryScrollView
+                .scrollRectToVisible(CGRect(x: 0,
+                                            y: self.calculationHistoryScrollView.contentSize.height
+                                                - self.calculationHistoryScrollView.bounds.height,
+                                            width: self.calculationHistoryScrollView.bounds.size.width,
+                                            height: self.calculationHistoryScrollView.bounds.size.height),
+                                     animated: true)
+        }
+    }
     
 }
 
