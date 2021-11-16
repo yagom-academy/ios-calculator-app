@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     @IBOutlet private weak var zeroButton: UIButton!
     @IBOutlet private weak var doubleZeroButton: UIButton!
     @IBOutlet private weak var dotButton: UIButton!
@@ -20,7 +19,6 @@ class ViewController: UIViewController {
     @IBOutlet private weak var sevenButton: UIButton!
     @IBOutlet private weak var eightButton: UIButton!
     @IBOutlet private weak var nineButton: UIButton!
-    
     
     @IBOutlet private weak var divideButton: UIButton!
     @IBOutlet private weak var multiplyButton: UIButton!
@@ -40,7 +38,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.expression.text = "0"
-        // Do any additional setup after loading the view.
     }
 
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
