@@ -49,7 +49,8 @@ class ViewController: UIViewController {
     }
     
     func scrollToBottom(_ view: UIScrollView) {
-        let bottomOffset = CGPoint(x: 0, y: view.contentSize.height)
+        calculatorScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
         view.setContentOffset(bottomOffset, animated: false)
     }
     
