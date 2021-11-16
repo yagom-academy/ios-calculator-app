@@ -19,6 +19,19 @@ class ViewController: UIViewController {
         clearLabels()
     }
     
+    @IBAction func allClearButtonDidTap(_ sender: UIButton) {
+    }
+    @IBAction func clearEntryButtonDidTap(_ sender: UIButton) {
+    }
+    @IBAction func toggleSignButtonDidTap(_ sender: UIButton) {
+    }
+    @IBAction func operandButtonDidTap(_ sender: UIButton) {
+    }
+    @IBAction func operatorButtonDidTap(_ sender: UIButton) {
+    }
+    @IBAction func equalsButtonDidTap(_ sender: UIButton) {
+    }
+    
     func clearLabels() {
         let blank = ""
         let zero = "0"
