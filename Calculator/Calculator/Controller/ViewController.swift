@@ -49,8 +49,8 @@ class ViewController: UIViewController {
     }
     
     func scrollToBottom(_ view: UIScrollView) {
-        let bottomOffset = CGPoint(x: 0, y: formulaScrollView.contentSize.height)
-        formulaScrollView.setContentOffset(bottomOffset, animated: false)
+        let bottomOffset = CGPoint(x: 0, y: view.contentSize.height)
+        view.setContentOffset(bottomOffset, animated: false)
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
