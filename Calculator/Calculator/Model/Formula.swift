@@ -22,20 +22,19 @@ struct Formula {
         var `operator` = operators.items
         var result = firstOperand
         
-         repeat {
+        repeat {
             do {
                 let nextOperand = try operands.removeItem()
                 if nextOperand == [] {
                     throw QueueError.emptyItem
                 }
-
+                
                 result = `operator`[0].calculate(lhs: result, rhs: nextOperand[0])
                 `operator` = try operators.removeItem()
             } catch {
                 throw QueueError.emptyItem
             }
         } while `operator`.count >= 1
-        
         
         return result
     }
