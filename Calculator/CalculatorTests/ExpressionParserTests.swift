@@ -49,7 +49,7 @@ class ExpressionParserTests: XCTestCase {
             
             switch successResult {
             case .success(let formula):
-                XCTAssertEqual(formula.operators.allOperators(), successAnswerList[index])
+                XCTAssertEqual(formula.operatorsQueue.allOperators(), successAnswerList[index])
             default:
                 break
             }
@@ -69,7 +69,7 @@ class ExpressionParserTests: XCTestCase {
             
             switch successResult {
             case .success(let formula):
-                XCTAssertEqual(formula.operands.allOperands(), successAnswerList[index])
+                XCTAssertEqual(formula.operandsQueue.allOperands(), successAnswerList[index])
             default:
                 break
             }

@@ -1,18 +1,18 @@
 struct Formula {
-    var operands = CalculatorItemQueue()
-    var operators = CalculatorItemQueue()
+    var operandsQueue = CalculatorItemQueue()
+    var operatorsQueue = CalculatorItemQueue()
 
     func result() -> Double {
-        let operandsArray: [Double] = operands.allOperands()
-        let operatorsArray: [Operator] = operators.allOperators()
+        let operands: [Double] = operandsQueue.allOperands()
+        let operators: [Operator] = operatorsQueue.allOperators()
         
-        guard operandsArray.count > 0 else {
+        guard operands.count > 0 else {
             return 0
         }
         
-        var result = operandsArray[0]
-        for index in 0..<operatorsArray.count {
-            result = operatorsArray[index].calculate(lhs: result, rhs: operandsArray[index+1])
+        var result = operands[0]
+        for index in 0..<operators.count {
+            result = operators[index].calculate(lhs: result, rhs: operands[index+1])
         }
 
         return result

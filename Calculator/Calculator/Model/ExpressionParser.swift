@@ -72,7 +72,7 @@ enum ExpressionParser {
                 return nil
             }
             
-            formula.operands.enqueue(operand)
+            formula.operandsQueue.enqueue(operand)
         }
         
         for `operator` in operators {
@@ -84,7 +84,7 @@ enum ExpressionParser {
                 return nil
             }
             
-            formula.operators.enqueue(_operator)
+            formula.operatorsQueue.enqueue(_operator)
         }
         
         return formula
