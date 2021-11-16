@@ -19,7 +19,7 @@ struct Formula {
         }
         
         let firstOperand = operands.items[0]
-        var `operator` = operators.items
+        var operatorItems = operators.items
         var result = firstOperand
         
         repeat {
@@ -30,17 +30,17 @@ struct Formula {
                     throw QueueError.emptyOperandItem
                 }
                 
-                result = `operator`[0].calculate(lhs: result, rhs: nextOperand[0])
+                result = operatorItems[0].calculate(lhs: result, rhs: nextOperand[0])
             } catch {
                 throw QueueError.emptyOperandItem
             }
             
             do {
-                `operator` = try operators.removeItem()
+                operatorItems = try operators.removeItem()
             } catch {
                 throw QueueError.emptyOperatorItem
             }
-        } while `operator`.count >= 1
+        } while operatorItems.count >= 1
         
         return result
     }
