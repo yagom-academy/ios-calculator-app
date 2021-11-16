@@ -53,7 +53,6 @@ extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
         if calculatorManager.calculatingFinish {
             initDisplayFormulas()
-            addFormulaToFormulas(operator: displayOperator, operand: displayOperand)
             initDisplayOperand()
             calculatorManager.setCalculatingFinishStatus(to: false)
         }
