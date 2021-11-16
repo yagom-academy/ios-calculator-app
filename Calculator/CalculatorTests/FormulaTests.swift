@@ -23,8 +23,8 @@ class FormulaTests: XCTestCase {
     
     func testThreeAddSix() throws {
         sut.operands.insert(3)
-        sut.operands.insert(6)
         sut.operators.insert(.add)
+        sut.operands.insert(6)
         
         let calculatedResult = try sut.result()
         let expectedResult: Double = 9
@@ -34,8 +34,8 @@ class FormulaTests: XCTestCase {
     
     func testThreeMultiplyMinusSix() throws {
         sut.operands.insert(3)
-        sut.operands.insert(-6)
         sut.operators.insert(.multiply)
+        sut.operands.insert(-6)
         
         let calculatedResult = try sut.result()
         let expectedResult: Double = -18
@@ -45,10 +45,10 @@ class FormulaTests: XCTestCase {
     
     func testSixSubtractNineMultiplyEight() throws {
         sut.operands.insert(6)
-        sut.operands.insert(9)
-        sut.operands.insert(8)
         sut.operators.insert(.subtract)
+        sut.operands.insert(9)
         sut.operators.insert(.multiply)
+        sut.operands.insert(8)
         
         let calculatedResult = try sut.result()
         let expectedResult: Double = -24
@@ -58,12 +58,12 @@ class FormulaTests: XCTestCase {
     
     func testSixSubtractNineMultiplyMinusEightDivideThree() throws {
         sut.operands.insert(6)
-        sut.operands.insert(9)
-        sut.operands.insert(-8)
-        sut.operands.insert(3)
         sut.operators.insert(.subtract)
+        sut.operands.insert(9)
         sut.operators.insert(.multiply)
+        sut.operands.insert(-8)
         sut.operators.insert(.divide)
+        sut.operands.insert(3)
         
         let calculatedResult = try sut.result()
         let expectedResult: Double = 8
