@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var formulaStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -18,6 +19,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpFormulaLabel()
+        removeFormulaView()
+    }
+    
+    private func removeFormulaView() {
+        formulaStackView.subviews.forEach{ view in
+            view.removeFromSuperview()
+        }
     }
     
     private func setUpFormulaLabel() {
@@ -57,6 +65,7 @@ class ViewController: UIViewController {
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         operandLabel.text = "0"
         operatorLabel.text = ""
+        removeFormulaView()
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
