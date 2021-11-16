@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		84756DEC273A701A00131DA0 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84756DEB273A701A00131DA0 /* CalculateItem.swift */; };
-		8476CE2527422F83009DB750 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE2427422F83009DB750 /* FormulaTests.swift */; };
 		8476CE362742349A009DB750 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE352742349A009DB750 /* DoubleExtensions.swift */; };
 		8476CE3A27423621009DB750 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE3927423621009DB750 /* StringExtensions.swift */; };
 		8476CE46274243F8009DB750 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE45274243F8009DB750 /* OperatorTests.swift */; };
@@ -47,7 +46,6 @@
 		84756DEB273A701A00131DA0 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		84756DF2273A738200131DA0 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84756DF6273A738200131DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8476CE2427422F83009DB750 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		8476CE352742349A009DB750 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		8476CE3927423621009DB750 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		8476CE45274243F8009DB750 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				84756DF6273A738200131DA0 /* Info.plist */,
-				8476CE2427422F83009DB750 /* FormulaTests.swift */,
 				8476CE45274243F8009DB750 /* OperatorTests.swift */,
 				8476CE552742451B009DB750 /* ParserTests.swift */,
 				8489CA6827426C2A00823A9C /* CalculatorItemQueueTests.swift */,
@@ -266,7 +263,6 @@
 				847C8CE82742504E00DDF111 /* CalculateItem.swift in Sources */,
 				8489CA6927426C2A00823A9C /* CalculatorItemQueueTests.swift in Sources */,
 				8476CE46274243F8009DB750 /* OperatorTests.swift in Sources */,
-				8476CE2527422F83009DB750 /* FormulaTests.swift in Sources */,
 				847C8CEB274250CF00DDF111 /* DoubleExtensions.swift in Sources */,
 				8489CA572742526400823A9C /* Formula.swift in Sources */,
 				8476CE562742451B009DB750 /* ParserTests.swift in Sources */,

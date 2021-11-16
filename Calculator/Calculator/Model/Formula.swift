@@ -17,6 +17,11 @@ struct Formula {
     }
 
     mutating func result() -> Double {
-        return 1.1
+        guard var operationResult = operands.dequeue() else { return 0.0 }
+        
+        while let nextOperator = operators.dequeue(), let nextOperand = operands.dequeue() {
+            operationResult = nextOperator.calculate(operationResult, nextOperand)
+        }
+        return operationResult
     }
 }
