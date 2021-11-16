@@ -75,5 +75,17 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(-2, calculationResult)
     }
+    
+    func test_0으로_나누었을_경우_오류를_검출하는지() throws {
+        [10, 5, 0, 2].forEach { number in
+            formula.operands.enqueue(operation: number)
+        }
+        
+        for _ in 1...3 {
+            formula.operators.enqueue(operation: .divide)
+        }
+  
+        XCTAssertThrowsError(try formula.result())
+    }
 }
 
