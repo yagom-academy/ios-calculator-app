@@ -117,5 +117,6 @@ class FormulaTests: XCTestCase {
         sut?.operators.appendItem(.subtract)
         
         XCTAssertEqual(try sut?.result(), -6)
+        XCTAssertIdentical(<#T##expression1: AnyObject?##AnyObject?#>, <#T##expression2: AnyObject?##AnyObject?#>)
     }
 }
