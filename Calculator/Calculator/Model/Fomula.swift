@@ -13,7 +13,7 @@ struct Formula {
             do {
                 let eachOperation = try oprators.linkedList.dequeueWithData()
                 let firstOperand = try operands.linkedList.dequeueWithData()
-                let secondOperand = try operands.linkedList.dequeueWithData() 
+                let secondOperand = try operands.linkedList.dequeueWithData()
                 guard let currentNumber = Operator(rawValue: eachOperation)?.calculate(lhs: firstOperand, rhs: secondOperand) else {
                     throw QueueError.EmptyInLinkedList
                 }
