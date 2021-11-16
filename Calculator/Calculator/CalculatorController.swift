@@ -11,6 +11,8 @@ class CalculatorController: UIViewController {
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak private var operatorLabel: UILabel!
     
+    @IBOutlet weak private var expressionStackView: UIStackView!
+    
     private var expressionInput: String = String()
     
     override func viewDidLoad() {
@@ -51,6 +53,26 @@ extension CalculatorController {
     private func resetExpressionInput() {
         expressionInput = String()
     }
+    
+    private func createExpressionStackView() {
+        let operatorLabel = UILabel()
+        operatorLabel.text = self.operatorLabel.text
+        operatorLabel.textColor = .white
+        operatorLabel.sizeToFit()
+        
+        let operandLabel = UILabel()
+        operandLabel.text = self.numberLabel.text
+        operandLabel.textColor = .white
+        operandLabel.sizeToFit()
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        stackView.spacing = 8
+        
+        expressionStackView.addArrangedSubview(stackView)
+    }
 }
 
 // MARK: - Button Event
@@ -78,6 +100,7 @@ extension CalculatorController {
         operatorLabel.text = `operator`
         
         appendExpression()
+        createExpressionStackView()
         resetNumberLabel()
     }
 
