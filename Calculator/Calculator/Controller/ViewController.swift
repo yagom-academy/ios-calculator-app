@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    private var isCalculated: Bool {
+    private var isNotZero: Bool {
         operandLabel.text != "0"
     }
     
@@ -108,7 +108,7 @@ extension ViewController {
         guard operandLabel.text! != "0" || currentOperandButtonText != "00" else {
             return
         }
-        guard isCalculated else {
+        guard isNotZero else {
             operandLabel.text! = currentOperandButtonText
             return
         }
@@ -116,7 +116,7 @@ extension ViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard isCalculated else {
+        guard isNotZero else {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
@@ -127,12 +127,11 @@ extension ViewController {
         calculatorStackView.addArrangedSubview(formula)
         operandLabel.text = "0"
         operatorLabel.text = currentOperatorButtonText
-        
         scrollToBottom(calculatorScrollView)
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        guard isCalculated || operatorLabel.text != "" else {
+        guard isNotZero || operatorLabel.text != "" else {
             return
         }
         removeFormulaLabel()
@@ -155,7 +154,7 @@ extension ViewController {
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
-        guard isCalculated else {
+        guard isNotZero else {
             return
         }
         let hasMinusNotIncluded = operandLabel.text!.contains("-") == false
