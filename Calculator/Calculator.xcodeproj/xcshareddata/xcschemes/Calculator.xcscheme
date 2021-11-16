@@ -39,6 +39,16 @@
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3AC451DB273F8C4B00DA18E2"
+               BuildableName = "ExpressionParserTests.xctest"
+               BlueprintName = "ExpressionParserTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

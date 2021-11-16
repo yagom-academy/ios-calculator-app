@@ -1,6 +1,6 @@
 struct LinkedList<T> {
-    private(set) var head: Node<T>?
-    private(set) var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
@@ -23,7 +23,6 @@ struct LinkedList<T> {
         let value = Node(value)
         self.head = value
         self.tail = value
-        
     }
     
     mutating func append(_ value: T) {
@@ -55,7 +54,7 @@ struct LinkedList<T> {
 }
 
 extension LinkedList {
-    class Node<T> {
+    final private class Node<T> {
         var value: T
         var next: Node<T>?
         
