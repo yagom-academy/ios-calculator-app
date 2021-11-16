@@ -44,4 +44,13 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testInputFourAddMinusSixIsTen() throws {
+        let input = "4 + -6"
+        var formula = ExpressionParser.parse(from: input)
+        let calculatedResult = try formula.result()
+        let expectedResult: Double = -2
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
 }
