@@ -8,5 +8,7 @@
 import Foundation
 
 extension Double: CalculateItem {
-    
+    func isSameAfterRounded() -> Bool {
+        return self == self.rounded()
+    }
 }
