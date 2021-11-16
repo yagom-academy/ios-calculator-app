@@ -35,4 +35,13 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(calculatedResult, expectedResult)
     }
+    
+    func testInputFourMultiplyMinusSixIsMinusTwentyFour() throws {
+        let input = "4*-6"
+        var formula = ExpressionParser.parse(from: input)
+        let calculatedResult = try formula.result()
+        let expectedResult: Double = -24
+        
+        XCTAssertEqual(calculatedResult, expectedResult)
+    }
 }
