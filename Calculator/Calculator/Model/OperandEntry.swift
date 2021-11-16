@@ -13,14 +13,7 @@ struct OperandEntry {
     }
     private var entry = "0"
     private var isPositive = true
-    private var isZeroState: Bool {
-        switch entry {
-            case "0":
-                return true
-            default:
-                return false
-        }
-    }
+    private var isZeroState: Bool { entry == "0" }
     mutating func append(_ input: String) {
         switch input {
             case "0" where isZeroState,
