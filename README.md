@@ -1,14 +1,11 @@
 ## iOS 커리어 스타터 캠프
 
-
-#### 계산기 프로젝트 저장소
-
+### 계산기 프로젝트 저장소
 
 #### UML
 ![image](https://user-images.githubusercontent.com/90945013/140878044-b9e2bb63-cc92-4a4c-9039-1ff1c39eb272.png)
 
 
-## STEP1
 #### 의도한 점, 고민한 점
 
 1. 배열 VS 단방향 연결리스트
