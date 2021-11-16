@@ -10,7 +10,7 @@ import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Double>!
-    
+   
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
@@ -45,5 +45,5 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueueElement(3)
         
         XCTAssertEqual(try sut.deQueueFirstElement(), 1)
-    }
+    }    
 }
