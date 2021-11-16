@@ -32,7 +32,7 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return Double()
+        return lhs - rhs
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
