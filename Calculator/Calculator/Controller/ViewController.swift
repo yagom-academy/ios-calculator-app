@@ -106,14 +106,14 @@ class ViewController: UIViewController {
         arithmetic.text = `operator`
     }
     
-    @IBAction func touchUpEqualButton(_ sender: Any) {
+    @IBAction private func touchUpEqualButton(_ sender: Any) {
         guard !isCalculated else {
             return
         }
         
         if !currentOperand.isEmpty && !currentOperator.isEmpty {
             addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
-        }        
+        }
         
         finalExpression += currentOperand
         
@@ -123,11 +123,16 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult = try formula.result()
-            expression.text = calculationResult.description
+            guard let resultText = calculationResult.description.addCommaOnEveryThreeDigits() else {
+                return
+            }
+            resetCurrentOperand()
+            expression.text = resultText
             arithmetic.text = ""
         } catch OperationError.dividedByZero {
             expression.text = "NaN"
             arithmetic.text = ""
+            resetCurrentOperand()
         } catch CalculationItemQueueError.hasNoElement {
             print(CalculationItemQueueError.hasNoElement.localizedDescription)
         } catch {
