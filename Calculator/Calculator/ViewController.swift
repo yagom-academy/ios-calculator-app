@@ -138,32 +138,32 @@ extension ViewController {
 // MARK: - private Methods
 
 extension ViewController {
-    func initDisplayOperator() {
+    private func initDisplayOperator() {
         displayOperator = ""
     }
     
-    func initDisplayOperand() {
+    private func initDisplayOperand() {
         displayOperand = "0"
     }
     
-    func initDisplayFormulas() {
+    private func initDisplayFormulas() {
         formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
     }
     
-    func initAllDisplay() {
+    private func initAllDisplay() {
         initDisplayOperator()
         initDisplayOperand()
         initDisplayFormulas()
     }
     
-    func scrollToBottom(in scrollView: UIScrollView) {
+    private func scrollToBottom(in scrollView: UIScrollView) {
         let bottomOffset = CGPoint(x: 0,y: scrollView.contentSize.height
                                     - scrollView.bounds.size.height)
         print(bottomOffset)
         scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    func addFormulaToFormulas(`operator`: String, operand: String) {
+    private func addFormulaToFormulas(`operator`: String, operand: String) {
         let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
@@ -185,7 +185,7 @@ extension ViewController {
         formulasStackView.addArrangedSubview(formulaRowStackView)
     }
     
-    func convertSign(from operand: String) -> String {
+    private func convertSign(from operand: String) -> String {
         guard let sign = operand.first, sign == "-" else {
             return "-" + operand
         }
@@ -193,7 +193,7 @@ extension ViewController {
         return String(operand[signIndex...])
     }
     
-    func assembleFormula() -> String {
+    private func assembleFormula() -> String {
         var result: [String] = []
         
         formulasStackView.arrangedSubviews.forEach {
