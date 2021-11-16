@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8453A6B42743C86F00DA8B44 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453A6B32743C86F00DA8B44 /* ExpressionParserTests.swift */; };
 		84756DEC273A701A00131DA0 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84756DEB273A701A00131DA0 /* CalculateItem.swift */; };
 		8476CE362742349A009DB750 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE352742349A009DB750 /* DoubleExtensions.swift */; };
 		8476CE3A27423621009DB750 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476CE3927423621009DB750 /* StringExtensions.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8453A6B32743C86F00DA8B44 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		84756DEB273A701A00131DA0 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		84756DF2273A738200131DA0 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84756DF6273A738200131DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				8476CE45274243F8009DB750 /* OperatorTests.swift */,
 				8476CE552742451B009DB750 /* ParserTests.swift */,
 				8489CA6827426C2A00823A9C /* CalculatorItemQueueTests.swift */,
+				8453A6B32743C86F00DA8B44 /* ExpressionParserTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				847C8CF4274250D800DDF111 /* ExpressionParser.swift in Sources */,
 				847C8CEE274250D300DDF111 /* StringExtensions.swift in Sources */,
 				8489CA5E2742533400823A9C /* CalculatorItemQueue.swift in Sources */,
+				8453A6B42743C86F00DA8B44 /* ExpressionParserTests.swift in Sources */,
 				847C8CE82742504E00DDF111 /* CalculateItem.swift in Sources */,
 				8489CA6927426C2A00823A9C /* CalculatorItemQueueTests.swift in Sources */,
 				8476CE46274243F8009DB750 /* OperatorTests.swift in Sources */,
