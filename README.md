@@ -13,7 +13,9 @@
 <a name="TimeLine"></a>
 # ⏰  타임 라인
 
-**21.11.08.Mon**
+<details>
+<summary>21.11.08.Mon</summary>
+<div markdown="1">       
 
 - Step1 요구사항 파악
 - Queue, LinkedList 자료구조 공부
@@ -21,7 +23,12 @@
 - 테스트 타겟 설정 및 초기 타입 구현
 - Step1 기한 설정
 
-**21.11.09.Tue**
+</div>
+</details>
+
+<details>
+<summary>21.11.09.Tue</summary>
+<div markdown="2">       
 
 - UML 작성
 - Queue 구현
@@ -29,6 +36,9 @@
 - 코드 Refactoring
 - Step1 PR 제출
 - [README.md](http://readme.md/) 작성
+
+</div>
+</details>
 
 <a name="Step1"></a>
 # 1️⃣ Step 1

@@ -5,6 +5,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack = [Element]()
     private var outputStack = [Element]()
     
+    init(_ items: [Element] = []) {
+        self.inputStack = items
+    }
+    
     var front: Element? {
         return outputStack.last ?? inputStack.first
     }
@@ -22,10 +26,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     @discardableResult
-    mutating func dequeue() -> Element? {
+    mutating func dequeue() throws -> Element {
         if inputStack.isEmpty && outputStack.isEmpty {
-            return nil
+            throw CalculateError.emptyQueue
         }
+        
         
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
