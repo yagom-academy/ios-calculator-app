@@ -50,14 +50,21 @@ class ViewController: UIViewController {
             return
         }
         
-        if operand == "." && currentOperand.isEmpty {
-            currentOperand += "0."
+        if operand == "." {
+            currentOperand += currentOperand.isEmpty ? "0." : "."
+            expression.text = currentOperand
+            return
         } else {
             currentOperand += operand
         }
                 
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
-        expression.text = currentOperand
+        
+        guard let operandText = currentOperand.addCommaOnEveryThreeDigits() else {
+            return
+        }
+        
+        expression.text = operandText
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
