@@ -14,7 +14,6 @@ class FormulaTests: XCTestCase {
         var formula = Formula()
         formula = sut.parse(from: "4*2/0")
         let result = try? formula.result()
-        XCTAssertEqual(result, .nan)
+        XCTAssertTrue(result!.isNaN)
     }
-    
 }
