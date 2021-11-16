@@ -13,6 +13,7 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
+		E9052A4B2743F6E1009C9D9C /* OperandEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9052A4A2743F6E1009C9D9C /* OperandEntry.swift */; };
 		E9B239DE27395FF3007E42A9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B239DD27395FF3007E42A9 /* CalculatorItemQueue.swift */; };
 		E9B239E227396069007E42A9 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B239E127396069007E42A9 /* CalculateItem.swift */; };
 		E9B239EB2739611B007E42A9 /* CauculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B239EA2739611B007E42A9 /* CauculatorItemQueueTests.swift */; };
@@ -84,6 +85,7 @@
 		C713D94A2570E5ED001C3AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9052A4A2743F6E1009C9D9C /* OperandEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperandEntry.swift; sourceTree = "<group>"; };
 		E9B239DD27395FF3007E42A9 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		E9B239E127396069007E42A9 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		E9B239E82739611B007E42A9 /* CauculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CauculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+				E9052A4A2743F6E1009C9D9C /* OperandEntry.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				E9B23A76273D7689007E42A9 /* Formula.swift in Sources */,
 				E9B23A4E273CFE14007E42A9 /* Operator.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				E9052A4B2743F6E1009C9D9C /* OperandEntry.swift in Sources */,
 				E9B23AB8273E769C007E42A9 /* ExpressionParser.swift in Sources */,
 				E9B23A17273A65BC007E42A9 /* Node.swift in Sources */,
 			);
