@@ -86,8 +86,8 @@ class ViewController: UIViewController {
         
         addCalculationHistory()
         
-        expression.text = ""
-        currentOperand = ""
+        expression.text = "0"
+        currentOperand = "0"
         arithmetic.text = `operator`
     }
     
