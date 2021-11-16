@@ -20,6 +20,8 @@ class CalculatorViewController: UIViewController {
     func reset() {
         operandLabel.text = "0"
         operatorLabel.text = ""
+        allClear()
+    }
     }
     
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
