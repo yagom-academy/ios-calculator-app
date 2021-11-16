@@ -14,7 +14,10 @@ class ViewController: UIViewController {
     }
     
     private func addFormulaLine(operator: String, operand: String) {
-        let horizontalStackView = UIStackView()
+        let operatorLabel = makeFormulaLabel(with: `operator`)
+        let operandLabel = makeFormulaLabel(with: operand)
+        let horizontalStackView = makeHorizontalStackView(operator: operatorLabel, operand: operandLabel)
+        
         verticalStackView.addArrangedSubview(horizontalStackView)
     }
     
