@@ -47,14 +47,14 @@ class ViewController: UIViewController {
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
         operand += operands(for: sender)
-        inputedOperandLabel.text = numberFormatter(inputOperand: operand)
+        inputedOperandLabel.text = numberFormatterFor(inputOperand: operand)
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
-        let operandLabelText = numberFormatter(inputOperand: operand)
+        let operandLabelText = numberFormatterFor(numberForCalculate: operand)
         let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
         
         fomula += operand
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         guard let operatorLabelText = inputedOperatorLabel.text else {
             return
         }
-        let operandLabelText = numberFormatter(inputOperand: operand)
+        let operandLabelText = numberFormatterFor(numberForCalculate: operand)
         let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
         
         fomula += " \(operatorLabelText) "
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         var parser = ExpressionParser.parse(from: fomula)
         
         do{
-            inputedOperandLabel.text = numberFormatter(inputOperand: try String(parser.result()))
+            inputedOperandLabel.text = numberFormatterFor(numberForCalculate: try String(parser.result()))
         } catch CalculateError.NotANumber {
             inputedOperandLabel.text = "NaN"
         } catch let error {
@@ -147,7 +147,19 @@ class ViewController: UIViewController {
         inputedOperandLabel.text = "0"
     }
     
-    private func numberFormatter(inputOperand: String) -> String? {
+    private func numberFormatterFor(numberForCalculate: String) -> String? {
+        guard let numberForCalculate = Double(numberForCalculate) else {
+            return ""
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 15
+        
+        return numberFormatter.string(for: numberForCalculate)
+    }
+    
+    private func numberFormatterFor(inputOperand: String) -> String? {
         guard let operand = Double(inputOperand) else {
             return ""
         }
@@ -155,6 +167,21 @@ class ViewController: UIViewController {
         numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
+        
+        if inputOperand.contains(".") {
+            let dotFront = inputOperand.split(with: ".")[0]
+            
+            if inputOperand.split(with: ".").count == 1 {
+                return dotFront + "."
+            }
+            
+            guard let formattedDotFront = numberFormatter.string(for: Double(dotFront)) else {
+                return nil
+            }
+            let dotBack = inputOperand.split(with: ".")[1]
+            
+            return formattedDotFront + "." + dotBack
+        }
 
         return numberFormatter.string(for: operand)
     }
