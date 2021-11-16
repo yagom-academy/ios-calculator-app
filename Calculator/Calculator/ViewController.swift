@@ -89,6 +89,10 @@ extension ViewController {
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
+        guard displayOperand != "NaN" else {
+            return
+        }
+        
         if calculatorManager.calculatingFinish {
             initDisplayFormulas()
             calculatorManager.setCalculatingFinishStatus(to: false)
@@ -180,11 +184,6 @@ extension ViewController {
     }
     
     private func addFormulaToFormulas(`operator`: String, operand: String) {
-        guard operand != "NaN" else {
-            displayOperand = "0"
-            return
-        }
-        
         let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
