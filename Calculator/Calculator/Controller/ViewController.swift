@@ -22,14 +22,14 @@ class ViewController: UIViewController {
     @IBOutlet private weak var nineButton: UIButton!
     
     
-    @IBOutlet weak var divideButton: UIButton!
-    @IBOutlet weak var multiplyButton: UIButton!
-    @IBOutlet weak var subtractButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet private weak var divideButton: UIButton!
+    @IBOutlet private weak var multiplyButton: UIButton!
+    @IBOutlet private weak var subtractButton: UIButton!
+    @IBOutlet private weak var addButton: UIButton!
     
-    @IBOutlet weak var calculationHistoryStackView: UIStackView!
+    @IBOutlet private weak var calculationHistoryStackView: UIStackView!
     @IBOutlet private weak var expression: UILabel!
-    @IBOutlet weak var arithmetic: UILabel!
+    @IBOutlet private weak var arithmetic: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         expression.text?.append(operand)
     }
     
-    @IBAction func changePlusMinusSign(_ sender: Any) {
+    @IBAction private func changePlusMinusSign(_ sender: Any) {
         guard let operand = expression.text else {
             return
         }
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = matchOperatorButton(sender: sender) else {
             return
         }
