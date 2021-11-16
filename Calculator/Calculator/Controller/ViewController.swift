@@ -32,7 +32,9 @@ extension ViewController {
     private func addFormulaLine(operator: String, operand: String) {
         let operatorLabel = makeFormulaLabel(with: `operator`)
         let operandLabel = makeFormulaLabel(with: operand)
-        let horizontalStackView = makeHorizontalStackView(operator: operatorLabel, operand: operandLabel)
+        let horizontalStackView =
+            makeHorizontalStackView(operator: operatorLabel,
+                                    operand: operandLabel)
         
         verticalStackView.addArrangedSubview(horizontalStackView)
     }
@@ -47,7 +49,8 @@ extension ViewController {
         return label
     }
     
-    private func makeHorizontalStackView(operator: UILabel, operand: UILabel) -> UIStackView {
+    private func makeHorizontalStackView(operator: UILabel,
+                                         operand: UILabel) -> UIStackView {
         let horizontal = UIStackView()
         let defaultSpacing: CGFloat = 8
         
