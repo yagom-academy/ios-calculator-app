@@ -70,4 +70,10 @@ class ParsingTests: XCTestCase {
         
         XCTAssertEqual(try formula.result(), 1)
     }
+    
+    func testParsingAndCalculate() {
+        sampleString = "0.1 − 0.2"
+        var formula: Formula = ExpressionParser.parse(from: sampleString)
+        XCTAssertEqual(try formula.result(), -0.1)
+    }
 }

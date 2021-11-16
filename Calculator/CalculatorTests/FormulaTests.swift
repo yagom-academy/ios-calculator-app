@@ -46,6 +46,7 @@ class FormulaTests: XCTestCase {
         }
     }
     
+    
     func testCalculateResultWhereDevideByZero() throws {
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.devide)
