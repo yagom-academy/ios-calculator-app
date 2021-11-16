@@ -54,6 +54,18 @@ extension CalculatorController {
         
         operatorLabel.text = `operator`
     }
+
+    @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+        var currentText = numberLabel.text ?? "0"
+        let minusSign = "-"
         
+        if numberLabel.text?.hasPrefix(minusSign) == true {
+            currentText = currentText.replacingOccurrences(of: "-", with: "")
+        } else {
+            currentText = minusSign + currentText
+        }
+        
+        numberLabel.text = currentText
+    }
     
 }
