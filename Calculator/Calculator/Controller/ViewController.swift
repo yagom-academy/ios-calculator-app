@@ -48,6 +48,22 @@ class ViewController: UIViewController {
         expression.text?.append(operand)
     }
     
+    @IBAction func changePlusMinusSign(_ sender: Any) {
+        guard let operand = expression.text else {
+            return
+        }
+        
+        guard let currentNumber = Double(operand), !currentNumber.isZero else {
+            return
+        }
+            
+        if currentNumber.rounded() == currentNumber {
+            expression.text = String(Int(currentNumber) * -1)
+        } else {
+            expression.text = String(currentNumber * -1)
+        }
+    }
+    
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = matchOperatorButton(sender: sender) else {
             return
