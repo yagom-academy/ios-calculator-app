@@ -46,9 +46,6 @@
 		25303DC627436606001E47C3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D3B273A7EC0001E47C3 /* Extension.swift */; };
 		25303DC72743660C001E47C3 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D4D273CF23D001E47C3 /* QueueError.swift */; };
 		25303DC82743660E001E47C3 /* CalculateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303D48273CDC6C001E47C3 /* CalculateError.swift */; };
-		25303DCA27441EEC001E47C3 /* StringOfInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DC927441EEC001E47C3 /* StringOfInitialize.swift */; };
-		25303DCB27441EEC001E47C3 /* StringOfInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DC927441EEC001E47C3 /* StringOfInitialize.swift */; };
-		25303DCC27441EEC001E47C3 /* StringOfInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DC927441EEC001E47C3 /* StringOfInitialize.swift */; };
 		25303DCE27442704001E47C3 /* NumberFormatterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DCD27442704001E47C3 /* NumberFormatterError.swift */; };
 		25303DCF27442704001E47C3 /* NumberFormatterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DCD27442704001E47C3 /* NumberFormatterError.swift */; };
 		25303DD027442704001E47C3 /* NumberFormatterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25303DCD27442704001E47C3 /* NumberFormatterError.swift */; };
@@ -96,7 +93,6 @@
 		25303DB027426E92001E47C3 /* CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25303DB227426E92001E47C3 /* CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITests.swift; sourceTree = "<group>"; };
 		25303DB427426E92001E47C3 /* CalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		25303DC927441EEC001E47C3 /* StringOfInitialize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringOfInitialize.swift; sourceTree = "<group>"; };
 		25303DCD27442704001E47C3 /* NumberFormatterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,7 +135,6 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				25303DC927441EEC001E47C3 /* StringOfInitialize.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -376,7 +371,6 @@
 				25303D43273A8E12001E47C3 /* Formula.swift in Sources */,
 				25303D2F273971F1001E47C3 /* CalculatorItemQueue.swift in Sources */,
 				25303DC3274365F5001E47C3 /* ViewController.swift in Sources */,
-				25303DCB27441EEC001E47C3 /* StringOfInitialize.swift in Sources */,
 				25303D46273ABFFF001E47C3 /* ExpressionParserTest.swift in Sources */,
 				25303D4F273CF244001E47C3 /* QueueError.swift in Sources */,
 				25303D42273A8B2A001E47C3 /* FormulaTest.swift in Sources */,
@@ -403,7 +397,6 @@
 				25303DBC27436582001E47C3 /* ExpressionParserTest.swift in Sources */,
 				25303DC1274365CD001E47C3 /* CalculatorItemQueue.swift in Sources */,
 				25303DC527436602001E47C3 /* StringError.swift in Sources */,
-				25303DCC27441EEC001E47C3 /* StringOfInitialize.swift in Sources */,
 				25303DC0274365CB001E47C3 /* LinkedList.swift in Sources */,
 				25303DD027442704001E47C3 /* NumberFormatterError.swift in Sources */,
 				25303DC82743660E001E47C3 /* CalculateError.swift in Sources */,
@@ -416,7 +409,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25303DCA27441EEC001E47C3 /* StringOfInitialize.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				25303D3E273A7FDA001E47C3 /* ExpressionParser.swift in Sources */,
 				25303D49273CDC6C001E47C3 /* CalculateError.swift in Sources */,

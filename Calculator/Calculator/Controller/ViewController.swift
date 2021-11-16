@@ -36,13 +36,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var cleanEntry: UIButton!
     @IBOutlet weak var convertPositiveOrNegativeNumber: UIButton!
     
+    let initializeOperandLabelText = "0"
+    let initializeOperatorLabelText = ""
+    let initializeToEmptyString = ""
+    
+    let maximumFractionDigits = 20
+    let stackViewSpacing: CGFloat = 8
+    
     var fomula: String = ""
     var operand: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        inputedOperandLabel.text = StringOfInitialize.operandLabelText
+        inputedOperandLabel.text = initializeOperandLabelText
     }
     
     @IBAction private func numberDidTap(_ sender: UIButton) {
@@ -56,7 +63,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
-        if operand == StringOfInitialize.toEmptyString {
+        if operand == initializeToEmptyString {
             inputedOperatorLabel.text = operators(for: sender)
             return
         }
@@ -76,8 +83,8 @@ class ViewController: UIViewController {
         
         fomula += operand
         fomula += " \(operatorLabelText) "
-        operand = StringOfInitialize.toEmptyString
-        inputedOperandLabel.text = StringOfInitialize.operandLabelText
+        operand = initializeToEmptyString
+        inputedOperandLabel.text = initializeOperandLabelText
 
         inputedOperatorLabel.text = operators(for: sender)
         
@@ -101,7 +108,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
-        if operand == StringOfInitialize.toEmptyString { return }
+        if operand == initializeToEmptyString { return }
         
         guard let operatorLabelText = inputedOperatorLabel.text else { return }
         
@@ -116,8 +123,8 @@ class ViewController: UIViewController {
         
         fomula += " \(operatorLabelText) "
         fomula += operand
-        operand = StringOfInitialize.toEmptyString
-        inputedOperatorLabel.text = StringOfInitialize.operatorLabelText
+        operand = initializeToEmptyString
+        inputedOperatorLabel.text = initializeOperatorLabelText
         
         showCalculateResult()
     }
@@ -139,7 +146,7 @@ class ViewController: UIViewController {
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
         
-        stackView.spacing = 8
+        stackView.spacing = stackViewSpacing
         operandLabel.text = operandLabelText
         operatorLabel.text = operatorLabelText
         
@@ -154,18 +161,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func allClearDidTap(_ sender: UIButton) {
-        fomula = StringOfInitialize.toEmptyString
-        operand = StringOfInitialize.toEmptyString
+        fomula = initializeToEmptyString
+        operand = initializeToEmptyString
         
-        inputedOperatorLabel.text = StringOfInitialize.operatorLabelText
-        inputedOperandLabel.text = StringOfInitialize.operandLabelText
+        inputedOperatorLabel.text = initializeOperatorLabelText
+        inputedOperandLabel.text = initializeOperandLabelText
         
         removeSubView(from: toBeCalculateFormulaStackView)
     }
     
     @IBAction func cleanEntryDidTap(_ sender: UIButton) {
-        operand = StringOfInitialize.toEmptyString
-        inputedOperandLabel.text = StringOfInitialize.operandLabelText
+        operand = initializeToEmptyString
+        inputedOperandLabel.text = initializeOperandLabelText
     }
     
     private func numberFormatterFor(numberForCalculate: String) throws -> String? {
@@ -176,7 +183,7 @@ class ViewController: UIViewController {
         
         numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 15
+        numberFormatter.maximumFractionDigits = maximumFractionDigits
         
         return numberFormatter.string(for: numberForCalculate)
     }
@@ -189,7 +196,7 @@ class ViewController: UIViewController {
         
         numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 15
+        numberFormatter.maximumFractionDigits = maximumFractionDigits
         
         if inputOperand.contains(".") {
             let dotFront = inputOperand.split(with: ".")[0]
@@ -212,13 +219,13 @@ class ViewController: UIViewController {
     private func operators(for buttton: UIButton) -> String {
         switch buttton {
         case addButton:
-            return "+"
+            return String(Operator.add.rawValue)
         case subtractButton:
-            return "-"
+            return String(Operator.subtract.rawValue)
         case divideButton:
-            return "÷"
+            return String(Operator.divide.rawValue)
         case multiplyButton:
-            return "×"
+            return String(Operator.multiply.rawValue)
         default:
             return ""
         }
