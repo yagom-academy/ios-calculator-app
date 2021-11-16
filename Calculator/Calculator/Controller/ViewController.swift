@@ -11,7 +11,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+    
+    private func addFormulaLine(operator: String, operand: String) {
+        let horizontalStackView = UIStackView()
+        verticalStackView.addArrangedSubview(horizontalStackView)
     }
     
     
