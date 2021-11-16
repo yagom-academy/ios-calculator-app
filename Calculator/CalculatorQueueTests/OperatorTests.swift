@@ -38,4 +38,11 @@ class OperatorTests: XCTestCase {
         
         XCTAssertEqual(result, 0.4)
     }
+    
+    func test_Operator_divide에_4에서_2를_나누면_2가_나오는지() {
+        sut = .divide
+        let result = sut.calculate(lhs: 4, rhs: 2)
+        
+        XCTAssertEqual(result, 2)
+    }
 }
