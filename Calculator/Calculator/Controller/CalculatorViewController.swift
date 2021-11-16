@@ -45,5 +45,11 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = operandLabelText + tapedNumber
         
     }
+    
+    func reset() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+        allClear()
+    }
 }
 
