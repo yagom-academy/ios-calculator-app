@@ -19,17 +19,17 @@ class CaculatorManagerTests: XCTestCase {
     
     func testConvertToDecimalStyleWhereNumberIsNegativeInt() {
         numberToConvert = "-1234"
-        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "-1,234")
     }
     
     func testConvertToDecimalStyleWhereNumberIsDouble() {
         numberToConvert = "1234.01234"
-        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "-1,234.1234")
     }
     
     func testConvertToDecimalStyleWhereNumberIsNegativeDouble() {
         numberToConvert = "-1234.01234"
-        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,234")
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "-1,234.01234")
     }
     
     func testConvertToDecimalStyleWhereNumberIsZero() {
