@@ -81,9 +81,9 @@ class ViewController: UIViewController {
         }
         
         if currentNumber.isSameAfterRounded() {
-            addCalculationHistory(operandsText: String(Int(currentNumber)), operatorText: `operator`)
+            addCalculationHistory(operandsText: String(Int(currentNumber)))
         } else {
-            addCalculationHistory(operandsText: String(currentNumber), operatorText: `operator`)
+            addCalculationHistory(operandsText: String(currentNumber))
         }
         
         currentOperand = "0"
@@ -137,10 +137,10 @@ class ViewController: UIViewController {
         }
     }
     
-    private func addCalculationHistory(operandsText: String, operatorText: String) {
+    private func addCalculationHistory(operandsText: String) {
         let sign = UILabel()
         sign.textColor = .white
-        sign.text = operatorText
+        sign.text = arithmetic.text
         sign.font = UIFont(name: "Helvetica", size: 24)
         
         let history = UILabel()
