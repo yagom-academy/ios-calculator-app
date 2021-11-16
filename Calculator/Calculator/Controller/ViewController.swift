@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     
+    private var inputFormula: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        addFormulaLine(operator: "-", operand: "1234567890")
