@@ -67,24 +67,24 @@ enum ExpressionParser {
         
         var formula = Formula()
         
-        for operand in operands {
-            guard let operand = Double(operand) else {
-                return nil
-            }
-            
-            formula.operandsQueue.enqueue(operand)
+        let filteredOperands = operands.compactMap{ Double($0) }
+        
+        let filteredOperators = operators.filter{
+            $0.count == 1
+        }.compactMap {
+            Operator(rawValue: Character($0))
         }
         
-        for `operator` in operators {
-            guard `operator`.count == 1 else {
-                return nil
-            }
-            
-            guard let _operator = Operator(rawValue: Character(`operator`)) else {
-                return nil
-            }
-            
-            formula.operatorsQueue.enqueue(_operator)
+        guard filteredOperands.count == operands.count,
+              filteredOperators.count == operators.count else {
+            return nil
+        }
+        
+        filteredOperands.forEach {
+            formula.operandsQueue.enqueue($0)
+        }
+        filteredOperators.forEach {
+            formula.operatorsQueue.enqueue($0)
         }
         
         return formula
