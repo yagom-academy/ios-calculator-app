@@ -243,7 +243,7 @@ extension ViewController {
         guard let formatterNumber = numberFormatter.string(for: value) else {
             return value.description
         }
-        guard formatterNumber.count <= 20 else {
+        guard formatterNumber.count < 26 else {
             return formatterNumber.map{ $0.description }[0]
         }
         return formatterNumber
