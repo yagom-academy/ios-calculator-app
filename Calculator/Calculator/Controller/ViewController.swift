@@ -46,6 +46,7 @@ class ViewController: UIViewController {
     
     @IBAction func hitACButton(_ sender: UIButton) {
         stringToCalculate.removeAll()
+        currentOperator.text = ""
         currentValue.text = initialValue
     }
     
