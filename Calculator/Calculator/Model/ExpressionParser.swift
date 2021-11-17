@@ -34,7 +34,7 @@ enum ExpressionParser {
 }
 
 extension ExpressionParser {
-    static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> { 
+    static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
         guard StringChecker.hasNotAbnormalCharacter(from: input) else {
             return .failure(.includingAbnormalCharacter)
         }

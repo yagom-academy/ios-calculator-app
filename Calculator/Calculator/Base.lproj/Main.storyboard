@@ -306,11 +306,11 @@
                     <connections>
                         <outlet property="adderButton" destination="sbh-wC-koF" id="nD9-op-Z1W"/>
                         <outlet property="allClearButton" destination="ped-N8-JbY" id="mgH-T2-aao"/>
-                        <outlet property="calculationListScrollView" destination="BOT-7g-vxv" id="Beq-Qq-Zsk"/>
                         <outlet property="clearButton" destination="RLD-dY-LOA" id="JzH-kz-AhJ"/>
-                        <outlet property="currentValueLabel" destination="Lwz-OF-XHD" id="QiY-X1-kRV"/>
                         <outlet property="dividerButton" destination="Tfz-eM-jll" id="alV-mH-grW"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="0Fg-yh-qgF"/>
+                        <outlet property="inputHistoryScrollView" destination="BOT-7g-vxv" id="Beq-Qq-Zsk"/>
+                        <outlet property="inputLabel" destination="Lwz-OF-XHD" id="QiY-X1-kRV"/>
                         <outlet property="multiplierButton" destination="811-Pz-An6" id="MNW-lA-pPq"/>
                         <outlet property="numberEightButton" destination="xgT-2D-A49" id="VHH-Nh-cyY"/>
                         <outlet property="numberFiveButton" destination="vpW-df-OLm" id="zWS-V5-yIh"/>

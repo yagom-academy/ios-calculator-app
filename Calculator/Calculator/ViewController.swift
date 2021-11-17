@@ -32,9 +32,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var multiplierButton: UIButton!
     
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var currentValueLabel: UILabel!
+    @IBOutlet weak var inputLabel: UILabel!
     
-    @IBOutlet weak var calculationListScrollView: UIScrollView!
+    @IBOutlet weak var inputHistoryScrollView: UIScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
