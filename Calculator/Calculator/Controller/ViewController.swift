@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func calculateFormula(from expression: [String]) {
+    private func calculateFormula(from expression: [String]) {
         let formula = ExpressionParser.parse(from: expression.joined(separator: " "))
         
         do {
