@@ -124,6 +124,7 @@ extension ViewController {
     
     @IBAction private func touchUpClearError(_ sender: UIButton) {
         initDisplayOperand()
+        calculatorManager.setDisplayingResultStatus(to: false)
     }
     
     @IBAction private func touchUpSignConversion(_ sender: UIButton) {
@@ -195,7 +196,10 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: false)
         
-        operatorLabel.text = `operator`
+        if !formulasStackViewIsEmpty {
+            operatorLabel.text = `operator`
+        }
+        
         operandLabel.text = calculatorManager.format(of: operand)
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
