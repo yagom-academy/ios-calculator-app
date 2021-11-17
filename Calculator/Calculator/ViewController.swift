@@ -7,8 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var currentPhase: CalculatorPhase = .phase0
-    
     @IBOutlet weak var numberOneButton: UIButton!
     @IBOutlet weak var numberTwoButton: UIButton!
     @IBOutlet weak var numberThreeButton: UIButton!
@@ -42,10 +40,7 @@ class ViewController: UIViewController {
         
         inputHistoryStackView.subviews.forEach {
             guard let history = $0 as? UILabel,
-                  let text = history.text else {
-                      return
-                      
-                  }
+                  let text = history.text else { return }
             
             allHistory += "  \(text)"
         }
@@ -71,6 +66,8 @@ class ViewController: UIViewController {
     @IBAction func resultButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: ResultButtonHandler.shared, button: sender)
     }
+    
+    var currentPhase: CalculatorPhase = .phase0
     
     func runButtonAction(delegate: ButtonActionDelegate, button: UIButton) {
         switch currentPhase {
