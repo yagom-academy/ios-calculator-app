@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var currentPhase: CalculatorPhase = .EmptyScrollViewWithoutInput
+    var currentPhase: CalculatorPhase = .phase0
     
     @IBOutlet weak var numberOneButton: UIButton!
     @IBOutlet weak var numberTwoButton: UIButton!
@@ -58,15 +58,15 @@ class ViewController: UIViewController {
     
     func runButtonAction(delegate: ButtonActionDelegate, button: UIButton) {
         switch currentPhase {
-        case .EmptyScrollViewWithoutInput:
+        case .phase0:
             delegate.runActionInPhase0(viewController: self, button: button)
-        case .EmptyScrollViewWithInput:
+        case .phase1:
             delegate.runActionInPhase1(viewController: self, button: button)
-        case .NotEmptyScrollViewWithoutInput:
+        case .phase2:
             delegate.runActionInPhase2(viewController: self, button: button)
-        case .NotEmptyScrollViewWithInput:
+        case .phase3:
             delegate.runActionInPhase3(viewController: self, button: button)
-        case .needToAllClear:
+        case .phase4:
             delegate.runActionInPhase4(viewController: self, button: button)
         }
     }

@@ -6,7 +6,7 @@ struct NumberButtonHandler: ButtonActionDelegate {
     
     func runActionInPhase0(viewController: ViewController, button: UIButton) {
         viewController.valueLabel.text = button.titleLabel?.text
-        viewController.currentPhase = .EmptyScrollViewWithInput
+        viewController.currentPhase = .phase1
     }
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
         guard let currentText = viewController.valueLabel.text else { return }
@@ -16,7 +16,7 @@ struct NumberButtonHandler: ButtonActionDelegate {
     }
     func runActionInPhase2(viewController: ViewController, button: UIButton) {
         viewController.valueLabel.text = button.titleLabel?.text
-        viewController.currentPhase = .NotEmptyScrollViewWithInput
+        viewController.currentPhase = .phase3
     }
     func runActionInPhase3(viewController: ViewController, button: UIButton) {
         guard let currentText = viewController.valueLabel.text else { return }
