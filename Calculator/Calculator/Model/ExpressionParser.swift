@@ -5,17 +5,11 @@ enum ExpressionParser {
         let formula = Formula()
         let componentsOfOperands = Self.componentsByOperators(from: input)
         
-        componentsOfOperands.forEach { operand in
-            if let operandInDouble = Double(operand) {
-                formula.operands.enqueue(value: operandInDouble)
-            }
-        }
+        componentsOfOperands.compactMap { Double($0) }
+            .map { formula.operands.enqueue(value: $0) }
         
-        for characterOfInput in input {
-            if let symbol = Operator(rawValue: characterOfInput) {
-                formula.operators.enqueue(value: symbol)
-            }
-        }
+        input.compactMap { Operator(rawValue: $0) }
+            .map { formula.operators.enqueue(value: $0) }
         
         return formula
     }

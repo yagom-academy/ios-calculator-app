@@ -14,7 +14,7 @@ struct Formula {
                 throw FormulaError.queueIsEmpty
             }
             
-            if $1 == .divide, nextOperand == 0 {
+            if $1 == .divide, nextOperand == 0 { // 에러 처리 위치 고려
                 throw FormulaError.dividedByZero
             }
             
