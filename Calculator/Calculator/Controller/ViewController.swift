@@ -29,6 +29,9 @@ class ViewController: UIViewController {
         inputValues.removeAll()
     }
     
+    @IBAction func hitCEButton(_ sender: UIButton) {
+        inputValues.removeLast()
+    }
     
     
     override func viewDidLoad() {
