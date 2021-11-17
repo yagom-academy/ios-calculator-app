@@ -14,9 +14,11 @@ struct Formula {
     mutating func result() throws -> Double {
         var result = try operands.dequeue()
         repeat {
-            result = try operators.dequeue().calculate(
+            let calculateOperator = try operators.dequeue()
+            let calculateOperand = try operands.dequeue()
+            result = calculateOperator.calculate(
                 lhs: result,
-                rhs: try operands.dequeue())
+                rhs: calculateOperand)
         } while !operators.outbox.isEmpty
         return result
     }
