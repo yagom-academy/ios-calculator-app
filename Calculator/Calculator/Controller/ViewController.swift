@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.operandLabel.text = "0"
+        resetCurrentOperand()
     }
 
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
