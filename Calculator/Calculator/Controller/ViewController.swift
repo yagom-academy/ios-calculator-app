@@ -7,20 +7,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setOperandLabel()
+        setLabel()
     }
     
     @IBOutlet weak var operandLabel: UILabel?
     @IBOutlet weak var operatorLabel: UILabel?
     
+    var textInput = ""
     var operandText = "0"
+    var operatorText = ""
     
-    func setOperandLabel() {
+    func setLabel() {
         operandLabel?.text = operandText
+        operatorLabel?.text = operatorText
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
@@ -45,6 +47,15 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         operandText += sender.currentTitle ?? "0"
+    }
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        textInput += operandText
+        operatorText = sender.currentTitle ?? "0"
+        textInput += operatorText
+        operatorLabel?.text = operatorText
+        operandText = "0"
+        operandLabel?.text = "0"
     }
 }
 
