@@ -14,8 +14,17 @@ class CalculatorController: UIViewController {
     
     private var expressionInput: String = String()
     
+    private let numberFormatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        initNumberFormatter()
+    }
+    
+    private func initNumberFormatter() {
+        numberFormatter.roundingMode = .ceiling
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
     }
 }
 
@@ -34,10 +43,15 @@ extension CalculatorController {
         } else {
             numberLabel.text = currentText + text
         }
+        
+        let numberLabelText = removeComma(text: numberLabel.text)
+        let number = Double(numberLabelText)
+        numberLabel.text = numberFormatter.string(for: number)
     }
     
     private func appendExpressionNumber() {
-        guard let number = numberLabel.text else { return }
+        guard let numberText = numberLabel.text else { return }
+        let number = removeComma(text: numberText)
         
         expressionInput.append(number)
     }
@@ -91,6 +105,10 @@ extension CalculatorController {
     
     private func clearExpressionsStackView() {
         expressionStackViewSuperView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func removeComma(text: String?) -> String {
+        return text?.replacingOccurrences(of: ",", with: "") ?? ""
     }
 }
 
@@ -160,7 +178,6 @@ extension CalculatorController {
         clearExpressionsStackView()
     }
     
-    
     @IBAction func touchUpResultButton(_ sender: UIButton) {
         guard let `operator` = operatorLabel.text,
               `operator` != "" else { return }
@@ -171,9 +188,8 @@ extension CalculatorController {
             resetOperatorLabel()
             
             let formula = ExpressionParser.parse(form: expressionInput)
-            
             let result = try formula.result()
-            numberLabel.text = String(result)
+            numberLabel.text = numberFormatter.string(for: result)
             
             resetExpressionInput()
         } catch OperatorError.divideByZero {
