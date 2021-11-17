@@ -56,7 +56,6 @@ class ViewController: UIViewController {
         operatorLabel?.text = operatorText
         operandText = "0"
         operandLabel?.text = "0"
-        print(textInput)
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
@@ -75,7 +74,11 @@ class ViewController: UIViewController {
         operatorText = ""
         operatorLabel?.text = operatorText
         operandLabel?.text = operandText
-        print(textInput)
+    }
+    
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        operandText = "0"
+        operandLabel?.text = operandText
     }
     
 }
