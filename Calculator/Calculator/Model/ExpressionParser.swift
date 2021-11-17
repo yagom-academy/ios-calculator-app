@@ -23,7 +23,7 @@ enum ExpressionParser {
             return "+/*₋".contains(`operator`)
         }
      
-        operators.forEach { `operator` in
+        operators.forEach { (`operator`: Character) -> () in
             guard let arithmetic = Operator(rawValue: `operator`) else {
                 return
             }
