@@ -34,11 +34,11 @@ struct CalculatorManager {
         numberFormatter.roundingMode = .halfUp
         
         guard let formattedNumber = numberFormatter
-                .string(from: NSNumber(value: number)) else {
+                .string(from: NSNumber(value: round(String(number)))) else {
             return "0"
         }
         
-        return round(formattedNumber)
+        return formattedNumber
     }
     
     mutating func setDisplayingResultStatus(to status: Bool) {
@@ -49,16 +49,12 @@ struct CalculatorManager {
         isTypingOperand = status
     }
     
-    private func round(_ number: String) -> String {
-        let roundBehavior = NSDecimalNumberHandler(roundingMode: .plain, scale: 15,
-                                                   raiseOnExactness: false,
-                                                   raiseOnOverflow: false,
-                                                   raiseOnUnderflow: false,
-                                                   raiseOnDivideByZero: false)
+    private func round(_ number: String) -> Double {
+        let targetRoundDigit: Double = 1000000000000000
         
-        let roundedNumber = NSDecimalNumber(string: number)
-                            .rounding(accordingToBehavior: roundBehavior)
+        let tempNumber = (Double(number)! * targetRoundDigit)
+        let roundedNumber = tempNumber.rounded(.toNearestOrAwayFromZero) / targetRoundDigit
         
-        return String(describing: roundedNumber)
+        return roundedNumber
     }
 }
