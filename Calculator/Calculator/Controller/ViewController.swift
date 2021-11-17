@@ -57,6 +57,17 @@ class ViewController: UIViewController {
         operandText = "0"
         operandLabel?.text = "0"
     }
+    
+    @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+        if operandText.hasPrefix("−") {
+            operandText.removeFirst()
+        } else {
+            operandText = "−" + operandText
+        }
+        
+        operandLabel?.text = operandText
+    }
+    
 }
 
 
