@@ -9,7 +9,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        numberLabel.text = "0"
     }
     
     var operatorsLabel: UILabel {
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        if numberLabel.text == "" {
+        if numberLabel.text == "0" {
             symbolLabel.text = sender.currentTitle
             initializeNumberLabel()
         } else {
@@ -75,15 +75,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dotButtonPressed(_ sender: UIButton) {
-        guard let text = numberLabel.text, text.isEmpty == false else { return }
+        guard var text = numberLabel.text else { return }
         
-        if isContainDot(text: text) {
-            return
+        guard !isContainDot(text: text) else { return }
+        
+        if text == "0" {
+            inputNumber += "0."
+            text = inputNumber
+            numberLabel.text = text
         } else {
             inputNumber += "."
-            numberLabel.text = inputNumber
+            text = inputNumber
+            numberLabel.text = text
         }
     }
+    
     @IBAction func negativePositiveButtonPressed(_ sender: UIButton) {
         guard var text = numberLabel.text, text.isEmpty == false else { return }
         
@@ -105,7 +111,7 @@ class ViewController: UIViewController {
     
     func initializeNumberLabel() {
         inputNumber.removeAll()
-        numberLabel.text?.removeAll()
+        numberLabel.text = "0"
     }
     
     func initializeSymbolLabel() {
