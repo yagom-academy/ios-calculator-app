@@ -4,37 +4,19 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() throws -> Double { // TODO: do-catch 구문 필요
+    mutating func result() throws -> Double {
         guard let removedOperand = operands.dequeue() else {
-            throw FormulaError.queueIsEmpty
+            throw CalculatorError.queueIsEmpty
         }
         
         let result: Double = try operators.scanAllValues().reduce(removedOperand) {
             guard let nextOperand = operands.dequeue() else {
-                throw FormulaError.queueIsEmpty
+                throw CalculatorError.queueIsEmpty
             }
             
-            if $1 == .divide, nextOperand == 0 { // 에러 처리 위치 고려
-                throw FormulaError.dividedByZero
-            }
-            
-            return $1.calculate(lhs: $0, rhs: nextOperand)
+            return try $1.calculate(lhs: $0, rhs: nextOperand) // TODO: do-catch 구문 필요
         }
         
         return result
-    }
-}
-
-enum FormulaError: Error, LocalizedError {
-    case queueIsEmpty
-    case dividedByZero
-    
-    var description: String {
-        switch self {
-        case .queueIsEmpty:
-            return "Dequeue 할 값이 존재하지 않습니다"
-        case .dividedByZero:
-            return "NaN"
-        }
     }
 }

@@ -26,7 +26,7 @@ class FormulaTests: XCTestCase {
         let sampleString: String = ""
         var formula = ExpressionParser.parse(from: sampleString)        
         XCTAssertThrowsError(try formula.result(), "Dequeue 할 값이 존재하지 않습니다") { error in
-            XCTAssertEqual(error as? FormulaError, FormulaError.queueIsEmpty)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.queueIsEmpty)
         }
     }
     
@@ -35,8 +35,8 @@ class FormulaTests: XCTestCase {
         var formula = ExpressionParser.parse(from: sampleString)
         do {
             let _ = try formula.result()
-        } catch FormulaError.queueIsEmpty {
-            XCTAssertEqual(FormulaError.queueIsEmpty.description, "Dequeue 할 값이 존재하지 않습니다")
+        } catch CalculatorError.queueIsEmpty {
+            XCTAssertEqual(CalculatorError.queueIsEmpty.description, "Dequeue 할 값이 존재하지 않습니다")
         } catch  {
             print(error)
         }
@@ -47,8 +47,8 @@ class FormulaTests: XCTestCase {
         var formula = ExpressionParser.parse(from: sampleString)
         do {
             let _ = try formula.result()
-        } catch FormulaError.dividedByZero {
-            XCTAssertEqual(FormulaError.dividedByZero.description, "NaN")
+        } catch CalculatorError.dividedByZero {
+            XCTAssertEqual(CalculatorError.dividedByZero.description, "NaN")
         } catch  {
             print(error)
         }
@@ -59,8 +59,8 @@ class FormulaTests: XCTestCase {
         var formula = ExpressionParser.parse(from: sampleString)
         do {
             let _ = try formula.result()
-        } catch FormulaError.dividedByZero {
-            XCTAssertEqual(FormulaError.dividedByZero.description, "NaN")
+        } catch CalculatorError.dividedByZero {
+            XCTAssertEqual(CalculatorError.dividedByZero.description, "NaN")
         } catch  {
             print(error)
         }
