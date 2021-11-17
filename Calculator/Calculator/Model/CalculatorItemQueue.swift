@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<T> {
     private var list = LinkedList<T>()
     
@@ -33,5 +29,13 @@ struct CalculatorItemQueue<T> {
     
     mutating func removeAll() {
         list.removeAll()
+    }
+}
+
+extension CalculatorItemQueue {
+    init(elements: [T]) {
+        for element in elements {
+            enqueue(element)
+        }
     }
 }
