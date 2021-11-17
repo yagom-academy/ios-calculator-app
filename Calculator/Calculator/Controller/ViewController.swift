@@ -75,7 +75,7 @@ class ViewController: UIViewController {
             return
         }
         
-        addCalculationHistory(operandsText: operandText, operatorText: currentOperator)
+        addCalculationHistory(operandText: operandText, operatorText: currentOperator)
         
         finalExpression += currentOperand
         finalExpression += " \(`operator`) "
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
         isCalculated = true
         
         if !currentOperand.isEmpty && !currentOperator.isEmpty {
-            addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
+            addCalculationHistory(operandText: currentOperand, operatorText: currentOperator)
         }
         
         finalExpression += currentOperand
@@ -152,14 +152,14 @@ class ViewController: UIViewController {
         resetCurrentOperand()
     }
     
-    private func addCalculationHistory(operandsText: String, operatorText: String) {
+    private func addCalculationHistory(operandText: String, operatorText: String) {
         let sign = UILabel()
         sign.textColor = .white
         sign.text = operatorText
         sign.font = UIFont(name: "Helvetica", size: 24)
         
         let history = UILabel()
-        history.text = operandsText
+        history.text = operandText
         history.textColor = .white
         history.font = UIFont(name: "Helvetica", size: 24)
         
