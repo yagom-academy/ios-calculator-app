@@ -12,7 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperandLabel: UILabel!
     
     private var entry = OperandEntry()
-    private var formula: String = ""
+    private var formula: String = "" {
+        didSet { print(formula) }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,19 @@ class ViewController: UIViewController {
         updateOperandLabel()
     }
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
+        guard let currentOperator = currentOperatorLabel.text else { return }
+        
+        if currentOperandLabel.text == "0",
+           currentOperator.isEmpty { return }
+        if currentOperandLabel.text == "0",
+           let inputOperator = sender.titleLabel?.text {
+            updateOperatorLabel(by: inputOperator)
+            return
+        }
+        
+        formula.append(currentOperator)
+        formula.append(entry.currentOperand)
+        entry.clear()
     }
     @IBAction func equalsButtonDidTap(_ sender: UIButton) {
         var parsedFormula = ExpressionParser.parse(from: formula)
