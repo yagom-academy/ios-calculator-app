@@ -30,25 +30,6 @@ class CalculatorController: UIViewController {
 
 // MARK: - Method
 extension CalculatorController {
-    private func changeNumberLabel(text: String) {
-        let currentText = numberLabel.text ?? "0"
-        
-        guard currentText != "0" ||
-              text != "00" else {
-                  return
-        }
-        
-        if currentText == "0" {
-            numberLabel.text = text
-        } else {
-            numberLabel.text = currentText + text
-        }
-        
-        let numberLabelText = removeComma(text: numberLabel.text)
-        let number = Double(numberLabelText)
-        numberLabel.text = numberFormatter.string(for: number)
-    }
-    
     private func appendExpressionNumber() {
         guard let numberText = numberLabel.text else { return }
         let number = removeComma(text: numberText)
@@ -59,52 +40,25 @@ extension CalculatorController {
     private func appendExpressionOperator() {
         guard let `operator` = operatorLabel.text else { return }
         
-        var hasOprator = false
-        Operator.allCases.forEach {
-            hasOprator = hasOprator == expressionInput.hasSuffix(String($0.rawValue))
-        }
-        
-        if hasOprator {
+        if hasSuffixOperator() {
             expressionInput.removeLast()
         }
         
         expressionInput.append(`operator`)
     }
     
-    private func resetNumberLabel() {
-        numberLabel.text = "0"
-    }
-    
-    private func resetOperatorLabel() {
-        operatorLabel.text = String()
+    private func hasSuffixOperator() -> Bool {
+        var hasOprator = false
+        
+        Operator.allCases.forEach {
+            hasOprator = hasOprator == expressionInput.hasSuffix(String($0.rawValue))
+        }
+        
+        return hasOprator
     }
     
     private func resetExpressionInput() {
         expressionInput = String()
-    }
-    
-    private func createExpressionStackView() {
-        let operatorLabel = UILabel()
-        operatorLabel.text = self.operatorLabel.text
-        operatorLabel.textColor = .white
-        operatorLabel.sizeToFit()
-        
-        let operandLabel = UILabel()
-        operandLabel.text = self.numberLabel.text
-        operandLabel.textColor = .white
-        operandLabel.sizeToFit()
-        
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.addArrangedSubview(operatorLabel)
-        stackView.addArrangedSubview(operandLabel)
-        stackView.spacing = 8
-        
-        expressionStackViewSuperView.addArrangedSubview(stackView)
-    }
-    
-    private func clearExpressionsStackView() {
-        expressionStackViewSuperView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func removeComma(text: String?) -> String {
@@ -197,5 +151,60 @@ extension CalculatorController {
         } catch {
             return
         }
+    }
+}
+
+// MARK: - View Method
+extension CalculatorController {
+    
+    private func changeNumberLabel(text: String) {
+        let currentText = numberLabel.text ?? "0"
+        
+        guard currentText != "0" ||
+              text != "00" else {
+                  return
+        }
+        
+        if currentText == "0" {
+            numberLabel.text = text
+        } else {
+            numberLabel.text = currentText + text
+        }
+        
+        let numberLabelText = removeComma(text: numberLabel.text)
+        let number = Double(numberLabelText)
+        numberLabel.text = numberFormatter.string(for: number)
+    }
+    
+    private func resetNumberLabel() {
+        numberLabel.text = "0"
+    }
+    
+    private func resetOperatorLabel() {
+        operatorLabel.text = String()
+    }
+    
+    private func createExpressionStackView() {
+        let operatorLabel = UILabel()
+        operatorLabel.text = self.operatorLabel.text
+        operatorLabel.textColor = .white
+        operatorLabel.sizeToFit()
+        
+        let operandLabel = UILabel()
+        operandLabel.text = self.numberLabel.text
+        operandLabel.textColor = .white
+        operandLabel.sizeToFit()
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        stackView.spacing = 8
+        
+        expressionStackViewSuperView.addArrangedSubview(stackView)
+    }
+    
+    private func clearExpressionsStackView() {
+        expressionStackViewSuperView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
