@@ -9,11 +9,15 @@ import Foundation
 
 struct OperandEntry {
     var currentOperand: String {
-        isPositive ? entry : "-" + entry
+        if isNonInputState { return "0" }
+        return isPositive ? entry : "-" + entry
     }
-    private var entry = "0"
+    private var entry = ""
     private var isPositive = true
+    var last: Character? { entry.last }
+    var isNonInputState: Bool { entry == "" }
     private var isZeroState: Bool { entry == "0" }
+    private var isDotState: Bool { entry.contains(".") }
     private var isResultState = false
     mutating func append(_ input: String) {
         if isResultState {
@@ -21,11 +25,18 @@ struct OperandEntry {
             return
         }
         switch input {
+            case "00" where isNonInputState:
+                append("0")
+                return
             case "0" where isZeroState,
                  "00" where isZeroState:
                 return
+            case "." where isDotState:
+                return
+            case "." where isNonInputState:
+                append("0.")
             default:
-                entry = isZeroState ? input : entry + input
+                entry = isNonInputState ? input : entry + input
         }
     }
     mutating func replace(with result: String) {
@@ -34,10 +45,10 @@ struct OperandEntry {
         append(result)
     }
     mutating func toggleSign() {
-        if isZeroState { return }
+        if isNonInputState { return }
         isPositive.toggle()
     }
     mutating func clear() {
-        entry = "0"
+        entry = ""
     }
 }

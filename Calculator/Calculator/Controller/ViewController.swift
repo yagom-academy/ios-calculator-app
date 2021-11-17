@@ -43,16 +43,8 @@ class ViewController: UIViewController {
         guard let currentOperator = currentOperatorLabel.text else { return }
         guard let inputOperator = sender.titleLabel?.text else { return }
         
-        if currentOperandLabel.text == "0",
-           currentOperator.isEmpty { return }
-        
-        if currentOperandLabel.text == "0",
-           inputOperator.isEmpty {
-            updateOperatorLabel(by: inputOperator)
-            return
-        }
-        
-        
+        if currentOperandLabel.text == "0", entry.isNonInputState { return }
+        if entry.last == "." { formula.append(entry.currentOperand + "0") }
         formula.append(currentOperator)
         formula.append(entry.currentOperand)
         entry.clear()
