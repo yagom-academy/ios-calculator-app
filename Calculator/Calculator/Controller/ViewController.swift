@@ -81,6 +81,26 @@ class ViewController: UIViewController {
         operandLabel?.text = operandText
     }
     
+    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        textInput += operandLabel?.text ?? "0"
+        var parserResult = ExpressionParser.parse(from: textInput)
+        
+        do {
+            textInput = ""
+            operatorText = ""
+            operandText = String(try parserResult.result())
+            operatorLabel?.text = operatorText
+            operandLabel?.text = operandText
+        } catch QueueError.emptyOperandItem {
+            
+        } catch QueueError.emptyOperatorItem {
+            
+        } catch {
+            
+        }
+        
+    }
+    
 }
 
 
