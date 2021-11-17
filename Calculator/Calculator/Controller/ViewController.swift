@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     let initialValue = "0"
     var stringToCalculate: [String] = []
     var inputOperandValues: [String] = []
-    var inputOperatorValue: [String] = []
+    var isOperatorEnterd: Bool = false
     
     @IBAction func hitOperandButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         
         inputOperandValues.append(inputButtonTitle)
         currentValue.text = inputOperandValues.joined()
+        isOperatorEnterd = false
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
@@ -45,11 +46,13 @@ class ViewController: UIViewController {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        if inputOperatorValue.count == 0 {
-            inputOperatorValue.append(inputButtonTitle)
+        if isOperatorEnterd {
+            stringToCalculate.removeLast()
+            stringToCalculate.append(inputButtonTitle)
+            
         } else {
-            inputOperatorValue.removeAll()
-            inputOperatorValue.append(inputButtonTitle)
+            stringToCalculate.append(inputButtonTitle)
+            isOperatorEnterd = true
         }
         currentOperator.text = inputButtonTitle
     }
