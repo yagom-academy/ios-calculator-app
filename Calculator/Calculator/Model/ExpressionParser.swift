@@ -10,11 +10,12 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var calculateFormula: Formula = Formula()
-        componentsByOperators(from: input).forEach {
-            guard let operation = Double($0) else {
+
+        componentsByOperators(from: input).forEach { component in
+           guard let operation = Double(component) else {
                 return
             }
-        
+
             calculateFormula.operands.enqueue(operation: operation)
         }
         
