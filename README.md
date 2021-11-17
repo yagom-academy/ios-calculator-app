@@ -32,6 +32,24 @@
       - 테스트 코드 포함 전체 코드 구현
       - UML 작성
       - README 작성
+    - 11/10 (수)
+      - 클로저 학습
+    - 11/11 (목)
+      - 스크럼
+      - PR 피드백 확인 후 리팩토링
+    - 11/12 (금)
+      - 스크럼
+      - STEP2 구현 시작
+    - 11/13 (토)
+      - ExpressionParser 내부 구현
+    - 11/14 (일)
+      - calculate, result 메서드 구현
+
+2) 2주차 - STEP2
+    - 11/15 (월) - STEP2 PR 요청
+      - 스크럼
+      - README 작성
+      - STEP2 최종 수정
 
 ## STEP1
 ### 구현 내용
@@ -61,3 +79,43 @@
 ### 키워드
    - TDD, Unit Test, Queue, Double Stack, Generic, UML 
 
+## STEP2
+### 구현 내용
+- TDD를 위한 각 테스트 케이스 생성(StringExtensionTest, OperatorTest, ExpressionParserTest, FormulaTest)
+- CalculatorItemQueue의 요소가 CalculateItem 프로토콜을 채택(Double, Operator)
+- Formula 구조체 생성
+- ExpressionParser 타입 (열거형) 생성
+ - Operator 내부 메서드(calculate, add, subtract, divide, multiply) 추가
+- CalculatorError 에러 타입(열거형) 생성
+	 
+### UML
+![](STEP2_UML.jpg)
+
+### 고려사항
+* 주요 사용자 정의 타입
+	- Formula: operands, operators 프로퍼티를 각 큐에서 사용할 타입으로 Double, Operator를 지정CalculatorItemQueue타입으로 생성, result메서드를 이용해 연산
+	- ExpressionParser: componentsByOperators를 이용해 입력된 String에서 숫자를 분리, parse내부에서 입력된 String을 숫자와 연산자를 분리하여 Formula인스턴스를 생성하여 리턴
+	- Operator: calculate내부 add, subtract, divide, multiply메서드 호출
+	- CalculatorError: 에러를 관리하기 위한 타입 생성, 추후에 에러 메세지를 출력할 가능성이 있다고 판단하여 LocalizedError 프로토콜 채택
+
+* 주요 프로퍼티
+	- operands/opberators : Double, Operator타입으로 CalculatorItemQueue 생성하여 연산자와 피연산자 큐를 관리
+	- CheckDequeueImpossible: dequeue가 불가능한 상태인지를 Bool타입으로 return
+
+* 주요 메서드
+	- dequeue: 기존 inbox & outbox가 비어있으면 nil을 반환하는 로직에서 에러를 던져주도록 수정
+	  	(nil을 반환하는 것 보다 error를 처리하는 것이 더 명확한 의미전달이라고 판단)
+	- result: 
+		1) 내부에서 dequeue메서드를 호출하여 연산 및 outbox가 빌때까지 반복하여 연산
+		2) operands의 갯수가 operators보다 하나 많기 때문에 수식의 첫 값을 dequeue를 해준 뒤 반복문 실행
+		3) 에러를 catch하는 부분은 viewController가 될 것이라 예상하여 try만 사용 하여 에러를 던져주도록 구현
+	- parse: 
+		1) compactMap을 사용하여 원하는 타입으로 변환한 배열을 생성
+		2) 변환된 배열을 Formula 이니셜라이저의 매개변수에 넣어 인스턴스 생성&반환
+	- componentsByOperators : 
+		1) 내부에서 Operator.allCases를 이용해 for-in구문 실행, 
+		2) componentsByOneOperator에 연산자를 하나씩 넣고 배열을 새로 만드는 과정을 반복하여 숫자만 들어있는 배열 생성
+	- calculate: switch구문을 이용하여 각 연산자에 맞는 메서드 호출
+
+### 키워드
+   - TDD, Unit Test, UML, computed property, contorl flow, compactMap, split, map 

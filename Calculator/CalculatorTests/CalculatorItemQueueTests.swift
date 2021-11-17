@@ -46,7 +46,7 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.multiply)
-        let result = formula.operators.dequeue()
+        let result = try! formula.operators.dequeue()
         XCTAssertEqual(result, .add)
     }
     
@@ -67,7 +67,7 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(123)
         formula.operands.enqueue(124)
-        let result = formula.operands.dequeue()
+        let result = try! formula.operands.dequeue()
         XCTAssertEqual(result, 123)
     }
     
@@ -88,7 +88,7 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(1.23)
         formula.operands.enqueue(1.24)
-        let result = formula.operands.dequeue()
+        let result = try! formula.operands.dequeue()
         XCTAssertEqual(result, 1.23)
     }
     
@@ -103,7 +103,7 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(123)
         formula.operands.enqueue(1.24)
-        let result = formula.operands.dequeue()
+        let result = try! formula.operands.dequeue()
         XCTAssertEqual(result, 123)
     }
     
@@ -118,20 +118,18 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(-123)
         formula.operands.enqueue(1.24)
-        let result = formula.operands.dequeue()
+        let result = try! formula.operands.dequeue()
         XCTAssertEqual(result, -123)
     }
     
-    func test_연산자_queue가_비어있을때_dequeue시_nil_반환() {
-        var formula = Formula()
-        let result = formula.operators.dequeue()
-        XCTAssertNil(result)
+    func test_연산자_queue가_비어있을때_dequeue시_Error_Throw() {
+        var formula = Formula.init()
+        XCTAssertThrowsError(try formula.operands.dequeue())
     }
     
-    func test_숫자_queue가_비어있을때_dequeue시_nil_반환() {
-        var formula = Formula()
-        let result = formula.operators.dequeue()
-        XCTAssertNil(result)
+    func test_숫자_queue가_비어있을때_dequeue시_Error_Throw() {
+        var formula = Formula.init()
+        XCTAssertThrowsError(try formula.operands.dequeue())
     }
 
 }

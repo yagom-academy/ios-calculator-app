@@ -13,16 +13,25 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<Element: CalculateItem> {
 
-    private(set) var inbox: [Element] = []
-    private(set) var outbox: [Element] = []
+    private(set) var inbox: [Element]
+    private(set) var outbox: [Element]
+    
+    init(inbox: [Element] = [], outbox: [Element] = []) {
+        self.inbox = inbox
+        self.outbox = outbox
+    }
+    
+    private var checkDequeueImpossible: Bool {
+        return inbox.isEmpty && outbox.isEmpty
+    }
     
     mutating func enqueue(_ item: Element) {
         inbox.append(item)
     }
     
-    mutating func dequeue() -> Element? {
-        if inbox.isEmpty && outbox.isEmpty {
-            return nil
+    mutating func dequeue() throws -> Element {
+        if checkDequeueImpossible {
+            throw CalculatorError.emptyQueue
         }
         if outbox.isEmpty {
             outbox = inbox.reversed()
@@ -33,7 +42,3 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
 }
 
-struct Formula {
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
-}
