@@ -116,7 +116,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="hitOperandOrOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cwl-GY-DvT"/>
+                                                    <action selector="hitOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Sq-a8-48K"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -165,7 +165,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="hitOperandOrOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="crw-01-yKM"/>
+                                                    <action selector="hitOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huc-IC-E2i"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -214,7 +214,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="hitOperandOrOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wM4-R4-guW"/>
+                                                    <action selector="hitOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aSy-W5-dh8"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -263,7 +263,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="hitOperandOrOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BBX-1r-Idm"/>
+                                                    <action selector="hitOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Am8-Tm-b3A"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -331,7 +331,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD">
                                                 <rect key="frame" x="27.5" y="0.0" width="354.5" height="37"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

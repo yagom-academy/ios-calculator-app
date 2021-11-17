@@ -17,15 +17,24 @@ class ViewController: UIViewController {
     @IBOutlet var ceButton: UIButton!
     @IBOutlet var positiveOrNegativeButton: UIButton!
     
+    
     var stringToCalculate: [String] = []
     
-    @IBAction func hitOperandOrOperatorButton(_ sender: UIButton) {
+    @IBAction func hitOperandButton(_ sender: UIButton) {
         guard let inputButtenTitle = sender.titleLabel?.text else {
             return
         }
         var inputValues: [String] = []
         inputValues.append(inputButtenTitle)
         currentResult.text = inputValues.joined()
+    }
+    
+    @IBAction func hitOperatorButton(_ sender: UIButton) {
+        guard let inputButtenTitle = sender.titleLabel?.text else {
+            return
+        }
+        let inputValues = inputButtenTitle
+        currentOperator.text = inputValues
     }
     
     @IBAction func hitACButton(_ sender: UIButton) {
