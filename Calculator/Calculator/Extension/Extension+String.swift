@@ -16,7 +16,6 @@ extension String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.roundingMode = .halfUp
-        formatter.minimumFractionDigits = 2
         formatter.maximumSignificantDigits = 20
         guard let number = formatter.number(from: self) else {
             return nil
