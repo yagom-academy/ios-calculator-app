@@ -22,6 +22,23 @@ class ViewController: UIViewController {
         
     }
     
+    func inputOperands() {
+        
+    }
+    func inputOperators() {
+        
+    }
+    func isPositive() {
+        
+    }
+    func clearAllcalculation() {
+    
+    }
+    func clearCurrentcalculation() {
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
