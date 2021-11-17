@@ -83,12 +83,11 @@ class ViewController: UIViewController {
         
         currentOperand = String(currentNumber * -1)
         
-        if abs(currentNumber) > pow(10,Double(maximumDigitsOfDoubleExpression)) {
-            print(currentNumber, currentOperand, operandText)
+        if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
             operandLabel.text = String(currentNumber * -1)
         } else {
             operandLabel.text = operandText
-        }        
+        }
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
@@ -105,7 +104,11 @@ class ViewController: UIViewController {
             return
         }
         
-        addCalculationHistory(operandText: operandText, operatorText: currentOperator)
+        if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+            addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
+        } else {
+            addCalculationHistory(operandText: operandText, operatorText: currentOperator)
+        }
         
         finalExpression += currentOperand
         finalExpression += " \(`operator`) "
