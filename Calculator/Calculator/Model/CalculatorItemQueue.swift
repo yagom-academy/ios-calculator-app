@@ -1,22 +1,7 @@
-//
-//  CalculatorItemQueue.swift
-//  Calculator
-//
-//  Created by si won kim on 2021/11/09.
-//
-
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
-extension Character: CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var calculatorItems = [T]()
+    var calculatorItems: [T]
     
     mutating func enqueue(_ item: T) {
         calculatorItems.append(item)
@@ -37,5 +22,9 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     mutating func removeAll() {
         calculatorItems.removeAll()
+    }
+    
+    var numberOfItems: Int {
+        return calculatorItems.count
     }
 }
