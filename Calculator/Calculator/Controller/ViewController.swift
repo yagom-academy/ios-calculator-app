@@ -37,8 +37,8 @@ class ViewController: UIViewController {
         }
         
         inputOperandValues.append(inputButtonTitle)
-        currentValue.text = inputOperandValues.joined()
         isOperatorEnterd = false
+        currentValue.text = inputOperandValues.joined()
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
@@ -49,7 +49,6 @@ class ViewController: UIViewController {
         if isOperatorEnterd {
             stringToCalculate.removeLast()
             stringToCalculate.append(inputButtonTitle)
-            
         } else {
             stringToCalculate.append(inputButtonTitle)
             isOperatorEnterd = true
@@ -81,7 +80,6 @@ class ViewController: UIViewController {
             }
             currentValue.text = String(conversionedValue * -1)
         }
-        
     }
     
 
