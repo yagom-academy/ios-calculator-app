@@ -165,6 +165,25 @@ class FormulaTests: XCTestCase {
         } catch {
             print("error")
         }
-        
+    }
+    
+    func test_연산자가_피연산자보다2개적을때에러남() {
+        formula.operands.enqueue(2)
+        formula.operators.enqueue(.add)
+        formula.operands.enqueue(3)
+        formula.operands.enqueue(2)
+        formula.operators.enqueue(.divide)
+        formula.operands.enqueue(2)
+        do {
+            let result = try formula.result()
+            XCTAssertThrowsError(result)
+        } catch { }
+    }
+    
+    func test_큐가없는데_연산하려고할때에러() {
+        do {
+            let result = try formula.result()
+            XCTAssertThrowsError(result)
+        } catch { }
     }
 }
