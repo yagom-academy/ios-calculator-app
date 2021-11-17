@@ -79,14 +79,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dotButtonPressed(_ sender: UIButton) {
-        guard let text = numberLabel.text else { return }
+        guard let text = numberLabel.text, text.isEmpty == false else { return }
         
-        if text.isEmpty || isContainDot(text: text) {
+        if isContainDot(text: text) {
             return
         } else {
             inputNumber += "."
             numberLabel.text = inputNumber
         }
+    }
+    @IBAction func negativePositiveButtonPressed(_ sender: UIButton) {
+        guard var text = numberLabel.text, text.isEmpty == false else { return }
+        
+        if text.hasPrefix("-") {
+            text = text.replacingOccurrences(of: "-", with: "")
+        } else {
+            text = "-" + text
+        }
+        
+        numberLabel.text = text
     }
     
     func initializeNumberLabel() {
