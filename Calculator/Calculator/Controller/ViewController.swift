@@ -31,11 +31,20 @@ class ViewController: UIViewController {
                 
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
         
-        guard let operandText = currentOperand.addCommaOnEveryThreeDigits() else {
+        var integerDigits = currentOperand
+        var fractionDigits = ""
+        
+        if currentOperand.contains(".") {
+            let splited = currentOperand.split(with: ".")
+            integerDigits = splited[0]
+            fractionDigits = splited[1]
+        }
+        
+        guard let operandText = integerDigits.addCommaOnEveryThreeDigits() else {
             return
         }
         
-        operandLabel.text = operandText
+        operandLabel.text = fractionDigits.isEmpty ? operandText : operandText + "." + fractionDigits
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
@@ -101,7 +110,7 @@ class ViewController: UIViewController {
         }
         
         finalExpression += currentOperand
-        
+        print(finalExpression)
         let formula = ExpressionParser.parse(from: finalExpression)
         
         do {
