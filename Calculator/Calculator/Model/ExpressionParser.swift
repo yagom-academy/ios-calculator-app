@@ -10,8 +10,8 @@ import Foundation
 enum ExpressionParser {
 
     static func parse(from input: String) -> Formula {
-        let calcultorItems = ["➕","➖", "➗", "✖️"]
-        let stringOperators = input.filter { calcultorItems.contains(String($0))}
+        let calculatorItems = ["➕","➖", "➗", "✖️"]
+        let stringOperators = input.filter { calculatorItems.contains(String($0))}
         let stringOperands = componentsByOperator(from: input)
         let operators = CalculatorItemQueue(stringOperators.map({Operator(rawValue: $0)!}))
         let operands = CalculatorItemQueue(stringOperands.map({Double($0)!}))

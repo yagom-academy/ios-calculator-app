@@ -23,7 +23,7 @@ struct Formula {
         for _ in 1...CalculationTrial {
             let rhs = operands.dequeue() as! Double
             let operation = operators.dequeue() as! Operator
-        result = operation.calculate(lhs: result, rhs: rhs)
+            result = operation.calculate(lhs: result, rhs: rhs)
         }
         return result
     }
