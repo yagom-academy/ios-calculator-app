@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         guard !inputOperandValues.isEmpty || inputButtonTitle != "00" else {
             return
         }
-        guard !inputOperandValues.isEmpty || inputButtonTitle != "." else {
+        guard inputButtonTitle != "." || inputOperandValues.last != "." else {
             return
         }
         
