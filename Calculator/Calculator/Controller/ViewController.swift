@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     
-    private var finalFormula: String = ""
+    private var finalFormula = [String]()
     private var currentOperand: String = ""
     private var currentOperator: String = ""
     
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
 
     // MARK: - Private Methods
     private func resetToInitialState() {
-        finalFormula = ""
+        finalFormula = [String]()
         currentOperator = ""
         operatorLabel.text = ""
         isCalculated = false
@@ -43,6 +43,16 @@ class ViewController: UIViewController {
     private func resetCurrentOperand() {
         currentOperand = ""
         operandLabel.text = "0"
+    }
+    
+    private func changeOperator(to newOperator: String) {
+        guard !finalFormula.isEmpty else {
+            return
+        }
+        
+        operatorLabel.text = newOperator
+        currentOperator = newOperator
+        finalFormula[finalFormula.count - 1] = newOperator
     }
     
     private func addCalculationHistory(operandText: String, operatorText: String) {
@@ -158,7 +168,7 @@ extension ViewController {
         }
     
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
-            operatorLabel.text = `operator`
+            changeOperator(to: `operator`)
             return
         }
         
@@ -172,11 +182,10 @@ extension ViewController {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
         }
         
-        finalFormula += currentOperand
-        finalFormula += " \(`operator`) "
-        currentOperator = `operator`
-        operatorLabel.text = `operator`
+        finalFormula.append(currentOperand)
+        finalFormula.append(`operator`)
         
+        changeOperator(to: `operator`)        
         resetCurrentOperand()
     }
     
@@ -203,9 +212,9 @@ extension ViewController {
             }
         }
         
-        finalFormula += currentOperand
+        finalFormula.append(currentOperand)
 
-        let formula = ExpressionParser.parse(from: finalFormula)
+        let formula = ExpressionParser.parse(from: finalFormula.joined(separator: " "))
         
         do {
             let calculationResult = try formula.result()
