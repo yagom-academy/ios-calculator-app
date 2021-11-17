@@ -33,9 +33,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var multiplierButton: UIButton!
     
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var inputLabel: UILabel!
+    @IBOutlet weak var valueLabel: UILabel!
     
-    @IBOutlet weak var inputHistoryScrollView: UIScrollView!
+    @IBOutlet weak var inputHistoryStackView: UIStackView!
 
     @IBAction func numberButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: NumberButtonHandler.shared, button: sender)
@@ -73,12 +73,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeLabels()
     }
     
-    func initializeLabels() {
-        inputLabel.text = "0"
-        operatorLabel.text = ""
+    func addInputHistory() {
+        let operatorText = operatorLabel.text ?? ""
+        let valueText = valueLabel.text ?? ""
+        
+        let inputHistory = UILabel()
+
+        if operatorLabel.text == "" {
+            inputHistory.text = valueLabel.text
+        } else {
+            inputHistory.text = "\(operatorText) \(valueText)"
+        }
+        
+        inputHistoryStackView.addArrangedSubview(inputHistory)
+    }
+    
+    func clearInputHistory() {
+        inputHistoryStackView.subviews.forEach {
+            inputHistoryStackView.removeArrangedSubview($0)
+        }
     }
 }
 
