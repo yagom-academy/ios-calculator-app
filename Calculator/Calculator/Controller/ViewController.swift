@@ -36,8 +36,8 @@ class ViewController: UIViewController {
         
         if currentOperand.contains(".") {
             let splited = currentOperand.split(with: ".")
-            integerDigits = splited[0]
-            fractionDigits = splited[1]
+            integerDigits = splited.first ?? ""
+            fractionDigits = splited.last ?? ""
         }
         
         guard let operandText = integerDigits.addCommaOnEveryThreeDigits() else {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
             return
         }
         
-        currentOperand += dot
+        currentOperand += currentOperand.isEmpty ? "0\(dot)" : dot
         operandLabel.text?.append(dot)
     }
     
