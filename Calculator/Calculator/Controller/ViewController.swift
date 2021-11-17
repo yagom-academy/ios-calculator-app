@@ -21,7 +21,7 @@ class ViewController: UIViewController {
             return
         }
         currentNumberString += numberPressedString
-        update(self.currentNumberLabel, to: currentNumberString)
+        update(label: self.currentNumberLabel, to: currentNumberString)
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
@@ -31,10 +31,10 @@ class ViewController: UIViewController {
             return
         }
         currentOperator = operatorPressedString
-        update(self.currentOperatorLabel, to: currentOperator)
+        update(label: self.currentOperatorLabel, to: currentOperator)
     }
     
-    private func update(_ label: UILabel, to data: String) {
+    private func update(label: UILabel, to data: String) {
         label.text = data
     }
 }
