@@ -136,14 +136,14 @@ extension ViewController {
     private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
         let formulaStackView = UIStackView()
         let operandLabel = UILabel()
-        currentOperand = operand
+        operandLabel.text = operand
         guard calculatorStackView.subviews.count > 0 else {
             setUpFormulaLabel(of: operandLabel)
             formulaStackView.addArrangedSubview(operandLabel)
             return formulaStackView
         }
         let operatorLabel = UILabel()
-        currentOperator = `operator`
+        operatorLabel.text = `operator`
         setUpFormulaLabel(of: operatorLabel)
         setUpFormulaLabel(of: operandLabel)
         formulaStackView.axis = .horizontal
