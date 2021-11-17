@@ -96,7 +96,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpClearError:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LY1-RF-0kZ"/>
+                                                    <action selector="touchUpClearEntry:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLw-yz-bWG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
