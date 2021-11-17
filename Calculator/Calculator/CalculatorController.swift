@@ -10,7 +10,7 @@ class CalculatorController: UIViewController {
 
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak private var operatorLabel: UILabel!
-    @IBOutlet weak private var expressionStackView: UIStackView!
+    @IBOutlet weak private var expressionStackViewSuperView: UIStackView!
     
     private var expressionInput: String = String()
     
@@ -74,11 +74,11 @@ extension CalculatorController {
         stackView.addArrangedSubview(operandLabel)
         stackView.spacing = 8
         
-        expressionStackView.addArrangedSubview(stackView)
+        expressionStackViewSuperView.addArrangedSubview(stackView)
     }
     
     private func clearExpressionsStackView() {
-        expressionStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        expressionStackViewSuperView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
