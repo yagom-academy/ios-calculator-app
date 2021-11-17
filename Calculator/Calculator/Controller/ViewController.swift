@@ -74,7 +74,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hitCEButton(_ sender: UIButton) {
-        stringToCalculate.removeLast()
+        inputOperandValues.removeAll()
         currentValue.text = initialValue
     }
     
