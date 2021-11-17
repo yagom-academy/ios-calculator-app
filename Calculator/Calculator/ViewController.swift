@@ -102,7 +102,7 @@ extension ViewController {
             return
         }
         
-        guard Double(displayOperand) != 0.0 || formulasStackViewIsEmpty else {
+        guard Double(displayOperand) != 0.0 else {
             displayOperator = currentOperandButtionTitle
             return
         }
