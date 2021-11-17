@@ -8,7 +8,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
     
     var operatorsLabel: UILabel {
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         operandsLabel.textColor = .white
         operandsLabel.textAlignment = .right
         operandsLabel.adjustsFontForContentSizeCategory = true
-//        operandsLabel.sizeToFit()
+
         return operandsLabel
     }
     
