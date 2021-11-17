@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var currentPhase: CalculatorPhase = .EmptyScrollViewWithoutInput
     
     @IBOutlet weak var numberOneButton: UIButton!
     @IBOutlet weak var numberTwoButton: UIButton!
@@ -36,6 +37,40 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var inputHistoryScrollView: UIScrollView!
 
+    @IBAction func numberButtonHandler(_ sender: UIButton) {
+        runButtonAction(delegate: NumberButtonHandler(), button: sender)
+    }
+    @IBAction func operatorButtonHandler(_ sender: UIButton) {
+        runButtonAction(delegate: OperatorButtonHandler(), button: sender)
+    }
+    @IBAction func allClearButtonHandler(_ sender: UIButton) {
+        runButtonAction(delegate: AllClearButtonHandler(), button: sender)
+    }
+    @IBAction func clearButtonHandler(_ sender: UIButton) {
+        runButtonAction(delegate: ClearButtonHandler(), button: sender)
+    }
+    @IBAction func togglePlusMinusButtonHandler(_ sender: UIButton) {
+        runButtonAction(delegate: TogglePlusMinusButtonHandler(), button: sender)
+    }
+    @IBAction func resultButtonHandler(_ sender: UIButton) {
+        runButtonAction(delegate: ResultButtonHandler(), button: sender)
+    }
+    
+    func runButtonAction(delegate: ButtonActionDelegate, button: UIButton) {
+        switch currentPhase {
+        case .EmptyScrollViewWithoutInput:
+            delegate.runActionInPhase0(viewController: self, button: button)
+        case .EmptyScrollViewWithInput:
+            delegate.runActionInPhase1(viewController: self, button: button)
+        case .NotEmptyScrollViewWithoutInput:
+            delegate.runActionInPhase2(viewController: self, button: button)
+        case .NotEmptyScrollViewWithInput:
+            delegate.runActionInPhase3(viewController: self, button: button)
+        case .needToAllClear:
+            delegate.runActionInPhase4(viewController: self, button: button)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

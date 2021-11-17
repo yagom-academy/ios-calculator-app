@@ -3,4 +3,5 @@ enum CalculatorPhase {
     case EmptyScrollViewWithInput
     case NotEmptyScrollViewWithoutInput
     case NotEmptyScrollViewWithInput
+    case needToAllClear
 }
