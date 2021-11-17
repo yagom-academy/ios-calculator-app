@@ -93,7 +93,7 @@ class ViewController: UIViewController {
     
     func clearInputHistory() {
         inputHistoryStackView.subviews.forEach {
-            inputHistoryStackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
         }
     }
     
