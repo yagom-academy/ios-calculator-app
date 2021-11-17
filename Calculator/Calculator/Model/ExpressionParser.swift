@@ -15,7 +15,7 @@ enum ExpressionParser {
                        operators: CalculatorItemQueue(operators))
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         var result: [String] = [input]
         Operator.allCases.forEach { `operator` in
             var splitedString: [String] = []
