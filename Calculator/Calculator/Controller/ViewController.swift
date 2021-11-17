@@ -25,6 +25,11 @@ class ViewController: UIViewController {
         inputValues.append(inputButtenTitle)
     }
     
+    @IBAction func hitACButton(_ sender: UIButton) {
+        inputValues.removeAll()
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
