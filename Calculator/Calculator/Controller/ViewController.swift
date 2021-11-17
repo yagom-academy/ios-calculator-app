@@ -31,13 +31,17 @@ class ViewController: UIViewController {
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
         stringToCalculate.append(inputOperandValues.joined())
-        inputOperandValues.removeAll()
-        currentValue.text = initialValue
+        clearCurrentValue()
         guard let inputButtenTitle = sender.titleLabel?.text else {
             return
         }
         let inputValues = inputButtenTitle
         currentOperator.text = inputValues
+    }
+    
+    func clearCurrentValue() {
+        inputOperandValues.removeAll()
+        currentValue.text = initialValue
     }
     
     @IBAction func hitACButton(_ sender: UIButton) {
@@ -47,7 +51,7 @@ class ViewController: UIViewController {
     
     @IBAction func hitCEButton(_ sender: UIButton) {
         stringToCalculate.removeLast()
-        currentResult.text = initialValue
+        currentValue.text = initialValue
     }
     
     
