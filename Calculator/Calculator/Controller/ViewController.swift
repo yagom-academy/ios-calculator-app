@@ -12,9 +12,10 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     
-    private var finalExpression: String = ""
+    private var finalFormula: String = ""
     private var currentOperand: String = ""
     private var currentOperator: String = ""
+    
     private var isCalculated: Bool = false
         
     private let maximumDigitsOfDoubleExpression = 16
@@ -25,6 +26,59 @@ class ViewController: UIViewController {
         resetCurrentOperand()
     }
 
+    // MARK: - Private Methods
+    private func resetToInitialState() {
+        finalFormula = ""
+        currentOperator = ""
+        operatorLabel.text = ""
+        isCalculated = false
+        
+        resetCurrentOperand()
+        
+        calculationHistoryStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+    }
+
+    private func resetCurrentOperand() {
+        currentOperand = ""
+        operandLabel.text = "0"
+    }
+    
+    private func addCalculationHistory(operandText: String, operatorText: String) {
+        let sign = UILabel()
+        sign.textColor = .white
+        sign.text = operatorText
+        sign.font = UIFont(name: "Helvetica", size: 24)
+        
+        let history = UILabel()
+        history.text = operandText
+        history.textColor = .white
+        history.font = UIFont(name: "Helvetica", size: 24)
+        
+        let newHistoryStackView = UIStackView(arrangedSubviews: [sign, history])
+        
+        newHistoryStackView.axis = .horizontal
+        newHistoryStackView.spacing = 10
+        
+        calculationHistoryStackView.addArrangedSubview(newHistoryStackView)
+        
+        autoScrollToBottom()
+    }
+    
+    private func autoScrollToBottom() {
+        calculationHistoryScrollView.layoutIfNeeded()
+        
+        let bottomOffset = CGPoint(x: 0, y: calculationHistoryScrollView.contentSize.height - calculationHistoryScrollView.bounds.height + calculationHistoryScrollView.contentInset.bottom)
+        
+        if bottomOffset.y > 0 {
+            calculationHistoryScrollView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
+}
+
+// MARK: - IBAction Methods
+extension ViewController {
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
         if isCalculated {
             resetToInitialState()
@@ -105,7 +159,6 @@ class ViewController: UIViewController {
     
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
             operatorLabel.text = `operator`
-            currentOperator = `operator`
             return
         }
         
@@ -119,8 +172,8 @@ class ViewController: UIViewController {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
         }
         
-        finalExpression += currentOperand
-        finalExpression += " \(`operator`) "
+        finalFormula += currentOperand
+        finalFormula += " \(`operator`) "
         currentOperator = `operator`
         operatorLabel.text = `operator`
         
@@ -150,9 +203,9 @@ class ViewController: UIViewController {
             }
         }
         
-        finalExpression += currentOperand
-        
-        let formula = ExpressionParser.parse(from: finalExpression)
+        finalFormula += currentOperand
+
+        let formula = ExpressionParser.parse(from: finalFormula)
         
         do {
             let calculationResult = try formula.result()
@@ -183,24 +236,6 @@ class ViewController: UIViewController {
         resetToInitialState()
     }
     
-    private func resetToInitialState() {
-        finalExpression = ""
-        currentOperator = ""
-        operatorLabel.text = ""
-        isCalculated = false
-        
-        resetCurrentOperand()
-        
-        calculationHistoryStackView.arrangedSubviews.forEach { view in
-            view.removeFromSuperview()
-        }
-    }
-
-    private func resetCurrentOperand() {
-        currentOperand = ""
-        operandLabel.text = "0"
-    }
-
     @IBAction private func touchUpCEButton(_ sender: Any) {
         guard !isCalculated else {
             resetToInitialState()
@@ -209,36 +244,4 @@ class ViewController: UIViewController {
         
         resetCurrentOperand()
     }
-    
-    private func addCalculationHistory(operandText: String, operatorText: String) {
-        let sign = UILabel()
-        sign.textColor = .white
-        sign.text = operatorText
-        sign.font = UIFont(name: "Helvetica", size: 24)
-        
-        let history = UILabel()
-        history.text = operandText
-        history.textColor = .white
-        history.font = UIFont(name: "Helvetica", size: 24)
-        
-        let newHistoryStackView = UIStackView(arrangedSubviews: [sign, history])
-        
-        newHistoryStackView.axis = .horizontal
-        newHistoryStackView.spacing = 10
-        
-        calculationHistoryStackView.addArrangedSubview(newHistoryStackView)
-        
-        autoScrollToBottom()
-    }
-    
-    private func autoScrollToBottom() {
-        calculationHistoryScrollView.layoutIfNeeded()
-        
-        let bottomOffset = CGPoint(x: 0, y: calculationHistoryScrollView.contentSize.height - calculationHistoryScrollView.bounds.height + calculationHistoryScrollView.contentInset.bottom)
-        
-        if bottomOffset.y > 0 {
-            calculationHistoryScrollView.setContentOffset(bottomOffset, animated: true)
-        }
-    }
 }
-
