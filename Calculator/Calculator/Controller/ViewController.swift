@@ -101,6 +101,7 @@ class ViewController: UIViewController {
     
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
             operatorLabel.text = `operator`
+            currentOperator = `operator`
             return
         }
         
