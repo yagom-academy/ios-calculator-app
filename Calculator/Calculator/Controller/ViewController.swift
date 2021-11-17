@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         operatorsLabel.adjustsFontForContentSizeCategory = true
         return operatorsLabel
     }
+    
     var operandsLabel: UILabel {
         let operandsLabel = UILabel()
         operandsLabel.text = numberLabel.text
@@ -63,8 +64,8 @@ class ViewController: UIViewController {
             symbolLabel.text = sender.currentTitle
             initializeNumberLabel()
         } else {
-            symbolLabel.text = sender.currentTitle
             stackView.addArrangedSubview(formulaStackView)
+            symbolLabel.text = sender.currentTitle
             initializeNumberLabel()
         }
     }
