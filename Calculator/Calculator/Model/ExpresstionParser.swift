@@ -28,10 +28,3 @@ enum ExpressionParser {
         return result.split(with: " ")
     }
 }
-
-extension String {
-    func split(with target: Character) -> [String] {
-        let result = self.split(separator: target).map{ String($0) }
-        return result
-    }
-}
