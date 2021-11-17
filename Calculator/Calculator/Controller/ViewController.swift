@@ -55,6 +55,26 @@ class ViewController: UIViewController {
         finalFormula[finalFormula.count - 1] = newOperator
     }
     
+    private func addLastCalculationHistory() {
+        guard !currentOperand.isEmpty && !currentOperator.isEmpty else {
+            return
+        }
+        
+        guard let currentOperandText = currentOperand.addCommaOnEveryThreeDigits() else {
+            return
+        }
+        
+        guard let currentNumber = Double(currentOperand) else {
+            return
+        }
+        
+        if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+            addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
+        } else {
+            addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
+        }
+    }
+    
     func calculateFormula(from expression: [String]) {
         let formula = ExpressionParser.parse(from: expression.joined(separator: " "))
         
@@ -224,24 +244,8 @@ extension ViewController {
         
         isCalculated = true
         
-        if !currentOperand.isEmpty && !currentOperator.isEmpty {
-            guard let currentOperandText = currentOperand.addCommaOnEveryThreeDigits() else {
-                return
-            }
-            
-            guard let currentNumber = Double(currentOperand) else {
-                return
-            }
-            
-            if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
-                addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
-            } else {
-                addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
-            }
-        }
-        
+        addLastCalculationHistory()
         finalFormula.append(currentOperand)
-
         calculateFormula(from: finalFormula)
     }
     
