@@ -10,7 +10,6 @@ class CalculatorController: UIViewController {
 
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak private var operatorLabel: UILabel!
-    
     @IBOutlet weak private var expressionStackView: UIStackView!
     
     private var expressionInput: String = String()
@@ -50,6 +49,10 @@ extension CalculatorController {
         numberLabel.text = "0"
     }
     
+    private func resetOperatorLabel() {
+        operatorLabel.text = String()
+    }
+    
     private func resetExpressionInput() {
         expressionInput = String()
     }
@@ -72,6 +75,10 @@ extension CalculatorController {
         stackView.spacing = 8
         
         expressionStackView.addArrangedSubview(stackView)
+    }
+    
+    private func clearExpressionsStackView() {
+        expressionStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
@@ -97,10 +104,16 @@ extension CalculatorController {
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         
+        guard numberLabel.text != "0" else {
+            operatorLabel.text = `operator`
+            return
+        }
+        
+        createExpressionStackView()
+        
         operatorLabel.text = `operator`
         
         appendExpression()
-        createExpressionStackView()
         resetNumberLabel()
     }
 
@@ -128,6 +141,8 @@ extension CalculatorController {
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         resetNumberLabel()
+        resetOperatorLabel()
         resetExpressionInput()
+        clearExpressionsStackView()
     }
 }
