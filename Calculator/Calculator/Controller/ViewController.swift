@@ -26,18 +26,8 @@ class ViewController: UIViewController {
         guard let operand = sender.titleLabel?.text else {
             return
         }
-                
-        guard operand != "." || !currentOperand.contains(".") else {
-            return
-        }
-        
-        if operand == "." {
-            currentOperand += currentOperand.isEmpty ? "0." : "."
-            operandLabel.text = currentOperand
-            return
-        } else {
-            currentOperand += operand
-        }
+                        
+        currentOperand += operand
                 
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
         
@@ -46,6 +36,19 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = operandText
+    }
+    
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        guard let dot = sender.titleLabel?.text else {
+            return
+        }
+        
+        guard !currentOperand.contains(dot) else {
+            return
+        }
+        
+        currentOperand += dot
+        operandLabel.text?.append(dot)
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
