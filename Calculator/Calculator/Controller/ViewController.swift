@@ -73,21 +73,13 @@ extension ViewController {
         
         guard let operatorLabelText = inputedOperatorLabel.text else { return }
         
-        do {
-            let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
-            let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
-            
-            toBeCalculateFormulaStackView.addArrangedSubview(stackView)
-        } catch let error {
-            print(error)
-        }
+        addStackView(operatorLabelText: operatorLabelText)
         
         fomula += operand + " " + operatorLabelText + " "
         operand = initializeToEmptyString
-        
         inputedOperandLabel.text = initializeOperandLabelText
         inputedOperatorLabel.text = operators(for: sender)
-        
+
         scrollToBottom()
     }
     
@@ -104,14 +96,7 @@ extension ViewController {
         
         guard let operatorLabelText = inputedOperatorLabel.text else { return }
         
-        do {
-            let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
-            let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
-            
-            toBeCalculateFormulaStackView.addArrangedSubview(stackView)
-        } catch let error {
-            print(error)
-        }
+        addStackView(operatorLabelText: operatorLabelText)
         
         fomula += " " + operatorLabelText + " " + operand
         operand = initializeToEmptyString
@@ -138,12 +123,15 @@ extension ViewController {
 
 // MARK: - View Method
 extension ViewController {
-    func scrollToBottom() {
-        scrollView.layoutIfNeeded()
-        
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
-        
-        scrollView.setContentOffset(bottomOffset, animated: true)
+    func addStackView(operatorLabelText: String) {
+        do {
+            let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
+            let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
+            
+            toBeCalculateFormulaStackView.addArrangedSubview(stackView)
+        } catch let error {
+            print(error)
+        }
     }
     
     func makeStackView(operatorLabelText: String?, operandLabelText: String?) -> UIStackView {
@@ -163,6 +151,14 @@ extension ViewController {
     
     func removeSubView(from stackView: UIStackView) {
         stackView.subviews.forEach { view in view.removeFromSuperview() }
+    }
+    
+    func scrollToBottom() {
+        scrollView.layoutIfNeeded()
+        
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
+        
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
     
