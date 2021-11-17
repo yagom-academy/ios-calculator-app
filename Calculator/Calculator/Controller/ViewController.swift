@@ -51,5 +51,10 @@ class ViewController: UIViewController {
             numberLabel.text = inputNumber
         }
     }
+    
+    @IBAction func CEButtonPressed(_ sender: UIButton) {
+        inputNumber = ""
+        numberLabel.text = inputNumber
+    }
 }
 
