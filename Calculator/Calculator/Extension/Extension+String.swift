@@ -17,11 +17,12 @@ extension String {
         formatter.numberStyle = .decimal
         formatter.roundingMode = .halfUp
         formatter.maximumSignificantDigits = 20
-        guard let number = formatter.number(from: self) else {
+        guard let number = formatter.number(from: self)
+              , let doubleValue = Double("\(number)")  else {
             return nil
         }
-        
-        guard let result = formatter.string(from: number) else {
+
+        guard let result = formatter.string(from: NSNumber(value: doubleValue)) else {
             return nil
         }
         
