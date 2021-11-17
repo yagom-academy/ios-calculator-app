@@ -215,13 +215,7 @@ extension ViewController {
         guard value.contains(",") else {
             return value
         }
-        return value.reduce("", {
-            if $1 == "," {
-                return $0
-            } else {
-                return $0 + $1.description
-            }
-        })
+        return value.replacingOccurrences(of: ",", with: "")
     }
 }
 // MARK: Label Initialization Related
