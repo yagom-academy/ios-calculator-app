@@ -65,9 +65,14 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         inputedOperand = "0"
+        
         if operandLabel.text == "0" {
             operatorLabel.text = sender.titleLabel?.text
             return
+        }
+        
+        if calculationHistoryStackView.subviews.isEmpty {
+            operatorLabel.text = ""
         }
         
         addFormula()
