@@ -24,7 +24,6 @@ struct ResultButtonHandler: ButtonActionDelegate {
         viewController.currentPhase = .phase4
     }
     func runActionInPhase2(viewController: ViewController, button: UIButton) {
-        viewController.addInputHistory()
         viewController.operatorLabel.text = ""
         
         let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
