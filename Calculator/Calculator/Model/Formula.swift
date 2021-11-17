@@ -15,7 +15,7 @@ struct Formula {
         let operand = try operands.deQueueFirstElement()
         var result = operand
         
-        while operators.isEmpty == false {
+        while !operators.isEmpty {
             let `operator` = try operators.deQueueFirstElement()
             let rhs = try operands.deQueueFirstElement()
             result = try `operator`.calculate(lhs: result, rhs: rhs)
