@@ -56,7 +56,7 @@
 
 ## STEP2
 ### 구현 내용
-- 사용자가 계산기에 입력한 숫자 및 연산자를 1개의 문자열로 받아 처리한다. 
+- 프로젝트 요구사항으로 주어진 UML에 따라 타입 및 메서드를 생성했다. 사용자가 계산기에 입력한 숫자 및 연산자를 1개의 문자열로 받아 처리한다.
 - 문자열을 처리하여 숫자 및 연산자를 각각의 Queue에 할당한다. 제네릭 타입 매개변수를 각각 Double/Operator 타입으로 지정하여 별도의 Queue 인스턴스를 생성했다.
 - Queue의 숫자/연산자를 차례로 꺼내어 사칙연산을 처리한다. (이번 프로젝트에서 연산자 우선순위는 무시한다.)
 
@@ -68,12 +68,13 @@
    - 숫자 및 연산자로 구성된 문자열 처리를 위해 Extension, Protocol을 활용했다.
    - 연산이 불가능한 경우 (ex. 0으로 나누기) 오류 처리를 했다.
    - 빈 Queue를 dequeue하는 경우 nil이 반환되므로 연산을 중지하도록 오류 처리를 했다.
+   - 옵셔널 바인딩 및 반복문 기능을 갖고 있는 compactMap, 컨테이너 내부의 컨텐츠를 하나로 통합하여 처리하는 reduce 등 고차함수를 적극 사용했다.
 
 * 주요 타입 및 메서드
    - Operator 열거형의 calculate : 연산자 (Operator case)에 따라 연산을 실행한다.
    - String Extenstion의 split : Character 타입을 전달인자로 받아 문자열을 분해하여 배열로 반환한다.
-   - ExpressionParser의 componentsByOperators : 문자열을 연산기호 (Operator case의 원시값, Character 타입)로 분해하여 배열로 반환한다.
-   - ExpressionParser의 parse : 문자열의 숫자 및 연산자를 구분하여 각각의 Queue에 할당하고, 해당 Queue를 프로퍼티로 갖는 Formula를 반환한다.
+   - ExpressionParser의 componentsByOperators : 문자열을 연산기호 (Operator case의 원시값인 Character 타입)로 분해하여 배열로 반환한다.
+   - ExpressionParser의 parse : 문자열의 숫자 및 연산자를 구분하여 각각의 Queue (Double/Operator 타입)에 할당하고, 해당 Queue를 프로퍼티로 갖는 Formula를 반환한다.
    - Formula의 result : Queue의 숫자/연산자를 차례로 꺼내어 사칙연산을 수행하고, 결과값을 반환한다. 
 
 * Test Case (ExtensionsTests/OperatorTests/ExpressionParserTests)
