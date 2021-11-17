@@ -40,7 +40,13 @@ class ViewController: UIViewController {
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
     }
     @IBAction func equalsButtonDidTap(_ sender: UIButton) {
-        //
+        var parsedFormula = ExpressionParser.parse(from: formula)
+        let result = parsedFormula.result()
+        guard let formattedResult =
+                NumberFormatter().string(from: NSNumber(value: result)) else {
+            return
+        }
+        entry.replace(with: formattedResult)
     }
     
     func clearLabels() {
