@@ -17,7 +17,7 @@ struct Formula {
             
             let `operator` = operators.dequeue()
             do {
-                let calculateResult =  try `operator`?.calculate(lhs: lhs, rhs: rhs)
+                let calculateResult = try `operator`?.calculate(lhs: lhs, rhs: rhs)
                 result = calculateResult ?? 0
             } catch {
                 print("0으로 나눌 수 없음")
