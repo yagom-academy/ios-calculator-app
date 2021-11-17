@@ -4,6 +4,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var symbolLabel: UILabel!
     private var inputNumber = ""
     
     override func viewDidLoad() {
@@ -13,7 +14,7 @@ class ViewController: UIViewController {
     
     var operatorsLabel: UILabel {
         let operatorsLabel = UILabel()
-        operatorsLabel.text = "Hi"
+        operatorsLabel.text =
         operatorsLabel.textColor = .white
         operatorsLabel.textAlignment = .right
         operatorsLabel.adjustsFontForContentSizeCategory = true
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     }
     var operandsLabel: UILabel {
         let operandsLabel = UILabel()
-        operandsLabel.text = "Bye"
+        operandsLabel.text =
         operandsLabel.textColor = .white
         operandsLabel.textAlignment = .right
         operandsLabel.adjustsFontForContentSizeCategory = true
@@ -52,9 +53,17 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func operatorButtonPressed(_ sender: UIButton) {
+        symbolLabel.text = sender.currentTitle
+    }
+    
     @IBAction func CEButtonPressed(_ sender: UIButton) {
         inputNumber = ""
         numberLabel.text = inputNumber
+        
+        symbolLabel.text = ""
     }
+    
+    
 }
 
