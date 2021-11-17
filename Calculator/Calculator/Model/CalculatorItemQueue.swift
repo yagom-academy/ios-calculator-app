@@ -21,7 +21,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         self.outbox = outbox
     }
     
-    private var CheckDequeueImpossible: Bool {
+    private var checkDequeueImpossible: Bool {
         return inbox.isEmpty && outbox.isEmpty
     }
     
@@ -30,7 +30,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() throws -> Element {
-        if CheckDequeueImpossible {
+        if checkDequeueImpossible {
             throw CalculatorError.emptyQueue
         }
         if outbox.isEmpty {
