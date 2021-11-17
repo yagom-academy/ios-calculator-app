@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     private var currentOperator: String = ""
     private var isCalculated: Bool = false
         
+    private let maximumDigitsOfDoubleExpression = 16
+    private let limitedDigitsOfExpression = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCurrentOperand()
@@ -26,7 +29,11 @@ class ViewController: UIViewController {
         guard let operand = sender.titleLabel?.text else {
             return
         }
-                        
+                 
+        guard currentOperand.count < limitedDigitsOfExpression else {
+            return
+        }
+        
         currentOperand += operand
                 
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
@@ -38,6 +45,11 @@ class ViewController: UIViewController {
             let splited = currentOperand.split(with: ".")
             integerDigits = splited.first ?? ""
             fractionDigits = splited.last ?? ""
+        }
+        
+        if integerDigits.count > maximumDigitsOfDoubleExpression {
+            operandLabel.text = Double(currentOperand)?.description
+            return
         }
         
         guard let operandText = integerDigits.addCommaOnEveryThreeDigits() else {
