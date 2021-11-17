@@ -18,8 +18,8 @@ class Node<T> {
 }
 
 struct LinkedList<T> {
-    var front: Node<T>?
-    var rear: Node<T>?
+    private var front: Node<T>?
+    private var rear: Node<T>?
     
     init(front: Node<T>? = nil) {
         self.front = front

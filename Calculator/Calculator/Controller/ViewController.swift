@@ -8,43 +8,43 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var inputedOperatorLabel: UILabel!
-    @IBOutlet weak var inputedOperandLabel: UILabel!
-    @IBOutlet weak var toBeCalculateFormulaStackView: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var inputedOperatorLabel: UILabel!
+    @IBOutlet private weak var inputedOperandLabel: UILabel!
+    @IBOutlet private weak var toBeCalculateFormulaStackView: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var inputDotButton: UIButton!
-    @IBOutlet weak var inputZeroZeroButton: UIButton!
-    @IBOutlet weak var inputZeroButton: UIButton!
-    @IBOutlet weak var inputOneButton: UIButton!
-    @IBOutlet weak var inputTwoButton: UIButton!
-    @IBOutlet weak var inputThreeButton: UIButton!
-    @IBOutlet weak var inputFourButton: UIButton!
-    @IBOutlet weak var inputFiveButton: UIButton!
-    @IBOutlet weak var inputSixButton: UIButton!
-    @IBOutlet weak var inputSevenButton: UIButton!
-    @IBOutlet weak var inputEightButton: UIButton!
-    @IBOutlet weak var inputNineButton: UIButton!
+    @IBOutlet private weak var inputDotButton: UIButton!
+    @IBOutlet private weak var inputZeroZeroButton: UIButton!
+    @IBOutlet private weak var inputZeroButton: UIButton!
+    @IBOutlet private weak var inputOneButton: UIButton!
+    @IBOutlet private weak var inputTwoButton: UIButton!
+    @IBOutlet private weak var inputThreeButton: UIButton!
+    @IBOutlet private weak var inputFourButton: UIButton!
+    @IBOutlet private weak var inputFiveButton: UIButton!
+    @IBOutlet private weak var inputSixButton: UIButton!
+    @IBOutlet private weak var inputSevenButton: UIButton!
+    @IBOutlet private weak var inputEightButton: UIButton!
+    @IBOutlet private weak var inputNineButton: UIButton!
     
-    @IBOutlet weak var divideButton: UIButton!
-    @IBOutlet weak var multiplyButton: UIButton!
-    @IBOutlet weak var subtractButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var equalButton: UIButton!
+    @IBOutlet private weak var divideButton: UIButton!
+    @IBOutlet private weak var multiplyButton: UIButton!
+    @IBOutlet private weak var subtractButton: UIButton!
+    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var equalButton: UIButton!
     
-    @IBOutlet weak var allClearButton: UIButton!
-    @IBOutlet weak var cleanEntry: UIButton!
-    @IBOutlet weak var convertPositiveOrNegativeNumber: UIButton!
+    @IBOutlet private weak var allClearButton: UIButton!
+    @IBOutlet private weak var cleanEntry: UIButton!
+    @IBOutlet private weak var convertPositiveOrNegativeNumber: UIButton!
     
-    let initializeOperandLabelText = "0"
-    let initializeOperatorLabelText = ""
-    let initializeToEmptyString = ""
+    private let initializeOperandLabelText = "0"
+    private let initializeOperatorLabelText = ""
+    private let initializeToEmptyString = ""
     
-    let maximumFractionDigits = 20
-    let stackViewSpacing: CGFloat = 8
+    private let maximumFractionDigits = 20
+    private let stackViewSpacing: CGFloat = 8
     
-    var fomula: String = ""
-    var operand: String = ""
+    private var fomula: String = ""
+    private var operand: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ extension ViewController {
         scrollToBottom()
     }
     
-    @IBAction func convertPositiveOrNegative(_ sender: UIButton) {
+    @IBAction private func convertPositiveOrNegative(_ sender: UIButton) {
         if let doubleOperand = Double(operand), doubleOperand != 0 {
             operand = String(doubleOperand * -1)
         }
@@ -91,7 +91,7 @@ extension ViewController {
         inputedOperandLabel.text = operand
     }
     
-    @IBAction func equalButtonDidTap(_ sender: UIButton) {
+    @IBAction private func equalButtonDidTap(_ sender: UIButton) {
         if operand == initializeToEmptyString { return }
         
         guard let operatorLabelText = inputedOperatorLabel.text else { return }
@@ -105,7 +105,7 @@ extension ViewController {
         showCalculateResult()
     }
     
-    @IBAction func allClearDidTap(_ sender: UIButton) {
+    @IBAction private func allClearDidTap(_ sender: UIButton) {
         fomula = initializeToEmptyString
         operand = initializeToEmptyString
         
@@ -115,7 +115,7 @@ extension ViewController {
         removeSubView(from: toBeCalculateFormulaStackView)
     }
     
-    @IBAction func cleanEntryDidTap(_ sender: UIButton) {
+    @IBAction private func cleanEntryDidTap(_ sender: UIButton) {
         operand = initializeToEmptyString
         inputedOperandLabel.text = initializeOperandLabelText
     }
@@ -123,7 +123,7 @@ extension ViewController {
 
 // MARK: - View Method
 extension ViewController {
-    func addStackView(operatorLabelText: String) {
+    private func addStackView(operatorLabelText: String) {
         do {
             let operandLabelText = try numberFormatterFor(numberForCalculate: operand)
             let stackView = makeStackView(operatorLabelText: operatorLabelText, operandLabelText: operandLabelText)
@@ -134,7 +134,7 @@ extension ViewController {
         }
     }
     
-    func makeStackView(operatorLabelText: String?, operandLabelText: String?) -> UIStackView {
+    private func makeStackView(operatorLabelText: String?, operandLabelText: String?) -> UIStackView {
         let stackView = UIStackView()
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
@@ -149,11 +149,11 @@ extension ViewController {
         return stackView
     }
     
-    func removeSubView(from stackView: UIStackView) {
+    private func removeSubView(from stackView: UIStackView) {
         stackView.subviews.forEach { view in view.removeFromSuperview() }
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         scrollView.layoutIfNeeded()
         
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
@@ -164,7 +164,7 @@ extension ViewController {
     
 // MARK: - Model Method
 extension ViewController {
-    func showCalculateResult() {
+    private func showCalculateResult() {
         var parser = ExpressionParser.parse(from: fomula)
         
         do{
