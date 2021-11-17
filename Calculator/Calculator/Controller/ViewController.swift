@@ -102,7 +102,7 @@ extension ViewController {
             hasCalculated.toggle()
             removeFormulaView()
         }
-        removeFormulaLabel()
+        currentOperand = "0"
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
