@@ -71,11 +71,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func CEButtonPressed(_ sender: UIButton) {
-        inputNumber = ""
-        numberLabel.text = inputNumber
-        
-        symbolLabel.text = ""
-//        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        initializeNumberLabel()
     }
     
     @IBAction func dotButtonPressed(_ sender: UIButton) {
@@ -101,9 +97,19 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber
     }
     
+    @IBAction func ACButtonPressed(_ sender: UIButton) {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        initializeNumberLabel()
+        initializeSymbolLabel()
+    }
+    
     func initializeNumberLabel() {
         inputNumber.removeAll()
         numberLabel.text?.removeAll()
+    }
+    
+    func initializeSymbolLabel() {
+        symbolLabel.text?.removeAll()
     }
     
     func isContainDot(text: String) -> Bool {
