@@ -240,14 +240,10 @@ extension UIStackView {
     var toString: String {
         var inputValues = [String]()
         self.arrangedSubviews.forEach{ view in
-            guard let subview = view as? UIStackView else {
-                return
-            }
-            subview.arrangedSubviews.forEach{ view in
-                guard let label = view as? UILabel else {
-                    return
-                }
-                guard let input = label.text else {
+            let subview = view as? UIStackView
+            subview?.arrangedSubviews.forEach{ view in
+                let label = view as? UILabel
+                guard let input = label?.text else {
                     return
                 }
                 inputValues.append(input)
