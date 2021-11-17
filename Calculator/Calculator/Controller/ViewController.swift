@@ -121,11 +121,10 @@ class ViewController: UIViewController {
         
         finalExpression += currentOperand
         finalExpression += " \(`operator`) "
-        
-        resetCurrentOperand()
-        
         currentOperator = `operator`
         operatorLabel.text = `operator`
+        
+        resetCurrentOperand()
     }
     
     @IBAction private func touchUpEqualButton(_ sender: Any) {
