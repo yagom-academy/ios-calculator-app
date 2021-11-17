@@ -6,33 +6,28 @@ struct Formula {
         operandsQueue.enqueue(item)
     }
     
-    mutating func dequeueFromOperandsQueue() -> CalculateItem? {
-        return operandsQueue.dequeue()
+    mutating func dequeueFromOperandsQueue() -> Double? {
+        return operandsQueue.dequeue() as? Double
     }
     
     mutating func enqueueToOperatorsQueue(_ item: Operator) {
         operatorsQueue.enqueue(item)
     }
     
-    mutating func dequeueFromOperatorsQueue() -> CalculateItem? {
-        return operatorsQueue.dequeue()
+    mutating func dequeueFromOperatorsQueue() -> Operator? {
+        return operatorsQueue.dequeue() as? Operator
     }
 
-    func result() -> Double {
-        let operands: [Double] = operandsQueue.allOperands()
-        let operators: [Operator] = operatorsQueue.allOperators()
-        
-        guard var result = operands.first else {
+    mutating func result() -> Double {
+        guard var result = dequeueFromOperandsQueue() else {
             return 0
         }
         
-        for (index, `operator`) in operators.enumerated() {
-            guard index+1 < operands.count else { break }
-            
-            let operand = operands[index+1]
+        while let `operator` = dequeueFromOperatorsQueue(),
+              let operand = dequeueFromOperandsQueue() {
             result = `operator`.calculate(lhs: result, rhs: operand)
         }
-
+        
         return result
     }
 }
