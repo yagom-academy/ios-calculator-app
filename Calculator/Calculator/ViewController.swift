@@ -122,7 +122,7 @@ extension ViewController {
         initAllDisplay()
     }
     
-    @IBAction private func touchUpClearError(_ sender: UIButton) {
+    @IBAction private func touchUpClearEntry(_ sender: UIButton) {
         initDisplayOperand()
         calculatorManager.setDisplayingResultStatus(to: false)
     }
