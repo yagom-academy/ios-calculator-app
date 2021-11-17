@@ -11,7 +11,14 @@ class ViewController: UIViewController {
     @IBOutlet var currentOperator: UILabel!
     @IBOutlet var currentResult: UILabel!
 
-    @IBAction func hitButton() {
+    @IBOutlet var operandsButton: UIButton!
+    @IBOutlet var operatorsButtonL: UIButton!
+    @IBOutlet var acButton: UIButton!
+    @IBOutlet var ceButton:
+    UIButton!
+    @IBOutlet var positiveOrNegativeButton: UIButton!
+    
+    @IBAction func hitButton(_ sender: UIButton) {
         
     }
     
