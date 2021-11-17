@@ -346,26 +346,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="sbh-wC-koF" id="P8G-Wv-j0G"/>
                         <outlet property="arithmetic" destination="HPC-iy-qdm" id="SQw-2B-xgQ"/>
                         <outlet property="calculationHistoryScrollView" destination="BOT-7g-vxv" id="rBO-nF-9fT"/>
                         <outlet property="calculationHistoryStackView" destination="XRe-QE-UJf" id="YaP-Vk-zal"/>
-                        <outlet property="divideButton" destination="Tfz-eM-jll" id="Eby-R6-qUz"/>
-                        <outlet property="dotButton" destination="h8q-5h-bnb" id="yVt-p8-CfJ"/>
-                        <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="XDJ-mo-lkN"/>
-                        <outlet property="eightButton" destination="xgT-2D-A49" id="obA-QF-8Be"/>
                         <outlet property="expression" destination="Lwz-OF-XHD" id="fNO-rD-AFe"/>
-                        <outlet property="fiveButton" destination="vpW-df-OLm" id="MRV-tz-l8X"/>
-                        <outlet property="fourButton" destination="hQm-yz-XvG" id="TBc-iu-aIm"/>
-                        <outlet property="multiplyButton" destination="811-Pz-An6" id="jzE-R8-ehQ"/>
-                        <outlet property="nineButton" destination="zcj-xJ-ruw" id="zqw-Dw-YAJ"/>
-                        <outlet property="oneButton" destination="nCE-qB-NiN" id="IEx-1k-yPH"/>
-                        <outlet property="sevenButton" destination="L6z-2G-Gar" id="Obj-lh-ZW6"/>
-                        <outlet property="sixButton" destination="OaY-Mw-CPv" id="SM9-PX-hlk"/>
-                        <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="x1B-sv-ckr"/>
-                        <outlet property="threeButton" destination="X8H-iH-tSd" id="kTq-ST-GTh"/>
-                        <outlet property="twoButton" destination="Rif-2S-UU2" id="WMr-WX-xGw"/>
-                        <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="KNP-Ol-Bin"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

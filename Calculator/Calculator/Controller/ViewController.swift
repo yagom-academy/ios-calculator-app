@@ -7,24 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet private weak var zeroButton: UIButton!
-    @IBOutlet private weak var doubleZeroButton: UIButton!
-    @IBOutlet private weak var dotButton: UIButton!
-    @IBOutlet private weak var oneButton: UIButton!
-    @IBOutlet private weak var twoButton: UIButton!
-    @IBOutlet private weak var threeButton: UIButton!
-    @IBOutlet private weak var fourButton: UIButton!
-    @IBOutlet private weak var fiveButton: UIButton!
-    @IBOutlet private weak var sixButton: UIButton!
-    @IBOutlet private weak var sevenButton: UIButton!
-    @IBOutlet private weak var eightButton: UIButton!
-    @IBOutlet private weak var nineButton: UIButton!
-    
-    @IBOutlet private weak var divideButton: UIButton!
-    @IBOutlet private weak var multiplyButton: UIButton!
-    @IBOutlet private weak var subtractButton: UIButton!
-    @IBOutlet private weak var addButton: UIButton!
-    
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     @IBOutlet private weak var calculationHistoryStackView: UIStackView!
     @IBOutlet private weak var expression: UILabel!
@@ -80,7 +62,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard let `operator` = matchOperatorButton(sender: sender) else {
+        guard let `operator` = sender.titleLabel?.text else {
             return
         }
     
@@ -168,21 +150,6 @@ class ViewController: UIViewController {
         }
         
         resetCurrentOperand()
-    }
-    
-    private func matchOperatorButton(sender: UIButton) -> String? {
-        switch sender {
-        case addButton:
-            return "+"
-        case subtractButton:
-            return "−"
-        case divideButton:
-            return "÷"
-        case multiplyButton:
-            return "×"
-        default:
-            return nil
-        }
     }
     
     private func addCalculationHistory(operandsText: String, operatorText: String) {
