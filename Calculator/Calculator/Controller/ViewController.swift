@@ -69,6 +69,9 @@ extension ViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard currentOperand != "NaN" else {
+            return
+        }
         guard isNotZero else {
             operatorLabel.text = sender.titleLabel?.text
             return
@@ -104,6 +107,7 @@ extension ViewController {
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         removeFormulaLabel()
         removeFormulaView()
+        hasCalculated = false
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
@@ -145,7 +149,18 @@ extension ViewController {
             let calcuatorResult = try formula.result()
             currentOperand = setUpNumberFormat(for: calcuatorResult)
         } catch let error as CalculatorError {
-            print(error.description)
+            switch error {
+            case .notNumber:
+                currentOperand = "NaN"
+                hasCalculated.toggle()
+                return
+            case .queueNotFound:
+                return
+            case .wrongOperand:
+                return
+            case .wrongOperator:
+                return
+            }
         } catch let error {
             print(error.localizedDescription)
         }
