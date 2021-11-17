@@ -42,12 +42,12 @@ class ViewController: UIViewController {
     
     @IBAction func hitACButton(_ sender: UIButton) {
         stringToCalculate.removeAll()
-        currentValue.text = "0"
+        currentValue.text = initialValue
     }
     
     @IBAction func hitCEButton(_ sender: UIButton) {
         stringToCalculate.removeLast()
-        currentResult.text = "0"
+        currentResult.text = initialValue
     }
     
     
