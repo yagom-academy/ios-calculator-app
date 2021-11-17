@@ -126,6 +126,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4816D1992744F173001F2239 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4816D19A2744F17C001F2239 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4825E89E273E942B00E2CD09 /* extension.swift */,
+				48C16C4D273916BC006E1BBC /* Calculator.swift */,
+				481FCCA9273CE96000349B74 /* LinkedList.swift */,
+				481FCCAB273CEDC900349B74 /* Formula.swift */,
+				4825E89C273E93C700E2CD09 /* ExpressionParser.swift */,
+				48B95108273D1A5B0009B8E3 /* Operator.swift */,
+				4825E8A0273E958E00E2CD09 /* Error.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4816D19B2744F186001F2239 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		4825E8A7273EB68D00E2CD09 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,19 +209,9 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				4825E89E273E942B00E2CD09 /* extension.swift */,
-				48C16C4D273916BC006E1BBC /* Calculator.swift */,
-				481FCCA9273CE96000349B74 /* LinkedList.swift */,
-				481FCCAB273CEDC900349B74 /* Formula.swift */,
-				4825E89C273E93C700E2CD09 /* ExpressionParser.swift */,
-				48B95108273D1A5B0009B8E3 /* Operator.swift */,
-				4825E8A0273E958E00E2CD09 /* Error.swift */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				4816D19B2744F186001F2239 /* Controller */,
+				4816D19A2744F17C001F2239 /* Model */,
+				4816D1992744F173001F2239 /* View */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
