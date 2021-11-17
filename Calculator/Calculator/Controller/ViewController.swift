@@ -13,8 +13,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
+    private var currentOperand: String {
+        get {
+            guard let operand = operandLabel.text else {
+                return ""
+            }
+            return operand
+        }
+        set {
+            operandLabel.text = newValue
+        }
+    }
+    
+    private var currentOperator: String {
+        get {
+            guard let `operator` = operatorLabel.text else {
+                return ""
+            }
+            return `operator`
+        }
+        set {
+            operatorLabel.text = newValue
+        }
+    }
+    
     private var isNotZero: Bool {
-        operandLabel.text != "0"
+        currentOperand != "0"
     }
     
     override func viewDidLoad() {
@@ -26,17 +50,17 @@ class ViewController: UIViewController {
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard let currentOperandButtonText = sender.titleLabel?.text else {
+        guard let newOperand = sender.titleLabel?.text else {
             return
         }
-        guard isNotZero || currentOperandButtonText != "00" else {
+        guard isNotZero || newOperand != "00" else {
             return
         }
         guard isNotZero else {
-            operandLabel.text = currentOperandButtonText
+            currentOperand = newOperand
             return
         }
-        operandLabel.text = operandLabel.text! + currentOperandButtonText
+        currentOperand = currentOperand + newOperand
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
@@ -44,18 +68,18 @@ extension ViewController {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
-        guard let currentOperatorButtonText = sender.titleLabel?.text else {
+        guard let newOperator = sender.titleLabel?.text else {
             return
         }
-        let formula = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
+        let formula = addFormula(operand: currentOperand, operator: currentOperator)
         calculatorStackView.addArrangedSubview(formula)
-        operandLabel.text = "0"
-        operatorLabel.text = currentOperatorButtonText
+        currentOperand = "0"
+        currentOperator = newOperator
         scrollToBottom(calculatorScrollView)
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        guard isNotZero || operatorLabel.text != "" else {
+        guard isNotZero || currentOperand != "" else {
             return
         }
         removeFormulaLabel()
@@ -67,44 +91,44 @@ extension ViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        let hasDotNotIncluded = operandLabel.text?.contains(".") == false
+        let hasDotNotIncluded = currentOperand.contains(".") == false
         guard hasDotNotIncluded else {
             return
         }
-        guard let currentOperandButtonText = sender.titleLabel?.text else {
+        guard let newOperand = sender.titleLabel?.text else {
             return
         }
-        operandLabel.text! += currentOperandButtonText
+        currentOperand = currentOperand + newOperand
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
         guard isNotZero else {
             return
         }
-        let hasMinusNotIncluded = operandLabel.text!.contains("-") == false
+        let hasMinusNotIncluded = currentOperand.contains("-") == false
         guard hasMinusNotIncluded else {
-            operandLabel.text!.remove(at: operandLabel.text!.startIndex)
+            currentOperand.remove(at: currentOperand.startIndex)
             return
         }
-        operandLabel.text = "-" + operandLabel.text!
+        currentOperand = "-" + currentOperand
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
-        guard operatorLabel.text != "" else {
+        guard currentOperator != "" else {
             return
         }
-        let formulaStackView = addFormula(operand: operandLabel.text!, operator: operatorLabel.text!)
+        let formulaStackView = addFormula(operand: currentOperand, operator: currentOperator)
         calculatorStackView.addArrangedSubview(formulaStackView)
         var formula = ExpressionParser.parse(from: calculatorStackView.toString)
         do {
             let calcuatorResult = try formula.result()
-            operandLabel.text = setUpNumberFormat(for: calcuatorResult)
+            currentOperand = setUpNumberFormat(for: calcuatorResult)
         } catch let error as CalculatorError {
             print(error.description)
         } catch let error {
             print(error.localizedDescription)
         }
-        operatorLabel.text = ""
+        currentOperator = ""
     }
 }
 // MARK: Formula Stack View Related
@@ -112,14 +136,14 @@ extension ViewController {
     private func addFormula(operand: String, operator: String) -> UIStackView {
         let formulaStackView = UIStackView()
         let operandLabel = UILabel()
-        operandLabel.text = operand
+        currentOperand = operand
         guard calculatorStackView.subviews.count > 0 else {
             setUpFormulaLabel(of: operandLabel)
             formulaStackView.addArrangedSubview(operandLabel)
             return formulaStackView
         }
         let operatorLabel = UILabel()
-        operatorLabel.text = `operator`
+        currentOperator = `operator`
         setUpFormulaLabel(of: operatorLabel)
         setUpFormulaLabel(of: operandLabel)
         formulaStackView.axis = .horizontal
@@ -152,8 +176,8 @@ extension ViewController {
     }
     
     private func removeFormulaLabel() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        currentOperand = "0"
+        currentOperator = ""
     }
 }
 // MARK: Calculation Result Related
