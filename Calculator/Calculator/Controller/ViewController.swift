@@ -26,6 +26,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
+        if isCalculated {
+            resetToInitialState()
+        }
+        
         guard let operand = sender.titleLabel?.text else {
             return
         }
