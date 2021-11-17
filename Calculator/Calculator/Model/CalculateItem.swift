@@ -1,7 +1,7 @@
 import Foundation
 
 enum OperatorError: Error {
-    case divideError
+    case divideByZero
 }
 
 protocol CalculateItem {
@@ -41,7 +41,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
-            throw OperatorError.divideError
+            throw OperatorError.divideByZero
         }
         return lhs / rhs
     }
