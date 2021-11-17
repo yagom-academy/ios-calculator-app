@@ -13,18 +13,18 @@ struct Formula {
     
     mutating func result() throws -> Double {
         guard let lhsOperand = operands.dequeue() else {
-            throw OperatorQueueError.NoElement
+            throw CalculatorQueueError.NoElement
         }
         
         var resultOfCaculate = lhsOperand
         
         while operands.countAllItem() != 0 {
             guard let nextOperand = operands.dequeue() else {
-                throw OperatorQueueError.NoElement
+                throw CalculatorQueueError.NoElement
             }
             
             guard let `operator` = operators.dequeue() else {
-                throw OperatorQueueError.NoElement
+                throw CalculatorQueueError.NoElement
             }
             
             resultOfCaculate = try `operator`.calculate(lhs: resultOfCaculate, rhs: nextOperand)

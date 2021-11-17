@@ -13,8 +13,8 @@
 		53893F812742B68100E64CAB /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F802742B68100E64CAB /* OperatorTests.swift */; };
 		53893F832742B69000E64CAB /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F822742B69000E64CAB /* Operator.swift */; };
 		53893F842742B69C00E64CAB /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F822742B69000E64CAB /* Operator.swift */; };
-		53893F872743696700E64CAB /* OperatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F862743696700E64CAB /* OperatorError.swift */; };
-		53893F8827437FAD00E64CAB /* OperatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F862743696700E64CAB /* OperatorError.swift */; };
+		53893F872743696700E64CAB /* OperandsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F862743696700E64CAB /* OperandsError.swift */; };
+		53893F8827437FAD00E64CAB /* OperandsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F862743696700E64CAB /* OperandsError.swift */; };
 		53893F8B2743843800E64CAB /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F8A2743843800E64CAB /* Extension+Double.swift */; };
 		53893F8F2743857100E64CAB /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F8E2743857100E64CAB /* Extension+String.swift */; };
 		53893F9127438ADF00E64CAB /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F9027438ADF00E64CAB /* ExpressionParser.swift */; };
@@ -25,8 +25,8 @@
 		53893F992743931C00E64CAB /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F982743931C00E64CAB /* FormulaTests.swift */; };
 		53893F9C2743A90000E64CAB /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F8A2743843800E64CAB /* Extension+Double.swift */; };
 		53893F9D2743A90200E64CAB /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F8E2743857100E64CAB /* Extension+String.swift */; };
-		53893F9F2743AAAE00E64CAB /* OperatorQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F9E2743AAAE00E64CAB /* OperatorQueueError.swift */; };
-		53893FA02743AAB000E64CAB /* OperatorQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F9E2743AAAE00E64CAB /* OperatorQueueError.swift */; };
+		53893F9F2743AAAE00E64CAB /* CalculatorQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F9E2743AAAE00E64CAB /* CalculatorQueueError.swift */; };
+		53893FA02743AAB000E64CAB /* CalculatorQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53893F9E2743AAAE00E64CAB /* CalculatorQueueError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -52,14 +52,14 @@
 		532A98EB273A686D00EBB9B7 /* CalculatorQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorQueue.swift; sourceTree = "<group>"; };
 		53893F802742B68100E64CAB /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		53893F822742B69000E64CAB /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
-		53893F862743696700E64CAB /* OperatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorError.swift; sourceTree = "<group>"; };
+		53893F862743696700E64CAB /* OperandsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperandsError.swift; sourceTree = "<group>"; };
 		53893F8A2743843800E64CAB /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 		53893F8E2743857100E64CAB /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		53893F9027438ADF00E64CAB /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		53893F9227438B4800E64CAB /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		53893F9427438E1A00E64CAB /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		53893F982743931C00E64CAB /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
-		53893F9E2743AAAE00E64CAB /* OperatorQueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorQueueError.swift; sourceTree = "<group>"; };
+		53893F9E2743AAAE00E64CAB /* CalculatorQueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorQueueError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,8 +134,8 @@
 		53893F85274368FD00E64CAB /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				53893F862743696700E64CAB /* OperatorError.swift */,
-				53893F9E2743AAAE00E64CAB /* OperatorQueueError.swift */,
+				53893F862743696700E64CAB /* OperandsError.swift */,
+				53893F9E2743AAAE00E64CAB /* CalculatorQueueError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -280,13 +280,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53893F8827437FAD00E64CAB /* OperatorError.swift in Sources */,
+				53893F8827437FAD00E64CAB /* OperandsError.swift in Sources */,
 				532A98E1273A676300EBB9B7 /* CalculatorQueueTests.swift in Sources */,
 				53893F9527438E1A00E64CAB /* ExpressionParserTests.swift in Sources */,
 				53893F842742B69C00E64CAB /* Operator.swift in Sources */,
 				53893F9C2743A90000E64CAB /* Extension+Double.swift in Sources */,
 				53893F992743931C00E64CAB /* FormulaTests.swift in Sources */,
-				53893FA02743AAB000E64CAB /* OperatorQueueError.swift in Sources */,
+				53893FA02743AAB000E64CAB /* CalculatorQueueError.swift in Sources */,
 				53893F812742B68100E64CAB /* OperatorTests.swift in Sources */,
 				53893F9D2743A90200E64CAB /* Extension+String.swift in Sources */,
 				53893F9627438E2800E64CAB /* ExpressionParser.swift in Sources */,
@@ -301,8 +301,8 @@
 			files = (
 				53893F8F2743857100E64CAB /* Extension+String.swift in Sources */,
 				53893F9127438ADF00E64CAB /* ExpressionParser.swift in Sources */,
-				53893F9F2743AAAE00E64CAB /* OperatorQueueError.swift in Sources */,
-				53893F872743696700E64CAB /* OperatorError.swift in Sources */,
+				53893F9F2743AAAE00E64CAB /* CalculatorQueueError.swift in Sources */,
+				53893F872743696700E64CAB /* OperandsError.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				53893F832742B69000E64CAB /* Operator.swift in Sources */,
