@@ -22,10 +22,18 @@ class ViewController: UIViewController {
     var inputOperandValues: [String] = []
     
     @IBAction func hitOperandButton(_ sender: UIButton) {
-        guard let inputButtenTitle = sender.titleLabel?.text else {
+        guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        inputOperandValues.append(inputButtenTitle)
+        
+        guard !inputOperandValues.isEmpty || inputButtonTitle != initialValue else {
+            return
+        }
+        guard inputButtonTitle != "00" else {
+            return
+        }
+        
+        inputOperandValues.append(inputButtonTitle)
         currentValue.text = inputOperandValues.joined()
     }
     
@@ -45,7 +53,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hitACButton(_ sender: UIButton) {
-        stringToCalculate.removeAll()
+        inputOperandValues.removeAll()
         currentOperator.text = ""
         currentValue.text = initialValue
     }
