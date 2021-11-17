@@ -155,6 +155,10 @@ extension ViewController {
                 currentOperand = error.description
                 hasCalculated.toggle()
                 return
+            case .queueNotFound:
+                print(error.description)
+                removeFormulaView()
+                return
             default:
                 print(error.description)
                 return
