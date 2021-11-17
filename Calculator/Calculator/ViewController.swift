@@ -116,7 +116,6 @@ extension ViewController {
         addFormulaToFormulas(operator: displayOperator, operand: displayOperand)
         displayOperator = currentOperandButtionTitle
         initDisplayOperand()
-        scrollToBottom(in: formulasScrollView)
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
@@ -183,10 +182,10 @@ extension ViewController {
         initDisplayFormulas()
     }
     
-    private func scrollToBottom(in scrollView: UIScrollView) {
-        let bottomOffset = CGPoint(x: 0,y: scrollView.contentSize.height
-                                    - scrollView.bounds.size.height)
-        scrollView.setContentOffset(bottomOffset, animated: true)
+    private func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0,y: self.formulasScrollView.contentSize.height
+                                    - self.formulasScrollView.bounds.size.height)
+        self.formulasScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func addFormulaToFormulas(`operator`: String, operand: String) {
@@ -211,6 +210,7 @@ extension ViewController {
         formulasStackView.addArrangedSubview(formulaRowStackView)
         
         formulasStackViewIsEmpty = false
+        scrollToBottom()
     }
     
     private func convertSign(from operand: String) -> String {
