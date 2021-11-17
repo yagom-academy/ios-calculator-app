@@ -13,8 +13,8 @@ class FormulaTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        operands = CalculateItemQueue<Double>(enqueueStack: [])
-        operators = CalculateItemQueue<Operator>(enqueueStack: [])
+        operands = CalculateItemQueue<Double>()
+        operators = CalculateItemQueue<Operator>()
     }
 
     override func tearDownWithError() throws {

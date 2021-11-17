@@ -15,7 +15,7 @@ struct CalculateItemQueue<T: CalculateItem> {
         enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    init(enqueueStack: [T]) {
+    init(enqueueStack: [T] = []) {
         self.enqueueStack = enqueueStack
     }
     
