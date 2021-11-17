@@ -24,7 +24,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         calculatorItems.removeAll()
     }
     
-    var countItems: Int {
+    var numberOfItems: Int {
         return calculatorItems.count
     }
 }

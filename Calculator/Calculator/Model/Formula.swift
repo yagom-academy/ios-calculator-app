@@ -11,7 +11,7 @@ struct Formula {
     
     mutating func result() -> Double {
         var result: Double = 0
-        while operands.countItems > 0 {
+        while operands.numberOfItems > 0 {
             let lhs = result
             guard let rhs = operands.dequeue() else { return 0 }
             
