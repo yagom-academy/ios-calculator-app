@@ -10,10 +10,10 @@ struct TogglePlusMinusButtonHandler: ButtonActionDelegate {
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
         let value = viewController.valueLabel.text ?? ""
         
-        if value.first == "-" {
+        if value.first == Operator.subtract.rawValue {
             viewController.valueLabel.text?.removeFirst()
         } else {
-            viewController.valueLabel.text = "-" + value
+            viewController.valueLabel.text = String(Operator.subtract.rawValue) + value
         }
     }
     func runActionInPhase2(viewController: ViewController, button: UIButton) {
@@ -22,10 +22,10 @@ struct TogglePlusMinusButtonHandler: ButtonActionDelegate {
     func runActionInPhase3(viewController: ViewController, button: UIButton) {
         let value = viewController.valueLabel.text ?? ""
         
-        if value.first == "-" {
+        if value.first == Operator.subtract.rawValue {
             viewController.valueLabel.text?.removeFirst()
         } else {
-            viewController.valueLabel.text = "-" + value
+            viewController.valueLabel.text = String(Operator.subtract.rawValue) + value
         }
     }
     func runActionInPhase4(viewController: ViewController, button: UIButton) {

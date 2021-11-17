@@ -9,7 +9,6 @@ struct ResultButtonHandler: ButtonActionDelegate {
     }
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
         viewController.addInputHistory()
-        viewController.addInputHistory()
         viewController.operatorLabel.text = ""
         
         let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
