@@ -72,10 +72,6 @@ extension ViewController {
         guard currentOperand != "NaN" else {
             return
         }
-        guard isNotZero else {
-            operatorLabel.text = sender.titleLabel?.text
-            return
-        }
         guard let newOperator = sender.titleLabel?.text else {
             return
         }
@@ -85,6 +81,10 @@ extension ViewController {
             addCurrentFormulaStack()
             currentOperator = newOperator
             currentOperand = "0"
+            return
+        }
+        guard isNotZero else {
+            operatorLabel.text = sender.titleLabel?.text
             return
         }
         addCurrentFormulaStack()
