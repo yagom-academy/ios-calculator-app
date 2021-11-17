@@ -78,6 +78,7 @@ extension ViewController {
         guard hasCalculated == false else {
             hasCalculated.toggle()
             removeFormulaView()
+            currentOperand = removeComma(currentOperand)
             addCurrentFormulaStack()
             currentOperator = newOperator
             currentOperand = "0"
@@ -204,6 +205,19 @@ extension ViewController {
         calculatorScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
         view.setContentOffset(bottomOffset, animated: false)
+    }
+    
+    private func removeComma(_ value: String) -> String {
+        guard value.contains(",") else {
+            return value
+        }
+        return value.reduce("", {
+            if $1 == "," {
+                return $0
+            } else {
+                return $0 + $1.description
+            }
+        })
     }
 }
 // MARK: Label Initialization Related
