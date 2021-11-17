@@ -81,7 +81,11 @@ class ViewController: UIViewController {
             return
         }
         
-        currentOperand = String(currentNumber * -1)
+        if currentNumber.isSameAfterRounded() {
+            currentOperand = String(Int(currentNumber * -1))
+        } else {
+            currentOperand = String(currentNumber * -1)
+        }
         
         if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
             operandLabel.text = String(currentNumber * -1)
