@@ -81,7 +81,7 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: true)
         
-        guard !displayOperand.contains(".") else {
+        guard !displayOperand.contains(".") && displayOperand != "NaN" else {
             return
         }
         
