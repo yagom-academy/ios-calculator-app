@@ -12,6 +12,7 @@ enum ExpressionParser {
                 $0.isNumber
                 || Operator.allCharacterCases.contains($0)
                 || $0 == " "
+                || $0 == "."
             }
             
             return input.count == filteredCharacters.count
