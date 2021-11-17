@@ -96,23 +96,24 @@ class CalculatorViewController: UIViewController {
         let stackView = UIStackView()
         
         if let `operator` = operatorLabel.text {
-            let insultingoperatingLable = UILabel()
-            insultingoperatingLable.textColor = UIColor.white
-            insultingoperatingLable.text = `operator`
+            let insertingOperatingLabel = UILabel()
+            insertingOperatingLabel.textColor = UIColor.white
+            insertingOperatingLabel.text = `operator`
+            insertingOperatingLabel.font = UIFont.preferredFont(forTextStyle: .title3)
             
-            stackView.addArrangedSubview(insultingoperatingLable)
+            stackView.addArrangedSubview(insertingOperatingLabel)
         }
         
         guard let operand = operandLabel.text else {
             return
         }
         
-        let insultinOperandLabel = UILabel()
-        insultinOperandLabel.textColor = UIColor.white
-        insultinOperandLabel.text = operand
+        let insertingOperandLabel = UILabel()
+        insertingOperandLabel.textColor = UIColor.white
+        insertingOperandLabel.text = operand
+        insertingOperandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        
-        stackView.addArrangedSubview(insultinOperandLabel)
+        stackView.addArrangedSubview(insertingOperandLabel)
         
         calculationHistoryStackView.addArrangedSubview(stackView)
         autoScrollDown()
