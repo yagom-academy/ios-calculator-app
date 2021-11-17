@@ -7,14 +7,22 @@
 
 import Foundation
 
-enum CalculatorError: Error, CustomStringConvertible {
+enum CalculatorQueueError: Error, CustomStringConvertible {
     case emptyQueue
-    case divideByZero
     
     var description: String {
         switch self {
         case .emptyQueue:
             return "Queue is Empty"
+        }
+    }
+}
+
+enum CalculateError: Error, CustomStringConvertible {
+    case divideByZero
+    
+    var description: String {
+        switch self {
         case .divideByZero:
             return "Cannot divide by zero"
         }

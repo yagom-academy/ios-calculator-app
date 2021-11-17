@@ -21,7 +21,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
             if rhs == 0 {
-                throw CalculatorError.divideByZero
+                throw CalculateError.divideByZero
             }
             return divide(lhs: lhs, rhs: rhs)
         case .multiply:
