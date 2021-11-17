@@ -40,10 +40,10 @@ class ViewController: UIViewController {
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
         endInputOperand()
-        guard let inputButtenTitle = sender.titleLabel?.text else {
+        guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        let inputValues = inputButtenTitle
+        let inputValues = inputButtonTitle
         currentOperator.text = inputValues
     }
     
