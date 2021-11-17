@@ -96,5 +96,9 @@ class ViewController: UIViewController {
             inputHistoryStackView.removeArrangedSubview($0)
         }
     }
+    
+    func clearValueLabel() {
+        valueLabel.text = "0"
+    }
 }
 
