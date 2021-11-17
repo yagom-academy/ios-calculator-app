@@ -31,22 +31,22 @@ enum Operator: Character, CaseIterable, CalculateItem {
         }
     }
     
-    func add(lhs: Double, rhs: Double) -> Double {
+    private func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
     }
     
-    func subtract(lhs: Double, rhs: Double) -> Double {
+    private func subtract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
     }
     
-    func divide(lhs: Double, rhs: Double) throws -> Double {
+    private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
             throw OperatorError.divideError
         }
         return lhs / rhs
     }
     
-    func multiply(lhs: Double, rhs: Double) -> Double {
+    private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
     }
 }

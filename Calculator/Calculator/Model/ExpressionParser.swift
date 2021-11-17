@@ -25,7 +25,7 @@ enum ExpressionParser {
         return formula
     }
 
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         var numberString = input
         
         Operator.allCases.forEach {
