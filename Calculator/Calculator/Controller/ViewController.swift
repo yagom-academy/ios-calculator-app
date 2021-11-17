@@ -175,7 +175,7 @@ extension ViewController {
         operandLabel.text = fractionDigits.isEmpty ? operandText : operandText + "." + fractionDigits
     }
     
-    @IBAction func touchUpDotButton(_ sender: UIButton) {
+    @IBAction private func touchUpDotButton(_ sender: UIButton) {
         guard let dot = sender.titleLabel?.text else {
             return
         }
