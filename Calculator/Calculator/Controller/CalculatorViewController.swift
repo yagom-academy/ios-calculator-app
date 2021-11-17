@@ -13,13 +13,22 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
+    var inputedOperand = "0"
+    var invalidCheckInputedOperand: Bool {
+        if inputedOperand.count <= 15 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         reset()
     }
     
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
-        guard let operandLabelText = operandLabel.text else {
+        guard invalidCheckInputedOperand else {
             return
         }
         
@@ -27,32 +36,35 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if operandLabelText == "0" {
+        if inputedOperand == "0" {
             if tapedNumber == "0" || tapedNumber == "00" {
                 return
             } else {
-                operandLabel.text = tapedNumber
+                inputedOperand = tapedNumber
+                operandLabel.text = inputedOperand
                 return
             }
         }
         
-        operandLabel.text = operandLabelText + tapedNumber
+        inputedOperand = inputedOperand + tapedNumber
+        operandLabel.text = changeNumberFormatter(target: inputedOperand)
+        
+        if tapedNumber == "0" {
+            operandLabel.text = inputedOperand
+        }
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text else {
+        guard !inputedOperand.contains(".") else {
             return
         }
         
-        guard !operand.contains(".") else {
-            return
-        }
-        
-        operandLabel.text = operand + "."
+        inputedOperand = inputedOperand + "."
+        operandLabel.text = inputedOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        
+        inputedOperand = "0"
         if operandLabel.text == "0" {
             operatorLabel.text = sender.titleLabel?.text
             return
@@ -87,7 +99,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func reset() {
-        operandLabel.text = "0"
+        inputedOperand = "0"
+        operandLabel.text = inputedOperand
         operatorLabel.text = ""
         allClear()
     }
@@ -126,7 +139,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func clearEntry() {
-        operandLabel.text = "0"
+        inputedOperand = "0"
+        operandLabel.text = inputedOperand
     }
     
     func autoScrollDown() {
@@ -139,6 +153,18 @@ class CalculatorViewController: UIViewController {
                                             height: self.calculationHistoryScrollView.bounds.size.height),
                                      animated: true)
         }
+    }
+    
+    func changeNumberFormatter(target: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 15
+
+        guard let number = Double(target),
+              let result = numberFormatter.string(for: number) else {
+            return ""
+        }
+        return result
     }
     
 }
