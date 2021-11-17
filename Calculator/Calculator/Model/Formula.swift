@@ -4,16 +4,17 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Character>()
     
-    func result() throws -> Double {
+    func result() -> Double {
         guard var tempValue = try? operands.deleteFromQueue() else {
-            throw ErrorCase.emptyQueue
+            return 0
         }
         while operands.linkedList.head != nil {
-            if let currentOperand = try? operands.deleteFromQueue(),
-               let currentOperator = try? operators.deleteFromQueue() {
-                let operatorCase = Operator(rawValue: currentOperator)
-                tempValue = operatorCase?.calculate(lhs: tempValue, rhs: currentOperand) ?? 0
-            }
+            guard let currentOperand = try? operands.deleteFromQueue(),
+                  let currentOperator = try? operators.deleteFromQueue(),
+                  let operatorCase = Operator(rawValue: currentOperator) else {
+                      return 0
+                  }
+            tempValue = operatorCase.calculate(lhs: tempValue, rhs: currentOperand)
         }
         return tempValue
     }

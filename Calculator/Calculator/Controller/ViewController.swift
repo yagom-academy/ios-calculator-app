@@ -64,6 +64,7 @@ class ViewController: UIViewController {
     
     @IBAction func hitACButton(_ sender: UIButton) {
         inputOperandValues.removeAll()
+        stringToCalculate.removeAll()
         currentOperator.text = ""
         currentValue.text = initialValue
     }
@@ -83,7 +84,15 @@ class ViewController: UIViewController {
         }
     }
     
-
+    @IBAction func hitEqualButton(_ sender: UIButton) {
+        endOperandInput()
+        let calculator = ExpressionParser.self
+        let resultOfDouble = calculator.parse(from: stringToCalculate.joined()).result()
+        
+        currentValue.text = String(resultOfDouble)
+        
+    }
+    
     
     
     
