@@ -71,8 +71,7 @@ extension ViewController {
         guard let newOperator = sender.titleLabel?.text else {
             return
         }
-        let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
-        calculatorStackView.addArrangedSubview(formulaStackView)
+        addCurrentFormulaStack()
         currentOperand = "0"
         currentOperator = newOperator
         scrollToBottom(calculatorScrollView)
@@ -117,8 +116,7 @@ extension ViewController {
         guard currentOperator != "" else {
             return
         }
-        let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
-        calculatorStackView.addArrangedSubview(formulaStackView)
+        addCurrentFormulaStack()
         var formula = ExpressionParser.parse(from: calculatorStackView.toString)
         do {
             let calcuatorResult = try formula.result()
@@ -133,6 +131,11 @@ extension ViewController {
 }
 // MARK: Formula Stack View Related
 extension ViewController {
+    private func addCurrentFormulaStack() {
+        let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
+        calculatorStackView.addArrangedSubview(formulaStackView)
+    }
+    
     private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
         let formulaStackView = UIStackView()
         let operandLabel = UILabel()
