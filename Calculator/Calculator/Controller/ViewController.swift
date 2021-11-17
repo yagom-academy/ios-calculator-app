@@ -29,14 +29,14 @@ extension ViewController {
         guard let currentOperandButtonText = sender.titleLabel?.text else {
             return
         }
-        guard operandLabel.text! != "0" || currentOperandButtonText != "00" else {
+        guard isNotZero || currentOperandButtonText != "00" else {
             return
         }
         guard isNotZero else {
-            operandLabel.text! = currentOperandButtonText
+            operandLabel.text = currentOperandButtonText
             return
         }
-        operandLabel.text! += currentOperandButtonText
+        operandLabel.text = operandLabel.text! + currentOperandButtonText
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
