@@ -24,7 +24,7 @@ struct Formula {
         var currentOperand = firstOperand
         let canBeCalculated = (operands.isEmpty == false) && (operators.isEmpty == false)
         guard canBeCalculated else {
-            return 0
+            throw CalculatorError.queueNotFound
         }
         repeat {
             guard let currentOperator = operators.dequeue() else {

@@ -16,7 +16,7 @@ enum CalculatorError: Error {
     var description: String {
         switch self {
         case .queueNotFound:
-            return "큐가 비어있습니다."
+            return "큐가 비어있습니다. 계산식을 추가해주세요."
         case .wrongOperator:
             return "잘못된 연산자입니다."
         case .wrongOperand:
