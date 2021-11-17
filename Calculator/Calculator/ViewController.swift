@@ -73,8 +73,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(type(of:self.inputLabel.text))
+        initializeLabels()
+    }
+    
+    func initializeLabels() {
+        inputLabel.text = "0"
+        operatorLabel.text = ""
     }
 }
 
