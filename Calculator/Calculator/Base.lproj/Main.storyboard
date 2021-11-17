@@ -341,6 +341,7 @@
                         <outlet property="clearButton" destination="RLD-dY-LOA" id="JzH-kz-AhJ"/>
                         <outlet property="dividerButton" destination="Tfz-eM-jll" id="alV-mH-grW"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="0Fg-yh-qgF"/>
+                        <outlet property="inputHistoryScrollView" destination="BOT-7g-vxv" id="eLG-Aa-ZlP"/>
                         <outlet property="inputHistoryStackView" destination="XRe-QE-UJf" id="qK3-nE-L2E"/>
                         <outlet property="multiplierButton" destination="811-Pz-An6" id="MNW-lA-pPq"/>
                         <outlet property="numberEightButton" destination="xgT-2D-A49" id="VHH-Nh-cyY"/>

@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
+    @IBOutlet weak var inputHistoryScrollView: UIScrollView!
     @IBOutlet weak var inputHistoryStackView: UIStackView!
     
     var allHistory: String {
@@ -102,6 +103,11 @@ class ViewController: UIViewController {
         inputHistory.textColor = .white
         
         inputHistoryStackView.addArrangedSubview(inputHistory)
+        
+        let scrollDestinationY = inputHistoryScrollView.contentSize.height
+        let scrollDestinationPoint = CGPoint(x: 0, y: scrollDestinationY)
+        
+        inputHistoryScrollView.setContentOffset(scrollDestinationPoint, animated: false)
     }
     
     func clearInputHistory() {
