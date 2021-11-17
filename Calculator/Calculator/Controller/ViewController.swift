@@ -25,14 +25,15 @@ class ViewController: UIViewController {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        
         guard !inputOperandValues.isEmpty || inputButtonTitle != initialValue else {
             return
         }
-        guard inputButtonTitle != "00" else {
+        guard !inputOperandValues.isEmpty || inputButtonTitle != "00" else {
             return
         }
-        
+        guard !inputOperandValues.isEmpty || inputButtonTitle != "." else {
+            return
+        }
         inputOperandValues.append(inputButtonTitle)
         currentValue.text = inputOperandValues.joined()
     }
