@@ -27,11 +27,15 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let result = Decimal(lhs) + Decimal(rhs)
+        
+        return result.doubleValue
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let result = Decimal(lhs) - Decimal(rhs)
+        
+        return result.doubleValue
     }
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
@@ -39,10 +43,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
             throw OperationError.dividedByZero
         }
         
-        return lhs / rhs
+        let result = Decimal(lhs) / Decimal(rhs)
+        
+        return result.doubleValue
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let result = Decimal(lhs) * Decimal(rhs)
+        
+        return result.doubleValue
     }
 }
