@@ -193,21 +193,28 @@ extension ViewController {
             return
         }
         
-        guard let operandText = String(currentNumber * -1).addCommaOnEveryThreeDigits() else {
+        guard var operand = operandLabel.text else {
             return
         }
         
-        if currentNumber.isSameAfterRounded() {
-            currentOperand = String(Int(currentNumber * -1))
+        if operand.contains("-") {
+            operand.removeFirst()
         } else {
-            currentOperand = String(currentNumber * -1)
+            operand = "-" + operand
         }
         
-        if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
-            operandLabel.text = String(currentNumber * -1)
-        } else {
-            operandLabel.text = operandText
+        operandLabel.text = operand
+                
+        guard operand.contains("e") else {
+            currentOperand = operand.replacingOccurrences(of: ",", with: "")
+            return
         }
+        
+        if currentOperand.contains("-") {
+            currentOperand.removeFirst()
+        } else {
+            currentOperand = "-" + currentOperand
+        }        
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
