@@ -86,6 +86,7 @@ class ViewController: UIViewController {
         } else {
             inputHistory.text = "\(operatorText) \(valueText)"
         }
+        inputHistory.textColor = .white
         
         inputHistoryStackView.addArrangedSubview(inputHistory)
     }
