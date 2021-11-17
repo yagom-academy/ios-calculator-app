@@ -303,6 +303,31 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="adderButton" destination="sbh-wC-koF" id="nD9-op-Z1W"/>
+                        <outlet property="allClearButton" destination="ped-N8-JbY" id="mgH-T2-aao"/>
+                        <outlet property="calculationListScrollView" destination="BOT-7g-vxv" id="Beq-Qq-Zsk"/>
+                        <outlet property="clearButton" destination="RLD-dY-LOA" id="JzH-kz-AhJ"/>
+                        <outlet property="currentValueLabel" destination="Lwz-OF-XHD" id="QiY-X1-kRV"/>
+                        <outlet property="dividerButton" destination="Tfz-eM-jll" id="alV-mH-grW"/>
+                        <outlet property="dotButton" destination="h8q-5h-bnb" id="0Fg-yh-qgF"/>
+                        <outlet property="multiplierButton" destination="811-Pz-An6" id="MNW-lA-pPq"/>
+                        <outlet property="numberEightButton" destination="xgT-2D-A49" id="VHH-Nh-cyY"/>
+                        <outlet property="numberFiveButton" destination="vpW-df-OLm" id="zWS-V5-yIh"/>
+                        <outlet property="numberFourButton" destination="hQm-yz-XvG" id="rEU-ea-9aU"/>
+                        <outlet property="numberNineButton" destination="zcj-xJ-ruw" id="gpK-en-e1D"/>
+                        <outlet property="numberOneButton" destination="nCE-qB-NiN" id="pi4-Ye-zuv"/>
+                        <outlet property="numberSevenButton" destination="L6z-2G-Gar" id="cFl-L4-ZOH"/>
+                        <outlet property="numberSixButton" destination="OaY-Mw-CPv" id="udv-1z-BkG"/>
+                        <outlet property="numberThreeButton" destination="X8H-iH-tSd" id="f5B-k9-ZK7"/>
+                        <outlet property="numberTwoButton" destination="Rif-2S-UU2" id="Zau-u2-562"/>
+                        <outlet property="numberZeroButton" destination="mSz-Y3-r5Z" id="bh4-j6-CQK"/>
+                        <outlet property="numberZeroZeroButton" destination="sH6-8l-kje" id="rtp-BO-r48"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="0vX-me-gCR"/>
+                        <outlet property="resultButton" destination="Daw-iX-Owl" id="hoB-37-FQ4"/>
+                        <outlet property="subtractorButton" destination="nTe-Sn-Pvd" id="S5F-zK-zIn"/>
+                        <outlet property="togglePlusMinusButton" destination="ows-U7-mNc" id="SEe-It-1Jf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
