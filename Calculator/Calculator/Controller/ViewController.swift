@@ -55,6 +55,19 @@ class ViewController: UIViewController {
         currentValue.text = initialValue
     }
     
+    @IBAction func hitCodeConversionButton(_ sender: UIButton) {
+        if currentValue.text != initialValue {
+            guard let conversionedValue = Double(currentValue.text ?? "") else {
+                return
+            }
+            currentValue.text = String(conversionedValue * -1)
+        }
+        
+    }
+    
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
