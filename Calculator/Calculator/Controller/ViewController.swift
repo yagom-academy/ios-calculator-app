@@ -43,7 +43,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
-        endOperandInput()
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
@@ -51,6 +50,7 @@ class ViewController: UIViewController {
             stringToCalculate.removeLast()
             stringToCalculate.append(inputButtonTitle)
         } else {
+            endOperandInput()
             stringToCalculate.append(inputButtonTitle)
             isOperatorEnterd = true
         }
