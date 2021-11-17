@@ -1,5 +1,9 @@
 import UIKit
 struct ClearButtonHandler: ButtonActionDelegate {
+    static let shared: ButtonActionDelegate = ClearButtonHandler()
+
+    private init() { }
+    
     func runActionInPhase0(viewController: ViewController, button: UIButton) {
         
     }

@@ -38,22 +38,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputHistoryScrollView: UIScrollView!
 
     @IBAction func numberButtonHandler(_ sender: UIButton) {
-        runButtonAction(delegate: NumberButtonHandler(), button: sender)
+        runButtonAction(delegate: NumberButtonHandler.shared, button: sender)
     }
     @IBAction func operatorButtonHandler(_ sender: UIButton) {
-        runButtonAction(delegate: OperatorButtonHandler(), button: sender)
+        runButtonAction(delegate: OperatorButtonHandler.shared, button: sender)
     }
     @IBAction func allClearButtonHandler(_ sender: UIButton) {
-        runButtonAction(delegate: AllClearButtonHandler(), button: sender)
+        runButtonAction(delegate: AllClearButtonHandler.shared, button: sender)
     }
     @IBAction func clearButtonHandler(_ sender: UIButton) {
-        runButtonAction(delegate: ClearButtonHandler(), button: sender)
+        runButtonAction(delegate: ClearButtonHandler.shared, button: sender)
     }
     @IBAction func togglePlusMinusButtonHandler(_ sender: UIButton) {
-        runButtonAction(delegate: TogglePlusMinusButtonHandler(), button: sender)
+        runButtonAction(delegate: TogglePlusMinusButtonHandler.shared, button: sender)
     }
     @IBAction func resultButtonHandler(_ sender: UIButton) {
-        runButtonAction(delegate: ResultButtonHandler(), button: sender)
+        runButtonAction(delegate: ResultButtonHandler.shared, button: sender)
     }
     
     func runButtonAction(delegate: ButtonActionDelegate, button: UIButton) {
@@ -73,7 +73,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        print(type(of:self.inputLabel.text))
     }
 }
 

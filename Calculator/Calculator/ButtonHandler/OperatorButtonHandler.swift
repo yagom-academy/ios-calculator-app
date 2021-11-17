@@ -1,5 +1,9 @@
 import UIKit
 struct OperatorButtonHandler: ButtonActionDelegate {
+    static let shared: ButtonActionDelegate = OperatorButtonHandler()
+
+    private init() { }
+    
     func runActionInPhase0(viewController: ViewController, button: UIButton) {
         
     }

@@ -1,5 +1,9 @@
 import UIKit
 struct ResultButtonHandler: ButtonActionDelegate {
+    static let shared: ButtonActionDelegate = ResultButtonHandler()
+
+    private init() { }
+    
     func runActionInPhase0(viewController: ViewController, button: UIButton) {
         
     }
