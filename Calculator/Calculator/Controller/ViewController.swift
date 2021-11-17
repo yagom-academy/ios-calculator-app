@@ -51,7 +51,10 @@ class ViewController: UIViewController {
 
         inputedOperandLabel.text = initializeOperandLabelText
     }
+}
     
+// MARK: - IBAction Method
+extension ViewController {
     @IBAction private func numberDidTap(_ sender: UIButton) {
         operand += operands(for: sender)
         
@@ -88,14 +91,6 @@ class ViewController: UIViewController {
         scrollToBottom()
     }
     
-    func scrollToBottom() {
-        scrollView.layoutIfNeeded()
-        
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
-        
-        scrollView.setContentOffset(bottomOffset, animated: true)
-    }
-    
     @IBAction func convertPositiveOrNegative(_ sender: UIButton) {
         if let doubleOperand = Double(operand), doubleOperand != 0 {
             operand = String(doubleOperand * -1)
@@ -125,16 +120,30 @@ class ViewController: UIViewController {
         showCalculateResult()
     }
     
-    func showCalculateResult() {
-        var parser = ExpressionParser.parse(from: fomula)
+    @IBAction func allClearDidTap(_ sender: UIButton) {
+        fomula = initializeToEmptyString
+        operand = initializeToEmptyString
         
-        do{
-            inputedOperandLabel.text = try numberFormatterFor(numberForCalculate: try String(parser.result()))
-        } catch CalculateError.notANumber {
-            inputedOperandLabel.text = CalculateError.notANumber.message
-        } catch let error {
-            print(error)
-        }
+        inputedOperatorLabel.text = initializeOperatorLabelText
+        inputedOperandLabel.text = initializeOperandLabelText
+        
+        removeSubView(from: toBeCalculateFormulaStackView)
+    }
+    
+    @IBAction func cleanEntryDidTap(_ sender: UIButton) {
+        operand = initializeToEmptyString
+        inputedOperandLabel.text = initializeOperandLabelText
+    }
+}
+
+// MARK: - View Method
+extension ViewController {
+    func scrollToBottom() {
+        scrollView.layoutIfNeeded()
+        
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
+        
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     func makeStackView(operatorLabelText: String?, operandLabelText: String?) -> UIStackView {
@@ -155,20 +164,20 @@ class ViewController: UIViewController {
     func removeSubView(from stackView: UIStackView) {
         stackView.subviews.forEach { view in view.removeFromSuperview() }
     }
+}
     
-    @IBAction func allClearDidTap(_ sender: UIButton) {
-        fomula = initializeToEmptyString
-        operand = initializeToEmptyString
+// MARK: - Model Method
+extension ViewController {
+    func showCalculateResult() {
+        var parser = ExpressionParser.parse(from: fomula)
         
-        inputedOperatorLabel.text = initializeOperatorLabelText
-        inputedOperandLabel.text = initializeOperandLabelText
-        
-        removeSubView(from: toBeCalculateFormulaStackView)
-    }
-    
-    @IBAction func cleanEntryDidTap(_ sender: UIButton) {
-        operand = initializeToEmptyString
-        inputedOperandLabel.text = initializeOperandLabelText
+        do{
+            inputedOperandLabel.text = try numberFormatterFor(numberForCalculate: try String(parser.result()))
+        } catch CalculateError.notANumber {
+            inputedOperandLabel.text = CalculateError.notANumber.message
+        } catch let error {
+            print(error)
+        }
     }
     
     private func numberFormatterFor(numberForCalculate: String) throws -> String? {
