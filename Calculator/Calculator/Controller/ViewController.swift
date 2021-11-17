@@ -4,6 +4,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var numberLabel: UILabel!
+    private var inputNumber = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,4 +39,17 @@ class ViewController: UIViewController {
         formulaStackView.addArrangedSubview(operandsLabel)
         return formulaStackView
     }
+    
+    @IBAction func numberButtonPressed(_ sender: UIButton) {
+        if sender.currentTitle == "0" || sender.currentTitle == "00" {
+            guard inputNumber.isEmpty == false else { return }
+            
+            inputNumber += sender.currentTitle ?? ""
+            numberLabel.text = inputNumber
+        } else {
+            inputNumber += sender.currentTitle ?? ""
+            numberLabel.text = inputNumber
+        }
+    }
 }
+
