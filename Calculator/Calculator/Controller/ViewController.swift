@@ -97,7 +97,8 @@ class ViewController: UIViewController {
             text = "-" + text
         }
         
-        numberLabel.text = text
+        inputNumber = text
+        numberLabel.text = inputNumber
     }
     
     func initializeNumberLabel() {
