@@ -3,9 +3,13 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let formula = Formula()
-        
         let componentsOfOperands = Self.componentsByOperators(from: input)
-        let _ = componentsOfOperands.map { formula.operands.enqueue(value: Double($0)!) }
+        
+        componentsOfOperands.forEach { operand in
+            if let operandInDouble = Double(operand) {
+                formula.operands.enqueue(value: operandInDouble)
+            }
+        }
         
         for characterOfInput in input {
             if let symbol = Operator(rawValue: characterOfInput) {
