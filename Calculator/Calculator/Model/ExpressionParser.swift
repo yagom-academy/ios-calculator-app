@@ -2,7 +2,7 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var formula = Formula()
+        let formula = Formula()
         
         let componentsOfOperands = Self.componentsByOperators(from: input)
         let _ = componentsOfOperands.map { formula.operands.enqueue(value: Double($0)!) }
