@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     var operatorsLabel: UILabel {
         let operatorsLabel = UILabel()
-        operatorsLabel.text =
+        operatorsLabel.text = symbolLabel.text
         operatorsLabel.textColor = .white
         operatorsLabel.textAlignment = .right
         operatorsLabel.adjustsFontForContentSizeCategory = true
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     }
     var operandsLabel: UILabel {
         let operandsLabel = UILabel()
-        operandsLabel.text =
+        operandsLabel.text = numberLabel.text
         operandsLabel.textColor = .white
         operandsLabel.textAlignment = .right
         operandsLabel.adjustsFontForContentSizeCategory = true
@@ -36,8 +36,12 @@ class ViewController: UIViewController {
         formulaStackView.spacing = 8
         formulaStackView.distribution = .fill
         formulaStackView.alignment = .firstBaseline
-        formulaStackView.addArrangedSubview(operatorsLabel)
-        formulaStackView.addArrangedSubview(operandsLabel)
+        if stackView.arrangedSubviews.count == 2 {
+            formulaStackView.addArrangedSubview(operandsLabel)
+        } else {
+            formulaStackView.addArrangedSubview(operatorsLabel)
+            formulaStackView.addArrangedSubview(operandsLabel)
+        }
         return formulaStackView
     }
     
@@ -47,6 +51,7 @@ class ViewController: UIViewController {
             
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = inputNumber
+            
         } else {
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = inputNumber
@@ -54,7 +59,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        symbolLabel.text = sender.currentTitle
+        if numberLabel.text == "" {
+            symbolLabel.text = sender.currentTitle
+            initializeNumberLabel()
+        } else {
+            symbolLabel.text = sender.currentTitle
+            stackView.addArrangedSubview(formulaStackView)
+            initializeNumberLabel()
+        }
     }
     
     @IBAction func CEButtonPressed(_ sender: UIButton) {
@@ -62,8 +74,12 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber
         
         symbolLabel.text = ""
+//        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    
+    func initializeNumberLabel() {
+        inputNumber.removeAll()
+        numberLabel.text?.removeAll()
+    }
 }
 
