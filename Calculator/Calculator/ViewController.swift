@@ -58,6 +58,10 @@ extension ViewController {
             calculatorManager.setDisplayingResultStatus(to: false)
         }
         
+        if !formulasStackViewIsEmpty && displayOperator == "" {
+            return
+        }
+        
         guard let currentOperandButtonTitle = sender.currentTitle else {
             return
         }
@@ -96,10 +100,6 @@ extension ViewController {
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
         guard displayOperand != "NaN" else {
-            return
-        }
-        
-        if displayOperand == "0" && formulasStackViewIsEmpty {
             return
         }
         
@@ -200,7 +200,11 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: false)
         
-        operatorLabel.text = `operator`
+        
+        if !formulasStackViewIsEmpty {
+            operatorLabel.text = `operator`
+        }
+        
         operandLabel.text = calculatorManager.format(of: operand)
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
