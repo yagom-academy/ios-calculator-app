@@ -8,15 +8,15 @@ class StringCheckerTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        testCases.append("+123+123+123+")
-        testCases.append("*12+/123--")
+        testCases.append("+ 123 + 123 + 123 +")
+        testCases.append("* 12 + / 123 - -")
         testCases.append("")
         testCases.append("1")
-        testCases.append("1/3")
+        testCases.append("1 / 3")
         testCases.append("123z")
     }
 
-    func test_hasOnlyNumberOrOperator() {
+    func test_hasNotAbnormalCharacter() {
         let answerList = [ true,
                            true,
                            true,
@@ -25,11 +25,16 @@ class StringCheckerTests: XCTestCase {
                            false ]
         
         for index in 0..<testCases.count {
-            XCTAssertEqual(ExpressionParser.StringChecker.hasOnlyNumberOrOperator(from: testCases[index]), answerList[index], "test: \(index) was failed")
+            XCTAssertEqual(ExpressionParser.StringChecker.hasNotAbnormalCharacter(from: testCases[index]), answerList[index], "test: \(index) was failed")
         }
     }
     
-    func test_firstAndLastLetterAreNumbers() {
+    func test_firstOrLastComponentIsNotOperand() {
+        
+        let newTestCases: [[String]] = testCases.map {
+            return $0.split(with: " ")
+        }
+        
         let answerList = [ false,
                            false,
                            false,
@@ -37,8 +42,8 @@ class StringCheckerTests: XCTestCase {
                            true,
                            false ]
         
-        for index in 0..<testCases.count {
-            XCTAssertEqual(ExpressionParser.StringChecker.firstAndLastCharacterAreNumbers(from: testCases[index]), answerList[index], "test: \(index) was failed")
+        for index in 0..<newTestCases.count {
+            XCTAssertEqual(ExpressionParser.StringChecker.firstAndLastComponentAreOperands(from: newTestCases[index]), answerList[index], "test: \(index) was failed")
         }
     }
     

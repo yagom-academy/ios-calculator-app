@@ -1,47 +1,54 @@
 enum ExpressionParser {
     enum ParserError: Error {
-        case includingIncorrectCharacter
-        case firstOrLastCharacterIsNotNumber
-        case incorrectCountOfNumbersAndOperators
+        case includingAbnormalCharacter
+        case firstOrLastComponentIsNotOperand
+        case incorrectCountOfOperandsAndOperators
         case failedToInitializeFormulaInstance
     }
     
     enum StringChecker {
-        static func hasOnlyNumberOrOperator(from input: String) -> Bool {
+        static func hasNotAbnormalCharacter(from input: String) -> Bool {
             let filteredCharacters = input.filter {
-                return $0.isNumber || Operator.allCharacterCases.contains($0)
+                $0.isNumber
+                || Operator.allCharacterCases.contains($0)
+                || $0 == " "
             }
             
             return input.count == filteredCharacters.count
         }
         
-        static func firstAndLastCharacterAreNumbers(from input: String) -> Bool {
-            guard let firstCharacter = input.first,
-                  let lastCharacter = input.last else {
-                return false
-            }
+        static func firstAndLastComponentAreOperands(from components: [String]) -> Bool {
+            guard let firstComponent = components.first,
+                  let _ = Double(firstComponent) else {
+                      return false
+                  }
             
-            return firstCharacter.isNumber && lastCharacter.isNumber
+            guard let lastComponent = components.last,
+                  let _ = Double(lastComponent) else {
+                      return false
+                  }
+            
+            return true
         }
     }
 }
 
 extension ExpressionParser {
-    static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
-        guard StringChecker.hasOnlyNumberOrOperator(from: input) else {
-            return .failure(.includingIncorrectCharacter)
-        }
-        
-        guard StringChecker.firstAndLastCharacterAreNumbers(from: input) else {
-            return .failure(.firstOrLastCharacterIsNotNumber)
+    static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> { 
+        guard StringChecker.hasNotAbnormalCharacter(from: input) else {
+            return .failure(.includingAbnormalCharacter)
         }
         
         let inputComponents = ExpressionParser.componentsByOperators(from: input)
+        
+        guard StringChecker.firstAndLastComponentAreOperands(from: inputComponents) else {
+            return .failure(.firstOrLastComponentIsNotOperand)
+        }
                    
         let (operands, operators) = separateOperandsAndOperators(from: inputComponents)
         
         guard operands.count == operators.count + 1 else {
-            return .failure(.incorrectCountOfNumbersAndOperators)
+            return .failure(.incorrectCountOfOperandsAndOperators)
         }
         
         guard let formula = makeFormula(operands: operands, operators: operators) else {
@@ -52,20 +59,7 @@ extension ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let modifiedInput = ExpressionParser.insertEmptySpaceByOperators(from: input)
-        
-        return modifiedInput.split(with: " ")
-    }
-    
-    static private func insertEmptySpaceByOperators(from input: String) -> String {
-        var modifiedInput = input
-        let allTargets = Operator.allStringCases
-        
-        allTargets.forEach {
-            modifiedInput = modifiedInput.replacingOccurrences(of: $0, with: " \($0) ")
-        }
-        
-        return modifiedInput
+        return input.split(with: " ")
     }
     
     static private func separateOperandsAndOperators(from components: [String]) -> ([String], [String]) {
