@@ -9,7 +9,7 @@ import XCTest
 
 class CaculatorManagerTests: XCTestCase {
     
-    private let calculatorManager = CalculatorManager(calculatingFinish: false,
+    private let calculatorManager = CalculatorManager(displayingResult: false,
                                                       isTypingOperand: false)
     private var numberToConvert: String = ""
 
@@ -43,8 +43,13 @@ class CaculatorManagerTests: XCTestCase {
         XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.123457897")
     }
     
-    func testConvertToMaximumSginificantWhereExceedMaximum() {
+    func testConvertToRounedNumberWhereExceedMaximumFractionDigit15() {
         numberToConvert = "0.123457897115615616513334"
-        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.12345789711561561651")
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "0.123457897115616")
+    }
+    
+    func testConvertToDecimal() {
+        numberToConvert = "1334597.454"
+        XCTAssertEqual(calculatorManager.format(of: numberToConvert), "1,334,597.454")
     }
 }
