@@ -36,6 +36,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var valueLabel: UILabel!
     
     @IBOutlet weak var inputHistoryStackView: UIStackView!
+    
+    var allHistory: String {
+        var allHistory = ""
+        
+        inputHistoryStackView.subviews.forEach {
+            guard let history = $0 as? UILabel,
+                  let text = history.text else {
+                      return
+                      
+                  }
+            
+            allHistory += "  \(text)"
+        }
+        
+        return allHistory
+    }
 
     @IBAction func numberButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: NumberButtonHandler.shared, button: sender)
