@@ -78,9 +78,24 @@ class ViewController: UIViewController {
 //        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
+    @IBAction func dotButtonPressed(_ sender: UIButton) {
+        guard let text = numberLabel.text else { return }
+        
+        if text.isEmpty || isContainDot(text: text) {
+            return
+        } else {
+            inputNumber += "."
+            numberLabel.text = inputNumber
+        }
+    }
+    
     func initializeNumberLabel() {
         inputNumber.removeAll()
         numberLabel.text?.removeAll()
+    }
+    
+    func isContainDot(text: String) -> Bool {
+        return text.contains(".")
     }
 }
 
