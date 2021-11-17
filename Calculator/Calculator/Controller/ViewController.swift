@@ -176,6 +176,15 @@ extension ViewController {
         }
     }
     
+    private func numberFormatter() -> NumberFormatter {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = maximumFractionDigits
+        
+        return numberFormatter
+    }
+    
     private func numberFormatterFor(numberForCalculate: String) throws -> String? {
         guard let numberForCalculate = Double(numberForCalculate) else {
             throw NumberFormatterError.dataTypeCastingFailed
@@ -192,30 +201,26 @@ extension ViewController {
         let numberFormatter = numberFormatter()
 
         if inputOperand.contains(".") {
-            let dotFront = inputOperand.split(with: ".")[0]
-            guard let formattedDotFront = numberFormatter.string(for: Double(dotFront)) else {
-                return nil
-            }
-            
-            if inputOperand.split(with: ".").count == 1 {
-                return formattedDotFront + "."
-            }
-            
-            let dotBack = inputOperand.split(with: ".")[1]
-            
-            return formattedDotFront + "." + dotBack
+            return try formatNumber(of: inputOperand)
         }
 
         return numberFormatter.string(for: operand)
     }
     
-    private func numberFormatter() -> NumberFormatter {
-        let numberFormatter = NumberFormatter()
+    private func formatNumber(of inputingOperand: String) throws -> String{
+        let numberFormatter = numberFormatter()
+        let dotFront = inputingOperand.split(with: ".")[0]
+        guard let formattedDotFront = numberFormatter.string(for: Double(dotFront)) else {
+            throw NumberFormatterError.dataTypeCastingFailed
+        }
         
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = maximumFractionDigits
+        if inputingOperand.split(with: ".").count == 1 {
+            return formattedDotFront + "."
+        }
         
-        return numberFormatter
+        let dotBack = inputingOperand.split(with: ".")[1]
+        
+        return formattedDotFront + "." + dotBack
     }
     
     private func operators(for buttton: UIButton) -> String {
