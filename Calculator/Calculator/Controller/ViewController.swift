@@ -98,7 +98,7 @@ class ViewController: UIViewController {
             currentValue.text = "NaN"
         } else {
             resetToInitialState()
-            currentValue.text = String(resultOfDouble)
+            currentValue.text = String(format: "%.4g", resultOfDouble)
         }
     }
     
