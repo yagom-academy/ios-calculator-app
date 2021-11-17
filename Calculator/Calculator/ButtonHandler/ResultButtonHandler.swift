@@ -9,53 +9,50 @@ struct ResultButtonHandler: ButtonActionDelegate {
     }
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
         viewController.addInputHistory()
-        viewController.operatorLabel.text = ""
-        
-        let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
-        
-        switch parsingResult {
-        case .success(var formula):
-            let result = formula.result()
-            viewController.valueLabel.text = (result == Double.infinity) ? "NaN" : String(result)
-        default:
-            break
-        }
-        
-        viewController.currentPhase = .phase4
+        showCalculationResult(viewController: viewController, button: button)
     }
     func runActionInPhase2(viewController: ViewController, button: UIButton) {
-        viewController.operatorLabel.text = ""
-        
-        let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
-        
-        switch parsingResult {
-        case .success(var formula):
-            let result = formula.result()
-            viewController.valueLabel.text = (result == Double.infinity) ? "NaN" : String(result)
-        default:
-            break
-        }
-        
-        viewController.currentPhase = .phase4
+        showCalculationResult(viewController: viewController, button: button)
     }
     func runActionInPhase3(viewController: ViewController, button: UIButton) {
         viewController.addInputHistory()
+        showCalculationResult(viewController: viewController, button: button)
+    }
+    func runActionInPhase4(viewController: ViewController, button: UIButton) {
+        return
+    }
+    
+    private func showCalculationResult(viewController: ViewController, button: UIButton) {
         viewController.operatorLabel.text = ""
         
         let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
         
+        var formulaResult = 0.0
+        
         switch parsingResult {
         case .success(var formula):
-            let result = formula.result()
-            viewController.valueLabel.text = (result == Double.infinity) ? "NaN" : String(result)
+            formulaResult = formula.result()
         default:
-            break
+            return
         }
+        
+        var result = ""
+        if formulaResult == Double.infinity {
+            result = "NaN"
+        } else {
+            result = convertToDeicmalString(from: formulaResult) ?? ""
+        }
+        
+        viewController.valueLabel.text = result
         
         viewController.currentPhase = .phase4
     }
-    func runActionInPhase4(viewController: ViewController, button: UIButton) {
-        return
+    
+    private func convertToDeicmalString(from formulaResult: Double) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        return numberFormatter.string(from: NSNumber(value: formulaResult))
     }
 }
 
