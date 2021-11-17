@@ -13,8 +13,8 @@ enum ExpressionParser {
         let calculatorItems = ["➕","➖", "➗", "✖️"]
         let stringOperators = input.filter { calculatorItems.contains(String($0))}
         let stringOperands = componentsByOperator(from: input)
-        let operators = CalculatorItemQueue(stringOperators.map({Operator(rawValue: $0)!}))
-        let operands = CalculatorItemQueue(stringOperands.map({Double($0)!}))
+        let operators = CalculatorItemQueue(stringOperators.compactMap({Operator(rawValue: $0)}))
+        let operands = CalculatorItemQueue(stringOperands.compactMap({Double($0)}))
         return Formula(operands: operands, operators: operators)
     }
 
