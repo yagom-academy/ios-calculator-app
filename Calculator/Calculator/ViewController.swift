@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var calculatorManager = CalculatorManager(calculatingFinish: false, isTypingOperand: false)
+    private var calculatorManager = CalculatorManager(displayingResult: false, isTypingOperand: false)
     private var formulasStackViewIsEmpty: Bool = true
     
     private var displayOperator: String {
@@ -52,10 +52,10 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
-        if calculatorManager.calculatingFinish {
+        if calculatorManager.displayingResult {
             initDisplayFormulas()
             initDisplayOperand()
-            calculatorManager.setCalculatingFinishStatus(to: false)
+            calculatorManager.setDisplayingResultStatus(to: false)
         }
         
         guard let currentOperandButtonTitle = sender.currentTitle else {
@@ -93,9 +93,9 @@ extension ViewController {
             return
         }
         
-        if calculatorManager.calculatingFinish {
+        if calculatorManager.displayingResult {
             initDisplayFormulas()
-            calculatorManager.setCalculatingFinishStatus(to: false)
+            calculatorManager.setDisplayingResultStatus(to: false)
         }
         
         guard let currentOperandButtionTitle = sender.currentTitle else {
@@ -143,10 +143,10 @@ extension ViewController {
         
         do {
             displayOperand = String(try formula.result())
-            calculatorManager.setCalculatingFinishStatus(to: true)
+            calculatorManager.setDisplayingResultStatus(to: true)
         } catch OperationError.devidedByZero {
             displayOperand = "NaN"
-            calculatorManager.setCalculatingFinishStatus(to: true)
+            calculatorManager.setDisplayingResultStatus(to: true)
         } catch {
             
         }
