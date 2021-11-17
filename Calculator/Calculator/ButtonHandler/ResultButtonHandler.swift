@@ -9,13 +9,15 @@ struct ResultButtonHandler: ButtonActionDelegate {
     }
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
         viewController.addInputHistory()
+        viewController.addInputHistory()
         viewController.operatorLabel.text = ""
         
         let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
         
         switch parsingResult {
         case .success(var formula):
-            viewController.valueLabel.text = String(formula.result())
+            let result = formula.result()
+            viewController.valueLabel.text = (result == Double.infinity) ? "NaN" : String(result)
         default:
             break
         }
@@ -23,13 +25,15 @@ struct ResultButtonHandler: ButtonActionDelegate {
         viewController.currentPhase = .phase4
     }
     func runActionInPhase2(viewController: ViewController, button: UIButton) {
+        viewController.addInputHistory()
         viewController.operatorLabel.text = ""
         
         let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
         
         switch parsingResult {
         case .success(var formula):
-            viewController.valueLabel.text = String(formula.result())
+            let result = formula.result()
+            viewController.valueLabel.text = (result == Double.infinity) ? "NaN" : String(result)
         default:
             break
         }
@@ -44,7 +48,8 @@ struct ResultButtonHandler: ButtonActionDelegate {
         
         switch parsingResult {
         case .success(var formula):
-            viewController.valueLabel.text = String(formula.result())
+            let result = formula.result()
+            viewController.valueLabel.text = (result == Double.infinity) ? "NaN" : String(result)
         default:
             break
         }

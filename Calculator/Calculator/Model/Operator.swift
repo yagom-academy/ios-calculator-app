@@ -1,8 +1,8 @@
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
     
     static var allCharacterCases: [Character] {
         return Self.allCases.map { $0.rawValue }
