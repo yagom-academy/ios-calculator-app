@@ -200,7 +200,6 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: false)
         
-        
         if !formulasStackViewIsEmpty {
             operatorLabel.text = `operator`
         }
