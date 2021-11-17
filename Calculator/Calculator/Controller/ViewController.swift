@@ -9,8 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     @IBOutlet private weak var calculationHistoryStackView: UIStackView!
-    @IBOutlet private weak var expression: UILabel!
-    @IBOutlet private weak var arithmetic: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
     private var finalExpression: String = ""
     private var currentOperand: String = ""
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.expression.text = "0"
+        self.operandLabel.text = "0"
     }
 
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         
         if operand == "." {
             currentOperand += currentOperand.isEmpty ? "0." : "."
-            expression.text = currentOperand
+            operandLabel.text = currentOperand
             return
         } else {
             currentOperand += operand
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
             return
         }
         
-        expression.text = operandText
+        operandLabel.text = operandText
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         }
         
         currentOperand = String(currentNumber * -1)
-        expression.text = operandText
+        operandLabel.text = operandText
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         }
     
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
-            arithmetic.text = `operator`
+            operatorLabel.text = `operator`
             return
         }
         
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         resetCurrentOperand()
         
         currentOperator = `operator`
-        arithmetic.text = `operator`
+        operatorLabel.text = `operator`
     }
     
     @IBAction private func touchUpEqualButton(_ sender: Any) {
@@ -108,12 +108,12 @@ class ViewController: UIViewController {
             }
             
             resetCurrentOperand()
-            expression.text = calculationResultText
-            arithmetic.text = ""
+            operandLabel.text = calculationResultText
+            operatorLabel.text = ""
         } catch OperationError.dividedByZero {
             resetCurrentOperand()
-            expression.text = "NaN"
-            arithmetic.text = ""
+            operandLabel.text = "NaN"
+            operatorLabel.text = ""
         } catch CalculationItemQueueError.hasNoElement {
             print(CalculationItemQueueError.hasNoElement.localizedDescription)
         } catch {
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
     private func resetToInitialState() {
         finalExpression = ""
         currentOperator = ""
-        arithmetic.text = ""
+        operatorLabel.text = ""
         isCalculated = false
         
         resetCurrentOperand()
@@ -140,7 +140,7 @@ class ViewController: UIViewController {
 
     private func resetCurrentOperand() {
         currentOperand = ""
-        expression.text = "0"
+        operandLabel.text = "0"
     }
 
     @IBAction private func touchUpCEButton(_ sender: Any) {
