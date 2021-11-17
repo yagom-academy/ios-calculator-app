@@ -151,14 +151,11 @@ extension ViewController {
         } catch let error as CalculatorError {
             switch error {
             case .notNumber:
-                currentOperand = "NaN"
+                currentOperand = error.description
                 hasCalculated.toggle()
                 return
-            case .queueNotFound:
-                return
-            case .wrongOperand:
-                return
-            case .wrongOperator:
+            default:
+                print(error.description)
                 return
             }
         } catch let error {
