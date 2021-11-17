@@ -76,7 +76,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+        if abs(currentNumber) >= pow(10, Double(maximumDigitsOfDoubleExpression)) {
             addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
             resetCurrentOperand()
             operatorLabel.text = ""
             
-            if abs(calculationResult) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+            if abs(calculationResult) >= pow(10, Double(maximumDigitsOfDoubleExpression)) {
                 operandLabel.text = String(calculationResult)
             } else {
                 operandLabel.text = calculationResultText
@@ -241,7 +241,6 @@ extension ViewController {
     
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
             changeOperator(to: `operator`)
-            print("final : \(finalFormula)")
             return
         }
         
@@ -249,7 +248,7 @@ extension ViewController {
             return
         }
         
-        if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+        if abs(currentNumber) >= pow(10, Double(maximumDigitsOfDoubleExpression)) {
             addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
@@ -272,7 +271,6 @@ extension ViewController {
         addLastCalculationHistory()
         finalFormula.append(currentOperand)
         calculateFormula(from: finalFormula)
-        print(finalFormula)
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
