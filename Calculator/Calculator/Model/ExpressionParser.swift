@@ -9,16 +9,12 @@ extension String {
 
 enum ExpressionParser {
     static func parse(from inputString: String) -> Formula {
-        let numberArrayInString = componentsByOperators(from: inputString)
-        let inputArrayInString = inputString.map { String($0) }
+        let inputArrayInString = inputString.map {String($0)}
+        let operandArray = componentsByOperators(from: inputString).compactMap{Double($0)}
+        let operatorArray = inputArrayInString.filter{Operator(rawValue: Character($0)) != nil}.compactMap{Operator(rawValue: Character($0))}
         
-        let operatorArrayInString = inputArrayInString.filter {!numberArrayInString.contains($0)}
-        
-        let numberArrayInDouble = numberArrayInString.map {Double($0) ?? 0}
-        let operatorArrayInOperator = operatorArrayInString.compactMap {Operator(rawValue: Character($0))}
-        
-        let operands = CalculatorItemQueue<Double>(calculatorItems: numberArrayInDouble)
-        let operators = CalculatorItemQueue<Operator>(calculatorItems: operatorArrayInOperator)
+        let operands = CalculatorItemQueue<Double>(calculatorItems: operandArray)
+        let operators = CalculatorItemQueue<Operator>(calculatorItems: operatorArray)
         
         let formula = Formula(operands: operands, operators: operators)
 
