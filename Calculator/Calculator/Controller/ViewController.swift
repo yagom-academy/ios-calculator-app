@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         currentOperand != "0"
     }
     
+    var hasCalculated = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaLabel()
@@ -50,6 +52,9 @@ class ViewController: UIViewController {
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
+        guard hasCalculated == false else {
+            return
+        }
         guard let newOperand = sender.titleLabel?.text else {
             return
         }
@@ -71,6 +76,14 @@ extension ViewController {
         guard let newOperator = sender.titleLabel?.text else {
             return
         }
+        guard hasCalculated == false else {
+            hasCalculated.toggle()
+            removeFormulaView()
+            addCurrentFormulaStack()
+            currentOperator = newOperator
+            currentOperand = "0"
+            return
+        }
         addCurrentFormulaStack()
         currentOperand = "0"
         currentOperator = newOperator
@@ -81,6 +94,10 @@ extension ViewController {
         guard isNotZero || currentOperand != "" else {
             return
         }
+        if hasCalculated {
+            hasCalculated.toggle()
+            removeFormulaView()
+        }
         removeFormulaLabel()
     }
     
@@ -90,6 +107,9 @@ extension ViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
+        guard hasCalculated == false else {
+            return
+        }
         let hasDotNotIncluded = currentOperand.contains(".") == false
         guard hasDotNotIncluded else {
             return
@@ -101,6 +121,9 @@ extension ViewController {
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
+        guard hasCalculated == false else {
+            return
+        }
         guard isNotZero else {
             return
         }
@@ -113,7 +136,7 @@ extension ViewController {
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
-        guard currentOperator != "" else {
+        guard hasCalculated == false else {
             return
         }
         addCurrentFormulaStack()
@@ -127,6 +150,7 @@ extension ViewController {
             print(error.localizedDescription)
         }
         currentOperator = ""
+        hasCalculated.toggle()
     }
 }
 // MARK: Formula Stack View Related
