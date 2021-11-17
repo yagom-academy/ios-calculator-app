@@ -24,13 +24,9 @@ class FormulaTests: XCTestCase {
     
     func test_빈_String을_parse하고_반환된_Formula를_result하면_queueIsEmpty에러가_발생한다() {
         let sampleString: String = ""
-        var formula = ExpressionParser.parse(from: sampleString)
-        do {
-            let _ = try formula.result()
-        } catch FormulaError.queueIsEmpty {
-            XCTAssertEqual(FormulaError.queueIsEmpty.description, "Dequeue 할 값이 존재하지 않습니다")
-        } catch  {
-            print(error)
+        var formula = ExpressionParser.parse(from: sampleString)        
+        XCTAssertThrowsError(try formula.result(), "Dequeue 할 값이 존재하지 않습니다") { error in
+            XCTAssertEqual(error as? FormulaError, FormulaError.queueIsEmpty)
         }
     }
     
