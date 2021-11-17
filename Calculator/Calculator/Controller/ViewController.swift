@@ -46,12 +46,20 @@ class ViewController: UIViewController {
     }
     
     private func changeOperator(to newOperator: String) {
-        guard !finalFormula.isEmpty else {
+        guard let last = finalFormula.last else {
             return
         }
         
         operatorLabel.text = newOperator
         currentOperator = newOperator
+        
+        let operatorSymbols = Operator.allCases.map { String($0.rawValue) }
+        
+        guard operatorSymbols.contains(last) else {
+            finalFormula.append(newOperator)
+            return
+        }
+    
         finalFormula[finalFormula.count - 1] = newOperator
     }
     
@@ -214,16 +222,26 @@ extension ViewController {
             currentOperand.removeFirst()
         } else {
             currentOperand = "-" + currentOperand
-        }        
+        }
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard operandLabel.text != "NaN" else {
+            return
+        }
+        
+        if isCalculated {
+            resetCurrentOperand()
+            isCalculated = false
+        }
+        
         guard let `operator` = sender.titleLabel?.text else {
             return
         }
     
         guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
             changeOperator(to: `operator`)
+            print("final : \(finalFormula)")
             return
         }
         
@@ -254,6 +272,7 @@ extension ViewController {
         addLastCalculationHistory()
         finalFormula.append(currentOperand)
         calculateFormula(from: finalFormula)
+        print(finalFormula)
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
