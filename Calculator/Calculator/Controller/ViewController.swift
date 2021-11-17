@@ -75,10 +75,11 @@ class ViewController: UIViewController {
     
     @IBAction func hitCodeConversionButton(_ sender: UIButton) {
         if currentValue.text != initialValue {
-            guard let conversionedValue = Double(currentValue.text ?? "") else {
+            guard let currentOperand = currentValue.text,
+                  let doubleTypeOperand = Double(currentOperand) else {
                 return
             }
-            currentValue.text = String(conversionedValue * -1)
+            currentValue.text = String(doubleTypeOperand * -1)
         }
     }
     
