@@ -1,9 +1,5 @@
 import Foundation
 
-enum OperatorError: Error {
-    case divideByZero
-}
-
 protocol CalculateItem {
     
 }
