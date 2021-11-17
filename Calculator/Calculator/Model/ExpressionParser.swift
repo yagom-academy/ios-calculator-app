@@ -19,19 +19,14 @@ enum ExpressionParser {
         
         return formula
     }
-    
+  
     static func componentsByOperators(from input: String) -> [String] {
         var components: [String] = [input]
-        var temporaryArray: [String] = []
-        
-        for operatorSymbol in Operator.allCases {
-            for element in components {
-                temporaryArray += element.split(with: operatorSymbol.rawValue)
-            }
-            components = temporaryArray
-            temporaryArray = []
+
+        components = Operator.allCases.reduce(components) { result, element in
+            result.flatMap { $0.split(with: element.rawValue) }
         }
-        
+
         return components
     }
 }
