@@ -110,10 +110,10 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				FBDAED682742C62B0077A5D8 /* Extension */,
-				FBDAED652742C5E70077A5D8 /* Protocol */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				FBDAED682742C62B0077A5D8 /* Extension */,
+				FBDAED652742C5E70077A5D8 /* Protocol */,
 				FBDAED642742C5D30077A5D8 /* Error */,
 				FB01135E273BCDCB00310758 /* Controller */,
 				FB01135C273BCDBF00310758 /* Model */,
