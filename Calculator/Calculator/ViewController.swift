@@ -99,6 +99,10 @@ extension ViewController {
             return
         }
         
+        if displayOperand == "0" && formulasStackViewIsEmpty {
+            return
+        }
+        
         if calculatorManager.displayingResult {
             initDisplayFormulas()
             calculatorManager.setDisplayingResultStatus(to: false)
@@ -196,10 +200,7 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: false)
         
-        if !formulasStackViewIsEmpty {
-            operatorLabel.text = `operator`
-        }
-        
+        operatorLabel.text = `operator`
         operandLabel.text = calculatorManager.format(of: operand)
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
