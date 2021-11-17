@@ -19,7 +19,6 @@ enum Operator: Character, CaseIterable, CalculateItem {
             } catch {
                 return .nan
             }
-            
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
