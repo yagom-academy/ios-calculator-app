@@ -37,17 +37,22 @@ extension CalculatorController {
     }
     
     private func appendExpressionNumber() {
-        guard let number = numberLabel.text else {
-                  return
-              }
+        guard let number = numberLabel.text else { return }
         
         expressionInput.append(number)
     }
     
     private func appendExpressionOperator() {
-        guard let `operator` = operatorLabel.text else {
-                  return
-              }
+        guard let `operator` = operatorLabel.text else { return }
+        
+        var hasOprator = false
+        Operator.allCases.forEach {
+            hasOprator = hasOprator == expressionInput.hasSuffix(String($0.rawValue))
+        }
+        
+        if hasOprator {
+            expressionInput.removeLast()
+        }
         
         expressionInput.append(`operator`)
     }
@@ -113,6 +118,7 @@ extension CalculatorController {
         
         guard numberLabel.text != "0" else {
             operatorLabel.text = `operator`
+            appendExpressionOperator()
             return
         }
         
