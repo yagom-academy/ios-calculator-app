@@ -15,9 +15,9 @@ struct Formula {
         guard var resultValue = operands.dequeue() else {
             return Double.zero
         }
-        while let _operator = operators.dequeue(),
-              let operand = operands.dequeue() {
-            resultValue = _operator.calculate(lhs: resultValue, rhs: operand)
+        while let currentOperator = operators.dequeue(),
+              let currentOperand = operands.dequeue() {
+            resultValue = currentOperator.calculate(lhs: resultValue, rhs: currentOperand)
         }
         return resultValue
     }
