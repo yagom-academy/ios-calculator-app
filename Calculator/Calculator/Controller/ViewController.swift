@@ -92,9 +92,13 @@ class ViewController: UIViewController {
         endOperandInput()
         let calculator = ExpressionParser.self
         let resultOfDouble = calculator.parse(from: stringToCalculate.joined()).result()
-        resetToInitialState()
-        currentValue.text = String(resultOfDouble)
-        
+        if resultOfDouble.isNaN {
+            resetToInitialState()
+            currentValue.text = "NaN"
+        } else {
+            resetToInitialState()
+            currentValue.text = String(resultOfDouble)
+        }
     }
     
     
