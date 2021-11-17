@@ -19,8 +19,10 @@ enum ExpressionParser {
             calculateFormula.operands.enqueue(operation: operation)
         }
         
-        let operators: [Character] = input.filter { "+/*₋".contains($0) }
-        
+        let operators: [Character] = input.filter { (`operator`: Character) -> Bool in
+            return "+/*₋".contains(`operator`)
+        }
+     
         operators.forEach { `operator` in
             guard let arithmetic = Operator(rawValue: `operator`) else {
                 return
