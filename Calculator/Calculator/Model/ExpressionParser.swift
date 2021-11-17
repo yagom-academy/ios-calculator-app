@@ -17,10 +17,10 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         var result: [String] = [input]
-        Operator.allCases.forEach { `operator` in
+        Operator.allCases.forEach { targetOperator in
             var splitedString: [String] = []
             for input in result {
-                splitedString += input.split(with: `operator`.rawValue)
+                splitedString += input.split(with: targetOperator.rawValue)
                 result = splitedString
             }
         }
