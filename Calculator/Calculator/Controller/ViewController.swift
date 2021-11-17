@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
-        endInputOperand()
+        endOperandInput()
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         currentOperator.text = inputButtonTitle
     }
     
-    func endInputOperand() {
+    func endOperandInput() {
         stringToCalculate.append(inputOperandValues.joined())
         inputOperandValues.removeAll()
         currentValue.text = initialValue
