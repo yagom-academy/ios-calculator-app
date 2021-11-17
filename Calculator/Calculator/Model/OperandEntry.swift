@@ -14,7 +14,12 @@ struct OperandEntry {
     private var entry = "0"
     private var isPositive = true
     private var isZeroState: Bool { entry == "0" }
+    private var isResultState = false
     mutating func append(_ input: String) {
+        if isResultState {
+            replace(with: input)
+            return
+        }
         switch input {
             case "0" where isZeroState,
                  "00" where isZeroState:
@@ -24,7 +29,9 @@ struct OperandEntry {
         }
     }
     mutating func replace(with result: String) {
-        entry = result
+        isResultState.toggle()
+        clear()
+        append(result)
     }
     mutating func toggleSign() {
         if isZeroState { return }

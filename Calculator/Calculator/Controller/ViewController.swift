@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     private var entry = OperandEntry()
     private var formula: String = ""
-    private var isZeroState: Bool { entry.currentOperand == "0" }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +34,6 @@ class ViewController: UIViewController {
     }
     @IBAction func numberButtonDidTap(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
-        if currentOperatorLabel.text == "", !isZeroState {
-            entry.clear()
-        }
         entry.append(number)
         updateOperandLabel()
     }
