@@ -361,7 +361,7 @@
                         <outlet property="acButton" destination="ped-N8-JbY" id="PKj-5I-3Z9"/>
                         <outlet property="ceButton" destination="RLD-dY-LOA" id="6f1-ta-RUv"/>
                         <outlet property="currentOperator" destination="HPC-iy-qdm" id="CZD-G0-SOI"/>
-                        <outlet property="currentResult" destination="Lwz-OF-XHD" id="4il-J3-LeQ"/>
+                        <outlet property="currentValue" destination="Lwz-OF-XHD" id="K9h-e1-S3c"/>
                         <outlet property="positiveOrNegativeButton" destination="ows-U7-mNc" id="hAI-N4-AiU"/>
                     </connections>
                 </viewController>

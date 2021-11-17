@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var currentOperator: UILabel!
-    @IBOutlet var currentResult: UILabel!
+    @IBOutlet var currentValue: UILabel!
 
     @IBOutlet var operandsButton: UIButton!
     @IBOutlet var operatorsButton: UIButton!
@@ -26,13 +26,13 @@ class ViewController: UIViewController {
             return
         }
         inputOperandValues.append(inputButtenTitle)
-        currentResult.text = inputOperandValues.joined()
+        currentValue.text = inputOperandValues.joined()
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
         stringToCalculate.append(inputOperandValues.joined())
         inputOperandValues.removeAll()
-        currentResult.text = initialValue
+        currentValue.text = initialValue
         guard let inputButtenTitle = sender.titleLabel?.text else {
             return
         }
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     
     @IBAction func hitACButton(_ sender: UIButton) {
         stringToCalculate.removeAll()
-        currentResult.text = "0"
+        currentValue.text = "0"
     }
     
     @IBAction func hitCEButton(_ sender: UIButton) {
