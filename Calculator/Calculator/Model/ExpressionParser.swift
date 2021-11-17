@@ -12,11 +12,11 @@ enum ExpressionParser {
         var calculateFormula: Formula = Formula()
 
         componentsByOperators(from: input).forEach { (component: String) -> () in
-           guard let operation = Double(component) else {
+           guard let number = Double(component) else {
                 return
             }
 
-            calculateFormula.operands.enqueue(operation: operation)
+            calculateFormula.operands.enqueue(operation: number)
         }
         
         let operators: [Character] = input.filter { (`operator`: Character) -> Bool in
