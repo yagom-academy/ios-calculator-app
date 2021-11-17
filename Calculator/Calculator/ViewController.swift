@@ -75,6 +75,12 @@ extension ViewController {
     }
     
     @IBAction private func touchUpDecimalPoint(_ sender: UIButton) {
+        if calculatorManager.displayingResult {
+            initDisplayFormulas()
+            initDisplayOperand()
+            calculatorManager.setDisplayingResultStatus(to: false)
+        }
+        
         guard let decimalPointButtonTitle = sender.currentTitle else {
             return
         }
