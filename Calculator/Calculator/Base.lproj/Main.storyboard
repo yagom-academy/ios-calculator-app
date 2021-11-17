@@ -317,6 +317,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpResultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mK0-q0-7p0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -361,7 +364,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="expressionStackView" destination="XRe-QE-UJf" id="lQl-Lh-FJV"/>
+                        <outlet property="expressionStackViewSuperView" destination="XRe-QE-UJf" id="z2h-Yq-g3d"/>
                         <outlet property="numberLabel" destination="Lwz-OF-XHD" id="uCg-CR-V9y"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="XHv-1x-Oem"/>
                     </connections>

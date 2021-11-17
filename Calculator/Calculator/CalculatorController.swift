@@ -36,13 +36,20 @@ extension CalculatorController {
         }
     }
     
-    private func appendExpression() {
-        guard let number = numberLabel.text,
-              let `operator` = operatorLabel.text else {
+    private func appendExpressionNumber() {
+        guard let number = numberLabel.text else {
                   return
               }
         
-        expressionInput.append(number + `operator`)
+        expressionInput.append(number)
+    }
+    
+    private func appendExpressionOperator() {
+        guard let `operator` = operatorLabel.text else {
+                  return
+              }
+        
+        expressionInput.append(`operator`)
     }
     
     private func resetNumberLabel() {
@@ -113,7 +120,8 @@ extension CalculatorController {
         
         operatorLabel.text = `operator`
         
-        appendExpression()
+        appendExpressionNumber()
+        appendExpressionOperator()
         resetNumberLabel()
     }
 
@@ -144,5 +152,28 @@ extension CalculatorController {
         resetOperatorLabel()
         resetExpressionInput()
         clearExpressionsStackView()
+    }
+    
+    
+    @IBAction func touchUpResultButton(_ sender: UIButton) {
+        guard let `operator` = operatorLabel.text,
+              `operator` != "" else { return }
+        
+        do {
+            createExpressionStackView()
+            appendExpressionNumber()
+            resetOperatorLabel()
+            
+            let formula = ExpressionParser.parse(form: expressionInput)
+            
+            let result = try formula.result()
+            numberLabel.text = String(result)
+            
+            resetExpressionInput()
+        } catch OperatorError.divideByZero {
+            numberLabel.text = "NaN"
+        } catch {
+            return
+        }
     }
 }
