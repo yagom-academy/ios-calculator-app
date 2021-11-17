@@ -107,11 +107,14 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="divide"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="÷"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G79-kC-Vm9"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -157,11 +160,14 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="multiply"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="𝗑"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HOE-dV-xrA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -207,11 +213,14 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="subtract"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="−"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6eo-aC-PSg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -257,11 +266,14 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="add"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="+"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operatorButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aeG-dG-t3V"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -357,6 +369,7 @@
                     </view>
                     <connections>
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="hdC-Q9-Qsb"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="70X-jP-Nf7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

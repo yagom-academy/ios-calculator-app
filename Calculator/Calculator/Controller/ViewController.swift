@@ -9,7 +9,9 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var currentNumberLabel: UILabel!
+    @IBOutlet var currentOperatorLabel: UILabel!
     var currentNumberString = ""
+    var currentOperator = ""
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -20,6 +22,16 @@ class ViewController: UIViewController {
         }
         currentNumberString += numberPressedString
         update(self.currentNumberLabel, to: currentNumberString)
+    }
+    
+    @IBAction func operatorButtonPressed(_ sender: UIButton) {
+        // convert current buffer to UIStackView and add to UIScrollView
+        // reset currentNumberLabel to 0
+        guard let operatorPressedString = sender.accessibilityIdentifier else {
+            return
+        }
+        currentOperator = operatorPressedString
+        update(self.currentOperatorLabel, to: currentOperator)
     }
     
     private func update(_ label: UILabel, to data: String) {
