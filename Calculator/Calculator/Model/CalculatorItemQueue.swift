@@ -8,12 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    private var queue: [CalculateItem] = []
-    var testableQueue: [CalculateItem] {
-        get {
-            return queue
-        }
-    }
+    private(set) var queue: [CalculateItem] = []
+    
     var itemCount: Int {
         return queue.count
     }

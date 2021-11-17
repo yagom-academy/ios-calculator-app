@@ -25,23 +25,23 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue호출시_queue는_첫번째요소로_1을_저장하는배열이된다() {
         calculatorItemQueue.enqueue(1.0)
         
-        XCTAssertNotNil(calculatorItemQueue.testableQueue)
-        XCTAssertEqual(calculatorItemQueue.testableQueue[0] as! Double, 1.0)
+        XCTAssertNotNil(calculatorItemQueue.queue)
+        XCTAssertEqual(calculatorItemQueue.queue[0] as! Double, 1.0)
     }
     
     func test_enqueue호출시_queue는_첫번째요소로_plus를_저장하는배열이된다() {
         calculatorItemQueue.enqueue(Operator.add)
 
-        XCTAssertNotNil(calculatorItemQueue.testableQueue)
+        XCTAssertNotNil(calculatorItemQueue.queue)
     }
 
     func test_enqueue호출시_queue는_1과_plus를_저장하는배열이된다() {
         calculatorItemQueue.enqueue(1)
         calculatorItemQueue.enqueue(Operator.add)
 
-        XCTAssertEqual(calculatorItemQueue.testableQueue.count, 2)
-        XCTAssertEqual(calculatorItemQueue.testableQueue[0] as! Double, 1.0)
-        XCTAssertEqual(calculatorItemQueue.testableQueue[1] as! Operator, Operator.add)
+        XCTAssertEqual(calculatorItemQueue.queue.count, 2)
+        XCTAssertEqual(calculatorItemQueue.queue[0] as! Double, 1.0)
+        XCTAssertEqual(calculatorItemQueue.queue[1] as! Operator, Operator.add)
     }
 
     //MARK:- dequeue Test
@@ -49,7 +49,7 @@ class CalculatorItemQueueTests: XCTestCase {
         calculatorItemQueue.enqueue(1)
         calculatorItemQueue.dequeue()
 
-        XCTAssertTrue(calculatorItemQueue.testableQueue.isEmpty)
+        XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
     }
 
     //MARK:- removeFirst Test
@@ -65,7 +65,7 @@ class CalculatorItemQueueTests: XCTestCase {
         calculatorItemQueue.enqueue(Operator.subtract)
         calculatorItemQueue.removeAllItems()
 
-        XCTAssertTrue(calculatorItemQueue.testableQueue.isEmpty)
+        XCTAssertTrue(calculatorItemQueue.queue.isEmpty)
     }
 
     func test_queue가_빈배열일때_removeAllItems호출하면_오류를던지지않는다() {
@@ -79,6 +79,6 @@ class CalculatorItemQueueTests: XCTestCase {
         let doubleArray = [1.0, 2.0, 3.0]
         let sut = CalculatorItemQueue(doubleArray)
         
-        XCTAssertEqual(sut.testableQueue[0] as! Double, doubleArray[0])
+        XCTAssertEqual(sut.queue[0] as! Double, doubleArray[0])
     }
 }
