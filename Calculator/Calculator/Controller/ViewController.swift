@@ -65,7 +65,10 @@ extension ViewController {
             currentOperand = newOperand
             return
         }
-        currentOperand = currentOperand + newOperand
+        guard let doubleValue = Double(removeComma(currentOperand) + newOperand) else {
+            return
+        }
+        currentOperand = setUpNumberFormat(for: doubleValue)
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
@@ -78,7 +81,7 @@ extension ViewController {
         guard hasCalculated == false else {
             hasCalculated.toggle()
             removeFormulaView()
-            currentOperand = removeComma(currentOperand)
+            currentOperand = currentOperand
             addCurrentFormulaStack()
             currentOperator = newOperator
             currentOperand = "0"
@@ -258,7 +261,7 @@ extension UIStackView {
                 guard let input = label?.text else {
                     return
                 }
-                inputValues.append(input)
+                inputValues.append(input.replacingOccurrences(of: ",", with: ""))
             }
         }
         return inputValues.joined(separator: " ")
