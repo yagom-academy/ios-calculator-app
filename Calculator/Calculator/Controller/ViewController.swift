@@ -55,6 +55,34 @@ class ViewController: UIViewController {
         finalFormula[finalFormula.count - 1] = newOperator
     }
     
+    func calculateFormula(from expression: [String]) {
+        let formula = ExpressionParser.parse(from: expression.joined(separator: " "))
+        
+        do {
+            let calculationResult = try formula.result()
+            guard let calculationResultText = calculationResult.description.addCommaOnEveryThreeDigits() else {
+                return
+            }
+            
+            resetCurrentOperand()
+            operatorLabel.text = ""
+            
+            if abs(calculationResult) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+                operandLabel.text = String(calculationResult)
+            } else {
+                operandLabel.text = calculationResultText
+            }
+        } catch OperationError.dividedByZero {
+            resetCurrentOperand()
+            operandLabel.text = "NaN"
+            operatorLabel.text = ""
+        } catch CalculationItemQueueError.hasNoElement {
+            print(CalculationItemQueueError.hasNoElement.localizedDescription)
+        } catch {
+            print(error)
+        }
+    }
+    
     private func addCalculationHistory(operandText: String, operatorText: String) {
         let sign = UILabel()
         sign.textColor = .white
@@ -214,31 +242,7 @@ extension ViewController {
         
         finalFormula.append(currentOperand)
 
-        let formula = ExpressionParser.parse(from: finalFormula.joined(separator: " "))
-        
-        do {
-            let calculationResult = try formula.result()
-            guard let calculationResultText = calculationResult.description.addCommaOnEveryThreeDigits() else {
-                return
-            }
-            
-            resetCurrentOperand()
-            operatorLabel.text = ""
-            
-            if abs(calculationResult) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
-                operandLabel.text = String(calculationResult)
-            } else {
-                operandLabel.text = calculationResultText
-            }
-        } catch OperationError.dividedByZero {
-            resetCurrentOperand()
-            operandLabel.text = "NaN"
-            operatorLabel.text = ""
-        } catch CalculationItemQueueError.hasNoElement {
-            print(CalculationItemQueueError.hasNoElement.localizedDescription)
-        } catch {
-            print(error)
-        }
+        calculateFormula(from: finalFormula)
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
