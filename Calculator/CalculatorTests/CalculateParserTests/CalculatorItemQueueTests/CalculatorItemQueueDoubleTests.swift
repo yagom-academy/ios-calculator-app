@@ -9,7 +9,7 @@ import XCTest
 
 class CalculatorItemQueueDoubleTests: XCTestCase {
     
-    var sutQueue: CalculatorItemQueue<Double>?
+    var sutQueue: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         sutQueue = CalculatorItemQueue()
@@ -21,12 +21,10 @@ class CalculatorItemQueueDoubleTests: XCTestCase {
     
     func test_빈_큐에_Double_타입_10을_enqueue하고_한번_dequeue하면_부동_소수점_10을_반환하는가() {
         // given
-        sutQueue?.enqueue(10.0)
+        sutQueue.enqueue(10.0)
         // when
-        let result = sutQueue?.dequeue()
+        let result = sutQueue.dequeue()
         // then
         XCTAssertEqual(result, 10.0)
     }
 }
-
-extension Double: CalculateItem { }
