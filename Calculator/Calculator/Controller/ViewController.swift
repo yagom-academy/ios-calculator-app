@@ -109,6 +109,8 @@ class ViewController: UIViewController {
             return
         }
         
+        isCalculated = true
+        
         if !currentOperand.isEmpty && !currentOperator.isEmpty {
             addCalculationHistory(operandsText: currentOperand, operatorText: currentOperator)
         }
@@ -117,15 +119,14 @@ class ViewController: UIViewController {
         
         let formula = ExpressionParser.parse(from: finalExpression)
         
-        isCalculated = true
-        
         do {
             let calculationResult = try formula.result()
-            guard let resultText = calculationResult.description.addCommaOnEveryThreeDigits() else {
+            guard let calculationResultText = calculationResult.description.addCommaOnEveryThreeDigits() else {
                 return
             }
+            
             resetCurrentOperand()
-            expression.text = resultText
+            expression.text = calculationResultText
             arithmetic.text = ""
         } catch OperationError.dividedByZero {
             resetCurrentOperand()
