@@ -180,10 +180,7 @@ extension ViewController {
         guard let numberForCalculate = Double(numberForCalculate) else {
             throw NumberFormatterError.dataTypeCastingFailed
         }
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = maximumFractionDigits
+        let numberFormatter = numberFormatter()
         
         return numberFormatter.string(for: numberForCalculate)
     }
@@ -192,28 +189,33 @@ extension ViewController {
         guard let operand = Double(inputOperand) else {
             throw NumberFormatterError.dataTypeCastingFailed
         }
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = maximumFractionDigits
-        
+        let numberFormatter = numberFormatter()
+
         if inputOperand.contains(".") {
             let dotFront = inputOperand.split(with: ".")[0]
-            
-            if inputOperand.split(with: ".").count == 1 {
-                return dotFront + "."
-            }
-            
             guard let formattedDotFront = numberFormatter.string(for: Double(dotFront)) else {
                 return nil
             }
+            
+            if inputOperand.split(with: ".").count == 1 {
+                return formattedDotFront + "."
+            }
+            
             let dotBack = inputOperand.split(with: ".")[1]
             
             return formattedDotFront + "." + dotBack
         }
 
         return numberFormatter.string(for: operand)
+    }
+    
+    private func numberFormatter() -> NumberFormatter {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = maximumFractionDigits
+        
+        return numberFormatter
     }
     
     private func operators(for buttton: UIButton) -> String {
