@@ -30,11 +30,12 @@ struct CalculatorManager {
         }
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumFractionDigits = 15
+        numberFormatter.maximumIntegerDigits = 20
         numberFormatter.roundingMode = .halfUp
         
         guard let formattedNumber = numberFormatter
-                .string(from: NSNumber(value: round(String(number)))) else {
+                .string(from: NSNumber(value: number)) else {
             return "0"
         }
         
@@ -47,14 +48,5 @@ struct CalculatorManager {
     
     mutating func setIsTypingOperandStatus(to status: Bool) {
         isTypingOperand = status
-    }
-    
-    private func round(_ number: String) -> Double {
-        let targetRoundDigit: Double = 1000000000000000
-        
-        let tempNumber = (Double(number)! * targetRoundDigit)
-        let roundedNumber = tempNumber.rounded(.toNearestOrAwayFromZero) / targetRoundDigit
-        
-        return roundedNumber
     }
 }
