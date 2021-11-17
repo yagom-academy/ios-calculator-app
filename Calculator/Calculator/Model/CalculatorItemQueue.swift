@@ -8,18 +8,21 @@
 import Foundation
 
 struct CalculatorItemQueue {
+    
+    // MARK: private property
+    
     private var queueList: LinkedList = LinkedList()
-    
-    private mutating func enqueue(item: CalculateItem) {
-        queueList.append(data: item)
+}
+
+// MARK: - internal method
+
+extension CalculatorItemQueue {
+    mutating func enqueue(number: Double) {
+        enqueue(item: number)
     }
     
-    mutating func enqueue(number: Int) {
-        self.enqueue(item: NumberItem(data: number))
-    }
-    
-    mutating func enqueue(operatorItem: OperatorItem) {
-        self.enqueue(item: operatorItem)
+    mutating func enqueue(operatorItem: Operator) {
+        enqueue(item: operatorItem)
     }
 
     @discardableResult
@@ -32,6 +35,14 @@ struct CalculatorItemQueue {
     }
     
     func getQueueList() -> LinkedList {
-        return self.queueList
+        return queueList
+    }
+}
+
+// MARK: - private method
+
+extension CalculatorItemQueue {
+    private mutating func enqueue(item: CalculateItem) {
+        queueList.append(data: item)
     }
 }

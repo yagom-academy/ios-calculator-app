@@ -1,9 +1,14 @@
-## iOS 커리어 스타터 캠프
 
-### 계산기 프로젝트 저장소
+### 계산기 프로젝트 
 
-## Step1. Queue 타입 구현
+### 프로젝트 만든 사람
+제리  
+
+### 프로젝트 만든 기간
+2021.11.08 ~
+
+---
 
 ### UML
 
-![Calculator_UML](https://user-images.githubusercontent.com/40068674/141048166-f808a8d5-67f7-41fa-8d4f-7021bddb0b84.png)
+<img src="https://user-images.githubusercontent.com/40068674/141787736-ffd5ef3c-4ecd-4e6c-a50b-d35cf07206c2.png" width="700" height="800">
