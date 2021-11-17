@@ -170,18 +170,16 @@ class ViewController: UIViewController {
         
         calculationHistoryStackView.addArrangedSubview(newHistoryStackView)
         
-        newHistoryStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            newHistoryStackView.trailingAnchor.constraint(equalTo: calculationHistoryStackView.trailingAnchor, constant: 10.0)
-        ])
-        
         autoScrollToBottom()
     }
     
     private func autoScrollToBottom() {
-        UIView.animate(withDuration: 0.1) {
-        self.calculationHistoryScrollView.contentOffset = CGPoint(x: 0, y: self.calculationHistoryScrollView.frame.origin.y * 100)
+        calculationHistoryScrollView.layoutIfNeeded()
+        
+        let bottomOffset = CGPoint(x: 0, y: calculationHistoryScrollView.contentSize.height - calculationHistoryScrollView.bounds.height + calculationHistoryScrollView.contentInset.bottom)
+        
+        if bottomOffset.y > 0 {
+            calculationHistoryScrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
 }
