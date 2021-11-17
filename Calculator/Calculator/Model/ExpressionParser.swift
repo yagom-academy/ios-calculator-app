@@ -3,9 +3,8 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let formula = Formula()
-        let componentsOfOperands = Self.componentsByOperators(from: input)
         
-        componentsOfOperands.compactMap { Double($0) }
+        componentsByOperators(from: input).compactMap { Double($0) }
             .map { formula.operands.enqueue(value: $0) }
         
         input.compactMap { Operator(rawValue: $0) }
