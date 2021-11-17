@@ -83,12 +83,12 @@ class ViewController: UIViewController {
         
         currentOperand = String(currentNumber * -1)
         
-        let operandSeparatedByComma = operandText.replacingOccurrences(of: ",", with: "")
-        if operandSeparatedByComma.count > 16 {
-            operandLabel.text = Double(operandSeparatedByComma)?.description
+        if abs(currentNumber) > pow(10,Double(maximumDigitsOfDoubleExpression)) {
+            print(currentNumber, currentOperand, operandText)
+            operandLabel.text = String(currentNumber * -1)
         } else {
             operandLabel.text = operandText
-        }
+        }        
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
