@@ -131,7 +131,15 @@ class ViewController: UIViewController {
                 return
             }
             
-            addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
+            guard let currentNumber = Double(currentOperand) else {
+                return
+            }
+            
+            if abs(currentNumber) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+                addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
+            } else {
+                addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
+            }
         }
         
         finalExpression += currentOperand
@@ -145,8 +153,13 @@ class ViewController: UIViewController {
             }
             
             resetCurrentOperand()
-            operandLabel.text = calculationResultText
             operatorLabel.text = ""
+            
+            if abs(calculationResult) >= pow(10,Double(maximumDigitsOfDoubleExpression)) {
+                operandLabel.text = String(calculationResult)
+            } else {
+                operandLabel.text = calculationResultText
+            }
         } catch OperationError.dividedByZero {
             resetCurrentOperand()
             operandLabel.text = "NaN"
