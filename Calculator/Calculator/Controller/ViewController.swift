@@ -22,6 +22,19 @@ class ViewController: UIViewController {
         numberCompositionLabel.text = "0"
     }
     
+    @IBAction func clickNumberSign(_ sender: UIButton) {
+        guard var numberOfLabel = numberCompositionLabel.text else {
+            return
+        }
+        
+        if numberOfLabel.hasPrefix("-") {
+            numberOfLabel.removeFirst()
+        } else {
+            numberOfLabel = "-" + numberOfLabel
+        }
+        
+        numberCompositionLabel.text = numberOfLabel
+    }
     
     @IBAction func clickNumber(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
