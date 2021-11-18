@@ -32,9 +32,9 @@ class Calculator {
 // MARK:- Receiving Events
 extension Calculator {
     func shouldSetInitialState() {
-        delegate?.clearFormulaStack()
-        delegate?.updateOperatorLabel(with: "")
-        delegate?.updateOperandLabel(with: "0")
+        formulaStack.removeAll()
+        currentOperator.removeAll()
+        currentOperand.toZero()
     }
     func allClearButtonDidTap() {
         
@@ -62,6 +62,12 @@ extension Calculator {
     }
     func digitButtonDidTap(number: String) {
         
+    }
+}
+
+private extension String {
+    mutating func toZero() {
+        self = "0"
     }
 }
 
