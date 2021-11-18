@@ -26,49 +26,38 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         inputOperandValues = [initialValue]
         isOperatorEnterd = false
+        currentValue.text = initialValue
     }
     
     @IBAction func hitOperandButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        guard isVerify(inputButtonTitle, in: inputOperandValues) else {
-            return
+        
+        if !inputOperandValues.contains(".") {
+            guard inputButtonTitle != "0" || inputOperandValues.first != "0" else {
+                return
+            }
+            guard inputButtonTitle != "00" || inputOperandValues.first != "0" else {
+                return
+            }
+            guard inputButtonTitle != "." || !inputOperandValues.contains(".") else {
+                return
+            }
         }
-  
-        let isDemicalAndInputIsNumber = inputOperandValues.first == initialValue
-                                        && !inputOperandValues.contains(".")
-                                        && inputButtonTitle != "."
-        if isDemicalAndInputIsNumber {
+        inputOperandValues.append(inputButtonTitle)
+        
+        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {
             inputOperandValues.removeFirst()
         }
-
-        inputOperandValues.append(inputButtonTitle)
         isOperatorEnterd = false
         currentValue.text = inputOperandValues.joined()
     }
     
-    func isVerify(_ value: String, in pastValues: [String]) -> Bool {
-        let value = value
-        
-        if value == "0" && pastValues.first == "0" {
-            return false
-        } else if value == "00" && pastValues.first == "0" {
-            return false
-        } else if value == "00" && pastValues.isEmpty {
-            return false
-        } else if value == "." && pastValues.isEmpty {
-            return false
-        } else if value == "." && pastValues.contains(".") {
-            return false
-        } else {
-            return true
-        }
-    }
     
     func endOperandInput() {
         stringToCalculate.append(inputOperandValues.joined())
-        inputOperandValues.removeAll()
+        inputOperandValues = [initialValue]
         currentValue.text = initialValue
     }
     
@@ -88,7 +77,7 @@ class ViewController: UIViewController {
     }
     
     func resetToInitialState() {
-        inputOperandValues.removeAll()
+        inputOperandValues = [initialValue]
         stringToCalculate.removeAll()
         currentOperator.text = ""
     }
@@ -109,6 +98,8 @@ class ViewController: UIViewController {
                   let doubleTypeOperand = Double(currentOperand) else {
                 return
             }
+            
+            
             currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
         }
     }
@@ -122,9 +113,23 @@ class ViewController: UIViewController {
             currentValue.text = "NaN"
         } else {
             resetToInitialState()
-            currentValue.text = String(format: "%.4g", resultOfDouble)
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+        
+            currentValue.text = addCommaToValue(resultOfDouble)
         }
     }
+    
+    func addCommaToValue(_ value: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        guard let resultWithComma = numberFormatter.string(for: value) else {
+            return "0"
+        }
+        
+        return resultWithComma
+    }
+    
     
     
     
