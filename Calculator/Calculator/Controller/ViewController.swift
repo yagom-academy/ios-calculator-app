@@ -53,13 +53,9 @@ class ViewController: UIViewController {
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard hasCalculated == false else {
-            return
-        }
-        guard let newOperand = sender.titleLabel?.text else {
-            return
-        }
-        guard isNotZero || newOperand != "00" else {
+        guard let newOperand = sender.titleLabel?.text,
+              hasCalculated == false,
+              isNotZero || newOperand != "00" else {
             return
         }
         guard isNotZero else {
@@ -116,24 +112,16 @@ extension ViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard hasCalculated == false else {
-            return
-        }
         let hasDotNotIncluded = currentOperand.contains(".") == false
-        guard hasDotNotIncluded else {
-            return
-        }
-        guard let newOperand = sender.titleLabel?.text else {
+        guard hasCalculated == false, hasDotNotIncluded,
+              let newOperand = sender.titleLabel?.text else {
             return
         }
         currentOperand = currentOperand + newOperand
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
-        guard hasCalculated == false else {
-            return
-        }
-        guard isNotZero else {
+        guard hasCalculated == false, isNotZero else {
             return
         }
         let hasMinusNotIncluded = currentOperand.contains("-") == false
