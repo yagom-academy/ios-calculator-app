@@ -3,7 +3,7 @@ import Foundation
 
 enum Operator: Character, CaseIterable {
     case add = "+"
-    case substract = "-"
+    case subtract = "-"
     case divide = "/"
     case multiply = "*"
     
@@ -11,8 +11,8 @@ enum Operator: Character, CaseIterable {
         switch self {
         case .add:
             return self.add(lhs: lhs, rhs: rhs)
-        case .substract:
-            return self.substract(lhs: lhs, rhs: rhs)
+        case .subtract:
+            return self.subtract(lhs: lhs, rhs: rhs)
         case .divide:
             return self.divide(lhs: lhs, rhs: rhs)
         case .multiply:
@@ -21,7 +21,7 @@ enum Operator: Character, CaseIterable {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double { lhs + rhs }
-    private func substract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
+    private func subtract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
         let isBothZero: Bool = (lhs == .zero && rhs == .zero)
