@@ -169,8 +169,8 @@ extension ViewController {
         
         do{
             inputedOperandLabel.text = try numberFormatterFor(numberForCalculate: try String(parser.result()))
-        } catch CalculateError.notANumber {
-            inputedOperandLabel.text = CalculateError.notANumber.message
+        } catch CalculateError.notNumber {
+            inputedOperandLabel.text = "\(CalculateError.notNumber)"
         } catch let error {
             print(error)
         }
@@ -222,7 +222,7 @@ extension ViewController {
         
         return formattedDotFront + "." + dotBack
     }
-    
+
     private func operators(for buttton: UIButton) -> String {
         switch buttton {
         case addButton:
@@ -236,6 +236,7 @@ extension ViewController {
         default:
             return ""
         }
+        Operator(rawValue: "+")
     }
     
     private func operands(for button: UIButton) -> String {
