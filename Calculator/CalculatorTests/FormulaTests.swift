@@ -64,4 +64,14 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, after)
     }
+    
+    func test_연산자만분리되는지확인() {
+        //given - 테스트를 위한 준비단계
+        let string = "123/456+789*3-100"
+        let after = ["/","+","*","-"]
+        //when - 동작하는 단계
+        let result = ExpressionParser.makeOperators(from: string)
+        //then - 테스트결과 확인
+        XCTAssertEqual(result, after)
+    }
 }
