@@ -79,7 +79,6 @@ extension ViewController: CalculatorDelegate {
     }
 }
 
-
 // MARK:- Formula StackView Factory
 private extension ViewController {
     func makeFormulaLabel(with text: String) -> UILabel {
