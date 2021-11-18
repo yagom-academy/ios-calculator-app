@@ -26,7 +26,7 @@ class ExpressionParserTests: XCTestCase {
         let exampleOperator: Operator = .multiply
         
         guard let testData = testFormula.operators.dequeue() else {
-            throw OperatorQueueError.NoElement
+            throw CalculatorQueueError.NoElement
         }
         
         XCTAssertEqual(exampleOperator, testData)
