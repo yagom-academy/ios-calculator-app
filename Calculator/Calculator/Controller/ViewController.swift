@@ -50,7 +50,7 @@ class ViewController: UIViewController {
 // MARK: - Actions
 
 extension ViewController {
-    @IBAction private func touchUpDigit(_ sender: UIButton) {
+    @IBAction private func touchUpDigitButton(_ sender: UIButton) {
         if calculatorManager.displayingResult {
             initDisplayedFormulas()
             initDisplayedOperand()
@@ -77,7 +77,7 @@ extension ViewController {
         }
     }
     
-    @IBAction private func touchUpDecimalPoint(_ sender: UIButton) {
+    @IBAction private func touchUpDecimalPointButton(_ sender: UIButton) {
         if calculatorManager.displayingResult {
             initDisplayedFormulas()
             initDisplayedOperand()
@@ -97,7 +97,7 @@ extension ViewController {
         displayedOperand = displayedOperand + decimalPointButtonTitle
     }
     
-    @IBAction private func touchUpOperator(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard displayedOperand != "NaN" else {
             return
         }
@@ -121,16 +121,16 @@ extension ViewController {
         initDisplayedOperand()
     }
     
-    @IBAction private func touchUpAllClear(_ sender: UIButton) {
+    @IBAction private func touchUpAllClearButton(_ sender: UIButton) {
         initAllDisplay()
     }
     
-    @IBAction private func touchUpClearEntry(_ sender: UIButton) {
+    @IBAction private func touchUpClearEntryButton(_ sender: UIButton) {
         initDisplayedOperand()
         calculatorManager.setDisplayingResultStatus(to: false)
     }
     
-    @IBAction private func touchUpSignConversion(_ sender: UIButton) {
+    @IBAction private func touchUpSignConversionButton(_ sender: UIButton) {
         guard Double(displayedOperand) != 0.0 else {
             return
         }
@@ -140,7 +140,7 @@ extension ViewController {
         displayedOperand = convertedOperand
     }
     
-    @IBAction private func touchUpEqualSign(_ sender: UIButton) {
+    @IBAction private func touchUpEqualSignButton(_ sender: UIButton) {
         guard displayedOperator != "" && displayedOperand != "" else {
             return
         }
