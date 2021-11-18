@@ -45,4 +45,5 @@ extension Calculator {
 // MARK:- Delegate Requirements
 protocol CalculatorDelegate {
     func clearToInitialState()
+    func addFormulaLine(operator: String, operand: String)
 }
