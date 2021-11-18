@@ -64,7 +64,12 @@ class ViewController: UIViewController {
         } else {
             return true
         }
-        
+    }
+    
+    func endOperandInput() {
+        stringToCalculate.append(inputOperandValues.joined())
+        inputOperandValues.removeAll()
+        currentValue.text = initialValue
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
@@ -82,21 +87,15 @@ class ViewController: UIViewController {
         currentOperator.text = inputButtonTitle
     }
     
-    func endOperandInput() {
-        stringToCalculate.append(inputOperandValues.joined())
+    func resetToInitialState() {
         inputOperandValues.removeAll()
-        currentValue.text = initialValue
+        stringToCalculate.removeAll()
+        currentOperator.text = ""
     }
     
     @IBAction func hitACButton(_ sender: UIButton) {
         resetToInitialState()
         currentValue.text = initialValue
-    }
-    
-    func resetToInitialState() {
-        inputOperandValues.removeAll()
-        stringToCalculate.removeAll()
-        currentOperator.text = ""
     }
     
     @IBAction func hitCEButton(_ sender: UIButton) {
