@@ -176,7 +176,7 @@ extension ViewController {
     }
     
     private func initDisplayedFormulas() {
-        formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
+        formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         formulasStackViewIsEmpty = true
     }
     
@@ -188,7 +188,8 @@ extension ViewController {
     
     private func scrollToBottom() {
         formulasScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0,y: self.formulasScrollView.contentSize.height
+        let bottomOffset = CGPoint(x: 0,
+                                   y: self.formulasScrollView.contentSize.height
                                     - self.formulasScrollView.bounds.size.height)
         self.formulasScrollView.setContentOffset(bottomOffset, animated: true)
     }
