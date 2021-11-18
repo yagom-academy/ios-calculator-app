@@ -61,7 +61,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="XRe-QE-UJf" firstAttribute="height" secondItem="BOT-7g-vxv" secondAttribute="height" id="1z4-Jq-fyY"/>
+                                    <constraint firstItem="XRe-QE-UJf" firstAttribute="height" secondItem="BOT-7g-vxv" secondAttribute="height" priority="100" id="1z4-Jq-fyY"/>
                                     <constraint firstItem="XRe-QE-UJf" firstAttribute="width" secondItem="BOT-7g-vxv" secondAttribute="width" id="9hO-gT-uzB"/>
                                     <constraint firstItem="XRe-QE-UJf" firstAttribute="height" secondItem="gA2-7M-FxF" secondAttribute="height" priority="1" id="PfX-qG-S4s"/>
                                     <constraint firstItem="XRe-QE-UJf" firstAttribute="leading" secondItem="K6N-nC-kaV" secondAttribute="leading" id="WTo-5t-Xde"/>

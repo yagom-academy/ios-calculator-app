@@ -25,9 +25,7 @@ class ViewController: UIViewController {
         stackView.spacing = 2.0
         stackView.alignment = .fill
         
-        for i in subviews {
-            stackView.addArrangedSubview(i)
-        }
+        subviews.forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }
@@ -41,8 +39,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let operand = sender.currentTitle else {return}
-        inputLabel.text?.append(contentsOf: operand)
+        guard let newInput = sender.currentTitle, let currentInput = inputLabel.text else {return}
+        
+        if newInput == "0" {
+            inputLabel.text = "0"
+        }
+        else {
+            inputLabel.text = currentInput + newInput
+        }
+        if currentInput == "0" {
+            inputLabel.text = newInput
+        }
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
