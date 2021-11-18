@@ -86,6 +86,7 @@ private extension Calculator {
         formulaStack.removeAll()
         currentOperator.removeAll()
         currentOperand.toZero()
+        isPositive = true
     }
 }
 
