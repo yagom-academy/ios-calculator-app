@@ -74,14 +74,14 @@ class ViewController: UIViewController {
             return
         }
         
-        guard let currentNumber = Double(currentOperand) else {
+        guard let currentOperandNumber = Double(currentOperand) else {
             return
         }
         
         finalFormula.append(currentOperand)
         
-        if isNumberOverMaximumExpression(number: currentNumber) {
-            addCalculationHistory(operandText: currentNumber.description, operatorText: currentOperator)
+        if isNumberOverMaximumExpression(number: currentOperandNumber) {
+            addCalculationHistory(operandText: currentOperandNumber.description, operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
         }
@@ -199,7 +199,7 @@ extension ViewController {
     }
     
     @IBAction private func changePlusMinusSign(_ sender: Any) {
-        guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
+        guard let currentOperandNumber = Double(currentOperand), !currentOperandNumber.isZero else {
             return
         }
         
@@ -215,7 +215,7 @@ extension ViewController {
         
         operandLabel.text = operand
                 
-        guard isNumberOverMaximumExpression(number: currentNumber) else {
+        guard isNumberOverMaximumExpression(number: currentOperandNumber) else {
             currentOperand = operand.replacingOccurrences(of: ",", with: "")
             return
         }
@@ -241,7 +241,7 @@ extension ViewController {
             return
         }
     
-        guard let currentNumber = Double(currentOperand), !currentNumber.isZero else {
+        guard let currentOperandNumber = Double(currentOperand), !currentOperandNumber.isZero else {
             changeOperator(to: `operator`)
             return
         }
@@ -250,8 +250,8 @@ extension ViewController {
             return
         }
         
-        if isNumberOverMaximumExpression(number: currentNumber) {
-            addCalculationHistory(operandText: currentNumber.description, operatorText: currentOperator)
+        if isNumberOverMaximumExpression(number: currentOperandNumber) {
+            addCalculationHistory(operandText: currentOperandNumber.description, operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
         }
