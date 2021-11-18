@@ -37,16 +37,6 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if notFormattedOperand == "0" {
-            guard number != "0" || number != "00" else {
-                return
-            }
-            
-            notFormattedOperand = number
-            operandLabel.text = notFormattedOperand
-            return
-        }
-        
         notFormattedOperand = notFormattedOperand + number
         operandLabel.text = changeNumberFormatter(insertedNumber: number)
     }
