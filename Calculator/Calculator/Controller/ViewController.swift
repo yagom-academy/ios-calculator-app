@@ -40,10 +40,16 @@ class ViewController: UIViewController {
 
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
-        
         if isEvaluated { return }
         
         if currentInputOperand == "0" {
+            currentInputOperator = operatorSymbole
+            return
+        }
+        
+        if mathExpression.isEmpty {
+            mathExpression += [currentInputOperand]
+            currentInputOperand = "0"
             currentInputOperator = operatorSymbole
             return
         }
@@ -65,5 +71,9 @@ class ViewController: UIViewController {
         currentInputOperand.insert("-", at: currentInputOperand.startIndex)
     }
     
+    
+    @IBAction func touchAllClearButton(_ sender: UIButton) {
+        resetExpression()
+    }
 }
 
