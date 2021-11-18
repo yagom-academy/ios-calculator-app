@@ -8,5 +8,8 @@
 import Foundation
 
 class InputValidator {
-    
+    typealias CalculatorStatus = (currentOperator: String,
+                                  currentOperand: String,
+                                  isPositive: Bool,
+                                  formulaStack: [(String, String)])
 }
