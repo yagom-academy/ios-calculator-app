@@ -22,24 +22,49 @@ class ViewController: UIViewController {
     var inputOperandValues: [String] = []
     var isOperatorEnterd: Bool = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        inputOperandValues = [initialValue]
+        isOperatorEnterd = false
+    }
+    
     @IBAction func hitOperandButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-
-        guard !inputOperandValues.isEmpty || inputButtonTitle != "00" else {
+        guard isVerify(inputButtonTitle, in: inputOperandValues) else {
             return
         }
-        guard inputButtonTitle != "." || inputOperandValues.last != "." else {
-            return
-        }
-        if inputOperandValues.first == initialValue {
+  
+        let isDemicalAndInputIsNumber = inputOperandValues.first == initialValue
+                                        && !inputOperandValues.contains(".")
+                                        && inputButtonTitle != "."
+        if isDemicalAndInputIsNumber {
             inputOperandValues.removeFirst()
         }
-        
+
         inputOperandValues.append(inputButtonTitle)
         isOperatorEnterd = false
         currentValue.text = inputOperandValues.joined()
+    }
+    
+    func isVerify(_ value: String, in pastValues: [String]) -> Bool {
+        let value = value
+        
+        if value == "0" && pastValues.first == "0" {
+            return false
+        } else if value == "00" && pastValues.first == "0" {
+            return false
+        } else if value == "00" && pastValues.isEmpty {
+            return false
+        } else if value == "." && pastValues.isEmpty {
+            return false
+        } else if value == "." && pastValues.contains(".") {
+            return false
+        } else {
+            return true
+        }
+        
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
@@ -85,7 +110,7 @@ class ViewController: UIViewController {
                   let doubleTypeOperand = Double(currentOperand) else {
                 return
             }
-            currentValue.text = String(doubleTypeOperand * -1)
+            currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
         }
     }
     
@@ -105,10 +130,7 @@ class ViewController: UIViewController {
     
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
+    
 
 
 }
