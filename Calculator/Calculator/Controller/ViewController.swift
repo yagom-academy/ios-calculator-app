@@ -36,6 +36,17 @@ class ViewController: UIViewController {
         numberCompositionLabel.text = numberOfLabel
     }
     
+    @IBAction func clickDoubleZero(_ sender: UIButton) {
+        guard let numberOfLabel = numberCompositionLabel.text, let point = sender.titleLabel?.text else {
+            return
+        }
+               
+        if numberOfLabel != "0" {
+            numberCompositionLabel.text = numberOfLabel + point
+        }
+    }
+    
+    
     @IBAction func clickNumber(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
             return
