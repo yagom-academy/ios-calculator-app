@@ -69,19 +69,14 @@ extension ViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard currentOperand != "NaN" else {
-            return
-        }
-        guard let newOperator = sender.titleLabel?.text else {
+        guard currentOperand != "NaN",
+              let newOperator = sender.titleLabel?.text else {
             return
         }
         guard hasCalculated == false else {
-            hasCalculated.toggle()
-            removeFormulaView()
-            currentOperand = currentOperand
-            addCurrentFormulaStack()
             currentOperator = newOperator
             currentOperand = "0"
+            startNewCalculation()
             return
         }
         guard isNotZero else {
@@ -165,6 +160,13 @@ extension ViewController {
 
 // MARK: Formula Stack View Related
 extension ViewController {
+    private func startNewCalculation() {
+        hasCalculated = false
+        removeFormulaView()
+        currentOperand = currentOperand
+        addCurrentFormulaStack()
+    }
+    
     private func addCurrentFormulaStack() {
         let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
         calculatorStackView.addArrangedSubview(formulaStackView)
