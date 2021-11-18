@@ -34,7 +34,8 @@ class ViewController: UIViewController {
         guard var numberOfLabel = numberCompositionLabel.text else {
             return
         }
-        if numberOfLabel == "0" {
+        
+        if isZeroValue(data: numberOfLabel) {
             return
         }
         
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
             return
         }
                
-        if numberOfLabel != "0" {
+        if isZeroValue(data: numberOfLabel) == false {
             numberCompositionLabel.text = numberOfLabel + point
         }
     }
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
             return
         }
     
-        if numberOfLabel == "0" {
+        if isZeroValue(data: numberOfLabel) {
             numberCompositionLabel.text = numberOfButton
         } else {
             numberCompositionLabel.text = numberOfLabel + numberOfButton
