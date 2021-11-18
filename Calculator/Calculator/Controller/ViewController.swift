@@ -51,6 +51,17 @@ class ViewController: UIViewController {
     @IBAction func touchUpClearEntryBtn(_ sender: UIButton) {
     }
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
+        guard let operandInNumber = Double(currentOperand), operandInNumber != 0 else {
+            return
+        }
+        
+        if currentOperand.first == "-" {
+            currentOperand.removeFirst()
+        } else {
+            currentOperand = "-\(currentOperand)"
+        }
+        
+        operandLabel.text = currentOperand
     }
     
     @IBAction func touchUpDivideOperator(_ sender: UIButton) {
