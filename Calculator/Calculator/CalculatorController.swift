@@ -156,7 +156,7 @@ extension CalculatorController {
 extension CalculatorController {
     
     private func changeNumberLabel(text: String) {
-        let currentText = numberLabel.text ?? "0"
+        var currentText = numberLabel.text ?? "0"
         
         guard currentText != "0" ||
               text != "00" else {
@@ -164,12 +164,12 @@ extension CalculatorController {
         }
         
         if currentText == "0" {
-            numberLabel.text = text
+            currentText = text
         } else {
-            numberLabel.text = currentText + text
+            currentText += text
         }
         
-        let numberLabelText = removeComma(text: numberLabel.text)
+        let numberLabelText = removeComma(text: currentText)
         let number = Double(numberLabelText)
         numberLabel.text = numberFormatter.string(for: number)
     }
