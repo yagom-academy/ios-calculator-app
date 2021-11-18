@@ -5,7 +5,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
+    
     private var inputNumber = ""
+    private var entireFormula = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +54,6 @@ class ViewController: UIViewController {
             
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = inputNumber
-            
         } else {
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = inputNumber
@@ -66,6 +67,7 @@ class ViewController: UIViewController {
         } else {
             stackView.addArrangedSubview(formulaStackView)
             symbolLabel.text = sender.currentTitle
+            addEntireFormula()
             initializeNumberLabel()
         }
     }
@@ -109,6 +111,20 @@ class ViewController: UIViewController {
         initializeSymbolLabel()
     }
     
+    @IBAction func EqualButtonPressed(_ sender: UIButton) {
+        entireFormula += numberLabel.text!
+        var formula = ExpressionParser.parse(from: entireFormula)
+        do {
+            let result = try formula.result()
+            numberLabel.text = String(result)
+        } catch CalculateError.emptyQueue {
+            return
+        } catch {
+            print(error)
+        }
+    }
+    
+    
     func initializeNumberLabel() {
         inputNumber.removeAll()
         numberLabel.text = "0"
@@ -120,6 +136,14 @@ class ViewController: UIViewController {
     
     func isContainDot(text: String) -> Bool {
         return text.contains(".")
+    }
+    
+    func addEntireFormula() {
+        guard let number = numberLabel.text, let symbol = symbolLabel.text else {
+            return
+        }
+        entireFormula += number
+        entireFormula += symbol
     }
 }
 
