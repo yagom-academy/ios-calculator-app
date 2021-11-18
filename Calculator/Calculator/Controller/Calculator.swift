@@ -64,15 +64,16 @@ extension Calculator {
         
     }
     func dotButtonDidTap() {
-        
+        validator.dotValidity(at: currentState) ?
+            currentOperand.append(".") : ()
     }
     func zeroButtonDidTap() {
         validator.zeroValidity(at: currentState) ?
-            currentOperator.append("0") : ()
+            currentOperand.append("0") : ()
     }
     func doubleZeroButtonDidTap() {
         validator.zeroValidity(at: currentState) ?
-            currentOperator.append("00") : ()
+            currentOperand.append("00") : ()
     }
     func digitButtonDidTap(number: String) {
         

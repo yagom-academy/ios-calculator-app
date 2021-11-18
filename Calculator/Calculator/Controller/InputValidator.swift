@@ -35,8 +35,10 @@ class InputValidator {
         }
         return true
     }
-    
     func zeroValidity(at state: CalculatorState) -> Bool {
         !isZero(state)
+    }
+    func dotValidity(at state: CalculatorState) -> Bool {
+        !isDotted(state)
     }
 }
