@@ -78,6 +78,8 @@ class ViewController: UIViewController {
             return
         }
         
+        finalFormula.append(currentOperand)
+        
         if isNumberOverMaximumExpression(number: currentNumber) {
             addCalculationHistory(operandText: currentNumber.description, operatorText: currentOperator)
         } else {
@@ -269,7 +271,6 @@ extension ViewController {
         isCalculated = true
         
         addLastCalculationHistory()
-        finalFormula.append(currentOperand)
         calculateFormula(from: finalFormula)
     }
     
