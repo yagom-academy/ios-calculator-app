@@ -70,6 +70,18 @@ class ViewController: UIViewController {
         operatorLabel.text = ""
     }
     
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        guard let currentOperand = operandsLabel.text else {
+            return
+        }
+        if currentOperand.contains(".") {
+            return
+        } else {
+            operandsLabel.text = currentOperand + "."
+        }
+    }
+    
+    
     @IBAction func euqualButtonTapped(_ sender: UIButton) {
     }
     
