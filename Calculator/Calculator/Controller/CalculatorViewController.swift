@@ -68,14 +68,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
-        if notFormattedOperand == "0" {
+        guard notFormattedOperand != "0" else {
             return
         }
+        
         if notFormattedOperand.contains("-") {
             notFormattedOperand.remove(at: notFormattedOperand.startIndex)
         } else {
             notFormattedOperand.insert("-", at: notFormattedOperand.startIndex)
         }
+        
         operandLabel.text = notFormattedOperand
     }
     
