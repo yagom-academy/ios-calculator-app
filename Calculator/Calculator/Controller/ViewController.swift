@@ -33,9 +33,8 @@ class ViewController: UIViewController {
 // MARK: - IBAction Method
 extension ViewController {
     @IBAction private func numberDidTap(_ sender: UIButton) {
-        operand += operands(for: sender)
-        
         do {
+            operand += try operands(for: sender)
             inputedOperandLabel.text = try numberFormatterFor(inputOperand: operand)
         } catch let error {
             print(error)
@@ -44,8 +43,12 @@ extension ViewController {
     
     @IBAction private func operatorDidTap(_ sender: UIButton) {
         if operand == initializeToEmptyString {
-            inputedOperatorLabel.text = operators(for: sender)
+            do {
+                inputedOperatorLabel.text = try operators(for: sender)
             return
+            } catch let error {
+                print(error)
+            }
         }
         
         guard let operatorLabelText = inputedOperatorLabel.text else { return }
@@ -55,7 +58,12 @@ extension ViewController {
         fomula += operand + " " + operatorLabelText + " "
         operand = initializeToEmptyString
         inputedOperandLabel.text = initializeOperandLabelText
-        inputedOperatorLabel.text = operators(for: sender)
+        do {
+            inputedOperatorLabel.text = try operators(for: sender)
+        return
+        } catch let error {
+            print(error)
+        }
 
         scrollToBottom()
     }
@@ -200,23 +208,23 @@ extension ViewController {
         return formattedDotFront + "." + dotBack
     }
 
-    private func operators(for buttton: UIButton) -> String {
+    private func operators(for buttton: UIButton) throws -> String {
         guard let buttonIdentifier = buttton.accessibilityIdentifier else {
-            return ""
+            throw ButtonMachingError.dataTypeCastingFailed
         }
         guard let machingOperator = Operator(rawValue: Character(buttonIdentifier)) else {
-            return ""
+            throw ButtonMachingError.dataTypeCastingFailed
         }
         
         return "\(machingOperator)"
     }
     
-    private func operands(for button: UIButton) -> String {
+    private func operands(for button: UIButton) throws -> String {
         guard let buttonIdentifier = button.accessibilityIdentifier else {
-            return ""
+            throw ButtonMachingError.dataTypeCastingFailed
         }
         guard let machingOperand = Operands(rawValue: buttonIdentifier) else {
-            return ""
+            throw ButtonMachingError.dataTypeCastingFailed
         }
         
         return "\(machingOperand)"
