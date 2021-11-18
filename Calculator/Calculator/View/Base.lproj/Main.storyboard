@@ -362,7 +362,7 @@
                     </view>
                     <connections>
                         <outlet property="currentInputOperandLabel" destination="Lwz-OF-XHD" id="dSf-oy-DEv"/>
-                        <outlet property="currentInputOperator" destination="HPC-iy-qdm" id="0Qa-YK-8tI"/>
+                        <outlet property="currentInputOperatorLabel" destination="HPC-iy-qdm" id="0Qa-YK-8tI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

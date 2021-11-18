@@ -9,12 +9,20 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var currentInputOperandLabel: UILabel!
+    @IBOutlet weak var currentInputOperatorLabel: UILabel!
+    
     var currentInputOperand: String = "0" {
         didSet {
             currentInputOperandLabel.text = currentInputOperand
         }
     }
-    @IBOutlet weak var currentInputOperator: UILabel!
+    
+    var currentInputOperator: String = "" {
+        didSet {
+            currentInputOperatorLabel.text = currentInputOperator
+        }
+    }
+    
     var mathExpression: [String] = []
     var isEvaluated: Bool = false
 
@@ -22,12 +30,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         currentInputOperandLabel.text = currentInputOperand
+        currentInputOperatorLabel.text = currentInputOperator
         
     }
     
     func resetExpression() {
         currentInputOperand = "0"
-        currentInputOperator.text = ""
+        currentInputOperator = ""
         mathExpression = []
         isEvaluated = false
     }
@@ -50,20 +59,20 @@ class ViewController: UIViewController {
         if isEvaluated { return }
         
         if currentInputOperand == "0" {
-            currentInputOperator.text = operatorSymbole
+            currentInputOperator = operatorSymbole
             return
         }
         
         if mathExpression.isEmpty {
             mathExpression += [currentInputOperand]
             currentInputOperand = "0"
-            currentInputOperator.text = operatorSymbole
+            currentInputOperator = operatorSymbole
             return
         }
         
-        mathExpression += [currentInputOperator.text ?? "", currentInputOperand]
+        mathExpression += [currentInputOperator, currentInputOperand]
         currentInputOperand = "0"
-        currentInputOperator.text = operatorSymbole
+        currentInputOperator = operatorSymbole
     }
     
     @IBAction func touchSignChangeButton(_ sender: UIButton) {
