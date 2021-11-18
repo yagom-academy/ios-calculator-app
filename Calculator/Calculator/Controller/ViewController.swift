@@ -116,7 +116,7 @@ extension ViewController {
             return
         }
         
-        addFormulaToFormulas(operator: displayedOperator, operand: displayedOperand)
+        addFormula(operator: displayedOperator, operand: displayedOperand)
         displayedOperator = currentOperandButtionTitle
         initDisplayedOperand()
     }
@@ -145,7 +145,7 @@ extension ViewController {
             return
         }
         
-        addFormulaToFormulas(operator: displayedOperator, operand: displayedOperand)
+        addFormula(operator: displayedOperator, operand: displayedOperand)
         
         let formulaString: String = assembleFormula()
         var formula: Formula = ExpressionParser.parse(from: formulaString)
@@ -194,7 +194,7 @@ extension ViewController {
         self.formulasScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    private func addFormulaToFormulas(`operator`: String, operand: String) {
+    private func addFormula(`operator`: String, operand: String) {
         let formulaRowStackView: UIStackView = UIStackView()
         let operatorLabel: UILabel = UILabel()
         let operandLabel: UILabel = UILabel()
