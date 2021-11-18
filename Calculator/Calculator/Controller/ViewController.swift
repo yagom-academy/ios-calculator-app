@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     var currentOperand: String = ""
     var currentOperator: String = ""
-    var completeFormula: [String] = []
+    var completeFormula: String = ""
     var isCalculationOver: Bool = false
 
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         
         currentOperand = ""
         currentOperator = ""
-        completeFormula = []
+        completeFormula = ""
         isCalculationOver = false
     }
     
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
         
     }
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
-        var formula: Formula = ExpressionParser.parse(from: completeFormula.joined())
+        var formula: Formula = ExpressionParser.parse(from: completeFormula)
         do {
             let result: Double = try formula.result()
             operandLabel.text = "\(result)"
