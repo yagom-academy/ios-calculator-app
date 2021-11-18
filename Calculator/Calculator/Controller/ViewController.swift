@@ -38,6 +38,19 @@ class ViewController: UIViewController {
         currentInputOperand += number
     }
 
-
+    @IBAction func touchOperatorButton(_ sender: UIButton) {
+        guard let operatorSymbole = sender.titleLabel?.text else { return }
+        
+        if isEvaluated { return }
+        
+        if currentInputOperand == "0" {
+            currentInputOperator = operatorSymbole
+            return
+        }
+        
+        mathExpression += [currentInputOperator, currentInputOperand]
+        currentInputOperand = "0"
+        currentInputOperator = operatorSymbole
+    }
 }
 
