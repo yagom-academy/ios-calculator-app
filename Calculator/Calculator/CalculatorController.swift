@@ -87,15 +87,13 @@ extension CalculatorController {
         guard let `operator` = sender.currentTitle else { return }
         
         guard numberLabel.text != "0" else {
-            operatorLabel.text = `operator`
+            changeOperatorLabel(text: `operator`)
             appendExpressionOperator()
             return
         }
         
         createExpressionStackView()
-        
-        operatorLabel.text = `operator`
-        
+        changeOperatorLabel(text: `operator`)
         appendExpressionNumber()
         appendExpressionOperator()
         resetNumberLabel()
@@ -176,6 +174,10 @@ extension CalculatorController {
     
     private func resetNumberLabel() {
         numberLabel.text = "0"
+    }
+    
+    private func changeOperatorLabel(text: String) {
+        operatorLabel.text = text
     }
     
     private func resetOperatorLabel() {
