@@ -6,9 +6,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var UIScrollView: UIScrollView!
     
+    var leftOperatorLabel: UILabel {
+        let label = UILabel()
+        return label
+    }
+    
+    var rightOperandLabel: UILabel {
+        let label = UILabel()
+        return label
+    }
+    
+    var stackView: UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20.0
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        
+        UIScrollView.addSubview(stackView)
+        stackView.addSubview(leftOperatorLabel)
+        stackView.addSubview(rightOperandLabel)
+
+        return stackView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resultLabel.text = "0"
+
         
     }
 
@@ -19,8 +44,9 @@ class ViewController: UIViewController {
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {return}
-        resultLabel.text?.append(contentsOf: `operator`)
         operatorLabel.text = `operator`
+        rightOperandLabel.text = resultLabel.text
+        resultLabel.text = ""
     }
     
     @IBAction func ACButtonTapped(_ sender: UIButton) {
@@ -33,7 +59,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func plusMinusButtonChanged(_ sender: UIButton) {
+    @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
         
     }
     
@@ -44,6 +70,7 @@ class ViewController: UIViewController {
     @IBAction func resultButtonTapped(_ sender: UIButton) {
         
     }
+
     
 }
 
