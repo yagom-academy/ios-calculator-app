@@ -38,13 +38,13 @@ class CalculatorViewController: UIViewController {
         }
         
         if inputedOperand == "0" {
-            if number == "0" || number == "00" {
-                return
-            } else {
-                inputedOperand = number
-                operandLabel.text = inputedOperand
+            guard number != "0" || number != "00" else {
                 return
             }
+            
+            inputedOperand = number
+            operandLabel.text = inputedOperand
+            return
         }
         
         inputedOperand = inputedOperand + number
