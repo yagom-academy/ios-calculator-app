@@ -364,6 +364,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="expressionScrollView" destination="BOT-7g-vxv" id="2Dr-QN-IwU"/>
                         <outlet property="expressionStackViewSuperView" destination="XRe-QE-UJf" id="z2h-Yq-g3d"/>
                         <outlet property="numberLabel" destination="Lwz-OF-XHD" id="uCg-CR-V9y"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="XHv-1x-Oem"/>

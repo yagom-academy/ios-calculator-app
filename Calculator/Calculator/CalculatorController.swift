@@ -11,6 +11,7 @@ class CalculatorController: UIViewController {
     @IBOutlet weak private var numberLabel: UILabel!
     @IBOutlet weak private var operatorLabel: UILabel!
     @IBOutlet weak private var expressionStackViewSuperView: UIStackView!
+    @IBOutlet weak private var expressionScrollView: UIScrollView!
     
     private var expressionInput: String = String()
     
@@ -221,9 +222,18 @@ extension CalculatorController {
         let stackView = createStackView(subviews: operatorLabel, operandLabel)
         
         expressionStackViewSuperView.addArrangedSubview(stackView)
+        
+        scrollToBottom(self.expressionScrollView)
     }
     
     private func clearExpressionsStackView() {
         expressionStackViewSuperView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func scrollToBottom(_ scroll: UIScrollView) {
+        scroll.layoutIfNeeded()
+        let offsetY = scroll.contentSize.height - scroll.bounds.size.height
+        let bottomOffset = CGPoint(x: 0, y: offsetY)
+        scroll.setContentOffset(bottomOffset, animated: true)
     }
 }
