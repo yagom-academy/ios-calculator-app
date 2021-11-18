@@ -2,13 +2,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet weak var inputLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var mainStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultLabel.text = "0"
+        inputLabel.text = "0"
     }
     
     func makeLabel(text: String?) -> UILabel {
@@ -33,44 +33,44 @@ class ViewController: UIViewController {
     }
     
     func makeSmallStackView() {
-        let operandLabel = makeLabel(text: self.resultLabel.text)
+        let operandLabel = makeLabel(text: self.inputLabel.text)
         let operatorLabel = makeLabel(text: self.operatorLabel.text)
         let smallStackview = makeStackView(with: operatorLabel,operandLabel)
         
-        stackView.addArrangedSubview(smallStackview)
+        mainStackView.addArrangedSubview(smallStackview)
     }
     
-    @IBAction func operandButtonTapped(_ sender: UIButton) {
+    @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let operand = sender.currentTitle else {return}
-        resultLabel.text?.append(contentsOf: operand)
+        inputLabel.text?.append(contentsOf: operand)
     }
     
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {return}
         operatorLabel.text = `operator`
         makeSmallStackView()
-        resultLabel.text = ""
+        inputLabel.text = ""
     }
     
-    @IBAction func ACButtonTapped(_ sender: UIButton) {
-        resultLabel.text = "0"
+    @IBAction func touchUpACButton(_ sender: UIButton) {
+        inputLabel.text = "0"
     }
     
-    @IBAction func CEButtonTapped(_ sender: UIButton) {
-        if resultLabel.text?.isEmpty == false {
-            resultLabel.text?.removeLast()
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        if inputLabel.text?.isEmpty == false {
+            inputLabel.text?.removeLast()
         }
     }
     
-    @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
+    @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
         
     }
     
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
         
     }
     
-    @IBAction func resultButtonTapped(_ sender: UIButton) {
+    @IBAction func touchUpResultButton(_ sender: UIButton) {
         
     }
 
