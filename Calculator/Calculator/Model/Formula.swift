@@ -8,7 +8,14 @@
 import Foundation
 
 struct Formula {
-    enum FormulaError: Error {
+    enum FormulaError: Error, CustomStringConvertible {
+        var description: String {
+            switch self {
+            case .NaN:
+                return "NaN"
+            }
+        }
+        
         case NaN
     }
     
