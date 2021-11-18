@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearToInitialState()
+        calculator.shouldSetInitialState()
     }
 }
 
@@ -59,11 +59,6 @@ private extension ViewController {
 
 // MARK:- Delegate Implementation
 extension ViewController: CalculatorDelegate {
-    func clearToInitialState() {
-        currentOperatorLabel.text = ""
-        currentOperandLabel.text = "0"
-        verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
     func addFormulaLine(operator: String, operand: String) {
         let operatorLabel = makeFormulaLabel(with: `operator`)
         let operandLabel = makeFormulaLabel(with: operand)

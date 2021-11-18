@@ -18,8 +18,13 @@ class Calculator {
 
 // MARK:- Receiving Events
 extension Calculator {
+    func shouldSetInitialState() {
+        delegate?.clearFormulaStack()
+        delegate?.updateOperatorLabel(with: "")
+        delegate?.updateOperandLabel(with: "0")
+    }
     func allClearButtonDidTap() {
-        delegate?.clearToInitialState()
+        
     }
     func clearEntryButtonDidTap() {
 
@@ -49,7 +54,6 @@ extension Calculator {
 
 // MARK:- Delegate Requirements
 protocol CalculatorDelegate {
-    func clearToInitialState()
     func addFormulaLine(operator: String, operand: String)
     func updateOperatorLabel(with operator: String)
     func updateOperandLabel(with operand: String)
