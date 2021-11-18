@@ -57,10 +57,12 @@ class ViewController: UIViewController {
             guard inputNumber.isEmpty == false else { return }
             
             inputNumber += sender.currentTitle ?? ""
-            numberLabel.text = inputNumber
+//            numberLabel.text = inputNumber
+            numberLabel.text = numberFormatter.string(for: Double(inputNumber))
         } else {
             inputNumber += sender.currentTitle ?? ""
-            numberLabel.text = inputNumber
+//            numberLabel.text = inputNumber
+            numberLabel.text = numberFormatter.string(for: Double(inputNumber))
         }
     }
     
@@ -119,13 +121,17 @@ class ViewController: UIViewController {
     @IBAction func EqualButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
         
+        stackView.addArrangedSubview(formulaStackView)
+        
         entireFormula += numberLabel.text ?? ""
+        
+        entireFormula = removeComma(of: entireFormula)
         
         var formula = ExpressionParser.parse(from: entireFormula)
         
         do {
             let result = try formula.result()
-            numberLabel.text = String(result)
+            numberLabel.text = numberFormatter.string(for: result)
             initializeSymbolLabel()
         } catch CalculateError.emptyQueue {
             return
@@ -159,5 +165,8 @@ class ViewController: UIViewController {
         formatter.numberStyle = .decimal
         formatter.maximumSignificantDigits = 20
     }
+    
+    func removeComma(of string: String) -> String {
+        return string.replacingOccurrences(of: ",", with: "")
+    }
 }
-
