@@ -11,7 +11,6 @@
 		1852752C27393DB00070A2D5 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852752B27393DB00070A2D5 /* CalculatorTests.swift */; };
 		18527534273945770070A2D5 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852752127393D4D0070A2D5 /* CalculatorItemQueue.swift */; };
 		18527535273945880070A2D5 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852752127393D4D0070A2D5 /* CalculatorItemQueue.swift */; };
-		1853C3E3273A910100CB3E33 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852752327393D630070A2D5 /* CalculateItem.swift */; };
 		1853C3E5273AEB2300CB3E33 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853C3E4273AEB2300CB3E33 /* LinkedList.swift */; };
 		1853C3E6273AEB2600CB3E33 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853C3E4273AEB2300CB3E33 /* LinkedList.swift */; };
 		1853C3E8273AEB7200CB3E33 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853C3E7273AEB7200CB3E33 /* QueueError.swift */; };
@@ -381,7 +380,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18527534273945770070A2D5 /* CalculatorItemQueue.swift in Sources */,
-				1853C3E3273A910100CB3E33 /* CalculateItem.swift in Sources */,
 				1853C3E9273AF04400CB3E33 /* QueueError.swift in Sources */,
 				1853C3E6273AEB2600CB3E33 /* LinkedList.swift in Sources */,
 				1852752C27393DB00070A2D5 /* CalculatorTests.swift in Sources */,
