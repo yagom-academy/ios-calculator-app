@@ -62,6 +62,10 @@ class ViewController: UIViewController {
         finalFormula.append(newOperator)
     }
     
+    private func isNumberOverMaximumExpression(number: Double) -> Bool {
+        return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
+    }
+    
     private func addLastCalculationHistory() {
         guard !currentOperand.isEmpty && !currentOperator.isEmpty else {
             return
@@ -75,7 +79,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if abs(currentNumber) >= pow(10, Double(maximumDigitsOfDoubleExpression)) {
+        if isNumberOverMaximumExpression(number: currentNumber) {
             addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
@@ -94,7 +98,7 @@ class ViewController: UIViewController {
             resetCurrentOperand()
             operatorLabel.text = ""
             
-            if abs(calculationResult) >= pow(10, Double(maximumDigitsOfDoubleExpression)) {
+            if isNumberOverMaximumExpression(number: calculationResult) {
                 operandLabel.text = String(calculationResult)
             } else {
                 operandLabel.text = calculationResultText
@@ -247,7 +251,7 @@ extension ViewController {
             return
         }
         
-        if abs(currentNumber) >= pow(10, Double(maximumDigitsOfDoubleExpression)) {
+        if isNumberOverMaximumExpression(number: currentNumber) {
             addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
