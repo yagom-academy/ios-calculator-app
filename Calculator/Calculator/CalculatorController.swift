@@ -143,7 +143,7 @@ extension CalculatorController {
             
             resetExpressionInput()
         } catch OperatorError.divideByZero {
-            numberLabel.text = "NaN"
+            showNotANumber()
         } catch {
             return
         }
@@ -174,6 +174,10 @@ extension CalculatorController {
     
     private func resetNumberLabel() {
         numberLabel.text = "0"
+    }
+
+    private func showNotANumber() {
+        numberLabel.text = "NaN"
     }
     
     private func changeOperatorLabel(text: String) {
