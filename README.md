@@ -1,7 +1,7 @@
 # 📱프로젝트명: 계산기
 
 ## 🐶 App소개
-
+<img src="https://user-images.githubusercontent.com/39155090/142417199-0dfa73e8-2ffa-4170-b598-d89b338a89cb.gif" width="300" height="600">
 
 
 ## 🐺 코드이해자료
