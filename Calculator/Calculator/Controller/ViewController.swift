@@ -13,29 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet private weak var toBeCalculateFormulaStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    @IBOutlet private weak var inputDotButton: UIButton!
-    @IBOutlet private weak var inputZeroZeroButton: UIButton!
-    @IBOutlet private weak var inputZeroButton: UIButton!
-    @IBOutlet private weak var inputOneButton: UIButton!
-    @IBOutlet private weak var inputTwoButton: UIButton!
-    @IBOutlet private weak var inputThreeButton: UIButton!
-    @IBOutlet private weak var inputFourButton: UIButton!
-    @IBOutlet private weak var inputFiveButton: UIButton!
-    @IBOutlet private weak var inputSixButton: UIButton!
-    @IBOutlet private weak var inputSevenButton: UIButton!
-    @IBOutlet private weak var inputEightButton: UIButton!
-    @IBOutlet private weak var inputNineButton: UIButton!
-    
-    @IBOutlet private weak var divideButton: UIButton!
-    @IBOutlet private weak var multiplyButton: UIButton!
-    @IBOutlet private weak var subtractButton: UIButton!
-    @IBOutlet private weak var addButton: UIButton!
-    @IBOutlet private weak var equalButton: UIButton!
-    
-    @IBOutlet private weak var allClearButton: UIButton!
-    @IBOutlet private weak var cleanEntry: UIButton!
-    @IBOutlet private weak var convertPositiveOrNegativeNumber: UIButton!
-    
     private let initializeOperandLabelText = "0"
     private let initializeOperatorLabelText = ""
     private let initializeToEmptyString = ""
@@ -224,50 +201,25 @@ extension ViewController {
     }
 
     private func operators(for buttton: UIButton) -> String {
-        switch buttton {
-        case addButton:
-            return String(Operator.add.rawValue)
-        case subtractButton:
-            return String(Operator.subtract.rawValue)
-        case divideButton:
-            return String(Operator.divide.rawValue)
-        case multiplyButton:
-            return String(Operator.multiply.rawValue)
-        default:
+        guard let buttonIdentifier = buttton.accessibilityIdentifier else {
             return ""
         }
-        Operator(rawValue: "+")
+        guard let machingOperator = Operator(rawValue: Character(buttonIdentifier)) else {
+            return ""
+        }
+        
+        return "\(machingOperator)"
     }
     
     private func operands(for button: UIButton) -> String {
-        switch button {
-        case inputDotButton:
-            return "."
-        case inputZeroButton:
-            return "0"
-        case inputZeroZeroButton:
-            return "00"
-        case inputOneButton:
-            return "1"
-        case inputTwoButton:
-            return "2"
-        case inputThreeButton:
-            return "3"
-        case inputFourButton:
-            return "4"
-        case inputFiveButton:
-            return "5"
-        case inputSixButton:
-            return "6"
-        case inputSevenButton:
-            return "7"
-        case inputEightButton:
-            return "8"
-        case inputNineButton:
-            return "9"
-        default:
+        guard let buttonIdentifier = button.accessibilityIdentifier else {
             return ""
         }
+        guard let machingOperand = Operands(rawValue: buttonIdentifier) else {
+            return ""
+        }
+        
+        return "\(machingOperand)"
     }
 }
 
