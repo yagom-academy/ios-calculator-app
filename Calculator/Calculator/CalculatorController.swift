@@ -16,6 +16,14 @@ class CalculatorController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     
+    private var hasSuffixOperator: Bool {
+        get {
+            return Operator.allCases.reduce(false) {
+                $0 == expressionInput.hasSuffix(String($1.rawValue))
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initNumberFormatter()
@@ -40,21 +48,11 @@ extension CalculatorController {
     private func appendExpressionOperator() {
         guard let `operator` = operatorLabel.text else { return }
         
-        if hasSuffixOperator() {
+        if hasSuffixOperator {
             expressionInput.removeLast()
         }
         
         expressionInput.append(`operator`)
-    }
-    
-    private func hasSuffixOperator() -> Bool {
-        var hasOprator = false
-        
-        Operator.allCases.forEach {
-            hasOprator = hasOprator == expressionInput.hasSuffix(String($0.rawValue))
-        }
-        
-        return hasOprator
     }
     
     private func resetExpressionInput() {
