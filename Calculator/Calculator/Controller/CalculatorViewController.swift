@@ -126,7 +126,8 @@ class CalculatorViewController: UIViewController {
         
         calculationHistoryStackView.addArrangedSubview(stackView)
         
-        calculatorController.insertFormula(operator: `operator`, operand: operand.components(separatedBy: [","]).joined())
+        calculatorController.insertFormula(operator: `operator`,
+                                           operand: operand.components(separatedBy: [","]).joined())
         
         autoScrollDown()
     }
@@ -172,5 +173,4 @@ class CalculatorViewController: UIViewController {
         }
         return result
     }
-    
 }
