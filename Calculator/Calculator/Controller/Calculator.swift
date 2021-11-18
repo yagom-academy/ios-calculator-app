@@ -16,14 +16,12 @@ class Calculator {
     }
     private var currentOperand = "0" {
         didSet {
-            delegate?.updateOperandLabel(with: isPositive ?
-                                            currentOperand : "-" + currentOperand)
+            delegate?.updateOperandLabel(with: currentOperandWithSign)
         }
     }
     private var isPositive = true {
         didSet {
-            delegate?.updateOperandLabel(with: isPositive ?
-                                            currentOperand : "-" + currentOperand)
+            delegate?.updateOperandLabel(with: currentOperandWithSign)
         }
     }
     private var formulaStack = [(operator: String, operand: String)]() {
@@ -38,6 +36,9 @@ class Calculator {
     }
     private var currentState: (String, String, Bool, [(String, String)]) {
         (currentOperator, currentOperand, isPositive, formulaStack)
+    }
+    private var currentOperandWithSign: String {
+        isPositive ? currentOperand : "-" + currentOperand
     }
 }
 
@@ -57,7 +58,10 @@ extension Calculator {
             isPositive.toggle() : ()
     }
     func operatorButtonDidTap(operator: String) {
-        
+        replaceOperator(with: `operator`)
+        guard validator.appendFormulaValidity(at: currentState) else { return }
+        formulaStack.append((currentOperator, currentOperandWithSign))
+        emptyOperand()
     }
     func equalsButtonDidTap() {
         
@@ -85,6 +89,13 @@ private extension Calculator {
     func toInitialState() {
         formulaStack.removeAll()
         currentOperator.removeAll()
+        currentOperand.toZero()
+        isPositive = true
+    }
+    func replaceOperator(with newOperator: String) {
+        currentOperator = newOperator
+    }
+    func emptyOperand() {
         currentOperand.toZero()
         isPositive = true
     }
