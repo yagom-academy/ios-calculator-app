@@ -130,11 +130,14 @@ class ViewController: UIViewController {
         var formula = ExpressionParser.parse(from: entireFormula)
         
         do {
+            initializeSymbolLabel()
+            
             let result = try formula.result()
             numberLabel.text = numberFormatter.string(for: result)
-            initializeSymbolLabel()
         } catch CalculateError.emptyQueue {
             return
+        } catch CalculateError.divideWithZero {
+            numberLabel.text = "NaN"
         } catch {
             print(error)
         }
