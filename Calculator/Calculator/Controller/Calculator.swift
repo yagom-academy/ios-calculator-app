@@ -36,6 +36,10 @@ class Calculator {
                                      operand: latestFormula.operand)
         }
     }
+    
+    var status: (String, String, Bool, [(String, String)]) {
+        (currentOperator, currentOperand, isPositive, formulaStack)
+    }
     var isInitialState: Bool {
         currentOperand == "0"
             && currentOperator == ""
