@@ -11,11 +11,20 @@ class Calculator {
     var delegate: CalculatorDelegate?
     private let validator = InputValidator()
     
-    private var currentOperand = "0" {
-        didSet { delegate?.updateOperandLabel(with: currentOperand) }
-    }
     private var currentOperator = "" {
         didSet { delegate?.updateOperatorLabel(with: currentOperator) }
+    }
+    private var currentOperand = "0" {
+        didSet {
+            delegate?.updateOperandLabel(with: isPositive ?
+                                            currentOperand : "-" + currentOperand)
+        }
+    }
+    private var isPositive = true {
+        didSet {
+            delegate?.updateOperandLabel(with: isPositive ?
+                                            currentOperand : "-" + currentOperand)
+        }
     }
     private var formulaStack = [(operator: String, operand: String)]() {
         didSet {
@@ -50,7 +59,7 @@ extension Calculator {
 
     }
     func toggleSignButtonDidTap() {
-        
+        isPositive.toggle()
     }
     func operatorButtonDidTap(operator: String) {
         
