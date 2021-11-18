@@ -8,13 +8,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var currentInputOperand: String = "0"
+    @IBOutlet weak var currentInputOperandLabel: UILabel!
+    var currentInputOperand: String = "0" {
+        didSet {
+            currentInputOperandLabel.text = currentInputOperand
+        }
+    }
     @IBOutlet weak var currentInputOperator: UILabel!
     var mathExpression: [String] = []
     var isEvaluated: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentInputOperandLabel.text = currentInputOperand
         
     }
     
