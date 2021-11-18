@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var processScrollView: UIStackView!
     @IBOutlet weak var signLabel: UILabel!
     
+    var inputString: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,6 @@ class ViewController: UIViewController {
     func resetResult() {
         resultLabel.text = "0"
         signLabel.text = ""
-        
     }
     
     @IBAction func touchUpAllClearBtn(_ sender: UIButton) {
@@ -39,8 +39,18 @@ class ViewController: UIViewController {
     @IBAction func touchUpSubtractOperator(_ sender: UIButton) {
     }
     @IBAction func touchUpAddOperator(_ sender: UIButton) {
+        
     }
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
+        var formula: Formula = ExpressionParser.parse(from: inputString)
+        do {
+            let result: Double = try formula.result()
+            resultLabel.text = "\(result)"
+        } catch CalculatorError.dividedByZero {
+            resultLabel.text = "\(CalculatorError.dividedByZero.description)"
+        } catch {
+            print(error)
+        }
     }
     
     @IBAction func touchUp0Btn(_ sender: UIButton) {
