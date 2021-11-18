@@ -87,13 +87,7 @@ extension CalculatorController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
-        
-        if numberLabel.text?.contains(dot) == false {
-            let currentText = numberLabel.text ?? "0"
-            
-            numberLabel.text = currentText + dot
-        }
+        insertDot()
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -180,6 +174,16 @@ extension CalculatorController {
         numberLabel.text = "0"
     }
 
+    private func insertDot() {
+        let dot = "."
+        
+        if numberLabel.text?.contains(dot) == false {
+            let currentText = numberLabel.text ?? "0"
+            
+            numberLabel.text = currentText + dot
+        }
+    }
+    
     private func showNotANumber() {
         numberLabel.text = "NaN"
     }
