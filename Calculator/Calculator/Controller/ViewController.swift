@@ -12,17 +12,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var operandsLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var formulaStackView: UIStackView!
     
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    func reset() {
-        operandsLabel.text = "0"
-        operatorLabel.text = ""
     }
     
     //MARK: - Actions
@@ -40,10 +36,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard let currentOperator = sender.currentTitle else {
+        guard let currentOperator = sender.currentTitle,
+            let currentOperands = operandsLabel.text else {
             return
         }
+        configureFormulaStackView(operands: currentOperands, operator: currentOperator)
         operatorLabel.text = currentOperator
+        operandsLabel.text = "0"
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
@@ -56,6 +55,23 @@ class ViewController: UIViewController {
         } else {
             operandsLabel.text = operandsLabel.text?.replacingOccurrences(of: "-", with: "")
         }
+    }
+    
+    func makeLabel(text: String) -> UILabel {
+       let label = UILabel()
+        label.textColor = .white
+        label.text = text
+        return label
+    }
+        
+    func configureFormulaStackView(operands: String, `operator`: String) {
+        let operandLabel = makeLabel(text: operands)
+        let operatorLabel = makeLabel(text: `operator`)
+        
+        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        formulaStackView.addArrangedSubview(stackView)
     }
 }
 
