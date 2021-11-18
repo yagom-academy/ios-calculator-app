@@ -48,7 +48,7 @@ class FormulaTests: XCTestCase {
         do {
             let _ = try formula.result()
         } catch CalculatorError.dividedByZero {
-            XCTAssertEqual(CalculatorError.dividedByZero.description, "NaN")
+            XCTAssertEqual(CalculatorError.dividedByZero.description, "NaN (숫자 아님)")
         } catch  {
             print(error)
         }
@@ -60,7 +60,7 @@ class FormulaTests: XCTestCase {
         do {
             let _ = try formula.result()
         } catch CalculatorError.dividedByZero {
-            XCTAssertEqual(CalculatorError.dividedByZero.description, "NaN")
+            XCTAssertEqual(CalculatorError.dividedByZero.description, "NaN (숫자 아님)")
         } catch  {
             print(error)
         }
