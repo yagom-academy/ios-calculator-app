@@ -1,5 +1,5 @@
 //
-//  StringExtensions.swift
+//  String+Extension.swift
 //  Calculator
 //
 //  Created by yeha on 2021/11/15.
