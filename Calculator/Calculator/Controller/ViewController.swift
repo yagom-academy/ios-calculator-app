@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var signLabel: UILabel!
     
     var inputString: String = ""
+    var currentInputString: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,17 @@ class ViewController: UIViewController {
     func resetResult() {
         resultLabel.text = "0"
         signLabel.text = ""
+        inputString = ""
+        currentInputString = ""
     }
+    
+    // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
+    
+    func addStackView() { // 연산자를 누를 때마다 stackView를 추가함
+        
+    }
+    
+    // scrollView의 Scroll 조정
     
     @IBAction func touchUpAllClearBtn(_ sender: UIButton) {
     }
@@ -60,6 +71,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpDotBtn(_ sender: UIButton) {
     }
     @IBAction func touchUp1Btn(_ sender: UIButton) {
+        
     }
     @IBAction func touchUp2Btn(_ sender: UIButton) {
     }
