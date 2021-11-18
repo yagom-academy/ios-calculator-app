@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         
         finalFormula.append(newOperator)
         operatorLabel.text = newOperator
-        currentOperator = newOperator                
+        currentOperator = newOperator
     }
     
     private func isNumberOverMaximumExpression(number: Double) -> Bool {
@@ -90,20 +90,18 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult = try formula.result()
-            guard let calculationResultText = calculationResult.description.addCommaOnEveryThreeDigits() else {
+            guard let calculationResultFormatted = calculationResult.description.addCommaOnEveryThreeDigits() else {
                 return
             }
             
-            resetCurrentOperand()
             operatorLabel.text = ""
             
             if isNumberOverMaximumExpression(number: calculationResult) {
                 operandLabel.text = String(calculationResult)
             } else {
-                operandLabel.text = calculationResultText
+                operandLabel.text = calculationResultFormatted
             }
         } catch OperationError.dividedByZero {
-            resetCurrentOperand()
             operandLabel.text = "NaN"
             operatorLabel.text = ""
         } catch CalculationItemQueueError.hasNoElement {
