@@ -34,8 +34,8 @@ enum ExpressionParser {
     private static func insertOperandsToQueue(from input: String) -> CalculatorItemQueue<Double> {
         var operandQueue = CalculatorItemQueue<Double>()
         
-        componentsByOperators(from: input).forEach {
-            guard let convertedOperand = Double($0) else { return }
+        componentsByOperators(from: input).forEach { singleOperand in
+            guard let convertedOperand = Double(singleOperand) else { return }
             operandQueue.enqueue(convertedOperand)
         }
         
