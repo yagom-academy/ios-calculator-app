@@ -18,6 +18,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberCompositionLabel: UILabel!
     @IBOutlet weak var operatorSettingLabel: UILabel!
     
+    @IBAction func initializationInputField(_ sender: UIButton) {
+        numberCompositionLabel.text = "0"
+    }
+    
+    
     @IBAction func clickNumber(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
             return
