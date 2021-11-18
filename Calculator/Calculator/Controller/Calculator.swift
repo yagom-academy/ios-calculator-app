@@ -36,7 +36,6 @@ class Calculator {
                                      operand: latestFormula.operand)
         }
     }
-    
     private var currentState: (String, String, Bool, [(String, String)]) {
         (currentOperator, currentOperand, isPositive, formulaStack)
     }
