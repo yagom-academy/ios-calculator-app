@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         guard let currentNumber = operandsLabel.text,
               let newNumber = sender.currentTitle else {
                   return
-              }
+        }
         if currentNumber == "0" {
             operandsLabel.text = newNumber
         } else {
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let currentOperator = sender.currentTitle,
-            let currentOperands = operandsLabel.text else {
+              let currentOperands = operandsLabel.text else {
             return
         }
         configureFormulaStackView(operands: currentOperands, operator: currentOperator)
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         guard let currentOperand = operandsLabel.text,
               let intValue = Int(currentOperand) else {
                   return
-              }
+        }
         if intValue > 0 {
             operandsLabel.text = "-" + currentOperand
         } else {
@@ -69,6 +69,10 @@ class ViewController: UIViewController {
         operandsLabel.text = "0"
         operatorLabel.text = ""
     }
+    
+    @IBAction func euqualButtonTapped(_ sender: UIButton) {
+    }
+    
     
     
     //MARK: - Helpers
