@@ -16,8 +16,7 @@ enum ExpressionParser {
         let operandsOfInputString = input.split(with: " ")
         
         OperatorsOfInputString.forEach {
-            inputOperator in
-                operators.enQueue(Operator(rawValue: Character(inputOperator)))
+            inputOperator in operators.enQueue(Operator(rawValue: Character(inputOperator)))
         }
         operandsOfInputString.compactMap { (operands: String) -> Double? in return Double(operands) }.forEach {
             inputOperand in operands.enQueue(inputOperand)
@@ -27,8 +26,8 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let availableOperators = Operator.allCases.map { (availableOperator: Operator) -> String in return String(availableOperator.rawValue) }
-        let operatorsOfInputString = input.split(with: " ").filter { (operatorOfInputString: String) -> Bool in return availableOperators.contains(operatorOfInputString) == true }
+        let availableOperators = Operator.allCases.map( { (availableOperator: Operator) -> String in return String(availableOperator.rawValue) } )
+        let operatorsOfInputString = input.split(with: " ").filter( { (inputString: String) -> Bool in return availableOperators.contains(inputString) == true } )
      
         return operatorsOfInputString
     }
