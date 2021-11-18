@@ -46,7 +46,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
     @IBAction func clickNumber(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
             return
@@ -64,11 +63,9 @@ class ViewController: UIViewController {
             return
         }
                
-        if numberOfLabel.contains(point) {
-            return
+        if numberOfLabel.contains(point) == false {
+            numberCompositionLabel.text = numberOfLabel + point
         }
-               
-        numberCompositionLabel.text = numberOfLabel + point
     }
     
 }
