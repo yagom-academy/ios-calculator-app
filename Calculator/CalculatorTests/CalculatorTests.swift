@@ -133,7 +133,7 @@ class CalculatorTests: XCTestCase {
             counterNumber += 1
         }
         //when
-        let result = calculatorItemQueue.arraySize
+        let result = Double(calculatorItemQueue.arraySize)
         //then
         XCTAssertEqual(result, counterNumber)
     }

@@ -35,8 +35,8 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         array.removeAll()
     }
     
-    var arraySize: T {
-        array.count as! T
+    var arraySize: Int {
+        array.count
     }
     
     var isEmpty: Bool {
