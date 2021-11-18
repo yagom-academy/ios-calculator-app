@@ -52,5 +52,18 @@ class ViewController: UIViewController {
         currentInputOperand = "0"
         currentInputOperator = operatorSymbole
     }
+    
+    @IBAction func touchSignChangeButton(_ sender: UIButton) {
+        if currentInputOperand == "0" { return }
+        if isEvaluated { return }
+        
+        if currentInputOperand.hasPrefix("-") {
+            currentInputOperand.removeFirst()
+            return
+        }
+        
+        currentInputOperand.insert("-", at: currentInputOperand.startIndex)
+    }
+    
 }
 
