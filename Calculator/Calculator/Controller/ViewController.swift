@@ -66,15 +66,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
-        if numberLabel.text == "0" {
-            symbolLabel.text = sender.currentTitle
-            initializeNumberLabel()
-        } else {
-            recordingStackView.addArrangedSubview(formulaStackView)
-            symbolLabel.text = sender.currentTitle
-            addEntireFormula()
-            initializeNumberLabel()
-        }
+        guard numberLabel.text != "0" else { return }
+        
+        recordingStackView.addArrangedSubview(formulaStackView)
+        symbolLabel.text = sender.currentTitle
+        addEntireFormula()
+        initializeNumberLabel()
+        
         scrollToBottom(calculatorScrollView)
     }
     
