@@ -106,27 +106,21 @@ class CalculatorViewController: UIViewController {
     func addFormula() {
         let stackView = UIStackView()
         
-        guard let `operator` = operatorLabel.text else {
+        guard let `operator` = operatorLabel.text,
+                let operand = operandLabel.text  else {
             return
         }
         
-        let insertingOperatingLabel = UILabel()
-        insertingOperatingLabel.textColor = UIColor.white
-        insertingOperatingLabel.text = `operator`
-        insertingOperatingLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        labelFormat(textValue: `operator`)
+        labelFormat(textValue: operand)
         
-        stackView.addArrangedSubview(insertingOperatingLabel)
-        
-        guard let operand = operandLabel.text else {
-            return
+        func labelFormat(textValue: String) {
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.text = textValue
+            label.font = UIFont.preferredFont(forTextStyle: .title3)
+            stackView.addArrangedSubview(label)
         }
-        
-        let insertingOperandLabel = UILabel()
-        insertingOperandLabel.textColor = UIColor.white
-        insertingOperandLabel.text = operand
-        insertingOperandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        stackView.addArrangedSubview(insertingOperandLabel)
         
         calculationHistoryStackView.addArrangedSubview(stackView)
         
