@@ -25,7 +25,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickOperator(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text else {
+        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfButton = sender.titleLabel?.text else {
+            return
+        }
+        
+        if isZeroValue(data: numberOfLabel) {
+            operatorSettingLabel.text = operatorOfButton
             return
         }
         
@@ -35,11 +40,8 @@ class ViewController: UIViewController {
             addExpression(signValue: nil, numberValue: numberOfLabel)
         }
         
-        
-        guard let operatorOfButton = sender.titleLabel?.text else {
-            return
-        }
         operatorSettingLabel.text = operatorOfButton
+        numberCompositionLabel.text = "0"
     }
     
     
