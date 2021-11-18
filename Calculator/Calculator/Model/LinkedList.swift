@@ -21,7 +21,7 @@ class LinkedList<Element> {
         self.head = head
     }
     
-    func enqueue(in data: Element) {
+    func enqueue(_ data: Element) {
         var finderForLast: Node<Element>?
         
         guard !isEmpty else {
