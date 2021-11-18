@@ -136,16 +136,16 @@ extension ViewController {
             currentOperand = setUpNumberFormat(for: calcuatorResult)
         } catch let error as CalculatorError {
             switch error {
-                currentOperand = error.description
             case .isNaN:
+                currentOperand = error.localizedFailureReason ?? "NaN"
                 hasCalculated = true
                 return
             case .queueNotFound:
-                print(error.description)
+                print(error.localizedDescription)
                 removeFormulaView()
                 return
             default:
-                print(error.description)
+                print(error.localizedDescription)
                 return
             }
         } catch let error {
