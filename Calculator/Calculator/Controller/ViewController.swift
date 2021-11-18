@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        if operatorLabel?.text == "0" {
+        if operandLabel?.text == "0" {
             operandText = "0"
         } else {
             operandText += sender.currentTitle ?? "0"
@@ -45,11 +45,16 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         textInput += operandText
+        if textInput.isEmpty {
+            return
+        }
+        
         operatorText = sender.currentTitle ?? "0"
         textInput += operatorText
         operatorLabel?.text = operatorText
-        operandText = "0"
+        operandText = ""
         operandLabel?.text = "0"
+        print(textInput)
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
@@ -64,15 +69,15 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         textInput = ""
-        operandText = "0"
+        operandText = ""
         operatorText = ""
-        operatorLabel?.text = operatorText
-        operandLabel?.text = operandText
+        operatorLabel?.text = ""
+        operandLabel?.text = "0"
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        operandText = "0"
-        operandLabel?.text = operandText
+        operandText = ""
+        operandLabel?.text = "0"
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
