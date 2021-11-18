@@ -7,25 +7,32 @@
 
 import Foundation
 
-class CalculatorItemQueue {
-    private var queue: [CalculateItem] = []
+struct CalculatorItemQueue {
+    private(set) var queue: [CalculateItem] = []
     
-    func enqueue(_ item: Double) {
-        queue.append(item)
+    var itemCount: Int {
+        return queue.count
     }
     
-    func enqueue(_ item: Operator) {
-        queue.append(item)
-    }
-    
-    func dequeue() {
-        guard queue.count > 0 else {
-            return
+    init(_ items: [CalculateItem] = []) {
+        for item in items {
+            self.enqueue(item)
         }
-        queue.removeFirst()
     }
     
-    func removeAllItems() {
+    mutating func enqueue(_ item: CalculateItem) {
+        queue.append(item)
+    }
+    
+    @discardableResult
+    mutating func dequeue() -> CalculateItem? {
+        guard queue.count > 0 else {
+            return nil
+        }
+        return queue.removeFirst()
+    }
+    
+    mutating func removeAllItems() {
         queue.removeAll()
     }
 }
