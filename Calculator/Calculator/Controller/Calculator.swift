@@ -32,12 +32,12 @@ class Calculator {
 // MARK:- Receiving Events
 extension Calculator {
     func shouldSetInitialState() {
+        allClearButtonDidTap()
+    }
+    func allClearButtonDidTap() {
         formulaStack.removeAll()
         currentOperator.removeAll()
         currentOperand.toZero()
-    }
-    func allClearButtonDidTap() {
-        
     }
     func clearEntryButtonDidTap() {
 
