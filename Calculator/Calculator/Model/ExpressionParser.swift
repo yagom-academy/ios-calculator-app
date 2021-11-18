@@ -26,7 +26,8 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        return input.replacingOccurrences(of: ",", with: "")
+            .split(with: " ")
             .compactMap { Double($0) }
             .map { String($0) }
     }

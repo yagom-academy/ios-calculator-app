@@ -16,7 +16,7 @@ class ParsingTests: XCTestCase {
     }
 
     func testParsing() {
-        sampleString = "1.7 + 3.8 - 21.9 / 41.0 * 310.7"
+        sampleString = "1.7 + 3.8 − 21.9 ÷ 41.0 × 310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
             let result = try formula.result()
@@ -28,7 +28,7 @@ class ParsingTests: XCTestCase {
     }
     
     func testParsingWithNegative() {
-        sampleString = "1.7 + -3.8 - -21.9 / -41.0 * -310.7"
+        sampleString = "1.7 + -3.8 − -21.9 ÷ -41.0 × -310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         do {
             let result = try formula.result()
@@ -69,5 +69,11 @@ class ParsingTests: XCTestCase {
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         
         XCTAssertEqual(try formula.result(), 1)
+    }
+    
+    func testParsingAndCalculate() {
+        sampleString = "0.1 − 0.2"
+        var formula: Formula = ExpressionParser.parse(from: sampleString)
+        XCTAssertEqual(try formula.result(), -0.1)
     }
 }

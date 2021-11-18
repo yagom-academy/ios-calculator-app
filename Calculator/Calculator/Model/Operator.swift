@@ -9,9 +9,9 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculatorItem {
     case add = "+"
-    case subtract = "-"
-    case devide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case devide = "÷"
+    case multiply = "×"
 }
 
 extension Operator {
