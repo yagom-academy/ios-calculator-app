@@ -87,15 +87,34 @@ class ViewController: UIViewController {
         operandLabel.text = currentOperand
     }
     
-    @IBAction func touchUpDivideOperator(_ sender: UIButton) {
-    }
-    @IBAction func touchUpMultiplyOperator(_ sender: UIButton) {
-    }
-    @IBAction func touchUpSubtractOperator(_ sender: UIButton) {
-    }
-    @IBAction func touchUpAddOperator(_ sender: UIButton) {
+    // 연산자를 누를 때 앞에서 입력한 숫자를 업데이트
+    @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
+        guard currentOperand != "" else { // 숫자 입력이 없는 상태에서는 연산자가 작동하지 않음 (입력값이 "0"일 때와 다르겠지?)
+            return
+        }
         
+//        completeFormula += currentOperand // last가 연산자일 때 숫자가 연속으로 추가되면 안되므로 삭제해줘야 함
+        let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
+        
+        guard let operatorSymbol: String = sender.titleLabel?.text,
+        operatorSymbols.contains(Character(operatorSymbol)) else {
+            return
+        }
+        operatorLabel.text = operatorSymbol
+        
+        guard let lastCharacter = completeFormula.last else { // 아무것도 탭하지 않고 연산자부터 누르면 반응 안함
+            return
+        }
+        
+        if operatorSymbols.contains(lastCharacter) {
+            completeFormula.removeLast() // 연산자를 탭하고, 다시 탭한 경우라면 마지막 연산자를 삭제
+        }
+        
+        currentOperator = operatorSymbol
+        completeFormula += "\(currentOperand)\(currentOperator)"
+        print(completeFormula) // 출력 안됨
     }
+
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
         guard isCalculationOver == false else {
             return // = 버튼을 탭하여 연산이 완료된 경우, 다시 탭할 때 재연산하지 않음
