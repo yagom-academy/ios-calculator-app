@@ -58,11 +58,9 @@ class ViewController: UIViewController {
             guard inputNumber.isEmpty == false else { return }
             
             inputNumber += sender.currentTitle ?? ""
-//            numberLabel.text = inputNumber
             numberLabel.text = numberFormatter.string(for: Double(inputNumber))
         } else {
             inputNumber += sender.currentTitle ?? ""
-//            numberLabel.text = inputNumber
             numberLabel.text = numberFormatter.string(for: Double(inputNumber))
         }
     }
@@ -159,9 +157,7 @@ class ViewController: UIViewController {
     }
     
     func addEntireFormula() {
-        guard let number = numberLabel.text, let symbol = symbolLabel.text else {
-            return
-        }
+        guard let number = numberLabel.text, let symbol = symbolLabel.text else { return }
         entireFormula += number
         entireFormula += symbol
     }

@@ -31,12 +31,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
             throw CalculateError.emptyQueue
         }
         
-        
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
             inputStack.removeAll()
         }
-            
         return outputStack.removeLast()
     }
     
