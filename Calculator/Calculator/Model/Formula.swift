@@ -18,7 +18,23 @@ struct Formula {
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
+        var operandsAndOperators = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+        let separatedOperandsArray = makeOperators(from: input)
+        let separatedOperatorsArray = makeOperators(from: input)
         
+        separatedOperandsArray.forEach({ operand in
+            guard let operand = Double(operand) else {
+                return
+            }
+            operandsAndOperators.operands.push(operand)
+        })
+        separatedOperatorsArray.forEach({ operatorValue in
+            guard let operatorValue = Operator(rawValue: Character(operatorValue)) else {
+                return
+            }
+            operandsAndOperators.operators.push(operatorValue)
+        })
+        return operandsAndOperators
     }
     
     static func makeOperators(from input: String) -> [String] {
@@ -29,8 +45,8 @@ enum ExpressionParser {
     
     static func makeOperands(from input: String) -> [String] {
         let operators = Operator.allCases
-        return operators.reduce([""]) { (array, `operator`) in
-            let separatedOperands = array.flatMap({$0.split(with: `operator`.rawValue)})
+        return operators.reduce([""]) { (array, operatorValue) in
+            let separatedOperands = array.flatMap({$0.split(with: operatorValue.rawValue)})
             return separatedOperands
     }
 }
