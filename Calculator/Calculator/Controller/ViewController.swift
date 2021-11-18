@@ -136,8 +136,8 @@ extension ViewController {
             currentOperand = setUpNumberFormat(for: calcuatorResult)
         } catch let error as CalculatorError {
             switch error {
-            case .notNumber:
                 currentOperand = error.description
+            case .isNaN:
                 hasCalculated = true
                 return
             case .queueNotFound:

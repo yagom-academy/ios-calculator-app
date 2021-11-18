@@ -39,7 +39,7 @@ struct Formula {
             operators.clear()
         }
         guard currentOperand.isNaN == false else {
-            throw CalculatorError.notNumber
+            throw CalculatorError.isNaN
         }
         return currentOperand
     }
