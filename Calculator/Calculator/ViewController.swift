@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var formulasStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -188,6 +187,7 @@ extension ViewController {
     }
     
     private func scrollToBottom() {
+        formulasScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0,y: self.formulasScrollView.contentSize.height
                                     - self.formulasScrollView.bounds.size.height)
         self.formulasScrollView.setContentOffset(bottomOffset, animated: true)
