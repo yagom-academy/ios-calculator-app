@@ -17,8 +17,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureInit()
     }
-
-
+    
+    func configureInit() {
+        operandsLabel.text = ""
+        operatorLabel.text = ""
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func numberPadTapped(_ sender: UIButton) {
+        guard let number = sender.currentTitle else {
+            return
+        }
+        guard let currentText = operandsLabel.text else {
+            return
+        }
+        operandsLabel.text = currentText + number
+    }
 }
 
