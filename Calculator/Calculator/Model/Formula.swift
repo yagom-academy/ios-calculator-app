@@ -53,6 +53,7 @@ enum ExpressionParser {
 
 extension String {
     func split(with target: Character) -> [String] {
-        
+        let conversionString: [String] = self.split(separator: target).map({ String($0) })
+        return conversionString
     }
 }
