@@ -35,11 +35,13 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        var resultOfReplacing: String = " "
-        for operation in Operator.allCases {
-            resultOfReplacing = input.replacingOccurrences(of: String(operation.rawValue), with: " ")
+        var resultOfReplacing: String = input
+        
+        Operator.allCases.forEach { (operation: Operator) -> () in
+            resultOfReplacing = resultOfReplacing.replacingOccurrences(of: String(operation.rawValue), with: " ")
         }
-   
+     
+
         return resultOfReplacing.split(with: " ")
     }
 }
