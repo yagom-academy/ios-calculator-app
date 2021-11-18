@@ -13,7 +13,7 @@ enum Operator: Character, CalculateItem, CaseIterable {
     case divide = "➗"
     case multiply = "✖️"
     
-    static var marks = allCases.map{$0.rawValue}
+    static var marks = allCases.map{ $0.rawValue }
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
