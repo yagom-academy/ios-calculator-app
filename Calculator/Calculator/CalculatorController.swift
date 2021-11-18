@@ -188,16 +188,18 @@ extension CalculatorController {
         operatorLabel.text = String()
     }
     
-    private func createExpressionStackView() {
-        let operatorLabel = UILabel()
-        operatorLabel.text = self.operatorLabel.text
-        operatorLabel.textColor = .white
-        operatorLabel.sizeToFit()
+    private func createLabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        label.sizeToFit()
         
-        let operandLabel = UILabel()
-        operandLabel.text = self.numberLabel.text
-        operandLabel.textColor = .white
-        operandLabel.sizeToFit()
+        return label
+    }
+    
+    private func createExpressionStackView() {
+        let operatorLabel = createLabel(text: self.operatorLabel.text)
+        let operandLabel = createLabel(text: self.numberLabel.text)
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
