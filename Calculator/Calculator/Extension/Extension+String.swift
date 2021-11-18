@@ -17,8 +17,7 @@ extension String {
         formatter.numberStyle = .decimal
         formatter.roundingMode = .halfUp
         formatter.maximumSignificantDigits = 20
-        guard let number = formatter.number(from: self)
-              , let doubleValue = Double("\(number)")  else {
+        guard let number = formatter.number(from: self), let doubleValue = Double("\(number)")  else {
             return nil
         }
 
