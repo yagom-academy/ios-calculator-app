@@ -22,6 +22,14 @@ class ViewController: UIViewController {
         numberCompositionLabel.text = "0"
     }
     
+    @IBAction func clickOperator(_ sender: UIButton) {
+        guard let operatorOfButton = sender.titleLabel?.text else {
+            return
+        }
+        operatorSettingLabel.text = operatorOfButton
+    }
+    
+    
     @IBAction func clickNumberSign(_ sender: UIButton) {
         guard var numberOfLabel = numberCompositionLabel.text else {
             return
