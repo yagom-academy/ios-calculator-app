@@ -364,6 +364,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculatorScrollView" destination="BOT-7g-vxv" id="ZvU-1J-uwr"/>
                         <outlet property="numberLabel" destination="Lwz-OF-XHD" id="sV0-vw-YyH"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="ais-dD-XJg"/>
                         <outlet property="symbolLabel" destination="HPC-iy-qdm" id="2yd-3U-Ui7"/>

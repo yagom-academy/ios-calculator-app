@@ -5,6 +5,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
+    @IBOutlet weak var calculatorScrollView: UIScrollView!
     
     private var inputNumber = ""
     private var entireFormula = ""
@@ -76,6 +77,7 @@ class ViewController: UIViewController {
             addEntireFormula()
             initializeNumberLabel()
         }
+        scrollToBottom(calculatorScrollView)
     }
     
     @IBAction func CEButtonPressed(_ sender: UIButton) {
@@ -172,4 +174,11 @@ class ViewController: UIViewController {
     func removeComma(of string: String) -> String {
         return string.replacingOccurrences(of: ",", with: "")
     }
+    
+    func scrollToBottom(_ scrollView: UIScrollView) {
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)4
+    }
 }
+
+
