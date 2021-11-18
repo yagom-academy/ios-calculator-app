@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, CalculatorDelegate {
+class ViewController: UIViewController {
     @IBOutlet weak var verticalStackView: UIStackView!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
@@ -52,19 +52,15 @@ extension ViewController {
     }
 }
 
-// MARK:-
-extension ViewController {
+// MARK:- Delegate Implementation
+extension ViewController: CalculatorDelegate {
     func clearToInitialState() {
         currentOperatorLabel.text = ""
         currentOperandLabel.text = "0"
         verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
-}
-
-
-// MARK:- Adding Formula Line To StackView
-extension ViewController {
-    private func addFormulaLine(operator: String, operand: String) {
+    
+    func addFormulaLine(operator: String, operand: String) {
         let operatorLabel = makeFormulaLabel(with: `operator`)
         let operandLabel = makeFormulaLabel(with: operand)
         let horizontalStackView =
@@ -73,7 +69,11 @@ extension ViewController {
         
         verticalStackView.addArrangedSubview(horizontalStackView)
     }
-    
+}
+
+
+// MARK:- Making Formula StackView
+extension ViewController {
     private func makeFormulaLabel(with text: String) -> UILabel {
         let label = UILabel()
         
