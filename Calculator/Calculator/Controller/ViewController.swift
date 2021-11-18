@@ -71,9 +71,19 @@ class ViewController: UIViewController {
         currentInputOperand.insert("-", at: currentInputOperand.startIndex)
     }
     
-    
     @IBAction func touchAllClearButton(_ sender: UIButton) {
         resetExpression()
+    }
+    
+    
+    @IBAction func touchClearEntryButton(_ sender: UIButton) {
+        if isEvaluated == false {
+            currentInputOperand = "0"
+            return
+        }
+        
+        resetExpression()
+        isEvaluated = false
     }
 }
 
