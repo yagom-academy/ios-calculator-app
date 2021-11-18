@@ -27,6 +27,14 @@ class Calculator {
                                      operand: latestFormula.operand)
         }
     }
+    var isInitialState: Bool {
+        currentOperand == "0"
+            && currentOperator == ""
+            && formulaStack.isEmpty
+    }
+    var isDotted: Bool {
+        currentOperand.contains(".")
+    }
 }
 
 // MARK:- Receiving Events

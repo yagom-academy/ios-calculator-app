@@ -92,7 +92,7 @@ private extension ViewController {
     }
     
     func makeHorizontalStackView(operator: UILabel,
-                                         operand: UILabel) -> UIStackView {
+                                 operand: UILabel) -> UIStackView {
         let horizontal = UIStackView()
         let defaultSpacing: CGFloat = 8
         
