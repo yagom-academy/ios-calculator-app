@@ -53,7 +53,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         notFormattedOperand = "0"
         
-        if operandLabel.text == "0" {
+        guard operandLabel.text != "0" else {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
