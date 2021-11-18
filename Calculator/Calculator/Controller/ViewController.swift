@@ -33,6 +33,9 @@ class ViewController: UIViewController {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
+        guard inputOperandValues.count <= 20 else {
+            return
+        }
         
         if !inputOperandValues.contains(".") {
             guard inputButtonTitle != "0" || inputOperandValues.first != "0" else {
@@ -99,7 +102,6 @@ class ViewController: UIViewController {
                 return
             }
             
-            
             currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
         }
     }
@@ -107,8 +109,9 @@ class ViewController: UIViewController {
     @IBAction func hitEqualButton(_ sender: UIButton) {
         endOperandInput()
         let calculator = ExpressionParser.self
-        let resultOfDouble = calculator.parse(from: stringToCalculate.joined()).result()
-        if resultOfDouble.isNaN {
+        let doubleTypeResult = calculator.parse(from: stringToCalculate.joined()).result()
+
+        if doubleTypeResult.isNaN {
             resetToInitialState()
             currentValue.text = "NaN"
         } else {
@@ -116,7 +119,7 @@ class ViewController: UIViewController {
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal
         
-            currentValue.text = addCommaToValue(resultOfDouble)
+            currentValue.text = addCommaToValue(doubleTypeResult)
         }
     }
     
