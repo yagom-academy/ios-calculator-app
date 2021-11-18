@@ -10,6 +10,10 @@ import Foundation
 class Calculator {
     var delegate: CalculatorDelegate?
     private let validator = InputValidator()
+    
+    var currentOperand = "0"
+    var currentOperator = ""
+    var formulaStack = [(operator: String, operand: String)]()
 }
 
 // MARK:- Receiving Events
@@ -18,7 +22,7 @@ extension Calculator {
         delegate?.clearToInitialState()
     }
     func clearEntryButtonDidTap() {
-        
+
     }
     func toggleSignButtonDidTap() {
         
