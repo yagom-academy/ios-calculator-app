@@ -13,14 +13,15 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
-    var inputedOperand = "0"
-    var invalidCheckInputedOperand: Bool {
-        if inputedOperand.count <= 15 {
+    private var inputedOperand = "0"
+    private var invalidCheckInputedOperand: Bool {
+        if inputedOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
             return true
         } else {
             return false
         }
     }
+    private let calculatorController = CalculatorController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,26 +33,22 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        guard let tapedNumber = sender.titleLabel?.text else {
+        guard let number = sender.titleLabel?.text else {
             return
         }
         
         if inputedOperand == "0" {
-            if tapedNumber == "0" || tapedNumber == "00" {
+            if number == "0" || number == "00" {
                 return
             } else {
-                inputedOperand = tapedNumber
+                inputedOperand = number
                 operandLabel.text = inputedOperand
                 return
             }
         }
         
-        inputedOperand = inputedOperand + tapedNumber
-        operandLabel.text = changeNumberFormatter(target: inputedOperand)
-        
-        if tapedNumber == "0" {
-            operandLabel.text = inputedOperand
-        }
+        inputedOperand = inputedOperand + number
+        operandLabel.text = changeNumberFormatter(insertedNumber: number)
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
@@ -81,18 +78,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
-        if var operand = operandLabel.text {
-            if operand == "0" {
-                return
-            }
-            
-            if operand.contains("-") {
-                operand.remove(at: operand.startIndex)
-            } else {
-                operand.insert("-", at: operand.startIndex)
-            }
-            operandLabel.text = operand
+        if inputedOperand == "0" {
+            return
         }
+        if inputedOperand.contains("-") {
+            inputedOperand.remove(at: inputedOperand.startIndex)
+        } else {
+            inputedOperand.insert("-", at: inputedOperand.startIndex)
+        }
+        operandLabel.text = inputedOperand
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -101,6 +95,15 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         clearEntry()
+    }
+    
+    @IBAction func touchUPEqualButton(_ sender: UIButton) {
+        if operatorLabel.text == "" {
+            return
+        }
+        addFormula()
+        operatorLabel.text = ""
+        operandLabel.text = calculatorController.calculate()
     }
     
     func reset() {
@@ -113,14 +116,16 @@ class CalculatorViewController: UIViewController {
     func addFormula() {
         let stackView = UIStackView()
         
-        if let `operator` = operatorLabel.text {
-            let insertingOperatingLabel = UILabel()
-            insertingOperatingLabel.textColor = UIColor.white
-            insertingOperatingLabel.text = `operator`
-            insertingOperatingLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-            
-            stackView.addArrangedSubview(insertingOperatingLabel)
+        guard let `operator` = operatorLabel.text else {
+            return
         }
+        
+        let insertingOperatingLabel = UILabel()
+        insertingOperatingLabel.textColor = UIColor.white
+        insertingOperatingLabel.text = `operator`
+        insertingOperatingLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        stackView.addArrangedSubview(insertingOperatingLabel)
         
         guard let operand = operandLabel.text else {
             return
@@ -134,6 +139,9 @@ class CalculatorViewController: UIViewController {
         stackView.addArrangedSubview(insertingOperandLabel)
         
         calculationHistoryStackView.addArrangedSubview(stackView)
+        
+        calculatorController.insertFormula(operator: `operator`, operand: operand.components(separatedBy: [","]).joined())
+        
         autoScrollDown()
     }
     
@@ -141,6 +149,7 @@ class CalculatorViewController: UIViewController {
         for subview in calculationHistoryStackView.subviews {
             subview.removeFromSuperview()
         }
+        calculatorController.resetFormula()
     }
     
     func clearEntry() {
@@ -160,17 +169,22 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func changeNumberFormatter(target: String) -> String {
+    func changeNumberFormatter(insertedNumber: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 15
 
-        guard let number = Double(target),
-              let result = numberFormatter.string(for: number) else {
+        guard let number = Double(inputedOperand),
+              let result = numberFormatter.string(from: NSNumber(value: number)) else {
             return ""
+        }
+        
+        if inputedOperand.contains(".") {
+            if insertedNumber == "0" || insertedNumber == "00" {
+                return inputedOperand
+            }
         }
         return result
     }
     
 }
-
