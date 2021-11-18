@@ -55,12 +55,11 @@ class ViewController: UIViewController {
         
         let operatorSymbols = Operator.allCases.map { String($0.rawValue) }
         
-        guard operatorSymbols.contains(last) else {
-            finalFormula.append(newOperator)
-            return
+        if operatorSymbols.contains(last) {
+            finalFormula.removeLast()
         }
-    
-        finalFormula[finalFormula.count - 1] = newOperator
+        
+        finalFormula.append(newOperator)
     }
     
     private func addLastCalculationHistory() {
