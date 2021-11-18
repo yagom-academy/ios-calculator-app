@@ -80,3 +80,10 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController {
+    private func isZeroValue(data: String) -> Bool {
+        return data == "0" ? true : false
+    }
+    
+}
+
