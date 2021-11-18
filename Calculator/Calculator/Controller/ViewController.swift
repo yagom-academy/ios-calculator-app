@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     var currentOperand: String = ""
     var currentOperator: String = ""
     var completeFormula: [String] = []
-    var isCalculationAdded: Bool = false
+    var isCalculationOver: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         currentOperand = ""
         currentOperator = ""
         completeFormula = []
-        isCalculationAdded = false
+        isCalculationOver = false
     }
     
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
@@ -75,6 +75,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandBtn(_ sender: UIButton) {
+        if isCalculationOver {
+            resetCalculator()
+        }
+        
+        guard let operand: String = sender.titleLabel?.text else {
+            return
+        }
+        
+        currentOperand += operand
+        
+        guard let operandInNumber = Double(currentOperand) else {
+            return
+        }
+        
+        operandLabel.text = "\(operandInNumber)"
     }
     
 
