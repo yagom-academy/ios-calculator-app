@@ -11,9 +11,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel?
     @IBOutlet weak var operatorLabel: UILabel?
     
+    let numberFormatter = NumberFormatter()
     var textInput = ""
     var operandText = ""
     var operatorText = ""
+    
+    func makeNumberFormat() {
+        numberFormatter.roundingMode = .ceiling
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        makeNumberFormat()
+    }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if operandLabel?.text == "0"  {
@@ -89,7 +101,7 @@ class ViewController: UIViewController {
         do {
             textInput = ""
             operatorText = ""
-            operandText = String(try parserResult.result())
+            operandText = numberFormatter.string(for: try parserResult.result()) ?? "0"
             operatorLabel?.text = operatorText
             operandLabel?.text = operandText
         } catch QueueError.emptyOperandItem {
