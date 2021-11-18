@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var formulaStackView: UIStackView!
     
+    //MARK: - Properties
+    
+    private var formulaString = String()
+    
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -26,7 +30,7 @@ class ViewController: UIViewController {
     @IBAction func numberPadTapped(_ sender: UIButton) {
         guard let currentNumber = operandsLabel.text,
               let newNumber = sender.currentTitle else {
-                  return
+            return
         }
         if currentNumber == "0" {
             operandsLabel.text = newNumber
@@ -43,12 +47,13 @@ class ViewController: UIViewController {
         configureFormulaStackView(operands: currentOperands, operator: currentOperator)
         operatorLabel.text = currentOperator
         operandsLabel.text = "0"
+        appendInputToFormula()
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
         guard let currentOperand = operandsLabel.text,
               let intValue = Int(currentOperand) else {
-                  return
+            return
         }
         if intValue > 0 {
             operandsLabel.text = "-" + currentOperand
@@ -65,7 +70,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func ACButtonTapped(_ sender: UIButton) {
-        formulaStackView.subviews.forEach{ $0.removeFromSuperview() }
+        formulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandsLabel.text = "0"
         operatorLabel.text = ""
     }
@@ -81,11 +86,14 @@ class ViewController: UIViewController {
         }
     }
     
-    
     @IBAction func euqualButtonTapped(_ sender: UIButton) {
+        do {
+            let formula = try ExpressionParser.parse(from: formulaString)
+            formula.result()
+        } catch CalculatorError.divideByZero {
+            operandsLabel.text = "NAN"
+        }
     }
-    
-    
     
     //MARK: - Helpers
     
@@ -105,5 +113,12 @@ class ViewController: UIViewController {
         stackView.spacing = 8
         formulaStackView.addArrangedSubview(stackView)
     }
+    
+    func appendInputToFormula() {
+        guard let `operator` = operatorLabel.text,
+              let operands = operandsLabel.text else {
+                  return
+        }
+        formulaString += operands + `operator`
+    }
 }
-
