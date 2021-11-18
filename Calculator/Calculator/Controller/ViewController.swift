@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         initializeNumberLabel()
         initializeSymbolLabel()
         initializeNumberFormatter(of: numberFormatter)
+        recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private var operatorsLabel: UILabel {
@@ -44,7 +45,7 @@ class ViewController: UIViewController {
         formulaStackView.spacing = 8
         formulaStackView.distribution = .fill
         formulaStackView.alignment = .firstBaseline
-        if recordingStackView.arrangedSubviews.count == 2 {
+        if recordingStackView.arrangedSubviews.count == 0 {
             formulaStackView.addArrangedSubview(operandsLabel)
         } else {
             formulaStackView.addArrangedSubview(operatorsLabel)
