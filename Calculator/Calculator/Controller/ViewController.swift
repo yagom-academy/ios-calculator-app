@@ -18,38 +18,39 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureInit()
     }
     
-    func configureInit() {
-        operandsLabel.text = ""
+    func reset() {
+        operandsLabel.text = "0"
         operatorLabel.text = ""
     }
     
     //MARK: - Actions
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
-        guard let number = sender.currentTitle else {
-            return
+        guard let currentNumber = operandsLabel.text,
+              let newNumber = sender.currentTitle else {
+                  return
+              }
+        if currentNumber == "0" {
+            operandsLabel.text = newNumber
+        } else {
+            operandsLabel.text = currentNumber + newNumber
         }
-        guard let currentText = operandsLabel.text else {
-            return
-        }
-        operandsLabel.text = currentText + number
     }
     
-    @IBAction func operatorTapped(_ sender: UIButton) {
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let currentOperator = sender.currentTitle else {
             return
         }
         operatorLabel.text = currentOperator
     }
     
-    @IBAction func plusMinusButtonTapped(_ sender: Any) {
+    @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
         guard let currentOperand = operandsLabel.text,
               let intValue = Int(currentOperand) else {
                   return
-        }
+              }
         if intValue > 0 {
             operandsLabel.text = "-" + currentOperand
         } else {
