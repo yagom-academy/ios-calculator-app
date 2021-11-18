@@ -6,8 +6,8 @@
 
 import UIKit
 
-// MARK: Property and LifeCycle
 class ViewController: UIViewController {
+    // MARK: Property and LifeCycle
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         removeFormulaView()
     }
 }
+
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
@@ -173,6 +174,7 @@ extension ViewController {
         hasCalculated.toggle()
     }
 }
+
 // MARK: Formula Stack View Related
 extension ViewController {
     private func addCurrentFormulaStack() {
@@ -221,6 +223,7 @@ extension ViewController {
         return value.replacingOccurrences(of: ",", with: "")
     }
 }
+
 // MARK: Label Initialization Related
 extension ViewController {
     private func removeFormulaView() {
@@ -234,6 +237,7 @@ extension ViewController {
         currentOperator = ""
     }
 }
+
 // MARK: Calculation Result Related
 extension ViewController {
     private func setUpNumberFormat(for value: Double) -> String {
