@@ -92,7 +92,7 @@ extension ViewController {
             return
         }
         if hasCalculated {
-            hasCalculated.toggle()
+            hasCalculated = false
             removeFormulaView()
         }
         currentOperand = "0"
@@ -138,7 +138,7 @@ extension ViewController {
             switch error {
             case .notNumber:
                 currentOperand = error.description
-                hasCalculated.toggle()
+                hasCalculated = true
                 return
             case .queueNotFound:
                 print(error.description)
@@ -152,7 +152,7 @@ extension ViewController {
             print(error.localizedDescription)
         }
         currentOperator = ""
-        hasCalculated.toggle()
+        hasCalculated = true
     }
 }
 
