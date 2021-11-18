@@ -11,7 +11,7 @@ class Number {
     var value: String
     var isBiggerThan0: Bool
     
-    init(value: String, isBiggerThan0: Bool) {
+    init(value: String = "0" , isBiggerThan0: Bool = true) {
         self.value = value
         self.isBiggerThan0 = true
     }
