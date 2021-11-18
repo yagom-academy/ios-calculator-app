@@ -36,7 +36,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        operandText += sender.currentTitle ?? "0"
+        if operandText.contains(".") {
+            return
+        } else {
+            operandText += sender.currentTitle ?? "0"
+        }
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
