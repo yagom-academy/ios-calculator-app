@@ -7,11 +7,11 @@
 import XCTest
 
 class CalculatorTests: XCTestCase {
-    var calculatorItemQueue = CalculatorItemQueue<Int>()
+    var calculatorItemQueue = CalculatorItemQueue<Double>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        calculatorItemQueue = CalculatorItemQueue<Int>()
+        calculatorItemQueue = CalculatorItemQueue<Double>()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
@@ -20,8 +20,8 @@ class CalculatorTests: XCTestCase {
     
     func test_nodes프로퍼티의값이_순서대로정렬_되는지_여부() {
         //given
-        let nodes = [1,2,3,4,5]
-        var result = calculatorItemQueue.bringNodes
+        let array: [Double] = [1,2,3,4,5]
+        var result = calculatorItemQueue.bringArray
         //when
         result.append(1)
         result.append(2)
@@ -29,25 +29,25 @@ class CalculatorTests: XCTestCase {
         result.append(4)
         result.append(5)
         //then
-        XCTAssertEqual(result, nodes)
+        XCTAssertEqual(result, array)
     }
     
     func test_nodes프로퍼티에_push메서드로값을넣어_값이_확인되는지_여부() {
         //given
-        let result = [2]
+        let result: [Double] = [2]
         //when
         calculatorItemQueue.push(1)
         calculatorItemQueue.push(2)
         calculatorItemQueue.deleteFront()
         
-        let nodes = calculatorItemQueue.bringNodes
+        let array = calculatorItemQueue.bringArray
         //then
-        XCTAssertEqual(nodes, result)
+        XCTAssertEqual(array, result)
     }
     
     func test_nodes프로퍼티의값이_push메서드와_deleteFront메서드기능이_적용되는지_여부() {
         // given
-        let result = [3,4,5]
+        let result: [Double] = [3,4,5]
         // when
         calculatorItemQueue.push(1)
         calculatorItemQueue.push(2)
@@ -56,15 +56,15 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.push(5)
         calculatorItemQueue.deleteFront()
         calculatorItemQueue.deleteFront()
-        let nodes = calculatorItemQueue.bringNodes
+        let array = calculatorItemQueue.bringArray
         // then
-        XCTAssertEqual(nodes, result)
+        XCTAssertEqual(array, result)
     }
     
     func test_nodes에_값을push한후_deleteFront했을때_값이있는지_여부() {
         //given
         for _ in 1...5 {
-            var counterNumber = 1
+            var counterNumber: Double = 1
             calculatorItemQueue.push(counterNumber)
             counterNumber += 1
         }
@@ -80,7 +80,7 @@ class CalculatorTests: XCTestCase {
     func test_nodes프로퍼티의_값이비어있는지_여부() {
         //given
         for _ in 1...5 {
-            var counterNumber = 1
+            var counterNumber: Double = 1
             calculatorItemQueue.push(counterNumber)
             counterNumber += 1
         }
@@ -95,7 +95,7 @@ class CalculatorTests: XCTestCase {
     
     func test_nodes의_값이_비어있을경우() {
         //given
-        let result: Int? = nil
+        let result: Double? = nil
         //when
         calculatorItemQueue.push(1)
         calculatorItemQueue.push(2)
@@ -103,14 +103,14 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.deleteRear()
         calculatorItemQueue.deleteRear()
         calculatorItemQueue.deleteRear()
-        let nodes = calculatorItemQueue.deleteRear()
+        let array = calculatorItemQueue.deleteRear()
         //then
-        XCTAssertEqual(result, nodes)
+        XCTAssertEqual(result, array)
     }
     
     func test_nodes의_프로퍼티의_값이_deleteRear통해_삭제되는지여부() {
         //given
-        let result = [1,2,3]
+        let result: [Double] = [1,2,3]
         //when
         calculatorItemQueue.push(1)
         calculatorItemQueue.push(2)
@@ -120,20 +120,20 @@ class CalculatorTests: XCTestCase {
         calculatorItemQueue.deleteRear()
         calculatorItemQueue.deleteRear()
         
-        let nodes = calculatorItemQueue.bringNodes
+        let array = calculatorItemQueue.bringArray
         //then
-        XCTAssertEqual(result, nodes)
+        XCTAssertEqual(result, array)
     }
     
     func test_nodes프로퍼티의_크기가얼마나되는지_여부() {
         //given
-        var counterNumber = 0
+        var counterNumber: Double = 0
         for _ in 1...5 {
             calculatorItemQueue.push(counterNumber)
             counterNumber += 1
         }
         //when
-        let result = calculatorItemQueue.nodesSize
+        let result = calculatorItemQueue.arraySize
         //then
         XCTAssertEqual(result, counterNumber)
     }

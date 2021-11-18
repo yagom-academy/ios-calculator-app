@@ -8,3 +8,7 @@ import Foundation
 protocol CalculatorItem {
     
 }
+
+extension Double: CalculatorItem {
+    
+}

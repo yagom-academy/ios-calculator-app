@@ -5,21 +5,21 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculatorItem> {
-    private var nodes: [T] = []
+    private var array: [T] = []
     
-    var bringNodes: [T] {
-        nodes
+    var bringArray: [T] {
+        array
     }
     
     mutating func push(_ item: T) {
-        nodes.append(item)
+        array.append(item)
     }
     
     mutating func deleteFront() -> T? {
         if isEmpty {
             return nil
         } else {
-            return nodes.removeFirst()
+            return array.removeFirst()
         }
     }
     
@@ -27,19 +27,19 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         if isEmpty {
             return nil
         } else {
-            return nodes.removeLast()
+            return array.removeLast()
         }
     }
     
     mutating func deleteAll() {
-        nodes.removeAll()
+        array.removeAll()
     }
     
-    var nodesSize: T {
-        nodes.count as! T
+    var arraySize: T {
+        array.count as! T
     }
     
     var isEmpty: Bool {
-        nodes.isEmpty
+        array.isEmpty
     }
 }
