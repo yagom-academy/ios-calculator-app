@@ -10,8 +10,6 @@ import Foundation
 struct CalculatorManager {
     private (set) var displayingResult : Bool
     private (set) var isTypingOperand : Bool
-    
-    private let numberFormatter = NumberFormatter()
 
     init(displayingResult: Bool, isTypingOperand: Bool){
         self.displayingResult = displayingResult
@@ -23,6 +21,7 @@ struct CalculatorManager {
             return numberExpression
         }
         
+        let numberFormatter = NumberFormatter()
         let numberExpressionWithoutDecimal = numberExpression
             .replacingOccurrences(of: ",", with: "")
         guard let number = Double(numberExpressionWithoutDecimal) else {
