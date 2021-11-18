@@ -46,20 +46,19 @@ class ViewController: UIViewController {
     }
     
     private func changeOperator(to newOperator: String) {
+        let operatorSymbols = Operator.allCases.map { String($0.rawValue) }
+        
         guard let last = finalFormula.last else {
             return
         }
-        
-        operatorLabel.text = newOperator
-        currentOperator = newOperator
-        
-        let operatorSymbols = Operator.allCases.map { String($0.rawValue) }
         
         if operatorSymbols.contains(last) {
             finalFormula.removeLast()
         }
         
         finalFormula.append(newOperator)
+        operatorLabel.text = newOperator
+        currentOperator = newOperator                
     }
     
     private func isNumberOverMaximumExpression(number: Double) -> Bool {
