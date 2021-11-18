@@ -45,6 +45,19 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
     }
     
+    private func splitWithIntegerAndFraction(from operand: String) -> (interger: String, fraction: String) {
+        var integerDigits = operand
+        var fractionDigits = ""
+        
+        if operand.contains(".") {
+            let splited = operand.split(with: ".")
+            integerDigits = splited.first ?? ""
+            fractionDigits = splited.last ?? ""
+        }
+        
+        return (integerDigits, fractionDigits)
+    }
+    
     private func changeOperator(to newOperator: String) {
         let operatorSymbols = Operator.allCases.map { $0.rawValue.description }
         
@@ -164,25 +177,26 @@ extension ViewController {
                 
         currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
         
-        var integerDigits = currentOperand
-        var fractionDigits = ""
-        
-        if currentOperand.contains(".") {
-            let splited = currentOperand.split(with: ".")
-            integerDigits = splited.first ?? ""
-            fractionDigits = splited.last ?? ""
-        }
-        
-        if integerDigits.count > maximumDigitsOfDoubleExpression {
-            operandLabel.text = Double(currentOperand)?.description
+        guard let currentOperandNumber = Double(currentOperand) else {
             return
         }
         
-        guard let operandText = integerDigits.addCommaOnEveryThreeDigits() else {
+        if isNumberOverMaximumExpression(number: currentOperandNumber) {
+            operandLabel.text = currentOperandNumber.description
             return
         }
         
-        operandLabel.text = fractionDigits.isEmpty ? operandText : operandText + "." + fractionDigits
+        let separatedCurrentOperand = splitWithIntegerAndFraction(from: currentOperand)
+        
+        guard let operandText = separatedCurrentOperand.interger.addCommaOnEveryThreeDigits() else {
+            return
+        }
+        
+        if separatedCurrentOperand.fraction.isEmpty {
+            operandLabel.text = operandText
+        } else {
+            operandLabel.text = operandText + "." + separatedCurrentOperand.fraction
+        }
     }
     
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
