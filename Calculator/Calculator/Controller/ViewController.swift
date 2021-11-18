@@ -91,16 +91,16 @@ extension ViewController {
         return data == "0" ? true : false
     }
     
-    private func addExpression() {
+    private func addExpression(text: String) {
         let expressionStackView = UIStackView()
         
         let signLabel = ExpressionLabel()
-        let numberLable = ExpressionLabel()
+        let numberLabel = ExpressionLabel()
         
-        numberLable.text = "123"
+        numberLabel.text = text
         
         expressionStackView.addArrangedSubview(signLabel)
-        expressionStackView.addArrangedSubview(numberLable)
+        expressionStackView.addArrangedSubview(numberLabel)
         
         ExpressionView.addArrangedSubview(expressionStackView)
     }
