@@ -8,35 +8,35 @@
 import Foundation
 
 class InputValidator {
-    typealias CalculatorState = (currentOperator: String,
-                                  currentOperand: String,
+    typealias CalculatorState = (operator: String,
+                                  operand: String,
                                   isPositive: Bool,
                                   formulaStack: [(String, String)])
     
     private func isInitialState(_ state: CalculatorState) -> Bool {
-        state.currentOperand == "0"
-            && state.currentOperator == ""
+        state.operand == "0"
+            && state.operator == ""
             && state.formulaStack.isEmpty
     }
     private func isZero(_ state: CalculatorState) -> Bool {
-        state.currentOperand == "0"
+        state.operand == "0"
     }
-    private func isDotted(_ state: CalculatorState) -> Bool { state.currentOperand.contains(".")
+    private func isDotted(_ state: CalculatorState) -> Bool { state.operand.contains(".")
     }
     
     func toggleSignValidity(at state: CalculatorState) -> Bool {
         if isZero(state) {
             return false
-        } else if state.currentOperand.hasSuffix("."),
-                  state.currentOperand.first == "0" {
+        } else if state.operand.hasSuffix("."),
+                  state.operand.first == "0" {
             return false
-        } else if state.currentOperand.filter({ $0 != "0" && $0 != "." }).isEmpty {
+        } else if state.operand.filter({ $0 != "0" && $0 != "." }).isEmpty {
             return false
         }
         return true
     }
     func convertedOperand(from digit: String, at state: CalculatorState) -> String {
-        isZero(state) ? digit : state.currentOperand + digit
+        isZero(state) ? digit : state.operand + digit
     }
     func zeroValidity(at state: CalculatorState) -> Bool {
         !isZero(state)
