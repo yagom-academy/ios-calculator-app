@@ -2,10 +2,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var recordingStackView: UIStackView!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var symbolLabel: UILabel!
-    @IBOutlet weak var calculatorScrollView: UIScrollView!
+    @IBOutlet private weak var recordingStackView: UIStackView!
+    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var symbolLabel: UILabel!
+    @IBOutlet private weak var calculatorScrollView: UIScrollView!
     
     private var inputNumber = ""
     private var entireFormula = ""
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         initializeNumberFormatter(of: numberFormatter)
     }
     
-    var operatorsLabel: UILabel {
+    private var operatorsLabel: UILabel {
         let operatorsLabel = UILabel()
         operatorsLabel.text = symbolLabel.text
         operatorsLabel.textColor = .white
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         return operatorsLabel
     }
     
-    var operandsLabel: UILabel {
+    private var operandsLabel: UILabel {
         let operandsLabel = UILabel()
         operandsLabel.text = numberLabel.text
         operandsLabel.textColor = .white
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         return operandsLabel
     }
     
-    var formulaStackView: UIStackView {
+    private var formulaStackView: UIStackView {
         let formulaStackView = UIStackView()
         formulaStackView.axis = .horizontal
         formulaStackView.spacing = 8
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         return formulaStackView
     }
     
-    @IBAction func numberButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberButtonPressed(_ sender: UIButton) {
         if sender.currentTitle == "0" || sender.currentTitle == "00" {
             guard inputNumber.isEmpty == false else { return }
             
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func operatorButtonPressed(_ sender: UIButton) {
+    @IBAction private func operatorButtonPressed(_ sender: UIButton) {
         if numberLabel.text == "0" {
             symbolLabel.text = sender.currentTitle
             initializeNumberLabel()
@@ -78,11 +78,11 @@ class ViewController: UIViewController {
         scrollToBottom(calculatorScrollView)
     }
     
-    @IBAction func CEButtonPressed(_ sender: UIButton) {
+    @IBAction private func CEButtonPressed(_ sender: UIButton) {
         initializeNumberLabel()
     }
     
-    @IBAction func dotButtonPressed(_ sender: UIButton) {
+    @IBAction private func dotButtonPressed(_ sender: UIButton) {
         guard var text = numberLabel.text else { return }
         
         guard !isContainDot(text: text) else { return }
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func negativePositiveButtonPressed(_ sender: UIButton) {
+    @IBAction private func negativePositiveButtonPressed(_ sender: UIButton) {
         guard var text = numberLabel.text, text != "0" else { return }
         
         if text.hasPrefix("-") {
@@ -111,14 +111,14 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber
     }
     
-    @IBAction func ACButtonPressed(_ sender: UIButton) {
+    @IBAction private func ACButtonPressed(_ sender: UIButton) {
         recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         entireFormula.removeAll()
         initializeNumberLabel()
         initializeSymbolLabel()
     }
     
-    @IBAction func EqualButtonPressed(_ sender: UIButton) {
+    @IBAction private func EqualButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
         
         recordingStackView.addArrangedSubview(formulaStackView)
@@ -143,35 +143,35 @@ class ViewController: UIViewController {
         }
     }
     
-    func initializeNumberLabel() {
+    private func initializeNumberLabel() {
         inputNumber.removeAll()
         numberLabel.text = "0"
     }
     
-    func initializeSymbolLabel() {
+    private func initializeSymbolLabel() {
         symbolLabel.text?.removeAll()
     }
     
-    func isContainDot(text: String) -> Bool {
+    private func isContainDot(text: String) -> Bool {
         return text.contains(".")
     }
     
-    func addEntireFormula() {
+    private func addEntireFormula() {
         guard let number = numberLabel.text, let symbol = symbolLabel.text else { return }
         entireFormula += number
         entireFormula += symbol
     }
     
-    func initializeNumberFormatter(of formatter: NumberFormatter) {
+    private func initializeNumberFormatter(of formatter: NumberFormatter) {
         formatter.numberStyle = .decimal
         formatter.maximumSignificantDigits = 20
     }
     
-    func removeComma(of string: String) -> String {
+    private func removeComma(of string: String) -> String {
         return string.replacingOccurrences(of: ",", with: "")
     }
     
-    func scrollToBottom(_ scrollView: UIScrollView) {
+    private func scrollToBottom(_ scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
