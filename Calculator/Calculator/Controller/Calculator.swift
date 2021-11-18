@@ -14,7 +14,7 @@ class Calculator {
 // MARK:- Receiving Events
 extension Calculator {
     func allClearButtonDidTap() {
-        
+        delegate?.clearToInitialState()
     }
     func clearEntryButtonDidTap() {
         
@@ -42,6 +42,7 @@ extension Calculator {
     }
 }
 
+// MARK:- Delegate Requirements
 protocol CalculatorDelegate {
-    
+    func clearToInitialState()
 }
