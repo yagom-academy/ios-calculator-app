@@ -13,9 +13,9 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
-    private var inputedOperand = "0"
+    private var notFormattedOperand = "0"
     private var invalidCheckInputedOperand: Bool {
-        if inputedOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
+        if notFormattedOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
             return true
         } else {
             return false
@@ -37,31 +37,31 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if inputedOperand == "0" {
+        if notFormattedOperand == "0" {
             guard number != "0" || number != "00" else {
                 return
             }
             
-            inputedOperand = number
-            operandLabel.text = inputedOperand
+            notFormattedOperand = number
+            operandLabel.text = notFormattedOperand
             return
         }
         
-        inputedOperand = inputedOperand + number
+        notFormattedOperand = notFormattedOperand + number
         operandLabel.text = changeNumberFormatter(insertedNumber: number)
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
-        guard !inputedOperand.contains(".") else {
+        guard !notFormattedOperand.contains(".") else {
             return
         }
         
-        inputedOperand = inputedOperand + "."
-        operandLabel.text = inputedOperand
+        notFormattedOperand = notFormattedOperand + "."
+        operandLabel.text = notFormattedOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        inputedOperand = "0"
+        notFormattedOperand = "0"
         
         if operandLabel.text == "0" {
             operatorLabel.text = sender.titleLabel?.text
@@ -78,15 +78,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
-        if inputedOperand == "0" {
+        if notFormattedOperand == "0" {
             return
         }
-        if inputedOperand.contains("-") {
-            inputedOperand.remove(at: inputedOperand.startIndex)
+        if notFormattedOperand.contains("-") {
+            notFormattedOperand.remove(at: notFormattedOperand.startIndex)
         } else {
-            inputedOperand.insert("-", at: inputedOperand.startIndex)
+            notFormattedOperand.insert("-", at: notFormattedOperand.startIndex)
         }
-        operandLabel.text = inputedOperand
+        operandLabel.text = notFormattedOperand
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -107,8 +107,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func reset() {
-        inputedOperand = "0"
-        operandLabel.text = inputedOperand
+        notFormattedOperand = "0"
+        operandLabel.text = notFormattedOperand
         operatorLabel.text = ""
         allClear()
     }
@@ -153,8 +153,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func clearEntry() {
-        inputedOperand = "0"
-        operandLabel.text = inputedOperand
+        notFormattedOperand = "0"
+        operandLabel.text = notFormattedOperand
     }
     
     func autoScrollDown() {
@@ -174,14 +174,14 @@ class CalculatorViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 15
 
-        guard let number = Double(inputedOperand),
+        guard let number = Double(notFormattedOperand),
               let result = numberFormatter.string(from: NSNumber(value: number)) else {
             return ""
         }
         
-        if inputedOperand.contains(".") {
+        if notFormattedOperand.contains(".") {
             if insertedNumber == "0" || insertedNumber == "00" {
-                return inputedOperand
+                return notFormattedOperand
             }
         }
         return result
