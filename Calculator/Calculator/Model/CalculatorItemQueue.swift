@@ -15,6 +15,10 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         array.append(item)
     }
     
+    mutating func pushArray(_ array: [T]) {
+        self.array += array
+    }
+    
     mutating func deleteFront() -> T? {
         if isEmpty {
             return nil
