@@ -24,6 +24,19 @@ class ViewController: UIViewController {
         mathExpression = []
         isEvaluated = false
     }
+    
+    @IBAction func touchNumberButton(_ sender: UIButton) {
+        guard let number = sender.titleLabel?.text else { return }
+        
+        if isEvaluated { return }
+        
+        if currentInputOperand == "0" {
+           currentInputOperand = number
+            return
+        }
+        
+        currentInputOperand += number
+    }
 
 
 }
