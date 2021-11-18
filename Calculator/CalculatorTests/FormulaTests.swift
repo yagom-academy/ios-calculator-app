@@ -32,4 +32,16 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, filterOperand)
     }
+    
+    func test_연산자만필터하기() {
+        //given
+        let inputStrings = "257+43*6%2+0.05="
+        let filterOperator: String = inputStrings.filter {
+            Int(String($0)) != nil
+        }
+        //when
+        let result = "2574362005"
+        //then
+        XCTAssertEqual(result, filterOperator)
+    }
 }
