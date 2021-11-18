@@ -11,7 +11,12 @@ class ViewController: UIViewController {
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentOperandLabel: UILabel!
     
-    private let calculator = Calculator()
+    private var calculator = Calculator()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.calculator.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
