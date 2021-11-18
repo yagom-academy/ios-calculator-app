@@ -50,6 +50,13 @@ class ViewController: UIViewController {
         resetCalculator()
     }
     @IBAction func touchUpClearEntryBtn(_ sender: UIButton) {
+        if isCalculationOver == false {
+            resetCalculator()
+            return
+        }
+        
+        operandLabel.text = "0"
+        currentOperand = ""
     }
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
         guard let operandInNumber = Double(currentOperand), operandInNumber != 0 else {
