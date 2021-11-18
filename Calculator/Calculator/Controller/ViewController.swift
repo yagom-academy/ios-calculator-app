@@ -244,7 +244,7 @@ extension ViewController {
             return
         }
         
-        guard let operandText = String(currentNumber).addCommaOnEveryThreeDigits() else {
+        guard let operandText = currentOperand.addCommaOnEveryThreeDigits() else {
             return
         }
         
