@@ -8,14 +8,14 @@ struct ResultButtonHandler: ButtonActionDelegate {
         return
     }
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
-        viewController.addInputHistory()
+        viewController.pushInputToHistoryStack()
         showCalculationResult(viewController: viewController, button: button)
     }
     func runActionInPhase2(viewController: ViewController, button: UIButton) {
         showCalculationResult(viewController: viewController, button: button)
     }
     func runActionInPhase3(viewController: ViewController, button: UIButton) {
-        viewController.addInputHistory()
+        viewController.pushInputToHistoryStack()
         showCalculationResult(viewController: viewController, button: button)
     }
     func runActionInPhase4(viewController: ViewController, button: UIButton) {

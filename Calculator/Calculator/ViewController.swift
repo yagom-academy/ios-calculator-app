@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var togglePlusMinusButton: UIButton!
     
     @IBOutlet weak var resultButton: UIButton!
+    
     @IBOutlet weak var adderButton: UIButton!
     @IBOutlet weak var subtractorButton: UIButton!
     @IBOutlet weak var dividerButton: UIButton!
@@ -37,33 +38,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputHistoryStackView: UIStackView!
     
     var allHistory: String {
-        var allHistory = ""
-        
-        inputHistoryStackView.subviews.forEach {
-            guard let history = $0 as? UILabel,
-                  let text = history.text else { return }
-            
-            allHistory += "  \(text)"
+        return inputHistoryStackView.subviews.compactMap {
+            ($0 as? UILabel)?.text
+        }.reduce("") {
+            "\($0) \($1)"
         }
-        
-        return allHistory
     }
 
     @IBAction func numberButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: NumberButtonHandler.shared, button: sender)
     }
+    
     @IBAction func operatorButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: OperatorButtonHandler.shared, button: sender)
     }
+    
     @IBAction func allClearButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: AllClearButtonHandler.shared, button: sender)
     }
+    
     @IBAction func clearButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: ClearButtonHandler.shared, button: sender)
     }
+    
     @IBAction func togglePlusMinusButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: TogglePlusMinusButtonHandler.shared, button: sender)
     }
+    
     @IBAction func resultButtonHandler(_ sender: UIButton) {
         runButtonAction(delegate: ResultButtonHandler.shared, button: sender)
     }
@@ -71,43 +72,36 @@ class ViewController: UIViewController {
     var currentPhase: CalculatorPhase = .phase0
     
     func runButtonAction(delegate: ButtonActionDelegate, button: UIButton) {
-        switch currentPhase {
-        case .phase0:
-            delegate.runActionInPhase0(viewController: self, button: button)
-        case .phase1:
-            delegate.runActionInPhase1(viewController: self, button: button)
-        case .phase2:
-            delegate.runActionInPhase2(viewController: self, button: button)
-        case .phase3:
-            delegate.runActionInPhase3(viewController: self, button: button)
-        case .phase4:
-            delegate.runActionInPhase4(viewController: self, button: button)
-        }
+        delegate.runAction(viewController: self, button: button)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func addInputHistory() {
-        let operatorText = operatorLabel.text ?? ""
-        let valueText = valueLabel.text ?? ""
+    func pushInputToHistoryStack() {
+        let newInput = UILabel()
+        newInput.textColor = .white
         
-        let inputHistory = UILabel()
+        let `operator` = operatorLabel.text ?? ""
+        let value = valueLabel.text ?? ""
 
-        if operatorLabel.text == "" {
-            inputHistory.text = valueLabel.text
+        if `operator` == "" {
+            newInput.text = value
         } else {
-            inputHistory.text = "\(operatorText) \(valueText)"
+            newInput.text = "\(`operator`) \(value)"
         }
-        inputHistory.textColor = .white
         
-        inputHistoryStackView.addArrangedSubview(inputHistory)
+        inputHistoryStackView.addArrangedSubview(newInput)
         
-        let scrollDestinationY = inputHistoryScrollView.contentSize.height
-        let scrollDestinationPoint = CGPoint(x: 0, y: scrollDestinationY)
+        scrollDownToBottom()
+    }
+    
+    func scrollDownToBottom() {
+        let destinationY = inputHistoryScrollView.contentSize.height
+        let destinationPoint = CGPoint(x: 0, y: destinationY)
         
-        inputHistoryScrollView.setContentOffset(scrollDestinationPoint, animated: false)
+        inputHistoryScrollView.setContentOffset(destinationPoint, animated: false)
     }
     
     func clearInputHistory() {

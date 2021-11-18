@@ -8,7 +8,7 @@ struct OperatorButtonHandler: ButtonActionDelegate {
         return
     }
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
-        viewController.addInputHistory()
+        viewController.pushInputToHistoryStack()
         viewController.operatorLabel.text = button.titleLabel?.text
         viewController.valueLabel.text = "0"
         viewController.currentPhase = .phase2
@@ -17,7 +17,7 @@ struct OperatorButtonHandler: ButtonActionDelegate {
         viewController.operatorLabel.text = button.titleLabel?.text
     }
     func runActionInPhase3(viewController: ViewController, button: UIButton) {
-        viewController.addInputHistory()
+        viewController.pushInputToHistoryStack()
         viewController.operatorLabel.text = button.titleLabel?.text
         viewController.valueLabel.text = "0"
         viewController.currentPhase = .phase2
