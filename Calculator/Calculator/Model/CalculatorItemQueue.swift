@@ -27,3 +27,5 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         items.removeAll()
     }
 }
+
+protocol CalculateItem {}
