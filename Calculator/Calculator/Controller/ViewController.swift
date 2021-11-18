@@ -25,7 +25,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickOperator(_ sender: UIButton) {
-        addExpression()
+        guard let numberOfLabel = numberCompositionLabel.text else {
+            return
+        }
+        
+        if let operatorOfLabel = operatorSettingLabel.text {
+            addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel)
+        } else {
+            addExpression(signValue: nil, numberValue: numberOfLabel)
+        }
+        
+        
         guard let operatorOfButton = sender.titleLabel?.text else {
             return
         }
@@ -91,19 +101,19 @@ extension ViewController {
         return data == "0" ? true : false
     }
     
-    private func addExpression(text: String) {
+    private func addExpression(signValue: String?, numberValue: String) {
         let expressionStackView = UIStackView()
         
         let signLabel = ExpressionLabel()
         let numberLabel = ExpressionLabel()
         
-        numberLabel.text = text
+        signLabel.text = signValue
+        numberLabel.text = numberValue
         
         expressionStackView.addArrangedSubview(signLabel)
         expressionStackView.addArrangedSubview(numberLabel)
         
         ExpressionView.addArrangedSubview(expressionStackView)
     }
-    
 }
 
