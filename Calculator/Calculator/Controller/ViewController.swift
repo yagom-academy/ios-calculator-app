@@ -76,6 +76,9 @@ extension ViewController: CalculatorDelegate {
     func updateOperatorLabel(with operator: String) {
         currentOperatorLabel.text = `operator`
     }
+    func updateOperandLabel(with operand: String) {
+        currentOperandLabel.text = operand
+    }
 }
 
 

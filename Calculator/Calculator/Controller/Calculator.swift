@@ -52,4 +52,5 @@ protocol CalculatorDelegate {
     func clearToInitialState()
     func addFormulaLine(operator: String, operand: String)
     func updateOperatorLabel(with operator: String)
+    func updateOperandLabel(with operand: String)
 }
