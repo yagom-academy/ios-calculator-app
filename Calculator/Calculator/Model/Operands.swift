@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operands: String, CustomStringConvertible {
+enum Operands: String {
     case dot = "."
     case zero = "0"
     case zerozero = "00"
@@ -20,7 +20,9 @@ enum Operands: String, CustomStringConvertible {
     case seven = "7"
     case eight = "8"
     case nine = "9"
-    
+}
+
+extension Operands: CustomStringConvertible {
     var description: String {
         return self.rawValue
     }
