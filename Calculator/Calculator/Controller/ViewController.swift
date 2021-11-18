@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureInit()
     }
     
@@ -35,6 +36,25 @@ class ViewController: UIViewController {
             return
         }
         operandsLabel.text = currentText + number
+    }
+    
+    @IBAction func operatorTapped(_ sender: UIButton) {
+        guard let currentOperator = sender.currentTitle else {
+            return
+        }
+        operatorLabel.text = currentOperator
+    }
+    
+    @IBAction func plusMinusButtonTapped(_ sender: Any) {
+        guard let currentOperand = operandsLabel.text,
+              let intValue = Int(currentOperand) else {
+                  return
+        }
+        if intValue > 0 {
+            operandsLabel.text = "-" + currentOperand
+        } else {
+            operandsLabel.text = operandsLabel.text?.replacingOccurrences(of: "-", with: "")
+        }
     }
 }
 
