@@ -22,22 +22,33 @@ class ViewController: UIViewController, CalculatorDelegate {
 // MARK:- IBAction
 extension ViewController {
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        calculator.allClearButtonDidTap()
     }
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+        calculator.clearEntryButtonDidTap()
     }
     @IBAction func toggleSignButtonTapped(_ sender: UIButton) {
+        calculator.toggleSignButtonDidTap()
     }
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let `operator` = sender.titleLabel?.text else { return }
+        calculator.operatorButtonDidTap(operator: `operator`)
     }
     @IBAction func equalsButtonTapped(_ sender: UIButton) {
+        calculator.equalsButtonDidTap()
     }
     @IBAction func dotButtonTapped(_ sender: UIButton) {
+        calculator.dotButtonDidTap()
     }
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
+        calculator.zeroButtonDidTap()
     }
     @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
+        calculator.doubleZeroButtonDidTap()
     }
     @IBAction func digitButtonTapped(_ sender: UIButton) {
+        guard let number = sender.titleLabel?.text else { return }
+        calculator.digitButtonDidTap(number: number)
     }
 }
 
