@@ -1,14 +1,18 @@
 //
-//  CalculateItemQueue.swift
+//  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by yeha on 2021/11/09.
+//  Created by yeha on 2021/11/15.
 //
 
 import Foundation
 
-struct CalculateItemQueue<Element: CalculateItem> {
-    private(set) var items: [Element] = []
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private(set) var items: [Element]
+    
+    init(_ item: [Element] = []) {
+        self.items = item
+    }
     
     mutating func enqueue(_ item: Element) {
         items.append(item)
@@ -23,3 +27,5 @@ struct CalculateItemQueue<Element: CalculateItem> {
         items.removeAll()
     }
 }
+
+protocol CalculateItem {}
