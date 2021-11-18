@@ -20,7 +20,6 @@ class FormulaTest: XCTestCase {
         
         var formula = Formula(operands: operands, operators: operators)
         
-        
         try XCTAssertEqual(formula.result(), 3)
     }
     
