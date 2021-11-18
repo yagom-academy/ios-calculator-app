@@ -11,7 +11,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = "0"
+        initializeNumberLabel()
+        initializeSymbolLabel()
     }
     
     var operatorsLabel: UILabel {
@@ -109,7 +110,7 @@ class ViewController: UIViewController {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         entireFormula.removeAll()
         initializeNumberLabel()
-        initializeSymbolLabel() 
+        initializeSymbolLabel()
     }
     
     @IBAction func EqualButtonPressed(_ sender: UIButton) {
@@ -124,7 +125,6 @@ class ViewController: UIViewController {
             print(error)
         }
     }
-    
     
     func initializeNumberLabel() {
         inputNumber.removeAll()
