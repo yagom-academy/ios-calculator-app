@@ -57,6 +57,22 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func CEButtonTapped(_ sender: UIButton) {
+        if let currentNumber = operandsLabel.text, currentNumber == "0" {
+            return
+        }
+        operandsLabel.text?.removeLast()
+    }
+    
+    @IBAction func ACButtonTapped(_ sender: UIButton) {
+        formulaStackView.subviews.forEach{ $0.removeFromSuperview() }
+        operandsLabel.text = "0"
+        operatorLabel.text = ""
+    }
+    
+    
+    //MARK: - Helpers
+    
     func makeLabel(text: String) -> UILabel {
        let label = UILabel()
         label.textColor = .white
