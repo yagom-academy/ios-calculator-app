@@ -197,15 +197,20 @@ extension CalculatorController {
         return label
     }
     
+    private func createStackView(subviews: UIView..., axis: NSLayoutConstraint.Axis = .horizontal) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = axis
+        stackView.spacing = 8
+        subviews.forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
+    }
+    
     private func createExpressionStackView() {
         let operatorLabel = createLabel(text: self.operatorLabel.text)
         let operandLabel = createLabel(text: self.numberLabel.text)
         
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.addArrangedSubview(operatorLabel)
-        stackView.addArrangedSubview(operandLabel)
-        stackView.spacing = 8
+        let stackView = createStackView(subviews: operatorLabel, operandLabel)
         
         expressionStackViewSuperView.addArrangedSubview(stackView)
     }
