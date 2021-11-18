@@ -44,4 +44,14 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, filterOperator)
     }
+    
+    func test_split메서드_형변환동작하는지_확인() {
+        //given
+        let string = "123/456+456*123"
+        let after: [String] = ["123","456+456*123"]
+        //when
+        let result: [String] = string.split(with: "/")
+        //then
+        XCTAssertEqual(result, after)
+    }
 }
