@@ -1,7 +1,9 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: LinkedList<T>, CalculateItem {
+struct CalculatorItemQueue<T>: CalculateItem {
+    var linkedList = LinkedList<T>()
 
 }
  
+

@@ -17,11 +17,11 @@ class LinkedList<Element> {
         return head == nil
     }
     
-    init(head: Node<Element>) {
+    init(head: Node<Element>? = nil) {
         self.head = head
     }
     
-    func enqueue(in data: Element) {
+    func enqueue(_ data: Element) {
         var finderForLast: Node<Element>?
         
         guard !isEmpty else {
@@ -42,10 +42,12 @@ class LinkedList<Element> {
         head = head?.pointer
     }
     
-    func dequeueWithData() -> Element? {
-        guard !isEmpty else { return nil }
+    func dequeueWithData() throws -> Element {
+        guard !isEmpty else { throw QueueError.EmptyInLinkedList }
         
-        let dataOfDequeueNode = head?.data
+        guard let dataOfDequeueNode = head?.data else {
+            throw QueueError.EmptyInLinkedList
+        }
         
         head = head?.pointer
         return dataOfDequeueNode
