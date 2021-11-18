@@ -65,6 +65,7 @@ extension Calculator {
     }
 }
 
+// MARK:- String Extension
 private extension String {
     mutating func toZero() {
         self = "0"
