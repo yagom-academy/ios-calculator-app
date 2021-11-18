@@ -2,7 +2,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var recordingStackView: UIStackView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var calculatorScrollView: UIScrollView!
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         formulaStackView.spacing = 8
         formulaStackView.distribution = .fill
         formulaStackView.alignment = .firstBaseline
-        if stackView.arrangedSubviews.count == 2 {
+        if recordingStackView.arrangedSubviews.count == 2 {
             formulaStackView.addArrangedSubview(operandsLabel)
         } else {
             formulaStackView.addArrangedSubview(operatorsLabel)
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
             symbolLabel.text = sender.currentTitle
             initializeNumberLabel()
         } else {
-            stackView.addArrangedSubview(formulaStackView)
+            recordingStackView.addArrangedSubview(formulaStackView)
             symbolLabel.text = sender.currentTitle
             addEntireFormula()
             initializeNumberLabel()
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func ACButtonPressed(_ sender: UIButton) {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         entireFormula.removeAll()
         initializeNumberLabel()
         initializeSymbolLabel()
@@ -121,7 +121,7 @@ class ViewController: UIViewController {
     @IBAction func EqualButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
         
-        stackView.addArrangedSubview(formulaStackView)
+        recordingStackView.addArrangedSubview(formulaStackView)
         
         entireFormula += numberLabel.text ?? ""
         
