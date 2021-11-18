@@ -33,9 +33,7 @@ class CalculatorController {
         } catch {
             return Formula.FormulaError.NaN.description
         }
-        print(calculatedResult.description)
-        print(calculatedResult)
-        
+
         guard let result = numberFormatter.string(from: NSNumber(value: calculatedResult)) else {
             return ""
         }
