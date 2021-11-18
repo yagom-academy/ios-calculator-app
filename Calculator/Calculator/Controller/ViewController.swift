@@ -26,6 +26,9 @@ class ViewController: UIViewController {
         guard var numberOfLabel = numberCompositionLabel.text else {
             return
         }
+        if numberOfLabel == "0" {
+            return
+        }
         
         if numberOfLabel.hasPrefix("-") {
             numberOfLabel.removeFirst()
@@ -67,6 +70,5 @@ class ViewController: UIViewController {
             numberCompositionLabel.text = numberOfLabel + point
         }
     }
-    
 }
 
