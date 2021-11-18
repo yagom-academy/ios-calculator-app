@@ -11,7 +11,7 @@ class OperatorError: XCTestCase {
     
     func test_0으로_나누면_NotANumber_오류가_발생한다() {
         
-        XCTAssertThrowsError(try Operator.divide.calculate(lhs: 1, rhs: 0)){ error in XCTAssertEqual(error as? CalculateError, CalculateError.NotANumber)}
+        XCTAssertThrowsError(try Operator.divide.calculate(lhs: 1, rhs: 0)){ error in XCTAssertEqual(error as? CalculateError, CalculateError.notNumber)}
     }
     
     override func setUpWithError() throws {

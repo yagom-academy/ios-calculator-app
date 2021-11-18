@@ -27,9 +27,12 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let availableOperators = Operator.allCases.map { (availableOperator: Operator) -> String in return  String(availableOperator.rawValue) }
-        let operatorsOfInputString = input.split(with: " ")
-            .filter{ (value: String) -> Bool in return availableOperators.contains(value) == true }
+        let availableOperators = Operator.allCases.map {
+            (availableOperator: Operator) -> String in return  String(availableOperator.rawValue)
+        }
+        let operatorsOfInputString = input.split(with: " ").filter {
+            (value: String) -> Bool in return availableOperators.contains(value) == true
+        }
      
         return operatorsOfInputString
     }

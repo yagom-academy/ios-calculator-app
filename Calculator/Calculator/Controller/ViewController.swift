@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet private weak var inputedOperatorLabel: UILabel!
     @IBOutlet private weak var inputedOperandLabel: UILabel!
     @IBOutlet private weak var toBeCalculateFormulaStackView: UIStackView!
@@ -25,11 +25,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         inputedOperandLabel.text = initializeOperandLabelText
     }
 }
-    
+
 // MARK: - IBAction Method
 extension ViewController {
     @IBAction private func numberDidTap(_ sender: UIButton) {
@@ -45,13 +45,15 @@ extension ViewController {
         if operand == initializeToEmptyString {
             do {
                 inputedOperatorLabel.text = try operators(for: sender)
-            return
+                return
             } catch let error {
                 print(error)
             }
         }
         
-        guard let operatorLabelText = inputedOperatorLabel.text else { return }
+        guard let operatorLabelText = inputedOperatorLabel.text else {
+            return
+        }
         
         addStackView(operatorLabelText: operatorLabelText)
         
@@ -60,11 +62,10 @@ extension ViewController {
         inputedOperandLabel.text = initializeOperandLabelText
         do {
             inputedOperatorLabel.text = try operators(for: sender)
-        return
         } catch let error {
             print(error)
         }
-
+        
         scrollToBottom()
     }
     
@@ -77,9 +78,13 @@ extension ViewController {
     }
     
     @IBAction private func equalButtonDidTap(_ sender: UIButton) {
-        if operand == initializeToEmptyString { return }
+        if operand == initializeToEmptyString {
+            return
+        }
         
-        guard let operatorLabelText = inputedOperatorLabel.text else { return }
+        guard let operatorLabelText = inputedOperatorLabel.text else {
+            return
+        }
         
         addStackView(operatorLabelText: operatorLabelText)
         
@@ -146,7 +151,7 @@ extension ViewController {
         scrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
-    
+
 // MARK: - Model Method
 extension ViewController {
     private func showCalculateResult() {
@@ -184,11 +189,11 @@ extension ViewController {
             throw NumberFormatterError.dataTypeCastingFailed
         }
         let numberFormatter = numberFormatter()
-
+        
         if inputOperand.contains(".") {
             return try formatNumber(of: inputOperand)
         }
-
+        
         return numberFormatter.string(for: operand)
     }
     
@@ -207,7 +212,7 @@ extension ViewController {
         
         return formattedDotFront + "." + dotBack
     }
-
+    
     private func operators(for buttton: UIButton) throws -> String {
         guard let buttonIdentifier = buttton.accessibilityIdentifier else {
             throw ButtonMachingError.dataTypeCastingFailed
