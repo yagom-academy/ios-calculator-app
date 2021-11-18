@@ -9,10 +9,13 @@ class ViewController: UIViewController {
     private var inputNumber = ""
     private var entireFormula = ""
     
+    private var numberFormatter: NumberFormatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeNumberLabel()
         initializeSymbolLabel()
+        initializeNumberFormatter(of: numberFormatter)
     }
     
     var operatorsLabel: UILabel {
@@ -150,6 +153,11 @@ class ViewController: UIViewController {
         }
         entireFormula += number
         entireFormula += symbol
+    }
+    
+    func initializeNumberFormatter(of formatter: NumberFormatter) {
+        formatter.numberStyle = .decimal
+        formatter.maximumSignificantDigits = 20
     }
 }
 
