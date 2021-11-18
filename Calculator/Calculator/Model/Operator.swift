@@ -24,7 +24,7 @@ enum Operator: Character, CaseIterable {
     private func subtract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        let isBothZero: Bool = (lhs == .zero && rhs == .zero)
+        let isBothZero: Bool = (rhs == .zero)
         return isBothZero ? .nan : lhs/rhs
     }
     
