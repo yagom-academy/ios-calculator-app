@@ -19,10 +19,10 @@
 		1882E5582740F50C00473FC4 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E5572740F50C00473FC4 /* ExpressionParserTests.swift */; };
 		1882E55F274180A500473FC4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FEA273E31A60050F48E /* Extension.swift */; };
 		1882E5622741867900473FC4 /* TestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E560274185FE00473FC4 /* TestInterface.swift */; };
-		1882E563274186EB00473FC4 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operation.swift */; };
+		1882E563274186EB00473FC4 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operator.swift */; };
 		1882E5652743B21700473FC4 /* CalculateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E5642743B21700473FC4 /* CalculateError.swift */; };
 		1882E5672744299400473FC4 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FFA273E500A0050F48E /* ExpressionParser.swift */; };
-		189C4FE9273E292A0050F48E /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operation.swift */; };
+		189C4FE9273E292A0050F48E /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operator.swift */; };
 		189C4FEB273E31A60050F48E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FEA273E31A60050F48E /* Extension.swift */; };
 		189C4FF3273E4E970050F48E /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FF2273E4E970050F48E /* ExtensionTests.swift */; };
 		189C4FF9273E4F240050F48E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FEA273E31A60050F48E /* Extension.swift */; };
@@ -70,7 +70,7 @@
 		1882E5572740F50C00473FC4 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		1882E560274185FE00473FC4 /* TestInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInterface.swift; sourceTree = "<group>"; };
 		1882E5642743B21700473FC4 /* CalculateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateError.swift; sourceTree = "<group>"; };
-		189C4FE8273E292A0050F48E /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		189C4FE8273E292A0050F48E /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		189C4FEA273E31A60050F48E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		189C4FF0273E4E970050F48E /* ExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		189C4FF2273E4E970050F48E /* ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTests.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 				189C4FFC273E504A0050F48E /* Formula.swift */,
 				189C4FFA273E500A0050F48E /* ExpressionParser.swift */,
 				189C4FEA273E31A60050F48E /* Extension.swift */,
-				189C4FE8273E292A0050F48E /* Operation.swift */,
+				189C4FE8273E292A0050F48E /* Operator.swift */,
 				1852752127393D4D0070A2D5 /* CalculatorItemQueue.swift */,
 				1853C3E4273AEB2300CB3E33 /* LinkedList.swift */,
 				1882E5662743B22700473FC4 /* ErrorHandling */,
@@ -394,7 +394,7 @@
 			files = (
 				1882E55F274180A500473FC4 /* Extension.swift in Sources */,
 				1882E5582740F50C00473FC4 /* ExpressionParserTests.swift in Sources */,
-				1882E563274186EB00473FC4 /* Operation.swift in Sources */,
+				1882E563274186EB00473FC4 /* Operator.swift in Sources */,
 				1882E5622741867900473FC4 /* TestInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,7 +417,7 @@
 				1853C3E5273AEB2300CB3E33 /* LinkedList.swift in Sources */,
 				1852752427393D630070A2D5 /* CalculateItem.swift in Sources */,
 				1853C3E8273AEB7200CB3E33 /* QueueError.swift in Sources */,
-				189C4FE9273E292A0050F48E /* Operation.swift in Sources */,
+				189C4FE9273E292A0050F48E /* Operator.swift in Sources */,
 				18527535273945880070A2D5 /* CalculatorItemQueue.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				1882E5672744299400473FC4 /* ExpressionParser.swift in Sources */,
