@@ -11,54 +11,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     
-    private var entry = OperandEntry()
-    private var formula: String = "" {
-        didSet { print(formula) }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        addFormulaLine(operator: "-", operand: "1234567890")
         clearLabels()
-    }
-    
-    @IBAction func allClearButtonDidTap(_ sender: UIButton) {
-        entry.clear()
-        updateOperandLabel()
-    }
-    @IBAction func clearEntryButtonDidTap(_ sender: UIButton) {
-        entry.clear()
-        updateOperandLabel()
-    }
-    @IBAction func toggleSignButtonDidTap(_ sender: UIButton) {
-        entry.toggleSign()
-        updateOperandLabel()
-    }
-    @IBAction func numberButtonDidTap(_ sender: UIButton) {
-        guard let number = sender.titleLabel?.text else { return }
-        entry.append(number)
-        updateOperandLabel()
-    }
-    @IBAction func operatorButtonDidTap(_ sender: UIButton) {
-        guard let currentOperator = currentOperatorLabel.text else { return }
-        guard let inputOperator = sender.titleLabel?.text else { return }
-        
-        if currentOperandLabel.text == "0", entry.isNonInputState { return }
-        if entry.last == "." { formula.append(entry.currentOperand + "0") }
-        formula.append(currentOperator)
-        formula.append(entry.currentOperand)
-        entry.clear()
-        currentOperatorLabel.text = inputOperator
-        updateOperandLabel()
-    }
-    @IBAction func equalsButtonDidTap(_ sender: UIButton) {
-        var parsedFormula = ExpressionParser.parse(from: formula)
-        let result = parsedFormula.result()
-        guard let formattedResult =
-                NumberFormatter().string(from: NSNumber(value: result)) else {
-            return
-        }
-        entry.replace(with: formattedResult)
     }
     
     func clearLabels() {
@@ -68,14 +24,6 @@ class ViewController: UIViewController {
         currentOperatorLabel.text = blank
         currentOperandLabel.text = zero
         verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    func updateOperandLabel() {
-        currentOperandLabel.text = entry.currentOperand
-    }
-    
-    func updateOperatorLabel(by operator: String) {
-        currentOperatorLabel.text = `operator`
     }
 }
 
