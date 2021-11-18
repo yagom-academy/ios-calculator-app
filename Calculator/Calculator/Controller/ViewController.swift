@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         currentOperand != "0"
     }
     
-    var hasCalculated = false
+    private var hasCalculated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
