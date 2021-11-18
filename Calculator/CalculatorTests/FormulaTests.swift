@@ -74,4 +74,15 @@ class FormulaTests: XCTestCase {
         //then - 테스트결과 확인
         XCTAssertEqual(result, after)
     }
+    
+    func test_입력값의_연산이_되는지확인() {
+        //given
+        let string = "8/4+10-12+10"
+        //when
+        let after: Double = 10.0
+        var testFormula = ExpressionParser.parse(from: string)
+        let result = testFormula.result()
+        //then
+        XCTAssertEqual(result, after)
+    }
 }
