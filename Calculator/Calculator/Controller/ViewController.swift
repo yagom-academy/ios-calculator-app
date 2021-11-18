@@ -79,6 +79,9 @@ extension ViewController: CalculatorDelegate {
     func updateOperandLabel(with operand: String) {
         currentOperandLabel.text = operand
     }
+    func clearFormulaStack() {
+        verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
 }
 
 
