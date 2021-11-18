@@ -51,4 +51,5 @@ extension Calculator {
 protocol CalculatorDelegate {
     func clearToInitialState()
     func addFormulaLine(operator: String, operand: String)
+    func updateOperatorLabel(with operator: String)
 }
