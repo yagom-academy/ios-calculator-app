@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     private func changeOperator(to newOperator: String) {
-        let operatorSymbols = Operator.allCases.map { String($0.rawValue) }
+        let operatorSymbols = Operator.allCases.map { $0.rawValue.description }
         
         guard let last = finalFormula.last else {
             return
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
         }
         
         if isNumberOverMaximumExpression(number: currentNumber) {
-            addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
+            addCalculationHistory(operandText: currentNumber.description, operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
         }
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
             operatorLabel.text = ""
             
             if isNumberOverMaximumExpression(number: calculationResult) {
-                operandLabel.text = String(calculationResult)
+                operandLabel.text = calculationResult.description
             } else {
                 operandLabel.text = calculationResultFormatted
             }
@@ -249,7 +249,7 @@ extension ViewController {
         }
         
         if isNumberOverMaximumExpression(number: currentNumber) {
-            addCalculationHistory(operandText: String(currentNumber), operatorText: currentOperator)
+            addCalculationHistory(operandText: currentNumber.description, operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
         }
