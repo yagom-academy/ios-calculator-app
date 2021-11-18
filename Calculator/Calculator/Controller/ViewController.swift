@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     // scrollView의 Scroll 조정
     
     @IBAction func touchUpAllClearBtn(_ sender: UIButton) {
+        resetCalculator()
     }
     @IBAction func touchUpClearEntryBtn(_ sender: UIButton) {
     }
