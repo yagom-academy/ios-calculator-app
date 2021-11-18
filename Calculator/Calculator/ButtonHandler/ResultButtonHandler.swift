@@ -25,34 +25,31 @@ struct ResultButtonHandler: ButtonActionDelegate {
     private func showCalculationResult(viewController: ViewController, button: UIButton) {
         viewController.operatorLabel.text = ""
         
-        let parsingResult = ExpressionParser.parse(from: viewController.allHistory)
+        let parsedInputHistory = ExpressionParser.parse(from: viewController.allHistory)
         
-        var formulaResult = 0.0
-        
-        switch parsingResult {
+        var calculationResult = 0.0
+        switch parsedInputHistory {
         case .success(var formula):
-            formulaResult = formula.result()
+            calculationResult = formula.result()
         default:
             return
         }
-        
-        var result = ""
-        if formulaResult == Double.infinity {
-            result = "NaN"
+
+        if calculationResult == Double.infinity {
+            viewController.valueLabel.text = "NaN"
         } else {
-            result = convertToDeicmalString(from: formulaResult) ?? ""
+            viewController.valueLabel.text = convertToDeicmalString(from: calculationResult) ?? ""
         }
-        
-        viewController.valueLabel.text = result
-        
+
         viewController.currentPhase = .phase4
     }
     
-    private func convertToDeicmalString(from formulaResult: Double) -> String? {
+    private func convertToDeicmalString(from calculationResult: Double) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
-        return numberFormatter.string(from: NSNumber(value: formulaResult))
+        
+        return numberFormatter.string(from: NSNumber(value: calculationResult))
     }
 }
 
