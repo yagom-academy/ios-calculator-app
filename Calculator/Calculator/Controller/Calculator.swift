@@ -32,9 +32,8 @@ class Calculator {
             && currentOperator == ""
             && formulaStack.isEmpty
     }
-    var isDotted: Bool {
-        currentOperand.contains(".")
-    }
+    var isZero: Bool { currentOperand == "0" }
+    var isDotted: Bool { currentOperand.contains(".") }
 }
 
 // MARK:- Receiving Events
