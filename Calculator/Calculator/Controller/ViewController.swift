@@ -7,11 +7,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var verticalStackView: UIStackView!
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var currentOperandLabel: UILabel!
+    @IBOutlet private weak var verticalStackView: UIStackView!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var currentOperandLabel: UILabel!
     
-    let calculator = Calculator()
+    private let calculator = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 }
 
 // MARK:- IBAction
-extension ViewController {
+private extension ViewController {
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         calculator.allClearButtonDidTap()
     }
@@ -72,9 +72,9 @@ extension ViewController: CalculatorDelegate {
 }
 
 
-// MARK:- Making Formula StackView
-extension ViewController {
-    private func makeFormulaLabel(with text: String) -> UILabel {
+// MARK:- Formula StackView Factory
+private extension ViewController {
+    func makeFormulaLabel(with text: String) -> UILabel {
         let label = UILabel()
         
         label.textColor = .white
@@ -84,7 +84,7 @@ extension ViewController {
         return label
     }
     
-    private func makeHorizontalStackView(operator: UILabel,
+    func makeHorizontalStackView(operator: UILabel,
                                          operand: UILabel) -> UIStackView {
         let horizontal = UIStackView()
         let defaultSpacing: CGFloat = 8
