@@ -10,11 +10,12 @@ struct TogglePlusMinusButtonHandler: ButtonActionDelegate {
     
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
         let value = viewController.valueLabel.text ?? ""
+        let minus = Operator.subtract.rawValue
         
-        if value.first == Operator.subtract.rawValue {
+        if value.first == minus {
             viewController.valueLabel.text?.removeFirst()
         } else {
-            viewController.valueLabel.text = String(Operator.subtract.rawValue) + value
+            viewController.valueLabel.text = "\(minus)\(value)"
         }
     }
     

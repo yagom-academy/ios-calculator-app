@@ -10,10 +10,10 @@ struct NumberButtonHandler: ButtonActionDelegate {
     }
     
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
-        guard let currentText = viewController.valueLabel.text else { return }
-        guard let buttonTitle = button.titleLabel?.text else { return }
+        guard let currentValue = viewController.valueLabel.text else { return }
+        guard let followingValue = button.titleLabel?.text else { return }
         
-        viewController.valueLabel.text = currentText + buttonTitle
+        viewController.valueLabel.text = currentValue + followingValue
     }
     
     func runActionInPhase2(viewController: ViewController, button: UIButton) {

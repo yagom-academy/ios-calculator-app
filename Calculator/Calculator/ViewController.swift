@@ -45,27 +45,27 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func numberButtonHandler(_ sender: UIButton) {
+    @IBAction func runNumberButtonAction(_ sender: UIButton) {
         runButtonAction(delegate: NumberButtonHandler.shared, button: sender)
     }
     
-    @IBAction func operatorButtonHandler(_ sender: UIButton) {
+    @IBAction func runOperatorButtonAction(_ sender: UIButton) {
         runButtonAction(delegate: OperatorButtonHandler.shared, button: sender)
     }
     
-    @IBAction func allClearButtonHandler(_ sender: UIButton) {
+    @IBAction func runAllClearButtonAction(_ sender: UIButton) {
         runButtonAction(delegate: AllClearButtonHandler.shared, button: sender)
     }
     
-    @IBAction func clearButtonHandler(_ sender: UIButton) {
+    @IBAction func runClearButtonAction(_ sender: UIButton) {
         runButtonAction(delegate: ClearButtonHandler.shared, button: sender)
     }
     
-    @IBAction func togglePlusMinusButtonHandler(_ sender: UIButton) {
+    @IBAction func runTogglePlusMinusButtonAction(_ sender: UIButton) {
         runButtonAction(delegate: TogglePlusMinusButtonHandler.shared, button: sender)
     }
     
-    @IBAction func resultButtonHandler(_ sender: UIButton) {
+    @IBAction func runResultButtonAction(_ sender: UIButton) {
         runButtonAction(delegate: ResultButtonHandler.shared, button: sender)
     }
     
@@ -79,20 +79,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    func pushInputToHistoryStack() {
-        let newInput = UILabel()
-        newInput.textColor = .white
+    func pushNewHistoryToStack() {
+        let newHistory = UILabel()
+        newHistory.textColor = .white
         
         let `operator` = operatorLabel.text ?? ""
         let value = valueLabel.text ?? ""
-
-        if `operator` == "" {
-            newInput.text = value
-        } else {
-            newInput.text = "\(`operator`) \(value)"
-        }
+        newHistory.text = "\(`operator`) \(value)"
         
-        inputHistoryStackView.addArrangedSubview(newInput)
+        inputHistoryStackView.addArrangedSubview(newHistory)
         
         scrollDownToBottom()
     }
@@ -108,10 +103,6 @@ class ViewController: UIViewController {
         inputHistoryStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-    }
-    
-    func clearValueLabel() {
-        valueLabel.text = "0"
     }
 }
 

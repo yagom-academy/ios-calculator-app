@@ -9,7 +9,7 @@ struct OperatorButtonHandler: ButtonActionDelegate {
     }
     
     func runActionInPhase1(viewController: ViewController, button: UIButton) {
-        viewController.pushInputToHistoryStack()
+        viewController.pushNewHistoryToStack()
         viewController.operatorLabel.text = button.titleLabel?.text
         viewController.valueLabel.text = "0"
         viewController.currentPhase = .phase2
