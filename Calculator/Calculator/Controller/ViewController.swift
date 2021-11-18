@@ -213,7 +213,7 @@ extension ViewController {
         
         operandLabel.text = operand
                 
-        guard operand.contains("e") else {
+        guard isNumberOverMaximumExpression(number: currentNumber) else {
             currentOperand = operand.replacingOccurrences(of: ",", with: "")
             return
         }
