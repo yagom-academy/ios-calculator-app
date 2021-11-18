@@ -4,10 +4,6 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
     
-    func test_operation_allcases가_모든연산자를_포함하는지() {
-        let opertaions = Operator.allCases.map { $0.rawValue }
-        XCTAssertTrue(opertaions.contains("+"))
-    }
     func test_componentsByoperator함수에_11더하기_12를_입력하면_11과_더하기와_12가_나오는지() {
         //given
         let result = testcomponentsByOperators(from: "11+12")
