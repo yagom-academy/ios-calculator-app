@@ -35,6 +35,9 @@ class InputValidator {
         }
         return true
     }
+    func convertedOperand(from digit: String, at state: CalculatorState) -> String {
+        isZero(state) ? digit : state.currentOperand + digit
+    }
     func zeroValidity(at state: CalculatorState) -> Bool {
         !isZero(state)
     }

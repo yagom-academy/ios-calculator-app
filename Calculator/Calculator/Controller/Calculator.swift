@@ -75,7 +75,8 @@ extension Calculator {
             currentOperand.append("00") : ()
     }
     func digitButtonDidTap(number: String) {
-        
+        currentOperand = validator.convertedOperand(from: number,
+                                                    at: currentState)
     }
 }
 
