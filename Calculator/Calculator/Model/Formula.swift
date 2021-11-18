@@ -17,7 +17,7 @@ struct Formula {
     }
 
     mutating func result() -> Double {
-        guard var operationResult = operands.dequeue() else { return 0.0 }
+        guard var operationResult = operands.dequeue() else { return Double.nan }
         
         while let nextOperator = operators.dequeue(), let nextOperand = operands.dequeue() {
             operationResult = nextOperator.calculate(operationResult, nextOperand)
