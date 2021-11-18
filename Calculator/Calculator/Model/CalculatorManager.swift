@@ -22,9 +22,9 @@ struct CalculatorManager {
         }
         
         let numberFormatter = NumberFormatter()
-        let numberExpressionWithoutDecimal = numberExpression
+        let numberWithoutDecimal = numberExpression
             .replacingOccurrences(of: ",", with: "")
-        guard let number = Double(numberExpressionWithoutDecimal) else {
+        guard let number = Double(numberWithoutDecimal) else {
             return "0"
         }
         
