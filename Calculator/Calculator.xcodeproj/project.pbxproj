@@ -17,7 +17,6 @@
 		1853C3E8273AEB7200CB3E33 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853C3E7273AEB7200CB3E33 /* QueueError.swift */; };
 		1853C3E9273AF04400CB3E33 /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853C3E7273AEB7200CB3E33 /* QueueError.swift */; };
 		1882E5582740F50C00473FC4 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E5572740F50C00473FC4 /* ExpressionParserTests.swift */; };
-		1882E55E2740F54900473FC4 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FFA273E500A0050F48E /* ExpressionParser.swift */; };
 		1882E55F274180A500473FC4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FEA273E31A60050F48E /* Extension.swift */; };
 		1882E5622741867900473FC4 /* TestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1882E560274185FE00473FC4 /* TestInterface.swift */; };
 		1882E563274186EB00473FC4 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C4FE8273E292A0050F48E /* Operation.swift */; };
@@ -394,7 +393,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1882E55F274180A500473FC4 /* Extension.swift in Sources */,
-				1882E55E2740F54900473FC4 /* ExpressionParser.swift in Sources */,
 				1882E5582740F50C00473FC4 /* ExpressionParserTests.swift in Sources */,
 				1882E563274186EB00473FC4 /* Operation.swift in Sources */,
 				1882E5622741867900473FC4 /* TestInterface.swift in Sources */,
