@@ -93,7 +93,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func negativePositiveButtonPressed(_ sender: UIButton) {
-        guard var text = numberLabel.text, text.isEmpty == false else { return }
+        guard var text = numberLabel.text, text != "0" else { return }
         
         if text.hasPrefix("-") {
             text = text.replacingOccurrences(of: "-", with: "")
