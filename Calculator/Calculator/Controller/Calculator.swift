@@ -37,16 +37,9 @@ class Calculator {
         }
     }
     
-    var status: (String, String, Bool, [(String, String)]) {
+    var currentState: (String, String, Bool, [(String, String)]) {
         (currentOperator, currentOperand, isPositive, formulaStack)
     }
-    var isInitialState: Bool {
-        currentOperand == "0"
-            && currentOperator == ""
-            && formulaStack.isEmpty
-    }
-    var isZero: Bool { currentOperand == "0" }
-    var isDotted: Bool { currentOperand.contains(".") }
 }
 
 // MARK:- Receiving Events
@@ -63,7 +56,8 @@ extension Calculator {
 
     }
     func toggleSignButtonDidTap() {
-        isPositive.toggle()
+        validator.toggleSignValidity(at: currentState) ?
+            isPositive.toggle() : ()
     }
     func operatorButtonDidTap(operator: String) {
         
