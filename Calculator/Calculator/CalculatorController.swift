@@ -62,6 +62,19 @@ extension CalculatorController {
     private func removeComma(text: String?) -> String {
         return text?.replacingOccurrences(of: ",", with: "") ?? ""
     }
+    
+    private func togglePlusMinus() -> String {
+        var currentText = numberLabel.text ?? "0"
+        let minusSign = "-"
+        
+        if currentText.hasPrefix(minusSign) == true {
+            currentText = currentText.replacingOccurrences(of: minusSign , with: "")
+        } else {
+            currentText = minusSign + currentText
+        }
+        
+        return currentText
+    }
 }
 
 // MARK: - Button Event
@@ -104,16 +117,7 @@ extension CalculatorController {
             return
         }
         
-        var currentText = numberLabel.text ?? "0"
-        let minusSign = "-"
-        
-        if numberLabel.text?.hasPrefix(minusSign) == true {
-            currentText = currentText.replacingOccurrences(of: "-", with: "")
-        } else {
-            currentText = minusSign + currentText
-        }
-        
-        numberLabel.text = currentText
+        numberLabel.text = togglePlusMinus()
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
