@@ -45,16 +45,21 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         textInput += operandText
-        if textInput.isEmpty {
+        guard let lastWord = textInput.last else {
             return
         }
-        
+        if lastWord.isNumber {
+        } else {
+            textInput.removeLast()
+        }
         operatorText = sender.currentTitle ?? "0"
         textInput += operatorText
         operatorLabel?.text = operatorText
         operandText = ""
         operandLabel?.text = "0"
         print(textInput)
+        
+        
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
