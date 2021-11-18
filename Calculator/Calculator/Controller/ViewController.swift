@@ -61,6 +61,10 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         inputLabel.text = "0"
+        for i in mainStackView.arrangedSubviews {
+            mainStackView.removeArrangedSubview(i)
+            i.removeFromSuperview()
+        }
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
