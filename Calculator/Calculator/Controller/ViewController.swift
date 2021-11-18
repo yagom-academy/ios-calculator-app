@@ -8,27 +8,37 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var resultLabel: UILabel!
-    @IBOutlet weak var processScrollView: UIStackView!
-    @IBOutlet weak var signLabel: UILabel!
+    @IBOutlet weak var processScrollView: UIScrollView!
+    @IBOutlet weak var processStackView: UIStackView!
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     
-    var inputString: String = ""
-    var currentInputString: String = ""
+    var currentOperand: String = ""
+    var currentOperator: String = ""
+    var completeFormula: [String] = []
+    var isCalculationAdded: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetResult()
+        resetCalculator()
     }
     
-    func resetResult() {
-        resultLabel.text = "0"
-        signLabel.text = ""
-        inputString = ""
-        currentInputString = ""
+    func resetCalculator() {
+        operandLabel.text = ""
+        operatorLabel.text = ""
+        
+        currentOperand = ""
+        currentOperator = ""
+        completeFormula = []
+        isCalculationAdded = false
     }
     
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
+    
+    func resetScrollView() {
+//        processScrollView.
+    }
     
     func addStackView() { // 연산자를 누를 때마다 stackView를 추가함
         
@@ -56,9 +66,9 @@ class ViewController: UIViewController {
         var formula: Formula = ExpressionParser.parse(from: inputString)
         do {
             let result: Double = try formula.result()
-            resultLabel.text = "\(result)"
+            operandLabel.text = "\(result)"
         } catch CalculatorError.dividedByZero {
-            resultLabel.text = "\(CalculatorError.dividedByZero.description)"
+            operandLabel.text = "\(CalculatorError.dividedByZero.description)"
         } catch {
             print(error)
         }

@@ -363,9 +363,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="processScrollView" destination="XRe-QE-UJf" id="9P1-Zt-9He"/>
-                        <outlet property="resultLabel" destination="Lwz-OF-XHD" id="TfL-4J-MQm"/>
-                        <outlet property="signLabel" destination="HPC-iy-qdm" id="yzD-v4-uYh"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="TfL-4J-MQm"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="yzD-v4-uYh"/>
+                        <outlet property="processScrollView" destination="BOT-7g-vxv" id="lWD-Wy-0rf"/>
+                        <outlet property="processStackView" destination="XRe-QE-UJf" id="9P1-Zt-9He"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
