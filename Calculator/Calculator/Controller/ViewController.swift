@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     private var calculatorManager = CalculatorManager(displayingResult: false, isTypingOperand: false)
     private var formulasStackViewIsEmpty: Bool = true
     
-    private var displayOperator: String {
+    private var displayedOperator: String {
         get {
             guard let `operator` = operatorLabel.text else {
                 return ""
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private var displayOperand: String {
+    private var displayedOperand: String {
         get {
             guard let operand = operandLabel.text else {
                 return ""
@@ -41,9 +41,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initDisplayOperand()
-        initDisplayOperator()
-        initDisplayFormulas()
+        initDisplayedOperand()
+        initDisplayedOperator()
+        initDisplayedFormulas()
     }
 }
 
@@ -52,12 +52,12 @@ class ViewController: UIViewController {
 extension ViewController {
     @IBAction private func touchUpDigit(_ sender: UIButton) {
         if calculatorManager.displayingResult {
-            initDisplayFormulas()
-            initDisplayOperand()
+            initDisplayedFormulas()
+            initDisplayedOperand()
             calculatorManager.setDisplayingResultStatus(to: false)
         }
         
-        if !formulasStackViewIsEmpty && displayOperator == "" {
+        if !formulasStackViewIsEmpty && displayedOperator == "" {
             return
         }
         
@@ -67,20 +67,20 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: true)
         
-        if displayOperand == "0" {
+        if displayedOperand == "0" {
             guard currentOperandButtonTitle != "00" else {
                 return
             }
-            displayOperand = currentOperandButtonTitle
+            displayedOperand = currentOperandButtonTitle
         } else {
-            displayOperand = displayOperand + currentOperandButtonTitle
+            displayedOperand = displayedOperand + currentOperandButtonTitle
         }
     }
     
     @IBAction private func touchUpDecimalPoint(_ sender: UIButton) {
         if calculatorManager.displayingResult {
-            initDisplayFormulas()
-            initDisplayOperand()
+            initDisplayedFormulas()
+            initDisplayedOperand()
             calculatorManager.setDisplayingResultStatus(to: false)
         }
         
@@ -90,20 +90,20 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: true)
         
-        guard !displayOperand.contains(".") && displayOperand != "NaN" else {
+        guard !displayedOperand.contains(".") && displayedOperand != "NaN" else {
             return
         }
         
-        displayOperand = displayOperand + decimalPointButtonTitle
+        displayedOperand = displayedOperand + decimalPointButtonTitle
     }
     
     @IBAction private func touchUpOperator(_ sender: UIButton) {
-        guard displayOperand != "NaN" else {
+        guard displayedOperand != "NaN" else {
             return
         }
         
         if calculatorManager.displayingResult {
-            initDisplayFormulas()
+            initDisplayedFormulas()
             calculatorManager.setDisplayingResultStatus(to: false)
         }
         
@@ -111,14 +111,14 @@ extension ViewController {
             return
         }
         
-        guard Double(displayOperand) != 0.0 else {
-            displayOperator = currentOperandButtionTitle
+        guard Double(displayedOperand) != 0.0 else {
+            displayedOperator = currentOperandButtionTitle
             return
         }
         
-        addFormulaToFormulas(operator: displayOperator, operand: displayOperand)
-        displayOperator = currentOperandButtionTitle
-        initDisplayOperand()
+        addFormulaToFormulas(operator: displayedOperator, operand: displayedOperand)
+        displayedOperator = currentOperandButtionTitle
+        initDisplayedOperand()
     }
     
     @IBAction private func touchUpAllClear(_ sender: UIButton) {
@@ -126,64 +126,64 @@ extension ViewController {
     }
     
     @IBAction private func touchUpClearEntry(_ sender: UIButton) {
-        initDisplayOperand()
+        initDisplayedOperand()
         calculatorManager.setDisplayingResultStatus(to: false)
     }
     
     @IBAction private func touchUpSignConversion(_ sender: UIButton) {
-        guard Double(displayOperand) != 0.0 else {
+        guard Double(displayedOperand) != 0.0 else {
             return
         }
         
-        let convertedOperand = convertSign(from: displayOperand)
+        let convertedOperand = convertSign(from: displayedOperand)
         
-        displayOperand = convertedOperand
+        displayedOperand = convertedOperand
     }
     
     @IBAction private func touchUpEqualSign(_ sender: UIButton) {
-        guard displayOperator != "" && displayOperand != "" else {
+        guard displayedOperator != "" && displayedOperand != "" else {
             return
         }
         
-        addFormulaToFormulas(operator: displayOperator, operand: displayOperand)
+        addFormulaToFormulas(operator: displayedOperator, operand: displayedOperand)
         
         let formulaString: String = assembleFormula()
         var formula: Formula = ExpressionParser.parse(from: formulaString)
         
         do {
-            displayOperand = String(try formula.result())
+            displayedOperand = String(try formula.result())
             calculatorManager.setDisplayingResultStatus(to: true)
         } catch OperationError.devidedByZero {
-            displayOperand = "NaN"
+            displayedOperand = "NaN"
             calculatorManager.setDisplayingResultStatus(to: true)
         } catch {
             
         }
         
-        initDisplayOperator()
+        initDisplayedOperator()
     }
 }
 
 // MARK: - private Methods
 
 extension ViewController {
-    private func initDisplayOperator() {
-        displayOperator = ""
+    private func initDisplayedOperator() {
+        displayedOperator = ""
     }
     
-    private func initDisplayOperand() {
-        displayOperand = "0"
+    private func initDisplayedOperand() {
+        displayedOperand = "0"
     }
     
-    private func initDisplayFormulas() {
+    private func initDisplayedFormulas() {
         formulasStackView.arrangedSubviews.forEach { $0.removeFromSuperview()}
         formulasStackViewIsEmpty = true
     }
     
     private func initAllDisplay() {
-        initDisplayOperator()
-        initDisplayOperand()
-        initDisplayFormulas()
+        initDisplayedOperator()
+        initDisplayedOperand()
+        initDisplayedFormulas()
     }
     
     private func scrollToBottom() {
