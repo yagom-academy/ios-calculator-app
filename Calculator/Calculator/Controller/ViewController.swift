@@ -112,17 +112,17 @@ class ViewController: UIViewController {
     }
     
     private func addCalculationHistory(operandText: String, operatorText: String) {
-        let sign = UILabel()
-        sign.textColor = .white
-        sign.text = operatorText
-        sign.font = UIFont(name: "Helvetica", size: 24)
+        let selectedOperatorLabel = UILabel()
+        selectedOperatorLabel.textColor = .white
+        selectedOperatorLabel.text = operatorText
+        selectedOperatorLabel.font = UIFont(name: "Helvetica", size: 24)
         
-        let history = UILabel()
-        history.text = operandText
-        history.textColor = .white
-        history.font = UIFont(name: "Helvetica", size: 24)
+        let selectedOperandLabel = UILabel()
+        selectedOperandLabel.textColor = .white
+        selectedOperandLabel.text = operandText
+        selectedOperandLabel.font = UIFont(name: "Helvetica", size: 24)
         
-        let newHistoryStackView = UIStackView(arrangedSubviews: [sign, history])
+        let newHistoryStackView = UIStackView(arrangedSubviews: [selectedOperatorLabel, selectedOperandLabel])
         
         newHistoryStackView.axis = .horizontal
         newHistoryStackView.spacing = 10
