@@ -15,4 +15,9 @@ class Number {
         self.value = value
         self.isBiggerThan0 = true
     }
+    
+    func reset() {
+        value = "0"
+        isBiggerThan0 = true
+    }
 }

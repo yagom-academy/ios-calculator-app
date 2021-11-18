@@ -16,8 +16,7 @@ class Number_Tests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        sut.value = "0"
-        sut.isBiggerThan0 = true 
+        sut.reset()
     }
     
     func test_Number의_초기_Label은_0이다() {
