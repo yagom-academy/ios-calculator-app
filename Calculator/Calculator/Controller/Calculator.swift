@@ -45,12 +45,10 @@ class Calculator {
 // MARK:- Receiving Events
 extension Calculator {
     func shouldSetInitialState() {
-        allClearButtonDidTap()
+        toInitialState()
     }
     func allClearButtonDidTap() {
-        formulaStack.removeAll()
-        currentOperator.removeAll()
-        currentOperand.toZero()
+        toInitialState()
     }
     func clearEntryButtonDidTap() {
 
@@ -76,6 +74,15 @@ extension Calculator {
     }
     func digitButtonDidTap(number: String) {
         
+    }
+}
+
+//MARK:- Private Methods
+private extension Calculator {
+    func toInitialState() {
+        formulaStack.removeAll()
+        currentOperator.removeAll()
+        currentOperand.toZero()
     }
 }
 
