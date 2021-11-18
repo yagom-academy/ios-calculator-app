@@ -18,11 +18,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberCompositionLabel: UILabel!
     @IBOutlet weak var operatorSettingLabel: UILabel!
     
+    @IBOutlet weak var ExpressionView: UIStackView!
+    
     @IBAction func initializationInputField(_ sender: UIButton) {
         numberCompositionLabel.text = "0"
     }
     
     @IBAction func clickOperator(_ sender: UIButton) {
+        addExpression()
         guard let operatorOfButton = sender.titleLabel?.text else {
             return
         }
@@ -81,9 +84,25 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: private method
+
 extension ViewController {
     private func isZeroValue(data: String) -> Bool {
         return data == "0" ? true : false
+    }
+    
+    private func addExpression() {
+        let expressionStackView = UIStackView()
+        
+        let signLabel = ExpressionLabel()
+        let numberLable = ExpressionLabel()
+        
+        numberLable.text = "123"
+        
+        expressionStackView.addArrangedSubview(signLabel)
+        expressionStackView.addArrangedSubview(numberLable)
+        
+        ExpressionView.addArrangedSubview(expressionStackView)
     }
     
 }

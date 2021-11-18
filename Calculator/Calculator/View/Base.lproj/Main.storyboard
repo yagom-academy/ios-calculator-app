@@ -358,6 +358,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ExpressionView" destination="XRe-QE-UJf" id="q4l-7t-wYJ"/>
                         <outlet property="numberCompositionLabel" destination="Lwz-OF-XHD" id="k6T-Wn-2jg"/>
                         <outlet property="operatorSettingLabel" destination="HPC-iy-qdm" id="3en-hC-jb1"/>
                     </connections>
