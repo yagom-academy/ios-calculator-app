@@ -11,9 +11,22 @@ class Calculator {
     var delegate: CalculatorDelegate?
     private let validator = InputValidator()
     
-    var currentOperand = "0"
-    var currentOperator = ""
-    var formulaStack = [(operator: String, operand: String)]()
+    private var currentOperand = "0" {
+        didSet { delegate?.updateOperandLabel(with: currentOperand) }
+    }
+    private var currentOperator = "" {
+        didSet { delegate?.updateOperatorLabel(with: currentOperator) }
+    }
+    private var formulaStack = [(operator: String, operand: String)]() {
+        didSet {
+            guard let latestFormula = formulaStack.last else {
+                delegate?.clearFormulaStack()
+                return
+            }
+            delegate?.addFormulaLine(operator: latestFormula.operator,
+                                     operand: latestFormula.operand)
+        }
+    }
 }
 
 // MARK:- Receiving Events
