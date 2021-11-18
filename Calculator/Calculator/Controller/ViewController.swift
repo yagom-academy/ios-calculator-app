@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentOperandLabel: UILabel!
     
-    private var calculator = Calculator()
+    private let calculator = Calculator()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
