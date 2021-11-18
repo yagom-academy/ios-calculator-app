@@ -20,4 +20,16 @@ class FormulaTests: XCTestCase {
         formula = nil
         expressionParser = nil
     }
+    
+    func test_피연산자만필터하기() {
+        //given
+        let inputStrings = "257+43*6%2+0.05="
+        let filterOperand : String = inputStrings.filter {
+            Int(String($0)) == nil
+        }
+        //when
+        let result = "+*%+.="
+        //then
+        XCTAssertEqual(result, filterOperand)
+    }
 }
