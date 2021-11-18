@@ -34,6 +34,21 @@ class ViewController: UIViewController {
         isCalculationOver = false
     }
     
+    func refreshLabelsWithResult(of formula: String) {
+        var formula: Formula = ExpressionParser.parse(from: formula)
+        
+        do {
+            let result: Double = try formula.result()
+            operandLabel.text = "\(result)"
+            operatorLabel.text = ""
+        } catch CalculatorError.dividedByZero {
+            operandLabel.text = "\(CalculatorError.dividedByZero.description)"
+            operatorLabel.text = ""
+        } catch {
+            print(error)
+        }
+    }
+    
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
     
     func resetScrollView() {
@@ -82,15 +97,12 @@ class ViewController: UIViewController {
         
     }
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
-        var formula: Formula = ExpressionParser.parse(from: completeFormula)
-        do {
-            let result: Double = try formula.result()
-            operandLabel.text = "\(result)"
-        } catch CalculatorError.dividedByZero {
-            operandLabel.text = "\(CalculatorError.dividedByZero.description)"
-        } catch {
-            print(error)
+        guard isCalculationOver == false else {
+            return // = 버튼을 탭하여 연산이 완료된 경우, 다시 탭할 때 재연산하지 않음
         }
+        
+        refreshLabelsWithResult(of: completeFormula)
+        isCalculationOver = true
     }
     
     @IBAction func touchUpOperandBtn(_ sender: UIButton) {
