@@ -6,14 +6,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CalculatorDelegate {
     @IBOutlet weak var verticalStackView: UIStackView!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     
+    let calculator = Calculator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        addFormulaLine(operator: "-", operand: "1234567890")
         clearLabels()
     }
     
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
         verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
+
 
 // MARK:- Adding Formula Line To StackView
 extension ViewController {

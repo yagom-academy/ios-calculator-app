@@ -8,5 +8,9 @@
 import Foundation
 
 class Calculator {
+    var delegate: CalculatorDelegate?
+}
+
+protocol CalculatorDelegate {
     
 }
