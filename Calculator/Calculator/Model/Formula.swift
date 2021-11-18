@@ -12,7 +12,25 @@ struct Formula {
     var operators =  CalculatorItemQueue<Operator>()
         
     mutating func result() -> Double {
-
+        var resultNumber = 0.0
+        
+        for _ in 1..<operands.arraySize {
+            guard let firstNumber = operands.deleteFront(),
+                  let secondNumber = operands.deleteFront(),
+                  let firstOperator = operators.deleteFront() else {
+                      return resultNumber
+                  }
+            let leftoverNumbers = operands.bringArray
+            let calculatedNumber = firstOperator.calculate(lhs: firstNumber, rhs: secondNumber)
+            operands.deleteAll()
+            operands.push(calculatedNumber)
+            operands.pushArray(leftoverNumbers)
+            
+            if operands.arraySize == 1 {
+                resultNumber = calculatedNumber
+            }
+        }
+        return resultNumber
     }
 }
 
@@ -48,9 +66,10 @@ enum ExpressionParser {
         return operators.reduce([""]) { (array, operatorValue) in
             let separatedOperands = array.flatMap({$0.split(with: operatorValue.rawValue)})
             return separatedOperands
+        }
     }
+    
 }
-
 extension String {
     func split(with target: Character) -> [String] {
         let conversionString: [String] = self.split(separator: target).map({ String($0) })
