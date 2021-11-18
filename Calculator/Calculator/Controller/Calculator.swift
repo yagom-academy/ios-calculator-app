@@ -9,6 +9,7 @@ import Foundation
 
 class Calculator {
     var delegate: CalculatorDelegate?
+    private let validator = InputValidator()
 }
 
 // MARK:- Receiving Events
