@@ -74,9 +74,8 @@ extension ViewController {
             return
         }
         guard hasCalculated == false else {
-            currentOperator = newOperator
-            currentOperand = "0"
             startNewCalculation()
+            updateCurrentLabel(newOperator)
             return
         }
         guard isNotZero else {
@@ -84,8 +83,7 @@ extension ViewController {
             return
         }
         addCurrentFormulaStack()
-        currentOperand = "0"
-        currentOperator = newOperator
+        updateCurrentLabel(newOperator)
         scrollToBottom(calculatorScrollView)
     }
     
@@ -216,6 +214,11 @@ extension ViewController {
 
 // MARK: Label Initialization Related
 extension ViewController {
+    private func updateCurrentLabel(_ newOperator: String) {
+        currentOperand = "0"
+        currentOperator = newOperator
+    }
+    
     private func removeFormulaView() {
         calculatorStackView.subviews.forEach{
             $0.removeFromSuperview()
