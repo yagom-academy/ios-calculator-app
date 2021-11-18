@@ -64,7 +64,6 @@ extension ViewController: CalculatorDelegate {
         currentOperandLabel.text = "0"
         verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
-    
     func addFormulaLine(operator: String, operand: String) {
         let operatorLabel = makeFormulaLabel(with: `operator`)
         let operandLabel = makeFormulaLabel(with: operand)
@@ -73,6 +72,9 @@ extension ViewController: CalculatorDelegate {
                                     operand: operandLabel)
         
         verticalStackView.addArrangedSubview(horizontalStackView)
+    }
+    func updateOperatorLabel(with operator: String) {
+        currentOperatorLabel.text = `operator`
     }
 }
 
