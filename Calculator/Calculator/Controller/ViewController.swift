@@ -30,6 +30,17 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func clickPoint(_ sender: UIButton) {
+        guard let numberOfLabel = numberCompositionLabel.text, let point = sender.titleLabel?.text else {
+            return
+        }
+               
+        if numberOfLabel.contains(point) {
+            return
+        }
+               
+        numberCompositionLabel.text = numberOfLabel + point
+    }
     
 }
 
