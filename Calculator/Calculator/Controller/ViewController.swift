@@ -4,39 +4,42 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var UIScrollView: UIScrollView!
-    
-    var leftOperatorLabel: UILabel {
-        let label = UILabel()
-        return label
-    }
-    
-    var rightOperandLabel: UILabel {
-        let label = UILabel()
-        return label
-    }
-    
-    var stackView: UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 20.0
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        
-        UIScrollView.addSubview(stackView)
-        stackView.addSubview(leftOperatorLabel)
-        stackView.addSubview(rightOperandLabel)
-
-        return stackView
-    }
+    @IBOutlet weak var stackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resultLabel.text = "0"
-
-        
     }
-
+    
+    func makeLabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = text
+        return label
+    }
+    
+    func makeStackView(with subviews: UIView...) -> UIStackView {
+        let stackView = UIStackView()
+        
+        stackView.axis = .horizontal
+        stackView.spacing = 2.0
+        stackView.alignment = .fill
+        
+        for i in subviews {
+            stackView.addArrangedSubview(i)
+        }
+        
+        return stackView
+    }
+    
+    func makeSmallStackView() {
+        let operandLabel = makeLabel(text: self.resultLabel.text)
+        let operatorLabel = makeLabel(text: self.operatorLabel.text)
+        let smallStackview = makeStackView(with: operatorLabel,operandLabel)
+        
+        stackView.addArrangedSubview(smallStackview)
+    }
+    
     @IBAction func operandButtonTapped(_ sender: UIButton) {
         guard let operand = sender.currentTitle else {return}
         resultLabel.text?.append(contentsOf: operand)
@@ -45,7 +48,7 @@ class ViewController: UIViewController {
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {return}
         operatorLabel.text = `operator`
-        rightOperandLabel.text = resultLabel.text
+        makeSmallStackView()
         resultLabel.text = ""
     }
     
