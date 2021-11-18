@@ -114,11 +114,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func EqualButtonPressed(_ sender: UIButton) {
-        entireFormula += numberLabel.text!
+        guard symbolLabel.text?.isEmpty == false else { return }
+        
+        entireFormula += numberLabel.text ?? ""
+        
         var formula = ExpressionParser.parse(from: entireFormula)
+        
         do {
             let result = try formula.result()
             numberLabel.text = String(result)
+            initializeSymbolLabel()
         } catch CalculateError.emptyQueue {
             return
         } catch {
