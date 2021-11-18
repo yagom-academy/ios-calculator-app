@@ -11,27 +11,30 @@ import XCTest
 class FormulaTest: XCTestCase {
     
     func test_큐에_1_더하기_2_순서로_enqueue하면_result는_3이다() throws {
-        let operators = CalculatorItemQueue<Operator>()
-        let operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
+        var operands = CalculatorItemQueue<Double>()
+        
+        operands.enQueue(1)
+        operators.enQueue(.add)
+        operands.enQueue(2)
+        
         var formula = Formula(operands: operands, operators: operators)
         
-        formula.operands.enQueue(1)
-        formula.operators.enQueue(.add)
-        formula.operands.enQueue(2)
         
         try XCTAssertEqual(formula.result(), 3)
     }
     
     func test_큐에_1_더하기_2_나누기_3의_순서로_enqueue하면_result는_1이다() throws {
-        let operators = CalculatorItemQueue<Operator>()
-        let operands = CalculatorItemQueue<Double>()
-        var formula = Formula(operands: operands, operators: operators)
+        var operators = CalculatorItemQueue<Operator>()
+        var operands = CalculatorItemQueue<Double>()
         
-        formula.operands.enQueue(1)
-        formula.operators.enQueue(.add)
-        formula.operands.enQueue(2)
-        formula.operators.enQueue(.divide)
-        formula.operands.enQueue(3)
+        operands.enQueue(1)
+        operators.enQueue(.add)
+        operands.enQueue(2)
+        operators.enQueue(.divide)
+        operands.enQueue(3)
+        
+        var formula = Formula(operands: operands, operators: operators)
         
         try XCTAssertEqual(formula.result(), 1)
     }
