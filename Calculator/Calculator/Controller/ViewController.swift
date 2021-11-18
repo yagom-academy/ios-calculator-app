@@ -17,7 +17,32 @@ class ViewController: UIViewController, CalculatorDelegate {
         super.viewDidLoad()
         clearLabels()
     }
-    
+}
+
+// MARK:- IBAction
+extension ViewController {
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func toggleSignButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func equalsButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func zeroButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
+    }
+    @IBAction func digitButtonTapped(_ sender: UIButton) {
+    }
+}
+
+// MARK:-
+extension ViewController {
     func clearLabels() {
         let blank = ""
         let zero = "0"
