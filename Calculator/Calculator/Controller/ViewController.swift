@@ -177,7 +177,7 @@ class ViewController: UIViewController {
     
     func scrollToBottom(_ scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)4
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
 }
 
