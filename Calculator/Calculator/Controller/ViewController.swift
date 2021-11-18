@@ -15,7 +15,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        resetResult()
+    }
+    
+    func resetResult() {
+        resultLabel.text = "0"
+        signLabel.text = ""
+        
     }
     
     @IBAction func touchUpAllClearBtn(_ sender: UIButton) {

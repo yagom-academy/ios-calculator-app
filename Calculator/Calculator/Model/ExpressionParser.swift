@@ -5,10 +5,10 @@ enum ExpressionParser {
         let formula = Formula()
         
         componentsByOperators(from: input).compactMap { Double($0) }
-            .map { formula.operands.enqueue(value: $0) }
+            .forEach { formula.operands.enqueue(value: $0) }
         
         input.compactMap { Operator(rawValue: $0) }
-            .map { formula.operators.enqueue(value: $0) }
+            .forEach { formula.operators.enqueue(value: $0) }
         
         return formula
     }
