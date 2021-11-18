@@ -67,10 +67,12 @@ extension Calculator {
         
     }
     func zeroButtonDidTap() {
-        
+        validator.zeroValidity(at: currentState) ?
+            currentOperator.append("0") : ()
     }
     func doubleZeroButtonDidTap() {
-        
+        validator.zeroValidity(at: currentState) ?
+            currentOperator.append("00") : ()
     }
     func digitButtonDidTap(number: String) {
         

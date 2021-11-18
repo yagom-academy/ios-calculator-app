@@ -35,4 +35,8 @@ class InputValidator {
         }
         return true
     }
+    
+    func zeroValidity(at state: CalculatorState) -> Bool {
+        !isZero(state)
+    }
 }
