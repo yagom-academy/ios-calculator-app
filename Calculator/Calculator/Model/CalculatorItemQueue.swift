@@ -6,15 +6,18 @@
 //
 
 import Foundation
-import Metal
 
-protocol CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private(set) var enQueueElements: [Element] = []
+    private(set) var deQueueElements: [Element] = []
     
-}
-
-struct CalculatorItemQueue<Element>: CalculateItem {
-    var enQueueElements: [Element] = []
-    var deQueueElements: [Element] = []
+    var isEmpty: Bool {
+        return enQueueElements.isEmpty && deQueueElements.isEmpty
+    }
+    
+    init(_ enQueueElements: [Element]) {
+        self.enQueueElements = enQueueElements
+    }
     
     mutating func enQueueElement(_ element: Element) {
         enQueueElements.append(element)
@@ -22,7 +25,7 @@ struct CalculatorItemQueue<Element>: CalculateItem {
     
     mutating func deQueueFirstElement() throws -> Element {
         if enQueueElements.isEmpty && deQueueElements.isEmpty {
-            throw CalculatorError.emptyQueue
+            throw CalculatorQueueError.emptyQueue
         }
         if deQueueElements.isEmpty {
             deQueueElements = enQueueElements.reversed()
