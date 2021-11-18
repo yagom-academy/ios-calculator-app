@@ -107,8 +107,9 @@ class ViewController: UIViewController {
     
     @IBAction func ACButtonPressed(_ sender: UIButton) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        entireFormula.removeAll()
         initializeNumberLabel()
-        initializeSymbolLabel()
+        initializeSymbolLabel() 
     }
     
     @IBAction func EqualButtonPressed(_ sender: UIButton) {
