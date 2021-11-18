@@ -65,17 +65,17 @@ extension Calculator {
     }
 }
 
-// MARK:- String Extension
-private extension String {
-    mutating func toZero() {
-        self = "0"
-    }
-}
-
 // MARK:- Delegate Requirements
 protocol CalculatorDelegate {
     func addFormulaLine(operator: String, operand: String)
     func updateOperatorLabel(with operator: String)
     func updateOperandLabel(with operand: String)
     func clearFormulaStack()
+}
+
+// MARK:- String Extension
+private extension String {
+    mutating func toZero() {
+        self = "0"
+    }
 }
