@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel?
     @IBOutlet weak var operatorLabel: UILabel?
     @IBOutlet weak var countingHistoryStackView: UIStackView?
+    @IBOutlet weak var countingHistoryScrollView: UIScrollView!
     
     let numberFormatter = NumberFormatter()
     var textInput = ""
@@ -83,6 +84,7 @@ class ViewController: UIViewController {
         operandText = ""
         operandLabel?.text = "0"
         addScrollViewLabel()
+        scrollToBottom()
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
@@ -144,6 +146,12 @@ class ViewController: UIViewController {
         let subview = countingHistoryStackView?.arrangedSubviews
         
         subview?.forEach { $0.removeFromSuperview() }
+    }
+    
+    func scrollToBottom() {
+        countingHistoryScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
+        countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
     }
 }
 

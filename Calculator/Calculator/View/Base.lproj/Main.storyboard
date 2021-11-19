@@ -368,6 +368,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="countingHistoryScrollView" destination="BOT-7g-vxv" id="OdN-bV-Qeo"/>
                         <outlet property="countingHistoryStackView" destination="XRe-QE-UJf" id="C6H-2v-UiG"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="jMq-Sb-SeL"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="3DU-c8-Qxb"/>
