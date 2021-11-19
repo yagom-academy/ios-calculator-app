@@ -20,5 +20,11 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber.value
     }
     
+    @IBAction func touchCEbutton(_ sender: UIButton) {
+        inputNumber.reset()
+        numberLabel.text = inputNumber.value
+    }
+    
+    
 }
 
