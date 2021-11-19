@@ -7,7 +7,8 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
+    //MARK: - Properties
+    
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var calculationHistoryStackView: UIStackView!
@@ -23,11 +24,16 @@ class CalculatorViewController: UIViewController {
     }
     private let calculatorController = CalculatorController()
     
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCalcurator()
     }
-    
+}
+
+// MARK: - Actions
+
+extension CalculatorViewController {
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
         guard checkNumberOfInputs else {
             return
