@@ -12,13 +12,15 @@ class ViewController: UIViewController {
     @IBOutlet var currentOperatorLabel: UILabel!
     @IBOutlet var historyStackView: UIStackView!
     
-    var currentNumberString = ""
-    var currentOperator = ""
+    private var currentNumberString = ""
+    private var currentOperatorString = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         removePlaceholderViews()
+        updateCurrentLabels()
     }
-
+    
     @IBAction func numberPressed(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
@@ -32,8 +34,8 @@ class ViewController: UIViewController {
         guard let operatorPressedString = sender.accessibilityIdentifier else {
             return
         }
-        currentOperator = operatorPressedString
-        update(label: self.currentOperatorLabel, to: currentOperator)
+        currentOperatorString = operatorPressedString
+        update(label: self.currentOperatorLabel, to: currentOperatorString)
         updateCurrentLabels()
     }
     
@@ -48,7 +50,7 @@ class ViewController: UIViewController {
     }
     
     private func addToStackView() {
-        let formulaStackView = createFormulaStackView(with: currentOperator, and: currentNumberString)
+        let formulaStackView = createFormulaStackView(with: currentOperatorString, and: currentNumberString)
         historyStackView.addArrangedSubview(formulaStackView)
     }
     
