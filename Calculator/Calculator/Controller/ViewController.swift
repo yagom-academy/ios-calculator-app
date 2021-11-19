@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     
     private var finalFormula = [String]()
-    private var currentOperand: String = ""
+    private var currentOperand: String = "0"
     private var currentOperator: String = ""
     
     private var isCalculated: Bool = false
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
 
     private func resetCurrentOperand() {
-        currentOperand = ""
+        currentOperand = "0"
         operandLabel.text = "0"
     }
     
@@ -173,9 +173,15 @@ extension ViewController {
             return
         }
         
+        if currentOperand == "0" {
+            if !["0","00"].contains(operand) {
+                currentOperand = operand
+                operandLabel.text = currentOperand
+            }
+            return
+        }
+        
         currentOperand += operand
-                
-        currentOperand = currentOperand.replacingOccurrences(of: "^0+", with: "0", options: .regularExpression)
         
         guard let currentOperandNumber = Double(currentOperand) else {
             return
@@ -191,7 +197,7 @@ extension ViewController {
         guard let operandText = separatedCurrentOperand.interger.addCommaOnEveryThreeDigits() else {
             return
         }
-        
+                
         if separatedCurrentOperand.fraction.isEmpty {
             operandLabel.text = operandText
         } else {
@@ -208,8 +214,8 @@ extension ViewController {
             return
         }
         
-        currentOperand += currentOperand.isEmpty ? "0\(dot)" : dot
-        operandLabel.text?.append(dot)
+        currentOperand += dot
+        operandLabel.text = currentOperand
     }
     
     @IBAction private func touchUpChangePlusMinusSign(_ sender: Any) {
