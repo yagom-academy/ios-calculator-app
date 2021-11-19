@@ -10,9 +10,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var operandLabel: UILabel?
     @IBOutlet weak var operatorLabel: UILabel?
+    @IBOutlet weak var countingHistoryStackView: UIStackView?
     
     let numberFormatter = NumberFormatter()
     var textInput = ""
+    var countingHistory = ""
     var operandText = ""
     var operatorText = ""
     
@@ -20,6 +22,14 @@ class ViewController: UIViewController {
         numberFormatter.roundingMode = .ceiling
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
+    }
+    
+    func addCountingHistory() {
+        if operandText == "" {
+            return
+        } else {
+            countingHistory = operatorText + " " + operandText
+        }
     }
     
     override func viewDidLoad() {
@@ -53,9 +63,11 @@ class ViewController: UIViewController {
         } else {
             operandText += sender.currentTitle ?? "0"
         }
+        operandLabel?.text = operandText
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        addCountingHistory()
         textInput += operandText
         guard let lastWord = textInput.last else {
             return
@@ -110,6 +122,19 @@ class ViewController: UIViewController {
             
         } catch {
             
+        }
+    }
+    
+    @IBAction func addScrollViewLabel() {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.isHidden = true
+        label.text = countingHistory
+        countingHistoryStackView?.addArrangedSubview(label)
+        
+        UIView.animate(withDuration: 0.3) {
+            label.isHidden = false
         }
     }
 }
