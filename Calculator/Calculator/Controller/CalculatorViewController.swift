@@ -132,6 +132,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func addCurrentInputToFormulaHistory() {
+        let formatter = initNumberFormatterForCalculator()
+        
         let stackView = UIStackView()
         stackView.spacing = 8.0
         
@@ -140,7 +142,8 @@ class CalculatorViewController: UIViewController {
         operatorSignLabelView.textColor = .white
         
         let operandLabelView = UILabel()
-        operandLabelView.text = currentInputOperand
+        
+        operandLabelView.text = formatter.string(for: Double(currentInputOperand)) ?? currentInputOperand
         operandLabelView.textColor = .white
         
         stackView.addArrangedSubview(operatorSignLabelView)
@@ -169,6 +172,14 @@ class CalculatorViewController: UIViewController {
         updateCurrentInput()
         mathExpression = []
         isEvaluated = false
+    }
+    
+    func initNumberFormatterForCalculator() -> Formatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumSignificantDigits = 20
+        formatter.roundingMode = .halfUp
+        return formatter
     }
     
     struct LabelContents {
