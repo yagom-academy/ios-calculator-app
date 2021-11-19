@@ -9,6 +9,19 @@ import UIKit
 
 extension CalculatorViewController {
     
+    func createFormulaStack() -> UIStackView {
+        let formulaStack = UIStackView()
+        
+        formulaStack.axis = .horizontal
+        formulaStack.alignment = .fill
+        formulaStack.distribution = .fill
+        formulaStack.spacing = 8
+        formulaStack.addArrangedSubview(operatorLabel)
+        formulaStack.addArrangedSubview(operandsLabel)
+        
+        return formulaStack
+    }
+    
     var operatorLabel: UILabel {
         let operatorLabel = UILabel()
         operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
