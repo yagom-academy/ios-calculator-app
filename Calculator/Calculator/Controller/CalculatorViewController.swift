@@ -127,7 +127,7 @@ class CalculatorViewController: UIViewController {
         } catch CalculatorError.divideByZero {
             updateCurrentInput(operandForm: LabelContents.notANumber)
         } catch {
-            print(error)
+            updateCurrentInput(operandForm: LabelContents.error)
         }
     }
     
@@ -178,6 +178,7 @@ class CalculatorViewController: UIViewController {
         static let minusSignSymbole = "-"
         static let pointSymbole = "."
         static let doubleZero = "00"
+        static let error = "error"
     }
 }
 
