@@ -7,8 +7,6 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
-    var expressionController: CalculatorExpressionController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +15,8 @@ class CalculatorViewController: UIViewController {
     }
     
     // MARK: property
+    
+    var expressionController: CalculatorExpressionController?
     
     @IBOutlet weak var numberCompositionLabel: UILabel!
     @IBOutlet weak var operatorSettingLabel: UILabel!

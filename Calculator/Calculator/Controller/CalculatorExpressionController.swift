@@ -43,11 +43,13 @@ struct CalculatorExpressionController {
         return expressionStackView
     }
     
+    mutating func expressionWrapperInit() {
+        expressionWrapper = ""
+    }
+    
     func changeNumberSign(numberValue: String) -> String {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
     
-    func expressionWrapperInit() {
-        expressionWrapper = ""
-    }
+    
 }
