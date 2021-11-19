@@ -19,7 +19,13 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initailizeLabel()
 
+    }
+    
+    func initailizeLabel() {
+        inputNumLabel.text = initialNumLabel
+        inputOperatorLabel.text = initialStringValue
     }
 
 
