@@ -98,6 +98,11 @@ class CalculatorViewController: UIViewController {
     }
     
     // MARK: - 특수 버튼 입력
-
+    @IBAction func tapACBtn(_ sender: UIButton) {
+        initailizeLabel()
+        entireStringFormula = initialStringValue
+        initializeFormulaStackView()
+    }
+    
 }
 
