@@ -8,7 +8,7 @@
 import Foundation
 
 extension Double: CalculateItem {
-    var presentingFormat: String? {
+    var presentableFormat: String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20

@@ -14,7 +14,7 @@ extension String {
             .compactMap { String($0) }
     }
     
-    var removedCommas: String {
+    var withoutCommas: String {
         return self.filter { $0 != "," }
     }
     

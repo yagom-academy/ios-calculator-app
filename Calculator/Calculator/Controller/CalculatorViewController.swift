@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
         clearCalculationHistory()
         update(currentOperandLabel, to: result)
         changeCurrentOperatorData(to: "")
-        let newOperand = result.removedCommas
+        let newOperand = result.withoutCommas
         setCurrentOperand(to: newOperand)
     }
     
@@ -128,10 +128,11 @@ extension CalculatorViewController {
     }
     
     private func calculateResult(from historyStack: [String]) -> String? {
-        let equationString = historyStack.filter { $0 != "" }.joined()
+        let equationString = historyStack.filter { $0 != "" }
+            .joined()
         var formula = ExpressionParser.parse(from: equationString)
         let rawResult = formula.result()
-        guard let result = rawResult.presentingFormat else {
+        guard let result = rawResult.presentableFormat else {
             return nil
         }
         return result
@@ -144,11 +145,7 @@ extension CalculatorViewController {
     
     private func updateHistoryStackView(with currentOperator: String, and currentOperand: String) {
         let formulaStackView = createFormulaStackView(with: currentOperator, and: currentOperand)
-        add(formulaStackView, to: calculationHistoryStackView)
-    }
-    
-    private func add(_ formulaStackView: UIStackView, to historyStackView: UIStackView) {
-        historyStackView.addArrangedSubview(formulaStackView)
+        calculationHistoryStackView.addArrangedSubview(formulaStackView)
     }
     
     private func clearCalculationHistory() {
