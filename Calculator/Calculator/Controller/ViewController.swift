@@ -109,15 +109,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hitCodeConversionButton(_ sender: UIButton) {
-        if currentValue.text != initialValue {
-            guard let currentOperand = currentValue.text,
-                  let doubleTypeOperand = Double(currentOperand) else {
-                return
-            }
-            signIsPositive = !signIsPositive
-            currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
+        guard currentValue.text != initialValue else {
+            return
         }
+        guard let currentOperand = currentValue.text,
+              let doubleTypeOperand = Double(currentOperand) else {
+                  return
+              }
+        signIsPositive = !signIsPositive
+        currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
     }
+
     
     @IBAction func hitEqualButton(_ sender: UIButton) {
         endOperandInput()
