@@ -143,6 +143,7 @@ class CalculatorViewController: UIViewController {
         stackView.addArrangedSubview(operandLabelView)
         
         formulaHistoryStackView.addArrangedSubview(stackView)
+        formulaHistoryScrollView.scrollToBottom()
     }
     
     func removeAllFormulaHistory() {
@@ -177,3 +178,9 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+extension UIScrollView {
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height)
+        setContentOffset(bottomOffset, animated: false)
+    }
+}
