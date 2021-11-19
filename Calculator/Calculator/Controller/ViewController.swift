@@ -10,7 +10,7 @@ class ViewController: UIViewController {
 
     //MARK: - Outlets
     
-    @IBOutlet weak var operandsLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var formulaStackView: UIStackView!
     
@@ -28,85 +28,86 @@ class ViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
-        guard let currentNumber = operandsLabel.text,
-              let newNumber = sender.currentTitle else {
+        guard let currentOperand = operandLabel.text,
+              let newDigit = sender.currentTitle else {
             return
         }
-        if currentNumber == "0" {
-            operandsLabel.text = newNumber
+        if currentOperand == "0" {
+            operandLabel.text = newDigit
         } else {
-            operandsLabel.text = currentNumber + newNumber
+            operandLabel.text = currentOperand + newDigit
         }
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let newOperator = sender.currentTitle,
-              let currentOperands = operandsLabel.text,
+              let currentOperand = operandLabel.text,
               let currentOperator = operatorLabel.text else {
             return
         }
         if operatorLabel.text == "" {
-            configureFormulaStackView(operands: currentOperands, operator: "")
+            configureFormulaStackView(operand: currentOperand, operator: "")
         } else {
-            configureFormulaStackView(operands: currentOperands, operator: currentOperator)
+            configureFormulaStackView(operand: currentOperand, operator: currentOperator)
         }
         operatorLabel.text = newOperator
-        operandsLabel.text = "0"
-        formulaString += currentOperands + newOperator
+        operandLabel.text = "0"
+        formulaString += currentOperand + newOperator
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
-        guard let currentOperand = operandsLabel.text,
+        guard let currentOperand = operandLabel.text,
               let intValue = Int(currentOperand) else {
             return
         }
         if intValue > 0 {
-            operandsLabel.text = "-" + currentOperand
+            operandLabel.text = "-" + currentOperand
         } else {
-            operandsLabel.text = operandsLabel.text?.replacingOccurrences(of: "-", with: "")
+            operandLabel.text = operandLabel.text?.replacingOccurrences(of: "-", with: "")
         }
     }
     
     @IBAction func CEButtonTapped(_ sender: UIButton) {
-        if let currentNumber = operandsLabel.text, currentNumber == "0" {
+        guard let currentOperand = operandLabel.text,
+                currentOperand != "0" else {
             return
         }
-        operandsLabel.text?.removeLast()
+        operandLabel.text?.removeLast()
     }
     
     @IBAction func ACButtonTapped(_ sender: UIButton) {
         formulaStackView.subviews.forEach { $0.removeFromSuperview() }
-        operandsLabel.text = "0"
+        operandLabel.text = "0"
         operatorLabel.text = ""
         formulaString = ""
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard let currentOperand = operandsLabel.text else {
+        guard let currentOperand = operandLabel.text else {
             return
         }
         if currentOperand.contains(".") {
             return
         } else {
-            operandsLabel.text = currentOperand + "."
+            operandLabel.text = currentOperand + "."
         }
     }
     
     @IBAction func euqualButtonTapped(_ sender: UIButton) {
-        guard let currentOperands = operandsLabel.text,
+        guard let currentOperand = operandLabel.text,
               let currentOperator = operatorLabel.text else {
-                  return
-              }
-        
+            return
+        }
         operatorLabel.text = ""
         do {
-            let input = formulaString + operandsLabel.text!
+            let input = formulaString + operandLabel.text!
             var formula = ExpressionParser.parse(from: input)
             
-            operandsLabel.text = String(try formula.result())
-            configureFormulaStackView(operands: currentOperands, operator: currentOperator)
+            operandLabel.text = String(try formula.result())
+            configureFormulaStackView(operand: currentOperand, operator: currentOperator)
         } catch CalculatorError.divideByZero {
-            operandsLabel.text = "NAN"
+            configureFormulaStackView(operand: currentOperand, operator: currentOperator)
+            operandLabel.text = "NAN"
         } catch {
             print(error)
         }
@@ -115,27 +116,19 @@ class ViewController: UIViewController {
     //MARK: - Helpers
     
     private func makeLabel(text: String) -> UILabel {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = .white
         label.text = text
         return label
     }
         
-    private func configureFormulaStackView(operands: String, `operator`: String) {
-        let operandLabel = makeLabel(text: operands)
+    private func configureFormulaStackView(operand: String, `operator`: String) {
+        let operandLabel = makeLabel(text: operand)
         let operatorLabel = makeLabel(text: `operator`)
         
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         stackView.axis = .horizontal
         stackView.spacing = 8
         formulaStackView.addArrangedSubview(stackView)
-    }
-    
-    private func appendInputToFormula() {
-        guard let `operator` = operatorLabel.text,
-              let operands = operandsLabel.text else {
-            return
-        }
-        formulaString += operands + `operator`
     }
 }

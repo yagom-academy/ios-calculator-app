@@ -365,7 +365,7 @@
                     </view>
                     <connections>
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="A6E-oe-klE"/>
-                        <outlet property="operandsLabel" destination="Lwz-OF-XHD" id="D9s-Hr-QxD"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="D9s-Hr-QxD"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="y8E-V7-ZJm"/>
                     </connections>
                 </viewController>
