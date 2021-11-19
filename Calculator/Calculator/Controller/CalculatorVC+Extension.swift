@@ -22,7 +22,7 @@ extension CalculatorViewController {
         return formulaStack
     }
     
-    var operatorLabel: UILabel {
+    private var operatorLabel: UILabel {
         let operatorLabel = UILabel()
         operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operatorLabel.textColor = .white
@@ -31,7 +31,7 @@ extension CalculatorViewController {
         return operatorLabel
     }
     
-    var operandsLabel: UILabel {
+    private var operandsLabel: UILabel {
         let operandsLabel = UILabel()
         operandsLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operandsLabel.textColor = .white
