@@ -31,5 +31,3 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         items.removeAll()
     }
 }
-
-
