@@ -34,6 +34,17 @@ class CalculatorViewController: UIViewController {
     }
 
     // MARK: - 숫자 버튼 입력
+    @IBAction func tapNumberPad(_ sender: UIButton) {
+        guard let currentNumLabel = inputNumLabel.text,
+             let inputNum = sender.currentTitle else { return }
+        
+        if currentNumLabel == initialNumLabel {
+            inputNumLabel.text = inputNum
+        } else {
+            updateInputNumLabel(currentNumLabel, with: inputNum)
+        }
+    }
+    
 
 }
 
