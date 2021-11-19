@@ -7,13 +7,6 @@
 
 import Foundation
 
-// MARK: property
-extension String {
-    var isZeroValue: Bool {
-        return self == "0" ? true : false
-    }
-}
-
 // MARK: method
 
 extension String {
