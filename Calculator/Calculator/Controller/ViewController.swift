@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     var stringToCalculate: [String] = []
     var inputOperandValues: [String] = []
     var isOperatorEnterd: Bool = false
+    var signIsPositive: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,48 +38,53 @@ class ViewController: UIViewController {
             return
         }
         
-        if !inputOperandValues.contains(".") {  //이미 입력된 값이 소수가 아닐때
+        if inputOperandValues.contains(".") {   //이미 입력된 값이 소수일 때
+            guard inputButtonTitle != "." else {
+                return
+            }
+        } else {
             guard inputButtonTitle != "0" || inputOperandValues.first != "0" else {
                 return
             }
             guard inputButtonTitle != "00" || inputOperandValues.first != "0" else {
                 return
             }
-            guard inputButtonTitle != "." || !inputOperandValues.contains(".") else {
-                return
-            }
         }
- 
-        if inputOperandValues.contains(".") {   //이미 입력된 값이 소수일 때
-            guard inputButtonTitle == "." else {
-                return
-            }
-        }
-        
         inputOperandValues.append(inputButtonTitle)         //일단 저장
         
         if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      // 피연산자가 소수아닌데 첫글자 0일때 현재입력숫자로 교체
             inputOperandValues.removeFirst()
         }
+        
+        if signIsPositive {
+            currentValue.text = inputOperandValues.joined()
+        } else {
+            currentValue.text = "-" + inputOperandValues.joined()
+        }
         isOperatorEnterd = false
-        currentValue.text = inputOperandValues.joined()
+        
     }
     
     func endOperandInput() {
-        stringToCalculate.append(inputOperandValues.joined())
+        if signIsPositive {
+            stringToCalculate.append(inputOperandValues.joined())
+        } else {
+            stringToCalculate.append("-" + inputOperandValues.joined())
+        }
         inputOperandValues = [initialValue]
         currentValue.text = initialValue
+        signIsPositive = true
     }
     
     @IBAction func hitOperatorButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
+        endOperandInput()
         if isOperatorEnterd {
             stringToCalculate.removeLast()
             stringToCalculate.append(inputButtonTitle)
         } else {
-            endOperandInput()
             stringToCalculate.append(inputButtonTitle)
             isOperatorEnterd = true
         }
@@ -107,6 +113,7 @@ class ViewController: UIViewController {
                   let doubleTypeOperand = Double(currentOperand) else {
                 return
             }
+            signIsPositive = !signIsPositive
             currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
         }
     }
