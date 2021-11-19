@@ -25,7 +25,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    var mathExpression: [String] = []
+    var mathExpression: [String] = [] {
+        didSet {
+            formulaHistoryScrollView.scrollToBottom()
+        }
+    }
     var isEvaluated: Bool = false
     
     override func viewDidLoad() {
@@ -143,7 +147,6 @@ class CalculatorViewController: UIViewController {
         stackView.addArrangedSubview(operandLabelView)
         
         formulaHistoryStackView.addArrangedSubview(stackView)
-        formulaHistoryScrollView.scrollToBottom()
     }
     
     func removeAllFormulaHistory() {
