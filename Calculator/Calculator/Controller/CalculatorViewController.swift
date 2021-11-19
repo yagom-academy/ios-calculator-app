@@ -45,6 +45,14 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func tapDotBtn(_ sender: UIButton) {
+        if let currentNumLabel = inputNumLabel.text,
+          let inputSign = sender.currentTitle,
+         !currentNumLabel.contains(".") {
+            updateInputNumLabel(currentNumLabel, with: inputSign)
+        }
+    }
+    
     func updateInputNumLabel(_ currentNum: String, with input: String) {
         inputNumLabel.text = currentNum + input
     }
