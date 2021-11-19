@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         
         do {
             let result: Double = try formula.result()
+            print("계산 결과 : \(result)")
             operandLabel.text = "\(result)"
             operatorLabel.text = ""
         } catch CalculatorError.dividedByZero {
@@ -112,6 +113,8 @@ class ViewController: UIViewController {
             return // = 버튼을 탭하여 연산이 완료된 경우, 다시 탭할 때 재연산하지 않음
         }
         
+        completeFormula += currentOperand // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
+        
         refreshLabelsWithResult(of: completeFormula)
         isCalculationOver = true
     }
@@ -126,7 +129,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operandLabel.text = "0"
+        operandLabel.text = "0" // currentOperator는 그대로 있어야 함
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
