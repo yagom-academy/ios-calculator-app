@@ -8,9 +8,9 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet var currentOperandLabel: UILabel!
-    @IBOutlet var currentOperatorLabel: UILabel!
-    @IBOutlet var historyStackView: UIStackView!
+    @IBOutlet weak var currentOperandLabel: UILabel!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var historyStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
     private var isPositiveOperand = true
