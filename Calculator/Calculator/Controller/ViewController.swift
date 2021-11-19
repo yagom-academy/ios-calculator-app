@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     
-    private var finalFormula = [String]()
+    private var mathExpression = [String]()
     private var currentOperand: String = "0"
     private var currentOperator: String = ""
     
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
 
     // MARK: - Private Methods
     private func resetToInitialState() {
-        finalFormula = [String]()
+        mathExpression = [String]()
         currentOperator = ""
         operatorLabel.text = ""
         isCalculated = false
@@ -63,15 +63,15 @@ class ViewController: UIViewController {
     private func changeOperator(to newOperator: String) {
         let operatorSymbols = Operator.allCases.map { $0.rawValue.description }
         
-        guard let last = finalFormula.last else {
+        guard let last = mathExpression.last else {
             return
         }
         
         if operatorSymbols.contains(last) {
-            finalFormula.removeLast()
+            mathExpression.removeLast()
         }
         
-        finalFormula.append(newOperator)
+        mathExpression.append(newOperator)
         operatorLabel.text = newOperator
         currentOperator = newOperator
     }
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
             return
         }
         
-        finalFormula.append(currentOperand)
+        mathExpression.append(currentOperand)
         
         if isNumberOverMaximumExpression(number: currentOperandNumber) {
             addCalculationHistory(operandText: currentOperandNumber.description, operatorText: currentOperator)
@@ -278,8 +278,8 @@ extension ViewController {
             addCalculationHistory(operandText: operandText, operatorText: currentOperator)
         }
         
-        finalFormula.append(currentOperand)
-        finalFormula.append(`operator`)
+        mathExpression.append(currentOperand)
+        mathExpression.append(`operator`)
         
         changeOperator(to: `operator`)        
         resetCurrentOperand()
@@ -293,7 +293,7 @@ extension ViewController {
         isCalculated = true
         
         addLastCalculationHistory()
-        calculateFormula(from: finalFormula)
+        calculateFormula(from: mathExpression)
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
