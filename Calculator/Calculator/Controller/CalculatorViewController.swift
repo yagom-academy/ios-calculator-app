@@ -10,7 +10,7 @@ class CalculatorViewController: UIViewController {
     //MARK: - @IBOutlet Properties
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var historyStackView: UIStackView!
+    @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     //MARK: - Properties
     private var isPositiveOperand = true
@@ -87,7 +87,7 @@ class CalculatorViewController: UIViewController {
 extension CalculatorViewController {
     // MARK: - Functions
     private func removeFormulaStackViews() {
-        historyStackView.arrangedSubviews.forEach { placeHolderView in
+        calculationHistoryStackView.arrangedSubviews.forEach { placeHolderView in
             placeHolderView.removeFromSuperview()
         }
     }
@@ -108,7 +108,7 @@ extension CalculatorViewController {
     
     private func updateHistoryStackView(with currentOperator: String, and currentOperand: String) {
         let formulaStackView = createFormulaStackView(with: currentOperator, and: currentOperand)
-        add(formulaStackView, to: historyStackView)
+        add(formulaStackView, to: calculationHistoryStackView)
     }
     
     private func add(_ formulaStackView: UIStackView, to historyStackView: UIStackView) {
@@ -139,7 +139,7 @@ extension CalculatorViewController {
     private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
         let formulaStackView = createStackView()
         let operandLabel = createLabel(with: currentOperand)
-        if historyStackView.arrangedSubviews.isEmpty {
+        if calculationHistoryStackView.arrangedSubviews.isEmpty {
             formulaStackView.addArrangedSubview(operandLabel)
             return formulaStackView
         }

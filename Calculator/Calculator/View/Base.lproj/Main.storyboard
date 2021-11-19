@@ -384,9 +384,9 @@
                     </view>
                     <connections>
                         <outlet property="calculationHistoryScrollView" destination="BOT-7g-vxv" id="yie-p4-L1s"/>
+                        <outlet property="calculationHistoryStackView" destination="XRe-QE-UJf" id="oY8-r4-PAc"/>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="Zsn-QM-bwK"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="NZT-pb-9WR"/>
-                        <outlet property="historyStackView" destination="XRe-QE-UJf" id="oY8-r4-PAc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
