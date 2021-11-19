@@ -47,6 +47,10 @@ class ViewController: UIViewController {
         clearAllLableAndQueue()
     }
     @IBAction func didClearEntryButtonTap (sender: UIButton) {
+        if !inputOperand.isEmpty && inputOperand != "0" {
+            inputOperand.removeLast()
+            presentOperandLable.text = inputOperand
+        }
     }
     @IBAction func didChangeSignButtonTap (sender: UIButton) {
         if inputOperand.hasPrefix("-") {
