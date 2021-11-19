@@ -9,4 +9,13 @@ import UIKit
 
 extension CalculatorViewController {
     
+    var operatorLabel: UILabel {
+        let operatorLabel = UILabel()
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.textColor = .white
+        operatorLabel.text = inputOperatorLabel.text
+        
+        return operatorLabel
+    }
+    
 }
