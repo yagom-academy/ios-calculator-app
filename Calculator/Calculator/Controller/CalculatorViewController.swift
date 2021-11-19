@@ -67,7 +67,7 @@ class CalculatorViewController: UIViewController {
     // MARK: - 연산자 버튼 입력
     @IBAction func tapOperatorBtn(_ sender: UIButton) {
         guard let currentNumLabel = inputNumLabel.text,
-            let inputOperator = sender.currentTitle else { return }
+             let inputOperator = sender.currentTitle else { return }
 
         if formulaStackView.arrangedSubviews.count == 0, currentNumLabel == initialNumLabel {
             inputOperatorLabel.text = initialStringValue
@@ -92,7 +92,7 @@ class CalculatorViewController: UIViewController {
     
     func addStringFormula() {
         guard let inputNum = inputNumLabel.text,
-              let inputOperator = inputOperatorLabel.text else { return }
+             let inputOperator = inputOperatorLabel.text else { return }
         
         entireStringFormula += (inputOperator + inputNum)
     }
