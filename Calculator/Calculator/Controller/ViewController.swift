@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     @IBOutlet weak var operandLabel: UILabel?
     @IBOutlet weak var operatorLabel: UILabel?
     @IBOutlet weak var countingHistoryStackView: UIStackView?
@@ -153,5 +152,3 @@ class ViewController: UIViewController {
         countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
     }
 }
-
-
