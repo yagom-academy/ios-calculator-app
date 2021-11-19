@@ -1,12 +1,12 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculatorViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     @IBOutlet var currentNumberLabel: UILabel!
     @IBOutlet var currentOperatorLabel: UILabel!
