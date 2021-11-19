@@ -44,6 +44,12 @@ class ViewController: UIViewController {
     @IBAction func didClearEntryButtonTap (sender: UIButton) {
     }
     @IBAction func didChangeSignButtonTap (sender: UIButton) {
+        if inputOperand.hasPrefix("-") {
+            inputOperand.removeFirst()
+        } else {
+            let temp = inputOperand
+            inputOperand = "-" + temp
+        }
     }
     @IBAction func didEqualsSignButtonTap (sender: UIButton) {
         guard inputOperand != "0" else { return }
