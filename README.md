@@ -6,6 +6,7 @@
 - [Ground Rule](#GroundRule)
 - [Time Line](#TimeLine)
 - [Step1](#Step1)
+- [Step2](#Step2)
 
 <a name="GroundRule"></a>
 # 🤝  의존 모둠 Ground Rule
@@ -14,8 +15,12 @@
 # ⏰  타임 라인
 
 <details>
-<summary>21.11.08.Mon</summary>
+<summary>Week 1</summary>
 <div markdown="1">       
+
+  <details>
+<summary>21.11.08.Mon</summary>
+<div markdown="1-1">       
 
 - Step1 요구사항 파악
 - Queue, LinkedList 자료구조 공부
@@ -28,17 +33,128 @@
 
 <details>
 <summary>21.11.09.Tue</summary>
-<div markdown="2">       
+<div markdown="1-2">       
 
 - UML 작성
 - Queue 구현
 - TDD 방식으로 Queue Test
 - 코드 Refactoring
 - Step1 PR 제출
-- [README.md](http://readme.md/) 작성
+- README.md 작성
 
 </div>
 </details>
+
+<details>
+<summary>21.11.11.Thu</summary>
+<div markdown="1-3">       
+
+- Step2 요구사항 파악
+- 모델 파일 생성 및 분류
+- Operator enumeration 구현
+
+</div>
+</details>
+
+<details>
+<summary>21.11.12.Fri</summary>
+<div markdown="1-4">       
+
+- TDD 방식으로 코드 작성
+- Queue 테스트 코드 리팩터링
+- Operator 테스트 코드 작성 및 리팩터링
+- Formula 구조체 테스트 코드 작성 및 내부 구현
+- ExpressionParser 테스트 코드 작성 및 내부 구현
+
+</div>
+</details>
+
+<details>
+<summary>21.11.13.Sat</summary>
+<div markdown="1-5">       
+
+- ExpressionParser 테스트 코드 작성 및 리팩터링
+- 파일 재분류
+  
+</div>
+</details>
+
+<details>
+<summary>21.11.14.Sun</summary>
+<div markdown="1-6">       
+
+- 주석 제거
+- 에러 타입 구현
+- 오류 처리 구현
+- Operator 분리 메소드 및 테스트 코드 리팩터링
+  
+</div>
+</details>
+
+</div>
+</details>
+
+<details>
+<summary>Week 2</summary>
+<div markdown="2">       
+
+<details>
+<summary>21.11.15.Mon</summary>
+<div markdown="2-1">       
+
+- README.md 업데이트
+- 코드 중복성 판단 후 수정
+  
+</div>
+</details>
+
+<details>
+<summary>21.11.16.Tue</summary>
+<div markdown="2-2">       
+
+- Step2 PR 제출
+  
+</div>
+</details>
+
+<details>
+<summary>21.11.17.Wed</summary>
+<div markdown="2-3">       
+
+- Step2 피드백 반영 및 리팩터링
+- Step3 요구사항 파악
+- StackView, Label 동적 생성 구현
+- 각 버튼 액션함수 구현
+  
+</div>
+</details>
+
+<details>
+<summary>21.11.18.Thu</summary>
+<div markdown="2-4">       
+
+- ScrollView 자동 최신화 구현
+- 액션 함수 내부 리팩터링
+- 함수 세분화, 분리
+- 개행 수정
+- Step3 PR 제출
+  
+</div>
+</details>
+
+<details>
+<summary>21.11.19.Fri</summary>
+<div markdown="2-5">       
+
+- README.md 업데이트
+  
+</div>
+</details>
+
+</div>
+</details>
+
+
 
 <a name="Step1"></a>
 # 1️⃣ Step 1
@@ -85,3 +201,10 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 그래서 그러한 단점을 보완한 **DoubleStack** 즉, **Array** 2개를 이용해 단점을 보완한다
 
 하나의 **Array**에 먼저 **enqueue** 하여 요소를 넣어주고 **dequeue**할 때 다른 Array에 ```reversed()```를 이용하여 넣어준다면 첫번째 배열의 첫번째 요소가 두번째 배열에선 마지막 요소가 되기에 **dequeue**하여 요소를 뺄 때 첫번째 요소를 뺴서 뒤의 요소들이 앞으로 당겨지는 비용이 쓰이지 않게 되어 시간복잡도가 O(1)이 되고, 요소가 많아도 비용이 늘지 않게 되는 것이다.
+
+<a name="Step2"></a>
+# 2️⃣ Step 2
+
+## 📊 Step2 UML
+
+
