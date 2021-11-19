@@ -25,13 +25,16 @@ class ViewController: UIViewController {
     }
     
     func resetCalculator() {
-        operandLabel.text = ""
+        resetOperand()
         operatorLabel.text = ""
-        
-        currentOperand = ""
         currentOperator = ""
         completeFormula = ""
         isCalculationOver = false
+    }
+    
+    func resetOperand() {
+        operandLabel.text = "0"
+        currentOperand = ""
     }
     
     func refreshLabelsWithResult(of formula: String) {
@@ -70,8 +73,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operandLabel.text = "0"
-        currentOperand = ""
+        resetOperand()
     }
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
         guard let operandInNumber = Double(currentOperand), operandInNumber != 0 else {
@@ -89,7 +91,11 @@ class ViewController: UIViewController {
     
     // 연산자를 누를 때 앞에서 입력한 숫자를 업데이트
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-        guard currentOperand != "" else { // 숫자 입력이 없는 상태에서는 연산자가 작동하지 않음 (입력값이 "0"일 때와 다르겠지?)
+        guard currentOperand != "0" else { // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
+            return
+        }
+        
+        guard isCalculationOver == false else { // =버튼을 탭한 직후 연산자를 탭하면 작동하지 않음
             return
         }
         
@@ -112,7 +118,10 @@ class ViewController: UIViewController {
         
         currentOperator = operatorSymbol
         completeFormula += "\(currentOperand)\(currentOperator)"
-        print(completeFormula) // 출력 안됨
+        print(completeFormula) // 출력 안됨 - 왜지????
+        
+        currentOperand = ""
+        operandLabel.text = "0"
     }
 
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
