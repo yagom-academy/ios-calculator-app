@@ -120,11 +120,11 @@ class ViewController: UIViewController {
             operatorLabel?.text = operatorText
             operandLabel?.text = operandText
         } catch QueueError.emptyOperandItem {
-            
+            showAlert(message: "숫자를 입력해주세요.")
         } catch QueueError.emptyOperatorItem {
-            
+            showAlert(message: "연산자를 입력해주세요.")
         } catch {
-            
+            showAlert(message: "예상치 못한 오류입니다.")
         }
     }
     
@@ -152,5 +152,14 @@ class ViewController: UIViewController {
         countingHistoryScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
         countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
