@@ -114,14 +114,14 @@ class ViewController: UIViewController {
     
     //MARK: - Helpers
     
-    func makeLabel(text: String) -> UILabel {
+    private func makeLabel(text: String) -> UILabel {
        let label = UILabel()
         label.textColor = .white
         label.text = text
         return label
     }
         
-    func configureFormulaStackView(operands: String, `operator`: String) {
+    private func configureFormulaStackView(operands: String, `operator`: String) {
         let operandLabel = makeLabel(text: operands)
         let operatorLabel = makeLabel(text: `operator`)
         
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
         formulaStackView.addArrangedSubview(stackView)
     }
     
-    func appendInputToFormula() {
+    private func appendInputToFormula() {
         guard let `operator` = operatorLabel.text,
               let operands = operandsLabel.text else {
             return
