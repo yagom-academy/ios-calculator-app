@@ -79,12 +79,12 @@ class ViewController: UIViewController {
         if currentInputOperand == LabelContents.defaultOperand { return }
         if isEvaluated { return }
         
-        if currentInputOperand.hasPrefix("-") {
+        if currentInputOperand.hasPrefix(LabelContents.minusSignSymbole) {
             currentInputOperand.removeFirst()
             return
         }
         
-        currentInputOperand.insert("-", at: currentInputOperand.startIndex)
+        currentInputOperand.insert(contentsOf: LabelContents.minusSignSymbole, at: currentInputOperand.startIndex)
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
@@ -126,6 +126,7 @@ class ViewController: UIViewController {
         static let notANumber = "NaN"
         static let emptyString = ""
         static let defaultOperand = "0"
+        static let minusSignSymbole = "-"
     }
 }
 
