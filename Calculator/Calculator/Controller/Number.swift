@@ -46,6 +46,16 @@ class Number {
         }
     }
     
+    func formmater(_ value: String) -> String {
+        guard let double = Double(value) else {
+            return "NaN"
+        }
+        let numberFormmater = NumberFormatter()
+        numberFormmater.numberStyle = .decimal
+        let result = numberFormmater.string(from: NSNumber(value: double))
+        return result!
+    }
+    
     func reset() {
         value = "0"
         isBiggerThan0 = true

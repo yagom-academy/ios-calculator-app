@@ -66,6 +66,7 @@ class Number_Tests: XCTestCase {
         XCTAssertEqual(fakeLabel, "789.")
     }
     
+    //MARK:- toggleSign Tests
     func test_value가양수일때_toggleSign을_호출하면_label에_마이너스부호가_추가된다() {
         let testNum = Number(value: "777", isBiggerThan0: true)
         testNum.toggleSign()
@@ -93,5 +94,18 @@ class Number_Tests: XCTestCase {
         sut.toggleSign()
         fakeLabel = sut.value
         XCTAssertFalse(fakeLabel.contains("-"))
+    }
+    
+    //MARK:- formmater Tests
+    func test_value가_1000000일때_formmater를_호출하면_천자리마다_콤마가추가된다() {
+        let testNum = Number(value: "1000000" , isBiggerThan0: true)
+        let formmatedValue = testNum.formmater(testNum.value)
+        XCTAssertEqual(formmatedValue, "1,000,000")
+    }
+    
+    func test_value가_마이너스12345일때_formatter를_호출하면_3자리마다_콤마가추가된다() {
+        let testNum = Number(value: "-12345" , isBiggerThan0: false)
+        let formmatedValue = testNum.formmater(testNum.value)
+        XCTAssertEqual(formmatedValue, "-12,345")
     }
 }
