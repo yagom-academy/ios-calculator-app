@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel?
     @IBOutlet weak var operatorLabel: UILabel?
     @IBOutlet weak var countingHistoryStackView: UIStackView?
