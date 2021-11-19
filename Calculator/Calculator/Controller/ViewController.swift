@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var isCalculationOver: Bool = false
 
     var isLastOperator: Bool = false // false = 마지막 숫자, true = 마지막 연산자
+    var isLastDot: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +44,9 @@ class ViewController: UIViewController {
         var formula: Formula = ExpressionParser.parse(from: formula)
         
         do {
-            let result: Double = try formula.result()
-            print("계산 결과 : \(result)")
-            operandLabel.text = "\(result)"
+            let calculationResult: Double = try formula.result()
+            print("계산 결과 : \(calculationResult)")
+            operandLabel.text = "\(calculationResult)"
             operatorLabel.text = ""
         } catch CalculatorError.dividedByZero {
             operandLabel.text = "\(CalculatorError.dividedByZero.description)"
@@ -114,7 +115,6 @@ class ViewController: UIViewController {
         }
         
         completeFormula += currentOperand // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
-        
         refreshLabelsWithResult(of: completeFormula)
         isCalculationOver = true
     }
@@ -133,6 +133,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
+        if isCalculationOver == true {
+            resetCalculator()
+        }
+        
         guard let operandInNumber = Double(currentOperand), operandInNumber != 0 else {
             return
         }
@@ -144,5 +148,27 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = currentOperand
+    }
+    
+    @IBAction func touchUpDotBtn(_ sender: UIButton) {
+        if isCalculationOver == true {
+            resetCalculator()
+        }
+        
+        guard let operandLabelText = operandLabel.text else { return }
+        
+        if operandLabelText.contains(".") { // 입력한 숫자에 .이 있으면 추가적인 .입력 불가
+            return
+        } else if operandLabelText == "0" { // 연산자를 누르면 이렇게 설정되는데 왜 여기에 안걸리지?
+            // 문제 발생 - 숫자1-연산자1-".3"을 입력하면 0.3 대신 3으로 인식하고, 연산 메서드 비정상 작동
+            // 원인-전에 입력한 숫자1이 currentOperand에 들어있어서 생기는 오류
+            print("I'm here")
+            currentOperand = "0."
+            operandLabel.text! = "0."
+            isLastDot = true
+        } else {
+            currentOperand += "."
+            operandLabel.text! += "." // 왜 다른 라인과 다르게 옵셔널이 되지?
+        }
     }
 }
