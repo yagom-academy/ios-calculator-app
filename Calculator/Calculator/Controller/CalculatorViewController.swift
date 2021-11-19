@@ -44,6 +44,7 @@ class CalculatorViewController: UIViewController {
     }
 
     // MARK: - 숫자 버튼 입력
+    
     @IBAction private func tapNumberPad(_ sender: UIButton) {
         guard let currentNumLabel = inputNumLabel.text,
              let inputNum = sender.currentTitle else { return }
@@ -80,6 +81,7 @@ class CalculatorViewController: UIViewController {
     }
     
     // MARK: - 연산자 버튼 입력
+    
     @IBAction private func tapOperatorBtn(_ sender: UIButton) {
         guard let currentNumLabel = inputNumLabel.text,
              let inputOperator = sender.currentTitle else { return }
@@ -116,6 +118,7 @@ class CalculatorViewController: UIViewController {
     }
     
     // MARK: - 특수 버튼 입력
+    
     @IBAction private func tapACBtn(_ sender: UIButton) {
         initailizeLabel()
         entireStringFormula = initialStringValue
@@ -161,6 +164,7 @@ class CalculatorViewController: UIViewController {
     }
     
     // MARK: - 자동 스크롤
+    
     private func scrollToBottom(_ scrollView: UIScrollView) {
             scrollView.layoutIfNeeded()
             scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
