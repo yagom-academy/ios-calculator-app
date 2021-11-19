@@ -27,6 +27,7 @@ class InputValidator {
     private var isDotted: Bool { state.operand.contains(".") }
     private var isShowingResult: Bool { state.isShowingResult }
     private var hasNoOperator: Bool { state.operator.isEmpty }
+    private var isFirstFormula: Bool { state.formulaStack.isEmpty && state.operator.isEmpty }
     
     func bind(with state: CalculatorState) {
         self.state = state
@@ -49,7 +50,7 @@ class InputValidator {
         !isShowingResult
     }
     func appendFormulaValidity() -> Bool {
-        !isShowingResult && !isZero
+        !isShowingResult && !isZero && !isFirstFormula
     }
     func convertedOperand(from digit: String) -> String {
         isZero ? digit : state.operand + digit
