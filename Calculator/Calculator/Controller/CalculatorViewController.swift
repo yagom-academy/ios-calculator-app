@@ -158,5 +158,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    // MARK: - 자동 스크롤
+    private func scrollToBottom(_ scrollView: UIScrollView) {
+            scrollView.layoutIfNeeded()
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
+        }
+    
 }
 
