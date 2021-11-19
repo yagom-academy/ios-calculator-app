@@ -55,8 +55,8 @@ class ViewController: UIViewController {
             configureFormulaStackView(operand: currentOperand, operator: currentOperator)
         }
         operatorLabel.text = newOperator
-        updateOperandLabel(with: "0")
         formulaString += currentOperand + newOperator
+        updateOperandLabel(with: "0")
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard currentOperand.contains(".") else {
+        if currentOperand.contains(".") {
             return
         }
         updateOperandLabel(with: currentOperand + ".")
@@ -91,13 +91,12 @@ class ViewController: UIViewController {
         guard let currentOperator = operatorLabel.text else {
             return
         }
-        updateOperandLabel(with: "")
+        operatorLabel.text = ""
+        configureFormulaStackView(operand: currentOperand, operator: currentOperator)
+        let input = formulaString + operandLabel.text!
+        var formula = ExpressionParser.parse(from: input)
         do {
-            let input = formulaString + operandLabel.text!
-            var formula = ExpressionParser.parse(from: input)
-            
             operandLabel.text = String(try formula.result())
-            configureFormulaStackView(operand: currentOperand, operator: currentOperator)
         } catch CalculatorError.divideByZero {
             configureFormulaStackView(operand: currentOperand, operator: currentOperator)
             updateOperandLabel(with: "NAN")
