@@ -88,10 +88,12 @@ class ViewController: UIViewController {
     
     @IBAction func euqualButtonTapped(_ sender: UIButton) {
         do {
-            let formula = try ExpressionParser.parse(from: formulaString)
-            formula.result()
+            var formula = ExpressionParser.parse(from: formulaString)
+            operandsLabel.text = String(try formula.result())
         } catch CalculatorError.divideByZero {
             operandsLabel.text = "NAN"
+        } catch {
+            print(error)
         }
     }
     
@@ -117,7 +119,7 @@ class ViewController: UIViewController {
     func appendInputToFormula() {
         guard let `operator` = operatorLabel.text,
               let operands = operandsLabel.text else {
-                  return
+            return
         }
         formulaString += operands + `operator`
     }
