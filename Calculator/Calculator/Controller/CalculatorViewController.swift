@@ -33,7 +33,7 @@ class CalculatorViewController: UIViewController {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
-        if isZero {
+        if isZero && numberPressedString != "." {
             currentOperand = ""
         }
         currentOperand += numberPressedString
@@ -53,7 +53,9 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func calculateButtonPressed(_ sender: Any) {
         refreshCalculateHistory()
-        currentOperand = calculateResult(from: historyStack)
+        guard let currentOperand = calculateResult(from: historyStack) else {
+            return
+        }
         historyStack.removeAll()
         currentOperator = ""
         removeFormulaStackViews()
@@ -152,11 +154,14 @@ extension CalculatorViewController {
         historyStack.append(contentsOf: [currentOperator, currentOperand])
     }
     
-    private func calculateResult(from historyStack: [String]) -> String {
+    private func calculateResult(from historyStack: [String]) -> String? {
         let equationString = historyStack.filter { $0 != "" }.joined()
         var formula = ExpressionParser.parse(from: equationString)
-        let result = formula.result()
-        return String(result)
+        let rawResult = formula.result()
+        guard let result = rawResult.presentingFormat else {
+            return nil
+        }
+        return result
     }
 }
 

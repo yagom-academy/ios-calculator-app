@@ -8,13 +8,16 @@
 import Foundation
 
 extension Double: CalculateItem {
-//    var decimalFormat: String {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        formatter.maximumFractionDigits = 20
-//        
-//        let number = NSNumber(value: value)
-//        let formattedValue = formatter.string(from: number)!
-//        return "\(name): \(formattedValue)"
-//    }
+    var presentingFormat: String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 0
+        numberFormatter.roundingMode = .up
+        guard let result = numberFormatter.string(from: NSNumber(value: self)) else {
+            return nil
+        }
+        return result
+    }
 }
