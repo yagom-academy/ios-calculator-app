@@ -39,54 +39,22 @@ class ViewController: UIViewController {
         }
         let `operator` = sender.title(for: .normal)
         let operand = inputNumber.value
-        
-        let expressionView = expressionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        let operatorlabels = expressionView.operatorLabel(operator: `operator`!)
-        let operanadlabels = expressionView.operandLabel(operand: operand)
-        expressionView.addSubview(operatorlabels)
-        expressionView.addSubview(operanadlabels)
-        expressionStack.addArrangedSubview(expressionView)
+    
+        let stackView = UIStackView()
+        var operatorlabel = UILabel()
+        operatorlabel.text = `operator`
+        operatorlabel.textColor = .white
+        var operandlabel = UILabel()
+        operandlabel.text = operand
+        operandlabel.textColor = .white
+        stackView.addArrangedSubview(operatorlabel)
+        stackView.addArrangedSubview(operandlabel)
+        stackView.spacing = 5
+        stackView.alignment = .bottom
+        expressionStack.addArrangedSubview(stackView)
         numberLabel.text = "0"
         inputNumber.reset()
         operatorLabel.text = `operator`
-    }
-    
-}
-
-class expressionView: UIView {
-    var operatorlabel: UILabel?
-    var operandlabel: UILabel?
-    
-    func operatorLabel(`operator`: String) -> UILabel {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 60, height: 25)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.text = `operator`
-        label.textColor = .white
-        return label
-    }
-    
-    func operandLabel(operand: String) -> UILabel {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 60, height: 25)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.text = operand
-        label.textColor = .white
-        return label
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    func layout() {
-        
     }
 }
 
