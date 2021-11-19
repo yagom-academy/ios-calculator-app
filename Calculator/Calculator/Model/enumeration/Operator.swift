@@ -17,6 +17,10 @@ enum Operator: String, CaseIterable, CalculateItem {
         return `case`.rawValue
     }
     
+    init?(symbol: String) {
+        self.init(rawValue: symbol)
+    }
+    
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         switch self {
         case .add:
