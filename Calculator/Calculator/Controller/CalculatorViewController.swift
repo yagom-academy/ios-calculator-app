@@ -113,10 +113,10 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        insertValueToStack(textValue: `operator`)
-        insertValueToStack(textValue: operand)
+        insertValueToStackView(textValue: `operator`)
+        insertValueToStackView(textValue: operand)
         
-        func insertValueToStack(textValue: String) {
+        func insertValueToStackView(textValue: String) {
             let label = calculatorHistoryUILbel(text: textValue)
             stackView.addArrangedSubview(label)
         }
