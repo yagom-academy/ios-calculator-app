@@ -279,3 +279,25 @@ private func scrollToBottom() {
 ---
 ### 💡 Step 3에서 보완한 부분 및 새롭게 안 내용
 ---
+#### 1. 함수의 호출 순서를 기준으로 메서드 배치 순서를 수정했습니다. 
+다소 메서드의 배치 순서가 뒤죽박죽되어 있는 부분이 있어 가독성과 로직 흐름을 잘 보여주기 위해 메서드 순서를 수정했습니다. 
+
+#### 2. 연산자를 바꿀 때 의미없이 로그가 계속 찍히는 오류를 수정했습니다. 
+`addScrollViewLabel()` 함수를 `textInput`의 마지막 글자가 숫자로 변환이 될 경우만 호출할 수 있도록 하여 해결했습니다.
+
+#### 3. Label의 text를 수정하는 부분을 따로 함수로 빼주어 가독성을 고려했습니다. 
+기존에 아래처럼 label의 text를 수정하고 로그에 쌓아주는 부분이 가독성이 떨어진다고 판단했습니다. 
+``` swift
+operatorText = sender.currentTitle ?? "0"
+textInput += operatorText
+operatorLabel?.text = operatorText
+```
+
+따라서 아래처럼 함수를 따로 만들어 가독성을 올릴 수 있도록 수정했습니다. 
+``` swift
+private func changeLabelText(into text: inout String, at sender: UIButton) {
+    text = sender.currentTitle ?? "0"
+    textInput += text
+    operatorLabel?.text = text
+}
+```
