@@ -8,15 +8,15 @@
 import Foundation
 
 class CalculatorController {
-    private var storedOperandAndOperator = ""
+    private var numericalExpression = ""
     
     func insertFormula(`operator`: String, operand: String) {
-        storedOperandAndOperator = storedOperandAndOperator + `operator` + String(ExpressionParser.separator)
+        numericalExpression = numericalExpression + `operator` + String(ExpressionParser.separator)
                             + operand + String(ExpressionParser.separator)
     }
     
     func resetFormula() {
-        storedOperandAndOperator = ""
+        numericalExpression = ""
     }
     
     func calculate() -> String {
@@ -28,7 +28,7 @@ class CalculatorController {
         var calculatedResult = 0.0
         
         do {
-            calculatedResult = try ExpressionParser.parse(from: storedOperandAndOperator).result()
+            calculatedResult = try ExpressionParser.parse(from: numericalExpression).result()
         } catch {
             return Formula.FormulaError.NaN.description
         }
