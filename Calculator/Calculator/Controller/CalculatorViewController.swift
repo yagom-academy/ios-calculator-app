@@ -23,31 +23,37 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var expressionView: UIStackView!
     
-    
-    @IBAction func clickAllClear(_ sender: UIButton) {
+}
+ 
+// MARK: private action method
+
+extension CalculatorViewController {
+    @IBAction private func clickAllClear(_ sender: UIButton) {
         removeExpressionView()
         setZeroInNumberLabel()
         
         expressionController?.expressionWrapperInit()
     }
     
-    @IBAction func clickEqual(_ sender: UIButton) {
+    @IBAction private func clickEqual(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let operatorOfLabel = operatorSettingLabel.text else {
             return
         }
         
-        let expressionInLabels: String = operatorOfLabel +  numberOfLabel
-        numberCompositionLabel.text = expressionController?.calculate(expression: expressionInLabels)
-        
-        removeExpressionView()
         setNilInOperatorLabel()
+        
+        if let stackView = expressionController?.addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel) {
+            expressionView.addArrangedSubview(stackView)
+        }
+    
+        numberCompositionLabel.text = expressionController?.calculate()
     }
     
-    @IBAction func clickClearExpression(_ sender: UIButton) {
+    @IBAction private func clickClearExpression(_ sender: UIButton) {
         setZeroInNumberLabel()
     }
     
-    @IBAction func clickOperator(_ sender: UIButton) {
+    @IBAction private func clickOperator(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let operatorOfButton = sender.titleLabel?.text else {
             return
         }
@@ -65,7 +71,7 @@ class CalculatorViewController: UIViewController {
         setZeroInNumberLabel()
     }
     
-    @IBAction func clickNumberSign(_ sender: UIButton) {
+    @IBAction private func clickNumberSign(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text else {
             return
         }
@@ -77,7 +83,7 @@ class CalculatorViewController: UIViewController {
         numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: numberOfLabel)
     }
     
-    @IBAction func clickDoubleZero(_ sender: UIButton) {
+    @IBAction private func clickDoubleZero(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let doubleZero = sender.titleLabel?.text else {
             return
         }
@@ -87,7 +93,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func clickNumber(_ sender: UIButton) {
+    @IBAction private func clickNumber(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
             return
         }
@@ -99,7 +105,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func clickPoint(_ sender: UIButton) {
+    @IBAction private func clickPoint(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let point = sender.titleLabel?.text else {
             return
         }

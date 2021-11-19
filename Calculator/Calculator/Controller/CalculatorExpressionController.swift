@@ -11,8 +11,7 @@ struct CalculatorExpressionController {
     
     var expressionWrapper: String = ""
     
-    mutating func calculate(expression: String) -> String? {
-        expressionWrapper += expression
+    mutating func calculate() -> String? {
         
         var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
         let calculatedValue: Double = formula.result()
@@ -32,7 +31,7 @@ struct CalculatorExpressionController {
         return numberFormatter.string(from: NSNumber(value: doubleValue))
     }
     
-    func decideNumberOfDigits(_ value: Double) -> (Int, Int) {
+    private func decideNumberOfDigits(_ value: Double) -> (Int, Int) {
         let stringValue = String(value)
         
         let splitedArray = stringValue.split(separator: ".")
