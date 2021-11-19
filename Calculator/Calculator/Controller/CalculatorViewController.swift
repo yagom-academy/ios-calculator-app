@@ -90,6 +90,13 @@ class CalculatorViewController: UIViewController {
         addStringFormula()
     }
     
+    func addStringFormula() {
+        guard let inputNum = inputNumLabel.text,
+              let inputOperator = inputOperatorLabel.text else { return }
+        
+        entireStringFormula += (inputOperator + inputNum)
+    }
+    
 
 }
 
