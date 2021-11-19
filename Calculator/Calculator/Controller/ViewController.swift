@@ -85,6 +85,11 @@ class ViewController: UIViewController {
         if inputLabel.text?.isEmpty == false {
             inputLabel.text?.removeLast()
         }
+        
+        if inputString.isEmpty == false {
+            inputString.removeLast()
+        }
+        
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
