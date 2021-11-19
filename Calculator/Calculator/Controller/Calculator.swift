@@ -57,11 +57,11 @@ extension Calculator {
         toInitialState()
     }
     func clearEntryButtonDidTap() {
-
+        
     }
     func toggleSignButtonDidTap() {
-        validator.toggleSignValidity() ?
-            isPositive.toggle() : ()
+        guard validator.toggleSignValidity() else { return }
+            isPositive.toggle()
     }
     func operatorButtonDidTap(operator: String) {
         replaceOperator(with: `operator`)
@@ -73,16 +73,16 @@ extension Calculator {
         
     }
     func dotButtonDidTap() {
-        validator.dotValidity() ?
-            currentOperand.append(".") : ()
+        guard validator.dotValidity() else { return }
+            currentOperand.append(".")
     }
     func zeroButtonDidTap() {
-        validator.zeroValidity() ?
-            currentOperand.append("0") : ()
+        guard validator.zeroValidity() else { return }
+            currentOperand.append("0")
     }
     func doubleZeroButtonDidTap() {
-        validator.zeroValidity() ?
-            currentOperand.append("00") : ()
+        guard validator.zeroValidity() else { return }
+            currentOperand.append("00")
     }
     func digitButtonDidTap(number: String) {
         currentOperand = validator.convertedOperand(from: number)
