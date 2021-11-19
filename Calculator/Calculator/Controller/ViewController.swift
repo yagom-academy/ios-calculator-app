@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // MARK: - Properties
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     @IBOutlet private weak var calculationHistoryStackView: UIStackView!
     @IBOutlet private weak var operandLabel: UILabel!
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     private let maximumDigitsOfDoubleExpression = 16
     private let limitedDigitsOfExpression = 20
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCurrentOperand()
