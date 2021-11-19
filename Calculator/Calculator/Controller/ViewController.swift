@@ -50,6 +50,7 @@ class ViewController: UIViewController {
             print("계산 결과 : \(calculationResult)")
             
             numberFormatter.maximumFractionDigits = 20 // 소수점 아래 20자리까지 표시하도록 제한
+            numberFormatter.numberStyle = .decimal // 1000 단위로 , 표시
             guard let resultInString = numberFormatter.string(from: NSNumber(value: calculationResult)) else { return }
             
             operandLabel.text = "\(resultInString)"
