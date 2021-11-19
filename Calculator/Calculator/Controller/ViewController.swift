@@ -215,7 +215,7 @@ extension ViewController {
         }
         
         currentOperand += dot
-        operandLabel.text = currentOperand
+        operandLabel.text?.append(dot)
     }
     
     @IBAction private func touchUpChangePlusMinusSign(_ sender: Any) {
