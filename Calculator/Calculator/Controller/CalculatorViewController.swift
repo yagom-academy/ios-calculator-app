@@ -70,6 +70,7 @@ class CalculatorViewController: UIViewController {
         }
         
         if lastWord.isNumber {
+            addScrollViewLabel()
         } else {
             textInput.removeLast()
         }
@@ -80,7 +81,6 @@ class CalculatorViewController: UIViewController {
         operandText = ""
         operandLabel?.text = "0"
         
-        addScrollViewLabel()
         scrollToBottom()
     }
     
