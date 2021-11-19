@@ -9,8 +9,15 @@ import UIKit
 
 struct CalculatorExpressionController {
     
+    // MARK: property
+    
     var expressionWrapper: String = ""
     
+}
+
+// MARK: internal method
+
+extension CalculatorExpressionController {
     mutating func calculate() -> String? {
         
         var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
@@ -23,29 +30,14 @@ struct CalculatorExpressionController {
     
     func applyNumberFormatter(doubleValue: Double) -> String? {
         let numberFormatter = NumberFormatter()
+        
         numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
 
         numberFormatter.minimumIntegerDigits = decideNumberOfDigits(doubleValue).0
         numberFormatter.minimumFractionDigits = decideNumberOfDigits(doubleValue).1
         
         return numberFormatter.string(from: NSNumber(value: doubleValue))
-    }
-    
-    private func decideNumberOfDigits(_ value: Double) -> (Int, Int) {
-        let stringValue = String(value)
-        
-        let splitedArray = stringValue.split(separator: ".")
-        
-        let integerDigits = splitedArray[0].count
-        let fractionDigits = splitedArray[1].count
-        
-        if integerDigits > 20 {
-            return (20, 0)
-        } else if integerDigits + fractionDigits > 20 {
-            return (integerDigits, 20 - fractionDigits)
-        } else {
-            return (integerDigits, fractionDigits)
-        }
     }
     
     mutating func addExpression(signValue: String?, numberValue: String) -> UIStackView {
@@ -76,6 +68,24 @@ struct CalculatorExpressionController {
     func changeNumberSign(numberValue: String) -> String {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
-    
-    
 }
+
+// MARK: private method
+
+extension CalculatorExpressionController {
+    private func decideNumberOfDigits(_ value: Double) -> (Int, Int) {
+        let stringValue = String(value)
+        
+        let splitedArray = stringValue.split(separator: ".")
+        let (integerDigits, fractionDigits) = (splitedArray[0].count, splitedArray[1].count)
+        
+        if integerDigits > 20 {
+            return (20, 0)
+        } else if integerDigits + fractionDigits > 20 {
+            return (integerDigits, 20 - fractionDigits)
+        } else {
+            return (integerDigits, fractionDigits)
+        }
+    }
+}
+
