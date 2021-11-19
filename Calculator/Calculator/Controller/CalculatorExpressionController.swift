@@ -17,12 +17,11 @@ struct CalculatorExpressionController {
         var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
         let calculatedValue: Double = formula.result()
         
-        expressionWrapper = ""
+        expressionWrapperInit()
         
         return String(calculatedValue)
     }
     
-    // stackView 만들기
     mutating func addExpression(signValue: String?, numberValue: String) -> UIStackView {
         let expressionStackView = UIStackView()
         
@@ -46,5 +45,9 @@ struct CalculatorExpressionController {
     
     func changeNumberSign(numberValue: String) -> String {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
+    }
+    
+    func expressionWrapperInit() {
+        expressionWrapper = ""
     }
 }

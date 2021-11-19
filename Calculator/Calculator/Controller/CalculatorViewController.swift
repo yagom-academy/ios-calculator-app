@@ -26,8 +26,9 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func clickAC(_ sender: UIButton) {
         removeExpression()
-        expressionController?.expressionWrapper = ""
         setZeroInNumberLabel()
+        
+        expressionController?.expressionWrapperInit()
     }
     
     @IBAction func clickCalculate(_ sender: UIButton) {
