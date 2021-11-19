@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     private var expression: String = ""
     
     @IBAction func clickAC(_ sender: UIButton) {
+        removeExpression()
         expression = ""
     }
     
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
         var formula: Formula = ExpressionParser.parse(from: expression)
         let calculatedValue: Double = formula.result()
         
+        removeExpression()
         expression = ""
         operatorSettingLabel.text = ""
         numberCompositionLabel.text = String(calculatedValue)
@@ -142,5 +144,11 @@ extension ViewController {
         
         expressionView.addArrangedSubview(expressionStackView)
     }
+    
+    func removeExpression() {
+        expressionView.subviews.forEach{ $0.removeFromSuperview() }
+    }
 }
+
+
 
