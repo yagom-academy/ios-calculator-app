@@ -141,7 +141,7 @@ class CalculatorViewController: UIViewController {
         var formula = ExpressionParser.parse(from: entireStringFormula)
         do {
             let result = try formula.result()
-            checkResultIsNaN(from: result)
+            updateNumLabel(with: result)
             inputOperatorLabel.text = initialStringValue
             entireStringFormula = initialStringValue
         } catch CalculatorError.emptyQueue {
@@ -151,11 +151,9 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func checkResultIsNaN(from result: Double) {
-        if result.isNaN {
-            inputNumLabel.text = "NaN"
-        } else {
-            inputNumLabel.text = String(result)
+    func updateNumLabel(with result: Double) {
+        if let convertedNum = numberFormatter.string(for: result) {
+            inputNumLabel.text = convertedNum
         }
     }
     
