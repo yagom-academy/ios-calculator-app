@@ -42,15 +42,11 @@ class ViewController: UIViewController {
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let newInput = sender.currentTitle, let currentInput = inputLabel.text else {return}
         
-        if newInput == "0" {
-            inputLabel.text = "0"
-        }
-        else {
-            inputLabel.text = currentInput + newInput
-        }
         if currentInput == "0" {
             inputLabel.text = newInput
         }
+        
+        inputLabel.text = currentInput + newInput
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
