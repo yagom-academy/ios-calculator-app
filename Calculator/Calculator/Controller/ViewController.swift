@@ -177,33 +177,15 @@ extension ViewController {
         let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
         calculatorStackView.addArrangedSubview(formulaStackView)
     }
-    
     private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
-        let formulaStackView = UIStackView()
-        let operandLabel = UILabel()
-        operandLabel.text = operand
+        let formulaStackView = FormulaStackView()
         guard calculatorStackView.subviews.count > 0 else {
-            setUpFormulaLabel(of: operandLabel)
-            formulaStackView.addArrangedSubview(operandLabel)
+            formulaStackView.addLabel(operand)
             return formulaStackView
         }
-        let operatorLabel = UILabel()
-        operatorLabel.text = `operator`
-        setUpFormulaLabel(of: operatorLabel)
-        setUpFormulaLabel(of: operandLabel)
-        formulaStackView.axis = .horizontal
-        formulaStackView.alignment = .fill
-        formulaStackView.distribution = .fill
-        formulaStackView.spacing = 8
-        formulaStackView.addArrangedSubview(operatorLabel)
-        formulaStackView.addArrangedSubview(operandLabel)
+        formulaStackView.addLabel(`operator`)
+        formulaStackView.addLabel(operand)
         return formulaStackView
-    }
-    
-    private func setUpFormulaLabel(of label: UILabel) {
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        label.adjustsFontForContentSizeCategory = true
     }
     
     private func scrollToBottom(_ view: UIScrollView) {
@@ -259,15 +241,11 @@ extension ViewController {
 extension UIStackView {
     var toString: String {
         var inputValues = [String]()
-        self.arrangedSubviews.forEach{ view in
-            let subview = view as? UIStackView
-            subview?.arrangedSubviews.forEach{ view in
-                let label = view as? UILabel
-                guard let input = label?.text else {
-                    return
-                }
-                inputValues.append(input.replacingOccurrences(of: ",", with: ""))
+        self.arrangedSubviews.forEach { view in
+            guard let formualStackView = view as? FormulaStackView else {
+                return
             }
+            inputValues.append(contentsOf: formualStackView.element)
         }
         return inputValues.joined(separator: " ")
     }
