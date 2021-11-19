@@ -38,7 +38,9 @@ class CalculatorViewController: UIViewController {
         update(label: self.currentOperatorLabel, to: currentOperatorString)
         updateCurrentLabels()
     }
-    
+}
+
+extension CalculatorViewController {
     private func removePlaceholderViews() {
         historyStackView.arrangedSubviews.forEach { placeHolderView in
             placeHolderView.removeFromSuperview()
