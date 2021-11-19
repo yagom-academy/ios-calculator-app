@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var formulaHistoryScrollView: UIScrollView!
     @IBOutlet weak var formulaHistoryStackView: UIStackView!
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     
     var mathExpression: [String] = []
     var isEvaluated: Bool = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         
         currentInputOperand += number
     }
-
+    
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
         if isEvaluated { return }
@@ -93,10 +93,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
-        resetExpression()
+        resetAllExpression()
         removeAllFormulaHistory()
     }
-    
     
     @IBAction func touchClearEntryButton(_ sender: UIButton) {
         if isEvaluated == false {
@@ -104,7 +103,7 @@ class ViewController: UIViewController {
             return
         }
         
-        resetExpression()
+        resetAllExpression()
         removeAllFormulaHistory()
         isEvaluated = false
     }
@@ -162,7 +161,7 @@ class ViewController: UIViewController {
         currentInputOperatorLabel.text = currentInputOperator
     }
     
-    func resetExpression() {
+    func resetAllExpression() {
         updateCurrentInput()
         mathExpression = []
         isEvaluated = false
