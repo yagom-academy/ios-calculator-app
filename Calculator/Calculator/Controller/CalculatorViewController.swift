@@ -25,7 +25,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        reset()
+        resetCalcurator()
     }
     
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
@@ -82,7 +82,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        reset()
+        resetCalcurator()
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -98,7 +98,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = calculatorController.calculate()
     }
     
-    func reset() {
+    func resetCalcurator() {
         notFormattedOperand = "0"
         operandLabel.text = notFormattedOperand
         operatorLabel.text = ""
