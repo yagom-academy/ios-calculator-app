@@ -107,5 +107,16 @@ class CalculatorViewController: UIViewController {
     @IBAction func tapCEBtn(_ sender: UIButton) {
         initailizeLabel()
     }
+    
+    @IBAction func tapPositiveNegativeBtn(_ sender: UIButton) {
+        guard let currentNum = inputNumLabel.text,
+             currentNum != initialNumLabel else { return }
+        
+        if currentNum.hasPrefix(negativeSign) {
+            inputNumLabel.text = String(currentNum.dropFirst())
+        } else {
+            inputNumLabel.text = negativeSign + currentNum
+        }
+    }
 }
 
