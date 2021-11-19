@@ -117,10 +117,7 @@ class CalculatorViewController: UIViewController {
         labelFormat(textValue: operand)
         
         func labelFormat(textValue: String) {
-            let label = UILabel()
-            label.textColor = UIColor.white
-            label.text = textValue
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
+            let label = calculatorHistoryUILbel(text: textValue)
             stackView.addArrangedSubview(label)
         }
         
