@@ -74,10 +74,11 @@ extension ViewController {
     }
     
     @IBAction private func convertPositiveOrNegative(_ sender: UIButton) {
-        if let doubleOperand = Double(operand), doubleOperand != 0 {
-            operand = String(doubleOperand * -1)
+        guard let doubleOperand = Double(operand), doubleOperand != 0 else {
+            return
         }
         
+        operand = String(doubleOperand * -1)
         inputedOperandLabel.text = operand
     }
     
