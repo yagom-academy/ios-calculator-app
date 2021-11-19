@@ -10,6 +10,7 @@ import Foundation
 class Number {
     private (set) var value: String
     private (set) var isBiggerThan0: Bool
+    let numberFormatter = Formmater().formatter
     
     init(value: String = "0" , isBiggerThan0: Bool = true) {
         self.value = value
@@ -46,18 +47,30 @@ class Number {
         }
     }
     
-    func formmater(_ value: String) -> String {
+    func formatter(_ value: String) -> String {
         guard let double = Double(value) else {
             return "NaN"
         }
-        let numberFormmater = NumberFormatter()
-        numberFormmater.numberStyle = .decimal
-        let result = numberFormmater.string(from: NSNumber(value: double))
+        let result = numberFormatter.string(from: NSNumber(value: double))
         return result!
     }
     
     func reset() {
         value = "0"
         isBiggerThan0 = true
+    }
+}
+
+extension Number {
+    class Formmater {
+        let formatter : NumberFormatter
+        init() {
+            formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 20
+            formatter.usesSignificantDigits = true
+            formatter.maximumSignificantDigits = 20
+            formatter.roundingMode = .ceiling
+        }
     }
 }
