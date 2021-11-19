@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func initializationInputField(_ sender: UIButton) {
-        numberCompositionLabel.text = "0"
+        setZeroInNumberLabel()
     }
     
     @IBAction func clickOperator(_ sender: UIButton) {
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         }
         
         operatorSettingLabel.text = operatorOfButton
-        numberCompositionLabel.text = "0"
+        setZeroInNumberLabel()
     }
     
     @IBAction func clickNumberSign(_ sender: UIButton) {
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: private method
+// MARK: - private method
 
 extension ViewController {
     private func isZeroValue(data: String) -> Bool {
@@ -145,8 +145,12 @@ extension ViewController {
         expressionView.addArrangedSubview(expressionStackView)
     }
     
-    func removeExpression() {
+    private func removeExpression() {
         expressionView.subviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func setZeroInNumberLabel() {
+        numberCompositionLabel.text = "0"
     }
 }
 
