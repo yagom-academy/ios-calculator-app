@@ -15,13 +15,13 @@ class ViewController: UIViewController {
     
     var currentInputOperand: String = LabelContents.defaultOperand {
         didSet {
-            currentInputOperandLabel.text = currentInputOperand
+            updateCurrentInputLabel()
         }
     }
     
     var currentInputOperator: String = LabelContents.emptyString {
         didSet {
-            currentInputOperatorLabel.text = currentInputOperator
+            updateCurrentInputLabel()
         }
     }
     
@@ -31,11 +31,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentInputOperandLabel.text = currentInputOperand
-        currentInputOperatorLabel.text = currentInputOperator
-        
+        updateCurrentInputLabel()
         removeAllFormulaHistory()
-        
     }
     
     func addCurrentInputToFormulaHistory() {
@@ -62,9 +59,18 @@ class ViewController: UIViewController {
         })
     }
     
+    func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
+        currentInputOperator = operatorForm
+        currentInputOperand = operandForm
+    }
+    
+    func updateCurrentInputLabel() {
+        currentInputOperandLabel.text = currentInputOperand
+        currentInputOperatorLabel.text = currentInputOperator
+    }
+    
     func resetExpression() {
-        currentInputOperand = LabelContents.defaultOperand
-        currentInputOperator = LabelContents.emptyString
+        updateCurrentInput()
         mathExpression = []
         isEvaluated = false
     }
@@ -74,7 +80,7 @@ class ViewController: UIViewController {
         
         if isEvaluated { return }
         
-        if number == LabelContents.pointSymbole && currentInputOperand.firstIndex(of: Character(LabelContents.pointSymbole)) != nil { return }
+        if number == LabelContents.pointSymbole && currentInputOperand.contains(LabelContents.pointSymbole) { return }
         
         if number == LabelContents.pointSymbole && currentInputOperand == LabelContents.defaultOperand {
             currentInputOperand += number
@@ -95,23 +101,23 @@ class ViewController: UIViewController {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
         if isEvaluated { return }
         
+        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty { return }
+        
         if currentInputOperand == LabelContents.defaultOperand {
-            currentInputOperator = operatorSymbole
+            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbole)
             return
         }
         
         if mathExpression.isEmpty {
             mathExpression += [currentInputOperand]
             addCurrentInputToFormulaHistory()
-            currentInputOperand = LabelContents.defaultOperand
-            currentInputOperator = operatorSymbole
+            updateCurrentInput(operatorForm: operatorSymbole)
             return
         }
         
         mathExpression += [currentInputOperator, currentInputOperand]
         addCurrentInputToFormulaHistory()
-        currentInputOperand = LabelContents.defaultOperand
-        currentInputOperator = operatorSymbole
+        updateCurrentInput(operatorForm: operatorSymbole)
     }
     
     @IBAction func touchSignChangeButton(_ sender: UIButton) {
@@ -134,7 +140,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchClearEntryButton(_ sender: UIButton) {
         if isEvaluated == false {
-            currentInputOperand = LabelContents.defaultOperand
+            updateCurrentInput(operandForm: LabelContents.defaultOperand, operatorForm: currentInputOperator)
             return
         }
         
@@ -154,11 +160,9 @@ class ViewController: UIViewController {
         
         do {
             let result = try ExpressionParser.parse(from: stringFormula).result()
-            currentInputOperand = String(result)
-            currentInputOperator = LabelContents.emptyString
+            updateCurrentInput(operandForm: String(result))
         } catch CalculatorError.divideByZero {
-            currentInputOperand = LabelContents.notANumber
-            currentInputOperator = LabelContents.emptyString
+            updateCurrentInput(operandForm: LabelContents.notANumber)
         } catch {
             print(error)
         }
