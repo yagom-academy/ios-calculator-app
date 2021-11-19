@@ -21,10 +21,10 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeNumberFormat()
+        setNumberFormat()
     }
     
-    private func makeNumberFormat() {
+    private func setNumberFormat() {
         numberFormatter.roundingMode = .ceiling
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
