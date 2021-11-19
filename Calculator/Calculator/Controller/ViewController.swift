@@ -8,53 +8,71 @@ import UIKit
 
 class ViewController: UIViewController {
     var inputNumber = Number()
-    @IBOutlet var numberLabel: UILabel!
-    @IBOutlet var operatorLabel: UILabel!
+    var expression : String = ""
+    @IBOutlet var inputNumberLabel: UILabel!
+    @IBOutlet var inputOperatorLabel: UILabel!
     @IBOutlet var expressionStack: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = inputNumber.value
+        inputNumberLabel.text = inputNumber.value
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         inputNumber.updateValue(with: sender.title(for: .normal)!)
-        numberLabel.text = inputNumber.value
+        inputNumberLabel.text = inputNumber.value
     }
     
     @IBAction func touchCEbutton(_ sender: UIButton) {
         inputNumber.reset()
-        numberLabel.text = inputNumber.value
+        inputNumberLabel.text = inputNumber.value
     }
     
     @IBAction func touchToggleSignButton(_ sender: UIButton) {
         inputNumber.toggleSign()
-        numberLabel.text = inputNumber.value
+        inputNumberLabel.text = inputNumber.value
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
-        guard numberLabel.text != "0" else {
-            operatorLabel.text = sender.title(for: .normal)
+        guard inputNumberLabel.text != "0" else {
+            inputOperatorLabel.text = sender.title(for: .normal)
             return
         }
         let `operator` = sender.title(for: .normal)
         let operand = inputNumber.value
     
         let stackView = UIStackView()
-        var operatorlabel = UILabel()
-        operatorlabel.text = `operator`
-        operatorlabel.textColor = .white
-        var operandlabel = UILabel()
-        operandlabel.text = operand
-        operandlabel.textColor = .white
-        stackView.addArrangedSubview(operatorlabel)
-        stackView.addArrangedSubview(operandlabel)
+        let operatorLabel = UILabel()
+        if !stackView.arrangedSubviews.isEmpty {
+            operatorLabel.text = ""
+            expression += operand
+        } else {
+            operatorLabel.text = `operator`
+            expression += `operator` ?? ""
+            expression += operand
+        }
+        operatorLabel.textColor = .white
+        let operandLabel = UILabel()
+        operandLabel.text = operand
+        operandLabel.textColor = .white
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
         stackView.spacing = 5
         stackView.alignment = .bottom
         expressionStack.addArrangedSubview(stackView)
-        numberLabel.text = "0"
+        inputNumberLabel.text = "0"
         inputNumber.reset()
-        operatorLabel.text = `operator`
+    }
+    
+    @IBAction func touchEqualityButton(_ sender: UIButton) {
+        if let `operator` = inputOperatorLabel.text {
+            expression += `operator`
+        }
+        expression += inputNumber.value
+        var formular = ExpressionParser.parse(from: expression)
+        let result = formular.result()
+        
+        inputNumberLabel.text = inputNumber.formatter(result)
     }
 }
 

@@ -68,6 +68,13 @@ class Number {
         return result!
     }
     
+    func formatter(_ value: Double) -> String {
+        if let result = numberFormatter.string(from: NSNumber(value: value)) {
+            return result
+        }
+        return "NaN"
+    }
+    
     func reset() {
         value = "0"
         isBiggerThan0 = true

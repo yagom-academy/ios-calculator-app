@@ -8,10 +8,10 @@
 import Foundation
 
 enum Operator: Character, CalculateItem, CaseIterable {
-    case add = "➕"
-    case subtract = "➖"
-    case divide = "➗"
-    case multiply = "✖️"
+    case add = "+"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     static var marks = allCases.map{ $0.rawValue }
     
