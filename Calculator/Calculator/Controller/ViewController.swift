@@ -18,7 +18,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberCompositionLabel: UILabel!
     @IBOutlet weak var operatorSettingLabel: UILabel!
     
-    @IBOutlet weak var ExpressionView: UIStackView!
+    @IBOutlet weak var expressionView: UIStackView!
+    
+    private var expression: String = ""
+    
+    @IBAction func clickAC(_ sender: UIButton) {
+        expression = ""
+    }
+    
+    @IBAction func clickCalculate(_ sender: UIButton) {
+        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfButton = operatorSettingLabel.text else {
+            return
+        }
+        expression += operatorOfButton + numberOfLabel
+        
+        var formula: Formula = ExpressionParser.parse(from: expression)
+        let calculatedValue: Double = formula.result()
+        
+        expression = ""
+        operatorSettingLabel.text = ""
+        numberCompositionLabel.text = String(calculatedValue)
+    }
     
     @IBAction func initializationInputField(_ sender: UIButton) {
         numberCompositionLabel.text = "0"
@@ -43,7 +63,6 @@ class ViewController: UIViewController {
         operatorSettingLabel.text = operatorOfButton
         numberCompositionLabel.text = "0"
     }
-    
     
     @IBAction func clickNumberSign(_ sender: UIButton) {
         guard var numberOfLabel = numberCompositionLabel.text else {
@@ -112,10 +131,16 @@ extension ViewController {
         signLabel.text = signValue
         numberLabel.text = numberValue
         
+        if let signValue = signValue {
+            expression += signValue + numberValue
+        } else {
+            expression += numberValue
+        }
+        
         expressionStackView.addArrangedSubview(signLabel)
         expressionStackView.addArrangedSubview(numberLabel)
         
-        ExpressionView.addArrangedSubview(expressionStackView)
+        expressionView.addArrangedSubview(expressionStackView)
     }
 }
 
