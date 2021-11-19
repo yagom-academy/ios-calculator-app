@@ -13,6 +13,10 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "×"
     case divide = "÷"
     
+    init?(sign: Character) {
+        self.init(rawValue: sign)
+    }
+    
     var operatorSign: Character {
             switch self {
             case .add:
