@@ -43,14 +43,14 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func testCalculatorQueueDequeue_givenRemoveAllOfMultipleMixedItems_expectIsEmpty() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
+        let newItems: [Any] = [20, "+", 30, "−", 2]
         appendContents(of: newItems, to: &sut)
         sut.removeAll()
         XCTAssertTrue(sut.isEmpty)
     }
     
     func testCalculatorQueueDequeue_givenMultipleDequeue_expectIsEmpty() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
+        let newItems: [Any] = [20, "+", 30, "−", 2]
         appendContents(of: newItems, to: &sut)
         removeAll(of: &sut)
         XCTAssertTrue(sut.isEmpty)

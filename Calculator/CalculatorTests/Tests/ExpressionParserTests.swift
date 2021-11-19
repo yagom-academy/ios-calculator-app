@@ -13,7 +13,7 @@ class ExpressionParserTests: XCTestCase {
         let testOperands: [Double] = [10, 23, 4]
         let testOperators: [Operator] = [.add, .divide]
         var mockFormula = Formula(operands: createQueue(with: testOperands), operators: createQueue(with: testOperators))
-        var resultFormula = ExpressionParser.parse(from: "10+23/4")
+        var resultFormula = ExpressionParser.parse(from: "10+23÷4")
         XCTAssertTrue(isSameFormula(formula: &resultFormula, otherFormula: &mockFormula))
     }
     
@@ -21,7 +21,7 @@ class ExpressionParserTests: XCTestCase {
         let testOperands: [Double] = [10, 23, 4]
         let testOperators: [Operator] = [.add, .divide, .subtract, .multiply]
         var mockFormula = Formula(operands: createQueue(with: testOperands), operators: createQueue(with: testOperators))
-        var resultFormula = ExpressionParser.parse(from: "10+23/4-*")
+        var resultFormula = ExpressionParser.parse(from: "10+23÷4−𝗑")
         XCTAssertTrue(isSameFormula(formula: &resultFormula, otherFormula: &mockFormula))
     }
     
@@ -29,7 +29,7 @@ class ExpressionParserTests: XCTestCase {
         let testOperands: [Double] = []
         let testOperators: [Operator] = [.add, .divide, .subtract, .multiply]
         var mockFormula = Formula(operands: createQueue(with: testOperands), operators: createQueue(with: testOperators))
-        var resultFormula = ExpressionParser.parse(from: "+/-*")
+        var resultFormula = ExpressionParser.parse(from: "+÷−𝗑")
         XCTAssertTrue(isSameFormula(formula: &resultFormula, otherFormula: &mockFormula))
     }
     

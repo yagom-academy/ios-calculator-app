@@ -15,6 +15,7 @@ class CalculatorViewController: UIViewController {
     private var isPositiveOperand = true
     private var currentOperand = ""
     private var currentOperator = ""
+    private var historyStack: [String] = []
     private var isZero: Bool {
         return currentOperand == "0"
     }
@@ -45,14 +46,30 @@ class CalculatorViewController: UIViewController {
             return
         }
         updateHistoryStackView(with: currentOperator, and: currentOperand)
+        historyStack.append(contentsOf: [currentOperator, currentOperand])
         currentOperator = operatorPressedString
         update(label: currentOperatorLabel, to: currentOperator)
         resetCurrentOperand()
     }
     
+    @IBAction func calculateButtonPressed(_ sender: Any) {
+        updateHistoryStackView(with: currentOperator, and: currentOperand)
+        historyStack.append(contentsOf: [currentOperator, currentOperand])
+        let equationString = historyStack.filter { $0 != "" }.joined()
+        var formula = ExpressionParser.parse(from: equationString)
+        let result = formula.result()
+        currentOperand = String(result)
+        historyStack.removeAll()
+        currentOperator = ""
+        removeFormulaStackViews()
+        update(label: currentOperandLabel, to: currentOperand)
+        update(label: currentOperatorLabel, to: currentOperator)
+    }
+    
     @IBAction func acButtonPressed(_ sender: Any) {
         removeFormulaStackViews()
         resetCurrentOperand()
+        historyStack.removeAll()
     }
     
     @IBAction func ceButtonPressed(_ sender: Any) {
