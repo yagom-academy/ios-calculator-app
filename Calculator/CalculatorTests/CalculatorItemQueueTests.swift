@@ -46,8 +46,14 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operators.enqueue(.add)
         formula.operators.enqueue(.multiply)
-        let result = try! formula.operators.dequeue()
-        XCTAssertEqual(result, .add)
+        do {
+            let result = try formula.operators.dequeue()
+            XCTAssertEqual(result, .add)
+        } catch CalculatorError.emptyQueue {
+            print("dequeue를 할 수 없음")
+        } catch {
+            print(error)
+        }
     }
     
     func test_숫자_inbox에_123추가() {
@@ -67,8 +73,14 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(123)
         formula.operands.enqueue(124)
-        let result = try! formula.operands.dequeue()
-        XCTAssertEqual(result, 123)
+        do {
+            let result = try formula.operands.dequeue()
+            XCTAssertEqual(result, 123)
+        } catch CalculatorError.emptyQueue {
+            print("dequeue를 할 수 없음")
+        } catch {
+            print(error)
+        }
     }
     
     func test_숫자_inbox에_1_dot_23_추가() {
@@ -88,8 +100,14 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(1.23)
         formula.operands.enqueue(1.24)
-        let result = try! formula.operands.dequeue()
-        XCTAssertEqual(result, 1.23)
+        do {
+            let result = try formula.operands.dequeue()
+            XCTAssertEqual(result, 1.23)
+        } catch CalculatorError.emptyQueue {
+            print("dequeue를 할 수 없음")
+        } catch {
+            print(error)
+        }
     }
     
     func test_숫자_inbox에_1_dot_23_124_추가() {
@@ -103,8 +121,14 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(123)
         formula.operands.enqueue(1.24)
-        let result = try! formula.operands.dequeue()
-        XCTAssertEqual(result, 123)
+        do {
+            let result = try formula.operands.dequeue()
+            XCTAssertEqual(result, 123)
+        } catch CalculatorError.emptyQueue {
+            print("dequeue를 할 수 없음")
+        } catch {
+            print(error)
+        }
     }
     
     func test_숫자_inbox에_음수_1_dot_23_124_추가() {
@@ -118,8 +142,14 @@ class CalculatorItemQueueTests: XCTestCase {
         var formula = Formula()
         formula.operands.enqueue(-123)
         formula.operands.enqueue(1.24)
-        let result = try! formula.operands.dequeue()
-        XCTAssertEqual(result, -123)
+        do {
+            let result = try formula.operands.dequeue()
+            XCTAssertEqual(result, -123)
+        } catch CalculatorError.emptyQueue {
+            print("dequeue를 할 수 없음")
+        } catch {
+            print(error)
+        }
     }
     
     func test_연산자_queue가_비어있을때_dequeue시_Error_Throw() {
