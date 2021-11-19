@@ -75,12 +75,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickDoubleZero(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let point = sender.titleLabel?.text else {
+        guard let numberOfLabel = numberCompositionLabel.text, let doubleZero = sender.titleLabel?.text else {
             return
         }
                
         if numberOfLabel.isZeroValue == false {
-            numberCompositionLabel.text = numberOfLabel + point
+            numberCompositionLabel.text = numberOfLabel + doubleZero
         }
     }
     
