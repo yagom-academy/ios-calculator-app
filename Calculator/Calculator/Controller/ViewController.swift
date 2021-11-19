@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet private weak var formulaScrollView: UIScrollView!
     @IBOutlet private weak var verticalStackView: UIStackView!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentOperandLabel: UILabel!
@@ -67,6 +68,7 @@ extension ViewController: CalculatorDelegate {
                                     operand: operandLabel)
         
         verticalStackView.addArrangedSubview(horizontalStackView)
+        scrollToBottom()
     }
     func updateOperatorLabel(with operator: String) {
         currentOperatorLabel.text = `operator`
@@ -103,5 +105,16 @@ private extension ViewController {
         horizontal.spacing = defaultSpacing
         
         return horizontal
+    }
+}
+
+// MARK:- Scroll View Related
+extension ViewController {
+    private func scrollToBottom() {
+        formulaScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0,
+                                   y: formulaScrollView.contentSize.height -
+                                    formulaScrollView.frame.height)
+        formulaScrollView.setContentOffset(bottomOffset, animated: false)
     }
 }
