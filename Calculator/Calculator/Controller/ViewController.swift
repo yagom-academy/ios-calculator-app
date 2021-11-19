@@ -25,6 +25,10 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber.value
     }
     
+    @IBAction func touchToggleSignButton(_ sender: UIButton) {
+        inputNumber.toggleSign()
+        numberLabel.text = inputNumber.value
+    }
     
 }
 
