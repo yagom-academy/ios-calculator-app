@@ -126,13 +126,21 @@ class CalculatorViewController: UIViewController {
         var formula = ExpressionParser.parse(from: entireStringFormula)
         do {
             let result = try formula.result()
-            inputNumLabel.text = String(result)
+            checkResultIsNaN(from: result)
             inputOperatorLabel.text = initialStringValue
             entireStringFormula = initialStringValue
         } catch CalculatorError.emptyQueue {
             return
         } catch {
             print(error)
+        }
+    }
+    
+    func checkResultIsNaN(from result: Double) {
+        if result.isNaN {
+            inputNumLabel.text = "NaN"
+        } else {
+            inputNumLabel.text = String(result)
         }
     }
     
