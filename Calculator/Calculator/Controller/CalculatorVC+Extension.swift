@@ -18,4 +18,13 @@ extension CalculatorViewController {
         return operatorLabel
     }
     
+    var operandsLabel: UILabel {
+        let operandsLabel = UILabel()
+        operandsLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandsLabel.textColor = .white
+        operandsLabel.text = inputNumLabel.text
+        
+        return operandsLabel
+    }
+    
 }
