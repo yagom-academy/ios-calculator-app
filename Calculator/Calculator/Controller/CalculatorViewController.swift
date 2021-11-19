@@ -18,25 +18,18 @@ class CalculatorViewController: UIViewController {
     private var operandText = ""
     private var operatorText = ""
     
-    private func makeNumberFormat() {
-        numberFormatter.roundingMode = .ceiling
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-    }
-    
-    private func addCountingHistory() {
-        if operandText == "" {
-            return
-        } else {
-            countingHistory = operatorText + " " + operandText
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         makeNumberFormat()
     }
     
+    private func makeNumberFormat() {
+        numberFormatter.roundingMode = .ceiling
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+    }
+        
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if operandLabel?.text == "0"  {
             operandText = sender.currentTitle ?? "0"
@@ -85,6 +78,32 @@ class CalculatorViewController: UIViewController {
         scrollToBottom()
     }
     
+    private func addCountingHistory() {
+        if operandText == "" {
+            return
+        } else {
+            countingHistory = operatorText + " " + operandText
+        }
+    }
+    
+    private func addScrollViewLabel() {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.text = countingHistory
+        countingHistoryStackView?.addArrangedSubview(label)
+        
+        UIView.animate(withDuration: 0.3) {
+            label.isHidden = false
+        }
+    }
+    
+    private func scrollToBottom() {
+        countingHistoryScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
+        countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
+    }
+    
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
         if operandText.hasPrefix("−") {
             operandText.removeFirst()
@@ -102,6 +121,14 @@ class CalculatorViewController: UIViewController {
         operatorLabel?.text = ""
         operandLabel?.text = "0"
         removeScrollViewLabel()
+    }
+    
+    private func removeScrollViewLabel() {
+        let subviews = countingHistoryStackView?.arrangedSubviews
+        
+        subviews?.forEach({ subview in
+            subview.removeFromSuperview()
+        })
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
@@ -126,32 +153,6 @@ class CalculatorViewController: UIViewController {
         } catch {
             showAlert(message: "예상치 못한 오류입니다.")
         }
-    }
-    
-    private func addScrollViewLabel() {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        label.text = countingHistory
-        countingHistoryStackView?.addArrangedSubview(label)
-        
-        UIView.animate(withDuration: 0.3) {
-            label.isHidden = false
-        }
-    }
-    
-    private func removeScrollViewLabel() {
-        let subviews = countingHistoryStackView?.arrangedSubviews
-        
-        subviews?.forEach({ subview in
-            subview.removeFromSuperview()
-        })
-    }
-    
-    private func scrollToBottom() {
-        countingHistoryScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
-        countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
     }
     
     private func showAlert(message: String) {
