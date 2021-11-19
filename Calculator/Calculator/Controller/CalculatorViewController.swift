@@ -8,20 +8,31 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    // MARK: view lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // MARK: property
+    // MARK: private property
     
-    let currentLabelValue = CurrentLabelValue.shared
+    private let currentLabelValue = CurrentLabelValue.shared
     
-    @IBOutlet weak var operandLabel: OperandLabel!
-    @IBOutlet weak var operatorLabel: OperatorLabel!
+    private var expressionWrapper: String = ""
     
-    @IBOutlet weak var expressionView: UIStackView!
+    // MARK: private outlet property
     
-    var numberFormatter: Formatter {
+    @IBOutlet private weak var operandLabel: OperandLabel!
+    @IBOutlet private weak var operatorLabel: OperatorLabel!
+    
+    @IBOutlet private weak var expressionView: UIStackView!
+    
+}
+
+// MARK: - private computed property
+
+extension CalculatorViewController {
+    private var numberFormatter: Formatter {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
@@ -31,8 +42,6 @@ class CalculatorViewController: UIViewController {
         
         return numberFormatter
     }
-    
-    var expressionWrapper: String = ""
 }
  
 // MARK: - private action method
@@ -78,7 +87,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func clickAllClear(_ sender: UIButton) {
-        expressionWrapperInit()
+        initExpressionWrapper()
         
         removeExpressionView()
         operandLabel.text = operandLabel.defaultValue
@@ -120,26 +129,30 @@ extension CalculatorViewController {
 // MARK: - private method
 
 extension CalculatorViewController {
-    private func removeExpressionView() {
-        expressionView.subviews.forEach{ $0.removeFromSuperview() }
-    }
-    
     private func createStackViewToAdd(signValue: String?, numberValue: String) -> UIStackView {
         let expressionStackView = ExpressionStackView()
         
         expressionStackView.signLabel.text = signValue
         expressionStackView.numberLabel.text = numberValue
         
+        setValueToExpressionWrapper(signValue, numberValue)
+        
+        return expressionStackView
+    }
+    
+    private func removeExpressionView() {
+        expressionView.subviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func setValueToExpressionWrapper(_ signValue: String?, _ numberValue: String) {
         if let signValue = signValue {
             expressionWrapper += signValue + numberValue
         } else {
             expressionWrapper += numberValue
         }
-        
-        return expressionStackView
     }
     
-    private func expressionWrapperInit() {
+    private func initExpressionWrapper() {
         expressionWrapper = ""
     }
     
@@ -147,31 +160,12 @@ extension CalculatorViewController {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
     
-    func calculateFormula() -> String? {
+    private func calculateFormula() -> String? {
         var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
         let calculatedValue: Decimal = Decimal(formula.result())
         
-        expressionWrapperInit()
+        initExpressionWrapper()
         
         return numberFormatter.string(for: calculatedValue)
-    }
-}
-
-//signleton
-
-class CurrentLabelValue {
-    
-    var operand: String
-    var `operator`: String
-    
-    static var shared: CurrentLabelValue = {
-        let instance = CurrentLabelValue()
-        
-        return instance
-    }()
-    
-    private init() {
-        operand = ""
-        `operator` = ""
     }
 }
