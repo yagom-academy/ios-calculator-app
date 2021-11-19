@@ -11,6 +11,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var inputNumLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet weak var formulaStackView: UIStackView!
+    @IBOutlet weak var calculatorScrollView: UIScrollView!
     
     private var entireStringFormula: String = ""
     private let negativeSign = "-"
@@ -103,6 +104,7 @@ class CalculatorViewController: UIViewController {
         let newFormulaStack = createFormulaStack()
         formulaStackView.addArrangedSubview(newFormulaStack)
         addStringFormula()
+        scrollToBottom(calculatorScrollView)
     }
     
     private func addStringFormula() {
