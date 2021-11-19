@@ -48,7 +48,6 @@ extension ExpressionStackView {
     
     private func setConstraint() {
         NSLayoutConstraint.activate([
-            numberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             signLabel.trailingAnchor.constraint(equalTo: numberLabel.leadingAnchor, constant: -10)
         ])
     }

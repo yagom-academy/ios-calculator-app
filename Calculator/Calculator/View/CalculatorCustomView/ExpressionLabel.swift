@@ -27,5 +27,6 @@ class ExpressionLabel: UILabel {
 extension ExpressionLabel {
     private func commonInit() {
         self.textColor = .white
+        self.font = UIFont.systemFont(ofSize: 20)
     }
 }
