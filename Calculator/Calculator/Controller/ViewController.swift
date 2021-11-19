@@ -6,6 +6,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var mainStackView: UIStackView!
     
+    var inputString: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         inputLabel.text = "0"
@@ -53,6 +55,9 @@ class ViewController: UIViewController {
                 inputLabel.text = "0"
             }
         }
+        
+        inputString.append(newInput)
+        print(inputString)
 
     }
     
@@ -61,6 +66,7 @@ class ViewController: UIViewController {
         guard inputLabel.text != "0" else { return }
         guard inputLabel.text?.isEmpty == false else {return}
         makeSmallStackView()
+        inputString.append(`operator`)
         inputLabel.text = ""
         operatorLabel.text = `operator`
     }
@@ -68,6 +74,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpACButton(_ sender: UIButton) {
         inputLabel.text = "0"
         operatorLabel.text = ""
+        inputString = ""
         for i in mainStackView.arrangedSubviews {
             mainStackView.removeArrangedSubview(i)
             i.removeFromSuperview()
@@ -95,9 +102,22 @@ class ViewController: UIViewController {
         guard let newInput = sender.currentTitle, let currentInput = inputLabel.text else {return}
         
         inputLabel.text = currentInput + newInput
+        inputString.append(newInput)
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
+        guard inputLabel.text != "0" else { return }
+        guard inputLabel.text?.isEmpty == false else {return}
+        makeSmallStackView()
+        
+        var formula: Formula = ExpressionParser.parse(from: inputString)
+        print(inputString)
+        print(formula.operands)
+        print(formula.operators)
+        let result = formula.result()
+        print(result)
+        inputLabel.text = result.description
+        operatorLabel.text = ""
         
     }
 
