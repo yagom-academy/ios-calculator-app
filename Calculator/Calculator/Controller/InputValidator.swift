@@ -33,7 +33,11 @@ class InputValidator {
         self.state = state
     }
     
-    func toggleSignValidity() -> Bool {
+    func convertedOperand(from digit: String) -> String {
+        isZero ? digit : state.operand + digit
+    }
+    
+    var toggleSignValidity: Bool {
         if isZero {
             return false
         } else if state.operand.hasSuffix("."),
@@ -46,22 +50,19 @@ class InputValidator {
         }
         return true
     }
-    func maintainInputValidity() -> Bool {
+    var maintainInputValidity: Bool {
         !isShowingResult
     }
-    func appendFormulaValidity() -> Bool {
+    var appendFormulaValidity: Bool {
         !isShowingResult && !isZero && !isFirstFormula
     }
-    func convertedOperand(from digit: String) -> String {
-        isZero ? digit : state.operand + digit
-    }
-    func zeroValidity() -> Bool {
+    var zeroValidity: Bool {
         !isZero
     }
-    func dotValidity() -> Bool {
+    var dotValidity: Bool {
         !isDotted
     }
-    func equalsValidity() -> Bool {
+    var equalsValidity: Bool {
         !isShowingResult && !hasNoOperator
     }
 }

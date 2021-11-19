@@ -63,24 +63,24 @@ extension Calculator {
         currentOperand.toZero()
     }
     func toggleSignButtonDidTap() {
-        guard validator.toggleSignValidity() else { return }
+        guard validator.toggleSignValidity else { return }
         isPositive.toggle()
     }
     func operatorButtonDidTap(operator: String) {
         let (formerOperator, formerOperandWithSign) = (currentOperator,
                                                        currentOperandWithSign)
-        guard validator.maintainInputValidity() else {
+        guard validator.maintainInputValidity else {
             toInitialState()
             operatorButtonDidTap(operator: `operator`)
             return
         }
         replaceOperator(with: `operator`)
-        guard validator.appendFormulaValidity() else { return }
+        guard validator.appendFormulaValidity else { return }
         formulaStack.append((formerOperator, formerOperandWithSign))
         emptyOperand()
     }
     func equalsButtonDidTap() {
-        guard validator.equalsValidity(),
+        guard validator.equalsValidity,
               let result = formattedResult() else { return }
         formulaStack.append((currentOperator, currentOperandWithSign))
         replaceOperator(with: "")
@@ -88,34 +88,34 @@ extension Calculator {
         isShowingResult = true
     }
     func dotButtonDidTap() {
-        guard validator.maintainInputValidity() else {
+        guard validator.maintainInputValidity else {
             toInitialState()
             dotButtonDidTap()
             return
         }
-        guard validator.dotValidity() else { return }
+        guard validator.dotValidity else { return }
         currentOperand.append(".")
     }
     func zeroButtonDidTap() {
-        guard validator.maintainInputValidity() else {
+        guard validator.maintainInputValidity else {
             toInitialState()
             zeroButtonDidTap()
             return
         }
-        guard validator.zeroValidity() else { return }
+        guard validator.zeroValidity else { return }
         currentOperand.append("0")
     }
     func doubleZeroButtonDidTap() {
-        guard validator.maintainInputValidity() else {
+        guard validator.maintainInputValidity else {
             toInitialState()
             doubleZeroButtonDidTap()
             return
         }
-        guard validator.zeroValidity() else { return }
+        guard validator.zeroValidity else { return }
         currentOperand.append("00")
     }
     func digitButtonDidTap(number: String) {
-        guard validator.maintainInputValidity() else {
+        guard validator.maintainInputValidity else {
             toInitialState()
             digitButtonDidTap(number: number)
             return
