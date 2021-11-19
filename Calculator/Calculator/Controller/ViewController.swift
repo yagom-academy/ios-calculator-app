@@ -55,11 +55,12 @@ class ViewController: UIViewController {
         if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      // 피연산자가 소수아닌데 첫글자 0일때 현재입력숫자로 교체
             inputOperandValues.removeFirst()
         }
+        let addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
         
         if signIsPositive {
-            currentValue.text = inputOperandValues.joined()
+            currentValue.text = addcommaOperand
         } else {
-            currentValue.text = "-" + inputOperandValues.joined()
+            currentValue.text = "-" + addcommaOperand
         }
         isOperatorEnterd = false
         
@@ -128,9 +129,6 @@ class ViewController: UIViewController {
             currentValue.text = "NaN"
         } else {
             resetToInitialState()
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-        
             currentValue.text = addCommaToValue(doubleTypeResult)
         }
     }
