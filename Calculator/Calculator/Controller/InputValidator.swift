@@ -9,9 +9,9 @@ import Foundation
 
 class InputValidator {
     typealias CalculatorState = (operator: String,
-                                  operand: String,
-                                  isShowingResult: Bool,
-                                  formulaStack: [(String, String)])
+                                 operand: String,
+                                 isShowingResult: Bool,
+                                 formulaStack: [(String, String)])
     private var state: CalculatorState
     
     init(state: CalculatorState) {

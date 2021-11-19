@@ -68,7 +68,7 @@ extension Calculator {
     }
     func operatorButtonDidTap(operator: String) {
         let (formerOperator, formerOperandWithSign) = (currentOperator,
-                                                      currentOperandWithSign)
+                                                       currentOperandWithSign)
         guard validator.maintainInputValidity() else {
             toInitialState()
             operatorButtonDidTap(operator: `operator`)
