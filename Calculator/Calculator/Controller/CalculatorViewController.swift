@@ -20,12 +20,17 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initailizeLabel()
+        initializeFormulaStackView()
 
     }
     
     func initailizeLabel() {
         inputNumLabel.text = initialNumLabel
         inputOperatorLabel.text = initialStringValue
+    }
+    
+    func initializeFormulaStackView() {
+        formulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 
 
