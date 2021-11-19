@@ -65,6 +65,22 @@ class CalculatorViewController: UIViewController {
     }
     
     // MARK: - 연산자 버튼 입력
+    @IBAction func tapOperatorBtn(_ sender: UIButton) {
+        guard let currentNumLabel = inputNumLabel.text,
+            let inputOperator = sender.currentTitle else { return }
+
+        if formulaStackView.arrangedSubviews.count == 0, currentNumLabel == initialNumLabel {
+            inputOperatorLabel.text = initialStringValue
+        } else if currentNumLabel == initialNumLabel {
+            changeOperatorLabel(with: inputOperator)
+        } else {
+            addFormulaStackView()
+            changeOperatorLabel(with: inputOperator)
+            inputNumLabel.text = initialNumLabel
+        }
+    }
+    
+    
 
 }
 
