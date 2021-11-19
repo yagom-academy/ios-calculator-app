@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     @IBOutlet private weak var calculationHistoryStackView: UIStackView!
@@ -151,7 +151,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - IBAction Methods
-extension ViewController {
+extension CalculatorViewController {
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
         if isCalculated {
             resetToInitialState()
