@@ -96,6 +96,13 @@ class Number_Tests: XCTestCase {
         XCTAssertFalse(fakeLabel.contains("-"))
     }
     
+    func test_value가_20자리일때_value는_변하지않는다() {
+        let testNum = Number(value: "12345678901234567890", isBiggerThan0: true)
+        testNum.updateValue(with: "1")
+        XCTAssertEqual(testNum.value, "12345678901234567890")
+        
+    }
+    
     //MARK:- formmater Tests
     func test_value가_1000000일때_formmater를_호출하면_3자리마다_콤마가추가된다() {
         let testNum = Number(value: "1000000" , isBiggerThan0: true)
