@@ -50,7 +50,7 @@ class CalculatorViewController: UIViewController {
         if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
         
         if currentInputOperand == LabelContents.defaultOperand {
-            currentInputOperand = number
+            updateCurrentInput(operandForm: number, operatorForm: currentInputOperator)
             return
         }
         
@@ -99,7 +99,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchClearEntryButton(_ sender: UIButton) {
         if isEvaluated == false {
-            updateCurrentInput(operandForm: LabelContents.defaultOperand, operatorForm: currentInputOperator)
+            updateCurrentInput(operatorForm: currentInputOperator)
             return
         }
         
