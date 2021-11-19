@@ -38,11 +38,24 @@ class ViewController: UIViewController {
         }
     }
     
+    private var hasCalculated = false
+    
     private var isNotZero: Bool {
         currentOperand != "0"
     }
     
-    private var hasCalculated = false
+    private var isNotCalculated: Bool {
+        hasCalculated == false
+    }
+    
+    private var hasDotNotIncluded: Bool {
+        currentOperand.contains(".") == false
+    }
+    
+    private var hasMinusNotIncluded: Bool {
+        currentOperand.contains("-") == false
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +74,8 @@ class ViewController: UIViewController {
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard let newOperand = sender.titleLabel?.text,
-              hasCalculated == false,
-              isNotZero || newOperand != "00" else {
+        guard let newOperand = sender.titleLabel?.text, isNotCalculated,
+                isNotZero || newOperand != "00" else {
             return
         }
         guard isNotZero else {
@@ -81,7 +93,7 @@ extension ViewController {
               let newOperator = sender.titleLabel?.text else {
             return
         }
-        guard hasCalculated == false else {
+        guard isNotCalculated else {
             startNewCalculation()
             updateCurrentLabel(newOperator)
             return
@@ -99,9 +111,11 @@ extension ViewController {
         guard isNotZero || currentOperand != "" else {
             return
         }
-        if hasCalculated {
+        guard isNotCalculated else {
             hasCalculated = false
             removeFormulaView()
+            removeFormulaLabel()
+            return
         }
         currentOperand = "0"
     }
@@ -113,8 +127,7 @@ extension ViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        let hasDotNotIncluded = currentOperand.contains(".") == false
-        guard hasCalculated == false, hasDotNotIncluded,
+        guard isNotCalculated, hasDotNotIncluded,
               let newOperand = sender.titleLabel?.text else {
             return
         }
@@ -122,10 +135,9 @@ extension ViewController {
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
-        guard hasCalculated == false, isNotZero else {
+        guard isNotCalculated, isNotZero else {
             return
         }
-        let hasMinusNotIncluded = currentOperand.contains("-") == false
         guard hasMinusNotIncluded else {
             currentOperand.remove(at: currentOperand.startIndex)
             return
@@ -134,7 +146,7 @@ extension ViewController {
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
-        guard hasCalculated == false else {
+        guard isNotCalculated else {
             return
         }
         addCurrentFormulaStack()
