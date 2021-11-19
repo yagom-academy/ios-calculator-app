@@ -25,7 +25,7 @@ class CalculatorViewController: UIViewController {
     
     
     @IBAction func clickAC(_ sender: UIButton) {
-        removeExpression()
+        removeExpressionView()
         setZeroInNumberLabel()
         
         expressionController?.expressionWrapperInit()
@@ -36,10 +36,10 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        removeExpression()
-        operatorSettingLabel.text = ""
-        
         let formulaResult = expressionController?.calculate(expression: operatorOfButton +  numberOfLabel)
+        
+        removeExpressionView()
+        setNilInOperatorLabel()
         numberCompositionLabel.text = formulaResult
     }
     
@@ -113,11 +113,15 @@ class CalculatorViewController: UIViewController {
 // MARK: - private method
 
 extension CalculatorViewController {
-    private func removeExpression() {
+    private func removeExpressionView() {
         expressionView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
     private func setZeroInNumberLabel() {
         numberCompositionLabel.text = "0"
+    }
+    
+    private func setNilInOperatorLabel() {
+        operatorSettingLabel.text = nil
     }
 }
