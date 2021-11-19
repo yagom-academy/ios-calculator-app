@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var formulaHistoryScrollView: UIScrollView!
     @IBOutlet weak var formulaHistoryStackView: UIStackView!
     @IBOutlet weak var currentInputOperandLabel: UILabel!
     @IBOutlet weak var currentInputOperatorLabel: UILabel!
@@ -56,9 +57,9 @@ class ViewController: UIViewController {
     }
     
     func removeAllFormulaHistory() {
-        while let last = formulaHistoryStackView.arrangedSubviews.last {
-            last.removeFromSuperview()
-        }
+        formulaHistoryStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in
+            view.removeFromSuperview()
+        })
     }
     
     func resetExpression() {
@@ -73,8 +74,17 @@ class ViewController: UIViewController {
         
         if isEvaluated { return }
         
+        if number == LabelContents.pointSymbole && currentInputOperand.firstIndex(of: Character(LabelContents.pointSymbole)) != nil { return }
+        
+        if number == LabelContents.pointSymbole && currentInputOperand == LabelContents.defaultOperand {
+            currentInputOperand += number
+            return
+        }
+        
+        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
+        
         if currentInputOperand == LabelContents.defaultOperand {
-           currentInputOperand = number
+            currentInputOperand = number
             return
         }
         
@@ -129,6 +139,7 @@ class ViewController: UIViewController {
         }
         
         resetExpression()
+        removeAllFormulaHistory()
         isEvaluated = false
     }
     
@@ -158,6 +169,8 @@ class ViewController: UIViewController {
         static let emptyString = ""
         static let defaultOperand = "0"
         static let minusSignSymbole = "-"
+        static let pointSymbole = "."
+        static let doubleZero = "00"
     }
 }
 
