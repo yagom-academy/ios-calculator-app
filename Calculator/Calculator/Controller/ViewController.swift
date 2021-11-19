@@ -40,14 +40,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard let currentOperator = sender.currentTitle,
-              let currentOperands = operandsLabel.text else {
+        guard let newOperator = sender.currentTitle,
+              let currentOperands = operandsLabel.text,
+              let currentOperator = operatorLabel.text else {
             return
         }
-        configureFormulaStackView(operands: currentOperands, operator: currentOperator)
-        operatorLabel.text = currentOperator
+        if operatorLabel.text == "" {
+            configureFormulaStackView(operands: currentOperands, operator: "")
+        } else {
+            configureFormulaStackView(operands: currentOperands, operator: currentOperator)
+        }
+        operatorLabel.text = newOperator
         operandsLabel.text = "0"
-        appendInputToFormula()
+        formulaString += currentOperands + newOperator
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
@@ -73,6 +78,7 @@ class ViewController: UIViewController {
         formulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandsLabel.text = "0"
         operatorLabel.text = ""
+        formulaString = ""
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
@@ -87,9 +93,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func euqualButtonTapped(_ sender: UIButton) {
+        guard let currentOperands = operandsLabel.text,
+              let currentOperator = operatorLabel.text else {
+                  return
+              }
+        
+        operatorLabel.text = ""
         do {
-            var formula = ExpressionParser.parse(from: formulaString)
+            let input = formulaString + operandsLabel.text!
+            var formula = ExpressionParser.parse(from: input)
+            
             operandsLabel.text = String(try formula.result())
+            configureFormulaStackView(operands: currentOperands, operator: currentOperator)
         } catch CalculatorError.divideByZero {
             operandsLabel.text = "NAN"
         } catch {
