@@ -80,6 +80,9 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    func changeOperatorLabel(with input: String) {
+        inputOperatorLabel.text = input
+    }
     
 
 }
