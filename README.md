@@ -9,6 +9,8 @@
   - [고민된 점 및 해결 방법](#2-고민된-점-및-해결-방법)
 - [Step 3](#step-3)
   - [고민된 점 및 해결 방법](#1-고민된-점-및-해결-방법) 	
+- [학습 키워드](#학습-키워드)
+
 
 ## Step 1 
 
@@ -129,3 +131,19 @@ while  operands.items.count  >  0  &&  operators.items.count  >  0 {
 
 위와 같은 내용에 기반하여 view의 변화가 즉각적인 반영이 필요하기에 `layoutIfNeeded`
 를 사용했습니다!
+
+
+---
+
+# 학습 키워드 
+
+- UML
+- LinkedList
+- TDD
+- 부동소수점
+- NumberFormatter
+- Decimal, NSDecimalNumber
+- ScrollView 
+- StackView
+- Custom Class
+- layoutIfNeeded, setNeedsLayout
