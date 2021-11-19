@@ -112,21 +112,11 @@ class CalculatorViewController: UIViewController {
 // MARK: - private method
 
 extension CalculatorViewController {
-    
-
-    // stackView 지우기
     private func removeExpression() {
         expressionView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
-    // ViewController단 numberLabel = 0 으로 만들기
     private func setZeroInNumberLabel() {
         numberCompositionLabel.text = "0"
     }
-    
-    // numberLabel 값 기호 바꾸기
-    private func changeNumberSign(numberValue: String) -> String {
-        return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
-    }
-
 }

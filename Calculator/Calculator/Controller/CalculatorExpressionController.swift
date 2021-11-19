@@ -32,4 +32,8 @@ struct CalculatorExpressionController {
         
         return expressionStackView
     }
+    
+    func changeNumberSign(numberValue: String) -> String {
+        return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
+    }
 }
