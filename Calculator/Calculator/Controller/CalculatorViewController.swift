@@ -75,13 +75,17 @@ class CalculatorViewController: UIViewController {
             textInput.removeLast()
         }
         
-        operatorText = sender.currentTitle ?? "0"
-        textInput += operatorText
-        operatorLabel?.text = operatorText
+        changeLabelText(into: &operatorText, at: sender)
         operandText = ""
         operandLabel?.text = "0"
         
         scrollToBottom()
+    }
+    
+    private func changeLabelText(into text: inout String, at sender: UIButton) {
+        text = sender.currentTitle ?? "0"
+        textInput += text
+        operatorLabel?.text = text
     }
     
     private func addCountingHistory() {
