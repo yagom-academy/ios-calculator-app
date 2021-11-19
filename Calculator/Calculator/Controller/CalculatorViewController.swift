@@ -26,7 +26,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: OperatorLabel!
     
     @IBOutlet private weak var expressionView: UIStackView!
-    
 }
 
 // MARK: - private computed property
@@ -70,6 +69,7 @@ extension CalculatorViewController {
         }
         
         let stackView = createStackViewToAdd(signValue: currentLabelValue.operator, numberValue: currentLabelValue.operand)
+        
         expressionView.addArrangedSubview(stackView)
         
         operatorLabel.text = operatorOfButton
@@ -77,7 +77,6 @@ extension CalculatorViewController {
     }
     
     @IBAction private func clickEqual(_ sender: UIButton) {
-        
         let stackView = createStackViewToAdd(signValue: currentLabelValue.operator, numberValue: currentLabelValue.operand)
         
         expressionView.addArrangedSubview(stackView)

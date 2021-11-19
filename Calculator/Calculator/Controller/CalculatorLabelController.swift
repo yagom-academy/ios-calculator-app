@@ -9,14 +9,20 @@ import Foundation
 
 class CurrentLabelValue {
     
-    var operand: String
-    var `operator`: String
+    // MARK: static property
     
     static var shared: CurrentLabelValue = {
         let instance = CurrentLabelValue()
         
         return instance
     }()
+    
+    // MARK: instance property
+    
+    var operand: String
+    var `operator`: String
+    
+    // MARK: init 
     
     private init() {
         operand = ""
