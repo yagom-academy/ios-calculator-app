@@ -13,7 +13,7 @@ enum CalculatorError: Error, LocalizedError {
     case wrongOperand
     case isNaN
     
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .queueNotFound:
             return "큐가 비어있습니다. 계산식을 추가해주세요."
@@ -25,7 +25,7 @@ enum CalculatorError: Error, LocalizedError {
             return "알 수 없는 에러가 발생했습니다."
         }
     }
-    var localizedFailureReason: String? {
+    var failureReason: String? {
         switch self {
         case .isNaN:
             return "NaN"

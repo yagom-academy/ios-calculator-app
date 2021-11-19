@@ -157,15 +157,15 @@ extension ViewController {
         } catch let error as CalculatorError {
             switch error {
             case .isNaN:
-                currentOperand = error.localizedFailureReason ?? "NaN"
+                currentOperand = error.failureReason ?? "NaN"
                 hasCalculated = true
                 return
             case .queueNotFound:
-                print(error.localizedDescription)
+                print(error.errorDescription ?? error.localizedDescription)
                 removeFormulaView()
                 return
             default:
-                print(error.localizedDescription)
+                print(error.errorDescription ?? error.localizedDescription)
                 return
             }
         } catch let error {
