@@ -69,7 +69,6 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         addCountingHistory()
-        print(countingHistory)
         textInput += operandText
         guard let lastWord = textInput.last else {
             return
