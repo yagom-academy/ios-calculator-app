@@ -30,6 +30,14 @@ class ViewController: UIViewController {
     @IBAction func didDecimalPointButtonTap (sender: UIButton) {
     }
     @IBAction func didOperatorButtonTap (sender: UIButton) {
+        let buttonTitle = sender.currentTitle
+        inputOperator = buttonTitle ?? ""
+        if inputOperand != "0" {
+            inputOperationQueue += inputOperand
+            inputOperand = "0"
+        }
+        presentOperatorLable.text! = inputOperator
+        presentOperandLable.text! = "0"
     }
     @IBAction func didAllClearButtonTap (sender: UIButton) {
     }
