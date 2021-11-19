@@ -7,12 +7,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    var inputNumber = Number()
+    @IBOutlet var numberLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        numberLabel.text = inputNumber.value
     }
 
-
+    @IBAction func touchNumberButton(_ sender: UIButton) {
+        inputNumber.updateValue(with: sender.title(for: .normal)!)
+        numberLabel.text = inputNumber.value
+    }
+    
 }
 

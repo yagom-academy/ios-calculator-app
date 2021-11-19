@@ -29,11 +29,15 @@ class Number {
         
         if value == "0" && input == "." {
             value = "0."
+            return
         } else if value == "0" {
             value = input
         } else {
             value += input
         }
+        
+        let formattedNumber = self.formatter(value)
+        value = formattedNumber
     }
     
     func toggleSign() {
@@ -53,7 +57,8 @@ class Number {
     }
     
     func formatter(_ value: String) -> String {
-        guard let double = Double(value) else {
+        let withoutComma = value.filter { $0 != "," }
+        guard let double = Double(withoutComma) else {
             return "NaN"
         }
         let result = numberFormatter.string(from: NSNumber(value: double))
