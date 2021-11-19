@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         presentOperandLable.text! = "0"
     }
     @IBAction func didAllClearButtonTap (sender: UIButton) {
+        clearAllLableAndQueue()
     }
     @IBAction func didClearEntryButtonTap (sender: UIButton) {
     }
@@ -57,11 +58,15 @@ class ViewController: UIViewController {
 
         var formula = ExpressionParser.parse(from: inputOperationQueue)
         let result = String(formula.result())
-        presentOperandLable.text = result
-        presentOperatorLable.text = ""
         
+        clearAllLableAndQueue()
+        presentOperandLable.text = result
+    }
+    func clearAllLableAndQueue() {
         inputOperator = "0"
         inputOperand = "0"
         inputOperationQueue = ""
+        presentOperandLable.text = ""
+        presentOperatorLable.text = ""
     }
 }
