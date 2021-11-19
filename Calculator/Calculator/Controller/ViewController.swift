@@ -35,46 +35,6 @@ class ViewController: UIViewController {
         removeAllFormulaHistory()
     }
     
-    func addCurrentInputToFormulaHistory() {
-        let stackView = UIStackView()
-        stackView.spacing = 8.0
-        
-        let operatorSignLabelView = UILabel()
-        operatorSignLabelView.text = currentInputOperator
-        operatorSignLabelView.textColor = .white
-        
-        let operandLabelView = UILabel()
-        operandLabelView.text = currentInputOperand
-        operandLabelView.textColor = .white
-        
-        stackView.addArrangedSubview(operatorSignLabelView)
-        stackView.addArrangedSubview(operandLabelView)
-        
-        formulaHistoryStackView.addArrangedSubview(stackView)
-    }
-    
-    func removeAllFormulaHistory() {
-        formulaHistoryStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in
-            view.removeFromSuperview()
-        })
-    }
-    
-    func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
-        currentInputOperator = operatorForm
-        currentInputOperand = operandForm
-    }
-    
-    func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = currentInputOperand
-        currentInputOperatorLabel.text = currentInputOperator
-    }
-    
-    func resetExpression() {
-        updateCurrentInput()
-        mathExpression = []
-        isEvaluated = false
-    }
-    
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
         
@@ -166,6 +126,46 @@ class ViewController: UIViewController {
         } catch {
             print(error)
         }
+    }
+    
+    func addCurrentInputToFormulaHistory() {
+        let stackView = UIStackView()
+        stackView.spacing = 8.0
+        
+        let operatorSignLabelView = UILabel()
+        operatorSignLabelView.text = currentInputOperator
+        operatorSignLabelView.textColor = .white
+        
+        let operandLabelView = UILabel()
+        operandLabelView.text = currentInputOperand
+        operandLabelView.textColor = .white
+        
+        stackView.addArrangedSubview(operatorSignLabelView)
+        stackView.addArrangedSubview(operandLabelView)
+        
+        formulaHistoryStackView.addArrangedSubview(stackView)
+    }
+    
+    func removeAllFormulaHistory() {
+        formulaHistoryStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in
+            view.removeFromSuperview()
+        })
+    }
+    
+    func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
+        currentInputOperator = operatorForm
+        currentInputOperand = operandForm
+    }
+    
+    func updateCurrentInputLabel() {
+        currentInputOperandLabel.text = currentInputOperand
+        currentInputOperatorLabel.text = currentInputOperator
+    }
+    
+    func resetExpression() {
+        updateCurrentInput()
+        mathExpression = []
+        isEvaluated = false
     }
     
     struct LabelContents {
