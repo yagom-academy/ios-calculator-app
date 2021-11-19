@@ -85,7 +85,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
+        guard let newInput = sender.currentTitle, let currentInput = inputLabel.text else {return}
         
+        inputLabel.text = currentInput + newInput
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
