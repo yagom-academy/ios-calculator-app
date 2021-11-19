@@ -14,6 +14,14 @@ class CalculatorViewController: UIViewController {
     
     private var isPositiveOperand = true
     
+    private var isZero: Bool {
+        return currentOperand == "0"
+    }
+    
+    private var isNotZero: Bool {
+        return currentOperand != "0"
+    }
+    
     private var currentOperand: String {
         get {
             guard let currentOperand = currentOperandLabel.text else {
@@ -48,7 +56,7 @@ class CalculatorViewController: UIViewController {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
-        if currentOperand == "0" {
+        if isZero {
             currentOperand = ""
         }
         currentOperand += numberPressedString
@@ -56,7 +64,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
         guard let operatorPressedString = sender.accessibilityIdentifier,
-              currentOperand != "0" else {
+              isNotZero else {
             return
         }
         updateHistoryStackView(with: currentOperator, and: currentOperand)
@@ -74,12 +82,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonPressed(_ sender: Any) {
-        isPositiveOperand.toggle()
-        if isPositiveOperand {
-            currentOperand = currentOperand.filter { $0.isNumber }
-        } else {
-            currentOperand = "-" + currentOperand
+        guard isNotZero else {
+            return
         }
+        isPositiveOperand.toggle()
+        toggleSignOfOperand()
     }
     
 }
@@ -137,7 +144,15 @@ extension CalculatorViewController {
     }
     
     private func resetCurrentOperand() {
-        self.currentOperand = "0"
+        currentOperand = "0"
+    }
+    
+    private func toggleSignOfOperand() {
+        if isPositiveOperand {
+            currentOperand = currentOperand.filter { $0.isNumber }
+        } else {
+            currentOperand = "-" + currentOperand
+        }
     }
 }
 
