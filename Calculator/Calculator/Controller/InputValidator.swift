@@ -12,20 +12,26 @@ class InputValidator {
                                   operand: String,
                                   isPositive: Bool,
                                   formulaStack: [(String, String)])
+    private var state: CalculatorState
     
-    private func isInitialState(_ state: CalculatorState) -> Bool {
+    init(state: CalculatorState) {
+        self.state = state
+    }
+    
+    private var isInitialState: Bool {
         state.operand == "0"
             && state.operator == ""
             && state.formulaStack.isEmpty
     }
-    private func isZero(_ state: CalculatorState) -> Bool {
-        state.operand == "0"
-    }
-    private func isDotted(_ state: CalculatorState) -> Bool { state.operand.contains(".")
+    private var isZero: Bool { state.operand == "0" }
+    private var isDotted: Bool { state.operand.contains(".") }
+    
+    func bind(with state: CalculatorState) {
+        self.state = state
     }
     
-    func toggleSignValidity(at state: CalculatorState) -> Bool {
-        if isZero(state) {
+    func toggleSignValidity() -> Bool {
+        if isZero {
             return false
         } else if state.operand.hasSuffix("."),
                   state.operand.first == "0" {
@@ -35,16 +41,16 @@ class InputValidator {
         }
         return true
     }
-    func appendFormulaValidity(at state: CalculatorState) -> Bool {
-        !isZero(state)
+    func appendFormulaValidity() -> Bool {
+        !isZero
     }
-    func convertedOperand(from digit: String, at state: CalculatorState) -> String {
-        isZero(state) ? digit : state.operand + digit
+    func convertedOperand(from digit: String) -> String {
+        isZero ? digit : state.operand + digit
     }
-    func zeroValidity(at state: CalculatorState) -> Bool {
-        !isZero(state)
+    func zeroValidity() -> Bool {
+        !isZero
     }
-    func dotValidity(at state: CalculatorState) -> Bool {
-        !isDotted(state)
+    func dotValidity() -> Bool {
+        !isDotted
     }
 }

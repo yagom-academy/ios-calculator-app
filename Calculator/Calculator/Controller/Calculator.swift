@@ -9,23 +9,29 @@ import Foundation
 
 class Calculator {
     var delegate: CalculatorDelegate?
-    private let validator = InputValidator()
+    private let validator = InputValidator(state: ("", "0", true, []))
     
     private var currentOperator = "" {
-        didSet { delegate?.updateOperatorLabel(with: currentOperator) }
+        didSet {
+            notifyCurrentState()
+            delegate?.updateOperatorLabel(with: currentOperator)
+        }
     }
     private var currentOperand = "0" {
         didSet {
+            notifyCurrentState()
             delegate?.updateOperandLabel(with: currentOperandWithSign)
         }
     }
     private var isPositive = true {
         didSet {
+            notifyCurrentState()
             delegate?.updateOperandLabel(with: currentOperandWithSign)
         }
     }
     private var formulaStack = [(operator: String, operand: String)]() {
         didSet {
+            notifyCurrentState()
             guard let latestFormula = formulaStack.last else {
                 delegate?.clearFormulaStack()
                 return
@@ -54,12 +60,12 @@ extension Calculator {
 
     }
     func toggleSignButtonDidTap() {
-        validator.toggleSignValidity(at: currentState) ?
+        validator.toggleSignValidity() ?
             isPositive.toggle() : ()
     }
     func operatorButtonDidTap(operator: String) {
         replaceOperator(with: `operator`)
-        guard validator.appendFormulaValidity(at: currentState) else { return }
+        guard validator.appendFormulaValidity() else { return }
         formulaStack.append((currentOperator, currentOperandWithSign))
         emptyOperand()
     }
@@ -67,20 +73,19 @@ extension Calculator {
         
     }
     func dotButtonDidTap() {
-        validator.dotValidity(at: currentState) ?
+        validator.dotValidity() ?
             currentOperand.append(".") : ()
     }
     func zeroButtonDidTap() {
-        validator.zeroValidity(at: currentState) ?
+        validator.zeroValidity() ?
             currentOperand.append("0") : ()
     }
     func doubleZeroButtonDidTap() {
-        validator.zeroValidity(at: currentState) ?
+        validator.zeroValidity() ?
             currentOperand.append("00") : ()
     }
     func digitButtonDidTap(number: String) {
-        currentOperand = validator.convertedOperand(from: number,
-                                                    at: currentState)
+        currentOperand = validator.convertedOperand(from: number)
     }
 }
 
@@ -98,6 +103,9 @@ private extension Calculator {
     func emptyOperand() {
         currentOperand.toZero()
         isPositive = true
+    }
+    func notifyCurrentState() {
+        validator.bind(with: currentState)
     }
 }
 
