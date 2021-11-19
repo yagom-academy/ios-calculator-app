@@ -13,6 +13,8 @@ class OperandLabel: UILabel {
             CurrentLabelValue.shared.operand = text ?? "0"
         }
     }
+    
+    let defaultValue = "0"
 }
 
 class OperatorLabel: UILabel {
@@ -21,6 +23,8 @@ class OperatorLabel: UILabel {
             CurrentLabelValue.shared.operator = text ?? ""
         }
     }
+    
+    let defaultValue = ""
 }
 
 class ExpressionStackView: UIStackView {

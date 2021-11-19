@@ -17,13 +17,13 @@ class CalculatorViewController: UIViewController {
     // MARK: property
     
     var expressionController: CalculatorExpressionController?
+    let currentLabelValue = CurrentLabelValue.shared
     
     @IBOutlet weak var operandLabel: OperandLabel!
     @IBOutlet weak var operatorLabel: OperatorLabel!
     
     @IBOutlet weak var expressionView: UIStackView!
     
-    let currentLabelValue = CurrentLabelValue.shared
 }
  
 // MARK: - private action method
@@ -34,7 +34,7 @@ extension CalculatorViewController {
             return
         }
     
-        if currentLabelValue.operand.isZeroValue {
+        if currentLabelValue.operand == operandLabel.defaultValue {
             operandLabel.text = numberOfButton
         } else {
             operandLabel.text = currentLabelValue.operand + numberOfButton
@@ -46,17 +46,17 @@ extension CalculatorViewController {
             return
         }
         
-        if currentLabelValue.operand.isZeroValue {
+        if currentLabelValue.operand == operandLabel.defaultValue {
             operatorLabel.text = operatorOfButton
             return
         }
         
-        if let stackView = expressionController?.addExpression(signValue: operatorLabel.text, numberValue: currentLabelValue.operand) {
+        if let stackView = expressionController?.addExpression(signValue: currentLabelValue.operator, numberValue: currentLabelValue.operand) {
             expressionView.addArrangedSubview(stackView)
         }
         
         operatorLabel.text = operatorOfButton
-        setZeroInNumberLabel()
+        operandLabel.text = operandLabel.defaultValue
     }
     
     @IBAction private func clickEqual(_ sender: UIButton) {
@@ -64,7 +64,7 @@ extension CalculatorViewController {
             return
         }
         
-        setNilInOperatorLabel()
+        operatorLabel.text = operatorLabel.defaultValue
         
         if let stackView = expressionController?.addExpression(signValue: operatorOfLabel, numberValue: currentLabelValue.operand) {
             expressionView.addArrangedSubview(stackView)
@@ -75,17 +75,17 @@ extension CalculatorViewController {
     
     @IBAction private func clickAllClear(_ sender: UIButton) {
         removeExpressionView()
-        setZeroInNumberLabel()
+        operandLabel.text = operandLabel.defaultValue
         
         expressionController?.expressionWrapperInit()
     }
     
     @IBAction private func clickClearExpression(_ sender: UIButton) {
-        setZeroInNumberLabel()
+        operandLabel.text = operandLabel.defaultValue
     }
     
     @IBAction private func clickNumberSign(_ sender: UIButton) {
-        if currentLabelValue.operand.isZeroValue {
+        if currentLabelValue.operand == operandLabel.defaultValue {
             operandLabel.text = expressionController?.changeNumberSign(numberValue: "")
         } else {
             operandLabel.text = expressionController?.changeNumberSign(numberValue: currentLabelValue.operand)
@@ -97,7 +97,7 @@ extension CalculatorViewController {
             return
         }
                
-        if currentLabelValue.operand.isZeroValue == false {
+        if currentLabelValue.operand != operandLabel.defaultValue {
             operandLabel.text = currentLabelValue.operand + doubleZero
         }
     }
@@ -118,14 +118,6 @@ extension CalculatorViewController {
 extension CalculatorViewController {
     private func removeExpressionView() {
         expressionView.subviews.forEach{ $0.removeFromSuperview() }
-    }
-    
-    private func setZeroInNumberLabel() {
-        operandLabel.text = "0"
-    }
-    
-    private func setNilInOperatorLabel() {
-        operatorLabel.text = nil
     }
 }
 
