@@ -81,7 +81,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+        guard let currentInput = inputLabel.text else {return}
         
+        if currentInput.contains("-") {
+            inputLabel.text = currentInput.replacingOccurrences(of: "-", with: "")
+        }
+        else {
+            inputLabel.text = "-" + currentInput
+        }
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
