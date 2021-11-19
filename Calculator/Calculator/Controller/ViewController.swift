@@ -12,19 +12,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var countingHistoryStackView: UIStackView?
     @IBOutlet weak var countingHistoryScrollView: UIScrollView!
     
-    let numberFormatter = NumberFormatter()
-    var textInput = ""
-    var countingHistory = ""
-    var operandText = ""
-    var operatorText = ""
+    private let numberFormatter = NumberFormatter()
+    private var textInput = ""
+    private var countingHistory = ""
+    private var operandText = ""
+    private var operatorText = ""
     
-    func makeNumberFormat() {
+    private func makeNumberFormat() {
         numberFormatter.roundingMode = .ceiling
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
     }
     
-    func addCountingHistory() {
+    private func addCountingHistory() {
         if operandText == "" {
             return
         } else {
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func addScrollViewLabel() {
+    private func addScrollViewLabel() {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
@@ -140,13 +140,13 @@ class ViewController: UIViewController {
         }
     }
     
-    func removeScrollViewLabel() {
+    private func removeScrollViewLabel() {
         let subview = countingHistoryStackView?.arrangedSubviews
         
         subview?.forEach { $0.removeFromSuperview() }
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         countingHistoryScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
         countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
