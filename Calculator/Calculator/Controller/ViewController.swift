@@ -91,37 +91,30 @@ class ViewController: UIViewController {
     
     // 연산자를 누를 때 앞에서 입력한 숫자를 업데이트
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-        guard currentOperand != "0" else { // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
-            return
-        }
+        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
-        guard isCalculationOver == false else { // =버튼을 탭한 직후 연산자를 탭하면 작동하지 않음
-            return
-        }
+        guard isCalculationOver == false else { return } // =버튼을 탭한 직후 연산자를 탭하면 작동하지 않음
         
-//        completeFormula += currentOperand // last가 연산자일 때 숫자가 연속으로 추가되면 안되므로 삭제해줘야 함
         let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
         
-        guard let operatorSymbol: String = sender.titleLabel?.text,
+        guard let operatorSymbol: String = sender.titleLabel?.text, // 버튼의 연산기호를 확인
         operatorSymbols.contains(Character(operatorSymbol)) else {
             return
         }
+        currentOperator = operatorSymbol
         operatorLabel.text = operatorSymbol
         
-        guard let lastCharacter = completeFormula.last else { // 아무것도 탭하지 않고 연산자부터 누르면 반응 안함
-            return
+        // 개선 - 숫자가 formula에 추가되지 않은 상태라면 lastCharacter 언래핑이 안되고 else문 실행
+        if let lastCharacter = completeFormula.last, operatorSymbols.contains(lastCharacter) { // formula 마지막이 연산자라면 (연산자를 연속 탭)
+            completeFormula.removeLast() // 마지막 연산자를 삭제
+            completeFormula += "\(currentOperator)" // 숫자는 다시 더해주지 않음
+            print(completeFormula)
+        } else {
+            completeFormula += "\(currentOperand)\(currentOperator)"
+            print(completeFormula)
         }
-        
-        if operatorSymbols.contains(lastCharacter) {
-            completeFormula.removeLast() // 연산자를 탭하고, 다시 탭한 경우라면 마지막 연산자를 삭제
-        }
-        
-        currentOperator = operatorSymbol
-        completeFormula += "\(currentOperand)\(currentOperator)"
-        print(completeFormula) // 출력 안됨 - 왜지????
-        
-        currentOperand = ""
-        operandLabel.text = "0"
+
+        resetOperand()
     }
 
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
