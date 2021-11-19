@@ -42,6 +42,13 @@ class ViewController: UIViewController {
         currentOperand = ""
     }
     
+    func changeNumberFormat(of number: Double) -> String? {
+        numberFormatter.maximumFractionDigits = 20 // 소수점 아래 20자리까지 표시하도록 제한
+        numberFormatter.numberStyle = .decimal // 1000 단위로 , 표시
+        guard let resultInString = numberFormatter.string(from: NSNumber(value: number)) else { return nil }
+        return resultInString
+    }
+    
     func refreshLabelsWithResult(of formula: String) {
         var formula: Formula = ExpressionParser.parse(from: formula)
         
@@ -49,9 +56,7 @@ class ViewController: UIViewController {
             let calculationResult: Double = try formula.result()
             print("계산 결과 : \(calculationResult)")
             
-            numberFormatter.maximumFractionDigits = 20 // 소수점 아래 20자리까지 표시하도록 제한
-            numberFormatter.numberStyle = .decimal // 1000 단위로 , 표시
-            guard let resultInString = numberFormatter.string(from: NSNumber(value: calculationResult)) else { return }
+            guard let resultInString = changeNumberFormat(of: calculationResult) else { return }
             
             operandLabel.text = "\(resultInString)"
             operatorLabel.text = ""
