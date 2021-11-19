@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var currentOperator = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        removePlaceholderViews()
     }
 
     @IBAction func numberPressed(_ sender: UIButton) {
@@ -34,6 +35,12 @@ class ViewController: UIViewController {
         currentOperator = operatorPressedString
         update(label: self.currentOperatorLabel, to: currentOperator)
         updateCurrentLabels()
+    }
+    
+    private func removePlaceholderViews() {
+        historyStackView.arrangedSubviews.forEach { placeHolderView in
+            placeHolderView.removeFromSuperview()
+        }
     }
     
     private func update(label: UILabel, to data: String) {
