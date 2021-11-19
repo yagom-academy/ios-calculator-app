@@ -13,16 +13,7 @@ struct CalculatorExpressionController {
     
     var expressionWrapper: String = ""
     
-    var numberFormatter: Formatter {
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-
-        numberFormatter.maximumSignificantDigits = 20
-        
-        return numberFormatter
-    }
+    
 }
 
 // MARK: - internal method
@@ -37,20 +28,7 @@ extension CalculatorExpressionController {
         return numberFormatter.string(for: calculatedValue)
     }
     
-    mutating func addExpression(signValue: String?, numberValue: String) -> UIStackView {
-        let expressionStackView = ExpressionStackView()
-        
-        expressionStackView.signLabel.text = signValue
-        expressionStackView.numberLabel.text = numberValue
-        
-        if let signValue = signValue {
-            expressionWrapper += signValue + numberValue
-        } else {
-            expressionWrapper += numberValue
-        }
-        
-        return expressionStackView
-    }
+    
     
     mutating func expressionWrapperInit() {
         expressionWrapper = ""

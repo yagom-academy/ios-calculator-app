@@ -15,6 +15,7 @@ class OperandLabel: UILabel {
     }
     
     let defaultValue = "0"
+    let emptyValue = ""
 }
 
 class OperatorLabel: UILabel {
