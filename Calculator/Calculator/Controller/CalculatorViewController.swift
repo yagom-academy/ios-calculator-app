@@ -11,6 +11,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet var currentOperandLabel: UILabel!
     @IBOutlet var currentOperatorLabel: UILabel!
     @IBOutlet var historyStackView: UIStackView!
+    @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
     private var isPositiveOperand = true
     private var currentOperand = ""
@@ -49,6 +50,7 @@ class CalculatorViewController: UIViewController {
         currentOperator = operatorPressedString
         update(label: currentOperatorLabel, to: currentOperator)
         resetCurrentOperand()
+        autoScrollToBottom()
     }
     
     @IBAction func calculateButtonPressed(_ sender: Any) {
@@ -163,5 +165,16 @@ extension CalculatorViewController {
         }
         return result
     }
+    
+    private func autoScrollToBottom() {
+        calculationHistoryScrollView.layoutIfNeeded()
+        let contentSizeHeight = calculationHistoryScrollView.contentSize.height
+        let boundsHeight = calculationHistoryScrollView.bounds.height
+        let contentInsetBottom = calculationHistoryScrollView.contentInset.bottom
+        let bottomOffset = CGPoint(x: 0, y: contentSizeHeight - boundsHeight + contentInsetBottom)
+        
+        if bottomOffset.y > 0 {
+            calculationHistoryScrollView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
 }
-
