@@ -58,9 +58,10 @@ class CalculatorViewController: UIViewController {
         if let currentNumLabel = inputNumLabel.text,
           let inputSign = sender.currentTitle,
          !currentNumLabel.contains(".") {
-            updateInputNumLabel(currentNumLabel, with: inputSign)
+            inputNumLabel.text = currentNumLabel + inputSign
         }
     }
+    
     @IBAction func tapDoubleZeroBtn(_ sender: UIButton) {
         if let currentNumLabel = inputNumLabel.text,
           let inputNum = sender.currentTitle,
