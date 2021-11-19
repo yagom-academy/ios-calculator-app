@@ -30,7 +30,7 @@ class CalculatorViewController: UIViewController {
         resetCurrentOperand()
     }
     
-    @IBAction func numberButtonPressed(_ sender: UIButton) {
+    @IBAction func touchUpDigitButton(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
@@ -41,7 +41,7 @@ class CalculatorViewController: UIViewController {
         update(label: currentOperandLabel, to: currentOperand)
     }
     
-    @IBAction func operatorButtonPressed(_ sender: UIButton) {
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let operatorPressedString = sender.accessibilityIdentifier,
               isNotZero else {
             return
@@ -53,7 +53,7 @@ class CalculatorViewController: UIViewController {
         autoScrollToBottom()
     }
     
-    @IBAction func calculateButtonPressed(_ sender: Any) {
+    @IBAction func touchUpCalculateButton(_ sender: Any) {
         refreshCalculateHistory()
         guard let currentOperand = calculateResult(from: historyStack) else {
             return
@@ -65,17 +65,17 @@ class CalculatorViewController: UIViewController {
         update(label: currentOperatorLabel, to: currentOperator)
     }
     
-    @IBAction func acButtonPressed(_ sender: Any) {
+    @IBAction func touchUpACButton(_ sender: Any) {
         removeFormulaStackViews()
         resetCurrentOperand()
         historyStack.removeAll()
     }
     
-    @IBAction func ceButtonPressed(_ sender: Any) {
+    @IBAction func touchUpCEButton(_ sender: Any) {
         resetCurrentOperand()
     }
     
-    @IBAction func toggleSignButtonPressed(_ sender: Any) {
+    @IBAction func touchUpSignButton(_ sender: Any) {
         guard isNotZero else {
             return
         }
