@@ -8,10 +8,11 @@
 import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
+    
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
  
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
@@ -36,12 +37,19 @@ enum Operator: Character, CaseIterable, CalculateItem {
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
-            throw CalculateError.NotANumber
+            throw CalculateError.notNumber
         }
+        
         return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
+    }
+}
+
+extension Operator: CustomStringConvertible {
+    var description: String {
+        return String(self.rawValue)
     }
 }

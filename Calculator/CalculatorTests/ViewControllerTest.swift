@@ -1,17 +1,17 @@
 //
-//  OperatorError.swift
+//  ViewControllerTest.swift
 //  CalculatorTests
 //
-//  Created by 박병호 on 2021/11/11.
+//  Created by 박병호 on 2021/11/15.
 //
 
 import XCTest
 
-class OperatorError: XCTestCase {
+class ViewControllerTest: XCTestCase {
+    var sut = ViewController()
     
-    func test_0으로_나누면_NotANumber_오류가_발생한다() {
-        
-        XCTAssertThrowsError(try Operator.divide.calculate(lhs: 1, rhs: 0)){ error in XCTAssertEqual(error as? CalculateError, CalculateError.notNumber)}
+    func 해당연산자를_누르면_해당_문자열이_추가된다() {
+        sut. 
     }
     
     override func setUpWithError() throws {
