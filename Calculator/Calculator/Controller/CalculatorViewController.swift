@@ -70,7 +70,11 @@ class CalculatorViewController: UIViewController {
     }
     
     func updateInputNumLabel(_ currentNum: String, with input: String) {
-        inputNumLabel.text = currentNum + input
+        let numWithoutComma = currentNum.replacingOccurrences(of: ",", with: "")
+        let updatedNum = numWithoutComma + input
+        if let convertedNum = numberFormatter.string(for: Double(updatedNum)) {
+            inputNumLabel.text = convertedNum
+        }
     }
     
     // MARK: - 연산자 버튼 입력
