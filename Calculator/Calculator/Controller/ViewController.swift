@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var formulaHistoryStackView: UIStackView!
     @IBOutlet weak var currentInputOperandLabel: UILabel!
     @IBOutlet weak var currentInputOperatorLabel: UILabel!
     
@@ -32,6 +33,32 @@ class ViewController: UIViewController {
         currentInputOperandLabel.text = currentInputOperand
         currentInputOperatorLabel.text = currentInputOperator
         
+        removeAllFormulaHistory()
+        
+    }
+    
+    func addCurrentInputToFormulaHistory() {
+        let stackView = UIStackView()
+        stackView.spacing = 8.0
+        
+        let operatorSignLabelView = UILabel()
+        operatorSignLabelView.text = currentInputOperator
+        operatorSignLabelView.textColor = .white
+        
+        let operandLabelView = UILabel()
+        operandLabelView.text = currentInputOperand
+        operandLabelView.textColor = .white
+        
+        stackView.addArrangedSubview(operatorSignLabelView)
+        stackView.addArrangedSubview(operandLabelView)
+        
+        formulaHistoryStackView.addArrangedSubview(stackView)
+    }
+    
+    func removeAllFormulaHistory() {
+        while let last = formulaHistoryStackView.arrangedSubviews.last {
+            last.removeFromSuperview()
+        }
     }
     
     func resetExpression() {
@@ -65,12 +92,14 @@ class ViewController: UIViewController {
         
         if mathExpression.isEmpty {
             mathExpression += [currentInputOperand]
+            addCurrentInputToFormulaHistory()
             currentInputOperand = LabelContents.defaultOperand
             currentInputOperator = operatorSymbole
             return
         }
         
         mathExpression += [currentInputOperator, currentInputOperand]
+        addCurrentInputToFormulaHistory()
         currentInputOperand = LabelContents.defaultOperand
         currentInputOperator = operatorSymbole
     }
@@ -89,6 +118,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
         resetExpression()
+        removeAllFormulaHistory()
     }
     
     
@@ -106,6 +136,7 @@ class ViewController: UIViewController {
         if isEvaluated { return }
         
         mathExpression += [currentInputOperator, currentInputOperand]
+        addCurrentInputToFormulaHistory()
         
         isEvaluated = true
         let stringFormula = mathExpression.joined()
