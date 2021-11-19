@@ -141,9 +141,11 @@ class ViewController: UIViewController {
     }
     
     private func removeScrollViewLabel() {
-        let subview = countingHistoryStackView?.arrangedSubviews
+        let subviews = countingHistoryStackView?.arrangedSubviews
         
-        subview?.forEach { $0.removeFromSuperview() }
+        subviews?.forEach({ subview in
+            subview.removeFromSuperview()
+        })
     }
     
     private func scrollToBottom() {
