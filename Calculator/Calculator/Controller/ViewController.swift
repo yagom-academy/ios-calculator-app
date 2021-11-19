@@ -67,7 +67,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickNumberSign(_ sender: UIButton) {
-        guard var numberOfLabel = numberCompositionLabel.text else {
+        guard let numberOfLabel = numberCompositionLabel.text else {
             return
         }
         
@@ -75,13 +75,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if numberOfLabel.hasPrefix("-") {
-            numberOfLabel.removeFirst()
-        } else {
-            numberOfLabel = "-" + numberOfLabel
-        }
-        
-        numberCompositionLabel.text = numberOfLabel
+        numberCompositionLabel.text = changeNumberSign(numberValue: numberOfLabel)
     }
     
     @IBAction func clickDoubleZero(_ sender: UIButton) {
@@ -151,6 +145,10 @@ extension ViewController {
     
     private func setZeroInNumberLabel() {
         numberCompositionLabel.text = "0"
+    }
+    
+    private func changeNumberSign(numberValue: String) -> String {
+        return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
 }
 
