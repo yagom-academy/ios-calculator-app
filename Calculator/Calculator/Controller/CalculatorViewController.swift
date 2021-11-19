@@ -45,6 +45,10 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    func updateInputNumLabel(_ currentNum: String, with input: String) {
+        inputNumLabel.text = currentNum + input
+    }
+    
 
 }
 
