@@ -37,7 +37,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if !inputOperandValues.contains(".") {
+        if !inputOperandValues.contains(".") {  //이미 입력된 값이 소수가 아닐때
             guard inputButtonTitle != "0" || inputOperandValues.first != "0" else {
                 return
             }
@@ -48,15 +48,21 @@ class ViewController: UIViewController {
                 return
             }
         }
-        inputOperandValues.append(inputButtonTitle)
+ 
+        if inputOperandValues.contains(".") {   //이미 입력된 값이 소수일 때
+            guard inputButtonTitle == "." else {
+                return
+            }
+        }
         
-        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {
+        inputOperandValues.append(inputButtonTitle)         //일단 저장
+        
+        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      // 피연산자가 소수아닌데 첫글자 0일때 현재입력숫자로 교체
             inputOperandValues.removeFirst()
         }
         isOperatorEnterd = false
         currentValue.text = inputOperandValues.joined()
     }
-    
     
     func endOperandInput() {
         stringToCalculate.append(inputOperandValues.joined())
@@ -101,7 +107,6 @@ class ViewController: UIViewController {
                   let doubleTypeOperand = Double(currentOperand) else {
                 return
             }
-            
             currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
         }
     }
@@ -129,16 +134,7 @@ class ViewController: UIViewController {
         guard let resultWithComma = numberFormatter.string(for: value) else {
             return "0"
         }
-        
         return resultWithComma
     }
-    
-    
-    
-    
-    
-    
-
-
 }
 
