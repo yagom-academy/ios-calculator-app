@@ -13,4 +13,9 @@ extension String {
             .split(separator: target)
             .compactMap { String($0) }
     }
+    
+    var removedCommas: String {
+        return self.filter { $0.isNumber }
+    }
+    
 }

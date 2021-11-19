@@ -1,8 +1,8 @@
 //
 //  Calculator - CalculatorViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -28,6 +28,7 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         removeFormulaStackViews()
         resetCurrentOperand()
+        update(currentOperandLabel, to: currentOperand)
     }
     //MARK: - @IBAction Properties
     @IBAction func touchUpDigitButton(_ sender: UIButton) {
@@ -35,10 +36,11 @@ class CalculatorViewController: UIViewController {
             return
         }
         if isZero && numberPressedString != "." {
-            currentOperand = ""
+            setCurrentOperand(to: "")
         }
-        currentOperand += numberPressedString
-        update(label: currentOperandLabel, to: currentOperand)
+        let newOperand = currentOperand + numberPressedString
+        setCurrentOperand(to: newOperand)
+        update(currentOperandLabel, to: currentOperand)
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -47,32 +49,38 @@ class CalculatorViewController: UIViewController {
             return
         }
         refreshCalculateHistory()
-        currentOperator = operatorPressedString
-        update(label: currentOperatorLabel, to: currentOperator)
+        setCurrentOperator(to: operatorPressedString)
+        update(currentOperatorLabel, to: currentOperator)
         resetCurrentOperand()
+        update(currentOperandLabel, to: currentOperand)
         autoScrollToBottom()
     }
     
     @IBAction func touchUpCalculateButton(_ sender: Any) {
         refreshCalculateHistory()
-        guard let currentOperand = calculateResult(from: historyStack) else {
+        resetCurrentOperand()
+        guard let result = calculateResult(from: historyStack) else {
             return
         }
         historyStack.removeAll()
-        currentOperator = ""
+        setCurrentOperator(to: "")
+        let newOperand = result.removedCommas
+        setCurrentOperand(to: newOperand)
         removeFormulaStackViews()
-        update(label: currentOperandLabel, to: currentOperand)
-        update(label: currentOperatorLabel, to: currentOperator)
+        update(currentOperandLabel, to: newOperand)
+        update(currentOperatorLabel, to: currentOperator)
     }
     
     @IBAction func touchUpACButton(_ sender: Any) {
         removeFormulaStackViews()
         resetCurrentOperand()
+        update(currentOperandLabel, to: currentOperand)
         historyStack.removeAll()
     }
     
     @IBAction func touchUpCEButton(_ sender: Any) {
         resetCurrentOperand()
+        update(currentOperandLabel, to: currentOperand)
     }
     
     @IBAction func touchUpSignButton(_ sender: Any) {
@@ -94,11 +102,18 @@ extension CalculatorViewController {
     }
     
     private func resetCurrentOperand() {
-        currentOperand = "0"
-        currentOperandLabel.text = "0"
+        setCurrentOperand(to: "0")
     }
     
-    private func update(label: UILabel, to data: String) {
+    private func setCurrentOperand(to newOperand: String) {
+        currentOperand = newOperand
+    }
+    
+    private func setCurrentOperator(to newOperator: String) {
+        currentOperator = newOperator
+    }
+    
+    private func update(_ label: UILabel, to data: String) {
         label.text = data
     }
     
@@ -118,11 +133,13 @@ extension CalculatorViewController {
     
     private func toggleSignOfOperand() {
         if isPositiveOperand {
-            currentOperand = currentOperand.filter { $0.isNumber }
+            let newOperand = currentOperand.filter { $0.isNumber }
+            setCurrentOperand(to: newOperand)
         } else {
-            currentOperand = "-" + currentOperand
+            let newOperand = "-" + currentOperand
+            setCurrentOperand(to: newOperand)
         }
-        update(label: currentOperandLabel, to: currentOperand)
+        update(currentOperandLabel, to: currentOperand)
     }
     
     private func autoScrollToBottom() {
