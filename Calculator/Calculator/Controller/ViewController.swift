@@ -101,5 +101,25 @@ class ViewController: UIViewController {
         resetExpression()
         isEvaluated = false
     }
+    
+    @IBAction func touchEvaluateButton(_ sender: UIButton) {
+        if isEvaluated { return }
+        
+        mathExpression += [currentInputOperator, currentInputOperand]
+        
+        isEvaluated = true
+        let stringFormula = mathExpression.joined()
+        
+        do {
+            let result = try ExpressionParser.parse(from: stringFormula).result()
+            currentInputOperand = String(result)
+            currentInputOperator = ""
+        } catch CalculatorError.divideByZero {
+            currentInputOperand = "NAN"
+            currentInputOperator = ""
+        } catch {
+            print(error)
+        }
+    }
 }
 
