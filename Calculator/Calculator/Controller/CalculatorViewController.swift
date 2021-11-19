@@ -88,8 +88,8 @@ extension CalculatorViewController {
     // MARK: - Functions
     private func removeFormulaStackViews() {
         calculationHistoryStackView.arrangedSubviews
-            .forEach { placeHolderView in
-                placeHolderView.removeFromSuperview()
+            .forEach { stackView in
+                stackView.removeFromSuperview()
             }
     }
     
