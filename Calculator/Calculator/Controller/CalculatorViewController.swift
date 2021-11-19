@@ -108,7 +108,8 @@ class CalculatorViewController: UIViewController {
         guard let inputNum = inputNumLabel.text,
              let inputOperator = inputOperatorLabel.text else { return }
         
-        entireStringFormula += (inputOperator + inputNum)
+        let inputNumWithoutComma = inputNum.replacingOccurrences(of: ",", with: "")
+        entireStringFormula += (inputOperator + inputNumWithoutComma)
     }
     
     // MARK: - 특수 버튼 입력
