@@ -18,8 +18,8 @@ class CalculatorViewController: UIViewController {
     
     var expressionController: CalculatorExpressionController?
     
-    @IBOutlet weak var operandLabel: NumberCompositionLabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: OperandLabel!
+    @IBOutlet weak var operatorLabel: OperatorLabel!
     
     @IBOutlet weak var expressionView: UIStackView!
     

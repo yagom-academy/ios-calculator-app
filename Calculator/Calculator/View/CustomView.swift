@@ -7,10 +7,18 @@
 
 import UIKit
 
-class NumberCompositionLabel: UILabel {
+class OperandLabel: UILabel {
     override var text: String? {
         didSet {
             CurrentLabelValue.shared.operand = text ?? "0"
+        }
+    }
+}
+
+class OperatorLabel: UILabel {
+    override var text: String? {
+        didSet {
+            CurrentLabelValue.shared.operator = text ?? ""
         }
     }
 }
