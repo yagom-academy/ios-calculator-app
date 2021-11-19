@@ -7,6 +7,14 @@
 
 import UIKit
 
+class NumberCompositionLabel: UILabel {
+    override var text: String? {
+        didSet {
+            CurrentLabelValue.shared.operand = text ?? "0"
+        }
+    }
+}
+
 class ExpressionStackView: UIStackView {
     
     var signLabel: ExpressionLabel = {

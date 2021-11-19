@@ -18,39 +18,40 @@ class CalculatorViewController: UIViewController {
     
     var expressionController: CalculatorExpressionController?
     
-    @IBOutlet weak var numberCompositionLabel: UILabel!
+    @IBOutlet weak var numberCompositionLabel: NumberCompositionLabel!
     @IBOutlet weak var operatorSettingLabel: UILabel!
     
     @IBOutlet weak var expressionView: UIStackView!
     
+    let currentLabelValue = CurrentLabelValue.shared
 }
  
 // MARK: - private action method
 
 extension CalculatorViewController {
     @IBAction private func clickNumber(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
+        guard let numberOfButton = sender.titleLabel?.text else {
             return
         }
     
-        if numberOfLabel.isZeroValue {
+        if currentLabelValue.operand.isZeroValue {
             numberCompositionLabel.text = numberOfButton
         } else {
-            numberCompositionLabel.text = numberOfLabel + numberOfButton
+            numberCompositionLabel.text = currentLabelValue.operand + numberOfButton
         }
     }
     
     @IBAction private func clickOperator(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfButton = sender.titleLabel?.text else {
+        guard let operatorOfButton = sender.titleLabel?.text else {
             return
         }
         
-        if numberOfLabel.isZeroValue {
+        if currentLabelValue.operand.isZeroValue {
             operatorSettingLabel.text = operatorOfButton
             return
         }
         
-        if let stackView = expressionController?.addExpression(signValue: operatorSettingLabel.text, numberValue: numberOfLabel) {
+        if let stackView = expressionController?.addExpression(signValue: operatorSettingLabel.text, numberValue: currentLabelValue.operand) {
             expressionView.addArrangedSubview(stackView)
         }
         
@@ -59,13 +60,13 @@ extension CalculatorViewController {
     }
     
     @IBAction private func clickEqual(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfLabel = operatorSettingLabel.text else {
+        guard let operatorOfLabel = operatorSettingLabel.text else {
             return
         }
         
         setNilInOperatorLabel()
         
-        if let stackView = expressionController?.addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel) {
+        if let stackView = expressionController?.addExpression(signValue: operatorOfLabel, numberValue: currentLabelValue.operand) {
             expressionView.addArrangedSubview(stackView)
         }
     
@@ -84,34 +85,30 @@ extension CalculatorViewController {
     }
     
     @IBAction private func clickNumberSign(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text else {
-            return
-        }
-        
-        if numberOfLabel.isZeroValue {
+        if currentLabelValue.operand.isZeroValue {
             numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: "")
         } else {
-            numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: numberOfLabel)
+            numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: currentLabelValue.operand)
         }
     }
     
     @IBAction private func clickDoubleZero(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let doubleZero = sender.titleLabel?.text else {
+        guard let doubleZero = sender.titleLabel?.text else {
             return
         }
                
-        if numberOfLabel.isZeroValue == false {
-            numberCompositionLabel.text = numberOfLabel + doubleZero
+        if currentLabelValue.operand.isZeroValue == false {
+            numberCompositionLabel.text = currentLabelValue.operand + doubleZero
         }
     }
     
     @IBAction private func clickPoint(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let point = sender.titleLabel?.text else {
+        guard let point = sender.titleLabel?.text else {
             return
         }
                
-        if numberOfLabel.contains(point) == false {
-            numberCompositionLabel.text = numberOfLabel + point
+        if currentLabelValue.operand.contains(point) == false {
+            numberCompositionLabel.text = currentLabelValue.operand + point
         }
     }
 }
@@ -129,5 +126,24 @@ extension CalculatorViewController {
     
     private func setNilInOperatorLabel() {
         operatorSettingLabel.text = nil
+    }
+}
+
+//signleton
+
+class CurrentLabelValue {
+    
+    var operand: String
+    var `operator`: String
+    
+    static var shared: CurrentLabelValue = {
+        let instance = CurrentLabelValue()
+        
+        return instance
+    }()
+    
+    private init() {
+        operand = ""
+        `operator` = ""
     }
 }

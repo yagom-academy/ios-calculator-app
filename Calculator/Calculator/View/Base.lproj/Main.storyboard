@@ -301,7 +301,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD" customClass="NumberCompositionLabel" customModule="Calculator" customModuleProvider="target">
                                                 <rect key="frame" x="58" y="0.0" width="324" height="50"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -329,7 +329,7 @@
                     </view>
                     <connections>
                         <outlet property="expressionView" destination="XRe-QE-UJf" id="q4l-7t-wYJ"/>
-                        <outlet property="numberCompositionLabel" destination="Lwz-OF-XHD" id="k6T-Wn-2jg"/>
+                        <outlet property="numberCompositionLabel" destination="Lwz-OF-XHD" id="uI1-P3-lGk"/>
                         <outlet property="operatorSettingLabel" destination="HPC-iy-qdm" id="3en-hC-jb1"/>
                     </connections>
                 </viewController>
