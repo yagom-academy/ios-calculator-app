@@ -77,10 +77,10 @@ extension CalculatorViewController {
         }
         
         if numberOfLabel.isZeroValue {
-            return
+            numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: "")
+        } else {
+            numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: numberOfLabel)
         }
-        
-        numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: numberOfLabel)
     }
     
     @IBAction private func clickDoubleZero(_ sender: UIButton) {

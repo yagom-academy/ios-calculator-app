@@ -19,7 +19,6 @@ struct CalculatorExpressionController {
 
 extension CalculatorExpressionController {
     mutating func calculate() -> String? {
-        
         var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
         let calculatedValue: Double = formula.result()
         
@@ -77,7 +76,7 @@ extension CalculatorExpressionController {
         let stringValue = String(value)
         
         let splitedArray = stringValue.split(separator: ".")
-        let (integerDigits, fractionDigits) = (splitedArray[0].count, splitedArray[1].count)
+        let (integerDigits, fractionDigits) = (splitedArray[0].filter{ $0.isNumber }.count, splitedArray[1].count)
         
         if integerDigits > 20 {
             return (20, 0)
