@@ -77,7 +77,8 @@ extension CalculatorViewController {
     }
     
     @IBAction private func clickEqual(_ sender: UIButton) {
-        if currentLabelValue.operand == operandLabel.defaultValue {
+        if currentLabelValue.operand == operandLabel.defaultValue &&
+            currentLabelValue.operator == operatorLabel.defaultValue {
             return
         }
         
