@@ -2,6 +2,8 @@
 
 > 계산이요.
 
+</br>
+
 **Index**
 - [Preview](#Preview)
 - [Ground Rule](#GroundRule)
@@ -18,9 +20,21 @@
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Simulator Screen Recording - iPhone 12 Pro - 2021-11-19 at 15 43 38](https://user-images.githubusercontent.com/70251136/142577395-26695bca-5c32-4483-9d5e-69d7e375049d.gif)  |  ![Simulator Screen Recording - iPhone 12 Pro - 2021-11-19 at 15 45 06](https://user-images.githubusercontent.com/70251136/142577469-596a5a3e-49ea-42b2-afa4-173a6cdd7612.gif)|![Simulator Screen Recording - iPhone 12 Pro - 2021-11-19 at 15 48 51](https://user-images.githubusercontent.com/70251136/142577862-5124e452-0a76-43cb-85e1-363fc1eab532.gif)
 
+</br>
 
 <a name="GroundRule"></a>
-# 🤝  의존 모둠 Ground Rule
+# 🤝 Ground Rule
+
+### Commit Convention
+
+- [Karma Style](http://karma-runner.github.io/latest/dev/git-commit-msg.html)
+
+### 기타
+
+- **수요일**은 되도록이면 프로젝트에 손을 대지않고, 프로젝트를 통해 알게된 것이나, 기타 사항으로 알게된 것을 정리하는 시간을 가진다.
+- 구현 전 **Issue**를 생성하며 요구사항에 대해 한번 더 생각해본다.
+
+</br>
 
 <a name="TimeLine"></a>
 # ⏰  타임 라인
@@ -165,7 +179,7 @@
 </div>
 </details>
 
-
+</br>
 
 <a name="Step1"></a>
 # 1️⃣ Step 1
@@ -213,6 +227,8 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 
 하나의 **Array**에 먼저 **enqueue** 하여 요소를 넣어주고 **dequeue**할 때 다른 Array에 ```reversed()```를 이용하여 넣어준다면 첫번째 배열의 첫번째 요소가 두번째 배열에선 마지막 요소가 되기에 **dequeue**하여 요소를 뺄 때 첫번째 요소를 뺴서 뒤의 요소들이 앞으로 당겨지는 비용이 쓰이지 않게 되어 시간복잡도가 O(1)이 되고, 요소가 많아도 비용이 늘지 않게 되는 것이다.
 
+</br>
+
 <a name="Step2"></a>
 # 2️⃣ Step 2
 
@@ -251,6 +267,19 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 
 5. 에러 처리 구현
 
+### TDD
+
+TDD 방식으로 진행하며, commit 단위를 고민해보았다.
+
+- 우선 TestCase 작성 후, 이후에 실제 기능을 하는 코드를 리팩터링하며 해당 TestCase가 성공하게 만드는 과정을 거쳤는데, 먼저 TestCase를 작성한 후 ```test:``` 로 커밋한 후 본 코드를 만져 ```feat:```, ```refactor:``` 로 추가해주어야 하는가?
+
+- 아니면 두 과정을 모두 거친 후 ```test:```로 body부분에 세부사항을 작성해 올려줘야 하는가? 
+
+TDD엔 **테스트 실패 -> 테스트 성공 -> 본 코드 리팩터링** 이라는 과정이 있는데 이 세부분 전부를 커밋을 나눠준다면 테스트를 실패한 코드도 커밋 기록에 남는다.
+
+그러기에 세부분을 나눠 커밋하는 것이 아닌 하나의 테스트케이스가 완성되었을 때, 즉 본 코드 **(기능 구현이 된, 테스트가 무조건 성공하는 코드가 아닌)** 와 테스트케이스의 구현이 완료되면 ```test:```로 커밋을 올리고, 이후 본 코드 리팩터링 작업을 하여 ```refactor:```로 커밋을 올리는 방법을 택했다.
+
+
 ## 🙇‍♂️ Step2 배운 점
 
 ### Protocol as Type
@@ -260,6 +289,7 @@ protocol CalculateItem { }
 ```
 
 빈 프로토콜을 활용해 타입으로서의 프로토콜을 정의했다. 제네릭의 요소의 타입이 해당 프로토콜을 준수하는 타입만 받을 수 있게끔 제한을 거는 용도로 사용할 수도 있다는 것을 알게됐다.  
+
 이번 프로젝트에선 큐의 타입에 제한을 거는 용도로 사용하였는데, 확장성을 따지려면 프로토콜로 타입 제한을 건 것을 제거하거나, 사용하고 싶은 타입에 프로토콜을 채택해주면 되지 않을까? 생각했다.
 
 ### 요구사항 파악의 중요성
