@@ -13,6 +13,17 @@ struct CalculatorExpressionController {
     
     var expressionWrapper: String = ""
     
+    var numberFormatter: Formatter {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+
+        numberFormatter.maximumSignificantDigits = 20
+        
+        return numberFormatter
+    }
+    
 }
 
 // MARK: - internal method
@@ -20,23 +31,11 @@ struct CalculatorExpressionController {
 extension CalculatorExpressionController {
     mutating func calculate() -> String? {
         var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
-        let calculatedValue: Double = formula.result()
+        let calculatedValue: Decimal = Decimal(formula.result())
         
         expressionWrapperInit()
         
-        return applyNumberFormatter(doubleValue: calculatedValue)
-    }
-    
-    func applyNumberFormatter(doubleValue: Double) -> String? {
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-
-        numberFormatter.minimumIntegerDigits = decideNumberOfDigits(doubleValue).0
-        numberFormatter.minimumFractionDigits = decideNumberOfDigits(doubleValue).1
-        
-        return numberFormatter.string(from: NSNumber(value: doubleValue))
+        return numberFormatter.string(for: calculatedValue)
     }
     
     mutating func addExpression(signValue: String?, numberValue: String) -> UIStackView {
@@ -68,23 +67,3 @@ extension CalculatorExpressionController {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
 }
-
-// MARK: - private method
-
-extension CalculatorExpressionController {
-    private func decideNumberOfDigits(_ value: Double) -> (Int, Int) {
-        let stringValue = String(value)
-        
-        let splitedArray = stringValue.split(separator: ".")
-        let (integerDigits, fractionDigits) = (splitedArray[0].filter{ $0.isNumber }.count, splitedArray[1].count)
-        
-        if integerDigits > 20 {
-            return (20, 0)
-        } else if integerDigits + fractionDigits > 20 {
-            return (integerDigits, 20 - fractionDigits)
-        } else {
-            return (integerDigits, fractionDigits)
-        }
-    }
-}
-
