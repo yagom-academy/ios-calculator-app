@@ -468,6 +468,26 @@
                         <outlet property="calculatorStackView" destination="XRe-QE-UJf" id="hTN-cV-uEw"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="xAN-GU-Llj"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="53O-RS-0mU"/>
+                        <outletCollection property="calculatorButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="6Sz-97-O8f"/>
+                        <outletCollection property="calculatorButtons" destination="ped-N8-JbY" collectionClass="NSMutableArray" id="7q9-bo-Wii"/>
+                        <outletCollection property="calculatorButtons" destination="RLD-dY-LOA" collectionClass="NSMutableArray" id="MlJ-fZ-cJV"/>
+                        <outletCollection property="calculatorButtons" destination="ows-U7-mNc" collectionClass="NSMutableArray" id="F0O-jU-3yC"/>
+                        <outletCollection property="calculatorButtons" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="6xf-69-Ybx"/>
+                        <outletCollection property="calculatorButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="fxg-Xc-9uQ"/>
+                        <outletCollection property="calculatorButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="yfh-Cr-1uy"/>
+                        <outletCollection property="calculatorButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="8gi-o2-KGG"/>
+                        <outletCollection property="calculatorButtons" destination="811-Pz-An6" collectionClass="NSMutableArray" id="CR3-MC-0Mh"/>
+                        <outletCollection property="calculatorButtons" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="Wl4-SA-Zv3"/>
+                        <outletCollection property="calculatorButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="xyJ-s2-QfD"/>
+                        <outletCollection property="calculatorButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="fXT-pd-hEY"/>
+                        <outletCollection property="calculatorButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="1LE-il-e1B"/>
+                        <outletCollection property="calculatorButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="M7r-aw-dsM"/>
+                        <outletCollection property="calculatorButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="BAz-YP-Ncv"/>
+                        <outletCollection property="calculatorButtons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="Iho-A3-4Pi"/>
+                        <outletCollection property="calculatorButtons" destination="Daw-iX-Owl" collectionClass="NSMutableArray" id="IhY-7i-Z7N"/>
+                        <outletCollection property="calculatorButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="txj-2k-geW"/>
+                        <outletCollection property="calculatorButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="3Q9-lh-CXz"/>
+                        <outletCollection property="calculatorButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="Seo-qI-oI0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

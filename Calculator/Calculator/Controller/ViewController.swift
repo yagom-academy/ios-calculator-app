@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet var calculatorButtons: [UIButton]!
     
     private var currentOperand: String {
         get {
@@ -47,6 +48,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         removeFormulaLabel()
         removeFormulaView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        calculatorButtons.forEach { button in
+            button.layer.cornerRadius = button.layer.frame.size.width / 2
+        }
     }
 }
 
