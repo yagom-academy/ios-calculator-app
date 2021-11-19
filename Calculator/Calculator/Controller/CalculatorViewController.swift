@@ -6,7 +6,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
+    
+    var expressionController = CalculatorExpressionController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +58,7 @@ class ViewController: UIViewController {
             return
         }
         
-        handleExpressionAddition(operatorOfLabel: operatorSettingLabel.text, numberOfLabel: numberOfLabel)
+        expressionController.addExpression(signValue: operatorSettingLabel.text, numberValue: numberOfLabel)
         
         operatorSettingLabel.text = operatorOfButton
         setZeroInNumberLabel()
@@ -109,30 +111,9 @@ class ViewController: UIViewController {
 
 // MARK: - private method
 
-extension ViewController {
+extension CalculatorViewController {
     
-    // stackView 만들기
-    private func addExpression(signValue: String?, numberValue: String) {
-        let expressionStackView = UIStackView()
-        
-        let signLabel = ExpressionLabel()
-        let numberLabel = ExpressionLabel()
-        
-        signLabel.text = signValue
-        numberLabel.text = numberValue
-        
-        if let signValue = signValue {
-            expression += signValue + numberValue
-        } else {
-            expression += numberValue
-        }
-        
-        expressionStackView.addArrangedSubview(signLabel)
-        expressionStackView.addArrangedSubview(numberLabel)
-        
-        expressionView.addArrangedSubview(expressionStackView)
-    }
-    
+
     // stackView 지우기
     private func removeExpression() {
         expressionView.subviews.forEach{ $0.removeFromSuperview() }
@@ -147,13 +128,5 @@ extension ViewController {
     private func changeNumberSign(numberValue: String) -> String {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
-    
-    // stackView 추가
-    func handleExpressionAddition(operatorOfLabel: String?, numberOfLabel: String) {
-        if let operatorOfLabel = operatorOfLabel {
-            addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel)
-        } else {
-            addExpression(signValue: nil, numberValue: numberOfLabel)
-        }
-    }
+
 }
