@@ -61,14 +61,15 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func didEqualsSignButtonTap (sender: UIButton) {
-        guard inputOperand != "0" else { return }
-        inputOperationQueue += inputOperand
+        if inputOperand != "0" {
+            inputOperationQueue += inputOperand
 
-        var formula = ExpressionParser.parse(from: inputOperationQueue)
-        let result = String(formula.result())
-        
-        clearAllLableAndQueue()
-        presentOperandLable.text = result
+            var formula = ExpressionParser.parse(from: inputOperationQueue)
+            let result = String(formula.result())
+            
+            clearAllLableAndQueue()
+            presentOperandLable.text = result
+        }
     }
     func clearAllLableAndQueue() {
         inputOperator = "0"
