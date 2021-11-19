@@ -1,17 +1,13 @@
 //
-//  Extension+String.swift
+//  String+addComma.swift
 //  Calculator
 //
-//  Created by 이차민 on 2021/11/12.
+//  Created by 이차민 on 2021/11/19.
 //
 
 import Foundation
 
 extension String {
-    func split(with target: Character) -> [String] {
-        return self.split(separator: target).map { String($0) }        
-    }
-    
     func addCommaOnEveryThreeDigits() -> String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
