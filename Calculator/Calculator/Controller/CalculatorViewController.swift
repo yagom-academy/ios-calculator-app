@@ -24,26 +24,26 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var expressionView: UIStackView!
     
     
-    @IBAction func clickAC(_ sender: UIButton) {
+    @IBAction func clickAllClear(_ sender: UIButton) {
         removeExpressionView()
         setZeroInNumberLabel()
         
         expressionController?.expressionWrapperInit()
     }
     
-    @IBAction func clickCalculate(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfButton = operatorSettingLabel.text else {
+    @IBAction func clickEqual(_ sender: UIButton) {
+        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfLabel = operatorSettingLabel.text else {
             return
         }
         
-        let formulaResult = expressionController?.calculate(expression: operatorOfButton +  numberOfLabel)
+        let formulaResult = expressionController?.calculate(expression: operatorOfLabel +  numberOfLabel)
         
         removeExpressionView()
         setNilInOperatorLabel()
         numberCompositionLabel.text = formulaResult
     }
     
-    @IBAction func initializationInputField(_ sender: UIButton) {
+    @IBAction func clickClearExpression(_ sender: UIButton) {
         setZeroInNumberLabel()
     }
     
