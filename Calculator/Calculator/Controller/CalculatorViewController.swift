@@ -104,5 +104,8 @@ class CalculatorViewController: UIViewController {
         initializeFormulaStackView()
     }
     
+    @IBAction func tapCEBtn(_ sender: UIButton) {
+        initailizeLabel()
+    }
 }
 
