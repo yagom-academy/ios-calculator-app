@@ -9,7 +9,18 @@ import UIKit
 
 struct CalculatorExpressionController {
     
-    var expression: String = ""
+    var expressionWrapper: String = ""
+    
+    mutating func calculate(expression: String) -> String {
+        expressionWrapper += expression
+        
+        var formula: Formula = ExpressionParser.parse(from: expressionWrapper)
+        let calculatedValue: Double = formula.result()
+        
+        expressionWrapper = ""
+        
+        return String(calculatedValue)
+    }
     
     // stackView 만들기
     mutating func addExpression(signValue: String?, numberValue: String) -> UIStackView {
@@ -22,9 +33,9 @@ struct CalculatorExpressionController {
         numberLabel.text = numberValue
         
         if let signValue = signValue {
-            expression += signValue + numberValue
+            expressionWrapper += signValue + numberValue
         } else {
-            expression += numberValue
+            expressionWrapper += numberValue
         }
         
         expressionStackView.addArrangedSubview(signLabel)

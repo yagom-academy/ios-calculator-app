@@ -7,12 +7,13 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    
-    var expressionController = CalculatorExpressionController()
 
+    var expressionController: CalculatorExpressionController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        expressionController = CalculatorExpressionController()
     }
     
     // MARK: property
@@ -22,26 +23,23 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var expressionView: UIStackView!
     
-    private var expression: String = ""
     
     @IBAction func clickAC(_ sender: UIButton) {
         removeExpression()
-        expression = ""
+        expressionController?.expressionWrapper = ""
+        setZeroInNumberLabel()
     }
     
     @IBAction func clickCalculate(_ sender: UIButton) {
         guard let numberOfLabel = numberCompositionLabel.text, let operatorOfButton = operatorSettingLabel.text else {
             return
         }
-        expression += operatorOfButton + numberOfLabel
-        
-        var formula: Formula = ExpressionParser.parse(from: expression)
-        let calculatedValue: Double = formula.result()
         
         removeExpression()
-        expression = ""
         operatorSettingLabel.text = ""
-        numberCompositionLabel.text = String(calculatedValue)
+        
+        let formulaResult = expressionController?.calculate(expression: operatorOfButton +  numberOfLabel)
+        numberCompositionLabel.text = formulaResult
     }
     
     @IBAction func initializationInputField(_ sender: UIButton) {
@@ -58,7 +56,9 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        expressionController.addExpression(signValue: operatorSettingLabel.text, numberValue: numberOfLabel)
+        if let stackView = expressionController?.addExpression(signValue: operatorSettingLabel.text, numberValue: numberOfLabel) {
+            expressionView.addArrangedSubview(stackView)
+        }
         
         operatorSettingLabel.text = operatorOfButton
         setZeroInNumberLabel()
@@ -73,7 +73,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        numberCompositionLabel.text = changeNumberSign(numberValue: numberOfLabel)
+        numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: numberOfLabel)
     }
     
     @IBAction func clickDoubleZero(_ sender: UIButton) {
