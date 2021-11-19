@@ -118,5 +118,23 @@ class CalculatorViewController: UIViewController {
             inputNumLabel.text = negativeSign + currentNum
         }
     }
+    
+    @IBAction func tapResultBtn(_ sender: UIButton) {
+        guard entireStringFormula != initialStringValue else { return }
+        
+        addFormulaStackView()
+        var formula = ExpressionParser.parse(from: entireStringFormula)
+        do {
+            let result = try formula.result()
+            inputNumLabel.text = String(result)
+            inputOperatorLabel.text = initialStringValue
+            entireStringFormula = initialStringValue
+        } catch CalculatorError.emptyQueue {
+            return
+        } catch {
+            print(error)
+        }
+    }
+    
 }
 
