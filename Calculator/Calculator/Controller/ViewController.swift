@@ -10,6 +10,8 @@ class ViewController: UIViewController {
     
     @IBOutlet var currentNumberLabel: UILabel!
     @IBOutlet var currentOperatorLabel: UILabel!
+    @IBOutlet var historyStackView: UIStackView!
+    
     var currentNumberString = ""
     var currentOperator = ""
     override func viewDidLoad() {
@@ -25,17 +27,50 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        // convert current buffer to UIStackView and add to UIScrollView
-        // reset currentNumberLabel to 0
+        addToStackView()
         guard let operatorPressedString = sender.accessibilityIdentifier else {
             return
         }
         currentOperator = operatorPressedString
         update(label: self.currentOperatorLabel, to: currentOperator)
+        updateCurrentLabels()
     }
     
     private func update(label: UILabel, to data: String) {
         label.text = data
+    }
+    
+    private func addToStackView() {
+        let formulaStackView = createFormulaStackView(with: currentOperator, and: currentNumberString)
+        historyStackView.addArrangedSubview(formulaStackView)
+    }
+    
+    private func createFormulaStackView(with operator: String, and operand: String) -> UIStackView {
+        let stackView = UIStackView()
+        let operandLabel = createLabel(with: operand)
+        let operatorLabel = createLabel(with: `operator`)
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        return stackView
+    }
+    
+    private func createLabel(with item: String) -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.text = item
+        label.textColor = .white
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }
+    
+    private func updateCurrentLabels() {
+        self.currentNumberLabel.text = "0"
+        self.currentNumberString = ""
     }
 }
 

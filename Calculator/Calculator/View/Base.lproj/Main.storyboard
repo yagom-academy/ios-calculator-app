@@ -370,6 +370,7 @@
                     <connections>
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="hdC-Q9-Qsb"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="70X-jP-Nf7"/>
+                        <outlet property="historyStackView" destination="XRe-QE-UJf" id="oY8-r4-PAc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
