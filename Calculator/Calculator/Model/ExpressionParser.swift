@@ -16,7 +16,10 @@ enum ExpressionParser {
         let operandsOfInputString = input.split(with: " ")
         
         OperatorsOfInputString.forEach {
-            inputOperator in operators.enQueue(Operator(rawValue: Character(inputOperator)))
+            inputOperator in
+                let operatorCharactor = Character(inputOperator)
+                let operatorMaded = Operator(rawValue: operatorCharactor)
+                operators.enQueue(operatorMaded)
         }
         operandsOfInputString.compactMap {
             (operands: String) -> Double? in return Double(operands)
