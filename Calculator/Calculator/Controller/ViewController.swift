@@ -28,6 +28,10 @@ class ViewController: UIViewController {
         
         inputedOperandLabel.text = initializeOperandLabelText
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+           return .lightContent
+    }
 }
 
 // MARK: - IBAction Method
@@ -130,6 +134,9 @@ extension ViewController {
         let operandLabel = UILabel()
         
         stackView.spacing = stackViewSpacing
+        operandLabel.textColor = .white
+        operatorLabel.textColor = .white
+        
         operandLabel.text = operandLabelText
         operatorLabel.text = operatorLabelText
         
