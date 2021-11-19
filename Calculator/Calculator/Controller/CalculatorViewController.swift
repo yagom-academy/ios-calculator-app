@@ -13,39 +13,15 @@ class CalculatorViewController: UIViewController {
     @IBOutlet var historyStackView: UIStackView!
     
     private var isPositiveOperand = true
-    
+    private var currentOperand = ""
+    private var currentOperator = ""
     private var isZero: Bool {
         return currentOperand == "0"
     }
-    
     private var isNotZero: Bool {
         return currentOperand != "0"
     }
-    
-    private var currentOperand: String {
-        get {
-            guard let currentOperand = currentOperandLabel.text else {
-                return ""
-            }
-            return currentOperand
-        }
-        set {
-            currentOperandLabel.text = newValue
-        }
-    }
-    
-    private var currentOperator: String {
-        get {
-            guard let currentOperator = currentOperatorLabel.text else {
-                return ""
-            }
-            return currentOperator
-        }
-        set {
-            currentOperatorLabel.text = newValue
-        }
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
@@ -60,6 +36,7 @@ class CalculatorViewController: UIViewController {
             currentOperand = ""
         }
         currentOperand += numberPressedString
+        update(label: currentOperandLabel, to: currentOperand)
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
@@ -69,6 +46,7 @@ class CalculatorViewController: UIViewController {
         }
         updateHistoryStackView(with: currentOperator, and: currentOperand)
         currentOperator = operatorPressedString
+        update(label: currentOperatorLabel, to: currentOperator)
         resetCurrentOperand()
     }
     
@@ -145,6 +123,7 @@ extension CalculatorViewController {
     
     private func resetCurrentOperand() {
         currentOperand = "0"
+        currentOperandLabel.text = "0"
     }
     
     private func toggleSignOfOperand() {
@@ -153,6 +132,7 @@ extension CalculatorViewController {
         } else {
             currentOperand = "-" + currentOperand
         }
+        update(label: currentOperandLabel, to: currentOperand)
     }
 }
 
