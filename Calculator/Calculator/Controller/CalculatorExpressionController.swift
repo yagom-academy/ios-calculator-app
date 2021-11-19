@@ -15,7 +15,7 @@ struct CalculatorExpressionController {
     
 }
 
-// MARK: internal method
+// MARK: - internal method
 
 extension CalculatorExpressionController {
     mutating func calculate() -> String? {
@@ -69,7 +69,7 @@ extension CalculatorExpressionController {
     }
 }
 
-// MARK: private method
+// MARK: - private method
 
 extension CalculatorExpressionController {
     private func decideNumberOfDigits(_ value: Double) -> (Int, Int) {

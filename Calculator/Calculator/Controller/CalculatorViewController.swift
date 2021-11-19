@@ -25,7 +25,7 @@ class CalculatorViewController: UIViewController {
     
 }
  
-// MARK: private action method
+// MARK: - private action method
 
 extension CalculatorViewController {
     @IBAction private func clickAllClear(_ sender: UIButton) {
