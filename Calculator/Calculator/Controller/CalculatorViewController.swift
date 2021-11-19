@@ -44,6 +44,9 @@ class CalculatorViewController: UIViewController {
         updateCurrentLabels()
     }
     
+    @IBAction func ceButtonPressed(_ sender: Any) {
+        updateCurrentLabels()
+    }
 }
 
 extension CalculatorViewController {
