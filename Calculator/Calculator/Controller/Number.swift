@@ -30,6 +30,22 @@ class Number {
         }
     }
     
+    func toggleSign() {
+        guard value != "0" else {
+            return
+        }
+        isBiggerThan0 = !isBiggerThan0
+        toggleValueSign()
+    }
+    
+    private func toggleValueSign() {
+        if value.contains("-") {
+            value.remove(at: value.startIndex)
+        } else {
+            value.insert("-", at: value.startIndex)
+        }
+    }
+    
     func reset() {
         value = "0"
         isBiggerThan0 = true

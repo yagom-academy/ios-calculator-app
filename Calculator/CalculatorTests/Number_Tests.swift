@@ -66,4 +66,32 @@ class Number_Tests: XCTestCase {
         XCTAssertEqual(fakeLabel, "789.")
     }
     
+    func test_value가양수일때_toggleSign을_호출하면_label에_마이너스부호가_추가된다() {
+        let testNum = Number(value: "777", isBiggerThan0: true)
+        testNum.toggleSign()
+        fakeLabel = testNum.value
+        XCTAssertTrue(fakeLabel.contains("-"))
+    }
+    
+    func test_value가양수일때_toggleSign을_두번호출하면_label엔_마이너스부호가_없다() {
+        let testNum = Number(value: "777", isBiggerThan0: true)
+        testNum.toggleSign()
+        testNum.toggleSign()
+        fakeLabel = testNum.value
+        XCTAssertFalse(fakeLabel.contains("-"))
+    }
+    
+    func test_value가음수일때_toggleSign을_호출하면_label엔_마이너스부호가_없다() {
+        let testNum = Number(value: "-777", isBiggerThan0: false)
+        testNum.toggleSign()
+        fakeLabel = testNum.value
+        XCTAssertEqual(fakeLabel, "777")
+        XCTAssertFalse(fakeLabel.contains("-"))
+    }
+    
+    func test_value가0일때_toggleSign을_호출하면_label엔_마이너스부호가_없다() {
+        sut.toggleSign()
+        fakeLabel = sut.value
+        XCTAssertFalse(fakeLabel.contains("-"))
+    }
 }
