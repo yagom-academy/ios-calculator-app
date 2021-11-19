@@ -101,7 +101,8 @@ class CalculatorViewController: UIViewController {
     
     private func scrollToBottom() {
         countingHistoryScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
+        let bottomOffset = CGPoint(x: 0,
+                                   y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
         countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
     }
     
