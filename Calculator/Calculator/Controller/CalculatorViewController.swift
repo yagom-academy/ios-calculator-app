@@ -17,9 +17,11 @@ class CalculatorViewController: UIViewController {
     private var currentOperand = ""
     private var currentOperator = ""
     private var historyStack: [String] = []
+    
     private var isZero: Bool {
         return currentOperand == "0"
     }
+    
     private var isNotZero: Bool {
         return currentOperand != "0"
     }
@@ -27,8 +29,7 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
-        resetCurrentOperand()
-        update(currentOperandLabel, to: currentOperand)
+        changeCurrentOperandData(to: "0")
     }
     //MARK: - @IBAction Properties
     @IBAction func touchUpDigitButton(_ sender: UIButton) {
@@ -39,8 +40,7 @@ class CalculatorViewController: UIViewController {
             setCurrentOperand(to: "")
         }
         let newOperand = currentOperand + numberPressedString
-        setCurrentOperand(to: newOperand)
-        update(currentOperandLabel, to: currentOperand)
+        changeCurrentOperandData(to: newOperand)
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -48,46 +48,38 @@ class CalculatorViewController: UIViewController {
               isNotZero else {
             return
         }
-        refreshCalculateHistory()
-        setCurrentOperator(to: operatorPressedString)
-        update(currentOperatorLabel, to: currentOperator)
-        resetCurrentOperand()
-        update(currentOperandLabel, to: currentOperand)
+        refreshCalculateHistory(with: currentOperator, and: currentOperand)
+        changeCurrentOperatorData(to: operatorPressedString)
+        changeCurrentOperandData(to: "0")
         autoScrollToBottom()
     }
     
     @IBAction func touchUpCalculateButton(_ sender: Any) {
-        refreshCalculateHistory()
-        resetCurrentOperand()
+        refreshCalculateHistory(with: currentOperator, and: currentOperand)
+        setCurrentOperand(to: "0")
         guard let result = calculateResult(from: historyStack) else {
             return
         }
-        historyStack.removeAll()
-        setCurrentOperator(to: "")
-        removeFormulaStackViews()
+        clearCalculationHistory()
         update(currentOperandLabel, to: result)
-        update(currentOperatorLabel, to: currentOperator)
+        changeCurrentOperatorData(to: "")
         let newOperand = result.removedCommas
         setCurrentOperand(to: newOperand)
     }
     
     @IBAction func touchUpACButton(_ sender: Any) {
-        removeFormulaStackViews()
-        resetCurrentOperand()
-        update(currentOperandLabel, to: currentOperand)
-        historyStack.removeAll()
+        clearCalculationHistory()
+        changeCurrentOperandData(to: "0")
     }
     
     @IBAction func touchUpCEButton(_ sender: Any) {
-        resetCurrentOperand()
-        update(currentOperandLabel, to: currentOperand)
+        changeCurrentOperandData(to: "0")
     }
     
     @IBAction func touchUpSignButton(_ sender: Any) {
         guard isNotZero else {
             return
         }
-        isPositiveOperand.toggle()
         toggleSignOfOperand()
     }
 }
@@ -101,12 +93,18 @@ extension CalculatorViewController {
             }
     }
     
-    private func resetCurrentOperand() {
-        setCurrentOperand(to: "0")
+    private func changeCurrentOperandData(to newOperand: String) {
+        setCurrentOperand(to: newOperand)
+        update(currentOperandLabel, to: newOperand)
     }
     
     private func setCurrentOperand(to newOperand: String) {
         currentOperand = newOperand
+    }
+    
+    private func changeCurrentOperatorData(to newOperator: String) {
+        setCurrentOperator(to: newOperator)
+        update(currentOperatorLabel, to: newOperator)
     }
     
     private func setCurrentOperator(to newOperator: String) {
@@ -117,7 +115,29 @@ extension CalculatorViewController {
         label.text = data
     }
     
-    private func refreshCalculateHistory() {
+    private func autoScrollToBottom() {
+        calculationHistoryScrollView.layoutIfNeeded()
+        let contentSizeHeight = calculationHistoryScrollView.contentSize.height
+        let boundsHeight = calculationHistoryScrollView.bounds.height
+        let contentInsetBottom = calculationHistoryScrollView.contentInset.bottom
+        let bottomOffset = CGPoint(x: 0, y: contentSizeHeight - boundsHeight + contentInsetBottom)
+        
+        if bottomOffset.y > 0 {
+            calculationHistoryScrollView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
+    
+    private func calculateResult(from historyStack: [String]) -> String? {
+        let equationString = historyStack.filter { $0 != "" }.joined()
+        var formula = ExpressionParser.parse(from: equationString)
+        let rawResult = formula.result()
+        guard let result = rawResult.presentingFormat else {
+            return nil
+        }
+        return result
+    }
+    
+    private func refreshCalculateHistory(with currentOperator: String, and currentOperand: String) {
         updateHistoryStackView(with: currentOperator, and: currentOperand)
         historyStack.append(contentsOf: [currentOperator, currentOperand])
     }
@@ -131,7 +151,13 @@ extension CalculatorViewController {
         historyStackView.addArrangedSubview(formulaStackView)
     }
     
+    private func clearCalculationHistory() {
+        historyStack.removeAll()
+        removeFormulaStackViews()
+    }
+    
     private func toggleSignOfOperand() {
+        isPositiveOperand.toggle()
         if isPositiveOperand {
             let newOperand = currentOperand.filter { $0.isNumber }
             setCurrentOperand(to: newOperand)
@@ -140,18 +166,6 @@ extension CalculatorViewController {
             setCurrentOperand(to: newOperand)
         }
         update(currentOperandLabel, to: currentOperand)
-    }
-    
-    private func autoScrollToBottom() {
-        calculationHistoryScrollView.layoutIfNeeded()
-        let contentSizeHeight = calculationHistoryScrollView.contentSize.height
-        let boundsHeight = calculationHistoryScrollView.bounds.height
-        let contentInsetBottom = calculationHistoryScrollView.contentInset.bottom
-        let bottomOffset = CGPoint(x: 0, y: contentSizeHeight - boundsHeight + contentInsetBottom)
-        
-        if bottomOffset.y > 0 {
-            calculationHistoryScrollView.setContentOffset(bottomOffset, animated: true)
-        }
     }
     
     private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
@@ -184,15 +198,5 @@ extension CalculatorViewController {
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
         return label
-    }
-    
-    private func calculateResult(from historyStack: [String]) -> String? {
-        let equationString = historyStack.filter { $0 != "" }.joined()
-        var formula = ExpressionParser.parse(from: equationString)
-        let rawResult = formula.result()
-        guard let result = rawResult.presentingFormat else {
-            return nil
-        }
-        return result
     }
 }
