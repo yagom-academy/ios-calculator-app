@@ -58,7 +58,8 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {return}
-    
+        guard inputLabel.text != "0" else { return }
+        guard inputLabel.text?.isEmpty == false else {return}
         makeSmallStackView()
         inputLabel.text = ""
         operatorLabel.text = `operator`
