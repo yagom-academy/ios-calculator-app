@@ -103,10 +103,9 @@ extension CalculatorViewController {
     
     @IBAction private func clickNumberSign(_ sender: UIButton) {
         if currentLabelValue.operand == operandLabel.defaultValue {
-            operandLabel.text = changeNumberSign(numberValue: operandLabel.emptyValue)
-        } else {
-            operandLabel.text = changeNumberSign(numberValue: currentLabelValue.operand)
+            return
         }
+        operandLabel.text = changeNumberSign(numberValue: currentLabelValue.operand)
     }
     
     @IBAction private func clickDoubleZero(_ sender: UIButton) {
