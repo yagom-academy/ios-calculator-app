@@ -13,9 +13,9 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
-    private var notFormattedOperand = "0"
+    private var rawOperand = "0"
     private var invalidCheckInputedOperand: Bool {
-        if notFormattedOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
+        if rawOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
             return true
         } else {
             return false
@@ -37,21 +37,21 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        notFormattedOperand = notFormattedOperand + number
+        rawOperand = rawOperand + number
         operandLabel.text = changeNumberFormatter(insertedNumber: number)
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
-        guard !notFormattedOperand.contains(".") else {
+        guard !rawOperand.contains(".") else {
             return
         }
         
-        notFormattedOperand = notFormattedOperand + "."
-        operandLabel.text = notFormattedOperand
+        rawOperand = rawOperand + "."
+        operandLabel.text = rawOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        notFormattedOperand = "0"
+        rawOperand = "0"
         
         guard operandLabel.text != "0" else {
             operatorLabel.text = sender.titleLabel?.text
@@ -68,17 +68,17 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
-        guard notFormattedOperand != "0" else {
+        guard rawOperand != "0" else {
             return
         }
         
-        if notFormattedOperand.contains("-") {
-            notFormattedOperand.remove(at: notFormattedOperand.startIndex)
+        if rawOperand.contains("-") {
+            rawOperand.remove(at: rawOperand.startIndex)
         } else {
-            notFormattedOperand.insert("-", at: notFormattedOperand.startIndex)
+            rawOperand.insert("-", at: rawOperand.startIndex)
         }
         
-        operandLabel.text = notFormattedOperand
+        operandLabel.text = rawOperand
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -99,8 +99,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func resetCalcurator() {
-        notFormattedOperand = "0"
-        operandLabel.text = notFormattedOperand
+        rawOperand = "0"
+        operandLabel.text = rawOperand
         operatorLabel.text = ""
         allClear()
     }
@@ -140,8 +140,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func clearEntry() {
-        notFormattedOperand = "0"
-        operandLabel.text = notFormattedOperand
+        rawOperand = "0"
+        operandLabel.text = rawOperand
     }
     
     func autoScrollDown() {
@@ -161,14 +161,14 @@ class CalculatorViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 15
 
-        guard let number = Double(notFormattedOperand),
+        guard let number = Double(rawOperand),
               let result = numberFormatter.string(from: NSNumber(value: number)) else {
             return ""
         }
         
-        if notFormattedOperand.contains(".") {
+        if rawOperand.contains(".") {
             if insertedNumber == "0" || insertedNumber == "00" {
-                return notFormattedOperand
+                return rawOperand
             }
         }
         return result
