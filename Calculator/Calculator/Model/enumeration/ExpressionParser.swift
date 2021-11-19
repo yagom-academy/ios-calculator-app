@@ -15,11 +15,12 @@ enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
         let splitedInput = input.split(with: whiteSpace)
-        let filteredOperatorRawValues = componentsByOperators(from: input)
-        let operands = CalculatorItemQueue(queue: splitedInput.compactMap { operand in
-            return Double(operand) })
-        let operators = CalculatorItemQueue(queue: filteredOperatorRawValues.compactMap { operatorRawValue in
-            return Operator(rawValue: operatorRawValue)
+        let operands = CalculatorItemQueue(queue: splitedInput.compactMap {
+            Double($0)
+        })
+        let filteredOperatorSymbols = componentsByOperators(from: input)
+        let operators = CalculatorItemQueue(queue: filteredOperatorSymbols.compactMap {
+            Operator(symbol: $0)
         })
         
         return Formula(operands: operands, operators: operators)
@@ -28,8 +29,6 @@ enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
         let splitedInput = input.split(with: whiteSpace)
         
-        return splitedInput.filter { `operator` in
-            return Operator.operatorRawValues.contains(`operator`)
-        }
+        return splitedInput.filter { Operator.symbols.contains($0) }
     }
 }
