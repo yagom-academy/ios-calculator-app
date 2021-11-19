@@ -82,12 +82,6 @@ class CalculatorViewController: UIViewController {
         scrollToBottom()
     }
     
-    private func changeLabelText(into text: inout String, at sender: UIButton) {
-        text = sender.currentTitle ?? "0"
-        textInput += text
-        operatorLabel?.text = text
-    }
-    
     private func addCountingHistory() {
         if operandText == "" {
             return
@@ -102,6 +96,12 @@ class CalculatorViewController: UIViewController {
         label.textColor = .white
         label.text = countingHistory
         countingHistoryStackView?.addArrangedSubview(label)
+    }
+    
+    private func changeLabelText(into text: inout String, at sender: UIButton) {
+        text = sender.currentTitle ?? "0"
+        textInput += text
+        operatorLabel?.text = text
     }
     
     private func scrollToBottom() {
