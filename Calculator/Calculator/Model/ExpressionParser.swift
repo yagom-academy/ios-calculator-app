@@ -21,10 +21,10 @@ enum ExpressionParser {
     
     private static func insertOperatorsToQueue(from input: String) -> CalculatorItemQueue<Operator> {
         var operatorQueue = CalculatorItemQueue<Operator>()
-        let allOperatorsRawValue = Operator.allCases.map { $0.rawValue }
+        let operatorsSymbols = Operator.allCases.map { $0.symbols }
 
-        input.filter { allOperatorsRawValue.contains($0) }.forEach {
-            guard let singleOperator = Operator(rawValue: $0) else { return }
+        input.filter { operatorsSymbols.contains($0) }.forEach {
+            guard let singleOperator = Operator(symbols: $0) else { return }
             operatorQueue.enqueue(singleOperator)
         }
         
@@ -46,7 +46,7 @@ enum ExpressionParser {
         var componentsWithoutOperators: [String] = []
         
         componentsWithoutOperators = Operator.allCases.reduce([input]) { (splitInput, operatorInInput) in
-            splitInput.flatMap { $0.split(with: operatorInInput.rawValue) }
+            splitInput.flatMap { $0.split(with: operatorInInput.symbols) }
         }
         
         return componentsWithoutOperators

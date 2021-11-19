@@ -13,6 +13,23 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multiply = "*"
     
+    var symbols: Character {
+        switch self {
+        case .add:
+            return "+"
+        case .subtract:
+            return "-"
+        case .divide:
+            return "/"
+        case .multiply:
+            return "*"
+        }
+    }
+    
+    init?(symbols: Character) {
+        self.init(rawValue: symbols)
+    }
+    
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         switch self {
         case .add:
