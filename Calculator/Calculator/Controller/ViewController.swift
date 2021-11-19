@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if isZeroValue(data: numberOfLabel) {
+        if numberOfLabel.isZeroValue {
             operatorSettingLabel.text = operatorOfButton
             return
         }
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if isZeroValue(data: numberOfLabel) {
+        if numberOfLabel.isZeroValue {
             return
         }
         
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
             return
         }
                
-        if isZeroValue(data: numberOfLabel) == false {
+        if numberOfLabel.isZeroValue == false {
             numberCompositionLabel.text = numberOfLabel + point
         }
     }
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
             return
         }
     
-        if isZeroValue(data: numberOfLabel) {
+        if numberOfLabel.isZeroValue {
             numberCompositionLabel.text = numberOfButton
         } else {
             numberCompositionLabel.text = numberOfLabel + numberOfButton
@@ -114,9 +114,6 @@ class ViewController: UIViewController {
 // MARK: - private method
 
 extension ViewController {
-    private func isZeroValue(data: String) -> Bool {
-        return data == "0" ? true : false
-    }
     
     private func addExpression(signValue: String?, numberValue: String) {
         let expressionStackView = UIStackView()
@@ -151,6 +148,3 @@ extension ViewController {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
     }
 }
-
-
-
