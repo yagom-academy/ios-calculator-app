@@ -51,6 +51,9 @@
 - `layoutIfNeeded()` `setNeedsLayout()`
 - `Main Run Loop` `Update Cycle`
 - `replacingOccurrences`
+- `split vs components`
+- `viewDidLoad` `viewWillLayoutSubviews`
+- `IBInspectable`
 
 # Reviewers
 
@@ -321,14 +324,135 @@
 - `해결`
     - 따라서 스크롤뷰의 원점에 대한 콘텐츠뷰의 오프셋 설정을 해주기 전에 `layoutIfNeeded()` 메소드를 호출하여 layout을 업데이트 하고 setContentOffset을 설정해주었더니 해당 문제에 대해서 해결되었다.
     
+ ### 2. 커스텀 뷰를 만들어보기
+
+- `상황` **스택뷰 > 스택뷰 > 레이블** 계층을 가진 부분에서 레이블의 텍스트를 꺼내려면 `arrangedSubviews`를 `이중 for문`을 돌면서 가져와야 하는 상황이 마음에 안들었다.
+    
+    ```swift
+    extension UIStackView {
+        var toString: String {
+            var inputValues = [String]()
+                    self.arrangedSubviews.forEach{ view in
+                let subview = view as? UIStackView
+                subview?.arrangedSubviews.forEach{ view in
+                    let label = view as? UILabel
+                    guard let input = label?.text else {
+                        return
+                    }
+                    inputValues.append(input.replacingOccurrences(of: ",", with: ""))
+                }
+            }
+            return inputValues.joined(separator: " ")
+        }
+    }
+    ```
+    
+- `해결방향` 리뷰어인 엘림에게 조언을 구해서 `스택뷰 > 커스텀뷰` 계층을 가질 수 있도록 커스텀뷰 만들기에 도전해보았다.
+- `결과`
+    
+    ```swift
+    extension UIStackView {
+        var toString: String {
+            var inputValues = [String]()
+            self.arrangedSubviews.forEach { view in
+                guard let formualStackView = view as? FormulaStackView else {
+                    return
+                }
+                inputValues.append(contentsOf: formualStackView.element)
+            }
+            return inputValues.joined(separator: " ")
+        }
+    }
+    ```
+    
+- `FormulaStackView`라는 커스텀 뷰를 만들어 줌으로써 이중 for문을 돌던 문제도 해결이 되었고, ViewController에서 스택뷰 내부에 `Label을 추가`해주는 부분도 커스텀뷰 내부에서 해결할 수 있게되었다.
+
+### 3.  스크롤 바로 인해 내부 Label의 Text가 가려지는 문제
+
+![Untitled](https://user-images.githubusercontent.com/49546979/142418073-e9de7219-2754-482e-9f7d-ad3f77633c48.png)
+
+- `상황` 계산내역이 쌓여서 스크롤바가 생기는 문제로 스크롤을 진행할 시 글씨가 가려지는 문제가 있었다.
+- `해결방향` 스크롤바를 가릴 수 있는 방법이 없는지 구글링을 통해서 찾아보았다.
+- `결과`
+- 찾아보니 인터페이스 빌더에서도 설정을 해줄 수도 있고 코드로도 해당 문제를 해결할 수 있었다.
+    - 코드로 설정하기
+        
+        ```swift
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        ```
+        
+        - 인터페이스 빌더에서 없애기
+        
+        ![https://i.imgur.com/rOkoBw3.png](https://i.imgur.com/rOkoBw3.png)
+        
+        위 사진에서 체크를 풀어주면 된다.
+        
+
+### 4. 버튼의 모양을 둥글게 만들기
+
+- `상황` 엘림에게 버튼을 둥글게 만들어보는 도전과제를 받게되어 해결해보기로 하였다.
+- `시도` 처음에는 버튼 자체가 코드가 아닌 스토리보드에서 생성된 버튼이라서 인터페이스 빌더로 해결해보고자 하였다.
+    
+    ```swift
+        extension UIView {
+            @IBInspectable var cornerRadius: CGFloat {
+                get {
+                    return layer.cornerRadius
+                }
+                set {
+                    layer.cornerRadius = newValue
+                    layer.masksToBounds = newValue > 0
+                }
+            }
+        }
+    ```
+    
+- 그러나 이 방법으로는 버튼의 cornerRadius를 직접 대입해주는 방식이기 때문에 디바이스가 다를 경우 내가 원하는 결과를 얻기에는 힘들다고 판단되었다. 그래서 코드로 해볼 수 있는 방법을 찾아 해결해보았다.
+- `결과`
+
+```swift
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        calculatorButtons.forEach { button in
+            button.layer.cornerRadius = button.layer.frame.size.width / 2
+        }
+    }
+```
+
+- 버튼의 너비 / 2를 해서 cornerRadius를 설정해준 코드다. 이때 `viewWillLayoutSubviews` 메소드를 써준다.
+
+### `viewWillLayoutSubviews()`
+
+- 뷰의 바운드가 최종적으로 결정되는 최초 시점
+- 제약이나 오토레이아웃을 사용하지 않았다면, 서브뷰의 레이아웃을 업데이트하기 적합한 시점이다.
+- 여러번 중복으로 호출될 수 있다.
+    - 메인뷰의 서브뷰가 로드되는 경우
+
 ## 3-4 배운 개념
 
 - 코드로 UI를 그려보는 방법
 - `Stack View`
     - 코드로 Stack View의 layout을 잡는 방법
 - `Scroll View`
+    - 스크롤 바 없애는 방법
 - `layoutIfNeeded()`활용
 - `NumberFormatter`
 - `LLDB`
+- `super.viewDidLoad()`
+- `protocol LocalizedError` 용도
+- `@IBInspectable`
+- `viewWillLayoutSubviews()`
+- 커스텀뷰를 만드는 방법 (only Code)
+
+## 3-5 PR 후 개선사항
+
+- 동일한 return을 하는 guard문을 합쳐서 개선
+- 스크롤바 때문에 가려지는 문제 해결
+- 주석위치와 줄바꿈으로 코드 내부 가독성 개선
+- 중복되는 부분 메소드로 분리하여 개선
+- toggle 사용으로 가독성이 떨어지는 부분을 직접 대입해주는 방식으로 개선
+- LocalizedError 프로토콜을 활용하여 description을 좀 더 직관적으로 확인할 수 있게 개선
+- 커스텀 뷰를 만들어서 ViewController 내부 코드 개선
 
 [![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#계산기-프로젝트)
