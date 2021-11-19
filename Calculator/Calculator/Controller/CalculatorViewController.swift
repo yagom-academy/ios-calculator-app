@@ -46,5 +46,16 @@ class ViewController: UIViewController {
     @IBAction func didChangeSignButtonTap (sender: UIButton) {
     }
     @IBAction func didEqualsSignButtonTap (sender: UIButton) {
+        guard inputOperand != "0" else { return }
+        inputOperationQueue += inputOperand
+
+        var formula = ExpressionParser.parse(from: inputOperationQueue)
+        let result = String(formula.result())
+        presentOperandLable.text = result
+        presentOperatorLable.text = ""
+        
+        inputOperator = "0"
+        inputOperand = "0"
+        inputOperationQueue = ""
     }
 }
