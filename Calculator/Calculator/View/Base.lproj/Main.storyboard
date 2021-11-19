@@ -71,7 +71,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="changePlusMinusSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ho-XS-Zzy"/>
+                                                    <action selector="touchUpChangePlusMinusSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="20e-Qn-xhy"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -315,7 +315,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DC3-Ia-6L7" secondAttribute="trailing" constant="16" id="4U4-wj-pOs"/>
-                            <constraint firstItem="BOT-7g-vxv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9Pe-KB-bQo"/>
+                            <constraint firstItem="BOT-7g-vxv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9Pe-KB-bQo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKH-82-hZC" secondAttribute="trailing" constant="16" id="YWo-lu-Avi"/>
                             <constraint firstItem="YKH-82-hZC" firstAttribute="top" secondItem="DC3-Ia-6L7" secondAttribute="bottom" constant="20" id="f7E-le-Da8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BOT-7g-vxv" secondAttribute="trailing" constant="16" id="jGA-4U-1bz"/>
