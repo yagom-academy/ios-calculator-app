@@ -38,6 +38,11 @@ class CalculatorViewController: UIViewController {
         update(label: self.currentOperatorLabel, to: currentOperatorString)
         updateCurrentLabels()
     }
+    @IBAction func acButtonPressed(_ sender: Any) {
+        removePlaceholderViews()
+        updateCurrentLabels()
+    }
+    
 }
 
 extension CalculatorViewController {
