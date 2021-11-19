@@ -36,11 +36,11 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        let formulaResult = expressionController?.calculate(expression: operatorOfLabel +  numberOfLabel)
+        let expressionInLabels: String = operatorOfLabel +  numberOfLabel
+        numberCompositionLabel.text = expressionController?.calculate(expression: expressionInLabels)
         
         removeExpressionView()
         setNilInOperatorLabel()
-        numberCompositionLabel.text = formulaResult
     }
     
     @IBAction func clickClearExpression(_ sender: UIButton) {

@@ -50,7 +50,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickAC:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8H1-ng-c71"/>
+                                                    <action selector="clickAllClear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RWZ-Ix-yOK"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
@@ -61,7 +61,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="initializationInputField:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sot-4U-mTx"/>
+                                                    <action selector="clickClearExpression:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gcm-wk-5UH"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -282,7 +282,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickCalculate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oq5-62-faE"/>
+                                                    <action selector="clickEqual:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PuV-ga-a4u"/>
                                                 </connections>
                                             </button>
                                         </subviews>
