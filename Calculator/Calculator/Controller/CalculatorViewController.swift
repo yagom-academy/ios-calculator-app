@@ -34,7 +34,10 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func didOperatorButtonTap (sender: UIButton) {
-        let buttonTitle = sender.currentTitle
+        var buttonTitle = sender.currentTitle
+        if buttonTitle == "-" {
+            buttonTitle = "_"
+        }
         inputOperator = buttonTitle ?? ""
         if inputOperand != "0" {
             inputOperationQueue += inputOperand
