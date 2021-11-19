@@ -9,6 +9,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
 
     @IBOutlet weak var inputNumLabel: UILabel!
+    @IBOutlet weak var inputOperatorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
