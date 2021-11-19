@@ -212,7 +212,7 @@ extension ViewController {
         operandLabel.text?.append(dot)
     }
     
-    @IBAction private func changePlusMinusSign(_ sender: Any) {
+    @IBAction private func touchUpChangePlusMinusSign(_ sender: Any) {
         guard let currentOperandNumber = Double(currentOperand), !currentOperandNumber.isZero else {
             return
         }
