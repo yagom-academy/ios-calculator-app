@@ -17,7 +17,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        removePlaceholderViews()
+        removeFormulaStackViews()
         updateCurrentLabels()
     }
     
@@ -26,27 +26,28 @@ class CalculatorViewController: UIViewController {
             return
         }
         currentNumberString += numberPressedString
-        update(label: self.currentNumberLabel, to: currentNumberString)
+        update(label: currentNumberLabel, to: currentNumberString)
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        addToStackView()
         guard let operatorPressedString = sender.accessibilityIdentifier else {
             return
         }
+        updateHistoryStackView()
         currentOperatorString = operatorPressedString
-        update(label: self.currentOperatorLabel, to: currentOperatorString)
+        update(label: currentOperatorLabel, to: currentOperatorString)
         updateCurrentLabels()
     }
+    
     @IBAction func acButtonPressed(_ sender: Any) {
-        removePlaceholderViews()
+        removeFormulaStackViews()
         updateCurrentLabels()
     }
     
 }
 
 extension CalculatorViewController {
-    private func removePlaceholderViews() {
+    private func removeFormulaStackViews() {
         historyStackView.arrangedSubviews.forEach { placeHolderView in
             placeHolderView.removeFromSuperview()
         }
@@ -56,8 +57,12 @@ extension CalculatorViewController {
         label.text = data
     }
     
-    private func addToStackView() {
+    private func updateHistoryStackView() {
         let formulaStackView = createFormulaStackView(with: currentOperatorString, and: currentNumberString)
+        add(formulaStackView, to: historyStackView)
+    }
+    
+    private func add(_ formulaStackView: UIStackView, to historyStackView: UIStackView) {
         historyStackView.addArrangedSubview(formulaStackView)
     }
     
