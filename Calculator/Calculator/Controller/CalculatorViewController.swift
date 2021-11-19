@@ -62,19 +62,24 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         addCountingHistory()
+        
         textInput += operandText
+        
         guard let lastWord = textInput.last else {
             return
         }
+        
         if lastWord.isNumber {
         } else {
             textInput.removeLast()
         }
+        
         operatorText = sender.currentTitle ?? "0"
         textInput += operatorText
         operatorLabel?.text = operatorText
         operandText = ""
         operandLabel?.text = "0"
+        
         addScrollViewLabel()
         scrollToBottom()
     }
