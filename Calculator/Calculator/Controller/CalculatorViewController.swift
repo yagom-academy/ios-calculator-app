@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
     private var rawOperand = "0"
-    private var invalidCheckInputedOperand: Bool {
+    private var checkNumberOfInputs: Bool {
         if rawOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
             return true
         } else {
@@ -29,7 +29,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
-        guard invalidCheckInputedOperand else {
+        guard checkNumberOfInputs else {
             return
         }
         
