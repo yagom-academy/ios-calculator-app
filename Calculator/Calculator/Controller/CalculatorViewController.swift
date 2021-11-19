@@ -9,76 +9,86 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var inputOperand: String = "0"
-    var inputOperator: String = "0"
-    var inputOperationQueue: String = ""
-    
-    @IBOutlet weak var presentOperandLable: UILabel!
-    @IBOutlet weak var presentOperatorLable: UILabel!
+    var currentOperand: String = "0"
+    var currentOperator: String = "0"
+    var operationQueue: String = ""
+
+    @IBOutlet private weak var currentOperandLable: UILabel!
+    @IBOutlet private weak var currentOperatorLable: UILabel!
     
     @IBAction func didNumberButtonTap(sender: UIButton) {
         let buttonTitle = sender.currentTitle
-        if inputOperand != "0" {
-            inputOperand += buttonTitle ?? ""
-        } else if inputOperand == "0" && buttonTitle != "00" {
-            inputOperand = buttonTitle ?? ""
+        
+        if currentOperand != "0" {
+            currentOperand += buttonTitle ?? ""
+        } else if currentOperand == "0" && buttonTitle != "00" {
+            currentOperand = buttonTitle ?? ""
         }
-        presentOperandLable.text! = inputOperand
-        inputOperationQueue += inputOperator
-        inputOperator = "0"
+        currentOperandLable.text! = currentOperand
+        operationQueue += currentOperator
+        currentOperator = "0"
     }
+
     @IBAction func didDecimalPointButtonTap (sender: UIButton) {
-        if inputOperand.last != "." && !inputOperand.contains(".") {
-            inputOperand += "."
-            presentOperandLable.text! = inputOperand
+        if currentOperand.last != "." && !currentOperand.contains(".") {
+            currentOperand += "."
+            currentOperandLable.text! = currentOperand
         }
     }
+
     @IBAction func didOperatorButtonTap (sender: UIButton) {
         var buttonTitle = sender.currentTitle
         if buttonTitle == "-" {
             buttonTitle = "_"
         }
-        inputOperator = buttonTitle ?? ""
-        if inputOperand != "0" {
-            inputOperationQueue += inputOperand
-            inputOperand = "0"
+        currentOperator = buttonTitle ?? ""
+        if currentOperand != "0" {
+            operationQueue += currentOperand
+            currentOperand = "0"
         }
-        presentOperatorLable.text! = inputOperator
-        presentOperandLable.text! = "0"
+        currentOperatorLable.text! = currentOperator
+        currentOperandLable.text! = "0"
     }
+
     @IBAction func didAllClearButtonTap (sender: UIButton) {
         clearAllLableAndQueue()
     }
-    @IBAction func didClearEntryButtonTap (sender: UIButton) {
-        if !inputOperand.isEmpty && inputOperand != "0" {
-            inputOperand.removeLast()
-            presentOperandLable.text = inputOperand
-        }
-    }
-    @IBAction func didChangeSignButtonTap (sender: UIButton) {
-        if inputOperand.hasPrefix("-") {
-            inputOperand.removeFirst()
-        } else {
-            let temp = inputOperand
-            inputOperand = "-" + temp
-        }
-    }
-    @IBAction func didEqualsSignButtonTap (sender: UIButton) {
-        if inputOperand != "0" {
-            inputOperationQueue += inputOperand
 
-            var formula = ExpressionParser.parse(from: inputOperationQueue)
-            let result = String(formula.result())
-            
-            clearAllLableAndQueue()
-            presentOperandLable.text = result
+    @IBAction func didClearEntryButtonTap (sender: UIButton) {
+        if !currentOperand.isEmpty && currentOperand != "0" {
+            currentOperand.removeLast()
+            currentOperandLable.text = currentOperand
         }
     }
+
+    @IBAction func didChangeSignButtonTap (sender: UIButton) {
+        if currentOperand.hasPrefix("-") {
+            currentOperand.removeFirst()
+        } else {
+            let temp = currentOperand
+            currentOperand = "-" + temp
+        }
+    }
+
+    @IBAction func didEqualsSignButtonTap (sender: UIButton) {
+        if currentOperand != "0" {
+            operationQueue += currentOperand
+            let result = calculate(with: operationQueue)
+            clearAllLableAndQueue()
+            currentOperandLable.text = result
+        }
+    }
+    
+    private func calculate(with queue: String) -> String {
+        var formula = ExpressionParser.parse(from: queue)
+        return String(formula.result())
+    }
+
     func clearAllLableAndQueue() {
-        inputOperator = "0"
-        inputOperand = "0"
-        inputOperationQueue = ""
-        presentOperandLable.text = ""
-        presentOperatorLable.text = ""
+        currentOperator = "0"
+        currentOperand = "0"
+        operationQueue = ""
+        currentOperandLable.text = ""
+        currentOperatorLable.text = ""
     }
 }
