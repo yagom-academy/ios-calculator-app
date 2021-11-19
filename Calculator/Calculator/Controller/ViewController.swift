@@ -56,11 +56,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if let operatorOfLabel = operatorSettingLabel.text {
-            addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel)
-        } else {
-            addExpression(signValue: nil, numberValue: numberOfLabel)
-        }
+        handleExpressionAddition(operatorOfLabel: operatorSettingLabel.text, numberOfLabel: numberOfLabel)
         
         operatorSettingLabel.text = operatorOfButton
         setZeroInNumberLabel()
@@ -115,6 +111,7 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
+    // stackView 만들기
     private func addExpression(signValue: String?, numberValue: String) {
         let expressionStackView = UIStackView()
         
@@ -136,15 +133,27 @@ extension ViewController {
         expressionView.addArrangedSubview(expressionStackView)
     }
     
+    // stackView 지우기
     private func removeExpression() {
         expressionView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
+    // ViewController단 numberLabel = 0 으로 만들기
     private func setZeroInNumberLabel() {
         numberCompositionLabel.text = "0"
     }
     
+    // numberLabel 값 기호 바꾸기
     private func changeNumberSign(numberValue: String) -> String {
         return numberValue.hasPrefix("-") ? numberValue.filter { $0.isNumber } : "-" + numberValue
+    }
+    
+    // stackView 추가
+    func handleExpressionAddition(operatorOfLabel: String?, numberOfLabel: String) {
+        if let operatorOfLabel = operatorOfLabel {
+            addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel)
+        } else {
+            addExpression(signValue: nil, numberValue: numberOfLabel)
+        }
     }
 }
