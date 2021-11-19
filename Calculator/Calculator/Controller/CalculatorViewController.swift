@@ -17,10 +17,13 @@ class CalculatorViewController: UIViewController {
     private let initialNumLabel = "0"
     private let initialStringValue = ""
     
+    private let numberFormatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initailizeLabel()
         initializeFormulaStackView()
+        initializeNumberFormatter()
 
     }
     
@@ -31,6 +34,12 @@ class CalculatorViewController: UIViewController {
     
     func initializeFormulaStackView() {
         formulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func initializeNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
     }
 
     // MARK: - 숫자 버튼 입력
