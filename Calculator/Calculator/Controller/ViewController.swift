@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         inputLabel.text = "0"
+        operatorLabel.text = ""
     }
     
     func makeLabel(text: String?) -> UILabel {
@@ -33,7 +34,7 @@ class ViewController: UIViewController {
     func makeSmallStackView() {
         let operandLabel = makeLabel(text: self.inputLabel.text)
         let operatorLabel = makeLabel(text: self.operatorLabel.text)
-        let smallStackview = makeStackView(with: operatorLabel,operandLabel)
+        let smallStackview = makeStackView(with: operatorLabel, operandLabel)
         
         mainStackView.addArrangedSubview(smallStackview)
     }
@@ -54,13 +55,15 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {return}
-        operatorLabel.text = `operator`
+    
         makeSmallStackView()
         inputLabel.text = ""
+        operatorLabel.text = `operator`
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         inputLabel.text = "0"
+        operatorLabel.text = ""
         for i in mainStackView.arrangedSubviews {
             mainStackView.removeArrangedSubview(i)
             i.removeFromSuperview()
