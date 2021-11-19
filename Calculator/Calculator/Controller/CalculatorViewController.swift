@@ -8,45 +8,80 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet var currentNumberLabel: UILabel!
+    @IBOutlet var currentOperandLabel: UILabel!
     @IBOutlet var currentOperatorLabel: UILabel!
     @IBOutlet var historyStackView: UIStackView!
     
-    private var currentNumberString = ""
-    private var currentOperatorString = ""
+    private var isPositiveOperand = true
+    
+    private var currentOperand: String {
+        get {
+            guard let currentOperand = currentOperandLabel.text else {
+                return ""
+            }
+            return currentOperand
+        }
+        set {
+            currentOperandLabel.text = newValue
+        }
+    }
+    
+    private var currentOperator: String {
+        get {
+            guard let currentOperator = currentOperatorLabel.text else {
+                return ""
+            }
+            return currentOperator
+        }
+        set {
+            currentOperatorLabel.text = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
-        updateCurrentLabels()
+        resetCurrentOperand()
     }
     
     @IBAction func numberPressed(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
-        currentNumberString += numberPressedString
-        update(label: currentNumberLabel, to: currentNumberString)
+        if currentOperand == "0" {
+            currentOperand = ""
+        }
+        currentOperand += numberPressedString
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        guard let operatorPressedString = sender.accessibilityIdentifier else {
+        guard let operatorPressedString = sender.accessibilityIdentifier,
+              currentOperand != "0" else {
             return
         }
-        updateHistoryStackView()
-        currentOperatorString = operatorPressedString
-        update(label: currentOperatorLabel, to: currentOperatorString)
-        updateCurrentLabels()
+        updateHistoryStackView(with: currentOperator, and: currentOperand)
+        currentOperator = operatorPressedString
+        resetCurrentOperand()
     }
     
     @IBAction func acButtonPressed(_ sender: Any) {
         removeFormulaStackViews()
-        updateCurrentLabels()
+        resetCurrentOperand()
     }
     
     @IBAction func ceButtonPressed(_ sender: Any) {
-        updateCurrentLabels()
+        resetCurrentOperand()
     }
+    
+    @IBAction func toggleSignButtonPressed(_ sender: Any) {
+        isPositiveOperand.toggle()
+        if isPositiveOperand {
+            currentOperand = currentOperand.filter { $0.isNumber }
+        } else {
+            currentOperand = "-" + currentOperand
+        }
+    }
+    
 }
 
 extension CalculatorViewController {
@@ -60,8 +95,8 @@ extension CalculatorViewController {
         label.text = data
     }
     
-    private func updateHistoryStackView() {
-        let formulaStackView = createFormulaStackView(with: currentOperatorString, and: currentNumberString)
+    private func updateHistoryStackView(with currentOperator: String, and currentOperand: String) {
+        let formulaStackView = createFormulaStackView(with: currentOperator, and: currentOperand)
         add(formulaStackView, to: historyStackView)
     }
     
@@ -69,17 +104,26 @@ extension CalculatorViewController {
         historyStackView.addArrangedSubview(formulaStackView)
     }
     
-    private func createFormulaStackView(with operator: String, and operand: String) -> UIStackView {
+    private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
+        let formulaStackView = createStackView()
+        let operandLabel = createLabel(with: currentOperand)
+        if historyStackView.arrangedSubviews.isEmpty {
+            formulaStackView.addArrangedSubview(operandLabel)
+            return formulaStackView
+        }
+        let operatorLabel = createLabel(with: currentOperator)
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(operandLabel)
+        return formulaStackView
+    }
+    
+    private func createStackView() -> UIStackView {
         let stackView = UIStackView()
-        let operandLabel = createLabel(with: operand)
-        let operatorLabel = createLabel(with: `operator`)
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(operatorLabel)
-        stackView.addArrangedSubview(operandLabel)
         return stackView
     }
     
@@ -92,9 +136,8 @@ extension CalculatorViewController {
         return label
     }
     
-    private func updateCurrentLabels() {
-        self.currentNumberLabel.text = "0"
-        self.currentNumberString = ""
+    private func resetCurrentOperand() {
+        self.currentOperand = "0"
     }
 }
 
