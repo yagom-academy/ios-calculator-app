@@ -93,10 +93,6 @@ class CalculatorViewController: UIViewController {
         label.textColor = .white
         label.text = countingHistory
         countingHistoryStackView?.addArrangedSubview(label)
-        
-        UIView.animate(withDuration: 0.3) {
-            label.isHidden = false
-        }
     }
     
     private func scrollToBottom() {
