@@ -94,6 +94,7 @@ extension CalculatorViewController {
         
         removeExpressionView()
         operandLabel.text = operandLabel.defaultValue
+        operatorLabel.text = operatorLabel.defaultValue
     }
     
     @IBAction private func clickClearExpression(_ sender: UIButton) {
