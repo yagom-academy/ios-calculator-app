@@ -38,7 +38,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if inputOperandValues.contains(".") {   //이미 입력된 값이 소수일 때
+        if inputOperandValues.contains(".") {
             guard inputButtonTitle != "." else {
                 return
             }
@@ -50,9 +50,9 @@ class ViewController: UIViewController {
                 return
             }
         }
-        inputOperandValues.append(inputButtonTitle)         //일단 저장
+        inputOperandValues.append(inputButtonTitle)
         
-        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      // 피연산자가 소수아닌데 첫글자 0일때 현재입력숫자로 교체
+        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      
             inputOperandValues.removeFirst()
         }
         let addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
