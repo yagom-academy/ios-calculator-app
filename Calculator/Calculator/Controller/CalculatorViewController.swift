@@ -87,9 +87,10 @@ class CalculatorViewController: UIViewController {
 extension CalculatorViewController {
     // MARK: - Functions
     private func removeFormulaStackViews() {
-        calculationHistoryStackView.arrangedSubviews.forEach { placeHolderView in
-            placeHolderView.removeFromSuperview()
-        }
+        calculationHistoryStackView.arrangedSubviews
+            .forEach { placeHolderView in
+                placeHolderView.removeFromSuperview()
+            }
     }
     
     private func resetCurrentOperand() {
