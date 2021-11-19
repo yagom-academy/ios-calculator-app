@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var completeFormula: String = ""
     var isCalculationOver: Bool = false
 
+    var isLastOperator: Bool = false // false = 마지막 숫자, true = 마지막 연산자
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,21 +71,23 @@ class ViewController: UIViewController {
             resetCalculator()
         }
         
-        guard let operand: String = sender.titleLabel?.text else {
-            return
+        guard let operand: String = sender.titleLabel?.text, Double(operand) != nil else { return }
+        
+        if isLastOperator == false {
+            currentOperand += operand
+            print("입력된 숫자 : \(currentOperand)")
+        } else { // 로직 변경 - 숫자1-연산자1-숫자2를 누르는 시점에서 숫자1-연산자1을 formula에 업데이트
+            completeFormula += "\(currentOperand)\(currentOperator)"
+            print("현재 formula : \(completeFormula)")
+            resetOperand()
+            
+            currentOperand = operand
         }
         
-        currentOperand += operand
-        print("입력된 숫자 : \(currentOperand)")
-        
-        guard let operandInNumber = Double(currentOperand) else {
-            return
-        }
-        
-        operandLabel.text = "\(operandInNumber)"
+        operandLabel.text = currentOperand
+        isLastOperator = false
     }
     
-    // 연산자를 누를 때 앞에서 입력한 숫자를 업데이트
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
 //        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
@@ -95,20 +99,12 @@ class ViewController: UIViewController {
         operatorSymbols.contains(Character(operatorSymbol)) else {
             return
         }
-        currentOperator = operatorSymbol
-        operatorLabel.text = currentOperator
         
-        // 개선 - 숫자가 formula에 추가되지 않은 상태라면 lastCharacter 언래핑이 안되고 else문 실행
-        if let lastCharacter = completeFormula.last, operatorSymbols.contains(lastCharacter) { // formula 마지막이 연산자라면 (연산자를 연속 탭)
-            completeFormula.removeLast() // 마지막 연산자를 삭제
-            completeFormula += "\(currentOperator)" // 숫자는 다시 더해주지 않음
-            print("현재 formula : \(completeFormula)")
-        } else {
-            completeFormula += "\(currentOperand)\(currentOperator)"
-            print("현재 formula : \(completeFormula)")
-        }
+        currentOperator = operatorSymbol
+        operatorLabel.text = currentOperator // formula에 반영하지 않고 레이블만 변경
+        operandLabel.text = "0"
 
-        resetOperand()
+        isLastOperator = true
     }
 
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
@@ -125,12 +121,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpClearEntryBtn(_ sender: UIButton) {
-        if isCalculationOver == false {
+        if isCalculationOver == true {
             resetCalculator()
             return
         }
         
-        resetOperand()
+        operandLabel.text = "0"
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
