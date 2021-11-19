@@ -28,7 +28,7 @@ class CalculatorViewController: UIViewController {
         resetCurrentOperand()
     }
     
-    @IBAction func numberPressed(_ sender: UIButton) {
+    @IBAction func numberButtonPressed(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
