@@ -68,6 +68,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         addCountingHistory()
+        print(countingHistory)
         textInput += operandText
         guard let lastWord = textInput.last else {
             return
@@ -81,6 +82,7 @@ class ViewController: UIViewController {
         operatorLabel?.text = operatorText
         operandText = ""
         operandLabel?.text = "0"
+        addScrollViewLabel()
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
@@ -99,6 +101,7 @@ class ViewController: UIViewController {
         operatorText = ""
         operatorLabel?.text = ""
         operandLabel?.text = "0"
+        removeScrollViewLabel()
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
@@ -125,17 +128,22 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func addScrollViewLabel() {
+    func addScrollViewLabel() {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
-        label.isHidden = true
         label.text = countingHistory
         countingHistoryStackView?.addArrangedSubview(label)
         
         UIView.animate(withDuration: 0.3) {
             label.isHidden = false
         }
+    }
+    
+    func removeScrollViewLabel() {
+        let subview = countingHistoryStackView?.arrangedSubviews
+        
+        subview?.forEach { $0.removeFromSuperview() }
     }
 }
 

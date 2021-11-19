@@ -119,7 +119,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addScrollViewLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="dtb-1V-QQr"/>
                                                     <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yis-4k-Jaa"/>
                                                 </connections>
                                             </button>
@@ -169,7 +168,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addScrollViewLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="YcK-zR-893"/>
                                                     <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vSL-VL-DEM"/>
                                                 </connections>
                                             </button>
@@ -219,7 +217,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addScrollViewLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgO-u7-doP"/>
                                                     <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BKT-L1-j7j"/>
                                                 </connections>
                                             </button>
@@ -269,7 +266,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addScrollViewLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="TRy-sg-7v5"/>
                                                     <action selector="touchUpOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wfX-Cr-vDp"/>
                                                 </connections>
                                             </button>
@@ -372,7 +368,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="countingHistoryStackView" destination="XRe-QE-UJf" id="XK3-6N-agB"/>
+                        <outlet property="countingHistoryStackView" destination="XRe-QE-UJf" id="C6H-2v-UiG"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="jMq-Sb-SeL"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="3DU-c8-Qxb"/>
                     </connections>
