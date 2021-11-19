@@ -13,7 +13,6 @@ class CalculatorController {
     func insertFormula(`operator`: String, operand: String) {
         formula = formula + `operator` + String(ExpressionParser.separator)
                             + operand + String(ExpressionParser.separator)
-        print(formula)
     }
     
     func resetFormula() {
