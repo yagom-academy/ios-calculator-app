@@ -45,20 +45,15 @@ class CalculatorViewController: UIViewController {
               isNotZero else {
             return
         }
-        updateHistoryStackView(with: currentOperator, and: currentOperand)
-        historyStack.append(contentsOf: [currentOperator, currentOperand])
+        refreshCalculateHistory()
         currentOperator = operatorPressedString
         update(label: currentOperatorLabel, to: currentOperator)
         resetCurrentOperand()
     }
     
     @IBAction func calculateButtonPressed(_ sender: Any) {
-        updateHistoryStackView(with: currentOperator, and: currentOperand)
-        historyStack.append(contentsOf: [currentOperator, currentOperand])
-        let equationString = historyStack.filter { $0 != "" }.joined()
-        var formula = ExpressionParser.parse(from: equationString)
-        let result = formula.result()
-        currentOperand = String(result)
+        refreshCalculateHistory()
+        currentOperand = calculateResult(from: historyStack)
         historyStack.removeAll()
         currentOperator = ""
         removeFormulaStackViews()
@@ -150,6 +145,18 @@ extension CalculatorViewController {
             currentOperand = "-" + currentOperand
         }
         update(label: currentOperandLabel, to: currentOperand)
+    }
+    
+    private func refreshCalculateHistory() {
+        updateHistoryStackView(with: currentOperator, and: currentOperand)
+        historyStack.append(contentsOf: [currentOperator, currentOperand])
+    }
+    
+    private func calculateResult(from historyStack: [String]) -> String {
+        let equationString = historyStack.filter { $0 != "" }.joined()
+        var formula = ExpressionParser.parse(from: equationString)
+        let result = formula.result()
+        return String(result)
     }
 }
 
