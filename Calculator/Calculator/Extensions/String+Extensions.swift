@@ -15,7 +15,7 @@ extension String {
     }
     
     var removedCommas: String {
-        return self.filter { $0.isNumber }
+        return self.filter { $0 != "," }
     }
     
 }

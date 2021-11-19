@@ -64,11 +64,11 @@ class CalculatorViewController: UIViewController {
         }
         historyStack.removeAll()
         setCurrentOperator(to: "")
+        removeFormulaStackViews()
+        update(currentOperandLabel, to: result)
+        update(currentOperatorLabel, to: currentOperator)
         let newOperand = result.removedCommas
         setCurrentOperand(to: newOperand)
-        removeFormulaStackViews()
-        update(currentOperandLabel, to: newOperand)
-        update(currentOperatorLabel, to: currentOperator)
     }
     
     @IBAction func touchUpACButton(_ sender: Any) {
