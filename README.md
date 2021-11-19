@@ -11,7 +11,7 @@
 - 커밋 기준: 기능 단위 (카르마 규칙 준수)
     - Step1: #1(Model), #2(Error), #3(Read Me), #4(Refactoring)
     - Step2: #5(Model), #6(Read Me), #7(Test), #8(Refactoring)
-    - Step3:
+    - Step3: #9(Model), #10(Refactoring) #11(Read Me)
 
 ### 🗝️ 키워드 
 ---
@@ -22,6 +22,9 @@
 - `UML`
 - `map` `compactMap`
 - `split` `components`
+- `scrollView`
+- `stackView`
+- `NumberFormatter`
 
 ### 🖌️ UML 
 ![](https://i.imgur.com/YOL74g2.png)
@@ -86,7 +89,7 @@ Array를 Queue 방식을 통해 값을 빼준다면 제일 처음 들어온 값�
 (이 과정에서 Linked List에 대해 알게 되었는데 이에 대해 추가적인 학습이 필요함을 느꼈습니다)
 
 ---
-### ⭐️ Step 1에서 보완한 부분 및 새롭게 안 내용
+### 💡 Step 1에서 보완한 부분 및 새롭게 안 내용
 ---
 #### 1. 프로젝트 미니멈 타겟이 iOS 14.1로 되어있는데 현재 아이폰 사용자의 OS 점유율은 어떨까?
 현재 85%의 기기가 iOS 14를 사용하고 있으며, 4년 동안 도입된 기기의 90%가 iOS 14를 사용 중입니다.
@@ -152,5 +155,149 @@ static func parse(from input: String) -> Formula {
 `let convertOperands = operands.map { $0.replacingOccurrences(of: "−", with: "-") }`
 
 ---
-### ⭐️ Step 2에서 보완한 부분 및 새롭게 안 내용
+### 💡 Step 2에서 보완한 부분 및 새롭게 안 내용
 ---
+#### 1. SOLID SRP
+기존에는 SRP, 즉 단일 책임 원칙을 준수하기 위해선 하나의 타입에 하나의 기능만 들어가야 하는 것이 아닌가 생각했습니다. 하지만 프로젝트를 진행하고 리뷰어인 @GREENOVER의 조언을 듣고 반드시 하나의 기능만 들어가야 하는 것은 아니다는 것을 알 수 있었습니다. 
+
+`CalculateItemQueue`에서도 `appendItem`, `removeItem`, `removeAllItems` 메서드 3개로 구성되어 있습니다. 하지만 세 가지 메서드 모두 Item을 관리하는 역할을 수행하고 있습니다. `CalculateItemQueue`은 Queue를 관리하는 타입인 것이고 3개의 메서드를 통해 하나의 책임을 맡고 있는 것입니다!! 
+
+물론 여기서 DB에서 Item을 가지고 오는 메서드가 있다면 단일 책임 원칙에 위배되겠지만, 현재 `CalculateItemQueue`에서는 단일 책임 원칙이 준수되고 있다고 판단했습니다. 
+
+#### 2. 왜 빈 문자열은 Character로 변환할 수 없는 것일까?
+프로젝트를 진행하며 빈 문자열은 Character로 변환할 수 없다는 오류에 마주쳤습니다. 
+`Can't form a Character from an empty String`
+
+처음에는 이유를 알지 못했습니다:cry: 
+하지만 Character에 대한 공식문서를 살펴보니 답을 찾을 수 있었습니다. 
+```swift=
+The Character type represents a character made up of one or more Unicode scalar values, grouped by a Unicode boundary algorithm
+```
+
+즉, Character는 하나 이상의 유니코드 값으로 구성되어 있다는 것입니다. 
+빈 문자열의 경우 하나 미만의 값을 가지고 있으니 당연히 변환을 할 수 없는 것이었습니다. 
+
+#### 3. 불필요한 줄바꿈 제거 (코딩 컨벤션 준수)
+미처 확인하지 못하고 불필요하게 줄바꿈을 남겨 놓았습니다.
+특히 코드 마지막 부분에 남겨 놓은 불필요한 줄바꿈들이 있었습니다.
+(이런 부분까지 꼭 확인하자!!:pray:)
+
+-> 추가적으로 SwiftLint나 Swift-format에 대해서도 공부를 해보도록 하자 💪
+
+#### 4. App Delegate와 Scene Delegate
+사실 이전 프로젝트에서 AppDelegate와 SceneDelegate가 controller에 위치해있어서 별 생각없이 Controller 그룹에 넣었습니다.. 😥
+
+하지만 이에 대해 찾아보니 AppDelegate는 iOS13 이후로 데이터 구조를 초기화하고, 알림에 대응하며, 앱 자체를 타겟하는 이벤트에 대응한다고 이해했습니다.
+SceneDelegate는 scene에서 일어나는 lifecycle event에 대해 다루고 있구요! 즉 화면에 뭘 보여줘야 할지 관리하는 역할이라 이해했습니다.
+
+아직 AppDelegate와 SceneDelegate를 직접 사용한 적이 한 번도 없어 정확하진 않지만 아예 따로 분리하는 것이 좋을 것 같다고 판단했고, 따로 파일 외부로 분리해놓았습니다.
+
+#### 5. `split`와 `components`
+`split`은 `seperator`가 `Character`이고, 반환타입은 [SubString]이었습니다! 또한 Swift 표준 라이브러리에 포함되어 있어 Foundation을 import하지 않아도 사용할 수 있었습니다.
+`components`의 경우 매개 변수로 `String`이 들어오고, 반환타입은 [String]이었습니다! components의 경우 Foundation을 import해야 사용할 수 있다고 알고 있습니다.
+
+일단 여기서 `components`를 사용했던 이유는 반환값이 `String`이었기 때문입니다! 물론 `split`의 결과값을 `map`을 사용해 변환할 수도 있었지만 `Character` 타입인 target을 `String`으로 바꾸는 방식이 더 간단하다고 판단해 `components`를 사용했습니다!
+
+다만 조금 더 찾아보니 `split`은 빈 시퀀스를 생략하기 때문에 `components`에 비해 더 빠르게 작동하고, `Components`는 `NSString`에 속해있어 `NSString`과 브릿징하는 작업을 내부에서 해줄 필요가 있었습니다. 
+
+즉, `split`이 `components` 보다 성능상으로 우위가 있다고 판단했고 `split`을 사용하는 방식으로 수정했습니다. 
+
+#### 6. Force Unwrapping을 최소화했습니다. 
+기존에는 테스트 파일에서 타입을 불러올 때 반드시 타입이 존재한다고 판단해서 Force Unwrapping을 사용했습니다. 하지만 Force Unwrapping은 앱 크래쉬의 주요 원인이 되기 때문에, 지금부터 최대한 Force Unwrapping을 사용하지 않도록 Force Unwrapping을 사용한 부분을 옵셔널로 처리할 수 있도록 했습니다. 
+
+<br/>
+
+
+## 1️⃣ Step 3
+---
+### 🤔 Step 3에서 고민했던 부분 
+___
+#### 1. 중복되는 코드를 최대한 줄일 수 있는 방법에 대해 고민했습니다. 
+처음에는 각 숫자에 해당하는 버튼을 전부 만들어줬습니다. 하지만 이렇게 하니 반복되는 코드가 정말 많았고 코드도 불필요하게 길어졌습니다. 그래서 버튼마다 어떤 값이 있는지 확인할 수 있는 방법이 없을까 고민하다가 UIButton의 title을 가져올 수 있는 `.currentTitle`을 찾을 수 있었습니다. 이를 통해 버튼을 눌렀을 때 각각의 Action을 만들지 않고 하나의 함수로 처리할 수 있었습니다. 
+
+#### 2. `.`이 두 번 이상 찍히지 않도록 하는 방법에 대해 고민했습니다. 
+숫자에는 소수점이 두 번 이상 들어갈 수 없으므로 이에 대한 방법을 고민했습니다. 이를 위해 `contains` 메서드를 활용해 `.`이 있는지 확인하고 있으면 그대로 함수를 return하도록 구현했고 없다면 `.`을 추가할 수 있도록 구현했습니다. 
+
+#### 3. 연산자를 연속으로 2번 이상 누르게 된다면 마지막 연산자만 올라가도록 하는 방법에 대해 고민했습니다. 
+계산의 전체 로그가 등록되는 textInput이라는 변수에서 마지막 글자를 확인하면 된다고 생각했습니다. 
+
+그래서 `last`를 활용하려 했으나 `last`의 값이 옵셔널로 반환되어 `guard let`을 활용해 옵셔널 바인딩을 해준 후 character의 메서드 중 하나인 `isNumber`를 통해 숫자로 변환할 수 있는 값인지 확인하는 방법을 선택했습니다. 
+
+여기서 if문이 아닌 guard문을 사용한다면 else를 사용하지 않아도 괜찮았지만 숫자가 아닌지 판단하는 메서드를 찾지 못했고, `isNumber == false`로 할 경우 코드의 가독성이 떨어진다고 판단하여 이와 같이 구현했습니다. 
+
+```swift=
+guard let lastWord = textInput.last else {
+    return
+}
+if lastWord.isNumber {
+} else {
+    textInput.removeLast()
+}
+```
+
+#### 4. 플러스 마이너스 버튼의 기능 구현에 대해 고민했습니다. 
+`-`가 있으면 빼주고 없으면 더해주는 로직을 생각했습니다. 
+`hasPrefix`를 활용해 `-`가 있는지 확인해주고 있다면 첫 글자를 삭제해주고 없다면 첫글자에 `-`를 추가해주는 방식으로 구현했습니다. 
+
+```swift=
+@IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+    if operandText.hasPrefix("−") {
+        operandText.removeFirst()
+    } else {
+        operandText = "−" + operandText
+    }
+        
+    operandLabel?.text = operandText
+}
+```
+
+#### 5. AC 버튼을 눌렀을 때 계산 로그가 사라지도록 하는 방법에 대해 고민했습니다. 
+`countingHistoryStackView`에서 바로 `removeFromSuperView`를 하니 로그는 사라졌지만 아예 StackView가 사라져서 더 이상 입력을 해도 로그가 쌓이지 않는 문제가 있었습니다. 
+또한 `removeArrangedSubview`를 사용하게 되면 추가되는 `arrangedSubview`의 이름을 알지 못해 이 메서드 또한 사용할 수 없었습니다. 
+
+그래서 `arrangedSubviews`를 따로 뽑아냈습니다. 또한 `UIView`의 배열이기 때문에 `forEach` 문을 활용해 배열의 요소에 접근해서 `removeFromSuperView`를 사용하도록 구현했습니다. 
+
+#### 6. 자동으로 가장 최근에 작성한 로그가 보일 수 있도록 스크롤되는 방법에 대해 고민했습니다. 
+⚠️ 이 부분은 구글링을 통해 구현했습니다. 
+
+공식문서를 통해 `func setContentOffset(CGPoint, animated: Bool)` 메서드를 활용하면 된다는 것은 파악했으나 CGPoint의 값을 어떻게 넣어줘야 하는지에 대해 찾을 수 없었습니다. 
+
+공식 문서 설명에도 `A structure that contains a point in a two-dimensional coordinate system.`로 이차원의 위치를 의미한다는 것 밖에 찾을 수 없었습니다. 
+
+그래서 이 부분은 구글링을 통해 다음과 같이 구현했습니다. 
+
+```swift=
+private func scrollToBottom() {
+    countingHistoryScrollView.layoutIfNeeded()
+    let bottomOffset = CGPoint(x: 0, y: countingHistoryScrollView.contentSize.height - countingHistoryScrollView.bounds.height + countingHistoryScrollView.contentInset.bottom)
+    countingHistoryScrollView?.setContentOffset(bottomOffset, animated: false)
+    }
+```
+
+이 부분은 아직 정확하게 이해를 하지 못해 추가적으로 공부를 할 예정입니다. 
+
+---
+### 💡 Step 3에서 보완한 부분 및 새롭게 안 내용
+---
+#### 1. 함수의 호출 순서를 기준으로 메서드 배치 순서를 수정했습니다. 
+다소 메서드의 배치 순서가 뒤죽박죽되어 있는 부분이 있어 가독성과 로직 흐름을 잘 보여주기 위해 메서드 순서를 수정했습니다. 
+
+#### 2. 연산자를 바꿀 때 의미없이 로그가 계속 찍히는 오류를 수정했습니다. 
+`addScrollViewLabel()` 함수를 `textInput`의 마지막 글자가 숫자로 변환이 될 경우만 호출할 수 있도록 하여 해결했습니다.
+
+#### 3. Label의 text를 수정하는 부분을 따로 함수로 빼주어 가독성을 고려했습니다. 
+기존에 아래처럼 label의 text를 수정하고 로그에 쌓아주는 부분이 가독성이 떨어진다고 판단했습니다. 
+``` swift
+operatorText = sender.currentTitle ?? "0"
+textInput += operatorText
+operatorLabel?.text = operatorText
+```
+
+따라서 아래처럼 함수를 따로 만들어 가독성을 올릴 수 있도록 수정했습니다. 
+``` swift
+private func changeLabelText(into text: inout String, at sender: UIButton) {
+    text = sender.currentTitle ?? "0"
+    textInput += text
+    operatorLabel?.text = text
+}
+```
