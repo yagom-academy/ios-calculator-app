@@ -84,6 +84,12 @@ class CalculatorViewController: UIViewController {
         inputOperatorLabel.text = input
     }
     
+    func addFormulaStackView() {
+        let newFormulaStack = createFormulaStack()
+        formulaStackView.addArrangedSubview(newFormulaStack)
+        addStringFormula()
+    }
+    
 
 }
 
