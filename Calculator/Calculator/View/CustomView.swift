@@ -7,6 +7,37 @@
 
 import UIKit
 
+class ExpressionStackView: UIStackView {
+    
+    var signLabel: ExpressionLabel = {
+        let label = ExpressionLabel()
+        
+        return label
+    }()
+    
+    var numberLabel: ExpressionLabel = {
+        let label = ExpressionLabel()
+        
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+    
+    private func commonInit() {
+        self.addArrangedSubview(signLabel)
+        self.addArrangedSubview(numberLabel)
+    }
+    
+}
+
 class ExpressionLabel: UILabel {
     
     override init(frame: CGRect) {

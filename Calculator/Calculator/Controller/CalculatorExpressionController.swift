@@ -38,22 +38,16 @@ extension CalculatorExpressionController {
     }
     
     mutating func addExpression(signValue: String?, numberValue: String) -> UIStackView {
-        let expressionStackView = UIStackView()
+        let expressionStackView = ExpressionStackView()
         
-        let signLabel = ExpressionLabel()
-        let numberLabel = ExpressionLabel()
-        
-        signLabel.text = signValue
-        numberLabel.text = numberValue
+        expressionStackView.signLabel.text = signValue
+        expressionStackView.numberLabel.text = numberValue
         
         if let signValue = signValue {
             expressionWrapper += signValue + numberValue
         } else {
             expressionWrapper += numberValue
         }
-        
-        expressionStackView.addArrangedSubview(signLabel)
-        expressionStackView.addArrangedSubview(numberLabel)
         
         return expressionStackView
     }
