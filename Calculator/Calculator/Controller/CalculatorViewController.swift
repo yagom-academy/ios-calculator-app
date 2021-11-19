@@ -56,6 +56,7 @@ class CalculatorViewController: UIViewController {
         } else {
             operandText += sender.currentTitle ?? "0"
         }
+        
         operandLabel?.text = operandText
     }
     
