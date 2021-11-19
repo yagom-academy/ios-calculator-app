@@ -31,7 +31,7 @@ class CalculatorViewController: UIViewController {
         removeFormulaStackViews()
         changeCurrentOperandData(to: "0")
     }
-    //MARK: - @IBAction Properties
+    //MARK: - @IBAction Methods
     @IBAction func touchUpDigitButton(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
@@ -85,7 +85,7 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController {
-    // MARK: - Functions
+    // MARK: - Methods
     private func removeFormulaStackViews() {
         calculationHistoryStackView.arrangedSubviews
             .forEach { stackView in
