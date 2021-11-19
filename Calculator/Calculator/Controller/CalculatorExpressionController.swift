@@ -23,7 +23,6 @@ struct CalculatorExpressionController {
         
         return numberFormatter
     }
-    
 }
 
 // MARK: - internal method

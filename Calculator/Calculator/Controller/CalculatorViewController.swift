@@ -28,29 +28,16 @@ class CalculatorViewController: UIViewController {
 // MARK: - private action method
 
 extension CalculatorViewController {
-    @IBAction private func clickAllClear(_ sender: UIButton) {
-        removeExpressionView()
-        setZeroInNumberLabel()
-        
-        expressionController?.expressionWrapperInit()
-    }
-    
-    @IBAction private func clickEqual(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfLabel = operatorSettingLabel.text else {
+    @IBAction private func clickNumber(_ sender: UIButton) {
+        guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
             return
         }
-        
-        setNilInOperatorLabel()
-        
-        if let stackView = expressionController?.addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel) {
-            expressionView.addArrangedSubview(stackView)
+    
+        if numberOfLabel.isZeroValue {
+            numberCompositionLabel.text = numberOfButton
+        } else {
+            numberCompositionLabel.text = numberOfLabel + numberOfButton
         }
-    
-        numberCompositionLabel.text = expressionController?.calculate()
-    }
-    
-    @IBAction private func clickClearExpression(_ sender: UIButton) {
-        setZeroInNumberLabel()
     }
     
     @IBAction private func clickOperator(_ sender: UIButton) {
@@ -68,6 +55,31 @@ extension CalculatorViewController {
         }
         
         operatorSettingLabel.text = operatorOfButton
+        setZeroInNumberLabel()
+    }
+    
+    @IBAction private func clickEqual(_ sender: UIButton) {
+        guard let numberOfLabel = numberCompositionLabel.text, let operatorOfLabel = operatorSettingLabel.text else {
+            return
+        }
+        
+        setNilInOperatorLabel()
+        
+        if let stackView = expressionController?.addExpression(signValue: operatorOfLabel, numberValue: numberOfLabel) {
+            expressionView.addArrangedSubview(stackView)
+        }
+    
+        numberCompositionLabel.text = expressionController?.calculate()
+    }
+    
+    @IBAction private func clickAllClear(_ sender: UIButton) {
+        removeExpressionView()
+        setZeroInNumberLabel()
+        
+        expressionController?.expressionWrapperInit()
+    }
+    
+    @IBAction private func clickClearExpression(_ sender: UIButton) {
         setZeroInNumberLabel()
     }
     
@@ -90,18 +102,6 @@ extension CalculatorViewController {
                
         if numberOfLabel.isZeroValue == false {
             numberCompositionLabel.text = numberOfLabel + doubleZero
-        }
-    }
-    
-    @IBAction private func clickNumber(_ sender: UIButton) {
-        guard let numberOfLabel = numberCompositionLabel.text, let numberOfButton = sender.titleLabel?.text else {
-            return
-        }
-    
-        if numberOfLabel.isZeroValue {
-            numberCompositionLabel.text = numberOfButton
-        } else {
-            numberCompositionLabel.text = numberOfLabel + numberOfButton
         }
     }
     
