@@ -66,6 +66,13 @@ class Number_Tests: XCTestCase {
         XCTAssertEqual(fakeLabel, "789.")
     }
     
+    func test_value가30일때_updateValueg호출시_input에_점을전달하면_label은_30점이된다() {
+        let preExisting = Number(value: "30", isBiggerThan0: true)
+        preExisting.updateValue(with: ".")
+        fakeLabel = preExisting.value
+        XCTAssertEqual(fakeLabel, "30.")
+    }
+    
     //MARK:- toggleSign Tests
     func test_value가양수일때_toggleSign을_호출하면_label에_마이너스부호가_추가된다() {
         let testNum = Number(value: "777", isBiggerThan0: true)

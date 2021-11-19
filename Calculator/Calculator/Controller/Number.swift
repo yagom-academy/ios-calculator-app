@@ -32,6 +32,9 @@ class Number {
             return
         } else if value == "0" {
             value = input
+        } else if input == "."{
+            value += input
+            return
         } else {
             value += input
         }
