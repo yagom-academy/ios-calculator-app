@@ -3,10 +3,21 @@
 > 계산이요.
 
 **Index**
+- [Preview](#Preview)
 - [Ground Rule](#GroundRule)
 - [Time Line](#TimeLine)
 - [Step1](#Step1)
 - [Step2](#Step2)
+
+</br>
+
+<a name="Preview"></a>
+# 🎞 Preview
+
+  Calculate                |  Divide to 0              |  Auto Scroll
+:-------------------------:|:-------------------------:|:-------------------------:
+![Simulator Screen Recording - iPhone 12 Pro - 2021-11-19 at 15 43 38](https://user-images.githubusercontent.com/70251136/142577395-26695bca-5c32-4483-9d5e-69d7e375049d.gif)  |  ![Simulator Screen Recording - iPhone 12 Pro - 2021-11-19 at 15 45 06](https://user-images.githubusercontent.com/70251136/142577469-596a5a3e-49ea-42b2-afa4-173a6cdd7612.gif)|![Simulator Screen Recording - iPhone 12 Pro - 2021-11-19 at 15 48 51](https://user-images.githubusercontent.com/70251136/142577862-5124e452-0a76-43cb-85e1-363fc1eab532.gif)
+
 
 <a name="GroundRule"></a>
 # 🤝  의존 모둠 Ground Rule
@@ -177,7 +188,7 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 
 - 큐 타입을 만들고 다음 스텝에서 구현할 Queue에 만들어놓은 Queue를 써주려했다. 숫자와 연산자의 Queue가 필요하다고 생각하였는데 그러러면 각 타입이 Int, String이여야 했고, 이를 위해 각 타입별 Queue를 만드는 것은 굉장히 비효율적이라고 생각하여 **타입에 제한을 두지않고 재사용하여 코드의 중복도 줄일 수 있는 Generic**을 활용해 Queue 타입을 생성
 
-- Queue 타입은 **구조체**를 택했습니다. 그 이유는 프로토콜만 채택하고, 굳이 상속할 필요도 없고 또한 상속 받을 것도 없었기때문에 이 점때문에라도 클래스를 굳이 택할 이유가 없지않나? 하고 결정
+- Queue 타입은 **구조체**를 택다. 그 이유는 프로토콜만 채택하고, 굳이 상속할 필요도 없고 또한 상속 받을 것도 없었기때문에 이 점때문에라도 클래스를 굳이 택할 이유가 없지않나? 하고 결정
 
 - Generic 타입 파라미터명을 뭐라고 해야하는지 고민되었다. 해당 파라미터명은 보통 T, U, V같은 하나의 대문자를 사용하지만, Array의 경우 Element(요소)와 연관된 의미와 규칙이 있으므로, 명확함을 주기위해 사용된다고 [공식문서]([https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID183](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID183))에서 보았다. 현재 프로젝트에서 생성한 Queue 또한 Element와 관련이 있다고 생각하여 타입 파라미터명을 Element로 지정해주었다.
 
@@ -206,5 +217,60 @@ Step 1 요구사항에 맞게 빈 프로토콜과, Queue 구현
 # 2️⃣ Step 2
 
 ## 📊 Step2 UML
+
+<img width="700" alt="image" src="./image/step2UML.jpeg">
+
+## 🎯 Step2 구현 내용
+
+- TDD를 위한 Test case 생성
+- Protocol as Type
+</br>
+
+|함수명|기능|
+|--|--|
+|calculate(lhs:,rhs:)|Queue에서 하나씩 dequeue하여 연산자에 따른 계산 결과 반환|
+|split(with target:)|피연산자와 연산자를 나눠 피연산자만 담긴 배열 반환|
+|componentsByOperators(from input:)|받은 input을 split을 활용하여 피연산자 배열 반환|
+|parse(from input:)| - componentsByOperators을 활용하여 반환된 피연산자 배열을 Double로 형변환하여 Formula의 operandsQueue에 반환 </br> - 받은 input에서 연산자만 걸러내 Formula의 operatorsQueue에 반환|
+|result()|parse로 반환 받은 Queue를 이용해 calculate로 연산후 결과 반환|
+
+
+## 🤔 Step2 고민했던 점
+
+### 흐름파악
+
+흐름을 파악하기 어려웠다. 고민하다 결정한 흐름은 아래와 같다.
+
+1. 받은 식을 ```split()```으로 연산자를 거르고 숫자만 담긴 배열 반환
+
+2. ```componentbyOperators()```에서 받은 input을 ```split()```를 사용하여 숫자 담긴 배열을 반환
+
+3. ```parse()``` 에서 ```componentbyOperators()``` 를 써서 반환된 숫자 배열을 더블로 형변환하여 formula의 숫자큐에 저장, 받은 파라미터에서 연산자만 걸러내 formula의 연산자큐에 저장, formula반환
+
+4. formula에서 받은 큐를 이용해 ```result()``` 에서 결과값 반환
+
+5. 에러 처리 구현
+
+## 🙇‍♂️ Step2 배운 점
+
+### Protocol as Type
+
+```swift
+protocol CalculateItem { }
+```
+
+빈 프로토콜을 활용해 타입으로서의 프로토콜을 정의했다. 제네릭의 요소의 타입이 해당 프로토콜을 준수하는 타입만 받을 수 있게끔 제한을 거는 용도로 사용할 수도 있다는 것을 알게됐다.  
+이번 프로젝트에선 큐의 타입에 제한을 거는 용도로 사용하였는데, 확장성을 따지려면 프로토콜로 타입 제한을 건 것을 제거하거나, 사용하고 싶은 타입에 프로토콜을 채택해주면 되지 않을까? 생각했다.
+
+### 요구사항 파악의 중요성
+
+Step2를 진행하며 각 메소드들을 정의하는데 흐름이 파악되지 않아 우선 각 메소드에 대한 기능이라도 생각해봐서 구현해보았다.
+
+하지만 향후 알게된 요구사항대로의 흐름을 파악했을 땐 코드를 다 갈아엎어야되는 경험을 했었다.
+
+이 과정에서 초기 요구사항을 상세히 파악해야하는 이유를 알게되었고, 갑자기 생겨날지 모르는 기획변경, 요구사항 변경 등에 대비해 함수를 세분화 시키고, 재사용성을 높이는 것이 위에서 내가 경험했던 코드를 다 갈아엎는 등의 비용을 낮출 수 있겠다고 느꼈다.
+
+ 
+ 
 
 
