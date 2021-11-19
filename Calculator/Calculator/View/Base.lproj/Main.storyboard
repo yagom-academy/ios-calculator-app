@@ -304,6 +304,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="formulaStackView" destination="XRe-QE-UJf" id="pZE-N7-7Gq"/>
                         <outlet property="inputNumLabel" destination="Lwz-OF-XHD" id="SPr-7m-NWT"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="djV-RZ-hxq"/>
                     </connections>
