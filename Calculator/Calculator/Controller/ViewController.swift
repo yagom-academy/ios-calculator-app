@@ -11,13 +11,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentInputOperandLabel: UILabel!
     @IBOutlet weak var currentInputOperatorLabel: UILabel!
     
-    var currentInputOperand: String = "0" {
+    var currentInputOperand: String = LabelContents.defaultOperand {
         didSet {
             currentInputOperandLabel.text = currentInputOperand
         }
     }
     
-    var currentInputOperator: String = "" {
+    var currentInputOperator: String = LabelContents.emptyString {
         didSet {
             currentInputOperatorLabel.text = currentInputOperator
         }
@@ -35,8 +35,8 @@ class ViewController: UIViewController {
     }
     
     func resetExpression() {
-        currentInputOperand = "0"
-        currentInputOperator = ""
+        currentInputOperand = LabelContents.defaultOperand
+        currentInputOperator = LabelContents.emptyString
         mathExpression = []
         isEvaluated = false
     }
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         
         if isEvaluated { return }
         
-        if currentInputOperand == "0" {
+        if currentInputOperand == LabelContents.defaultOperand {
            currentInputOperand = number
             return
         }
@@ -58,25 +58,25 @@ class ViewController: UIViewController {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
         if isEvaluated { return }
         
-        if currentInputOperand == "0" {
+        if currentInputOperand == LabelContents.defaultOperand {
             currentInputOperator = operatorSymbole
             return
         }
         
         if mathExpression.isEmpty {
             mathExpression += [currentInputOperand]
-            currentInputOperand = "0"
+            currentInputOperand = LabelContents.defaultOperand
             currentInputOperator = operatorSymbole
             return
         }
         
         mathExpression += [currentInputOperator, currentInputOperand]
-        currentInputOperand = "0"
+        currentInputOperand = LabelContents.defaultOperand
         currentInputOperator = operatorSymbole
     }
     
     @IBAction func touchSignChangeButton(_ sender: UIButton) {
-        if currentInputOperand == "0" { return }
+        if currentInputOperand == LabelContents.defaultOperand { return }
         if isEvaluated { return }
         
         if currentInputOperand.hasPrefix("-") {
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchClearEntryButton(_ sender: UIButton) {
         if isEvaluated == false {
-            currentInputOperand = "0"
+            currentInputOperand = LabelContents.defaultOperand
             return
         }
         
@@ -113,13 +113,19 @@ class ViewController: UIViewController {
         do {
             let result = try ExpressionParser.parse(from: stringFormula).result()
             currentInputOperand = String(result)
-            currentInputOperator = ""
+            currentInputOperator = LabelContents.emptyString
         } catch CalculatorError.divideByZero {
-            currentInputOperand = "NAN"
-            currentInputOperator = ""
+            currentInputOperand = LabelContents.notANumber
+            currentInputOperator = LabelContents.emptyString
         } catch {
             print(error)
         }
+    }
+    
+    struct LabelContents {
+        static let notANumber = "NaN"
+        static let emptyString = ""
+        static let defaultOperand = "0"
     }
 }
 
