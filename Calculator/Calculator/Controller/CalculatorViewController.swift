@@ -28,6 +28,10 @@ class ViewController: UIViewController {
         inputOperator = "0"
     }
     @IBAction func didDecimalPointButtonTap (sender: UIButton) {
+        if inputOperand.last != "." && !inputOperand.contains(".") {
+            inputOperand += "."
+            presentOperandLable.text! = inputOperand
+        }
     }
     @IBAction func didOperatorButtonTap (sender: UIButton) {
         let buttonTitle = sender.currentTitle
