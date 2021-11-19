@@ -18,8 +18,8 @@ class CalculatorViewController: UIViewController {
     
     var expressionController: CalculatorExpressionController?
     
-    @IBOutlet weak var numberCompositionLabel: NumberCompositionLabel!
-    @IBOutlet weak var operatorSettingLabel: UILabel!
+    @IBOutlet weak var operandLabel: NumberCompositionLabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     
     @IBOutlet weak var expressionView: UIStackView!
     
@@ -35,9 +35,9 @@ extension CalculatorViewController {
         }
     
         if currentLabelValue.operand.isZeroValue {
-            numberCompositionLabel.text = numberOfButton
+            operandLabel.text = numberOfButton
         } else {
-            numberCompositionLabel.text = currentLabelValue.operand + numberOfButton
+            operandLabel.text = currentLabelValue.operand + numberOfButton
         }
     }
     
@@ -47,20 +47,20 @@ extension CalculatorViewController {
         }
         
         if currentLabelValue.operand.isZeroValue {
-            operatorSettingLabel.text = operatorOfButton
+            operatorLabel.text = operatorOfButton
             return
         }
         
-        if let stackView = expressionController?.addExpression(signValue: operatorSettingLabel.text, numberValue: currentLabelValue.operand) {
+        if let stackView = expressionController?.addExpression(signValue: operatorLabel.text, numberValue: currentLabelValue.operand) {
             expressionView.addArrangedSubview(stackView)
         }
         
-        operatorSettingLabel.text = operatorOfButton
+        operatorLabel.text = operatorOfButton
         setZeroInNumberLabel()
     }
     
     @IBAction private func clickEqual(_ sender: UIButton) {
-        guard let operatorOfLabel = operatorSettingLabel.text else {
+        guard let operatorOfLabel = operatorLabel.text else {
             return
         }
         
@@ -70,7 +70,7 @@ extension CalculatorViewController {
             expressionView.addArrangedSubview(stackView)
         }
     
-        numberCompositionLabel.text = expressionController?.calculate()
+        operandLabel.text = expressionController?.calculate()
     }
     
     @IBAction private func clickAllClear(_ sender: UIButton) {
@@ -86,9 +86,9 @@ extension CalculatorViewController {
     
     @IBAction private func clickNumberSign(_ sender: UIButton) {
         if currentLabelValue.operand.isZeroValue {
-            numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: "")
+            operandLabel.text = expressionController?.changeNumberSign(numberValue: "")
         } else {
-            numberCompositionLabel.text = expressionController?.changeNumberSign(numberValue: currentLabelValue.operand)
+            operandLabel.text = expressionController?.changeNumberSign(numberValue: currentLabelValue.operand)
         }
     }
     
@@ -98,7 +98,7 @@ extension CalculatorViewController {
         }
                
         if currentLabelValue.operand.isZeroValue == false {
-            numberCompositionLabel.text = currentLabelValue.operand + doubleZero
+            operandLabel.text = currentLabelValue.operand + doubleZero
         }
     }
     
@@ -108,7 +108,7 @@ extension CalculatorViewController {
         }
                
         if currentLabelValue.operand.contains(point) == false {
-            numberCompositionLabel.text = currentLabelValue.operand + point
+            operandLabel.text = currentLabelValue.operand + point
         }
     }
 }
@@ -121,11 +121,11 @@ extension CalculatorViewController {
     }
     
     private func setZeroInNumberLabel() {
-        numberCompositionLabel.text = "0"
+        operandLabel.text = "0"
     }
     
     private func setNilInOperatorLabel() {
-        operatorSettingLabel.text = nil
+        operatorLabel.text = nil
     }
 }
 
