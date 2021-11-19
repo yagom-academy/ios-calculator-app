@@ -44,9 +44,16 @@ class ViewController: UIViewController {
         
         if currentInput == "0" {
             inputLabel.text = newInput
+        } else {
+            inputLabel.text = currentInput + newInput
         }
         
-        inputLabel.text = currentInput + newInput
+        if newInput == "00" {
+            if currentInput == "0" || currentInput == "" {
+                inputLabel.text = "0"
+            }
+        }
+
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
