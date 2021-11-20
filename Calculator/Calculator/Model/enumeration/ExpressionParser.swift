@@ -10,8 +10,6 @@ import UIKit
 
 enum ExpressionParser {
     static let whiteSpace: Character = " "
-    static let emptyString: String = ""
-    static let defaultOperandLabel: String = "0"
     
     static func parse(from input: String) -> Formula {
         let splitedInput = input.split(with: whiteSpace)
