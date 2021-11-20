@@ -10,13 +10,16 @@ class CalculatorViewController: UIViewController {
     private var savedCalculatorItems: String = ""
     private let emptyString: String = ""
     private let decimalPoint: String = "."
+    private let decimalComma: String = ","
     private let negativeSign: String = "-"
     private let defaultOperandLabel: String = "0"
+    private let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
     @IBAction func resultButtonDidTouchUp(_ button: UIButton) {
+        numberFormatter.numberStyle = .decimal
         switch operatorLabel.text!.isEmpty {
         case true:
             return
@@ -31,7 +34,7 @@ class CalculatorViewController: UIViewController {
                 resetSavedCalculatorItems()
                 return
             }
-            operandLabel.text = result.description
+            operandLabel.text = numberFormatter.string(for: result)
             resetSavedCalculatorItems()
         }
     }
@@ -102,7 +105,13 @@ class CalculatorViewController: UIViewController {
     }
     
     private func saveCalculator(item: String) {
-        savedCalculatorItems += " \(item)"
+        switch item.contains(decimalComma) {
+        case true:
+            let commaRemoveditem = item.components(separatedBy: decimalComma).joined()
+            savedCalculatorItems += " \(commaRemoveditem)"
+        case false:
+            savedCalculatorItems += " \(item)"
+        }
     }
     
     private func resetSavedCalculatorItems() {
