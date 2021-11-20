@@ -14,6 +14,30 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
+    @IBAction func operandButtondidTouchUp(_ button: UIButton) {
+        switch operandLabel.text! {
+        case defaultOperandLabel:
+            operandLabel.text = emptyString
+            operandLabel.text! += button.currentTitle!
+        default:
+            operandLabel.text! += button.currentTitle!
+        }
+    }
+    
+    @IBAction func operatorButtonDidTouchUp(_ button: UIButton) {
+        switch operatorLabel.text!.isEmpty {
+        case true:
+            saveCalculator(item: "\(operandLabel.text!)")
+            resetOperandLable()
+            operatorLabel.text = button.currentTitle
+        case false:
+            saveCalculator(item: "\(operatorLabel.text!)")
+            saveCalculator(item: "\(operandLabel.text!)")
+            resetOperandLable()
+            operatorLabel.text = button.currentTitle
+        }
+    }
+    
     private func saveCalculator(item: String) {
         savedCalculatorItems += " \(item)"
     }
