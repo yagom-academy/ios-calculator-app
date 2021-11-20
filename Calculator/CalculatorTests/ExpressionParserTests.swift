@@ -9,22 +9,22 @@ class ExpressionParserTests: XCTestCase {
     var failureTestCases: [String] = []
     
     override func setUpWithError() throws {
-        failureTestCases.append("+123+123+123+")
-        failureTestCases.append("*12+/123--")
+        failureTestCases.append("+ 123 + 123 + 123 +")
+        failureTestCases.append("* 12 + / 123 - -")
         failureTestCases.append("123z")
-        failureTestCases.append("12++1")
+        failureTestCases.append("12 + + 1")
         
-        successTestCases.append("123+123+123")
-        successTestCases.append("12+123-3/1*5")
+        successTestCases.append("123 + 123 + 123")
+        successTestCases.append("12 + 123 - 3 / 1 * 5")
         successTestCases.append("1")
-        successTestCases.append("1/3")
+        successTestCases.append("1 / 3")
     }
     
     func test_failureCase() {
-        let failureAnswerList: [ExpressionParser.ParserError] = [.firstOrLastCharacterIsNotNumber,
-                                                          .firstOrLastCharacterIsNotNumber,
-                                                          .includingIncorrectCharacter,
-                                                          .incorrectCountOfNumbersAndOperators]
+        let failureAnswerList: [ExpressionParser.ParserError] = [.firstOrLastComponentIsNotOperand,
+                                                          .firstOrLastComponentIsNotOperand,
+                                                          .includingAbnormalCharacter,
+                                                          .incorrectCountOfOperandsAndOperators]
         
         for index in 0..<failureTestCases.count {
             let failureResult = ExpressionParser.parse(from: failureTestCases[index])
