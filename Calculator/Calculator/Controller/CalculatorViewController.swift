@@ -25,6 +25,12 @@ class CalculatorViewController: UIViewController {
             saveCalculator(item: "\(operandLabel.text!)")
             resetOperatorLable()
             let result = ExpressionParser.parse(from: savedCalculatorItems).result()
+            
+            guard result.description != "nan" else {
+                operandLabel.text = "NaN"
+                resetSavedCalculatorItems()
+                return
+            }
             operandLabel.text = result.description
             resetSavedCalculatorItems()
         }
