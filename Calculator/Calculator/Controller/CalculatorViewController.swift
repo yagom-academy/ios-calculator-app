@@ -9,6 +9,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     private var savedCalculatorItems: String = ""
     private let emptyString: String = ""
+    private let decimalPoint: String = "."
     private let defaultOperandLabel: String = "0"
     
     @IBOutlet weak var operandLabel: UILabel!
@@ -35,6 +36,15 @@ class CalculatorViewController: UIViewController {
             saveCalculator(item: "\(operandLabel.text!)")
             resetOperandLable()
             operatorLabel.text = button.currentTitle
+        }
+    }
+    
+    @IBAction func decimalPointButtonDidTouchUp(_ button: UIButton) {
+        switch operandLabel.text!.contains(decimalPoint) {
+        case true:
+            return
+        case false:
+            operandLabel.text! += button.currentTitle!
         }
     }
     
