@@ -45,7 +45,9 @@ class ViewController: UIViewController {
     func changeNumberFormat(of number: Double) -> String? {
         numberFormatter.maximumFractionDigits = 20 // 소수점 아래 20자리까지 표시하도록 제한
         numberFormatter.numberStyle = .decimal // 1000 단위로 , 표시
+        
         guard let resultInString = numberFormatter.string(from: NSNumber(value: number)) else { return nil }
+        
         return resultInString
     }
     
@@ -69,6 +71,36 @@ class ViewController: UIViewController {
     }
     
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
+    func addStackViewWithTwoLabels() {
+        let horizontalStackView = UIStackView()
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStackView.spacing = 12
+        horizontalStackView.distribution = .fillProportionally // 수정 필요
+        horizontalStackView.alignment = .trailing
+        
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        operatorLabel.adjustsFontForContentSizeCategory = true
+        operatorLabel.adjustsFontSizeToFitWidth = true
+        operatorLabel.textColor = .white
+        operatorLabel.textAlignment = .right
+        operatorLabel.text = currentOperator
+//        operatorLabel.largeContentTitle = .largeTitle3????
+        
+        operandLabel.adjustsFontForContentSizeCategory = true
+        operandLabel.adjustsFontSizeToFitWidth = true
+        operandLabel.textColor = .white
+        operandLabel.textAlignment = .right
+        operandLabel.text = currentOperand
+//        operandLabel.largeContentTitle = .largeTitle3????
+        
+        horizontalStackView.addArrangedSubview(operatorLabel)
+        horizontalStackView.addArrangedSubview(operandLabel)
+        
+        processScrollView.addSubview(horizontalStackView) // StackView 테스트
+    }
     
     func resetScrollView() {
 //        processScrollView.
@@ -103,6 +135,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
+//        addStackViewWithTwoLabels() // StackView 테스트
+        
 //        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
         guard isCalculationOver == false else { return } // =버튼을 탭한 직후 연산자를 탭하면 작동하지 않음
