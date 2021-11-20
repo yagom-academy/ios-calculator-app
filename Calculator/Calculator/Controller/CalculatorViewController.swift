@@ -7,10 +7,9 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
+    private var savedCalculatorItems: String = ""
+    
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
 }
 
