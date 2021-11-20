@@ -10,6 +10,7 @@ class CalculatorViewController: UIViewController {
     private var savedCalculatorItems: String = ""
     private let emptyString: String = ""
     private let decimalPoint: String = "."
+    private let negativeSign: String = "-"
     private let defaultOperandLabel: String = "0"
     
     @IBOutlet weak var operandLabel: UILabel!
@@ -54,6 +55,19 @@ class CalculatorViewController: UIViewController {
             return
         case false:
             operandLabel.text! += button.currentTitle!
+        }
+    }
+    
+    @IBAction func changeSignButtonDidTouchUp(_ button: UIButton) {
+        guard operandLabel.text! != defaultOperandLabel else {
+            return
+        }
+        
+        switch operandLabel.text!.hasPrefix(negativeSign) {
+        case true:
+            operandLabel.text!.removeFirst()
+        case false:
+            operandLabel.text! = negativeSign + operandLabel.text!
         }
     }
     
