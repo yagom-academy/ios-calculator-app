@@ -39,6 +39,15 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func zeroButtonDidTouchUp(_ button: UIButton) {
+        switch operandLabel.text! {
+        case defaultOperandLabel:
+            return
+        default:
+            operandLabel.text! += button.currentTitle!
+        }
+    }
+    
     @IBAction func decimalPointButtonDidTouchUp(_ button: UIButton) {
         switch operandLabel.text!.contains(decimalPoint) {
         case true:
