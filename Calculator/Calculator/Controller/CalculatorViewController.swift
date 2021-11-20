@@ -71,6 +71,16 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func allClearButtonDidTouchUp(_ button: UIButton) {
+        resetSavedCalculatorItems()
+        resetOperandLable()
+        resetOperatorLable()
+    }
+    
+    @IBAction func clearEntryButtonDidTouchUp(_ button: UIButton) {
+        resetOperandLable()
+    }
+    
     private func saveCalculator(item: String) {
         savedCalculatorItems += " \(item)"
     }
