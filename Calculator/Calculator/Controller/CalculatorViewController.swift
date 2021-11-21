@@ -37,6 +37,13 @@ class CalculatorViewController: UIViewController {
         savedItemlabel.font = UIFont.preferredFont(forTextStyle: .title3)
         savedItemlabel.textColor = .white
         savedItemlabel.adjustsFontSizeToFitWidth = true
+        
+        if operandLabel.text!.contains(decimalPoint) {
+            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(decimalPoint) {
+                operandLabel.text!.removeLast()
+            }
+        }
+        
         savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
         savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
         scrollToBottom()
