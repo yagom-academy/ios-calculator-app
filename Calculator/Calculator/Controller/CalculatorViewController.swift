@@ -89,17 +89,14 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func operatorButtonDidTouchUp(_ button: UIButton) {
-        switch operatorLabel.text!.isEmpty {
+        switch operatorLabel.text!.isEmpty || operandLabel.text! != defaultOperandLabel {
         case true:
+            saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
             addStackViewLabel()
             resetOperandLable()
             operatorLabel.text = button.currentTitle
         case false:
-            saveCalculator(item: "\(operatorLabel.text!)")
-            saveCalculator(item: "\(operandLabel.text!)")
-            addStackViewLabel()
-            resetOperandLable()
             operatorLabel.text = button.currentTitle
         }
     }
