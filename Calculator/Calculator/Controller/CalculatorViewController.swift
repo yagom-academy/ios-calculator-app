@@ -91,9 +91,7 @@ extension CalculatorViewController {
     // MARK: - Methods
     private func removeFormulaStackViews() {
         calculationHistoryStackView.arrangedSubviews
-            .forEach { stackView in
-                stackView.removeFromSuperview()
-            }
+            .forEach { $0.removeFromSuperview() }
     }
     
     private func changeCurrentOperandData(to newOperand: String) {
