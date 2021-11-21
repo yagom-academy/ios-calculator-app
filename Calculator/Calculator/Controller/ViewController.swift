@@ -70,8 +70,12 @@ class ViewController: UIViewController {
         }
     }
     
+    func addLabel() -> UILabel {
+        
+    }
+    
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
-    func addStackViewWithTwoLabels() {
+    func addHorizontalStackViewWithTwoLabels() {
         let horizontalStackView = UIStackView()
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         horizontalStackView.axis = .horizontal
@@ -79,39 +83,39 @@ class ViewController: UIViewController {
         horizontalStackView.distribution = .fill // 수정 필요
         horizontalStackView.alignment = .fill
         
-        let operatorHistoryLabel = UILabel()
-        let operandHistoryLabel = UILabel()
-        operatorHistoryLabel.translatesAutoresizingMaskIntoConstraints = false
-        operandHistoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        let operatorProcessLabel = UILabel()
+        let operandProcessLabel = UILabel()
+        operatorProcessLabel.translatesAutoresizingMaskIntoConstraints = false
+        operandProcessLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        operatorHistoryLabel.adjustsFontForContentSizeCategory = true
-        operatorHistoryLabel.adjustsFontSizeToFitWidth = true
-        operatorHistoryLabel.textColor = .white
-        operatorHistoryLabel.textAlignment = .right
-        operatorHistoryLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorHistoryLabel.baselineAdjustment = .alignBaselines
-        operatorHistoryLabel.text = currentOperator
+        operatorProcessLabel.adjustsFontForContentSizeCategory = true
+        operatorProcessLabel.adjustsFontSizeToFitWidth = true
+        operatorProcessLabel.textColor = .white
+        operatorProcessLabel.textAlignment = .right
+        operatorProcessLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorProcessLabel.baselineAdjustment = .alignBaselines
+        operatorProcessLabel.text = currentOperator
         
-        operandHistoryLabel.adjustsFontForContentSizeCategory = true
-        operandHistoryLabel.adjustsFontSizeToFitWidth = true
-        operandHistoryLabel.textColor = .white
-        operandHistoryLabel.textAlignment = .right
-        operandHistoryLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operandHistoryLabel.baselineAdjustment = .alignBaselines
-        operandHistoryLabel.text = currentOperand
+        operandProcessLabel.adjustsFontForContentSizeCategory = true
+        operandProcessLabel.adjustsFontSizeToFitWidth = true
+        operandProcessLabel.textColor = .white
+        operandProcessLabel.textAlignment = .right
+        operandProcessLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandProcessLabel.baselineAdjustment = .alignBaselines
+        operandProcessLabel.text = currentOperand
         
-        horizontalStackView.addArrangedSubview(operatorHistoryLabel)
-        horizontalStackView.addArrangedSubview(operandHistoryLabel)
+        horizontalStackView.addArrangedSubview(operatorProcessLabel)
+        horizontalStackView.addArrangedSubview(operandProcessLabel)
         
-        processScrollView.addSubview(horizontalStackView) // StackView 테스트
+        processStackView.addSubview(horizontalStackView) // StackView 테스트
         
-        processScrollView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.trailingAnchor.constraint(equalTo: processScrollView.trailingAnchor, constant: 0).isActive = true
-        horizontalStackView.bottomAnchor.constraint(equalTo: processScrollView.bottomAnchor, constant: 0).isActive = true
+        processStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStackView.trailingAnchor.constraint(equalTo: processStackView.trailingAnchor, constant: 0).isActive = true
+        horizontalStackView.bottomAnchor.constraint(equalTo: processStackView.bottomAnchor, constant: 0).isActive = true
     }
     
     func resetScrollView() {
-//        processScrollView.
+        
     }
     
     func addStackView() { // 연산자를 누를 때마다 stackView를 추가함
@@ -143,7 +147,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-        addStackViewWithTwoLabels() // StackView 테스트
+        addHorizontalStackViewWithTwoLabels() // StackView 테스트
         
 //        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
@@ -224,5 +228,28 @@ class ViewController: UIViewController {
             currentOperand += "."
             operandLabel.text! += "." // 왜 다른 라인과 다르게 옵셔널이 되지?
         }
+    }
+}
+
+class ProcessLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    init(text: String) {
+        super.init(frame: CGRect.zero)
+        self.text = text
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.adjustsFontForContentSizeCategory = true
+        self.adjustsFontSizeToFitWidth = true
+        self.textColor = .white
+//        self.textAlignment = .right
+        self.font = UIFont.preferredFont(forTextStyle: .title3)
+        self.baselineAdjustment = .alignBaselines
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
