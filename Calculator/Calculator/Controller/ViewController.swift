@@ -35,6 +35,8 @@ class ViewController: UIViewController {
         currentOperator = ""
         completeFormula = ""
         isCalculationOver = false
+        
+        resetScrollView()
     }
     
     func resetOperand() {
@@ -92,8 +94,8 @@ class ViewController: UIViewController {
         }
     }
         
-    func resetScrollView() {
-        
+    func clearScrollView() {
+        processVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     func addStackView() { // 연산자를 누를 때마다 stackView를 추가함
@@ -125,11 +127,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-        addHorizontalStackViewWithTwoLabels() // StackView 테스트
-        
 //        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
         guard isCalculationOver == false else { return } // =버튼을 탭한 직후 연산자를 탭하면 작동하지 않음
+        
+        addHorizontalStackViewWithTwoLabels()
         
         let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
         
