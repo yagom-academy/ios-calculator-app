@@ -38,7 +38,15 @@ class CalculatorViewController: UIViewController {
         savedItemlabel.textColor = .white
         savedItemlabel.adjustsFontSizeToFitWidth = true
         savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
+        scrollToBottom()
         savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
+    }
+    
+    private func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: savedCalculatorItemsScrollView.contentSize.height - savedCalculatorItemsScrollView.bounds.size.height + savedCalculatorItemsScrollView.contentInset.bottom)
+        if(bottomOffset.y > 0) {
+            savedCalculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
+        }
     }
     
     private func clearAllStackViewLabel() {
