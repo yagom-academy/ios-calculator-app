@@ -58,11 +58,16 @@ class ViewController: UIViewController {
         if sender.currentTitle == "0" || sender.currentTitle == "00" {
             guard inputNumber.isEmpty == false else { return }
             
+            if inputNumber.contains(".") {
+                inputNumber += sender.currentTitle ?? ""
+                numberLabel.text = inputNumber
+            } else {
+                inputNumber += sender.currentTitle ?? ""
+                numberLabel.text = numberFormatter.string(for: Double(inputNumber))
+            }
+        } else {    
             inputNumber += sender.currentTitle ?? ""
-            numberLabel.text = numberFormatter.string(for: Double(inputNumber))
-        } else {
-            inputNumber += sender.currentTitle ?? ""
-            numberLabel.text = numberFormatter.string(for: Double(inputNumber))
+            numberLabel.text = numberFormatter.string(for: Double(removeComma(of: inputNumber)))
         }
     }
     
@@ -89,15 +94,9 @@ class ViewController: UIViewController {
         
         guard !isContainDot(text: text) else { return }
         
-        if text == "0" {
-            inputNumber += "0."
-            text = inputNumber
-            numberLabel.text = text
-        } else {
-            inputNumber += "."
-            text = inputNumber
-            numberLabel.text = text
-        }
+        text += "."
+        inputNumber = text
+        numberLabel.text = inputNumber
     }
     
     @IBAction private func negativePositiveButtonPressed(_ sender: UIButton) {
