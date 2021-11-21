@@ -18,8 +18,19 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    @IBAction func resultButtonDidTouchUp(_ button: UIButton) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        applyNumberFormatter()
+    }
+    
+    private func applyNumberFormatter() {
+        // FIXME: 최대 숫자 20자리 제한, 반올림 제대로 되는지 확인하고 수정해야 함
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .halfUp
+    }
+    
+    @IBAction func resultButtonDidTouchUp(_ button: UIButton) {
         switch operatorLabel.text!.isEmpty {
         case true:
             return
