@@ -12,6 +12,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var calculationHistoryStackView: UIStackView!
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
+    
     //MARK: - Properties
     private var isPositiveOperand = true
     private var currentOperand = ""
@@ -25,12 +26,14 @@ final class CalculatorViewController: UIViewController {
     private var isNotZero: Bool {
         return currentOperand != "0"
     }
+    
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
         changeCurrentOperandData(to: "0")
     }
+    
     //MARK: - @IBAction Methods
     @IBAction private func touchUpDigitButton(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
