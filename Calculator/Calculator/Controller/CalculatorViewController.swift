@@ -24,7 +24,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private var isNotZero: Bool {
-        return currentOperand != "0"
+        return !isZero
     }
     
     //MARK: - View Lifecycle
