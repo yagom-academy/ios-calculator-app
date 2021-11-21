@@ -12,9 +12,9 @@ class NumberManager {
     private (set) var isBiggerThan0: Bool
     let numberFormatter = Formatter()
     
-    init(value: String = "0" , isBiggerThan0: Bool = true) {
+    init(value: String = "0", isBiggerThan0: Bool = true) {
         self.value = value
-        self.isBiggerThan0 = true
+        self.isBiggerThan0 = isBiggerThan0
     }
     
     func updateValue(with input: String) {
