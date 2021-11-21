@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         
         let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
         
-        guard let operatorSymbol: String = sender.titleLabel?.text, // 버튼의 연산기호를 확인
+        guard let operatorSymbol: String = sender.titleLabel?.text,
         operatorSymbols.contains(Character(operatorSymbol)) else {
             return
         }
@@ -200,50 +200,5 @@ class ViewController: UIViewController {
             currentOperand += "."
             operandLabel.text! += "." // 왜 다른 라인과 다르게 옵셔널이 되지? (개선 필요)
         }
-    }
-}
-
-class ProcessLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    init(text: String) {
-        super.init(frame: CGRect.zero)
-        self.text = text
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.adjustsFontForContentSizeCategory = true
-        self.adjustsFontSizeToFitWidth = true
-        self.textColor = .white
-        self.font = UIFont.preferredFont(forTextStyle: .title3)
-        self.baselineAdjustment = .alignBaselines
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-class ProcessHorizontalStackView: UIStackView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    init(lhsLabel: UILabel, rhsLebel: UILabel) {
-        super.init(frame: CGRect.zero)
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.axis = .horizontal
-        self.spacing = 8
-        self.distribution = .fill
-        self.alignment = .fill
-        
-        self.addArrangedSubview(lhsLabel)
-        self.addArrangedSubview(rhsLebel)
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
