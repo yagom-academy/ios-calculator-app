@@ -19,7 +19,9 @@ class NumberManager {
     
     func updateValue(with input: String) {
         let digitCount = value.filter{ $0.isNumber }.count
-        guard digitCount < 20 else {
+        let validDigitCount = 20
+        
+        guard digitCount < validDigitCount else {
             return
         }
         
