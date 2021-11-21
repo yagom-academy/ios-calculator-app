@@ -12,14 +12,6 @@ class ViewController: UIViewController {
     
     private var numberFormatter: NumberFormatter = NumberFormatter()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initializeNumberLabel()
-        initializeSymbolLabel()
-        initializeNumberFormatter(of: numberFormatter)
-        recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
     private var operatorsLabel: UILabel {
         let operatorsLabel = UILabel()
         operatorsLabel.text = symbolLabel.text
@@ -52,6 +44,14 @@ class ViewController: UIViewController {
             formulaStackView.addArrangedSubview(operandsLabel)
         }
         return formulaStackView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initializeNumberLabel()
+        initializeSymbolLabel()
+        initializeNumberFormatter(of: numberFormatter)
+        recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func numberButtonPressed(_ sender: UIButton) {
@@ -125,14 +125,12 @@ class ViewController: UIViewController {
         recordingStackView.addArrangedSubview(formulaStackView)
         
         entireFormula += numberLabel.text ?? ""
-        
         entireFormula = removeComma(of: entireFormula)
         
         var formula = ExpressionParser.parse(from: entireFormula)
         
         do {
             initializeSymbolLabel()
-            
             let result = try formula.result()
             numberLabel.text = numberFormatter.string(for: result)
         } catch CalculateError.emptyQueue {
