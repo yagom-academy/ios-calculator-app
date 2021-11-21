@@ -58,14 +58,15 @@ class ViewController: UIViewController {
         if sender.currentTitle == "0" || sender.currentTitle == "00" {
             guard inputNumber.isEmpty == false else { return }
             
+            inputNumber += sender.currentTitle ?? ""
+            
             if inputNumber.contains(".") {
-                inputNumber += sender.currentTitle ?? ""
                 numberLabel.text = inputNumber
             } else {
-                inputNumber += sender.currentTitle ?? ""
                 numberLabel.text = numberFormatter.string(for: Double(inputNumber))
             }
-        } else {    
+            
+        } else {
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = numberFormatter.string(for: Double(removeComma(of: inputNumber)))
         }
@@ -74,14 +75,13 @@ class ViewController: UIViewController {
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
         if numberLabel.text == "0" {
             symbolLabel.text = sender.currentTitle
-            initializeNumberLabel()
             return
         } else {
             recordingStackView.addArrangedSubview(formulaStackView)
             symbolLabel.text = sender.currentTitle
             addEntireFormula()
-            initializeNumberLabel()
         }
+        initializeNumberLabel()
         scrollToBottom(calculatorScrollView)
     }
     
