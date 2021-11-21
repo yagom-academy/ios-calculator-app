@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var processScrollView: UIScrollView!
-    @IBOutlet weak var processStackView: UIStackView!
+    @IBOutlet weak var processVerticalStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -69,11 +69,7 @@ class ViewController: UIViewController {
             print(error)
         }
     }
-    
-    func addLabel(text: String) -> UILabel {
-        return ProcessLabel(text: text)
-    }
-    
+      
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
     func addHorizontalStackViewWithTwoLabels() {        
         let operatorProcessLabel = ProcessLabel(text: currentOperator)
@@ -81,13 +77,10 @@ class ViewController: UIViewController {
         
         let horizontalStackView = ProcessHorizontalStackView(lhsLabel: operatorProcessLabel, rhsLebel: operandProcessLabel)
                 
-        processStackView.addSubview(horizontalStackView) // StackView 테스트
-        
-        processStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.trailingAnchor.constraint(equalTo: processStackView.trailingAnchor, constant: 0).isActive = true
-        horizontalStackView.bottomAnchor.constraint(equalTo: processStackView.bottomAnchor, constant: 0).isActive = true
+        // 문제해결 addSubview -> addArrangedSubview
+        processVerticalStackView.addArrangedSubview(horizontalStackView)
     }
-    
+        
     func resetScrollView() {
         
     }
@@ -218,7 +211,6 @@ class ProcessLabel: UILabel {
         self.adjustsFontForContentSizeCategory = true
         self.adjustsFontSizeToFitWidth = true
         self.textColor = .white
-//        self.textAlignment = .right
         self.font = UIFont.preferredFont(forTextStyle: .title3)
         self.baselineAdjustment = .alignBaselines
     }
