@@ -43,6 +43,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func scrollToBottom() {
+        savedCalculatorItemsScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: savedCalculatorItemsScrollView.contentSize.height - savedCalculatorItemsScrollView.bounds.size.height + savedCalculatorItemsScrollView.contentInset.bottom)
         if(bottomOffset.y > 0) {
             savedCalculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
