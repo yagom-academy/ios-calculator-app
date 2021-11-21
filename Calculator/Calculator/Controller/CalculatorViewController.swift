@@ -27,7 +27,6 @@ class CalculatorViewController: UIViewController {
     }
     
     private func applyNumberFormatter() {
-        // FIXME: 최대 숫자 20자리 제한, 반올림 제대로 되는지 확인하고 수정해야 함
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 20
