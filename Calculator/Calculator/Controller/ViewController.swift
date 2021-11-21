@@ -73,33 +73,41 @@ class ViewController: UIViewController {
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
     func addStackViewWithTwoLabels() {
         let horizontalStackView = UIStackView()
-        horizontalStackView.axis = .horizontal
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.spacing = 12
-        horizontalStackView.distribution = .fillProportionally // 수정 필요
-        horizontalStackView.alignment = .trailing
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.spacing = 8
+        horizontalStackView.distribution = .fill // 수정 필요
+        horizontalStackView.alignment = .fill
         
         let operatorHistoryLabel = UILabel()
         let operandHistoryLabel = UILabel()
+        operatorHistoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        operandHistoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
         operatorHistoryLabel.adjustsFontForContentSizeCategory = true
         operatorHistoryLabel.adjustsFontSizeToFitWidth = true
         operatorHistoryLabel.textColor = .white
         operatorHistoryLabel.textAlignment = .right
         operatorHistoryLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorHistoryLabel.baselineAdjustment = .alignBaselines
         operatorHistoryLabel.text = currentOperator
         
         operandHistoryLabel.adjustsFontForContentSizeCategory = true
         operandHistoryLabel.adjustsFontSizeToFitWidth = true
         operandHistoryLabel.textColor = .white
         operandHistoryLabel.textAlignment = .right
-        operandHistoryLabel.text = currentOperand
         operandHistoryLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandHistoryLabel.baselineAdjustment = .alignBaselines
+        operandHistoryLabel.text = currentOperand
         
         horizontalStackView.addArrangedSubview(operatorHistoryLabel)
         horizontalStackView.addArrangedSubview(operandHistoryLabel)
         
         processScrollView.addSubview(horizontalStackView) // StackView 테스트
+        
+        processScrollView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStackView.trailingAnchor.constraint(equalTo: processScrollView.trailingAnchor, constant: 0).isActive = true
+        horizontalStackView.bottomAnchor.constraint(equalTo: processScrollView.bottomAnchor, constant: 0).isActive = true
     }
     
     func resetScrollView() {
