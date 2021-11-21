@@ -8,10 +8,10 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     //MARK: - @IBOutlet Properties
-    @IBOutlet weak var currentOperandLabel: UILabel!
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var calculationHistoryStackView: UIStackView!
-    @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
+    @IBOutlet private weak var currentOperandLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var calculationHistoryStackView: UIStackView!
+    @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     //MARK: - Properties
     private var isPositiveOperand = true
     private var currentOperand = ""
@@ -32,7 +32,7 @@ final class CalculatorViewController: UIViewController {
         changeCurrentOperandData(to: "0")
     }
     //MARK: - @IBAction Methods
-    @IBAction func touchUpDigitButton(_ sender: UIButton) {
+    @IBAction private func touchUpDigitButton(_ sender: UIButton) {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
@@ -43,7 +43,7 @@ final class CalculatorViewController: UIViewController {
         changeCurrentOperandData(to: newOperand)
     }
     
-    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard let operatorPressedString = sender.accessibilityIdentifier,
               isNotZero else {
             return
@@ -54,7 +54,7 @@ final class CalculatorViewController: UIViewController {
         autoScrollToBottom()
     }
     
-    @IBAction func touchUpCalculateButton(_ sender: Any) {
+    @IBAction private func touchUpCalculateButton(_ sender: Any) {
         refreshCalculateHistory(with: currentOperator, and: currentOperand)
         setCurrentOperand(to: "0")
         guard let result = calculateResult(from: historyStack) else {
@@ -67,16 +67,16 @@ final class CalculatorViewController: UIViewController {
         setCurrentOperand(to: newOperand)
     }
     
-    @IBAction func touchUpACButton(_ sender: Any) {
+    @IBAction private func touchUpACButton(_ sender: Any) {
         clearCalculationHistory()
         changeCurrentOperandData(to: "0")
     }
     
-    @IBAction func touchUpCEButton(_ sender: Any) {
+    @IBAction private func touchUpCEButton(_ sender: Any) {
         changeCurrentOperandData(to: "0")
     }
     
-    @IBAction func touchUpSignButton(_ sender: Any) {
+    @IBAction private func touchUpSignButton(_ sender: Any) {
         guard isNotZero else {
             return
         }
