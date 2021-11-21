@@ -32,6 +32,23 @@ class CalculatorViewController: UIViewController {
         numberFormatter.roundingMode = .halfUp
     }
     
+    private func addStackViewLabel() {
+        let savedItemlabel = UILabel()
+        savedItemlabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        savedItemlabel.textColor = .white
+        savedItemlabel.adjustsFontSizeToFitWidth = true
+        savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
+        savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
+    }
+    
+    private func clearAllStackViewLabel() {
+        let addedStackViewLabels = savedCalculatorItemsStackView.arrangedSubviews
+        
+        addedStackViewLabels.forEach { subview in
+            return subview.removeFromSuperview()
+        }
+    }
+    
     @IBAction func resultButtonDidTouchUp(_ button: UIButton) {
         switch operatorLabel.text!.isEmpty {
         case true:
@@ -39,6 +56,7 @@ class CalculatorViewController: UIViewController {
         case false:
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
+            addStackViewLabel()
             resetOperatorLable()
             let result = ExpressionParser.parse(from: savedCalculatorItems).result()
             
@@ -66,11 +84,13 @@ class CalculatorViewController: UIViewController {
         switch operatorLabel.text!.isEmpty {
         case true:
             saveCalculator(item: "\(operandLabel.text!)")
+            addStackViewLabel()
             resetOperandLable()
             operatorLabel.text = button.currentTitle
         case false:
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
+            addStackViewLabel()
             resetOperandLable()
             operatorLabel.text = button.currentTitle
         }
@@ -111,6 +131,7 @@ class CalculatorViewController: UIViewController {
         resetSavedCalculatorItems()
         resetOperandLable()
         resetOperatorLable()
+        clearAllStackViewLabel()
     }
     
     @IBAction func clearEntryButtonDidTouchUp(_ button: UIButton) {

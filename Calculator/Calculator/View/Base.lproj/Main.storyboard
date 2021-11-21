@@ -334,7 +334,6 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPC-iy-qdm">
                                                 <rect key="frame" x="0.0" y="0.0" width="19.5" height="37"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="19.5" id="gzQ-PW-Q8F"/>
                                                     <constraint firstAttribute="height" constant="37" id="k58-Mt-01E"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
