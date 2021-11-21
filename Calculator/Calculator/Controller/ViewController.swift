@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         operatorsLabel.textColor = .white
         operatorsLabel.textAlignment = .right
         operatorsLabel.adjustsFontForContentSizeCategory = true
+        
         return operatorsLabel
     }
     
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
             formulaStackView.addArrangedSubview(operatorsLabel)
         }
         formulaStackView.addArrangedSubview(operandsLabel)
+        
         return formulaStackView
     }
     
