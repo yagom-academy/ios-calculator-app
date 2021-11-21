@@ -79,25 +79,25 @@ class ViewController: UIViewController {
         horizontalStackView.distribution = .fillProportionally // 수정 필요
         horizontalStackView.alignment = .trailing
         
-        let operatorLabel = UILabel()
-        let operandLabel = UILabel()
+        let operatorHistoryLabel = UILabel()
+        let operandHistoryLabel = UILabel()
         
-        operatorLabel.adjustsFontForContentSizeCategory = true
-        operatorLabel.adjustsFontSizeToFitWidth = true
-        operatorLabel.textColor = .white
-        operatorLabel.textAlignment = .right
-        operatorLabel.text = currentOperator
-//        operatorLabel.largeContentTitle = .largeTitle3????
+        operatorHistoryLabel.adjustsFontForContentSizeCategory = true
+        operatorHistoryLabel.adjustsFontSizeToFitWidth = true
+        operatorHistoryLabel.textColor = .white
+        operatorHistoryLabel.textAlignment = .right
+        operatorHistoryLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorHistoryLabel.text = currentOperator
         
-        operandLabel.adjustsFontForContentSizeCategory = true
-        operandLabel.adjustsFontSizeToFitWidth = true
-        operandLabel.textColor = .white
-        operandLabel.textAlignment = .right
-        operandLabel.text = currentOperand
-//        operandLabel.largeContentTitle = .largeTitle3????
+        operandHistoryLabel.adjustsFontForContentSizeCategory = true
+        operandHistoryLabel.adjustsFontSizeToFitWidth = true
+        operandHistoryLabel.textColor = .white
+        operandHistoryLabel.textAlignment = .right
+        operandHistoryLabel.text = currentOperand
+        operandHistoryLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        horizontalStackView.addArrangedSubview(operatorLabel)
-        horizontalStackView.addArrangedSubview(operandLabel)
+        horizontalStackView.addArrangedSubview(operatorHistoryLabel)
+        horizontalStackView.addArrangedSubview(operandHistoryLabel)
         
         processScrollView.addSubview(horizontalStackView) // StackView 테스트
     }
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-//        addStackViewWithTwoLabels() // StackView 테스트
+        addStackViewWithTwoLabels() // StackView 테스트
         
 //        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
