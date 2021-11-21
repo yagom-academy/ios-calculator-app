@@ -70,43 +70,17 @@ class ViewController: UIViewController {
         }
     }
     
-    func addLabel() -> UILabel {
-        
+    func addLabel(text: String) -> UILabel {
+        return ProcessLabel(text: text)
     }
     
     // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
-    func addHorizontalStackViewWithTwoLabels() {
-        let horizontalStackView = UIStackView()
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.axis = .horizontal
-        horizontalStackView.spacing = 8
-        horizontalStackView.distribution = .fill // 수정 필요
-        horizontalStackView.alignment = .fill
+    func addHorizontalStackViewWithTwoLabels() {        
+        let operatorProcessLabel = ProcessLabel(text: currentOperator)
+        let operandProcessLabel = ProcessLabel(text: currentOperand)
         
-        let operatorProcessLabel = UILabel()
-        let operandProcessLabel = UILabel()
-        operatorProcessLabel.translatesAutoresizingMaskIntoConstraints = false
-        operandProcessLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        operatorProcessLabel.adjustsFontForContentSizeCategory = true
-        operatorProcessLabel.adjustsFontSizeToFitWidth = true
-        operatorProcessLabel.textColor = .white
-        operatorProcessLabel.textAlignment = .right
-        operatorProcessLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorProcessLabel.baselineAdjustment = .alignBaselines
-        operatorProcessLabel.text = currentOperator
-        
-        operandProcessLabel.adjustsFontForContentSizeCategory = true
-        operandProcessLabel.adjustsFontSizeToFitWidth = true
-        operandProcessLabel.textColor = .white
-        operandProcessLabel.textAlignment = .right
-        operandProcessLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operandProcessLabel.baselineAdjustment = .alignBaselines
-        operandProcessLabel.text = currentOperand
-        
-        horizontalStackView.addArrangedSubview(operatorProcessLabel)
-        horizontalStackView.addArrangedSubview(operandProcessLabel)
-        
+        let horizontalStackView = ProcessHorizontalStackView(lhsLabel: operatorProcessLabel, rhsLebel: operandProcessLabel)
+                
         processStackView.addSubview(horizontalStackView) // StackView 테스트
         
         processStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -250,6 +224,29 @@ class ProcessLabel: UILabel {
     }
     
     required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class ProcessHorizontalStackView: UIStackView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    init(lhsLabel: UILabel, rhsLebel: UILabel) {
+        super.init(frame: CGRect.zero)
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.axis = .horizontal
+        self.spacing = 8
+        self.distribution = .fill
+        self.alignment = .fill
+        
+        self.addArrangedSubview(lhsLabel)
+        self.addArrangedSubview(rhsLebel)
+    }
+    
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
