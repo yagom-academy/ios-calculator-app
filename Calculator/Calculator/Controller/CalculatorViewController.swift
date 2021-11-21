@@ -186,7 +186,7 @@ extension CalculatorViewController {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = 8.0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }
