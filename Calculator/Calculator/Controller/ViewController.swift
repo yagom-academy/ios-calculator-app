@@ -77,8 +77,19 @@ class ViewController: UIViewController {
         
         let horizontalStackView = ProcessHorizontalStackView(lhsLabel: operatorProcessLabel, rhsLebel: operandProcessLabel)
                 
-        // 문제해결 addSubview -> addArrangedSubview
         processVerticalStackView.addArrangedSubview(horizontalStackView)
+        scrollToBottom()
+    }
+    
+    func scrollToBottom() {
+        processScrollView.layoutIfNeeded()
+
+        // *View의 Origin = 좌상단
+        let bottomOffset = CGPoint(x: 0,
+                                   y: processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom)
+        if bottomOffset.y > 0 {
+            processScrollView.setContentOffset(bottomOffset, animated: true) // ScrollView의 원하는 위치 (좌표)로 이동시켜줌
+        }
     }
         
     func resetScrollView() {
