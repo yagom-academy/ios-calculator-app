@@ -68,12 +68,6 @@ class CalculatorViewController: UIViewController {
             addStackViewLabel()
             resetOperatorLable()
             let result = ExpressionParser.parse(from: savedCalculatorItems).result()
-            
-            guard result.description != "nan" else {
-                operandLabel.text = "NaN"
-                resetSavedCalculatorItems()
-                return
-            }
             operandLabel.text = numberFormatter.string(for: result)
             resetSavedCalculatorItems()
         }
