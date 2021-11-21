@@ -17,6 +17,8 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var savedCalculatorItemsStackView: UIStackView!
+    @IBOutlet weak var savedCalculatorItemsScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
