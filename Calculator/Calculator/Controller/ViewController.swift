@@ -11,8 +11,6 @@ class ViewController: UIViewController {
     @IBOutlet var currentOperator: UILabel!
     @IBOutlet var currentValue: UILabel!
 
-    @IBOutlet var operandsButton: UIButton!
-    @IBOutlet var operatorsButton: UIButton!
     @IBOutlet var acButton: UIButton!
     @IBOutlet var ceButton: UIButton!
     @IBOutlet var positiveOrNegativeButton: UIButton!
@@ -55,7 +53,13 @@ class ViewController: UIViewController {
         if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      
             inputOperandValues.removeFirst()
         }
-        let addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
+        
+        let addcommaOperand: String
+        if inputOperandValues.contains(".") {
+            addcommaOperand = inputOperandValues.joined()
+        } else {
+            addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
+        }
         
         if signIsPositive {
             currentValue.text = addcommaOperand
@@ -63,7 +67,6 @@ class ViewController: UIViewController {
             currentValue.text = "-" + addcommaOperand
         }
         isOperatorEnterd = false
-        
     }
     
     func endOperandInput() {
