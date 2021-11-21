@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         var formular = ExpressionParser.parse(from: expression)
         let result = formular.result()
         
-        inputNumberLabel.text = inputNumber.formatter(result)
+        inputNumberLabel.text = inputNumber.textualRepresentation(with: result)
     }
 }
 

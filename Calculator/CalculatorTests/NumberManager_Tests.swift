@@ -113,49 +113,49 @@ class NumberManager_Tests: XCTestCase {
     //MARK:- formmater Tests
     func test_value가_1000000일때_formmater를_호출하면_3자리마다_콤마가추가된다() {
         let testNum = NumberManager(value: "1000000" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "1,000,000")
     }
     
     func test_value가_마이너스12345일때_formatter를_호출하면_3자리마다_콤마가추가된다() {
         let testNum = NumberManager(value: "-12345" , isBiggerThan0: false)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "-12,345")
     }
     
     func test_value가_12345점6789일때_formatter를_호출하면_3자리마다_콤마가추가된다() {
         let testNum = NumberManager(value: "12345.6789" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "12,345.6789")
     }
     
     func test_value가_0점0일때_formatter를_호출하면_0을_반환한다() {
         let testNum = NumberManager(value: "0.0" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "0")
     }
     
     func test_value가_0점123000일때_formatter를_호출하면_0을_반환한다() {
         let testNum = NumberManager(value: "0.123000" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "0.123")
     }
     
     func test_value가_21자리이상일때_formatter를_호출하면_21번째자리에서_반올림한숫자를_반환된다() {
         let testNum = NumberManager(value: "0.12737958362846485936" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "0.1273795836284648593")
     }
     
     func test_value가_소수점이하18자리일때_formatter를_호출하면_소수점이하17자리까지만_반환된다() {
         let testNum = NumberManager(value: "0.127379583628464859" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "0.12737958362846485")
     }
     
     func test_value가_총21자리일때_formatter를_호출하면_반올림한_20자리수가_반환된다() {
         let testNum = NumberManager(value: "12345678901234567891.5" , isBiggerThan0: true)
-        let formmatedValue = testNum.formatter(testNum.value)
+        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
         XCTAssertEqual(formmatedValue, "12,345,678,901,234,567,892")
     }
 }
