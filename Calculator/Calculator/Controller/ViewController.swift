@@ -8,9 +8,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var fomulaScrollView: UIScrollView!
+    @IBOutlet var fomulaStackView: UIStackView!
     @IBOutlet var currentOperator: UILabel!
     @IBOutlet var currentValue: UILabel!
-
     @IBOutlet var acButton: UIButton!
     @IBOutlet var ceButton: UIButton!
     @IBOutlet var positiveOrNegativeButton: UIButton!
@@ -26,6 +27,29 @@ class ViewController: UIViewController {
         inputOperandValues = [initialValue]
         isOperatorEnterd = false
         currentValue.text = initialValue
+    }
+    
+    func addToFomulaHistory() {
+        let stckView = UIStackView()
+        stckView.spacing = 8.0
+        
+        let opertatorView = UILabel()
+        opertatorView.text = currentOperator.text
+        opertatorView.textColor = .white
+        
+        let operandView = UILabel()
+        operandView.text = currentValue.text
+        operandView.textColor = .white
+        
+        stckView.addArrangedSubview(opertatorView)
+        stckView.addArrangedSubview(operandView)
+        
+        fomulaStackView.addArrangedSubview(stckView)
+    }
+    
+    func removeStackViewContents() {
+        fomulaStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in view.removeFromSuperview()
+        })
     }
     
     @IBAction func hitOperandButton(_ sender: UIButton) {
@@ -75,6 +99,8 @@ class ViewController: UIViewController {
         } else {
             stringToCalculate.append("-" + inputOperandValues.joined())
         }
+        addToFomulaHistory()
+        fomulaScrollView.scrollViewToBottom()
         inputOperandValues = [initialValue]
         currentValue.text = initialValue
         signIsPositive = true
@@ -103,6 +129,7 @@ class ViewController: UIViewController {
     
     @IBAction func hitACButton(_ sender: UIButton) {
         resetToInitialState()
+        removeStackViewContents()
         currentValue.text = initialValue
     }
     
@@ -145,6 +172,14 @@ class ViewController: UIViewController {
             return "0"
         }
         return resultWithComma
+    }
+}
+
+
+extension UIScrollView {
+    func scrollViewToBottom() {
+        let setOfBottem = CGPoint(x: 0, y: contentSize.height)
+        setContentOffset(setOfBottem, animated: false)
     }
 }
 
