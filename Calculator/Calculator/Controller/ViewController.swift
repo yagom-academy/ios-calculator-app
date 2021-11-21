@@ -37,12 +37,10 @@ class ViewController: UIViewController {
         formulaStackView.spacing = 8
         formulaStackView.distribution = .fill
         formulaStackView.alignment = .firstBaseline
-        if recordingStackView.arrangedSubviews.count == 0 {
-            formulaStackView.addArrangedSubview(operandsLabel)
-        } else {
+        if recordingStackView.arrangedSubviews.count != 0 {
             formulaStackView.addArrangedSubview(operatorsLabel)
-            formulaStackView.addArrangedSubview(operandsLabel)
         }
+        formulaStackView.addArrangedSubview(operandsLabel)
         return formulaStackView
     }
     
