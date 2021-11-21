@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Number {
+class NumberManager {
     private (set) var value: String
     private (set) var isBiggerThan0: Bool
     let numberFormatter = Formmater().formatter
@@ -81,7 +81,7 @@ class Number {
     }
 }
 
-extension Number {
+extension NumberManager {
     class Formmater {
         let formatter : NumberFormatter
         init() {
