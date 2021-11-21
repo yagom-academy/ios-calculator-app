@@ -14,6 +14,7 @@ class CalculatorViewController: UIViewController {
     private let negativeSign: String = "-"
     private let defaultOperandLabel: String = "0"
     private let numberFormatter = NumberFormatter()
+    private let hapticGenerator = UISelectionFeedbackGenerator()
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -143,6 +144,10 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func clearEntryButtonDidTouchUp(_ button: UIButton) {
         resetOperandLable()
+    }
+    
+    @IBAction func occurHapticFeedback() {
+        hapticGenerator.selectionChanged()
     }
     
     private func saveCalculator(item: String) {

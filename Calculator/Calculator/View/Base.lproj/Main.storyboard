@@ -82,6 +82,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="allClearButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o90-zJ-8Sz"/>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="lwJ-3G-emG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
@@ -93,6 +94,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="clearEntryButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eT2-D1-SMo"/>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="iSy-vc-9qq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -104,6 +106,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="changeSignButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hu3-oO-AMf"/>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="5AD-Gv-8an"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -114,6 +117,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="BhR-U6-wvE"/>
                                                     <action selector="operatorButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RyL-4U-O3E"/>
                                                 </connections>
                                             </button>
@@ -130,6 +134,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="rra-fs-ffi"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2HC-HV-BOY"/>
                                                 </connections>
                                             </button>
@@ -141,6 +146,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="Srf-6h-w79"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JC3-ft-s2E"/>
                                                 </connections>
                                             </button>
@@ -152,6 +158,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="W4J-JT-ocU"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gEq-Gh-6Ub"/>
                                                 </connections>
                                             </button>
@@ -163,6 +170,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="HdA-43-tZt"/>
                                                     <action selector="operatorButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hti-G2-Wo7"/>
                                                 </connections>
                                             </button>
@@ -179,6 +187,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="GjA-Q8-TiB"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Y3-y0-52x"/>
                                                 </connections>
                                             </button>
@@ -190,6 +199,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="FRQ-LV-qbK"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IJP-kO-Q9k"/>
                                                 </connections>
                                             </button>
@@ -201,6 +211,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="tIW-ed-mv7"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m8o-oY-o0a"/>
                                                 </connections>
                                             </button>
@@ -212,6 +223,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZFq-ZA-yim"/>
                                                     <action selector="operatorButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uw4-3z-ofN"/>
                                                 </connections>
                                             </button>
@@ -228,6 +240,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="DQM-Zc-Hjv"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xWy-8e-oFo"/>
                                                 </connections>
                                             </button>
@@ -239,6 +252,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="rx6-TD-2tg"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ag-ad-u6D"/>
                                                 </connections>
                                             </button>
@@ -250,6 +264,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dgy-kw-A1z"/>
                                                     <action selector="operandButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iiM-h3-ahY"/>
                                                 </connections>
                                             </button>
@@ -261,6 +276,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="QUX-Ji-YZY"/>
                                                     <action selector="operatorButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MPr-u3-7HE"/>
                                                 </connections>
                                             </button>
@@ -277,6 +293,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xdv-Xh-frV"/>
                                                     <action selector="zeroButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fyA-VR-vWX"/>
                                                 </connections>
                                             </button>
@@ -288,6 +305,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="ibQ-bG-yic"/>
                                                     <action selector="zeroButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huh-za-yDt"/>
                                                 </connections>
                                             </button>
@@ -300,6 +318,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="decimalPointButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WuD-Pt-ss8"/>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="MRw-W9-GP6"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -313,6 +332,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="occurHapticFeedback" destination="BYZ-38-t0r" eventType="touchUpInside" id="TF7-Kr-cmV"/>
                                                     <action selector="resultButtonDidTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KkR-15-HPd"/>
                                                 </connections>
                                             </button>
