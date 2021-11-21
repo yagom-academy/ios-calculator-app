@@ -5,6 +5,7 @@
 // 
 
 import UIKit
+import OSLog
 
 class ViewController: UIViewController {
     // MARK: Property and LifeCycle
@@ -161,15 +162,15 @@ extension ViewController {
                 hasCalculated = true
                 return
             case .queueNotFound:
-                print(error.errorDescription ?? error.localizedDescription)
+                os_log(.error, log: .error, "%@", error.errorDescription ?? error.localizedDescription)
                 removeFormulaView()
                 return
             default:
-                print(error.errorDescription ?? error.localizedDescription)
+                os_log(.error, log: .error, "%@", error.errorDescription ?? error.localizedDescription)
                 return
             }
         } catch let error {
-            print(error.localizedDescription)
+            os_log(.error, log: .error, "%@", error.localizedDescription)
         }
         currentOperator = ""
         hasCalculated = true
