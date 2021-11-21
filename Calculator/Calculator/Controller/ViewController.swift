@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var completeFormula: String = ""
     var isCalculationOver: Bool = false
 
-    var isLastOperator: Bool = false // false = 마지막 숫자, true = 마지막 연산자
+    var isLastOperator: Bool = false
     var isLastDot: Bool = false
     
     let numberFormatter = NumberFormatter()
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         completeFormula = ""
         isCalculationOver = false
         
-        resetScrollView()
+        clearCalculationProcess()
     }
     
     func resetOperand() {
@@ -45,8 +45,8 @@ class ViewController: UIViewController {
     }
     
     func changeNumberFormat(of number: Double) -> String? {
-        numberFormatter.maximumFractionDigits = 20 // 소수점 아래 20자리까지 표시하도록 제한
-        numberFormatter.numberStyle = .decimal // 1000 단위로 , 표시
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
         
         guard let resultInString = numberFormatter.string(from: NSNumber(value: number)) else { return nil }
         
@@ -58,8 +58,6 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult: Double = try formula.result()
-            print("계산 결과 : \(calculationResult)")
-            
             guard let resultInString = changeNumberFormat(of: calculationResult) else { return }
             
             operandLabel.text = "\(resultInString)"
@@ -72,8 +70,7 @@ class ViewController: UIViewController {
         }
     }
       
-    // UILabel, 텍스트 사이즈 등 - 스토리보드 설정보고 작성
-    func addHorizontalStackViewWithTwoLabels() {        
+    func addCalculationProcessWithHorizontalStackView() {        
         let operatorProcessLabel = ProcessLabel(text: currentOperator)
         let operandProcessLabel = ProcessLabel(text: currentOperand)
         
@@ -86,23 +83,16 @@ class ViewController: UIViewController {
     func scrollToBottom() {
         processScrollView.layoutIfNeeded()
 
-        // *View의 Origin = 좌상단
         let bottomOffset = CGPoint(x: 0,
                                    y: processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom)
         if bottomOffset.y > 0 {
-            processScrollView.setContentOffset(bottomOffset, animated: true) // ScrollView의 원하는 위치 (좌표)로 이동시켜줌
+            processScrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
         
-    func clearScrollView() {
+    func clearCalculationProcess() {
         processVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
-    
-    func addStackView() { // 연산자를 누를 때마다 stackView를 추가함
-        
-    }
-    
-    // scrollView의 Scroll 조정
     
     @IBAction func touchUpOperandBtn(_ sender: UIButton) {
         if isCalculationOver {
@@ -114,7 +104,7 @@ class ViewController: UIViewController {
         if isLastOperator == false {
             currentOperand += operand
             print("입력된 숫자 : \(currentOperand)")
-        } else { // 로직 변경 - 숫자1-연산자1-숫자2를 누르는 시점에서 숫자1-연산자1을 formula에 업데이트
+        } else {
             completeFormula += "\(currentOperand)\(currentOperator)"
             print("현재 formula : \(completeFormula)")
             resetOperand()
@@ -127,11 +117,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-//        guard currentOperand != "0" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
+//        guard currentOperand != "0", currentOperand != "00" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
         
-        guard isCalculationOver == false else { return } // =버튼을 탭한 직후 연산자를 탭하면 작동하지 않음
+        guard isCalculationOver == false else { return }
         
-        addHorizontalStackViewWithTwoLabels()
+        addCalculationProcessWithHorizontalStackView()
         
         let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
         
@@ -141,7 +131,7 @@ class ViewController: UIViewController {
         }
         
         currentOperator = operatorSymbol
-        operatorLabel.text = currentOperator // formula에 반영하지 않고 레이블만 변경
+        operatorLabel.text = currentOperator
         operandLabel.text = "0"
 
         isLastOperator = true
@@ -149,10 +139,12 @@ class ViewController: UIViewController {
 
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
         guard isCalculationOver == false else {
-            return // = 버튼을 탭하여 연산이 완료된 경우, 다시 탭할 때 재연산하지 않음
+            return
         }
         
         completeFormula += currentOperand // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
+        addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        
         refreshLabelsWithResult(of: completeFormula)
         isCalculationOver = true
     }
@@ -167,7 +159,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operandLabel.text = "0" // currentOperator는 그대로 있어야 함
+        operandLabel.text = "0"
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
@@ -195,18 +187,18 @@ class ViewController: UIViewController {
         
         guard let operandLabelText = operandLabel.text else { return }
         
-        if operandLabelText.contains(".") { // 입력한 숫자에 .이 있으면 추가적인 .입력 불가
+        if operandLabelText.contains(".") {
             return
-        } else if operandLabelText == "0" { // 연산자를 누르면 이렇게 설정되는데 왜 여기에 안걸리지?
+        } else if operandLabelText == "0" {
             // 문제 발생 - 숫자1-연산자1-".3"을 입력하면 0.3 대신 3으로 인식하고, 연산 메서드 비정상 작동
-            // 원인-전에 입력한 숫자1이 currentOperand에 들어있어서 생기는 오류
+            // 원인-전에 입력한 숫자1이 currentOperand에 들어있어서 생기는 오류 (개선 필요)
             print("I'm here")
             currentOperand = "0."
             operandLabel.text! = "0."
             isLastDot = true
         } else {
             currentOperand += "."
-            operandLabel.text! += "." // 왜 다른 라인과 다르게 옵셔널이 되지?
+            operandLabel.text! += "." // 왜 다른 라인과 다르게 옵셔널이 되지? (개선 필요)
         }
     }
 }
