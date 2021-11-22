@@ -1,19 +1,30 @@
-struct CalculatorItemQueue {
-    private var firstNode: LinkedListNode?
-    private weak var lastNode: LinkedListNode?
-    
-    mutating func enqueue(_ item: CalculateItem) {
-        if let backupOfLastNode = self.lastNode {
-            let newLastNode = LinkedListNode(value: item)
-            backupOfLastNode.link(nextNode: newLastNode)
-            self.lastNode = newLastNode
-        } else {
-            self.firstNode = LinkedListNode(value: item)
-            self.lastNode = self.firstNode
+struct CalculatorItemQueue<Value: CalculateItem> {
+    private var firstNode: LinkedListNode<Value>?
+    private var lastNode: LinkedListNode<Value>? {
+        guard var finderToLastNode = firstNode else {
+            return nil
         }
+        
+        while let nextNode = finderToLastNode.nextNode {
+            finderToLastNode = nextNode
+        }
+        return finderToLastNode
     }
     
-    mutating func dequeue() -> CalculateItem? {
+    var isEmpty: Bool {
+        return firstNode == nil
+    }
+    
+    mutating func enqueue(_ value: Value) {
+        let newNode: LinkedListNode<Value> = LinkedListNode<Value>(value: value)
+        if isEmpty {
+            firstNode = newNode
+            return
+        }
+        lastNode?.link(nextNode: newNode)
+    }
+    
+    mutating func dequeue() -> Value? {
         guard let firstNodeValue = self.firstNode?.value else { return nil }
         
         let secondNode = self.firstNode?.nextNode
@@ -22,29 +33,16 @@ struct CalculatorItemQueue {
         return firstNodeValue
     }
     
-    func allOperands() -> [Double] {
-        var allOperands: [Double] = []
+    func allItems() -> [Value] {
+        var allItems: [Value] = []
         
         var currentNode = self.firstNode
         
-        while let operand = currentNode?.value as? Double {
-            allOperands.append(operand)
+        while let item = currentNode?.value {
+            allItems.append(item)
             currentNode = currentNode?.nextNode
         }
         
-        return allOperands
-    }
-    
-    func allOperators() -> [Operator] {
-        var allOperators: [Operator] = []
-        
-        var currentNode = self.firstNode
-        
-        while let operand = currentNode?.value as? Operator {
-            allOperators.append(operand)
-            currentNode = currentNode?.nextNode
-        }
-        
-        return allOperators
+        return allItems
     }
 }

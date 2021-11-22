@@ -1,13 +1,13 @@
 struct Formula {
-    private(set) var operandsQueue = CalculatorItemQueue()
-    private(set) var operatorsQueue = CalculatorItemQueue()
+    private(set) var operandsQueue = CalculatorItemQueue<Double>()
+    private(set) var operatorsQueue = CalculatorItemQueue<Operator>()
     
     mutating func enqueueToOperandsQueue(_ item: Double) {
         operandsQueue.enqueue(item)
     }
     
     mutating func dequeueFromOperandsQueue() -> Double? {
-        return operandsQueue.dequeue() as? Double
+        return operandsQueue.dequeue()
     }
     
     mutating func enqueueToOperatorsQueue(_ item: Operator) {
@@ -15,17 +15,20 @@ struct Formula {
     }
     
     mutating func dequeueFromOperatorsQueue() -> Operator? {
-        return operatorsQueue.dequeue() as? Operator
+        return operatorsQueue.dequeue()
     }
 
-    mutating func result() -> Double {
-        guard var result = dequeueFromOperandsQueue() else {
-            return 0
+    mutating func result() throws -> Double {
+        guard let removedOperand = operandsQueue.dequeue() else {
+            throw CalculatorError.queueIsEmpty
         }
         
-        while let `operator` = dequeueFromOperatorsQueue(),
-              let operand = dequeueFromOperandsQueue() {
-            result = `operator`.calculate(lhs: result, rhs: operand)
+        let result: Double = try operatorsQueue.allItems().reduce(removedOperand) {
+            guard let nextOperand = operandsQueue.dequeue() else {
+                throw CalculatorError.queueIsEmpty
+            }
+            
+            return try $1.calculate(lhs: $0, rhs: nextOperand)
         }
         
         return result
