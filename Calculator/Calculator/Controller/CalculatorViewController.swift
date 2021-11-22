@@ -68,7 +68,7 @@ extension CalculatorViewController {
             operatorLabel.text = ""
         }
         
-        addFormula()
+        addCurrentFormulaStack()
         operatorLabel.text = sender.titleLabel?.text
         operandLabel.text = "0"
     }
@@ -99,7 +99,7 @@ extension CalculatorViewController {
         if operatorLabel.text == "" {
             return
         }
-        addFormula()
+        addCurrentFormulaStack()
         operatorLabel.text = ""
         operandLabel.text = calculatorController.calculate()
     }
@@ -111,28 +111,32 @@ extension CalculatorViewController {
         clearAll()
     }
     
-    func addFormula() {
-        let stackView = UIStackView()
-        
+    private func addCurrentFormulaStack() {
         guard let `operator` = operatorLabel.text,
                 let operand = operandLabel.text  else {
             return
         }
-        
-        insertValueToStackView(textValue: `operator`)
-        insertValueToStackView(textValue: operand)
-        
-        func insertValueToStackView(textValue: String) {
-            let label = calculatorHistoryUILbel(text: textValue)
-            stackView.addArrangedSubview(label)
+        let formulaStackView = addFormulaStackView(operand: operand, operator: `operator`)
+        calculationHistoryStackView.addArrangedSubview(formulaStackView)
+        calculatorController.insertFormula(operator: `operator`, operand: operand.replacingOccurrences(of: ",", with: ""))
+        scrollToBottom(calculationHistoryScrollView)
+    }
+    
+    private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
+        let formulaStackView = FormulaStackView()
+        guard calculationHistoryStackView.subviews.count > 0 else {
+            formulaStackView.addLabel(operand)
+            return formulaStackView
         }
-        
-        calculationHistoryStackView.addArrangedSubview(stackView)
-        
-        calculatorController.insertFormula(operator: `operator`,
-                                           operand: operand.components(separatedBy: [","]).joined())
-        
-        autoScrollDown()
+        formulaStackView.addLabel(`operator`)
+        formulaStackView.addLabel(operand)
+        return formulaStackView
+    }
+    
+    private func scrollToBottom(_ view: UIScrollView) {
+        calculationHistoryScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: calculationHistoryScrollView.contentSize.height - calculationHistoryScrollView.frame.height)
+        view.setContentOffset(bottomOffset, animated: false)
     }
     
     func clearAll() {
@@ -145,18 +149,6 @@ extension CalculatorViewController {
     func clearEntry() {
         rawOperand = "0"
         operandLabel.text = rawOperand
-    }
-    
-    func autoScrollDown() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1 ) {
-            self.calculationHistoryScrollView
-                .scrollRectToVisible(CGRect(x: 0,
-                                            y: self.calculationHistoryScrollView.contentSize.height
-                                                - self.calculationHistoryScrollView.bounds.height,
-                                            width: self.calculationHistoryScrollView.bounds.size.width,
-                                            height: self.calculationHistoryScrollView.bounds.size.height),
-                                     animated: true)
-        }
     }
     
     func changeNumberFormatter(insertedNumber: String) -> String {
