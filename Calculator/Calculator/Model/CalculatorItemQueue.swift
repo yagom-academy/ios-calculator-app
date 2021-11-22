@@ -24,7 +24,7 @@ struct CalculatorItemQueue<Value: CalculateItem> {
         lastNode?.link(nextNode: newNode)
     }
     
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> Value? {
         guard let firstNodeValue = self.firstNode?.value else { return nil }
         
         let secondNode = self.firstNode?.nextNode
@@ -33,29 +33,16 @@ struct CalculatorItemQueue<Value: CalculateItem> {
         return firstNodeValue
     }
     
-    func allOperands() -> [Double] {
-        var allOperands: [Double] = []
+    func allItems() -> [Value] {
+        var allItems: [Value] = []
         
         var currentNode = self.firstNode
         
-        while let operand = currentNode?.value as? Double {
-            allOperands.append(operand)
+        while let item = currentNode?.value {
+            allItems.append(item)
             currentNode = currentNode?.nextNode
         }
         
-        return allOperands
-    }
-    
-    func allOperators() -> [Operator] {
-        var allOperators: [Operator] = []
-        
-        var currentNode = self.firstNode
-        
-        while let operand = currentNode?.value as? Operator {
-            allOperators.append(operand)
-            currentNode = currentNode?.nextNode
-        }
-        
-        return allOperators
+        return allItems
     }
 }
