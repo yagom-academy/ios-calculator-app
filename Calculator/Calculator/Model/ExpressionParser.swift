@@ -33,12 +33,10 @@ enum ExpressionParser {
     }
     
     private static func makeOperatorQueue(with input: String) -> CalculatorItemQueue<Operator> {
-        let operatorRawValues = Operator.allCases.map { $0.rawValue }
         var operatorQueue = CalculatorItemQueue<Operator>()
         
-        input.filter { operatorRawValues.contains($0) }.forEach {
-            guard let operatorItem = Operator(rawValue: $0) else { return }
-            operatorQueue.enqueue(operatorItem)
+        input.compactMap{ Operator(rawValue: $0) }.forEach {
+            operatorQueue.enqueue($0)
         }
         
         return operatorQueue

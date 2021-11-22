@@ -16,7 +16,8 @@ struct Formula {
 
         while let nextOperator = operators.dequeue(),
               let nextOperand = operands.dequeue() {
-            calculatedResult = nextOperator.calculate(lhs: calculatedResult, rhs: nextOperand)
+            calculatedResult = nextOperator.calculate(lhs: calculatedResult,
+                                                      rhs: nextOperand)
             }
         
         return calculatedResult

@@ -7,10 +7,114 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet private weak var formulaScrollView: UIScrollView!
+    @IBOutlet private weak var verticalStackView: UIStackView!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var currentOperandLabel: UILabel!
+    
+    private let calculator = Calculator()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.calculator.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        calculator.shouldSetInitialState()
     }
 }
 
+// MARK:- IBAction
+private extension ViewController {
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        calculator.allClearButtonDidTap()
+    }
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+        calculator.clearEntryButtonDidTap()
+    }
+    @IBAction func toggleSignButtonTapped(_ sender: UIButton) {
+        calculator.toggleSignButtonDidTap()
+    }
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let `operator` = sender.titleLabel?.text else { return }
+        calculator.operatorButtonDidTap(operator: `operator`)
+    }
+    @IBAction func equalsButtonTapped(_ sender: UIButton) {
+        calculator.equalsButtonDidTap()
+    }
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        calculator.dotButtonDidTap()
+    }
+    @IBAction func zeroButtonTapped(_ sender: UIButton) {
+        calculator.zeroButtonDidTap()
+    }
+    @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
+        calculator.doubleZeroButtonDidTap()
+    }
+    @IBAction func digitButtonTapped(_ sender: UIButton) {
+        guard let number = sender.titleLabel?.text else { return }
+        calculator.digitButtonDidTap(number: number)
+    }
+}
+
+// MARK:- Delegate Implementation
+extension ViewController: CalculatorDelegate {
+    func addFormulaLine(operator: String, operand: String) {
+        let operatorLabel = makeFormulaLabel(with: `operator`)
+        let operandLabel = makeFormulaLabel(with: operand)
+        let horizontalStackView =
+            makeHorizontalStackView(operator: operatorLabel,
+                                    operand: operandLabel)
+        
+        verticalStackView.addArrangedSubview(horizontalStackView)
+        scrollToBottom()
+    }
+    func updateOperatorLabel(with operator: String) {
+        currentOperatorLabel.text = `operator`
+    }
+    func updateOperandLabel(with operand: String) {
+        currentOperandLabel.text = operand
+    }
+    func clearFormulaStack() {
+        verticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+}
+
+// MARK:- Formula StackView Factory
+private extension ViewController {
+    func makeFormulaLabel(with text: String) -> UILabel {
+        let label = UILabel()
+        
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.text = text
+        
+        return label
+    }
+    
+    func makeHorizontalStackView(operator: UILabel,
+                                 operand: UILabel) -> UIStackView {
+        let horizontal = UIStackView()
+        let defaultSpacing: CGFloat = 8
+        
+        horizontal.axis = .horizontal
+        horizontal.translatesAutoresizingMaskIntoConstraints = false
+        horizontal.addArrangedSubview(`operator`)
+        horizontal.addArrangedSubview(operand)
+        horizontal.spacing = defaultSpacing
+        
+        return horizontal
+    }
+}
+
+// MARK:- Scroll View Related
+extension ViewController {
+    private func scrollToBottom() {
+        formulaScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0,
+                                   y: formulaScrollView.contentSize.height -
+                                    formulaScrollView.frame.height)
+        formulaScrollView.setContentOffset(bottomOffset, animated: false)
+    }
+}
