@@ -112,14 +112,6 @@ struct Calculator {
         isEvaluated = false
     }
     
-    private func initNumberFormatterForCalculator() -> Formatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumSignificantDigits = 20
-        formatter.roundingMode = .halfUp
-        return formatter
-    }
-    
     private struct LabelContents {
         static let notANumber = "NaN"
         static let emptyString = ""
