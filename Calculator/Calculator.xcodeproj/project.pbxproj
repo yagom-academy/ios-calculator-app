@@ -13,7 +13,6 @@
 		4714EFC5273A4A6F00A0A974 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714EFC4273A4A6F00A0A974 /* Operator.swift */; };
 		4714EFC6273A4D6800A0A974 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714EFC4273A4A6F00A0A974 /* Operator.swift */; };
 		4774A532274779FC00F117A4 /* CalculatorVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774A531274779FC00F117A4 /* CalculatorVC+Extension.swift */; };
-		4792A8BD27414CCB007F5421 /* LearningTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8BC27414CCB007F5421 /* LearningTest.swift */; };
 		4792A8BF27414F74007F5421 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8BE27414F74007F5421 /* CalculatorError.swift */; };
 		4792A8C027414F74007F5421 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8BE27414F74007F5421 /* CalculatorError.swift */; };
 		4792A8C227422E64007F5421 /* FormulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792A8C127422E64007F5421 /* FormulaTest.swift */; };
@@ -58,7 +57,6 @@
 		4714EFB9273A0CE100A0A974 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		4714EFC4273A4A6F00A0A974 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4774A531274779FC00F117A4 /* CalculatorVC+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalculatorVC+Extension.swift"; sourceTree = "<group>"; };
-		4792A8BC27414CCB007F5421 /* LearningTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTest.swift; sourceTree = "<group>"; };
 		4792A8BE27414F74007F5421 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		4792A8C127422E64007F5421 /* FormulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTest.swift; sourceTree = "<group>"; };
 		479B9E11274BB178001ADC77 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				47C5F25B273EACC50047D57F /* ExpressionParserTest.swift */,
 				4792A8C127422E64007F5421 /* FormulaTest.swift */,
 				4714EFB9273A0CE100A0A974 /* CalculatorItemQueueTests.swift */,
-				4792A8BC27414CCB007F5421 /* LearningTest.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -298,7 +295,6 @@
 				47C5F26227400F7B0047D57F /* ExpressionParser.swift in Sources */,
 				4714EFC0273A0D3400A0A974 /* CalculatorItemQueue.swift in Sources */,
 				47C5F25F273ED6750047D57F /* String+Extension.swift in Sources */,
-				4792A8BD27414CCB007F5421 /* LearningTest.swift in Sources */,
 				47C5F25C273EACC50047D57F /* ExpressionParserTest.swift in Sources */,
 				4714EFC6273A4D6800A0A974 /* Operator.swift in Sources */,
 				4792A8C227422E64007F5421 /* FormulaTest.swift in Sources */,
@@ -541,7 +537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3P8RM8472L;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -562,7 +558,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3P8RM8472L;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
