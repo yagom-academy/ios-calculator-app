@@ -51,18 +51,16 @@ class CalculatorViewController: UIViewController {
     }
     
     func addCurrentInputToFormulaHistory() {
-        let formatter = initNumberFormatterForCalculator()
-        
         let stackView = UIStackView()
         stackView.spacing = 8.0
         
         let operatorSignLabelView = UILabel()
-        operatorSignLabelView.text = currentInputOperator
+        operatorSignLabelView.text = calculatorModel.currentInputOperator
         operatorSignLabelView.textColor = .white
         
         let operandLabelView = UILabel()
         
-        operandLabelView.text = formatter.string(for: Double(currentInputOperand)) ?? currentInputOperand
+        operandLabelView.text = calculatorModel.currentInputOperand
         operandLabelView.textColor = .white
         
         stackView.addArrangedSubview(operatorSignLabelView)
