@@ -14,4 +14,15 @@ struct CalculatorItemQueue<Element> {
     mutating func enQueueElement(_ element: Element) {
         enQueueElements.append(element)
     }
+    
+    mutating func deQueueFirstElement() -> Element {
+        if enQueueElements.isEmpty && deQueueElements.isEmpty {
+            fatalError("Queue is empty")
+        }
+        if deQueueElements.isEmpty {
+            deQueueElements = enQueueElements.reversed()
+            enQueueElements.removeAll()
+        }
+        return deQueueElements.removeLast()
+    }
 }
