@@ -10,6 +10,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeView()
+    }
+    
+    func initializeView() {
         operandsLabel.text = "0"
         operatorLabel.text = ""
     }
@@ -21,7 +25,7 @@ class ViewController: UIViewController {
         return label
     }
     
-    private func makeStackView(with subviews: UIView...) -> UIStackView {
+    private func makeStackView(with subviews: [UIView]) -> UIStackView {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
@@ -36,9 +40,9 @@ class ViewController: UIViewController {
     private func makeExpressionStackView() {
         let operandLabel = makeLabel(text: self.operandsLabel.text)
         let operatorLabel = makeLabel(text: self.operatorLabel.text)
-        let smallStackview = makeStackView(with: operatorLabel, operandLabel)
+        let expressionStackview = makeStackView(with: [operatorLabel, operandLabel])
         
-        mainStackView.addArrangedSubview(smallStackview)
+        mainStackView.addArrangedSubview(expressionStackview)
     }
     
     private func changeOperandsLabelText(newInput: String) {
