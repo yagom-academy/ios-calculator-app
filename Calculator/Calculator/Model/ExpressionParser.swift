@@ -1,10 +1,10 @@
 enum ExpressionParser {
-    enum ParserError: Error {
-        case includingAbnormalCharacter
-        case firstOrLastComponentIsNotOperand
-        case incorrectCountOfOperandsAndOperators
-        case failedToInitializeFormulaInstance
-    }
+//    enum ParserError: Error {
+//        case includingAbnormalCharacter
+//        case firstOrLastComponentIsNotOperand
+//        case incorrectCountOfOperandsAndOperators
+//        case failedToInitializeFormulaInstance
+//    }
     
     enum StringChecker {
         static func hasNotAbnormalCharacter(from input: String) -> Bool {
@@ -35,28 +35,28 @@ enum ExpressionParser {
 }
 
 extension ExpressionParser {
-    static func parse(from input: String) -> Result<Formula, ExpressionParser.ParserError> {
+    static func parse(from input: String) throws -> Formula {
         guard StringChecker.hasNotAbnormalCharacter(from: input) else {
-            return .failure(.includingAbnormalCharacter)
+            throw CalculatorError.includingAbnormalCharacter
         }
         
         let inputComponents = ExpressionParser.componentsByOperators(from: input)
         
         guard StringChecker.firstAndLastComponentAreOperands(from: inputComponents) else {
-            return .failure(.firstOrLastComponentIsNotOperand)
+            throw CalculatorError.firstOrLastComponentIsNotOperand
         }
                    
         let (operands, operators) = separateOperandsAndOperators(from: inputComponents)
         
         guard operands.count == operators.count + 1 else {
-            return .failure(.incorrectCountOfOperandsAndOperators)
+            throw CalculatorError.incorrectCountOfOperandsAndOperators
         }
         
         guard let formula = makeFormula(operands: operands, operators: operators) else {
-            return .failure(.failedToInitializeFormulaInstance)
+            throw CalculatorError.failedToInitializeFormulaInstance
         }
         
-        return .success(formula)
+        return formula
     }
     
     static private func componentsByOperators(from input: String) -> [String] {

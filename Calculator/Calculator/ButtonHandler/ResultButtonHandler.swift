@@ -25,20 +25,15 @@ struct ResultButtonHandler: ButtonActionDelegate {
     private func showCalculationResult(viewController: ViewController, button: UIButton) {
         viewController.operatorLabel.text = ""
         
-        let parsedInputHistory = ExpressionParser.parse(from: viewController.allHistory)
-        
-        var calculationResult = 0.0
-        switch parsedInputHistory {
-        case .success(var formula):
-            calculationResult = formula.result()
-        default:
-            return
-        }
-
-        if calculationResult == Double.infinity {
-            viewController.valueLabel.text = "NaN"
-        } else {
+        do {
+            var formula = try ExpressionParser.parse(from: viewController.allHistory)
+            let calculationResult = try formula.result()
             viewController.valueLabel.text = convertToDeicmalString(from: calculationResult) ?? ""
+        } catch CalculatorError.dividedByZero {
+            viewController.valueLabel.text = "\(CalculatorError.dividedByZero.description)"
+            viewController.operatorLabel.text = ""
+        } catch {
+            print(error)
         }
 
         viewController.currentPhase = .phase4
