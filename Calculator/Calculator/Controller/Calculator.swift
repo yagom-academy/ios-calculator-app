@@ -8,11 +8,11 @@
 import Foundation
 
 struct Calculator {
-    var currentInputOperand = LabelContents.defaultOperand
-    var currentInputOperator = LabelContents.emptyString
+    private(set) var currentInputOperand = LabelContents.defaultOperand
+    private(set) var currentInputOperator = LabelContents.emptyString
     
-    var isEvaluated = false
-    var mathExpression: [String] = []
+    private var isEvaluated = false
+    private var mathExpression: [String] = []
     
     mutating func touchNumberButton(_ number: String) {
         if isEvaluated { return }
@@ -99,18 +99,18 @@ struct Calculator {
     }
     
     
-    mutating func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
+    mutating private func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
         currentInputOperator = operatorForm
         currentInputOperand = operandForm
     }
     
-    mutating func resetAllExpression() {
+    mutating private func resetAllExpression() {
         updateCurrentInput()
         mathExpression = []
         isEvaluated = false
     }
     
-    func initNumberFormatterForCalculator() -> Formatter {
+    private func initNumberFormatterForCalculator() -> Formatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumSignificantDigits = 20
@@ -118,7 +118,7 @@ struct Calculator {
         return formatter
     }
     
-    struct LabelContents {
+    private struct LabelContents {
         static let notANumber = "NaN"
         static let emptyString = ""
         static let defaultOperand = "0"
