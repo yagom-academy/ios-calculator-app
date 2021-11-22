@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet private weak var inputLabel: UILabel!
+    @IBOutlet private weak var operandsLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var mainStackView: UIStackView!
     
@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputLabel.text = "0"
+        operandsLabel.text = "0"
         operatorLabel.text = ""
     }
     
@@ -33,8 +33,8 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    func makeSmallStackView() {
-        let operandLabel = makeLabel(text: self.inputLabel.text)
+    func makeExpressionStackView() {
+        let operandLabel = makeLabel(text: self.operandsLabel.text)
         let operatorLabel = makeLabel(text: self.operatorLabel.text)
         let smallStackview = makeStackView(with: operatorLabel, operandLabel)
         
@@ -42,17 +42,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let newInput = sender.currentTitle, let currentInput = inputLabel.text else {return}
+        guard let newInput = sender.currentTitle, let operandsLabelText = operandsLabel.text else {return}
         
-        if currentInput == "0" {
-            inputLabel.text = newInput
+        if operandsLabelText == "0" {
+            operandsLabel.text = newInput
         } else {
-            inputLabel.text = currentInput + newInput
+            operandsLabel.text = operandsLabelText + newInput
         }
-        
+
         if newInput == "00" {
-            if currentInput == "0" || currentInput == "" {
-                inputLabel.text = "0"
+            if operandsLabelText == "0" || operandsLabelText == "" {
+                operandsLabel.text = "0"
             }
         }
         
@@ -63,16 +63,16 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {return}
-        guard inputLabel.text != "0" else { return }
-        guard inputLabel.text?.isEmpty == false else {return}
-        makeSmallStackView()
+        guard operandsLabel.text != "0" else { return }
+        guard operandsLabel.text?.isEmpty == false else {return}
+        makeExpressionStackView()
         inputString.append(`operator`)
-        inputLabel.text = ""
+        operandsLabel.text = ""
         operatorLabel.text = `operator`
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        inputLabel.text = "0"
+        operandsLabel.text = "0"
         operatorLabel.text = ""
         inputString = ""
         for i in mainStackView.arrangedSubviews {
@@ -82,8 +82,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        if inputLabel.text?.isEmpty == false {
-            inputLabel.text?.removeLast()
+        if operandsLabel.text?.isEmpty == false {
+            operandsLabel.text?.removeLast()
         }
         
         if inputString.isEmpty == false {
@@ -93,27 +93,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
-        guard let currentInput = inputLabel.text else {return}
+        guard let operandsLabelText = operandsLabel.text else {return}
         
-        if currentInput.contains("-") {
-            inputLabel.text = currentInput.replacingOccurrences(of: "-", with: "")
+        if operandsLabelText.contains("-") {
+            operandsLabel.text = operandsLabelText.replacingOccurrences(of: "-", with: "")
         }
         else {
-            inputLabel.text = "-" + currentInput
+            operandsLabel.text = "-" + operandsLabelText
         }
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        guard let newInput = sender.currentTitle, let currentInput = inputLabel.text else {return}
+        guard let newInput = sender.currentTitle, let operandsLabelText = operandsLabel.text else {return}
         
-        inputLabel.text = currentInput + newInput
+        operandsLabel.text = operandsLabelText + newInput
         inputString.append(newInput)
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
-        guard inputLabel.text != "0" else { return }
-        guard inputLabel.text?.isEmpty == false else {return}
-        makeSmallStackView()
+        guard operandsLabel.text != "0" else { return }
+        guard operandsLabel.text?.isEmpty == false else {return}
+        makeExpressionStackView()
         
         var formula: Formula = ExpressionParser.parse(from: inputString)
         print(inputString)
@@ -121,7 +121,7 @@ class ViewController: UIViewController {
         print(formula.operators)
         let result = formula.result()
         print(result)
-        inputLabel.text = result.description
+        operandsLabel.text = result.description
         operatorLabel.text = ""
         
     }
