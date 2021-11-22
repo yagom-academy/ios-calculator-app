@@ -6,7 +6,8 @@ struct CalculatorItemQueue<Element> {
     func insertToQueue(_ insertValue: Element) {
         linkedList.addNewNode(insertValue)
     }
-    
+
+    @discardableResult
     func deleteFromQueue() throws -> Element {
         guard let deletedValue = linkedList.head?.nodeValue else {
             throw CalculatorError.emptyQueue
