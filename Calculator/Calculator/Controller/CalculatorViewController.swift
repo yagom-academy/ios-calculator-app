@@ -8,16 +8,16 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    var calculatorModel = Calculator() {
+    private var calculatorModel = Calculator() {
         didSet {
             updateCurrentInputLabel()
         }
     }
     
-    @IBOutlet weak var formulaHistoryScrollView: UIScrollView!
-    @IBOutlet weak var formulaHistoryStackView: UIStackView!
-    @IBOutlet weak var currentInputOperandLabel: UILabel!
-    @IBOutlet weak var currentInputOperatorLabel: UILabel!
+    @IBOutlet weak private var formulaHistoryScrollView: UIScrollView!
+    @IBOutlet weak private var formulaHistoryStackView: UIStackView!
+    @IBOutlet weak private var currentInputOperandLabel: UILabel!
+    @IBOutlet weak private var currentInputOperatorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,35 +26,35 @@ class CalculatorViewController: UIViewController {
         removeAllFormulaHistory()
     }
     
-    @IBAction func touchNumberButton(_ sender: UIButton) {
+    @IBAction private func touchNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
         calculatorModel.touchNumberButton(number)
     }
     
-    @IBAction func touchOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
         calculatorModel.touchOperatorButton(operatorSymbole)
     }
     
-    @IBAction func touchSignChangeButton(_ sender: UIButton) {
+    @IBAction private func touchSignChangeButton(_ sender: UIButton) {
         calculatorModel.touchSignChangeButton()
     }
     
-    @IBAction func touchAllClearButton(_ sender: UIButton) {
+    @IBAction private func touchAllClearButton(_ sender: UIButton) {
         calculatorModel.touchAllClearButton()
         removeAllFormulaHistory()
     }
     
-    @IBAction func touchClearEntryButton(_ sender: UIButton) {
+    @IBAction private func touchClearEntryButton(_ sender: UIButton) {
         calculatorModel.touchClearEntryButton()
         removeAllFormulaHistory()
     }
     
-    @IBAction func touchEvaluateButton(_ sender: UIButton) {
+    @IBAction private func touchEvaluateButton(_ sender: UIButton) {
         calculatorModel.touchEvaluateButton()
     }
     
-    func addCurrentInputToFormulaHistory() {
+    private func addCurrentInputToFormulaHistory() {
         let stackView = UIStackView()
         stackView.spacing = 8.0
         
@@ -73,19 +73,19 @@ class CalculatorViewController: UIViewController {
         formulaHistoryStackView.addArrangedSubview(stackView)
     }
     
-    func removeAllFormulaHistory() {
+    private func removeAllFormulaHistory() {
         formulaHistoryStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in
             view.removeFromSuperview()
         })
     }
     
-    func updateCurrentInputLabel() {
+    private func updateCurrentInputLabel() {
         currentInputOperandLabel.text = calculatorModel.currentInputOperand
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
 }
 
-extension UIScrollView {
+fileprivate extension UIScrollView {
     func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: contentSize.height)
         setContentOffset(bottomOffset, animated: false)
