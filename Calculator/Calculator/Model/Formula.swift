@@ -23,11 +23,11 @@ struct Formula {
                 throw CalculatorQueueError.NoElement
             }
             
-            guard let `operator` = operators.dequeue() else {
+            guard let operatorInstance = operators.dequeue() else {
                 throw CalculatorQueueError.NoElement
             }
             
-            resultOfCaculate = try `operator`.calculate(lhs: resultOfCaculate, rhs: nextOperand)
+            resultOfCaculate = try operatorInstance.calculate(lhs: resultOfCaculate, rhs: nextOperand)
         }
         
         return resultOfCaculate
