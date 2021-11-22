@@ -73,6 +73,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func touchUpACButton(_ sender: Any) {
         clearCalculationHistory()
         changeCurrentOperandData(to: "0")
+        changeCurrentOperatorData(to: "")
     }
     
     @IBAction private func touchUpCEButton(_ sender: Any) {
