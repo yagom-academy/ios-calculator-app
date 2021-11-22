@@ -1,40 +1,48 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operands = componentsByOperators(from: input)
-                        .compactMap{ Double($0) }
-        
-        let operators = input.compactMap{ Operator(rawValue: $0) }
-        
-        return Formula(operators: CalculatorItemQueue(operators), operands: CalculatorItemQueue(operands))
+        let splitInput = componentsByOperators(from: input)
+        let operands = splitInput.compactMap { Double($0) }
+        let operators = input.compactMap { Operator(rawValue: $0) }
+        let formula = Formula(operands: operands, operators: operators)
+        return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var inputArray = [input]
-        var tempArray: [String] = []
-        Operator.allCases.forEach { `operator` in
-            for input in inputArray {
-                tempArray += input.split(with: `operator`.rawValue)
-            }
-            inputArray = tempArray
-            tempArray.removeAll()
+        let operators = Operator.allCases.map { $0.rawValue }
+        var result: [String] = [input]
+        for `operator` in operators {
+            result = result.flatMap { $0.split(with: `operator`) }
         }
-        return inputArray
+        return result
     }
 }
 
 fileprivate extension String {
     func split(with target: Character) -> [String] {
-        var strArray: [String] = []
-        var num: String = ""
-        self.forEach {
-            if $0 != target {
-                num = num + String($0)
+        var result: [String] = []
+        var number = ""
+        for char in self {
+            if char == target {
+                result.append(number)
+                result.append(String(char))
+                number.removeAll()
             } else {
-                strArray.append(num)
-                num.removeAll()
+                number += String(char)
             }
         }
-        strArray.append(num)
-        return strArray
+        
+        if number.isEmpty == false {
+            result.append(number)
+        }
+        return result
+    }
+}
+
+fileprivate extension Character {
+    init?(text: String) {
+        guard text.count == 1 else {
+            return nil
+        }
+        self.init(text)
     }
 }

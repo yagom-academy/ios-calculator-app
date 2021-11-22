@@ -1,25 +1,25 @@
-
-import Foundation
-
 struct Formula {
-    var operators: CalculatorItemQueue<Operator>
-    var operands: CalculatorItemQueue<Double>
+    var operandQueue: CalculatorItemQueue<Double>
+    var operatorQueue: CalculatorItemQueue<Operator>
     
-    init(operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(), operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()) {
-        self.operators = operators
-        self.operands = operands
+    init(operands: [Double], operators:[Operator]) {
+        self.operandQueue = CalculatorItemQueue(operands)
+        self.operatorQueue = CalculatorItemQueue(operators)
+    }
+    
+    init() {
+        self.operandQueue = CalculatorItemQueue<Double>()
+        self.operatorQueue = CalculatorItemQueue<Operator>()
     }
     
     mutating func result() throws -> Double {
-        var result = try operands.dequeue()
+        var result = try operandQueue.dequeue()
         
-        while operators.isEmpty == false {
-            let `operator` = try operators.dequeue()
-            
-            let operand = try operands.dequeue()
+        while operatorQueue.isEmpty == false {
+            let `operator` = try operatorQueue.dequeue()
+            let operand = try operandQueue.dequeue()
             result = try `operator`.calculate(lhs: result, rhs: operand)
         }
         return result
     }
 }
-
