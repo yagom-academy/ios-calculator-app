@@ -29,25 +29,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
-        if isEvaluated { return }
-        
-        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty { return }
-        
-        if currentInputOperand == LabelContents.defaultOperand {
-            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbole)
-            return
-        }
-        
-        if mathExpression.isEmpty {
-            mathExpression += [currentInputOperand]
-            addCurrentInputToFormulaHistory()
-            updateCurrentInput(operatorForm: operatorSymbole)
-            return
-        }
-        
-        mathExpression += [currentInputOperator, currentInputOperand]
-        addCurrentInputToFormulaHistory()
-        updateCurrentInput(operatorForm: operatorSymbole)
+        calculatorModel.touchOperatorButton(operatorSymbole)
     }
     
     @IBAction func touchSignChangeButton(_ sender: UIButton) {
