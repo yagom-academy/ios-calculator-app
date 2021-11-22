@@ -33,15 +33,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchSignChangeButton(_ sender: UIButton) {
-        if currentInputOperand == LabelContents.defaultOperand { return }
-        if isEvaluated { return }
-        
-        if currentInputOperand.hasPrefix(LabelContents.minusSignSymbole) {
-            currentInputOperand.removeFirst()
-            return
-        }
-        
-        currentInputOperand.insert(contentsOf: LabelContents.minusSignSymbole, at: currentInputOperand.startIndex)
+        calculatorModel.touchSignChangeButton()
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
