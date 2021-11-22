@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private func parseExpression() -> Double {
+    private func drawResultFromExpression() -> Double {
         var formula: Formula = ExpressionParser.parse(from: inputString)
         let result = formula.result()
         return result
@@ -164,7 +164,7 @@ class ViewController: UIViewController {
         guard operandsLabel.text?.isEmpty == false else {return}
         
         makeExpressionStackView()
-        updateOperandsLabel(text: parseExpression().description)
+        updateOperandsLabel(text: drawResultFromExpression().description)
         initializeOpertorLabel()
     }
 }
