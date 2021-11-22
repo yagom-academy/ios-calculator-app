@@ -39,7 +39,7 @@ class CalculatorViewController: UIViewController {
 
 extension CalculatorViewController {
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
-        guard checkNumberOfInputs else {
+        guard checkNumberOfInputs, isNotCalculated else {
             return
         }
         
@@ -52,7 +52,7 @@ extension CalculatorViewController {
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
-        guard !rawOperand.contains(".") else {
+        guard !rawOperand.contains("."), isNotCalculated else {
             return
         }
         
@@ -85,7 +85,7 @@ extension CalculatorViewController {
     }
     
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
-        guard rawOperand != "0" else {
+        guard rawOperand != "0", isNotCalculated else {
             return
         }
         
@@ -100,14 +100,19 @@ extension CalculatorViewController {
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         resetCalcurator()
+        hasCalculated = false
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         clearEntry()
+        if hasCalculated {
+            clearAll()
+            hasCalculated = false
+        }
     }
     
     @IBAction func touchUPEqualButton(_ sender: UIButton) {
-        if operatorLabel.text == "" {
+        if operatorLabel.text == "", hasCalculated {
             return
         }
         addCurrentFormulaStack()
