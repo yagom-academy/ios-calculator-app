@@ -47,22 +47,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchEvaluateButton(_ sender: UIButton) {
-        if isEvaluated { return }
-        
-        mathExpression += [currentInputOperator, currentInputOperand]
-        addCurrentInputToFormulaHistory()
-        
-        isEvaluated = true
-        let stringFormula = mathExpression.joined()
-        
-        do {
-            let result = try ExpressionParser.parse(from: stringFormula).result()
-            updateCurrentInput(operandForm: String(result))
-        } catch CalculatorError.divideByZero {
-            updateCurrentInput(operandForm: LabelContents.notANumber)
-        } catch {
-            updateCurrentInput(operandForm: LabelContents.error)
-        }
+        calculatorModel.touchEvaluateButton()
     }
     
     func addCurrentInputToFormulaHistory() {
