@@ -6,16 +6,17 @@
 //
 
 import Foundation
-import Metal
 
 struct LinkedList<Element: CalculateItem> {
     
     // MARK: private property
+    
     private var head: Node<Element>?
     private var tail: Node<Element>?
 }
 
-// MARK: internal method
+// MARK: - internal method
+
 extension LinkedList {
     
     mutating func append(data: Element) {
