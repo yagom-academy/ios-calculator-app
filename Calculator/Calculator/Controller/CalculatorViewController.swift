@@ -10,6 +10,7 @@ class CalculatorViewController: UIViewController {
     
     private var calculatorModel = Calculator() {
         didSet {
+            addCurrentInputToFormulaHistory()
             updateCurrentInputLabel()
         }
     }

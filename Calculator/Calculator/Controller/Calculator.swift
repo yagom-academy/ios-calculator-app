@@ -12,7 +12,7 @@ struct Calculator {
     private(set) var currentInputOperator = LabelContents.emptyString
     
     private var isEvaluated = false
-    private var mathExpression: [String] = []
+    private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
     
     mutating func touchNumberButton(_ number: String) {
         if isEvaluated { return }
@@ -45,12 +45,12 @@ struct Calculator {
         }
         
         if mathExpression.isEmpty {
-            mathExpression += [currentInputOperand]
+            mathExpression += [(LabelContents.emptyString, currentInputOperand)]
             updateCurrentInput(operatorForm: operatorSymbole)
             return
         }
         
-        mathExpression += [currentInputOperator, currentInputOperand]
+        mathExpression += [(currentInputOperator, currentInputOperand)]
         updateCurrentInput(operatorForm: operatorSymbole)
     }
     
@@ -83,10 +83,12 @@ struct Calculator {
     mutating func touchEvaluateButton() {
         if isEvaluated { return }
         
-        mathExpression += [currentInputOperator, currentInputOperand]
+        mathExpression += [(currentInputOperator, currentInputOperand)]
         
         isEvaluated = true
-        let stringFormula = mathExpression.joined()
+        let stringFormula = mathExpression.reduce(LabelContents.emptyString) { (previousResult, each) in
+            return previousResult + each.operatorSymbole + each.operandNumber
+        }
         
         do {
             let result = try ExpressionParser.parse(from: stringFormula).result()
