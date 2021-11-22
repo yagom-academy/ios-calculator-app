@@ -7,32 +7,29 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element: CalculatorItem> {
-    private var items: LinkedList<Element>
-    var isEmpty: Bool {
-        return items.isEmpty
-    }
+struct CalculatorItemQueue<Element: CalculateItem> {
+    var items: [Element] = []
+    var reversedItems: [Element] = []
     
-    init() {
-        items = LinkedList<Element>()
-    }
-    
-    mutating func enqueue(_ item: Element) {
+    mutating func appendItem(_ item: Element) {
         items.append(item)
     }
     
-    mutating func dequeue() -> Element? {
-        return items.pop()
+    mutating func removeItem() throws -> [Element] {
+        if items.isEmpty {
+            throw QueueError.emptyItem
+        }
+        reversedItems = items.reversed()
+        reversedItems.removeLast()
+        items = reversedItems.reversed()
+        
+        return items
     }
     
-    mutating func removeLast() -> Element? {
-        return items.removeLast()
+    mutating func removeAllItems() throws {
+        if items.isEmpty {
+            throw QueueError.emptyItem
+        }
+        items.removeAll()
     }
 }
-
-extension CalculatorItemQueue: CustomStringConvertible {
-    var description: String {
-        return items.description
-    }
-}
-

@@ -19,8 +19,8 @@ enum ExpressionParser {
                 .filter { operatorSet.contains($0) }
                 .compactMap { Operator(rawValue: Character($0)) }
 
-        operands.forEach { operandsQueue.enqueue($0) }
-        operators.forEach { operatorsQueue.enqueue($0) }
+        operands.forEach { operandsQueue.appendItem($0) }
+        operators.forEach { operatorsQueue.appendItem($0) }
 
         return Formula(operands: operandsQueue, operators: operatorsQueue)
     }

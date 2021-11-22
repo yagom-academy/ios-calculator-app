@@ -8,17 +8,20 @@
 import Foundation
 
 enum QueueError: Error {
-    case operandQueueIsEmpty
-    case operatorQueueIsEmpty
+    case emptyItem
+    case emptyOperandItem
+    case emptyOperatorItem
 }
 
 extension QueueError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .operandQueueIsEmpty:
+        case .emptyOperandItem:
             return "피연산자 큐가 비어있습니다."
-        case .operatorQueueIsEmpty:
+        case .emptyOperatorItem:
             return "연산자 큐가 비어있습니다."
+        case .emptyItem:
+            return "큐가 비어있습니다."
         }
     }
 }

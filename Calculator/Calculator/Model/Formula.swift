@@ -11,36 +11,39 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
-        self.operands = operands
-        self.operators = operators
-    }
-    
     mutating func result() throws -> Double {
-        guard let firstOperand = operands.dequeue() else {
-            throw QueueError.operandQueueIsEmpty
+        if operands.items == [] {
+            operands.appendItem(0)
         }
         
-        var currentValue: Double = firstOperand
+        if operators.items == [] {
+            throw QueueError.emptyOperatorItem
+        }
         
-        while !operands.isEmpty {
-            guard let currentOperator = operators.dequeue() else {
-                throw QueueError.operatorQueueIsEmpty
-            }
-            guard let currentOperand = operands.dequeue() else {
-                throw QueueError.operandQueueIsEmpty
-            }
+        let firstOperand = operands.items[0]
+        var operatorItems = operators.items
+        var result = firstOperand
+        
+        repeat {
             do {
-            currentValue = try currentOperator.calculate(lhs: currentValue, rhs: currentOperand)
-            } catch let error {
-                throw error
+                let nextOperand = try operands.removeItem()
+                
+                if nextOperand == [] {
+                    throw QueueError.emptyOperandItem
+                }
+                
+                result = try operatorItems[0].calculate(lhs: result, rhs: nextOperand[0])
+            } catch {
+                throw QueueError.emptyOperandItem
             }
-        }
+            
+            do {
+                operatorItems = try operators.removeItem()
+            } catch {
+                throw QueueError.emptyOperatorItem
+            }
+        } while operatorItems.count >= 1
         
-        guard operators.isEmpty else {
-            throw OperationError.invalidFormula
-        }
-        
-        return currentValue
+        return result
     }
 }
