@@ -15,7 +15,12 @@ struct Calculator {
     private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
     
     mutating func touchNumberButton(_ number: String) {
-        if isEvaluated { return }
+        if isEvaluated {
+            let temporaryOperand = currentInputOperand + number
+            resetAllExpression()
+            updateCurrentInput(operandForm: temporaryOperand)
+            return
+        }
         
         if number == LabelContents.pointSymbole && currentInputOperand.contains(LabelContents.pointSymbole) { return }
         
@@ -40,6 +45,7 @@ struct Calculator {
             resetAllExpression()
             mathExpression += [(LabelContents.emptyString, temporaryOperand)]
             updateCurrentInput(operatorForm: operatorSymbole)
+            return
         }
         
         if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty { return }
