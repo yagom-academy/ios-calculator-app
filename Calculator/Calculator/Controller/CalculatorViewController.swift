@@ -42,14 +42,8 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchClearEntryButton(_ sender: UIButton) {
-        if isEvaluated == false {
-            updateCurrentInput(operatorForm: currentInputOperator)
-            return
-        }
-        
-        resetAllExpression()
+        calculatorModel.touchClearEntryButton()
         removeAllFormulaHistory()
-        isEvaluated = false
     }
     
     @IBAction func touchEvaluateButton(_ sender: UIButton) {
