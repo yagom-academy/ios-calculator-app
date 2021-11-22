@@ -11,7 +11,7 @@ enum ExpressionParser {
     static let separator: Character = " "
     
     static func parse(from input: String) -> Formula {
-        let formula = Formula()
+        var formula = Formula()
         
         let separatedInput = componentsByOperators(from: input)
         

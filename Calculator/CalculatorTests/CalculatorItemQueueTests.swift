@@ -7,83 +7,130 @@
 
 import XCTest
 
-extension Double: CalculateItem { }
-extension String: CalculateItem { }
-
-class CalculatorTests: XCTestCase {
-
-    func test_기존_연산큐에_데이터가_없을때_계산기가_입력받은_1와_더하기_연산자는_연산큐에_쌓이는가() {
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<String>()
+class CalculatorItemQueueTests: XCTestCase {
+    
+    func test_enqueue() {
+        var queue = CalculatorItemQueue<Double>()
         
-        operands.enqueue(1.0)
-        operators.enqueue("+")
+        queue.enqueue(123)
+        XCTAssertEqual(queue.count, 1)
         
-        XCTAssertEqual(1.0, operands.queue.first?.value)
-        XCTAssertEqual("+", operators.queue.first?.value)
+        queue.enqueue(456)
+        XCTAssertEqual(queue.count, 2)
+        
+        queue.enqueue(789)
+        XCTAssertEqual(queue.count, 3)
     }
     
-    func test_기존_연산큐에_데이터가_있을때_제대로_쌓이는가() {
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<String>()
-
-        operands.enqueue(1.0)
-        operators.enqueue("+")
-        operands.enqueue(2.0)
-        operators.enqueue("-")
-        operands.enqueue(3.0)
-        operators.enqueue("/")
-
-        XCTAssertEqual(1.0, operands.queue.first?.value)
-        XCTAssertEqual("+", operators.queue.first?.value)
-        XCTAssertEqual(3.0, operands.queue.last?.value)
-        XCTAssertEqual("/", operators.queue.last?.value)
-    }
-
-    func test_연산큐에_데이터가_존재할때_dequeue_기능이_잘_되는가() {
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<String>()
-
-        operands.enqueue(1.0)
-        operators.enqueue("+")
-        operands.enqueue(2.0)
-        operators.enqueue("-")
-        operands.enqueue(3.0)
-        operators.enqueue("/")
-
-        let firstDequeuedOperands = operands.dequeue()
-        let firstDequeuedOperators = operators.dequeue()
-
-        XCTAssertEqual(1.0, firstDequeuedOperands)
-        XCTAssertEqual("+", firstDequeuedOperators)
-
-        XCTAssertEqual(2.0, operands.queue.first?.value)
-        XCTAssertEqual("-", operators.queue.first?.value)
+    func test_dequeue() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        queue.enqueue(123)
+        XCTAssertEqual(queue.count, 1)
+        
+        let node1 = queue.dequeue()
+        XCTAssertNotNil(node1)
+        XCTAssertEqual(node1, 123)
+        
+        
+        let node2 = queue.dequeue()
+        XCTAssertNil(node2)
+        XCTAssertEqual(node2, nil)
+        
+        let node3 = queue.dequeue()
+        XCTAssertNil(node3)
+        XCTAssertEqual(queue.count, 0)
     }
     
-    func test_연산큐에_있는_모든_데이터를_지우는_기능이_잘_되는가() {
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<String>()
+    func test_첫번째요소() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        let node1 = queue.front
+        let node2 = queue.dequeue()
+        
+        XCTAssertTrue(node1 == node2)
+    }
+    
+    func test_count() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        
+        XCTAssertEqual(queue.count, 2)
 
-        operands.enqueue(1.0)
-        operators.enqueue("+")
-        operands.enqueue(2.0)
-        operators.enqueue("-")
-        operands.enqueue(3.0)
-        operators.enqueue("/")
+        queue.dequeue()
+        XCTAssertEqual(queue.count, 1)
+        
+        queue.dequeue()
+        XCTAssertEqual(queue.count, 0)
+    }
+    
+    func test_isEmpty() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        XCTAssertTrue(queue.isEmpty)
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        
+        queue.dequeue()
+        XCTAssertFalse(queue.isEmpty)
 
-        XCTAssertEqual(1.0, operands.queue.first?.value)
-        XCTAssertEqual("+", operators.queue.first?.value)
-        XCTAssertEqual(3.0, operands.queue.last?.value)
-        XCTAssertEqual("/", operators.queue.last?.value)
-
-        operands.reset()
-        operators.reset()
-
-        XCTAssertEqual(nil, operands.queue.first?.value)
-        XCTAssertEqual(nil, operators.queue.first?.value)
-        XCTAssertEqual(nil, operands.queue.first?.value)
-        XCTAssertEqual(nil, operators.queue.first?.value)
-
+        queue.dequeue()
+        XCTAssertTrue(queue.isEmpty)
+        
+        queue.enqueue(123)
+        XCTAssertFalse(queue.isEmpty)
+        
+        queue.clear()
+        XCTAssertTrue(queue.isEmpty)
+    }
+    
+    func test_요소가한개일때() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        queue.enqueue(123)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 1)
+        
+        let result = queue.dequeue()
+        XCTAssertEqual(result, 123)
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertEqual(queue.count, 0)
+    }
+    
+    func test_요소가두개일때() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 2)
+        
+        let result1 = queue.dequeue()
+        XCTAssertEqual(result1, 123)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 1)
+        
+        let result2 = queue.dequeue()
+        XCTAssertEqual(result2, 456)
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertEqual(queue.count, 0)
+    }
+    
+    func test_요소가두개일때_clear호출() {
+        var queue = CalculatorItemQueue<Double>()
+        
+        queue.enqueue(123)
+        queue.enqueue(456)
+        XCTAssertFalse(queue.isEmpty)
+        XCTAssertEqual(queue.count, 2)
+        
+        queue.clear()
+        XCTAssertTrue(queue.isEmpty)
+        XCTAssertEqual(queue.count, 0)
     }
 }

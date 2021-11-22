@@ -22,12 +22,12 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    func result() throws -> Double {
+    mutating func result() throws -> Double {
         guard var result = operands.dequeue() else {
             return 0.0
         }
         
-        while !operands.isEmpty() {
+        while !operands.isEmpty {
             guard let `operator` = operators.dequeue() else {
                 return 0.0
             }

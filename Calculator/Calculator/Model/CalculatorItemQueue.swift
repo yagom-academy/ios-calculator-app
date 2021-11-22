@@ -7,28 +7,44 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private let linkedList = LinkedList<T>()
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var inBox = [Element]()
+    private var outBox = [Element]()
     
-    var queue: LinkedList<T> {
-        linkedList
+    init(_ items: [Element] = []) {
+        self.inBox = items
     }
     
-    func enqueue(_ value: T) {
-        linkedList.append(value)
+    var front: Element? {
+        return outBox.last ?? inBox.first
     }
     
-    func dequeue() -> T? {
-        let node = linkedList.removeFirst()
-        
-        return node?.value
+    var count: Int {
+        return inBox.count + outBox.count
     }
     
-    func reset() {
-        linkedList.removeAll()
+    var isEmpty: Bool {
+        return inBox.isEmpty && outBox.isEmpty
     }
     
-    func isEmpty() -> Bool {
-        linkedList.isEmpty
+    mutating func enqueue(_ item: Element) {
+        inBox.append(item)
+    }
+    
+    @discardableResult
+    mutating func dequeue() -> Element? {
+        guard (outBox.isEmpty && inBox.isEmpty) == false else {
+            return nil
+        }
+        if outBox.isEmpty {
+            outBox = inBox.reversed()
+            inBox = []
+        }
+        return outBox.removeLast()
+    }
+    
+    mutating func clear() {
+        inBox = []
+        outBox = []
     }
 }

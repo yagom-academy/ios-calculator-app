@@ -26,9 +26,9 @@ class CalculatorController {
         numberFormatter.roundingMode = .halfUp
         
         var calculatedResult = 0.0
-        
+        var formula = ExpressionParser.parse(from: numericalExpression)
         do {
-            calculatedResult = try ExpressionParser.parse(from: numericalExpression).result()
+            calculatedResult = try formula.result()
         } catch {
             return Formula.FormulaError.NaN.description
         }
