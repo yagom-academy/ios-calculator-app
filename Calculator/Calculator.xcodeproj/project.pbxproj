@@ -23,6 +23,7 @@
 		C917CD5C273E412D00E0F939 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD5B273E412D00E0F939 /* OperationError.swift */; };
 		C917CD5D273E41A900E0F939 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C917CD5B273E412D00E0F939 /* OperationError.swift */; };
 		C992B31227457203007C65DA /* Decimal+double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C992B31127457203007C65DA /* Decimal+double.swift */; };
+		C9B75474274B8985009800E9 /* Decimal+double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C992B31127457203007C65DA /* Decimal+double.swift */; };
 		C9BF322A27476B900039814D /* String+formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BF322927476B900039814D /* String+formatter.swift */; };
 		C9BF322C27476DAA0039814D /* ExpressionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BF322B27476DAA0039814D /* ExpressionLabel.swift */; };
 		C9BF322E27476E890039814D /* HistoryStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BF322D27476E890039814D /* HistoryStackView.swift */; };
@@ -340,6 +341,7 @@
 				C9F7BCEE273A3C990076ED33 /* CalculatorItemQueueTest.swift in Sources */,
 				C9F7BCF3273A44E20076ED33 /* CalculatorItemQueue.swift in Sources */,
 				C9F7BD05273CFD1E0076ED33 /* FormulaTest.swift in Sources */,
+				C9B75474274B8985009800E9 /* Decimal+double.swift in Sources */,
 				C917CD5D273E41A900E0F939 /* OperationError.swift in Sources */,
 				C917CD5A273E0F5400E0F939 /* ExpressionParser.swift in Sources */,
 				C9F7BD01273CF2350076ED33 /* Operator.swift in Sources */,
