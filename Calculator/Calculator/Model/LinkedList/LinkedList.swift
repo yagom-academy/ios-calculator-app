@@ -32,7 +32,7 @@ extension LinkedList {
         }
     }
     
-    mutating func removeFrist() -> Element? {
+    mutating func removeFirst() -> Element? {
         if head == nil {
             return nil
         }

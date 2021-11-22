@@ -11,7 +11,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     // MARK: private property
     
-    private var linkedList: LinkedList<Element>
+    private var linkedList = LinkedList<Element>()
     
 }
 
@@ -23,8 +23,8 @@ extension CalculatorItemQueue {
         linkedList.append(data: item)
     }
     
-    mutating func dequeue() throws -> Element? {
-        return linkedList.removeFrist()
+    mutating func dequeue() -> Element? {
+        return linkedList.removeFirst()
     }
     
 }
