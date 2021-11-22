@@ -147,8 +147,8 @@ class CalculatorViewController: UIViewController {
     }
     
     func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = currentInputOperand
-        currentInputOperatorLabel.text = currentInputOperator
+        currentInputOperandLabel.text = calculatorModel.currentInputOperand
+        currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
     func resetAllExpression() {
