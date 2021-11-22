@@ -23,8 +23,7 @@ struct CalculatorItemQueue <Element: CalculatorItem> {
             return nil
         }
         
-        let operation = operationStorage.removeFirst()
-        return operation
+        return operationStorage.removeFirst()
     }
  
     func countAllItem() -> Int {
