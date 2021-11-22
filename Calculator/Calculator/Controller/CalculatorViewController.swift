@@ -75,7 +75,8 @@ class CalculatorViewController: UIViewController {
             saveCalculator(item: "\(operandLabel.text!)")
             addStackViewLabel()
             resetOperatorLable()
-            let result = ExpressionParser.parse(from: savedCalculatorItems).result()
+            var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
+            let result = parsedFormula.result()
             operandLabel.text = numberFormatter.string(for: result)
             resetSavedCalculatorItems()
         }
