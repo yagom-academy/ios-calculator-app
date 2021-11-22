@@ -29,6 +29,7 @@
 		FBFA13B1274BC3FA00E98813 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13B0274BC3FA00E98813 /* OperatorTests.swift */; };
 		FBFA13B3274BC41B00E98813 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13AE274BC13600E98813 /* Operator.swift */; };
 		FBFA13B4274BC43500E98813 /* CalculateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB33D91274BC2470068931F /* CalculateError.swift */; };
+		FBFA13B8274BC66400E98813 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13B7274BC66400E98813 /* StringExtensionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		FBFA13AC274BBD9C00E98813 /* CalculatorQueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorQueueError.swift; sourceTree = "<group>"; };
 		FBFA13AE274BC13600E98813 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		FBFA13B0274BC3FA00E98813 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
+		FBFA13B7274BC66400E98813 /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				0DB33D83274BBEF40068931F /* CalculatorItemQueue.swift */,
 				FBFA13B0274BC3FA00E98813 /* OperatorTests.swift */,
+				FBFA13B7274BC66400E98813 /* StringExtensionTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				FBFA13B3274BC41B00E98813 /* Operator.swift in Sources */,
 				0DB33D8E274BBF770068931F /* CalculatorQueueError.swift in Sources */,
 				0DB33D8F274BBF7C0068931F /* CalculateItem.swift in Sources */,
+				FBFA13B8274BC66400E98813 /* StringExtensionTests.swift in Sources */,
 				FBFA13B4274BC43500E98813 /* CalculateError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
