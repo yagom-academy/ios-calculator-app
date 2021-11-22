@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<Element: CalculateItem> {
 
     private(set) var inbox: [Element]
