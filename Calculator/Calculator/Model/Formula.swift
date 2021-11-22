@@ -1,6 +1,3 @@
-
-import Foundation
-
 struct Formula {
     var operators: CalculatorItemQueue<Operator>
     var operands: CalculatorItemQueue<Double>
