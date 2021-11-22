@@ -61,7 +61,7 @@ class CalculatorViewController: UIViewController {
             stackView.spacing = 8.0
             
             let operatorSignLabelView = UILabel()
-            operatorSignLabelView.text = formatNumberForStackView(eachForm.operatorSymbole)
+            operatorSignLabelView.text = eachForm.operatorSymbole
             operatorSignLabelView.textColor = .white
             
             let operandLabelView = UILabel()
