@@ -2,9 +2,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var inputLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var mainStackView: UIStackView!
+    @IBOutlet private weak var inputLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var mainStackView: UIStackView!
     
     var inputString: String = ""
     
