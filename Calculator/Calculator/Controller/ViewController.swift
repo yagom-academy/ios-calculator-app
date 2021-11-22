@@ -42,23 +42,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let newInput = sender.currentTitle, let operandsLabelText = operandsLabel.text else {return}
+        guard let newInput = sender.currentTitle else {return}
         
-        if operandsLabelText == "0" {
-            operandsLabel.text = newInput
-        } else {
-            operandsLabel.text = operandsLabelText + newInput
-        }
-
-        if newInput == "00" {
-            if operandsLabelText == "0" || operandsLabelText == "" {
-                operandsLabel.text = "0"
-            }
-        }
-        
+        changeOperandsLabelText(newInput: newInput)
         inputString.append(newInput)
         print(inputString)
 
+    }
+    
+    func changeOperandsLabelText(newInput: String) {
+        guard let currentText = operandsLabel.text else {return}
+        if currentText == "0" {
+            operandsLabel.text = newInput
+        } else {
+            operandsLabel.text = currentText + newInput
+        }
+
+        if newInput == "00" {
+            if currentText == "0" || currentText == "" {
+                operandsLabel.text = "0"
+            }
+        }
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -67,7 +71,7 @@ class ViewController: UIViewController {
         guard operandsLabel.text?.isEmpty == false else {return}
         makeExpressionStackView()
         inputString.append(`operator`)
-        operandsLabel.text = ""
+        operandsLabel.text = "0"
         operatorLabel.text = `operator`
     }
     

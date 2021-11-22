@@ -364,8 +364,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="inputLabel" destination="Lwz-OF-XHD" id="vrH-QW-w3K"/>
                         <outlet property="mainStackView" destination="XRe-QE-UJf" id="IS0-Kj-3NT"/>
+                        <outlet property="operandsLabel" destination="Lwz-OF-XHD" id="oTw-8h-BwP"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="wkW-NX-n9A"/>
                     </connections>
                 </viewController>
