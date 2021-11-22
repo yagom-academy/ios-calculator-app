@@ -27,8 +27,8 @@
 		3696A73B2742D1DA00A6012A /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A73A2742D1DA00A6012A /* FormulaTests.swift */; };
 		3696A73D2745C51200A6012A /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A73C2745C51200A6012A /* CalculatorError.swift */; };
 		3696A73E2745C5CF00A6012A /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A73C2745C51200A6012A /* CalculatorError.swift */; };
-		3696A7B9274A776B00A6012A /* ProcessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A7B8274A776B00A6012A /* ProcessLabel.swift */; };
-		3696A7BB274A77A700A6012A /* ProcessHorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A7BA274A77A700A6012A /* ProcessHorizontalStackView.swift */; };
+		3696A7BD274B6F7200A6012A /* ProcessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A7BC274B6F7200A6012A /* ProcessLabel.swift */; };
+		3696A7BF274B6F9900A6012A /* ProcessHorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3696A7BE274B6F9900A6012A /* ProcessHorizontalStackView.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -63,8 +63,8 @@
 		3689532227418075003B8C71 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		3696A73A2742D1DA00A6012A /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		3696A73C2745C51200A6012A /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
-		3696A7B8274A776B00A6012A /* ProcessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessLabel.swift; path = ../../../../../Documents/100_iOS_project/170_yagom_Camp/AutoLayout/ProcessLabel.swift; sourceTree = "<group>"; };
-		3696A7BA274A77A700A6012A /* ProcessHorizontalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessHorizontalStackView.swift; path = ../../../../../Documents/100_iOS_project/170_yagom_Camp/AutoLayout/ProcessHorizontalStackView.swift; sourceTree = "<group>"; };
+		3696A7BC274B6F7200A6012A /* ProcessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessLabel.swift; path = ../../../../../Documents/100_iOS_project/170_yagom_Camp/AutoLayout/ProcessLabel.swift; sourceTree = "<group>"; };
+		3696A7BE274B6F9900A6012A /* ProcessHorizontalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProcessHorizontalStackView.swift; path = ../../../../../Documents/100_iOS_project/170_yagom_Camp/AutoLayout/ProcessHorizontalStackView.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +117,8 @@
 				3689532227418075003B8C71 /* Formula.swift */,
 				3689531F27417F26003B8C71 /* ExpressionParser.swift */,
 				3696A73C2745C51200A6012A /* CalculatorError.swift */,
+				3696A7BC274B6F7200A6012A /* ProcessLabel.swift */,
+				3696A7BE274B6F9900A6012A /* ProcessHorizontalStackView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,8 +139,6 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
-				3696A7B8274A776B00A6012A /* ProcessLabel.swift */,
-				3696A7BA274A77A700A6012A /* ProcessHorizontalStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,9 +296,9 @@
 				368952E9273E1370003B8C71 /* Operator.swift in Sources */,
 				368952DF273E04B1003B8C71 /* CalculatorItemQueue.swift in Sources */,
 				368952E2273E083C003B8C71 /* Extensions.swift in Sources */,
-				3696A7B9274A776B00A6012A /* ProcessLabel.swift in Sources */,
+				3696A7BF274B6F9900A6012A /* ProcessHorizontalStackView.swift in Sources */,
+				3696A7BD274B6F7200A6012A /* ProcessLabel.swift in Sources */,
 				3696A73D2745C51200A6012A /* CalculatorError.swift in Sources */,
-				3696A7BB274A77A700A6012A /* ProcessHorizontalStackView.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				3689532027417F26003B8C71 /* ExpressionParser.swift in Sources */,
