@@ -37,12 +37,3 @@ fileprivate extension String {
         return result
     }
 }
-
-fileprivate extension Character {
-    init?(text: String) {
-        guard text.count == 1 else {
-            return nil
-        }
-        self.init(text)
-    }
-}
