@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum ExpressionParser {
     static let whiteSpace: Character = " "
@@ -26,9 +25,10 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let splitedInput = input.split(with: whiteSpace)
+        let symbols = Operator.provideSymbols()
         
         return splitedInput.filter { eachString in
-            Operator.symbols.contains(eachString)
+            symbols.contains(eachString)
         }
     }
 }

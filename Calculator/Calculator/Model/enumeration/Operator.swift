@@ -13,8 +13,10 @@ enum Operator: String, CaseIterable, CalculateItem {
     case multiply = "×"
     case divide = "÷"
     
-    static let symbols = Operator.allCases.map { `case` in
-        return `case`.rawValue
+    static func provideSymbols() -> [String] {
+        return Operator.allCases.map { `case` in
+            `case`.rawValue
+        }
     }
     
     init?(symbol: String) {
