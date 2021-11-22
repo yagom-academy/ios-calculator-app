@@ -13,7 +13,7 @@ class FormulaTest: XCTestCase {
         var formula = ExpressionParser.parse(from: input)
         do {
             let result = try formula.result()
-            XCTAssertEqual(result, 7.894736842105266)
+            XCTAssertEqual(result, 7.8947368421052619)
         } catch CalculatorError.emptyQueue {
             print("연산을 할 수 없습니다.")
         } catch {
@@ -26,7 +26,7 @@ class FormulaTest: XCTestCase {
         var formula = ExpressionParser.parse(from: input)
         do {
             let result = try formula.result()
-            XCTAssertEqual(result, 2.8981929096454824)
+            XCTAssertEqual(result, 2.8981929096454819)
         } catch CalculatorError.emptyQueue {
             print("연산을 할 수 없습니다.")
         } catch {

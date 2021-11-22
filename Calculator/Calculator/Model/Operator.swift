@@ -18,17 +18,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     var operatorSign: Character {
-            switch self {
-            case .add:
-                return "+"
-            case .subtract:
-                return "−"
-            case .multiply:
-                return "×"
-            case .divide:
-                return "÷"
-            }
-        }
+        return self.rawValue
+    }
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -44,22 +35,26 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let decimalResult = Decimal(lhs) + Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        return result
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let decimalResult = Decimal(lhs) - Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        return result
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let decimalResult = Decimal(lhs) * Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        return result
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        if rhs == 0 {
-            return Double.nan
-        } else {
-            return lhs / rhs
-        }
+        let decimalResult = Decimal(lhs) / Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        return result
     }
 }
