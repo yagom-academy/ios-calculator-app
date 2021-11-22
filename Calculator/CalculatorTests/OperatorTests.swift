@@ -18,7 +18,7 @@ class OperatorTests: XCTestCase {
         let input = 0.0
         
         // When
-        let result = sut.calculate(lhs: input, rhs: input)
+        let result = try? sut.calculate(lhs: input, rhs: input)
         
         // Then
         XCTAssertNotNil(result)
@@ -29,7 +29,7 @@ class OperatorTests: XCTestCase {
         sut = .add
         
         // When
-        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        let result = try? sut.calculate(lhs: 0.0, rhs: 0.0)
         
         // Then
         XCTAssertNotNil(result)
@@ -40,7 +40,7 @@ class OperatorTests: XCTestCase {
         sut = .substract
         
         // When
-        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        let result = try? sut.calculate(lhs: 0.0, rhs: 0.0)
         
         // Then
         XCTAssertNotNil(result)
@@ -51,7 +51,7 @@ class OperatorTests: XCTestCase {
         sut = .substract
         
         // When
-        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        let result = try? sut.calculate(lhs: 0.0, rhs: 0.0)
         
         // Then
         XCTAssertNotNil(result)
@@ -62,10 +62,10 @@ class OperatorTests: XCTestCase {
         sut = .divide
         
         // When
-        let result = sut.calculate(lhs: 0.0, rhs: 0.0)
+        let result = try? sut.calculate(lhs: 0.0, rhs: 0.0)
         
         // Then
-        XCTAssertNotNil(result)
+        XCTAssertNil(result)
     }
     
     func test_Operator가add일때_calculate호출시_계산값이정상적으로나오는지() {
@@ -73,7 +73,7 @@ class OperatorTests: XCTestCase {
         sut = .add
         
         // When
-        let result = sut.calculate(lhs: 1.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: 1.0, rhs: 1.0)
         
         // Then
         XCTAssertEqual(result, 2.0)
@@ -84,7 +84,7 @@ class OperatorTests: XCTestCase {
         sut = .substract
         
         // When
-        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
         
         // Then
         XCTAssertEqual(result, 1.0)
@@ -95,7 +95,7 @@ class OperatorTests: XCTestCase {
         sut = .multiply
         
         // When
-        let result = sut.calculate(lhs: 2.0, rhs: 4.0)
+        let result = try? sut.calculate(lhs: 2.0, rhs: 4.0)
         
         // Then
         XCTAssertEqual(result, 8.0)
@@ -106,7 +106,7 @@ class OperatorTests: XCTestCase {
         sut = .divide
         
         // When
-        let result = sut.calculate(lhs: 6.0, rhs: 4.0)
+        let result = try? sut.calculate(lhs: 6.0, rhs: 4.0)
         
         // Then
         XCTAssertEqual(result, 1.5)
@@ -115,11 +115,8 @@ class OperatorTests: XCTestCase {
     func test_Operator가divide일때_값을0으로나눌시_nan이출력되는지() {
         // Given
         sut = .divide
-        
-        // When
-        let result = sut.calculate(lhs: 6.0, rhs: 0.0)
-        
+
         // Then
-        XCTAssertTrue(result.isNaN)
+        XCTAssertThrowsError(try sut.calculate(lhs: 6.0, rhs: 0.0))
     }
 }

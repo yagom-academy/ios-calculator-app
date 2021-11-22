@@ -1,6 +1,3 @@
-
-import Foundation
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operands = componentsByOperators(from: input)
@@ -22,5 +19,22 @@ enum ExpressionParser {
             tempArray.removeAll()
         }
         return inputArray
+    }
+}
+
+fileprivate extension String {
+    func split(with target: Character) -> [String] {
+        var strArray: [String] = []
+        var num: String = ""
+        self.forEach {
+            if $0 != target {
+                num = num + String($0)
+            } else {
+                strArray.append(num)
+                num.removeAll()
+            }
+        }
+        strArray.append(num)
+        return strArray
     }
 }
