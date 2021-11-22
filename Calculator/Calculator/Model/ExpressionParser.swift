@@ -33,8 +33,9 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: separator)
-            .compactMap { Double($0) }
-            .map { String($0) }
+        let expression = [input]
+        let operandsArray = Operator.allCases.reduce(expression){ (expressionSplitedByOperator: [String], `operator`: Operator) -> [String] in
+            return expressionSplitedByOperator.flatMap{ $0.split(with: `operator`.rawValue) }}
+        return operandsArray
     }
 }
