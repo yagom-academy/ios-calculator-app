@@ -82,14 +82,6 @@ class CalculatorViewController: UIViewController {
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
-    func initNumberFormatterForCalculator() -> Formatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumSignificantDigits = 20
-        formatter.roundingMode = .halfUp
-        return formatter
-    }
-    
     struct LabelContents {
         static let notANumber = "NaN"
         static let emptyString = ""
