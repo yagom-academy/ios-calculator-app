@@ -201,7 +201,6 @@ extension CalculatorController {
         let label = UILabel()
         label.text = text
         label.textColor = .white
-        label.sizeToFit()
         
         return label
     }
