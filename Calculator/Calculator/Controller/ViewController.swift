@@ -60,71 +60,50 @@ class ViewController: UIViewController {
         }
     }
     
-    func initializeOperandsLabel() {
+    private func initializeOperandsLabel() {
         operandsLabel.text = "0"
     }
     
-    func initializeOpertorLabel() {
+    private func initializeOpertorLabel() {
         operatorLabel.text = ""
     }
     
-    func initializeInputString() {
+    private func initializeInputString() {
         inputString = ""
     }
     
-    func updateOperandsLabel(text operands: String) {
+    private func updateOperandsLabel(text operands: String) {
         operandsLabel.text = operands
     }
     
-    func updateOperatorLabel(text operator: String) {
+    private func updateOperatorLabel(text operator: String) {
         operatorLabel.text = `operator`
     }
     
-    func appendInputString(text input: String) {
+    private func appendInputString(text input: String) {
         inputString.append(input)
     }
     
-    @IBAction private func touchUpOperandButton(_ sender: UIButton) {
-        guard let newInput = sender.currentTitle else {return}
-        changeOperandsLabelText(newInput: newInput)
-        
-        appendInputString(text: newInput)
+    private func removeTextFromInputString() {
+        if inputString.isEmpty == false {
+            inputString.removeLast()
+        }
     }
     
-    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard let `operator` = sender.currentTitle else {return}
-        guard operandsLabel.text != "0" else {return}
-        guard operandsLabel.text?.isEmpty == false else {return}
-        makeExpressionStackView()
-        initializeOperandsLabel()
-        updateOperatorLabel(text: `operator`)
-        
-        appendInputString(text: `operator`)
+    private func removeTextFromOperandsLabel() {
+        if operandsLabel.text?.isEmpty == false {
+            operandsLabel.text?.removeLast()
+        }
     }
     
-    @IBAction private func touchUpACButton(_ sender: UIButton) {
-        initializeOperandsLabel()
-        initializeOpertorLabel()
-        initializeInputString()
-        
+    private func removeSubviewsFromStackView() {
         for i in mainStackView.arrangedSubviews {
             mainStackView.removeArrangedSubview(i)
             i.removeFromSuperview()
         }
     }
     
-    @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        if operandsLabel.text?.isEmpty == false {
-            operandsLabel.text?.removeLast()
-        }
-        
-        if inputString.isEmpty == false {
-            inputString.removeLast()
-        }
-        
-    }
-    
-    @IBAction private func touchUpPlusMinusButton(_ sender: UIButton) {
+    private func changePlusMinus() {
         guard let operandsLabelText = operandsLabel.text else {return}
         
         if operandsLabelText.contains("-") {
@@ -134,22 +113,58 @@ class ViewController: UIViewController {
         }
     }
     
+    private func parseExpression() -> Double {
+        var formula: Formula = ExpressionParser.parse(from: inputString)
+        let result = formula.result()
+        return result
+    }
+    
+    @IBAction private func touchUpOperandButton(_ sender: UIButton) {
+        guard let newInput = sender.currentTitle else {return}
+        changeOperandsLabelText(newInput: newInput)
+        appendInputString(text: newInput)
+    }
+    
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard let `operator` = sender.currentTitle else {return}
+        guard operandsLabel.text != "0" else {return}
+        guard operandsLabel.text?.isEmpty == false else {return}
+        
+        makeExpressionStackView()
+        initializeOperandsLabel()
+        updateOperatorLabel(text: `operator`)
+        appendInputString(text: `operator`)
+    }
+    
+    @IBAction private func touchUpACButton(_ sender: UIButton) {
+        initializeOperandsLabel()
+        initializeOpertorLabel()
+        initializeInputString()
+        removeSubviewsFromStackView()
+    }
+    
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
+        removeTextFromOperandsLabel()
+        removeTextFromInputString()
+    }
+    
+    @IBAction private func touchUpPlusMinusButton(_ sender: UIButton) {
+        changePlusMinus()
+    }
+    
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
         guard let newInput = sender.currentTitle, let operandsLabelText = operandsLabel.text else {return}
         
         updateOperandsLabel(text: operandsLabelText + newInput)
-        updateOperatorLabel(text: newInput)
+        appendInputString(text: newInput)
     }
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
         guard operandsLabel.text != "0" else { return }
         guard operandsLabel.text?.isEmpty == false else {return}
+        
         makeExpressionStackView()
-        
-        var formula: Formula = ExpressionParser.parse(from: inputString)
-        let result = formula.result()
-        
-        updateOperandsLabel(text: result.description)
+        updateOperandsLabel(text: parseExpression().description)
         initializeOpertorLabel()
     }
 }
