@@ -76,31 +76,40 @@ class CalculatorViewController: UIViewController {
     }
     
     private func formatNumberForCurrentLabel(_ number: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.roundingMode = .halfUp
+        let numberFormatter = initNumberFormatter()
         
-        guard var result = numberFormatter.string(for: Double(number)) else {
+        guard let result = numberFormatter.string(for: Double(number)) else {
             return number
         }
         
-        if let index = number.firstIndex(of: "."), number[index...].filter({ $0 != LabelContents.zero && $0 != LabelContents.pointSymbole }).isEmpty {
-            result += number[index...]
+        guard let numberPointIndex = number.firstIndex(of: LabelContents.pointSymbole) else {
+            return result
         }
         
-        return result
+        if number[numberPointIndex...] == ".0" { return result }
+        
+        guard let resultPointIndex = result.firstIndex(of: LabelContents.pointSymbole) else {
+            return result + String(number[numberPointIndex...])
+        }
+        
+        return String(result[..<resultPointIndex]) + String(number[numberPointIndex...])
     }
     
     private func formatNumberForStackView(_ number: String) -> String {
+        let numberFormatter = initNumberFormatter()
+        return numberFormatter.string(for: Double(number)) ?? number
+    }
+    
+    private func initNumberFormatter() -> NumberFormatter {
         let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
+        
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 20
+        
+        numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         
-        return numberFormatter.string(for: Double(number)) ?? number
+        return numberFormatter
     }
     
     private func removeAllFormulaHistory() {

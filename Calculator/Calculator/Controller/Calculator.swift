@@ -77,7 +77,6 @@ struct Calculator {
         }
         
         resetAllExpression()
-        isEvaluated = false
     }
     
     mutating func touchEvaluateButton() {
