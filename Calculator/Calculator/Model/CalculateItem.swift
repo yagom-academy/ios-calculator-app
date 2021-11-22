@@ -10,9 +10,9 @@ extension Double: CalculateItem {
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "_"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {

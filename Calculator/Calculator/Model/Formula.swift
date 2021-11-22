@@ -15,10 +15,10 @@ struct Formula {
             let lhs = result
             guard let rhs = operands.dequeue() else { return 0 }
             
-            let `operator` = operators.dequeue()
+            guard let `operator` = operators.dequeue() else {return 0}
             do {
-                let calculateResult = try `operator`?.calculate(lhs: lhs, rhs: rhs)
-                result = calculateResult ?? 0
+                let calculateResult = try `operator`.calculate(lhs: lhs, rhs: rhs)
+                result = calculateResult
             } catch {
                 print("0으로 나눌 수 없음")
             }
