@@ -24,24 +24,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
-        
-        if isEvaluated { return }
-        
-        if number == LabelContents.pointSymbole && currentInputOperand.contains(LabelContents.pointSymbole) { return }
-        
-        if number == LabelContents.pointSymbole && currentInputOperand == LabelContents.defaultOperand {
-            currentInputOperand += number
-            return
-        }
-        
-        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
-        
-        if currentInputOperand == LabelContents.defaultOperand {
-            updateCurrentInput(operandForm: number, operatorForm: currentInputOperator)
-            return
-        }
-        
-        currentInputOperand += number
+        calculatorModel.touchNumberButton(number)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
