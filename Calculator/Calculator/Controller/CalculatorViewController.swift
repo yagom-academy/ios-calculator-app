@@ -15,25 +15,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentInputOperandLabel: UILabel!
     @IBOutlet weak var currentInputOperatorLabel: UILabel!
     
-    var currentInputOperand: String = LabelContents.defaultOperand {
-        didSet {
-            updateCurrentInputLabel()
-        }
-    }
-    
-    var currentInputOperator: String = LabelContents.emptyString {
-        didSet {
-            updateCurrentInputLabel()
-        }
-    }
-    
-    var mathExpression: [String] = [] {
-        didSet {
-            formulaHistoryScrollView.scrollToBottom()
-        }
-    }
-    var isEvaluated: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
