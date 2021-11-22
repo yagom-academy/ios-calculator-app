@@ -61,11 +61,11 @@ class CalculatorViewController: UIViewController {
             stackView.spacing = 8.0
             
             let operatorSignLabelView = UILabel()
-            operatorSignLabelView.text = formatNumber(eachForm.operatorSymbole)
+            operatorSignLabelView.text = formatNumberForStackView(eachForm.operatorSymbole)
             operatorSignLabelView.textColor = .white
             
             let operandLabelView = UILabel()
-            operandLabelView.text = formatNumber(eachForm.operandNumber)
+            operandLabelView.text = formatNumberForStackView(eachForm.operandNumber)
             operandLabelView.textColor = .white
             
             stackView.addArrangedSubview(operatorSignLabelView)
@@ -75,7 +75,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func formatNumber(_ number: String) -> String {
+    private func formatNumberForCurrentLabel(_ number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumIntegerDigits = 20
@@ -90,7 +90,17 @@ class CalculatorViewController: UIViewController {
             result += number[index...]
         }
         
-        return  result
+        return result
+    }
+    
+    private func formatNumberForStackView(_ number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        
+        return numberFormatter.string(for: Double(number)) ?? number
     }
     
     private func removeAllFormulaHistory() {
@@ -100,7 +110,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = formatNumber(calculatorModel.currentInputOperand)
+        currentInputOperandLabel.text = formatNumberForCurrentLabel(calculatorModel.currentInputOperand)
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
