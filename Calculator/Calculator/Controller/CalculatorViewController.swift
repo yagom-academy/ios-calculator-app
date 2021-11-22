@@ -56,22 +56,24 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addCurrentInputToFormulaHistory() {
-        let stackView = UIStackView()
-        stackView.spacing = 8.0
-        
-        let operatorSignLabelView = UILabel()
-        operatorSignLabelView.text = calculatorModel.currentInputOperator
-        operatorSignLabelView.textColor = .white
-        
-        let operandLabelView = UILabel()
-        
-        operandLabelView.text = calculatorModel.currentInputOperand
-        operandLabelView.textColor = .white
-        
-        stackView.addArrangedSubview(operatorSignLabelView)
-        stackView.addArrangedSubview(operandLabelView)
-        
-        formulaHistoryStackView.addArrangedSubview(stackView)
+        removeAllFormulaHistory()
+        calculatorModel.mathExpression.forEach { eachForm in
+            let stackView = UIStackView()
+            stackView.spacing = 8.0
+            
+            let operatorSignLabelView = UILabel()
+            operatorSignLabelView.text = eachForm.operatorSymbole
+            operatorSignLabelView.textColor = .white
+            
+            let operandLabelView = UILabel()
+            operandLabelView.text = eachForm.operandNumber
+            operandLabelView.textColor = .white
+            
+            stackView.addArrangedSubview(operatorSignLabelView)
+            stackView.addArrangedSubview(operandLabelView)
+            
+            formulaHistoryStackView.addArrangedSubview(stackView)
+        }
     }
     
     private func removeAllFormulaHistory() {
