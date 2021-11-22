@@ -100,13 +100,13 @@
 		189D45E1274B7ADB0076E6B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				189D45CD274B790B0076E6B8 /* LinkedList.swift */,
+				189D45CF274B79680076E6B8 /* CalculatorItemQueue.swift */,
+				189D45D1274B797A0076E6B8 /* Formula.swift */,
+				189D45D3274B79AF0076E6B8 /* ExpressionParser.swift */,
+				189D45D5274B79C00076E6B8 /* Operator.swift */,
 				189D45DD274B7A9C0076E6B8 /* ErrorHandling.swift */,
 				189D45D9274B7A2A0076E6B8 /* Extension.swift */,
-				189D45D5274B79C00076E6B8 /* Operator.swift */,
-				189D45D3274B79AF0076E6B8 /* ExpressionParser.swift */,
-				189D45D1274B797A0076E6B8 /* Formula.swift */,
-				189D45CF274B79680076E6B8 /* CalculatorItemQueue.swift */,
-				189D45CD274B790B0076E6B8 /* LinkedList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
