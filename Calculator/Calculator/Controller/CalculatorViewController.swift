@@ -15,12 +15,16 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
     private var rawOperand = "0"
+    private var hasCalculated = false
     private var checkNumberOfInputs: Bool {
         if rawOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
             return true
         } else {
             return false
         }
+    }
+    private var isNotCalculated: Bool {
+            hasCalculated == false
     }
     private let calculatorController = CalculatorController()
     
@@ -59,6 +63,13 @@ extension CalculatorViewController {
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         rawOperand = "0"
         
+        guard isNotCalculated else {
+            startNewCalculation()
+            operandLabel.text = "0"
+            clearEntry()
+            operatorLabel.text = sender.titleLabel?.text
+            return
+        }
         guard operandLabel.text != "0" else {
             operatorLabel.text = sender.titleLabel?.text
             return
@@ -102,6 +113,16 @@ extension CalculatorViewController {
         addCurrentFormulaStack()
         operatorLabel.text = ""
         operandLabel.text = calculatorController.calculate()
+        
+        hasCalculated = true
+        rawOperand = operandLabel.text?.replacingOccurrences(of: ",", with: "") ?? ""
+    }
+    
+    func startNewCalculation() {
+        hasCalculated = false
+        clearAll()
+        operandLabel.text = operandLabel.text
+        addCurrentFormulaStack()
     }
     
     func resetCalcurator() {
