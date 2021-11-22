@@ -37,19 +37,19 @@ class CalculatorViewController: UIViewController {
         calculatorModel.touchOperatorButton(operatorSymbole)
     }
     
-    @IBAction private func touchSignChangeButton(_ sender: UIButton) {
+    @IBAction private func touchSignChangeButton() {
         calculatorModel.touchSignChangeButton()
     }
     
-    @IBAction private func touchAllClearButton(_ sender: UIButton) {
+    @IBAction private func touchAllClearButton() {
         calculatorModel.touchAllClearButton()
     }
     
-    @IBAction private func touchClearEntryButton(_ sender: UIButton) {
+    @IBAction private func touchClearEntryButton() {
         calculatorModel.touchClearEntryButton()
     }
     
-    @IBAction private func touchEvaluateButton(_ sender: UIButton) {
+    @IBAction private func touchEvaluateButton() {
         calculatorModel.touchEvaluateButton()
     }
     
