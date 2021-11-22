@@ -12,6 +12,7 @@ class CalculatorViewController: UIViewController {
         didSet {
             addCurrentInputToFormulaHistory()
             updateCurrentInputLabel()
+            formulaHistoryScrollView.scrollToBottom()
         }
     }
     
@@ -37,19 +38,19 @@ class CalculatorViewController: UIViewController {
         calculatorModel.touchOperatorButton(operatorSymbole)
     }
     
-    @IBAction private func touchSignChangeButton() {
+    @IBAction private func touchSignChangeButton(_ sender: UIButton) {
         calculatorModel.touchSignChangeButton()
     }
     
-    @IBAction private func touchAllClearButton() {
+    @IBAction private func touchAllClearButton(_ sender: UIButton) {
         calculatorModel.touchAllClearButton()
     }
     
-    @IBAction private func touchClearEntryButton() {
+    @IBAction private func touchClearEntryButton(_ sender: UIButton) {
         calculatorModel.touchClearEntryButton()
     }
     
-    @IBAction private func touchEvaluateButton() {
+    @IBAction private func touchEvaluateButton(_ sender: UIButton) {
         calculatorModel.touchEvaluateButton()
     }
     
@@ -88,7 +89,8 @@ class CalculatorViewController: UIViewController {
 
 fileprivate extension UIScrollView {
     func scrollToBottom() {
-        let bottomOffset = CGPoint(x: 0, y: contentSize.height)
+        layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.height + contentInset.bottom)
         setContentOffset(bottomOffset, animated: false)
     }
 }
