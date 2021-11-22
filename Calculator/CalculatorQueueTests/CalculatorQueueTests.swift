@@ -82,22 +82,7 @@ class CalculatorQueueTests: XCTestCase {
         
         XCTAssertNil(operationData)
     }
-    
-    func test_calculatorItemQueue_item이_한번에_제거되는지() {
-        sut.enqueue(operation: "+")
-        sut.enqueue(operation: "=")
-        sut.removeAllItem()
-        let operationCount = sut.countAllItem()
-        
-        XCTAssertEqual(operationCount, 0)
-    }
-    
-    func test_calculatorItemQueue가_이미_빈경우에_제거요청시_정상작동하는지() {
-        sut.removeAllItem()
-        let operationRemoveAllTest = sut.countAllItem()
-        
-        XCTAssertEqual(operationRemoveAllTest, 0)
-    }
+
 }
 
 extension String: CalculatorItem { }

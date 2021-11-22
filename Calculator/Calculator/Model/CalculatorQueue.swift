@@ -26,11 +26,7 @@ struct CalculatorItemQueue <Element: CalculatorItem> {
         let operation = operationStorage.removeFirst()
         return operation
     }
-    
-    mutating func removeAllItem() {
-        operationStorage.removeAll()
-    }
-    
+ 
     func countAllItem() -> Int {
         return operationStorage.count
     }
