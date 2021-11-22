@@ -81,16 +81,6 @@ class CalculatorViewController: UIViewController {
         currentInputOperandLabel.text = calculatorModel.currentInputOperand
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
-    
-    struct LabelContents {
-        static let notANumber = "NaN"
-        static let emptyString = ""
-        static let defaultOperand = "0"
-        static let minusSignSymbole = "-"
-        static let pointSymbole = "."
-        static let doubleZero = "00"
-        static let error = "error"
-    }
 }
 
 extension UIScrollView {
