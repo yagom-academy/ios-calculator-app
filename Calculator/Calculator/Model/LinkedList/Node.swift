@@ -8,6 +8,7 @@
 import Foundation
 
 class Node<Element: CalculateItem> {
+    
     var data: Element
     var next: Node?
     
@@ -15,4 +16,5 @@ class Node<Element: CalculateItem> {
         self.data = data
         self.next = next
     }
+    
 }
