@@ -77,11 +77,6 @@ class CalculatorViewController: UIViewController {
         })
     }
     
-    func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
-        currentInputOperator = operatorForm
-        currentInputOperand = operandForm
-    }
-    
     func updateCurrentInputLabel() {
         currentInputOperandLabel.text = calculatorModel.currentInputOperand
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
