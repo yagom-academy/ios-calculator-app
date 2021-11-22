@@ -19,8 +19,14 @@ struct Formula {
         case NaN
     }
     
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
+    
+    init(opreands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(),
+          operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()) {
+         self.operands = opreands
+         self.operators = operators
+    }
     
     mutating func result() throws -> Double {
         guard var result = operands.dequeue() else {
