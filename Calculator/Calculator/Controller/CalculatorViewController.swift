@@ -82,12 +82,6 @@ class CalculatorViewController: UIViewController {
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
-    func resetAllExpression() {
-        updateCurrentInput()
-        mathExpression = []
-        isEvaluated = false
-    }
-    
     func initNumberFormatterForCalculator() -> Formatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
