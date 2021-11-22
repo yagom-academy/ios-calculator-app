@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		600BFEBB274BA7A400D77EB1 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600BFEBA274BA7A400D77EB1 /* CalculatorError.swift */; };
 		60222047274361BD002F20D3 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60222046274361BD002F20D3 /* Character.swift */; };
 		6022204E274392F7002F20D3 /* StringCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6022204D274392F7002F20D3 /* StringCheckerTests.swift */; };
 		602220502744DACB002F20D3 /* NumberButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6022204F2744DACB002F20D3 /* NumberButtonHandler.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		600BFEBA274BA7A400D77EB1 /* CalculatorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		60222046274361BD002F20D3 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		6022204D274392F7002F20D3 /* StringCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCheckerTests.swift; sourceTree = "<group>"; };
 		6022204F2744DACB002F20D3 /* NumberButtonHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberButtonHandler.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				6095457C273921C200C3263D /* CalculateItem.swift */,
 				609545A0273CFA1200C3263D /* LinkedListNode.swift */,
 				609545A4273D08E400C3263D /* Formula.swift */,
+				600BFEBA274BA7A400D77EB1 /* CalculatorError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				609545A7273D5FEE00C3263D /* ExpressionParser.swift in Sources */,
 				602220542744DAFC002F20D3 /* AllClearButtonHandler.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				600BFEBB274BA7A400D77EB1 /* CalculatorError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
