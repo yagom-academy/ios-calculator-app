@@ -37,7 +37,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
-        resetAllExpression()
+        calculatorModel.touchAllClearButton()
         removeAllFormulaHistory()
     }
     
