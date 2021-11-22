@@ -9,9 +9,15 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "_"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "×"
+    case multiply = "÷"
+    
+    static func provideSymbols() -> [Character] {
+        return Operator.allCases.map { `case` in
+            `case`.rawValue
+        }
+    }
     
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         switch self {
