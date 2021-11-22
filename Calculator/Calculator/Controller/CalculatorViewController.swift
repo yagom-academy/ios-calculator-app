@@ -108,7 +108,7 @@ extension CalculatorViewController {
         rawOperand = "0"
         operandLabel.text = rawOperand
         operatorLabel.text = ""
-        allClear()
+        clearAll()
     }
     
     func addFormula() {
@@ -135,7 +135,7 @@ extension CalculatorViewController {
         autoScrollDown()
     }
     
-    func allClear() {
+    func clearAll() {
         for subview in calculationHistoryStackView.subviews {
             subview.removeFromSuperview()
         }
