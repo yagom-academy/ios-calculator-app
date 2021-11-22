@@ -17,7 +17,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     mutating func deQueueFirstElement() throws -> Element {
         if enQueueElements.isEmpty && deQueueElements.isEmpty {
-            throw CalculatorError.emptyQueue
+            throw CalculatorQueueError.emptyQueue
         }
         if deQueueElements.isEmpty {
             deQueueElements = enQueueElements.reversed()

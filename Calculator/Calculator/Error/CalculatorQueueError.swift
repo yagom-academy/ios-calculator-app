@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CalculatorError: Error, CustomStringConvertible {
+enum CalculatorQueueError: Error, CustomStringConvertible {
     case emptyQueue
     
     var description: String {
