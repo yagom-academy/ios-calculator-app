@@ -43,12 +43,10 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func touchAllClearButton(_ sender: UIButton) {
         calculatorModel.touchAllClearButton()
-        removeAllFormulaHistory()
     }
     
     @IBAction private func touchClearEntryButton(_ sender: UIButton) {
         calculatorModel.touchClearEntryButton()
-        removeAllFormulaHistory()
     }
     
     @IBAction private func touchEvaluateButton(_ sender: UIButton) {
