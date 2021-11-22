@@ -19,7 +19,6 @@ enum ExpressionParser {
         operatorsArray.forEach { operators.enqueue($0) }
         
         return Formula(operands: operands, operators: operators)
-
     }
     
     static func componentsByOperators(from input: String) -> [String] {
