@@ -304,7 +304,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TGl-8Z-7a2"/>
+                                                    <action selector="touchPointNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T05-dJ-FAy"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">

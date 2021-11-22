@@ -22,13 +22,6 @@ struct Calculator {
             return
         }
         
-        if number == LabelContents.pointSymbole && currentInputOperand.contains(LabelContents.pointSymbole) { return }
-        
-        if number == LabelContents.pointSymbole && currentInputOperand == LabelContents.defaultOperand {
-            currentInputOperand += number
-            return
-        }
-        
         if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
         
         if currentInputOperand == LabelContents.defaultOperand {
@@ -37,6 +30,17 @@ struct Calculator {
         }
         
         currentInputOperand += number
+    }
+    
+    mutating func touchPointButton() {
+        if isEvaluated {
+            resetAllExpression()
+            return
+        }
+        
+        if currentInputOperand.contains(LabelContents.pointSymbole) { return }
+        
+        currentInputOperand += LabelContents.pointSymbole
     }
     
     mutating func touchOperatorButton(_ operatorSymbole: String) {

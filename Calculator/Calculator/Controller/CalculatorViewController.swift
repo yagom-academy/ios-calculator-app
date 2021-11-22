@@ -33,6 +33,10 @@ class CalculatorViewController: UIViewController {
         calculatorModel.touchNumberButton(number)
     }
     
+    @IBAction func touchPointNumber(_ sender: UIButton) {
+        calculatorModel.touchPointButton()
+    }
+    
     @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard let operatorSymbole = sender.titleLabel?.text else { return }
         calculatorModel.touchOperatorButton(operatorSymbole)
