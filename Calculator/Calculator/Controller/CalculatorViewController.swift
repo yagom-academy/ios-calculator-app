@@ -8,7 +8,11 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    var calculatorModel = Calculator()
+    var calculatorModel = Calculator() {
+        didSet {
+            updateCurrentInputLabel()
+        }
+    }
     
     @IBOutlet weak var formulaHistoryScrollView: UIScrollView!
     @IBOutlet weak var formulaHistoryStackView: UIStackView!
