@@ -61,11 +61,11 @@ class CalculatorViewController: UIViewController {
             stackView.spacing = 8.0
             
             let operatorSignLabelView = UILabel()
-            operatorSignLabelView.text = eachForm.operatorSymbole
+            operatorSignLabelView.text = formatNumber(eachForm.operatorSymbole)
             operatorSignLabelView.textColor = .white
             
             let operandLabelView = UILabel()
-            operandLabelView.text = eachForm.operandNumber
+            operandLabelView.text = formatNumber(eachForm.operandNumber)
             operandLabelView.textColor = .white
             
             stackView.addArrangedSubview(operatorSignLabelView)
@@ -75,6 +75,24 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private func formatNumber(_ number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        
+        guard var result = numberFormatter.string(for: Double(number)) else {
+            return number
+        }
+        
+        if let index = number.firstIndex(of: "."), number[index...].filter({ $0 != LabelContents.zero && $0 != LabelContents.pointSymbole }).isEmpty {
+            result += number[index...]
+        }
+        
+        return  result
+    }
+    
     private func removeAllFormulaHistory() {
         formulaHistoryStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in
             view.removeFromSuperview()
@@ -82,8 +100,13 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = calculatorModel.currentInputOperand
+        currentInputOperandLabel.text = formatNumber(calculatorModel.currentInputOperand)
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
+    }
+    
+    private struct LabelContents {
+        static let zero: Character = "0"
+        static let pointSymbole: Character = "."
     }
 }
 
