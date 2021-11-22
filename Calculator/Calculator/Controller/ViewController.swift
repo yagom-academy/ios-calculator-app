@@ -17,7 +17,10 @@ class ViewController: UIViewController {
         operandsLabel.text = "0"
         operatorLabel.text = ""
     }
-    
+}
+
+// MARK: - Method
+extension ViewController {
     private func makeLabel(text: String?) -> UILabel {
         let label = UILabel()
         label.textColor = .white
@@ -119,6 +122,10 @@ class ViewController: UIViewController {
         return result
     }
     
+}
+
+// MARK: - Button Event
+extension ViewController {
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
         guard let newInput = sender.currentTitle else {return}
         changeOperandsLabelText(newInput: newInput)
@@ -168,4 +175,3 @@ class ViewController: UIViewController {
         initializeOpertorLabel()
     }
 }
-
