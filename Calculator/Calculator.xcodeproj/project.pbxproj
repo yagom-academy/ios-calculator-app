@@ -21,6 +21,7 @@
 		479B9E13274BB178001ADC77 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B9E11274BB178001ADC77 /* Node.swift */; };
 		479B9E15274BB185001ADC77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B9E14274BB185001ADC77 /* LinkedList.swift */; };
 		479B9E16274BB185001ADC77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B9E14274BB185001ADC77 /* LinkedList.swift */; };
+		479B9E17274BC2DD001ADC77 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F61C0274BA9F400AF89D8 /* CalculateItem.swift */; };
 		47C5F255273E15630047D57F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F254273E15630047D57F /* Double+Extension.swift */; };
 		47C5F256273E62F90047D57F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F254273E15630047D57F /* Double+Extension.swift */; };
 		47C5F258273EA6BF0047D57F /* StringExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */; };
@@ -305,6 +306,7 @@
 				47C5F265274103FC0047D57F /* Formula.swift in Sources */,
 				4792A8C027414F74007F5421 /* CalculatorError.swift in Sources */,
 				47C5F258273EA6BF0047D57F /* StringExtensionTest.swift in Sources */,
+				479B9E17274BC2DD001ADC77 /* CalculateItem.swift in Sources */,
 				47C5F25A273EA96F0047D57F /* OperatorTest.swift in Sources */,
 				479B9E16274BB185001ADC77 /* LinkedList.swift in Sources */,
 				4714EFBA273A0CE100A0A974 /* CalculatorItemQueueTests.swift in Sources */,
