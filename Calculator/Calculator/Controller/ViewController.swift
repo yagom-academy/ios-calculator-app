@@ -82,11 +82,10 @@ class ViewController: UIViewController {
     func scrollToBottom() {
         processScrollView.layoutIfNeeded()
 
-        let bottomOffset = CGPoint(x: 0,
-                                   y: processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom)
-        if bottomOffset.y > 0 {
-            processScrollView.setContentOffset(bottomOffset, animated: true)
-        }
+        let destinationY = processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom
+        let destinationPoint = CGPoint(x: 0, y: destinationY)
+        
+        processScrollView.setContentOffset(destinationPoint, animated: false)
     }
         
     func clearCalculationProcess() {
