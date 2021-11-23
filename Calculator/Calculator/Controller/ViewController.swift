@@ -13,15 +13,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    var currentOperand: String = ""
-    var currentOperator: String = ""
-    var completeFormula: String = ""
-    var isCalculationOver: Bool = false
+    private var currentOperand: String = ""
+    private var currentOperator: String = ""
+    private var completeFormula: String = ""
+    private var isCalculationOver: Bool = false
 
-    var isLastOperator: Bool = false
-    var isLastDot: Bool = false
+    private var isLastOperator: Bool = false
+    private var isLastDot: Bool = false
     
-    let numberFormatter = NumberFormatter()
+    private let numberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         resetCalculator()
     }
     
-    func resetCalculator() {
+    private func resetCalculator() {
         resetOperand()
         operatorLabel.text = ""
         currentOperator = ""
@@ -39,12 +39,12 @@ class ViewController: UIViewController {
         clearCalculationProcess()
     }
     
-    func resetOperand() {
+    private func resetOperand() {
         operandLabel.text = "0"
         currentOperand = ""
     }
     
-    func changeNumberFormat(of number: Double) -> String? {
+    private func changeNumberFormat(of number: Double) -> String? {
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         return resultInString
     }
     
-    func refreshLabelsWithResult(of formula: String) {
+    private func refreshLabelsWithResult(of formula: String) {
         var formula: Formula = ExpressionParser.parse(from: formula)
         
         do {
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         }
     }
       
-    func addCalculationProcessWithHorizontalStackView() {        
+    private func addCalculationProcessWithHorizontalStackView() {
         let operatorProcessLabel = ProcessLabel(text: currentOperator)
         let operandProcessLabel = ProcessLabel(text: currentOperand)
         
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
         scrollToBottom()
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         processScrollView.layoutIfNeeded()
 
         let bottomOffset = CGPoint(x: 0,
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         }
     }
         
-    func clearCalculationProcess() {
+    private func clearCalculationProcess() {
         processVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
@@ -160,6 +160,7 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = "0"
+        
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
