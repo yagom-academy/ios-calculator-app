@@ -63,9 +63,7 @@ class ViewController: UIViewController {
             }
         }
         inputOperandValues.append(inputButtonTitle)
-        addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
-
-        
+        addcommaOperand = inputOperandValues.joined().insertComma()        
 
         if signIsPositive {
             currentValueLable.text = addcommaOperand
@@ -137,7 +135,7 @@ class ViewController: UIViewController {
                   return
               }
         signIsPositive = !signIsPositive
-        currentValueLable.text = String(format: "%.4g", doubleTypeOperand * -1)
+        currentValueLable.text = String(doubleTypeOperand * -1)
     }
 
     
@@ -155,18 +153,9 @@ class ViewController: UIViewController {
             currentValueLable.text = "NaN"
         } else {
             resetToInitialState()
-            currentValueLable.text = addCommaToValue(doubleTypeResult)
+            currentValueLable.text = String(doubleTypeResult).insertComma()
         }
         isCalculated = true
-    }
-    
-    private func addCommaToValue(_ value: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        guard let resultWithComma = numberFormatter.string(for: value) else {
-            return "0"
-        }
-        return resultWithComma
     }
 }
 
