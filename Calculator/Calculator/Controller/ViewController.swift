@@ -50,32 +50,23 @@ class ViewController: UIViewController {
                   inputOperandValues.count < 20 else {
             return
         }
+        let addcommaOperand: String
         
         if inputOperandValues.contains(".") {
             guard inputButtonTitle != "." else {
                 return
             }
         } else {
-            guard inputButtonTitle != "0" || inputOperandValues.first != "0" else {
-                return
-            }
-            guard inputButtonTitle != "00" || inputOperandValues.first != "0" else {
+            guard inputButtonTitle != "0" || !inputOperandValues.isEmpty,
+                  inputButtonTitle != "00" || !inputOperandValues.isEmpty else {
                 return
             }
         }
         inputOperandValues.append(inputButtonTitle)
+        addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
+
         
-        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {                      
-            inputOperandValues.removeFirst()
-        }
-        
-        let addcommaOperand: String
-        if inputOperandValues.contains(".") {
-            addcommaOperand = inputOperandValues.joined()
-        } else {
-            addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
-        }
-        
+
         if signIsPositive {
             currentValueLable.text = addcommaOperand
         } else {
@@ -186,4 +177,5 @@ extension UIScrollView {
         setContentOffset(setOfBottem, animated: false)
     }
 }
+
 
