@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv" userLabel="Process Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv" userLabel="History Scroll View">
                                 <rect key="frame" x="16" y="219" width="358" height="44.666666666666686"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf" userLabel="History Vertical Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="44.666666666666664"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-Ld-ZGi">
@@ -363,10 +363,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="lWD-Wy-0rf"/>
+                        <outlet property="historyVerticalStackView" destination="XRe-QE-UJf" id="9P1-Zt-9He"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="TfL-4J-MQm"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="yzD-v4-uYh"/>
-                        <outlet property="processScrollView" destination="BOT-7g-vxv" id="lWD-Wy-0rf"/>
-                        <outlet property="processVerticalStackView" destination="XRe-QE-UJf" id="9P1-Zt-9He"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

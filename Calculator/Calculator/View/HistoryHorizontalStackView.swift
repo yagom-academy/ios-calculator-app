@@ -1,6 +1,6 @@
 import UIKit
 
-class ProcessHorizontalStackView: UIStackView {
+class HistoryHorizontalStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

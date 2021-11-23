@@ -8,8 +8,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var processScrollView: UIScrollView!
-    @IBOutlet weak var processVerticalStackView: UIStackView!
+    @IBOutlet weak var historyScrollView: UIScrollView!
+    @IBOutlet weak var historyVerticalStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -20,6 +20,7 @@ class ViewController: UIViewController {
 
     private var isLastOperator: Bool = false
     private var isLastDot: Bool = false
+    
     
     private let numberFormatter = NumberFormatter()
     
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
         completeFormula = ""
         isCalculationOver = false
         
-        clearCalculationProcess()
+        clearCalculationHistory()
     }
     
     private func resetOperand() {
@@ -68,31 +69,31 @@ class ViewController: UIViewController {
         }
     }
       
-    private func addCalculationProcessWithHorizontalStackView() {
-        let operatorProcessLabel = ProcessLabel(text: currentOperator)
-        let operandProcessLabel = ProcessLabel(text: currentOperand)
+    private func addCalculationHistoryWithHorizontalStackView() {
+        let operatorHistoryLabel = HistoryLabel(text: currentOperator)
+        let operandHistoryLabel = HistoryLabel(text: currentOperand)
         
-        let horizontalStackView = ProcessHorizontalStackView(lhsLabel: operatorProcessLabel, rhsLebel: operandProcessLabel)
+        let horizontalStackView = HistoryHorizontalStackView(lhsLabel: operatorHistoryLabel, rhsLebel: operandHistoryLabel)
                 
-        processVerticalStackView.addArrangedSubview(horizontalStackView)
+        historyVerticalStackView.addArrangedSubview(horizontalStackView)
         scrollToBottom()
         
-        processScrollView.showsVerticalScrollIndicator = false
-        processScrollView.showsHorizontalScrollIndicator = false
+        historyScrollView.showsVerticalScrollIndicator = false
+        historyScrollView.showsHorizontalScrollIndicator = false
     }
     
     private func scrollToBottom() {
-        processScrollView.layoutIfNeeded()
+        historyScrollView.layoutIfNeeded()
 
         let bottomOffset = CGPoint(x: 0,
-                                   y: processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom)
+                                   y: historyScrollView.contentSize.height - historyScrollView.bounds.size.height + historyScrollView.contentInset.bottom)
         if bottomOffset.y > 0 {
-            processScrollView.setContentOffset(bottomOffset, animated: true)
+            historyScrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
         
-    private func clearCalculationProcess() {
-        processVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    private func clearCalculationHistory() {
+        historyVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func touchUpOperandBtn(_ sender: UIButton) {
@@ -132,7 +133,7 @@ class ViewController: UIViewController {
             operatorLabel.text = currentOperator
             return
         } else {
-            addCalculationProcessWithHorizontalStackView()
+            addCalculationHistoryWithHorizontalStackView()
 
             currentOperator = operatorSymbol
             operatorLabel.text = currentOperator
@@ -150,7 +151,7 @@ class ViewController: UIViewController {
         completeFormula += currentOperand // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
         
         if isLastOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
-            addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+            addCalculationHistoryWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
         } 
         
         refreshLabelsWithResult(of: completeFormula)

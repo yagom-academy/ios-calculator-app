@@ -1,6 +1,6 @@
 import UIKit
 
-class ProcessLabel: UILabel {
+class HistoryLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
