@@ -9,14 +9,14 @@ import Foundation
 
 enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
-            var result: [String] = [input]
-            Operator.allCases.forEach { targetOperator in
-                var splitedString: [String] = []
-                for input in result {
-                    splitedString += input.split(with: targetOperator.rawValue)
-                    result = splitedString
-                }
+        var result: [String] = [input]
+        Operator.allCases.forEach { targetOperator in
+            var splitedString: [String] = []
+            for input in result {
+                splitedString += input.split(with: targetOperator.rawValue)
+                result = splitedString
             }
-            return result
         }
+        return result
+    }
 }
