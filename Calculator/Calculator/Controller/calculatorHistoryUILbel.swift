@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class calculatorHistoryUILbel: UILabel {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

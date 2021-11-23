@@ -42,11 +42,9 @@ extension CalculatorViewController {
         guard checkNumberOfInputs, isNotCalculated else {
             return
         }
-        
         guard let number = sender.titleLabel?.text else {
             return
         }
-        
         rawOperand = rawOperand + number
         operandLabel.text = changeNumberFormatter(insertedNumber: number)
     }
@@ -55,7 +53,6 @@ extension CalculatorViewController {
         guard !rawOperand.contains("."), isNotCalculated else {
             return
         }
-        
         rawOperand = rawOperand + "."
         operandLabel.text = rawOperand
     }
@@ -64,9 +61,7 @@ extension CalculatorViewController {
         guard operandLabel.text != "NaN" else {
             return
         }
-        
         rawOperand = "0"
-        
         guard isNotCalculated else {
             startNewCalculation()
             operandLabel.text = "0"
@@ -78,11 +73,9 @@ extension CalculatorViewController {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
-        
         if calculationHistoryStackView.subviews.isEmpty {
             operatorLabel.text = ""
         }
-        
         addCurrentFormulaStack()
         operatorLabel.text = sender.titleLabel?.text
         operandLabel.text = "0"
@@ -92,13 +85,11 @@ extension CalculatorViewController {
         guard rawOperand != "0", isNotCalculated else {
             return
         }
-        
         if rawOperand.contains("-") {
             rawOperand.remove(at: rawOperand.startIndex)
         } else {
             rawOperand.insert("-", at: rawOperand.startIndex)
         }
-        
         operandLabel.text = rawOperand
     }
     
@@ -122,7 +113,6 @@ extension CalculatorViewController {
         addCurrentFormulaStack()
         operatorLabel.text = ""
         operandLabel.text = calculatorController.calculate()
-        
         hasCalculated = true
         rawOperand = operandLabel.text?.replacingOccurrences(of: ",", with: "") ?? ""
     }
@@ -148,7 +138,8 @@ extension CalculatorViewController {
         }
         let formulaStackView = addFormulaStackView(operand: operand, operator: `operator`)
         calculationHistoryStackView.addArrangedSubview(formulaStackView)
-        calculatorController.insertFormula(operator: `operator`, operand: operand.replacingOccurrences(of: ",", with: ""))
+        calculatorController.insertFormula(operator: `operator`,
+                                           operand: operand.replacingOccurrences(of: ",", with: ""))
         scrollToBottom(calculationHistoryScrollView)
     }
     
@@ -165,7 +156,9 @@ extension CalculatorViewController {
     
     private func scrollToBottom(_ view: UIScrollView) {
         calculationHistoryScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: calculationHistoryScrollView.contentSize.height - calculationHistoryScrollView.frame.height)
+        let bottomOffset = CGPoint(x: 0,
+                                   y: calculationHistoryScrollView.contentSize.height
+                                          - calculationHistoryScrollView.frame.height)
         view.setContentOffset(bottomOffset, animated: false)
     }
     
@@ -185,12 +178,10 @@ extension CalculatorViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 15
-
         guard let number = Double(rawOperand),
               let result = numberFormatter.string(from: NSNumber(value: number)) else {
             return ""
         }
-        
         if rawOperand.contains(".") {
             if insertedNumber == "0" || insertedNumber == "00" {
                 return rawOperand

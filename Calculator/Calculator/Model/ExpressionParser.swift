@@ -12,13 +12,10 @@ enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
         var formula = Formula()
-        
         let separatedInput = componentsByOperators(from: input)
-        
         separatedInput
             .compactMap { Double($0) }
             .forEach { formula.operands.enqueue($0) }
-        
         separatedInput
             .filter {
                 Operator.allCases
@@ -26,7 +23,6 @@ enum ExpressionParser {
             }
             .compactMap { Operator(rawValue: Character($0)) }
             .forEach { formula.operators.enqueue($0) }
-        
         return formula
     }
     

@@ -24,7 +24,6 @@ class CalculatorController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp
-        
         var calculatedResult = 0.0
         var formula = ExpressionParser.parse(from: numericalExpression)
         do {
@@ -32,7 +31,6 @@ class CalculatorController {
         } catch {
             return Formula.FormulaError.NaN.description
         }
-
         guard let result = numberFormatter.string(from: NSNumber(value: calculatedResult)) else {
             return ""
         }
