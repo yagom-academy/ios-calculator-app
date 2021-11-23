@@ -16,14 +16,14 @@ struct CalculatorManager {
     
     //MARK: - Properties
     
-    private var inputOperand: String = "0" {
+    private var currentOperand: String = "0" {
         didSet {
-            delegate?.updateOperandLabel(by: inputOperand)
+            delegate?.updateOperandLabel(by: currentOperand)
         }
     }
-    private var inputOperator: String = "" {
+    private var currentOperator: String = "" {
         didSet {
-            delegate?.updateOperatorLabel(by: inputOperator)
+            delegate?.updateOperatorLabel(by: currentOperator)
         }
     }
     private var hasCalculated: Bool = false
@@ -31,40 +31,39 @@ struct CalculatorManager {
     var delegate: CalculatorManagerDelegate?
     
     mutating func tapNumberPad(_ operand: String) {
-        if inputOperand == "0" {
+        if currentOperand == "0" {
             delegate?.updateOperandLabel(by: operand)
-            inputOperand = operand
+            currentOperand = operand
             return
         }
-        inputOperand += operand
+        currentOperand += operand
     }
     
     mutating func tapOperatorButton(_ `operator`: String) {
-        delegate?.updateOperatorLabel(by: `operator`)
     }
     
     mutating func tapDotButton() {
-        if inputOperand.contains(".") {
+        if currentOperand.contains(".") {
             return
         }
-        inputOperand += "."
-        delegate?.updateOperandLabel(by: inputOperand)
+        currentOperand += "."
+        delegate?.updateOperandLabel(by: currentOperand)
     }
     
     mutating func tapPlusMinusButton() {
-        if inputOperand.hasPrefix("-") {
-            inputOperand = inputOperand.replacingOccurrences(of: "-", with: "")
+        if currentOperand.hasPrefix("-") {
+            currentOperand = currentOperand.replacingOccurrences(of: "-", with: "")
         } else {
-            inputOperand = "-" + inputOperand
+            currentOperand = "-" + currentOperand
         }
     }
     
     mutating func tapCEButton() {
-        if inputOperand.count == 1 {
-            inputOperand = "0"
+        if currentOperand.count == 1 {
+            currentOperand = "0"
             return
         }
-        inputOperand.removeLast()
+        currentOperand.removeLast()
     }
     
     mutating func tapACButton() {
@@ -72,8 +71,8 @@ struct CalculatorManager {
     }
     
     private mutating func reset() {
-        inputOperand = "0"
-        inputOperator = ""
+        currentOperand = "0"
+        currentOperator = ""
         hasCalculated = false
     }
 }
