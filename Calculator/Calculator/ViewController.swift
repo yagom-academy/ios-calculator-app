@@ -8,6 +8,11 @@ class ViewController: UIViewController {
     @IBOutlet weak private var expressionScrollView: UIScrollView!
     
     private var inputString: String = ""
+    private var hasSuffixOperator: Bool {
+        return Operator.allCases.reduce(false) {
+            $0 == inputString.hasSuffix(String($1.rawValue))
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +34,6 @@ extension ViewController {
         guard let operand = sender.currentTitle else { return }
         
         changeOperandLabel(text: operand)
-        appendInputString(text: operand)
         print(inputString)
         
     }
@@ -37,19 +41,18 @@ extension ViewController {
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         guard let currentText = operandLabel.text else { return }
-        guard inputString.isEmpty == false else { return } //AC누른후 0상태에서 들어오는 연산자 막기용
         
         if currentText == "0" {
-            inputString.removeLast()
-            appendInputString(text: `operator`)
             updateOperatorLabel(text: `operator`)
+            appendOperatorToInputString()
             print(inputString)
             return
         }
         
         addExpressionStackView()
         updateOperatorLabel(text: `operator`)
-        appendInputString(text: `operator`)
+        appendOperandToInputString()
+        appendOperatorToInputString()
         resetOperandLabel()
         print(inputString)
 
@@ -61,7 +64,6 @@ extension ViewController {
     }
     
 }
-    
 
 // MARK: - View Method
 extension ViewController {
@@ -143,7 +145,19 @@ extension ViewController {
 //MARK: - Method
 
 extension ViewController {
-    private func appendInputString(text input: String) {
-        inputString.append(input)
+    private func appendOperandToInputString() {
+        guard let numberText = operandLabel.text else { return }
+        
+        inputString.append(numberText)
+    }
+    
+    private func appendOperatorToInputString() {
+        guard let `operator` = operatorLabel.text else { return }
+        
+        if hasSuffixOperator {
+            inputString.removeLast()
+        }
+        
+        inputString.append(`operator`)
     }
 }
