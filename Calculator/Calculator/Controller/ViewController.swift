@@ -121,8 +121,6 @@ class ViewController: UIViewController {
         
         guard isCalculationOver == false else { return }
         
-        addCalculationProcessWithHorizontalStackView()
-        
         let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
         
         guard let operatorSymbol: String = sender.titleLabel?.text,
@@ -130,10 +128,18 @@ class ViewController: UIViewController {
             return
         }
         
-        currentOperator = operatorSymbol
-        operatorLabel.text = currentOperator
-        operandLabel.text = "0"
+        if isLastOperator == true {
+            currentOperator = operatorSymbol
+            operatorLabel.text = currentOperator
+            return
+        } else {
+            addCalculationProcessWithHorizontalStackView()
 
+            currentOperator = operatorSymbol
+            operatorLabel.text = currentOperator
+            operandLabel.text = "0"
+        }
+        
         isLastOperator = true
     }
 
