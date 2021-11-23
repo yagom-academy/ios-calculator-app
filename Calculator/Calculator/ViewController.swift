@@ -63,6 +63,18 @@ extension ViewController {
         resetInputString()
     }
     
+    @IBAction func touchUpResultButton(_ sender: UIButton) {
+        guard let `operator` = operatorLabel.text,
+              `operator` != "" else { return }
+        
+        addExpressionStackView()
+        appendOperandToInputString()
+        resetOperatorLabel()
+        
+        var formula = ExpressionParser.parse(from: inputString)
+        let result = formula.result()
+        operandLabel.text = String(result)
+    }
 }
 
 // MARK: - View Method
