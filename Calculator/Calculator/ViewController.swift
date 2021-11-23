@@ -63,6 +63,18 @@ extension ViewController {
         resetInputString()
     }
     
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        resetOperandLabel()
+    }
+    
+    @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+        guard operandLabel.text != "0" else {
+            return
+        }
+        
+        operandLabel.text = togglePlusMinus()
+    }
+    
     @IBAction func touchUpResultButton(_ sender: UIButton) {
         guard let `operator` = operatorLabel.text,
               `operator` != "" else { return }
@@ -151,6 +163,19 @@ extension ViewController {
         label.text = text
         
         return label
+    }
+    
+    private func togglePlusMinus() -> String {
+        var currentText = operandLabel.text ?? "0"
+        let minusSign = "-"
+        
+        if currentText.hasPrefix(minusSign) == true {
+            currentText = currentText.replacingOccurrences(of: minusSign , with: "")
+        } else {
+            currentText = minusSign + currentText
+        }
+        
+        return currentText
     }
 }
 
