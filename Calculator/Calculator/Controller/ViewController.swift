@@ -92,7 +92,7 @@ class ViewController: UIViewController {
             stringToCalculate.append("-" + inputOperandValues.joined())
         }
         
-        if inputOperandValues != [initialValue] {
+        if stringToCalculate != [initialValue] {
             addToFomulaHistory()
             fomulaScrollView.scrollViewToBottom()
         }
@@ -151,7 +151,7 @@ class ViewController: UIViewController {
     
     @IBAction func hitEqualButton(_ sender: UIButton) {
         guard isCalculated == false,
-              inputOperandValues != [initialValue] else {
+              stringToCalculate != [initialValue] else {
               return
         }
         endOperandInput()
