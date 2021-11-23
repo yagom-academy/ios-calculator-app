@@ -13,7 +13,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     
-    private var mathExpression = [String]()
+    private var mathExpression = ""
     private var currentOperand: String = "0"
     private var currentOperator: String = ""
     
@@ -30,7 +30,7 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Private Methods
     private func resetToInitialState() {
-        mathExpression = [String]()
+        mathExpression = ""
         currentOperator = ""
         operatorLabel.text = ""
         isCalculated = false
@@ -61,7 +61,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeOperator(to newOperator: String) {
-        let operatorSymbols = Operator.allCases.map { $0.rawValue.description }
+        let operatorSymbols = Operator.allCases.map { $0.rawValue }
         
         guard let last = mathExpression.last else {
             return
@@ -102,8 +102,8 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func calculateFormula(from expression: [String]) {
-        let formula = ExpressionParser.parse(from: expression.joined(separator: " "))
+    private func calculateFormula(from expression: String) {
+        let formula = ExpressionParser.parse(from: expression)
         
         do {
             let calculationResult = try formula.result()
