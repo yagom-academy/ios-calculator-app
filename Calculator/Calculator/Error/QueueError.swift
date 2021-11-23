@@ -16,12 +16,12 @@ enum QueueError: Error {
 extension QueueError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .emptyItem:
+            return "큐가 비어있습니다."
         case .emptyOperandItem:
             return "피연산자 큐가 비어있습니다."
         case .emptyOperatorItem:
             return "연산자 큐가 비어있습니다."
-        case .emptyItem:
-            return "큐가 비어있습니다."
         }
     }
 }
