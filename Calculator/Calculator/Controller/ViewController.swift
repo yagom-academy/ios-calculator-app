@@ -151,11 +151,12 @@ class ViewController: UIViewController {
 
     
     @IBAction private func hitEqualButton(_ sender: UIButton) {
-        addOperandToCalculateTarget()
-        guard isCalculated == false,
-              calculateTarget != [initialValue] else {
+        guard calculateTarget != [initialValue] &&
+              calculateTarget.count > 2 else {
               return
         }
+        addOperandToCalculateTarget()
+        
         let calculator = ExpressionParser.self
         let doubleTypeResult = calculator.parse(from: calculateTarget.joined()).result()
         resetCurrentInputOperand()
