@@ -145,7 +145,10 @@ class ViewController: UIViewController {
         }
         
         completeFormula += currentOperand // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
-        addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        
+        if isLastOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
+            addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        } 
         
         refreshLabelsWithResult(of: completeFormula)
         isCalculationOver = true
