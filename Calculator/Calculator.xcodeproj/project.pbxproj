@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2514146C274C7DE60086B0A8 /* CalculateItemQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514146B274C7DE60086B0A8 /* CalculateItemQueueError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2514146B274C7DE60086B0A8 /* CalculateItemQueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemQueueError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2514146A274C7D940086B0A8 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				2514146B274C7DE60086B0A8 /* CalculateItemQueueError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				2514146A274C7D940086B0A8 /* Errors */,
 				ED1A7A8D274286AA002B36CE /* Controller */,
 				ED1A7A8C27428670002B36CE /* View */,
 				ED1A7A8727428592002B36CE /* Extensions */,
@@ -311,6 +322,7 @@
 				ED1A7A89274285A9002B36CE /* String+Extensions.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				ED00CF42273982370081B9F3 /* LinkedList.swift in Sources */,
+				2514146C274C7DE60086B0A8 /* CalculateItemQueueError.swift in Sources */,
 				ED1A7A862741445C002B36CE /* ExpressionParser.swift in Sources */,
 				ED1A7A9027429023002B36CE /* CalculateItem.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
