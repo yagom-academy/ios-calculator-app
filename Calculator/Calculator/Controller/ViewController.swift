@@ -7,11 +7,11 @@ class ViewController: UIViewController {
     @IBOutlet var currentOperatorLable: UILabel!
     @IBOutlet var currentValueLable: UILabel!
     
-    let initialValue = "0"
-    var stringToCalculate: [String] = []
-    var inputOperandValues: [String] = []
-    var isOperatorEntered: Bool = false
-    var signIsPositive: Bool = true
+    private let initialValue = "0"
+    private var calculateTarget: [String] = []
+    private var inputOperandValues: [String] = []
+    private var isOperatorEntered: Bool = false
+    private var signIsPositive: Bool = true
     var isCalculated: Bool = false
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         })
     }
     
-    @IBAction func hitOperandButton(_ sender: UIButton) {
+    @IBAction private func hitOperandButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
@@ -86,11 +86,11 @@ class ViewController: UIViewController {
         isOperatorEntered = false
     }
     
-    func endOperandInput() {
+    private func addOperandToCalculateTarget() {
         if signIsPositive {
-            stringToCalculate.append(inputOperandValues.joined())
+            calculateTarget.append(inputOperandValues.joined())
         } else {
-            stringToCalculate.append("-" + inputOperandValues.joined())
+            calculateTarget.append("-" + inputOperandValues.joined())
         }
         
         if inputOperandValues != [initialValue] {
@@ -98,45 +98,48 @@ class ViewController: UIViewController {
             fomulaScrollView.scrollViewToBottom()
         }
         
-        inputOperandValues = [initialValue]
-        currentValueLable.text = initialValue
         isCalculated = false
         signIsPositive = true
     }
     
-    @IBAction func hitOperatorButton(_ sender: UIButton) {
+    @IBAction private func hitOperatorButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        endOperandInput()
+        addOperandToCalculateTarget()
+        resetCurrentInputOperand()
         if isOperatorEntered {
-            stringToCalculate.removeLast()
-            stringToCalculate.append(inputButtonTitle)
+            calculateTarget.removeLast()
+            calculateTarget.append(inputButtonTitle)
         } else {
-            stringToCalculate.append(inputButtonTitle)
+            calculateTarget.append(inputButtonTitle)
             isOperatorEntered = true
         }
         currentOperatorLable.text = inputButtonTitle
     }
     
     func resetToInitialState() {
-        inputOperandValues = [initialValue]
-        stringToCalculate.removeAll()
+        resetCurrentInputOperand()
+        calculateTarget.removeAll()
         currentOperatorLable.text = ""
     }
     
-    @IBAction func hitACButton(_ sender: UIButton) {
+    private func resetCurrentInputOperand() {
+        inputOperandValues = [initialValue]
+        currentValueLable.text = initialValue
+    }
+    
+    @IBAction private func hitACButton(_ sender: UIButton) {
         resetToInitialState()
         removeStackViewContents()
+    }
+    
+    @IBAction private func hitCEButton(_ sender: UIButton) {
+        resetCurrentInputOperand()
         currentValueLable.text = initialValue
     }
     
-    @IBAction func hitCEButton(_ sender: UIButton) {
-        inputOperandValues.removeAll()
-        currentValueLable.text = initialValue
-    }
-    
-    @IBAction func hitCodeConversionButton(_ sender: UIButton) {
+    @IBAction private func hitCodeConversionButton(_ sender: UIButton) {
         guard currentValueLable.text != initialValue else {
             return
         }
@@ -149,14 +152,15 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func hitEqualButton(_ sender: UIButton) {
+    @IBAction private func hitEqualButton(_ sender: UIButton) {
         guard isCalculated == false,
               inputOperandValues != [initialValue] else {
               return
         }
-        endOperandInput()
+        addOperandToCalculateTarget()
+        resetCurrentInputOperand()
         let calculator = ExpressionParser.self
-        let doubleTypeResult = calculator.parse(from: stringToCalculate.joined()).result()
+        let doubleTypeResult = calculator.parse(from: calculateTarget.joined()).result()
         if doubleTypeResult.isNaN {
             resetToInitialState()
             currentValueLable.text = "NaN"
@@ -167,7 +171,7 @@ class ViewController: UIViewController {
         isCalculated = true
     }
     
-    func addCommaToValue(_ value: Double) -> String {
+    private func addCommaToValue(_ value: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         guard let resultWithComma = numberFormatter.string(for: value) else {
