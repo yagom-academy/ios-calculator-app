@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     func addToFomulaHistory() {
         let stackView = UIStackView()
         stackView.spacing = 8.0
+        stackView.axis = .horizontal
         
         let opertatorView = UILabel()
         opertatorView.text = currentOperator.text
