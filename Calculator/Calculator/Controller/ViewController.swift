@@ -223,11 +223,11 @@ extension ViewController {
     }
     
     private func convertSign(from operand: inout String) -> String {
-        if operand.hasPrefix("−") {
+        if operand.hasPrefix("-") {
             operand.removeFirst()
             return operand
         } else {
-            return "−" + operand
+            return "-" + operand
         }
     }
     
