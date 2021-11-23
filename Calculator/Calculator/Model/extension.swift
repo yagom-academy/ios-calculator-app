@@ -11,8 +11,10 @@ extension String {
     }
     
     func insertComma() -> String {
-        let numberFomatter = NumberFormatter()
-        numberFomatter.numberStyle = .decimal
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumSignificantDigits = 20
         
         let splitByDecimalPoint = self.split(with: ".")
         guard let dobleTypeInteger = Double(splitByDecimalPoint[0]) else {
@@ -20,7 +22,7 @@ extension String {
         }
         
         let valueWithComma: String
-        guard let integerWithComma = numberFomatter.string(from: NSNumber(value: dobleTypeInteger)) else {
+        guard let integerWithComma = numberFormatter.string(from: NSNumber(value: dobleTypeInteger)) else {
             return ""
         }
         
