@@ -37,6 +37,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        addFormulaHistory()
         calculatorModel.touchEqualButton()
         updateCurrentInputLabel()
     }
@@ -48,6 +49,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
         guard let operatorSymbol = sender.titleLabel?.text else { return }
+        addFormulaHistory()
         calculatorModel.touchOperatorButton(operatorSymbol)
         updateCurrentInputLabel()
     }
@@ -61,5 +63,23 @@ class CalculatorViewController: UIViewController {
     private func updateCurrentInputLabel() {
         currentInputOperandLabel.text = calculatorModel.currentInputOperand
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
+    }
+    
+    private func addFormulaHistory() {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        
+        let operatorLabel = UILabel()
+        operatorLabel.text = calculatorModel.currentInputOperator
+        operatorLabel.textColor = .white
+        
+        let operandLabel = UILabel()
+        operandLabel.text = calculatorModel.currentInputOperand
+        operandLabel.textColor = .white
+        
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        formulaHistoryStackView.addArrangedSubview(stackView)
     }
 }
