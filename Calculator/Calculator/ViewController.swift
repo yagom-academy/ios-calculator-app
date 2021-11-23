@@ -20,10 +20,33 @@ class ViewController: UIViewController {
     
 }
 
+// MARK: - IBAction
+extension ViewController {
+    @IBAction func touchUpOperandButton(_ sender: UIButton) {
+        guard let operand = sender.currentTitle else { return }
+        
+        changeOperandLabel(text: operand)
+    }
+}
+
 // MARK: - View Method
 extension ViewController {
-    private func removeSubviewsFromStackView() {
-        expressionsStackView.arrangedSubviews.forEach{$0.removeFromSuperview()}
+    
+    private func changeOperandLabel(text: String) {
+        var currentText = operandLabel.text ?? "0"
+        
+        guard currentText != "0" ||
+              text != "00" else {
+                  return
+        }
+        
+        if currentText == "0" {
+            currentText = text
+        } else {
+            currentText += text
+        }
+        
+        operandLabel.text = currentText
     }
     
     private func resetOperandLabel() {
@@ -41,6 +64,10 @@ extension ViewController {
                                                           operand: operand)
         
         expressionsStackView.addArrangedSubview(expressionStackView)
+    }
+    
+    private func removeSubviewsFromStackView() {
+        expressionsStackView.arrangedSubviews.forEach{$0.removeFromSuperview()}
     }
     
     private func makeExpressionStackView(operator: UILabel,
