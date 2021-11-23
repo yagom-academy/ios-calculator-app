@@ -63,10 +63,10 @@ final class CalculatorViewController: UIViewController {
             return
         }
         clearCalculationHistory()
-        update(currentOperandLabel, to: result)
+        updateOperandLabel(currentOperandLabel, to: result)
         changeCurrentOperatorData(to: "")
-        let newOperand = result.withoutCommas
-        setCurrentOperand(to: newOperand)
+        //let newOperand = result.withoutCommas
+        setCurrentOperand(to: result)
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
@@ -101,7 +101,7 @@ extension CalculatorViewController {
     
     private func changeCurrentOperandData(to newOperand: String) {
         setCurrentOperand(to: newOperand)
-        update(currentOperandLabel, to: newOperand)
+        updateOperandLabel(currentOperandLabel, to: newOperand)
     }
     
     private func setCurrentOperand(to newOperand: String) {
@@ -110,14 +110,18 @@ extension CalculatorViewController {
     
     private func changeCurrentOperatorData(to newOperator: String) {
         setCurrentOperator(to: newOperator)
-        update(currentOperatorLabel, to: newOperator)
+        updateOperatorLabel(currentOperatorLabel, to: newOperator)
     }
     
     private func setCurrentOperator(to newOperator: String) {
         currentOperator = newOperator
     }
     
-    private func update(_ label: UILabel, to data: String) {
+    private func updateOperatorLabel(_ label: UILabel, to data: String) {
+        label.text = data
+    }
+    
+    private func updateOperandLabel(_ label: UILabel, to data: String) {
         do {
             guard let presentableString = try data.convertNumberToPresentableFormat() else {
                 return
