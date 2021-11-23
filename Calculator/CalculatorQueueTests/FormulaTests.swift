@@ -16,8 +16,6 @@ class FormulaTests: XCTestCase {
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        formula.operators.removeAllItem()
-        formula.operands.removeAllItem()
     }
     
     func test_숫자_4개의_덧셈을_잘_수행하는지() throws {
