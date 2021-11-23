@@ -13,6 +13,24 @@ struct Calculator {
     private var isEvaluated = false
     private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
     
+    mutating func touchNumberButton(_ number: String) {
+        if isEvaluated {
+            let newOperand = number
+            resetAllExpression()
+            updateCurrentInput(operandForm: newOperand)
+            return
+        }
+        
+        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
+        
+        if currentInputOperand == LabelContents.defaultOperand {
+            updateCurrentInput(operandForm: number, operatorForm: currentInputOperator)
+            return
+        }
+        
+        currentInputOperand += number
+    }
+    
     mutating func touchAllClearButton() {
         resetAllExpression()
     }
