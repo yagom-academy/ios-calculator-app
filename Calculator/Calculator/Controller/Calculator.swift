@@ -57,6 +57,18 @@ struct Calculator {
         updateCurrentInput(operatorForm: operatorSymbole)
     }
     
+    mutating func touchSignChangeButton() {
+        if currentInputOperand == LabelContents.defaultOperand { return }
+        if isEvaluated { return }
+        
+        if currentInputOperand.hasPrefix(LabelContents.minusSignSymbole) {
+            currentInputOperand.removeFirst()
+            return
+        }
+        
+        currentInputOperand.insert(contentsOf: LabelContents.minusSignSymbole, at: currentInputOperand.startIndex)
+    }
+    
     mutating func touchAllClearButton() {
         resetAllExpression()
     }
