@@ -330,8 +330,8 @@
                     <connections>
                         <outlet property="acButton" destination="ped-N8-JbY" id="PKj-5I-3Z9"/>
                         <outlet property="ceButton" destination="RLD-dY-LOA" id="6f1-ta-RUv"/>
-                        <outlet property="currentOperator" destination="HPC-iy-qdm" id="CZD-G0-SOI"/>
-                        <outlet property="currentValue" destination="Lwz-OF-XHD" id="K9h-e1-S3c"/>
+                        <outlet property="currentOperatorLable" destination="HPC-iy-qdm" id="CZD-G0-SOI"/>
+                        <outlet property="currentValueLable" destination="Lwz-OF-XHD" id="K9h-e1-S3c"/>
                         <outlet property="fomulaScrollView" destination="BOT-7g-vxv" id="aJX-00-0qV"/>
                         <outlet property="fomulaStackView" destination="XRe-QE-UJf" id="CRP-De-AgF"/>
                         <outlet property="positiveOrNegativeButton" destination="ows-U7-mNc" id="HGj-WH-uDF"/>
