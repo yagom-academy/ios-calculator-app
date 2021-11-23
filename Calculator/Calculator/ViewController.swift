@@ -13,6 +13,11 @@ class ViewController: UIViewController {
             $0 == inputString.hasSuffix(String($1.rawValue))
         }
     }
+    private var hasDot: Bool {
+        let text = operandLabel.text ?? ""
+        
+        return text.contains(".")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +30,6 @@ class ViewController: UIViewController {
         removeSubviewsFromStackView()
     }
     
-
 }
 
 // MARK: - IBAction
@@ -75,6 +79,10 @@ extension ViewController {
         operandLabel.text = togglePlusMinus()
     }
     
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        insertDot()
+    }
+    
     @IBAction func touchUpResultButton(_ sender: UIButton) {
         guard let `operator` = operatorLabel.text,
               `operator` != "" else { return }
@@ -109,6 +117,16 @@ extension ViewController {
         operandLabel.text = currentText
     }
     
+    private func insertDot() {
+        let dot = "."
+        
+        if hasDot == false {
+            let currentText = operandLabel.text ?? "0"
+            
+            operandLabel.text = currentText + dot
+        }
+    }
+    
     private func resetOperandLabel() {
         operandLabel.text = "0"
     }
@@ -136,6 +154,7 @@ extension ViewController {
                                                           operand: operand)
         
         expressionsStackView.addArrangedSubview(expressionStackView)
+        scrollToBottom(expressionScrollView)
     }
     
     private func removeSubviewsFromStackView() {
@@ -176,6 +195,13 @@ extension ViewController {
         }
         
         return currentText
+    }
+    
+    private func scrollToBottom(_ scroll: UIScrollView) {
+        scroll.layoutIfNeeded()
+        let offsetY = scroll.contentSize.height - scroll.bounds.size.height
+        let bottomOffset = CGPoint(x: 0, y: offsetY)
+        scroll.setContentOffset(bottomOffset, animated: true)
     }
 }
 
