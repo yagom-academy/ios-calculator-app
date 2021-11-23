@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String, CaseIterable, CalculateItem {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
     case multiply = "×"
@@ -15,12 +15,12 @@ enum Operator: String, CaseIterable, CalculateItem {
     
     static func provideSymbols() -> [String] {
         return Operator.allCases.map { `case` in
-            `case`.rawValue
+            `case`.rawValue.description
         }
     }
     
     init?(symbol: String) {
-        self.init(rawValue: symbol)
+        self.init(rawValue: Character(symbol))
     }
     
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
