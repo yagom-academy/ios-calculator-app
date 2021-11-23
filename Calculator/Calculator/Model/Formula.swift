@@ -18,14 +18,8 @@ struct Formula {
         }
     }
     
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
-    
-    init(opreands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>(),
-          operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()) {
-         self.operands = opreands
-         self.operators = operators
-    }
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() throws -> Double {
         guard var result = operands.dequeue() else {
