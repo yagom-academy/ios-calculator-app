@@ -76,6 +76,9 @@ class ViewController: UIViewController {
                 
         processVerticalStackView.addArrangedSubview(horizontalStackView)
         scrollToBottom()
+        
+        processScrollView.showsVerticalScrollIndicator = false
+        processScrollView.showsHorizontalScrollIndicator = false
     }
     
     private func scrollToBottom() {
