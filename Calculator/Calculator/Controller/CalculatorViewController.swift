@@ -133,9 +133,21 @@ extension CalculatorViewController {
         let equationString = historyStack.filter { $0 != "" }
             .joined()
         var formula = ExpressionParser.parse(from: equationString)
-        let rawResult = formula.result()
+        let rawResult = getCalculationResult(from: &formula)
         guard let result = rawResult.presentableFormat else {
             return nil
+        }
+        return result
+    }
+    
+    private func getCalculationResult(from formula: inout Formula) -> Double {
+        var result = 0.0
+        do {
+            try result = formula.result()
+        } catch CalculateItemQueueError.queueIsEmpty {
+            print(CalculateItemQueueError.queueIsEmpty)
+        } catch let error {
+            print(error)
         }
         return result
     }
