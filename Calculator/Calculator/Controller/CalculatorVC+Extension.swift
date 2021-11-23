@@ -10,12 +10,8 @@ import UIKit
 extension CalculatorViewController {
     
     func createFormulaStack() -> UIStackView {
-        let formulaStack = UIStackView()
+        let formulaStack = FormulaStackView()
         
-        formulaStack.axis = .horizontal
-        formulaStack.alignment = .fill
-        formulaStack.distribution = .fill
-        formulaStack.spacing = 8
         formulaStack.addArrangedSubview(operatorLabel)
         formulaStack.addArrangedSubview(operandsLabel)
         
