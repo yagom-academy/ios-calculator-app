@@ -10,20 +10,20 @@ class ViewController: UIViewController {
     let initialValue = "0"
     var stringToCalculate: [String] = []
     var inputOperandValues: [String] = []
-    var isOperatorEnterd: Bool = false
+    var isOperatorEntered: Bool = false
     var signIsPositive: Bool = true
     var isCalculated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inputOperandValues = [initialValue]
-        isOperatorEnterd = false
+        isOperatorEntered = false
         currentValue.text = initialValue
     }
     
     func addToFomulaHistory() {
-        let stckView = UIStackView()
-        stckView.spacing = 8.0
+        let stackView = UIStackView()
+        stackView.spacing = 8.0
         
         let opertatorView = UILabel()
         opertatorView.text = currentOperator.text
@@ -33,10 +33,10 @@ class ViewController: UIViewController {
         operandView.text = currentValue.text
         operandView.textColor = .white
         
-        stckView.addArrangedSubview(opertatorView)
-        stckView.addArrangedSubview(operandView)
+        stackView.addArrangedSubview(opertatorView)
+        stackView.addArrangedSubview(operandView)
         
-        fomulaStackView.addArrangedSubview(stckView)
+        fomulaStackView.addArrangedSubview(stackView)
     }
     
     func removeStackViewContents() {
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
         } else {
             currentValue.text = "-" + addcommaOperand
         }
-        isOperatorEnterd = false
+        isOperatorEntered = false
     }
     
     func endOperandInput() {
@@ -108,12 +108,12 @@ class ViewController: UIViewController {
             return
         }
         endOperandInput()
-        if isOperatorEnterd {
+        if isOperatorEntered {
             stringToCalculate.removeLast()
             stringToCalculate.append(inputButtonTitle)
         } else {
             stringToCalculate.append(inputButtonTitle)
-            isOperatorEnterd = true
+            isOperatorEntered = true
         }
         currentOperator.text = inputButtonTitle
     }
