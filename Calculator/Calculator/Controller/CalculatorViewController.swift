@@ -110,11 +110,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func zeroButtonDidTouchUp(_ button: UIButton) {
-        switch operandLabel.text! {
-        case defaultOperandLabel:
-            return
-        default:
-            operandLabel.text! += button.currentTitle!
+        guard let buttonTitle = button.currentTitle,
+              var operandLabelText = operandLabel.text else { return }
+        
+        if operandLabelText != defaultOperandLabel {
+            operandLabelText += buttonTitle
+            operandLabel.text = operandLabelText
         }
     }
     
