@@ -44,20 +44,18 @@ class ViewController: UIViewController {
         currentOperand = ""
     }
     
-    func changeNumberFormat(of number: Double) -> String? {
+    func convertToString(from number: Double) -> String? {
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         
-        guard let resultInString = numberFormatter.string(from: NSNumber(value: number)) else { return nil }
-        
-        return resultInString
+        return numberFormatter.string(from: NSNumber(value: number))
     }
     
     func refreshLabelsWithResult(of formula: String) {
         do {
             var formula: Formula = try ExpressionParser.parse(from: formula)
             let calculationResult: Double = try formula.result()
-            guard let resultInString = changeNumberFormat(of: calculationResult) else { return }
+            guard let resultInString = convertToString(from: calculationResult) else { return }
             
             operandLabel.text = "\(resultInString)"
             operatorLabel.text = ""
@@ -69,13 +67,11 @@ class ViewController: UIViewController {
         }
     }
       
-    func addCalculationProcessWithHorizontalStackView() {        
-        let operatorProcessLabel = ProcessLabel(text: currentOperator)
-        let operandProcessLabel = ProcessLabel(text: currentOperand)
+    func addCalculationProcessWithHorizontalStackView() {
+        let processLabel = ProcessLabel(text: "\(currentOperator) \(currentOperand)")
         
-        let horizontalStackView = ProcessHorizontalStackView(lhsLabel: operatorProcessLabel, rhsLebel: operandProcessLabel)
-                
-        processVerticalStackView.addArrangedSubview(horizontalStackView)
+        processVerticalStackView.addArrangedSubview(processLabel)
+        
         scrollToBottom()
     }
     
