@@ -119,18 +119,22 @@ class ViewController: UIViewController {
         
         guard isCalculationOver == false else { return }
         
-        addCalculationProcessWithHorizontalStackView()
-        
-        let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
-        
         guard let operatorSymbol: String = sender.titleLabel?.text,
-        operatorSymbols.contains(Character(operatorSymbol)) else {
+              let _ = Operator(rawValue: Character(operatorSymbol)) else {
             return
         }
         
-        currentOperator = operatorSymbol
-        operatorLabel.text = currentOperator
-        operandLabel.text = "0"
+        if isLastOperator {
+            currentOperator = operatorSymbol
+            operatorLabel.text = currentOperator
+            return
+        } else {
+            addCalculationProcessWithHorizontalStackView()
+            
+            currentOperator = operatorSymbol
+            operatorLabel.text = currentOperator
+            operandLabel.text = "0"
+        }
 
         isLastOperator = true
     }
@@ -141,7 +145,11 @@ class ViewController: UIViewController {
         }
         
         completeFormula += " \(currentOperand)" // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
-        addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        print("현재 formula : \(completeFormula)")
+        
+        if isLastOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
+            addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        }
         
         refreshLabelsWithResult(of: completeFormula)
         isCalculationOver = true
@@ -157,7 +165,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operandLabel.text = "0"
+        resetOperand()
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
@@ -169,10 +177,10 @@ class ViewController: UIViewController {
             return
         }
         
-        if currentOperand.first == "-" {
+        if currentOperand.first == Operator.subtract.rawValue {
             currentOperand.removeFirst()
         } else {
-            currentOperand = "-\(currentOperand)"
+            currentOperand = "\(Operator.subtract.rawValue)\(currentOperand)"
         }
         
         operandLabel.text = currentOperand
