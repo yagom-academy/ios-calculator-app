@@ -25,7 +25,6 @@ class CalculatorViewController: UIViewController {
         initailizeLabel()
         initializeFormulaStackView()
         initializeNumberFormatter()
-
     }
     
     private func initailizeLabel() {
@@ -59,7 +58,7 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapDotBtn(_ sender: UIButton) {
         if let currentNumLabel = inputNumLabel.text,
           let inputSign = sender.currentTitle,
-         !currentNumLabel.contains(".") {
+         currentNumLabel.contains(".") == false {
             inputNumLabel.text = currentNumLabel + inputSign
         }
     }
@@ -73,6 +72,11 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateInputNumLabel(_ currentNum: String, with input: String) {
+        guard currentNum.contains(".") == false else {
+            inputNumLabel.text = currentNum + input
+            return
+        }
+        
         let numWithoutComma = currentNum.replacingOccurrences(of: ",", with: "")
         let updatedNum = numWithoutComma + input
         if let convertedNum = numberFormatter.string(for: Double(updatedNum)) {
@@ -126,7 +130,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapCEBtn(_ sender: UIButton) {
-        initailizeLabel()
+        inputNumLabel.text = initialNumLabel
     }
     
     @IBAction private func tapPositiveNegativeBtn(_ sender: UIButton) {
@@ -144,10 +148,10 @@ class CalculatorViewController: UIViewController {
         guard entireStringFormula != initialStringValue else { return }
         
         addFormulaStackView()
-        var formula = ExpressionParser.parse(from: entireStringFormula)
         do {
+            var formula = ExpressionParser.parse(from: entireStringFormula)
             let result = try formula.result()
-            updateNumLabel(with: result)
+            updateNumLabel(with: Decimal(result))
             inputOperatorLabel.text = initialStringValue
             entireStringFormula = initialStringValue
         } catch CalculatorError.emptyQueue {
@@ -157,7 +161,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func updateNumLabel(with result: Double) {
+    private func updateNumLabel(with result: Decimal) {
         if let convertedNum = numberFormatter.string(for: result) {
             inputNumLabel.text = convertedNum
         }
@@ -166,9 +170,9 @@ class CalculatorViewController: UIViewController {
     // MARK: - 자동 스크롤
     
     private func scrollToBottom(_ scrollView: UIScrollView) {
-            scrollView.layoutIfNeeded()
-            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
-        }
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: true)
+    }
     
 }
 
