@@ -40,19 +40,10 @@ class ParsingTests: XCTestCase {
     }
     
     func testParsingWithDevidedByZero() {
-        sampleString = "1.7 + 3.8 - 21.9 / 0.0 * -310.7"
+        sampleString = "1.7 + 3.8 − 21.9 ÷ 0.0 × -310.7"
         var formula: Formula = ExpressionParser.parse(from: sampleString)
         
         XCTAssertThrowsError(try formula.result())
-    }
-    
-    func testParsingFromInvaildString() {
-        sampleString = "1.7 + 3.8 - 21.9 / 41.0 * * * 310.7"
-        var formula: Formula = ExpressionParser.parse(from: sampleString)
-        
-        XCTAssertThrowsError(try formula.result()) { error in
-            print(error)
-        }
     }
     
     func testParsingWithEmptyQueue() {
@@ -62,13 +53,6 @@ class ParsingTests: XCTestCase {
         XCTAssertThrowsError(try formula.result()) { error in
             print(error)
         }
-    }
-    
-    func testParsingWithOnlyFirstOperand() {
-        sampleString = "1"
-        var formula: Formula = ExpressionParser.parse(from: sampleString)
-        
-        XCTAssertEqual(try formula.result(), 1)
     }
     
     func testParsingAndCalculate() {

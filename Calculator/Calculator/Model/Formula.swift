@@ -33,8 +33,8 @@ struct Formula {
                 }
                 
                 result = try operatorItems[0].calculate(lhs: result, rhs: nextOperand[0])
-            } catch {
-                throw QueueError.emptyOperandItem
+            } catch let error {
+                throw error
             }
             
             do {

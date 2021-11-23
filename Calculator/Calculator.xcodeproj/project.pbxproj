@@ -13,7 +13,6 @@
 		332FE421273A93A300E42C8D /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE420273A93A300E42C8D /* CalculateItem.swift */; };
 		332FE423273A969C00E42C8D /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE422273A969C00E42C8D /* CalculatorItemQueueTests.swift */; };
 		332FE424273A96BE00E42C8D /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FE420273A93A300E42C8D /* CalculateItem.swift */; };
-		33306F47273A829300737205 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306F46273A829300737205 /* ListTests.swift */; };
 		3383F511273BBAF400C13A81 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F510273BBAF400C13A81 /* Operator.swift */; };
 		3383F514273BBE0A00C13A81 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F513273BBE0A00C13A81 /* Double+Extension.swift */; };
 		3383F515273BBE6400C13A81 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383F513273BBE0A00C13A81 /* Double+Extension.swift */; };
@@ -57,7 +56,6 @@
 		332FE422273A969C00E42C8D /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		33306F30273A682900737205 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33306F34273A682900737205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33306F46273A829300737205 /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		3383F510273BBAF400C13A81 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		3383F513273BBE0A00C13A81 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		3383F516273BBF4B00C13A81 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 		33306F31273A682900737205 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				33306F46273A829300737205 /* ListTests.swift */,
 				332FE422273A969C00E42C8D /* CalculatorItemQueueTests.swift */,
 				3383F520273BF77F00C13A81 /* OperationTests.swift */,
 				33FCCFDC273D5E2B001FF7AD /* FormulaTests.swift */,
@@ -301,7 +298,6 @@
 				332FE424273A96BE00E42C8D /* CalculateItem.swift in Sources */,
 				3324AC05273ADA05003F9865 /* QueueError.swift in Sources */,
 				3383F518273BBF4E00C13A81 /* String+Extension.swift in Sources */,
-				33306F47273A829300737205 /* ListTests.swift in Sources */,
 				3383F51F273BF6CC00C13A81 /* Operator.swift in Sources */,
 				332FE41F273A90F100E42C8D /* CalculatorItemQueue.swift in Sources */,
 				33FCCFDD273D5E2B001FF7AD /* FormulaTests.swift in Sources */,
