@@ -119,10 +119,8 @@ class ViewController: UIViewController {
         
         guard isCalculationOver == false else { return }
         
-        let operatorSymbols: [Character] = Operator.allCases.map { $0.rawValue }
-        
         guard let operatorSymbol: String = sender.titleLabel?.text,
-        operatorSymbols.contains(Character(operatorSymbol)) else {
+              let _ = Operator(rawValue: Character(operatorSymbol)) else {
             return
         }
         
