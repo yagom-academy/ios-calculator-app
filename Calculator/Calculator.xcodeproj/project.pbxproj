@@ -35,6 +35,7 @@
 		FBFA13B8274BC66400E98813 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13B7274BC66400E98813 /* StringExtensionTests.swift */; };
 		FBFA13BA274C83E300E98813 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13B9274C83E300E98813 /* Formula.swift */; };
 		FBFA13BB274C83E300E98813 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13B9274C83E300E98813 /* Formula.swift */; };
+		FBFA13BD274C8B7D00E98813 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA13BC274C8B7D00E98813 /* FormulaTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		FBFA13B0274BC3FA00E98813 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		FBFA13B7274BC66400E98813 /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 		FBFA13B9274C83E300E98813 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		FBFA13BC274C8B7D00E98813 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				FBFA13B0274BC3FA00E98813 /* OperatorTests.swift */,
 				FBFA13B7274BC66400E98813 /* StringExtensionTests.swift */,
 				0DB33D99274C88340068931F /* ExpressionParserTests.swift */,
+				FBFA13BC274C8B7D00E98813 /* FormulaTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBFA13BD274C8B7D00E98813 /* FormulaTests.swift in Sources */,
 				0DB33D8D274BBF740068931F /* Double.swift in Sources */,
 				FBFA13B1274BC3FA00E98813 /* OperatorTests.swift in Sources */,
 				FBFA13BB274C83E300E98813 /* Formula.swift in Sources */,
