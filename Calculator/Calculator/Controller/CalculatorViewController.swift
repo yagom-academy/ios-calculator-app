@@ -18,16 +18,8 @@ final class CalculatorViewController: UIViewController {
     private var currentOperator = ""
     private var historyStack: [String] = []
     
-    private var isZero: Bool {
-        return currentOperand == "0"
-    }
-    
-    private var isNotZero: Bool {
-        return !isZero
-    }
-    
     private var isZeroDuringInput: Bool {
-        return isZero && !historyStack.isEmpty
+        return currentOperand.isZero && !historyStack.isEmpty
     }
     
     //MARK: - View Lifecycle
@@ -62,7 +54,7 @@ final class CalculatorViewController: UIViewController {
             changeCurrentOperatorData(to: operatorPressedString)
             return
         }
-        if isNotZero {
+        if currentOperand.isNotZero {
             refreshCalculateHistory(with: currentOperator, and: currentOperand)
             changeCurrentOperatorData(to: operatorPressedString)
             changeCurrentOperandData(to: "0")
@@ -76,7 +68,6 @@ final class CalculatorViewController: UIViewController {
         guard let result = calculateResult(from: historyStack) else {
             return
         }
-        clearCalculationHistory()
         update(currentOperandLabel, to: result)
         changeCurrentOperatorData(to: "")
         setCurrentOperand(to: result)
@@ -93,7 +84,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpSignButton(_ sender: Any) {
-        guard isNotZero,
+        guard currentOperand.isNotZero,
               let doubleOperand = Double(currentOperand.withoutCommas),
               doubleOperand != 0 else {
             return
