@@ -61,7 +61,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeOperator(to newOperator: String) {
-        let operatorSymbols = Operator.allCases.map { $0.rawValue }
+        let operatorSymbols = Operator.marks
         
         guard let last = mathExpression.last else {
             return
