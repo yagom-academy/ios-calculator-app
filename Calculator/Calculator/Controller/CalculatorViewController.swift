@@ -33,7 +33,7 @@ class CalculatorViewController: UIViewController {
         calculatorModel.touchNumberButton(number)
     }
     
-    @IBAction func touchPointNumber(_ sender: UIButton) {
+    @IBAction private func touchPointNumber(_ sender: UIButton) {
         calculatorModel.touchPointButton()
     }
     
