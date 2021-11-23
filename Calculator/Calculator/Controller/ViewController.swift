@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         currentValue.text = initialValue
     }
     
-    func addToFomulaHistory() {
+    private func addToFomulaHistory() {
         let stackView = UIStackView()
         stackView.spacing = 8.0
         stackView.axis = .horizontal
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         fomulaStackView.addArrangedSubview(stackView)
     }
     
-    func removeStackViewContents() {
+    private func removeStackViewContents() {
         fomulaStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in view.removeFromSuperview()
         })
     }
