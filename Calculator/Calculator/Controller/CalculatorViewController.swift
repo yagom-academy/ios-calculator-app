@@ -14,7 +14,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     
     //MARK: - Properties
-    private var isPositiveOperand = true
     private var currentOperand = ""
     private var currentOperator = ""
     private var historyStack: [String] = []
@@ -81,10 +80,15 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpSignButton(_ sender: Any) {
-        guard isNotZero else {
+        guard isNotZero,
+              let doubleOperand = Double(currentOperand),
+              doubleOperand != 0 else {
             return
         }
-        toggleSignOfOperand()
+        guard let newOperand = (doubleOperand * -1).presentableFormat else {
+            return
+        }
+        changeCurrentOperandData(to: newOperand)
     }
 }
 
@@ -165,18 +169,6 @@ extension CalculatorViewController {
     private func clearCalculationHistory() {
         historyStack.removeAll()
         removeFormulaStackViews()
-    }
-    
-    private func toggleSignOfOperand() {
-        isPositiveOperand.toggle()
-        if isPositiveOperand {
-            let newOperand = currentOperand.filter { $0.isNumber }
-            setCurrentOperand(to: newOperand)
-        } else {
-            let newOperand = "-" + currentOperand
-            setCurrentOperand(to: newOperand)
-        }
-        update(currentOperandLabel, to: currentOperand)
     }
     
     private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
