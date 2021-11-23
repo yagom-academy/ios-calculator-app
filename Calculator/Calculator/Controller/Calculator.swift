@@ -8,7 +8,14 @@
 import Foundation
 
 struct Calculator {
-    private(set) var currentInputOperand = LabelContents.defaultOperand
+    private(set) var currentInputOperand = LabelContents.defaultOperand {
+        didSet {
+            if isEvaluated && currentInputOperand.hasSuffix(".0") {
+                guard let index = currentInputOperand.firstIndex(of: Character(LabelContents.pointSymbole)) else { return }
+                    currentInputOperand = String(currentInputOperand[..<index])
+            }
+        }
+    }
     private(set) var currentInputOperator = LabelContents.emptyString
     
     private var isEvaluated = false
@@ -33,12 +40,14 @@ struct Calculator {
     }
     
     mutating func touchPointButton() {
+        if currentInputOperand.contains(LabelContents.pointSymbole) { return }
+        
         if isEvaluated {
+            let temporaryOperand = currentInputOperand + LabelContents.pointSymbole
             resetAllExpression()
+            updateCurrentInput(operandForm: temporaryOperand)
             return
         }
-        
-        if currentInputOperand.contains(LabelContents.pointSymbole) { return }
         
         currentInputOperand += LabelContents.pointSymbole
     }

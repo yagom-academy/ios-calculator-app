@@ -90,8 +90,6 @@ class CalculatorViewController: UIViewController {
             return result
         }
         
-        if number[numberPointIndex...] == ".0" { return result }
-        
         guard let resultPointIndex = result.firstIndex(of: LabelContents.pointSymbole) else {
             return result + String(number[numberPointIndex...])
         }
