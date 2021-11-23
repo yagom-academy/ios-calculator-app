@@ -46,8 +46,6 @@ extension ViewController {
         guard let operand = sender.currentTitle else { return }
         
         changeOperandLabel(text: operand)
-        print(inputString)
-        
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -57,7 +55,6 @@ extension ViewController {
         if currentText == "0" {
             updateOperatorLabel(text: `operator`)
             appendOperatorToInputString()
-            print(inputString)
             return
         }
         
@@ -66,8 +63,6 @@ extension ViewController {
         appendOperandToInputString()
         appendOperatorToInputString()
         resetOperandLabel()
-        print(inputString)
-
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
