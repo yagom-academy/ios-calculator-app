@@ -135,7 +135,7 @@ extension ViewController {
             return
         }
         
-        let convertedOperand = convertSign(from: displayedOperand)
+        let convertedOperand = convertSign(from: &displayedOperand)
         
         displayedOperand = convertedOperand
     }
@@ -222,14 +222,13 @@ extension ViewController {
         scrollToBottom()
     }
     
-    private func convertSign(from operand: String) -> String {
-        guard let sign = operand.first, sign == "-" else {
+    private func convertSign(from operand: inout String) -> String {
+        if operand.hasPrefix("-") {
+            operand.removeFirst()
+            return operand
+        } else {
             return "-" + operand
         }
-        
-        let signIndex: String.Index = operand.index(operand.startIndex, offsetBy: 1)
-        
-        return String(operand[signIndex...])
     }
     
     private func assembleFormula() -> String {

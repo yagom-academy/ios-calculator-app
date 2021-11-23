@@ -11,36 +11,45 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
-        self.operands = operands
-        self.operators = operators
-    }
-    
     mutating func result() throws -> Double {
-        guard let firstOperand = operands.dequeue() else {
-            throw QueueError.operandQueueIsEmpty
+        if operands.items.isEmpty {
+            operands.appendItem(0)
         }
         
-        var currentValue: Double = firstOperand
+        if operators.items.isEmpty {
+            throw QueueError.emptyOperatorItem
+        }
         
-        while !operands.isEmpty {
-            guard let currentOperator = operators.dequeue() else {
-                throw QueueError.operatorQueueIsEmpty
-            }
-            guard let currentOperand = operands.dequeue() else {
-                throw QueueError.operandQueueIsEmpty
-            }
+        guard let firstOperand = operands.items.first else {
+            throw QueueError.emptyOperandItem
+        }
+        var operatorItems = operators.items
+        var result = firstOperand
+        
+        repeat {
             do {
-            currentValue = try currentOperator.calculate(lhs: currentValue, rhs: currentOperand)
+                let operandsItems = try operands.removeItem()
+                
+                guard let nextOperand = operandsItems.first else {
+                    throw QueueError.emptyOperandItem
+                }
+                
+                guard let `operator` = operatorItems.first else {
+                    throw QueueError.emptyOperatorItem
+                }
+                
+                result = try `operator`.calculate(lhs: result, rhs: nextOperand)
             } catch let error {
                 throw error
             }
-        }
+            
+            do {
+                operatorItems = try operators.removeItem()
+            } catch {
+                throw QueueError.emptyOperatorItem
+            }
+        } while operatorItems.count >= 1
         
-        guard operators.isEmpty else {
-            throw OperationError.invalidFormula
-        }
-        
-        return currentValue
+        return result
     }
 }

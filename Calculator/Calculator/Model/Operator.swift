@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum Operator: Character, CaseIterable, CalculatorItem {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
-    case devide = "÷"
+    case divide = "÷"
     case multiply = "×"
 }
 
@@ -21,7 +21,7 @@ extension Operator {
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
-        case .devide:
+        case .divide:
             guard rhs != 0 else {
                 throw OperationError.devidedByZero
             }
