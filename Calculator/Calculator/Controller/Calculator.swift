@@ -82,6 +82,27 @@ struct Calculator {
         updateCurrentInput(operatorForm: currentInputOperator)
     }
     
+    mutating func touchEqualButton() {
+        if isEvaluated { return }
+        
+        mathExpression += [(currentInputOperator, currentInputOperand)]
+        
+        isEvaluated = true
+        let stringFormula = mathExpression.reduce(LabelContents.emptyString) { (previousResult: String, each: (operatorSymbol: String, operandNumber: String)) in
+            return previousResult + each.operatorSymbol + each.operandNumber
+        }
+        
+        do {
+            var fomula = ExpressionParser.parse(from: stringFormula)
+            let result = try fomula.result()
+            updateCurrentInput(operandForm: String(result))
+        } catch OperandsError.dividedByZero {
+            updateCurrentInput(operandForm: LabelContents.notANumber)
+        } catch {
+            updateCurrentInput(operandForm: LabelContents.error)
+        }
+    }
+    
     mutating private func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
         currentInputOperator = operatorForm
         currentInputOperand = operandForm
