@@ -46,10 +46,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func hitOperandButton(_ sender: UIButton) {
-        guard let inputButtonTitle = sender.titleLabel?.text else {
-            return
-        }
-        guard inputOperandValues.count <= 20 else {
+        guard let inputButtonTitle = sender.titleLabel?.text,
+                  inputOperandValues.count < 20 else {
             return
         }
         
@@ -93,7 +91,7 @@ class ViewController: UIViewController {
             calculateTarget.append("-" + inputOperandValues.joined())
         }
         
-        if inputOperandValues != [initialValue] {
+        if currentOperatorLable.text != "" || currentValueLable.text != initialValue {
             addToFomulaHistory()
             fomulaScrollView.scrollViewToBottom()
         }
@@ -153,14 +151,14 @@ class ViewController: UIViewController {
 
     
     @IBAction private func hitEqualButton(_ sender: UIButton) {
+        addOperandToCalculateTarget()
         guard isCalculated == false,
-              inputOperandValues != [initialValue] else {
+              calculateTarget != [initialValue] else {
               return
         }
-        addOperandToCalculateTarget()
-        resetCurrentInputOperand()
         let calculator = ExpressionParser.self
         let doubleTypeResult = calculator.parse(from: calculateTarget.joined()).result()
+        resetCurrentInputOperand()
         if doubleTypeResult.isNaN {
             resetToInitialState()
             currentValueLable.text = "NaN"
