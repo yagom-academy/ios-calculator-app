@@ -48,9 +48,7 @@ class ViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         
-        guard let resultInString = numberFormatter.string(from: NSNumber(value: number)) else { return nil }
-        
-        return resultInString
+        return numberFormatter.string(from: NSNumber(value: number))
     }
     
     private func refreshLabelsWithResult(of formula: String) {
@@ -101,15 +99,15 @@ class ViewController: UIViewController {
         
         guard let operand: String = sender.titleLabel?.text, Double(operand) != nil else { return }
         
-        if isLastOperator == false {
-            currentOperand += operand
-            print("입력된 숫자 : \(currentOperand)")
-        } else {
+        if isLastOperator {
             completeFormula += "\(currentOperand)\(currentOperator)"
             print("현재 formula : \(completeFormula)")
             resetOperand()
             
             currentOperand = operand
+        } else {
+            currentOperand += operand
+            print("입력된 숫자 : \(currentOperand)")
         }
         
         operandLabel.text = currentOperand
@@ -128,7 +126,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if isLastOperator == true {
+        if isLastOperator {
             currentOperator = operatorSymbol
             operatorLabel.text = currentOperator
             return
@@ -160,7 +158,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpClearEntryBtn(_ sender: UIButton) {
-        if isCalculationOver == true {
+        if isCalculationOver {
             resetCalculator()
             return
         }
@@ -169,7 +167,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
-        if isCalculationOver == true {
+        if isCalculationOver {
             resetCalculator()
         }
         
@@ -187,7 +185,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDotBtn(_ sender: UIButton) {
-        if isCalculationOver == true {
+        if isCalculationOver {
             resetCalculator()
         }
         
