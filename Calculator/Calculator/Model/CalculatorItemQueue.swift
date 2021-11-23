@@ -23,8 +23,11 @@ struct CalculatorItemQueue<T> {
     }
     
     @discardableResult
-    mutating func dequeue() -> T? {
-        return list.retrieveHeadValue()
+    mutating func dequeue() throws -> T {
+        guard let headValue = list.retrieveHeadValue() else {
+            throw CalculateItemQueueError.queueIsEmpty
+        }
+        return headValue
     }
     
     mutating func removeAll() {

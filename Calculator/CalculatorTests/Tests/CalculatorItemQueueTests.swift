@@ -27,32 +27,32 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isNotEmpty)
     }
     
-    func testCalculatorItemQueueDequeue_givenNewInteger_expectFirstItemEqualToInsertedItem() {
+    func testCalculatorItemQueueDequeue_givenNewInteger_expectFirstItemEqualToInsertedItem() throws {
         let newData = 10
         sut.enqueue(newData)
-        guard let removedItem = sut.dequeue() as? Int else { return }
+        guard let removedItem = try sut.dequeue() as? Int else { return }
         XCTAssertEqual(removedItem, newData)
     }
     
-    func testCalculatorItemQueueDequeue_givenNewOperator_expectFirstItemEqualToInsertedItem() {
+    func testCalculatorItemQueueDequeue_givenNewOperator_expectFirstItemEqualToInsertedItem() throws {
         let newData = "+"
         sut.enqueue(newData)
-        let removedItem = sut.dequeue()
+        let removedItem = try sut.dequeue()
         guard let removedItem = removedItem as? String else { return }
         XCTAssertEqual(removedItem, newData)
     }
     
     func testCalculatorQueueDequeue_givenRemoveAllOfMultipleMixedItems_expectIsEmpty() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
+        let newItems: [Any] = [20, "+", 30, "−", 2]
         appendContents(of: newItems, to: &sut)
         sut.removeAll()
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func testCalculatorQueueDequeue_givenMultipleDequeue_expectIsEmpty() {
-        let newItems: [Any] = [20, "+", 30, "-", 2]
+    func testCalculatorQueueDequeue_givenMultipleDequeue_expectIsEmpty() throws {
+        let newItems: [Any] = [20, "+", 30, "−", 2]
         appendContents(of: newItems, to: &sut)
-        removeAll(of: &sut)
+        try removeAll(of: &sut)
         XCTAssertTrue(sut.isEmpty)
     }
     
@@ -89,9 +89,9 @@ class CalculatorItemQueueTests: XCTestCase {
         return nil
     }
     
-    private func removeAll(of queue: inout CalculatorItemQueue<Any>) {
+    private func removeAll(of queue: inout CalculatorItemQueue<Any>) throws {
         while queue.isNotEmpty {
-            queue.dequeue()
+            try queue.dequeue()
         }
     }
 }
