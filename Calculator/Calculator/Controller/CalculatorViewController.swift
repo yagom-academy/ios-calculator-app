@@ -18,12 +18,14 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        removeAllFormulaHistory()
         updateCurrentInputLabel()
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         calculatorModel.touchAllClearButton()
         updateCurrentInputLabel()
+        removeAllFormulaHistory()
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -81,5 +83,11 @@ class CalculatorViewController: UIViewController {
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         formulaHistoryStackView.addArrangedSubview(stackView)
+    }
+    
+    private func removeAllFormulaHistory() {
+        formulaHistoryStackView.arrangedSubviews.forEach { (view: UIView) -> () in
+            view.removeFromSuperview()
+        }
     }
 }
