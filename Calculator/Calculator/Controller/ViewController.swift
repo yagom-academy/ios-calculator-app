@@ -15,10 +15,17 @@ class ViewController: UIViewController {
     
     var currentOperand: String = ""
     var currentOperator: String = ""
-    var completeFormula: String = ""
     var isCalculationOver: Bool = false
-
     var isLastOperator: Bool = false
+    
+    var allProcess: String {
+        return processVerticalStackView.subviews.compactMap {
+            ($0 as? UILabel)?.text
+        }.reduce("") {
+            "\($0) \($1)"
+        }
+    }
+    
     var isLastDot: Bool = false
     
     let numberFormatter = NumberFormatter()
@@ -33,7 +40,6 @@ class ViewController: UIViewController {
         resetOperand()
         operatorLabel.text = ""
         currentOperator = ""
-        completeFormula = ""
         isCalculationOver = false
         
         clearCalculationProcess()
@@ -99,10 +105,7 @@ class ViewController: UIViewController {
             currentOperand += operand
             print("입력된 숫자 : \(currentOperand)")
         } else {
-            completeFormula += " \(currentOperand) \(currentOperator)"
-            print("현재 formula : \(completeFormula)")
             resetOperand()
-            
             currentOperand = operand
         }
         
@@ -140,14 +143,11 @@ class ViewController: UIViewController {
             return
         }
         
-        completeFormula += " \(currentOperand)" // formula에 반영되지 못한 마지막 숫자를 추가 (개선 필요)
-        print("현재 formula : \(completeFormula)")
-        
         if isLastOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
             addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
         }
         
-        refreshLabelsWithResult(of: completeFormula)
+        refreshLabelsWithResult(of: allProcess)
         isCalculationOver = true
     }
     
