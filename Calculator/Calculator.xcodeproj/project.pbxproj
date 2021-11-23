@@ -19,6 +19,7 @@
 		8489CA572742526400823A9C /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489CA552742526400823A9C /* Formula.swift */; };
 		8489CA5D2742533400823A9C /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489CA5C2742533400823A9C /* CalculatorItemQueue.swift */; };
 		8489CA5E2742533400823A9C /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489CA5C2742533400823A9C /* CalculatorItemQueue.swift */; };
+		C101F67A274CD9FA0018AE44 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101F679274CD9FA0018AE44 /* Calculator.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
@@ -45,6 +46,7 @@
 		8476CE51274244C4009DB750 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		8489CA552742526400823A9C /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		8489CA5C2742533400823A9C /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
+		C101F679274CD9FA0018AE44 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+				C101F679274CD9FA0018AE44 /* Calculator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				8476CE3A27423621009DB750 /* String+Extension.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				8476CE4A27424424009DB750 /* Operator.swift in Sources */,
+				C101F67A274CD9FA0018AE44 /* Calculator.swift in Sources */,
 				8489CA5D2742533400823A9C /* CalculatorItemQueue.swift in Sources */,
 				8476CE362742349A009DB750 /* Double+Extension.swift in Sources */,
 				8489CA562742526400823A9C /* Formula.swift in Sources */,

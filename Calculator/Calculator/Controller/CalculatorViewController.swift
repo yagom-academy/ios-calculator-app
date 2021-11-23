@@ -8,13 +8,6 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     private var savedCalculatorItems: String = ""
-    private let emptyString: String = ""
-    private let decimalPoint: String = "."
-    private let decimalComma: String = ","
-    private let negativeSign: String = "-"
-    private let defaultOperandLabel: String = "0"
-    private let numberFormatter = NumberFormatter()
-    private let hapticGenerator = UISelectionFeedbackGenerator()
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -23,14 +16,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyNumberFormatter()
-    }
-    
-    private func applyNumberFormatter() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.roundingMode = .halfUp
+        Calculator.applyNumberFormatter()
     }
     
     private func addStackViewLabel() {
@@ -39,8 +25,8 @@ class CalculatorViewController: UIViewController {
         savedItemlabel.textColor = .white
         savedItemlabel.adjustsFontSizeToFitWidth = true
         
-        if operandLabel.text!.contains(decimalPoint) {
-            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(decimalPoint) {
+        if operandLabel.text!.contains(Calculator.decimalPoint) {
+            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(Calculator.decimalPoint) {
                 operandLabel.text!.removeLast()
             }
         }
@@ -77,15 +63,15 @@ class CalculatorViewController: UIViewController {
             resetOperatorLable()
             var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
             let result = parsedFormula.result()
-            operandLabel.text = numberFormatter.string(for: result)
+            operandLabel.text = Calculator.numberFormatter.string(for: result)
             resetSavedCalculatorItems()
         }
     }
     
     @IBAction func operandButtonDidTouchUp(_ button: UIButton) {
         switch operandLabel.text! {
-        case defaultOperandLabel:
-            operandLabel.text = emptyString
+        case Calculator.defaultOperandLabel:
+            operandLabel.text = Calculator.emptyString
             operandLabel.text! += button.currentTitle!
         default:
             operandLabel.text! += button.currentTitle!
@@ -93,7 +79,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func operatorButtonDidTouchUp(_ button: UIButton) {
-        switch operatorLabel.text!.isEmpty || operandLabel.text! != defaultOperandLabel {
+        switch operatorLabel.text!.isEmpty || operandLabel.text! != Calculator.defaultOperandLabel {
         case true:
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
@@ -107,7 +93,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func zeroButtonDidTouchUp(_ button: UIButton) {
         switch operandLabel.text! {
-        case defaultOperandLabel:
+        case Calculator.defaultOperandLabel:
             return
         default:
             operandLabel.text! += button.currentTitle!
@@ -115,7 +101,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func decimalPointButtonDidTouchUp(_ button: UIButton) {
-        switch operandLabel.text!.contains(decimalPoint) {
+        switch operandLabel.text!.contains(Calculator.decimalPoint) {
         case true:
             return
         case false:
@@ -124,15 +110,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func changeSignButtonDidTouchUp(_ button: UIButton) {
-        guard operandLabel.text! != defaultOperandLabel else {
+        guard operandLabel.text! != Calculator.defaultOperandLabel else {
             return
         }
         
-        switch operandLabel.text!.hasPrefix(negativeSign) {
+        switch operandLabel.text!.hasPrefix(Calculator.negativeSign) {
         case true:
             operandLabel.text!.removeFirst()
         case false:
-            operandLabel.text! = negativeSign + operandLabel.text!
+            operandLabel.text! = Calculator.negativeSign + operandLabel.text!
         }
     }
     
@@ -148,13 +134,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func occurHapticFeedback() {
-        hapticGenerator.selectionChanged()
+        Calculator.hapticGenerator.selectionChanged()
     }
     
     private func saveCalculator(item: String) {
-        switch item.contains(decimalComma) {
+        switch item.contains(Calculator.decimalComma) {
         case true:
-            let commaRemoveditem = item.components(separatedBy: decimalComma).joined()
+            let commaRemoveditem = item.components(separatedBy: Calculator.decimalComma).joined()
             savedCalculatorItems += " \(commaRemoveditem)"
         case false:
             savedCalculatorItems += " \(item)"
@@ -162,15 +148,15 @@ class CalculatorViewController: UIViewController {
     }
     
     private func resetSavedCalculatorItems() {
-        savedCalculatorItems = emptyString
+        savedCalculatorItems = Calculator.emptyString
     }
     
     private func resetOperandLable() {
-        operandLabel.text = defaultOperandLabel
+        operandLabel.text = Calculator.defaultOperandLabel
     }
     
     private func resetOperatorLable() {
-        operatorLabel.text = emptyString
+        operatorLabel.text = Calculator.emptyString
     }
 }
 
