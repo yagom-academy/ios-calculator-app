@@ -31,6 +31,19 @@ struct Calculator {
         currentInputOperand += number
     }
     
+    mutating func touchPointButton() {
+        if currentInputOperand.contains(LabelContents.pointSymbole) { return }
+        
+        if isEvaluated {
+            let newOperand = currentInputOperand + LabelContents.pointSymbole
+            resetAllExpression()
+            updateCurrentInput(operandForm: newOperand)
+            return
+        }
+        
+        currentInputOperand += LabelContents.pointSymbole
+    }
+    
     mutating func touchOperatorButton(_ operatorSymbole: String) {
         if isEvaluated {
             let newOperand = currentInputOperand
