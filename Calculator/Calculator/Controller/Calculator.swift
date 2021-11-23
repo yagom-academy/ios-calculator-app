@@ -74,7 +74,12 @@ struct Calculator {
     }
     
     mutating func touchClearEntryButton() {
-        resetAllExpression()
+        if isEvaluated {
+            resetAllExpression()
+            return
+        }
+        
+        updateCurrentInput(operatorForm: currentInputOperator)
     }
     
     mutating private func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
