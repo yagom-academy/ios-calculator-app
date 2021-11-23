@@ -1,6 +1,3 @@
-
-import Foundation
-
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case substract = "−"
@@ -9,10 +6,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
 
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
-        case .add: return add(lhs: lhs, rhs: rhs)
-        case .divide: return try divide(lhs: lhs, rhs: rhs)
-        case .multiply: return multiply(lhs: lhs, rhs: rhs)
-        case .substract: return substract(lhs: lhs, rhs: rhs)
+        case .add:
+            return add(lhs: lhs, rhs: rhs)
+        case .divide:
+            return try divide(lhs: lhs, rhs: rhs)
+        case .multiply:
+            return multiply(lhs: lhs, rhs: rhs)
+        case .substract:
+            return substract(lhs: lhs, rhs: rhs)
         }
     }
 
