@@ -15,7 +15,7 @@ struct Formula {
                 let currentOperand = try operands.deleteFromQueue()
                 let currentOperator = try operators.deleteFromQueue()
                 let operatorCase = Operator(rawValue: currentOperator)
-                temporaryValue += operatorCase?.calculate(lhs: temporaryValue, rhs: currentOperand) ?? .zero
+                temporaryValue = operatorCase?.calculate(lhs: temporaryValue, rhs: currentOperand) ?? .zero
             }
             catch let error as CalculatorError {
                 print(fatalError())
@@ -24,7 +24,7 @@ struct Formula {
                 print("확인되지 않은 에러가 발생했습니다.")
             }
         }
-        return .zero
+        return temporaryValue
     }
 }
 
