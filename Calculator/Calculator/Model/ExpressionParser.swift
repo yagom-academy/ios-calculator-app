@@ -8,33 +8,19 @@
 import Foundation
 
 enum ExpressionParser {
-    private static let separator: Character = " "
-    
     static func parse(from input: String) -> Formula {
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<Operator>()
-        
-        let operatorStringsSet = Set(Operator.allCases.map { String($0.rawValue) })
-            
-        input.split(with: separator)
-            .filter { operatorStringsSet.contains($0) }
-            .compactMap { Operator(rawValue: Character($0)) }
-            .forEach { arithmetic in
-                operators.enqueue(arithmetic)
-            }
-        
-        componentsByOperators(from: input)
-            .compactMap { Double($0) }
-            .forEach { number in
-                operands.enqueue(number)
-            }
-            
+        let operatorMarks = Operator.marks
+        let stringOperators = input.filter { operatorMarks.contains($0) }
+        let stringOperands = componentsByOperators(from: input)
+        let operators = CalculatorItemQueue(stringOperators.compactMap { Operator(rawValue: $0) })
+        let operands = CalculatorItemQueue(stringOperands.compactMap { Double($0) })
         return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: separator)
-            .compactMap { Double($0) }
-            .map { String($0) }
+        let expression = [input]
+        let operandsArray = Operator.allCases.reduce(expression) { (expressionSplitedByOperator: [String], `operator`: Operator) -> [String] in
+            return expressionSplitedByOperator.flatMap { $0.split(with: `operator`.rawValue) }}
+        return operandsArray
     }
 }

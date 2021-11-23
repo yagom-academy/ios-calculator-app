@@ -10,6 +10,12 @@ import Foundation
 struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items = LinkedList<Element>()
     
+    init(_ items: [Element] = []) {
+        for item in items {
+            self.enqueue(item)
+        }
+    }
+    
     var isEmpty: Bool {
         return self.items.isEmpty
     }
