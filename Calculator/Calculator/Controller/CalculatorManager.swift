@@ -21,7 +21,11 @@ struct CalculatorManager {
             delegate?.updateOperandLabel(by: inputOperand)
         }
     }
-    private var inputOperator: String = ""
+    private var inputOperator: String = "" {
+        didSet {
+            delegate?.updateOperatorLabel(by: inputOperator)
+        }
+    }
     private var hasCalculated: Bool = false
     
     var delegate: CalculatorManagerDelegate?
@@ -53,5 +57,23 @@ struct CalculatorManager {
         } else {
             inputOperand = "-" + inputOperand
         }
+    }
+    
+    mutating func tapCEButton() {
+        if inputOperand.count == 1 {
+            inputOperand = "0"
+            return
+        }
+        inputOperand.removeLast()
+    }
+    
+    mutating func tapACButton() {
+        reset()
+    }
+    
+    private mutating func reset() {
+        inputOperand = "0"
+        inputOperator = ""
+        hasCalculated = false
     }
 }

@@ -50,9 +50,11 @@ class CalculatorController: UIViewController {
     }
     
     @IBAction func CEButtonTapped(_ sender: UIButton) {
+        calculatorManager.tapCEButton()
     }
     
     @IBAction func ACButtonTapped(_ sender: UIButton) {
+        calculatorManager.tapACButton()
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
