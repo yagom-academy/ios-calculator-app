@@ -74,6 +74,11 @@ class ViewController: UIViewController {
     }
       
     func addCalculationProcessWithHorizontalStackView() {
+        
+        if currentOperand.first == "." {
+            currentOperand = "0\(currentOperand)"
+        }
+        
         let processLabel = ProcessLabel(text: "\(currentOperator) \(currentOperand)")
         
         processVerticalStackView.addArrangedSubview(processLabel)
@@ -99,9 +104,13 @@ class ViewController: UIViewController {
             resetCalculator()
         }
         
-        guard let operand: String = sender.titleLabel?.text, Double(operand) != nil else { return }
+        guard let operand: String = sender.titleLabel?.text else { return }
         
         if isLastOperator == false {
+            currentOperand += operand
+            print("입력된 숫자 : \(currentOperand)")
+        } else if operand == "." {
+            resetOperand()
             currentOperand += operand
             print("입력된 숫자 : \(currentOperand)")
         } else {
@@ -180,27 +189,5 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = currentOperand
-    }
-    
-    @IBAction func touchUpDotBtn(_ sender: UIButton) {
-        if isCalculationOver == true {
-            resetCalculator()
-        }
-        
-        guard let operandLabelText = operandLabel.text else { return }
-        
-        if operandLabelText.contains(".") {
-            return
-        } else if operandLabelText == "0" {
-            // 문제 발생 - 숫자1-연산자1-".3"을 입력하면 0.3 대신 3으로 인식하고, 연산 메서드 비정상 작동
-            // 원인-전에 입력한 숫자1이 currentOperand에 들어있어서 생기는 오류 (개선 필요)
-            print("I'm here")
-            currentOperand = "0."
-            operandLabel.text! = "0."
-            isLastDot = true
-        } else {
-            currentOperand += "."
-            operandLabel.text! += "." // 왜 다른 라인과 다르게 옵셔널이 되지? (개선 필요)
-        }
     }
 }
