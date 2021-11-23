@@ -22,27 +22,31 @@ class CalculatorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         calculatorManager.delegate = self
+        
     }
+    
     //MARK: - Actions
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
         guard let operand = sender.currentTitle else {
             return
         }
-        updateOperandLabel(by: operand)
+        calculatorManager.tapNumberPad(operand)
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {
             return
         }
-        updateOperatorLabel(by: `operator`)
+        calculatorManager.tapOperatorButton(`operator`)
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
+        calculatorManager.tapDotButton()
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
+        calculatorManager.tapPlusMinusButton()
     }
     
     @IBAction func CEButtonTapped(_ sender: UIButton) {
