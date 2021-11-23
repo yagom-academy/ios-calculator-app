@@ -7,6 +7,8 @@ class ViewController: UIViewController {
     @IBOutlet weak private var expressionsStackView: UIStackView!
     @IBOutlet weak private var expressionScrollView: UIScrollView!
     
+    private var inputString: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -18,6 +20,7 @@ class ViewController: UIViewController {
         removeSubviewsFromStackView()
     }
     
+
 }
 
 // MARK: - IBAction
@@ -26,8 +29,39 @@ extension ViewController {
         guard let operand = sender.currentTitle else { return }
         
         changeOperandLabel(text: operand)
+        appendInputString(text: operand)
+        print(inputString)
+        
     }
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let `operator` = sender.currentTitle else { return }
+        guard let currentText = operandLabel.text else { return }
+        guard inputString.isEmpty == false else { return } //AC누른후 0상태에서 들어오는 연산자 막기용
+        
+        if currentText == "0" {
+            inputString.removeLast()
+            appendInputString(text: `operator`)
+            updateOperatorLabel(text: `operator`)
+            print(inputString)
+            return
+        }
+        
+        addExpressionStackView()
+        updateOperatorLabel(text: `operator`)
+        appendInputString(text: `operator`)
+        resetOperandLabel()
+        print(inputString)
+
+    }
+    
+    @IBAction func touchUpACButton(_ sender: UIButton) {
+        initializeView()
+        resetInputString()
+    }
+    
 }
+    
 
 // MARK: - View Method
 extension ViewController {
@@ -50,11 +84,23 @@ extension ViewController {
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = ""
+        operandLabel.text = "0"
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = "0"
+        operatorLabel.text = ""
+    }
+    
+    private func resetInputString() {
+        inputString = String()
+    }
+    
+    private func updateOperandsLabel(text operands: String) {
+        operandLabel.text = operands
+    }
+    
+    private func updateOperatorLabel(text operator: String) {
+        operatorLabel.text = `operator`
     }
     
     private func addExpressionStackView() {
@@ -91,5 +137,13 @@ extension ViewController {
         label.text = text
         
         return label
+    }
+}
+
+//MARK: - Method
+
+extension ViewController {
+    private func appendInputString(text input: String) {
+        inputString.append(input)
     }
 }
