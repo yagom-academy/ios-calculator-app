@@ -7,7 +7,13 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    @IBAction func touchUpAllClearButton(_ sender: Any) {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -22,12 +28,11 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchUpDotButton(_ sender: UIButton) {
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBAction func touchUpNumberButton(_ sender: UIButton) {
     }
-
+    
+    @IBAction func touchUpOperator(_ sender: UIButton) {
+    }
 
 }
 
