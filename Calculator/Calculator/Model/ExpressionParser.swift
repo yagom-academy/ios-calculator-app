@@ -21,7 +21,7 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         var result = [input]
         for target in Operator.allCases {
             result = componentsByOneOperator(from: result, with: target.operatorSign)
