@@ -11,6 +11,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var enQueueElements: [Element] = []
     private(set) var deQueueElements: [Element] = []
     
+    var isEmpty: Bool {
+        return enQueueElements.isEmpty && deQueueElements.isEmpty
+    }
+    
     init(_ enQueueElements: [Element]) {
         self.enQueueElements = enQueueElements
     }
