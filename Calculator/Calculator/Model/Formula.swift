@@ -12,11 +12,11 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        if operands.items == [] {
+        if operands.items.isEmpty {
             operands.appendItem(0)
         }
         
-        if operators.items == [] {
+        if operators.items.isEmpty {
             throw QueueError.emptyOperatorItem
         }
         
@@ -28,7 +28,7 @@ struct Formula {
             do {
                 let nextOperand = try operands.removeItem()
                 
-                if nextOperand == [] {
+                if nextOperand.isEmpty {
                     throw QueueError.emptyOperandItem
                 }
                 
