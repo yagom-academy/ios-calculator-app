@@ -7,6 +7,8 @@ class ViewController: UIViewController {
     @IBOutlet weak private var expressionsStackView: UIStackView!
     @IBOutlet weak private var expressionScrollView: UIScrollView!
     
+    private let numberFormatter = NumberFormatter()
+    
     private var inputString: String = ""
     private var hasSuffixOperator: Bool {
         return Operator.allCases.reduce(false) {
@@ -22,14 +24,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
+        initNumberFormatter()
     }
     
-    func initializeView() {
+    private func initializeView() {
         resetOperandLabel()
         resetOperatorLabel()
         removeSubviewsFromStackView()
     }
     
+    private func initNumberFormatter() {
+        numberFormatter.roundingMode = .ceiling
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+    }
 }
 
 // MARK: - IBAction
@@ -93,7 +101,7 @@ extension ViewController {
         
         var formula = ExpressionParser.parse(from: inputString)
         let result = formula.result()
-        operandLabel.text = String(result)
+        operandLabel.text = numberFormatter.string(for: result)
     }
 }
 
@@ -114,7 +122,13 @@ extension ViewController {
             currentText += text
         }
         
-        operandLabel.text = currentText
+        if hasDot == false {
+            let numberLabelText = removeComma(text: currentText)
+            let number = Double(numberLabelText)
+            operandLabel.text = numberFormatter.string(for: number)
+        } else {
+            operandLabel.text = currentText
+        }
     }
     
     private func insertDot() {
@@ -183,20 +197,7 @@ extension ViewController {
         
         return label
     }
-    
-    private func togglePlusMinus() -> String {
-        var currentText = operandLabel.text ?? "0"
-        let minusSign = "-"
         
-        if currentText.hasPrefix(minusSign) == true {
-            currentText = currentText.replacingOccurrences(of: minusSign , with: "")
-        } else {
-            currentText = minusSign + currentText
-        }
-        
-        return currentText
-    }
-    
     private func scrollToBottom(_ scroll: UIScrollView) {
         scroll.layoutIfNeeded()
         let offsetY = scroll.contentSize.height - scroll.bounds.size.height
@@ -210,10 +211,11 @@ extension ViewController {
 extension ViewController {
     private func appendOperandToInputString() {
         guard let numberText = operandLabel.text else { return }
+        let number = removeComma(text: numberText)
         
-        inputString.append(numberText)
+        inputString.append(number)
     }
-    
+        
     private func appendOperatorToInputString() {
         guard let `operator` = operatorLabel.text else { return }
         
@@ -222,5 +224,22 @@ extension ViewController {
         }
         
         inputString.append(`operator`)
+    }
+    
+    private func removeComma(text: String?) -> String {
+        return text?.replacingOccurrences(of: ",", with: "") ?? ""
+    }
+    
+    private func togglePlusMinus() -> String {
+        var currentText = operandLabel.text ?? "0"
+        let minusSign = "-"
+        
+        if currentText.hasPrefix(minusSign) == true {
+            currentText = currentText.replacingOccurrences(of: minusSign , with: "")
+        } else {
+            currentText = minusSign + currentText
+        }
+        
+        return currentText
     }
 }
