@@ -20,19 +20,25 @@ struct Formula {
             throw QueueError.emptyOperatorItem
         }
         
-        let firstOperand = operands.items[0]
+        guard let firstOperand = operands.items.first else {
+            throw QueueError.emptyOperandItem
+        }
         var operatorItems = operators.items
         var result = firstOperand
         
         repeat {
             do {
-                let nextOperand = try operands.removeItem()
+                let operandsItems = try operands.removeItem()
                 
-                if nextOperand.isEmpty {
+                guard let nextOperand = operandsItems.first else {
                     throw QueueError.emptyOperandItem
                 }
                 
-                result = try operatorItems[0].calculate(lhs: result, rhs: nextOperand[0])
+                guard let `operator` = operatorItems.first else {
+                    throw QueueError.emptyOperatorItem
+                }
+                
+                result = try `operator`.calculate(lhs: result, rhs: nextOperand)
             } catch let error {
                 throw error
             }
