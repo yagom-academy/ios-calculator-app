@@ -20,7 +20,7 @@ enum ExpressionParser {
         }
         
         let operators: [Character] = input.filter { (operatorInstance: Character) -> Bool in
-            return "+/*₋".contains(operatorInstance)
+            return "+÷×−".contains(operatorInstance)
         }
      
         operators.forEach { (operatorInstance: Character) -> () in

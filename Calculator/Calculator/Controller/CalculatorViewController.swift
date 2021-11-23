@@ -65,7 +65,6 @@ class CalculatorViewController: UIViewController {
         
         mathExpression += beforeOperator
         mathExpression += beforeNumber
-        print(mathExpression)
         var resultOfCalculate = ExpressionParser.parse(from: mathExpression)
         
         do {
@@ -76,7 +75,6 @@ class CalculatorViewController: UIViewController {
         } catch {
             print(error)
         }
-        print(mathExpression)
         mathExpression = ""
     }
     
@@ -108,7 +106,6 @@ class CalculatorViewController: UIViewController {
             updateCurrentInputLabel(from: historyStackExpression)
             currentExpression = ""
             currentInputOperandLabel.text = "0"
-            print(mathExpression)
         }
     }
     
@@ -130,6 +127,5 @@ class CalculatorViewController: UIViewController {
         currentInputOperatorLabel.text = ""
         currentExpression = ""
         mathExpression = ""
-        
     }
 }
