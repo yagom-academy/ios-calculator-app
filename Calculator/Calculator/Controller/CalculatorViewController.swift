@@ -11,6 +11,7 @@ class CalculatorViewController: UIViewController {
     
     var calculatorModel = Calculator()
     
+    @IBOutlet weak var formulaHistoryScrollView: UIScrollView!
     @IBOutlet weak var formulaHistoryStackView: UIStackView!
     @IBOutlet weak var currentInputOperandLabel: UILabel!
     @IBOutlet weak var currentInputOperatorLabel: UILabel!
@@ -40,6 +41,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
         addFormulaHistory()
+        formulaHistoryScrollView.scrollToBottom()
         calculatorModel.touchEqualButton()
         updateCurrentInputLabel()
     }
@@ -52,6 +54,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
         guard let operatorSymbol = sender.titleLabel?.text else { return }
         addFormulaHistory()
+        formulaHistoryScrollView.scrollToBottom()
         calculatorModel.touchOperatorButton(operatorSymbol)
         updateCurrentInputLabel()
     }
@@ -89,5 +92,13 @@ class CalculatorViewController: UIViewController {
         formulaHistoryStackView.arrangedSubviews.forEach { (view: UIView) -> () in
             view.removeFromSuperview()
         }
+    }
+}
+
+fileprivate extension UIScrollView {
+    func scrollToBottom() {
+        layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.height + contentInset.bottom)
+        setContentOffset(bottomOffset, animated: false)
     }
 }
