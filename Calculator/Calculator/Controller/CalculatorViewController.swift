@@ -171,7 +171,10 @@ class CalculatorViewController: UIViewController {
     
     private func scrollToBottom(_ scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: true)
+        scrollView.setContentOffset(
+            CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height),
+            animated: true
+        )
     }
     
 }

@@ -11,7 +11,6 @@ extension CalculatorViewController {
     
     func createFormulaStack() -> UIStackView {
         let formulaStack = FormulaStackView()
-        
         formulaStack.addArrangedSubview(operatorLabel)
         formulaStack.addArrangedSubview(operandsLabel)
         

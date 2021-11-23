@@ -33,7 +33,6 @@ extension LinkedList {
     }
     
     mutating func removeFirst() -> Element? {
-        
         let removedData = head?.data
         head = head?.next
       

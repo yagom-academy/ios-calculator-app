@@ -15,7 +15,7 @@ struct Formula {
         guard var result = operands.dequeue() else {
             throw CalculatorError.emptyQueue
         }
-    
+        
         var isContinue = true
         repeat {
             if let calculateOperator = operators.dequeue(),
@@ -24,10 +24,11 @@ struct Formula {
                     lhs: result,
                     rhs: calculateOperand)
             } else {
-              isContinue = false
+                isContinue = false
             }
         } while isContinue
         
         return result
     }
+    
 }

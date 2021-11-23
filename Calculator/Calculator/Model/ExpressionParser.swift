@@ -12,9 +12,9 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
+        
         let operandsArray = componentsByOperators(from: input).compactMap { Double($0) }
         let operatorsArray = input.compactMap { Operator(sign: $0) }
-        
         operandsArray.forEach { operands.enqueue($0) }
         operatorsArray.forEach { operators.enqueue($0) }
         
