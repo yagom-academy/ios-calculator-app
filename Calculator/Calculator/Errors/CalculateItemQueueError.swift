@@ -7,9 +7,11 @@
 
 import Foundation
 
-enum CalculateItemQueueError: String, CustomStringConvertible, Error {
+enum CalculateItemQueueError: String, Error {
     case queueIsEmpty = "큐가 비어있습니다."
-    
+}
+
+extension CalculateItemQueueError: CustomStringConvertible {
     var description: String {
         return rawValue
     }

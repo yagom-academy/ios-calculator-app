@@ -11,10 +11,8 @@ extension Double: CalculateItem {
     var presentableFormat: String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 0
-        numberFormatter.roundingMode = .up
+        numberFormatter.maximumFractionDigits = 20
+        
         guard let result = numberFormatter.string(from: NSNumber(value: self)) else {
             return nil
         }

@@ -118,7 +118,18 @@ extension CalculatorViewController {
     }
     
     private func update(_ label: UILabel, to data: String) {
-        label.text = data
+        do {
+            guard let presentableString = try data.convertNumberToPresentableFormat() else {
+                return
+            }
+            label.text = presentableString
+        } catch NumberFormatError.numberFormatFailed {
+            print(NumberFormatError.numberFormatFailed)
+        } catch NumberFormatError.typeCastingFailed {
+            print(NumberFormatError.typeCastingFailed)
+        } catch let error {
+            print(error)
+        }
     }
     
     private func autoScrollToBottom() {

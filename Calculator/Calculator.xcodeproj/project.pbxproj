@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2514146C274C7DE60086B0A8 /* CalculateItemQueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514146B274C7DE60086B0A8 /* CalculateItemQueueError.swift */; };
+		2514146E274CBA620086B0A8 /* NumberFormatError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514146D274CBA620086B0A8 /* NumberFormatError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		2514146B274C7DE60086B0A8 /* CalculateItemQueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemQueueError.swift; sourceTree = "<group>"; };
+		2514146D274CBA620086B0A8 /* NumberFormatError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				2514146B274C7DE60086B0A8 /* CalculateItemQueueError.swift */,
+				2514146D274CBA620086B0A8 /* NumberFormatError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			files = (
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
 				ED1A7A822740E12C002B36CE /* Formula.swift in Sources */,
+				2514146E274CBA620086B0A8 /* NumberFormatError.swift in Sources */,
 				ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */,
 				ED00CF4C273BA29A0081B9F3 /* CalculatorItemQueue.swift in Sources */,
 				ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */,
