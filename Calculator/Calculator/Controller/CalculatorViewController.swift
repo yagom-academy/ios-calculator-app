@@ -26,11 +26,16 @@ final class CalculatorViewController: UIViewController {
         return !isZero
     }
     
+    private var isZeroDuringInput: Bool {
+        return isZero && !historyStack.isEmpty
+    }
+    
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
         changeCurrentOperandData(to: "0")
+        changeCurrentOperatorData(to: "")
     }
     
     //MARK: - @IBAction Methods
@@ -38,22 +43,31 @@ final class CalculatorViewController: UIViewController {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
-        if isZero && numberPressedString != "." {
-            setCurrentOperand(to: "")
+        let newOperand = currentOperand.withoutCommas + numberPressedString
+        do {
+            guard let formattedOperand = try newOperand.convertNumberToPresentableFormat() else {
+                return
+            }
+            changeCurrentOperandData(to: formattedOperand)
+        } catch let error {
+            print(error)
         }
-        let newOperand = currentOperand + numberPressedString
-        changeCurrentOperandData(to: newOperand)
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard let operatorPressedString = sender.accessibilityIdentifier,
-              isNotZero else {
+        guard let operatorPressedString = sender.accessibilityIdentifier else {
             return
         }
-        refreshCalculateHistory(with: currentOperator, and: currentOperand)
-        changeCurrentOperatorData(to: operatorPressedString)
-        changeCurrentOperandData(to: "0")
-        autoScrollToBottom()
+        if isZeroDuringInput {
+            changeCurrentOperatorData(to: operatorPressedString)
+            return
+        }
+        if isNotZero {
+            refreshCalculateHistory(with: currentOperator, and: currentOperand)
+            changeCurrentOperatorData(to: operatorPressedString)
+            changeCurrentOperandData(to: "0")
+            autoScrollToBottom()
+        }
     }
     
     @IBAction private func touchUpCalculateButton(_ sender: Any) {
@@ -63,9 +77,8 @@ final class CalculatorViewController: UIViewController {
             return
         }
         clearCalculationHistory()
-        updateOperandLabel(currentOperandLabel, to: result)
+        update(currentOperandLabel, to: result)
         changeCurrentOperatorData(to: "")
-        //let newOperand = result.withoutCommas
         setCurrentOperand(to: result)
     }
     
@@ -81,7 +94,7 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func touchUpSignButton(_ sender: Any) {
         guard isNotZero,
-              let doubleOperand = Double(currentOperand),
+              let doubleOperand = Double(currentOperand.withoutCommas),
               doubleOperand != 0 else {
             return
         }
@@ -101,7 +114,7 @@ extension CalculatorViewController {
     
     private func changeCurrentOperandData(to newOperand: String) {
         setCurrentOperand(to: newOperand)
-        updateOperandLabel(currentOperandLabel, to: newOperand)
+        update(currentOperandLabel, to: newOperand)
     }
     
     private func setCurrentOperand(to newOperand: String) {
@@ -110,30 +123,15 @@ extension CalculatorViewController {
     
     private func changeCurrentOperatorData(to newOperator: String) {
         setCurrentOperator(to: newOperator)
-        updateOperatorLabel(currentOperatorLabel, to: newOperator)
+        update(currentOperatorLabel, to: newOperator)
     }
     
     private func setCurrentOperator(to newOperator: String) {
         currentOperator = newOperator
     }
     
-    private func updateOperatorLabel(_ label: UILabel, to data: String) {
+    private func update(_ label: UILabel, to data: String) {
         label.text = data
-    }
-    
-    private func updateOperandLabel(_ label: UILabel, to data: String) {
-        do {
-            guard let presentableString = try data.convertNumberToPresentableFormat() else {
-                return
-            }
-            label.text = presentableString
-        } catch NumberFormatError.numberFormatFailed {
-            print(NumberFormatError.numberFormatFailed)
-        } catch NumberFormatError.typeCastingFailed {
-            print(NumberFormatError.typeCastingFailed)
-        } catch let error {
-            print(error)
-        }
     }
     
     private func autoScrollToBottom() {
@@ -151,6 +149,7 @@ extension CalculatorViewController {
     private func calculateResult(from historyStack: [String]) -> String? {
         let equationString = historyStack.filter { $0 != "" }
             .joined()
+            .withoutCommas
         var formula = ExpressionParser.parse(from: equationString)
         let rawResult = getCalculationResult(from: &formula)
         guard let result = rawResult.presentableFormat else {
