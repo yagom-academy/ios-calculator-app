@@ -159,8 +159,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operandLabel.text = "0"
-        
+        resetOperand()
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
