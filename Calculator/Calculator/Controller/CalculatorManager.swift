@@ -97,7 +97,7 @@ struct CalculatorManager {
     }
     
     mutating func tapEqualButton() {
-        if hasCalculated || currentOperand == zero {
+        if hasCalculated {
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
