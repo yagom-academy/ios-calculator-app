@@ -201,11 +201,14 @@ extension ViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: false)
         
+        let (newOperator, newOperand) = convertOperatorAndNegativeOperand(operator: `operator`,
+                                                                          operand: operand)
+
         if !formulasStackViewIsEmpty {
-            operatorLabel.text = `operator`
+            operatorLabel.text = newOperator
         }
         
-        operandLabel.text = calculatorManager.format(of: operand)
+        operandLabel.text = calculatorManager.format(of: newOperand)
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
         
@@ -220,6 +223,23 @@ extension ViewController {
         
         formulasStackViewIsEmpty = false
         scrollToBottom()
+    }
+    
+    private func convertOperatorAndNegativeOperand(`operator`: String,
+                                                   operand: String) -> (String, String) {
+        var newOperand = operand
+        
+        if operand.hasPrefix("-") {
+            switch `operator` {
+            case "+":
+                return ("−", convertSign(from: &newOperand))
+            case "−":
+                return ("+", convertSign(from: &newOperand))
+            default:
+                return (`operator`, operand)
+            }
+        }
+        return (`operator`, operand)
     }
     
     private func convertSign(from operand: inout String) -> String {
