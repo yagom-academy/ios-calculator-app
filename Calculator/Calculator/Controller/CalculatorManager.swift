@@ -28,12 +28,14 @@ struct CalculatorManager {
     }
     private var currentOperator: String = "" {
         didSet {
+            if hasCalculated {
+                return
+            }
             delegate?.updateOperatorLabel(with: currentOperator)
         }
     }
     private var hasCalculated: Bool = false
     private var formulaExpression = String()
-    
     var delegate: CalculatorManagerDelegate?
     
     //MARK: - Method
@@ -44,12 +46,8 @@ struct CalculatorManager {
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
-        if hasCalculated {
-            return
-        }
         if currentOperand == "0" {
             currentOperator = newOperator
-            delegate?.addFormulaStackView(operand: currentOperand, operator: "")
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)

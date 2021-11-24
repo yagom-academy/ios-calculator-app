@@ -38,6 +38,7 @@ class CalculatorController: UIViewController {
             return
         }
         calculatorManager.tapOperatorButton(`operator`)
+        scrollToButtom(scrollView: formulaScrollView)
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
@@ -67,6 +68,12 @@ class CalculatorController: UIViewController {
         label.textColor = .white
         label.text = text
         return label
+    }
+    
+    private func scrollToButtom(scrollView: UIScrollView) {
+        scrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height)
+        scrollView.setContentOffset(bottomOffset, animated: false)
     }
 }
 
