@@ -8,10 +8,6 @@
 import Foundation
 
 extension String {
-    var withoutCommas: String {
-        return self.filter { $0 != "," }
-    }
-    
     var isZero: Bool {
         return self == "0"
     }
@@ -26,14 +22,19 @@ extension String {
             .compactMap { String($0) }
     }
     
+    private var numberFormatter: NumberFormatter {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        numberFormatter.maximumFractionDigits = 20
+        return numberFormatter
+    }
+    
     func convertNumberToPresentableFormat() throws -> String? {
         let inputOperand = self
         guard let operand = Double(inputOperand) else {
             throw NumberFormatError.typeCastingFailed
         }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
         
         if inputOperand.contains(".") {
             return try inputOperand.convertToPresentableWithDot()
@@ -43,20 +44,17 @@ extension String {
     }
     
     private func convertToPresentableWithDot() throws -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
-        let dotFront = self.split(with: ".")[0]
+        let splittedNumberArray = self.split(with: ".")
+        let dotFront = splittedNumberArray[0]
         guard let formattedDotFront = numberFormatter.string(for: Double(dotFront)) else {
             throw NumberFormatError.numberFormatFailed
         }
         
-        if self.split(with: ".").count == 1 {
+        if splittedNumberArray.count == 1 {
             return formattedDotFront + "."
         }
         
-        let dotBack = self.split(with: ".")[1]
+        let dotBack = splittedNumberArray[1]
         
         return formattedDotFront + "." + dotBack
     }

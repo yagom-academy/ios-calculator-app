@@ -18,4 +18,8 @@ extension Double: CalculateItem {
         }
         return result
     }
+    
+    var convertToString: String {
+        return String(self)
+    }
 }

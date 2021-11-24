@@ -14,9 +14,18 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     
     //MARK: - Properties
+    private var historyStack: [String] = []
     private var currentOperand = ""
     private var currentOperator = ""
-    private var historyStack: [String] = []
+    
+    private var currentOperandLabelText: String {
+        get {
+            return currentOperandLabel.text ?? "0"
+        }
+        set {
+            currentOperandLabel.text = newValue
+        }
+    }
     
     private var isZeroDuringInput: Bool {
         return currentOperand.isZero && !historyStack.isEmpty
@@ -26,8 +35,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
-        changeCurrentOperandData(to: "0")
-        changeCurrentOperatorData(to: "")
+        updateCurrentOperandValueAndLabel(to: "0")
+        updateCurrentOperatorValueAndLabel(to: "")
     }
     
     //MARK: - @IBAction Methods
@@ -35,12 +44,13 @@ final class CalculatorViewController: UIViewController {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
-        let newOperand = currentOperand.withoutCommas + numberPressedString
+        let newOperand = currentOperand + numberPressedString
         do {
             guard let formattedOperand = try newOperand.convertNumberToPresentableFormat() else {
                 return
             }
-            changeCurrentOperandData(to: formattedOperand)
+            updateCurrentOperandValue(to: newOperand)
+            update(currentOperandLabel, to: formattedOperand)
         } catch let error {
             print(error)
         }
@@ -51,48 +61,53 @@ final class CalculatorViewController: UIViewController {
             return
         }
         if isZeroDuringInput {
-            changeCurrentOperatorData(to: operatorPressedString)
+            updateCurrentOperatorValueAndLabel(to: operatorPressedString)
             return
         }
         if currentOperand.isNotZero {
-            refreshCalculateHistory(with: currentOperator, and: currentOperand)
-            changeCurrentOperatorData(to: operatorPressedString)
-            changeCurrentOperandData(to: "0")
+            updateHistoryStackView(with: currentOperator, and: currentOperandLabelText)
+            updateHistoryStack(with: currentOperator, and: currentOperand)
+            updateCurrentOperatorValueAndLabel(to: operatorPressedString)
+            updateCurrentOperandValueAndLabel(to: "0")
             autoScrollToBottom()
         }
     }
     
     @IBAction private func touchUpCalculateButton(_ sender: Any) {
-        refreshCalculateHistory(with: currentOperator, and: currentOperand)
-        setCurrentOperand(to: "0")
-        guard let result = calculateResult(from: historyStack) else {
-            return
+        updateHistoryStack(with: currentOperator, and: currentOperand)
+        updateHistoryStackView(with: currentOperator, and: currentOperandLabelText)
+        
+        let result = calculateResult(from: historyStack)
+        if let presentableResult = result.presentableFormat {
+            update(currentOperandLabel, to: presentableResult)
         }
-        update(currentOperandLabel, to: result)
-        changeCurrentOperatorData(to: "")
-        setCurrentOperand(to: result)
+        
+        updateCurrentOperandValue(to: result.convertToString)
+        updateCurrentOperatorValueAndLabel(to: "")
+        clearHistoryStack()
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
         clearCalculationHistory()
-        changeCurrentOperandData(to: "0")
-        changeCurrentOperatorData(to: "")
+        clearHistoryStack()
+        updateCurrentOperandValueAndLabel(to: "0")
+        updateCurrentOperatorValueAndLabel(to: "")
     }
     
     @IBAction private func touchUpCEButton(_ sender: Any) {
-        changeCurrentOperandData(to: "0")
+        updateCurrentOperandValueAndLabel(to: "0")
     }
     
     @IBAction private func touchUpSignButton(_ sender: Any) {
         guard currentOperand.isNotZero,
-              let doubleOperand = Double(currentOperand.withoutCommas),
+              let doubleOperand = Double(currentOperand),
               doubleOperand != 0 else {
             return
         }
         guard let newOperand = (doubleOperand * -1).presentableFormat else {
             return
         }
-        changeCurrentOperandData(to: newOperand)
+        updateCurrentOperandValueAndLabel(to: newOperand)
     }
 }
 
@@ -103,21 +118,21 @@ extension CalculatorViewController {
             .forEach { $0.removeFromSuperview() }
     }
     
-    private func changeCurrentOperandData(to newOperand: String) {
-        setCurrentOperand(to: newOperand)
+    private func updateCurrentOperandValueAndLabel(to newOperand: String) {
+        updateCurrentOperandValue(to: newOperand)
         update(currentOperandLabel, to: newOperand)
     }
     
-    private func setCurrentOperand(to newOperand: String) {
+    private func updateCurrentOperandValue(to newOperand: String) {
         currentOperand = newOperand
     }
     
-    private func changeCurrentOperatorData(to newOperator: String) {
-        setCurrentOperator(to: newOperator)
+    private func updateCurrentOperatorValueAndLabel(to newOperator: String) {
+        updateCurrentOperatorValue(to: newOperator)
         update(currentOperatorLabel, to: newOperator)
     }
     
-    private func setCurrentOperator(to newOperator: String) {
+    private func updateCurrentOperatorValue(to newOperator: String) {
         currentOperator = newOperator
     }
     
@@ -137,15 +152,11 @@ extension CalculatorViewController {
         }
     }
     
-    private func calculateResult(from historyStack: [String]) -> String? {
+    private func calculateResult(from historyStack: [String]) -> Double {
         let equationString = historyStack.filter { $0 != "" }
             .joined()
-            .withoutCommas
         var formula = ExpressionParser.parse(from: equationString)
-        let rawResult = getCalculationResult(from: &formula)
-        guard let result = rawResult.presentableFormat else {
-            return nil
-        }
+        let result = getCalculationResult(from: &formula)
         return result
     }
     
@@ -161,8 +172,7 @@ extension CalculatorViewController {
         return result
     }
     
-    private func refreshCalculateHistory(with currentOperator: String, and currentOperand: String) {
-        updateHistoryStackView(with: currentOperator, and: currentOperand)
+    private func updateHistoryStack(with currentOperator: String, and currentOperand: String) {
         historyStack.append(contentsOf: [currentOperator, currentOperand])
     }
     
@@ -172,8 +182,11 @@ extension CalculatorViewController {
     }
     
     private func clearCalculationHistory() {
-        historyStack.removeAll()
         removeFormulaStackViews()
+    }
+    
+    private func clearHistoryStack() {
+        historyStack.removeAll()
     }
     
     private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
