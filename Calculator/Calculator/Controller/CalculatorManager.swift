@@ -35,13 +35,9 @@ struct CalculatorManager {
     
     //MARK: - Method
     
-    mutating func tapNumberPad(_ operand: String) {
-        if currentOperand == "0" {
-            delegate?.updateOperandLabel(with: operand)
-            currentOperand = operand
-            return
-        }
-        currentOperand += operand
+    mutating func tapNumberPad(_ newOperand: String) {
+        let text = currentOperand == "0" ? newOperand : currentOperand + newOperand
+        currentOperand = text
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
