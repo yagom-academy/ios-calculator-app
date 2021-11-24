@@ -5,6 +5,7 @@
 // 
 
 import UIKit
+import OSLog
 
 class CalculatorViewController: UIViewController {
     //MARK: - Properties
@@ -116,7 +117,8 @@ extension CalculatorViewController {
     }
     
     @IBAction func touchUPEqualButton(_ sender: UIButton) {
-        if operatorLabel.text == "", hasCalculated {
+        if rawOperand == "" || hasCalculated {
+            os_log(.error, log: .error, "%@", "큐가 비어있습니다. 계산식을 추가해주세요")
             return
         }
         addCurrentFormulaStack()
