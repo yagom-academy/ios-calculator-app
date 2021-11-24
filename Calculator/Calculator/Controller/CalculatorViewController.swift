@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculationHistoryStackView: UIStackView!
     @IBOutlet weak var calculationHistoryScrollView: UIScrollView!
     
-    private var rawOperand = "0"
+    private var rawOperand = ""
     private var hasCalculated = false
     private var checkNumberOfInputs: Bool {
         if rawOperand.components(separatedBy: [",", "-"]).joined().count <= 14 {
@@ -86,15 +86,17 @@ extension CalculatorViewController {
     }
     
     @IBAction func touchUpTogglePlusMinusButton(_ sender: UIButton) {
-        guard rawOperand != "0", isNotCalculated else {
+        guard var currentOperand = operandLabel.text,
+                  currentOperand != "0", isNotCalculated else {
             return
         }
-        if rawOperand.contains("-") {
-            rawOperand.remove(at: rawOperand.startIndex)
+        if currentOperand.contains("-") {
+            currentOperand.removeFirst()
         } else {
-            rawOperand.insert("-", at: rawOperand.startIndex)
+            currentOperand = "-" + currentOperand
         }
-        operandLabel.text = rawOperand
+        rawOperand = currentOperand
+        operandLabel.text = currentOperand
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -128,8 +130,8 @@ extension CalculatorViewController {
     }
     
     func resetCalcurator() {
-        rawOperand = "0"
-        operandLabel.text = rawOperand
+        rawOperand = ""
+        operandLabel.text = "0"
         operatorLabel.text = ""
         clearAll()
     }
@@ -173,8 +175,8 @@ extension CalculatorViewController {
     }
     
     func clearEntry() {
-        rawOperand = "0"
-        operandLabel.text = rawOperand
+        rawOperand = ""
+        operandLabel.text = "0"
     }
     
     func changeNumberFormatter(insertedNumber: String) -> String {
