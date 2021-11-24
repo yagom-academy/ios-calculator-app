@@ -130,7 +130,9 @@ class ViewController: UIViewController {
         } catch CalculateError.emptyQueue {
             return
         } catch CalculateError.divideWithZero {
-            numberLabel.text = "NaN"
+            let nan = "NaN"
+            numberLabel.text = nan
+            resultNumber = nan
         } catch {
             print(error)
         }
