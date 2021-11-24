@@ -146,8 +146,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
-//        guard currentOperand != "0", currentOperand != "00" else { return } // 숫자 입력이 없거나 "0"인 상태에서는 연산자가 작동하지 않음 (주의-계산기 앱에서는 0도 작동함)
-        
         guard isCalculationOver == false else { return }
         
         guard let operatorSymbol: String = sender.titleLabel?.text,
@@ -175,8 +173,8 @@ class ViewController: UIViewController {
             return
         }
         
-        if isNotPreviousInputOperator { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
-            pushProcessLabelToStack() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        if isNotPreviousInputOperator {
+            pushProcessLabelToStack() 
         }
         
         updateLabelsWithResult(of: allProcess)
