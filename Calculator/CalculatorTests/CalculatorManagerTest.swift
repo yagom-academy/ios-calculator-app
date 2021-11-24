@@ -69,4 +69,12 @@ class CalculatorManagerTest: XCTestCase {
         XCTAssertEqual("-123,45", numb)
         XCTAssertEqual("-12345", calculatorManager.currentOperand)
     }
+    
+    func test_입력된_연산자와_피연산자가_수식에_제대로_추가되는지() {
+        var calculatorManager = CalculatorManager(currentOperand: "", currentOperator: "", expression: "", isCalculated: false)
+        let operand = "12"
+        let `operator` = "+"
+        calculatorManager.fetchExpression(operand: operand, operator: `operator`)
+        XCTAssertEqual("12+", calculatorManager.expression)
+    }
 }
