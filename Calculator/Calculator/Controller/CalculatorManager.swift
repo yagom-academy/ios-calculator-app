@@ -42,4 +42,7 @@ struct CalculatorManager {
         operand += input
     }
     
+    func isNumberOverMaximumExpression(number: Double) -> Bool {
+        return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
+    }
 }
