@@ -57,6 +57,7 @@ class CalculatorController: UIViewController {
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
+        calculatorManager.tapEqualButton()
     }
     
     //MARK: - Helper

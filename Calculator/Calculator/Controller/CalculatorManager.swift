@@ -20,6 +20,9 @@ struct CalculatorManager {
     
     private var currentOperand: String = "0" {
         didSet {
+            if hasCalculated {
+                return
+            }
             delegate?.updateOperandLabel(with: currentOperand)
         }
     }
@@ -41,15 +44,17 @@ struct CalculatorManager {
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
+        if hasCalculated {
+            return
+        }
         if currentOperand == "0" {
             currentOperator = newOperator
             return
         }
-        let text = currentOperator == "" ? "" : currentOperator
-        delegate?.addFormulaStackView(operand: currentOperand, operator: text)
-        currentOperator = newOperator
-        
-        formulaExpression += currentOperand + currentOperator
+        let text = currentOperator == "" ? "" : newOperator
+        currentOperator = text
+        addFormulaExpression()
+        delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         currentOperand = "0"
     }
     
@@ -58,10 +63,12 @@ struct CalculatorManager {
             return
         }
         currentOperand += "."
-        delegate?.updateOperandLabel(with: currentOperand)
     }
     
     mutating func tapPlusMinusButton() {
+        if currentOperand == "0" {
+            return
+        }
         if currentOperand.hasPrefix("-") {
             currentOperand = currentOperand.replacingOccurrences(of: "-", with: "")
         } else {
@@ -70,6 +77,10 @@ struct CalculatorManager {
     }
     
     mutating func tapCEButton() {
+        if hasCalculated {
+            reset()
+            delegate?.clearFormulaStackView()
+        }
         if currentOperand.count == 1 {
             currentOperand = "0"
             return
@@ -82,10 +93,36 @@ struct CalculatorManager {
         delegate?.clearFormulaStackView()
     }
     
+    mutating func tapEqualButton() {
+        if hasCalculated {
+            return
+        }
+        delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
+        addFormulaExpression()
+        calculateFormula()
+        hasCalculated = true
+        currentOperator = ""
+    }
+    
     private mutating func reset() {
+        hasCalculated = false
         currentOperand = "0"
         currentOperator = ""
-        hasCalculated = false
         formulaExpression = ""
+    }
+    
+    private mutating func addFormulaExpression() {
+        formulaExpression += currentOperand + currentOperator
+    }
+    
+    private mutating func calculateFormula() {
+        do {
+            var formula = ExpressionParser.parse(from: formulaExpression)
+            currentOperand = String(try formula.result())
+        } catch CalculatorError.divideByZero {
+            currentOperand = "NAN"
+        } catch {
+            print(error)
+        }
     }
 }
