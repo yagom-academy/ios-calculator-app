@@ -11,6 +11,7 @@ class CalculatorViewController: UIViewController {
     
     var calculatorModel = Calculator() {
         didSet {
+            removeAllFormulaHistory()
             updateCurrentInputLabel()
             addFormulaHistory()
         }
