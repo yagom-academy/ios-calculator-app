@@ -4,7 +4,7 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    let items: LinkedList<T> = LinkedList<T>(head: nil) // private(set) var에서 let으로 수정
+    let items: LinkedList<T> = LinkedList<T>(head: nil) // private(set) var에서 let으로 수정 (원인 파악 필요)
 
     func enqueue(value: T) {
         items.append(value: value)

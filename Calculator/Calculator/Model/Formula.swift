@@ -14,7 +14,7 @@ struct Formula {
                 throw CalculatorError.queueIsEmpty
             }
             
-            return try $1.calculate(lhs: $0, rhs: nextOperand) // TODO: do-catch 구문 필요
+            return try $1.calculate(lhs: $0, rhs: nextOperand)
         }
         
         return result

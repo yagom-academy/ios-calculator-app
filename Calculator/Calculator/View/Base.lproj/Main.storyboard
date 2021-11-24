@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv" userLabel="History Scroll View">
                                 <rect key="frame" x="16" y="219" width="358" height="44.666666666666686"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf" userLabel="History Vertical Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="44.666666666666664"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-Ld-ZGi">
@@ -118,7 +118,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpDivideOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1ED-Py-U9P"/>
+                                                    <action selector="touchUpOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="noS-qO-kfu"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -134,7 +134,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp7Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="22s-kl-B4U"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mj7-fa-oLL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
@@ -145,7 +145,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp8Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z8F-L5-UpM"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZOK-CB-pPG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
@@ -156,7 +156,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp9Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nww-oM-arg"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YIj-Xx-33q"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
@@ -167,7 +167,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpMultiplyOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a33-6U-6Sa"/>
+                                                    <action selector="touchUpOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XI6-EJ-xbK"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -183,7 +183,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp4Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4kj-wt-4oi"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MSc-3f-EK4"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
@@ -194,7 +194,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp5Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k3W-Gx-ecQ"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tap-jq-LCs"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -205,7 +205,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp6Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uwC-Sz-FIX"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jdb-wb-LF5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
@@ -216,7 +216,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpSubtractOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dbf-Lb-Mim"/>
+                                                    <action selector="touchUpOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vjJ-8a-jYx"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -232,7 +232,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp1Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9V9-I4-Mg1"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gSz-4q-h8D"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
@@ -243,7 +243,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp2Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xnG-kf-Ue2"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yc0-WW-wIN"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -254,7 +254,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp3Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Aj-xU-HDE"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eld-Kc-308"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
@@ -265,7 +265,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpAddOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RAo-Q3-Mgs"/>
+                                                    <action selector="touchUpOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P98-mJ-jy9"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -281,7 +281,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp0Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B5p-Am-ktF"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z5b-8Z-2qS"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
@@ -292,7 +292,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUp00Btn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gXt-sB-UFs"/>
+                                                    <action selector="touchUpOperandBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mWT-pU-5UD"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -303,7 +303,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpDotBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d6y-o9-R0n"/>
+                                                    <action selector="touchUpDotBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fjQ-fL-lyq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -324,7 +324,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DC3-Ia-6L7">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DC3-Ia-6L7" userLabel="ResultStackView">
                                 <rect key="frame" x="16" y="283.66666666666669" width="358" height="37"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2pK-nQ-lxl">
@@ -363,9 +363,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="processScrollView" destination="XRe-QE-UJf" id="9P1-Zt-9He"/>
-                        <outlet property="resultLabel" destination="Lwz-OF-XHD" id="TfL-4J-MQm"/>
-                        <outlet property="signLabel" destination="HPC-iy-qdm" id="yzD-v4-uYh"/>
+                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="lWD-Wy-0rf"/>
+                        <outlet property="historyVerticalStackView" destination="XRe-QE-UJf" id="9P1-Zt-9He"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="TfL-4J-MQm"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="yzD-v4-uYh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
