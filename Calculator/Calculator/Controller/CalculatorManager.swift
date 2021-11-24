@@ -12,6 +12,9 @@ struct CalculatorManager {
     private(set) var currentOperator: String = ""
     private(set) var expression: String = ""
     private(set) var isCalculated = false
+    var isOperandContainsDot: Bool {
+        return currentOperand.contains(".")
+    }
     
     private let maximumDigitsOfDoubleExpression = 16
     private let limitedDigitsOfExpression = 20
