@@ -12,6 +12,8 @@ struct CalculatorManager {
     private(set) var `operator`: String = ""
     private(set) var expression: String = ""
     private(set) var isCalculated = false
+    private let maximumDigitsOfDoubleExpression = 16
+    private let limitedDigitsOfExpression = 20
     
     mutating func resetOperand() {
         operand = "0"
@@ -22,4 +24,22 @@ struct CalculatorManager {
         expression = ""
         isCalculated = false
     }
+    
+    mutating func fetchOperand(input: String) {
+        let digitsCount = operand.filter { $0.isNumber }.count
+        
+        guard digitsCount < limitedDigitsOfExpression else {
+            return
+        }
+        
+        if operand == "0" && !["0","00"].contains(input) {
+            operand = input
+            return
+        } else if operand == "0" && ["0","00"].contains(input) {
+            return
+        }
+        
+        operand += input
+    }
+    
 }
