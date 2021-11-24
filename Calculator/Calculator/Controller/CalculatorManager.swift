@@ -76,6 +76,14 @@ struct CalculatorManager {
         
         return (integerDigits, fractionDigits)
     }
+    
+    func toggleOperandSign(from operand: inout String) {
+        if operand.contains("-") {
+            operand.remove(at: operand.startIndex)
+        } else {
+            operand.insert("-", at: operand.startIndex)
+        }
+    }
 }
 
 extension CalculatorManager {
