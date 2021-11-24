@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     private var resultNumber = ""
     private var entireFormula = ""
     
-    private var numberFormatter: NumberFormatter = NumberFormatter()
+    private let numberFormatter: NumberFormatter = NumberFormatter()
     
     private var operatorsLabel: UILabel {
         let operatorsLabel = UILabel()
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         initializeNumberLabel()
         initializeSymbolLabel()
-        initializeNumberFormatter(of: numberFormatter)
+        initializeNumberFormatter()
         recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
@@ -159,9 +159,9 @@ class ViewController: UIViewController {
         symbolLabel.text?.removeAll()
     }
     
-    private func initializeNumberFormatter(of formatter: NumberFormatter) {
-        formatter.numberStyle = .decimal
-        formatter.maximumSignificantDigits = 20
+    private func initializeNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     private func removeComma(of string: String) -> String {
