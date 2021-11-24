@@ -8,14 +8,14 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
 
-    @IBOutlet weak var inputNumLabel: UILabel!
+    @IBOutlet weak var inputNumberLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet weak var formulaStackView: UIStackView!
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     
     private var entireStringFormula: String = ""
     private let negativeSign = "-"
-    private let initialNumLabel = "0"
+    private let initialNumberLabel = "0"
     private let initialStringValue = ""
     
     private let numberFormatter = NumberFormatter()
@@ -28,7 +28,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func initailizeLabel() {
-        inputNumLabel.text = initialNumLabel
+        inputNumberLabel.text = initialNumberLabel
         inputOperatorLabel.text = initialStringValue
     }
     
@@ -45,60 +45,60 @@ class CalculatorViewController: UIViewController {
     // MARK: - 숫자 버튼 입력
     
     @IBAction private func tapNumberPad(_ sender: UIButton) {
-        guard let currentNumLabel = inputNumLabel.text,
+        guard let currentNumberLabel = inputNumberLabel.text,
              let inputNum = sender.currentTitle else { return }
         
-        if currentNumLabel == initialNumLabel {
-            inputNumLabel.text = inputNum
+        if currentNumberLabel == initialNumberLabel {
+            inputNumberLabel.text = inputNum
         } else {
-            updateInputNumLabel(currentNumLabel, with: inputNum)
+            updateInputNumLabel(currentNumberLabel, with: inputNum)
         }
     }
     
-    @IBAction private func tapDotBtn(_ sender: UIButton) {
-        if let currentNumLabel = inputNumLabel.text,
+    @IBAction private func tapDotButton(_ sender: UIButton) {
+        if let currentNumberLabel = inputNumberLabel.text,
           let inputSign = sender.currentTitle,
-         currentNumLabel.contains(".") == false {
-            inputNumLabel.text = currentNumLabel + inputSign
+         currentNumberLabel.contains(".") == false {
+            inputNumberLabel.text = currentNumberLabel + inputSign
         }
     }
     
-    @IBAction private func tapDoubleZeroBtn(_ sender: UIButton) {
-        if let currentNumLabel = inputNumLabel.text,
+    @IBAction private func tapDoubleZeroButton(_ sender: UIButton) {
+        if let currentNumberLabel = inputNumberLabel.text,
           let inputNum = sender.currentTitle,
-         currentNumLabel != initialNumLabel {
-            updateInputNumLabel(currentNumLabel, with: inputNum)
+         currentNumberLabel != initialNumberLabel {
+            updateInputNumLabel(currentNumberLabel, with: inputNum)
         }
     }
     
     private func updateInputNumLabel(_ currentNum: String, with input: String) {
         guard currentNum.contains(".") == false else {
-            inputNumLabel.text = currentNum + input
+            inputNumberLabel.text = currentNum + input
             return
         }
         
         let numWithoutComma = currentNum.replacingOccurrences(of: ",", with: "")
         let updatedNum = numWithoutComma + input
         if let convertedNum = numberFormatter.string(for: Double(updatedNum)) {
-            inputNumLabel.text = convertedNum
+            inputNumberLabel.text = convertedNum
         }
     }
     
     // MARK: - 연산자 버튼 입력
     
-    @IBAction private func tapOperatorBtn(_ sender: UIButton) {
-        guard let currentNumLabel = inputNumLabel.text,
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
+        guard let currentNumberLabel = inputNumberLabel.text,
              let inputOperator = sender.currentTitle else { return }
 
         if formulaStackView.arrangedSubviews.isEmpty,
-          currentNumLabel == initialNumLabel {
+          currentNumberLabel == initialNumberLabel {
             inputOperatorLabel.text = initialStringValue
-        } else if currentNumLabel == initialNumLabel {
+        } else if currentNumberLabel == initialNumberLabel {
             changeOperatorLabel(with: inputOperator)
         } else {
             addFormulaStackView()
             changeOperatorLabel(with: inputOperator)
-            inputNumLabel.text = initialNumLabel
+            inputNumberLabel.text = initialNumberLabel
         }
     }
     
@@ -114,44 +114,44 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addStringFormula() {
-        guard let inputNum = inputNumLabel.text,
+        guard let inputNumber = inputNumberLabel.text,
              let inputOperator = inputOperatorLabel.text else { return }
         
-        let inputNumWithoutComma = inputNum.replacingOccurrences(of: ",", with: "")
-        entireStringFormula += (inputOperator + inputNumWithoutComma)
+        let inputNumberWithoutComma = inputNumber.replacingOccurrences(of: ",", with: "")
+        entireStringFormula += (inputOperator + inputNumberWithoutComma)
     }
     
     // MARK: - 특수 버튼 입력
     
-    @IBAction private func tapACBtn(_ sender: UIButton) {
+    @IBAction private func tapACButton(_ sender: UIButton) {
         initailizeLabel()
         entireStringFormula = initialStringValue
         initializeFormulaStackView()
     }
     
-    @IBAction private func tapCEBtn(_ sender: UIButton) {
-        inputNumLabel.text = initialNumLabel
+    @IBAction private func tapCEButton(_ sender: UIButton) {
+        inputNumberLabel.text = initialNumberLabel
     }
     
-    @IBAction private func tapPositiveNegativeBtn(_ sender: UIButton) {
-        guard let currentNum = inputNumLabel.text,
-             currentNum != initialNumLabel else { return }
+    @IBAction private func tapPositiveNegativeButton(_ sender: UIButton) {
+        guard let currentNum = inputNumberLabel.text,
+             currentNum != initialNumberLabel else { return }
         
         if currentNum.hasPrefix(negativeSign) {
-            inputNumLabel.text = String(currentNum.dropFirst())
+            inputNumberLabel.text = String(currentNum.dropFirst())
         } else {
-            inputNumLabel.text = negativeSign + currentNum
+            inputNumberLabel.text = negativeSign + currentNum
         }
     }
     
-    @IBAction private func tapResultBtn(_ sender: UIButton) {
+    @IBAction private func tapResultButton(_ sender: UIButton) {
         guard entireStringFormula != initialStringValue else { return }
         
         addFormulaStackView()
         do {
             var formula = ExpressionParser.parse(from: entireStringFormula)
             let result = try formula.result()
-            updateNumLabel(with: Decimal(result))
+            updateNumberLabel(with: Decimal(result))
             inputOperatorLabel.text = initialStringValue
             entireStringFormula = initialStringValue
         } catch CalculatorError.emptyQueue {
@@ -161,9 +161,9 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func updateNumLabel(with result: Decimal) {
-        if let convertedNum = numberFormatter.string(for: result) {
-            inputNumLabel.text = convertedNum
+    private func updateNumberLabel(with result: Decimal) {
+        if let convertedNumber = numberFormatter.string(for: result) {
+            inputNumberLabel.text = convertedNumber
         }
     }
     

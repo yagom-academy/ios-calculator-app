@@ -26,7 +26,7 @@ extension CalculatorViewController {
     
     private var operandsLabel: UILabel {
         let operandsLabel = FormulaLabel()
-        operandsLabel.text = inputNumLabel.text
+        operandsLabel.text = inputNumberLabel.text
         
         return operandsLabel
     }
