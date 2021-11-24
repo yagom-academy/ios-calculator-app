@@ -42,25 +42,25 @@ struct CalculatorManager {
     
     mutating func tapNumberPad(_ newOperand: String) {
         let text = currentOperand == "0" ? newOperand : currentOperand + newOperand
-        currentOperand = text
+        setOperand(by: text)
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
         if currentOperand == "0" {
-            currentOperator = newOperator
+            setOperator(by: newOperator)
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
-        currentOperator = newOperator
+        setOperator(by: newOperator)
         addFormulaExpression()
-        currentOperand = "0"
+        setOperand(by: "0")
     }
     
     mutating func tapDotButton() {
         if currentOperand.contains(".") {
             return
         }
-        currentOperand += "."
+        setOperand(by: currentOperand + ".")
     }
     
     mutating func tapPlusMinusButton() {
@@ -70,7 +70,7 @@ struct CalculatorManager {
         if currentOperand.hasPrefix("-") {
             currentOperand = currentOperand.replacingOccurrences(of: "-", with: "")
         } else {
-            currentOperand = "-" + currentOperand
+            setOperand(by: "-" + currentOperand)
         }
     }
     
@@ -98,8 +98,16 @@ struct CalculatorManager {
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         addFormulaExpression()
         calculateFormula()
-        currentOperator = ""
+        setOperator(by: "")
         hasCalculated = true
+    }
+    
+    private mutating func setOperand(by value: String) {
+        currentOperand = value
+    }
+    
+    private mutating func setOperator(by value: String) {
+        currentOperator = value
     }
     
     private mutating func reset() {
