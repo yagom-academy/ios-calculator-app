@@ -120,7 +120,6 @@ extension CalculatorViewController {
     func startNewCalculation() {
         hasCalculated = false
         clearAll()
-        operandLabel.text = operandLabel.text
         addCurrentFormulaStack()
     }
     
