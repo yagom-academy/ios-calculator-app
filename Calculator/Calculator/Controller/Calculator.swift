@@ -49,6 +49,10 @@ struct Calculator {
     }
     
     mutating func inputOperator(_ operatorSymbole: String) {
+        if currentInputOperand == LabelContents.notANumber {
+            resetAllExpression()
+        }
+        
         if isEvaluated {
             let newOperand = currentInputOperand
             resetAllExpression()
