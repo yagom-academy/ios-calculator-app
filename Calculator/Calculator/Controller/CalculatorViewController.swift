@@ -78,7 +78,7 @@ class CalculatorViewController: UIViewController {
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
             addStackViewLabel()
-            resetOperatorLable()
+            resetOperatorLabel()
             var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
             let result = parsedFormula.result()
             operandLabel.text = numberFormatter.string(for: result)
@@ -102,7 +102,7 @@ class CalculatorViewController: UIViewController {
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
             addStackViewLabel()
-            resetOperandLable()
+            resetOperandLabel()
             operatorLabel.text = button.currentTitle
         case false:
             operatorLabel.text = button.currentTitle
@@ -143,13 +143,13 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func allClearButtonDidTouchUp(_ button: UIButton) {
         resetSavedCalculatorItems()
-        resetOperandLable()
-        resetOperatorLable()
+        resetOperandLabel()
+        resetOperatorLabel()
         clearAllStackViewLabel()
     }
     
     @IBAction func clearEntryButtonDidTouchUp(_ button: UIButton) {
-        resetOperandLable()
+        resetOperandLabel()
     }
     
     @IBAction func occurHapticFeedback() {
@@ -170,11 +170,11 @@ class CalculatorViewController: UIViewController {
         savedCalculatorItems = emptyString
     }
     
-    private func resetOperandLable() {
+    private func resetOperandLabel() {
         operandLabel.text = defaultOperandLabel
     }
     
-    private func resetOperatorLable() {
+    private func resetOperatorLabel() {
         operatorLabel.text = emptyString
     }
 }
