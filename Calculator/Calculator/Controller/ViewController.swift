@@ -8,6 +8,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var calculatorScrollView: UIScrollView!
     
     private var inputNumber = ""
+    private var resultNumber = ""
     private var entireFormula = ""
     
     private var numberFormatter: NumberFormatter = NumberFormatter()
@@ -76,6 +77,9 @@ class ViewController: UIViewController {
         if numberLabel.text == "0" {
             symbolLabel.text = sender.currentTitle
             return
+        } else if resultNumber == numberLabel.text {
+            symbolLabel.text = sender.currentTitle
+            entireFormula += symbolLabel.text ?? ""
         } else {
             recordingStackView.addArrangedSubview(formulaStackView)
             symbolLabel.text = sender.currentTitle
@@ -115,6 +119,7 @@ class ViewController: UIViewController {
     @IBAction private func ACButtonPressed(_ sender: UIButton) {
         recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         entireFormula.removeAll()
+        resultNumber.removeAll()
         initializeNumberLabel()
         initializeSymbolLabel()
     }
@@ -133,6 +138,7 @@ class ViewController: UIViewController {
             initializeSymbolLabel()
             let result = try formula.result()
             numberLabel.text = numberFormatter.string(for: result)
+            resultNumber = numberLabel.text ?? ""
         } catch CalculateError.emptyQueue {
             return
         } catch CalculateError.divideWithZero {
