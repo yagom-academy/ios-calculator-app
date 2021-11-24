@@ -68,7 +68,7 @@ struct CalculatorManager {
     }
     
     mutating func tapPlusMinusButton() {
-        guard currentOperand != zero else {
+        if currentOperand == zero {
             return
         }
         let minusSign = String(Operator.subtract.rawValue)
@@ -80,7 +80,7 @@ struct CalculatorManager {
     }
     
     mutating func tapCEButton() {
-       guard hasCalculated == false else {
+        if hasCalculated {
            reset()
            return
         }
@@ -116,8 +116,8 @@ struct CalculatorManager {
     
     private mutating func reset() {
         hasCalculated = false
-        currentOperand = zero
-        currentOperator = emptyString
+        setOperand(value: zero)
+        setOperator(value: emptyString)
         formulaExpression = emptyString
         delegate?.clearFormulaStackView()
     }
