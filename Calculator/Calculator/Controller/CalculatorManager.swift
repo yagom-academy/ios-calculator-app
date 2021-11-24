@@ -18,6 +18,8 @@ struct CalculatorManager {
     
     //MARK: - Properties
     
+    var delegate: CalculatorManagerDelegate?
+    
     private var currentOperand: String = "0" {
         didSet {
             if hasCalculated {
@@ -34,53 +36,57 @@ struct CalculatorManager {
             delegate?.updateOperatorLabel(with: currentOperator)
         }
     }
-    private var hasCalculated: Bool = false
+    private var hasCalculated = false
     private var formulaExpression = String()
-    var delegate: CalculatorManagerDelegate?
+    private let zero = "0"
+    private let emptyString = ""
+    private let notANumber = "Nan"
     
     //MARK: - Method
     
     mutating func tapNumberPad(_ newOperand: String) {
-        let text = currentOperand == "0" ? newOperand : currentOperand + newOperand
-        setOperand(by: text)
+        let operand = currentOperand == zero ? newOperand : currentOperand + newOperand
+        setOperand(by: operand)
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
-        if currentOperand == "0" {
+        if currentOperand == zero {
             setOperator(by: newOperator)
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         setOperator(by: newOperator)
         addFormulaExpression()
-        setOperand(by: "0")
+        setOperand(by: zero)
     }
     
     mutating func tapDotButton() {
-        if currentOperand.contains(".") {
+        let dotSign = "."
+        if currentOperand.contains(dotSign) {
             return
         }
-        setOperand(by: currentOperand + ".")
+        setOperand(by: currentOperand + dotSign)
     }
     
     mutating func tapPlusMinusButton() {
-        if currentOperand == "0" {
+        guard currentOperand != zero else {
             return
         }
-        if currentOperand.hasPrefix("-") {
-            currentOperand = currentOperand.replacingOccurrences(of: "-", with: "")
+        let minusSign = String(Operator.subtract.rawValue)
+        if currentOperand.hasPrefix(minusSign) {
+            setOperand(by: currentOperand.replacingOccurrences(of: minusSign, with: emptyString))
         } else {
-            setOperand(by: "-" + currentOperand)
+            setOperand(by: minusSign + currentOperand)
         }
     }
     
     mutating func tapCEButton() {
-        if hasCalculated {
-            reset()
-            delegate?.clearFormulaStackView()
+       guard hasCalculated == false else {
+           reset()
+           return
         }
         if currentOperand.count == 1 {
-            currentOperand = "0"
+            setOperand(by: zero)
             return
         }
         currentOperand.removeLast()
@@ -88,17 +94,16 @@ struct CalculatorManager {
     
     mutating func tapACButton() {
         reset()
-        delegate?.clearFormulaStackView()
     }
     
     mutating func tapEqualButton() {
-        if hasCalculated || currentOperand == "0" {
+        if hasCalculated || currentOperand == zero {
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         addFormulaExpression()
         calculateFormula()
-        setOperator(by: "")
+        setOperator(by: emptyString)
         hasCalculated = true
     }
     
@@ -112,9 +117,10 @@ struct CalculatorManager {
     
     private mutating func reset() {
         hasCalculated = false
-        currentOperand = "0"
-        currentOperator = ""
-        formulaExpression = ""
+        currentOperand = zero
+        currentOperator = emptyString
+        formulaExpression = emptyString
+        delegate?.clearFormulaStackView()
     }
     
     private mutating func addFormulaExpression() {
@@ -124,12 +130,13 @@ struct CalculatorManager {
     private mutating func calculateFormula() {
         do {
             var formula = ExpressionParser.parse(from: formulaExpression)
-            guard let formattedResult = setNumberFormat(for: try formula.result()) else {
+            let result = try formula.result()
+            guard let formattedResult = setNumberFormat(for: result) else {
                 return
             }
-            currentOperand = formattedResult
+            setOperand(by: formattedResult)
         } catch CalculatorError.divideByZero {
-            currentOperand = "NaN"
+            setOperand(by: notANumber)
         } catch {
             print(error)
         }
