@@ -96,8 +96,7 @@ class CalculatorViewController: UIViewController {
     private func convertFormattedNumber(_ number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 10
-        numberFormatter.maximumIntegerDigits = 10
+        numberFormatter.maximumFractionDigits = 15
         numberFormatter.roundingMode = .halfUp
         
         guard let convertedNumber = numberFormatter.string(for: Double(number)) else {

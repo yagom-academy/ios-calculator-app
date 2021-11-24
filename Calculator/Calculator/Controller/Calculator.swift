@@ -8,7 +8,11 @@
 import Foundation
 
 struct Calculator {
-    private(set) var currentInputOperand = LabelContents.defaultOperand
+    private(set) var currentInputOperand = LabelContents.defaultOperand {
+        didSet {
+            isOverMaximumDigit()
+        }
+    }
     private(set) var currentInputOperator = LabelContents.emptyString
     private var isEvaluated = false
     private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
@@ -125,6 +129,12 @@ struct Calculator {
         updateCurrentInput()
         mathExpression = []
         isEvaluated = false
+    }
+    
+    mutating func isOverMaximumDigit() {
+        if currentInputOperand.count >= 15 {
+            currentInputOperand.removeLast()
+        }
     }
     
     private struct LabelContents {
