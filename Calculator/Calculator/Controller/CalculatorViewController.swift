@@ -8,10 +8,10 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
 
-    @IBOutlet weak var inputNumberLabel: UILabel!
-    @IBOutlet weak var inputOperatorLabel: UILabel!
-    @IBOutlet weak var formulaStackView: UIStackView!
-    @IBOutlet weak var calculatorScrollView: UIScrollView!
+    @IBOutlet private weak var inputNumberLabel: UILabel!
+    @IBOutlet private weak var inputOperatorLabel: UILabel!
+    @IBOutlet private weak var formulaStackView: UIStackView!
+    @IBOutlet private weak var calculatorScrollView: UIScrollView!
     
     private var entireStringFormula: String = ""
     private let negativeSign = "-"
@@ -51,7 +51,7 @@ class CalculatorViewController: UIViewController {
         if currentNumberLabel == initialNumberLabel {
             inputNumberLabel.text = inputNum
         } else {
-            updateInputNumLabel(currentNumberLabel, with: inputNum)
+            updateInputNumberLabel(currentNumberLabel, with: inputNum)
         }
     }
     
@@ -67,20 +67,20 @@ class CalculatorViewController: UIViewController {
         if let currentNumberLabel = inputNumberLabel.text,
           let inputNum = sender.currentTitle,
          currentNumberLabel != initialNumberLabel {
-            updateInputNumLabel(currentNumberLabel, with: inputNum)
+            updateInputNumberLabel(currentNumberLabel, with: inputNum)
         }
     }
     
-    private func updateInputNumLabel(_ currentNum: String, with input: String) {
-        guard currentNum.contains(".") == false else {
-            inputNumberLabel.text = currentNum + input
+    private func updateInputNumberLabel(_ currentNumber: String, with input: String) {
+        guard currentNumber.contains(".") == false else {
+            inputNumberLabel.text = currentNumber + input
             return
         }
         
-        let numWithoutComma = currentNum.replacingOccurrences(of: ",", with: "")
-        let updatedNum = numWithoutComma + input
-        if let convertedNum = numberFormatter.string(for: Double(updatedNum)) {
-            inputNumberLabel.text = convertedNum
+        let numberWithoutComma = currentNumber.replacingOccurrences(of: ",", with: "")
+        let updatedNumber = numberWithoutComma + input
+        if let convertedNumber = numberFormatter.string(for: Double(updatedNumber)) {
+            inputNumberLabel.text = convertedNumber
         }
     }
     

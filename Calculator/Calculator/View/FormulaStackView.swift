@@ -19,7 +19,7 @@ class FormulaStackView: UIStackView {
         initializeLabel()
     }
     
-    func initializeLabel() {
+    private func initializeLabel() {
         axis = .horizontal
         alignment = .fill
         distribution = .fill
