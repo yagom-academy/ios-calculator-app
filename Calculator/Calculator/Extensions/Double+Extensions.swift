@@ -9,13 +9,11 @@ import Foundation
 
 extension Double: CalculateItem {
     var presentableFormat: String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
+        let numberFormatter = NumberFormatGenerator.createNumberFormatter()
         guard let result = numberFormatter.string(from: NSNumber(value: self)) else {
             return nil
         }
+        
         return result
     }
     

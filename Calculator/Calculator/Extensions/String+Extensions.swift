@@ -21,15 +21,7 @@ extension String {
             .split(separator: target)
             .compactMap { String($0) }
     }
-    
-    private var numberFormatter: NumberFormatter {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
-        numberFormatter.maximumFractionDigits = 20
-        return numberFormatter
-    }
-    
+
     func convertNumberToPresentableFormat() throws -> String? {
         let inputOperand = self
         guard let operand = Double(inputOperand) else {
@@ -39,11 +31,13 @@ extension String {
         if inputOperand.contains(".") {
             return try inputOperand.convertToPresentableWithDot()
         }
+        let numberFormatter = NumberFormatGenerator.createNumberFormatter()
         
         return numberFormatter.string(for: operand)
     }
     
     private func convertToPresentableWithDot() throws -> String {
+        let numberFormatter = NumberFormatGenerator.createNumberFormatter()
         let splittedNumberArray = self.split(with: ".")
         let dotFront = splittedNumberArray[0]
         guard let formattedDotFront = numberFormatter.string(for: Double(dotFront)) else {

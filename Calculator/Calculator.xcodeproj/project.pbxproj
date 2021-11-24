@@ -32,6 +32,7 @@
 		ED1A7A89274285A9002B36CE /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A88274285A9002B36CE /* String+Extensions.swift */; };
 		ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */; };
 		ED1A7A9027429023002B36CE /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8F27429023002B36CE /* CalculateItem.swift */; };
+		ED28F047274E4A7E000EA57D /* NumberFormatGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		ED1A7A88274285A9002B36CE /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		ED1A7A8F27429023002B36CE /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
+		ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+				ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				2514146E274CBA620086B0A8 /* NumberFormatError.swift in Sources */,
 				ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */,
 				ED00CF4C273BA29A0081B9F3 /* CalculatorItemQueue.swift in Sources */,
+				ED28F047274E4A7E000EA57D /* NumberFormatGenerator.swift in Sources */,
 				ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */,
 				ED1A7A89274285A9002B36CE /* String+Extensions.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
