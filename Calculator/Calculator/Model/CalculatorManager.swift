@@ -33,7 +33,6 @@ struct CalculatorManager {
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.roundingMode = .halfUp
         
-        
         guard let formattedNumber = numberFormatter
                 .string(from: NSNumber(value: number)) else {
             return "0"
