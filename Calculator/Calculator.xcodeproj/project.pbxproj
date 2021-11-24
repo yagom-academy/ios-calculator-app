@@ -152,8 +152,8 @@
 				C9F7BD04273CFD1E0076ED33 /* FormulaTest.swift */,
 				C917CD51273E06ED00E0F939 /* StringTest.swift */,
 				C917CD56273E09BA00E0F939 /* ExpressionParserTest.swift */,
-				C9F7BCD8273919470076ED33 /* Info.plist */,
 				C9BE3A1E274E32F50083AF02 /* CalculatorManagerTest.swift */,
+				C9F7BCD8273919470076ED33 /* Info.plist */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
