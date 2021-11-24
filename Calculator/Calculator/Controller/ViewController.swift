@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         scrollToBottom()
     }
     
-    @IBAction private func CEButtonPressed(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonPressed(_ sender: UIButton) {
         initializeNumberLabel()
     }
     
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber
     }
     
-    @IBAction private func ACButtonPressed(_ sender: UIButton) {
+    @IBAction private func allClearButtonPressed(_ sender: UIButton) {
         recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         entireFormula.removeAll()
         resultNumber.removeAll()
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         initializeSymbolLabel()
     }
     
-    @IBAction private func EqualButtonPressed(_ sender: UIButton) {
+    @IBAction private func equalButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
         addRecord(with: sender.currentTitle)
         entireFormula = removeComma(of: entireFormula)
