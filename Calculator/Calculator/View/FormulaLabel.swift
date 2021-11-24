@@ -19,7 +19,7 @@ class FormulaLabel: UILabel {
         initializeLabel()
     }
     
-    func initializeLabel() {
+    private func initializeLabel() {
         textColor = .white
         font = UIFont.preferredFont(forTextStyle: .title3)
     }
