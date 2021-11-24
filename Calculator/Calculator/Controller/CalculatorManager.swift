@@ -22,17 +22,13 @@ struct CalculatorManager {
     
     private var currentOperand: String = "0" {
         didSet {
-            if hasCalculated {
-                return
+            if hasCalculated == false {
+                delegate?.updateOperandLabel(with: currentOperand)
             }
-            delegate?.updateOperandLabel(with: currentOperand)
         }
     }
     private var currentOperator: String = "" {
         didSet {
-            if hasCalculated {
-                return
-            }
             delegate?.updateOperatorLabel(with: currentOperator)
         }
     }
@@ -50,6 +46,9 @@ struct CalculatorManager {
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
+        if hasCalculated {
+            return
+        }
         if currentOperand == zero {
             setOperator(value: newOperator)
             return
