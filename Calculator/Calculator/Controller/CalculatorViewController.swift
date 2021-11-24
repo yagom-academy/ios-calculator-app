@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = calculatorModel.currentInputOperand
+        currentInputOperandLabel.text = convertFormattedNumber(calculatorModel.currentInputOperand)
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
@@ -78,7 +78,7 @@ class CalculatorViewController: UIViewController {
             operatorLabel.textColor = .white
             
             let operandLabel = UILabel()
-            operandLabel.text = each.operandNumber
+            operandLabel.text = convertFormattedNumber(each.operandNumber)
             operandLabel.textColor = .white
             
             stackView.addArrangedSubview(operatorLabel)
@@ -91,6 +91,19 @@ class CalculatorViewController: UIViewController {
         formulaHistoryStackView.arrangedSubviews.forEach { (view: UIView) -> () in
             view.removeFromSuperview()
         }
+    }
+    
+    private func convertFormattedNumber(_ number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        
+        guard let convertedNumber = numberFormatter.string(for: Double(number)) else {
+            return number
+        }
+        
+        return convertedNumber
     }
 }
 
