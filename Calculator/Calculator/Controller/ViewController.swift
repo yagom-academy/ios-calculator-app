@@ -56,9 +56,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func numberButtonPressed(_ sender: UIButton) {
+        guard resultNumber != numberLabel.text else { return }
+        
         if sender.currentTitle == "0" || sender.currentTitle == "00" {
             guard inputNumber.isEmpty == false else { return }
-            
+
             inputNumber += sender.currentTitle ?? ""
             
             if inputNumber.isContainDot {
@@ -66,7 +68,6 @@ class ViewController: UIViewController {
             } else {
                 numberLabel.text = numberFormatter.string(for: Double(inputNumber))
             }
-            
         } else {
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = numberFormatter.string(for: Double(removeComma(of: inputNumber)))
