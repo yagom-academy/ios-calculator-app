@@ -11,10 +11,10 @@ class CalculatorViewController: UIViewController {
     
     var currentOperand: String = "0"
     var currentOperator: String = "0"
-    var operationQueue: String = ""
+    var operationBuffer: String = ""
 
-    @IBOutlet private weak var currentOperandLable: UILabel!
-    @IBOutlet private weak var currentOperatorLable: UILabel!
+    @IBOutlet private weak var currentOperandLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
     
     @IBAction func didNumberButtonTap(sender: UIButton) {
         let buttonTitle = sender.currentTitle
@@ -24,15 +24,15 @@ class CalculatorViewController: UIViewController {
         } else if currentOperand == "0" && buttonTitle != "00" {
             currentOperand = buttonTitle ?? ""
         }
-        currentOperandLable.text! = currentOperand
-        operationQueue += currentOperator
+        currentOperandLabel.text! = currentOperand
+        operationBuffer += currentOperator
         currentOperator = "0"
     }
 
     @IBAction func didDecimalPointButtonTap (sender: UIButton) {
         if currentOperand.last != "." && !currentOperand.contains(".") {
             currentOperand += "."
-            currentOperandLable.text! = currentOperand
+            currentOperandLabel.text! = currentOperand
         }
     }
 
@@ -43,21 +43,21 @@ class CalculatorViewController: UIViewController {
         }
         currentOperator = buttonTitle ?? ""
         if currentOperand != "0" {
-            operationQueue += currentOperand
+            operationBuffer += currentOperand
             currentOperand = "0"
         }
-        currentOperatorLable.text! = currentOperator
-        currentOperandLable.text! = "0"
+        currentOperatorLabel.text! = currentOperator
+        currentOperandLabel.text! = "0"
     }
 
     @IBAction func didAllClearButtonTap (sender: UIButton) {
-        clearAllLableAndQueue()
+        clearAllLabelAndQueue()
     }
 
     @IBAction func didClearEntryButtonTap (sender: UIButton) {
         if !currentOperand.isEmpty && currentOperand != "0" {
             currentOperand.removeLast()
-            currentOperandLable.text = currentOperand
+            currentOperandLabel.text = currentOperand
         }
     }
 
@@ -72,10 +72,10 @@ class CalculatorViewController: UIViewController {
 
     @IBAction func didEqualsSignButtonTap (sender: UIButton) {
         if currentOperand != "0" {
-            operationQueue += currentOperand
-            let result = calculate(with: operationQueue)
-            clearAllLableAndQueue()
-            currentOperandLable.text = result
+            operationBuffer += currentOperand
+            let result = calculate(with: operationBuffer)
+            clearAllLabelAndQueue()
+            currentOperandLabel.text = result
         }
     }
     
@@ -84,11 +84,11 @@ class CalculatorViewController: UIViewController {
         return String(formula.result())
     }
 
-    func clearAllLableAndQueue() {
+    func clearAllLabelAndQueue() {
         currentOperator = "0"
         currentOperand = "0"
-        operationQueue = ""
-        currentOperandLable.text = ""
-        currentOperatorLable.text = ""
+        operationBuffer = ""
+        currentOperandLabel.text = ""
+        currentOperatorLabel.text = ""
     }
 }
