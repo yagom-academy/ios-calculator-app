@@ -133,7 +133,7 @@ extension CalculatorViewController {
     
     private func addCurrentFormulaStack() {
         guard let `operator` = operatorLabel.text,
-                let operand = operandLabel.text  else {
+              let operand = operandLabel.text  else {
             return
         }
         let formulaStackView = addFormulaStackView(operand: operand, operator: `operator`)
