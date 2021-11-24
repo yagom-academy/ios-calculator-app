@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculatorScrollView: UIScrollView!
     
     private var entireStringFormula: String = ""
-    private let negativeSign = "-"
+
     private let initialNumberLabel = "0"
     private let initialStringValue = ""
     
@@ -51,7 +51,7 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapDotButton(_ sender: UIButton) {
         if let currentNumberText = inputNumberLabel.text,
           let inputSign = sender.currentTitle,
-         currentNumberText.contains(".") == false {
+           currentNumberText.contains(CalculatorSign.dot) == false {
             inputNumberLabel.text = currentNumberText + inputSign
         }
     }
@@ -65,7 +65,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateInputNumberLabel(_ currentNumber: String, with input: String) {
-        guard currentNumber.contains(".") == false else {
+        guard currentNumber.contains(CalculatorSign.dot) == false else {
             inputNumberLabel.text = currentNumber + input
             return
         }
@@ -130,10 +130,10 @@ class CalculatorViewController: UIViewController {
         guard let currentNumberText = inputNumberLabel.text,
              currentNumberText != initialNumberLabel else { return }
         
-        if currentNumberText.hasPrefix(negativeSign) {
+        if currentNumberText.hasPrefix(CalculatorSign.negative) {
             inputNumberLabel.text = String(currentNumberText.dropFirst())
         } else {
-            inputNumberLabel.text = negativeSign + currentNumberText
+            inputNumberLabel.text = CalculatorSign.negative + currentNumberText
         }
     }
     
