@@ -39,4 +39,10 @@ class CalculatorManagerTest: XCTestCase {
         calculatorManager.fetchOperand(input: "3")
         XCTAssertEqual("3", calculatorManager.operand)
     }
+    
+    func test_Double타입의_숫자가_17자리를_넘는경우_true를_반환하는지() {
+        let calculatorManager = CalculatorManager(operand: "", operator: "", expression: "", isCalculated: false)
+        let number: Double = 10000000000000000
+        XCTAssertTrue(calculatorManager.isNumberOverMaximumExpression(number: number))
+    }
 }
