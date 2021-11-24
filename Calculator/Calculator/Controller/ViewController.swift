@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     var currentOperator: String = ""
     var isCalculationOver: Bool = false
     var isPreviousInputOperator: Bool = false
+    var isNotPreviousInputOperator: Bool {
+        !isPreviousInputOperator
+    }
     
     var allProcess: String {
         return processStackView.subviews.compactMap {
@@ -96,6 +99,13 @@ class ViewController: UIViewController {
         processStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
+    func didNotRepeatDotOperand(operand: String) -> Bool {
+        if currentOperand.contains(".") && operand == "." {
+            return false
+        }
+        return true
+    }
+    
     @IBAction func touchUpOperandBtn(_ sender: UIButton) {
         if isCalculationOver {
             resetCalculator()
@@ -103,7 +113,11 @@ class ViewController: UIViewController {
         
         guard let operand: String = sender.titleLabel?.text else { return }
         
-        if isPreviousInputOperator == false {
+        guard didNotRepeatDotOperand(operand: operand) else {
+            return
+        }
+        
+        if isNotPreviousInputOperator {
             currentOperand += operand
             print("입력된 숫자 : \(currentOperand)")
         } else if operand == "." {
@@ -149,7 +163,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if isPreviousInputOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
+        if isNotPreviousInputOperator { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
             pushProcessLabelToStack() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
         }
         
@@ -162,7 +176,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpClearEntryBtn(_ sender: UIButton) {
-        if isCalculationOver == true {
+        if isCalculationOver {
             resetCalculator()
             return
         }
@@ -171,7 +185,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpSignChangeBtn(_ sender: UIButton) {
-        if isCalculationOver == true {
+        if isCalculationOver {
             resetCalculator()
         }
         

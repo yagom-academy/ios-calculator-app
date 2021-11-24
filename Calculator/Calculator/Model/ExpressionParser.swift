@@ -1,11 +1,4 @@
 enum ExpressionParser {
-//    enum ParserError: Error {
-//        case includingAbnormalCharacter
-//        case firstOrLastComponentIsNotOperand
-//        case incorrectCountOfOperandsAndOperators
-//        case failedToInitializeFormulaInstance
-//    }
-    
     enum StringChecker {
         static func hasOnlyValidCharacter(from input: String) -> Bool {
             let filteredCharacters = input.filter {
