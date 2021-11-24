@@ -77,15 +77,8 @@ class ViewController: UIViewController {
         if numberLabel.text == "0" {
             symbolLabel.text = sender.currentTitle
             return
-        } else if resultNumber == numberLabel.text {
-            symbolLabel.text = sender.currentTitle
-            entireFormula += symbolLabel.text ?? ""
         } else {
-            recordingStackView.addArrangedSubview(formulaStackView)
-            symbolLabel.text = sender.currentTitle
-            guard let number = numberLabel.text, let symbol = symbolLabel.text else { return }
-            entireFormula += number
-            entireFormula += symbol
+            addRecord(with: sender.currentTitle)
         }
         initializeNumberLabel()
         scrollToBottom(calculatorScrollView)
@@ -128,14 +121,10 @@ class ViewController: UIViewController {
     
     @IBAction private func EqualButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
-        
-        recordingStackView.addArrangedSubview(formulaStackView)
-        
-        entireFormula += numberLabel.text ?? ""
+        addRecord(with: sender.currentTitle)
         entireFormula = removeComma(of: entireFormula)
         
         var formula = ExpressionParser.parse(from: entireFormula)
-        
         do {
             initializeSymbolLabel()
             let result = try formula.result()
@@ -147,6 +136,21 @@ class ViewController: UIViewController {
             numberLabel.text = "NaN"
         } catch {
             print(error)
+        }
+    }
+    
+    private func addRecord(with operator: String?) {
+        if resultNumber == numberLabel.text {
+            symbolLabel.text = `operator`
+            return
+        }
+        recordingStackView.addArrangedSubview(formulaStackView)
+        scrollToBottom(calculatorScrollView)
+        entireFormula += symbolLabel.text ?? ""
+        entireFormula += numberLabel.text ?? ""
+        
+        if `operator` != "=" {
+            symbolLabel.text = `operator`
         }
     }
     
