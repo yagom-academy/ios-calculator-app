@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         operatorsLabel.textColor = .white
         operatorsLabel.textAlignment = .right
         operatorsLabel.adjustsFontForContentSizeCategory = true
-        
+    
         return operatorsLabel
     }
     
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
             
             inputNumber += sender.currentTitle ?? ""
             
-            if inputNumber.contains(".") {
+            if inputNumber.isContainDot {
                 numberLabel.text = inputNumber
             } else {
                 numberLabel.text = numberFormatter.string(for: Double(inputNumber))
@@ -88,9 +88,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func dotButtonPressed(_ sender: UIButton) {
-        guard var text = numberLabel.text else { return }
-        
-        guard !isContainDot(text: text) else { return }
+        guard var text = numberLabel.text, text.isContainDot == false else { return }
         
         text += "."
         inputNumber = text
@@ -158,10 +156,6 @@ class ViewController: UIViewController {
         symbolLabel.text?.removeAll()
     }
     
-    private func isContainDot(text: String) -> Bool {
-        return text.contains(".")
-    }
-    
     private func initializeNumberFormatter(of formatter: NumberFormatter) {
         formatter.numberStyle = .decimal
         formatter.maximumSignificantDigits = 20
@@ -174,5 +168,11 @@ class ViewController: UIViewController {
     private func scrollToBottom(_ scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
+    }
+}
+
+fileprivate extension String {
+    var isContainDot: Bool {
+        return self.contains(".")
     }
 }
