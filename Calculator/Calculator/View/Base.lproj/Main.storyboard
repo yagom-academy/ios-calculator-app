@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -86,7 +86,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapACBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Eo-iB-M6y"/>
+                                                    <action selector="tapACButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ivB-qK-mfy"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
@@ -97,7 +97,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapCEBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cr6-37-upE"/>
+                                                    <action selector="tapCEButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q1c-1V-1UR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -108,7 +108,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapPositiveNegativeBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IJj-4p-gfY"/>
+                                                    <action selector="tapPositiveNegativeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c4x-ef-Mck"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -119,7 +119,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dEz-JH-8dz"/>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rz2-AM-hkb"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -168,7 +168,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jDr-Cp-xhb"/>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="osM-ug-xLY"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -217,7 +217,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gsL-Sn-C2A"/>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bYJ-z0-jYc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -266,7 +266,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapOperatorBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AGB-G1-oHb"/>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yv2-Ez-eVX"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -293,7 +293,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapDoubleZeroBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7h1-P3-kVb"/>
+                                                    <action selector="tapDoubleZeroButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uWp-WW-yTX"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -304,7 +304,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapDotBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GTs-un-DWM"/>
+                                                    <action selector="tapDotButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="puk-tF-V0V"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -318,7 +318,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapResultBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Obe-uv-glB"/>
+                                                    <action selector="tapResultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aV2-Ix-d5Z"/>
                                                 </connections>
                                             </button>
                                         </subviews>

@@ -21,6 +21,7 @@
 		479B9E16274BB185001ADC77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B9E14274BB185001ADC77 /* LinkedList.swift */; };
 		479B9E17274BC2DD001ADC77 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F61C0274BA9F400AF89D8 /* CalculateItem.swift */; };
 		479B9E19274CB81F001ADC77 /* FormulaStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B9E18274CB81F001ADC77 /* FormulaStackView.swift */; };
+		479B9E1B274DDA2C001ADC77 /* CalculatorNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B9E1A274DDA2C001ADC77 /* CalculatorNumberFormatter.swift */; };
 		47C5F255273E15630047D57F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F254273E15630047D57F /* Double+Extension.swift */; };
 		47C5F256273E62F90047D57F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F254273E15630047D57F /* Double+Extension.swift */; };
 		47C5F258273EA6BF0047D57F /* StringExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */; };
@@ -62,6 +63,7 @@
 		479B9E11274BB178001ADC77 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		479B9E14274BB185001ADC77 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		479B9E18274CB81F001ADC77 /* FormulaStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaStackView.swift; sourceTree = "<group>"; };
+		479B9E1A274DDA2C001ADC77 /* CalculatorNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorNumberFormatter.swift; sourceTree = "<group>"; };
 		47C5F254273E15630047D57F /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		47C5F257273EA6BF0047D57F /* StringExtensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTest.swift; sourceTree = "<group>"; };
 		47C5F259273EA96F0047D57F /* OperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTest.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+				479B9E1A274DDA2C001ADC77 /* CalculatorNumberFormatter.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4714EFB2273A0B9000A0A974 /* CalculatorItemQueue.swift in Sources */,
+				479B9E1B274DDA2C001ADC77 /* CalculatorNumberFormatter.swift in Sources */,
 				47C5F25E273ED6750047D57F /* String+Extension.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
 				47C5F255273E15630047D57F /* Double+Extension.swift in Sources */,
