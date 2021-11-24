@@ -49,12 +49,12 @@ struct CalculatorManager {
         }
         if currentOperand == "0" {
             currentOperator = newOperator
+            delegate?.addFormulaStackView(operand: currentOperand, operator: "")
             return
         }
-        let text = currentOperator == "" ? "" : newOperator
-        currentOperator = text
-        addFormulaExpression()
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
+        currentOperator = newOperator
+        addFormulaExpression()
         currentOperand = "0"
     }
     
@@ -120,7 +120,7 @@ struct CalculatorManager {
             var formula = ExpressionParser.parse(from: formulaExpression)
             currentOperand = String(try formula.result())
         } catch CalculatorError.divideByZero {
-            currentOperand = "NAN"
+            currentOperand = "NaN"
         } catch {
             print(error)
         }
