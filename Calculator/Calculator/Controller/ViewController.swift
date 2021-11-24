@@ -15,6 +15,7 @@ class ViewController: UIViewController {
             guard let `operator` = operatorLabel.text else {
                 return ""
             }
+            
             return `operator`
         }
         set {
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
             guard let operand = operandLabel.text else {
                 return ""
             }
+            
             return operand
         }
         set {
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var formulasStackView: UIStackView!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -156,8 +159,8 @@ extension ViewController {
         } catch OperationError.devidedByZero {
             displayedOperand = "NaN"
             calculatorManager.setDisplayingResultStatus(to: true)
-        } catch {
-            
+        } catch let error {
+            showAlert(message: error.localizedDescription)
         }
         
         initDisplayedOperator()
@@ -245,6 +248,7 @@ extension ViewController {
     private func convertSign(from operand: inout String) -> String {
         if operand.hasPrefix("-") {
             operand.removeFirst()
+            
             return operand
         } else {
             return "-" + operand
@@ -268,5 +272,14 @@ extension ViewController {
         }
         
         return result.joined(separator: " ")
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
