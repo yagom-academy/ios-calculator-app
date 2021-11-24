@@ -40,24 +40,24 @@ struct CalculatorManager {
     private var formulaExpression = String()
     private let zero = "0"
     private let emptyString = ""
-    private let notANumber = "Nan"
+    private let notANumber = "NaN"
     
     //MARK: - Method
     
     mutating func tapNumberPad(_ newOperand: String) {
         let operand = currentOperand == zero ? newOperand : currentOperand + newOperand
-        setOperand(by: operand)
+        setOperand(value: operand)
     }
     
     mutating func tapOperatorButton(_ newOperator: String) {
         if currentOperand == zero {
-            setOperator(by: newOperator)
+            setOperator(value: newOperator)
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
-        setOperator(by: newOperator)
+        setOperator(value: newOperator)
         addFormulaExpression()
-        setOperand(by: zero)
+        setOperand(value: zero)
     }
     
     mutating func tapDotButton() {
@@ -65,7 +65,7 @@ struct CalculatorManager {
         if currentOperand.contains(dotSign) {
             return
         }
-        setOperand(by: currentOperand + dotSign)
+        setOperand(value: currentOperand + dotSign)
     }
     
     mutating func tapPlusMinusButton() {
@@ -74,9 +74,9 @@ struct CalculatorManager {
         }
         let minusSign = String(Operator.subtract.rawValue)
         if currentOperand.hasPrefix(minusSign) {
-            setOperand(by: currentOperand.replacingOccurrences(of: minusSign, with: emptyString))
+            setOperand(value: currentOperand.replacingOccurrences(of: minusSign, with: emptyString))
         } else {
-            setOperand(by: minusSign + currentOperand)
+            setOperand(value: minusSign + currentOperand)
         }
     }
     
@@ -86,7 +86,7 @@ struct CalculatorManager {
            return
         }
         if currentOperand.count == 1 {
-            setOperand(by: zero)
+            setOperand(value: zero)
             return
         }
         currentOperand.removeLast()
@@ -103,15 +103,15 @@ struct CalculatorManager {
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         addFormulaExpression()
         calculateFormula()
-        setOperator(by: emptyString)
+        setOperator(value: emptyString)
         hasCalculated = true
     }
     
-    private mutating func setOperand(by value: String) {
+    private mutating func setOperand(value: String) {
         currentOperand = value
     }
     
-    private mutating func setOperator(by value: String) {
+    private mutating func setOperator(value: String) {
         currentOperator = value
     }
     
@@ -134,9 +134,9 @@ struct CalculatorManager {
             guard let formattedResult = setNumberFormat(for: result) else {
                 return
             }
-            setOperand(by: formattedResult)
+            setOperand(value: formattedResult)
         } catch CalculatorError.divideByZero {
-            setOperand(by: notANumber)
+            setOperand(value: notANumber)
         } catch {
             print(error)
         }
