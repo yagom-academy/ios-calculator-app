@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     
     @IBAction private func equalButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
-        addRecord(with: sender.currentTitle)
+        addRecord()
         entireFormula = removeComma(of: entireFormula)
         
         var formula = ExpressionParser.parse(from: entireFormula)
@@ -139,13 +139,13 @@ class ViewController: UIViewController {
         }
     }
     
-    private func addRecord(with operator: String?) {
+    private func addRecord(with operator: String? = nil) {
         recordingStackView.addArrangedSubview(formulaStackView)
         scrollToBottom()
         entireFormula += symbolLabel.text ?? ""
         entireFormula += numberLabel.text ?? ""
         
-        if `operator` != "=" {
+        if `operator` != nil {
             symbolLabel.text = `operator`
         }
     }
