@@ -38,29 +38,29 @@ class CalculatorViewController: UIViewController {
     // MARK: - 숫자 버튼 입력
     
     @IBAction private func tapNumberPad(_ sender: UIButton) {
-        guard let currentNumberLabel = inputNumberLabel.text,
-             let inputNum = sender.currentTitle else { return }
+        guard let currentNumberText = inputNumberLabel.text,
+             let inputNumber = sender.currentTitle else { return }
         
-        if currentNumberLabel == initialNumberLabel {
-            inputNumberLabel.text = inputNum
+        if currentNumberText == initialNumberLabel {
+            inputNumberLabel.text = inputNumber
         } else {
-            updateInputNumberLabel(currentNumberLabel, with: inputNum)
+            updateInputNumberLabel(currentNumberText, with: inputNumber)
         }
     }
     
     @IBAction private func tapDotButton(_ sender: UIButton) {
-        if let currentNumberLabel = inputNumberLabel.text,
+        if let currentNumberText = inputNumberLabel.text,
           let inputSign = sender.currentTitle,
-         currentNumberLabel.contains(".") == false {
-            inputNumberLabel.text = currentNumberLabel + inputSign
+         currentNumberText.contains(".") == false {
+            inputNumberLabel.text = currentNumberText + inputSign
         }
     }
     
     @IBAction private func tapDoubleZeroButton(_ sender: UIButton) {
-        if let currentNumberLabel = inputNumberLabel.text,
+        if let currentNumberText = inputNumberLabel.text,
           let inputNum = sender.currentTitle,
-         currentNumberLabel != initialNumberLabel {
-            updateInputNumberLabel(currentNumberLabel, with: inputNum)
+         currentNumberText != initialNumberLabel {
+            updateInputNumberLabel(currentNumberText, with: inputNum)
         }
     }
     
@@ -80,13 +80,13 @@ class CalculatorViewController: UIViewController {
     // MARK: - 연산자 버튼 입력
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
-        guard let currentNumberLabel = inputNumberLabel.text,
+        guard let currentNumberText = inputNumberLabel.text,
              let inputOperator = sender.currentTitle else { return }
 
         if formulaStackView.arrangedSubviews.isEmpty,
-          currentNumberLabel == initialNumberLabel {
+          currentNumberText == initialNumberLabel {
             inputOperatorLabel.text = initialStringValue
-        } else if currentNumberLabel == initialNumberLabel {
+        } else if currentNumberText == initialNumberLabel {
             changeOperatorLabel(with: inputOperator)
         } else {
             addFormulaStackView()
@@ -127,13 +127,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapPositiveNegativeButton(_ sender: UIButton) {
-        guard let currentNum = inputNumberLabel.text,
-             currentNum != initialNumberLabel else { return }
+        guard let currentNumberText = inputNumberLabel.text,
+             currentNumberText != initialNumberLabel else { return }
         
-        if currentNum.hasPrefix(negativeSign) {
-            inputNumberLabel.text = String(currentNum.dropFirst())
+        if currentNumberText.hasPrefix(negativeSign) {
+            inputNumberLabel.text = String(currentNumberText.dropFirst())
         } else {
-            inputNumberLabel.text = negativeSign + currentNum
+            inputNumberLabel.text = negativeSign + currentNumberText
         }
     }
     
