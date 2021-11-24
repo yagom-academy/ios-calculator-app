@@ -57,6 +57,9 @@ extension CalculatorViewController {
         guard !rawOperand.contains("."), isNotCalculated else {
             return
         }
+        if rawOperand == "" {
+            rawOperand = "0"
+        }
         rawOperand = rawOperand + "."
         operandLabel.text = rawOperand
     }
