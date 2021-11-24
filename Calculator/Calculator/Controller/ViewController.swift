@@ -81,7 +81,7 @@ class ViewController: UIViewController {
             addRecord(with: sender.currentTitle)
         }
         initializeNumberLabel()
-        scrollToBottom(calculatorScrollView)
+        scrollToBottom()
     }
     
     @IBAction private func CEButtonPressed(_ sender: UIButton) {
@@ -141,7 +141,7 @@ class ViewController: UIViewController {
     
     private func addRecord(with operator: String?) {
         recordingStackView.addArrangedSubview(formulaStackView)
-        scrollToBottom(calculatorScrollView)
+        scrollToBottom()
         entireFormula += symbolLabel.text ?? ""
         entireFormula += numberLabel.text ?? ""
         
@@ -168,9 +168,9 @@ class ViewController: UIViewController {
         return string.replacingOccurrences(of: ",", with: "")
     }
     
-    private func scrollToBottom(_ scrollView: UIScrollView) {
-        scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
+    private func scrollToBottom() {
+        calculatorScrollView.layoutIfNeeded()
+        calculatorScrollView.setContentOffset(CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height), animated: false)
     }
 }
 
