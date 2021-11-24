@@ -86,6 +86,11 @@ struct CalculatorManager {
             self.currentOperand.insert("-", at: operand.startIndex)
         }
     }
+    
+    mutating func fetchExpression(operand: String, operator: String) {
+        expression.append(operand)
+        expression.append(`operator`)
+    }
 }
 
 extension CalculatorManager {
