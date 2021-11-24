@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorManager {
-    private(set) var operand: String = "0"
-    private(set) var `operator`: String = ""
+    private(set) var currentOperand: String = "0"
+    private(set) var currentOperator: String = ""
     private(set) var expression: String = ""
     private(set) var isCalculated = false
     
@@ -19,38 +19,38 @@ struct CalculatorManager {
     let formatter = Formatter()
     
     mutating func resetOperand() {
-        operand = "0"
+        currentOperand = "0"
     }
     
     mutating func reset() {
-        `operator` = ""
+        currentOperator = ""
         expression = ""
         isCalculated = false
     }
     
     mutating func fetchOperand(input: String) {
-        let digitsCount = operand.filter { $0.isNumber }.count
+        let digitsCount = currentOperand.filter { $0.isNumber }.count
         
         guard digitsCount < limitedDigitsOfExpression else {
             return
         }
         
-        if operand == "0" && !["0","00"].contains(input) {
-            operand = input
+        if currentOperand == "0" && !["0","00"].contains(input) {
+            currentOperand = input
             return
-        } else if operand == "0" && ["0","00"].contains(input) {
+        } else if currentOperand == "0" && ["0","00"].contains(input) {
             return
         }
         
-        operand += input
+        currentOperand += input
     }
     
     func isNumberOverMaximumExpression(number: Double) -> Bool {
         return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
     }
     
-    func addCommaOnEveryThreeDigits(to input: String) -> String? {
-        guard let doubleValue = Double(input) else {
+    func addCommaOnEveryThreeDigits(to operand: String) -> String? {
+        guard let doubleValue = Double(operand) else {
             return nil
         }
 
@@ -61,14 +61,14 @@ struct CalculatorManager {
         return result
     }
     
-    func splitWithIntegerAndFraction(from input: String) -> (integer: String, fraction: String) {
-        var integerDigits = input
+    func splitWithIntegerAndFraction(from operand: String) -> (integer: String, fraction: String) {
+        var integerDigits = operand
         var fractionDigits = ""
         
-        if input.contains(".") {
-            let splited = input.split(with: ".")
-            integerDigits = splited.first ?? ""
-            fractionDigits = splited.last ?? ""
+        if operand.contains(".") {
+            let separated = operand.split(with: ".")
+            integerDigits = separated.first ?? ""
+            fractionDigits = separated.last ?? ""
         }
         
         return (integerDigits, fractionDigits)
