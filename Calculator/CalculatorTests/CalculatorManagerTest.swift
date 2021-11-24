@@ -45,4 +45,12 @@ class CalculatorManagerTest: XCTestCase {
         let number: Double = 10000000000000000
         XCTAssertTrue(calculatorManager.isNumberOverMaximumExpression(number: number))
     }
+    
+    func test_3자리마다_콤마를_찍어주는지() {
+        let calculatorManager = CalculatorManager(operand: "12345", operator: "", expression: "", isCalculated: false)
+        guard let result = calculatorManager.addCommaOnEveryThreeDigits(to: calculatorManager.operand) else {
+            return
+        }
+        XCTAssertEqual("12,345", result)
+    }
 }
