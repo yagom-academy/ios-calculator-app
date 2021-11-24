@@ -60,6 +60,19 @@ struct CalculatorManager {
         
         return result
     }
+    
+    func splitWithIntegerAndFraction(from input: String) -> (integer: String, fraction: String) {
+        var integerDigits = input
+        var fractionDigits = ""
+        
+        if input.contains(".") {
+            let splited = input.split(with: ".")
+            integerDigits = splited.first ?? ""
+            fractionDigits = splited.last ?? ""
+        }
+        
+        return (integerDigits, fractionDigits)
+    }
 }
 
 extension CalculatorManager {
