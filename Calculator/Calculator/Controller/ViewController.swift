@@ -83,7 +83,9 @@ class ViewController: UIViewController {
         } else {
             recordingStackView.addArrangedSubview(formulaStackView)
             symbolLabel.text = sender.currentTitle
-            addEntireFormula()
+            guard let number = numberLabel.text, let symbol = symbolLabel.text else { return }
+            entireFormula += number
+            entireFormula += symbol
         }
         initializeNumberLabel()
         scrollToBottom(calculatorScrollView)
@@ -161,12 +163,6 @@ class ViewController: UIViewController {
         return text.contains(".")
     }
     
-    private func addEntireFormula() {
-        guard let number = numberLabel.text, let symbol = symbolLabel.text else { return }
-        entireFormula += number
-        entireFormula += symbol
-    }
-    
     private func initializeNumberFormatter(of formatter: NumberFormatter) {
         formatter.numberStyle = .decimal
         formatter.maximumSignificantDigits = 20
@@ -181,5 +177,3 @@ class ViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
 }
-
-
