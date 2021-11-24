@@ -53,4 +53,11 @@ class CalculatorManagerTest: XCTestCase {
         }
         XCTAssertEqual("12,345", result)
     }
+    
+    func test_입력된값을_정수부와_소수부로_나누어_반환하는지() {
+        let calculatorManager = CalculatorManager(operand: "123.45", operator: "", expression: "", isCalculated: false)
+        let splited = calculatorManager.splitWithIntegerAndFraction(from: calculatorManager.operand)
+        XCTAssertEqual("123", splited.integer)
+        XCTAssertEqual("45", splited.fraction)
+    }
 }
