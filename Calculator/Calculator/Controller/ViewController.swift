@@ -74,9 +74,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
-        if numberLabel.text == "0" {
+        if numberLabel.text == "0" || resultNumber == numberLabel.text {
             symbolLabel.text = sender.currentTitle
-            return
         } else {
             addRecord(with: sender.currentTitle)
         }
@@ -140,10 +139,6 @@ class ViewController: UIViewController {
     }
     
     private func addRecord(with operator: String?) {
-        if resultNumber == numberLabel.text {
-            symbolLabel.text = `operator`
-            return
-        }
         recordingStackView.addArrangedSubview(formulaStackView)
         scrollToBottom(calculatorScrollView)
         entireFormula += symbolLabel.text ?? ""
