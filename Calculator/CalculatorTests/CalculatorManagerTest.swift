@@ -60,4 +60,13 @@ class CalculatorManagerTest: XCTestCase {
         XCTAssertEqual("123", separated.integer)
         XCTAssertEqual("45", separated.fraction)
     }
+    
+    func test_입력된_값의_부호를_반대로_바꿔주는지() {
+        var calculatorManager = CalculatorManager(currentOperand: "12345", currentOperator: "", expression: "", isCalculated: false)
+        
+        var numb = "123,45"
+        calculatorManager.toggleOperandSign(from: &numb)
+        XCTAssertEqual("-123,45", numb)
+        XCTAssertEqual("-12345", calculatorManager.currentOperand)
+    }
 }
