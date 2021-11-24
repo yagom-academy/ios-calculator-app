@@ -1,4 +1,4 @@
-enum Operator: Character, CaseIterable, CalculateItem {
+enum Operator: Character, CaseIterable {
     case add = "+"
     case substract = "−"
     case divide = "÷"
