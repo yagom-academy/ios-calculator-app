@@ -30,6 +30,8 @@ struct CalculatorManager {
     
     var delegate: CalculatorManagerDelegate?
     
+    //MARK: - Method
+    
     mutating func tapNumberPad(_ operand: String) {
         if currentOperand == "0" {
             delegate?.updateOperandLabel(by: operand)
@@ -39,7 +41,8 @@ struct CalculatorManager {
         currentOperand += operand
     }
     
-    mutating func tapOperatorButton(_ `operator`: String) {
+    mutating func tapOperatorButton(_ newOperatpr: String) {
+        currentOperator = newOperatpr
     }
     
     mutating func tapDotButton() {
