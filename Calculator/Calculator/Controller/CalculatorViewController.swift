@@ -24,30 +24,30 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        calculatorModel.touchAllClearButton()
+        calculatorModel.clearAllExpression()
         updateCurrentInputLabel()
         removeAllFormulaHistory()
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
-        calculatorModel.touchClearEntryButton()
+        calculatorModel.clearEntry()
         updateCurrentInputLabel()
     }
     
     @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
-        calculatorModel.touchSignChangeButton()
+        calculatorModel.changeSignOfNumber()
         updateCurrentInputLabel()
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
         addFormulaHistory()
         formulaHistoryScrollView.scrollToBottom()
-        calculatorModel.touchEqualButton()
+        calculatorModel.calculateAllExpression()
         updateCurrentInputLabel()
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        calculatorModel.touchPointButton()
+        calculatorModel.inputDot()
         updateCurrentInputLabel()
     }
     
@@ -55,13 +55,13 @@ class CalculatorViewController: UIViewController {
         guard let operatorSymbol = sender.titleLabel?.text else { return }
         addFormulaHistory()
         formulaHistoryScrollView.scrollToBottom()
-        calculatorModel.touchOperatorButton(operatorSymbol)
+        calculatorModel.inputOperator(operatorSymbol)
         updateCurrentInputLabel()
     }
     
     @IBAction func touchUpOperandsButton(_ sender: UIButton) {
         guard let operandSymbol = sender.titleLabel?.text else { return }
-        calculatorModel.touchNumberButton(operandSymbol)
+        calculatorModel.inputNumber(operandSymbol)
         updateCurrentInputLabel()
     }
     
