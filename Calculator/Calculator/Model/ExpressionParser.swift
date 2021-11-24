@@ -7,7 +7,7 @@ enum ExpressionParser {
 //    }
     
     enum StringChecker {
-        static func hasNotAbnormalCharacter(from input: String) -> Bool {
+        static func hasOnlyValidCharacter(from input: String) -> Bool {
             let filteredCharacters = input.filter {
                 $0.isNumber
                 || Operator.allCharacterCases.contains($0)
@@ -36,7 +36,7 @@ enum ExpressionParser {
 
 extension ExpressionParser {
     static func parse(from input: String) throws -> Formula {
-        guard StringChecker.hasNotAbnormalCharacter(from: input) else {
+        guard StringChecker.hasOnlyValidCharacter(from: input) else {
             throw CalculatorError.includingAbnormalCharacter
         }
         

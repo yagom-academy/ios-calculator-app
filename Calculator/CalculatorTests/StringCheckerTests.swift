@@ -25,7 +25,7 @@ class StringCheckerTests: XCTestCase {
                            false ]
         
         for index in 0..<testCases.count {
-            XCTAssertEqual(ExpressionParser.StringChecker.hasNotAbnormalCharacter(from: testCases[index]), answerList[index], "test: \(index) was failed")
+            XCTAssertEqual(ExpressionParser.StringChecker.hasOnlyValidCharacter(from: testCases[index]), answerList[index], "test: \(index) was failed")
         }
     }
     

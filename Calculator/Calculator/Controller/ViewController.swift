@@ -9,24 +9,22 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var processScrollView: UIScrollView!
-    @IBOutlet weak var processVerticalStackView: UIStackView!
+    @IBOutlet weak var processStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
     var currentOperand: String = ""
     var currentOperator: String = ""
     var isCalculationOver: Bool = false
-    var isLastOperator: Bool = false
+    var isPreviousInputOperator: Bool = false
     
     var allProcess: String {
-        return processVerticalStackView.subviews.compactMap {
+        return processStackView.subviews.compactMap {
             ($0 as? UILabel)?.text
         }.reduce("") {
             "\($0) \($1)"
         }
     }
-    
-    var isLastDot: Bool = false
     
     let numberFormatter = NumberFormatter()
     
@@ -42,7 +40,7 @@ class ViewController: UIViewController {
         currentOperator = ""
         isCalculationOver = false
         
-        clearCalculationProcess()
+        clearProcessStack()
     }
     
     func resetOperand() {
@@ -50,18 +48,18 @@ class ViewController: UIViewController {
         currentOperand = ""
     }
     
-    func convertToString(from number: Double) -> String? {
+    func convertToDecimalString(from number: Double) -> String? {
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         
         return numberFormatter.string(from: NSNumber(value: number))
     }
     
-    func refreshLabelsWithResult(of formula: String) {
+    func updateLabelsWithResult(of formula: String) {
         do {
             var formula: Formula = try ExpressionParser.parse(from: formula)
             let calculationResult: Double = try formula.result()
-            guard let resultInString = convertToString(from: calculationResult) else { return }
+            guard let resultInString = convertToDecimalString(from: calculationResult) else { return }
             
             operandLabel.text = "\(resultInString)"
             operatorLabel.text = ""
@@ -72,16 +70,15 @@ class ViewController: UIViewController {
             print(error)
         }
     }
-      
-    func addCalculationProcessWithHorizontalStackView() {
-        
+    
+    func pushProcessLabelToStack() {
         if currentOperand.first == "." {
             currentOperand = "0\(currentOperand)"
         }
         
         let processLabel = ProcessLabel(text: "\(currentOperator) \(currentOperand)")
         
-        processVerticalStackView.addArrangedSubview(processLabel)
+        processStackView.addArrangedSubview(processLabel)
         
         scrollToBottom()
     }
@@ -89,14 +86,14 @@ class ViewController: UIViewController {
     func scrollToBottom() {
         processScrollView.layoutIfNeeded()
 
-        let destinationY = processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom
-        let destinationPoint = CGPoint(x: 0, y: destinationY)
+        let bottomY = processScrollView.contentSize.height - processScrollView.bounds.size.height + processScrollView.contentInset.bottom
+        let bottomPoint = CGPoint(x: 0, y: bottomY)
         
-        processScrollView.setContentOffset(destinationPoint, animated: false)
+        processScrollView.setContentOffset(bottomPoint, animated: false)
     }
         
-    func clearCalculationProcess() {
-        processVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    func clearProcessStack() {
+        processStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func touchUpOperandBtn(_ sender: UIButton) {
@@ -106,7 +103,7 @@ class ViewController: UIViewController {
         
         guard let operand: String = sender.titleLabel?.text else { return }
         
-        if isLastOperator == false {
+        if isPreviousInputOperator == false {
             currentOperand += operand
             print("입력된 숫자 : \(currentOperand)")
         } else if operand == "." {
@@ -119,7 +116,7 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = currentOperand
-        isLastOperator = false
+        isPreviousInputOperator = false
     }
     
     @IBAction func touchUpOperatorBtn(_ sender: UIButton) {
@@ -132,19 +129,19 @@ class ViewController: UIViewController {
             return
         }
         
-        if isLastOperator {
+        if isPreviousInputOperator {
             currentOperator = operatorSymbol
             operatorLabel.text = currentOperator
             return
         } else {
-            addCalculationProcessWithHorizontalStackView()
+            pushProcessLabelToStack()
             
             currentOperator = operatorSymbol
             operatorLabel.text = currentOperator
             operandLabel.text = "0"
         }
 
-        isLastOperator = true
+        isPreviousInputOperator = true
     }
 
     @IBAction func touchUpResultBtn(_ sender: UIButton) {
@@ -152,11 +149,11 @@ class ViewController: UIViewController {
             return
         }
         
-        if isLastOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
-            addCalculationProcessWithHorizontalStackView() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
+        if isPreviousInputOperator == false { // =버튼 탭하기 직전이 연산자이면 ScrollView에 반영하지 않음
+            pushProcessLabelToStack() // StackView에 반영되지 못한 마지막 숫자/연산자를 추가 (개선 필요)
         }
         
-        refreshLabelsWithResult(of: allProcess)
+        updateLabelsWithResult(of: allProcess)
         isCalculationOver = true
     }
     
