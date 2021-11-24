@@ -8,8 +8,10 @@
 import Foundation
 
 protocol CalculatorManagerDelegate {
-    func updateOperandLabel(by newOperand: String)
-    func updateOperatorLabel(by newOperator: String)
+    func updateOperandLabel(with newOperand: String)
+    func updateOperatorLabel(with newOperator: String)
+    func addFormulaStackView(operand: String, operator: String )
+    func clearFormulaStackView()
 }
 
 struct CalculatorManager {
@@ -18,15 +20,16 @@ struct CalculatorManager {
     
     private var currentOperand: String = "0" {
         didSet {
-            delegate?.updateOperandLabel(by: currentOperand)
+            delegate?.updateOperandLabel(with: currentOperand)
         }
     }
     private var currentOperator: String = "" {
         didSet {
-            delegate?.updateOperatorLabel(by: currentOperator)
+            delegate?.updateOperatorLabel(with: currentOperator)
         }
     }
     private var hasCalculated: Bool = false
+    private var formulaExpression = String()
     
     var delegate: CalculatorManagerDelegate?
     
@@ -34,15 +37,24 @@ struct CalculatorManager {
     
     mutating func tapNumberPad(_ operand: String) {
         if currentOperand == "0" {
-            delegate?.updateOperandLabel(by: operand)
+            delegate?.updateOperandLabel(with: operand)
             currentOperand = operand
             return
         }
         currentOperand += operand
     }
     
-    mutating func tapOperatorButton(_ newOperatpr: String) {
-        currentOperator = newOperatpr
+    mutating func tapOperatorButton(_ newOperator: String) {
+        if currentOperand == "0" {
+            currentOperator = newOperator
+            return
+        }
+        let text = currentOperator == "" ? "" : currentOperator
+        delegate?.addFormulaStackView(operand: currentOperand, operator: text)
+        currentOperator = newOperator
+        
+        formulaExpression += currentOperand + currentOperator
+        currentOperand = "0"
     }
     
     mutating func tapDotButton() {
@@ -50,7 +62,7 @@ struct CalculatorManager {
             return
         }
         currentOperand += "."
-        delegate?.updateOperandLabel(by: currentOperand)
+        delegate?.updateOperandLabel(with: currentOperand)
     }
     
     mutating func tapPlusMinusButton() {
@@ -71,11 +83,13 @@ struct CalculatorManager {
     
     mutating func tapACButton() {
         reset()
+        delegate?.clearFormulaStackView()
     }
     
     private mutating func reset() {
         currentOperand = "0"
         currentOperator = ""
         hasCalculated = false
+        formulaExpression = ""
     }
 }

@@ -22,7 +22,6 @@ class CalculatorController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         calculatorManager.delegate = self
-        
     }
     
     //MARK: - Actions
@@ -59,14 +58,34 @@ class CalculatorController: UIViewController {
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
     }
+    
+    //MARK: - Helper
+    
+    private func formulaLabel(with text: String) -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = text
+        return label
+    }
 }
 
 extension CalculatorController: CalculatorManagerDelegate {
-    func updateOperandLabel(by newOperand: String) {
+    func updateOperandLabel(with newOperand: String) {
         operandLabel.text = newOperand
     }
     
-    func updateOperatorLabel(by newOperator: String) {
+    func updateOperatorLabel(with newOperator: String) {
         operatorLabel.text = newOperator
+    }
+    
+    func addFormulaStackView(operand: String, operator: String) {
+        let stackView = UIStackView(arrangedSubviews: [formulaLabel(with: `operator`), formulaLabel(with: operand)])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        formulaStackView.addArrangedSubview(stackView)
+    }
+    
+    func clearFormulaStackView() {
+        formulaStackView.subviews.forEach { $0.removeFromSuperview() }
     }
 }
