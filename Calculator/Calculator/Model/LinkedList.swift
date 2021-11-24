@@ -20,21 +20,14 @@ class LinkedList<Element> {
     typealias Node = ListNode<Element>
     
     private var head: Node?
+    private var tail: Node?
     
     var first: Node? {
         return head
     }
     
     var last: Node? {
-        guard var node = head else {
-            return nil
-        }
-        
-        while let next = node.next {
-            node = next
-        }
-        
-        return node
+        return tail
     }
     
     var isEmpty: Bool {
@@ -59,12 +52,13 @@ class LinkedList<Element> {
     func appendNode(value: Element) {
         let newNode = Node(value: value)
         
-        guard let lastNode = last else {
+        if let tailNode = tail {
+            tailNode.next = newNode
+        } else {
             head = newNode
-            return
         }
         
-        lastNode.next = newNode
+        tail = newNode
     }
     
     @discardableResult
@@ -80,5 +74,6 @@ class LinkedList<Element> {
     
     func removeAllNodes() {
         head = nil
+        tail = nil
     }
 }
