@@ -12,8 +12,11 @@ struct CalculatorManager {
     private(set) var `operator`: String = ""
     private(set) var expression: String = ""
     private(set) var isCalculated = false
+    
     private let maximumDigitsOfDoubleExpression = 16
     private let limitedDigitsOfExpression = 20
+    
+    let formatter = Formatter()
     
     mutating func resetOperand() {
         operand = "0"
@@ -44,5 +47,33 @@ struct CalculatorManager {
     
     func isNumberOverMaximumExpression(number: Double) -> Bool {
         return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
+    }
+    
+    func addCommaOnEveryThreeDigits(to input: String) -> String? {
+        guard let doubleValue = Double(input) else {
+            return nil
+        }
+
+        guard let result = formatter.string(from: NSNumber(value: doubleValue)) else {
+            return nil
+        }
+        
+        return result
+    }
+}
+
+extension CalculatorManager {
+    class Formatter: NumberFormatter {
+        override init() {
+            super.init()
+            self.numberStyle = .decimal
+            self.usesSignificantDigits = true
+            self.maximumSignificantDigits = 20
+            self.roundingMode = .halfUp
+        }
+        
+        required init?(coder: NSCoder) {
+            super.init(coder: coder)
+        }
     }
 }
