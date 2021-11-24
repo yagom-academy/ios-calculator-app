@@ -57,10 +57,8 @@ class ViewController: UIViewController {
                 return
             }
         } else {
-            guard inputButtonTitle != "0" || !inputOperandValues.isEmpty,
-                  inputButtonTitle != "00" || !inputOperandValues.isEmpty else {
-                return
-            }
+            if (inputButtonTitle == "0" && inputOperandValues.isEmpty) ||
+               (inputButtonTitle == "00" && inputOperandValues.isEmpty) { return }
         }
         inputOperandValues.append(inputButtonTitle)
         addcommaOperand = inputOperandValues.joined().insertComma()        
