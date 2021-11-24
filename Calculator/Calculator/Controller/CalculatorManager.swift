@@ -92,14 +92,14 @@ struct CalculatorManager {
     }
     
     mutating func tapEqualButton() {
-        if hasCalculated {
+        if hasCalculated || currentOperand == "0" {
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         addFormulaExpression()
         calculateFormula()
-        hasCalculated = true
         currentOperator = ""
+        hasCalculated = true
     }
     
     private mutating func reset() {
@@ -116,11 +116,22 @@ struct CalculatorManager {
     private mutating func calculateFormula() {
         do {
             var formula = ExpressionParser.parse(from: formulaExpression)
-            currentOperand = String(try formula.result())
+            guard let formattedResult = setNumberFormat(for: try formula.result()) else {
+                return
+            }
+            currentOperand = formattedResult
         } catch CalculatorError.divideByZero {
             currentOperand = "NaN"
         } catch {
             print(error)
         }
+    }
+    
+    private func setNumberFormat(for value: Double) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        return numberFormatter.string(for: value)
     }
 }
