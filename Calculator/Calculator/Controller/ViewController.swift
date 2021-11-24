@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     var allProcess: String {
         return processStackView.subviews.compactMap {
             ($0 as? UILabel)?.text
+        }.map {
+            $0.replacingOccurrences(of: ",", with: "")
         }.reduce("") {
             "\($0) \($1)"
         }
@@ -79,6 +81,16 @@ class ViewController: UIViewController {
             currentOperand = "0\(currentOperand)"
         }
         
+        if currentOperand.last == "." {
+            currentOperand.removeLast()
+        }
+        
+        guard let operandInNumber = Double(currentOperand) else {
+            return
+        }
+        
+        currentOperand = convertToDecimalString(from: operandInNumber) ?? ""
+        
         let processLabel = ProcessLabel(text: "\(currentOperator) \(currentOperand)")
         
         processStackView.addArrangedSubview(processLabel)
@@ -122,7 +134,7 @@ class ViewController: UIViewController {
             print("입력된 숫자 : \(currentOperand)")
         } else if operand == "." {
             resetOperand()
-            currentOperand += operand
+            currentOperand = "0" + operand
             print("입력된 숫자 : \(currentOperand)")
         } else {
             resetOperand()
