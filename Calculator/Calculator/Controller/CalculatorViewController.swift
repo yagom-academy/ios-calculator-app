@@ -165,11 +165,11 @@ extension CalculatorViewController {
             return
         }
         
-        if currentOperand == "0" {
-            if !["0","00"].contains(operand) {
-                currentOperand = operand
-                operandLabel.text = currentOperand
-            }
+        if currentOperand == "0" && !["0","00"].contains(operand) {
+            currentOperand = operand
+            operandLabel.text = currentOperand
+            return
+        } else if currentOperand == "0" && ["0","00"].contains(operand) {
             return
         }
         
