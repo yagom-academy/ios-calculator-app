@@ -21,11 +21,7 @@ struct Formula {
         calculationResult = firstOperand
         
         while !operands.isEmpty && !operators.isEmpty {
-            guard let operand = operands.dequeue() else {
-                throw CalculationItemQueueError.hasNoElement
-            }
-            
-            guard let `operator` = operators.dequeue() else {
+            guard let operand = operands.dequeue(), let `operator` = operators.dequeue() else {
                 throw CalculationItemQueueError.hasNoElement
             }
             
