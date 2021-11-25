@@ -67,7 +67,7 @@ extension CalculatorViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard operandLabel.text != "NaN" else {
-            os_log(.error, log: .error, "%@", "NaN일 경우, 계산을 이어서 연산할 수 없습니다.")
+            os_log(.error, log: .error, LogMessage.resetNaN)
             return
         }
         rawOperand = "0"
@@ -119,7 +119,7 @@ extension CalculatorViewController {
     
     @IBAction func touchUPEqualButton(_ sender: UIButton) {
         if rawOperand == "" || hasCalculated {
-            os_log(.error, log: .error, "%@", "큐가 비어있습니다. 계산식을 추가해주세요")
+            os_log(.error, log: .error, LogMessage.canNotCalculate)
             return
         }
         addCurrentFormulaStack()
