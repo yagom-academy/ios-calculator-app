@@ -38,22 +38,6 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = calculatorManager.currentOperand
     }
     
-    private func changeOperator(to newOperator: String) {
-        let operatorSymbols = Operator.allCases.map { $0.rawValue }
-        
-        guard let last = mathExpression.last else {
-            return
-        }
-        
-        if operatorSymbols.contains(last) {
-            mathExpression.removeLast()
-        }
-        
-        mathExpression.append(newOperator)
-        operatorLabel.text = newOperator
-        currentOperator = newOperator
-    }
-    
     private func addLastCalculationHistory() {
         guard !currentOperand.isEmpty && !currentOperator.isEmpty else {
             return
@@ -191,34 +175,43 @@ extension CalculatorViewController {
             return
         }
         
-        if isCalculated {
+        if calculatorManager.isCalculated {
             resetCurrentOperand()
-            isCalculated = false
+            calculatorManager.resetIsCalculated()
         }
         
         guard let `operator` = sender.titleLabel?.text else {
             return
         }
     
-        guard let currentOperandNumber = Double(currentOperand), !currentOperandNumber.isZero else {
-            changeOperator(to: `operator`)
+        guard let currentOperandDouble = calculatorManager.currentOperandToDouble(), !currentOperandDouble.isZero else {
+            operatorLabel.text = `operator`
             return
         }
         
-        guard let operandText = currentOperand.addCommaOnEveryThreeDigits() else {
+        guard let operandText = calculatorManager.addCommaOnEveryThreeDigits(to: calculatorManager.currentOperand) else {
             return
         }
         
-        if isNumberOverMaximumExpression(number: currentOperandNumber) {
-            addCalculationHistory(operandText: currentOperandNumber.description, operatorText: currentOperator)
+        guard !calculatorManager.expression.isEmpty else {
+            addCalculationHistory(operandText: operandText, operatorText: "")
+            calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: "")
+            return
+        }
+        
+        guard let operatorText = operatorLabel.text else {
+            return
+        }
+        
+        if calculatorManager.isNumberOverMaximumExpression(number: currentOperandDouble) {
+            addCalculationHistory(operandText: currentOperandDouble.description, operatorText: operatorText)
         } else {
-            addCalculationHistory(operandText: operandText, operatorText: currentOperator)
+            addCalculationHistory(operandText: operandText, operatorText: operatorText)
         }
+                
+        calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: operatorText)
         
-        mathExpression.append(currentOperand)
-        mathExpression.append(`operator`)
-        
-        changeOperator(to: `operator`)        
+        operatorLabel.text = `operator`
         resetCurrentOperand()
     }
     
