@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         temporaryOperandValues = [initialValue]
-        isOperatorEntered = false
         currentValueLabel.text = initialValue
     }
     
