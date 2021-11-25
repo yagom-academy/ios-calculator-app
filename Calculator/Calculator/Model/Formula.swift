@@ -12,23 +12,22 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var result = operands.dequeue() else {
+        guard let result = operands.dequeue() else {
             throw CalculatorError.emptyQueue
         }
         
-        var isContinue = true
-        repeat {
-            if let calculateOperator = operators.dequeue(),
-               let calculateOperand = operands.dequeue() {
-                result = calculateOperator.calculate(
-                    lhs: result,
-                    rhs: calculateOperand)
-            } else {
-                isContinue = false
-            }
-        } while isContinue
-        
-        return result
+        return recursiveCalculate(result: result)
+    }
+    
+    private mutating func recursiveCalculate(result: Double) -> Double {
+        if let calculateOperator = operators.dequeue(),
+          let calculateOperand = operands.dequeue() {
+            let calculatedResult = calculateOperator.calculate(lhs: result, rhs: calculateOperand)
+            
+            return recursiveCalculate(result: calculatedResult)
+        } else {
+            return result
+        }
     }
     
 }
