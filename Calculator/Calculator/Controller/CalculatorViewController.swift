@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     private var calculatorManager = CalculatorManager(displayingResult: false, isTypingOperand: false)
     private var formulasStackViewIsEmpty: Bool = true
     
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
 
 // MARK: - Actions
 
-extension ViewController {
+extension CalculatorViewController {
     @IBAction private func touchUpDigitButton(_ sender: UIButton) {
         if calculatorManager.displayingResult {
             initDisplayedFormulas()
@@ -170,7 +170,7 @@ extension ViewController {
 
 // MARK: - private Methods
 
-extension ViewController {
+extension CalculatorViewController {
     private func initDisplayedOperator() {
         displayedOperator = ""
     }
