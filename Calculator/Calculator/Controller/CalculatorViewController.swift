@@ -83,7 +83,7 @@ class CalculatorViewController: UIViewController {
             operatorLabel.textColor = .white
             
             let operandLabel = UILabel()
-            operandLabel.text = formatStackViewNumber(each.operandNumber)
+            operandLabel.text = formatNumber(each.operandNumber)
             operandLabel.textColor = .white
             
             stackView.addArrangedSubview(operatorLabel)
@@ -98,20 +98,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func formatStackViewNumber(_ number: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 15
-        numberFormatter.roundingMode = .halfUp
-        
-        guard let convertedNumber = numberFormatter.string(for: Double(number)) else {
-            return number
-        }
-        
-        return convertedNumber
-    }
-    
-    private func formatInputNumber(_ number: String) -> String {
+    private func formatNumber(_ number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
@@ -120,6 +107,12 @@ class CalculatorViewController: UIViewController {
         guard let formattedNumber = numberFormatter.string(for: Double(number)) else {
             return number
         }
+        
+        return formattedNumber
+    }
+    
+    private func formatInputNumber(_ number: String) -> String {
+        let formattedNumber = formatNumber(number)
         
         guard let numberDotindex = number.firstIndex(of: ".") else {
             return formattedNumber
