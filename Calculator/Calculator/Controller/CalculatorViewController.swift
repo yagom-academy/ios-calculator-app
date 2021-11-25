@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = formattedInputNumber(calculatorModel.currentInputOperand)
+        currentInputOperandLabel.text = formatInputNumber(calculatorModel.currentInputOperand)
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
@@ -78,7 +78,7 @@ class CalculatorViewController: UIViewController {
             operatorLabel.textColor = .white
             
             let operandLabel = UILabel()
-            operandLabel.text = convertFormattedNumber(each.operandNumber)
+            operandLabel.text = formatStackViewNumber(each.operandNumber)
             operandLabel.textColor = .white
             
             stackView.addArrangedSubview(operatorLabel)
@@ -93,7 +93,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func convertFormattedNumber(_ number: String) -> String {
+    private func formatStackViewNumber(_ number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
@@ -106,7 +106,7 @@ class CalculatorViewController: UIViewController {
         return convertedNumber
     }
     
-    private func formattedInputNumber(_ number: String) -> String {
+    private func formatInputNumber(_ number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
