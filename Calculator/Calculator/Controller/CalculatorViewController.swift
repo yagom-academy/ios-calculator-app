@@ -52,7 +52,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func resultButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedResultButton(_ button: UIButton) {
         switch operatorLabel.text!.isEmpty {
         case true:
             return
@@ -60,7 +60,7 @@ class CalculatorViewController: UIViewController {
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
             addStackViewLabel()
-            resetOperatorLable()
+            resetOperatorLabel()
             var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
             let result = parsedFormula.result()
             operandLabel.text = Calculator.numberFormatter.string(for: result)
@@ -68,7 +68,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func operandButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedOperandButton(_ button: UIButton) {
         switch operandLabel.text! {
         case Calculator.defaultOperandLabel:
             operandLabel.text = Calculator.emptyString
@@ -78,20 +78,20 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func operatorButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedOperatorButton(_ button: UIButton) {
         switch operatorLabel.text!.isEmpty || operandLabel.text! != Calculator.defaultOperandLabel {
         case true:
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
             addStackViewLabel()
-            resetOperandLable()
+            resetOperandLabel()
             operatorLabel.text = button.currentTitle
         case false:
             operatorLabel.text = button.currentTitle
         }
     }
     
-    @IBAction func zeroButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedZeroButton(_ button: UIButton) {
         guard var operandLabelText = operandLabel.text,
               let buttonTitle = button.currentTitle else { return }
         
@@ -101,7 +101,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func decimalPointButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedDecimalPointButton(_ button: UIButton) {
         switch operandLabel.text!.contains(Calculator.decimalPoint) {
         case true:
             return
@@ -110,7 +110,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func changeSignButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedChangeSignButton(_ button: UIButton) {
         guard operandLabel.text! != Calculator.defaultOperandLabel else {
             return
         }
@@ -123,15 +123,15 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func allClearButtonDidTouchUp(_ button: UIButton) {
+    @IBAction func tappedAllClearButton(_ button: UIButton) {
         resetSavedCalculatorItems()
-        resetOperandLable()
-        resetOperatorLable()
+        resetOperandLabel()
+        resetOperatorLabel()
         clearAllStackViewLabel()
     }
     
-    @IBAction func clearEntryButtonDidTouchUp(_ button: UIButton) {
-        resetOperandLable()
+    @IBAction func tappedClearEntryButton(_ button: UIButton) {
+        resetOperandLabel()
     }
     
     @IBAction func occurHapticFeedback() {
@@ -152,11 +152,11 @@ class CalculatorViewController: UIViewController {
         savedCalculatorItems = Calculator.emptyString
     }
     
-    private func resetOperandLable() {
+    private func resetOperandLabel() {
         operandLabel.text = Calculator.defaultOperandLabel
     }
     
-    private func resetOperatorLable() {
+    private func resetOperatorLabel() {
         operatorLabel.text = Calculator.emptyString
     }
 }
