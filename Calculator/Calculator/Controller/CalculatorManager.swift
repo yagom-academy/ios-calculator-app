@@ -28,6 +28,10 @@ struct CalculatorManager {
     mutating func reset() {
         currentOperator = ""
         expression = ""
+        resetIsCalculated()
+    }
+    
+    mutating func resetIsCalculated() {
         isCalculated = false
     }
     
