@@ -38,6 +38,22 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = calculatorManager.currentOperand
     }
     
+    private func changeOperator(to newOperator: String) {
+        let operatorMarks = Operator.marks
+        
+        guard let last = calculatorManager.expression.last else {
+            return
+        }
+        
+        if operatorMarks.contains(last) {
+            calculatorManager.removeLastExpression()
+        }
+        
+        calculatorManager.fetchExpression(operand: "", operator: newOperator)
+        operatorLabel.text = newOperator
+        calculatorManager.fetchOperator(with: newOperator)
+    }
+    
     private func addLastCalculationHistory() {
         guard !calculatorManager.currentOperand.isEmpty && !calculatorManager.currentOperator.isEmpty else {
             return
@@ -159,18 +175,11 @@ extension CalculatorViewController {
         }
     
         guard let currentOperandDouble = calculatorManager.currentOperandToDouble(), !currentOperandDouble.isZero else {
-            operatorLabel.text = `operator`
-            calculatorManager.fetchOperator(with: `operator`)
+            changeOperator(to: `operator`)
             return
         }
         
         guard let operandText = calculatorManager.addCommaOnEveryThreeDigits(to: calculatorManager.currentOperand) else {
-            return
-        }
-        
-        guard !calculatorManager.expression.isEmpty else {
-            addCalculationHistory(operandText: operandText, operatorText: "")
-            calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: "")
             return
         }
         
@@ -182,8 +191,7 @@ extension CalculatorViewController {
                 
         calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: calculatorManager.currentOperator)
         
-        calculatorManager.fetchOperator(with: `operator`)
-        operatorLabel.text = `operator`
+        changeOperator(to: `operator`)
         resetCurrentOperand()
     }
     

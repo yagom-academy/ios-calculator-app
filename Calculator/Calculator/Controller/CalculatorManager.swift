@@ -35,6 +35,10 @@ struct CalculatorManager {
         isCalculated = false
     }
     
+    mutating func removeLastExpression() {
+        self.expression.removeLast()
+    }
+    
     mutating func fetchOperand(input: String) {
         let digitsCount = currentOperand.filter { $0.isNumber }.count
         
