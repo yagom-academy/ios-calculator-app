@@ -18,7 +18,7 @@ class CalculatorViewController: UIViewController {
         guard var operandLabelText = operandLabel.text,
               let operatorLabelText = operatorLabel.text else { return }
         
-        while operandLabelText.hasMeaninglessDecimal() {
+        while operandLabelText.hasMeaninglessDecimal {
             operandLabelText.removeLast()
             operandLabel.text = operandLabelText
         }
@@ -36,19 +36,19 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedResultButton(_ button: UIButton) {
-        switch operatorLabel.text!.isEmpty {
-        case true:
-            return
-        case false:
-            appendCalculatorItem("\(operatorLabel.text!)")
-            appendCalculatorItem("\(operandLabel.text!)")
-            addStackViewLabel()
-            resetOperatorLabelText()
-            var parsedFormula = ExpressionParser.parse(from: calculatorItems)
-            let result = parsedFormula.result()
-            operandLabel.text = CalculatorSetting.formatNumber(result)
-            resetCalculatorItems()
-        }
+        guard let operatorLabelText = operatorLabel.text,
+              let operandLabelText = operandLabel.text,
+              operatorLabelText.isNotEmpty else { return }
+
+        appendCalculatorItem("\(operatorLabelText)")
+        appendCalculatorItem("\(operandLabelText)")
+        addStackViewLabel()
+        resetOperatorLabelText()
+        
+        var parsedFormula = ExpressionParser.parse(from: calculatorItems)
+        let calculatedResult = parsedFormula.result()
+        operandLabel.text = CalculatorSetting.formatNumber(calculatedResult)
+        resetCalculatorItems()
     }
     
     @IBAction func tappedOperandButton(_ button: UIButton) {
