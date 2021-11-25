@@ -16,7 +16,6 @@ enum CalculatorSetting {
         return singleLabel
     }
     
-    
     static func scrollToBottom(on scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0,
