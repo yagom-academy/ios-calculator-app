@@ -79,7 +79,7 @@ extension ViewController {
             return
         }
         
-        operandLabel.text = togglePlusMinus()
+        togglePlusMinus()
     }
     
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
@@ -132,6 +132,18 @@ extension ViewController {
             
             operandLabel.text = currentText + CalculatorSymbol.Dot
         }
+    }
+    
+    private func togglePlusMinus() {
+        var currentText = operandLabel.text ?? CalculatorSymbol.Zero
+        
+        if currentText.hasPrefix(CalculatorSymbol.Minus) == true {
+            currentText = currentText.replacingOccurrences(of: CalculatorSymbol.Minus, with: String.empty)
+        } else {
+            currentText = CalculatorSymbol.Minus + currentText
+        }
+        
+        operandLabel.text = currentText
     }
     
     private func resetOperandLabel() {
@@ -221,17 +233,5 @@ extension ViewController {
     
     private func removeComma(text: String?) -> String {
         return text?.replacingOccurrences(of: CalculatorSymbol.Comma, with: String.empty) ?? String.empty
-    }
-    
-    private func togglePlusMinus() -> String {
-        var currentText = operandLabel.text ?? CalculatorSymbol.Zero
-        
-        if currentText.hasPrefix(CalculatorSymbol.Minus) == true {
-            currentText = currentText.replacingOccurrences(of: CalculatorSymbol.Minus, with: String.empty)
-        } else {
-            currentText = CalculatorSymbol.Minus + currentText
-        }
-        
-        return currentText
     }
 }
