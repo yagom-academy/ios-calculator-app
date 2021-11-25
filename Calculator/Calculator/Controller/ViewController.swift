@@ -2,16 +2,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var formulaScrollView: UIScrollView!
-    @IBOutlet var formulaStackView: UIStackView!
-    @IBOutlet var currentOperatorLabel: UILabel!
-    @IBOutlet var currentValueLabel: UILabel!
+    @IBOutlet private var formulaScrollView: UIScrollView!
+    @IBOutlet private var formulaStackView: UIStackView!
+    @IBOutlet private var currentOperatorLabel: UILabel!
+    @IBOutlet private var currentValueLabel: UILabel!
     
-    let initialValue = "0"
-    var valuesForCalculate: [String] = []
-    var temporaryOperandValues: [String] = []
-    var isOperatorEntered: Bool = false
-    var signIsPositive: Bool = true
+    private let initialValue = "0"
+    private var valuesForCalculate: [String] = []
+    private var temporaryOperandValues: [String] = []
+    private var isOperatorEntered: Bool = false
+    private var signIsPositive: Bool = true
     var isCalculated: Bool = false
     
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         currentValueLabel.text = initialValue
     }
     
-    func addToFormulaHistory() {
+    private func addToFormulaHistory() {
         let stackView = UIStackView()
         stackView.spacing = 8.0
         
@@ -39,12 +39,12 @@ class ViewController: UIViewController {
         formulaStackView.addArrangedSubview(stackView)
     }
     
-    func removeStackViewContents() {
+    private func removeStackViewContents() {
         formulaStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in view.removeFromSuperview()
         })
     }
     
-    @IBAction func hitOperandButton(_ sender: UIButton) {
+    @IBAction private func hitOperandButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         isOperatorEntered = false
     }
     
-    func endOperandInput() {
+    private func endOperandInput() {
         if signIsPositive {
             valuesForCalculate.append(temporaryOperandValues.joined())
         } else {
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         signIsPositive = true
     }
     
-    @IBAction func hitOperatorButton(_ sender: UIButton) {
+    @IBAction private func hitOperatorButton(_ sender: UIButton) {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
@@ -125,18 +125,18 @@ class ViewController: UIViewController {
         currentOperatorLabel.text = ""
     }
     
-    @IBAction func hitACButton(_ sender: UIButton) {
+    @IBAction private func hitACButton(_ sender: UIButton) {
         resetToInitialState()
         removeStackViewContents()
         currentValueLabel.text = initialValue
     }
     
-    @IBAction func hitCEButton(_ sender: UIButton) {
+    @IBAction private func hitCEButton(_ sender: UIButton) {
         temporaryOperandValues.removeAll()
         currentValueLabel.text = initialValue
     }
     
-    @IBAction func hitCodeConversionButton(_ sender: UIButton) {
+    @IBAction private func hitCodeConversionButton(_ sender: UIButton) {
         guard currentValueLabel.text != initialValue else {
             return
         }
@@ -149,7 +149,7 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func hitEqualButton(_ sender: UIButton) {
+    @IBAction private func hitEqualButton(_ sender: UIButton) {
         guard isCalculated == false,
               valuesForCalculate != [initialValue] else {
               return
@@ -167,7 +167,7 @@ class ViewController: UIViewController {
         isCalculated = true
     }
     
-    func addCommaToValue(_ value: Double) -> String {
+    private func addCommaToValue(_ value: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         guard let resultWithComma = numberFormatter.string(for: value) else {
