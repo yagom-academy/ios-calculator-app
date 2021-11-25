@@ -15,11 +15,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculatorItemsScrollView: UIScrollView!
     
     private func addStackViewLabel() {
-        let singleItem = UILabel()
-        singleItem.font = UIFont.preferredFont(forTextStyle: .title3)
-        singleItem.textColor = .white
-        singleItem.adjustsFontSizeToFitWidth = true
-        
+        let singleItem = CalculatorSetting.adjustLabelAttribute()
         if operandLabel.text!.contains(String.decimalPoint) {
             while operandLabel.text!.hasSuffix(String.zero) || operandLabel.text!.hasSuffix(String.decimalPoint) {
                 operandLabel.text!.removeLast()

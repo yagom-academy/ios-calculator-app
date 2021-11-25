@@ -8,6 +8,14 @@
 import UIKit
 
 enum CalculatorSetting {
+    static func adjustLabelAttribute() -> UILabel {
+        let singleLabel = UILabel()
+        singleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        singleLabel.textColor = .white
+        singleLabel.adjustsFontSizeToFitWidth = true
+        return singleLabel
+    }
+    
     static func formatNumber(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
