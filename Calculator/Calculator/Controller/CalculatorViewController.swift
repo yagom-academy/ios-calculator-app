@@ -26,7 +26,7 @@ class CalculatorViewController: UIViewController {
             }
         }
         
-        savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
+        savedItemlabel.text = "\(operatorLabel.text!)\(Character.whiteSpace)\(operandLabel.text!)"
         savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
         scrollToBottom()
     }
@@ -34,7 +34,7 @@ class CalculatorViewController: UIViewController {
     private func scrollToBottom() {
         savedCalculatorItemsScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: savedCalculatorItemsScrollView.contentSize.height - savedCalculatorItemsScrollView.bounds.size.height + savedCalculatorItemsScrollView.contentInset.bottom)
-        if(bottomOffset.y > 0) {
+        if bottomOffset.y > 0 {
             savedCalculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
         }
     }
@@ -42,9 +42,7 @@ class CalculatorViewController: UIViewController {
     private func clearAllStackViewLabel() {
         let addedStackViewLabels = savedCalculatorItemsStackView.arrangedSubviews
         
-        addedStackViewLabels.forEach { subview in
-            return subview.removeFromSuperview()
-        }
+        addedStackViewLabels.forEach { subview in subview.removeFromSuperview() }
     }
     
     @IBAction func tappedResultButton(_ button: UIButton) {
@@ -67,9 +65,9 @@ class CalculatorViewController: UIViewController {
         switch operandLabel.text! {
         case String.zero:
             operandLabel.text = String.empty
-            operandLabel.text! += button.currentTitle!
+            operandLabel.text! = "\(operandLabel.text!)\(button.currentTitle!)"
         default:
-            operandLabel.text! += button.currentTitle!
+            operandLabel.text! = "\(operandLabel.text!)\(button.currentTitle!)"
         }
     }
     
@@ -99,7 +97,7 @@ class CalculatorViewController: UIViewController {
         case true:
             return
         case false:
-            operandLabel.text! += button.currentTitle!
+            operandLabel.text! = "\(operandLabel.text!)\(button.currentTitle!)"
         }
     }
     
@@ -112,7 +110,7 @@ class CalculatorViewController: UIViewController {
         case true:
             operandLabel.text!.removeFirst()
         case false:
-            operandLabel.text! = String.negativeSign + operandLabel.text!
+            operandLabel.text! = "\(String.negativeSign)\(operandLabel.text!)"
         }
     }
     
@@ -135,9 +133,9 @@ class CalculatorViewController: UIViewController {
         switch item.contains(String.decimalComma) {
         case true:
             let commaRemoveditem = item.components(separatedBy: String.decimalComma).joined()
-            savedCalculatorItems += "\(Character.whiteSpace)\(commaRemoveditem)"
+            savedCalculatorItems = "\(savedCalculatorItems)\(Character.whiteSpace)\(commaRemoveditem)"
         case false:
-            savedCalculatorItems += "\(Character.whiteSpace)\(item)"
+            savedCalculatorItems = "\(savedCalculatorItems)\(Character.whiteSpace)\(item)"
         }
     }
     
