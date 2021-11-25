@@ -91,6 +91,10 @@ struct CalculatorManager {
         expression.append(operand)
         expression.append(`operator`)
     }
+    
+    func currentOperandToDouble() -> Double? {
+        return Double(self.currentOperand)
+    }
 }
 
 extension CalculatorManager {
