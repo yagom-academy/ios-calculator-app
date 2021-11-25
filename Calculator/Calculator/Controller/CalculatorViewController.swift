@@ -9,6 +9,7 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    // MARK: Properties
     var calculatorModel = Calculator() {
         didSet {
             removeAllFormulaHistory()
@@ -21,7 +22,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var formulaHistoryStackView: UIStackView!
     @IBOutlet weak var currentInputOperandLabel: UILabel!
     @IBOutlet weak var currentInputOperatorLabel: UILabel!
-
+    
+    // MARK: View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,44 +31,7 @@ class CalculatorViewController: UIViewController {
         updateCurrentInputLabel()
     }
     
-    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        calculatorModel.clearAllExpression()
-    }
-    
-    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
-        calculatorModel.clearEntry()
-    }
-    
-    @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
-        calculatorModel.changeSignOfNumber()
-    }
-    
-    @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        formulaHistoryScrollView.scrollToBottom()
-        calculatorModel.calculateAllExpression()
-    }
-    
-    @IBAction func touchUpDotButton(_ sender: UIButton) {
-        calculatorModel.inputDot()
-    }
-    
-    @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
-        guard let operatorSymbol = sender.titleLabel?.text else {
-            return
-        }
-        
-        formulaHistoryScrollView.scrollToBottom()
-        calculatorModel.inputOperator(operatorSymbol)
-    }
-    
-    @IBAction func touchUpOperandsButton(_ sender: UIButton) {
-        guard let operandSymbol = sender.titleLabel?.text else {
-            return
-        }
-        
-        calculatorModel.inputNumber(operandSymbol)
-    }
-    
+    // MARK: Private Method
     private func updateCurrentInputLabel() {
         currentInputOperandLabel.text = formatInputNumber(calculatorModel.currentInputOperand)
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
@@ -124,6 +89,46 @@ class CalculatorViewController: UIViewController {
         
         return String(formattedNumber[..<formattedNumberDotIndex]) + String(number[numberDotindex...])
     }
+    
+    // MARK: Action
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+        calculatorModel.clearAllExpression()
+    }
+    
+    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
+        calculatorModel.clearEntry()
+    }
+    
+    @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
+        calculatorModel.changeSignOfNumber()
+    }
+    
+    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        formulaHistoryScrollView.scrollToBottom()
+        calculatorModel.calculateAllExpression()
+    }
+    
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        calculatorModel.inputDot()
+    }
+    
+    @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
+        guard let operatorSymbol = sender.titleLabel?.text else {
+            return
+        }
+        
+        formulaHistoryScrollView.scrollToBottom()
+        calculatorModel.inputOperator(operatorSymbol)
+    }
+    
+    @IBAction func touchUpOperandsButton(_ sender: UIButton) {
+        guard let operandSymbol = sender.titleLabel?.text else {
+            return
+        }
+        
+        calculatorModel.inputNumber(operandSymbol)
+    }
+    
 }
 
 fileprivate extension UIScrollView {
