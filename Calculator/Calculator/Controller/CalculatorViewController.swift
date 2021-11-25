@@ -193,10 +193,9 @@ extension CalculatorViewController {
               let result = numberFormatter.string(from: NSNumber(value: number)) else {
             return ""
         }
-        if rawOperand.contains(".") {
-            if insertedNumber == "0" || insertedNumber == "00" {
-                return rawOperand
-            }
+        guard !rawOperand.contains("."),
+              insertedNumber != "0" || insertedNumber != "00" else {
+            return rawOperand
         }
         return result
     }
