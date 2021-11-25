@@ -25,7 +25,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     private var isNotCalculated: Bool {
-            hasCalculated == false
+        hasCalculated == false
     }
     private let calculatorController = CalculatorController()
     
