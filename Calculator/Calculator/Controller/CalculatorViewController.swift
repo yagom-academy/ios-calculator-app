@@ -14,8 +14,9 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     
     //MARK: - Properties
+    private var calculatorManager = CalculatorManager()
     private var historyStack: [String] = []
-    private var currentOperand = ""
+    private var currentOperand = ""
     private var currentOperator = ""
     
     private var currentOperandLabelText: String {
@@ -79,7 +80,7 @@ final class CalculatorViewController: UIViewController {
         updateHistoryStack(with: currentOperator, and: currentOperand)
         updateHistoryStackView(with: currentOperator, and: currentOperandLabelText)
         
-        let result = calculateResult(from: historyStack)
+        let result = calculatorManager.calculateResult(from: historyStack)
         do {
             if let presentableResult = try result.presentableFormat() {
                 update(currentOperandLabel, to: presentableResult)
@@ -166,26 +167,6 @@ extension CalculatorViewController {
         }
     }
     
-    private func calculateResult(from historyStack: [String]) -> Double {
-        let equationString = historyStack.filter { $0 != "" }
-            .joined()
-        var formula = ExpressionParser.parse(from: equationString)
-        let result = getCalculationResult(from: &formula)
-        return result
-    }
-    
-    private func getCalculationResult(from formula: inout Formula) -> Double {
-        var result = 0.0
-        do {
-            try result = formula.result()
-        } catch let error as CalculateItemQueueError {
-            print(error.errorDescription)
-        } catch {
-            print(error)
-        }
-        return result
-    }
-    
     private func updateHistoryStack(with currentOperator: String, and currentOperand: String) {
         historyStack.append(contentsOf: [currentOperator, currentOperand])
     }
@@ -233,5 +214,29 @@ extension CalculatorViewController {
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
         return label
+    }
+}
+//MARK: - CalculatorManager
+extension CalculatorViewController {
+    private struct CalculatorManager: Calculatable {
+        func calculateResult(from historyStack: [String]) -> Double {
+            let equationString = historyStack.filter { $0 != "" }
+                .joined()
+            var formula = ExpressionParser.parse(from: equationString)
+            let result = getCalculationResult(from: &formula)
+            return result
+        }
+        
+        func getCalculationResult(from formula: inout Formula) -> Double {
+            var result = 0.0
+            do {
+                try result = formula.result()
+            } catch let error as CalculateItemQueueError {
+                print(error.errorDescription)
+            } catch {
+                print(error)
+            }
+            return result
+        }
     }
 }

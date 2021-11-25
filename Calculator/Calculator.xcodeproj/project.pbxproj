@@ -33,6 +33,9 @@
 		ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */; };
 		ED1A7A9027429023002B36CE /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8F27429023002B36CE /* CalculateItem.swift */; };
 		ED28F047274E4A7E000EA57D /* NumberFormatGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */; };
+		ED28F049274F336C000EA57D /* Calculatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F048274F336C000EA57D /* Calculatable.swift */; };
+		ED28F04F274F3438000EA57D /* MockCalculatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F04E274F3438000EA57D /* MockCalculatorManager.swift */; };
+		ED28F051274F354F000EA57D /* CalculatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F050274F354F000EA57D /* CalculatableTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		ED1A7A8F27429023002B36CE /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatGenerator.swift; sourceTree = "<group>"; };
+		ED28F048274F336C000EA57D /* Calculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculatable.swift; sourceTree = "<group>"; };
+		ED28F04E274F3438000EA57D /* MockCalculatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCalculatorManager.swift; sourceTree = "<group>"; };
+		ED28F050274F354F000EA57D /* CalculatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				ED00CF4D273BC4A50081B9F3 /* DummyItem.swift */,
+				ED28F04E274F3438000EA57D /* MockCalculatorManager.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -178,6 +185,7 @@
 				ED1A7A7C273E496B002B36CE /* OperatorDivideTests.swift */,
 				ED1A7A7E273E62ED002B36CE /* OperatorMultipyTests.swift */,
 				ED1A7A8327413056002B36CE /* ExpressionParserTests.swift */,
+				ED28F050274F354F000EA57D /* CalculatableTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -208,6 +216,7 @@
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
 				ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */,
+				ED28F048274F336C000EA57D /* Calculatable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -320,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED28F049274F336C000EA57D /* Calculatable.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
 				ED1A7A822740E12C002B36CE /* Formula.swift in Sources */,
 				2514146E274CBA620086B0A8 /* NumberFormatError.swift in Sources */,
@@ -347,8 +357,10 @@
 				ED1A7A7B273E456F002B36CE /* OperatorSubtractTests.swift in Sources */,
 				ED00CF4E273BC4A50081B9F3 /* DummyItem.swift in Sources */,
 				ED00CF4A273BA1E80081B9F3 /* CalculatorItemQueueTests.swift in Sources */,
+				ED28F04F274F3438000EA57D /* MockCalculatorManager.swift in Sources */,
 				ED1A7A67273E245C002B36CE /* FormulaTests.swift in Sources */,
 				ED00CF3B27397DA40081B9F3 /* LinkedListTests.swift in Sources */,
+				ED28F051274F354F000EA57D /* CalculatableTests.swift in Sources */,
 				ED1A7A7D273E496B002B36CE /* OperatorDivideTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
