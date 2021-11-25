@@ -1,5 +1,5 @@
 //
-//  Calculator.swift
+//  CalculatorSetting.swift
 //  Calculator
 //
 //  Created by 예거 on 2021/11/23.
@@ -7,16 +7,20 @@
 
 import UIKit
 
-enum Calculator {
-    static let hapticGenerator = UISelectionFeedbackGenerator()
-    static let numberFormatter: NumberFormatter = {
+enum CalculatorSetting {
+    static func formatNumber(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.roundingMode = .halfUp
-        return numberFormatter
-    }()
+        return numberFormatter.string(for: input) ?? String.empty
+    }
+    
+    static func occurHapticFeedback() {
+        let hapticGenerator = UISelectionFeedbackGenerator()
+        hapticGenerator.selectionChanged()
+    }
 }
 
 extension Character {

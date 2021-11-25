@@ -58,7 +58,7 @@ class CalculatorViewController: UIViewController {
             resetOperatorLabel()
             var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
             let result = parsedFormula.result()
-            operandLabel.text = Calculator.numberFormatter.string(for: result)
+            operandLabel.text = CalculatorSetting.formatNumber(result)
             resetSavedCalculatorItems()
         }
     }
@@ -130,7 +130,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func occurHapticFeedback() {
-        Calculator.hapticGenerator.selectionChanged()
+        CalculatorSetting.occurHapticFeedback()
     }
     
     private func saveCalculator(item: String) {
