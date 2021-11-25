@@ -9,7 +9,7 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let convertedOperand = input.split(with: " ")
+        let convertedOperand = input.split(with: Calculator.whiteSpace)
                                     .compactMap { operand in Double(operand) }
         let convertedOperator = componentsByOperators(from: input)
                                 .compactMap { `operator` in Operator(symbol: `operator`) }
@@ -20,7 +20,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        return input.split(with: Calculator.whiteSpace)
                     .filter { eachString in Operator.doesContain(eachString) }
     }
 }

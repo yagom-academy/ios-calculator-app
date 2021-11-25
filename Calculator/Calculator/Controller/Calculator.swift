@@ -8,6 +8,7 @@
 import UIKit
 
 enum Calculator {
+    static let whiteSpace: Character = " "
     static let emptyString: String = ""
     static let decimalPoint: String = "."
     static let decimalComma: String = ","
