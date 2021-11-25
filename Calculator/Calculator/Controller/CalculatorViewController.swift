@@ -118,7 +118,7 @@ extension CalculatorViewController {
     }
     
     @IBAction func touchUPEqualButton(_ sender: UIButton) {
-        if rawOperand == "" || hasCalculated {
+        guard calculationHistoryStackView.arrangedSubviews.count > 0 else {
             os_log(.error, log: .error, LogMessage.canNotCalculate)
             return
         }
