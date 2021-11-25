@@ -31,7 +31,6 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         calculatorModel.clearAllExpression()
-        removeAllFormulaHistory()
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -52,13 +51,19 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
-        guard let operatorSymbol = sender.titleLabel?.text else { return }
+        guard let operatorSymbol = sender.titleLabel?.text else {
+            return
+        }
+        
         formulaHistoryScrollView.scrollToBottom()
         calculatorModel.inputOperator(operatorSymbol)
     }
     
     @IBAction func touchUpOperandsButton(_ sender: UIButton) {
-        guard let operandSymbol = sender.titleLabel?.text else { return }
+        guard let operandSymbol = sender.titleLabel?.text else {
+            return
+        }
+        
         calculatorModel.inputNumber(operandSymbol)
     }
     

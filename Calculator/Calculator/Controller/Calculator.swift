@@ -155,7 +155,7 @@ struct Calculator {
     }
     
     mutating private func removeZeroSuffix(from operand: String) -> String {
-        if operand.hasSuffix(".0") {
+        if operand.hasSuffix(LabelContents.dotZero) {
             guard let doubleOperandValue = Double(operand) else {
                 return operand
             }
@@ -167,12 +167,13 @@ struct Calculator {
     }
     
     mutating private func setMaximumDigit() {
-        if currentInputOperand.count >= 15 {
+        if currentInputOperand.count >= LabelContents.maximumDigitNumber {
             currentInputOperand.removeLast()
         }
     }
     
     private struct LabelContents {
+        static let dotZero = ".0"
         static let notANumber = "NaN"
         static let emptyString = ""
         static let defaultOperand = "0"
@@ -180,5 +181,6 @@ struct Calculator {
         static let pointSymbol = "."
         static let doubleZero = "00"
         static let error = "error"
+        static let maximumDigitNumber = 15
     }
 }
