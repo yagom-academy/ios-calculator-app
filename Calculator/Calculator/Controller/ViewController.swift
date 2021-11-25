@@ -2,45 +2,45 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var fomulaScrollView: UIScrollView!
-    @IBOutlet var fomulaStackView: UIStackView!
-    @IBOutlet var currentOperator: UILabel!
-    @IBOutlet var currentValue: UILabel!
+    @IBOutlet var formulaScrollView: UIScrollView!
+    @IBOutlet var formulaStackView: UIStackView!
+    @IBOutlet var currentOperatorLabel: UILabel!
+    @IBOutlet var currentValueLabel: UILabel!
     
     let initialValue = "0"
-    var stringToCalculate: [String] = []
-    var inputOperandValues: [String] = []
+    var valuesForCalculate: [String] = []
+    var temporaryOperandValues: [String] = []
     var isOperatorEntered: Bool = false
     var signIsPositive: Bool = true
     var isCalculated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputOperandValues = [initialValue]
+        temporaryOperandValues = [initialValue]
         isOperatorEntered = false
-        currentValue.text = initialValue
+        currentValueLabel.text = initialValue
     }
     
-    func addToFomulaHistory() {
+    func addToFormulaHistory() {
         let stackView = UIStackView()
         stackView.spacing = 8.0
         
-        let opertatorView = UILabel()
-        opertatorView.text = currentOperator.text
-        opertatorView.textColor = .white
+        let operatorView = UILabel()
+        operatorView.text = currentOperatorLabel.text
+        operatorView.textColor = .white
         
         let operandView = UILabel()
-        operandView.text = currentValue.text
+        operandView.text = currentValueLabel.text
         operandView.textColor = .white
         
-        stackView.addArrangedSubview(opertatorView)
+        stackView.addArrangedSubview(operatorView)
         stackView.addArrangedSubview(operandView)
         
-        fomulaStackView.addArrangedSubview(stackView)
+        formulaStackView.addArrangedSubview(stackView)
     }
     
     func removeStackViewContents() {
-        fomulaStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in view.removeFromSuperview()
+        formulaStackView.arrangedSubviews.forEach({ (view: UIView) -> Void in view.removeFromSuperview()
         })
     }
     
@@ -48,57 +48,57 @@ class ViewController: UIViewController {
         guard let inputButtonTitle = sender.titleLabel?.text else {
             return
         }
-        guard inputOperandValues.count <= 20 else {
+        guard temporaryOperandValues.count <= 20 else {
             return
         }
         
-        if inputOperandValues.contains(".") {
+        if temporaryOperandValues.contains(".") {
             guard inputButtonTitle != "." else {
                 return
             }
         } else {
-            guard inputButtonTitle != "0" || inputOperandValues.first != "0" else {
+            guard inputButtonTitle != "0" || temporaryOperandValues.first != "0" else {
                 return
             }
-            guard inputButtonTitle != "00" || inputOperandValues.first != "0" else {
+            guard inputButtonTitle != "00" || temporaryOperandValues.first != "0" else {
                 return
             }
         }
-        inputOperandValues.append(inputButtonTitle)
+        temporaryOperandValues.append(inputButtonTitle)
         
-        if !inputOperandValues.contains(".") && inputOperandValues.first == initialValue {
-            inputOperandValues.removeFirst()
+        if !temporaryOperandValues.contains(".") && temporaryOperandValues.first == initialValue {
+            temporaryOperandValues.removeFirst()
         }
         
         let addcommaOperand: String
-        if inputOperandValues.contains(".") {
-            addcommaOperand = inputOperandValues.joined()
+        if temporaryOperandValues.contains(".") {
+            addcommaOperand = temporaryOperandValues.joined()
         } else {
-            addcommaOperand = addCommaToValue(Double(inputOperandValues.joined()) ?? 0)
+            addcommaOperand = addCommaToValue(Double(temporaryOperandValues.joined()) ?? 0)
         }
         
         if signIsPositive {
-            currentValue.text = addcommaOperand
+            currentValueLabel.text = addcommaOperand
         } else {
-            currentValue.text = "-" + addcommaOperand
+            currentValueLabel.text = "-" + addcommaOperand
         }
         isOperatorEntered = false
     }
     
     func endOperandInput() {
         if signIsPositive {
-            stringToCalculate.append(inputOperandValues.joined())
+            valuesForCalculate.append(temporaryOperandValues.joined())
         } else {
-            stringToCalculate.append("-" + inputOperandValues.joined())
+            valuesForCalculate.append("-" + temporaryOperandValues.joined())
         }
         
-        if stringToCalculate != [initialValue] {
-            addToFomulaHistory()
-            fomulaScrollView.scrollViewToBottom()
+        if valuesForCalculate != [initialValue] {
+            addToFormulaHistory()
+            formulaScrollView.scrollViewToBottom()
         }
         
-        inputOperandValues = [initialValue]
-        currentValue.text = initialValue
+        temporaryOperandValues = [initialValue]
+        currentValueLabel.text = initialValue
         isCalculated = false
         signIsPositive = true
     }
@@ -109,60 +109,60 @@ class ViewController: UIViewController {
         }
         endOperandInput()
         if isOperatorEntered {
-            stringToCalculate.removeLast()
-            stringToCalculate.append(inputButtonTitle)
+            valuesForCalculate.removeLast()
+            valuesForCalculate.append(inputButtonTitle)
         } else {
-            stringToCalculate.append(inputButtonTitle)
+            valuesForCalculate.append(inputButtonTitle)
             isOperatorEntered = true
         }
-        currentOperator.text = inputButtonTitle
+        currentOperatorLabel.text = inputButtonTitle
     }
     
     func resetToInitialState() {
-        inputOperandValues = [initialValue]
-        stringToCalculate.removeAll()
+        temporaryOperandValues = [initialValue]
+        valuesForCalculate.removeAll()
         isCalculated = false
-        currentOperator.text = ""
+        currentOperatorLabel.text = ""
     }
     
     @IBAction func hitACButton(_ sender: UIButton) {
         resetToInitialState()
         removeStackViewContents()
-        currentValue.text = initialValue
+        currentValueLabel.text = initialValue
     }
     
     @IBAction func hitCEButton(_ sender: UIButton) {
-        inputOperandValues.removeAll()
-        currentValue.text = initialValue
+        temporaryOperandValues.removeAll()
+        currentValueLabel.text = initialValue
     }
     
     @IBAction func hitCodeConversionButton(_ sender: UIButton) {
-        guard currentValue.text != initialValue else {
+        guard currentValueLabel.text != initialValue else {
             return
         }
-        guard let currentOperand = currentValue.text,
+        guard let currentOperand = currentValueLabel.text,
               let doubleTypeOperand = Double(currentOperand) else {
                   return
               }
         signIsPositive = !signIsPositive
-        currentValue.text = String(format: "%.4g", doubleTypeOperand * -1)
+        currentValueLabel.text = String(format: "%.4g", doubleTypeOperand * -1)
     }
 
     
     @IBAction func hitEqualButton(_ sender: UIButton) {
         guard isCalculated == false,
-              stringToCalculate != [initialValue] else {
+              valuesForCalculate != [initialValue] else {
               return
         }
         endOperandInput()
         let calculator = ExpressionParser.self
-        let doubleTypeResult = calculator.parse(from: stringToCalculate.joined()).result()
+        let doubleTypeResult = calculator.parse(from: valuesForCalculate.joined()).result()
         if doubleTypeResult.isNaN {
             resetToInitialState()
-            currentValue.text = "NaN"
+            currentValueLabel.text = "NaN"
         } else {
             resetToInitialState()
-            currentValue.text = addCommaToValue(doubleTypeResult)
+            currentValueLabel.text = addCommaToValue(doubleTypeResult)
         }
         isCalculated = true
     }
@@ -180,8 +180,8 @@ class ViewController: UIViewController {
 
 extension UIScrollView {
     func scrollViewToBottom() {
-        let setOfBottem = CGPoint(x: 0, y: contentSize.height)
-        setContentOffset(setOfBottem, animated: false)
+        let setOfBottom = CGPoint(x: 0, y: contentSize.height)
+        setContentOffset(setOfBottom, animated: false)
     }
 }
 
