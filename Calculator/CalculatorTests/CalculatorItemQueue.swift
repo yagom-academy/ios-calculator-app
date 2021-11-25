@@ -21,15 +21,15 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enQueue에_요소를_추가했을때_잘들어가는지() {
-        sut.enQueueElement(1)
+        sut.enQueue(1)
         
         XCTAssertEqual(sut.enQueueElements, [1])
     }
     
     func test_enQueue에_여러개의_요소를_추가했을때_잘들어가는지() {
-        sut.enQueueElement(1)
-        sut.enQueueElement(2)
-        sut.enQueueElement(3)
+        sut.enQueue(1)
+        sut.enQueue(2)
+        sut.enQueue(3)
         
         XCTAssertEqual(sut.enQueueElements, [1, 2, 3])
     }
@@ -39,9 +39,9 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enQueue에_요소여러개를_추가하고_deQueue했을때_마지막요소가_빠지는지() {
-        sut.enQueueElement(1)
-        sut.enQueueElement(2)
-        sut.enQueueElement(3)
+        sut.enQueue(1)
+        sut.enQueue(2)
+        sut.enQueue(3)
         
         XCTAssertEqual(try sut.deQueueFirstElement(), 1)
     }
