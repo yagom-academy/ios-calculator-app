@@ -42,13 +42,13 @@ class ViewController: UIViewController {
 
 // MARK: - IBAction
 extension ViewController {
-    @IBAction func touchUpOperandButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperandButton(_ sender: UIButton) {
         guard let operand = sender.currentTitle else { return }
         
         changeOperandLabel(text: operand)
     }
     
-    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         guard let currentText = operandLabel.text else { return }
         
@@ -65,16 +65,16 @@ extension ViewController {
         resetOperandLabel()
     }
     
-    @IBAction func touchUpACButton(_ sender: UIButton) {
+    @IBAction private func touchUpACButton(_ sender: UIButton) {
         initializeView()
         resetInputString()
     }
     
-    @IBAction func touchUpCEButton(_ sender: UIButton) {
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
         resetOperandLabel()
     }
     
-    @IBAction func touchUpPlusMinusButton(_ sender: UIButton) {
+    @IBAction private func touchUpPlusMinusButton(_ sender: UIButton) {
         guard operandLabel.text != "0" else {
             return
         }
@@ -82,11 +82,11 @@ extension ViewController {
         operandLabel.text = togglePlusMinus()
     }
     
-    @IBAction func touchUpDotButton(_ sender: UIButton) {
+    @IBAction private func touchUpDotButton(_ sender: UIButton) {
         insertDot()
     }
     
-    @IBAction func touchUpResultButton(_ sender: UIButton) {
+    @IBAction private func touchUpResultButton(_ sender: UIButton) {
         guard let `operator` = operatorLabel.text,
               `operator` != "" else { return }
         
