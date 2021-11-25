@@ -8,12 +8,18 @@
 import Foundation
 
 struct CalculatorManager {
+    // MARK: - Properties
     private(set) var currentOperand: String = "0"
     private(set) var currentOperator: String = ""
     private(set) var expression: String = ""
     private(set) var isCalculated = false
+    
     var isOperandContainsDot: Bool {
         return currentOperand.contains(".")
+    }
+    
+    var currentOperandDouble: Double? {
+        return Double(currentOperand)
     }
     
     private let maximumDigitsOfDoubleExpression = 16
@@ -21,62 +27,51 @@ struct CalculatorManager {
     
     let formatter = Formatter()
     
-    mutating func resetOperand() {
+    // MARK: - Methods
+    mutating func initializeCurrentOperand() {
         currentOperand = "0"
     }
     
-    mutating func reset() {
-        currentOperator = ""
-        expression = ""
-        resetIsCalculated()
-    }
-    
-    mutating func resetIsCalculated() {
+    mutating func initializeIsCalculated() {
         isCalculated = false
     }
     
-    mutating func removeLastExpression() {
-        self.expression.removeLast()
+    mutating func initialize() {
+        currentOperator = ""
+        expression = ""
+        initializeIsCalculated()
     }
     
-    mutating func fetchOperand(input: String) {
+    mutating func fetchOperand(with operand: String) {
         let digitsCount = currentOperand.filter { $0.isNumber }.count
         
         guard digitsCount < limitedDigitsOfExpression else {
             return
         }
         
-        if currentOperand == "0" && !["0","00", "."].contains(input) {
-            currentOperand = input
+        if currentOperand == "0" && !["0","00", "."].contains(operand) {
+            currentOperand = operand
             return
-        } else if currentOperand == "0" && ["0","00"].contains(input) {
+        } else if currentOperand == "0" && ["0","00"].contains(operand) {
             return
         }
         
-        currentOperand += input
+        currentOperand += operand
     }
     
-    mutating func fetchOperator(with newOperator: String) {
-        self.currentOperator = newOperator
+    mutating func fetchOperator(with operator: String) {
+        currentOperator = `operator`
+    }
+    
+    mutating func removeLastExpression() {
+        expression.removeLast()
     }
     
     func isNumberOverMaximumExpression(number: Double) -> Bool {
         return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
     }
     
-    func addCommaOnEveryThreeDigits(to operand: String) -> String? {
-        guard let doubleValue = Double(operand) else {
-            return nil
-        }
-
-        guard let result = formatter.string(from: NSNumber(value: doubleValue)) else {
-            return nil
-        }
-        
-        return result
-    }
-    
-    func splitWithIntegerAndFraction(from operand: String) -> (integer: String, fraction: String) {
+    func splitToIntegerAndFraction(from operand: String) -> (integer: String, fraction: String) {
         var integerDigits = operand
         var fractionDigits = ""
         
@@ -89,13 +84,25 @@ struct CalculatorManager {
         return (integerDigits, fractionDigits)
     }
     
+    func addCommaOnEveryThreeDigits(to operand: String) -> String? {
+        guard let doubleValue = Double(operand) else {
+            return nil
+        }
+
+        guard let formattedString = formatter.string(from: NSNumber(value: doubleValue)) else {
+            return nil
+        }
+        
+        return formattedString
+    }
+    
     mutating func toggleOperandSign(from operand: inout String) {
         if operand.contains("-") {
             operand.remove(at: operand.startIndex)
-            self.currentOperand.remove(at: operand.startIndex)
+            currentOperand.remove(at: currentOperand.startIndex)
         } else {
             operand.insert("-", at: operand.startIndex)
-            self.currentOperand.insert("-", at: operand.startIndex)
+            currentOperand.insert("-", at: currentOperand.startIndex)
         }
     }
     
@@ -104,19 +111,16 @@ struct CalculatorManager {
         expression.append(`operator`)
     }
     
-    func currentOperandToDouble() -> Double? {
-        return Double(self.currentOperand)
-    }
-    
     mutating func doCalculate() throws -> Double {
-        self.isCalculated = true
-        let formula = ExpressionParser.parse(from: self.expression)
+        isCalculated = true
+        let formula = ExpressionParser.parse(from: expression)
         
         let calculationResult = try formula.result()
         return calculationResult
     }
 }
 
+// MARK: - NumberFormatter
 extension CalculatorManager {
     class Formatter: NumberFormatter {
         override init() {

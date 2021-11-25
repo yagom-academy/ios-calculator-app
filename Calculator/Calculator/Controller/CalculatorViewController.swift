@@ -23,7 +23,7 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Private Methods
     private func resetToInitialState() {
-        calculatorManager.reset()
+        calculatorManager.initialize()
         operatorLabel.text = calculatorManager.currentOperator
         
         resetCurrentOperand()
@@ -34,7 +34,7 @@ class CalculatorViewController: UIViewController {
     }
 
     private func resetCurrentOperand() {
-        calculatorManager.resetOperand()
+        calculatorManager.initializeCurrentOperand()
         operandLabel.text = calculatorManager.currentOperand
     }
     
@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        guard let currentOperandDouble = calculatorManager.currentOperandToDouble() else {
+        guard let currentOperandDouble = calculatorManager.currentOperandDouble else {
             return
         }
         
@@ -109,9 +109,9 @@ extension CalculatorViewController {
             return
         }
                  
-        calculatorManager.fetchOperand(input: operand)
+        calculatorManager.fetchOperand(with: operand)
         
-        guard let currentOperandDouble = calculatorManager.currentOperandToDouble() else {
+        guard let currentOperandDouble = calculatorManager.currentOperandDouble else {
             return
         }
         
@@ -120,7 +120,7 @@ extension CalculatorViewController {
             return
         }
         
-        let separatedCurrentOperand = calculatorManager.splitWithIntegerAndFraction(from: calculatorManager.currentOperand)
+        let separatedCurrentOperand = calculatorManager.splitToIntegerAndFraction(from: calculatorManager.currentOperand)
         
         guard let operandText = calculatorManager.addCommaOnEveryThreeDigits(to: separatedCurrentOperand.integer) else {
             return
@@ -142,12 +142,12 @@ extension CalculatorViewController {
             return
         }
         
-        calculatorManager.fetchOperand(input: dot)
+        calculatorManager.fetchOperand(with: dot)
         operandLabel.text?.append(dot)
     }
     
     @IBAction private func touchUpChangePlusMinusSign(_ sender: Any) {
-        guard let currentOperandDouble = calculatorManager.currentOperandToDouble(), !currentOperandDouble.isZero else {
+        guard let currentOperandDouble = calculatorManager.currentOperandDouble, !currentOperandDouble.isZero else {
             return
         }
         
@@ -167,14 +167,14 @@ extension CalculatorViewController {
         
         if calculatorManager.isCalculated {
             resetCurrentOperand()
-            calculatorManager.resetIsCalculated()
+            calculatorManager.initializeIsCalculated()
         }
         
         guard let `operator` = sender.titleLabel?.text else {
             return
         }
     
-        guard let currentOperandDouble = calculatorManager.currentOperandToDouble(), !currentOperandDouble.isZero else {
+        guard let currentOperandDouble = calculatorManager.currentOperandDouble, !currentOperandDouble.isZero else {
             changeOperator(to: `operator`)
             return
         }
