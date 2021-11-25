@@ -20,8 +20,8 @@ class CalculatorViewController: UIViewController {
         savedItemlabel.textColor = .white
         savedItemlabel.adjustsFontSizeToFitWidth = true
         
-        if operandLabel.text!.contains(Calculator.decimalPoint) {
-            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(Calculator.decimalPoint) {
+        if operandLabel.text!.contains(String.decimalPoint) {
+            while operandLabel.text!.hasSuffix(String.zero) || operandLabel.text!.hasSuffix(String.decimalPoint) {
                 operandLabel.text!.removeLast()
             }
         }
@@ -65,8 +65,8 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedOperandButton(_ button: UIButton) {
         switch operandLabel.text! {
-        case Calculator.defaultOperandLabel:
-            operandLabel.text = Calculator.emptyString
+        case String.zero:
+            operandLabel.text = String.empty
             operandLabel.text! += button.currentTitle!
         default:
             operandLabel.text! += button.currentTitle!
@@ -74,7 +74,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorButton(_ button: UIButton) {
-        switch operatorLabel.text!.isEmpty || operandLabel.text! != Calculator.defaultOperandLabel {
+        switch operatorLabel.text!.isEmpty || operandLabel.text! != String.zero {
         case true:
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
@@ -90,14 +90,14 @@ class CalculatorViewController: UIViewController {
         guard var operandLabelText = operandLabel.text,
               let buttonTitle = button.currentTitle else { return }
         
-        if operandLabelText != Calculator.defaultOperandLabel {
+        if operandLabelText != String.zero {
             operandLabelText += buttonTitle
             operandLabel.text = operandLabelText
         }
     }
     
     @IBAction func tappedDecimalPointButton(_ button: UIButton) {
-        switch operandLabel.text!.contains(Calculator.decimalPoint) {
+        switch operandLabel.text!.contains(String.decimalPoint) {
         case true:
             return
         case false:
@@ -106,15 +106,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedChangeSignButton(_ button: UIButton) {
-        guard operandLabel.text! != Calculator.defaultOperandLabel else {
+        guard operandLabel.text! != String.zero else {
             return
         }
         
-        switch operandLabel.text!.hasPrefix(Calculator.negativeSign) {
+        switch operandLabel.text!.hasPrefix(String.negativeSign) {
         case true:
             operandLabel.text!.removeFirst()
         case false:
-            operandLabel.text! = Calculator.negativeSign + operandLabel.text!
+            operandLabel.text! = String.negativeSign + operandLabel.text!
         }
     }
     
@@ -134,25 +134,25 @@ class CalculatorViewController: UIViewController {
     }
     
     private func saveCalculator(item: String) {
-        switch item.contains(Calculator.decimalComma) {
+        switch item.contains(String.decimalComma) {
         case true:
-            let commaRemoveditem = item.components(separatedBy: Calculator.decimalComma).joined()
-            savedCalculatorItems += " \(commaRemoveditem)"
+            let commaRemoveditem = item.components(separatedBy: String.decimalComma).joined()
+            savedCalculatorItems += "\(Character.whiteSpace)\(commaRemoveditem)"
         case false:
-            savedCalculatorItems += " \(item)"
+            savedCalculatorItems += "\(Character.whiteSpace)\(item)"
         }
     }
     
     private func resetSavedCalculatorItems() {
-        savedCalculatorItems = Calculator.emptyString
+        savedCalculatorItems = String.empty
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = Calculator.defaultOperandLabel
+        operandLabel.text = String.zero
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = Calculator.emptyString
+        operatorLabel.text = String.empty
     }
 }
 

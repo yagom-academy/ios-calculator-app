@@ -8,12 +8,6 @@
 import UIKit
 
 enum Calculator {
-    static let whiteSpace: Character = " "
-    static let emptyString: String = ""
-    static let decimalPoint: String = "."
-    static let decimalComma: String = ","
-    static let negativeSign: String = "-"
-    static let defaultOperandLabel: String = "0"
     static let hapticGenerator = UISelectionFeedbackGenerator()
     static let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -23,4 +17,16 @@ enum Calculator {
         numberFormatter.roundingMode = .halfUp
         return numberFormatter
     }()
+}
+
+extension Character {
+    static let whiteSpace: Character = " "
+}
+
+extension String {
+    static let empty: String = ""
+    static let zero: String = "0"
+    static let decimalPoint: String = "."
+    static let decimalComma: String = ","
+    static let negativeSign: String = "-"
 }
