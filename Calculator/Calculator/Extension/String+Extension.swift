@@ -5,7 +5,11 @@ extension String {
         return ""
     }
     
-    func split(with target: Character) -> [String] {
+    func split(with target: Character) -> [Self] {
         return self.components(separatedBy: target.description)
+    }
+    
+    func removedComma() -> Self {
+        return self.replacingOccurrences(of: CalculatorSymbol.Comma, with: Self.empty)
     }
 }

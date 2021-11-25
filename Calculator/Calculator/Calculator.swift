@@ -3,18 +3,51 @@ import Foundation
 class Calculator {
     weak private var delegate: CalculatorDelegate?
     
+    var currentOperator: String
+    var currentOperand: String {
+        didSet {
+            delegate?.calculator(didChangeCurrentOperandTo: currentOperand)
+        }
+    }
+    var inputString: String
+    
+    private let numberFormatter = NumberFormatter()
+    
+    private var hasSuffixOperator: Bool {
+        return Operator.allCases.reduce(false) {
+            $0 == inputString.hasSuffix(String($1.rawValue))
+        }
+    }
+    
+    private var hasDot: Bool {
+        return currentOperand.contains(CalculatorSymbol.Dot)
+    }
+    
+    init(currentOperator: String = String.empty,
+         currentOperand: String = CalculatorSymbol.Zero,
+         inputString: String = String.empty) {
+        self.currentOperator = currentOperator
+        self.currentOperand = currentOperand
+        self.inputString = inputString
+        self.initNumberFormatter()
+    }
+    
     convenience init(delegate: CalculatorDelegate) {
         self.init()
         self.delegate = delegate
+    }
+    
+    private func initNumberFormatter() {
+        numberFormatter.roundingMode = .ceiling
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
     }
 }
 
 // MARK: -Receive Event
 extension Calculator {
     func operandButtonTouched(_ operand: String) {
-//        guard let operand = sender.currentTitle else { return }
-//        
-//        changeOperandLabel(text: operand)
+        changeCurrentOperand(text: operand)
     }
     
     func operatorButtonTouched(_ operator: String) {
@@ -67,4 +100,33 @@ extension Calculator {
 //        let result = formula.result()
 //        operandLabel.text = numberFormatter.string(for: result)
     }
+}
+
+// MARK: Private Method
+extension Calculator {
+    private func changeCurrentOperand(text: String) {
+        var currentText = currentOperand
+        
+        guard currentText != CalculatorSymbol.Zero ||
+                text != CalculatorSymbol.DoubleZero else {
+            return
+        }
+        
+        if currentText == CalculatorSymbol.Zero {
+            currentText = text
+        } else {
+            currentText += text
+        }
+        
+        if hasDot == false {
+            let numberLabelText = currentText.removedComma()
+            let number = Double(numberLabelText)
+            currentOperand = numberFormatter.string(for: number) ?? CalculatorSymbol.Zero
+        } else {
+            currentOperand = currentText
+        }
+    }
+}
+extension Calculator {
+    
 }
