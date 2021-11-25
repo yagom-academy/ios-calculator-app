@@ -38,7 +38,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = calculatorManager.currentOperand
     }
     
-    private func changeOperator(to newOperator: String) {
+    private func changeOperator(with newOperator: String) {
         let operatorMarks = Operator.marks
         
         guard let last = calculatorManager.expression.last else {
@@ -146,7 +146,7 @@ extension CalculatorViewController {
         operandLabel.text?.append(dot)
     }
     
-    @IBAction private func touchUpChangePlusMinusSign(_ sender: Any) {
+    @IBAction private func touchUpChangePlusMinusSign(_ sender: UIButton) {
         guard let currentOperandDouble = calculatorManager.currentOperandDouble, !currentOperandDouble.isZero else {
             return
         }
@@ -175,7 +175,7 @@ extension CalculatorViewController {
         }
     
         guard let currentOperandDouble = calculatorManager.currentOperandDouble, !currentOperandDouble.isZero else {
-            changeOperator(to: `operator`)
+            changeOperator(with: `operator`)
             return
         }
         
@@ -191,11 +191,11 @@ extension CalculatorViewController {
                 
         calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: calculatorManager.currentOperator)
         
-        changeOperator(to: `operator`)
+        changeOperator(with: `operator`)
         resetCurrentOperand()
     }
     
-    @IBAction private func touchUpEqualButton(_ sender: Any) {
+    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
         guard !calculatorManager.isCalculated else {
             return
         }
@@ -204,7 +204,7 @@ extension CalculatorViewController {
         
         do {
             let calculationResult = try calculatorManager.doCalculate()
-            guard let calculationResultFormatted = calculatorManager.addCommaOnEveryThreeDigits(to: calculationResult.description) else {
+            guard let formattedCalculationResult = calculatorManager.addCommaOnEveryThreeDigits(to: calculationResult.description) else {
                 return
             }
             
@@ -213,7 +213,7 @@ extension CalculatorViewController {
             if calculatorManager.isNumberOverMaximumExpression(number: calculationResult) {
                 operandLabel.text = calculationResult.description
             } else {
-                operandLabel.text = calculationResultFormatted
+                operandLabel.text = formattedCalculationResult
             }
         } catch OperationError.dividedByZero {
             operandLabel.text = "NaN"
@@ -225,11 +225,11 @@ extension CalculatorViewController {
         }
     }
     
-    @IBAction private func touchUpACButton(_ sender: Any) {
+    @IBAction private func touchUpACButton(_ sender: UIButton) {
         resetToInitialState()
     }
     
-    @IBAction private func touchUpCEButton(_ sender: Any) {
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
         resetCurrentOperand()
     }
 }
