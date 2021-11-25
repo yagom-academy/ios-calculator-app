@@ -125,6 +125,12 @@ struct Calculator {
     }
     
     mutating private func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
+        if isEvaluated {
+            currentInputOperator = operatorForm
+            currentInputOperand = removeZeroSuffix(from: operandForm)
+            return
+        }
+        
         currentInputOperator = operatorForm
         currentInputOperand = operandForm
     }
@@ -133,6 +139,18 @@ struct Calculator {
         updateCurrentInput()
         mathExpression = []
         isEvaluated = false
+    }
+    
+    mutating private func removeZeroSuffix(from operand: String) -> String {
+        if operand.hasSuffix(".0") {
+            guard let doubleOperandValue = Double(operand) else {
+                return operand
+            }
+            
+            return String(Int(doubleOperandValue))
+        }
+        
+        return operand
     }
     
     mutating func isOverMaximumDigit() {
