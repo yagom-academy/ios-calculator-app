@@ -14,11 +14,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var savedCalculatorItemsStackView: UIStackView!
     @IBOutlet weak var savedCalculatorItemsScrollView: UIScrollView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        Calculator.applyNumberFormatter()
-    }
-    
     private func addStackViewLabel() {
         let savedItemlabel = UILabel()
         savedItemlabel.font = UIFont.preferredFont(forTextStyle: .title3)

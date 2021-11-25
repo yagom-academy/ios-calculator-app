@@ -14,13 +14,13 @@ enum Calculator {
     static let decimalComma: String = ","
     static let negativeSign: String = "-"
     static let defaultOperandLabel: String = "0"
-    static let numberFormatter = NumberFormatter()
     static let hapticGenerator = UISelectionFeedbackGenerator()
-    
-    static func applyNumberFormatter() {
+    static let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.roundingMode = .halfUp
-    }
+        return numberFormatter
+    }()
 }
