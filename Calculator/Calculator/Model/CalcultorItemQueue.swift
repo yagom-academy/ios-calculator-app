@@ -15,10 +15,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return enQueueElements.isEmpty && deQueueElements.isEmpty
     }
     
-    init(_ enQueueElements: [Element]) {
-        self.enQueueElements = enQueueElements
-    }
-    
     mutating func enQueueElement(_ element: Element) {
         enQueueElements.append(element)
     }
@@ -32,5 +28,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
             enQueueElements.removeAll()
         }
         return deQueueElements.removeLast()
+    }
+}
+
+extension CalculatorItemQueue {
+    init(_ enQueueElements: [Element]) {
+        self.enQueueElements = enQueueElements
     }
 }
