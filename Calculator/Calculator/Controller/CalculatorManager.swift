@@ -52,6 +52,10 @@ struct CalculatorManager {
         currentOperand += input
     }
     
+    mutating func fetchOperator(with newOperator: String) {
+        self.currentOperator = newOperator
+    }
+    
     func isNumberOverMaximumExpression(number: Double) -> Bool {
         return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
     }

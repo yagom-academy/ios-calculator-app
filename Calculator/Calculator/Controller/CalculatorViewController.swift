@@ -39,10 +39,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addLastCalculationHistory() {
-        guard let currentOperator = operatorLabel.text else {
-            return
-        }
-        guard !calculatorManager.currentOperand.isEmpty && !currentOperator.isEmpty else {
+        guard !calculatorManager.currentOperand.isEmpty && !calculatorManager.currentOperator.isEmpty else {
             return
         }
         
@@ -57,9 +54,9 @@ class CalculatorViewController: UIViewController {
         calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: "")
         
         if calculatorManager.isNumberOverMaximumExpression(number: currentOperandDouble) {
-            addCalculationHistory(operandText: currentOperandDouble.description, operatorText: currentOperator)
+            addCalculationHistory(operandText: currentOperandDouble.description, operatorText: calculatorManager.currentOperator)
         } else {
-            addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
+            addCalculationHistory(operandText: currentOperandText, operatorText: calculatorManager.currentOperator)
         }
     }
     
@@ -163,6 +160,7 @@ extension CalculatorViewController {
     
         guard let currentOperandDouble = calculatorManager.currentOperandToDouble(), !currentOperandDouble.isZero else {
             operatorLabel.text = `operator`
+            calculatorManager.fetchOperator(with: `operator`)
             return
         }
         
@@ -176,18 +174,15 @@ extension CalculatorViewController {
             return
         }
         
-        guard let operatorText = operatorLabel.text else {
-            return
-        }
-        
         if calculatorManager.isNumberOverMaximumExpression(number: currentOperandDouble) {
-            addCalculationHistory(operandText: currentOperandDouble.description, operatorText: operatorText)
+            addCalculationHistory(operandText: currentOperandDouble.description, operatorText: calculatorManager.currentOperator)
         } else {
-            addCalculationHistory(operandText: operandText, operatorText: operatorText)
+            addCalculationHistory(operandText: operandText, operatorText: calculatorManager.currentOperator)
         }
                 
-        calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: operatorText)
+        calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: calculatorManager.currentOperator)
         
+        calculatorManager.fetchOperator(with: `operator`)
         operatorLabel.text = `operator`
         resetCurrentOperand()
     }
