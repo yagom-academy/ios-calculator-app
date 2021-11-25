@@ -52,58 +52,33 @@ extension ViewController {
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
         guard let operand = sender.currentTitle else { return }
         
-        changeOperandLabel(text: operand)
+        calculator?.operandButtonTouched(operand)
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
-        guard let currentText = operandLabel.text else { return }
         
-        if currentText == CalculatorSymbol.Zero {
-            updateOperatorLabel(text: `operator`)
-            appendOperatorToInputString()
-            return
-        }
-        
-        addExpressionStackView()
-        updateOperatorLabel(text: `operator`)
-        appendOperandToInputString()
-        appendOperatorToInputString()
-        resetOperandLabel()
+        calculator?.operatorButtonTouched(`operator`)
     }
     
     @IBAction private func touchUpACButton(_ sender: UIButton) {
-        initializeView()
-        resetInputString()
+        calculator?.allClearButtonTouched()
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        resetOperandLabel()
+        calculator?.clearEntryButtonTouched()
     }
     
     @IBAction private func touchUpPlusMinusButton(_ sender: UIButton) {
-        guard operandLabel.text != CalculatorSymbol.Zero else {
-            return
-        }
-        
-        togglePlusMinus()
+        calculator?.plusMinusButtonTouched()
     }
     
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
-        insertDot()
+        calculator?.dotButtonTouched()
     }
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
-        guard let `operator` = operatorLabel.text,
-              `operator` != String.empty else { return }
-        
-        addExpressionStackView()
-        appendOperandToInputString()
-        resetOperatorLabel()
-        
-        var formula = ExpressionParser.parse(from: inputString)
-        let result = formula.result()
-        operandLabel.text = numberFormatter.string(for: result)
+        calculator?.resultButtonTouched()
     }
 }
 
