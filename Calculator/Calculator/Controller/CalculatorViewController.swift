@@ -164,11 +164,11 @@ extension CalculatorViewController {
             return
         }
         
-        guard !currentOperand.contains(dot) else {
+        guard !calculatorManager.isOperandContainsDot else {
             return
         }
         
-        currentOperand += dot
+        calculatorManager.fetchOperand(input: dot)
         operandLabel.text?.append(dot)
     }
     
