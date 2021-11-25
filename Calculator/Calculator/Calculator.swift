@@ -85,15 +85,11 @@ extension Calculator {
     }
     
     func clearEntryButtonTouched() {
-//        resetOperandLabel()
+        resetCurrentOperand()
     }
     
     func plusMinusButtonTouched() {
-//        guard operandLabel.text != CalculatorSymbol.Zero else {
-//            return
-//        }
-//
-//        togglePlusMinus()
+        togglePlusMinus()
     }
     
     func dotButtonTouched() {
@@ -136,6 +132,14 @@ extension Calculator {
             currentOperand = numberFormatter.string(for: number) ?? CalculatorSymbol.Zero
         } else {
             currentOperand = currentText
+        }
+    }
+    
+    private func togglePlusMinus() {
+        if currentOperand.hasPrefix(CalculatorSymbol.Minus) == true {
+            currentOperand = currentOperand.replacingOccurrences(of: CalculatorSymbol.Minus, with: String.empty)
+        } else {
+            currentOperand = CalculatorSymbol.Minus + currentOperand
         }
     }
     
