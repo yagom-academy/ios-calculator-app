@@ -16,6 +16,18 @@ enum CalculatorSetting {
         return singleLabel
     }
     
+    
+    static func scrollToBottom(on scrollView: UIScrollView) {
+        scrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0,
+                                   y: scrollView.contentSize.height
+                                      - scrollView.bounds.size.height
+                                      + scrollView.contentInset.bottom)
+        if bottomOffset.y > 0 {
+            scrollView.setContentOffset(bottomOffset, animated: false)
+        }
+    }
+    
     static func formatNumber(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -41,8 +53,4 @@ extension String {
     static let decimalPoint: String = "."
     static let decimalComma: String = ","
     static let negativeSign: String = "-"
-    
-    func notContains(_ input: String) -> Bool {
-        return !contains(Character(input))
-    }
 }

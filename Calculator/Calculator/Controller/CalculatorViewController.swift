@@ -15,27 +15,18 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculatorItemsScrollView: UIScrollView!
     
     private func addStackViewLabel() {
-        let singleItem = CalculatorSetting.adjustLabelAttribute()
-        if operandLabel.text!.contains(String.decimalPoint) {
-            while operandLabel.text!.hasSuffix(String.zero) || operandLabel.text!.hasSuffix(String.decimalPoint) {
-                operandLabel.text!.removeLast()
-            }
+        guard var operandLabelText = operandLabel.text,
+              let operatorLabelText = operatorLabel.text else { return }
+        
+        while operandLabelText.hasMeaninglessDecimal() {
+            operandLabelText.removeLast()
+            operandLabel.text = operandLabelText
         }
         
-        singleItem.text = "\(operatorLabel.text!)\(Character.whiteSpace)\(operandLabel.text!)"
+        let singleItem = CalculatorSetting.adjustLabelAttribute()
+        singleItem.text = "\(operatorLabelText)\(Character.whiteSpace)\(operandLabelText)"
         calculatorItemsStackView.addArrangedSubview(singleItem)
-        scrollToBottom()
-    }
-    
-    private func scrollToBottom() {
-        calculatorItemsScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0,
-                                   y: calculatorItemsScrollView.contentSize.height
-                                      - calculatorItemsScrollView.bounds.size.height
-                                      + calculatorItemsScrollView.contentInset.bottom)
-        if bottomOffset.y > 0 {
-            calculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
-        }
+        CalculatorSetting.scrollToBottom(on: calculatorItemsScrollView)
     }
     
     private func clearAllStackViewLabel() {
