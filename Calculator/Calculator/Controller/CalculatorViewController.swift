@@ -17,6 +17,10 @@ class CalculatorViewController: UIViewController {
 
     private let initialNumberLabel = "0"
     private let initialStringValue = ""
+    private var isBeforeCalculate: Bool {
+        let hasResult = formulaStackView.arrangedSubviews.isEmpty == false && entireStringFormula == initialStringValue
+        return !hasResult
+    }
     
     private let numberFormatter = CalculatorNumberFormatter()
     
@@ -51,7 +55,8 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapNumberPad(_ sender: UIButton) {
         guard let currentNumberText = inputNumberLabel.text,
-             let inputNumber = sender.currentTitle else { return }
+             let inputNumber = sender.currentTitle,
+            isBeforeCalculate else { return }
         
         if currentNumberText == initialNumberLabel {
             inputNumberLabel.text = inputNumber
@@ -63,7 +68,8 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapDotButton(_ sender: UIButton) {
         if let currentNumberText = inputNumberLabel.text,
           let inputSign = sender.currentTitle,
-           currentNumberText.contains(CalculatorSign.dot) == false {
+         isBeforeCalculate,
+        currentNumberText.contains(CalculatorSign.dot) == false {
             inputNumberLabel.text = currentNumberText + inputSign
         }
     }
@@ -71,7 +77,8 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapDoubleZeroButton(_ sender: UIButton) {
         if let currentNumberText = inputNumberLabel.text,
           let inputNum = sender.currentTitle,
-         currentNumberText != initialNumberLabel {
+         isBeforeCalculate,
+        currentNumberText != initialNumberLabel {
             updateInputNumberLabel(currentNumberText, with: inputNum)
         }
     }
@@ -93,7 +100,8 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let currentNumberText = inputNumberLabel.text,
-             let inputOperator = sender.currentTitle else { return }
+             let inputOperator = sender.currentTitle,
+            isBeforeCalculate else { return }
 
         if formulaStackView.arrangedSubviews.isEmpty,
           currentNumberText == initialNumberLabel {
