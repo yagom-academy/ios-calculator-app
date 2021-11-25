@@ -173,7 +173,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpChangePlusMinusSign(_ sender: Any) {
-        guard let currentOperandNumber = Double(currentOperand), !currentOperandNumber.isZero else {
+        guard let currentOperandDouble = calculatorManager.currentOperandToDouble(), !currentOperandDouble.isZero else {
             return
         }
         
@@ -181,24 +181,9 @@ extension CalculatorViewController {
             return
         }
         
-        if operand.contains("-") {
-            operand.removeFirst()
-        } else {
-            operand = "-" + operand
-        }
+        calculatorManager.toggleOperandSign(from: &operand)
         
         operandLabel.text = operand
-                
-        guard isNumberOverMaximumExpression(number: currentOperandNumber) else {
-            currentOperand = operand.replacingOccurrences(of: ",", with: "")
-            return
-        }
-        
-        if currentOperand.contains("-") {
-            currentOperand.removeFirst()
-        } else {
-            currentOperand = "-" + currentOperand
-        }
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
