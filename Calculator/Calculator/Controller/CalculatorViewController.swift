@@ -13,14 +13,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     
-    private var mathExpression = ""
-    private var currentOperand: String = "0"
-    private var currentOperator: String = ""
-    
-    private var isCalculated: Bool = false
-        
-    private let maximumDigitsOfDoubleExpression = 16
-    private let limitedDigitsOfExpression = 20
+    private var calculatorManager = CalculatorManager()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -30,10 +23,8 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Private Methods
     private func resetToInitialState() {
-        mathExpression = ""
-        currentOperator = ""
-        operatorLabel.text = ""
-        isCalculated = false
+        calculatorManager.reset()
+        operatorLabel.text = calculatorManager.currentOperator
         
         resetCurrentOperand()
         
@@ -43,21 +34,8 @@ class CalculatorViewController: UIViewController {
     }
 
     private func resetCurrentOperand() {
-        currentOperand = "0"
-        operandLabel.text = "0"
-    }
-    
-    private func splitWithIntegerAndFraction(from operand: String) -> (interger: String, fraction: String) {
-        var integerDigits = operand
-        var fractionDigits = ""
-        
-        if operand.contains(".") {
-            let splited = operand.split(with: ".")
-            integerDigits = splited.first ?? ""
-            fractionDigits = splited.last ?? ""
-        }
-        
-        return (integerDigits, fractionDigits)
+        calculatorManager.resetOperand()
+        operandLabel.text = calculatorManager.currentOperand
     }
     
     private func changeOperator(to newOperator: String) {
@@ -74,10 +52,6 @@ class CalculatorViewController: UIViewController {
         mathExpression.append(newOperator)
         operatorLabel.text = newOperator
         currentOperator = newOperator
-    }
-    
-    private func isNumberOverMaximumExpression(number: Double) -> Bool {
-        return abs(number) >= pow(10, Double(maximumDigitsOfDoubleExpression))
     }
     
     private func addLastCalculationHistory() {
@@ -153,7 +127,7 @@ class CalculatorViewController: UIViewController {
 // MARK: - IBAction Methods
 extension CalculatorViewController {
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
-        if isCalculated {
+        if calculatorManager.isCalculated {
             resetToInitialState()
         }
         
@@ -161,32 +135,20 @@ extension CalculatorViewController {
             return
         }
                  
-        guard currentOperand.count < limitedDigitsOfExpression else {
+        calculatorManager.fetchOperand(input: operand)
+        
+        guard let currentOperandDouble = calculatorManager.currentOperandToDouble() else {
             return
         }
         
-        if currentOperand == "0" && !["0","00"].contains(operand) {
-            currentOperand = operand
-            operandLabel.text = currentOperand
-            return
-        } else if currentOperand == "0" && ["0","00"].contains(operand) {
+        if calculatorManager.isNumberOverMaximumExpression(number: currentOperandDouble) {
+            operandLabel.text = currentOperandDouble.description
             return
         }
         
-        currentOperand += operand
+        let separatedCurrentOperand = calculatorManager.splitWithIntegerAndFraction(from: calculatorManager.currentOperand)
         
-        guard let currentOperandNumber = Double(currentOperand) else {
-            return
-        }
-        
-        if isNumberOverMaximumExpression(number: currentOperandNumber) {
-            operandLabel.text = currentOperandNumber.description
-            return
-        }
-        
-        let separatedCurrentOperand = splitWithIntegerAndFraction(from: currentOperand)
-        
-        guard let operandText = separatedCurrentOperand.interger.addCommaOnEveryThreeDigits() else {
+        guard let operandText = calculatorManager.addCommaOnEveryThreeDigits(to: separatedCurrentOperand.integer) else {
             return
         }
                 
