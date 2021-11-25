@@ -7,13 +7,18 @@
 
 import Foundation
 
-enum NumberFormatError: String, Error {
-    case numberFormatFailed = "Number fomatting 실패"
-    case typeCastingFailed = "형변환 실패"
+enum NumberFormatError: Error {
+    case numberFormatFailed
+    case typeCastingFailed
 }
 
-extension NumberFormatError: CustomStringConvertible {
-    var description: String {
-        return rawValue
+extension NumberFormatError {
+    var errorDescription: String {
+        switch self {
+        case .numberFormatFailed:
+            return "Number fomatting 실패"
+        case .typeCastingFailed:
+            return "형변환 실패"
+        }
     }
 }

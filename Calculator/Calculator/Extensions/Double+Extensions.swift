@@ -8,10 +8,10 @@
 import Foundation
 
 extension Double: CalculateItem {
-    var presentableFormat: String? {
+    func presentableFormat() throws -> String? {
         let numberFormatter = NumberFormatGenerator.createNumberFormatter()
         guard let result = numberFormatter.string(from: NSNumber(value: self)) else {
-            return nil
+            throw NumberFormatError.numberFormatFailed
         }
         
         return result

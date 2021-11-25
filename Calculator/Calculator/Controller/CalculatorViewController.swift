@@ -51,7 +51,9 @@ final class CalculatorViewController: UIViewController {
             }
             updateCurrentOperandValue(to: newOperand)
             update(currentOperandLabel, to: formattedOperand)
-        } catch let error {
+        } catch let error as NumberFormatError {
+            print(error.errorDescription)
+        } catch {
             print(error)
         }
     }
@@ -78,8 +80,14 @@ final class CalculatorViewController: UIViewController {
         updateHistoryStackView(with: currentOperator, and: currentOperandLabelText)
         
         let result = calculateResult(from: historyStack)
-        if let presentableResult = result.presentableFormat {
-            update(currentOperandLabel, to: presentableResult)
+        do {
+            if let presentableResult = try result.presentableFormat() {
+                update(currentOperandLabel, to: presentableResult)
+            }
+        } catch let error as NumberFormatError{
+            print(error.errorDescription)
+        } catch {
+            print(error)
         }
         
         updateCurrentOperandValue(to: result.convertToString)
@@ -104,10 +112,16 @@ final class CalculatorViewController: UIViewController {
               doubleOperand != 0 else {
             return
         }
-        guard let newOperand = (doubleOperand * -1).presentableFormat else {
-            return
+        do {
+            guard let newOperand = try (doubleOperand * -1).presentableFormat() else {
+                return
+            }
+            updateCurrentOperandValueAndLabel(to: newOperand)
+        } catch let error as NumberFormatError{
+            print(error.errorDescription)
+        } catch {
+            print(error)
         }
-        updateCurrentOperandValueAndLabel(to: newOperand)
     }
 }
 
@@ -164,9 +178,9 @@ extension CalculatorViewController {
         var result = 0.0
         do {
             try result = formula.result()
-        } catch CalculateItemQueueError.queueIsEmpty {
-            print(CalculateItemQueueError.queueIsEmpty)
-        } catch let error {
+        } catch let error as CalculateItemQueueError {
+            print(error.errorDescription)
+        } catch {
             print(error)
         }
         return result
