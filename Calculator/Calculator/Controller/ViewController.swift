@@ -116,6 +116,7 @@ extension ViewController {
         
         guard Double(displayedOperand) != 0.0 else {
             displayedOperator = currentOperandButtionTitle
+            
             return
         }
         
@@ -147,7 +148,7 @@ extension ViewController {
         guard displayedOperator != "" && displayedOperand != "" else {
             return
         }
-        
+         
         addFormula(operator: displayedOperator, operand: displayedOperand)
         
         let formulaString: String = assembleFormula()
@@ -242,6 +243,7 @@ extension ViewController {
                 return (`operator`, operand)
             }
         }
+        
         return (`operator`, operand)
     }
     

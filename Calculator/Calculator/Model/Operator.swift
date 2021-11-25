@@ -25,6 +25,7 @@ extension Operator {
             guard rhs != 0 else {
                 throw OperationError.devidedByZero
             }
+            
             return devide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
