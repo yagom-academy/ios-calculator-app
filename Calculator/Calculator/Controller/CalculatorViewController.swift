@@ -67,6 +67,7 @@ extension CalculatorViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard operandLabel.text != "NaN" else {
+            os_log(.error, log: .error, "%@", "NaN일 경우, 계산을 이어서 연산할 수 없습니다.")
             return
         }
         rawOperand = "0"
