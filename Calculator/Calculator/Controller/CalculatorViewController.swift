@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentInputLabel() {
-        currentInputOperandLabel.text = convertFormattedNumber(calculatorModel.currentInputOperand)
+        currentInputOperandLabel.text = formattedInputNumber(calculatorModel.currentInputOperand)
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
@@ -104,6 +104,27 @@ class CalculatorViewController: UIViewController {
         }
         
         return convertedNumber
+    }
+    
+    private func formattedInputNumber(_ number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 15
+        numberFormatter.roundingMode = .halfUp
+        
+        guard let formattedNumber = numberFormatter.string(for: Double(number)) else {
+            return number
+        }
+        
+        guard let numberDotindex = number.firstIndex(of: ".") else {
+            return formattedNumber
+        }
+        
+        guard let formattedNumberDotIndex = formattedNumber.firstIndex(of: ".") else {
+            return formattedNumber + String(number[numberDotindex...])
+        }
+        
+        return String(formattedNumber[..<formattedNumberDotIndex]) + String(number[numberDotindex...])
     }
 }
 
