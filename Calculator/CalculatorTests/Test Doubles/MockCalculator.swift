@@ -1,5 +1,5 @@
 //
-//  MockCalculatorManager.swift
+//  MockCalculator.swift
 //  CalculatorTests
 //
 //  Created by Jun Bang on 2021/11/25.
@@ -11,5 +11,3 @@ import Foundation
 struct MockCalculator: Calculatable {
     var formulaStack: [String] = []
 }
-
-

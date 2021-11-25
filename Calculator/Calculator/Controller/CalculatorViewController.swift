@@ -14,11 +14,14 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     
     //MARK: - Properties
+    private let zeroString = "0"
+    private let emptyString = ""
+    
     private var calculator = Calculator()
     
     private var currentOperandLabelText: String {
         get {
-            return currentOperandLabel.text ?? "0"
+            return currentOperandLabel.text ?? zeroString
         }
         set {
             currentOperandLabel.text = newValue
@@ -33,8 +36,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         removeFormulaStackViews()
-        updateCurrentOperandValueAndLabel(to: "0")
-        updateCurrentOperatorValueAndLabel(to: "")
+        updateCurrentOperandValueAndLabel(to: zeroString)
+        updateCurrentOperatorValueAndLabel(to: emptyString)
     }
     
     //MARK: - @IBAction Methods
@@ -66,15 +69,15 @@ final class CalculatorViewController: UIViewController {
         }
         if calculator.currentOperandIsNotZero {
             updateHistoryStackView(with: calculator.currentOperator, and: currentOperandLabelText)
-            calculator.updateHistoryStack(with: calculator.currentOperator, and: calculator.currentOperand)
+            calculator.updateHistoryStack()
             updateCurrentOperatorValueAndLabel(to: operatorPressedString)
-            updateCurrentOperandValueAndLabel(to: "0")
+            updateCurrentOperandValueAndLabel(to: zeroString)
             autoScrollToBottom()
         }
     }
     
     @IBAction private func touchUpCalculateButton(_ sender: Any) {
-        calculator.updateHistoryStack(with: calculator.currentOperator, and: calculator.currentOperand)
+        calculator.updateHistoryStack()
         updateHistoryStackView(with: calculator.currentOperator, and: currentOperandLabelText)
         
         let result = calculator.calculateResult()
@@ -89,7 +92,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         calculator.updateCurrentOperandValue(to: result.convertToString)
-        updateCurrentOperatorValueAndLabel(to: "")
+        updateCurrentOperatorValueAndLabel(to: emptyString)
         calculator.clearHistoryStack()
         autoScrollToBottom()
     }
@@ -97,12 +100,12 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func touchUpACButton(_ sender: Any) {
         removeFormulaStackViews()
         calculator.clearHistoryStack()
-        updateCurrentOperandValueAndLabel(to: "0")
-        updateCurrentOperatorValueAndLabel(to: "")
+        updateCurrentOperandValueAndLabel(to: zeroString)
+        updateCurrentOperatorValueAndLabel(to: emptyString)
     }
     
     @IBAction private func touchUpCEButton(_ sender: Any) {
-        updateCurrentOperandValueAndLabel(to: "0")
+        updateCurrentOperandValueAndLabel(to: zeroString)
     }
     
     @IBAction private func touchUpSignButton(_ sender: Any) {
@@ -177,10 +180,11 @@ extension CalculatorViewController {
     
     private func createStackView() -> UIStackView {
         let stackView = UIStackView()
+        let spacingConstant = 8.0
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 8.0
+        stackView.spacing = CGFloat(spacingConstant)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }

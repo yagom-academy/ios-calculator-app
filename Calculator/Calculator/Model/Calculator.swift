@@ -36,7 +36,7 @@ struct Calculator: Calculatable {
         currentOperator = newOperator
     }
     
-    mutating func updateHistoryStack(with currentOperator: String, and currentOperand: String) {
+    mutating func updateHistoryStack() {
         formulaStack.append(contentsOf: [currentOperator, currentOperand])
     }
 }

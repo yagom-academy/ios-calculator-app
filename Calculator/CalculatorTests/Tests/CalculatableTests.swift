@@ -19,9 +19,27 @@ class CalculatableTests: XCTestCase {
         sut = nil
     }
 
-    func testCaculatable_givenMultiplicationEquation_expect200() {
+    func testCalculatable_givenMultiplicationEquation_expect200() {
         sut.formulaStack = ["10", "𝗑", "20"]
         let result = sut.calculateResult()
         XCTAssertEqual(result, 200)
+    }
+    
+    func testCalculatable_givenInvalidEquation_expectNaN() {
+        sut.formulaStack = ["10", "÷", "0"]
+        let result = sut.calculateResult()
+        XCTAssertTrue(result.isNaN)
+    }
+    
+    func testCalculatable_givenMixedEquation_expect4Point2() {
+        sut.formulaStack = ["10", "𝗑", "20", "−", "30", "+", "40", "÷", "50"]
+        let result = sut.calculateResult()
+        XCTAssertEqual(result, 4.2)
+    }
+    
+    func testCalculatable_givenMixedEquation_expect1Point4() {
+        sut.formulaStack = ["1.5", "−", "0.5", "𝗑", "10", "+", "4", "÷", "10"]
+        let result = sut.calculateResult()
+        XCTAssertEqual(result, 1.4)
     }
 }
