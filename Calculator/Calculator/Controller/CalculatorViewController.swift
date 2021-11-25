@@ -101,16 +101,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedChangeSignButton(_ button: UIButton) {
-        guard operandLabel.text! != String.zero else {
+        guard var operandLabelText = operandLabel.text,
+              operandLabelText != String.zero else { return }
+        
+        guard operandLabelText.hasPrefix(String.negativeSign) else {
+            operandLabel.text = "\(String.negativeSign)\(operandLabelText)"
             return
         }
         
-        switch operandLabel.text!.hasPrefix(String.negativeSign) {
-        case true:
-            operandLabel.text!.removeFirst()
-        case false:
-            operandLabel.text! = "\(String.negativeSign)\(operandLabel.text!)"
-        }
+        operandLabelText.removeFirst()
+        operandLabel.text = operandLabelText
     }
     
     @IBAction func tappedAllClearButton(_ button: UIButton) {
