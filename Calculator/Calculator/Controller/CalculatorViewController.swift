@@ -93,12 +93,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedDecimalPointButton(_ button: UIButton) {
-        switch operandLabel.text!.contains(String.decimalPoint) {
-        case true:
-            return
-        case false:
-            operandLabel.text! = "\(operandLabel.text!)\(button.currentTitle!)"
-        }
+        guard let operandLabelText = operandLabel.text,
+              let buttonTitle = button.currentTitle,
+              operandLabelText.notContains(String.decimalPoint) else { return }
+        
+        operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
     @IBAction func tappedChangeSignButton(_ button: UIButton) {
