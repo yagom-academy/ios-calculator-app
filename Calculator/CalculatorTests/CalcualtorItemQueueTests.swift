@@ -3,65 +3,55 @@ import XCTest
 @testable import Calculator
 
 class CalcualtorItemQueueTests: XCTestCase {
-    var testQueue: CalculatorItemQueue!
+    var operandQueue: CalculatorItemQueue<Double>!
+    var operatorQueue: CalculatorItemQueue<Operator>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        testQueue = CalculatorItemQueue()
+        operandQueue = CalculatorItemQueue()
+        operatorQueue = CalculatorItemQueue()
     }
     
     func test_basicOperandQueueing() {
-        testQueue.enqueue(1)
+        operandQueue.enqueue(1)
         
-        let firstOperand = testQueue.dequeue() as? Double
+        let firstOperand = operandQueue.dequeue()
         
         XCTAssertEqual(firstOperand, 1)
     }
     
     func test_operandsQueueing() {
-        var poppedItems: [CalculateItem?] = []
+        var removedItems: [Double?] = []
         
-        testQueue.enqueue(1)
-        testQueue.enqueue(2)
-        testQueue.enqueue(3)
-        testQueue.enqueue(4)
-        testQueue.enqueue(5)
-        poppedItems.append(testQueue.dequeue())
-        poppedItems.append(testQueue.dequeue())
-        poppedItems.append(testQueue.dequeue())
+        operandQueue.enqueue(1)
+        operandQueue.enqueue(2)
+        operandQueue.enqueue(3)
+        operandQueue.enqueue(4)
+        operandQueue.enqueue(5)
+        removedItems.append(operandQueue.dequeue())
+        removedItems.append(operandQueue.dequeue())
+        removedItems.append(operandQueue.dequeue())
         
-        let leftOperands = testQueue.allOperands()
+        let operandsInQueue = operandQueue.allItems()
         
-        let poppedOperands = poppedItems.map {
-            return $0 as? Double
-        }
-        
-        let isRightLeftOperands = (leftOperands == [4,5]) ? true : false
-        let isRightPoppedOperands = (poppedOperands == [1,2,3]) ? true : false
-
-        XCTAssertTrue(isRightLeftOperands && isRightPoppedOperands)
+        XCTAssertTrue(operandsInQueue == [4,5])
+        XCTAssertTrue(removedItems == [1,2,3])
     }
     
     func test_operatorsQueueing() {
-        var poppedItems: [CalculateItem?] = []
-        
-        testQueue.enqueue(Operator.add)
-        testQueue.enqueue(Operator.subtract)
-        testQueue.enqueue(Operator.divide)
-        testQueue.enqueue(Operator.multiply)
-        poppedItems.append(testQueue.dequeue())
-        testQueue.enqueue(Operator.add)
-        
-        let leftOperators = testQueue.allOperators()
-        
-        let poppedOperators = poppedItems.map {
-            return $0 as? Operator
-        }
-        
-        let isRightLeftOperators = (leftOperators == [.subtract,.divide,.multiply,.add]) ? true : false
-        let isRightPoppedOperators = (poppedOperators == [.add]) ? true : false
+        var removedItems: [Operator?] = []
 
-        XCTAssertTrue(isRightLeftOperators && isRightPoppedOperators)
+        operatorQueue.enqueue(Operator.add)
+        operatorQueue.enqueue(Operator.subtract)
+        operatorQueue.enqueue(Operator.divide)
+        operatorQueue.enqueue(Operator.multiply)
+        removedItems.append(operatorQueue.dequeue())
+        operatorQueue.enqueue(Operator.add)
+
+        let operatorsInQueue = operatorQueue.allItems()
+
+        XCTAssertTrue(operatorsInQueue == [.subtract,.divide,.multiply,.add])
+        XCTAssertTrue(removedItems == [.add])
     }
 }
 

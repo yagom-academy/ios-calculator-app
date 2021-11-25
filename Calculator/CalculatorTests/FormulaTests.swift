@@ -23,25 +23,29 @@ class FormulaTests: XCTestCase {
     func test_emptyCalculatorItemQueue() {
         self.formula = Formula()
         
-        XCTAssertEqual(self.formula.result(), 0)
+        XCTAssertThrowsError(try formula.result(), "Dequeue 할 값이 존재하지 않습니다") { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.queueIsEmpty)
+        }
     }
 
     func test_calculationAccuracy() {
         let inputOperands: [Double] = [5,5,5,5,5,5]
         let inputOperators: [Operator] = [.add, .add,.subtract,.multiply,.divide]
-        
+
         insertInputArrayToFormula(operands: inputOperands, operators: inputOperators)
-        
-        XCTAssertEqual(self.formula.result(), 10)
+
+        XCTAssertEqual(try self.formula.result(), 10)
     }
-    
+
     func test_dividedZero() {
         let inputOperands: [Double] = [5,5,5,0,5]
         let inputOperators: [Operator] = [.add,.add,.divide,.add]
-        
+
         insertInputArrayToFormula(operands: inputOperands, operators: inputOperators)
-        
-        XCTAssertEqual(self.formula.result(), Double.infinity)
+
+        XCTAssertThrowsError(try formula.result(), "나누기 0 에러") { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.dividedByZero)
+        }
     }
 
 }
