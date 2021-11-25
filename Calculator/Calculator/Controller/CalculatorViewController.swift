@@ -222,11 +222,6 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpCEButton(_ sender: Any) {
-        guard !isCalculated else {
-            resetToInitialState()
-            return
-        }
-        
         resetCurrentOperand()
     }
 }
