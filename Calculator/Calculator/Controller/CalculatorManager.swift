@@ -38,7 +38,7 @@ struct CalculatorManager {
     private let emptyString = ""
     private let notANumber = "NaN"
     
-    //MARK: - Method
+    //MARK: - Methods
     
     mutating func tapNumberPad(_ newOperand: String) {
         let operand = currentOperand == zero ? newOperand : currentOperand + newOperand
@@ -100,7 +100,7 @@ struct CalculatorManager {
             return
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
-        addFormulaExpression()
+        addFormulaExpression(operand: currentOperand, operator: currentOperator)
         calculateFormula()
         setOperator(value: emptyString)
         hasCalculated = true
@@ -122,8 +122,8 @@ struct CalculatorManager {
         delegate?.clearFormulaStackView()
     }
     
-    private mutating func addFormulaExpression() {
-        formulaExpression += currentOperand + currentOperator
+    private mutating func addFormulaExpression(operand: String, operator: String) {
+        formulaExpression += operand + `operator`
     }
     
     private mutating func calculateFormula() {

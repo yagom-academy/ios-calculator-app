@@ -19,6 +19,8 @@ class CalculatorController: UIViewController {
     
     var calculatorManager = CalculatorManager()
     
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calculatorManager.delegate = self
@@ -61,7 +63,7 @@ class CalculatorController: UIViewController {
         calculatorManager.tapEqualButton()
     }
     
-    //MARK: - Helper
+    //MARK: - Helpers
     
     private func formulaLabel(with text: String) -> UILabel {
         let label = UILabel()
