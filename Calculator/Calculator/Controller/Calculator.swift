@@ -10,7 +10,7 @@ import Foundation
 struct Calculator {
     private(set) var currentInputOperand = LabelContents.defaultOperand {
         didSet {
-            isOverMaximumDigit()
+            setMaximumDigit()
         }
     }
     private(set) var currentInputOperator = LabelContents.emptyString
@@ -25,7 +25,9 @@ struct Calculator {
             return
         }
         
-        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
+        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand {
+            return
+        }
         
         if currentInputOperand == LabelContents.defaultOperand {
             updateCurrentInput(operandForm: number, operatorForm: currentInputOperator)
@@ -36,7 +38,9 @@ struct Calculator {
     }
     
     mutating func inputDot() {
-        if currentInputOperand.contains(LabelContents.pointSymbol) { return }
+        if currentInputOperand.contains(LabelContents.pointSymbol) {
+            return
+        }
         
         if isEvaluated {
             let newOperand = currentInputOperand + LabelContents.pointSymbol
@@ -48,7 +52,7 @@ struct Calculator {
         currentInputOperand += LabelContents.pointSymbol
     }
     
-    mutating func inputOperator(_ operatorSymbole: String) {
+    mutating func inputOperator(_ operatorSymbol: String) {
         if currentInputOperand == LabelContents.notANumber {
             resetAllExpression()
         }
@@ -57,30 +61,37 @@ struct Calculator {
             let newOperand = currentInputOperand
             resetAllExpression()
             mathExpression += [(LabelContents.emptyString, newOperand)]
-            updateCurrentInput(operatorForm: operatorSymbole)
+            updateCurrentInput(operatorForm: operatorSymbol)
             return
         }
         
-        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty { return }
+        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty {
+            return
+        }
         
         if currentInputOperand == LabelContents.defaultOperand {
-            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbole)
+            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbol)
             return
         }
         
         if mathExpression.isEmpty {
             mathExpression += [(LabelContents.emptyString, currentInputOperand)]
-            updateCurrentInput(operatorForm: operatorSymbole)
+            updateCurrentInput(operatorForm: operatorSymbol)
             return
         }
         
         mathExpression += [(currentInputOperator, currentInputOperand)]
-        updateCurrentInput(operatorForm: operatorSymbole)
+        updateCurrentInput(operatorForm: operatorSymbol)
     }
     
     mutating func changeSignOfNumber() {
-        if currentInputOperand == LabelContents.defaultOperand { return }
-        if isEvaluated { return }
+        if currentInputOperand == LabelContents.defaultOperand {
+            return
+        }
+        
+        if isEvaluated {
+            return
+        }
         
         if currentInputOperand.hasPrefix(LabelContents.minusSignSymbol) {
             currentInputOperand.removeFirst()
@@ -104,7 +115,9 @@ struct Calculator {
     }
     
     mutating func calculateAllExpression() {
-        if isEvaluated { return }
+        if isEvaluated {
+            return
+        }
         
         mathExpression += [(currentInputOperator, currentInputOperand)]
         
@@ -153,7 +166,7 @@ struct Calculator {
         return operand
     }
     
-    mutating func isOverMaximumDigit() {
+    mutating private func setMaximumDigit() {
         if currentInputOperand.count >= 15 {
             currentInputOperand.removeLast()
         }
