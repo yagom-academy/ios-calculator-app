@@ -46,7 +46,7 @@ struct CalculatorManager {
             return
         }
         
-        if currentOperand == "0" && !["0","00"].contains(input) {
+        if currentOperand == "0" && !["0","00", "."].contains(input) {
             currentOperand = input
             return
         } else if currentOperand == "0" && ["0","00"].contains(input) {
