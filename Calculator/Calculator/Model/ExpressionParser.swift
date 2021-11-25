@@ -1,26 +1,20 @@
-//
-//  ExpressionParser.swift
-//  Calculator
-//
-//  Created by 황제하 on 2021/11/12.
-//
 
 import Foundation
 
 enum ExpressionParser {
-    static func parse(form input: String) -> Formula {
-        let formula = Formula()
+    static func parse(from input: String) -> Formula {
+        var formula = Formula()
         
-        let numbers = componentsByOperators(form: input).compactMap { Double($0) }
+        let numbers = componentsByOperators(from: input).compactMap { Double($0) }
         let operators = input.filter { Double($0.description) == nil }.compactMap { Operator.init(rawValue: $0) }
         
-        numbers.forEach { formula.operands.enqueue(value: $0) }
-        operators.forEach { formula.operators.enqueue(value: $0) }
+        numbers.forEach { formula.operands.enqueue($0) }
+        operators.forEach { formula.operators.enqueue($0) }
         
         return formula
     }
-    
-    private static func componentsByOperators(form input: String) -> [String] {
+
+    private static func componentsByOperators(from input: String) -> [String] {
         var result = input
         
         Operator.allCases.forEach { `operator` in

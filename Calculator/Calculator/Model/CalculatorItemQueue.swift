@@ -1,33 +1,29 @@
-//
-//  CalculatorItemQueue.swift
-//  Calculator
-//
-//  Created by 황제하 on 2021/11/08.
-//
-
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    let items: LinkedList<T> = LinkedList<T>()
+    private var calculatorItems = [T]()
     
-    var isEmpty: Bool {
-        return items.isEmpty
+    mutating func enqueue(_ item: T) {
+        calculatorItems.append(item)
     }
     
-    func enqueue(value: T) {
-        self.items.addRear(value)
-    }
-    
-    @discardableResult
-    func dequeue() throws -> T {
-        guard let node = self.items.removeFront() else {
-            throw QueueError.queueIsEmpty
+    mutating func dequeue() -> T? {
+        guard calculatorItems.isEmpty == false else {
+            return nil
         }
         
-        return node.value
+        calculatorItems = calculatorItems.reversed()
+        let item = calculatorItems.removeLast()
+        calculatorItems = calculatorItems.reversed()
+        
+        return item
     }
     
-    func clear() {
-        items.removeAll()
+    mutating func removeAll() {
+        calculatorItems.removeAll()
+    }
+    
+    var numberOfItems: Int {
+        return calculatorItems.count
     }
 }
