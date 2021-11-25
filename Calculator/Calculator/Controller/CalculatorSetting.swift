@@ -33,4 +33,8 @@ extension String {
     static let decimalPoint: String = "."
     static let decimalComma: String = ","
     static let negativeSign: String = "-"
+    
+    func notContains(_ input: String) -> Bool {
+        return !contains(Character(input))
+    }
 }
