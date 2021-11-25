@@ -39,50 +39,27 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addLastCalculationHistory() {
-        guard !currentOperand.isEmpty && !currentOperator.isEmpty else {
+        guard let currentOperator = operatorLabel.text else {
+            return
+        }
+        guard !calculatorManager.currentOperand.isEmpty && !currentOperator.isEmpty else {
             return
         }
         
-        guard let currentOperandText = currentOperand.addCommaOnEveryThreeDigits() else {
+        guard let currentOperandText = calculatorManager.addCommaOnEveryThreeDigits(to: calculatorManager.currentOperand) else {
             return
         }
         
-        guard let currentOperandNumber = Double(currentOperand) else {
+        guard let currentOperandDouble = calculatorManager.currentOperandToDouble() else {
             return
         }
         
-        mathExpression.append(currentOperand)
+        calculatorManager.fetchExpression(operand: calculatorManager.currentOperand, operator: "")
         
-        if isNumberOverMaximumExpression(number: currentOperandNumber) {
-            addCalculationHistory(operandText: currentOperandNumber.description, operatorText: currentOperator)
+        if calculatorManager.isNumberOverMaximumExpression(number: currentOperandDouble) {
+            addCalculationHistory(operandText: currentOperandDouble.description, operatorText: currentOperator)
         } else {
             addCalculationHistory(operandText: currentOperandText, operatorText: currentOperator)
-        }
-    }
-    
-    private func calculateFormula(from expression: String) {
-        let formula = ExpressionParser.parse(from: expression)
-        
-        do {
-            let calculationResult = try formula.result()
-            guard let calculationResultFormatted = calculationResult.description.addCommaOnEveryThreeDigits() else {
-                return
-            }
-            
-            operatorLabel.text = ""
-            
-            if isNumberOverMaximumExpression(number: calculationResult) {
-                operandLabel.text = calculationResult.description
-            } else {
-                operandLabel.text = calculationResultFormatted
-            }
-        } catch OperationError.dividedByZero {
-            operandLabel.text = "NaN"
-            operatorLabel.text = ""
-        } catch CalculationItemQueueError.hasNoElement {
-            print(CalculationItemQueueError.hasNoElement.localizedDescription)
-        } catch {
-            print(error)
         }
     }
     
@@ -216,14 +193,33 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: Any) {
-        guard !isCalculated else {
+        guard !calculatorManager.isCalculated else {
             return
         }
         
-        isCalculated = true
-        
         addLastCalculationHistory()
-        calculateFormula(from: mathExpression)
+        
+        do {
+            let calculationResult = try calculatorManager.doCalculate()
+            guard let calculationResultFormatted = calculatorManager.addCommaOnEveryThreeDigits(to: calculationResult.description) else {
+                return
+            }
+            
+            operatorLabel.text = ""
+            
+            if calculatorManager.isNumberOverMaximumExpression(number: calculationResult) {
+                operandLabel.text = calculationResult.description
+            } else {
+                operandLabel.text = calculationResultFormatted
+            }
+        } catch OperationError.dividedByZero {
+            operandLabel.text = "NaN"
+            operatorLabel.text = ""
+        } catch CalculationItemQueueError.hasNoElement {
+            print(CalculationItemQueueError.hasNoElement.localizedDescription)
+        } catch {
+            print(error)
+        }
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {

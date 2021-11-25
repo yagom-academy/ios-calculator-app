@@ -100,7 +100,8 @@ struct CalculatorManager {
         return Double(self.currentOperand)
     }
     
-    func doCalculate() throws -> Double {
+    mutating func doCalculate() throws -> Double {
+        self.isCalculated = true
         let formula = ExpressionParser.parse(from: self.expression)
         
         let calculationResult = try formula.result()
