@@ -55,7 +55,7 @@ struct CalculatorManager {
         }
         delegate?.addFormulaStackView(operand: currentOperand, operator: currentOperator)
         setOperator(value: newOperator)
-        addFormulaExpression()
+        addFormulaExpression(operand: currentOperand, operator: currentOperator)
         setOperand(value: zero)
     }
     
