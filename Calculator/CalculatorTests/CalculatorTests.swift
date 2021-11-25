@@ -32,17 +32,4 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(queue.linkedList.head?.nodeValue, 2)
         XCTAssertNil(queue.linkedList.head?.pointer)
     }
-
-    func test_빈큐에_deleteFromQueue하면_emptyQueue오류발생() {
-        let queue = CalculatorItemQueue<Int>()
-        XCTAssertNil(queue.linkedList.head?.nodeValue)
-        
-        do {
-            try queue.deleteFromQueue()
-        } catch ErrorCase.emptyQueue {
-            XCTAssertThrowsError(ErrorCase.emptyQueue)
-        } catch {
-            return
-        }
-    }
 }

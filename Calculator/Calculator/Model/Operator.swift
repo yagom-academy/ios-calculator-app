@@ -2,9 +2,9 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -19,7 +19,6 @@ enum Operator: Character, CaseIterable, CalculateItem {
             } catch {
                 return .nan
             }
-            
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
