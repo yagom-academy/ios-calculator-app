@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -393,10 +392,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculatorItemsScrollView" destination="BOT-7g-vxv" id="tLZ-D8-pSC"/>
+                        <outlet property="calculatorItemsStackView" destination="XRe-QE-UJf" id="YTj-wy-7gX"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="gtB-hg-ooh"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="W9Y-Zc-Ymn"/>
-                        <outlet property="savedCalculatorItemsScrollView" destination="BOT-7g-vxv" id="WKH-Zy-FH9"/>
-                        <outlet property="savedCalculatorItemsStackView" destination="XRe-QE-UJf" id="fts-OI-2vh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
