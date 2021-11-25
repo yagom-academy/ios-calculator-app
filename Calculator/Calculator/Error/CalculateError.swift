@@ -7,13 +7,15 @@
 
 import Foundation
 
-enum CalculateError: Error, CustomStringConvertible {
+enum CalculateError: Error {
     case divideByZero
-    
-    var description: String {
+}
+
+extension CalculateError: LocalizedError {
+    var errorDescription: String? {
         switch self {
         case .divideByZero:
-                    return "Cannot divide by zero"
+            return "Cannot divide by zero"
         }
     }
 }
