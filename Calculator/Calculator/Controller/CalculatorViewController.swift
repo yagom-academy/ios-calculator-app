@@ -7,18 +7,18 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    private var savedCalculatorItems: String = ""
+    private var calculatorItems = String.empty
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var savedCalculatorItemsStackView: UIStackView!
-    @IBOutlet weak var savedCalculatorItemsScrollView: UIScrollView!
+    @IBOutlet weak var calculatorItemsStackView: UIStackView!
+    @IBOutlet weak var calculatorItemsScrollView: UIScrollView!
     
     private func addStackViewLabel() {
-        let savedItemlabel = UILabel()
-        savedItemlabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        savedItemlabel.textColor = .white
-        savedItemlabel.adjustsFontSizeToFitWidth = true
+        let singleItem = UILabel()
+        singleItem.font = UIFont.preferredFont(forTextStyle: .title3)
+        singleItem.textColor = .white
+        singleItem.adjustsFontSizeToFitWidth = true
         
         if operandLabel.text!.contains(String.decimalPoint) {
             while operandLabel.text!.hasSuffix(String.zero) || operandLabel.text!.hasSuffix(String.decimalPoint) {
@@ -26,21 +26,21 @@ class CalculatorViewController: UIViewController {
             }
         }
         
-        savedItemlabel.text = "\(operatorLabel.text!)\(Character.whiteSpace)\(operandLabel.text!)"
-        savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
+        singleItem.text = "\(operatorLabel.text!)\(Character.whiteSpace)\(operandLabel.text!)"
+        calculatorItemsStackView.addArrangedSubview(singleItem)
         scrollToBottom()
     }
     
     private func scrollToBottom() {
-        savedCalculatorItemsScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: savedCalculatorItemsScrollView.contentSize.height - savedCalculatorItemsScrollView.bounds.size.height + savedCalculatorItemsScrollView.contentInset.bottom)
+        calculatorItemsScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: calculatorItemsScrollView.contentSize.height - calculatorItemsScrollView.bounds.size.height + calculatorItemsScrollView.contentInset.bottom)
         if bottomOffset.y > 0 {
-            savedCalculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
+            calculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
         }
     }
     
     private func clearAllStackViewLabel() {
-        let addedStackViewLabels = savedCalculatorItemsStackView.arrangedSubviews
+        let addedStackViewLabels = calculatorItemsStackView.arrangedSubviews
         
         addedStackViewLabels.forEach { subview in subview.removeFromSuperview() }
     }
@@ -50,14 +50,14 @@ class CalculatorViewController: UIViewController {
         case true:
             return
         case false:
-            saveCalculator(item: "\(operatorLabel.text!)")
-            saveCalculator(item: "\(operandLabel.text!)")
+            appendCalculatorItem("\(operatorLabel.text!)")
+            appendCalculatorItem("\(operandLabel.text!)")
             addStackViewLabel()
-            resetOperatorLabel()
-            var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
+            resetOperatorLabelText()
+            var parsedFormula = ExpressionParser.parse(from: calculatorItems)
             let result = parsedFormula.result()
             operandLabel.text = CalculatorSetting.formatNumber(result)
-            resetSavedCalculatorItems()
+            resetCalculatorItems()
         }
     }
     
@@ -74,10 +74,10 @@ class CalculatorViewController: UIViewController {
     @IBAction func tappedOperatorButton(_ button: UIButton) {
         switch operatorLabel.text!.isEmpty || operandLabel.text! != String.zero {
         case true:
-            saveCalculator(item: "\(operatorLabel.text!)")
-            saveCalculator(item: "\(operandLabel.text!)")
+            appendCalculatorItem("\(operatorLabel.text!)")
+            appendCalculatorItem("\(operandLabel.text!)")
             addStackViewLabel()
-            resetOperandLabel()
+            resetOperandLabelText()
             operatorLabel.text = button.currentTitle
         case false:
             operatorLabel.text = button.currentTitle
@@ -114,39 +114,39 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedAllClearButton(_ button: UIButton) {
-        resetSavedCalculatorItems()
-        resetOperandLabel()
-        resetOperatorLabel()
+        resetCalculatorItems()
+        resetOperandLabelText()
+        resetOperatorLabelText()
         clearAllStackViewLabel()
     }
     
     @IBAction func tappedClearEntryButton(_ button: UIButton) {
-        resetOperandLabel()
+        resetOperandLabelText()
     }
     
     @IBAction func occurHapticFeedback() {
         CalculatorSetting.occurHapticFeedback()
     }
     
-    private func saveCalculator(item: String) {
+    private func appendCalculatorItem(_ item: String) {
         switch item.contains(String.decimalComma) {
         case true:
             let commaRemoveditem = item.components(separatedBy: String.decimalComma).joined()
-            savedCalculatorItems = "\(savedCalculatorItems)\(Character.whiteSpace)\(commaRemoveditem)"
+            calculatorItems = "\(calculatorItems)\(Character.whiteSpace)\(commaRemoveditem)"
         case false:
-            savedCalculatorItems = "\(savedCalculatorItems)\(Character.whiteSpace)\(item)"
+            calculatorItems = "\(calculatorItems)\(Character.whiteSpace)\(item)"
         }
     }
     
-    private func resetSavedCalculatorItems() {
-        savedCalculatorItems = String.empty
+    private func resetCalculatorItems() {
+        calculatorItems = String.empty
     }
     
-    private func resetOperandLabel() {
+    private func resetOperandLabelText() {
         operandLabel.text = String.zero
     }
     
-    private func resetOperatorLabel() {
+    private func resetOperatorLabelText() {
         operatorLabel.text = String.empty
     }
 }
