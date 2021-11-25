@@ -52,13 +52,14 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperandButton(_ button: UIButton) {
-        switch operandLabel.text! {
-        case String.zero:
-            operandLabel.text = String.empty
-            operandLabel.text! = "\(operandLabel.text!)\(button.currentTitle!)"
-        default:
-            operandLabel.text! = "\(operandLabel.text!)\(button.currentTitle!)"
+        guard var operandLabelText = operandLabel.text,
+              let buttonTitle = button.currentTitle else { return }
+        
+        if operandLabelText == String.zero {
+            operandLabelText = String.empty
         }
+        
+        operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
     @IBAction func tappedOperatorButton(_ button: UIButton) {
