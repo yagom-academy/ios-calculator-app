@@ -7,6 +7,7 @@ class ViewController: UIViewController {
     @IBOutlet weak private var expressionsStackView: UIStackView!
     @IBOutlet weak private var expressionScrollView: UIScrollView!
     
+    private var calculator: Calculator?
     private let numberFormatter = NumberFormatter()
     
     private var inputString: String = String.empty
@@ -15,10 +16,16 @@ class ViewController: UIViewController {
             $0 == inputString.hasSuffix(String($1.rawValue))
         }
     }
+    
     private var hasDot: Bool {
         let text = operandLabel.text ?? String.empty
         
         return text.contains(CalculatorSymbol.Dot)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        calculator = Calculator(delegate: self)
     }
     
     override func viewDidLoad() {
@@ -234,4 +241,8 @@ extension ViewController {
     private func removeComma(text: String?) -> String {
         return text?.replacingOccurrences(of: CalculatorSymbol.Comma, with: String.empty) ?? String.empty
     }
+}
+
+extension ViewController: CalculatorDelegate {
+    
 }
