@@ -99,6 +99,13 @@ struct CalculatorManager {
     func currentOperandToDouble() -> Double? {
         return Double(self.currentOperand)
     }
+    
+    func doCalculate() throws -> Double {
+        let formula = ExpressionParser.parse(from: self.expression)
+        
+        let calculationResult = try formula.result()
+        return calculationResult
+    }
 }
 
 extension CalculatorManager {
