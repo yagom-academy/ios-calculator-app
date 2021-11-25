@@ -123,10 +123,14 @@ class ViewController: UIViewController {
             resetCalculator()
         }
         
-        guard let operand: String = sender.titleLabel?.text else { return }
+        guard var operand: String = sender.titleLabel?.text else { return }
         
         guard didNotRepeatDotOperand(operand: operand) else {
             return
+        }
+        
+        if currentOperand == "", operand == "." {
+            operand = "0" + operand
         }
         
         if isNotPreviousInputOperator {
@@ -134,7 +138,6 @@ class ViewController: UIViewController {
             print("입력된 숫자 : \(currentOperand)")
         } else if operand == "." {
             resetOperand()
-            currentOperand = "0" + operand
             print("입력된 숫자 : \(currentOperand)")
         } else {
             resetOperand()
@@ -163,6 +166,7 @@ class ViewController: UIViewController {
             currentOperator = operatorSymbol
             operatorLabel.text = currentOperator
             operandLabel.text = "0"
+            currentOperand = ""
         }
 
         isPreviousInputOperator = true
