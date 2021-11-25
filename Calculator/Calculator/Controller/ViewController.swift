@@ -111,8 +111,16 @@ class ViewController: UIViewController {
         processStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    func didNotRepeatDotOperand(operand: String) -> Bool {
+    func didNotRepeatDot(operand: String) -> Bool {
         if currentOperand.contains(".") && operand == "." {
+            return false
+        }
+        return true
+    }
+    
+    func didNotRepeatZero(operand: String) -> Bool {
+        if operandLabel.text == "0",
+           (operand == "0" || operand == "00") {
             return false
         }
         return true
@@ -125,12 +133,16 @@ class ViewController: UIViewController {
         
         guard var operand: String = sender.titleLabel?.text else { return }
         
-        guard didNotRepeatDotOperand(operand: operand) else {
+        guard didNotRepeatDot(operand: operand) else {
             return
         }
         
         if currentOperand == "", operand == "." {
             operand = "0" + operand
+        }
+        
+        guard didNotRepeatZero(operand: operand) else {
+            return
         }
         
         if isNotPreviousInputOperator {
