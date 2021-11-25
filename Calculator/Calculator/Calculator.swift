@@ -3,12 +3,18 @@ import Foundation
 class Calculator {
     weak private var delegate: CalculatorDelegate?
     
-    var currentOperator: String
+    var currentOperator: String {
+        didSet {
+            delegate?.calculator(didChangeCurrentOperatorTo: currentOperator)
+        }
+    }
+    
     var currentOperand: String {
         didSet {
             delegate?.calculator(didChangeCurrentOperandTo: currentOperand)
         }
     }
+    
     var inputString: String
     
     private let numberFormatter = NumberFormatter()
@@ -35,6 +41,12 @@ class Calculator {
     convenience init(delegate: CalculatorDelegate) {
         self.init()
         self.delegate = delegate
+    }
+    
+    private func resetCurrentData() {
+        resetCurrentOperand()
+        resetCurrentOperator()
+        delegate?.calculatorDidClearAllData()
     }
     
     private func initNumberFormatter() {
@@ -68,8 +80,8 @@ extension Calculator {
     }
     
     func allClearButtonTouched() {
-//        initializeView()
-//        resetInputString()
+        resetInputString()
+        resetCurrentData()
     }
     
     func clearEntryButtonTouched() {
@@ -109,8 +121,8 @@ extension Calculator {
         
         guard currentText != CalculatorSymbol.Zero ||
                 text != CalculatorSymbol.DoubleZero else {
-            return
-        }
+                    return
+                }
         
         if currentText == CalculatorSymbol.Zero {
             currentText = text
@@ -125,6 +137,18 @@ extension Calculator {
         } else {
             currentOperand = currentText
         }
+    }
+    
+    private func resetCurrentOperand() {
+        currentOperand = CalculatorSymbol.Zero
+    }
+    
+    private func resetCurrentOperator() {
+        currentOperator = String.empty
+    }
+    
+    private func resetInputString() {
+        inputString = String.empty
     }
 }
 extension Calculator {

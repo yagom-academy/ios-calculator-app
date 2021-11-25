@@ -20,9 +20,9 @@ class ViewController: UIViewController {
     }
     
     private func initializeView() {
-//        resetOperandLabel()
-//        resetOperatorLabel()
-//        removeSubviewsFromStackView()
+        operandLabel.text = CalculatorSymbol.Zero
+        operatorLabel.text = String.empty
+        removeSubviewsFromStackView()
     }
 }
 
@@ -84,17 +84,8 @@ extension ViewController {
 //        operandLabel.text = currentText
 //    }
 //
-//    private func resetOperandLabel() {
-//        operandLabel.text = CalculatorSymbol.Zero
-//    }
-//
-//    private func resetOperatorLabel() {
-//        operatorLabel.text = String.empty
-//    }
-//
-//    private func resetInputString() {
-////        inputString = String.empty
-//    }
+
+
 //
 //    private func updateOperandsLabel(text operands: String) {
 //        operandLabel.text = operands
@@ -114,9 +105,9 @@ extension ViewController {
 //        scrollToBottom(expressionScrollView)
 //    }
 //
-//    private func removeSubviewsFromStackView() {
-//        expressionsStackView.arrangedSubviews.forEach{$0.removeFromSuperview()}
-//    }
+    private func removeSubviewsFromStackView() {
+        expressionsStackView.arrangedSubviews.forEach{$0.removeFromSuperview()}
+    }
     
     private func makeExpressionStackView(operator: UILabel,
                                          operand: UILabel) -> UIStackView {
@@ -173,5 +164,13 @@ extension ViewController {
 extension ViewController: CalculatorDelegate {
     func calculator(didChangeCurrentOperandTo operand: String) {
         operandLabel.text = operand
+    }
+    
+    func calculator(didChangeCurrentOperatorTo operator: String) {
+        operatorLabel.text = `operator`
+    }
+    
+    func calculatorDidClearAllData() {
+        removeSubviewsFromStackView()
     }
 }
