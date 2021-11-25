@@ -77,4 +77,16 @@ class CalculatorManagerTest: XCTestCase {
         calculatorManager.fetchExpression(operand: operand, operator: `operator`)
         XCTAssertEqual("12+", calculatorManager.expression)
     }
+    
+    func test_수식을_받아_정상적으로_연산을_하는지() {
+        let calculatorManager = CalculatorManager(currentOperand: "", currentOperator: "", expression: "1.5+3.5×2.0", isCalculated: false)
+        XCTAssertEqual(10.0, try calculatorManager.doCalculate())
+    }
+    
+    func test_수식에_0으로_나누는_경우가_있을_때_NaN을_반환하는지() {
+        let calculatorManager = CalculatorManager(currentOperand: "", currentOperator: "", expression: "1.5+3.5÷0.0", isCalculated: false)
+        XCTAssertThrowsError(try calculatorManager.doCalculate()) { error in
+            XCTAssertEqual(error as! OperationError, OperationError.dividedByZero)
+        }
+    }
 }
