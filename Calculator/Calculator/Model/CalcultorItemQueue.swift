@@ -15,7 +15,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return enQueueElements.isEmpty && deQueueElements.isEmpty
     }
     
-    mutating func enQueueElement(_ element: Element) {
+    mutating func enQueue(_ element: Element) {
         enQueueElements.append(element)
     }
     
