@@ -19,9 +19,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let symbols = Operator.provideSymbols()
-        
         return input.split(with: " ")
-                    .filter { eachString in symbols.contains(eachString) }
+                    .filter { eachString in Operator.doesContain(eachString) }
     }
 }

@@ -13,8 +13,10 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "÷"
     case multiply = "×"
     
-    static func provideSymbols() -> [String] {
-        return Operator.allCases.map { `case` in `case`.rawValue.description }
+    static func doesContain(_ target: String) -> Bool {
+        let symbols = Operator.allCases.map { `case` in `case`.rawValue.description }
+        
+        return symbols.contains(target)
     }
     
     init?(symbol: String) {
