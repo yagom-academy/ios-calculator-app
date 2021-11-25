@@ -22,13 +22,25 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initailizeLabel()
+        initializeLabel()
         initializeFormulaStackView()
     }
     
-    private func initailizeLabel() {
+    private func initializeLabel() {
+        initializeNumberLabel()
+        initializeOperatorLabel()
+    }
+    
+    private func initializeNumberLabel() {
         inputNumberLabel.text = initialNumberLabel
+    }
+    
+    private func initializeOperatorLabel() {
         inputOperatorLabel.text = initialStringValue
+    }
+    
+    private func initializeStringFormula() {
+        entireStringFormula = initialStringValue
     }
     
     private func initializeFormulaStackView() {
@@ -85,13 +97,13 @@ class CalculatorViewController: UIViewController {
 
         if formulaStackView.arrangedSubviews.isEmpty,
           currentNumberText == initialNumberLabel {
-            inputOperatorLabel.text = initialStringValue
+            initializeOperatorLabel()
         } else if currentNumberText == initialNumberLabel {
             changeOperatorLabel(with: inputOperator)
         } else {
             addFormulaStackView()
             changeOperatorLabel(with: inputOperator)
-            inputNumberLabel.text = initialNumberLabel
+            initializeNumberLabel()
         }
     }
     
@@ -117,13 +129,13 @@ class CalculatorViewController: UIViewController {
     // MARK: - 특수 버튼 입력
     
     @IBAction private func tapACButton(_ sender: UIButton) {
-        initailizeLabel()
-        entireStringFormula = initialStringValue
+        initializeLabel()
+        initializeStringFormula()
         initializeFormulaStackView()
     }
     
     @IBAction private func tapCEButton(_ sender: UIButton) {
-        inputNumberLabel.text = initialNumberLabel
+        initializeNumberLabel()
     }
     
     @IBAction private func tapPositiveNegativeButton(_ sender: UIButton) {
@@ -145,8 +157,8 @@ class CalculatorViewController: UIViewController {
             var formula = ExpressionParser.parse(from: entireStringFormula)
             let result = try formula.result()
             updateNumberLabel(with: Decimal(result))
-            inputOperatorLabel.text = initialStringValue
-            entireStringFormula = initialStringValue
+            initializeOperatorLabel()
+            initializeStringFormula()
         } catch CalculatorError.emptyQueue {
             return
         } catch {
