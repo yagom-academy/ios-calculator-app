@@ -48,4 +48,10 @@ class OperatorTest: XCTestCase {
         let result = Operator.multiply.calculate(lhs: 2.5, rhs: -4.5)
         XCTAssertEqual(result, -11.25)
     }
+    
+    func test_실수_0_각1개_devide연산자_계산() {
+        let result = Operator.divide.calculate(lhs: 2.5, rhs: 0)
+        
+        XCTAssertTrue(result.isNaN)
+    }
 }

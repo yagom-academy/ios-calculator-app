@@ -9,9 +9,17 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "_"
+    case subtract = "−"
     case multiply = "×"
-    case divide = "/"
+    case divide = "÷"
+    
+    init?(sign: Character) {
+        self.init(rawValue: sign)
+    }
+    
+    var operatorSign: Character {
+        return self.rawValue
+    }
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -27,18 +35,31 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let decimalResult = Decimal(lhs) + Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let decimalResult = Decimal(lhs) - Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let decimalResult = Decimal(lhs) * Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        return lhs / rhs
+        let decimalResult = Decimal(lhs) / Decimal(rhs)
+        let result = Double(truncating: decimalResult as NSNumber)
+        
+        return result
     }
+    
 }
