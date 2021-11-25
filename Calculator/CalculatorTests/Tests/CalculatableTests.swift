@@ -10,8 +10,9 @@ import XCTest
 
 class CalculatableTests: XCTestCase {
     var sut: Calculatable!
+    
     override func setUpWithError() throws {
-        sut = MockCalculatorManager()
+        sut = MockCalculator()
     }
 
     override func tearDownWithError() throws {
@@ -19,8 +20,8 @@ class CalculatableTests: XCTestCase {
     }
 
     func testCaculatable_givenMultiplicationEquation_expect200() {
-        let dummyHistoryStack = ["", "010", "𝗑", "020"]
-        let result = sut.calculateResult(from: dummyHistoryStack)
+        sut.formulaStack = ["10", "𝗑", "20"]
+        let result = sut.calculateResult()
         XCTAssertEqual(result, 200)
     }
 }

@@ -14,10 +14,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculationHistoryScrollView: UIScrollView!
     
     //MARK: - Properties
-    private var calculatorManager = CalculatorManager()
-    private var historyStack: [String] = []
-    private var currentOperand = ""
-    private var currentOperator = ""
+    private var calculator = Calculator()
     
     private var currentOperandLabelText: String {
         get {
@@ -29,7 +26,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private var isZeroDuringInput: Bool {
-        return currentOperand.isZero && !historyStack.isEmpty
+        return calculator.currentOperandIsZero && calculator.historyStackIsNotEmpty
     }
     
     //MARK: - View Lifecycle
@@ -45,12 +42,12 @@ final class CalculatorViewController: UIViewController {
         guard let numberPressedString = sender.accessibilityIdentifier else {
             return
         }
-        let newOperand = currentOperand + numberPressedString
+        let newOperand = calculator.currentOperand + numberPressedString
         do {
             guard let formattedOperand = try newOperand.convertNumberToPresentableFormat() else {
                 return
             }
-            updateCurrentOperandValue(to: newOperand)
+            calculator.updateCurrentOperandValue(to: newOperand)
             update(currentOperandLabel, to: formattedOperand)
         } catch let error as NumberFormatError {
             print(error.errorDescription)
@@ -67,9 +64,9 @@ final class CalculatorViewController: UIViewController {
             updateCurrentOperatorValueAndLabel(to: operatorPressedString)
             return
         }
-        if currentOperand.isNotZero {
-            updateHistoryStackView(with: currentOperator, and: currentOperandLabelText)
-            updateHistoryStack(with: currentOperator, and: currentOperand)
+        if calculator.currentOperandIsNotZero {
+            updateHistoryStackView(with: calculator.currentOperator, and: currentOperandLabelText)
+            calculator.updateHistoryStack(with: calculator.currentOperator, and: calculator.currentOperand)
             updateCurrentOperatorValueAndLabel(to: operatorPressedString)
             updateCurrentOperandValueAndLabel(to: "0")
             autoScrollToBottom()
@@ -77,10 +74,10 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpCalculateButton(_ sender: Any) {
-        updateHistoryStack(with: currentOperator, and: currentOperand)
-        updateHistoryStackView(with: currentOperator, and: currentOperandLabelText)
+        calculator.updateHistoryStack(with: calculator.currentOperator, and: calculator.currentOperand)
+        updateHistoryStackView(with: calculator.currentOperator, and: currentOperandLabelText)
         
-        let result = calculatorManager.calculateResult(from: historyStack)
+        let result = calculator.calculateResult()
         do {
             if let presentableResult = try result.presentableFormat() {
                 update(currentOperandLabel, to: presentableResult)
@@ -91,14 +88,15 @@ final class CalculatorViewController: UIViewController {
             print(error)
         }
         
-        updateCurrentOperandValue(to: result.convertToString)
+        calculator.updateCurrentOperandValue(to: result.convertToString)
         updateCurrentOperatorValueAndLabel(to: "")
-        clearHistoryStack()
+        calculator.clearHistoryStack()
+        autoScrollToBottom()
     }
     
     @IBAction private func touchUpACButton(_ sender: Any) {
-        clearCalculationHistory()
-        clearHistoryStack()
+        removeFormulaStackViews()
+        calculator.clearHistoryStack()
         updateCurrentOperandValueAndLabel(to: "0")
         updateCurrentOperatorValueAndLabel(to: "")
     }
@@ -108,8 +106,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpSignButton(_ sender: Any) {
-        guard currentOperand.isNotZero,
-              let doubleOperand = Double(currentOperand),
+        guard calculator.currentOperandIsNotZero,
+              let doubleOperand = Double(calculator.currentOperand),
               doubleOperand != 0 else {
             return
         }
@@ -134,21 +132,13 @@ extension CalculatorViewController {
     }
     
     private func updateCurrentOperandValueAndLabel(to newOperand: String) {
-        updateCurrentOperandValue(to: newOperand)
+        calculator.updateCurrentOperandValue(to: newOperand)
         update(currentOperandLabel, to: newOperand)
     }
     
-    private func updateCurrentOperandValue(to newOperand: String) {
-        currentOperand = newOperand
-    }
-    
     private func updateCurrentOperatorValueAndLabel(to newOperator: String) {
-        updateCurrentOperatorValue(to: newOperator)
+        calculator.updateCurrentOperatorValue(to: newOperator)
         update(currentOperatorLabel, to: newOperator)
-    }
-    
-    private func updateCurrentOperatorValue(to newOperator: String) {
-        currentOperator = newOperator
     }
     
     private func update(_ label: UILabel, to data: String) {
@@ -167,21 +157,9 @@ extension CalculatorViewController {
         }
     }
     
-    private func updateHistoryStack(with currentOperator: String, and currentOperand: String) {
-        historyStack.append(contentsOf: [currentOperator, currentOperand])
-    }
-    
     private func updateHistoryStackView(with currentOperator: String, and currentOperand: String) {
         let formulaStackView = createFormulaStackView(with: currentOperator, and: currentOperand)
         calculationHistoryStackView.addArrangedSubview(formulaStackView)
-    }
-    
-    private func clearCalculationHistory() {
-        removeFormulaStackViews()
-    }
-    
-    private func clearHistoryStack() {
-        historyStack.removeAll()
     }
     
     private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
@@ -214,29 +192,5 @@ extension CalculatorViewController {
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
         return label
-    }
-}
-//MARK: - CalculatorManager
-extension CalculatorViewController {
-    private struct CalculatorManager: Calculatable {
-        func calculateResult(from historyStack: [String]) -> Double {
-            let equationString = historyStack.filter { $0 != "" }
-                .joined()
-            var formula = ExpressionParser.parse(from: equationString)
-            let result = getCalculationResult(from: &formula)
-            return result
-        }
-        
-        func getCalculationResult(from formula: inout Formula) -> Double {
-            var result = 0.0
-            do {
-                try result = formula.result()
-            } catch let error as CalculateItemQueueError {
-                print(error.errorDescription)
-            } catch {
-                print(error)
-            }
-            return result
-        }
     }
 }
