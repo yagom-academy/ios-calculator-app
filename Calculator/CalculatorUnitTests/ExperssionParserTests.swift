@@ -4,10 +4,12 @@ class ExperssionParserTests: XCTestCase {
     var sut: ExpressionParser.Type!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = ExpressionParser.self
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
         
