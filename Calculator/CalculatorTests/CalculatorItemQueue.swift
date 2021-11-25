@@ -12,7 +12,7 @@ class CalculatorItemQueueTests: XCTestCase {
    
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue([])
+        sut = CalculatorItemQueue(enQueueElements: [])
     }
 
     override func tearDownWithError() throws {
