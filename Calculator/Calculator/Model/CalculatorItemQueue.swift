@@ -27,6 +27,7 @@ struct CalculatorItemQueue<T> {
         guard let headValue = list.retrieveHeadValue() else {
             throw CalculateItemQueueError.queueIsEmpty
         }
+        
         return headValue
     }
     

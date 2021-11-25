@@ -17,6 +17,7 @@ extension Calculatable {
             .joined()
         var formula = ExpressionParser.parse(from: equationString)
         let result = getCalculationResult(from: &formula)
+        
         return result
     }
 
@@ -29,6 +30,7 @@ extension Calculatable {
         } catch {
             print(error)
         }
+         
         return result
     }
 }

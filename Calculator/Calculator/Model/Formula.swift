@@ -17,8 +17,10 @@ struct Formula {
         while operators.isNotEmpty {
             let currentOperator = try operators.dequeue()
             let currentOperand = try operands.dequeue()
+            
             resultValue = currentOperator.calculate(lhs: resultValue, rhs: currentOperand)
         }
+        
         return resultValue
     }
 }

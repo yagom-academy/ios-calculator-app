@@ -90,7 +90,6 @@ final class CalculatorViewController: UIViewController {
         } catch {
             print(error)
         }
-        
         calculator.updateCurrentOperandValue(to: result.convertToString)
         updateCurrentOperatorValueAndLabel(to: emptyString)
         calculator.clearHistoryStack()
@@ -168,33 +167,39 @@ extension CalculatorViewController {
     private func createFormulaStackView(with currentOperator: String, and currentOperand: String) -> UIStackView {
         let formulaStackView = createStackView()
         let operandLabel = createLabel(with: currentOperand)
+        let operatorLabel = createLabel(with: currentOperator)
+        
         if calculationHistoryStackView.arrangedSubviews.isEmpty {
             formulaStackView.addArrangedSubview(operandLabel)
             return formulaStackView
         }
-        let operatorLabel = createLabel(with: currentOperator)
         formulaStackView.addArrangedSubview(operatorLabel)
         formulaStackView.addArrangedSubview(operandLabel)
+        
         return formulaStackView
     }
     
     private func createStackView() -> UIStackView {
         let stackView = UIStackView()
         let spacingConstant = 8.0
+        
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = CGFloat(spacingConstant)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         return stackView
     }
     
     private func createLabel(with item: String) -> UILabel {
         let label = UILabel()
+        
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.text = item
         label.textColor = .white
         label.adjustsFontForContentSizeCategory = true
+        
         return label
     }
 }

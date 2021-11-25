@@ -24,6 +24,7 @@ extension String {
 
     func convertNumberToPresentableFormat() throws -> String? {
         let inputOperand = self
+        let numberFormatter = NumberFormatGenerator.createNumberFormatter()
         guard let operand = Double(inputOperand) else {
             throw NumberFormatError.typeCastingFailed
         }
@@ -31,7 +32,6 @@ extension String {
         if inputOperand.contains(".") {
             return try inputOperand.convertToPresentableWithDot()
         }
-        let numberFormatter = NumberFormatGenerator.createNumberFormatter()
         
         return numberFormatter.string(for: operand)
     }
@@ -47,7 +47,6 @@ extension String {
         if splittedNumberArray.count == 1 {
             return formattedDotFront + "."
         }
-        
         let dotBack = splittedNumberArray[1]
         
         return formattedDotFront + "." + dotBack
