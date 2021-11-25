@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08993111274F2C4B0092711F /* CalculatorSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08993110274F2C4B0092711F /* CalculatorSymbol.swift */; };
 		08A63D93274CAE38003B5CBC /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A63D92274CAE38003B5CBC /* ExpressionParser.swift */; };
 		08A63D95274CAE6B003B5CBC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A63D94274CAE6B003B5CBC /* String+Extension.swift */; };
 		08A63D96274CAE6B003B5CBC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A63D94274CAE6B003B5CBC /* String+Extension.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08993110274F2C4B0092711F /* CalculatorSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSymbol.swift; sourceTree = "<group>"; };
 		08A63D92274CAE38003B5CBC /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		08A63D94274CAE6B003B5CBC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		08A63D98274CAEA8003B5CBC /* ExperssionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperssionParserTests.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				EA981AC5274BD2ED00F3F6D3 /* Operator.swift */,
 				E90EF528274C86850026E11E /* Formula.swift */,
 				08A63D92274CAE38003B5CBC /* ExpressionParser.swift */,
+				08993110274F2C4B0092711F /* CalculatorSymbol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				E90EF529274C86850026E11E /* Formula.swift in Sources */,
 				08A63D95274CAE6B003B5CBC /* String+Extension.swift in Sources */,
 				EA981AC9274BD6B000F3F6D3 /* Double+Extension.swift in Sources */,
+				08993111274F2C4B0092711F /* CalculatorSymbol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,16 +9,16 @@ class ViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     
-    private var inputString: String = ""
+    private var inputString: String = String.empty
     private var hasSuffixOperator: Bool {
         return Operator.allCases.reduce(false) {
             $0 == inputString.hasSuffix(String($1.rawValue))
         }
     }
     private var hasDot: Bool {
-        let text = operandLabel.text ?? ""
+        let text = operandLabel.text ?? String.empty
         
-        return text.contains(".")
+        return text.contains(CalculatorSymbol.Dot)
     }
     
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ extension ViewController {
         guard let `operator` = sender.currentTitle else { return }
         guard let currentText = operandLabel.text else { return }
         
-        if currentText == "0" {
+        if currentText == CalculatorSymbol.Zero {
             updateOperatorLabel(text: `operator`)
             appendOperatorToInputString()
             return
@@ -75,7 +75,7 @@ extension ViewController {
     }
     
     @IBAction private func touchUpPlusMinusButton(_ sender: UIButton) {
-        guard operandLabel.text != "0" else {
+        guard operandLabel.text != CalculatorSymbol.Zero else {
             return
         }
         
@@ -88,7 +88,7 @@ extension ViewController {
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
         guard let `operator` = operatorLabel.text,
-              `operator` != "" else { return }
+              `operator` != String.empty else { return }
         
         addExpressionStackView()
         appendOperandToInputString()
@@ -104,14 +104,14 @@ extension ViewController {
 extension ViewController {
     
     private func changeOperandLabel(text: String) {
-        var currentText = operandLabel.text ?? "0"
+        var currentText = operandLabel.text ?? CalculatorSymbol.Zero
         
-        guard currentText != "0" ||
-              text != "00" else {
+        guard currentText != CalculatorSymbol.Zero ||
+                text != CalculatorSymbol.DoubleZero else {
                   return
         }
         
-        if currentText == "0" {
+        if currentText == CalculatorSymbol.Zero {
             currentText = text
         } else {
             currentText += text
@@ -127,25 +127,23 @@ extension ViewController {
     }
     
     private func insertDot() {
-        let dot = "."
-        
         if hasDot == false {
-            let currentText = operandLabel.text ?? "0"
+            let currentText = operandLabel.text ?? CalculatorSymbol.Zero
             
-            operandLabel.text = currentText + dot
+            operandLabel.text = currentText + CalculatorSymbol.Dot
         }
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = "0"
+        operandLabel.text = CalculatorSymbol.Zero
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = ""
+        operatorLabel.text = String.empty
     }
     
     private func resetInputString() {
-        inputString = String()
+        inputString = String.empty
     }
     
     private func updateOperandsLabel(text operands: String) {
@@ -222,17 +220,16 @@ extension ViewController {
     }
     
     private func removeComma(text: String?) -> String {
-        return text?.replacingOccurrences(of: ",", with: "") ?? ""
+        return text?.replacingOccurrences(of: CalculatorSymbol.Comma, with: String.empty) ?? String.empty
     }
     
     private func togglePlusMinus() -> String {
-        var currentText = operandLabel.text ?? "0"
-        let minusSign = "-"
+        var currentText = operandLabel.text ?? CalculatorSymbol.Zero
         
-        if currentText.hasPrefix(minusSign) == true {
-            currentText = currentText.replacingOccurrences(of: minusSign , with: "")
+        if currentText.hasPrefix(CalculatorSymbol.Minus) == true {
+            currentText = currentText.replacingOccurrences(of: CalculatorSymbol.Minus, with: String.empty)
         } else {
-            currentText = minusSign + currentText
+            currentText = CalculatorSymbol.Minus + currentText
         }
         
         return currentText
