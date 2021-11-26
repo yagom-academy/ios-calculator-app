@@ -63,20 +63,18 @@ extension Calculator {
     }
     
     func operatorButtonTouched(_ operator: String) {
-//        guard let `operator` = sender.currentTitle else { return }
-//        guard let currentText = operandLabel.text else { return }
-//
-//        if currentText == CalculatorSymbol.Zero {
-//            updateOperatorLabel(text: `operator`)
-//            appendOperatorToInputString()
-//            return
-//        }
-//
-//        addExpressionStackView()
-//        updateOperatorLabel(text: `operator`)
-//        appendOperandToInputString()
-//        appendOperatorToInputString()
-//        resetOperandLabel()
+
+        if currentOperand == CalculatorSymbol.Zero {
+            updateCurrentOperator(text: `operator`)
+            appendOperatorToInputString()
+            return
+        }
+
+        delegate?.calculatorDidReceiveValidExpression()
+        updateCurrentOperator(text: `operator`)
+        appendOperandToInputString()
+        appendOperatorToInputString()
+        resetCurrentOperand()
     }
     
     func allClearButtonTouched() {
@@ -93,7 +91,7 @@ extension Calculator {
     }
     
     func dotButtonTouched() {
-        //insertDot()
+        insertDot()
     }
     
     func resultButtonTouched() {
@@ -135,6 +133,10 @@ extension Calculator {
         }
     }
     
+    private func updateCurrentOperator(text operator: String) {
+        currentOperator = `operator`
+    }
+    
     private func togglePlusMinus() {
         if currentOperand.hasPrefix(CalculatorSymbol.Minus) == true {
             currentOperand = currentOperand.replacingOccurrences(of: CalculatorSymbol.Minus, with: String.empty)
@@ -153,6 +155,24 @@ extension Calculator {
     
     private func resetInputString() {
         inputString = String.empty
+    }
+    
+    private func insertDot() {
+        if hasDot == false {
+            currentOperand += CalculatorSymbol.Dot
+        }
+    }
+    
+    private func appendOperandToInputString() {
+        inputString.append(currentOperand.removedComma())
+    }
+        
+    private func appendOperatorToInputString() {
+        if hasSuffixOperator {
+            inputString.removeLast()
+        }
+
+        inputString.append(currentOperator)
     }
 }
 extension Calculator {

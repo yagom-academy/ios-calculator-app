@@ -64,13 +64,7 @@ extension ViewController {
 // MARK: - View Method
 extension ViewController {
     
-    private func insertDot() {
-//        if hasDot == false {
-//            let currentText = operandLabel.text ?? CalculatorSymbol.Zero
-//
-//            operandLabel.text = currentText + CalculatorSymbol.Dot
-//        }
-    }
+
     
 //    private func togglePlusMinus() {
 //        var currentText = operandLabel.text ?? CalculatorSymbol.Zero
@@ -86,25 +80,25 @@ extension ViewController {
 //
 
 
-//
-//    private func updateOperandsLabel(text operands: String) {
-//        operandLabel.text = operands
-//    }
-//
-//    private func updateOperatorLabel(text operator: String) {
-//        operatorLabel.text = `operator`
-//    }
-//
-//    private func addExpressionStackView() {
-//        let `operator` = makeLabel(with: operatorLabel.text)
-//        let operand = makeLabel(with: operandLabel.text)
-//        let expressionStackView = makeExpressionStackView(operator: `operator`,
-//                                                          operand: operand)
-//
-//        expressionsStackView.addArrangedSubview(expressionStackView)
-//        scrollToBottom(expressionScrollView)
-//    }
-//
+
+    private func updateOperandsLabel(text operands: String) {
+        operandLabel.text = operands
+    }
+
+    private func updateOperatorLabel(text operator: String) {
+        operatorLabel.text = `operator`
+    }
+
+    private func addExpressionStackView() {
+        let `operator` = makeLabel(with: operatorLabel.text)
+        let operand = makeLabel(with: operandLabel.text)
+        let expressionStackView = makeExpressionStackView(operator: `operator`,
+                                                          operand: operand)
+
+        expressionsStackView.addArrangedSubview(expressionStackView)
+        scrollToBottom(expressionScrollView)
+    }
+
     private func removeSubviewsFromStackView() {
         expressionsStackView.arrangedSubviews.forEach{$0.removeFromSuperview()}
     }
@@ -163,11 +157,15 @@ extension ViewController {
 
 extension ViewController: CalculatorDelegate {
     func calculator(didChangeCurrentOperandTo operand: String) {
-        operandLabel.text = operand
+        updateOperandsLabel(text: operand)
     }
     
     func calculator(didChangeCurrentOperatorTo operator: String) {
-        operatorLabel.text = `operator`
+        updateOperatorLabel(text: `operator`)
+    }
+    
+    func calculatorDidReceiveValidExpression() {
+        addExpressionStackView()
     }
     
     func calculatorDidClearAllData() {
