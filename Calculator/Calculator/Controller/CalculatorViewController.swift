@@ -90,11 +90,11 @@ class CalculatorViewController: UIViewController {
             return number
         }
         
-        guard let numberPointIndex = number.firstIndex(of: LabelContents.pointSymbole) else {
+        guard let numberPointIndex = number.firstIndex(of: Character(Labels.pointSymbole)) else {
             return result
         }
         
-        guard let resultPointIndex = result.firstIndex(of: LabelContents.pointSymbole) else {
+        guard let resultPointIndex = result.firstIndex(of: Character(Labels.pointSymbole)) else {
             let formattedResult = result + String(number[numberPointIndex...])
             return formattedResult
         }
@@ -144,10 +144,6 @@ class CalculatorViewController: UIViewController {
         currentInputOperatorLabel.text = calculatorModel.currentInputOperator
     }
     
-    private struct LabelContents {
-        static let zero: Character = "0"
-        static let pointSymbole: Character = "."
-    }
 }
 
 fileprivate extension UIScrollView {

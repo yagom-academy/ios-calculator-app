@@ -22,3 +22,14 @@ struct Buttons {
     static let divide = "÷"
     static let multiply = "×"
 }
+
+struct Labels {
+    static let zero: Character = "0"
+    static let notANumber = "NaN"
+    static let emptyString = ""
+    static let defaultOperand = "0"
+    static let minusSignSymbole = "-"
+    static let pointSymbole = "."
+    static let doubleZero = "00"
+    static let error = "error"
+}
