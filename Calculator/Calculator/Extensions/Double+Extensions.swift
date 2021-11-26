@@ -7,16 +7,7 @@
 
 import Foundation
 
-extension Double: CalculateItem {
-    func presentableFormat() throws -> String? {
-        let numberFormatter = NumberFormatGenerator.createNumberFormatter()
-        guard let result = numberFormatter.string(from: NSNumber(value: self)) else {
-            throw NumberFormatError.numberFormatFailed
-        }
-        
-        return result
-    }
-    
+extension Double: CalculateItem {    
     var convertToString: String {
         return String(self)
     }

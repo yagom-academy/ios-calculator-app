@@ -17,7 +17,8 @@ final class CalculatorViewController: UIViewController {
     private let zeroString = "0"
     private let emptyString = ""
     
-    private var calculator = Calculator()
+    var calculator: Calculatable!
+    var numberFormatter: CustomNumberFormatter!
     
     private var currentOperandLabelText: String {
         get {
@@ -47,7 +48,7 @@ final class CalculatorViewController: UIViewController {
         }
         let newOperand = calculator.currentOperand + numberPressedString
         do {
-            guard let formattedOperand = try newOperand.convertNumberToPresentableFormat() else {
+            guard let formattedOperand = try numberFormatter.convertStringToPresentableFormat(from: newOperand) else {
                 return
             }
             calculator.updateCurrentOperandValue(to: newOperand)
@@ -69,7 +70,7 @@ final class CalculatorViewController: UIViewController {
         }
         if calculator.currentOperandIsNotZero {
             updateHistoryStackView(with: calculator.currentOperator, and: currentOperandLabelText)
-            calculator.updateHistoryStack()
+            calculator.updateFormulaList()
             updateCurrentOperatorValueAndLabel(to: operatorPressedString)
             updateCurrentOperandValueAndLabel(to: zeroString)
             autoScrollToBottom()
@@ -77,12 +78,12 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpCalculateButton(_ sender: Any) {
-        calculator.updateHistoryStack()
+        calculator.updateFormulaList()
         updateHistoryStackView(with: calculator.currentOperator, and: currentOperandLabelText)
         
         let result = calculator.calculateResult()
         do {
-            if let presentableResult = try result.presentableFormat() {
+            if let presentableResult = try numberFormatter.convertToPresentableFormat(from: result) {
                 update(currentOperandLabel, to: presentableResult)
             }
         } catch let error as NumberFormatError{
@@ -114,7 +115,8 @@ final class CalculatorViewController: UIViewController {
             return
         }
         do {
-            guard let newOperand = try (doubleOperand * -1).presentableFormat() else {
+            let toggledOperand = doubleOperand * -1
+            guard let newOperand = try numberFormatter.convertToPresentableFormat(from: toggledOperand) else {
                 return
             }
             updateCurrentOperandValueAndLabel(to: newOperand)

@@ -9,28 +9,16 @@ import Foundation
 
 protocol Calculatable {
     var formulaStack: [String] { get set }
-}
-
-extension Calculatable {
-    func calculateResult() -> Double {
-        let equationString = formulaStack.filter { $0 != "" }
-            .joined()
-        var formula = ExpressionParser.parse(from: equationString)
-        let result = getCalculationResult(from: &formula)
-        
-        return result
-    }
-
-    func getCalculationResult(from formula: inout Formula) -> Double {
-        var result = 0.0
-        do {
-            try result = formula.result()
-        } catch let error as CalculateItemQueueError {
-            print(error.errorDescription)
-        } catch {
-            print(error)
-        }
-         
-        return result
-    }
+    var currentOperand: String { get set }
+    var currentOperator: String { get set }
+    var currentOperandIsZero: Bool { get }
+    var currentOperandIsNotZero: Bool { get }
+    var historyStackIsNotEmpty: Bool { get }
+    
+    mutating func clearHistoryStack()
+    mutating func updateCurrentOperandValue(to newOperand: String)
+    mutating func updateCurrentOperatorValue(to newOperator: String)
+    mutating func updateFormulaList()
+    func calculateResult() -> Double
+    func getCalculationResult(from formula: inout Formula) -> Double
 }

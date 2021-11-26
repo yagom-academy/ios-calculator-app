@@ -34,8 +34,7 @@
 		ED1A7A89274285A9002B36CE /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A88274285A9002B36CE /* String+Extensions.swift */; };
 		ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */; };
 		ED1A7A9027429023002B36CE /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1A7A8F27429023002B36CE /* CalculateItem.swift */; };
-		ED28F047274E4A7E000EA57D /* NumberFormatGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */; };
-		ED28F04F274F3438000EA57D /* MockCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F04E274F3438000EA57D /* MockCalculator.swift */; };
+		ED28F047274E4A7E000EA57D /* CustomNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F046274E4A7E000EA57D /* CustomNumberFormatter.swift */; };
 		ED28F051274F354F000EA57D /* CalculatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28F050274F354F000EA57D /* CalculatableTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,8 +80,7 @@
 		ED1A7A88274285A9002B36CE /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		ED1A7A8A274285CB002B36CE /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		ED1A7A8F27429023002B36CE /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
-		ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatGenerator.swift; sourceTree = "<group>"; };
-		ED28F04E274F3438000EA57D /* MockCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCalculator.swift; sourceTree = "<group>"; };
+		ED28F046274E4A7E000EA57D /* CustomNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNumberFormatter.swift; sourceTree = "<group>"; };
 		ED28F050274F354F000EA57D /* CalculatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				ED00CF4D273BC4A50081B9F3 /* DummyItem.swift */,
-				ED28F04E274F3438000EA57D /* MockCalculator.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -218,7 +215,7 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
-				ED28F046274E4A7E000EA57D /* NumberFormatGenerator.swift */,
+				ED28F046274E4A7E000EA57D /* CustomNumberFormatter.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -338,7 +335,7 @@
 				ED1A7A75273E3FCC002B36CE /* Operator.swift in Sources */,
 				ED00CF4C273BA29A0081B9F3 /* CalculatorItemQueue.swift in Sources */,
 				25141479274F81B80086B0A8 /* Calculator.swift in Sources */,
-				ED28F047274E4A7E000EA57D /* NumberFormatGenerator.swift in Sources */,
+				ED28F047274E4A7E000EA57D /* CustomNumberFormatter.swift in Sources */,
 				ED1A7A8B274285CB002B36CE /* Double+Extensions.swift in Sources */,
 				ED1A7A89274285A9002B36CE /* String+Extensions.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
@@ -361,7 +358,6 @@
 				ED1A7A7B273E456F002B36CE /* OperatorSubtractTests.swift in Sources */,
 				ED00CF4E273BC4A50081B9F3 /* DummyItem.swift in Sources */,
 				ED00CF4A273BA1E80081B9F3 /* CalculatorItemQueueTests.swift in Sources */,
-				ED28F04F274F3438000EA57D /* MockCalculator.swift in Sources */,
 				ED1A7A67273E245C002B36CE /* FormulaTests.swift in Sources */,
 				ED00CF3B27397DA40081B9F3 /* LinkedListTests.swift in Sources */,
 				ED28F051274F354F000EA57D /* CalculatableTests.swift in Sources */,

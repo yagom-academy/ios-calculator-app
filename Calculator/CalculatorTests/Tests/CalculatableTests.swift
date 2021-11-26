@@ -12,7 +12,7 @@ class CalculatableTests: XCTestCase {
     var sut: Calculatable!
     
     override func setUpWithError() throws {
-        sut = MockCalculator()
+        sut = Calculator()
     }
 
     override func tearDownWithError() throws {
@@ -20,26 +20,44 @@ class CalculatableTests: XCTestCase {
     }
 
     func testCalculatable_givenMultiplicationEquation_expect200() {
-        sut.formulaStack = ["10", "𝗑", "20"]
+        let FormulaList = ["10", "𝗑", "20"]
+        
+        sut.updateFormulaList(formulaList: FormulaList)
         let result = sut.calculateResult()
+        
         XCTAssertEqual(result, 200)
     }
     
     func testCalculatable_givenInvalidEquation_expectNaN() {
-        sut.formulaStack = ["10", "÷", "0"]
+        let FormulaList = ["10", "÷", "0"]
+        
+        sut.updateFormulaList(formulaList: FormulaList)
         let result = sut.calculateResult()
+        
         XCTAssertTrue(result.isNaN)
     }
     
     func testCalculatable_givenMixedEquation_expect4Point2() {
-        sut.formulaStack = ["10", "𝗑", "20", "−", "30", "+", "40", "÷", "50"]
+        let formulaList = ["10", "𝗑", "20", "−", "30", "+", "40", "÷", "50"]
+        
+        sut.updateFormulaList(formulaList: formulaList)
         let result = sut.calculateResult()
+        
         XCTAssertEqual(result, 4.2)
     }
     
     func testCalculatable_givenMixedEquation_expect1Point4() {
-        sut.formulaStack = ["1.5", "−", "0.5", "𝗑", "10", "+", "4", "÷", "10"]
+        let formulaList = ["1.5", "−", "0.5", "𝗑", "10", "+", "4", "÷", "10"]
+        
+        sut.updateFormulaList(formulaList: formulaList)
         let result = sut.calculateResult()
+        
         XCTAssertEqual(result, 1.4)
+    }
+}
+
+extension Calculatable {
+    mutating func updateFormulaList(formulaList: [String]) {
+        formulaStack.append(contentsOf: formulaList)
     }
 }
