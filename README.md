@@ -2,6 +2,8 @@
 
 - iOS 계산기 앱을 구현합니다
 
+https://user-images.githubusercontent.com/25794814/143540058-61198ebe-6f3f-4059-9ded-483e62421e38.mp4
+
 ### **프로젝트 참여자**
 
 @singularis7
@@ -34,7 +36,8 @@
 
 - ViewController 에서 View 에 관련된 처리만 할 수 있도록 계산기에 관련한 데이터와 로직을 별도의 타입으로 분리하였습니다.
 - 모델에 존재하는 계산 데이터의 상태를 View 가 반영하도록 데이터의 흐름을 제어하였습니다.
-- 
+- StackView와 ScrollView 를 활용하여 연산 수식을 표현해보았습니다.
+- NumberFormatter 를 활용하여 숫자를 특정 형식으로 포맷팅하여 출력시켜보았습니다.
 
 ---
 
