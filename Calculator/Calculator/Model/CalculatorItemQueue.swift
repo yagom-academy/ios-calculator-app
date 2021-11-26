@@ -1,13 +1,13 @@
 import Foundation
 
-struct CalculatorItemQueue<T: CalculateItem> {
+class CalculatorItemQueue<T: CalculateItem> {
     private var calculatorItems = [T]()
     
-    mutating func enqueue(_ item: T) {
+    func enqueue(_ item: T) {
         calculatorItems.append(item)
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         guard calculatorItems.isEmpty == false else {
             return nil
         }
@@ -19,7 +19,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return item
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         calculatorItems.removeAll()
     }
     
