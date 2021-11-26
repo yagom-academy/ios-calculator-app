@@ -21,6 +21,11 @@ struct Buttons {
     static let subtract = "−"
     static let divide = "÷"
     static let multiply = "×"
+    static let AC = "AC"
+    static let CE = "CE"
+    static let sign = "⁺⁄₋"
+    static let equal = "="
+    static let dot = "."
 }
 
 struct Labels {

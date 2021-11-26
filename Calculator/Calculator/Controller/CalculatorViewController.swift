@@ -35,10 +35,6 @@ class CalculatorViewController: UIViewController {
         calculatorModel.touchNumberButton(number)
     }
     
-    @IBAction private func touchPointNumber(_ sender: UIButton) {
-        calculatorModel.touchPointButton()
-    }
-    
     @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard let operatorSymbole = sender.titleLabel?.text else {
             return
@@ -46,20 +42,26 @@ class CalculatorViewController: UIViewController {
         calculatorModel.touchOperatorButton(operatorSymbole)
     }
     
-    @IBAction private func touchSignChangeButton(_ sender: UIButton) {
-        calculatorModel.touchSignChangeButton()
-    }
-    
-    @IBAction private func touchAllClearButton(_ sender: UIButton) {
-        calculatorModel.touchAllClearButton()
-    }
-    
-    @IBAction private func touchClearEntryButton(_ sender: UIButton) {
-        calculatorModel.touchClearEntryButton()
-    }
-    
-    @IBAction private func touchEvaluateButton(_ sender: UIButton) {
-        calculatorModel.touchEvaluateButton()
+    @IBAction private func touchButton(_ sender: UIButton) {
+        guard let symbol = sender.titleLabel?.text else {
+            return
+        }
+        
+        switch symbol {
+        case Buttons.AC:
+            calculatorModel.touchAllClearButton()
+        case Buttons.CE:
+            calculatorModel.touchClearEntryButton()
+        case Buttons.sign:
+            calculatorModel.touchSignChangeButton()
+        case Buttons.equal:
+            calculatorModel.touchEvaluateButton()
+        case Buttons.dot:
+            calculatorModel.touchPointButton()
+        default:
+            return
+        }
+        
     }
     
     private func addCurrentInputToFormulaHistory() {
