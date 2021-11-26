@@ -11,8 +11,11 @@ struct Calculator {
     private(set) var currentInputOperand = LabelContents.defaultOperand {
         didSet {
             if isEvaluated && currentInputOperand.hasSuffix(".0") {
-                guard let index = currentInputOperand.firstIndex(of: Character(LabelContents.pointSymbole)) else { return }
-                    currentInputOperand = String(currentInputOperand[..<index])
+                guard let index = currentInputOperand.firstIndex(of: Character(LabelContents.pointSymbole)) else {
+                    return
+                }
+                
+                currentInputOperand = String(currentInputOperand[..<index])
             }
         }
     }
@@ -29,7 +32,9 @@ struct Calculator {
             return
         }
         
-        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
+        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand {
+            return
+        }
         
         if currentInputOperand == LabelContents.defaultOperand {
             updateCurrentInput(operandForm: number, operatorForm: currentInputOperator)
@@ -40,7 +45,9 @@ struct Calculator {
     }
     
     mutating func touchPointButton() {
-        if currentInputOperand.contains(LabelContents.pointSymbole) { return }
+        if currentInputOperand.contains(LabelContents.pointSymbole) {
+            return
+        }
         
         if isEvaluated {
             let temporaryOperand = currentInputOperand + LabelContents.pointSymbole
@@ -61,7 +68,9 @@ struct Calculator {
             return
         }
         
-        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty { return }
+        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty {
+            return
+        }
         
         if currentInputOperand == LabelContents.defaultOperand {
             updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbole)
@@ -79,8 +88,13 @@ struct Calculator {
     }
     
     mutating func touchSignChangeButton() {
-        if currentInputOperand == LabelContents.defaultOperand { return }
-        if isEvaluated { return }
+        if currentInputOperand == LabelContents.defaultOperand {
+            return
+        }
+        
+        if isEvaluated {
+            return
+        }
         
         if currentInputOperand.hasPrefix(LabelContents.minusSignSymbole) {
             currentInputOperand.removeFirst()
@@ -104,7 +118,9 @@ struct Calculator {
     }
     
     mutating func touchEvaluateButton() {
-        if isEvaluated { return }
+        if isEvaluated {
+            return
+        }
         
         mathExpression += [(currentInputOperator, currentInputOperand)]
         

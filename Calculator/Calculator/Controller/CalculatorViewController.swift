@@ -29,7 +29,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchNumberButton(_ sender: UIButton) {
-        guard let number = sender.titleLabel?.text else { return }
+        guard let number = sender.titleLabel?.text else {
+            return
+        }
         calculatorModel.touchNumberButton(number)
     }
     
@@ -38,7 +40,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchOperatorButton(_ sender: UIButton) {
-        guard let operatorSymbole = sender.titleLabel?.text else { return }
+        guard let operatorSymbole = sender.titleLabel?.text else {
+            return
+        }
         calculatorModel.touchOperatorButton(operatorSymbole)
     }
     
