@@ -3,21 +3,19 @@ import Foundation
 class Calculator {
     weak private var delegate: CalculatorDelegate?
     
-    var currentOperator: String {
+    private var currentOperator: String {
         didSet {
             delegate?.calculator(didChangeCurrentOperatorTo: currentOperator)
         }
     }
     
-    var currentOperand: String {
+    private var currentOperand: String {
         didSet {
             delegate?.calculator(didChangeCurrentOperandTo: currentOperand)
         }
     }
     
-    var inputString: String
-    
-    private let numberFormatter = NumberFormatter()
+    private var inputString: String
     
     private var hasSuffixOperator: Bool {
         return Operator.allCases.reduce(false) {
@@ -35,7 +33,6 @@ class Calculator {
         self.currentOperator = currentOperator
         self.currentOperand = currentOperand
         self.inputString = inputString
-        self.initNumberFormatter()
     }
     
     convenience init(delegate: CalculatorDelegate) {
@@ -49,11 +46,6 @@ class Calculator {
         delegate?.calculatorDidClearAllData()
     }
     
-    private func initNumberFormatter() {
-        numberFormatter.roundingMode = .ceiling
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-    }
 }
 
 // MARK: -Receive Event
@@ -103,7 +95,7 @@ extension Calculator {
 
         var formula = ExpressionParser.parse(from: inputString)
         let result = formula.result()
-        currentOperand = numberFormatter.string(for: result) ?? CalculatorSymbol.Error
+        currentOperand = DecimalNumberFormatter.shared.string(for: result) ?? CalculatorSymbol.Error
     }
 }
 
@@ -126,7 +118,7 @@ extension Calculator {
         if hasDot == false {
             let numberLabelText = currentText.removedComma()
             let number = Double(numberLabelText)
-            currentOperand = numberFormatter.string(for: number) ?? CalculatorSymbol.Zero
+            currentOperand = DecimalNumberFormatter.shared.string(for: number) ?? CalculatorSymbol.Zero
         } else {
             currentOperand = currentText
         }
