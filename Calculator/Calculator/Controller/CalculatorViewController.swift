@@ -95,10 +95,12 @@ class CalculatorViewController: UIViewController {
         }
         
         guard let resultPointIndex = result.firstIndex(of: LabelContents.pointSymbole) else {
-            return result + String(number[numberPointIndex...])
+            let formattedResult = result + String(number[numberPointIndex...])
+            return formattedResult
         }
         
-        return String(result[..<resultPointIndex]) + String(number[numberPointIndex...])
+        let formattedResult = String(result[..<resultPointIndex]) + String(number[numberPointIndex...])
+        return formattedResult
     }
     
     private func formatNumberForStackView(_ number: String) -> String {
