@@ -1,4 +1,3 @@
-
 import Foundation
 
 extension String {
@@ -9,5 +8,3 @@ extension String {
         return targetPlusEmptySpace.components(separatedBy: " ").map{ String($0) }
     }
 }
-
-
