@@ -8,12 +8,16 @@
 import Foundation
 
 struct Calculator {
-    private(set) var currentInputOperand = LabelContents.defaultOperand
+    private(set) var currentInputOperand = LabelContents.defaultOperand {
+        didSet {
+            setMaximumDigit()
+        }
+    }
     private(set) var currentInputOperator = LabelContents.emptyString
     private var isEvaluated = false
     private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
     
-    mutating func touchNumberButton(_ number: String) {
+    mutating func inputNumber(_ number: String) {
         if isEvaluated {
             let newOperand = number
             resetAllExpression()
@@ -21,7 +25,9 @@ struct Calculator {
             return
         }
         
-        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand { return }
+        if number == LabelContents.doubleZero && currentInputOperand == LabelContents.defaultOperand {
+            return
+        }
         
         if currentInputOperand == LabelContents.defaultOperand {
             updateCurrentInput(operandForm: number, operatorForm: currentInputOperator)
@@ -31,62 +37,75 @@ struct Calculator {
         currentInputOperand += number
     }
     
-    mutating func touchPointButton() {
-        if currentInputOperand.contains(LabelContents.pointSymbole) { return }
+    mutating func inputDot() {
+        if currentInputOperand.contains(LabelContents.pointSymbol) {
+            return
+        }
         
         if isEvaluated {
-            let newOperand = currentInputOperand + LabelContents.pointSymbole
+            let newOperand = currentInputOperand + LabelContents.pointSymbol
             resetAllExpression()
             updateCurrentInput(operandForm: newOperand)
             return
         }
         
-        currentInputOperand += LabelContents.pointSymbole
+        currentInputOperand += LabelContents.pointSymbol
     }
     
-    mutating func touchOperatorButton(_ operatorSymbole: String) {
+    mutating func inputOperator(_ operatorSymbol: String) {
+        if currentInputOperand == LabelContents.notANumber {
+            resetAllExpression()
+        }
+        
         if isEvaluated {
             let newOperand = currentInputOperand
             resetAllExpression()
             mathExpression += [(LabelContents.emptyString, newOperand)]
-            updateCurrentInput(operatorForm: operatorSymbole)
+            updateCurrentInput(operatorForm: operatorSymbol)
             return
         }
         
-        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty { return }
+        if currentInputOperand == LabelContents.defaultOperand && mathExpression.isEmpty {
+            return
+        }
         
         if currentInputOperand == LabelContents.defaultOperand {
-            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbole)
+            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbol)
             return
         }
         
         if mathExpression.isEmpty {
             mathExpression += [(LabelContents.emptyString, currentInputOperand)]
-            updateCurrentInput(operatorForm: operatorSymbole)
+            updateCurrentInput(operatorForm: operatorSymbol)
             return
         }
         
         mathExpression += [(currentInputOperator, currentInputOperand)]
-        updateCurrentInput(operatorForm: operatorSymbole)
+        updateCurrentInput(operatorForm: operatorSymbol)
     }
     
-    mutating func touchSignChangeButton() {
-        if currentInputOperand == LabelContents.defaultOperand { return }
-        if isEvaluated { return }
+    mutating func changeSignOfNumber() {
+        if currentInputOperand == LabelContents.defaultOperand {
+            return
+        }
         
-        if currentInputOperand.hasPrefix(LabelContents.minusSignSymbole) {
+        if isEvaluated {
+            return
+        }
+        
+        if currentInputOperand.hasPrefix(LabelContents.minusSignSymbol) {
             currentInputOperand.removeFirst()
             return
         }
         
-        currentInputOperand.insert(contentsOf: LabelContents.minusSignSymbole, at: currentInputOperand.startIndex)
+        currentInputOperand.insert(contentsOf: LabelContents.minusSignSymbol, at: currentInputOperand.startIndex)
     }
     
-    mutating func touchAllClearButton() {
+    mutating func clearAllExpression() {
         resetAllExpression()
     }
     
-    mutating func touchClearEntryButton() {
+    mutating func clearEntry() {
         if isEvaluated {
             resetAllExpression()
             return
@@ -95,8 +114,10 @@ struct Calculator {
         updateCurrentInput(operatorForm: currentInputOperator)
     }
     
-    mutating func touchEqualButton() {
-        if isEvaluated { return }
+    mutating func calculateAllExpression() {
+        if isEvaluated {
+            return
+        }
         
         mathExpression += [(currentInputOperator, currentInputOperand)]
         
@@ -117,6 +138,12 @@ struct Calculator {
     }
     
     mutating private func updateCurrentInput(operandForm: String = LabelContents.defaultOperand, operatorForm: String = LabelContents.emptyString) {
+        if isEvaluated {
+            currentInputOperator = operatorForm
+            currentInputOperand = removeZeroSuffix(from: operandForm)
+            return
+        }
+        
         currentInputOperator = operatorForm
         currentInputOperand = operandForm
     }
@@ -127,13 +154,36 @@ struct Calculator {
         isEvaluated = false
     }
     
+    mutating private func removeZeroSuffix(from operand: String) -> String {
+        if operand.hasSuffix(LabelContents.dotZero) {
+            guard let doubleOperandValue = Double(operand) else {
+                return operand
+            }
+            
+            let intOperandValue = Int(doubleOperandValue)
+            let operandHasNotDotZero = String(intOperandValue)
+            
+            return operandHasNotDotZero
+        }
+        
+        return operand
+    }
+    
+    mutating private func setMaximumDigit() {
+        if currentInputOperand.count >= LabelContents.maximumDigitNumber {
+            currentInputOperand.removeLast()
+        }
+    }
+    
     private struct LabelContents {
+        static let dotZero = ".0"
         static let notANumber = "NaN"
         static let emptyString = ""
         static let defaultOperand = "0"
-        static let minusSignSymbole = "-"
-        static let pointSymbole = "."
+        static let minusSignSymbol = "-"
+        static let pointSymbol = "."
         static let doubleZero = "00"
         static let error = "error"
+        static let maximumDigitNumber = 15
     }
 }

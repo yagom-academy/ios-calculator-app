@@ -20,7 +20,7 @@ class ExpressionParserTests: XCTestCase {
     }
 
     func test_연산자와_피연산자를_각각_다른_큐에_담는지() throws {
-        exampleData = "12 * -3"
+        exampleData = "12 × -3"
         
         var testFormula = ExpressionParser.parse(from: exampleData)
         let exampleOperator: Operator = .multiply
@@ -33,7 +33,7 @@ class ExpressionParserTests: XCTestCase {
     }
     
     func test_12_곱하기_마이너스3_더하기_5_빼기_4_나누기_5_는_마이너스7_이다() throws {
-        exampleData = "12 * -3 + 5 ₋ 4 / 5"
+        exampleData = "12 × -3 + 5 − 4 ÷ 5"
         
         var testFormula = ExpressionParser.parse(from: exampleData)
         
