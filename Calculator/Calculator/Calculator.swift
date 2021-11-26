@@ -95,16 +95,15 @@ extension Calculator {
     }
     
     func resultButtonTouched() {
-//        guard let `operator` = operatorLabel.text,
-//              `operator` != String.empty else { return }
-//
-//        addExpressionStackView()
-//        appendOperandToInputString()
-//        resetOperatorLabel()
-//
-//        var formula = ExpressionParser.parse(from: inputString)
-//        let result = formula.result()
-//        operandLabel.text = numberFormatter.string(for: result)
+        guard currentOperator.isEmpty == false else { return }
+
+        delegate?.calculatorDidReceiveValidExpression()
+        appendOperandToInputString()
+        resetCurrentOperator()
+
+        var formula = ExpressionParser.parse(from: inputString)
+        let result = formula.result()
+        currentOperand = numberFormatter.string(for: result) ?? CalculatorSymbol.Error
     }
 }
 
@@ -174,7 +173,4 @@ extension Calculator {
 
         inputString.append(currentOperator)
     }
-}
-extension Calculator {
-    
 }

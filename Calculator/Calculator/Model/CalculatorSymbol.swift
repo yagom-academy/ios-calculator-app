@@ -6,4 +6,5 @@ enum CalculatorSymbol {
     static let DoubleZero = "00"
     static let Minus = "-"
     static let Comma = ","
+    static let Error = "Error"
 }

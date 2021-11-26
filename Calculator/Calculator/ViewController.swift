@@ -63,23 +63,6 @@ extension ViewController {
 
 // MARK: - View Method
 extension ViewController {
-    
-
-    
-//    private func togglePlusMinus() {
-//        var currentText = operandLabel.text ?? CalculatorSymbol.Zero
-//
-//        if currentText.hasPrefix(CalculatorSymbol.Minus) == true {
-//            currentText = currentText.replacingOccurrences(of: CalculatorSymbol.Minus, with: String.empty)
-//        } else {
-//            currentText = CalculatorSymbol.Minus + currentText
-//        }
-//
-//        operandLabel.text = currentText
-//    }
-//
-
-
 
     private func updateOperandsLabel(text operands: String) {
         operandLabel.text = operands
@@ -131,27 +114,6 @@ extension ViewController {
         let offsetY = scroll.contentSize.height - scroll.bounds.size.height
         let bottomOffset = CGPoint(x: 0, y: offsetY)
         scroll.setContentOffset(bottomOffset, animated: true)
-    }
-}
-
-//MARK: - Method
-
-extension ViewController {
-    private func appendOperandToInputString() {
-        guard let numberText = operandLabel.text else { return }
-//        let number = removeComma(text: numberText)
-//
-//        inputString.append(number)
-    }
-        
-    private func appendOperatorToInputString() {
-        guard let `operator` = operatorLabel.text else { return }
-        
-//        if hasSuffixOperator {
-//            inputString.removeLast()
-//        }
-//
-//        inputString.append(`operator`)
     }
 }
 
