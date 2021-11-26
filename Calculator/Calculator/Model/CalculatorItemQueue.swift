@@ -8,28 +8,23 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var items: [Element] = []
-    var reversedItems: [Element] = []
+    var enqueueStack: [Element] = []
+    var dequeueStack: [Element] = []
     
-    mutating func appendItem(_ item: Element) {
-        items.append(item)
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    mutating func removeItem() throws -> [Element] {
-        if items.isEmpty {
-            throw QueueError.emptyItem
+    mutating func enqueue(_ item: Element) {
+        enqueueStack.append(item)
+    }
+    
+    mutating func dequeue() -> Element? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        reversedItems = items.reversed()
-        reversedItems.removeLast()
-        items = reversedItems.reversed()
         
-        return items
-    }
-    
-    mutating func removeAllItems() throws {
-        if items.isEmpty {
-            throw QueueError.emptyItem
-        }
-        items.removeAll()
+        return dequeueStack.popLast()
     }
 }

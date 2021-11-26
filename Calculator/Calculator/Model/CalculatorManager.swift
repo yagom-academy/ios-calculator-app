@@ -24,6 +24,7 @@ struct CalculatorManager {
         let numberFormatter = NumberFormatter()
         let numberWithoutDecimal = numberExpression
             .replacingOccurrences(of: ",", with: "")
+        
         guard let number = Double(numberWithoutDecimal) else {
             return "0"
         }
@@ -32,7 +33,6 @@ struct CalculatorManager {
         numberFormatter.maximumFractionDigits = 15
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.roundingMode = .halfUp
-        
         
         guard let formattedNumber = numberFormatter
                 .string(from: NSNumber(value: number)) else {
