@@ -109,6 +109,7 @@
 		532A98EA273A683C00EBB9B7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C119327C274CB92400D015E5 /* Calculator.swift */,
 				532A98EB273A686D00EBB9B7 /* CalculatorQueue.swift */,
 				53893F822742B69000E64CAB /* Operator.swift */,
 				53893F9227438B4800E64CAB /* Formula.swift */,
@@ -123,7 +124,6 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
-				C119327C274CB92400D015E5 /* Calculator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
