@@ -10,19 +10,15 @@ import Foundation
 struct Calculator {
     private(set) var currentInputOperand = Labels.defaultOperand {
         didSet {
-            if isEvaluated && currentInputOperand.hasSuffix(".0") {
-                guard let index = currentInputOperand.firstIndex(of: Character(Labels.pointSymbole)) else {
-                    return
-                }
-                
-                currentInputOperand = String(currentInputOperand[..<index])
-            }
+            removeUnnessaryFractionDigit()
+            removeAfterMaximumDigitNumber()
         }
     }
     private(set) var currentInputOperator = Labels.emptyString
     
     private var isEvaluated = false
     private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
+    private var maximumDigit = 15
     
     mutating func touchNumberButton(_ number: String) {
         if isEvaluated {
@@ -150,6 +146,22 @@ struct Calculator {
         updateCurrentInput()
         mathExpression = []
         isEvaluated = false
+    }
+    
+    mutating private func removeUnnessaryFractionDigit() {
+        if isEvaluated && currentInputOperand.hasSuffix(".0") {
+            guard let index = currentInputOperand.firstIndex(of: Character(Labels.pointSymbole)) else {
+                return
+            }
+            
+            currentInputOperand = String(currentInputOperand[..<index])
+        }
+    }
+    
+    mutating private func removeAfterMaximumDigitNumber() {
+        if currentInputOperand.count >= maximumDigit {
+            currentInputOperand.removeLast()
+        }
     }
     
 }
