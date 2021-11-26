@@ -160,7 +160,10 @@ struct Calculator {
                 return operand
             }
             
-            return String(Int(doubleOperandValue))
+            let intOperandValue = Int(doubleOperandValue)
+            let operandHasNotDotZero = String(intOperandValue)
+            
+            return operandHasNotDotZero
         }
         
         return operand

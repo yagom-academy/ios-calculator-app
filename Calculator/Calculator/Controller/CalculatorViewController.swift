@@ -69,7 +69,11 @@ class CalculatorViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 15
         numberFormatter.roundingMode = .halfUp
         
-        guard let formattedNumber = numberFormatter.string(for: Double(number)) else {
+        guard let doubleNumber = Double(number) else {
+            return number
+        }
+        
+        guard let formattedNumber = numberFormatter.string(for: doubleNumber) else {
             return number
         }
         
