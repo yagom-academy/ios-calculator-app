@@ -2,48 +2,28 @@
 import Foundation
 
 enum ExpressionParser {
-    
     static func parse(from input: String) -> Formula {
-        let operators = Operator.allCases.map { String($0.rawValue) }
-        let splitedByOperators = componentsByOperators(from: input)
-        var operatorsInInput: [String] = []
-        var operandsInInput: [String] = []
+        let operatorEnumArray = Operator.allCases.map { String($0.rawValue) }
+        let inputCharacters = Array(input).map { String($0) }
+        let inputOperator = inputCharacters.filter { operatorEnumArray.contains($0) }
+        let inputOperands = componentsByOperators(from: input)
         
-        splitedByOperators.forEach{
-            operators.contains($0) ? operatorsInInput.append($0) : operandsInInput.append($0)
-        }
         let formula = Formula()
-        let operatorsInputWithoutNil = operatorsInInput.compactMap { Operator(rawValue: Character($0)) }
-        operatorsInputWithoutNil.forEach {
-            formula.operators.linkedList.enqueue($0.rawValue )
+        for inputOperands in inputOperands {
+            formula.operands.insertToQueue(Double(inputOperands) ?? 0)
         }
-        operandsInInput.forEach {
-            formula.operands.linkedList.enqueue(Double($0) ?? .zero)
+        for inputOperator in inputOperator {
+            formula.operators.insertToQueue(Character(inputOperator))
         }
-        
         return formula
     }
-    
-    private static func componentsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.map{ $0.rawValue }
-        var inputs: [String] = [input]
-        
-        for operand in operators {
-            let inputsCount = inputs.count
-            let indexOfFilteredByOperand: [Int] = ((0..<inputsCount).map { inputs[$0].contains(operand) ? $0 : nil}).compactMap { $0 }
-            let filteredInputsByHavingOperand: [String] = inputs.filter { $0.contains(operand) }
-            var splitedCount = 0
-            
-            for index in indexOfFilteredByOperand {
-                splitedCount += 1
-                let splitedByOperand = filteredInputsByHavingOperand[splitedCount - 1 ].split(with: operand)
-                inputs.insert(contentsOf: splitedByOperand.flatMap { $0 }, at: index)
-                inputs.remove(at: index + splitedByOperand.count)
-            }
-        }
-        
-        return inputs
-    }
-    
-}
 
+    private static func componentsByOperators(from input: String) -> [String] {
+        var stringOfSplitTarget = [input]
+        for operatorCase in Operator.allCases {
+            stringOfSplitTarget = stringOfSplitTarget.flatMap{ $0.split(with: operatorCase.rawValue)}
+        }
+        let inputOperands = stringOfSplitTarget
+        return inputOperands
+    }
+}

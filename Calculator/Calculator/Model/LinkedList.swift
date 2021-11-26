@@ -1,60 +1,37 @@
-
 import Foundation
 
 class Node<Element> {
-    var data: Element
+    let nodeValue: Element
     var pointer: Node?
     
-    init(data: Element, pointer: Node? = nil) {
-        self.data = data
+    init(_ nodeValue: Element, pointer: Node? = nil) {
+        self.nodeValue = nodeValue
         self.pointer = pointer
     }
 }
 
 class LinkedList<Element> {
     var head: Node<Element>?
-    var isEmpty: Bool {
-        return head == nil
-    }
     
-    init(head: Node<Element>? = nil) {
+    init(head: Node<Element>?) {
         self.head = head
     }
     
-    func enqueue(_ data: Element) {
-        var finderForLast: Node<Element>?
-        
-        guard !isEmpty else {
-            head = Node(data: data, pointer: nil)
+    func addNewNode(_ nodeValue: Element) {
+        if head == nil {
+            head = Node(nodeValue)
             return
         }
         
-        finderForLast = head
-        while finderForLast?.pointer != nil {
-            finderForLast = finderForLast?.pointer
+        var finderToLastNode: Node<Element>? = head
+        
+        while finderToLastNode?.pointer != nil {
+            finderToLastNode = finderToLastNode?.pointer
         }
-        finderForLast?.pointer = Node(data: data, pointer: nil)
+        finderToLastNode?.pointer = Node(nodeValue)
     }
     
-    func dequeue() {
-        guard !isEmpty else { return }
-        
+    func deleteFirstNode() {
         head = head?.pointer
-    }
-    
-    func dequeueWithData() throws -> Element {
-        guard !isEmpty else { throw QueueError.EmptyInLinkedList }
-        
-        guard let dataOfDequeueNode = head?.data else {
-            throw QueueError.EmptyInLinkedList
-        }
-        
-        head = head?.pointer
-        return dataOfDequeueNode
-    }
-    
-    func cleanQueue() {
-        head = nil
     }
 }
-

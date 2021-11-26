@@ -1,13 +1,8 @@
-
 import Foundation
 
 extension String {
-    
     func split(with target: Character) -> [String] {
-        let targetPlusEmptySpace = self.replacingOccurrences(of: String(target), with: " \(target) ")
-        
-        return targetPlusEmptySpace.components(separatedBy: " ").map{ String($0) }
+        let splitedString = self.split(separator: target).map { String($0) }
+        return splitedString
     }
 }
-
-

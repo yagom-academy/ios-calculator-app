@@ -3,25 +3,28 @@ import Foundation
 
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator.RawValue>()
-    let operations = Operator.allCases.map { $0.rawValue }
+    var operators = CalculatorItemQueue<Character>()
     
-    func result() throws -> Double {
-        var value = 0.0
+    func result() -> Double {
+        guard var temporaryValue = try? operands.deleteFromQueue() else {
+            return .zero
+        }
         
-        while !operators.linkedList.isEmpty {
+        while operands.linkedList.head != nil {
             do {
-                let eachOperation = try operators.linkedList.dequeueWithData()
-                let firstOperand = try operands.linkedList.dequeueWithData()
-                let secondOperand = try operands.linkedList.dequeueWithData()
-                guard let currentNumber = Operator(rawValue: eachOperation)?.calculate(lhs: firstOperand, rhs: secondOperand) else {
-                    throw QueueError.EmptyInLinkedList
-                }
-                value += currentNumber
-            } catch QueueError.EmptyInLinkedList {
-                break
+                let currentOperand = try operands.deleteFromQueue()
+                let currentOperator = try operators.deleteFromQueue()
+                let operatorCase = Operator(rawValue: currentOperator)
+                temporaryValue = operatorCase?.calculate(lhs: temporaryValue, rhs: currentOperand) ?? .zero
+            }
+            catch let error as CalculatorError {
+                print(fatalError())
+            }
+            catch {
+                print("확인되지 않은 에러가 발생했습니다.")
             }
         }
-        return value
+        return temporaryValue
     }
 }
+
