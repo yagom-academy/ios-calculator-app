@@ -36,10 +36,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchOperatorButton(_ sender: UIButton) {
-        guard let operatorSymbole = sender.titleLabel?.text else {
+        guard let operatorSymbol = sender.titleLabel?.text else {
             return
         }
-        calculatorModel.touchOperatorButton(operatorSymbole)
+        calculatorModel.touchOperatorButton(operatorSymbol)
     }
     
     @IBAction private func touchButton(_ sender: UIButton) {
@@ -71,7 +71,7 @@ class CalculatorViewController: UIViewController {
             stackView.spacing = 8.0
             
             let operatorSignLabelView = UILabel()
-            operatorSignLabelView.text = eachForm.operatorSymbole
+            operatorSignLabelView.text = eachForm.operatorSymbol
             operatorSignLabelView.textColor = .white
             
             let operandLabelView = UILabel()
@@ -92,11 +92,11 @@ class CalculatorViewController: UIViewController {
             return number
         }
         
-        guard let numberPointIndex = number.firstIndex(of: Character(Labels.pointSymbole)) else {
+        guard let numberPointIndex = number.firstIndex(of: Character(Labels.pointSymbol)) else {
             return result
         }
         
-        guard let resultPointIndex = result.firstIndex(of: Character(Labels.pointSymbole)) else {
+        guard let resultPointIndex = result.firstIndex(of: Character(Labels.pointSymbol)) else {
             let formattedResult = result + String(number[numberPointIndex...])
             return formattedResult
         }

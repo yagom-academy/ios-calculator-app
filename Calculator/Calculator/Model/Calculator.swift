@@ -17,7 +17,7 @@ struct Calculator {
     private(set) var currentInputOperator = Labels.emptyString
     
     private var isEvaluated = false
-    private(set) var mathExpression: [(operatorSymbole: String, operandNumber: String)] = []
+    private(set) var mathExpression: [(operatorSymbol: String, operandNumber: String)] = []
     private var maximumDigit = 15
     
     mutating func touchNumberButton(_ number: String) {
@@ -41,26 +41,26 @@ struct Calculator {
     }
     
     mutating func touchPointButton() {
-        if currentInputOperand.contains(Labels.pointSymbole) {
+        if currentInputOperand.contains(Labels.pointSymbol) {
             return
         }
         
         if isEvaluated {
-            let temporaryOperand = currentInputOperand + Labels.pointSymbole
+            let temporaryOperand = currentInputOperand + Labels.pointSymbol
             resetAllExpression()
             updateCurrentInput(operandForm: temporaryOperand)
             return
         }
         
-        currentInputOperand += Labels.pointSymbole
+        currentInputOperand += Labels.pointSymbol
     }
     
-    mutating func touchOperatorButton(_ operatorSymbole: String) {
+    mutating func touchOperatorButton(_ operatorSymbol: String) {
         if isEvaluated {
             let temporaryOperand = currentInputOperand
             resetAllExpression()
             mathExpression += [(Labels.emptyString, temporaryOperand)]
-            updateCurrentInput(operatorForm: operatorSymbole)
+            updateCurrentInput(operatorForm: operatorSymbol)
             return
         }
         
@@ -69,18 +69,18 @@ struct Calculator {
         }
         
         if currentInputOperand == Labels.defaultOperand {
-            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbole)
+            updateCurrentInput(operandForm: currentInputOperand, operatorForm: operatorSymbol)
             return
         }
         
         if mathExpression.isEmpty {
             mathExpression += [(Labels.emptyString, currentInputOperand)]
-            updateCurrentInput(operatorForm: operatorSymbole)
+            updateCurrentInput(operatorForm: operatorSymbol)
             return
         }
         
         mathExpression += [(currentInputOperator, currentInputOperand)]
-        updateCurrentInput(operatorForm: operatorSymbole)
+        updateCurrentInput(operatorForm: operatorSymbol)
     }
     
     mutating func touchSignChangeButton() {
@@ -92,12 +92,12 @@ struct Calculator {
             return
         }
         
-        if currentInputOperand.hasPrefix(Labels.minusSignSymbole) {
+        if currentInputOperand.hasPrefix(Labels.minusSignSymbol) {
             currentInputOperand.removeFirst()
             return
         }
         
-        currentInputOperand.insert(contentsOf: Labels.minusSignSymbole, at: currentInputOperand.startIndex)
+        currentInputOperand.insert(contentsOf: Labels.minusSignSymbol, at: currentInputOperand.startIndex)
     }
     
     mutating func touchAllClearButton() {
@@ -122,7 +122,7 @@ struct Calculator {
         
         isEvaluated = true
         let stringFormula = mathExpression.reduce(Labels.emptyString) { (previousResult, each) in
-            return previousResult + each.operatorSymbole + each.operandNumber
+            return previousResult + each.operatorSymbol + each.operandNumber
         }
         
         do {
@@ -150,7 +150,7 @@ struct Calculator {
     
     mutating private func removeUnnessaryFractionDigit() {
         if isEvaluated && currentInputOperand.hasSuffix(".0") {
-            guard let index = currentInputOperand.firstIndex(of: Character(Labels.pointSymbole)) else {
+            guard let index = currentInputOperand.firstIndex(of: Character(Labels.pointSymbol)) else {
                 return
             }
             
