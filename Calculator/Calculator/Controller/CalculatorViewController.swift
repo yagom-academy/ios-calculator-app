@@ -103,7 +103,12 @@ class CalculatorViewController: UIViewController {
     
     private func formatNumberForStackView(_ number: String) -> String {
         let numberFormatter = initNumberFormatter()
-        return numberFormatter.string(for: Double(number)) ?? number
+        
+        guard let formattedResult = numberFormatter.string(for: Double(number)) else {
+            return number
+        }
+        
+        return formattedResult
     }
     
     private func initNumberFormatter() -> NumberFormatter {
