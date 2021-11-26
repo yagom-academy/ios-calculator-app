@@ -72,10 +72,8 @@ extension ViewController {
         operatorLabel.text = `operator`
     }
 
-    private func addExpressionStackView() {
-        let `operator` = makeLabel(with: operatorLabel.text)
-        let operand = makeLabel(with: operandLabel.text)
-        let expressionStackView = makeExpressionStackView(operator: `operator`,
+    private func addExpressionStackView(_ operator: String, _ operand: String) {
+        let expressionStackView = ExpressionStackView(operator: `operator`,
                                                           operand: operand)
 
         expressionsStackView.addArrangedSubview(expressionStackView)
@@ -86,29 +84,6 @@ extension ViewController {
         expressionsStackView.arrangedSubviews.forEach{$0.removeFromSuperview()}
     }
     
-    private func makeExpressionStackView(operator: UILabel,
-                                         operand: UILabel) -> UIStackView {
-        let expression = UIStackView()
-        let spacing: CGFloat = 8
-        
-        expression.axis = .horizontal
-        expression.spacing = spacing
-        expression.addArrangedSubview(`operator`)
-        expression.addArrangedSubview(operand)
-        
-        return expression
-    }
-    
-    private func makeLabel(with text: String?) -> UILabel {
-        let label = UILabel()
-        
-        label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.text = text
-        
-        return label
-    }
-        
     private func scrollToBottom(_ scroll: UIScrollView) {
         scroll.layoutIfNeeded()
         let offsetY = scroll.contentSize.height - scroll.bounds.size.height
@@ -126,8 +101,9 @@ extension ViewController: CalculatorDelegate {
         updateOperatorLabel(text: `operator`)
     }
     
-    func calculatorDidReceiveValidExpression() {
-        addExpressionStackView()
+    func calculator(didReceiveValidExpression expression: (operator: String,
+                                                           operand: String)) {
+        addExpressionStackView(expression.operator, expression.operand)
     }
     
     func calculatorDidClearAllData() {

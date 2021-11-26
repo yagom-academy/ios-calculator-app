@@ -62,7 +62,8 @@ extension Calculator {
             return
         }
 
-        delegate?.calculatorDidReceiveValidExpression()
+        delegate?.calculator(didReceiveValidExpression: (currentOperator,
+                                                         currentOperand))
         updateCurrentOperator(text: `operator`)
         appendOperandToInputString()
         appendOperatorToInputString()
@@ -89,7 +90,8 @@ extension Calculator {
     func resultButtonTouched() {
         guard currentOperator.isEmpty == false else { return }
 
-        delegate?.calculatorDidReceiveValidExpression()
+        delegate?.calculator(didReceiveValidExpression: (currentOperator,
+                                                         currentOperand))
         appendOperandToInputString()
         resetCurrentOperator()
 
