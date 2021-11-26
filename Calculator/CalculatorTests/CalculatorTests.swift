@@ -286,22 +286,5 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, "0.5")
     }
-
-    struct Buttons {
-        static let doubleZero = "00"
-        static let zero = "0"
-        static let one = "1"
-        static let two = "2"
-        static let three = "3"
-        static let four = "4"
-        static let five = "5"
-        static let six = "6"
-        static let seven = "7"
-        static let eight = "8"
-        static let nine = "9"
-        static let add = "+"
-        static let subtract = "−"
-        static let divide = "÷"
-        static let multiply = "×"
-    }
+    
 }
