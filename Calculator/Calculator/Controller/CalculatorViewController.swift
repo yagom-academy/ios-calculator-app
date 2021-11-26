@@ -205,8 +205,10 @@ extension CalculatorViewController {
         
         calculatorManager.setIsTypingOperandStatus(to: false)
         
-        let (newOperator, newOperand) = convertOperatorAndNegativeOperand(operator: `operator`,
-                                                                          operand: operand)
+        let (newOperator, newOperand) = convertOperatorAndNegativeOperand(
+            operator: `operator`,
+            operand: operand
+        )
 
         if !formulasStackViewIsEmpty {
             operatorLabel.text = newOperator
