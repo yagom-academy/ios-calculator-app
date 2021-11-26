@@ -148,7 +148,7 @@ extension CalculatorViewController {
         guard displayedOperator != "" && displayedOperand != "" else {
             return
         }
-         
+        
         addFormula(operator: displayedOperator, operand: displayedOperand)
         
         let formulaString: String = assembleFormula()
