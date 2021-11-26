@@ -131,7 +131,8 @@ struct Calculator {
         
         do {
             let result = try ExpressionParser.parse(from: stringFormula).result()
-            updateCurrentInput(operandForm: String(result))
+            let stringResult = String(result)
+            updateCurrentInput(operandForm: stringResult)
         } catch CalculatorError.divideByZero {
             updateCurrentInput(operandForm: LabelContents.notANumber)
         } catch {

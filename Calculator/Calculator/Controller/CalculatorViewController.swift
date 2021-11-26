@@ -99,14 +99,22 @@ class CalculatorViewController: UIViewController {
             return formattedResult
         }
         
-        let formattedResult = String(result[..<resultPointIndex]) + String(number[numberPointIndex...])
+        let formattedNumberIntegerDigit = String(result[..<resultPointIndex])
+        let userInputNumberFractionDigit = String(number[numberPointIndex...])
+        
+        let formattedResult = formattedNumberIntegerDigit + userInputNumberFractionDigit
+        
         return formattedResult
     }
     
     private func formatNumberForStackView(_ number: String) -> String {
         let numberFormatter = initNumberFormatter()
         
-        guard let formattedResult = numberFormatter.string(for: Double(number)) else {
+        guard let doubleNumber = Double(number) else {
+            return number
+        }
+        
+        guard let formattedResult = numberFormatter.string(for: doubleNumber) else {
             return number
         }
         
