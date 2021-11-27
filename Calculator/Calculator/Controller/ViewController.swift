@@ -8,9 +8,10 @@ class ViewController: UIViewController {
     @IBOutlet private weak var calculatorScrollView: UIScrollView!
     
     private var inputNumber = ""
+    private var resultNumber = ""
     private var entireFormula = ""
     
-    private var numberFormatter: NumberFormatter = NumberFormatter()
+    private let numberFormatter: NumberFormatter = NumberFormatter()
     
     private var operatorsLabel: UILabel {
         let operatorsLabel = UILabel()
@@ -18,7 +19,7 @@ class ViewController: UIViewController {
         operatorsLabel.textColor = .white
         operatorsLabel.textAlignment = .right
         operatorsLabel.adjustsFontForContentSizeCategory = true
-        
+    
         return operatorsLabel
     }
     
@@ -50,22 +51,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         initializeNumberLabel()
         initializeSymbolLabel()
-        initializeNumberFormatter(of: numberFormatter)
+        initializeNumberFormatter()
         recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func numberButtonPressed(_ sender: UIButton) {
+        guard resultNumber != numberLabel.text else { return }
+        
         if sender.currentTitle == "0" || sender.currentTitle == "00" {
             guard inputNumber.isEmpty == false else { return }
-            
+
             inputNumber += sender.currentTitle ?? ""
             
-            if inputNumber.contains(".") {
+            if inputNumber.isContainDot {
                 numberLabel.text = inputNumber
             } else {
                 numberLabel.text = numberFormatter.string(for: Double(inputNumber))
             }
-            
         } else {
             inputNumber += sender.currentTitle ?? ""
             numberLabel.text = numberFormatter.string(for: Double(removeComma(of: inputNumber)))
@@ -73,26 +75,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
-        if numberLabel.text == "0" {
+        if numberLabel.text == "0" || resultNumber == numberLabel.text {
             symbolLabel.text = sender.currentTitle
-            return
         } else {
-            recordingStackView.addArrangedSubview(formulaStackView)
-            symbolLabel.text = sender.currentTitle
-            addEntireFormula()
+            addRecord(with: sender.currentTitle)
         }
         initializeNumberLabel()
-        scrollToBottom(calculatorScrollView)
+        scrollToBottom()
     }
     
-    @IBAction private func CEButtonPressed(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonPressed(_ sender: UIButton) {
         initializeNumberLabel()
     }
     
     @IBAction private func dotButtonPressed(_ sender: UIButton) {
-        guard var text = numberLabel.text else { return }
-        
-        guard !isContainDot(text: text) else { return }
+        guard var text = numberLabel.text, text.isContainDot == false else { return }
         
         text += "."
         inputNumber = text
@@ -112,33 +109,44 @@ class ViewController: UIViewController {
         numberLabel.text = inputNumber
     }
     
-    @IBAction private func ACButtonPressed(_ sender: UIButton) {
+    @IBAction private func allClearButtonPressed(_ sender: UIButton) {
         recordingStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         entireFormula.removeAll()
+        resultNumber.removeAll()
         initializeNumberLabel()
         initializeSymbolLabel()
     }
     
-    @IBAction private func EqualButtonPressed(_ sender: UIButton) {
+    @IBAction private func equalButtonPressed(_ sender: UIButton) {
         guard symbolLabel.text?.isEmpty == false else { return }
-        
-        recordingStackView.addArrangedSubview(formulaStackView)
-        
-        entireFormula += numberLabel.text ?? ""
+        addRecord()
         entireFormula = removeComma(of: entireFormula)
         
         var formula = ExpressionParser.parse(from: entireFormula)
-        
         do {
             initializeSymbolLabel()
             let result = try formula.result()
             numberLabel.text = numberFormatter.string(for: result)
+            resultNumber = numberLabel.text ?? ""
         } catch CalculateError.emptyQueue {
             return
         } catch CalculateError.divideWithZero {
-            numberLabel.text = "NaN"
+            let nan = "NaN"
+            numberLabel.text = nan
+            resultNumber = nan
         } catch {
             print(error)
+        }
+    }
+    
+    private func addRecord(with operator: String? = nil) {
+        recordingStackView.addArrangedSubview(formulaStackView)
+        scrollToBottom()
+        entireFormula += symbolLabel.text ?? ""
+        entireFormula += numberLabel.text ?? ""
+        
+        if `operator` != nil {
+            symbolLabel.text = `operator`
         }
     }
     
@@ -151,29 +159,23 @@ class ViewController: UIViewController {
         symbolLabel.text?.removeAll()
     }
     
-    private func isContainDot(text: String) -> Bool {
-        return text.contains(".")
-    }
-    
-    private func addEntireFormula() {
-        guard let number = numberLabel.text, let symbol = symbolLabel.text else { return }
-        entireFormula += number
-        entireFormula += symbol
-    }
-    
-    private func initializeNumberFormatter(of formatter: NumberFormatter) {
-        formatter.numberStyle = .decimal
-        formatter.maximumSignificantDigits = 20
+    private func initializeNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     private func removeComma(of string: String) -> String {
         return string.replacingOccurrences(of: ",", with: "")
     }
     
-    private func scrollToBottom(_ scrollView: UIScrollView) {
-        scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
+    private func scrollToBottom() {
+        calculatorScrollView.layoutIfNeeded()
+        calculatorScrollView.setContentOffset(CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height), animated: false)
     }
 }
 
-
+fileprivate extension String {
+    var isContainDot: Bool {
+        return self.contains(".")
+    }
+}

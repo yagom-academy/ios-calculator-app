@@ -1,4 +1,4 @@
-struct CalculatorItemQueue<Element: CalculateItem> {
+struct CalculatorItemQueue<Element> {
     private var inputStack = [Element]()
     private var outputStack = [Element]()
     
