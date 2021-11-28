@@ -16,7 +16,8 @@ struct Formula {
             return Double.nan
         }
 
-        while let nextOperator = operators.dequeue(), let nextOperand = operands.dequeue() {
+        while let nextOperator = operators.dequeue(),
+              let nextOperand = operands.dequeue() {
             partialResult = nextOperator.calculate(partialResult, nextOperand)
         }
         
