@@ -14,20 +14,18 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculatorItemsStackView: UIStackView!
     @IBOutlet weak var calculatorItemsScrollView: UIScrollView!
     
-    private func addStackViewLabel() {
-        let savedItemlabel = UILabel()
-        savedItemlabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        savedItemlabel.textColor = .white
-        savedItemlabel.adjustsFontSizeToFitWidth = true
+    private func addNewLabelOnStackView() {
+        guard var operandLabelText = operandLabel.text,
+              let operatorLabelText = operatorLabel.text else { return }
         
-        if operandLabel.text!.contains(String.decimalPoint) {
-            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(String.decimalPoint) {
-                operandLabel.text!.removeLast()
-            }
+        while operandLabelText.hasMeaninglessDecimal {
+            operandLabelText.removeLast()
         }
+        operandLabel.text = operandLabelText
         
-        savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
-        calculatorItemsStackView.addArrangedSubview(savedItemlabel)
+        let singleItem = CalculatorSetting.adjustLabelAttributes()
+        singleItem.text = "\(operatorLabelText)\(Character.whiteSpace)\(operandLabelText)"
+        calculatorItemsStackView.addArrangedSubview(singleItem)
         CalculatorSetting.scrollToBottom(on: calculatorItemsScrollView)
     }
     
@@ -46,7 +44,7 @@ class CalculatorViewController: UIViewController {
         case false:
             appendCalculatorItem("\(operatorLabel.text!)")
             appendCalculatorItem("\(operandLabel.text!)")
-            addStackViewLabel()
+            addNewLabelOnStackView()
             resetOperatorLabel()
             var parsedFormula = ExpressionParser.parse(from: calculatorItems)
             let calculatedResult = parsedFormula.result()
@@ -70,7 +68,7 @@ class CalculatorViewController: UIViewController {
         case true:
             appendCalculatorItem("\(operatorLabel.text!)")
             appendCalculatorItem("\(operandLabel.text!)")
-            addStackViewLabel()
+            addNewLabelOnStackView()
             resetOperandLabel()
             operatorLabel.text = button.currentTitle
         case false:
