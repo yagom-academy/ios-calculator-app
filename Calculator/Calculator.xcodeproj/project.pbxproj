@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C14DE9C427536F3200D50884 /* CalculatorSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14DE9C327536F3200D50884 /* CalculatorSetting.swift */; };
+		C14DE9C527536F3200D50884 /* CalculatorSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14DE9C327536F3200D50884 /* CalculatorSetting.swift */; };
 		C16704A62738EC5900E8E237 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704A52738EC5900E8E237 /* CalculatorItemQueueTests.swift */; };
 		C16704AF2739106100E8E237 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704AE2739106100E8E237 /* CalculatorItemQueue.swift */; };
 		C16704B02739106100E8E237 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16704AE2739106100E8E237 /* CalculatorItemQueue.swift */; };
@@ -45,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C14DE9C327536F3200D50884 /* CalculatorSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSetting.swift; sourceTree = "<group>"; };
 		C16704A32738EC5900E8E237 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16704A52738EC5900E8E237 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		C16704AE2739106100E8E237 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+				C14DE9C327536F3200D50884 /* CalculatorSetting.swift */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 			);
@@ -290,6 +294,7 @@
 				C16704E8273FA32300E8E237 /* Double+extension.swift in Sources */,
 				C16704BE273A813500E8E237 /* CalculateItem.swift in Sources */,
 				C16704FF2742D2E900E8E237 /* StringExtensionTests.swift in Sources */,
+				C14DE9C527536F3200D50884 /* CalculatorSetting.swift in Sources */,
 				C167050427436C6300E8E237 /* ExpressionParserTests.swift in Sources */,
 				C16704F1274174E300E8E237 /* Formula.swift in Sources */,
 				C16704B02739106100E8E237 /* CalculatorItemQueue.swift in Sources */,
@@ -315,6 +320,7 @@
 				C16704BA273A7FA200E8E237 /* Operator.swift in Sources */,
 				C16704F0274174E300E8E237 /* Formula.swift in Sources */,
 				C16704E5273F9FC900E8E237 /* Double+extension.swift in Sources */,
+				C14DE9C427536F3200D50884 /* CalculatorSetting.swift in Sources */,
 				C16705012742D3BF00E8E237 /* String+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

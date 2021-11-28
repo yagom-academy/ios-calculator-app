@@ -8,11 +8,6 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     private var savedCalculatorItems: String = ""
-    private let emptyString: String = ""
-    private let decimalPoint: String = "."
-    private let decimalComma: String = ","
-    private let negativeSign: String = "-"
-    private let defaultOperandLabel: String = "0"
     private let numberFormatter = NumberFormatter()
     private let hapticGenerator = UISelectionFeedbackGenerator()
     
@@ -39,8 +34,8 @@ class CalculatorViewController: UIViewController {
         savedItemlabel.textColor = .white
         savedItemlabel.adjustsFontSizeToFitWidth = true
         
-        if operandLabel.text!.contains(decimalPoint) {
-            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(decimalPoint) {
+        if operandLabel.text!.contains(String.decimalPoint) {
+            while operandLabel.text!.hasSuffix("0") || operandLabel.text!.hasSuffix(String.decimalPoint) {
                 operandLabel.text!.removeLast()
             }
         }
@@ -88,8 +83,8 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedOperandButton(_ button: UIButton) {
         switch operandLabel.text! {
-        case defaultOperandLabel:
-            operandLabel.text = emptyString
+        case String.zero:
+            operandLabel.text = String.empty
             operandLabel.text! += button.currentTitle!
         default:
             operandLabel.text! += button.currentTitle!
@@ -97,7 +92,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorButton(_ button: UIButton) {
-        switch operatorLabel.text!.isEmpty || operandLabel.text! != defaultOperandLabel {
+        switch operatorLabel.text!.isEmpty || operandLabel.text! != String.zero {
         case true:
             saveCalculator(item: "\(operatorLabel.text!)")
             saveCalculator(item: "\(operandLabel.text!)")
@@ -113,14 +108,14 @@ class CalculatorViewController: UIViewController {
         guard let buttonTitle = button.currentTitle,
               var operandLabelText = operandLabel.text else { return }
         
-        if operandLabelText != defaultOperandLabel {
+        if operandLabelText != String.zero {
             operandLabelText += buttonTitle
             operandLabel.text = operandLabelText
         }
     }
     
     @IBAction func tappedDecimalPointButton(_ button: UIButton) {
-        switch operandLabel.text!.contains(decimalPoint) {
+        switch operandLabel.text!.contains(String.decimalPoint) {
         case true:
             return
         case false:
@@ -129,15 +124,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedChangeSignButton(_ button: UIButton) {
-        guard operandLabel.text! != defaultOperandLabel else {
+        guard operandLabel.text! != String.zero else {
             return
         }
         
-        switch operandLabel.text!.hasPrefix(negativeSign) {
+        switch operandLabel.text!.hasPrefix(String.negativeSign) {
         case true:
             operandLabel.text!.removeFirst()
         case false:
-            operandLabel.text! = negativeSign + operandLabel.text!
+            operandLabel.text! = String.negativeSign + operandLabel.text!
         }
     }
     
@@ -157,9 +152,9 @@ class CalculatorViewController: UIViewController {
     }
     
     private func saveCalculator(item: String) {
-        switch item.contains(decimalComma) {
+        switch item.contains(String.decimalComma) {
         case true:
-            let commaRemoveditem = item.components(separatedBy: decimalComma).joined()
+            let commaRemoveditem = item.components(separatedBy: String.decimalComma).joined()
             savedCalculatorItems += " \(commaRemoveditem)"
         case false:
             savedCalculatorItems += " \(item)"
@@ -167,15 +162,15 @@ class CalculatorViewController: UIViewController {
     }
     
     private func resetSavedCalculatorItems() {
-        savedCalculatorItems = emptyString
+        savedCalculatorItems = String.empty
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = defaultOperandLabel
+        operandLabel.text = String.zero
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = emptyString
+        operatorLabel.text = String.empty
     }
 }
 
