@@ -20,6 +20,6 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: Character.whiteSpace)
-                    .filter { eachString in Operator.contains(eachString) }
+                    .filter { eachString in Operator.doesContain(eachString) }
     }
 }
