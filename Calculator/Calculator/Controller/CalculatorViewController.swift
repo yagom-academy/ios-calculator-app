@@ -16,18 +16,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var savedCalculatorItemsStackView: UIStackView!
     @IBOutlet weak var savedCalculatorItemsScrollView: UIScrollView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        applyNumberFormatter()
-    }
-    
-    private func applyNumberFormatter() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.roundingMode = .halfUp
-    }
-    
     private func addStackViewLabel() {
         let savedItemlabel = UILabel()
         savedItemlabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -42,19 +30,7 @@ class CalculatorViewController: UIViewController {
         
         savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
         savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
-        scrollToBottom()
-    }
-    
-    private func scrollToBottom() {
-        savedCalculatorItemsScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(
-            x: 0,
-            y: savedCalculatorItemsScrollView.contentSize.height
-             - savedCalculatorItemsScrollView.bounds.size.height
-             + savedCalculatorItemsScrollView.contentInset.bottom)
-        if(bottomOffset.y > 0) {
-            savedCalculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
-        }
+        CalculatorSetting.scrollToBottom(on: savedCalculatorItemsScrollView)
     }
     
     private func clearAllStackViewLabel() {
