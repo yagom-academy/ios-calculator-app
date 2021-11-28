@@ -124,13 +124,14 @@ class CalculatorViewController: UIViewController {
     }
     
     private func appendCalculatorItem(_ item: String) {
-        switch item.contains(String.decimalComma) {
-        case true:
-            let commaRemoveditem = item.components(separatedBy: String.decimalComma).joined()
-            calculatorItems += " \(commaRemoveditem)"
-        case false:
-            calculatorItems += " \(item)"
+        guard item.contains(String.decimalComma) else {
+            calculatorItems = "\(calculatorItems)\(Character.whiteSpace)\(item)"
+            return
         }
+
+        let commaRemovedItem = item.components(separatedBy: String.decimalComma)
+                                   .joined()
+        calculatorItems = "\(calculatorItems)\(Character.whiteSpace)\(commaRemovedItem)"
     }
     
     private func resetCalculatorItems() {
