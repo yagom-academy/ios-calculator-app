@@ -17,18 +17,34 @@ class CalculatorViewController: UIViewController {
 
     private let initialNumberLabel = "0"
     private let initialStringValue = ""
+    private var isBeforeCalculate: Bool {
+        let hasResult = formulaStackView.arrangedSubviews.isEmpty == false && entireStringFormula == initialStringValue
+        return !hasResult
+    }
     
     private let numberFormatter = CalculatorNumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initailizeLabel()
+        initializeLabel()
         initializeFormulaStackView()
     }
     
-    private func initailizeLabel() {
+    private func initializeLabel() {
+        initializeNumberLabel()
+        initializeOperatorLabel()
+    }
+    
+    private func initializeNumberLabel() {
         inputNumberLabel.text = initialNumberLabel
+    }
+    
+    private func initializeOperatorLabel() {
         inputOperatorLabel.text = initialStringValue
+    }
+    
+    private func initializeStringFormula() {
+        entireStringFormula = initialStringValue
     }
     
     private func initializeFormulaStackView() {
@@ -39,7 +55,8 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapNumberPad(_ sender: UIButton) {
         guard let currentNumberText = inputNumberLabel.text,
-             let inputNumber = sender.currentTitle else { return }
+             let inputNumber = sender.currentTitle,
+            isBeforeCalculate else { return }
         
         if currentNumberText == initialNumberLabel {
             inputNumberLabel.text = inputNumber
@@ -51,7 +68,8 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapDotButton(_ sender: UIButton) {
         if let currentNumberText = inputNumberLabel.text,
           let inputSign = sender.currentTitle,
-           currentNumberText.contains(CalculatorSign.dot) == false {
+         isBeforeCalculate,
+        currentNumberText.contains(CalculatorSign.dot) == false {
             inputNumberLabel.text = currentNumberText + inputSign
         }
     }
@@ -59,7 +77,8 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapDoubleZeroButton(_ sender: UIButton) {
         if let currentNumberText = inputNumberLabel.text,
           let inputNum = sender.currentTitle,
-         currentNumberText != initialNumberLabel {
+         isBeforeCalculate,
+        currentNumberText != initialNumberLabel {
             updateInputNumberLabel(currentNumberText, with: inputNum)
         }
     }
@@ -81,17 +100,18 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let currentNumberText = inputNumberLabel.text,
-             let inputOperator = sender.currentTitle else { return }
+             let inputOperator = sender.currentTitle,
+            isBeforeCalculate else { return }
 
         if formulaStackView.arrangedSubviews.isEmpty,
           currentNumberText == initialNumberLabel {
-            inputOperatorLabel.text = initialStringValue
+            initializeOperatorLabel()
         } else if currentNumberText == initialNumberLabel {
             changeOperatorLabel(with: inputOperator)
         } else {
             addFormulaStackView()
             changeOperatorLabel(with: inputOperator)
-            inputNumberLabel.text = initialNumberLabel
+            initializeNumberLabel()
         }
     }
     
@@ -117,13 +137,13 @@ class CalculatorViewController: UIViewController {
     // MARK: - 특수 버튼 입력
     
     @IBAction private func tapACButton(_ sender: UIButton) {
-        initailizeLabel()
-        entireStringFormula = initialStringValue
+        initializeLabel()
+        initializeStringFormula()
         initializeFormulaStackView()
     }
     
     @IBAction private func tapCEButton(_ sender: UIButton) {
-        inputNumberLabel.text = initialNumberLabel
+        initializeNumberLabel()
     }
     
     @IBAction private func tapPositiveNegativeButton(_ sender: UIButton) {
@@ -145,8 +165,8 @@ class CalculatorViewController: UIViewController {
             var formula = ExpressionParser.parse(from: entireStringFormula)
             let result = try formula.result()
             updateNumberLabel(with: Decimal(result))
-            inputOperatorLabel.text = initialStringValue
-            entireStringFormula = initialStringValue
+            initializeOperatorLabel()
+            initializeStringFormula()
         } catch CalculatorError.emptyQueue {
             return
         } catch {
