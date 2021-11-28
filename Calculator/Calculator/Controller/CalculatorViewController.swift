@@ -80,13 +80,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedZeroButton(_ button: UIButton) {
-        guard let buttonTitle = button.currentTitle,
-              var operandLabelText = operandLabel.text else { return }
+        guard let operandLabelText = operandLabel.text,
+              let buttonTitle = button.currentTitle,
+              operandLabelText != String.zero else { return }
         
-        if operandLabelText != String.zero {
-            operandLabelText += buttonTitle
-            operandLabel.text = operandLabelText
-        }
+        operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
     @IBAction func tappedDecimalPointButton(_ button: UIButton) {
