@@ -65,16 +65,18 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorButton(_ button: UIButton) {
-        switch operatorLabel.text!.isEmpty || operandLabel.text! != String.zero {
-        case true:
-            appendCalculatorItem("\(operatorLabel.text!)")
-            appendCalculatorItem("\(operandLabel.text!)")
-            addNewLabelOnStackView()
-            resetOperandLabel()
-            operatorLabel.text = button.currentTitle
-        case false:
-            operatorLabel.text = button.currentTitle
-        }
+        guard let operatorLabelText = operatorLabel.text,
+              let operandLabelText = operandLabel.text,
+              operatorLabelText.isEmpty || operandLabelText != String.zero else {
+                  operatorLabel.text = button.currentTitle
+                  return
+              }
+        
+        appendCalculatorItem("\(operatorLabelText)")
+        appendCalculatorItem("\(operandLabelText)")
+        addNewLabelOnStackView()
+        resetOperandLabel()
+        operatorLabel.text = button.currentTitle
     }
     
     @IBAction func tappedZeroButton(_ button: UIButton) {
