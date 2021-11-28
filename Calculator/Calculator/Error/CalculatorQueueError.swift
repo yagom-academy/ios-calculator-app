@@ -7,10 +7,12 @@
 
 import Foundation
 
-enum CalculatorQueueError: Error, CustomStringConvertible {
+enum CalculatorQueueError: Error {
     case emptyQueue
-    
-    var description: String {
+}
+
+extension CalculatorQueueError: LocalizedError {
+    var errorDescription: String? {
         switch self {
         case .emptyQueue:
             return "Queue is Empty"

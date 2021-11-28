@@ -13,8 +13,8 @@ class FormulaTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        operands = CalculatorItemQueue<Double>([])
-        operators = CalculatorItemQueue<Operator>([])
+        operands = CalculatorItemQueue<Double>(enQueueElements: [])
+        operators = CalculatorItemQueue<Operator>(enQueueElements: [])
     }
 
     override func tearDownWithError() throws {
@@ -24,45 +24,45 @@ class FormulaTests: XCTestCase {
     }
     
     func test_result메서드를_호출했을때_더하기가_잘되는지() {
-        operands.enQueueElement(1994)
-        operands.enQueueElement(1004)
-        operators.enQueueElement(Operator.add)
+        operands.enQueue(1994)
+        operands.enQueue(1004)
+        operators.enQueue(Operator.add)
         var formula = Formula(operands: operands, operators: operators)
         
         XCTAssertEqual(try formula.result(), 2998)
     }
     
     func test_result메서드를_호출했을때_빼기가_잘되는지() {
-        operands.enQueueElement(1994)
-        operands.enQueueElement(1004)
-        operators.enQueueElement(Operator.subtract)
+        operands.enQueue(1994)
+        operands.enQueue(1004)
+        operators.enQueue(Operator.subtract)
         var formula = Formula(operands: operands, operators: operators)
         
         XCTAssertEqual(try formula.result(), 990)
     }
     
     func test_result메서드를_호출했을때_곱하기가_잘되는지() {
-        operands.enQueueElement(10)
-        operands.enQueueElement(4)
-        operators.enQueueElement(Operator.multiply)
+        operands.enQueue(10)
+        operands.enQueue(4)
+        operators.enQueue(Operator.multiply)
         var formula = Formula(operands: operands, operators: operators)
         
         XCTAssertEqual(try formula.result(), 40)
     }
     
     func test_result메서드를_호출했을때_나누기가_잘되는지() {
-        operands.enQueueElement(10)
-        operands.enQueueElement(4)
-        operators.enQueueElement(Operator.divide)
+        operands.enQueue(10)
+        operands.enQueue(4)
+        operators.enQueue(Operator.divide)
         var formula = Formula(operands: operands, operators: operators)
         
         XCTAssertEqual(try formula.result(), 2.5)
     }
    
     func test_0으로_나누려고할때_에러를_던지는지() {
-        operands.enQueueElement(10)
-        operands.enQueueElement(0)
-        operators.enQueueElement(Operator.divide)
+        operands.enQueue(10)
+        operands.enQueue(0)
+        operators.enQueue(Operator.divide)
         var formula = Formula(operands: operands, operators: operators)
         
         XCTAssertThrowsError(try formula.result())
