@@ -18,7 +18,7 @@ class CalculatorViewController: UIViewController {
         guard var operandLabelText = operandLabel.text,
               let operatorLabelText = operatorLabel.text else { return }
         
-        operandLabel.text = operandLabelText.removeMeaninglessDecimal()
+        operandLabel.text = operandLabelText.removeUnnecessaryDecimal()
         
         let singleItem = CalculatorSetting.adjustLabelAttributes()
         singleItem.text = "\(operatorLabelText)\(Character.whiteSpace)\(operandLabelText)"

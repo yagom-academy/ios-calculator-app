@@ -10,13 +10,13 @@ extension String {
         return !isEmpty
     }
     
-    var hasMeaninglessDecimal: Bool {
+    var hasUnnecessaryDecimal: Bool {
         return self.hasSuffix(String.decimalPoint)
             || (self.contains(String.decimalPoint) && self.hasSuffix(String.zero))
     }
     
-    mutating func removeMeaninglessDecimal() -> String {
-        while self.hasMeaninglessDecimal {
+    mutating func removeUnnecessaryDecimal() -> String {
+        while self.hasUnnecessaryDecimal {
             self.removeLast()
         }
         
