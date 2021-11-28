@@ -7,14 +7,12 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    private var savedCalculatorItems: String = ""
-    private let numberFormatter = NumberFormatter()
-    private let hapticGenerator = UISelectionFeedbackGenerator()
+    private var calculatorItems = String.empty
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var savedCalculatorItemsStackView: UIStackView!
-    @IBOutlet weak var savedCalculatorItemsScrollView: UIScrollView!
+    @IBOutlet weak var calculatorItemsStackView: UIStackView!
+    @IBOutlet weak var calculatorItemsScrollView: UIScrollView!
     
     private func addStackViewLabel() {
         let savedItemlabel = UILabel()
@@ -29,12 +27,12 @@ class CalculatorViewController: UIViewController {
         }
         
         savedItemlabel.text = "\(operatorLabel.text!) \(operandLabel.text!)"
-        savedCalculatorItemsStackView.addArrangedSubview(savedItemlabel)
-        CalculatorSetting.scrollToBottom(on: savedCalculatorItemsScrollView)
+        calculatorItemsStackView.addArrangedSubview(savedItemlabel)
+        CalculatorSetting.scrollToBottom(on: calculatorItemsScrollView)
     }
     
     private func clearAllStackViewLabel() {
-        let addedStackViewLabels = savedCalculatorItemsStackView.arrangedSubviews
+        let addedStackViewLabels = calculatorItemsStackView.arrangedSubviews
         
         addedStackViewLabels.forEach { subview in
             return subview.removeFromSuperview()
@@ -46,14 +44,14 @@ class CalculatorViewController: UIViewController {
         case true:
             return
         case false:
-            saveCalculator(item: "\(operatorLabel.text!)")
-            saveCalculator(item: "\(operandLabel.text!)")
+            appendCalculatorItem("\(operatorLabel.text!)")
+            appendCalculatorItem("\(operandLabel.text!)")
             addStackViewLabel()
             resetOperatorLabel()
-            var parsedFormula = ExpressionParser.parse(from: savedCalculatorItems)
-            let result = parsedFormula.result()
-            operandLabel.text = numberFormatter.string(for: result)
-            resetSavedCalculatorItems()
+            var parsedFormula = ExpressionParser.parse(from: calculatorItems)
+            let calculatedResult = parsedFormula.result()
+            operandLabel.text = CalculatorSetting.formatNumber(calculatedResult)
+            resetCalculatorItems()
         }
     }
     
@@ -70,8 +68,8 @@ class CalculatorViewController: UIViewController {
     @IBAction func tappedOperatorButton(_ button: UIButton) {
         switch operatorLabel.text!.isEmpty || operandLabel.text! != String.zero {
         case true:
-            saveCalculator(item: "\(operatorLabel.text!)")
-            saveCalculator(item: "\(operandLabel.text!)")
+            appendCalculatorItem("\(operatorLabel.text!)")
+            appendCalculatorItem("\(operandLabel.text!)")
             addStackViewLabel()
             resetOperandLabel()
             operatorLabel.text = button.currentTitle
@@ -113,7 +111,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedAllClearButton(_ button: UIButton) {
-        resetSavedCalculatorItems()
+        resetCalculatorItems()
         resetOperandLabel()
         resetOperatorLabel()
         clearAllStackViewLabel()
@@ -124,21 +122,21 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func occurHapticFeedback() {
-        hapticGenerator.selectionChanged()
+        CalculatorSetting.occurHapticFeedback()
     }
     
-    private func saveCalculator(item: String) {
+    private func appendCalculatorItem(_ item: String) {
         switch item.contains(String.decimalComma) {
         case true:
             let commaRemoveditem = item.components(separatedBy: String.decimalComma).joined()
-            savedCalculatorItems += " \(commaRemoveditem)"
+            calculatorItems += " \(commaRemoveditem)"
         case false:
-            savedCalculatorItems += " \(item)"
+            calculatorItems += " \(item)"
         }
     }
     
-    private func resetSavedCalculatorItems() {
-        savedCalculatorItems = String.empty
+    private func resetCalculatorItems() {
+        calculatorItems = String.empty
     }
     
     private func resetOperandLabel() {

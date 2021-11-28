@@ -387,10 +387,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculatorItemsScrollView" destination="BOT-7g-vxv" id="QIL-5M-Tbw"/>
+                        <outlet property="calculatorItemsStackView" destination="XRe-QE-UJf" id="FDM-QV-dgY"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="vom-fp-LAg"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Tic-mq-uEJ"/>
-                        <outlet property="savedCalculatorItemsScrollView" destination="BOT-7g-vxv" id="QIL-5M-Tbw"/>
-                        <outlet property="savedCalculatorItemsStackView" destination="XRe-QE-UJf" id="FDM-QV-dgY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
