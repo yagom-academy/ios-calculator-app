@@ -8,7 +8,7 @@
 import UIKit
 
 extension Character {
-    static let whiteSpace = " "
+    static let whiteSpace: Character = " "
 }
 
 extension String {
