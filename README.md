@@ -22,7 +22,7 @@
 
 - 숫자 0 으로 나누는 경우, `NaN`이 출력되고, NaN 에는 어떤 연산을 적용해도 다시 NaN 이 출력됩니다.
 
-- 누적된 연산이 화면 길이를 넘어가면, 새로운 연산이 추가될 때마다 `화면이 스크롤의 최하단으로 이동`합니다.
+- 누적된 연산이 화면 길이를 넘어가면, 새로운 연산이 추가될 때마다 `화면이 스크롤의 최하단으로 이동`합니다. 동시에 `스크롤 인디케이터`가 반짝이며 사용자에게 스크롤의 존재를 알립니다.
 
 - 사용자는 터치로 `스크롤` 기능을 사용할 수 있으며, 누적된 연산 기록을 확인할 수 있습니다.
 
@@ -32,7 +32,7 @@
 
 - 모든 버튼에는 [Selection 햅틱 피드백](https://developer.apple.com/documentation/uikit/uiselectionfeedbackgenerator)을 적용하여, 사용자의 버튼 터치 경험을 향상시켰습니다.
 
-https://user-images.githubusercontent.com/71127966/143767070-107c8bb0-bec9-4497-b77b-1339be001c0e.mp4
+https://user-images.githubusercontent.com/71127966/143849158-e35a7fb0-395b-4ce5-863f-7fc73358be99.mp4
 
 <br>
 
