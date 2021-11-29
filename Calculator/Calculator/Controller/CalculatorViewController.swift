@@ -17,7 +17,6 @@ class CalculatorViewController: UIViewController {
     private func addStackViewLabel() {
         guard var operandLabelText = operandLabel.text,
               let operatorLabelText = operatorLabel.text else { return }
-        
         operandLabel.text = operandLabelText.removeMeaninglessDecimal()
         
         let singleItem = CalculatorSetting.adjustLabelAttribute()
