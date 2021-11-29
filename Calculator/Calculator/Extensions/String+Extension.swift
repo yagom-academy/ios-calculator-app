@@ -14,6 +14,14 @@ extension String {
         return self.hasSuffix(String.decimalPoint)
             || (self.contains(String.decimalPoint) && self.hasSuffix(String.zero))
     }
+
+    mutating func removeMeaninglessDecimal() -> String {
+        while self.hasMeaninglessDecimal {
+            self.removeLast()
+        }
+        
+        return self
+    }
     
     func split(with target: Character) -> [String] {
         return components(separatedBy: target.description)
