@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NumberManager {
+class CalculatorManager {
     private (set) var value: String
     private (set) var isBiggerThan0: Bool
     let numberFormatter = Formatter()
@@ -83,7 +83,7 @@ class NumberManager {
     }
 }
 
-extension NumberManager {
+extension CalculatorManager {
     class Formatter: NumberFormatter {
         
         override init() {

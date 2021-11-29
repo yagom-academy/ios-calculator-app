@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var inputNumber = NumberManager()
+    var inputNumber = CalculatorManager()
     var expression : String = ""
     @IBOutlet var inputNumberLabel: UILabel!
     @IBOutlet var inputOperatorLabel: UILabel!
