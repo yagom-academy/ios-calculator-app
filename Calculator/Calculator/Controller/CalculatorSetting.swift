@@ -37,6 +37,8 @@ enum CalculatorSetting {
         if bottomOffset.y > 0 {
             scrollView.setContentOffset(bottomOffset, animated: false)
         }
+        
+        scrollView.flashScrollIndicators()
     }
     
     static func formatNumber(_ input: Double) -> String {
