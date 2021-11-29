@@ -63,11 +63,12 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedOperatorButton(_ button: UIButton) {
         guard let operatorLabelText = operatorLabel.text,
-              let operandLabelText = operandLabel.text,
-              operatorLabelText.isEmpty || operandLabelText != String.zero else {
-                  operatorLabel.text = button.currentTitle
-                  return
-              }
+              let operandLabelText = operandLabel.text else { return }
+        
+        guard operatorLabelText.isEmpty || operandLabelText != String.zero else {
+            operatorLabel.text = button.currentTitle
+            return
+        }
         
         appendCalculatorItem("\(operatorLabelText)")
         appendCalculatorItem("\(operandLabelText)")
