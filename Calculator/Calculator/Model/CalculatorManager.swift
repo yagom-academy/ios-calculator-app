@@ -32,7 +32,10 @@ class CalculatorManager {
         if value == "0" && input == "." {
             value = "0."
             return
-        } else if input == "."{
+        } else if value == "0" {
+            value = input
+            return
+        }else if input == "."{
             value += input
             return
         } else if value.contains(".") && input == "00" {
