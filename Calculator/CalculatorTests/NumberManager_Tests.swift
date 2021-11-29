@@ -110,10 +110,10 @@ class NumberManager_Tests: XCTestCase {
         
     }
     
-    //MARK:- formmater Tests
+    //MARK:- updateValue Tests
     func test_value가_1000000일때_formmater를_호출하면_3자리마다_콤마가추가된다() {
         let testNum = NumberManager(value: "1000000" , isBiggerThan0: true)
-        let formmatedValue = testNum.textualRepresentation(with: testNum.value)
+        let formmatedValue = testNum.textualRepresentation()
         XCTAssertEqual(formmatedValue, "1,000,000")
     }
     

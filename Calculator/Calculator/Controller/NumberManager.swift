@@ -41,7 +41,7 @@ class NumberManager {
             value += input
         }
         
-        let formattedNumber = self.textualRepresentation(with: value)
+        let formattedNumber = self.textualRepresentation()
         value = formattedNumber
     }
     
@@ -61,8 +61,8 @@ class NumberManager {
         }
     }
     
-    func textualRepresentation(with value: String) -> String {
-        let withoutComma = value.filter { $0 != "," }
+    private func textualRepresentation() -> String {
+        let withoutComma = self.value.filter { $0 != "," }
         guard let double = Double(withoutComma) else {
             return "NaN"
         }
