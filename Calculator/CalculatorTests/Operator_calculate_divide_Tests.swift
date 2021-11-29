@@ -17,10 +17,12 @@ class Operator_calculate_divide_Tests: XCTestCase {
         XCTAssertEqual(try sut.calculate(lhs: lhs, rhs: rhs), lhs/rhs)
     }
     
-    func test_calculate호출시_rhs가_0일때_NaN을_반환한다() {
+    func test_calculate호출시_rhs가_0일때_divideByZero을_반환한다() {
         let lhs = 12345.6789
         let rhs = 0.0
-        XCTAssertTrue(try sut.calculate(lhs: lhs, rhs: rhs).isNaN)
+        XCTAssertThrowsError(try sut.calculate(lhs: lhs, rhs: rhs)) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
+        }
     }
     
     func test_calculate호출시_lhs가_음수이고_rhs는_양수일때_1hs를_2hs로_나눈몫을_반환한다() {

@@ -19,7 +19,6 @@ class Formula_Tests: XCTestCase {
         let operands = CalculatorItemQueue(testOperands)
         let operators = CalculatorItemQueue(testOperators)
         sut = Formula(operands: operands, operators: operators)
-        
         XCTAssertEqual(try sut.result(), 7.5)
     }
     
@@ -29,7 +28,6 @@ class Formula_Tests: XCTestCase {
         let operands = CalculatorItemQueue(testOperands)
         let operators = CalculatorItemQueue(testOperators)
         sut = Formula(operands: operands, operators: operators)
-        
-        XCTAssertTrue(try sut.result().isNaN)
+        XCTAssertThrowsError(try sut.result())
     }
 }

@@ -30,16 +30,5 @@ struct Formula {
             }
             return try operation.calculate(lhs: lhs, rhs: rhs)
         }
-        //        guard var result = operands.dequeue() as? Double else {
-        //            return Double.nan
-        //        }
-        //
-        //        for _ in 1...operators.itemCount {
-        //            let rhs = operands.dequeue() as! Double
-        //            let operation = operators.dequeue() as! Operator
-        //            result = operation.calculate(lhs: result, rhs: rhs)
-        //        }
-        //        return result
-        //    }
     }
 }
