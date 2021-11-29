@@ -19,9 +19,8 @@ class Formula_Tests: XCTestCase {
         let operands = CalculatorItemQueue(testOperands)
         let operators = CalculatorItemQueue(testOperators)
         sut = Formula(operands: operands, operators: operators)
-        let result = sut.result()
         
-        XCTAssertEqual(result, 7.5)
+        XCTAssertEqual(try sut.result(), 7.5)
     }
     
     func test_result호출시_연산과정중_NaN이나오면_NaN을_반환한다() {
@@ -30,8 +29,7 @@ class Formula_Tests: XCTestCase {
         let operands = CalculatorItemQueue(testOperands)
         let operators = CalculatorItemQueue(testOperators)
         sut = Formula(operands: operands, operators: operators)
-        let result = sut.result()
         
-        XCTAssertTrue(result.isNaN)
+        XCTAssertTrue(try sut.result().isNaN)
     }
 }

@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         }
         let `operator` = sender.title(for: .normal)
         let operand = inputNumber.value
-    
+        
         let stackView = UIStackView()
         let operatorLabel = UILabel()
         if !stackView.arrangedSubviews.isEmpty {
@@ -70,9 +70,17 @@ class ViewController: UIViewController {
         }
         expression += inputNumber.value
         var formular = ExpressionParser.parse(from: expression)
-        let result = formular.result()
+        do {
+            let result = try formular.result()
+            inputNumberLabel.text = inputNumber.textualRepresentation(with: result)
+        } catch CalculatorError.divideByZero {
+            inputNumberLabel.text = "NaN"
+        } catch CalculatorError.emptyCalculatorItemQueue {
+            print("연산 할 연산자 또는 피연산자가 없습니다.")
+        } catch {
+            print("알 수 없는 오류가 발생했습니다.")
+        }
         
-        inputNumberLabel.text = inputNumber.textualRepresentation(with: result)
     }
 }
 

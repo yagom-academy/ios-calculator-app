@@ -16,16 +16,30 @@ struct Formula {
         self.operators = operators
     }
     
-    mutating func result() -> Double {
-        guard var result = operands.dequeue() as? Double else {
-            return Double.nan
+    mutating func result() throws -> Double {
+        guard let result = operands.dequeue() as? Double else {
+            throw CalculatorError.emptyCalculatorItemQueue
         }
         
-        for _ in 1...operators.itemCount {
-            let rhs = operands.dequeue() as! Double
-            let operation = operators.dequeue() as! Operator
-            result = operation.calculate(lhs: result, rhs: rhs)
+        return try operators.queue.reduce(result) { (lhs: Double , operation: CalculateItem) in
+            guard let operation = operation as? Operator else {
+                throw CalculatorError.emptyCalculatorItemQueue
+            }
+            guard let rhs = operands.dequeue() as? Double else {
+                throw CalculatorError.emptyCalculatorItemQueue
+            }
+            return try operation.calculate(lhs: lhs, rhs: rhs)
         }
-        return result
+        //        guard var result = operands.dequeue() as? Double else {
+        //            return Double.nan
+        //        }
+        //
+        //        for _ in 1...operators.itemCount {
+        //            let rhs = operands.dequeue() as! Double
+        //            let operation = operators.dequeue() as! Operator
+        //            result = operation.calculate(lhs: result, rhs: rhs)
+        //        }
+        //        return result
+        //    }
     }
 }

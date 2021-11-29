@@ -14,8 +14,6 @@ class Operator_calculate_add_Tests: XCTestCase {
     func test_calculate호출시_lhs와_rhs의_합을_반환한다() {
         let lhs = 11.00
         let rhs = 9.99
-        let sum = sut.calculate(lhs: lhs , rhs: rhs)
-        
-        XCTAssertEqual(sum, lhs + rhs)
+        XCTAssertEqual(try sut.calculate(lhs: lhs, rhs: rhs), lhs + rhs)
     }
 }
