@@ -10,7 +10,7 @@ import Foundation
 class CalculatorManager {
     private (set) var value: String
     private (set) var isBiggerThan0: Bool
-    let numberFormatter = Formatter()
+    let numberFormatter = CustomNumberFormatter()
     
     init(value: String = "0", isBiggerThan0: Bool = true) {
         self.value = value
@@ -83,19 +83,3 @@ class CalculatorManager {
     }
 }
 
-extension CalculatorManager {
-    class Formatter: NumberFormatter {
-        
-        override init() {
-            super.init()
-            self.numberStyle = .decimal
-            self.usesSignificantDigits = true
-            self.maximumSignificantDigits = 20
-            self.roundingMode = .ceiling
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-    }
-}
