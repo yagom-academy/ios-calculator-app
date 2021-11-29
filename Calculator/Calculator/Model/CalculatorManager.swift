@@ -50,7 +50,7 @@ class CalculatorManager {
     }
     
     func toggleSign() {
-        guard value != "0" else {
+        if value == "0" || value == "0." {
             return
         }
         isBiggerThan0 = !isBiggerThan0
