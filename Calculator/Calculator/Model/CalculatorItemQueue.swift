@@ -7,6 +7,8 @@
 
 import Foundation
 
+protocol CalculateItem {}
+
 struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var items: [Element]
     
@@ -18,7 +20,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         items.append(item)
     }
     
-    @discardableResult
     mutating func dequeue() -> Element? {
         return items.isEmpty ? nil : items.removeFirst()
     }
@@ -27,5 +28,3 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         items.removeAll()
     }
 }
-
-protocol CalculateItem {}

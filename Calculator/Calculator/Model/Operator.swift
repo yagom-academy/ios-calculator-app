@@ -9,9 +9,19 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "_"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
+    
+    static func doesContain(_ target: String) -> Bool {
+        let symbols = Operator.allCases.map { `case` in `case`.rawValue.description }
+        
+        return symbols.contains(target)
+    }
+    
+    init?(symbol: String) {
+        self.init(rawValue: Character(symbol))
+    }
     
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         switch self {

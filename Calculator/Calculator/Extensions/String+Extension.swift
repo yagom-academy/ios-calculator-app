@@ -5,10 +5,29 @@
 //  Created by yeha on 2021/11/15.
 //
 
-import Foundation
-
 extension String {
-    func split(with target: Character = " ") -> [String] {
-        return split(separator: target).map({ String($0) })
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
+    
+    var hasMeaninglessDecimal: Bool {
+        return self.hasSuffix(String.decimalPoint)
+            || (self.contains(String.decimalPoint) && self.hasSuffix(String.zero))
+    }
+
+    mutating func removeMeaninglessDecimal() -> String {
+        while self.hasMeaninglessDecimal {
+            self.removeLast()
+        }
+        
+        return self
+    }
+    
+    func split(with target: Character) -> [String] {
+        return components(separatedBy: target.description)
+    }
+    
+    func notContains(_ input: String) -> Bool {
+        return !contains(Character(input))
     }
 }
