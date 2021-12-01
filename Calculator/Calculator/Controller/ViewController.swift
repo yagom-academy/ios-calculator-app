@@ -38,19 +38,30 @@ class ViewController: UIViewController {
             inputOperatorLabel.text = sender.title(for: .normal)
             return
         }
-        let `operator` = sender.title(for: .normal)
         let operand = inputNumber.value
+        guard let currentOperator = inputOperatorLabel.text else {
+            return
+        }
+        guard let touchingOperator = sender.title(for: .normal) else {
+            return
+        }
         
+        if expression.isEmpty {
+            expression += operand
+            let operandLabel = UILabel()
+            operandLabel.text = operand
+            operandLabel.textColor = .white
+            expressionStack.addArrangedSubview(operandLabel)
+            inputNumber.reset()
+            inputNumberLabel.text = inputNumber.value
+            inputOperatorLabel.text = touchingOperator
+            return
+        }
+        expression += currentOperator
+        expression += operand
         let stackView = UIStackView()
         let operatorLabel = UILabel()
-        if !stackView.arrangedSubviews.isEmpty {
-            operatorLabel.text = ""
-            expression += operand
-        } else {
-            operatorLabel.text = `operator`
-            expression += `operator` ?? ""
-            expression += operand
-        }
+        operatorLabel.text = currentOperator
         operatorLabel.textColor = .white
         let operandLabel = UILabel()
         operandLabel.text = operand
@@ -60,8 +71,9 @@ class ViewController: UIViewController {
         stackView.spacing = 5
         stackView.alignment = .bottom
         expressionStack.addArrangedSubview(stackView)
-        inputNumberLabel.text = "0"
         inputNumber.reset()
+        inputNumberLabel.text = inputNumber.value
+        inputOperatorLabel.text = touchingOperator
     }
     
     @IBAction func touchEqualityButton(_ sender: UIButton) {
