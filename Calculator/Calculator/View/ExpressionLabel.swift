@@ -7,7 +7,7 @@
 
 import UIKit
 
-class expressionLabel: UILabel {
+class ExpressionLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
