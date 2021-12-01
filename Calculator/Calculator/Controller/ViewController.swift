@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     var inputNumber = CalculatorManager()
     var expression : String = ""
+    var isCalculated = false
     @IBOutlet var inputNumberLabel: UILabel!
     @IBOutlet var inputOperatorLabel: UILabel!
     @IBOutlet var expressionStack: UIStackView!
@@ -38,6 +39,11 @@ class ViewController: UIViewController {
             inputOperatorLabel.text = sender.title(for: .normal)
             return
         }
+        
+        if isCalculated == true {
+            isCalculated = false
+        }
+        
         let operand = inputNumber.value
         guard let currentOperator = inputOperatorLabel.text else {
             return
@@ -77,6 +83,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchEqualityButton(_ sender: UIButton) {
+        guard isCalculated == false else {
+            return
+        }
+        
         if let currentOperator = inputOperatorLabel.text {
             expression += currentOperator
         }
@@ -86,6 +96,7 @@ class ViewController: UIViewController {
         do {
             let result = try formular.result()
             inputNumberLabel.text = inputNumber.textualRepresentation(with: result)
+            isCalculated = true
         } catch CalculatorError.divideByZero {
             inputNumberLabel.text = "NaN"
         } catch CalculatorError.emptyCalculatorItemQueue {
