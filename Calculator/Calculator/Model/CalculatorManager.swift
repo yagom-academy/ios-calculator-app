@@ -17,6 +17,11 @@ class CalculatorManager {
         self.isBiggerThan0 = isBiggerThan0
     }
     
+    func setValueInitialState() {
+        value = ""
+        isBiggerThan0 = true
+    }
+    
     func updateValue(with input: String) {
         let digitCount = value.filter{ $0.isNumber }.count
         let validDigitCount = 20
