@@ -77,10 +77,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchEqualityButton(_ sender: UIButton) {
-        if let `operator` = inputOperatorLabel.text {
-            expression += `operator`
+        if let currentOperator = inputOperatorLabel.text {
+            expression += currentOperator
         }
         expression += inputNumber.value
+        inputOperatorLabel.text = ""
         var formular = ExpressionParser.parse(from: expression)
         do {
             let result = try formular.result()
