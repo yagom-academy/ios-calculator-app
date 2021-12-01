@@ -68,7 +68,8 @@ class ViewController: UIViewController {
             inputOperatorLabel.text = touchingOperator
             return
         }
-
+        expression += currentOperator
+        expression += operand
         addExpressionHistoryStack(operator: currentOperator, operand: operand)
         inputNumber.reset()
         inputNumberLabel.text = inputNumber.value
