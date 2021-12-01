@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         inputNumberLabel.text = inputNumber.value
+        inputOperatorLabel.text = ""
     }
     
     private func addExpressionHistoryStack(operator: String, operand: String) {
