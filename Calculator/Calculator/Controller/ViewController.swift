@@ -12,11 +12,18 @@ class ViewController: UIViewController {
     var isCalculated = false
     @IBOutlet var inputNumberLabel: UILabel!
     @IBOutlet var inputOperatorLabel: UILabel!
-    @IBOutlet var expressionStack: UIStackView!
+    @IBOutlet var expressionHistoryStack: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inputNumberLabel.text = inputNumber.value
+    }
+    
+    private func addExpressionHistoryStack(operator: String, operand: String) {
+        let operatorExpression = ExpressionLabel(text: `operator`)
+        let opernadExpression = ExpressionLabel(text: operand)
+        let expressionStackView = ExpressionStackView(arrangedSubviews: [operatorExpression, opernadExpression])
+        expressionHistoryStack.addArrangedSubview(expressionStackView)
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
@@ -54,29 +61,14 @@ class ViewController: UIViewController {
         
         if expression.isEmpty {
             expression += operand
-            let operandLabel = UILabel()
-            operandLabel.text = operand
-            operandLabel.textColor = .white
-            expressionStack.addArrangedSubview(operandLabel)
+            addExpressionHistoryStack(operator: "", operand: operand)
             inputNumber.reset()
             inputNumberLabel.text = inputNumber.value
             inputOperatorLabel.text = touchingOperator
             return
         }
-        expression += currentOperator
-        expression += operand
-        let stackView = UIStackView()
-        let operatorLabel = UILabel()
-        operatorLabel.text = currentOperator
-        operatorLabel.textColor = .white
-        let operandLabel = UILabel()
-        operandLabel.text = operand
-        operandLabel.textColor = .white
-        stackView.addArrangedSubview(operatorLabel)
-        stackView.addArrangedSubview(operandLabel)
-        stackView.spacing = 5
-        stackView.alignment = .bottom
-        expressionStack.addArrangedSubview(stackView)
+
+        addExpressionHistoryStack(operator: currentOperator, operand: operand)
         inputNumber.reset()
         inputNumberLabel.text = inputNumber.value
         inputOperatorLabel.text = touchingOperator
@@ -93,18 +85,7 @@ class ViewController: UIViewController {
         }
         expression += currentOperator
         expression += inputNumber.value
-        let stackView = UIStackView()
-        stackView.spacing = 5
-        stackView.alignment = .bottom
-        let operatorLabel = UILabel()
-        operatorLabel.text = currentOperator
-        operatorLabel.textColor = .white
-        let operandLabel = UILabel()
-        operandLabel.text = operand
-        operandLabel.textColor = .white
-        stackView.addArrangedSubview(operatorLabel)
-        stackView.addArrangedSubview(operandLabel)
-        expressionStack.addArrangedSubview(stackView)
+        addExpressionHistoryStack(operator: currentOperator, operand: operand)
         inputOperatorLabel.text = ""
         var formular = ExpressionParser.parse(from: expression)
         do {

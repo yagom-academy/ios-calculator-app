@@ -12,11 +12,15 @@ class ExpressionStackView: UIStackView {
         super.init(frame: frame)
     }
     
-    init(expressionLabels arrangedSubviews: [UIView]) {
+    init(arrangedSubviews views: [UIView]) {
         super.init(frame: CGRect.zero)
         self.axis = .horizontal
         self.alignment = .firstBaseline
         self.spacing = 5
+        
+        views.forEach { (view: UIView) in
+            addArrangedSubview(view)
+        }
     }
     
     required init(coder: NSCoder) {

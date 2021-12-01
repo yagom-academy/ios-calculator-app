@@ -334,7 +334,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="expressionStack" destination="XRe-QE-UJf" id="fAg-ZB-BXA"/>
+                        <outlet property="expressionHistoryStack" destination="XRe-QE-UJf" id="Q2p-Sw-sbP"/>
                         <outlet property="inputNumberLabel" destination="Lwz-OF-XHD" id="buV-rf-NQ6"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="n4U-wd-1qT"/>
                     </connections>
