@@ -101,7 +101,6 @@ class ViewController: UIViewController {
         operatorLabel.textColor = .white
         let operandLabel = UILabel()
         operandLabel.text = operand
-        print(operand)
         operandLabel.textColor = .white
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
