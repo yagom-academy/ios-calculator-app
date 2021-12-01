@@ -87,10 +87,25 @@ class ViewController: UIViewController {
             return
         }
         
-        if let currentOperator = inputOperatorLabel.text {
-            expression += currentOperator
+        let operand = inputNumber.value
+        guard let currentOperator = inputOperatorLabel.text else {
+            return
         }
+        expression += currentOperator
         expression += inputNumber.value
+        let stackView = UIStackView()
+        stackView.spacing = 5
+        stackView.alignment = .bottom
+        let operatorLabel = UILabel()
+        operatorLabel.text = currentOperator
+        operatorLabel.textColor = .white
+        let operandLabel = UILabel()
+        operandLabel.text = operand
+        print(operand)
+        operandLabel.textColor = .white
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        expressionStack.addArrangedSubview(stackView)
         inputOperatorLabel.text = ""
         var formular = ExpressionParser.parse(from: expression)
         do {
