@@ -26,10 +26,9 @@ class CalculatorViewController: UIViewController {
         return buttonTitle
     }
     
-    private func addNewLabelOnStackView() {
-        var operandLabelText = unwrapLabelText(of: operandLabel)
-        let operatorLabelText = unwrapLabelText(of: operatorLabel)
-        
+    private func addNewLabelOnStackView(operatorLabelText: String, operandLabelText: inout String) {
+        appendCalculatorItem("\(operatorLabelText)")
+        appendCalculatorItem("\(operandLabelText)")
         operandLabel.text = operandLabelText.removeUnnecessaryDecimal()
         
         let singleItem = CalculatorSetting.adjustLabelAttributes()
@@ -47,13 +46,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedResultButton(_ button: UIButton) {
-        let operandLabelText = unwrapLabelText(of: operandLabel)
+        var operandLabelText = unwrapLabelText(of: operandLabel)
         let operatorLabelText = unwrapLabelText(of: operatorLabel)
         guard operatorLabelText.isNotEmpty else { return }
         
-        appendCalculatorItem("\(operatorLabelText)")
-        appendCalculatorItem("\(operandLabelText)")
-        addNewLabelOnStackView()
+        addNewLabelOnStackView(operatorLabelText: operatorLabelText, operandLabelText: &operandLabelText)
         resetOperatorLabel()
         
         var parsedFormula = ExpressionParser.parse(from: calculatorItems)
@@ -74,16 +71,14 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorButton(_ button: UIButton) {
-        let operandLabelText = unwrapLabelText(of: operandLabel)
+        var operandLabelText = unwrapLabelText(of: operandLabel)
         let operatorLabelText = unwrapLabelText(of: operatorLabel)
         guard operatorLabelText.isEmpty || operandLabelText != String.zero else {
             operatorLabel.text = button.currentTitle
             return
         }
         
-        appendCalculatorItem("\(operatorLabelText)")
-        appendCalculatorItem("\(operandLabelText)")
-        addNewLabelOnStackView()
+        addNewLabelOnStackView(operatorLabelText: operatorLabelText, operandLabelText: &operandLabelText)
         resetOperandLabel()
         operatorLabel.text = button.currentTitle
     }
