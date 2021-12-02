@@ -20,6 +20,12 @@ class CalculatorViewController: UIViewController {
         return labelText
     }
     
+    private func unwrapButtonTitle(of button: UIButton) -> String {
+        guard let buttonTitle = button.currentTitle else { return String.empty }
+        
+        return buttonTitle
+    }
+    
     private func addNewLabelOnStackView() {
         var operandLabelText = unwrapLabelText(of: operandLabel)
         let operatorLabelText = unwrapLabelText(of: operatorLabel)
@@ -58,7 +64,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedOperandButton(_ button: UIButton) {
         var operandLabelText = unwrapLabelText(of: operandLabel)
-        guard let buttonTitle = button.currentTitle else { return }
+        let buttonTitle = unwrapButtonTitle(of: button)
         
         if operandLabelText == String.zero {
             operandLabelText = String.empty
@@ -84,16 +90,16 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedZeroButton(_ button: UIButton) {
         let operandLabelText = unwrapLabelText(of: operandLabel)
-        guard let buttonTitle = button.currentTitle,
-              operandLabelText != String.zero else { return }
+        let buttonTitle = unwrapButtonTitle(of: button)
+        guard operandLabelText != String.zero else { return }
         
         operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
     @IBAction func tappedDecimalPointButton(_ button: UIButton) {
         let operandLabelText = unwrapLabelText(of: operandLabel)
-        guard let buttonTitle = button.currentTitle,
-              operandLabelText.notContains(String.decimalPoint) else { return }
+        let buttonTitle = unwrapButtonTitle(of: button)
+        guard operandLabelText.notContains(String.decimalPoint) else { return }
         
         operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
