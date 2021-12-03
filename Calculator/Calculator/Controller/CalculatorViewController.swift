@@ -46,8 +46,8 @@ extension CalculatorViewController {
         guard let InputedNumber = sender.titleLabel?.text else {
             return
         }
-        guard rawOperand != "0" || InputedNumber != "0",
-              rawOperand != "0" || InputedNumber != "00" else {
+        guard rawOperand != "" || InputedNumber != "0",
+              rawOperand != "" || InputedNumber != "00" else {
             return
         }
         rawOperand = rawOperand + InputedNumber
