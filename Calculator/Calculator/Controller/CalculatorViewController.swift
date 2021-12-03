@@ -43,15 +43,15 @@ extension CalculatorViewController {
         guard checkNumberOfInputs, isNotCalculated else {
             return
         }
-        guard let InputedNumber = sender.titleLabel?.text else {
+        guard let inputedNumber = sender.titleLabel?.text else {
             return
         }
-        guard rawOperand != "" || InputedNumber != "0",
-              rawOperand != "" || InputedNumber != "00" else {
+        guard rawOperand != "" || inputedNumber != "0",
+              rawOperand != "" || inputedNumber != "00" else {
             return
         }
-        rawOperand = rawOperand + InputedNumber
-        operandLabel.text = changeNumberFormatter(insertedNumber: InputedNumber)
+        rawOperand = rawOperand + inputedNumber
+        operandLabel.text = changeNumberFormatter(insertedNumber: inputedNumber)
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
