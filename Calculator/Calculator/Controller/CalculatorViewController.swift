@@ -32,7 +32,7 @@ class CalculatorViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetCalcurator()
+        resetCalculator()
     }
 }
 
@@ -105,7 +105,7 @@ extension CalculatorViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        resetCalcurator()
+        resetCalculator()
         hasCalculated = false
     }
     
@@ -135,7 +135,7 @@ extension CalculatorViewController {
         addCurrentFormulaStack()
     }
     
-    func resetCalcurator() {
+    func resetCalculator() {
         rawOperand = ""
         operandLabel.text = "0"
         operatorLabel.text = ""
