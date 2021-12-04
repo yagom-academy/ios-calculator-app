@@ -45,7 +45,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tappedResultButton(_ button: UIButton) {
+    @IBAction private func tappedResultButton(_ button: UIButton) {
         var operandLabelText = unwrapLabelText(of: operandLabel)
         let operatorLabelText = unwrapLabelText(of: operatorLabel)
         guard operatorLabelText.isNotEmpty else { return }
@@ -59,7 +59,7 @@ class CalculatorViewController: UIViewController {
         resetCalculatorItems()
     }
     
-    @IBAction func tappedOperandButton(_ button: UIButton) {
+    @IBAction private func tappedOperandButton(_ button: UIButton) {
         var operandLabelText = unwrapLabelText(of: operandLabel)
         let buttonTitle = unwrapButtonTitle(of: button)
         
@@ -70,7 +70,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
-    @IBAction func tappedOperatorButton(_ button: UIButton) {
+    @IBAction private func tappedOperatorButton(_ button: UIButton) {
         var operandLabelText = unwrapLabelText(of: operandLabel)
         let operatorLabelText = unwrapLabelText(of: operatorLabel)
         guard operatorLabelText.isEmpty || operandLabelText != String.zero else {
@@ -83,7 +83,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = button.currentTitle
     }
     
-    @IBAction func tappedZeroButton(_ button: UIButton) {
+    @IBAction private func tappedZeroButton(_ button: UIButton) {
         let operandLabelText = unwrapLabelText(of: operandLabel)
         let buttonTitle = unwrapButtonTitle(of: button)
         guard operandLabelText != String.zero else { return }
@@ -91,7 +91,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
-    @IBAction func tappedDecimalPointButton(_ button: UIButton) {
+    @IBAction private func tappedDecimalPointButton(_ button: UIButton) {
         let operandLabelText = unwrapLabelText(of: operandLabel)
         let buttonTitle = unwrapButtonTitle(of: button)
         guard operandLabelText.notContains(String.decimalPoint) else { return }
@@ -99,7 +99,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "\(operandLabelText)\(buttonTitle)"
     }
     
-    @IBAction func tappedChangeSignButton(_ button: UIButton) {
+    @IBAction private func tappedChangeSignButton(_ button: UIButton) {
         var operandLabelText = unwrapLabelText(of: operandLabel)
         guard operandLabelText != String.zero else { return }
         guard operandLabelText.hasPrefix(String.negativeSign) else {
@@ -111,18 +111,18 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = operandLabelText
     }
     
-    @IBAction func tappedAllClearButton(_ button: UIButton) {
+    @IBAction private func tappedAllClearButton(_ button: UIButton) {
         resetCalculatorItems()
         resetOperandLabel()
         resetOperatorLabel()
         clearAllStackViewLabel()
     }
     
-    @IBAction func tappedClearEntryButton(_ button: UIButton) {
+    @IBAction private func tappedClearEntryButton(_ button: UIButton) {
         resetOperandLabel()
     }
     
-    @IBAction func occurHapticFeedback() {
+    @IBAction private func occurHapticFeedback() {
         CalculatorSetting.occurHapticFeedback()
     }
     
