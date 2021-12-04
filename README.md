@@ -115,14 +115,14 @@ enum CalculatorSetting {
 <p align="center"><img src="https://user-images.githubusercontent.com/71127966/143768821-7731fa0b-af8a-48e0-b9cd-4e583e24d82f.png" width="60%"></p>
 
 ```swift
-@IBAction func tappedOperandButton(_ button: UIButton) {
-    guard var operandLabelText = operandLabel.text,
-          let buttonTitle = button.currentTitle else { return }
-        
+@IBAction private func tappedOperandButton(_ button: UIButton) {
+    var operandLabelText = unwrapLabelText(of: operandLabel)
+    let buttonTitle = unwrapButtonTitle(of: button)
+    
     if operandLabelText == String.zero {
         operandLabelText = String.empty
     }
-        
+    
     operandLabel.text = "\(operandLabelText)\(buttonTitle)"
 }
 ```
