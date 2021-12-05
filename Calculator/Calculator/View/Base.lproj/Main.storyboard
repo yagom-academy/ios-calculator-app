@@ -63,7 +63,6 @@
                                     <constraint firstItem="XRe-QE-UJf" firstAttribute="bottom" secondItem="K6N-nC-kaV" secondAttribute="bottom" id="dlN-3y-jhh"/>
                                     <constraint firstItem="XRe-QE-UJf" firstAttribute="top" secondItem="K6N-nC-kaV" secondAttribute="top" id="hlo-zV-yFo"/>
                                 </constraints>
-                                <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="350" maxY="0.0"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="K6N-nC-kaV"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="gA2-7M-FxF"/>
                             </scrollView>
