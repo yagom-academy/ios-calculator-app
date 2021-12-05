@@ -119,20 +119,3 @@ struct CalculatorManager {
         return calculationResult
     }
 }
-
-// MARK: - NumberFormatter
-extension CalculatorManager {
-    class Formatter: NumberFormatter {
-        override init() {
-            super.init()
-            self.numberStyle = .decimal
-            self.usesSignificantDigits = true
-            self.maximumSignificantDigits = 20
-            self.roundingMode = .halfUp
-        }
-        
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-        }
-    }
-}
