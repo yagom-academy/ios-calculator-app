@@ -23,7 +23,7 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Private Methods
     private func resetToInitialState() {
-        calculatorManager.initialize()
+        calculatorManager.reset()
         operatorLabel.text = calculatorManager.currentOperator
         
         resetCurrentOperand()
@@ -34,7 +34,7 @@ class CalculatorViewController: UIViewController {
     }
 
     private func resetCurrentOperand() {
-        calculatorManager.initializeCurrentOperand()
+        calculatorManager.resetCurrentOperand()
         operandLabel.text = calculatorManager.currentOperand
     }
     
@@ -167,7 +167,7 @@ extension CalculatorViewController {
         
         if calculatorManager.isCalculated {
             resetCurrentOperand()
-            calculatorManager.initializeIsCalculated()
+            calculatorManager.resetIsCalculated()
         }
         
         guard let `operator` = sender.titleLabel?.text else {
