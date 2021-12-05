@@ -111,7 +111,7 @@ struct CalculatorManager {
         expression.append(`operator`)
     }
     
-    mutating func doCalculate() throws -> Double {
+    mutating func calculate() throws -> Double {
         isCalculated = true
         let formula = ExpressionParser.parse(from: expression)
         

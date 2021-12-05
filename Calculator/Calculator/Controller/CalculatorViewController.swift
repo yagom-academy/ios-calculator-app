@@ -203,7 +203,7 @@ extension CalculatorViewController {
         addLastCalculationHistory()
         
         do {
-            let calculationResult = try calculatorManager.doCalculate()
+            let calculationResult = try calculatorManager.calculate()
             guard let formattedCalculationResult = calculatorManager.addCommaOnEveryThreeDigits(to: calculationResult.description) else {
                 return
             }
