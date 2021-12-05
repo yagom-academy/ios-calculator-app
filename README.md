@@ -1,156 +1,110 @@
-# 📱 계산기 프로젝트
+# 📱 계산기 프로젝트 (팀)
 
-- 구현 기간 : 2021.11.08 ~ 19 (2 weeks)
-- 개인 프로젝트
+- 구현 기간 : 2021.11.22 ~ 26 (1 weeks)
+- 팀 프로젝트 (코드 병합 및 리팩터링)
 
-|STEP 1|STEP 2|STEP 3|
-|:---:|:---:|:---:|
-|✅|✅||
+|STEP 1|STEP 2|
+|:---:|:---:|
+|✅|✅|
 
 ## 목차 
 - [Step 1](#step-1)
-  - [UML](#1-uml) 
-  - [고민된 점 및 해결 방법](#2-고민된-점-및-해결-방법)
+  - [고민된 점 및 해결 방법 1](#고민된-점-및-해결-방법-1)
 - [Step 2](#step-2)
-  - [UML 분석](#1-uml-분석) 
-  - [고민된 점 및 해결 방법](#2-고민된-점-및-해결-방법)
-- [Step 3](#step-3)
-  - [고민된 점 및 해결 방법](#1-고민된-점-및-해결-방법) 	
+  - [고민된 점 및 해결 방법 2](#고민된-점-및-해결-방법-2)
 - [학습 키워드](#학습-키워드)
 
 
 ## Step 1 
 
-구현 기간: 2021.11.08 ~ 09
+구현 기간: 2021.11.22 ~ 24
 
 
+## 고민된 점 및 해결 방법 1
 
-### 1. UML
-![CalculatorUML](https://user-images.githubusercontent.com/45652743/141072217-badda911-4d21-476f-bab8-a91dcab94259.png)
+### Model
 
-### 2. 고민된 점 및 해결 방법 
+> 1. linked list
 
-> 1. 타입 명시에 관한 부분 
+큐 타입구현을 위해서 배열보다 linked list가 삽입, 삭제에 효율적이라 판단해 linked list를 선택했습니다.
 
-`LinkedList`나 `CalculatorItemQueue`를 구현할 때에 특정한 타입을 선택해서 적어줘야 할까에 대한 고민을 해봤습니다. 현재는 계산기 프로젝트이기 때문에 유효한 타입으로는 `Double`(or `Float`)이나 `String`정도가 들어올 수 있다고 생각했습니다. 이에 특정한 타입을 정해두고 `LinkedList`나 `CalculatorItemQueue`를 구현하는 것이 아니라 generics를 활용하여 확장성있는 타입을 구현하였습니다. 또한 generics 사용시 `T`가 아닌 더 명확한 의미를 주고자 `Element`라는 키워드를 활용하였습니다
+> 2. CalculatorItemQueue 이니셜라이저 추가
 
-
-> 2. `Array` vs `LinkedList`
-
-Queue를 구현하기 위해 어떠한 자료구조를 써야할지 고민을 해봤습니다. Array를 기반으로 queue를 구현한다면 별도의 추가 코드 없이 구현할 수 있겠지만, LinkedList의 이점이 명확하게 드러나는 것 같아 LinkedList 자료구조를 선택했습니다. 
-
-|자료 구조|Array|LinkedList|
-|---|---|---|
-|장점|1. 인덱싱(검색)이 빠르다(`O(1)`)|1. 데이터 추가 및 삭제가 빠르다 <br> 2. 데이터 추가/삭제시 메모리 재배치가 필요없기에 오버헤드가 낮다  |
-|단점|1. 메모리의 위치가 연속적이고 고정적이기에 오버헤드가 높다 <br> 2. 데이터 추가/삭제가 느리다 |1. 인덱싱(검색)이 느리다(`O(n)`) |
-
-계산기 프로젝트에서는 값의 검색보다는 추가/삭제가 더 빈번하게 발생할 것이라 생각하여 `LinkedList` 타입을 선택하였고 그 중에서 `계산은 우선순위 없이 순서대로 된다`라는 부분에 착안하여 `Singly Linked List`를 구현한 후 이를 활용하여 Queue를 구현했습니다. 
-
-> 3. TDD에 대하여 
-
-TDD 기반으로 프로젝트를 진행해보고자 테스트 코드를 우선적으로 작성하였습니다. 테스트 코드를 짤 때 미세하게 놓친 부분들이 실제 프로덕션 코드를 구현할 때 생각이 나기도 했고 이를 수정해가며 테스트를 통과할 수 있는 코드를 작성해봤습니다. 테스트 실행 이후 code coverage를 살펴보며 커버되지 않는 부분이 있는지 스스로 피드백하며 테스트를 진행해봤습니다. 
-
-
-## Step 2
-
-구현 기간: 2021.11.10 ~ 12
-
-### 1. UML 분석 
-
-- `ExpressionPaser`
-	- 연산식에서 피연산자와 연산자를 분리하는 역할과 책임을 갖는 타입이라고 생각했습니다. 
-	- `parse`: 연산식에서 피연산자/연산자를 분리하고 이를 활용하여 `Formula` 인스턴스를 만들어 반환
-	- `componentsByOperators`: 연산자를 제외한 연산자 배열만 반환하는 기능
-- `String`
-	- `split`: 특정 구분자를 갖고 연산식을 피연산자/연산자와 분리허는 기능
-- `Operator`
-	- 연산을 담당하는 타입 
-	- 연산자 케이스와 각 케이스에 맞는 연산 로직 매칭 담당
-- `Formula`
-	- 최종 연산자/피연산자로 구성된 queue를 각각 가지고 있다.
-	- 이를 통해 result 메서드를 사용하여 최종 연산 결과를 얻어내는 역할을 한다.
-
-
-`Double`이나 `Operator`가 빈 프로토콜인 `CalculateItem`를 채택하는 이유는 `CalculatoritemQueue`가 다루는 요소가 `CalculateItem`를 채택하기 때문에 이들 또한 채택해야 요소로서 사용할 수 있을 것이라 생각했습니다. 
-
-
-### 2. 고민된 점 및 해결 방법
-
-> 1. guard 문 
+CalculatorItemQueue를 초기화할 때 요소배열을 받아 생성해주기 위해 이니셜라이저를 추가했습니다.
 
 ```swift
-while  operands.items.count  >  0  &&  operators.items.count  >  0 {
-    guard let nextOperand = operands.dequeue() else {
-        throw QueueError.queueIsEmpty
+init(_ items: [Element] = []) {
+    for item in items {
+        self.enqueue(item)
     }
-    ...
 }
-```
-이렇게 사전에 조건을 달아줌에 따라 요소가 있는 것을 확인해주는 역할을 하지만, 최대한 안정성을 추구하고자 내부에서 dequeue할 때 강제 언래핑이 아닌 옵셔널 바인딩을 사용했습니다. 
+```    
+
+> 3. Operator내 타입 프로퍼티 추가
+
+Operator의 모든 케이스에 대한 배열의 정보를 가지는 타입 프로퍼티(marks)를 추가했습니다.
+parse나 ViewController에서 Operator의 case배열을 필요로하는 곳이 많아 타입 프로퍼티로 제공해주도록 했습니다.
+
+> 4. Decimal
+
+부동소수점으로 인한 부정확한 연산 문제를 해결하기 위해 Decimal타입을 활용하여 연산을 했습니다.
+
+> 5. 0으로 나눌때 에러를 던지는 로직
+
+0으로 나눌 때 `Double.nan`을 반환할 지, 에러를 반환할 지 고민했습니다.
+프로젝트 요구사항에서 0으로 나눌 때 에러핸들링을 하라고 명시되어있어 에러를 반환하는 방식으로 구현했습니다.
+에러를 던져주는 방식이 해당 메서드를 사용할 때 예외 케이스가 있음을 인지할 수 있는 장점이 있다고 생각했습니다.
+
+> 6. componentsByOperator, parse 로직 수정
+
+`componentsByOperator()`가 operator를 기준으로 문자열을 나누는 기능이라 해석하여, Operator의 allCase를 순회하며 문자열을 분리하도록 로직을 수정했습니다.
+그에 따라 `parse()` 메서드도 로직을 수정해주었습니다.
 
 
+### View
 
-### Set 과 array
+> 1. 스택뷰의 요소를 커스텀 클래스로 구현
 
-`Operator`인지 여부를 파악하기 위해 filter하는 부분에서 `Operator`의 `allCases`를 `Array`가 아닌 `Set`으로 두었습니다. 
-그 이유는 `Set`의 `.contains` 시간 복잡도는 `O(1)`이고, `Array`의 `.contains`가 `O(n)`이어서 더 빠른 `Set`으로 구현하였습니다. 
-
-
-## Step 3
-
-구현 기간: 2021.11.15 ~ 18
+스크롤뷰 내 스택뷰에 추가될 스택뷰와 이를 구성하는 UILabel을 커스텀 클래스로 구현했습니다.
 
 
-## 1. 고민된 점 및 해결 방법
+### Controller
 
-> 1. Double은 16자리까지 표현이 가능하다는 것 
+> 1. 수식 입력 방식 변경에 따른 리팩터링
 
-처음에 20자리까지 입력된다는 조건이 있어서 숫자를 입력하던 도중 특정 자리수를 넘어서는 순간부터 일부 숫자가 0으로 변하는 현상을 목격하였습니다. 이에 확인 결과 `Double`은 16자리의 수까지만 표현이 가능하다는 것을 알고 이를 대처하기 위해 `지수 표기법`으로 표현하고자 했습니다. 
+`[String]`에서 공백으로 구분해주려 했던 방식에서 `String`내 연산자들로 구분해주는 방식으로 변경했습니다.
+별도 공백이나 구분자 없이도 주어진 연산자들로 구분을 할 수 있다는 이점이 있다고 생각했습니다.
 
-이에 1000000... 입력을 하다가 17자리가 되는 순간 `1e+16`과 같이 표현되도록 구현하였습니다. 연산 이력이 나오는 `stackView`나 연산 결과를 보여주는 곳 또한 마찬가지로 17자리를 넘어서는 경우 `지수 표기법`으로 표현해주었습니다. 
- 
-> 2. 연산 결과가 있을 때, 피연산자/연산자 버튼을 눌렀을 때 대응 
+## Step 2 
 
-우선 연산(`=`) 이후 연산자와 피연산자 케이스를 나누어 고민을 해봤습니다. 
+구현 기간: 2021.11.24 ~ 26
 
-- 피연산자 버튼 터치 시
-	- 연산 결과를 지우고 새로운 식으로 시작
-- 연산자 버튼 터치 시
-	- 연산 결과가 유효한 경우 기존 식에서 이어서 연산식 추가
-	- 연산 결과가 `NaN`인 경우 연산자 버튼이 작동하지 않도록 구현
+## 고민된 점 및 해결 방법 2
 
-> 3. 부동소수점 문제 
+### Model
 
-실제 연산을 테스트 할 때 `1.04 - 0.42`나 `10.0 / 3.0`과 같은 식에서 예상한 값과 다른 결과를 반환하는 것을 확인했습니다. 이에 문제는 부동소수점이라는 것 또한 확인하였고 이를 해결하기 위해 `Double`로만 연산하는 것이 아니라 `Decimal` 타입을 활용하여 연산하도록 구현하였습니다. 
+> 1. LinkedList tail 구현
 
-> 4. ScrollView AutoScroll
+기존 LinkedList appendNode 메서드의 시간 복잡도가 `O(n)`이라는 것을 확인하고, LinkedList의 끝 노드를 항상 가지고 있는 tail 프로퍼티를 만들어주어 이를 해결하고자 했습니다. head만 있었을 때는 노드의 개수만큼 끝까지 이동해야했으나, tail을 참조하여 바로 다음 노드에 새로운 노드를 할당하는 방식으로 리팩터링을 진행했습니다.
 
-연산 이력이 `stackView`에 계속 쌓이게 되면서 어느 순간 `stackView`의 높이가 `scrollView` 의 프레임 높이 보다 커지는 순간이 올 때가 있습니다. 이 때 요구되었던 것 처럼 자동적으로 `scrollView`의 최하단을 보여줄 수 있도록 구현하였습니다. 이 과정에서 `main run loop`에 대해 학습해보게 되었습니다. 사용자의 인터랙션을 처리하고 다시 `main run loop`로 돌아가는 시점을 `update cycle` 라고 하는데, 이 때 `view`들의 값이 변한다고 하여 애니메이션도 이 시점에 동작하겠구나 생각했습니다. 
+### View
 
-이에 `layoutSubViews`를 예약하는 `setNeedsLayout` 과 `layoutIfNeeded`에 대해서 알게 되었습니다. 
+> 2. `required init(coder: )` 내 메서드
 
-- `setNeedsLayout`
-	- `layoutSubViews`를 예약하여, `update cycle`에서 실행되도록 한다. 
-	- view의 애니메이션 등이 즉각 반영되지 않는다. 
-- `layoutIfNeeded`
-	- `layoutSubViews`를 예약하는 행위는 동일하나, `update cycle`이 아닌 `layoutIfNeeded`이 불린 시점에 즉각 업데이트 한다. 
-	- 애니메이션에 적합하다. 
+기존에 `required init(coder: )`내에 기본적으로 제공해주는 fatalError를 사용했었으나, 이전에 주셨던 코멘트에 따라 앱이 최대한 종료되지 않는 쪽으로 수정하고자 `super.init(coder: )`로 대체하였습니다.
 
-위와 같은 내용에 기반하여 view의 변화가 즉각적인 반영이 필요하기에 `layoutIfNeeded`
-를 사용했습니다!
+### ViewController
 
+> 3. CalculatorManager 생성
+
+기존 CalculatorViewController가 가지고 있던 UI와 관련이 없는 로직을 CalculatorManager에게 역할을 넘겨주도록 리팩터링했습니다.
+이에 최대한 핵심 로직은 CalculatorManager가 가지고 있게 만들어줌으로써 조금이나마 CalculatorViewController의 역할을 덜어줄 수 있었습니다.
 
 ---
 
 # 학습 키워드 
 
-- UML
-- LinkedList
-- TDD
-- 부동소수점
-- NumberFormatter
-- Decimal, NSDecimalNumber
-- ScrollView 
-- StackView
-- Custom Class
-- layoutIfNeeded, setNeedsLayout
+- 공통된 UML 기반의 코드를 합치는 과정
+- 서로의 코드를 기반으로 리팩터링하는 과정
+- ViewController의 역할 대체 
+- required init
