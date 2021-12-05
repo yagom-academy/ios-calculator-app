@@ -172,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
-				6329A66C274E240D00E6EE60 /* CalculatorManager.swift */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 			);
@@ -182,6 +181,7 @@
 		C9F7BCE9273A1F070076ED33 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6329A66C274E240D00E6EE60 /* CalculatorManager.swift */,
 				C9F7BCEA273A1F1E0076ED33 /* LinkedList.swift */,
 				C9F7BCF4273A48650076ED33 /* CalculateItem.swift */,
 				C9F7BCF1273A44480076ED33 /* CalculatorItemQueue.swift */,
