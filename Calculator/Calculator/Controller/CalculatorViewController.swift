@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        guard let currentOperandDouble = calculatorManager.currentOperandDouble else {
+        guard let currentOperandDouble = Double(calculatorManager.currentOperand) else {
             return
         }
         
@@ -111,7 +111,7 @@ extension CalculatorViewController {
                  
         calculatorManager.fetchOperand(with: operand)
         
-        guard let currentOperandDouble = calculatorManager.currentOperandDouble else {
+        guard let currentOperandDouble = Double(calculatorManager.currentOperand) else {
             return
         }
         
@@ -147,7 +147,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpChangePlusMinusSign(_ sender: UIButton) {
-        guard let currentOperandDouble = calculatorManager.currentOperandDouble, !currentOperandDouble.isZero else {
+        guard let currentOperandDouble = Double(calculatorManager.currentOperand), !currentOperandDouble.isZero else {
             return
         }
         
@@ -174,7 +174,7 @@ extension CalculatorViewController {
             return
         }
     
-        guard let currentOperandDouble = calculatorManager.currentOperandDouble, !currentOperandDouble.isZero else {
+        guard let currentOperandDouble = Double(calculatorManager.currentOperand), !currentOperandDouble.isZero else {
             changeOperator(with: `operator`)
             return
         }

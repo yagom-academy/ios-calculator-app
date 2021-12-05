@@ -18,10 +18,6 @@ struct CalculatorManager {
         return currentOperand.contains(".")
     }
     
-    var currentOperandDouble: Double? {
-        return Double(currentOperand)
-    }
-    
     private let maximumDigitsOfDoubleExpression = 16
     private let limitedDigitsOfExpression = 20
     
