@@ -23,9 +23,9 @@
 - 숫자 0 으로 나누는 경우, `NaN`이 출력되고, NaN 에는 어떤 연산을 적용해도 다시 NaN 이 출력됩니다.
 
 - 누적된 연산이 화면 길이를 넘어가면, 새로운 연산이 추가될 때마다 `화면이 스크롤의 최하단으로 이동`합니다.
-동시에 `스크롤 인디케이터`가 반짝이며 사용자에게 스크롤의 존재를 알립니다.
-
-- 사용자는 터치로 `스크롤` 기능을 사용할 수 있으며, 누적된 연산 기록을 확인할 수 있습니다.
+  - 동시에 `스크롤 인디케이터`가 반짝이며 사용자에게 스크롤의 존재를 알립니다.
+  - 사용자는 터치로 `스크롤` 기능을 사용할 수 있으며, 누적된 연산 기록을 확인할 수 있습니다.
+  - `스크롤 인디케이터`는 아이폰 기기가 바뀌더라도 항상 UIScrollView 왼쪽 edge 에서 3pt 떨어진 곳에 위치합니다.
 
 - `[CE] 버튼`을 누르면 입력창의 숫자가 0 으로 초기화됩니다.
 
@@ -129,11 +129,24 @@ enum CalculatorSetting {
 
 <br>
 
-### ✅ Scroll Indicator 의 가시성을 높이고 숫자를 가리지 않도록 attributes 변경
+### ✅ Scroll Indicator 의 가시성을 높이고 숫자를 가리지 않도록 위치 변경
 
 - 스토리보드에서 ScrollView 의 `indicatorStyle` 을 `white`로 변경하여 어두운 배경에서 눈에 더 잘 띄는 흰색으로 변경했습니다.
 
-- 스토리보드에서 `scrollIndicatorInsets` 프로퍼티에 Right 350pt 부여해서 Scroll Indicator 가 숫자를 가리지 않도록 화면의 왼쪽으로 이동시켰습니다.
+- viewController 의 생명주기 메서드 중 `viewDidAppear()` 메서드 내부에 `스크롤 인디케이터` 위치 변경 메서드를 구현하여 다양한 아이폰 기기에 대응하도록 했습니다.
+
+- 📝 [구체적인 문제 해결 과정](https://github.com/yagom-academy/ios-calculator-app/pull/142#issuecomment-986193526)
+
+```swift
+override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    let scrollViewWidth = calculatorItemsScrollView.bounds.width
+    calculatorItemsScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: .zero,
+                                                                           left: .zero,
+                                                                           bottom: .zero,
+                                                                           right: scrollViewWidth - 9)
+}
+```
 
 <p align="center"><img width="60%" alt="Scroll Indicator 더 잘 보이게 변경" src="https://user-images.githubusercontent.com/71127966/143805516-4204c52e-89f4-42e0-ba3f-bf1b6a310ea4.png"></p>
 
