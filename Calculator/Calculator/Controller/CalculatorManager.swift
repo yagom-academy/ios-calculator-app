@@ -28,18 +28,18 @@ struct CalculatorManager {
     let formatter = Formatter()
     
     // MARK: - Methods
-    mutating func initializeCurrentOperand() {
+    mutating func resetCurrentOperand() {
         currentOperand = "0"
     }
     
-    mutating func initializeIsCalculated() {
+    mutating func resetIsCalculated() {
         isCalculated = false
     }
     
-    mutating func initialize() {
+    mutating func reset() {
         currentOperator = ""
         expression = ""
-        initializeIsCalculated()
+        resetIsCalculated()
     }
     
     mutating func fetchOperand(with operand: String) {
