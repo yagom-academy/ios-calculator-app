@@ -97,7 +97,7 @@ extension Calculator {
 
         var formula = ExpressionParser.parse(from: inputString)
         let result = formula.result()
-        currentOperand = DecimalNumberFormatter.shared.string(for: result) ?? CalculatorSymbol.Error
+        currentOperand = DecimalNumberFormatter.string(for: result) ?? CalculatorSymbol.Error
     }
 }
 
@@ -120,7 +120,7 @@ extension Calculator {
         if hasDot == false {
             let numberLabelText = currentText.removedComma()
             let number = Double(numberLabelText)
-            currentOperand = DecimalNumberFormatter.shared.string(for: number) ?? CalculatorSymbol.Zero
+            currentOperand = DecimalNumberFormatter.string(for: number) ?? CalculatorSymbol.Zero
         } else {
             currentOperand = currentText
         }

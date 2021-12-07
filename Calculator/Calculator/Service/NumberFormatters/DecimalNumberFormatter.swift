@@ -1,13 +1,13 @@
 import Foundation
 
-class DecimalNumberFormatter {
-    static let shared: NumberFormatter = {
-        var instance = NumberFormatter()
+enum DecimalNumberFormatter {
+    static func string(for obj: Any?) -> String? {
+        let formatter = NumberFormatter()
         
-        instance.roundingMode = .ceiling
-        instance.numberStyle = .decimal
-        instance.maximumFractionDigits = 20
-        
-        return instance
-    }()
+        formatter.roundingMode = .ceiling
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 20
+                
+        return formatter.string(for: obj)
+    }
 }
