@@ -108,15 +108,22 @@ extension Calculator {
         
         guard currentText != CalculatorSymbol.Zero ||
                 text != CalculatorSymbol.DoubleZero else {
-                    return
-                }
+            return
+        }
         
+        update(&currentText, with: text)
+        updateOperandIfHasDot(with: currentText)
+    }
+    
+    private func update(_ currentText: inout String, with text: String) {
         if currentText == CalculatorSymbol.Zero {
             currentText = text
         } else {
             currentText += text
         }
-        
+    }
+    
+    private func updateOperandIfHasDot(with currentText: String) {
         if hasDot == false {
             let numberLabelText = currentText.removedComma()
             let number = Double(numberLabelText)
