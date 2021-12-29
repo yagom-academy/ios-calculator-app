@@ -114,7 +114,8 @@
 - 소수점 자리는 최대 20자리까지 표시하고, 숫자는 1000 단위 마다 comma(,)를 표시한다.
 
 ### 계산기 프로그램 실행 화면
-![image](https://user-images.githubusercontent.com/70856586/142766100-4e97dd34-c4e4-49df-88ea-f98678577a38.png)
+![general_Simulator Screen Recording - iPhone 12 - 2021-11-23 at 09 20 43](https://user-images.githubusercontent.com/70856586/147676122-733cd81f-cccd-44f6-9bfc-38c00e220db0.gif)
+![연산자직후=탭 케이스 추가ExceptionHandling_Simulator Screen Recording - iPhone 12 - 2021-11-23 at 09 43 26](https://user-images.githubusercontent.com/70856586/147676090-6c498e9e-90b9-4753-bdd4-a5637069d14f.gif)
 
 ### 고려사항
 * 기능
