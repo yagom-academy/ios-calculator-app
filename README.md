@@ -18,6 +18,9 @@
    - 입력된 숫자가 0인 경우 . 버튼을 탭하면 자동으로 0.* 형태의 소수로 처리한다.
    - 0으로 나누기를 하는 경우 연산 결과로 "NaN (숫자 아님)"을 표시한다.
 
+![general_Simulator Screen Recording - iPhone 12 - 2021-11-23 at 09 20 43](https://user-images.githubusercontent.com/70856586/147676122-733cd81f-cccd-44f6-9bfc-38c00e220db0.gif)
+![연산자직후=탭 케이스 추가ExceptionHandling_Simulator Screen Recording - iPhone 12 - 2021-11-23 at 09 43 26](https://user-images.githubusercontent.com/70856586/147676090-6c498e9e-90b9-4753-bdd4-a5637069d14f.gif)
+
 ### 프로젝트 참여자
    - 팀원 : 애플사이다 @just1103 (개인 프로젝트)
    - 리뷰어 : 찌루루 @jae57
@@ -112,10 +115,6 @@
 - StackView 및 Label을 활용하여 ScrollView에 연산 내역을 표시한다.
 - 계산 내역이 길어지면, 사용자가 가장 최근의 연산 내역을 확인할 수 있도록 최하단으로 자동 Scroll 한다. 
 - 소수점 자리는 최대 20자리까지 표시하고, 숫자는 1000 단위 마다 comma(,)를 표시한다.
-
-### 계산기 프로그램 실행 화면
-![general_Simulator Screen Recording - iPhone 12 - 2021-11-23 at 09 20 43](https://user-images.githubusercontent.com/70856586/147676122-733cd81f-cccd-44f6-9bfc-38c00e220db0.gif)
-![연산자직후=탭 케이스 추가ExceptionHandling_Simulator Screen Recording - iPhone 12 - 2021-11-23 at 09 43 26](https://user-images.githubusercontent.com/70856586/147676090-6c498e9e-90b9-4753-bdd4-a5637069d14f.gif)
 
 ### 고려사항
 * 기능
