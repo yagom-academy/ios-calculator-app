@@ -37,7 +37,7 @@
 ## [STEP 1]
 
 ## UML
-![](https://user-images.githubusercontent.com/54234176/158190145-4aa99688-86c8-44a4-8eba-fd6dfee44fff.png)
+![](https://user-images.githubusercontent.com/54234176/158206284-bd69aab5-20cc-4beb-8f45-0e14fbcc4d66.png)
 
 ### 고민한 점
 1. 자료구조 결정
