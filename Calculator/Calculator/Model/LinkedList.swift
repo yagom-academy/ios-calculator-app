@@ -32,6 +32,22 @@ struct LinkedList<Element> {
         tail?.prev = newNode
     }
     
+    func removeFirst() -> Element? {
+        if isEmpty {
+            return nil
+        }
+        
+        let targetNode = head?.next
+        let targetData = targetNode?.data
+        
+        let nextNode = targetNode?.next
+        
+        head?.next = nextNode
+        nextNode?.prev = head
+        
+        return targetData
+    }
+    
     func allElement() -> [Element] {
         var elements = [Element]()
         var current = head?.next

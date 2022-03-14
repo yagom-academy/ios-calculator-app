@@ -32,6 +32,29 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, [1,2,3])
     }
     
+    func test_아무것도없는_LinkedList에서_removeFirst를_했을때_nil이_반환되는지() {
+        //given
+        //when
+        let result = sut.removeFirst()
+        
+        //then
+        XCTAssertNil(nil)
+    }
+    
+    func test_1_2_3이_들어있는_LinkedList에서_removeFirst를_했을때_2_3을_가지고있는지() {
+        //given
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        //when
+        _ = sut.removeFirst()
+        let result = sut.allElement()
+        
+        //then
+        XCTAssertEqual(result, [2,3])
+    }
+    
     func test_LinkedList에_1을_넣었을때_isEmpty가_false인지() {
         //given
         sut.append(1)
