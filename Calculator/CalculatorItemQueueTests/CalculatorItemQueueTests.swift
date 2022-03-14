@@ -21,10 +21,24 @@ class CalculatorItemQueueTests: XCTestCase {
         self.sut = nil
     }
     
-    func test_프로퍼티초기화잘됐는지() {
+    func test_init_프로퍼티초기화잘됐는지() {
         XCTAssertEqual(sut.queue, [])
         XCTAssertEqual(sut.front, -1)
         XCTAssertEqual(sut.rear, -1)
+    }
+    
+    func test_isEmpty_true나오는지() {
+        let result = sut.isEmpty()
+        XCTAssertTrue(result)
+    }
+    
+    func test_enqueue_확인() {
+        let expectation: [CalculatorItem] = [.integer(4), .operator(.devision)]
+        
+        sut.enqueue(.integer(4))
+        sut.enqueue(.operator(.devision))
+        
+        XCTAssertEqual(sut.queue, expectation)
     }
 
 }

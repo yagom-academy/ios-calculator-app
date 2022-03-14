@@ -5,7 +5,7 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-struct CalculatorItemQueue {
+final class CalculatorItemQueue {
     var queue: [CalculatorItem]
     var front: Int
     var rear: Int
@@ -14,5 +14,13 @@ struct CalculatorItemQueue {
         self.queue = queue
         self.front = front
         self.rear = rear
+    }
+    
+    func isEmpty() -> Bool {
+        return queue.isEmpty
+    }
+    
+    func enqueue(_ newValue: CalculatorItem) {
+        self.queue.append(newValue)
     }
 }
