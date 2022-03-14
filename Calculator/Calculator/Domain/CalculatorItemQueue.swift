@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element> {
   private(set) var elements: [Element] = []
   
-  func enqueue(data: Element) {
+  mutating func enqueue(data: Element) {
     self.elements.append(data)
   }
   
-  func dequeue() -> Element? {
+  mutating func dequeue() -> Element? {
     guard self.isEmpty() == false else {
       return nil
     }
@@ -25,7 +25,7 @@ final class CalculatorItemQueue<Element> {
     return self.elements.first
   }
   
-  func clear() {
+  mutating func clear() {
     self.elements.removeAll()
   }
   
