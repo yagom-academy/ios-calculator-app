@@ -14,6 +14,9 @@ enum Operator: CalculateItem {
     case add, subtract, multiply, division
 }
 
+extension Double: CalculateItem {
+}
+
 struct Queue {
     var queue: [Int: Int] = [:]
     
