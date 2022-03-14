@@ -5,7 +5,11 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-class Node<T> {
+final class Node<T>: Equatable {
+    static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
+        return lhs === rhs
+    }
+    
     let data: T
     var next: Node?
     
@@ -14,7 +18,7 @@ class Node<T> {
     }
 }
 
-class LinkedList<T> {
+final class LinkedList<T> {
     var head: Node<T>?
     
     init(head: Node<T>) {

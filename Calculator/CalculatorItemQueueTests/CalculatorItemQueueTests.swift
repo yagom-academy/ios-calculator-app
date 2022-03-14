@@ -8,12 +8,18 @@
 import XCTest
 @testable import Calculator
 
+struct MockNode {
+    static let mockInt = Node(data: CalculatorItem.integer(10))
+    static let mockOperator = Node(data: CalculatorItem.operator(.devision))
+    static let mockDouble = Node(data: CalculatorItem.double(3.5))
+}
+
 class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        self.sut = .init()
+        self.sut = CalculatorItemQueue(node: MockNode.mockInt)
     }
 
     override func tearDownWithError() throws {
@@ -21,39 +27,35 @@ class CalculatorItemQueueTests: XCTestCase {
         self.sut = nil
     }
     
-    func test_init_프로퍼티초기화잘됐는지() {
-        XCTAssertEqual(sut.queue, [])
-    }
-    
-    func test_isEmpty_true나오는지() {
-        let result = sut.isEmpty()
-        
-        XCTAssertTrue(result)
-    }
-    
     func test_enqueue_확인() {
-        let expectation: [CalculatorItem] = [.integer(4), .operator(.devision)]
+        sut.enqueue(MockNode.mockOperator)
+        sut.enqueue(MockNode.mockDouble)
         
-        sut.enqueue(.integer(4))
-        sut.enqueue(.operator(.devision))
+        let firstNode = sut.queue.head
+        let secondNode = firstNode!.next
+        let thirdNode = secondNode!.next
         
-        XCTAssertEqual(sut.queue, expectation)
-    }
-
-    func test_dequeue_4_devision있을때_4없어지는지확인() {
-        let expectation: [CalculatorItem] = [.operator(.devision)]
-        
-        sut.queue = [.integer(4), .operator(.devision)]
-        let result = sut.dequeue()
-        
-        XCTAssertEqual(result, .integer(4))
-        XCTAssertEqual(sut.queue, expectation)
+        XCTAssertEqual(firstNode, MockNode.mockInt)
+        XCTAssertEqual(secondNode, MockNode.mockOperator)
+        XCTAssertEqual(thirdNode, MockNode.mockDouble)
     }
     
-    func test_clear_queue데이터없어지는지확인() {
-        sut.queue = [.integer(4), .operator(.devision)]
+    func test_clear_Nil나오는지() {
+        let lastHead = sut.queue.head
+        
         sut.clear()
         
-        XCTAssertEqual(sut.queue, [])
+        XCTAssertEqual(lastHead, MockNode.mockInt)
+        XCTAssertNil(sut.queue.head)
+    }
+
+    func test_dequeue_확인() {
+        let result = sut.dequeue()
+        
+        let firstNode = sut.queue.head
+        
+        XCTAssertEqual(result, MockNode.mockInt.data)
+        XCTAssertEqual(firstNode, nil)
+        XCTAssertTrue(sut.isEmpty())
     }
 }

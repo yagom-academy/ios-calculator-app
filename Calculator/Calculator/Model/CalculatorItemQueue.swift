@@ -6,25 +6,25 @@
 //
 
 final class CalculatorItemQueue {
-    var queue: [CalculatorItem]
+    let queue: LinkedList<CalculatorItem>
     
-    init(queue: [CalculatorItem] = []) {
-        self.queue = queue
+    init(node: Node<CalculatorItem>) {
+        self.queue = LinkedList<CalculatorItem>.init(head: node)
     }
     
     func isEmpty() -> Bool {
-        return queue.isEmpty
+        return queue.isEmpty()
     }
     
-    func enqueue(_ newValue: CalculatorItem) {
-        self.queue.append(newValue)
+    func enqueue(_ node: Node<CalculatorItem>) {
+        self.queue.append(node: node)
     }
     
-    func dequeue() -> CalculatorItem {
+    func dequeue() -> CalculatorItem? {
         self.queue.removeFirst()
     }
     
     func clear() {
-        self.queue = []
+        self.queue.clear()
     }
 }
