@@ -85,18 +85,10 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		B0E177B127DF9AEC00620996 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		B0EE793827DF30730075DE95 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
 				B0EE793927DF30730075DE95 /* CalculatorLinkedListTests.swift */,
-				B0E177B127DF9AEC00620996 /* New Group */,
 				B0EE794527DF582D0075DE95 /* CalculatorItemQueueTests.swift */,
 			);
 			path = CalculatorTests;

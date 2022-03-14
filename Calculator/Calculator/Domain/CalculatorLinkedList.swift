@@ -25,6 +25,8 @@ final class CalculatorLinkedList<Element> {
       self.count += 1
       return
     }
+    self.rear?.next = newNode
+    self.rear = newNode
     self.count += 1
   }
 }

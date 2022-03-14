@@ -61,4 +61,35 @@ class CalculatorLinkedListTests: XCTestCase {
     XCTAssertNotNil(self.sut.rear)
     XCTAssertTrue(self.sut.front === self.sut.rear)
   }
+  
+  func test_append_count가_1일때_새로운_노드를_추가하면_rear가_front의_next와_같은_인스턴스를_참조해야한다() {
+    // given
+    self.sut.append(1.0)
+    let input = self.sut.count
+    
+    // when
+    self.sut.append(2.0)
+    
+    // then
+    XCTAssertEqual(input, 1)
+    XCTAssertNotNil(self.sut.front?.next)
+    XCTAssertNotNil(self.sut.rear)
+    XCTAssertTrue(self.sut.front?.next === self.sut.rear)
+  }
+  
+  func test_append_count가_2일때_새로운_노드를_추가하면_rear가_front의_next와_같은_인스턴스를_참조해야한다() {
+    // given
+    self.sut.append(1.0)
+    self.sut.append(1.0)
+    let input = self.sut.count
+    
+    // when
+    self.sut.append(1.0)
+    
+    // then
+    XCTAssertEqual(input, 2)
+    XCTAssertNotNil(self.sut.front?.next?.next)
+    XCTAssertNotNil(self.sut.rear)
+    XCTAssertTrue(self.sut.front?.next?.next === self.sut.rear)
+  }
 }
