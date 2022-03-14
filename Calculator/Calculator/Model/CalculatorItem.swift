@@ -24,8 +24,8 @@ enum CalculatorItem: Equatable {
             return String(number)
         case .double(let number):
             return String(number)
-        case .operator(let opr):
-            return opr.rawValue
+        case .operator(let sign):
+            return sign.rawValue
         }
     }
     
