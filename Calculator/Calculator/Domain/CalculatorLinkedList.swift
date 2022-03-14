@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CalculatorLinkedList<Element> {
+final class CalculatorLinkedList<Element: CalculateItem> {
   private(set) var front: CalculatorNode<Element>?
   private(set) var rear: CalculatorNode<Element>?
   private(set) var count = 0

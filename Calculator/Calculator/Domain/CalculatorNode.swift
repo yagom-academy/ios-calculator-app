@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CalculatorNode<Element> {
+final class CalculatorNode<Element: CalculateItem> {
   var data: Element
   var next: CalculatorNode?
   
