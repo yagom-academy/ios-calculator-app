@@ -31,7 +31,7 @@ struct Queue {
         if queue.isEmpty {
             return nil
         } else {
-            guard let value = self.queue[head] else { return nil }
+            let value = self.queue[head]
             head += 1
             return value
         }
