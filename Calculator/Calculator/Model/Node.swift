@@ -5,7 +5,7 @@
 //  Created by DuDu on 2022/03/14.
 //
 
-class Node<Element> {
+class Node<Element: CalculateItem> {
     var data: Element?
     var next: Node<Element>? = nil
     weak var prev: Node<Element>? = nil

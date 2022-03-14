@@ -5,7 +5,7 @@
 //  Created by DuDu on 2022/03/14.
 //
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var list = LinkedList<Element>()
     
     var isEmpty: Bool {

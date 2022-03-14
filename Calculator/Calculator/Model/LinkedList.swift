@@ -5,7 +5,7 @@
 //  Created by DuDu on 2022/03/14.
 //
 
-struct LinkedList<Element> {
+struct LinkedList<Element: CalculateItem> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
