@@ -36,7 +36,7 @@ class LinkedListTest: XCTestCase {
     //MARK: removeFirst 함수 테스트
     func test_아무것도없는_LinkedList에서_removeFirst를_했을때_nil이_반환되는지() {
         //given, when, then
-        XCTAssertNil(sut.removeFirst)
+        XCTAssertNil(sut.removeFirst())
     }
     
     func test_1_2_3이_들어있는_LinkedList에서_removeFirst를_했을때_반환값이_1이고_2_3을_가지고있는지() {
