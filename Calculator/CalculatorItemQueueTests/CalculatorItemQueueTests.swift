@@ -27,7 +27,7 @@ class CalculatorItemQueueTests: XCTestCase {
         self.sut = nil
     }
     
-    func test_enqueue_확인() {
+    func test_enqueue_node2개추가됐는지() {
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
         
@@ -40,7 +40,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(thirdNode, MockNode.mockDouble)
     }
     
-    func test_clear_Nil나오는지() {
+    func test_clear_head가nil인지() {
         let lastHead = sut.queue.head
         
         sut.clear()
@@ -49,7 +49,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(sut.queue.head)
     }
 
-    func test_dequeue_확인() {
+    func test_dequeue_빈queue인지() {
         let result = sut.dequeue()
         
         let firstNode = sut.queue.head
