@@ -58,4 +58,9 @@ class ModelTests: XCTestCase {
         // then
         XCTAssertEqual(result, Operator.add)
     }
+    
+    func test_queue가_비어있을때_dequeue가_nil을뱉는지() {
+        let result = sut.dequeue()
+        XCTAssertNil(result)
+    }
 }

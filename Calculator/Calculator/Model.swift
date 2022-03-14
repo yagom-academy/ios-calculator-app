@@ -27,9 +27,13 @@ struct Queue {
         tail += 1
     }
     
-    mutating func dequeue() -> CalculateItem {
-        let value = self.queue[head] ?? 0.0
-        head += 1
-        return value
+    mutating func dequeue() -> CalculateItem? {
+        if queue.isEmpty {
+            return nil
+        } else {
+            guard let value = self.queue[head] else { return nil }
+            head += 1
+            return value
+        }
     }
 }
