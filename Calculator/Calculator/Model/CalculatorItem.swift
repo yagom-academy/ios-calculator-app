@@ -10,6 +10,7 @@ enum Operator: String {
     case subtraction = "-"
     case devision = "/"
     case multiplication = "*"
+    case equalSign = "="
 }
 
 enum CalculatorItem: Equatable {
