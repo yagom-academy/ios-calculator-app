@@ -19,6 +19,7 @@ class LinkedListTest: XCTestCase {
         sut = nil
     }
     
+    //MARK: append 함수 테스트
     func test_LinkedList에_1_2_3을_넣었을때_1_2_3을_가지고있는지() {
         //given
         sut.append(1)
@@ -32,29 +33,28 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(result, [1,2,3])
     }
     
+    //MARK: removeFirst 함수 테스트
     func test_아무것도없는_LinkedList에서_removeFirst를_했을때_nil이_반환되는지() {
-        //given
-        //when
-        let result = sut.removeFirst()
-        
-        //then
-        XCTAssertNil(nil)
+        //given, when, then
+        XCTAssertNil(sut.removeFirst)
     }
     
-    func test_1_2_3이_들어있는_LinkedList에서_removeFirst를_했을때_2_3을_가지고있는지() {
+    func test_1_2_3이_들어있는_LinkedList에서_removeFirst를_했을때_반환값이_1이고_2_3을_가지고있는지() {
         //given
         sut.append(1)
         sut.append(2)
         sut.append(3)
         
         //when
-        _ = sut.removeFirst()
+        let data = sut.removeFirst()
         let result = sut.allElement()
         
         //then
+        XCTAssertEqual(data, 1)
         XCTAssertEqual(result, [2,3])
     }
     
+    //MARK: isEmpty 프로퍼티 테스트
     func test_LinkedList에_1을_넣었을때_isEmpty가_false인지() {
         //given
         sut.append(1)
@@ -67,12 +67,18 @@ class LinkedListTest: XCTestCase {
     }
     
     func test_LinkedList가_비어있을때_isEmpty가_true인지() {
+        //given, when, then
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    //MARK: - removeAll 함수 테스트
+    func test_LinkedList에_1_2를_append한후_removeAll을_했을때_isEmpty가_true인지() {
         //given
-
-        //when
-        let result = sut.isEmpty
+        sut.append(1)
+        sut.append(2)
+        sut.removeAll()
         
-        //then
-        XCTAssertTrue(result)
+        //when, then
+        XCTAssertTrue(sut.isEmpty)
     }
 }

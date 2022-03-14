@@ -48,6 +48,14 @@ struct LinkedList<Element> {
         return targetData
     }
     
+    mutating func removeAll() {
+        head = Node<Element>()
+        tail = Node<Element>()
+        
+        head?.next = tail
+        tail?.prev = head
+    }
+    
     func allElement() -> [Element] {
         var elements = [Element]()
         var current = head?.next
