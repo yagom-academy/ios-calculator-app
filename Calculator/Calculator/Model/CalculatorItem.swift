@@ -5,6 +5,10 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
+protocol CalculateItem {
+    
+}
+
 enum Operator: String {
     case addition = "+"
     case subtraction = "-"
@@ -13,7 +17,7 @@ enum Operator: String {
     case equalSign = "="
 }
 
-enum CalculatorItem: Equatable {
+enum CalculatorItem: Equatable, CalculateItem {
     case integer(Int)
     case double(Double)
     case `operator`(Operator)
