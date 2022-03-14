@@ -10,7 +10,7 @@ import Foundation
 final class CalculatorLinkedList<Element> {
   private(set) var front: CalculatorNode<Element>?
   private(set) var rear: CalculatorNode<Element>?
-  var count = 0
+  private(set) var count = 0
   
   var first: Element? {
     return self.isEmpty ? nil : self.front?.data
@@ -39,5 +39,11 @@ final class CalculatorLinkedList<Element> {
     self.front = self.front?.next
     self.count -= 1
     return data
+  }
+  
+  func removeAll() {
+    self.front = nil
+    self.rear = nil
+    self.count = 0
   }
 }

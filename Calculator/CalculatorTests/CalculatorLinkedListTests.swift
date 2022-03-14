@@ -176,4 +176,56 @@ class CalculatorLinkedListTests: XCTestCase {
     XCTAssertEqual(inputCount, 2)
     XCTAssertEqual(outputCount, 1)
   }
+  
+  func test_removeAll_호출시_count가_0을_반환해야한다() {
+    // given
+    self.sut.append(1.0)
+    self.sut.append(2.0)
+    
+    // when
+    self.sut.removeAll()
+    let output = self.sut.count
+    
+    // then
+    XCTAssertEqual(output, 0)
+  }
+  
+  func test_removeAll_호출시_isEmpty가_true을_반환해야한다() {
+    // given
+    self.sut.append(1.0)
+    self.sut.append(2.0)
+    
+    // when
+    self.sut.removeAll()
+    let output = self.sut.isEmpty
+    
+    // then
+    XCTAssertTrue(output)
+  }
+  
+  func test_removeAll_호출시_front가_nil을_반환해야한다() {
+    // given
+    self.sut.append(1.0)
+    self.sut.append(2.0)
+    
+    // when
+    self.sut.removeAll()
+    let output = self.sut.front
+    
+    // then
+    XCTAssertNil(output)
+  }
+  
+  func test_removeAll_호출시_rear가_nil을_반환해야한다() {
+    // given
+    self.sut.append(1.0)
+    self.sut.append(2.0)
+    
+    // when
+    self.sut.removeAll()
+    let output = self.sut.rear
+    
+    // then
+    XCTAssertNil(output)
+  }
 }
