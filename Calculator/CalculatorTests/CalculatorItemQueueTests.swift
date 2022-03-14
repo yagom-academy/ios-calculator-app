@@ -22,6 +22,8 @@ class CalculatorItemQueueTests: XCTestCase {
     self.sut = nil
   }
   
+  // MARK: - enqueue()
+  
   func test_enqueue_elements의_개수가_1_증가해야한다() {
     // given
     let input = sut.elements.count
@@ -59,6 +61,8 @@ class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(output, [1, 2, 3, 4])
   }
   
+  // MARK: - dequeue()
+  
   func test_dequeue_elements가_비어있을때_호출하면_nil이_반환되어야한다() {
     // given
     let input = self.sut.elements.count
@@ -94,5 +98,5 @@ class CalculatorItemQueueTests: XCTestCase {
     
     // then
     XCTAssertEqual(output, [2, 3])
-  }
+  }  
 }
