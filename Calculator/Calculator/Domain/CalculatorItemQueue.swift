@@ -20,4 +20,8 @@ final class CalculatorItemQueue<Element> {
     }
     return self.elements.removeFirst()
   }
+  
+  func peek() -> Element? {
+    return nil
+  }
 }

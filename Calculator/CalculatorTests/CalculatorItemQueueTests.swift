@@ -98,5 +98,19 @@ class CalculatorItemQueueTests: XCTestCase {
     
     // then
     XCTAssertEqual(output, [2, 3])
-  }  
+  }
+  
+  // MARK: - peek()
+  
+  func test_peek_호출시_원소가_존재하지_않으면_nil을_반환해야한다() {
+    // given
+    let input: [Int] = []
+    self.sut.elements = input
+    
+    // when
+    let output = self.sut.peek()
+    
+    // then
+    XCTAssertNil(output)
+  }
 }
