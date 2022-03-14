@@ -32,12 +32,4 @@ struct Queue {
         head += 1
         return value
     }
-    mutating func returnAllValue() -> [CalculateItem] {
-        var presentQueue: [CalculateItem] = []
-        for (_, value) in self.queue {
-            presentQueue.append(value)
-        }
-        return presentQueue
-        
-    }
 }
