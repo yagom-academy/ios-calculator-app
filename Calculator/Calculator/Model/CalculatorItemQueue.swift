@@ -27,4 +27,8 @@ final class CalculatorItemQueue {
     func dequeue() -> CalculatorItem {
         self.queue.removeFirst()
     }
+    
+    func clear() {
+        self.queue = []
+    }
 }

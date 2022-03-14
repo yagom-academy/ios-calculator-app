@@ -29,6 +29,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_isEmpty_true나오는지() {
         let result = sut.isEmpty()
+        
         XCTAssertTrue(result)
     }
     
@@ -49,5 +50,12 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, .integer(4))
         XCTAssertEqual(sut.queue, expectation)
+    }
+    
+    func test_clear_queue데이터없어지는지확인() {
+        sut.queue = [.integer(4), .operator(.devision)]
+        sut.clear()
+        
+        XCTAssertEqual(sut.queue, [])
     }
 }
