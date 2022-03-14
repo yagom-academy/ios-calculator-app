@@ -63,4 +63,17 @@ class ModelTests: XCTestCase {
         let result = sut.dequeue()
         XCTAssertNil(result)
     }
+    
+    func test_resetQueue가_queu를_잘_비우는지() {
+        _ = sut.resetQueue()
+        let result = sut.queue.isEmpty
+        XCTAssertTrue(result)
+    }
+    
+    func test_resetQueue가_head와tail을_초기화해주는지() {
+        _ = sut.resetQueue()
+        let result = sut.head == 0 && sut.tail == 0
+        XCTAssertTrue(result)
+    }
+    
 }
