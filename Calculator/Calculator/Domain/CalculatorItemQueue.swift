@@ -24,4 +24,8 @@ final class CalculatorItemQueue<Element> {
   func peek() -> Element? {
     return self.elements.first
   }
+  
+  func clear() {
+    self.elements.removeAll()
+  }
 }

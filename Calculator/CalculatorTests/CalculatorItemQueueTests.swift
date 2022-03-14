@@ -125,4 +125,19 @@ class CalculatorItemQueueTests: XCTestCase {
     // then
     XCTAssertEqual(output, 1)
   }
+  
+  // MARK: - clear()
+  
+  func test_clear_호출시_elements가_빈_배열이_되어야한다() {
+    // given
+    let input = [1, 2, 3]
+    self.sut.elements = input
+    
+    // when
+    self.sut.clear()
+    let output = self.sut.elements
+    
+    // then
+    XCTAssertEqual(output, [])
+  }
 }
