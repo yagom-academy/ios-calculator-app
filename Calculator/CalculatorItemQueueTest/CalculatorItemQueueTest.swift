@@ -24,4 +24,18 @@ class CalculatorItemQueueTest: XCTestCase {
         //given, when, then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    //MARK: - enqueue 함수 테스트
+    func test_큐에_1_2_3을_넣었을때_큐가_1_2_3을_가지고있는지() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        //when
+        let result = sut.allElement()
+        
+        //then
+        XCTAssertEqual(result, [1,2,3])
+    }
 }

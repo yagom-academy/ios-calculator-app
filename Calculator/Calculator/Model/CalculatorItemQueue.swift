@@ -11,4 +11,12 @@ struct CalculatorItemQueue<Element> {
     var isEmpty: Bool {
         list.isEmpty
     }
+    
+    func enqueue(_ data: Element) {
+        list.append(data)
+    }
+    
+    func allElement() -> [Element] {
+        list.allElement()
+    }
 }
