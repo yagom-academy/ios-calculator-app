@@ -38,4 +38,24 @@ class CalculatorItemQueueTest: XCTestCase {
         //then
         XCTAssertEqual(result, [1,2,3])
     }
+    
+    //MARK: - dequeue 함수 테스트
+    func test_큐에_1_2_3을_넣고_dequeue했을때_큐가_2_3을_가지고있는지() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        _ = sut.dequeue()
+        
+        //when
+        let result = sut.allElement()
+        
+        //then
+        XCTAssertEqual(result, [2,3])
+    }
+    
+    func test_빈큐에_dequeue했을때_nil을_반환하는지() {
+        //given, when, then
+        XCTAssertNil(sut.dequeue())
+    }
 }

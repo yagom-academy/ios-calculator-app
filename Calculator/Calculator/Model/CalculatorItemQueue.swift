@@ -16,6 +16,10 @@ struct CalculatorItemQueue<Element> {
         list.append(data)
     }
     
+    func dequeue() -> Element? {
+        list.removeFirst()
+    }
+    
     func allElement() -> [Element] {
         list.allElement()
     }
