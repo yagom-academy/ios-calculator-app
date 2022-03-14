@@ -41,4 +41,13 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.queue, expectation)
     }
 
+    func test_dequeue_4_devision있을때_4없어지는지확인() {
+        let expectation: [CalculatorItem] = [.operator(.devision)]
+        
+        sut.queue = [.integer(4), .operator(.devision)]
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, .integer(4))
+        XCTAssertEqual(sut.queue, expectation)
+    }
 }

@@ -23,4 +23,8 @@ final class CalculatorItemQueue {
     func enqueue(_ newValue: CalculatorItem) {
         self.queue.append(newValue)
     }
+    
+    func dequeue() -> CalculatorItem {
+        self.queue.removeFirst()
+    }
 }
