@@ -7,13 +7,9 @@
 
 final class CalculatorItemQueue {
     var queue: [CalculatorItem]
-    var front: Int
-    var rear: Int
     
-    init(queue: [CalculatorItem] = [], front: Int = -1, rear: Int = -1) {
+    init(queue: [CalculatorItem] = []) {
         self.queue = queue
-        self.front = front
-        self.rear = rear
     }
     
     func isEmpty() -> Bool {

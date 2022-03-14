@@ -23,8 +23,6 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_init_프로퍼티초기화잘됐는지() {
         XCTAssertEqual(sut.queue, [])
-        XCTAssertEqual(sut.front, -1)
-        XCTAssertEqual(sut.rear, -1)
     }
     
     func test_isEmpty_true나오는지() {
