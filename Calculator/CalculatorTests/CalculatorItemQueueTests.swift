@@ -70,4 +70,29 @@ class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(input, 0)
     XCTAssertNil(output)
   }
+  
+  func test_dequeue_elements_1_2_3이_들어있고_한번_호출시_맨_앞의_1이_반환되어야한다() {
+    // given
+    let input = [1, 2, 3]
+    self.sut.elements = input
+    
+    // when
+    let output = self.sut.dequeue()
+    
+    // then
+    XCTAssertEqual(output, 1)
+  }
+  
+  func test_dequeue_elements_1_2_3이_들어있고_한번_호출시_나머지가_2_3이_반환되어야한다() {
+    // given
+    let input = [1, 2, 3]
+    self.sut.elements = input
+    
+    // when
+    _ = self.sut.dequeue()
+    let output = self.sut.elements
+    
+    // then
+    XCTAssertEqual(output, [2, 3])
+  }
 }

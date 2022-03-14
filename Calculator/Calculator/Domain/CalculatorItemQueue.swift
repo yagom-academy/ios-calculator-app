@@ -15,6 +15,9 @@ final class CalculatorItemQueue<Element> {
   }
   
   func dequeue() -> Element? {
-    return nil
+    guard self.elements.isEmpty == false else {
+      return nil
+    }
+    return self.elements.removeFirst()
   }
 }
