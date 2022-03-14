@@ -7,4 +7,8 @@
 
 struct CalculatorItemQueue<Element> {
     private var list = LinkedList<Element>()
+    
+    var isEmpty: Bool {
+        list.isEmpty
+    }
 }
