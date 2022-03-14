@@ -1,6 +1,6 @@
 //
 //  CalculatorItemQueueTest.swift
-//  LinkedListTest
+//  CalculatorItemQueueTest
 //
 //  Created by DuDu on 2022/03/15.
 //
@@ -59,6 +59,7 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertNil(sut.dequeue())
     }
     
+    //MARK: - removeAll 테스트
     func test_1_2_3을_enqueue한다음_removeAll했을때_isEmpty가_true인지() {
         //given
         sut.enqueue(1)
