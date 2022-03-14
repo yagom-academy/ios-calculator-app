@@ -12,6 +12,10 @@ final class CalculatorLinkedList<Element> {
   private(set) var rear: CalculatorNode<Element>?
   var count = 0
   
+  var first: Element? {
+    return self.isEmpty ? nil : self.front?.data
+  }
+  
   var isEmpty: Bool {
     return self.count == Int.zero ? true : false
   }

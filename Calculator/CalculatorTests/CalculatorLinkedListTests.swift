@@ -92,4 +92,31 @@ class CalculatorLinkedListTests: XCTestCase {
     XCTAssertNotNil(self.sut.rear)
     XCTAssertTrue(self.sut.front?.next?.next === self.sut.rear)
   }
+  
+  // MARK: - first
+  
+  func test_first_프로퍼티를_호출할때_리스트가_비어있지_않을시_front의_data를_반환한다() {
+    // given
+    self.sut.append(1.0)
+    let input = self.sut.isEmpty
+    
+    // when
+    let data = self.sut.first
+    
+    // then
+    XCTAssertFalse(input)
+    XCTAssertEqual(data, 1.0)
+  }
+  
+  func test_first_프로퍼티를_호출할때_리스트가_비어있을시_nil을_반환한다() {
+    // given
+    let input = self.sut.isEmpty
+    
+    // when
+    let data = self.sut.first
+    
+    // then
+    XCTAssertTrue(input)
+    XCTAssertNil(data)
+  }
 }
