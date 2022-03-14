@@ -20,9 +20,11 @@ extension Double: CalculateItem {
 struct Queue {
     var queue: [Int: CalculateItem] = [:]
     var head: Int = 0
+    var tail: Int = 0
     
     mutating func enqueue(with value: CalculateItem) {
         self.queue[queue.count + 1] = value
+        tail += 1
     }
     
     mutating func dequeue() -> CalculateItem {

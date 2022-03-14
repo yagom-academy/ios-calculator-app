@@ -31,12 +31,11 @@ class ModelTests: XCTestCase {
     func test_연산자파라미터가_잘_들어가는가() {
         // given
         let operatorValue: Operator = .add
-        let expectResult: [Operator] = [.add]
         // when
         sut.enqueue(with: operatorValue)
-        guard let result = sut.returnAllValue() as? [Operator] else { return }
+        guard let result = sut.queue[sut.tail] as? Operator else { return }
         // then
-        XCTAssertEqual(result, expectResult)
+        XCTAssertEqual(result, operatorValue)
     }
     
     func test_dequeue메서드의_Double타입을_빼낼때_잘_작동하는가() {
