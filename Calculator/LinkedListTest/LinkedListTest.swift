@@ -31,4 +31,25 @@ class LinkedListTest: XCTestCase {
         //then
         XCTAssertEqual(result, [1,2,3])
     }
+    
+    func test_LinkedList에_1을_넣었을때_isEmpty가_false인지() {
+        //given
+        sut.append(1)
+
+        //when
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertFalse(result)
+    }
+    
+    func test_LinkedList가_비어있을때_isEmpty가_true인지() {
+        //given
+
+        //when
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertTrue(result)
+    }
 }

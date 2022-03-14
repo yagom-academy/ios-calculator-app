@@ -17,6 +17,10 @@ struct LinkedList<Element> {
         tail?.prev = head
     }
     
+    var isEmpty: Bool {
+        return head?.next === tail
+    }
+    
     func append(_ data: Element) {
         let newNode = Node(data: data)
         let previousNode = tail?.prev
