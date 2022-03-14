@@ -26,11 +26,11 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_enqueue_elements의_개수가_1_증가해야한다() {
     // given
-    let input = sut.elements.count
+    let input = self.sut.count()
     
     // when
     self.sut.enqueue(data: 1)
-    let output = sut.elements.count
+    let output = self.sut.count()
     
     // then
     XCTAssertEqual(output, input + 1)
@@ -65,7 +65,7 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_dequeue_elements가_비어있을때_호출하면_nil이_반환되어야한다() {
     // given
-    let input = self.sut.elements.count
+    let input = self.sut.count()
     
     // when
     let output = self.sut.dequeue()
@@ -77,8 +77,9 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_dequeue_elements_1_2_3이_들어있고_한번_호출시_맨_앞의_1이_반환되어야한다() {
     // given
-    let input = [1, 2, 3]
-    self.sut.elements = input
+    self.sut.enqueue(data: 1)
+    self.sut.enqueue(data: 2)
+    self.sut.enqueue(data: 3)
     
     // when
     let output = self.sut.dequeue()
@@ -89,8 +90,9 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_dequeue_elements_1_2_3이_들어있고_한번_호출시_나머지가_2_3이_반환되어야한다() {
     // given
-    let input = [1, 2, 3]
-    self.sut.elements = input
+    self.sut.enqueue(data: 1)
+    self.sut.enqueue(data: 2)
+    self.sut.enqueue(data: 3)
     
     // when
     _ = self.sut.dequeue()
@@ -104,20 +106,22 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_peek_호출시_원소가_존재하지_않으면_nil을_반환해야한다() {
     // given
-    let input: [Int] = []
-    self.sut.elements = input
+    self.sut.clear()
+    let input = self.sut.count()
     
     // when
     let output = self.sut.peek()
     
     // then
+    XCTAssertEqual(input, 0)
     XCTAssertNil(output)
   }
   
   func test_peek_호출시_원소가_존재하면_맨앞의_원소를_반환해야한다() {
     // given
-    let input = [1, 2, 3]
-    self.sut.elements = input
+    self.sut.enqueue(data: 1)
+    self.sut.enqueue(data: 2)
+    self.sut.enqueue(data: 3)
     
     // when
     let output = self.sut.peek()
@@ -130,8 +134,9 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_clear_호출시_elements가_빈_배열이_되어야한다() {
     // given
-    let input = [1, 2, 3]
-    self.sut.elements = input
+    self.sut.enqueue(data: 1)
+    self.sut.enqueue(data: 2)
+    self.sut.enqueue(data: 3)
     
     // when
     self.sut.clear()

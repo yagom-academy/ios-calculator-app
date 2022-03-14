@@ -8,7 +8,7 @@
 import Foundation
 
 final class CalculatorItemQueue<Element> {
-  var elements: [Element] = []
+  private(set) var elements: [Element] = []
   
   func enqueue(data: Element) {
     self.elements.append(data)
@@ -31,5 +31,9 @@ final class CalculatorItemQueue<Element> {
   
   func isEmpty() -> Bool {
     return self.elements.isEmpty
+  }
+  
+  func count() -> Int {
+    return self.elements.count
   }
 }
