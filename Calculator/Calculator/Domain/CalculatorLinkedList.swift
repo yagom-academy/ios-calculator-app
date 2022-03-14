@@ -33,4 +33,11 @@ final class CalculatorLinkedList<Element> {
     self.rear = newNode
     self.count += 1
   }
+  
+  func removeFirst() -> Element? {
+    let data = self.front?.data
+    self.front = self.front?.next
+    self.count -= 1
+    return data
+  }
 }

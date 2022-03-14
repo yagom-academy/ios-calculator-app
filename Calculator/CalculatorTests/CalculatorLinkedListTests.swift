@@ -119,4 +119,61 @@ class CalculatorLinkedListTests: XCTestCase {
     XCTAssertTrue(input)
     XCTAssertNil(data)
   }
+  
+  // MARK: - removeFirst()
+  
+  func test_removeFirst_호출시_리스트가_비어있다면_nil을_반환한다() {
+    // given
+    let input = self.sut.isEmpty
+    
+    // when
+    let output = self.sut.removeFirst()
+    
+    // then
+    XCTAssertTrue(input)
+    XCTAssertNil(output)
+  }
+  
+  func test_removeFirst_호출시_리스트가_비어있지_않다면_노드의_data를_반환한다() {
+    // given
+    self.sut.append(1.0)
+    let input = self.sut.isEmpty
+    
+    // when
+    let output = self.sut.removeFirst()
+    
+    // then
+    XCTAssertFalse(input)
+    XCTAssertEqual(output, 1.0)
+  }
+  
+  func test_removeFirst_호출시_기존_리스트의_개수가_1일_경우_count는_0을_반환하고_isEmpty는_true이다() {
+    // given
+    self.sut.append(1.0)
+    let inputCount = self.sut.count
+    
+    // when
+    _ = self.sut.removeFirst()
+    let outputCount = self.sut.count
+    let output = self.sut.isEmpty
+    
+    // then
+    XCTAssertEqual(inputCount, 1)
+    XCTAssertEqual(outputCount, 0)
+    XCTAssertTrue(output)
+  }
+  
+  func test_removeFirst_호출시_기존_리스트의_개수가_2일_경우_count는_1을_반환한다() {
+    self.sut.append(1.0)
+    self.sut.append(2.0)
+    let inputCount = self.sut.count
+    
+    // when
+    _ = self.sut.removeFirst()
+    let outputCount = self.sut.count
+    
+    // then
+    XCTAssertEqual(inputCount, 2)
+    XCTAssertEqual(outputCount, 1)
+  }
 }
