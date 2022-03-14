@@ -18,13 +18,13 @@ extension Double: CalculateItem {
 }
 
 struct Queue {
-    var queue: [Int: Int] = [:]
+    var queue: [Int: CalculateItem] = [:]
     
-    mutating func enqueue(with value: Int) {
+    mutating func enqueue(with value: Double) {
         self.queue[queue.count + 1] = value
     }
-    mutating func returnAllValue() -> [Int] {
-        var presentQueue: [Int] = []
+    mutating func returnAllValue() -> [CalculateItem] {
+        var presentQueue: [CalculateItem] = []
         for (_, value) in self.queue {
             presentQueue.append(value)
         }
