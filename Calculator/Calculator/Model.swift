@@ -10,6 +10,10 @@ import Foundation
 protocol CalculateItem {
 }
 
+enum Operator: CalculateItem {
+    case add, subtract, multiply, division
+}
+
 struct Queue {
     var queue: [Int: Int] = [:]
     
