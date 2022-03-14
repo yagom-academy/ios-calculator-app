@@ -5,16 +5,29 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-struct Oprator {
-    static let addition = "+"
-    static let subtraction = "-"
-    static let devision = "/"
-    static let multiplication = "*"
+enum Oprator: String {
+    case addition = "+"
+    case subtraction = "-"
+    case devision = "/"
+    case multiplication = "*"
 }
 
-enum CalculatorItem {
+enum CalculatorItem: Equatable {
+    static func == (lhs: CalculatorItem, rhs: CalculatorItem) -> Bool {
+        return lhs.value == rhs.value
+    }
+    
     case numbers(Double)
     case `operator`(Oprator)
+    
+    var value: String? {
+        switch self {
+        case .numbers(let num):
+            return String(num)
+        case .operator(let opr):
+            return opr.rawValue
+        }
+    }
 }
 
 struct CalculatorItemQueue {

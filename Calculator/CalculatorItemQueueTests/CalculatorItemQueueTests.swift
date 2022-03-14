@@ -20,5 +20,11 @@ class CalculatorItemQueueTests: XCTestCase {
         try super.tearDownWithError()
         self.sut = nil
     }
+    
+    func test_프로퍼티초기화잘됐는지() {
+        XCTAssertEqual(sut.queue, [])
+        XCTAssertEqual(sut.front, -1)
+        XCTAssertEqual(sut.rear, -1)
+    }
 
 }
