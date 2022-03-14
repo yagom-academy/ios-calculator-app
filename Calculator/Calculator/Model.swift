@@ -23,7 +23,7 @@ struct Queue {
     var tail: Int = 0
     
     mutating func enqueue(with value: CalculateItem) {
-        self.queue[queue.count + 1] = value
+        self.queue[tail] = value
         tail += 1
     }
     
