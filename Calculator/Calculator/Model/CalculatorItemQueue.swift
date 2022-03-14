@@ -20,6 +20,10 @@ struct CalculatorItemQueue<Element> {
         list.removeFirst()
     }
     
+    mutating func removeAll() {
+        list.removeAll()
+    }
+    
     func allElement() -> [Element] {
         list.allElement()
     }

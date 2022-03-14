@@ -58,4 +58,17 @@ class CalculatorItemQueueTest: XCTestCase {
         //given, when, then
         XCTAssertNil(sut.dequeue())
     }
+    
+    func test_1_2_3을_enqueue한다음_removeAll했을때_isEmpty가_true인지() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        //when
+        sut.removeAll()
+        
+        //then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
