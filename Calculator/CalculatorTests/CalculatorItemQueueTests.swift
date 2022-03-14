@@ -59,4 +59,15 @@ class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(output, [1, 2, 3, 4])
   }
   
+  func test_dequeue_elements가_비어있을때_호출하면_nil이_반환되어야한다() {
+    // given
+    let input = self.sut.elements.count
+    
+    // when
+    let output = self.sut.dequeue()
+    
+    // then
+    XCTAssertEqual(input, 0)
+    XCTAssertNil(output)
+  }
 }

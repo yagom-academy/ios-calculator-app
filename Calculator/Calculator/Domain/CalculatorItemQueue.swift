@@ -13,4 +13,8 @@ final class CalculatorItemQueue<Element> {
   func enqueue(data: Element) {
     self.elements.append(data)
   }
+  
+  func dequeue() -> Element? {
+    return nil
+  }
 }
