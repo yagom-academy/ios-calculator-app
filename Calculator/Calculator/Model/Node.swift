@@ -9,7 +9,7 @@ class Node<Element> {
     var data: Element?
     var next: Node<Element>? = nil
     
-    init(data: Element?) {
+    init(data: Element? = nil) {
         self.data = data
     }
 }
