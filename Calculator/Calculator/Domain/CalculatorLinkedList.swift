@@ -46,4 +46,14 @@ final class CalculatorLinkedList<Element: CalculateItem> {
     self.rear = nil
     self.count = 0
   }
+
+  func allElements() -> [Element?] {
+    var result: [Element?] = []
+    var curr = self.front
+    while curr != nil {
+      result.append(curr?.data)
+      curr = curr?.next
+    }
+    return result
+  }
 }

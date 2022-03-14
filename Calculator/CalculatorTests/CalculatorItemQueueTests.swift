@@ -26,11 +26,11 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_enqueue_elements의_개수가_1_증가해야한다() {
     // given
-    let input = self.sut.count()
+    let input = self.sut.count
     
     // when
     self.sut.enqueue(data: 1.0)
-    let output = self.sut.count()
+    let output = self.sut.count
     
     // then
     XCTAssertEqual(output, input + 1)
@@ -65,7 +65,7 @@ class CalculatorItemQueueTests: XCTestCase {
   
   func test_dequeue_elements가_비어있을때_호출하면_nil이_반환되어야한다() {
     // given
-    let input = self.sut.count()
+    let input = self.sut.count
     
     // when
     let output = self.sut.dequeue()
@@ -107,7 +107,7 @@ class CalculatorItemQueueTests: XCTestCase {
   func test_peek_호출시_원소가_존재하지_않으면_nil을_반환해야한다() {
     // given
     self.sut.clear()
-    let input = self.sut.count()
+    let input = self.sut.count
     
     // when
     let output = self.sut.peek()
