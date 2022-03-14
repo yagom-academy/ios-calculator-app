@@ -21,12 +21,11 @@ class ModelTests: XCTestCase {
     func test_숫자파라미터가_잘_들어가는가() {
         // given
         let numberValue: Double = 10
-        let expectResult: [Double] = [10]
         // when
         sut.enqueue(with: numberValue)
-        guard let result = sut.returnAllValue() as? [Double] else { return }
+        guard let result = sut.queue[sut.head] as? Double else { return }
         // then
-        XCTAssertEqual(result, expectResult)
+        XCTAssertEqual(result, numberValue)
     }
     
     func test_연산자파라미터가_잘_들어가는가() {
