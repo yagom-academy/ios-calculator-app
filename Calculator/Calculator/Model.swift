@@ -7,6 +7,9 @@
 
 import Foundation
 
+protocol CalculateItem {
+}
+
 struct Queue {
     var queue: [Int: Int] = [:]
     
