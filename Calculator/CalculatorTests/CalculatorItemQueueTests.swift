@@ -113,4 +113,16 @@ class CalculatorItemQueueTests: XCTestCase {
     // then
     XCTAssertNil(output)
   }
+  
+  func test_peek_호출시_원소가_존재하면_맨앞의_원소를_반환해야한다() {
+    // given
+    let input = [1, 2, 3]
+    self.sut.elements = input
+    
+    // when
+    let output = self.sut.peek()
+    
+    // then
+    XCTAssertEqual(output, 1)
+  }
 }

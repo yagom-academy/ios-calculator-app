@@ -22,6 +22,6 @@ final class CalculatorItemQueue<Element> {
   }
   
   func peek() -> Element? {
-    return nil
+    return self.elements.first
   }
 }
