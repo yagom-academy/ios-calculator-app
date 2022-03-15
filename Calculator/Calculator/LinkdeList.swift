@@ -7,21 +7,21 @@
 
 import Foundation
 
-class Node<T> {
-    var data: T
+class Node<CalculateItem> {
+    var data: CalculateItem
     var next: Node?
     
-    init(data: T, next: Node? = nil) {
+    init(data: CalculateItem, next: Node? = nil) {
         self.data = data
         self.next = next
     }
 }
 
-class LinkdeList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+class LinkdeList<CalculateItem> {
+    var head: Node<CalculateItem>?
+    var tail: Node<CalculateItem>?
     
-    func append(_ data: T) {
+    func append(_ data: CalculateItem){
         if head == nil {
             head = Node(data: data)
             tail = head
@@ -54,8 +54,8 @@ class LinkdeList<T> {
         return count
     }
     
-    func removeFirst() -> T? {
-        let value: T?
+    func removeFirst() -> CalculateItem? {
+        let value: CalculateItem?
         if head == nil { return nil }
         
         if head?.next == nil {
