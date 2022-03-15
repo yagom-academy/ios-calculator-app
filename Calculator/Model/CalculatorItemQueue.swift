@@ -7,6 +7,7 @@
 
 struct CalculatorItemQueue<T> {
     private var list = [T?]()
+    private var head: Int = 0
     
     public var isEmpty: Bool {
         return list.isEmpty
