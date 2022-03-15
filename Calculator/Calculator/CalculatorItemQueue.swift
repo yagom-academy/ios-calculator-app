@@ -15,10 +15,10 @@ extension Int: CalculateItem {
     
 }
 
-class CalculatorItemQueue<CalculateItem> {
-    private let linkdeList = LinkdeList<CalculateItem>()
+class CalculatorItemQueue<T: CalculateItem> {
+    private let linkdeList = LinkdeList<T>()
     
-    func enqueue(_ data: CalculateItem) {
+    func enqueue(_ data: T) {
         linkdeList.append(data)
     }
     
@@ -30,12 +30,16 @@ class CalculatorItemQueue<CalculateItem> {
         return linkdeList.count()
     }
     
-    func dequeue() -> CalculateItem? {
+    func dequeue() -> T? {
         return linkdeList.removeFirst()
     }
     
     func removeAll() {
         linkdeList.removeAll()
         
+    }
+    
+    func allData() -> [T] {
+        return linkdeList.allData()!
     }
 }

@@ -7,21 +7,21 @@
 
 import Foundation
 
-class Node<CalculateItem> {
-    var data: CalculateItem
+class Node<T> {
+    var data: T
     var next: Node?
     
-    init(data: CalculateItem, next: Node? = nil) {
+    init(data: T, next: Node? = nil) {
         self.data = data
         self.next = next
     }
 }
 
-class LinkdeList<CalculateItem> {
-    private var head: Node<CalculateItem>?
-    private var tail: Node<CalculateItem>?
+class LinkdeList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
-    func append(_ data: CalculateItem) {
+    func append(_ data: T) {
         if head == nil {
             head = Node(data: data)
             tail = head
@@ -47,15 +47,16 @@ class LinkdeList<CalculateItem> {
             return 0
         }
         var count = 1
-        while head?.next != nil {
+        var nodePoint = head
+        while nodePoint?.next != nil {
             count += 1
-            head = head?.next
+            nodePoint = nodePoint?.next
         }
         return count
     }
     
-    func removeFirst() -> CalculateItem? {
-        let value: CalculateItem?
+    func removeFirst() -> T? {
+        let value: T?
         if head == nil { return nil }
         
         if head?.next == nil {
@@ -74,6 +75,21 @@ class LinkdeList<CalculateItem> {
         
         head = nil
         tail = nil
+    }
+    
+    func allData() -> [T]? {
+        var dataArray: [T] = []
+
+        if head == nil { return nil }
+        var nodePoint = head
+        while nodePoint?.next != nil {
+            guard let value = nodePoint?.data else { return dataArray }
+            dataArray.append(value)
+            nodePoint = nodePoint?.next
+        }
+        guard let value = nodePoint?.data else { return dataArray }
+        dataArray.append(value)
+        return dataArray
     }
 
 }
