@@ -11,6 +11,11 @@ final class CalculatorLinkedList<T> {
     typealias Node = CalculatorNode<T>
     var head: Node?
     var tail: Node?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
     var count: Int {
         guard var node = head else { return Int.zero }
         var count = 1
@@ -21,7 +26,7 @@ final class CalculatorLinkedList<T> {
         return count
     }
     
-    func appendNewNode(_ value: T) {
+    func append(_ value: T) {
         let newNode = Node(value: value)
         
         if let previousTail = tail {
@@ -32,6 +37,16 @@ final class CalculatorLinkedList<T> {
             head = newNode
             tail = newNode
         }
+    }
+    
+    func removeFirst() -> T? {
+        defer {
+            head = head?.next
+            if isEmpty {
+                tail = nil
+            }
+        }
+        return head?.value
     }
     
     func removeAll() {

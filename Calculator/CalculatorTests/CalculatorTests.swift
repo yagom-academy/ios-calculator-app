@@ -37,20 +37,31 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_새로운node를3개append하면count호출시출력_3() {
-        sut.appendNewNode(10)
-        sut.appendNewNode(20)
-        sut.appendNewNode(30)
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
         
         let result = sut.count
         
         XCTAssertEqual(result, 3)
     }
     
-    func test_새로운node를3개append후removeAll호출시출력_0() {
-        sut.appendNewNode(10)
-        sut.appendNewNode(20)
-        sut.appendNewNode(30)
+    func test_새로운node를6개append후removeAll호출시출력_0() {
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
         sut.removeAll()
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_새로운node를1개append후removeFirst호출시출력_0() {
+        sut.removeFirst()
         
         let result = sut.count
         
