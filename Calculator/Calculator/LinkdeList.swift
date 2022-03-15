@@ -68,5 +68,12 @@ class LinkdeList<CalculateItem> {
         head = head?.next
         return value
     }
+    
+    func removeAll() {
+        if head == nil { return }
+        
+        head = nil
+        tail = nil
+    }
 
 }

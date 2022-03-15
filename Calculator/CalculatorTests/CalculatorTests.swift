@@ -106,4 +106,20 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(reselt, 0)
     }
+    
+    func test_removeAll_count_0() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.enqueue(4)
+        sut.enqueue(5)
+        sut.removeAll()
+
+        // when
+        let reselt = sut.count()
+
+        // then
+        XCTAssertEqual(reselt, 0)
+    }
 }

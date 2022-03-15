@@ -33,4 +33,9 @@ class CalculatorItemQueue<CalculateItem> {
     func dequeue() -> CalculateItem? {
         return linkdeList.removeFirst()
     }
+    
+    func removeAll() {
+        linkdeList.removeAll()
+        
+    }
 }
