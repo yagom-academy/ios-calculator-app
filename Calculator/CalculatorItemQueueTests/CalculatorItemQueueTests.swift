@@ -142,7 +142,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.dequeue()
         
         // then
-        let result = sut.last
+        let result = sut.rear
         let expected = 2
         XCTAssertEqual(result, expected)
     }

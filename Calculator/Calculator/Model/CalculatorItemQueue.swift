@@ -27,7 +27,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return outputStack.last ?? inputStack.first
     }
     
-    var last: Element? {
+    var rear: Element? {
         return outputStack.first ?? inputStack.last
     }
     
@@ -45,7 +45,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     mutating func dequeue() -> Element? {
         if outputStack.isEmpty {
-            guard self.isEmpty == false else {
+            guard inputStack.isEmpty == false else {
                 return nil
             }
             outputStack = inputStack.reversed()
