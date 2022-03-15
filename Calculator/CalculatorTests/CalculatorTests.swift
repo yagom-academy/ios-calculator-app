@@ -9,91 +9,47 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    
-    func test_inque_CalculatorItemQueue() {
-        //given
-        let calculatorItemQueue = CalculatorItemQueue()
         
-        //when
-        calculatorItemQueue.enqueue(number: 3,operation: "+")
-        
-        //then
-        let result: Bool
-        let number = calculatorItemQueue.queue[0].number
-        let plusString = calculatorItemQueue.queue[0].operation
-        if number == 3 && plusString == "+" {
-            result = true
-        } else {
-            result = false
-        }
-        XCTAssertTrue(result)
-    }
-    
     func test_deque_CalculatorItemQueue() {
         //given
         let calculatorItemQueue = CalculatorItemQueue()
-        calculatorItemQueue.enqueue(number: 3,operation: "+")
-        calculatorItemQueue.enqueue(number: 2,operation: "-")
+        let firstEnqueueNumber: Float = 3
+        let firstEnqueueOperation = "+"
+        let secondEnqueueNumber: Float = 2
+        let secondEnqueueOperation = "-"
+        calculatorItemQueue.enqueue(number: firstEnqueueNumber,operation: firstEnqueueOperation)
+        calculatorItemQueue.enqueue(number: secondEnqueueNumber,operation: secondEnqueueOperation)
         
         //when
         let dequeResult = calculatorItemQueue.dequeue()
         
         //then
-        let result: Bool
-        let number = dequeResult.number
-        let plusString = dequeResult.operation
-        if number == 3 && plusString == "+" {
-            result = true
-        } else {
-            result = false
-        }
-        XCTAssertTrue(result)
+        let resultNumber = dequeResult.number
+        let resultOperation = dequeResult.operation
+        
+        XCTAssertEqual(firstEnqueueNumber, resultNumber)
+        XCTAssertEqual(firstEnqueueOperation, resultOperation)
     }
     
     func test_deque_twice_CalculatorItemQueue() {
         //given
         let calculatorItemQueue = CalculatorItemQueue()
-        calculatorItemQueue.enqueue(number: 3,operation: "+")
-        calculatorItemQueue.enqueue(number: 2,operation: "-")
+        let firstEnqueueNumber: Float = 3
+        let firstEnqueueOperation = "+"
+        let secondEnqueueNumber: Float = 2
+        let secondEnqueueOperation = "-"
+        calculatorItemQueue.enqueue(number: firstEnqueueNumber,operation: firstEnqueueOperation)
+        calculatorItemQueue.enqueue(number: secondEnqueueNumber,operation: secondEnqueueOperation)
         
         //when
         _ = calculatorItemQueue.dequeue()
-        let dequeResult2 = calculatorItemQueue.dequeue()
+        let dequeResult = calculatorItemQueue.dequeue()
         
         //then
-        let result: Bool
-        let number = dequeResult2.number
-        let plusString = dequeResult2.operation
-        if number == 2 && plusString == "-" {
-            result = true
-        } else {
-            result = false
-        }
-        XCTAssertTrue(result)
+        let resultNumber = dequeResult.number
+        let resultOperation = dequeResult.operation
+        
+        XCTAssertEqual(secondEnqueueNumber, resultNumber)
+        XCTAssertEqual(secondEnqueueOperation, resultOperation)
     }
-    
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
