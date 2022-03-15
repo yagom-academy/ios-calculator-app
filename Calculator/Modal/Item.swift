@@ -1,9 +1,11 @@
 //
-//  CalculateItem.swift
+//  Item.swift
 //  Calculator
 //
-//  Created by 곽우종 on 2022/03/15.
+//  Created by 우롱차 on 2022/03/15.
 //
+
+import Foundation
 
 import Foundation
 
@@ -20,4 +22,3 @@ class Item: CalculateItem {
         self.operation = operation
     }
 }
-
