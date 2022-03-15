@@ -7,14 +7,18 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Int> {
-    private var inputStack: [Int] = []
+protocol CalculateItem {}
+
+extension Int: CalculateItem {}
+
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var inputStack: [Element] = []
     
-    var currentInputStack: [Int] {
+    var currentInputStack: [Element] {
         return inputStack
     }
     
-    mutating func enqueue(_ element: Int) {
+    mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }
 }
