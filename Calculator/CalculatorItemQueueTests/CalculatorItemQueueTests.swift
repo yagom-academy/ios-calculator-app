@@ -87,4 +87,19 @@ class CalculatorItemQueueTests: XCTestCase {
         let expected = 2
         XCTAssertEqual(result, expected)
     }
+    
+    func test_enqueue를두번하고_dequeue를한번했을때_현재queue의_개수가1개인지() {
+        // given
+        let input = [1,2]
+        
+        // when
+        sut.enqueue(input[0])
+        sut.enqueue(input[1])
+        sut.dequeue()
+        
+        // then
+        let result = sut.count
+        let expected = 1
+        XCTAssertEqual(result, expected)
+    }
 }
