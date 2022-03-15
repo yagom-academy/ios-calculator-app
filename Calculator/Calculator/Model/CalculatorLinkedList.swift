@@ -1,0 +1,52 @@
+//
+//  CalculatorLinkedList.swift
+//  Calculator
+//
+//  Created by song on 2022/03/15.
+//
+
+import Foundation
+
+class Node<T> {
+  var data: T
+  var next: Node?
+  var previous: Node?
+  
+  init(_ data: T) {
+    self.data = data
+    self.next = nil
+    self.previous = nil
+  }
+}
+
+class DoubleLinkedList<T: Equatable> {
+  private var head: Node<T>?
+  private var tail: Node<T>?
+  
+  func append(data: T) {
+    let newNode = Node(data)
+    
+    if head == nil {
+      self.head = newNode
+      self.tail = newNode
+      return
+    }
+    
+    self.tail?.next = newNode
+    self.tail = newNode
+  }
+  
+  func removeHead() {
+    
+    if head == nil {
+      return
+    }
+    self.head = self.head?.next
+  }
+  
+  func removeAll() {
+    self.head  = nil
+    self.tail = nil
+  }
+}
+
