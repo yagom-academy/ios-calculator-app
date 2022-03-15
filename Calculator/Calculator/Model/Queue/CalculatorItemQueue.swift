@@ -31,3 +31,7 @@ struct CalculatorItemQueue<T> {
         return list.removeAll()
     }
 }
+
+extension CalculatorItemQueue: CalculateItem {
+    
+}

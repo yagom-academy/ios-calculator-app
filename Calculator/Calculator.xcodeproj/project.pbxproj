@@ -76,6 +76,7 @@
 		9C99F34927E057A500DE77CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9C99F34E27E0580100DE77CD /* Protocol */,
 				9C99F35727E05FE200DE77CD /* Queue */,
 				9C99F35427E05FB500DE77CD /* LinkedList */,
 			);
@@ -111,7 +112,6 @@
 		9C99F35427E05FB500DE77CD /* LinkedList */ = {
 			isa = PBXGroup;
 			children = (
-				9C99F34E27E0580100DE77CD /* Protocol */,
 				9C99F35227E05EFD00DE77CD /* CalculatorLinkedList.swift */,
 				9C99F35527E05FD100DE77CD /* CalculatorNode.swift */,
 			);
