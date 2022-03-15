@@ -1,9 +1,6 @@
-//
 //  LinkedList.swift
 //  Calculator
-//
 //  Created by LIMGAUI on 2022/03/15.
-//
 
 import Foundation
 
@@ -37,5 +34,18 @@ final class LinkedList {
         let lastNode = Node(data: data)
         tail?.next = lastNode
         tail = lastNode
+    }
+    
+    func removeFirst() -> Int? {
+        if head == nil { return nil }
+        
+        if head?.next == nil {
+            let lastData = head?.data
+            head = nil
+            return lastData
+        }
+        let data = head?.data
+        head = head?.next
+        return data
     }
 }

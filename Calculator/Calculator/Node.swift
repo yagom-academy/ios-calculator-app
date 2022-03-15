@@ -1,9 +1,6 @@
-//
 //  Node.swift
 //  Calculator
-//
 //  Created by LIMGAUI on 2022/03/15.
-//
 
 import Foundation
 

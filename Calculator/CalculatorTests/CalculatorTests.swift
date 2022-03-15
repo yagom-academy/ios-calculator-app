@@ -84,4 +84,38 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(head, 1)
         XCTAssertEqual(tail, 10)
     }
+    
+    func test_removeFirst메서드호출시_값5가_나오는지() {
+        sut.append(data: 5)
+        
+        let result = sut.removeFirst()
+        
+        XCTAssertEqual(result, 5)
+    }
+    
+    func test_append메서드5번호출후_removeFirst메서드5번호출후_count값이0이나오는지() {
+        for number in 1...5 {
+            sut.append(data: number)
+        }
+        for _ in 1...5 {
+            let _ = sut.removeFirst()
+        }
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_append메서드10000번호출후_removeFirst메서드9999번호출후_마지막RemoveFirst메서드호출한값이10000이_나오는지() {
+        for number in 1...10000 {
+            sut.append(data: number)
+        }
+        for _ in 1...9999 {
+            let _ = sut.removeFirst()
+        }
+        
+        let result = sut.removeFirst()
+        
+        XCTAssertEqual(result, 10000)
+    }
 }
