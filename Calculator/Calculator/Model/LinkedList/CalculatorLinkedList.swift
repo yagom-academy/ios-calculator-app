@@ -55,4 +55,6 @@ final class CalculatorLinkedList<T> {
     }
 }
 
-extension CalculatorLinkedList: CalculateItem {}
+extension CalculatorLinkedList: CalculateItem {
+    
+}
