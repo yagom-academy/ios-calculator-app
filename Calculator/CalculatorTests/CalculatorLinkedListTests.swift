@@ -13,10 +13,12 @@ class CalculatorLinkedListTests: XCTestCase {
   var sut: CalculatorLinkedList<Double>!
   
   override func setUpWithError() throws {
+    try super.setUpWithError()
     self.sut = CalculatorLinkedList()
   }
   
   override func tearDownWithError() throws {
+    try super.tearDownWithError()
     self.sut = nil
   }
   

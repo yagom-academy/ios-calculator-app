@@ -7,22 +7,22 @@
 
 import Foundation
 
-final class CalculatorLinkedList<Element: CalculateItem> {
+struct CalculatorLinkedList<Element: CalculateItem> {
+  
   private(set) var front: CalculatorNode<Element>?
   private(set) var rear: CalculatorNode<Element>?
-  private(set) var count = 0
+  private(set) var count = Int.zero
   
   var first: Element? {
-    return self.isEmpty ? nil : self.front?.data
+    return self.front?.data
   }
   
   var isEmpty: Bool {
-    return self.count == Int.zero ? true : false
+    return self.front == nil
   }
   
-  func append(_ data: Element) {
+  mutating func append(_ data: Element) {
     let newNode = CalculatorNode(data)
-    
     if self.isEmpty {
       self.front = newNode
       self.rear = newNode
@@ -34,17 +34,17 @@ final class CalculatorLinkedList<Element: CalculateItem> {
     self.count += 1
   }
   
-  func removeFirst() -> Element? {
+  mutating func removeFirst() -> Element? {
     let data = self.front?.data
     self.front = self.front?.next
     self.count -= 1
     return data
   }
   
-  func removeAll() {
+  mutating func removeAll() {
     self.front = nil
     self.rear = nil
-    self.count = 0
+    self.count = Int.zero
   }
 
   func allElements() -> [Element?] {
