@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue {
     private var addStack: [CalculateItem] = []
     private var subStack: [CalculateItem] = []
     
