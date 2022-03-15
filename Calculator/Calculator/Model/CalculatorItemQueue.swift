@@ -15,6 +15,11 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         inputStack.count + outputStack.count
     }
     
+    mutating func removeAll() {
+        inputStack.removeAll()
+        outputStack.removeAll()
+    }
+    
     mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }

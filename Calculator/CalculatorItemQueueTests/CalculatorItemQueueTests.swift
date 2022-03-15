@@ -24,13 +24,23 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_빈배열에_1을_enqueue하면_추가되는가() {
         // given
         let input = 1.0
-        
         // when
         sut.enqueue(input)
         let result = sut.inputStack[0]
-        
         // then
         XCTAssertEqual(result, 1.0)
+    }
+    
+    func test_빈배열에_여러번_enqueue하면_마지막값이_정상반환되는가() {
+        // given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        sut.enqueue(3.0)
+        sut.enqueue(4.0)
+        // when
+        let result = sut.inputStack[3]
+        // then
+        XCTAssertEqual(result, 4.0)
     }
     
     func test_빈배열에서_값을_dequeue하면_nil을_반환하는가() {
@@ -38,7 +48,6 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.dequeue()
-        
         // then
         XCTAssertEqual(result, nil)
     }
@@ -49,7 +58,6 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(2.0)
         // when
         let result = sut.dequeue()
-        
         // then
         XCTAssertEqual(result, 1.0)
     }
@@ -59,9 +67,29 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(2.0)
         // when
         let result = sut.dequeue()
-        
         // then
         XCTAssertEqual(result, 2.0)
+    }
+    
+    func test_enqueue를_2번_dequeue를_2번하면_정상반환하는가() {
+        // given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        // when
+        let _ = sut.dequeue()
+        let result = sut.dequeue()
+        // then
+        XCTAssertEqual(result, 2.0)
+    }
+    
+    func test_enqueue를_1번_dequeue를_2번하면_nil을_반환하는가() {
+        // given
+        sut.enqueue(1.0)
+        // when
+        let _ = sut.dequeue()
+        let result = sut.dequeue()
+        // then
+        XCTAssertEqual(result, nil)
     }
     
     func test_배열의_count를_정상적으로_반환하는가() {
@@ -72,8 +100,19 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(4.0)
         // when
         let result = sut.count
-        
         // then
         XCTAssertEqual(result, 4)
+    }
+    
+    func test_배열의_removeAll이_정상적으로_작동하는가() {
+        // given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        sut.enqueue(3.0)
+        sut.enqueue(4.0)
+        // when
+        sut.removeAll()
+        // then
+        XCTAssertEqual(sut.count, 0)
     }
 }
