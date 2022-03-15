@@ -32,4 +32,16 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(sut.currentInputStack.first, 1)
     }
+    
+    func test_dequeue했을때_값이정상적으로빠져나가는지() {
+        // given
+        let input = 1
+        
+        // when
+        sut.enqueue(input)
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, input)
+    }
 }
