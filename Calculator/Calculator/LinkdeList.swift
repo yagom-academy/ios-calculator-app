@@ -21,7 +21,7 @@ class LinkdeList<T> {
     var head: Node<T>?
     var tail: Node<T>?
     
-    func append(data: T) {
+    func append(_ data: T) {
         if head == nil {
             head = Node(data: data)
             tail = head
