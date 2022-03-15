@@ -105,4 +105,29 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 10)
     }
+    
+    func test_head가nil일때_insert메서드at1로_insert한값으로나오는지() {
+        sut.head = nil
+        
+        sut.insert(Node(data: 3, next: nil), at: 1)
+        
+        XCTAssertEqual(sut.findNode(at: 1)?.data, 3)
+    }
+    
+    func test_append메서드3번호출후_insert메서드at4호출시_값4가_잘나오는지() {
+        sut.append(Node(data: 1, next: nil))
+        sut.append(Node(data: 2, next: nil))
+        sut.append(Node(data: 3, next: nil))
+        
+        sut.insert(Node(data: 4, next: nil), at: 4)
+        
+        XCTAssertEqual(sut.findNode(at: 4)?.data, 4)
+    }
+    
+    func test_insert10번호출시_정상적인count10이나오는지() {
+        for number in 1...10 {
+            sut.insert(Node(data: number, next: nil), at: number)
+        }
+        XCTAssertEqual(sut.count, 10)
+    }
 }

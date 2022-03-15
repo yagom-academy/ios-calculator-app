@@ -50,4 +50,24 @@ final class LinkedList {
             self.tail = newNode
         }
     }
+    
+    func insert(_ newNode: Node, at index: Int) {
+        if self.head == nil {
+            self.head = newNode
+            self.tail = newNode
+            return
+        }
+        guard let frontNode = findNode(at: index-1) else {
+            self.tail?.next = newNode
+            self.tail = newNode
+            return
+        }
+        guard let nextNode = frontNode.next else {
+            frontNode.next = newNode
+            self.tail = newNode
+            return
+        }
+        newNode.next = nextNode
+        frontNode.next = newNode
+    }
 }
