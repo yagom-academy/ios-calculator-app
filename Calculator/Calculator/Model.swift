@@ -30,11 +30,11 @@ struct Queue {
     mutating func dequeue() -> CalculateItem? {
         if queue.isEmpty {
             return nil
-        } else {
-            let value = self.queue[head]
-            head += 1
-            return value
         }
+        let value = self.queue[head]
+        head += 1
+        return value
+        
     }
     mutating func resetQueue() {
         queue = [:]
