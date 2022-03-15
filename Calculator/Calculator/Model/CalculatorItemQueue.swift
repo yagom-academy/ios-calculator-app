@@ -8,11 +8,15 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    var inputStack: [Element] = []
-    var outputStack: [Element] = []
+    private(set) var inputStack: [Element] = []
+    private(set) var outputStack: [Element] = []
     
     var count: Int {
         inputStack.count + outputStack.count
+    }
+    
+    var first: Element? {
+        outputStack.isEmpty ? inputStack.first : outputStack.last
     }
     
     mutating func enqueue(_ element: Element) {
