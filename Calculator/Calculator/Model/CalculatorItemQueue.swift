@@ -7,5 +7,6 @@
 
 import Foundation
 
-class Queue {
+class CalculateItemQueue {
+  
 }

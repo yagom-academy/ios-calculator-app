@@ -10,12 +10,10 @@ import Foundation
 class Node<T> {
   var data: T
   var next: Node?
-  var previous: Node?
   
   init(_ data: T) {
     self.data = data
     self.next = nil
-    self.previous = nil
   }
 }
 
@@ -37,15 +35,11 @@ class DoubleLinkedList<T: Equatable> {
   }
   
   func removeHead() {
-    
-    if head == nil {
-      return
-    }
     self.head = self.head?.next
   }
   
   func removeAll() {
-    self.head  = nil
+    self.head = nil
     self.tail = nil
   }
 }
