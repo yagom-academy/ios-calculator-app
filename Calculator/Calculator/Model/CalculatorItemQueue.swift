@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculateItemQueue<T>: CalculateItem {
+final class CalculateItemQueue<T>: CalculateItem {
   var list = LinkedList<T>()
   
   func enqueue(data: T) {
@@ -15,7 +15,7 @@ class CalculateItemQueue<T>: CalculateItem {
   }
   
   func dequeue() {
-    list.removeHead()
+    list.removeFinal()
   }
   
   func dequeueAll() {

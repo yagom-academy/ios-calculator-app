@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Node<T> {
-  var data: T
+final class Node<T> {
+  private(set) var data: T
   var next: Node?
   
   init(_ data: T) {
@@ -17,7 +17,7 @@ class Node<T> {
   }
 }
 
-class LinkedList<T> {
+final class LinkedList<T> {
   var head: Node<T>?
   var tail: Node<T>?
   
@@ -33,7 +33,7 @@ class LinkedList<T> {
     self.tail = newNode
   }
   
-  func removeHead() {
+  func removeFinal() {
     self.head = self.head?.next
   }
   
