@@ -7,5 +7,16 @@
 
 import Foundation
 
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue<Element: CalculateItem> {
+    var queue: [Element] = []
+    
+    mutating func resetQueue() {
+        queue.removeAll()
+    }
+    
+    mutating func enQueue(element: Element) {
+        queue.append(element)
+    }
 }
+
+
