@@ -36,14 +36,9 @@ struct Queue {
             return value
         }
     }
-    mutating func resetQueue() -> [CalculateItem?] {
-        var allValue: [CalculateItem?] = []
-        let countOfQueue = queue.count
-        for _ in stride(from: 1, through: countOfQueue, by: 1) {
-            allValue.append(dequeue())
-        }
+    mutating func resetQueue() {
+        queue = [:]
         head = 0
         tail = 0
-        return allValue
     }
 }
