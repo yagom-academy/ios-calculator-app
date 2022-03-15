@@ -8,9 +8,6 @@
 import XCTest
 @testable import Calculator
 
-extension Double: CalculateItem {
-}
-
 class QueueTests: XCTestCase {
     
     var sut: CalculatorItemQueue<Double>!
@@ -24,7 +21,7 @@ class QueueTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-    
+
     func test_peek_프로퍼티가_큐배열의_처음_인덱스를_가르키는지() {
         sut.enQueue(element: 1)
         sut.enQueue(element: 2)
@@ -43,16 +40,26 @@ class QueueTests: XCTestCase {
     }
     
     func test_enQueue큐_배열에_값이_추가가_되는지() {
-        let result:[Double] = [1, 2, 3]
+        let result: [Double] = [1, 2, 3]
         sut.enQueue(element: 1)
         sut.enQueue(element: 2)
         sut.enQueue(element: 3)
-        XCTAssertEqual(sut.addList, result)
+        XCTAssertEqual(sut.addStack, result)
     }
     
     func test_resetQueue큐_배열의_값이_제거가되는지() {
         sut.enQueue(element: 1)
         sut.resetQueue()
         XCTAssertTrue(sut.isEmpty)
+    }
+
+    func test_deQueue큐배열의_처음_인덱스를_제거해주는지(){
+        let test: Double = 2
+        sut.enQueue(element: 2)
+        sut.enQueue(element: 3)
+        
+        let result = sut.deQueue()
+        
+        XCTAssertEqual(result, test)
     }
 }
