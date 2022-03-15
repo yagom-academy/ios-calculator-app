@@ -32,6 +32,6 @@ class LinkdeList<T> {
 }
 
 class CalculatorItemQueue<T: CalculateItem> {
-
+    let linkdeList = LinkdeList<T>()
 
 }
