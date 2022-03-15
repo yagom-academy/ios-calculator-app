@@ -53,7 +53,64 @@
 - 네이밍
 - 연결 리스트
     - 처음에는 큐를 배열로 만들었지만 리스트를 직접 만들고 싶어서 큐와 비슷하게 선입선출이 가능한 연결 리스트를 정의했습니다.
-    - 정의한 연결 리스트 타입에서 고차함수를 사용하고 싶어서 프로토콜을 채택했습니다.
+    - 정의한 연결 리스트 타입에서 고차함수를 사용하고 싶어서 프로토콜을 채택했습니다. 테스트를 해본 결과 무한루프에 빠지는데요. 프로토콜 채택 시 구현한 메서드의 내용이 잘못된 것 같습니다.😭
+    
+    ```swift
+    extension LinkedList: Sequence {
+        typealias Element = Node<T>
+        
+        func makeIterator() -> LinkedListIterator<T> {
+            return LinkedListIterator(current: self.head!)
+        }
+    }
+    
+    class LinkedListIterator<T>: IteratorProtocol {
+        typealias Element = Node<T>
+        
+        var current: Element
+        
+        init(current: Element) {
+            self.current = current
+        }
+        
+        func next() -> Element? {
+            return current.next
+        }
+    }
+    
+    extension Node: Sequence {
+        typealias Element = Node<T>
+        
+        func makeIterator() -> NodeIterator<T> {
+            return NodeIterator(current: self)
+        }
+    }
+    
+    class NodeIterator<T>: IteratorProtocol {
+        typealias Element = Node<T>
+        
+        var current: Element
+        
+        init(current: Element) {
+            self.current = current
+        }
+        
+        func next() -> Element? {
+            return current.next
+        }
+    }
+    ```
+    
+    ```swift
+    func test_sequence채택_고차함수사용가능한지() {
+            sut?.append(node: Node(data: 2))
+    
+            let result: [Int] = sut!.map {test in test.data }
+    
+            XCTAssertEqual(result, [1, 2])
+    }
+    ```
+    
     - 기존에 시도했던 배열과 달리 인덱스를 통한 값 찾기가 불가능하고 next로 하나씩 찾아가서 search의 성능은 좋지 않은 것 같습니다.
 - 연산자와 숫자를 타입으로 묶기
     - 제너릭을 사용하면 하나의 타입만 넣을 수 있습니다.
@@ -64,4 +121,3 @@
 - TDD
     - 처음에 배열로 리스트를 만들고 테스트 코드를 작성했습니다. 이후 리스트를 연결리스트로 바꾸면서 테스트 코드를 전체적으로 다 수정했는데요. 테스트가 타입에 의존해서 발생한 문제일까요?
     - 프로토콜로 진행하게 되어도 채택한 타입에서 정의한 프로퍼티나 메서드를 사용하려면 다운 캐스팅을 진행해야 할 것 같은데요. 테스트 케이스는 타입을 수정할 때마다 변경하는 것이 맞을까요?
-
