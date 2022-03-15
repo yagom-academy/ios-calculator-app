@@ -15,22 +15,21 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         inputStack.count + outputStack.count
     }
     
-    mutating func removeAll() {
-        inputStack.removeAll()
-        outputStack.removeAll()
-    }
-    
     mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }
     
     mutating func dequeue() -> Element? {
         if outputStack.isEmpty {
-            guard !inputStack.isEmpty else { return nil }
             outputStack = inputStack.reversed()
             inputStack.removeAll()
         }
-        return outputStack.removeLast()
+        return outputStack.popLast()
+    }
+    
+    mutating func removeAll() {
+        inputStack.removeAll()
+        outputStack.removeAll()
     }
 }
 
