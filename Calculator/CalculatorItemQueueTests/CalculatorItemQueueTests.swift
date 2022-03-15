@@ -146,4 +146,15 @@ class CalculatorItemQueueTests: XCTestCase {
         let expected = 2
         XCTAssertEqual(result, expected)
     }
+    
+    func test_queue에값이비어있을때_dequeue하는경우() {
+        // given
+        let input = [1,2]
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, nil)
+    }
 }
