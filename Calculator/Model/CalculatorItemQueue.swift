@@ -7,5 +7,5 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue: CalculateItem {
 }
