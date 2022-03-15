@@ -26,16 +26,26 @@ class QueueTests: XCTestCase {
     }
     
     func test_enQueue큐_배열에_값이_추가가_되는지() {
-        let calculateItem = 0.33
-        sut.enQueue(element: calculateItem)
-        XCTAssertNotNil(sut.queue.isEmpty)
+        sut.enQueue(element: 1)
+        sut.enQueue(element: 2)
+        sut.enQueue(element: 3)
+        let result:[Double] = [1, 2, 3]
+        XCTAssertEqual(sut.list, result)
     }
     
-    func test_queue() {
-        //given
-        
-        //when
-        
-        //then
+    func test_resetQueue큐_배열의_값이_제거가되는지() {
+        sut.enQueue(element: 1)
+        sut.resetQueue()
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_isEmpty_프로퍼티에_값을_넣었을때_False_값을_반환하는지() {
+        let calculateItem = 0.35
+        sut.enQueue(element: calculateItem)
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_isEmpty_프로퍼티에_값을_넣었을때_True_값을_반환하는지() {
+        XCTAssertTrue(sut.isEmpty)
     }
 }
