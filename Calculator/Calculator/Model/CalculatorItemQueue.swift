@@ -8,11 +8,11 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    var forwordStack: [Element] = []
-    var reverseStack: [Element] = []
+    var inputStack: [Element] = []
+    var outputStack: [Element] = []
     
     mutating func enqueue(_ element: Element) {
-        forwordStack.append(element)
+        inputStack.append(element)
     }
 }
 

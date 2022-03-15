@@ -27,7 +27,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(input)
-        let result = sut.forwordStack[0]
+        let result = sut.inputStack[0]
         
         // then
         XCTAssertEqual(result, 1.0)
