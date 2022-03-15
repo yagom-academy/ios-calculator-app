@@ -29,7 +29,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
         queue[head] = nil
         head += 1
         
-        if head > 50 {
+        let percentage = Double(head / queue.count)
+        if percentage > 0.3 {
             queue.removeFirst(head)
             head = 0
         }
