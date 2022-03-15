@@ -79,7 +79,7 @@ final class LinkdeList<T> {
     
     func allData() -> [T]? {
         var dataArray: [T] = []
-
+        
         if head == nil { return nil }
         var nodePoint = head
         while nodePoint?.next != nil {
@@ -91,5 +91,5 @@ final class LinkdeList<T> {
         dataArray.append(value)
         return dataArray
     }
-
+    
 }
