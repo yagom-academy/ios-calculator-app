@@ -19,7 +19,7 @@ struct CalculatorItemQueue<T> {
     }
     
     func enqueue(_ element: T) {
-        return list.append(element)
+        list.append(element)
     }
     
     func dequeue() -> T? {
@@ -28,7 +28,7 @@ struct CalculatorItemQueue<T> {
     }
     
     func removeAll() {
-        return list.removeAll()
+        list.removeAll()
     }
 }
 

@@ -54,7 +54,3 @@ final class CalculatorLinkedList<T> {
         tail = nil
     }
 }
-
-extension CalculatorLinkedList: CalculateItem {
-    
-}
