@@ -156,10 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				9C99F35827E0657100DE77CD /* Application */,
+				9C99F34E27E0580100DE77CD /* Protocol */,
 				9C99F34B27E057B700DE77CD /* Controller */,
 				9C99F34927E057A500DE77CD /* Model */,
 				9C99F34A27E057B100DE77CD /* View */,
-				9C99F34E27E0580100DE77CD /* Protocol */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
