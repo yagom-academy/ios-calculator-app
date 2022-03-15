@@ -25,16 +25,17 @@ class LinkedList<T> {
         if head == nil {
             return nil
         }
-        if index < 0 || index > count {
-            return nil
-        }
         
+        guard 0..<count ~= index else { return nil }
         guard let head = head else { return nil }
         var node = head
-        for _ in 0..<(index - 1) {
-            guard let next = node.next else { return nil }
-            node = next
+        if index > 0 {
+            for _ in 0..<(index - 1) {
+                guard let next = node.next else { return nil }
+                node = next
+            }
         }
+        
         return node
     }
     
@@ -53,9 +54,7 @@ class LinkedList<T> {
     }
     
     public func insert(_ data: T, at index: Int) {
-        if 0...count ~= count {
-            return
-        }
+        guard 0...count ~= index else { return }
         let newNode = Node(data)
         if index == 0 {
             newNode.next = head
@@ -64,7 +63,7 @@ class LinkedList<T> {
             count += 1
         } else if index == count {
             append(data)
-        } else {    // 중간 삽입
+        } else {
             let nextNode = getNode(at: index)
             let prevNode = nextNode?.prev
             newNode.next = nextNode
@@ -76,9 +75,7 @@ class LinkedList<T> {
     }
     
     public func remove(at index: Int) -> T? {
-        if 0..<count ~= index {
-            return nil
-        }
+        guard 0..<count ~= index else { return nil }
         guard let node = getNode(at: index) else { return nil }
         count -= 1
         if count == 1 {
@@ -86,16 +83,14 @@ class LinkedList<T> {
             return node.data
         }
         
-        // 헤드일 때
         if index == 0 {
             head = node.next
             head?.prev = nil
-        }   // 테일일 때
+        }
         else if index == (count - 1) {
             tail = node.prev
             tail?.next = nil
         } else {
-            // 중간 삭제
             let nextNode = node.next
             let prevNode = node.prev
             prevNode?.next = nextNode
