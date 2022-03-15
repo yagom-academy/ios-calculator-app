@@ -79,4 +79,30 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, sut.head?.next?.next?.next?.next?.next?.next?.next?.next?.next)
     }
+    
+    func test_append메서드2번호출시_이전과다음node가_연결이되는지여부() {
+        sut.append(Node(data: 1, next: nil))
+        sut.append(Node(data: 2, next: nil))
+        
+        let result = sut.findNode(at: 1)?.next?.data
+        
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_append메서드10번호출시_count10이_나오는지여부() {
+        sut.append(Node(data: 1, next: nil))
+        sut.append(Node(data: 2, next: nil))
+        sut.append(Node(data: 3, next: nil))
+        sut.append(Node(data: 4, next: nil))
+        sut.append(Node(data: 5, next: nil))
+        sut.append(Node(data: 6, next: nil))
+        sut.append(Node(data: 7, next: nil))
+        sut.append(Node(data: 8, next: nil))
+        sut.append(Node(data: 9, next: nil))
+        sut.append(Node(data: 10, next: nil))
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, 10)
+    }
 }

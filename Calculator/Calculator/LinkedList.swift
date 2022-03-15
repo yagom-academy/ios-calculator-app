@@ -40,4 +40,14 @@ final class LinkedList {
         }
         return node
     }
+    
+    func append(_ newNode: Node) {
+        if let tail = self.tail {
+            tail.next = newNode
+            self.tail = tail.next
+        } else {
+            self.head = newNode
+            self.tail = newNode
+        }
+    }
 }
