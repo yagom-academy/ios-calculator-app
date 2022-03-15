@@ -19,6 +19,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return inputStack.isEmpty && outputStack.isEmpty
     }
     
+    var count: Int {
+        return inputStack.count + outputStack.count
+    }
+    
     var currentInputStack: [Element] {
         return inputStack
     }
