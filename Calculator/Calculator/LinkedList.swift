@@ -27,4 +27,15 @@ final class LinkedList {
         }
         return count
     }
+    
+    func append(data: Int?) {
+        if head == nil {
+            head = Node(data: data)
+            tail = head
+            return
+        }
+        let lastNode = Node(data: data)
+        tail?.next = lastNode
+        tail = lastNode
+    }
 }
