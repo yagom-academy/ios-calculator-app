@@ -11,6 +11,10 @@ struct CalculatorItemQueue<T> {
     public var isEmpty: Bool {
         return list.isEmpty
     }
+    
+    public var count: Int {
+        return list.count
+    }
 }
 
 
