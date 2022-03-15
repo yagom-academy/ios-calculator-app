@@ -45,3 +45,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
 protocol CalculateItem {
     
 }
+
+extension Double: CalculateItem {
+    
+}
