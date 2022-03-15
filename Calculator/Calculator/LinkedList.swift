@@ -21,7 +21,7 @@ class LinkedList<T> {
         return head == nil
     }
     
-    func getNode(at index: Int) -> Node<T>? {
+    func node(at index: Int) -> Node<T>? {
         if head == nil {
             return nil
         }
@@ -64,7 +64,7 @@ class LinkedList<T> {
         } else if index == count {
             append(data)
         } else {
-            let nextNode = getNode(at: index)
+            let nextNode = node(at: index)
             let prevNode = nextNode?.prev
             newNode.next = nextNode
             newNode.prev = prevNode
@@ -76,7 +76,7 @@ class LinkedList<T> {
     
     public func remove(at index: Int) -> T? {
         guard 0..<count ~= index else { return nil }
-        guard let node = getNode(at: index) else { return nil }
+        guard let node = node(at: index) else { return nil }
         
         if count == 1 {
             removeAll()
