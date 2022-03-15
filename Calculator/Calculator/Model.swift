@@ -18,9 +18,9 @@ extension Double: CalculateItem {
 }
 
 struct CalculatorItemQueue {
-    var queue: [Int: CalculateItem] = [:]
-    var head: Int = 0
-    var tail: Int = 0
+    private(set) var queue: [Int: CalculateItem] = [:]
+    private(set) var head: Int = 0
+    private(set) var tail: Int = 0
     
     mutating func enqueue(with data: CalculateItem) {
         self.queue[tail] = data
