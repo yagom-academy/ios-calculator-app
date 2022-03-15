@@ -17,13 +17,13 @@ enum Operator: CalculateItem {
 extension Double: CalculateItem {
 }
 
-struct Queue {
+struct CalculatorItemQueue {
     var queue: [Int: CalculateItem] = [:]
     var head: Int = 0
     var tail: Int = 0
     
-    mutating func enqueue(with value: CalculateItem) {
-        self.queue[tail] = value
+    mutating func enqueue(with data: CalculateItem) {
+        self.queue[tail] = data
         tail += 1
     }
     
@@ -34,9 +34,9 @@ struct Queue {
         let value = self.queue[head]
         head += 1
         return value
-        
     }
-    mutating func resetQueue() {
+    
+    mutating func reset() {
         queue = [:]
         head = 0
         tail = 0

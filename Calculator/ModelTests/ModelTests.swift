@@ -9,9 +9,9 @@ import XCTest
 @testable import Calculator
 
 class ModelTests: XCTestCase {
-    var sut: Queue!
+    var sut: CalculatorItemQueue!
     override func setUpWithError() throws {
-        sut = Queue()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
@@ -65,13 +65,13 @@ class ModelTests: XCTestCase {
     }
     
     func test_resetQueue가_queu를_잘_비우는지() {
-        sut.resetQueue()
+        sut.reset()
         let result = sut.queue.isEmpty
         XCTAssertTrue(result)
     }
     
     func test_resetQueue가_head와tail을_초기화해주는지() {
-        sut.resetQueue()
+        sut.reset()
         let result = sut.head == 0 && sut.tail == 0
         XCTAssertTrue(result)
     }
