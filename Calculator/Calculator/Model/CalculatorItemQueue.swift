@@ -15,6 +15,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack: [Element] = []
     private var outputStack: [Element] = []
     
+    var isEmpty: Bool {
+        return inputStack.isEmpty && outputStack.isEmpty
+    }
+    
     var currentInputStack: [Element] {
         return inputStack
     }
