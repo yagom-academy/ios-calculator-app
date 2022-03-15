@@ -27,6 +27,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return outputStack.last ?? inputStack.first
     }
     
+    var last: Element? {
+        return outputStack.first ?? inputStack.last
+    }
+    
     var currentInputStack: [Element] {
         return inputStack
     }

@@ -131,4 +131,19 @@ class CalculatorItemQueueTests: XCTestCase {
         let expected = 2
         XCTAssertEqual(result, expected)
     }
+    
+    func test_1_2를enqueue하고_dequeue했을때_마지막요소가_2가맞는지() {
+        // given
+        let input = [1,2]
+        
+        // when
+        sut.enqueue(input[0])
+        sut.enqueue(input[1])
+        sut.dequeue()
+        
+        // then
+        let result = sut.last
+        let expected = 2
+        XCTAssertEqual(result, expected)
+    }
 }
