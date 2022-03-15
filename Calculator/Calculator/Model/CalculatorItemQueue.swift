@@ -13,9 +13,14 @@ extension Int: CalculateItem {}
 
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack: [Element] = []
+    private var outputStack: [Element] = []
     
     var currentInputStack: [Element] {
         return inputStack
+    }
+    
+    var currentOutputStack: [Element] {
+        return outputStack
     }
     
     mutating func enqueue(_ element: Element) {
@@ -23,6 +28,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() -> Element {
-        inputStack.removeFirst()
+        if outputStack.isEmpty {
+            outputStack = inputStack.reversed()
+            inputStack.removeAll()
+        }
+        
+        return outputStack.removeLast()
     }
 }
