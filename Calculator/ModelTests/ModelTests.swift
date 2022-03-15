@@ -17,8 +17,8 @@ class ModelTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-    
-    func test_숫자파라미터가_잘_들어가는가() {
+
+    func test_enqueue_DoubleType을넣었을때() {
         // given
         let numberValue: Double = 10
         // when
@@ -28,7 +28,7 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(result, numberValue)
     }
     
-    func test_연산자파라미터가_잘_들어가는가() {
+    func test_enqueue_OperatorType을넣었을때() {
         // given
         let operatorValue: Operator = .add
         // when
@@ -38,7 +38,7 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(result, operatorValue)
     }
     
-    func test_dequeue메서드의_Double타입을_빼낼때_잘_작동하는가() {
+    func test_dequeue_DoubleType을뺄때() {
         // when
         sut.enqueue(with: 1.0)
         sut.enqueue(with: Operator.add)
@@ -48,7 +48,7 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
-    func test_dequeue메서드의_Operator타입을_빼낼때_잘_작동하는가() {
+    func test_dequeue_DoubleType을넣었을때() {
         // when
         sut.enqueue(with: 1.0)
         sut.enqueue(with: Operator.add)
@@ -59,18 +59,18 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(result, Operator.add)
     }
     
-    func test_queue가_비어있을때_dequeue가_nil을뱉는지() {
+    func test_dequeue_queue가비어있을때_nil() {
         let result = sut.dequeue()
         XCTAssertNil(result)
     }
     
-    func test_resetQueue가_queu를_잘_비우는지() {
+    func test_reset_queue를초기화() {
         sut.reset()
         let result = sut.queue.isEmpty
         XCTAssertTrue(result)
     }
     
-    func test_resetQueue가_head와tail을_초기화해주는지() {
+    func test_reset_head와tail을초기화() {
         sut.reset()
         let result = sut.head == 0 && sut.tail == 0
         XCTAssertTrue(result)
