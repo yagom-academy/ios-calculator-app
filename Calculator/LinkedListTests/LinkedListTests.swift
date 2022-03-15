@@ -30,11 +30,11 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(node, sut?.head)
     }
 
-//    func test_sequence채택_고차함수사용가능한지() {
-//        sut?.append(node: Node(data: 2))
-//
-//        let result: [Int] = sut!.map {test in test.data }
-//
-//        XCTAssertEqual(result, [1, 2])
-//    }
+    func test_sequence채택_고차함수사용가능한지() {
+        sut?.append(node: Node(data: 2))
+
+        let result: [Int] = sut!.map {test in test.data}
+
+        XCTAssertEqual(result, [1, 2])
+    }
 }

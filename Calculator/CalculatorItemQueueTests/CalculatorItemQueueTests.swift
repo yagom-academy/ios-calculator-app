@@ -15,7 +15,7 @@ struct MockNode {
 }
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<CalculatorItem>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -58,5 +58,15 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(firstNode, nil)
         XCTAssertTrue(sut.queue.tail == nil)
         XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_sequence채택_고차함수사용가능한지() {
+        sut.enqueue(MockNode.mockOperator)
+        sut.enqueue(MockNode.mockDouble)
+
+        let result: [CalculatorItem] = sut.map { $0.data }
+        let expectation = [CalculatorItem.integer(10), CalculatorItem.operator(.devision), CalculatorItem.double(3.5)]
+
+        XCTAssertEqual(result, expectation)
     }
 }
