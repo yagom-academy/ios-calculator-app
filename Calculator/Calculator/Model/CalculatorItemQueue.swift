@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private(set) var inputStack: [Element] = []
-    private(set) var outputStack: [Element] = []
+    private var inputStack: [Element] = []
+    private var outputStack: [Element] = []
     
     var count: Int {
         inputStack.count + outputStack.count

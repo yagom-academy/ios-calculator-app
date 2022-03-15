@@ -26,7 +26,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = 1.0
         // when
         sut.enqueue(input)
-        let result = sut.inputStack[0]
+        let result = sut.first
         // then
         XCTAssertEqual(result, 1.0)
     }
@@ -38,7 +38,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(3.0)
         sut.enqueue(4.0)
         // when
-        let result = sut.inputStack[3]
+        let result = sut.last
         // then
         XCTAssertEqual(result, 4.0)
     }
@@ -113,6 +113,6 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
         sut.removeAll()
         // then
-        XCTAssertEqual(sut.count, 0)
+        XCTAssertTrue(sut.isEmpty)
     }
 }
