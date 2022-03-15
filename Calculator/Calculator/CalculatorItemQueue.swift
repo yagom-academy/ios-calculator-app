@@ -16,7 +16,7 @@ extension Int: CalculateItem {
 }
 
 class CalculatorItemQueue<CalculateItem> {
-    let linkdeList = LinkdeList<CalculateItem>()
+    private let linkdeList = LinkdeList<CalculateItem>()
     
     func enqueue(_ data: CalculateItem) {
         linkdeList.append(data)

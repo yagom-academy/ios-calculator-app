@@ -18,10 +18,10 @@ class Node<CalculateItem> {
 }
 
 class LinkdeList<CalculateItem> {
-    var head: Node<CalculateItem>?
-    var tail: Node<CalculateItem>?
+    private var head: Node<CalculateItem>?
+    private var tail: Node<CalculateItem>?
     
-    func append(_ data: CalculateItem){
+    func append(_ data: CalculateItem) {
         if head == nil {
             head = Node(data: data)
             tail = head
