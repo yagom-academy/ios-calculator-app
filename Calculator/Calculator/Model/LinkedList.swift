@@ -36,6 +36,10 @@ final class LinkedList<T> {
     func append(node: Node<T>) {
         tail?.next = node
         tail = node
+        
+        if head == nil {
+            head = node
+        }
     }
     
     func removeFirst() -> T? {
