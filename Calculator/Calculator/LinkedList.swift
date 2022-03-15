@@ -15,4 +15,16 @@ final class LinkedList {
         self.head = head
         self.tail = head
     }
+    
+    var count: Int {
+        guard var node = self.head else {
+            return 0
+        }
+        var count = 1
+        while node.next != nil {
+            count += 1
+            node = node.next!
+        }
+        return count
+    }
 }
