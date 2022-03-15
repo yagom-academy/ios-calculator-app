@@ -41,5 +41,17 @@ class LinkdeList<T> {
             return false
         }
     }
+    
+    func count() -> Int {
+        if head == nil {
+            return 0
+        }
+        var count = 1
+        while head?.next != nil {
+            count += 1
+            head = head?.next
+        }
+        return count
+    }
 
 }

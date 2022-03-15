@@ -25,4 +25,8 @@ class CalculatorItemQueue<T: CalculateItem> {
     func isEmpty() -> Bool {
         return linkdeList.isEmpty()
     }
+    
+    func count() -> Int {
+        return linkdeList.count()
+    }
 }
