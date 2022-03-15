@@ -41,5 +41,19 @@ class LinkedList<T> {
     self.head = nil
     self.tail = nil
   }
+  
+  func showAll() -> [T] {
+    var allNode: [T] = []
+    var headDate = self.head
+    
+    while tail?.next == nil {
+      guard let date = headDate?.data  else {
+        return allNode
+      }
+      allNode.append(date)
+      headDate = headDate?.next
+    }
+    return allNode
+  }
 }
 

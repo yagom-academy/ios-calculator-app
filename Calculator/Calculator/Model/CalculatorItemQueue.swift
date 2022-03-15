@@ -13,4 +13,17 @@ class CalculateItemQueue<T>: CalculateItem {
   func enqueue(data: T) {
     list.append(data: data)
   }
+  
+  func dequeue() {
+    list.removeHead()
+  }
+  
+  func dequeueAll() {
+    list.removeAll()
+  }
+  
+  func presentAll() -> [T]{
+   return list.showAll()
+  }
+  
 }
