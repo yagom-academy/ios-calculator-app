@@ -5,16 +5,18 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-final class Node<T>: Equatable {
-    static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
-        return lhs === rhs
-    }
-    
+final class Node<T> {
     let data: T
     var next: Node?
     
     init(data: T) {
         self.data = data
+    }
+}
+
+extension Node: Equatable {
+    static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
+        return lhs === rhs
     }
 }
 

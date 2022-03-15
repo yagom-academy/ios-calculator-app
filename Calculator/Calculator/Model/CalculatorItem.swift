@@ -17,7 +17,7 @@ enum Operator: String {
     case equalSign = "="
 }
 
-enum CalculatorItem: Equatable, CalculateItem {
+enum CalculatorItem: CalculateItem {
     case integer(Int)
     case double(Double)
     case `operator`(Operator)
@@ -32,7 +32,9 @@ enum CalculatorItem: Equatable, CalculateItem {
             return sign.rawValue
         }
     }
-    
+}
+
+extension CalculatorItem: Equatable {
     static func == (lhs: CalculatorItem, rhs: CalculatorItem) -> Bool {
         return lhs.value == rhs.value
     }
