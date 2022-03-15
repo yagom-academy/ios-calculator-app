@@ -17,7 +17,7 @@ struct CalculatorItemQueue<T> {
         }
     }
     
-    mutating func removeAll() {
+    mutating func clearAll() {
         queue.removeAll()
     }
     

@@ -50,13 +50,13 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue_empty_queue_returns_nil() {
-        calculator.removeAll()
+        calculator.clearAll()
             
         XCTAssertNil(calculator.dequeue())
     }
     
     func test_removeAll() {
-        calculator.removeAll()
+        calculator.clearAll()
             
         let result = calculator.queue
             
