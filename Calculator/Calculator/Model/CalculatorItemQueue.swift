@@ -12,19 +12,19 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     private var outputStack: [Element] = []
     
     var count: Int {
-        inputStack.count + outputStack.count
+        return inputStack.count + outputStack.count
     }
     
     var isEmpty: Bool {
-        inputStack.isEmpty && outputStack.isEmpty
+        return inputStack.isEmpty && outputStack.isEmpty
     }
     
     var first: Element? {
-        outputStack.isEmpty ? inputStack.first : outputStack.last
+        return inputStack.isEmpty ? outputStack.last : inputStack.first
     }
     
     var last: Element? {
-        inputStack.isEmpty ? outputStack.first : inputStack.last
+        return inputStack.isEmpty ? outputStack.first : inputStack.last
     }
     
     mutating func enqueue(_ element: Element) {
