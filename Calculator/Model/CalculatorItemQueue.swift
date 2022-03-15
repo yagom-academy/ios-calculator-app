@@ -15,6 +15,10 @@ struct CalculatorItemQueue<T> {
     public var count: Int {
         return list.count
     }
+    
+    public func enqueue(_ element: T) {
+        return list.append(element)
+    }
 }
 
 
