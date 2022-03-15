@@ -11,6 +11,10 @@ protocol CalculateItem {
     
 }
 
+extension Int: CalculateItem {
+    
+}
+
 class LinkdeList<T> {
 
 }
