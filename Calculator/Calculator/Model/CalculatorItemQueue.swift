@@ -8,18 +8,23 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var list: [Element] = []
+    var addList: [Element] = []
+    var subList: [Element] = []
+    
+    var peek: Element? {
+        addList.first
+    }
     
     var isEmpty: Bool {
-        list.isEmpty
+        addList.isEmpty && subList.isEmpty
     }
     
     mutating func resetQueue() {
-        list.removeAll()
+        addList.removeAll()
     }
     
     mutating func enQueue(element: Element) {
-        list.append(element)
+        addList.append(element)
     }
 }
 
