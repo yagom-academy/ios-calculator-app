@@ -28,8 +28,8 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue_and_dequeue() {
         var queue = sut
         queue.enqueue(element: 10)
-        guard let dequeue = queue.dequeue() else { return }
-        XCTAssertEqual(dequeue as! Int, 10)
+        guard let dequeue = queue.dequeue() as? Int else { return }
+        XCTAssertEqual(dequeue, 10)
     }
     
     func test_peek_equal_data() {
@@ -55,9 +55,22 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue_is_Empty() {
         var queue = sut
+        XCTAssertEqual(queue.isEmpty, true)
+    }
+    
+    func test_queue_is_Empty_after_clear() {
+        var queue = sut
         queue.enqueue(element: 1)
         queue.clear()
         XCTAssertEqual(queue.isEmpty, true)
+    }
+    
+    func test_queue_can_push_lots_of_data() {
+        var queue = sut
+        queue.enqueue(element: 1)
+        queue.enqueue(element: "+")
+        queue.enqueue(element: 3)
+        queue.enqueue(element: "=")
     }
     
     func testPerformanceExample() throws {

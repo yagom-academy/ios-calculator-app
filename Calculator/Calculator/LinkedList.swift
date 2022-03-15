@@ -30,7 +30,7 @@ class LinkedList<T> {
         guard let head = head else { return nil }
         var node = head
         if index > 0 {
-            for _ in 0..<(index - 1) {
+            for _ in 0..<index {
                 guard let next = node.next else { return nil }
                 node = next
             }
@@ -77,7 +77,7 @@ class LinkedList<T> {
     public func remove(at index: Int) -> T? {
         guard 0..<count ~= index else { return nil }
         guard let node = getNode(at: index) else { return nil }
-        count -= 1
+        
         if count == 1 {
             removeAll()
             return node.data
@@ -96,6 +96,7 @@ class LinkedList<T> {
             prevNode?.next = nextNode
             nextNode?.prev = prevNode
         }
+        count -= 1
         node.next = nil
         node.prev = nil
         return node.data
