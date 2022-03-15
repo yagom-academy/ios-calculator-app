@@ -16,7 +16,7 @@ struct CalculatorItemQueue<T> {
         return list.count
     }
     
-    public func enqueue(_ element: T) {
+    public mutating func enqueue(_ element: T) {
         return list.append(element)
     }
 }
