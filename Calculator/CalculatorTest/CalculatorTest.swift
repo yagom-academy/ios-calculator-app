@@ -61,7 +61,6 @@ final class CalculatorTests: XCTestCase {
     let inputOne = 1.0
     let inputTwo = 2.0
     
-    
     sut.enqueue(data: inputOne)
     sut.enqueue(data: inputTwo)
     sut.dequeueAll()
@@ -89,5 +88,4 @@ final class CalculatorTests: XCTestCase {
     
     XCTAssertEqual(sut.presentAll(), [1.0])
   }
-  
 }

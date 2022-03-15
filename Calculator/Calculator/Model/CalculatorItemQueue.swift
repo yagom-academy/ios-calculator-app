@@ -29,5 +29,4 @@ final class CalculateItemQueue<T>: CalculateItem {
   func presentAll() -> [T]{
    return list.showAll()
   }
-  
 }
