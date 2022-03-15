@@ -8,10 +8,18 @@
 import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var addStack: [Element] = []
-    var subStack: [Element] = []
+    private var addStack: [Element] = []
+    private var subStack: [Element] = []
     
-    var peek: Element? {
+    var list: [Element] {
+        return addStack + subStack
+    }
+    
+    var last: Element? {
+        return addStack.last
+    }
+    
+    var first: Element? {
         return addStack.first
     }
     

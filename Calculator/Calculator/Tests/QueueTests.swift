@@ -22,11 +22,16 @@ class QueueTests: XCTestCase {
         sut = nil
     }
 
-    func test_peek_프로퍼티가_큐배열의_처음_인덱스를_가르키는지() {
+    func test_first_프로퍼티가_큐배열의_처음_인덱스를_가르키는지() {
         sut.enQueue(element: 1)
         sut.enQueue(element: 2)
-        sut.enQueue(element: 3)
-        XCTAssertEqual(sut.peek, 1)
+        XCTAssertEqual(sut.first, 1)
+    }
+    
+    func test_last_프로퍼티가_큐배열의_마지막_인덱스를_가르키는지() {
+        sut.enQueue(element: 1)
+        sut.enQueue(element: 2)
+        XCTAssertEqual(sut.last, 2)
     }
     
     func test_isEmpty_프로퍼티에_값을_넣었을때_False_값을_반환하는지() {
@@ -40,11 +45,10 @@ class QueueTests: XCTestCase {
     }
     
     func test_enQueue큐_배열에_값이_추가가_되는지() {
-        let result: [Double] = [1, 2, 3]
+        let result: [Double] = [1, 2]
         sut.enQueue(element: 1)
         sut.enQueue(element: 2)
-        sut.enQueue(element: 3)
-        XCTAssertEqual(sut.addStack, result)
+        XCTAssertEqual(sut.list, result)
     }
     
     func test_resetQueue큐_배열의_값이_제거가되는지() {
@@ -54,9 +58,9 @@ class QueueTests: XCTestCase {
     }
 
     func test_deQueue큐배열의_처음_인덱스를_제거해주는지(){
-        let test: Double = 2
+        let test: Double = 1
+        sut.enQueue(element: 1)
         sut.enQueue(element: 2)
-        sut.enQueue(element: 3)
         
         let result = sut.deQueue()
         
