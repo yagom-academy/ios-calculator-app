@@ -53,5 +53,20 @@ class LinkdeList<T> {
         }
         return count
     }
+    
+    func removeFirst() -> T? {
+        let value: T?
+        if head == nil { return nil }
+        
+        if head?.next == nil {
+            value = head?.data
+            head = nil
+            tail = nil
+            return value
+        }
+        value = head?.data
+        head = head?.next
+        return value
+    }
 
 }

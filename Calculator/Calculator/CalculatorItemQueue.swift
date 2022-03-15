@@ -29,4 +29,8 @@ class CalculatorItemQueue<T: CalculateItem> {
     func count() -> Int {
         return linkdeList.count()
     }
+    
+    func dequeue() -> T? {
+        return linkdeList.removeFirst()
+    }
 }

@@ -68,6 +68,42 @@ class CalculatorTests: XCTestCase {
         let reselt = sut.count()
 
         // then
-        XCTAssertEqual(reselt, 2)
+        XCTAssertEqual(reselt, 3)
+    }
+    
+    func test_data_1_dequeue_retrun_1() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+
+        // when
+        let reselt = sut.dequeue()
+
+        // then
+        XCTAssertEqual(reselt, 1)
+    }
+    
+    func test_not_enqueue_dequeue_return_nil() {
+        // given
+
+
+        // when
+        let reselt = sut.dequeue()
+
+        // then
+        XCTAssertEqual(reselt, nil)
+    }
+    
+    func test_data_1_dequeue_count_retrun_0() {
+        // given
+        sut.enqueue(1)
+        sut.dequeue()
+
+        // when
+        let reselt = sut.count()
+
+        // then
+        XCTAssertEqual(reselt, 0)
     }
 }
