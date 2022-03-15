@@ -31,14 +31,6 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
-    func test_count호출시_출력_1() {
-        sut.head = CalculatorNode(value: 10)
-        
-        let result = sut.count
-        
-        XCTAssertEqual(result, 1)
-    }
-    
     func test_새로운node를3개append하면count호출시출력_3() {
         sut.append(10)
         sut.append(20)
