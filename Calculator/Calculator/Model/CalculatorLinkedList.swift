@@ -17,9 +17,9 @@ class Node<T> {
   }
 }
 
-class DoubleLinkedList<T: Equatable> {
-  private var head: Node<T>?
-  private var tail: Node<T>?
+class LinkedList<T> {
+  var head: Node<T>?
+  var tail: Node<T>?
   
   func append(data: T) {
     let newNode = Node(data)
@@ -29,7 +29,6 @@ class DoubleLinkedList<T: Equatable> {
       self.tail = newNode
       return
     }
-    
     self.tail?.next = newNode
     self.tail = newNode
   }

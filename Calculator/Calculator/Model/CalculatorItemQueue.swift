@@ -7,6 +7,10 @@
 
 import Foundation
 
-class CalculateItemQueue {
+class CalculateItemQueue<T>: CalculateItem {
+  var list = LinkedList<T>()
   
+  func enqueue(data: T) {
+    list.append(data: data)
+  }
 }
