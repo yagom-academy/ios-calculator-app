@@ -33,5 +33,13 @@ class LinkdeList<T> {
         tail = node
         
     }
+    
+    func isEmpty() -> Bool {
+        if head == nil {
+            return true
+        } else {
+            return false
+        }
+    }
 
 }

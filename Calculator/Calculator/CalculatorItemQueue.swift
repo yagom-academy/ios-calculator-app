@@ -21,4 +21,8 @@ class CalculatorItemQueue<T: CalculateItem> {
     func enqueue(_ data: T) {
         linkdeList.append(data)
     }
+    
+    func isEmpty() -> Bool {
+        return linkdeList.isEmpty()
+    }
 }

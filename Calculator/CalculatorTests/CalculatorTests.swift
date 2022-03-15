@@ -28,9 +28,22 @@ class CalculatorTests: XCTestCase {
         
 
         // when
-        
+        let reselt = sut.isEmpty()
 
         // then
+        XCTAssertTrue(reselt)
+        
+    }
+    
+    func test_once_enqueue_isEmpty_return_false() {
+        // given
+        sut.enqueue(0)
+
+        // when
+        let reselt = sut.isEmpty()
+
+        // then
+        XCTAssertFalse(reselt)
         
     }
     
