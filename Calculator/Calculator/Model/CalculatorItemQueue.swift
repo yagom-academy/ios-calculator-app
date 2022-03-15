@@ -12,7 +12,7 @@ struct CalculatorItemQueue {
     private var subStack: [CalculateItem] = []
     
     var list: [CalculateItem] {
-        return addStack + subStack
+        return addStack + subStack.reversed()
     }
     
     var last: CalculateItem? {
