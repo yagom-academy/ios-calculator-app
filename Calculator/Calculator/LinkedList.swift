@@ -32,7 +32,7 @@ final class LinkedList {
         guard var node = self.head else {
             return nil
         }
-        for _ in 1..<index {
+        for _ in 1...index {
             guard let nextNode = node.next else {
                 return nil
             }
@@ -69,5 +69,20 @@ final class LinkedList {
         }
         newNode.next = nextNode
         frontNode.next = newNode
+    }
+    
+    func remove(at index: Int) {
+        guard let frontNode = findNode(at: index-1) else  {
+            return
+        }
+        guard let removeNode = frontNode.next else {
+            return
+        }
+        guard let nextNode = removeNode.next else {
+            frontNode.next = nil
+            self.tail = frontNode
+            return
+        }
+        frontNode.next = nextNode
     }
 }

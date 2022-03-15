@@ -130,4 +130,21 @@ final class CalculatorTests: XCTestCase {
         }
         XCTAssertEqual(sut.count, 10)
     }
+    
+    func test_인스턴스가nil일때_remove메서드호출시_nil값이나오는지여부() {
+        sut.remove(at: 1)
+        
+        let result = sut.findNode(at: 1)
+        
+        XCTAssertEqual(result, nil)
+    }
+    
+    func test_append메서드2번호출하고remove메서드1번호출시_count1가나오는지여부() {
+        sut.append(Node(data: 1, next: nil))
+        sut.append(Node(data: 2, next: nil))
+        //작동오류남, count값이 1이아닌 2가 호출됨
+        sut.remove(at: 1)
+        let result = sut.count
+        XCTAssertEqual(result, 2)
+    }
 }
