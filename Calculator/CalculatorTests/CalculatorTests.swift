@@ -55,4 +55,28 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 10)
     }
+    
+    func test_head가nil떄_findNode메서드호출시_값이nil이나오는지() {
+        sut.head = nil
+        
+        let result = sut.findNode(at: 0)
+        
+        XCTAssertEqual(result, nil)
+    }
+    
+    func test_head값이있을때_findNode메서드호출시_head의값을똑같이반환하는지() {
+        sut.head = Node(data: 1, next: nil)
+        
+        let result = sut.findNode(at: 1)?.data
+        
+        XCTAssertEqual(result, sut.head?.data)
+    }
+    
+    func test_Node의값들이_count10일때_findNode메서드호출이_10번쨰의값이호출되는지() {
+        sut.head = Node(data: 1, next: Node(data: 2, next: Node(data: 3, next: Node(data: 4, next: Node(data: 5, next: Node(data: 6, next: Node(data: 7, next: Node(data: 8, next: Node(data: 9, next: Node(data: 10, next: nil))))))))))
+        
+        let result = sut.findNode(at: 10)
+        
+        XCTAssertEqual(result, sut.head?.next?.next?.next?.next?.next?.next?.next?.next?.next)
+    }
 }

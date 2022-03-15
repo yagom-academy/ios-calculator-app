@@ -27,4 +27,17 @@ final class LinkedList {
         }
         return count
     }
+    
+    func findNode(at index: Int) -> Node? {
+        guard var node = self.head else {
+            return nil
+        }
+        for _ in 1..<index {
+            guard let nextNode = node.next else {
+                return nil
+            }
+            node = nextNode
+        }
+        return node
+    }
 }
