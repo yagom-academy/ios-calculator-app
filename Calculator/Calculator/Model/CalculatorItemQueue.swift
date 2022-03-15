@@ -19,6 +19,10 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         outputStack.isEmpty ? inputStack.first : outputStack.last
     }
     
+    var last: Element? {
+        inputStack.isEmpty ? outputStack.first : inputStack.last
+    }
+    
     mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }
