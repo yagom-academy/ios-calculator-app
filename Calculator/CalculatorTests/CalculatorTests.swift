@@ -17,11 +17,16 @@ class CalculatorTests: XCTestCase {
         let firstEnqueueOperation = "+"
         let secondEnqueueNumber: Float = 2
         let secondEnqueueOperation = "-"
-        calculatorItemQueue.enqueue(number: firstEnqueueNumber,operation: firstEnqueueOperation)
-        calculatorItemQueue.enqueue(number: secondEnqueueNumber,operation: secondEnqueueOperation)
+        let firstEnqueueItem = Item(number: firstEnqueueNumber,operation: firstEnqueueOperation)
+        let secondEnqueueItem = Item(number: secondEnqueueNumber,operation: secondEnqueueOperation)
+        calculatorItemQueue.enqueue(calculateItem: firstEnqueueItem)
+        calculatorItemQueue.enqueue(calculateItem: secondEnqueueItem)
         
         //when
-        let dequeResult = calculatorItemQueue.dequeue()
+        guard let dequeResult = calculatorItemQueue.dequeue() as? Item else {
+            XCTFail()
+            return
+        }
         
         //then
         let resultNumber = dequeResult.number
@@ -38,12 +43,16 @@ class CalculatorTests: XCTestCase {
         let firstEnqueueOperation = "+"
         let secondEnqueueNumber: Float = 2
         let secondEnqueueOperation = "-"
-        calculatorItemQueue.enqueue(number: firstEnqueueNumber,operation: firstEnqueueOperation)
-        calculatorItemQueue.enqueue(number: secondEnqueueNumber,operation: secondEnqueueOperation)
-        
+        let firstEnqueueItem = Item(number: firstEnqueueNumber,operation: firstEnqueueOperation)
+        let secondEnqueueItem = Item(number: secondEnqueueNumber,operation: secondEnqueueOperation)
+        calculatorItemQueue.enqueue(calculateItem: firstEnqueueItem)
+        calculatorItemQueue.enqueue(calculateItem: secondEnqueueItem)
         //when
         _ = calculatorItemQueue.dequeue()
-        let dequeResult = calculatorItemQueue.dequeue()
+        guard let dequeResult = calculatorItemQueue.dequeue() as? Item else {
+            XCTFail()
+            return
+        }
         
         //then
         let resultNumber = dequeResult.number
