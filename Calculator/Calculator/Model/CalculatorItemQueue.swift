@@ -17,14 +17,14 @@ final class CalculatorItemQueue {
     }
     
     func enqueue(_ node: Node<CalculatorItem>) {
-        self.queue.append(node: node)
+        queue.append(node: node)
     }
     
     func dequeue() -> CalculatorItem? {
-        self.queue.removeFirst()
+        queue.removeFirst()
     }
     
     func clear() {
-        self.queue.clear()
+        queue.clear()
     }
 }

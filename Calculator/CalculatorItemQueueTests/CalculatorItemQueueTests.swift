@@ -41,11 +41,11 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_clear_head가nil인지() {
-        let lastHead = sut.queue.head
+        let oldHead = sut.queue.head
         
         sut.clear()
         
-        XCTAssertEqual(lastHead, MockNode.mockInt)
+        XCTAssertEqual(oldHead, MockNode.mockInt)
         XCTAssertNil(sut.queue.head)
     }
 
@@ -56,6 +56,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, MockNode.mockInt.data)
         XCTAssertEqual(firstNode, nil)
+        XCTAssertTrue(sut.queue.tail == nil)
         XCTAssertTrue(sut.isEmpty())
     }
 }

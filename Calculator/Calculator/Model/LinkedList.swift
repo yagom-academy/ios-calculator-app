@@ -22,37 +22,35 @@ extension Node: Equatable {
 
 final class LinkedList<T> {
     var head: Node<T>?
+    var tail: Node<T>?
     
     init(head: Node<T>) {
         self.head = head
+        self.tail = head
     }
     
     func isEmpty() -> Bool {
-        return head == nil
+        return head == nil && tail == nil
     }
     
     func append(node: Node<T>) {
-        findLastNode()?.next = node
-    }
-    
-    func findLastNode() -> Node<T>? {
-        var currentNode = head
-        
-        while currentNode?.next != nil {
-            currentNode = currentNode?.next
-        }
-        return currentNode
+        tail?.next = node
+        tail = node
     }
     
     func removeFirst() -> T? {
         let firstData = head?.data
         
         head = head?.next
+        if head == nil {
+            tail = nil
+        }
         return firstData
     }
     
     func clear() {
         head = nil
+        tail = nil
     }
 }
 
