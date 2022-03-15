@@ -11,6 +11,10 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     var inputStack: [Element] = []
     var outputStack: [Element] = []
     
+    var count: Int {
+        inputStack.count + outputStack.count
+    }
+    
     mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }

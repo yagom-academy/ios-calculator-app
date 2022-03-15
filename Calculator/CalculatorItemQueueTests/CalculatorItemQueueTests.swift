@@ -63,4 +63,17 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, 2.0)
     }
+    
+    func test_배열의_count를_정상적으로_반환하는가() {
+        // given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        sut.enqueue(3.0)
+        sut.enqueue(4.0)
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, 4)
+    }
 }
