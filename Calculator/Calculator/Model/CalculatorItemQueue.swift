@@ -15,7 +15,11 @@ final class CalculateItemQueue<T>: CalculateItem {
   }
   
   func dequeue() {
-    list.removeFinal()
+    list.removeFirst()
+  }
+  
+  func dequeueLatest() {
+    list.removeLatest()
   }
   
   func dequeueAll() {

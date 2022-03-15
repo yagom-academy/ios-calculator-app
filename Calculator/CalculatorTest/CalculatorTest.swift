@@ -61,11 +61,12 @@ final class CalculatorTests: XCTestCase {
     let inputOne = 1.0
     let inputTwo = 2.0
     
+    
     sut.enqueue(data: inputOne)
     sut.enqueue(data: inputTwo)
     sut.dequeueAll()
     
-    XCTAssertEqual(sut.list.head?.data, nil)
+    XCTAssertEqual(sut.presentAll(), [])
   }
   
   func test_presentAll함수를_호출하면_올라갔던_1과2가_모두보이는지() {
@@ -74,8 +75,19 @@ final class CalculatorTests: XCTestCase {
     
     sut.enqueue(data: inputOne)
     sut.enqueue(data: inputTwo)
-    sut.presentAll()
     
     XCTAssertEqual(sut.presentAll(), [1.0, 2.0])
   }
+  
+  func test_dequeueLatest함수를_호출하면_올라갔던_1과2중_2가_삭제되는지() {
+    let inputOne = 1.0
+    let inputTwo = 2.0
+
+    sut.enqueue(data: inputOne)
+    sut.enqueue(data: inputTwo)
+    sut.dequeueLatest()
+    
+    XCTAssertEqual(sut.presentAll(), [1.0])
+  }
+  
 }
