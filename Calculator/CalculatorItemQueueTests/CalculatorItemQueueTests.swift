@@ -37,4 +37,29 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(outElement, 1)
     }
     
+    func test_dequeue_every_element_in_queue() {
+        calculator.enqueue(1)
+        calculator.enqueue(2)
+        calculator.enqueue(3)
+        calculator.dequeue()
+        calculator.dequeue()
+        calculator.dequeue()
+  
+        let result = calculator.queue
+        XCTAssertEqual(result, [])
+    }
+    
+    func test_dequeue_empty_queue_returns_nil() {
+        calculator.removeAll()
+            
+        XCTAssertNil(calculator.dequeue())
+    }
+    
+    func test_removeAll() {
+        calculator.removeAll()
+            
+        let result = calculator.queue
+            
+        XCTAssertEqual(result, [])
+    }
 }
