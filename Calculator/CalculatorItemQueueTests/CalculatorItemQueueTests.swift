@@ -24,5 +24,17 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, [1,2,3])
     }
-
+    
+    func test_dequeue_element() {
+        calculator.enqueue(1)
+        calculator.enqueue(2)
+        calculator.enqueue(3)
+        
+        let outElement = calculator.dequeue()
+        let result = calculator.queue
+        
+        XCTAssertEqual(result, [2,3])
+        XCTAssertEqual(outElement, 1)
+    }
+    
 }

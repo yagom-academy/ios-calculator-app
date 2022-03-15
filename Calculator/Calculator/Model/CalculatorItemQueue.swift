@@ -9,4 +9,12 @@ struct CalculatorItemQueue<T> {
         queue.append(element)
     }
     
+    mutating func dequeue() -> T? {
+        if !queue.isEmpty {
+            return queue.removeFirst()
+        } else {
+            return nil
+        }
+    }
+    
 }
