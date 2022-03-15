@@ -14,6 +14,15 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }
+    
+    mutating func dequeue() -> Element? {
+        if outputStack.isEmpty {
+            guard !inputStack.isEmpty else { return nil }
+            outputStack = inputStack.reversed()
+            inputStack.removeAll()
+        }
+        return outputStack.removeLast()
+    }
 }
 
 protocol CalculatorItem { }

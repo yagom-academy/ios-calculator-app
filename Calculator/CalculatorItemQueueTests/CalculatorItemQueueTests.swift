@@ -32,4 +32,14 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1.0)
     }
+    
+    func test_빈배열에서_값을_dequeue하면_nil을_반환하는가() {
+        // given
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, nil)
+    }
 }
