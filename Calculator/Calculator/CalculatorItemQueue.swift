@@ -15,7 +15,7 @@ extension Int: CalculateItem {
     
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T: CalculateItem> {
     private let linkdeList = LinkdeList<T>()
     
     func enqueue(_ data: T) {
