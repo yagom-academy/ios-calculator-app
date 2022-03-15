@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element: CalculateItem> {
-    private var addStack: [Element] = []
-    private var subStack: [Element] = []
+struct CalculatorItemQueue<Element> {
+    private var addStack: [CalculateItem] = []
+    private var subStack: [CalculateItem] = []
     
-    var list: [Element] {
+    var list: [CalculateItem] {
         return addStack + subStack
     }
     
-    var last: Element? {
+    var last: CalculateItem? {
         return addStack.last
     }
     
-    var first: Element? {
+    var first: CalculateItem? {
         return addStack.first
     }
     
@@ -32,11 +32,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         subStack.removeAll()
     }
     
-    mutating func enQueue(element: Element) {
-        addStack.append(element)
+    mutating func enQueue(item: CalculateItem) {
+        addStack.append(item)
     }
     
-    mutating func deQueue() -> Element? {
+    mutating func deQueue() -> CalculateItem? {
         if subStack.isEmpty {
             subStack = addStack.reversed()
             addStack.removeAll()

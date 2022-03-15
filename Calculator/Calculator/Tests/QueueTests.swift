@@ -23,20 +23,22 @@ class QueueTests: XCTestCase {
     }
 
     func test_first_프로퍼티가_큐배열의_처음_인덱스를_가르키는지() {
-        sut.enQueue(element: 1)
-        sut.enQueue(element: 2)
-        XCTAssertEqual(sut.first, 1)
+        let result: CalculateItem = 1
+        sut.enQueue(item: 1)
+        sut.enQueue(item: 2)
+        XCTAssertEqual(sut.first as? Double, result as? Double)
     }
     
     func test_last_프로퍼티가_큐배열의_마지막_인덱스를_가르키는지() {
-        sut.enQueue(element: 1)
-        sut.enQueue(element: 2)
-        XCTAssertEqual(sut.last, 2)
+        let result: CalculateItem = 2
+        sut.enQueue(item: 1)
+        sut.enQueue(item: 2)
+        XCTAssertEqual(sut.last as? Double, result as? Double)
     }
     
     func test_isEmpty_프로퍼티에_값을_넣었을때_False_값을_반환하는지() {
         let calculateItem = 0.35
-        sut.enQueue(element: calculateItem)
+        sut.enQueue(item: calculateItem)
         XCTAssertFalse(sut.isEmpty)
     }
     
@@ -46,24 +48,24 @@ class QueueTests: XCTestCase {
     
     func test_enQueue큐_배열에_값이_추가가_되는지() {
         let result: [Double] = [1, 2]
-        sut.enQueue(element: 1)
-        sut.enQueue(element: 2)
-        XCTAssertEqual(sut.list, result)
+        sut.enQueue(item: 1)
+        sut.enQueue(item: 2)
+        XCTAssertEqual(sut.list as? [Double], result)
     }
     
     func test_resetQueue큐_배열의_값이_제거가되는지() {
-        sut.enQueue(element: 1)
+        sut.enQueue(item: 1)
         sut.resetQueue()
         XCTAssertTrue(sut.isEmpty)
     }
 
     func test_deQueue큐배열의_처음_인덱스를_제거해주는지(){
         let test: Double = 1
-        sut.enQueue(element: 1)
-        sut.enQueue(element: 2)
+        sut.enQueue(item: 1)
+        sut.enQueue(item: 2)
         
         let result = sut.deQueue()
         
-        XCTAssertEqual(result, test)
+        XCTAssertEqual(result as? Double, test)
     }
 }
