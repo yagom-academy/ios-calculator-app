@@ -10,15 +10,14 @@ import Foundation
 
 
 class CalculatorItemQueue {
-    var queue: [Item] = []
+    private var queue: [CalculateItem] = []
     
-    func enqueue(number: Float, operation: String) {
-        queue.append(Item(number: number, operation: operation))
+    func enqueue(calculateItem: CalculateItem) {
+        queue.append(calculateItem)
     }
     
-    func dequeue() -> Item{
-        let returnValue = queue[0]
-        queue.remove(at: 0)
+    func dequeue() -> CalculateItem{
+        let returnValue = queue.remove(at: 0)
         return returnValue
     }
 }
