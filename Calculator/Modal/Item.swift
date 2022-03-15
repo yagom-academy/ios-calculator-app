@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 //추후 기능 구현
 protocol CalculateItem {
 }

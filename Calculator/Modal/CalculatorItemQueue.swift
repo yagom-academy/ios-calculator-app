@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 class CalculatorItemQueue {
     private var queue: [CalculateItem] = []
     
