@@ -15,6 +15,10 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         inputStack.count + outputStack.count
     }
     
+    var isEmpty: Bool {
+        inputStack.isEmpty && outputStack.isEmpty
+    }
+    
     var first: Element? {
         outputStack.isEmpty ? inputStack.first : outputStack.last
     }
