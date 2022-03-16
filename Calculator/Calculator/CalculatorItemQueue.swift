@@ -30,6 +30,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return linkdeList.count()
     }
     
+    @discardableResult
     func dequeue() -> T? {
         return linkdeList.removeFirst()
     }
