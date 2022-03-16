@@ -20,21 +20,10 @@ final class Node<T> {
 final class LinkdeList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    
-    func append(_ data: T) {
-        if head == nil {
-            head = Node(data: data)
-            tail = head
-            return
-        }
-        let node = Node(data: data)
-        tail?.next = node
-        tail = node
-    }
-    
-    func isEmpty() -> Bool { head == nil }
-    
-    func count() -> Int {
+    var isEmpty: Bool { head == nil }
+    var count: Int { getCount() }
+
+    private func getCount() -> Int {
         if head == nil {
             return 0
         }
@@ -45,6 +34,17 @@ final class LinkdeList<T> {
             nodePoint = nodePoint?.next
         }
         return count
+    }
+    
+    func append(_ data: T) {
+        if head == nil {
+            head = Node(data: data)
+            tail = head
+            return
+        }
+        let node = Node(data: data)
+        tail?.next = node
+        tail = node
     }
     
     func removeFirst() -> T? {
