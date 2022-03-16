@@ -9,14 +9,6 @@ class LinkedList<T> {
         count = 0
     }
     
-    public var first: T? {
-        return head?.data
-    }
-    
-    public var last: T? {
-        return tail?.data
-    }
-    
     public var isEmpty: Bool {
         return head == nil
     }
