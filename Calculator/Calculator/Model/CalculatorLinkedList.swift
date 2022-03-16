@@ -67,14 +67,14 @@ final class LinkedList<T> {
   
   func showAll() -> [T] {
     var allNode: [T] = []
-    var head = self.head
+    var current = self.head
     
     for _ in 0...capacity {
-      guard let data = head?.data else {
+      guard let currentData = current?.data else {
         return allNode
       }
-      allNode.append(data)
-      head = head?.next
+      allNode.append(currentData)
+      current = current?.next
     }
     return allNode
   }
