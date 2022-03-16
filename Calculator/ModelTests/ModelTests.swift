@@ -40,7 +40,7 @@ class ModelTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
-    func test_dequeue_DoubleType을넣었을때() {
+    func test_dequeue_OperatorType을뺄때() {
         sut.enqueue(with: 1.0)
         sut.enqueue(with: Operator.add)
         sut.enqueue(with: 2.0)
