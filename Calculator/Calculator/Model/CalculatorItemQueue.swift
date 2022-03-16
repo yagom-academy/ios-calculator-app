@@ -48,10 +48,3 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
 protocol CalculatorItem { }
 
 extension Double: CalculatorItem { }
-
-enum Operator: CalculatorItem {
-    case plus
-    case minus
-    case divide
-    case multiply
-}
