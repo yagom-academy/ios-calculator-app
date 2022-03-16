@@ -26,7 +26,7 @@ final class CalculateItemQueue<T: CalculateItem> {
     list.removeAll()
   }
   
-  func presentAll() -> [T]{
+  func presentAll() -> [T] {
    return list.showAll()
   }
 }

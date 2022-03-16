@@ -67,6 +67,7 @@ final class LinkedList<T> {
   
   func showAll() -> [T] {
     var allNode: [T] = []
+    var head = self.head
     
     for _ in 0...capacity {
       guard let data = head?.data else {
