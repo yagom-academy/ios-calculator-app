@@ -18,4 +18,9 @@ struct CalculatorItemQueue<item: CalculateItem> {
         }
         return dequeueList.popLast()
     }
+    
+    mutating func removeAll() {
+        enqueueList.removeAll()
+        dequeueList.removeAll()
+    }
 }

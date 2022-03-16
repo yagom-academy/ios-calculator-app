@@ -11,8 +11,34 @@ class CalculatorItemQueueTest: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    //MARK: - count
+    func test_count호출시_dequeue호출전_enqueueList의개수가정상적으로반환되는지() {
+        let input: Double = 5
+        let input2: Double = 2
+        let input3: Double = 9
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 3)
+    }
     
-    //MARK: - enqueue
+    func test_count호출시_dequeue호출후_dequeueList의개수가정상적으로반환되는지() {
+        let input: Double = 5
+        let input2: Double = 2
+        let input3: Double = 9
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        sut.dequeue()
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 2)
+    }
+    //MARK: - enqueue()
     func test_enqueue호출시_정상적으로추가가되는지() {
         //given
         let input: Double = 2
@@ -27,7 +53,7 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(sut.last, input3)
         XCTAssertEqual(sut.count, 3)
     }
-    //MARK: - dequeue
+    //MARK: - dequeue()
     func test_dequeue호출시_FIFO가정상적으로진행되는지() {
         //given
         let input: Double = 5
@@ -52,5 +78,22 @@ class CalculatorItemQueueTest: XCTestCase {
         let result = sut.dequeue()
         //then
         XCTAssertNil(result)
+    }
+    //MARK: - removeAll()
+    func test_removeAll호출시_전부삭제되는지() {
+        //given
+        let input: Double = 5
+        let input2: Double = 2
+        let input3: Double = 9
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        let preCount = sut.count
+        sut.removeAll()
+        let result = sut.count
+        //then
+        XCTAssertEqual(preCount, 3)
+        XCTAssertEqual(result, 0)
     }
 }
