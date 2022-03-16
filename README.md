@@ -10,6 +10,9 @@
 - [STEP 1](#step-1)
     + [고민한점](#고민한점)
     + [배운개념](#배운개념)
+- [STEP 2](#step-2)
+    + [고민한점](#고민한점)
+    + [배운개념](#배운개념)
 - [기술의 장단점](#기술의-장단점)
     
 ## 프로젝트 소개 및 기능
@@ -21,10 +24,11 @@
 [![xcode](https://img.shields.io/badge/Xcode-13.0-blue)]()
 
 ## UML
-![](https://i.imgur.com/tYnfmpy.png)
+![ic_Step2_class_diagram](https://user-images.githubusercontent.com/88810018/158505149-f94c95e5-610d-44dd-9814-ffa31814ddba.jpeg)
 
 ## [STEP 1]
-### 고민한점
+### 🤔고민한점
+- 고민한점 ❓ / 트러블슈팅 ❗️
 #### 1️⃣ Queue(Linked Queue vs Double Stack Queue)
 - ❓swift는 Queue 형태의 저장 구조를 지원하지 않는다. 따라서 Queue 구현에 있어 고민을 했다. 
 - ❓이번 프로젝트에 필요한 기능은 1) 마지막 값에 값을 추가, 2) 첫번째 값을 시간복잡도 O(1)인 제거, 이 두가지로 판단된다.
@@ -39,7 +43,7 @@
 - ❗️test 코드에서 직접 배열에 접근하지 않고, first, last, isEmpty, count를 이용하여 값을 확인했다.
 
 ---
-### 배운개념
+### 📝배운개념
 - Queue
 - Linked List
 - Linked Queue
@@ -47,7 +51,39 @@
 - protocol
 
 ---
+## [STEP 1]
+### 🤔고민한점
+- 고민한점 ❓ / 트러블슈팅 ❗️
+### 📝배운개념
+
+---
 ## 기술의 장단점
 
 ---
+## commit 규칙
+> 커밋 제목은 최대 50자 입력
+> 본문은 한 줄 최대 72자 입력
+
+### **Commit 제목 규칙**
+- ✅[chore]: 코드 수정, 내부 파일 수정
+- ✨[feat]: 새로운 기능 구현
+- 📐[style]: 스타일 관련 기능(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
+- ➕[add]: Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성 시
+- 🔨[fix]: 버그, 오류 해결
+- ⚰️[del]: 쓸모없는 코드 삭제
+- 📝[docs]: README나 WIKI 등의 문서 개정
+- 💄[mod]: storyboard 파일,UI 수정한 경우
+- ✏️[correct]: 주로 문법의 오류나 타입의 변경, 이름 변경 등에 사용합니다.
+- 🚚[move]: 프로젝트 내 파일이나 코드의 이동
+- ⏪️[rename]: 파일 이름 변경이 있을 때 사용합니다.
+- ⚡️[improve]: 향상이 있을 때 사용합니다.
+- ♻️[refactor]: 전면 수정이 있을 때 사용합니다
+- 🔀[merge]: 다른브렌치를 merge 할 때 사용합니다.
+
+### **Commit Body 규칙**
+- 제목 끝에 마침표(.) 금지
+- 한글로 작성
+
+### **브랜치 이름 규칙**
+ex) 5_mmim90, STEP2, STEP3, STEP2-dev 
 
