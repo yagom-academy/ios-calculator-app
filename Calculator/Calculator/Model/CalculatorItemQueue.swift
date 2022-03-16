@@ -6,32 +6,32 @@
 //
 
 final class CalculatorItemQueue<T: CalculateItem> {
-    let queue: LinkedList<T>
+    let linkedList: LinkedList<T>
     
     init(node: Node<T>) {
-        self.queue = LinkedList<T>.init(head: node)
+        self.linkedList = LinkedList<T>.init(head: node)
     }
     
     func isEmpty() -> Bool {
-        return queue.isEmpty()
+        return linkedList.isEmpty()
     }
     
     func enqueue(_ node: Node<T>) {
-        queue.append(node: node)
+        linkedList.append(node: node)
     }
     
     func dequeue() -> T? {
-        queue.removeFirst()
+        linkedList.removeFirst()
     }
     
     func clear() {
-        queue.clear()
+        linkedList.clear()
     }
 }
 
 extension CalculatorItemQueue: Sequence {
     func makeIterator() -> queueIterator<T> {
-        return queueIterator(current: self.queue.head)
+        return queueIterator(current: self.linkedList.head)
     }
 }
 

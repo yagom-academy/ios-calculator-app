@@ -31,7 +31,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
         
-        let firstNode = sut.queue.head
+        let firstNode = sut.linkedList.head
         let secondNode = firstNode!.next
         let thirdNode = secondNode!.next
         
@@ -41,22 +41,22 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_clear_head가nil인지() {
-        let oldHead = sut.queue.head
+        let oldHead = sut.linkedList.head
         
         sut.clear()
         
         XCTAssertEqual(oldHead, MockNode.mockInt)
-        XCTAssertNil(sut.queue.head)
+        XCTAssertNil(sut.linkedList.head)
     }
 
     func test_dequeue_빈queue인지() {
         let result = sut.dequeue()
         
-        let firstNode = sut.queue.head
+        let firstNode = sut.linkedList.head
         
         XCTAssertEqual(result, MockNode.mockInt.data)
         XCTAssertEqual(firstNode, nil)
-        XCTAssertTrue(sut.queue.tail == nil)
+        XCTAssertTrue(sut.linkedList.tail == nil)
         XCTAssertTrue(sut.isEmpty())
     }
     
