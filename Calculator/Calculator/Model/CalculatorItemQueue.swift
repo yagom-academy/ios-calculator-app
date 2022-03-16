@@ -30,12 +30,12 @@ final class CalculatorItemQueue<T: CalculateItem> {
 }
 
 extension CalculatorItemQueue: Sequence {
-    func makeIterator() -> queueIterator<T> {
-        return queueIterator(current: self.linkedList.head)
+    func makeIterator() -> QueueIterator<T> {
+        return QueueIterator(current: self.linkedList.head)
     }
 }
 
-struct queueIterator<T>: IteratorProtocol {
+struct QueueIterator<T>: IteratorProtocol {
     typealias Element = Node<T>
     
     var current: Element?

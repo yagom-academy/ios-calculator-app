@@ -9,9 +9,9 @@ import XCTest
 @testable import Calculator
 
 struct MockNode {
-    static let mockInt = Node(data: CalculatorItem.integer(10))
-    static let mockOperator = Node(data: CalculatorItem.operator(.devision))
-    static let mockDouble = Node(data: CalculatorItem.double(3.5))
+    static var mockInt = Node(data: CalculatorItem.integer(10))
+    static var mockOperator = Node(data: CalculatorItem.operator(.devision))
+    static var mockDouble = Node(data: CalculatorItem.double(3.5))
 }
 
 class CalculatorItemQueueTests: XCTestCase {
@@ -25,6 +25,9 @@ class CalculatorItemQueueTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         self.sut = nil
+        MockNode.mockDouble.next = nil
+        MockNode.mockInt.next = nil
+        MockNode.mockOperator.next = nil
     }
     
     func test_enqueue_node2개추가됐는지() {
@@ -56,7 +59,6 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, MockNode.mockInt.data)
         XCTAssertEqual(firstNode, nil)
-        XCTAssertTrue(sut.linkedList.tail == nil)
         XCTAssertTrue(sut.isEmpty())
     }
     

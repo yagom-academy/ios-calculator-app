@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Int>?
+    var sut: LinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -21,19 +21,53 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_append_빈queue에값넣었을때_head가첫노드인지() {
+    func test_isEmpty_true() {
+        sut.head = nil
+        
+        XCTAssertTrue(sut.isEmpty())
+    }
+    
+    func test_clear_빈리스트반환하나() {
+        sut.clear()
+        
+        XCTAssertNil(sut.head)
+    }
+    
+    func test_removeFirst_1제거되나() {
+        let result = sut.removeFirst()
+        
+        XCTAssertEqual(result, 1)
+        XCTAssertNil(sut.head)
+    }
+    
+    func test_append_2가추가되는지() {
+        let secondNode = Node(data: 2)
+        var result: [Int] = []
+        
+        sut.append(node: secondNode)
+        if let firstData = sut.removeFirst(),
+           let secondData = sut.removeFirst() {
+            result = [firstData, secondData]
+        }
+        
+        XCTAssertEqual(result, [1, 2])
+    }
+    
+    func test_append_빈queue에값2넣었을때_2있는지() {
         let node = Node(data: 2)
         
-        _ = sut?.removeFirst()
-        sut?.append(node: node)
+        _ = sut.removeFirst()
+        sut.append(node: node)
         
-        XCTAssertEqual(node, sut?.head)
+        XCTAssertEqual(node.data, 2)
+        XCTAssertNil(node.next)
+        XCTAssertEqual(node, sut.head)
     }
 
-    func test_sequence채택_고차함수사용가능한지() {
-        sut?.append(node: Node(data: 2))
+    func test_sequence프로토콜_준수하는지() {
+        sut.append(node: Node(data: 2))
 
-        let result: [Int] = sut!.map {test in test.data}
+        let result: [Int] = sut.map { test in test.data }
 
         XCTAssertEqual(result, [1, 2])
     }
