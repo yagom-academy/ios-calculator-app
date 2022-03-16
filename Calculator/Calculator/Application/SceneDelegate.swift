@@ -1,8 +1,9 @@
 //
-//  Calculator - SceneDelegate.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
+//  SceneDelegate.swift
+//  Calculator
+//
+//  Created by Lingo on 2022/03/14.
+//
 
 import UIKit
 
