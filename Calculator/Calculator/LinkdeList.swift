@@ -64,16 +64,4 @@ final class LinkdeList<T> {
         head = nil
         tail = nil
     }
-    
-    func getAllData() -> [T]? {
-        var dataBundle: [T] = []
-        if head == nil { return nil }
-        var nodePoint = head
-        while nodePoint != nil {
-            guard let value = nodePoint?.data else { return dataBundle }
-            dataBundle.append(value)
-            nodePoint = nodePoint?.next
-        }
-        return dataBundle
-    }
 }
