@@ -67,10 +67,9 @@ class ModelTests: XCTestCase {
         _ = sut.dequeue()
         _ = sut.dequeue()
         let result2 = sut.dequeue()
-        let result3 = sut.queue.isEmpty
         XCTAssertNil(result1)
         XCTAssertNil(result2)
-        XCTAssertTrue(result3)
+        XCTAssertTrue(sut.isEmpty)
     }
     
     func test_reset_queue를초기화() {

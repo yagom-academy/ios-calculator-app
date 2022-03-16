@@ -23,6 +23,10 @@ struct CalculatorItemQueue {
     private(set) var head: Int = 0
     private(set) var tail: Int = 0
     
+    var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
     mutating func enqueue(with data: CalculateItem) {
         self.queue[tail] = data
         tail += 1
