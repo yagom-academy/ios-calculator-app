@@ -17,6 +17,15 @@ final class Node<T> {
     }
 }
 
+protocol List {
+    var isEmpty: Bool { get }
+    var count: Int { get }
+    
+    func append()
+    func removeFirst()
+    func removeAll()
+}
+
 final class LinkdeList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
