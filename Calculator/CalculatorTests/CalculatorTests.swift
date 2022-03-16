@@ -21,7 +21,7 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_enqueue() {
+    func test_enqueue에는_Double타입의값을_추가할수있다() {
         // given
         let input: Double = 1.0
         // when
@@ -31,7 +31,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, [1.0])
     }
     
-    func test_dequeue() {
+    func test_dequeue하면_element를리턴하고_queue에서는nil로처리된다() {
         // given
         let input: Double = 2.0
         // when
