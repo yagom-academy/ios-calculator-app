@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CalculateItem {
+    // empty
 }
 
 enum Operator: CalculateItem {
