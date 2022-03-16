@@ -5,6 +5,8 @@
 //  Created by DuDu on 2022/03/14.
 //
 
+import UIKit
+
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var front: Node<Element>?
     private var rear: Node<Element>?
@@ -73,3 +75,26 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
 }
 
+extension CalculatorItemQueue: Sequence {
+    func makeIterator() -> QueueIterator<Element> {
+        return QueueIterator<Element>(front: front)
+    }
+}
+
+struct QueueIterator<Element: CalculateItem>: IteratorProtocol {
+    var current: Node<Element>?
+    
+    init(front: Node<Element>?) {
+        self.current = front?.next
+    }
+    
+    mutating func next() -> Element? {
+        if current?.data != nil {
+            let item = current?.data
+            current = current?.next
+            return item
+        }
+        
+        return nil
+    }
+}

@@ -72,4 +72,18 @@ class CalculatorItemQueueTest: XCTestCase {
         //then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    //MARK: - 고차함수 테스트
+    func test_1_2_3을_enqueue한다음_reduce로_모두_더했을때_결과가_6인지() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        //when
+        let result = sut.reduce(0,+)
+        
+        //then
+        XCTAssertEqual(result, 6)
+    }
 }
