@@ -15,5 +15,4 @@ final class Node<T> {
     init(value: T) {
         self.value = value
     }
-    
 }

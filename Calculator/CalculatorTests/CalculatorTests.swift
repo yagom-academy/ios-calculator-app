@@ -6,30 +6,25 @@
 //
 
 import XCTest
-import Calculator
+@testable import Calculator
+
 
 class CalculatorTests<T>: XCTestCase {
-    var sut: QueueLinkedList<T>!
-  
+    var sut: QueueLinkedList<Int>!
+    var Operator: QueueLinkedList<String>!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = QueueLinkedList<T>()
+        sut = QueueLinkedList<Int>()
+        Operator = QueueLinkedList<String>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        
+        sut = nil
+        Operator = nil
     }
-    
-    func test_enque_one_element() {
-        
-        
-        let input = "1"
-        
-        
-        
-        
-    }
+
     
 //    func test_deque_one_element() {
 //        let result = ["1"]

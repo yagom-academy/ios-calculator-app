@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CalculatorDoublyLinkedList<T> {
+class CalculatorDoublyLinkedList<T>: CalculateItem {
     var headNode: Node<T>?
     var tailNode: Node<T>?
     
@@ -37,7 +37,7 @@ final class CalculatorDoublyLinkedList<T> {
         return nodeCount
     }
     
-    public func append(_ value: T) {
+    public func appendNodes(_ value: T) {
         let newNode = Node(value: value)
         if let tail = tailNode {
             newNode.prev = tail
@@ -49,7 +49,7 @@ final class CalculatorDoublyLinkedList<T> {
         }
     }
     
-    public func remove(_ node: Node<T>) -> T {
+    public func removeNode(_ node: Node<T>) -> T {
         let previous = node.prev
         let next = node.next
         

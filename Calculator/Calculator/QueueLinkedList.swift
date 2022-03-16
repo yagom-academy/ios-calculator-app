@@ -12,26 +12,26 @@ public struct QueueLinkedList<T> {
     
     public init() { }
     
-    private func enqueue(_ element: T) {
-        calculateList.append(element)
+    public func enqueue(_ element: T) {
+        calculateList.appendNodes(element)
     }
     
-    private func dequeue() -> T? {
+    public func dequeue() -> T? {
         guard !calculateList.isEmpty, let element = calculateList.firstNode else {
             return nil
         }
-        return calculateList.remove(element)
+        return calculateList.removeNode(element)
     }
     
-    private var isEmpty: Bool {
+    public var isEmpty: Bool {
         return calculateList.isEmpty
     }
     
-    private func resetAll() {
+    public func resetAll() {
         return calculateList.resetAll()
     }
     
-    private func countNode() -> Int {
+    public func countNode() -> Int {
         return calculateList.countNodes
     }
 }
