@@ -74,16 +74,16 @@ final class LinkdeList<T> {
     }
     
     func getAllData() -> [T]? {
-        var dataArray: [T] = []
+        var dataBundle: [T] = []
         if head == nil { return nil }
         var nodePoint = head
         while nodePoint?.next != nil {
-            guard let value = nodePoint?.data else { return dataArray }
-            dataArray.append(value)
+            guard let value = nodePoint?.data else { return dataBundle }
+            dataBundle.append(value)
             nodePoint = nodePoint?.next
         }
-        guard let value = nodePoint?.data else { return dataArray }
-        dataArray.append(value)
-        return dataArray
+        guard let value = nodePoint?.data else { return dataBundle }
+        dataBundle.append(value)
+        return dataBundle
     }
 }
