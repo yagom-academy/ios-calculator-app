@@ -50,9 +50,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2,3]
         
         // when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
-        sut.enqueue(input[2])
+        input.forEach {
+            sut.enqueue($0)
+        }
         sut.dequeue()
         
         // then
@@ -66,7 +66,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1]
         
         // when
-        sut.enqueue(input[0])
+        input.forEach {
+            sut.enqueue($0)
+        }
         sut.dequeue()
         
         // then
@@ -79,8 +81,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         // when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
+        input.forEach {
+            sut.enqueue($0)
+        }
         
         // then
         let result = sut.count
@@ -93,8 +96,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         // when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
+        input.forEach {
+            sut.enqueue($0)
+        }
         sut.dequeue()
         
         // then
@@ -108,8 +112,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         // when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
+        input.forEach {
+            sut.enqueue($0)
+        }
         
         // then
         let result = sut.front
@@ -122,8 +127,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         // when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
+        input.forEach {
+            sut.enqueue($0)
+        }
         sut.dequeue()
         
         // then
@@ -137,8 +143,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         // when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
+        input.forEach {
+            sut.enqueue($0)
+        }
         sut.dequeue()
         
         // then
@@ -148,9 +155,6 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_queue에값이비어있을때_dequeue하는경우() {
-        // given
-        let input = [1,2]
-        
         // when
         let result = sut.dequeue()
         
