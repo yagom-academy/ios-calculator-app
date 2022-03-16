@@ -4,22 +4,22 @@
 
 import Foundation
 
-struct CalculateItemQueue {
-    private var queue = LinkedList()
+struct CalculateItemQueue<T: CalculateItem> {
+    private var queue = LinkedList<T>()
     
     var count: Int {
         return queue.count
     }
     
     var isEmpty: Bool {
-        return queue.count > 0
+        return queue.count == 0
     }
     
-    mutating func enqueue(_ node: Int) {
+    mutating func enqueue(_ node: T) {
         queue.append(data: node)
     }
     
-    mutating func dequeue() -> Int? {
+    mutating func dequeue() -> T? {
         return isEmpty ? nil : queue.removeFirst()
     }
 }

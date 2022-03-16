@@ -6,12 +6,12 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-    var sut: LinkedList!
-    var queue: CalculateItemQueue!
+    var sut: LinkedList<Int>!
+    var queue: CalculateItemQueue<Int>!
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList()
-        queue = CalculateItemQueue()
+        sut = LinkedList<Int>()
+        queue = CalculateItemQueue<Int>()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
@@ -20,9 +20,9 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_nodeInitializer_isSuccess() {
-        let nodes = Node(data: nil, next: nil)
+        let nodes = Node<Int>(data: nil, next: nil)
         
-        let result = LinkedList()
+        let result = LinkedList<Int>()
         
         XCTAssertEqual(result.head?.data, nodes.data)
     }

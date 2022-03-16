@@ -4,11 +4,11 @@
 
 import Foundation
 
-final class LinkedList {
-    var head: Node?
-    var tail: Node?
+final class LinkedList<T> {
+    var head: Node<T>?
+    var tail: Node<T>?
     
-    init(head: Node? = nil) {
+    init(head: Node<T>? = nil) {
         self.head = head
         self.tail = head
     }
@@ -25,7 +25,7 @@ final class LinkedList {
         return count
     }
     
-    func append(data: Int?) {
+    func append(data: T) {
         if head == nil {
             head = Node(data: data)
             tail = head
@@ -36,7 +36,7 @@ final class LinkedList {
         tail = lastNode
     }
     
-    func removeFirst() -> Int? {
+    func removeFirst() -> T? {
         if head == nil { return nil }
         
         if head?.next == nil {
