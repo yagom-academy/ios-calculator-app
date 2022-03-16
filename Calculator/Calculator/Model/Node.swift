@@ -6,11 +6,11 @@
 //
 
 final class Node<Element: CalculateItem> {
-    var data: Element?
+    var data: Element
     var next: Node<Element>? = nil
     weak var prev: Node<Element>? = nil
     
-    init(data: Element? = nil) {
+    init(data: Element) {
         self.data = data
     }
 }
