@@ -17,7 +17,7 @@ class CalculatorItemTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_다른케이스끼리비교했을때_false나오는지() {
+    func test_다른케이스끼리_비교했을때_false나오는지() {
         let integer = CalculatorItem.integer(10)
         let double = CalculatorItem.double(10.0)
         let `operator` = CalculatorItem.operator(.addition)
@@ -26,5 +26,4 @@ class CalculatorItemTests: XCTestCase {
         XCTAssertFalse(integer == `operator`)
         XCTAssertFalse(double == `operator`)
     }
-
 }
