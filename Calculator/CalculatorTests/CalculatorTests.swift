@@ -28,7 +28,7 @@ class CalculatorTests: XCTestCase {
         
 
         // when
-        let reselt = sut.isEmpty()
+        let reselt = sut.isEmpty
 
         // then
         XCTAssertTrue(reselt)
@@ -40,7 +40,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(0)
 
         // when
-        let reselt = sut.isEmpty()
+        let reselt = sut.isEmpty
 
         // then
         XCTAssertFalse(reselt)
@@ -52,7 +52,7 @@ class CalculatorTests: XCTestCase {
         
 
         // when
-        let reselt = sut.count()
+        let reselt = sut.count
 
         // then
         XCTAssertEqual(reselt, 0)
@@ -65,7 +65,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(2)
 
         // when
-        let reselt = sut.count()
+        let reselt = sut.count
 
         // then
         XCTAssertEqual(reselt, 3)
@@ -101,7 +101,7 @@ class CalculatorTests: XCTestCase {
         sut.dequeue()
 
         // when
-        let reselt = sut.count()
+        let reselt = sut.count
 
         // then
         XCTAssertEqual(reselt, 0)
@@ -117,7 +117,7 @@ class CalculatorTests: XCTestCase {
         sut.removeAll()
 
         // when
-        let reselt = sut.count()
+        let reselt = sut.count
 
         // then
         XCTAssertEqual(reselt, 0)

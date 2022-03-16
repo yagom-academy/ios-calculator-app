@@ -17,17 +17,11 @@ extension Int: CalculateItem {
 
 struct CalculatorItemQueue<T: CalculateItem> {
     private let linkdeList = LinkdeList<T>()
+    var isEmpty: Bool { linkdeList.isEmpty }
+    var count: Int { linkdeList.count }
     
     func enqueue(_ data: T) {
         linkdeList.append(data)
-    }
-    
-    func isEmpty() -> Bool {
-        return linkdeList.isEmpty
-    }
-    
-    func count() -> Int {
-        return linkdeList.count
     }
     
     @discardableResult
