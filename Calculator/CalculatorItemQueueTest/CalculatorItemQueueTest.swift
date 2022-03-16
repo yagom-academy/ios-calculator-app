@@ -20,13 +20,13 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     //MARK: - isEmpty 함수 테스트
-    func test_큐가_비어있을때_isEmpty가_true인지() {
+    func test_큐가_초기화되었을떄_isEmpty가_true여야한다() {
         //given, when, then
         XCTAssertTrue(sut.isEmpty)
     }
     
     //MARK: - enqueue 함수 테스트
-    func test_큐에_1_2_3을_넣었을때_큐가_1_2_3을_가지고있는지() {
+    func test_큐에_1_2_3을_enqueue했을때_큐가_1_2_3을_가지고있어야한다() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -40,7 +40,7 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     //MARK: - dequeue 함수 테스트
-    func test_큐에_1_2_3을_넣고_dequeue했을때_큐가_2_3을_가지고있는지() {
+    func test_큐에_1_2_3을_넣은후_dequeue를_한번_했을때_큐가_2_3을_가지고있어야한다() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -54,13 +54,13 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(result, [2,3])
     }
     
-    func test_빈큐에_dequeue했을때_nil을_반환하는지() {
+    func test_초기화된큐에_dequeue를_했을때_nil을_반환해야한다() {
         //given, when, then
         XCTAssertNil(sut.dequeue())
     }
     
     //MARK: - removeAll 테스트
-    func test_1_2_3을_enqueue한다음_removeAll했을때_isEmpty가_true인지() {
+    func test_1_2_3을_enqueue한다음_removeAll했을때_isEmpty가_true여야한다() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
