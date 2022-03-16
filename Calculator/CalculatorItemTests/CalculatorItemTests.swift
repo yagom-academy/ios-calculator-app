@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorItemTests: XCTestCase {
+final class CalculatorItemTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
     }
@@ -17,7 +17,7 @@ class CalculatorItemTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_다른케이스끼리_비교했을때_false나오는지() {
+    private func test_다른케이스끼리_비교했을때_false나오는지() {
         let integer = CalculatorItem.integer(10)
         let double = CalculatorItem.double(10.0)
         let `operator` = CalculatorItem.operator(.addition)

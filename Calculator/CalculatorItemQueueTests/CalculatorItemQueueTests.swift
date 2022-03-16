@@ -14,8 +14,8 @@ fileprivate struct MockNode {
     static var mockDouble = Node(data: CalculatorItem.double(3.5))
 }
 
-class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<CalculatorItem>!
+final class CalculatorItemQueueTests: XCTestCase {
+    private var sut: CalculatorItemQueue<CalculatorItem>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -30,7 +30,7 @@ class CalculatorItemQueueTests: XCTestCase {
         MockNode.mockOperator.next = nil
     }
     
-    func test_enqueue_node2개_추가됐는지() {
+    private func test_enqueue_node2개_추가됐는지() {
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
         
@@ -43,7 +43,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(thirdNode, MockNode.mockDouble)
     }
     
-    func test_clear_head가_nil인지() {
+    private func test_clear_head가_nil인지() {
         let oldHead = sut.linkedList.head
         
         sut.clear()
@@ -52,7 +52,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(sut.linkedList.head)
     }
 
-    func test_dequeue_빈queue인지() {
+    private func test_dequeue_빈queue인지() {
         let result = sut.dequeue()
         
         let firstNode = sut.linkedList.head
@@ -62,7 +62,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_sequence프로토콜_준수하는지() {
+    private func test_sequence프로토콜_준수하는지() {
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
 

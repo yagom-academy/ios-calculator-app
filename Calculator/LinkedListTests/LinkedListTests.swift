@@ -8,8 +8,8 @@
 import XCTest
 @testable import Calculator
 
-class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Int>!
+final class LinkedListTests: XCTestCase {
+    private var sut: LinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -21,26 +21,26 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_isEmpty_true() {
+    private func test_isEmpty_true() {
         sut.head = nil
         
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_clear_빈리스트인지() {
+    private func test_clear_빈리스트인지() {
         sut.clear()
         
         XCTAssertNil(sut.head)
     }
     
-    func test_removeFirst_1제거되는지() {
+    private func test_removeFirst_1제거되는지() {
         let result = sut.removeFirst()
         
         XCTAssertEqual(result, 1)
         XCTAssertNil(sut.head)
     }
     
-    func test_append_2추가되는지() {
+    private func test_append_2추가되는지() {
         let secondNode = Node(data: 2)
         var result: [Int] = []
         
@@ -53,7 +53,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, [1, 2])
     }
     
-    func test_append_빈queue에_2넣었을때_2있는지() {
+    private func test_append_빈queue에_2넣었을때_2있는지() {
         let node = Node(data: 2)
         
         _ = sut.removeFirst()
@@ -64,7 +64,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(node, sut.head)
     }
 
-    func test_sequence프로토콜_준수하는지() {
+    private func test_sequence프로토콜_준수하는지() {
         sut.append(node: Node(data: 2))
 
         let result: [Int] = sut.map { test in test.data }
