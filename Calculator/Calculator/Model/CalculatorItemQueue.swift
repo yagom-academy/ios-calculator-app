@@ -41,7 +41,3 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return queue
     }
 }
-
-extension Double: CalculateItem {
-    
-}
