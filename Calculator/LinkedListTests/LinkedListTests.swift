@@ -27,20 +27,20 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_clear_빈리스트반환하나() {
+    func test_clear_빈리스트인지() {
         sut.clear()
         
         XCTAssertNil(sut.head)
     }
     
-    func test_removeFirst_1제거되나() {
+    func test_removeFirst_1제거되는지() {
         let result = sut.removeFirst()
         
         XCTAssertEqual(result, 1)
         XCTAssertNil(sut.head)
     }
     
-    func test_append_2가추가되는지() {
+    func test_append_2추가되는지() {
         let secondNode = Node(data: 2)
         var result: [Int] = []
         
@@ -53,7 +53,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, [1, 2])
     }
     
-    func test_append_빈queue에값2넣었을때_2있는지() {
+    func test_append_빈queue에_2넣었을때_2있는지() {
         let node = Node(data: 2)
         
         _ = sut.removeFirst()

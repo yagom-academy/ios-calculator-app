@@ -62,7 +62,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_sequence채택_고차함수사용가능한지() {
+    func test_sequence프로토콜_준수하는지() {
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
 
