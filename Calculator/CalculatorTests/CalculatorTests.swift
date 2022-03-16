@@ -130,7 +130,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(3)
 
         // when
-        let reselt = sut.allData()
+        let reselt = sut.getAllData()
 
         // then
         XCTAssertEqual(reselt, [1, 2, 3])

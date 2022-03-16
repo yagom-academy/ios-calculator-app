@@ -73,7 +73,7 @@ final class LinkdeList<T> {
         tail = nil
     }
     
-    func allData() -> [T]? {
+    func getAllData() -> [T]? {
         var dataArray: [T] = []
         if head == nil { return nil }
         var nodePoint = head

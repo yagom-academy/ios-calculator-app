@@ -38,8 +38,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
         linkdeList.removeAll()
     }
     
-    func allData() -> [T]? {
-        guard let value = linkdeList.allData() else { return nil }
+    func getAllData() -> [T]? {
+        guard let value = linkdeList.getAllData() else { return nil }
         return value
     }
 }
