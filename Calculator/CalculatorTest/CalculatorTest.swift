@@ -88,4 +88,13 @@ final class CalculatorTests: XCTestCase {
     
     XCTAssertEqual(sut.presentAll(), [1.0])
   }
+  
+  func test_presentAll함수를_아무것도_없는_상태에서_호출하면_nil이_출력되는지() {
+    XCTAssertEqual(sut.presentAll(), [])
+  }
+  
+  func test_dequeue함수를_아무것도_없는_상태에서_호출하면_capacity가_0이되는지() {
+    sut.dequeue()
+    XCTAssertEqual(sut.list.capacity, 0)
+  }
 }

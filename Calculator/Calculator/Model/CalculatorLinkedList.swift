@@ -22,44 +22,58 @@ final class Node<T> {
 final class LinkedList<T> {
   var head: Node<T>?
   var tail: Node<T>?
-  
+  var capacity: Int = Int.zero
+
   func append(data: T) {
     let newNode = Node(data)
     
     if head == nil {
       self.head = newNode
       self.tail = newNode
+      self.capacity += 1
       return
     }
     self.tail?.next = newNode
     newNode.previous = tail
     self.tail = newNode
+    self.capacity += 1
   }
   
   func removeFirst() {
+    if self.head == nil {
+      return
+    }
     self.head = self.head?.next
+    capacity -= 1
   }
   
   func removeLatest() {
-    tail?.previous?.next = tail?.next
+    if self.head == nil {
+      return
+    }
+    tail?.previous?.next = nil
     self.tail = self.tail?.previous
+    capacity -= 1
   }
   
   func removeAll() {
+    if self.head == nil {
+      return
+    }
     self.head = nil
     self.tail = nil
+    capacity = Int.zero
   }
   
   func showAll() -> [T] {
     var allNode: [T] = []
-    var headDate = self.head
     
-    while tail?.next == nil {
-      guard let date = headDate?.data  else {
+    for _ in 0...capacity {
+      guard let data = head?.data else {
         return allNode
       }
-      allNode.append(date)
-      headDate = headDate?.next
+      allNode.append(data)
+      head = head?.next
     }
     return allNode
   }
