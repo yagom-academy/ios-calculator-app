@@ -157,4 +157,19 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, nil)
     }
+    
+    func test_queue에_clear가_잘되는지() {
+        // given
+        let input = [1,2]
+        
+        // when
+        input.forEach {
+            sut.enqueue($0)
+        }
+        sut.clear()
+        
+        // then
+        let result = sut.isEmpty
+        XCTAssertTrue(result)
+    }
 }

@@ -54,4 +54,9 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         
         return outputStack.removeLast()
     }
+    
+    mutating func clear() {
+        inputStack.removeAll()
+        outputStack.removeAll()
+    }
 }
