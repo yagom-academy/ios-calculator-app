@@ -10,10 +10,4 @@ class Node<T> {
         next = nil
         self.data = data
     }
-    
-    init(data: T?, prev: Node?, next: Node?) {
-        self.prev = prev
-        self.data = data
-        self.next = next
-    }
 }
