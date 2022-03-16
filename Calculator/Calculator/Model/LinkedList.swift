@@ -78,24 +78,3 @@ struct LinkedListIterator<T>: IteratorProtocol {
         }
     }
 }
-
-extension Node: Sequence {
-    func makeIterator() -> NodeIterator<T> {
-        return NodeIterator(current: self)
-    }
-}
-
-struct NodeIterator<T>: IteratorProtocol {
-    var current: Node<T>?
-    
-    mutating func next() -> T? {
-        if let node = current {
-            let data = node.data
-            
-            current = node.next
-            return data
-        } else {
-            return nil
-        }
-    }
-}
