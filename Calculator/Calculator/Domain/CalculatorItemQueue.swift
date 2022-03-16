@@ -9,7 +9,7 @@ import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
 
-  private var list: CalculatorLinkedList<Element>
+  private(set) var list: CalculatorLinkedList<Element> = .init()
   
   var elements: [Element] {
     return self.list.allElements()
@@ -25,10 +25,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
   
   var first: Element? {
     return self.list.first
-  }
-  
-  init(list: CalculatorLinkedList<Element> = CalculatorLinkedList<Element>()) {
-    self.list = list
   }
   
   mutating func enqueue(_ data: Element) {
