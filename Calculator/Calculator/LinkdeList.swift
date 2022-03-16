@@ -22,7 +22,7 @@ final class LinkdeList<T> {
     private var tail: Node<T>?
     var isEmpty: Bool { head == nil }
     var count: Int { getCount() }
-
+    
     private func getCount() -> Int {
         if head == nil {
             return 0
@@ -37,14 +37,14 @@ final class LinkdeList<T> {
     }
     
     func append(_ data: T) {
-        if head == nil {
-            head = Node(data: data)
-            tail = head
-            return
-        }
         let node = Node(data: data)
-        tail?.next = node
-        tail = node
+        if head == nil {
+            head = node
+            tail = head
+        } else {
+            tail?.next = node
+            tail = node
+        }
     }
     
     func removeFirst() -> T? {
