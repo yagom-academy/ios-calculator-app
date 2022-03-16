@@ -25,7 +25,9 @@ struct CalculatorItemQueue<T: CalculateItem> {
         guard head < queue.count else {
             return nil
         }
-        let element = queue[head]
+        guard let element = queue[head] else {
+            return nil
+        }
         queue[head] = nil
         head += 1
         
