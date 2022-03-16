@@ -6,5 +6,11 @@
 //
 
 struct LinkedList<Element: CalculateItem> {
+    var head: Node<Element>?
+    var tail: Node<Element>?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
 }
 

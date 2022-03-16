@@ -18,4 +18,11 @@ class LinkedListTest: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_초기화후_isEmpty가_true여야한다() {
+        //given
+        let sut = LinkedList<Int>()
+        //when, then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
