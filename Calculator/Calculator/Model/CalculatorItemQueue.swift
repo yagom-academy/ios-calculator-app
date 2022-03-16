@@ -36,11 +36,9 @@ extension CalculatorItemQueue: Sequence {
 }
 
 struct QueueIterator<T>: IteratorProtocol {
-    typealias Element = Node<T>
+    var current: Node<T>?
     
-    var current: Element?
-    
-    mutating func next() -> Element? {
+    mutating func next() -> Node<T>? {
         if let node = current {
             current = node.next
             return node
