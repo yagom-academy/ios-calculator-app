@@ -8,7 +8,11 @@
 import UIKit
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-  
+    let list = LinkedList<Element>()
+    
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
 }
 
 
