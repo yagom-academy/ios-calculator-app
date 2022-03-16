@@ -60,8 +60,17 @@ class ModelTests: XCTestCase {
     }
     
     func test_dequeue_queue가비어있을때_nil() {
-        let result = sut.dequeue()
-        XCTAssertNil(result)
+        let result1 = sut.dequeue()
+        
+        sut.enqueue(with: 1.0)
+        sut.enqueue(with: 2.0)
+        _ = sut.dequeue()
+        _ = sut.dequeue()
+        let result2 = sut.dequeue()
+        let result3 = sut.queue.isEmpty
+        XCTAssertNil(result1)
+        XCTAssertNil(result2)
+        XCTAssertTrue(result3)
     }
     
     func test_reset_queue를초기화() {

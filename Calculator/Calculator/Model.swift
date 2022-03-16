@@ -33,6 +33,7 @@ struct CalculatorItemQueue {
             return nil
         }
         let value = self.queue[head]
+        queue[head] = nil
         head += 1
         return value
     }
