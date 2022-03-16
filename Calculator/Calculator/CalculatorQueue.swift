@@ -48,9 +48,7 @@ public struct CalculatorQueue: CalculateItem {
     }
     
     public func isQueueEmpty() -> Bool {
-        if data.isEmpty {
-            return "큐가 비어있습니다"
-        }
+        return data.isEmpty
     }
     
     public func changeSign() {
