@@ -35,8 +35,11 @@ struct CalculatorLinkedList<Element: CalculateItem> {
   }
   
   mutating func removeFirst() -> Element? {
-    let data = self.front?.data
-    self.front = self.front?.next
+    guard let front = self.front else {
+      return nil
+    }
+    let data = front.data
+    self.front = front.next
     self.count -= 1
     return data
   }

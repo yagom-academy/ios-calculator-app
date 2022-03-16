@@ -116,6 +116,14 @@ final class CalculatorLinkedListTests: XCTestCase {
   }
   
   // MARK: - removeFirst()
+  func test_removeFirst_리스트가_비어있을때_호출시_count는_0을_반환해야한다() {
+    // given when
+    _ = self.sut.removeFirst()
+    let output = self.sut.count
+    
+    // then
+    XCTAssertEqual(output, 0)
+  }
   
   func test_removeFirst_리스트가_비어있다면_호출시_nil을_반환해야한다() {
     // given
