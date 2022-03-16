@@ -125,4 +125,14 @@ final class CalculatorItemQueueTests: XCTestCase {
     // then
     XCTAssertEqual(output, [])
   }
+  
+  // MARK: - isEmpty
+  
+  func test_isEmpty_큐가_비어있을때_호출시_true를_반환해야한다() {
+    // given when
+    let output = self.sut.isEmpty
+    
+    // then
+    XCTAssertEqual(output, true)
+  }
 }
