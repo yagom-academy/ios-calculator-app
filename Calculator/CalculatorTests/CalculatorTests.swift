@@ -168,4 +168,15 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(input, result)
     }
+    
+    func test_enqueue메서드10번호출후_removeAll메서드호출했을때_count값0이나오는지() {
+        for number in 1...10 {
+            queue.enqueue(number)
+        }
+        queue.removeAll()
+        
+        let result = queue.count
+        
+        XCTAssertEqual(result, 0)
+    }
 }

@@ -22,4 +22,8 @@ struct CalculateItemQueue<T: CalculateItem> {
     mutating func dequeue() -> T? {
         return isEmpty ? nil : queue.removeFirst()
     }
+    
+    mutating func removeAll() {
+        queue.removeAll()
+    }
 }
