@@ -11,7 +11,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
 
   private var list: CalculatorLinkedList<Element>
   
-  var elements: [Element?] {
+  var elements: [Element] {
     return self.list.allElements()
   }
   

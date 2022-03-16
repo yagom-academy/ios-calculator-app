@@ -47,12 +47,12 @@ struct CalculatorLinkedList<Element: CalculateItem> {
     self.count = Int.zero
   }
 
-  func allElements() -> [Element?] {
-    var result: [Element?] = []
-    var curr = self.front
-    while curr != nil {
-      result.append(curr?.data)
-      curr = curr?.next
+  func allElements() -> [Element] {
+    var result: [Element] = []
+    var current = self.front
+    while let node = current {
+      result.append(node.data)
+      current = node.next
     }
     return result
   }
