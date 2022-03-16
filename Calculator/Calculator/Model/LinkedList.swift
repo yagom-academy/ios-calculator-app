@@ -41,5 +41,10 @@ struct LinkedList<Element: CalculateItem> {
         
         return target
     }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
 

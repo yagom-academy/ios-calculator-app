@@ -45,4 +45,16 @@ class CalculatorItemQueueTest: XCTestCase {
         //when, then
         XCTAssertEqual(sut?.dequeue(), 1)
     }
+    
+    func test_초기화후_1_2_3을_enqueue한후_removeAll을하면_isEmpty가_true여야한다() {
+        //given
+        var sut = CalculatorItemQueue<Int>()
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.removeAll()
+        
+        //when, then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
