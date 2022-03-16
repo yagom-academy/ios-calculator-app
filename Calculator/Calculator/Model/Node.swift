@@ -14,3 +14,9 @@ final class Node<Element: CalculateItem> {
         self.data = data
     }
 }
+
+extension Node: Equatable {
+    static func == (lhs: Node<Element>, rhs: Node<Element>) -> Bool {
+        lhs === rhs
+    }
+}

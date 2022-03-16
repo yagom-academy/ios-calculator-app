@@ -24,5 +24,22 @@ struct LinkedList<Element: CalculateItem> {
             tail = newNode
         }
     }
+    
+    mutating func removeFirst() -> Element? {
+        if head == nil {
+            return nil
+        }
+        
+        let target = head?.data
+        
+        if head == tail {
+            head = nil
+            tail = nil
+        } else {
+            head = head?.next
+        }
+        
+        return target
+    }
 }
 
