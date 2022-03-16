@@ -10,12 +10,12 @@ import Foundation
 final class Node<T> {
   private(set) var data: T
   var next: Node?
-  var privious: Node?
+  var previous: Node?
   
   init(_ data: T) {
     self.data = data
     self.next = nil
-    self.privious = nil
+    self.previous = nil
   }
 }
 
@@ -32,7 +32,7 @@ final class LinkedList<T> {
       return
     }
     self.tail?.next = newNode
-    newNode.privious = tail
+    newNode.previous = tail
     self.tail = newNode
   }
   
@@ -41,8 +41,8 @@ final class LinkedList<T> {
   }
   
   func removeLatest() {
-    tail?.privious?.next = tail?.next
-    self.tail = self.tail?.privious
+    tail?.previous?.next = tail?.next
+    self.tail = self.tail?.previous
   }
   
   func removeAll() {
