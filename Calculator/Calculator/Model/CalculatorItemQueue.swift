@@ -6,25 +6,70 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var list = LinkedList<Element>()
+    private var front: Node<Element>?
+    private var rear: Node<Element>?
+    
+    init() {
+        front = Node<Element>()
+        rear = Node<Element>()
+        
+        front?.next = rear
+        rear?.prev = front
+    }
     
     var isEmpty: Bool {
-        list.isEmpty
+        return front?.next === rear
     }
     
     func enqueue(_ data: Element) {
-        list.append(data)
+        let newNode = Node(data: data)
+        let previousNode = rear?.prev
+        
+        previousNode?.next = newNode
+        newNode.prev = previousNode
+        
+        newNode.next = rear
+        rear?.prev = newNode
     }
     
     func dequeue() -> Element? {
-        list.removeFirst()
+        if isEmpty {
+            return nil
+        }
+        
+        let targetNode = front?.next
+        let targetData = targetNode?.data
+        
+        let nextNode = targetNode?.next
+        
+        front?.next = nextNode
+        nextNode?.prev = front
+        
+        return targetData
     }
     
     mutating func removeAll() {
-        list.removeAll()
+        front = Node<Element>()
+        rear = Node<Element>()
+        
+        front?.next = rear
+        rear?.prev = front
     }
     
     func allElement() -> [Element] {
-        list.allElement()
+        var elements = [Element]()
+        var current = front?.next
+        
+        while current !== rear {
+            guard let data = current?.data else {
+                break
+            }
+            
+            elements.append(data)
+            current = current?.next
+        }
+        
+        return elements
     }
 }
+
