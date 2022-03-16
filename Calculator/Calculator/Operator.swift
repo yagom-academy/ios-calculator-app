@@ -7,9 +7,11 @@
 
 import Foundation
 
-enum Operator {
-    case add
-    case subtract
-    case multiply
-    case division
+enum Operator: String {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
+    case divide = "%"
+    case equalMark = "="
 }
+

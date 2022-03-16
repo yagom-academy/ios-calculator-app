@@ -23,9 +23,11 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_enque_one_element() {
+        sut.capacity = 5
+        sut.data = ["1"]
         let input = "1"
         
-        let result = sut.enqueOperation(input)
+        let result = sut.enqueData(input)
         
         XCTAssertEqual(result, ["1"])
     }
@@ -42,10 +44,11 @@ class CalculatorTests: XCTestCase {
     func test_count_how_many_elements_in_queue() {
         var count = 0
         
-        count = sut.countOperation
+        count = sut.countData
         
         XCTAssertEqual(count, 0)
     }
+    
     
     
     
