@@ -73,8 +73,8 @@
 				03F64CAB27E0750E002EEB1B /* CalculatorItemQueue.swift */,
 				030764FD27E1894B00CD34AF /* Operator.swift */,
 				030764FF27E18D7400CD34AF /* CalculatorItem.swift */,
-				0307650327E1B81300CD34AF /* ExpressionParser.swift */,
 				0307650127E1B18900CD34AF /* Formula.swift */,
+				0307650327E1B81300CD34AF /* ExpressionParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

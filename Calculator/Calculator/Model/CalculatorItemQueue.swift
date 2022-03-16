@@ -46,3 +46,9 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
 }
 
 extension Double: CalculatorItem { }
+
+extension String {
+    func split(with target: Character) -> [String] {
+        return [target.description]
+    }
+}
