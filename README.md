@@ -21,7 +21,7 @@
 - 계산기가 입력받은 숫자와 연산자는 연산큐에 쌓입니다.
 
 ## STEP 1 UML
-![https://s3.ap-northeast-2.amazonaws.com/media.yagom-academy.kr/resources/usr/61ef886d2947bf40f08f3699/20220316/62317f6a0983dd14920a357d.png](https://s3.ap-northeast-2.amazonaws.com/media.yagom-academy.kr/resources/usr/61ef886d2947bf40f08f3699/20220316/62317f6a0983dd14920a357d.png)
+![스크린샷 2022-03-16 오후 3 10 13](https://user-images.githubusercontent.com/63997044/158528313-cf17a7a6-1ec5-4d8e-886e-d12b40bb066f.png)
 
 ## STEP 1 기능 구현
 - ```CalculateItem```
