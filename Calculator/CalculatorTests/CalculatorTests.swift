@@ -47,6 +47,7 @@ class CalculatorTests: XCTestCase {
         let secondEnqueueItem = Item(number: secondEnqueueNumber,operation: secondEnqueueOperation)
         calculatorItemQueue.enqueue(calculateItem: firstEnqueueItem)
         calculatorItemQueue.enqueue(calculateItem: secondEnqueueItem)
+        
         //when
         _ = calculatorItemQueue.dequeue()
         guard let dequeResult = calculatorItemQueue.dequeue() as? Item else {

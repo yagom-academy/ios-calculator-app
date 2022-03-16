@@ -14,7 +14,7 @@ class CalculatorItemQueue {
         queue.append(calculateItem)
     }
     
-    func dequeue() -> CalculateItem{
+    func dequeue() -> CalculateItem {
         let returnValue = queue.remove(at: 0)
         return returnValue
     }
