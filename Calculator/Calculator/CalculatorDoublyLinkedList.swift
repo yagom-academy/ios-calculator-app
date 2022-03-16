@@ -25,14 +25,14 @@ final class CalculatorDoublyLinkedList<T> {
     }
     
     public func append(_ value: T) {
-        let node = Node(value: value)
+        let newNode = Node(value: value)
         if let tail = tailNode {
-            node.prev = tail
-            tail.next = node
-            tailNode = node
+            newNode.prev = tail
+            tail.next = newNode
+            tailNode = newNode
         } else {
-            headNode = node
-            tailNode = node
+            headNode = newNode
+            tailNode = newNode
         }
     }
     
@@ -53,7 +53,7 @@ final class CalculatorDoublyLinkedList<T> {
             tailNode = previous
         }
         return node.value
-}
+    }
     
     public func resetAll() {
         headNode = nil

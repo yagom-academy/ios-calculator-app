@@ -8,24 +8,24 @@
 import Foundation
 
 public struct QueueLinkedList<T> {
-    var list = CalculatorDoublyLinkedList<T>()
+    var calculateList = CalculatorDoublyLinkedList<T>()
     
-    public func enqueue(_ element: T) {
-        list.append(element)
+    private func enqueue(_ element: T) {
+        calculateList.append(element)
     }
     
-    public func dequeue() -> T? {
-        guard !list.isEmpty, let element = list.first else {
+    private func dequeue() -> T? {
+        guard !calculateList.isEmpty, let element = calculateList.first else {
             return nil
         }
-        return list.remove(element)
+        return calculateList.remove(element)
     }
     
-    public var isEmpty: Bool {
-        return list.isEmpty
+    private var isEmpty: Bool {
+        return calculateList.isEmpty
     }
     
-    public func resetAll() {
-        return list.resetAll()
+    private func resetAll() {
+        return calculateList.resetAll()
     }
 }
