@@ -21,14 +21,14 @@ class ModelTests: XCTestCase {
     func test_enqueue_DoubleType을넣었을때() {
         let numberValue: Double = 10
         sut.enqueue(with: numberValue)
-        guard let result = sut.queue[sut.head] as? Double else { return }
+        let result = sut.queue[sut.head] as? Double
         XCTAssertEqual(result, numberValue)
     }
     
     func test_enqueue_OperatorType을넣었을때() {
         let operatorValue: Operator = .add
         sut.enqueue(with: operatorValue)
-        guard let result = sut.queue[sut.tail] as? Operator else { return }
+        let result = sut.queue[sut.tail - 1] as? Operator
         XCTAssertEqual(result, operatorValue)
     }
     
@@ -36,7 +36,7 @@ class ModelTests: XCTestCase {
         sut.enqueue(with: 1.0)
         sut.enqueue(with: Operator.add)
         sut.enqueue(with: 2.0)
-        guard let result = sut.dequeue() as? Double else { return }
+        let result = sut.dequeue() as? Double
         XCTAssertEqual(result, 1.0)
     }
     
@@ -45,7 +45,7 @@ class ModelTests: XCTestCase {
         sut.enqueue(with: Operator.add)
         sut.enqueue(with: 2.0)
         _ = sut.dequeue()
-        guard let result = sut.dequeue() as? Operator else { return }
+        let result = sut.dequeue() as? Operator
         XCTAssertEqual(result, Operator.add)
     }
     
