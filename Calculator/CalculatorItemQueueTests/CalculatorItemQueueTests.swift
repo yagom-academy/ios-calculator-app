@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-struct MockNode {
+fileprivate struct MockNode {
     static var mockInt = Node(data: CalculatorItem.integer(10))
     static var mockOperator = Node(data: CalculatorItem.operator(.devision))
     static var mockDouble = Node(data: CalculatorItem.double(3.5))
@@ -30,7 +30,7 @@ class CalculatorItemQueueTests: XCTestCase {
         MockNode.mockOperator.next = nil
     }
     
-    func test_enqueue_node2개추가됐는지() {
+    func test_enqueue_node2개_추가됐는지() {
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
         
@@ -43,7 +43,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(thirdNode, MockNode.mockDouble)
     }
     
-    func test_clear_head가nil인지() {
+    func test_clear_head가_nil인지() {
         let oldHead = sut.linkedList.head
         
         sut.clear()
