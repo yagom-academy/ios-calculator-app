@@ -1,6 +1,6 @@
 //
 //  Calculator - AppDelegate.swift
-//  Created by yagom. 
+//  Created by 우롱차.
 //  Copyright © yagom. All rights reserved.
 // 
 

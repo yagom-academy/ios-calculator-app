@@ -2,5 +2,5 @@
 
 ### 계산기 프로젝트 저장소
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
 
+![UML](https://user-images.githubusercontent.com/43274246/158321457-ee779a79-05b6-4689-aaf9-6b0a9498c2fd.jpg)
