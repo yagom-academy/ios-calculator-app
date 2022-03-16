@@ -9,7 +9,7 @@ final class CalculatorItemQueue<T: CalculateItem> {
     let linkedList: LinkedList<T>
     
     init(node: Node<T>) {
-        self.linkedList = LinkedList<T>.init(head: node)
+        linkedList = LinkedList<T>(head: node)
     }
     
     func isEmpty() -> Bool {
@@ -31,7 +31,7 @@ final class CalculatorItemQueue<T: CalculateItem> {
 
 extension CalculatorItemQueue: Sequence {
     func makeIterator() -> QueueIterator<T> {
-        return QueueIterator(current: self.linkedList.head)
+        return QueueIterator(current: linkedList.head)
     }
 }
 

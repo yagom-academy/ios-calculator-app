@@ -19,12 +19,12 @@ class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        self.sut = CalculatorItemQueue(node: MockNode.mockInt)
+        sut = CalculatorItemQueue(node: MockNode.mockInt)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        self.sut = nil
+        sut = nil
         MockNode.mockDouble.next = nil
         MockNode.mockInt.next = nil
         MockNode.mockOperator.next = nil

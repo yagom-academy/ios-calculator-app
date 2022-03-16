@@ -62,7 +62,7 @@ final class LinkedList<T> {
 
 extension LinkedList: Sequence {
     func makeIterator() -> LinkedListIterator<T> {
-        return LinkedListIterator(current: self.head)
+        return LinkedListIterator(current: head)
     }
 }
 
