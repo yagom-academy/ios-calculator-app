@@ -32,7 +32,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
   }
   
   mutating func dequeue() -> Element? {
-    guard self.isEmpty == false else {
+    guard self.list.isEmpty == false else {
       return nil
     }
     return self.list.removeFirst()
