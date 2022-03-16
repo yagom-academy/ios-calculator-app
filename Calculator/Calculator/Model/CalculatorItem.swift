@@ -6,7 +6,7 @@
 //
 
 protocol CalculateItem {
-    
+    // empty
 }
 
 enum Operator: String {
