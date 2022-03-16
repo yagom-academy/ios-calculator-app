@@ -48,16 +48,14 @@ final class LinkdeList<T> {
     }
     
     func removeFirst() -> T? {
-        let value: T?
+        let value = head?.data
         if head == nil { return nil }
         if head?.next == nil {
-            value = head?.data
             head = nil
             tail = nil
-            return value
+        } else {
+            head = head?.next
         }
-        value = head?.data
-        head = head?.next
         return value
     }
     
