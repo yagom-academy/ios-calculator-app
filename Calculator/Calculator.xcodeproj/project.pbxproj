@@ -69,6 +69,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B06FD63A27E23035007BD380 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B0E177A927DF909300620996 /* Protocol */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B06FD63C27E23070007BD380 /* CalculatorItemQueue */ = {
+			isa = PBXGroup;
+			children = (
+				B0E177A127DF5C0000620996 /* CalculatorItemQueue.swift */,
+				B0E177AF27DF99E200620996 /* CalculatorLinkedList.swift */,
+				B0E177B227DF9F5E00620996 /* CalculatorNode.swift */,
+			);
+			path = CalculatorItemQueue;
+			sourceTree = "<group>";
+		};
 		B0E177A927DF909300620996 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,9 +132,8 @@
 		B0EE794227DF309F0075DE95 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				B0E177A127DF5C0000620996 /* CalculatorItemQueue.swift */,
-				B0E177AF27DF99E200620996 /* CalculatorLinkedList.swift */,
-				B0E177B227DF9F5E00620996 /* CalculatorNode.swift */,
+				B06FD63A27E23035007BD380 /* Common */,
+				B06FD63C27E23070007BD380 /* CalculatorItemQueue */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -124,7 +141,6 @@
 		B0EE794327DF30A50075DE95 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				B0E177A927DF909300620996 /* Protocol */,
 				B0E177AC27DF90B000620996 /* Extension */,
 			);
 			path = Util;
