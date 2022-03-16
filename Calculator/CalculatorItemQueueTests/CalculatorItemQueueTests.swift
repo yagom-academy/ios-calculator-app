@@ -22,7 +22,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_1을_enqueue했을때_값이정상적으로추가되는지() {
+    func test_enqueue를한번호출했을때_queue의카운트가_1이여야한다() {
         // given
         let input = 1
         
@@ -30,22 +30,101 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(input)
         
         // then
-        XCTAssertEqual(sut.currentInputStack.first, 1)
+        let result = sut.count
+        let expected = 1
+        XCTAssertEqual(result, expected)
     }
     
-    func test_dequeue했을때_값이정상적으로빠져나가는지() {
+    func test_enqueue와dequeue를한번씩호출했을때_queue의카운트가_0이여야한다() {
         // given
         let input = 1
         
         // when
         sut.enqueue(input)
-        let result = sut.dequeue()
-
+        sut.dequeue()
+        
         // then
-        XCTAssertEqual(result, input)
+        let result = sut.count
+        let expected = 0
+        XCTAssertEqual(result, expected)
     }
     
-    func test_outputStack이_비어있을때_dequeue하는경우_값이정상적으로빠져나가는지() {
+    func test_enqueue와dequeue를한번씩호출했을때_isEmpty는_true이여야한다() {
+        // given
+        let input = 1
+        
+        // when
+        sut.enqueue(input)
+        sut.dequeue()
+        
+        // then
+        let result = sut.isEmpty
+        XCTAssertTrue(result)
+    }
+    
+    func test_enqueue를두번호출했을때_queue의카운트는_2여야한다() {
+        // given
+        let input = [1,2]
+        
+        // when
+        input.forEach {
+            sut.enqueue($0)
+        }
+        
+        // then
+        let result = sut.count
+        let expected = 2
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_enqueue를두번호출하고dequeue를한번호출했을때_queue의카운트는_1이여야한다() {
+        // given
+        let input = [1,2]
+        
+        // when
+        input.forEach {
+            sut.enqueue($0)
+        }
+        sut.dequeue()
+        
+        // then
+        let result = sut.count
+        let expected = 1
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_1_2를enqueue했을때_front는_1이여야한다() {
+        // given
+        let input = [1,2]
+        
+        // when
+        input.forEach {
+            sut.enqueue($0)
+        }
+        
+        // then
+        let result = sut.front
+        let expected = 1
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_1_2를enqueue하고dequeue를한번호출했을때_front는_2여야한다() {
+        // given
+        let input = [1,2]
+        
+        // when
+        input.forEach {
+            sut.enqueue($0)
+        }
+        sut.dequeue()
+        
+        // then
+        let result = sut.front
+        let expected = 2
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_1_2_3을enqueue하고dequeue를한번호출했을때_rear는_3이여야한다() {
         // given
         let input = [1,2,3]
         
@@ -56,105 +135,12 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.dequeue()
         
         // then
-        let result = sut.currentOutputStack
-        let expected = [3, 2]
-        XCTAssertEqual(result, expected)
-    }
-    
-    func test_queue가_비어있는지() {
-        // given
-        let input = [1]
-        
-        // when
-        input.forEach {
-            sut.enqueue($0)
-        }
-        sut.dequeue()
-        
-        // then
-        let result = sut.isEmpty
-        XCTAssertTrue(result)
-    }
-    
-    func test_enqueue를두번했을때_현재queue의_개수가2개인지() {
-        // given
-        let input = [1,2]
-        
-        // when
-        input.forEach {
-            sut.enqueue($0)
-        }
-        
-        // then
-        let result = sut.count
-        let expected = 2
-        XCTAssertEqual(result, expected)
-    }
-    
-    func test_enqueue를두번하고_dequeue를한번했을때_현재queue의_개수가1개인지() {
-        // given
-        let input = [1,2]
-        
-        // when
-        input.forEach {
-            sut.enqueue($0)
-        }
-        sut.dequeue()
-        
-        // then
-        let result = sut.count
-        let expected = 1
-        XCTAssertEqual(result, expected)
-    }
-    
-    func test_1_2를enqueue했을때_첫번째요소가_1이맞는지() {
-        // given
-        let input = [1,2]
-        
-        // when
-        input.forEach {
-            sut.enqueue($0)
-        }
-        
-        // then
-        let result = sut.front
-        let expected = 1
-        XCTAssertEqual(result, expected)
-    }
-    
-    func test_1_2를enqueue하고_dequeue했을때_첫번째요소가_2가맞는지() {
-        // given
-        let input = [1,2]
-        
-        // when
-        input.forEach {
-            sut.enqueue($0)
-        }
-        sut.dequeue()
-        
-        // then
-        let result = sut.front
-        let expected = 2
-        XCTAssertEqual(result, expected)
-    }
-    
-    func test_1_2를enqueue하고_dequeue했을때_마지막요소가_2가맞는지() {
-        // given
-        let input = [1,2]
-        
-        // when
-        input.forEach {
-            sut.enqueue($0)
-        }
-        sut.dequeue()
-        
-        // then
         let result = sut.rear
-        let expected = 2
+        let expected = 3
         XCTAssertEqual(result, expected)
     }
     
-    func test_queue에값이비어있을때_dequeue하는경우() {
+    func test_queue가비어있을때_dequeue를하면_nil을_반환해야한다() {
         // when
         let result = sut.dequeue()
         
@@ -162,7 +148,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, nil)
     }
     
-    func test_queue에_clear가_잘되는지() {
+    func test_clear를했을때_isEmpty는_true이여야한다() {
         // given
         let input = [1,2]
         
