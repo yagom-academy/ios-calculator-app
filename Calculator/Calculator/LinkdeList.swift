@@ -32,13 +32,7 @@ final class LinkdeList<T> {
         tail = node
     }
     
-    func isEmpty() -> Bool {
-        if head == nil {
-            return true
-        } else {
-            return false
-        }
-    }
+    func isEmpty() -> Bool { head == nil }
     
     func count() -> Int {
         if head == nil {
