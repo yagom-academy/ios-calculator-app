@@ -25,4 +25,17 @@ class LinkedListTest: XCTestCase {
         //when, then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_초기화후_1을넣었을때_head와_tail의_데이터가_모두_1이여야한다() {
+        //given
+        var sut = LinkedList<Int>()
+        sut.append(1)
+        
+        //when
+        let headData = sut.head?.data
+        let tailData = sut.tail?.data
+        
+        XCTAssertEqual(1, headData)
+        XCTAssertEqual(headData, tailData)
+    }
 }

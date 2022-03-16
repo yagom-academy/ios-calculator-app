@@ -12,5 +12,17 @@ struct LinkedList<Element: CalculateItem> {
     var isEmpty: Bool {
         return head == nil
     }
+    
+    mutating func append(_ data: Element) {
+        let newNode = Node(data: data)
+        
+        if head == nil {
+            head = newNode
+            tail = head
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
+    }
 }
 
