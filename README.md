@@ -16,7 +16,7 @@
     - 주말은 필요에 따라
 
 ## UML 
-![](https://i.imgur.com/rSN0Owe.jpg)
+![Untitled (1)](https://user-images.githubusercontent.com/82325822/158533449-03543b04-be60-4cfa-8ef9-373f671e7f0d.jpg)
 
 ## STEP 1 기능 구현
 - DoubleStack을 이용해 Queue구현
