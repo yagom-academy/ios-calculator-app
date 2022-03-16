@@ -36,7 +36,6 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     func removeAll() {
         linkdeList.removeAll()
-        
     }
     
     func allData() -> [T] {

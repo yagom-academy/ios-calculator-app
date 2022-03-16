@@ -27,11 +27,9 @@ final class LinkdeList<T> {
             tail = head
             return
         }
-        
         let node = Node(data: data)
         tail?.next = node
         tail = node
-        
     }
     
     func isEmpty() -> Bool {
@@ -58,7 +56,6 @@ final class LinkdeList<T> {
     func removeFirst() -> T? {
         let value: T?
         if head == nil { return nil }
-        
         if head?.next == nil {
             value = head?.data
             head = nil
@@ -72,14 +69,12 @@ final class LinkdeList<T> {
     
     func removeAll() {
         if head == nil { return }
-        
         head = nil
         tail = nil
     }
     
     func allData() -> [T]? {
         var dataArray: [T] = []
-        
         if head == nil { return nil }
         var nodePoint = head
         while nodePoint?.next != nil {
@@ -91,5 +86,4 @@ final class LinkdeList<T> {
         dataArray.append(value)
         return dataArray
     }
-    
 }
