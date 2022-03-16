@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Double>!
+    var sut: CalculatorItemQueue<Double>?
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -25,8 +25,8 @@ class CalculatorTests: XCTestCase {
         // given
         let input: Double = 1.0
         // when
-        sut.enqueue(input)
-        let result = sut.queue
+        sut?.enqueue(input)
+        let result = sut?.queue
         // then
         XCTAssertEqual(result, [1.0])
     }
@@ -35,9 +35,9 @@ class CalculatorTests: XCTestCase {
         // given
         let input: Double = 2.0
         // when
-        sut.enqueue(input)
-        let result = sut.dequeue()
-        let queue = sut.queue
+        sut?.enqueue(input)
+        let result = sut?.dequeue()
+        let queue = sut?.queue
         // then
         XCTAssertEqual(result, 2.0)
         XCTAssertEqual(queue, [nil])
