@@ -10,12 +10,14 @@ import Foundation
 public struct QueueLinkedList<T> {
     var calculateList = CalculatorDoublyLinkedList<T>()
     
+    public init() { }
+    
     private func enqueue(_ element: T) {
         calculateList.append(element)
     }
     
     private func dequeue() -> T? {
-        guard !calculateList.isEmpty, let element = calculateList.first else {
+        guard !calculateList.isEmpty, let element = calculateList.firstNode else {
             return nil
         }
         return calculateList.remove(element)
@@ -27,5 +29,9 @@ public struct QueueLinkedList<T> {
     
     private func resetAll() {
         return calculateList.resetAll()
+    }
+    
+    private func countNode() -> Int {
+        return calculateList.countNodes
     }
 }

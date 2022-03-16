@@ -20,8 +20,21 @@ final class CalculatorDoublyLinkedList<T> {
         return false
     }
     
-    public var first: Node<T>? {
+    public var firstNode: Node<T>? {
         return headNode
+    }
+    
+    public var countNodes: Int {
+        var nodeCount = 0
+        guard var node = headNode else {
+            nodeCount = 0
+            return nodeCount
+        }
+        while let nextNode = node.next {
+            node = nextNode
+            nodeCount += 1
+        }
+        return nodeCount
     }
     
     public func append(_ value: T) {
