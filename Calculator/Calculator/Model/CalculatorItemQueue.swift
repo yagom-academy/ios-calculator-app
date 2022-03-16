@@ -44,10 +44,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() -> Element? {
+        guard self.isEmpty == false else {
+            return nil
+        }
+        
         if outputStack.isEmpty {
-            guard inputStack.isEmpty == false else {
-                return nil
-            }
             outputStack = inputStack.reversed()
             inputStack.removeAll()
         }
