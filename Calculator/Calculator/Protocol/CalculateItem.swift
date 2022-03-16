@@ -9,3 +9,8 @@ import Foundation
 
 protocol CalculateItem {
 }
+
+extension Double: CalculateItem {
+}
+extension String: CalculateItem {
+}
