@@ -7,31 +7,27 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
-    private var list = CalculatorLinkedList<T>()
+struct CalculatorItemQueue<T: CalculateItem> {
+    private var linkedList = CalculatorLinkedList<T>()
     
     var count: Int {
-        return list.count
+        return linkedList.count
     }
     
     var isEmpty: Bool {
-        return list.isEmpty
+        return linkedList.isEmpty
     }
     
     func enqueue(_ element: T) {
-        list.append(element)
+        linkedList.append(element)
     }
     
     func dequeue() -> T? {
-        guard !list.isEmpty else { return nil }
-        return list.removeFirst()
+        guard !linkedList.isEmpty else { return nil }
+        return linkedList.removeFirst()
     }
     
     func removeAll() {
-        list.removeAll()
+        linkedList.removeAll()
     }
-}
-
-extension CalculatorItemQueue: CalculateItem {
-    
 }
