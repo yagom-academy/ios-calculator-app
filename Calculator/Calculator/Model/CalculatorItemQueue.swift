@@ -43,6 +43,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         inputStack.append(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> Element? {
         guard self.isEmpty == false else {
             return nil
