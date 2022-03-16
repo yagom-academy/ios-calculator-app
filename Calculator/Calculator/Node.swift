@@ -4,11 +4,7 @@
 
 import Foundation
 
-final class Node: Equatable {
-    static func == (lhs: Node, rhs: Node) -> Bool {
-        return lhs.next == rhs.next && lhs.data == rhs.data
-    }
-    
+final class Node {
     var data: Int?
     var next: Node?
     

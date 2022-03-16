@@ -7,13 +7,16 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     var sut: LinkedList!
+    var queue: CalculateItemQueue!
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = LinkedList()
+        queue = CalculateItemQueue()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
+        queue = nil
     }
     
     func test_nodeInitializer_isSuccess() {
@@ -117,5 +120,40 @@ final class CalculatorTests: XCTestCase {
         let result = sut.removeFirst()
         
         XCTAssertEqual(result, 10000)
+    }
+    
+    func test_append메서드를사용하지않고_isEmpty메서드를호출했을때_False가나오는지() {
+        let result = queue.isEmpty
+        
+        XCTAssertEqual(result, false)
+    }
+    
+    func test_enqueue메서드호출후_isEmpty메서드호출값이_True가나오는지() {
+        queue.enqueue(1)
+        
+        let result = queue.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_enqueue메서드호출10번후_count값이10이나오는지() {
+        for number in 1...10 {
+            queue.enqueue(number)
+        }
+        let result = queue.count
+        
+        XCTAssertEqual(result, 10)
+    }
+    
+    func test_enqueue메서드호출1000번후_dequeue999번후에_count값1이나오는지() {
+        for number in 1...1000 {
+            queue.enqueue(number)
+        }
+        for _ in 1...999 {
+            let _ = queue.dequeue()
+        }
+        let result = queue.count
+        
+        XCTAssertEqual(result, 1)
     }
 }
