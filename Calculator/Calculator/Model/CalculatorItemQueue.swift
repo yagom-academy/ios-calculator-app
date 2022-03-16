@@ -31,14 +31,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return outputStack.first ?? inputStack.last
     }
     
-    var currentInputStack: [Element] {
-        return inputStack
-    }
-    
-    var currentOutputStack: [Element] {
-        return outputStack
-    }
-    
     mutating func enqueue(_ element: Element) {
         inputStack.append(element)
     }
