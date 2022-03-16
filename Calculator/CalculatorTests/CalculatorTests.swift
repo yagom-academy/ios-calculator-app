@@ -26,7 +26,7 @@ class CalculatorTests: XCTestCase {
         let input: Double = 1.0
         // when
         sut.enqueue(input)
-        let result = sut.returnQueueForTest()
+        let result = sut.queue
         // then
         XCTAssertEqual(result, [1.0])
     }
@@ -37,7 +37,7 @@ class CalculatorTests: XCTestCase {
         // when
         sut.enqueue(input)
         let result = sut.dequeue()
-        let queue = sut.returnQueueForTest()
+        let queue = sut.queue
         // then
         XCTAssertEqual(result, 2.0)
         XCTAssertEqual(queue, [nil])

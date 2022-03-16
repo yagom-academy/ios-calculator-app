@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    fileprivate var queue: Array<T?> = Array<T?>()
-    fileprivate var head: Int = 0
+    private(set) var queue: Array<T?> = Array<T?>()
+    private(set) var head: Int = 0
     public var isEmpty: Bool {
         return queue.isEmpty
     }
@@ -35,9 +35,5 @@ struct CalculatorItemQueue<T: CalculateItem> {
             head = 0
         }
         return element
-    }
-    
-    func returnQueueForTest() -> Array<T?>{
-        return queue
     }
 }
