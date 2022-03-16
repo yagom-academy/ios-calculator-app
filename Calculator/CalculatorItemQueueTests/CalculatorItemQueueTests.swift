@@ -20,7 +20,7 @@ class CalculatorItemQueueTests: XCTestCase {
         calculator.enqueue(2)
         calculator.enqueue(3)
         
-        let result = calculator.queue
+        let result = calculator.inputStack
         
         XCTAssertEqual(result, [1,2,3])
     }
@@ -31,10 +31,12 @@ class CalculatorItemQueueTests: XCTestCase {
         calculator.enqueue(3)
         
         let outElement = calculator.dequeue()
-        let result = calculator.queue
+        let outStackResult = calculator.outputStack
+        let inStackResult = calculator.inputStack
         
-        XCTAssertEqual(result, [2,3])
+        XCTAssertEqual(outStackResult, [3,2])
         XCTAssertEqual(outElement, 1)
+        XCTAssertEqual(inStackResult, [])
     }
     
     func test_dequeue_every_element_in_queue() {
@@ -45,21 +47,24 @@ class CalculatorItemQueueTests: XCTestCase {
         calculator.dequeue()
         calculator.dequeue()
   
-        let result = calculator.queue
+        let result = calculator.outputStack
         XCTAssertEqual(result, [])
     }
     
     func test_dequeue_empty_queue_returns_nil() {
-        calculator.clearAll()
+        calculator.allClear()
             
         XCTAssertNil(calculator.dequeue())
     }
     
-    func test_removeAll() {
-        calculator.clearAll()
+    func test_allClear() {
+        calculator.allClear()
             
-        let result = calculator.queue
+        let inputStackResult = calculator.inputStack
+        let outputStackResult = calculator.outputStack
             
-        XCTAssertEqual(result, [])
+        XCTAssertEqual(inputStackResult, [])
+        XCTAssertEqual(outputStackResult, [])
     }
+    
 }
