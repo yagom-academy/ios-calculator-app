@@ -37,10 +37,8 @@ final class CalculatorItemQueueTests: XCTestCase {
   }
   
   func test_enqueue_1을_넣으면_elements는_배열_1을_반환해야한다() {
-    // given
+    // given when
     self.sut.enqueue(1.0)
-    
-    // when
     let output = self.sut.elements
     
     // then
@@ -48,37 +46,29 @@ final class CalculatorItemQueueTests: XCTestCase {
   }
   
   func test_enqueue_여러번_호출시_elements는_넣은_원소들의_배열을_반환해야한다() {
-    // given
+    // given when
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    self.sut.enqueue(3.0)
-    
-    // when
     let output = self.sut.elements
     
     // then
-    XCTAssertEqual(output, [1.0, 2.0, 3.0])
+    XCTAssertEqual(output, [1.0, 2.0])
   }
   
   // MARK: - dequeue()
   
   func test_dequeue_큐가_비어있을때_호출시_nil을_반환해야한다() {
-    // given
-    let input = self.sut.count
-    
-    // when
+    // given when
     let output = self.sut.dequeue()
     
     // then
-    XCTAssertEqual(input, 0)
-    XCTAssertNil(output)
+    XCTAssertEqual(output, nil)
   }
   
-  func test_dequeue_큐에_1_2_3이_들어있고_호출시_맨_앞의_1을_반환해야한다() {
+  func test_dequeue_큐에_1_2가_들어있고_호출시_1을_반환해야한다() {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    self.sut.enqueue(3.0)
     
     // when
     let output = self.sut.dequeue()
@@ -87,40 +77,33 @@ final class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(output, 1.0)
   }
   
-  func test_dequeue_큐에_1_2_3이_들어있고_호출시_elements는_배열_2_3을_반환해야한다() {
+  func test_dequeue_큐에_1_2가_들어있고_호출시_elements는_배열_2를_반환해야한다() {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    self.sut.enqueue(3.0)
     
     // when
     _ = self.sut.dequeue()
     let output = self.sut.elements
     
     // then
-    XCTAssertEqual(output, [2.0, 3.0])
+    XCTAssertEqual(output, [2.0])
   }
   
   // MARK: - first
   
   func test_first_호출시_큐가_비어있다면_nil을_반환해야한다() {
-    // given
-    self.sut.clear()
-    let input = self.sut.count
-    
-    // when
+    // given when
     let output = self.sut.first
     
     // then
-    XCTAssertEqual(input, 0)
-    XCTAssertNil(output)
+    XCTAssertEqual(output, nil)
   }
   
-  func test_first_1_2_3이_들어있는_큐에서_호출시_맨앞의_원소_1을_반환해야한다() {
+  func test_first_1_2가_들어있는_큐에서_호출시_1을_반환해야한다() {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    self.sut.enqueue(3.0)
     
     // when
     let output = self.sut.first
@@ -134,8 +117,6 @@ final class CalculatorItemQueueTests: XCTestCase {
   func test_clear_호출시_elements가_빈_배열을_반환해야한다() {
     // given
     self.sut.enqueue(1.0)
-    self.sut.enqueue(2.0)
-    self.sut.enqueue(3.0)
     
     // when
     self.sut.clear()
