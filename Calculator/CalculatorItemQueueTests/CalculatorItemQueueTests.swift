@@ -35,8 +35,8 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(MockNode.mockDouble)
         
         let firstNode = sut.linkedList.head
-        let secondNode = firstNode!.next
-        let thirdNode = secondNode!.next
+        let secondNode = firstNode?.next
+        let thirdNode = secondNode?.next
         
         XCTAssertEqual(firstNode, MockNode.mockInt)
         XCTAssertEqual(secondNode, MockNode.mockOperator)
