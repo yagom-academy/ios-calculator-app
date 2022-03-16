@@ -8,16 +8,16 @@
 import Foundation
 
 enum Operator: CalculatorItem {
-    case plus
-    case minus
+    case add
+    case subtract
     case divide
     case multiply
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
-        case .plus:
+        case .add:
             return lhs + rhs
-        case .minus:
+        case .subtract:
             return lhs - rhs
         case .divide:
             return lhs / rhs
