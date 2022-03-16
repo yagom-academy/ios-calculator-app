@@ -42,5 +42,25 @@ class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertNotNil(sut.enqueueStack)
     }
+    
+    func test_dequeue를_통해_Element가_나오는가() {
+        //given
+        sut.enqueue(10.0)
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, 10.0)
+    }
+    
+    func test_Stack에_여러개가_쌓여도_dequeue를_통해_Element가_잘나오는가() {
+        //given
+        sut.enqueue(10.0)
+        sut.enqueue(11.0)
+        //when
+        var result = sut.dequeue()
+        result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, 11.0)
+    }
 }
 
