@@ -59,19 +59,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     func allElement() -> [Element] {
-        var elements = [Element]()
-        var current = front?.next
-        
-        while current !== rear {
-            guard let data = current?.data else {
-                break
-            }
-            
-            elements.append(data)
-            current = current?.next
-        }
-        
-        return elements
+        compactMap{$0}
     }
 }
 
