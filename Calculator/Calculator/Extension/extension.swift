@@ -7,3 +7,7 @@ import Foundation
 extension Int: CalculateItem {
     
 }
+
+extension String: CalculateItem {
+    
+}

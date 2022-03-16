@@ -8,15 +8,18 @@ import XCTest
 final class CalculatorTests: XCTestCase {
     var sut: LinkedList<Int>!
     var queue: CalculateItemQueue<Int>!
+    var stringQueue: CalculateItemQueue<String>!
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = LinkedList<Int>()
         queue = CalculateItemQueue<Int>()
+        stringQueue = CalculateItemQueue<String>()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
         queue = nil
+        stringQueue = nil
     }
     
     func test_nodeInitializer_isSuccess() {
@@ -155,5 +158,14 @@ final class CalculatorTests: XCTestCase {
         let result = queue.count
         
         XCTAssertEqual(result, 1)
+    }
+    
+    func test_enqueue메서드quokka값을넣고_dequeue햇을때quokka값이나오는지() {
+        let input = "quokka"
+        stringQueue.enqueue(input)
+        
+        let result = stringQueue.dequeue()
+        
+        XCTAssertEqual(input, result)
     }
 }
