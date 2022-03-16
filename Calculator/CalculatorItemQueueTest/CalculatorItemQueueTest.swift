@@ -32,7 +32,17 @@ class CalculatorItemQueueTest: XCTestCase {
         var sut = CalculatorItemQueue<Int>()
         sut.enqueue(1)
         
-        //when
+        //when, then
         XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_초기화후_1_2_3을_enqueue한후_dequeue를하면_1이나와야한다() {
+        //given
+        sut?.enqueue(1)
+        sut?.enqueue(2)
+        sut?.enqueue(3)
+        
+        //when, then
+        XCTAssertEqual(sut?.dequeue(), 1)
     }
 }
