@@ -26,4 +26,13 @@ class CalculatorItemQueueTest: XCTestCase {
         //when, then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_초기화후_1을_enqueue하면_isEmpty가_false여야한다() {
+        //given
+        var sut = CalculatorItemQueue<Int>()
+        sut.enqueue(1)
+        
+        //when
+        XCTAssertFalse(sut.isEmpty)
+    }
 }

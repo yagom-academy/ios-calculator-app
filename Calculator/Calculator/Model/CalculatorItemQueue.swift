@@ -8,10 +8,14 @@
 import UIKit
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    let list = LinkedList<Element>()
+    var list = LinkedList<Element>()
     
     var isEmpty: Bool {
         return list.isEmpty
+    }
+    
+    mutating func enqueue(_ data: Element) {
+        list.append(data)
     }
 }
 
