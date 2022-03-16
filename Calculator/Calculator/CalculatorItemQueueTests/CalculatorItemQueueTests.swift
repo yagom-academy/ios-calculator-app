@@ -40,7 +40,7 @@ class CalculatorItemQueueTests: XCTestCase {
         //when
         sut.enqueue(value)
         //then
-        XCTAssertNotNil(sut.enqueueStack)
+        XCTAssertEqual(sut.enqueueStack, [10.0])
     }
     
     func test_dequeue를_통해_Element가_나오는가() {
@@ -61,6 +61,27 @@ class CalculatorItemQueueTests: XCTestCase {
         result = sut.dequeue()
         //then
         XCTAssertEqual(result, 11.0)
+    }
+    
+    func test_clear가_사용됐을때_enqueue가_비워지는가() {
+        //given
+        sut.enqueue(10.0)
+        sut.enqueue(11.0)
+        //when
+        sut.clear()
+        //then
+        XCTAssertEqual(sut.enqueueStack, [])
+    }
+    
+    func test_clear가_사용됐을때_dequeue가_비워지는가() {
+        //given
+        sut.enqueue(10.0)
+        sut.enqueue(11.0)
+        sut.dequeueStack = sut.enqueueStack.reversed()
+        //when
+        sut.clear()
+        //then
+        XCTAssertEqual(sut.dequeueStack, [])
     }
 }
 

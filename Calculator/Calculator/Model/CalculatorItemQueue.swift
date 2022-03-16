@@ -21,4 +21,9 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         
         return dequeueStack.removeLast()
     }
+    
+    mutating func clear() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
+    }
 }
