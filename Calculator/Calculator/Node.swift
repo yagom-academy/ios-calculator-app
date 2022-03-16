@@ -5,7 +5,6 @@ class Node<T> {
     var prev: Node<T>?
     var next: Node<T>?
     
-    
     init(_ data: T) {
         prev = nil
         next = nil

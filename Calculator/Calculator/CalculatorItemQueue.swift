@@ -1,7 +1,6 @@
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    
+struct CalculatorItemQueue<T: CalculateItem> {
     private var data = LinkedList<T>()
     
     public mutating func enqueue(element: T) {
@@ -28,7 +27,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     public mutating func removeAtIndex(_ at: Int) {
-        data.remove(at: at)
+        _ = data.remove(at: at)
     }
     
     public var count: Int {
