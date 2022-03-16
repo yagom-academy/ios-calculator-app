@@ -28,15 +28,15 @@ struct CalculatorItemQueue {
     }
     
     mutating func enqueue(with data: CalculateItem) {
-        self.queue[tail] = data
+        queue[tail] = data
         tail += 1
     }
     
     mutating func dequeue() -> CalculateItem? {
-        if queue.isEmpty {
+        if isEmpty {
             return nil
         }
-        let value = self.queue[head]
+        let value = queue[head]
         queue[head] = nil
         head += 1
         return value
