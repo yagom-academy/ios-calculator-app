@@ -74,7 +74,7 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     //MARK: - 고차함수 테스트
-    func test_1_2_3을_enqueue한다음_reduce로_모두_더했을때_결과가_6인지() {
+    func test_1_2_3을_enqueue한다음_reduce로_모두_더했을때_결과가_6이여야한다() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -85,5 +85,29 @@ class CalculatorItemQueueTest: XCTestCase {
         
         //then
         XCTAssertEqual(result, 6)
+    }
+    
+    func test_1_2_3_4_5_6_7_8을_enqueue한다음_filter로_짝수만걸렀을때_결과가_2_4_6_8이여야한다() {
+        //given
+        let elements = [1,2,3,4,5,6,7,8]
+        elements.forEach{ sut.enqueue($0) }
+        
+        //when
+        let result = sut.filter{ $0 % 2 == 0 }
+        
+        //then
+        XCTAssertEqual(result, [2,4,6,8])
+    }
+    
+    func test_1_2_3을_enqueue한다음_map으로_2배씩해주었을때_결과가_2_4_6이여야한다() {
+        //given
+        let elements = [1,2,3]
+        elements.forEach { sut.enqueue($0) }
+        
+        //when
+        let result = sut.map{ $0 * 2 }
+        
+        //then
+        XCTAssertEqual(result, [2,4,6])
     }
 }
