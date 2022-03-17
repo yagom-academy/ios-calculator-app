@@ -20,30 +20,18 @@ class CalculatorTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-
-    func test_enqueue에는_Double타입의값을_추가할수있다() {
-        // given
-        let input: Double = 1.0
-        // when
-        sut?.enqueue(input)
-        let result = sut?.nodeList
-        // then
-        XCTAssertEqual(result, [1.0])
-    }
     
-    func test_dequeue하면_element를리턴하고_queue에서는nil로처리된다() {
+    func test_dequeue하면_element를리턴한다() {
         // given
         let input: Double = 2.0
         // when
         sut?.enqueue(input)
         let result = sut?.dequeue()
-        let queue = sut?.nodeList
         // then
         XCTAssertEqual(result, 2.0)
-        XCTAssertEqual(queue, [nil])
     }
     
-    func test_queue가_비어있을때_isEmpty가_true를리턴한다() {
+    func test_nodeList가_비어있을때_isEmpty가_true를리턴한다() {
         // given
         // when
         let result = sut?.isEmpty
@@ -51,7 +39,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, true)
     }
     
-    func test_queue가_비어있지않을때_isEmpty가_false를리턴한다() {
+    func test_nodeList가_비어있지않을때_isEmpty가_false를리턴한다() {
         // given
         sut?.enqueue(1.0)
         // when
@@ -60,7 +48,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, false)
     }
     
-    func test_queue의count가_enqueue할때마다_업데이트된다() {
+    func test_nodeList의count가_enqueue할때마다_업데이트된다() {
         // given
         let input1: Double = 1.0
         let input2: Double = 2.0

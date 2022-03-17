@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var nodeList: Array<T?> = Array<T?>()
-    private(set) var head: Int = 0
+    private var nodeList: Array<T?> = Array<T?>()
+    private var head: Int = 0
     public var isEmpty: Bool {
         return nodeList.isEmpty
     }
