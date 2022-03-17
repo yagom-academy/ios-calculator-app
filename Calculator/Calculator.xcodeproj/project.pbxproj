@@ -16,6 +16,7 @@
 		DA7952A727DF9DFF00CBEC59 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7952A627DF9DFF00CBEC59 /* Model.swift */; };
 		DA7952AF27DFA09800CBEC59 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7952AE27DFA09800CBEC59 /* ModelTests.swift */; };
 		DA7FB43727E383D50002E8C0 /* FormulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FB43627E383D50002E8C0 /* FormulaTest.swift */; };
+		DA7FB43927E3AC2F0002E8C0 /* ExpressionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FB43827E3AC2F0002E8C0 /* ExpressionParserTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		DA7952AC27DFA09700CBEC59 /* ModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7952AE27DFA09800CBEC59 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		DA7FB43627E383D50002E8C0 /* FormulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTest.swift; sourceTree = "<group>"; };
+		DA7FB43827E3AC2F0002E8C0 /* ExpressionParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		DA7952AD27DFA09800CBEC59 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA7FB43827E3AC2F0002E8C0 /* ExpressionParserTest.swift */,
 				DA7FB43627E383D50002E8C0 /* FormulaTest.swift */,
 				DA7952AE27DFA09800CBEC59 /* ModelTests.swift */,
 			);
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7FB43927E3AC2F0002E8C0 /* ExpressionParserTest.swift in Sources */,
 				DA7FB43727E383D50002E8C0 /* FormulaTest.swift in Sources */,
 				DA7952AF27DFA09800CBEC59 /* ModelTests.swift in Sources */,
 			);

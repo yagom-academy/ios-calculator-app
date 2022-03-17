@@ -101,3 +101,12 @@ extension String {
         return self.components(separatedBy: String(target))
     }
 }
+
+enum ExpressionParser {
+    case scroll
+    
+    func componentsByOperators(from input: String) -> [String] {
+        return input.split(with: " ")
+    }
+    
+}
