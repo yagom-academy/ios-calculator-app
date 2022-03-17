@@ -80,3 +80,9 @@ struct CalculatorItemQueue {
         tail = 0
     }
 }
+
+struct Formula {
+    var operands = CalculatorItemQueue()
+    var operators = CalculatorItemQueue()
+    
+}
