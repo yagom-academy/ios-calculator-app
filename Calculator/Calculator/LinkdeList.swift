@@ -57,6 +57,7 @@ final class LinkdeList<T: CalculateItem> {
         }
     }
     
+    @discardableResult
     func removeFirst() -> T? {
         let value = head?.data
         if head == nil { return nil }

@@ -6,27 +6,62 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class LinkdeListTests: XCTestCase {
+    var sut: LinkdeList<Int>!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = LinkdeList<Int>()
+
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        sut = nil
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func test_append_했을때_isEmmpy_return_false() {
+        // given
+        sut.append(1)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+        // when
+        let result = sut.isEmpty
+
+        // then
+        XCTAssertFalse(result)
     }
+    
+    func test_append_안했을때_isEmmpy_return_true() {
+        // given
 
+        // when
+        let result = sut.isEmpty
+
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_append_1번했을때_count_return_1() {
+        // given
+        sut.append(1)
+
+        // when
+        let result = sut.count
+
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_append_1번_removeFirst_1번_return_true() {
+        // given
+        sut.append(1)
+        sut.removeFirst()
+
+        // when
+        let result = sut.isEmpty
+
+        // then
+        XCTAssertTrue(result)
+    }
 }
