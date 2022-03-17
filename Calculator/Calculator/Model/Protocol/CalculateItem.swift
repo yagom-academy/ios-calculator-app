@@ -8,9 +8,6 @@
 import Foundation
 
 protocol CalculateItem {
-    
+    // Empty
 }
 
-extension Int: CalculateItem {}
-extension String: CalculateItem {}
-extension Double: CalculateItem {}
