@@ -27,7 +27,7 @@ protocol List {
     func removeAll()
 }
 
-final class LinkdeList<T: CalculateItem> {
+final class LinkdeList<T: CalculateItem>: List {
     private var head: Node<T>?
     private var tail: Node<T>?
     var isEmpty: Bool { head == nil }
