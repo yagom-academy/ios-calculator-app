@@ -9,6 +9,6 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return [target.description]
+        return self.split(separator: target) as? [String] ?? []
     }
 }
