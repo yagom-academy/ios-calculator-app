@@ -68,4 +68,18 @@ class OperatorTests: XCTestCase {
         let expected = 2.0
         XCTAssertEqual(result, expected)
     }
+    
+    func test_Operator가divide이고rhs를0으로calculate할때_예상되는에러를반환해야한다() {
+        // given
+        sut = .divide
+        
+        // when
+        let result = sut.calculate(lhs: 2.0, rhs: 0.0)
+        
+        // then
+        let expected: CalculatorError = .dividedByZero
+        XCTAssertThrowsError(try result) { error in
+            XCTAssertEqual(error as? CalculatorError, expected)
+        }
+    }
 }
