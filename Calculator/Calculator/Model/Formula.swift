@@ -11,27 +11,19 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    mutating func result() throws -> Double {
-        var middleResult = operands.dequeue()
+    mutating func result() -> Double {
+        var middleResult = operands.dequeue() ?? .nan
         
         while !operands.isEmpty {
-            guard let firstOperand = middleResult else {
-                throw CalculationError.unknownError }
-            
-            guard let secondOperand = operands.dequeue() else {
-                throw CalculationError.unknownError }
+            guard let operand = operands.dequeue() else {
+                return .nan }
             
             guard let onceOperator = operators.dequeue() else {
-                throw CalculationError.unknownError
+                return .nan
             }
-            
-            middleResult = onceOperator.calculate(lhs: firstOperand, rhs: secondOperand)
+            middleResult = onceOperator.calculate(lhs: middleResult, rhs: operand)
         }
-        
-        guard let result = middleResult else {
-            throw CalculationError.unknownError }
-        
-        return result
+        return middleResult
     }
 }
 
