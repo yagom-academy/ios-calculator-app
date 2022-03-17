@@ -26,6 +26,9 @@ enum Operator: CalculateItem {
         return lhs / rhs
     }
     
+    func mutiply(lhs: Double, rhs: Double) -> Double {
+        return lhs * rhs
+    }
 }
 
 extension Double: CalculateItem {
