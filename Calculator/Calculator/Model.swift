@@ -17,9 +17,15 @@ enum Operator: CalculateItem {
     func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
     }
+    
     func subtract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
     }
+    
+    func divided(lhs: Double, rhs: Double) -> Double {
+        return lhs / rhs
+    }
+    
 }
 
 extension Double: CalculateItem {
