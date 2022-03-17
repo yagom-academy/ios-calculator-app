@@ -12,5 +12,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
 }
 
 extension Operator {
-
+    func calculate(lhs: Double, rhs: Double) -> Double {
+        switch self {
+        case .add:
+            return add(lhs: lhs, rhs: rhs)
+        }
+    }
+    
+    private func add(lhs: Double, rhs: Double) -> Double {
+        return lhs + rhs
+    }
 }

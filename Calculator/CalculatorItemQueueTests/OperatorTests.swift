@@ -22,6 +22,14 @@ class OperatorTests: XCTestCase {
     }
     
     func test_Operator가add이고calculate할때_결과값이예상값과같아야한다() {
+        // given
+        sut = .add
         
+        // when
+        let result = sut.calculate(lhs: 1.0, rhs: 2.0)
+        
+        // then
+        let expected = 3.0
+        XCTAssertEqual(result, expected)
     }
 }
