@@ -26,43 +26,29 @@ final class LinkedList<T> {
     }
     
     func append(data: T) {
+        let lastNode = Node(data: data)
         if head == nil {
-            head = Node(data: data)
+            head = lastNode
             tail = head
-            return
         } else {
-            let lastNode = Node(data: data)
             tail?.next = lastNode
             tail = lastNode
         }
     }
     
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
     func removeFirst() -> T? {
-        if head?.next == nil {
-            let lastData = head?.data
-            head = nil
-            return lastData
-        } else {
-            let data = head?.data
-            head = head?.next
-            return data
-        }
+        if isEmpty { return nil }
+        let lastData = head?.data
+        head = head?.next
+        return lastData
     }
     
     func removeAll() {
         head = nil
         tail = nil
-    }
-    
-    func bringHead() -> Node<T>? {
-        return head
-    }
-    
-    func bringTail() -> Node<T>? {
-        return tail
-    }
-    
-    func asignNilToHead() {
-        head = nil
     }
 }

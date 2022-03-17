@@ -7,19 +7,13 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     var sut: LinkedList<Int>!
-    var queue: CalculateItemQueue<Int>!
-    var stringQueue: CalculateItemQueue<String>!
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = LinkedList<Int>()
-        queue = CalculateItemQueue<Int>()
-        stringQueue = CalculateItemQueue<String>()
     }
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
-        queue = nil
-        stringQueue = nil
     }
     
     func test_nodeInitializer_isSuccess() {
@@ -46,15 +40,6 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_LinkedList인스턴스가data와next까지값가지고있을때_count2가나오는지() {
-        sut.append(data: 1)
-        sut.append(data: 2)
-        
-        let result = sut.count
-        
-        XCTAssertEqual(result, 2)
-    }
-    
     func test_LinkedList인스턴스Node길이가10일때_count10이나오는지() {
         for number in 1...10 {
             sut.append(data: number)
@@ -65,10 +50,8 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_append메서드3번호출시_nodeCount값이_3이나오는지() {
-        sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
-        
+        let numbers: [Int] = [1, 2, 3]
+        numbers.forEach(sut.append(data:))
         let result = sut.count
         
         XCTAssertEqual(result, 3)
@@ -126,59 +109,5 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 10000)
     }
-    
-    func test_append메서드를사용하지않고_isEmpty메서드를호출했을때_False가나오는지() {
-        let result = queue.isEmpty
-        
-        XCTAssertEqual(result, false)
-    }
-    
-    func test_enqueue메서드호출후_isEmpty메서드호출값이_True가나오는지() {
-        queue.enqueue(1)
-        
-        let result = queue.isEmpty
-        
-        XCTAssertTrue(result)
-    }
-    
-    func test_enqueue메서드호출10번후_count값이10이나오는지() {
-        for number in 1...10 {
-            queue.enqueue(number)
-        }
-        let result = queue.count
-        
-        XCTAssertEqual(result, 10)
-    }
-    
-    func test_enqueue메서드호출1000번후_dequeue999번후에_count값1이나오는지() {
-        for number in 1...1000 {
-            queue.enqueue(number)
-        }
-        for _ in 1...999 {
-            let _ = queue.dequeue()
-        }
-        let result = queue.count
-        
-        XCTAssertEqual(result, 1)
-    }
-    
-    func test_enqueue메서드quokka값을넣고_dequeue햇을때quokka값이나오는지() {
-        let input = "quokka"
-        stringQueue.enqueue(input)
-        
-        let result = stringQueue.dequeue()
-        
-        XCTAssertEqual(input, result)
-    }
-    
-    func test_enqueue메서드10번호출후_removeAll메서드호출했을때_count값0이나오는지() {
-        for number in 1...10 {
-            queue.enqueue(number)
-        }
-        queue.removeAll()
-        
-        let result = queue.count
-        
-        XCTAssertEqual(result, 0)
-    }
 }
+
