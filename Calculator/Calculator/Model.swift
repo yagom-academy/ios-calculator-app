@@ -27,7 +27,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return self.subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return self.divided(lhs: lhs, rhs: rhs)
+            return rhs == 0 ? .nan : self.divided(lhs: lhs, rhs: rhs)
         case .multiply:
             return self.mutiply(lhs: lhs, rhs: rhs)
         }
@@ -88,17 +88,13 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    mutating func result() throws -> Double {
+    mutating func result() -> Double {
         var lhs = operands.dequeue() ?? 0.0
         while operators.isEmpty == false {
             let rhs = operands.dequeue() ?? 0.0
             let oneOperator = operators.dequeue() ?? Operator.add
-            if oneOperator == .divide && rhs == 0.0 {
-                throw CalculatorError.dividedWithZero
-            } else {
-                lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
+            lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
             }
-        }
         return lhs
     }
 }

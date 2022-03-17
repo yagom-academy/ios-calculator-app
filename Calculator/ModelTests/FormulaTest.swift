@@ -27,7 +27,7 @@ class FormulaTest: XCTestCase {
         sut.operators.enqueue(with: Operator.add)
         
         let expectResult: Double = 10.0
-        let result = try sut.result()
+        let result = sut.result()
         
         XCTAssertEqual(result, expectResult)
     }
