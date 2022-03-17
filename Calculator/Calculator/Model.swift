@@ -50,8 +50,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
 extension Double: CalculateItem {
 }
 
-struct CalculatorItemQueue {
-    private(set) var queue: [Int: CalculateItem] = [:]
+struct CalculatorItemQueue<T: CalculateItem> {
+    private(set) var queue: [Int: T] = [:]
     private(set) var head: Int = 0
     private(set) var tail: Int = 0
     
@@ -59,12 +59,12 @@ struct CalculatorItemQueue {
         return queue.isEmpty
     }
     
-    mutating func enqueue(with data: CalculateItem) {
+    mutating func enqueue(with data: T) {
         queue[tail] = data
         tail += 1
     }
     
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> T? {
         if isEmpty {
             return nil
         }
@@ -82,7 +82,6 @@ struct CalculatorItemQueue {
 }
 
 struct Formula {
-    var operands = CalculatorItemQueue()
-    var operators = CalculatorItemQueue()
-    
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
 }
