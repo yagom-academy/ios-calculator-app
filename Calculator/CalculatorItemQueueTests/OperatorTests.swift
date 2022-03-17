@@ -21,7 +21,7 @@ class OperatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_Operator가add이고calculate할때_결과값이예상값과같아야한다() {
+    func test_Operator가add이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .add
         
@@ -33,7 +33,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_Operator가substract이고calculate할때_결과값이예상값과같아야한다() {
+    func test_Operator가substract이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .substract
         
@@ -45,7 +45,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_Operator가divide이고calculate할때_결과값이예상값과같아야한다() {
+    func test_Operator가divide이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .divide
         
@@ -57,7 +57,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_Operator가multiply이고calculate할때_결과값이예상값과같아야한다() {
+    func test_Operator가multiply이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .multiply
         
@@ -69,7 +69,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_Operator가divide이고rhs를0으로calculate할때_예상되는에러를반환해야한다() {
+    func test_Operator가divide이고rhs를0으로calculate를호출할때_예상되는에러를반환해야한다() {
         // given
         sut = .divide
         
