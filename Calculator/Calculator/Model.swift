@@ -84,4 +84,14 @@ struct CalculatorItemQueue<T: CalculateItem> {
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
+    
+    mutating func result() -> Double {
+        var lhs = operands.dequeue() ?? 0.0
+        while !operators.isEmpty {
+            let rhs = operands.dequeue() ?? 0.0
+            let oneOperator = operators.dequeue() ?? Operator.add
+            lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
+        }
+        return lhs
+    }
 }

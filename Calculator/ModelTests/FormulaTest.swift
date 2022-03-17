@@ -22,9 +22,11 @@ class FormulaTest: XCTestCase {
     func test_result() {
         sut.operands.enqueue(with: 2.0)
         sut.operands.enqueue(with: 3.0)
+        sut.operands.enqueue(with: 4.0)
+        sut.operators.enqueue(with: Operator.multiply)
         sut.operators.enqueue(with: Operator.add)
         
-        let expectResult: Double = 6.0
+        let expectResult: Double = 10.0
         let result = sut.result()
         XCTAssertEqual(result, expectResult)
     }
