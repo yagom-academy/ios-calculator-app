@@ -33,7 +33,7 @@ class LinkedQueue<Element: CalculateItem> {
         return tail == nil ? nil : tail
     }
     
-    func appendLast(newNode: Element?) {
+    func append(newNode: Element?) {
         if head == nil {
             head = Node(value: newNode)
             tail = head
@@ -44,7 +44,7 @@ class LinkedQueue<Element: CalculateItem> {
         tail = tail?.next
     }
     
-    func removeLast() {
+    func removeFirst() {
         if head == nil {
             return
         }
