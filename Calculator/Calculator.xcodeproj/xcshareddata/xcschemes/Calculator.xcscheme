@@ -43,7 +43,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9476538A27DFA3CC00646A7F"
+               BlueprintIdentifier = "94184E3027E227C6000C17C0"
                BuildableName = "CalculatorItemQueueTest.xctest"
                BlueprintName = "CalculatorItemQueueTest"
                ReferencedContainer = "container:Calculator.xcodeproj">
@@ -56,6 +56,16 @@
                BlueprintIdentifier = "9492862427E226D00012F0B8"
                BuildableName = "CalculatorItemQueue.xctest"
                BlueprintName = "CalculatorItemQueue"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "946FAE2B27E393070058F4DE"
+               BuildableName = "OperatorTest.xctest"
+               BlueprintName = "OperatorTest"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
