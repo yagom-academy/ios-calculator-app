@@ -8,21 +8,21 @@
 import UIKit
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var list = LinkedList<Element>()
+    private let list = LinkedList<Element>()
     
     var isEmpty: Bool {
         return list.isEmpty
     }
     
-    mutating func enqueue(_ data: Element) {
+    func enqueue(_ data: Element) {
         list.append(data)
     }
     
-    mutating func dequeue() -> Element? {
+    func dequeue() -> Element? {
         list.removeFirst()
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         list.removeAll()
     }
 }
