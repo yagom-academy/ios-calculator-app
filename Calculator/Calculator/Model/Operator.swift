@@ -15,14 +15,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
 }
 
 extension Operator {
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .substract:
             return substract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
+            return try divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -36,7 +36,11 @@ extension Operator {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) -> Double {
+    private func divide(lhs: Double, rhs: Double) throws -> Double {
+        if rhs == .zero {
+            throw CalculatorError.dividedByZero
+        }
+        
         return lhs / rhs
     }
 

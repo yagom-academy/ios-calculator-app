@@ -26,7 +26,7 @@ class OperatorTests: XCTestCase {
         sut = .add
         
         // when
-        let result = sut.calculate(lhs: 1.0, rhs: 2.0)
+        let result = try? sut.calculate(lhs: 1.0, rhs: 2.0)
         
         // then
         let expected = 3.0
@@ -38,7 +38,7 @@ class OperatorTests: XCTestCase {
         sut = .substract
         
         // when
-        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
         
         // then
         let expected = 1.0
@@ -50,7 +50,7 @@ class OperatorTests: XCTestCase {
         sut = .divide
         
         // when
-        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
         
         // then
         let expected = 2.0
@@ -62,7 +62,7 @@ class OperatorTests: XCTestCase {
         sut = .multiply
         
         // when
-        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
         
         // then
         let expected = 2.0
@@ -74,11 +74,9 @@ class OperatorTests: XCTestCase {
         sut = .divide
         
         // when
-        let result = sut.calculate(lhs: 2.0, rhs: 0.0)
-        
         // then
         let expected: CalculatorError = .dividedByZero
-        XCTAssertThrowsError(try result) { error in
+        XCTAssertThrowsError(try sut.calculate(lhs: 2.0, rhs: 0.0)) { error in
             XCTAssertEqual(error as? CalculatorError, expected)
         }
     }
