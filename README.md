@@ -7,6 +7,13 @@
 
 # [STEP 1]
 
+## Step 1 수행 중 핵심경험
+- TDD 시작하기
+    * 기존의 프로젝트에 Test Target 추가
+- Queue 자료구조의 이해와 구현
+- List 자료구조 직접 구현해보기
+    * 리스트를 활용하여 Queue 구현
+
 ## ⁉️ Queue를 구현하기 위해 고민한 점 (Array, Singly Linked List, Doubly Linked List)
 > - `Queue`라는 자료구조를 구현하기 위해 `Array`와 `List`에 대해 먼저 공부하고 진행하였습니다. 
 > - 물론 `Array`로도 충분히 구현가능하지만 `Array`로 구현할때, `Queue`에서 값이 `dequeue`되는 경우, 그 뒤의 값들이 앞으로 옮겨져야 하는 오버헤드가 발생하게 됩니다. 
