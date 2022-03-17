@@ -32,4 +32,16 @@ class OperatorTests: XCTestCase {
         let expected = 3.0
         XCTAssertEqual(result, expected)
     }
+    
+    func test_Operator가substract이고calculate할때_결과값이예상값과같아야한다() {
+        // given
+        sut = .substract
+        
+        // when
+        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        
+        // then
+        let expected = 1.0
+        XCTAssertEqual(result, expected)
+    }
 }
