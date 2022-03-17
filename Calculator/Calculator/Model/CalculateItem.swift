@@ -9,7 +9,7 @@ import Foundation
 
 protocol CalculateItem {}
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "/"
@@ -42,14 +42,5 @@ enum Operator: Character, CaseIterable {
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
-    }
-}
-
-extension Double: CalculateItem {}
-
-extension String {
-    func split(with target: Character) -> [String] {
-        let convertStringArray = Array(arrayLiteral: target).map{ String($0) }
-        return convertStringArray
     }
 }
