@@ -8,7 +8,7 @@ extension Int: CalculateItem {
     
 }
 
-extension Float: CalculateItem {
+extension Double: CalculateItem {
     
 }
 
