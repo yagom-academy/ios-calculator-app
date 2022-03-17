@@ -18,6 +18,7 @@ final class Node<T> {
 }
 
 protocol List {
+    associatedtype T
     var isEmpty: Bool { get }
     var count: Int { get }
     
