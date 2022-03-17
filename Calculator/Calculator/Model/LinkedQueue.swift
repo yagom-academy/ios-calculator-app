@@ -33,15 +33,17 @@ struct LinkedQueue<Element: CalculateItem> {
         return tail == nil ? nil : tail
     }
     
-    mutating func append(newNode: Element?) {
+    mutating func removeFirst() -> Node<Element>? {
         if head == nil {
-            head = Node(value: newNode)
-            tail = head
-            return
+            return nil
         }
         
-        tail?.next = Node(value: newNode)
-        tail = tail?.next
+        defer {
+            let nextHead = head?.next
+            head = nil
+            head = nextHead
+        }
+        return head
     }
     
     mutating func removeFirst() {
