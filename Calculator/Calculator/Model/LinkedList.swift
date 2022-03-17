@@ -5,7 +5,7 @@
 //  Created by DuDu on 2022/03/16.
 //
 
-class LinkedList<Element: CalculateItem> {
+final class LinkedList<Element: CalculateItem> {
     private(set) var head: Node<Element>?
     private(set) var tail: Node<Element>?
     

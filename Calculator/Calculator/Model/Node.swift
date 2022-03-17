@@ -6,7 +6,7 @@
 //
 
 final class Node<Element: CalculateItem> {
-    var data: Element
+    private(set) var data: Element
     var next: Node<Element>? = nil
     
     init(data: Element) {
