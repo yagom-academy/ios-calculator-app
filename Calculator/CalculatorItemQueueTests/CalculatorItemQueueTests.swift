@@ -49,7 +49,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
         let result = sut.dequeue()
         // then
-        XCTAssertEqual(result, nil)
+        XCTAssertNil(result)
     }
     
     func test_값이_있는_배열에_dequeue하면_정상반환하는가() {
