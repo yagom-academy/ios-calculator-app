@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -26,7 +26,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = 1
         
         // when
-        sut.enqueue(input)
+        sut.enqueue(Double(input))
         
         // then
         let result = sut.count
@@ -39,7 +39,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = 1
         
         // when
-        sut.enqueue(input)
+        sut.enqueue(Double(input))
         sut.dequeue()
         
         // then
@@ -53,7 +53,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = 1
         
         // when
-        sut.enqueue(input)
+        sut.enqueue(Double(input))
         sut.dequeue()
         
         // then
@@ -67,7 +67,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach {
-            sut.enqueue($0)
+            sut.enqueue(Double($0))
         }
         
         // then
@@ -82,7 +82,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach {
-            sut.enqueue($0)
+            sut.enqueue(Double($0))
         }
         sut.dequeue()
         
@@ -98,12 +98,12 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach {
-            sut.enqueue($0)
+            sut.enqueue(Double($0))
         }
         
         // then
         let result = sut.first
-        let expected = 1
+        let expected = 1.0
         XCTAssertEqual(result, expected)
     }
     
@@ -113,13 +113,13 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach {
-            sut.enqueue($0)
+            sut.enqueue(Double($0))
         }
         sut.dequeue()
         
         // then
         let result = sut.first
-        let expected = 2
+        let expected = 2.0
         XCTAssertEqual(result, expected)
     }
     
@@ -129,13 +129,13 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach {
-            sut.enqueue($0)
+            sut.enqueue(Double($0))
         }
         sut.dequeue()
         
         // then
         let result = sut.last
-        let expected = 3
+        let expected = 3.0
         XCTAssertEqual(result, expected)
     }
     
@@ -153,7 +153,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach {
-            sut.enqueue($0)
+            sut.enqueue(Double($0))
         }
         sut.clear()
         

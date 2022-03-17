@@ -9,7 +9,7 @@ import Foundation
 
 protocol CalculateItem {}
 
-extension Int: CalculateItem {}
+extension Double: CalculateItem {}
 
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack: [Element] = []
