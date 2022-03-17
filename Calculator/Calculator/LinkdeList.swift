@@ -18,18 +18,18 @@ final class Node<T> {
 }
 
 protocol List {
-    associatedtype T
+    associatedtype Element
     var isEmpty: Bool { get }
     var count: Int { get }
     
-    func append(_ data: T)
-    func removeFirst() -> T?
+    func append(_ data: Element)
+    func removeFirst() -> Element?
     func removeAll()
 }
 
-final class LinkdeList<T: CalculateItem>: List {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+final class LinkdeList<Element: CalculateItem>: List {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     var isEmpty: Bool { head == nil }
     var count: Int { retrieveCount() }
     
@@ -46,7 +46,7 @@ final class LinkdeList<T: CalculateItem>: List {
         return count
     }
     
-    func append(_ data: T) {
+    func append(_ data: Element) {
         let node = Node(data: data)
         if head == nil {
             head = node
@@ -58,7 +58,7 @@ final class LinkdeList<T: CalculateItem>: List {
     }
     
     @discardableResult
-    func removeFirst() -> T? {
+    func removeFirst() -> Element? {
         let value = head?.data
         if head == nil { return nil }
         if head?.next == nil {
