@@ -1,6 +1,55 @@
-## iOS 커리어 스타터 캠프
+### 계산기 프로젝트
+> 프로젝트 기간 2022.03.14 ~ 2022.
+팀원 : [@malrang](https://github.com/kinggoguma) / 리뷰어 : [도미닉](https://github.com/AppleCEO)
 
-### 계산기 프로젝트 저장소
+- [UML](#UML)
+- [STEP 1 기능 구현](#step-1-기능-구현)
+    + [고민했던 것들](#고민했던-것들)
+    + [배운 개념](#배운-개념)
+    + [PR 후 개선사항](#pr-후-개선사항)
+    
+## UML
+![asd](https://user-images.githubusercontent.com/88717147/158518548-08c96f45-b77e-429b-837f-5b28fc6d0fa5.png)
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
+## STEP 1 기능 구현
 
+## 고민했던 것들
+1. Queue 구현
+- Queue 에 대한 예시를 찾아보니 배열 하나로 구현하는방법, 배열 두개로 구현하는 방법, 링크드 리스트를 이용한 방법 등이 있었다.
+- 배열로 구현하게되면 배열은 stack(LIFO)방식으로 저장되기 때문에 처음 저장한 값을 제거 하게되면 배열에 저장된 element 갯수 만큼 인덱스 위치를 -1 씩 해주어야해서 시간 복잡도가 늘어난다는것을 알게 되었다.
+- 그렇다면 순서가 있는 컬렉션 타입 말고 다른 것으로 구현시켜주면 삭제해주더라도 -1 해주는 과정이 없어 시간복잡도 면에서 유리하지 않을까? 생각하여 다른 타입으로 구현하는것을 고민함
+2. 프로토콜 활용 방법
+- 큐 배열 에서 활용될 프로토콜 채택 방법을 어떻게 해야할지 고민함.
+- 큐 에서 사용될 Element가 프로토콜을 채택 하게끔 해야할지.
+- 프로토콜을 채택한 타입만 배열에 넣어 사용해야할지.
+```swift
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var addStack: [Element] = []
+    private var subStack: [Element] = []
+    }
+```
+```swift
+struct CalculatorItemQueue {
+    private var addStack: [CalculateItem] = []
+    private var subStack: [CalculateItem] = []
+    }
+```
+3. 큐 배열에 element가 여러개일때 deQueue 를 한번만 실행한후 enQueue 를 실행할경우
+```swift
+    mutating func deQueue() -> CalculateItem? {
+        if subStack.isEmpty {
+            subStack = addStack.reversed()
+            addStack.removeAll()
+        }
+        return subStack.popLast()
+    }
+```
+- 이부분은 고민하다 계산기 프로젝트에서는 이대로 사용해도 괜찮을것 같아..수정하지않았다..
+- 계산기 특성상 deQueue를 호출하면 배열에있는 모든 element를 제거 하기전까지 enQueue 기능을 사용할수 없기 때문에 이번 프로젝트에서는 문제가 될것같지 않았다..!
+
+## 배운 개념
+- unit-test
+- 자료구조 Queue
+- generic
+
+## PR 후 개선사항
