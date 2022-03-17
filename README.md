@@ -9,9 +9,20 @@
     + [PR 후 개선사항](#pr-후-개선사항)
     
 ## UML
+더블 스택큐
 ![asd](https://user-images.githubusercontent.com/88717147/158518548-08c96f45-b77e-429b-837f-5b28fc6d0fa5.png)
 
 ## STEP 1 기능 구현
+1. 더블 스택 큐
+- resetQueue() 저장된 모든 데이터를 삭제 해주는 메서드
+- enQueue() 큐 배열의 마지막에 데이터를 저장해주는 메서드
+- deQueue() 큐 배열의 처음 데이터를 제거, 반환 해주는 메서드
+
+2. 링크드 리스트 큐
+- removeAll() 저장된 모든 노드 를 제거해주는 메서드
+- removeFirst() 저장된 처음 노드 를 제거해주는 메서드
+- append() 새로운 노드를 마지막 노드로 추가해주는 메서드
+
 
 ## 고민했던 것들
 1. Queue 구현
