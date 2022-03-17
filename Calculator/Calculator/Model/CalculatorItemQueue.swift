@@ -8,32 +8,32 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var queue: Array<T?> = Array<T?>()
+    private(set) var nodeList: Array<T?> = Array<T?>()
     private(set) var head: Int = 0
     public var isEmpty: Bool {
-        return queue.isEmpty
+        return nodeList.isEmpty
     }
     public var count: Int {
-        return queue.count
+        return nodeList.count
     }
     
     mutating public func enqueue(_ element: T) {
-        queue.append(element)
+        nodeList.append(element)
     }
     
     mutating public func dequeue() -> T? {
-        guard head < queue.count else {
+        guard head < nodeList.count else {
             return nil
         }
-        guard let element = queue[head] else {
+        guard let element = nodeList[head] else {
             return nil
         }
-        queue[head] = nil
+        nodeList[head] = nil
         head += 1
         
-        let percentage = Double(head / queue.count)
+        let percentage = Double(head / nodeList.count)
         if head > 50, percentage > 0.3 {
-            queue.removeFirst(head)
+            nodeList.removeFirst(head)
             head = 0
         }
         return element
