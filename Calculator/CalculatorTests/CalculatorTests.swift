@@ -31,8 +31,8 @@ class CalculatorTests: XCTestCase {
     
     func test_값1개enqueue후dequeue후count호출시출력_0() {
         sut.enqueue("+")
-        sut.dequeue()
-        
+        _ = sut.dequeue()
+
         let result = sut.count
         
         XCTAssertEqual(result, 0)
@@ -40,7 +40,7 @@ class CalculatorTests: XCTestCase {
     
     func test_값1개enqueue후dequeue후isEmpty출력_true() {
         sut.enqueue("+")
-        sut.dequeue()
+        _ = sut.dequeue()
         
         let result = sut.isEmpty
         
@@ -77,7 +77,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue("+")
         sut.enqueue("-")
         sut.enqueue("+")
-        sut.dequeue()
+        _ = sut.dequeue()
         
         let result = sut.count
         
