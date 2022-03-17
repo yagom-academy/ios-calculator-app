@@ -40,7 +40,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(Double(input))
-        sut.dequeue()
+        try! sut.dequeue()
         
         // then
         let result = sut.count
@@ -54,7 +54,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(Double(input))
-        sut.dequeue()
+        try! sut.dequeue()
         
         // then
         let result = sut.isEmpty
@@ -84,7 +84,7 @@ class CalculatorItemQueueTests: XCTestCase {
         input.forEach {
             sut.enqueue(Double($0))
         }
-        sut.dequeue()
+        try! sut.dequeue()
         
         // then
         let result = sut.count
@@ -115,7 +115,7 @@ class CalculatorItemQueueTests: XCTestCase {
         input.forEach {
             sut.enqueue(Double($0))
         }
-        sut.dequeue()
+        try! sut.dequeue()
         
         // then
         let result = sut.first
@@ -131,7 +131,7 @@ class CalculatorItemQueueTests: XCTestCase {
         input.forEach {
             sut.enqueue(Double($0))
         }
-        sut.dequeue()
+        try! sut.dequeue()
         
         // then
         let result = sut.last
@@ -139,12 +139,13 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_queue가비어있을때_dequeue를하면_nil을_반환해야한다() {
+    func test_queue가비어있을때_dequeue를하면_예상되는에러를반환해야한다() {
         // when
-        let result = sut.dequeue()
-        
         // then
-        XCTAssertEqual(result, nil)
+        let expected: QueueError = .notFoundElement
+        XCTAssertThrowsError(try sut.dequeue()) { error in
+            XCTAssertEqual(error as? QueueError, expected)
+        }
     }
     
     func test_clear를했을때_isEmpty는_true이여야한다() {
