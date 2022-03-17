@@ -31,9 +31,9 @@ final class LinkdeList<T: CalculateItem> {
     private var head: Node<T>?
     private var tail: Node<T>?
     var isEmpty: Bool { head == nil }
-    var count: Int { getCount() }
+    var count: Int { retrieveCount() }
     
-    private func getCount() -> Int {
+    private func retrieveCount() -> Int {
         if head == nil {
             return 0
         }
