@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0A47D8227E37337003CD7E5 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8127E37337003CD7E5 /* OperatorTests.swift */; };
+		B0A47D8427E376AF003CD7E5 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8327E376AF003CD7E5 /* Operator.swift */; };
 		B0E177A227DF5C0000620996 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E177A127DF5C0000620996 /* CalculatorItemQueue.swift */; };
 		B0E177AB27DF909F00620996 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E177AA27DF909F00620996 /* CalculateItem.swift */; };
 		B0E177AE27DF90DB00620996 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E177AD27DF90DB00620996 /* Double+Extension.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B0A47D8127E37337003CD7E5 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
+		B0A47D8327E376AF003CD7E5 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		B0E177A127DF5C0000620996 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		B0E177AA27DF909F00620996 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		B0E177AD27DF90DB00620996 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				B0E177A927DF909300620996 /* Protocol */,
+				B0A47D8327E376AF003CD7E5 /* Operator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			children = (
 				B0EE793927DF30730075DE95 /* CalculatorLinkedListTests.swift */,
 				B0EE794527DF582D0075DE95 /* CalculatorItemQueueTests.swift */,
+				B0A47D8127E37337003CD7E5 /* OperatorTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0EE794627DF582D0075DE95 /* CalculatorItemQueueTests.swift in Sources */,
+				B0A47D8227E37337003CD7E5 /* OperatorTests.swift in Sources */,
 				B0EE793A27DF30730075DE95 /* CalculatorLinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +310,7 @@
 				B0E177B027DF99E200620996 /* CalculatorLinkedList.swift in Sources */,
 				B0E177A227DF5C0000620996 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				B0A47D8427E376AF003CD7E5 /* Operator.swift in Sources */,
 				B0E177B327DF9F5E00620996 /* CalculatorNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
