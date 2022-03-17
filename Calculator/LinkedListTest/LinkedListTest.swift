@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTest: XCTestCase {
-    var sut: LinkedList<Int>?
+    var sut: LinkedList<Double>?
 
     override func setUpWithError() throws {
-        sut = LinkedList<Int>()
+        sut = LinkedList<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -21,7 +21,7 @@ class LinkedListTest: XCTestCase {
     
     func test_초기화후_isEmpty가_true여야한다() {
         //given
-        let sut = LinkedList<Int>()
+        let sut = LinkedList<Double>()
         //when, then
         XCTAssertTrue(sut.isEmpty)
     }
