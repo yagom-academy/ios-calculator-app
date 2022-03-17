@@ -5,8 +5,8 @@
 import Foundation
 
 final class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     init(head: Node<T>? = nil) {
         self.head = head
@@ -52,5 +52,17 @@ final class LinkedList<T> {
     func removeAll() {
         head = nil
         tail = nil
+    }
+    
+    func bringHead() -> Node<T>? {
+        return head
+    }
+    
+    func bringTail() -> Node<T>? {
+        return tail
+    }
+    
+    func asignNilToHead() {
+        head = nil
     }
 }

@@ -27,11 +27,11 @@ final class CalculatorTests: XCTestCase {
         
         let result = LinkedList<Int>()
         
-        XCTAssertEqual(result.head?.data, nodes.data)
+        XCTAssertEqual(result.bringHead()?.data, nodes.data)
     }
     
     func test_LinkedList인스턴스가nil일때_count0이나오는지() {
-        sut.head = nil
+        sut.asignNilToHead()
         
         let result = sut.count
         
@@ -39,7 +39,7 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_LinkedList인스턴스가값이있을떄_count1이나오는지() {
-        sut.head = Node(data: 1, next: nil)
+        sut.append(data: 1)
         
         let result = sut.count
         
@@ -47,7 +47,8 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_LinkedList인스턴스가data와next까지값가지고있을때_count2가나오는지() {
-        sut.head = Node(data: 1, next: Node(data: 1, next: nil))
+        sut.append(data: 1)
+        sut.append(data: 2)
         
         let result = sut.count
         
@@ -55,8 +56,9 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_LinkedList인스턴스Node길이가10일때_count10이나오는지() {
-        sut.head = Node(data: 1, next: Node(data: 2, next: Node(data: 3, next: Node(data: 4, next: Node(data: 5, next: Node(data: 6, next: Node(data: 7, next: Node(data: 8, next: Node(data: 9, next: Node(data: 10, next: nil))))))))))
-        
+        for number in 1...10 {
+            sut.append(data: number)
+        }
         let result = sut.count
         
         XCTAssertEqual(result, 10)
@@ -75,7 +77,7 @@ final class CalculatorTests: XCTestCase {
     func test_append메서드3을넣어호출시_보낸data값3이나오는지() {
         sut.append(data: 3)
         
-        let result = sut.head?.data
+        let result = sut.bringHead()?.data
         
         XCTAssertEqual(result, 3)
     }
@@ -84,8 +86,8 @@ final class CalculatorTests: XCTestCase {
         for number in 1...10 {
             sut.append(data: number)
         }
-        let head = sut.head?.data
-        let tail = sut.tail?.data
+        let head = sut.bringHead()?.data
+        let tail = sut.bringTail()?.data
         
         XCTAssertEqual(head, 1)
         XCTAssertEqual(tail, 10)
