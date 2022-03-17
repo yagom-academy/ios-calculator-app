@@ -22,7 +22,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue를한번호출했을때_queue의카운트가_1이여야한다() {
+    func test_enqueue를한번호출했을때_queue의카운트가_예상값과같아야한다() {
         // given
         let input = 1
         
@@ -35,7 +35,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_enqueue와dequeue를한번씩호출했을때_queue의카운트가_0이여야한다() {
+    func test_enqueue와dequeue를한번씩호출했을때_queue의카운트가_예상값과같아야한다() {
         // given
         let input = 1
         
@@ -49,7 +49,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_enqueue와dequeue를한번씩호출했을때_isEmpty는_true이여야한다() {
+    func test_enqueue와dequeue를한번씩호출했을때_isEmpty는_예상값과같아야한다() {
         // given
         let input = 1
         
@@ -62,7 +62,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_enqueue를두번호출했을때_queue의카운트는_2여야한다() {
+    func test_enqueue를여러번호출했을때_queue의카운트는_예상값과같아야한다() {
         // given
         let input = [1,2]
         
@@ -77,7 +77,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_enqueue를두번호출하고dequeue를한번호출했을때_queue의카운트는_1이여야한다() {
+    func test_enqueue를두번호출하고dequeue를한번호출했을때_queue의카운트는_예상값과같아야한다() {
         // given
         let input = [1,2]
         
@@ -93,7 +93,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_1_2를enqueue했을때_front는_1이여야한다() {
+    func test_enqueue를여러번호출했을때_first는_예상값과같아야한다() {
         // given
         let input = [1,2]
         
@@ -103,12 +103,12 @@ class CalculatorItemQueueTests: XCTestCase {
         }
         
         // then
-        let result = sut.front
+        let result = sut.first
         let expected = 1
         XCTAssertEqual(result, expected)
     }
     
-    func test_1_2를enqueue하고dequeue를한번호출했을때_front는_2여야한다() {
+    func test_enqueue여러번하고dequeue를한번호출했을때_first는_예상값과같아야한다() {
         // given
         let input = [1,2]
         
@@ -119,12 +119,12 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.dequeue()
         
         // then
-        let result = sut.front
+        let result = sut.first
         let expected = 2
         XCTAssertEqual(result, expected)
     }
     
-    func test_1_2_3을enqueue하고dequeue를한번호출했을때_rear는_3이여야한다() {
+    func test_enqueue여러번하고dequeue를한번호출했을때_last는_예상값과같아야한다() {
         // given
         let input = [1,2,3]
         
@@ -135,7 +135,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.dequeue()
         
         // then
-        let result = sut.rear
+        let result = sut.last
         let expected = 3
         XCTAssertEqual(result, expected)
     }
