@@ -53,7 +53,21 @@ class CalculatorItemQueueTest: XCTestCase {
         //then
         XCTAssertEqual(sut.first, input)
         XCTAssertEqual(sut.last, input3)
-        XCTAssertEqual(sut.count, 3)
+    }
+    
+    func test_enqueue후dequeue후다시enqueue진행시_정상적으로enqueue가되는지() {
+        //given
+        let input: Double = 2
+        let input2: Double = 4
+        let input3: Double = 7
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.dequeue()
+        sut.enqueue(input3)
+        //then
+        XCTAssertEqual(sut.first, input2)
+        XCTAssertEqual(sut.last, input3)
     }
     //MARK: - dequeue()
     func test_dequeue호출시_FIFO가정상적으로진행되는지() {
@@ -86,16 +100,12 @@ class CalculatorItemQueueTest: XCTestCase {
         //given
         let input: Double = 5
         let input2: Double = 2
-        let input3: Double = 9
         //when
         sut.enqueue(input)
         sut.enqueue(input2)
-        sut.enqueue(input3)
-        let preCount = sut.count
         sut.removeAll()
         let result = sut.count
         //then
-        XCTAssertEqual(preCount, 3)
         XCTAssertEqual(result, 0)
     }
 }

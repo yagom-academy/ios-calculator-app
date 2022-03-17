@@ -8,6 +8,10 @@ struct CalculatorItemQueue<item: CalculateItem> {
     var last: item? { dequeueList.isEmpty ? enqueueList.last : dequeueList.first }
     
     mutating func enqueue(_ item: item) {
+        if enqueueList.isEmpty {
+            enqueueList = dequeueList.reversed()
+            dequeueList.removeAll()
+        }
         enqueueList.append(item)
     }
     
