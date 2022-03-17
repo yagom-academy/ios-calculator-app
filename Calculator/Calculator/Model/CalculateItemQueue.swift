@@ -5,25 +5,25 @@
 import Foundation
 
 struct CalculateItemQueue<T: CalculateItem> {
-    private var queue = LinkedList<T>()
+    private let nodes = LinkedList<T>()
     
     var count: Int {
-        return queue.count
+        return nodes.count
     }
     
     var isEmpty: Bool {
-        return queue.count == 0
+        return nodes.count == 0
     }
     
-    mutating func enqueue(_ node: T) {
-        queue.append(data: node)
+    func enqueue(_ node: T) {
+        nodes.append(data: node)
     }
     
-    mutating func dequeue() -> T? {
-        return isEmpty ? nil : queue.removeFirst()
+    func dequeue() -> T? {
+        return isEmpty ? nil : nodes.removeFirst()
     }
     
-    mutating func removeAll() {
-        queue.removeAll()
+    func removeAll() {
+        nodes.removeAll()
     }
 }
