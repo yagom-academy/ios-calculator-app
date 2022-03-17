@@ -33,8 +33,7 @@ final class CalculatorLinkedList<T> {
             newNode.previous = previousTail
             previousTail.next = newNode
             tail = newNode
-        }
-        if head == nil {
+        } else {
             head = newNode
             tail = newNode
         }
