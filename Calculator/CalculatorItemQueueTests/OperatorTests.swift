@@ -11,4 +11,17 @@ import XCTest
 class OperatorTests: XCTestCase {
     var sut: Operator!
     
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = .add
+    }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_Operator가add이고calculate할때_결과값이예상값과같아야한다() {
+        
+    }
 }
