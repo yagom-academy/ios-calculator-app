@@ -5,11 +5,11 @@
 //  Created by Lingo on 2022/03/17.
 //
 
-enum Operator {
-  case add
-  case subtract
-  case divide
-  case multiply
+enum Operator: Character, CaseIterable, CalculateItem {
+  case add = "+"
+  case subtract = "-"
+  case divide = "÷"
+  case multiply = "×"
   
   func calculate(lhs: Double, rhs: Double) -> Double {
     switch self {
