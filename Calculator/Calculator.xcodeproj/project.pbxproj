@@ -13,6 +13,7 @@
 		9C99F35327E05EFD00DE77CD /* CalculatorLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C99F35227E05EFD00DE77CD /* CalculatorLinkedList.swift */; };
 		9C99F35627E05FD100DE77CD /* CalculatorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C99F35527E05FD100DE77CD /* CalculatorNode.swift */; };
 		9CA2890527E35F3E00EB3DAA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2890427E35F3E00EB3DAA /* Extension.swift */; };
+		9CA2890727E363F400EB3DAA /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2890627E363F400EB3DAA /* Formula.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 		9C99F35227E05EFD00DE77CD /* CalculatorLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLinkedList.swift; sourceTree = "<group>"; };
 		9C99F35527E05FD100DE77CD /* CalculatorNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorNode.swift; sourceTree = "<group>"; };
 		9CA2890427E35F3E00EB3DAA /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		9CA2890627E363F400EB3DAA /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				9C99F34E27E0580100DE77CD /* Protocol */,
 				9C99F35727E05FE200DE77CD /* Queue */,
 				9C99F35427E05FB500DE77CD /* LinkedList */,
+				9CA2890627E363F400EB3DAA /* Formula.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				9C99F34D27E057FC00DE77CD /* CalculateItem.swift in Sources */,
 				9C99F35627E05FD100DE77CD /* CalculatorNode.swift in Sources */,
 				9CA2890527E35F3E00EB3DAA /* Extension.swift in Sources */,
+				9CA2890727E363F400EB3DAA /* Formula.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
