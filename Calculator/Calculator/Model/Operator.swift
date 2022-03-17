@@ -24,4 +24,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
     private func divide(lhs: Double, rhs: Double) -> Double {
         return lhs / rhs
     }
+    
+    private func multiply(lhs: Double, rhs: Double) -> Double {
+        return lhs * rhs
+    }
 }
