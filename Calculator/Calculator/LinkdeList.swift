@@ -22,8 +22,8 @@ protocol List {
     var isEmpty: Bool { get }
     var count: Int { get }
     
-    func append()
-    func removeFirst()
+    func append(_ data: T)
+    func removeFirst() -> T?
     func removeAll()
 }
 
