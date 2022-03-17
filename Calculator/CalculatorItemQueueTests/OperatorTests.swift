@@ -9,12 +9,6 @@ import XCTest
 @testable import Calculator
 
 class OperatorTests: XCTestCase {
+    var sut: Operator!
     
-    override func setUpWithError() throws {
-        
-    }
-
-    override func tearDownWithError() throws {
-        
-    }
 }
