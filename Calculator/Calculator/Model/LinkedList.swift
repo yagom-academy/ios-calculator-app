@@ -38,16 +38,15 @@ final class LinkedList<T> {
     }
     
     func removeFirst() -> T? {
-        if head == nil { return nil }
-        
         if head?.next == nil {
             let lastData = head?.data
             head = nil
             return lastData
+        } else {
+            let data = head?.data
+            head = head?.next
+            return data
         }
-        let data = head?.data
-        head = head?.next
-        return data
     }
     
     func removeAll() {
