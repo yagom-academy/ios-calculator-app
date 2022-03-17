@@ -11,6 +11,8 @@
 		B0A47D8427E376AF003CD7E5 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8327E376AF003CD7E5 /* Operator.swift */; };
 		B0A47D8627E3801C003CD7E5 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8527E3801C003CD7E5 /* FormulaTests.swift */; };
 		B0A47D8827E382FE003CD7E5 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8727E382FE003CD7E5 /* Formula.swift */; };
+		B0A47D8A27E38892003CD7E5 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8927E38892003CD7E5 /* ExpressionParserTests.swift */; };
+		B0A47D8C27E38B25003CD7E5 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A47D8B27E38B25003CD7E5 /* ExpressionParser.swift */; };
 		B0E177A227DF5C0000620996 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E177A127DF5C0000620996 /* CalculatorItemQueue.swift */; };
 		B0E177AB27DF909F00620996 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E177AA27DF909F00620996 /* CalculateItem.swift */; };
 		B0E177AE27DF90DB00620996 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E177AD27DF90DB00620996 /* Double+Extension.swift */; };
@@ -41,6 +43,8 @@
 		B0A47D8327E376AF003CD7E5 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		B0A47D8527E3801C003CD7E5 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		B0A47D8727E382FE003CD7E5 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		B0A47D8927E38892003CD7E5 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		B0A47D8B27E38B25003CD7E5 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		B0E177A127DF5C0000620996 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		B0E177AA27DF909F00620996 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		B0E177AD27DF90DB00620996 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 				B0EE794527DF582D0075DE95 /* CalculatorItemQueueTests.swift */,
 				B0A47D8127E37337003CD7E5 /* OperatorTests.swift */,
 				B0A47D8527E3801C003CD7E5 /* FormulaTests.swift */,
+				B0A47D8927E38892003CD7E5 /* ExpressionParserTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			children = (
 				B06FD63A27E23035007BD380 /* Common */,
 				B06FD63C27E23070007BD380 /* CalculatorItemQueue */,
+				B0A47D8B27E38B25003CD7E5 /* ExpressionParser.swift */,
 				B0A47D8727E382FE003CD7E5 /* Formula.swift */,
 				B0A47D8327E376AF003CD7E5 /* Operator.swift */,
 			);
@@ -302,6 +308,7 @@
 				B0EE794627DF582D0075DE95 /* CalculatorItemQueueTests.swift in Sources */,
 				B0A47D8227E37337003CD7E5 /* OperatorTests.swift in Sources */,
 				B0A47D8627E3801C003CD7E5 /* FormulaTests.swift in Sources */,
+				B0A47D8A27E38892003CD7E5 /* ExpressionParserTests.swift in Sources */,
 				B0EE793A27DF30730075DE95 /* CalculatorLinkedListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +326,7 @@
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				B0A47D8427E376AF003CD7E5 /* Operator.swift in Sources */,
 				B0A47D8827E382FE003CD7E5 /* Formula.swift in Sources */,
+				B0A47D8C27E38B25003CD7E5 /* ExpressionParser.swift in Sources */,
 				B0E177B327DF9F5E00620996 /* CalculatorNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
