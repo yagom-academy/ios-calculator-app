@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+enum CalculationError: Error {
+    case unknownError
+    case notBeDividedByZero
+}
