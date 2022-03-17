@@ -11,8 +11,11 @@ protocol CalculateItem {
     // empty
 }
 
-enum Operator: CalculateItem {
-    case add, subtract, multiply, division
+enum Operator: Character, CaseIterable, CalculateItem {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "×"
+    case division = "÷"
     
     func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
