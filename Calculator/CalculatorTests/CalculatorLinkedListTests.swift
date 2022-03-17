@@ -27,11 +27,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_append_호출시_개수가_1_증가해야한다() {
     // given
     let input = self.sut.count
-    
     // when
     self.sut.append(1.0)
     let output = self.sut.count
-    
     // then
     XCTAssertEqual(output, input + 1)
   }
@@ -39,7 +37,6 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_append_리스트가_비어있을때_호출시_front와_rear가_nil이_아닌값을_반환해야한다() {
     // given when
     self.sut.append(1.0)
-    
     // then
     XCTAssertNotNil(self.sut.front)
     XCTAssertNotNil(self.sut.rear)
@@ -49,7 +46,6 @@ final class CalculatorLinkedListTests: XCTestCase {
     // given when
     self.sut.append(1.0)
     let output = self.sut.front === self.sut.rear
-    
     // then
     XCTAssertEqual(output, true)
   }
@@ -59,7 +55,6 @@ final class CalculatorLinkedListTests: XCTestCase {
     self.sut.append(1.0)
     self.sut.append(2.0)
     let output = self.sut.front?.next === self.sut.rear
-    
     // then
     XCTAssertEqual(output, true)
   }
@@ -69,7 +64,6 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_first_리스트가_비어있을때_호출시_nil을_반환해야한다() {
     // given when
     let output = self.sut.first
-    
     // then
     XCTAssertEqual(output, nil)
   }
@@ -77,10 +71,8 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_first_1을_넣어_리스트가_비어있지_않을때_호출시_1을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     let output = self.sut.first
-    
     // then
     XCTAssertEqual(output, 1.0)
   }
@@ -91,7 +83,6 @@ final class CalculatorLinkedListTests: XCTestCase {
     // given when
     _ = self.sut.removeFirst()
     let output = self.sut.count
-    
     // then
     XCTAssertEqual(output, 0)
   }
@@ -99,7 +90,6 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeFirst_리스트가_비어있다면_호출시_nil을_반환해야한다() {
     // given when
     let output = self.sut.removeFirst()
-    
     // then
     XCTAssertEqual(output, nil)
   }
@@ -107,10 +97,8 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeFirst_1을_넣어_리스트가_비어있지_않을때_호출시_1을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     let output = self.sut.removeFirst()
-    
     // then
     XCTAssertEqual(output, 1.0)
   }
@@ -118,11 +106,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeFirst_리스트의_개수가_1일때_호출시_count는_0을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     _ = self.sut.removeFirst()
     let output = self.sut.count
-    
     // then
     XCTAssertEqual(output, 0)
   }
@@ -130,11 +116,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeFirst_리스트의_개수가_1일때_호출시_isEmpty는_true를_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     _ = self.sut.removeFirst()
     let output = self.sut.isEmpty
-    
     // then
     XCTAssertEqual(output, true)
   }
@@ -143,11 +127,9 @@ final class CalculatorLinkedListTests: XCTestCase {
     // given
     self.sut.append(1.0)
     self.sut.append(2.0)
-    
     // when
     _ = self.sut.removeFirst()
     let output = self.sut.count
-    
     // then
     XCTAssertEqual(output, 1)
   }
@@ -157,11 +139,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeAll_리스트가_비어있지_않을때_호출시_count가_0을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     self.sut.removeAll()
     let output = self.sut.count
-    
     // then
     XCTAssertEqual(output, 0)
   }
@@ -169,11 +149,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeAll_리스트가_비어있지_않을때_호출시_isEmpty가_true을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     self.sut.removeAll()
     let output = self.sut.isEmpty
-    
     // then
     XCTAssertEqual(output, true)
   }
@@ -181,11 +159,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeAll_리스트가_비어있지_않을때_호출시_front가_nil을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     self.sut.removeAll()
     let output = self.sut.front
-    
     // then
     XCTAssertNil(output)
   }
@@ -193,11 +169,9 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeAll_리스트가_비어있지_않을때_호출시_rear가_nil을_반환해야한다() {
     // given
     self.sut.append(1.0)
-    
     // when
     self.sut.removeAll()
     let output = self.sut.rear
-    
     // then
     XCTAssertNil(output)
   }
@@ -205,7 +179,6 @@ final class CalculatorLinkedListTests: XCTestCase {
   func test_removeAll_리스트가_비어있을때_호출시_front와_rear이_nil을_반환해야한다() {
     // given when
     self.sut.removeAll()
-    
     // then
     XCTAssertNil(self.sut.front)
     XCTAssertNil(self.sut.rear)

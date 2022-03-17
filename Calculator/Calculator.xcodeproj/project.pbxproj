@@ -120,9 +120,9 @@
 			children = (
 				B0EE793927DF30730075DE95 /* CalculatorLinkedListTests.swift */,
 				B0EE794527DF582D0075DE95 /* CalculatorItemQueueTests.swift */,
-				B0A47D8127E37337003CD7E5 /* OperatorTests.swift */,
-				B0A47D8527E3801C003CD7E5 /* FormulaTests.swift */,
 				B0A47D8927E38892003CD7E5 /* ExpressionParserTests.swift */,
+				B0A47D8527E3801C003CD7E5 /* FormulaTests.swift */,
+				B0A47D8127E37337003CD7E5 /* OperatorTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";

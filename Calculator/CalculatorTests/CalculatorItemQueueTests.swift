@@ -27,11 +27,9 @@ final class CalculatorItemQueueTests: XCTestCase {
   func test_enqueue_호출시_개수가_1_증가해야한다() {
     // given
     let input = self.sut.count
-    
     // when
     self.sut.enqueue(1.0)
     let output = self.sut.count
-    
     // then
     XCTAssertEqual(output, input + 1)
   }
@@ -40,7 +38,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     // given when
     self.sut.enqueue(1.0)
     let output = self.sut.elements
-    
     // then
     XCTAssertEqual(output, [1.0])
   }
@@ -50,7 +47,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
     let output = self.sut.elements
-    
     // then
     XCTAssertEqual(output, [1.0, 2.0])
   }
@@ -60,7 +56,6 @@ final class CalculatorItemQueueTests: XCTestCase {
   func test_dequeue_큐가_비어있을때_호출시_nil을_반환해야한다() {
     // given when
     let output = self.sut.dequeue()
-    
     // then
     XCTAssertEqual(output, nil)
   }
@@ -69,10 +64,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    
     // when
     let output = self.sut.dequeue()
-    
     // then
     XCTAssertEqual(output, 1.0)
   }
@@ -81,11 +74,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    
     // when
     _ = self.sut.dequeue()
     let output = self.sut.elements
-    
     // then
     XCTAssertEqual(output, [2.0])
   }
@@ -95,7 +86,6 @@ final class CalculatorItemQueueTests: XCTestCase {
   func test_first_호출시_큐가_비어있다면_nil을_반환해야한다() {
     // given when
     let output = self.sut.first
-    
     // then
     XCTAssertEqual(output, nil)
   }
@@ -104,10 +94,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    
     // when
     let output = self.sut.first
-    
     // then
     XCTAssertEqual(output, 1.0)
   }
@@ -117,11 +105,9 @@ final class CalculatorItemQueueTests: XCTestCase {
   func test_clear_호출시_elements가_빈_배열을_반환해야한다() {
     // given
     self.sut.enqueue(1.0)
-    
     // when
     self.sut.clear()
     let output = self.sut.elements
-    
     // then
     XCTAssertEqual(output, [])
   }
@@ -131,7 +117,6 @@ final class CalculatorItemQueueTests: XCTestCase {
   func test_isEmpty_큐가_비어있을때_호출시_true를_반환해야한다() {
     // given when
     let output = self.sut.isEmpty
-    
     // then
     XCTAssertEqual(output, true)
   }
