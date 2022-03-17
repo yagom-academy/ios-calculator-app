@@ -7,6 +7,7 @@
 
 enum CalculateError: Error {
     case divideByZero
+    case invalidFormula
 }
 
 enum Operator: Character, CaseIterable, CalculateItem {
