@@ -2,7 +2,7 @@
 //  FormulaTest.swift
 //  ModelTests
 //
-//  Created by 박세리 on 2022/03/17.
+//  Created by Red on 2022/03/17.
 //
 
 import XCTest
@@ -19,7 +19,7 @@ class FormulaTest: XCTestCase {
         sut = nil
     }
     
-    func test_result() {
+    func test_result() throws {
         sut.operands.enqueue(with: 2.0)
         sut.operands.enqueue(with: 3.0)
         sut.operands.enqueue(with: 4.0)
@@ -27,7 +27,8 @@ class FormulaTest: XCTestCase {
         sut.operators.enqueue(with: Operator.add)
         
         let expectResult: Double = 10.0
-        let result = sut.result()
+        let result = try sut.result()
+        
         XCTAssertEqual(result, expectResult)
     }
 

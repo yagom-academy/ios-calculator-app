@@ -88,12 +88,16 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         var lhs = operands.dequeue() ?? 0.0
-        while !operators.isEmpty {
+        while operators.isEmpty == false {
             let rhs = operands.dequeue() ?? 0.0
             let oneOperator = operators.dequeue() ?? Operator.add
-            lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
+            if oneOperator == .divide && rhs == 0.0 {
+                throw CalculatorError.dividedWithZero
+            } else {
+                lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
+            }
         }
         return lhs
     }
