@@ -16,28 +16,10 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_nodeInitializer_isSuccess() {
-        let nodes = Node<Int>(data: nil, next: nil)
-        
-        let result = LinkedList<Int>()
-        
-        XCTAssertEqual(result.bringHead()?.data, nodes.data)
-    }
-    
     func test_LinkedList인스턴스가nil일때_count0이나오는지() {
-        sut.asignNilToHead()
-        
         let result = sut.count
         
         XCTAssertEqual(result, 0)
-    }
-    
-    func test_LinkedList인스턴스가값이있을떄_count1이나오는지() {
-        sut.append(data: 1)
-        
-        let result = sut.count
-        
-        XCTAssertEqual(result, 1)
     }
     
     func test_LinkedList인스턴스Node길이가10일때_count10이나오는지() {
@@ -57,20 +39,12 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_append메서드3을넣어호출시_보낸data값3이나오는지() {
-        sut.append(data: 3)
-        
-        let result = sut.bringHead()?.data
-        
-        XCTAssertEqual(result, 3)
-    }
-    
     func test_append메서드10번호출후_head는1_tail은10값이나오는지() {
         for number in 1...10 {
             sut.append(data: number)
         }
-        let head = sut.bringHead()?.data
-        let tail = sut.bringTail()?.data
+        let head = sut.head?.data
+        let tail = sut.tail?.data
         
         XCTAssertEqual(head, 1)
         XCTAssertEqual(tail, 10)

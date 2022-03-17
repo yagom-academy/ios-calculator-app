@@ -10,24 +10,23 @@ import XCTest
 
 class CalculateItemQueue1: XCTestCase {
     var queue: CalculateItemQueue<Int>!
-    var stringNodes: CalculateItemQueue<String>!
+    var stringQueue: CalculateItemQueue<String>!
     override func setUpWithError() throws {
         queue = CalculateItemQueue()
-        stringNodes = CalculateItemQueue()
+        stringQueue = CalculateItemQueue()
     }
     override func tearDownWithError() throws {
         queue = nil
-        stringNodes = nil
+        stringQueue = nil
     }
     
     func test_append메서드를사용하지않고_isEmpty메서드를호출했을때_False가나오는지() {
-        let result = queue
+        let result = queue.isEmpty
         
         XCTAssertEqual(result, false)
     }
     
     func test_enqueue메서드호출후_isEmpty메서드호출값이_True가나오는지() {
-        
         let result = queue.isEmpty
         
         XCTAssertTrue(result)

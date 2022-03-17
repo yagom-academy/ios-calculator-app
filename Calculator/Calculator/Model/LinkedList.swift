@@ -5,8 +5,8 @@
 import Foundation
 
 final class LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     
     init(head: Node<T>? = nil) {
         self.head = head
