@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		303FEF7A27E3217400213704 /* LinkedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303FEF7927E3217400213704 /* LinkedQueue.swift */; };
 		3059F0F127DF346600D56036 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059F0F027DF346600D56036 /* Calculator.swift */; };
 		30B1AF4827E073F9003890A1 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059F0F827DF34C000D56036 /* CalculatorTests.swift */; };
 		30D625A527E036CD00D1DE80 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D625A427E036CD00D1DE80 /* CalculatorItemQueue.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		303FEF7927E3217400213704 /* LinkedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedQueue.swift; sourceTree = "<group>"; };
 		3059F0F027DF346600D56036 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		3059F0F627DF34C000D56036 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3059F0F827DF34C000D56036 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				30D625A627E036F100D1DE80 /* CalculateItem.swift */,
 				30D625A427E036CD00D1DE80 /* CalculatorItemQueue.swift */,
+				303FEF7927E3217400213704 /* LinkedQueue.swift */,
 				3059F0F027DF346600D56036 /* Calculator.swift */,
 			);
 			path = Model;
@@ -297,6 +300,7 @@
 			files = (
 				30D625A527E036CD00D1DE80 /* CalculatorItemQueue.swift in Sources */,
 				30D625A727E036F100D1DE80 /* CalculateItem.swift in Sources */,
+				303FEF7A27E3217400213704 /* LinkedQueue.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				3059F0F127DF346600D56036 /* Calculator.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
