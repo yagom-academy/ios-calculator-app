@@ -10,6 +10,7 @@ import Foundation
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case substract = "-"
+    case divide = "/"
 }
 
 extension Operator {
@@ -19,6 +20,8 @@ extension Operator {
             return add(lhs: lhs, rhs: rhs)
         case .substract:
             return substract(lhs: lhs, rhs: rhs)
+        case .divide:
+            return divide(lhs: lhs, rhs: rhs)
         }
     }
     
@@ -28,5 +31,9 @@ extension Operator {
     
     private func substract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
+    }
+    
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        return lhs / rhs
     }
 }
