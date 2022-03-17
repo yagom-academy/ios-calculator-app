@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests<T>: XCTestCase {
+class CalculatorTests: XCTestCase {
     var sut: QueueLinkedList<Int>!
     
     override func setUpWithError() throws {

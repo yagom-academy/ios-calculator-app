@@ -25,7 +25,7 @@ class CalculatorDoublyLinkedList<T>: CalculateItem {
     }
     
     public var countNodes: Int {
-        var nodeCount = 0
+        var nodeCount = 1
         guard var node = headNode else {
             nodeCount = 0
             return nodeCount
