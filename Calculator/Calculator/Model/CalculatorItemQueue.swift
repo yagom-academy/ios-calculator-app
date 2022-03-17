@@ -45,4 +45,3 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     }
 }
 
-extension Double: CalculatorItem { }
