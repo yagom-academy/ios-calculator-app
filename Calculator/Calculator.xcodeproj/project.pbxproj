@@ -81,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				B0E177A927DF909300620996 /* Protocol */,
-				B0A47D8327E376AF003CD7E5 /* Operator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -146,6 +145,7 @@
 				B06FD63A27E23035007BD380 /* Common */,
 				B06FD63C27E23070007BD380 /* CalculatorItemQueue */,
 				B0A47D8727E382FE003CD7E5 /* Formula.swift */,
+				B0A47D8327E376AF003CD7E5 /* Operator.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
