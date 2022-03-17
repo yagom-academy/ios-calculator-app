@@ -5,15 +5,15 @@
 //  Created by DuDu on 2022/03/16.
 //
 
-struct LinkedList<Element: CalculateItem> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+class LinkedList<Element: CalculateItem> {
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
     }
     
-    mutating func append(_ data: Element) {
+    func append(_ data: Element) {
         let newNode = Node(data: data)
         
         if head == nil {
@@ -25,7 +25,7 @@ struct LinkedList<Element: CalculateItem> {
         }
     }
     
-    mutating func removeFirst() -> Element? {
+    func removeFirst() -> Element? {
         if head == nil {
             return nil
         }
@@ -42,7 +42,7 @@ struct LinkedList<Element: CalculateItem> {
         return target
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
         tail = nil
     }
