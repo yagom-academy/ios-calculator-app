@@ -23,11 +23,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return inputStack.count + outputStack.count
     }
     
-    var front: Element? {
+    var first: Element? {
         return outputStack.last ?? inputStack.first
     }
     
-    var rear: Element? {
+    var last: Element? {
         return outputStack.first ?? inputStack.last
     }
     
