@@ -15,17 +15,21 @@ extension Int: CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private let linkdeList = LinkdeList<T>()
+struct CalculatorItemQueue<L: List> {
+    private let linkdeList: L
     var isEmpty: Bool { linkdeList.isEmpty }
     var count: Int { linkdeList.count }
     
-    func enqueue(_ data: T) {
+    init(_ list: L) {
+        self.linkdeList = list
+    }
+    
+    func enqueue(_ data: L.T) {
         linkdeList.append(data)
     }
     
     @discardableResult
-    func dequeue() -> T? {
+    func dequeue() -> L.T? {
         return linkdeList.removeFirst()
     }
     
