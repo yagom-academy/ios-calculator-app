@@ -30,10 +30,11 @@ final class LinkedList<T> {
             head = Node(data: data)
             tail = head
             return
+        } else {
+            let lastNode = Node(data: data)
+            tail?.next = lastNode
+            tail = lastNode
         }
-        let lastNode = Node(data: data)
-        tail?.next = lastNode
-        tail = lastNode
     }
     
     func removeFirst() -> T? {
