@@ -7,8 +7,13 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
+protocol CalculateItem {}
 
-extension Double: CalculateItem {
+extension Double: CalculateItem {}
+
+extension String {
+    func split(with target: Character) -> [String] {
+        let convertStringArray = Array(arrayLiteral: target).map{ String($0) }
+        return convertStringArray
+    }
 }
