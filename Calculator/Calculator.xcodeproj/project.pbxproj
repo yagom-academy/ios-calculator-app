@@ -81,11 +81,12 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				E5D69FDD27E1EE0F00E4BD23 /* Extension */,
-				E5D69FE227E1F4CA00E4BD23 /* Controller */,
 				E5D69FE027E1F4BD00E4BD23 /* Model */,
 				E5D69FE127E1F4C500E4BD23 /* View */,
+				E5D69FE227E1F4CA00E4BD23 /* Controller */,
 				E5D69FD527E1E8BC00E4BD23 /* CalculatorItemQueueTests */,
+				E5D69FDD27E1EE0F00E4BD23 /* Extension */,
+				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -120,7 +121,6 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
-				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -407,7 +407,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Calculator/View/info.plist;
+				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,7 +428,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Calculator/View/info.plist;
+				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

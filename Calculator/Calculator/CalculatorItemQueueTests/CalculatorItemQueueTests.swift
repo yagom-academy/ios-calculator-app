@@ -14,74 +14,96 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_CalculatorItemQueue가_비어있을때_isEmpry는_true를_반환하는가() {
-        //given
-        sut.enqueueStack = []
-        sut.dequeueStack = []
+    func test_5번_enqueue시_queue의_count가_5인가() {
         //when
-        let result = sut.isEmpty
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.enqueue(4)
+        sut.enqueue(5)
+        
         //then
-        XCTAssertEqual(result, true)
+        XCTAssertEqual(sut.count, 5)
     }
     
-    func test_CalculatorItemQueue가_비어있지않을때_isEmpry는_false를_반환하는가() {
-        //given
-        sut.enqueueStack = [1, 2, 3]
-        sut.dequeueStack = []
+    func test_enqueue_2번하고_dequeue하고_enqueue_2번하면_queue의_count는_3인가() {
         //when
-        let result = sut.isEmpty
+        sut.enqueue(1)
+        sut.enqueue(2)
+        XCTAssertNotNil(sut.dequeue())
+        sut.enqueue(3)
+        sut.enqueue(4)
         //then
-        XCTAssertEqual(result, false)
+        XCTAssertEqual(sut.count, 3)
     }
     
-    func test_enqueue를_통해_새로운_Element를_추가할수있는가() {
+    func test_1_2_3의_값을_enqueue뒤_dequeue했을때_1_2_3이_순서대로_pop되는가() {
         //given
-        let value = 10.0
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
         //when
-        sut.enqueue(value)
+        var result = sut.dequeue()
         //then
-        XCTAssertEqual(sut.enqueueStack, [10.0])
+        XCTAssertEqual(result, 1)
+        
+        //when
+        result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, 2)
+        
+        //when
+        result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, 3)
     }
     
-    func test_dequeue를_통해_Element가_나오는가() {
+    func test_enqueue_3번_dequeue4번_했을때_반환값이_nil인가() {
         //given
-        sut.enqueue(10.0)
-        //when
-        let result = sut.dequeue()
-        //then
-        XCTAssertEqual(result, 10.0)
-    }
-    
-    func test_Stack에_여러개가_쌓여도_dequeue를_통해_Element가_잘나오는가() {
-        //given
-        sut.enqueue(10.0)
-        sut.enqueue(11.0)
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         //when
         var result = sut.dequeue()
         result = sut.dequeue()
+        result = sut.dequeue()
+        result = sut.dequeue()
         //then
-        XCTAssertEqual(result, 11.0)
+        XCTAssertNil(result)
     }
     
-    func test_clear가_사용됐을때_enqueue가_비워지는가() {
+    func test_1_2_값을_enqueue하고_clear_했을때_isEmpty가_true인가() {
         //given
-        sut.enqueue(10.0)
-        sut.enqueue(11.0)
+        sut.enqueue(1)
+        sut.enqueue(2)
+
         //when
         sut.clear()
+        
         //then
-        XCTAssertEqual(sut.enqueueStack, [])
+        XCTAssertEqual(sut.isEmpty, true)
     }
     
-    func test_clear가_사용됐을때_dequeue가_비워지는가() {
+    func test_1_2_값을_enqueue하고_dequeue후_clear_했을때_isEmpty가_true인가() {
         //given
-        sut.enqueue(10.0)
-        sut.enqueue(11.0)
-        sut.dequeueStack = sut.enqueueStack.reversed()
+        sut.enqueue(1)
+        sut.enqueue(2)
+        XCTAssertNotNil(sut.dequeue())
+        
         //when
         sut.clear()
+        
         //then
-        XCTAssertEqual(sut.dequeueStack, [])
+        XCTAssertEqual(sut.isEmpty, true)
+    }
+    
+    func test_clear하고_enqueue_했을때_isEmpty가_false인가() {
+        //when
+        sut.clear()
+        sut.enqueue(4)
+        
+        //then
+        XCTAssertEqual(sut.isEmpty, false)
     }
 }
-
