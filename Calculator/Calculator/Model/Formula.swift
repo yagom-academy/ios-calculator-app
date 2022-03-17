@@ -25,10 +25,6 @@ struct Formula {
                 throw CalculationError.unknownError
             }
             
-            guard onceOperator != .divide && secondOperand != 0 else {
-                throw CalculationError.notBeDividedByZero
-            }
-            
             middleResult = onceOperator.calculate(lhs: firstOperand, rhs: secondOperand)
         }
         
