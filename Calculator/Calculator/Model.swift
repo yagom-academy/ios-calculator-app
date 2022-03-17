@@ -10,9 +10,6 @@ import Foundation
 protocol CalculateItem {
     // empty
 }
-enum CalculatorError: Error {
-    case dividedWithZero
-}
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
