@@ -30,7 +30,7 @@
 [![xcode](https://img.shields.io/badge/Xcode-13.0-blue)]()
 
 ## UML
-![](https://i.imgur.com/CE0pvE8.png)
+![](https://i.imgur.com/DVuMu9l.png)
 
 
 ## [STEP 1]
