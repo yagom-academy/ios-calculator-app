@@ -24,7 +24,7 @@ class CalculatorTests: XCTestCase {
     func test_enque_one_element() {
         sut.enqueue(1)
         
-        let result = sut.countNode()
+        let result = sut.countNode
 
         XCTAssertEqual(result, 1)
     }
@@ -33,7 +33,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         
-        let result = sut.countNode()
+        let result = sut.countNode
         
         XCTAssertEqual(result, 2)
     }
@@ -42,7 +42,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         sut.dequeue()
         
-        let result = sut.countNode()
+        let result = sut.countNode
 
         XCTAssertEqual(result, 0)
     }
@@ -52,7 +52,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(2)
         sut.resetAll()
         
-        let result = sut.countNode()
+        let result = sut.countNode
         
         XCTAssertEqual(result, 0)
     }

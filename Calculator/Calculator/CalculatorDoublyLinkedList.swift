@@ -8,18 +8,18 @@
 import Foundation
 
 class CalculatorDoublyLinkedList<T> {
-    var headNode: Node<T>?
-    var tailNode: Node<T>?
+    private var headNode: Node<T>?
+    private var tailNode: Node<T>?
     
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return headNode == nil || tailNode == nil
     }
     
-    public var firstNode: Node<T>? {
+    var firstNode: Node<T>? {
         return headNode
     }
     
-    public var countNodes: Int {
+    var countNodes: Int {
         var nodeCount = 1
         guard var node = headNode else {
             nodeCount = 0
@@ -32,7 +32,7 @@ class CalculatorDoublyLinkedList<T> {
         return nodeCount
     }
     
-    public func appendNodes(_ value: T) {
+    func appendNodes(_ value: T) {
         let newNode = Node(value: value)
         if let tail = tailNode {
             newNode.prev = tail
@@ -44,7 +44,7 @@ class CalculatorDoublyLinkedList<T> {
         }
     }
     
-    public func removeNode(_ node: Node<T>) -> T {
+    func removeNode(_ node: Node<T>) -> T {
         let previous = node.prev
         let next = node.next
         
@@ -63,7 +63,7 @@ class CalculatorDoublyLinkedList<T> {
         return node.value
     }
     
-    public func resetAll() {
+    func resetAll() {
         headNode = nil
         tailNode = nil
     }
