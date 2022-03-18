@@ -24,4 +24,20 @@ enum ExpressionParser {
                 String(double)
             }
     }
+    
+    private static func componentsByOperands(from input: String) -> [String] {
+        let operatorTypes = Operator
+            .allCases
+            .map { type in
+                String(type.rawValue)
+            }
+        
+        return input.split(with: " ")
+            .filter { string in
+                operatorTypes.contains(string)
+            }
+            .map { double in
+                String(double)
+            }
+    }
 }
