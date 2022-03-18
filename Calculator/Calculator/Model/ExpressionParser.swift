@@ -15,8 +15,18 @@ enum ExpressionParser {
             .map { Node(data: $0) }
             .forEach { operands.append(node: $0) }
         
+        var lastValue: Character = "_"
+        
         input
-            .compactMap { Operator(rawValue: $0) }
+            .map {
+                if let currentValue = Operator(rawValue: $0),
+                   let _ = Double(String(lastValue)) {
+                    lastValue = $0
+                    return currentValue
+                }
+                lastValue = $0
+                return nil
+            }.compactMap { $0 }
             .map { Node(data: $0) }
             .forEach { operators.append(node: $0) }
         
@@ -28,17 +38,18 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         var result: [String] = []
-        var lastValue: Character = "0"
+        var lastValue: Character = "_"
         
-        input.forEach {
-            if let _ = Operator(rawValue: $0),
-               let _ = Double(String(lastValue)) {
-                result.append("_")
-            } else {
-                result.append(String($0))
+        input
+            .forEach {
+                if let _ = Operator(rawValue: $0),
+                   let _ = Double(String(lastValue)) {
+                    result.append("_")
+                } else {
+                    result.append(String($0))
+                }
+                lastValue = $0
             }
-            lastValue = $0
-        }
         
         let stringResult: String = result.joined()
         

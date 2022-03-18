@@ -18,8 +18,8 @@ class ExpressionParserTests: XCTestCase {
     }
 
     func test_parse_formula_result확인() {
-        let formula = ExpressionParser.parse(from: "10*46--50")
+        let formula = ExpressionParser.parse(from: "-10*-46+-50/+1")
         
-        XCTAssertEqual(try! formula.result(), 510)
+        XCTAssertEqual(try! formula.result(), 410)
     }
 }
