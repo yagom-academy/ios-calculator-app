@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.components(separatedBy: String(target))
+        return self.components(separatedBy: " \(target) ")
     }
 }
 
@@ -24,6 +24,25 @@ enum ExpressionParser {
         }
         
         return value
+    }
+    
+    static func parse(from input: String) -> Formula {
+        let operatorList: [String] = ["+", "-", "÷", "×"]
+        let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(LinkdeList<Double>())
+        let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(LinkdeList<Operator>())
+        let operands = compomnentsByOperators(from: input).compactMap { Double($0) }
+        
+        operands.forEach(operandQueue.enqueue(_:))
+        
+        let operators = input.split(with: " ")
+            .filter { operatorList.contains($0) }
+        
+        operators.forEach {
+            guard let data = Operator(rawValue: Character($0)) else { return }
+            operatorQueue.enqueue(data)
+        }
+
+        return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
 }
