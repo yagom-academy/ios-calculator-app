@@ -8,7 +8,7 @@
 import XCTest
 
 class ExpressionParserTests: XCTestCase {
-    let mockExpression = "1 + 2 - 3 / 4 * -5"
+    var mockExpression = "1 + 2 - 3 / 4 * -5"
 
     func test_parse를호출할때_operands의카운트값이예상값과같아야한다() {
         // given
@@ -40,5 +40,19 @@ class ExpressionParserTests: XCTestCase {
         // then
         let result = (1 + 2 - 3) / 4 * -5
         XCTAssertEqual(Double(result), try formula.result())
+    }
+    
+    func test_parse를호출할때_반환된표현식이_0으로divide되는경우예상된에러를반환해야한다() {
+        // given
+        mockExpression = "1 + 2 - 3 / 0 * -5"
+        
+        // when
+        var formula = ExpressionParser.parse(from: mockExpression)
+        
+        // then
+        let expected: CalculatorError = .dividedByZero
+        XCTAssertThrowsError(try formula.result()) { error in
+            XCTAssertEqual(error as? CalculatorError, expected)
+        }
     }
 }
