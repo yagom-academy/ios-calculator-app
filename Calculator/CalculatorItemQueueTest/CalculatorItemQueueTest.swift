@@ -28,6 +28,7 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_count호출시_dequeue호출후_dequeueList의개수가정상적으로반환되는지() {
+        //given
         let input: Double = 5
         let input2: Double = 2
         let input3: Double = 9
@@ -40,6 +41,55 @@ class CalculatorItemQueueTest: XCTestCase {
         //then
         XCTAssertEqual(result, 2)
     }
+    //MARK: - first, last
+    func test_enqueueList에요소가있고dequeueList는비어있을때_fist와last가정상적으로값을반환하는지() {
+        //given
+        let input: Double = 3
+        let input2: Double = 6
+        let input3: Double = 31
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        //then
+        XCTAssertEqual(sut.first, input)
+        XCTAssertEqual(sut.last, input3)
+    }
+    
+    func test_enqueueList는비어있고dequeueList는요소가있을때_fist와last가정상적으로값을반환하는지() {
+        //given
+        let input: Double = 4
+        let input2: Double = 12
+        let input3: Double = 43
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        sut.dequeue()
+        //then
+        XCTAssertEqual(sut.first, input2)
+        XCTAssertEqual(sut.last, input3)
+    }
+
+    func test_enqueueList와dequeueList둘다요소가있을때_first와last를정상적으로반환하는지() {
+        //given
+        let input: Double = 5
+        let input2: Double = 41
+        let input3: Double = 1
+        let input4: Double = 6
+        let input5: Double = 8
+        //when
+        sut.enqueue(input)
+        sut.enqueue(input2)
+        sut.enqueue(input3)
+        sut.dequeue()
+        sut.enqueue(input4)
+        sut.enqueue(input5)
+        //then
+        XCTAssertEqual(sut.first, input2)
+        XCTAssertEqual(sut.last, input5)
+    }
+    
     //MARK: - enqueue()
     func test_enqueue호출시_정상적으로추가가되는지() {
         //given
@@ -53,7 +103,6 @@ class CalculatorItemQueueTest: XCTestCase {
         //then
         XCTAssertEqual(sut.first, input)
         XCTAssertEqual(sut.last, input3)
-        XCTAssertEqual(sut.count, 3)
     }
     //MARK: - dequeue()
     func test_dequeue호출시_FIFO가정상적으로진행되는지() {
