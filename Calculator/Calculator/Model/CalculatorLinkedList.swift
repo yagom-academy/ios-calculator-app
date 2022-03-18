@@ -39,12 +39,13 @@ final class LinkedList<T> {
     self.capacity += 1
   }
   
-  func removeFirst() {
+  func removeFirst() -> T? {
     if self.head == nil {
-      return
+      return nil
     }
     self.head = self.head?.next
     capacity -= 1
+    return head?.previous?.data
   }
   
   func removeLatest() {
