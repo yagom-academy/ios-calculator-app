@@ -8,9 +8,9 @@
 import Foundation
 
 extension String {
-  func split(with target: Character) {
-    //String배열 return
-  }
+    func split(with target: Character) -> [String] {
+      split(separator: target).map{ String($0) }
+    }
 }
 
 enum ExpressionParser {
