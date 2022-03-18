@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import Calculator
 
 class OperatorTests: XCTestCase {
     var sut: Operator!
