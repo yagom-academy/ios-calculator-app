@@ -8,26 +8,17 @@
 import XCTest
 @testable import Calculator
 
-fileprivate struct MockNode {
-    static var mockInt = Node(data: CalculatorItem.integer(10))
-    static var mockOperator = Node(data: CalculatorItem.operator(.devide))
-    static var mockDouble = Node(data: CalculatorItem.double(3.5))
-}
-
 final class CalculatorItemQueueTests: XCTestCase {
-    private var sut: CalculatorItemQueue<CalculatorItem>!
+    private var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue(linkedList: LinkedList<CalculatorItem>())
+        sut = CalculatorItemQueue(linkedList: LinkedList<Double>())
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
-        MockNode.mockDouble.next = nil
-        MockNode.mockInt.next = nil
-        MockNode.mockOperator.next = nil
     }
     
     func test_isEmpty_true인지() {
@@ -37,13 +28,13 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue_isEmpty_false인지() {
-        sut.enqueue(MockNode.mockOperator)
+        sut.enqueue(Node(data: 3.0))
         
         XCTAssertFalse(sut.isEmpty())
     }
     
     func test_clear_isEmpty_true인지() {
-        sut.enqueue(MockNode.mockOperator)
+        sut.enqueue(Node(data: 3.0))
         
         sut.clear()
         
@@ -51,20 +42,20 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
 
     func test_dequeue_빈queue인지() {
-        sut.enqueue(MockNode.mockInt)
+        sut.enqueue(Node(data: 3.0))
         let result = sut.dequeue()
         
-        XCTAssertEqual(result, MockNode.mockInt.data)
+        XCTAssertEqual(result, 3.0)
         XCTAssertTrue(sut.isEmpty())
     }
     
     func test_sequence프로토콜_준수하는지() {
-        sut.enqueue(MockNode.mockInt)
-        sut.enqueue(MockNode.mockOperator)
-        sut.enqueue(MockNode.mockDouble)
+        sut.enqueue(Node(data: 1.0))
+        sut.enqueue(Node(data: 2.0))
+        sut.enqueue(Node(data: 3.0))
 
-        let result: [CalculatorItem] = sut.map { $0.data }
-        let expectation = [CalculatorItem.integer(10), CalculatorItem.operator(.devide), CalculatorItem.double(3.5)]
+        let result = sut.map { $0.data }
+        let expectation = [1.0, 2.0, 3.0]
 
         XCTAssertEqual(result, expectation)
     }
