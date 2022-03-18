@@ -22,7 +22,7 @@ class FormulaTest: XCTestCase {
     func test_operands큐에_3_2_1_5가있고_operators큐에_add_substract_multiply가있을때_result결과가_20이여야한다() {
         //given
         let operands: [Double] = [3,2,1,5]
-        let operators: [Operator] = [.add, .substract, .multiply]
+        let operators: [Operator] = [.add, .subtract, .multiply]
         
         let operandQueue = CalculatorItemQueue<Double>()
         let operatorQueue = CalculatorItemQueue<Operator>()
@@ -66,7 +66,7 @@ class FormulaTest: XCTestCase {
     func test_operands큐에_1_1_0이있고_operators큐에_substract_divide가있을때_CalculateError_divideByZero가_발생해야한다() {
         //given
         let operands: [Double] = [1,1,0]
-        let operators: [Operator] = [.substract, .divide]
+        let operators: [Operator] = [.subtract, .divide]
         
         let operandQueue = CalculatorItemQueue<Double>()
         let operatorQueue = CalculatorItemQueue<Operator>()

@@ -32,7 +32,7 @@ class OperatorTest: XCTestCase {
     
     func test_4와3을_substract_Operator로_연산했을때_1이되어야한다() {
         //given
-        sut = .substract
+        sut = .subtract
         
         //when
         let result = try? sut?.calculate(lhs: 4, rhs: 3)
@@ -69,7 +69,7 @@ class OperatorTest: XCTestCase {
         
         //when
         do {
-            let result = try sut?.calculate(lhs: 10, rhs: 0)
+            let _ = try sut?.calculate(lhs: 10, rhs: 0)
             XCTAssertTrue(false)
         } catch (let error as CalculateError) {
             //then

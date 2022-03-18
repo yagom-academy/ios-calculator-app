@@ -6,7 +6,7 @@
 //
 
 enum ExpressionParser {
-    private static func componentsByOperatos(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
     
@@ -14,10 +14,10 @@ enum ExpressionParser {
         let operandQueue = CalculatorItemQueue<Double>()
         let operatorQueue = CalculatorItemQueue<Operator>()
         
-        let operandList = componentsByOperatos(from: input)
+        let operandList = componentsByOperators(from: input)
                             .compactMap{ Double($0) }
         
-        let operatorList = componentsByOperatos(from: input)
+        let operatorList = componentsByOperators(from: input)
                             .filter{$0.count == 1}
                             .compactMap{ Operator(rawValue: Character($0))}
                         
