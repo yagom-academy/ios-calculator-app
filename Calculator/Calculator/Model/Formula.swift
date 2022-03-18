@@ -14,15 +14,10 @@ struct Formula {
     mutating func result() -> Double {
         var middleResult = operands.dequeue() ?? .nan
         
-        while !operands.isEmpty {
-            guard let operand = operands.dequeue() else {
-                return .nan }
-            
-            guard let onceOperator = operators.dequeue() else {
-                return .nan
-            }
+        while let operand = operands.dequeue(), let onceOperator = operators.dequeue() {
             middleResult = onceOperator.calculate(lhs: middleResult, rhs: operand)
         }
+        
         return middleResult
     }
 }
