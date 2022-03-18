@@ -45,7 +45,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ABF3D98727E3480F0081AE5C"
                BuildableName = "CalculateItemQueue.xctest"
-               BlueprintName = "CalculateItemQueue"
+               BlueprintName = "CalculateItemQueueTest"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>

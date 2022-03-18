@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculateItemQueue1: XCTestCase {
+class CalculateItemQueueTest: XCTestCase {
     var queue: CalculateItemQueue<Int>!
     var stringQueue: CalculateItemQueue<String>!
     override func setUpWithError() throws {
