@@ -15,11 +15,12 @@ extension String {
 
 enum ExpressionParser {
     
-    private func compomnentsByOperators(from input: String) -> [String] {
+    private static func compomnentsByOperators(from input: String) -> [String] {
         var value: [String] = []
-        let operators = ["+", "-", "÷", "×"]
-        for i in operators {
-            value = input.split(with: Character(i))
+        value.append(input)
+        let operatorList: [Character] = ["+", "-", "÷", "×"]
+        for i in operatorList {
+            value = value.flatMap { $0.split(with: i) }
         }
         
         return value
