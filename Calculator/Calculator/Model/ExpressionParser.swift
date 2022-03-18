@@ -28,13 +28,16 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         var result: [String] = []
+        var lastValue: Character = "0"
         
         input.forEach {
-            guard let _ = Operator(rawValue: $0) else {
+            if let _ = Operator(rawValue: $0),
+               let _ = Double(String(lastValue)) {
+                result.append("_")
+            } else {
                 result.append(String($0))
-                return
             }
-            result.append("_")
+            lastValue = $0
         }
         
         let stringResult: String = result.joined()
