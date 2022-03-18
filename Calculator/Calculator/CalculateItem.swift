@@ -28,7 +28,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return self.subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return self.divide(lhs: lhs, rhs: lhs)
+            return self.divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return self.multiply(lhs: lhs, rhs: rhs)
         }
