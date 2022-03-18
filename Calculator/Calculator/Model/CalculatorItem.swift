@@ -9,7 +9,7 @@ protocol CalculateItem {
     // empty
 }
 
-enum Operator: String {
+enum Operator: String, CalculateItem {
     case addition = "+"
     case subtraction = "-"
     case devision = "/"
