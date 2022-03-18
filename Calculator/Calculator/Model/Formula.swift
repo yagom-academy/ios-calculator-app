@@ -17,7 +17,23 @@ struct Formula {
         self.operators = operators
     }
     
-    func result() -> Double {
+    mutating func result() throws -> Double {
+        var result: Double = 0.0
+
+        while operands.isEmpty == false {
+            guard let operand = try operands.dequeue() else {
+                
+                throw QueueError.notFoundElement
+            }
+            
+            guard let `operator` = try operators.dequeue() else {
+                
+                throw QueueError.notFoundElement
+            }
+            
+            result = try `operator`.calculate(lhs: result, rhs: operand)
+        }
         
+        return result
     }
 }
