@@ -39,10 +39,10 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(_ lhs: Double, _ rhs: Double) throws -> Double {
-        guard rhs != 0 else {
-            return lhs / rhs
-        }
+        if rhs == 0 {
             throw DivideError.divideByZero
+        }
+        return lhs / rhs
     }
     
     private func multiply(_ lhs: Double, _ rhs: Double) -> Double {
