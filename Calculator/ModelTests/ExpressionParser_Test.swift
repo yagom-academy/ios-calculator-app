@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class ExpressionParserTest: XCTestCase {
+class ExpressionParser_Test: XCTestCase {
     
     override func setUpWithError() throws {
     }

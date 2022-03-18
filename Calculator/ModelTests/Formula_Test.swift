@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class FormulaTest: XCTestCase {
+class Formula_Test: XCTestCase {
     var sut: Formula!
     
     override func setUpWithError() throws {
