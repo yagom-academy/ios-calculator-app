@@ -16,7 +16,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     private(set) var head: Int = 0
     private(set) var tail: Int = 0
     
-    init(values: [T]) {
+    init(values: [T] = [:]) {
         values.forEach { enqueue(with: $0)}
     }
     

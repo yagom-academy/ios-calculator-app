@@ -18,7 +18,12 @@ class ExpressionParser_Test: XCTestCase {
 
     func test_componentsByOperators() {
         let expectResult = ["10", "+", "2", "-", "3", "×", "4"]
-        let result = ExpressionParser.scroll.componentsByOperators(from: "10 + 2 - 3 × 4")
+        let formula = ExpressionParser.parse(form: "10 + 2 - 3 × 4")
+        
+        let result_operands = formula.operands
+        let result_operators = formula.operators
+        
+        
         XCTAssertEqual(result, expectResult)
     }
 
