@@ -25,7 +25,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
 
         // then
-        XCTAssertEqual(testData, mock.dataA)
+        XCTAssertEqual(testData, mock.mockData)
     }
     
     func test_dequeue() {
@@ -38,7 +38,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
 
         // then
-        XCTAssertEqual(testData, mock.dataA)
+        XCTAssertEqual(testData, mock.mockData)
     }
     
     func test_removeAll() {
@@ -51,7 +51,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
 
         // then
-        XCTAssertEqual(testData, mock.dataA)
+        XCTAssertEqual(testData, mock.mockData)
     }
     
     func test_isEmpty_Equal() {
@@ -81,22 +81,22 @@ class CalculatorItemQueueTests: XCTestCase {
 
 class MockList<T>: List {
     
-    var dataA: [T] = []
+    var mockData: [T] = []
     
-    var isEmpty: Bool { dataA.isEmpty }
+    var isEmpty: Bool { mockData.isEmpty }
     
-    var count: Int { dataA.count }
+    var count: Int { mockData.count }
     
     func append(_ data: T) {
-        dataA.append(data)
+        mockData.append(data)
     }
     
     func removeFirst() -> T? {
-        return dataA.remove(at: 0)
+        return mockData.remove(at: 0)
     }
     
     func removeAll() {
-        dataA.removeAll()
+        mockData.removeAll()
     }
 
 }
