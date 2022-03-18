@@ -15,7 +15,6 @@ struct Formula {
         guard var result = operands.removeFirst()?.value else { return .nan }
         
         while let oper = operators.removeFirst()?.value, let rhs = operands.removeFirst()?.value {
-//            if oper == .divide && rhs == .zero { return .nan }
             result = oper.calculate(lhs: result, rhs: rhs)
         }
         return result
