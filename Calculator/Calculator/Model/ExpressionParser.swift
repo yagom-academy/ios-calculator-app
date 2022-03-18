@@ -5,6 +5,10 @@
 //  Created by 김태현 on 2022/03/18.
 //
 
+fileprivate enum Separator {
+    static let underScore: Character = "_"
+}
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operands = LinkedList<Double>()
@@ -15,7 +19,7 @@ enum ExpressionParser {
             .map { Node(data: $0) }
             .forEach { operands.append(node: $0) }
         
-        var lastValue: Character = "_"
+        var lastValue: Character = Separator.underScore
         
         input
             .map {
@@ -38,13 +42,13 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         var result: [String] = []
-        var lastValue: Character = "_"
+        var lastValue: Character = Separator.underScore
         
         input
             .forEach {
                 if let _ = Operator(rawValue: $0),
                    let _ = Double(String(lastValue)) {
-                    result.append("_")
+                    result.append(String(Separator.underScore))
                 } else {
                     result.append(String($0))
                 }
@@ -53,6 +57,6 @@ enum ExpressionParser {
         
         let stringResult: String = result.joined()
         
-        return stringResult.split(with: "_")
+        return stringResult.split(with: Separator.underScore)
     }
 }
