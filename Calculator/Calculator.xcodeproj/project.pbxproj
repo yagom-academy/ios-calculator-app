@@ -12,7 +12,7 @@
 		0307650227E1B18900CD34AF /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307650127E1B18900CD34AF /* Formula.swift */; };
 		0307650427E1B81300CD34AF /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307650327E1B81300CD34AF /* ExpressionParser.swift */; };
 		0358730627E4453A00824718 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872FF27E4441D00824718 /* FormulaTests.swift */; };
-		0358730827E4684A00824718 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0358730727E4684A00824718 /* ExpressionParser.swift */; };
+		0358730827E4684A00824718 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0358730727E4684A00824718 /* ExpressionParserTests.swift */; };
 		03CC8BB527E39C78003C2751 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC8BB427E39C78003C2751 /* String+Extension.swift */; };
 		03CC8BB727E3A3E0003C2751 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC8BB627E3A3E0003C2751 /* Double+Extension.swift */; };
 		03F64CAC27E0750E002EEB1B /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F64CAB27E0750E002EEB1B /* CalculatorItemQueue.swift */; };
@@ -49,7 +49,7 @@
 		0307650327E1B81300CD34AF /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		035872FD27E4441D00824718 /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		035872FF27E4441D00824718 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
-		0358730727E4684A00824718 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		0358730727E4684A00824718 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		03CC8BB427E39C78003C2751 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		03CC8BB627E3A3E0003C2751 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		03F64CAB27E0750E002EEB1B /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 			children = (
 				03F64CB327E07588002EEB1B /* CalculatorItemQueueTests.swift */,
 				035872FF27E4441D00824718 /* FormulaTests.swift */,
-				0358730727E4684A00824718 /* ExpressionParser.swift */,
+				0358730727E4684A00824718 /* ExpressionParserTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0358730627E4453A00824718 /* FormulaTests.swift in Sources */,
-				0358730827E4684A00824718 /* ExpressionParser.swift in Sources */,
+				0358730827E4684A00824718 /* ExpressionParserTests.swift in Sources */,
 				03F64CB427E07588002EEB1B /* CalculatorItemQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

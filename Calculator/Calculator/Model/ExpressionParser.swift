@@ -8,7 +8,7 @@
 import Foundation
 // input String = "1 + 2 - -3"
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         var formula = Formula()
         componentsByOperator(from: input) // ["1", "+", "2", "-", "-3"]
             .compactMap{ Double($0) } // [1, 2, -3]
@@ -20,7 +20,7 @@ enum ExpressionParser {
         return formula
     }
     
-    private func componentsByOperator(from input: String) -> [String] {
+    private static func componentsByOperator(from input: String) -> [String] {
         return input.split(with: " ")
     }
 }
