@@ -9,7 +9,6 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        let convertStringArray = Array(arrayLiteral: target).map{ String($0) }
-        return convertStringArray
+        return Array(arrayLiteral: target).map{ String($0) }
     }
 }
