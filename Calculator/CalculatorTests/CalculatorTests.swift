@@ -6,15 +6,21 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class CalculatorTests: XCTestCase {
+    private var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = nil
     }
 
     func testExample() throws {
@@ -30,6 +36,13 @@ class CalculatorTests: XCTestCase {
         measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func test_LinkedListNode가_비었을때_isEmpty가_true를_리턴하는가() {
+        
+        let result = sut.isEmpty()
+        
+        XCTAssertTrue(result)
     }
 
 }
