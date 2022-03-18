@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum DivideError: Error {
-    case divideByZero
-}
-
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
@@ -48,5 +44,4 @@ enum Operator: Character, CaseIterable, CalculateItem {
     private func multiply(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
-    
 }
