@@ -12,9 +12,10 @@ struct Formula {
     func result() throws -> Double {
         var result = operands.dequeue() ?? 0
         
-        try operators.forEach {
-            result = try $0.data.calculate(lhs: result, rhs: operands.dequeue() ?? 0)
-        }
+        try operators
+            .forEach {
+                result = try $0.data.calculate(lhs: result, rhs: operands.dequeue() ?? 0)
+            }
         
         return result
     }
