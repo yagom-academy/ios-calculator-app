@@ -6,17 +6,17 @@
 //
 
 import Foundation
-// input String = "1 + 2 - -3"
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula = Formula()
-        componentsByOperators(from: input) // ["1", "+", "2", "-", "-3"]
-            .compactMap{ Double($0) } // [1, 2, -3]
-            .forEach{ formula.operands.enqueue($0) } // enqueue [1, 2, -3]
-        componentsByOperators(from: input) // ["1", "+", "2", "-", "-3"]
-            .filter{ Double($0) == nil } // ["+", "-"]
-            .compactMap{ Operator(rawValue: Character($0)) } // [.add, .subtract]
-            .forEach{ formula.operators.enqueue($0) } //dequeue [.add, .subtract]
+        componentsByOperators(from: input)
+            .compactMap{ Double($0) }
+            .forEach{ formula.operands.enqueue($0) }
+        componentsByOperators(from: input)
+            .filter{ Double($0) == nil }
+            .compactMap{ Operator(rawValue: Character($0)) }
+            .forEach{ formula.operators.enqueue($0) }
         return formula
     }
     
