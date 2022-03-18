@@ -10,7 +10,7 @@ import XCTest
 
 fileprivate struct MockNode {
     static var mockInt = Node(data: CalculatorItem.integer(10))
-    static var mockOperator = Node(data: CalculatorItem.operator(.devision))
+    static var mockOperator = Node(data: CalculatorItem.operator(.devide))
     static var mockDouble = Node(data: CalculatorItem.double(3.5))
 }
 
@@ -64,7 +64,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(MockNode.mockDouble)
 
         let result: [CalculatorItem] = sut.map { $0.data }
-        let expectation = [CalculatorItem.integer(10), CalculatorItem.operator(.devision), CalculatorItem.double(3.5)]
+        let expectation = [CalculatorItem.integer(10), CalculatorItem.operator(.devide), CalculatorItem.double(3.5)]
 
         XCTAssertEqual(result, expectation)
     }

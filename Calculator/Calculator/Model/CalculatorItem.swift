@@ -5,18 +5,6 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-protocol CalculateItem {
-    // empty
-}
-
-enum Operator: String, CalculateItem {
-    case addition = "+"
-    case subtraction = "-"
-    case devision = "/"
-    case multiplication = "*"
-    case equalSign = "="
-}
-
 enum CalculatorItem: CalculateItem {
     case integer(Int)
     case double(Double)
@@ -29,7 +17,7 @@ enum CalculatorItem: CalculateItem {
         case .double(let number):
             return String(number)
         case .operator(let sign):
-            return sign.rawValue
+            return String(sign.rawValue)
         }
     }
 }

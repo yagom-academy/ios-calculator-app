@@ -15,7 +15,7 @@ class FormulaTests: XCTestCase {
         try super.setUpWithError()
         
         let doubleList = LinkedList(head: Node(data: CalculatorItem.double(1)))
-        let operatorList = LinkedList(head: Node(data: CalculatorItem.operator(.addition)))
+        let operatorList = LinkedList(head: Node(data: CalculatorItem.operator(.add)))
         let doubleQueue = CalculatorItemQueue(linkedList: doubleList)
         let operatorQueue = CalculatorItemQueue(linkedList: operatorList)
         
