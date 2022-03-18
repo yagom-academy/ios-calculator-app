@@ -13,16 +13,16 @@ enum ExpressionParser {
         var fomula = Formula()
         let values = componentsByOperators(from: input)
 
-        let a: [Double] = values.enumerated()
+        let operandsValue: [Double] = values.enumerated()
                                 .filter { $0.offset % 2 == 0 }
                                 .compactMap { Double($0.element) }
 
-        let b: [Operator] = values.enumerated()
+        let operatorValue: [Operator] = values.enumerated()
                                     .filter { $0.offset % 2 != 0 }
                                     .compactMap { Operator(rawValue: Character($0.element)) }
    
-        fomula.operands = CalculatorItemQueue(values: a)
-        fomula.operators = CalculatorItemQueue(values: b)
+        fomula.operands = CalculatorItemQueue(values: operandsValue)
+        fomula.operators = CalculatorItemQueue(values: operatorValue)
         return fomula
     }
     
