@@ -12,7 +12,7 @@ struct CalculateItemQueue<T: CalculateItem> {
     }
     
     var isEmpty: Bool {
-        return store.count == 0
+        return store.isEmpty
     }
     
     func enqueue(_ node: T) {

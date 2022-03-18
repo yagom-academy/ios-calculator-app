@@ -26,10 +26,18 @@ class CalculateItemQueue1: XCTestCase {
         XCTAssertEqual(result, false)
     }
     
-    func test_enqueue메서드호출후_isEmpty메서드호출값이_True가나오는지() {
+    func test_값할당한게없을떄_isEmpty메서드호출값이_True가나오는지() {
         let result = queue.isEmpty
         
         XCTAssertTrue(result)
+    }
+    
+    func test_enqueue메서드호출후_isEmpty메서드호출값이_False가나오는지() {
+        queue.enqueue(1)
+        
+        let result = queue.isEmpty
+        
+        XCTAssertFalse(result)
     }
     
     func test_enqueue메서드호출10번후_count값이10이나오는지() {
