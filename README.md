@@ -141,3 +141,53 @@
 6. commit 작게 하기
 
 ---
+
+## [STEP 2]
+
+### 구현한 내용
+
+- CalculatorError
+- **extension** String
+    - split(with target: Character) -> [String] : target을 기준으로 나뉜 문자열 배열을 반환
+- Operator : 연산자에 맞는 연산 진행
+    - calculate(lhs: Double, rhs: Double) **throws** -> Double
+    - add(lhs: Double, rhs: Double) -> Double
+    - subtract(lhs: Double, rhs: Double) -> Double
+    - devide(lhs: Double, rhs: Double) **throws** -> Double
+    - multiply(lhs: Double, rhs: Double) -> Double
+- Formula : 연산자 큐와 피연산자 큐를 이용해서 결과값 반환
+    - result() **throws** -> Double
+- ExpressionParser
+    - parse(from input: String) -> Formula : 연결 리스트를 이용해서 큐를 생성
+    - componentsByOperators(from input: String) -> [String] : 숫자로만 이워진 배열을 추출
+
+---
+
+### 고민한 점
+
+1. 네이밍
+    - 테스트 케이스의 네이밍: 내부에 구현된 데이터를 자세히 명시하지 않고, 확인하려는 기능에 대해서만 설명하도록 작성했습니다. 이 경우, 내부에서 다른 데이터를 넣어서 확인해도 테스트 케이스의 이름은 수정할 필요가 없어 좋을 것 같습니다.
+2. UML에 충실하게
+3. 유닛 테스트
+    - 외부에서 사용되지 않는다는 생각에 모든 테스트 케이스에 private을 설정했지만 제대로 테스트가 돌아가지 않아 무조건 테스트를 성공하는 것을 확인했습니다.
+    - 정확한 이유는 모르겠지만 import한 모듈에서 접근이 필요해서 internal으로 설정하는 것 같습니다.
+    - 타겟을 설정할 때 import가 되지 않아 target membership을 임의로 체크했는데 이 때문에 Calcaultor 모듈이나 UIKit에 접근 불가능했습니다. 확인해보니, 해당 파일이 속한 최상위 그룹이 그 파일의 타겟이 되는 것 같습니다. 또 @testable로 모듈을 import하는 경우 굳이 target memebership을 하나하나 설정할 필요가 없는 것 같습니다.
+4. 다른 타입과의 의존도
+    - 이니셜라이저 내부에서 다른 타입의 인스턴스를 생성하기 보다는 외부에서 주입 받을 수 있도록 했습니다.
+5. error handling
+    - 0으로 나뉘는 것을 제외한 경우(ex. 연속된 연산자 입력)은 UI 쪽에서 제어가 가능하다고 판단하여 추가적인 에러 처리는 없습니다.
+6. 파일 분리
+    - Utils라는 그룹 내에 Error와 Extension을 넣었습니다.
+7. commit 단위 작게
+8. ExpressionParser
+    - 이번 스탭에서 가능 고민했던 구현 부분이지만 구현이 깔끔하지 못한 것 같아 아쉬운 부분입니다.😭
+    - UML에서 요구한 split() 메서드를 사용해서 연산자와 숫자를 분리하는 방법에 대해 고민했습니다.
+    - prefix로 올 -/ +를 처리하는 방법에 대해 고민했습니다. 뷰에서 빈 칸을 넣어주고 이를 이용하는 것보다는 입력된 값에서 자체적으로 연산자와 숫자들을 분리하고 싶었습니다. 이 과정에서 연달아서 어떤 값이 오는지 확인해야 하지만 뷰에서 값을 직관적으로 받아올 수 있기 때문에 이 방법을 사용했습니다.
+9. 테스트 삭제 시 타겟 제거
+    - 불필요한 테스트를 삭제하는 경우 타겟을 지우지 않으니 모든 테스트를 통과해도 테스트가 실패했다고 나왔습니다. 이를 해결하기 위해 프로젝트 설정에서 남아있는 타겟을 제거했습니다.
+10. 고차함수 활용
+11. 프로토콜 채택 표기 순서
+    - Operator의 경우 CalculateItem과 CaseIterable을 채택합니다. 채택 시 구현이 필요한 부분이 있으면 extension으로 따로 작성했겠지만, 이 경우 구현을 요구하지도 않아 타입 구현에서 2가지를 다 채택합니다. 구현되는 내용이 없어도 extension으로 다 빼는 것이 가독성이 좋은지 궁금합니다. 또 한 개 이상을 채택하는 경우 선호되는 채택 순서가 있을지 궁금합니다.
+12. 메스드만 가지는 enum
+    - 기존에 값 타입은 주로 struct을 사용하고 case가 필요한 경우만 enum을 사용했습니다. 그런데, 이번 스탭의 UML을 보니 case가 없는 enum의 구현을 요구해서 그 이유에 대한 고민을 했습니다.
+    - enum의 경우 케이스가 없으니 인스턴스 생성이 제한적이어서 특정 목적의 타입 메서드를 모아놓기에 좋을 것이라고 생각됩니다.
