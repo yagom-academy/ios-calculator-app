@@ -1,10 +1,3 @@
-//
-//  CalculatorTests.swift
-//  CalculatorTests
-//
-//  Created by 고명주 on 2022/03/18.
-//
-
 import XCTest
 @testable import Calculator
 
@@ -38,17 +31,49 @@ class CalculatorTests: XCTestCase {
         }
     }
     
-    func test_LinkedListNode가_비었을때_isEmpty가_true를_리턴하는가() {
-        
+    func test_LinkedList가_비었을때_isEmpty가_true를_리턴하는가() {
+        //when
         let result = sut.isEmpty()
         
+        //then
         XCTAssertTrue(result)
     }
     
-    func test_LinkedListNode의_element가_존재할때_isEmpty가_false를_리턴하는가() {
+    func test_LinkedList의_element가_존재할때_isEmpty가_false를_리턴하는가() {
+        //given
         sut.enqueue(1)
+        
+        //when
         let result = sut.isEmpty()
+        
+        //then
         XCTAssertFalse(result)
     }
-
+    
+    func test_LinkedList에_addNode메서드를_한번호출했을때_count가1을_리턴하는가() {
+        //given
+        sut.enqueue(1)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_LinkedList에_addNode메서드를_세번호출했을때_count가3을_리턴하는가() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 3)
+        
+    }
+    
+    
 }
