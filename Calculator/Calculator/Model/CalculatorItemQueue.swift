@@ -1,0 +1,43 @@
+//
+//  CalculatorItemQueue.swift
+//  Calculator
+//
+//  Created by Red on 2022/03/18.
+//
+
+import Foundation
+
+protocol CalculateItem {
+    // empty
+}
+
+struct CalculatorItemQueue<T: CalculateItem> {
+    private(set) var queue: [Int: T] = [:]
+    private(set) var head: Int = 0
+    private(set) var tail: Int = 0
+    
+    var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    mutating func enqueue(with data: T) {
+        queue[tail] = data
+        tail += 1
+    }
+    
+    mutating func dequeue() -> T? {
+        if isEmpty {
+            return nil
+        }
+        let value = queue[head]
+        queue[head] = nil
+        head += 1
+        return value
+    }
+    
+    mutating func reset() {
+        queue = [:]
+        head = 0
+        tail = 0
+    }
+}
