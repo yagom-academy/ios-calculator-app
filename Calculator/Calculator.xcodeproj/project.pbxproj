@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C72128927DF3D27004DF2A5 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C72128827DF3D27004DF2A5 /* CalculatorTests.swift */; };
+		9C731DE527E4B22F0085FE0E /* Formula_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C731DE427E4B22F0085FE0E /* Formula_Test.swift */; };
 		9C99F34D27E057FC00DE77CD /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C99F34C27E057FC00DE77CD /* CalculateItem.swift */; };
 		9C99F35027E058AD00DE77CD /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C99F34F27E058AD00DE77CD /* CalculatorItemQueue.swift */; };
 		9C99F35327E05EFD00DE77CD /* CalculatorLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C99F35227E05EFD00DE77CD /* CalculatorLinkedList.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		9C72128627DF3D27004DF2A5 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C72128827DF3D27004DF2A5 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		9C731DE427E4B22F0085FE0E /* Formula_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula_Test.swift; sourceTree = "<group>"; };
 		9C99F34C27E057FC00DE77CD /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		9C99F34F27E058AD00DE77CD /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		9C99F35227E05EFD00DE77CD /* CalculatorLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLinkedList.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				9C72128827DF3D27004DF2A5 /* CalculatorTests.swift */,
+				9C731DE427E4B22F0085FE0E /* Formula_Test.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C731DE527E4B22F0085FE0E /* Formula_Test.swift in Sources */,
 				9C72128927DF3D27004DF2A5 /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
