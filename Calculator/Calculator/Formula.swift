@@ -7,16 +7,16 @@ struct Formula {
     public mutating func result() throws -> Double {
         var result: Double = 0.0
         
-        guard let initNumber = operands.dequeue() else { return 0.0 }
-        result = initNumber
+        guard let firstNumber = operands.dequeue() else { return 0.0 }
+        result = firstNumber
         
         while !operators.isEmpty {
-            guard let numFromQueue: Double = operands.dequeue() else { return 0.0 }
-            guard let opFromQueue: Character = operators.dequeue() else { return 0.0 }
-            guard let op: Operator = Operator.init(rawValue: opFromQueue) else { return 0.0 }
+            guard let operandItem: Double = operands.dequeue() else { return 0.0 }
+            guard let operatorSymbol: Character = operators.dequeue() else { return 0.0 }
+            guard let operatorItem: Operator = Operator.init(rawValue: operatorSymbol) else { return 0.0 }
             
             do {
-                try result = op.calculate(lhs: result, rhs: numFromQueue)
+                try result = operatorItem.calculate(lhs: result, rhs: operandItem)
             } catch _ as CalculatorError {
                 break
             }

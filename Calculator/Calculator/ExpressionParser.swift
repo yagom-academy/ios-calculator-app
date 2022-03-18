@@ -6,13 +6,13 @@ enum ExpressionParser {
         var operators: CalculatorItemQueue = CalculatorItemQueue<Character>()
         let operatorPool = Operator.allCases.map({ String($0.rawValue) })
         
-        let convertedInputArray = componentsByOperators(from: input)
+        let componentsInputByOperators = componentsByOperators(from: input)
         
-        convertedInputArray.compactMap({ Double($0) }).forEach({
+        componentsInputByOperators.compactMap({ Double($0) }).forEach({
             operands.enqueue(element: $0)
         })
         
-        convertedInputArray.filter({ operatorPool.contains($0) }).compactMap({ Character($0) }).forEach({
+        componentsInputByOperators.filter({ operatorPool.contains($0) }).compactMap({ Character($0) }).forEach({
             operators.enqueue(element: $0)
         })
         
