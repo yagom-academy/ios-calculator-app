@@ -10,15 +10,18 @@ import Foundation
 enum ExpressionParser {
     func parse(from input: String) -> Formula {
         let componentsString = componentsByOperators(from: input)
-        
         var values = LinkedQueue<Double>()
-        let convertDouble = componentsString.compactMap{ Double($0) }
-        convertDouble.forEach{ values.append(newNode: $0) }
-        
         var oper = LinkedQueue<Operator>()
-        let converteOper = componentsString.compactMap{ Operator(rawValue: Character($0)) }
-        converteOper.forEach{ oper.append(newNode: $0) }
-    
+        
+        componentsString.forEach{
+            if Double($0) != nil {
+                values.append(newNode: Double($0))
+            } else {
+                let convertOper = Operator(rawValue: Character($0))
+                oper.append(newNode: convertOper)
+            }
+        }
+        
         let calculator = Formula(operands: values, operators: oper)
         return calculator
     }
@@ -27,3 +30,4 @@ enum ExpressionParser {
         return input.split(with: " ")
     }
 }
+
