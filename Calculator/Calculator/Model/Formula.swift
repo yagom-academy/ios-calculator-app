@@ -8,9 +8,17 @@
 import Foundation
 
 struct Formula {
-    private(set) var operands: CalculatorItemQueue<Double>
-    private(set) var operators: CalculatorItemQueue<Operator>
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
 
+    var _operandsCount: Int {
+        return operands.count
+    }
+    
+    var _operatorsCount: Int {
+        return operators.count
+    }
+    
     init(operands: CalculatorItemQueue<Double>,
          operators: CalculatorItemQueue<Operator>) {
         self.operands = operands

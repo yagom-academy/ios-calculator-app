@@ -16,7 +16,7 @@ class ExpressionParserTests: XCTestCase {
         let formula = ExpressionParser.parse(from: mockExpression)
         
         // then
-        let result = formula.operands.count
+        let result = formula._operandsCount
         let expected = 5
         XCTAssertEqual(result, expected)
     }
@@ -27,8 +27,18 @@ class ExpressionParserTests: XCTestCase {
         let formula = ExpressionParser.parse(from: mockExpression)
         
         // then
-        let result = formula.operators.count
+        let result = formula._operatorsCount
         let expected = 4
         XCTAssertEqual(result, expected)
+    }
+    
+    func test_parse를호출할때_반환된표현식의결과값이예상값과같아야한다() {
+        // given
+        // when
+        var formula = ExpressionParser.parse(from: mockExpression)
+        
+        // then
+        let result = (1 + 2 - 3) / 4 * -5
+        XCTAssertEqual(Double(result), try formula.result())
     }
 }
