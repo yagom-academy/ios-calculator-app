@@ -18,10 +18,10 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>()
         
         for item in splitStringArray {
-            if let operatorItem = Operator(rawValue: Character(item)) {
-                operators.enqueue(operatorItem)
-            } else {
+            if let _ = Double(item) {
                 operands.enqueue(item)
+            } else if let operatorItem = Operator(rawValue: Character(item)) {
+                operators.enqueue(operatorItem)
             }
         }
         
