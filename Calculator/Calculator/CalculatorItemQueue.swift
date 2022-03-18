@@ -10,8 +10,6 @@ import Foundation
 public struct CalculatorItemQueue<T>: CalculateItem {
     var calculateList = CalculatorDoublyLinkedList<T>()
     
-    public init() { }
-    
     public func enqueue(_ element: T) {
         calculateList.appendNodes(element)
     }

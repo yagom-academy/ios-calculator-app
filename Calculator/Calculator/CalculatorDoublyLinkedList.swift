@@ -11,8 +11,6 @@ class CalculatorDoublyLinkedList<T> {
     var headNode: Node<T>?
     var tailNode: Node<T>?
     
-    public init() { }
-    
     public var isEmpty: Bool {
         return headNode == nil || tailNode == nil
     }
