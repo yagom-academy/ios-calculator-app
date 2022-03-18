@@ -12,54 +12,38 @@ class CalculatorTests: XCTestCase {
         
     func test_deque_CalculatorItemQueue() {
         //given
-        let calculatorItemQueue = CalculatorItemQueue()
-        let firstEnqueueNumber: Float = 3
-        let firstEnqueueOperation = "+"
-        let secondEnqueueNumber: Float = 2
-        let secondEnqueueOperation = "-"
-        let firstEnqueueItem = Item(number: firstEnqueueNumber,operation: firstEnqueueOperation)
-        let secondEnqueueItem = Item(number: secondEnqueueNumber,operation: secondEnqueueOperation)
-        calculatorItemQueue.enqueue(calculateItem: firstEnqueueItem)
-        calculatorItemQueue.enqueue(calculateItem: secondEnqueueItem)
+        let calculatorItemQueue = CalculatorItemQueue<String>()
+        let firstEnqueue = "3"
+        let secondEnqueue = "2"
+        calculatorItemQueue.enqueue(firstEnqueue)
+        calculatorItemQueue.enqueue(secondEnqueue)
         
         //when
-        guard let dequeResult = calculatorItemQueue.dequeue() as? Item else {
+        guard let dequeResult = calculatorItemQueue.dequeue() else {
             XCTFail()
             return
         }
         
         //then
-        let resultNumber = dequeResult.number
-        let resultOperation = dequeResult.operation
-        
-        XCTAssertEqual(firstEnqueueNumber, resultNumber)
-        XCTAssertEqual(firstEnqueueOperation, resultOperation)
+        XCTAssertEqual(firstEnqueue, dequeResult)
     }
     
     func test_deque_twice_CalculatorItemQueue() {
         //given
-        let calculatorItemQueue = CalculatorItemQueue()
-        let firstEnqueueNumber: Float = 3
-        let firstEnqueueOperation = "+"
-        let secondEnqueueNumber: Float = 2
-        let secondEnqueueOperation = "-"
-        let firstEnqueueItem = Item(number: firstEnqueueNumber,operation: firstEnqueueOperation)
-        let secondEnqueueItem = Item(number: secondEnqueueNumber,operation: secondEnqueueOperation)
-        calculatorItemQueue.enqueue(calculateItem: firstEnqueueItem)
-        calculatorItemQueue.enqueue(calculateItem: secondEnqueueItem)
+        let calculatorItemQueue = CalculatorItemQueue<String>()
+        let firstEnqueue = "3"
+        let secondEnqueue = "2"
+        calculatorItemQueue.enqueue(firstEnqueue)
+        calculatorItemQueue.enqueue(secondEnqueue)
         
         //when
-        _ = calculatorItemQueue.dequeue()
-        guard let dequeResult = calculatorItemQueue.dequeue() as? Item else {
+        guard let dequeResult = calculatorItemQueue.dequeue(),
+             let dequeResult2 = calculatorItemQueue.dequeue() else {
             XCTFail()
             return
         }
         
-        //then
-        let resultNumber = dequeResult.number
-        let resultOperation = dequeResult.operation
-        
-        XCTAssertEqual(secondEnqueueNumber, resultNumber)
-        XCTAssertEqual(secondEnqueueOperation, resultOperation)
+        XCTAssertEqual(firstEnqueue, dequeResult)
+        XCTAssertEqual(secondEnqueue, dequeResult2)
     }
 }
