@@ -66,7 +66,5 @@ class OperatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, first * second)
     }
-    
-    
 
 }

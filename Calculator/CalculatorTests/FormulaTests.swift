@@ -30,7 +30,7 @@ class FormulaTests: XCTestCase {
         // given
         let operatorData = [Operator.add, Operator.subtract, Operator.divide, Operator.multiply]
         let operandData = [1.0, 5.0, 3.0, 4.0, 6.0]
-        operatorData.forEach( operatorQueue.enqueue(_:) )
+        operatorData.forEach(operatorQueue.enqueue(_:))
         operandData.forEach(operandQueue.enqueue(_:))
 
         // when
@@ -39,9 +39,6 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, (1+5-3)/4*6)
         
-        
     }
     
-    
-
 }
