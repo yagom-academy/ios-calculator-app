@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

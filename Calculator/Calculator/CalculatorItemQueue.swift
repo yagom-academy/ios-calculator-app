@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct QueueLinkedList<T> {
+public struct CalculatorItemQueue<T>: CalculateItem {
     var calculateList = CalculatorDoublyLinkedList<T>()
     
     public init() { }

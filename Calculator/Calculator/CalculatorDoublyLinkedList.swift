@@ -7,17 +7,14 @@
 
 import Foundation
 
-class CalculatorDoublyLinkedList<T>: CalculateItem {
+class CalculatorDoublyLinkedList<T> {
     var headNode: Node<T>?
     var tailNode: Node<T>?
     
     public init() { }
     
     public var isEmpty: Bool {
-        if headNode == nil || tailNode == nil {
-            return true
-        }
-        return false
+        return headNode == nil || tailNode == nil
     }
     
     public var firstNode: Node<T>? {
