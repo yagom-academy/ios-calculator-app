@@ -26,11 +26,11 @@ struct LinkedQueue<Element: CalculateItem> {
     }
     
     var first: Node<Element>? {
-        return head == nil ? nil : head
+        return head
     }
     
     var last: Node<Element>? {
-        return tail == nil ? nil : tail
+        return tail
     }
     
     mutating func append(newNode: Element?) {
