@@ -22,6 +22,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
+            if rhs == .zero { return .nan }
             return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
