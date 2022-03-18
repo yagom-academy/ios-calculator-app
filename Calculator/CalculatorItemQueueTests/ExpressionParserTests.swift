@@ -20,4 +20,15 @@ class ExpressionParserTests: XCTestCase {
         let expected = 5
         XCTAssertEqual(result, expected)
     }
+    
+    func test_parse를호출할때_operators의카운트값이예상값과같아야한다() {
+        // given
+        // when
+        let formula = ExpressionParser.parse(from: mockExpression)
+        
+        // then
+        let result = formula.operators.count
+        let expected = 4
+        XCTAssertEqual(result, expected)
+    }
 }
