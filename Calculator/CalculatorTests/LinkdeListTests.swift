@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 class LinkdeListTests: XCTestCase {
-    var sut: LinkdeList<Int>!
+    var sut: LinkdeList<Double>!
 
     override func setUpWithError() throws {
-        sut = LinkdeList<Int>()
+        sut = LinkdeList<Double>()
 
     }
 
@@ -77,7 +77,7 @@ class LinkdeListTests: XCTestCase {
     
     func test_append_data_removeFirst_return_data_Equal_true() {
         // given
-        let testData = 1
+        let testData = 1.0
         sut.append(testData)
         
 
@@ -90,7 +90,7 @@ class LinkdeListTests: XCTestCase {
     
     func test_append_3번_FisrtData_removeFirst_return_data_Equal_true() {
         // given
-        let testData = [1, 2, 3]
+        let testData = [1.0, 2.0, 3.0]
         testData.forEach(sut.append(_:))
         
 
@@ -103,7 +103,7 @@ class LinkdeListTests: XCTestCase {
     
     func test_append_3번_removeFirst_1번_count_return_2() {
         // given
-        let testData = [1, 2, 3]
+        let testData = [1.0, 2.0, 3.0]
         testData.forEach(sut.append(_:))
         sut.removeFirst()
         
@@ -117,7 +117,7 @@ class LinkdeListTests: XCTestCase {
     
     func test_append_3번_removeAll_isEmpty_return_true() {
         // given
-        let testData = [1, 2, 3]
+        let testData = [1.0, 2.0, 3.0]
         testData.forEach(sut.append(_:))
         sut.removeAll()
         
@@ -131,7 +131,7 @@ class LinkdeListTests: XCTestCase {
     
     func test_append_3번_removeAll_count_return_0() {
         // given
-        let testData = [1, 2, 3]
+        let testData = [1.0, 2.0, 3.0]
         testData.forEach(sut.append(_:))
         sut.removeAll()
         

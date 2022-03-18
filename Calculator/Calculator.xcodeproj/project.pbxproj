@@ -12,6 +12,7 @@
 		9B542FB227E43733009FA843 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B542FB127E43733009FA843 /* ExpressionParser.swift */; };
 		9B542FB427E43885009FA843 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B542FB327E43885009FA843 /* Formula.swift */; };
 		9B542FB627E43AD6009FA843 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B542FB527E43AD6009FA843 /* CalculateItem.swift */; };
+		9B542FC027E44996009FA843 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B542FBF27E44996009FA843 /* OperatorTests.swift */; };
 		9BD01C8027E332B500C3CCD0 /* LinkdeListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD01C7F27E332B500C3CCD0 /* LinkdeListTests.swift */; };
 		9BD01C9327E3572400C3CCD0 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD01C8C27E3375B00C3CCD0 /* CalculatorItemQueueTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		9B542FB127E43733009FA843 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		9B542FB327E43885009FA843 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		9B542FB527E43AD6009FA843 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
+		9B542FBF27E44996009FA843 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		9BD01C7D27E332B500C3CCD0 /* LinkdeListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkdeListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD01C7F27E332B500C3CCD0 /* LinkdeListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkdeListTests.swift; sourceTree = "<group>"; };
 		9BD01C8A27E3375B00C3CCD0 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +106,7 @@
 			children = (
 				9BD01C7F27E332B500C3CCD0 /* LinkdeListTests.swift */,
 				9BD01C8C27E3375B00C3CCD0 /* CalculatorItemQueueTests.swift */,
+				9B542FBF27E44996009FA843 /* OperatorTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				TargetAttributes = {
 					9B49220A27E03F3A00556485 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 						TestTargetID = C713D93D2570E5EB001C3AFC;
 					};
 					9BD01C7C27E332B500C3CCD0 = {
@@ -307,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B542FC027E44996009FA843 /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +391,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -400,6 +406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = siwon.CalculatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/Calculator";
@@ -411,6 +418,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
