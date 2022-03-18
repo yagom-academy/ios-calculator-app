@@ -54,4 +54,18 @@ enum ExpressionParser {
         
         return operands
     }
+    
+    private static func makeOperatorsQueue(from input: String) -> CalculatorItemQueue<Operator> {
+        var operators = CalculatorItemQueue<Operator>()
+        
+        componentsByOperands(from: input)
+            .compactMap { string in
+                Operator(rawValue: Character(string))
+            }
+            .forEach { `operator` in
+                operators.enqueue(`operator`)
+            }
+        
+        return operators
+    }
 }
