@@ -28,7 +28,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
 
-    func test_result_Double반환하는지() throws {
+    func test_result_double반환하는지() throws {
         let expectation = 3.0
         let result = try sut.result()
         

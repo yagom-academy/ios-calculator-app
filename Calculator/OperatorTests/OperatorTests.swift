@@ -41,7 +41,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_calculate_devide_0으로나눌때_에러던지나() {
+    func test_calculate_devide_0으로나눌때_에러던지는지() {
         let `operator` = Operator.devide
         
         XCTAssertThrowsError(try `operator`.calculate(lhs: 1.0, rhs: 0)) { error in

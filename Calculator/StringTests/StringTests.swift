@@ -18,7 +18,7 @@ class StringTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_split() {
+    func test_split_string배열반환하는지() {
         let mockString = "123+4.0"
         
         let result = mockString.split(with: "+")

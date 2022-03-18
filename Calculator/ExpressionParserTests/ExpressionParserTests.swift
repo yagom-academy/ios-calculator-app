@@ -17,7 +17,7 @@ class ExpressionParserTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_parse_formula_result확인() {
+    func test_parse_formula_result반환하는지() {
         let formula = ExpressionParser.parse(from: "-10*-46+-50/+1")
         
         XCTAssertEqual(try! formula.result(), 410)
