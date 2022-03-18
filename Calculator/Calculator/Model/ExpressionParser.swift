@@ -9,11 +9,19 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
-        Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+        return Formula(operands: operands, operators: operators)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         input.split(with: " ")
+            .compactMap { string in
+                Double(string)
+            }
+            .map { double in
+                String(double)
+            }
     }
 }
