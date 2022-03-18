@@ -5,14 +5,15 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T> {
-    let linkedList = LinkedList<T>()
+    var linkedList = LinkedList<T>()
     
     func isEmpty() -> Bool {
         return linkedList.isEmpty()
     }
     
-//    func enqueue() -> {
-//        linkedList.addNode(data: T?)
-//        return
-//    }
+    mutating func enqueue(_ data: T) {
+        return linkedList.addNode(data: data)
+    }
+    
+    
 }

@@ -44,5 +44,11 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    func test_LinkedListNode의_element가_존재할때_isEmpty가_false를_리턴하는가() {
+        sut.enqueue(1)
+        let result = sut.isEmpty()
+        XCTAssertFalse(result)
+    }
 
 }
