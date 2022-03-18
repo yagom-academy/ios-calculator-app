@@ -17,11 +17,15 @@ enum ExpressionParser {
   func parse(from input: String) -> Formula {
     let formula = Formula()
     
-       input.split(with: " ")
+       componentsByOperators(from: input)
       .compactMap { Double($0) }
       .forEach { formula.operands.enqueue(data: $0) }
    
     return formula
+  }
+  
+  private func componentsByOperators(from input: String) -> [String] {
+    input.split(with: " ")
   }
 }
 
