@@ -89,7 +89,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let _ = sut.dequeue()
         let result = sut.dequeue()
         // then
-        XCTAssertEqual(result, nil)
+        XCTAssertNil(result)
     }
     
     func test_배열의_count를_정상적으로_반환하는가() {
