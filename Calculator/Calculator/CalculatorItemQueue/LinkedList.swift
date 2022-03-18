@@ -4,7 +4,7 @@ class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     var count: Int
-    
+        
     init() {
         count = 0
     }
