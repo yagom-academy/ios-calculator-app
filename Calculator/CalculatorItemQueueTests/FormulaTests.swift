@@ -37,12 +37,35 @@ class FormulaTests: XCTestCase {
         [-1, 2, 3, 4, 5].forEach {
             mockOperandQueue.enqueue($0)
         }
-
+        
+        sut = Formula(operands: mockOperandQueue, operators: CalculatorItemQueue<Operator>())
+        
         // when
         // then
         let expected: QueueError = .notFoundElement
         XCTAssertThrowsError(try sut.result()) { error in
             XCTAssertEqual(error as? QueueError, expected)
         }
+    }
+
+    func test_result를호출할때_결과값과예상값이같아야한다() {
+        // given
+        var mockOperandQueue = CalculatorItemQueue<Double>()
+        var mockOperatorQueue = CalculatorItemQueue<Operator>()
+
+        [-1, 2, 3, 4, 5].forEach {
+            mockOperandQueue.enqueue($0)
+        }
+        
+        [.add, .substract, .divide, .multiply].forEach {
+            mockOperatorQueue.enqueue($0)
+        }
+
+        sut = Formula(operands: mockOperandQueue, operators: mockOperatorQueue)
+        
+        // when
+        // then
+        let expected = -2.5
+        XCTAssertEqual(try sut.result(), expected)
     }
 }

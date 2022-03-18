@@ -24,7 +24,7 @@ struct Formula {
 
         var result: Double = firstOperand
         
-        while operands.isEmpty == false && operators.isEmpty == false {
+        while operands.isEmpty == false {
             guard let operand = try operands.dequeue() else {
                 throw QueueError.notFoundElement
             }
