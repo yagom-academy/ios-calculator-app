@@ -9,16 +9,12 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var mook: MookList<Int>!
-    var sut: CalculatorItemQueue<MookList<Int>>!
+    var mock: MockList<Int>!
+    var sut: CalculatorItemQueue<MockList<Int>>!
 
     override func setUpWithError() throws {
-        mook = MookList<Int>()
-        sut = CalculatorItemQueue<MookList<Int>>(mook)
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        mock = MockList<Int>()
+        sut = CalculatorItemQueue<MockList<Int>>(mock)
     }
     
     func test_enqueue() {
@@ -29,7 +25,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
 
         // then
-        XCTAssertEqual(testData, mook.dataA)
+        XCTAssertEqual(testData, mock.dataA)
     }
     
     func test_dequeue() {
@@ -42,7 +38,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
 
         // then
-        XCTAssertEqual(testData, mook.dataA)
+        XCTAssertEqual(testData, mock.dataA)
     }
     
     func test_removeAll() {
@@ -55,7 +51,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // when
 
         // then
-        XCTAssertEqual(testData, mook.dataA)
+        XCTAssertEqual(testData, mock.dataA)
     }
     
     func test_isEmpty_Equal() {
@@ -83,7 +79,7 @@ class CalculatorItemQueueTests: XCTestCase {
 
 }
 
-class MookList<T>: List {
+class MockList<T>: List {
     
     var dataA: [T] = []
     
@@ -102,9 +98,5 @@ class MookList<T>: List {
     func removeAll() {
         dataA.removeAll()
     }
-    
 
-    
-    
-    
 }
