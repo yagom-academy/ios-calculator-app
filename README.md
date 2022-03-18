@@ -7,10 +7,20 @@
     + [고민했던 것들](#고민했던-것들)
     + [배운 개념](#배운-개념)
     + [PR 후 개선사항](#pr-후-개선사항)
+- [STEP 2 기능 구현](#step-2-기능-구현)
+    + [고민했던 것들](#고민했던-것들)
+    + [배운 개념](#배운-개념)
+    + [PR 후 개선사항](#pr-후-개선사항)
     
 ## UML
-더블 스택큐
+
+Step1 더블스택 큐
+
 ![asd](https://user-images.githubusercontent.com/88717147/158518548-08c96f45-b77e-429b-837f-5b28fc6d0fa5.png)
+
+Step2 UML
+![큐](https://user-images.githubusercontent.com/88717147/158963736-420edddb-d8fe-49b7-a873-97df97c18d74.jpeg)
+
 
 ## STEP 1 기능 구현
 1. 더블 스택 큐
@@ -69,4 +79,9 @@ struct CalculatorItemQueue {
 - 자료구조 Queue
 - generic
 
+## PR 후 개선사항
+
+## STEP 2 기능 구현
+## 고민했던 것들
+## 배운 개념
 ## PR 후 개선사항
