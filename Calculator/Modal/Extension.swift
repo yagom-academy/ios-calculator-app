@@ -13,4 +13,14 @@ extension String {
         let stringArray = splitString.map{ (value) -> String in return String(value)}
         return stringArray
     }
+    
+    static func stringToDouble(_ str:String?) -> Double {
+        guard let string = str else {
+            return 0
+        }
+                
+        return Double(string) ?? 0
+    }
+
+    
 }

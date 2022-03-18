@@ -13,23 +13,16 @@ struct Formula {
     
     func result() -> Double {
         
-        var result = stringToDouble(operands.dequeue())
+        var result = String.stringToDouble(operands.dequeue())
         
         while (self.operands.isEmpty() == false) || (self.operators.isEmpty() == false){
             guard let operands = operands.dequeue(), let operators = operators.dequeue() else {
                return 0
             }
-            let doubleOperands = stringToDouble(operands)
+            let doubleOperands = String.stringToDouble(operands)
             result = operators.calculate(lhs: result, rhs: doubleOperands)
         }
         return result
     }
     
-    func stringToDouble(_ str:String?) -> Double {
-        guard let string = str else {
-            return 0
-        }
-                
-        return Double(string) ?? 0
     }
-}
