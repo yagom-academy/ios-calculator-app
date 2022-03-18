@@ -1,10 +1,22 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+protocol CalculateItem {
     
-    private(set) var inputStack:[T] = []
-    private(set) var outputStack:[T] = []
+}
+
+extension Int: CalculateItem {
+    
+}
+
+struct CalculatorItemQueue<T: CalculateItem> {
+    
+    private var inputStack:[T] = []
+    private var outputStack:[T] = []
+    
+    var count: Int {
+        return inputStack.count + outputStack.count
+    }
     
     mutating func enqueue(_ element: T) {
         inputStack.append(element)

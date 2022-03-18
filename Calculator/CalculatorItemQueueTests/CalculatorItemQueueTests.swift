@@ -5,66 +5,59 @@ import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
     
-    var calculator = CalculatorItemQueue<Int>()
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    var calculatorQueue = CalculatorItemQueue<Int>()
+    
+    func test_When_enqueue_3_element_Expect_count_is_3() {
+        //when
+        calculatorQueue.enqueue(1)
+        calculatorQueue.enqueue(2)
+        calculatorQueue.enqueue(3)
+        
+        //then
+        XCTAssertEqual(calculatorQueue.count, 3)
     }
     
-    func test_enqueue_element() {
-        calculator.enqueue(1)
-        calculator.enqueue(2)
-        calculator.enqueue(3)
+    func test_When_dequeue_element_Expect_return_firstIn() {
+        //given
+        calculatorQueue.enqueue(1)
+        calculatorQueue.enqueue(2)
+        calculatorQueue.enqueue(3)
         
-        let result = calculator.inputStack
+        //when
+        let outElement = calculatorQueue.dequeue()
         
-        XCTAssertEqual(result, [1,2,3])
-    }
-    
-    func test_dequeue_element() {
-        calculator.enqueue(1)
-        calculator.enqueue(2)
-        calculator.enqueue(3)
-        
-        let outElement = calculator.dequeue()
-        let outStackResult = calculator.outputStack
-        let inStackResult = calculator.inputStack
-        
-        XCTAssertEqual(outStackResult, [3,2])
+        //then
         XCTAssertEqual(outElement, 1)
-        XCTAssertEqual(inStackResult, [])
     }
     
-    func test_dequeue_every_element_in_queue() {
-        calculator.enqueue(1)
-        calculator.enqueue(2)
-        calculator.enqueue(3)
-        calculator.dequeue()
-        calculator.dequeue()
-        calculator.dequeue()
+    func test_When_dequeue_every_element_Expect_count_is_0() {
+        //given
+        calculatorQueue.enqueue(1)
+        calculatorQueue.enqueue(2)
+        calculatorQueue.enqueue(3)
+        
+        //when
+        calculatorQueue.dequeue()
+        calculatorQueue.dequeue()
+        calculatorQueue.dequeue()
   
-        let result = calculator.outputStack
-        XCTAssertEqual(result, [])
+        XCTAssertEqual(calculatorQueue.count, 0)
     }
     
-    func test_dequeue_empty_queue_returns_nil() {
-        calculator.allClear()
-            
-        XCTAssertNil(calculator.dequeue())
+    func test_When_dequeue_empty_queue_Expect_return_nil() {
+        //when
+        calculatorQueue.allClear()
+         
+        //then
+        XCTAssertNil(calculatorQueue.dequeue())
     }
     
-    func test_allClear() {
-        calculator.allClear()
-            
-        let inputStackResult = calculator.inputStack
-        let outputStackResult = calculator.outputStack
-            
-        XCTAssertEqual(inputStackResult, [])
-        XCTAssertEqual(outputStackResult, [])
+    func test_When_allClear_Expect_count_is_0() {
+       //when
+        calculatorQueue.allClear()
+        
+        //then
+        XCTAssertEqual(calculatorQueue.count, 0)
     }
     
 }
