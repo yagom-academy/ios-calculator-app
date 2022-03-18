@@ -6,10 +6,16 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<CalculatorItem>
-    var operators: CalculatorItemQueue<CalculatorItem>
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     func result() -> Double {
-        return 1
+        var result = operands.dequeue() ?? 0
+        
+        operators.forEach {
+            result = $0.data.calculate(lhs: result, rhs: operands.dequeue() ?? 0)
+        }
+        
+        return result
     }
 }

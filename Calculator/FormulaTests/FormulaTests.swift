@@ -14,12 +14,13 @@ class FormulaTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        let doubleList = LinkedList(head: Node(data: CalculatorItem.double(1)))
-        let operatorList = LinkedList(head: Node(data: CalculatorItem.operator(.add)))
-        let doubleQueue = CalculatorItemQueue(linkedList: doubleList)
+        let doubleList = LinkedList(head: Node(data: 1.0))
+        doubleList.append(node: Node(data: 2.0))
+        let operatorList = LinkedList(head: Node(data: Operator.add))
+        let operandsQueue = CalculatorItemQueue(linkedList: doubleList)
         let operatorQueue = CalculatorItemQueue(linkedList: operatorList)
         
-        sut = Formula(operands: doubleQueue, operators: operatorQueue)
+        sut = Formula(operands: operandsQueue, operators: operatorQueue)
     }
 
     override func tearDownWithError() throws {
@@ -28,7 +29,7 @@ class FormulaTests: XCTestCase {
     }
 
     func test_result_Double반환하는지() {
-        let expectation = 1.0
+        let expectation = 3.0
         let result = sut.result()
         
         XCTAssertEqual(result, expectation)
