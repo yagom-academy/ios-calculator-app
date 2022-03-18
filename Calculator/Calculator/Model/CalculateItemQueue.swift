@@ -23,10 +23,6 @@ struct CalculateItemQueue<T: CalculateItem> {
         return store.removeFirst()
     }
     
-    var removeFirst: T? {
-        return store.removeFirst()
-    }
-    
     func removeAll() {
         store.removeAll()
     }
