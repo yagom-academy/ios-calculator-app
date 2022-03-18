@@ -80,4 +80,17 @@ class CalculateItemQueue1: XCTestCase {
         
         XCTAssertEqual(result, 0)
     }
+    
+    func test_enqueue메서드10번호출후_removeFirst메서드5번실행시_count5가나오는지() {
+        for number in 1...10 {
+            queue.enqueue(number)
+        }
+        for _ in 1...5 {
+            let _ = queue.removeFirst
+        }
+        
+        let result = queue.count
+        
+        XCTAssertEqual(result, 5)
+    }
 }
