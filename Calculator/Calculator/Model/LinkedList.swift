@@ -23,6 +23,8 @@ extension Node: Equatable {
 final class LinkedList<T> {
     var head: Node<T>?
     
+    init() { }
+    
     init(head: Node<T>) {
         self.head = head
     }

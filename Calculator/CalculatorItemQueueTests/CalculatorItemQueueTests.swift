@@ -19,7 +19,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue(node: MockNode.mockInt)
+        sut = CalculatorItemQueue(linkedList: LinkedList<CalculatorItem>())
     }
 
     override func tearDownWithError() throws {
@@ -30,39 +30,36 @@ final class CalculatorItemQueueTests: XCTestCase {
         MockNode.mockOperator.next = nil
     }
     
-    private func test_enqueue_node2개_추가됐는지() {
-        sut.enqueue(MockNode.mockOperator)
-        sut.enqueue(MockNode.mockDouble)
+    func test_isEmpty_true인지() {
+        let result = sut.isEmpty()
         
-        let firstNode = sut.linkedList.head
-        let secondNode = firstNode?.next
-        let thirdNode = secondNode?.next
-        
-        XCTAssertEqual(firstNode, MockNode.mockInt)
-        XCTAssertEqual(secondNode, MockNode.mockOperator)
-        XCTAssertEqual(thirdNode, MockNode.mockDouble)
+        XCTAssertTrue(result)
     }
     
-    private func test_clear_head가_nil인지() {
-        let oldHead = sut.linkedList.head
+    func test_enqueue_isEmpty_false인지() {
+        sut.enqueue(MockNode.mockOperator)
+        
+        XCTAssertFalse(sut.isEmpty())
+    }
+    
+    func test_clear_isEmpty_true인지() {
+        sut.enqueue(MockNode.mockOperator)
         
         sut.clear()
         
-        XCTAssertEqual(oldHead, MockNode.mockInt)
-        XCTAssertNil(sut.linkedList.head)
+        XCTAssertTrue(sut.isEmpty())
     }
 
-    private func test_dequeue_빈queue인지() {
+    func test_dequeue_빈queue인지() {
+        sut.enqueue(MockNode.mockInt)
         let result = sut.dequeue()
         
-        let firstNode = sut.linkedList.head
-        
         XCTAssertEqual(result, MockNode.mockInt.data)
-        XCTAssertEqual(firstNode, nil)
         XCTAssertTrue(sut.isEmpty())
     }
     
-    private func test_sequence프로토콜_준수하는지() {
+    func test_sequence프로토콜_준수하는지() {
+        sut.enqueue(MockNode.mockInt)
         sut.enqueue(MockNode.mockOperator)
         sut.enqueue(MockNode.mockDouble)
 

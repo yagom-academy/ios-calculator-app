@@ -5,11 +5,11 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-final class CalculatorItemQueue<T: CalculateItem> {
-    let linkedList: LinkedList<T>
+struct CalculatorItemQueue<T: CalculateItem> {
+    private let linkedList: LinkedList<T>
     
-    init(node: Node<T>) {
-        linkedList = LinkedList<T>(head: node)
+    init(linkedList: LinkedList<T>) {
+        self.linkedList = linkedList
     }
     
     func isEmpty() -> Bool {
