@@ -1,6 +1,6 @@
 //
 //  CalculatorItemQueueTests.swift
-//  CalculatorItemQueueTests
+//  Tests
 //
 //  Created by mmim.
 //
