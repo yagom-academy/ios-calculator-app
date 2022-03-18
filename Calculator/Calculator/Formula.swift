@@ -8,5 +8,6 @@
 import Foundation
 
 struct Formula {
-    
+    let operands: CalculatorItemQueue<LinkdeList<Int>>
+    let operators: CalculatorItemQueue<LinkdeList<>>
 }
