@@ -9,12 +9,10 @@ import Foundation
 
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
-        return target.description.components(separatedBy: ["+","-","/","*"])
+        self.split(separator: target).map { character in
+            String(character)
+        }
     }
-}
-
-extension Int: CalculateItem {
-    // Empty
 }
 
 extension Double: CalculateItem {
