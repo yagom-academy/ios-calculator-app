@@ -18,6 +18,6 @@ extension Double: CalculateItem {
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
 }
