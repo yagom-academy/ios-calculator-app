@@ -18,16 +18,18 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        var result: Double = 0.0
+        guard let firstOperand = try operands.dequeue() else {
+            throw QueueError.notFoundElement
+        }
 
-        while operands.isEmpty == false {
+        var result: Double = firstOperand
+        
+        while operands.isEmpty == false && operators.isEmpty == false {
             guard let operand = try operands.dequeue() else {
-                
                 throw QueueError.notFoundElement
             }
             
             guard let `operator` = try operators.dequeue() else {
-                
                 throw QueueError.notFoundElement
             }
             
