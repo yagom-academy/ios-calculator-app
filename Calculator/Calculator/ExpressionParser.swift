@@ -7,7 +7,16 @@
 
 import Foundation
 
+extension String {
+    func split(with target: Character) -> [String] {
+        return self.components(separatedBy: String(target))
+    }
+}
+
 enum ExpressionParser {
     
+    private func compomnentsByOperators(from input: String) -> [String] {
+        return []
+    }
     
 }
