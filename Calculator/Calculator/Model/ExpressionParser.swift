@@ -14,7 +14,14 @@ extension String {
 }
 
 enum ExpressionParser {
-  func parse(from input: String) {
-    //Formula return
+  func parse(from input: String) -> Formula {
+    let formula = Formula()
+    
+       input.split(with: " ")
+      .compactMap { Double($0) }
+      .forEach { formula.operands.enqueue(data: $0) }
+   
+    return formula
   }
 }
+
