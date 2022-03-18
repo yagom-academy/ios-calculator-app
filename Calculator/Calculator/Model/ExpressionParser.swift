@@ -15,7 +15,7 @@ enum ExpressionParser {
 
         let a: [Double] = values.enumerated()
                                 .filter { $0.offset % 2 == 0 }
-                                .compactMap { Double($0.element) ?? .nan }
+                                .compactMap { Double($0.element) }
 
         let b: [Operator] = values.enumerated()
                                     .filter { $0.offset % 2 != 0 }
