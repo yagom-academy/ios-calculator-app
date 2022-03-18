@@ -16,7 +16,13 @@ extension String {
 enum ExpressionParser {
     
     private func compomnentsByOperators(from input: String) -> [String] {
-        return []
+        var value: [String] = []
+        let operators = ["+", "-", "÷", "×"]
+        for i in operators {
+            value = input.split(with: Character(i))
+        }
+        
+        return value
     }
     
 }
