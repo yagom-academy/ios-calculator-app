@@ -11,23 +11,24 @@ struct Formula {
     var operands = LinkedQueue<Double>()
     var operators = LinkedQueue<Operator>()
     
+    //0으로 나눴을때 nan 표기
     mutating func result() -> Double {
-        var asd = 0.0
-        guard var lhs = operands.removeFirst()?.value else { return 0 }
+        guard var resultNumber = operands.removeFirst()?.value else { return .zero }
+        
         while operators.isEmpty != true {
-            guard let rhs = operands.removeFirst()?.value else { return 0 }
+            
+            guard let rhs = operands.removeFirst()?.value else { return .zero }
             let oper = operators.removeFirst()
-            asd = oper?.value?.calculate(lhs: lhs, rhs: rhs) ?? 0
-            lhs = asd
-            asd = lhs
+            
+            if oper?.value == Operator.divide && rhs == .zero {
+                return .nan
+            } else {
+                resultNumber = oper?.value?.calculate(lhs: resultNumber, rhs: rhs) ?? .zero
+            }
         }
-        return asd
-        //        guard let lhs = operands.removeFirst()?.value else { return 0 }
-        //        guard let rhs = operands.removeFirst()?.value else { return 0 }
-        //
-        //        let `operator` = operators.removeFirst()
-        //        guard let result = `operator`?.value?.calculate(lhs: lhs, rhs: rhs) else { return 0}
-        //
-        //        return result
+        return resultNumber
     }
+    
+    
+    
 }
