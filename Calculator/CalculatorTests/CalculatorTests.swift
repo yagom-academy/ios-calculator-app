@@ -64,4 +64,13 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertFalse(result)
     }
+    
+    func test_check_enque_deque_isEmpty() {
+        sut.enqueue(1)
+        sut.dequeue()
+        
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
+    }
 }
