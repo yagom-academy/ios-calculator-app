@@ -1,10 +1,10 @@
 import Foundation
 
 struct Formula {
-    public var operands: CalculatorItemQueue<Double> = .init()
-    public var operators: CalculatorItemQueue<Character> = .init()
+    public var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
+    public var operators: CalculatorItemQueue<Character> = CalculatorItemQueue<Character>()
     
-    public mutating func result() -> Double {
+    public mutating func result() throws -> Double {
         var result: Double = 0.0
         
         guard let initNumber = operands.dequeue() else { return 0.0 }
@@ -14,7 +14,12 @@ struct Formula {
             guard let numFromQueue: Double = operands.dequeue() else { return 0.0 }
             guard let opFromQueue: Character = operators.dequeue() else { return 0.0 }
             guard let op: Operator = Operator.init(rawValue: opFromQueue) else { return 0.0 }
-            result = op.calculate(lhs: result, rhs: numFromQueue)
+            
+            do {
+                try result = op.calculate(lhs: result, rhs: numFromQueue)
+            } catch _ as CalculatorError {
+                break
+            }
         }
         
         return result
