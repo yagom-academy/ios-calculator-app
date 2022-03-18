@@ -12,17 +12,17 @@ enum ExpressionParser {
     static func parse(form input: String) -> Formula {
         var fomula = Formula()
         let values = componentsByOperators(from: input)
-        
-        values.enumerated()
-            .filter { $0.offset % 2 == 0 }
-            .compactMap { Double($0.element) ?? .nan }
-            .forEach { fomula.operands.enqueue(with: $0) }
-        
-        values.enumerated()
-            .filter { $0.offset % 2 != 0 }
-            .compactMap { Operator(rawValue: Character($0.element)) }
-            .forEach { fomula.operators.enqueue(with: $0) }
-        
+
+        let a: [Double] = values.enumerated()
+                                .filter { $0.offset % 2 == 0 }
+                                .compactMap { Double($0.element) ?? .nan }
+
+        let b: [Operator] = values.enumerated()
+                                    .filter { $0.offset % 2 != 0 }
+                                    .compactMap { Operator(rawValue: Character($0.element)) }
+   
+        fomula.operands = CalculatorItemQueue(values: a)
+        fomula.operators = CalculatorItemQueue(values: b)
         return fomula
     }
     
