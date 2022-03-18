@@ -8,9 +8,8 @@
 import Foundation
 
 enum ExpressionParser {
-    case scroll
     
-    func parse(form input: String) -> Formula {
+    static func parse(form input: String) -> Formula {
         var fomula = Formula()
         let values = componentsByOperators(from: input)
         
@@ -27,7 +26,7 @@ enum ExpressionParser {
         return fomula
     }
     
-    func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
     
