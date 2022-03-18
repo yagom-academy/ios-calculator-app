@@ -88,8 +88,8 @@
 				9C99F34E27E0580100DE77CD /* Protocol */,
 				9C99F35727E05FE200DE77CD /* Queue */,
 				9C99F35427E05FB500DE77CD /* LinkedList */,
-				9CA2890627E363F400EB3DAA /* Formula.swift */,
 				9CA2890827E36BA300EB3DAA /* ExpressionParser.swift */,
+				9CA2890627E363F400EB3DAA /* Formula.swift */,
 				9CA6803627E37E01006C1533 /* Operator.swift */,
 			);
 			path = Model;

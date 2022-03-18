@@ -7,12 +7,18 @@
 
 import Foundation
 
-struct Formula<T: CalculateItem> {
-    let operands: CalculatorItemQueue<T>
-    let operators: CalculatorItemQueue<T>
+// 공식
+struct Formula {
+    // 피연산자
+    let operands: CalculatorItemQueue<Double>
+    // 연산자
+    let operators: CalculatorItemQueue<Operator>
     
 //    func result() -> Double {
-//        // 피연산자 연산자 가지고 로직구현
+//        
+//        let 피연산자 = operands.dequeue()
+//        let 연산자 = operators.dequeue()
+//        
 //        return
 //    }
 }
