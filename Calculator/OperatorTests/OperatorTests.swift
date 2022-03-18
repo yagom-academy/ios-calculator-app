@@ -17,34 +17,42 @@ class OperatorTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_calculate_add_결과반환하는지() {
+    func test_calculate_add_결과반환하는지() throws {
         let `operator` = Operator.add
         
-        let result = `operator`.calculate(lhs: 1.0, rhs: 1.0)
+        let result = try `operator`.calculate(lhs: 1.0, rhs: 1.0)
         
         XCTAssertEqual(result, 2.0)
     }
 
-    func test_calculate_subtract_결과반환하는지() {
+    func test_calculate_subtract_결과반환하는지() throws {
         let `operator` = Operator.subtract
         
-        let result = `operator`.calculate(lhs: 1.0, rhs: 1.0)
+        let result = try `operator`.calculate(lhs: 1.0, rhs: 1.0)
         
         XCTAssertEqual(result, 0)
     }
     
-    func test_calculate_devide_결과반환하는지() {
+    func test_calculate_devide_결과반환하는지() throws {
         let `operator` = Operator.devide
         
-        let result = `operator`.calculate(lhs: 1.0, rhs: 1.0)
+        let result = try `operator`.calculate(lhs: 1.0, rhs: 1.0)
         
         XCTAssertEqual(result, 1)
     }
     
-    func test_calculate_multiply_결과반환하는지() {
+    func test_calculate_devide_0으로나눌때_에러던지나() {
+        let `operator` = Operator.devide
+        
+        XCTAssertThrowsError(try `operator`.calculate(lhs: 1.0, rhs: 0)) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.devidedByZero)
+        }
+    }
+    
+    func test_calculate_multiply_결과반환하는지() throws {
         let `operator` = Operator.multiply
         
-        let result = `operator`.calculate(lhs: 1.0, rhs: 1.0)
+        let result = try `operator`.calculate(lhs: 1.0, rhs: 1.0)
         
         XCTAssertEqual(result, 1)
     }

@@ -28,9 +28,9 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
 
-    func test_result_Double반환하는지() {
+    func test_result_Double반환하는지() throws {
         let expectation = 3.0
-        let result = sut.result()
+        let result = try sut.result()
         
         XCTAssertEqual(result, expectation)
     }
