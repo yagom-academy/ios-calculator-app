@@ -8,6 +8,7 @@
 import Foundation
 
 struct Formula {
+  
   var operands: CalculatorItemQueue<Double> = .init()
   var operators: CalculatorItemQueue<Operator> = .init()
   
