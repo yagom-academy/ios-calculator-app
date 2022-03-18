@@ -19,17 +19,18 @@ class Formula_Test: XCTestCase {
         sut = nil
     }
     
-    func test_result() throws {
+    func test_result() {
+        sut.operands.enqueue(with: -10.0)
         sut.operands.enqueue(with: 2.0)
         sut.operands.enqueue(with: 3.0)
         sut.operands.enqueue(with: 4.0)
-        sut.operators.enqueue(with: Operator.multiply)
         sut.operators.enqueue(with: Operator.add)
+        sut.operators.enqueue(with: Operator.subtract)
+        sut.operators.enqueue(with: Operator.multiply)
         
-        let expectResult: Double = 10.0
         let result = sut.result()
         
-        XCTAssertEqual(result, expectResult)
+        XCTAssertEqual(result, -44.0)
     }
 
 }

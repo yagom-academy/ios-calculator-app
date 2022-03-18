@@ -17,11 +17,11 @@ class ExpressionParser_Test: XCTestCase {
     }
 
     func test_componentsByOperators() {
-        var formula = ExpressionParser.parse(form: "10 + 2 - 3 × 4")
+        var formula = ExpressionParser.parse(form: "-10 + +2 - -3 × 4")
         
         let result = formula.result()
         
-        XCTAssertEqual(result, 36.0)
+        XCTAssertEqual(result, -20.0)
     }
 
 }

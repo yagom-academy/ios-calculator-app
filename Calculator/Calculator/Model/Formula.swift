@@ -12,10 +12,8 @@ struct Formula {
     var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
-        var lhs = operands.dequeue() ?? 0.0
-        while operators.isEmpty == false {
-            let rhs = operands.dequeue() ?? 0.0
-            let oneOperator = operators.dequeue() ?? Operator.add
+        var lhs = operands.dequeue() ?? .nan
+        while let rhs = operands.dequeue(), let oneOperator = operators.dequeue() {
             lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
             }
         return lhs
