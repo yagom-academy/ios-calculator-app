@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol CalculateItem {
+    
+}
+
+extension Int: CalculateItem {
+    
+}
