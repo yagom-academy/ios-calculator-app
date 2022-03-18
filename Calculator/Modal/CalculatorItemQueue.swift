@@ -5,18 +5,27 @@
 //  Created by 우롱차 on 2022/03/15.
 //
 
+
+
 import Foundation
 
-class CalculatorItemQueue {
-    private var queue: [CalculateItem] = []
+class CalculatorItemQueue<T> {
+    private var queue: [T] = []
     
-    func enqueue(calculateItem: CalculateItem) {
-        queue.append(calculateItem)
+    func enqueue(_ item: T) {
+        queue.append(item)
     }
     
-    func dequeue() -> CalculateItem {
+    func dequeue() -> T? {
+        if self.queue.isEmpty {
+            return nil
+        }
         let returnValue = queue.remove(at: 0)
         return returnValue
+    }
+    
+    func isEmpty() -> Bool {
+        return queue.isEmpty
     }
 }
 
