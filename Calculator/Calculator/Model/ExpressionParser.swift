@@ -40,4 +40,18 @@ enum ExpressionParser {
                 String(double)
             }
     }
+    
+    private static func makeOperandsQueue(from input: String) -> CalculatorItemQueue<Double> {
+        var operands = CalculatorItemQueue<Double>()
+        
+        componentsByOperators(from: input)
+            .compactMap { string in
+                Double(string)
+            }
+            .forEach { operand in
+                operands.enqueue(operand)
+            }
+        
+        return operands
+    }
 }
