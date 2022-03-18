@@ -29,7 +29,7 @@ public struct CalculatorItemQueue<T>: CalculateItem {
         return calculateList.resetAll()
     }
     
-    public func countNode() -> Int {
+    public var countNode: Int {
         return calculateList.countNodes
     }
 }
