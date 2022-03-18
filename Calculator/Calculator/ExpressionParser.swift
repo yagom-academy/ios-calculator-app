@@ -16,9 +16,9 @@ extension String {
 enum ExpressionParser {
     
     private static func compomnentsByOperators(from input: String) -> [String] {
-        var value: [String] = []
-        value.append(input)
+        var value: [String] = [input]
         let operatorList = Operator.allCases
+        
         for i in operatorList {
             value = value.flatMap { $0.split(with: i.rawValue) }
         }
