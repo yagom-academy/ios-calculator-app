@@ -1,8 +1,5 @@
-//
-//  Calculator - AppDelegate.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
+//  Calculator - ViewController.swift
+//  Created by quokka.
 
 import UIKit
 
