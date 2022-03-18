@@ -9,8 +9,6 @@ import Foundation
 
 protocol CalculateItem {}
 
-extension Double: CalculateItem {}
-
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack: [Element] = []
     private var outputStack: [Element] = []
