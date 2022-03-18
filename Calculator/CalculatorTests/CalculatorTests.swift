@@ -46,4 +46,28 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(firstEnqueue, dequeResult)
         XCTAssertEqual(secondEnqueue, dequeResult2)
     }
+    
+    func test_ExpressionParser_calculate() {
+        //given
+        let testString = "3 + 2 + 1 * 10 - 5"
+        
+        //when
+        let formula = ExpressionParser.parse(from: testString)
+        
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 55)
+    }
+    
+    func test_ExpressionParser_calculate2() {
+        //given
+        let testString = "3 + 2 + 1 * 10 / 5"
+        
+        //when
+        let formula = ExpressionParser.parse(from: testString)
+        
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 12)
+    }
 }
