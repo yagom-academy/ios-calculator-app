@@ -25,7 +25,7 @@ enum ExpressionParser {
             }
     }
     
-    private static func componentsByOperands(from input: String) -> [String] {
+    private static func componentsByOperands(from input: String) -> [Operator] {
         let operatorTypes = Operator
             .allCases
             .map { type in
@@ -36,8 +36,8 @@ enum ExpressionParser {
             .filter { string in
                 operatorTypes.contains(string)
             }
-            .map { double in
-                String(double)
+            .compactMap { string in
+                Operator(rawValue: Character(string))
             }
     }
     
@@ -59,9 +59,6 @@ enum ExpressionParser {
         var operators = CalculatorItemQueue<Operator>()
         
         componentsByOperands(from: input)
-            .compactMap { string in
-                Operator(rawValue: Character(string))
-            }
             .forEach { `operator` in
                 operators.enqueue(`operator`)
             }
