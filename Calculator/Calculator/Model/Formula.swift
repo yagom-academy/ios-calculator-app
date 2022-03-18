@@ -6,20 +6,20 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    let operands: CalculatorItemQueue<Double>
+    let operators: CalculatorItemQueue<Operator>
     
     func result() throws -> Double {
         var formulaResult = operands.dequeue() ?? 0
         
         while operands.isEmpty == false {
             guard let number = operands.dequeue(),
-                  let op = operators.dequeue()
+                  let `operator` = operators.dequeue()
             else {
                 throw CalculateError.invalidFormula
             }
             
-            formulaResult = try op.calculate(lhs: formulaResult, rhs: number)
+            formulaResult = try `operator`.calculate(lhs: formulaResult, rhs: number)
         }
         
         return formulaResult
