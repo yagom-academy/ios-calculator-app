@@ -20,13 +20,13 @@ enum ExpressionParser {
         
         let doubleTypeArray = operandArray.map { Double($0) ?? 0 }
         for element in doubleTypeArray {
-            formula.operands?.enqueue(element)
+            formula.operands.enqueue(element)
         }
         
         let characterTypeArray = operatorArray.map { Character($0) }
         let operatorTypeArray = characterTypeArray.map { Operator(rawValue: $0) ?? Operator.subtract }
         for element in operatorTypeArray {
-            formula.operators?.enqueue(element)
+            formula.operators.enqueue(element)
         }
         return formula
     }
