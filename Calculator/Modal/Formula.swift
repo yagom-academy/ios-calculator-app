@@ -8,21 +8,21 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue<String>
-    var operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue
+    var operators: CalculatorItemQueue
     
-    func result() -> Double {
+    func result() -> Double? {
         
-        var result = String.stringToDouble(operands.dequeue())
-        
+        var result = operands.dequeue() as? Double
+       
         while (self.operands.isEmpty() == false) || (self.operators.isEmpty() == false){
-            guard let operands = operands.dequeue(), let operators = operators.dequeue() else {
-               return 0
+            guard let operators = operators.dequeue() as? Operator,
+                 let doubleOperands = operands.dequeue() as? Double
+                  else {
+                return nil
             }
-            let doubleOperands = String.stringToDouble(operands)
             result = operators.calculate(lhs: result, rhs: doubleOperands)
         }
         return result
     }
-    
-    }
+}

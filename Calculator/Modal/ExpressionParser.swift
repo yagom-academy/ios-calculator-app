@@ -14,21 +14,21 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         
         let splitStringArray = componentsByOperators(from: input)
-        let operands = CalculatorItemQueue<String>()
-        let operators = CalculatorItemQueue<Operator>()
+        let operands = CalculatorItemQueue()
+        let operators = CalculatorItemQueue()
         
         for item in splitStringArray {
-            if let _ = Double(item) {
-                operands.enqueue(item)
+            if let doubleItem = Double(item) {
+                operands.enqueue(calculateItem: doubleItem)
             } else if let operatorItem = Operator(rawValue: Character(item)) {
-                operators.enqueue(operatorItem)
+                operators.enqueue(calculateItem: operatorItem)
             }
         }
-        
+    
         return Formula(operands: operands, operators: operators)
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+            return input.split(with: " ")
     }
 }
