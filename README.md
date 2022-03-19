@@ -11,7 +11,12 @@
     + [고민했던 것](#STEP-1-고민했던-것들)
     + [배운 개념](#STEP-1-배운-개념)
     + [PR 후 개선사항](#STEP-1-PR-후-개선사항)
-
+- [STEP 2](#[STEP-2]-계산-타입-및-주변-타입-구현)
+    + [UML](#STEP-2-UML)
+    + [기능 구현](#STEP-2-기능-구현)
+    + [고민했던 것](#STEP-2-고민했던-것들)
+    + [배운 개념](#STEP-2-배운-개념)
+    + [PR 후 개선사항](#STEP-2-PR-후-개선사항)
 
 ## 계산기 I
 
@@ -77,4 +82,44 @@
 - Queue의 구현
 
 ## STEP 1 PR 후 개선사항
+___
+
+## [STEP 2] 계산 타입 및 주변 타입 구현
+- TDD를 기반으로 수행합니다.
+- 프로젝트에 단위 테스트를 위한 타깃을 추가합니다.
+- 계산기가 입력받은 숫자와 연산자는 연산큐에 쌓입니다.
+
+## STEP 2 UML
+![](https://s3.ap-northeast-2.amazonaws.com/media.yagom-academy.kr/resources/6131c8fa2e11413823f8dd7f/6189d7537c82755a83c68a7d.jpg)
+
+## STEP 2 기능 구현
+- ```CalculatorError```
+    - ```cannotDivideByZero```: 0으로 나눴을 경우 throw할 에러 지정
+- ```CalculateItem```
+    - ```extension String```: ```split``` 함수 재정의를 위한 확장
+- ```Operator```
+    - ```calculate```: 연산자 타입에 맞는 연산 결과를 반환하는 함수
+- ```ExpressionParser```
+    - ```parse```: 입력으로부터 연산자와 피연산자를 분리해 ```Formula``` 타입을 반환하는 함수
+    - ```componentsByOperators```: 입력으로부터 연산자와 피연산자의 배열 형태로 만들어주는 함수
+- ```Formula```
+    - ```operands```: 피연산자가 담긴 ```CalculatorItemQueue```
+    - ```operators```: 연산자가 담긴 ```CalculatorItemQueue```
+    - ```result```: 연산의 결과를 반환하는 함수
+- ```OperatorTests```
+- ```FormulaTests```
+
+
+## STEP 2 고민했던 것들
+1. 설계된 타입과 메서드의 역할과 기능에 대해 고민했습니다.
+2. 테스트 케이스의 설계에 대해 고민했습니다.
+3. 0으로 나누는 상황의 에러 처리에 대해 고민했습니다.
+4. 고차함수가 올바르게 사용되었는지 고민했습니다.
+
+## STEP 2 배운 개념
+- TDD
+- UML을 기반으로 한 코드 구현
+- 숫자와 연산자 입력에 큐 활용
+
+## STEP 2 PR 후 개선사항
 
