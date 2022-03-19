@@ -67,6 +67,8 @@ class CalculatorTests: XCTestCase {
     
     func test_check_enque_deque_isEmpty() {
         sut.enqueue(1)
+        sut.enqueue(2)
+        sut.dequeue()
         sut.dequeue()
         
         let result = sut.isEmpty
