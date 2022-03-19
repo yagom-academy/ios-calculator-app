@@ -10,7 +10,7 @@ struct CalculatorItemQueue<T> {
     }
     
     mutating func isEmpty() -> Bool {
-        return linkedList.isEmpty()
+        return linkedList.isEmpty
     }
     
     mutating func enqueue(_ data: T) {

@@ -4,10 +4,10 @@ class LinkedList<T> {
     var head: LinkedListNode<T>?
     var tail: LinkedListNode<T>?
     var count: Int = 0
-    
-    func isEmpty() -> Bool {
-        return self.head == nil
-    } //연산프로퍼티
+    var isEmpty: Bool {
+        self.head == nil
+    }
+
     
     func addNode(data: T) {
         if head == nil {
