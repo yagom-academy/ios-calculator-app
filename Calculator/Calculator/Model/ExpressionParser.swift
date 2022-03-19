@@ -22,8 +22,7 @@ enum ExpressionParser {
             }
         }
         
-        let calculator = Formula(operands: values, operators: oper)
-        return calculator
+        return Formula(operands: values, operators: oper)
     }
     
     private func componentsByOperators(from input: String) -> [String] {
