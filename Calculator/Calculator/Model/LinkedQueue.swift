@@ -8,6 +8,7 @@
 import Foundation
 
 class Node<Element: CalculateItem> {
+    
     var value: Element
     var next: Node<Element>?
     
@@ -17,6 +18,7 @@ class Node<Element: CalculateItem> {
 }
 
 struct LinkedQueue<Element: CalculateItem> {
+    
     private var head: Node<Element>?
     private var tail: Node<Element>?
     

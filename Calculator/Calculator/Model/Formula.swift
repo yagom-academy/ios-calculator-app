@@ -8,6 +8,7 @@
 import Foundation
 
 struct Formula {
+    
     var operands = LinkedQueue<Double>()
     var operators = LinkedQueue<Operator>()
     

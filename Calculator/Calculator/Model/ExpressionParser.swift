@@ -8,7 +8,9 @@
 import Foundation
 
 enum ExpressionParser {
+    
     static func parse(from input: String) -> Formula {
+        
         let componentsString = componentsByOperators(from: input)
         var values = LinkedQueue<Double>()
         var oper = LinkedQueue<Operator>()

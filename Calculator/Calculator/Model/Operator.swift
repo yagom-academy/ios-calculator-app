@@ -8,6 +8,7 @@
 import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
+    
     case add = "+"
     case subtract = "-"
     case divide = "/"
@@ -20,7 +21,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return rhs == .zero ? .nan : divide(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -35,7 +36,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        return lhs / rhs
+        return rhs == .zero ? .nan : lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
