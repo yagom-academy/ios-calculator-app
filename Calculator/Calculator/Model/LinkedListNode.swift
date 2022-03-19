@@ -8,5 +8,4 @@ class LinkedListNode<T> {
         self.data = data
         self.next = next
     }
-    
 }

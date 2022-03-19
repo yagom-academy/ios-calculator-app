@@ -2,12 +2,12 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    private var sut: CalculatorItemQueue<Double>!
+    private var sut: CalculatorItemQueue<Int>!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Double>()
+        sut = CalculatorItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
@@ -98,6 +98,17 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result?.data, 1)
+    }
+    
 
     
 }

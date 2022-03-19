@@ -7,7 +7,7 @@ class LinkedList<T> {
     
     func isEmpty() -> Bool {
         return self.head == nil
-    }
+    } //연산프로퍼티
     
     func addNode(data: T) {
         if head == nil {
@@ -23,19 +23,24 @@ class LinkedList<T> {
         return
     }
     
-    func removeFirstNode() {
-        guard head != nil else {
-            count = 0
-            return
+    func removeFirstNode() -> LinkedListNode<T>? {
+        if head == nil {
+            clear()
+            return nil
         }
         if head?.next == nil {
+            clear()
             count = 0
-            head = nil
-            tail = nil
-            return
+            return head
         }
+        let node = head
         head = head?.next
         count -= 1
-        return 
+        return node
+    }
+    
+    func clear() {
+        head = nil
+        tail = nil
     }
 }

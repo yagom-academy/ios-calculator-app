@@ -1,7 +1,6 @@
 import Foundation
 
 protocol CalculateItem {
-    
 }
 
 struct CalculatorItemQueue<T> {
@@ -19,8 +18,7 @@ struct CalculatorItemQueue<T> {
         return
     }
     
-    mutating func dequeue() {
+    mutating func dequeue() -> LinkedListNode<T>? {
         return linkedList.removeFirstNode()
     }
-    
 }
