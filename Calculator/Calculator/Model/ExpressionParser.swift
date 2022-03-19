@@ -22,7 +22,6 @@ enum ExpressionParser {
                 oper.append(newNode: convertOper)
             }
         }
-        
         return Formula(operands: values, operators: oper)
     }
     
