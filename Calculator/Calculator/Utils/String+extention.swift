@@ -7,8 +7,10 @@
 
 import Foundation
 
+// 무언가를 기준으로 쪼개서 스트링 배열으로
 extension String {
     func split(with target: Character) -> [String] {
-        return Array(arrayLiteral: target).map{ String($0) }
+        return split(separator: target).map{ String($0) }
     }
 }
+
