@@ -27,8 +27,8 @@ class FomulaTests: XCTestCase {
         sut.operands.append(newNode: 2)
         sut.operands.append(newNode: 4)
         
-        sut.operators.append(newNode: Operator(rawValue: Character("+")))
-        sut.operators.append(newNode: Operator(rawValue: Character("-")))
+        sut.operators.append(newNode: .add)
+        sut.operators.append(newNode: .subtract)
         
         XCTAssertEqual(sut.result(), 1)
     }

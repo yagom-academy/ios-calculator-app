@@ -14,10 +14,9 @@ enum ExpressionParser {
         var oper = LinkedQueue<Operator>()
         
         componentsString.forEach{
-            if Double($0) != nil {
-                values.append(newNode: Double($0))
-            } else {
-                let convertOper = Operator(rawValue: Character($0))
+            if let number = Double($0) {
+                values.append(newNode: number)
+            } else if let convertOper = Operator(rawValue: Character($0)) {
                 oper.append(newNode: convertOper)
             }
         }
