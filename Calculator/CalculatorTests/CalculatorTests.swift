@@ -10,7 +10,7 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
         
-    func test_deque_CalculatorItemQueue() {
+    func test_deque동작확인_3_2_입력_3_출력() {
         //given
         let calculatorItemQueue = CalculatorItemQueue()
         let firstEnqueue: Double = 3
@@ -25,7 +25,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(firstEnqueue, dequeResult)
     }
     
-    func test_deque_twice_CalculatorItemQueue() {
+    func test_deque동작확인_3_2_입력_3_2_출력() {
         //given
         let calculatorItemQueue = CalculatorItemQueue()
         let firstEnqueue:Double = 3
@@ -41,7 +41,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(secondEnqueue, dequeResult2)
     }
     
-    func test_ExpressionParser_calculate() {
+    func test_ExpressionParser동작확인_55출력() {
         //given
         let testString = "3 + 2 + 1 * 10 - 5"
         
@@ -53,7 +53,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 55)
     }
     
-    func test_ExpressionParser_calculate2() {
+    func test_ExpressionParser동작확인_12출력() {
         //given
         let testString = "3 + 2 + 1 * 10 / 5"
         
