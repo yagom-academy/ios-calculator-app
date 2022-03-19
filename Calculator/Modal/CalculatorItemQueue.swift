@@ -9,17 +9,14 @@
 
 import Foundation
 
-class CalculatorItemQueue<T> {
-    private var queue: [T] = []
+class CalculatorItemQueue {
+    private var queue: [CalculateItem] = []
     
-    func enqueue(_ item: T) {
-        queue.append(item)
+    func enqueue(calculateItem: CalculateItem) {
+        queue.append(calculateItem)
     }
     
-    func dequeue() -> T? {
-        if self.queue.isEmpty {
-            return nil
-        }
+    func dequeue() -> CalculateItem {
         let returnValue = queue.remove(at: 0)
         return returnValue
     }
