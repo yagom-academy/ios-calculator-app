@@ -1,23 +1,41 @@
 import Foundation
 
-struct LinkedList<T> {
-    private var head: LinkedListNode<T>?//첫번째노드를가리킬head
-    private var tail: LinkedListNode<T>?//마지막노드를가리킬tail
+class LinkedList<T> {
+    var head: LinkedListNode<T>?
+    var tail: LinkedListNode<T>?
+    var count: Int = 0
     
-    mutating func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return self.head == nil
     }
     
-    mutating func addNode(data: T) {
-        if head == nil || tail == nil {
-            head = LinkedListNode<T>()
+    func addNode(data: T) {
+        if head == nil {
+            head = LinkedListNode<T>(data: data)
             tail = head
+            count = 1
             return
         }
-        let newNode = LinkedListNode<T>()
+        let newNode = LinkedListNode<T>(data: data)
         tail?.next = newNode
-        newNode.prev = tail
         tail = newNode
+        count += 1
         return
+    }
+    
+    func removeFirstNode() {
+        guard head != nil else {
+            count = 0
+            return
+        }
+        if head?.next == nil {
+            count = 0
+            head = nil
+            tail = nil
+            return
+        }
+        head = head?.next
+        count -= 1
+        return 
     }
 }
