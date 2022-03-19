@@ -3,7 +3,7 @@ import Foundation
 protocol CalculateItem {
 }
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     var linkedList = LinkedList<T>()
     func countNumber() -> Int {
         return linkedList.count
