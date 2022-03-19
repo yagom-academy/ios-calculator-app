@@ -9,16 +9,29 @@ import Foundation
 
 enum ExpressionParser {
     public func parse(from input: String) -> Formula {
-        componentsByOperators(from: input)
+        var formula: Formula = Formula()
+        let elementArray = componentsByOperators(from: input)
+        var operandArray: [String] = []
+        var operatorArray: [String] = []
+        
+        for index in 0..<elementArray.count {
+            (index % 2) == 0 ? operandArray.append(elementArray[index]) : operatorArray.append(elementArray[index])
+        }
+        
+        let doubleTypeArray = operandArray.map { Double($0) ?? 0 }
+        for element in doubleTypeArray {
+            formula.operands?.enqueue(element)
+        }
+        
+        let characterTypeArray = operatorArray.map { Character($0) }
+        let operatorTypeArray = characterTypeArray.map { Operator(rawValue: $0) ?? Operator.subtract }
+        for element in operatorTypeArray {
+            formula.operators?.enqueue(element)
+        }
+        return formula
     }
     
     private func componentsByOperators(from input: String) -> [String] {
-        let stringArray = input.split(with: " ")
-        var operandsArray:[String] = []
-        var operatorsArray: [String] = []
-        for index in 0..<stringArray.count {
-            (index % 2) != 0 ? operandsArray.append(stringArray[index]) : operatorsArray.append(stringArray[index])
-        }
-        return operandsArray
+        return input.split(with: " ")
     }
 }
