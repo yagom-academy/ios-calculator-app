@@ -32,6 +32,8 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_LinkedList가_비었을때_isEmpty가_true를_리턴하는가() {
+        //given
+        
         //when
         let result = sut.isEmpty()
         
@@ -50,7 +52,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_CalculatorItemQueue에_enqueue메서드를_한번호출했을때_count가1을_리턴하는가() {
+    func test_CalculatorItemQueue에_enqueue메서드를_한번호출했을때_countNumber가1을_리턴하는가() {
         //given
         sut.enqueue(1)
         
@@ -61,7 +63,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_CalculatorItemQueue에_enqueue메서드를_세번호출했을때_count가3을_리턴하는가() {
+    func test_CalculatorItemQueue에_enqueue메서드를_세번호출했을때_countNumber가3을_리턴하는가() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -74,7 +76,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_enqueue와dequeue를호출했을때_count가0을_반환하는가() {
+    func test_enqueue와dequeue를호출했을때_countNumber가0을_리턴하는가() {
         //given
         sut.enqueue(2)
         sut.dequeue()
@@ -86,7 +88,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
-    func test_CalculatorItemQueue에_enqueue를두번dequeue를한번호출했을때_count가1을_리턴하는가() {
+    func test_CalculatorItemQueue에_enqueue를두번dequeue를한번호출했을때_countNumber가1을_리턴하는가() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -99,16 +101,29 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_() {
+    func test_CalculatorItemQueue의_enqueue에123을넣었을때_dequeue가1을_리턴하는가() {
+        //given
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         
+        //when
         let result = sut.dequeue()
         
+        //then
         XCTAssertEqual(result?.data, 1)
     }
     
-
-    
+    func test_CalculatorItemQueue의_enqueue에3과5를넣고_dequeue를두번했을때_nil을_리턴하는가() {
+        //given
+        sut.enqueue(3)
+        sut.enqueue(5)
+        sut.dequeue()
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result?.data, nil)
+    }
 }

@@ -8,7 +8,6 @@ class LinkedList<T> {
         self.head == nil
     }
 
-    
     func addNode(data: T) {
         if head == nil {
             head = LinkedListNode<T>(data: data)
