@@ -7,6 +7,9 @@
 
 import Foundation
 
+extension Double: CalculateItem {
+    
+}
 extension String {
     func split(with target: Character) -> [String] {
         let splitString = self.split(separator: target)
@@ -21,6 +24,4 @@ extension String {
                 
         return Double(string) ?? 0
     }
-
-    
 }
