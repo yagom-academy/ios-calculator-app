@@ -10,23 +10,23 @@ import Foundation
 enum ExpressionParser {
     public static func parse(from input: String) -> Formula {
         var formula: Formula = Formula()
-        let elementArray = componentsByOperators(from: input)
-        var operandArray: [String] = []
-        var operatorArray: [String] = []
+        let whiteSpaceDeletedString = componentsByOperators(from: input)
+        var stringOperands: [String] = []
+        var stringOperators: [String] = []
         
-        for index in 0..<elementArray.count {
-            (index % 2) == 0 ? operandArray.append(elementArray[index]) : operatorArray.append(elementArray[index])
+        for index in 0..<whiteSpaceDeletedString.count {
+            (index % 2) == 0 ? stringOperands.append(whiteSpaceDeletedString[index]) : stringOperators.append(whiteSpaceDeletedString[index])
         }
         
-        let doubleTypeArray = operandArray.map { Double($0) ?? 0 }
-        for element in doubleTypeArray {
-            formula.operands.enqueue(element)
+        let operands = stringOperands.compactMap { Double($0) }
+        for operand in operands {
+            formula.operands.enqueue(operand)
         }
         
-        let characterTypeArray = operatorArray.map { Character($0) }
-        let operatorTypeArray = characterTypeArray.map { Operator(rawValue: $0) ?? Operator.subtract }
-        for element in operatorTypeArray {
-            formula.operators.enqueue(element)
+        let characterOperators = stringOperators.map { Character($0) }
+        let operators = characterOperators.compactMap { Operator(rawValue: $0) }
+        for someOperator in operators {
+            formula.operators.enqueue(someOperator)
         }
         return formula
     }
