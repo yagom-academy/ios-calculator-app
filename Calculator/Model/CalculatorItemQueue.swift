@@ -7,8 +7,8 @@
 import Foundation
 
 struct CalculatorItemQueue<T> {
-    private var list = [T?]()
-    private var head: Int = 0
+    var list = [T?]()
+    var head: Int = 0
     
     public var isEmpty: Bool {
         return list.isEmpty
@@ -18,8 +18,8 @@ struct CalculatorItemQueue<T> {
         return list.count
     }
     
-    public mutating func enqueue(_ element: T) {
-        return list.append(element)
+    public mutating func enqueue(value: T) {
+        return list.append(value)
     }
     
     public mutating func dequeue() -> T? {
@@ -28,7 +28,6 @@ struct CalculatorItemQueue<T> {
                 list.removeFirst(head)
                 head = 0
             }
-            
             list[head] = nil
             return list[head]
             head += 1
