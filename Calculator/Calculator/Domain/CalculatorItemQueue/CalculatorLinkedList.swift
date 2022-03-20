@@ -11,7 +11,7 @@ struct CalculatorLinkedList<Element: CalculateItem> {
   
   private(set) var front: CalculatorNode<Element>?
   private(set) var rear: CalculatorNode<Element>?
-  private(set) var count = Int.zero
+  private(set) var count: Int = .zero
   
   var first: Element? {
     return self.front?.data
@@ -51,7 +51,7 @@ struct CalculatorLinkedList<Element: CalculateItem> {
   }
 
   func allElements() -> [Element] {
-    var result: [Element] = []
+    var result = [Element]()
     var current = self.front
     while let node = current {
       result.append(node.data)
