@@ -38,5 +38,15 @@ class ExpressionParserTests: XCTestCase {
         // then
         XCTAssertEqual(result, -9.0)
     }
+    
+    func test_parse에_1_플러스_2_나누기_0_입력_parse의_result_return_isNaN() {
+        // given
+
+        // when
+        let result = ExpressionParser.parse(from: "1 + 2 ÷ 0").result().isNaN
+
+        // then
+        XCTAssertTrue(result)
+    }
 
 }
