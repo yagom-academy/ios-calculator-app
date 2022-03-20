@@ -30,7 +30,8 @@
 [![xcode](https://img.shields.io/badge/Xcode-13.0-blue)]()
 
 ## UML
-![](https://i.imgur.com/DVuMu9l.png)
+![](https://i.imgur.com/T30a44z.png)
+
 
 
 ## [STEP 1]
@@ -50,6 +51,49 @@ Double Stack과 Array 중 고민하던 중, 하나의 Array로 더 간단히 구
 - Linked List
 - Unit Test
 - TDD
+
+---
+
+## [STEP 2]
+### 고민한점
+#### 로직을 어떻게 할까?
+로직을 고민하는게 이번 스텝에서 가장 오래걸렸다.🥲 내가 생각한 로직은 아래와 같다.
+1) String으로 받은 계산식을 `split(with:)`와 `componentsByOperators(from input:)` 메서드를 통해 공백으로 숫자와 배열로 구분해 [String]으로 리턴한다.
+(이 과정에서 연산자와 숫자의 부호를 구분한다)
+ex) 1 + 2 + 3 + -2 * 2 -> ["1", "+", "2", "+", "3", "+", "-2", "*", "2"]
+2) parse메서드에서 1의 결과를 받아 operands와 operators를 나눠 formula 타입으로 리턴한다.
+ex) formula의 operands: [Double] = [1.0, 2.0, 3.0, -2.0, 2.0]
+    formula의 operators: [Operators] = [+, +, +, -, *]
+3) result메서드에서 operands와 operator로 연산한 결과를 Double타입으로 리턴한다.
+ex) result() -> 8.0
+#### String을 Character타입인 Operator로 어떻게 변환할까?
+처음에는 String의 배열이었던 stringOperands를 바로 Operator로 캐스팅하고 싶었지만, 실패했다. 그래서 우선 map을 이용해 stringOperands를 Character 타입으로 변환한뒤, 다시 characterOperators를 Operator 타입으로 변환했다.
+```swift=
+let characterOperators = stringOperators.map { Character($0) }
+let operators = characterOperators.compactMap { Operator(rawValue: $0) }
+```
+#### split처리한 [String]에서 피연산자와 연산자를 어떻게 구분할까?
+단순하게 생각해서, 예를 들어 식이 [1 + 2 + 3 + 4]라면, index로 봤을때 무조건 홀수는 연산자, 그 외에 0 및 짝수는 피연산자라고 생각했다. 그래서 우선은 공백을 기준으로 모든 요소를 분리하고 (["1", "+", "2", "+, "3", "+", "4"]), for 문을 돌면서 삼항연산자를 사용해 index가 짝수일 경우 피연산자의 배열에, 아닐 경우는 연산자의 배열에 append하도록 구현했다.
+```swift=
+for index in 0..<whiteSpaceDeletedString.count {
+    (index % 2) == 0 ? stringOperands.append(whiteSpaceDeletedString[index]) : stringOperators.append(whiteSpaceDeletedString[index])
+}
+```
+#### componentsByOperator는 왜 필요할까?
+UML을 통해 String을 extension하여 [String]의 타입을 반환하는 split(with target: Character) -> [String] 메서드를 구현해야함을 확인했다. 그리고 componentsByOperators 메서드의 의미상, componentsByOperators에서는 operator를 기준으로 구분된 operands의 배열을 리턴해야하는게 아닌가라고 처음에 생각했다. 하지만 operator와 operands는 한 메서드 안에서 구분해주는 것이 효율적이라는 생각이 들었다. 그래서 componentsByOperators에서는 공백이 제거된 [String]을 리턴하도록 했고, 그 리턴값을 parse메서드에서 받아 operands와 operators는 parse에서 구분하여 formula 타입을 리턴하도록 했다.
+근데 이렇게 하고 보니 componentsByOperator라는 메서드명에 맞지 않게 구현을 한게 아닌가라는 생각을 하게 되었다.. 
+
+### 배운개념
+#### Access Control
+#### compactMap
+#### split vs componentsBy
+
+---
+
+## [STEP 3]
+### 고민한점
+### 배운개념
+
 
 ---
 ## 트러블슈팅
