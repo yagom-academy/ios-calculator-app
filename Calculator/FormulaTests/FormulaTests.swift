@@ -13,12 +13,13 @@ class FormulaTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+
+        let operandsQueue = CalculatorItemQueue()
+        let operatorQueue = CalculatorItemQueue()
         
-        let doubleList = LinkedList(head: Node(data: 1.0))
-        doubleList.append(node: Node(data: 2.0))
-        let operatorList = LinkedList(head: Node(data: Operator.add))
-        let operandsQueue = CalculatorItemQueue(linkedList: doubleList)
-        let operatorQueue = CalculatorItemQueue(linkedList: operatorList)
+        operandsQueue.enqueue(Node(data: 1.0))
+        operandsQueue.enqueue(Node(data: 2.0))
+        operatorQueue.enqueue(Node(data: Operator.add))
         
         sut = Formula(operands: operandsQueue, operators: operatorQueue)
     }

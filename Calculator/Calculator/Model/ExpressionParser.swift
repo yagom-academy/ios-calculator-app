@@ -11,13 +11,13 @@ fileprivate enum Separator {
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operands = LinkedList<Double>()
-        let operators = LinkedList<Operator>()
+        let operandQueue = CalculatorItemQueue()
+        let operatorQueue = CalculatorItemQueue()
         
         componentsByOperators(from: input)
             .compactMap { Double($0) }
             .map { Node(data: $0) }
-            .forEach { operands.append(node: $0) }
+            .forEach { operandQueue.enqueue($0) }
         
         var lastValue: Character = Separator.underScore
         
@@ -32,10 +32,7 @@ enum ExpressionParser {
                 return nil
             }.compactMap { $0 }
             .map { Node(data: $0) }
-            .forEach { operators.append(node: $0) }
-        
-        let operandQueue = CalculatorItemQueue(linkedList: operands)
-        let operatorQueue = CalculatorItemQueue(linkedList: operators)
+            .forEach { operatorQueue.enqueue($0) }
         
         return Formula(operands: operandQueue, operators: operatorQueue)
     }

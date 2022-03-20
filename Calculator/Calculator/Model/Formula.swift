@@ -6,15 +6,19 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue
+    var operators: CalculatorItemQueue
     
     func result() throws -> Double {
-        var result = operands.dequeue() ?? 0
+        var result = operands.dequeue() as? Double ?? 0.0
         
         try operators
             .forEach {
-                result = try $0.data.calculate(lhs: result, rhs: operands.dequeue() ?? 0)
+                guard let `operator` = $0.data as? Operator,
+                let rhs = operands.dequeue() as? Double else {
+                    return
+                }
+                result = try `operator`.calculate(lhs: result, rhs: rhs)
             }
         
         return result

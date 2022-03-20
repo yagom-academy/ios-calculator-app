@@ -5,22 +5,18 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private let linkedList: LinkedList<T>
-    
-    init(linkedList: LinkedList<T>) {
-        self.linkedList = linkedList
-    }
+struct CalculatorItemQueue {
+    private let linkedList = LinkedList<CalculateItem>()
     
     func isEmpty() -> Bool {
         return linkedList.isEmpty()
     }
     
-    func enqueue(_ node: Node<T>) {
+    func enqueue(_ node: Node<CalculateItem>) {
         linkedList.append(node: node)
     }
     
-    func dequeue() -> T? {
+    func dequeue() -> CalculateItem? {
         linkedList.removeFirst()
     }
     
@@ -30,15 +26,15 @@ struct CalculatorItemQueue<T: CalculateItem> {
 }
 
 extension CalculatorItemQueue: Sequence {
-    func makeIterator() -> QueueIterator<T> {
+    func makeIterator() -> QueueIterator {
         return QueueIterator(current: linkedList.head)
     }
 }
 
-struct QueueIterator<T>: IteratorProtocol {
-    var current: Node<T>?
+struct QueueIterator: IteratorProtocol {
+    var current: Node<CalculateItem>?
     
-    mutating func next() -> Node<T>? {
+    mutating func next() -> Node<CalculateItem>? {
         if let node = current {
             current = node.next
             return node
