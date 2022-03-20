@@ -10,19 +10,22 @@ import Foundation
 struct Formula {
     public var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
     public var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
-    private var temporaryResult: Double = Double()
     
     public mutating func result() -> Double? {
-        guard let numberToCalculate = operands.dequeue() else {
-            return nil
-        }
-        
-        guard let operatorToCalculate = operators.dequeue() else {
+        guard var temporaryResult = operands.dequeue() else {
             return nil
         }
         
         for _ in 0..<operators.count {
-            temporaryResult = operatorToCalculate.calculate(lhs: numberToCalculate, rhs: numberToCalculate)
+            guard let rhs = operands.dequeue() else {
+                return nil
+            }
+            
+            guard let operatorToCalculate = operators.dequeue() else {
+                return nil
+            }
+            
+            temporaryResult = operatorToCalculate.calculate(lhs: temporaryResult, rhs: rhs)
         }
         return temporaryResult
     }

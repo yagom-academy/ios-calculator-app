@@ -21,8 +21,32 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func test_1에2를더하면_3을리턴한다() {
-        let formula = Formula()
+    func test_1더하기2더하기3은_6을리턴한다() {
+        // given
+        let input = "1 + 2 + 3"
+        var formula = ExpressionParser.parse(from: input)
+        // when
+        let result = formula.result()
+        // then
+        XCTAssertEqual(result, 6.0)
     }
-
+    
+    func test_1더하기2곱하기3은_9를리턴한다() {
+        // given
+        let input = "1 + 2 * 3"
+        var formula = ExpressionParser.parse(from: input)
+        // when
+        let result = formula.result()
+        // then
+        XCTAssertEqual(result, 9.0)
+    }
+    func test_4더하기2나누기3은_1콤마5를리턴한다() {
+        // given
+        let input = "4 + 2 / 4"
+        var formula = ExpressionParser.parse(from: input)
+        // when
+        let result = formula.result()
+        // then
+        XCTAssertEqual(result, 1.5)
+    }
 }
