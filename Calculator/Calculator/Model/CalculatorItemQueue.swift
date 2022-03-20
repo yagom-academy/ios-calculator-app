@@ -20,7 +20,7 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     }
     
     var first: Element? {
-        return inputStack.isEmpty ? outputStack.last : inputStack.first
+        return outputStack.isEmpty ? inputStack.first : outputStack.last
     }
     
     var last: Element? {
@@ -45,6 +45,3 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     }
 }
 
-protocol CalculatorItem { }
-
-extension Double: CalculatorItem { }
