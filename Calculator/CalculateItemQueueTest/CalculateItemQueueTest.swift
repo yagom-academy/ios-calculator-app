@@ -1,9 +1,6 @@
-//
 //  CalculateItemQueue.swift
 //  CalculateItemQueue
-//
-//  Created by LIMGAUI on 2022/03/17.
-//
+//  Created by LIMGAUI on 2022/03/17
 
 import XCTest
 @testable import Calculator
