@@ -15,24 +15,31 @@ enum ExpressionParser {
         let operatorQueue = CalculatorItemQueue<Operator>()
         
         componentsByOperators(from: input)
-            .compactMap { Double($0) }
-            .map { Node(data: $0) }
-            .forEach { operandQueue.enqueue($0) }
+            .forEach {
+                guard let operand = Double($0) else {
+                    return
+                }
+                operandQueue.enqueue(Node(data: operand))
+            }
         
         var lastValue: Character = Separator.underScore
         
         input
-            .map {
-                if let currentValue = Operator(rawValue: $0),
+            .map { (currentValue: Character) -> Operator? in
+                if let currentOperator: Operator = Operator(rawValue: currentValue),
                    let _ = Double(String(lastValue)) {
-                    lastValue = $0
-                    return currentValue
+                    lastValue = currentValue
+                    return currentOperator
                 }
-                lastValue = $0
+                lastValue = currentValue
                 return nil
-            }.compactMap { $0 }
-            .map { Node(data: $0) }
-            .forEach { operatorQueue.enqueue($0) }
+            }
+            .forEach {
+                guard let tmp: Operator = $0 else {
+                    return
+                }
+                operatorQueue.enqueue(Node(data: tmp))
+            }
         
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
