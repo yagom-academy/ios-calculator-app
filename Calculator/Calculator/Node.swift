@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class Node<T> {
-    var prev: Node<T>?
-    var next: Node<T>?
-    var value: T
+final class Node {
+    var prev: Node?
+    var next: Node?
+    var value: String
     
-    init(value: T) {
+    init(value: String) {
         self.value = value
     }
 }

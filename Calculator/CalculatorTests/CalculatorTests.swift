@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
@@ -22,7 +22,7 @@ class CalculatorTests: XCTestCase {
     }
 
     func test_enque_one_element() {
-        sut.enqueue(1)
+        sut.enqueue("1")
         
         let result = sut.countNode
 
@@ -30,8 +30,8 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_enque_two_elements() {
-        sut.enqueue(1)
-        sut.enqueue(2)
+        sut.enqueue("1")
+        sut.enqueue("2")
         
         let result = sut.countNode
         
@@ -39,8 +39,8 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_enque_one_deque_one_element() {
-        sut.enqueue(1)
-        sut.dequeue()
+        sut.enqueue("1")
+//        sut.dequeue("1")
         
         let result = sut.countNode
 
@@ -48,8 +48,8 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_all_reset() {
-        sut.enqueue(1)
-        sut.enqueue(2)
+        sut.enqueue("1")
+        sut.enqueue("2")
         sut.resetAll()
         
         let result = sut.countNode
@@ -58,7 +58,7 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_check_if_isEmpty() {
-        sut.enqueue(1)
+        sut.enqueue("1")
         
         let result = sut.isEmpty
         
@@ -66,10 +66,10 @@ class CalculatorTests: XCTestCase {
     }
     
     func test_check_enque_deque_isEmpty() {
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.dequeue()
-        sut.dequeue()
+        sut.enqueue("1")
+        sut.enqueue("2")
+//        sut.dequeue()
+//        sut.dequeue()
         
         let result = sut.isEmpty
         

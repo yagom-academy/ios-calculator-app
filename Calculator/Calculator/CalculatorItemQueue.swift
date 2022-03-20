@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    private var calculateList = CalculatorDoublyLinkedList<T>()
+struct CalculatorItemQueue: CalculateItem {
+    private var calculateList = CalculatorDoublyLinkedList()
     
-    func enqueue(_ element: T) {
+    func enqueue(_ element: String) {
         calculateList.appendNodes(element)
     }
     
-    func dequeue() -> T? {
-        guard !calculateList.isEmpty, let element = calculateList.firstNode else {
+    func dequeue(_ element: Node) -> String? {
+        guard !calculateList.isEmpty else {
             return nil
         }
         return calculateList.removeNode(element)
