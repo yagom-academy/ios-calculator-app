@@ -18,7 +18,7 @@ class ExpressionParserTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_parse의input에_string을넣고_dequeue하면_Double로변환된숫자가리턴된다() throws {
+    func test_parse의input에_string숫자를넣고_dequeue하면_Double로변환된숫자가리턴된다() throws {
         // given
         let input = "1 + 2 + 3"
         // when
@@ -28,12 +28,14 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result.operands.dequeue(), 2.0)
         XCTAssertEqual(result.operands.dequeue(), 3.0)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_parse의input에_string부호를넣고_dequeue하면_Operator로변환된부호가리턴된다() throws {
+        // given
+        let input = "1 * 2 / 3"
+        // when
+        var result = ExpressionParser.parse(from: input)
+        // then
+        XCTAssertEqual(result.operators.dequeue(), Operator.multiply)
+        XCTAssertEqual(result.operators.dequeue(), Operator.divide)
     }
-
 }

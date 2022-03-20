@@ -40,6 +40,7 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 9.0)
     }
+    
     func test_4더하기2나누기3은_1콤마5를리턴한다() {
         // given
         let input = "4 + 2 / 4"
@@ -48,5 +49,15 @@ class FormulaTests: XCTestCase {
         let result = formula.result()
         // then
         XCTAssertEqual(result, 1.5)
+    }
+    
+    func test_4더하기마이너스2더하기3은_5를리턴한다() {
+        // given
+        let input = "4 + -2 + 3"
+        var formula = ExpressionParser.parse(from: input)
+        // when
+        let result = formula.result()
+        // then
+        XCTAssertEqual(result, 5)
     }
 }
