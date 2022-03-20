@@ -66,5 +66,17 @@ class OperatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, first * second)
     }
+    
+    func test_1점1_divide_0_return_isNaN() {
+        // given
+        sut = .divide
+        let first = 1.1
+        let second = 0.0
+
+        // when
+        let result = sut.calculate(lhs: first, rhs: second).isNaN
+        // then
+        XCTAssertTrue(result)
+    }
 
 }
