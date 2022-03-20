@@ -6,25 +6,18 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     func result() throws -> Double {
-        guard var result = operands.dequeue() as? Double else {
-            throw CalculatorError.unexpectedOperand
-        }
+        var result = try operands.dequeue()
         
         try operators
             .forEach {
-                guard let `operator` = $0.data as? Operator else {
-                    throw CalculatorError.unexpectedOperator
-                }
-                guard let rhs = operands.dequeue() as? Double else {
-                    throw CalculatorError.unexpectedOperand
-                }
+                let `operator` = $0.data
+                let rhs = try operands.dequeue()
                 result = try `operator`.calculate(lhs: result, rhs: rhs)
             }
-        
         return result
     }
 }

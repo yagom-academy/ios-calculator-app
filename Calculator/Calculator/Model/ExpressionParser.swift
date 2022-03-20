@@ -11,8 +11,8 @@ fileprivate enum Separator {
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operandQueue = CalculatorItemQueue()
-        let operatorQueue = CalculatorItemQueue()
+        let operandQueue = CalculatorItemQueue<Double>()
+        let operatorQueue = CalculatorItemQueue<Operator>()
         
         componentsByOperators(from: input)
             .compactMap { Double($0) }

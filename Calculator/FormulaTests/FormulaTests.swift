@@ -14,8 +14,8 @@ class FormulaTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
 
-        let operandsQueue = CalculatorItemQueue()
-        let operatorQueue = CalculatorItemQueue()
+        let operandsQueue: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
+        let operatorQueue: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
         
         operandsQueue.enqueue(Node(data: 1.0))
         operandsQueue.enqueue(Node(data: 2.0))

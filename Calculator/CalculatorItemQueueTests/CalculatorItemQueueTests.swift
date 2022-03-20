@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    private var sut: CalculatorItemQueue!
+    private var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -41,20 +41,25 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
 
-    func test_dequeue_빈queue인지() {
+    func test_dequeue_빈queue인지() throws {
         sut.enqueue(Node(data: 3.0))
-        let result = sut.dequeue() as? Double
+        let result = try sut.dequeue()
         
         XCTAssertEqual(result, 3.0)
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_sequence프로토콜_준수하는지() {
+    func test_makeIterator_node반환하는지() throws {
         sut.enqueue(Node(data: 1.0))
         sut.enqueue(Node(data: 2.0))
         sut.enqueue(Node(data: 3.0))
+        
+//        guard let tmp: Any = sut,
+//              let _ = tmp as? Sequence else {
+//            return
+//        }
 
-        let result = sut.map { $0.data as? Double }
+        let result = sut.map { $0.data }
         let expectation = [1.0, 2.0, 3.0]
 
         XCTAssertEqual(result, expectation)
