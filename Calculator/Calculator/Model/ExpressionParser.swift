@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    public func parse(from input: String) -> Formula {
+    public static func parse(from input: String) -> Formula {
         var formula: Formula = Formula()
         let elementArray = componentsByOperators(from: input)
         var operandArray: [String] = []
@@ -31,7 +31,7 @@ enum ExpressionParser {
         return formula
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
 }
