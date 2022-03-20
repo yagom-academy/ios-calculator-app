@@ -16,6 +16,7 @@ enum ExpressionParser {
             let splitedValues = newInput.split(with: $0.rawValue)
             operands.append(splitedValues[0])
             newInput = splitedValues[1]
+            if let _ = Int(newInput) { operands.append(newInput); return }
         }
         return operands
     }

@@ -3,11 +3,20 @@
 //  Created by LIMGAUI on 2022/03/21
 
 import XCTest
+@testable import Calculator
 
 class ExpressionParserTest: XCTestCase {
     override func setUpWithError() throws {
     }
 
     override func tearDownWithError() throws {
+    }
+    
+    func test_componentsByOperators메서드호출시_피연산자만분리되는지() {
+        let input = "5➕10➕2➖2✖️-2➗2"
+        let operands = ["5","10","2","2","-2","2"]
+        let result = ExpressionParser.componentsByOperators(from: input)
+        
+        XCTAssertEqual(result, operands)
     }
 }
