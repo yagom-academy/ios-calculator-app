@@ -10,13 +10,17 @@ struct Formula {
     var operators: CalculatorItemQueue
     
     func result() throws -> Double {
-        var result = operands.dequeue() as? Double ?? 0.0
+        guard var result = operands.dequeue() as? Double else {
+            throw CalculatorError.unexpectedOperand
+        }
         
         try operators
             .forEach {
-                guard let `operator` = $0.data as? Operator,
-                let rhs = operands.dequeue() as? Double else {
-                    return
+                guard let `operator` = $0.data as? Operator else {
+                    throw CalculatorError.unexpectedOperator
+                }
+                guard let rhs = operands.dequeue() as? Double else {
+                    throw CalculatorError.unexpectedOperand
                 }
                 result = try `operator`.calculate(lhs: result, rhs: rhs)
             }

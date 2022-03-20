@@ -43,7 +43,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 
     func test_dequeue_빈queue인지() {
         sut.enqueue(Node(data: 3.0))
-        let result = sut.dequeue() as! Double
+        let result = sut.dequeue() as? Double
         
         XCTAssertEqual(result, 3.0)
         XCTAssertTrue(sut.isEmpty())
@@ -54,7 +54,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(Node(data: 2.0))
         sut.enqueue(Node(data: 3.0))
 
-        let result = sut.map { $0.data as! Double }
+        let result = sut.map { $0.data as? Double }
         let expectation = [1.0, 2.0, 3.0]
 
         XCTAssertEqual(result, expectation)

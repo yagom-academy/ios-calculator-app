@@ -7,4 +7,6 @@
 
 enum CalculatorError: Error {
     case devidedByZero
+    case unexpectedOperand
+    case unexpectedOperator
 }
