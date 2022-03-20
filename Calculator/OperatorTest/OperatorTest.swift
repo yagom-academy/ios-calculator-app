@@ -53,6 +53,19 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(result, 8.000048600311041)
     }
     
+    func test_devide메서드호출시_rhs값이0일때_isNaN오류를던지는지() throws {
+        let numbers = [777.0, 0.0]
+        let operatorValue = Operator(rawValue: "➗")!
+        
+        sut.operators.enqueue(operatorValue)
+        do {
+            let result = try sut.operators.dequeue?.calculate(lhs: numbers[0], rhs: numbers[1])
+            XCTAssertEqual(result, .nan)
+        } catch {
+            print(error)
+        }
+    }
+    
     func test_multiply메서드호출시_123점567곱하기_456점789값이_56444점0463623이나오는지()  throws {
         let numbers = [123.567, 456.789]
         let operatorValue = Operator(rawValue: "✖️")!
