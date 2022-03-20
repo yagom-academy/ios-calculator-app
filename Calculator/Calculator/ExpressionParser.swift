@@ -34,7 +34,7 @@ enum ExpressionParser {
         
         operands.forEach(operandQueue.enqueue(_:))
         
-        let operators = input.split(with: " ")
+        let operators = input.components(separatedBy: " ")
             .filter { operatorList.contains($0) }
         
         operators.forEach {
