@@ -12,6 +12,14 @@ class ExpressionParserTest: XCTestCase {
     override func tearDownWithError() throws {
     }
     
+    func test_split메서드호출시_플러스값을넣었을때_maxSplits매개변수값1만큼만_작동하는지() {
+        let input = "5➕10➕2➖2✖️-2➗2"
+        let splitedValues = ["5","10➕2➖2✖️-2➗2"]
+        let result = input.split(with: "➕")
+        
+        XCTAssertEqual(result, splitedValues)
+    }
+    
     func test_componentsByOperators메서드호출시_피연산자만분리되는지() {
         let input = "5➕10➕2➖2✖️-2➗2"
         let operands = ["5","10","2","2","-2","2"]
