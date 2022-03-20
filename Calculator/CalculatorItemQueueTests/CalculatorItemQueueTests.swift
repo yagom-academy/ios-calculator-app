@@ -49,15 +49,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_makeIterator_node반환하는지() throws {
+    func test_makeIterator_node반환하는지() {
         sut.enqueue(Node(data: 1.0))
         sut.enqueue(Node(data: 2.0))
         sut.enqueue(Node(data: 3.0))
-        
-//        guard let tmp: Any = sut,
-//              let _ = tmp as? Sequence else {
-//            return
-//        }
 
         let result = sut.map { $0.data }
         let expectation = [1.0, 2.0, 3.0]
