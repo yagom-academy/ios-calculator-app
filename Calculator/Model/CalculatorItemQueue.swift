@@ -10,19 +10,19 @@ struct CalculatorItemQueue<T> {
     var list = [T?]()
     var head: Int = 0
     
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return list.isEmpty
     }
     
-    public var count: Int {
+    var count: Int {
         return list.count
     }
     
-    public mutating func enqueue(value: T) {
+    mutating func enqueue(value: T) {
         return list.append(value)
     }
     
-    public mutating func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         guard head <= list.count, let element = list[head] else {
             if head > 100 {
                 list.removeFirst(head)
