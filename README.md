@@ -58,7 +58,7 @@ Double Stack과 Array 중 고민하던 중, 하나의 Array로 더 간단히 구
 ### 고민한점
 #### 로직을 어떻게 할까?
 로직을 고민하는게 이번 스텝에서 가장 오래걸렸다.🥲 내가 생각한 로직은 아래와 같다.
-1) String으로 받은 계산식을 `split(with:)`와 `componentsByOperators(from input:)` 메서드를 통해 공백으로 숫자와 배열로 구분해 [String]으로 리턴한다.
+1) String으로 받은 계산식을 `split(with:)`와 `componentsByOperators(from input:)` 메서드를 통해 공백으로 연산자와 피연산자를 구분해 [String]으로 리턴한다.
 (이 과정에서 연산자와 숫자의 부호를 구분한다)
 ex) 1 + 2 + 3 + -2 * 2 -> ["1", "+", "2", "+", "3", "+", "-2", "*", "2"]
 2) parse메서드에서 1의 결과를 받아 operands와 operators를 나눠 formula 타입으로 리턴한다.
