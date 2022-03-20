@@ -5,13 +5,17 @@
 import Foundation
 
 enum ExpressionParser {
-    static private func componenetsByOperators(from input: String) -> [String] {
+    static func componentsByOperators(from input: String) -> [String] {
+        var newInput = input
+        var operators = [Operator]()
         var operands = [String]()
         input.forEach {
-            if let _ = Operator(rawValue: $0) {
-            } else {
-                operands.append(String($0))
-            }
+            if let value = Operator(rawValue: $0) {operators.append(value)}
+        }
+        operators.forEach {
+            let splitedValues = newInput.split(with: $0.rawValue)
+            operands.append(splitedValues[0])
+            newInput = splitedValues[1]
         }
         return operands
     }
