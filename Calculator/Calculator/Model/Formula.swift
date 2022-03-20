@@ -6,7 +6,7 @@ import Foundation
 
 struct Formula {
     let operands: CalculateItemQueue<Double>
-    let operators: CalculateItemQueue<String>
+    let operators: CalculateItemQueue<Operator>
     
     func result() -> Double {
         0.0
