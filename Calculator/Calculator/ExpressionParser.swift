@@ -19,8 +19,8 @@ enum ExpressionParser {
         var value: [String] = [input]
         let operatorList = Operator.allCases
         
-        for i in operatorList {
-            value = value.flatMap { $0.split(with: i.rawValue) }
+        for element in operatorList {
+            value = value.flatMap { $0.split(with: element.rawValue) }
         }
         
         return value
