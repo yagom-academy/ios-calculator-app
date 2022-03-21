@@ -22,6 +22,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     var count: Int {
         return list.count
+    var first: T? {
+        return list.first ?? nil
+    }
+    
+    var last: T? {
+        return list.last ?? nil
     }
     
     mutating func enqueue(value: T) {
