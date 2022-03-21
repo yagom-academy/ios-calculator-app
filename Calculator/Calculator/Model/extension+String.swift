@@ -1,14 +1,11 @@
 //
-//  model.swift
+//  extension + String.swift
 //  Calculator
 //
-//  Created by Red on 2022/03/15.
+//  Created by Red on 2022/03/21.
 //
 
 import Foundation
-
-extension Double: CalculateItem {
-}
 
 extension String {
     func split(with target: Character) -> [String] {
