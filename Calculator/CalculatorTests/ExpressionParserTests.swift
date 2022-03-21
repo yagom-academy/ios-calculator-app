@@ -39,6 +39,16 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, -9.0)
     }
     
+    func test_parse에_플러스_2_곱하기_마이너스3_입력_parse의_result_return_마이너스6() {
+        // given
+
+        // when
+        let result = ExpressionParser.parse(from: " + 2 × -3").result()
+
+        // then
+        XCTAssertEqual(result, -6.0)
+    }
+    
     func test_parse에_1_플러스_2_나누기_0_입력_parse의_result_return_isNaN() {
         // given
 
