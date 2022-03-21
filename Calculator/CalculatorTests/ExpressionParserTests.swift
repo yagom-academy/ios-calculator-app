@@ -10,13 +10,6 @@ import XCTest
 
 final class ExpressionParserTests: XCTestCase {
   
-  func test_parse를_호출시_Formula타입을_반환해야한다() {
-    // given when
-    let output = ExpressionParser.parse(from: "")
-    // then
-    XCTAssertTrue(type(of: output) == Formula.self)
-  }
-  
   func test_parse_주어진_입력후_호출시_formula_operands_elements는_1_2_음수1의_배열을_반환해야한다() {
     // given
     let input = "1 + 2 × -1"
