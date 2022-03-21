@@ -12,17 +12,18 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         
         let componentsString = componentsByOperators(from: input)
-        var values = LinkedQueue<Double>()
-        var oper = LinkedQueue<Operator>()
+        var operands = LinkedQueue<Double>()
+        var operators = LinkedQueue<Operator>()
         
         componentsString.forEach{
             if let number = Double($0) {
-                values.append(newNode: number)
-            } else if let convertOper = Operator(rawValue: Character($0)) {
-                oper.append(newNode: convertOper)
+                operands.append(newNode: number)
+            }
+            if let convertOper = Operator(rawValue: Character($0)) {
+                operators.append(newNode: convertOper)
             }
         }
-        return Formula(operands: values, operators: oper)
+        return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
