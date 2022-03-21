@@ -12,9 +12,9 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var queue: [Int: T] = [:]
-    private(set) var head: Int = 0
-    private(set) var tail: Int = 0
+    private var queue: [Int: T] = [:]
+    private var head: Int = 0
+    private var tail: Int = 0
     
     init(values: [T] = []) {
         values.forEach { enqueue(with: $0) }

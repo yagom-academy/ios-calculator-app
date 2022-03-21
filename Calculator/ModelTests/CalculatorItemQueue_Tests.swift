@@ -19,18 +19,11 @@ class CalculatorItemQueue_Test: XCTestCase {
         sut = nil
     }
 
-    func test_enqueue_값을넣을때() {
-        let numberValue: Double = 10
-        sut.enqueue(with: numberValue)
-        let result = sut.queue[sut.head]
-        XCTAssertEqual(result, numberValue)
-    }
-    
-    func test_dequeue_값을뺄때() {
-        sut.enqueue(with: 1.0)
-        sut.enqueue(with: 2.0)
+    func test_enqueue_값을넣을때_dequeue_값을뺄때() {
+        let expectedValue: Double = 10
+        sut.enqueue(with: expectedValue)
         let result = sut.dequeue()
-        XCTAssertEqual(result, 1.0)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_dequeue_queue가비어있을때_nil() {
@@ -48,13 +41,7 @@ class CalculatorItemQueue_Test: XCTestCase {
     
     func test_reset_queue를초기화() {
         sut.reset()
-        let result = sut.queue.isEmpty
-        XCTAssertTrue(result)
-    }
-    
-    func test_reset_head와tail을초기화() {
-        sut.reset()
-        let result = sut.head == 0 && sut.tail == 0
+        let result = sut.isEmpty
         XCTAssertTrue(result)
     }
 }
