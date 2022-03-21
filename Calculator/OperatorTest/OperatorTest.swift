@@ -12,14 +12,13 @@ class OperatorTest: XCTestCase {
     var sut: Operator?
 
     override func setUpWithError() throws {
-        //sut = Operator.add
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
     
-    func test_3과4를_add_Operator로_연산했을때_7이되어야한다() {
+    func test_두수를_add_Operator로_연산했을때_더하기가_수행되어야한다() {
         //given
         sut = .add
         
@@ -30,7 +29,7 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(result, 7)
     }
     
-    func test_4와3을_substract_Operator로_연산했을때_1이되어야한다() {
+    func test_두수를_subtract_Operator로_연산했을때_빼기가_수행되어야한다() {
         //given
         sut = .subtract
         
@@ -41,7 +40,7 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_4와3을_multiply_Operator로_연산했을때_12가되어야한다() {
+    func test_두수를_multiply_Operator로_연산했을때_곱하기_수행되어야한다() {
         //given
         sut = .multiply
         
@@ -52,7 +51,7 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(result, 12)
     }
     
-    func test_10과2를_divide_Operator로_연산했을때_5가되어야한다() {
+    func test_두수를_divide_Operator로_연산했을때_나누기가_수행되어야한다() {
         //given
         sut = .divide
         
@@ -63,19 +62,13 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(result, 5)
     }
     
-    func test_10과0을_divide_Operator로_연산했을때_error가나와야한다() {
+    func test_두수를_divide_Operator로_연산했을때_나누는수가_0이라면_CalculateError_divideByZero가_발생해야한다() {
         //given
         sut = .divide
         
-        //when
-        do {
-            let _ = try sut?.calculate(lhs: 10, rhs: 0)
-            XCTAssertTrue(false)
-        } catch (let error as CalculateError) {
-            //then
-            XCTAssertEqual(CalculateError.divideByZero, error)
-        } catch {
-            XCTAssertTrue(false)
+        //when, then
+        XCTAssertThrowsError(try sut?.calculate(lhs: 10, rhs: 0), "divideByZero") { error in
+            XCTAssertEqual(error as? CalculateError, CalculateError.divideByZero)
         }
     }
 }

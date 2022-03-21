@@ -19,7 +19,7 @@ class ExpressionParserTest: XCTestCase {
         sut = nil
     }
     
-    func test_1_add_2_multiply_3을_parse했을때_Formula가_제대로만들어지고_result결과가_9여야한다() {
+    func test_더하기와_곱하기연산이_주어졌을때_연산자우선순위와_관계없이_주어진순서대로_연산되어야한다() {
         //given
         let expression = "1 + 2 × 3"
         
@@ -30,7 +30,7 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual(result, 9)
     }
     
-    func test_음수1_add_음수2_divide_10을_parse했을때_formula가_제대로만들어지고_result결과가_음수0쩜3이어야한다() {
+    func test_음수와_양수를_나누는연산이_주어졌을때_나누기법칙에맞게_연산되어야한다() {
         //given
         let expression = "-1 + -2 ÷ 10"
         
