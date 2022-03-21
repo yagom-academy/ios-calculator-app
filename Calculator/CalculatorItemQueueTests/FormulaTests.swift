@@ -10,6 +10,9 @@ import XCTest
 class FormulaTests: XCTestCase {
     var sut: Formula!
     
+    var mockOperandQueue = CalculatorItemQueue<Double>()
+    var mockOperatorQueue = CalculatorItemQueue<Operator>()
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
@@ -18,6 +21,8 @@ class FormulaTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
+        mockOperandQueue.clear()
+        mockOperatorQueue.clear()
     }
     
     func test_operand가없는경우result를호출할때_예상되는에러를반환해야한다() {
@@ -32,13 +37,11 @@ class FormulaTests: XCTestCase {
     
     func test_operator가없는경우result를호출할때_예상되는에러를반환해야한다() {
         // given
-        var mockOperandQueue = CalculatorItemQueue<Double>()
-        
         [-1, 2, 3, 4, 5].forEach {
             mockOperandQueue.enqueue($0)
         }
         
-        sut = Formula(operands: mockOperandQueue, operators: CalculatorItemQueue<Operator>())
+        sut = Formula(operands: mockOperandQueue, operators: mockOperatorQueue)
         
         // when
         // then
@@ -50,9 +53,6 @@ class FormulaTests: XCTestCase {
 
     func test_result를호출할때_결과값과예상값이같아야한다() {
         // given
-        var mockOperandQueue = CalculatorItemQueue<Double>()
-        var mockOperatorQueue = CalculatorItemQueue<Operator>()
-
         [-1, 2, 3, 4, 5].forEach {
             mockOperandQueue.enqueue($0)
         }
@@ -71,9 +71,6 @@ class FormulaTests: XCTestCase {
     
     func test_result를호출할때_0으로divide하는경우_예상되는에러를반환해야한다() {
         // given
-        var mockOperandQueue = CalculatorItemQueue<Double>()
-        var mockOperatorQueue = CalculatorItemQueue<Operator>()
-
         [-1, 2, 3, 0, 5].forEach {
             mockOperandQueue.enqueue($0)
         }
