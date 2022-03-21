@@ -49,14 +49,16 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
-    func test_makeIterator_node반환하는지() {
-        sut.enqueue(Node(data: 1.0))
-        sut.enqueue(Node(data: 2.0))
-        sut.enqueue(Node(data: 3.0))
-
-        let result = sut.map { $0.data }
-        let expectation = [1.0, 2.0, 3.0]
-
-        XCTAssertEqual(result, expectation)
+    func test_makeIterator_차례대로_node반환하는지() {
+        let head = Node(data: 1.0)
+        let nextNode = Node(data: 2.0)
+        sut.enqueue(head)
+        sut.enqueue(nextNode)
+        
+        let result = sut.makeIterator().current
+        let nextResult = sut.makeIterator().current?.next
+        
+        XCTAssertEqual(result, head)
+        XCTAssertEqual(nextResult, nextNode)
     }
 }
