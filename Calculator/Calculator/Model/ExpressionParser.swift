@@ -5,6 +5,17 @@
 import Foundation
 
 enum ExpressionParser {
+    static func parse(from input: String) -> Formula {
+        let queueOperands = CalculateItemQueue<Double>()
+        let queueOperators = CalculateItemQueue<Operator>()
+        componentsByOperators(from: input)
+            .compactMap {Double($0)}
+            .forEach(queueOperands.enqueue(_:))
+        input.compactMap {Operator(rawValue: $0)}
+            .forEach(queueOperators.enqueue(_:))
+        return Formula(operands: queueOperands, operators: queueOperators)
+    }
+    
     static func componentsByOperators(from input: String) -> [String] {
         var newInput = input
         var operators = [Operator]()

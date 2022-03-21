@@ -8,7 +8,6 @@ import XCTest
 class ExpressionParserTest: XCTestCase {
     override func setUpWithError() throws {
     }
-
     override func tearDownWithError() throws {
     }
     
