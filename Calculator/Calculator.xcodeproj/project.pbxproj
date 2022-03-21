@@ -92,10 +92,10 @@
 			children = (
 				B31D436427E0D91100FE0B5C /* CalculatorItemQueue.swift */,
 				B373782427E46CC6009488F9 /* Formula.swift */,
-				B38E131727E7317600BBD19C /* CalculatorError.swift */,
 				B373782627E47126009488F9 /* ExpressionParser.swift */,
 				B31D436B27E0D9C900FE0B5C /* Operator.swift */,
 				B31D436D27E0F61300FE0B5C /* CalculateItem.swift */,
+				B38E131727E7317600BBD19C /* CalculatorError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

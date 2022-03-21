@@ -60,4 +60,13 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 5)
     }
+    
+    func test_0으로나누기를시도했을때_error를throw한다() throws {
+        // given
+        let input = "2 / 0"
+        var formula = ExpressionParser.parse(from: input)
+        // when
+        // then
+        XCTAssertThrowsError(try formula.result())
+    }
 }
