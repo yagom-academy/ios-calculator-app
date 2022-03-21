@@ -13,7 +13,7 @@
 		ABAB92E727E709A4008E6D63 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB92E627E709A4008E6D63 /* Operator.swift */; };
 		ABAB92EF27E70D1B008E6D63 /* FormulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB92EE27E70D1B008E6D63 /* FormulaTest.swift */; };
 		ABAB930227E72769008E6D63 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB930127E72769008E6D63 /* OperatorTest.swift */; };
-		ABAB930A27E730FA008E6D63 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB930927E730FA008E6D63 /* Error.swift */; };
+		ABAB930A27E730FA008E6D63 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB930927E730FA008E6D63 /* Calculate.swift */; };
 		ABAB930C27E76218008E6D63 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB930B27E76218008E6D63 /* ExpressionParser.swift */; };
 		ABAB932A27E794E7008E6D63 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB932927E794E7008E6D63 /* Split.swift */; };
 		ABAB933F27E79615008E6D63 /* ExpressionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAB933E27E79615008E6D63 /* ExpressionParserTest.swift */; };
@@ -77,7 +77,7 @@
 		ABAB92EE27E70D1B008E6D63 /* FormulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTest.swift; sourceTree = "<group>"; };
 		ABAB92FF27E72769008E6D63 /* OperatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABAB930127E72769008E6D63 /* OperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTest.swift; sourceTree = "<group>"; };
-		ABAB930927E730FA008E6D63 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		ABAB930927E730FA008E6D63 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		ABAB930B27E76218008E6D63 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		ABAB932927E794E7008E6D63 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
 		ABAB933C27E79615008E6D63 /* ExpressionParserTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionParserTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,7 +194,7 @@
 		ABAB930827E730D8008E6D63 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				ABAB930927E730FA008E6D63 /* Error.swift */,
+				ABAB930927E730FA008E6D63 /* Calculate.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 				ABF621CD27E06F8400EB936A /* LinkedList.swift in Sources */,
 				ABF621D127E080B500EB936A /* Node.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
-				ABAB930A27E730FA008E6D63 /* Error.swift in Sources */,
+				ABAB930A27E730FA008E6D63 /* Calculate.swift in Sources */,
 				ABAB932A27E794E7008E6D63 /* Split.swift in Sources */,
 				ABF621D527E0E72100EB936A /* CalculateItemQueue.swift in Sources */,
 				AB482B1127E166C60090B343 /* CalculateItem.swift in Sources */,

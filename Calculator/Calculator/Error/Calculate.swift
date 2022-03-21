@@ -4,6 +4,6 @@
 
 import Foundation
 
-enum DevideError: Error {
+enum CalculateError: Error {
     case isNaN(Double)
 }
