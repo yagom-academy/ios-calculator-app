@@ -75,7 +75,7 @@ class FormulaTest: XCTestCase {
     }
     
     func test_result호출시_6나누기3빼기6곱하기4진행시_음수16을반환하는지() {
-        //given
+        //when
         sut.operands.enqueue(6)
         sut.operands.enqueue(3)
         sut.operations.enqueue(.divide)
@@ -83,9 +83,22 @@ class FormulaTest: XCTestCase {
         sut.operations.enqueue(.subtract)
         sut.operands.enqueue(4)
         sut.operations.enqueue(.multiply)
-        //when
         let result = sut.result()
         //then
         XCTAssertEqual(result, -16)
+    }
+    
+    func test_result호출시_0으로나눌경우_nan을반환하는지() {
+        //when
+        sut.operands.enqueue(6)
+        sut.operations.enqueue(.divide)
+        sut.operands.enqueue(3)
+        sut.operations.enqueue(.divide)
+        sut.operands.enqueue(0)
+        sut.operations.enqueue(.multiply)
+        sut.operands.enqueue(4)
+        let result = sut.result()
+        //then
+        XCTAssertTrue(result.isNaN)
     }
 }
