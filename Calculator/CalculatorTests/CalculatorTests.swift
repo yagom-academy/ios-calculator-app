@@ -54,5 +54,19 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(sut.dequeue(), 1.0)
     }
+    
+    func test_dequeue와_enqueue가_정상적으로_작동하는지(){
+        //when
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.dequeue()
+        sut.enqueue(value: 3)
+        sut.enqueue(value: 4)
+        sut.dequeue()
+        sut.dequeue()
+        sut.dequeue()
+        //then
+        XCTAssertEqual(sut.count, 4)
+    }
 
 }
