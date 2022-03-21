@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTest: XCTestCase {
-    var sut: CalculatorItemQueue<Int>?
+    var sut: CalculatorItemQueue<Double>?
 
     override func setUpWithError() throws {
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -21,22 +21,22 @@ class CalculatorItemQueueTest: XCTestCase {
     
     func test_초기화후_isEmpty가_true여야한다() {
         //given
-        let sut = CalculatorItemQueue<Int>()
+        let sut = CalculatorItemQueue<Double>()
         
         //when, then
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_초기화후_1을_enqueue하면_isEmpty가_false여야한다() {
+    func test_초기화후_데이터를_enqueue하면_isEmpty가_false여야한다() {
         //given
-        var sut = CalculatorItemQueue<Int>()
+        let sut = CalculatorItemQueue<Double>()
         sut.enqueue(1)
         
         //when, then
         XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_초기화후_1_2_3을_enqueue한후_dequeue를하면_1이나와야한다() {
+    func test_초기화후_데이터들을_enqueue한후_dequeue를하면_가장먼저넣은_데이터가_나와야한다() {
         //given
         sut?.enqueue(1)
         sut?.enqueue(2)
@@ -46,9 +46,9 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(sut?.dequeue(), 1)
     }
     
-    func test_초기화후_1_2_3을_enqueue한후_removeAll을하면_isEmpty가_true여야한다() {
+    func test_초기화후_데이터들을_enqueue한후_removeAll을하면_isEmpty가_true여야한다() {
         //given
-        var sut = CalculatorItemQueue<Int>()
+        let sut = CalculatorItemQueue<Double>()
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)

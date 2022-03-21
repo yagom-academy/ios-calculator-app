@@ -1,4 +1,4 @@
-## 🏕 iOS 커리어 스타터 캠프
+# 🏕 iOS 커리어 스타터 캠프
 
 ## ➕➖✖️➗ 계산기 프로젝트
 
@@ -83,6 +83,11 @@ ex) enqueue에 대해서 검증하고 싶다면..?
 
 ### 피드백 후 개선한 점
 
+- 커밋을 조금더 큰 개념단위로 하기
+- LinkedList를 클래스로 변경
+- 테스트 코드에서 옵서녈 쓰지 않기
+- 테스트 함수의 네이밍
+
 ### 배운 개념
 
 - 구조체는 동일한 타입을 저장프로퍼티로 가질 수 없다/ 이유까지
@@ -90,7 +95,82 @@ ex) enqueue에 대해서 검증하고 싶다면..?
 
 ## STEP 2
 
+STEP2는 주어진 명세서 대로 코드를 작성하는 것이었습니다
+
+![](https://s3.ap-northeast-2.amazonaws.com/media.yagom-academy.kr/resources/6131c8fa2e11413823f8dd7f/6189d7537c82755a83c68a7d.jpg)
+
+명서세를 이해하는데에만 시간이 꽤 걸렸던것 같습니다.
+
+#### extension String
+- `split(with target: Character) -> [String]`: target을 기준으로 split 해주는 함수
+
+#### enum ExpressionParser
+- `componentsByOperators(from input: String) -> [String]`: 연산자를 기준으로 구분해주는 함수
+- `parse(from input String) -> Formula`: 식 문자열을 받아서 계산을 위한 Formula 구조체를 만드는 함수
+
+#### struct Formula
+- `result() throws -> Double`: 연산자큐, 피연산자큐에 있는 걸로 결과를 계산하는 함수
+
+#### enum Operator
+- `calculate(lhs: Double, rhs: Double) -> Double`: 외부에서 계산을 위해 호출하는 함수
+- `add(lhs: Double, rhs: Double) -> Double`: 더하는 함수
+- `subtract(lhs: Double, rhs: Double) -> Double`: 빼는 함수
+- `multiply(lhs: Double, rhs: Double) -> Double`: 곱하는 함수
+- `divide(lhs: Double, rhs: Double) throws -> Double`: 나누는 함수
+
 ### 고민한 점
+
+#### 명세서를 보고 코드 작성하기
+
+가장 고민이 됬던건 다음 연산이 입력됬을때 어떻게 걸러야 할까? 였습니다  
+식: `"-1*3+(-2)"`
+
+연산자 +/-와, 부호 +/-를 구분해야 할 필요성이 있었습니다  
+그래서 애초에 계산기에서 문자를 하나씩 입력하여 연산문자열을 만들어줄때 사이사이에 공백을 넣어주면 구분이 매우 간단할 것 같았습니다  
+식: `"-1 * 3 + -2"`
+
+이렇게 되고 나니, 주어진 함수를 어떤식으로 써야할지 고민했습니다  
+`componentsByOperators(from input: String) -> [String]`  
+연산자를 기준으로 나눠주는 함수인데, 이미 공백으로 나눠진 값이 들어왔기때문에, 내부에서 split(with: " ") 을 호출하면, 알아서 연산자 기준으로 분리가 되는것을 확인했습니다  
+연산자 기준으로 나뉜식: `["-1", "*", "3", "+", "-2"]`
+
+다만 이렇게 되니, componentsByOperators의 용도가 살짝 애매해지는 느낌이 있었습니다.. (굳이 왜만들었을까?)
+
+### 궁금한점
+
+#### 제대로 오류가 던져지는지 테스트 하고 싶을때
+
+잘못된 문자열이거나, 0으로 나눠서특정한 오류가 발생했을때 해당 오류가 잘 발생했는지 확인하고 싶었습니다  
+그래서 테스트 코드를 다음과 같이 작성했는데, 이런식으로 하는게 맞을까요?  
+(원하는 부분에만 맞는 식을 써놓고, 오류가 안나거나 정상작동하면 무조건 테스트가 실패하게 만들었습니다)  
+
+```swift
+    func test_10과0을_divide_Operator로_연산했을때_error가나와야한다() {
+        //given
+        sut = .divide
+        
+        //when
+        do {
+            let _ = try sut?.calculate(lhs: 10, rhs: 0)
+            XCTAssertTrue(false)
+        } catch (let error as CalculateError) {
+            //then
+            XCTAssertEqual(CalculateError.divideByZero, error)
+        } catch {
+            XCTAssertTrue(false)
+        }
+    }
+```
+
+#### 이미 예약어로 지정된 이름 사용하기
+
+operator를 변수이름으로 쓰고 싶었는데 예약어라서 쓰지 못한다는 에러가 났습니다  
+그래서 'operator'와 같이 쓰면 쓸수 있다는 법을 알아냈는데, 해당방식이 좋은 방식일까요?  
+애초에 예약어는 굳이 이렇게 안쓰는게 좋을거 같은데, 축약을 하지 않고 operator를 대체할 단어를 생각해 내지를 못했습니다  
+
+그래도 oneOperator 이런식으로라도 쓰는게 좋을까요?
+
+
 ### 배운 개념
 ### 피드백 후 개선한 점
 
@@ -99,3 +179,4 @@ ex) enqueue에 대해서 검증하고 싶다면..?
 ### 고민한 점
 ### 배운 개념
 ### 피드백 후 개선한 점
+

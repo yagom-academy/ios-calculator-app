@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTest: XCTestCase {
-    var sut: LinkedList<Int>?
+    var sut: LinkedList<Double>?
 
     override func setUpWithError() throws {
-        sut = LinkedList<Int>()
+        sut = LinkedList<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -21,12 +21,12 @@ class LinkedListTest: XCTestCase {
     
     func test_초기화후_isEmpty가_true여야한다() {
         //given
-        let sut = LinkedList<Int>()
+        let sut = LinkedList<Double>()
         //when, then
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_1을넣었을때_head와_tail의_데이터가_모두_1이여야한다() {
+    func test_초기화후_데이터를_넣으면_head와_tail_모두_해당데이터를_가지고있어야한다() {
         //given
         sut?.append(1)
         
@@ -39,7 +39,7 @@ class LinkedListTest: XCTestCase {
         XCTAssertEqual(headData, tailData)
     }
     
-    func test_1_2_3을_넣었을때_head는_1_tail은_3의_데이터를_가지고있어야한다() {
+    func test_데이터를_여러개_추가했을때_head는_가장먼저넣은데이터_tail은_가장나중에넣은데이터를_가지고있어야한다() {
         //given
         sut?.append(1)
         sut?.append(2)
