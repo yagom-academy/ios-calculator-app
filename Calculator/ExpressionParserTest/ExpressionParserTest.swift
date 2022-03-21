@@ -19,14 +19,6 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual(result, splitedValues)
     }
     
-    func test_componentsByOperators메서드호출시_피연산자만분리되는지() {
-        let input = "5➕10➕2➖2✖️-2➗2"
-        let operands = ["5","10","2","2","-2","2"]
-        let result = ExpressionParser.componentsByOperators(from: input)
-        
-        XCTAssertEqual(result, operands)
-    }
-    
     func test_parse메서드호출시_입력한_계산식에서_연산자값과_피연산자값이_분리가되는지() {
         let input = "5➕10➕2➖2✖️-2➗2"
         
