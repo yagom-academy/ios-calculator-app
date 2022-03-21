@@ -32,3 +32,26 @@
 - *`LinkedList`*
 
 ## PR 후 개선사항
+- Double Stack으로 큐를 구현함에 있으 낮은 이해도로 인해 발생된 문제 들 개선
+
+1. count
+
+변경전
+```swift
+var count: Int { dequeueList.isEmpty ? enqueueList.count : dequeueList.count }
+```
+변경 후
+```swift
+var count: Int { enqueueList.count + dequeueList.count }
+```
+2. first, last
+변경전
+```swift
+var first: item? { enqueueList.first }
+var last: item? { enqueueList.last }
+```
+변경 후
+```swift
+var first: item? { dequeueList.isEmpty ? enqueueList.first : dequeueList.last }
+var last: item? { enqueueList.isEmpty ? dequeueList.first : enqueueList.last }
+```
