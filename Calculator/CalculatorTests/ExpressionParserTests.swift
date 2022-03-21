@@ -35,7 +35,7 @@ final class ExpressionParserTests: XCTestCase {
     let input = "1 + 2 × -1"
     // when
     var formula = ExpressionParser.parse(from: input)
-    let output = formula.result()
+    let output = try! formula.result()
     // then
     XCTAssertEqual(output, -3.0)
   }
@@ -45,18 +45,17 @@ final class ExpressionParserTests: XCTestCase {
     let input = "1 + 2 ÷ 0"
     // when
     var formula = ExpressionParser.parse(from: input)
-    let output = formula.result()
+    let output = try! formula.result()
     // then
     XCTAssertTrue(output.isNaN)
   }
   
-  func test_parse_미완성된_사용자_입력후_호출시_formula의_result는_NaN을_반환해야한다() {
+  func test_parse_미완성된_사용자_입력후_호출시_formula의_result는_Error를_던져야한다() {
     // given
     let input = "1 + 2 - "
     // when
     var formula = ExpressionParser.parse(from: input)
-    let output = formula.result()
     // then
-    XCTAssertTrue(output.isNaN)
+    XCTAssertThrowsError(try formula.result())
   }
 }
