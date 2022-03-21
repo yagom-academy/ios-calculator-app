@@ -78,10 +78,102 @@ struct CalculatorItemQueue {
 - unit-test
 - 자료구조 Queue
 - generic
-
-## PR 후 개선사항
+- linked-List
 
 ## STEP 2 기능 구현
+- enum Operator
+    - calculate() Operator case 의 값에 따라 매개변수들을 연산하는 메서드
+    - add() 매개변수를 2개 받아 값을 더해주는 메서드
+    - sub() 매개변수를 2개 받아 값을 차감하는 메서드
+    - divide() 매개변수를 2개 받아 값을 나눠주는 메서드
+    - multiply() 매개변수를 2개 받아 값을 곱해주는 메서드
+- struct Formula
+    - result() 저장된 연산자와 피연산자를 활용해 값을 연산해주는 메서드
+- enum ExpressionParser
+    - parse() String 타입의 매개변수를 연산자와 피연산자로 구분하여 저장된 Formula 를 반환하는 메서드
+    - componentsByOperators() String 타입의 값을 공백을 기준으로 분리시켜주는 메서드
+    
 ## 고민했던 것들
+1. 기존 구현해 두었던 링크드 리스트 를 구조체로 변경해야할지 고민함.
+단순하게만 보았을때는 class 와 struct 는 저장방식이 다르기때문에 struct로 수정하는것이 기능이 더 효율적일것이다 라고 생각 했으나 struct 로 변경하게되면 mutating 키워드를 사용하여 값을 전체적으로 복사하여 새로운 인스턴스를 만들게 된다.
+그렇다면 이번 프로젝트에서 연산을 할때마다 mutating 으로 프로퍼티의 값이 변경되기 때문에 연산횟수가 많아질수록 성능이 저하될것으로 생각하였다.
+struct 를 사용하는것과 class 에 final 키워드를 작성하는것 두가지중 어떤것이 성능이 더좋을지 고민함 
+2. ExpressionParser parse 코드의 가독성
+어떤 코드가 더 이해하기 쉬운 코드인지 고민함.
+1번 예시
+```swift
+ mutating func result() -> Double {
+        var result = operands.removeFirst() ?? .nan
+        
+        while let oper = operators.removeFirst(), let rhs = operands.removeFirst() {
+            result = oper.calculate(lhs: result, rhs: rhs)
+        }
+        return result
+    }
+```
+2번 예시
+```swift
+mutating func result() -> Double {
+        var result = operands.removeFirst() ?? .zero
+        
+        while operators.isEmpty == false {
+            guard let rhs = operands.removeFirst() else { return result}
+            guard let `operator` = operators.removeFirst() else { return .nan }
+            result = `operator`.calculate(lhs: result, rhs: rhs)
+        }
+        return result
+    }
+```
 ## 배운 개념
+defer
+forEach 내부에서의 return 구문
+else 를 남발하였을때 생기는 불편함
+while let 을 이용한 옵셔널바인딩
+early return
+early continue
+early break
+
 ## PR 후 개선사항
+1. else 구문 분리
+기존 코드
+```swift
+    static func parse(from input: String) -> Formula {
+        
+        let componentsString = componentsByOperators(from: input)
+        var values = LinkedQueue<Double>()
+        var oper = LinkedQueue<Operator>()
+        
+        componentsString.forEach{
+            if let number = Double($0) {
+                values.append(newNode: number)
+            } else if let convertOper = Operator(rawValue: Character($0)) {
+                oper.append(newNode: convertOper)
+            }
+        }
+        return Formula(operands: values, operators: oper)
+    }
+```
+변경후 코드
+```swift
+    static func parse(from input: String) -> Formula {
+        
+        let componentsString = componentsByOperators(from: input)
+        var operands = LinkedQueue<Double>()
+        var operators = LinkedQueue<Operator>()
+        
+        for value in componentsString {
+            
+            if let number = Double(value) {
+                operands.append(newNode: number)
+                continue
+            }
+            
+            if let convertOper = Operator(rawValue: Character(value)) {
+                operators.append(newNode: convertOper)
+            }
+        }
+        
+        return Formula(operands: operands, operators: operators)
+    }
+```
+코드의 양은 더 늘어났으나 조금더 이해하기 편하도록 if - else 구문을 분리시킴.
