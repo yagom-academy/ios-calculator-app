@@ -2,7 +2,7 @@ import Foundation
 
 protocol CalculateItem {}
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var enqueueStack: [Element] = []
     private var dequeueStack: [Element] = []
     
