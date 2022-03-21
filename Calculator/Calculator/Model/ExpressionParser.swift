@@ -23,20 +23,20 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let rawInput = input.split(with: " ")
-        var typeIndex: [String] = []
-        var newInput: [String] = []
+        let inputSource = input.split(with: " ")
+        var inputScourceType: [String] = []
+        var clearInput: [String] = []
         
-        for value in rawInput {
-            Double(value) == nil ? typeIndex.append("operator") : typeIndex.append("number")
+        for value in inputSource {
+            Double(value) == nil ? inputScourceType.append("operator") : inputScourceType.append("number")
         }
         
-        typeIndex.append("operator")
+        inputScourceType.append("operator")
         
-        for index in (0..<typeIndex.count - 1) where typeIndex[index] != typeIndex[index + 1] {
-            newInput.append("\(rawInput[index])")
+        for index in (0..<inputScourceType.count - 1) where inputScourceType[index] != inputScourceType[index + 1] {
+            clearInput.append("\(inputSource[index])")
         }
         
-        return newInput
+        return clearInput
     }
 }
