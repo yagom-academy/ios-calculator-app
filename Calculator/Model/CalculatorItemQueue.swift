@@ -6,22 +6,18 @@
 //
 import Foundation
 
-struct CalculatorItemQueue<T>:CalculateItem {
-    var list = [T?]()
-    var head: Int = 0
 struct CalculatorItemQueue<T: CalculateItem> {
+    private var list = [T?]()
     private(set) var head: Int = 0
     
     var count: Int {
         return list.count
     }
+    
     var isEmpty: Bool {
-        return list.isEmpty
         return list.compactMap{$0}.isEmpty
     }
     
-    var count: Int {
-        return list.count
     var first: T? {
         return list.first ?? nil
     }
@@ -31,18 +27,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func enqueue(value: T) {
-        return list.append(value)
+        list.append(value)
     }
     
     mutating func dequeue() -> T? {
         guard head <= list.count, let element = list[head] else {
-            if head > 100 {
-                list.removeFirst(head)
-                head = 0
-            }
-            list[head] = nil
-            return list[head]
-            head += 1
             return nil
         }
         list[head] = nil

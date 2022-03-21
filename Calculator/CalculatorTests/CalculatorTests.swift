@@ -26,9 +26,11 @@ class CalculatorTests: XCTestCase {
         let input = 1.0
         //when
         sut.enqueue(value: input)
-        let result = sut.list
+        let result = sut.first
         //then
-        XCTAssertEqual(result, [1.0])
+        XCTAssertEqual(result, 1.0)
+    }
+    
     func test_isEmpty가_정상적으로_작동되는지() {
         //given
         let input = 1.0
@@ -38,6 +40,7 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertTrue(sut.isEmpty)
     }
+    
     func test_enqueue를_두번_했을때_처음과_마지막에_정상적으로_enqueue되는지(){
         //given
         let input = 1.0
@@ -78,14 +81,14 @@ class CalculatorTests: XCTestCase {
         //when
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
-        sut.dequeue()
+        let _ = sut.dequeue()
         sut.enqueue(value: 3)
         sut.enqueue(value: 4)
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
+        let _ = sut.dequeue()
+        let _ = sut.dequeue()
+        let _ = sut.dequeue()
         //then
-        XCTAssertEqual(sut.count, 4)
+        XCTAssertEqual(sut.head, 4)
     }
 
 }
