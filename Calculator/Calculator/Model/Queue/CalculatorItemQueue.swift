@@ -23,8 +23,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     func dequeue() -> T? {
-        guard !linkedList.isEmpty else { return nil }
-        return linkedList.removeFirst()
+        if linkedList.isEmpty {
+            return nil
+        } else {
+            return linkedList.removeFirst()
+        }
     }
     
     func removeAll() {
