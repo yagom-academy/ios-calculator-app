@@ -7,6 +7,4 @@ struct Formula {
     func result() -> Double {
         return 0
     }
-    
-    
 }
