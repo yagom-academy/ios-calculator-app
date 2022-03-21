@@ -17,40 +17,26 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         input.split(with: " ")
-            .compactMap { string in
-                Double(string)
-            }
-            .map { double in
-                String(double)
-            }
+            .compactMap { Double($0) }
+            .map { String($0) }
     }
     
     private static func componentsByOperands(from input: String) -> [Operator] {
         let operatorTypes = Operator
             .allCases
-            .map { type in
-                String(type.rawValue)
-            }
+            .map { String($0.rawValue) }
         
         return input.split(with: " ")
-            .filter { string in
-                operatorTypes.contains(string)
-            }
-            .compactMap { string in
-                Operator(rawValue: Character(string))
-            }
+            .filter { operatorTypes.contains($0) }
+            .compactMap { Operator(rawValue: Character($0)) }
     }
     
     private static func makeOperandsQueue(from input: String) -> CalculatorItemQueue<Double> {
         var operands = CalculatorItemQueue<Double>()
         
         componentsByOperators(from: input)
-            .compactMap { string in
-                Double(string)
-            }
-            .forEach { operand in
-                operands.enqueue(operand)
-            }
+            .compactMap { Double($0) }
+            .forEach { operands.enqueue($0) }
         
         return operands
     }
@@ -59,9 +45,7 @@ enum ExpressionParser {
         var operators = CalculatorItemQueue<Operator>()
         
         componentsByOperands(from: input)
-            .forEach { `operator` in
-                operators.enqueue(`operator`)
-            }
+            .forEach { operators.enqueue($0) }
         
         return operators
     }
