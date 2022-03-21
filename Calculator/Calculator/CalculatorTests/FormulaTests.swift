@@ -51,7 +51,7 @@ class FormulaTests: XCTestCase {
         XCTAssertNoThrow(try formula.result(), "error 발생")
     }
     
-    func test_4더하기마이너스2더하기3은_5를리턴한다() {
+    func test_숫자에붙어있는부호를_연산자가아니라_숫자의부호로인식해서계산한다() {
         // given
         let input = "4 + -2 + 3"
         // when
