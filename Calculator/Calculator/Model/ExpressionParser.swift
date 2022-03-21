@@ -35,10 +35,10 @@ enum ExpressionParser {
                 return nil
             }
             .forEach {
-                guard let tmp: Operator = $0 else {
+                guard let `operator`: Operator = $0 else {
                     return
                 }
-                operatorQueue.enqueue(Node(data: tmp))
+                operatorQueue.enqueue(Node(data: `operator`))
             }
         
         return Formula(operands: operandQueue, operators: operatorQueue)
