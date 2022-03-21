@@ -17,6 +17,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     var isEmpty: Bool {
         return list.isEmpty
+        return list.compactMap{$0}.isEmpty
     }
     
     var count: Int {
