@@ -10,10 +10,16 @@ struct Formula {
     
     func result() throws -> Double {
         let operandsCount = operands.count
-        guard var result = operands.dequeue else { return 0.0 }
+        guard var result = operands.dequeue else {
+            throw CalculateError.operandIsNil
+        }
         for _ in 2...operandsCount {
-            guard let operandValue = operands.dequeue else { return 0.0 }
-            guard let operatorValue = operators.dequeue else { return 0.0 }
+            guard let operandValue = operands.dequeue else {
+                throw CalculateError.operandIsNil
+            }
+            guard let operatorValue = operators.dequeue else {
+                throw CalculateError.operatorIsNil
+            }
             result = try operatorValue.calculate(lhs: result, rhs: operandValue)
         }
         return result

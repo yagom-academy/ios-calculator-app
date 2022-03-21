@@ -6,4 +6,6 @@ import Foundation
 
 enum CalculateError: Error {
     case isNaN(Double)
+    case operandIsNil
+    case operatorIsNil
 }
