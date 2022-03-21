@@ -20,7 +20,7 @@ class OperatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_Operator가add이고calculate를호출할때_결과값이예상값과같아야한다() {
+    func test_add_calculate() {
         // given
         sut = .add
         let lhs = 2.0
@@ -33,7 +33,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, lhs + rhs)
     }
     
-    func test_Operator가substract이고calculate를호출할때_결과값이예상값과같아야한다() {
+    func test_substract_calculate() {
         // given
         sut = .substract
         let lhs = 2.0
@@ -46,7 +46,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, lhs - rhs)
     }
     
-    func test_Operator가divide이고calculate를호출할때_결과값이예상값과같아야한다() {
+    func test_divide_calculate() {
         // given
         sut = .divide
         let lhs = 2.0
@@ -59,7 +59,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, lhs / rhs)
     }
     
-    func test_Operator가multiply이고calculate를호출할때_결과값이예상값과같아야한다() {
+    func test_multiply_calculate() {
         // given
         sut = .multiply
         let lhs = 2.0
