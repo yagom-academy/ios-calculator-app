@@ -10,6 +10,7 @@ struct CalculatorItemQueue<T>:CalculateItem {
     var list = [T?]()
     var head: Int = 0
 struct CalculatorItemQueue<T: CalculateItem> {
+    private(set) var head: Int = 0
     
     var isEmpty: Bool {
         return list.isEmpty
