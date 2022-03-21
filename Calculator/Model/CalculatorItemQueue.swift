@@ -43,6 +43,13 @@ struct CalculatorItemQueue<T: CalculateItem> {
             list[head] = nil
             return list[head]
             head += 1
+            return nil
+        }
+        list[head] = nil
+        head += 1
+        if head > 100 {
+            list.removeFirst(head)
+            head = 0
         }
         return element
     }
