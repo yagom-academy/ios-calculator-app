@@ -21,7 +21,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func test_1더하기2더하기3은_6을리턴한다() throws {
+    func test_3가지숫자의합을_Double타입으로리턴한다() throws {
         // given
         let input = "1 + 2 + 3"
         var formula = ExpressionParser.parse(from: input)
@@ -31,7 +31,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 6.0)
     }
     
-    func test_1더하기2곱하기3은_9를리턴한다() throws {
+    func test_곱하기연산자가뒤에있을때에도_앞에서부터차례대로계산한다() throws {
         // given
         let input = "1 + 2 * 3"
         var formula = ExpressionParser.parse(from: input)
@@ -41,7 +41,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 9.0)
     }
     
-    func test_4더하기2나누기3은_1콤마5를리턴한다() throws {
+    func test_소숫점연산결과를_Double타입으로리턴한다() throws {
         // given
         let input = "4 + 2 / 4"
         var formula = ExpressionParser.parse(from: input)
