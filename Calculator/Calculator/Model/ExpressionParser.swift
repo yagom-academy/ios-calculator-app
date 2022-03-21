@@ -9,7 +9,6 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(form input: String) -> Formula {
-        var formula = Formula()
         let values = componentsByOperators(from: input)
         
         let operandsValue: [Double] = values.enumerated()
@@ -20,9 +19,7 @@ enum ExpressionParser {
                                               .filter { $0.offset % 2 != 0 }
                                               .compactMap { Operator(rawValue: Character($0.element)) }
         
-        formula.operands = CalculatorItemQueue(values: operandsValue)
-        formula.operators = CalculatorItemQueue(values: operatorValue)
-        return formula
+        return Formula(operands: CalculatorItemQueue(values: operandsValue), operators: CalculatorItemQueue(values: operatorValue))
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
