@@ -18,7 +18,7 @@ class ExpressionParserTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_parse의input에_string숫자를넣고_dequeue하면_Double로변환된숫자가리턴된다() throws {
+    func test_parse의input에_string숫자를넣고_dequeue하면_Double로변환된숫자가리턴된다() {
         // given
         let input = "1 + 2 + 3"
         // when
@@ -27,9 +27,10 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result.operands.dequeue(), 1.0)
         XCTAssertEqual(result.operands.dequeue(), 2.0)
         XCTAssertEqual(result.operands.dequeue(), 3.0)
+        XCTAssertNoThrow(result, "error 발생")
     }
     
-    func test_parse의input에_string부호를넣고_dequeue하면_Operator로변환된부호가리턴된다() throws {
+    func test_parse의input에_string부호를넣고_dequeue하면_Operator로변환된부호가리턴된다() {
         // given
         let input = "1 * 2 / 3"
         // when
@@ -37,5 +38,6 @@ class ExpressionParserTests: XCTestCase {
         // then
         XCTAssertEqual(result.operators.dequeue(), Operator.multiply)
         XCTAssertEqual(result.operators.dequeue(), Operator.divide)
+        XCTAssertNoThrow(result, "error 발생")
     }
 }

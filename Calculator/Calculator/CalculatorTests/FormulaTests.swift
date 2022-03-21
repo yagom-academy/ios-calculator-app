@@ -21,51 +21,51 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func test_3가지숫자의합을_Double타입으로리턴한다() throws {
+    func test_3가지숫자의합을_Double타입으로리턴한다() {
         // given
         let input = "1 + 2 + 3"
-        var formula = ExpressionParser.parse(from: input)
         // when
-        let result = try formula.result()
+        var formula = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(result, 6.0)
+        XCTAssertEqual(try formula.result(), 6.0)
+        XCTAssertNoThrow(try formula.result(), "error 발생")
     }
     
-    func test_곱하기연산자가뒤에있을때에도_앞에서부터차례대로계산한다() throws {
+    func test_곱하기연산자가뒤에있을때에도_앞에서부터차례대로계산한다() {
         // given
         let input = "1 + 2 * 3"
-        var formula = ExpressionParser.parse(from: input)
         // when
-        let result = try formula.result()
+        var formula = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(result, 9.0)
+        XCTAssertEqual(try formula.result(), 9.0)
+        XCTAssertNoThrow(try formula.result(), "error 발생")
     }
     
-    func test_소숫점연산결과를_Double타입으로리턴한다() throws {
+    func test_소숫점연산결과를_Double타입으로리턴한다() {
         // given
         let input = "4 + 2 / 4"
-        var formula = ExpressionParser.parse(from: input)
         // when
-        let result = try formula.result()
+        var formula = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(result, 1.5)
+        XCTAssertEqual(try formula.result(), 1.5)
+        XCTAssertNoThrow(try formula.result(), "error 발생")
     }
     
-    func test_4더하기마이너스2더하기3은_5를리턴한다() throws {
+    func test_4더하기마이너스2더하기3은_5를리턴한다() {
         // given
         let input = "4 + -2 + 3"
-        var formula = ExpressionParser.parse(from: input)
         // when
-        let result = try formula.result()
+        var formula = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(result, 5)
+        XCTAssertEqual(try formula.result(), 5)
+        XCTAssertNoThrow(try formula.result(), "error 발생")
     }
     
-    func test_0으로나누기를시도했을때_error를throw한다() throws {
+    func test_0으로나누기를시도했을때_error를throw한다() {
         // given
         let input = "2 / 0"
-        var formula = ExpressionParser.parse(from: input)
         // when
+        var formula = ExpressionParser.parse(from: input)
         // then
         XCTAssertThrowsError(try formula.result())
     }
