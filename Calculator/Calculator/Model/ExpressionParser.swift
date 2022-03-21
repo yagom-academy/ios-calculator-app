@@ -9,7 +9,7 @@ enum ExpressionParser {
         let queueOperands = CalculateItemQueue<Double>()
         let queueOperators = CalculateItemQueue<Operator>()
         componentsByOperators(from: input)
-            .compactMap {Double($0)}
+            .compactMap(Double.init)
             .forEach(queueOperands.enqueue(_:))
         input.compactMap {Operator(rawValue: $0)}
             .forEach(queueOperators.enqueue(_:))
