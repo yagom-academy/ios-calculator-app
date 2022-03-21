@@ -26,4 +26,26 @@ class ExpressionParserTest: XCTestCase {
         
         XCTAssertEqual(result, operands)
     }
+    
+    func test_parse메서드호출시_입력한_계산식에서_연산자값과_피연산자값이_분리가되는지() {
+        let input = "5➕10➕2➖2✖️-2➗2"
+        
+        let formula = ExpressionParser.parse(from: input)
+        var operands = [String]()
+        var operators = [String]()
+        
+        for _ in 1...formula.operands.count {
+            guard let operand = formula.operands.dequeue else {return}
+            operands.append(String(operand))
+        }
+        for _ in 1...formula.operators.count {
+            guard let operatorValue = formula.operators.dequeue else {return}
+            operators.append(String(operatorValue.rawValue))
+        }
+        let operandsResult = ["5.0","10.0","2.0","2.0","-2.0","2.0"]
+        let operatorsResult = ["➕","➕","➖","✖️","➗"]
+        
+        XCTAssertEqual(operands, operandsResult)
+        XCTAssertEqual(operators, operatorsResult)
+    }
 }
