@@ -60,6 +60,20 @@ class FormulaTest: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
+    func test_result호출시_숫자하나와연산자만2개있을경우_해당숫자를반환하는지() {
+        //given
+        let inputNumber = 3.0
+        let inputOperation = Operator.divide
+        let inputOperation2 = Operator.subtract
+        //when
+        sut.operands.enqueue(inputNumber)
+        sut.operations.enqueue(inputOperation)
+        sut.operations.enqueue(inputOperation2)
+        let result = sut.result()
+        //then
+        XCTAssertEqual(result, inputNumber)
+    }
+    
     func test_result호출시_6나누기3빼기6곱하기4진행시_음수16을반환하는지() {
         //given
         sut.operands.enqueue(6)
@@ -74,6 +88,4 @@ class FormulaTest: XCTestCase {
         //then
         XCTAssertEqual(result, -16)
     }
-    
-
 }
