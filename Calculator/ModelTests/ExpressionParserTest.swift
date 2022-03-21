@@ -16,8 +16,16 @@ class ExpressionParserTest: XCTestCase {
     override func tearDownWithError() throws {
     }
 
-    func test_componentsByOperators() {
+    func test_parse() {
         var formula = ExpressionParser.parse(form: "-10 + +2 - -3 × 4")
+        
+        let result = formula.result()
+        
+        XCTAssertEqual(result, -20.0)
+    }
+    
+    func test_parse_잘못된인풋() {
+        var formula = ExpressionParser.parse(form: "-10 - + 10 +2 - -3 × 7 4 +")
         
         let result = formula.result()
         
