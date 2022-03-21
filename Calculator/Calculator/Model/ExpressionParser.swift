@@ -16,7 +16,7 @@ enum ExpressionParser {
         return Formula(operands: queueOperands, operators: queueOperators)
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         var newInput = input
         var operators = [Operator]()
         var operands = [String]()
