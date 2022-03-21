@@ -9,12 +9,16 @@ import Foundation
 
 enum ExpressionParser {
     
-//    static func parse(from input: String) -> Formula {
+//    static func parse(from input: String) {
+//        let splitSentence = componentsByOperators(from: input)
+//            
+//        if let aaa = Double($0), let vvv = Operator(rawValue: Character($0)) {
 //        
-//
+//        }
+//            Formula(operands: aaa, operators: vvv)
 //    }
-//    
-//    static private func componentsByOperators(from input: String) -> [String] {
-//        return input.split(with: " ")
-//    }
+    
+    static func componentsByOperators(from input: String) -> [String] {
+        return input.split(with: " ")
+    }
 }

@@ -5,13 +5,12 @@
 //  Created by SeoDongyeon on 2022/03/18.
 //
 
-import Foundation
 import XCTest
 @testable import Calculator
 
 class Formula_Test: XCTestCase {
-    var doubleQueue = CalculatorItemQueue<Double>()
-    var operatorQueue = CalculatorItemQueue<Operator>()
+    private var doubleQueue = CalculatorItemQueue<Double>()
+    private var operatorQueue = CalculatorItemQueue<Operator>()
     private var sut: Formula!
 
     override func setUpWithError() throws {

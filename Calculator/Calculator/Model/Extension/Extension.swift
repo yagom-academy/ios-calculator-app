@@ -9,9 +9,7 @@ import Foundation
 
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
-        self.split(separator: target).map { character in
-            String(character)
-        }
+        return components(separatedBy: String(target))
     }
 }
 
