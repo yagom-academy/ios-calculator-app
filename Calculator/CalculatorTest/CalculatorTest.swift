@@ -10,7 +10,6 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
   var sut: CalculateItemQueue<Double>!
-  var sut1: ExpressionParser!
   
   override func setUpWithError() throws {
     try super.setUpWithError()
