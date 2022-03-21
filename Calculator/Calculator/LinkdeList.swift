@@ -19,6 +19,7 @@ final class Node<T> {
 
 protocol List {
     associatedtype Element
+    
     var isEmpty: Bool { get }
     var count: Int { get }
     
@@ -34,20 +35,22 @@ final class LinkdeList<Element: CalculateItem>: List {
     var count: Int { retrieveCount() }
     
     private func retrieveCount() -> Int {
-        if head == nil {
-            return 0
-        }
+        if head == nil { return 0 }
+        
         var count = 1
         var nodePoint = head
+        
         while nodePoint?.next != nil {
             count += 1
             nodePoint = nodePoint?.next
         }
+        
         return count
     }
     
     func append(_ data: Element) {
         let node = Node(data: data)
+        
         if head == nil {
             head = node
             tail = head
@@ -60,18 +63,22 @@ final class LinkdeList<Element: CalculateItem>: List {
     @discardableResult
     func removeFirst() -> Element? {
         let value = head?.data
+        
         if head == nil { return nil }
+        
         if head?.next == nil {
             head = nil
             tail = nil
         } else {
             head = head?.next
         }
+        
         return value
     }
     
     func removeAll() {
         if head == nil { return }
+        
         head = nil
         tail = nil
     }
