@@ -34,7 +34,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     @discardableResult
-    mutating func dequeue() throws -> Element? {
+    mutating func dequeue() throws -> Element {
         guard self.isEmpty == false else {
             throw QueueError.notFoundElement
         }

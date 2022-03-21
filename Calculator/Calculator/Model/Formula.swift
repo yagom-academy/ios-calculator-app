@@ -26,20 +26,13 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        guard let firstOperand = try operands.dequeue() else {
-            throw QueueError.notFoundElement
-        }
+        let firstOperand = try operands.dequeue()
 
         var result: Double = firstOperand
         
         while operands.isEmpty == false {
-            guard let operand = try operands.dequeue() else {
-                throw QueueError.notFoundElement
-            }
-            
-            guard let `operator` = try operators.dequeue() else {
-                throw QueueError.notFoundElement
-            }
+            let operand = try operands.dequeue()
+            let `operator` = try operators.dequeue()
             
             result = try `operator`.calculate(lhs: result, rhs: operand)
         }
