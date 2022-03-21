@@ -23,49 +23,53 @@ class OperatorTests: XCTestCase {
     func test_Operator가add이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .add
+        let lhs = 2.0
+        let rhs = 1.0
         
         // when
-        let result = try? sut.calculate(lhs: 1.0, rhs: 2.0)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
-        let expected = 3.0
-        XCTAssertEqual(result, expected)
+        XCTAssertEqual(result, lhs + rhs)
     }
     
     func test_Operator가substract이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .substract
+        let lhs = 2.0
+        let rhs = 1.0
         
         // when
-        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
-        let expected = 1.0
-        XCTAssertEqual(result, expected)
+        XCTAssertEqual(result, lhs - rhs)
     }
     
     func test_Operator가divide이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .divide
+        let lhs = 2.0
+        let rhs = 1.0
         
         // when
-        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
-        let expected = 2.0
-        XCTAssertEqual(result, expected)
+        XCTAssertEqual(result, lhs / rhs)
     }
     
     func test_Operator가multiply이고calculate를호출할때_결과값이예상값과같아야한다() {
         // given
         sut = .multiply
+        let lhs = 2.0
+        let rhs = 1.0
         
         // when
-        let result = try? sut.calculate(lhs: 2.0, rhs: 1.0)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
-        let expected = 2.0
-        XCTAssertEqual(result, expected)
+        XCTAssertEqual(result, lhs * rhs)
     }
     
     func test_Operator가divide이고rhs를0으로calculate를호출할때_예상되는에러를반환해야한다() {
