@@ -18,7 +18,7 @@ enum ExpressionParser {
   static func parse(from input: String) -> Formula {
     let fomula = Formula()
     
-    componentsByOperators(from: input)
+    input.split(with: " ")
       .compactMap { Double($0) }
       .forEach { fomula.operands.enqueue(data: $0) }
     
@@ -30,6 +30,6 @@ enum ExpressionParser {
   }
   
   private static func componentsByOperators(from input: String) -> [String] {
-    input.split(with: " ")
+    input.split(with: " ").filter { Double($0) == nil }
   }
 }
