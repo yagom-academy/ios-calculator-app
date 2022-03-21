@@ -15,7 +15,7 @@ struct Formula {
         var lhs = operands.dequeue() ?? .nan
         while let rhs = operands.dequeue(), let oneOperator = operators.dequeue() {
             lhs = oneOperator.calculate(lhs: lhs, rhs: rhs)
-            }
+        }
         return lhs
     }
 }

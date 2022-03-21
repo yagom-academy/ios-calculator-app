@@ -23,5 +23,4 @@ class ExpressionParser_Test: XCTestCase {
         
         XCTAssertEqual(result, -20.0)
     }
-
 }

@@ -32,5 +32,4 @@ class Formula_Test: XCTestCase {
         
         XCTAssertEqual(result, -44.0)
     }
-
 }

@@ -57,5 +57,4 @@ class CalculatorItemQueue_Test: XCTestCase {
         let result = sut.head == 0 && sut.tail == 0
         XCTAssertTrue(result)
     }
-    
 }
