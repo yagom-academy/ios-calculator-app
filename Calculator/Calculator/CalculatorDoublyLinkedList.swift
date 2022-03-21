@@ -44,23 +44,27 @@ class CalculatorDoublyLinkedList {
         }
     }
     
-    func removeNode(_ node: Node) -> String {
-        let previous = node.prev
-        let next = node.next
-        
-        if let previous = previous {
-            previous.next = next
-            next?.prev = previous
-        } else {
-            headNode = next
-        }
-        
-        if let next = next {
-            previous?.next = next
-        } else {
-            tailNode = previous
-        }
-        return node.value
+    func removeNode() -> T? {
+        if isEmpty { return nil }
+        let lastData = headNode?.value
+        headNode = headNode?.next
+        return lastData
+//        let previous = node.prev
+//        let next = node.next
+//
+//        if let previous = previous {
+//            previous.next = next
+//            next?.prev = previous
+//        } else {
+//            headNode = next
+//        }
+//
+//        if let next = next {
+//            previous?.next = next
+//        } else {
+//            tailNode = previous
+//        }
+//        return node.value
     }
     
     func resetAll() {
