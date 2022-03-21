@@ -29,6 +29,15 @@ class CalculatorTests: XCTestCase {
         let result = sut.list
         //then
         XCTAssertEqual(result, [1.0])
+    func test_isEmpty가_정상적으로_작동되는지() {
+        //given
+        let input = 1.0
+        //when
+        sut.enqueue(value: input)
+        let _ = sut.dequeue()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+    }
     }
     
     func test_count를_정상적으로_세고있는지() {
