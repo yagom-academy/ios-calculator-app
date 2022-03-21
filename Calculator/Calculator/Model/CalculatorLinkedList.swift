@@ -79,5 +79,12 @@ final class LinkedList<T> {
     }
     return allNode
   }
+  
+  func isEmpty() -> Bool {
+    if head == nil {
+      return true
+    }
+    return false
+  }
 }
 

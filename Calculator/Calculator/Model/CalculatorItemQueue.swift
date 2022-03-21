@@ -27,6 +27,10 @@ struct CalculateItemQueue<T: CalculateItem> {
   }
   
   func presentAll() -> [T] {
-   return list.showAll()
+    return list.showAll()
+  }
+  
+  func isEmpty() -> Bool {
+    list.isEmpty()
   }
 }
