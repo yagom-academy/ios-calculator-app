@@ -3,16 +3,12 @@
 ### 계산기 프로젝트 저장소
 
 # 📍 UML
-<img src="https://user-images.githubusercontent.com/74251593/158520059-d1b1d709-2042-49ea-bc3f-0e6940780f74.png" width="80%" height="80%">
+<img src="https://user-images.githubusercontent.com/74251593/159279325-54f4c081-724c-4be1-acd7-458b5f053b10.png" width="80%" height="80%">
+
+# [STEP 2]
+
 
 # [STEP 1]
-
-## Step 1 수행 중 핵심경험
-- TDD 시작하기
-    * 기존의 프로젝트에 Test Target 추가
-- Queue 자료구조의 이해와 구현
-- List 자료구조 직접 구현해보기
-    * 리스트를 활용하여 Queue 구현
 
 ## ⁉️ Queue를 구현하기 위해 고민한 점 (Array, Singly Linked List, Doubly Linked List)
 > - `Queue`라는 자료구조를 구현하기 위해 `Array`와 `List`에 대해 먼저 공부하고 진행하였습니다. 
