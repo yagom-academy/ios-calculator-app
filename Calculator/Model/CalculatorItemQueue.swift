@@ -9,6 +9,7 @@ import Foundation
 struct CalculatorItemQueue<T>:CalculateItem {
     var list = [T?]()
     var head: Int = 0
+struct CalculatorItemQueue<T: CalculateItem> {
     
     var isEmpty: Bool {
         return list.isEmpty
