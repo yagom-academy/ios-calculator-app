@@ -39,9 +39,15 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_divide_() {
+    func test_divide_rhs값이_0이아닐때_성공적으로_나누어지는지() {
         sut = .divide
         let result = sut.calculate(lhs: 2, rhs: 1)
         XCTAssertEqual(result, 2)
+    }
+    
+    func test_divide_rhs값이_0일때_결과값이_nan인지() {
+        sut = .divide
+        let result = sut.calculate(lhs: 2, rhs: 0)
+        XCTAssertTrue(result.isNaN)
     }
 }
