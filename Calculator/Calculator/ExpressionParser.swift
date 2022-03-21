@@ -30,12 +30,15 @@ enum ExpressionParser {
         let operatorList: [String] = ["+", "-", "÷", "×"]
         let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(LinkdeList<Double>())
         let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(LinkdeList<Operator>())
+        let allElement = input.trimmingCharacters(in: .whitespaces).components(separatedBy: " ")
         let operands = compomnentsByOperators(from: input).compactMap { Double($0) }
+        let operators = allElement.filter { operatorList.contains($0) }
+        
+        if operatorList.contains(allElement[0]) {
+            operandQueue.enqueue(0.0)
+        }
         
         operands.forEach(operandQueue.enqueue(_:))
-        
-        let operators = input.components(separatedBy: " ")
-            .filter { operatorList.contains($0) }
         
         operators.forEach {
             guard let data = Operator(rawValue: Character($0)) else { return }
