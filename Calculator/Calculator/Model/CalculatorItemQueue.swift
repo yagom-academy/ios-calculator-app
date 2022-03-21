@@ -17,11 +17,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return nodeList.count
     }
     
-    mutating public func enqueue(_ element: T) {
+    public mutating func enqueue(_ element: T) {
         nodeList.append(element)
     }
     
-    mutating public func dequeue() -> T? {
+    public mutating func dequeue() -> T? {
         guard head < nodeList.count else {
             return nil
         }
