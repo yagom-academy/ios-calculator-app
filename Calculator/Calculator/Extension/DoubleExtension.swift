@@ -2,7 +2,7 @@
 //  DoubleExtension.swift
 //  Calculator
 //
-//  Created by Marisol Mirim Kim on 2022/03/16.
+//  Created by marisol on 2022/03/16.
 //
 
 import Foundation
