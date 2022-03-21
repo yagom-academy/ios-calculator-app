@@ -11,22 +11,27 @@ struct Formula {
   var operands = CalculateItemQueue<Double>()
   var operators = CalculateItemQueue<Operator>()
   
-  func result() -> Double {
+  func result() -> Result<Double,CalculatorError> {
     
     guard var result = operands.dequeue() else {
-      return 0
+      return .failure(.nonNumber)
     }
   
     while operands.isEmpty() == false {
 
       guard let operand = operands.dequeue()  else {
-        return result
+        return .failure(.nonNumber)
       }
       guard let `operator` = operators.dequeue() else {
-       return result
+       return .failure(.nonOperator)
       }
+      
+      if `operator` == Operator.divide && operand == Double.zero {
+        return .failure(.divisionByZero)
+      }
+      
       result = `operator`.calculate(lhs: result, rhs: operand)
     }
-    return result
+    return .success(result)
   }
 }
