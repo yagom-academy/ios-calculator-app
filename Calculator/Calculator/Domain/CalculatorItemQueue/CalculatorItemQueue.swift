@@ -9,7 +9,7 @@ import Foundation
 
 struct CalculatorItemQueue<Element: CalculateItem> {
 
-  private(set) var list: CalculatorLinkedList<Element> = .init()
+  private(set) var list = CalculatorLinkedList<Element>()
   
   var elements: [Element] {
     return self.list.allElements()
