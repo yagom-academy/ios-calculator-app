@@ -1,5 +1,5 @@
 //
-//  DoublyLinkedList.swift
+//  CalculatorLinkedList.swift
 //  Calculator
 //
 //  Created by SeoDongyeon on 2022/03/15.
