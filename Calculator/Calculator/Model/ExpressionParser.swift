@@ -15,14 +15,18 @@ enum ExpressionParser {
         var operands = LinkedQueue<Double>()
         var operators = LinkedQueue<Operator>()
         
-        componentsString.forEach{
-            if let number = Double($0) {
+        for value in componentsString {
+            
+            if let number = Double(value) {
                 operands.append(newNode: number)
+                continue
             }
-            if let convertOper = Operator(rawValue: Character($0)) {
+            
+            if let convertOper = Operator(rawValue: Character(value)) {
                 operators.append(newNode: convertOper)
             }
         }
+        
         return Formula(operands: operands, operators: operators)
     }
     
@@ -30,3 +34,4 @@ enum ExpressionParser {
         return input.split(with: " ")
     }
 }
+
