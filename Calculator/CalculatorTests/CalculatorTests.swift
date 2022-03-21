@@ -38,6 +38,16 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertTrue(sut.isEmpty)
     }
+    func test_enqueue를_두번_했을때_처음과_마지막에_정상적으로_enqueue되는지(){
+        //given
+        let input = 1.0
+        let input2 = 2.0
+        //when
+        sut.enqueue(value: input)
+        sut.enqueue(value: input2)
+        //then
+        XCTAssertEqual(sut.first, 1.0)
+        XCTAssertEqual(sut.last, 2.0)
     }
     
     func test_count를_정상적으로_세고있는지() {
