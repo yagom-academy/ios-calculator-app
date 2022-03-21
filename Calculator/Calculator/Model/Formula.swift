@@ -11,12 +11,12 @@ struct Formula {
     
     var operands = LinkedQueue<Double>()
     var operators = LinkedQueue<Operator>()
-    
+
     mutating func result() -> Double {
-        guard var result = operands.removeFirst() else { return .nan }
-        
-        while let oper = operators.removeFirst(), let rhs = operands.removeFirst() {
-            result = oper.calculate(lhs: result, rhs: rhs)
+        var result = operands.removeFirst() ?? .zero
+
+        while let operators = operators.removeFirst(), let rhs = operands.removeFirst() {
+            result = operators.calculate(lhs: result, rhs: rhs)
         }
         return result
     }
