@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T>:CalculateItem {
     var list = [T?]()
     var head: Int = 0
     
