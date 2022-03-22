@@ -106,7 +106,7 @@ class ExpressionParserTests: XCTestCase {
         }
     }
     
-    func test_parse를호출할때_반환된표현식에_숫자가너무큰경우() {
+    func test_parse를호출할때_반환된표현식에_숫자가너무큰경우에도_예상값과같아야한다() {
         // given
         mockExpression = "999999999 + 999999999 - 999999999 / 999999999 * 999999999"
         
