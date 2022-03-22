@@ -8,67 +8,57 @@
 import XCTest
 @testable import Calculator
 
-fileprivate struct MockNode {
-    static var mockInt = Node(data: CalculatorItem.integer(10))
-    static var mockOperator = Node(data: CalculatorItem.operator(.devision))
-    static var mockDouble = Node(data: CalculatorItem.double(3.5))
-}
-
 final class CalculatorItemQueueTests: XCTestCase {
-    private var sut: CalculatorItemQueue<CalculatorItem>!
+    private var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue(node: MockNode.mockInt)
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
-        MockNode.mockDouble.next = nil
-        MockNode.mockInt.next = nil
-        MockNode.mockOperator.next = nil
     }
     
-    private func test_enqueue_node2개_추가됐는지() {
-        sut.enqueue(MockNode.mockOperator)
-        sut.enqueue(MockNode.mockDouble)
+    func test_isEmpty_true인지() {
+        let result = sut.isEmpty()
         
-        let firstNode = sut.linkedList.head
-        let secondNode = firstNode?.next
-        let thirdNode = secondNode?.next
-        
-        XCTAssertEqual(firstNode, MockNode.mockInt)
-        XCTAssertEqual(secondNode, MockNode.mockOperator)
-        XCTAssertEqual(thirdNode, MockNode.mockDouble)
+        XCTAssertTrue(result)
     }
     
-    private func test_clear_head가_nil인지() {
-        let oldHead = sut.linkedList.head
+    func test_enqueue_isEmpty_false인지() {
+        sut.enqueue(Node(data: 3.0))
+        
+        XCTAssertFalse(sut.isEmpty())
+    }
+    
+    func test_clear_isEmpty_true인지() {
+        sut.enqueue(Node(data: 3.0))
         
         sut.clear()
         
-        XCTAssertEqual(oldHead, MockNode.mockInt)
-        XCTAssertNil(sut.linkedList.head)
+        XCTAssertTrue(sut.isEmpty())
     }
 
-    private func test_dequeue_빈queue인지() {
-        let result = sut.dequeue()
+    func test_dequeue_빈queue인지() throws {
+        sut.enqueue(Node(data: 3.0))
+        let result = try sut.dequeue()
         
-        let firstNode = sut.linkedList.head
-        
-        XCTAssertEqual(result, MockNode.mockInt.data)
-        XCTAssertEqual(firstNode, nil)
+        XCTAssertEqual(result, 3.0)
         XCTAssertTrue(sut.isEmpty())
     }
     
-    private func test_sequence프로토콜_준수하는지() {
-        sut.enqueue(MockNode.mockOperator)
-        sut.enqueue(MockNode.mockDouble)
-
-        let result: [CalculatorItem] = sut.map { $0.data }
-        let expectation = [CalculatorItem.integer(10), CalculatorItem.operator(.devision), CalculatorItem.double(3.5)]
-
-        XCTAssertEqual(result, expectation)
+    func test_makeIterator_차례대로_node반환하는지() {
+        let head = Node(data: 1.0)
+        let nextNode = Node(data: 2.0)
+        sut.enqueue(head)
+        sut.enqueue(nextNode)
+        
+        let result = sut.makeIterator().current
+        let nextResult = sut.makeIterator().current?.next
+        
+        XCTAssertEqual(result, head)
+        XCTAssertEqual(nextResult, nextNode)
     }
 }

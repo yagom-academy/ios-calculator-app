@@ -5,12 +5,8 @@
 //  Created by 김태현 on 2022/03/14.
 //
 
-final class CalculatorItemQueue<T: CalculateItem> {
-    let linkedList: LinkedList<T>
-    
-    init(node: Node<T>) {
-        linkedList = LinkedList<T>(head: node)
-    }
+struct CalculatorItemQueue<T: CalculateItem> {
+    private let linkedList = LinkedList<T>()
     
     func isEmpty() -> Bool {
         return linkedList.isEmpty()
@@ -20,8 +16,11 @@ final class CalculatorItemQueue<T: CalculateItem> {
         linkedList.append(node: node)
     }
     
-    func dequeue() -> T? {
-        linkedList.removeFirst()
+    func dequeue() throws -> T {
+        guard let data = linkedList.removeFirst() else {
+            throw CalculatorError.unexpectedData
+        }
+        return data
     }
     
     func clear() {
@@ -31,7 +30,7 @@ final class CalculatorItemQueue<T: CalculateItem> {
 
 extension CalculatorItemQueue: Sequence {
     func makeIterator() -> QueueIterator<T> {
-        return QueueIterator(current: linkedList.head)
+        return QueueIterator<T>(current: linkedList.head)
     }
 }
 
