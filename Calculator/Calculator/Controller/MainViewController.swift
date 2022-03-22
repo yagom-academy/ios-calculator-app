@@ -61,8 +61,8 @@ class MainViewController: UIViewController {
         return subStackView
     }
     
-    func insertSubStackView() {
-        
+    func addInCalculationLog(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
+        calculationLogStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
     }
     
 }
