@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Calculator View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="FunctionalButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MJl-fv-Ddt"/>
+                                                    <action selector="allClearAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ri-QC-fxz"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA" customClass="FunctionalButton" customModule="Calculator" customModuleProvider="target">
@@ -97,7 +97,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="FunctionalButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Gp-dx-sL7"/>
+                                                    <action selector="clearEntryAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Inc-9y-A6r"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc" customClass="FunctionalButton" customModule="Calculator" customModuleProvider="target">
@@ -108,7 +108,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="FunctionalButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YbH-vg-QtD"/>
+                                                    <action selector="changeSignAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M8O-37-3Te"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll" customClass="OperatorButton" customModule="Calculator" customModuleProvider="target">
@@ -318,7 +318,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="FunctionalButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jBN-TK-nhr"/>
+                                                    <action selector="executeCalculatingAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sgm-yV-aYf"/>
                                                 </connections>
                                             </button>
                                         </subviews>
