@@ -47,6 +47,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
+        addInCalculationLog(selectedOperatorLabel, selectedOperandLabel)
         
     }
     
