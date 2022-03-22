@@ -7,6 +7,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     private var currentNumber: String = ""
+    private var expression: String = ""
     private var isInputExist: Bool = false
     
     @IBOutlet private var logScrollView: UIScrollView!
@@ -50,7 +51,7 @@ final class ViewController: UIViewController {
         numberLabel.text = currentNumber
     }
     
-    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTapped(_ sender: UIButton?) {
         if isInputExist == false {
             operatorLabel.text = findOperator(of: sender)
             return
@@ -96,6 +97,7 @@ final class ViewController: UIViewController {
     @IBAction private func acButtonDidTapped(_ sender: Any) {
         currentNumber = ""
         numberLabel.text = "0"
+        operatorLabel.text = ""
         isInputExist = false
         
         calculateLogStackView.arrangedSubviews.forEach { subView in
@@ -128,6 +130,33 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonDidTapped(_ sender: Any) {
+        var expression = ""
+        operatorButtonDidTapped(nil)
+        
+        guard let logStackViews = calculateLogStackView.arrangedSubviews as? [UIStackView] else {
+            return
+        }
+        
+        for logStackView in logStackViews where logStackView.arrangedSubviews.count == 2 {
+            if let operatorView = logStackView.arrangedSubviews[0] as? UILabel {
+                expression += operatorView.text ?? ""
+                expression += " "
+            }
+            
+            if let operandView = logStackView.arrangedSubviews[1] as? UILabel {
+                expression += operandView.text ?? ""
+                expression += " "
+            }
+        }
+        
+        do {
+            let calculateResult = try ExpressionParser.parse(from: expression).result()
+            
+            numberLabel.text = "\(calculateResult)"
+            
+        } catch {
+            numberLabel.text = "NaN"
+        }
     }
     
     private func findNumber(of button: UIButton) -> String {
@@ -159,7 +188,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    private func findOperator(of button: UIButton) -> String? {
+    private func findOperator(of button: UIButton?) -> String? {
         switch button {
         case plusButton:
             return "+"
