@@ -19,13 +19,18 @@ class FunctionalButton: UIButton {
 }
 
 class ViewController: UIViewController {
-
+    static let defaultOperand: String = "0"
+    var formulaNotYetCalculated: String = ""
+    var inputtingOperand: String = defaultOperand
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUpOperandValue()
         setUpOpertorValue()
     }
+    
     
     @IBOutlet var OperandButtons: [OperandButton]!
     
@@ -41,7 +46,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var OperandEightButton: OperandButton!
     @IBOutlet weak var OperandNineButton: OperandButton!
     @IBOutlet weak var OperandDotButton: OperandButton!
-    
     
     
     @IBOutlet var OperatorButtons: [OperatorButton]!
@@ -78,10 +82,22 @@ class ViewController: UIViewController {
         OperatorMultiplyButton.value = "×"
         OperatorDivideButton.value = "÷"
     }
-
+    
     @IBAction func OperandButtonAction(_ sender: OperandButton) {
         guard let input = sender.value else { return }
-        print(input)
+        
+        if inputtingOperand == "0" {
+            if sender == OperandZeroButton || sender == OperandCoupleZeroButton {
+                inputtingOperand = ViewController.defaultOperand
+            } else if sender == OperandDotButton {
+                inputtingOperand += input
+            } else {
+                inputtingOperand = input
+            }
+        } else {
+            inputtingOperand += input
+        }
+        print(inputtingOperand)
     }
     
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
@@ -94,16 +110,22 @@ class ViewController: UIViewController {
         
         switch sender {
         case FuncAllClearButton:
-            print("AC")
+            inputtingOperand = ViewController.defaultOperand
+            formulaNotYetCalculated = ""
         case FuncClearEntryButton:
-            print("CE")
+            inputtingOperand = ViewController.defaultOperand
         case FuncChangeSignButton:
-            print("+/-")
+            if inputtingOperand.first == "-" {
+                inputtingOperand.remove(at: inputtingOperand.startIndex)
+            } else {
+                inputtingOperand.insert("-", at: inputtingOperand.startIndex)
+            }
         case FuncExecuteButton:
             print("=")
         default:
             return
         }
+        print(inputtingOperand)
         
     }
     
