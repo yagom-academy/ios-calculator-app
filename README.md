@@ -170,9 +170,12 @@ operator를 변수이름으로 쓰고 싶었는데 예약어라서 쓰지 못한
 
 그래도 oneOperator 이런식으로라도 쓰는게 좋을까요?
 
-
 ### 배운 개념
+
 ### 피드백 후 개선한 점
+
+- 오류 테스트를 위한 XCAssertThrowsError(), XCTAssertNoThrow()
+- 테스트 함수 네이밍 방법(검증하고 싶은 내용을 적어주기)
 
 ## STEP 3
 
