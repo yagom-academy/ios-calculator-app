@@ -50,17 +50,31 @@ class ViewController: UIViewController {
         
         switch sender.tag {
         case 0:
-            currentOperator = String(Operator.add.rawValue)
+            currentOperator = "\(Operator.add.rawValue)"
         case 1:
-            currentOperator = String(Operator.subtract.rawValue)
+            currentOperator = "\(Operator.subtract.rawValue)"
         case 2:
-            currentOperator = String(Operator.multiply.rawValue)
+            currentOperator = "\(Operator.multiply.rawValue)"
         case 3:
-            currentOperator = String(Operator.divide.rawValue)
+            currentOperator = "\(Operator.divide.rawValue)"
         default:
             print("에러호출")
         }
         currentOperatorLabel.text = currentOperator
+    }
+    
+    @IBAction func convertSignOfCurrentNumber(_ sender: UIButton) {
+        guard var currentNumber = currentNumberLabel.text else {
+            return
+        }
+        
+        if currentNumber.contains(Operator.subtract.rawValue) {
+            let minusSign = currentNumber.first
+            currentNumber = currentNumber.filter{ $0 != minusSign }
+        } else {
+            currentNumber = "-\(currentNumber)"
+        }
+        currentNumberLabel.text = currentNumber
     }
 }
 
