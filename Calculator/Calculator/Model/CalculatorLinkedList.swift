@@ -27,7 +27,7 @@ final class LinkedList<T> {
   func append(data: T) {
     let newNode = Node(data)
     
-    if head == nil {
+    if isEmpty() {
       self.head = newNode
       self.tail = newNode
       self.capacity += 1
@@ -40,7 +40,7 @@ final class LinkedList<T> {
   }
   
   func removeFirst() -> T? {
-    if self.head == nil {
+    if isEmpty() {
       return nil
     }
     let data = head?.data
@@ -50,7 +50,7 @@ final class LinkedList<T> {
   }
   
   func removeLatest() {
-    if self.head == nil {
+    if isEmpty() {
       return
     }
     tail?.previous?.next = nil
@@ -59,7 +59,7 @@ final class LinkedList<T> {
   }
   
   func removeAll() {
-    if self.head == nil {
+    if isEmpty() {
       return
     }
     self.head = nil
