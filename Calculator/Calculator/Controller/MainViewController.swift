@@ -68,6 +68,9 @@ class MainViewController: UIViewController {
         
         subStackView.addArrangedSubview(operatorInLog)
         subStackView.addArrangedSubview(operandInLog)
+        
+        calculationLog.append(operandInLog.text)
+        calculationLog.append(operatorInLog.text)
         return subStackView
     }
     
