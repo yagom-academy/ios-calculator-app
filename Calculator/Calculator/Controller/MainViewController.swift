@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
-        
+        selectedOperandLabel.text = sender.titleLabel?.text
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
