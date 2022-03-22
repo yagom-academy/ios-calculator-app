@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     static let defaultOperand: String = "0"
     var formulaNotYetCalculated: String = ""
     var inputtingOperand: String = defaultOperand
+    var inputtingOperator: String = ""
     var calculator: Formula = Formula()
     var statusZeroFlag: Bool = true
     
@@ -71,8 +72,6 @@ class ViewController: UIViewController {
     
     
     
-    
-    
     func setUpOperandValue() {
         OperandZeroButton.value = "0"
         OperandCoupleZeroButton.value = "00"
@@ -110,20 +109,29 @@ class ViewController: UIViewController {
         } else {
             inputtingOperand += input
         }
+        
+        if !inputtingOperator.isEmpty {
+            formulaNotYetCalculated += inputtingOperator
+            inputtingOperator = ""
+        }
+        
         NumberLabel.text = inputtingOperand
     }
     
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
+        inputtingOperator = input
+        OperatorLabel.text = inputtingOperator
+        
         if statusZeroFlag == true {
             return
         }
         
         formulaNotYetCalculated += inputtingOperand
-        formulaNotYetCalculated += input
+        
         inputtingOperand = ViewController.defaultOperand
         statusZeroFlag = true
-        OperatorLabel.text = sender.value
+        
     }
     
     
@@ -132,13 +140,14 @@ class ViewController: UIViewController {
         case FuncAllClearButton:
             inputtingOperand = ViewController.defaultOperand
             formulaNotYetCalculated = ""
+            inputtingOperator = ""
             statusZeroFlag = true
             OperatorLabel.text = ""
             NumberLabel.text = "0"
         case FuncClearEntryButton:
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
-            OperatorLabel.text = ""
+            
             NumberLabel.text = "0"
         case FuncChangeSignButton:
             if inputtingOperand == ViewController.defaultOperand {
@@ -148,6 +157,7 @@ class ViewController: UIViewController {
             } else {
                 inputtingOperand.insert("-", at: inputtingOperand.startIndex)
             }
+            NumberLabel.text = inputtingOperand
         case FuncExecuteButton:
             if formulaNotYetCalculated.isEmpty {
                 return
@@ -159,6 +169,7 @@ class ViewController: UIViewController {
             formulaNotYetCalculated = ""
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
+            inputtingOperator = ""
             OperatorLabel.text = ""
             NumberLabel.text = "0"
             guard let result = try? parser.result() as Double else { return }
