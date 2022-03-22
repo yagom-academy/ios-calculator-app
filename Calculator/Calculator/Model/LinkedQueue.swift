@@ -8,16 +8,17 @@
 import Foundation
 
 class Node<Element: CalculateItem> {
-    var value: Element?
+    
+    var value: Element
     var next: Node<Element>?
     
-    init(value: Element?, next: Node? = nil) {
+    init(value: Element) {
         self.value = value
-        self.next = next
     }
 }
 
 struct LinkedQueue<Element: CalculateItem> {
+    
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
@@ -25,15 +26,7 @@ struct LinkedQueue<Element: CalculateItem> {
         return head == nil
     }
     
-    var first: Node<Element>? {
-        return head == nil ? nil : head
-    }
-    
-    var last: Node<Element>? {
-        return tail == nil ? nil : tail
-    }
-    
-    mutating func append(newNode: Element?) {
+    mutating func append(newNode: Element) {
         if head == nil {
             head = Node(value: newNode)
             tail = head
@@ -44,14 +37,17 @@ struct LinkedQueue<Element: CalculateItem> {
         tail = tail?.next
     }
     
-    mutating func removeFirst() {
+    mutating func removeFirst() -> Element? {
         if head == nil {
-            return
+            return nil
         }
         
-        let nextHead = head?.next
-        head = nil
-        head = nextHead
+        defer {
+            let nextHead = head?.next
+            head = nil
+            head = nextHead
+        }
+        return head?.value
     }
     
     mutating func removeAll() {

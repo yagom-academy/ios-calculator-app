@@ -7,8 +7,4 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
-
-extension Double: CalculateItem {
-}
+protocol CalculateItem {}
