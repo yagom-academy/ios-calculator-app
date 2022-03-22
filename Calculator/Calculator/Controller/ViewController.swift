@@ -7,7 +7,9 @@ import UIKit
 
 final class ViewController: UIViewController {
     private var currentNumber: String = ""
+    private var isInputExist: Bool = false
     
+    @IBOutlet private var logScrollView: UIScrollView!
     @IBOutlet private var calculateLogStackView: UIStackView!
     
     @IBOutlet private var numberLabel: UILabel!
@@ -39,14 +41,43 @@ final class ViewController: UIViewController {
         let inputNumber = findNumber(of: sender)
         
         if ["00","0"].contains(inputNumber) && numberLabel.text == "0" {
+            isInputExist = true
             return
         }
         
+        isInputExist = true
         currentNumber += inputNumber
         numberLabel.text = currentNumber
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
+        if isInputExist == false {
+            operatorLabel.text = findOperator(of: sender)
+            return
+        }
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        
+        let numberLogLabel = UILabel()
+        numberLogLabel.text = numberLabel.text
+        numberLogLabel.textColor = .white
+        
+        let operatorLogLabel = UILabel()
+        operatorLogLabel.text = operatorLabel.text
+        operatorLogLabel.textColor = .white
+        
+        stackView.addArrangedSubview(operatorLogLabel)
+        stackView.addArrangedSubview(numberLogLabel)
+        
+        calculateLogStackView.addArrangedSubview(stackView)
+        logScrollView.scroll()
+        
+        isInputExist = false
+        currentNumber = ""
+        operatorLabel.text = findOperator(of: sender)
+        numberLabel.text = "0"
     }
     
     @IBAction private func dotButtonDidTapped(_ sender: Any) {

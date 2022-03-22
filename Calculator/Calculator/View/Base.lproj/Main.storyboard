@@ -333,6 +333,7 @@
                         <outlet property="eightButton" destination="xgT-2D-A49" id="fKj-ja-nP5"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="0Bt-jp-INS"/>
                         <outlet property="fourButton" destination="hQm-yz-XvG" id="bHU-QA-pIJ"/>
+                        <outlet property="logScrollView" destination="BOT-7g-vxv" id="Oil-2W-tZG"/>
                         <outlet property="minusButton" destination="nTe-Sn-Pvd" id="St9-L3-yUN"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="Gq4-9T-ef5"/>
                         <outlet property="nineButton" destination="zcj-xJ-ruw" id="nBJ-Ds-zSc"/>
