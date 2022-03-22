@@ -15,21 +15,6 @@ class CalculatorTests: XCTestCase {
         try super.setUpWithError()
         sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
     func test_LinkedList가_비었을때_isEmpty가_true를_리턴하는가() {
         //given
@@ -57,23 +42,10 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         
         //when
-        let result = sut.countNumber()
+        let result = sut.count()
         
         //then
         XCTAssertEqual(result, 1)
-    }
-    
-    func test_CalculatorItemQueue에_enqueue메서드를_세번호출했을때_countNumber가3을_리턴하는가() {
-        //given
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.enqueue(3)
-        
-        //when
-        let result = sut.countNumber()
-        
-        //then
-        XCTAssertEqual(result, 3)
     }
     
     func test_enqueue와dequeue를호출했을때_countNumber가0을_리턴하는가() {
@@ -82,7 +54,7 @@ class CalculatorTests: XCTestCase {
         sut.dequeue()
         
         //when
-        let result = sut.countNumber()
+        let result = sut.count()
         
         //then
         XCTAssertEqual(result, 0)
@@ -95,10 +67,23 @@ class CalculatorTests: XCTestCase {
         sut.dequeue()
         
         //when
-        let result = sut.countNumber()
+        let result = sut.count()
         
         //then
         XCTAssertEqual(result, 1)
+    }
+    
+    func test_CalculatorItemQueue의_enqueue에3과5를넣고_dequeue를두번했을때_nil을_리턴하는가() {
+        //given
+        sut.enqueue(3)
+        sut.enqueue(5)
+        sut.dequeue()
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result?.data, nil)
     }
     
     func test_CalculatorItemQueue의_enqueue에123을넣었을때_dequeue가1을_리턴하는가() {
@@ -114,16 +99,5 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result?.data, 1)
     }
     
-    func test_CalculatorItemQueue의_enqueue에3과5를넣고_dequeue를두번했을때_nil을_리턴하는가() {
-        //given
-        sut.enqueue(3)
-        sut.enqueue(5)
-        sut.dequeue()
-        
-        //when
-        let result = sut.dequeue()
-        
-        //then
-        XCTAssertEqual(result?.data, nil)
-    }
+    
 }

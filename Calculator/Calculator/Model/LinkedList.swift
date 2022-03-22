@@ -3,42 +3,41 @@ import Foundation
 class LinkedList<T> {
     var head: LinkedListNode<T>?
     var tail: LinkedListNode<T>?
-    var count: Int = 0
+//    var count: Int = 0
     var isEmpty: Bool {
-        self.head == nil
+        head == nil
     }
 
     func addNode(data: T) {
-        if head == nil {
-            head = LinkedListNode<T>(data: data)
-            tail = head
-            count = 1
-            return
-        }
         let newNode = LinkedListNode<T>(data: data)
+        if head == nil {
+            head = newNode
+            tail = head
+        } else {
         tail?.next = newNode
         tail = newNode
-        count += 1
-        return
+        }
+//        count += 1
     }
     
     func removeFirstNode() -> LinkedListNode<T>? {
         if head == nil {
             clear()
             return nil
-        }
-        if head?.next == nil {
+        } else if head?.next == nil {
+//            count = 0
+            let headNode = head
             clear()
-            count = 0
-            return head
-        }
+            return headNode
+        } else {
         let node = head
         head = head?.next
-        count -= 1
+//        count -= 1
         return node
+        }
     }
     
-    func clear() {
+    private func clear() {
         head = nil
         tail = nil
     }
