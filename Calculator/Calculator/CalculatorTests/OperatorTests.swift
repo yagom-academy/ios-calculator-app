@@ -22,4 +22,26 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, 0)
     }
+    
+    func test_calculate_divide했을때_결과값이_올바른가() {
+        //given
+        let divide = Operator.divide
+        
+        //when
+        let result = divide.calculate(lhs: 3, rhs: 3)
+        
+        //then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_calculate_0으로_divide했을때_결과값이_nan인가() {
+        //given
+        let divide = Operator.divide
+        
+        //when
+        let result = divide.calculate(lhs: 3, rhs: 0)
+    
+        //then
+        XCTAssertTrue(result.isNaN)
+    }
 }
