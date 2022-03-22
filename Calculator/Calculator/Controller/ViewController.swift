@@ -17,22 +17,7 @@ final class ViewController: UIViewController {
     @IBOutlet private var numberLabel: UILabel!
     @IBOutlet private var operatorLabel: UILabel!
     
-    @IBOutlet private var oneZeroButton: UIButton!
-    @IBOutlet private var twoZeroButton: UIButton!
-    @IBOutlet private var oneButton: UIButton!
-    @IBOutlet private var twoButton: UIButton!
-    @IBOutlet private var threeButton: UIButton!
-    @IBOutlet private var fourButton: UIButton!
-    @IBOutlet private var fiveButton: UIButton!
-    @IBOutlet private var sixButton: UIButton!
-    @IBOutlet private var sevenButton: UIButton!
-    @IBOutlet private var eightButton: UIButton!
-    @IBOutlet private var nineButton: UIButton!
-    
-    @IBOutlet private var plusButton: UIButton!
-    @IBOutlet private var minusButton: UIButton!
-    @IBOutlet private var multiplyButton: UIButton!
-    @IBOutlet private var divideButton: UIButton!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +34,7 @@ final class ViewController: UIViewController {
             acButtonDidTapped(nil)
         }
         
-        let inputNumber = findNumber(of: sender)
+        let inputNumber = sender.titleLabel?.text
         
         if ["00","0"].contains(inputNumber) && numberLabel.text == "0" {
             isInputExist = true
@@ -57,7 +42,7 @@ final class ViewController: UIViewController {
         }
         
         isInputExist = true
-        currentNumber += inputNumber
+        currentNumber += inputNumber ?? ""
         numberLabel.text = currentNumber
     }
     
@@ -67,7 +52,7 @@ final class ViewController: UIViewController {
         }
         
         if isInputExist == false {
-            operatorLabel.text = findOperator(of: sender)
+            operatorLabel.text = sender?.titleLabel?.text
             return
         }
         
@@ -96,7 +81,7 @@ final class ViewController: UIViewController {
     
         isInputExist = false
         currentNumber = ""
-        operatorLabel.text = findOperator(of: sender)
+        operatorLabel.text = sender?.titleLabel?.text
         numberLabel.text = "0"
     }
     
@@ -180,50 +165,6 @@ final class ViewController: UIViewController {
         } catch {
             numberLabel.text = "NaN"
             currentNumber = ""
-        }
-    }
-    
-    private func findNumber(of button: UIButton) -> String {
-        switch button {
-        case oneZeroButton:
-            return "0"
-        case twoZeroButton:
-            return "00"
-        case oneButton:
-            return "1"
-        case twoButton:
-            return "2"
-        case threeButton:
-            return "3"
-        case fourButton:
-            return "4"
-        case fiveButton:
-            return "5"
-        case sixButton:
-            return "6"
-        case sevenButton:
-            return "7"
-        case eightButton:
-            return "8"
-        case nineButton:
-            return "9"
-        default:
-            return ""
-        }
-    }
-    
-    private func findOperator(of button: UIButton?) -> String? {
-        switch button {
-        case plusButton:
-            return "+"
-        case minusButton:
-            return "-"
-        case multiplyButton:
-            return "×"
-        case divideButton:
-            return "÷"
-        default:
-            return ""
         }
     }
     
