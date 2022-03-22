@@ -1,11 +1,9 @@
 import Foundation
 
 enum ExpressionParser {
-//    func parse(from input: String) -> Formula {
-//
-//    }
-//
-//    private func componentsByOperators(from input: String) -> [String] {
-//
-//    }
+//    static func parse(from input: String) -> Formula {}
+
+    static private func componentsByOperators(from input: String) -> [String] {
+        return input.split(with: " ")
+    }
 }

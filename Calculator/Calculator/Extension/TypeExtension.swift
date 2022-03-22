@@ -1,6 +1,8 @@
 import Foundation
 
 extension Double: CalculateItem {}
-//extension String {
-//    split(with target: Character) -> [String] { }
-//}
+extension String {
+    func split(with target: Character) -> [String] {
+        return self.components(separatedBy: String(target))
+    }
+}
