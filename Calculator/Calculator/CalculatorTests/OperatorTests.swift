@@ -44,4 +44,15 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertTrue(result.isNaN)
     }
+    
+    func test_calculate_multiply했을때_결과값이_올바른가() {
+        //given
+        let multiply = Operator.multiply
+        
+        //when
+        let result = multiply.calculate(lhs: 3, rhs: 3)
+        
+        //then
+        XCTAssertEqual(result, 9)
+    }
 }
