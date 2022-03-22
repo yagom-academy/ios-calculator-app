@@ -9,8 +9,6 @@ import Foundation
 
 protocol CalculateItem {}
 
-extension Int: CalculateItem {}
-
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack: [Element] = []
     private var outputStack: [Element] = []
@@ -23,11 +21,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return inputStack.count + outputStack.count
     }
     
-    var front: Element? {
+    var first: Element? {
         return outputStack.last ?? inputStack.first
     }
     
-    var rear: Element? {
+    var last: Element? {
         return outputStack.first ?? inputStack.last
     }
     
@@ -36,9 +34,9 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     @discardableResult
-    mutating func dequeue() -> Element? {
+    mutating func dequeue() throws -> Element {
         guard self.isEmpty == false else {
-            return nil
+            throw QueueError.notFoundElement
         }
         
         if outputStack.isEmpty {
