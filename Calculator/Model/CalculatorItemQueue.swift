@@ -7,8 +7,12 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var list = [T?]()
-    private(set) var head: Int = 0
+    private var dequeueStack: [T] = []
+    private var enqueueStack: [T] = []
+    
+    var head: T? {
+       return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
+    }
     
     var count: Int {
         return list.count
