@@ -77,4 +77,44 @@ class ExpressionParserTests: XCTestCase {
             XCTAssertEqual(error as? CalculatorError, expected)
         }
     }
+    
+    func test_parse를호출할때_반환된표현식에_연산자가없는경우_예상되는에러를반환해야한다() {
+        // given
+        mockExpression = "1230-5"
+        
+        // when
+        var formula = ExpressionParser.parse(from: mockExpression)
+        
+        // then
+        let expected: QueueError = .notFoundElement
+        XCTAssertThrowsError(try formula.result()) { error in
+            XCTAssertEqual(error as? QueueError, expected)
+        }
+    }
+    
+    func test_parse를호출할때_반환된표현식에_피연산자가없는경우_예상되는에러를반환해야한다() {
+        // given
+        mockExpression = "+-/*"
+        
+        // when
+        var formula = ExpressionParser.parse(from: mockExpression)
+        
+        // then
+        let expected: QueueError = .notFoundElement
+        XCTAssertThrowsError(try formula.result()) { error in
+            XCTAssertEqual(error as? QueueError, expected)
+        }
+    }
+    
+    func test_parse를호출할때_반환된표현식에_숫자가너무큰경우() {
+        // given
+        mockExpression = "999999999 + 999999999 - 999999999 / 999999999 * 999999999"
+        
+        // when
+        var formula = ExpressionParser.parse(from: mockExpression)
+        
+        // then
+        let result = (999999999.0+999999999.0-999999999.0)/999999999.0*999999999.0
+        XCTAssertEqual(Double(result), try formula.result())
+    }
 }
