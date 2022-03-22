@@ -29,6 +29,10 @@ class ViewController: UIViewController {
             return
         }
         
+        guard currentNumber.count <= 19 else {
+            return
+        }
+        
         if currentNumber == Number.zero.rawValue, sender.tag == 10 {
             return
         } else if currentNumber == Number.zero.rawValue, sender.tag != 11 {
