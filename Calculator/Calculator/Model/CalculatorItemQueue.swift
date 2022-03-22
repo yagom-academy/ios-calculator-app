@@ -1,8 +1,8 @@
 //
-//  model.swift
+//  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by Red on 2022/03/15.
+//  Created by Red on 2022/03/18.
 //
 
 import Foundation
@@ -11,28 +11,25 @@ protocol CalculateItem {
     // empty
 }
 
-enum Operator: CalculateItem {
-    case add, subtract, multiply, division
-}
-
-extension Double: CalculateItem {
-}
-
-struct CalculatorItemQueue {
-    private(set) var queue: [Int: CalculateItem] = [:]
-    private(set) var head: Int = 0
-    private(set) var tail: Int = 0
+struct CalculatorItemQueue<T: CalculateItem> {
+    private var queue: [Int: T] = [:]
+    private var head: Int = 0
+    private var tail: Int = 0
+    
+    init(values: [T] = []) {
+        values.forEach { enqueue(with: $0) }
+    }
     
     var isEmpty: Bool {
         return queue.isEmpty
     }
     
-    mutating func enqueue(with data: CalculateItem) {
+    mutating func enqueue(with data: T) {
         queue[tail] = data
         tail += 1
     }
     
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> T? {
         if isEmpty {
             return nil
         }
