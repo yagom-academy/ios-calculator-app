@@ -9,7 +9,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet weak var calculationLogStackView: UIStackView!
-    private var calculationLog: String?
+    private var calculationLog: [String?] = []
     
     @IBOutlet weak var oneButton: UIButton!
     @IBOutlet weak var twoButton: UIButton!
