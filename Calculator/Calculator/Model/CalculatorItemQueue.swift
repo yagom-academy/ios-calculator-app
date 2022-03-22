@@ -6,21 +6,17 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T: CalculateItem> {
     private var linkedList = LinkedList<T>()
     var count: Int
-//    func countNumber() -> Int {
-//        return linkedList.count
-//    }
     
-//    func isEmpty() -> Bool {
-//        return linkedList.isEmpty
-//       // return linkedList.head == nil
-//    }
+    func isEmpty() -> Bool {
+        return linkedList.isEmpty
+    }
     
     mutating func enqueue(_ data: T) {
         linkedList.addNode(data: data)
         count += 1
     }
     
-    mutating func dequeue() -> LinkedListNode<T>? {
+    mutating func dequeue() -> T? {
         if linkedList.head == nil || linkedList.head?.next == nil {
             count = 0
         } else {
