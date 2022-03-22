@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        currentNumberLabel.text = Number.zero.rawValue
     }
     
     // MARK: Label Changing Methods
@@ -37,6 +37,8 @@ class ViewController: UIViewController {
             return
         } else if currentNumber == Number.zero.rawValue, sender.tag != 11 {
             currentNumber = ""
+        } else if currentNumber == "-\(Number.zero.rawValue)" {
+            currentNumber = "-"
         } else if currentNumber.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
             return
         }
