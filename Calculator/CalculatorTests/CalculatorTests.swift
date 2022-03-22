@@ -37,53 +37,52 @@ class CalculatorTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_CalculatorItemQueue에_enqueue메서드를_한번호출했을때_countNumber가1을_리턴하는가() {
+    func test_CalculatorItemQueue에_enqueue메서드를_한번호출했을때_count가1을_리턴하는가() {
         //given
         sut.enqueue(1)
         
         //when
-        let result = sut.count()
+        let result = sut.count
         
         //then
         XCTAssertEqual(result, 1)
     }
     
-    func test_enqueue와dequeue를호출했을때_countNumber가0을_리턴하는가() {
+    func test_enqueue와dequeue를호출했을때_dequeue가2를_리턴하는가() {
         //given
         sut.enqueue(2)
-        sut.dequeue()
         
         //when
-        let result = sut.count()
+        let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result, 0)
+        XCTAssertEqual(result, 2)
     }
     
-    func test_CalculatorItemQueue에_enqueue를두번dequeue를한번호출했을때_countNumber가1을_리턴하는가() {
+    func test_CalculatorItemQueue에_enqueue를두번dequeue를한번호출했을때_dequeue가1를_리턴하는가() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
-        sut.dequeue()
         
         //when
-        let result = sut.count()
+        let result = sut.dequeue()
         
         //then
         XCTAssertEqual(result, 1)
     }
     
-    func test_CalculatorItemQueue의_enqueue에3과5를넣고_dequeue를두번했을때_nil을_리턴하는가() {
+    func test_CalculatorItemQueue의_enqueue에3과5를넣고_dequeue를세번했을때_nil을_리턴하는가() {
         //given
         sut.enqueue(3)
         sut.enqueue(5)
+        sut.dequeue()
         sut.dequeue()
         
         //when
         let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result?.data, nil)
+        XCTAssertEqual(result, nil)
     }
     
     func test_CalculatorItemQueue의_enqueue에123을넣었을때_dequeue가1을_리턴하는가() {
@@ -96,7 +95,7 @@ class CalculatorTests: XCTestCase {
         let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result?.data, 1)
+        XCTAssertEqual(result, 1)
     }
     
     

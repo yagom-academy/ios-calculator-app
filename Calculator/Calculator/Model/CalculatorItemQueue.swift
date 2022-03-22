@@ -4,7 +4,7 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var linkedList = LinkedList<T>()
+    private let linkedList = LinkedList<T>()
     var count: Int
     
     func isEmpty() -> Bool {
