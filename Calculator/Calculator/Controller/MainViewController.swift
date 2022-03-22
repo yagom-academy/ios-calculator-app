@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
         addInCalculationLog(selectedOperatorLabel, selectedOperandLabel)
-        
+        selectedOperatorLabel.text = sender.titleLabel?.text
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
