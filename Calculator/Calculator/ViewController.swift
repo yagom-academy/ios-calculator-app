@@ -28,9 +28,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         setUpOperandValue()
         setUpOpertorValue()
+        
+        OperatorLabel.text = ""
+        NumberLabel.text = "0"
     }
     
     
@@ -62,6 +64,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var FuncClearEntryButton: FunctionalButton!
     @IBOutlet weak var FuncChangeSignButton: FunctionalButton!
     @IBOutlet weak var FuncExecuteButton: FunctionalButton!
+    
+  
+    @IBOutlet weak var OperatorLabel: UILabel!
+    @IBOutlet weak var NumberLabel: UILabel!
+    
+    
+    
+    
     
     func setUpOperandValue() {
         OperandZeroButton.value = "0"
@@ -100,6 +110,7 @@ class ViewController: UIViewController {
         } else {
             inputtingOperand += input
         }
+        NumberLabel.text = inputtingOperand
     }
     
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
@@ -112,6 +123,7 @@ class ViewController: UIViewController {
         formulaNotYetCalculated += input
         inputtingOperand = ViewController.defaultOperand
         statusZeroFlag = true
+        OperatorLabel.text = sender.value
     }
     
     
@@ -121,9 +133,13 @@ class ViewController: UIViewController {
             inputtingOperand = ViewController.defaultOperand
             formulaNotYetCalculated = ""
             statusZeroFlag = true
+            OperatorLabel.text = ""
+            NumberLabel.text = "0"
         case FuncClearEntryButton:
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
+            OperatorLabel.text = ""
+            NumberLabel.text = "0"
         case FuncChangeSignButton:
             if inputtingOperand == ViewController.defaultOperand {
                 return
@@ -143,8 +159,15 @@ class ViewController: UIViewController {
             formulaNotYetCalculated = ""
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
+            OperatorLabel.text = ""
+            NumberLabel.text = "0"
             guard let result = try? parser.result() as Double else { return }
-            print(result)
+            if result.isNaN {
+                NumberLabel.text = "NaN"
+            } else {
+                NumberLabel.text = String(result)
+            }
+            
         default:
             return
         }

@@ -368,6 +368,7 @@
                         <outlet property="FuncChangeSignButton" destination="ows-U7-mNc" id="0Vy-Yo-sUS"/>
                         <outlet property="FuncClearEntryButton" destination="RLD-dY-LOA" id="Yto-So-XaQ"/>
                         <outlet property="FuncExecuteButton" destination="Daw-iX-Owl" id="EBa-mG-pCb"/>
+                        <outlet property="NumberLabel" destination="Lwz-OF-XHD" id="OMK-Vs-5eZ"/>
                         <outlet property="OperandCoupleZeroButton" destination="sH6-8l-kje" id="GEh-xT-I5F"/>
                         <outlet property="OperandDotButton" destination="h8q-5h-bnb" id="KzM-3U-FaP"/>
                         <outlet property="OperandEightButton" destination="xgT-2D-A49" id="pvO-Ua-Cuv"/>
@@ -382,6 +383,7 @@
                         <outlet property="OperandZeroButton" destination="mSz-Y3-r5Z" id="cbw-ez-XG1"/>
                         <outlet property="OperatorAddButton" destination="sbh-wC-koF" id="beO-7Z-yR5"/>
                         <outlet property="OperatorDivideButton" destination="Tfz-eM-jll" id="eFy-RO-OWk"/>
+                        <outlet property="OperatorLabel" destination="HPC-iy-qdm" id="Xxs-Ch-09D"/>
                         <outlet property="OperatorMultiplyButton" destination="811-Pz-An6" id="PMw-Lb-fUE"/>
                         <outlet property="OperatorSubtractButton" destination="nTe-Sn-Pvd" id="vIG-eQ-FcR"/>
                         <outletCollection property="OperandButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="sae-DT-eMW"/>
