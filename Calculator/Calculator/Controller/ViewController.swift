@@ -24,11 +24,11 @@ class ViewController: UIViewController {
     }
     
     // MARK: Label Changing Methods
-    @IBAction func showNumberOnLabel(_ sender: UIButton) {
+    @IBAction func numberButtonsClicked(_ sender: UIButton) {
         guard var currentNumber = currentNumberLabel.text else {
             return
         }
-
+        
         if currentNumber == Number.zero.rawValue, sender.tag == 10 {
             return
         } else if currentNumber == Number.zero.rawValue, sender.tag != 11 {
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             guard (0..<12) ~= sender.tag  else {
                 return
             }
-
+            
             if String(sender.tag) == number.rawValue {
                 currentNumber += number.rawValue
             } else if sender.tag == 10, number == .doubleZero {
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func showOperatorOnLabel(_ sender: UIButton) {
+    @IBAction func operatorButtonsClicked(_ sender: UIButton) {
         guard var currentOperator = currentOperatorLabel.text else {
             return
         }
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         currentOperatorLabel.text = currentOperator
     }
     
-    @IBAction func convertSignOfCurrentNumber(_ sender: UIButton) {
+    @IBAction func signConvertingButtonClicked(_ sender: UIButton) {
         guard var currentNumber = currentNumberLabel.text else {
             return
         }
