@@ -43,5 +43,24 @@ class ViewController: UIViewController {
             currentNumberLabel.text = currentNumber
         }
     }
+    @IBAction func showOperatorOnLabel(_ sender: UIButton) {
+        guard var currentOperator = currentOperatorLabel.text else {
+            return
+        }
+        
+        switch sender.tag {
+        case 0:
+            currentOperator = String(Operator.add.rawValue)
+        case 1:
+            currentOperator = String(Operator.subtract.rawValue)
+        case 2:
+            currentOperator = String(Operator.multiply.rawValue)
+        case 3:
+            currentOperator = String(Operator.divide.rawValue)
+        default:
+            print("에러호출")
+        }
+        currentOperatorLabel.text = currentOperator
+    }
 }
 
