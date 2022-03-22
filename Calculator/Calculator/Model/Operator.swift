@@ -10,7 +10,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
-            return add(lhs: lhs, rhs: lhs)
+            return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
