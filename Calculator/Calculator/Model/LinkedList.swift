@@ -11,11 +11,10 @@ class LinkedList<T> {
         let newNode = LinkedListNode<T>(data: data)
         if isEmpty {
             head = newNode
-            tail = head
         } else {
         tail?.next = newNode
-        tail = newNode
         }
+        tail = newNode
     }
     
     func removeFirstNode() -> T? {
