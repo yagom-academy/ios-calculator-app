@@ -7,7 +7,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     private var currentNumber: String = ""
-    private var expression: String = ""
+    private var expression: [String?] = []
     private var isInputExist: Bool = false
     
     @IBOutlet private var logScrollView: UIScrollView!
@@ -39,6 +39,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
+        if numberLabel.text == "NaN" {
+            return
+        }
+        
         let inputNumber = findNumber(of: sender)
         
         if ["00","0"].contains(inputNumber) && numberLabel.text == "0" {
@@ -52,6 +56,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton?) {
+        if numberLabel.text == "NaN" {
+            return
+        }
+        
         if isInputExist == false {
             operatorLabel.text = findOperator(of: sender)
             return
@@ -75,6 +83,9 @@ final class ViewController: UIViewController {
         calculateLogStackView.addArrangedSubview(stackView)
         logScrollView.scroll()
         
+        expression.append(operatorLabel.text)
+        expression.append(numberLabel.text)
+    
         isInputExist = false
         currentNumber = ""
         operatorLabel.text = findOperator(of: sender)
@@ -82,6 +93,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func dotButtonDidTapped(_ sender: Any) {
+        if numberLabel.text == "NaN" {
+            return
+        }
+        
         if currentNumber.contains(".") {
             return
         }
@@ -95,6 +110,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func acButtonDidTapped(_ sender: Any) {
+        expression.removeAll()
         currentNumber = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
@@ -106,6 +122,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func ceButtonDidTapped(_ sender: Any) {
+        if numberLabel.text == "NaN" {
+            return
+        }
+        
         currentNumber = ""
         numberLabel.text = "0"
         isInputExist = false
@@ -130,32 +150,23 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonDidTapped(_ sender: Any) {
-        var expression = ""
-        operatorButtonDidTapped(nil)
-        
-        guard let logStackViews = calculateLogStackView.arrangedSubviews as? [UIStackView] else {
+        if expression.isEmpty {
             return
         }
         
-        for logStackView in logStackViews where logStackView.arrangedSubviews.count == 2 {
-            if let operatorView = logStackView.arrangedSubviews[0] as? UILabel {
-                expression += operatorView.text ?? ""
-                expression += " "
-            }
-            
-            if let operandView = logStackView.arrangedSubviews[1] as? UILabel {
-                expression += operandView.text ?? ""
-                expression += " "
-            }
-        }
+        operatorButtonDidTapped(nil)
+        
+        let expressionString = expression.compactMap{$0}.joined(separator: " ")
+        expression.removeAll()
         
         do {
-            let calculateResult = try ExpressionParser.parse(from: expression).result()
-            
+            let calculateResult = try ExpressionParser.parse(from: expressionString).result()
             numberLabel.text = "\(calculateResult)"
-            
+            currentNumber = "\(calculateResult)"
+            isInputExist = true
         } catch {
             numberLabel.text = "NaN"
+            currentNumber = ""
         }
     }
     
