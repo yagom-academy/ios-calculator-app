@@ -41,5 +41,22 @@ class MainViewController: UIViewController {
     }
 
 
+    
+    @IBAction func operandButtonsClicked(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func signButtonClicked(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func operatorButtonsClicked(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func equalSignButtonClicked(_ sender: UIButton) {
+        
+    }
+    
 }
 
