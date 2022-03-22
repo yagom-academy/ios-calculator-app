@@ -94,9 +94,19 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func acButtonDidTapped(_ sender: Any) {
+        currentNumber = ""
+        numberLabel.text = "0"
+        isInputExist = false
+        
+        calculateLogStackView.arrangedSubviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
     }
     
     @IBAction private func ceButtonDidTapped(_ sender: Any) {
+        currentNumber = ""
+        numberLabel.text = "0"
+        isInputExist = false
     }
     
     @IBAction private func signButtonDidTapped(_ sender: Any) {
