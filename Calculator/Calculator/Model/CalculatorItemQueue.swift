@@ -1,14 +1,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
-extension Int: CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<T: CalculateItem> {
     
     private var inputStack:[T] = []
