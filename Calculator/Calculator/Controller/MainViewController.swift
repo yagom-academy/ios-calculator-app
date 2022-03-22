@@ -49,6 +49,7 @@ class MainViewController: UIViewController {
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
         addInCalculationLog(selectedOperatorLabel, selectedOperandLabel)
         selectedOperatorLabel.text = sender.titleLabel?.text
+        selectedOperandLabel.text = ""
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
@@ -73,6 +74,5 @@ class MainViewController: UIViewController {
     func addInCalculationLog(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
         calculationLogStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
     }
-    
 }
 
