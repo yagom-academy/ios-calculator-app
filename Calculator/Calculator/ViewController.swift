@@ -125,7 +125,9 @@ class ViewController: UIViewController {
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
         case FuncChangeSignButton:
-            if inputtingOperand.first == "-" {
+            if inputtingOperand == ViewController.defaultOperand {
+                return
+            } else if inputtingOperand.first == "-" {
                 inputtingOperand.remove(at: inputtingOperand.startIndex)
             } else {
                 inputtingOperand.insert("-", at: inputtingOperand.startIndex)
