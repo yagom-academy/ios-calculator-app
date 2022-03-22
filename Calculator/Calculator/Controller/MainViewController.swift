@@ -7,7 +7,6 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
     
     @IBOutlet weak var calculationLogStackView: UIStackView!
     private var calculationLog: String?
@@ -35,12 +34,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         self.selectedOperatorLabel.text = ""
         self.selectedOperandLabel.text = ""
     }
-
-
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         
@@ -55,6 +51,17 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
+        
+    }
+    
+    func insertCalculationLog() -> UIStackView {
+        let subStackView = UIStackView()
+        subStackView.addArrangedSubview(selectedOperatorLabel)
+        subStackView.addArrangedSubview(selectedOperandLabel)
+        return subStackView
+    }
+    
+    func insertSubStackView() {
         
     }
     
