@@ -15,23 +15,23 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     var count: Int {
-        return list.count
+        return enqueueStack.count
     }
     
     var isEmpty: Bool {
-        return list.compactMap{$0}.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
     var first: T? {
-        return list.first ?? nil
+        return enqueueStack.first
     }
     
     var last: T? {
-        return list.last ?? nil
+        return enqueueStack.last
     }
     
     mutating func enqueue(value: T) {
-        list.append(value)
+        enqueueStack.append(value)
     }
     
     mutating func dequeue() -> T? {
