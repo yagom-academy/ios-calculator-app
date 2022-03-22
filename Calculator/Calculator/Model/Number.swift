@@ -19,4 +19,5 @@ enum Number: String, CaseIterable {
     case nine = "9"
     case zero = "0"
     case doubleZero = "00"
+    case decimalPoint = "."
 }
