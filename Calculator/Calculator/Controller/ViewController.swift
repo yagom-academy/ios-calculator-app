@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+    // MARK: IBOutlet
     @IBOutlet weak var currentNumberLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
+    // MARK: Label Changing Methods
     @IBAction func showNumberOnLabel(_ sender: UIButton) {
         guard var currentNumber = currentNumberLabel.text else {
             return
@@ -75,6 +75,9 @@ class ViewController: UIViewController {
             currentNumber = "-\(currentNumber)"
         }
         currentNumberLabel.text = currentNumber
+    }
+    @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
+        currentNumberLabel.text = Number.zero.rawValue
     }
 }
 
