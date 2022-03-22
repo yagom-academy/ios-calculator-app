@@ -17,8 +17,13 @@ final class ViewController: UIViewController {
     @IBOutlet private var numberLabel: UILabel!
     @IBOutlet private var operatorLabel: UILabel!
     
-
-
+    private lazy var numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.roundingMode = .floor
+        return formatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         numberLabel.text = "0"
@@ -29,6 +34,10 @@ final class ViewController: UIViewController {
             return
         }
         
+        if String(currentNumber).count >= 20 {
+            return
+        }
+        
         if isCalculateValue {
             isCalculateValue = false
             acButtonDidTapped(nil)
@@ -36,7 +45,7 @@ final class ViewController: UIViewController {
         
         let inputNumber = sender.titleLabel?.text
         
-        if ["00","0"].contains(inputNumber) && numberLabel.text == "0" {
+        if ["00","0"].contains(inputNumber), numberLabel.text == "0" {
             isInputExist = true
             return
         }
@@ -58,27 +67,25 @@ final class ViewController: UIViewController {
         
         isCalculateValue = false
         
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .trailing
-        stackView.spacing = 10
+        let doubleNumber = numberLabel.text?.replacingOccurrences(of: ",", with: "")
         
         let numberLogLabel = UILabel()
-        numberLogLabel.text = numberLabel.text
+        numberLogLabel.text = doubleNumber
         numberLogLabel.textColor = .white
         
         let operatorLogLabel = UILabel()
         operatorLogLabel.text = operatorLabel.text
         operatorLogLabel.textColor = .white
         
-        stackView.addArrangedSubview(operatorLogLabel)
-        stackView.addArrangedSubview(numberLogLabel)
+        let stackView = UIStackView(arrangedSubviews: [operatorLogLabel, numberLogLabel])
+        stackView.axis = .horizontal
+        stackView.alignment = .trailing
+        stackView.spacing = 10
         
         calculateLogStackView.addArrangedSubview(stackView)
         logScrollView.scroll()
-        
-        expression.append(operatorLabel.text)
-        expression.append(numberLabel.text)
+    
+        expression.append(contentsOf: [operatorLabel.text, doubleNumber])
     
         isInputExist = false
         currentNumber = ""
@@ -99,6 +106,10 @@ final class ViewController: UIViewController {
             return
         }
         
+        if String(currentNumber).count >= 20 {
+            return
+        }
+
         if currentNumber.isEmpty {
             currentNumber = "0"
         }
@@ -151,7 +162,7 @@ final class ViewController: UIViewController {
         if expression.isEmpty {
             return
         }
-        
+                
         operatorButtonDidTapped(nil)
         
         let expressionString = expression.compactMap{$0}.joined(separator: " ")
@@ -159,13 +170,24 @@ final class ViewController: UIViewController {
         
         do {
             let calculateResult = try ExpressionParser.parse(from: expressionString).result()
-            numberLabel.text = "\(calculateResult)"
+            numberLabel.text = adjust(number: calculateResult)
             currentNumber = ""
             isCalculateValue = true
             isInputExist = true
         } catch {
             numberLabel.text = "NaN"
             currentNumber = ""
+        }
+    }
+    
+    private func adjust(number: Double) -> String? {
+        let splitedNumber = String(number).split(with: ".")
+        let integerDigits = splitedNumber[0]
+        
+        if integerDigits.count > 20 {
+            return "NaN"
+        } else {
+            return numberFormatter.string(from: number as NSNumber)
         }
     }
     
