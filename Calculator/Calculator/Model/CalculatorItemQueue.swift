@@ -3,7 +3,7 @@ import Foundation
 protocol CalculateItem {
 }
 
-struct CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T> {
     private let linkedList = LinkedList<T>()
 
     func isEmpty() -> Bool {
