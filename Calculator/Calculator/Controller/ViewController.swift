@@ -50,5 +50,49 @@ final class ViewController: UIViewController {
     @IBAction private func calculateButtonDidTapped(_ sender: Any) {
     }
     
+    private func findNumber(of button: UIButton) -> String {
+        switch button {
+        case oneZeroButton:
+            return "0"
+        case twoZeroButton:
+            return "00"
+        case oneButton:
+            return "1"
+        case twoButton:
+            return "2"
+        case threeButton:
+            return "3"
+        case fourButton:
+            return "4"
+        case fiveButton:
+            return "5"
+        case sixButton:
+            return "6"
+        case sevenButton:
+            return "7"
+        case eightButton:
+            return "8"
+        case nineButton:
+            return "9"
+        default:
+            return ""
+        }
+    }
+    
+    private func findOperator(of button: UIButton) -> String? {
+        switch button {
+        case plusButton:
+            return "+"
+        case minusButton:
+            return "-"
+        case multiplyButton:
+            return "×"
+        case divideButton:
+            return "÷"
+        default:
+            return ""
+        }
+    }
+    
 }
 
