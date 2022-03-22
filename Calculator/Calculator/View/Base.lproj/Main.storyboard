@@ -329,8 +329,6 @@
                     </view>
                     <connections>
                         <outlet property="calculateLogStackView" destination="XRe-QE-UJf" id="8Sv-N5-EOt"/>
-                        <outlet property="currentOperand" destination="Lwz-OF-XHD" id="eHS-YG-rXR"/>
-                        <outlet property="currentOperator" destination="HPC-iy-qdm" id="kfh-oo-DB2"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="z3q-XP-9jB"/>
                         <outlet property="eightButton" destination="xgT-2D-A49" id="fKj-ja-nP5"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="0Bt-jp-INS"/>
@@ -338,8 +336,10 @@
                         <outlet property="minusButton" destination="nTe-Sn-Pvd" id="St9-L3-yUN"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="Gq4-9T-ef5"/>
                         <outlet property="nineButton" destination="zcj-xJ-ruw" id="nBJ-Ds-zSc"/>
+                        <outlet property="numberLabel" destination="Lwz-OF-XHD" id="UK3-UZ-p18"/>
                         <outlet property="oneButton" destination="nCE-qB-NiN" id="B9x-gE-p6j"/>
                         <outlet property="oneZeroButton" destination="mSz-Y3-r5Z" id="ATQ-Fl-VvZ"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="4fW-3q-XX9"/>
                         <outlet property="plusButton" destination="sbh-wC-koF" id="xDg-5x-8A1"/>
                         <outlet property="sevenButton" destination="L6z-2G-Gar" id="RT1-OK-6DH"/>
                         <outlet property="sixButton" destination="OaY-Mw-CPv" id="QIJ-jH-Do0"/>
