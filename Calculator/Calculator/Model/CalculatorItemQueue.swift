@@ -6,6 +6,7 @@ struct CalculatorItemQueue<item: CalculateItem> {
     var count: Int { enqueueList.count + dequeueList.count }
     var first: item? { dequeueList.isEmpty ? enqueueList.first : dequeueList.last }
     var last: item? { enqueueList.isEmpty ? dequeueList.first : enqueueList.last }
+    var isEmpty: Bool { enqueueList.isEmpty && dequeueList.isEmpty }
     
     mutating func enqueue(_ item: item) {
         enqueueList.append(item)

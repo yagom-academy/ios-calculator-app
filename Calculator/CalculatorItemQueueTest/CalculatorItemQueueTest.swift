@@ -90,6 +90,40 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(sut.last, input5)
     }
     
+    //MARK: - isEmpty
+    func test_isEmpty호출시_리스트들이비어있을때_true를반환하는지() {
+        //when
+        sut.removeAll()
+        //then
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_isEmpty호출시_enqueueList만요소가있을때_false를반환하는지() {
+        //when
+        sut.enqueue(1)
+        //then
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_isEmpty호출시_dequeueList만요소가있을때_false를반환하는지() {
+        //when
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.dequeue()
+        //then
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_isEmpty호출시_두리스트다요소가있을때_false를반환하는지() {
+        //when
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.dequeue()
+        sut.enqueue(123)
+        //then
+        XCTAssertFalse(sut.isEmpty)
+        
+    }
     //MARK: - enqueue()
     func test_enqueue호출시_정상적으로추가가되는지() {
         //given
