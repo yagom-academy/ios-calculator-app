@@ -22,28 +22,29 @@ final class CalculatorTests: XCTestCase {
   }
   
   func test_enqueue함수를_호출하면_1이_추가되는지() {
-    let input = 1.0
+    let inputOne = 1.0
     
-    sut.enqueue(data: input)
+    sut.enqueue(data: inputOne)
     
     XCTAssertEqual(sut.list.head?.data, 1.0)
   }
   
   func test_enqueue함수를_호출하면_2가_올라가는지() {
-    let input = 2.0
+    let inputTwo = 2.0
     
-    sut.enqueue(data: input)
+    sut.enqueue(data: inputTwo)
     
     XCTAssertEqual(sut.list.head?.data, 2.0)
   }
   
   func test_dequeue함수를_호출하면_올라갔던_2가_삭제되는지() {
-    let input = 2.0
+    let inputTwo = 2.0
+    let inputThree = 3.0
+    sut.enqueue(data: inputTwo)
+    sut.enqueue(data: inputThree)
+
     
-    sut.enqueue(data: input)
-    sut.dequeue()
-    
-    XCTAssertEqual(sut.list.head?.data, nil)
+    XCTAssertEqual(sut.dequeue(), 2.0)
   }
   
   func test_dequeue함수를_호출하면_올라갔던_1과2중_1이_삭제되는지() {
@@ -95,6 +96,18 @@ final class CalculatorTests: XCTestCase {
   
   func test_dequeue함수를_아무것도_없는_상태에서_호출하면_capacity가_0이되는지() {
     sut.dequeue()
+    
     XCTAssertEqual(sut.list.capacity, 0)
   }
+  
+  func test_dequeue함수를_호출하면_올라갔던_1과2중_2가_반환되는지() {
+    let inputOne = 1.0
+    let inputTwo = 2.0
+
+    sut.enqueue(data: inputOne)
+    sut.enqueue(data: inputTwo)
+    
+    XCTAssertEqual(sut.dequeue(), 1.0)
+  }
+  
 }

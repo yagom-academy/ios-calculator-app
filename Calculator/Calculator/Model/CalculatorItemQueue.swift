@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class CalculateItemQueue<T: CalculateItem> {
+struct CalculateItemQueue<T: CalculateItem> {
   var list = LinkedList<T>()
   
   func enqueue(data: T) {
     list.append(data: data)
   }
   
-  func dequeue() {
+  func dequeue() -> T? {
     list.removeFirst()
   }
   
@@ -27,6 +27,10 @@ final class CalculateItemQueue<T: CalculateItem> {
   }
   
   func presentAll() -> [T] {
-   return list.showAll()
+    return list.showAll()
+  }
+  
+  func isEmpty() -> Bool {
+    list.isEmpty()
   }
 }
