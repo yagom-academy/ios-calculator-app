@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.selectedOperatorLabel.text = ""
-        self.selectedOperandLabel.text = ""
+        self.selectedOperandLabel.text = "0"
     }
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
