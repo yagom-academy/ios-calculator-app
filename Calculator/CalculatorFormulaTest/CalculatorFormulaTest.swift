@@ -41,7 +41,7 @@ class CalculatorTests: XCTestCase {
     
     switch result {
     case .success(let number):
-      XCTAssertEqual(number, 2)
+      XCTAssertEqual(number, Double.infinity)
     case .failure(let error):
       XCTAssertEqual(error, CalculatorError.divisionByZero)
     }
@@ -54,7 +54,7 @@ class CalculatorTests: XCTestCase {
     
     switch result {
     case .success(let number):
-      XCTAssertEqual(number, 2)
+      XCTAssertEqual(number, 0)
     case .failure(let error):
       XCTAssertEqual(error, CalculatorError.nonNumber)
     }
@@ -67,7 +67,7 @@ class CalculatorTests: XCTestCase {
     
     switch result {
     case .success(let number):
-      XCTAssertEqual(number, 3)
+      XCTAssertEqual(number, 2)
     case .failure(let error):
       XCTAssertEqual(error, CalculatorError.nonOperator)
     }
