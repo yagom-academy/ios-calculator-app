@@ -4,7 +4,7 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators =  CalculatorItemQueue<Operator>()
     
-    func result() -> Double {
-        return 0
-    }
+//    func result() -> Double {
+//        return 0
+//    }
 }
