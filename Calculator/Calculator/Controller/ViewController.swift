@@ -22,9 +22,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
     // MARK: Label Changing Methods
     @IBAction func showNumberOnLabel(_ sender: UIButton) {
         guard var currentNumber = currentNumberLabel.text else {
+            return
+        }
+
+        if currentNumber == Number.zero.rawValue, sender.tag == 10 {
+            return
+        } else if currentNumber == Number.zero.rawValue, sender.tag != 11 {
+            currentNumber = ""
+        } else if currentNumber.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
             return
         }
         
@@ -43,6 +52,7 @@ class ViewController: UIViewController {
             currentNumberLabel.text = currentNumber
         }
     }
+    
     @IBAction func showOperatorOnLabel(_ sender: UIButton) {
         guard var currentOperator = currentOperatorLabel.text else {
             return
@@ -76,6 +86,7 @@ class ViewController: UIViewController {
         }
         currentNumberLabel.text = currentNumber
     }
+    
     @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
         currentNumberLabel.text = Number.zero.rawValue
     }
