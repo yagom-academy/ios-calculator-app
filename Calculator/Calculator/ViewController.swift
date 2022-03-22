@@ -10,12 +10,17 @@ class OperandButton: UIButton {
     var value: String?
 }
 
+class OperatorButton: UIButton {
+    var value: String?
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUpOperandValue()
+        setUpOpertorValue()
     }
     
     @IBOutlet var OperandButtons: [OperandButton]!
@@ -33,6 +38,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var OperandNineButton: OperandButton!
     @IBOutlet weak var OperandDotButton: OperandButton!
     
+    
+    
+    @IBOutlet var OperatorButtons: [OperatorButton]!
+    
+    @IBOutlet weak var OperatorAddButton: OperatorButton!
+    @IBOutlet weak var OperatorSubtractButton: OperatorButton!
+    @IBOutlet weak var OperatorMultiplyButton: OperatorButton!
+    @IBOutlet weak var OperatorDivideButton: OperatorButton!
+    
+    
     func setUpOperandValue() {
         OperandZeroButton.value = "0"
         OperandCoupleZeroButton.value = "00"
@@ -47,12 +62,24 @@ class ViewController: UIViewController {
         OperandNineButton.value = "9"
         OperandDotButton.value = "."
     }
+    
+    func setUpOpertorValue() {
+        OperatorAddButton.value = "+"
+        OperatorSubtractButton.value = "-"
+        OperatorMultiplyButton.value = "×"
+        OperatorDivideButton.value = "÷"
+    }
 
     @IBAction func OperandButtonAction(_ sender: OperandButton) {
         guard let input = sender.value else { return }
         print(input)
     }
     
+    @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
+        guard let input = sender.value else { return }
+        print(input)
+        
+    }
     
     
 }
