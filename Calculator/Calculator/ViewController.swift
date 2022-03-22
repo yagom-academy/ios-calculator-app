@@ -77,15 +77,15 @@ class ViewController: UIViewController {
     }
     
     func setUpOpertorValue() {
-        OperatorAddButton.value = "+"
-        OperatorSubtractButton.value = "-"
-        OperatorMultiplyButton.value = "×"
-        OperatorDivideButton.value = "÷"
+        OperatorAddButton.value = " + "
+        OperatorSubtractButton.value = " - "
+        OperatorMultiplyButton.value = " × "
+        OperatorDivideButton.value = " ÷ "
     }
     
     @IBAction func OperandButtonAction(_ sender: OperandButton) {
         guard let input = sender.value else { return }
-        
+          
         if inputtingOperand == "0" {
             if sender == OperandZeroButton || sender == OperandCoupleZeroButton {
                 inputtingOperand = ViewController.defaultOperand
@@ -97,12 +97,17 @@ class ViewController: UIViewController {
         } else {
             inputtingOperand += input
         }
-        print(inputtingOperand)
     }
     
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
-        print(input)
+        if inputtingOperand == ViewController.defaultOperand {
+            return
+        }
+        
+        formulaNotYetCalculated += inputtingOperand
+        formulaNotYetCalculated += input
+        inputtingOperand = ViewController.defaultOperand
     }
     
     
@@ -121,12 +126,14 @@ class ViewController: UIViewController {
                 inputtingOperand.insert("-", at: inputtingOperand.startIndex)
             }
         case FuncExecuteButton:
-            print("=")
+            if formulaNotYetCalculated.isEmpty {
+                return
+            }
+            formulaNotYetCalculated += inputtingOperand
+            inputtingOperand = ViewController.defaultOperand
         default:
             return
         }
-        print(inputtingOperand)
-        
     }
     
 }
