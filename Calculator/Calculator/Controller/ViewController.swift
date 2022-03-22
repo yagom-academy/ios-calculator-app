@@ -60,6 +60,7 @@ final class ViewController: UIViewController {
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.alignment = .trailing
         stackView.spacing = 10
         
         let numberLogLabel = UILabel()
