@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     @IBOutlet private var calculateLogStackView: UIStackView!
     
     @IBOutlet private var currentOperator: UILabel!
