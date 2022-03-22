@@ -53,7 +53,14 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
-        
+        addInCalculationLog(selectedOperatorLabel, selectedOperandLabel)
+        selectedOperatorLabel.text = ""
+        let expressionString = calculationLog.compactMap{ $0 }.joined(separator: " ")
+        var expressionForm = ExpressionParser.parse(from: expressionString)
+        let result = expressionForm.result()
+        selectedOperandLabel.text = result.description
+        calculationLog.removeAll()
+        calculationLog.append(selectedOperandLabel.text)
     }
     
     func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
