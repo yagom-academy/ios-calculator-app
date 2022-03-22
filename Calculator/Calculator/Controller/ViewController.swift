@@ -9,6 +9,7 @@ final class ViewController: UIViewController {
     private var currentNumber: String = ""
     private var expression: [String?] = []
     private var isInputExist: Bool = false
+    private var isCalculateValue: Bool = false
     
     @IBOutlet private var logScrollView: UIScrollView!
     @IBOutlet private var calculateLogStackView: UIStackView!
@@ -43,6 +44,11 @@ final class ViewController: UIViewController {
             return
         }
         
+        if isCalculateValue {
+            isCalculateValue = false
+            acButtonDidTapped(nil)
+        }
+        
         let inputNumber = findNumber(of: sender)
         
         if ["00","0"].contains(inputNumber) && numberLabel.text == "0" {
@@ -64,6 +70,8 @@ final class ViewController: UIViewController {
             operatorLabel.text = findOperator(of: sender)
             return
         }
+        
+        isCalculateValue = false
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -101,6 +109,10 @@ final class ViewController: UIViewController {
             return
         }
         
+        if isCalculateValue {
+            return
+        }
+        
         if currentNumber.isEmpty {
             currentNumber = "0"
         }
@@ -109,7 +121,7 @@ final class ViewController: UIViewController {
         numberLabel.text = currentNumber
     }
     
-    @IBAction private func acButtonDidTapped(_ sender: Any) {
+    @IBAction private func acButtonDidTapped(_ sender: Any?) {
         expression.removeAll()
         currentNumber = ""
         numberLabel.text = "0"
@@ -162,7 +174,8 @@ final class ViewController: UIViewController {
         do {
             let calculateResult = try ExpressionParser.parse(from: expressionString).result()
             numberLabel.text = "\(calculateResult)"
-            currentNumber = "\(calculateResult)"
+            currentNumber = ""
+            isCalculateValue = true
             isInputExist = true
         } catch {
             numberLabel.text = "NaN"
