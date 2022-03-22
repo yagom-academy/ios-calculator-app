@@ -21,11 +21,21 @@ class FunctionalButton: UIButton {
 class ViewController: UIViewController {
     static let defaultOperand: String = "0"
     var formulaNotYetCalculated: String = ""
-    var inputtingOperand: String = defaultOperand
-    var inputtingOperator: String = ""
     var calculator: Formula = Formula()
     var statusZeroFlag: Bool = true
     
+    var inputtingOperand: String = defaultOperand {
+        didSet {
+            NumberLabel.text = inputtingOperand
+        }
+    }
+    var inputtingOperator: String = "" {
+        didSet {
+            OperatorLabel.text = inputtingOperator
+        }
+    }
+    
+    let numberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +44,14 @@ class ViewController: UIViewController {
         
         OperatorLabel.text = ""
         NumberLabel.text = "0"
+        setUpNumberFormat()
     }
     
+    func setUpNumberFormat() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .halfUp
+    }
     
     @IBOutlet var OperandButtons: [OperandButton]!
     
@@ -69,8 +85,6 @@ class ViewController: UIViewController {
   
     @IBOutlet weak var OperatorLabel: UILabel!
     @IBOutlet weak var NumberLabel: UILabel!
-    
-    
     
     func setUpOperandValue() {
         OperandZeroButton.value = "0"
@@ -111,27 +125,23 @@ class ViewController: UIViewController {
         }
         
         if !inputtingOperator.isEmpty {
+            let lastInputtedOperator = OperatorLabel.text
             formulaNotYetCalculated += inputtingOperator
             inputtingOperator = ""
+            OperatorLabel.text = lastInputtedOperator
         }
-        
-        NumberLabel.text = inputtingOperand
     }
     
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
         inputtingOperator = input
-        OperatorLabel.text = inputtingOperator
-        
         if statusZeroFlag == true {
             return
         }
         
         formulaNotYetCalculated += inputtingOperand
-        
         inputtingOperand = ViewController.defaultOperand
         statusZeroFlag = true
-        
     }
     
     
@@ -142,13 +152,12 @@ class ViewController: UIViewController {
             formulaNotYetCalculated = ""
             inputtingOperator = ""
             statusZeroFlag = true
-            OperatorLabel.text = ""
-            NumberLabel.text = "0"
+            
         case FuncClearEntryButton:
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
             
-            NumberLabel.text = "0"
+            
         case FuncChangeSignButton:
             if inputtingOperand == ViewController.defaultOperand {
                 return
@@ -157,7 +166,7 @@ class ViewController: UIViewController {
             } else {
                 inputtingOperand.insert("-", at: inputtingOperand.startIndex)
             }
-            NumberLabel.text = inputtingOperand
+            
         case FuncExecuteButton:
             if formulaNotYetCalculated.isEmpty {
                 return
@@ -170,19 +179,17 @@ class ViewController: UIViewController {
             inputtingOperand = ViewController.defaultOperand
             statusZeroFlag = true
             inputtingOperator = ""
-            OperatorLabel.text = ""
-            NumberLabel.text = "0"
+            
             guard let result = try? parser.result() as Double else { return }
             if result.isNaN {
                 NumberLabel.text = "NaN"
             } else {
-                NumberLabel.text = String(result)
+                guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
+                NumberLabel.text = numberFormattedResult
             }
-            
         default:
             return
         }
     }
-    
 }
 
