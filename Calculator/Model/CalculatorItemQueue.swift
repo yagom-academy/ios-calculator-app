@@ -35,16 +35,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func dequeue() -> T? {
-        guard head <= list.count, let element = list[head] else {
-            return nil
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        list[head] = nil
-        head += 1
-        if head > 100 {
-            list.removeFirst(head)
-            head = 0
-        }
-        return element
+        return dequeueStack.popLast()
     }
 }
 
