@@ -57,8 +57,16 @@ class MainViewController: UIViewController {
     
     func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
         let subStackView = UIStackView()
-        subStackView.addArrangedSubview(selectedOperatorLabel)
-        subStackView.addArrangedSubview(selectedOperandLabel)
+        let operatorInLog = UILabel()
+        let operandInLog = UILabel()
+        
+        operatorInLog.textColor = .white
+        operandInLog.textColor = .white
+        operatorInLog.text = selectedOperatorLabel.text
+        operandInLog.text = selectedOperandLabel.text
+        
+        subStackView.addArrangedSubview(operatorInLog)
+        subStackView.addArrangedSubview(operandInLog)
         return subStackView
     }
     
