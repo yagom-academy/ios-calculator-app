@@ -88,7 +88,7 @@ class CalculatorTests: XCTestCase {
         let _ = sut.dequeue()
         let _ = sut.dequeue()
         //then
-        XCTAssertEqual(sut.head, 4)
+        XCTAssertTrue(sut.isEmpty)
     }
     
     func test_head의_값을_제대로_가져오는지() {
@@ -102,6 +102,6 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(value: input2)
         let _ = sut.dequeue()
         //then
-        XCTAssertEqual(sut.head, 2.0)
+        XCTAssertEqual(sut.first, 2.0)
     }
 }

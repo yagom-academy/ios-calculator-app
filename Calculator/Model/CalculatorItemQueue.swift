@@ -10,12 +10,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
     private var dequeueStack: [T] = []
     private var enqueueStack: [T] = []
     
-    var head: T? {
-       return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
-    }
-    
     var count: Int {
-        return enqueueStack.count
+        return enqueueStack.count + dequeueStack.count
     }
     
     var isEmpty: Bool {
@@ -23,11 +19,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     var first: T? {
-        return enqueueStack.first
+        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
     var last: T? {
-        return enqueueStack.last
+        return enqueueStack.isEmpty ? dequeueStack.first : enqueueStack.last
     }
     
     mutating func enqueue(value: T) {
