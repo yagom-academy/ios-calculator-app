@@ -14,6 +14,10 @@ class OperatorButton: UIButton {
     var value: String?
 }
 
+class FunctionalButton: UIButton {
+    
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -48,6 +52,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var OperatorDivideButton: OperatorButton!
     
     
+    @IBOutlet weak var FuncAllClearButton: FunctionalButton!
+    @IBOutlet weak var FuncClearEntryButton: FunctionalButton!
+    @IBOutlet weak var FuncChangeSignButton: FunctionalButton!
+    @IBOutlet weak var FuncExecuteButton: FunctionalButton!
+    
     func setUpOperandValue() {
         OperandZeroButton.value = "0"
         OperandCoupleZeroButton.value = "00"
@@ -78,9 +87,25 @@ class ViewController: UIViewController {
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
         print(input)
-        
     }
     
+    
+    @IBAction func FunctionalButtonAction(_ sender: FunctionalButton) {
+        
+        switch sender {
+        case FuncAllClearButton:
+            print("AC")
+        case FuncClearEntryButton:
+            print("CE")
+        case FuncChangeSignButton:
+            print("+/-")
+        case FuncExecuteButton:
+            print("=")
+        default:
+            return
+        }
+        
+    }
     
 }
 
