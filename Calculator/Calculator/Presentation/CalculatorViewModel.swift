@@ -32,7 +32,7 @@ final class CalculatorViewModel {
     if value.contains("-") {
       value.removeFirst()
     } else if let number = Double(value), number > 0 {
-      value = "-\(number)"
+      value = "-\(value)"
     }
     self.operandValue.next(value)
   }
@@ -42,7 +42,13 @@ final class CalculatorViewModel {
       return
     }
     var value = self.operandValue.value
-    value = (value == "0" ? numberString : value + numberString)
+    if value == "0" && numberString == "00" {
+      value = "0"
+    } else if value == "0" && numberString != "00" {
+      value = numberString
+    } else {
+      value += numberString
+    }
     self.operandValue.next(value)
   }
   
