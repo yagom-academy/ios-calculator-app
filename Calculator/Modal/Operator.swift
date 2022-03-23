@@ -40,7 +40,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     
     private func divide(lhs: Double, rhs: Double) -> Double? {
         if rhs == 0 {
-            return nil
+            return Double.nan
         }
         return lhs / rhs
     }
