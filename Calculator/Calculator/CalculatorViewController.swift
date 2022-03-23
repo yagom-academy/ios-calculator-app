@@ -83,6 +83,9 @@ class CalculatorViewController: UIViewController {
         //너무 자리수가 길어지면 0으로 표현되는 버그 있음
         let displayNSNumber = NSNumber(value: Double(currentDisplayNumber) ?? 0)
         currentNumberLabel.text = numberFormatter.string(from: displayNSNumber)
+        if displayNSNumber == 0 && dotStatus == true {
+            currentNumberLabel.text =  currentDisplayNumber
+        }
     }
     
     
