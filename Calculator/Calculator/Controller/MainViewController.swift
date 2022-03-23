@@ -161,6 +161,12 @@ class MainViewController: UIViewController {
         expressionRecordStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
     }
     
+    func changeToNumberFormatter(with totalOperand: String) -> String? {
+        let numberOfFormatter = NumberFormatter()
+        numberOfFormatter.numberStyle = .decimal
+        numberOfFormatter.roundingMode = .halfUp
+        numberOfFormatter.maximumSignificantDigits = 20
+        let operandExpressionForm = numberOfFormatter.string(from: NSNumber(value: Double(totalOperand) ?? 0))
+        return operandExpressionForm
     }
 }
-
