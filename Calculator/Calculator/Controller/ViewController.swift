@@ -11,7 +11,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     var isNoneNumber: Bool = true
-    var isFirst : Bool = true
+    var isFirst: Bool = true
+    var isResult: Bool = false
     var calculationFormula = ""
     
     override func viewDidLoad() {
@@ -44,13 +45,14 @@ class ViewController: UIViewController {
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let operandText = self.operandLabel.text else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
-        if operandText == "NaN" {
+        if operandText == "NaN" || isResult == true {
             self.operandLabel.text = inputNumber
         } else {
             self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
         }
         self.isNoneNumber = false
         self.isFirst = false
+        self.isResult = false
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
@@ -72,21 +74,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
+        if self.isResult == true { return }
         guard let operandText = self.operandLabel.text else { return }
         guard let operationText = self.operationLabel.text else { return }
         addFormula(operation: operationText, operand: operandText)
         var resultFormula = ExpressionParser.parse(from: self.calculationFormula)
         let result = resultFormula.result()
         if result.isNaN {
-            self.isNoneNumber = true
             self.isFirst = true
             self.operandLabel.text = "NaN"
         } else {
             self.operandLabel.text = changeNumberFormat(number: String(result))
         }
-//        self.operandLabel.text = result.isNaN ? "NaN" : changeNumberFormat(number: String(result))
         self.operationLabel.text = ""
         self.calculationFormula = ""
+        self.isResult = true
     }
     //MARK: - Functions
     func setBasicStatus() {
