@@ -146,7 +146,7 @@ class CalculatorViewController: UIViewController {
     
     public func generateOperandNumber(_ sender: OperandButton) {
         guard let input = sender.value else { return }
-        if statusZero == true || inputtingOperand == CalculatorViewController.zero {
+        if statusZero || inputtingOperand == CalculatorViewController.zero {
             if sender == OperandZeroButton || sender == OperandCoupleZeroButton {
                 inputtingOperand = CalculatorViewController.zero
             } else if sender == OperandDotButton {
@@ -188,7 +188,7 @@ class CalculatorViewController: UIViewController {
     public func addOperandToFormula() {
         formulaNotYetCalculated += inputtingOperand
         setStatusZero()
-        formerOperator = inputtingOperand
+        formerOperator = inputtingOperator
     }
     
     @IBAction func allClearAction(_ sender: FunctionalButton) {
@@ -215,6 +215,11 @@ class CalculatorViewController: UIViewController {
         if formulaNotYetCalculated.isEmpty {
             return
         }
+        
+        if statusZero {
+            return
+        }
+        
         insertHistoryInStackView(formerOperator + inputtingOperand)
         formulaNotYetCalculated += inputtingOperand
         clearInputtingOperand()
