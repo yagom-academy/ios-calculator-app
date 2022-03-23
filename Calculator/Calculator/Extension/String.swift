@@ -14,15 +14,24 @@ extension String {
     }
     
     func addCommaEveryThirdTime() -> String {
+        let maximumSignificantDigits = 20
         let numberFormatter = NumberFormatter()
+        let splitCurrentOperand = self.split(with: ".")
+        
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumSignificantDigits = maximumSignificantDigits
+        numberFormatter.alwaysShowsDecimalSeparator = true
         
-        guard let result = numberFormatter.string(for: Double(self)) else {
+        guard let integerOperand = splitCurrentOperand.first,
+              let fractionOperand = splitCurrentOperand.last else {
             return self.description
         }
         
-        return result
+        guard let result = numberFormatter.string(for: Double(integerOperand)) else {
+            return self.description
+        }
+
+        return result + fractionOperand
     }
 }

@@ -93,10 +93,10 @@ extension CalculatorViewController {
         
         if currentOperand == Constant.zero {
             currentOperand = operand
-            operandLabel.text = currentOperand.addCommaEveryThirdTime()
+            operandLabel.text = currentOperand
             return
         }
-        
+                
         currentOperand += operand
         operandLabel.text = currentOperand.addCommaEveryThirdTime()
     }
