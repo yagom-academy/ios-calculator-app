@@ -42,24 +42,22 @@ final class ViewController: UIViewController {
     }
 
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == NumberString.nan {
+        guard currentStringNumber.count < Digit.limitDigit,
+              let inputNumber = sender.titleLabel?.text else {
+            
             return
         }
         
-        if currentStringNumber.count >= Digit.limitDigit {
-            return
-        }
-        
-        if isCalculateValue {
+        if isCalculateValue ||
+            numberLabel.text == NumberString.nan {
+            
             isCalculateValue = false
             resetCalculator()
         }
         
-        guard let inputNumber = sender.titleLabel?.text else {
-            return
-        }
-        
-        if ["00","0"].contains(inputNumber), numberLabel.text == NumberString.nan {
+        if ["00","0"].contains(inputNumber),
+            numberLabel.text == NumberString.zero {
+            
             isInputExist = true
             return
         }
@@ -70,24 +68,20 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
+        guard numberLabel.text != NumberString.nan else {
+            return
+        }
+        
         writeCalculateLog()
         operatorLabel.text = sender.titleLabel?.text
     }
     
     @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == NumberString.nan {
-            return
-        }
-        
-        if currentStringNumber.contains(".") {
-            return
-        }
-        
-        if isCalculateValue {
-            return
-        }
-        
-        if currentStringNumber.count >= Digit.limitDigit {
+        guard numberLabel.text != NumberString.nan,
+              !currentStringNumber.contains("."),
+              isCalculateValue == false,
+              currentStringNumber.count < Digit.limitDigit else {
+            
             return
         }
 
@@ -104,7 +98,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func clearEntryButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == NumberString.nan {
+        guard numberLabel.text != NumberString.nan else {
             return
         }
         
@@ -114,11 +108,9 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func signButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == NumberString.zero {
-            return
-        }
-        
-        guard let number = Double(currentStringNumber) else {
+        guard let number = Double(currentStringNumber),
+              numberLabel.text != NumberString.zero else {
+            
             return
         }
         
@@ -132,19 +124,22 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonDidTapped(_ sender: UIButton) {
-
-        if expression.isEmpty {
+        guard expression.isEmpty == false else {
             return
         }
                 
         writeCalculateLog()
         
-        let expressionString = expression.compactMap{$0}.joined(separator: " ")
+        let expressionString = expression
+                                .compactMap{$0}
+                                .joined(separator: " ")
         expression.removeAll()
         currentStringNumber = NumberString.empty
         
         do {
-            let calculateResult = try ExpressionParser.parse(from: expressionString).result()
+            let calculateResult = try ExpressionParser
+                                    .parse(from: expressionString)
+                                    .result()
             numberLabel.text = adjust(number: calculateResult)
             
             isCalculateValue = true
@@ -164,11 +159,7 @@ private extension ViewController {
     }
     
     func writeCalculateLog() {
-        if numberLabel.text == NumberString.nan {
-            return
-        }
-        
-        if isInputExist == false {
+        guard isInputExist else {
             return
         }
         
