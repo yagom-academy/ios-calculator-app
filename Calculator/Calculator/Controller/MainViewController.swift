@@ -152,6 +152,7 @@ class MainViewController: UIViewController {
     
     func addToExpressionRecord(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
         expressionRecordStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
+        expressionRecordScrollView.scrollToBottom()
     }
     
     func changeToNumberFormatter(with totalOperand: String) -> String? {
