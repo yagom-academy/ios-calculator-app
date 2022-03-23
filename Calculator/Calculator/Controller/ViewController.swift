@@ -15,9 +15,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var acButton: UIButton!
     @IBOutlet weak var ceButton: UIButton!
-    
     @IBOutlet weak var prefixButton: UIButton!
-    @IBOutlet weak var dotButton: UIButton!
     
     @IBOutlet weak var addButton: UIButton!
     
@@ -25,6 +23,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var devideButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
     @IBOutlet weak var equalButton: UIButton!
+    
+    @IBOutlet weak var dotButton: UIButton!
     
     @IBOutlet weak var zeroButton: UIButton!
     @IBOutlet weak var doubleZeroButton: UIButton!
@@ -40,10 +40,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     
+    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+    }
     
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+    }
     
-    
-    
+    @IBAction func touchUpFunctionButton(_ sender: UIButton) {
+    }
     
     
     
