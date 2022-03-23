@@ -1,12 +1,12 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculateViewController.swift
 //  Created by DuDu
 //
 
 import UIKit
 
-final class ViewController: UIViewController {
-    private var currentNumber: String = ""
+final class CalculateViewController: UIViewController {
+    private var currentStringNumber: String = ""
     private var expression: [String?] = []
     private var isInputExist: Bool = false
     private var isCalculateValue: Bool = false
@@ -36,13 +36,13 @@ final class ViewController: UIViewController {
             return
         }
         
-        if String(currentNumber).count >= 20 {
+        if currentStringNumber.count >= 20 {
             return
         }
         
         if isCalculateValue {
             isCalculateValue = false
-            //acButtonDidTapped(nil)
+            resetCalculator()
         }
         
         guard let inputNumber = sender.titleLabel?.text else {
@@ -55,21 +55,17 @@ final class ViewController: UIViewController {
         }
         
         isInputExist = true
-        currentNumber += inputNumber
-        numberLabel.text = currentNumber
+        currentStringNumber += inputNumber
+        numberLabel.text = currentStringNumber
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
-        operatorLabel.text = sender.titleLabel?.text
-        writeCalculateLog()
-    }
-    
-    private func writeCalculateLog() {
         if numberLabel.text == "NaN" {
             return
         }
         
         if isInputExist == false {
+            operatorLabel.text = sender.titleLabel?.text
             return
         }
         
@@ -89,8 +85,9 @@ final class ViewController: UIViewController {
         expression.append(contentsOf: [operatorLabel.text, doubleNumber])
     
         isInputExist = false
-        currentNumber = ""
+        currentStringNumber = ""
         numberLabel.text = "0"
+        operatorLabel.text = sender.titleLabel?.text
     }
     
     private func makeLabel(with text: String?) -> UILabel {
@@ -105,7 +102,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        if currentNumber.contains(".") {
+        if currentStringNumber.contains(".") {
             return
         }
         
@@ -113,26 +110,26 @@ final class ViewController: UIViewController {
             return
         }
         
-        if String(currentNumber).count >= 20 {
+        if String(currentStringNumber).count >= 20 {
             return
         }
 
-        if currentNumber.isEmpty {
-            currentNumber = "0"
+        if currentStringNumber.isEmpty {
+            currentStringNumber = "0"
         }
         
-        currentNumber += "."
-        numberLabel.text = currentNumber
+        currentStringNumber += "."
+        numberLabel.text = currentStringNumber
     }
     
-    @IBAction private func acButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonDidTapped(_ sender: UIButton) {
         resetCalculator()
     }
     
     private func resetCalculator() {
         expression.removeAll()
         isInputExist = false
-        currentNumber = ""
+        currentStringNumber = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
         
@@ -142,12 +139,12 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func ceButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonDidTapped(_ sender: UIButton) {
         if numberLabel.text == "NaN" {
             return
         }
         
-        currentNumber = ""
+        currentStringNumber = ""
         numberLabel.text = "0"
         isInputExist = false
     }
@@ -157,30 +154,32 @@ final class ViewController: UIViewController {
             return
         }
         
-        guard let number = Double(currentNumber) else {
+        guard let number = Double(currentStringNumber) else {
             return
         }
         
         if number < 0 {
-            currentNumber.removeFirst()
+            currentStringNumber.removeFirst()
         } else {
-            currentNumber.insert("-", at: currentNumber.startIndex)
+            currentStringNumber.insert("-", at: currentStringNumber.startIndex)
         }
         
-        numberLabel.text = currentNumber
+        numberLabel.text = currentStringNumber
     }
     
     @IBAction private func calculateButtonDidTapped(_ sender: UIButton) {
-
+        print(#function)
+        
         if expression.isEmpty {
             return
         }
                 
-        writeCalculateLog()
+        //operatorButtonDidTapped(nil)
         
         let expressionString = expression.compactMap{$0}.joined(separator: " ")
         expression.removeAll()
-        currentNumber = ""
+        print(expressionString)
+        currentStringNumber = ""
         
         do {
             let calculateResult = try ExpressionParser.parse(from: expressionString).result()
