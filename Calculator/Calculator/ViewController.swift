@@ -41,9 +41,13 @@ class ViewController: UIViewController {
     @IBAction func clickZeroButton(_ sender: UIButton) {
         if currentNumberLabbel.text == "0" {
             touchedNumber = "0"
+        } else if ((currentNumberLabbel.text?.contains(".")) == true) {
+            let currentNumberLabbelText = currentNumberLabbel.text ?? ""
+            let zeros = sender.currentTitle ?? ""
+            currentNumberLabbel.text = currentNumberLabbelText + zeros
+            touchedNumber += zeros
         } else {
             touchedNumber += sender.currentTitle ?? ""
-            currentNumberLabbel.text = touchedNumber
             currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
         }
     }
