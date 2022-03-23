@@ -15,6 +15,8 @@ struct Formula {
         guard var value: Double = operands.dequeue() else { return 0 }
         
         while !operands.isEmpty {
+            if value.isNaN { return value }
+            
             guard let operand = operands.dequeue() else { return value }
             guard let calculatedValue = operators.dequeue()?.calculate(lhs: value, rhs: operand) else { return value }
             
