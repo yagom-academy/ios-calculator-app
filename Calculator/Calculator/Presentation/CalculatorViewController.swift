@@ -82,4 +82,27 @@ private extension CalculatorViewController {
     let result = newNumber == .zero ? .zero : newNumber
     self.operandLabel.text = result.formatString()
   }
+  
+  func makeResultSubStackView(operatorType: String?, operand: String?) -> UIStackView? {
+    let stackView = UIStackView()
+    stackView.axis = .horizontal
+    stackView.distribution = .fill
+    stackView.alignment = .fill
+    stackView.spacing = 8
+    
+    let operatorResultLabel = UILabel()
+    operatorResultLabel.font = .preferredFont(forTextStyle: .title3)
+    operatorResultLabel.textColor = .white
+    operatorResultLabel.text = operatorType
+    
+    let operandResultLabel = UILabel()
+    operandResultLabel.font = .preferredFont(forTextStyle: .title3)
+    operandResultLabel.textColor = .white
+    operandResultLabel.text = operand
+    
+    stackView.addArrangedSubview(operatorResultLabel)
+    stackView.addArrangedSubview(operandResultLabel)
+    
+    return stackView
+  }
 }
