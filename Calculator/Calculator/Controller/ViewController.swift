@@ -186,13 +186,13 @@ class ViewController: UIViewController {
     private func findOperator(of button: UIButton) throws -> String {
         switch button {
         case addButton:
-            return "+"
+            return String(Operator.add.rawValue)
         case subtractButton:
-            return "-"
+            return String(Operator.subtract.rawValue)
         case devideButton:
-            return "/"
+            return String(Operator.devide.rawValue)
         case multiplyButton:
-            return "*"
+            return String(Operator.multiply.rawValue)
         case equalButton:
             return "="
         default:
