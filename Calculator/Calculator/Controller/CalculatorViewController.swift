@@ -13,7 +13,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     
     // MARK: - Property
-    private var currentOperand: String = "0"
+    private var currentOperand: String = ""
+    private var expression = [String]()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -36,7 +37,11 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard let `operator` = sender.titleLabel?.text else {
+            return
+        }
         
+        updateOperator(by: `operator`)
     }
     
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
@@ -44,7 +49,7 @@ extension CalculatorViewController {
             return
         }
         
-        updateOperandLabel(with: operand)
+        updateOperand(with: operand)
     }
         
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
@@ -52,7 +57,7 @@ extension CalculatorViewController {
             return
         }
         
-        updateOperandLabel(by: dot)
+        updateOperand(by: dot)
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
@@ -62,7 +67,7 @@ extension CalculatorViewController {
 
 // MARK: - Method
 extension CalculatorViewController {
-    private func updateOperandLabel(with operand: String) {
+    private func updateOperand(with operand: String) {
         guard currentOperand.count < 20 else {
             return
         }
@@ -71,7 +76,7 @@ extension CalculatorViewController {
         operandLabel.text = currentOperand.addCommaEveryThirdTime()
     }
     
-    private func updateOperandLabel(by dot: String) {
+    private func updateOperand(by dot: String) {
         guard currentOperand.contains(dot) == false else {
             return
         }
@@ -101,8 +106,20 @@ extension CalculatorViewController {
         }
     }
     
+    private func updateOperator(by operator: String) {
+        guard operandLabel.text != "0" else {
+            operatorLabel.text = `operator`
+            return
+        }
+        
+        expression.append(currentOperand)
+        expression.append(`operator`)
+        operatorLabel.text = `operator`
+        resetOperand()
+    }
+    
     private func resetOperand() {
-        currentOperand = "0"
+        currentOperand = ""
         operandLabel.text = "0"
     }
 }
