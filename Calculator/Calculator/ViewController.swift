@@ -92,10 +92,6 @@ class ViewController: UIViewController {
         return changedNumber
     }
     
-    func removeComma(_ text: String) -> String {
-        text.replacingOccurrences(of: ",", with: "")
-    }
-    
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
         let newStack = UIStackView()
         newStack.translatesAutoresizingMaskIntoConstraints = false
