@@ -9,6 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var presentValue: UILabel!
+    @IBOutlet weak var presentOperator: UILabel!
+    
     var inputOperand: String = ""
     var valueToBeCalculated: [String] = []
     
@@ -24,8 +26,8 @@ class ViewController: UIViewController {
     
     @IBAction func didTapOperator(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
-        guard let labelText = presentValue.text else { return }
-        let valueStack = "\(buttonLabel + " " + labelText)"
+        presentOperator.text = buttonLabel
+        let valueStack = "\(buttonLabel + " " + inputOperand)"
         valueToBeCalculated.append(valueStack)
         presentValue.text = "0"
     }
