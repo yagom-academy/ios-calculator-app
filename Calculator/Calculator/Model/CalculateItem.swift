@@ -42,7 +42,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     private func subtract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        guard rhs != .zero else { return .nan }
+        if rhs == .zero { return .nan }
         
         return lhs / rhs
     }

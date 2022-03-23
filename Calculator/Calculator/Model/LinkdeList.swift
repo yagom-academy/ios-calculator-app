@@ -35,7 +35,7 @@ final class LinkdeList<Element: CalculateItem>: List {
     var count: Int { retrieveCount() }
     
     private func retrieveCount() -> Int {
-        guard head != nil else { return 0 }
+        if head == nil { return 0 }
         
         var count = 1
         var nodePoint = head
@@ -62,7 +62,7 @@ final class LinkdeList<Element: CalculateItem>: List {
     
     @discardableResult
     func removeFirst() -> Element? {
-        guard head != nil else { return nil }
+        if head == nil { return nil }
         
         let value = head?.data
         
@@ -77,7 +77,7 @@ final class LinkdeList<Element: CalculateItem>: List {
     }
     
     func removeAll() {
-        guard head != nil else { return }
+        if head == nil { return }
         
         head = nil
         tail = nil
