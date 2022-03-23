@@ -371,7 +371,13 @@
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="Led-K4-z5y"/>
                         <outlet property="eightButton" destination="xgT-2D-A49" id="1rn-It-uqh"/>
                         <outlet property="equalButton" destination="Daw-iX-Owl" id="eCh-Ym-VGg"/>
+                        <outlet property="firstNumberLabel" destination="oGo-LN-bKL" id="8Dh-E5-xqJ"/>
+                        <outlet property="firstOperatorLabel" destination="c7v-6K-W40" id="CD8-zu-nB1"/>
+                        <outlet property="firstStackView" destination="2Pu-Ld-ZGi" id="IxX-lg-LYQ"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="uA6-Tt-q53"/>
+                        <outlet property="followingNumberLabel" destination="Hcb-r0-27f" id="u21-oy-Y5j"/>
+                        <outlet property="followingOperatorLabel" destination="alw-Zd-2pT" id="x3A-Wc-wEY"/>
+                        <outlet property="followingStackView" destination="6I9-iL-eIa" id="KMd-CS-Emp"/>
                         <outlet property="fourButton" destination="hQm-yz-XvG" id="9rD-7c-Eo0"/>
                         <outlet property="inputStackView" destination="XRe-QE-UJf" id="Iuv-6J-nBU"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="k0s-Iv-bbu"/>

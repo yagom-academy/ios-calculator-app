@@ -11,6 +11,12 @@ class ViewController: UIViewController {
     private var hasFirstInput = false
 
     @IBOutlet weak var inputStackView: UIStackView!
+    @IBOutlet weak var firstStackView: UIStackView!
+    @IBOutlet weak var firstOperatorLabel: UILabel!
+    @IBOutlet weak var firstNumberLabel: UILabel!
+    @IBOutlet weak var followingStackView: UIStackView!
+    @IBOutlet weak var followingOperatorLabel: UILabel!
+    @IBOutlet weak var followingNumberLabel: UILabel!
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
