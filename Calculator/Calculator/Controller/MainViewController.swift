@@ -42,8 +42,6 @@ class MainViewController: UIViewController {
         setInitialState()
     }
     
-    @IBAction func operandButtonsClicked(_ sender: UIButton) {
-        selectedOperandLabel.text = sender.titleLabel?.text
     func setInitialState() {
         self.expressionRecordStackView.subviews.forEach{ $0.removeFromSuperview() }
         self.expressionRecord = []
@@ -93,6 +91,18 @@ class MainViewController: UIViewController {
         totalOperand += selectedOperand
         operandLabel.text = totalOperand
     }
+    
+    @IBAction func operandButtonsClicked(_ sender: UIButton) {
+        guard let selectedOperand = sender.titleLabel?.text else { return }
+        guard totalOperand.count < 21 else { return }
+        
+        if selectedOperand == "0" && isZeroNone == false && operandLabel.text == "0" {
+            return
+        } else {
+            totalOperand += selectedOperand
+            operandLabel.text = changeToNumberFormatter(with: totalOperand)
+            isZeroNone = false
+        }
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
