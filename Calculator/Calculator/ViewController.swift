@@ -71,15 +71,17 @@ class ViewController: UIViewController {
     }
 
     @IBAction func clickCalculateButton(_ sender: UIButton) {
-        addNumberAndOperator(currentOperatorLabel.text ?? "", currentNumberLabbel.text ?? "")
-        let mergedAllOperation = allOperation.joined(separator: " ")
-        var formula = ExpressionParser.parse(form: mergedAllOperation)
-        let result = formula.result()
-        
-        currentOperatorLabel.text = ""
-        currentNumberLabbel.text = changeDecimalFormat("\(result)")
-        touchedNumber = "\(result)"
-        allOperation = []
+        if allOperation.isEmpty != true {
+            addNumberAndOperator(currentOperatorLabel.text ?? "", currentNumberLabbel.text ?? "")
+            let mergedAllOperation = allOperation.joined(separator: " ")
+            var formula = ExpressionParser.parse(form: mergedAllOperation)
+            let result = formula.result()
+            
+            currentOperatorLabel.text = ""
+            currentNumberLabbel.text = changeDecimalFormat("\(result)")
+            touchedNumber = changeDecimalFormat("\(result)")
+            allOperation = []
+        }
     }
     
     func changeDecimalFormat(_ text: String) -> String {
