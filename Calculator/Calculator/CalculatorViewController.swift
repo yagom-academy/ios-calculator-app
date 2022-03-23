@@ -40,7 +40,7 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initalizeButtonValue()
-        // Do any additional setup after loading the view.
+        removeStackView()
     }
     
     func initalizeButtonValue() {
@@ -64,7 +64,6 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickNumber(sender: NumberButton) {
-        //.처리에 대해선 추후 고민
         let clickValue = sender.value ?? ""
         if clickValue == "." && dotStatus == true {
             return
@@ -83,11 +82,10 @@ class CalculatorViewController: UIViewController {
         //너무 자리수가 길어지면 0으로 표현되는 버그 있음
         let displayNSNumber = NSNumber(value: Double(currentDisplayNumber) ?? 0)
         currentNumberLabel.text = numberFormatter.string(from: displayNSNumber)
-        if displayNSNumber == 0 && dotStatus == true {
+        if dotStatus == true {
             currentNumberLabel.text =  currentDisplayNumber
         }
     }
-    
     
     @IBAction func clickOperand(sender: OperandButton) {
         let operand = sender.value ?? ""
@@ -126,6 +124,7 @@ class CalculatorViewController: UIViewController {
         if currentDisplayNumber.isEmpty && totalCalculate.isEmpty {
             return
         }
+        dotStatus = false
         addStackView()
         let fomula = ExpressionParser.parse(from: totalCalculate)
         currentOperandLabel.text = ""
@@ -146,10 +145,7 @@ class CalculatorViewController: UIViewController {
         currentDisplayNumber = ""
         totalCalculate = ""
         setDisplayNumberLabel()
-        processStackView.arrangedSubviews.forEach({ child in
-            processStackView.removeArrangedSubview(child)
-            child.removeFromSuperview()
-        })
+        removeStackView()
     }
     
     @IBAction func clickMinusPlusButton(sender: UIButton) {
@@ -162,6 +158,13 @@ class CalculatorViewController: UIViewController {
             setDisplayNumberLabel()
             negativeStatus = false
         }
+    }
+    
+    func removeStackView() {
+        processStackView.arrangedSubviews.forEach({ child in
+            processStackView.removeArrangedSubview(child)
+            child.removeFromSuperview()
+        })
     }
 }
 
