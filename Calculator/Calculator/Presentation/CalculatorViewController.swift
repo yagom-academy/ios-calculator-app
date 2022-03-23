@@ -64,6 +64,7 @@ private extension CalculatorViewController {
     self.operandLabel.text = Double.zero.formatString()
     self.resultStackView.arrangedSubviews.forEach {
       self.resultStackView.removeArrangedSubview($0)
+      $0.removeFromSuperview()
     }
   }
   
