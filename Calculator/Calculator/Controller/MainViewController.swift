@@ -45,6 +45,18 @@ class MainViewController: UIViewController {
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         selectedOperandLabel.text = sender.titleLabel?.text
+    func setInitialState() {
+        self.expressionRecordStackView.subviews.forEach{ $0.removeFromSuperview() }
+        self.expressionRecord = []
+        self.totalOperand = ""
+        self.operationCount = 0
+        self.operatorLabel.text = nil
+        self.operandLabel.text = "0"
+        self.isPlus = true
+        self.isZeroNone = true
+        self.isFirstTime = true
+    }
+    
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
