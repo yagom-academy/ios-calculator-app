@@ -15,7 +15,7 @@ class OperatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_1점1_add_1점2_return_Equal_1점1_더하기_1점2() {
+    func test_더하기_연산이_잘_이루어지는지() {
         // given
         sut = .add
         let first = 1.1
@@ -28,7 +28,7 @@ class OperatorTests: XCTestCase {
         
     }
     
-    func test_1점1_subtract_1점2_return_Equal_1점1_빼기_1점2() {
+    func test_빼기_연산이_잘_이루어지는지() {
         // given
         sut = .subtract
         let first = 1.1
@@ -40,7 +40,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, first - second)
     }
     
-    func test_1점1_divide_1점2_return_Equal_1점1_나누기_1점2() {
+    func test_나누기_연산이_잘_이루어지는지() {
         // given
         sut = .divide
         let first = 1.1
@@ -52,7 +52,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, first / second)
     }
     
-    func test_1점1_multiply_1점2_return_Equal_1점1_곱하기_1점2() {
+    func test_곱하기_연산이_잘_이루어지는지() {
         // given
         sut = .multiply
         let first = 1.1

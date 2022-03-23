@@ -25,7 +25,7 @@ class FormulaTests: XCTestCase {
         operandQueue = nil
     }
     
-    func test_result() {
+    func test_result함수가_계산을_해주는지() {
         // given
         let operatorData = [Operator.add, Operator.subtract, Operator.divide, Operator.multiply]
         let operandData = [1.0, 5.0, 3.0, 4.0, 6.0]
@@ -37,5 +37,18 @@ class FormulaTests: XCTestCase {
 
         // then
         XCTAssertEqual(result, (1+5-3)/4*6)
+    }
+    
+    func test_중간에_0으로_나눴을때_dividedByZero오류를_던지는지() {
+        // given
+        let operatorData = [Operator.add, Operator.subtract, Operator.divide, Operator.multiply]
+        let operandData = [1.0, 5.0, 3.0, 0.0, 6.0]
+        operatorData.forEach(operatorQueue.enqueue(_:))
+        operandData.forEach(operandQueue.enqueue(_:))
+
+        // then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? CalauletorError, CalauletorError.dividedByZero)
+        }
     }
 }
