@@ -8,13 +8,14 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var expressionRecordScrollView: UIScrollView!
     @IBOutlet weak var expressionRecordStackView: UIStackView!
     private var expressionRecord: [String?] = []
     private var totalOperand: String = ""
     private var operationCount: Int = 0
     private var isPlus: Bool = true
-    private var isZeroNone: Bool = true
     private var isFirstTime: Bool = true
+    private var isDotUsed: Bool = false
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
