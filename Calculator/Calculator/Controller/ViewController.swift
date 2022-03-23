@@ -26,5 +26,8 @@ class ViewController: UIViewController {
         self.operandLabel.text = "0"
         self.operationLabel.text = ""
     }
+    @IBAction func touchCEButton(_ sender: UIButton) {
+        self.operandLabel.text = "0"
+    }
 }
 
