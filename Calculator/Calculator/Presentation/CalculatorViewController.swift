@@ -36,8 +36,9 @@ final class CalculatorViewController: UIViewController {
     }
   }
   
-  @IBAction private func didTapOperatorButton(_ sender: UIButton) {}
   @IBAction private func didTapNumberButton(_ sender: UIButton) {}
+  @IBAction private func didTapOperatorButton(_ sender: UIButton) {}
+  @IBAction private func didTapCalculateButton(_ sender: UIButton) {}
 }
 
 // MARK: - Private Extension
