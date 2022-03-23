@@ -44,7 +44,11 @@ class ViewController: UIViewController {
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let operandText = self.operandLabel.text else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
-        self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
+        if operandText == "NaN" {
+            self.operandLabel.text = inputNumber
+        } else {
+            self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
+        }
         self.isNoneNumber = false
         self.isFirst = false
     }
@@ -63,16 +67,33 @@ class ViewController: UIViewController {
         self.operationLabel.text = inputOperation
         if isNoneNumber == true { return }
         addFormula(operation: operationText, operand: operandText)
-        let numberStackView = setStackView(operationText: operationText , operandText: changeNumberFormat(number: operandText))
-        self.numberListStackView.addArrangedSubview(numberStackView)
         self.operandLabel.text = "0"
         self.isNoneNumber = true
+    }
+    
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        guard let operandText = self.operandLabel.text else { return }
+        guard let operationText = self.operationLabel.text else { return }
+        addFormula(operation: operationText, operand: operandText)
+        var resultFormula = ExpressionParser.parse(from: self.calculationFormula)
+        let result = resultFormula.result()
+        if result.isNaN {
+            self.isNoneNumber = true
+            self.isFirst = true
+            self.operandLabel.text = "NaN"
+        } else {
+            self.operandLabel.text = changeNumberFormat(number: String(result))
+        }
+//        self.operandLabel.text = result.isNaN ? "NaN" : changeNumberFormat(number: String(result))
+        self.operationLabel.text = ""
+        self.calculationFormula = ""
     }
     //MARK: - Functions
     func setBasicStatus() {
         self.numberListStackView.subviews.forEach({$0.removeFromSuperview()})
         self.operandLabel.text = "0"
         self.operationLabel.text = ""
+        self.calculationFormula = ""
         self.isNoneNumber = true
         self.isFirst = true
     }
@@ -95,18 +116,16 @@ class ViewController: UIViewController {
         return changedNumber
     }
     
-    func setStackView(operationText: String, operandText: String) -> UIStackView {
+    func makeStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
-        stackView.addArrangedSubview(setLabel(element: operationText))
-        stackView.addArrangedSubview(setLabel(element: operandText))
         return stackView
     }
     
-    func setLabel(element: String) -> UILabel {
+    func makeLabel(element: String) -> UILabel {
         let label = UILabel()
         label.text = element
         label.textColor = .white
@@ -115,6 +134,10 @@ class ViewController: UIViewController {
     
     func addFormula(operation: String, operand: String) {
         self.calculationFormula = "\(self.calculationFormula) \(operation) \(String(changeToDouble(number: operand)))"
+        let numberStackView = makeStackView()
+        numberStackView.addArrangedSubview(makeLabel(element: operation))
+        numberStackView.addArrangedSubview(makeLabel(element: operand))
+        self.numberListStackView.addArrangedSubview(numberStackView)
     }
 }
 
