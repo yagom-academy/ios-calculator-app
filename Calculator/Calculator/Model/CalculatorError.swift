@@ -9,5 +9,5 @@ import Foundation
 
 enum CalauletorError: Error {
     case dividedByZero
-    case invalidOperatorInput
+    case invalidInputValue
 }

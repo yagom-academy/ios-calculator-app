@@ -26,7 +26,7 @@ enum ExpressionParser {
         value = value.filter { !$0.isEmpty }
         
         guard value.count == value.compactMap({ Double($0) }).count else {
-            throw CalauletorError.invalidOperatorInput
+            throw CalauletorError.invalidInputValue
         }
         
         return value

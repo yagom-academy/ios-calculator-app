@@ -29,7 +29,7 @@ class ExpressionParserTests: XCTestCase {
         
         // then
         XCTAssertThrowsError(try ExpressionParser.parse(from: "1 + 2 . -3").result()) { error in
-            XCTAssertEqual(error as? CalauletorError, CalauletorError.invalidOperatorInput)
+            XCTAssertEqual(error as? CalauletorError, CalauletorError.invalidInputValue)
         }
     }
     
