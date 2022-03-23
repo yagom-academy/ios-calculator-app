@@ -21,7 +21,6 @@ extension String {
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = maximumSignificantDigits
-        numberFormatter.alwaysShowsDecimalSeparator = true
         
         guard let integerOperand = splitCurrentOperand.first,
               let fractionOperand = splitCurrentOperand.last else {
@@ -31,7 +30,11 @@ extension String {
         guard let result = numberFormatter.string(for: Double(integerOperand)) else {
             return self.description
         }
-
-        return result + fractionOperand
+        
+        if self.contains(".") {
+            return result + "." + fractionOperand
+        }
+        
+        return result
     }
 }
