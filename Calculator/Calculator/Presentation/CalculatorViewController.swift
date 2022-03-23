@@ -30,7 +30,8 @@ final class CalculatorViewController: UIViewController {
       self.clearAll()
     case "CE":
       self.clearEntry()
-    case "⁺⁄₋": break
+    case "⁺⁄₋":
+      self.convertSign()
     default: break
     }
   }
@@ -54,5 +55,16 @@ private extension CalculatorViewController {
   
   func clearEntry() {
     self.operandLabel.text = Double.zero.formatString()
+  }
+  
+  func convertSign() {
+    guard let operand = self.operandLabel.text,
+          let number = Double(operand)
+    else {
+      return
+    }
+    let newNumber = number * -1
+    let result = newNumber == .zero ? .zero : newNumber
+    self.operandLabel.text = result.formatString()
   }
 }
