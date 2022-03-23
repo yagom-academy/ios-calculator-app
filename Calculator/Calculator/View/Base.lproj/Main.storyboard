@@ -341,6 +341,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="expressionRecordScrollView" destination="BOT-7g-vxv" id="gD7-K7-lwP"/>
                         <outlet property="expressionRecordStackView" destination="XRe-QE-UJf" id="EWq-Oe-bf3"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="hch-Cn-bBz"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="6Yg-Rr-7yS"/>
