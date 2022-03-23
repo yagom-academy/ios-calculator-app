@@ -32,7 +32,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
-        
+        updatePlusMinusSign()
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
@@ -78,6 +78,27 @@ extension CalculatorViewController {
         
         currentOperand += dot
         operandLabel.text?.append(dot)
+    }
+    
+    private func updatePlusMinusSign() {
+        guard operandLabel.text != "0",
+              var operand = operandLabel.text else {
+            return
+        }
+        
+        if operand.contains("-") {
+            operand.removeFirst()
+            currentOperand.removeFirst()
+            operandLabel.text = operand
+            return
+        }
+        
+        if operand.contains("-") == false {
+            operand.insert("-", at: operand.startIndex)
+            currentOperand.insert("-", at: operand.startIndex)
+            operandLabel.text = operand
+            return
+        }
     }
     
     private func resetOperand() {
