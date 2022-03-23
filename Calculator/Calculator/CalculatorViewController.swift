@@ -61,7 +61,7 @@ class CalculatorViewController: UIViewController {
         divideButton.value = "÷"
     }
     
-    @IBAction func numberClick(sender: NumberButton) {
+    @IBAction func clickNumber(sender: NumberButton) {
         //.처리에 대해선 추후 고민
         currentDisplayNumber = currentDisplayNumber + (sender.value ?? "")
         setDisplayNumberLabel()
@@ -77,7 +77,7 @@ class CalculatorViewController: UIViewController {
     }
     
     
-    @IBAction func operandClick(sender: OperandButton) {
+    @IBAction func clickOperand(sender: OperandButton) {
         let operand = sender.value ?? ""
         addStackView()
         setDisplayOperandLabel(operand: operand)
@@ -88,6 +88,7 @@ class CalculatorViewController: UIViewController {
     }
     
     func addStackView() {
+        addTotalCalculate()
         let verticalStackView = UIStackView()
         verticalStackView.axis = .horizontal
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,5 +104,24 @@ class CalculatorViewController: UIViewController {
         verticalStackView.addArrangedSubview(numberLabel)
         processStackView.addArrangedSubview(verticalStackView)
     }
+    
+    func addTotalCalculate() {
+        totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? "") \(currentDisplayNumber)"
+    }
+    
+    @IBAction func getResult(sender: UIButton) {
+        addStackView()
+        let fomula = ExpressionParser.parse(from: totalCalculate)
+        currentOperandLabel.text = ""
+        currentDisplayNumber = "\(fomula.result() ?? 0)"
+        setDisplayNumberLabel()
+        currentDisplayNumber = ""
+        totalCalculate = ""
+    }
+    
+    @IBAction func clickACButton(sender: UIButton) {
+        
+    }
+    
 }
 
