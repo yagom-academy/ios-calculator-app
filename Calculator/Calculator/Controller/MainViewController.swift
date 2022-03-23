@@ -110,18 +110,23 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
-        guard operatorLabel.text != "" else { return }
+        guard operatorLabel.text != nil else { return }
+        operandLabel.text = changeToNumberFormatter(with: operandLabel.text ?? "")
         addToExpressionRecord(operatorLabel, operandLabel)
-        operatorLabel.text = ""
+        operatorLabel.text = nil
         let expressionString: String = expressionRecord
                                         .compactMap{ $0 }
                                         .joined(separator: " ")
                                         .replacingOccurrences(of: ",", with: "")
         var expressionForm = ExpressionParser.parse(from: expressionString)
         let result = expressionForm.result()
-        operandLabel.text = result.description
+        operandLabel.text = changeToNumberFormatter(with: result.description)
+        totalOperand = operandLabel.text ?? ""
         expressionRecord.removeAll()
-        isZeroNone = true
+        self.isDotUsed = false
+        if operandLabel.text == "NaN" {
+            isFirstTime = true
+        }
     }
     
     func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
