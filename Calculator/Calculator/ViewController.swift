@@ -43,6 +43,15 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func clickPlusMimusSign(_ sender: UIButton) {
+        if touchedNumber.hasPrefix("-") == true {
+            touchedNumber.remove(at: touchedNumber.startIndex)
+        } else {
+            touchedNumber.insert("-", at: touchedNumber.startIndex)
+        }
+        currentNumberLabbel.text = touchedNumber
+    }
+    
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
         let newStack = UIStackView()
         newStack.translatesAutoresizingMaskIntoConstraints = false
