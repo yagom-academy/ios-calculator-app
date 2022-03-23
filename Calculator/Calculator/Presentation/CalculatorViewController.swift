@@ -18,6 +18,7 @@ final class CalculatorViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.clearAll()
   }
   
   @IBAction private func didTapKeyOperationButton(_ sender: UIButton) {
@@ -26,7 +27,7 @@ final class CalculatorViewController: UIViewController {
     }
     switch keyOperation {
     case "AC":
-      self.clear()
+      self.clearAll()
     case "CE": break
     case "⁺⁄₋": break
     default: break
@@ -41,7 +42,7 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
   
-  func clear() {
+  func clearAll() {
     self.formulas.removeAll()
     self.operatorLabel.text = nil
     self.operandLabel.text = Double.zero.formatString()
