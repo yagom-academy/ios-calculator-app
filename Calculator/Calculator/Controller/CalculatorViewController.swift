@@ -73,18 +73,17 @@ private extension CalculatorViewController {
     func writeCalculateLog() {
         guard isInputExist else { return }
         
-        let doubleNumber = numberLabel.text?.replacingOccurrences(of: ",", with: "")
+        let doubleNumber = numberLabel.text?.removeComma()
         let stackView = logStackView()
         
+        expression.append(contentsOf: [operatorLabel.text, doubleNumber])
         calculateLogStackView.addArrangedSubview(stackView)
         logScrollView.scroll()
-        expression.append(contentsOf: [operatorLabel.text, doubleNumber])
-        
         resetElements()
     }
     
     func logStackView() -> UIStackView {
-        let doubleNumber = numberLabel.text?.replacingOccurrences(of: ",", with: "")
+        let doubleNumber = numberLabel.text?.removeComma()
         let numberLogLabel = logLabel(with: doubleNumber)
         let operatorLogLabel = logLabel(with: operatorLabel.text)
         
