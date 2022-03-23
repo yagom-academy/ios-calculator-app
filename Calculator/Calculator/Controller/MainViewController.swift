@@ -34,8 +34,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var divideButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
     
-    @IBOutlet weak var selectedOperatorLabel: UILabel!
-    @IBOutlet weak var selectedOperandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
