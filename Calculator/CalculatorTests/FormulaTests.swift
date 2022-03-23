@@ -23,7 +23,6 @@ class FormulaTests: XCTestCase {
         sut = nil
         operatorQueue = nil
         operandQueue = nil
-        
     }
     
     func test_result() {

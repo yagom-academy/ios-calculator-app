@@ -48,5 +48,4 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double { lhs * rhs }
-    
 }

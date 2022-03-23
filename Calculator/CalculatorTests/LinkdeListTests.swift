@@ -13,12 +13,10 @@ class LinkdeListTests: XCTestCase {
 
     override func setUpWithError() throws {
         sut = LinkdeList<Double>()
-
     }
 
     override func tearDownWithError() throws {
         sut = nil
-
     }
     
     func test_append_했을때_isEmmpy_return_false() {

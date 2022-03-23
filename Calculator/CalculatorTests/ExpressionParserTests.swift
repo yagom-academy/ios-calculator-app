@@ -10,14 +10,6 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
 
-    override func setUpWithError() throws {
-
-    }
-
-    override func tearDownWithError() throws {
-
-    }
-    
     func test_parse_return_type_Formula() {
         // given
 

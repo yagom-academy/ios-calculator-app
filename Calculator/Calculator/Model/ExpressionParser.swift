@@ -47,5 +47,4 @@ enum ExpressionParser {
 
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
-    
 }
