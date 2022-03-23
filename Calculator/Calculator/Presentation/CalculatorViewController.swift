@@ -18,6 +18,7 @@ final class CalculatorViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.configureUI()
     self.bindUI()
     self.clearAll()
   }
@@ -56,6 +57,7 @@ final class CalculatorViewController: UIViewController {
     if self.viewModel.didTapOperatorButton(of: operatorString) {
       self.resultStackView.addArrangedSubview(stackView)
     }
+    self.scrollToDown()
   }
   
   @IBAction private func didTapNumberButton(_ sender: UIButton) {
@@ -73,6 +75,10 @@ final class CalculatorViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension CalculatorViewController {
+  
+  func configureUI() {
+    self.resultScrollView.showsVerticalScrollIndicator = false
+  }
   
   func bindUI() {
     self.viewModel.operatorType.bind { [weak self] operatorType in
@@ -108,5 +114,16 @@ private extension CalculatorViewController {
 
   func convertSign() {
     self.viewModel.convertSign()
+  }
+  
+  func scrollToDown() {
+    let contentSizeHeight = self.resultScrollView.contentSize.height
+    let boundsHeight = self.resultScrollView.bounds.size.height
+    let contentInsetBottom = self.resultScrollView.contentInset.bottom
+    let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
+    if pointY > 0 {
+      let contentOffset = CGPoint(x: 0, y: pointY + 24)
+      self.resultScrollView.setContentOffset(contentOffset, animated: true)
+    }
   }
 }
