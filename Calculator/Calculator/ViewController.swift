@@ -10,10 +10,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentNumberLabbel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var operationRecord: UIStackView!
-    var touchedNumber: String = ""
+    var touchedNumber: String = "0"
     
     @IBAction func clickNumberButton(_ sender: UIButton) {
-        touchedNumber += sender.currentTitle ?? ""
+        if currentNumberLabbel.text == "0" {
+            touchedNumber = sender.currentTitle ?? ""
+        } else {
+            touchedNumber += sender.currentTitle ?? ""
+        }
         currentNumberLabbel.text = touchedNumber
     }
     
@@ -21,7 +25,22 @@ class ViewController: UIViewController {
         addNumberAndOperator(currentOperatorLabel.text ?? "", currentNumberLabbel.text ?? "")
         
         currentOperatorLabel.text = sender.currentTitle
-        currentNumberLabbel.text = "0"
+    }
+    
+    @IBAction func clickDotButton(_ sender: UIButton) {
+        if ((currentNumberLabbel.text?.contains(".")) == false) {
+            touchedNumber += sender.currentTitle ?? ""
+            currentNumberLabbel.text = touchedNumber
+        }
+    }
+    
+    @IBAction func clickZeroButton(_ sender: UIButton) {
+        if currentNumberLabbel.text == "0" {
+            touchedNumber = "0"
+        } else {
+            touchedNumber += sender.currentTitle ?? ""
+            currentNumberLabbel.text = touchedNumber
+        }
     }
     
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
@@ -46,8 +65,8 @@ class ViewController: UIViewController {
         newStack.addArrangedSubview(numberLabel)
         operationRecord.addArrangedSubview(newStack)
         
-        touchedNumber = ""
-        currentNumberLabbel.text = ""
+        touchedNumber = "0"
+        currentNumberLabbel.text = "0"
     }
     
     override func viewDidLoad() {
