@@ -29,4 +29,9 @@ class ViewController: UIViewController {
          presentValue.text = convertedString
          presentValueLabelText.append(convertedString)
      }
+    
+    @IBAction func didTapAllClear(sender: UIButton) {
+           presentValueLabelText.removeAll()
+           presentValue.text = "0"
+       }
 }
