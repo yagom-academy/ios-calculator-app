@@ -31,11 +31,13 @@ final class CalculatorLinkedList<T> {
     func append(_ value: T) {
         let newNode = Node(value: value)
         
-        if let previousTail = tail {
+        if !isEmpty {
+            let previousTail = tail
             newNode.previous = previousTail
-            previousTail.next = newNode
+            previousTail?.next = newNode
             tail = newNode
-        } else {
+        }
+        if isEmpty {
             head = newNode
             tail = newNode
         }

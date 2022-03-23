@@ -26,7 +26,7 @@ class Formula_Test: XCTestCase {
         operatorQueue.enqueue(Operator.add)
         operatorQueue.enqueue(Operator.multiply)
         
-        sut = Formula(operands: doubleQueue, operators: operatorQueue)
+        sut = Formula(operandQueue: doubleQueue, operatorQueue: operatorQueue)
     }
 
     override func tearDownWithError() throws {
