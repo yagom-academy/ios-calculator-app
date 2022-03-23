@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         } else {
             touchedNumber += sender.currentTitle ?? ""
         }
-        currentNumberLabbel.text = touchedNumber
+        currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
     }
     
     @IBAction func clickOperatorButton(_ sender: UIButton) {
@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         } else {
             touchedNumber += sender.currentTitle ?? ""
             currentNumberLabbel.text = touchedNumber
+            currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
         }
     }
     
@@ -70,9 +71,21 @@ class ViewController: UIViewController {
         let result = formula.result()
         
         currentOperatorLabel.text = ""
-        currentNumberLabbel.text = "\(result)"
+        currentNumberLabbel.text = changeDecimalFormat("\(result)")
         touchedNumber = "\(result)"
         allOperation = []
+    }
+    
+    func changeDecimalFormat(_ text: String) -> String {
+        let number = Double(text) ?? 0
+        
+        let numberFomatter = NumberFormatter()
+        numberFomatter.numberStyle = .decimal
+        numberFomatter.usesSignificantDigits = true
+        numberFomatter.maximumSignificantDigits = 20
+        numberFomatter.roundingMode = .halfUp
+        let changedNumber = numberFomatter.string(from: number as NSNumber) ?? ""
+        return changedNumber
     }
     
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
@@ -91,7 +104,7 @@ class ViewController: UIViewController {
         numberLabel.textColor = .white
         numberLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
         
-        numberLabel.text = currentNumber
+        numberLabel.text = changeDecimalFormat(currentNumber)
         operatorLabel.text = currentOperator
         newStack.addArrangedSubview(operatorLabel)
         newStack.addArrangedSubview(numberLabel)
