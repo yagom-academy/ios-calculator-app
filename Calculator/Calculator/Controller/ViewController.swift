@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         guard isValidNumber(input: input, currentNumber: currentNumber) else {
             return
         }
-        if hasFirstInput == true, input.contains("0") {
+        if hasFirstInput == true, currentNumber == "0", input.contains("0") {
             numberLabel.text = "0"
         } else if currentNumber == "0", input != "." {
             numberLabel.text = input
