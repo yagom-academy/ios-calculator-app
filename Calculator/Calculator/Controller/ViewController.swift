@@ -17,7 +17,7 @@ private enum NumberString {
 }
 
 final class ViewController: UIViewController {
-    private var currentNumber: String = NumberString.empty
+    private var currentStringNumber: String = NumberString.empty
     private var expression: [String?] = []
     private var isInputExist: Bool = false
     private var isCalculateValue: Bool = false
@@ -47,7 +47,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        if String(currentNumber).count >= Digit.limitDigit {
+        if currentStringNumber.count >= Digit.limitDigit {
             return
         }
         
@@ -66,8 +66,8 @@ final class ViewController: UIViewController {
         }
         
         isInputExist = true
-        currentNumber += inputNumber
-        numberLabel.text = currentNumber
+        currentStringNumber += inputNumber
+        numberLabel.text = currentStringNumber
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
@@ -84,7 +84,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        isCalculateValue = false
+        
         
         let doubleNumber = numberLabel.text?.replacingOccurrences(of: ",", with: "")
         let numberLogLabel = makeLabel(with: doubleNumber)
@@ -99,8 +99,9 @@ final class ViewController: UIViewController {
         logScrollView.scroll()
         expression.append(contentsOf: [operatorLabel.text, doubleNumber])
     
+        isCalculateValue = false
         isInputExist = false
-        currentNumber = NumberString.empty
+        currentStringNumber = NumberString.empty
         numberLabel.text = NumberString.zero
         operatorLabel.text = NumberString.empty
     }
@@ -117,7 +118,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        if currentNumber.contains(".") {
+        if currentStringNumber.contains(".") {
             return
         }
         
@@ -125,16 +126,16 @@ final class ViewController: UIViewController {
             return
         }
         
-        if String(currentNumber).count >= Digit.limitDigit {
+        if currentStringNumber.count >= Digit.limitDigit {
             return
         }
 
-        if currentNumber.isEmpty {
-            currentNumber = NumberString.zero
+        if currentStringNumber.isEmpty {
+            currentStringNumber = NumberString.zero
         }
         
-        currentNumber += "."
-        numberLabel.text = currentNumber
+        currentStringNumber += "."
+        numberLabel.text = currentStringNumber
     }
     
     @IBAction private func acButtonDidTapped(_ sender: UIButton) {
@@ -144,7 +145,7 @@ final class ViewController: UIViewController {
     private func resetCalculator() {
         expression.removeAll()
         isInputExist = false
-        currentNumber = NumberString.empty
+        currentStringNumber = NumberString.empty
         numberLabel.text = NumberString.zero
         operatorLabel.text = NumberString.empty
         
@@ -159,7 +160,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        currentNumber = NumberString.empty
+        currentStringNumber = NumberString.empty
         numberLabel.text = NumberString.zero
         isInputExist = false
     }
@@ -169,17 +170,17 @@ final class ViewController: UIViewController {
             return
         }
         
-        guard let number = Double(currentNumber) else {
+        guard let number = Double(currentStringNumber) else {
             return
         }
         
         if number < .zero {
-            currentNumber.removeFirst()
+            currentStringNumber.removeFirst()
         } else {
-            currentNumber.insert("-", at: currentNumber.startIndex)
+            currentStringNumber.insert("-", at: currentStringNumber.startIndex)
         }
         
-        numberLabel.text = currentNumber
+        numberLabel.text = currentStringNumber
     }
     
     @IBAction private func calculateButtonDidTapped(_ sender: UIButton) {
@@ -192,7 +193,7 @@ final class ViewController: UIViewController {
         
         let expressionString = expression.compactMap{$0}.joined(separator: " ")
         expression.removeAll()
-        currentNumber = NumberString.empty
+        currentStringNumber = NumberString.empty
         
         do {
             let calculateResult = try ExpressionParser.parse(from: expressionString).result()
