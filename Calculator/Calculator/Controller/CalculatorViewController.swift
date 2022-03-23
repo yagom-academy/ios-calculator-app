@@ -114,8 +114,22 @@ extension CalculatorViewController {
         
         expression.append(currentOperand)
         expression.append(`operator`)
+        
+        updateCalculationRecord(with: currentOperand, operator: `operator`)
+        
         operatorLabel.text = `operator`
         resetOperand()
+    }
+    
+    private func updateCalculationRecord(with operand: String, operator: String) {
+        if calculationRecordStackView.subviews.count == 0 {
+            let ExpressionStackView = ExpressionStackView(operand: operand)
+            calculationRecordStackView.addArrangedSubview(ExpressionStackView)
+            return
+        }
+
+        let ExpressionStackView = ExpressionStackView(operator: `operator`, operand: operand)
+        calculationRecordStackView.addArrangedSubview(ExpressionStackView)
     }
     
     private func resetOperand() {
