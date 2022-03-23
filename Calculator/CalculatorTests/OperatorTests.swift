@@ -69,10 +69,10 @@ class OperatorTests: XCTestCase {
         sut = .divide
         let first = 1.1
         let second = 0.0
-
+        
+        // then
         XCTAssertThrowsError(try sut.calculate(lhs: first, rhs: second)) { error in
             XCTAssertEqual(error as? CalauletorError, CalauletorError.dividedByZero)
         }
     }
-
 }

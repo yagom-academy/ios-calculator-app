@@ -21,9 +21,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // given
         let testData = [1, 2, 3]
         testData.forEach( sut.enqueue(_:) )
-
-        // when
-
+        
         // then
         XCTAssertEqual(testData, mock.mockData)
     }
@@ -34,8 +32,6 @@ class CalculatorItemQueueTests: XCTestCase {
         testData.forEach( sut.enqueue(_:) )
         sut.dequeue()
         testData.remove(at: 0)
-
-        // when
 
         // then
         XCTAssertEqual(testData, mock.mockData)
@@ -48,8 +44,6 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.removeAll()
         testData.removeAll()
 
-        // when
-
         // then
         XCTAssertEqual(testData, mock.mockData)
     }
@@ -58,9 +52,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // given
         let testData = [1, 2, 3]
         testData.forEach( sut.enqueue(_:) )
-
-        // when
-
+        
         // then
         XCTAssertEqual(testData.isEmpty, sut.isEmpty)
     }
@@ -69,9 +61,7 @@ class CalculatorItemQueueTests: XCTestCase {
         // given
         let testData = [1, 2, 3]
         testData.forEach( sut.enqueue(_:) )
-
-        // when
-
+        
         // then
         XCTAssertEqual(testData.count, sut.count)
     }

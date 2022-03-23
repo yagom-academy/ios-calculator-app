@@ -37,7 +37,5 @@ class FormulaTests: XCTestCase {
 
         // then
         XCTAssertEqual(result, (1+5-3)/4*6)
-        
     }
-    
 }
