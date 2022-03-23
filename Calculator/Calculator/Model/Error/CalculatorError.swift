@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum DivideError: Error {
+enum CalculatorError: Error {
     case divideByZero
 }
