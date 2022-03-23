@@ -42,7 +42,6 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func CEButtonClicked(_ sender: UIButton) {
-        self.isZeroNone = true
         self.operandLabel.text = "0"
         self.totalOperand = ""
     }
