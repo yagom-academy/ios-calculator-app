@@ -79,16 +79,20 @@ private extension CalculatorViewController {
       self?.operatorLabel.text = operatorType
     }
     self.viewModel.operandValue.bind { [weak self] operand in
-      if let isResult = self?.viewModel.isResult, isResult == true {
-        guard let operand = Double(operand) else {
-          return
-        }
-        self?.operandLabel.text = operand.formatString()
-        self?.viewModel.isResult = false
-      } else {
-        self?.operandLabel.text = operand
-      }
+      self?.changeOperandLabel(of: operand)
     }
+  }
+  
+  func changeOperandLabel(of operand: String) {
+    guard self.viewModel.isResult == true else {
+      self.operandLabel.text = operand
+      return
+    }
+    guard let operand = Double(operand) else {
+      return
+    }
+    self.operandLabel.text = operand.formatString()
+    self.viewModel.isResult = false
   }
   
   func clearAll() {
