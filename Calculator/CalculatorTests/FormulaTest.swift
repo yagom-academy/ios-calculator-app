@@ -20,7 +20,7 @@ class FormulaTest: XCTestCase {
         operators = nil
     }
     
-    func test_result메서드호출시_10더하기_2빼기_2곱하기_마이너스2나누기_2의값이_마이너스10이나오는지() throws {
+    func test_result메서드() throws {
         let operands = [10, 2, 2, -2, 2]
         let operators = ["➕", "➖", "✖️", "➗"]
         operands.forEach{sut.operands.enqueue(Double($0))}
@@ -31,7 +31,7 @@ class FormulaTest: XCTestCase {
         XCTAssertEqual(result, -10.0)
     }
     
-    func test_result메서드호출시_234점532더하기_254점521곱하기_2점5나누기_3점5의값이_349점323571428571429값이나오는지() throws {
+    func test_result메서드2() throws {
         let operands = [234.532, 254.521, 2.5, 3.5]
         let operators = ["➕", "✖️", "➗"]
         
@@ -41,5 +41,19 @@ class FormulaTest: XCTestCase {
         let result = try sut.result()
         
         XCTAssertEqual(result, 349.323571428571429)
+    }
+    
+    func test_result메서드호출시_피연산자가nil일경우_에러를던지는지() throws {
+        let _ = try sut.result()
+        
+        XCTAssertThrowsError(CalculateError.operandIsNil)
+    }
+    
+    func test_result메서드호출시_연산자가nil일경우_에러를던지는지() throws {
+        let operands = [1, 2, 3, 4, 5]
+        operands.forEach {sut.operands.enqueue(Double($0)) }
+        let _ = try sut.result()
+        
+        XCTAssertThrowsError(CalculateError.operatorIsNil)
     }
 }
