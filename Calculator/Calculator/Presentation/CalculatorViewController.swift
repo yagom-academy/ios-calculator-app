@@ -50,7 +50,33 @@ final class CalculatorViewController: UIViewController {
     }
   }
   
-  @IBAction private func didTapOperatorButton(_ sender: UIButton) {}
+  @IBAction private func didTapOperatorButton(_ sender: UIButton) {
+    guard let newOperatorType = sender.titleLabel?.text else {
+      return
+    }
+    guard let number = self.operandLabel.text,
+          Double(number) != 0
+    else {
+      self.operatorLabel.text = newOperatorType
+      return
+    }
+    
+    let stackView = self.makeResultSubStackView(
+      operatorType: self.operatorLabel.text,
+      operand: number
+    )
+    if let stackView = stackView {
+      self.resultStackView.addArrangedSubview(stackView)
+    }
+    
+    if let operatorType = self.operatorLabel.text {
+      self.formulas.append(operatorType)
+    }
+    self.formulas.append(number)
+    self.operatorLabel.text = newOperatorType
+    self.operandLabel.text = "\(Int.zero)"
+  }
+  
   @IBAction private func didTapCalculateButton(_ sender: UIButton) {}
 }
 
