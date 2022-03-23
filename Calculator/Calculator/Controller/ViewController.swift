@@ -40,6 +40,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
+        guard let input = try? findNumber(of: sender) else {
+            return
+        }
+        let currentNumber = numberLabel.text
+        
+        guard isValidNumber(input: input, currentNumber: currentNumber) else {
+            return
+        }
+        if currentNumber == "0",
+           input != "." {
+            numberLabel.text = input
+        } else {
+            numberLabel.text?.append(input)
+        }
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -54,6 +68,49 @@ class ViewController: UIViewController {
         operatorLabel.text = ""
     }
 
+    private func findNumber(of button: UIButton) throws -> String {
+        switch button {
+        case dotButton:
+            return "."
+        case zeroButton:
+            return "0"
+        case doubleZeroButton:
+            return "00"
+        case oneButton:
+            return "1"
+        case twoButton:
+            return "2"
+        case threeButton:
+            return "3"
+        case fourButton:
+            return "4"
+        case fiveButton:
+            return "5"
+        case sixButton:
+            return "6"
+        case sevenButton:
+            return "7"
+        case eightButton:
+            return "8"
+        case nineButton:
+            return "9"
+        default:
+            throw CalculatorError.unexpectedData
+        }
+    }
+    
+    private func isValidNumber(input: String, currentNumber: String?) -> Bool {
+        let isValidZero = true
+        let isValidDot = true
+        
+        if currentNumber == "0", input.contains("0") {
+            return !isValidZero
+        }
+        if ((currentNumber?.contains(".")) == true), input == "." {
+            return !isValidDot
+        }
+        return true
+    }
 
 }
 
