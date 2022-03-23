@@ -13,6 +13,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     
     // MARK: - Property
+    private var currentOperand: String = ""
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -27,7 +28,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        
+
     }
     
     @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
@@ -39,9 +40,13 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
+        guard let operand = sender.titleLabel?.text else {
+            return
+        }
         
+        updateOperandLabel(with: operand)
     }
-    
+        
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
         
     }
@@ -53,5 +58,12 @@ extension CalculatorViewController {
 
 // MARK: - Method
 extension CalculatorViewController {
-    
+    private func updateOperandLabel(with operand: String) {
+        guard currentOperand.count < 20 else {
+            return
+        }
+        
+        currentOperand += operand
+        operandLabel.text = currentOperand.addCommaEveryThirdTime()
+    }
 }
