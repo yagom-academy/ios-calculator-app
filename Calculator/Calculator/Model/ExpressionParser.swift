@@ -22,7 +22,9 @@ enum ExpressionParser {
         for element in operatorList {
             value = value.flatMap { $0.split(with: element.rawValue) }
         }
+        
         value = value.filter { !$0.isEmpty }
+        
         guard value.count == value.compactMap({ Double($0) }).count else {
             throw CalauletorError.invalidOperatorInput
         }
