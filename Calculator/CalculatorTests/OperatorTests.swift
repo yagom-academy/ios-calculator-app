@@ -22,9 +22,10 @@ class OperatorTests: XCTestCase {
         let second = 1.2
 
         // when
-        let result = sut.calculate(lhs: first, rhs: second)
+        let result = try? sut.calculate(lhs: first, rhs: second)
         // then
         XCTAssertEqual(result, first + second)
+        
     }
     
     func test_1점1_subtract_1점2_return_Equal_1점1_빼기_1점2() {
@@ -34,7 +35,7 @@ class OperatorTests: XCTestCase {
         let second = 1.2
 
         // when
-        let result = sut.calculate(lhs: first, rhs: second)
+        let result = try? sut.calculate(lhs: first, rhs: second)
         // then
         XCTAssertEqual(result, first - second)
     }
@@ -46,7 +47,7 @@ class OperatorTests: XCTestCase {
         let second = 1.2
 
         // when
-        let result = sut.calculate(lhs: first, rhs: second)
+        let result = try? sut.calculate(lhs: first, rhs: second)
         // then
         XCTAssertEqual(result, first / second)
     }
@@ -58,21 +59,20 @@ class OperatorTests: XCTestCase {
         let second = 1.2
 
         // when
-        let result = sut.calculate(lhs: first, rhs: second)
+        let result = try? sut.calculate(lhs: first, rhs: second)
         // then
         XCTAssertEqual(result, first * second)
     }
     
-    func test_1점1_divide_0_return_isNaN() {
+    func test_0으로_나눴을때_dividedByZero오류를_던지는지() {
         // given
         sut = .divide
         let first = 1.1
         let second = 0.0
 
-        // when
-        let result = sut.calculate(lhs: first, rhs: second).isNaN
-        // then
-        XCTAssertTrue(result)
+        XCTAssertThrowsError(try sut.calculate(lhs: first, rhs: second)) { error in
+            XCTAssertEqual(error as? CalauletorError, CalauletorError.dividedByZero)
+        }
     }
 
 }

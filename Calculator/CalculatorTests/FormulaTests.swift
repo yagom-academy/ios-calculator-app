@@ -33,7 +33,7 @@ class FormulaTests: XCTestCase {
         operandData.forEach(operandQueue.enqueue(_:))
 
         // when
-        let result = sut.result()
+        let result = try? sut.result()
 
         // then
         XCTAssertEqual(result, (1+5-3)/4*6)
