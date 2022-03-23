@@ -44,8 +44,8 @@ enum ExpressionParser {
         operands.forEach(operandQueue.enqueue(_:))
         
         operators.forEach {
-            guard let data = Operator(rawValue: Character($0)) else { return }
-            operatorQueue.enqueue(data)
+            guard let opertorData = Operator(rawValue: Character($0)) else { return }
+            operatorQueue.enqueue(opertorData)
         }
 
         return Formula(operands: operandQueue, operators: operatorQueue)
