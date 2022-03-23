@@ -11,7 +11,7 @@ enum ExpressionParser {
         componentsByOperators(from: input)
             .compactMap(Double.init)
             .forEach(queueOperands.enqueue(_:))
-        exctractOperators(from: input)
+        extractOperators(from: input)
             .forEach(queueOperators.enqueue(_:))
         return Formula(operands: queueOperands, operators: queueOperators)
     }
@@ -19,7 +19,7 @@ enum ExpressionParser {
     static private func componentsByOperators(from input: String) -> [String] {
         var newInput = input
         var operands = [String]()
-        exctractOperators(from: input).forEach {
+        extractOperators(from: input).forEach {
             let splitedValues = newInput.split(with: $0.rawValue)
             operands.append(splitedValues[0])
             newInput = splitedValues[1]
@@ -28,11 +28,7 @@ enum ExpressionParser {
         return operands
     }
     
-    static private func exctractOperators(from input: String) -> [Operator] {
-        var operators = [Operator]()
-        input.forEach {
-            if let value = Operator(rawValue: $0) {operators.append(value)}
-        }
-        return operators
+    static private func extractOperators(from input: String) -> [Operator] {
+        return input.compactMap {Operator(rawValue: $0)}
     }
 }
