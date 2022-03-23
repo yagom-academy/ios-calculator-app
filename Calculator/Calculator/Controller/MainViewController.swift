@@ -60,6 +60,10 @@ class MainViewController: UIViewController {
         setInitialState()
     }
     
+    @IBAction func CEButtonClicked(_ sender: UIButton) {
+        self.isZeroNone = true
+        self.operandLabel.text = "0"
+        self.totalOperand = ""
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
