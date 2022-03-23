@@ -28,7 +28,8 @@ final class CalculatorViewController: UIViewController {
     switch keyOperation {
     case "AC":
       self.clearAll()
-    case "CE": break
+    case "CE":
+      self.clearEntry()
     case "⁺⁄₋": break
     default: break
     }
@@ -49,5 +50,9 @@ private extension CalculatorViewController {
     self.resultStackView.arrangedSubviews.forEach {
       self.resultStackView.removeArrangedSubview($0)
     }
+  }
+  
+  func clearEntry() {
+    self.operandLabel.text = Double.zero.formatString()
   }
 }
