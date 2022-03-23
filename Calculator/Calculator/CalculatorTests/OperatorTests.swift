@@ -1,5 +1,6 @@
 import XCTest
 @testable import Calculator
+
 class OperatorTests: XCTestCase {
     func test_calculate_add했을때_결과값이_올바른가() {
         //given
