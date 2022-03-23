@@ -77,7 +77,7 @@ final class CalculatorViewModel {
   }
   
   func didTapCalculateButton() -> Bool {
-    if self.operandValue.value == "0" {
+    if self.operandValue.value == "0" && self.operatorType.value == nil {
       return false
     }
     
