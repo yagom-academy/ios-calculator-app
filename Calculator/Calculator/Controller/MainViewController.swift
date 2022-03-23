@@ -73,14 +73,21 @@ class MainViewController: UIViewController {
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard totalOperand.count < 21 else { return }
+        guard totalOperand.count < 20 else { return }
         
-        if selectedOperand == "0" && isZeroNone == false && operandLabel.text == "0" {
+        if isFirstTime == false && operatorLabel.text == nil {
+            return
+        } else if selectedOperand == "0" && totalOperand.last == "." {
+            totalOperand += selectedOperand
+            operandLabel.text = totalOperand
+        } else if selectedOperand == "0" && totalOperand.last == "0" && isDotUsed == true {
+            totalOperand += selectedOperand
+            operandLabel.text = totalOperand
+        } else if selectedOperand == "0" && totalOperand.first == "0" && isDotUsed == false {
             return
         } else {
             totalOperand += selectedOperand
             operandLabel.text = changeToNumberFormatter(with: totalOperand)
-            isZeroNone = false
         }
     }
     
