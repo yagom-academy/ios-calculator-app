@@ -79,7 +79,20 @@ class MainViewController: UIViewController {
         }
     }
     
+    @IBAction func dotButtonClicked(_ sender: UIButton) {
+        guard let selectedOperand = sender.titleLabel?.text else { return }
+        guard totalOperand.count < 21 else { return }
         
+        if isZeroNone == true && operandLabel.text == "0" {
+            return
+        } else if isZeroNone == false && operandLabel.text == "0" {
+            return
+        } else if totalOperand.contains(".") == true {
+            return
+        }
+        totalOperand += selectedOperand
+        operandLabel.text = totalOperand
+    }
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
