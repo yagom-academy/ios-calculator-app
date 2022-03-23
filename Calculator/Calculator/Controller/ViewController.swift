@@ -5,8 +5,19 @@
 
 import UIKit
 
+private enum Digit {
+    static let limitDigit = 20
+    static let limitNumber = 1.0e20
+}
+
+private enum NumberString {
+    static let empty = ""
+    static let zero = "0"
+    static let nan = "NaN"
+}
+
 final class ViewController: UIViewController {
-    private var currentNumber: String = ""
+    private var currentNumber: String = NumberString.empty
     private var expression: [String?] = []
     private var isInputExist: Bool = false
     private var isCalculateValue: Bool = false
@@ -20,36 +31,36 @@ final class ViewController: UIViewController {
     private lazy var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 20
+        formatter.maximumFractionDigits = Digit.limitDigit
         formatter.roundingMode = .floor
         return formatter
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = "0"
+        numberLabel.text = NumberString.zero
         logScrollView.showsVerticalScrollIndicator = false
     }
     
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == "NaN" {
+        if numberLabel.text == NumberString.nan {
             return
         }
         
-        if String(currentNumber).count >= 20 {
+        if String(currentNumber).count >= Digit.limitDigit {
             return
         }
         
         if isCalculateValue {
             isCalculateValue = false
-            //acButtonDidTapped(nil)
+            resetCalculator()
         }
         
         guard let inputNumber = sender.titleLabel?.text else {
             return
         }
         
-        if ["00","0"].contains(inputNumber), numberLabel.text == "0" {
+        if ["00","0"].contains(inputNumber), numberLabel.text == NumberString.nan {
             isInputExist = true
             return
         }
@@ -60,12 +71,12 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
-        operatorLabel.text = sender.titleLabel?.text
         writeCalculateLog()
+        operatorLabel.text = sender.titleLabel?.text
     }
     
     private func writeCalculateLog() {
-        if numberLabel.text == "NaN" {
+        if numberLabel.text == NumberString.nan {
             return
         }
         
@@ -89,8 +100,9 @@ final class ViewController: UIViewController {
         expression.append(contentsOf: [operatorLabel.text, doubleNumber])
     
         isInputExist = false
-        currentNumber = ""
-        numberLabel.text = "0"
+        currentNumber = NumberString.empty
+        numberLabel.text = NumberString.zero
+        operatorLabel.text = NumberString.empty
     }
     
     private func makeLabel(with text: String?) -> UILabel {
@@ -101,7 +113,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == "NaN" {
+        if numberLabel.text == NumberString.nan {
             return
         }
         
@@ -113,12 +125,12 @@ final class ViewController: UIViewController {
             return
         }
         
-        if String(currentNumber).count >= 20 {
+        if String(currentNumber).count >= Digit.limitDigit {
             return
         }
 
         if currentNumber.isEmpty {
-            currentNumber = "0"
+            currentNumber = NumberString.zero
         }
         
         currentNumber += "."
@@ -132,9 +144,9 @@ final class ViewController: UIViewController {
     private func resetCalculator() {
         expression.removeAll()
         isInputExist = false
-        currentNumber = ""
-        numberLabel.text = "0"
-        operatorLabel.text = ""
+        currentNumber = NumberString.empty
+        numberLabel.text = NumberString.zero
+        operatorLabel.text = NumberString.empty
         
         
         calculateLogStackView.arrangedSubviews.forEach { subView in
@@ -143,17 +155,17 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func ceButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == "NaN" {
+        if numberLabel.text == NumberString.nan {
             return
         }
         
-        currentNumber = ""
-        numberLabel.text = "0"
+        currentNumber = NumberString.empty
+        numberLabel.text = NumberString.zero
         isInputExist = false
     }
     
     @IBAction private func signButtonDidTapped(_ sender: UIButton) {
-        if numberLabel.text == "0" {
+        if numberLabel.text == NumberString.zero {
             return
         }
         
@@ -161,7 +173,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        if number < 0 {
+        if number < .zero {
             currentNumber.removeFirst()
         } else {
             currentNumber.insert("-", at: currentNumber.startIndex)
@@ -180,7 +192,7 @@ final class ViewController: UIViewController {
         
         let expressionString = expression.compactMap{$0}.joined(separator: " ")
         expression.removeAll()
-        currentNumber = ""
+        currentNumber = NumberString.empty
         
         do {
             let calculateResult = try ExpressionParser.parse(from: expressionString).result()
@@ -189,7 +201,7 @@ final class ViewController: UIViewController {
             isCalculateValue = true
             isInputExist = true
         } catch {
-            numberLabel.text = "NaN"
+            numberLabel.text = NumberString.nan
         }
     }
     
@@ -197,9 +209,8 @@ final class ViewController: UIViewController {
         let splitedNumber = String(number).split(with: ".")
         let integerDigits = splitedNumber[0]
         
-        
-        if integerDigits.count > 20 || number >= 1.0e19{
-            return "NaN"
+        if integerDigits.count > Digit.limitDigit || number >= Digit.limitNumber {
+            return NumberString.nan
         } else {
             return numberFormatter.string(from: number as NSNumber)
         }
