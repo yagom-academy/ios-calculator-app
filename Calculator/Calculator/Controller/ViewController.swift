@@ -60,5 +60,20 @@ class ViewController: UIViewController {
         guard let changedNumber = numberFormatter.string(from: NSNumber(value: number)) else { return "" }
         return changedNumber
     }
+    
+    func setStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        return stackView
+    }
+    
+    func setLabel(element: String) -> UILabel {
+        let label = UILabel()
+        label.text = element
+        return label
+    }
 }
 
