@@ -26,7 +26,7 @@ enum ExpressionParser {
         return value
     }
     
-    static func parse(from input: String) -> Formula {
+    static func parse(from input: String) throws -> Formula {
         let operatorList: [String] = ["+", "-", "÷", "×"]
         let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(.init())
         let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(.init())
@@ -40,8 +40,11 @@ enum ExpressionParser {
         
         operands.forEach(operandQueue.enqueue(_:))
         
-        operators.forEach {
-            guard let data = Operator(rawValue: Character($0)) else { return }
+        try operators.forEach {
+            guard let data = Operator(rawValue: Character($0)) else {
+                throw CalauletorError.invalidOperatorInput
+                
+            }
             operatorQueue.enqueue(data)
         }
 
