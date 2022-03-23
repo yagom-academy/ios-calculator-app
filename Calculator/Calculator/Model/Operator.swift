@@ -27,12 +27,16 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        let result = Decimal(lhs + rhs).description
+        let lhsToDecimal: Decimal = Decimal(lhs)
+        let rhsToDecimal: Decimal = Decimal(rhs)
+        let result = (lhsToDecimal + rhsToDecimal).description
         return Double(result) ?? .nan
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        let result = Decimal(lhs - rhs).description
+        let lhsToDecimal: Decimal = Decimal(lhs)
+        let rhsToDecimal: Decimal = Decimal(rhs)
+        let result = (lhsToDecimal - rhsToDecimal).description
         return Double(result) ?? .nan
     }
     
@@ -40,12 +44,16 @@ enum Operator: Character, CaseIterable, CalculatorItem {
         if rhs == 0 {
             return .nan
         }
-        let result = Decimal(lhs / rhs).description
+        let lhsToDecimal: Decimal = Decimal(lhs)
+        let rhsToDecimal: Decimal = Decimal(rhs)
+        let result = (lhsToDecimal / rhsToDecimal).description
         return Double(result) ?? .nan
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        let result = Decimal(lhs * rhs).description
+        let lhsToDecimal: Decimal = Decimal(lhs)
+        let rhsToDecimal: Decimal = Decimal(rhs)
+        let result = (lhsToDecimal * rhsToDecimal).description
         return Double(result) ?? .nan
     }
 }
