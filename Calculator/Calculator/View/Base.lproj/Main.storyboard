@@ -328,6 +328,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculationRecordScrollView" destination="BOT-7g-vxv" id="qwO-mr-Ucm"/>
                         <outlet property="calculationRecordStackView" destination="XRe-QE-UJf" id="QwY-Rq-aPG"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="S4w-00-Mpy"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="6de-AR-eYZ"/>

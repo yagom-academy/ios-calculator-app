@@ -8,6 +8,7 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     // MARK: - IBOutlet
+    @IBOutlet private weak var calculationRecordScrollView: UIScrollView!
     @IBOutlet private weak var calculationRecordStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
@@ -116,6 +117,7 @@ extension CalculatorViewController {
         expression.append(`operator`)
         
         updateCalculationRecord(with: currentOperand, operator: `operator`)
+        calculationRecordScrollView.scrollToBottom()
         
         operatorLabel.text = `operator`
         resetOperand()
