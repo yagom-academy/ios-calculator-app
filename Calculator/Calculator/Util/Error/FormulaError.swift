@@ -8,5 +8,5 @@
 import Foundation
 
 enum FormulaError: Error {
-  case inCompletedFormula
+  case inValidFormula
 }
