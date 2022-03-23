@@ -138,7 +138,7 @@ class ViewController: UIViewController {
         self.calculationFormula = "\(self.calculationFormula) \(operation) \(String(changeToDouble(number: operand)))"
         let numberStackView = makeStackView()
         numberStackView.addArrangedSubview(makeLabel(element: operation))
-        numberStackView.addArrangedSubview(makeLabel(element: operand))
+        numberStackView.addArrangedSubview(makeLabel(element: changeNumberFormat(number: operand)))
         self.numberListStackView.addArrangedSubview(numberStackView)
     }
 }
