@@ -102,7 +102,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="48B-a0-xBi"/>
+                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WK1-9J-ciZ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -151,7 +151,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nOv-2G-qtl"/>
+                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tiQ-0j-oek"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -196,11 +196,11 @@
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="−">
+                                                <state key="normal" title="-">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GFS-su-Nwu"/>
+                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ymb-Cg-eGD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -248,6 +248,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qns-89-vno"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
