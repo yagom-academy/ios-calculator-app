@@ -62,6 +62,9 @@
                                                 <state key="normal" title="AC">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="ACButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3GQ-7h-n3S"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -70,6 +73,9 @@
                                                 <state key="normal" title="CE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="CEButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ddf-1y-m2E"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -184,7 +190,7 @@
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="−">
+                                                <state key="normal" title="-">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -275,7 +281,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zat-CJ-i1h"/>
+                                                    <action selector="dotButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k9k-Su-cRf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -302,13 +308,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2pK-nQ-lxl">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="37"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPC-iy-qdm" userLabel="recentOperator">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="+" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPC-iy-qdm" userLabel="operatorScreenLabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="19.5" height="37"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD" userLabel="recentOperand">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD" userLabel="numberScreenLabel">
                                                 <rect key="frame" x="27.5" y="0.0" width="354.5" height="37"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -336,18 +342,18 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="sbh-wC-koF" id="8UH-Gd-swr"/>
-                        <outlet property="calculationLogStackView" destination="XRe-QE-UJf" id="EWq-Oe-bf3"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="8OJ-Bm-Plf"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="1m1-OZ-m4W"/>
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="g2l-6J-8Iq"/>
                         <outlet property="eightButton" destination="xgT-2D-A49" id="szH-dZ-h99"/>
+                        <outlet property="expressionRecordStackView" destination="XRe-QE-UJf" id="EWq-Oe-bf3"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="x5i-g6-3rf"/>
                         <outlet property="fourButton" destination="hQm-yz-XvG" id="DoM-kF-fP4"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="Ec6-Rf-9yI"/>
                         <outlet property="nineButton" destination="zcj-xJ-ruw" id="8Dq-wi-4L2"/>
                         <outlet property="oneButton" destination="nCE-qB-NiN" id="yIk-VR-y7u"/>
-                        <outlet property="selectedOperandLabel" destination="Lwz-OF-XHD" id="ppb-8p-TvW"/>
-                        <outlet property="selectedOperatorLabel" destination="HPC-iy-qdm" id="Rt4-ID-2Eu"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="hch-Cn-bBz"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="6Yg-Rr-7yS"/>
                         <outlet property="sevenButton" destination="L6z-2G-Gar" id="Bh8-FW-Ci6"/>
                         <outlet property="sixButton" destination="OaY-Mw-CPv" id="pRm-bM-YL5"/>
                         <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="knD-HN-cpm"/>
