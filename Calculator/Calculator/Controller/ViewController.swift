@@ -39,7 +39,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var eightButton: UIButton!
     @IBOutlet weak var nineButton: UIButton!
     
-    
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
     }
     
@@ -49,12 +48,10 @@ class ViewController: UIViewController {
     @IBAction func touchUpFunctionButton(_ sender: UIButton) {
     }
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        numberLabel.text = "0"
+        operatorLabel.text = ""
     }
 
 
