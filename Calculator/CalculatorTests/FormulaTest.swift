@@ -43,17 +43,9 @@ class FormulaTest: XCTestCase {
         XCTAssertEqual(result, 349.323571428571429)
     }
     
-    func test_result메서드호출시_피연산자가nil일경우_에러를던지는지() throws {
+    func test_result메서드호출시_피연산자와_연산자가값이없을떄_에러를던지는지() throws {
         let _ = try sut.result()
         
-        XCTAssertThrowsError(CalculateError.operandIsNil)
-    }
-    
-    func test_result메서드호출시_연산자가nil일경우_에러를던지는지() throws {
-        let operands = [1, 2, 3, 4, 5]
-        operands.forEach {sut.operands.enqueue(Double($0)) }
-        let _ = try sut.result()
-        
-        XCTAssertThrowsError(CalculateError.operatorIsNil)
+        XCTAssertThrowsError(CalculateError.cannotCalculation)
     }
 }

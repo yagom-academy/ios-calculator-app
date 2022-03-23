@@ -17,12 +17,6 @@ class CalculateItemQueueTest: XCTestCase {
         stringQueue = nil
     }
     
-    func test_append메서드를사용하지않고_isEmpty메서드를호출했을때_False가나오는지() {
-        let result = queue.isEmpty
-        
-        XCTAssertEqual(result, false)
-    }
-    
     func test_값할당한게없을떄_isEmpty메서드호출값이_True가나오는지() {
         let result = queue.isEmpty
         
