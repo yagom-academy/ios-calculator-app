@@ -27,6 +27,7 @@
 		A120570927E44A2800370835 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12056FE27E4375C00370835 /* ExpressionParser.swift */; };
 		A14AD7CF27DF77E500E02407 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AD7CE27DF77E500E02407 /* CalculatorItemQueueTests.swift */; };
 		A14AD7D627E01C1500E02407 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AD7D527E01C1400E02407 /* CalculatorItemQueue.swift */; };
+		A196737327EB697300914AB8 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6560F27EB533700F74107 /* Constant.swift */; };
 		A1C6560927EAEE7B00F74107 /* ExpressionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6560827EAEE7B00F74107 /* ExpressionStackView.swift */; };
 		A1C6560B27EAF6FA00F74107 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6560A27EAF6FA00F74107 /* UIScrollView.swift */; };
 		A1C6561027EB533700F74107 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C6560F27EB533700F74107 /* Constant.swift */; };
@@ -312,6 +313,7 @@
 				A12056F327E41E6300370835 /* CalculatorItemQueue.swift in Sources */,
 				A12056E627E3745700370835 /* OperatorTests.swift in Sources */,
 				A12056FD27E41FE000370835 /* Formula.swift in Sources */,
+				A196737327EB697300914AB8 /* Constant.swift in Sources */,
 				A120570527E4388500370835 /* Double.swift in Sources */,
 				A120570927E44A2800370835 /* ExpressionParser.swift in Sources */,
 				A12056F627E41E6D00370835 /* QueueError.swift in Sources */,

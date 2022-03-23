@@ -84,7 +84,7 @@ extension CalculatorViewController {
     }
 }
 
-// MARK: - Method
+// MARK: - Update && Calculate Method
 extension CalculatorViewController {
     private func updateOperand(with operand: String) {
         guard currentOperand.count < Constant.limitOperandCount else {
@@ -180,10 +180,13 @@ extension CalculatorViewController {
     }
     
     private func updateCalculateResult(by result: Double) {
-        operandLabel.text = result.description.addCommaEveryThirdTime()
+        operandLabel.text = "\(result)"
         reconfigureOperator()
     }
-    
+}
+
+// MARK: - Reconfigure Method
+extension CalculatorViewController {
     private func reconfigureCalculator() {
         isCalculated = false
         expression = [String]()
@@ -203,7 +206,10 @@ extension CalculatorViewController {
         currentOperator = Constant.blank
         operatorLabel.text = Constant.blank
     }
-    
+}
+
+// MARK: - Error Handle Method
+extension CalculatorViewController {
     private func handleError(error: Error) {
         if let calculatorError = error as? CalculatorError {
             handleCalculatorError(error: calculatorError)
@@ -229,3 +235,4 @@ extension CalculatorViewController {
         }
     }
 }
+
