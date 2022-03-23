@@ -7,7 +7,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var hasFirstInput = false
+    private var calculatorInput = ""
+    private var hasFirstInput = false
 
     @IBOutlet weak var inputStackView: UIStackView!
     
@@ -48,8 +49,9 @@ class ViewController: UIViewController {
         guard isValidNumber(input: input, currentNumber: currentNumber) else {
             return
         }
-        if currentNumber == "0",
-           input != "." {
+        if hasFirstInput == true, input.contains("0") {
+            numberLabel.text = "0"
+        } else if currentNumber == "0", input != "." {
             numberLabel.text = input
         } else {
             numberLabel.text?.append(input)
@@ -60,9 +62,38 @@ class ViewController: UIViewController {
         guard let input = try? findOperator(of: sender) else {
             return
         }
-        
-        if hasFirstInput == true {
+        // hasFirstInput == true
+            // -> calculatorInput에 operatorLabel.text랑 numberLabel.text 차례대로 추가
+            // 아래 스택 선택
+        // hasFirstInput == false
+            // -> operatorLabel.text = "", number
+            // 위 스택 선택
+        // inputStack에 추가(vertical stack에 operator label이랑 inputNumber label 수정해서 넣기)
+        // 스택 추가하고 나면
+//        if hasFirstInput == false {
+//            hasFirstInput = true
+//        }
+        hasFirstInput = true // stack view 하기 전에 테스트용으로
+        if input == "=" {
+            let result: Double
+            do {
+                result = try ExpressionParser.parse(from: calculatorInput).result()
+                // NumberFormatter로 , 넣기
+                // 반올림하기
+                // 자리수 20이하인지 확인하기
+                numberLabel.text = String(result)
+                operatorLabel.text = ""
+            } catch {
+                guard let nan = error as? CalculatorError,
+                      nan == .unexpectedData else {
+                    return
+                }
+                operatorLabel.text = ""
+                numberLabel.text = "NaN"
+            }
+        } else if hasFirstInput == true {
             operatorLabel.text = input
+            numberLabel.text = "0"
         }
     }
     
@@ -116,6 +147,8 @@ class ViewController: UIViewController {
             return "/"
         case multiplyButton:
             return "*"
+        case equalButton:
+            return "="
         default:
             throw CalculatorError.unexpectedData
         }
@@ -125,7 +158,7 @@ class ViewController: UIViewController {
         let isValidZero = true
         let isValidDot = true
         
-        if currentNumber == "0", input.contains("0") {
+        if hasFirstInput == false, currentNumber == "0", input.contains("0") {
             return !isValidZero
         }
         if ((currentNumber?.contains(".")) == true), input == "." {
