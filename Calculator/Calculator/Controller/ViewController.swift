@@ -10,8 +10,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberListStackView: UIStackView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    var isRealZero: Bool = false
+    var isNoneNumber: Bool = true
     var isFirst : Bool = true
+    var calculationFormula = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,10 @@ class ViewController: UIViewController {
     
     @IBAction func touchCEButton(_ sender: UIButton) {
         self.operandLabel.text = "0"
-        self.isRealZero = false
-        self.isFirst = true
+        self.isNoneNumber = true
+        if self.calculationFormula.isEmpty {
+            self.isFirst = true
+        }
     }
     
     @IBAction func touchChangeSignButton(_ sender: UIButton) {
@@ -42,9 +45,10 @@ class ViewController: UIViewController {
         guard let operandText = self.operandLabel.text else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
         self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
-        self.isRealZero = true
+        self.isNoneNumber = false
         self.isFirst = false
     }
+    
     @IBAction func touchDotButton(_ sender: UIButton) {
         guard let operandText = self.operandLabel.text else { return }
         if operandText.contains(".") { return }
@@ -57,18 +61,19 @@ class ViewController: UIViewController {
         guard let operationText = self.operationLabel.text else { return }
         if isFirst == true { return }
         self.operationLabel.text = inputOperation
-        guard isRealZero == true else { return }
+        if isNoneNumber == true { return }
+        addFormula(operation: operationText, operand: operandText)
         let numberStackView = setStackView(operationText: operationText , operandText: changeNumberFormat(number: operandText))
         self.numberListStackView.addArrangedSubview(numberStackView)
         self.operandLabel.text = "0"
-        self.isRealZero = false
+        self.isNoneNumber = true
     }
     //MARK: - Functions
     func setBasicStatus() {
         self.numberListStackView.subviews.forEach({$0.removeFromSuperview()})
         self.operandLabel.text = "0"
         self.operationLabel.text = ""
-        self.isRealZero = false
+        self.isNoneNumber = true
         self.isFirst = true
     }
     
@@ -77,8 +82,12 @@ class ViewController: UIViewController {
         return changeNumberFormat(number: number)
     }
     
+    func changeToDouble(number: String) -> Double {
+        return Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
+    }
+    
     func changeNumberFormat(number: String) -> String {
-        guard let number = Double(number.replacingOccurrences(of: ",", with: "")) else { return "" }
+        let number = changeToDouble(number: number)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = -2
@@ -102,6 +111,10 @@ class ViewController: UIViewController {
         label.text = element
         label.textColor = .white
         return label
+    }
+    
+    func addFormula(operation: String, operand: String) {
+        self.calculationFormula = "\(self.calculationFormula) \(operation) \(String(changeToDouble(number: operand)))"
     }
 }
 
