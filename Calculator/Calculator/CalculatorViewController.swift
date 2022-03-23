@@ -146,7 +146,7 @@ class CalculatorViewController: UIViewController {
     
     public func generateOperandNumber(_ sender: OperandButton) {
         guard let input = sender.value else { return }
-        if statusZero == true || inputtingOperand == "0" {
+        if statusZero == true || inputtingOperand == CalculatorViewController.zero {
             if sender == OperandZeroButton || sender == OperandCoupleZeroButton {
                 inputtingOperand = CalculatorViewController.zero
             } else if sender == OperandDotButton {
