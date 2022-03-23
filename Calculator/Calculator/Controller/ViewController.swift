@@ -10,6 +10,8 @@ class ViewController: UIViewController {
     private var calculatorInput = ""
     private var hasFirstInput = false
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var inputStackView: UIStackView!
     @IBOutlet weak var firstStackView: UIStackView!
     @IBOutlet weak var firstOperatorLabel: UILabel!
@@ -139,6 +141,12 @@ class ViewController: UIViewController {
         var newInput: String = operatorLabel.text ?? ""
         newInput.append(numberLabel.text ?? "")
         calculatorInput.append(contentsOf: newInput)
+        
+        scrollView
+            .setContentOffset(
+                CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
+                animated: true
+            )
     }
     
     private func removeStack() {

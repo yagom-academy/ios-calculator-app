@@ -386,6 +386,7 @@
                         <outlet property="oneButton" destination="nCE-qB-NiN" id="8rd-HH-Jd0"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="fBa-C7-elo"/>
                         <outlet property="prefixButton" destination="ows-U7-mNc" id="ofh-e9-Fy6"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="F3N-du-W64"/>
                         <outlet property="sevenButton" destination="L6z-2G-Gar" id="Skc-Rq-bRq"/>
                         <outlet property="sixButton" destination="OaY-Mw-CPv" id="WH2-Vt-Yu5"/>
                         <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="7J7-pY-2fL"/>
