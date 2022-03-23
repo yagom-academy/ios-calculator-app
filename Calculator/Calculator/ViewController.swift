@@ -26,7 +26,6 @@ class ViewController: UIViewController {
         if touchedNumber != "0" {
             addNumberAndOperator(currentOperatorLabel.text ?? "", currentNumberLabbel.text ?? "")
         }
-        //넘어갈 때 . 으로 끝나는 경우 .을 제거하고 화면에 띄울 것
         
         currentOperatorLabel.text = sender.currentTitle
     }
@@ -34,7 +33,8 @@ class ViewController: UIViewController {
     @IBAction func clickDotButton(_ sender: UIButton) {
         if ((currentNumberLabbel.text?.contains(".")) == false) {
             touchedNumber += sender.currentTitle ?? ""
-            currentNumberLabbel.text = touchedNumber
+            let currentNumberLabbelText = currentNumberLabbel.text ?? ""
+            currentNumberLabbel.text = currentNumberLabbelText + "."
         }
     }
     
@@ -77,15 +77,19 @@ class ViewController: UIViewController {
     }
     
     func changeDecimalFormat(_ text: String) -> String {
-        let number = Double(text) ?? 0
-        
         let numberFomatter = NumberFormatter()
         numberFomatter.numberStyle = .decimal
         numberFomatter.usesSignificantDigits = true
         numberFomatter.maximumSignificantDigits = 20
         numberFomatter.roundingMode = .halfUp
-        let changedNumber = numberFomatter.string(from: number as NSNumber) ?? ""
+        let number = numberFomatter.number(from: text) ?? 0
+        
+        let changedNumber = numberFomatter.string(from: number) ?? ""
         return changedNumber
+    }
+    
+    func removeComma(_ text: String) -> String {
+        text.replacingOccurrences(of: ",", with: "")
     }
     
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
@@ -121,7 +125,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // 뷰가 로드 될 때 화면을 초기화 하는 함수 따로 만들기
     }
 
 }
