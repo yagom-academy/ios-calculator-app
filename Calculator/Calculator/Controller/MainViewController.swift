@@ -67,6 +67,18 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
+        if isZeroNone == true && operandLabel.text == "0" {
+            return
+        } else if var numberScreen = operandLabel.text, isPlus == true {
+            numberScreen.insert("-", at: numberScreen.startIndex)
+            operandLabel.text = numberScreen
+            isPlus = false
+        } else {
+            operandLabel.text?.removeFirst()
+            isPlus = true
+        }
+    }
+    
         
     }
     
