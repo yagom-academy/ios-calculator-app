@@ -98,6 +98,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpFunctionButton(_ sender: UIButton) {
+        try? findFunction(of: sender)
     }
     
     override func viewDidLoad() {
@@ -151,6 +152,37 @@ class ViewController: UIViewController {
             return "="
         default:
             throw CalculatorError.unexpectedData
+        }
+    }
+    
+    private func findFunction(of button: UIButton) throws {
+        switch button {
+        case acButton:
+            // inputStack 다 없애기
+            return
+        case ceButton:
+            numberLabel.text = "0"
+        case prefixButton:
+            configurePrefix()
+        default:
+            throw CalculatorError.unexpectedData
+        }
+    }
+    
+    private func configurePrefix() {
+        guard let currentNumber = numberLabel.text,
+              currentNumber != "0" else {
+            return
+        }
+        
+        if currentNumber.first == "+" {
+            numberLabel.text?.removeFirst()
+            numberLabel.text?.insert("-", at: currentNumber.startIndex)
+        } else if currentNumber.first == "-" {
+            numberLabel.text?.removeFirst()
+            numberLabel.text?.insert("+", at: currentNumber.startIndex)
+        } else {
+            numberLabel.text = "-" + currentNumber
         }
     }
     
