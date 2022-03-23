@@ -8,28 +8,31 @@ import UIKit
 
 class ViewController: UIViewController {
     // MARK: IBOutlet
-    @IBOutlet weak var currentNumberLabel: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     
-    @IBOutlet var numberButtons: [UIButton]!
+    @IBOutlet var operandButtons: [UIButton]!
     @IBOutlet var operatorButtons: [UIButton]!
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var acButton: UIButton!
     @IBOutlet weak var ceButton: UIButton!
     @IBOutlet weak var convertingSignButton: UIButton!
     
+    @IBOutlet var lowerVerticalStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentNumberLabel.text = Number.zero.rawValue
+        currentOperandLabel.text = Number.zero.rawValue
+        currentOperatorLabel.text = ""
     }
     
     // MARK: Label Changing Methods
-    @IBAction func numberButtonsClicked(_ sender: UIButton) {
-        guard var currentNumber = currentNumberLabel.text else {
+    @IBAction func operandButtonsClicked(_ sender: UIButton) {
+        guard var currentNumber = currentOperandLabel.text else {
             return
         }
         
-        guard currentNumber.count <= 19 else {
+        guard currentNumber.count < 20 else {
             return
         }
         
@@ -55,7 +58,7 @@ class ViewController: UIViewController {
             } else if sender.tag == 11, number == .decimalPoint {
                 currentNumber += Number.decimalPoint.rawValue
             }
-            currentNumberLabel.text = currentNumber
+            currentOperandLabel.text = currentNumber
         }
     }
     
@@ -80,7 +83,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signConvertingButtonClicked(_ sender: UIButton) {
-        guard var currentNumber = currentNumberLabel.text else {
+        guard var currentNumber = currentOperandLabel.text else {
             return
         }
         
@@ -90,11 +93,11 @@ class ViewController: UIViewController {
         } else {
             currentNumber = "-\(currentNumber)"
         }
-        currentNumberLabel.text = currentNumber
+        currentOperandLabel.text = currentNumber
     }
     
     @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
-        currentNumberLabel.text = Number.zero.rawValue
+        currentOperandLabel.text = Number.zero.rawValue
     }
 }
 

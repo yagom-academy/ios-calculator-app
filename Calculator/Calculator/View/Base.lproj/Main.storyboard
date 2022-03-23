@@ -132,7 +132,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qAh-iC-I66"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hKV-gj-ftL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
@@ -143,7 +143,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LdZ-ZP-H9c"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DIB-kD-eSn"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
@@ -154,7 +154,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OX1-Gw-VeR"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GGi-zl-O4O"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
@@ -181,7 +181,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dga-eZ-IxM"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9z2-Fl-bAN"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
@@ -192,7 +192,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eTf-Se-3eG"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sYy-Q2-F5c"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -203,7 +203,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J7U-Y0-lxi"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AN4-ID-Vx5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
@@ -230,7 +230,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bbk-X2-54T"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XdY-Ew-Zof"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
@@ -241,7 +241,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IuB-LM-feB"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gTF-Pc-P5Y"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -252,7 +252,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iT7-OJ-1Kf"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fT9-tu-9MA"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
@@ -279,7 +279,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZX0-Gr-s7l"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bcb-zn-E14"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
@@ -290,7 +290,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AUj-n6-r8c"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4IL-NY-svE"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -301,7 +301,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="numberButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qqc-CT-jEw"/>
+                                                    <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U0j-HT-cmR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -361,21 +361,22 @@
                         <outlet property="acButton" destination="ped-N8-JbY" id="mAb-cb-bPV"/>
                         <outlet property="ceButton" destination="RLD-dY-LOA" id="IFj-3B-mUQ"/>
                         <outlet property="convertingSignButton" destination="ows-U7-mNc" id="Lcy-YG-2bf"/>
-                        <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="JNf-4q-C6Q"/>
-                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="vK6-TL-tBf"/>
+                        <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="jg9-Tx-FWt"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="0ad-ix-Ers"/>
+                        <outlet property="lowerVerticalStackView" destination="6I9-iL-eIa" id="Gee-th-zP8"/>
                         <outlet property="resultButton" destination="Daw-iX-Owl" id="Gs7-KB-gsJ"/>
-                        <outletCollection property="numberButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="c3W-31-yWS"/>
-                        <outletCollection property="numberButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="XWg-K3-t7u"/>
-                        <outletCollection property="numberButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="yEi-tS-swT"/>
-                        <outletCollection property="numberButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="GJp-jv-Xvt"/>
-                        <outletCollection property="numberButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="hLk-gV-SsO"/>
-                        <outletCollection property="numberButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="cIG-Pk-DSc"/>
-                        <outletCollection property="numberButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="wHV-vr-h2D"/>
-                        <outletCollection property="numberButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="XJA-SS-elA"/>
-                        <outletCollection property="numberButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="RlL-Y3-M7c"/>
-                        <outletCollection property="numberButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="17c-tE-m6E"/>
-                        <outletCollection property="numberButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="rfj-8d-pVn"/>
-                        <outletCollection property="numberButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="0HO-Qe-WeD"/>
+                        <outletCollection property="operandButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="c3W-31-yWS"/>
+                        <outletCollection property="operandButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="XWg-K3-t7u"/>
+                        <outletCollection property="operandButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="yEi-tS-swT"/>
+                        <outletCollection property="operandButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="GJp-jv-Xvt"/>
+                        <outletCollection property="operandButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="hLk-gV-SsO"/>
+                        <outletCollection property="operandButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="cIG-Pk-DSc"/>
+                        <outletCollection property="operandButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="wHV-vr-h2D"/>
+                        <outletCollection property="operandButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="XJA-SS-elA"/>
+                        <outletCollection property="operandButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="RlL-Y3-M7c"/>
+                        <outletCollection property="operandButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="17c-tE-m6E"/>
+                        <outletCollection property="operandButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="rfj-8d-pVn"/>
+                        <outletCollection property="operandButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="0HO-Qe-WeD"/>
                         <outletCollection property="operatorButtons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="ArI-b8-aUp"/>
                         <outletCollection property="operatorButtons" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="9or-o3-mZp"/>
                         <outletCollection property="operatorButtons" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="vLb-y2-ZS7"/>
