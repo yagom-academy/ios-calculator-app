@@ -371,22 +371,6 @@
                         <outlet property="OperatorLabel" destination="HPC-iy-qdm" id="Xxs-Ch-09D"/>
                         <outlet property="OperatorMultiplyButton" destination="811-Pz-An6" id="PMw-Lb-fUE"/>
                         <outlet property="OperatorSubtractButton" destination="nTe-Sn-Pvd" id="vIG-eQ-FcR"/>
-                        <outletCollection property="OperandButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="sae-DT-eMW"/>
-                        <outletCollection property="OperandButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="rbI-oX-Ytt"/>
-                        <outletCollection property="OperandButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="PYI-Wu-qti"/>
-                        <outletCollection property="OperandButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="FQ6-q3-u9c"/>
-                        <outletCollection property="OperandButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="jaw-41-ddk"/>
-                        <outletCollection property="OperandButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="FIk-64-H8r"/>
-                        <outletCollection property="OperandButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="TTB-hA-UhQ"/>
-                        <outletCollection property="OperandButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="Brh-da-DQ7"/>
-                        <outletCollection property="OperandButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="ltr-Lm-uN2"/>
-                        <outletCollection property="OperandButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="UfK-Yv-LFi"/>
-                        <outletCollection property="OperandButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="Wjr-ir-PbS"/>
-                        <outletCollection property="OperandButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="RdW-Nc-i8P"/>
-                        <outletCollection property="OperatorButtons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="kmY-WG-bcT"/>
-                        <outletCollection property="OperatorButtons" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="f6b-f7-Me8"/>
-                        <outletCollection property="OperatorButtons" destination="811-Pz-An6" collectionClass="NSMutableArray" id="vGa-Wg-reH"/>
-                        <outletCollection property="OperatorButtons" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="5r1-95-vo1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

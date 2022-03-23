@@ -29,38 +29,34 @@ class CalculatorViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     
-    @IBOutlet var OperandButtons: [OperandButton]!
-    
-    @IBOutlet weak var OperandZeroButton: OperandButton!
-    @IBOutlet weak var OperandCoupleZeroButton: OperandButton!
-    @IBOutlet weak var OperandOneButton: OperandButton!
-    @IBOutlet weak var OperandTwoButton: OperandButton!
-    @IBOutlet weak var OperandThreeButton: OperandButton!
-    @IBOutlet weak var OperandFourButton: OperandButton!
-    @IBOutlet weak var OperandFiveButton: OperandButton!
-    @IBOutlet weak var OperandSixButton: OperandButton!
-    @IBOutlet weak var OperandSevenButton: OperandButton!
-    @IBOutlet weak var OperandEightButton: OperandButton!
-    @IBOutlet weak var OperandNineButton: OperandButton!
-    @IBOutlet weak var OperandDotButton: OperandButton!
+    @IBOutlet private weak var OperandZeroButton: OperandButton!
+    @IBOutlet private weak var OperandCoupleZeroButton: OperandButton!
+    @IBOutlet private weak var OperandOneButton: OperandButton!
+    @IBOutlet private weak var OperandTwoButton: OperandButton!
+    @IBOutlet private weak var OperandThreeButton: OperandButton!
+    @IBOutlet private weak var OperandFourButton: OperandButton!
+    @IBOutlet private weak var OperandFiveButton: OperandButton!
+    @IBOutlet private weak var OperandSixButton: OperandButton!
+    @IBOutlet private weak var OperandSevenButton: OperandButton!
+    @IBOutlet private weak var OperandEightButton: OperandButton!
+    @IBOutlet private weak var OperandNineButton: OperandButton!
+    @IBOutlet private weak var OperandDotButton: OperandButton!
     
     
-    @IBOutlet var OperatorButtons: [OperatorButton]!
-    
-    @IBOutlet weak var OperatorAddButton: OperatorButton!
-    @IBOutlet weak var OperatorSubtractButton: OperatorButton!
-    @IBOutlet weak var OperatorMultiplyButton: OperatorButton!
-    @IBOutlet weak var OperatorDivideButton: OperatorButton!
+    @IBOutlet private weak var OperatorAddButton: OperatorButton!
+    @IBOutlet private weak var OperatorSubtractButton: OperatorButton!
+    @IBOutlet private weak var OperatorMultiplyButton: OperatorButton!
+    @IBOutlet private weak var OperatorDivideButton: OperatorButton!
     
     
-    @IBOutlet weak var FuncAllClearButton: FunctionalButton!
-    @IBOutlet weak var FuncClearEntryButton: FunctionalButton!
-    @IBOutlet weak var FuncChangeSignButton: FunctionalButton!
-    @IBOutlet weak var FuncExecuteButton: FunctionalButton!
+    @IBOutlet private weak var FuncAllClearButton: FunctionalButton!
+    @IBOutlet private weak var FuncClearEntryButton: FunctionalButton!
+    @IBOutlet private weak var FuncChangeSignButton: FunctionalButton!
+    @IBOutlet private weak var FuncExecuteButton: FunctionalButton!
     
   
-    @IBOutlet weak var OperatorLabel: UILabel!
-    @IBOutlet weak var NumberLabel: UILabel!
+    @IBOutlet private weak var OperatorLabel: UILabel!
+    @IBOutlet private weak var NumberLabel: UILabel!
     
     
     @IBOutlet weak var HistoryScrollView: UIScrollView!
@@ -132,14 +128,14 @@ class CalculatorViewController: UIViewController {
         clearHistoryStackView()
     }
     
-    func clearHistoryStackView() {
+    public func clearHistoryStackView() {
         for historyView in HistoryStackView.arrangedSubviews {
             historyView.removeFromSuperview()
             HistoryStackView.removeArrangedSubview(historyView)
         }
     }
     
-    @IBAction func OperandButtonAction(_ sender: OperandButton) {
+    @IBAction public func OperandButtonAction(_ sender: OperandButton) {
         generateOperandNumber(sender)
         addOperatorToFormulaIfExists()
     }
@@ -170,7 +166,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
+    @IBAction public func OperatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
         inputtingOperator = input
         if statusZero {
@@ -191,17 +187,17 @@ class CalculatorViewController: UIViewController {
         formerOperator = inputtingOperator
     }
     
-    @IBAction func allClearAction(_ sender: FunctionalButton) {
+    @IBAction public func allClearAction(_ sender: FunctionalButton) {
         setUpDefaultStatus()
         clearHistoryStackView()
     }
     
     
-    @IBAction func clearEntryAction(_ sender: FunctionalButton) {
+    @IBAction public func clearEntryAction(_ sender: FunctionalButton) {
         setStatusZero()
     }
     
-    @IBAction func changeSignAction(_ sender: FunctionalButton) {
+    @IBAction public func changeSignAction(_ sender: FunctionalButton) {
         if inputtingOperand == CalculatorViewController.zero {
             return
         } else if inputtingOperand.first == CalculatorViewController.negativeSign {
@@ -211,7 +207,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func executeCalculatingAction(_ sender: FunctionalButton) {
+    @IBAction public func executeCalculatingAction(_ sender: FunctionalButton) {
         if formulaNotYetCalculated.isEmpty {
             return
         }
@@ -239,18 +235,17 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func insertHistoryInStackView(_ inputted: String) {
+    public func insertHistoryInStackView(_ inputted: String) {
         let stackView = historyStackView(inputted)
         HistoryStackView.addArrangedSubview(stackView)
         let offsetY = HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height
-        
         
         if(offsetY > 0) {
             HistoryScrollView.setContentOffset(CGPoint(x: 0, y: (HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height + 30)), animated: true)
         }
     }
     
-    func historyStackView(_ inputted: String) -> UIStackView {
+    public func historyStackView(_ inputted: String) -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
