@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     private var calculatorInput = ""
     private var hasFirstInput = false
 
