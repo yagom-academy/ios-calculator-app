@@ -75,6 +75,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchResultButton(_ sender: UIButton) {
         if self.isResult == true { return }
+        if self.numberListStackView.subviews.isEmpty { return }
         guard let operandText = self.operandLabel.text else { return }
         guard let operationText = self.operationLabel.text else { return }
         addFormula(operation: operationText, operand: operandText)
