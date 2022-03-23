@@ -17,7 +17,9 @@ final class CalculatorLinkedList<T> {
     }
     
     var count: Int {
-        guard var node = head else { return 0 }
+        guard var node = head else {
+            return 0
+        }
         var count = 1
         while let nextNode = node.next {
             node = nextNode

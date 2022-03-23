@@ -32,7 +32,7 @@ enum ExpressionParser {
                 operatorQueue.enqueue(value)
             }
     
-        return Formula(operands: operandQueue, operators: operatorQueue)
+        return Formula(operandQueue: operandQueue, operatorQueue: operatorQueue)
     }
     
     static func componentsByOperators(from input: String) -> [String] {
