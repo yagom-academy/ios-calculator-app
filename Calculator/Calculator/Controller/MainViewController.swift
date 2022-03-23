@@ -162,11 +162,11 @@ class MainViewController: UIViewController {
     }
     
     func changeToNumberFormatter(with totalOperand: String) -> String? {
-        let numberOfFormatter = NumberFormatter()
-        numberOfFormatter.numberStyle = .decimal
-        numberOfFormatter.roundingMode = .halfUp
-        numberOfFormatter.maximumSignificantDigits = 20
-        let operandExpressionForm = numberOfFormatter.string(from: NSNumber(value: Double(totalOperand) ?? 0))
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumSignificantDigits = 20
+        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(totalOperand) ?? 0))
         return operandExpressionForm
     }
 }
