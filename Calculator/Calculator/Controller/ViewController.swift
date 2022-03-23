@@ -13,12 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var inputStackView: UIStackView!
-    @IBOutlet weak var firstStackView: UIStackView!
-    @IBOutlet weak var firstOperatorLabel: UILabel!
-    @IBOutlet weak var firstNumberLabel: UILabel!
-    @IBOutlet weak var followingStackView: UIStackView!
-    @IBOutlet weak var followingOperatorLabel: UILabel!
-    @IBOutlet weak var followingNumberLabel: UILabel!
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
@@ -78,10 +72,9 @@ class ViewController: UIViewController {
             let result: Double
             do {
                 result = try ExpressionParser.parse(from: calculatorInput).result()
-                // NumberFormatter로 , 넣기
-                // 반올림하기
-                // 자리수 20이하인지 확인하기
-                numberLabel.text = String(result)
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                numberLabel.text = numberFormatter.string(for: result)
                 operatorLabel.text = ""
             } catch {
                 guard let nan = error as? CalculatorError,
