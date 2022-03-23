@@ -155,13 +155,13 @@ class MainViewController: UIViewController {
         expressionRecordScrollView.scrollToBottom()
     }
     
-    func changeToNumberFormatter(with totalOperand: String) -> String? {
+    func changeToNumberFormatter(with totalOperand: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
-        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(totalOperand) ?? 0))
+        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(totalOperand) ?? 0)) ?? ""
         return operandExpressionForm
     }
 }
