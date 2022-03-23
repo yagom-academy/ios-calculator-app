@@ -14,10 +14,11 @@ final class CalculatorViewController: UIViewController {
   @IBOutlet private weak var operatorLabel: UILabel!
   @IBOutlet private weak var operandLabel: UILabel!
   
-  private var formulas: [String] = []
+  private let viewModel = CalculatorViewModel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.bindUI()
     self.clearAll()
   }
   
@@ -36,99 +37,72 @@ final class CalculatorViewController: UIViewController {
     }
   }
   
-  @IBAction private func didTapNumberButton(_ sender: UIButton) {
-    guard let number = sender.titleLabel?.text,
-          let oldNumber = self.operandLabel.text
-    else {
-      return
-    }
-    if oldNumber == "0" {
-      self.operandLabel.text = number
-    } else {
-      let newNumber = oldNumber + number
-      self.operandLabel.text = newNumber
+  @IBAction private func didTapCalculateButton(_ sender: UIButton) {
+    let operand = self.operandLabel.text
+    let operatorType = self.operatorLabel.text
+    if self.viewModel.didTapCalculateButton() {
+      let stackView = UIStackView.create(type: operatorType, operand: operand)
+      self.resultStackView.addArrangedSubview(stackView)
     }
   }
   
   @IBAction private func didTapOperatorButton(_ sender: UIButton) {
-    guard let newOperatorType = sender.titleLabel?.text else {
+    guard let operatorString = sender.titleLabel?.text else {
       return
     }
-    guard let number = self.operandLabel.text,
-          Double(number) != 0
-    else {
-      self.operatorLabel.text = newOperatorType
-      return
-    }
-    
-    let stackView = self.makeResultSubStackView(
-      operatorType: self.operatorLabel.text,
-      operand: number
-    )
-    if let stackView = stackView {
+    let operand = self.operandLabel.text
+    let operatorType = self.operatorLabel.text
+    if self.viewModel.didTapOperatorButton(of: operatorString) {
+      let stackView = UIStackView.create(type: operatorType, operand: operand)
       self.resultStackView.addArrangedSubview(stackView)
     }
-    
-    if let operatorType = self.operatorLabel.text {
-      self.formulas.append(operatorType)
-    }
-    self.formulas.append(number)
-    self.operatorLabel.text = newOperatorType
-    self.operandLabel.text = "\(Int.zero)"
   }
   
-  @IBAction private func didTapCalculateButton(_ sender: UIButton) {}
+  @IBAction private func didTapNumberButton(_ sender: UIButton) {
+    guard let numberString = sender.titleLabel?.text else {
+      return
+    }
+    self.viewModel.didTapNumberButton(of: numberString)
+  }
+  
+  @IBAction private func didTapDotButton(_ sender: UIButton) {
+    self.viewModel.didTapDotButton()
+  }
 }
 
 // MARK: - Private Extension
 
 private extension CalculatorViewController {
   
+  func bindUI() {
+    self.viewModel.operatorType.bind { [weak self] operatorType in
+      self?.operatorLabel.text = operatorType
+    }
+    self.viewModel.operandValue.bind { [weak self] operand in
+      if let isResult = self?.viewModel.isResult, isResult == true {
+        guard let operand = Double(operand) else {
+          return
+        }
+        self?.operandLabel.text = operand.formatString()
+        self?.viewModel.isResult = false
+      } else {
+        self?.operandLabel.text = operand
+      }
+    }
+  }
+  
   func clearAll() {
-    self.formulas.removeAll()
-    self.operatorLabel.text = nil
-    self.operandLabel.text = Double.zero.formatString()
+    self.viewModel.clearAll()
     self.resultStackView.arrangedSubviews.forEach {
-      self.resultStackView.removeArrangedSubview($0)
       $0.removeFromSuperview()
     }
   }
   
   func clearEntry() {
-    self.operandLabel.text = Double.zero.formatString()
+    self.viewModel.clearEntry()
   }
-  
+
   func convertSign() {
-    guard let operand = self.operandLabel.text,
-          let number = Double(operand)
-    else {
-      return
-    }
-    let newNumber = number * -1
-    let result = newNumber == .zero ? .zero : newNumber
-    self.operandLabel.text = result.formatString()
-  }
-  
-  func makeResultSubStackView(operatorType: String?, operand: String?) -> UIStackView? {
-    let stackView = UIStackView()
-    stackView.axis = .horizontal
-    stackView.distribution = .fill
-    stackView.alignment = .fill
-    stackView.spacing = 8
-    
-    let operatorResultLabel = UILabel()
-    operatorResultLabel.font = .preferredFont(forTextStyle: .title3)
-    operatorResultLabel.textColor = .white
-    operatorResultLabel.text = operatorType
-    
-    let operandResultLabel = UILabel()
-    operandResultLabel.font = .preferredFont(forTextStyle: .title3)
-    operandResultLabel.textColor = .white
-    operandResultLabel.text = operand
-    
-    stackView.addArrangedSubview(operatorResultLabel)
-    stackView.addArrangedSubview(operandResultLabel)
-    
-    return stackView
+    self.viewModel.convertSign()
   }
 }
