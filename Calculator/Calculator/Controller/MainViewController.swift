@@ -61,15 +61,14 @@ class MainViewController: UIViewController {
     
     @IBAction func dotButtonClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard totalOperand.count < 21 else { return }
+        guard totalOperand.count < 20 else { return }
         
-        if isZeroNone == true && operandLabel.text == "0" {
-            return
-        } else if totalOperand.contains(".") == true {
+        if totalOperand.contains(".") == true {
             return
         }
         totalOperand += selectedOperand
-        operandLabel.text = totalOperand
+        operandLabel.text = changeToNumberFormatter(with: totalOperand) + "."
+        self.isDotUsed = true
     }
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
