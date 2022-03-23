@@ -95,7 +95,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YKH-82-hZC">
-                                <rect key="frame" x="16" y="362" width="382" height="479.5"/>
+                                <rect key="frame" x="16" y="362.5" width="382" height="479.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AP2-25-h5E">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="89.5"/>
@@ -131,6 +131,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K2g-Wg-LgR"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -178,7 +181,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wf0-vP-yJK"/>
+                                                    <action selector="clickOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ch8-Ar-s0k"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -226,6 +229,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eke-PC-qtJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -272,6 +278,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0bX-6v-WMv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -342,6 +351,10 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currentNumberLabbel" destination="Lwz-OF-XHD" id="Gpm-uv-mXj"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="Kz8-QY-bgZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
