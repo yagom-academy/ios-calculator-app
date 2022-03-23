@@ -8,4 +8,5 @@ enum CalculateError: Error {
     case isNaN(Double)
     case operandIsNil
     case operatorIsNil
+    case cannotCalculation
 }
