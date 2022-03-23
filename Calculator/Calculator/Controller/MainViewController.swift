@@ -8,8 +8,13 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var calculationLogStackView: UIStackView!
-    private var calculationLog: [String?] = []
+    @IBOutlet weak var expressionRecordStackView: UIStackView!
+    private var expressionRecord: [String?] = []
+    private var totalOperand: String = ""
+    private var operationCount: Int = 0
+    private var isPlus: Bool = true
+    private var isZeroNone: Bool = true
+    private var isFirstTime: Bool = true
     
     @IBOutlet weak var oneButton: UIButton!
     @IBOutlet weak var twoButton: UIButton!
