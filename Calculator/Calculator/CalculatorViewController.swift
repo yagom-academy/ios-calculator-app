@@ -34,6 +34,8 @@ class CalculatorViewController: UIViewController {
     var currentDisplayNumber: String = ""
     var totalCalculate = ""
     
+    var dotStatus = false
+    var negativeStatus = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +65,14 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func clickNumber(sender: NumberButton) {
         //.처리에 대해선 추후 고민
-        currentDisplayNumber = currentDisplayNumber + (sender.value ?? "")
+        let clickValue = sender.value ?? ""
+        if clickValue == "." && dotStatus == true {
+            return
+        }
+        if clickValue == "." {
+            dotStatus = true
+        }
+        currentDisplayNumber = currentDisplayNumber + clickValue
         setDisplayNumberLabel()
     }
     
@@ -79,6 +88,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func clickOperand(sender: OperandButton) {
         let operand = sender.value ?? ""
+        dotStatus = false
         addStackView()
         setDisplayOperandLabel(operand: operand)
     }
