@@ -15,7 +15,9 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Property
     private var currentOperand: String = ""
+    private var currentOperator: String = ""
     private var expression = [String]()
+    private var isCalculated = false
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -30,7 +32,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        resetOperand()
+        reconfigureOperand()
     }
     
     @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
@@ -62,7 +64,11 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
+        guard isCalculated == false else {
+            return
+        }
         
+        updateLastCalculation()
     }
 }
 
@@ -112,18 +118,19 @@ extension CalculatorViewController {
             operatorLabel.text = `operator`
             return
         }
-        
+                
         expression.append(currentOperand)
         expression.append(`operator`)
         
-        updateCalculationRecord(with: currentOperand, operator: `operator`)
+        updateCalculationRecord(with: currentOperand, currentOperator)
         calculationRecordScrollView.scrollToBottom()
         
+        currentOperator = `operator`
         operatorLabel.text = `operator`
-        resetOperand()
+        reconfigureOperand()
     }
     
-    private func updateCalculationRecord(with operand: String, operator: String) {
+    private func updateCalculationRecord(with operand: String, _ operator: String) {
         if calculationRecordStackView.subviews.count == 0 {
             let ExpressionStackView = ExpressionStackView(operand: operand)
             calculationRecordStackView.addArrangedSubview(ExpressionStackView)
@@ -134,21 +141,47 @@ extension CalculatorViewController {
         calculationRecordStackView.addArrangedSubview(ExpressionStackView)
     }
     
+    private func updateLastCalculation() {
+        expression.append(currentOperand)
+        updateCalculationRecord(with: currentOperand, currentOperator)
+        
+        calculate()
+    }
+    
+    private func calculate() {
+        var formula = ExpressionParser.parse(from: expression.joined(separator: " "))
+        
+        do {
+            let result = try formula.result()
+            updateCalculateResult(by: result)
+        } catch {
+            
+        }
+    }
+    
+    private func updateCalculateResult(by result: Double) {
+        isCalculated = true
+        operandLabel.text = result.description.addCommaEveryThirdTime()
+        reconfigureOperator()
+    }
+    
     private func reconfigureCalculator() {
+        isCalculated = false
         expression = [String]()
-        resetOperand()
-        resetOperator()
+        reconfigureOperand()
+        reconfigureOperator()
         calculationRecordStackView
             .arrangedSubviews
             .forEach { $0.removeFromSuperview() }
     }
     
-    private func resetOperand() {
+    private func reconfigureOperand() {
         currentOperand = ""
         operandLabel.text = "0"
     }
     
-    private func resetOperator() {
+    private func reconfigureOperator() {
+        currentOperator = ""
         operatorLabel.text = ""
     }
 }
