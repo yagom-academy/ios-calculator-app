@@ -41,22 +41,17 @@ final class CalculatorViewModel {
     guard self.operandValue.value.count <= 19 else {
       return
     }
-    var newValue: String
-    let oldValue = self.operandValue.value
-    if oldValue == "0" {
-      newValue = numberString
-    } else {
-      newValue = oldValue + numberString
-    }
-    self.operandValue.next(newValue)
+    var value = self.operandValue.value
+    value = (value == "0" ? numberString : value + numberString)
+    self.operandValue.next(value)
   }
   
   func didTapDotButton() {
     guard self.isDotted == false else {
       return
     }
-    let newValue = self.operandValue.value + "."
-    self.operandValue.next(newValue)
+    let value = self.operandValue.value + "."
+    self.operandValue.next(value)
   }
   
   func didTapOperatorButton(of operatorString: String) -> Bool {
@@ -81,7 +76,7 @@ final class CalculatorViewModel {
       return false
     }
     
-    if self.formulas.count == Int.zero {
+    if self.formulas.isEmpty {
       return false
     }
     
