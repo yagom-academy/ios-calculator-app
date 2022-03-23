@@ -28,8 +28,8 @@ enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
         let operatorList: [String] = ["+", "-", "÷", "×"]
-        let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(LinkdeList<Double>())
-        let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(LinkdeList<Operator>())
+        let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(.init())
+        let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(.init())
         let allElement = input.trimmingCharacters(in: .whitespaces).components(separatedBy: " ")
         let operands = compomnentsByOperators(from: input).compactMap { Double($0) }
         let operators = allElement.filter { operatorList.contains($0) }
