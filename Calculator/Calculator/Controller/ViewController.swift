@@ -38,10 +38,9 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = NumberString.zero
-        logScrollView.showsVerticalScrollIndicator = false
+        setUpAttribute()
     }
-    
+
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
         if numberLabel.text == NumberString.nan {
             return
@@ -75,44 +74,6 @@ final class ViewController: UIViewController {
         operatorLabel.text = sender.titleLabel?.text
     }
     
-    private func writeCalculateLog() {
-        if numberLabel.text == NumberString.nan {
-            return
-        }
-        
-        if isInputExist == false {
-            return
-        }
-        
-        
-        
-        let doubleNumber = numberLabel.text?.replacingOccurrences(of: ",", with: "")
-        let numberLogLabel = makeLabel(with: doubleNumber)
-        let operatorLogLabel = makeLabel(with: operatorLabel.text)
-        
-        let stackView = UIStackView(arrangedSubviews: [operatorLogLabel, numberLogLabel])
-        stackView.axis = .horizontal
-        stackView.alignment = .trailing
-        stackView.spacing = 10
-        
-        calculateLogStackView.addArrangedSubview(stackView)
-        logScrollView.scroll()
-        expression.append(contentsOf: [operatorLabel.text, doubleNumber])
-    
-        isCalculateValue = false
-        isInputExist = false
-        currentStringNumber = NumberString.empty
-        numberLabel.text = NumberString.zero
-        operatorLabel.text = NumberString.empty
-    }
-    
-    private func makeLabel(with text: String?) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.textColor = .white
-        return label
-    }
-    
     @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
         if numberLabel.text == NumberString.nan {
             return
@@ -138,24 +99,11 @@ final class ViewController: UIViewController {
         numberLabel.text = currentStringNumber
     }
     
-    @IBAction private func acButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonDidTapped(_ sender: UIButton) {
         resetCalculator()
     }
     
-    private func resetCalculator() {
-        expression.removeAll()
-        isInputExist = false
-        currentStringNumber = NumberString.empty
-        numberLabel.text = NumberString.zero
-        operatorLabel.text = NumberString.empty
-        
-        
-        calculateLogStackView.arrangedSubviews.forEach { subView in
-            subView.removeFromSuperview()
-        }
-    }
-    
-    @IBAction private func ceButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonDidTapped(_ sender: UIButton) {
         if numberLabel.text == NumberString.nan {
             return
         }
@@ -205,17 +153,74 @@ final class ViewController: UIViewController {
             numberLabel.text = NumberString.nan
         }
     }
+
+}
+
+private extension ViewController {
     
-    private func adjust(number: Double) -> String? {
+    func setUpAttribute() {
+        numberLabel.text = NumberString.zero
+        logScrollView.showsVerticalScrollIndicator = false
+    }
+    
+    func writeCalculateLog() {
+        if numberLabel.text == NumberString.nan {
+            return
+        }
+        
+        if isInputExist == false {
+            return
+        }
+        
+        let doubleNumber = numberLabel.text?.replacingOccurrences(of: ",", with: "")
+        let numberLogLabel = makeLabel(with: doubleNumber)
+        let operatorLogLabel = makeLabel(with: operatorLabel.text)
+        
+        let stackView = UIStackView(arrangedSubviews: [operatorLogLabel, numberLogLabel])
+        stackView.axis = .horizontal
+        stackView.alignment = .trailing
+        stackView.spacing = 10
+        
+        calculateLogStackView.addArrangedSubview(stackView)
+        logScrollView.scroll()
+        expression.append(contentsOf: [operatorLabel.text, doubleNumber])
+    
+        isCalculateValue = false
+        isInputExist = false
+        currentStringNumber = NumberString.empty
+        numberLabel.text = NumberString.zero
+        operatorLabel.text = NumberString.empty
+    }
+    
+    func makeLabel(with text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        return label
+    }
+    
+    func resetCalculator() {
+        expression.removeAll()
+        isInputExist = false
+        currentStringNumber = NumberString.empty
+        numberLabel.text = NumberString.zero
+        operatorLabel.text = NumberString.empty
+        
+        calculateLogStackView.arrangedSubviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
+    }
+    
+    func adjust(number: Double) -> String? {
         let splitedNumber = String(number).split(with: ".")
         let integerDigits = splitedNumber[0]
         
-        if integerDigits.count > Digit.limitDigit || number >= Digit.limitNumber {
+        if integerDigits.count > Digit.limitDigit ||
+           number >= Digit.limitNumber {
             return NumberString.nan
         } else {
             return numberFormatter.string(from: number as NSNumber)
         }
     }
-    
 }
 
