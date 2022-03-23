@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
-        if isZeroNone == true && operandLabel.text == "0" {
+        if operandLabel.text == "0" {
             return
         } else if var numberScreen = operandLabel.text, isPlus == true {
             numberScreen.insert("-", at: numberScreen.startIndex)
@@ -64,8 +64,6 @@ class MainViewController: UIViewController {
         guard totalOperand.count < 21 else { return }
         
         if isZeroNone == true && operandLabel.text == "0" {
-            return
-        } else if isZeroNone == false && operandLabel.text == "0" {
             return
         } else if totalOperand.contains(".") == true {
             return
@@ -147,6 +145,7 @@ class MainViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
+        numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
         let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(totalOperand) ?? 0))
         return operandExpressionForm
