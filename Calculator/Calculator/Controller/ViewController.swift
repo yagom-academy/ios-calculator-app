@@ -24,6 +24,16 @@ class ViewController: UIViewController {
         self.operandLabel.text = "0"
     }
     
+    @IBAction func touchChangeSignButton(_ sender: UIButton) {
+        guard let labelOperand = self.operandLabel.text else { return }
+        if labelOperand == "0" { return }
+        if labelOperand.contains("-") {
+            self.operandLabel.text = labelOperand.replacingOccurrences(of: "-", with: "")
+        } else {
+            self.operandLabel.text = "-" + labelOperand
+        }
+    }
+    
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let labelOperand = self.operandLabel.text else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
