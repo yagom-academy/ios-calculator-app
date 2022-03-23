@@ -13,7 +13,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     
     // MARK: - Property
-    private var currentOperand: String = ""
+    private var currentOperand: String = "0"
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -44,11 +44,25 @@ extension CalculatorViewController {
             return
         }
         
-        updateOperandLabel(with: operand)
+        guard currentOperand.count < 20 else {
+            return
+        }
+        
+        currentOperand += operand
+        operandLabel.text = currentOperand.addCommaEveryThirdTime()
     }
         
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
+        guard let dot = sender.titleLabel?.text else {
+            return
+        }
         
+        guard currentOperand.contains(dot) == false else {
+            return
+        }
+        
+        currentOperand += dot
+        operandLabel.text?.append(dot)
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
@@ -58,15 +72,6 @@ extension CalculatorViewController {
 
 // MARK: - Method
 extension CalculatorViewController {
-    private func updateOperandLabel(with operand: String) {
-        guard currentOperand.count < 20 else {
-            return
-        }
-        
-        currentOperand += operand
-        operandLabel.text = currentOperand.addCommaEveryThirdTime()
-    }
-    
     private func resetOperand() {
         currentOperand = "0"
         operandLabel.text = "0"
