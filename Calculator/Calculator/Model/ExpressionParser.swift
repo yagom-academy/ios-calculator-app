@@ -14,13 +14,24 @@ enum ExpressionParser {
         let operatorQueue = CalculatorItemQueue<Operator>()
         
         componentsByOperators(from: input)
-            .compactMap { Double($0) }
-            .forEach { operandQueue.enqueue($0) }
-        componentsByOperators(from: input)
-            .filter { $0.count == 1 }
-            .compactMap { Operator(rawValue: Character($0)) }
-            .forEach{ operatorQueue.enqueue($0)}
+            .compactMap { value in
+                Double(value)
+            }
+            .forEach { value in
+                operandQueue.enqueue(value)
+            }
         
+        componentsByOperators(from: input)
+            .filter { value in
+                value.count == 1
+            }
+            .compactMap({ value in
+                Operator(rawValue: Character(value))
+            })
+            .forEach { value in
+                operatorQueue.enqueue(value)
+            }
+    
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
     

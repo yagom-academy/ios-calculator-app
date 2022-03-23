@@ -1,5 +1,5 @@
 //
-//  DivideError.swift
+//  CalculatorError.swift
 //  Calculator
 //
 //  Created by SeoDongyeon on 2022/03/18.
