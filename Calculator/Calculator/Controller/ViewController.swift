@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var presentValue: UILabel!
-    var presentValueLabelText: [String] = []
+    var valueToBeCalculated: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,21 +17,25 @@ class ViewController: UIViewController {
     
     @IBAction func didTapOperand(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
-        
-        presentValueLabelText.append(buttonLabel)
         presentValue.text = buttonLabel
     }
     
+    @IBAction func didTapOperator(sender: UIButton) {
+        guard let buttonLabel = sender.titleLabel?.text else { return }
+        guard let labelText = presentValue.text else { return }
+        let valueStack = "\(buttonLabel + " " + labelText)"
+        valueToBeCalculated.append(valueStack)
+    }
+    
     @IBAction func changeSign(sender: UIButton) {
-         guard let lastValue = Double(presentValueLabelText.removeLast()) else { return }
-         
-         let convertedString = String(lastValue * -1)
-         presentValue.text = convertedString
-         presentValueLabelText.append(convertedString)
-     }
+        if let labelText = presentValue.text {
+            let converteDouble = Double(labelText) ?? 0
+            presentValue.text = String(converteDouble * -1)
+        }
+    }
     
     @IBAction func didTapAllClear(sender: UIButton) {
-           presentValueLabelText.removeAll()
-           presentValue.text = "0"
-       }
+        valueToBeCalculated.removeAll()
+        presentValue.text = "0"
+    }
 }
