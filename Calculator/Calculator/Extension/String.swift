@@ -7,6 +7,10 @@
 
 import Foundation
 
+fileprivate extension Constant {
+    static let dot = "."
+}
+
 extension String {
     func split(with target: Character) -> [String] {
         return self.split(separator: target)
@@ -16,7 +20,7 @@ extension String {
     func addCommaEveryThirdTime() -> String {
         let maximumSignificantDigits = 20
         let numberFormatter = NumberFormatter()
-        let splitCurrentOperand = self.split(with: ".")
+        let splitCurrentOperand = self.split(with: Character(Constant.dot))
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
@@ -31,8 +35,8 @@ extension String {
             return self.description
         }
         
-        if self.contains(".") {
-            return result + "." + fractionOperand
+        if self.contains(Constant.dot) {
+            return result + Constant.dot + fractionOperand
         }
         
         return result
