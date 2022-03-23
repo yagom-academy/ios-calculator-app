@@ -189,7 +189,8 @@ final class ViewController: UIViewController {
         let splitedNumber = String(number).split(with: ".")
         let integerDigits = splitedNumber[0]
         
-        if integerDigits.count > 20 {
+        
+        if integerDigits.count > 20 || number >= 1.0e19{
             return "NaN"
         } else {
             return numberFormatter.string(from: number as NSNumber)
