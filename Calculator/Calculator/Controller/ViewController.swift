@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
-        guard let operandText = self.operandLabel.text else { return }
+        guard let operandText = self.operandLabel.text, operandText.count < 20 else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
         if operandText == "NaN" || isResult == true {
             self.operandLabel.text = inputNumber
@@ -83,10 +83,8 @@ class ViewController: UIViewController {
         let result = resultFormula.result()
         if result.isNaN {
             self.isFirst = true
-            self.operandLabel.text = "NaN"
-        } else {
-            self.operandLabel.text = changeNumberFormat(number: String(result))
         }
+            self.operandLabel.text = changeNumberFormat(number: String(result))
         self.operationLabel.text = ""
         self.calculationFormula = ""
         self.isResult = true
