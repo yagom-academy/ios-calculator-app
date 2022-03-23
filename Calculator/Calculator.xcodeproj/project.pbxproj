@@ -178,10 +178,10 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				863B593027E059C100584B7C /* Model */,
+				863B593127E059CB00584B7C /* Application */,
 				863B593327E059EA00584B7C /* Protocol */,
 				863B593227E059D600584B7C /* ViewController */,
-				863B593127E059CB00584B7C /* Application */,
-				863B593027E059C100584B7C /* Model */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
