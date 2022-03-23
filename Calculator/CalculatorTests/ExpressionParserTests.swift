@@ -52,7 +52,7 @@ final class ExpressionParserTests: XCTestCase {
   
   func test_parse_미완성된_사용자_입력후_호출시_formula의_result는_Error를_던져야한다() {
     // given
-    let input = "1 + 2 - "
+    let input = "1 + 2 − "
     // when
     var formula = ExpressionParser.parse(from: input)
     // then
