@@ -39,8 +39,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.selectedOperatorLabel.text = nil
-        self.selectedOperandLabel.text = "0"
+        setInitialState()
     }
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
