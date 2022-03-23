@@ -92,15 +92,17 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
-        if isFirstTime == true && isZeroNone == true && operandLabel.text == "0" {
+        operandLabel.text = changeToNumberFormatter(with: totalOperand)
+        if isFirstTime == true && operandLabel.text == "0" {
             return
-        } else if isFirstTime == false && isZeroNone == true && operandLabel.text == "0" {
+        } else if isFirstTime == true && operandLabel.text == "NaN" {
+            return
+        } else if isFirstTime == false && operandLabel.text == "0" {
             operatorLabel.text = sender.titleLabel?.text
             return
         } else {
             addToExpressionRecord(operatorLabel, operandLabel)
             operatorLabel.text = sender.titleLabel?.text
-            isZeroNone = true
             operandLabel.text = "0"
             totalOperand = ""
             isFirstTime = false
