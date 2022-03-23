@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var hasFirstInput = false
 
     @IBOutlet weak var inputStackView: UIStackView!
     
@@ -18,7 +19,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var prefixButton: UIButton!
     
     @IBOutlet weak var addButton: UIButton!
-    
     @IBOutlet weak var subtractButton: UIButton!
     @IBOutlet weak var devideButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
@@ -57,6 +57,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let input = try? findOperator(of: sender) else {
+            return
+        }
+        
+        if hasFirstInput == true {
+            operatorLabel.text = input
+        }
     }
     
     @IBAction func touchUpFunctionButton(_ sender: UIButton) {
@@ -94,6 +101,21 @@ class ViewController: UIViewController {
             return "8"
         case nineButton:
             return "9"
+        default:
+            throw CalculatorError.unexpectedData
+        }
+    }
+    
+    private func findOperator(of button: UIButton) throws -> String {
+        switch button {
+        case addButton:
+            return "+"
+        case subtractButton:
+            return "-"
+        case devideButton:
+            return "/"
+        case multiplyButton:
+            return "*"
         default:
             throw CalculatorError.unexpectedData
         }
