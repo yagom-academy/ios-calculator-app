@@ -71,7 +71,7 @@ class CalculatorViewController: UIViewController {
         setStatusZero()
         clearInputtingOperand()
         clearInputtingOperator()
-        formerOperator = ""
+        formerOperator = CalculatorViewController.empty
     }
     
     public func clearFormula() {
@@ -166,9 +166,8 @@ class CalculatorViewController: UIViewController {
             formulaNotYetCalculated += inputtingOperator
             clearInputtingOperator()
             OperatorLabel.text = lastInputtedOperator
-            formerOperator = lastInputtedOperator ?? ""
+            formerOperator = lastInputtedOperator ?? CalculatorViewController.empty
         }
-        
     }
     
     @IBAction func OperatorButtonAction(_ sender: OperatorButton) {
@@ -237,8 +236,9 @@ class CalculatorViewController: UIViewController {
     
     func insertHistoryInStackView(_ inputted: String) {
         let stackView = historyStackView(inputted)
-        let offsetY = HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height
         HistoryStackView.addArrangedSubview(stackView)
+        let offsetY = HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height
+        
         
         if(offsetY > 0) {
             HistoryScrollView.setContentOffset(CGPoint(x: 0, y: (HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height + 30)), animated: true)
