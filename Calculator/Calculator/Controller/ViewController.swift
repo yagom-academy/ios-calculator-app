@@ -142,4 +142,3 @@ class ViewController: UIViewController {
         self.numberListStackView.addArrangedSubview(numberStackView)
     }
 }
-

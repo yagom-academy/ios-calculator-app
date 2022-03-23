@@ -18,15 +18,19 @@ enum Operator: Character, CaseIterable, CalculateItem {
         }
     }
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let resultString = (Decimal(lhs) * Decimal(rhs)).description
+        return Double(resultString) ?? .nan
     }
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let resultString = (Decimal(lhs) - Decimal(rhs)).description
+        return Double(resultString) ?? .nan
     }
     private func divide(lhs: Double, rhs: Double) -> Double {
-        return lhs / rhs
+        let resultString = (Decimal(lhs) / Decimal(rhs)).description
+        return Double(resultString) ?? .nan
     }
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let resultString = (Decimal(lhs) * Decimal(rhs)).description
+        return Double(resultString) ?? .nan
     }
 }
