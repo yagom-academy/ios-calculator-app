@@ -68,18 +68,10 @@ class ViewController: UIViewController {
         guard let input = try? findOperator(of: sender) else {
             return
         }
-        // hasFirstInput == true
-            // -> calculatorInput에 operatorLabel.text랑 numberLabel.text 차례대로 추가
-            // 아래 스택 선택
-        // hasFirstInput == false
-            // -> operatorLabel.text = "", number
-            // 위 스택 선택
-        // inputStack에 추가(vertical stack에 operator label이랑 inputNumber label 수정해서 넣기)
-        // 스택 추가하고 나면
-//        if hasFirstInput == false {
-//            hasFirstInput = true
-//        }
-        hasFirstInput = true // stack view 하기 전에 테스트용으로
+        if numberLabel.text == "0" && hasFirstInput == false {
+            return
+        }
+        addStack()
         if input == "=" {
             let result: Double
             do {
@@ -111,6 +103,52 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         numberLabel.text = "0"
         operatorLabel.text = ""
+    }
+    
+    private func addStack() {
+        let stack = UIStackView()
+        let operatorStackLabel = UILabel()
+        let numberStackLabel = UILabel()
+        
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.distribution = .fill
+        stack.alignment = .fill
+        
+        numberStackLabel.textColor = .white
+        operatorStackLabel.textColor = .white
+        
+        operatorStackLabel.text = hasFirstInput == false ? "": operatorLabel.text
+        numberStackLabel.text = numberLabel.text
+        
+        stack.addArrangedSubview(operatorStackLabel)
+        stack.addArrangedSubview(numberStackLabel)
+        
+        stack.isHidden = true
+        
+        inputStackView.addArrangedSubview(stack)
+        
+        UIView.animate(withDuration: 0.3) {
+            stack.isHidden = false
+        }
+        
+        if hasFirstInput == false {
+            hasFirstInput = true
+        }
+        
+        var newInput: String = operatorLabel.text ?? ""
+        newInput.append(numberLabel.text ?? "")
+        calculatorInput.append(contentsOf: newInput)
+    }
+    
+    private func removeStack() {
+        inputStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        hasFirstInput = false
+        operatorLabel.text = ""
+        numberLabel.text = "0"
+        calculatorInput = ""
     }
 
     private func findNumber(of button: UIButton) throws -> String {
@@ -164,8 +202,7 @@ class ViewController: UIViewController {
     private func findFunction(of button: UIButton) throws {
         switch button {
         case acButton:
-            // inputStack 다 없애기
-            return
+            removeStack()
         case ceButton:
             numberLabel.text = "0"
         case prefixButton:
