@@ -18,7 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var ceButton: UIButton!
     @IBOutlet weak var convertingSignButton: UIButton!
     
-    @IBOutlet var lowerVerticalStackView: UIStackView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var totalVerticalStackView: UIStackView!
+    @IBOutlet var lowerHorizontalStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +30,24 @@ class ViewController: UIViewController {
     
     // MARK: Label Changing Methods
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
-        guard var currentNumber = currentOperandLabel.text else {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        guard var currentOperand = currentOperandLabel.text else {
             return
         }
         
-        guard currentNumber.count < 20 else {
+        guard currentOperand.count < 20 else {
             return
         }
         
-        if currentNumber == Number.zero.rawValue, sender.tag == 10 {
+        if currentOperand == Number.zero.rawValue, sender.tag == 10 {
             return
-        } else if currentNumber == Number.zero.rawValue, sender.tag != 11 {
-            currentNumber = ""
-        } else if currentNumber == "-\(Number.zero.rawValue)" {
-            currentNumber = "-"
-        } else if currentNumber.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
+        } else if currentOperand == Number.zero.rawValue, sender.tag != 11 {
+            currentOperand = ""
+        } else if currentOperand == "-\(Number.zero.rawValue)" {
+            currentOperand = "-"
+        } else if currentOperand.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
             return
         }
         
@@ -52,13 +57,20 @@ class ViewController: UIViewController {
             }
             
             if String(sender.tag) == number.rawValue {
-                currentNumber += number.rawValue
+                currentOperand += number.rawValue
             } else if sender.tag == 10, number == .doubleZero {
-                currentNumber += Number.doubleZero.rawValue
+                currentOperand += Number.doubleZero.rawValue
             } else if sender.tag == 11, number == .decimalPoint {
-                currentNumber += Number.decimalPoint.rawValue
+                currentOperand += Number.decimalPoint.rawValue
             }
-            currentOperandLabel.text = currentNumber
+            
+            let commaDeletedOperand = currentOperand.filter { $0 != "," }
+            guard let doubleTypeOperand = Double(commaDeletedOperand) else {
+                return
+            }
+            
+            let formattedOperand = numberFormatter.string(from: NSNumber(value: doubleTypeOperand))
+            currentOperandLabel.text = formattedOperand
         }
     }
     

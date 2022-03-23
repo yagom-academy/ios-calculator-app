@@ -363,8 +363,10 @@
                         <outlet property="convertingSignButton" destination="ows-U7-mNc" id="Lcy-YG-2bf"/>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="jg9-Tx-FWt"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="0ad-ix-Ers"/>
-                        <outlet property="lowerVerticalStackView" destination="6I9-iL-eIa" id="Gee-th-zP8"/>
+                        <outlet property="lowerHorizontalStackView" destination="6I9-iL-eIa" id="Gee-th-zP8"/>
                         <outlet property="resultButton" destination="Daw-iX-Owl" id="Gs7-KB-gsJ"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="g5h-sa-Dmb"/>
+                        <outlet property="totalVerticalStackView" destination="XRe-QE-UJf" id="ZAQ-Oh-BDf"/>
                         <outletCollection property="operandButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="c3W-31-yWS"/>
                         <outletCollection property="operandButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="XWg-K3-t7u"/>
                         <outletCollection property="operandButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="yEi-tS-swT"/>
