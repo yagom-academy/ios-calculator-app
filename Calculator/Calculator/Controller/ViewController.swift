@@ -21,4 +21,12 @@ class ViewController: UIViewController {
         presentValueLabelText.append(buttonLabel)
         presentValue.text = buttonLabel
     }
+    
+    @IBAction func changeSign(sender: UIButton) {
+         guard let lastValue = Double(presentValueLabelText.removeLast()) else { return }
+         
+         let convertedString = String(lastValue * -1)
+         presentValue.text = convertedString
+         presentValueLabelText.append(convertedString)
+     }
 }
