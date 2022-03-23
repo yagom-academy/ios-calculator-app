@@ -120,6 +120,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func getResult(sender: UIButton) {
+        if currentDisplayNumber.isEmpty && totalCalculate.isEmpty {
+            return
+        }
         addStackView()
         let fomula = ExpressionParser.parse(from: totalCalculate)
         currentOperandLabel.text = ""
