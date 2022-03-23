@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operationRecord: UIStackView!
     var touchedNumber: String = "0"
     var allOperation: [String] = []
+
+    //맨처음에 연산자가 없는 상태에서는 = 을 눌러도 계산 화면으로 넘어가지 않는다.
     
     @IBAction func clickNumberButton(_ sender: UIButton) {
         if currentNumberLabbel.text == "0" {
@@ -53,13 +55,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickPlusMimusSign(_ sender: UIButton) {
-        //입력된 숫자가 0인 경우 부호를 표시하지 않음!
-        if touchedNumber.hasPrefix("-") == true {
+        if touchedNumber == "0" {
+        } else if touchedNumber.hasPrefix("-") == true {
             touchedNumber.remove(at: touchedNumber.startIndex)
         } else {
             touchedNumber.insert("-", at: touchedNumber.startIndex)
         }
-        currentNumberLabbel.text = touchedNumber
+        currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
     }
     
     @IBAction func clickAC(_ sender: UIButton) {
