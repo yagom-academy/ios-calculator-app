@@ -8,8 +8,8 @@
 import XCTest
 
 class ExpressionParserTests: XCTestCase {
-    var mockExpression = "1 + 2 - -3 / 4 * -5"
-
+    var mockExpression = "1 + 2 - -3 ÷ 4 × -5"
+    
     func test_parse를호출할때_operands의카운트값이예상값과같아야한다() {
         // given
         // when
@@ -34,7 +34,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse를호출할때_반환된표현식의결과값이예상값과같아야한다() {
         // given
-        mockExpression = "1 + 2 - -3 / -4 * 5"
+        mockExpression = "1 + 2 - -3 ÷ -4 × 5"
         
         // when
         var formula = ExpressionParser.parse(from: mockExpression)
@@ -44,7 +44,7 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(Double(result), try formula.result())
         
         // given
-        mockExpression = "-1 - -2 - -3 / -4 * 5"
+        mockExpression = "-1 - -2 - -3 ÷ -4 × 5"
         
         // when
         formula = ExpressionParser.parse(from: mockExpression)
@@ -54,7 +54,7 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(Double(result), try formula.result())
         
         // given
-        mockExpression = "-11.4 - -2 - -3 / -4 * 5"
+        mockExpression = "-11.4 - -2 - -3 ÷ -4 × 5"
         
         // when
         formula = ExpressionParser.parse(from: mockExpression)
@@ -66,7 +66,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse를호출할때_반환된표현식이_0으로divide되는경우예상된에러를반환해야한다() {
         // given
-        mockExpression = "1 + 2 - 3 / 0 * -5"
+        mockExpression = "1 + 2 - 3 ÷ 0 × -5"
         
         // when
         var formula = ExpressionParser.parse(from: mockExpression)
@@ -108,7 +108,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse를호출할때_반환된표현식에_숫자가너무큰경우에도_예상값과같아야한다() {
         // given
-        mockExpression = "999999999 + 999999999 - 999999999 / 999999999 * 999999999"
+        mockExpression = "999999999 + 999999999 - 999999999 ÷ 999999999 × 999999999"
         
         // when
         var formula = ExpressionParser.parse(from: mockExpression)

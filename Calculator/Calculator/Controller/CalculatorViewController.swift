@@ -6,6 +6,13 @@
 
 import UIKit
 
+fileprivate extension Constant {
+    static let zero = "0"
+    static let minus = "-"
+    static let strangeMinus = "−"
+    static let limitOperandCount = 20
+}
+
 final class CalculatorViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet private weak var calculationRecordScrollView: UIScrollView!
@@ -14,8 +21,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     
     // MARK: - Property
-    private var currentOperand: String = ""
-    private var currentOperator: String = ""
+    private var currentOperand: String = Constant.zero
+    private var currentOperator: String = Constant.blank
     private var expression = [String]()
     private var isCalculated = false
     
@@ -48,13 +55,17 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
+        if isCalculated {
+            reconfigureCalculator()
+        }
+        
         guard let operand = sender.titleLabel?.text else {
             return
         }
         
         updateOperand(with: operand)
     }
-        
+    
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
         guard let dot = sender.titleLabel?.text else {
             return
@@ -68,6 +79,7 @@ extension CalculatorViewController {
             return
         }
         
+        isCalculated = true
         updateLastCalculation()
     }
 }
@@ -75,7 +87,13 @@ extension CalculatorViewController {
 // MARK: - Method
 extension CalculatorViewController {
     private func updateOperand(with operand: String) {
-        guard currentOperand.count < 20 else {
+        guard currentOperand.count < Constant.limitOperandCount else {
+            return
+        }
+        
+        if currentOperand == Constant.zero {
+            currentOperand = operand
+            operandLabel.text = currentOperand.addCommaEveryThirdTime()
             return
         }
         
@@ -93,32 +111,32 @@ extension CalculatorViewController {
     }
     
     private func updatePlusMinusSign() {
-        guard operandLabel.text != "0",
+        guard operandLabel.text != Constant.zero,
               var operand = operandLabel.text else {
             return
         }
         
-        if operand.contains("-") {
+        if operand.contains(Constant.minus) {
             operand.removeFirst()
             currentOperand.removeFirst()
             operandLabel.text = operand
             return
         }
         
-        if operand.contains("-") == false {
-            operand.insert("-", at: operand.startIndex)
-            currentOperand.insert("-", at: operand.startIndex)
+        if operand.contains(Constant.minus) == false {
+            operand.insert(Character(Constant.minus), at: operand.startIndex)
+            currentOperand.insert(Character(Constant.minus), at: operand.startIndex)
             operandLabel.text = operand
             return
         }
     }
     
     private func updateOperator(by operator: String) {
-        guard operandLabel.text != "0" else {
+        guard operandLabel.text != Constant.zero else {
             operatorLabel.text = `operator`
             return
         }
-                
+        
         expression.append(currentOperand)
         expression.append(`operator`)
         
@@ -131,12 +149,12 @@ extension CalculatorViewController {
     }
     
     private func updateCalculationRecord(with operand: String, _ operator: String) {
-        if calculationRecordStackView.subviews.count == 0 {
+        if calculationRecordStackView.subviews.count == .zero {
             let ExpressionStackView = ExpressionStackView(operand: operand)
             calculationRecordStackView.addArrangedSubview(ExpressionStackView)
             return
         }
-
+        
         let ExpressionStackView = ExpressionStackView(operator: `operator`, operand: operand)
         calculationRecordStackView.addArrangedSubview(ExpressionStackView)
     }
@@ -149,18 +167,19 @@ extension CalculatorViewController {
     }
     
     private func calculate() {
-        var formula = ExpressionParser.parse(from: expression.joined(separator: " "))
+        var formula = ExpressionParser.parse(from: expression
+            .joined(separator: Constant.whiteSpace)
+            .replacingOccurrences(of: Constant.strangeMinus, with: Constant.minus))
         
         do {
             let result = try formula.result()
             updateCalculateResult(by: result)
-        } catch {
-            
+        } catch (let error) {
+            handleError(error: error)
         }
     }
     
     private func updateCalculateResult(by result: Double) {
-        isCalculated = true
         operandLabel.text = result.description.addCommaEveryThirdTime()
         reconfigureOperator()
     }
@@ -176,12 +195,37 @@ extension CalculatorViewController {
     }
     
     private func reconfigureOperand() {
-        currentOperand = ""
-        operandLabel.text = "0"
+        currentOperand = Constant.zero
+        operandLabel.text = Constant.zero
     }
     
     private func reconfigureOperator() {
-        currentOperator = ""
-        operatorLabel.text = ""
+        currentOperator = Constant.blank
+        operatorLabel.text = Constant.blank
+    }
+    
+    private func handleError(error: Error) {
+        if let calculatorError = error as? CalculatorError {
+            handleCalculatorError(error: calculatorError)
+        }
+        
+        if let queueError = error as? QueueError {
+            handleQueueError(error: queueError)
+        }
+    }
+    
+    private func handleCalculatorError(error: CalculatorError) {
+        if case .dividedByZero = error,
+           let errorDescription = error.errorDescription {
+            operandLabel.text = errorDescription
+            operatorLabel.text = Constant.blank
+        }
+    }
+    
+    private func handleQueueError(error: QueueError) {
+        if case .notFoundElement = error,
+            let errorDescription = error.errorDescription {
+            assertionFailure(errorDescription)
+        }
     }
 }

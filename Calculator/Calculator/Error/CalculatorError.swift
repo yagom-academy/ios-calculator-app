@@ -15,7 +15,7 @@ extension CalculatorError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .dividedByZero:
-            return "0으로 나누는 경우 결과값은 NaN으로 표기됩니다."
+            return "NaN"
         }
     }
 }

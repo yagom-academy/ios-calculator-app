@@ -8,8 +8,8 @@
 import UIKit
 
 final class ExpressionStackView: UIStackView {
-    private var operand: String = ""
-    private var `operator`: String = ""
+    private var operand: String = Constant.blank
+    private var `operator`: String = Constant.blank
     
     private lazy var operatorLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -36,7 +36,7 @@ final class ExpressionStackView: UIStackView {
     
     convenience init(`operator`: String, operand: String) {
         self.init()
-        self.operator = `operator`
+        self.`operator` = `operator`
         self.operand = operand
         
         self.addArrangedSubview(operatorLabel)
