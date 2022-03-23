@@ -106,9 +106,19 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
-        addInCalculationLog(selectedOperatorLabel, selectedOperandLabel)
-        selectedOperatorLabel.text = sender.titleLabel?.text
-        selectedOperandLabel.text = ""
+        if isFirstTime == true && isZeroNone == true && operandLabel.text == "0" {
+            return
+        } else if isFirstTime == false && isZeroNone == true && operandLabel.text == "0" {
+            operatorLabel.text = sender.titleLabel?.text
+            return
+        } else {
+            addToExpressionRecord(operatorLabel, operandLabel)
+            operatorLabel.text = sender.titleLabel?.text
+            isZeroNone = true
+            operandLabel.text = "0"
+            totalOperand = ""
+            isFirstTime = false
+        }
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
