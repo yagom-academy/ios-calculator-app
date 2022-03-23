@@ -27,33 +27,25 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        let lhsDecimal = Decimal(lhs)
-        let rhsDecimal = Decimal(rhs)
-        let result = lhsDecimal + rhsDecimal
-        return Double(truncating: result as NSNumber)
+        let result = Decimal(lhs + rhs).description
+        return Double(result) ?? .nan
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        let lhsDecimal = Decimal(lhs)
-        let rhsDecimal = Decimal(rhs)
-        let result = lhsDecimal - rhsDecimal
-        return Double(truncating: result as NSNumber)
+        let result = Decimal(lhs - rhs).description
+        return Double(result) ?? .nan
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
         if rhs == 0 {
             return .nan
         }
-        let lhsDecimal = Decimal(lhs)
-        let rhsDecimal = Decimal(rhs)
-        let result = lhsDecimal / rhsDecimal
-        return Double(truncating: result as NSNumber)
+        let result = Decimal(lhs / rhs).description
+        return Double(result) ?? .nan
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        let lhsDecimal = Decimal(lhs)
-        let rhsDecimal = Decimal(rhs)
-        let result = lhsDecimal * rhsDecimal
-        return Double(truncating: result as NSNumber)
+        let result = Decimal(lhs * rhs).description
+        return Double(result) ?? .nan
     }
 }
