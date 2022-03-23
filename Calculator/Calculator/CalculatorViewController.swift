@@ -88,6 +88,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clickOperand(sender: OperandButton) {
+        if currentDisplayNumber.isEmpty {
+            return
+        }
         let operand = sender.value ?? ""
         dotStatus = false
         addStackView()
