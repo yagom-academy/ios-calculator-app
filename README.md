@@ -179,7 +179,57 @@ operator를 변수이름으로 쓰고 싶었는데 예약어라서 쓰지 못한
 
 ## STEP 3
 
+STEP 3는 앞서 구현했던 계산기능을 UI와 연동시켜서 온전히 작동하는 계산기를 만드는 것이었습니다  
+사실, scrollView가 이미 오토레이아웃이 다 잡혀있어서, 해당 부분에서 크게 어려운 점은 없었던것 같습니다! (직접 잡으라고 했으면 많이 어려웠을것 같습니다)
+
 ### 고민한 점
+
+#### ScrollView를 코드로 scroll시키는 방법
+
+당연히 delegate를 통해서 이미 만들어져 있을줄 알았는데, 없어서 조금 당황했습니다..  
+scrollView의 contentSize.height - bounds.size.height 을 통해서, 이동해야할 수직 거리를 구한다음 setContentOffset으로 bounds의 origin의 y좌표를 변경해서 하단으로 scroll이 되게 구현하였습니다
+
+#### 계산기의 각종 예외상황을 어떻게 처리할지
+
+대부분은 명세서에 나와있는대로 구현했지만, 나와있지 않은 부분도 있어서 해당 부분 처리를 고민했습니다
+
+#### if 조건들을 한번에 써도 괜찮은지
+
+여러 조건들을 한번에 쓸지, 따로따로 써줘야할지 고민했습니다  
+스타일 차이인지, 더 선호되는 방법이 있는지 궁금합니다.
+
+```swift
+//방법1
+
+if condition1 {
+    return
+}
+
+if condition2 {
+    return
+}
+
+//방법2
+
+if condition1 || condition2 {
+    return
+}
+
+```
+
+#### 수식 문자열을 어떻게 만들지
+
+처음에는 StackView에 연산자, 피연산자 형태로 기록이 남아있으니, 해당 stackView를 순회하면서 문자열을 만들어줄 생각이었습니다.  
+그러나, 이미 계산된 결과 역시 다시 피연산자로 쓰일수가 있기에, 해당 방법은 사용하지 않고, StackView와 완전 별개로 계산결과를 따로 저장하도록 리팩터링 하였습니다.
+
+
 ### 배운 개념
+
+- frame과 bounds의 제대로된 이해 (특히 bounds)
+- contentInset와 contentOffset
+- ScrollView를 코드로 scroll하는 방법
+
+
 ### 피드백 후 개선한 점
+
 
