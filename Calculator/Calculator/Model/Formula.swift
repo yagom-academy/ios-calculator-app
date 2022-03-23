@@ -9,11 +9,14 @@ struct Formula {
     let operators: CalculateItemQueue<Operator>
     
     func result() throws -> Double {
-        let operandsCount = operands.count
+        let operandsRangeCount = 2...operands.count
+        guard operands.count > 2 || operators.isEmpty else {
+            throw CalculateError.cannotCalculation
+        }
         guard var result = operands.dequeue else {
             throw CalculateError.operandIsNil
         }
-        for _ in 2...operandsCount {
+        for _ in operandsRangeCount {
             guard let operandValue = operands.dequeue else {
                 throw CalculateError.operandIsNil
             }
