@@ -36,7 +36,20 @@ final class CalculatorViewController: UIViewController {
     }
   }
   
-  @IBAction private func didTapNumberButton(_ sender: UIButton) {}
+  @IBAction private func didTapNumberButton(_ sender: UIButton) {
+    guard let number = sender.titleLabel?.text,
+          let oldNumber = self.operandLabel.text
+    else {
+      return
+    }
+    if oldNumber == "0" {
+      self.operandLabel.text = number
+    } else {
+      let newNumber = oldNumber + number
+      self.operandLabel.text = newNumber
+    }
+  }
+  
   @IBAction private func didTapOperatorButton(_ sender: UIButton) {}
   @IBAction private func didTapCalculateButton(_ sender: UIButton) {}
 }
