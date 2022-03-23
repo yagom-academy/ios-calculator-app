@@ -33,8 +33,8 @@ class MainViewController: UIViewController {
         self.operatorLabel.text = nil
         self.operandLabel.text = "0"
         self.isPlus = true
-        self.isZeroNone = true
         self.isFirstTime = true
+        self.isDotUsed = false
     }
     
     @IBAction func ACButtonClicked(_ sender: UIButton) {
