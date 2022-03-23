@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     var touchedNumber: String = "0"
     var allOperation: [String] = []
 
-    //맨처음에 연산자가 없는 상태에서는 = 을 눌러도 계산 화면으로 넘어가지 않는다.
     
     @IBAction func clickNumberButton(_ sender: UIButton) {
         if currentNumberLabbel.text == "0" {
@@ -26,7 +25,7 @@ class ViewController: UIViewController {
     
     @IBAction func clickOperatorButton(_ sender: UIButton) {
         if touchedNumber != "0" {
-            addNumberAndOperator(currentOperatorLabel.text ?? "", currentNumberLabbel.text ?? "")
+            addNumberAndOperator(currentOperatorLabel.text ?? "", touchedNumber)
         }
         
         currentOperatorLabel.text = sender.currentTitle
@@ -72,14 +71,14 @@ class ViewController: UIViewController {
 
     @IBAction func clickCalculateButton(_ sender: UIButton) {
         if allOperation.isEmpty != true {
-            addNumberAndOperator(currentOperatorLabel.text ?? "", currentNumberLabbel.text ?? "")
+            addNumberAndOperator(currentOperatorLabel.text ?? "", touchedNumber)
             let mergedAllOperation = allOperation.joined(separator: " ")
             var formula = ExpressionParser.parse(form: mergedAllOperation)
             let result = formula.result()
             
             currentOperatorLabel.text = ""
             currentNumberLabbel.text = changeDecimalFormat("\(result)")
-            touchedNumber = changeDecimalFormat("\(result)")
+            touchedNumber = changeDecimalFormat("\(result)").replacingOccurrences(of: ",", with: "")
             allOperation = []
         }
     }
