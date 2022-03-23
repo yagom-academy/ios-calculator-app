@@ -157,8 +157,10 @@ class MainViewController: UIViewController {
         return subStackView
     }
     
-    func addInCalculationLog(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
-        calculationLogStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
+    func addToExpressionRecord(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
+        expressionRecordStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
+    }
+    
     }
 }
 
