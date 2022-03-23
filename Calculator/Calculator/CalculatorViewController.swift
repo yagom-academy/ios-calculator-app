@@ -28,8 +28,12 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var currentNumberLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
+
+    @IBOutlet weak var processStackView: UIStackView!
     
     var currentDisplayNumber: String = ""
+    var totalCalculate = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,21 +57,51 @@ class CalculatorViewController: UIViewController {
 
         addButton.value = "+"
         subtractButton.value = "-"
-        multiplyButton.value = "*"
-        divideButton.value = "/"
+        multiplyButton.value = "×"
+        divideButton.value = "÷"
     }
     
     @IBAction func numberClick(sender: NumberButton) {
         //.처리에 대해선 추후 고민
         currentDisplayNumber = currentDisplayNumber + (sender.value ?? "")
-        setDisplayLabel()
+        setDisplayNumberLabel()
     }
     
-    func setDisplayLabel() {
+    func setDisplayNumberLabel() {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
-        currentNumberLabel.text = numberFormatter.string(for: currentDisplayNumber) ?? "0"
+        //너무 자리수가 길어지면 0으로 표현되는 버그 있음
+        let displayNSNumber = NSNumber(value: Double(currentDisplayNumber) ?? 0)
+        currentNumberLabel.text = numberFormatter.string(from: displayNSNumber)
+    }
+    
+    
+    @IBAction func operandClick(sender: OperandButton) {
+        let operand = sender.value ?? ""
+        addStackView()
+        setDisplayOperandLabel(operand: operand)
+    }
+    
+    func setDisplayOperandLabel(operand: String) {
+        currentOperandLabel.text = operand
+    }
+    
+    func addStackView() {
+        let verticalStackView = UIStackView()
+        verticalStackView.axis = .horizontal
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        let numberLabel = UILabel()
+        numberLabel.textColor = .white
+        numberLabel.text = currentDisplayNumber
+        currentDisplayNumber = ""
+        setDisplayNumberLabel()
+        let operandLabel = UILabel()
+        operandLabel.textColor = .white
+        operandLabel.text = currentOperandLabel.text ?? ""
+        verticalStackView.addArrangedSubview(operandLabel)
+        verticalStackView.addArrangedSubview(numberLabel)
+        processStackView.addArrangedSubview(verticalStackView)
     }
 }
 
