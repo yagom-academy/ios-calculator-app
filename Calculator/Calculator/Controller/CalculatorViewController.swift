@@ -44,12 +44,7 @@ extension CalculatorViewController {
             return
         }
         
-        guard currentOperand.count < 20 else {
-            return
-        }
-        
-        currentOperand += operand
-        operandLabel.text = currentOperand.addCommaEveryThirdTime()
+        updateOperandLabel(with: operand)
     }
         
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
@@ -57,12 +52,7 @@ extension CalculatorViewController {
             return
         }
         
-        guard currentOperand.contains(dot) == false else {
-            return
-        }
-        
-        currentOperand += dot
-        operandLabel.text?.append(dot)
+        updateOperandLabel(by: dot)
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
@@ -72,6 +62,24 @@ extension CalculatorViewController {
 
 // MARK: - Method
 extension CalculatorViewController {
+    private func updateOperandLabel(with operand: String) {
+        guard currentOperand.count < 20 else {
+            return
+        }
+        
+        currentOperand += operand
+        operandLabel.text = currentOperand.addCommaEveryThirdTime()
+    }
+    
+    private func updateOperandLabel(by dot: String) {
+        guard currentOperand.contains(dot) == false else {
+            return
+        }
+        
+        currentOperand += dot
+        operandLabel.text?.append(dot)
+    }
+    
     private func resetOperand() {
         currentOperand = "0"
         operandLabel.text = "0"
