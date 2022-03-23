@@ -22,11 +22,11 @@ class ExpressionParserTest: XCTestCase {
         var operators = [String]()
         
         for _ in 1...formula.operands.count {
-            guard let operand = formula.operands.dequeue else {return}
+            guard let operand = formula.operands.dequeue() else {return}
             operands.append(String(operand))
         }
         for _ in 1...formula.operators.count {
-            guard let operatorValue = formula.operators.dequeue else {return}
+            guard let operatorValue = formula.operators.dequeue() else {return}
             operators.append(String(operatorValue.rawValue))
         }
         let operandsResult = ["5.0","10.0","2.0","2.0","-2.0","2.0"]

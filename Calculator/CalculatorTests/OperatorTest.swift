@@ -28,7 +28,7 @@ class OperatorTest: XCTestCase {
         let operatorValue = Operator(rawValue: "➕")!
         
         sut.operators.enqueue(operatorValue)
-        let result = try sut.operators.dequeue?.calculate(lhs: numbers[0], rhs: numbers[1])
+        let result = try sut.operators.dequeue()?.calculate(lhs: numbers[0], rhs: numbers[1])
         
         XCTAssertEqual(result, 40.75)
     }
@@ -38,7 +38,7 @@ class OperatorTest: XCTestCase {
         let operatorValue = Operator(rawValue: "➖")!
         
         sut.operators.enqueue(operatorValue)
-        let result = try sut.operators.dequeue?.calculate(lhs: numbers[0], rhs: numbers[1])
+        let result = try sut.operators.dequeue()?.calculate(lhs: numbers[0], rhs: numbers[1])
         
         XCTAssertEqual(result, -476.6)
     }
@@ -48,7 +48,7 @@ class OperatorTest: XCTestCase {
         let operatorValue = Operator(rawValue: "➗")!
         
         sut.operators.enqueue(operatorValue)
-        let result = try sut.operators.dequeue?.calculate(lhs: numbers[0], rhs: numbers[1])
+        let result = try sut.operators.dequeue()?.calculate(lhs: numbers[0], rhs: numbers[1])
         
         XCTAssertEqual(result, 8.000048600311041)
     }
@@ -59,7 +59,7 @@ class OperatorTest: XCTestCase {
         
         sut.operators.enqueue(operatorValue)
         do {
-            let result = try sut.operators.dequeue?.calculate(lhs: numbers[0], rhs: numbers[1])
+            let result = try sut.operators.dequeue()?.calculate(lhs: numbers[0], rhs: numbers[1])
             XCTAssertEqual(result, .nan)
         } catch {
             print(error)
@@ -71,7 +71,7 @@ class OperatorTest: XCTestCase {
         let operatorValue = Operator(rawValue: "✖️")!
         
         sut.operators.enqueue(operatorValue)
-        let result = try sut.operators.dequeue?.calculate(lhs: numbers[0], rhs: numbers[1])
+        let result = try sut.operators.dequeue()?.calculate(lhs: numbers[0], rhs: numbers[1])
         
         XCTAssertEqual(result, 56444.046362999994)
     }

@@ -19,7 +19,7 @@ struct CalculateItemQueue<T: CalculateItem> {
         store.append(data: node)
     }
     
-    var dequeue: T? {
+    func dequeue() -> T? {
         return store.removeFirst()
     }
     

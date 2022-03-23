@@ -56,7 +56,7 @@ class CalculateItemQueueTest: XCTestCase {
         let input = "quokka"
         stringQueue.enqueue(input)
         
-        let result = stringQueue.dequeue
+        let result = stringQueue.dequeue()
         
         XCTAssertEqual(input, result)
     }
