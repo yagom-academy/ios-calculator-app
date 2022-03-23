@@ -26,7 +26,7 @@ final class CalculatorViewController: UIViewController {
 // MARK: - IBAction
 extension CalculatorViewController {
     @IBAction private func touchUpACButton(_ sender: UIButton) {
-        
+        reconfigureCalculator()
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
@@ -134,8 +134,21 @@ extension CalculatorViewController {
         calculationRecordStackView.addArrangedSubview(ExpressionStackView)
     }
     
+    private func reconfigureCalculator() {
+        expression = [String]()
+        resetOperand()
+        resetOperator()
+        calculationRecordStackView
+            .arrangedSubviews
+            .forEach { $0.removeFromSuperview() }
+    }
+    
     private func resetOperand() {
         currentOperand = ""
         operandLabel.text = "0"
+    }
+    
+    private func resetOperator() {
+        operatorLabel.text = ""
     }
 }
