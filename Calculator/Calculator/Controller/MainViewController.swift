@@ -56,6 +56,10 @@ class MainViewController: UIViewController {
         self.isFirstTime = true
     }
     
+    @IBAction func ACButtonClicked(_ sender: UIButton) {
+        setInitialState()
+    }
+    
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
