@@ -70,6 +70,7 @@ final class CalculatorViewController: UIViewController {
 //MARK: - Method
 
 private extension CalculatorViewController {
+    
     func writeCalculateLog() {
         guard isInputExist else { return }
         
@@ -130,21 +131,18 @@ private extension CalculatorViewController {
     
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
         guard currentStringNumber.count < Digit.limitDigit,
-              let inputNumber = sender.titleLabel?.text else {
-            
+            let inputNumber = sender.titleLabel?.text else {
             return
         }
         
         if isCalculateValue ||
             numberLabel.text == NumberString.nan {
-            
             isCalculateValue = false
             resetCalculator()
         }
         
         if ["00","0"].contains(inputNumber),
            numberLabel.text == NumberString.zero {
-            
             isInputExist = true
             return
         }
@@ -155,9 +153,7 @@ private extension CalculatorViewController {
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
-        guard numberLabel.text != NumberString.nan else {
-            return
-        }
+        guard numberLabel.text != NumberString.nan else { return }
         
         writeCalculateLog()
         updateOperatorLabel(to: sender.titleLabel?.text)
@@ -165,10 +161,9 @@ private extension CalculatorViewController {
     
     @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
         guard numberLabel.text != NumberString.nan,
-              !currentStringNumber.contains("."),
-              isCalculateValue == false,
-              currentStringNumber.count < Digit.limitDigit else {
-            
+            !currentStringNumber.contains("."),
+            isCalculateValue == false,
+            currentStringNumber.count < Digit.limitDigit else {
             return
         }
         
@@ -185,9 +180,7 @@ private extension CalculatorViewController {
     }
     
     @IBAction private func clearEntryButtonDidTapped(_ sender: UIButton) {
-        guard numberLabel.text != NumberString.nan else {
-            return
-        }
+        guard numberLabel.text != NumberString.nan else { return }
         
         updateCurrentStringNumber(to: NumberString.empty)
         updateNumberLabel(to: NumberString.zero)
@@ -196,8 +189,7 @@ private extension CalculatorViewController {
     
     @IBAction private func signButtonDidTapped(_ sender: UIButton) {
         guard let number = Double(currentStringNumber),
-              numberLabel.text != NumberString.zero else {
-            
+            numberLabel.text != NumberString.zero else {
             return
         }
         
@@ -211,25 +203,18 @@ private extension CalculatorViewController {
     }
     
     @IBAction private func calculateButtonDidTapped(_ sender: UIButton) {
-        guard expression.isEmpty == false else {
-            return
-        }
+        guard expression.isEmpty == false else { return }
         
         writeCalculateLog()
         
-        let expressionString = expression
-            .compactMap{$0}
-            .joined(separator: " ")
+        let expressionString = expression.compactMap { $0 }.joined(separator: " ")
         expression.removeAll()
         updateCurrentStringNumber(to: NumberString.empty)
         
         do {
-            let calculateResult = try ExpressionParser
-                .parse(from: expressionString)
-                .result()
+            let calculateResult = try ExpressionParser.parse(from: expressionString).result()
             
             updateNumberLabel(to: adjust(number: calculateResult))
-            
             isCalculateValue = true
             isInputExist = true
         } catch {
