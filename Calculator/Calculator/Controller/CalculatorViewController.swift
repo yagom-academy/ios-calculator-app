@@ -1,5 +1,5 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculatorViewController.swift
 //  Created by DuDu
 //
 
@@ -16,7 +16,7 @@ private enum NumberString {
     static let nan = "NaN"
 }
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     private var currentStringNumber: String = NumberString.empty
     private var expression: [String?] = []
     private var isInputExist: Bool = false
@@ -151,7 +151,7 @@ final class ViewController: UIViewController {
 
 }
 
-private extension ViewController {
+private extension CalculatorViewController {
     
     func setUpAttribute() {
         numberLabel.text = NumberString.zero
