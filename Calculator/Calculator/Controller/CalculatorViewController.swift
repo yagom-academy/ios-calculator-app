@@ -28,7 +28,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-
+        resetOperand()
     }
     
     @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
@@ -65,5 +65,10 @@ extension CalculatorViewController {
         
         currentOperand += operand
         operandLabel.text = currentOperand.addCommaEveryThirdTime()
+    }
+    
+    private func resetOperand() {
+        currentOperand = "0"
+        operandLabel.text = "0"
     }
 }
