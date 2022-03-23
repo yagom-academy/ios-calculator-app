@@ -30,9 +30,6 @@ class ViewController: UIViewController {
     
     // MARK: Label Changing Methods
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
         guard var currentOperand = currentOperandLabel.text else {
             return
         }
@@ -63,15 +60,8 @@ class ViewController: UIViewController {
             } else if sender.tag == 11, number == .decimalPoint {
                 currentOperand += Number.decimalPoint.rawValue
             }
-            
-            let commaDeletedOperand = currentOperand.filter { $0 != "," }
-            guard let doubleTypeOperand = Double(commaDeletedOperand) else {
-                return
-            }
-            
-            let formattedOperand = numberFormatter.string(from: NSNumber(value: doubleTypeOperand))
-            currentOperandLabel.text = formattedOperand
         }
+        currentOperandLabel.text = currentOperand
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
