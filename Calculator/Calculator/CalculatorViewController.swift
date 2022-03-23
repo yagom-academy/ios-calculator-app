@@ -119,9 +119,33 @@ class CalculatorViewController: UIViewController {
         totalCalculate = ""
     }
     
-    @IBAction func clickACButton(sender: UIButton) {
-        
+    @IBAction func clickCEButton(sender: UIButton) {
+        dotStatus = false
+        currentDisplayNumber = ""
+        setDisplayNumberLabel()
     }
     
+    @IBAction func clickACButton(sender: UIButton) {
+        dotStatus = false
+        currentDisplayNumber = ""
+        totalCalculate = ""
+        setDisplayNumberLabel()
+        processStackView.arrangedSubviews.forEach({ child in
+            processStackView.removeArrangedSubview(child)
+            child.removeFromSuperview()
+        })
+    }
+    
+    @IBAction func clickMinusPlusButton(sender: UIButton) {
+        if negativeStatus == false {
+            currentDisplayNumber = "-\(currentDisplayNumber)"
+            setDisplayNumberLabel()
+            negativeStatus = true
+        } else {
+            currentDisplayNumber.remove(at: currentDisplayNumber.startIndex)
+            setDisplayNumberLabel()
+            negativeStatus = false
+        }
+    }
 }
 
