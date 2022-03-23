@@ -38,10 +38,8 @@ final class CalculatorViewController: UIViewController {
   }
   
   @IBAction private func didTapCalculateButton(_ sender: UIButton) {
-    let operand = self.operandLabel.text
-    let operatorType = self.operatorLabel.text
+    let stackView = self.viewModel.makeSubResultStackView()
     if self.viewModel.didTapCalculateButton() {
-      let stackView = UIStackView.create(type: operatorType, operand: operand)
       self.resultStackView.addArrangedSubview(stackView)
     }
   }
@@ -50,10 +48,8 @@ final class CalculatorViewController: UIViewController {
     guard let operatorString = sender.titleLabel?.text else {
       return
     }
-    let operand = self.operandLabel.text
-    let operatorType = self.operatorLabel.text
+    let stackView = self.viewModel.makeSubResultStackView()
     if self.viewModel.didTapOperatorButton(of: operatorString) {
-      let stackView = UIStackView.create(type: operatorType, operand: operand)
       self.resultStackView.addArrangedSubview(stackView)
     }
   }
