@@ -1,5 +1,5 @@
 //
-//  DoublyLinkedList.swift
+//  CalculatorLinkedList.swift
 //  Calculator
 //
 //  Created by SeoDongyeon on 2022/03/15.
@@ -17,7 +17,9 @@ final class CalculatorLinkedList<T> {
     }
     
     var count: Int {
-        guard var node = head else { return 0 }
+        guard var node = head else {
+            return 0
+        }
         var count = 1
         while let nextNode = node.next {
             node = nextNode
@@ -28,16 +30,15 @@ final class CalculatorLinkedList<T> {
     
     func append(_ value: T) {
         let newNode = Node(value: value)
-        
-        if let previousTail = tail {
-            newNode.previous = previousTail
-            previousTail.next = newNode
-            tail = newNode
-        }
-        if head == nil {
+
+        if isEmpty {
             head = newNode
             tail = newNode
+            return
         }
+        newNode.previous = tail
+        tail?.next = newNode
+        tail = newNode
     }
     
     func removeFirst() -> T? {
