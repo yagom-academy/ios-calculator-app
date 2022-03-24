@@ -79,7 +79,7 @@ private extension CalculatorViewController {
         
         expression.append(contentsOf: [operatorLabel.text, doubleNumber])
         calculateLogStackView.addArrangedSubview(stackView)
-        logScrollView.scroll()
+        logScrollView.scrollToBottom()
         resetElements()
     }
     
