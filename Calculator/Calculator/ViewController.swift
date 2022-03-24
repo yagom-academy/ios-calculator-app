@@ -25,5 +25,10 @@ class ViewController: UIViewController {
               let inputValue = inputFormulaLabel.text else { return }
         inputFormulaLabel.text = inputValue+operand
     }
+    
+    @IBAction func appendOperatorToInputFormulaLabel(_ sender: UIButton) {
+        guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
+              let inputValue = inputFormulaLabel.text else { return }
+        inputFormulaLabel.text = inputValue+operatorValue
+    }
 }
-

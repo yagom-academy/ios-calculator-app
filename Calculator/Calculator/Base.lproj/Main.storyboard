@@ -93,6 +93,9 @@
                                                 <state key="normal" title="CE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpEntryClear" destination="BYZ-38-t0r" eventType="touchUpInside" id="fdb-Uv-ujJ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -102,13 +105,16 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="÷">
+                                                <state key="normal" title="➗">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wp4-lT-vh4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -148,13 +154,16 @@
                                                     <action selector="appendOperandToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eta-yi-glc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="×">
+                                                <state key="normal" title="✖️">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jv8-td-gj2"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -194,13 +203,16 @@
                                                     <action selector="appendOperandToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CGX-ph-6LN"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="−">
+                                                <state key="normal" title="➖">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IwQ-ie-kKQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -244,9 +256,12 @@
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="+">
+                                                <state key="normal" title="➕">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ty9-Er-ImC"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -358,10 +373,10 @@
                         <outletCollection property="operandBtns" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="TaJ-az-f71"/>
                         <outletCollection property="operandBtns" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="8yX-w8-csa"/>
                         <outletCollection property="operandBtns" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="rwz-4q-Oyt"/>
-                        <outletCollection property="operatorBtns" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="fpJ-9n-lgC"/>
-                        <outletCollection property="operatorBtns" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="Pd0-vJ-hA2"/>
-                        <outletCollection property="operatorBtns" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="wjL-9M-0Ds"/>
-                        <outletCollection property="operatorBtns" destination="811-Pz-An6" collectionClass="NSMutableArray" id="TbP-DR-dgL"/>
+                        <outletCollection property="operatorBtns" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="s37-Rn-T0S"/>
+                        <outletCollection property="operatorBtns" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="cmi-yE-Dji"/>
+                        <outletCollection property="operatorBtns" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="oqb-Wl-1d2"/>
+                        <outletCollection property="operatorBtns" destination="811-Pz-An6" collectionClass="NSMutableArray" id="QMA-4W-xzo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
