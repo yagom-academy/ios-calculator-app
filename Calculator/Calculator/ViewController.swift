@@ -107,11 +107,6 @@ extension ViewController {
     func changeDecimalFormat(_ text: String) -> String {
         let numberFomatter = NumberFormatter()
         numberFomatter.numberStyle = .decimal
-        numberFomatter.usesSignificantDigits = false
-        numberFomatter.maximumSignificantDigits = 20
-        numberFomatter.maximumFractionDigits = 20
-        numberFomatter.maximumIntegerDigits = 20
-        numberFomatter.roundingMode = .halfUp
         let number = numberFomatter.number(from: text) ?? 0
         
         let changedNumber = numberFomatter.string(from: number) ?? ""
