@@ -218,11 +218,11 @@ extension CalculatorViewController {
 extension CalculatorViewController {
     private func configureAllButton() {
         allButtonComponentExceptEqual.forEach {
-            $0.addTarget(self, action: #selector(action(sender:)), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(reconfigureAction(sender:)), for: .touchUpInside)
         }
     }
 
-    @objc private func action(sender: UIButton) {
+    @objc private func reconfigureAction(sender: UIButton) {
         if isCalculated {
             reconfigureCalculator()
         }
