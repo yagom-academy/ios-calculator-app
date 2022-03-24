@@ -32,15 +32,15 @@ class ViewController: UIViewController {
         inputOperatorLabel.text = operatorValue
     }
     
-    @IBAction func touchUpEntryClear() {
+    @IBAction func touchUpEntryClearToInputFormulaLabel() {
         inputFormulaLabel.text?.removeLast()
     }
     
-    @IBAction func touchUpAllClear() {
+    @IBAction func touchUpAllClearToInputFormulaLabel() {
         inputFormulaLabel.text?.removeAll()
     }
     
-    @IBAction func switchPlusAndMinus() {
+    @IBAction func switchPlusAndMinusToInputOperatorLabel() {
         if inputOperatorLabel.text == "➕" {
             inputOperatorLabel.text = "➖"
         } else {
