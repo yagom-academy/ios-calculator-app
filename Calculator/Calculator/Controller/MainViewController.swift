@@ -10,15 +10,14 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var expressionRecordScrollView: UIScrollView!
     @IBOutlet weak var expressionRecordStackView: UIStackView!
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
+    
     private var expressionRecord: [String?] = []
-    private var totalOperand: String = ""
-    private var operationCount: Int = 0
+    private var sumOfOperands: String = ""
     private var isPlus: Bool = true
     private var isFirstTime: Bool = true
     private var isDotUsed: Bool = false
-    
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +27,7 @@ class MainViewController: UIViewController {
     func setInitialState() {
         self.expressionRecordStackView.subviews.forEach{ $0.removeFromSuperview() }
         self.expressionRecord = []
-        self.totalOperand = ""
-        self.operationCount = 0
+        self.sumOfOperands = ""
         self.operatorLabel.text = nil
         self.operandLabel.text = "0"
         self.isPlus = true
@@ -43,7 +41,7 @@ class MainViewController: UIViewController {
     
     @IBAction func CEButtonClicked(_ sender: UIButton) {
         self.operandLabel.text = "0"
-        self.totalOperand = ""
+        self.sumOfOperands = ""
     }
     
     @IBAction func signButtonClicked(_ sender: UIButton) {
@@ -61,38 +59,38 @@ class MainViewController: UIViewController {
     
     @IBAction func dotButtonClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard totalOperand.count < 20 else { return }
+        guard sumOfOperands.count < 20 else { return }
         
-        if totalOperand.contains(".") == true {
+        if sumOfOperands.contains(".") == true {
             return
         }
-        totalOperand += selectedOperand
-        operandLabel.text = changeToNumberFormatter(with: totalOperand) + "."
+        sumOfOperands += selectedOperand
+        operandLabel.text = changeToNumberFormatter(with: sumOfOperands) + "."
         self.isDotUsed = true
     }
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard totalOperand.count < 20 else { return }
+        guard sumOfOperands.count < 20 else { return }
         
         if isFirstTime == false && operatorLabel.text == nil {
             return
-        } else if selectedOperand == "0" && totalOperand.last == "." {
-            totalOperand += selectedOperand
-            operandLabel.text = totalOperand
-        } else if selectedOperand == "0" && totalOperand.last == "0" && isDotUsed == true {
-            totalOperand += selectedOperand
-            operandLabel.text = totalOperand
-        } else if selectedOperand == "0" && totalOperand.first == "0" && isDotUsed == false {
+        } else if selectedOperand == "0" && sumOfOperands.last == "." {
+            sumOfOperands += selectedOperand
+            operandLabel.text = sumOfOperands
+        } else if selectedOperand == "0" && sumOfOperands.last == "0" && isDotUsed == true {
+            sumOfOperands += selectedOperand
+            operandLabel.text = sumOfOperands
+        } else if selectedOperand == "0" && sumOfOperands.first == "0" && isDotUsed == false {
             return
         } else {
-            totalOperand += selectedOperand
-            operandLabel.text = changeToNumberFormatter(with: totalOperand)
+            sumOfOperands += selectedOperand
+            operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         }
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
-        operandLabel.text = changeToNumberFormatter(with: totalOperand)
+        operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         if isFirstTime == true && operandLabel.text == "0" {
             return
         } else if isFirstTime == true && operandLabel.text == "NaN" {
@@ -104,7 +102,7 @@ class MainViewController: UIViewController {
             addToExpressionRecord(operatorLabel, operandLabel)
             operatorLabel.text = sender.titleLabel?.text
             operandLabel.text = "0"
-            totalOperand = ""
+            sumOfOperands = ""
             isFirstTime = false
         }
     }
@@ -121,7 +119,7 @@ class MainViewController: UIViewController {
         var expressionForm = ExpressionParser.parse(from: expressionString)
         let result = expressionForm.result()
         operandLabel.text = changeToNumberFormatter(with: result.description)
-        totalOperand = operandLabel.text ?? ""
+        sumOfOperands = operandLabel.text ?? ""
         expressionRecord.removeAll()
         self.isDotUsed = false
         if operandLabel.text == "NaN" {
