@@ -5,10 +5,10 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) -> Formula {
+    static func parse(from input: String) throws -> Formula {
         let queueOperands = CalculateItemQueue<Double>()
         let queueOperators = CalculateItemQueue<Operator>()
-        componentsByOperators(from: input)
+        try componentsByOperators(from: input)
             .compactMap(Double.init)
             .forEach(queueOperands.enqueue(_:))
         extractOperators(from: input)
@@ -16,13 +16,15 @@ enum ExpressionParser {
         return Formula(operands: queueOperands, operators: queueOperators)
     }
     
-    static private func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) throws -> [String] {
         var newInput = input
         var operands = [String]()
-        extractOperators(from: input).forEach {
+        try extractOperators(from: input).forEach {
             var splitedValues = newInput.split(with: $0.rawValue)
             guard let remainingValue = splitedValues.popLast(),
-                  let operandValue = splitedValues.popLast() else { return }
+                  let operandValue = splitedValues.popLast() else {
+                throw CalculateError.cannotCalculation
+            }
             newInput = remainingValue
             operands.append(operandValue)
         }
