@@ -112,7 +112,7 @@ private extension CalculatorViewController {
         }
     }
     
-    func adjust(number: Double) -> String? {
+    func addComma(to number: Double) -> String? {
         let splitedNumber = String(number).split(with: ".")
         let integerDigits = splitedNumber[0]
         
@@ -129,7 +129,7 @@ private extension CalculatorViewController {
 
 private extension CalculatorViewController {
     
-    @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
+    @IBAction func numberButtonDidTapped(_ sender: UIButton) {
         guard currentStringNumber.count < Digit.limitDigit,
             let inputNumber = sender.titleLabel?.text else {
             return
@@ -146,20 +146,20 @@ private extension CalculatorViewController {
             isInputExist = true
             return
         }
-        
+    
         isInputExist = true
         updateCurrentStringNumber(to: currentStringNumber + inputNumber)
         updateNumberLabel(to: currentStringNumber)
     }
     
-    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
+    @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
         guard numberLabel.text != NumberString.nan else { return }
         
         writeCalculateLog()
         updateOperatorLabel(to: sender.titleLabel?.text)
     }
     
-    @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
+    @IBAction func dotButtonDidTapped(_ sender: UIButton) {
         guard numberLabel.text != NumberString.nan,
             !currentStringNumber.contains("."),
             isCalculateValue == false,
@@ -175,11 +175,11 @@ private extension CalculatorViewController {
         updateNumberLabel(to: currentStringNumber)
     }
     
-    @IBAction private func allClearButtonDidTapped(_ sender: UIButton) {
+    @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
         resetCalculator()
     }
     
-    @IBAction private func clearEntryButtonDidTapped(_ sender: UIButton) {
+    @IBAction func clearEntryButtonDidTapped(_ sender: UIButton) {
         guard numberLabel.text != NumberString.nan else { return }
         
         updateCurrentStringNumber(to: NumberString.empty)
@@ -187,7 +187,7 @@ private extension CalculatorViewController {
         isInputExist = false
     }
     
-    @IBAction private func signButtonDidTapped(_ sender: UIButton) {
+    @IBAction func signButtonDidTapped(_ sender: UIButton) {
         guard let number = Double(currentStringNumber),
             numberLabel.text != NumberString.zero else {
             return
@@ -202,7 +202,7 @@ private extension CalculatorViewController {
         updateNumberLabel(to: currentStringNumber)
     }
     
-    @IBAction private func calculateButtonDidTapped(_ sender: UIButton) {
+    @IBAction func calculateButtonDidTapped(_ sender: UIButton) {
         guard expression.isEmpty == false else { return }
         
         writeCalculateLog()
@@ -214,7 +214,7 @@ private extension CalculatorViewController {
         do {
             let calculateResult = try ExpressionParser.parse(from: expressionString).result()
             
-            updateNumberLabel(to: adjust(number: calculateResult))
+            updateNumberLabel(to: addComma(to: calculateResult))
             isCalculateValue = true
             isInputExist = true
         } catch {
