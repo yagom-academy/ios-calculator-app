@@ -36,5 +36,11 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func tappedOperandsButtons(_ sender: UIButton) {
+    }
+    
+    
+    
 }
 
