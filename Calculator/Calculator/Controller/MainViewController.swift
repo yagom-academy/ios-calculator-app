@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
     
     @IBAction func dotButtonClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard sumOfOperands.count < 20 else { return }
+        guard sumOfOperands.count < 16 else { return }
         guard sumOfOperands.contains(".") == false else { return }
         
         sumOfOperands += selectedOperand
