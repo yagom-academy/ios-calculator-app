@@ -7,14 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
-extension Int: CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<T: List> {
     private let linkdeList: T
     var isEmpty: Bool { linkdeList.isEmpty }

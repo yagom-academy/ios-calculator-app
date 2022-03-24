@@ -9,27 +9,21 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var mook: MookList<Int>!
-    var sut: CalculatorItemQueue<MookList<Int>>!
+    var mock: MockList<Int>!
+    var sut: CalculatorItemQueue<MockList<Int>>!
 
     override func setUpWithError() throws {
-        mook = MookList<Int>()
-        sut = CalculatorItemQueue<MookList<Int>>(mook)
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        mock = MockList<Int>()
+        sut = CalculatorItemQueue<MockList<Int>>(mock)
     }
     
     func test_enqueue() {
         // given
         let testData = [1, 2, 3]
         testData.forEach( sut.enqueue(_:) )
-
-        // when
-
+        
         // then
-        XCTAssertEqual(testData, mook.dataA)
+        XCTAssertEqual(testData, mock.mockData)
     }
     
     func test_dequeue() {
@@ -39,10 +33,8 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.dequeue()
         testData.remove(at: 0)
 
-        // when
-
         // then
-        XCTAssertEqual(testData, mook.dataA)
+        XCTAssertEqual(testData, mock.mockData)
     }
     
     func test_removeAll() {
@@ -52,19 +44,15 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.removeAll()
         testData.removeAll()
 
-        // when
-
         // then
-        XCTAssertEqual(testData, mook.dataA)
+        XCTAssertEqual(testData, mock.mockData)
     }
     
     func test_isEmpty_Equal() {
         // given
         let testData = [1, 2, 3]
         testData.forEach( sut.enqueue(_:) )
-
-        // when
-
+        
         // then
         XCTAssertEqual(testData.isEmpty, sut.isEmpty)
     }
@@ -73,38 +61,9 @@ class CalculatorItemQueueTests: XCTestCase {
         // given
         let testData = [1, 2, 3]
         testData.forEach( sut.enqueue(_:) )
-
-        // when
-
+        
         // then
         XCTAssertEqual(testData.count, sut.count)
     }
 
-
-}
-
-class MookList<T>: List {
-    
-    var dataA: [T] = []
-    
-    var isEmpty: Bool { dataA.isEmpty }
-    
-    var count: Int { dataA.count }
-    
-    func append(_ data: T) {
-        dataA.append(data)
-    }
-    
-    func removeFirst() -> T? {
-        return dataA.remove(at: 0)
-    }
-    
-    func removeAll() {
-        dataA.removeAll()
-    }
-    
-
-    
-    
-    
 }
