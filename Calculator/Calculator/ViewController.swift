@@ -153,6 +153,4 @@ private extension ViewController {
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
         return label
     }
-    
-    
 }
