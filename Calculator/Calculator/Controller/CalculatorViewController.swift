@@ -79,6 +79,7 @@ class CalculatorViewController: UIViewController {
                 
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
+                numberFormatter.maximumFractionDigits = 10
                 numberLabel.text = numberFormatter.string(for: result)
                 operatorLabel.text = ""
             } catch {
