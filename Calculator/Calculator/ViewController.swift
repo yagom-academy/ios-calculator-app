@@ -56,6 +56,15 @@ class ViewController: UIViewController {
         return operandLabel
     }
     
+    func makeOperatorLabel(labelText: String?) -> UILabel {
+        let operatorLabel = UILabel()
+        
+        operatorLabel.text = labelText
+        operatorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return operatorLabel
+    }
+    
     func makeCalculationStackView() -> UIStackView {
         let calculationStack = UIStackView()
         
