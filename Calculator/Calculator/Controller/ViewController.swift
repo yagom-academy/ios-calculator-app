@@ -19,8 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var convertingSignButton: UIButton!
     
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var totalVerticalStackView: UIStackView!
-    @IBOutlet var lowerHorizontalStackView: UIStackView!
+    @IBOutlet var verticalStackView: UIStackView!
+    var flag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +82,8 @@ class ViewController: UIViewController {
             print("에러호출")
         }
         currentOperatorLabel.text = currentOperator
+        insertLabelToHorizontalStackView()
+        currentOperandLabel.text = Number.zero.rawValue
     }
     
     @IBAction func signConvertingButtonClicked(_ sender: UIButton) {
@@ -100,6 +102,29 @@ class ViewController: UIViewController {
     
     @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
         currentOperandLabel.text = Number.zero.rawValue
+    }
+    
+    func insertLabelToHorizontalStackView() {
+        let label = UILabel()
+        
+        guard let operatorLabelText = currentOperatorLabel.text else {
+            return
+        }
+        
+        guard let operandLabelText = currentOperandLabel.text else {
+            return
+        }
+        
+        if flag == false {
+            label.text = "\(operandLabelText)"
+            label.textColor = .white
+            verticalStackView.addArrangedSubview(label)
+            flag = true
+        } else {
+            label.text = "\(operatorLabelText)  \(operandLabelText)"
+            label.textColor = .white
+            verticalStackView.addArrangedSubview(label)
+        }
     }
 }
 
