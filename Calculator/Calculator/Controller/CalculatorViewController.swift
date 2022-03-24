@@ -72,6 +72,11 @@ class CalculatorViewController: UIViewController {
             let result: Double
             do {
                 result = try ExpressionParser.parse(from: calculatorInput).result()
+                
+                if String(result).count > 20 {
+                    throw CalculatorError.unexpectedData
+                }
+                
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 numberLabel.text = numberFormatter.string(for: result)
