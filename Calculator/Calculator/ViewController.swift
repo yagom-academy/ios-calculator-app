@@ -76,10 +76,14 @@ class ViewController: UIViewController {
     
     // MARK: - Method
     
+    func removeComma(_ input: String) -> String {
+        input.replacingOccurrences(of: ",", with: "")
+    }
+    
     func updateOperandLabel(_ button: UIButton) {
-        guard let text = operandLabel.text, let inputText = button.currentTitle else { return }
+        guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
         
-        operandLabel.text = text + inputText
+        operandLabel.text = operandText + inputText
     }
     
     func makeLabel(labelText: String?) -> UILabel {
