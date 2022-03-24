@@ -8,8 +8,8 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
 
-    @IBOutlet weak var singleZeroButton: UIButton!
-    @IBOutlet weak var doubleZeroButton: UIButton!
+    @IBOutlet weak var numberSingleZeroButton: UIButton!
+    @IBOutlet weak var numberDoubleZeroButton: UIButton!
     @IBOutlet weak var singleDotButton: UIButton!
     @IBOutlet weak var numberOneButton: UIButton!
     @IBOutlet weak var numberTwoButton: UIButton!

@@ -368,15 +368,16 @@
                         <outlet property="allClearButton" destination="ped-N8-JbY" id="XFK-j8-fXx"/>
                         <outlet property="clearElementButton" destination="RLD-dY-LOA" id="dij-z8-rLI"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="pjH-Zq-I8C"/>
-                        <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="lpB-ch-wWu"/>
                         <outlet property="equalSignButton" destination="Daw-iX-Owl" id="EkX-zZ-oA4"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="nRp-r1-sjk"/>
+                        <outlet property="numberDoubleZeroButton" destination="sH6-8l-kje" id="6ms-NE-IrC"/>
                         <outlet property="numberEightButton" destination="xgT-2D-A49" id="Rm4-A4-ppb"/>
                         <outlet property="numberFiveButton" destination="vpW-df-OLm" id="5hO-qF-KEw"/>
                         <outlet property="numberFourButton" destination="hQm-yz-XvG" id="n6n-v3-Vtt"/>
                         <outlet property="numberNineButton" destination="zcj-xJ-ruw" id="iLv-Lb-MTJ"/>
                         <outlet property="numberOneButton" destination="nCE-qB-NiN" id="tGK-Yx-Zh5"/>
                         <outlet property="numberSevenButton" destination="L6z-2G-Gar" id="2J2-cg-pbl"/>
+                        <outlet property="numberSingleZeroButton" destination="mSz-Y3-r5Z" id="qS3-Et-jGQ"/>
                         <outlet property="numberSixButton" destination="OaY-Mw-CPv" id="1qU-HE-qt5"/>
                         <outlet property="numberThreeButton" destination="X8H-iH-tSd" id="hPh-zi-4Cp"/>
                         <outlet property="numberTwoButton" destination="Rif-2S-UU2" id="3xL-0H-cIo"/>
@@ -384,7 +385,6 @@
                         <outlet property="operatorComeInLabel" destination="HPC-iy-qdm" id="yBy-8q-uCL"/>
                         <outlet property="positiveNegativeConversionButton" destination="ows-U7-mNc" id="4E3-tF-VUH"/>
                         <outlet property="singleDotButton" destination="h8q-5h-bnb" id="h5R-rP-3wg"/>
-                        <outlet property="singleZeroButton" destination="mSz-Y3-r5Z" id="9Yv-uG-qJq"/>
                         <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="NGz-Gj-ryf"/>
                     </connections>
                 </viewController>
