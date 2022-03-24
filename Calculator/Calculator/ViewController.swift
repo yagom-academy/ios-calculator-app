@@ -38,6 +38,8 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpAllClearToInputFormulaLabel() {
         inputFormulaLabel.text?.removeAll()
+        inputOperatorLabel.text?.removeAll()
+        inputFormulaLabel.text = "0"
     }
     
     @IBAction func switchPlusAndMinusToInputOperatorLabel() {
