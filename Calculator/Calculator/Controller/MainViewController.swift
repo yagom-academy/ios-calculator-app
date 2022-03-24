@@ -117,8 +117,8 @@ class MainViewController: UIViewController {
                                         .joined(separator: " ")
                                         .replacingOccurrences(of: ",", with: "")
         var expressionForm = ExpressionParser.parse(from: expressionString)
-        let result = expressionForm.result()
-        operandLabel.text = changeToNumberFormatter(with: result.description)
+        let calculationResult = expressionForm.result()
+        operandLabel.text = changeToNumberFormatter(with: calculationResult.description)
         sumOfOperands = operandLabel.text ?? ""
         expressionRecord.removeAll()
         self.isDotUsed = false
