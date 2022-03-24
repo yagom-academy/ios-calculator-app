@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var allCalculationStack: UIStackView!
     
     // MARK: - IBAction
     

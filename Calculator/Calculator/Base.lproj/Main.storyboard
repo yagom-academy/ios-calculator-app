@@ -307,6 +307,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allCalculationStack" destination="XRe-QE-UJf" id="KHm-tR-hIk"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="4vN-4k-sD8"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="1lo-MU-eOc"/>
                     </connections>
