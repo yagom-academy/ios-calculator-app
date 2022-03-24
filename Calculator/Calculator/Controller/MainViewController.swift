@@ -94,6 +94,7 @@ final class MainViewController: UIViewController {
             sumOfOperands += selectedOperand
             operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         }
+        isNone = false
     }
     
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
