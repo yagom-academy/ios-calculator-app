@@ -19,6 +19,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculationRecordStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private var allButtonComponentExceptEqual: [UIButton]!
     
     // MARK: - Property
     private var currentOperand: String = Constant.zero
@@ -55,10 +56,6 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpOperandButton(_ sender: UIButton) {
-        if isCalculated {
-            reconfigureCalculator()
-        }
-        
         guard let operand = sender.titleLabel?.text else {
             return
         }
@@ -190,10 +187,11 @@ extension CalculatorViewController {
         }
         
         reconfigureOperator()
+        configureAllButton()
     }
 }
 
-// MARK: - Reconfigure Method
+// MARK: - Configure Method
 extension CalculatorViewController {
     private func reconfigureCalculator() {
         isCalculated = false
@@ -213,6 +211,21 @@ extension CalculatorViewController {
     private func reconfigureOperator() {
         currentOperator = Constant.blank
         operatorLabel.text = Constant.blank
+    }
+}
+
+// MARK: - Button Configure Method
+extension CalculatorViewController {
+    private func configureAllButton() {
+        allButtonComponentExceptEqual.forEach {
+            $0.addTarget(self, action: #selector(action(sender:)), for: .touchUpInside)
+        }
+    }
+
+    @objc private func action(sender: UIButton) {
+        if isCalculated {
+            reconfigureCalculator()
+        }
     }
 }
 
