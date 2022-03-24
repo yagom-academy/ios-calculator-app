@@ -109,6 +109,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperatorsButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bSU-su-cTL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -155,6 +158,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperatorsButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Vx-ol-h5C"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -201,6 +207,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperatorsButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R0w-Mj-abJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -247,6 +256,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperatorsButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="awD-Kg-vfT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -296,6 +308,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperatorsButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a4h-eG-TkR"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

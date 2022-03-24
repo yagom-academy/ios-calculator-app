@@ -40,6 +40,8 @@ class CalculatorViewController: UIViewController {
     @IBAction func tappedOperandsButtons(_ sender: UIButton) {
     }
     
+    @IBAction func tappedOperatorsButtons(_ sender: UIButton) {
+    }
     
     
 }
