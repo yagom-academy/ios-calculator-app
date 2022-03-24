@@ -14,8 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet var operandButtons: [UIButton]!
     @IBOutlet var operatorButtons: [UIButton]!
     @IBOutlet weak var resultButton: UIButton!
-    @IBOutlet weak var acButton: UIButton!
-    @IBOutlet weak var ceButton: UIButton!
     @IBOutlet weak var convertingSignButton: UIButton!
     
     @IBOutlet var scrollView: UIScrollView!
@@ -126,6 +124,19 @@ class ViewController: UIViewController {
             label.textColor = .white
             verticalStackView.addArrangedSubview(label)
         }
+    }
+    
+    @IBAction func allClearButtonClicked(_ sender: UIButton) {
+        guard verticalStackView.arrangedSubviews.last != nil else {
+            return
+        }
+        
+        for view in verticalStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        
+        currentOperandLabel.text = Number.zero.rawValue
+        currentOperatorLabel.text = ""
     }
 }
 
