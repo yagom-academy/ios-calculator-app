@@ -1,14 +1,11 @@
-//
 //  CalculateItemQueue.swift
 //  CalculateItemQueue
-//
-//  Created by LIMGAUI on 2022/03/17.
-//
+//  Created by LIMGAUI on 2022/03/17
 
 import XCTest
 @testable import Calculator
 
-class CalculateItemQueue1: XCTestCase {
+class CalculateItemQueueTest: XCTestCase {
     var queue: CalculateItemQueue<Int>!
     var stringQueue: CalculateItemQueue<String>!
     override func setUpWithError() throws {
@@ -18,12 +15,6 @@ class CalculateItemQueue1: XCTestCase {
     override func tearDownWithError() throws {
         queue = nil
         stringQueue = nil
-    }
-    
-    func test_append메서드를사용하지않고_isEmpty메서드를호출했을때_False가나오는지() {
-        let result = queue.isEmpty
-        
-        XCTAssertEqual(result, false)
     }
     
     func test_값할당한게없을떄_isEmpty메서드호출값이_True가나오는지() {
@@ -54,7 +45,7 @@ class CalculateItemQueue1: XCTestCase {
             queue.enqueue(number)
         }
         for _ in 1...999 {
-            let _ = queue.dequeue
+            let _ = queue.dequeue()
         }
         let result = queue.count
         
@@ -65,7 +56,7 @@ class CalculateItemQueue1: XCTestCase {
         let input = "quokka"
         stringQueue.enqueue(input)
         
-        let result = stringQueue.dequeue
+        let result = stringQueue.dequeue()
         
         XCTAssertEqual(input, result)
     }
@@ -79,18 +70,5 @@ class CalculateItemQueue1: XCTestCase {
         let result = queue.count
         
         XCTAssertEqual(result, 0)
-    }
-    
-    func test_enqueue메서드10번호출후_removeFirst메서드5번실행시_count5가나오는지() {
-        for number in 1...10 {
-            queue.enqueue(number)
-        }
-        for _ in 1...5 {
-            let _ = queue.removeFirst
-        }
-        
-        let result = queue.count
-        
-        XCTAssertEqual(result, 5)
     }
 }
