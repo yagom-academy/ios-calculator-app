@@ -98,6 +98,7 @@ class MainViewController: UIViewController {
             operandLabel.text = "0"
             sumOfOperands = ""
             isFirstTime = false
+            isDotUsed = false
         }
     }
     
