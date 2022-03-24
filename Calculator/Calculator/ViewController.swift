@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var clearEntryBtn: UIButton!
     @IBOutlet weak var plusAndMinusBtn: UIButton!
     @IBOutlet weak var calculationBtn: UIButton!
+    var inputValueResult = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func appendOperatorToInputFormulaLabel(_ sender: UIButton) {
-        guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text else { return }
-        inputOperatorLabel.text = operatorValue
+        guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
+              let operandValue = inputFormulaLabel.text else { return }
+        inputValueResult += operandValue
+        inputValueResult += operatorValue
     }
     
     @IBAction func touchUpEntryClearToInputFormulaLabel() {
