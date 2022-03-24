@@ -30,17 +30,15 @@ final class CalculatorLinkedList<T> {
     
     func append(_ value: T) {
         let newNode = Node(value: value)
-        
-        if !isEmpty {
-            let previousTail = tail
-            newNode.previous = previousTail
-            previousTail?.next = newNode
-            tail = newNode
-        }
+
         if isEmpty {
             head = newNode
             tail = newNode
+            return
         }
+        newNode.previous = tail
+        tail?.next = newNode
+        tail = newNode
     }
     
     func removeFirst() -> T? {
