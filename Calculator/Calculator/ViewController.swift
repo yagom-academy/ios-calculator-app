@@ -4,6 +4,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var calculatingValueLabel: UILabel!
     @IBOutlet weak var inputFormulaLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet var operandBtns: [UIButton]!
@@ -31,8 +32,9 @@ class ViewController: UIViewController {
     @IBAction func appendOperatorToInputFormulaLabel(_ sender: UIButton) {
         guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let operandValue = inputFormulaLabel.text else { return }
-        inputValueResult += operandValue
-        inputValueResult += operatorValue
+        inputOperatorLabel.text = operatorValue
+        calculatingValueLabel.text = operandValue
+        inputFormulaLabel.text?.removeAll()
     }
     
     @IBAction func touchUpEntryClearToInputFormulaLabel() {

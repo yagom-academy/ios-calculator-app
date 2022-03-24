@@ -362,6 +362,7 @@
                     </view>
                     <connections>
                         <outlet property="allClearBtn" destination="ped-N8-JbY" id="anK-La-ei6"/>
+                        <outlet property="calculatingValueLabel" destination="Hcb-r0-27f" id="Xya-jO-rsL"/>
                         <outlet property="calculationBtn" destination="Daw-iX-Owl" id="UyQ-i9-7Yj"/>
                         <outlet property="clearEntryBtn" destination="RLD-dY-LOA" id="EqJ-b8-UO5"/>
                         <outlet property="inputFormulaLabel" destination="Lwz-OF-XHD" id="m6E-W9-Sgq"/>
