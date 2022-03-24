@@ -14,10 +14,10 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual(result, splitedValues)
     }
     
-    func test_parse메서드호출시_입력한_계산식에서_연산자값과_피연산자값이_분리가되는지() {
+    func test_parse메서드호출시_입력한_계산식에서_연산자값과_피연산자값이_분리가되는지() throws {
         let input = "5➕10➕2➖2✖️-2➗2"
         
-        let formula = ExpressionParser.parse(from: input)
+        let formula = try ExpressionParser.parse(from: input)
         var operands = [String]()
         var operators = [String]()
         
