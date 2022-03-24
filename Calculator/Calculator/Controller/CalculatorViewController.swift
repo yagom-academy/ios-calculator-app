@@ -62,8 +62,14 @@ class CalculatorViewController: UIViewController {
         operatorsLabel.text = input
     }
     
-    @IBAction func tappedClearAndConversionButtons(_ sender: UIButton) {
+    @IBAction func tappedAllClearButton
+    (_ sender: UIButton) {
     }
     
+    @IBAction func tappedClearElementButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func tappedPositiveNegativeConversionButton(_ sender: UIButton) {
+    }
 }
 
