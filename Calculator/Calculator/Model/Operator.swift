@@ -27,33 +27,21 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        let lhsToDecimal: Decimal = Decimal(lhs)
-        let rhsToDecimal: Decimal = Decimal(rhs)
-        let result = (lhsToDecimal + rhsToDecimal).description
-        return Double(result) ?? .nan
+        return lhs + rhs
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        let lhsToDecimal: Decimal = Decimal(lhs)
-        let rhsToDecimal: Decimal = Decimal(rhs)
-        let result = (lhsToDecimal - rhsToDecimal).description
-        return Double(result) ?? .nan
+        return lhs - rhs
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
         if rhs == 0 {
             return .nan
         }
-        let lhsToDecimal: Decimal = Decimal(lhs)
-        let rhsToDecimal: Decimal = Decimal(rhs)
-        let result = (lhsToDecimal / rhsToDecimal).description
-        return Double(result) ?? .nan
+        return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        let lhsToDecimal: Decimal = Decimal(lhs)
-        let rhsToDecimal: Decimal = Decimal(rhs)
-        let result = (lhsToDecimal * rhsToDecimal).description
-        return Double(result) ?? .nan
+        return lhs * rhs
     }
 }
