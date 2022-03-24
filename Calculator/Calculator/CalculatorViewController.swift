@@ -18,51 +18,51 @@ class CalculatorViewController: UIViewController {
     private var formerOperator: String = empty
     private var inputtingOperand: String = zero {
         didSet {
-            NumberLabel.text = inputtingOperand
+            numberLabel.text = inputtingOperand
         }
     }
     private var inputtingOperator: String = empty {
         didSet {
-            OperatorLabel.text = inputtingOperator
+            operatorLabel.text = inputtingOperator
         }
     }
     
     private let numberFormatter = NumberFormatter()
     
-    @IBOutlet private weak var OperandZeroButton: OperandButton!
-    @IBOutlet private weak var OperandCoupleZeroButton: OperandButton!
-    @IBOutlet private weak var OperandOneButton: OperandButton!
-    @IBOutlet private weak var OperandTwoButton: OperandButton!
-    @IBOutlet private weak var OperandThreeButton: OperandButton!
-    @IBOutlet private weak var OperandFourButton: OperandButton!
-    @IBOutlet private weak var OperandFiveButton: OperandButton!
-    @IBOutlet private weak var OperandSixButton: OperandButton!
-    @IBOutlet private weak var OperandSevenButton: OperandButton!
-    @IBOutlet private weak var OperandEightButton: OperandButton!
-    @IBOutlet private weak var OperandNineButton: OperandButton!
-    @IBOutlet private weak var OperandDotButton: OperandButton!
+    @IBOutlet private weak var operandZeroButton: OperandButton!
+    @IBOutlet private weak var operandCoupleZeroButton: OperandButton!
+    @IBOutlet private weak var operandOneButton: OperandButton!
+    @IBOutlet private weak var operandTwoButton: OperandButton!
+    @IBOutlet private weak var operandThreeButton: OperandButton!
+    @IBOutlet private weak var operandFourButton: OperandButton!
+    @IBOutlet private weak var operandFiveButton: OperandButton!
+    @IBOutlet private weak var operandSixButton: OperandButton!
+    @IBOutlet private weak var operandSevenButton: OperandButton!
+    @IBOutlet private weak var operandEightButton: OperandButton!
+    @IBOutlet private weak var operandNineButton: OperandButton!
+    @IBOutlet private weak var operandDotButton: OperandButton!
     
     
-    @IBOutlet private weak var OperatorAddButton: OperatorButton!
-    @IBOutlet private weak var OperatorSubtractButton: OperatorButton!
-    @IBOutlet private weak var OperatorMultiplyButton: OperatorButton!
-    @IBOutlet private weak var OperatorDivideButton: OperatorButton!
+    @IBOutlet private weak var operatorAddButton: OperatorButton!
+    @IBOutlet private weak var operatorSubtractButton: OperatorButton!
+    @IBOutlet private weak var operatorMultiplyButton: OperatorButton!
+    @IBOutlet private weak var operatorDivideButton: OperatorButton!
     
     
-    @IBOutlet private weak var FuncAllClearButton: FunctionalButton!
-    @IBOutlet private weak var FuncClearEntryButton: FunctionalButton!
-    @IBOutlet private weak var FuncChangeSignButton: FunctionalButton!
-    @IBOutlet private weak var FuncExecuteButton: FunctionalButton!
+    @IBOutlet private weak var funcAllClearButton: FunctionalButton!
+    @IBOutlet private weak var funcClearEntryButton: FunctionalButton!
+    @IBOutlet private weak var funcChangeSignButton: FunctionalButton!
+    @IBOutlet private weak var funcExecuteButton: FunctionalButton!
     
   
-    @IBOutlet private weak var OperatorLabel: UILabel!
-    @IBOutlet private weak var NumberLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var numberLabel: UILabel!
     
     
-    @IBOutlet weak var HistoryScrollView: UIScrollView!
-    @IBOutlet weak var HistoryStackView: UIStackView!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
+    @IBOutlet private weak var historyStackView: UIStackView!
     
-    public func setUpDefaultStatus() {
+    private func setUpDefaultStatus() {
         clearFormula()
         setStatusZero()
         clearInputtingOperand()
@@ -70,18 +70,18 @@ class CalculatorViewController: UIViewController {
         formerOperator = CalculatorViewController.empty
     }
     
-    public func clearFormula() {
+    private func clearFormula() {
         formulaNotYetCalculated = CalculatorViewController.empty
     }
     
-    public func setStatusZero() {
+    private func setStatusZero() {
         clearInputtingOperand()
         statusZero = true
     }
-    public func clearInputtingOperand() {
+    private func clearInputtingOperand() {
         inputtingOperand = CalculatorViewController.zero
     }
-    public func clearInputtingOperator() {
+    private func clearInputtingOperator() {
         inputtingOperator = CalculatorViewController.empty
     }
     
@@ -94,58 +94,58 @@ class CalculatorViewController: UIViewController {
         setUpHistoryStackView()
     }
     
-    public func setUpNumberFormat() {
+    private func setUpNumberFormat() {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.roundingMode = .halfUp
     }
     
-    public func setUpOperandButtonValue() {
-        OperandZeroButton.value = "0"
-        OperandCoupleZeroButton.value = "00"
-        OperandOneButton.value = "1"
-        OperandTwoButton.value = "2"
-        OperandThreeButton.value = "3"
-        OperandFourButton.value = "4"
-        OperandFiveButton.value = "5"
-        OperandSixButton.value = "6"
-        OperandSevenButton.value = "7"
-        OperandEightButton.value = "8"
-        OperandNineButton.value = "9"
-        OperandDotButton.value = "."
+    private func setUpOperandButtonValue() {
+        operandZeroButton.value = "0"
+        operandCoupleZeroButton.value = "00"
+        operandOneButton.value = "1"
+        operandTwoButton.value = "2"
+        operandThreeButton.value = "3"
+        operandFourButton.value = "4"
+        operandFiveButton.value = "5"
+        operandSixButton.value = "6"
+        operandSevenButton.value = "7"
+        operandEightButton.value = "8"
+        operandNineButton.value = "9"
+        operandDotButton.value = "."
     }
 
-    public func setUpOpertorButtonValue() {
-        OperatorAddButton.value = " + "
-        OperatorSubtractButton.value = " - "
-        OperatorMultiplyButton.value = " × "
-        OperatorDivideButton.value = " ÷ "
+    private func setUpOpertorButtonValue() {
+        operatorAddButton.value = " + "
+        operatorSubtractButton.value = " - "
+        operatorMultiplyButton.value = " × "
+        operatorDivideButton.value = " ÷ "
     }
     
-    public func setUpHistoryStackView() {
-        HistoryStackView.spacing = 8
-        HistoryStackView.distribution = .fillEqually
+    private func setUpHistoryStackView() {
+        historyStackView.spacing = 8
+        historyStackView.distribution = .fillEqually
         clearHistoryStackView()
     }
     
-    public func clearHistoryStackView() {
-        for historyView in HistoryStackView.arrangedSubviews {
+    private func clearHistoryStackView() {
+        for historyView in historyStackView.arrangedSubviews {
             historyView.removeFromSuperview()
-            HistoryStackView.removeArrangedSubview(historyView)
+            historyStackView.removeArrangedSubview(historyView)
         }
     }
     
-    @IBAction public func OperandButtonAction(_ sender: OperandButton) {
+    @IBAction private func operandButtonAction(_ sender: OperandButton) {
         generateOperandNumber(sender)
         addOperatorToFormulaIfExists()
     }
     
-    public func generateOperandNumber(_ sender: OperandButton) {
+    private func generateOperandNumber(_ sender: OperandButton) {
         guard let input = sender.value else { return }
         if statusZero || inputtingOperand == CalculatorViewController.zero {
-            if sender == OperandZeroButton || sender == OperandCoupleZeroButton {
+            if sender == operandZeroButton || sender == operandCoupleZeroButton {
                 inputtingOperand = CalculatorViewController.zero
-            } else if sender == OperandDotButton {
+            } else if sender == operandDotButton {
                 inputtingOperand += input
             } else {
                 inputtingOperand = input
@@ -156,24 +156,24 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    public func addOperatorToFormulaIfExists() {
+    private func addOperatorToFormulaIfExists() {
         if !inputtingOperator.isEmpty {
-            let lastInputtedOperator = OperatorLabel.text
+            let lastInputtedOperator = operatorLabel.text
             formulaNotYetCalculated += inputtingOperator
             clearInputtingOperator()
-            OperatorLabel.text = lastInputtedOperator
+            operatorLabel.text = lastInputtedOperator
             formerOperator = lastInputtedOperator ?? CalculatorViewController.empty
         }
     }
     
-    @IBAction public func OperatorButtonAction(_ sender: OperatorButton) {
+    @IBAction private func operatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
         inputtingOperator = input
         if statusZero {
             return
         }
         
-        if HistoryStackView.arrangedSubviews.count < 1 {
+        if historyStackView.arrangedSubviews.count < 1 {
             insertHistoryInStackView(inputtingOperand)
         } else {
             insertHistoryInStackView(formerOperator + inputtingOperand)
@@ -181,23 +181,23 @@ class CalculatorViewController: UIViewController {
         addOperandToFormula()
     }
     
-    public func addOperandToFormula() {
+    private func addOperandToFormula() {
         formulaNotYetCalculated += inputtingOperand
         setStatusZero()
         formerOperator = inputtingOperator
     }
     
-    @IBAction public func allClearAction(_ sender: FunctionalButton) {
+    @IBAction private func allClearAction(_ sender: FunctionalButton) {
         setUpDefaultStatus()
         clearHistoryStackView()
     }
     
     
-    @IBAction public func clearEntryAction(_ sender: FunctionalButton) {
+    @IBAction private func clearEntryAction(_ sender: FunctionalButton) {
         setStatusZero()
     }
     
-    @IBAction public func changeSignAction(_ sender: FunctionalButton) {
+    @IBAction private func changeSignAction(_ sender: FunctionalButton) {
         if inputtingOperand == CalculatorViewController.zero {
             return
         } else if inputtingOperand.first == CalculatorViewController.negativeSign {
@@ -207,7 +207,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction public func executeCalculatingAction(_ sender: FunctionalButton) {
+    @IBAction private func executeCalculatingAction(_ sender: FunctionalButton) {
         if formulaNotYetCalculated.isEmpty {
             return
         }
@@ -226,26 +226,26 @@ class CalculatorViewController: UIViewController {
         configureCalculateResultLabel(result)
     }
     
-    public func configureCalculateResultLabel(_ result: Double) {
+    private func configureCalculateResultLabel(_ result: Double) {
         if result.isNaN {
-            NumberLabel.text = CalculatorViewController.nanResult
+            numberLabel.text = CalculatorViewController.nanResult
         } else {
             guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
-            NumberLabel.text = numberFormattedResult
+            numberLabel.text = numberFormattedResult
         }
     }
     
-    public func insertHistoryInStackView(_ inputted: String) {
+    private func insertHistoryInStackView(_ inputted: String) {
         let stackView = historyStackView(inputted)
-        HistoryStackView.addArrangedSubview(stackView)
-        let offsetY = HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height
+        historyStackView.addArrangedSubview(stackView)
+        let offsetY = historyScrollView.contentSize.height - historyScrollView.bounds.height
         
         if(offsetY > 0) {
-            HistoryScrollView.setContentOffset(CGPoint(x: 0, y: (HistoryScrollView.contentSize.height - HistoryScrollView.bounds.height + 30)), animated: true)
+            historyScrollView.setContentOffset(CGPoint(x: 0, y: (historyScrollView.contentSize.height - historyScrollView.bounds.height + 30)), animated: true)
         }
     }
     
-    public func historyStackView(_ inputted: String) -> UIStackView {
+    private func historyStackView(_ inputted: String) -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
