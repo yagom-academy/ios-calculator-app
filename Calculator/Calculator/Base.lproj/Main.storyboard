@@ -304,8 +304,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="operand" destination="Lwz-OF-XHD" id="4vN-4k-sD8"/>
-                        <outlet property="operator" destination="HPC-iy-qdm" id="1lo-MU-eOc"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="4vN-4k-sD8"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="1lo-MU-eOc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
