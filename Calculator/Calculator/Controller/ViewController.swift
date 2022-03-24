@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         let number = changeToDouble(number: number)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumFractionDigits = -2
         guard let changedNumber = numberFormatter.string(from: number as NSNumber) else { return "" }
         if changedNumber == "-0" { return "0"}
         return changedNumber
