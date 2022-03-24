@@ -31,4 +31,8 @@ class ViewController: UIViewController {
               let inputValue = inputFormulaLabel.text else { return }
         inputFormulaLabel.text = inputValue+operatorValue
     }
+    
+    @IBAction func touchUpEntryClear() {
+        guard let _ = inputFormulaLabel.text?.removeLast() else { return }
+    }
 }
