@@ -50,7 +50,16 @@ class ViewController: UIViewController {
         return operandLabel
     }
     
-    
+    func makeCalculationStackView() -> UIStackView {
+        let calculationStack = UIStackView()
+        
+        calculationStack.axis = .horizontal
+        calculationStack.alignment = .fill
+        calculationStack.distribution = .fill
+        calculationStack.spacing = 8
+        
+        return calculationStack
+    }
     
     
     
