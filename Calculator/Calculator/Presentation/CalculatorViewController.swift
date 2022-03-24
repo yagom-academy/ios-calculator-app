@@ -56,8 +56,8 @@ final class CalculatorViewController: UIViewController {
     }
     if self.viewModel.didTapOperatorButton(of: operatorString) {
       self.resultStackView.addArrangedSubview(stackView)
+      self.scrollToDown()
     }
-    self.scrollToDown()
   }
   
   @IBAction private func didTapNumberButton(_ sender: UIButton) {
@@ -117,12 +117,13 @@ private extension CalculatorViewController {
   }
   
   func scrollToDown() {
+    self.resultScrollView.layoutIfNeeded()
     let contentSizeHeight = self.resultScrollView.contentSize.height
     let boundsHeight = self.resultScrollView.bounds.size.height
     let contentInsetBottom = self.resultScrollView.contentInset.bottom
     let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
     if pointY > 0 {
-      let contentOffset = CGPoint(x: 0, y: pointY + 24)
+      let contentOffset = CGPoint(x: 0, y: pointY)
       self.resultScrollView.setContentOffset(contentOffset, animated: true)
     }
   }
