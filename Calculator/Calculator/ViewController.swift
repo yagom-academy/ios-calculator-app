@@ -35,4 +35,8 @@ class ViewController: UIViewController {
     @IBAction func touchUpEntryClear() {
         guard let _ = inputFormulaLabel.text?.removeLast() else { return }
     }
+    
+    @IBAction func touchUpAllClear() {
+        guard let _ = inputFormulaLabel.text?.removeAll() else { return }
+    }
 }
