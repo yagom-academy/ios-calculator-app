@@ -71,6 +71,7 @@ extension ViewController {
     
     @IBAction func clickAC(_ sender: UIButton) {
         clearAllHistory()
+        allOperation = []
     }
     
     @IBAction func clickEC(_ sender: UIButton) {
