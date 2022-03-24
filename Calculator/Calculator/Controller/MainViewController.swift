@@ -167,10 +167,10 @@ final class MainViewController: UIViewController {
     
     private func changeToNumberFormatter(with sumOfOperands: String) -> String {
         let numberFormatter = NumberFormatter()
-        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(sumOfOperands) ?? 0)) ?? ""
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumFractionDigits = 20
+        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(sumOfOperands) ?? 0)) ?? ""
         return operandExpressionForm
     }
 }
