@@ -344,6 +344,7 @@
                         <outlet property="calculationBtn" destination="Daw-iX-Owl" id="UyQ-i9-7Yj"/>
                         <outlet property="clearEntryBtn" destination="RLD-dY-LOA" id="EqJ-b8-UO5"/>
                         <outlet property="inputFormulaLabel" destination="Lwz-OF-XHD" id="m6E-W9-Sgq"/>
+                        <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="arG-Zw-Vjg"/>
                         <outlet property="plusAndMinusBtn" destination="ows-U7-mNc" id="8A7-1R-ugR"/>
                         <outletCollection property="operandBtns" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="ku4-Lj-Owd"/>
                         <outletCollection property="operandBtns" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="hyf-G7-pq7"/>

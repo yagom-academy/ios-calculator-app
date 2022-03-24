@@ -5,6 +5,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var inputFormulaLabel: UILabel!
+    @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet var operandBtns: [UIButton]!
     @IBOutlet var operatorBtns: [UIButton]!
     
