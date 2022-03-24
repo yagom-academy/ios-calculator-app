@@ -76,7 +76,7 @@
                                                     <action selector="signConvertingButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3S-Kj-uCA"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
@@ -125,7 +125,7 @@
                                                     <action selector="operandButtonsClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GGi-zl-O4O"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" red="0.89715212580000003" green="0.57001358270000002" blue="0.2305330038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>

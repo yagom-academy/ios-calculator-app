@@ -71,16 +71,17 @@ class ViewController: UIViewController {
         
         switch sender.tag {
         case 0:
-            currentOperator = "\(Operator.add.rawValue)"
+            currentOperator = operatorButtons[0].titleLabel?.text ?? ""
         case 1:
-            currentOperator = "\(Operator.subtract.rawValue)"
+            currentOperator = operatorButtons[1].titleLabel?.text ?? ""
         case 2:
-            currentOperator = "\(Operator.multiply.rawValue)"
+            currentOperator = operatorButtons[2].titleLabel?.text ?? ""
         case 3:
-            currentOperator = "\(Operator.divide.rawValue)"
+            currentOperator = operatorButtons[3].titleLabel?.text ?? ""
         default:
             print("에러호출")
         }
+        
         currentOperatorLabel.text = currentOperator
         insertLabelToHorizontalStackView()
         currentOperandLabel.text = Number.zero.rawValue
