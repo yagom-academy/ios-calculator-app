@@ -87,11 +87,11 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNumberFormat()
         setUpOperandButtonValue()
         setUpOpertorButtonValue()
-        setUpNumberFormat()
-        setUpDefaultStatus()
         setUpHistoryStackView()
+        setUpDefaultStatus()
     }
     
     private func setUpNumberFormat() {
@@ -169,9 +169,7 @@ class CalculatorViewController: UIViewController {
     @IBAction private func operatorButtonAction(_ sender: OperatorButton) {
         guard let input = sender.value else { return }
         inputtingOperator = input
-        if statusZero {
-            return
-        }
+        guard !statusZero else { return }
         
         if historyStackView.arrangedSubviews.count < 1 {
             insertHistoryInStackView(inputtingOperand)
@@ -208,13 +206,8 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func executeCalculatingAction(_ sender: FunctionalButton) {
-        if formulaNotYetCalculated.isEmpty {
-            return
-        }
+        guard !formulaNotYetCalculated.isEmpty, !statusZero else  { return }
         
-        if statusZero {
-            return
-        }
         
         insertHistoryInStackView(formerOperator + inputtingOperand)
         formulaNotYetCalculated += inputtingOperand
