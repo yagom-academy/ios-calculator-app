@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var listScrollView: UIScrollView!
     @IBOutlet weak var numberListStackView: UIStackView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
@@ -71,6 +72,7 @@ class ViewController: UIViewController {
         addFormula(operation: operationText, operand: operandText)
         self.operandLabel.text = "0"
         self.isNoneNumber = true
+        listScrollView.scrollToBottom(labelStackView: numberListStackView)
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -84,7 +86,7 @@ class ViewController: UIViewController {
         if result.isNaN {
             self.isFirst = true
         }
-            self.operandLabel.text = changeNumberFormat(number: String(result))
+        self.operandLabel.text = changeNumberFormat(number: String(result))
         self.operationLabel.text = ""
         self.calculationFormula = ""
         self.isResult = true
@@ -112,8 +114,9 @@ class ViewController: UIViewController {
         let number = changeToDouble(number: number)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = -2
-        guard let changedNumber = numberFormatter.string(from: NSNumber(value: number)) else { return "" }
+        numberFormatter.maximumFractionDigits = 20
+        guard let changedNumber = numberFormatter.string(from: number as NSNumber) else { return "" }
+        if changedNumber == "-0" { return "0"}
         return changedNumber
     }
     
@@ -139,5 +142,13 @@ class ViewController: UIViewController {
         numberStackView.addArrangedSubview(makeLabel(element: operation))
         numberStackView.addArrangedSubview(makeLabel(element: changeNumberFormat(number: operand)))
         self.numberListStackView.addArrangedSubview(numberStackView)
+    }
+}
+
+extension UIScrollView {
+    func scrollToBottom(labelStackView: UIStackView) {
+        layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
+        setContentOffset(bottomOffset, animated: true)
     }
 }
