@@ -34,6 +34,11 @@ class ViewController: UIViewController {
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         operandLabel.text = "0"
     }
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        operatorLabel.text = sender.currentTitle
+    }
+    
     // MARK: - Method
     
     func updateOperandLabel(_ button: UIButton) {
@@ -62,14 +67,9 @@ class ViewController: UIViewController {
         return calculationStack
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
-
-
 }
-
