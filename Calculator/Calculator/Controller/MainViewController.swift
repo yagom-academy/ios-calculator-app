@@ -15,7 +15,6 @@ class MainViewController: UIViewController {
     
     private var expressionRecord: [String?] = []
     private var sumOfOperands: String = ""
-    private var isPlus: Bool = true
     private var isFirstTime: Bool = true
     private var isDotUsed: Bool = false
     
@@ -30,7 +29,6 @@ class MainViewController: UIViewController {
         self.sumOfOperands = ""
         self.operatorLabel.text = nil
         self.operandLabel.text = "0"
-        self.isPlus = true
         self.isFirstTime = true
         self.isDotUsed = false
     }
@@ -47,13 +45,11 @@ class MainViewController: UIViewController {
     @IBAction func signButtonClicked(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
-        } else if var numberScreen = operandLabel.text, isPlus == true {
-            numberScreen.insert("-", at: numberScreen.startIndex)
-            operandLabel.text = numberScreen
-            isPlus = false
+        } else if var sumOfOperand = operandLabel.text, sumOfOperand.first != "-" {
+            sumOfOperand.insert("-", at: sumOfOperand.startIndex)
+            operandLabel.text = sumOfOperand
         } else {
             operandLabel.text?.removeFirst()
-            isPlus = true
         }
     }
     
