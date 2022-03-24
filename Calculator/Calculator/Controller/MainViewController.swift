@@ -104,7 +104,7 @@ class MainViewController: UIViewController {
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
         guard operatorLabel.text != nil else { return }
-        operandLabel.text = changeToNumberFormatter(with: operandLabel.text ?? "")
+        operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         addToExpressionRecord(operatorLabel, operandLabel)
         operatorLabel.text = nil
         let expressionString: String = expressionRecord
