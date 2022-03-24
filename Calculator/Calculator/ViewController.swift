@@ -65,6 +65,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpChangeSign(_ sender: UIButton) {
+        if  operandLabel.text == "0" { return }
+        
         guard let operandText = operandLabel.text else { return }
         
         let nonCommaOperandText = removeComma(operandText)
