@@ -24,7 +24,6 @@ class CalculatorViewController: UIViewController {
             } catch {
                 setUpDefaultStatus()
             }
-            
         }
     }
     private var inputtingOperator: String = empty {
@@ -238,9 +237,6 @@ class CalculatorViewController: UIViewController {
             numberLabel.text = String(format: "%.\(String(20 - integerLength))f", result)
         } else {
             guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
-            
-            
-            
             numberLabel.text = numberFormattedResult
         }
     }
@@ -251,10 +247,6 @@ class CalculatorViewController: UIViewController {
         let decimalLength = componentsByDecimalSeperator[1].count
            
         return decimalLength >= 16 && integerLength + decimalLength < 20
-    }
-    
-    private func roundValueOfResult(_ result: Double) -> Double {
-        return 0.0
     }
     
     private func insertHistoryInStackView(_ inputted: String) {
