@@ -24,21 +24,21 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs+rhs
+        return lhs + rhs
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs-rhs
+        return lhs - rhs
     }
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0.0 {
             throw CalculateError.isNaN(.nan)
         }
-        return lhs/rhs
+        return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs*rhs
+        return lhs * rhs
     }
 }
