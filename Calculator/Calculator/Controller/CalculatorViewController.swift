@@ -40,18 +40,26 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperandButtons(_ sender: UIButton) {
-        guard let buttonTextLabel = sender.titleLabel?.text else {
+        guard let operandButtonsTextLabel = sender.titleLabel?.text else {
             return
         }
-        inputOperandsLabel(by: buttonTextLabel)
+        inputAtOperandsLabel(by: operandButtonsTextLabel)
     }
     
-    private func inputOperandsLabel(by inputText: String) {
-        temporaryFormula += inputText
+    private func inputAtOperandsLabel(by input: String) {
+        temporaryFormula += input
         operandsLabel.text = temporaryFormula
     }
     
     @IBAction func tappedOperatorButtons(_ sender: UIButton) {
+        guard let operatorButtonsTextLabel = sender.titleLabel?.text else {
+            return
+        }
+        inputOperatorsLabel(by: operatorButtonsTextLabel)
+    }
+    
+    private func inputOperatorsLabel(by input: String) {
+        operatorsLabel.text = input
     }
     
     @IBAction func tappedClearAndConversionButtons(_ sender: UIButton) {
