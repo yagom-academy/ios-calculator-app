@@ -11,6 +11,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var allCalculationStack: UIStackView!
     
+    private var numberFormatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            return formatter
+        }()
+    
     // MARK: - IBAction
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
