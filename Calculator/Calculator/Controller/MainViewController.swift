@@ -65,16 +65,16 @@ class MainViewController: UIViewController {
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard sumOfOperands.count < 20 else { return }
+        guard sumOfOperands.count < 16 else { return }
         
         if isFirstTime == false && operatorLabel.text == nil {
             return
-        } else if selectedOperand == "0" && sumOfOperands.first == "0" && isDotUsed == false {
+        } else if selectedOperand.last == "0" && sumOfOperands.first == "0" && isDotUsed == false {
             return
-        } else if selectedOperand == "0" && sumOfOperands.last == "." {
+        } else if selectedOperand.last == "0" && sumOfOperands.last == "." {
             sumOfOperands += selectedOperand
             operandLabel.text = changeToNumberFormatter(with: sumOfOperands.split(with: ".")[0]) + "." + sumOfOperands.split(with: ".")[1]
-        } else if selectedOperand == "0" && sumOfOperands.last == "0" && isDotUsed == true {
+        } else if selectedOperand.last == "0" && sumOfOperands.last == "0" && isDotUsed == true {
             sumOfOperands += selectedOperand
             operandLabel.text = changeToNumberFormatter(with: sumOfOperands.split(with: ".")[0]) + "." + sumOfOperands.split(with: ".")[1]
         } else {
