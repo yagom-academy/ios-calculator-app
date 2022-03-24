@@ -9,6 +9,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     private var temporaryOperandText: String = ""
+    private var isEmptyOperatorsLabel: Bool = true
 
     @IBOutlet weak var numberSingleZeroButton: UIButton!
     @IBOutlet weak var numberDoubleZeroButton: UIButton!
@@ -70,17 +71,33 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorButtons(_ sender: UIButton) {
-        guard let operatorButtonsTextLabel = sender.titleLabel?.text else {
+        guard let operatorButtonsTitleText = sender.titleLabel?.text else {
             return
         }
-        inputOperatorsLabel(by: operatorButtonsTextLabel)
+        let currentOperandsLabel = operandsLabel.text
+        
+        guard isValidOperatorsLabel(inputText: operatorButtonsTitleText,
+                                    currentOperandsLabel: currentOperandsLabel) else {
+            return
+        }
+        inputOperatorsLabel(by: operatorButtonsTitleText)
     }
     
-    private func inputOperatorsLabel(by input: String) {
-        operatorsLabel.text = input
+    private func isValidOperatorsLabel(inputText: String, currentOperandsLabel: String?) -> Bool {
+        if currentOperandsLabel == "0" {
+            return false
+        }
+        return true
+    }
+    
+    private func inputOperatorsLabel(by inputText: String) {
+        operatorsLabel.text = inputText
     }
     
     @IBAction func tappedAllClearButton(_ sender: UIButton) {
+        temporaryOperandText = ""
+        operatorsLabel.text = ""
+        operandsLabel.text = "0"
     }
     
     @IBAction func tappedClearElementButton(_ sender: UIButton) {
