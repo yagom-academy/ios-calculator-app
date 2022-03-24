@@ -8,7 +8,7 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    private var temporaryFormula: String = ""
+    private var temporaryOperandText: String = ""
 
     @IBOutlet weak var numberSingleZeroButton: UIButton!
     @IBOutlet weak var numberDoubleZeroButton: UIButton!
@@ -37,18 +37,36 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        operandsLabel.text = "0"
+        operatorsLabel.text = ""
     }
     
     @IBAction func tappedOperandButtons(_ sender: UIButton) {
-        guard let operandButtonsTextLabel = sender.titleLabel?.text else {
+        guard let operandButtonsTitleText = sender.titleLabel?.text else {
             return
         }
-        inputAtOperandsLabel(by: operandButtonsTextLabel)
+        let currentOperandsLabel = operandsLabel.text
+        
+        guard isValidZeroOrDot(inputText: operandButtonsTitleText,
+                               currentLabel: currentOperandsLabel) else {
+            return
+        }
+        inputAtOperandsLabel(by: operandButtonsTitleText)
     }
     
-    private func inputAtOperandsLabel(by input: String) {
-        temporaryFormula += input
-        operandsLabel.text = temporaryFormula
+    private func isValidZeroOrDot(inputText: String, currentLabel: String?) -> Bool {
+        if inputText.contains("0") && currentLabel == "0" {
+            return false
+        }
+        if inputText == "." && ((currentLabel?.contains(".")) == true) {
+            return false
+        }
+        return true
+    }
+    
+    private func inputAtOperandsLabel(by inputText: String) {
+        temporaryOperandText += inputText
+        operandsLabel.text = temporaryOperandText
     }
     
     @IBAction func tappedOperatorButtons(_ sender: UIButton) {
@@ -62,8 +80,7 @@ class CalculatorViewController: UIViewController {
         operatorsLabel.text = input
     }
     
-    @IBAction func tappedAllClearButton
-    (_ sender: UIButton) {
+    @IBAction func tappedAllClearButton(_ sender: UIButton) {
     }
     
     @IBAction func tappedClearElementButton(_ sender: UIButton) {
