@@ -31,6 +31,7 @@ struct Formula {
                 calculatedNumber = operatorToCalculate.calculate(lhs: calculatedNumber, rhs: numberToCalculate)
             }
         }
+        
         return calculatedNumber
     }
 }

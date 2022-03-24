@@ -28,6 +28,7 @@ enum ExpressionParser {
         for someOperator in operators {
             formula.operators.enqueue(someOperator)
         }
+        
         return formula
     }
     

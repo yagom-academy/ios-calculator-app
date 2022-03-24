@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var verticalStackView: UIStackView!
-    var flag = false
+    var isFirstOperand = true
+    var isOperandEntered = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class ViewController: UIViewController {
         currentOperatorLabel.text = ""
     }
     
-    // MARK: Label Changing Methods
+    // MARK: Operand Button Method
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         guard var currentOperand = currentOperandLabel.text else {
             return
@@ -59,10 +60,14 @@ class ViewController: UIViewController {
                 currentOperand += Number.decimalPoint.rawValue
             }
         }
+        
+        isOperandEntered = true
         currentOperandLabel.text = currentOperand
     }
     
+    // MARK: Operator Button Methods
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
+        
         guard var currentOperator = currentOperatorLabel.text else {
             return
         }
@@ -81,7 +86,36 @@ class ViewController: UIViewController {
         }
         
         currentOperatorLabel.text = currentOperator
-        insertLabelToHorizontalStackView()
+
+        if isOperandEntered == true {
+            insertLabelToHorizontalStackView()
+            currentOperandLabel.text = Number.zero.rawValue
+            isOperandEntered = false
+        }
+    }
+    
+    @IBAction func resultButtonClicked(_ sender: UIButton) {
+        guard verticalStackView.arrangedSubviews.last != nil else {
+            return
+        }
+
+    }
+    
+    // MARK: Extra Button Methods
+    @IBAction func allClearButtonClicked(_ sender: UIButton) {
+        guard verticalStackView.arrangedSubviews.last != nil else {
+            return
+        }
+        
+        for view in verticalStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        
+        currentOperandLabel.text = Number.zero.rawValue
+        currentOperatorLabel.text = ""
+    }
+
+    @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
         currentOperandLabel.text = Number.zero.rawValue
     }
     
@@ -94,15 +128,13 @@ class ViewController: UIViewController {
             let minusSign = currentNumber.first
             currentNumber = currentNumber.filter{ $0 != minusSign }
         } else {
-            currentNumber = "-\(currentNumber)"
+            currentNumber = String(Operator.subtract.rawValue) + currentNumber
         }
+        
         currentOperandLabel.text = currentNumber
     }
     
-    @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
-        currentOperandLabel.text = Number.zero.rawValue
-    }
-    
+    // MARK: StackView Related Method
     func insertLabelToHorizontalStackView() {
         let label = UILabel()
         
@@ -114,29 +146,16 @@ class ViewController: UIViewController {
             return
         }
         
-        if flag == false {
+        if isFirstOperand == true {
             label.text = "\(operandLabelText)"
             label.textColor = .white
             verticalStackView.addArrangedSubview(label)
-            flag = true
+            isFirstOperand = false
         } else {
-            label.text = "\(operatorLabelText)  \(operandLabelText)"
+            label.text = "\(operatorLabelText) \(operandLabelText)"
             label.textColor = .white
             verticalStackView.addArrangedSubview(label)
         }
-    }
-    
-    @IBAction func allClearButtonClicked(_ sender: UIButton) {
-        guard verticalStackView.arrangedSubviews.last != nil else {
-            return
-        }
-        
-        for view in verticalStackView.arrangedSubviews {
-            view.removeFromSuperview()
-        }
-        
-        currentOperandLabel.text = Number.zero.rawValue
-        currentOperatorLabel.text = ""
     }
 }
 
