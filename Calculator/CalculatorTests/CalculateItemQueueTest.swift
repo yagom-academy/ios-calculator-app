@@ -45,7 +45,7 @@ class CalculateItemQueueTest: XCTestCase {
             queue.enqueue(number)
         }
         for _ in 1...999 {
-            let _ = queue.dequeue
+            let _ = queue.dequeue()
         }
         let result = queue.count
         

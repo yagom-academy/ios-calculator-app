@@ -21,9 +21,10 @@ enum ExpressionParser {
         var operands = [String]()
         extractOperators(from: input).forEach {
             var splitedValues = newInput.split(with: $0.rawValue)
-            newInput = splitedValues.removeLast()
-            operands.append(splitedValues.removeLast())
-            if let _ = Int(newInput) { operands.append(newInput); return }
+            guard let remainingValue = splitedValues.popLast(),
+                  let operandValue = splitedValues.popLast() else { return }
+            newInput = remainingValue
+            operands.append(operandValue)
         }
         return operands
     }
