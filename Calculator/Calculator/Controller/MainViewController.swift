@@ -152,8 +152,7 @@ class MainViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumFractionDigits = 20
         let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(sumOfOperands) ?? 0)) ?? ""
         return operandExpressionForm
     }
