@@ -36,12 +36,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        let calculationStackView = [makeOperandLabel(labelText: operandLabel.text),
-         makeOperatorLabel(labelText: operatorLabel.text)].forEach { makeCalculationStackView().addArrangedSubview($0) }
+        let calculationStackView: UIStackView = makeCalculationStackView()
         
+        [makeLabel(labelText: operatorLabel.text),
+         makeLabel(labelText: operandLabel.text)].forEach { calculationStackView.addArrangedSubview($0) }
         
+        allCalculationStack.addArrangedSubview(calculationStackView)
         
         operatorLabel.text = sender.currentTitle
+        operandLabel.text = "0"
     }
     
     // MARK: - Method
