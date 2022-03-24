@@ -27,9 +27,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func appendOperatorToInputFormulaLabel(_ sender: UIButton) {
-        guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
-              let inputValue = inputFormulaLabel.text else { return }
-        inputFormulaLabel.text = inputValue+operatorValue
+        guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text else { return }
+        inputOperatorLabel.text = operatorValue
     }
     
     @IBAction func touchUpEntryClear() {
