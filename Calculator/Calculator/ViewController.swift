@@ -13,8 +13,7 @@ class ViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-
-        if operandLabel.text == "0" && sender.currentTitle != "." { operandLabel.text = "" }
+        if operandLabel.text == "0" { operandLabel.text = "" }
         
         guard let text = operandLabel.text, let inputText = sender.currentTitle else { return }
         
