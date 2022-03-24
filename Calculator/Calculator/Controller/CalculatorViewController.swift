@@ -91,7 +91,7 @@ extension CalculatorViewController {
             return
         }
         
-        if currentOperand.first?.description == Constant.zero {
+        if currentOperand.first?.description == Constant.zero && currentOperand.contains(Constant.dot) == false {
             currentOperand = operand
             operandLabel.text = currentOperand
             return
