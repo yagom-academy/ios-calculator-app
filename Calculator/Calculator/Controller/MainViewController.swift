@@ -112,6 +112,7 @@ final class MainViewController: UIViewController {
             sumOfOperands = ""
             isFirstTime = false
             isDotUsed = false
+            isNone = true
         }
     }
     
