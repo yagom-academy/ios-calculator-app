@@ -14,7 +14,13 @@ class ViewController: UIViewController {
     var touchedNumber: String = "0"
     var allOperation: [String] = []
 
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        clearAllHistory()
+    }
+}
+// MARK: IBAction
+extension ViewController {
     @IBAction func clickNumberButton(_ sender: UIButton) {
         if currentNumberLabbel.text == "0" {
             touchedNumber = sender.currentTitle ?? ""
@@ -32,11 +38,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickDotButton(_ sender: UIButton) {
-        if ((currentNumberLabbel.text?.contains(".")) == false) {
-            touchedNumber += sender.currentTitle ?? ""
-            let currentNumberLabbelText = currentNumberLabbel.text ?? ""
-            currentNumberLabbel.text = currentNumberLabbelText + "."
-        }
+        guard let currentNumber = currentNumberLabbel.text,
+                (currentNumber.contains(".") == false) else { return }
+        touchedNumber += "."
+        currentNumberLabbel.text = currentNumber + "."
     }
     
     @IBAction func clickZeroButton(_ sender: UIButton) {
@@ -89,7 +94,9 @@ class ViewController: UIViewController {
             allOperation = []
         }
     }
-    
+}
+// MARK: funtion
+extension ViewController {
     func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
         touchedNumber = "0"
@@ -100,8 +107,10 @@ class ViewController: UIViewController {
     func changeDecimalFormat(_ text: String) -> String {
         let numberFomatter = NumberFormatter()
         numberFomatter.numberStyle = .decimal
-        numberFomatter.usesSignificantDigits = true
+        numberFomatter.usesSignificantDigits = false
         numberFomatter.maximumSignificantDigits = 20
+        numberFomatter.maximumFractionDigits = 20
+        numberFomatter.maximumIntegerDigits = 20
         numberFomatter.roundingMode = .halfUp
         let number = numberFomatter.number(from: text) ?? 0
         
@@ -140,11 +149,4 @@ class ViewController: UIViewController {
         touchedNumber = "0"
         currentNumberLabbel.text = "0"
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        clearAllHistory()
-    }
-
 }
-
