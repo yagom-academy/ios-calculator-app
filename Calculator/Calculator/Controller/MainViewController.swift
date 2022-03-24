@@ -47,9 +47,10 @@ final class MainViewController: UIViewController {
     @IBAction func signButtonClicked(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
-        } else if var sumOfOperand = operandLabel.text, sumOfOperand.first != "-" {
-            sumOfOperand.insert("-", at: sumOfOperand.startIndex)
-            operandLabel.text = sumOfOperand
+        } else if var recentOperandLabel = operandLabel.text, recentOperandLabel.first != "-" {
+            recentOperandLabel.insert("-", at: recentOperandLabel.startIndex)
+            sumOfOperands = recentOperandLabel
+            operandLabel.text = sumOfOperands
         } else {
             operandLabel.text?.removeFirst()
         }
