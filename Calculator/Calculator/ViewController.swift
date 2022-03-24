@@ -52,22 +52,14 @@ class ViewController: UIViewController {
         operandLabel.text = text + inputText
     }
     
-    func makeOperandLabel(labelText: String?) -> UILabel {
+    func makeLabel(labelText: String?) -> UILabel {
         let operandLabel = UILabel()
         
         operandLabel.text = labelText
+        operandLabel.textColor = .white
         operandLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return operandLabel
-    }
-    
-    func makeOperatorLabel(labelText: String?) -> UILabel {
-        let operatorLabel = UILabel()
-        
-        operatorLabel.text = labelText
-        operatorLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        return operatorLabel
     }
     
     func makeCalculationStackView() -> UIStackView {
