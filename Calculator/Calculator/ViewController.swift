@@ -52,6 +52,13 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
     }
     
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+        allCalculationStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        setUpDefaultLabel()
+    }
+    
+    
     // MARK: - Method
     
     func updateOperandLabel(_ button: UIButton) {
