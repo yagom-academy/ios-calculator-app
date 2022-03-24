@@ -5,7 +5,7 @@ import XCTest
 
 class CalculatorItemQueueTests: XCTestCase {
     
-    var calculatorQueue = CalculatorItemQueue<Int>()
+    var calculatorQueue = CalculatorItemQueue<Double>()
     
     func test_When_enqueue_3_element_Expect_count_is_3() {
         //when
