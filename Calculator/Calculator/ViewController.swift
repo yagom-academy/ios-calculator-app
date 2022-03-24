@@ -33,11 +33,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEntryClear() {
-        guard let _ = inputFormulaLabel.text?.removeLast() else { return }
+        inputFormulaLabel.text?.removeLast()
     }
     
     @IBAction func touchUpAllClear() {
-        guard let _ = inputFormulaLabel.text?.removeAll() else { return }
+        inputFormulaLabel.text?.removeAll()
     }
     
     @IBAction func switchPlusAndMinus() {
