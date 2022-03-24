@@ -64,6 +64,15 @@ class ViewController: UIViewController {
         setUpDefaultLabel()
     }
     
+    @IBAction func touchUpChangeSign(_ sender: UIButton) {
+        guard let operandText = operandLabel.text else { return }
+        
+        let nonCommaOperandText = removeComma(operandText)
+        
+        guard let number = Double(nonCommaOperandText) else { return }
+        
+        operandLabel.text = numberFormatter.string(from: (number * -1) as NSNumber)
+    }
     
     // MARK: - Method
     
