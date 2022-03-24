@@ -97,8 +97,8 @@ extension ViewController {
     }
 }
 
-// MARK: funtion
-extension ViewController {
+// MARK: private funtion
+private extension ViewController {
     func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
         touchedNumber = "0"
@@ -118,28 +118,16 @@ extension ViewController {
     }
     
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
-        let newStack = UIStackView()
-        newStack.translatesAutoresizingMaskIntoConstraints = false
-        newStack.axis = .horizontal
-        newStack.alignment = .fill
-        newStack.distribution = .fill
-        newStack.spacing = 8
-        
-        let operatorLabel = UILabel()
-        operatorLabel.textColor = .white
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
-        
-        let numberLabel = UILabel()
-        numberLabel.textColor = .white
-        numberLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
-        
+        let operatorLabel = makeLabel()
+        let numberLabel = makeLabel()
         numberLabel.text = changeDecimalFormat(currentNumber)
         operatorLabel.text = currentOperator
-        newStack.addArrangedSubview(operatorLabel)
-        newStack.addArrangedSubview(numberLabel)
-        operationRecord.addArrangedSubview(newStack)
+        
+        let logStackView = makeStackView([operatorLabel, numberLabel])
+        operationRecord.addArrangedSubview(logStackView)
         view.layoutIfNeeded()
-        operationRecordScrollView.setContentOffset(CGPoint(x: 0, y: operationRecordScrollView.contentSize.height - operationRecordScrollView.frame.height), animated: true)
+        let contentBottom = operationRecordScrollView.contentSize.height - operationRecordScrollView.frame.height
+        operationRecordScrollView.setContentOffset(CGPoint(x: 0, y: contentBottom), animated: true)
         
         if allOperation.isEmpty == false {
             allOperation.append(currentOperator)
@@ -149,5 +137,22 @@ extension ViewController {
         touchedNumber = "0"
         currentNumberLabbel.text = "0"
     }
+    
+    func makeStackView(_ views: [UIView]) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: views)
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        return stackView
+    }
+    
+    func makeLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        return label
+    }
+    
     
 }
