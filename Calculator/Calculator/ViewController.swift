@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         inputFormulaLabel.text = "0"
+        inputOperatorLabel.text = ""
     }
     
     @IBAction func appendOperandToInputFormulaLabel(_ sender: UIButton) {
