@@ -6,7 +6,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     @IBOutlet weak var expressionRecordScrollView: UIScrollView!
     @IBOutlet weak var expressionRecordStackView: UIStackView!
@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         setInitialState()
     }
     
-    func setInitialState() {
+    private func setInitialState() {
         self.expressionRecordStackView.subviews.forEach{ $0.removeFromSuperview() }
         self.expressionRecord = []
         self.sumOfOperands = ""
@@ -54,9 +54,15 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func dotButtonClicked(_ sender: UIButton) {
-        guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard sumOfOperands.count < 16 else { return }
-        guard sumOfOperands.contains(".") == false else { return }
+        guard let selectedOperand = sender.titleLabel?.text else {
+            return
+        }
+        guard sumOfOperands.count < 16 else {
+            return
+        }
+        guard sumOfOperands.contains(".") == false else {
+            return
+        }
         
         sumOfOperands += selectedOperand
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands) + "."
@@ -64,8 +70,12 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
-        guard let selectedOperand = sender.titleLabel?.text else { return }
-        guard sumOfOperands.count < 16 else { return }
+        guard let selectedOperand = sender.titleLabel?.text else {
+            return
+        }
+        guard sumOfOperands.count < 16 else {
+            return
+        }
         
         if isFirstTime == false && operatorLabel.text == nil {
             return
@@ -103,7 +113,10 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func equalSignButtonClicked(_ sender: UIButton) {
-        guard operatorLabel.text != nil else { return }
+        guard operatorLabel.text != nil else {
+            return
+        }
+        
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         addToExpressionRecord(operatorLabel, operandLabel)
         operatorLabel.text = nil
@@ -114,21 +127,22 @@ class MainViewController: UIViewController {
         var expressionForm = ExpressionParser.parse(from: expressionString)
         let calculationResult = expressionForm.result()
         operandLabel.text = changeToNumberFormatter(with: calculationResult.description)
+        
         sumOfOperands = operandLabel.text ?? ""
         expressionRecord.removeAll()
         self.isDotUsed = false
+        
         if operandLabel.text == "NaN" {
             isFirstTime = true
         }
     }
     
-    func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
+    private func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
         let subStackView = UIStackView()
-        subStackView.spacing = 10
-        
         let operatorInLog = UILabel()
         let operandInLog = UILabel()
         
+        subStackView.spacing = 10
         operatorInLog.textColor = .white
         operandInLog.textColor = .white
         operatorInLog.text = operatorLabel.text
@@ -136,24 +150,23 @@ class MainViewController: UIViewController {
         
         subStackView.addArrangedSubview(operatorInLog)
         subStackView.addArrangedSubview(operandInLog)
-        
         expressionRecord.append(operatorInLog.text)
         expressionRecord.append(operandInLog.text)
         
         return subStackView
     }
     
-    func addToExpressionRecord(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
+    private func addToExpressionRecord(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
         expressionRecordStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
         expressionRecordScrollView.scrollToBottom()
     }
     
-    func changeToNumberFormatter(with sumOfOperands: String) -> String {
+    private func changeToNumberFormatter(with sumOfOperands: String) -> String {
         let numberFormatter = NumberFormatter()
+        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(sumOfOperands) ?? 0)) ?? ""
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumFractionDigits = 20
-        let operandExpressionForm = numberFormatter.string(from: NSNumber(value: Double(sumOfOperands) ?? 0)) ?? ""
         return operandExpressionForm
     }
 }
