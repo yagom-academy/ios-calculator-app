@@ -98,7 +98,7 @@ extension CalculatorViewController {
         }
                 
         currentOperand += operand
-        operandLabel.text = currentOperand.addCommaEveryThirdTime()
+        operandLabel.text = currentOperand.addedCommaToInteger()
     }
     
     private func updateOperand(by dot: String) {
@@ -175,12 +175,12 @@ extension CalculatorViewController {
             let result = try formula.result()
             updateCalculateResult(by: result)
         } catch (let error) {
-            handleError(error: error)
+            handle(error: error)
         }
     }
     
     private func updateCalculateResult(by result: Double) {
-        operandLabel.text = "\(result)"
+        operandLabel.text = result.description.addedCommaToInteger()
         reconfigureOperator()
     }
 }
@@ -210,27 +210,27 @@ extension CalculatorViewController {
 
 // MARK: - Error Handle Method
 extension CalculatorViewController {
-    private func handleError(error: Error) {
+    private func handle(error: Error) {
         if let calculatorError = error as? CalculatorError {
-            handleCalculatorError(error: calculatorError)
+            handle(calculatorError: calculatorError)
         }
         
         if let queueError = error as? QueueError {
-            handleQueueError(error: queueError)
+            handle(queueError: queueError)
         }
     }
     
-    private func handleCalculatorError(error: CalculatorError) {
-        if case .dividedByZero = error,
-           let errorDescription = error.errorDescription {
+    private func handle(calculatorError: CalculatorError) {
+        if case .dividedByZero = calculatorError,
+           let errorDescription = calculatorError.errorDescription {
             operandLabel.text = errorDescription
             operatorLabel.text = Constant.blank
         }
     }
     
-    private func handleQueueError(error: QueueError) {
-        if case .notFoundElement = error,
-            let errorDescription = error.errorDescription {
+    private func handle(queueError: QueueError) {
+        if case .notFoundElement = queueError,
+            let errorDescription = queueError.errorDescription {
             assertionFailure(errorDescription)
         }
     }

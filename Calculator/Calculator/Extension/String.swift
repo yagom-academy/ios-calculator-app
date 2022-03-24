@@ -17,7 +17,7 @@ extension String {
             .map { String($0) }
     }
     
-    func addCommaEveryThirdTime() -> String {
+    func addedCommaToInteger() -> String {
         let maximumSignificantDigits = 20
         let numberFormatter = NumberFormatter()
         let splitCurrentOperand = self.split(with: Character(Constant.dot))
