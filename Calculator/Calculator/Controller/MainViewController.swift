@@ -17,6 +17,7 @@ final class MainViewController: UIViewController {
     private var sumOfOperands: String = ""
     private var isFirstTime: Bool = true
     private var isDotUsed: Bool = false
+    private var isNone: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
