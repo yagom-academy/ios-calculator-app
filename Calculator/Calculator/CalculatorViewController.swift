@@ -96,7 +96,7 @@ class CalculatorViewController: UIViewController {
     
     private func setUpNumberFormat() {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp
     }
     
@@ -208,7 +208,6 @@ class CalculatorViewController: UIViewController {
     @IBAction private func executeCalculatingAction(_ sender: FunctionalButton) {
         guard !formulaNotYetCalculated.isEmpty, !statusZero else  { return }
         
-        
         insertHistoryInStackView(formerOperator + inputtingOperand)
         formulaNotYetCalculated += inputtingOperand
         clearInputtingOperand()
@@ -222,11 +221,29 @@ class CalculatorViewController: UIViewController {
     private func configureCalculateResultLabel(_ result: Double) {
         if result.isNaN {
             numberLabel.text = CalculatorViewController.nanResult
+        } else if cannotUseNumberFormatter(result) {
+            let integerLength = String(result).components(separatedBy: ".")[0].count
+            numberLabel.text = String(format: "%.\(String(20 - integerLength))f", result)
         } else {
             guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
+            
+            
+            
             numberLabel.text = numberFormattedResult
         }
     }
+    
+    private func cannotUseNumberFormatter(_ result: Double) -> Bool {
+        let componentsByDecimalSeperator = String(result).components(separatedBy: ".")
+        let integerLength = componentsByDecimalSeperator[0].count
+        let decimalLength = componentsByDecimalSeperator[1].count
+        
+        guard decimalLength < 17, integerLength + decimalLength >= 20 else {
+            return false
+        }
+        return true
+    }
+    
     
     private func insertHistoryInStackView(_ inputted: String) {
         let stackView = historyStackView(inputted)
