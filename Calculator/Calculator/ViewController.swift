@@ -83,7 +83,11 @@ class ViewController: UIViewController {
     func updateOperandLabel(_ button: UIButton) {
         guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
         
-        operandLabel.text = operandText + inputText
+        let nonCommaOperandText = removeComma(operandText + inputText)
+        
+        guard let number = numberFormatter.number(from: nonCommaOperandText) else { return }
+        
+        operandLabel.text = numberFormatter.string(from: number)
     }
     
     func makeLabel(labelText: String?) -> UILabel {
