@@ -5,10 +5,7 @@
 
 - [프로젝트 규칙](#프로젝트-규칙)
 - [UML](#프로젝트-규칙)
-- [STEP 1 기능 구현](#step-1-기능-구현)
-    + [고민했던 것들](#고민했던-것들)
-    + [배운 개념](#배운-개념)
-    + [PR 후 개선사항](#pr-후-개선사항)
+
 ## 프로젝트 규칙
 - 🕐 시간
     - 월,화,목 AM09:00 ~ PM08:00 + α
@@ -126,5 +123,73 @@ func parse(from input: String) -> Formula
 - *`기존 타입의 확장 및 메서드 생성`*
 - *`map & compactMap`*
 - *`nan`*
+
+## STEP 3 기능 구현
+- STEP1 ~ STEP2 에서 만든 기능을 UI에 연결
+- 화면에 터치한 숫자, 연산자 등과 결과를 표시하는 기능 구현
+## 고민했던 것들
+### 1. ScrollView의 레이아웃 과정에서의 문제점
+![](https://i.imgur.com/uynlj4h.png)
+어플 실행시에는 ScrollView에는 아무 컨텐츠도 없는데 빨간줄이 뜨더라도 이렇게 비워줘야 하는지 아니면 아무 요소라도 추가하고 뷰 실행 시 제거해줘야 하는지 고민
+->일단은 후자의 방법대로 추가 해놓고 어플 실행시 ViewDidLoad에서 제거해줌
+
+### 2. Double의 유효 자릿수 문제
+![](https://i.imgur.com/oeAOF50.png)
+Double의 유효 자릿수는 15자리 이지만 이번 프로젝트에서는 화면에 20자리까지 나타내기를 요청함
+Decimal타입을 이용해 어떻게 해보려고 했으나 해당 프로젝트에서 사용되는 Double을 모두 Decimal로 대체하지 않는 이상 표현이 어렵다고 생각해 콤마 포함 20자리 수로 나타내기로 결정
+(하지만 계산 결과는 여전히 문제...)
+
+### 3. 뷰 변화 반영 시점
+
+숫자를 추가한 이후 ScrollView안에 있는 스택뷰에 추가되었으며 아래와 같은 코드를 통해 최하단으로 스크롤 하는 기능을 구현
+```swift
+    func scrollToBottom(labelStackView: UIStackView) {
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
+        setContentOffset(bottomOffset, animated: true)
+```
+ScrollView가 갖고 있는 컨텐츠의 높이에서 스크롤뷰의 높이 만큼 빼준 값의 위치로 이동한다는 점에 있어 문제가 없다고 생각 했으나 리스트 한개씩 밀려서 올라오는 문제가 발생
+
+![](https://i.imgur.com/SqN7o2a.png)
+
+추가 전 ScrollView안에 있는 스택뷰의 크기를 확인 하고 추가 후 확인 했을 때 변화가 없었음
+그래서 확인 결과 뷰의 변화가 반영되는 시점? 에 대한 글을 읽게 되었는데 그 글에 다르면
+```swift
+    func scrollToBottom(labelStackView: UIStackView) {
+        layoutIfNeeded()  // << 요거!
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
+        setContentOffset(bottomOffset, animated: true)
+```
+해당 메서드를 통해 레이 아웃을 바로 갱신 시킬 수 있었음
+
+### 4. NumberFormatter의 maxSignificantDigits 란??
+![](https://i.imgur.com/APd4KzR.png)
+
+![](https://i.imgur.com/vkns1jz.png)
+계산 결과가 위와 같이 나오는 케이스들이 너무 많았는데 부동소수점의 문제점이긴 하지만 해당 문제는 NumberFormatter의 maxSignificantDigits를 사용함에 있어 문제가 발생했음
+
+```swift
+let numberFormatter = NumberFormatter()
+numberFormatter.maximumIntegerDigits = 10 // 1번
+numberFormatter.maximumFractionDigits = 10 // 2번
+numberFormatter.maximumSignificantDigits = 10 // 3번
+```
+
+NumberFormatter에서 자릿수를 제한하는 키워드는 위와 같이 세가지가 있는데 
+1번은 정수의 자릿수를, 
+2번은 소수의 자릿수를 제한하는 기능이라고 확인을 했으나 
+3번의 경우 공식 문서와 그 예시로는 파악을 하기가 어려워 대충 정수와 소수를 원하는 자릿수로 제한하는 기능이라고 추측을 하고 사용하여 위와 같은 문제가 발생
+
+추후 Double의 유효자릿 수에 대해 찾아보면서 Significant Digits를 직역하면 유효 자릿수라는 사실을 알게 되면서 `maximumSignificantDigits` 는 최대 유효자릿수를 설정해 주는 키워드로 확인 했으며 그로 인해 문제가 발생 한 것으로 파악했음(하지만, 이 부분도 추측이면 정확한 사실은 아님...)
+
+
+
+## 배운 개념
+- Double의 유효 자릿수
+- Decimal
+- 부동 소수점의 오차 범위
+- 코드로 UI요소 추가 및 제거 방법
+- Scroll View
+- frame과 bounds의 차이
+- NumberFormatter
 
 ## PR 후 개선사항
