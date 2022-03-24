@@ -36,6 +36,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        if  operandLabel.text == "0" {
+            operatorLabel.text = sender.currentTitle
+            return
+        }
+        
         let calculationStackView: UIStackView = makeCalculationStackView()
         
         [makeLabel(labelText: operatorLabel.text),
