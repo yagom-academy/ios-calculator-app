@@ -81,9 +81,13 @@ class ViewController: UIViewController {
         return calculationStack
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func setUpDefaultLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpDefaultLabel()
     }
 }
