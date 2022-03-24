@@ -41,6 +41,17 @@ class ViewController: UIViewController {
         operandLabel.text = text + inputText
     }
     
+    func makeOperandLabel(labelText: String) -> UILabel {
+        let operandLabel = UILabel()
+        
+        operandLabel.text = labelText
+        operandLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return operandLabel
+    }
+    
+    
+    
     
     
     override func viewDidLoad() {
