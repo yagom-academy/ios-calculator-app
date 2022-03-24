@@ -69,14 +69,14 @@ class MainViewController: UIViewController {
         
         if isFirstTime == false && operatorLabel.text == nil {
             return
-        } else if selectedOperand == "0" && sumOfOperands.last == "." {
-            sumOfOperands += selectedOperand
-            operandLabel.text = sumOfOperands
-        } else if selectedOperand == "0" && sumOfOperands.last == "0" && isDotUsed == true {
-            sumOfOperands += selectedOperand
-            operandLabel.text = sumOfOperands
         } else if selectedOperand == "0" && sumOfOperands.first == "0" && isDotUsed == false {
             return
+        } else if selectedOperand == "0" && sumOfOperands.last == "." {
+            sumOfOperands += selectedOperand
+            operandLabel.text = changeToNumberFormatter(with: sumOfOperands.split(with: ".")[0]) + "." + sumOfOperands.split(with: ".")[1]
+        } else if selectedOperand == "0" && sumOfOperands.last == "0" && isDotUsed == true {
+            sumOfOperands += selectedOperand
+            operandLabel.text = changeToNumberFormatter(with: sumOfOperands.split(with: ".")[0]) + "." + sumOfOperands.split(with: ".")[1]
         } else {
             sumOfOperands += selectedOperand
             operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
