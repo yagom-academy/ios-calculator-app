@@ -103,9 +103,8 @@ final class MainViewController: UIViewController {
             return
         } else if isFirstTime == true && operandLabel.text == "NaN" {
             return
-        } else if isFirstTime == false && operandLabel.text == "0" {
+        } else if isFirstTime == false && operandLabel.text == "0" && isNone == true {
             operatorLabel.text = sender.titleLabel?.text
-            return
         } else {
             addToExpressionRecord(operatorLabel, operandLabel)
             operatorLabel.text = sender.titleLabel?.text
