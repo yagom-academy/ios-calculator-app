@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         inputFormulaLabel.text = inputValue+operand
     }
     
-    @IBAction func appendOperatorToInputFormulaLabel(_ sender: UIButton) {
+    @IBAction func appendInputFormulaLabelToCalculatingValueLabel(_ sender: UIButton) {
         guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let operandValue = inputFormulaLabel.text else { return }
         inputOperatorLabel.text = operatorValue
