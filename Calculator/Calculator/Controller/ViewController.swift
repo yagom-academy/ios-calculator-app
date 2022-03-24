@@ -83,7 +83,6 @@ class ViewController: UIViewController {
         addFormula(operation: operationText, operand: operandText)
         self.operandLabel.text = "0"
         self.isNoneNumber = true
-        listScrollView.scrollToBottom(labelStackView: numberListStackView)
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -154,13 +153,14 @@ class ViewController: UIViewController {
         numberStackView.addArrangedSubview(makeLabel(element: operation))
         numberStackView.addArrangedSubview(makeLabel(element: changeNumberFormat(number: operand)))
         self.numberListStackView.addArrangedSubview(numberStackView)
+        self.listScrollView.scrollToBottom(labelStackView: numberListStackView)
     }
 }
 
 extension UIScrollView {
     func scrollToBottom(labelStackView: UIStackView) {
         layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
         setContentOffset(bottomOffset, animated: true)
     }
 }
