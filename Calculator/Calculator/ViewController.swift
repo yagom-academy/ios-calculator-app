@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         clearAllHistory()
     }
 }
+
 // MARK: IBAction
 extension ViewController {
     @IBAction func clickNumberButton(_ sender: UIButton) {
@@ -95,6 +96,7 @@ extension ViewController {
         }
     }
 }
+
 // MARK: funtion
 extension ViewController {
     func clearAllHistory() {
@@ -105,8 +107,10 @@ extension ViewController {
     }
     
     func changeDecimalFormat(_ text: String) -> String {
+        guard text != "nan" else { return "NaN" }
         let numberFomatter = NumberFormatter()
         numberFomatter.numberStyle = .decimal
+        
         let number = numberFomatter.number(from: text) ?? 0
         
         let changedNumber = numberFomatter.string(from: number) ?? ""
@@ -134,7 +138,8 @@ extension ViewController {
         newStack.addArrangedSubview(operatorLabel)
         newStack.addArrangedSubview(numberLabel)
         operationRecord.addArrangedSubview(newStack)
-        operationRecordScrollView.setContentOffset(CGPoint(x: 0, y: operationRecordScrollView.contentSize.height), animated: false)
+        view.layoutIfNeeded()
+        operationRecordScrollView.setContentOffset(CGPoint(x: 0, y: operationRecordScrollView.contentSize.height - operationRecordScrollView.frame.height), animated: true)
         
         if allOperation.isEmpty == false {
             allOperation.append(currentOperator)
@@ -144,4 +149,5 @@ extension ViewController {
         touchedNumber = "0"
         currentNumberLabbel.text = "0"
     }
+    
 }
