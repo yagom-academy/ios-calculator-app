@@ -30,6 +30,9 @@ class ViewController: UIViewController {
         updateOperandLabel(sender)
     }
     
+    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
+        operandLabel.text = "0"
+    }
     // MARK: - Method
     
     func updateOperandLabel(_ button: UIButton) {
