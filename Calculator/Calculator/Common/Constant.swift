@@ -8,4 +8,5 @@
 enum Constant {
     static let blank = ""
     static let whiteSpace = " "
+    static let dot = "."
 }

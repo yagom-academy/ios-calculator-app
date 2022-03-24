@@ -91,7 +91,7 @@ extension CalculatorViewController {
             return
         }
         
-        if currentOperand == Constant.zero {
+        if currentOperand.first?.description == Constant.zero {
             currentOperand = operand
             operandLabel.text = currentOperand
             return
@@ -180,7 +180,15 @@ extension CalculatorViewController {
     }
     
     private func updateCalculateResult(by result: Double) {
-        operandLabel.text = result.description.addedCommaToInteger()
+        if currentOperand.contains(Constant.dot) {
+            operandLabel.text = result.description.addedCommaToInteger()
+        }
+        
+        if currentOperand.contains(Constant.dot) == false {
+            let convertedDoubleToInt = Int(result)
+            operandLabel.text = convertedDoubleToInt.description.addedCommaToInteger()
+        }
+        
         reconfigureOperator()
     }
 }

@@ -7,10 +7,6 @@
 
 import Foundation
 
-fileprivate extension Constant {
-    static let dot = "."
-}
-
 extension String {
     func split(with target: Character) -> [String] {
         return self.split(separator: target)
@@ -23,7 +19,6 @@ extension String {
         let splitCurrentOperand = self.split(with: Character(Constant.dot))
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = maximumSignificantDigits
         
         guard let integerOperand = splitCurrentOperand.first,
