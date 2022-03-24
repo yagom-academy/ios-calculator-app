@@ -13,12 +13,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var plusAndMinusBtn: UIButton!
     @IBOutlet weak var calculationBtn: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        inputFormulaLabel.text = "0"
     }
     
-    
+    @IBAction func appendOperandToInputFormulaLabel(_ sender: UIButton) {
+        guard let operand = operandBtns[sender.tag].titleLabel?.text,
+              let inputValue = inputFormulaLabel.text else { return }
+        inputFormulaLabel.text = inputValue+operand
+    }
 }
 
