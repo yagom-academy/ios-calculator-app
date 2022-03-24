@@ -33,7 +33,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEntryClearToInputFormulaLabel() {
-        inputFormulaLabel.text?.removeLast()
+        if inputOperatorLabel.text?.isEmpty == true {
+            inputFormulaLabel.text?.removeLast()
+            inputFormulaLabel.text = "0"
+        }
     }
     
     @IBAction func touchUpAllClearToInputFormulaLabel() {
