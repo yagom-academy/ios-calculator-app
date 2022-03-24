@@ -367,6 +367,7 @@
                         <outlet property="currentNumberLabbel" destination="Lwz-OF-XHD" id="Gpm-uv-mXj"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="Kz8-QY-bgZ"/>
                         <outlet property="operationRecord" destination="XRe-QE-UJf" id="CCv-Ja-VSA"/>
+                        <outlet property="operationRecordScrollView" destination="BOT-7g-vxv" id="w4W-w2-gPm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

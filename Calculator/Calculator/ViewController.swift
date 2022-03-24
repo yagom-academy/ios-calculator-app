@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentNumberLabbel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var operationRecord: UIStackView!
+    @IBOutlet weak var operationRecordScrollView: UIScrollView!
     var touchedNumber: String = "0"
     var allOperation: [String] = []
 
@@ -27,7 +28,6 @@ class ViewController: UIViewController {
         if touchedNumber != "0" {
             addNumberAndOperator(currentOperatorLabel.text ?? "", touchedNumber)
         }
-        
         currentOperatorLabel.text = sender.currentTitle
     }
     
@@ -89,6 +89,7 @@ class ViewController: UIViewController {
             allOperation = []
         }
     }
+    
     func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
         touchedNumber = "0"
@@ -129,6 +130,7 @@ class ViewController: UIViewController {
         newStack.addArrangedSubview(operatorLabel)
         newStack.addArrangedSubview(numberLabel)
         operationRecord.addArrangedSubview(newStack)
+        operationRecordScrollView.setContentOffset(CGPoint(x: 0, y: operationRecordScrollView.contentSize.height), animated: false)
         
         if allOperation.isEmpty == false {
             allOperation.append(currentOperator)
@@ -142,7 +144,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearAllHistory()
-        // 뷰가 로드 될 때 화면을 초기화 하는 함수 따로 만들기
     }
 
 }
