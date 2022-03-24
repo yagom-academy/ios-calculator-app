@@ -39,4 +39,12 @@ class ViewController: UIViewController {
     @IBAction func touchUpAllClear() {
         guard let _ = inputFormulaLabel.text?.removeAll() else { return }
     }
+    
+    @IBAction func switchPlusAndMinus() {
+        if inputOperatorLabel.text == "➕" {
+            inputOperatorLabel.text = "➖"
+        } else {
+            inputOperatorLabel.text = "➕"
+        }
+    }
 }
