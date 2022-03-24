@@ -7,6 +7,8 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    
+    private var temporaryFormula: String = ""
 
     @IBOutlet weak var numberSingleZeroButton: UIButton!
     @IBOutlet weak var numberDoubleZeroButton: UIButton!
@@ -30,17 +32,26 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var clearElementButton: UIButton!
     @IBOutlet weak var positiveNegativeConversionButton: UIButton!
     
-    @IBOutlet weak var operatorComeInLabel: UILabel!
-    @IBOutlet weak var operandComeInLabel: UILabel!
+    @IBOutlet weak var operatorsLabel: UILabel!
+    @IBOutlet weak var operandsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func tappedOperandsButtons(_ sender: UIButton) {
+    @IBAction func tappedOperandButtons(_ sender: UIButton) {
+        guard let buttonTextLabel = sender.titleLabel?.text else {
+            return
+        }
+        inputOperandsLabel(by: buttonTextLabel)
     }
     
-    @IBAction func tappedOperatorsButtons(_ sender: UIButton) {
+    private func inputOperandsLabel(by inputText: String) {
+        temporaryFormula += inputText
+        operandsLabel.text = temporaryFormula
+    }
+    
+    @IBAction func tappedOperatorButtons(_ sender: UIButton) {
     }
     
     @IBAction func tappedClearAndConversionButtons(_ sender: UIButton) {
