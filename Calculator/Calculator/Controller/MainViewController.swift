@@ -72,6 +72,37 @@ final class MainViewController: UIViewController {
         self.isDotUsed = true
     }
     
+    private func recombineByDot(with selectedOperand: String) {
+        guard let integer = sumOfOperands.split(with: ".").first else {
+            return
+        }
+        guard let numberAfterDot = sumOfOperands.split(with: ".").last else {
+            return
+        }
+        operandLabel.text = changeToNumberFormatter(with: integer) + "." + numberAfterDot
+    }
+    
+    private func workByCase(of selectedOperand: String) {
+        if isFirstTime == false && operatorLabel.text == nil {
+            return
+        } else if selectedOperand.last == "0" && sumOfOperands.first == "0" && isDotUsed == false {
+            return
+        } else if selectedOperand.last == "0" && sumOfOperands.last == "." {
+            sumOfOperands += selectedOperand
+            recombineByDot(with: selectedOperand)
+        } else if selectedOperand.last == "0" && sumOfOperands.last == "0" && isDotUsed == true {
+            sumOfOperands += selectedOperand
+            recombineByDot(with: selectedOperand)
+        } else if operandLabel.text == "NaN" {
+            setInitialState()
+            sumOfOperands += selectedOperand
+            operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
+        } else {
+            sumOfOperands += selectedOperand
+            operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
+        }
+    }
+    
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else {
             return
@@ -80,23 +111,11 @@ final class MainViewController: UIViewController {
             return
         }
         
-        if isFirstTime == false && operatorLabel.text == nil {
-            return
-        } else if selectedOperand.last == "0" && sumOfOperands.first == "0" && isDotUsed == false {
-            return
-        } else if selectedOperand.last == "0" && sumOfOperands.last == "." {
-            sumOfOperands += selectedOperand
-            operandLabel.text = changeToNumberFormatter(with: sumOfOperands.split(with: ".")[0]) + "." + sumOfOperands.split(with: ".")[1]
-        } else if selectedOperand.last == "0" && sumOfOperands.last == "0" && isDotUsed == true {
-            sumOfOperands += selectedOperand
-            operandLabel.text = changeToNumberFormatter(with: sumOfOperands.split(with: ".")[0]) + "." + sumOfOperands.split(with: ".")[1]
-        } else {
-            sumOfOperands += selectedOperand
-            operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
-        }
+        workByCase(of: selectedOperand)
+        
         isNone = false
     }
-    
+
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         if isFirstTime == true && operandLabel.text == "0" {
@@ -116,29 +135,42 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func equalSignButtonClicked(_ sender: UIButton) {
-        guard operatorLabel.text != nil else {
-            return
-        }
-        
+    private func prepareBeforeResult() {
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         addToExpressionRecord(operatorLabel, operandLabel)
         operatorLabel.text = nil
+    }
+    
+    private func calculate() -> String {
         let expressionString: String = expressionRecord
                                         .compactMap{ $0 }
                                         .joined(separator: " ")
                                         .replacingOccurrences(of: ",", with: "")
         var expressionForm = ExpressionParser.parse(from: expressionString)
-        let calculationResult = expressionForm.result()
-        operandLabel.text = changeToNumberFormatter(with: calculationResult.description)
-        
+        return changeToNumberFormatter(with: expressionForm.result().description)
+    }
+    
+    private func workAfter(_ result: String) {
+        if result == "-0" {
+            operandLabel.text = "0"
+        } else {
+            operandLabel.text = result
+        }
         sumOfOperands = operandLabel.text ?? ""
         expressionRecord.removeAll()
-        self.isDotUsed = false
-        
-        if operandLabel.text == "NaN" {
-            isFirstTime = true
+        isDotUsed = false
+    }
+    
+    @IBAction func equalSignButtonClicked(_ sender: UIButton) {
+        guard operatorLabel.text != nil else {
+            return
         }
+        
+        prepareBeforeResult()
+        
+        let result = calculate()
+        
+        workAfter(result)
     }
     
     private func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
