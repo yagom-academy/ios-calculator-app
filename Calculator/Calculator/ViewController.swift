@@ -64,9 +64,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clickAC(_ sender: UIButton) {
-        operationRecord.subviews.forEach { $0.removeFromSuperview() }
-        touchedNumber = "0"
-        currentNumberLabbel.text = "0"
+        clearAllHistory()
+    }
+    
+    @IBAction func clickEC(_ sender: UIButton) {
+        if allOperation.isEmpty {
+            clearAllHistory()
+        } else {
+            touchedNumber = "0"
+            currentNumberLabbel.text = touchedNumber
+        }
     }
 
     @IBAction func clickCalculateButton(_ sender: UIButton) {
@@ -81,6 +88,12 @@ class ViewController: UIViewController {
             touchedNumber = changeDecimalFormat("\(result)").replacingOccurrences(of: ",", with: "")
             allOperation = []
         }
+    }
+    func clearAllHistory() {
+        operationRecord.subviews.forEach { $0.removeFromSuperview() }
+        touchedNumber = "0"
+        currentNumberLabbel.text = "0"
+        currentOperatorLabel.text = ""
     }
     
     func changeDecimalFormat(_ text: String) -> String {
@@ -128,6 +141,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        clearAllHistory()
         // 뷰가 로드 될 때 화면을 초기화 하는 함수 따로 만들기
     }
 
