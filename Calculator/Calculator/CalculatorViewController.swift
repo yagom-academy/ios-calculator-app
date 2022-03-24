@@ -19,6 +19,12 @@ class CalculatorViewController: UIViewController {
     private var inputtingOperand: String = zero {
         didSet {
             numberLabel.text = inputtingOperand
+            do {
+                try inputIsWithinRange(inputtingOperand)
+            } catch {
+                setUpDefaultStatus()
+            }
+            
         }
     }
     private var inputtingOperator: String = empty {
@@ -61,6 +67,12 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var historyScrollView: UIScrollView!
     @IBOutlet private weak var historyStackView: UIStackView!
+    
+    private func inputIsWithinRange(_ inputtingOperand: String) throws {
+        guard inputtingOperand.count <= 20 else {
+            throw CalculatorError.outOfInputRange
+        }
+    }
     
     private func setUpDefaultStatus() {
         clearFormula()
@@ -237,13 +249,13 @@ class CalculatorViewController: UIViewController {
         let componentsByDecimalSeperator = String(result).components(separatedBy: ".")
         let integerLength = componentsByDecimalSeperator[0].count
         let decimalLength = componentsByDecimalSeperator[1].count
-        
-        guard decimalLength < 17, integerLength + decimalLength >= 20 else {
-            return false
-        }
-        return true
+           
+        return decimalLength >= 16 && integerLength + decimalLength < 20
     }
     
+    private func roundValueOfResult(_ result: Double) -> Double {
+        return 0.0
+    }
     
     private func insertHistoryInStackView(_ inputted: String) {
         let stackView = historyStackView(inputted)
