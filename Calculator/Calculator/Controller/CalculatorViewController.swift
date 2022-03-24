@@ -43,6 +43,8 @@ class CalculatorViewController: UIViewController {
     @IBAction func tappedOperatorsButtons(_ sender: UIButton) {
     }
     
+    @IBAction func tappedClearAndConversionButtons(_ sender: UIButton) {
+    }
     
 }
 
