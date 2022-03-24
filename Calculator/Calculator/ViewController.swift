@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         inputFormulaLabel.text = ""
         inputOperatorLabel.text = ""
+        removeOperatorLabelTextAtInputValueIsZero()
     }
     
     @IBAction func appendOperandToInputFormulaLabel(_ sender: UIButton) {
@@ -44,6 +45,12 @@ class ViewController: UIViewController {
             inputOperatorLabel.text = "➖"
         } else {
             inputOperatorLabel.text = "➕"
+        }
+    }
+    
+    func removeOperatorLabelTextAtInputValueIsZero() {
+        if inputFormulaLabel.text == "0" {
+            inputOperatorLabel.text?.removeAll()
         }
     }
 }
