@@ -165,3 +165,63 @@ print(sum)
 
 ## ExpressionParser가 enum으로 구현된 이유
 - 메모리에 계속 살아있는 네임스페이스를 사용하기 위함이다. struct나 class의 인스턴스메소드로 선언해주고 매번 인스턴스를 만들어 사용하는 방법도 있으나 앱 전역적으로 살아있어야하기때문이라면 매번 생성할 필요없이 enum을 만들어주는 편이다. (울라프 조언)
+
+## STEP2 PR하면서 얻은 내용
+- Author는 나중에 코드에 궁금증이나 이상이생겼을떄 만든사람에게 여쭤볼 수 있으니 그대로 두는게 좋다.
+- override메서드는 super를 호출하는게 원칙중 하나이다. 꼭 불러줘야한다.
+- TDD를 작성할때는 User가 어떻게 입력할지 ? 생각하면서 엣지케이스를 작성하는게 좋다.
+- 메소드를 동사형으로 사용할떄는 사이드이펙이 발생하는 코드를 뜻하고 메서드가 과거분사이면 사이드이펙이없고 연산프로퍼티는 사이드이펙이없이 단순 값을 반환하는 역할로 사용 될 수 있다. (https://www.swiftbysundell.com/tips/computed-properties-vs-methods/)
+- 이모지로 연산자를 사용하는 방법이 구분되고 잘 사용하는 방법일 수 있지만 나중에 어떠한 사이드이펙을 발생시킬지는 의문일 수 있어 가능하다면 수정하는게 좋을 것같다.
+- 아래와 같이 로직을 직접 그려보는게 이해하는데 굉장히 도움이 많이되서 code practing은 이해가안될때나 설명할때 사용하면 좋습니다.
+```swift
+예시) 5➕10➖5➗2 ✖️3➕5
+operands = 5,10,5,2,3,5
+operators = ➕, ➖, ➗, ✖️, ➕
+var operandsCount = 6
+
+첫번째 반복문, 2...6
+var result = operands.dequeue //5
+var operandValue = operands.dequeue //10
+var operatorValue  = operators.dequeue //➕
+result = operatorValue.calculate(5➕10)
+
+두번째 반복문, 3...6
+operands = 5,2,3,5
+operators = ➖,➗,✖️,➕
+
+var result = 15
+var operandValue = operands.dequeue //5
+var operatorValue  = operators.dequeue //➖
+result = operatorValue.calculate(15➖5)
+
+세번째 반복문, 4...6
+operands = 2,3,5
+operators = ➗,✖️,➕
+
+var result = 10
+var operandValue = operands.dequeue //2
+var operatorValue  = operators.dequeue //➗
+result = operatorValue.calculate(10➗2)
+
+네번째 반복문, 5...6
+operands = 3,5
+operators = ✖️,➕
+
+var result = 5
+var operandValue = operands.dequeue //3
+var operatorValue  = operators.dequeue //✖️
+result = operatorValue.calculate(5✖️3)
+
+
+다섯번째 반복문, 6...6
+operands = 5
+operators = ➕
+
+var result = 15
+var operandValue = operands.dequeue //5
+var operatorValue  = operators.dequeue //➕
+result = operatorValue.calculate(15➕5)
+
+return result //20
+```
+- flatMap은 디플리케이티드 예정인게 있어서 잘 참고하고 사용하는게 좋고 혹여나 디플리케이티드가 되있는 코드는 언제 삭제해도 이상하지않다는걸 애플이 공지한거라서 나중에 디플리케이티드된 메서드가 삭제되면 빌드자체가 안되기때문에 지양해야한다.
