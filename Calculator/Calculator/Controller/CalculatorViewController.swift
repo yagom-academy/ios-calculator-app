@@ -31,8 +31,6 @@ final class CalculatorViewController: UIViewController {
     private lazy var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = Digit.limitDigit
-        formatter.roundingMode = .floor
         return formatter
     }()
     

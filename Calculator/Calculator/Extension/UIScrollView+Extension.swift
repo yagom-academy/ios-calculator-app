@@ -9,11 +9,11 @@ import UIKit
 
 extension UIScrollView {
     func scrollToBottom() {
+        layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
         
         if bottomOffset.y > 0 {
             setContentOffset(bottomOffset, animated: true)
-            layoutIfNeeded()
         }
     }
 }
