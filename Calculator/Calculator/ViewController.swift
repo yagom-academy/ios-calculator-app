@@ -30,12 +30,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func appendInputFormulaLabelToCalculatingValueLabel(_ sender: UIButton) {
-        if inputFormulaLabel.text == "" || inputFormulaLabel.text == "0" { return }
+        if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
         guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let operandValue = inputFormulaLabel.text else { return }
         inputOperatorLabel.text = operatorValue
         calculatingValueLabel.text = operandValue
-        inputFormulaLabel.text?.removeAll()
+        inputFormulaLabel.text = "0"
     }
     
     @IBAction func touchUpEntryClearToInputFormulaLabel() {
