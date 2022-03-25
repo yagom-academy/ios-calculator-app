@@ -110,4 +110,12 @@ class ViewController: UIViewController {
             inputOperatorLabel.text?.removeAll()
         }
     }
+    
+    @IBAction func startCalculationBtn(_ sender: Any) {
+        formulaStackView.arrangedSubviews.forEach {
+            for index in formulaStackView.arrangedSubviews.count {
+                $0.subviews[]
+            }
+        }
+    }
 }
