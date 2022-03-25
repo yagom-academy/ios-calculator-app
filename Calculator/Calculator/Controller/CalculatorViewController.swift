@@ -38,8 +38,7 @@ final class CalculatorViewController: UIViewController {
         guard isValidZeroForOperandsLabel(inputText: operandButtonsTitleText, currentLabel: currentOperandsLabel) else {
             return
         }
-        guard isValidDotForOperandsLabel(inputText: operandButtonsTitleText,
-                               currentLabel: currentOperandsLabel) else {
+        guard isValidDotForOperandsLabel(inputText: operandButtonsTitleText, currentLabel: currentOperandsLabel) else {
             return
         }
         
@@ -77,7 +76,6 @@ final class CalculatorViewController: UIViewController {
     
     private func appendOperandAtTemporaryOperandText(by inputOperand: String) {
         temporaryOperandText += "\(inputOperand)"
-        print(temporaryOperandText)
     }
     
     private func inputAtOperandsLabel(by inputOperand: String) {
@@ -135,7 +133,6 @@ final class CalculatorViewController: UIViewController {
     
     private func appendOperatorAtTemporaryOperandText(by inputOperator: String) {
         temporaryOperandText += " \(inputOperator) "
-        print(temporaryOperandText)
     }
     
     private func addArrangedStackView(operatorText: String?, operandText: String?) {
