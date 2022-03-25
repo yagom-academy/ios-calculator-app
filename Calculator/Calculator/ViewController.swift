@@ -14,7 +14,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var clearEntryBtn: UIButton!
     @IBOutlet weak var plusAndMinusBtn: UIButton!
     @IBOutlet weak var calculationBtn: UIButton!
-    var inputValueResult = ""
+    
+    let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        return numberFormatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +30,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandBtns(_ sender: UIButton) {
-        guard let operand = operandBtns[sender.tag].titleLabel?.text,
-              let inputValue = inputFormulaLabel.text else { return }
-        inputFormulaLabel.text = inputValue+operand
+        if inputFormulaLabel.text == "0" { inputOperatorLabel.text = "" }
+        guard let inputOperandValue = operandBtns[sender.tag].titleLabel?.text,
+              let enteredValue = inputFormulaLabel.text else { return }
+        let resultValue = enteredValue+inputOperandValue
+        inputFormulaLabel.text = convertDecimalValue(resultValue)
     }
     
     @IBAction func touchUpOperatorBtns(_ sender: UIButton) {
@@ -36,6 +44,14 @@ class ViewController: UIViewController {
         inputOperatorLabel.text = operatorValue
         calculatingValueLabel.text = operandValue
         inputFormulaLabel.text = "0"
+    }
+    
+    func convertDecimalValue(_ operatorValue: String) -> String? {
+        if let operandDoubleValue = Double(operatorValue) {
+            return numberFormatter.string(from: operandDoubleValue as NSNumber)
+        } else {
+            return operatorValue.split(separator: ",").reduce("", +)
+        }
     }
     
     @IBAction func touchUpEntryClear() {
