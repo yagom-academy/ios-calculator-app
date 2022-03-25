@@ -58,10 +58,6 @@ class ViewController: UIViewController {
             return
         }
         
-        if inputOperand != "0" {
-            presentOperator.text = buttonLabel
-        }
-        
         if valueToBeCalculated.isEmpty {
             let newStackView = makeStackView()
             newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
@@ -71,6 +67,7 @@ class ViewController: UIViewController {
             valueToBeCalculated.append(buttonLabel)
             inputOperand = "0"
             presentValue.text = inputOperand
+            presentOperator.text = buttonLabel
             return
         }
         
@@ -78,12 +75,13 @@ class ViewController: UIViewController {
             let newStackView = makeStackView()
             newStackView.addArrangedSubview(makeLable(text: buttonLabel))
             newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
-            stackView.addArrangedSubview(view)
+            stackView.addArrangedSubview(newStackView)
             scrollView.scrollToBottom()
             valueToBeCalculated.append(inputOperand)
             valueToBeCalculated.append(buttonLabel)
             inputOperand = "0"
             presentValue.text = inputOperand
+            presentOperator.text = buttonLabel
             return
         }
     }
@@ -110,21 +108,22 @@ class ViewController: UIViewController {
         if inputOperand != "0" {
             let converteDouble = Double(inputOperand) ?? .zero
             inputOperand = String(converteDouble * -1)
-            presentValue.text = inputOperand
+            presentValue.text = numberFormatter(number: inputOperand)
         }
     }
     
     @IBAction func didTapEqualSign() {
-        let view = makeStackView()
-        view.addArrangedSubview(makeLable(text: presentOperator.text ?? "NaN"))
-        view.addArrangedSubview(makeLable(text: inputOperand))
-        stackView.addArrangedSubview(view)
+        let newStackView = makeStackView()
+        newStackView.addArrangedSubview(makeLable(text: presentOperator.text ?? "NaN"))
+        newStackView.addArrangedSubview(makeLable(text: inputOperand))
+        stackView.addArrangedSubview(newStackView)
         scrollView.scrollToBottom()
         
         let xx = valueToBeCalculated.joined(separator: " ") + " " + inputOperand
         var fomula = ExpressionParser.parse(from: xx)
         let asd = String(fomula.result())
         presentValue.text = numberFormatter(number: asd)
+        presentOperator.text = ""
     }
     
     @IBAction func didTapAC() {
