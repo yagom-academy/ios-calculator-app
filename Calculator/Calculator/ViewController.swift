@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var clearEntryBtn: UIButton!
     @IBOutlet weak var plusAndMinusBtn: UIButton!
     @IBOutlet weak var calculationBtn: UIButton!
+    @IBOutlet weak var enteredFormulaValueScrollView: UIScrollView!
+    @IBOutlet weak var formulaStackView: UIStackView!
     
     let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -42,8 +44,32 @@ class ViewController: UIViewController {
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
         inputOperatorLabel.text = inputOperatorValue
-        calculatingValueLabel.text = enteredValue
+        appendFormulaValueToScrollView(enteredValue, operatorsValue: inputOperatorValue)
         inputFormulaLabel.text = "0"
+    }
+    
+    func appendFormulaValueToScrollView(_ operandsValue: String, operatorsValue: String) {
+        let operandsValueLabel: UILabel = {
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.font = .preferredFont(forTextStyle: .title3)
+            label.text = operandsValue
+            return label
+        }()
+        
+        let operatorValueLabel: UILabel = {
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.text = operatorsValue
+            return label
+        }()
+        
+        let stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [operatorValueLabel, operandsValueLabel])
+            return stackView
+        }()
+        formulaStackView.addArrangedSubview(stackView)
+        enteredFormulaValueScrollView.addSubview(formulaStackView)
     }
     
     func convertDecimalValue(_ operatorValue: String) -> String? {
