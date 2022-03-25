@@ -102,7 +102,7 @@ class ViewController: UIViewController {
         self.isResult = true
     }
     //MARK: - Functions
-    func setBasicStatus() {
+    private func setBasicStatus() {
         self.numberListStackView.subviews.forEach({
             $0.removeFromSuperview()})
         self.operandLabel.text = "0"
@@ -112,16 +112,16 @@ class ViewController: UIViewController {
         self.isFirst = true
     }
     
-    func showZeroAfterDot(number: String) -> String {
+    private func showZeroAfterDot(number: String) -> String {
         if number.contains(".") && number.last == "0" { return number }
         return changeNumberFormat(number: number)
     }
     
-    func changeToDouble(number: String) -> Double {
+    private func changeToDouble(number: String) -> Double {
         return Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
     }
     
-    func changeNumberFormat(number: String) -> String {
+    private func changeNumberFormat(number: String) -> String {
         let number = changeToDouble(number: number)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
         return changedNumber
     }
     
-    func makeStackView() -> UIStackView {
+    private func makeStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -140,14 +140,14 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    func makeLabel(element: String) -> UILabel {
+    private func makeLabel(element: String) -> UILabel {
         let label = UILabel()
         label.text = element
         label.textColor = .white
         return label
     }
     
-    func addFormula(operation: String, operand: String) {
+    private func addFormula(operation: String, operand: String) {
         self.formulaToSend = "\(self.formulaToSend) \(operation) \(String(changeToDouble(number: operand)))"
         let numberStackView = makeStackView()
         numberStackView.addArrangedSubview(makeLabel(element: operation))
