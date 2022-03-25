@@ -35,7 +35,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operatorsLabel: UILabel!
     @IBOutlet weak var operandsLabel: UILabel!
     
-    @IBOutlet weak var horizontalStackView: UIStackView!
+    @IBOutlet weak var verticalStackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,7 @@ class CalculatorViewController: UIViewController {
                                currentLabel: currentOperandsLabel) else {
             return
         }
+        appendOperandAtTemporaryOperandText(by: operandButtonsTitleText)
         inputAtOperandsLabel(by: operandButtonsTitleText)
     }
     
@@ -66,9 +68,19 @@ class CalculatorViewController: UIViewController {
         return true
     }
     
-    private func inputAtOperandsLabel(by inputText: String) {
-        temporaryOperandText += inputText
-        operandsLabel.text = temporaryOperandText
+    private func appendOperandAtTemporaryOperandText(by inputOperand: String) {
+        temporaryOperandText += "\(inputOperand)"
+        print(temporaryOperandText)
+    }
+    
+    private func inputAtOperandsLabel(by inputOperand: String) {
+        guard var temporaryLabel = operandsLabel.text else { return }
+        
+        if temporaryLabel == "0" {
+            temporaryLabel = ""
+        }
+        temporaryLabel += "\(inputOperand)"
+        operandsLabel.text = temporaryLabel
     }
     
     @IBAction func tappedOperatorButtons(_ sender: UIButton) {
@@ -76,30 +88,47 @@ class CalculatorViewController: UIViewController {
             return
         }
         let currentOperandsLabel = operandsLabel.text
+        let currentOperatorsLabel = operatorsLabel.text
         
-        guard isValidZeroInOperandsLabel(currentOperandsLabel: currentOperandsLabel) else {
+        guard isValidZero(currentOperandsLabel: currentOperandsLabel) else {
             return
         }
-        
-        let currentOperatorslabel = operatorsLabel.text
-        
-        addArrangedStackView(operators: currentOperatorslabel, operands: currentOperandsLabel)
-        inputOperatorsLabel(by: operatorButtonsTitleText)
+        guard isValidDuplicateOperators() else {
+            return
+        }
+        addArrangedStackView(operatorText: currentOperatorsLabel, operandText: currentOperandsLabel)
+        inputAtOperatorsLabel(by: operatorButtonsTitleText)
+        appendOperatorAtTemporaryOperandText(by: operatorButtonsTitleText)
+        operandsLabel.text = "0"
     }
     
-    private func isValidZeroInOperandsLabel(currentOperandsLabel: String?) -> Bool {
+    private func isValidZero(currentOperandsLabel: String?) -> Bool {
         if currentOperandsLabel == "0" {
             return false
         }
         return true
     }
     
-    private func inputOperatorsLabel(by inputText: String) {
-        operatorsLabel.text = inputText
+    private func isValidDuplicateOperators() -> Bool {
+        if temporaryOperandText.hasSuffix("+") ||
+           temporaryOperandText.hasSuffix("-") ||
+           temporaryOperandText.hasSuffix("×") ||
+           temporaryOperandText.hasSuffix("÷") {
+            return false
+        }
+        return true
     }
     
-    func addArrangedStackView(operators: String?, operands: String?) {
-        guard let operators = operators, let operands = operands else {
+    private func inputAtOperatorsLabel(by inputOperator: String) {
+        operatorsLabel.text = inputOperator
+    }
+    
+    private func appendOperatorAtTemporaryOperandText(by inputOperator: String) {
+        temporaryOperandText += "\(inputOperator)"
+    }
+    
+    private func addArrangedStackView(operatorText: String?, operandText: String?) {
+        guard let operatorText = operatorText, let operandText = operandText else {
             return
         }
         
@@ -108,7 +137,7 @@ class CalculatorViewController: UIViewController {
             label.textColor = UIColor.white
             label.font = UIFont.preferredFont(forTextStyle: .title3)
             label.textAlignment = .right
-            label.text = "\(operators)"
+            label.text = "\(operatorText)"
             return label
         }()
         
@@ -117,7 +146,7 @@ class CalculatorViewController: UIViewController {
             label.textColor = UIColor.white
             label.font = UIFont.preferredFont(forTextStyle: .title3)
             label.textAlignment = .right
-            label.text = "\(operands)"
+            label.text = "\(operandText)"
             return label
         }()
         
@@ -131,9 +160,9 @@ class CalculatorViewController: UIViewController {
             return view
         }()
         
-        horizontalStackView.addArrangedSubview(stackView)
+        verticalStackView.addArrangedSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.trailingAnchor.constraint(equalTo: horizontalStackView.trailingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: verticalStackView.trailingAnchor).isActive = true
     }
     
     @IBAction func tappedAllClearButton(_ sender: UIButton) {

@@ -349,7 +349,6 @@
                         <outlet property="clearElementButton" destination="RLD-dY-LOA" id="dij-z8-rLI"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="pjH-Zq-I8C"/>
                         <outlet property="equalSignButton" destination="Daw-iX-Owl" id="EkX-zZ-oA4"/>
-                        <outlet property="horizontalStackView" destination="XRe-QE-UJf" id="j5o-yV-hfF"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="nRp-r1-sjk"/>
                         <outlet property="numberDoubleZeroButton" destination="sH6-8l-kje" id="6ms-NE-IrC"/>
                         <outlet property="numberEightButton" destination="xgT-2D-A49" id="Rm4-A4-ppb"/>
@@ -365,8 +364,10 @@
                         <outlet property="operandsLabel" destination="Lwz-OF-XHD" id="HLD-yh-v6I"/>
                         <outlet property="operatorsLabel" destination="HPC-iy-qdm" id="9mm-bc-kt9"/>
                         <outlet property="positiveNegativeConversionButton" destination="ows-U7-mNc" id="4E3-tF-VUH"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="6H2-qk-7hF"/>
                         <outlet property="singleDotButton" destination="h8q-5h-bnb" id="h5R-rP-3wg"/>
                         <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="NGz-Gj-ryf"/>
+                        <outlet property="verticalStackView" destination="XRe-QE-UJf" id="okw-w5-qSk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
