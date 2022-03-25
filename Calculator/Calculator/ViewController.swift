@@ -42,6 +42,12 @@ class ViewController: UIViewController {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
+        if enteredResultValue == "" {
+            appendFormulaValueToScrollView(enteredValue, operatorsValue: "")
+        } else {
+            appendFormulaValueToScrollView(enteredValue, operatorsValue: inputOperatorValue)
+        }
+        enteredResultValue += enteredValue+inputOperatorValue
         inputOperatorLabel.text = inputOperatorValue
         inputFormulaLabel.text = "0"
     }
