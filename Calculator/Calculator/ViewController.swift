@@ -40,18 +40,16 @@ private extension ViewController {
         guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
                 
         if (operandLabel.text?.contains(".") == true) {
-            updateDotOperandLabel(sender)
-        } else {
             updateOperandLabel(sender)
+        } else {
+            updateNumberFormat(sender)
         }
-        
-        
     }
         
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         if (operandLabel.text?.contains(".") == true) && sender.currentTitle == "." { return }
         
-        updateDotOperandLabel(sender)
+        updateOperandLabel(sender)
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -132,7 +130,7 @@ private extension ViewController {
         input.replacingOccurrences(of: ",", with: "")
     }
     
-    func updateOperandLabel(_ button: UIButton) {
+    func updateNumberFormat(_ button: UIButton) {
         guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
         
         let nonCommaOperandText = removeComma(operandText + inputText)
@@ -142,7 +140,7 @@ private extension ViewController {
         operandLabel.text = numberFormatter.string(from: number)
     }
     
-    func updateDotOperandLabel(_ button: UIButton) {
+    func updateOperandLabel(_ button: UIButton) {
         guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
         
         operandLabel.text = operandText + inputText
