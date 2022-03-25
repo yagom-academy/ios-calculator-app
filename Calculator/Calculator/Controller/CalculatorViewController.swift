@@ -9,7 +9,6 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     private var temporaryOperandText: String = ""
-    private var isEmptyOperatorsLabel: Bool = true
 
     @IBOutlet weak var numberSingleZeroButton: UIButton!
     @IBOutlet weak var numberDoubleZeroButton: UIButton!
@@ -35,6 +34,8 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operatorsLabel: UILabel!
     @IBOutlet weak var operandsLabel: UILabel!
+    
+    @IBOutlet weak var horizontalStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,14 +77,17 @@ class CalculatorViewController: UIViewController {
         }
         let currentOperandsLabel = operandsLabel.text
         
-        guard isValidOperatorsLabel(inputText: operatorButtonsTitleText,
-                                    currentOperandsLabel: currentOperandsLabel) else {
+        guard isValidZeroInOperandsLabel(currentOperandsLabel: currentOperandsLabel) else {
             return
         }
+        
+        let currentOperatorslabel = operatorsLabel.text
+        
+        addArrangedStackView(operators: currentOperatorslabel, operands: currentOperandsLabel)
         inputOperatorsLabel(by: operatorButtonsTitleText)
     }
     
-    private func isValidOperatorsLabel(inputText: String, currentOperandsLabel: String?) -> Bool {
+    private func isValidZeroInOperandsLabel(currentOperandsLabel: String?) -> Bool {
         if currentOperandsLabel == "0" {
             return false
         }
@@ -92,6 +96,44 @@ class CalculatorViewController: UIViewController {
     
     private func inputOperatorsLabel(by inputText: String) {
         operatorsLabel.text = inputText
+    }
+    
+    func addArrangedStackView(operators: String?, operands: String?) {
+        guard let operators = operators, let operands = operands else {
+            return
+        }
+        
+        let scrollViewOperatorsLabel: UILabel = {
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.font = UIFont.preferredFont(forTextStyle: .title3)
+            label.textAlignment = .right
+            label.text = "\(operators)"
+            return label
+        }()
+        
+        let scrollViewOperandsLabel: UILabel = {
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.font = UIFont.preferredFont(forTextStyle: .title3)
+            label.textAlignment = .right
+            label.text = "\(operands)"
+            return label
+        }()
+        
+        let stackView: UIStackView = {
+            let view = UIStackView(arrangedSubviews: [scrollViewOperatorsLabel, scrollViewOperandsLabel])
+            view.axis = .horizontal
+            view.alignment = .fill
+            view.spacing = 8
+            view.distribution = .fill
+            view.contentMode = .scaleToFill
+            return view
+        }()
+        
+        horizontalStackView.addArrangedSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.trailingAnchor.constraint(equalTo: horizontalStackView.trailingAnchor).isActive = true
     }
     
     @IBAction func tappedAllClearButton(_ sender: UIButton) {
