@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var allCalculationStack: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var allStackIsEmpty: Bool { allCalculationStack.arrangedSubviews.isEmpty }
+    
     private var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
