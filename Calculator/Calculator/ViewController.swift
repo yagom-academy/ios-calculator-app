@@ -6,6 +6,14 @@
 
 import UIKit
 
+enum CalculatorSign {
+    static var zero: String { "0" }
+    static var doubleZero: String { "00" }
+    static var dot: String { "." }
+    static var empty: String { "" }
+    static var nan: String { "NaN" }
+}
+
 final class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -27,8 +35,8 @@ final class ViewController: UIViewController {
     }
     
     func setUpDefaultLabel() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        operandLabel.text = CalculatorSign.zero
+        operatorLabel.text = CalculatorSign.empty
     }
 }
 
@@ -39,7 +47,7 @@ private extension ViewController {
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
                 
-        if (operandLabel.text?.contains(".") == true) {
+        if (operandLabel.text?.contains(CalculatorSign.dot) == true) {
             updateOperandLabel(sender)
         } else {
             updateNumberFormat(sender)
@@ -47,17 +55,17 @@ private extension ViewController {
     }
         
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        if (operandLabel.text?.contains(".") == true) && sender.currentTitle == "." { return }
+        if (operandLabel.text?.contains(CalculatorSign.dot) == true) && sender.currentTitle == CalculatorSign.dot { return }
         
         updateOperandLabel(sender)
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
-        operandLabel.text = "0"
+        operandLabel.text = CalculatorSign.zero
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        if  operandLabel.text == "0" && allCalculatStackIsEmpty {
+        if  operandLabel.text == CalculatorSign.zero && allCalculatStackIsEmpty {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -65,7 +73,7 @@ private extension ViewController {
         addStackView()
         
         operatorLabel.text = sender.currentTitle
-        operandLabel.text = "0"
+        operandLabel.text = CalculatorSign.zero
         
         scrollToBottom()
     }
@@ -77,7 +85,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpChangeSign(_ sender: UIButton) {
-        if  operandLabel.text == "0" { return }
+        if  operandLabel.text == CalculatorSign.zero { return }
         
         guard let operandText = operandLabel.text else { return }
         
@@ -89,7 +97,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpCalculationButton(_ sender: Any) {
-        if operatorLabel.text == "" { return }
+        if operatorLabel.text == CalculatorSign.empty { return }
         
         var arithmeticExpressio = ""
         
@@ -116,7 +124,7 @@ private extension ViewController {
         do {
             operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: arithmeticExpressio).result())
         } catch {
-            operandLabel.text = "NaN"
+            operandLabel.text = CalculatorSign.nan
         }
         
         operatorLabel.text = ""
