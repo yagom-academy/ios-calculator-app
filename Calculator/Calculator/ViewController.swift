@@ -9,10 +9,10 @@ import UIKit
 final class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var allCalculationStack: UIStackView!
+    @IBOutlet weak var allCalculatStack: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var allStackIsEmpty: Bool { allCalculationStack.arrangedSubviews.isEmpty }
+    var allCalculatStackIsEmpty: Bool { allCalculatStack.arrangedSubviews.isEmpty }
     
     private var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -61,7 +61,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        if  operandLabel.text == "0" && allStackIsEmpty {
+        if  operandLabel.text == "0" && allCalculatStackIsEmpty {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -75,7 +75,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        allCalculationStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         setUpDefaultLabel()
     }
@@ -100,7 +100,7 @@ private extension ViewController {
         addStackView()
         scrollToBottom()
         
-        allCalculationStack.arrangedSubviews.forEach {
+        allCalculatStack.arrangedSubviews.forEach {
             let stack = $0 as? UIStackView
             let operatorLabel = stack?.arrangedSubviews[0] as? UILabel
             let operandLabel = stack?.arrangedSubviews[1] as? UILabel
@@ -177,7 +177,7 @@ private extension ViewController {
         [makeLabel(labelText: operatorLabel.text),
          makeLabel(labelText: operandLabel.text)].forEach { calculationStackView.addArrangedSubview($0) }
         
-        allCalculationStack.addArrangedSubview(calculationStackView)
+        allCalculatStack.addArrangedSubview(calculationStackView)
     }
 }
 
