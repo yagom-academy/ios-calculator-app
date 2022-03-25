@@ -11,19 +11,19 @@ struct CalculateItemQueue<T: CalculateItem> {
   var list = LinkedList<T>()
   
   func enqueue(data: T) {
-    list.append(data: data)
+    return list.append(data: data)
   }
   
   func dequeue() -> T? {
-    list.removeFirst()
+    return list.removeFirst()
   }
   
   func dequeueLatest() {
-    list.removeLatest()
+    return list.removeLatest()
   }
   
   func dequeueAll() {
-    list.removeAll()
+    return list.removeAll()
   }
   
   func presentAll() -> [T] {
@@ -31,6 +31,6 @@ struct CalculateItemQueue<T: CalculateItem> {
   }
   
   func isEmpty() -> Bool {
-    list.isEmpty()
+    return list.isEmpty()
   }
 }

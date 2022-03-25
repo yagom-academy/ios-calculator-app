@@ -15,7 +15,7 @@ class ViewController: UIViewController {
   
   private var fomula = Asset.blank
   
-  private var visibleNumber = Asset.blank{
+  private var visibleNumber = Asset.blank {
     didSet{
       let doubleNumber = Double(visibleNumber)
       guard doubleNumber != nil else {
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     }
   }
   
-  private var visibleOperator = Asset.blank{
+  private var visibleOperator = Asset.blank {
     didSet{
       self.operatorbutton.text = visibleOperator
     }
@@ -123,6 +123,7 @@ class ViewController: UIViewController {
   }
   
   @IBAction func tapCE(_ sender: UIButton) {
+    
     visibleNumber.removeAll()
     visibleNumber = Asset.zero
   }
@@ -137,10 +138,8 @@ class ViewController: UIViewController {
     fomula += visibleNumber
     processStackView.addArrangedSubview(makeStackView(visibleOperator, formatNumber))
     self.processScrollView.scrollToBottom()
-
     visibleNumber.removeAll()
     visibleOperator.removeAll()
-    
     let result = ExpressionParser.parse(from: fomula).result()
     fomula = Asset.blank
     
@@ -168,13 +167,15 @@ private extension ViewController {
   
   func makeLabel(_ inputinformation: String) -> UILabel {
     let label = UILabel()
+    
     label.text = inputinformation
     label.textColor = .white
     return label
   }
   
-  func makeformatter() -> NumberFormatter{
+  func makeformatter() -> NumberFormatter {
     let numberFormatter = NumberFormatter()
+    
     numberFormatter.numberStyle = .decimal
     numberFormatter.maximumFractionDigits = Asset.maximum20Digits
     return numberFormatter
@@ -183,6 +184,7 @@ private extension ViewController {
 
 extension UIScrollView {
   func scrollToBottom() {
+    
     layoutIfNeeded()
     let bottomOffset = CGPoint(x: Double.zero, y: contentSize.height - bounds.size.height)
     setContentOffset(bottomOffset, animated: true)
