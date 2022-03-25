@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         }
         
         isOperandEntered = true
-        currentOperandLabel.text = currentOperand
+        currentOperandLabel.text = numberDividedByComma(from: currentOperand)
     }
     
     // MARK: Operator Button Methods
@@ -159,6 +159,24 @@ class ViewController: UIViewController {
             label.textColor = .white
             verticalStackView.addArrangedSubview(label)
         }
+    }
+    
+    func numberDividedByComma(from currentOperand: String) -> String? {
+        let commaDeletedOperand = currentOperand.filter { $0 != "," }
+        guard let doubledCurrentOperand = Double(commaDeletedOperand) else {
+            return nil
+        }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = -2
+        
+        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: doubledCurrentOperand)) else {
+            return nil
+        }
+        
+        return formattedNumber
     }
 }
 
