@@ -80,10 +80,7 @@ final class CalculatorViewController: UIViewController {
                 throw CalculatorError.unexpectedData
             }
             
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.maximumFractionDigits = 10
-            numberLabel.text = numberFormatter.string(for: result)
+            numberLabel.text = NumberFormatter.calculator.string(for: result)
             operatorLabel.text = ""
         } catch {
             operatorLabel.text = CalculatorConstant.defaultOperator
