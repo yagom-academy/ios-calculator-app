@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        if  operandLabel.text == "0" {
+        if  operandLabel.text == "0" && allStackIsEmpty {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -170,6 +170,8 @@ class ViewController: UIViewController {
         
         allCalculationStack.addArrangedSubview(calculationStackView)
     }
+    
+    
     
     // MARK: - ScrollView Method
     
