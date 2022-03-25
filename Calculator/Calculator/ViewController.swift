@@ -39,17 +39,9 @@ private extension ViewController {
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
         
-        if operandLabel.text == "0" { operandLabel.text = "" }
         
-        updateOperandLabel(sender)
     }
-    
-    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-        if operandLabel.text == "0" && sender.currentTitle == "00" { return }
         
-        updateOperandLabel(sender)
-    }
-    
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         if (operandLabel.text?.contains(".") == true) && sender.currentTitle == "." { return }
         
