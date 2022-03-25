@@ -14,7 +14,6 @@ class CalculatorViewController: UIViewController {
     
     private var formulaNotYetCalculated: String = empty
     private var calculator: Formula = Formula()
-    private var statusZero: Bool = true
     private var formerOperator: String = empty
     private var inputtingOperand: String = zero {
         didSet {
@@ -32,6 +31,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private enum CalculatorStatus {
+        case initStatus, zeroStatus, nonZeroStatus
+    }
+    
+    private var calculatorStatus: CalculatorStatus = .zeroStatus
     private let numberFormatter = NumberFormatter()
     
     @IBOutlet private weak var operandZeroButton: OperandButton!
@@ -47,22 +51,18 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operandNineButton: OperandButton!
     @IBOutlet private weak var operandDotButton: OperandButton!
     
-    
     @IBOutlet private weak var operatorAddButton: OperatorButton!
     @IBOutlet private weak var operatorSubtractButton: OperatorButton!
     @IBOutlet private weak var operatorMultiplyButton: OperatorButton!
     @IBOutlet private weak var operatorDivideButton: OperatorButton!
-    
     
     @IBOutlet private weak var funcAllClearButton: FunctionalButton!
     @IBOutlet private weak var funcClearEntryButton: FunctionalButton!
     @IBOutlet private weak var funcChangeSignButton: FunctionalButton!
     @IBOutlet private weak var funcExecuteButton: FunctionalButton!
     
-  
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var numberLabel: UILabel!
-    
     
     @IBOutlet private weak var historyScrollView: UIScrollView!
     @IBOutlet private weak var historyStackView: UIStackView!
@@ -75,25 +75,35 @@ class CalculatorViewController: UIViewController {
     
     private func setUpDefaultStatus() {
         clearFormula()
-        setStatusZero()
         clearInputtingOperand()
         clearInputtingOperator()
-        formerOperator = CalculatorViewController.empty
+        setStatusInit()
+        clearFormerInputOperator()
     }
     
     private func clearFormula() {
         formulaNotYetCalculated = CalculatorViewController.empty
     }
     
-    private func setStatusZero() {
-        clearInputtingOperand()
-        statusZero = true
-    }
     private func clearInputtingOperand() {
         inputtingOperand = CalculatorViewController.zero
     }
+    
     private func clearInputtingOperator() {
         inputtingOperator = CalculatorViewController.empty
+    }
+    
+    private func setStatusInit() {
+        calculatorStatus = .initStatus
+    }
+    
+    private func clearFormerInputOperator() {
+        formerOperator = CalculatorViewController.empty
+    }
+    
+    private func setStatusZero() {
+        clearInputtingOperand()
+        calculatorStatus = .zeroStatus
     }
     
     override func viewDidLoad() {
@@ -153,7 +163,7 @@ class CalculatorViewController: UIViewController {
     
     private func generateOperandNumber(_ sender: OperandButton) {
         guard let input = sender.value else { return }
-        if statusZero || inputtingOperand == CalculatorViewController.zero {
+        if calculatorStatus != .nonZeroStatus || inputtingOperand == CalculatorViewController.zero {
             if sender == operandZeroButton || sender == operandCoupleZeroButton {
                 inputtingOperand = CalculatorViewController.zero
             } else if sender == operandDotButton {
@@ -161,7 +171,7 @@ class CalculatorViewController: UIViewController {
             } else {
                 inputtingOperand = input
             }
-            statusZero = false
+            calculatorStatus = .nonZeroStatus
         } else {
             inputtingOperand += input
         }
@@ -178,9 +188,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonAction(_ sender: OperatorButton) {
+        guard calculatorStatus != .initStatus else { return }
         guard let input = sender.value else { return }
         inputtingOperator = input
-        guard !statusZero else { return }
+        guard calculatorStatus == .nonZeroStatus else { return }
         
         if historyStackView.arrangedSubviews.count < 1 {
             insertHistoryInStackView(inputtingOperand)
@@ -201,7 +212,6 @@ class CalculatorViewController: UIViewController {
         clearHistoryStackView()
     }
     
-    
     @IBAction private func clearEntryAction(_ sender: FunctionalButton) {
         setStatusZero()
     }
@@ -217,11 +227,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func executeCalculatingAction(_ sender: FunctionalButton) {
-        guard !formulaNotYetCalculated.isEmpty, !statusZero else  { return }
+        guard !formulaNotYetCalculated.isEmpty, calculatorStatus == .nonZeroStatus else  { return }
         
         insertHistoryInStackView(formerOperator + inputtingOperand)
         formulaNotYetCalculated += inputtingOperand
         clearInputtingOperand()
+        
         var parser = ExpressionParser.parse(from: formulaNotYetCalculated)
         setUpDefaultStatus()
         
