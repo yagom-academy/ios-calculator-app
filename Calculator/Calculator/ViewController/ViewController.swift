@@ -13,20 +13,19 @@ class ViewController: UIViewController {
   @IBOutlet private weak var processScrollView: UIScrollView!
   @IBOutlet private weak var processStackView: UIStackView!
   
-  private var fomula = ""
+  private var fomula = Asset.blank
   
-  private var visibleNumber = ""{
+  private var visibleNumber = Asset.blank{
     didSet{
       let doubleNumber = Double(visibleNumber)
       guard doubleNumber != nil else {
         return self.numberLabel.text = visibleNumber
       }
       self.numberLabel.text = makeformatter().string(for: doubleNumber)
-
     }
   }
   
-  private var visibleOperator = ""{
+  private var visibleOperator = Asset.blank{
     didSet{
       self.operatorbutton.text = visibleOperator
     }
@@ -46,24 +45,24 @@ class ViewController: UIViewController {
       return
     }
     
-    if visibleNumber.first == "0" && visibleNumber.contains(".") == false {
+    if visibleNumber.first == "0" && visibleNumber.contains(Asset.dot) == false {
       visibleNumber.removeAll()
       visibleNumber.append(inputString)
-    } else if visibleNumber == "0.0"  {
+    } else if visibleNumber == Asset.doubleZero {
       visibleNumber.removeAll()
       visibleNumber.append(inputString)
     } else {
       visibleNumber.append(inputString)
     }
     
-    if visibleNumber == "00" {
-      visibleNumber = "0"
+    if visibleNumber == Asset.zeroZero {
+      visibleNumber = Asset.zero
     }
   }
-  
+    
   @IBAction func tapPlusMinus(_ sender: UIButton) {
     
-    guard visibleNumber != "" else {
+    guard visibleNumber != Asset.blank else {
       return
     }
     
@@ -71,15 +70,15 @@ class ViewController: UIViewController {
       visibleNumber = visibleNumber.trimmingCharacters(in: ["-"])
     } else {
       visibleNumber = String(visibleNumber.reversed())
-      visibleNumber.append("-")
+      visibleNumber.append(Asset.minus)
       visibleNumber = String(visibleNumber.reversed())
     }
   }
   
   @IBAction func tapDot(_ sender: UIButton) {
     
-    if visibleNumber.contains(".") == false {
-      visibleNumber.append(".")
+    if visibleNumber.contains(Asset.dot) == false {
+      visibleNumber.append(Asset.dot)
     }
   }
   
@@ -90,7 +89,7 @@ class ViewController: UIViewController {
       return
     }
     
-    guard visibleNumber != "" else {
+    guard visibleNumber != Asset.blank else {
       return
     }
     
@@ -101,15 +100,15 @@ class ViewController: UIViewController {
     processStackView.addArrangedSubview(makeStackView(visibleOperator, formatNumber))
     self.processScrollView.scrollToBottom()
 
-    if visibleNumber != "" {
+    if visibleNumber != Asset.blank {
       fomula += visibleNumber
-      fomula += " "
+      fomula += Asset.spacing
     }
     
     visibleOperator.removeAll()
     visibleOperator.append(inputOperator)
     fomula += visibleOperator
-    fomula += " "
+    fomula += Asset.spacing
     visibleNumber.removeAll()
   }
   
@@ -120,12 +119,12 @@ class ViewController: UIViewController {
     self.processStackView.arrangedSubviews.forEach {
       $0.removeFromSuperview()
     }
-    visibleNumber = "0"
+    visibleNumber = Asset.zero
   }
   
   @IBAction func tapCE(_ sender: UIButton) {
     visibleNumber.removeAll()
-    visibleNumber = "0"
+    visibleNumber = Asset.zero
   }
   
   @IBAction func tapResult(_ sender: UIButton) {
@@ -143,13 +142,13 @@ class ViewController: UIViewController {
     visibleOperator.removeAll()
     
     let result = ExpressionParser.parse(from: fomula).result()
-    fomula = ""
+    fomula = Asset.blank
     
     switch result {
     case .success(let resultValue):
       visibleNumber = String(resultValue)
     case .failure(let error):
-      visibleNumber = error.errorDescription ?? "404"
+      visibleNumber = error.errorDescription ?? Asset.notFoundError
     }
   }
 }
@@ -158,7 +157,7 @@ private extension ViewController {
   
   func makeStackView(_ operatorString: String, _ numberString: String) -> UIStackView {
     let stackView = UIStackView()
-    stackView.spacing = 10
+    stackView.spacing = Asset.staticViewSpacing
     
     [makeLabel(operatorString),
      makeLabel(numberString)].forEach {
@@ -177,7 +176,7 @@ private extension ViewController {
   func makeformatter() -> NumberFormatter{
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
-    numberFormatter.maximumFractionDigits = 20
+    numberFormatter.maximumFractionDigits = Asset.maximum20Digits
     return numberFormatter
   }
 }
@@ -185,7 +184,7 @@ private extension ViewController {
 extension UIScrollView {
   func scrollToBottom() {
     layoutIfNeeded()
-    let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
+    let bottomOffset = CGPoint(x: Double.zero, y: contentSize.height - bounds.size.height)
     setContentOffset(bottomOffset, animated: true)
   }
 }
