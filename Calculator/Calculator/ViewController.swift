@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var allCalculationStack: UIStackView!
@@ -21,7 +21,20 @@ class ViewController: UIViewController {
         return formatter
     }()
     
-    // MARK: - IBAction
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpDefaultLabel()
+    }
+    
+    func setUpDefaultLabel() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+    }
+}
+
+// MARK: - IBAction
+
+private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
@@ -85,7 +98,6 @@ class ViewController: UIViewController {
         var arithmeticExpressio = ""
         
         addStackView()
-        
         scrollToBottom()
         
         allCalculationStack.arrangedSubviews.forEach {
@@ -101,6 +113,7 @@ class ViewController: UIViewController {
             }
             
             guard let operandText = operandLabel?.text else { return }
+            
             arithmeticExpressio += removeComma(operandText)
         }
         
@@ -111,9 +124,11 @@ class ViewController: UIViewController {
         }
         
         operatorLabel.text = ""
-        
     }
-    // MARK: - Method
+}
+
+// MARK: - Method
+private extension ViewController {
     
     func removeComma(_ input: String) -> String {
         input.replacingOccurrences(of: ",", with: "")
@@ -133,7 +148,6 @@ class ViewController: UIViewController {
         guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
         
         operandLabel.text = operandText + inputText
-        
     }
     
     func makeLabel(labelText: String?) -> UILabel {
@@ -157,11 +171,6 @@ class ViewController: UIViewController {
         return calculationStack
     }
     
-    func setUpDefaultLabel() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-    }
-    
     func addStackView() {
         let calculationStackView: UIStackView = makeCalculationStackView()
         
@@ -170,10 +179,10 @@ class ViewController: UIViewController {
         
         allCalculationStack.addArrangedSubview(calculationStackView)
     }
-    
-    
-    
-    // MARK: - ScrollView Method
+}
+
+// MARK: - ScrollView Method
+private extension ViewController {
     
     func scrollToBottom() {
         scrollView.layoutIfNeeded()
@@ -184,9 +193,5 @@ class ViewController: UIViewController {
             scrollView.setContentOffset(positionValue, animated: true)
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpDefaultLabel()
-    }
 }
+
