@@ -35,6 +35,11 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        calculationRecordScrollView.scrollToBottom()
+    }
 }
 
 // MARK: - IBAction
@@ -142,7 +147,6 @@ extension CalculatorViewController {
         expression.append(`operator`)
         
         updateCalculationRecord(with: currentOperand, currentOperator)
-        calculationRecordScrollView.scrollToBottom()
         
         currentOperator = `operator`
         operatorLabel.text = `operator`
