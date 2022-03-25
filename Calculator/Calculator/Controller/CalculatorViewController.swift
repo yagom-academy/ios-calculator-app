@@ -1,8 +1,8 @@
 //
 //  Calculator - CalculatorViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -25,7 +25,11 @@ final class CalculatorViewController: UIViewController {
     private var currentOperand: String = Constant.zero
     private var currentOperator: String = Constant.blank
     private var expression = [String]()
-    private var isCalculated = false
+    private enum CalculatorStatus {
+        case nonCalculated
+        case calculated
+    }
+    private var calculatorStatus: CalculatorStatus = .nonCalculated
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -72,11 +76,11 @@ extension CalculatorViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        guard isCalculated == false else {
+        guard calculatorStatus == .nonCalculated else {
             return
         }
         
-        isCalculated = true
+        calculatorStatus = .calculated
         updateLastCalculation()
     }
 }
@@ -194,7 +198,7 @@ extension CalculatorViewController {
 // MARK: - Configure Method
 extension CalculatorViewController {
     private func reconfigureCalculator() {
-        isCalculated = false
+        calculatorStatus = .nonCalculated
         expression = [String]()
         reconfigureOperand()
         reconfigureOperator()
@@ -223,7 +227,7 @@ extension CalculatorViewController {
     }
 
     @objc private func reconfigureAction(sender: UIButton) {
-        if isCalculated {
+        if calculatorStatus == .calculated {
             reconfigureCalculator()
         }
     }
