@@ -103,10 +103,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func switchPlusAndMinusToInputOperatorLabel() {
-        if inputOperatorLabel.text == "➕" {
-            inputOperatorLabel.text = "➖"
-        } else {
-            inputOperatorLabel.text = "➕"
+        if inputFormulaLabel.text == "0" { return }
+        if let inputFormulaFirstValue = inputFormulaLabel.text?.first,
+           let inputFormulaValue = inputFormulaLabel.text,
+           let _ = Int(inputFormulaFirstValue.description) {
+            inputFormulaLabel.text = "-"+inputFormulaValue
+        } else if let inputFormulaFirstValue = inputFormulaLabel.text?.first,
+            inputFormulaFirstValue == "-" {
+            inputFormulaLabel.text?.removeFirst()
         }
     }
     
