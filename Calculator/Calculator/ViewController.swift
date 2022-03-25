@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputFormulaLabel.text = ""
+        inputFormulaLabel.text = "0"
         inputOperatorLabel.text = ""
         removeOperatorLabelTextAtInputValueIsZero()
     }

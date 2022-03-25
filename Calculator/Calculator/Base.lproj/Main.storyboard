@@ -86,7 +86,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpAllClear" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mv4-iO-95p"/>
+                                                    <action selector="touchUpAllClearToInputFormulaLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="uVA-yD-Dkp"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
@@ -97,7 +97,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpEntryClear" destination="BYZ-38-t0r" eventType="touchUpInside" id="fdb-Uv-ujJ"/>
+                                                    <action selector="touchUpEntryClearToInputFormulaLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="upF-kw-Qvc"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -108,7 +108,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="switchPlusAndMinus" destination="BYZ-38-t0r" eventType="touchUpInside" id="81d-ie-ORH"/>
+                                                    <action selector="switchPlusAndMinusToInputOperatorLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q8C-KU-XfL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -119,7 +119,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wp4-lT-vh4"/>
+                                                    <action selector="appendInputFormulaLabelToCalculatingValueLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Sq-9T-du5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -168,7 +168,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jv8-td-gj2"/>
+                                                    <action selector="appendInputFormulaLabelToCalculatingValueLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fwK-2e-1T4"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -217,7 +217,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IwQ-ie-kKQ"/>
+                                                    <action selector="appendInputFormulaLabelToCalculatingValueLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fve-fy-LbN"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -266,7 +266,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="appendOperatorToInputFormulaLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ty9-Er-ImC"/>
+                                                    <action selector="appendInputFormulaLabelToCalculatingValueLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N7F-bC-ikS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
