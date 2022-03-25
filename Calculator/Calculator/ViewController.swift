@@ -38,6 +38,12 @@ private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
+                
+        if (operandLabel.text?.contains(".") == true) {
+            updateDotOperandLabel(sender)
+        } else {
+            updateOperandLabel(sender)
+        }
         
         
     }
