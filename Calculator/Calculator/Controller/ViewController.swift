@@ -106,17 +106,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton) {
+        insertLabelToHorizontalStackView()
+        
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
+        
         let formulaForResult = ExpressionParser.parse(from: stringToParse)
         var myFormula = formulaForResult
         
         do {
-            guard let testFormula = try myFormula.result() else {
+            guard let result = try myFormula.result() else {
                 return
             }
-            currentOperandLabel.text = String(testFormula)
+            currentOperandLabel.text = String(result)
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = "NaN"
         } catch {}
@@ -126,6 +129,7 @@ class ViewController: UIViewController {
     
     // MARK: Extra Button Methods
     @IBAction func allClearButtonClicked(_ sender: UIButton) {
+        currentOperandLabel.text = Number.zero.rawValue
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
