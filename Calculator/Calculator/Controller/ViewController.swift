@@ -18,11 +18,20 @@ class ViewController: UIViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var verticalStackView: UIStackView!
-    var isFirstOperand = true
-    var isOperandEntered = false
+    
+    var stringToParse: String = ""
+    var isFirstOperand: Bool = true
+    var isOperandEntered: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
+    }
+    
+    func initialize() {
+        stringToParse = ""
+        isFirstOperand = true
+        isOperandEntered = false
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
     }
@@ -100,7 +109,19 @@ class ViewController: UIViewController {
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
+        let formulaForResult = ExpressionParser.parse(from: stringToParse)
+        var myFormula = formulaForResult
         
+        do {
+            guard let testFormula = try myFormula.result() else {
+                return
+            }
+            currentOperandLabel.text = String(testFormula)
+        } catch CalculatorError.divisionByZero {
+            currentOperandLabel.text = "NaN"
+        } catch {}
+        
+        currentOperatorLabel.text = ""
     }
     
     // MARK: Extra Button Methods
@@ -108,14 +129,12 @@ class ViewController: UIViewController {
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
-
+        
         for view in verticalStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
-        currentOperandLabel.text = Number.zero.rawValue
-        currentOperatorLabel.text = ""
-        isFirstOperand = true
+        initialize()
     }
     
     @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
@@ -150,15 +169,21 @@ class ViewController: UIViewController {
         }
         
         if isFirstOperand == true {
-            label.text = "\(operandLabelText)"
+            label.text = "\(operandLabelText) "
             label.textColor = .white
             verticalStackView.addArrangedSubview(label)
             isFirstOperand = false
         } else {
-            label.text = "\(operatorLabelText) \(operandLabelText)"
+            label.text = "\(operatorLabelText) \(operandLabelText) "
             label.textColor = .white
             verticalStackView.addArrangedSubview(label)
         }
+        
+        guard let string = label.text else {
+            return
+        }
+        
+        stringToParse.append(string)
     }
     
     func numberDividedByComma(from currentOperand: String) -> String? {

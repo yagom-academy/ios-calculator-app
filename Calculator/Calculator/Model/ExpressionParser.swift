@@ -15,7 +15,7 @@ enum ExpressionParser {
         var stringOperators: [String] = []
         
         for index in 0..<whiteSpaceDeletedString.count {
-            (index % 2) == 0 ? stringOperands.append(whiteSpaceDeletedString[index]) : stringOperators.append(whiteSpaceDeletedString[index])
+            (index % 2) != 0 ? stringOperators.append(whiteSpaceDeletedString[index]) : stringOperands.append(whiteSpaceDeletedString[index])
         }
         
         let operands = stringOperands.compactMap { Double($0) }
