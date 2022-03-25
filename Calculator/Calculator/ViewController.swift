@@ -120,7 +120,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func startCalculationBtn(_ sender: Any) {
+    @IBAction func startCalculationBtn(_ sender: Any) throws {
         guard let inputValue = inputFormulaLabel.text else { return }
         enteredResultValue += inputValue
         do {

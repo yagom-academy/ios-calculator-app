@@ -10,3 +10,18 @@ enum CalculateError: Error {
     case operatorIsNil
     case cannotCalculation
 }
+
+extension CalculateError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .isNaN(_):
+            return "NaN"
+        case .operandIsNil:
+            return "operandIsNil"
+        case .operatorIsNil:
+            return "operatorIsNil"
+        case .cannotCalculation:
+            return "cannotCalculation"
+        }
+    }
+}
