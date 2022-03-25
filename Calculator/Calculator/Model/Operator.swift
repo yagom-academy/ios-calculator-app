@@ -6,6 +6,11 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multiply = "*"
     
+
+    static func characterToString() -> [String] {
+        return Self.allCases.map { String($0.rawValue) }
+    }
+    
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
@@ -38,4 +43,5 @@ enum Operator: Character, CaseIterable, CalculateItem {
     private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
     }
+    
 }

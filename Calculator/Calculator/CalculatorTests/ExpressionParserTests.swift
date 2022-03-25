@@ -7,10 +7,58 @@ class ExpressionParserTests: XCTestCase {
         let formula = "1 + 3 - 4 / 2 * 1"
 
         //when
-        let result = ExpressionParser.parse(from: formula)
+        do {
+            let result = try ExpressionParser.parse(from: formula)
+            
+            //then
+            XCTAssertEqual(result.operators.count, 4)
+            XCTAssertEqual(result.operands.count, 5)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func test_parse_연산자_외에_문자가_입력됐을때_발생하는_에러가_올바른가() {
+        //given
+        let formula = "1 & -3 - 3 / 1 * 3"
+        let expectedError = CalculateError.wrongInputFormula
         
         //then
-        XCTAssertEqual(result.operators.count, 4)
-        XCTAssertEqual(result.operands.count, 5)
+        XCTAssertThrowsError(try ExpressionParser.parse(from: formula)) { error in
+            XCTAssertEqual(error as? CalculateError, expectedError)
+        }
+    }
+    
+    func test_parse_연산자가_입력안됐을때_발생하는_에러가_올바른가() {
+        //given
+        let formula = "1 3"
+        let expectedError = CalculateError.wrongInputFormula
+        
+        //then
+        XCTAssertThrowsError(try ExpressionParser.parse(from: formula)) { error in
+            XCTAssertEqual(error as? CalculateError, expectedError)
+        }
+    }
+    
+    func test_parse_연산자만_입력됐을때_발생하는_에러가_올바른가() {
+        //given
+        let formula = "+ -"
+        let expectedError = CalculateError.wrongInputFormula
+        
+        //then
+        XCTAssertThrowsError(try ExpressionParser.parse(from: formula)) { error in
+            XCTAssertEqual(error as? CalculateError, expectedError)
+        }
+    }
+    
+    func test_parse_연산자가_피연산자_보다_많을때_발생하는_에러가_올바른가() {
+        //given
+        let formula = "+ 1 -"
+        let expectedError = CalculateError.wrongInputFormula
+        
+        //then
+        XCTAssertThrowsError(try ExpressionParser.parse(from: formula)) { error in
+            XCTAssertEqual(error as? CalculateError, expectedError)
+        }
     }
 }

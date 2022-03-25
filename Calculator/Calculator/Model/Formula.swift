@@ -9,16 +9,14 @@ struct Formula {
             return 0
         }
         
-        while !(operands.isEmpty && operators.isEmpty) {
+        while !(operands.isEmpty) {
             guard let operand = operands.dequeue(), let `operator` = operators.dequeue() else {
                 return 0
             }
             
-            guard !(sumTotal.isNaN) else {
-                break
-            }
-            
             sumTotal = `operator`.calculate(lhs: sumTotal, rhs: operand)
+            
+            if sumTotal.isNaN { break }
         }
         
         return sumTotal
