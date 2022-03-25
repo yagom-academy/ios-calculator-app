@@ -51,41 +51,20 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        guard let inputNumber = try? findNumber(of: sender),
-              let currentNumber = numberLabel.text else {
+        guard let inputNumber = try? findNumber(of: sender) else {
             return
         }
-        if (calculatorInput.isEmpty && inputNumber.contains("0")) ||
-            (currentNumber.contains(".") && inputNumber == ".") {
+        if isValidNumber(inputNumber: inputNumber) == false {
             return
         }
         
         calculatorInput.append(inputNumber)
-        
-        if currentNumber == CalculatorConstant.defaultNumber,
-           inputNumber != "." {
-            numberLabel.text = inputNumber == "00" ? "0": inputNumber
-            return
-        }
-        numberLabel.text?.append(inputNumber)
+        updateNumberLabel(with: inputNumber)
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        addStack()
-
-        do {
-            let result = try ExpressionParser.parse(from: calculatorInput).result()
-            
-            if String(result).count > 20 {
-                throw CalculatorError.unexpectedData
-            }
-            
-            numberLabel.text = NumberFormatter.calculator.string(for: result)
-            operatorLabel.text = ""
-        } catch {
-            operatorLabel.text = CalculatorConstant.defaultOperator
-            numberLabel.text = CalculatorConstant.failedResult
-        }
+        addInputStack()
+        calculate()
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -95,14 +74,12 @@ final class CalculatorViewController: UIViewController {
         }
         
         if let _ = Int(String(lastInput)) {
-            addStack()
+            addInputStack()
         } else {
             calculatorInput.removeLast()
         }
         calculatorInput.append(inputOperator)
-        
-        operatorLabel.text = inputOperator
-        numberLabel.text = CalculatorConstant.defaultNumber
+        updateLabels(with: inputOperator)
     }
     
     @IBAction func touchUpFunctionButton(_ sender: UIButton) {
@@ -115,54 +92,6 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = CalculatorConstant.defaultOperator
     }
     
-    private func addStack() {
-        guard let `operator` = operatorLabel.text,
-              let number = numberLabel.text else {
-            return
-        }
-        
-        let stack = UIStackView()
-        let operatorStackLabel = UILabel()
-        let numberStackLabel = UILabel()
-        
-        stack.axis = .horizontal
-        stack.spacing = 8
-        stack.distribution = .fill
-        stack.alignment = .fill
-        
-        numberStackLabel.textColor = .white
-        operatorStackLabel.textColor = .white
-        
-        operatorStackLabel.text = `operator`
-        numberStackLabel.text = number
-        
-        stack.addArrangedSubview(operatorStackLabel)
-        stack.addArrangedSubview(numberStackLabel)
-        
-        stack.isHidden = true
-        
-        inputStackView.addArrangedSubview(stack)
-        
-        UIView.animate(withDuration: CalculatorConstant.actionDuration) {
-            stack.isHidden = false
-        }
-        
-        scrollView
-            .setContentOffset(
-                CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
-                animated: true
-            )
-    }
-    
-    private func removeStack() {
-        inputStackView.subviews.forEach {
-            $0.removeFromSuperview()
-        }
-        operatorLabel.text = CalculatorConstant.defaultOperator
-        numberLabel.text = CalculatorConstant.defaultNumber
-        calculatorInput = CalculatorConstant.defaultInput
-    }
-
     private func findNumber(of button: UIButton) throws -> String {
         switch button {
         case dotButton:
@@ -194,6 +123,100 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
+    private func isValidNumber(inputNumber: String) -> Bool {
+        guard let currentNumber = numberLabel.text else {
+            return false
+        }
+        if (calculatorInput.isEmpty && inputNumber.contains("0")) ||
+            (currentNumber.contains(".") && inputNumber == ".") {
+            return false
+        }
+        return true
+    }
+    
+    private func updateNumberLabel(with inputNumber: String) {
+        guard let currentNumber = numberLabel.text else {
+            return
+        }
+        if currentNumber == CalculatorConstant.defaultNumber,
+           inputNumber != "." {
+            numberLabel.text = inputNumber == "00" ? "0": inputNumber
+            return
+        }
+        numberLabel.text?.append(inputNumber)
+    }
+    
+    private func addInputStack() {
+        guard let stack = generateStack() else {
+            return
+        }
+        
+        inputStackView.addArrangedSubview(stack)
+        setAnimation(of: stack)
+        setScrollViewLayout()
+    }
+    
+    private func generateStack() -> UIStackView? {
+        guard let (operatorStackLabel, numberStackLabel) = generateStackLabels() else {
+            return nil
+        }
+        let stack = UIStackView()
+        
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.distribution = .fill
+        stack.alignment = .fill
+        
+        stack.addArrangedSubview(operatorStackLabel)
+        stack.addArrangedSubview(numberStackLabel)
+        
+        return stack
+    }
+    
+    private func generateStackLabels() -> (UILabel, UILabel)? {
+        guard let `operator` = operatorLabel.text,
+              let number = numberLabel.text else {
+            return nil
+        }
+        let operatorStackLabel = UILabel()
+        let numberStackLabel = UILabel()
+        
+        operatorStackLabel.textColor = .white
+        operatorStackLabel.text = `operator`
+        
+        numberStackLabel.textColor = .white
+        numberStackLabel.text = number
+        
+        return (operatorStackLabel, numberStackLabel)
+    }
+    
+    private func setAnimation(of stack: UIStackView) {
+        stack.isHidden = true
+        UIView.animate(withDuration: CalculatorConstant.actionDuration) {
+            stack.isHidden = false
+        }
+    }
+    
+    private func setScrollViewLayout() {
+        scrollView
+            .setContentOffset(
+                CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
+                animated: true
+            )
+    }
+    
+    private func calculate() {
+        do {
+            let result = try ExpressionParser.parse(from: calculatorInput).result()
+            
+            numberLabel.text = NumberFormatter.calculator.string(for: result)
+            operatorLabel.text = ""
+        } catch {
+            operatorLabel.text = CalculatorConstant.defaultOperator
+            numberLabel.text = CalculatorConstant.failedResult
+        }
+    }
+    
     private func findOperator(of button: UIButton) throws -> String {
         switch button {
         case addButton:
@@ -209,6 +232,11 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
+    private func updateLabels(with inputOperator: String) {
+        operatorLabel.text = inputOperator
+        numberLabel.text = CalculatorConstant.defaultNumber
+    }
+    
     private func findFunction(of button: UIButton) throws {
         switch button {
         case acButton:
@@ -222,12 +250,21 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func removeLabelText() {
+    private func removeStack() {
+        inputStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        operatorLabel.text = CalculatorConstant.defaultOperator
         numberLabel.text = CalculatorConstant.defaultNumber
+        calculatorInput = CalculatorConstant.defaultInput
+    }
+    
+    private func removeLabelText() {
         guard let numberCount = numberLabel.text?.count else {
             return
         }
         calculatorInput.removeLast(numberCount)
+        numberLabel.text = CalculatorConstant.defaultNumber
     }
     
     private func configurePrefix() {
