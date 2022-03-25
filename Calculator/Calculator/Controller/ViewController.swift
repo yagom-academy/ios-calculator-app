@@ -41,8 +41,8 @@ class ViewController: UIViewController {
             return
         } else if currentOperand == Number.zero.rawValue, sender.tag != 11 {
             currentOperand = ""
-        } else if currentOperand == "-\(Number.zero.rawValue)" {
-            currentOperand = "-"
+        } else if currentOperand.hasPrefix("−\(Number.zero.rawValue)") {
+            currentOperand = "−"
         } else if currentOperand.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
             return
         }
@@ -86,19 +86,21 @@ class ViewController: UIViewController {
         }
         
         currentOperatorLabel.text = currentOperator
-
-        if isOperandEntered == true {
-            insertLabelToHorizontalStackView()
-            currentOperandLabel.text = Number.zero.rawValue
-            isOperandEntered = false
+        
+        guard isOperandEntered == true else {
+            return
         }
+        
+        insertLabelToHorizontalStackView()
+        currentOperandLabel.text = Number.zero.rawValue
+        isOperandEntered = false
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton) {
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
-
+        
     }
     
     // MARK: Extra Button Methods
@@ -106,15 +108,16 @@ class ViewController: UIViewController {
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
-        
+
         for view in verticalStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
+        isFirstOperand = true
     }
-
+    
     @IBAction func clearEntryButtonClicked(_ sender: UIButton) {
         currentOperandLabel.text = Number.zero.rawValue
     }
