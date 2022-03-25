@@ -6,8 +6,16 @@
 
 import UIKit
 
+fileprivate enum CalculatorConstant {
+    static let defaultNumber: String = "0"
+    static let defaultOperator: String = ""
+    static let defaultInput: String = ""
+    
+    static let actionDuration: Double = 0.3
+}
+
 final class CalculatorViewController: UIViewController {
-    private var calculatorInput: String = ""
+    private var calculatorInput: String = CalculatorConstant.defaultInput
     private var hasFirstInput: Bool = false
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -87,12 +95,12 @@ final class CalculatorViewController: UIViewController {
                       nan == .unexpectedData else {
                     return
                 }
-                operatorLabel.text = ""
+                operatorLabel.text = CalculatorConstant.defaultOperator
                 numberLabel.text = "NaN"
             }
         } else if hasFirstInput == true {
             operatorLabel.text = input
-            numberLabel.text = "0"
+            numberLabel.text = CalculatorConstant.defaultNumber
         }
     }
     
@@ -102,8 +110,8 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = "0"
-        operatorLabel.text = ""
+        numberLabel.text = CalculatorConstant.defaultNumber
+        operatorLabel.text = CalculatorConstant.defaultOperator
     }
     
     private func addStack() {
@@ -119,7 +127,7 @@ final class CalculatorViewController: UIViewController {
         numberStackLabel.textColor = .white
         operatorStackLabel.textColor = .white
         
-        operatorStackLabel.text = hasFirstInput == false ? "": operatorLabel.text
+        operatorStackLabel.text = hasFirstInput == false ? CalculatorConstant.defaultOperator: operatorLabel.text
         numberStackLabel.text = numberLabel.text
         
         stack.addArrangedSubview(operatorStackLabel)
@@ -129,7 +137,7 @@ final class CalculatorViewController: UIViewController {
         
         inputStackView.addArrangedSubview(stack)
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: CalculatorConstant.actionDuration) {
             stack.isHidden = false
         }
         
@@ -137,8 +145,8 @@ final class CalculatorViewController: UIViewController {
             hasFirstInput = true
         }
         
-        var newInput: String = operatorLabel.text ?? ""
-        newInput.append(numberLabel.text ?? "")
+        var newInput: String = operatorLabel.text ?? CalculatorConstant.defaultOperator
+        newInput.append(numberLabel.text ?? CalculatorConstant.defaultInput)
         calculatorInput.append(contentsOf: newInput)
         
         scrollView
@@ -153,9 +161,9 @@ final class CalculatorViewController: UIViewController {
             $0.removeFromSuperview()
         }
         hasFirstInput = false
-        operatorLabel.text = ""
-        numberLabel.text = "0"
-        calculatorInput = ""
+        operatorLabel.text = CalculatorConstant.defaultOperator
+        numberLabel.text = CalculatorConstant.defaultNumber
+        calculatorInput = CalculatorConstant.defaultInput
     }
 
     private func findNumber(of button: UIButton) throws -> String {
@@ -211,7 +219,7 @@ final class CalculatorViewController: UIViewController {
         case acButton:
             removeStack()
         case ceButton:
-            numberLabel.text = "0"
+            numberLabel.text = CalculatorConstant.defaultNumber
         case prefixButton:
             configurePrefix()
         default:
