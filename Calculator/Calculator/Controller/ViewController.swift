@@ -11,10 +11,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberListStackView: UIStackView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    var isNoneNumber: Bool = true
-    var isFirst: Bool = true
-    var isResult: Bool = false
-    var formulaToSend = ""
+    private var isNoneNumber: Bool = true
+    private var isFirst: Bool = true
+    private var isResult: Bool = false
+    private var formulaToSend = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
