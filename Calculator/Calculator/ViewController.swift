@@ -4,7 +4,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var calculatingValueLabel: UILabel!
     @IBOutlet weak var inputFormulaLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet var operandBtns: [UIButton]!
@@ -13,7 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var allClearBtn: UIButton!
     @IBOutlet weak var clearEntryBtn: UIButton!
     @IBOutlet weak var plusAndMinusBtn: UIButton!
-    @IBOutlet weak var calculationBtn: UIButton!
     @IBOutlet weak var enteredFormulaValueScrollView: UIScrollView!
     @IBOutlet weak var formulaStackView: UIStackView!
     
