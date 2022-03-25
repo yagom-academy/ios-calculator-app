@@ -50,8 +50,8 @@ class ViewController: UIViewController {
             return
         } else if currentOperand == Number.zero.rawValue, sender.tag != 11 {
             currentOperand = ""
-        } else if currentOperand.hasPrefix("−\(Number.zero.rawValue)") {
-            currentOperand = "−"
+        } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
+            currentOperand = "-"
         } else if currentOperand.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
             return
         }
@@ -77,25 +77,8 @@ class ViewController: UIViewController {
     // MARK: Operator Button Methods
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
         
-        guard var currentOperator = currentOperatorLabel.text else {
-            return
-        }
-        
-        switch sender.tag {
-        case 0:
-            currentOperator = operatorButtons[0].titleLabel?.text ?? ""
-        case 1:
-            currentOperator = operatorButtons[1].titleLabel?.text ?? ""
-        case 2:
-            currentOperator = operatorButtons[2].titleLabel?.text ?? ""
-        case 3:
-            currentOperator = operatorButtons[3].titleLabel?.text ?? ""
-        default:
-            print("에러호출")
-        }
-        
-        currentOperatorLabel.text = currentOperator
-        
+        currentOperatorLabel.text = sender.titleLabel?.text
+                
         guard isOperandEntered == true else {
             return
         }
@@ -130,6 +113,8 @@ class ViewController: UIViewController {
     // MARK: Extra Button Methods
     @IBAction func allClearButtonClicked(_ sender: UIButton) {
         currentOperandLabel.text = Number.zero.rawValue
+        currentOperatorLabel.text = ""
+        
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
