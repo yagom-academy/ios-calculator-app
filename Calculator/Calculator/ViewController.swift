@@ -13,14 +13,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var numberFormatter: NumberFormatter = {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            return formatter
-        }()
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 20
+        return formatter
+    }()
     
     // MARK: - IBAction
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
+        guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
+        
         if operandLabel.text == "0" { operandLabel.text = "" }
         
         updateOperandLabel(sender)
