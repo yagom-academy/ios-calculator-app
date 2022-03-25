@@ -63,9 +63,9 @@ class ViewController: UIViewController {
         }
         
         if valueToBeCalculated.isEmpty {
-            let view = makeStackView()
-            view.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
-            stackView.addArrangedSubview(view)
+            let newStackView = makeStackView()
+            newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
+            stackView.addArrangedSubview(newStackView)
             scrollView.scrollToBottom()
             valueToBeCalculated.append(inputOperand)
             valueToBeCalculated.append(buttonLabel)
@@ -75,9 +75,9 @@ class ViewController: UIViewController {
         }
         
         if valueToBeCalculated.isEmpty == false {
-            let view = makeStackView()
-            view.addArrangedSubview(makeLable(text: buttonLabel))
-            view.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
+            let newStackView = makeStackView()
+            newStackView.addArrangedSubview(makeLable(text: buttonLabel))
+            newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
             stackView.addArrangedSubview(view)
             scrollView.scrollToBottom()
             valueToBeCalculated.append(inputOperand)
