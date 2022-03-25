@@ -11,12 +11,13 @@ fileprivate enum CalculatorConstant {
     static let defaultOperator: String = ""
     static let defaultInput: String = ""
     
+    static let failedResult = "NaN"
+    
     static let actionDuration: Double = 0.3
 }
 
 final class CalculatorViewController: UIViewController {
     private var calculatorInput: String = CalculatorConstant.defaultInput
-    private var hasFirstInput: Bool = false
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -33,7 +34,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var subtractButton: UIButton!
     @IBOutlet weak var devideButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
-    @IBOutlet weak var equalButton: UIButton!
     
     @IBOutlet weak var dotButton: UIButton!
     
@@ -51,57 +51,61 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        guard let input = try? findNumber(of: sender) else {
+        guard let input = try? findNumber(of: sender),
+              let currentNumber = numberLabel.text else {
             return
         }
-        let currentNumber = numberLabel.text
+        if (calculatorInput.isEmpty && input.contains("0")) ||
+            (currentNumber.contains(".") && input == ".") {
+            return
+        }
         
-        guard isValidNumber(input: input, currentNumber: currentNumber) else {
+        calculatorInput.append(input)
+        
+        if currentNumber == CalculatorConstant.defaultNumber,
+           input != "." {
+            numberLabel.text = input == "00" ? "0": input
             return
         }
-        if hasFirstInput == true, currentNumber == "0", input.contains("0") {
-            numberLabel.text = "0"
-        } else if currentNumber == "0", input != "." {
-            numberLabel.text = input
-        } else {
-            numberLabel.text?.append(input)
+        numberLabel.text?.append(input)
+    }
+    
+    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        addStack()
+
+        do {
+            let result = try ExpressionParser.parse(from: calculatorInput).result()
+            
+            if String(result).count > 20 {
+                throw CalculatorError.unexpectedData
+            }
+            
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.maximumFractionDigits = 10
+            numberLabel.text = numberFormatter.string(for: result)
+            operatorLabel.text = ""
+        } catch {
+            operatorLabel.text = CalculatorConstant.defaultOperator
+            numberLabel.text = CalculatorConstant.failedResult
         }
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let input = try? findOperator(of: sender) else {
+        guard let input = try? findOperator(of: sender),
+              let lastInput = calculatorInput.last else {
             return
         }
-        if numberLabel.text == "0" && hasFirstInput == false {
-            return
+        
+        if let _ = Int(String(lastInput)) {
+            addStack()
+        } else {
+            calculatorInput.removeLast()
         }
-        addStack()
-        if input == "=" {
-            let result: Double
-            do {
-                result = try ExpressionParser.parse(from: calculatorInput).result()
-                
-                if String(result).count > 20 {
-                    throw CalculatorError.unexpectedData
-                }
-                
-                let numberFormatter = NumberFormatter()
-                numberFormatter.numberStyle = .decimal
-                numberFormatter.maximumFractionDigits = 10
-                numberLabel.text = numberFormatter.string(for: result)
-                operatorLabel.text = ""
-            } catch {
-                guard let nan = error as? CalculatorError,
-                      nan == .unexpectedData else {
-                    return
-                }
-                operatorLabel.text = CalculatorConstant.defaultOperator
-                numberLabel.text = "NaN"
-            }
-        } else if hasFirstInput == true {
-            operatorLabel.text = input
-            numberLabel.text = CalculatorConstant.defaultNumber
-        }
+        calculatorInput.append(input)
+        
+        operatorLabel.text = input
+        numberLabel.text = CalculatorConstant.defaultNumber
     }
     
     @IBAction func touchUpFunctionButton(_ sender: UIButton) {
@@ -115,6 +119,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addStack() {
+        guard let `operator` = operatorLabel.text,
+              let number = numberLabel.text else {
+            return
+        }
+        
         let stack = UIStackView()
         let operatorStackLabel = UILabel()
         let numberStackLabel = UILabel()
@@ -127,8 +136,8 @@ final class CalculatorViewController: UIViewController {
         numberStackLabel.textColor = .white
         operatorStackLabel.textColor = .white
         
-        operatorStackLabel.text = hasFirstInput == false ? CalculatorConstant.defaultOperator: operatorLabel.text
-        numberStackLabel.text = numberLabel.text
+        operatorStackLabel.text = `operator`
+        numberStackLabel.text = number
         
         stack.addArrangedSubview(operatorStackLabel)
         stack.addArrangedSubview(numberStackLabel)
@@ -141,14 +150,6 @@ final class CalculatorViewController: UIViewController {
             stack.isHidden = false
         }
         
-        if hasFirstInput == false {
-            hasFirstInput = true
-        }
-        
-        var newInput: String = operatorLabel.text ?? CalculatorConstant.defaultOperator
-        newInput.append(numberLabel.text ?? CalculatorConstant.defaultInput)
-        calculatorInput.append(contentsOf: newInput)
-        
         scrollView
             .setContentOffset(
                 CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
@@ -160,7 +161,6 @@ final class CalculatorViewController: UIViewController {
         inputStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-        hasFirstInput = false
         operatorLabel.text = CalculatorConstant.defaultOperator
         numberLabel.text = CalculatorConstant.defaultNumber
         calculatorInput = CalculatorConstant.defaultInput
@@ -207,8 +207,6 @@ final class CalculatorViewController: UIViewController {
             return String(Operator.devide.rawValue)
         case multiplyButton:
             return String(Operator.multiply.rawValue)
-        case equalButton:
-            return "="
         default:
             throw CalculatorError.unexpectedData
         }
@@ -220,10 +218,21 @@ final class CalculatorViewController: UIViewController {
             removeStack()
         case ceButton:
             numberLabel.text = CalculatorConstant.defaultNumber
+            removeLabelTextInCalculatorInput()
         case prefixButton:
             configurePrefix()
         default:
             throw CalculatorError.unexpectedData
+        }
+    }
+    
+    private func removeLabelTextInCalculatorInput() {
+        guard var lastValue = calculatorInput.last else {
+            return
+        }
+        while Int(String(lastValue)) != nil {
+            _ = calculatorInput.popLast()
+            lastValue = calculatorInput.last ?? " "
         }
     }
     
@@ -242,20 +251,12 @@ final class CalculatorViewController: UIViewController {
         } else {
             numberLabel.text = "-" + currentNumber
         }
-    }
-    
-    private func isValidNumber(input: String, currentNumber: String?) -> Bool {
-        let isValidZero = true
-        let isValidDot = true
         
-        if hasFirstInput == false, currentNumber == "0", input.contains("0") {
-            return !isValidZero
+        removeLabelTextInCalculatorInput()
+        guard let number = numberLabel.text else {
+            return
         }
-        if ((currentNumber?.contains(".")) == true), input == "." {
-            return !isValidDot
-        }
-        return true
+        calculatorInput.append(number)
     }
-
 }
 
