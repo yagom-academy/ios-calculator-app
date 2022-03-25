@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func appendInputFormulaLabelToCalculatingValueLabel(_ sender: UIButton) {
+        if inputFormulaLabel.text == "" || inputFormulaLabel.text == "0" { return }
         guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let operandValue = inputFormulaLabel.text else { return }
         inputOperatorLabel.text = operatorValue
