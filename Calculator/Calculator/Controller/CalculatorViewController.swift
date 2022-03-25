@@ -51,23 +51,23 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        guard let input = try? findNumber(of: sender),
+        guard let inputNumber = try? findNumber(of: sender),
               let currentNumber = numberLabel.text else {
             return
         }
-        if (calculatorInput.isEmpty && input.contains("0")) ||
-            (currentNumber.contains(".") && input == ".") {
+        if (calculatorInput.isEmpty && inputNumber.contains("0")) ||
+            (currentNumber.contains(".") && inputNumber == ".") {
             return
         }
         
-        calculatorInput.append(input)
+        calculatorInput.append(inputNumber)
         
         if currentNumber == CalculatorConstant.defaultNumber,
-           input != "." {
-            numberLabel.text = input == "00" ? "0": input
+           inputNumber != "." {
+            numberLabel.text = inputNumber == "00" ? "0": inputNumber
             return
         }
-        numberLabel.text?.append(input)
+        numberLabel.text?.append(inputNumber)
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -92,7 +92,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let input = try? findOperator(of: sender),
+        guard let inputOperator = try? findOperator(of: sender),
               let lastInput = calculatorInput.last else {
             return
         }
@@ -102,9 +102,9 @@ final class CalculatorViewController: UIViewController {
         } else {
             calculatorInput.removeLast()
         }
-        calculatorInput.append(input)
+        calculatorInput.append(inputOperator)
         
-        operatorLabel.text = input
+        operatorLabel.text = inputOperator
         numberLabel.text = CalculatorConstant.defaultNumber
     }
     
