@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     private var temporaryOperandText: String = ""
     private let singleZero = "0"
@@ -109,6 +109,7 @@ class CalculatorViewController: UIViewController {
         inputAtOperatorsLabel(by: operatorButtonsTitleText)
         appendOperatorAtTemporaryOperandText(by: operatorButtonsTitleText)
         operandsLabel.text = singleZero
+        scrollView.scrollToBottom(animated: true)
     }
     
     private func isValidZeroForOperatorsLabel(currentOperandsLabel: String?) -> Bool {
@@ -182,9 +183,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedClearElementButton(_ sender: UIButton) {
+        // Empty
     }
     
     @IBAction func tappedPositiveNegativeConversionButton(_ sender: UIButton) {
+        // Empty
     }
     
     @IBAction func tappedEqualSignButton(_ sender: UIButton) {
@@ -210,7 +213,7 @@ class CalculatorViewController: UIViewController {
         let currentOperatorsLabel = operatorsLabel.text
         
         addArrangedStackView(operatorText: currentOperatorsLabel, operandText: currentOperandsLabel)
-    
+        
         let result: Double
         do {
             result = try ExpressionParser.parse(from: temporaryOperandText).result()
