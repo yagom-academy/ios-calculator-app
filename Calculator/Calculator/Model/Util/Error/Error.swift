@@ -12,15 +12,16 @@ enum CalculatorError: Error {
   case nonNumber
   case nonOperator
 }
+
 extension CalculatorError: LocalizedError {
   var errorDescription: String?{
     switch self {
     case .divisionByZero:
       return "NaN"
     case .nonNumber:
-      return "숫자잘못입력"
+      return "numberError"
     case .nonOperator:
-      return "기호잘못입력"
+      return "operatorError"
     }
   }
 }

@@ -17,13 +17,13 @@ struct Formula {
       return .failure(.nonNumber)
     }
   
-    while operands.isEmpty() == false {
+    while operands.isEmpty() == false || operators.isEmpty() == false {
 
       guard let operand = operands.dequeue()  else {
         return .failure(.nonNumber)
       }
       guard let `operator` = operators.dequeue() else {
-       return .failure(.nonOperator)
+        return .failure(.nonOperator)
       }
       
       if `operator` == Operator.divide && operand == Double.zero {
