@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var allCalculationStack: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var numberFormatter: NumberFormatter = {
             let formatter = NumberFormatter()
@@ -56,6 +57,8 @@ class ViewController: UIViewController {
         
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
+        
+        scrollToBottom()
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -116,6 +119,18 @@ class ViewController: UIViewController {
     func setUpDefaultLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
+    }
+    
+    // MARK: - ScrollView Method
+    
+    func scrollToBottom() {
+        scrollView.layoutIfNeeded()
+        
+        let positionValue = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
+        
+        if (positionValue.y > 0) {
+            scrollView.setContentOffset(positionValue, animated: true)
+        }
     }
     
     override func viewDidLoad() {
