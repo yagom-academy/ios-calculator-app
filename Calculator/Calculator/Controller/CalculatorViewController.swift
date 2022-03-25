@@ -6,9 +6,9 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
-    private var calculatorInput = ""
-    private var hasFirstInput = false
+final class CalculatorViewController: UIViewController {
+    private var calculatorInput: String = ""
+    private var hasFirstInput: Bool = false
 
     @IBOutlet weak var scrollView: UIScrollView!
     
