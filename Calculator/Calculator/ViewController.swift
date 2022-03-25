@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var plusAndMinusBtn: UIButton!
     @IBOutlet weak var enteredFormulaValueScrollView: UIScrollView!
     @IBOutlet weak var formulaStackView: UIStackView!
+    var enteredResultValue = ""
     
     let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -42,7 +43,6 @@ class ViewController: UIViewController {
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
         inputOperatorLabel.text = inputOperatorValue
-        appendFormulaValueToScrollView(enteredValue, operatorsValue: inputOperatorValue)
         inputFormulaLabel.text = "0"
     }
     
@@ -86,7 +86,6 @@ class ViewController: UIViewController {
            let _ = Int(inputLastValue.description) {
             inputFormulaLabel.text?.removeLast()
         } else if inputOperatorLabel.text?.isEmpty == false {
-        } else {
             inputFormulaLabel.text?.removeLast()
         }
     }
@@ -112,10 +111,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startCalculationBtn(_ sender: Any) {
-        formulaStackView.arrangedSubviews.forEach {
-            for index in formulaStackView.arrangedSubviews.count {
-                $0.subviews[]
-            }
+        guard let inputValue = inputFormulaLabel.text else { return }
+        enteredResultValue += inputValue
+        do {
+            let result = try ExpressionParser.parse(from: enteredResultValue).result()
+            inputFormulaLabel.text = String(Int(result))
+        } catch {
+            print(error)
         }
     }
 }
