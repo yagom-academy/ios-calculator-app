@@ -217,8 +217,7 @@ final class CalculatorViewController: UIViewController {
         case acButton:
             removeStack()
         case ceButton:
-            numberLabel.text = CalculatorConstant.defaultNumber
-            removeLabelTextInCalculatorInput()
+            removeLabelText()
         case prefixButton:
             configurePrefix()
         default:
@@ -226,37 +225,35 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func removeLabelTextInCalculatorInput() {
-        guard var lastValue = calculatorInput.last else {
+    private func removeLabelText() {
+        numberLabel.text = CalculatorConstant.defaultNumber
+        guard let numberCount = numberLabel.text?.count else {
             return
         }
-        while Int(String(lastValue)) != nil {
-            _ = calculatorInput.popLast()
-            lastValue = calculatorInput.last ?? " "
-        }
+        calculatorInput.removeLast(numberCount)
     }
     
     private func configurePrefix() {
-        guard let currentNumber = numberLabel.text,
-              currentNumber != "0" else {
+        guard var currentNumber = numberLabel.text,
+              currentNumber != "0",
+              let firstNumber = currentNumber.first else {
             return
         }
+        let newPrefix: String
         
-        if currentNumber.first == "+" {
-            numberLabel.text?.removeFirst()
-            numberLabel.text?.insert("-", at: currentNumber.startIndex)
-        } else if currentNumber.first == "-" {
-            numberLabel.text?.removeFirst()
-            numberLabel.text?.insert("+", at: currentNumber.startIndex)
-        } else {
-            numberLabel.text = "-" + currentNumber
+        calculatorInput.removeLast(currentNumber.count)
+        switch firstNumber {
+        case let currentPrefix where "+-".contains(currentPrefix):
+            currentNumber.removeFirst()
+            newPrefix = currentPrefix == "+" ? "-" : "+"
+        default:
+            newPrefix = "-"
         }
         
-        removeLabelTextInCalculatorInput()
-        guard let number = numberLabel.text else {
-            return
-        }
-        calculatorInput.append(number)
+        let newNumber: String = newPrefix + currentNumber
+        
+        numberLabel.text = newNumber
+        calculatorInput.append(newNumber)
     }
 }
 
