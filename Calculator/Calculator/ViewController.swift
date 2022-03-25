@@ -48,12 +48,7 @@ class ViewController: UIViewController {
             return
         }
         
-        let calculationStackView: UIStackView = makeCalculationStackView()
-        
-        [makeLabel(labelText: operatorLabel.text),
-         makeLabel(labelText: operandLabel.text)].forEach { calculationStackView.addArrangedSubview($0) }
-        
-        allCalculationStack.addArrangedSubview(calculationStackView)
+        addStackView()
         
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
@@ -79,6 +74,40 @@ class ViewController: UIViewController {
         operandLabel.text = numberFormatter.string(from: (number * -1) as NSNumber)
     }
     
+    @IBAction func touchUpCalculationButton(_ sender: Any) {
+        if operatorLabel.text == "" { return }
+        
+        var arithmeticExpressio = ""
+        
+        addStackView()
+        
+        scrollToBottom()
+        
+        allCalculationStack.arrangedSubviews.forEach {
+            let stack = $0 as? UIStackView
+            let operatorLabel = stack?.arrangedSubviews[0] as? UILabel
+            let operandLabel = stack?.arrangedSubviews[1] as? UILabel
+            
+            if operatorLabel?.text?.isEmpty == false {
+                guard let operatorText = operatorLabel?.text else { return }
+                arithmeticExpressio += " \(operatorText) "
+            } else {
+                arithmeticExpressio = ""
+            }
+            
+            guard let operandText = operandLabel?.text else { return }
+            arithmeticExpressio += removeComma(operandText)
+        }
+        
+        do {
+            operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: arithmeticExpressio).result())
+        } catch {
+            operandLabel.text = "NaN"
+        }
+        
+        operatorLabel.text = ""
+        
+    }
     // MARK: - Method
     
     func removeComma(_ input: String) -> String {
@@ -119,6 +148,15 @@ class ViewController: UIViewController {
     func setUpDefaultLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
+    }
+    
+    func addStackView() {
+        let calculationStackView: UIStackView = makeCalculationStackView()
+        
+        [makeLabel(labelText: operatorLabel.text),
+         makeLabel(labelText: operandLabel.text)].forEach { calculationStackView.addArrangedSubview($0) }
+        
+        allCalculationStack.addArrangedSubview(calculationStackView)
     }
     
     // MARK: - ScrollView Method
