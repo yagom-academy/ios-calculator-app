@@ -3,8 +3,8 @@ import Foundation
 enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
     
     public func calculate(lhs: Double, rhs: Double) throws -> Double {
         do {

@@ -17,6 +17,12 @@
     + [고민했던 것](#STEP-2-고민했던-것들)
     + [배운 개념](#STEP-2-배운-개념)
     + [PR 후 개선사항](#STEP-2-PR-후-개선사항)
+- [STEP 3](#[STEP-3]-계산기-UI-연동)
+    + [기능 구현](#STEP-3-기능-구현)
+    + [고민했던 것](#STEP-3-고민했던-것들)
+    + [배운 개념](#STEP-3-배운-개념)
+    + [PR 후 개선사항](#STEP-3-PR-후-개선사항)
+
 
 ## 계산기 I
 
@@ -82,6 +88,7 @@
 - Queue의 구현
 
 ## STEP 1 PR 후 개선사항
+- Unit Test 내부 코드에 //given //when //then 으로 각 코드의 역할 구분
 ___
 
 ## [STEP 2] 계산 타입 및 주변 타입 구현
@@ -122,4 +129,60 @@ ___
 - 숫자와 연산자 입력에 큐 활용
 
 ## STEP 2 PR 후 개선사항
+- 불필요한 코드 제거
+- 사용하지 않는 함수 제거
+
+---
+
+## [STEP 3] 계산기 UI 연동
+- 사용자의 터치 이벤트를 수신하여 실제로 연산을 수행할 수 있도록 구현합니다.
+- 숫자를 입력하고 계산하는 기능을 구현합니다.
+- 스택뷰와 레이블을 활용하여 계산 내역을 표시해줍니다.
+- 계산내역이 길어지면 위아래로 스크롤할 수 있습니다.
+- 계산내역이 상단 공간을 넘어 이어지는 경우, 사용자에게 제대로 보일 수 있도록 새로 추가될 때 최하단으로 자동 스크롤할 수 있도록 합니다.
+
+
+## STEP 3 주요 기능 구현
+- ```OperandButton```: UIButton을 상속받은 피연산자들의 Custom Class
+    - ```value```: 피연산자(숫자)의 값
+- ```OperatorButton```: UIButton을 상속받은 연산자들의 Custom Class
+    - ```value```: 연산자의 값
+- ```FunctionalButton```: UIButton을 상속받은 특수한 기능을 하는 연산자와 피연산자를 제외한 나머지 버튼들의 Custom Class 
+- ```CalculatorViewController```
+    - ```formulaNotYetCalculated```: 사용자가 계산기로 입력한 수식
+    - ```calculator```: 실제 연산을 할 Formula 인스턴스
+    - ```statusZero```: 0의 상태를 나타내는 Bool 변수
+    - ```formerOperator```: 이전에 입력했던 연산자를 저장하는 String 변수
+    - ```inputtingOperand```: 계산기로 입력한 피연산자
+    - ```inputtingOperator```: 계산기로 입력한 연산자
+    - ```numberFormatter```: 출력 형식을 지정하는 NumberFormatter
+    - ```OperandButtonAction()```: 피연산자 버튼을 클릭했을 때 수행할 액션
+    - ```generateOperandNumber()```: 입력으로부터 피연산자를 조합하는 함수
+    - ```addOperatorToFormulaIfExists()```: 이전에 입력된 연산자를 수식에 추가하는 함수
+    - ```OperatorButtonAction()```: 연산자 버튼을 클릭했을 때 수행할 액션
+    - ```addOperandToFormula()```: 이전에 입력된 피연산자를 수식에 추가하는 함수
+    - ```allClearAction()```: AC 버튼을 눌렀을 때 수행할 액션. 모든 연산내역과 입력을 초기화하는 함수
+    - ```clearEntryAction()```: EC 버튼을 눌렀을 때 수행할 액션. 현재 입력한 숫자 혹은 연산결과를 삭제하는 함수
+    - ```changeSignAction()```: +/- 버튼을 눌렀을 때 수행할 액션. 피연산자의 부호를 변경하는 함수
+    - ```executeCalculatingAction()```: 만들어진 수식으로 실제 연산을 하는 함수
+    - ```configureCalculateResultLabel()```: 연산 결과를 Label에 출력하는 함수
+    - ```insertHistoryInStackView()```: 계산 내역을 생성해서 스택 뷰에 추가하는 함수
+    - ```historyStackView()```: 계산 내역이 작성된 뷰를 생성하는 함수
+
+
+## STEP 3 고민했던 것들
+1. 계산기의 버튼들을 용도에 맞게 구분할 수 있는 방법을 고민했습니다.
+2. 0의 상태와 입력이 0일 경우를 구분할 수 있는 방법을 고민했습니다.
+3. 피연산자의 입력을 어떻게 분기처리할 것인지 고민했습니다.
+4. 스택 뷰의 동적 생성에 대해 고민했습니다.
+5. 스크롤 뷰의 이동에 대해 고민했습니다.
+
+## STEP 3 배운 개념
+- IBOutlet/IBAction
+- 스택뷰의 활용
+- 스크롤뷰의 활용
+
+## STEP 3 PR 후 개선사항
+
+
 
