@@ -43,7 +43,7 @@ class CalculatorTests: XCTestCase {
     
     func test_ExpressionParser동작확인_55출력() {
         //given
-        let testString = "3 + 2 + 1 * 10 - 5"
+        let testString = "3 + 2 + 1 × 10 - 5"
         
         //when
         let formula = ExpressionParser.parse(from: testString)
@@ -55,7 +55,7 @@ class CalculatorTests: XCTestCase {
     
     func test_ExpressionParser동작확인_12출력() {
         //given
-        let testString = "3 + 2 + 1 * 10 / 5"
+        let testString = "3 + 2 + 1 × 10 ÷ 5"
         
         //when
         let formula = ExpressionParser.parse(from: testString)
