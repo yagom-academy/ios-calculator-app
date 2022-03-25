@@ -126,8 +126,14 @@ class ViewController: UIViewController {
         do {
             let result = try ExpressionParser.parse(from: enteredResultValue).result()
             inputFormulaLabel.text = String(Int(result))
-        } catch {
-            print(error)
+        } catch CalculateError.isNaN(.nan) {
+            inputFormulaLabel.text = CalculateError.isNaN(.nan).errorDescription
+        } catch CalculateError.cannotCalculation {
+            print(CalculateError.cannotCalculation.errorDescription as Any)
+        } catch CalculateError.operandIsNil {
+            print(CalculateError.operandIsNil.errorDescription as Any)
+        } catch CalculateError.operatorIsNil {
+            print(CalculateError.operatorIsNil.errorDescription as Any)
         }
     }
 }
