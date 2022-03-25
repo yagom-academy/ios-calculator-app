@@ -17,7 +17,7 @@ class CalculatorItemQueue {
     }
     
     func dequeue() -> CalculateItem? {
-        if queue.isEmpty {
+        guard queue.isEmpty == false else{
             return nil
         }
         let returnValue = queue.remove(at: 0)
