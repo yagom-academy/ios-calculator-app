@@ -23,13 +23,13 @@ class ViewController: UIViewController {
         removeOperatorLabelTextAtInputValueIsZero()
     }
     
-    @IBAction func appendOperandToInputFormulaLabel(_ sender: UIButton) {
+    @IBAction func touchUpOperandBtns(_ sender: UIButton) {
         guard let operand = operandBtns[sender.tag].titleLabel?.text,
               let inputValue = inputFormulaLabel.text else { return }
         inputFormulaLabel.text = inputValue+operand
     }
     
-    @IBAction func appendInputFormulaLabelToCalculatingValueLabel(_ sender: UIButton) {
+    @IBAction func touchUpOperatorBtns(_ sender: UIButton) {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
         guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let operandValue = inputFormulaLabel.text else { return }
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         inputFormulaLabel.text = "0"
     }
     
-    @IBAction func touchUpEntryClearToInputFormulaLabel() {
+    @IBAction func touchUpEntryClear() {
         if let inputValue = inputFormulaLabel.text,
            let inputLastValue = inputValue.last,
            let _ = Int(inputLastValue.description) {
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpAllClearToInputFormulaLabel() {
+    @IBAction func touchUpAllClear() {
         inputFormulaLabel.text?.removeAll()
         inputOperatorLabel.text?.removeAll()
         inputFormulaLabel.text = "0"
