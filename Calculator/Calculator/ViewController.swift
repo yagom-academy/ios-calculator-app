@@ -99,7 +99,7 @@ private extension ViewController {
     @IBAction func touchUpCalculationButton(_ sender: Any) {
         if operatorLabel.text == CalculatorSign.empty { return }
         
-        var arithmeticExpressio = ""
+        var arithmeticExpressio = CalculatorSign.empty
         
         addStackView()
         scrollToBottom()
@@ -113,7 +113,7 @@ private extension ViewController {
                 guard let operatorText = operatorLabel?.text else { return }
                 arithmeticExpressio += " \(operatorText) "
             } else {
-                arithmeticExpressio = ""
+                arithmeticExpressio = CalculatorSign.empty
             }
             
             guard let operandText = operandLabel?.text else { return }
@@ -127,7 +127,7 @@ private extension ViewController {
             operandLabel.text = CalculatorSign.nan
         }
         
-        operatorLabel.text = ""
+        operatorLabel.text = CalculatorSign.empty
     }
 }
 
