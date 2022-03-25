@@ -50,7 +50,9 @@ class ViewController: UIViewController {
         if let operandDoubleValue = Double(operatorValue) {
             return numberFormatter.string(from: operandDoubleValue as NSNumber)
         } else {
-            return operatorValue.split(separator: ",").reduce("", +)
+            let operandDoubleValue = operatorValue.split(separator: ",").reduce("", +)
+            guard let operandDoubleValue = Double(operandDoubleValue) else { return ""}
+            return numberFormatter.string(from: operandDoubleValue as NSNumber)
         }
     }
     
