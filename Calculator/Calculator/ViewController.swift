@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         if (operandLabel.text?.contains(".") == true) && sender.currentTitle == "." { return }
         
-        updateOperandLabel(sender)
+        updateDotOperandLabel(sender)
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -122,6 +122,13 @@ class ViewController: UIViewController {
         guard let number = numberFormatter.number(from: nonCommaOperandText) else { return }
         
         operandLabel.text = numberFormatter.string(from: number)
+    }
+    
+    func updateDotOperandLabel(_ button: UIButton) {
+        guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
+        
+        operandLabel.text = operandText + inputText
+        
     }
     
     func makeLabel(labelText: String?) -> UILabel {
