@@ -39,10 +39,10 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorBtns(_ sender: UIButton) {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
-        guard let operatorValue = operatorBtns[sender.tag].titleLabel?.text,
-              let operandValue = inputFormulaLabel.text else { return }
-        inputOperatorLabel.text = operatorValue
-        calculatingValueLabel.text = operandValue
+        guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
+              let enteredValue = inputFormulaLabel.text else { return }
+        inputOperatorLabel.text = inputOperatorValue
+        calculatingValueLabel.text = enteredValue
         inputFormulaLabel.text = "0"
     }
     
@@ -55,8 +55,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEntryClear() {
-        if let inputValue = inputFormulaLabel.text,
-           let inputLastValue = inputValue.last,
+        if let enteredValue = inputFormulaLabel.text,
+           let inputLastValue = enteredValue.last,
            let _ = Int(inputLastValue.description) {
             inputFormulaLabel.text?.removeLast()
         } else if inputOperatorLabel.text?.isEmpty == false {
