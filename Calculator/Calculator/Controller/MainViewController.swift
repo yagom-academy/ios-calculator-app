@@ -60,13 +60,9 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard let selectedOperand = sender.titleLabel?.text else {
-            return
-        }
-        guard sumOfOperands.count < 16 else {
-            return
-        }
-        guard sumOfOperands.contains(".") == false else {
+        guard let selectedOperand = sender.titleLabel?.text,
+                sumOfOperands.count < 16,
+                sumOfOperands.contains(".") == false else {
             return
         }
         
