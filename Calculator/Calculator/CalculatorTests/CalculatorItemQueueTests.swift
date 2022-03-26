@@ -14,7 +14,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_5번_enqueue시_queue의_count가_5인가() {
+    func test_enqueue_n번_했을때_count가_올바른가() {
         //when
         sut.enqueue(1)
         sut.enqueue(2)
@@ -26,7 +26,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 5)
     }
     
-    func test_enqueue_2번하고_dequeue하고_enqueue_2번하면_queue의_count는_3인가() {
+    func test_enqueue_dequeue하고_enqueue했을때_count는_올바른가() {
         //when
         sut.enqueue(1)
         sut.enqueue(2)
@@ -37,29 +37,22 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 3)
     }
     
-    func test_1_2_3의_값을_enqueue뒤_dequeue했을때_1_2_3이_순서대로_pop되는가() {
+    func test_dequeue_1_2_3_enqueue일때_순서대로_pop되는가() {
         //given
+        var result: [Double] = []
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         
         //when
-        var result = sut.dequeue()
+        result.append(sut.dequeue()!)
+        result.append(sut.dequeue()!)
+        result.append(sut.dequeue()!)
         //then
-        XCTAssertEqual(result, 1)
-        
-        //when
-        result = sut.dequeue()
-        //then
-        XCTAssertEqual(result, 2)
-        
-        //when
-        result = sut.dequeue()
-        //then
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, [1,2,3])
     }
     
-    func test_enqueue_3번_dequeue4번_했을때_반환값이_nil인가() {
+    func test_dequeue_enqueue보다_dequeue를_많이했을때_반환값이_올바른가() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -73,7 +66,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_1_2_값을_enqueue하고_clear_했을때_isEmpty가_true인가() {
+    func test_isEmpty_enqueue하고_clear_했을때_반환값이_올바른가() {
         //given
         sut.enqueue(1)
         sut.enqueue(2)
@@ -83,27 +76,5 @@ class CalculatorItemQueueTests: XCTestCase {
         
         //then
         XCTAssertEqual(sut.isEmpty, true)
-    }
-    
-    func test_1_2_값을_enqueue하고_dequeue후_clear_했을때_isEmpty가_true인가() {
-        //given
-        sut.enqueue(1)
-        sut.enqueue(2)
-        XCTAssertNotNil(sut.dequeue())
-        
-        //when
-        sut.clear()
-        
-        //then
-        XCTAssertEqual(sut.isEmpty, true)
-    }
-    
-    func test_clear하고_enqueue_했을때_isEmpty가_false인가() {
-        //when
-        sut.clear()
-        sut.enqueue(4)
-        
-        //then
-        XCTAssertEqual(sut.isEmpty, false)
     }
 }
