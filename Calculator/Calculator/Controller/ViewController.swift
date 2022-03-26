@@ -40,40 +40,22 @@ class ViewController: UIViewController {
     
     // MARK: Operand Button Method
     @IBAction func operandButtonsClicked(_ sender: UIButton) {
-        guard var currentOperand = currentOperandLabel.text else {
-            return
-        }
-        
-        guard currentOperand.filter({ $0 != "," }).count < 20 else {
-            return
-        }
-        
-        if currentOperand == Number.zero.rawValue, sender.tag == 10 {
-            return
-        } else if currentOperand == Number.zero.rawValue, sender.tag != 11 {
-            currentOperand = ""
-        } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
-            currentOperand = "-"
-        } else if currentOperand.contains(Number.decimalPoint.rawValue), sender.tag == 11 {
-            return
-        }
+        guard var validOperand = checkValidity(of: sender) else { return }
         
         Number.allCases.forEach { number in
-            guard (0..<12) ~= sender.tag  else {
-                return
-            }
+            guard (0..<12) ~= sender.tag  else { return }
             
             if String(sender.tag) == number.rawValue {
-                currentOperand += number.rawValue
+                validOperand += number.rawValue
             } else if sender.tag == 10, number == .doubleZero {
-                currentOperand += Number.doubleZero.rawValue
+                validOperand += Number.doubleZero.rawValue
             } else if sender.tag == 11, number == .decimalPoint {
-                currentOperand += Number.decimalPoint.rawValue
+                validOperand += Number.decimalPoint.rawValue
             }
         }
         
         isOperandEntered = true
-        currentOperandLabel.text = numberDividedByComma(from: currentOperand)
+        currentOperandLabel.text = numberDividedByComma(from: validOperand)
     }
     
     // MARK: Operator Button Methods
@@ -225,7 +207,7 @@ class ViewController: UIViewController {
             guard let result = try myFormula.result() else {
                 return
             }
-
+            
             if floor(result) == result {
                 resultString = String(format:"%.0f", result)
                 currentOperandLabel.text = numberDividedByComma(from: resultString)
@@ -237,8 +219,23 @@ class ViewController: UIViewController {
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = "NaN"
         } catch {}
-
+        
         currentOperatorLabel.text = ""
+    }
+    
+    func checkValidity(of sender: UIButton) -> String? {
+        guard var currentOperand = currentOperandLabel.text else { return nil }
+        
+        guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
+        
+        guard currentOperand != Number.zero.rawValue || sender.tag != 10 else { return nil }
+        
+        if currentOperand == Number.zero.rawValue, sender.tag != 11 {
+            currentOperand = ""
+        } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
+            currentOperand = "-"
+        }
+        return currentOperand
     }
 }
 
