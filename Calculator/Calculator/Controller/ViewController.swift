@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     
     var inputOperand: String = ""
-    var valueToBeCalculated: [String] = []
+    var inputValues: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +44,8 @@ class ViewController: UIViewController {
             return
         }
         
-        if inputOperand != "0" {
-            inputOperand += buttonLabel
-            presentValue.text = numberFormatter(number: inputOperand)
-            return
-        }
+        inputOperand += buttonLabel
+        presentValue.text = numberFormatter(number: inputOperand)
     }
     
     @IBAction func didTapOperator(sender: UIButton) {
@@ -58,27 +55,27 @@ class ViewController: UIViewController {
             return
         }
         
-        if valueToBeCalculated.isEmpty {
+        if inputValues.isEmpty {
             let newStackView = makeStackView()
             newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
             stackView.addArrangedSubview(newStackView)
             scrollView.scrollToBottom()
-            valueToBeCalculated.append(inputOperand)
-            valueToBeCalculated.append(buttonLabel)
+            inputValues.append(inputOperand)
+            inputValues.append(buttonLabel)
             inputOperand = "0"
             presentValue.text = inputOperand
             presentOperator.text = buttonLabel
             return
         }
         
-        if valueToBeCalculated.isEmpty == false {
+        if inputValues.isEmpty == false {
             let newStackView = makeStackView()
             newStackView.addArrangedSubview(makeLable(text: buttonLabel))
             newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
             stackView.addArrangedSubview(newStackView)
             scrollView.scrollToBottom()
-            valueToBeCalculated.append(inputOperand)
-            valueToBeCalculated.append(buttonLabel)
+            inputValues.append(inputOperand)
+            inputValues.append(buttonLabel)
             inputOperand = "0"
             presentValue.text = inputOperand
             presentOperator.text = buttonLabel
@@ -94,10 +91,8 @@ class ViewController: UIViewController {
             return
         }
         
-        if inputOperand.contains(".") == false {
-            inputOperand += buttonLabel
-            presentValue.text = lableText + buttonLabel
-        }
+        inputOperand += buttonLabel
+        presentValue.text = lableText + buttonLabel
     }
     
     @IBAction func changeSign(sender: UIButton) {
@@ -105,11 +100,9 @@ class ViewController: UIViewController {
             return
         }
         
-        if inputOperand != "0" {
-            let converteDouble = Double(inputOperand) ?? .zero
-            inputOperand = String(converteDouble * -1)
-            presentValue.text = numberFormatter(number: inputOperand)
-        }
+        let converteDouble = Double(inputOperand) ?? .zero
+        inputOperand = String(converteDouble * -1)
+        presentValue.text = numberFormatter(number: inputOperand)
     }
     
     @IBAction func didTapEqualSign() {
@@ -119,10 +112,10 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(newStackView)
         scrollView.scrollToBottom()
         
-        let xx = valueToBeCalculated.joined(separator: " ") + " " + inputOperand
-        var fomula = ExpressionParser.parse(from: xx)
-        let asd = String(fomula.result())
-        presentValue.text = numberFormatter(number: asd)
+        let valueToBeCalculated = inputValues.joined(separator: " ") + " " + inputOperand
+        var fomula = ExpressionParser.parse(from: valueToBeCalculated)
+        let result = String(fomula.result())
+        presentValue.text = numberFormatter(number: result)
         presentOperator.text = ""
     }
     
@@ -137,11 +130,11 @@ class ViewController: UIViewController {
 }
 
 extension UIScrollView {
-   func scrollToBottom() {
-       self.layoutIfNeeded()
-     let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
-       self.setContentOffset(bottomOffset, animated: true)
-  }
+    func scrollToBottom() {
+        self.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
+        self.setContentOffset(bottomOffset, animated: true)
+    }
 }
 
 extension ViewController {
@@ -151,7 +144,7 @@ extension ViewController {
         presentValue.text = "0"
         presentOperator.text = ""
         inputOperand = "0"
-        valueToBeCalculated.removeAll()
+        inputValues.removeAll()
     }
     
     private func numberFormatter(number: String) -> String {
