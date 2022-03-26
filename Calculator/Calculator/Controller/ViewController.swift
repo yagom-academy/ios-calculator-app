@@ -24,11 +24,7 @@ class ViewController: UIViewController {
     @IBAction func didTapOperand(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
         
-        if inputOperand.count >= 16 {
-            return
-        }
-        
-        if inputOperand == "0" && buttonLabel == "0" {
+        if inputOperand.count >= 16 || inputOperand == "0" && buttonLabel == "0" {
             return
         }
         
