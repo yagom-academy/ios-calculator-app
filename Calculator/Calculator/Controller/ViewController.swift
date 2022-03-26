@@ -60,7 +60,6 @@ class ViewController: UIViewController {
     
     // MARK: Operator Button Methods
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
-        
         currentOperatorLabel.text = sender.titleLabel?.text
         
         if isResultButtonClicked == true {
@@ -69,9 +68,7 @@ class ViewController: UIViewController {
             isResultButtonClicked = false
         }
         
-        guard isOperandEntered == true else {
-            return
-        }
+        guard isOperandEntered == true else { return }
         
         insertLabelToHorizontalStackView()
         currentOperandLabel.text = Number.zero.rawValue
@@ -79,13 +76,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton) {
-        guard currentOperatorLabel.text != "" else {
-            return
-        }
+        guard currentOperatorLabel.text != "" else { return }
         
-        guard verticalStackView.arrangedSubviews.last != nil else {
-            return
-        }
+        guard verticalStackView.arrangedSubviews.last != nil else { return }
         
         insertLabelToHorizontalStackView()
         tryToReturnResult()
@@ -97,9 +90,7 @@ class ViewController: UIViewController {
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
         
-        guard verticalStackView.arrangedSubviews.last != nil else {
-            return
-        }
+        guard verticalStackView.arrangedSubviews.last != nil else { return }
         
         for view in verticalStackView.arrangedSubviews {
             view.removeFromSuperview()
@@ -113,13 +104,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signConvertingButtonClicked(_ sender: UIButton) {
-        guard var currentNumber = currentOperandLabel.text else {
-            return
-        }
+        guard var currentNumber = currentOperandLabel.text else { return }
         
-        guard currentNumber != Number.zero.rawValue else {
-            return
-        }
+        guard currentNumber != Number.zero.rawValue else { return }
         
         if currentNumber.contains(Operator.subtract.rawValue) {
             let minusSign = currentNumber.first
@@ -135,13 +122,9 @@ class ViewController: UIViewController {
     func insertLabelToHorizontalStackView() {
         let label = UILabel()
         
-        guard let operatorLabelText = currentOperatorLabel.text else {
-            return
-        }
+        guard let operatorLabelText = currentOperatorLabel.text else { return }
         
-        guard var operandLabelText = currentOperandLabel.text else {
-            return
-        }
+        guard var operandLabelText = currentOperandLabel.text else { return }
         
         while operandLabelText.contains(Number.decimalPoint.rawValue)
                 && operandLabelText.hasSuffix(Number.zero.rawValue) {
@@ -163,9 +146,7 @@ class ViewController: UIViewController {
             verticalStackView.addArrangedSubview(label)
         }
         
-        guard let string = label.text?.filter({ $0 != "," }) else {
-            return
-        }
+        guard let string = label.text?.filter({ $0 != "," }) else { return }
         
         stringToParse.append(string)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
@@ -185,14 +166,10 @@ class ViewController: UIViewController {
         if commaDeletedOperand.hasSuffix(Number.decimalPoint.rawValue) {
             return currentOperand
         } else {
-            guard let doubledCurrentOperand = Double(commaDeletedOperand) else {
-                return nil
-            }
+            guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return nil }
             
             let number = NSNumber(value: doubledCurrentOperand)
-            guard let formattedNumber = numberFormatter.string(from: number) else {
-                return nil
-            }
+            guard let formattedNumber = numberFormatter.string(from: number) else { return nil }
             
             return formattedNumber
         }
@@ -204,9 +181,7 @@ class ViewController: UIViewController {
         var resultString: String
         
         do {
-            guard let result = try myFormula.result() else {
-                return
-            }
+            guard let result = try myFormula.result() else { return }
             
             if floor(result) == result {
                 resultString = String(format:"%.0f", result)
