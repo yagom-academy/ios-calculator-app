@@ -35,16 +35,16 @@ final class MainViewController: UIViewController {
         self.isNone = true
     }
     
-    @IBAction func ACButtonClicked(_ sender: UIButton) {
+    @IBAction func ACButtonTapped(_ sender: UIButton) {
         setInitialState()
     }
     
-    @IBAction func CEButtonClicked(_ sender: UIButton) {
+    @IBAction func CEButtonTapped(_ sender: UIButton) {
         operandLabel.text = "0"
         sumOfOperands = ""
     }
     
-    @IBAction func signButtonClicked(_ sender: UIButton) {
+    @IBAction func signButtonTapped(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
         } else if var recentOperandLabel = operandLabel.text, recentOperandLabel.first != "-" {
@@ -56,7 +56,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonClicked(_ sender: UIButton) {
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else {
             return
         }
@@ -103,7 +103,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func operandButtonsClicked(_ sender: UIButton) {
+    @IBAction func operandButtonsTapped(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text else {
             return
         }
@@ -116,7 +116,7 @@ final class MainViewController: UIViewController {
         isNone = false
     }
 
-    @IBAction func operatorButtonsClicked(_ sender: UIButton) {
+    @IBAction func operatorButtonsTapped(_ sender: UIButton) {
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
         if isFirstTime == true && operandLabel.text == "0" {
             return
@@ -161,7 +161,7 @@ final class MainViewController: UIViewController {
         isDotUsed = false
     }
     
-    @IBAction func equalSignButtonClicked(_ sender: UIButton) {
+    @IBAction func equalSignButtonTapped(_ sender: UIButton) {
         guard operatorLabel.text != nil else {
             return
         }
