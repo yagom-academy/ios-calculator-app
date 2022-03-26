@@ -181,7 +181,7 @@ final class MainViewController: UIViewController {
         
         let result = calculate()
         
-        setExpressionAfter(result)
+        setExpression(with: result)
     }
     
     private func makeSubStackView() -> UIStackView {
