@@ -19,12 +19,14 @@ enum ExpressionParser {
         }
         
         let operands = stringOperands.compactMap { Double($0) }
+        
         for operand in operands {
             formula.operands.enqueue(operand)
         }
         
         let characterOperators = stringOperators.map { Character($0) }
         let operators = characterOperators.compactMap { Operator(rawValue: $0) }
+        
         for someOperator in operators {
             formula.operators.enqueue(someOperator)
         }
