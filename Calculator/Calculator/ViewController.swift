@@ -45,6 +45,12 @@ final class ViewController: UIViewController {
 private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
+        if !allCalculatStackIsEmpty && (operatorLabel.text?.isEmpty == true) {
+            allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            
+            operandLabel.text = ""
+        }
+        
         guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
                 
         if (operandLabel.text?.contains(CalculatorSign.dot) == true) {
