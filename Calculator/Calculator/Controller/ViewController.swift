@@ -57,9 +57,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        let newStackView = makeStackView()
-        newStackView.addArrangedSubview(makeLable(text: operatorLabel))
-        newStackView.addArrangedSubview(makeLable(text: operandLabel))
+        let newStackView = pushStackView(operandText: operatorLabel, operatorText: operandLabel)
         stackView.addArrangedSubview(newStackView)
         scrollView.scrollToBottom()
         inputValues.append(inputOperand)
@@ -99,9 +97,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        let newStackView = makeStackView()
-        newStackView.addArrangedSubview(makeLable(text: operatorLabel))
-        newStackView.addArrangedSubview(makeLable(text: operandLabel))
+        let newStackView = pushStackView(operandText: operatorLabel, operatorText: operandLabel)
         stackView.addArrangedSubview(newStackView)
         scrollView.scrollToBottom()
         
@@ -152,18 +148,22 @@ extension ViewController {
         return result
     }
     
-    private func makeLable(text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.textColor = .white
-        return label
-    }
-    
-    private func makeStackView() -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.spacing = 10
-        return stackView
+     private func pushStackView(operandText: String?, operatorText: String?) -> UIStackView {
+        let operand = UILabel()
+        let `operator` = UILabel()
+        
+        operand.text = operandText
+        `operator`.text = operatorText
+        operand.textColor = .white
+        `operator`.textColor = .white
+        
+        let newStackView = UIStackView()
+        newStackView.axis = .horizontal
+        newStackView.distribution = .fill
+        newStackView.spacing = 10
+        
+        newStackView.addArrangedSubview(operand)
+        newStackView.addArrangedSubview(`operator`)
+        return newStackView
     }
 }
