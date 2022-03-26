@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         guard var validOperand = checkValidity(of: sender) else { return }
         
         Number.allCases.forEach { number in
-            guard (0..<12) ~= sender.tag  else { return }
+            guard (0..<12) ~= sender.tag else { return }
             
             if String(sender.tag) == number.rawValue {
                 validOperand += number.rawValue
@@ -128,11 +128,11 @@ class ViewController: UIViewController {
         
         while operandLabelText.contains(Number.decimalPoint.rawValue)
                 && operandLabelText.hasSuffix(Number.zero.rawValue) {
-            
             operandLabelText.removeLast()
-            if operandLabelText.contains(Number.decimalPoint.rawValue) {
-                operandLabelText.removeLast()
-            }
+        }
+        
+        if operandLabelText.hasSuffix(Number.decimalPoint.rawValue) {
+            operandLabelText.removeLast()
         }
         
         if isFirstOperand == true {
@@ -210,6 +210,7 @@ class ViewController: UIViewController {
         } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
             currentOperand = "-"
         }
+        
         return currentOperand
     }
 }
