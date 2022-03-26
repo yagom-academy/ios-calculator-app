@@ -95,19 +95,7 @@ class ViewController: UIViewController {
             return
         }
         
-        let formulaForResult = ExpressionParser.parse(from: stringToParse)
-        var myFormula = formulaForResult
-        
-        do {
-            guard let result = try myFormula.result() else {
-                return
-            }
-            currentOperandLabel.text = String(result)
-        } catch CalculatorError.divisionByZero {
-            currentOperandLabel.text = "NaN"
-        } catch {}
-        
-        currentOperatorLabel.text = ""
+        tryToReturnResult()
     }
     
     // MARK: Extra Button Methods
@@ -165,8 +153,10 @@ class ViewController: UIViewController {
                 && operandLabelText.hasSuffix(Number.zero.rawValue) {
             
             operandLabelText.removeLast()
+            if operandLabelText.contains(Number.decimalPoint.rawValue) {
+                operandLabelText.removeLast()
+            }
         }
-        operandLabelText.removeLast()
         
         if isFirstOperand == true {
             label.text = "\(operandLabelText) "
@@ -212,6 +202,28 @@ class ViewController: UIViewController {
             
             return formattedNumber
         }
+    }
+    
+    func tryToReturnResult() {
+        let formulaForResult = ExpressionParser.parse(from: stringToParse)
+        var myFormula = formulaForResult
+        
+        do {
+            guard let result = try myFormula.result() else {
+                return
+            }
+
+            if floor(result) == result {
+                currentOperandLabel.text = String(format:"%.0f",result)
+            } else {
+                currentOperandLabel.text = String(format:"%.20f",result)
+            }
+            
+        } catch CalculatorError.divisionByZero {
+            currentOperandLabel.text = "NaN"
+        } catch {}
+
+        currentOperatorLabel.text = ""
     }
 }
 
