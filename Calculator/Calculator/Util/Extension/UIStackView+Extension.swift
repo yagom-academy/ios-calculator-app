@@ -9,12 +9,12 @@ import UIKit
 
 extension UIStackView {
   
-  static func create(type: String?, operand: String?) -> UIStackView {
-    let stackView = UIStackView()
-    stackView.axis = .horizontal
-    stackView.distribution = .fill
-    stackView.alignment = .fill
-    stackView.spacing = 8
+  convenience init(frame: CGRect = .zero, type: String?, operand: String?) {
+    self.init(frame: frame)
+    self.distribution = .fill
+    self.alignment = .fill
+    self.axis = .horizontal
+    self.spacing = 8
     
     let operatorLabel = UILabel()
     operatorLabel.font = .preferredFont(forTextStyle: .title3)
@@ -26,8 +26,7 @@ extension UIStackView {
     operandLabel.textColor = .white
     operandLabel.text = operand
     
-    stackView.addArrangedSubview(operatorLabel)
-    stackView.addArrangedSubview(operandLabel)
-    return stackView
+    self.addArrangedSubview(operatorLabel)
+    self.addArrangedSubview(operandLabel)
   }
 }

@@ -107,7 +107,7 @@ final class CalculatorViewModel {
       return nil
     }
     let operatorType = self.operatorType.value
-    let stackView = UIStackView.create(type: operatorType, operand: operand.formatString())
+    let stackView = UIStackView(type: operatorType, operand: operand.formatString())
     return stackView
   }
 }
