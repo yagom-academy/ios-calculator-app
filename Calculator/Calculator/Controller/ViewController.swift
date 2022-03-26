@@ -93,12 +93,11 @@ class ViewController: UIViewController {
             return
         }
         
-        insertLabelToHorizontalStackView()
-        
         guard verticalStackView.arrangedSubviews.last != nil else {
             return
         }
         
+        insertLabelToHorizontalStackView()
         tryToReturnResult()
     }
     
@@ -173,7 +172,7 @@ class ViewController: UIViewController {
             verticalStackView.addArrangedSubview(label)
         }
         
-        guard let string = label.text else {
+        guard let string = label.text?.filter({ $0 != "," }) else {
             return
         }
         
@@ -186,7 +185,7 @@ class ViewController: UIViewController {
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 3
         
-        guard currentOperand.contains(".") == false, currentOperand.last != "0" else {
+        guard currentOperand.contains(".") == false || currentOperand.last != "0" else {
             return currentOperand
         }
         
@@ -211,6 +210,7 @@ class ViewController: UIViewController {
     func tryToReturnResult() {
         let formulaForResult = ExpressionParser.parse(from: stringToParse)
         var myFormula = formulaForResult
+        var resultString: String
         
         do {
             guard let result = try myFormula.result() else {
@@ -218,9 +218,11 @@ class ViewController: UIViewController {
             }
 
             if floor(result) == result {
-                currentOperandLabel.text = String(format:"%.0f",result)
+                resultString = String(format:"%.0f", result)
+                currentOperandLabel.text = numberDividedByComma(from: resultString)
             } else {
-                currentOperandLabel.text = String(format:"%.20f",result)
+                resultString = String(format:"%.10f", result)
+                currentOperandLabel.text = numberDividedByComma(from: resultString)
             }
             
         } catch CalculatorError.divisionByZero {
