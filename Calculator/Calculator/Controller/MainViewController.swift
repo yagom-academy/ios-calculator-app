@@ -150,7 +150,7 @@ final class MainViewController: UIViewController {
         return changeToNumberFormatter(with: expressionForm.result().description)
     }
     
-    private func workAfter(_ result: String) {
+    private func setExpressionAfter(_ result: String) {
         if result == "-0" {
             operandLabel.text = "0"
         } else {
@@ -170,7 +170,7 @@ final class MainViewController: UIViewController {
         
         let result = calculate()
         
-        workAfter(result)
+        setExpressionAfter(result)
     }
     
     private func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
