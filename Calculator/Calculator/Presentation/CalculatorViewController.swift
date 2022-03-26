@@ -18,7 +18,6 @@ final class CalculatorViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.configureUI()
     self.bindUI()
     self.clearAll()
   }
@@ -75,10 +74,6 @@ final class CalculatorViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension CalculatorViewController {
-  
-  func configureUI() {
-    self.resultScrollView.showsVerticalScrollIndicator = false
-  }
   
   func bindUI() {
     self.viewModel.operatorType.bind { [weak self] operatorType in
