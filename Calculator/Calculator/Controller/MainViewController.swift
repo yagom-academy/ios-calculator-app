@@ -74,65 +74,61 @@ final class MainViewController: UIViewController {
     private func recombineByDot(with selectedOperand: String) {
         guard let integer = sumOfOperands.split(with: ".").first,
               let numberAfterDot = sumOfOperands.split(with: ".").last else {
-            return
-        }
+                  return
+              }
         
         operandLabel.text = changeToNumberFormatter(with: integer) + "." + numberAfterDot
     }
     
-    private func workByCase(of selectedOperand: String) {
+    private func handleException(of selectedOperand: String, isZero: Bool) {
+        guard isZero == false,
+              sumOfOperands.first != "0" || isDotUsed != false else {
+                  return
+              }
+        
+        if sumOfOperands.last == "." || (sumOfOperands.last == "0" && isDotUsed == true) {
+            sumOfOperands += selectedOperand
+            recombineByDot(with: selectedOperand)
+            return
+        }
+    }
+    
+    private func setOperandLabel(from selectedOperand: String, isZero: Bool) {
+        guard isZero == false else {
+            return
+        }
+        if operandLabel.text == "NaN" {
+            setInitialState()
+        }
+        sumOfOperands += selectedOperand
+        operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
+    }
+    
+    private func updateOperandLabel(by selectedOperand: String) {
         guard isFirstTime == true || operatorLabel.text != nil else {
             return
         }
-        
-        if selectedOperand.last == "0" && sumOfOperands.first == "0" && isDotUsed == false {
-            return
-        }
-        
-        if selectedOperand.last == "0" && sumOfOperands.last == "." {
-            sumOfOperands += selectedOperand
-            recombineByDot(with: selectedOperand)
-            return
-        }
-        
-        if selectedOperand.last == "0" && sumOfOperands.last == "0" && isDotUsed == true {
-            sumOfOperands += selectedOperand
-            recombineByDot(with: selectedOperand)
-            return
-        }
-        
-        if operandLabel.text == "NaN" {
-            setInitialState()
-            sumOfOperands += selectedOperand
-            operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
-            return
-        }
-        
-        sumOfOperands += selectedOperand
-        operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
+        handleException(of: selectedOperand, isZero: selectedOperand.last == "0")
+        setOperandLabel(from: selectedOperand, isZero: selectedOperand.last == "0")
     }
     
     @IBAction func operandButtonsTapped(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text,
               sumOfOperands.count < 16 else {
-            return
-        }
+                  return
+              }
         
-        workByCase(of: selectedOperand)
+        updateOperandLabel(by: selectedOperand)
         
         isNone = false
     }
-
+    
     @IBAction func operatorButtonsTapped(_ sender: UIButton) {
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
-        
-        if isFirstTime == true && operandLabel.text == "0" {
-            return
-        }
-        
-        if isFirstTime == true && operandLabel.text == "NaN" {
-            return
-        }
+        guard isFirstTime == false || operandLabel.text != "0",
+              isFirstTime == false || operandLabel.text != "NaN" else {
+                  return
+              }
         
         if isFirstTime == false && operandLabel.text == "0" && isNone == true {
             operatorLabel.text = sender.titleLabel?.text
