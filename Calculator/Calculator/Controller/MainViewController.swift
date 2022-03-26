@@ -158,9 +158,12 @@ final class MainViewController: UIViewController {
         return changeToNumberFormatter(with: expressionForm.result().description)
     }
     
-    private func setExpressionAfter(_ result: String) {
+    private func setExpression(with result: String) {
         if result == "-0" {
             operandLabel.text = "0"
+        } else if result == "NaN" {
+            isFirstTime = true
+            operandLabel.text = result
         } else {
             operandLabel.text = result
         }
