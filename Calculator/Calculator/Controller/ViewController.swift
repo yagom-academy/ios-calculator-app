@@ -89,6 +89,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton) {
+        guard currentOperatorLabel.text != "" else {
+            return
+        }
+        
         insertLabelToHorizontalStackView()
         
         guard verticalStackView.arrangedSubviews.last != nil else {
