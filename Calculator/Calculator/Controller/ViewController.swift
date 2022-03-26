@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         }
         
         isOperandEntered = true
-        currentOperandLabel.text = numberDividedByComma(from: validOperand)
+        currentOperandLabel.text = returnNumberDividedByComma(from: validOperand)
     }
     
     // MARK: Operator Button Methods
@@ -137,7 +137,7 @@ class ViewController: UIViewController {
         addLabelToStackView(label, operandLabelText, operatorLabelText)
     }
     
-    func numberDividedByComma(from currentOperand: String) -> String? {
+    func returnNumberDividedByComma(from currentOperand: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 3
@@ -170,10 +170,10 @@ class ViewController: UIViewController {
             
             if floor(result) == result {
                 resultString = String(format:"%.0f", result)
-                currentOperandLabel.text = numberDividedByComma(from: resultString)
+                currentOperandLabel.text = returnNumberDividedByComma(from: resultString)
             } else {
                 resultString = String(result)
-                currentOperandLabel.text = numberDividedByComma(from: resultString)
+                currentOperandLabel.text = returnNumberDividedByComma(from: resultString)
             }
             
         } catch CalculatorError.divisionByZero {
