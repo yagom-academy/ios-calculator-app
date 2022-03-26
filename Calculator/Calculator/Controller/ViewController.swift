@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet weak var presentValue: UILabel!
     @IBOutlet weak var presentOperator: UILabel!
@@ -24,7 +24,11 @@ class ViewController: UIViewController {
     @IBAction func didTapOperand(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
         
-        if inputOperand.count >= 16 || inputOperand == "0" && buttonLabel == "0" {
+        if inputOperand.count >= 16 {
+            return
+        }
+        
+        if inputOperand == "0" && buttonLabel == "0" || inputOperand == "0" && buttonLabel == "00" {
             return
         }
         
@@ -46,37 +50,23 @@ class ViewController: UIViewController {
     
     @IBAction func didTapOperator(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
+        guard let operatorLabel = presentOperator.text else { return }
+        guard let operandLabel = presentValue.text else { return }
         
         if inputOperand == "0" {
             return
         }
         
-        if inputValues.isEmpty {
-            let newStackView = makeStackView()
-            newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
-            stackView.addArrangedSubview(newStackView)
-            scrollView.scrollToBottom()
-            inputValues.append(inputOperand)
-            inputValues.append(buttonLabel)
-            inputOperand = "0"
-            presentValue.text = inputOperand
-            presentOperator.text = buttonLabel
-            return
-        }
-        
-        if inputValues.isEmpty == false {
-            let newStackView = makeStackView()
-            newStackView.addArrangedSubview(makeLable(text: buttonLabel))
-            newStackView.addArrangedSubview(makeLable(text: numberFormatter(number: inputOperand)))
-            stackView.addArrangedSubview(newStackView)
-            scrollView.scrollToBottom()
-            inputValues.append(inputOperand)
-            inputValues.append(buttonLabel)
-            inputOperand = "0"
-            presentValue.text = inputOperand
-            presentOperator.text = buttonLabel
-            return
-        }
+        let newStackView = makeStackView()
+        newStackView.addArrangedSubview(makeLable(text: operatorLabel))
+        newStackView.addArrangedSubview(makeLable(text: operandLabel))
+        stackView.addArrangedSubview(newStackView)
+        scrollView.scrollToBottom()
+        inputValues.append(inputOperand)
+        inputValues.append(buttonLabel)
+        inputOperand = "0"
+        presentValue.text = inputOperand
+        presentOperator.text = buttonLabel
     }
     
     @IBAction func didTapDot(sender: UIButton) {
@@ -102,9 +92,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapEqualSign() {
+        guard let operatorLabel = presentOperator.text else { return }
+        guard let operandLabel = presentValue.text else { return }
+        
+        if operandLabel == "0" {
+            return
+        }
+        
         let newStackView = makeStackView()
-        newStackView.addArrangedSubview(makeLable(text: presentOperator.text ?? "NaN"))
-        newStackView.addArrangedSubview(makeLable(text: inputOperand))
+        newStackView.addArrangedSubview(makeLable(text: operatorLabel))
+        newStackView.addArrangedSubview(makeLable(text: operandLabel))
         stackView.addArrangedSubview(newStackView)
         scrollView.scrollToBottom()
         
@@ -126,7 +123,7 @@ class ViewController: UIViewController {
 }
 
 extension UIScrollView {
-    func scrollToBottom() {
+    fileprivate func scrollToBottom() {
         self.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
         self.setContentOffset(bottomOffset, animated: true)
@@ -135,7 +132,7 @@ extension UIScrollView {
 
 extension ViewController {
     
-    func removeHistory() {
+    private func removeHistory() {
         stackView.subviews.forEach{ (view) in view.removeFromSuperview() }
         presentValue.text = "0"
         presentOperator.text = ""
@@ -155,14 +152,14 @@ extension ViewController {
         return result
     }
     
-    func makeLable(text: String) -> UILabel {
+    private func makeLable(text: String) -> UILabel {
         let label = UILabel()
         label.text = text
         label.textColor = .white
         return label
     }
     
-    func makeStackView() -> UIStackView {
+    private func makeStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
