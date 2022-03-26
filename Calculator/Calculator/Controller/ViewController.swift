@@ -135,6 +135,10 @@ class ViewController: UIViewController {
             return
         }
         
+        guard currentNumber != Number.zero.rawValue else {
+            return
+        }
+        
         if currentNumber.contains(Operator.subtract.rawValue) {
             let minusSign = currentNumber.first
             currentNumber = currentNumber.filter{ $0 != minusSign }
@@ -188,7 +192,9 @@ class ViewController: UIViewController {
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 3
         
-        guard currentOperand.contains(".") == false, currentOperand.last != "0" else { return currentOperand }
+        guard currentOperand.contains(".") == false, currentOperand.last != "0" else {
+            return currentOperand
+        }
         
         let commaDeletedOperand = currentOperand.filter { $0 != "," }
         
