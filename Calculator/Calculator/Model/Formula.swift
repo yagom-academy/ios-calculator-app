@@ -12,18 +12,12 @@ struct Formula {
     public var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
     
     public mutating func result() throws -> Double? {
-        guard var calculatedNumber = operands.dequeue() else {
-            return nil
-        }
+        guard var calculatedNumber = operands.dequeue() else { return nil }
         
         for _ in 0..<operators.count {
-            guard let numberToCalculate = operands.dequeue() else {
-                return nil
-            }
+            guard let numberToCalculate = operands.dequeue() else { return nil }
             
-            guard let operatorToCalculate = operators.dequeue() else {
-                return nil
-            }
+            guard let operatorToCalculate = operators.dequeue() else { return nil }
             
             if operatorToCalculate == Operator.divide && numberToCalculate == 0 {
                 throw CalculatorError.divisionByZero
