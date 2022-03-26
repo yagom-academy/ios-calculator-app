@@ -125,21 +125,26 @@ final class MainViewController: UIViewController {
 
     @IBAction func operatorButtonsTapped(_ sender: UIButton) {
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
+        
         if isFirstTime == true && operandLabel.text == "0" {
             return
-        } else if isFirstTime == true && operandLabel.text == "NaN" {
-            return
-        } else if isFirstTime == false && operandLabel.text == "0" && isNone == true {
-            operatorLabel.text = sender.titleLabel?.text
-        } else {
-            addToExpressionRecord()
-            operatorLabel.text = sender.titleLabel?.text
-            operandLabel.text = "0"
-            sumOfOperands = ""
-            isFirstTime = false
-            isDotUsed = false
-            isNone = true
         }
+        
+        if isFirstTime == true && operandLabel.text == "NaN" {
+            return
+        }
+        
+        if isFirstTime == false && operandLabel.text == "0" && isNone == true {
+            operatorLabel.text = sender.titleLabel?.text
+            return
+        }
+        addToExpressionRecord()
+        operatorLabel.text = sender.titleLabel?.text
+        operandLabel.text = "0"
+        sumOfOperands = ""
+        isFirstTime = false
+        isDotUsed = false
+        isNone = true
     }
     
     private func prepareBeforeResult() {
