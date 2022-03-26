@@ -29,7 +29,7 @@ final class CalculatorViewModel {
   
   func convertSign() {
     var value = self.operandValue.value
-    if value.contains("-") {
+    if value.hasPrefix("-") {
       value.removeFirst()
     } else if let number = Double(value), number > 0 {
       value = "-\(value)"
@@ -37,7 +37,7 @@ final class CalculatorViewModel {
     self.operandValue.next(value)
   }
   
-  func didTapNumberButton(of numberString: String) {
+  func addOperand(of numberString: String) {
     guard self.operandValue.value.count <= 19 else {
       return
     }
@@ -52,7 +52,7 @@ final class CalculatorViewModel {
     self.operandValue.next(value)
   }
   
-  func didTapDotButton() {
+  func addDot() {
     guard self.isDotted == false else {
       return
     }
@@ -60,7 +60,7 @@ final class CalculatorViewModel {
     self.operandValue.next(value)
   }
   
-  func didTapOperatorButton(of operatorString: String) -> Bool {
+  func addOperator(of operatorString: String) -> Bool {
     if self.operandValue.value == "0" && self.operatorType.value == nil {
       return false
     }
@@ -77,7 +77,7 @@ final class CalculatorViewModel {
     return true
   }
   
-  func didTapCalculateButton() -> Bool {
+  func calculate() -> Bool {
     if self.operandValue.value == "0" && self.operatorType.value == nil {
       return false
     }

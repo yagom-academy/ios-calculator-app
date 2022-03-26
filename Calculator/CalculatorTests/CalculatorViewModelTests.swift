@@ -102,7 +102,7 @@ final class CalculatorViewModelTests: XCTestCase {
     // given
     self.sut?.operandValue.next("1")
     // when
-    self.sut?.didTapDotButton()
+    self.sut?.addDot()
     let output = self.sut?.operandValue.value
     // then
     XCTAssertEqual(output, "1.")
