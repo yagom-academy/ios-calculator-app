@@ -113,10 +113,8 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func operandButtonsTapped(_ sender: UIButton) {
-        guard let selectedOperand = sender.titleLabel?.text else {
-            return
-        }
-        guard sumOfOperands.count < 16 else {
+        guard let selectedOperand = sender.titleLabel?.text,
+              sumOfOperands.count < 16 else {
             return
         }
         
