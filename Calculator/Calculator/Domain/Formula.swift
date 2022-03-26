@@ -9,14 +9,14 @@ import Foundation
 
 struct Formula {
   
-  var operands: CalculatorItemQueue<Double> = .init()
-  var operators: CalculatorItemQueue<Operator> = .init()
+  var operands = CalculatorItemQueue<Double>()
+  var operators = CalculatorItemQueue<Operator>()
   
-  mutating func result() -> Double {
+  mutating func result() throws -> Double {
     guard var total = self.operands.dequeue(),
           self.operands.count == self.operators.count
     else {
-      return .nan
+      throw FormulaError.inValidFormula
     }
     while let operand = self.operands.dequeue(), let operatorType = self.operators.dequeue() {
       total = operatorType.calculate(lhs: total, rhs: operand)

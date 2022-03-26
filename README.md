@@ -26,6 +26,9 @@
 ### STEP 2 UML
 <img width="800" alt="6189d7537c82755a83c68a7d" src="https://user-images.githubusercontent.com/94151993/158860793-b0c46671-50be-4dc7-ad6b-534f1a9917fc.jpeg">
 
+### STEP 3 UML (통합)
+![계산기I UML](https://user-images.githubusercontent.com/94151993/159829422-d2133937-ddc6-4f8e-a369-bb57784f78b3.png)
+
 ---
 
 ## [STEP 1]
@@ -170,7 +173,118 @@ static func parse(from input: String) -> Formula {
 ## [STEP 3]
 ### 고민 및 해결한 점
 
-`TBD`
+### 기능 구현
+### AC 버튼
+|2+3-4+5 입력 후 AC 클릭|2+3-4+5= 입력 후 AC 클릭|
+|:---:|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159833554-4f082b7d-e2c4-487a-bead-635428c44b27.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159833811-ccba6ed6-2084-4dfb-a7f8-3f0141447d1b.gif">|
+
+### CE 버튼
+|2+3-4+5 입력 후 CE 클릭|2+3-4+ 입력 후 CE 클릭|2+3-4+5= 입력 후 CE 클릭|
+|:---:|:---:|:---:|
+|<img width="300" alt="" src="https://user-images.githubusercontent.com/94151993/159834266-825eb6f8-3ada-4e6b-bf95-f81c48f799c1.gif">|<img width="300" alt="" src="https://user-images.githubusercontent.com/94151993/159834275-c6eed4d4-d625-4308-a1f9-71fc1dd15464.gif">|<img width="300" alt="" src="https://user-images.githubusercontent.com/94151993/159834282-c7cf97a8-9660-41c7-9d2b-67ffcd690aa9.gif">|
+
+### +/- 버튼
+|입력 후 +/- 클릭 (0일때는 부호를 변경하지 않는다)|
+|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834358-72f0aa2d-9189-40f3-83b8-c2fe2192864c.gif">|
+
+### 사칙연산 버튼
+|연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력|숫자입력이 없는 상태인 0에서는 연산자를 반복해도 연산하지 않고 종류만 변경|
+|:---:|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834649-d1ee707b-621b-4c19-8b6d-f5db7ee530aa.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834672-6bc66522-eb4a-46f1-a4f3-abdaa6842050.gif">|
+
+### 계산 버튼
+|= 버튼을 누르면 입력된 연산을 한 번에 수행|연산 후 다시 =을 눌러도 이전 연산을 다시 연산 X|
+|:---:|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834753-e09c71ea-cbb7-4ff2-9d78-3dd77ab513e9.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835001-1c969580-f0e8-45ac-97b2-721ffc0b99ad.gif">|
+
+|2+3*3-1 의 연산결과는 14|3/3+2-1 의 연산결과는 2|1+2-3*2-3/6 의 연산결과는 -0.5|
+|:---:|:---:|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834763-21db5b15-eaf2-4e32-9bc8-1378b06b274b.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834758-1b9fdfd5-e071-47d7-806b-a29ba2b03525.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834770-c2158c9d-0b39-4eb1-bca7-73366244eda4.gif">|
+
+### 보여주는 화면
+|0.123000000 → 0.123 / 1.22340000 → 1.2234|숫자는 3자리마다 쉼표(,)를 표기|
+|:---:|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835322-3531da93-0f07-46e9-8900-c36cc8870aa4.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835330-e034130e-1b38-4544-a743-80ae4a92011e.gif">|
+
+### 0으로 나누는 경우
+|0으로 나누기에 대해서는 결과값을 NaN으로 표기|
+|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835346-1ca7a613-f426-431e-ac76-a6cde4a37acc.gif">|
+
+## 고민 및 해결한 점
+### 1. 테스트 가능하도록 설계하는 것에 대해
+이번 프로젝트는 **TDD 방법론의 사용과 XCTest를 사용하여 테스트 가능한 코드를 만드는 것**이 중요하다고 생각했습니다. 
+STEP 1, 2 의 경우 테스트하기 쉬운 환경이었지만 CalculatorViewController의 경우 UI 요소와의 연결로 인해 복잡하게 얽혀있는 환경이라 테스트 코드를 작성하는데 어려움이 있었습니다.
+
+CalculatorViewModel 이라는 클래스를 두어 화면에 보여줄 데이터에 대한 변환을 진행하고 CalculatorViewController는 오직 ViewModel에서 오는 데이터를 UI로 보여주는 역할만 하도록하여 CalculatorViewModel 에 대한 테스트 코드를 작성하여 UI 요소와 얽혀있었던 문제를 해결했습니다.
+
+CalculatorViewController 에서 CalculatorViewModel의 데이터를 bind 함수를 통해 데이터가 변경되면 실행될 클로저를 정의해주고 next 함수를 통해 값을 보내주면 subscriber에 저장되어있던 클로저가 실행되면서 CalculatorViewController의 UI 요소를 변경하도록 했습니다.
+```swift
+final class Observable<T> {
+  private var subscriber: ((T) -> Void)?
+  private(set) var value: T {
+    didSet {
+      subscriber?(value)
+    }
+  }
+  
+  init(_ value: T) {
+    self.value = value
+  }
+  
+  func bind(_ subscriber: @escaping (T) -> Void) {
+    subscriber(self.value)
+    self.subscriber = subscriber
+  }
+  
+  func next(_ value: T) {
+    self.value = value
+  }
+}
+```
+이렇게 구현하는 것이 MVVM 패턴과 비슷한 것 같은데 .. 아직 공부가 필요할 것 같습니다 😅
+
+### 2. 결과가 보여질 ScrollView의 자동 스크롤
+<img width="800" alt="" src="https://user-images.githubusercontent.com/94151993/159837627-8cc80866-ff3f-43f5-b71e-7ac1bb62d9d8.png">
+
+위의 그림처럼 resultScrollView의`contentOffset` 값을 변경하여 자동으로 아래로 스크롤하도록 변경했습니다.
+```swift
+func scrollToDown() {
+  let contentSizeHeight = self.resultScrollView.contentSize.height
+  let boundsHeight = self.resultScrollView.bounds.size.height
+  let contentInsetBottom = self.resultScrollView.contentInset.bottom
+  let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
+  if pointY > 0 {
+    let contentOffset = CGPoint(x: 0, y: pointY + 24)
+    self.resultScrollView.setContentOffset(contentOffset, animated: true)
+  }
+}
+```
+하지만, 생각한 것과 달리 약간의 오차가 발생했습니다. 이를 보정하기 위해 +24를 추가로 해주었는데 아직 근본적인 문제를 해결하지 못했습니다 🥲 
+|기존 에러|+24로 보정|
+|:---:|:---:|
+|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159838308-24b73f98-96ce-46da-9fde-20216f1aaf09.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159838361-e2a5f8ff-e6bf-49bb-83e1-e908b604d15c.gif">|
+
+**+ 수정 (2022.03.25)**
+resultScrollView 내부의 resultStackView에 addArrangedSubview 한 후에 scrollDown 함수가 불릴때 아직 Layout 반영되는 사이클이 오지 않아 문제가 발생했던 것이었습니다. (아직 Main Run Loop의 Update Cycle이 오지 않아서 생긴 문제)
+
+따라서, scrollDown 함수가 호출될때 layout을 즉시 하도록 `layoutIfNeeded`를 사용하여 수정했습니다!
+```swift
+func scrollToDown() {
+  self.resultScrollView.layoutIfNeeded()
+  let contentSizeHeight = self.resultScrollView.contentSize.height
+  let boundsHeight = self.resultScrollView.bounds.size.height
+  let contentInsetBottom = self.resultScrollView.contentInset.bottom
+  let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
+  if pointY > 0 {
+    let contentOffset = CGPoint(x: 0, y: pointY)
+    self.resultScrollView.setContentOffset(contentOffset, animated: true)
+  }
+}
+```
+
 
 ---
 
