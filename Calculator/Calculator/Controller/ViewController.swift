@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     // MARK: IBOutlet
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
@@ -19,17 +19,17 @@ class ViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var verticalStackView: UIStackView!
     
-    var stringToParse: String = ""
-    var isFirstOperand: Bool = true
-    var isOperandEntered: Bool = false
-    var isResultButtonClicked: Bool = false
+    private var stringToParse: String = ""
+    private var isFirstOperand: Bool = true
+    private var isOperandEntered: Bool = false
+    private var isResultButtonClicked: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
-    func initialize() {
+    private func initialize() {
         stringToParse = ""
         isFirstOperand = true
         isOperandEntered = false
