@@ -135,6 +135,7 @@ class ViewController: UIViewController {
         addLabelToStackView(label, operandLabelText, operatorLabelText)
     }
     
+    // MARK: Function-Separated Method
     func returnNumberDividedByComma(from currentOperand: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
