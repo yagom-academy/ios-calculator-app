@@ -47,10 +47,9 @@ final class CalculatorViewController: UIViewController {
   }
   
   @IBAction private func didTapOperatorButton(_ sender: UIButton) {
-    guard let operatorString = sender.titleLabel?.text else {
-      return
-    }
-    guard let stackView = self.viewModel.makeSubResultStackView() else {
+    guard let operatorString = sender.titleLabel?.text,
+          let stackView = self.viewModel.makeSubResultStackView()
+    else {
       return
     }
     if self.viewModel.didTapOperatorButton(of: operatorString) {
@@ -85,11 +84,10 @@ private extension CalculatorViewController {
   }
   
   func changeOperandLabel(of operand: String) {
-    guard self.viewModel.isResult == true else {
+    guard self.viewModel.isResult,
+          let operand = Double(operand)
+    else {
       self.operandLabel.text = operand
-      return
-    }
-    guard let operand = Double(operand) else {
       return
     }
     self.operandLabel.text = operand.formatString()
