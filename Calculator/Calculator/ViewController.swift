@@ -46,7 +46,7 @@ private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if !allCalculatStackIsEmpty && (operatorLabel.text?.isEmpty == true) {
-            allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            allClearStackView()
             
             operandLabel.text = ""
         }
@@ -85,7 +85,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        allClearStackView()
         
         setUpDefaultLabel()
     }
@@ -188,6 +188,10 @@ private extension ViewController {
          makeLabel(labelText: operandLabel.text)].forEach { calculationStackView.addArrangedSubview($0) }
         
         allCalculatStack.addArrangedSubview(calculationStackView)
+    }
+    
+    func allClearStackView() {
+        allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
