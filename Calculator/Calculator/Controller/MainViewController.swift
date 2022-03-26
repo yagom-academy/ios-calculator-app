@@ -125,7 +125,7 @@ final class MainViewController: UIViewController {
         } else if isFirstTime == false && operandLabel.text == "0" && isNone == true {
             operatorLabel.text = sender.titleLabel?.text
         } else {
-            addToExpressionRecord(operatorLabel, operandLabel)
+            addToExpressionRecord()
             operatorLabel.text = sender.titleLabel?.text
             operandLabel.text = "0"
             sumOfOperands = ""
@@ -137,7 +137,7 @@ final class MainViewController: UIViewController {
     
     private func prepareBeforeResult() {
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
-        addToExpressionRecord(operatorLabel, operandLabel)
+        addToExpressionRecord()
         operatorLabel.text = nil
     }
     
@@ -173,27 +173,27 @@ final class MainViewController: UIViewController {
         setExpressionAfter(result)
     }
     
-    private func insert(_ selectedOperator: UILabel, _ selectedOperand: UILabel) -> UIStackView {
+    private func makeSubStackView() -> UIStackView {
         let subStackView = UIStackView()
-        let operatorInLog = UILabel()
-        let operandInLog = UILabel()
+        let operatorInRecord = UILabel()
+        let operandInRecord = UILabel()
         
         subStackView.spacing = 10
-        operatorInLog.textColor = .white
-        operandInLog.textColor = .white
-        operatorInLog.text = operatorLabel.text
-        operandInLog.text = operandLabel.text
+        operatorInRecord.textColor = .white
+        operandInRecord.textColor = .white
+        operatorInRecord.text = operatorLabel.text
+        operandInRecord.text = operandLabel.text
         
-        subStackView.addArrangedSubview(operatorInLog)
-        subStackView.addArrangedSubview(operandInLog)
-        expressionRecord.append(operatorInLog.text)
-        expressionRecord.append(operandInLog.text)
+        subStackView.addArrangedSubview(operatorInRecord)
+        subStackView.addArrangedSubview(operandInRecord)
+        expressionRecord.append(operatorInRecord.text)
+        expressionRecord.append(operandInRecord.text)
         
         return subStackView
     }
     
-    private func addToExpressionRecord(_ selectedOperator: UILabel, _ selectedOperand: UILabel) {
-        expressionRecordStackView.addArrangedSubview(insert(selectedOperator, selectedOperand))
+    private func addToExpressionRecord() {
+        expressionRecordStackView.addArrangedSubview(makeSubStackView())
         expressionRecordScrollView.scrollToBottom()
     }
     
