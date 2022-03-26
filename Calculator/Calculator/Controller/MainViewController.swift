@@ -196,7 +196,9 @@ final class MainViewController: UIViewController {
         expressionRecordStackView.addArrangedSubview(makeSubStackView())
         expressionRecordScrollView.scrollToBottom()
     }
-    
+}
+
+extension MainViewController {
     private func changeToNumberFormatter(with sumOfOperands: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
