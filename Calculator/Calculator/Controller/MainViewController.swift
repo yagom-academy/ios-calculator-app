@@ -72,12 +72,11 @@ final class MainViewController: UIViewController {
     }
     
     private func recombineByDot(with selectedOperand: String) {
-        guard let integer = sumOfOperands.split(with: ".").first else {
+        guard let integer = sumOfOperands.split(with: ".").first,
+              let numberAfterDot = sumOfOperands.split(with: ".").last else {
             return
         }
-        guard let numberAfterDot = sumOfOperands.split(with: ".").last else {
-            return
-        }
+        
         operandLabel.text = changeToNumberFormatter(with: integer) + "." + numberAfterDot
     }
     
