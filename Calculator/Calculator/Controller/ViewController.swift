@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
         
         currentOperatorLabel.text = sender.titleLabel?.text
-                
+        
         guard isOperandEntered == true else {
             return
         }
@@ -153,9 +153,16 @@ class ViewController: UIViewController {
             return
         }
         
-        guard let operandLabelText = currentOperandLabel.text else {
+        guard var operandLabelText = currentOperandLabel.text else {
             return
         }
+        
+        while operandLabelText.contains(Number.decimalPoint.rawValue)
+                && operandLabelText.hasSuffix(Number.zero.rawValue) {
+            
+            operandLabelText.removeLast()
+        }
+        operandLabelText.removeLast()
         
         if isFirstOperand == true {
             label.text = "\(operandLabelText) "
@@ -176,21 +183,29 @@ class ViewController: UIViewController {
     }
     
     func numberDividedByComma(from currentOperand: String) -> String? {
-        let commaDeletedOperand = currentOperand.filter { $0 != "," }
-        guard let doubledCurrentOperand = Double(commaDeletedOperand) else {
-            return nil
-        }
-        
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumFractionDigits = -2
+        numberFormatter.maximumFractionDigits = 3
         
-        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: doubledCurrentOperand)) else {
-            return nil
+        guard currentOperand.contains(".") == false, currentOperand.last != "0" else { return currentOperand }
+        
+        let commaDeletedOperand = currentOperand.filter { $0 != "," }
+        
+        if commaDeletedOperand.hasSuffix(Number.decimalPoint.rawValue) {
+            return currentOperand
+        } else {
+            guard let doubledCurrentOperand = Double(commaDeletedOperand) else {
+                return nil
+            }
+            
+            let number = NSNumber(value: doubledCurrentOperand)
+            guard let formattedNumber = numberFormatter.string(from: number) else {
+                return nil
+            }
+            
+            return formattedNumber
         }
-        
-        return formattedNumber
     }
 }
 
