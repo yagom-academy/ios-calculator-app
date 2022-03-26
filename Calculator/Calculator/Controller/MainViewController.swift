@@ -61,10 +61,10 @@ final class MainViewController: UIViewController {
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
         guard let selectedOperand = sender.titleLabel?.text,
-                sumOfOperands.count < 16,
-                sumOfOperands.contains(".") == false else {
-            return
-        }
+              sumOfOperands.count < 16,
+              sumOfOperands.contains(".") == false else {
+                  return
+              }
         
         sumOfOperands += selectedOperand
         operandLabel.text = changeToNumberFormatter(with: sumOfOperands) + "."
