@@ -139,7 +139,7 @@ final class ViewController: UIViewController {
     func returnNumberDividedByComma(from currentOperand: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 3
+        numberFormatter.maximumFractionDigits = 19
         
         guard currentOperand.contains(".") == false || currentOperand.last != "0" else {
             return currentOperand
