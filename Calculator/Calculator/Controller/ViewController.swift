@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var stringToParse: String = ""
     var isFirstOperand: Bool = true
     var isOperandEntered: Bool = false
+    var isResultButtonClicked: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
         stringToParse = ""
         isFirstOperand = true
         isOperandEntered = false
+        isResultButtonClicked = false
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
     }
@@ -42,7 +44,7 @@ class ViewController: UIViewController {
             return
         }
         
-        guard currentOperand.count < 20 else {
+        guard currentOperand.filter({ $0 != "," }).count < 20 else {
             return
         }
         
@@ -79,6 +81,12 @@ class ViewController: UIViewController {
         
         currentOperatorLabel.text = sender.titleLabel?.text
         
+        if isResultButtonClicked == true {
+            isOperandEntered = false
+            currentOperandLabel.text = Number.zero.rawValue
+            isResultButtonClicked = false
+        }
+        
         guard isOperandEntered == true else {
             return
         }
@@ -99,6 +107,7 @@ class ViewController: UIViewController {
         
         insertLabelToHorizontalStackView()
         tryToReturnResult()
+        isResultButtonClicked = true
     }
     
     // MARK: Extra Button Methods
@@ -183,7 +192,6 @@ class ViewController: UIViewController {
     func numberDividedByComma(from currentOperand: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 3
         
         guard currentOperand.contains(".") == false || currentOperand.last != "0" else {
@@ -222,7 +230,7 @@ class ViewController: UIViewController {
                 resultString = String(format:"%.0f", result)
                 currentOperandLabel.text = numberDividedByComma(from: resultString)
             } else {
-                resultString = String(format:"%.10f", result)
+                resultString = String(result)
                 currentOperandLabel.text = numberDividedByComma(from: resultString)
             }
             
