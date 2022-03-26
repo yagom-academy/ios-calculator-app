@@ -38,7 +38,7 @@ final class CalculatorViewController: UIViewController {
   }
   
   @IBAction private func didTapCalculateButton(_ sender: UIButton) {
-    guard let stackView = self.viewModel.makeSubResultStackView() else {
+    guard let stackView = self.makeSubResultStackView() else {
       return
     }
     if self.viewModel.didTapCalculateButton() {
@@ -48,7 +48,7 @@ final class CalculatorViewController: UIViewController {
   
   @IBAction private func didTapOperatorButton(_ sender: UIButton) {
     guard let operatorString = sender.titleLabel?.text,
-          let stackView = self.viewModel.makeSubResultStackView()
+          let stackView = self.makeSubResultStackView()
     else {
       return
     }
@@ -119,5 +119,14 @@ private extension CalculatorViewController {
       let contentOffset = CGPoint(x: 0, y: pointY)
       self.resultScrollView.setContentOffset(contentOffset, animated: true)
     }
+  }
+  
+  func makeSubResultStackView() -> UIStackView? {
+    guard let operand = Double(self.viewModel.operandValue.value) else {
+      return nil
+    }
+    let operatorType = self.viewModel.operatorType.value
+    let stackView = UIStackView(type: operatorType, operand: operand.formatString())
+    return stackView
   }
 }

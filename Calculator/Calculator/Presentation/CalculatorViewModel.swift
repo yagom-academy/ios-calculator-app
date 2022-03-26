@@ -101,13 +101,4 @@ final class CalculatorViewModel {
     self.formulas.removeAll()
     return true
   }
-  
-  func makeSubResultStackView() -> UIStackView? {
-    guard let operand = Double(self.operandValue.value) else {
-      return nil
-    }
-    let operatorType = self.operatorType.value
-    let stackView = UIStackView(type: operatorType, operand: operand.formatString())
-    return stackView
-  }
 }
