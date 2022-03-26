@@ -177,6 +177,7 @@ class ViewController: UIViewController {
         }
         
         stringToParse.append(string)
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: false)
     }
     
     func numberDividedByComma(from currentOperand: String) -> String? {
