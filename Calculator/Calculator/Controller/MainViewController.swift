@@ -83,22 +83,33 @@ final class MainViewController: UIViewController {
     private func workByCase(of selectedOperand: String) {
         if isFirstTime == false && operatorLabel.text == nil {
             return
-        } else if selectedOperand.last == "0" && sumOfOperands.first == "0" && isDotUsed == false {
+        }
+        
+        if selectedOperand.last == "0" && sumOfOperands.first == "0" && isDotUsed == false {
             return
-        } else if selectedOperand.last == "0" && sumOfOperands.last == "." {
+        }
+        
+        if selectedOperand.last == "0" && sumOfOperands.last == "." {
             sumOfOperands += selectedOperand
             recombineByDot(with: selectedOperand)
-        } else if selectedOperand.last == "0" && sumOfOperands.last == "0" && isDotUsed == true {
+            return
+        }
+        
+        if selectedOperand.last == "0" && sumOfOperands.last == "0" && isDotUsed == true {
             sumOfOperands += selectedOperand
             recombineByDot(with: selectedOperand)
-        } else if operandLabel.text == "NaN" {
+            return
+        }
+        
+        if operandLabel.text == "NaN" {
             setInitialState()
             sumOfOperands += selectedOperand
             operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
-        } else {
-            sumOfOperands += selectedOperand
-            operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
+            return
         }
+        
+        sumOfOperands += selectedOperand
+        operandLabel.text = changeToNumberFormatter(with: sumOfOperands)
     }
     
     @IBAction func operandButtonsTapped(_ sender: UIButton) {
