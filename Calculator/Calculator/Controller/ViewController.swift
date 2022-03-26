@@ -63,6 +63,7 @@ class ViewController: UIViewController {
         if isResultButtonClicked == true {
             isOperandEntered = false
             currentOperandLabel.text = Number.zero.rawValue
+            currentOperatorLabel.text = sender.titleLabel?.text
             isResultButtonClicked = false
         }
         
@@ -163,19 +164,11 @@ class ViewController: UIViewController {
     func tryToReturnResult() {
         let formulaForResult = ExpressionParser.parse(from: stringToParse)
         var myFormula = formulaForResult
-        var resultString: String
         
         do {
             guard let result = try myFormula.result() else { return }
-            
-            if floor(result) == result {
-                resultString = String(format:"%.0f", result)
-                currentOperandLabel.text = returnNumberDividedByComma(from: resultString)
-            } else {
-                resultString = String(result)
-                currentOperandLabel.text = returnNumberDividedByComma(from: resultString)
-            }
-            
+
+            currentOperandLabel.text = checkIfDecimalPointIsNeeded(result)
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = "NaN"
         } catch {}
@@ -215,6 +208,17 @@ class ViewController: UIViewController {
         
         stringToParse.append(string)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
+    }
+    
+    func checkIfDecimalPointIsNeeded(_ result: Double) -> String? {
+        var resultString: String
+
+        if floor(result) == result {
+            resultString = String(format:"%.0f", result)
+        } else {
+            resultString = String(result)
+        }
+        return returnNumberDividedByComma(from: resultString)
     }
 }
 
