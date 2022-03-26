@@ -77,7 +77,6 @@ class ViewController: UIViewController {
     
     @IBAction func resultButtonClicked(_ sender: UIButton) {
         guard currentOperatorLabel.text != "" else { return }
-        
         guard verticalStackView.arrangedSubviews.last != nil else { return }
         
         checkAndAddLabelToStackView()
@@ -105,7 +104,6 @@ class ViewController: UIViewController {
     
     @IBAction func signConvertingButtonClicked(_ sender: UIButton) {
         guard var currentNumber = currentOperandLabel.text else { return }
-        
         guard currentNumber != Number.zero.rawValue else { return }
         
         if currentNumber.contains(Operator.subtract.rawValue) {
@@ -123,7 +121,6 @@ class ViewController: UIViewController {
         let label = UILabel()
         
         guard let operatorLabelText = currentOperatorLabel.text else { return }
-        
         guard var operandLabelText = currentOperandLabel.text else { return }
         
         while operandLabelText.contains(Number.decimalPoint.rawValue)
@@ -153,7 +150,6 @@ class ViewController: UIViewController {
             return currentOperand
         } else {
             guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return nil }
-            
             let number = NSNumber(value: doubledCurrentOperand)
             guard let formattedNumber = numberFormatter.string(from: number) else { return nil }
             
@@ -167,7 +163,6 @@ class ViewController: UIViewController {
         
         do {
             guard let result = try myFormula.result() else { return }
-
             currentOperandLabel.text = checkIfDecimalPointIsNeeded(result)
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = "NaN"
@@ -178,9 +173,7 @@ class ViewController: UIViewController {
     
     func checkValidity(of sender: UIButton) -> String? {
         guard var currentOperand = currentOperandLabel.text else { return nil }
-        
         guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
-        
         guard currentOperand != Number.zero.rawValue || sender.tag != 10 else { return nil }
         
         if currentOperand == Number.zero.rawValue, sender.tag != 11 {
@@ -218,6 +211,7 @@ class ViewController: UIViewController {
         } else {
             resultString = String(result)
         }
+        
         return returnNumberDividedByComma(from: resultString)
     }
 }
