@@ -53,9 +53,10 @@ final class MainViewController: UIViewController {
             recentOperandLabel.insert("-", at: recentOperandLabel.startIndex)
             sumOfOperands = recentOperandLabel
             operandLabel.text = sumOfOperands
-        } else {
-            operandLabel.text?.removeFirst()
+            return
         }
+        
+        operandLabel.text?.removeFirst()
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
