@@ -60,8 +60,6 @@ class ViewController: UIViewController {
     
     // MARK: Operator Button Methods
     @IBAction func operatorButtonsClicked(_ sender: UIButton) {
-        currentOperatorLabel.text = sender.titleLabel?.text
-        
         if isResultButtonClicked == true {
             isOperandEntered = false
             currentOperandLabel.text = Number.zero.rawValue
@@ -70,7 +68,8 @@ class ViewController: UIViewController {
         
         guard isOperandEntered == true else { return }
         
-        insertLabelToHorizontalStackView()
+        checkAndAddLabelToStackView()
+        currentOperatorLabel.text = sender.titleLabel?.text
         currentOperandLabel.text = Number.zero.rawValue
         isOperandEntered = false
     }
@@ -80,7 +79,7 @@ class ViewController: UIViewController {
         
         guard verticalStackView.arrangedSubviews.last != nil else { return }
         
-        insertLabelToHorizontalStackView()
+        checkAndAddLabelToStackView()
         tryToReturnResult()
         isResultButtonClicked = true
     }
@@ -119,7 +118,7 @@ class ViewController: UIViewController {
     }
     
     // MARK: StackView Related Method
-    func insertLabelToHorizontalStackView() {
+    func checkAndAddLabelToStackView() {
         let label = UILabel()
         
         guard let operatorLabelText = currentOperatorLabel.text else { return }
@@ -135,21 +134,7 @@ class ViewController: UIViewController {
             operandLabelText.removeLast()
         }
         
-        if isFirstOperand == true {
-            label.text = "\(operandLabelText) "
-            label.textColor = .white
-            verticalStackView.addArrangedSubview(label)
-            isFirstOperand = false
-        } else {
-            label.text = "\(operatorLabelText) \(operandLabelText) "
-            label.textColor = .white
-            verticalStackView.addArrangedSubview(label)
-        }
-        
-        guard let string = label.text?.filter({ $0 != "," }) else { return }
-        
-        stringToParse.append(string)
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
+        addLabelToStackView(label, operandLabelText, operatorLabelText)
     }
     
     func numberDividedByComma(from currentOperand: String) -> String? {
@@ -212,6 +197,24 @@ class ViewController: UIViewController {
         }
         
         return currentOperand
+    }
+    
+    func addLabelToStackView(_ label: UILabel, _ operandLabelText: String, _ operatorLabelText: String) {
+        if isFirstOperand == true {
+            label.text = "\(operandLabelText) "
+            label.textColor = .white
+            verticalStackView.addArrangedSubview(label)
+            isFirstOperand = false
+        } else {
+            label.text = "\(operatorLabelText) \(operandLabelText) "
+            label.textColor = .white
+            verticalStackView.addArrangedSubview(label)
+        }
+        
+        guard let string = label.text?.filter({ $0 != "," }) else { return }
+        
+        stringToParse.append(string)
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
     }
 }
 
