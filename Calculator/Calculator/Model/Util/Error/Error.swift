@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum CalculatorError: Error {
+enum CalculatorError {
   case divisionByZero
   case nonNumber
   case nonOperator
 }
 
 extension CalculatorError: LocalizedError {
-  var errorDescription: String?{
+  var errorDescription: String? {
     switch self {
     case .divisionByZero:
       return "NaN"
