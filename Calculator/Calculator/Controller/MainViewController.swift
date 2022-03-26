@@ -81,7 +81,10 @@ final class MainViewController: UIViewController {
     }
     
     private func workByCase(of selectedOperand: String) {
-        if isFirstTime == false && operatorLabel.text == nil {
+//        if isFirstTime == false && operatorLabel.text == nil {
+//            return
+//        }
+        guard isFirstTime == false && operatorLabel.text != nil else {
             return
         }
         
