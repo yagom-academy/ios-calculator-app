@@ -154,7 +154,8 @@ extension ViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         
-        guard let result = numberFormatter.string(for: convertedNumber) else { return "NaN" }
+        let result = numberFormatter.string(for: convertedNumber) ?? "NaN"
+        
         return result
     }
     
