@@ -5,7 +5,6 @@
 //  Created by mmim.
 //
 
-import Foundation
 import UIKit
 
 extension UIScrollView {
