@@ -45,9 +45,11 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func signButtonTapped(_ sender: UIButton) {
-        if operandLabel.text == "0" {
+        guard operandLabel.text != "0" else {
             return
-        } else if var recentOperandLabel = operandLabel.text, recentOperandLabel.first != "-" {
+        }
+        
+        if var recentOperandLabel = operandLabel.text, recentOperandLabel.first != "-" {
             recentOperandLabel.insert("-", at: recentOperandLabel.startIndex)
             sumOfOperands = recentOperandLabel
             operandLabel.text = sumOfOperands
