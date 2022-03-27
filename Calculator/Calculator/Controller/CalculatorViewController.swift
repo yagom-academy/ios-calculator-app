@@ -32,8 +32,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var resultButton: UIButton!
     @IBOutlet private weak var convertingSignButton: UIButton!
 
-    @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet private var formulaStackView: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var formulaStackView: UIStackView!
     
     private let comma: Character = ","
     private var stringToParse: String = ""
