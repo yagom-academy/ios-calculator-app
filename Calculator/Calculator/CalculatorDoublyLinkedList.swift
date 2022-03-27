@@ -7,15 +7,15 @@
 
 import Foundation
 
-class CalculatorDoublyLinkedList {
-    private var headNode: Node?
-    private var tailNode: Node?
+final class CalculatorDoublyLinkedList<T> {
+    private var headNode: Node<T>?
+    private var tailNode: Node<T>?
     
     var isEmpty: Bool {
         return headNode == nil || tailNode == nil
     }
     
-    var firstNode: Node? {
+    var firstNode: Node<T>? {
         return headNode
     }
     
@@ -32,8 +32,8 @@ class CalculatorDoublyLinkedList {
         return nodeCount
     }
     
-    func appendNodes(_ value: String) {
-        let newNode = Node(value: value)
+    func appendNodes(_ value: T) {
+        let newNode = Node<T>(value: value)
         if let tail = tailNode {
             newNode.prev = tail
             tail.next = newNode
@@ -49,22 +49,6 @@ class CalculatorDoublyLinkedList {
         let lastData = headNode?.value
         headNode = headNode?.next
         return lastData
-//        let previous = node.prev
-//        let next = node.next
-//
-//        if let previous = previous {
-//            previous.next = next
-//            next?.prev = previous
-//        } else {
-//            headNode = next
-//        }
-//
-//        if let next = next {
-//            previous?.next = next
-//        } else {
-//            tailNode = previous
-//        }
-//        return node.value
     }
     
     func resetAll() {
