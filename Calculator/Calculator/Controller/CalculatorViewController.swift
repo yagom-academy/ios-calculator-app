@@ -137,9 +137,7 @@ final class CalculatorViewController: UIViewController {
     private func checkAndAddLabelToStackView() {
         guard let operatorLabelText = currentOperatorLabel.text else { return }
         guard var operandLabelText = currentOperandLabel.text else { return }
-        
-        let label = UILabel()
-        
+                
         while operandLabelText.contains(Number.decimalPoint.rawValue)
                 && operandLabelText.hasSuffix(Number.zero.rawValue) {
             operandLabelText.removeLast()
@@ -149,7 +147,7 @@ final class CalculatorViewController: UIViewController {
             operandLabelText.removeLast()
         }
         
-        addLabelToStackView(label, operandLabelText, operatorLabelText)
+        addLabelToStackView(operandLabelText, operatorLabelText)
     }
     
     // MARK: Function-Separated Method
@@ -204,7 +202,9 @@ final class CalculatorViewController: UIViewController {
         return currentOperand
     }
     
-    private func addLabelToStackView(_ label: UILabel, _ operandLabelText: String, _ operatorLabelText: String) {
+    private func addLabelToStackView(_ operandLabelText: String, _ operatorLabelText: String) {
+        let label = UILabel()
+
         if isFirstOperand == true {
             label.text = "\(operandLabelText) "
             label.textColor = .white
