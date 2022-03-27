@@ -137,18 +137,17 @@ final class CalculatorViewController: UIViewController {
     // MARK: StackView Related Method
     private func checkAndAddLabelToStackView() {
         guard let operatorLabelText = currentOperatorLabel.text else { return }
-        guard var operandLabelText = currentOperandLabel.text else { return }
-                
-        while operandLabelText.contains(Number.decimalPoint.rawValue)
-                && operandLabelText.hasSuffix(Number.zero.rawValue) {
-            operandLabelText.removeLast()
-        }
-        
-        if operandLabelText.hasSuffix(Number.decimalPoint.rawValue) {
-            operandLabelText.removeLast()
-        }
-        
-        addLabelToStackView(operandLabelText, operatorLabelText)
+        guard let operandLabelText = currentOperandLabel.text else { return }
+
+        let commaDeletedOperand = operandLabelText.filter { $0 != comma }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return }
+        let number = NSNumber(value: doubledCurrentOperand)
+        guard let formattedNumber = numberFormatter.string(from: number) else { return }
+
+        addLabelToStackView(formattedNumber, operatorLabelText)
     }
     
     // MARK: Function-Separated Method
