@@ -35,6 +35,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private var scrollView: UIScrollView!
     @IBOutlet private var formulaStackView: UIStackView!
     
+    private let comma: Character = ","
     private var stringToParse: String = ""
     private var isFirstOperand: Bool = true
     private var isOperandEntered: Bool = false
@@ -160,7 +161,7 @@ final class CalculatorViewController: UIViewController {
             return currentOperand
         }
         
-        let commaDeletedOperand = currentOperand.filter { $0 != "," }
+        let commaDeletedOperand = currentOperand.filter { $0 != comma }
         
         if commaDeletedOperand.hasSuffix(Number.decimalPoint.rawValue) {
             return currentOperand
@@ -190,7 +191,7 @@ final class CalculatorViewController: UIViewController {
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.titleLabel?.text else { return nil }
         guard var currentOperand = currentOperandLabel.text else { return nil }
-        guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
+        guard currentOperand.filter({ $0 != comma }).count < 20 else { return nil }
         guard currentOperand != Number.zero.rawValue || buttonString != "\(Number.doubleZero.rawValue)" else { return nil }
         
         if currentOperand == Number.zero.rawValue, buttonString != "\(Number.decimalPoint.rawValue)" {
@@ -218,7 +219,7 @@ final class CalculatorViewController: UIViewController {
             formulaStackView.addArrangedSubview(resultLabel)
         }
         
-        guard let string = resultLabel.text?.filter({ $0 != "," }) else { return }
+        guard let string = resultLabel.text?.filter({ $0 != comma }) else { return }
         
         stringToParse.append(string)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
