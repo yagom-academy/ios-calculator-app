@@ -33,7 +33,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var convertingSignButton: UIButton!
 
     @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet private var verticalStackView: UIStackView!
+    @IBOutlet private var formulaStackView: UIStackView!
     
     private var stringToParse: String = ""
     private var isFirstOperand: Bool = true
@@ -60,14 +60,12 @@ final class CalculatorViewController: UIViewController {
         
         Number.allCases.forEach { number in
             guard let buttonString = sender.titleLabel?.text else { return }
-            guard let buttonNumber = Int(buttonString) else { return }
-            guard (0..<12) ~= buttonNumber else { return }
             
             if buttonString == number.rawValue {
                 validOperand += number.rawValue
-            } else if buttonNumber == 10, number == .doubleZero {
+            } else if buttonString == Number.doubleZero.rawValue, number == .doubleZero {
                 validOperand += Number.doubleZero.rawValue
-            } else if buttonNumber == 11, number == .decimalPoint {
+            } else if buttonString == Number.decimalPoint.rawValue, number == .decimalPoint {
                 validOperand += Number.decimalPoint.rawValue
             }
         }
@@ -96,7 +94,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
         guard let operatorString = currentOperatorLabel.text else { return }
         guard !operatorString.isEmpty else { return }
-        guard verticalStackView.arrangedSubviews.last != nil else { return }
+        guard formulaStackView.arrangedSubviews.last != nil else { return }
         
         checkAndAddLabelToStackView()
         tryToReturnResult()
@@ -108,9 +106,9 @@ final class CalculatorViewController: UIViewController {
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
         
-        guard verticalStackView.arrangedSubviews.last != nil else { return }
+        guard formulaStackView.arrangedSubviews.last != nil else { return }
         
-        for view in verticalStackView.arrangedSubviews {
+        for view in formulaStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
@@ -193,12 +191,11 @@ final class CalculatorViewController: UIViewController {
     
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.titleLabel?.text else { return nil }
-        guard let buttonNumber = Int(buttonString) else { return nil }
         guard var currentOperand = currentOperandLabel.text else { return nil }
         guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
-        guard currentOperand != Number.zero.rawValue || buttonNumber != 10 else { return nil }
+        guard currentOperand != Number.zero.rawValue || buttonString != "\(Number.doubleZero.rawValue)" else { return nil }
         
-        if currentOperand == Number.zero.rawValue, buttonNumber != 11 {
+        if currentOperand == Number.zero.rawValue, buttonString != "\(Number.decimalPoint.rawValue)" {
             currentOperand = ""
         } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
             currentOperand = "-"
@@ -211,12 +208,12 @@ final class CalculatorViewController: UIViewController {
         if isFirstOperand == true {
             label.text = "\(operandLabelText) "
             label.textColor = .white
-            verticalStackView.addArrangedSubview(label)
+            formulaStackView.addArrangedSubview(label)
             isFirstOperand = false
         } else {
             label.text = "\(operatorLabelText) \(operandLabelText) "
             label.textColor = .white
-            verticalStackView.addArrangedSubview(label)
+            formulaStackView.addArrangedSubview(label)
         }
         
         guard let string = label.text?.filter({ $0 != "," }) else { return }
