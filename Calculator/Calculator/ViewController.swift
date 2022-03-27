@@ -111,9 +111,9 @@ private extension ViewController {
         scrollToBottom()
         
         allCalculatStack.arrangedSubviews.forEach {
-            let stack = $0 as? UIStackView
-            let operatorLabel = stack?.arrangedSubviews[0] as? UILabel
-            let operandLabel = stack?.arrangedSubviews[1] as? UILabel
+            let subStackView = $0 as? UIStackView
+            let operatorLabel = subStackView?.arrangedSubviews[0] as? UILabel
+            let operandLabel = subStackView?.arrangedSubviews[1] as? UILabel
             
             if operatorLabel?.text?.isEmpty == false {
                 guard let operatorText = operatorLabel?.text else { return }
