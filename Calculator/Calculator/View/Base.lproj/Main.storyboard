@@ -345,6 +345,7 @@
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="ym6-Bt-cJq"/>
                         <outlet property="eightButton" destination="xgT-2D-A49" id="JbR-vx-M5G"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="gpD-js-xrd"/>
+                        <outlet property="formulaStackView" destination="XRe-QE-UJf" id="cfa-m7-6Od"/>
                         <outlet property="fourButton" destination="hQm-yz-XvG" id="2wk-Pu-EII"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="UJL-ac-lUv"/>
                         <outlet property="nineButton" destination="zcj-xJ-ruw" id="vwA-5V-LVN"/>
@@ -356,7 +357,6 @@
                         <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="tbK-LW-bdn"/>
                         <outlet property="threeButton" destination="X8H-iH-tSd" id="HJ2-qG-ZVd"/>
                         <outlet property="twoButton" destination="Rif-2S-UU2" id="lv1-Bk-2fI"/>
-                        <outlet property="verticalStackView" destination="XRe-QE-UJf" id="ZAQ-Oh-BDf"/>
                         <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="VpZ-dR-uyd"/>
                     </connections>
                 </viewController>
