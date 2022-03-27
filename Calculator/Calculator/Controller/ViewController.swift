@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     private var isNoneNumber: Bool = true
-    private var isFirst: Bool = true
     private var isResult: Bool = false
     private var formulaToSend = ""
     
@@ -28,9 +27,6 @@ class ViewController: UIViewController {
     @IBAction func touchCEButton(_ sender: UIButton) {
         self.operandLabel.text = "0"
         self.isNoneNumber = true
-        if self.formulaToSend.isEmpty {
-            self.isFirst = true
-        }
     }
     
     @IBAction func touchChangeSignButton(_ sender: UIButton) {
@@ -56,7 +52,6 @@ class ViewController: UIViewController {
             self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
         }
         self.isNoneNumber = false
-        self.isFirst = false
         self.isResult = false
     }
     
@@ -70,7 +65,7 @@ class ViewController: UIViewController {
         guard let inputOperation = sender.titleLabel?.text else { return }
         guard let operandText = self.operandLabel.text else { return }
         guard let operationText = self.operationLabel.text else { return }
-        if isFirst == true { return }
+        if self.formulaListStackView.subviews.isEmpty && operandText == "0" || operandText == "NaN" { return }
         if isResult == true {
             removeFormula()
             self.isResult = false
@@ -90,9 +85,6 @@ class ViewController: UIViewController {
         addFormula(operation: operationText, operand: operandText)
         var resultFormula = ExpressionParser.parse(from: self.formulaToSend)
         let result = resultFormula.result()
-        if result.isNaN {
-            self.isFirst = true
-        }
         self.operandLabel.text = changeNumberFormat(number: String(result))
         self.operationLabel.text = ""
         self.formulaToSend = ""
@@ -105,7 +97,6 @@ class ViewController: UIViewController {
         self.operationLabel.text = ""
         self.formulaToSend = ""
         self.isNoneNumber = true
-        self.isFirst = true
     }
     
     private func showZeroAfterDot(number: String) -> String {
