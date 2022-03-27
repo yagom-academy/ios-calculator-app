@@ -170,19 +170,19 @@ private extension ViewController {
         return operandLabel
     }
     
-    func makeCalculationStackView() -> UIStackView {
-        let calculationStack = UIStackView()
+    func makeStackView() -> UIStackView {
+        let stackView = UIStackView()
         
-        calculationStack.axis = .horizontal
-        calculationStack.alignment = .fill
-        calculationStack.distribution = .fill
-        calculationStack.spacing = 8
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
         
-        return calculationStack
+        return stackView
     }
     
     func addStackView() {
-        let calculationStackView: UIStackView = makeCalculationStackView()
+        let calculationStackView: UIStackView = makeStackView()
         
         [makeLabel(labelText: operatorLabel.text),
          makeLabel(labelText: operandLabel.text)].forEach { calculationStackView.addArrangedSubview($0) }
