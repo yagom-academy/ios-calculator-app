@@ -135,10 +135,10 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: StackView Related Method
     private func checkAndAddLabelToStackView() {
-        let label = UILabel()
-        
         guard let operatorLabelText = currentOperatorLabel.text else { return }
         guard var operandLabelText = currentOperandLabel.text else { return }
+        
+        let label = UILabel()
         
         while operandLabelText.contains(Number.decimalPoint.rawValue)
                 && operandLabelText.hasSuffix(Number.zero.rawValue) {
