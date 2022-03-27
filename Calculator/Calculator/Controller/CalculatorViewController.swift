@@ -28,10 +28,10 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var subtractButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
     @IBOutlet weak var divideButton: UIButton!
-    
+
     @IBOutlet private weak var resultButton: UIButton!
     @IBOutlet private weak var convertingSignButton: UIButton!
-    
+
     @IBOutlet private var scrollView: UIScrollView!
     @IBOutlet private var verticalStackView: UIStackView!
     
