@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     // MARK: IBOutlet
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
