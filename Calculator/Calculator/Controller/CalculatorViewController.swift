@@ -203,20 +203,22 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addLabelToStackView(_ operandLabelText: String, _ operatorLabelText: String) {
-        let label = UILabel()
-
-        if isFirstOperand == true {
-            label.text = "\(operandLabelText) "
+        let resultLabel: UILabel = {
+            let label = UILabel()
             label.textColor = .white
-            formulaStackView.addArrangedSubview(label)
+            return label
+        }()
+        
+        if isFirstOperand == true {
+            resultLabel.text = "\(operandLabelText) "
+            formulaStackView.addArrangedSubview(resultLabel)
             isFirstOperand = false
         } else {
-            label.text = "\(operatorLabelText) \(operandLabelText) "
-            label.textColor = .white
-            formulaStackView.addArrangedSubview(label)
+            resultLabel.text = "\(operatorLabelText) \(operandLabelText) "
+            formulaStackView.addArrangedSubview(resultLabel)
         }
         
-        guard let string = label.text?.filter({ $0 != "," }) else { return }
+        guard let string = resultLabel.text?.filter({ $0 != "," }) else { return }
         
         stringToParse.append(string)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
