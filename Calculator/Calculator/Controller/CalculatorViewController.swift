@@ -94,7 +94,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
         guard let operatorString = currentOperatorLabel.text else { return }
         guard !operatorString.isEmpty else { return }
-        guard formulaStackView.arrangedSubviews.last != nil else { return }
+        guard !formulaStackView.arrangedSubviews.isEmpty else { return }
         
         checkAndAddLabelToStackView()
         tryToReturnResult()
