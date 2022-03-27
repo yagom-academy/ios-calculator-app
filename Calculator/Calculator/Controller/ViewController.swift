@@ -8,7 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var listScrollView: UIScrollView!
-    @IBOutlet weak var numberListStackView: UIStackView!
+    @IBOutlet weak var formulaListStackView: UIStackView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     private var isNoneNumber: Bool = true
@@ -18,11 +18,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBasicStatus()
+        initializeCalculator()
     }
     //MARK: - IBAction
     @IBAction func touchACButton(_ sender: UIButton) {
-        setBasicStatus()
+        initializeCalculator()
     }
     
     @IBAction func touchCEButton(_ sender: UIButton) {
@@ -47,12 +47,10 @@ class ViewController: UIViewController {
         guard let operandText = self.operandLabel.text, operandText.count < 20 else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
         if self.operandLabel.text == "NaN" {
-            self.numberListStackView.subviews.forEach({
-                $0.removeFromSuperview()})
+            removeFormula()
         }
         if isResult == true {
-            self.numberListStackView.subviews.forEach({
-                $0.removeFromSuperview()})
+            removeFormula()
             self.operandLabel.text = changeNumberFormat(number: inputNumber)
         } else {
             self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
@@ -74,8 +72,7 @@ class ViewController: UIViewController {
         guard let operationText = self.operationLabel.text else { return }
         if isFirst == true { return }
         if isResult == true {
-            self.numberListStackView.subviews.forEach({
-                $0.removeFromSuperview()})
+            removeFormula()
             self.isResult = false
         }
         self.operationLabel.text = inputOperation
@@ -87,7 +84,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchResultButton(_ sender: UIButton) {
         if self.isResult == true { return }
-        if self.numberListStackView.subviews.isEmpty { return }
+        if self.formulaListStackView.subviews.isEmpty { return }
         guard let operandText = self.operandLabel.text else { return }
         guard let operationText = self.operationLabel.text else { return }
         addFormula(operation: operationText, operand: operandText)
@@ -102,9 +99,8 @@ class ViewController: UIViewController {
         self.isResult = true
     }
     //MARK: - Functions
-    private func setBasicStatus() {
-        self.numberListStackView.subviews.forEach({
-            $0.removeFromSuperview()})
+    private func initializeCalculator() {
+        removeFormula()
         self.operandLabel.text = "0"
         self.operationLabel.text = ""
         self.formulaToSend = ""
@@ -152,8 +148,13 @@ class ViewController: UIViewController {
         let numberStackView = makeStackView()
         numberStackView.addArrangedSubview(makeLabel(element: operation))
         numberStackView.addArrangedSubview(makeLabel(element: changeNumberFormat(number: operand)))
-        self.numberListStackView.addArrangedSubview(numberStackView)
-        self.listScrollView.scrollToBottom(labelStackView: numberListStackView)
+        self.formulaListStackView.addArrangedSubview(numberStackView)
+        self.listScrollView.scrollToBottom(labelStackView: formulaListStackView)
+    }
+    
+    private func removeFormula() {
+        self.formulaListStackView.subviews.forEach({
+            $0.removeFromSuperview()})
     }
 }
 
