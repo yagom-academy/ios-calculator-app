@@ -108,7 +108,7 @@ private extension ViewController {
         addStackView()
         scrollToBottom()
         
-        let formula = makeFormula(CalculatorSign.empty)
+        let formula = makeFormula()
         
         do {
             operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: formula).result())
@@ -177,8 +177,8 @@ private extension ViewController {
         allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    func makeFormula(_ input: String) -> String {
-        var formula = input
+    func makeFormula() -> String {
+        var formula = ""
         
         allCalculatStack.arrangedSubviews.forEach {
             let subStackView = $0 as? UIStackView
