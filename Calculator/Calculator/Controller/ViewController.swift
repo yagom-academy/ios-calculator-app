@@ -22,7 +22,7 @@ final class CalculatorViewController: UIViewController {
     private var stringToParse: String = ""
     private var isFirstOperand: Bool = true
     private var isOperandEntered: Bool = false
-    private var isResultButtonClicked: Bool = false
+    private var isResultButtonDidTouch: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +33,13 @@ final class CalculatorViewController: UIViewController {
         stringToParse = ""
         isFirstOperand = true
         isOperandEntered = false
-        isResultButtonClicked = false
+        isResultButtonDidTouch = false
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
     }
     
     // MARK: Operand Button Method
-    @IBAction private func operandButtonsClicked(_ sender: UIButton) {
+    @IBAction private func operandButtonsDidTouch(_ sender: UIButton) {
         guard var validOperand = checkValidity(of: sender) else { return }
         
         Number.allCases.forEach { number in
@@ -59,12 +59,12 @@ final class CalculatorViewController: UIViewController {
     }
     
     // MARK: Operator Button Methods
-    @IBAction private func operatorButtonsClicked(_ sender: UIButton) {
-        if isResultButtonClicked == true {
+    @IBAction private func operatorButtonsDidTouch(_ sender: UIButton) {
+        if isResultButtonDidTouch == true {
             isOperandEntered = false
             currentOperandLabel.text = Number.zero.rawValue
             currentOperatorLabel.text = sender.titleLabel?.text
-            isResultButtonClicked = false
+            isResultButtonDidTouch = false
         }
         
         guard isOperandEntered == true else { return }
@@ -75,17 +75,17 @@ final class CalculatorViewController: UIViewController {
         isOperandEntered = false
     }
     
-    @IBAction private func resultButtonClicked(_ sender: UIButton) {
+    @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
         guard currentOperatorLabel.text != "" else { return }
         guard verticalStackView.arrangedSubviews.last != nil else { return }
         
         checkAndAddLabelToStackView()
         tryToReturnResult()
-        isResultButtonClicked = true
+        isResultButtonDidTouch = true
     }
     
     // MARK: Extra Button Methods
-    @IBAction private func allClearButtonClicked(_ sender: UIButton) {
+    @IBAction private func allClearButtonDidTouch(_ sender: UIButton) {
         currentOperandLabel.text = Number.zero.rawValue
         currentOperatorLabel.text = ""
         
@@ -98,11 +98,11 @@ final class CalculatorViewController: UIViewController {
         setUp()
     }
     
-    @IBAction private func clearEntryButtonClicked(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonDidTouch(_ sender: UIButton) {
         currentOperandLabel.text = Number.zero.rawValue
     }
     
-    @IBAction private func signConvertingButtonClicked(_ sender: UIButton) {
+    @IBAction private func signConvertingButtonDidTouch(_ sender: UIButton) {
         guard var currentNumber = currentOperandLabel.text else { return }
         guard currentNumber != Number.zero.rawValue else { return }
         
