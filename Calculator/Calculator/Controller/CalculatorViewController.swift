@@ -124,11 +124,11 @@ final class CalculatorViewController: UIViewController {
         guard var currentNumber = currentOperandLabel.text else { return }
         guard currentNumber != Number.zero.rawValue else { return }
         
-        if currentNumber.contains(Operator.subtract.rawValue) {
+        if currentNumber.contains(Operator.subtraction.rawValue) {
             let minusSign = currentNumber.first
             currentNumber = currentNumber.filter{ $0 != minusSign }
         } else {
-            currentNumber = String(Operator.subtract.rawValue) + currentNumber
+            currentNumber = String(Operator.subtraction.rawValue) + currentNumber
         }
         
         currentOperandLabel.text = currentNumber

@@ -19,7 +19,7 @@ struct Formula {
             
             guard let operatorToCalculate = operators.dequeue() else { return nil }
             
-            if operatorToCalculate == Operator.divide && numberToCalculate == 0 {
+            if operatorToCalculate == Operator.division && numberToCalculate == 0 {
                 throw CalculatorError.divisionByZero
             } else {
                 calculatedNumber = operatorToCalculate.calculate(lhs: calculatedNumber, rhs: numberToCalculate)

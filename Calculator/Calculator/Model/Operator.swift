@@ -8,21 +8,21 @@
 import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
-    case add = "+"
-    case subtract = "-"
-    case divide = "÷"
-    case multiply = "×"
+    case addition = "+"
+    case subtraction = "-"
+    case division = "÷"
+    case multiplication = "×"
 }
 extension Operator {
     public func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
-        case .add:
+        case .addition:
             return add(lhs: lhs, rhs: rhs)
-        case .subtract:
+        case .subtraction:
             return subtract(lhs: lhs, rhs: rhs)
-        case .divide:
+        case .division:
             return divide(lhs: lhs, rhs: rhs)
-        case .multiply:
+        case .multiplication:
             return multiply(lhs: lhs, rhs: rhs)
         }
     }
