@@ -105,30 +105,13 @@ private extension ViewController {
     @IBAction func touchUpCalculationButton(_ sender: Any) {
         if operatorLabel.text == CalculatorSign.empty { return }
         
-        var arithmeticExpressio = CalculatorSign.empty
-        
         addStackView()
         scrollToBottom()
         
-        allCalculatStack.arrangedSubviews.forEach {
-            let subStackView = $0 as? UIStackView
-            let operatorLabel = subStackView?.arrangedSubviews[0] as? UILabel
-            let operandLabel = subStackView?.arrangedSubviews[1] as? UILabel
-            
-            if operatorLabel?.text?.isEmpty == false {
-                guard let operatorText = operatorLabel?.text else { return }
-                arithmeticExpressio += " \(operatorText) "
-            } else {
-                arithmeticExpressio = CalculatorSign.empty
-            }
-            
-            guard let operandText = operandLabel?.text else { return }
-            
-            arithmeticExpressio += removeComma(operandText)
-        }
+        let formula = makeFormula(CalculatorSign.empty)
         
         do {
-            operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: arithmeticExpressio).result())
+            operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: formula).result())
         } catch {
             operandLabel.text = CalculatorSign.nan
         }
@@ -192,6 +175,30 @@ private extension ViewController {
     
     func allClearStackView() {
         allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func makeFormula(_ input: String) -> String {
+        
+        var formula = input
+        
+        allCalculatStack.arrangedSubviews.forEach {
+            let subStackView = $0 as? UIStackView
+            let operatorLabel = subStackView?.arrangedSubviews[0] as? UILabel
+            let operandLabel = subStackView?.arrangedSubviews[1] as? UILabel
+            
+            if operatorLabel?.text?.isEmpty == false {
+                guard let operatorText = operatorLabel?.text else { return }
+                formula += " \(operatorText) "
+            } else {
+                formula = CalculatorSign.empty
+            }
+            
+            guard let operandText = operandLabel?.text else { return }
+            
+            formula += removeComma(operandText)
+        }
+        
+        return formula
     }
 }
 
