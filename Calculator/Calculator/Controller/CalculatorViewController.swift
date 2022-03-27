@@ -11,7 +11,19 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentOperandLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     
-    @IBOutlet private var operandButtons: [UIButton]!
+    @IBOutlet weak var zeroButton: UIButton!
+    @IBOutlet weak var doubleZeroButton: UIButton!
+    @IBOutlet weak var decimalPointButton: UIButton!
+    @IBOutlet weak var oneButton: UIButton!
+    @IBOutlet weak var twoButton: UIButton!
+    @IBOutlet weak var threeButton: UIButton!
+    @IBOutlet weak var fourButton: UIButton!
+    @IBOutlet weak var fiveButton: UIButton!
+    @IBOutlet weak var sixButton: UIButton!
+    @IBOutlet weak var sevenButton: UIButton!
+    @IBOutlet weak var eightButton: UIButton!
+    @IBOutlet weak var nineButton: UIButton!
+    
     @IBOutlet private var operatorButtons: [UIButton]!
     @IBOutlet private weak var resultButton: UIButton!
     @IBOutlet private weak var convertingSignButton: UIButton!
@@ -43,13 +55,15 @@ final class CalculatorViewController: UIViewController {
         guard var validOperand = checkValidity(of: sender) else { return }
         
         Number.allCases.forEach { number in
-            guard (0..<12) ~= sender.tag else { return }
+            guard let buttonString = sender.titleLabel?.text else { return }
+            guard let buttonNumber = Int(buttonString) else { return }
+            guard (0..<12) ~= buttonNumber else { return }
             
-            if String(sender.tag) == number.rawValue {
+            if buttonString == number.rawValue {
                 validOperand += number.rawValue
-            } else if sender.tag == 10, number == .doubleZero {
+            } else if buttonNumber == 10, number == .doubleZero {
                 validOperand += Number.doubleZero.rawValue
-            } else if sender.tag == 11, number == .decimalPoint {
+            } else if buttonNumber == 11, number == .decimalPoint {
                 validOperand += Number.decimalPoint.rawValue
             }
         }
@@ -173,11 +187,13 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func checkValidity(of sender: UIButton) -> String? {
+        guard let buttonString = sender.titleLabel?.text else { return nil }
+        guard let buttonNumber = Int(buttonString) else { return nil }
         guard var currentOperand = currentOperandLabel.text else { return nil }
         guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
-        guard currentOperand != Number.zero.rawValue || sender.tag != 10 else { return nil }
+        guard currentOperand != Number.zero.rawValue || buttonNumber != 10 else { return nil }
         
-        if currentOperand == Number.zero.rawValue, sender.tag != 11 {
+        if currentOperand == Number.zero.rawValue, buttonNumber != 11 {
             currentOperand = ""
         } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
             currentOperand = "-"
