@@ -79,7 +79,7 @@ final class CalculatorViewController: UIViewController {
             calculatorInput.removeLast()
         }
         calculatorInput.append(inputOperator)
-        updateLabels(with: inputOperator)
+        setLabelsText(inputOperator: inputOperator)
     }
     
     @IBAction func touchUpFunctionButton(_ sender: UIButton) {
@@ -88,8 +88,7 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = CalculatorConstant.defaultNumber
-        operatorLabel.text = CalculatorConstant.defaultOperator
+        setLabelsText()
     }
     
     private func findNumber(of button: UIButton) throws -> String {
@@ -208,12 +207,13 @@ final class CalculatorViewController: UIViewController {
     private func calculate() {
         do {
             let result = try ExpressionParser.parse(from: calculatorInput).result()
+            guard let processedNumber = NumberFormatter.calculator.string(for: result) else {
+                return
+            }
             
-            numberLabel.text = NumberFormatter.calculator.string(for: result)
-            operatorLabel.text = ""
+            setLabelsText(inputNumber: processedNumber)
         } catch {
-            operatorLabel.text = CalculatorConstant.defaultOperator
-            numberLabel.text = CalculatorConstant.failedResult
+            setLabelsText()
         }
     }
     
@@ -232,9 +232,10 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func updateLabels(with inputOperator: String) {
+    private func setLabelsText(inputOperator: String = CalculatorConstant.defaultOperator,
+                              inputNumber: String = CalculatorConstant.defaultNumber) {
         operatorLabel.text = inputOperator
-        numberLabel.text = CalculatorConstant.defaultNumber
+        numberLabel.text = inputNumber
     }
     
     private func findFunction(of button: UIButton) throws {
@@ -254,8 +255,7 @@ final class CalculatorViewController: UIViewController {
         inputStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-        operatorLabel.text = CalculatorConstant.defaultOperator
-        numberLabel.text = CalculatorConstant.defaultNumber
+        setLabelsText()
         calculatorInput = CalculatorConstant.defaultInput
     }
     
