@@ -98,7 +98,7 @@ final class CalculatorViewController: UIViewController {
         guard !formulaStackView.arrangedSubviews.isEmpty else { return }
         
         checkAndAddLabelToStackView()
-        tryToReturnResult()
+        setResult()
         isResultButtonDidTouch = true
     }
     
@@ -174,12 +174,11 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func tryToReturnResult() {
-        let formulaForResult = ExpressionParser.parse(from: stringToParse)
-        var myFormula = formulaForResult
+    private func setResult() {
+        var formulaForResult = ExpressionParser.parse(from: stringToParse)
         
         do {
-            guard let result = try myFormula.result() else { return }
+            guard let result = try formulaForResult.result() else { return }
             currentOperandLabel.text = checkIfDecimalPointIsNeeded(result)
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = "NaN"
