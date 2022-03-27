@@ -14,6 +14,8 @@ fileprivate enum CalculatorConstant {
     static let failedResult = "NaN"
     
     static let actionDuration: Double = 0.3
+    
+    static let maxInputNumberLimit = 20
 }
 
 final class CalculatorViewController: UIViewController {
@@ -54,10 +56,10 @@ final class CalculatorViewController: UIViewController {
         guard let inputNumber = try? findNumber(of: sender) else {
             return
         }
-        if isValidNumber(inputNumber: inputNumber) == false {
+        guard isValidNumber(inputNumber: inputNumber),
+              isValidLength(inputNumber: inputNumber) else {
             return
         }
-        
         calculatorInput.append(inputNumber)
         updateNumberLabel(with: inputNumber)
     }
@@ -128,6 +130,17 @@ final class CalculatorViewController: UIViewController {
         }
         if (calculatorInput.isEmpty && inputNumber.contains("0")) ||
             (currentNumber.contains(".") && inputNumber == ".") {
+            return false
+        }
+        return true
+    }
+    
+    private func isValidLength(inputNumber: String) -> Bool {
+        guard let currentNumber = numberLabel.text else {
+            return false
+        }
+        let newLength = currentNumber.count + inputNumber.count
+        guard newLength <= CalculatorConstant.maxInputNumberLimit else {
             return false
         }
         return true
