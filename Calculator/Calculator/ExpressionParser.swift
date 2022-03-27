@@ -28,7 +28,7 @@ enum ExpressionParser {
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
-    func componentsByOperators(from input: String) -> [String] {
+    private func componentsByOperators(from input: String) -> [String] {
         let result = input.split(with: " ")
         return result
         
