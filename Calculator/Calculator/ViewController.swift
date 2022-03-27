@@ -178,7 +178,6 @@ private extension ViewController {
     }
     
     func makeFormula(_ input: String) -> String {
-        
         var formula = input
         
         allCalculatStack.arrangedSubviews.forEach {
