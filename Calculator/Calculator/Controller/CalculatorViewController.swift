@@ -24,7 +24,11 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var eightButton: UIButton!
     @IBOutlet weak var nineButton: UIButton!
     
-    @IBOutlet private var operatorButtons: [UIButton]!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var subtractButton: UIButton!
+    @IBOutlet weak var multiplyButton: UIButton!
+    @IBOutlet weak var divideButton: UIButton!
+    
     @IBOutlet private weak var resultButton: UIButton!
     @IBOutlet private weak var convertingSignButton: UIButton!
     
