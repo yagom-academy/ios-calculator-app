@@ -19,7 +19,6 @@ enum Operator: Character, CaseIterable {
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return substract(lhs: lhs, rhs: rhs)
-        // NaN 처리하기! throws 이용
         case .divide:
             return try divide(lhs: lhs, rhs: rhs)
         case .multiply:
