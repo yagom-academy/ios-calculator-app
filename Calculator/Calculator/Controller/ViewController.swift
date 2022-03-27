@@ -26,10 +26,10 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        setUp()
     }
     
-    private func initialize() {
+    private func setUp() {
         stringToParse = ""
         isFirstOperand = true
         isOperandEntered = false
@@ -95,7 +95,7 @@ final class CalculatorViewController: UIViewController {
             view.removeFromSuperview()
         }
         
-        initialize()
+        setUp()
     }
     
     @IBAction private func clearEntryButtonClicked(_ sender: UIButton) {
