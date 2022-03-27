@@ -13,15 +13,15 @@ final class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     
-    var inputOperand: String = ""
-    var inputValues: [String] = []
+    private var inputOperand: String = ""
+    private var inputValues: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         removeHistory()
     }
     
-    @IBAction func didTapOperand(sender: UIButton) {
+    @IBAction private func didTapOperand(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
         
         if inputOperand.count >= 16 {
@@ -48,7 +48,7 @@ final class ViewController: UIViewController {
         presentValue.text = numberFormatter(number: inputOperand)
     }
     
-    @IBAction func didTapOperator(sender: UIButton) {
+    @IBAction private func didTapOperator(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
         guard let operatorLabel = presentOperator.text else { return }
         guard let operandLabel = presentValue.text else { return }
@@ -67,7 +67,7 @@ final class ViewController: UIViewController {
         presentOperator.text = buttonLabel
     }
     
-    @IBAction func didTapDot(sender: UIButton) {
+    @IBAction private func didTapDot(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
         guard let lableText = presentValue.text else { return }
         
@@ -79,7 +79,7 @@ final class ViewController: UIViewController {
         presentValue.text = lableText + buttonLabel
     }
     
-    @IBAction func changeSign(sender: UIButton) {
+    @IBAction private func changeSign(sender: UIButton) {
         if inputOperand == "0" {
             return
         }
@@ -89,7 +89,7 @@ final class ViewController: UIViewController {
         presentValue.text = numberFormatter(number: inputOperand)
     }
     
-    @IBAction func didTapEqualSign() {
+    @IBAction private func didTapEqualSign() {
         guard let operatorLabel = presentOperator.text else { return }
         guard let operandLabel = presentValue.text else { return }
         
@@ -108,11 +108,11 @@ final class ViewController: UIViewController {
         presentOperator.text = ""
     }
     
-    @IBAction func didTapAC() {
+    @IBAction private func didTapAC() {
         removeHistory()
     }
     
-    @IBAction func didTapCE() {
+    @IBAction private func didTapCE() {
         inputOperand = "0"
         presentValue.text = inputOperand
     }
