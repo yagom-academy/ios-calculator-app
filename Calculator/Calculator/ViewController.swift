@@ -52,21 +52,19 @@ final class ViewController: UIViewController {
         inputFormulaLabel.text = "0"
     }
     
+    private func makeLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.font = .preferredFont(forTextStyle: .title3)
+        return label
+    }
+    
     private func appendFormulaValueToScrollView(_ operandsValue: String, operatorsValue: String) {
-        let operandsValueLabel: UILabel = {
-            let label = UILabel()
-            label.textColor = UIColor.white
-            label.font = .preferredFont(forTextStyle: .title3)
-            label.text = operandsValue
-            return label
-        }()
+        let operandsValueLabel = makeLabel()
+        let operatorValueLabel = makeLabel()
         
-        let operatorValueLabel: UILabel = {
-            let label = UILabel()
-            label.textColor = UIColor.white
-            label.text = operatorsValue
-            return label
-        }()
+        operandsValueLabel.text = operandsValue
+        operatorValueLabel.text = operatorsValue
         
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [operatorValueLabel, operandsValueLabel])
