@@ -45,4 +45,3 @@ final class CalculatorLinkedList<T> {
         tail = nil
     }
 }
-
