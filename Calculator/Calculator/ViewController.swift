@@ -3,20 +3,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    @IBOutlet weak var inputFormulaLabel: UILabel!
-    @IBOutlet weak var inputOperatorLabel: UILabel!
-    @IBOutlet var operandBtns: [UIButton]!
-    @IBOutlet var operatorBtns: [UIButton]!
+final class ViewController: UIViewController {
+    @IBOutlet private weak var inputFormulaLabel: UILabel!
+    @IBOutlet private weak var inputOperatorLabel: UILabel!
+    @IBOutlet private var operandBtns: [UIButton]!
+    @IBOutlet private var operatorBtns: [UIButton]!
     
-    @IBOutlet weak var allClearBtn: UIButton!
-    @IBOutlet weak var clearEntryBtn: UIButton!
-    @IBOutlet weak var plusAndMinusBtn: UIButton!
-    @IBOutlet weak var enteredFormulaValueScrollView: UIScrollView!
-    @IBOutlet weak var formulaStackView: UIStackView!
-    var enteredResultValue = ""
+    @IBOutlet private weak var allClearBtn: UIButton!
+    @IBOutlet private weak var clearEntryBtn: UIButton!
+    @IBOutlet private weak var plusAndMinusBtn: UIButton!
+    @IBOutlet private weak var enteredFormulaValueScrollView: UIScrollView!
+    @IBOutlet private weak var formulaStackView: UIStackView!
+    private var enteredResultValue = ""
     
-    let numberFormatter: NumberFormatter = {
+    private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         removeOperatorLabelTextAtInputValueIsZero()
     }
     
-    @IBAction func touchUpOperandBtns(_ sender: UIButton) {
+    @IBAction private func touchUpOperandBtns(_ sender: UIButton) {
         if inputFormulaLabel.text == "0" { inputOperatorLabel.text = "" }
         guard let inputOperandValue = operandBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         inputFormulaLabel.text = convertDecimalValue(resultValue)
     }
     
-    @IBAction func touchUpOperatorBtns(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorBtns(_ sender: UIButton) {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         inputFormulaLabel.text = "0"
     }
     
-    func appendFormulaValueToScrollView(_ operandsValue: String, operatorsValue: String) {
+    private func appendFormulaValueToScrollView(_ operandsValue: String, operatorsValue: String) {
         let operandsValueLabel: UILabel = {
             let label = UILabel()
             label.textColor = UIColor.white
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         enteredFormulaValueScrollView.addSubview(formulaStackView)
     }
     
-    func convertDecimalValue(_ operatorValue: String) -> String? {
+    private func convertDecimalValue(_ operatorValue: String) -> String? {
         if let operandDoubleValue = Double(operatorValue) {
             return numberFormatter.string(from: operandDoubleValue as NSNumber)
         } else {
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpEntryClear() {
+    @IBAction private func touchUpEntryClear() {
         if let enteredValue = inputFormulaLabel.text,
            let inputLastValue = enteredValue.last,
            let _ = Int(inputLastValue.description) {
@@ -96,13 +96,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpAllClear() {
+    @IBAction private func touchUpAllClear() {
         inputFormulaLabel.text?.removeAll()
         inputOperatorLabel.text?.removeAll()
         inputFormulaLabel.text = "0"
     }
     
-    @IBAction func switchPlusAndMinusToInputOperatorLabel() {
+    @IBAction private func switchPlusAndMinusToInputOperatorLabel() {
         if inputFormulaLabel.text == "0" { return }
         if let inputFormulaFirstValue = inputFormulaLabel.text?.first,
            let inputFormulaValue = inputFormulaLabel.text,
@@ -114,13 +114,13 @@ class ViewController: UIViewController {
         }
     }
     
-    func removeOperatorLabelTextAtInputValueIsZero() {
+    private func removeOperatorLabelTextAtInputValueIsZero() {
         if inputFormulaLabel.text == "0" {
             inputOperatorLabel.text?.removeAll()
         }
     }
     
-    @IBAction func startCalculationBtn(_ sender: Any) throws {
+    @IBAction private func startCalculationBtn(_ sender: Any) throws {
         guard let inputValue = inputFormulaLabel.text else { return }
         enteredResultValue += inputValue
         do {
