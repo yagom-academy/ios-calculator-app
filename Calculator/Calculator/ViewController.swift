@@ -25,8 +25,8 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputFormulaLabel.text = "0"
-        inputOperatorLabel.text = ""
+        resetInputFormulaLabel()
+        resetOperatorLabel()
         removeOperatorLabelTextAtInputValueIsZero()
     }
     
@@ -47,6 +47,10 @@ final class ViewController: UIViewController {
         appendToScrollViewAfterCheckEnteredResultValueIsNone(inputFormulaText, inputOperatorValue)
         storeFormulaValue += inputFormulaText+inputOperatorValue
         inputOperatorLabel.text = inputOperatorValue
+        resetInputFormulaLabel()
+    }
+    
+    private func resetInputFormulaLabel() {
         inputFormulaLabel.text = ""
     }
     
@@ -110,7 +114,7 @@ final class ViewController: UIViewController {
     @IBAction private func touchUpAllClear() {
         inputFormulaLabel.text?.removeAll()
         inputOperatorLabel.text?.removeAll()
-        inputFormulaLabel.text = "0"
+        resetInputFormulaLabel()
         removeAllStackView()
     }
     
