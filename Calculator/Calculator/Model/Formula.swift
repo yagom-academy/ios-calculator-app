@@ -12,7 +12,7 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     private func result() -> Double {
-        guard var resultOperand = operands.dequeue() else {
+        guard var operationResult = operands.dequeue() else {
             return .nan
         }
         
@@ -21,8 +21,8 @@ struct Formula {
                   let elementOperator = operators.dequeue() else {
                 return .nan
             }
-            resultOperand = elementOperator.calculate(lhs: resultOperand, rhs: elementOperand)
+            operationResult = elementOperator.calculate(lhs: operationResult, rhs: elementOperand)
         }
-        return resultOperand
+        return operationResult
     }
 }

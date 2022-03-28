@@ -5,32 +5,23 @@
 //  Created by Eddy on 2022/03/20.
 //
 
-import Foundation
-
 enum ExpressionParser {
     func parse(from input: String) -> Formula {
-        let operandQueue: CalculatorItemQueue<Double> = CalculatorItemQueue()
-        let operatorQueue: CalculatorItemQueue<Operator> = CalculatorItemQueue()
+        let operandQueue = CalculatorItemQueue<Double>()
+        let operatorQueue = CalculatorItemQueue<Operator>()
         
-        componentsByOperators(from: input).compactMap { element in
-            Double(element)
-        }.forEach { elementOperand in
-            operandQueue.enqueue(elementOperand)
-        }
+        componentsByOperators(from: input)
+            .compactMap { Double($0) }
+            .forEach { operandQueue.enqueue($0) }
         
-        componentsByOperators(from: input).filter { number in
-            number.count == 1
-        }.compactMap { element in
-            Operator(rawValue: Character(element))
-        }.forEach { elementOperator in
-            operatorQueue.enqueue(elementOperator)
-        }
+        componentsByOperators(from: input)
+            .filter { $0.count == 1 }
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { operatorQueue.enqueue($0) }
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
     private func componentsByOperators(from input: String) -> [String] {
-        let result = input.split(with: " ")
-        return result
-        
+        return input.split(with: " ")
     }
 }
