@@ -33,8 +33,8 @@ final class ViewController: UIViewController {
     @IBAction private func touchUpOperandBtns(_ sender: UIButton) {
         if inputFormulaLabel.text == "0" { inputOperatorLabel.text = "" }
         guard let inputOperandValue = operandBtns[sender.tag].titleLabel?.text,
-              let enteredValue = inputFormulaLabel.text else { return }
-        let resultValue = enteredValue+inputOperandValue
+              let inputFormulaText = inputFormulaLabel.text else { return }
+        let resultValue = inputFormulaText+inputOperandValue
         inputFormulaLabel.text = convertDecimalValue(resultValue)
     }
     
@@ -42,10 +42,10 @@ final class ViewController: UIViewController {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
         
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
-              let enteredValue = inputFormulaLabel.text else { return }
+              let inputFormulaText = inputFormulaLabel.text else { return }
         
-        appendToScrollViewAfterCheckEnteredResultValueIsNone(enteredValue, inputOperatorValue)
-        storeFormulaValue += enteredValue+inputOperatorValue
+        appendToScrollViewAfterCheckEnteredResultValueIsNone(inputFormulaText, inputOperatorValue)
+        storeFormulaValue += inputFormulaText+inputOperatorValue
         inputOperatorLabel.text = inputOperatorValue
         inputFormulaLabel.text = ""
     }
@@ -97,9 +97,9 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpEntryClear() {
-        if let enteredValue = inputFormulaLabel.text,
-           let inputLastValue = enteredValue.last,
-           let _ = Int(inputLastValue.description) {
+        if let inputFormulaText = inputFormulaLabel.text,
+           let inputFormulaLastValue = inputFormulaText.last,
+           let _ = Int(inputFormulaLastValue.description) {
             inputFormulaLabel.text?.removeLast()
         } else if inputOperatorLabel.text?.isEmpty == false {
             inputFormulaLabel.text?.removeLast()
