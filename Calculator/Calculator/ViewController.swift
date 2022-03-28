@@ -101,15 +101,14 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpEntryClear() {
-        if let inputFormulaText = inputFormulaLabel.text,
+        if inputOperatorLabel.text == "" {
+           setInputFormulaTextIsZero()
+       } else if let inputFormulaText = inputFormulaLabel.text,
            let inputFormulaLastValue = inputFormulaText.last,
            let _ = Int(inputFormulaLastValue.description) {
             inputFormulaLabel.text?.removeLast()
         } else if inputOperatorLabel.text?.isEmpty == false,
                   inputOperatorLabel.text?.isEmpty == false {
-            
-        } else if inputOperatorLabel.text == "" {
-            setInputFormulaTextIsZero()
         }
     }
     
