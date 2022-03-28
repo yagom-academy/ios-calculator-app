@@ -108,6 +108,8 @@ final class ViewController: UIViewController {
         } else if inputOperatorLabel.text?.isEmpty == false {
             inputFormulaLabel.text?.removeLast()
             // 연산자만 입력했을때 CE하면 에러발생함 error: last empty collection
+        } else if inputOperatorLabel.text == "" {
+            setInputFormulaTextIsZero()
         }
     }
     
@@ -116,6 +118,11 @@ final class ViewController: UIViewController {
         inputOperatorLabel.text?.removeAll()
         resetInputFormulaLabel()
         removeAllStackView()
+        setInputFormulaTextIsZero()
+    }
+    
+    private func setInputFormulaTextIsZero() {
+        inputFormulaLabel.text = "0"
     }
     
     private func removeAllStackView() {
