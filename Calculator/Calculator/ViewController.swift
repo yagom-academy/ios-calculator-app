@@ -1,5 +1,5 @@
 //  Calculator - ViewController.swift
-//  Created by quokka.
+//  Created by quokka
 
 import UIKit
 
@@ -149,13 +149,14 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func startCalculationBtn(_ sender: UIButton) {
+        if inputOperatorLabel.text == "" { return }
         guard let inputFormulaText = inputFormulaLabel.text else { return }
         storeFormulaValue += inputFormulaText
         do {
             let result = try ExpressionParser.parse(from: storeFormulaValue).result()
             inputFormulaLabel.text = String(Int(result))
         } catch CalculateError.isNaN {
-            inputFormulaLabel.text = "NaN"
+            inputFormulaLabel.text = CalculateError.isNaN.errorDescription
         } catch {
             print(error)
         }
