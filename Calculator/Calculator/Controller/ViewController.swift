@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var formulaListStackView: UIStackView!
     @IBOutlet weak var operationLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    private var isNoneNumber: Bool = true
+    private var isRealZero: Bool = false
     private var isResult: Bool = false
     private var formulaToSend = ""
     private let stringZero = "0"
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchCEButton(_ sender: UIButton) {
         self.operandLabel.text = stringZero
-        self.isNoneNumber = true
+        self.isRealZero = false
     }
     
     @IBAction func touchChangeSignButton(_ sender: UIButton) {
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         } else {
             self.operandLabel.text = self.showZeroAfterDot(number: operandText + inputNumber)
         }
-        self.isNoneNumber = false
+        self.isRealZero = true
         self.isResult = false
     }
     
@@ -75,10 +75,10 @@ class ViewController: UIViewController {
             self.isResult = false
         }
         self.operationLabel.text = inputOperation
-        if isNoneNumber == true { return }
+        if isRealZero == false { return }
         addFormula(operation: operationText, operand: operandText)
         self.operandLabel.text = stringZero
-        self.isNoneNumber = true
+        self.isRealZero = false
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         self.operandLabel.text = stringZero
         self.operationLabel.text = ""
         self.formulaToSend = ""
-        self.isNoneNumber = true
+        self.isRealZero = false
     }
     
     private func showZeroAfterDot(number: String) -> String {
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
     }
     
     private func removeFormula() {
-        self.formulaListStackView.subviews.forEach({
+        self.formulaListStackView.arrangedSubviews.forEach({
             $0.removeFromSuperview()})
     }
 }
