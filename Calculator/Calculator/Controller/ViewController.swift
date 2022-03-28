@@ -21,11 +21,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeCalculator()
+        resetCalculator()
     }
     //MARK: - IBAction
     @IBAction func touchACButton(_ sender: UIButton) {
-        initializeCalculator()
+        resetCalculator()
     }
     
     @IBAction func touchCEButton(_ sender: UIButton) {
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         self.isResult = true
     }
     //MARK: - Functions
-    private func initializeCalculator() {
+    private func resetCalculator() {
         removeFormula()
         self.operandLabel.text = stringZero
         self.operationLabel.text = ""
