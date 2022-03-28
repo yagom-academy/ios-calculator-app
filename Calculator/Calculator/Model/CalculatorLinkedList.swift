@@ -35,9 +35,7 @@ final class CalculatorLinkedList<T> {
             return nil
         }
         defer {
-            let nextHead = head?.next
-            head = nil
-            head = nextHead
+            head = head?.next
         }
         return head?.value
     }
