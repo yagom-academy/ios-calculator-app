@@ -2,7 +2,7 @@
 //  CalculatorViewController.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/14.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 import UIKit
@@ -54,7 +54,7 @@ final class CalculatorViewController: UIViewController {
     }
     if self.viewModel.addOperator(of: operatorString) {
       self.resultStackView.addArrangedSubview(stackView)
-      self.scrollToDown()
+      self.resultScrollView.scrollToBottom()
     }
   }
   
@@ -107,18 +107,6 @@ private extension CalculatorViewController {
 
   func convertSign() {
     self.viewModel.convertSign()
-  }
-  
-  func scrollToDown() {
-    self.resultScrollView.layoutIfNeeded()
-    let contentSizeHeight = self.resultScrollView.contentSize.height
-    let boundsHeight = self.resultScrollView.bounds.size.height
-    let contentInsetBottom = self.resultScrollView.contentInset.bottom
-    let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
-    if pointY > 0 {
-      let contentOffset = CGPoint(x: 0, y: pointY)
-      self.resultScrollView.setContentOffset(contentOffset, animated: true)
-    }
   }
   
   func makeSubResultStackView() -> UIStackView? {
