@@ -17,4 +17,8 @@ struct CalculatorQueue<T: CalculateItem> {
     func enqueue(_ element: T) {
         return linkedList.append(element)
     }
+    
+    func dequeue() -> T? {
+        return linkedList.removeFirst()
+    }
 }
