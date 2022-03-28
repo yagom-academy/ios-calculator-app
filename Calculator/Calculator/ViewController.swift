@@ -105,9 +105,9 @@ final class ViewController: UIViewController {
            let inputFormulaLastValue = inputFormulaText.last,
            let _ = Int(inputFormulaLastValue.description) {
             inputFormulaLabel.text?.removeLast()
-        } else if inputOperatorLabel.text?.isEmpty == false {
-            inputFormulaLabel.text?.removeLast()
-            // 연산자만 입력했을때 CE하면 에러발생함 error: last empty collection
+        } else if inputOperatorLabel.text?.isEmpty == false,
+                  inputOperatorLabel.text?.isEmpty == false {
+            
         } else if inputOperatorLabel.text == "" {
             setInputFormulaTextIsZero()
         }
