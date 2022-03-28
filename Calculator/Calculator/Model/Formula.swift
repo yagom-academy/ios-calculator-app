@@ -5,27 +5,27 @@
 //  Created by marisol on 2022/03/18.
 //
 
-import Foundation
-
 struct Formula {
-    public var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
-    public var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
-    public mutating func result() throws -> Double? {
-        guard var calculatedNumber = operands.dequeue() else { return nil }
-        
-        for _ in 0..<operators.count {
-            guard let numberToCalculate = operands.dequeue() else { return nil }
-            
-            guard let operatorToCalculate = operators.dequeue() else { return nil }
-            
-            if operatorToCalculate == Operator.division && numberToCalculate == 0 {
-                throw CalculatorError.divisionByZero
-            } else {
-                calculatedNumber = operatorToCalculate.calculate(lhs: calculatedNumber, rhs: numberToCalculate)
+    mutating func result() throws -> Double {
+        var formulaResult = operands.dequeue() ?? 0
+
+        while operands.isEmpty == false {
+            guard let number = operands.dequeue(),
+                  let operatorData = operators.dequeue()
+            else {
+                throw CalculatorError.invalidFormula
             }
+            
+            if number == .zero && operatorData == .division {
+                throw CalculatorError.divisionByZero
+            }
+            
+            formulaResult = operatorData.calculate(lhs: formulaResult, rhs: number)
         }
         
-        return calculatedNumber
+        return formulaResult
     }
 }

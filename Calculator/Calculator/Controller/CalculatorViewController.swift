@@ -177,7 +177,7 @@ final class CalculatorViewController: UIViewController {
         var formulaForResult = ExpressionParser.parse(from: stringToParse)
         
         do {
-            guard let result = try formulaForResult.result() else { return }
+            let result = try formulaForResult.result()
             currentOperandLabel.text = checkIfDecimalPointIsNeeded(result)
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = "NaN"
