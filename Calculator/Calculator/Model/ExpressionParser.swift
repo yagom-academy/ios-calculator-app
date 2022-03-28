@@ -6,7 +6,7 @@
 //
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         let operandQueue = CalculatorItemQueue<Double>()
         let operatorQueue = CalculatorItemQueue<Operator>()
         
@@ -21,7 +21,7 @@ enum ExpressionParser {
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
 }

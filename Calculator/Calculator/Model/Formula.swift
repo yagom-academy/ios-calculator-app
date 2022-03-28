@@ -11,7 +11,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    private func result() -> Double {
+    func result() -> Double {
         guard var operationResult = operands.dequeue() else {
             return .nan
         }
