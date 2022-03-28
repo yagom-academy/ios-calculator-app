@@ -2,6 +2,12 @@
 > 프로젝트 기간 2022.03.14 ~ 2022.03.25 </br>
 팀원 : [@마이노](https://github.com/Mino777) / 리뷰어 : [@Steven](https://github.com/stevenkim18)
 
+---
+
+<img src="https://user-images.githubusercontent.com/54234176/160284016-53016a35-80d6-4706-af8d-78d48ae772ad.gif" width="250" height="500"/>
+
+---
+
 ## 키워드
 - Protocols
 - Extensions
