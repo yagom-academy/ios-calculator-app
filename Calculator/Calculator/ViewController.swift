@@ -110,6 +110,11 @@ final class ViewController: UIViewController {
         inputFormulaLabel.text?.removeAll()
         inputOperatorLabel.text?.removeAll()
         inputFormulaLabel.text = "0"
+        removeAllStackView()
+    }
+    
+    private func removeAllStackView() {
+        formulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func switchPlusAndMinusToInputOperatorLabel() {
