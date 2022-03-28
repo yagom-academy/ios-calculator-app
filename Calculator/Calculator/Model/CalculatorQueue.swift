@@ -13,4 +13,8 @@ struct CalculatorQueue<T: CalculateItem> {
     var isEmpty: Bool {
         return linkedList.isEmpty
     }
+    
+    func enqueue(_ element: T) {
+        return linkedList.append(element)
+    }
 }
