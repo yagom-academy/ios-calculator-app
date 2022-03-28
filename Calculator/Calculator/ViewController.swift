@@ -14,7 +14,7 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var plusAndMinusBtn: UIButton!
     @IBOutlet private weak var enteredFormulaValueScrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
-    private var enteredResultValue = ""
+    private var storeFormulaValue = ""
     
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -40,16 +40,18 @@ final class ViewController: UIViewController {
     
     @IBAction private func touchUpOperatorBtns(_ sender: UIButton) {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
+        
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
+        
         appendToScrollViewAfterCheckEnteredResultValueIsNone(enteredValue, inputOperatorValue)
-        enteredResultValue += enteredValue+inputOperatorValue
+        storeFormulaValue += enteredValue+inputOperatorValue
         inputOperatorLabel.text = inputOperatorValue
-        inputFormulaLabel.text = "0"
+        inputFormulaLabel.text = ""
     }
     
     private func appendToScrollViewAfterCheckEnteredResultValueIsNone(_ inputFormulaText: String,_ operatorValue: String) {
-        if enteredResultValue == "" {
+        if storeFormulaValue == "" {
             appendFormulaValueToScrollView(inputFormulaText, operatorsValue: "")
         } else {
             appendFormulaValueToScrollView(inputFormulaText, operatorsValue: operatorValue)
@@ -129,21 +131,15 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func startCalculationBtn(_ sender: UIButton) {
-        guard let inputValue = inputFormulaLabel.text else { return }
-        enteredResultValue += inputValue
+        guard let inputFormulaText = inputFormulaLabel.text else { return }
+        storeFormulaValue += inputFormulaText
         do {
-            let result = try ExpressionParser.parse(from: enteredResultValue).result()
+            let result = try ExpressionParser.parse(from: storeFormulaValue).result()
             inputFormulaLabel.text = String(Int(result))
-        } catch CalculateError.isNaN(.nan) {
-            inputFormulaLabel.text = CalculateError.isNaN(.nan).errorDescription
-        } catch CalculateError.cannotCalculation {
-            print(CalculateError.cannotCalculation.errorDescription as Any)
-        } catch CalculateError.operandIsNil {
-            print(CalculateError.operandIsNil.errorDescription as Any)
-        } catch CalculateError.operatorIsNil {
-            print(CalculateError.operatorIsNil.errorDescription as Any)
+        } catch CalculateError.isNaN {
+            inputFormulaLabel.text = "NaN"
         } catch {
-            
+            print(error)
         }
     }
 }

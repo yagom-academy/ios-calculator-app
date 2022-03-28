@@ -5,7 +5,7 @@
 import Foundation
 
 enum CalculateError: Error {
-    case isNaN(Double)
+    case isNaN
     case operandIsNil
     case operatorIsNil
     case cannotCalculation
@@ -14,7 +14,7 @@ enum CalculateError: Error {
 extension CalculateError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .isNaN(_):
+        case .isNaN:
             return "NaN"
         case .operandIsNil:
             return "operandIsNil"
