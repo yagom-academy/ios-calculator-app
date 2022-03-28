@@ -62,6 +62,11 @@ final class CalculatorViewController: UIViewController {
     guard let numberString = sender.titleLabel?.text else {
       return
     }
+    if self.viewModel.isResult {
+      self.resultStackView.arrangedSubviews.forEach {
+        $0.removeFromSuperview()
+      }
+    }
     self.viewModel.addOperand(of: numberString)
   }
   
@@ -92,7 +97,12 @@ private extension CalculatorViewController {
         self?.operandLabel.text = decimal
         return
       }
-      self?.operandLabel.text = decimal + "." + fraction
+      if integer == .zero {
+        self?.operandLabel.text = "0"
+      } else {
+        let result = decimal + "." + fraction
+        self?.operandLabel.text = Double(result)?.formatString()
+      }
     }
   }
   

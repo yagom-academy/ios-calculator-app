@@ -15,11 +15,13 @@ final class CalculatorViewModel {
   private var isDotted: Bool {
     self.operandValue.value.contains(".")
   }
+  private(set) var isResult: Bool = false
   
   func clearAll() {
     self.formulas.removeAll()
     self.operatorType.next(nil)
     self.operandValue.next("0")
+    self.isResult = false
   }
   
   func clearEntry() {
@@ -37,7 +39,7 @@ final class CalculatorViewModel {
   }
   
   func addOperand(of numberString: String) {
-    guard self.operandValue.value.count <= 19 else {
+    guard self.operandValue.value.count <= 14 else {
       return
     }
     var value = self.operandValue.value
@@ -46,7 +48,12 @@ final class CalculatorViewModel {
     } else if value == "0" && numberString != "00" {
       value = numberString
     } else {
-      value += numberString
+      if self.isResult {
+        value = numberString
+        self.isResult = false
+      } else {
+        value += numberString
+      }
     }
     self.operandValue.next(value)
   }
@@ -60,6 +67,7 @@ final class CalculatorViewModel {
   }
   
   func addOperator(of operatorString: String) -> Bool {
+    self.isResult = false
     if self.operandValue.value == "0" && self.operatorType.value == nil {
       return false
     }
@@ -97,6 +105,7 @@ final class CalculatorViewModel {
     self.operatorType.next(nil)
     self.operandValue.next("\(result)")
     self.formulas.removeAll()
+    self.isResult = true
     return true
   }
 }
