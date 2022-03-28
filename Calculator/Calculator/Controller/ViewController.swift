@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     }
     //MARK: - IBAction
     @IBAction func touchACButton(_ sender: UIButton) {
+        removeFormula()
         resetCalculator()
     }
     
@@ -96,7 +97,6 @@ class ViewController: UIViewController {
     }
     //MARK: - Functions
     private func resetCalculator() {
-        removeFormula()
         self.operandLabel.text = stringZero
         self.operationLabel.text = ""
         self.formulaToSend = ""
