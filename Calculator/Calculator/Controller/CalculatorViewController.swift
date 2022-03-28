@@ -15,11 +15,11 @@ fileprivate extension Constant {
 
 final class CalculatorViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet private weak var calculationRecordScrollView: UIScrollView!
-    @IBOutlet private weak var calculationRecordStackView: UIStackView!
+    @IBOutlet private weak var topRecordScrollView: UIScrollView!
+    @IBOutlet private weak var topRecordStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
-    @IBOutlet private var allButtonComponentExceptEqual: [UIButton]!
+    @IBOutlet private var buttons: [UIButton]!
     
     // MARK: - Property
     private var currentOperand: String = Constant.zero
@@ -38,18 +38,18 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        calculationRecordScrollView.scrollToBottom()
+        topRecordScrollView.scrollToBottom()
     }
 }
 
 // MARK: - IBAction
 extension CalculatorViewController {
     @IBAction private func touchUpACButton(_ sender: UIButton) {
-        reconfigureCalculator()
+        resetCalculator()
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        reconfigureOperand()
+        resetOperand()
     }
     
     @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
@@ -127,9 +127,7 @@ extension CalculatorViewController {
             currentOperand.removeFirst()
             operandLabel.text = operand
             return
-        }
-        
-        if operand.contains(Constant.minus) == false {
+        } else {
             operand.insert(Character(Constant.minus), at: operand.startIndex)
             currentOperand.insert(Character(Constant.minus), at: operand.startIndex)
             operandLabel.text = operand
@@ -150,18 +148,18 @@ extension CalculatorViewController {
         
         currentOperator = `operator`
         operatorLabel.text = `operator`
-        reconfigureOperand()
+        resetOperand()
     }
     
     private func updateCalculationRecord(with operand: String, _ operator: String) {
-        if calculationRecordStackView.subviews.count == .zero {
+        if topRecordStackView.subviews.count == .zero {
             let ExpressionStackView = ExpressionStackView(operand: operand)
-            calculationRecordStackView.addArrangedSubview(ExpressionStackView)
+            topRecordStackView.addArrangedSubview(ExpressionStackView)
             return
         }
         
         let ExpressionStackView = ExpressionStackView(operator: `operator`, operand: operand)
-        calculationRecordStackView.addArrangedSubview(ExpressionStackView)
+        topRecordStackView.addArrangedSubview(ExpressionStackView)
     }
     
     private func updateLastCalculation() {
@@ -187,36 +185,34 @@ extension CalculatorViewController {
     private func updateCalculateResult(by result: Double) {
         if currentOperand.contains(Constant.dot) {
             operandLabel.text = result.description.addedCommaToInteger()
-        }
-        
-        if currentOperand.contains(Constant.dot) == false {
+        } else {
             let convertedDoubleToInt = Int(result)
             operandLabel.text = convertedDoubleToInt.description.addedCommaToInteger()
         }
         
-        reconfigureOperator()
-        configureAllButton()
+        resetOperator()
+        addAllTargets()
     }
 }
 
 // MARK: - Configure Method
 extension CalculatorViewController {
-    private func reconfigureCalculator() {
+    private func resetCalculator() {
         calculatorStatus = .nonCalculated
         expression = [String]()
-        reconfigureOperand()
-        reconfigureOperator()
-        calculationRecordStackView
+        resetOperand()
+        resetOperator()
+        topRecordStackView
             .arrangedSubviews
             .forEach { $0.removeFromSuperview() }
     }
     
-    private func reconfigureOperand() {
+    private func resetOperand() {
         currentOperand = Constant.zero
         operandLabel.text = Constant.zero
     }
     
-    private func reconfigureOperator() {
+    private func resetOperator() {
         currentOperator = Constant.blank
         operatorLabel.text = Constant.blank
     }
@@ -224,15 +220,15 @@ extension CalculatorViewController {
 
 // MARK: - Button Configure Method
 extension CalculatorViewController {
-    private func configureAllButton() {
-        allButtonComponentExceptEqual.forEach {
-            $0.addTarget(self, action: #selector(reconfigureAction(sender:)), for: .touchUpInside)
+    private func addAllTargets() {
+        buttons.forEach {
+            $0.addTarget(self, action: #selector(resetAction(sender:)), for: .touchUpInside)
         }
     }
 
-    @objc private func reconfigureAction(sender: UIButton) {
+    @objc private func resetAction(sender: UIButton) {
         if calculatorStatus == .calculated {
-            reconfigureCalculator()
+            resetCalculator()
         }
     }
 }
