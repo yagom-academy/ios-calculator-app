@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Fomula {
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
+    
+    func result() {
+        // return Double
+    }
+}
