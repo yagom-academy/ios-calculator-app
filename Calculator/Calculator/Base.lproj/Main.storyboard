@@ -301,7 +301,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="startCalculationBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fjn-QO-BuB"/>
+                                                    <action selector="startCalculationBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qM5-cc-Vc5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -351,7 +351,7 @@
                         <outlet property="clearEntryBtn" destination="RLD-dY-LOA" id="EqJ-b8-UO5"/>
                         <outlet property="enteredFormulaValueScrollView" destination="BOT-7g-vxv" id="Eri-aN-OCD"/>
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="2Ao-w9-bJE"/>
-                        <outlet property="inputFormulaLabel" destination="Lwz-OF-XHD" id="m6E-W9-Sgq"/>
+                        <outlet property="inputFormulaLabel" destination="Lwz-OF-XHD" id="em3-dc-zew"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="arG-Zw-Vjg"/>
                         <outlet property="plusAndMinusBtn" destination="ows-U7-mNc" id="8A7-1R-ugR"/>
                         <outletCollection property="operandBtns" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="ku4-Lj-Owd"/>

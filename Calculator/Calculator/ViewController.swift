@@ -42,14 +42,18 @@ final class ViewController: UIViewController {
         if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let enteredValue = inputFormulaLabel.text else { return }
-        if enteredResultValue == "" {
-            appendFormulaValueToScrollView(enteredValue, operatorsValue: "")
-        } else {
-            appendFormulaValueToScrollView(enteredValue, operatorsValue: inputOperatorValue)
-        }
+        appendToScrollViewAfterCheckEnteredResultValueIsNone(enteredValue, inputOperatorValue)
         enteredResultValue += enteredValue+inputOperatorValue
         inputOperatorLabel.text = inputOperatorValue
         inputFormulaLabel.text = "0"
+    }
+    
+    private func appendToScrollViewAfterCheckEnteredResultValueIsNone(_ inputFormulaText: String,_ operatorValue: String) {
+        if enteredResultValue == "" {
+            appendFormulaValueToScrollView(inputFormulaText, operatorsValue: "")
+        } else {
+            appendFormulaValueToScrollView(inputFormulaText, operatorsValue: operatorValue)
+        }
     }
     
     private func makeLabel() -> UILabel {
@@ -124,7 +128,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func startCalculationBtn(_ sender: Any) throws {
+    @IBAction private func startCalculationBtn(_ sender: UIButton) {
         guard let inputValue = inputFormulaLabel.text else { return }
         enteredResultValue += inputValue
         do {
@@ -138,6 +142,8 @@ final class ViewController: UIViewController {
             print(CalculateError.operandIsNil.errorDescription as Any)
         } catch CalculateError.operatorIsNil {
             print(CalculateError.operatorIsNil.errorDescription as Any)
+        } catch {
+            
         }
     }
 }
