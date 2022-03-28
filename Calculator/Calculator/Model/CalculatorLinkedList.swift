@@ -39,5 +39,10 @@ final class CalculatorLinkedList<T> {
         }
         return head?.value
     }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
 
