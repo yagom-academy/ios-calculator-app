@@ -16,5 +16,18 @@ final class CalculatorLinkedList<T> {
     var isEmpty: Bool {
         return head == nil
     }
+    
+    func append(_ value: T) {
+        let newNode = Node(value: value)
+        
+        if isEmpty {
+            head = newNode
+            tail = newNode
+            return
+        }
+        newNode.previous = tail
+        tail?.next = newNode
+        tail = newNode
+    }
 }
 
