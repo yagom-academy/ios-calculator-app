@@ -79,19 +79,21 @@ private extension CalculatorViewController {
       self?.operatorLabel.text = operatorType
     }
     self.viewModel.operandValue.bind { [weak self] operand in
-      self?.changeOperandLabel(of: operand)
+      let splitedOperand = operand.split(with: ".")
+      guard let integerString = splitedOperand.first,
+            let integer = Double(integerString),
+            let decimal = integer.formatString()
+      else {
+        return
+      }
+      guard splitedOperand.count != 1,
+            let fraction = splitedOperand.last
+      else {
+        self?.operandLabel.text = decimal
+        return
+      }
+      self?.operandLabel.text = decimal + "." + fraction
     }
-  }
-  
-  func changeOperandLabel(of operand: String) {
-    guard self.viewModel.isResult,
-          let operand = Double(operand)
-    else {
-      self.operandLabel.text = operand
-      return
-    }
-    self.operandLabel.text = operand.formatString()
-    self.viewModel.isResult = false
   }
   
   func clearAll() {

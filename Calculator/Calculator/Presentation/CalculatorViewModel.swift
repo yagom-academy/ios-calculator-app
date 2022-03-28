@@ -15,7 +15,6 @@ final class CalculatorViewModel {
   private var isDotted: Bool {
     self.operandValue.value.contains(".")
   }
-  var isResult: Bool = false
   
   func clearAll() {
     self.formulas.removeAll()
@@ -95,7 +94,6 @@ final class CalculatorViewModel {
     guard let result = try? formula.result() else {
       return false
     }
-    self.isResult = true
     self.operatorType.next(nil)
     self.operandValue.next("\(result)")
     self.formulas.removeAll()
