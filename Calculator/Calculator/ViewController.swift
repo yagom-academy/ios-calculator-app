@@ -103,6 +103,7 @@ final class ViewController: UIViewController {
             inputFormulaLabel.text?.removeLast()
         } else if inputOperatorLabel.text?.isEmpty == false {
             inputFormulaLabel.text?.removeLast()
+            // 연산자만 입력했을때 CE하면 에러발생함 error: last empty collection
         }
     }
     
@@ -135,6 +136,10 @@ final class ViewController: UIViewController {
         }
     }
     
+    private func resetStoreFormulaValue() {
+        storeFormulaValue = ""
+    }
+    
     @IBAction private func startCalculationBtn(_ sender: UIButton) {
         guard let inputFormulaText = inputFormulaLabel.text else { return }
         storeFormulaValue += inputFormulaText
@@ -146,5 +151,6 @@ final class ViewController: UIViewController {
         } catch {
             print(error)
         }
+        resetStoreFormulaValue()
     }
 }
