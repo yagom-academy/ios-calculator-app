@@ -59,6 +59,16 @@ final class ViewController: UIViewController {
         return label
     }
     
+    private func makeStack(_ labels: [UIView]) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: labels)
+        return stack
+    }
+    
+    private func addStack(_ stack: UIStackView) {
+        formulaStackView.addArrangedSubview(stack)
+        enteredFormulaValueScrollView.addSubview(formulaStackView)
+    }
+    
     private func appendFormulaValueToScrollView(_ operandsValue: String, operatorsValue: String) {
         let operandsValueLabel = makeLabel()
         let operatorValueLabel = makeLabel()
@@ -66,12 +76,8 @@ final class ViewController: UIViewController {
         operandsValueLabel.text = operandsValue
         operatorValueLabel.text = operatorsValue
         
-        let stackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operatorValueLabel, operandsValueLabel])
-            return stackView
-        }()
-        formulaStackView.addArrangedSubview(stackView)
-        enteredFormulaValueScrollView.addSubview(formulaStackView)
+        let stackView = makeStack([operatorValueLabel, operandsValueLabel])
+        addStack(stackView)
     }
     
     private func convertDecimalValue(_ operatorValue: String) -> String? {
