@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/17.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 enum Operator: Character, CaseIterable, CalculateItem {

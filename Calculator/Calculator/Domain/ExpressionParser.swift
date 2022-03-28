@@ -2,7 +2,7 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/18.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 enum ExpressionParser {
@@ -23,6 +23,6 @@ enum ExpressionParser {
   private static func componentsByOperators(from input: String) -> [String] {
     return input
       .split(with: " ")
-      .filter { $0.isEmpty == false }
+      .filter { $0 != "" }
   }
 }
