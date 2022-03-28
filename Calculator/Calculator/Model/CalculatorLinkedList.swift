@@ -1,0 +1,20 @@
+//
+//  CalculatorLinkedList.swift
+//  Calculator
+//
+//  Created by SeoDongyeon on 2022/03/28.
+//
+
+import Foundation
+
+final class CalculatorLinkedList<T> {
+    typealias Node = CalculatorNode<T>
+    
+    private var head: Node?
+    private var tail: Node?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
+}
+
