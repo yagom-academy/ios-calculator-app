@@ -29,5 +29,17 @@ final class CalculatorLinkedList<T> {
         tail?.next = newNode
         tail = newNode
     }
+    
+    func removeFirst() -> T? {
+        if isEmpty {
+            return nil
+        }
+        defer {
+            let nextHead = head?.next
+            head = nil
+            head = nextHead
+        }
+        return head?.value
+    }
 }
 
