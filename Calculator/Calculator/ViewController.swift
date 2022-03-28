@@ -140,6 +140,10 @@ final class ViewController: UIViewController {
         storeFormulaValue = ""
     }
     
+    private func resetOperatorLabel() {
+        inputOperatorLabel.text = ""
+    }
+    
     @IBAction private func startCalculationBtn(_ sender: UIButton) {
         guard let inputFormulaText = inputFormulaLabel.text else { return }
         storeFormulaValue += inputFormulaText
@@ -152,5 +156,6 @@ final class ViewController: UIViewController {
             print(error)
         }
         resetStoreFormulaValue()
+        resetOperatorLabel()
     }
 }
