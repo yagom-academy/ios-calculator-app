@@ -32,7 +32,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse의input에_string부호를넣고_dequeue하면_Operator로변환된부호가리턴된다() {
         // given
-        let input = "1 * 2 / 3"
+        let input = "1 × 2 ÷ 3"
         // when
         var result = ExpressionParser.parse(from: input)
         // then
