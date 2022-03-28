@@ -39,13 +39,15 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorBtns(_ sender: UIButton) {
-        if inputFormulaLabel.text == "0", inputOperatorLabel.text?.isEmpty == false { return }
-        
         guard let inputOperatorValue = operatorBtns[sender.tag].titleLabel?.text,
               let inputFormulaText = inputFormulaLabel.text else { return }
         
+        if inputFormulaLabel.text == "0" {
+            inputOperatorLabel.text = inputOperatorValue; return
+        }
+        
         appendToScrollViewAfterCheckEnteredResultValueIsNone(inputFormulaText, inputOperatorValue)
-        storeFormulaValue += inputFormulaText+inputOperatorValue
+        storeFormulaValue += (inputFormulaText+inputOperatorValue)
         inputOperatorLabel.text = inputOperatorValue
         resetInputFormulaLabel()
     }
