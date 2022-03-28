@@ -20,7 +20,7 @@ struct Formula {
             guard let elementOperand = operands.dequeue(), let elementOperator = operators.dequeue() else {
                 return 0
             }
-            resultOperand = try elementOperator.calculate(lhs: resultOperand, rhs: elementOperand)
+            resultOperand = elementOperator.calculate(lhs: resultOperand, rhs: elementOperand)
         }
         return resultOperand
     }
