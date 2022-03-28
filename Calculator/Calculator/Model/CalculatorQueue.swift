@@ -21,4 +21,8 @@ struct CalculatorQueue<T: CalculateItem> {
     func dequeue() -> T? {
         return linkedList.removeFirst()
     }
+    
+    func allClear() {
+        return linkedList.removeAll()
+    }
 }
