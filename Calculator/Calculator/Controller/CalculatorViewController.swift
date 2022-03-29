@@ -30,6 +30,7 @@ class CalculatorViewController: UIViewController {
     static let empty: String = ""
     static let negativeSign: Character = "-"
     static let nanResult: String = "NaN"
+    static let dotSymbol: String = "."
     
     private let numberFormatter = NumberFormatter()
     
@@ -44,13 +45,13 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private var currentDisplayOperator: String = "" {
+    private var currentDisplayOperator: String = CalculatorViewController.empty {
         didSet {
             currentOperandLabel.text = currentDisplayOperator
         }
     }
     
-    private var totalCalculate = ""
+    private var totalCalculate = CalculatorViewController.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,13 +74,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func clickNumber(_ sender: UIButton) {
-        let clickValue = sender.currentTitle ?? ""
+        let clickValue = sender.currentTitle ?? CalculatorViewController.empty
         setCurrentDisplayNumber(clickValue)
     }
     
     private func setCurrentDisplayNumber(_ num: String) {
         
-        if currentDisplayNumber == "0" {
+        if currentDisplayNumber == CalculatorViewController.zero {
             currentDisplayNumber = num
         } else {
             currentDisplayNumber = currentDisplayNumber + num
@@ -94,7 +95,7 @@ class CalculatorViewController: UIViewController {
         addTotalCalculate()
         
         //resetCurrentDisplayNumber()
-        let operatorItem = sender.currentTitle ?? ""
+        let operatorItem = sender.currentTitle ?? CalculatorViewController.empty
         currentDisplayOperator = operatorItem
         clearInputtingOperand()
     }
@@ -119,7 +120,7 @@ class CalculatorViewController: UIViewController {
         if result.isNaN {
            currentNumberLabel.text = CalculatorViewController.nanResult
         } else if cannotUseNumberFormatter(result) {
-            let integerLength = String(result).components(separatedBy: ".")[0].count
+            let integerLength = String(result).components(separatedBy: CalculatorViewController.dotSymbol)[0].count
             currentNumberLabel.text = String(format: "%.\(String(20 - integerLength))f", result)
         } else {
             guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
@@ -129,7 +130,7 @@ class CalculatorViewController: UIViewController {
     
     
     private func cannotUseNumberFormatter(_ result: Double) -> Bool {
-        let componentsByDecimalSeperator = String(result).components(separatedBy: ".")
+        let componentsByDecimalSeperator = String(result).components(separatedBy: CalculatorViewController.dotSymbol)
         let integerLength = componentsByDecimalSeperator[0].count
         let decimalLength = componentsByDecimalSeperator[1].count
         
@@ -155,7 +156,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if currentDisplayNumber == "0" {
+        if currentDisplayNumber == CalculatorViewController.zero {
             return
         } else {
             currentDisplayNumber = currentDisplayNumber + doubleZero
@@ -174,7 +175,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addTotalCalculate() {
-        totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? "") \(currentDisplayNumber)"
+        totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? CalculatorViewController.empty) \(currentDisplayNumber)"
     }
     
     private func clearHistoryStackView() {
@@ -225,10 +226,10 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if currentDisplayNumber.contains("-") {
+       if currentDisplayNumber.contains(CalculatorViewController.negativeSign) {
             currentDisplayNumber.removeFirst()
         } else {
-            currentDisplayNumber.insert("-", at: currentDisplayNumber.startIndex)
+            currentDisplayNumber.insert(CalculatorViewController.negativeSign, at: currentDisplayNumber.startIndex)
         }
     }
 }
