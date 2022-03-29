@@ -36,11 +36,6 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         addTapGesture()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        topRecordScrollView.scrollToBottom()
-    }
 }
 
 // MARK: - View Tap Gesture Recognizer
@@ -217,6 +212,8 @@ extension CalculatorViewController {
         
         let ExpressionStackView = ExpressionStackView(operator: `operator`, operand: operand)
         topRecordStackView.addArrangedSubview(ExpressionStackView)
+        
+        topRecordScrollView.scrollToBottom()
     }
     
     private func calculate() {
