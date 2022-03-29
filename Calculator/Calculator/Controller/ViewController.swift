@@ -89,5 +89,14 @@ class ViewController: UIViewController {
         }
         return changedNumber
     }
+    
+    private func makeStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        return stackView
+    }
 }
 
