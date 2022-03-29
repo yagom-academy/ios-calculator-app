@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     private let stringZero = "0"
     private let stringDot = "."
     private let minusSign = "-"
+    private var isInputZero = false
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchCEButton(_ sender: UIButton) {
         self.operandLabel.text = stringZero
+        self.isInputZero = false
     }
     
     @IBAction func touchChangeSignButton(_ sender: UIButton) {
@@ -51,6 +53,7 @@ class ViewController: UIViewController {
             return
         }
         self.operandLabel.text = checkZeroAfterDot(number: operandsText + inputNumber)
+        self.isInputZero = true
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
@@ -73,15 +76,23 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text else {
             return
         }
+        if self.fomulaListStackView.subviews.isEmpty && operandsText == stringZero {
+            return
+        }
         self.operatorLabel.text = inputOperator
+        if isInputZero == false {
+            return
+        }
         addFomula(operator: operatorText, operand: operandsText)
         self.operandLabel.text = stringZero
+        self.isInputZero = false
     }
     
     
     private func resetCaculator() {
         self.operatorLabel.text = ""
         self.operandLabel.text = stringZero
+        self.isInputZero = false
     }
     
     private func removeFomulaList() {
