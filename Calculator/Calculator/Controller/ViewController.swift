@@ -89,6 +89,29 @@ class ViewController: UIViewController {
         self.isInputZero = false
     }
     
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        if self.fomulaListStackView.arrangedSubviews.isEmpty {
+            return
+        }
+        guard let operatorText = self.operatorLabel.text else {
+            return
+        }
+        guard let operandsText = self.operandLabel.text else {
+            return
+        }
+        addFomula(operator: operatorText, operand: operandsText)
+        var resultFomula = ExpressionParser.parse(frome: self.fomulaToSend)
+        let result = resultFomula.result()
+        switch result {
+        case .success(let number):
+            self.operandLabel.text = changeNumberFormat(number: String(number))
+        case .failure(let error):
+            self.operandLabel.text = error.errorDescription
+        }
+        self.operatorLabel.text = ""
+        self.fomulaToSend = ""
+    }
+    
     private func resetCaculator() {
         removeFomulaList()
         self.operatorLabel.text = ""
