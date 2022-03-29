@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text, operandsText.count < 20 else {
             return
         }
-        self.operandLabel.text = operandsText + inputNumber
+        self.operandLabel.text = changeNumberFormat(number: operandsText + inputNumber)
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
@@ -55,6 +55,17 @@ class ViewController: UIViewController {
     
     private func removeFomulaList() {
         self.fomulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func changeNumberFormat(number: String) -> String {
+        let number = Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = -2
+        guard let changedNumber = numberFormatter.string(from: number as NSNumber) else {
+            return ""
+        }
+        return changedNumber
     }
 }
 
