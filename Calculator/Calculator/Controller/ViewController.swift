@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchACButton(_ sender: UIButton) {
-        removeFomulaList()
         resetCaculator()
     }
     
@@ -90,6 +89,7 @@ class ViewController: UIViewController {
     
     
     private func resetCaculator() {
+        removeFomulaList()
         self.operatorLabel.text = ""
         self.operandLabel.text = stringZero
         self.isInputZero = false
