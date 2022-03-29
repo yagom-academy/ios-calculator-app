@@ -85,25 +85,30 @@ private extension CalculatorViewController {
     }
     self.viewModel.operandValue.bind { [weak self] operand in
       let splitedOperand = operand.split(with: ".")
-      guard let integerString = splitedOperand.first,
-            let integer = Double(integerString),
-            let decimal = integer.formatString()
-      else {
-        return
-      }
-      guard splitedOperand.count != 1,
-            let fraction = splitedOperand.last
-      else {
-        self?.operandLabel.text = decimal
-        return
-      }
-      if integer == .zero {
-        self?.operandLabel.text = "0"
-      } else {
-        let result = decimal + "." + fraction
-        self?.operandLabel.text = Double(result)?.formatString()
-      }
+      self?.operandLabel.text = self?.makeOperandLabel(splitedOperand)
     }
+  }
+  
+  func makeOperandLabel(_ splitedOperand: [String]) -> String? {
+    guard let integerString = splitedOperand.first,
+          let integer = Double(integerString)
+    else {
+      return nil
+    }
+    var result = integer.formatString()
+    if self.viewModel.isDotted,
+        let decimal = result,
+        let fraction = splitedOperand.last
+    {
+      result = "\(decimal).\(fraction)"
+    }
+    if self.viewModel.isResult,
+        let numberString = result?.replacingOccurrences(of: ",", with: ""),
+        let number = Double(numberString)?.formatString()
+    {
+      result = number
+    }
+    return result
   }
   
   func clearAll() {

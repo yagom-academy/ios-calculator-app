@@ -12,7 +12,7 @@ final class CalculatorViewModel {
   private(set) var operatorType = Observable<String?>(nil)
   private(set) var operandValue = Observable<String>("0")
   private var formulas = [String]()
-  private var isDotted: Bool {
+  var isDotted: Bool {
     self.operandValue.value.contains(".")
   }
   private(set) var isResult: Bool = false
@@ -102,10 +102,14 @@ final class CalculatorViewModel {
     guard let result = try? formula.result() else {
       return false
     }
-    self.operatorType.next(nil)
-    self.operandValue.next("\(result)")
-    self.formulas.removeAll()
     self.isResult = true
+    if result == .zero {
+      self.operandValue.next("0")
+    } else {
+      self.operandValue.next("\(result)")
+    }
+    self.operatorType.next(nil)
+    self.formulas.removeAll()
     return true
   }
 }
