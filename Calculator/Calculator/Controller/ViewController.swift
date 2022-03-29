@@ -10,9 +10,8 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
-    
     @IBOutlet private weak var fomulaListStackView: UIStackView!
-    
+    private let stringZero = "0"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +21,9 @@ class ViewController: UIViewController {
     @IBAction private func touchACButton(_ sender: UIButton) {
         removeFomulaList()
         resetCaculator()
+    }
+    @IBAction func touchCEButton(_ sender: UIButton) {
+        self.operandLabel.text = stringZero
     }
     
     private func resetCaculator() {
