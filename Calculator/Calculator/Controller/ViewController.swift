@@ -8,11 +8,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
+    
+    @IBOutlet private weak var fomulaListStackView: UIStackView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        resetCaculator()
+    }
+    
+    @IBAction private func touchACButton(_ sender: UIButton) {
+        removeFomulaList()
         resetCaculator()
     }
     
@@ -20,7 +28,9 @@ class ViewController: UIViewController {
         self.operatorLabel.text = ""
         self.operandLabel.text = ""
     }
-
-
+    
+    private func removeFomulaList() {
+        self.fomulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
 }
 
