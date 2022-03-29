@@ -11,10 +11,17 @@ enum ExpressionParser {
     func parse(frome input: String) {
         //return Fomula
     }
+    private static func componentsByOperators(from input: String) -> [String] {
+        return input.split(with: " ").filter {
+            Double($0) == nil
+        }
+    }
 }
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map { String($0) }
+        return self.split(separator: target).map {
+            String($0)
+        }
     }
 }
