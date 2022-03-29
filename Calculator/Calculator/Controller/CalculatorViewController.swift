@@ -24,6 +24,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentOperandLabel: UILabel!
     
     @IBOutlet private weak var historyStackView: UIStackView!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
     
     static let zero: String = "0"
     static let empty: String = ""
@@ -40,6 +41,7 @@ class CalculatorViewController: UIViewController {
     private var currentDisplayOperator: String = "" {
         didSet {
             currentOperandLabel.text = currentDisplayOperator
+            updateHistoryStackView()
         }
     }
     
@@ -130,5 +132,30 @@ class CalculatorViewController: UIViewController {
     private func clearInputtingOperator() {
         currentDisplayOperator = CalculatorViewController.empty
     }
+    
+    private func updateHistoryStackView() {
+        let recordStackView = makeRecordStackView()
+        historyStackView.addArrangedSubview(recordStackView)
+        historyScrollView.setContentOffset(CGPoint(x: 0, y: historyScrollView.contentSize.height - historyScrollView.bounds.height), animated: true)
+        clearInputtingOperand()
+    }
+    
+    private func makeRecordStackView() -> UIStackView {
+        let recordStackView = UIStackView()
+        recordStackView.axis = .horizontal
+        
+        let validOperandLabel = UILabel()
+        validOperandLabel.text = currentDisplayNumber
+        validOperandLabel.textColor = .white
+        
+        let validOperatorLabel = UILabel()
+        validOperatorLabel.text = currentDisplayOperator
+        validOperatorLabel.textColor = .white
+        
+        [validOperatorLabel, validOperandLabel].forEach { recordStackView.addArrangedSubview($0) }
+
+        return recordStackView
+    }
+    
 }
 

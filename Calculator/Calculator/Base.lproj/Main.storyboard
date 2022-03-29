@@ -362,6 +362,7 @@
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="jb1-YH-CC6"/>
                         <outlet property="currentOperandLabel" destination="HPC-iy-qdm" id="pAf-Zb-dWd"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="FYa-PG-gXi"/>
+                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="HCH-T4-CxP"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="LRD-eD-Vfa"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="4N4-iJ-XNo"/>
                         <outlet property="numberDotButton" destination="h8q-5h-bnb" id="Tq6-Ed-3rW"/>
