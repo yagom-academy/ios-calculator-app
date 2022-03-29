@@ -2,7 +2,8 @@
 > 프로젝트 기간 2022.03.14 ~ 2022.
 팀원 : [@malrang](https://github.com/kinggoguma) / 리뷰어 : [도미닉](https://github.com/AppleCEO)
 
-- [UML](#UML)
+- [실행화면](#실행화면)
+- [UML](#uml)
 - [STEP 1 기능 구현](#step-1-기능-구현)
     + [고민했던 것들](#고민했던-것들)
     + [배운 개념](#배운-개념)
@@ -11,7 +12,15 @@
     + [고민했던 것들](#고민했던-것들)
     + [배운 개념](#배운-개념)
     + [PR 후 개선사항](#pr-후-개선사항)
-    
+- [STEP 3 기능 구현](#step-3-기능-구현)
+    + [고민했던 것들](#고민했던-것들)
+    + [배운 개념](#배운-개념)
+    + [PR 후 개선사항](#pr-후-개선사항)
+
+## 실행화면
+
+![Mar-27-2022 16-59-31](https://user-images.githubusercontent.com/88717147/160272509-a37b9cef-ff23-47a8-98ea-4f1c99a0f519.gif)
+
 ## UML
 
 Step1 더블스택 큐
@@ -177,3 +186,53 @@ early break
     }
 ```
 코드의 양은 더 늘어났으나 조금더 이해하기 편하도록 if - else 구문을 분리시킴.
+
+## STEP 3 기능 구현
+- ViewController
+    - didTapOperand() 계산기 UI 의 숫자 버튼을 누르면 해당 숫자가 저장되는 메서드
+    - didTapOperator() 계산기 UI 의 연산자 버튼을 누르면 해당 연산자가 저장되고 스크롤뷰에 스택뷰가 추가되는 메서드
+    - didTapDot() 계산기 UI 의 소수점 버튼을 누르면 입력된 숫자 뒤에 소수점이 붙는 메서드
+    - changeSign() 입력된 숫자의 부호를 바꾸어 저장하는 메서드
+    - didTapEqualSign() 지금까지 입력된 숫자와 연산자를 입력받아 계산하여 결과를 보여주는 메서드
+    - didTapAC() 기존 입력하여 저장된 숫자와 연산자들의 정보를 제거하는 메서드
+    - didTapCE() 가장 마지막 입력된 숫자를 제거하는 메서드
+- ViewController extention
+    - removeHistory() 스크롤 뷰에 추가된 스택뷰, 입력되어 저장된 숫자와 연산자를 제거해주는 메서드
+    - numberFormatter() 저장된 숫자를 .demica(십진법 표기)스타일로 변경후 반환해주는 메서드
+    - pushStackView() 스택뷰와 레이블2개를 생성해 스택뷰 에 레이블 2개를 넣어주는 메서드
+- UIScrollView extention
+    - scrollToBottom() 스택뷰가 추가될경우 스크롤뷰가 추가된 높이만큼 viewPort 를 내려주는 메서드
+    
+## 고민했던 것들
+1. UI를 통해 입력된 값을 저장하는방법
+2. 저장된 숫자와 연산자를 스택뷰에 추가하는방법
+3. 저장된 숫자와 연사자를 연산하는 방법
+4. 입력값에 소수점이 추가되었을 경우 넘버포메터를 적용하지 않는방법
+
+## 배운 개념
+1. AutoLayOut
+2. ScrollView
+3. StackView
+4. Formatter
+5. NumberFormatter
+6. frame 과 bound 의 차이
+
+## PR 후 개선사항
+1. early return 되는 조건문 병합
+
+변경전
+```swift
+ if inputOperand.count >= 16 {
+    return
+ }
+
+ if inputOperand == "0" && buttonLabel == "0" {
+    return
+ }
+```
+변경후
+```swift
+if inputOperand.count >= 16 || inputOperand == "0" && buttonLabel == "0" {
+    return
+ }
+```
