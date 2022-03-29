@@ -31,8 +31,7 @@ class CalculatorViewController: UIViewController {
     static let negativeSign: Character = "-"
     static let nanResult: String = "NaN"
     
-    
-    private var currentDisplayNumber: String = "0" {
+    private var currentDisplayNumber: String = CalculatorViewController.zero {
         didSet {
             currentNumberLabel.text = currentDisplayNumber
         }
@@ -157,5 +156,16 @@ class CalculatorViewController: UIViewController {
         return recordStackView
     }
     
+   @IBAction private func updateOperandSign() {
+        guard currentDisplayNumber != CalculatorViewController.zero else {
+            return
+        }
+        
+        if currentDisplayNumber.contains("-") {
+            currentDisplayNumber.removeFirst()
+        } else {
+            currentDisplayNumber.insert("-", at: currentDisplayNumber.startIndex)
+        }
+    }
 }
 
