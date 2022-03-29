@@ -15,8 +15,8 @@ extension String {
 
 enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
-        var splitInput = input.split(with: " ")
-        let operatorList = ["+","−","÷","×"]
+        var splitInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
+        let operatorList = Operator.allCases.map { String($0.rawValue) }
         
         splitInput.removeAll(where: { operatorList.contains($0) })
         
