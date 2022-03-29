@@ -8,8 +8,18 @@
 import Foundation
 
 enum ExpressionParser {
-    func parse(frome input: String) {
-        //return Fomula
+    static func parse(frome input: String) -> Fomula {
+        var fomula = Fomula()
+        
+        input.split(with: " ")
+            .compactMap { Double($0) }
+            .forEach { fomula.operands.enqueue(value: $0) }
+        
+        componentsByOperators(from: input)
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { fomula.operators.enqueue(value: $0) }
+        
+        return fomula
     }
     private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ").filter {
