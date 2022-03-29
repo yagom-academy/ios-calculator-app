@@ -74,6 +74,9 @@
 		4E8284E527F1F36000B5056B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -81,6 +84,8 @@
 		4E8284E627F1F36800B5056B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
 			);
 			path = Controller;
@@ -127,11 +132,6 @@
 				4E8284E527F1F36000B5056B /* View */,
 				67990E4427F1E92D00B6C802 /* CalculatorError */,
 				E1224A8F27F1DE7000160824 /* Model */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
