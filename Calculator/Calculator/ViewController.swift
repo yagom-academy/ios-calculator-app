@@ -32,7 +32,6 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - IBAction
-
 private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
@@ -52,7 +51,7 @@ private extension ViewController {
     }
         
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        if (operandLabel.text?.contains(String.dot) == true) && sender.currentTitle == .dot { return }
+        if (operandLabel.text?.contains(String.dot) == true) { return }
         
         updateOperandLabel(sender)
     }
@@ -93,7 +92,7 @@ private extension ViewController {
         operandLabel.text = numberFormatter.string(from: (number * -1) as NSNumber)
     }
     
-    @IBAction func touchUpCalculationButton(_ sender: Any) {
+    @IBAction func touchUpCalculationButton() {
         if operatorLabel.text == .empty { return }
         
         addStackView()
