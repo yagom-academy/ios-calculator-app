@@ -9,4 +9,11 @@ import Foundation
 
 enum CalculatorError: Error {
     case divideByZero
+
+    var description: String {
+        switch self {
+        case .divideByZero:
+            return "NaN"
+        }
+    }
 }
