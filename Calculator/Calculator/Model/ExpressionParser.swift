@@ -44,6 +44,10 @@ enum ExpressionParser {
         
         addZeroNumber(to: operandQueue, from: input)
         
+        guard operands.count == operands.compactMap({ Double($0) }).count else {
+            throw CalauletorError.invalidInputValue
+        }
+        
         operands.compactMap { Double($0) }.forEach { operandQueue.enqueue($0) }
         
         operators.compactMap ({ Operator(rawValue: Character($0)) }).forEach { operatorQueue.enqueue($0) }
