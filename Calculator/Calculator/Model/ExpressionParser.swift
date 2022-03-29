@@ -31,13 +31,28 @@ enum ExpressionParser {
         
         return splitInput
     }
+    
+    private static func addZeroNumber(to operandQueue: CalculatorItemQueue<LinkdeList<Double>>, from input: String) {
+        let allElement = input.trimmingCharacters(in: .whitespaces).split(with: " ")
+        
+        guard let firstElement = allElement.first else { return }
+        
+        if firstElement.count == 1 && Operator(rawValue: Character(firstElement)) != nil {
+            operandQueue.enqueue(0.0)
+        }
+    }
+    
     static func parse(from input: String) throws -> Formula {
         let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(.init())
         let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(.init())
         let operands = componentsByOperators(from: input)
+        let operators = componentsByOperands(from: input)
         
-        operands.compactMap{Double($0)}.forEach{operandQueue.enqueue($0)}
-        input.split(with: " ").filter{$0.count == 1 && Operator(rawValue: Character($0))}.forEach{operatorQueue.enqueue($0)}
+        addZeroNumber(to: operandQueue, from: input)
+        
+        operands.compactMap { Double($0) }.forEach { operandQueue.enqueue($0) }
+        
+        operators.compactMap ({ Operator(rawValue: Character($0)) }).forEach { operatorQueue.enqueue($0) }
         
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
