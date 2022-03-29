@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     private let stringZero = "0"
+    private let stringDot = "."
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
@@ -35,6 +36,16 @@ class ViewController: UIViewController {
             return
         }
         self.operandLabel.text = operandsText + inputNumber
+    }
+    
+    @IBAction func touchDotButton(_ sender: UIButton) {
+        guard let operandsText = self.operandLabel.text else {
+            return
+        }
+        if operandsText.contains(stringDot) {
+            return
+        }
+        self.operandLabel.text = operandsText + stringDot
     }
     
     private func resetCaculator() {
