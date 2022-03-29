@@ -1,6 +1,6 @@
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var numberZeroButton: UIButton!
     @IBOutlet private weak var numberDoubleZeroButton: UIButton!
@@ -88,18 +88,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func clickOperator(_ sender: UIButton) {
-        if currentDisplayNumber.isEmpty {
-            return
-        }
+        guard currentDisplayNumber.isEmpty == false else { return }
+        
         updateHistoryStackView()
         addTotalCalculate()
         
-        //resetCurrentDisplayNumber()
         let operatorItem = sender.currentTitle ?? CalculatorViewController.empty
         currentDisplayOperator = operatorItem
         clearInputtingOperand()
     }
-    
     
     @IBAction func executeCalculatingAction(_ sender: UIButton) {
         guard totalCalculate.isEmpty == false else { return }
