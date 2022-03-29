@@ -34,11 +34,31 @@ final class CalculatorViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTapGesture()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         topRecordScrollView.scrollToBottom()
+    }
+}
+
+// MARK: - View Tap Gesture Recognizer
+extension CalculatorViewController: UIGestureRecognizerDelegate {
+    private func addTapGesture() {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+        tapGesture.delegate = self
+        
+        blockScreenView.addGestureRecognizer(tapGesture)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if blockScreenView.isHidden == false {
+            resetCalculator()
+            blockScreenView.isHidden = true
+        }
+        
+        return true
     }
 }
 
