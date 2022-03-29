@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     private let stringDot = "."
     private let minusSign = "-"
     private var isInputZero = false
+    private var isResult = false
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
@@ -53,8 +54,14 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text, operandsText.count < 20 else {
             return
         }
-        self.operandLabel.text = checkZeroAfterDot(number: operandsText + inputNumber)
+        if isResult == true {
+            removeFomulaList()
+            self.operandLabel.text = inputNumber
+        } else {
+            self.operandLabel.text = self.checkZeroAfterDot(number: operandsText + inputNumber)
+        }
         self.isInputZero = true
+        self.isResult = false
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
@@ -77,12 +84,16 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text else {
             return
         }
-        if self.fomulaListStackView.subviews.isEmpty && operandsText == stringZero {
+        if self.fomulaListStackView.subviews.isEmpty && operandsText == stringZero || operandsText == "NaN" {
             return
         }
         self.operatorLabel.text = inputOperator
         if isInputZero == false {
             return
+        }
+        if self.isResult == true {
+            removeFomulaList()
+            self.isResult = false
         }
         addFomula(operator: operatorText, operand: operandsText)
         self.operandLabel.text = stringZero
@@ -90,6 +101,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
+        if self.isResult == true {
+            return
+        }
         if self.fomulaListStackView.arrangedSubviews.isEmpty {
             return
         }
@@ -110,6 +124,7 @@ class ViewController: UIViewController {
         }
         self.operatorLabel.text = ""
         self.fomulaToSend = ""
+        self.isResult = true
     }
     
     private func resetCaculator() {
