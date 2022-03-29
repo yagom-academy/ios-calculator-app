@@ -88,7 +88,6 @@ class ViewController: UIViewController {
         self.isInputZero = false
     }
     
-    
     private func resetCaculator() {
         removeFomulaList()
         self.operatorLabel.text = ""
@@ -107,8 +106,12 @@ class ViewController: UIViewController {
         return changeNumberFormat(number: number)
     }
     
+    private func changeToDouble(number: String) -> Double {
+        return Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
+    }
+    
     private func changeNumberFormat(number: String) -> String {
-        let number = Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
+        let number = changeToDouble(number: number)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = -2
