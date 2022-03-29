@@ -196,10 +196,10 @@ class CalculatorViewController: UIViewController {
     private func updateHistoryStackView() {
         let recordStackView = makeRecordStackView()
         historyStackView.addArrangedSubview(recordStackView)
-        historyStackView.layoutIfNeeded()
+        historyScrollView.layoutIfNeeded()
         let offsetY = historyScrollView.contentSize.height - historyScrollView.bounds.height
         if offsetY > 0 {
-            historyScrollView.setContentOffset(CGPoint(x: 0, y: offsetY + 30), animated: true)
+            historyScrollView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
         }
     }
     
