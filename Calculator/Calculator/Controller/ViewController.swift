@@ -8,9 +8,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        resetCaculator()
+    }
+    
+    private func resetCaculator() {
+        self.operatorLabel.text = ""
+        self.operandLabel.text = ""
     }
 
 
