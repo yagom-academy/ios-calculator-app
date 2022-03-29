@@ -19,7 +19,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var topRecordStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
-    @IBOutlet weak var blockScreenView: UIView!
+    @IBOutlet private weak var blockScreenView: UIView!
     
     // MARK: - Property
     private var currentOperand: String = Constant.zero

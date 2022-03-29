@@ -9,9 +9,11 @@ import UIKit
 
 extension UIScrollView {
     func scrollToBottom() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        let delayTime = 0.1
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
             let bottomOffset = CGPoint(
-                x: 0,
+                x: .zero,
                 y: self.contentSize.height - self.bounds.size.height + self.contentInset.bottom)
             
             if(bottomOffset.y > .zero) {
