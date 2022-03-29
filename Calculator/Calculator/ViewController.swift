@@ -104,7 +104,7 @@ private extension ViewController {
         do {
             operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: formula).result())
         } catch {
-            operandLabel.text = .nan
+            operandLabel.text = (error as? CalauletorError)?.errorDescription
         }
         
         operatorLabel.text = .empty
