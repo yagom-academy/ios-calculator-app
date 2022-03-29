@@ -1,13 +1,13 @@
 //
-//  ViewController.swift
+//  CalculatorViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom. All rights reserved.
-// /
+//
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class CalculatorViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
