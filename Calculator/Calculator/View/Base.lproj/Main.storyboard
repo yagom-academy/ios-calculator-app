@@ -311,46 +311,36 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0k-so-MFd">
+                                <rect key="frame" x="16" y="362.5" width="382" height="479.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DC3-Ia-6L7" secondAttribute="trailing" constant="16" id="4U4-wj-pOs"/>
+                            <constraint firstItem="O0k-so-MFd" firstAttribute="bottom" secondItem="YKH-82-hZC" secondAttribute="bottom" id="7D6-Cs-KRn"/>
                             <constraint firstItem="BOT-7g-vxv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9Pe-KB-bQo"/>
+                            <constraint firstItem="O0k-so-MFd" firstAttribute="trailing" secondItem="YKH-82-hZC" secondAttribute="trailing" id="YIE-2H-ST4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKH-82-hZC" secondAttribute="trailing" constant="16" id="YWo-lu-Avi"/>
+                            <constraint firstItem="O0k-so-MFd" firstAttribute="leading" secondItem="YKH-82-hZC" secondAttribute="leading" id="bPz-ls-vvZ"/>
                             <constraint firstItem="YKH-82-hZC" firstAttribute="top" secondItem="DC3-Ia-6L7" secondAttribute="bottom" constant="20" id="f7E-le-Da8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BOT-7g-vxv" secondAttribute="trailing" constant="16" id="jGA-4U-1bz"/>
                             <constraint firstItem="YKH-82-hZC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jKU-BN-eas"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YKH-82-hZC" secondAttribute="bottom" constant="20" id="lPP-CN-Q7m"/>
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="top" secondItem="BOT-7g-vxv" secondAttribute="bottom" constant="20" id="mfk-MI-h75"/>
                             <constraint firstItem="BOT-7g-vxv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="qyL-Qq-yAo"/>
+                            <constraint firstItem="O0k-so-MFd" firstAttribute="top" secondItem="YKH-82-hZC" secondAttribute="top" id="sdl-RS-Y7v"/>
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blockScreenView" destination="O0k-so-MFd" id="njV-Sf-EOf"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="S4w-00-Mpy"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="6de-AR-eYZ"/>
                         <outlet property="topRecordScrollView" destination="BOT-7g-vxv" id="8yW-0d-AOi"/>
                         <outlet property="topRecordStackView" destination="XRe-QE-UJf" id="XhZ-as-TtD"/>
-                        <outletCollection property="buttons" destination="ped-N8-JbY" collectionClass="NSMutableArray" id="JC1-fm-n3K"/>
-                        <outletCollection property="buttons" destination="RLD-dY-LOA" collectionClass="NSMutableArray" id="qBl-RY-nBO"/>
-                        <outletCollection property="buttons" destination="ows-U7-mNc" collectionClass="NSMutableArray" id="R41-y5-tT3"/>
-                        <outletCollection property="buttons" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="znf-a3-jHp"/>
-                        <outletCollection property="buttons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="d2l-gL-Rpo"/>
-                        <outletCollection property="buttons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="TkB-FV-vyP"/>
-                        <outletCollection property="buttons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="bjs-5C-dJz"/>
-                        <outletCollection property="buttons" destination="811-Pz-An6" collectionClass="NSMutableArray" id="bqc-6g-bFI"/>
-                        <outletCollection property="buttons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="C0I-Md-ibU"/>
-                        <outletCollection property="buttons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="afB-ZR-IGj"/>
-                        <outletCollection property="buttons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="qQH-Qc-buq"/>
-                        <outletCollection property="buttons" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="hRQ-qC-l4G"/>
-                        <outletCollection property="buttons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="l4x-dS-eSY"/>
-                        <outletCollection property="buttons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="sGE-6W-kvg"/>
-                        <outletCollection property="buttons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="fvN-KU-YKr"/>
-                        <outletCollection property="buttons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="psg-wa-ftm"/>
-                        <outletCollection property="buttons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="gNp-3F-IJp"/>
-                        <outletCollection property="buttons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="xCq-hT-jim"/>
-                        <outletCollection property="buttons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="UbW-7n-txr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

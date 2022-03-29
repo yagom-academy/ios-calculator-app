@@ -19,7 +19,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var topRecordStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
-    @IBOutlet private var buttons: [UIButton]!
+    @IBOutlet weak var blockScreenView: UIView!
     
     // MARK: - Property
     private var currentOperand: String = Constant.zero
@@ -42,78 +42,39 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
-// MARK: - IBAction
+// MARK: - When touch up AC Button
 extension CalculatorViewController {
     @IBAction private func touchUpACButton(_ sender: UIButton) {
         resetCalculator()
     }
     
+    private func resetCalculator() {
+        calculatorStatus = .nonCalculated
+        expression = [String]()
+        resetOperand()
+        resetOperator()
+        topRecordStackView
+            .arrangedSubviews
+            .forEach { $0.removeFromSuperview() }
+    }
+}
+
+// MARK: - When touch up CE Button
+extension CalculatorViewController {
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
         resetOperand()
     }
     
-    @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
-        updatePlusMinusSign()
-    }
-    
-    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard let `operator` = sender.titleLabel?.text else {
-            return
-        }
-        
-        updateOperator(by: `operator`)
-    }
-    
-    @IBAction private func touchUpOperandButton(_ sender: UIButton) {
-        guard let operand = sender.titleLabel?.text else {
-            return
-        }
-        
-        updateOperand(with: operand)
-    }
-    
-    @IBAction private func touchUpDotButton(_ sender: UIButton) {
-        guard let dot = sender.titleLabel?.text else {
-            return
-        }
-        
-        updateOperand(by: dot)
-    }
-    
-    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        guard calculatorStatus == .nonCalculated else {
-            return
-        }
-        
-        calculatorStatus = .calculated
-        updateLastCalculation()
+    private func resetOperand() {
+        currentOperand = Constant.zero
+        operandLabel.text = Constant.zero
     }
 }
 
-// MARK: - Update && Calculate Method
+// MARK: - When touch up ChangePlusMinus Button
 extension CalculatorViewController {
-    private func updateOperand(with operand: String) {
-        guard currentOperand.count < Constant.limitOperandCount else {
-            return
-        }
-        
-        if currentOperand.first?.description == Constant.zero && currentOperand.contains(Constant.dot) == false {
-            currentOperand = operand
-            operandLabel.text = currentOperand
-            return
-        }
-                
-        currentOperand += operand
-        operandLabel.text = currentOperand.addedCommaToInteger()
-    }
-    
-    private func updateOperand(by dot: String) {
-        guard currentOperand.contains(dot) == false else {
-            return
-        }
-        
-        currentOperand += dot
-        operandLabel.text?.append(dot)
+    @IBAction private func touchUpChangePlusMinusButton(_ sender: UIButton) {
+        updatePlusMinusSign()
     }
     
     private func updatePlusMinusSign() {
@@ -134,6 +95,17 @@ extension CalculatorViewController {
             return
         }
     }
+}
+
+// MARK: - When touch up Operator Button
+extension CalculatorViewController {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard let `operator` = sender.titleLabel?.text else {
+            return
+        }
+        
+        updateOperator(by: `operator`)
+    }
     
     private func updateOperator(by operator: String) {
         guard operandLabel.text != Constant.zero else {
@@ -150,6 +122,71 @@ extension CalculatorViewController {
         operatorLabel.text = `operator`
         resetOperand()
     }
+}
+
+// MARK: - When touch up Operand Button
+extension CalculatorViewController {
+    @IBAction private func touchUpOperandButton(_ sender: UIButton) {
+        guard let operand = sender.titleLabel?.text else {
+            return
+        }
+        
+        updateOperand(with: operand)
+    }
+    
+    private func updateOperand(with operand: String) {
+        guard currentOperand.count < Constant.limitOperandCount else {
+            return
+        }
+        
+        if currentOperand.first?.description == Constant.zero && currentOperand.contains(Constant.dot) == false {
+            currentOperand = operand
+            operandLabel.text = currentOperand
+            return
+        }
+                
+        currentOperand += operand
+        operandLabel.text = currentOperand.addedCommaToInteger()
+    }
+}
+
+// MARK: - When touch up Dot Button
+extension CalculatorViewController {
+    @IBAction private func touchUpDotButton(_ sender: UIButton) {
+        guard let dot = sender.titleLabel?.text else {
+            return
+        }
+        
+        updateOperand(by: dot)
+    }
+    
+    private func updateOperand(by dot: String) {
+        guard currentOperand.contains(dot) == false else {
+            return
+        }
+        
+        currentOperand += dot
+        operandLabel.text?.append(dot)
+    }
+}
+
+// MARK: - When touch up Equal Button
+extension CalculatorViewController {
+    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
+        guard calculatorStatus == .nonCalculated else {
+            return
+        }
+        
+        calculatorStatus = .calculated
+        updateLastCalculation()
+    }
+    
+    private func updateLastCalculation() {
+        expression.append(currentOperand)
+        updateCalculationRecord(with: currentOperand, currentOperator)
+        
+        calculate()
+    }
     
     private func updateCalculationRecord(with operand: String, _ operator: String) {
         if topRecordStackView.subviews.count == .zero {
@@ -160,13 +197,6 @@ extension CalculatorViewController {
         
         let ExpressionStackView = ExpressionStackView(operator: `operator`, operand: operand)
         topRecordStackView.addArrangedSubview(ExpressionStackView)
-    }
-    
-    private func updateLastCalculation() {
-        expression.append(currentOperand)
-        updateCalculationRecord(with: currentOperand, currentOperator)
-        
-        calculate()
     }
     
     private func calculate() {
@@ -191,50 +221,14 @@ extension CalculatorViewController {
         }
         
         resetOperator()
-        addAllTargets()
-    }
-}
-
-// MARK: - Configure Method
-extension CalculatorViewController {
-    private func resetCalculator() {
-        calculatorStatus = .nonCalculated
-        expression = [String]()
-        resetOperand()
-        resetOperator()
-        topRecordStackView
-            .arrangedSubviews
-            .forEach { $0.removeFromSuperview() }
-    }
-    
-    private func resetOperand() {
-        currentOperand = Constant.zero
-        operandLabel.text = Constant.zero
+        blockScreenView.isHidden = false
     }
     
     private func resetOperator() {
         currentOperator = Constant.blank
         operatorLabel.text = Constant.blank
     }
-}
-
-// MARK: - Button Configure Method
-extension CalculatorViewController {
-    private func addAllTargets() {
-        buttons.forEach {
-            $0.addTarget(self, action: #selector(resetAction(sender:)), for: .touchUpInside)
-        }
-    }
-
-    @objc private func resetAction(sender: UIButton) {
-        if calculatorStatus == .calculated {
-            resetCalculator()
-        }
-    }
-}
-
-// MARK: - Error Handle Method
-extension CalculatorViewController {
+    
     private func handle(error: Error) {
         if let calculatorError = error as? CalculatorError {
             handle(calculatorError: calculatorError)
