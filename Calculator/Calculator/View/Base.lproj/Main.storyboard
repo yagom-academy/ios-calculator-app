@@ -337,6 +337,7 @@
                     </view>
                     <connections>
                         <outlet property="fomulaListStackView" destination="XRe-QE-UJf" id="JdB-xB-tBR"/>
+                        <outlet property="listScrollView" destination="BOT-7g-vxv" id="NGD-a8-thv"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="QSB-gy-1Bs"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="ELU-Wf-mUQ"/>
                     </connections>

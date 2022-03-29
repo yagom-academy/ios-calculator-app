@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var listScrollView: UIScrollView!
     @IBOutlet private weak var fomulaListStackView: UIStackView!
     
     override func viewDidLoad() {
@@ -138,6 +139,14 @@ class ViewController: UIViewController {
         numberStackView.addArrangedSubview(makeLabel(element: `operator`))
         numberStackView.addArrangedSubview(makeLabel(element: operand))
         self.fomulaListStackView.addArrangedSubview(numberStackView)
+        self.listScrollView.scrollToBottom()
     }
 }
 
+extension UIScrollView {
+    func scrollToBottom() {
+        layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
+        setContentOffset(bottomOffset, animated: true)
+    }
+}
