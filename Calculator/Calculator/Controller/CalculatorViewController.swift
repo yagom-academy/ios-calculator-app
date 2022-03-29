@@ -24,20 +24,77 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentOperandLabel: UILabel!
     
     
+    
+    private var currentDisplayNumber: String = "" {
+        didSet {
+            currentNumberLabel.text = currentDisplayNumber
+        }
+    }
+    
+    private var currentDisplayOperator: String = "" {
+        didSet {
+            currentOperandLabel.text = currentDisplayOperator
+        }
+    }
+    
+    private var totalCalculate = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     
-    @IBAction private func clickNumber(_ sender: Any) {
+    @IBAction private func clickNumber(_ sender: UIButton) {
+        let clickValue = sender.currentTitle ?? ""
+        setCurrentDisplayNumber(clickValue)
+    }
+    
+    private func setCurrentDisplayNumber(_ num: String) {
+        currentDisplayNumber = currentDisplayNumber + num
     }
     
     
-    @IBAction private func clickOperator(_ sender: Any) {
+    @IBAction private func clickOperator(_ sender: UIButton) {
+        if currentDisplayNumber.isEmpty {
+            return
+        }
+        addTotalCalculate()
+        
+        //resetCurrentDisplayNumber()
+        let operatorItem = sender.currentTitle ?? ""
+        currentDisplayOperator = operatorItem
+        
     }
     
     
+    @IBAction func clickDot(_ sender: UIButton) {
+        guard let dot = sender.titleLabel?.text else {
+            return
+        }
+        
+        if currentDisplayNumber.contains(dot) {
+            return
+        } else {
+            currentDisplayNumber = currentDisplayNumber + dot
+        }
+    }
     
     
+    @IBAction func clickDoubleZero(_ sender: UIButton) {
+        guard let doubleZero = sender.titleLabel?.text else{
+            return
+        }
+        
+        if currentDisplayNumber == "0" {
+            return
+        } else {
+            currentDisplayNumber = currentDisplayNumber + doubleZero
+        }
+    }
+
+    
+    private func addTotalCalculate() {
+        totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? "") \(currentDisplayNumber)"
+    }
 }
 
