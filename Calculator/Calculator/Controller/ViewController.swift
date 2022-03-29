@@ -25,7 +25,6 @@ class ViewController: UIViewController {
     }
     //MARK: - IBAction
     @IBAction func touchACButton(_ sender: UIButton) {
-        removeFormula()
         resetCalculator()
     }
     
@@ -47,9 +46,6 @@ class ViewController: UIViewController {
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let operandText = self.operandLabel.text, operandText.count < 20 else { return }
         guard let inputNumber = sender.titleLabel?.text else { return }
-        if operandText == stringNaN {
-            removeFormula()
-        }
         if isResult == true {
             removeFormula()
             self.operandLabel.text = changeNumberFormat(number: inputNumber)
@@ -84,7 +80,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchResultButton(_ sender: UIButton) {
         if self.isResult == true { return }
-        if self.formulaListStackView.subviews.isEmpty { return }
+        if self.formulaListStackView.arrangedSubviews.isEmpty { return }
         guard let operandText = self.operandLabel.text else { return }
         guard let operationText = self.operationLabel.text else { return }
         addFormula(operation: operationText, operand: operandText)
@@ -97,6 +93,7 @@ class ViewController: UIViewController {
     }
     //MARK: - Functions
     private func resetCalculator() {
+        removeFormula()
         self.operandLabel.text = stringZero
         self.operationLabel.text = ""
         self.formulaToSend = ""
@@ -144,7 +141,7 @@ class ViewController: UIViewController {
         numberStackView.addArrangedSubview(makeLabel(element: operation))
         numberStackView.addArrangedSubview(makeLabel(element: changeNumberFormat(number: operand)))
         self.formulaListStackView.addArrangedSubview(numberStackView)
-        self.listScrollView.scrollToBottom(labelStackView: formulaListStackView)
+        self.listScrollView.scrollToBottom()
     }
     
     private func removeFormula() {
@@ -154,7 +151,7 @@ class ViewController: UIViewController {
 }
 
 extension UIScrollView {
-    func scrollToBottom(labelStackView: UIStackView) {
+    func scrollToBottom() {
         layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
         setContentOffset(bottomOffset, animated: true)
