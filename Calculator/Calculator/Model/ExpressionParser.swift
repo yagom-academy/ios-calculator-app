@@ -7,12 +7,6 @@
 
 import Foundation
 
-extension String {
-    func split(with target: Character) -> [String] {
-        return self.components(separatedBy: "\(target)")
-        }
-}
-
 enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
         var splitInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
