@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var fomulaToSend = ""
     private let stringZero = "0"
     private let stringDot = "."
     private let minusSign = "-"
@@ -138,6 +139,7 @@ class ViewController: UIViewController {
     }
     
     private func addFomula(`operator`: String, operand: String) {
+        self.fomulaToSend = "\(self.fomulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
         let numberStackView = makeStackView()
         numberStackView.addArrangedSubview(makeLabel(element: `operator`))
         numberStackView.addArrangedSubview(makeLabel(element: operand))
