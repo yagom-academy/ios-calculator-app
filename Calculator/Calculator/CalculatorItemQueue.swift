@@ -15,10 +15,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func dequeue() -> T? {
-        guard !calculateList.isEmpty, let element = calculateList.firstNode else {
+        if calculateList.isEmpty {
             return nil
+        } else {
+            return calculateList.removeNode()
         }
-        return calculateList.removeNode(element)
     }
     
     var isEmpty: Bool {

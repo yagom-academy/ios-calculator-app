@@ -10,3 +10,15 @@ import Foundation
 protocol CalculateItem {
     // empty
 }
+
+
+extension Double: CalculateItem {
+   // empty
+}
+
+extension String: CalculateItem {
+    func split(with target: Character) -> [String] {
+        let operatorNumber = target.description.components(separatedBy: " ")
+        return operatorNumber
+    }
+}
