@@ -105,5 +105,12 @@ class ViewController: UIViewController {
         label.textColor = .white
         return label
     }
+    
+    private func addFomula(`operator`: String, operand: String) {
+        let numberStackView = makeStackView()
+        numberStackView.addArrangedSubview(makeLabel(element: `operator`))
+        numberStackView.addArrangedSubview(makeLabel(element: operand))
+        self.fomulaListStackView.addArrangedSubview(numberStackView)
+    }
 }
 
