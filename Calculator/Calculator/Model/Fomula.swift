@@ -16,14 +16,7 @@ struct Fomula {
             return .failure(.nonOperand)
         }
         
-        while operands.isEmpty == false || operators.isEmpty == false {
-            guard let operand = operands.dequeue() else {
-                return .failure(.nonOperand)
-            }
-            guard let `operator` = operators.dequeue() else {
-                return .failure(.nonOperator)
-            }
-            
+        while let operand = self.operands.dequeue(), let `operator` = self.operators.dequeue() {
             if `operator` == Operator.divide && operand == Double.zero {
                 return .failure(.divisionByZero)
             }
