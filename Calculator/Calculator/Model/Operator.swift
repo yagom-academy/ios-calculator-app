@@ -12,6 +12,12 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case substract = "-"
     case divide = "÷"
     case multiply = "×"
+    
+    static func generatedOperatorTypes() -> [String] {
+        Operator
+            .allCases
+            .map { String($0.rawValue) }
+    }
 }
 
 extension Operator {

@@ -22,12 +22,8 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperands(from input: String) -> [Operator] {
-        let operatorTypes = Operator
-            .allCases
-            .map { String($0.rawValue) }
-        
         return input.split(with: Character(Constant.whiteSpace))
-            .filter { operatorTypes.contains($0) }
+            .filter { Operator.generatedOperatorTypes().contains($0) }
             .compactMap { Operator(rawValue: Character($0)) }
     }
     
