@@ -61,6 +61,8 @@ private extension ViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let operandText = operandLabel.text, CalauletorError(rawValue: operandText) == nil else { return }
+        
         if  operandLabel.text == .zero && allCalculatStackIsEmpty {
             operatorLabel.text = sender.currentTitle
             return
@@ -103,7 +105,7 @@ private extension ViewController {
         do {
             operandLabel.text = try numberFormatter.string(for: ExpressionParser.parse(from: formula).result())
         } catch {
-            operandLabel.text = (error as? CalauletorError)?.errorDescription
+            operandLabel.text = (error as? CalauletorError)?.rawValue
         }
         
         operatorLabel.text = .empty
@@ -172,8 +174,8 @@ private extension ViewController {
         
         allCalculatStack.arrangedSubviews.forEach {
             let subStackView = $0 as? UIStackView
-            let operatorLabel = subStackView?.arrangedSubviews[0] as? UILabel
-            let operandLabel = subStackView?.arrangedSubviews[1] as? UILabel
+            let operatorLabel = subStackView?.arrangedSubviews.first as? UILabel
+            let operandLabel = subStackView?.arrangedSubviews.last as? UILabel
             
             if operatorLabel?.text?.isEmpty == false {
                 guard let operatorText = operatorLabel?.text else { return }

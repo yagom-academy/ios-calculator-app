@@ -282,7 +282,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpCalculationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="shA-pe-2Dj"/>
+                                                    <action selector="touchUpCalculationButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="klJ-3G-qJQ"/>
                                                 </connections>
                                             </button>
                                         </subviews>

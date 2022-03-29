@@ -12,10 +12,6 @@ struct Formula {
     let operators: CalculatorItemQueue<LinkdeList<Operator>>
     
     func result() throws -> Double {
-        guard operands.count >= 2 && operators.isEmpty == false else {
-            throw CalauletorError.cannotCalculation
-        }
-        
         guard var firstOperand = operands.dequeue() else {
             throw CalauletorError.operandIsNil
         }
