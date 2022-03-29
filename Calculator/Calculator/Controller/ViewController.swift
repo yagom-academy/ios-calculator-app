@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     private let stringZero = "0"
     private let stringDot = "."
+    private let minusSign = "-"
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
@@ -26,6 +27,20 @@ class ViewController: UIViewController {
     
     @IBAction func touchCEButton(_ sender: UIButton) {
         self.operandLabel.text = stringZero
+    }
+    
+    @IBAction func touchChangeSignButton(_ sender: UIButton) {
+        guard let operandsText = self.operandLabel.text else {
+            return
+        }
+        if operandsText == stringZero {
+            return
+        }
+        if operandsText.contains(minusSign) {
+            self.operandLabel.text = operandsText.replacingOccurrences(of: minusSign, with: "")
+        } else {
+            self.operandLabel.text = minusSign + operandsText
+        }
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
