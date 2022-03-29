@@ -23,6 +23,12 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentNumberLabel: UILabel!
     @IBOutlet private weak var currentOperandLabel: UILabel!
     
+    @IBOutlet private weak var historyStackView: UIStackView!
+    
+    static let zero: String = "0"
+    static let empty: String = ""
+    static let negativeSign: Character = "-"
+    static let nanResult: String = "NaN"
     
     
     private var currentDisplayNumber: String = "0" {
@@ -43,7 +49,6 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
     @IBAction private func clickNumber(_ sender: UIButton) {
         let clickValue = sender.currentTitle ?? ""
         setCurrentDisplayNumber(clickValue)
@@ -56,11 +61,7 @@ class CalculatorViewController: UIViewController {
         } else {
             currentDisplayNumber = currentDisplayNumber + num
         }
-        
-        
-        //currentDisplayNumber = currentDisplayNumber + num
     }
-    
     
     @IBAction private func clickOperator(_ sender: UIButton) {
         if currentDisplayNumber.isEmpty {
@@ -71,7 +72,6 @@ class CalculatorViewController: UIViewController {
         //resetCurrentDisplayNumber()
         let operatorItem = sender.currentTitle ?? ""
         currentDisplayOperator = operatorItem
-        
     }
     
     
@@ -99,10 +99,36 @@ class CalculatorViewController: UIViewController {
             currentDisplayNumber = currentDisplayNumber + doubleZero
         }
     }
-
+    
+    @IBAction private func allClear() {
+        clearInputtingOperand()
+        clearInputtingOperator()
+        clearFormula()
+        clearHistoryStackView()
+    }
+    
+    @IBAction private func clearEntry() {
+        clearInputtingOperand()
+    }
     
     private func addTotalCalculate() {
         totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? "") \(currentDisplayNumber)"
+    }
+    
+    private func clearHistoryStackView() {
+        historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func clearFormula() {
+        totalCalculate = CalculatorViewController.empty
+    }
+    
+    private func clearInputtingOperand() {
+        currentDisplayNumber = CalculatorViewController.zero
+    }
+    
+    private func clearInputtingOperator() {
+        currentDisplayOperator = CalculatorViewController.empty
     }
 }
 
