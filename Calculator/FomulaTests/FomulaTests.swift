@@ -21,9 +21,9 @@ class FomulaTests: XCTestCase {
 
     func test_result_함수를_호출하면_1더하기1은_2가되는지() {
         // given
-        let sum = "1 + 1"
+        let fomula = "1 + 1"
         // when
-        var result = ExpressionParser.parse(frome: sum)
+        var result = ExpressionParser.parse(frome: fomula)
         // then
         switch result.result() {
         case .success(let value):
@@ -36,9 +36,9 @@ class FomulaTests: XCTestCase {
     
     func test_result_함수_호출시_nonOperator_error가_발생하는지() {
         // given
-        let sum = "1 + 1 1"
+        let fomula = "1 + 1 1"
         // when
-        var result = ExpressionParser.parse(frome: sum)
+        var result = ExpressionParser.parse(frome: fomula)
         // then
         switch result.result() {
         case .success(let value):
@@ -50,9 +50,9 @@ class FomulaTests: XCTestCase {
     
     func test_result_함수_호출시_nonOperand_error가_발생하는지() {
         // given
-        let sum = "1 + 1 +"
+        let fomula = "1 + 1 +"
         // when
-        var result = ExpressionParser.parse(frome: sum)
+        var result = ExpressionParser.parse(frome: fomula)
         // then
         switch result.result() {
         case .success(let value):
@@ -64,9 +64,9 @@ class FomulaTests: XCTestCase {
     
     func test_result_함수_호출시_divisionByZero_error가_발생하는지() {
         // given
-        let sum = "2 ÷ 0"
+        let fomula = "2 ÷ 0"
         // when
-        var result = ExpressionParser.parse(frome: sum)
+        var result = ExpressionParser.parse(frome: fomula)
         // then
         switch result.result() {
         case .success(let value):
