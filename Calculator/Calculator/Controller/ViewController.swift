@@ -157,6 +157,7 @@ class ViewController: UIViewController {
         guard let changedNumber = numberFormatter.string(from: number as NSNumber) else {
             return ""
         }
+        if changedNumber == "-0" { return stringZero}
         return changedNumber
     }
     
