@@ -16,6 +16,12 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeHistory()
+    }
+    
+    private func initializeHistory() {
+        operandsLabel.text = CalculatorEtc.singleZero
+        operatorsLabel.text = CalculatorEtc.emptyStateString
     }
 
     private func isValidTemporaryOperandTextDigitsLessFifteenCount() -> Bool {
@@ -25,7 +31,7 @@ class CalculatorViewController: UIViewController {
         return true
     }
         
-    private func isValidZeroForTemporaryOperandText(inputText: String) -> Bool {
+    private func isValidFirstInputNonZero(inputText: String) -> Bool {
         guard operandsLabel.text == CalculatorEtc.singleZero else { return true }
         if inputText == CalculatorEtc.singleZero || inputText == CalculatorEtc.doubleZero {
             return false
@@ -34,7 +40,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateTemporaryOperandTextAndOperandsLabel(by inputText: String) {
-        if operandsLabel.text == "0" {
+        if operandsLabel.text == CalculatorEtc.singleZero {
             temporaryOperandText = inputText
             operandsLabel.text = temporaryOperandText
         }
@@ -47,7 +53,7 @@ class CalculatorViewController: UIViewController {
         guard isValidTemporaryOperandTextDigitsLessFifteenCount() else {
             return
         }
-        guard isValidZeroForTemporaryOperandText(inputText: operandButtonLabelText) else {
+        guard isValidFirstInputNonZero(inputText: operandButtonLabelText) else {
             return
         }
         updateTemporaryOperandTextAndOperandsLabel(by: operandButtonLabelText)
