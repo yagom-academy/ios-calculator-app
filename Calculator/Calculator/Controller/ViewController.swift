@@ -98,5 +98,12 @@ class ViewController: UIViewController {
         stackView.spacing = 8
         return stackView
     }
+    
+    private func makeLabel(element: String) -> UILabel {
+        let label = UILabel()
+        label.text = element
+        label.textColor = .white
+        return label
+    }
 }
 
