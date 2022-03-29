@@ -23,6 +23,14 @@ enum ExpressionParser {
         return splitInput
     }
     
+    private static func componentsByOperands(from input: String) -> [String] {
+        var splitInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
+        let operandSet: Set<String> = Set(componentsByOperators(from: input))
+        
+        splitInput.removeAll(where: { operandSet.contains($0) })
+        
+        return splitInput
+    }
     static func parse(from input: String) throws -> Formula {
         let operandQueue = CalculatorItemQueue<LinkdeList<Double>>(.init())
         let operatorQueue = CalculatorItemQueue<LinkdeList<Operator>>(.init())
