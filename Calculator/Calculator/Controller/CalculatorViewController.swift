@@ -12,6 +12,7 @@ class CalculatorViewController: UIViewController {
     private var confirmedFormula: [String] = []
     
     @IBOutlet weak var operandsLabel: UILabel!
+    @IBOutlet weak var operatorsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,13 @@ class CalculatorViewController: UIViewController {
         return true
     }
     
+    private func updateTemporaryOperandTextAndOperandsLabel(by inputText: String) {
+        if operandsLabel.text == "0" {
+            temporaryOperandText = inputText
+            operandsLabel.text = temporaryOperandText
+        }
+    }
+    
     @IBAction func didTapOperandButtons(_ sender: UIButton) {
         guard let operandButtonLabelText = sender.titleLabel?.text else {
             return
@@ -42,6 +50,6 @@ class CalculatorViewController: UIViewController {
         guard isValidZeroForTemporaryOperandText(inputText: operandButtonLabelText) else {
             return
         }
+        updateTemporaryOperandTextAndOperandsLabel(by: operandButtonLabelText)
     }
 }
-
