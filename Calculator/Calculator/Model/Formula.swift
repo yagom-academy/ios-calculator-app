@@ -12,15 +12,27 @@ struct Formula {
     let operators: CalculatorItemQueue<LinkdeList<Operator>>
     
     func result() throws -> Double {
-        guard var value: Double = operands.dequeue() else { return 0 }
-        
-        while !operands.isEmpty {
-            guard let operand = operands.dequeue() else { return value }
-            guard let calculatedValue = try operators.dequeue()?.calculate(lhs: value, rhs: operand) else { return value }
-            
-            value = calculatedValue
+        guard operands.count >= 2 && operators.isEmpty == false else {
+            throw CalauletorError.cannotCalculation
         }
         
-        return value
+        guard var firstOperand = operands.dequeue() else {
+            throw CalauletorError.operandIsNil
+        }
+        
+        while operands.isEmpty == false {
+            guard let operandValue = operands.dequeue() else {
+                throw CalauletorError.operandIsNil
+            }
+            
+            guard let operatorValue = operators.dequeue() else {
+                throw CalauletorError.operatorIsNil
+            }
+            
+            firstOperand = try operatorValue.calculate(lhs: firstOperand, rhs: operandValue)
+        }
+        let result = firstOperand
+        
+        return result
     }
 }

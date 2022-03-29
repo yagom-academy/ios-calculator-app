@@ -10,4 +10,7 @@ import Foundation
 enum CalauletorError: Error {
     case dividedByZero
     case invalidInputValue
+    case cannotCalculation
+    case operandIsNil
+    case operatorIsNil
 }
