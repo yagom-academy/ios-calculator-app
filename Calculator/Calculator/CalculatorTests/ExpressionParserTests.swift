@@ -36,8 +36,8 @@ class ExpressionParserTests: XCTestCase {
         // when
         var result = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(result.operators.dequeue(), Operator.multiply)
-        XCTAssertEqual(result.operators.dequeue(), Operator.divide)
+        XCTAssertEqual(result.operators.dequeue(), Operator.multiplication)
+        XCTAssertEqual(result.operators.dequeue(), Operator.division)
         XCTAssertNoThrow(result, "error 발생")
     }
 }
