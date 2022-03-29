@@ -63,6 +63,22 @@ class ViewController: UIViewController {
         self.operandLabel.text = operandsText + stringDot
     }
     
+    @IBAction func touchOperatorButton(_ sender: UIButton) {
+        guard let inputOperator = sender.titleLabel?.text else {
+            return
+        }
+        guard let operatorText = self.operatorLabel.text else {
+            return
+        }
+        guard let operandsText = self.operandLabel.text else {
+            return
+        }
+        self.operatorLabel.text = inputOperator
+        addFomula(operator: operatorText, operand: operandsText)
+        self.operandLabel.text = stringZero
+    }
+    
+    
     private func resetCaculator() {
         self.operatorLabel.text = ""
         self.operandLabel.text = stringZero
