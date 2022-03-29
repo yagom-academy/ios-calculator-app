@@ -25,7 +25,7 @@ class CalculatorViewController: UIViewController {
     
     
     
-    private var currentDisplayNumber: String = "" {
+    private var currentDisplayNumber: String = "0" {
         didSet {
             currentNumberLabel.text = currentDisplayNumber
         }
@@ -50,7 +50,15 @@ class CalculatorViewController: UIViewController {
     }
     
     private func setCurrentDisplayNumber(_ num: String) {
-        currentDisplayNumber = currentDisplayNumber + num
+        
+        if currentDisplayNumber == "0" {
+            currentDisplayNumber = num
+        } else {
+            currentDisplayNumber = currentDisplayNumber + num
+        }
+        
+        
+        //currentDisplayNumber = currentDisplayNumber + num
     }
     
     
