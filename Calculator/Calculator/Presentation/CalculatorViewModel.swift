@@ -2,7 +2,7 @@
 //  CalculatorViewModel.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/23.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 import UIKit
@@ -11,11 +11,11 @@ final class CalculatorViewModel {
   
   private(set) var operatorType = Observable<String?>(nil)
   private(set) var operandValue = Observable<String>("0")
+  private(set) var isResult: Bool = false
   private var formulas = [String]()
   var isDotted: Bool {
     self.operandValue.value.contains(".")
   }
-  private(set) var isResult: Bool = false
   
   func clearAll() {
     self.formulas.removeAll()
