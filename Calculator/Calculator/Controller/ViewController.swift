@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text, operandsText.count < 20 else {
             return
         }
-        self.operandLabel.text = changeNumberFormat(number: operandsText + inputNumber)
+        self.operandLabel.text = checkZeroAfterDot(number: operandsText + inputNumber)
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
@@ -55,6 +55,13 @@ class ViewController: UIViewController {
     
     private func removeFomulaList() {
         self.fomulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func checkZeroAfterDot(number: String) -> String {
+        if number.contains(stringDot) && number.last == Character(stringZero) {
+            return number
+        }
+        return changeNumberFormat(number: number)
     }
     
     private func changeNumberFormat(number: String) -> String {
