@@ -16,7 +16,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     try super.setUpWithError()
     self.sut = CalculatorItemQueue()
   }
-
+  
   override func tearDownWithError() throws {
     try super.tearDownWithError()
     self.sut = nil
@@ -34,21 +34,26 @@ final class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(output, input + 1)
   }
   
-  func test_enqueue_1을_넣으면_elements는_배열_1을_반환해야한다() {
-    // given when
-    self.sut.enqueue(1.0)
-    let output = self.sut.elements
+  func test_enqueue_빈배열에_1을_호출하면_추가되는가() {
+    // given
+    let input = 1.0
+    // when
+    self.sut.enqueue(input)
+    let result = self.sut.first
     // then
-    XCTAssertEqual(output, [1.0])
+    XCTAssertEqual(result, 1.0)
   }
   
-  func test_enqueue_여러번_호출시_elements는_넣은_원소들의_배열을_반환해야한다() {
-    // given when
+  func test_enqueue_빈배열에_여러번_호출하면_마지막값이_정상반환되는가() {
+    // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
-    let output = self.sut.elements
+    self.sut.enqueue(3.0)
+    self.sut.enqueue(4.0)
+    // when
+    let result = sut.last
     // then
-    XCTAssertEqual(output, [1.0, 2.0])
+    XCTAssertEqual(result, 4.0)
   }
   
   // MARK: - dequeue()
@@ -70,15 +75,76 @@ final class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(output, 1.0)
   }
   
-  func test_dequeue_큐에_1_2가_들어있고_호출시_elements는_배열_2를_반환해야한다() {
+  func test_dequeue_큐에_1_2가_들어있고_호출시_2를_반환해야한다() {
     // given
     self.sut.enqueue(1.0)
     self.sut.enqueue(2.0)
     // when
     _ = self.sut.dequeue()
-    let output = self.sut.elements
+    let output = self.sut.first
     // then
-    XCTAssertEqual(output, [2.0])
+    XCTAssertEqual(output, 2.0)
+  }
+  
+  func test_dequeue_빈배열에서_값을_호출하면_nil을_반환하는가() {
+    // given when
+    let result = self.sut.dequeue()
+    // then
+    XCTAssertNil(result)
+  }
+  
+  func test_dequeue_값이_있는_배열에_호출하면_정상반환하는가() {
+    // given
+    self.sut.enqueue(1.0)
+    self.sut.enqueue(2.0)
+    // when
+    let result = self.sut.dequeue()
+    // then
+    XCTAssertEqual(result, 1.0)
+  }
+  
+  func test_dequeue_값이_하나인_배열에_호출하면_정상반환하는가() {
+    // given
+    self.sut.enqueue(2.0)
+    // when
+    let result = self.sut.dequeue()
+    // then
+    XCTAssertEqual(result, 2.0)
+  }
+  
+  func test_dequeue_enqueue를_2번_dequeue를_2번하면_정상반환하는가() {
+    // given
+    self.sut.enqueue(1.0)
+    self.sut.enqueue(2.0)
+    // when
+    _ = self.sut.dequeue()
+    let result = self.sut.dequeue()
+    // then
+    XCTAssertEqual(result, 2.0)
+  }
+  
+  func test_dequeue_enqueue를_1번_dequeue를_2번하면_nil을_반환하는가() {
+    // given
+    self.sut.enqueue(1.0)
+    // when
+    _ = self.sut.dequeue()
+    let result = self.sut.dequeue()
+    // then
+    XCTAssertNil(result)
+  }
+  
+  // MARK: - count
+  
+  func test_count_배열의_개수를_정상적으로_반환하는가() {
+    // given
+    self.sut.enqueue(1.0)
+    self.sut.enqueue(2.0)
+    self.sut.enqueue(3.0)
+    self.sut.enqueue(4.0)
+    // when
+    let result = self.sut.count
+    // then
+    XCTAssertEqual(result, 4)
   }
   
   // MARK: - first
@@ -100,16 +166,19 @@ final class CalculatorItemQueueTests: XCTestCase {
     XCTAssertEqual(output, 1.0)
   }
   
-  // MARK: - clear()
+  // MARK: - removeAll()
   
-  func test_clear_호출시_elements가_빈_배열을_반환해야한다() {
+  func test_removeAll_호출시_비어_있어야한다() {
     // given
     self.sut.enqueue(1.0)
+    self.sut.enqueue(2.0)
+    self.sut.enqueue(3.0)
+    self.sut.enqueue(4.0)
     // when
-    self.sut.clear()
-    let output = self.sut.elements
+    self.sut.removeAll()
+    let output = self.sut.isEmpty
     // then
-    XCTAssertEqual(output, [])
+    XCTAssertTrue(output)
   }
   
   // MARK: - isEmpty

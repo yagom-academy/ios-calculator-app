@@ -14,8 +14,11 @@ final class ExpressionParserTests: XCTestCase {
     // given
     let input = "1 + 2 × -1"
     // when
-    let formula = ExpressionParser.parse(from: input)
-    let output = formula.operands.elements
+    var formula = ExpressionParser.parse(from: input)
+    var output = [Double?]()
+    output.append(formula.operands.dequeue())
+    output.append(formula.operands.dequeue())
+    output.append(formula.operands.dequeue())
     // then
     XCTAssertEqual(output, [1.0, 2.0, -1.0])
   }
@@ -24,8 +27,10 @@ final class ExpressionParserTests: XCTestCase {
     // given
     let input = "1 + 2 × -1"
     // when
-    let formula = ExpressionParser.parse(from: input)
-    let output = formula.operators.elements
+    var formula = ExpressionParser.parse(from: input)
+    var output = [Operator?]()
+    output.append(formula.operators.dequeue())
+    output.append(formula.operators.dequeue())
     // then
     XCTAssertEqual(output, [.add, .multiply])
   }
@@ -34,28 +39,49 @@ final class ExpressionParserTests: XCTestCase {
     // given
     let input = "1 + 2 × -1"
     // when
-    var formula = ExpressionParser.parse(from: input)
-    let output = try! formula.result()
+    var expressionParser = ExpressionParser.parse(from: input)
     // then
-    XCTAssertEqual(output, -3.0)
-  }
-  
-  func test_parse_주어진_입력후_호출시_formula의_result는_NaN을_반환해야한다() {
-    // given
-    let input = "1 + 2 ÷ 0"
-    // when
-    var formula = ExpressionParser.parse(from: input)
-    let output = try! formula.result()
-    // then
-    XCTAssertTrue(output.isNaN)
+    XCTAssertEqual(try expressionParser.result(), -3.0)
   }
   
   func test_parse_미완성된_사용자_입력후_호출시_formula의_result는_Error를_던져야한다() {
     // given
     let input = "1 + 2 − "
     // when
-    var formula = ExpressionParser.parse(from: input)
+    var expressionParser = ExpressionParser.parse(from: input)
     // then
-    XCTAssertThrowsError(try formula.result())
+    XCTAssertThrowsError(try expressionParser.result())
+  }
+  
+  func test_parse_계산한_결과값이_6이_나와야한다() {
+    // given when
+    let someInput = "1 + 2 − -3 "
+    var expressionParser = ExpressionParser.parse(from: someInput)
+    // then
+    XCTAssertEqual(try expressionParser.result(), 6.0)
+  }
+  
+  func test_parse_계산했을때_연산자로_끝나는_경우_에러를_던저야한다() {
+    // given when
+    let someInput = "1 + 2 − -3 + "
+    var expressionParser = ExpressionParser.parse(from: someInput)
+    // then
+    XCTAssertThrowsError(try expressionParser.result())
+  }
+  
+  func test_parse_계산했을때_0으로_나누는_경우_NaN를_반환해야한다() {
+    // given when
+    let someInput = "1 + 2 ÷ 0 "
+    var expressionParser = ExpressionParser.parse(from: someInput)
+    // then
+    XCTAssertTrue(try expressionParser.result().isNaN)
+  }
+  
+  func test_parse_빈_문자를_입력후_계산했을때_에러를_던져야한다() {
+    // given when
+    let someInput = ""
+    var expressionParser = ExpressionParser.parse(from: someInput)
+    // then
+    XCTAssertThrowsError(try expressionParser.result())
   }
 }
