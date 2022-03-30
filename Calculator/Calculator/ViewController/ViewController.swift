@@ -13,15 +13,15 @@ class ViewController: UIViewController {
   @IBOutlet private weak var processScrollView: UIScrollView!
   @IBOutlet private weak var processStackView: UIStackView!
   
-  private var fomula = Asset.blank
+  private var fomula = SimpleValue.blank
   
-  private var visibleNumber = Asset.blank {
+  private var visibleNumber = SimpleValue.blank {
     didSet{
       convertNumberLabelToformatter()
     }
   }
   
-  private var visibleOperator = Asset.blank {
+  private var visibleOperator = SimpleValue.blank {
     didSet{
       self.operatorbutton.text = visibleOperator
     }
@@ -41,24 +41,24 @@ class ViewController: UIViewController {
       return
     }
     
-    if visibleNumber.first == "0" && visibleNumber.contains(Asset.dot) == false {
+    if visibleNumber.first == "0" && visibleNumber.contains(SimpleValue.dot) == false {
       visibleNumber.removeAll()
       visibleNumber.append(inputString)
-    } else if visibleNumber == Asset.doubleZero {
+    } else if visibleNumber == SimpleValue.doubleZero {
       visibleNumber.removeAll()
       visibleNumber.append(inputString)
     } else {
       visibleNumber.append(inputString)
     }
     
-    if visibleNumber == Asset.zeroZero {
-      visibleNumber = Asset.zero
+    if visibleNumber == SimpleValue.zeroZero {
+      visibleNumber = SimpleValue.zero
     }
   }
     
   @IBAction func tapPlusMinus(_ sender: UIButton) {
     
-    guard visibleNumber != Asset.blank else {
+    guard visibleNumber != SimpleValue.blank else {
       return
     }
     
@@ -66,15 +66,15 @@ class ViewController: UIViewController {
       visibleNumber = visibleNumber.trimmingCharacters(in: ["-"])
     } else {
       visibleNumber = String(visibleNumber.reversed())
-      visibleNumber.append(Asset.minus)
+      visibleNumber.append(SimpleValue.minus)
       visibleNumber = String(visibleNumber.reversed())
     }
   }
   
   @IBAction func tapDot(_ sender: UIButton) {
     
-    if visibleNumber.contains(Asset.dot) == false {
-      visibleNumber.append(Asset.dot)
+    if visibleNumber.contains(SimpleValue.dot) == false {
+      visibleNumber.append(SimpleValue.dot)
     }
   }
   
@@ -84,22 +84,22 @@ class ViewController: UIViewController {
       return
     }
     
-    guard visibleNumber != Asset.blank else {
+    guard visibleNumber != SimpleValue.blank else {
       return
     }
     
     processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? errorString.Error))
     self.processScrollView.scrollToBottom()
 
-    if visibleNumber != Asset.blank {
+    if visibleNumber != SimpleValue.blank {
       fomula += visibleNumber
-      fomula += Asset.spacing
+      fomula += SimpleValue.spacing
     }
     
     visibleOperator.removeAll()
     visibleOperator.append(inputOperator)
     fomula += visibleOperator
-    fomula += Asset.spacing
+    fomula += SimpleValue.spacing
     visibleNumber.removeAll()
   }
   
@@ -110,13 +110,13 @@ class ViewController: UIViewController {
     self.processStackView.arrangedSubviews.forEach {
       $0.removeFromSuperview()
     }
-    visibleNumber = Asset.zero
+    visibleNumber = SimpleValue.zero
   }
   
   @IBAction func tapCE(_ sender: UIButton) {
     
     visibleNumber.removeAll()
-    visibleNumber = Asset.zero
+    visibleNumber = SimpleValue.zero
   }
   
   @IBAction func tapResult(_ sender: UIButton) {
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
     visibleNumber.removeAll()
     visibleOperator.removeAll()
     let result = ExpressionParser.parse(from: fomula).result()
-    fomula = Asset.blank
+    fomula = SimpleValue.blank
     
     switch result {
     case .success(let resultValue):
