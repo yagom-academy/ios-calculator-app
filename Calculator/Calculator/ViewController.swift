@@ -25,6 +25,8 @@ extension ViewController {
         let currentNumber = currentNumberLabbel.text.bind()
         let buttonTitle = sender.currentTitle.bind()
         
+        guard currentNumber.replacingOccurrences(of: ",", with: "").count < 20 else { return }
+        
         if currentNumber == "0" {
             currentNumberLabbel.text = buttonTitle
         } else {
@@ -52,6 +54,8 @@ extension ViewController {
     @IBAction func clickZeroButton(_ sender: UIButton) {
         let currentNumber = currentNumberLabbel.text.bind()
         let zeros = sender.currentTitle.bind()
+        
+        guard currentNumber.replacingOccurrences(of: ",", with: "").count < 20 else { return }
         
         if currentNumber.contains(".") == true {
             currentNumberLabbel.text = currentNumber + zeros

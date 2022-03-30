@@ -16,7 +16,9 @@ extension String {
         guard self != "nan" else { return "NaN" }
         
         let numberFomatter = NumberFormatter()
-        numberFomatter.numberStyle = .decimal
+//        numberFomatter.numberStyle = .decimal
+        numberFomatter.positiveFormat = "##,###,###,###,###,###,##0.####################"
+        numberFomatter.negativeFormat = "-##,###,###,###,###,###,##0.####################"
         
         let pureNumber = self.replacingOccurrences(of: ",", with: "")
         let number = numberFomatter.number(from: pureNumber) ?? 0
