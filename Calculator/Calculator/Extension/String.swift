@@ -8,6 +8,10 @@
 import Foundation
 
 extension String {
+    var first: String {
+        return self[self.startIndex].description
+    }
+    
     func split(with target: Character) -> [String] {
         return self.split(separator: target)
             .map { String($0) }

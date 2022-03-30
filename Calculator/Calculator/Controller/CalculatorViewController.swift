@@ -152,7 +152,7 @@ extension CalculatorViewController {
             return
         }
         
-        if currentOperand.first?.description == Const.zero && currentOperand.contains(Const.dot) == false {
+        if currentOperand.first == Const.zero && currentOperand.contains(Const.dot) == false {
             currentOperand = operand
             operandLabel.text = currentOperand
             return
