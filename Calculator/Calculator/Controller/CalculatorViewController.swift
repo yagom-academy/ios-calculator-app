@@ -25,11 +25,11 @@ final class CalculatorViewController: UIViewController {
     private var currentOperand: String = Const.zero
     private var currentOperator: String = Const.blank
     private var expression = [String]()
-    private enum CalculatorStatus {
+    private enum Status {
         case nonCalculated
         case calculated
     }
-    private var calculatorStatus: CalculatorStatus = .nonCalculated
+    private var status: Status = .nonCalculated
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ extension CalculatorViewController {
     }
     
     private func resetCalculator() {
-        calculatorStatus = .nonCalculated
+        status = .nonCalculated
         expression = [String]()
         resetOperand()
         resetOperator()
@@ -168,11 +168,11 @@ extension CalculatorViewController {
 // MARK: - When touch up Dot Button
 extension CalculatorViewController {
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
-        guard let dot = sender.titleLabel?.text else {
-            return
-        }
-        
-        updateOperand(by: dot)
+//        guard let dot = sender.titleLabel?.text else {
+//            return
+//        }
+//
+        updateOperand(by: Const.dot)
     }
     
     private func updateOperand(by dot: String) {
@@ -188,11 +188,11 @@ extension CalculatorViewController {
 // MARK: - When touch up Equal Button
 extension CalculatorViewController {
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        guard calculatorStatus == .nonCalculated else {
+        guard status == .nonCalculated else {
             return
         }
         
-        calculatorStatus = .calculated
+        status = .calculated
         updateLastCalculation()
     }
     
