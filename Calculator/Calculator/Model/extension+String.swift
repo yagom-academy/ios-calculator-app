@@ -16,15 +16,18 @@ extension String {
         guard self != "nan" else { return "NaN" }
         
         let numberFomatter = NumberFormatter()
-//        numberFomatter.numberStyle = .decimal
         numberFomatter.positiveFormat = "##,###,###,###,###,###,##0.####################"
         numberFomatter.negativeFormat = "-##,###,###,###,###,###,##0.####################"
         
-        let pureNumber = self.replacingOccurrences(of: ",", with: "")
+        let pureNumber = self.removeComma()
         let number = numberFomatter.number(from: pureNumber) ?? 0
         let changedNumber = numberFomatter.string(from: number) ?? ""
         
         return changedNumber
+    }
+    
+    func removeComma() -> String {
+        return self.replacingOccurrences(of: ",", with: "")
     }
 }
 

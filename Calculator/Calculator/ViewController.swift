@@ -25,7 +25,7 @@ extension ViewController {
         let currentNumber = currentNumberLabbel.text.bind()
         let buttonTitle = sender.currentTitle.bind()
         
-        guard currentNumber.replacingOccurrences(of: ",", with: "").count < 20 else { return }
+        guard currentNumber.removeComma().count < 20 else { return }
         
         if currentNumber == "0" {
             currentNumberLabbel.text = buttonTitle
@@ -55,7 +55,7 @@ extension ViewController {
         let currentNumber = currentNumberLabbel.text.bind()
         let zeros = sender.currentTitle.bind()
         
-        guard currentNumber.replacingOccurrences(of: ",", with: "").count < 20 else { return }
+        guard currentNumber.removeComma().count < 20 else { return }
         
         if currentNumber.contains(".") == true {
             currentNumberLabbel.text = currentNumber + zeros
@@ -130,7 +130,7 @@ private extension ViewController {
         if allOperations.isEmpty == false {
             allOperations.append(currentOperator)
         }
-        let numberWithoutComma = currentNumber.replacingOccurrences(of: ",", with: "")
+        let numberWithoutComma = currentNumber.removeComma()
         allOperations.append(numberWithoutComma)
         
         currentNumberLabbel.text = "0"
