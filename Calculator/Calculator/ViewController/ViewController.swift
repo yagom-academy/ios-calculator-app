@@ -161,11 +161,10 @@ private extension ViewController {
   
   func convertNumberLabelToformatter() {
     let numberFormatter = NumberFormatter()
-    let doubleNumber = Double(visibleNumber)
-    
-    guard doubleNumber != nil else {
+    guard let doubleNumber = Double(visibleNumber) else {
       return
     }
+      
     numberFormatter.numberStyle = .decimal
     numberFormatter.maximumFractionDigits = Asset.maximum20Digits
     self.numberLabel.text = numberFormatter.string(for: doubleNumber)
