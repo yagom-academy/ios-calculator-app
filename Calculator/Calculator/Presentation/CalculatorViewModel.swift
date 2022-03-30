@@ -90,14 +90,11 @@ final class CalculatorViewModel {
   }
   
   func calculate() -> Bool {
-    if self.operandValue.value == "0" && self.operatorType.value == nil {
+    guard self.operandValue.value != "0" || self.operatorType.value != nil,
+          !self.formulas.isEmpty
+    else {
       return false
     }
-    
-    if self.formulas.isEmpty {
-      return false
-    }
-    
     if let operatorType = self.operatorType.value {
       self.formulas.append(operatorType)
     }
