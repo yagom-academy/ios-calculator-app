@@ -11,7 +11,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var operationRecord: UIStackView!
     @IBOutlet weak var operationRecordScrollView: UIScrollView!
-    var touchedNumber: String = "0"
     var allOperations: [String] = []
 
     override func viewDidLoad() {
@@ -23,51 +22,55 @@ class ViewController: UIViewController {
 // MARK: IBAction
 extension ViewController {
     @IBAction func clickNumberButton(_ sender: UIButton) {
-        if currentNumberLabbel.text == "0" {
-            touchedNumber = sender.currentTitle ?? ""
+        let currentNumber = currentNumberLabbel.text.bind()
+        let buttonTitle = sender.currentTitle.bind()
+        
+        if currentNumber == "0" {
+            currentNumberLabbel.text = buttonTitle
         } else {
-            touchedNumber += sender.currentTitle ?? ""
+            currentNumberLabbel.text = (currentNumber + buttonTitle).changeDecimalFormat()
         }
-        currentNumberLabbel.text = touchedNumber.changeDecimalFormat()
     }
     
     @IBAction func clickOperatorButton(_ sender: UIButton) {
-        if touchedNumber != "0" {
-            addNumberAndOperator(currentOperatorLabel.text ?? "", touchedNumber)
+        let currentNumber = currentNumberLabbel.text.bind()
+        let currentOperator = currentOperatorLabel.text.bind()
+        
+        if currentNumber != "0" {
+            addNumberAndOperator(currentOperator, currentNumber)
         }
         currentOperatorLabel.text = sender.currentTitle
     }
     
     @IBAction func clickDotButton(_ sender: UIButton) {
-        guard let currentNumber = currentNumberLabbel.text,
-                (currentNumber.contains(".") == false) else { return }
-        touchedNumber += "."
+        let currentNumber = currentNumberLabbel.text.bind()
+        
+        guard currentNumber.contains(".") == false else { return }
         currentNumberLabbel.text = currentNumber + "."
     }
     
     @IBAction func clickZeroButton(_ sender: UIButton) {
-        if currentNumberLabbel.text == "0" {
-            touchedNumber = "0"
-        } else if ((currentNumberLabbel.text?.contains(".")) == true) {
-            let currentNumberLabbelText = currentNumberLabbel.text ?? ""
-            let zeros = sender.currentTitle ?? ""
-            currentNumberLabbel.text = currentNumberLabbelText + zeros
-            touchedNumber += zeros
+        let currentNumber = currentNumberLabbel.text.bind()
+        let zeros = sender.currentTitle.bind()
+        
+        if currentNumber.contains(".") == true {
+            currentNumberLabbel.text = currentNumber + zeros
         } else {
-            touchedNumber += sender.currentTitle ?? ""
-            currentNumberLabbel.text = touchedNumber.changeDecimalFormat()
+            currentNumberLabbel.text = (currentNumber + zeros).changeDecimalFormat()
         }
     }
     
     @IBAction func clickPlusMimusSign(_ sender: UIButton) {
-        if touchedNumber != "0" {
-            if touchedNumber.hasPrefix("-") == true {
-                touchedNumber.remove(at: touchedNumber.startIndex)
-            } else {
-                touchedNumber.insert("-", at: touchedNumber.startIndex)
-            }
+        var currentNumber = currentNumberLabbel.text.bind()
+        
+        guard currentNumber != "0" else { return }
+        
+        if currentNumber.hasPrefix("-") == true {
+            currentNumber.removeFirst()
+        } else {
+            currentNumber.insert("-", at: currentNumber.startIndex)
         }
-        currentNumberLabbel.text = touchedNumber.changeDecimalFormat()
+        currentNumberLabbel.text = currentNumber.changeDecimalFormat()
     }
     
     @IBAction func clickAC(_ sender: UIButton) {
@@ -79,21 +82,22 @@ extension ViewController {
         if allOperations.isEmpty {
             clearAllHistory()
         } else {
-            touchedNumber = "0"
-            currentNumberLabbel.text = touchedNumber
+            currentNumberLabbel.text = "0"
         }
     }
 
     @IBAction func clickCalculateButton(_ sender: UIButton) {
+        let currentNumber = currentNumberLabbel.text.bind()
+        let currentOperator = currentOperatorLabel.text.bind()
+        
         if allOperations.isEmpty != true {
-            addNumberAndOperator(currentOperatorLabel.text ?? "", touchedNumber)
+            addNumberAndOperator(currentOperator, currentNumber)
             let mergedAllOperation = allOperations.joined(separator: " ")
             var formula = ExpressionParser.parse(form: mergedAllOperation)
             let result = formula.result()
             
             currentOperatorLabel.text = ""
             currentNumberLabbel.text = String(result).changeDecimalFormat()
-            touchedNumber = String(result).changeDecimalFormat().replacingOccurrences(of: ",", with: "")
             allOperations = []
         }
     }
@@ -103,7 +107,6 @@ extension ViewController {
 private extension ViewController {
     func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
-        touchedNumber = "0"
         currentNumberLabbel.text = "0"
         currentOperatorLabel.text = ""
     }
@@ -123,9 +126,9 @@ private extension ViewController {
         if allOperations.isEmpty == false {
             allOperations.append(currentOperator)
         }
-        allOperations.append(currentNumber)
+        let numberWithoutComma = currentNumber.replacingOccurrences(of: ",", with: "")
+        allOperations.append(numberWithoutComma)
         
-        touchedNumber = "0"
         currentNumberLabbel.text = "0"
     }
     
