@@ -21,7 +21,7 @@ extension String {
         
         let pureNumber = self.removeComma()
         let number = numberFomatter.number(from: pureNumber) ?? 0
-        let changedNumber = numberFomatter.string(from: number) ?? ""
+        let changedNumber = numberFomatter.string(from: number) ?? Constant.empty
         
         return changedNumber
     }
@@ -33,7 +33,7 @@ extension String {
 
 extension Optional where Wrapped == String {
     func bind() -> String {
-        guard let value = self else { return "" }
+        guard let value = self else { return Constant.empty }
         return value
     }
 }

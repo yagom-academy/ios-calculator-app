@@ -23,9 +23,9 @@ final class ViewController: UIViewController {
         let currentNumber = currentNumberLabel.text.bind()
         let buttonTitle = sender.currentTitle.bind()
         
-        guard currentNumber.removeComma().count < 20 else { return }
+        guard currentNumber.removeComma().count < Constant.maximunNumberCount else { return }
         
-        if currentNumber == "0" {
+        if currentNumber == Constant.defaultNumber {
             currentNumberLabel.text = buttonTitle
         } else {
             currentNumberLabel.text = (currentNumber + buttonTitle).changeDecimalFormat()
@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
         let currentNumber = currentNumberLabel.text.bind()
         let currentOperator = currentOperatorLabel.text.bind()
         
-        if currentNumber != "0" {
+        if currentNumber != Constant.defaultNumber {
             addNumberAndOperator(currentOperator, currentNumber)
         }
         currentOperatorLabel.text = sender.currentTitle
@@ -45,17 +45,17 @@ final class ViewController: UIViewController {
     @IBAction func clickDotButton(_ sender: UIButton) {
         let currentNumber = currentNumberLabel.text.bind()
         
-        guard currentNumber.contains(".") == false else { return }
-        currentNumberLabel.text = currentNumber + "."
+        guard currentNumber.contains(Constant.dot) == false else { return }
+        currentNumberLabel.text = currentNumber + Constant.dot
     }
     
     @IBAction func clickZeroButton(_ sender: UIButton) {
         let currentNumber = currentNumberLabel.text.bind()
         let zeros = sender.currentTitle.bind()
         
-        guard currentNumber.removeComma().count < 20 else { return }
+        guard currentNumber.removeComma().count < Constant.maximunNumberCount else { return }
         
-        if currentNumber.contains(".") == true {
+        if currentNumber.contains(Constant.dot) == true {
             currentNumberLabel.text = currentNumber + zeros
         } else {
             currentNumberLabel.text = (currentNumber + zeros).changeDecimalFormat()
@@ -65,12 +65,12 @@ final class ViewController: UIViewController {
     @IBAction func clickPlusMimusSign(_ sender: UIButton) {
         var currentNumber = currentNumberLabel.text.bind()
         
-        guard currentNumber != "0" else { return }
+        guard currentNumber != Constant.defaultNumber else { return }
         
-        if currentNumber.hasPrefix("-") == true {
+        if currentNumber.hasPrefix(Constant.minus) == true {
             currentNumber.removeFirst()
         } else {
-            currentNumber.insert("-", at: currentNumber.startIndex)
+            currentNumber.insert(Character(Constant.minus), at: currentNumber.startIndex)
         }
         currentNumberLabel.text = currentNumber.changeDecimalFormat()
     }
@@ -84,7 +84,7 @@ final class ViewController: UIViewController {
         if allOperations.isEmpty {
             clearAllHistory()
         } else {
-            currentNumberLabel.text = "0"
+            currentNumberLabel.text = Constant.defaultNumber
         }
     }
     
@@ -94,11 +94,11 @@ final class ViewController: UIViewController {
         
         if allOperations.isEmpty != true {
             addNumberAndOperator(currentOperator, currentNumber)
-            let mergedAllOperation = allOperations.joined(separator: " ")
+            let mergedAllOperation = allOperations.joined(separator: Constant.blank)
             var formula = ExpressionParser.parse(form: mergedAllOperation)
             let result = formula.result()
             
-            currentOperatorLabel.text = ""
+            currentOperatorLabel.text = Constant.empty
             currentNumberLabel.text = String(result).changeDecimalFormat()
             allOperations = []
         }
@@ -107,8 +107,8 @@ final class ViewController: UIViewController {
     // MARK: private funtion
     private func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
-        currentNumberLabel.text = "0"
-        currentOperatorLabel.text = ""
+        currentNumberLabel.text = Constant.defaultNumber
+        currentOperatorLabel.text = Constant.empty
     }
     
     private func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
@@ -129,7 +129,7 @@ final class ViewController: UIViewController {
         let numberWithoutComma = currentNumber.removeComma()
         allOperations.append(numberWithoutComma)
         
-        currentNumberLabel.text = "0"
+        currentNumberLabel.text = Constant.defaultNumber
     }
     
     private func makeStackView(_ views: [UIView]) -> UIStackView {
