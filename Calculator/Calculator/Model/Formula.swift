@@ -17,15 +17,8 @@ struct Formula {
       return .failure(.nonNumber)
     }
   
-    while operands.isEmpty() == false || operators.isEmpty() == false {
+    while let operand = operands.dequeue(), let `operator` = operators.dequeue() {
 
-      guard let operand = operands.dequeue()  else {
-        return .failure(.nonNumber)
-      }
-      guard let `operator` = operators.dequeue() else {
-        return .failure(.nonOperator)
-      }
-      
       if `operator` == Operator.divide && operand == Double.zero {
         return .failure(.divisionByZero)
       }
