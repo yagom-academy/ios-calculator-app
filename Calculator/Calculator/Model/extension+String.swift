@@ -18,9 +18,17 @@ extension String {
         let numberFomatter = NumberFormatter()
         numberFomatter.numberStyle = .decimal
         
-        let number = numberFomatter.number(from: self) ?? 0
+        let pureNumber = self.replacingOccurrences(of: ",", with: "")
+        let number = numberFomatter.number(from: pureNumber) ?? 0
         let changedNumber = numberFomatter.string(from: number) ?? ""
         
         return changedNumber
+    }
+}
+
+extension Optional where Wrapped == String {
+    func bind() -> String {
+        guard let value = self else { return "" }
+        return value
     }
 }
