@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     @IBOutlet weak var currentNumberLabbel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var operationRecord: UIStackView!
