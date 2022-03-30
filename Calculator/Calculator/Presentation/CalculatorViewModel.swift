@@ -70,10 +70,12 @@ final class CalculatorViewModel {
   }
   
   func addOperator(of operatorString: String) -> Bool {
-    self.isResult = false
-    if self.operandValue.value == "0" && self.operatorType.value == nil {
+    guard self.operandValue.value != "nan",
+          self.operandValue.value != "0" || self.operatorType.value != nil
+    else {
       return false
     }
+    self.isResult = false
     if self.operandValue.value == "0" && self.operatorType.value != nil {
       self.operatorType.next(operatorString)
       return false
