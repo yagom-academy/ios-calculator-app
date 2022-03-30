@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operationRecord: UIStackView!
     @IBOutlet weak var operationRecordScrollView: UIScrollView!
     var touchedNumber: String = "0"
-    var allOperation: [String] = []
+    var allOperations: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ extension ViewController {
         } else {
             touchedNumber += sender.currentTitle ?? ""
         }
-        currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
+        currentNumberLabbel.text = touchedNumber.changeDecimalFormat()
     }
     
     @IBAction func clickOperatorButton(_ sender: UIButton) {
@@ -55,27 +55,28 @@ extension ViewController {
             touchedNumber += zeros
         } else {
             touchedNumber += sender.currentTitle ?? ""
-            currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
+            currentNumberLabbel.text = touchedNumber.changeDecimalFormat()
         }
     }
     
     @IBAction func clickPlusMimusSign(_ sender: UIButton) {
-        if touchedNumber == "0" {
-        } else if touchedNumber.hasPrefix("-") == true {
-            touchedNumber.remove(at: touchedNumber.startIndex)
-        } else {
-            touchedNumber.insert("-", at: touchedNumber.startIndex)
+        if touchedNumber != "0" {
+            if touchedNumber.hasPrefix("-") == true {
+                touchedNumber.remove(at: touchedNumber.startIndex)
+            } else {
+                touchedNumber.insert("-", at: touchedNumber.startIndex)
+            }
         }
-        currentNumberLabbel.text = changeDecimalFormat(touchedNumber)
+        currentNumberLabbel.text = touchedNumber.changeDecimalFormat()
     }
     
     @IBAction func clickAC(_ sender: UIButton) {
         clearAllHistory()
-        allOperation = []
+        allOperations = []
     }
     
     @IBAction func clickEC(_ sender: UIButton) {
-        if allOperation.isEmpty {
+        if allOperations.isEmpty {
             clearAllHistory()
         } else {
             touchedNumber = "0"
@@ -84,16 +85,16 @@ extension ViewController {
     }
 
     @IBAction func clickCalculateButton(_ sender: UIButton) {
-        if allOperation.isEmpty != true {
+        if allOperations.isEmpty != true {
             addNumberAndOperator(currentOperatorLabel.text ?? "", touchedNumber)
-            let mergedAllOperation = allOperation.joined(separator: " ")
+            let mergedAllOperation = allOperations.joined(separator: " ")
             var formula = ExpressionParser.parse(form: mergedAllOperation)
             let result = formula.result()
             
             currentOperatorLabel.text = ""
-            currentNumberLabbel.text = changeDecimalFormat("\(result)")
-            touchedNumber = changeDecimalFormat("\(result)").replacingOccurrences(of: ",", with: "")
-            allOperation = []
+            currentNumberLabbel.text = String(result).changeDecimalFormat()
+            touchedNumber = String(result).changeDecimalFormat().replacingOccurrences(of: ",", with: "")
+            allOperations = []
         }
     }
 }
@@ -107,21 +108,10 @@ private extension ViewController {
         currentOperatorLabel.text = ""
     }
     
-    func changeDecimalFormat(_ text: String) -> String {
-        guard text != "nan" else { return "NaN" }
-        let numberFomatter = NumberFormatter()
-        numberFomatter.numberStyle = .decimal
-        
-        let number = numberFomatter.number(from: text) ?? 0
-        
-        let changedNumber = numberFomatter.string(from: number) ?? ""
-        return changedNumber
-    }
-    
     func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
         let operatorLabel = makeLabel()
         let numberLabel = makeLabel()
-        numberLabel.text = changeDecimalFormat(currentNumber)
+        numberLabel.text = currentNumber.changeDecimalFormat()
         operatorLabel.text = currentOperator
         
         let logStackView = makeStackView([operatorLabel, numberLabel])
@@ -130,10 +120,10 @@ private extension ViewController {
         let contentBottom = operationRecordScrollView.contentSize.height - operationRecordScrollView.frame.height
         operationRecordScrollView.setContentOffset(CGPoint(x: 0, y: contentBottom), animated: true)
         
-        if allOperation.isEmpty == false {
-            allOperation.append(currentOperator)
+        if allOperations.isEmpty == false {
+            allOperations.append(currentOperator)
         }
-        allOperation.append(currentNumber)
+        allOperations.append(currentNumber)
         
         touchedNumber = "0"
         currentNumberLabbel.text = "0"
