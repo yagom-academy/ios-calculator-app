@@ -166,10 +166,6 @@ extension CalculatorViewController {
 // MARK: - When touch up Dot Button
 extension CalculatorViewController {
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
-//        guard let dot = sender.titleLabel?.text else {
-//            return
-//        }
-//
         updateOperand(by: Const.dot)
     }
     
