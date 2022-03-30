@@ -88,7 +88,7 @@ class ViewController: UIViewController {
       return
     }
     
-    processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? errorString.Error))
+    processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? notFoundError.notFoundError))
     self.processScrollView.scrollToBottom()
 
     if visibleNumber != SimpleValue.blank {
@@ -122,7 +122,7 @@ class ViewController: UIViewController {
   @IBAction func tapResult(_ sender: UIButton) {
     
     fomula += visibleNumber
-    processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? errorString.Error))
+    processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? notFoundError.notFoundError))
     self.processScrollView.scrollToBottom()
     visibleNumber.removeAll()
     visibleOperator.removeAll()
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
     case .success(let resultValue):
       visibleNumber = String(resultValue)
     case .failure(let error):
-      visibleNumber = error.errorDescription ?? errorString.notFoundError
+      visibleNumber = error.errorDescription ?? notFoundError.notFoundError
     }
   }
 }

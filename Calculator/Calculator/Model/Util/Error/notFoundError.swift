@@ -7,8 +7,7 @@
 
 import Foundation
 
-enum errorString {
+enum notFoundError {
   static let notFoundError = "NotFoundError"
-  static let Error = "Error"
 }
 
