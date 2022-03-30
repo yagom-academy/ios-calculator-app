@@ -102,12 +102,10 @@ extension CalculatorViewController {
             operand.removeFirst()
             currentOperand.removeFirst()
             operandLabel.text = operand
-            return
         } else {
             operand.insert(Character(Const.minus), at: operand.startIndex)
             currentOperand.insert(Character(Const.minus), at: operand.startIndex)
             operandLabel.text = operand
-            return
         }
     }
 }
