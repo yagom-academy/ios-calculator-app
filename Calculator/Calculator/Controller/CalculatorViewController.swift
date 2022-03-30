@@ -129,7 +129,7 @@ extension CalculatorViewController {
         expression.append(currentOperand)
         expression.append(`operator`)
         
-        updateCalculationRecord(with: currentOperand, currentOperator)
+        updateRecord(operand: currentOperand, operator: currentOperator)
         
         currentOperator = `operator`
         operatorLabel.text = `operator`
@@ -192,12 +192,12 @@ extension CalculatorViewController {
     
     private func updateLastCalculation() {
         expression.append(currentOperand)
-        updateCalculationRecord(with: currentOperand, currentOperator)
+        updateRecord(operand: currentOperand, operator: currentOperator)
         
         calculate()
     }
     
-    private func updateCalculationRecord(with operand: String, _ operator: String) {
+    private func updateRecord(operand: String, operator: String) {
         if topRecordStackView.subviews.count == .zero {
             let ExpressionStackView = ExpressionStackView(operand: operand)
             topRecordStackView.addArrangedSubview(ExpressionStackView)
@@ -217,13 +217,13 @@ extension CalculatorViewController {
         
         do {
             let result = try formula.result()
-            updateCalculateResult(by: result)
+            updateResult(by: result)
         } catch (let error) {
             handle(error: error)
         }
     }
     
-    private func updateCalculateResult(by result: Double) {
+    private func updateResult(by result: Double) {
         if currentOperand.contains(Const.dot) {
             operandLabel.text = result.description.addedCommaToInteger()
         } else {
