@@ -11,16 +11,14 @@ final class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var operationRecord: UIStackView!
     @IBOutlet weak var operationRecordScrollView: UIScrollView!
-    var allOperations: [String] = []
-
+    private var allOperations: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         clearAllHistory()
     }
-}
-
-// MARK: IBAction
-extension ViewController {
+    
+    // MARK: IBAction
     @IBAction func clickNumberButton(_ sender: UIButton) {
         let currentNumber = currentNumberLabel.text.bind()
         let buttonTitle = sender.currentTitle.bind()
@@ -89,7 +87,7 @@ extension ViewController {
             currentNumberLabel.text = "0"
         }
     }
-
+    
     @IBAction func clickCalculateButton(_ sender: UIButton) {
         let currentNumber = currentNumberLabel.text.bind()
         let currentOperator = currentOperatorLabel.text.bind()
@@ -105,17 +103,15 @@ extension ViewController {
             allOperations = []
         }
     }
-}
-
-// MARK: private funtion
-private extension ViewController {
-    func clearAllHistory() {
+    
+    // MARK: private funtion
+    private func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
         currentNumberLabel.text = "0"
         currentOperatorLabel.text = ""
     }
     
-    func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
+    private func addNumberAndOperator(_ currentOperator: String, _ currentNumber: String) {
         let operatorLabel = makeLabel()
         let numberLabel = makeLabel()
         numberLabel.text = currentNumber.changeDecimalFormat()
@@ -136,7 +132,7 @@ private extension ViewController {
         currentNumberLabel.text = "0"
     }
     
-    func makeStackView(_ views: [UIView]) -> UIStackView {
+    private func makeStackView(_ views: [UIView]) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: views)
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -145,7 +141,7 @@ private extension ViewController {
         return stackView
     }
     
-    func makeLabel() -> UILabel {
+    private func makeLabel() -> UILabel {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
