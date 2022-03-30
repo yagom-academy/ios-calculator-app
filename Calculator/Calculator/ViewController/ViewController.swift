@@ -159,7 +159,7 @@ private extension ViewController {
     return label
   }
   
-  func makeformatter() {
+  func convertNumberLabelToformatter() {
     let numberFormatter = NumberFormatter()
     let doubleNumber = Double(visibleNumber)
     
