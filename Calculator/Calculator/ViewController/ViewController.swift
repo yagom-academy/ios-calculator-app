@@ -142,7 +142,7 @@ private extension ViewController {
   
   func makeStackView(_ operatorString: String, _ numberString: String) -> UIStackView {
     let stackView = UIStackView()
-    stackView.spacing = Asset.staticViewSpacing
+    stackView.spacing = 10
     
     [makeLabel(operatorString),
      makeLabel(numberString)].forEach {
@@ -166,7 +166,7 @@ private extension ViewController {
     }
       
     numberFormatter.numberStyle = .decimal
-    numberFormatter.maximumFractionDigits = Asset.maximum20Digits
+    numberFormatter.maximumFractionDigits = 20
     self.numberLabel.text = numberFormatter.string(for: doubleNumber)
   }
 }
