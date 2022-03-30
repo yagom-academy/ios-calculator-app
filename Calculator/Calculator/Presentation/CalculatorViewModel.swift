@@ -45,15 +45,18 @@ final class CalculatorViewModel {
     var value = self.operandValue.value
     if value == "0" && numberString == "00" {
       value = "0"
+      self.operandValue.next(value)
+      return
     } else if value == "0" && numberString != "00" {
       value = numberString
+      self.operandValue.next(value)
+      return
+    }
+    if self.isResult {
+      value = numberString
+      self.isResult = false
     } else {
-      if self.isResult {
-        value = numberString
-        self.isResult = false
-      } else {
-        value += numberString
-      }
+      value += numberString
     }
     self.operandValue.next(value)
   }
