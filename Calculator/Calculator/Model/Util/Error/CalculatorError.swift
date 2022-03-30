@@ -10,7 +10,6 @@ import Foundation
 enum CalculatorError {
   case divisionByZero
   case nonNumber
-  case nonOperator
 }
 
 extension CalculatorError: LocalizedError {
@@ -20,8 +19,6 @@ extension CalculatorError: LocalizedError {
       return "NaN"
     case .nonNumber:
       return "numberError"
-    case .nonOperator:
-      return "operatorError"
     }
   }
 }
