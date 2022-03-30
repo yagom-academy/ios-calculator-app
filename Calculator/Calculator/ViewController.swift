@@ -7,7 +7,7 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    @IBOutlet weak var currentNumberLabbel: UILabel!
+    @IBOutlet weak var currentNumberLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var operationRecord: UIStackView!
     @IBOutlet weak var operationRecordScrollView: UIScrollView!
@@ -22,20 +22,20 @@ final class ViewController: UIViewController {
 // MARK: IBAction
 extension ViewController {
     @IBAction func clickNumberButton(_ sender: UIButton) {
-        let currentNumber = currentNumberLabbel.text.bind()
+        let currentNumber = currentNumberLabel.text.bind()
         let buttonTitle = sender.currentTitle.bind()
         
         guard currentNumber.removeComma().count < 20 else { return }
         
         if currentNumber == "0" {
-            currentNumberLabbel.text = buttonTitle
+            currentNumberLabel.text = buttonTitle
         } else {
-            currentNumberLabbel.text = (currentNumber + buttonTitle).changeDecimalFormat()
+            currentNumberLabel.text = (currentNumber + buttonTitle).changeDecimalFormat()
         }
     }
     
     @IBAction func clickOperatorButton(_ sender: UIButton) {
-        let currentNumber = currentNumberLabbel.text.bind()
+        let currentNumber = currentNumberLabel.text.bind()
         let currentOperator = currentOperatorLabel.text.bind()
         
         if currentNumber != "0" {
@@ -45,27 +45,27 @@ extension ViewController {
     }
     
     @IBAction func clickDotButton(_ sender: UIButton) {
-        let currentNumber = currentNumberLabbel.text.bind()
+        let currentNumber = currentNumberLabel.text.bind()
         
         guard currentNumber.contains(".") == false else { return }
-        currentNumberLabbel.text = currentNumber + "."
+        currentNumberLabel.text = currentNumber + "."
     }
     
     @IBAction func clickZeroButton(_ sender: UIButton) {
-        let currentNumber = currentNumberLabbel.text.bind()
+        let currentNumber = currentNumberLabel.text.bind()
         let zeros = sender.currentTitle.bind()
         
         guard currentNumber.removeComma().count < 20 else { return }
         
         if currentNumber.contains(".") == true {
-            currentNumberLabbel.text = currentNumber + zeros
+            currentNumberLabel.text = currentNumber + zeros
         } else {
-            currentNumberLabbel.text = (currentNumber + zeros).changeDecimalFormat()
+            currentNumberLabel.text = (currentNumber + zeros).changeDecimalFormat()
         }
     }
     
     @IBAction func clickPlusMimusSign(_ sender: UIButton) {
-        var currentNumber = currentNumberLabbel.text.bind()
+        var currentNumber = currentNumberLabel.text.bind()
         
         guard currentNumber != "0" else { return }
         
@@ -74,7 +74,7 @@ extension ViewController {
         } else {
             currentNumber.insert("-", at: currentNumber.startIndex)
         }
-        currentNumberLabbel.text = currentNumber.changeDecimalFormat()
+        currentNumberLabel.text = currentNumber.changeDecimalFormat()
     }
     
     @IBAction func clickAC(_ sender: UIButton) {
@@ -86,12 +86,12 @@ extension ViewController {
         if allOperations.isEmpty {
             clearAllHistory()
         } else {
-            currentNumberLabbel.text = "0"
+            currentNumberLabel.text = "0"
         }
     }
 
     @IBAction func clickCalculateButton(_ sender: UIButton) {
-        let currentNumber = currentNumberLabbel.text.bind()
+        let currentNumber = currentNumberLabel.text.bind()
         let currentOperator = currentOperatorLabel.text.bind()
         
         if allOperations.isEmpty != true {
@@ -101,7 +101,7 @@ extension ViewController {
             let result = formula.result()
             
             currentOperatorLabel.text = ""
-            currentNumberLabbel.text = String(result).changeDecimalFormat()
+            currentNumberLabel.text = String(result).changeDecimalFormat()
             allOperations = []
         }
     }
@@ -111,7 +111,7 @@ extension ViewController {
 private extension ViewController {
     func clearAllHistory() {
         operationRecord.subviews.forEach { $0.removeFromSuperview() }
-        currentNumberLabbel.text = "0"
+        currentNumberLabel.text = "0"
         currentOperatorLabel.text = ""
     }
     
@@ -133,7 +133,7 @@ private extension ViewController {
         let numberWithoutComma = currentNumber.removeComma()
         allOperations.append(numberWithoutComma)
         
-        currentNumberLabbel.text = "0"
+        currentNumberLabel.text = "0"
     }
     
     func makeStackView(_ views: [UIView]) -> UIStackView {
