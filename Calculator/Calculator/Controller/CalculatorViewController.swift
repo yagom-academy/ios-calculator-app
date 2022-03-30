@@ -199,13 +199,13 @@ extension CalculatorViewController {
     
     private func updateRecord(operand: String, operator: String) {
         if topRecordStackView.subviews.count == .zero {
-            let ExpressionStackView = ExpressionStackView(operand: operand)
-            topRecordStackView.addArrangedSubview(ExpressionStackView)
+            let stackView = ExpressionStackView(operand: operand)
+            topRecordStackView.addArrangedSubview(stackView)
             return
         }
         
-        let ExpressionStackView = ExpressionStackView(operator: `operator`, operand: operand)
-        topRecordStackView.addArrangedSubview(ExpressionStackView)
+        let stackView = ExpressionStackView(operator: `operator`, operand: operand)
+        topRecordStackView.addArrangedSubview(stackView)
         
         topRecordScrollView.scrollToBottom()
     }
