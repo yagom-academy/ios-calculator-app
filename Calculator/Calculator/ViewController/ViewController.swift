@@ -164,7 +164,7 @@ private extension ViewController {
     guard let doubleNumber = Double(visibleNumber) else {
       return
     }
-      
+    
     numberFormatter.numberStyle = .decimal
     numberFormatter.maximumFractionDigits = 20
     self.numberLabel.text = numberFormatter.string(for: doubleNumber)

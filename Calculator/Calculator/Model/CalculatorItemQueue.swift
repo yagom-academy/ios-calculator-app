@@ -31,6 +31,6 @@ struct CalculateItemQueue<T: CalculateItem> {
   }
   
   func isEmpty() -> Bool {
-    return list.isEmpty()
+    return list.isEmpty
   }
 }
