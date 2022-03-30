@@ -2,7 +2,7 @@
 //  String+Extension.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/18.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 extension String {

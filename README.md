@@ -1,7 +1,7 @@
 # 계산기 I 프로젝트 저장소
 
 > 프로젝트 기간 2022.03.14 ~ 2022.03.25 </br>
-팀원 : [@Lingo](https://github.com/llingo) / 리뷰어 : [@엘림](https://github.com/lina0322)
+팀원 : [@Lingo](https://github.com/llingo) [@mmim](https://github.com/JoSH0318) / 리뷰어 : 👑 [@엘림](https://github.com/lina0322)
 
 ## 목차
 
@@ -9,317 +9,106 @@
 - [UML](#UML)
 - [STEP 1](#step-1)
     + [고민 및 해결한 점](#고민_및_해결한_점)
-- [STEP 2](#step-2)
-    + [고민 및 해결한 점](#고민_및_해결한_점)
-- [STEP 3](#step-3)
-    + [고민 및 해결한 점](#고민_및_해결한_점)
 - [그라운드 룰](#그라운드-룰)
-    + [활동 시간](#진행-방식)
+    + [스크럼](#스크럼)
     + [코딩 컨벤션](#코딩-컨벤션) 
 
 ---
 
 ## UML
-### STEP 1 UML
-<img width="500" alt="스크린샷 2022-03-15 오전 10 31 59" src="https://user-images.githubusercontent.com/94151993/158294801-13c102dd-69b2-4f25-ab3e-e9c9bb0f9b8a.png">
-
-### STEP 2 UML
-<img width="800" alt="6189d7537c82755a83c68a7d" src="https://user-images.githubusercontent.com/94151993/158860793-b0c46671-50be-4dc7-ad6b-534f1a9917fc.jpeg">
-
-### STEP 3 UML (통합)
-![계산기I UML](https://user-images.githubusercontent.com/94151993/159829422-d2133937-ddc6-4f8e-a369-bb57784f78b3.png)
+![계산기 II](https://user-images.githubusercontent.com/94151993/160551272-085dad6c-3a19-46d9-b5f0-6e16d57367fd.png)
 
 ---
 
 ## [STEP 1]
 ### 고민 및 해결한 점
+1️⃣ 커밋 단위를 어떻게 할 것 인가
 
-### 1. removeAll vs []
-리스트를 직접 구현하기전에는 [Element] 배열을 사용하여 구현했었습니다. 그때 모든 원소를 삭제하는 방법으로 removeAll 메서드를 사용하거나 빈배열 [] 을 넣는 방법이 있었고 두 개의 차이가 무엇인지 궁금했습니다.
-[StackOverFlow - Performance removeAll vs []](https://stackoverflow.com/questions/54133045/performance-array-removeall-vs) 를 참고한 후 [Swift - Array.swift](https://github.com/apple/swift/blob/ad50a39b120343f4827edb0a5a7013bb586306a6/stdlib/public/core/Array.swift#L1255)의 removeAll 구현 함수를 살펴보았더니 
-만약, capacity를 유지하지 않으면 _Buffer() 를 할당해준다고 되어있었습니다. 
-```swift
-@inlinable
-public mutating func removeAll(keepingCapacity keepCapacity: Bool = false) {
-  if !keepCapacity {
-    _buffer = _Buffer()
-  }
-  else {
-    self.replaceSubrange(indices, with: EmptyCollection())
-  }
-}
-```
+계산기 I의 STEP1~3의 순서에 따라 변경사항이 없으면 파일을 기준으로 커밋을 하였고 변경사항이 있다면 기능을 기준으로 커밋을 진행했습니다.
 
-_Buffer는 objc일 경우 _ArrayBuffer<Element>, 아닐 경우 _ContiguousArrayBuffer<Element> 의 타입 별칭이며 
-_ContiguousArrayBuffer는 구조체로 선언되어있고 _ArrayBufferProtocol을 채택하고 있는 Array를 의미하여 결국 _buffer = _Buffer()는 새로운 Array를 넣어준다고 생각했고 capacity를 유지해야하는 경우가 아니라면 두 경우는 큰 차이가 없다고 이해했습니다.
-```swift
-#if _runtime(_ObjC)
-@usableFromInline
-internal typealias _Buffer = _ArrayBuffer<Element>
-#else
-@usableFromInline
-internal typealias _Buffer = _ContiguousArrayBuffer<Element>
-#endif
-```
+- 계산기 I의 STEP1 ~ 3까지 순서
+- 변경사항이 없으면 파일 기준
+- 변경사항이 생기면 기능 기준
 
-### 2. List를 직접 구현하는 과정에서 발생한 구조체 에러에 대해
-직접 구현한 List의 Node를 구조체로 구현하려고 했을때 다음과 같은 에러가 발생했었습니다. 
-```
-Value type 'CalculatorNode<Element>' cannot have a stored property that recursively contains it
-```
-원인을 찾아보니 동적 메모리 영역인 힙을 사용하는 참조타입과 달리 구조체는 정적 메모리 영역인 스택만 사용하기 때문에 구조체는 컴파일 단계 에서 고정된 메모리 크기를 가지고 있어야하는데 Node 내부의 Node 내부를 프로퍼티로 가지게 되면 `Node[Node[Node[Node...` 로 무한한 크기를 가지게 되기 때문에 에러가 발생하는 것이었습니다. ([StackOverFlow - struct can't have stored property itself](https://stackoverflow.com/questions/53626802/struct-cannot-have-stored-property-that-references-itself-but-it-can-have-an-arr))
+2️⃣ 합치는 기준은 무엇으로 둘 것인가
 
-따라서, LinkedList는 구조체로 Node는 클래스로 `next` 프로퍼티를 통해 다음 Node를 참조하도록 구현했습니다.
+본격적으로 코드를 합치는 과정에 앞서 서로의 코드를 설명하고 충분히 이해하는 시간을 가졌습니다.
+그리고 몇가지 기준을 세우고, 그 기준에 맞춰 코드를 합쳤습니다.
 
-### 3. UML 작성시 제네릭과 프로토콜의 관계 설정에 대해
-각 타입의 제네릭 Element가 CalculateItem 프로토콜을 채택해야하는 상황인데 UML에서는 어떻게 그려야할 지 모르겠습니다.
-저는 제네릭 Element의 데이터를 직접 담는 타입이 CalculatorNode의 data 프로퍼티이기 때문에 CalculatorNode에서 CalculateItem  프로토콜을 실체화 관계로써 작성했는데 엘림의 의견은 어떠한지 궁금합니다!
+1. 팀원이 완벽히 이해하고 있는 코드를 사용한다. 
+(이해하지 못하면 쓰지 않고 꼭 서야한다면 이해할 때까지 설명해야한다.)
+2. 코드의 로직이 꼬이지 않는 선에서 합한다.
+3. 요구사항에 어긋나거나, 부족한 점을 서로의 코드에서 채워나간다.
+ 
+3️⃣ 합치는 과정에서 생긴 오류
+1. 서로가 이해했던 요구사항이 달랐기 때문에 요구사항 정의에서 합의가 필요했습니다.
+2. 각자가 설계한 프로젝트 구조와 데이터를 처리하는 로직의 설계가 달라 로직의 흐름을 변경하게되면 사이드이펙트가 발생하는 문제가 있었습니다.
 
-### 4. TDD를 처음 진행하면서 고민되었던 사항
-**LinkedList의 front와 rear가 같은 인스턴스를 참조하는지 확인**하는 테스트를 작성하고 이를 통과하도록 구현하는 과정에서 front와 rear를 `internal`로 설정 했었는데 이후 리팩토링 과정에서 front와 rear를 `private`로 외부에서 접근을 못하도록 감춰야 된다면 위의 테스트 코드는 실패하게됩니다. 
-이럴때 구현했던 테스트코드를 제거하는 것인지 `private(set)`을 사용해 front와 rear 프로퍼티를 `읽기전용`으로 변경하더라도 테스트 코드를 살려둬야하는지 궁금합니다. 저는 이번 PR에서는 `private(set)`으로 `읽기전용`으로 변경하여 테스트코드를 제거하지 않았습니다.
+> 따라서, 최대한 팀원의 로직의 흐름을 끊지 않는 선에서 부족한 요구사항을 보완했습니다.
 
-### 5. 기타
-테스트 코드에서 테스트 함수에 `private`를 설정하면 테스트가 진행되지 않는다는 것을 모든 테스트 함수에 적용한 후에 알았습니다 🥲 
-
-UML에서 보통 접근제어 표시를 `private: -`, `public: +`, `protected: #`으로 표기하지만 swift에는 protected 접근제어자가 없고 `private(set)`이라는 `읽기전용`이 있기 때문에 이번 프로젝트에서 #을 `private(set)`라는 의미로 표기했습니다.
-
----
-
-## [STEP 2]
-### 고민 및 해결한 점
-
-### 1. UML 요구 조건 분석에서 어려웠던 점
-이번 STEP 2는 UML이 주어졌기 때문에 각각의 타입과 메서드들이 하는 역할에 대해 코드를 구현하기전 분석이 필요했고 다음과 같은 고민이 있었습니다. 
-
-먼저, String 타입에서 extension으로 구현해야하는 `split()`과 ExpressionParser 타입의 `componentsByOperators()`, `parse()` 메서드들을 어떻게 구현해야하며 왜 필요할까?
-
-둘째, 처음에는 `"1+2x-1"`과 같이 입력이 붙어있는 경우로 생각했고 `x-1`와 같이 연산자와 음수값이 붙어있을때 어떻게 처리해야할까?
-
-결론적으로 사용자 입력에서 연산자와 피연산자 사이에 한칸씩 띄워져 있다고 생각했습니다. 예를 들어, 사용자 입력 : "1 + 2 x -1" 이 들어왔다면,
-1. `componentsByOperators()`에서 사용자 입력을 파라미터로 받고 `split()`메서드를 통해 `["1", "+", "2", "x", "-1"]`을 반환
-(`componentsByOperators()`에서는 `split()`의 결과가 [""]과 같이 빈 문자가 요소로 있는 경우를 필터링합니다.)
-2. `parse()`에서 앞선 단계에서 받은 `["1", "+", "2", "x", "-1"]`에서 **연산자**와 **피연산자**를 구분해서 새로 생성한 Formula 인스턴스의 큐에 각각 enqueue 하고 Formula 인스턴스를 반환하는 역할을 수행합니다.
-
-### 2. 숫자를 0으로 나누는 경우에 대한 처리
-숫자를 0으로 나누었을때 NaN(Not a Number)이 나와야하며 이를 어떻게 처리해야할 지에 대해 고민했습니다. Double.zero 와 같이 Double 타입에는 .nan이 존재하여 Operator의 divide 메서드 내부에서 `rhs == .zero` 일때 `.nan`를 반환하도록 하는 방법을 사용했습니다.
-```swift
-private func divide(lhs: Double, rhs: Double) -> Double {
-  if rhs == .zero {
-    return .nan
-  }
-  return lhs / rhs
-}
-```
-
-### 3. 중복 들여쓰기를 하지 않도록 하려면 어떻게 구현해야할까?
-기존 ExpressionParser 타입의 `parse()` 메서드의 **연산자**와 **피연산자**로 구분하는 로직에서 이중 if 문(들여쓰기)을 사용해서 구현했었습니다. 하지만, 이번 프로젝트의 요구 조건에는
-```
-코드 들여쓰기를 2번을 초과하지 않습니다.
-예) if문 안의 if문은 들여쓰기를 두 번 한것입니다.
-```
-가 명시되어 있기 때문에 **중복 들여쓰기를 해결할 방법**에 대해 생각했고 __함수형 프로그래밍__ 을 사용하여 해결했습니다.
-```swift
-// 기존
-static func parse(from input: String) -> Formula {
-  var formula = Formula()
-  let inputString = self.componentsByOperators(from: input)
-  inputString.forEach {
-    if let number = Double($0) {
-      formula.operands.enqueue(number)
-    } else if let operation = Operator(rawValue: Character($0)) {
-      formula.operators.enqueue(operation)
-    }
-  }
-  return formula
-}
-```
-
-inputString이라는 변수명을 result로 네이밍을 변경하고 result를 forEach로 순회할때 if 문으로 분기처리해줬던 로직을
-filter, compactMap으로 전처리를 해준 결과를 forEach로 순회하는 방법으로 리팩토링했습니다.
-
-```swift
-// 개선 (리팩토링)
-static func parse(from input: String) -> Formula {
-  var formula = Formula()
-  let result = self.componentsByOperators(from: input)
-  result
-    .compactMap { Double($0) }
-    .forEach {
-      formula.operands.enqueue($0)
-    }
-  result
-    .filter { Double($0) == nil }
-    .compactMap { Operator(rawValue: Character($0)) }
-    .forEach {
-      formula.operators.enqueue($0)
-    }
-  return formula
-}
-```
-
-### 4. 기타 (STEP 1 PR의 피드백)
-- STEP 1 PR의 피드백을 통해 의존성 주입에 대해 잘못 알고 있던 오개념을 바로 잡을 수 있었습니다! 😃
-- 구조체에서 생성자를 extension에 구현할 때와 안할 때의 차이점에 대해 알 수 있었습니다
-- `mutating` 과 `final` 키워드에 대해 더 자세히 알 수 있었습니다.
-- 타입을 명시하고 안하는 것에 대한 기준을 잡자.
-- 테스트 코드는 성공/실패하는 케이스를 골고루 작성하자.
-- 테스트 코드를 작성할 때 모든 것을 테스트하는 것도 중요하지만 `무엇을` `왜` `어떻게`를 생각해봐야한다. 😅
-
-
-
----
-
-## [STEP 3]
-### 고민 및 해결한 점
-
-### 기능 구현
-### AC 버튼
-|2+3-4+5 입력 후 AC 클릭|2+3-4+5= 입력 후 AC 클릭|
-|:---:|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159833554-4f082b7d-e2c4-487a-bead-635428c44b27.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159833811-ccba6ed6-2084-4dfb-a7f8-3f0141447d1b.gif">|
-
-### CE 버튼
-|2+3-4+5 입력 후 CE 클릭|2+3-4+ 입력 후 CE 클릭|2+3-4+5= 입력 후 CE 클릭|
-|:---:|:---:|:---:|
-|<img width="300" alt="" src="https://user-images.githubusercontent.com/94151993/159834266-825eb6f8-3ada-4e6b-bf95-f81c48f799c1.gif">|<img width="300" alt="" src="https://user-images.githubusercontent.com/94151993/159834275-c6eed4d4-d625-4308-a1f9-71fc1dd15464.gif">|<img width="300" alt="" src="https://user-images.githubusercontent.com/94151993/159834282-c7cf97a8-9660-41c7-9d2b-67ffcd690aa9.gif">|
-
-### +/- 버튼
-|입력 후 +/- 클릭 (0일때는 부호를 변경하지 않는다)|
-|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834358-72f0aa2d-9189-40f3-83b8-c2fe2192864c.gif">|
-
-### 사칙연산 버튼
-|연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력|숫자입력이 없는 상태인 0에서는 연산자를 반복해도 연산하지 않고 종류만 변경|
-|:---:|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834649-d1ee707b-621b-4c19-8b6d-f5db7ee530aa.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834672-6bc66522-eb4a-46f1-a4f3-abdaa6842050.gif">|
-
-### 계산 버튼
-|= 버튼을 누르면 입력된 연산을 한 번에 수행|연산 후 다시 =을 눌러도 이전 연산을 다시 연산 X|
-|:---:|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834753-e09c71ea-cbb7-4ff2-9d78-3dd77ab513e9.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835001-1c969580-f0e8-45ac-97b2-721ffc0b99ad.gif">|
-
-|2+3*3-1 의 연산결과는 14|3/3+2-1 의 연산결과는 2|1+2-3*2-3/6 의 연산결과는 -0.5|
-|:---:|:---:|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834763-21db5b15-eaf2-4e32-9bc8-1378b06b274b.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834758-1b9fdfd5-e071-47d7-806b-a29ba2b03525.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159834770-c2158c9d-0b39-4eb1-bca7-73366244eda4.gif">|
-
-### 보여주는 화면
-|0.123000000 → 0.123 / 1.22340000 → 1.2234|숫자는 3자리마다 쉼표(,)를 표기|
-|:---:|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835322-3531da93-0f07-46e9-8900-c36cc8870aa4.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835330-e034130e-1b38-4544-a743-80ae4a92011e.gif">|
-
-### 0으로 나누는 경우
-|0으로 나누기에 대해서는 결과값을 NaN으로 표기|
-|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159835346-1ca7a613-f426-431e-ac76-a6cde4a37acc.gif">|
-
-## 고민 및 해결한 점
-### 1. 테스트 가능하도록 설계하는 것에 대해
-이번 프로젝트는 **TDD 방법론의 사용과 XCTest를 사용하여 테스트 가능한 코드를 만드는 것**이 중요하다고 생각했습니다. 
-STEP 1, 2 의 경우 테스트하기 쉬운 환경이었지만 CalculatorViewController의 경우 UI 요소와의 연결로 인해 복잡하게 얽혀있는 환경이라 테스트 코드를 작성하는데 어려움이 있었습니다.
-
-CalculatorViewModel 이라는 클래스를 두어 화면에 보여줄 데이터에 대한 변환을 진행하고 CalculatorViewController는 오직 ViewModel에서 오는 데이터를 UI로 보여주는 역할만 하도록하여 CalculatorViewModel 에 대한 테스트 코드를 작성하여 UI 요소와 얽혀있었던 문제를 해결했습니다.
-
-CalculatorViewController 에서 CalculatorViewModel의 데이터를 bind 함수를 통해 데이터가 변경되면 실행될 클로저를 정의해주고 next 함수를 통해 값을 보내주면 subscriber에 저장되어있던 클로저가 실행되면서 CalculatorViewController의 UI 요소를 변경하도록 했습니다.
-```swift
-final class Observable<T> {
-  private var subscriber: ((T) -> Void)?
-  private(set) var value: T {
-    didSet {
-      subscriber?(value)
-    }
-  }
-  
-  init(_ value: T) {
-    self.value = value
-  }
-  
-  func bind(_ subscriber: @escaping (T) -> Void) {
-    subscriber(self.value)
-    self.subscriber = subscriber
-  }
-  
-  func next(_ value: T) {
-    self.value = value
-  }
-}
-```
-이렇게 구현하는 것이 MVVM 패턴과 비슷한 것 같은데 .. 아직 공부가 필요할 것 같습니다 😅
-
-### 2. 결과가 보여질 ScrollView의 자동 스크롤
-<img width="800" alt="" src="https://user-images.githubusercontent.com/94151993/159837627-8cc80866-ff3f-43f5-b71e-7ac1bb62d9d8.png">
-
-위의 그림처럼 resultScrollView의`contentOffset` 값을 변경하여 자동으로 아래로 스크롤하도록 변경했습니다.
-```swift
-func scrollToDown() {
-  let contentSizeHeight = self.resultScrollView.contentSize.height
-  let boundsHeight = self.resultScrollView.bounds.size.height
-  let contentInsetBottom = self.resultScrollView.contentInset.bottom
-  let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
-  if pointY > 0 {
-    let contentOffset = CGPoint(x: 0, y: pointY + 24)
-    self.resultScrollView.setContentOffset(contentOffset, animated: true)
-  }
-}
-```
-하지만, 생각한 것과 달리 약간의 오차가 발생했습니다. 이를 보정하기 위해 +24를 추가로 해주었는데 아직 근본적인 문제를 해결하지 못했습니다 🥲 
-|기존 에러|+24로 보정|
-|:---:|:---:|
-|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159838308-24b73f98-96ce-46da-9fde-20216f1aaf09.gif">|<img width="250" alt="" src="https://user-images.githubusercontent.com/94151993/159838361-e2a5f8ff-e6bf-49bb-83e1-e908b604d15c.gif">|
-
-**+ 수정 (2022.03.25)**
-resultScrollView 내부의 resultStackView에 addArrangedSubview 한 후에 scrollDown 함수가 불릴때 아직 Layout 반영되는 사이클이 오지 않아 문제가 발생했던 것이었습니다. (아직 Main Run Loop의 Update Cycle이 오지 않아서 생긴 문제)
-
-따라서, scrollDown 함수가 호출될때 layout을 즉시 하도록 `layoutIfNeeded`를 사용하여 수정했습니다!
-```swift
-func scrollToDown() {
-  self.resultScrollView.layoutIfNeeded()
-  let contentSizeHeight = self.resultScrollView.contentSize.height
-  let boundsHeight = self.resultScrollView.bounds.size.height
-  let contentInsetBottom = self.resultScrollView.contentInset.bottom
-  let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
-  if pointY > 0 {
-    let contentOffset = CGPoint(x: 0, y: pointY)
-    self.resultScrollView.setContentOffset(contentOffset, animated: true)
-  }
-}
-```
-
+4️⃣ bind 메서드 로직 변경한 점
+1. ❓`1234.0`값을 입력하면 현재 입력값을 나타내는 Label에는 `1,234.0` 표시되어야 합니다. 하지만 `1234`를 나오는 오류가 있었고, 이를 해결하기 위해 변경해야 했습니다.
+2. 해당 오류는 `1234.0`가 formtter를 거치며 생기는 오류로 판단했습니다.
+3. ❗️`.`을 기준으로 두 개 요소로 배열에 담고, 정수만 formatter를 거치게하고 소수점 이후는 거치지 않는 형태로 Label에 할당하도록 했습니다.
+4. 입력하는 경우와 계산하는 경우에서 `.`을 처리하는 방식이 달라져야하므로 계산하는 경우에는 한번도 formatter를 거치도록 변경했습니다.
+5. ❓ViewModel의 OperandValue 프로퍼티의 값이 바뀌면 ViewController의 Label에 새로운 값을 할당하는 클로저가 길어지는 문제가 생겼습니다.
+6. ❗️데이터를 Label에 들어갈 값으로 변경하는 로직을 메서드로 기능을 분리하는 방법으로 해결했습니다.
 
 ---
 
 ## 그라운드 룰
-### 진행 방식
-- 매일 아침 9시 - 23시 (with: 중간에 식사나 휴식)
-- UML 설계 후 TDD 방법론에 따른다.
-- 중간에 발생하는 트러블슈팅을 노션에 기록한다.
-- 칸반보드와 이슈를 사용한다.
+🪧 Lingo, mmim 팀 그라운드 룰
+
+### 스크럼
+스크럼은 딱딱한 분위기보단 자유롭고 부드러운 분위기로 😋
+매일 아침 10시, 디스코드에서 진행
+어제의 활동 리뷰
+오늘 활동 예정 사항 / 목표
+자신의 부족한 부분 / 우리 팀이 아쉬운 부분 토론
+컨디션 공유 😰
+공유하고 싶은 이슈, 꿀팁 공유
+스크럼 진행시간은 최대 30분을 넘기지 않기 ⏱
+상황에 따라 조정 가능
+
+#### 세션 있는 날
+데일리 스크럼 + 18시 30분 ~ 진행
+
+#### 세션 없는 날
+데일리 스크럼 + 13시 ~ 진행
 
 ---
 
 ### 코딩 컨벤션
-### 1. Swift 코드 스타일
+#### Swift 코드 스타일
 코드 스타일은 [스타일쉐어 가이드 컨벤션](https://github.com/StyleShare/swift-style-guide#%EC%A4%84%EB%B0%94%EA%BF%88) 에 따라 진행한다.
 
-### 2. 커밋 메시지
-**2-1. 커밋 Titie 규칙**
+### Commit 규칙
+커밋 제목은 최대 50자 입력
+본문은 한 줄 최대 72자 입력
+
+### Commit 제목 규칙
 ```
-feat: 새로운 기능의 추가
-fix: 버그 수정
-docs: 문서 수정
-style: 스타일 관련 기능(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
-refactor: 코드 리펙토링
-test: 테스트 코트, 리펙토링 테스트 코드 추가
-chore: 빌드 업무 수정, 패키지 매니저 수정(ex .gitignore 수정 같은 경우)
+[chore] : 코드 수정, 내부 파일 수정
+[feat] : 새로운 기능 구현
+[style] : 스타일 관련 기능(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
+[add] : Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성 시
+[fix] : 버그, 오류 해결
+[del] : 쓸모없는 코드 삭제
+[docs] : README나 WIKI 등의 문서 개정
+[mod] : storyboard 파일,UI 수정한 경우
+[correct] : 주로 문법의 오류나 타입의 변경, 이름 변경 등에 사용합니다.
+[move] : 프로젝트 내 파일이나 코드의 이동
+[rename] : 파일 이름 변경이 있을 때 사용합니다.
+[improve] : 향상이 있을 때 사용합니다.
+[refactor] : 전면 수정이 있을 때 사용합니다
+[merge]: 다른브렌치를 merge 할 때 사용합니다.
 ```
 
-**2-2. 커밋 Body 규칙**
-```
-현재 시제를 사용, 이전 행동과 대조하여 변경을 한 동기를 포함하는 것을 권장
-문장형으로 끝내지 않기
-subject와 body 사이는 한 줄 띄워 구분하기
-subject line의 글자수는 50자 이내로 제한하기
-subject line의 마지막에 마침표(.) 사용하지 않기
-body는 72자마다 줄 바꾸기
-body는 어떻게 보다 무엇을, 왜 에 맞춰 작성하기
-```
+### Commit Body 규칙
+제목 끝에 마침표(.) 금지
+한글로 작성
+
+### 브랜치 이름 규칙
+`II-STEP1`, `II-STEP2`, `II-STEP3`
+
+

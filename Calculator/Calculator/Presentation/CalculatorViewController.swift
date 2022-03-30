@@ -2,7 +2,7 @@
 //  CalculatorViewController.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/14.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 import UIKit
@@ -54,13 +54,18 @@ final class CalculatorViewController: UIViewController {
     }
     if self.viewModel.addOperator(of: operatorString) {
       self.resultStackView.addArrangedSubview(stackView)
-      self.scrollToDown()
+      self.resultScrollView.scrollToBottom()
     }
   }
   
   @IBAction private func didTapNumberButton(_ sender: UIButton) {
     guard let numberString = sender.titleLabel?.text else {
       return
+    }
+    if self.viewModel.isResult {
+      self.resultStackView.arrangedSubviews.forEach {
+        $0.removeFromSuperview()
+      }
     }
     self.viewModel.addOperand(of: numberString)
   }
@@ -79,19 +84,31 @@ private extension CalculatorViewController {
       self?.operatorLabel.text = operatorType
     }
     self.viewModel.operandValue.bind { [weak self] operand in
-      self?.changeOperandLabel(of: operand)
+      let splitedOperand = operand.split(with: ".")
+      self?.operandLabel.text = self?.makeOperandLabel(splitedOperand)
     }
   }
   
-  func changeOperandLabel(of operand: String) {
-    guard self.viewModel.isResult,
-          let operand = Double(operand)
+  func makeOperandLabel(_ splitedOperand: [String]) -> String? {
+    guard let integerString = splitedOperand.first,
+          let integer = Double(integerString)
     else {
-      self.operandLabel.text = operand
-      return
+      return nil
     }
-    self.operandLabel.text = operand.formatString()
-    self.viewModel.isResult = false
+    var result = integer.formatString()
+    if self.viewModel.isDotted,
+        let decimal = result,
+        let fraction = splitedOperand.last
+    {
+      result = "\(decimal).\(fraction)"
+    }
+    if self.viewModel.isResult,
+        let numberString = result?.replacingOccurrences(of: ",", with: ""),
+        let number = Double(numberString)?.formatString()
+    {
+      result = number
+    }
+    return result
   }
   
   func clearAll() {
@@ -107,18 +124,6 @@ private extension CalculatorViewController {
 
   func convertSign() {
     self.viewModel.convertSign()
-  }
-  
-  func scrollToDown() {
-    self.resultScrollView.layoutIfNeeded()
-    let contentSizeHeight = self.resultScrollView.contentSize.height
-    let boundsHeight = self.resultScrollView.bounds.size.height
-    let contentInsetBottom = self.resultScrollView.contentInset.bottom
-    let pointY = contentSizeHeight - boundsHeight + contentInsetBottom
-    if pointY > 0 {
-      let contentOffset = CGPoint(x: 0, y: pointY)
-      self.resultScrollView.setContentOffset(contentOffset, animated: true)
-    }
   }
   
   func makeSubResultStackView() -> UIStackView? {

@@ -2,7 +2,7 @@
 //  CalculatorViewModel.swift
 //  Calculator
 //
-//  Created by Lingo on 2022/03/23.
+//  Created by Lingo, mmim on 2022/03/28.
 //
 
 import UIKit
@@ -11,16 +11,17 @@ final class CalculatorViewModel {
   
   private(set) var operatorType = Observable<String?>(nil)
   private(set) var operandValue = Observable<String>("0")
+  private(set) var isResult: Bool = false
   private var formulas = [String]()
-  private var isDotted: Bool {
+  var isDotted: Bool {
     self.operandValue.value.contains(".")
   }
-  var isResult: Bool = false
   
   func clearAll() {
     self.formulas.removeAll()
     self.operatorType.next(nil)
     self.operandValue.next("0")
+    self.isResult = false
   }
   
   func clearEntry() {
@@ -38,14 +39,22 @@ final class CalculatorViewModel {
   }
   
   func addOperand(of numberString: String) {
-    guard self.operandValue.value.count <= 19 else {
+    guard self.operandValue.value.count <= 14 else {
       return
     }
     var value = self.operandValue.value
     if value == "0" && numberString == "00" {
       value = "0"
+      self.operandValue.next(value)
+      return
     } else if value == "0" && numberString != "00" {
       value = numberString
+      self.operandValue.next(value)
+      return
+    }
+    if self.isResult {
+      value = numberString
+      self.isResult = false
     } else {
       value += numberString
     }
@@ -61,6 +70,7 @@ final class CalculatorViewModel {
   }
   
   func addOperator(of operatorString: String) -> Bool {
+    self.isResult = false
     if self.operandValue.value == "0" && self.operatorType.value == nil {
       return false
     }
@@ -96,8 +106,12 @@ final class CalculatorViewModel {
       return false
     }
     self.isResult = true
+    if result == .zero {
+      self.operandValue.next("0")
+    } else {
+      self.operandValue.next("\(result)")
+    }
     self.operatorType.next(nil)
-    self.operandValue.next("\(result)")
     self.formulas.removeAll()
     return true
   }
