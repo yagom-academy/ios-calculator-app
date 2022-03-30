@@ -225,10 +225,13 @@ extension CalculatorViewController {
     
     private func updateResult(by result: Double) {
         if currentOperand.contains(Const.dot) {
-            operandLabel.text = result.description.addedCommaToInteger()
+            operandLabel.text = result
+                .description
+                .addedCommaToInteger()
         } else {
-            let convertedDoubleToInt = Int(result)
-            operandLabel.text = convertedDoubleToInt.description.addedCommaToInteger()
+            operandLabel.text = Int(result)
+                .description
+                .addedCommaToInteger()
         }
         
         resetOperator()
