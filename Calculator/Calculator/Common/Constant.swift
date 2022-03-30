@@ -5,7 +5,7 @@
 //  Created by 조민호 on 2022/03/23.
 //
 
-enum Constant {
+enum Const {
     static let blank = ""
     static let whiteSpace = " "
     static let dot = "."

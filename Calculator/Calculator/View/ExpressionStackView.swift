@@ -8,8 +8,8 @@
 import UIKit
 
 final class ExpressionStackView: UIStackView {
-    private var operand: String = Constant.blank
-    private var `operator`: String = Constant.blank
+    private var operand: String = Const.blank
+    private var `operator`: String = Const.blank
     
     private lazy var operatorLabel: UILabel = {
         let label = UILabel(frame: .zero)

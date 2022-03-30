@@ -16,13 +16,13 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        input.split(with: Character(Constant.whiteSpace))
+        input.split(with: Character(Const.whiteSpace))
             .compactMap { Double($0) }
             .map { String($0) }
     }
     
     private static func componentsByOperands(from input: String) -> [Operator] {
-        return input.split(with: Character(Constant.whiteSpace))
+        return input.split(with: Character(Const.whiteSpace))
             .filter { Operator.generatedOperatorTypes().contains($0) }
             .compactMap { Operator(rawValue: Character($0)) }
     }

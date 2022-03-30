@@ -6,7 +6,7 @@
 
 import UIKit
 
-fileprivate extension Constant {
+fileprivate extension Const {
     static let zero = "0"
     static let minus = "-"
     static let strangeMinus = "−"
@@ -22,8 +22,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var blockScreenView: UIView!
     
     // MARK: - Property
-    private var currentOperand: String = Constant.zero
-    private var currentOperator: String = Constant.blank
+    private var currentOperand: String = Const.zero
+    private var currentOperator: String = Const.blank
     private var expression = [String]()
     private enum CalculatorStatus {
         case nonCalculated
@@ -81,8 +81,8 @@ extension CalculatorViewController {
     }
     
     private func resetOperand() {
-        currentOperand = Constant.zero
-        operandLabel.text = Constant.zero
+        currentOperand = Const.zero
+        operandLabel.text = Const.zero
     }
 }
 
@@ -93,19 +93,19 @@ extension CalculatorViewController {
     }
     
     private func updatePlusMinusSign() {
-        guard operandLabel.text != Constant.zero,
+        guard operandLabel.text != Const.zero,
               var operand = operandLabel.text else {
             return
         }
         
-        if operand.contains(Constant.minus) {
+        if operand.contains(Const.minus) {
             operand.removeFirst()
             currentOperand.removeFirst()
             operandLabel.text = operand
             return
         } else {
-            operand.insert(Character(Constant.minus), at: operand.startIndex)
-            currentOperand.insert(Character(Constant.minus), at: operand.startIndex)
+            operand.insert(Character(Const.minus), at: operand.startIndex)
+            currentOperand.insert(Character(Const.minus), at: operand.startIndex)
             operandLabel.text = operand
             return
         }
@@ -123,7 +123,7 @@ extension CalculatorViewController {
     }
     
     private func updateOperator(by operator: String) {
-        guard operandLabel.text != Constant.zero else {
+        guard operandLabel.text != Const.zero else {
             operatorLabel.text = `operator`
             return
         }
@@ -150,11 +150,11 @@ extension CalculatorViewController {
     }
     
     private func updateOperand(with operand: String) {
-        guard currentOperand.count < Constant.limitOperandCount else {
+        guard currentOperand.count < Const.limitOperandCount else {
             return
         }
         
-        if currentOperand.first?.description == Constant.zero && currentOperand.contains(Constant.dot) == false {
+        if currentOperand.first?.description == Const.zero && currentOperand.contains(Const.dot) == false {
             currentOperand = operand
             operandLabel.text = currentOperand
             return
@@ -218,8 +218,8 @@ extension CalculatorViewController {
     
     private func calculate() {
         var formula = ExpressionParser.parse(from: expression
-            .joined(separator: Constant.whiteSpace)
-            .replacingOccurrences(of: Constant.strangeMinus, with: Constant.minus))
+            .joined(separator: Const.whiteSpace)
+            .replacingOccurrences(of: Const.strangeMinus, with: Const.minus))
         
         do {
             let result = try formula.result()
@@ -230,7 +230,7 @@ extension CalculatorViewController {
     }
     
     private func updateCalculateResult(by result: Double) {
-        if currentOperand.contains(Constant.dot) {
+        if currentOperand.contains(Const.dot) {
             operandLabel.text = result.description.addedCommaToInteger()
         } else {
             let convertedDoubleToInt = Int(result)
@@ -242,8 +242,8 @@ extension CalculatorViewController {
     }
     
     private func resetOperator() {
-        currentOperator = Constant.blank
-        operatorLabel.text = Constant.blank
+        currentOperator = Const.blank
+        operatorLabel.text = Const.blank
     }
     
     private func handle(error: Error) {
@@ -260,7 +260,7 @@ extension CalculatorViewController {
         if case .dividedByZero = calculatorError,
            let errorDescription = calculatorError.errorDescription {
             operandLabel.text = errorDescription
-            operatorLabel.text = Constant.blank
+            operatorLabel.text = Const.blank
         }
     }
     

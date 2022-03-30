@@ -16,7 +16,7 @@ extension String {
     func addedCommaToInteger() -> String {
         let maximumSignificantDigits = 20
         let numberFormatter = NumberFormatter()
-        let splitCurrentOperand = self.split(with: Character(Constant.dot))
+        let splitCurrentOperand = self.split(with: Character(Const.dot))
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = maximumSignificantDigits
@@ -30,8 +30,8 @@ extension String {
             return self.description
         }
         
-        if self.contains(Constant.dot) {
-            return result + Constant.dot + fractionOperand
+        if self.contains(Const.dot) {
+            return result + Const.dot + fractionOperand
         }
         
         return result
