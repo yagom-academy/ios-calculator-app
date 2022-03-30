@@ -17,11 +17,7 @@ class ViewController: UIViewController {
   
   private var visibleNumber = Asset.blank {
     didSet{
-      let doubleNumber = Double(visibleNumber)
-      guard doubleNumber != nil else {
-        return self.numberLabel.text = visibleNumber
-      }
-      self.numberLabel.text = makeformatter().string(for: doubleNumber)
+      makeformatter()
     }
   }
   
@@ -83,7 +79,6 @@ class ViewController: UIViewController {
   }
   
   @IBAction func tapOperator(_ sender: UIButton) {
-    let doubleNumber = Double(visibleNumber)
     
     guard let inputOperator = sender.titleLabel?.text else {
       return
@@ -93,11 +88,7 @@ class ViewController: UIViewController {
       return
     }
     
-    guard let formatNumber = makeformatter().string(for: doubleNumber) else {
-      return
-    }
-    
-    processStackView.addArrangedSubview(makeStackView(visibleOperator, formatNumber))
+    processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? "Error"))
     self.processScrollView.scrollToBottom()
 
     if visibleNumber != Asset.blank {
@@ -129,14 +120,9 @@ class ViewController: UIViewController {
   }
   
   @IBAction func tapResult(_ sender: UIButton) {
-    let doubleNumber = Double(visibleNumber)
-    
-    guard let formatNumber = makeformatter().string(for: doubleNumber) else {
-      return
-    }
     
     fomula += visibleNumber
-    processStackView.addArrangedSubview(makeStackView(visibleOperator, formatNumber))
+    processStackView.addArrangedSubview(makeStackView(visibleOperator, self.numberLabel.text ?? "Error"))
     self.processScrollView.scrollToBottom()
     visibleNumber.removeAll()
     visibleOperator.removeAll()
@@ -173,12 +159,16 @@ private extension ViewController {
     return label
   }
   
-  func makeformatter() -> NumberFormatter {
+  func makeformatter() {
     let numberFormatter = NumberFormatter()
+    let doubleNumber = Double(visibleNumber)
     
+    guard doubleNumber != nil else {
+      return
+    }
     numberFormatter.numberStyle = .decimal
     numberFormatter.maximumFractionDigits = Asset.maximum20Digits
-    return numberFormatter
+    self.numberLabel.text = numberFormatter.string(for: doubleNumber)
   }
 }
 
