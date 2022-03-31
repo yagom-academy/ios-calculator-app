@@ -94,19 +94,31 @@ extension CalculatorViewController {
     
     private func updatePlusMinusSign() {
         guard operandLabel.text != Const.zero,
-              var operand = operandLabel.text else {
+              let operand = operandLabel.text else {
             return
         }
         
         if operand.contains(Const.minus) {
-            operand.removeFirst()
-            currentOperand.removeFirst()
-            operandLabel.text = operand
+            deleteMinus(with: operand)
         } else {
-            operand.insert(Character(Const.minus), at: operand.startIndex)
-            currentOperand.insert(Character(Const.minus), at: operand.startIndex)
-            operandLabel.text = operand
+            addMinus(with: operand)
         }
+    }
+    
+    private func deleteMinus(with operand: String) {
+        var operand = operand
+        
+        operand.removeFirst()
+        currentOperand.removeFirst()
+        operandLabel.text = operand
+    }
+    
+    private func addMinus(with operand: String) {
+        var operand = operand
+        
+        operand.insert(Character(Const.minus), at: operand.startIndex)
+        currentOperand.insert(Character(Const.minus), at: operand.startIndex)
+        operandLabel.text = operand
     }
 }
 
