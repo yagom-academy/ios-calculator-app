@@ -82,13 +82,13 @@ extension CalculatorViewController {
     }
     
     @IBAction private func operatorButtonsDidTouch(_ sender: UIButton) {
-        if isResultButtonDidTouch == true {
+        if isResultButtonDidTouch {
             isOperandEntered = false
             currentOperandLabel.text = .zero
             currentOperatorLabel.text = sender.currentTitle
         }
         
-        guard isOperandEntered == true else { return }
+        guard isOperandEntered else { return }
         
         checkAndAddLabelToStackView()
         currentOperatorLabel.text = sender.currentTitle
@@ -97,8 +97,8 @@ extension CalculatorViewController {
     }
     
     @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
-        guard !currentOperator.isEmpty else { return }
-        guard !formulaStackView.arrangedSubviews.isEmpty else { return }
+        guard currentOperator.isEmpty == false else { return }
+        guard formulaStackView.arrangedSubviews.isEmpty == false else { return }
         
         checkAndAddLabelToStackView()
         setResult()
@@ -108,7 +108,7 @@ extension CalculatorViewController {
         currentOperandLabel.text = .zero
         currentOperatorLabel.text = .empty
         
-        guard !formulaStackView.arrangedSubviews.isEmpty else { return }
+        guard formulaStackView.arrangedSubviews.isEmpty == false else { return }
         
         for view in formulaStackView.arrangedSubviews {
             view.removeFromSuperview()
@@ -148,7 +148,7 @@ extension CalculatorViewController {
     }
     
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
-        guard currentOperand.contains(".") == false || currentOperand.last != "0" else {
+        if currentOperand.contains(".") && currentOperand.last == "0" {
             return currentOperand
         }
         
@@ -182,9 +182,9 @@ extension CalculatorViewController {
     
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.currentTitle else { return nil }
-        guard !currentOperand.contains(".") || buttonString != "." else { return nil }
         guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
-        guard currentOperand != .zero || buttonString != .doubleZero else { return nil }
+        if currentOperand.contains(".") && buttonString == "." { return nil}
+        if currentOperand == .zero && buttonString == .doubleZero { return nil }
         
         if currentOperand == .zero, buttonString != .decimalPoint {
             currentOperand = .empty
@@ -202,7 +202,7 @@ extension CalculatorViewController {
             return label
         }()
         
-        if isFirstOperand == true {
+        if isFirstOperand {
             resultLabel.text = "\(operandLabelText) "
             formulaStackView.addArrangedSubview(resultLabel)
         } else {
