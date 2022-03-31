@@ -10,38 +10,38 @@ import Foundation
 enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
     
-    func calculate(lhs: Double, rhs: Double) throws -> Double {
+    func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return substract(lhs: lhs, rhs: rhs)
         case .divide:
-            return try divide(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
     }
     
-    func add(lhs: Double, rhs: Double) -> Double {
+    private func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
     }
     
-    func substract(lhs: Double, rhs: Double) -> Double {
+    private func substract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
     }
     
-    func divide(lhs: Double, rhs: Double) throws -> Double {
+    private func divide(lhs: Double, rhs: Double) -> Double {
         if rhs == 0 {
-            throw CalculatorError.divideByZero
+            return .nan
         }
         return lhs / rhs
     }
     
-    func multiply(lhs: Double, rhs: Double) -> Double {
+    private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
     }
 }
