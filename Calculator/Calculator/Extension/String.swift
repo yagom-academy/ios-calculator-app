@@ -19,7 +19,7 @@ extension String {
     
     func addedCommaToInteger() -> String {
         let maximumSignificantDigits = 20
-        let numberFormatter = NumberFormatter()
+        let numberFormatter = Formatter.number
         let splitCurrentOperand = self.split(with: Character(Const.dot))
         
         numberFormatter.numberStyle = .decimal

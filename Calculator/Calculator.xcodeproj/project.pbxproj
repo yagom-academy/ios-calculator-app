@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10AA26D27F594CD00EC06AE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10AA26C27F594CD00EC06AE /* Formatter.swift */; };
 		A12056E627E3745700370835 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12056E527E3745700370835 /* OperatorTests.swift */; };
 		A12056E827E374EC00370835 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12056E727E374EC00370835 /* Operator.swift */; };
 		A12056EB27E386E000370835 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12056EA27E386E000370835 /* CalculatorError.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A10AA26C27F594CD00EC06AE /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		A12056E527E3745700370835 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		A12056E727E374EC00370835 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		A12056EA27E386E000370835 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A10AA26B27F594B100EC06AE /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A10AA26C27F594CD00EC06AE /* Formatter.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		A12056E927E386D100370835 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 				A12056E927E386D100370835 /* Error */,
 				A1C6560E27EB52F000F74107 /* Common */,
 				A120570027E437E500370835 /* Extension */,
+				A10AA26B27F594B100EC06AE /* Util */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
@@ -325,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
+				A10AA26D27F594CD00EC06AE /* Formatter.swift in Sources */,
 				A120570427E4381100370835 /* String.swift in Sources */,
 				A12056FF27E4375C00370835 /* ExpressionParser.swift in Sources */,
 				A12056E827E374EC00370835 /* Operator.swift in Sources */,
