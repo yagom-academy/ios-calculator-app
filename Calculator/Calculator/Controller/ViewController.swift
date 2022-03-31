@@ -136,6 +136,7 @@ class ViewController: UIViewController {
         removeFormulaList()
         self.operatorLabel.text = ""
         self.operandLabel.text = stringZero
+        self.formulaToSend = ""
         self.isInputZero = false
     }
     
