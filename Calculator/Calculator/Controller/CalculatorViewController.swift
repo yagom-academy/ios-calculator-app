@@ -22,6 +22,9 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
     
+    private var stringToParse: String = .empty
+    private var isOperandEntered: Bool = false
+
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -42,14 +45,11 @@ final class CalculatorViewController: UIViewController {
     private var currentOperator: String {
         currentOperatorLabel.text ?? .empty
     }
-    
-    private var stringToParse: String = .empty
     private var isFirstOperand: Bool {
         currentOperand == .zero &&
         currentOperator == .empty &&
         formulaStackView.arrangedSubviews.isEmpty
     }
-    private var isOperandEntered: Bool = false
     private var isResultButtonDidTouch: Bool {
         currentOperator == .empty &&
         formulaStackView.arrangedSubviews.isEmpty == false
@@ -57,10 +57,10 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()
+        resetProperties()
     }
     
-    private func setUp() {
+    private func resetProperties() {
         stringToParse = .empty
         isOperandEntered = false
         currentOperandLabel.text = .zero
@@ -114,7 +114,7 @@ extension CalculatorViewController {
             view.removeFromSuperview()
         }
         
-        setUp()
+        resetProperties()
     }
     
     @IBAction private func clearEntryButtonDidTouch(_ sender: UIButton) {
@@ -214,6 +214,7 @@ extension CalculatorViewController {
         
         stringToParse.append(string)
         scrollView.layoutIfNeeded()
+        
         let labelHeight = scrollView.contentSize.height - scrollView.bounds.height
         if labelHeight > 0 {
             scrollView.setContentOffset(CGPoint(x: 0, y: labelHeight), animated: true)
