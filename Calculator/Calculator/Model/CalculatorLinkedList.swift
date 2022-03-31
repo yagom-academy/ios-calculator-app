@@ -34,10 +34,10 @@ final class CalculatorLinkedList<T> {
         if isEmpty {
             return nil
         }
-        defer {
-            head = head?.next
-        }
-        return head?.value
+        let removeHead = head?.value
+        head = head?.next
+        
+        return removeHead
     }
     
     func removeAll() {
