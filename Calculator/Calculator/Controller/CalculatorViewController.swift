@@ -121,11 +121,10 @@ extension CalculatorViewController {
     @IBAction private func signConvertingButtonDidTouch(_ sender: UIButton) {
         guard currentOperand != .zero else { return }
         
-        if currentOperand.contains("-") {
-            let minusSign = currentOperand.first
-            currentOperand = currentOperand.filter{ $0 != minusSign }
+        if currentOperand.first == "-" {
+            currentOperand.removeFirst()
         } else {
-            currentOperand = "-" + currentOperand
+            currentOperand.insert("-", at: currentOperand.startIndex)
         }
         
         currentOperandLabel.text = currentOperand
