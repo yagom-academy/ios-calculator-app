@@ -14,6 +14,20 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
     
+    private var currentOperand: String {
+        get {
+            currentOperandLabel.text ?? ""
+        }
+        
+        set {
+            currentOperandLabel.text = newValue
+        }
+    }
+    
+    private var currentOperator: String {
+        currentOperatorLabel.text ?? ""
+    }
+    
     private let comma: Character = ","
     private var stringToParse: String = ""
     private var isFirstOperand: Bool = true
@@ -72,8 +86,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
-        guard let operatorString = currentOperatorLabel.text else { return }
-        guard !operatorString.isEmpty else { return }
+        guard !currentOperator.isEmpty else { return }
         guard !formulaStackView.arrangedSubviews.isEmpty else { return }
         
         checkAndAddLabelToStackView()
@@ -100,25 +113,21 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func signConvertingButtonDidTouch(_ sender: UIButton) {
-        guard var currentNumber = currentOperandLabel.text else { return }
-        guard currentNumber != Number.zero.rawValue else { return }
+        guard currentOperand != Number.zero.rawValue else { return }
         
-        if currentNumber.contains(Operator.subtraction.rawValue) {
-            let minusSign = currentNumber.first
-            currentNumber = currentNumber.filter{ $0 != minusSign }
+        if currentOperand.contains(Operator.subtraction.rawValue) {
+            let minusSign = currentOperand.first
+            currentOperand = currentOperand.filter{ $0 != minusSign }
         } else {
-            currentNumber = String(Operator.subtraction.rawValue) + currentNumber
+            currentOperand = String(Operator.subtraction.rawValue) + currentOperand
         }
         
-        currentOperandLabel.text = currentNumber
+        currentOperandLabel.text = currentOperand
     }
     
     // MARK: StackView Related Method
     private func checkAndAddLabelToStackView() {
-        guard let operatorLabelText = currentOperatorLabel.text else { return }
-        guard let operandLabelText = currentOperandLabel.text else { return }
-
-        let commaDeletedOperand = operandLabelText.filter { $0 != comma }
+        let commaDeletedOperand = currentOperand.filter { $0 != comma }
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
 
@@ -126,7 +135,7 @@ final class CalculatorViewController: UIViewController {
         let number = NSNumber(value: doubledCurrentOperand)
         guard let formattedNumber = numberFormatter.string(from: number) else { return }
 
-        addLabelToStackView(formattedNumber, operatorLabelText)
+        addLabelToStackView(formattedNumber, currentOperator)
     }
     
     // MARK: Function-Separated Method
@@ -167,7 +176,6 @@ final class CalculatorViewController: UIViewController {
     
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.titleLabel?.text else { return nil }
-        guard var currentOperand = currentOperandLabel.text else { return nil }
         guard currentOperand.filter({ $0 != comma }).count < 20 else { return nil }
         guard currentOperand != Number.zero.rawValue || buttonString != "\(Number.doubleZero.rawValue)" else { return nil }
         
