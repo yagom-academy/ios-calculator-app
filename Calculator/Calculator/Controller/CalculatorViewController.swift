@@ -218,7 +218,11 @@ final class CalculatorViewController: UIViewController {
         guard let string = resultLabel.text?.filter({ $0 != "," }) else { return }
         
         stringToParse.append(string)
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
+        scrollView.layoutIfNeeded()
+        let labelHeight = scrollView.contentSize.height - scrollView.bounds.height
+        if labelHeight > 0 {
+            scrollView.setContentOffset(CGPoint(x: 0, y: labelHeight), animated: true)
+        }
     }
     
     private func checkIfDecimalPointIsNeeded(_ result: Double) -> String? {
