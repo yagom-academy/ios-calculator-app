@@ -178,6 +178,8 @@ final class CalculatorViewController: UIViewController {
             currentOperandLabel.text = checkIfDecimalPointIsNeeded(result)
         } catch CalculatorError.divisionByZero {
             currentOperandLabel.text = .nan
+        } catch CalculatorError.overMaximumDigit {
+            currentOperandLabel.text = .nan
         } catch {}
         
         currentOperatorLabel.text = .empty

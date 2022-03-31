@@ -10,4 +10,5 @@ import Foundation
 enum CalculatorError: Error {
     case divisionByZero
     case invalidFormula
+    case overMaximumDigit
 }

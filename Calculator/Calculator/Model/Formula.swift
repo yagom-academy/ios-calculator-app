@@ -26,6 +26,12 @@ struct Formula {
             formulaResult = operatorData.calculate(lhs: formulaResult, rhs: number)
         }
         
+        let splited = String(formulaResult).split(with: "+")
+
+        if splited.count == 2, let digit = Int(splited[1]), digit > 20 {
+            throw CalculatorError.overMaximumDigit
+        }
+        
         return formulaResult
     }
 }
