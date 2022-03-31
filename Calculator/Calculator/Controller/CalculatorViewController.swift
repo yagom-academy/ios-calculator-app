@@ -60,7 +60,7 @@ final class CalculatorViewController: UIViewController {
         guard var validOperand = checkValidity(of: sender) else { return }
         
         Number.allCases.forEach { number in
-            guard let buttonString = sender.titleLabel?.text else { return }
+            guard let buttonString = sender.currentTitle else { return }
             
             if buttonString == number.rawValue {
                 validOperand += number.rawValue
@@ -82,14 +82,14 @@ final class CalculatorViewController: UIViewController {
         if isResultButtonDidTouch == true {
             isOperandEntered = false
             currentOperandLabel.text = .zero
-            currentOperatorLabel.text = sender.titleLabel?.text
+            currentOperatorLabel.text = sender.currentTitle
             isResultButtonDidTouch = false
         }
         
         guard isOperandEntered == true else { return }
         
         checkAndAddLabelToStackView()
-        currentOperatorLabel.text = sender.titleLabel?.text
+        currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = .zero
         isOperandEntered = false
     }
@@ -159,7 +159,7 @@ final class CalculatorViewController: UIViewController {
         
         let commaDeletedOperand = currentOperand.filter { $0 != "," }
         
-        if commaDeletedOperand.hasSuffix(Number.decimalPoint.rawValue) {
+        if commaDeletedOperand.hasSuffix(.decimalPoint) {
             return currentOperand
         } else {
             guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return nil }
@@ -184,7 +184,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func checkValidity(of sender: UIButton) -> String? {
-        guard let buttonString = sender.titleLabel?.text else { return nil }
+        guard let buttonString = sender.currentTitle else { return nil }
         guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
         guard currentOperand != .zero || buttonString != .doubleZero else { return nil }
         
