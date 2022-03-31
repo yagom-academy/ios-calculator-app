@@ -10,17 +10,15 @@ final class CalculatorViewController: UIViewController {
     private var allOperations: [String] = []
     
     @IBOutlet weak var calculatorStackView: UIStackView!
-    
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentNumberLabel: UILabel!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
-        
+        var updatedNumber: String
         guard isvalidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: CalculatorConstant.maximumLength) else { return }
         
-        var updatedNumber: String
         if currentNumberLabelText == CalculatorConstant.defaultNumber {
             updatedNumber = buttonTitle
         } else {
@@ -33,7 +31,6 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
-        
         guard currentNumberLabelText != CalculatorConstant.defaultNumber else {
             return
         }
@@ -43,7 +40,6 @@ final class CalculatorViewController: UIViewController {
         if allOperations.isEmpty == false {
             allOperations.append(currentOperatorLabelText)
         }
-        
         allOperations.append(currentNumberLabelText)
         setLabels(operatorText: buttonTitle)
     }
@@ -59,13 +55,16 @@ final class CalculatorViewController: UIViewController {
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
-        
-        guard isvalidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: CalculatorConstant.maximumLength) else { return }
+        let updatedText = currentNumberLabelText + buttonTitle
+        guard isvalidLength(
+            texts: [currentNumberLabelText, buttonTitle],
+            maximumLength: CalculatorConstant.maximumLength
+        ) else { return }
         
         if currentNumberLabelText.contains(CalculatorConstant.dot) == true {
-            currentNumberLabel.text = currentNumberLabelText + buttonTitle
+            currentNumberLabel.text = updatedText
         } else {
-            currentNumberLabel.text = (currentNumberLabelText + buttonTitle).numberFomatter()
+            currentNumberLabel.text = updatedText.numberFomatter()
         }
     }
     
@@ -73,14 +72,14 @@ final class CalculatorViewController: UIViewController {
         var currentNumberLabelText = currentNumberLabel.text.unwrapped
         
         switch currentNumberLabelText.first {
-        case Character(CalculatorConstant.defaultNumber):
-            break
+        case Character(CalculatorConstant.whiteSpace), "0":
+            return
         case CalculatorConstant.minus:
             _ = currentNumberLabelText.removeFirst()
         default:
-            currentNumberLabelText.insert(CalculatorConstant.minus, at: currentNumberLabelText.startIndex)
+            currentNumberLabelText.insert(CalculatorConstant.minus,
+                                          at: currentNumberLabelText.startIndex)
         }
-        
         currentNumberLabel.text = currentNumberLabelText.numberFomatter()
     }
     
@@ -106,7 +105,10 @@ final class CalculatorViewController: UIViewController {
         
         if allOperations.isEmpty != true {
             addInputStack()
-            let mergedAllOperation = allOperations.joined(separator: CalculatorConstant.whiteSpace)
+            
+            let mergedAllOperation = allOperations.joined(
+                separator: CalculatorConstant.whiteSpace
+            )
             let validOperation = removeComma(from: mergedAllOperation)
             let formula = ExpressionParser.parse(from: validOperation)
             let result = formula.result()
@@ -121,7 +123,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func removeComma(from input: String) -> String {
-        return input.replacingOccurrences(of: CalculatorConstant.comma, with: CalculatorConstant.blank)
+        return input.replacingOccurrences(of: CalculatorConstant.comma,
+                                          with: CalculatorConstant.blank)
     }
     
     private func isvalidLength(texts: [String], maximumLength: Int) -> Bool {
@@ -136,9 +139,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addInputStack() {
-        guard let stack = generateStack() else {
-            return
-        }
+        guard let stack = generateStack() else { return }
         
         calculatorStackView.addArrangedSubview(stack)
         setScrollViewLayout()
@@ -168,18 +169,18 @@ final class CalculatorViewController: UIViewController {
         let numberStackLabel = UILabel()
         
         operatorStackLabel.textColor = .white
-        numberStackLabel.textColor = .white
-        
         operatorStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
-        numberStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
-        
         operatorStackLabel.text = `operator`
+        
+        numberStackLabel.textColor = .white
+        numberStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
         numberStackLabel.text = number
         
         return (operatorStackLabel, numberStackLabel)
     }
     
-    private func setLabels(numberText: String = CalculatorConstant.defaultNumber, operatorText: String = CalculatorConstant.blank) {
+    private func setLabels(numberText: String = CalculatorConstant.defaultNumber,
+                           operatorText: String = CalculatorConstant.blank) {
         currentNumberLabel.text = numberText
         currentOperatorLabel.text = operatorText
     }
@@ -188,13 +189,10 @@ final class CalculatorViewController: UIViewController {
         guard let scrollView = calculatorStackView.superview as? UIScrollView else {
             return
         }
-        scrollView.layoutIfNeeded()
+        let hiddenHeight = scrollView.contentSize.height - scrollView.bounds.height
         
-        scrollView
-            .setContentOffset(
-                CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
-                animated: true
-            )
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: .zero, y: hiddenHeight), animated: true)
     }
 }
 
