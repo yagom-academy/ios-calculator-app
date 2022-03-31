@@ -118,6 +118,7 @@ class ViewController: UIViewController {
         self.operatorLabel.text = ""
         self.formulaToSend = ""
         self.isResult = true
+        self.isInputZero = true
     }
     
     func getResult() -> String {
