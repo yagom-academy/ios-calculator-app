@@ -114,17 +114,22 @@ class ViewController: UIViewController {
             return
         }
         addFormula(operator: operatorText, operand: operandsText)
+        self.operandLabel.text = getResult()
+        self.operatorLabel.text = ""
+        self.formulaToSend = ""
+        self.isResult = true
+    }
+    
+    func getResult() -> String {
         var resultFormula = ExpressionParser.parse(frome: self.formulaToSend)
         let result = resultFormula.result()
         switch result {
         case .success(let number):
-            self.operandLabel.text = changeNumberFormat(number: String(number))
+            let stringResult = changeNumberFormat(number: String(number))
+            return stringResult == "-0" ? "0" : stringResult
         case .failure(let error):
-            self.operandLabel.text = error.errorDescription
+            return error.errorDescription
         }
-        self.operatorLabel.text = ""
-        self.formulaToSend = ""
-        self.isResult = true
     }
     
     private func resetCaculator() {
@@ -158,12 +163,16 @@ class ViewController: UIViewController {
         guard let changedNumber = numberFormatter.string(from: number as NSNumber) else {
             return ""
         }
-        if changedNumber == "-0" {
-            return stringZero
-        }
         return changedNumber
     }
     
+    private func addFormula(`operator`: String, operand: String) {
+        self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
+        addFormulaListStackView(operator: `operator`, operand: operand)
+    }
+}
+// MARK: - About View
+extension ViewController {
     private func makeStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -178,11 +187,6 @@ class ViewController: UIViewController {
         label.text = element
         label.textColor = .white
         return label
-    }
-    
-    private func addFormula(`operator`: String, operand: String) {
-        self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
-        addFormulaListStackView(operator: `operator`, operand: operand)
     }
     
     private func addFormulaListStackView(`operator`: String, operand: String) {
