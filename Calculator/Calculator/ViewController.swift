@@ -22,10 +22,10 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpDefaultLabel()
+        resetLabelText()
     }
     
-    func setUpDefaultLabel() {
+    func resetLabelText() {
         operandLabel.text = .zero
         operatorLabel.text = .empty
     }
@@ -79,7 +79,7 @@ private extension ViewController {
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         allClearStackView()
         
-        setUpDefaultLabel()
+        resetLabelText()
     }
     
     @IBAction func touchUpChangeSign(_ sender: UIButton) {
