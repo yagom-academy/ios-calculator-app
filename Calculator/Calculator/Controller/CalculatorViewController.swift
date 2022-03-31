@@ -14,6 +14,11 @@ private extension String {
     static let nan = "NaN"
 }
 
+private extension Character {
+    static let comma = Character(",")
+    static let decimalPoint = Character(".")
+}
+
 final class CalculatorViewController: UIViewController {
     // MARK: IBOutlet
     @IBOutlet private weak var currentOperandLabel: UILabel!
@@ -138,7 +143,7 @@ extension CalculatorViewController {
 
 extension CalculatorViewController {
     private func checkAndAddLabelToStackView() {
-        let commaDeletedOperand = currentOperand.filter { $0 != "," }
+        let commaDeletedOperand = currentOperand.filter { $0 != .comma }
 
         guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return }
         let number = NSNumber(value: doubledCurrentOperand)
@@ -148,11 +153,11 @@ extension CalculatorViewController {
     }
     
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
-        if currentOperand.contains(".") && currentOperand.last == "0" {
+        if currentOperand.contains(.decimalPoint) && currentOperand.last == "0" {
             return currentOperand
         }
         
-        let commaDeletedOperand = currentOperand.filter { $0 != "," }
+        let commaDeletedOperand = currentOperand.filter { $0 != .comma }
         
         if commaDeletedOperand.hasSuffix(.decimalPoint) {
             return currentOperand
@@ -182,8 +187,8 @@ extension CalculatorViewController {
     
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.currentTitle else { return nil }
-        guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
-        if currentOperand.contains(".") && buttonString == "." { return nil}
+        guard currentOperand.filter({ $0 != .comma }).count < 20 else { return nil }
+        if currentOperand.contains(.decimalPoint) && buttonString == .decimalPoint { return nil}
         if currentOperand == .zero && buttonString == .doubleZero { return nil }
         
         if currentOperand == .zero, buttonString != .decimalPoint {
@@ -210,7 +215,7 @@ extension CalculatorViewController {
             formulaStackView.addArrangedSubview(resultLabel)
         }
         
-        guard let string = resultLabel.text?.filter({ $0 != "," }) else { return }
+        guard let string = resultLabel.text?.filter({ $0 != .comma }) else { return }
         
         stringToParse.append(string)
         scrollView.layoutIfNeeded()
