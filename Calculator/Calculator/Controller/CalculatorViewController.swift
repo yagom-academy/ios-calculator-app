@@ -18,6 +18,9 @@ final class CalculatorViewController: UIViewController {
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
+        
+        guard isvalidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: 20) else { return }
+        
         var updatedNumber: String
         if currentNumberLabelText == "0" {
             updatedNumber = buttonTitle
@@ -53,6 +56,8 @@ final class CalculatorViewController: UIViewController {
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
+        
+        guard isvalidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: 20) else { return }
         
         if currentNumberLabelText.contains(".") == true {
             currentNumberLabel.text = currentNumberLabelText + buttonTitle
@@ -111,6 +116,12 @@ final class CalculatorViewController: UIViewController {
     
     private func removeComma(from input: String) -> String {
         return input.replacingOccurrences(of: ",", with: "")
+    }
+    
+    private func isvalidLength(texts: [String], maximumLength: Int) -> Bool {
+        let textCount = texts.reduce(0) { $0 + removeComma(from: $1).count }
+        
+        return textCount <= maximumLength
     }
     
     private func clearAllHistory() {
