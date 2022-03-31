@@ -16,10 +16,10 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeHistory()
+        initializeCalculatorHistory()
     }
     
-    private func initializeHistory() {
+    private func initializeCalculatorHistory() {
         operandsLabel.text = CalculatorNameSpace.singleZero
         operatorsLabel.text = CalculatorNameSpace.emptyStateString
     }
