@@ -8,7 +8,7 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    private var temporaryOperandText: String = ""
+    private var temporaryOperandText: String = CalculatorNameSpace.emptyStateString
     private var confirmedFormula: [String] = []
     
     @IBOutlet weak var operandsLabel: UILabel!
@@ -25,14 +25,16 @@ class CalculatorViewController: UIViewController {
     }
 
     private func isValidTemporaryOperandTextDigitsLessFifteenCount() -> Bool {
-        if temporaryOperandText.count > 15 {
+        if temporaryOperandText.count > CalculatorNameSpace.doubleTypeSignificantDigits {
             return false
         }
         return true
     }
         
     private func isValidFirstInputNonZero(inputText: String) -> Bool {
-        guard operandsLabel.text == CalculatorNameSpace.singleZero else { return true }
+        guard operandsLabel.text == CalculatorNameSpace.singleZero else {
+            return true
+        }
         if inputText == CalculatorNameSpace.singleZero || inputText == CalculatorNameSpace.doubleZero {
             return false
         }

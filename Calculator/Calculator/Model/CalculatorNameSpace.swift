@@ -13,4 +13,5 @@ enum CalculatorNameSpace {
     static let singleDot = "."
     static let singleZeroAndDot = "0."
     static let emptyStateString = ""
+    static let doubleTypeSignificantDigits = 15
 }
