@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E39599B27F5C79A000AEBDC /* CalculatorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39599A27F5C79A000AEBDC /* CalculatorConstant.swift */; };
 		6436C3E527E0A70F00A6D3A3 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6436C3E427E0A70F00A6D3A3 /* CalculatorTests.swift */; };
 		6436C3EF27E1A45800A6D3A3 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6436C3EE27E1A45800A6D3A3 /* CalculateItem.swift */; };
 		6436C3F327E1CA8A00A6D3A3 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6436C3F227E1CA8A00A6D3A3 /* Operator.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E39599A27F5C79A000AEBDC /* CalculatorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorConstant.swift; sourceTree = "<group>"; };
 		6436C3E227E0A70F00A6D3A3 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6436C3E427E0A70F00A6D3A3 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		6436C3EE27E1A45800A6D3A3 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E39599927F5C74D000AEBDC /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				0E39599A27F5C79A000AEBDC /* CalculatorConstant.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
 		6436C3E327E0A70F00A6D3A3 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +137,7 @@
 		6436C43E27F1D5B900A6D3A3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0E39599927F5C74D000AEBDC /* Constant */,
 				6436C43D27F1D5AD00A6D3A3 /* Extension */,
 			);
 			path = Utils;
@@ -280,6 +291,7 @@
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				6436C3F927E1D47900A6D3A3 /* CalculatorItemQueue.swift in Sources */,
+				0E39599B27F5C79A000AEBDC /* CalculatorConstant.swift in Sources */,
 				6436C43C27F1D53A00A6D3A3 /* String+extension.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				6436C43A27F1D4FB00A6D3A3 /* Double+extension.swift in Sources */,

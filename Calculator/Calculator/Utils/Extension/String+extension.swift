@@ -13,7 +13,7 @@ extension String {
     }
     
     var withoutComma: String {
-        self.replacingOccurrences(of: ",", with: "")
+        self.replacingOccurrences(of: CalculatorConstant.comma, with: CalculatorConstant.blank)
     }
 }
 
@@ -26,17 +26,17 @@ extension String {
         
         let numberFomatter = NumberFormatter()
         numberFomatter.numberStyle = .decimal
-        numberFomatter.maximumFractionDigits = 20
+        numberFomatter.maximumFractionDigits = CalculatorConstant.maximumLength
         let number = numberFomatter.number(from: noCommaText) ?? zero
         
-        let changedNumber = numberFomatter.string(from: number) ?? ""
+        let changedNumber = numberFomatter.string(from: number) ?? CalculatorConstant.blank
         return changedNumber
     }
 }
 
 extension Optional where Wrapped == String {
     var unwrapped: String {
-        guard let result = self else { return "" }
+        guard let result = self else { return CalculatorConstant.blank }
         return result
     }
 }
