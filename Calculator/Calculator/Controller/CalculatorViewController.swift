@@ -27,7 +27,7 @@ final class CalculatorViewController: UIViewController {
         } else {
             updatedNumber = currentNumberLabelText + buttonTitle
         }
-        currentNumberLabel.text = changeDecimalFormat(updatedNumber)
+        currentNumberLabel.text = updatedNumber.numberFomatter()
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -62,7 +62,7 @@ final class CalculatorViewController: UIViewController {
         if currentNumberLabelText.contains(".") == true {
             currentNumberLabel.text = currentNumberLabelText + buttonTitle
         } else {
-            currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText + buttonTitle)
+            currentNumberLabel.text = (currentNumberLabelText + buttonTitle).numberFomatter()
         }
     }
     
@@ -78,7 +78,7 @@ final class CalculatorViewController: UIViewController {
             currentNumberLabelText.insert("-", at: currentNumberLabelText.startIndex)
         }
         
-        currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText)
+        currentNumberLabel.text = currentNumberLabelText.numberFomatter()
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -109,7 +109,7 @@ final class CalculatorViewController: UIViewController {
             let result = formula.result()
             
             currentOperatorLabel.text = ""
-            currentNumberLabel.text = changeDecimalFormat("\(result)")
+            currentNumberLabel.text = String(result).numberFomatter()
             allOperations = []
         }
     }
@@ -128,21 +128,6 @@ final class CalculatorViewController: UIViewController {
         calculatorStackView.subviews.forEach { $0.removeFromSuperview() }
         currentNumberLabel.text = "0"
         currentOperatorLabel.text = ""
-    }
-    
-    private func changeDecimalFormat(_ text: String) -> String {
-        let zero: NSNumber = 0
-        
-        guard text != "nan" else { return "NaN" }
-        let noCommaText = removeComma(from: text)
-        
-        let numberFomatter = NumberFormatter()
-        numberFomatter.numberStyle = .decimal
-        
-        let number = numberFomatter.number(from: noCommaText) ?? zero
-        
-        let changedNumber = numberFomatter.string(from: number) ?? blank
-        return changedNumber
     }
     
     private func addInputStack() {
