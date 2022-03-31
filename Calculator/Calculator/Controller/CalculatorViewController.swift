@@ -16,8 +16,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentNumberLabel: UILabel!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let buttonTitle = sender.currentTitle else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let buttonTitle = sender.currentTitle.unwrapped
         var updatedNumber: String
         if currentNumberLabelText == "0" {
             updatedNumber = buttonTitle
@@ -28,9 +28,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let currentOperatorLabelText = currentOperatorLabel.text else { return }
-        guard let buttonTitle = sender.currentTitle else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
+        let buttonTitle = sender.currentTitle.unwrapped
         addInputStack()
         
         if allOperations.isEmpty == false {
@@ -43,7 +43,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
         guard (currentNumberLabel.text?.contains(".")) == true else {
             currentNumberLabel.text = currentNumberLabelText + "."
             return
@@ -51,8 +51,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let buttonTitle = sender.currentTitle else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let buttonTitle = sender.currentTitle.unwrapped
         
         if currentNumberLabelText.contains(".") == true {
             currentNumberLabel.text = currentNumberLabelText + buttonTitle
@@ -62,7 +62,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpPlusMinusSignButton(_ sender: UIButton) {
-        guard var currentNumberLabelText = currentNumberLabel.text else { return }
+        var currentNumberLabelText = currentNumberLabel.text.unwrapped
         
         switch currentNumberLabelText.first {
         case "0":
@@ -90,8 +90,8 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func touchUpCalculateButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let currentOperatorLabelText = currentOperatorLabel.text else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         
         allOperations.append(currentOperatorLabelText)
         allOperations.append(currentNumberLabelText)
@@ -161,10 +161,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        guard let `operator` = currentOperatorLabel.text,
-              let number = currentNumberLabel.text else {
-            return nil
-        }
+        let `operator` = currentOperatorLabel.text.unwrapped
+        let number = currentNumberLabel.text.unwrapped
         let operatorStackLabel = UILabel()
         let numberStackLabel = UILabel()
         

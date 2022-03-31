@@ -12,3 +12,10 @@ extension String {
         return split(separator: target).map { String($0) }
     }
 }
+
+extension Optional where Wrapped == String {
+    var unwrapped: String {
+        guard let result = self else { return "" }
+        return result
+    }
+}
