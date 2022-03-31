@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var fomulaToSend = ""
+    private var formulaToSend = ""
     private let stringZero = "0"
     private let stringDot = "."
     private let minusSign = "-"
@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var listScrollView: UIScrollView!
-    @IBOutlet private weak var fomulaListStackView: UIStackView!
+    @IBOutlet private weak var formulaListStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
             return
         }
         if isResult == true {
-            removeFomulaList()
+            removeFormulaList()
             self.operandLabel.text = inputNumber
         } else {
             self.operandLabel.text = self.checkZeroAfterDot(number: operandsText + inputNumber)
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text else {
             return
         }
-        if self.fomulaListStackView.subviews.isEmpty && operandsText == stringZero || operandsText == "NaN" {
+        if self.formulaListStackView.subviews.isEmpty && operandsText == stringZero || operandsText == "NaN" {
             return
         }
         self.operatorLabel.text = inputOperator
@@ -92,10 +92,10 @@ class ViewController: UIViewController {
             return
         }
         if self.isResult == true {
-            removeFomulaList()
+            removeFormulaList()
             self.isResult = false
         }
-        addFomula(operator: operatorText, operand: operandsText)
+        addFormula(operator: operatorText, operand: operandsText)
         self.operandLabel.text = stringZero
         self.isInputZero = false
     }
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         if self.isResult == true {
             return
         }
-        if self.fomulaListStackView.arrangedSubviews.isEmpty {
+        if self.formulaListStackView.arrangedSubviews.isEmpty {
             return
         }
         guard let operatorText = self.operatorLabel.text else {
@@ -113,9 +113,9 @@ class ViewController: UIViewController {
         guard let operandsText = self.operandLabel.text else {
             return
         }
-        addFomula(operator: operatorText, operand: operandsText)
-        var resultFomula = ExpressionParser.parse(frome: self.fomulaToSend)
-        let result = resultFomula.result()
+        addFormula(operator: operatorText, operand: operandsText)
+        var resultFormula = ExpressionParser.parse(frome: self.formulaToSend)
+        let result = resultFormula.result()
         switch result {
         case .success(let number):
             self.operandLabel.text = changeNumberFormat(number: String(number))
@@ -123,19 +123,19 @@ class ViewController: UIViewController {
             self.operandLabel.text = error.errorDescription
         }
         self.operatorLabel.text = ""
-        self.fomulaToSend = ""
+        self.formulaToSend = ""
         self.isResult = true
     }
     
     private func resetCaculator() {
-        removeFomulaList()
+        removeFormulaList()
         self.operatorLabel.text = ""
         self.operandLabel.text = stringZero
         self.isInputZero = false
     }
     
-    private func removeFomulaList() {
-        self.fomulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    private func removeFormulaList() {
+        self.formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
     private func checkZeroAfterDot(number: String) -> String {
@@ -177,12 +177,12 @@ class ViewController: UIViewController {
         return label
     }
     
-    private func addFomula(`operator`: String, operand: String) {
-        self.fomulaToSend = "\(self.fomulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
+    private func addFormula(`operator`: String, operand: String) {
+        self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
         let numberStackView = makeStackView()
         numberStackView.addArrangedSubview(makeLabel(element: `operator`))
         numberStackView.addArrangedSubview(makeLabel(element: operand))
-        self.fomulaListStackView.addArrangedSubview(numberStackView)
+        self.formulaListStackView.addArrangedSubview(numberStackView)
         self.listScrollView.scrollToBottom()
     }
 }
