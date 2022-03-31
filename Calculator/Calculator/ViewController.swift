@@ -26,8 +26,10 @@ final class ViewController: UIViewController {
     
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
+        
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 20
+        
         return formatter
     }()
     
@@ -93,7 +95,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpChangeSign(_ sender: UIButton) {
-        if  operandLabel.text == .zero { return }
+        if operandLabel.text == .zero { return }
         
         guard let operandText = operandLabel.text else { return }
         
@@ -210,11 +212,9 @@ private extension ViewController {
 
 // MARK: - UIStackView Method
 private extension UIStackView {
-    
     var isEmpty: Bool { self.arrangedSubviews.isEmpty }
     
     func clearSubViews() {
         self.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
-
