@@ -11,6 +11,8 @@ final class ViewController: UIViewController {
     @IBOutlet weak var allCalculatStack: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var isCalculated: Bool { !allCalculatStack.isEmpty && operatorLabel.text?.isEmpty == true }
+    
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -33,7 +35,7 @@ final class ViewController: UIViewController {
 private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        if !allCalculatStack.isEmpty && (operatorLabel.text?.isEmpty == true) {
+        if isCalculated {
             allCalculatStack.clearSubViews()
             
             operandLabel.text = ""
