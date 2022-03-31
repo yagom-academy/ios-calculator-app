@@ -40,8 +40,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         allOperations.append(currentNumberLabelText)
-        currentNumberLabel.text = CalculatorConstant.defaultNumber
-        currentOperatorLabel.text = buttonTitle
+        setLabels(operatorText: buttonTitle)
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
@@ -107,8 +106,7 @@ final class CalculatorViewController: UIViewController {
             let formula = ExpressionParser.parse(from: validOperation)
             let result = formula.result()
             
-            currentOperatorLabel.text = CalculatorConstant.blank
-            currentNumberLabel.text = String(result).numberFomatter()
+            setLabels(numberText: String(result).numberFomatter())
             allOperations = []
         }
     }
@@ -125,8 +123,7 @@ final class CalculatorViewController: UIViewController {
     
     private func clearAllHistory() {
         calculatorStackView.subviews.forEach { $0.removeFromSuperview() }
-        currentNumberLabel.text = CalculatorConstant.defaultNumber
-        currentOperatorLabel.text = CalculatorConstant.blank
+        setLabels()
     }
     
     private func addInputStack() {
@@ -162,18 +159,27 @@ final class CalculatorViewController: UIViewController {
         let numberStackLabel = UILabel()
         
         operatorStackLabel.textColor = .white
-        operatorStackLabel.text = `operator`
-        
         numberStackLabel.textColor = .white
+        
+        operatorStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        numberStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        
+        operatorStackLabel.text = `operator`
         numberStackLabel.text = number
         
         return (operatorStackLabel, numberStackLabel)
+    }
+    
+    private func setLabels(numberText: String = CalculatorConstant.defaultNumber, operatorText: String = CalculatorConstant.blank) {
+        currentNumberLabel.text = numberText
+        currentOperatorLabel.text = operatorText
     }
     
     private func setScrollViewLayout() {
         guard let scrollView = calculatorStackView.superview as? UIScrollView else {
             return
         }
+        scrollView.layoutIfNeeded()
         
         scrollView
             .setContentOffset(
