@@ -159,7 +159,7 @@ class ViewController: UIViewController {
             return ""
         }
         if changedNumber == "-0" {
-            return stringZero            
+            return stringZero
         }
         return changedNumber
     }
