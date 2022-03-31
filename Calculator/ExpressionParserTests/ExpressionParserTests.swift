@@ -8,16 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class ExpressionParserTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        
-    }
-
-    override func tearDownWithError() throws {
-      
-    }
-    
+class ExpressionParserTests: XCTestCase {    
     func test_parser_함수를_호출했을때_숫자와_기호가_분리되는지() {
         // given
         let someString = "1 + 2"
