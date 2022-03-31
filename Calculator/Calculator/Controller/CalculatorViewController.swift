@@ -44,9 +44,16 @@ final class CalculatorViewController: UIViewController {
     }
     
     private var stringToParse: String = .empty
-    private var isFirstOperand: Bool = true
+    private var isFirstOperand: Bool {
+        currentOperand == .zero &&
+        currentOperator == .empty &&
+        formulaStackView.arrangedSubviews.isEmpty
+    }
     private var isOperandEntered: Bool = false
-    private var isResultButtonDidTouch: Bool = false
+    private var isResultButtonDidTouch: Bool {
+        currentOperator == .empty &&
+        formulaStackView.arrangedSubviews.isEmpty == false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +62,7 @@ final class CalculatorViewController: UIViewController {
     
     private func setUp() {
         stringToParse = .empty
-        isFirstOperand = true
         isOperandEntered = false
-        isResultButtonDidTouch = false
         currentOperandLabel.text = .zero
         currentOperatorLabel.text = .empty
     }
@@ -81,7 +86,6 @@ extension CalculatorViewController {
             isOperandEntered = false
             currentOperandLabel.text = .zero
             currentOperatorLabel.text = sender.currentTitle
-            isResultButtonDidTouch = false
         }
         
         guard isOperandEntered == true else { return }
@@ -98,7 +102,6 @@ extension CalculatorViewController {
         
         checkAndAddLabelToStackView()
         setResult()
-        isResultButtonDidTouch = true
     }
     
     @IBAction private func allClearButtonDidTouch(_ sender: UIButton) {
@@ -202,7 +205,6 @@ extension CalculatorViewController {
         if isFirstOperand == true {
             resultLabel.text = "\(operandLabelText) "
             formulaStackView.addArrangedSubview(resultLabel)
-            isFirstOperand = false
         } else {
             resultLabel.text = "\(operatorLabelText) \(operandLabelText) "
             formulaStackView.addArrangedSubview(resultLabel)
