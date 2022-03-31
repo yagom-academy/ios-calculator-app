@@ -9,27 +9,27 @@ import Foundation
 
 enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
-        var splitInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
+        var splittedInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
         let operatorList = Operator.allCases.map { String($0.rawValue) }
         
-        splitInput.removeAll(where: { operatorList.contains($0) })
+        splittedInput.removeAll(where: { operatorList.contains($0) })
         
-        return splitInput
+        return splittedInput
     }
     
     private static func componentsByOperands(from input: String) -> [String] {
-        var splitInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
+        var splittedInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
         let operandSet: Set<String> = Set(componentsByOperators(from: input))
         
-        splitInput.removeAll(where: { operandSet.contains($0) })
+        splittedInput.removeAll(where: { operandSet.contains($0) })
         
-        return splitInput
+        return splittedInput
     }
     
     private static func addZeroNumber(to operandQueue: CalculatorItemQueue<LinkdeList<Double>>, from input: String) {
-        let allElement = input.trimmingCharacters(in: .whitespaces).split(with: " ")
+        let splittedInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
         
-        guard let firstElement = allElement.first else { return }
+        guard let firstElement = splittedInput.first else { return }
         
         if firstElement.count == 1 && Operator(rawValue: Character(firstElement)) != nil {
             operandQueue.enqueue(0.0)
