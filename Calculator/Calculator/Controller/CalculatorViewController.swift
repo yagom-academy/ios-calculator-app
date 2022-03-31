@@ -43,7 +43,6 @@ extension CalculatorViewController: UIGestureRecognizerDelegate {
     private func addTapGesture() {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
         tapGesture.delegate = self
-        
         blockScreenView.addGestureRecognizer(tapGesture)
     }
     
@@ -68,9 +67,7 @@ extension CalculatorViewController {
         expression = [String]()
         resetOperand()
         resetOperator()
-        topRecordStackView
-            .arrangedSubviews
-            .forEach { $0.removeFromSuperview() }
+        topRecordStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
@@ -93,32 +90,26 @@ extension CalculatorViewController {
     }
     
     private func updatePlusMinusSign() {
-        guard operandLabel.text != Const.zero,
-              let operand = operandLabel.text else {
-            return
+        guard operandLabel.text != Const.zero else { return }
+        guard var operand = operandLabel.text else { return }
+        
+        func deleteMinus() {
+            operand.removeFirst()
+            currentOperand.removeFirst()
+            operandLabel.text = operand
         }
         
+        func addMinus() {
+            operand.insert(Character(Const.minus), at: operand.startIndex)
+            currentOperand.insert(Character(Const.minus), at: operand.startIndex)
+            operandLabel.text = operand
+        }
+                
         if operand.contains(Const.minus) {
-            deleteMinus(with: operand)
+            deleteMinus()
         } else {
-            addMinus(with: operand)
+            addMinus()
         }
-    }
-    
-    private func deleteMinus(with operand: String) {
-        var operand = operand
-        
-        operand.removeFirst()
-        currentOperand.removeFirst()
-        operandLabel.text = operand
-    }
-    
-    private func addMinus(with operand: String) {
-        var operand = operand
-        
-        operand.insert(Character(Const.minus), at: operand.startIndex)
-        currentOperand.insert(Character(Const.minus), at: operand.startIndex)
-        operandLabel.text = operand
     }
 }
 
@@ -128,7 +119,6 @@ extension CalculatorViewController {
         guard let `operator` = sender.titleLabel?.text else {
             return
         }
-        
         updateOperator(by: `operator`)
     }
     
@@ -137,12 +127,9 @@ extension CalculatorViewController {
             operatorLabel.text = `operator`
             return
         }
-        
         expression.append(currentOperand)
         expression.append(`operator`)
-        
         updateRecord(operand: currentOperand, operator: currentOperator)
-        
         currentOperator = `operator`
         operatorLabel.text = `operator`
         resetOperand()
@@ -155,23 +142,21 @@ extension CalculatorViewController {
         guard let operand = sender.titleLabel?.text else {
             return
         }
-        
         updateOperand(with: operand)
     }
     
     private func updateOperand(with operand: String) {
-        guard currentOperand.count < Const.limitOperandCount else {
-            return
-        }
+        if currentOperand.count > Const.limitOperandCount { return }
         
-        if currentOperand.first == Const.zero && currentOperand.contains(Const.dot) == false {
+        func isValid() -> Bool { currentOperand.first == Const.zero && currentOperand.contains(Const.dot) == false }
+        
+        if isValid() {
             currentOperand = operand
             operandLabel.text = currentOperand
-            return
+        } else {
+            currentOperand += operand
+            operandLabel.text = currentOperand.toDecimal()
         }
-                
-        currentOperand += operand
-        operandLabel.text = currentOperand.addedCommaToInteger()
     }
 }
 
@@ -185,7 +170,6 @@ extension CalculatorViewController {
         guard currentOperand.contains(dot) == false else {
             return
         }
-        
         currentOperand += dot
         operandLabel.text?.append(dot)
     }
@@ -197,7 +181,6 @@ extension CalculatorViewController {
         guard status == .nonCalculated else {
             return
         }
-        
         status = .calculated
         updateLastCalculation()
     }
@@ -205,7 +188,6 @@ extension CalculatorViewController {
     private func updateLastCalculation() {
         expression.append(currentOperand)
         updateRecord(operand: currentOperand, operator: currentOperator)
-        
         calculate()
     }
     
@@ -215,10 +197,8 @@ extension CalculatorViewController {
             topRecordStackView.addArrangedSubview(stackView)
             return
         }
-        
         let stackView = ExpressionStackView(operator: `operator`, operand: operand)
         topRecordStackView.addArrangedSubview(stackView)
-        
         topRecordScrollView.scrollToBottom()
     }
     
@@ -239,13 +219,12 @@ extension CalculatorViewController {
         if currentOperand.contains(Const.dot) {
             operandLabel.text = result
                 .description
-                .addedCommaToInteger()
+                .toDecimal()
         } else {
             operandLabel.text = Int(result)
                 .description
-                .addedCommaToInteger()
+                .toDecimal()
         }
-        
         resetOperator()
         blockScreenView.isHidden = false
     }

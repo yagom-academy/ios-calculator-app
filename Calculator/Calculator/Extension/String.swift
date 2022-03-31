@@ -17,7 +17,7 @@ extension String {
             .map { String($0) }
     }
     
-    func addedCommaToInteger() -> String {
+    func toDecimal() -> String {
         let maximumSignificantDigits = 20
         let numberFormatter = Formatter.number
         let splitCurrentOperand = self.split(with: Character(Const.dot))
