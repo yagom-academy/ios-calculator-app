@@ -13,6 +13,15 @@ final class ViewController: UIViewController {
     
     var isCalculated: Bool { !allCalculatStack.isEmpty && operatorLabel.text?.isEmpty == true }
     var isDotContained: Bool { operandLabel.text?.contains(String.dot) == true }
+    var isErrorHappened: Bool {
+        get {
+            if let operandText = operandLabel.text, CalauletorError(rawValue: operandText) == nil {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
     
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -47,7 +56,7 @@ private extension ViewController {
         
         updateOperandLabel(inputValue)
     }
-        
+    
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         if isDotContained { return }
         
@@ -61,7 +70,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let operandText = operandLabel.text, CalauletorError(rawValue: operandText) == nil else { return }
+        if isErrorHappened { return }
         
         if  operandLabel.text == .zero && allCalculatStack.isEmpty {
             operatorLabel.text = sender.currentTitle
