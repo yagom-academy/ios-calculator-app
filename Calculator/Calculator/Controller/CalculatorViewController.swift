@@ -105,7 +105,7 @@ extension CalculatorViewController {
         currentOperandLabel.text = .zero
         currentOperatorLabel.text = .empty
         
-        guard formulaStackView.arrangedSubviews.last != nil else { return }
+        guard !formulaStackView.arrangedSubviews.isEmpty else { return }
         
         for view in formulaStackView.arrangedSubviews {
             view.removeFromSuperview()
