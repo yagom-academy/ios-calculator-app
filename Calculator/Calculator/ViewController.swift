@@ -6,14 +6,15 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var allCalculatStack: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var allCalculatStack: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
-    var isCalculated: Bool { !allCalculatStack.isEmpty && operatorLabel.text?.isEmpty == true }
-    var isDotContained: Bool { operandLabel.text?.contains(String.dot) == true }
-    var isErrorHappened: Bool {
+    private var isCalculated: Bool { !allCalculatStack.isEmpty && operatorLabel.text?.isEmpty == true }
+    private var isDotContained: Bool { operandLabel.text?.contains(String.dot) == true }
+    private var isInitialState: Bool { operandLabel.text == .zero && allCalculatStack.isEmpty }
+    private var isErrorHappened: Bool {
         get {
             if let operandText = operandLabel.text, CalauletorError(rawValue: operandText) == nil {
                 return false
@@ -72,7 +73,7 @@ private extension ViewController {
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         if isErrorHappened { return }
         
-        if  operandLabel.text == .zero && allCalculatStack.isEmpty {
+        if isInitialState {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -129,7 +130,7 @@ private extension ViewController {
     }
     
     func updateOperandLabel(_ text: String) {
-        if (operandLabel.text?.contains(String.dot) == true) {
+        if isDotContained {
             guard let operandText = operandLabel.text else { return }
             
             operandLabel.text = operandText + text
