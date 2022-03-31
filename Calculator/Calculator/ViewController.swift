@@ -12,6 +12,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     var isCalculated: Bool { !allCalculatStack.isEmpty && operatorLabel.text?.isEmpty == true }
+    var isDotContained: Bool { operandLabel.text?.contains(String.dot) == true }
     
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -48,7 +49,7 @@ private extension ViewController {
     }
         
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        if (operandLabel.text?.contains(String.dot) == true) { return }
+        if isDotContained { return }
         
         guard let inputValue = sender.currentTitle else { return }
         
