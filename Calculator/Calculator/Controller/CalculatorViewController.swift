@@ -34,7 +34,7 @@ final class CalculatorViewController: UIViewController {
         guard isValidFirstInputNonZero(inputText: operandButtonLabelText) else {
             return
         }
-        updateTemporaryOperandTextAndOperandsLabel(by: operandButtonLabelText)
+        operandsLabel.text = numberFormatter(by: operandButtonLabelText)
     }
 }
 
@@ -47,7 +47,7 @@ extension CalculatorViewController {
         }
         return true
     }
-        
+    
     private func isValidFirstInputNonZero(inputText: String) -> Bool {
         guard operandsLabel.text == CalculatorNameSpace.singleZero else {
             return true
@@ -58,17 +58,28 @@ extension CalculatorViewController {
         return true
     }
     
-    private func updateTemporaryOperandTextAndOperandsLabel(by inputText: String) {
+    private func numberFormatter(by inputText: String) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
         if operandsLabel.text == CalculatorNameSpace.singleZero {
-            temporaryOperandText = inputText
-            operandsLabel.text = temporaryOperandText
+            return updateTemporaryOperandText(by: inputText)
         }
+        if temporaryOperandText.hasSuffix(CalculatorNameSpace.singleDot) {
+            return appendTemporaryOperandText(by: inputText)
+        }
+        temporaryOperandText += inputText
+        return numberFormatter.string(for: Double(temporaryOperandText))
     }
     
-    private func appendNumberToDecimalPlace(by inputText: String) {
-        if temporaryOperandText.last == "." {
+    private func updateTemporaryOperandText(by inputText: String) -> String {
+            temporaryOperandText = inputText
+            return temporaryOperandText
+    }
+    
+    private func appendTemporaryOperandText(by inputText: String) -> String {
             temporaryOperandText += inputText
-            operandsLabel.text = temporaryOperandText
-        }
+            return temporaryOperandText
     }
 }
