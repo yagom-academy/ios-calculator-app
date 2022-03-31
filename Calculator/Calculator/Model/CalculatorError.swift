@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CalauletorError: String, Error, CaseIterable {
+enum CalauletorError: String, Error {
     case dividedByZero = "NaN"
     case invalidInputValue = "잘못된 입력입니다."
     case operandIsNil = "피연산자 입력이 잘못되었습니다."
