@@ -14,7 +14,6 @@
     + [고민한점](#고민한점)
     + [배운개념](#배운개념)
 - [트러블슈팅](#트러블슈팅)
-- [기술의 장단점](#기술의-장단점)
 
 ## 프로젝트 소개 및 기능
 
@@ -26,6 +25,7 @@
 ## UML
 ![](https://i.imgur.com/I7oNB57.png)
 
+
 ## [STEP 1](#step-1)
 ### 고민한점
 x
@@ -36,7 +36,10 @@ x
 
 ## [STEP 2](#step-2)
 ### 고민한점
+
 ### 배운개념
+- layoutIfNeeded
+- computed property
 
 ---
 ## 트러블슈팅
@@ -62,4 +65,26 @@ struct Formula {
         }
     }
 ```
+
+### 앱을 처음 실행했을 때에도 stackView의 subview.isEmpty가 false인 이유?
+
+flag를 관리해줄 필요를 없애기 위해 isFirstOperand와 isResultButtonDidTouch의 조건 중 formulaStackView.arrangedSubviews.isEmpty를 걸어주었는데요,
+처음 실행하고 입력한 숫자가 아무것도 없을 때도 isFirstOperand에서 formulaStackView.arrangedSubviews.isEmpty가 false로 되어 첫번째로 입력한 숫자가 먹히는 현상이 있었습니다.
+main.storyboard를 보니 UIScrollView 안에 빈 label이 default로 들어가 있어 발생한 문제였습니다.
+해당 label을 삭제하니, 이번에는 scrollview의 오토레이아웃 제약 에러가 발생하였는데, UIScrollView의 Intrinsic Size를 placeholder로 설정하여 문제를 해결했습니다.
+
+### removedOperand = operand.filter { $0 != "," }에 대해..
+
+저 자리가 Character의 자리라고 생각해서
+
+```swift
+private extension Character {
+    static let comma = ","
+}
+
+removedOperand = operand.filter { $0 != .comma }
+```
+
+와 같이 썼지만 컴파일 에러가 계속 떠서 해결하지 못했습니다.  
+옆에서 동료캠퍼 mmim이 해당 타입이 comma의 타입이 String인것을 발견하여 명시적으로 Character(",") 로 써줘서 해결하였습니다.
 
