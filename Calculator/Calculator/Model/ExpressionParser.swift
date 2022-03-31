@@ -22,16 +22,18 @@ enum ExpressionParser {
         return formula
     }
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ").filter {
+        let splitOperand = input.split(with: " ").filter {
             Double($0) == nil
         }
+        return splitOperand
     }
 }
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map {
+        let splitString = self.split(separator: target).map {
             String($0)
         }
+        return splitString
     }
 }

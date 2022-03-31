@@ -146,7 +146,8 @@ class ViewController: UIViewController {
     }
     
     private func changeToDouble(number: String) -> Double {
-        return Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
+        let doubleNumber = Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
+        return doubleNumber
     }
     
     private func changeNumberFormat(number: String) -> String {
@@ -157,7 +158,9 @@ class ViewController: UIViewController {
         guard let changedNumber = numberFormatter.string(from: number as NSNumber) else {
             return ""
         }
-        if changedNumber == "-0" { return stringZero}
+        if changedNumber == "-0" {
+            return stringZero            
+        }
         return changedNumber
     }
     
