@@ -22,6 +22,13 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
     
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 19
+        return numberFormatter
+    }()
+    
     private var currentOperand: String {
         get {
             currentOperandLabel.text ?? .empty
@@ -140,8 +147,6 @@ extension CalculatorViewController {
 extension CalculatorViewController {
     private func checkAndAddLabelToStackView() {
         let commaDeletedOperand = currentOperand.filter { $0 != "," }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
 
         guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return }
         let number = NSNumber(value: doubledCurrentOperand)
@@ -151,10 +156,6 @@ extension CalculatorViewController {
     }
     
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 19
-        
         guard currentOperand.contains(".") == false || currentOperand.last != "0" else {
             return currentOperand
         }
