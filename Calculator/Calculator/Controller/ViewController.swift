@@ -182,6 +182,10 @@ class ViewController: UIViewController {
     
     private func addFormula(`operator`: String, operand: String) {
         self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
+        addFormulaListStackView(operator: `operator`, operand: operand)
+    }
+    
+    private func addFormulaListStackView(`operator`: String, operand: String) {
         let numberStackView = makeStackView()
         numberStackView.addArrangedSubview(makeLabel(element: `operator`))
         numberStackView.addArrangedSubview(makeLabel(element: operand))
