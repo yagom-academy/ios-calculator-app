@@ -91,8 +91,6 @@
 		9C727E0F27F1D4C100D7508A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
 			);
 			path = Controller;
@@ -136,12 +134,14 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				9C727E1627F1E52700D7508A /* Utils */,
 				30341EB927F1D6EC00D139C4 /* Model */,
 				9C727E1027F1D4D600D7508A /* View */,
 				9C727E0F27F1D4C100D7508A /* Controller */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
