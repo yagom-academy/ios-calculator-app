@@ -26,13 +26,15 @@ enum ExpressionParser {
         return splittedInput
     }
     
-    private static func addZeroNumber(to operandQueue: CalculatorItemQueue<LinkdeList<Double>>, from input: String) {
+    private static func isOperatorAtFirstElement(from input: String) -> Bool {
         let splittedInput = input.trimmingCharacters(in: .whitespaces).split(with: " ")
         
-        guard let firstElement = splittedInput.first else { return }
+        guard let firstElement = splittedInput.first else { return false }
         
         if firstElement.count == 1 && Operator(rawValue: Character(firstElement)) != nil {
-            operandQueue.enqueue(0.0)
+            return true
+        } else {
+            return false
         }
     }
     
@@ -42,7 +44,9 @@ enum ExpressionParser {
         let operands = componentsByOperators(from: input)
         let operators = componentsByOperands(from: input)
         
-        addZeroNumber(to: operandQueue, from: input)
+        if isOperatorAtFirstElement(from: input) {
+            operandQueue.enqueue(0.0)
+        }
         
         guard operands.count == operands.compactMap({ Double($0) }).count else {
             throw CalauletorError.invalidInputValue
