@@ -41,19 +41,18 @@ private extension ViewController {
             operandLabel.text = ""
         }
         
-        guard let operandText = operandLabel.text , removeComma(operandText).count < 20 else { return }
-                
-        if (operandLabel.text?.contains(String.dot) == true) {
-            updateOperandLabel(sender)
-        } else {
-            updateNumberFormat(sender)
-        }
+        guard let operandText = operandLabel.text, removeComma(operandText).count < 20 else { return }
+        guard let inputValue = sender.currentTitle else { return }
+        
+        updateOperandLabel(inputValue)
     }
         
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         if (operandLabel.text?.contains(String.dot) == true) { return }
         
-        updateOperandLabel(sender)
+        guard let inputValue = sender.currentTitle else { return }
+        
+        updateOperandLabel(inputValue)
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -119,20 +118,18 @@ private extension ViewController {
         input.replacingOccurrences(of: ",", with: "")
     }
     
-    func updateNumberFormat(_ button: UIButton) {
-        guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
-        
-        let nonCommaOperandText = removeComma(operandText + inputText)
-        
-        guard let number = numberFormatter.number(from: nonCommaOperandText) else { return }
-        
-        operandLabel.text = numberFormatter.string(from: number)
-    }
-    
-    func updateOperandLabel(_ button: UIButton) {
-        guard let operandText = operandLabel.text, let inputText = button.currentTitle else { return }
-        
-        operandLabel.text = operandText + inputText
+    func updateOperandLabel(_ text: String) {
+        if (operandLabel.text?.contains(String.dot) == true) {
+            guard let operandText = operandLabel.text else { return }
+            
+            operandLabel.text = operandText + text
+        } else {
+            guard let operandText = operandLabel.text else { return }
+            let nonCommaOperandText = removeComma(operandText + text)
+            guard let number = numberFormatter.number(from: nonCommaOperandText) else { return }
+            
+            operandLabel.text = numberFormatter.string(from: number)
+        }
     }
     
     func makeLabel(labelText: String?) -> UILabel {
