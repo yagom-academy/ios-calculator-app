@@ -41,7 +41,7 @@ private extension ViewController {
             operandLabel.text = ""
         }
         
-        guard let operandText = operandLabel.text, removeComma(operandText).count < 20 else { return }
+        guard let operandText = operandLabel.text, removedComma(operandText).count < 20 else { return }
         guard let inputValue = sender.currentTitle else { return }
         
         updateOperandLabel(inputValue)
@@ -86,7 +86,7 @@ private extension ViewController {
         
         guard let operandText = operandLabel.text else { return }
         
-        let nonCommaOperandText = removeComma(operandText)
+        let nonCommaOperandText = removedComma(operandText)
         
         guard let number = Double(nonCommaOperandText) else { return }
         
@@ -114,7 +114,7 @@ private extension ViewController {
 // MARK: - Method
 private extension ViewController {
     
-    func removeComma(_ input: String) -> String {
+    func removedComma(_ input: String) -> String {
         input.replacingOccurrences(of: ",", with: "")
     }
     
@@ -125,7 +125,7 @@ private extension ViewController {
             operandLabel.text = operandText + text
         } else {
             guard let operandText = operandLabel.text else { return }
-            let nonCommaOperandText = removeComma(operandText + text)
+            let nonCommaOperandText = removedComma(operandText + text)
             guard let number = numberFormatter.number(from: nonCommaOperandText) else { return }
             
             operandLabel.text = numberFormatter.string(from: number)
@@ -183,7 +183,7 @@ private extension ViewController {
             
             guard let operandText = operandLabel?.text else { return }
             
-            formula += removeComma(operandText)
+            formula += removedComma(operandText)
         }
         
         return formula
