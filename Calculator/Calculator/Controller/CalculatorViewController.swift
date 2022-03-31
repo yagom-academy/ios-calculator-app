@@ -64,4 +64,11 @@ extension CalculatorViewController {
             operandsLabel.text = temporaryOperandText
         }
     }
+    
+    private func appendNumberToDecimalPlace(by inputText: String) {
+        if temporaryOperandText.last == "." {
+            temporaryOperandText += inputText
+            operandsLabel.text = temporaryOperandText
+        }
+    }
 }
