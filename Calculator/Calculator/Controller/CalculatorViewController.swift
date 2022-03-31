@@ -20,8 +20,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var multiplyButton: UIButton!
     @IBOutlet private weak var divideButton: UIButton!
     
-    @IBOutlet private weak var currentNumberLabel: UILabel!
-    @IBOutlet private weak var currentOperandLabel: UILabel!
+    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
@@ -34,31 +34,31 @@ final class CalculatorViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     
-    private var currentDisplayNumber: String = CalculatorViewController.zero {
+    private var inputNumber: String = CalculatorViewController.zero {
         didSet {
-            currentNumberLabel.text = currentDisplayNumber
+            numberLabel.text = inputNumber
             do {
-                try inputIsWithinRange(currentDisplayNumber)
+                try checkInputIsWithinRange(inputNumber)
             } catch {
-                clearInputtingOperand()
+                clearInputNumber()
             }
         }
     }
     
-    private var currentDisplayOperator: String = CalculatorViewController.empty {
+    private var inputOperator: String = CalculatorViewController.empty {
         didSet {
-            currentOperandLabel.text = currentDisplayOperator
+            operatorLabel.text = inputOperator
         }
     }
     
-    private var totalCalculate = CalculatorViewController.empty
+    private var formulaString = CalculatorViewController.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNumberFormat()
         clearHistoryStackView()
-        clearInputtingOperand()
-        clearInputtingOperator()
+        clearInputNumber()
+        clearInputOperator()
     }
     
     private func setUpNumberFormat() {
@@ -67,7 +67,7 @@ final class CalculatorViewController: UIViewController {
         numberFormatter.roundingMode = .halfUp
     }
     
-    private func inputIsWithinRange(_ inputtingOperand: String) throws {
+    private func checkInputIsWithinRange(_ inputtingOperand: String) throws {
         guard inputtingOperand.count <= 20 else {
             throw CalculatorError.outOfInputRange
         }
@@ -75,53 +75,52 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func clickNumber(_ sender: UIButton) {
         let clickValue = sender.currentTitle ?? CalculatorViewController.empty
-        setCurrentDisplayNumber(clickValue)
+        setInputNumber(clickValue)
     }
     
-    private func setCurrentDisplayNumber(_ num: String) {
-        
-        if currentDisplayNumber == CalculatorViewController.zero {
-            currentDisplayNumber = num
+    private func setInputNumber(_ num: String) {
+        if inputNumber == CalculatorViewController.zero {
+            inputNumber = num
         } else {
-            currentDisplayNumber = currentDisplayNumber + num
+            inputNumber = inputNumber + num
         }
     }
     
     @IBAction private func clickOperator(_ sender: UIButton) {
-        guard currentDisplayNumber.isEmpty == false else { return }
+        guard inputNumber.isEmpty == false else { return }
         
         updateHistoryStackView()
-        addTotalCalculate()
+        updateFormulaString()
         
         let operatorItem = sender.currentTitle ?? CalculatorViewController.empty
-        currentDisplayOperator = operatorItem
-        clearInputtingOperand()
+        inputOperator = operatorItem
+        clearInputNumber()
     }
     
-    @IBAction func executeCalculatingAction(_ sender: UIButton) {
-        guard totalCalculate.isEmpty == false else { return }
+    @IBAction func clickCalculation(_ sender: UIButton) {
+        guard formulaString.isEmpty == false else { return }
         
         updateHistoryStackView()
-        addTotalCalculate()
-        clearInputtingOperand()
-        clearInputtingOperator()
+        updateFormulaString()
+        clearInputNumber()
+        clearInputOperator()
         
-        var parser = ExpressionParser.parse(from: totalCalculate)
+        var parser = ExpressionParser.parse(from: formulaString)
         
         guard let result = try? parser.result() as Double else { return }
-        configureCalculateResultLabel(result)
+        showCalculateResult(result)
     }
     
-    private func configureCalculateResultLabel(_ result: Double) {
+    private func showCalculateResult(_ result: Double) {
         
         if result.isNaN {
-           currentNumberLabel.text = CalculatorViewController.nanResult
+           numberLabel.text = CalculatorViewController.nanResult
         } else if cannotUseNumberFormatter(result) {
             let integerLength = String(result).components(separatedBy: CalculatorViewController.dotSymbol)[0].count
-            currentNumberLabel.text = String(format: "%.\(String(20 - integerLength))f", result)
+            numberLabel.text = String(format: "%.\(String(20 - integerLength))f", result)
         } else {
             guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
-            currentNumberLabel.text = numberFormattedResult
+            numberLabel.text = numberFormattedResult
         }
     }
     
@@ -140,10 +139,10 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if currentDisplayNumber.contains(dot) {
+        if inputNumber.contains(dot) {
             return
         } else {
-            currentDisplayNumber = currentDisplayNumber + dot
+            inputNumber = inputNumber + dot
         }
     }
     
@@ -153,46 +152,46 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if currentDisplayNumber == CalculatorViewController.zero {
+        if inputNumber == CalculatorViewController.zero {
             return
         } else {
-            currentDisplayNumber = currentDisplayNumber + doubleZero
+            inputNumber = inputNumber + doubleZero
         }
     }
     
-    @IBAction private func allClear() {
-        clearInputtingOperand()
-        clearInputtingOperator()
-        clearFormula()
+    @IBAction private func clickAllClear() {
+        clearInputNumber()
+        clearInputOperator()
+        clearFormulaString()
         clearHistoryStackView()
     }
     
-    @IBAction private func clearEntry() {
-        clearInputtingOperand()
+    @IBAction private func clickClearEntry() {
+        clearInputNumber()
     }
     
-    private func addTotalCalculate() {
-        totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? CalculatorViewController.empty) \(currentDisplayNumber)"
+    private func updateFormulaString() {
+        formulaString = "\(formulaString) \(operatorLabel.text ?? CalculatorViewController.empty) \(inputNumber)"
     }
     
     private func clearHistoryStackView() {
         historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func clearFormula() {
-        totalCalculate = CalculatorViewController.empty
+    private func clearFormulaString() {
+        formulaString = CalculatorViewController.empty
     }
     
-    private func clearInputtingOperand() {
-        currentDisplayNumber = CalculatorViewController.zero
+    private func clearInputNumber() {
+        inputNumber = CalculatorViewController.zero
     }
     
-    private func clearInputtingOperator() {
-        currentDisplayOperator = CalculatorViewController.empty
+    private func clearInputOperator() {
+        inputOperator = CalculatorViewController.empty
     }
     
     private func updateHistoryStackView() {
-        let recordStackView = makeRecordStackView()
+        let recordStackView = recordStackView()
         historyStackView.addArrangedSubview(recordStackView)
         historyScrollView.layoutIfNeeded()
         let offsetY = historyScrollView.contentSize.height - historyScrollView.bounds.height
@@ -201,16 +200,16 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeRecordStackView() -> UIStackView {
+    private func recordStackView() -> UIStackView {
         let recordStackView = UIStackView()
         recordStackView.axis = .horizontal
         
         let validOperandLabel = UILabel()
-        validOperandLabel.text = numberFormatter.string(for: Double(currentDisplayNumber))
+        validOperandLabel.text = numberFormatter.string(for: Double(inputNumber))
         validOperandLabel.textColor = .white
         
         let validOperatorLabel = UILabel()
-        validOperatorLabel.text = currentDisplayOperator
+        validOperatorLabel.text = inputOperator
         validOperatorLabel.textColor = .white
         
         [validOperatorLabel, validOperandLabel].forEach { recordStackView.addArrangedSubview($0) }
@@ -218,15 +217,15 @@ final class CalculatorViewController: UIViewController {
         return recordStackView
     }
     
-   @IBAction private func updateOperandSign() {
-        guard currentDisplayNumber != CalculatorViewController.zero else {
+   @IBAction private func clickOperandSign() {
+        guard inputNumber != CalculatorViewController.zero else {
             return
         }
         
-       if currentDisplayNumber.contains(CalculatorViewController.negativeSign) {
-            currentDisplayNumber.removeFirst()
+       if inputNumber.contains(CalculatorViewController.negativeSign) {
+            inputNumber.removeFirst()
         } else {
-            currentDisplayNumber.insert(CalculatorViewController.negativeSign, at: currentDisplayNumber.startIndex)
+            inputNumber.insert(CalculatorViewController.negativeSign, at: inputNumber.startIndex)
         }
     }
 }
