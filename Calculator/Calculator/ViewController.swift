@@ -11,8 +11,6 @@ final class ViewController: UIViewController {
     @IBOutlet weak var allCalculatStack: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var allCalculatStackIsEmpty: Bool { allCalculatStack.arrangedSubviews.isEmpty }
-    
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -35,8 +33,8 @@ final class ViewController: UIViewController {
 private extension ViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        if !allCalculatStackIsEmpty && (operatorLabel.text?.isEmpty == true) {
-            allClearStackView()
+        if !allCalculatStack.isEmpty && (operatorLabel.text?.isEmpty == true) {
+            allCalculatStack.clearSubViews()
             
             operandLabel.text = ""
         }
@@ -62,7 +60,7 @@ private extension ViewController {
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         guard let operandText = operandLabel.text, CalauletorError(rawValue: operandText) == nil else { return }
         
-        if  operandLabel.text == .zero && allCalculatStackIsEmpty {
+        if  operandLabel.text == .zero && allCalculatStack.isEmpty {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -76,7 +74,7 @@ private extension ViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        allClearStackView()
+        allCalculatStack.clearSubViews()
         
         resetLabelText()
     }
@@ -159,10 +157,6 @@ private extension ViewController {
         allCalculatStack.addArrangedSubview(calculationStackView)
     }
     
-    func allClearStackView() {
-        allCalculatStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
     func makeFormula() -> String {
         var formula = ""
         
@@ -198,6 +192,16 @@ private extension ViewController {
         if (positionValue.y > 0) {
             scrollView.setContentOffset(positionValue, animated: true)
         }
+    }
+}
+
+// MARK: - UIStackView Method
+private extension UIStackView {
+    
+    var isEmpty: Bool { self.arrangedSubviews.isEmpty }
+    
+    func clearSubViews() {
+        self.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
