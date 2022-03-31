@@ -54,8 +54,12 @@ final class CalculatorViewController: UIViewController {
         currentOperandLabel.text = .zero
         currentOperatorLabel.text = .empty
     }
+}
+
+// MARK: - IBAction Method
+
+extension CalculatorViewController {
     
-    // MARK: Operand Button Method
     @IBAction private func operandButtonsDidTouch(_ sender: UIButton) {
         guard var validOperand = checkValidity(of: sender) else { return }
         
@@ -75,9 +79,6 @@ final class CalculatorViewController: UIViewController {
         currentOperandLabel.text = returnNumberDividedByComma(from: validOperand)
     }
     
-
-    
-    // MARK: Operator Button Methods
     @IBAction private func operatorButtonsDidTouch(_ sender: UIButton) {
         if isResultButtonDidTouch == true {
             isOperandEntered = false
@@ -103,7 +104,6 @@ final class CalculatorViewController: UIViewController {
         isResultButtonDidTouch = true
     }
     
-    // MARK: Extra Button Methods
     @IBAction private func allClearButtonDidTouch(_ sender: UIButton) {
         currentOperandLabel.text = .zero
         currentOperatorLabel.text = .empty
@@ -133,8 +133,11 @@ final class CalculatorViewController: UIViewController {
         
         currentOperandLabel.text = currentOperand
     }
-    
-    // MARK: StackView Related Method
+}
+
+// MARK: - logic Method
+
+extension CalculatorViewController {
     private func checkAndAddLabelToStackView() {
         let commaDeletedOperand = currentOperand.filter { $0 != "," }
         let numberFormatter = NumberFormatter()
@@ -147,7 +150,6 @@ final class CalculatorViewController: UIViewController {
         addLabelToStackView(formattedNumber, currentOperator)
     }
     
-    // MARK: Function-Separated Method
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -237,4 +239,3 @@ final class CalculatorViewController: UIViewController {
         return returnNumberDividedByComma(from: resultString)
     }
 }
-
