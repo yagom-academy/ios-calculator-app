@@ -69,19 +69,9 @@ extension CalculatorViewController {
     
     @IBAction private func operandButtonsDidTouch(_ sender: UIButton) {
         guard var validOperand = checkValidity(of: sender) else { return }
+        guard let buttonString = sender.currentTitle else { return }
         
-        Number.allCases.forEach { number in
-            guard let buttonString = sender.currentTitle else { return }
-            
-            if buttonString == number.rawValue {
-                validOperand += number.rawValue
-            } else if buttonString == .doubleZero, number == .doubleZero {
-                validOperand += .doubleZero
-            } else if buttonString == .decimalPoint, number == .decimalPoint {
-                validOperand += .decimalPoint
-            }
-        }
-        
+        validOperand += buttonString
         isOperandEntered = true
         currentOperandLabel.text = returnNumberDividedByComma(from: validOperand)
     }
@@ -190,6 +180,7 @@ extension CalculatorViewController {
     
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.currentTitle else { return nil }
+        guard !currentOperand.contains(".") || buttonString != "." else { return nil }
         guard currentOperand.filter({ $0 != "," }).count < 20 else { return nil }
         guard currentOperand != .zero || buttonString != .doubleZero else { return nil }
         
