@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CalculatorEtc {
+enum CalculatorNameSpace {
     static let singleZero = "0"
     static let doubleZero = "00"
     static let singleDot = "."
