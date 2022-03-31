@@ -13,8 +13,8 @@ enum CalculatorError {
     case nonOperator
 }
 
-extension CalculatorError: LocalizedError {
-    var errorDescription: String? {
+extension CalculatorError: Error {
+    var errorDescription: String {
         switch self {
         case .divisionByZero:
             return "NaN"
