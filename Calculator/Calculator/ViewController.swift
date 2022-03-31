@@ -142,7 +142,7 @@ private extension ViewController {
         return operandLabel
     }
     
-    func ㅎ() -> UIStackView {
+    func makeStackView() -> UIStackView {
         let stackView = UIStackView()
         
         stackView.spacing = 8
