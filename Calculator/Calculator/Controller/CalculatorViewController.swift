@@ -10,27 +10,6 @@ final class CalculatorViewController: UIViewController {
     // MARK: IBOutlet
     @IBOutlet private weak var currentOperandLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
-    
-    @IBOutlet private weak var zeroButton: UIButton!
-    @IBOutlet private weak var doubleZeroButton: UIButton!
-    @IBOutlet private weak var decimalPointButton: UIButton!
-    @IBOutlet private weak var oneButton: UIButton!
-    @IBOutlet private weak var twoButton: UIButton!
-    @IBOutlet private weak var threeButton: UIButton!
-    @IBOutlet private weak var fourButton: UIButton!
-    @IBOutlet private weak var fiveButton: UIButton!
-    @IBOutlet private weak var sixButton: UIButton!
-    @IBOutlet private weak var sevenButton: UIButton!
-    @IBOutlet private weak var eightButton: UIButton!
-    @IBOutlet private weak var nineButton: UIButton!
-    
-    @IBOutlet private weak var addButton: UIButton!
-    @IBOutlet private weak var subtractButton: UIButton!
-    @IBOutlet private weak var multiplyButton: UIButton!
-    @IBOutlet private weak var divideButton: UIButton!
-
-    @IBOutlet private weak var resultButton: UIButton!
-    @IBOutlet private weak var convertingSignButton: UIButton!
 
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
