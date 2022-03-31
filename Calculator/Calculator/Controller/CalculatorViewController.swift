@@ -24,6 +24,13 @@ final class CalculatorViewController: UIViewController {
         operatorsLabel.text = CalculatorNameSpace.emptyStateString
     }
     
+    private func bringCurrentOperandsLabelText() -> String {
+        guard let currentLabel = operandsLabel.text else {
+            return CalculatorNameSpace.emptyStateString
+        }
+        return currentLabel
+    }
+    
     @IBAction func didTapOperandButtons(_ sender: UIButton) {
         guard let operandButtonLabelText = sender.titleLabel?.text else {
             return
@@ -34,7 +41,34 @@ final class CalculatorViewController: UIViewController {
         guard isValidFirstInputNonZero(inputText: operandButtonLabelText) else {
             return
         }
-        operandsLabel.text = numberFormatter(by: operandButtonLabelText)
+        let currentLabel = bringCurrentOperandsLabelText()
+        
+        if currentLabel.contains(CalculatorNameSpace.singleDot) {
+            temporaryOperandText += operandButtonLabelText
+            operandsLabel.text = appendOperandsLabel(by: operandButtonLabelText)
+            return
+        }
+        operandsLabel.text = numberFormatter(currentLabel: currentLabel, inputText: operandButtonLabelText)
+    }
+    
+    @IBAction func didTapSingleDotButton(_ sender: UIButton) {
+        guard let singleDotButtonLabelText = sender.titleLabel?.text else {
+            return
+        }
+        guard hasNotIncludedSingleDot() else {
+            return
+        }
+        var currentLabel = bringCurrentOperandsLabelText()
+        
+        if currentLabel == CalculatorNameSpace.singleZero {
+            currentLabel += singleDotButtonLabelText
+            temporaryOperandText = CalculatorNameSpace.singleZeroAndDot
+            operandsLabel.text = currentLabel
+            return
+        }
+        currentLabel += singleDotButtonLabelText
+        temporaryOperandText += singleDotButtonLabelText
+        operandsLabel.text = currentLabel
     }
 }
 
@@ -58,16 +92,13 @@ extension CalculatorViewController {
         return true
     }
     
-    private func numberFormatter(by inputText: String) -> String? {
+    private func numberFormatter(currentLabel: String, inputText: String) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         
-        if operandsLabel.text == CalculatorNameSpace.singleZero {
+        if currentLabel == CalculatorNameSpace.singleZero {
             return updateTemporaryOperandText(by: inputText)
-        }
-        if temporaryOperandText.hasSuffix(CalculatorNameSpace.singleDot) {
-            return appendTemporaryOperandText(by: inputText)
         }
         temporaryOperandText += inputText
         return numberFormatter.string(for: Double(temporaryOperandText))
@@ -77,9 +108,21 @@ extension CalculatorViewController {
             temporaryOperandText = inputText
             return temporaryOperandText
     }
-    
-    private func appendTemporaryOperandText(by inputText: String) -> String {
-            temporaryOperandText += inputText
-            return temporaryOperandText
+        
+    private func appendOperandsLabel(by inputText: String) -> String {
+        var currentLabel = bringCurrentOperandsLabelText()
+        currentLabel.append(contentsOf: inputText)
+        return currentLabel
     }
 }
+
+// MARK: - didTapSingleDotButton 관련 메서드
+extension CalculatorViewController {
+    private func hasNotIncludedSingleDot() -> Bool {
+        if temporaryOperandText.contains(CalculatorNameSpace.singleDot) {
+            return false
+        }
+        return true
+    }
+}
+
