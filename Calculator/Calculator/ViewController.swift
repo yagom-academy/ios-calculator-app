@@ -13,7 +13,7 @@ final class ViewController: UIViewController {
     
     var allCalculatStackIsEmpty: Bool { allCalculatStack.arrangedSubviews.isEmpty }
     
-    private var numberFormatter: NumberFormatter = {
+    private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 20
