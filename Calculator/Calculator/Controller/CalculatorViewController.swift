@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     private var temporaryOperandText: String = CalculatorNameSpace.emptyStateString
     private var confirmedFormula: [String] = []
@@ -23,7 +23,24 @@ class CalculatorViewController: UIViewController {
         operandsLabel.text = CalculatorNameSpace.singleZero
         operatorsLabel.text = CalculatorNameSpace.emptyStateString
     }
+    
+    @IBAction func didTapOperandButtons(_ sender: UIButton) {
+        guard let operandButtonLabelText = sender.titleLabel?.text else {
+            return
+        }
+        guard isValidTemporaryOperandTextDigitsLessFifteenCount() else {
+            return
+        }
+        guard isValidFirstInputNonZero(inputText: operandButtonLabelText) else {
+            return
+        }
+        updateTemporaryOperandTextAndOperandsLabel(by: operandButtonLabelText)
+    }
+}
 
+// MARK: - didTapOperandButtons 관련 메서드
+
+extension CalculatorViewController {
     private func isValidTemporaryOperandTextDigitsLessFifteenCount() -> Bool {
         if temporaryOperandText.count > CalculatorNameSpace.doubleTypeSignificantDigits {
             return false
@@ -46,18 +63,5 @@ class CalculatorViewController: UIViewController {
             temporaryOperandText = inputText
             operandsLabel.text = temporaryOperandText
         }
-    }
-    
-    @IBAction func didTapOperandButtons(_ sender: UIButton) {
-        guard let operandButtonLabelText = sender.titleLabel?.text else {
-            return
-        }
-        guard isValidTemporaryOperandTextDigitsLessFifteenCount() else {
-            return
-        }
-        guard isValidFirstInputNonZero(inputText: operandButtonLabelText) else {
-            return
-        }
-        updateTemporaryOperandTextAndOperandsLabel(by: operandButtonLabelText)
     }
 }
