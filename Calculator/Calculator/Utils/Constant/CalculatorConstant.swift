@@ -7,7 +7,7 @@
 
 enum CalculatorConstant {
     static let blank: String = ""
-    static let defaultNumber: String = "0"
+    static let defaultNumber: String = " 0"
     static let dot: String = "."
     static let comma: String = ","
     static let whiteSpace: String = " "

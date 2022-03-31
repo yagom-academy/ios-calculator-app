@@ -33,6 +33,11 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
+        
+        guard currentNumberLabelText != CalculatorConstant.defaultNumber else {
+            return
+        }
+        
         addInputStack()
         
         if allOperations.isEmpty == false {
@@ -109,6 +114,10 @@ final class CalculatorViewController: UIViewController {
             setLabels(numberText: String(result).numberFomatter())
             allOperations = []
         }
+    }
+    
+    override func viewDidLoad() {
+        setLabels(numberText: CalculatorConstant.defaultNumber)
     }
     
     private func removeComma(from input: String) -> String {
