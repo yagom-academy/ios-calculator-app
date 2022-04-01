@@ -39,7 +39,7 @@ final class CalculatorViewModel {
   }
   
   func addOperand(of numberString: String) {
-    guard self.operandValue.value.count <= 14 else {
+    guard self.isResult || self.operandValue.value.count <= 14 else {
       return
     }
     var value = self.operandValue.value
