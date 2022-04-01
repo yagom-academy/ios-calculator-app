@@ -13,6 +13,8 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operandsLabel: UILabel!
     @IBOutlet weak var operatorsLabel: UILabel!
+    @IBOutlet weak var verticalStackView: UIStackView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,7 @@ final class CalculatorViewController: UIViewController {
         temporaryOperandText = CalculatorNameSpace.negativeSign + temporaryOperandText
         operandsLabel.text = CalculatorNameSpace.negativeSign + operandsLabelText
     }
-        
+    
     @IBAction func didTapOperandButtons(_ sender: UIButton) {
         guard let operandButtonLabelText = sender.titleLabel?.text else {
             return
@@ -76,9 +78,13 @@ final class CalculatorViewController: UIViewController {
         guard let operatorButtonLabelText = sender.titleLabel?.text else {
             return
         }
+        guard let currentOperatorsLabel = operatorsLabel.text else {
+            return
+        }
         if temporaryOperandText == CalculatorNameSpace.singleZero {
             return
         }
+        appendArrangedStackView(operandText: temporaryOperandText, operatorText: currentOperatorsLabel)
         confirmedFormula.append(temporaryOperandText)
         confirmedFormula.append(operatorButtonLabelText)
         temporaryOperandText = CalculatorNameSpace.singleZero
@@ -161,5 +167,33 @@ extension CalculatorViewController {
             return false
         }
         return true
+    }
+}
+
+
+// MARK: - stackView 관련 메서드
+
+extension CalculatorViewController {
+    private func appendArrangedStackView(operandText: String?, operatorText: String?) {
+        let stackViewOperandLabel: UILabel = {
+            let label = UILabel()
+            label.text = operandText
+            label.textColor = .white
+            return label
+        }()
+        let stackViewOperatorLabel: UILabel = {
+            let label = UILabel()
+            label.text = operatorText
+            label.textColor = .white
+            return label
+        }()
+        let stackView: UIStackView = {
+            let view = UIStackView(arrangedSubviews: [stackViewOperatorLabel, stackViewOperandLabel])
+            view.axis = .horizontal
+            view.distribution = .fill
+            view.spacing = 8
+            return view
+        }()
+        verticalStackView.addArrangedSubview(stackView)
     }
 }
