@@ -20,6 +20,8 @@ enum ExpressionParser {
             }
             if let operatorElement = Operator(rawValue: Character(element)) {
                 operatorQueue.enqueue(operatorElement)
+            } else {
+                return Formula(operandQueue: operandQueue, opratorQueue: operatorQueue)
             }
         }
         return Formula(operandQueue: operandQueue, opratorQueue: operatorQueue)

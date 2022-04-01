@@ -82,7 +82,6 @@ final class CalculatorViewController: UIViewController {
         guard let operatorButtonLabelText = sender.titleLabel?.text else {
             return
         }
-        
         if temporaryOperandText == CalculatorNameSpace.singleZero {
             return
         }
@@ -96,9 +95,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTapEqualSignButton(_ sender: UIButton) {
-        if temporaryOperandText == CalculatorNameSpace.singleZero {
-            return
-        }
         if operatorsLabel.text == CalculatorNameSpace.emptyStateString {
             return
         }
@@ -106,7 +102,7 @@ final class CalculatorViewController: UIViewController {
         appendArrangedStackView(operandText: operandsLabel.text, operatorText: operatorsLabel.text)
         scrollView.scrollToBottom()
         
-        let valueToBeCalculate = confirmedFormula.joined(separator: " ") + " " + temporaryOperandText
+        let valueToBeCalculate = confirmedFormula.joined(separator: CalculatorNameSpace.whiteSpace) + CalculatorNameSpace.whiteSpace + temporaryOperandText
         let formula = ExpressionParser.parse(from: valueToBeCalculate)
         let result = String(formula.result())
         operandsLabel.text = numberFormatter(by: result)
