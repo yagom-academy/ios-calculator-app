@@ -28,7 +28,6 @@ final class CalculatorViewController: UIViewController {
         operandsLabel.text = CalculatorNameSpace.singleZero
     }
     
-    
     @IBAction func didTapPositiveNegativeConversionButton(_ sender: UIButton) {
         guard var operandsLabelText = operandsLabel.text else {
             return
@@ -71,6 +70,20 @@ final class CalculatorViewController: UIViewController {
         }
         temporaryOperandText += operandButtonLabelText
         operandsLabel.text = operandsLabelText + operandButtonLabelText
+    }
+    
+    @IBAction func didTapOperatorButtons(_ sender: UIButton) {
+        guard let operatorButtonLabelText = sender.titleLabel?.text else {
+            return
+        }
+        if temporaryOperandText == CalculatorNameSpace.singleZero {
+            return
+        }
+        confirmedFormula.append(temporaryOperandText)
+        confirmedFormula.append(operatorButtonLabelText)
+        temporaryOperandText = CalculatorNameSpace.singleZero
+        operandsLabel.text = CalculatorNameSpace.singleZero
+        operatorsLabel.text = operatorButtonLabelText
     }
 }
 
