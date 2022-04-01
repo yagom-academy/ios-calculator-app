@@ -6,12 +6,6 @@
 
 import UIKit
 
-private extension Array where Element: UIView {
-    var isNotEmpty: Bool {
-        return !isEmpty
-    }
-}
-
 private extension String {
     static let zero = "0"
     static let doubleZero = "00"
@@ -23,10 +17,6 @@ private extension String {
     var isNotEmpty: Bool {
         return !isEmpty
     }
-}
-
-private extension Int {
-    static let limitDigit = 20
 }
 
 final class CalculatorViewController: UIViewController {

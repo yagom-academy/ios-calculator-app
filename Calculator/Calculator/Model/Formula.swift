@@ -27,8 +27,8 @@ struct Formula {
         }
         
         let splited = String(formulaResult).split(with: .plus)
-
-        if splited.count == 2, let digit = Int(splited[1]), digit > 20 {
+        
+        if let stringDigit = splited[safe: 1], let digit = Int(stringDigit), digit > .limitDigit {
             throw CalculatorError.overMaximumDigit
         }
         
