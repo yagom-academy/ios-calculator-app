@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var formulaToSend = ""
     private let stringZero = "0"
     private let stringDot = "."
     private let minusSign = "-"
@@ -116,7 +115,6 @@ class ViewController: UIViewController {
         addFormula(operator: operatorText, operand: operandsText)
         self.operandLabel.text = getResult()
         self.operatorLabel.text = ""
-        self.formulaToSend = ""
         self.isResult = true
         self.isInputZero = true
     }
@@ -139,7 +137,6 @@ class ViewController: UIViewController {
         removeFormulaList()
         self.operatorLabel.text = ""
         self.operandLabel.text = stringZero
-        self.formulaToSend = ""
         self.isInputZero = false
     }
     
@@ -158,7 +155,6 @@ class ViewController: UIViewController {
     }
     
     private func addFormula(`operator`: String, operand: String) {
-        self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(operand.changeToDouble()))"
         addFormulaListStackView(operator: `operator`, operand: operand)
     }
     
