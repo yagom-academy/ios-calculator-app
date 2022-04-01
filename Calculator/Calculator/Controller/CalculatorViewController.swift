@@ -14,7 +14,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var operandsLabel: UILabel!
     @IBOutlet weak var operatorsLabel: UILabel!
     @IBOutlet weak var verticalStackView: UIStackView!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,10 +81,14 @@ final class CalculatorViewController: UIViewController {
         guard let currentOperatorsLabel = operatorsLabel.text else {
             return
         }
+        guard let currentOperandsLabel = operandsLabel.text else {
+            return
+        }
         if temporaryOperandText == CalculatorNameSpace.singleZero {
             return
         }
-        appendArrangedStackView(operandText: temporaryOperandText, operatorText: currentOperatorsLabel)
+        appendArrangedStackView(operandText: currentOperandsLabel, operatorText: currentOperatorsLabel)
+        scrollView.scrollToBottom()
         confirmedFormula.append(temporaryOperandText)
         confirmedFormula.append(operatorButtonLabelText)
         temporaryOperandText = CalculatorNameSpace.singleZero
