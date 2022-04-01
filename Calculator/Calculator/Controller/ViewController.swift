@@ -142,10 +142,6 @@ class ViewController: UIViewController {
         self.isInputZero = false
     }
     
-    private func removeFormulaList() {
-        self.formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
-    }
-    
     private func changeNumberFormat(number: String) -> String {
         if number.contains(stringDot) && number.last == Character(stringZero) {
             return number
@@ -189,6 +185,12 @@ extension ViewController {
         numberStackView.addArrangedSubview(makeLabel(element: operand))
         self.formulaListStackView.addArrangedSubview(numberStackView)
         self.listScrollView.scrollToBottom()
+    }
+    
+    private func removeFormulaList() {
+        self.formulaListStackView.arrangedSubviews.forEach{
+            $0.removeFromSuperview()
+        }
     }
 }
 
