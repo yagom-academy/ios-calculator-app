@@ -364,26 +364,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="sbh-wC-koF" id="6Kh-Df-zUE"/>
-                        <outlet property="divideButton" destination="Tfz-eM-jll" id="FYa-PG-gXi"/>
                         <outlet property="historyScrollView" destination="BOT-7g-vxv" id="HCH-T4-CxP"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="LRD-eD-Vfa"/>
-                        <outlet property="multiplyButton" destination="811-Pz-An6" id="4N4-iJ-XNo"/>
-                        <outlet property="numberDotButton" destination="h8q-5h-bnb" id="Tq6-Ed-3rW"/>
-                        <outlet property="numberDoubleZeroButton" destination="sH6-8l-kje" id="Lch-wj-DTG"/>
-                        <outlet property="numberEightButton" destination="xgT-2D-A49" id="mLF-A1-ywN"/>
-                        <outlet property="numberFiveButton" destination="vpW-df-OLm" id="6bW-Zr-ph7"/>
-                        <outlet property="numberFourButton" destination="hQm-yz-XvG" id="Ypd-zX-ixi"/>
                         <outlet property="numberLabel" destination="Lwz-OF-XHD" id="jb1-YH-CC6"/>
-                        <outlet property="numberNineButton" destination="zcj-xJ-ruw" id="vYw-sD-oqy"/>
-                        <outlet property="numberOneButton" destination="nCE-qB-NiN" id="85m-CF-1sr"/>
-                        <outlet property="numberSevenButton" destination="L6z-2G-Gar" id="KBP-rS-gSl"/>
-                        <outlet property="numberSixButton" destination="OaY-Mw-CPv" id="6tJ-vs-tcN"/>
-                        <outlet property="numberThreeButton" destination="X8H-iH-tSd" id="o1l-2E-h65"/>
-                        <outlet property="numberTwoButton" destination="Rif-2S-UU2" id="nD1-dh-VLb"/>
-                        <outlet property="numberZeroButton" destination="mSz-Y3-r5Z" id="WHF-ac-43s"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="pAf-Zb-dWd"/>
-                        <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="wLa-ri-qYJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
