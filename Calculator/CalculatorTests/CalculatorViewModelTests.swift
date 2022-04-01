@@ -136,7 +136,6 @@ final class CalculatorViewModelTests: XCTestCase {
     XCTAssertEqual(output, "1.")
   }
   
-  
   // MARK: - addOperand
   
   func testAddOperand_WhenOutOfBoundsOperandProvided_ShouldEarlyExit() {
@@ -147,6 +146,39 @@ final class CalculatorViewModelTests: XCTestCase {
     let output = self.sut?.operandValue.value
     // then
     XCTAssertNotEqual(output, "11111111111111112")
+  }
+  
+  func testAddOperand_WhenOutOfBoundsResultProvided_ShouldOperandIsThree() {
+    // given
+    self.sut?.addOperand(of: "1000000000000000")
+    _ = self.sut?.addOperator(of: "+")
+    self.sut?.addOperand(of: "1000000000000000")
+    // when
+    _ = self.sut?.calculate()
+    self.sut?.addOperand(of: "3")
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "3")
+  }
+  
+  func testAddOperand_WhenDoubleZeroIsProvided_OperandShouldReturnZero() {
+    // given
+    self.sut?.addOperand(of: "0")
+    self.sut?.addOperand(of: "00")
+    // when
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "0")
+  }
+  
+  func testAddOperand_WhenOneAndTwoProvided_OperandShouldReturn12() {
+    // given
+    self.sut?.addOperand(of: "1")
+    self.sut?.addOperand(of: "2")
+    // when
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "12")
   }
   
   // MARK: - addOperator
