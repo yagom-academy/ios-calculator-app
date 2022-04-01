@@ -122,7 +122,8 @@ class ViewController: UIViewController {
     }
     
     func getResult() -> String {
-        var resultFormula = ExpressionParser.parse(frome: self.formulaToSend)
+        let a = sendFormula()
+        var resultFormula = ExpressionParser.parse(frome: a)
         let result = resultFormula.result()
         switch result {
         case .success(var number):
@@ -159,6 +160,17 @@ class ViewController: UIViewController {
     private func addFormula(`operator`: String, operand: String) {
         self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(operand.changeToDouble()))"
         addFormulaListStackView(operator: `operator`, operand: operand)
+    }
+    
+    private func sendFormula() -> String {
+        var formula: String = ""
+        self.formulaListStackView.arrangedSubviews.forEach({a in
+            let operatorLabel = a.subviews[0] as? UILabel
+            let operandLabel = a.subviews[1] as? UILabel
+            formula = "\(formula) \(operatorLabel?.text ?? "") \(operandLabel?.text ?? "")"
+        })
+        
+        return formula
     }
 }
 // MARK: - About View
