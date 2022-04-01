@@ -19,9 +19,8 @@ final class CalculatorViewController: UIViewController {
         initializeCalculatorHistory()
     }
     
-    private func initializeCalculatorHistory() {
-        operandsLabel.text = CalculatorNameSpace.singleZero
-        operatorsLabel.text = CalculatorNameSpace.emptyStateString
+    @IBAction func didTapAllClearButton(_ sender: UIButton) {
+        initializeCalculatorHistory()
     }
     
     @IBAction func didTapOperandButtons(_ sender: UIButton) {
@@ -49,6 +48,16 @@ final class CalculatorViewController: UIViewController {
         }
         temporaryOperandText = operandsLabelText
         operandsLabel.text = appendTemporaryOperandText(by: operandButtonLabelText)
+    }
+}
+
+// MARK: - didTapAllClearButton 관련 메서드
+
+extension CalculatorViewController {
+    private func initializeCalculatorHistory() {
+        operandsLabel.text = CalculatorNameSpace.singleZero
+        operatorsLabel.text = CalculatorNameSpace.emptyStateString
+        temporaryOperandText = CalculatorNameSpace.emptyStateString
     }
 }
 
