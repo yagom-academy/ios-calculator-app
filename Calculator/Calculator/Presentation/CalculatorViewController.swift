@@ -13,6 +13,7 @@ final class CalculatorViewController: UIViewController {
   @IBOutlet private weak var resultStackView: UIStackView!
   @IBOutlet private weak var operatorLabel: UILabel!
   @IBOutlet private weak var operandLabel: UILabel!
+  @IBOutlet private var buttons: [UIButton]!
   
   private let viewModel = CalculatorViewModel()
   
@@ -20,6 +21,11 @@ final class CalculatorViewController: UIViewController {
     super.viewDidLoad()
     self.bindUI()
     self.clearAll()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.configureUI()
   }
   
   @IBAction private func didTapKeyOperationButton(_ sender: UIButton) {
@@ -78,6 +84,12 @@ final class CalculatorViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension CalculatorViewController {
+  
+  func configureUI() {
+    self.buttons.forEach {
+      $0.layer.cornerRadius = 0.5 * $0.frame.width
+    }
+  }
   
   func bindUI() {
     self.viewModel.operatorType.bind { [weak self] operatorType in
