@@ -125,9 +125,10 @@ class ViewController: UIViewController {
         var resultFormula = ExpressionParser.parse(frome: self.formulaToSend)
         let result = resultFormula.result()
         switch result {
-        case .success(let number):
+        case .success(var number):
+            number = number == -0 ? 0 : number
             let stringResult = changeNumberFormat(number: String(number))
-            return stringResult == "-0" ? "0" : stringResult
+            return stringResult
         case .failure(let error):
             return error.errorDescription
         }
