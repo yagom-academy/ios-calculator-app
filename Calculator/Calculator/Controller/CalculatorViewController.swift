@@ -48,34 +48,11 @@ final class CalculatorViewController: UIViewController {
         clearInputNumber()
         clearInputOperator()
     }
-    
-    private func checkInputIsWithinRange(_ inputtingOperand: String) throws {
-        guard inputtingOperand.count <= CalculatorConstant.maximumDecimalCount else {
-            throw CalculatorError.outOfInputRange
-        }
-    }
-    
-    private func setUpNumberFormat() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = CalculatorConstant.maximumDecimalCount
-        numberFormatter.roundingMode = .halfUp
-    }
-    
-    private func clearFormulaString() {
-        formulaString = CalculatorConstant.empty
-    }
-    
-    private func clearHistoryStackView() {
-        historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    private func clearInputNumber() {
-        inputNumber = CalculatorConstant.zero
-    }
-    
-    private func clearInputOperator() {
-        inputOperator = CalculatorConstant.empty
-    }
+
+}
+
+//MARK: - IBAction
+extension CalculatorViewController {
     
     @IBAction private func clickNumber(_ sender: UIButton) {
         let clickValue = sender.currentTitle ?? CalculatorConstant.empty
@@ -135,15 +112,38 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func clickOperandSign() {
-        guard inputNumber != CalculatorConstant.zero else {
-            return
+        inputNumber = calculatorManager.editOperandSign(current: inputNumber)
+    }
+}
+
+//MARK: - private function
+extension CalculatorViewController {
+    private func checkInputIsWithinRange(_ inputtingOperand: String) throws {
+        guard inputtingOperand.count <= CalculatorConstant.maximumDecimalCount else {
+            throw CalculatorError.outOfInputRange
         }
-        
-        if inputNumber.contains(CalculatorConstant.negativeSign) {
-            inputNumber.removeFirst()
-        } else {
-            inputNumber.insert(CalculatorConstant.negativeSign, at: inputNumber.startIndex)
-        }
+    }
+    
+    private func setUpNumberFormat() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = CalculatorConstant.maximumDecimalCount
+        numberFormatter.roundingMode = .halfUp
+    }
+    
+    private func clearFormulaString() {
+        formulaString = CalculatorConstant.empty
+    }
+    
+    private func clearHistoryStackView() {
+        historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func clearInputNumber() {
+        inputNumber = CalculatorConstant.zero
+    }
+    
+    private func clearInputOperator() {
+        inputOperator = CalculatorConstant.empty
     }
     
     private func setInputNumber(_ num: String) {
@@ -201,4 +201,3 @@ final class CalculatorViewController: UIViewController {
         return decimalLength >= 16 && integerLength + decimalLength < CalculatorConstant.maximumDecimalCount
     }
 }
-
