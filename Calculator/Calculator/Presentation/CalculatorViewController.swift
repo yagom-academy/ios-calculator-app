@@ -33,11 +33,11 @@ final class CalculatorViewController: UIViewController {
       return
     }
     switch keyOperation {
-    case "AC":
+    case Constants.allClear:
       self.clearAll()
-    case "CE":
+    case Constants.clearEntry:
       self.clearEntry()
-    case "⁺⁄₋":
+    case Constants.signConversion:
       self.convertSign()
     default: break
     }
@@ -97,7 +97,7 @@ private extension CalculatorViewController {
       self?.operatorLabel.text = operatorType
     }
     self.viewModel.operandValue.bind { [weak self] operand in
-      let splitedOperand = operand.split(with: ".")
+      let splitedOperand = operand.components(separatedBy: Constants.dot)
       self?.operandLabel.text = self?.makeOperandLabel(splitedOperand)
     }
   }
@@ -109,19 +109,23 @@ private extension CalculatorViewController {
       return nil
     }
     var result = integer.formatString()
-    if self.viewModel.isDotted,
-        let decimal = result,
-        let fraction = splitedOperand.last
-    {
-      result = "\(decimal).\(fraction)"
+    if self.viewModel.isDotted, let decimal = result, let fraction = splitedOperand.last {
+      result = "\(decimal)\(Constants.dot)\(fraction)"
     }
-    if self.viewModel.isResult,
-        let numberString = result?.replacingOccurrences(of: ",", with: ""),
-        let number = Double(numberString)?.formatString()
-    {
+    if self.viewModel.isResult, let number = makeNumber(by: result) {
       result = number
     }
     return result
+  }
+  
+  func makeNumber(by result: String?) -> String? {
+    guard let numberString = result?.replacingOccurrences(of: Constants.comma,
+                                                          with: Constants.noneSpace),
+          let number = Double(numberString)?.formatString()
+    else {
+      return nil
+    }
+    return number
   }
   
   func clearAll() {
@@ -134,7 +138,7 @@ private extension CalculatorViewController {
   func clearEntry() {
     self.viewModel.clearEntry()
   }
-
+  
   func convertSign() {
     self.viewModel.convertSign()
   }
