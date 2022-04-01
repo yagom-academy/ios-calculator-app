@@ -3,6 +3,8 @@ import Foundation
 
 protocol CalculatorManagerable {
     func editInputNumber(current: String, input: String) -> String
+    
+    func editOperandSign(current: String) -> String
 }
 
 struct CalculatorManager : CalculatorManagerable {
@@ -28,4 +30,20 @@ struct CalculatorManager : CalculatorManagerable {
         
         return result
     }
+    
+    func editOperandSign(current: String) -> String {
+        guard current != CalculatorConstant.zero else {
+            return current
+        }
+        
+        var result = current
+        
+        if current.contains(CalculatorConstant.negativeSign) {
+            result.removeFirst()
+        } else {
+            result.insert(CalculatorConstant.negativeSign, at: result.startIndex)
+        }
+        return result
+    }
+    
 }
