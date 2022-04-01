@@ -49,6 +49,7 @@ final class CalculatorViewController: UIViewController {
     }
     if self.viewModel.calculate() {
       self.resultStackView.addArrangedSubview(stackView)
+      self.resultScrollView.scrollToBottom()
     }
   }
   
