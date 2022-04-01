@@ -1,5 +1,14 @@
 import UIKit
 
+enum CalcualtorConstant {
+    static let zero: String = "0"
+    static let empty: String = ""
+    static let negativeSign: Character = "-"
+    static let nanResult: String = "NaN"
+    static let dotSymbol: String = "."
+    static let maximumDecimalCount: Int = 20
+}
+
 final class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var numberLabel: UILabel!
@@ -8,16 +17,9 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
     
-    static let zero: String = "0"
-    static let empty: String = ""
-    static let negativeSign: Character = "-"
-    static let nanResult: String = "NaN"
-    static let dotSymbol: String = "."
-    static let maximumDecimalCount: Int = 20
-    
     private let numberFormatter = NumberFormatter()
     
-    private var inputNumber: String = CalculatorViewController.zero {
+    private var inputNumber: String = CalcualtorConstant.zero {
         didSet {
             numberLabel.text = inputNumber
             do {
@@ -28,13 +30,13 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private var inputOperator: String = CalculatorViewController.empty {
+    private var inputOperator: String = CalcualtorConstant.empty {
         didSet {
             operatorLabel.text = inputOperator
         }
     }
     
-    private var formulaString = CalculatorViewController.empty
+    private var formulaString = CalcualtorConstant.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,19 +47,19 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func checkInputIsWithinRange(_ inputtingOperand: String) throws {
-        guard inputtingOperand.count <= CalculatorViewController.maximumDecimalCount else {
+        guard inputtingOperand.count <= CalcualtorConstant.maximumDecimalCount else {
             throw CalculatorError.outOfInputRange
         }
     }
     
     private func setUpNumberFormat() {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = CalculatorViewController.maximumDecimalCount
+        numberFormatter.maximumSignificantDigits = CalcualtorConstant.maximumDecimalCount
         numberFormatter.roundingMode = .halfUp
     }
     
     private func clearFormulaString() {
-        formulaString = CalculatorViewController.empty
+        formulaString = CalcualtorConstant.empty
     }
     
     private func clearHistoryStackView() {
@@ -65,15 +67,15 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func clearInputNumber() {
-        inputNumber = CalculatorViewController.zero
+        inputNumber = CalcualtorConstant.zero
     }
     
     private func clearInputOperator() {
-        inputOperator = CalculatorViewController.empty
+        inputOperator = CalcualtorConstant.empty
     }
     
     @IBAction private func clickNumber(_ sender: UIButton) {
-        let clickValue = sender.currentTitle ?? CalculatorViewController.empty
+        let clickValue = sender.currentTitle ?? CalcualtorConstant.empty
         setInputNumber(clickValue)
     }
     
@@ -83,12 +85,12 @@ final class CalculatorViewController: UIViewController {
         updateHistoryStackView()
         updateFormulaString()
         
-        let operatorItem = sender.currentTitle ?? CalculatorViewController.empty
+        let operatorItem = sender.currentTitle ?? CalcualtorConstant.empty
         inputOperator = operatorItem
         clearInputNumber()
     }
     
-    @IBAction func clickCalculation(_ sender: UIButton) {
+    @IBAction private func clickCalculation(_ sender: UIButton) {
         guard formulaString.isEmpty == false else { return }
         
         updateHistoryStackView()
@@ -102,7 +104,7 @@ final class CalculatorViewController: UIViewController {
         showCalculateResult(result)
     }
     
-    @IBAction func clickDot(_ sender: UIButton) {
+    @IBAction private func clickDot(_ sender: UIButton) {
         guard let dot = sender.titleLabel?.text else {
             return
         }
@@ -114,12 +116,12 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func clickDoubleZero(_ sender: UIButton) {
+    @IBAction private func clickDoubleZero(_ sender: UIButton) {
         guard let doubleZero = sender.titleLabel?.text else{
             return
         }
         
-        if inputNumber == CalculatorViewController.zero {
+        if inputNumber == CalcualtorConstant.zero {
             return
         } else {
             inputNumber = inputNumber + doubleZero
@@ -138,19 +140,19 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func clickOperandSign() {
-        guard inputNumber != CalculatorViewController.zero else {
+        guard inputNumber != CalcualtorConstant.zero else {
             return
         }
         
-        if inputNumber.contains(CalculatorViewController.negativeSign) {
+        if inputNumber.contains(CalcualtorConstant.negativeSign) {
             inputNumber.removeFirst()
         } else {
-            inputNumber.insert(CalculatorViewController.negativeSign, at: inputNumber.startIndex)
+            inputNumber.insert(CalcualtorConstant.negativeSign, at: inputNumber.startIndex)
         }
     }
     
     private func setInputNumber(_ num: String) {
-        if inputNumber == CalculatorViewController.zero {
+        if inputNumber == CalcualtorConstant.zero {
             inputNumber = num
         } else {
             inputNumber = inputNumber + num
@@ -190,10 +192,10 @@ final class CalculatorViewController: UIViewController {
     
     private func showCalculateResult(_ result: Double) {
         if result.isNaN {
-           numberLabel.text = CalculatorViewController.nanResult
+           numberLabel.text = CalcualtorConstant.nanResult
         } else if cannotUseNumberFormatter(result) {
-            let integerLength = String(result).components(separatedBy: CalculatorViewController.dotSymbol)[0].count
-            numberLabel.text = String(format: "%.\(String(CalculatorViewController.maximumDecimalCount - integerLength))f", result)
+            let integerLength = String(result).components(separatedBy: CalcualtorConstant.dotSymbol)[0].count
+            numberLabel.text = String(format: "%.\(String(CalcualtorConstant.maximumDecimalCount - integerLength))f", result)
         } else {
             guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
             numberLabel.text = numberFormattedResult
@@ -201,11 +203,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func cannotUseNumberFormatter(_ result: Double) -> Bool {
-        let componentsByDecimalSeperator = String(result).components(separatedBy: CalculatorViewController.dotSymbol)
+        let componentsByDecimalSeperator = String(result).components(separatedBy: CalcualtorConstant.dotSymbol)
         let integerLength = componentsByDecimalSeperator[0].count
         let decimalLength = componentsByDecimalSeperator[1].count
         
-        return decimalLength >= 16 && integerLength + decimalLength < CalculatorViewController.maximumDecimalCount
+        return decimalLength >= 16 && integerLength + decimalLength < CalcualtorConstant.maximumDecimalCount
     }
 }
 
