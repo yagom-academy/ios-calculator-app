@@ -146,16 +146,11 @@ class ViewController: UIViewController {
         self.formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
-    private func changeToDouble(number: String) -> Double {
-        let doubleNumber = Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
-        return doubleNumber
-    }
-    
     private func changeNumberFormat(number: String) -> String {
         if number.contains(stringDot) && number.last == Character(stringZero) {
             return number
         }
-        let number = changeToDouble(number: number)
+        let number = number.changeToDouble()
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = -2
@@ -166,7 +161,7 @@ class ViewController: UIViewController {
     }
     
     private func addFormula(`operator`: String, operand: String) {
-        self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(changeToDouble(number: operand)))"
+        self.formulaToSend = "\(self.formulaToSend) \(`operator`) \(String(operand.changeToDouble()))"
         addFormulaListStackView(operator: `operator`, operand: operand)
     }
 }
