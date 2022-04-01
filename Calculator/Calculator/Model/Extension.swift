@@ -12,6 +12,11 @@ extension String {
         let doubleNumber = Double(self.replacingOccurrences(of: ",", with: "")) ?? 0
         return doubleNumber
     }
+    
+    func removeString(target: String) -> String {
+        let removedString = self.replacingOccurrences(of: target, with: "")
+        return removedString
+    }
 }
 
 extension Double: CalculateItem {
