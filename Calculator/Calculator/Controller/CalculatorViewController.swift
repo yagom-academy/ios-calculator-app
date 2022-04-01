@@ -24,10 +24,28 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTapClearEntryButton(_ sender: UIButton) {
-        temporaryOperandText = CalculatorNameSpace.emptyStateString
+        temporaryOperandText = CalculatorNameSpace.singleZero
         operandsLabel.text = CalculatorNameSpace.singleZero
     }
     
+    
+    @IBAction func didTapPositiveNegativeConversionButton(_ sender: UIButton) {
+        guard var operandsLabelText = operandsLabel.text else {
+            return
+        }
+        if temporaryOperandText == CalculatorNameSpace.singleZero {
+            return
+        }
+        if temporaryOperandText.hasPrefix(CalculatorNameSpace.negativeSign) {
+            temporaryOperandText.removeFirst()
+            operandsLabelText.removeFirst()
+            operandsLabel.text = operandsLabelText
+            return
+        }
+        temporaryOperandText = CalculatorNameSpace.negativeSign + temporaryOperandText
+        operandsLabel.text = CalculatorNameSpace.negativeSign + operandsLabelText
+    }
+        
     @IBAction func didTapOperandButtons(_ sender: UIButton) {
         guard let operandButtonLabelText = sender.titleLabel?.text else {
             return
@@ -38,7 +56,7 @@ final class CalculatorViewController: UIViewController {
         guard isValidFirstInputNonZero(inputText: operandButtonLabelText) else {
             return
         }
-        operandsLabel.text = numberFormatter(by: operandButtonLabelText)
+        operandsLabel.text = validateTemporaryOperandTextConditionAndChangeValue(by: operandButtonLabelText)
     }
     
     @IBAction func didTapSingleDotButton(_ sender: UIButton) {
@@ -51,8 +69,8 @@ final class CalculatorViewController: UIViewController {
         guard hasNotIncludedSingleDot() else {
             return
         }
-        temporaryOperandText = operandsLabelText
-        operandsLabel.text = appendTemporaryOperandText(by: operandButtonLabelText)
+        temporaryOperandText += operandButtonLabelText
+        operandsLabel.text = operandsLabelText + operandButtonLabelText
     }
 }
 
@@ -62,7 +80,7 @@ extension CalculatorViewController {
     private func initializeCalculatorHistory() {
         operandsLabel.text = CalculatorNameSpace.singleZero
         operatorsLabel.text = CalculatorNameSpace.emptyStateString
-        temporaryOperandText = CalculatorNameSpace.emptyStateString
+        temporaryOperandText = CalculatorNameSpace.singleZero
     }
 }
 
@@ -90,25 +108,35 @@ extension CalculatorViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
-        
+        return numberFormatter.string(for: Double(inputText))
+    }
+    
+    private func validateTemporaryOperandTextConditionAndChangeValue(by inputText: String) -> String? {
         if operandsLabel.text == CalculatorNameSpace.singleZero {
             return updateTemporaryOperandText(by: inputText)
         }
+        if temporaryOperandText.contains(CalculatorNameSpace.singleDot) &&
+            (inputText == CalculatorNameSpace.singleZero || inputText == CalculatorNameSpace.doubleZero) {
+            temporaryOperandText = appendTemporaryOperandText(by: inputText)
+            let operandsLabelText = operandsLabel.text ?? CalculatorNameSpace.singleZero
+            return operandsLabelText + inputText
+        }
         if temporaryOperandText.contains(CalculatorNameSpace.singleDot) {
-            return appendTemporaryOperandText(by: inputText)
+            let result = appendTemporaryOperandText(by: inputText)
+            return numberFormatter(by: result)
         }
         temporaryOperandText += inputText
-        return numberFormatter.string(for: Double(temporaryOperandText))
+        return numberFormatter(by: temporaryOperandText)
     }
     
     private func updateTemporaryOperandText(by inputText: String) -> String {
-            temporaryOperandText = inputText
-            return temporaryOperandText
+        temporaryOperandText = inputText
+        return temporaryOperandText
     }
     
     private func appendTemporaryOperandText(by inputText: String) -> String {
-            temporaryOperandText += inputText
-            return temporaryOperandText
+        temporaryOperandText += inputText
+        return temporaryOperandText
     }
 }
 
