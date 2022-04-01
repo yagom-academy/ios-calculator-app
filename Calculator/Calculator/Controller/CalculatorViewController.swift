@@ -1,198 +1,160 @@
 import UIKit
 
-final class CalculatorViewController: UIViewController {
-    
-    @IBOutlet private weak var numberZeroButton: UIButton!
-    @IBOutlet private weak var numberDoubleZeroButton: UIButton!
-    @IBOutlet private weak var numberDotButton: UIButton!
-    @IBOutlet private weak var numberOneButton: UIButton!
-    @IBOutlet private weak var numberTwoButton: UIButton!
-    @IBOutlet private weak var numberThreeButton: UIButton!
-    @IBOutlet private weak var numberFourButton: UIButton!
-    @IBOutlet private weak var numberFiveButton: UIButton!
-    @IBOutlet private weak var numberSixButton: UIButton!
-    @IBOutlet private weak var numberSevenButton: UIButton!
-    @IBOutlet private weak var numberEightButton: UIButton!
-    @IBOutlet private weak var numberNineButton: UIButton!
-    
-    @IBOutlet private weak var addButton: UIButton!
-    @IBOutlet private weak var subtractButton: UIButton!
-    @IBOutlet private weak var multiplyButton: UIButton!
-    @IBOutlet private weak var divideButton: UIButton!
-    
-    @IBOutlet private weak var currentNumberLabel: UILabel!
-    @IBOutlet private weak var currentOperandLabel: UILabel!
-    
-    @IBOutlet private weak var historyStackView: UIStackView!
-    @IBOutlet private weak var historyScrollView: UIScrollView!
-    
+enum CalculatorConstant {
     static let zero: String = "0"
     static let empty: String = ""
     static let negativeSign: Character = "-"
     static let nanResult: String = "NaN"
     static let dotSymbol: String = "."
+    static let doubleZero: String = "00"
+    static let maximumDecimalCount: Int = 20
+}
+
+final class CalculatorViewController: UIViewController {
+    
+    private let calculatorManager: CalculatorManagerable = CalculatorManager()
+    
+    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var historyStackView: UIStackView!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
     
-    private var currentDisplayNumber: String = CalculatorViewController.zero {
+    private var inputNumber: String = CalculatorConstant.zero {
         didSet {
-            currentNumberLabel.text = currentDisplayNumber
+            numberLabel.text = inputNumber
             do {
-                try inputIsWithinRange(currentDisplayNumber)
+                try checkInputIsWithinRange(inputNumber)
             } catch {
-                clearInputtingOperand()
+                clearInputNumber()
             }
         }
     }
     
-    private var currentDisplayOperator: String = CalculatorViewController.empty {
+    private var inputOperator: String = CalculatorConstant.empty {
         didSet {
-            currentOperandLabel.text = currentDisplayOperator
+            operatorLabel.text = inputOperator
         }
     }
     
-    private var totalCalculate = CalculatorViewController.empty
+    private var formulaString = CalculatorConstant.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNumberFormat()
         clearHistoryStackView()
-        clearInputtingOperand()
-        clearInputtingOperator()
+        clearInputNumber()
+        clearInputOperator()
     }
-    
-    private func setUpNumberFormat() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .halfUp
-    }
-    
-    private func inputIsWithinRange(_ inputtingOperand: String) throws {
-        guard inputtingOperand.count <= 20 else {
-            throw CalculatorError.outOfInputRange
-        }
-    }
+
+}
+
+//MARK: - IBAction
+extension CalculatorViewController {
     
     @IBAction private func clickNumber(_ sender: UIButton) {
-        let clickValue = sender.currentTitle ?? CalculatorViewController.empty
-        setCurrentDisplayNumber(clickValue)
-    }
-    
-    private func setCurrentDisplayNumber(_ num: String) {
-        
-        if currentDisplayNumber == CalculatorViewController.zero {
-            currentDisplayNumber = num
-        } else {
-            currentDisplayNumber = currentDisplayNumber + num
-        }
+        let clickValue = sender.currentTitle ?? CalculatorConstant.empty
+        setInputNumber(clickValue)
     }
     
     @IBAction private func clickOperator(_ sender: UIButton) {
-        guard currentDisplayNumber.isEmpty == false else { return }
+        guard inputNumber.isEmpty == false else { return }
         
         updateHistoryStackView()
-        addTotalCalculate()
+        updateFormulaString()
         
-        let operatorItem = sender.currentTitle ?? CalculatorViewController.empty
-        currentDisplayOperator = operatorItem
-        clearInputtingOperand()
+        let operatorItem = sender.currentTitle ?? CalculatorConstant.empty
+        inputOperator = operatorItem
+        clearInputNumber()
     }
     
-    @IBAction func executeCalculatingAction(_ sender: UIButton) {
-        guard totalCalculate.isEmpty == false else { return }
+    @IBAction private func clickCalculation(_ sender: UIButton) {
+        guard formulaString.isEmpty == false else { return }
         
         updateHistoryStackView()
-        addTotalCalculate()
-        clearInputtingOperand()
-        clearInputtingOperator()
+        updateFormulaString()
+        clearInputNumber()
+        clearInputOperator()
         
-        var parser = ExpressionParser.parse(from: totalCalculate)
+        var parser = ExpressionParser.parse(from: formulaString)
         
         guard let result = try? parser.result() as Double else { return }
-        configureCalculateResultLabel(result)
+        showCalculateResult(result)
     }
     
-    private func configureCalculateResultLabel(_ result: Double) {
-        
-        if result.isNaN {
-           currentNumberLabel.text = CalculatorViewController.nanResult
-        } else if cannotUseNumberFormatter(result) {
-            let integerLength = String(result).components(separatedBy: CalculatorViewController.dotSymbol)[0].count
-            currentNumberLabel.text = String(format: "%.\(String(20 - integerLength))f", result)
-        } else {
-            guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
-            currentNumberLabel.text = numberFormattedResult
-        }
-    }
-    
-    
-    private func cannotUseNumberFormatter(_ result: Double) -> Bool {
-        let componentsByDecimalSeperator = String(result).components(separatedBy: CalculatorViewController.dotSymbol)
-        let integerLength = componentsByDecimalSeperator[0].count
-        let decimalLength = componentsByDecimalSeperator[1].count
-        
-        return decimalLength >= 16 && integerLength + decimalLength < 20
-    }
-    
-    
-    @IBAction func clickDot(_ sender: UIButton) {
+    @IBAction private func clickDot(_ sender: UIButton) {
         guard let dot = sender.titleLabel?.text else {
             return
         }
         
-        if currentDisplayNumber.contains(dot) {
-            return
-        } else {
-            currentDisplayNumber = currentDisplayNumber + dot
-        }
+        inputNumber = calculatorManager.editInputNumber(current: inputNumber, input: dot)
     }
     
-    
-    @IBAction func clickDoubleZero(_ sender: UIButton) {
-        guard let doubleZero = sender.titleLabel?.text else{
+    @IBAction private func clickDoubleZero(_ sender: UIButton) {
+        guard let doubleZero = sender.titleLabel?.text else {
             return
         }
         
-        if currentDisplayNumber == CalculatorViewController.zero {
-            return
-        } else {
-            currentDisplayNumber = currentDisplayNumber + doubleZero
-        }
+        inputNumber = calculatorManager.editInputNumber(current: inputNumber, input: doubleZero)
     }
     
-    @IBAction private func allClear() {
-        clearInputtingOperand()
-        clearInputtingOperator()
-        clearFormula()
+    @IBAction private func clickAllClear() {
+        clearInputNumber()
+        clearInputOperator()
+        clearFormulaString()
         clearHistoryStackView()
     }
     
-    @IBAction private func clearEntry() {
-        clearInputtingOperand()
+    @IBAction private func clickClearEntry() {
+        clearInputNumber()
     }
     
-    private func addTotalCalculate() {
-        totalCalculate = "\(totalCalculate) \(currentOperandLabel.text ?? CalculatorViewController.empty) \(currentDisplayNumber)"
+    @IBAction private func clickOperandSign() {
+        inputNumber = calculatorManager.editOperandSign(current: inputNumber)
+    }
+}
+
+//MARK: - private function
+extension CalculatorViewController {
+    private func checkInputIsWithinRange(_ inputtingOperand: String) throws {
+        guard inputtingOperand.count <= CalculatorConstant.maximumDecimalCount else {
+            throw CalculatorError.outOfInputRange
+        }
+    }
+    
+    private func setUpNumberFormat() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = CalculatorConstant.maximumDecimalCount
+        numberFormatter.roundingMode = .halfUp
+    }
+    
+    private func clearFormulaString() {
+        formulaString = CalculatorConstant.empty
     }
     
     private func clearHistoryStackView() {
         historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func clearFormula() {
-        totalCalculate = CalculatorViewController.empty
+    private func clearInputNumber() {
+        inputNumber = CalculatorConstant.zero
     }
     
-    private func clearInputtingOperand() {
-        currentDisplayNumber = CalculatorViewController.zero
+    private func clearInputOperator() {
+        inputOperator = CalculatorConstant.empty
     }
     
-    private func clearInputtingOperator() {
-        currentDisplayOperator = CalculatorViewController.empty
+    private func setInputNumber(_ num: String) {
+        inputNumber = calculatorManager.editInputNumber(current: inputNumber, input: num)
+    }
+    
+    private func updateFormulaString() {
+        formulaString = "\(formulaString) \(inputOperator) \(inputNumber)"
     }
     
     private func updateHistoryStackView() {
-        let recordStackView = makeRecordStackView()
+        let recordStackView = recordStackView()
         historyStackView.addArrangedSubview(recordStackView)
         historyScrollView.layoutIfNeeded()
         let offsetY = historyScrollView.contentSize.height - historyScrollView.bounds.height
@@ -201,16 +163,16 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeRecordStackView() -> UIStackView {
+    private func recordStackView() -> UIStackView {
         let recordStackView = UIStackView()
         recordStackView.axis = .horizontal
         
         let validOperandLabel = UILabel()
-        validOperandLabel.text = numberFormatter.string(for: Double(currentDisplayNumber))
+        validOperandLabel.text = numberFormatter.string(for: Double(inputNumber))
         validOperandLabel.textColor = .white
         
         let validOperatorLabel = UILabel()
-        validOperatorLabel.text = currentDisplayOperator
+        validOperatorLabel.text = inputOperator
         validOperatorLabel.textColor = .white
         
         [validOperatorLabel, validOperandLabel].forEach { recordStackView.addArrangedSubview($0) }
@@ -218,16 +180,7 @@ final class CalculatorViewController: UIViewController {
         return recordStackView
     }
     
-   @IBAction private func updateOperandSign() {
-        guard currentDisplayNumber != CalculatorViewController.zero else {
-            return
-        }
-        
-       if currentDisplayNumber.contains(CalculatorViewController.negativeSign) {
-            currentDisplayNumber.removeFirst()
-        } else {
-            currentDisplayNumber.insert(CalculatorViewController.negativeSign, at: currentDisplayNumber.startIndex)
-        }
+    private func showCalculateResult(_ result: Double) {
+        numberLabel.text = calculatorManager.editCalculatorResult(current: result, numberFormatter: numberFormatter)
     }
 }
-
