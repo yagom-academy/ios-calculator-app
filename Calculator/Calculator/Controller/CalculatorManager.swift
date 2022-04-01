@@ -8,7 +8,7 @@ protocol CalculatorManagerable {
 }
 
 struct CalculatorManager : CalculatorManagerable {
-   private func editInputNumber(current: String, input: String) -> String {
+    func editInputNumber(current: String, input: String) -> String {
         var result: String = current
         
         switch input {
@@ -31,7 +31,7 @@ struct CalculatorManager : CalculatorManagerable {
         return result
     }
     
-    private func editOperandSign(current: String) -> String {
+    func editOperandSign(current: String) -> String {
         guard current != CalculatorConstant.zero else {
             return current
         }
@@ -46,7 +46,7 @@ struct CalculatorManager : CalculatorManagerable {
         return result
     }
     
-    private func editCalculatorResult(current: Double, numberFormatter: NumberFormatter) -> String {
+    func editCalculatorResult(current: Double, numberFormatter: NumberFormatter) -> String {
         var result = ""
         
         if current.isNaN {
@@ -62,7 +62,7 @@ struct CalculatorManager : CalculatorManagerable {
         return result
     }
     
-    private func cannotUseNumberFormatter(_ result: Double) -> Bool {
+    func cannotUseNumberFormatter(_ result: Double) -> Bool {
         let componentsByDecimalSeperator = String(result).components(separatedBy: CalculatorConstant.dotSymbol)
         let integerLength = componentsByDecimalSeperator[0].count
         let decimalLength = componentsByDecimalSeperator[1].count
