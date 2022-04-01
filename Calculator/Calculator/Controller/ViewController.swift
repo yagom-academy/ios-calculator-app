@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             return
         }
         if operandsText.contains(minusSign) {
-            self.operandLabel.text = operandsText.replacingOccurrences(of: minusSign, with: "")
+            self.operandLabel.text = operandsText.removeString(target: minusSign)
         } else {
             self.operandLabel.text = minusSign + operandsText
         }
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         guard let inputNumber = sender.titleLabel?.text else {
             return
         }
-        guard let operandsText = self.operandLabel.text, operandsText.replacingOccurrences(of: ",", with: "").count < 15 else {
+        guard let operandsText = self.operandLabel.text, operandsText.removeString(target: ",").count < 15 else {
             return
         }
         if isResult == true {
