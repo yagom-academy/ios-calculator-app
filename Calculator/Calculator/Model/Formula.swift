@@ -10,7 +10,7 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        var formulaResult = operands.dequeue() ?? 0
+        var formulaResult = operands.dequeue() ?? .zero
 
         while operands.isEmpty == false {
             guard let number = operands.dequeue(),
@@ -26,7 +26,7 @@ struct Formula {
             formulaResult = operatorData.calculate(lhs: formulaResult, rhs: number)
         }
         
-        let splited = String(formulaResult).split(with: "+")
+        let splited = String(formulaResult).split(with: .plus)
 
         if splited.count == 2, let digit = Int(splited[1]), digit > 20 {
             throw CalculatorError.overMaximumDigit

@@ -18,15 +18,15 @@ private extension String {
     static let empty = ""
     static let decimalPoint = "."
     static let nan = "NaN"
+    static let minus = "-"
     
     var isNotEmpty: Bool {
         return !isEmpty
     }
 }
 
-private extension Character {
-    static let comma = Character(",")
-    static let decimalPoint = Character(".")
+private extension Int {
+    static let limitDigit = 20
 }
 
 final class CalculatorViewController: UIViewController {
@@ -43,7 +43,7 @@ final class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 19
+        numberFormatter.maximumFractionDigits = .limitDigit
         return numberFormatter
     }()
     
@@ -139,10 +139,10 @@ extension CalculatorViewController {
     @IBAction private func signConvertingButtonDidTouch(_ sender: UIButton) {
         guard currentOperand != .zero else { return }
         
-        if currentOperand.first == "-" {
+        if currentOperand.first == .minus {
             currentOperand.removeFirst()
         } else {
-            currentOperand.insert("-", at: currentOperand.startIndex)
+            currentOperand.insert(.minus, at: currentOperand.startIndex)
         }
         
         currentOperandLabel.text = currentOperand
@@ -163,7 +163,7 @@ extension CalculatorViewController {
     }
     
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
-        if currentOperand.contains(.decimalPoint) && currentOperand.last == "0" {
+        if currentOperand.contains(.decimalPoint) && currentOperand.last == .zero {
             return currentOperand
         }
         
@@ -197,14 +197,14 @@ extension CalculatorViewController {
     
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.currentTitle else { return nil }
-        guard currentOperand.filter({ $0 != .comma }).count < 20 else { return nil }
+        guard currentOperand.filter({ $0 != .comma }).count < .limitDigit else { return nil }
         if currentOperand.contains(.decimalPoint) && buttonString == .decimalPoint { return nil}
         if currentOperand == .zero && buttonString == .doubleZero { return nil }
         
         if currentOperand == .zero, buttonString != .decimalPoint {
             currentOperand = .empty
-        } else if currentOperand.hasPrefix("-" + .zero) {
-            currentOperand = "-"
+        } else if currentOperand.hasPrefix(.minus + .zero) {
+            currentOperand = .minus
         }
         
         return currentOperand
