@@ -23,7 +23,7 @@ class FormulaTests: XCTestCase {
         // given
         let formula = "1 + 1"
         // when
-        var result = ExpressionParser.parse(frome: formula)
+        var result = ExpressionParser.parse(from: formula)
         // then
         switch result.result() {
         case .success(let value):
@@ -38,7 +38,7 @@ class FormulaTests: XCTestCase {
         // given
         let formula = "1 + 1 1"
         // when
-        var result = ExpressionParser.parse(frome: formula)
+        var result = ExpressionParser.parse(from: formula)
         // then
         switch result.result() {
         case .success(let value):
@@ -52,7 +52,7 @@ class FormulaTests: XCTestCase {
         // given
         let formula = "1 + 1 +"
         // when
-        var result = ExpressionParser.parse(frome: formula)
+        var result = ExpressionParser.parse(from: formula)
         // then
         switch result.result() {
         case .success(let value):
@@ -66,7 +66,7 @@ class FormulaTests: XCTestCase {
         // given
         let formula = "2 ÷ 0"
         // when
-        var result = ExpressionParser.parse(frome: formula)
+        var result = ExpressionParser.parse(from: formula)
         // then
         switch result.result() {
         case .success(let value):
@@ -80,7 +80,7 @@ class FormulaTests: XCTestCase {
         // given
         let formula = "              1  + 3"
         // when
-        var result = ExpressionParser.parse(frome: formula)
+        var result = ExpressionParser.parse(from: formula)
         // then
         switch result.result() {
         case .success(let value):
@@ -94,7 +94,7 @@ class FormulaTests: XCTestCase {
         // given
         let formula = "1 + 3          "
         // when
-        var result = ExpressionParser.parse(frome: formula)
+        var result = ExpressionParser.parse(from: formula)
         // then
         switch result.result() {
         case .success(let value):

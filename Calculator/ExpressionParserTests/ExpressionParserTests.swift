@@ -13,7 +13,7 @@ class ExpressionParserTests: XCTestCase {
         // given
         let someString = "1 + 2"
         // when
-        let result = ExpressionParser.parse(frome: someString)
+        let result = ExpressionParser.parse(from: someString)
         // then
         XCTAssertEqual(result.operands.first, 1)
         XCTAssertEqual(result.operands.last, 2)

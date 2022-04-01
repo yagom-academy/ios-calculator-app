@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         resetCaculator()
     }
-    
+    //MARK: - IBActions
     @IBAction private func touchACButton(_ sender: UIButton) {
         resetCaculator()
     }
@@ -57,7 +57,6 @@ class ViewController: UIViewController {
             removeFormulaList()
             self.operandLabel.text = inputNumber
         } else {
-            self.operandLabel.text = self.changeNumberFormat(number: operandsText + inputNumber)
             showNumberString(inputNumber: inputNumber, operandsText: operandsText)
         }
         self.isInputZero = true
@@ -78,10 +77,7 @@ class ViewController: UIViewController {
         guard let inputOperator = sender.titleLabel?.text else {
             return
         }
-        guard let operatorText = self.operatorLabel.text else {
-            return
-        }
-        guard let operandsText = self.operandLabel.text else {
+        guard let operatorText = self.operatorLabel.text, let operandsText = self.operandLabel.text else {
             return
         }
         if self.formulaListStackView.subviews.isEmpty && operandsText == stringZero || operandsText == "NaN" {
@@ -95,57 +91,39 @@ class ViewController: UIViewController {
             removeFormulaList()
             self.isResult = false
         }
-        addFormula(operator: operatorText, operand: operandsText)
+        addFormulaListStackView(operator: operatorText, operand: operandsText)
         self.operandLabel.text = stringZero
         self.isInputZero = false
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
-        if self.isResult == true {
+        if self.isResult == true || self.formulaListStackView.arrangedSubviews.isEmpty {
             return
         }
-        if self.formulaListStackView.arrangedSubviews.isEmpty {
+        guard let operatorText = self.operatorLabel.text, let operandsText = self.operandLabel.text else {
             return
         }
-        guard let operatorText = self.operatorLabel.text else {
-            return
-        }
-        guard let operandsText = self.operandLabel.text else {
-            return
-        }
-        addFormula(operator: operatorText, operand: operandsText)
+        addFormulaListStackView(operator: operatorText, operand: operandsText)
         self.operandLabel.text = getResult()
         self.operatorLabel.text = ""
         self.isResult = true
         self.isInputZero = true
     }
     
-    func getResult() -> String {
-        let a = sendFormula()
-        var resultFormula = ExpressionParser.parse(frome: a)
+    //MARK: - Methods
+    private func resetCaculator() {
+        removeFormulaList()
+        self.operatorLabel.text = ""
+        self.operandLabel.text = stringZero
+        self.isInputZero = false
+    }
+    
     private func showNumberString(inputNumber: String, operandsText: String) {
         if inputNumber == stringZero && operandsText.contains(stringDot) {
             self.operandLabel.text = operandsText + inputNumber
         } else {
             self.operandLabel.text = self.changeNumberFormat(number: operandsText + inputNumber)
         }
-    }
-        let result = resultFormula.result()
-        switch result {
-        case .success(var number):
-            number = number == -0 ? 0 : number
-            let stringResult = changeNumberFormat(number: String(number))
-            return stringResult
-        case .failure(let error):
-            return error.errorDescription
-        }
-    }
-    
-    private func resetCaculator() {
-        removeFormulaList()
-        self.operatorLabel.text = ""
-        self.operandLabel.text = stringZero
-        self.isInputZero = false
     }
     
     private func changeNumberFormat(number: String) -> String {
@@ -159,18 +137,26 @@ class ViewController: UIViewController {
         return changedNumber
     }
     
-    private func addFormula(`operator`: String, operand: String) {
-        addFormulaListStackView(operator: `operator`, operand: operand)
+    private func getResult() -> String {
+        var resultFormula = ExpressionParser.parse(from: sendFormula())
+        let result = resultFormula.result()
+        switch result {
+        case .success(var number):
+            number = number == -0 ? 0 : number
+            let stringResult = changeNumberFormat(number: String(number))
+            return stringResult
+        case .failure(let error):
+            return error.errorDescription
+        }
     }
     
     private func sendFormula() -> String {
         var formula: String = ""
-        self.formulaListStackView.arrangedSubviews.forEach({a in
-            let operatorLabel = a.subviews[0] as? UILabel
-            let operandLabel = a.subviews[1] as? UILabel
-            formula = "\(formula) \(operatorLabel?.text ?? "") \(operandLabel?.text ?? "")"
+        self.formulaListStackView.arrangedSubviews.forEach({ elementStackView in
+            let operatorLabel = elementStackView.subviews[0] as? UILabel
+            let operandLabel = elementStackView.subviews[1] as? UILabel
+            formula = "\(formula) \(operatorLabel?.text ?? "") \(operandLabel?.text?.removeString(target: ",") ?? "")"
         })
-        
         return formula
     }
 }
@@ -178,9 +164,6 @@ class ViewController: UIViewController {
 extension ViewController {
     private func makeStackView() -> UIStackView {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fill
         stackView.spacing = 8
         return stackView
     }
