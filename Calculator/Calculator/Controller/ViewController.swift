@@ -58,6 +58,7 @@ class ViewController: UIViewController {
             self.operandLabel.text = inputNumber
         } else {
             self.operandLabel.text = self.changeNumberFormat(number: operandsText + inputNumber)
+            showNumberString(inputNumber: inputNumber, operandsText: operandsText)
         }
         self.isInputZero = true
         self.isResult = false
@@ -122,6 +123,13 @@ class ViewController: UIViewController {
     func getResult() -> String {
         let a = sendFormula()
         var resultFormula = ExpressionParser.parse(frome: a)
+    private func showNumberString(inputNumber: String, operandsText: String) {
+        if inputNumber == stringZero && operandsText.contains(stringDot) {
+            self.operandLabel.text = operandsText + inputNumber
+        } else {
+            self.operandLabel.text = self.changeNumberFormat(number: operandsText + inputNumber)
+        }
+    }
         let result = resultFormula.result()
         switch result {
         case .success(var number):
@@ -141,9 +149,6 @@ class ViewController: UIViewController {
     }
     
     private func changeNumberFormat(number: String) -> String {
-        if number.contains(stringDot) && number.last == Character(stringZero) {
-            return number
-        }
         let number = number.changeToDouble()
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
