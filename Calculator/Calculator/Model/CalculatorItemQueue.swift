@@ -13,8 +13,8 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<T: CalculateItem> {
     private var queue: [Int: T] = [:]
-    private var head: Int = 0
-    private var tail: Int = 0
+    private var head = Int.zero
+    private var tail = Int.zero
     
     init(values: [T] = []) {
         values.forEach { enqueue(with: $0) }
@@ -41,7 +41,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     mutating func reset() {
         queue = [:]
-        head = 0
-        tail = 0
+        head = Int.zero
+        tail = Int.zero
     }
 }
