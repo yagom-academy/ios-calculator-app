@@ -23,6 +23,11 @@ final class CalculatorViewController: UIViewController {
         initializeCalculatorHistory()
     }
     
+    @IBAction func didTapClearEntryButton(_ sender: UIButton) {
+        temporaryOperandText = CalculatorNameSpace.emptyStateString
+        operandsLabel.text = CalculatorNameSpace.singleZero
+    }
+    
     @IBAction func didTapOperandButtons(_ sender: UIButton) {
         guard let operandButtonLabelText = sender.titleLabel?.text else {
             return
