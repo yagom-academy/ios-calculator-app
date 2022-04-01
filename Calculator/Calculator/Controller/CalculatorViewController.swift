@@ -93,7 +93,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func clickDoubleZero(_ sender: UIButton) {
-        guard let doubleZero = sender.titleLabel?.text else{
+        guard let doubleZero = sender.titleLabel?.text else {
             return
         }
         
@@ -182,22 +182,7 @@ extension CalculatorViewController {
     }
     
     private func showCalculateResult(_ result: Double) {
-        if result.isNaN {
-           numberLabel.text = CalculatorConstant.nanResult
-        } else if cannotUseNumberFormatter(result) {
-            let integerLength = String(result).components(separatedBy: CalculatorConstant.dotSymbol)[0].count
-            numberLabel.text = String(format: "%.\(String(CalculatorConstant.maximumDecimalCount - integerLength))f", result)
-        } else {
-            guard let numberFormattedResult = numberFormatter.string(for: result) else { return }
-            numberLabel.text = numberFormattedResult
-        }
+        numberLabel.text = calculatorManager.editCalculatorResult(current: result, numberFormatter: numberFormatter)
     }
     
-    private func cannotUseNumberFormatter(_ result: Double) -> Bool {
-        let componentsByDecimalSeperator = String(result).components(separatedBy: CalculatorConstant.dotSymbol)
-        let integerLength = componentsByDecimalSeperator[0].count
-        let decimalLength = componentsByDecimalSeperator[1].count
-        
-        return decimalLength >= 16 && integerLength + decimalLength < CalculatorConstant.maximumDecimalCount
-    }
 }
