@@ -58,7 +58,7 @@ class ViewController: UIViewController {
             removeFormulaList()
             self.operandLabel.text = inputNumber
         } else {
-            self.operandLabel.text = self.checkZeroAfterDot(number: operandsText + inputNumber)
+            self.operandLabel.text = self.changeNumberFormat(number: operandsText + inputNumber)
         }
         self.isInputZero = true
         self.isResult = false
@@ -146,19 +146,15 @@ class ViewController: UIViewController {
         self.formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
-    private func checkZeroAfterDot(number: String) -> String {
-        if number.contains(stringDot) && number.last == Character(stringZero) {
-            return number
-        }
-        return changeNumberFormat(number: number)
-    }
-    
     private func changeToDouble(number: String) -> Double {
         let doubleNumber = Double(number.replacingOccurrences(of: ",", with: "")) ?? 0
         return doubleNumber
     }
     
     private func changeNumberFormat(number: String) -> String {
+        if number.contains(stringDot) && number.last == Character(stringZero) {
+            return number
+        }
         let number = changeToDouble(number: number)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
