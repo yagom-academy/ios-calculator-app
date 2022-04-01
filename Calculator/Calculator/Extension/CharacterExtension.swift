@@ -5,8 +5,6 @@
 //  Created by marisol on 2022/04/01.
 //
 
-import Foundation
-
 extension Character {
     static let comma: Character = ","
     static let decimalPoint: Character = "."

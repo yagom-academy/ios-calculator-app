@@ -163,7 +163,7 @@ extension CalculatorViewController {
     }
     
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
-        if currentOperand.contains(.decimalPoint) && currentOperand.last == .zero {
+        if currentOperand.contains(.decimalPoint), currentOperand.last == .zero {
             return currentOperand
         }
         
@@ -198,8 +198,8 @@ extension CalculatorViewController {
     private func checkValidity(of sender: UIButton) -> String? {
         guard let buttonString = sender.currentTitle else { return nil }
         guard currentOperand.filter({ $0 != .comma }).count < .limitDigit else { return nil }
-        if currentOperand.contains(.decimalPoint) && buttonString == .decimalPoint { return nil}
-        if currentOperand == .zero && buttonString == .doubleZero { return nil }
+        if currentOperand.contains(.decimalPoint), buttonString == .decimalPoint { return nil }
+        if currentOperand == .zero, buttonString == .doubleZero { return nil }
         
         if currentOperand == .zero, buttonString != .decimalPoint {
             currentOperand = .empty

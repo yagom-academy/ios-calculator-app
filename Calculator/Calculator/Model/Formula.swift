@@ -19,7 +19,7 @@ struct Formula {
                 throw CalculatorError.invalidFormula
             }
             
-            if number == .zero && operatorData == .division {
+            if number == .zero, operatorData == .division {
                 throw CalculatorError.divisionByZero
             }
             

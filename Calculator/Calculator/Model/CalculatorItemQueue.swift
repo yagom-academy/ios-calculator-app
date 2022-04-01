@@ -5,8 +5,6 @@
 //  Created by marisol on 2022/03/15.
 //
 
-import Foundation
-
 struct CalculatorItemQueue<T: CalculateItem> {
     private var nodeList: Array<T> = Array<T>()
     
