@@ -19,7 +19,9 @@ struct CalculatorManager : CalculatorManagerable {
                 result = current + input
             }
         default:
-            if current != CalculatorConstant.zero {
+            if current == CalculatorConstant.zero {
+                result = input
+            } else {
                 result = current + input
             }
         }
