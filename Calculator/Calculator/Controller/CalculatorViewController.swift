@@ -23,6 +23,10 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction func didTapAllClearButton(_ sender: UIButton) {
         initializeCalculatorHistory()
+        verticalStackView.subviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        confirmedFormula.removeAll()
     }
     
     @IBAction func didTapClearEntryButton(_ sender: UIButton) {
