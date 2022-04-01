@@ -6,12 +6,22 @@
 
 import UIKit
 
+private extension Array where Element: UIView {
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
+}
+
 private extension String {
     static let zero = "0"
     static let doubleZero = "00"
     static let empty = ""
     static let decimalPoint = "."
     static let nan = "NaN"
+    
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
 }
 
 private extension Character {
@@ -57,7 +67,7 @@ final class CalculatorViewController: UIViewController {
     }
     private var isResultButtonDidTouch: Bool {
         currentOperator == .empty &&
-        formulaStackView.arrangedSubviews.isEmpty == false
+        formulaStackView.arrangedSubviews.isNotEmpty
     }
     
     override func viewDidLoad() {
@@ -102,8 +112,8 @@ extension CalculatorViewController {
     }
     
     @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
-        guard currentOperator.isEmpty == false else { return }
-        guard formulaStackView.arrangedSubviews.isEmpty == false else { return }
+        guard currentOperator.isNotEmpty else { return }
+        guard formulaStackView.arrangedSubviews.isNotEmpty else { return }
         
         checkAndAddLabelToStackView()
         setResult()
@@ -113,7 +123,7 @@ extension CalculatorViewController {
         currentOperandLabel.text = .zero
         currentOperatorLabel.text = .empty
         
-        guard formulaStackView.arrangedSubviews.isEmpty == false else { return }
+        guard formulaStackView.arrangedSubviews.isNotEmpty else { return }
         
         for view in formulaStackView.arrangedSubviews {
             view.removeFromSuperview()
