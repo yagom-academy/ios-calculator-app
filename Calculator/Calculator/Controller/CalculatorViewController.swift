@@ -16,7 +16,6 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var numberLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
-    
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
     
@@ -184,5 +183,4 @@ extension CalculatorViewController {
     private func showCalculateResult(_ result: Double) {
         numberLabel.text = calculatorManager.editCalculatorResult(current: result, numberFormatter: numberFormatter)
     }
-    
 }

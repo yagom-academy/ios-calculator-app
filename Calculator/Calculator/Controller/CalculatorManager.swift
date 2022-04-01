@@ -2,13 +2,13 @@
 import Foundation
 
 protocol CalculatorManagerable {
-    func editInputNumber(current: String, input: String) -> String
-    func editOperandSign(current: String) -> String
-    func editCalculatorResult(current: Double, numberFormatter: NumberFormatter) -> String
+   func editInputNumber(current: String, input: String) -> String
+   func editOperandSign(current: String) -> String
+   func editCalculatorResult(current: Double, numberFormatter: NumberFormatter) -> String
 }
 
 struct CalculatorManager : CalculatorManagerable {
-    func editInputNumber(current: String, input: String) -> String {
+   private func editInputNumber(current: String, input: String) -> String {
         var result: String = current
         
         switch input {
@@ -31,7 +31,7 @@ struct CalculatorManager : CalculatorManagerable {
         return result
     }
     
-    func editOperandSign(current: String) -> String {
+    private func editOperandSign(current: String) -> String {
         guard current != CalculatorConstant.zero else {
             return current
         }
@@ -46,7 +46,7 @@ struct CalculatorManager : CalculatorManagerable {
         return result
     }
     
-    func editCalculatorResult(current: Double, numberFormatter: NumberFormatter) -> String {
+    private func editCalculatorResult(current: Double, numberFormatter: NumberFormatter) -> String {
         var result = ""
         
         if current.isNaN {
