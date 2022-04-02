@@ -6,163 +6,160 @@
 
 import UIKit
 
+private extension String {
+    static let zero = "0"
+    static let doubleZero = "00"
+    static let empty = ""
+    static let decimalPoint = "."
+    static let nan = "NaN"
+    static let minus = "-"
+    
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
+}
+
 final class CalculatorViewController: UIViewController {
     // MARK: IBOutlet
     @IBOutlet private weak var currentOperandLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
-    
-    @IBOutlet private weak var zeroButton: UIButton!
-    @IBOutlet private weak var doubleZeroButton: UIButton!
-    @IBOutlet private weak var decimalPointButton: UIButton!
-    @IBOutlet private weak var oneButton: UIButton!
-    @IBOutlet private weak var twoButton: UIButton!
-    @IBOutlet private weak var threeButton: UIButton!
-    @IBOutlet private weak var fourButton: UIButton!
-    @IBOutlet private weak var fiveButton: UIButton!
-    @IBOutlet private weak var sixButton: UIButton!
-    @IBOutlet private weak var sevenButton: UIButton!
-    @IBOutlet private weak var eightButton: UIButton!
-    @IBOutlet private weak var nineButton: UIButton!
-    
-    @IBOutlet private weak var addButton: UIButton!
-    @IBOutlet private weak var subtractButton: UIButton!
-    @IBOutlet private weak var multiplyButton: UIButton!
-    @IBOutlet private weak var divideButton: UIButton!
-
-    @IBOutlet private weak var resultButton: UIButton!
-    @IBOutlet private weak var convertingSignButton: UIButton!
 
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
     
-    private let comma: Character = ","
-    private var stringToParse: String = ""
-    private var isFirstOperand: Bool = true
+    private var stringToParse: String = .empty
     private var isOperandEntered: Bool = false
-    private var isResultButtonDidTouch: Bool = false
+
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = .limitDigit
+        return numberFormatter
+    }()
+    
+    private var currentOperand: String {
+        get {
+            currentOperandLabel.text ?? .empty
+        }
+        
+        set {
+            currentOperandLabel.text = newValue
+        }
+    }
+    
+    private var currentOperator: String {
+        currentOperatorLabel.text ?? .empty
+    }
+    private var isFirstOperand: Bool {
+        currentOperand == .zero &&
+        currentOperator == .empty &&
+        formulaStackView.arrangedSubviews.isEmpty
+    }
+    private var isResultButtonDidTouch: Bool {
+        currentOperator == .empty &&
+        formulaStackView.arrangedSubviews.isNotEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()
+        resetProperties()
     }
     
-    private func setUp() {
-        stringToParse = ""
-        isFirstOperand = true
+    private func resetProperties() {
+        stringToParse = .empty
         isOperandEntered = false
-        isResultButtonDidTouch = false
-        currentOperandLabel.text = Number.zero.rawValue
-        currentOperatorLabel.text = ""
+        currentOperandLabel.text = .zero
+        currentOperatorLabel.text = .empty
     }
+}
+
+// MARK: - IBAction Method
+
+extension CalculatorViewController {
     
-    // MARK: Operand Button Method
     @IBAction private func operandButtonsDidTouch(_ sender: UIButton) {
         guard var validOperand = checkValidity(of: sender) else { return }
+        guard let buttonString = sender.currentTitle else { return }
         
-        Number.allCases.forEach { number in
-            guard let buttonString = sender.titleLabel?.text else { return }
-            
-            if buttonString == number.rawValue {
-                validOperand += number.rawValue
-            } else if buttonString == Number.doubleZero.rawValue, number == .doubleZero {
-                validOperand += Number.doubleZero.rawValue
-            } else if buttonString == Number.decimalPoint.rawValue, number == .decimalPoint {
-                validOperand += Number.decimalPoint.rawValue
-            }
-        }
-        
+        validOperand += buttonString
         isOperandEntered = true
         currentOperandLabel.text = returnNumberDividedByComma(from: validOperand)
     }
     
-    // MARK: Operator Button Methods
     @IBAction private func operatorButtonsDidTouch(_ sender: UIButton) {
-        if isResultButtonDidTouch == true {
+        if isResultButtonDidTouch {
             isOperandEntered = false
-            currentOperandLabel.text = Number.zero.rawValue
-            currentOperatorLabel.text = sender.titleLabel?.text
-            isResultButtonDidTouch = false
+            currentOperandLabel.text = .zero
+            currentOperatorLabel.text = sender.currentTitle
         }
         
-        guard isOperandEntered == true else { return }
+        guard isOperandEntered else { return }
         
         checkAndAddLabelToStackView()
-        currentOperatorLabel.text = sender.titleLabel?.text
-        currentOperandLabel.text = Number.zero.rawValue
+        currentOperatorLabel.text = sender.currentTitle
+        currentOperandLabel.text = .zero
         isOperandEntered = false
     }
     
     @IBAction private func resultButtonDidTouch(_ sender: UIButton) {
-        guard let operatorString = currentOperatorLabel.text else { return }
-        guard !operatorString.isEmpty else { return }
-        guard !formulaStackView.arrangedSubviews.isEmpty else { return }
+        guard currentOperator.isNotEmpty else { return }
+        guard formulaStackView.arrangedSubviews.isNotEmpty else { return }
         
         checkAndAddLabelToStackView()
         setResult()
-        isResultButtonDidTouch = true
     }
     
-    // MARK: Extra Button Methods
     @IBAction private func allClearButtonDidTouch(_ sender: UIButton) {
-        currentOperandLabel.text = Number.zero.rawValue
-        currentOperatorLabel.text = ""
+        currentOperandLabel.text = .zero
+        currentOperatorLabel.text = .empty
         
-        guard formulaStackView.arrangedSubviews.last != nil else { return }
+        guard formulaStackView.arrangedSubviews.isNotEmpty else { return }
         
         for view in formulaStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
-        setUp()
+        resetProperties()
     }
     
     @IBAction private func clearEntryButtonDidTouch(_ sender: UIButton) {
-        currentOperandLabel.text = Number.zero.rawValue
+        currentOperandLabel.text = .zero
     }
     
     @IBAction private func signConvertingButtonDidTouch(_ sender: UIButton) {
-        guard var currentNumber = currentOperandLabel.text else { return }
-        guard currentNumber != Number.zero.rawValue else { return }
+        guard currentOperand != .zero else { return }
         
-        if currentNumber.contains(Operator.subtraction.rawValue) {
-            let minusSign = currentNumber.first
-            currentNumber = currentNumber.filter{ $0 != minusSign }
+        if currentOperand.first == .minus {
+            currentOperand.removeFirst()
         } else {
-            currentNumber = String(Operator.subtraction.rawValue) + currentNumber
+            currentOperand.insert(.minus, at: currentOperand.startIndex)
         }
         
-        currentOperandLabel.text = currentNumber
+        currentOperandLabel.text = currentOperand
     }
-    
-    // MARK: StackView Related Method
-    private func checkAndAddLabelToStackView() {
-        guard let operatorLabelText = currentOperatorLabel.text else { return }
-        guard let operandLabelText = currentOperandLabel.text else { return }
+}
 
-        let commaDeletedOperand = operandLabelText.filter { $0 != comma }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
+// MARK: - logic Method
+
+extension CalculatorViewController {
+    private func checkAndAddLabelToStackView() {
+        let commaDeletedOperand = currentOperand.filter { $0 != .comma }
 
         guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return }
         let number = NSNumber(value: doubledCurrentOperand)
         guard let formattedNumber = numberFormatter.string(from: number) else { return }
 
-        addLabelToStackView(formattedNumber, operatorLabelText)
+        addLabelToStackView(formattedNumber, currentOperator)
     }
     
-    // MARK: Function-Separated Method
     private func returnNumberDividedByComma(from currentOperand: String) -> String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 19
-        
-        guard currentOperand.contains(".") == false || currentOperand.last != "0" else {
+        if currentOperand.contains(.decimalPoint), currentOperand.last == .zero {
             return currentOperand
         }
         
-        let commaDeletedOperand = currentOperand.filter { $0 != comma }
+        let commaDeletedOperand = currentOperand.filter { $0 != .comma }
         
-        if commaDeletedOperand.hasSuffix(Number.decimalPoint.rawValue) {
+        if commaDeletedOperand.hasSuffix(.decimalPoint) {
             return currentOperand
         } else {
             guard let doubledCurrentOperand = Double(commaDeletedOperand) else { return nil }
@@ -180,22 +177,24 @@ final class CalculatorViewController: UIViewController {
             let result = try formulaForResult.result()
             currentOperandLabel.text = checkIfDecimalPointIsNeeded(result)
         } catch CalculatorError.divisionByZero {
-            currentOperandLabel.text = "NaN"
+            currentOperandLabel.text = .nan
+        } catch CalculatorError.overMaximumDigit {
+            currentOperandLabel.text = .nan
         } catch {}
         
-        currentOperatorLabel.text = ""
+        currentOperatorLabel.text = .empty
     }
     
     private func checkValidity(of sender: UIButton) -> String? {
-        guard let buttonString = sender.titleLabel?.text else { return nil }
-        guard var currentOperand = currentOperandLabel.text else { return nil }
-        guard currentOperand.filter({ $0 != comma }).count < 20 else { return nil }
-        guard currentOperand != Number.zero.rawValue || buttonString != "\(Number.doubleZero.rawValue)" else { return nil }
+        guard let buttonString = sender.currentTitle else { return nil }
+        guard currentOperand.filter({ $0 != .comma }).count < .limitDigit else { return nil }
+        if currentOperand.contains(.decimalPoint), buttonString == .decimalPoint { return nil }
+        if currentOperand == .zero, buttonString == .doubleZero { return nil }
         
-        if currentOperand == Number.zero.rawValue, buttonString != "\(Number.decimalPoint.rawValue)" {
-            currentOperand = ""
-        } else if currentOperand.hasPrefix("-\(Number.zero.rawValue)") {
-            currentOperand = "-"
+        if currentOperand == .zero, buttonString != .decimalPoint {
+            currentOperand = .empty
+        } else if currentOperand.hasPrefix(.minus + .zero) {
+            currentOperand = .minus
         }
         
         return currentOperand
@@ -208,19 +207,23 @@ final class CalculatorViewController: UIViewController {
             return label
         }()
         
-        if isFirstOperand == true {
+        if isFirstOperand {
             resultLabel.text = "\(operandLabelText) "
             formulaStackView.addArrangedSubview(resultLabel)
-            isFirstOperand = false
         } else {
             resultLabel.text = "\(operatorLabelText) \(operandLabelText) "
             formulaStackView.addArrangedSubview(resultLabel)
         }
         
-        guard let string = resultLabel.text?.filter({ $0 != comma }) else { return }
+        guard let string = resultLabel.text?.filter({ $0 != .comma }) else { return }
         
         stringToParse.append(string)
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height), animated: false)
+        scrollView.layoutIfNeeded()
+        
+        let labelHeight = scrollView.contentSize.height - scrollView.bounds.height
+        if labelHeight > 0 {
+            scrollView.setContentOffset(CGPoint(x: 0, y: labelHeight), animated: true)
+        }
     }
     
     private func checkIfDecimalPointIsNeeded(_ result: Double) -> String? {
@@ -235,4 +238,3 @@ final class CalculatorViewController: UIViewController {
         return returnNumberDividedByComma(from: resultString)
     }
 }
-

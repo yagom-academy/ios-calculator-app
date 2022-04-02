@@ -20,16 +20,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
                                 <rect key="frame" x="16" y="235.5" width="382" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf" userLabel="Vertical Stack View">
+                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="382" placeholderIntrinsicHeight="50" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf" userLabel="Vertical Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwU-n9-OZQ">
-                                                <rect key="frame" x="332" y="0.0" width="50" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -336,28 +328,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="sbh-wC-koF" id="Cra-hX-TrU"/>
-                        <outlet property="convertingSignButton" destination="ows-U7-mNc" id="Lcy-YG-2bf"/>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="jg9-Tx-FWt"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="0ad-ix-Ers"/>
-                        <outlet property="decimalPointButton" destination="h8q-5h-bnb" id="mFH-dA-e4r"/>
-                        <outlet property="divideButton" destination="Tfz-eM-jll" id="cni-2e-myc"/>
-                        <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="ym6-Bt-cJq"/>
-                        <outlet property="eightButton" destination="xgT-2D-A49" id="JbR-vx-M5G"/>
-                        <outlet property="fiveButton" destination="vpW-df-OLm" id="gpD-js-xrd"/>
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="cfa-m7-6Od"/>
-                        <outlet property="fourButton" destination="hQm-yz-XvG" id="2wk-Pu-EII"/>
-                        <outlet property="multiplyButton" destination="811-Pz-An6" id="UJL-ac-lUv"/>
-                        <outlet property="nineButton" destination="zcj-xJ-ruw" id="vwA-5V-LVN"/>
-                        <outlet property="oneButton" destination="nCE-qB-NiN" id="AjV-wq-okt"/>
-                        <outlet property="resultButton" destination="Daw-iX-Owl" id="Gs7-KB-gsJ"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="g5h-sa-Dmb"/>
-                        <outlet property="sevenButton" destination="L6z-2G-Gar" id="y3B-0u-X5A"/>
-                        <outlet property="sixButton" destination="OaY-Mw-CPv" id="iR7-az-7GU"/>
-                        <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="tbK-LW-bdn"/>
-                        <outlet property="threeButton" destination="X8H-iH-tSd" id="HJ2-qG-ZVd"/>
-                        <outlet property="twoButton" destination="Rif-2S-UU2" id="lv1-Bk-2fI"/>
-                        <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="VpZ-dR-uyd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
