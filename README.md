@@ -1,6 +1,7 @@
-# 계산기 I 프로젝트 저장소
+# 계산기 II 프로젝트 저장소
 
-> 프로젝트 기간 2022.03.14 ~ 2022.03.25 </br>
+> 계산기 I 프로젝트 기간 2022.03.14 ~ 2022.03.25 </br>
+> 계산기 II 프로젝트 기간 2022.03.28 ~ 2022.04.01 </br>
 팀원 : [@Lingo](https://github.com/llingo) [@mmim](https://github.com/JoSH0318) / 리뷰어 : 👑 [@엘림](https://github.com/lina0322)
 
 ## 목차
@@ -8,6 +9,8 @@
 - [프로젝트 소개](#프로젝트-소개)
 - [UML](#UML)
 - [STEP 1](#step-1)
+    + [고민 및 해결한 점](#고민_및_해결한_점)
+- [STEP 2](#step-2)
     + [고민 및 해결한 점](#고민_및_해결한_점)
 - [그라운드 룰](#그라운드-룰)
     + [스크럼](#스크럼)
@@ -53,6 +56,84 @@
 4. 입력하는 경우와 계산하는 경우에서 `.`을 처리하는 방식이 달라져야하므로 계산하는 경우에는 한번도 formatter를 거치도록 변경했습니다.
 5. ❓ViewModel의 OperandValue 프로퍼티의 값이 바뀌면 ViewController의 Label에 새로운 값을 할당하는 클로저가 길어지는 문제가 생겼습니다.
 6. ❗️데이터를 Label에 들어갈 값으로 변경하는 로직을 메서드로 기능을 분리하는 방법으로 해결했습니다.
+
+---
+
+## [STEP 2]
+### 고민 및 해결한 점
+
+1️⃣ 코드를 합치는 과정에서 서로간의 코드가 충돌이 나는 경우도 있었지만, 수월하게 합쳐지는 경우도 많았습니다. 이것을 통해 다시 한번 객체지향 프로그램의 중요성을 깨달았습니다. 객체가 다른 객체를 의존하지 않고 역할과 책임을 다했기 때문에 합치는 과정에서 충돌이 없었다고 생각합니다! 
+
+> 얼마나 객체끼리 의존하지 않고 있고, 객체가 역할과 책임에 충실하고 있는지를 파악해볼 수 있었습니다. 
+역시 야곰의 큰그림 👍 👑
+
+2️⃣ UML의 중요성
+
+계산기 I 프로젝트의 STEP 2에서 주어진 UML을 각자 구현했었습니다. 계산기 II에서 팀원과 코드를 합칠 때 충돌이 적게나는 것을 느꼈고 이를 통해 **UML 설계의 중요성**을 깨달을 수 있었습니다.
+
+3️⃣ 사전에 합의된 패턴의 중요성
+
+`mmim`은 MVC패턴을 적용했고 `lingo`는 테스트를 위해 MVVM, 옵저버 패턴을 적용했습니다. 코드를 합치는 과정에서 서로 다른 패턴으로 구현되어있었고 그 과정에서 구조상의 충돌이 있었습니다. 
+따라서, 설계하기전에 사전 합의된 패턴 사용의 중요성을 깨달을 수 있었습니다. 😅
+
+4️⃣ 버튼의 CornerRadius을 주는 과정에서 기기별 버튼 프레임 사이즈에 따라 CornerRadius이 변경되지 않는 문제가 발생했습니다.
+
+<img width="400px" src="https://i.imgur.com/B9l2JO4.png"/>
+
+❓ 위 코드와 같이 Button의 인스펙터에 접근할 수 있는 코드를 구현하고 사이즈 인스펙터에서 스토리보드의 버튼 크기의 1/2을 입력해주었지만 버튼마다 인스펙터에 접근해서 값을 입력해줘야 하는 번거러움이 생겼습니다.
+
+---
+
+<img width="400px" src="https://i.imgur.com/un7tO6l.png"/>
+
+❗️ 위와 같이 코드를 변경하여 On/Off를 통해 기기별 버튼 프레임 사이즈의 1/2이 자동으로 입력될 수 있도록 변경했습니다.
+
+❓ CornerRadius에 `self.frame.width * 0.5`을 할당해주었지만, 기기별로 찌그러지거나 완벽한 원형이 아니었습니다.(화면이 작은 기기는 찌그러짐, 화면이 큰 기기는 완벽한 구형이 아님)
+
+❗️ 디버깅 `[LLDB] po self.frame`으로 기기별 CornerRadius에 할당되는 값을 찍어봤습니다.
+- 기기별로 41.83이라는 같은 CornerRadius가 할당되고 있었고 41.83은 스토리보드의 버튼 크기의 반이라는 사실을 깨달았습니다.
+- 따라서, 실시간으로 기기별 버튼의 frame이 반영되지 않고 있다는 것을 알게되었습니다. (결국 시점의 문제)
+    
+---
+    
+<img width="400px" src="https://i.imgur.com/9B92UyN.png"/>
+
+❗️ 원하는 시점에 버튼의 CornerRadius가 할당될 수 있도록 위와 같이 스토리보드에서 설정하는 것이 아닌 코드로 기기가 앱을 실행시킨 후 ViewController 인스턴스가 초기화되는 시점에 구현해야한다고 판단했고 viewDidLoad 시점에서 함수를 호출해야할 것으로 가설을 세웠습니다.
+
+❓ viewDidLoad에 breakPoint를 두고 `[LLDB] po self.frame` 찍어봤지만 여전히 반영되지 않았습니다.
+❗️ 뷰가 로드될 시점에 스토리보드에서 지정된 기기의 frame을 받아서 넣어주기 때문에 다른 기기에서 실행 했을때 버튼이 찌그러진다고 판단했습니다.
+
+➡️ viewWillAppear까지 찍어보니 스토리보드에 지정한 기기의 frame을 읽어오고 있다는 것을 파악할 수 있었습니다. 하지만 viewDidAppear일때는 해당 기기의 frame을 읽어오는 것을 확인했습니다.
+
+➡️ viewDidAppear 시점에서 configureUI() 메서드를 호출하는 것으로 오류를 해결할 수 있었습니다. 👍
+
+---
+
+### 궁금한 점
+
+```swift
+func addOperator(of operatorString: String) -> Bool {
+    guard self.operandValue.value != "nan",
+          self.operandValue.value != "0" || self.operatorType.value != nil
+    else {
+      return false
+    }
+    self.isResult = false
+    if self.operandValue.value == "0" && self.operatorType.value != nil {
+      self.operatorType.next(operatorString)
+      return false
+    }
+    if let operatorType = self.operatorType.value {
+      self.formulas.append(operatorType)
+    }
+    self.formulas.append(self.operandValue.value)
+    self.operatorType.next(operatorString)
+    self.operandValue.next("0")
+    return true
+}
+```
+
+저희 코드에서 대표적으로 guard문과 if문이 많은 메서드 중 하나입니다. 많은 조건들을 제어하기 위한 어쩔수 없는 선택이었다고 생각합니다. `early exit`의 같은 경우는 guard문을 사용하고 맨 위로, 나머지 조건들은 if문으로 아래쪽에 배치했습니다. 궁금한 점은 이런 경우 더 좋은 방법이 있을까요? 조언을 얻고 싶습니다.😭🙏
 
 ---
 
@@ -110,5 +191,3 @@
 
 ### 브랜치 이름 규칙
 `II-STEP1`, `II-STEP2`, `II-STEP3`
-
-

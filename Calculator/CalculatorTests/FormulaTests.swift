@@ -23,48 +23,80 @@ final class FormulaTests: XCTestCase {
   }
   
   func test_result_operands_operators_queue_add가_주어졌을때_계산_결과_3을_반환해야한다() {
-    // given
+    // given when
     self.sut.operands.enqueue(1.0)
     self.sut.operands.enqueue(2.0)
-    self.sut.operators.enqueue(Operator.add)
-    // when
-    let output = try! self.sut.result()
+    self.sut.operators.enqueue(.add)
     // then
-    XCTAssertEqual(output, 3.0)
+    XCTAssertEqual(try self.sut.result(), 3.0)
   }
   
   func test_result_operands_operators_queue_subtract가_주어졌을때_계산_결과_0을_반환하면_안된다() {
-    // given
+    // given when
     self.sut.operands.enqueue(5.0)
     self.sut.operands.enqueue(10.0)
-    self.sut.operators.enqueue(Operator.subtract)
-    // when
-    let output = try! self.sut.result()
+    self.sut.operators.enqueue(.subtract)
     // then
-    XCTAssertNotEqual(output, .zero)
+    XCTAssertNotEqual(try self.sut.result(), .zero)
   }
   
   func test_result_operands_operators_queue_multiply가_주어졌을때_계산_결과_10을_반환해야한다() {
-    // given
+    // given when
     self.sut.operands.enqueue(2.0)
     self.sut.operands.enqueue(5.0)
-    self.sut.operators.enqueue(Operator.multiply)
-    // when
-    let output = try! self.sut.result()
+    self.sut.operators.enqueue(.multiply)
     // then
-    XCTAssertEqual(output, 10.0)
+    XCTAssertEqual(try self.sut.result(), 10.0)
   }
   
   func test_result_operands_operators_queue_divide_add가_주어졌을때_계산_결과_NaN을_반환해야한다() {
-    // given
+    // given when
     self.sut.operands.enqueue(2.0)
     self.sut.operands.enqueue(.zero)
     self.sut.operands.enqueue(5.0)
-    self.sut.operators.enqueue(Operator.divide)
-    self.sut.operators.enqueue(Operator.add)
-    // when
-    let output = try! self.sut.result()
+    self.sut.operators.enqueue(.divide)
+    self.sut.operators.enqueue(.add)
     // then
-    XCTAssertTrue(output.isNaN)
+    XCTAssertTrue(try self.sut.result().isNaN)
+  }
+  
+  func test_result_add_했을때_3이_반환되어야한다() {
+    // given
+    self.sut.operands.enqueue(1.0)
+    self.sut.operands.enqueue(2.0)
+    // when
+    self.sut.operators.enqueue(.add)
+    // then
+    XCTAssertEqual(try self.sut.result(), 3.0)
+  }
+  
+  func test_result_subtract_했을때_1이_반환되어야한다() {
+    // given
+    self.sut.operands.enqueue(2.0)
+    self.sut.operands.enqueue(1.0)
+    // when
+    self.sut.operators.enqueue(.subtract)
+    // then
+    XCTAssertEqual(try self.sut.result(), 1.0)
+  }
+  
+  func test_result_divide_했을때_2가_반환되어야한다() {
+    // given
+    self.sut.operands.enqueue(4.0)
+    self.sut.operands.enqueue(2.0)
+    // when
+    self.sut.operators.enqueue(.divide)
+    // then
+    XCTAssertEqual(try self.sut.result(), 2.0)
+  }
+  
+  func test_result_multiply_했을때_6이_반환되어야한다() {
+    // given
+    self.sut.operands.enqueue(2.0)
+    self.sut.operands.enqueue(3.0)
+    // when
+    self.sut.operators.enqueue(.multiply)
+    // then
+    XCTAssertEqual(try self.sut.result(), 6.0)
   }
 }

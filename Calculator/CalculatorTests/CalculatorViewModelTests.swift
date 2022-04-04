@@ -22,6 +22,8 @@ final class CalculatorViewModelTests: XCTestCase {
     self.sut = nil
   }
   
+  // MARK: - clearAll
+  
   func testClearAll_WhenCalled_OperatorTypeShouldReturnNil() {
     // given
     self.sut?.operandValue.next("1")
@@ -44,6 +46,8 @@ final class CalculatorViewModelTests: XCTestCase {
     // then
     XCTAssertEqual(output, "0")
   }
+  
+  // MARK: - clearEntry
   
   func testClearEntry_WhenCalled_OperatorTypeShouldNotReturnNil() {
     // given
@@ -68,6 +72,8 @@ final class CalculatorViewModelTests: XCTestCase {
     XCTAssertEqual(output, "0")
   }
   
+  // MARK: - convertSign
+  
   func testConvertSign_WhenCalled_OperandValueShouldReturnWithMinus() {
     // given
     self.sut?.operandValue.next("1234.0")
@@ -76,6 +82,16 @@ final class CalculatorViewModelTests: XCTestCase {
     let output = self.sut?.operandValue.value
     // then
     XCTAssertEqual(output, "-1234.0")
+  }
+  
+  func testConvertSign_WhenCalled_OperandValueShouldNotReturnMinus() {
+    // given
+    self.sut?.operandValue.next("-1234.0")
+    // when
+    self.sut?.convertSign()
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "1234.0")
   }
   
   func testConvertSign_WhenCalled_OperandValueShouldReturnZero() {
@@ -98,7 +114,9 @@ final class CalculatorViewModelTests: XCTestCase {
     XCTAssertEqual(output, "00")
   }
   
-  func testDidTapDotButton_WhenCalled_OperandValueShouldReturnWithDot() {
+  // MARK: - addDot
+  
+  func testAddDot_WhenDotNotUsed_ShouldReturnWithDot() {
     // given
     self.sut?.operandValue.next("1")
     // when
@@ -106,5 +124,143 @@ final class CalculatorViewModelTests: XCTestCase {
     let output = self.sut?.operandValue.value
     // then
     XCTAssertEqual(output, "1.")
+  }
+  
+  func testAddDot_WhenDotIsUsed_ShouldEarlyExit() {
+    // given
+    self.sut?.operandValue.next("1.")
+    // when
+    self.sut?.addDot()
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "1.")
+  }
+  
+  // MARK: - addOperand
+  
+  func testAddOperand_WhenOutOfBoundsOperandProvided_ShouldEarlyExit() {
+    // given
+    self.sut?.addOperand(of: "1111111111111111")
+    // when
+    self.sut?.addOperand(of: "2")
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertNotEqual(output, "11111111111111112")
+  }
+  
+  func testAddOperand_WhenOutOfBoundsResultProvided_ShouldOperandIsThree() {
+    // given
+    self.sut?.addOperand(of: "1000000000000000")
+    _ = self.sut?.addOperator(of: "+")
+    self.sut?.addOperand(of: "1000000000000000")
+    // when
+    _ = self.sut?.calculate()
+    self.sut?.addOperand(of: "3")
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "3")
+  }
+  
+  func testAddOperand_WhenDoubleZeroIsProvided_OperandShouldReturnZero() {
+    // given
+    self.sut?.addOperand(of: "0")
+    self.sut?.addOperand(of: "00")
+    // when
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "0")
+  }
+  
+  func testAddOperand_WhenOneAndTwoProvided_OperandShouldReturn12() {
+    // given
+    self.sut?.addOperand(of: "1")
+    self.sut?.addOperand(of: "2")
+    // when
+    let output = self.sut?.operandValue.value
+    // then
+    XCTAssertEqual(output, "12")
+  }
+  
+  // MARK: - addOperator
+  
+  func testAddOperator_WhenOperandIsNaN_ShouldReturnFalse() {
+    // given
+    self.sut?.operandValue.next("nan")
+    // when
+    let output = self.sut?.addOperator(of: "+")
+    // then
+    XCTAssertEqual(output, false)
+  }
+  
+  func testAddOperator_WhenOperandIsZero_ShouldReturnFalse() {
+    // given
+    self.sut?.operandValue.next("0")
+    // when
+    let output = self.sut?.addOperator(of: "+")
+    // then
+    XCTAssertEqual(output, false)
+  }
+  
+  func testAddOperator_WhenOperandIsZeroAndOperatorNotNil_ShouldReturnFalse() {
+    // given
+    self.sut?.operandValue.next("0")
+    self.sut?.operatorType.next("+")
+    // when
+    let output = self.sut?.addOperator(of: "+")
+    // then
+    XCTAssertEqual(output, false)
+  }
+  
+  func testAddOperator_WhenOneIsProvided_ShouldReturnTrue() {
+    // given
+    self.sut?.operandValue.next("1")
+    // when
+    let output = self.sut?.addOperator(of: "+")
+    // then
+    XCTAssertEqual(output, true)
+  }
+  
+  func testAddOperator_WhenOnePlusTwoIsProvided_ShouldReturnTrue() {
+    // given
+    self.sut?.operandValue.next("1")
+    self.sut?.operatorType.next("+")
+    self.sut?.operandValue.next("2")
+    // when
+    let output = self.sut?.addOperator(of: "×")
+    // then
+    XCTAssertEqual(output, true)
+  }
+  
+  // MARK: - calculate
+  
+  func testCalculate_WhenOperandIsZeroAndOperatorIsNil_ShouldReturnFalse() {
+    // given
+    self.sut?.addOperand(of: "0")
+    // when
+    let output = self.sut?.calculate()
+    // then
+    XCTAssertEqual(output, false)
+  }
+  
+  func testCalculate_WhenNormalFormulaIsProvided_ShouldReturnTrue() {
+    // given
+    self.sut?.addOperand(of: "1")
+    _ = self.sut?.addOperator(of: "+")
+    self.sut?.addOperand(of: "2")
+    // when
+    let output = self.sut?.calculate()
+    // then
+    XCTAssertEqual(output, true)
+  }
+  
+  func testCalculate_WhenResultIsZero_ShouldReturnTrue() {
+    // given
+    self.sut?.addOperand(of: "1")
+    _ = self.sut?.addOperator(of: "−")
+    self.sut?.addOperand(of: "1")
+    // when
+    let output = self.sut?.calculate()
+    // then
+    XCTAssertEqual(output, true)
   }
 }
