@@ -8,7 +8,7 @@ import UIKit
 
 fileprivate enum Const {
     static let blank: String = ""
-    static let defaultNumber: String = " 0"
+    static let initialNumber: String = " 0"
     static let dot: String = "."
     static let comma: String = ","
     static let whiteSpace: String = " "
@@ -29,7 +29,7 @@ final class CalculatorViewController: UIViewController {
         var updatedNumber: String
         guard isValidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: Const.maximumLength) else { return }
         
-        if currentNumberLabelText == Const.defaultNumber {
+        if currentNumberLabelText == Const.initialNumber {
             updatedNumber = buttonTitle
         } else {
             updatedNumber = currentNumberLabelText + buttonTitle
@@ -41,7 +41,7 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
-        guard currentNumberLabelText != Const.defaultNumber else {
+        guard currentNumberLabelText != Const.initialNumber else {
             setLabels(operatorText: buttonTitle)
             return
         }
@@ -105,7 +105,7 @@ final class CalculatorViewController: UIViewController {
         if allOperations.isEmpty {
             clearAllHistory()
         } else {
-            currentNumberLabel.text = Const.defaultNumber
+            currentNumberLabel.text = Const.initialNumber
         }
     }
 
@@ -178,7 +178,7 @@ final class CalculatorViewController: UIViewController {
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
         var `operator` = currentOperatorLabel.text.unwrapped
-        let number = currentNumberLabel.text.unwrapped
+        var number = currentNumberLabel.text.unwrapped
         let operatorStackLabel = UILabel()
         let numberStackLabel = UILabel()
         
@@ -192,12 +192,13 @@ final class CalculatorViewController: UIViewController {
         
         numberStackLabel.textColor = .white
         numberStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        
         numberStackLabel.text = number
         
         return (operatorStackLabel, numberStackLabel)
     }
     
-    private func setLabels(numberText: String = Const.defaultNumber,
+    private func setLabels(numberText: String = Const.initialNumber,
                            operatorText: String = Const.blank) {
         currentNumberLabel.text = numberText
         currentOperatorLabel.text = operatorText
