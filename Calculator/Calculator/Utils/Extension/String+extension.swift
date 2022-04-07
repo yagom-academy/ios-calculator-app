@@ -27,7 +27,6 @@ extension String {
 extension String {
     func numberFomatter() -> String {
         let zero: NSNumber = 0
-        guard self != "nan" else { return "NaN" }
         
         let noCommaText = self.withoutComma
         let numberFomatter = NumberFormatter()

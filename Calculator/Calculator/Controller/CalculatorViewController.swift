@@ -129,12 +129,16 @@ final class CalculatorViewController: UIViewController {
         let formula = ExpressionParser.parse(from: validOperation)
         let result = formula.result()
         
-        setLabels(numberText: String(result).numberFomatter())
+        if result.isNaN {
+            setLabels(numberText: "NaN")
+        } else {
+            setLabels(numberText: String(result).numberFomatter())
+        }
         allOperations = []
     }
     
     override func viewDidLoad() {
-        setLabels(numberText: Const.defaultNumber)
+        setLabels(numberText: Const.initialNumber)
     }
     
     private func isValidLength(texts: [String], maximumLength: Int) -> Bool {
