@@ -32,6 +32,7 @@ final class CalculatorViewController: UIViewController {
         let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
         guard currentNumberLabelText != CalculatorConstant.defaultNumber else {
+            setLabels(operatorText: buttonTitle)
             return
         }
         
@@ -56,7 +57,7 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
         let updatedText = currentNumberLabelText + buttonTitle
-        guard isvalidLength(
+        guard isValidLength(
             texts: [currentNumberLabelText, buttonTitle],
             maximumLength: CalculatorConstant.maximumLength
         ) else { return }
@@ -127,7 +128,7 @@ final class CalculatorViewController: UIViewController {
                                           with: CalculatorConstant.blank)
     }
     
-    private func isvalidLength(texts: [String], maximumLength: Int) -> Bool {
+    private func isValidLength(texts: [String], maximumLength: Int) -> Bool {
         let textCount = texts.reduce(0) { $0 + removeComma(from: $1).count }
         
         return textCount <= maximumLength
