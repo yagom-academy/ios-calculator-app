@@ -78,7 +78,7 @@ final class CalculatorViewController: UIViewController {
         
         switch currentNumberLabelText.first {
         case CalculatorConstant.minus:
-            _ = currentNumberLabelText.removeFirst()
+            currentNumberLabelText.removeFirst()
         default:
             currentNumberLabelText.insert(CalculatorConstant.minus,
                                           at: currentNumberLabelText.startIndex)
@@ -100,25 +100,27 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func touchUpCalculateButton(_ sender: UIButton) {
+        guard allOperations.count >= 1 else {
+            return
+        }
+        
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         
         allOperations.append(currentOperatorLabelText)
         allOperations.append(currentNumberLabelText)
         
-        if allOperations.isEmpty != true {
-            addInputStack()
-            
-            let mergedAllOperation = allOperations.joined(
-                separator: CalculatorConstant.whiteSpace
-            )
-            let validOperation = removeComma(from: mergedAllOperation)
-            let formula = ExpressionParser.parse(from: validOperation)
-            let result = formula.result()
-            
-            setLabels(numberText: String(result).numberFomatter())
-            allOperations = []
-        }
+        addInputStack()
+        
+        let mergedAllOperation = allOperations.joined(
+            separator: CalculatorConstant.whiteSpace
+        )
+        let validOperation = removeComma(from: mergedAllOperation)
+        let formula = ExpressionParser.parse(from: validOperation)
+        let result = formula.result()
+        
+        setLabels(numberText: String(result).numberFomatter())
+        allOperations = []
     }
     
     override func viewDidLoad() {
