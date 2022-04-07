@@ -166,13 +166,17 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        let `operator` = currentOperatorLabel.text.unwrapped
+        var `operator` = currentOperatorLabel.text.unwrapped
         let number = currentNumberLabel.text.unwrapped
         let operatorStackLabel = UILabel()
         let numberStackLabel = UILabel()
         
         operatorStackLabel.textColor = .white
         operatorStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        
+        if calculatorStackView.subviews.isEmpty {
+            `operator` = CalculatorConstant.blank
+        }
         operatorStackLabel.text = `operator`
         
         numberStackLabel.textColor = .white
