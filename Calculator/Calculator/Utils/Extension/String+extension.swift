@@ -38,11 +38,3 @@ extension String {
         return changedNumber
     }
 }
-
-extension Optional where Wrapped == String {
-    var unwrapped: String {
-        guard let result = self else { return Const.blank }
-        
-        return result
-    }
-}

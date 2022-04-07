@@ -178,7 +178,7 @@ final class CalculatorViewController: UIViewController {
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
         var `operator` = currentOperatorLabel.text.unwrapped
-        var number = currentNumberLabel.text.unwrapped
+        let number = currentNumberLabel.text.unwrapped
         let operatorStackLabel = UILabel()
         let numberStackLabel = UILabel()
         
@@ -215,3 +215,10 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
+fileprivate extension Optional where Wrapped == String {
+    var unwrapped: String {
+        guard let result = self else { return Const.blank }
+        
+        return result
+    }
+}
