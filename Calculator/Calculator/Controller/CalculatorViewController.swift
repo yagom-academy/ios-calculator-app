@@ -1,10 +1,20 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by Tiana, Eddy and Red
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
+
+fileprivate enum Const {
+    static let blank: String = ""
+    static let defaultNumber: String = " 0"
+    static let dot: String = "."
+    static let comma: String = ","
+    static let whiteSpace: String = " "
+    static let minus: Character = "-"
+    static let maximumLength: Int = 20
+}
 
 final class CalculatorViewController: UIViewController {
     private var allOperations: [String] = []
@@ -17,9 +27,9 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
         var updatedNumber: String
-        guard isValidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: CalculatorConstant.maximumLength) else { return }
+        guard isValidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: Const.maximumLength) else { return }
         
-        if currentNumberLabelText == CalculatorConstant.defaultNumber {
+        if currentNumberLabelText == Const.defaultNumber {
             updatedNumber = buttonTitle
         } else {
             updatedNumber = currentNumberLabelText + buttonTitle
@@ -31,7 +41,7 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
-        guard currentNumberLabelText != CalculatorConstant.defaultNumber else {
+        guard currentNumberLabelText != Const.defaultNumber else {
             setLabels(operatorText: buttonTitle)
             return
         }
@@ -47,8 +57,8 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
-        guard currentNumberLabel.text?.contains(CalculatorConstant.dot) == true else {
-            currentNumberLabel.text = currentNumberLabelText + CalculatorConstant.dot
+        guard currentNumberLabel.text?.contains(Const.dot) == true else {
+            currentNumberLabel.text = currentNumberLabelText + Const.dot
             return
         }
     }
@@ -59,10 +69,10 @@ final class CalculatorViewController: UIViewController {
         let updatedText = currentNumberLabelText + buttonTitle
         guard isValidLength(
             texts: [currentNumberLabelText, buttonTitle],
-            maximumLength: CalculatorConstant.maximumLength
+            maximumLength: Const.maximumLength
         ) else { return }
         
-        if currentNumberLabelText.contains(CalculatorConstant.dot) == true {
+        if currentNumberLabelText.contains(Const.dot) == true {
             currentNumberLabel.text = updatedText
         } else {
             currentNumberLabel.text = updatedText.numberFomatter()
@@ -71,16 +81,16 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpPlusMinusSignButton(_ sender: UIButton) {
         var currentNumberLabelText = currentNumberLabel.text.unwrapped
-        guard currentNumberLabelText.first != Character(CalculatorConstant.whiteSpace),
+        guard currentNumberLabelText.first != Character(Const.whiteSpace),
               currentNumberLabelText.first != "0" else {
             return
         }
         
         switch currentNumberLabelText.first {
-        case CalculatorConstant.minus:
+        case Const.minus:
             currentNumberLabelText.removeFirst()
         default:
-            currentNumberLabelText.insert(CalculatorConstant.minus,
+            currentNumberLabelText.insert(Const.minus,
                                           at: currentNumberLabelText.startIndex)
         }
         currentNumberLabel.text = currentNumberLabelText.numberFomatter()
@@ -95,7 +105,7 @@ final class CalculatorViewController: UIViewController {
         if allOperations.isEmpty {
             clearAllHistory()
         } else {
-            currentNumberLabel.text = CalculatorConstant.defaultNumber
+            currentNumberLabel.text = Const.defaultNumber
         }
     }
 
@@ -113,9 +123,9 @@ final class CalculatorViewController: UIViewController {
         addInputStack()
         
         let mergedAllOperation = allOperations.joined(
-            separator: CalculatorConstant.whiteSpace
+            separator: Const.whiteSpace
         )
-        let validOperation = removeComma(from: mergedAllOperation)
+        let validOperation = mergedAllOperation.withoutComma
         let formula = ExpressionParser.parse(from: validOperation)
         let result = formula.result()
         
@@ -124,16 +134,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        setLabels(numberText: CalculatorConstant.defaultNumber)
-    }
-    
-    private func removeComma(from input: String) -> String {
-        return input.replacingOccurrences(of: CalculatorConstant.comma,
-                                          with: CalculatorConstant.blank)
+        setLabels(numberText: Const.defaultNumber)
     }
     
     private func isValidLength(texts: [String], maximumLength: Int) -> Bool {
-        let textCount = texts.reduce(0) { $0 + removeComma(from: $1).count }
+        let textCount = texts.reduce(0) { $0 + $1.withoutComma.count }
         
         return textCount <= maximumLength
     }
@@ -177,7 +182,7 @@ final class CalculatorViewController: UIViewController {
         operatorStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
         
         if calculatorStackView.subviews.isEmpty {
-            `operator` = CalculatorConstant.blank
+            `operator` = Const.blank
         }
         operatorStackLabel.text = `operator`
         
@@ -188,8 +193,8 @@ final class CalculatorViewController: UIViewController {
         return (operatorStackLabel, numberStackLabel)
     }
     
-    private func setLabels(numberText: String = CalculatorConstant.defaultNumber,
-                           operatorText: String = CalculatorConstant.blank) {
+    private func setLabels(numberText: String = Const.defaultNumber,
+                           operatorText: String = Const.blank) {
         currentNumberLabel.text = numberText
         currentOperatorLabel.text = operatorText
     }

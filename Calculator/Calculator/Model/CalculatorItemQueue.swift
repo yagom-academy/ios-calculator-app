@@ -2,7 +2,7 @@
 //  QueueLinkedList.swift
 //  Calculator
 //
-//  Created by Eddy on 2022/03/16.
+//  Created by Tiana, Eddy and Red on 2022/03/16.
 //
 
 import Foundation
