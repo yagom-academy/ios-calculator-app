@@ -17,7 +17,7 @@ final class CalculatorViewController: UIViewController {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
         let buttonTitle = sender.currentTitle.unwrapped
         var updatedNumber: String
-        guard isvalidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: CalculatorConstant.maximumLength) else { return }
+        guard isValidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: CalculatorConstant.maximumLength) else { return }
         
         if currentNumberLabelText == CalculatorConstant.defaultNumber {
             updatedNumber = buttonTitle
