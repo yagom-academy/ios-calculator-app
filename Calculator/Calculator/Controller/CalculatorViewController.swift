@@ -71,10 +71,12 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpPlusMinusSignButton(_ sender: UIButton) {
         var currentNumberLabelText = currentNumberLabel.text.unwrapped
+        guard currentNumberLabelText.first != Character(CalculatorConstant.whiteSpace),
+              currentNumberLabelText.first != "0" else {
+            return
+        }
         
         switch currentNumberLabelText.first {
-        case Character(CalculatorConstant.whiteSpace), "0":
-            return
         case CalculatorConstant.minus:
             _ = currentNumberLabelText.removeFirst()
         default:
