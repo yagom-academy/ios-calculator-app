@@ -46,7 +46,7 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         let currentNumberLabelText = currentNumberLabel.text.unwrapped
-        guard (currentNumberLabel.text?.contains(CalculatorConstant.dot)) == true else {
+        guard currentNumberLabel.text?.contains(CalculatorConstant.dot) == true else {
             currentNumberLabel.text = currentNumberLabelText + CalculatorConstant.dot
             return
         }
