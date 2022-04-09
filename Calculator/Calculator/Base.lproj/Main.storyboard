@@ -69,7 +69,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpAllClear" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDU-LN-F19"/>
+                                                    <action selector="touchUpAllClearButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lhz-Bm-4MP"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
@@ -80,7 +80,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpEntryClear" destination="BYZ-38-t0r" eventType="touchUpInside" id="ONE-Ub-3WR"/>
+                                                    <action selector="touchUpEntryClearButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="GUC-ds-CV2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -91,7 +91,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="switchPlusAndMinusToInputOperatorLabel" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q8C-KU-XfL"/>
+                                                    <action selector="switchPlusAndMinusToInputOperatorLabelButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="bvg-4T-Arp"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -102,7 +102,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpOperatorBtns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dyz-Mi-xiV"/>
+                                                    <action selector="touchUpOperatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DrU-ju-gHw"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -151,7 +151,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpOperatorBtns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QeZ-dm-ETB"/>
+                                                    <action selector="touchUpOperatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4KZ-nI-1Sh"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -200,7 +200,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpOperatorBtns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="707-Rv-qxE"/>
+                                                    <action selector="touchUpOperatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lgO-uA-s6z"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -249,7 +249,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpOperatorBtns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rx7-wE-uh8"/>
+                                                    <action selector="touchUpOperatorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="arn-hc-oin"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -301,7 +301,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="startCalculationBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qM5-cc-Vc5"/>
+                                                    <action selector="startCalculationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5v0-LR-a9X"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -347,34 +347,32 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="allClearBtn" destination="ped-N8-JbY" id="anK-La-ei6"/>
-                        <outlet property="clearEntryBtn" destination="RLD-dY-LOA" id="EqJ-b8-UO5"/>
                         <outlet property="enteredFormulaValueScrollView" destination="BOT-7g-vxv" id="Eri-aN-OCD"/>
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="2Ao-w9-bJE"/>
                         <outlet property="inputFormulaLabel" destination="Lwz-OF-XHD" id="em3-dc-zew"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="arG-Zw-Vjg"/>
-                        <outlet property="plusAndMinusBtn" destination="ows-U7-mNc" id="8A7-1R-ugR"/>
-                        <outletCollection property="operandBtns" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="ku4-Lj-Owd"/>
-                        <outletCollection property="operandBtns" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="hyf-G7-pq7"/>
-                        <outletCollection property="operandBtns" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="INe-IO-dF7"/>
-                        <outletCollection property="operandBtns" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="hnJ-Bx-WwD"/>
-                        <outletCollection property="operandBtns" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="iTd-LC-tbf"/>
-                        <outletCollection property="operandBtns" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="0jU-Ev-OwW"/>
-                        <outletCollection property="operandBtns" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="UWt-G9-XQN"/>
-                        <outletCollection property="operandBtns" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="uNl-8q-1ZA"/>
-                        <outletCollection property="operandBtns" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="CuO-d1-kf2"/>
-                        <outletCollection property="operandBtns" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="TaJ-az-f71"/>
-                        <outletCollection property="operandBtns" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="8yX-w8-csa"/>
-                        <outletCollection property="operandBtns" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="rwz-4q-Oyt"/>
-                        <outletCollection property="operatorBtns" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="s37-Rn-T0S"/>
-                        <outletCollection property="operatorBtns" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="cmi-yE-Dji"/>
-                        <outletCollection property="operatorBtns" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="oqb-Wl-1d2"/>
-                        <outletCollection property="operatorBtns" destination="811-Pz-An6" collectionClass="NSMutableArray" id="QMA-4W-xzo"/>
+                        <outlet property="plusAndMinusButton" destination="ows-U7-mNc" id="UNK-at-qgo"/>
+                        <outletCollection property="operatorButtons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="uyp-aU-Fpi"/>
+                        <outletCollection property="operatorButtons" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="uI0-bo-4bP"/>
+                        <outletCollection property="operatorButtons" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="cd2-k3-Axu"/>
+                        <outletCollection property="operatorButtons" destination="811-Pz-An6" collectionClass="NSMutableArray" id="MMF-sQ-8e3"/>
+                        <outletCollection property="operandButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="oog-lO-7RX"/>
+                        <outletCollection property="operandButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="Tky-az-Y4g"/>
+                        <outletCollection property="operandButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="fNb-T3-fXn"/>
+                        <outletCollection property="operandButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="p7A-8e-sGd"/>
+                        <outletCollection property="operandButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="cnl-mU-X72"/>
+                        <outletCollection property="operandButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="jgG-VA-JH1"/>
+                        <outletCollection property="operandButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="urR-4w-yQM"/>
+                        <outletCollection property="operandButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="HjT-n8-DGc"/>
+                        <outletCollection property="operandButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="VPs-3H-O5n"/>
+                        <outletCollection property="operandButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="us5-Po-eiI"/>
+                        <outletCollection property="operandButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="8Ba-VT-7CR"/>
+                        <outletCollection property="operandButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="oRh-gx-3JT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.57971014492756" y="138.61607142857142"/>
+            <point key="canvasLocation" x="-77" y="112"/>
         </scene>
     </scenes>
     <resources>
