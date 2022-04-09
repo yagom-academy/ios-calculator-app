@@ -225,3 +225,110 @@ result = operatorValue.calculate(15➕5)
 return result //20
 ```
 - flatMap은 디플리케이티드 예정인게 있어서 잘 참고하고 사용하는게 좋고 혹여나 디플리케이티드가 되있는 코드는 언제 삭제해도 이상하지않다는걸 애플이 공지한거라서 나중에 디플리케이티드된 메서드가 삭제되면 빌드자체가 안되기때문에 지양해야한다.
+
+
+## STEP3 및 코드합치는 팀프로젝트하면서 느낌점, 공부한것, 배운것, 피드백받은것, 문제해결 등
+
+## 리뷰어가 피드백 해주신 내용
+- MVVM을 사용하는게 뷰컨이 비대해진닥는 이유는 너무 부수적인것중에 하나이며 지금은 알필요없다.
+- 뷰는 이벤트전달과 보여주는것만하지 에러를 잡아 던지는건 옳지않다.
+- 조건문이 길경우 상황이 어떤상황인지 알기가어렵다. 이러한 경우에는 연산프로퍼티나 메서드로 네이미을 잡아주는게 좋음
+```swift=
+    private var isCalculated: Bool { !allCalculatStack.isEmpty && operatorLabel.text?.isEmpty == true }
+    private var isDotContained: Bool { operandLabel.text?.contains(String.dot) == true }
+    private var isInitialState: Bool { operandLabel.text == .zero && allCalculatStack.isEmpty }
+    private var isErrorHappened: Bool {
+```
+- 매개변수로 버튼이나 네이블타입을 받기보다 . Text 같은 스콥을 줄여주는 매개변수가 더 좋음
+- stackView설정시 Axis = .horizontal, alignment = .fill, distribution = .fill 이렇게 기본값이기때문에 따로 설정해줄 필요가 없다. 다른 뷰를만들때도 유사한 기본값들이 존재하니 잘확인해보자.
+- 사이드 이펙트가 발생하지않는 메서드는 동사원형으로 네이밍을 작성해야할것
+
+*질문사항에대한 답변)*
+- is 네이밍도 불에대해서 메서드명이로 사용될수있는지 => 대부분은 연산프로퍼티에 is를 사용함
+- isOperatorAtFirstElement vs isFirstElementAtOperator  # 보충
+- Model, view, VC의 역할을 구분하자
+
+
+## 알게된점
+- extension앞에 private을 사용하게되면 변수 및 메서드에 각각 private을 붙일 필요가 없다.
+- 익스텐션으로 String? 타입에 코드를 추가할때는 String extension으로 추가하는것이아니라 옵셔널 익스텐션으로 추가해야한다. 왜냐하면 String?과 String은 아예다른 타입이기때문이다.
+```swift
+extension Optional where Wrapped == String {
+    var unwrapped: String {
+        guard let result = self else { return CalculatorConstant.blank }
+        return result
+    }
+}
+```
+
+- 스크롤뷰를 사용할때
+로컬라이즈드 에러를 사용하고 다운케스트를 하게되면 
+
+## 문제해결
+- StackView내에 label이 담긴 StackView를 추가하고 label의 값을 추출해야하는 상황이 발생할때 값을 어떻게 꺼내서 사용할것인가?
+1. 첫번째 방법은 전역변수를 두고 상위 StackView에 label을 추가할때 계산식을 전역변수에동시에 값을 저장하여 사용한다.
+2. 상위 stackView의 arrangedSubViews를 접근하여 다운캐스트를 시도하여 값을 추출한다.
+
+개인적인 생각으로 후자가 사이드이펙트가 없으며 코드가 깔끔해지고 불필요한 변수를 생성할 필요또한 없다고 판단하여 후자코드가 더 좋아보인다.
+
+```swift=
+        calculateStacks.arrangedSubviews.forEach {
+            let subStackView = $0 as? UIStackView
+            let operatorLabel = subStackView?.arrangedSubviews.first as? UILabel
+            let operandLabel = subStackView?.arrangedSubviews.last as? UILabel
+    }
+```
+그리고 여기서 값을 remove하여 접근할 수 있는가 시도를 해봤으나 arrangedSubviews는 [UIView] {get}으로 읽기전용이다. 그래서
+안전하게 다운캐스트로 접근하는 방법을 사용했다.
+
+# 앱 bounds와 frame의 개념 및 차이점
+- superView란 최상위 view인 루트 View가 아니라 나의 한칸 윗계층의 View를 말하는것
+- frame은 superView를 기준으로 본인의 위치(0,0)을 잡는다.
+- frame은 size는 view의 자체 크기를 말하는것이아니라 view가 차지하는 영역을 감싸서 만든 사각형을 말한다. 그래서 view가 회전할때 값이 바뀐다.
+- bounds는 self view를 기준으로 위치(0,0)를 잡는다.
+
+ ### frame및 bounds의 사용처
+ ### [frame]
+ - View의 크기를 확인할때 사용함
+ 
+ ### [bounds]
+ - View를 회전한 후 View의 실제크기를 알고 싶을때사용한다. 왜냐하면 frame의 origin및 size와 bounds의 origin 및 size는 다르기떄문이다.
+ - View내부에 그림을 그릴때(drawRect)사용한다.
+ - ScrollView에서 크르롤을 할때 사용한다.
+
+
+참고자료
+- [소들이블로그](https://babbab2.tistory.com/46)
+
+## viewDidLoad가 불리는 시점 복습
+
+- 초기에 앱을 실행하고 init이 된 이후에 viewDidLoad가 불리기도하고 화면전환이될때 그 뷰에대한 로드가된 시점에 불리는것으로 이해하고 있습니다.
+
+## viewDidLoad의 특징
+
+- ViewController의 모든뷰들이 메모리에 로드되었을때 호출됩니다. ex) IBOutltet변수들
+- 생명주기에서 첫뷰에대한 viewDidLoad는 딱 한번 불립니다. 그래서 한번호출될 필요가 있는 메서드를 안에서 실행해줄 수 있습니다.
+
+## 주간 학습키워드
+- ARC
+- weak, unowned
+- 메모리구조
+- AppDelegate
+- SceneDelegate
+- iOS App Life Cycle
+- viewDidLoad
+- Closure variable create method
+
+
+## 공부해야할것
+- flag란?
+- ScrollView사용할때 View의 크기와 ScrollView의 크기를 빼서 사용하는 계산법 이해하기
+- NumberFormatter
+- IBOutlet을 사용할때 강제언랩핑을 사용하는 이유
+- AppDelegate와 SceneDelegate에대한 WWDC 2019영상 시청
+
+
+# 계산기 프로젝트 코드 합치면서 느낀점
+- 코드의 함수기능분리가 다소 아쉬웠어서 나의 코드의 부족함을 많이느꼈다.
+- 코드를 합칠때 적절하게 한명한명의 코드에 잘한이점을 보려고 노력하며 그 점을 중심으로 합치려고 노력했다.
+- 코드에는 정답이없다보니 코드를 합치는 기준을 선정하는게 더욱 어려웠다. 그리고 처음에는 내가 작성했던 코드들이 사용되지못했다는 아쉬움과 속상함이 들수있으나 잘하는 사람에게 코드를 배울 수 있으며 이성적으로 회사에 다닌다고 생각하니 받아들이는게 더 가벼워진 기분이었다. 그래서 다수의 의견을 따르는데에 있어서 나의 코드의 부족한점을 인정하고 받아들이는 연습을 할 수 있었던것같다. 최종적으로 직관적으로 네이밍이 좋고 코드가 깔끔하다고 판단되는 코드를 최대한 선택하였다.
