@@ -332,6 +332,7 @@ extension Optional where Wrapped == String {
 
 
 ## 공부해야할것
+- weak로 강한참조가 되는 동작원리 DuDu블로그 참고(https://velog.io/@aurora_97/TIL-Delegate%EC%99%80-Weak)
 - flag란?
 - ScrollView사용할때 View의 크기와 ScrollView의 크기를 빼서 사용하는 계산법 이해하기
 - NumberFormatter
