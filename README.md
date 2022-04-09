@@ -281,6 +281,17 @@ extension Optional where Wrapped == String {
 그리고 여기서 값을 remove하여 접근할 수 있는가 시도를 해봤으나 arrangedSubviews는 [UIView] {get}으로 읽기전용이다. 그래서
 안전하게 다운캐스트로 접근하는 방법을 사용했다.
 
+# layoutIfNeeded, setNeedsLayout, setNeedsDisplay의 차이는 무엇인가? 
+- layoutIfNeeded
+함수의 main loop가 끝나야만 update cycle이 샐행되어 뷰의 업데이트가 적용되이 된다. 그런데 스크롤뷰를 사용할때 스크롤 아래로 내려주는 작업이 진행된 후 update cycle에서
+뷰가 추가되었기때문에 맨 아래 뷰가 숨겨지는 문제가 발생했다. 이런 문제를 해결해주기위해 사용하는 메서드가 layoutIfNeeded이며 이는 호출된 시점에 즉시 뷰를 바로 업데이트해주는 역할을 한다.
+
+- setNeedsLayout
+이 메서드는 layoutIfNeeded메서드와 다르게 비동기적으로 동작합니다. 그래서 바로 View가 업데이트되지않고 View업데이트를 예약함으로써 다음 Main Run Loop가 끝난 후에 Update Cycle에서 작동합니다.
+
+- setNeedDisPlay()
+수신기의 전체 경계 사각형을 다시 그려야하는 것으로 표시한다...(공부필요)
+
 # 앱 bounds와 frame의 개념 및 차이점
 - superView란 최상위 view인 루트 View가 아니라 나의 한칸 윗계층의 View를 말하는것
 - frame은 superView를 기준으로 본인의 위치(0,0)을 잡는다.
