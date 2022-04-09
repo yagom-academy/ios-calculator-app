@@ -14,6 +14,7 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var plusAndMinusBtn: UIButton!
     @IBOutlet private weak var enteredFormulaValueScrollView: UIScrollView!
     @IBOutlet private weak var formulaStackView: UIStackView!
+    private var firstOperatorValue = ""
     private var storeFormulaValue = ""
     
     private let numberFormatter: NumberFormatter = {
@@ -58,6 +59,7 @@ final class ViewController: UIViewController {
     
     private func appendToScrollViewAfterCheckEnteredResultValueIsNone(_ inputFormulaText: String,_ operatorValue: String) {
         if storeFormulaValue == "" {
+            firstOperatorValue += operatorValue
             appendFormulaValueToScrollView(inputFormulaText, operatorsValue: "")
         } else {
             appendFormulaValueToScrollView(inputFormulaText, operatorsValue: operatorValue)
@@ -170,5 +172,25 @@ final class ViewController: UIViewController {
         }
         resetStoreFormulaValue()
         resetOperatorLabel()
+        makeFormula()
+    }
+    
+    func makeFormula() {
+        var formula = ""
+        formulaStackView.arrangedSubviews.forEach {
+            guard let subStackView = $0 as? UIStackView,
+                  let operatorLabel = subStackView.arrangedSubviews.first as? UILabel,
+                  let operandLabel = subStackView.arrangedSubviews.last as? UILabel else { return }
+            
+            guard let operandText = operandLabel.text,
+                  let operatorText = operatorLabel.text else { return }
+            if operatorLabel.text?.isEmpty == true {
+                formula += operandText
+                formula += firstOperatorValue
+            } else {
+                formula += operandText
+                formula += operatorText
+            }
+        }
     }
 }
