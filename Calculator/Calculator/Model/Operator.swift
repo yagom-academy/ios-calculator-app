@@ -2,12 +2,12 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by Eddy on 2022/03/16.
+//  Created by Tiana, Eddy and Red on 2022/03/16.
 //
 
 import Foundation
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "÷"

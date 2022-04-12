@@ -2,8 +2,12 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by Eddy on 2022/03/20.
+//  Created by Tiana, Eddy and Red on 2022/03/20.
 //
+
+fileprivate enum Const {
+    static let whiteSpace: Character = " "
+}
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
@@ -22,6 +26,6 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        return input.split(with: Const.whiteSpace)
     }
 }

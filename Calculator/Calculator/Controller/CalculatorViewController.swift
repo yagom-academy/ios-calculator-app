@@ -1,79 +1,99 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by Tiana, Eddy and Red
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
+fileprivate enum Const {
+    static let blank: String = ""
+    static let initialNumber: String = " 0"
+    static let dot: String = "."
+    static let comma: String = ","
+    static let whiteSpace: String = " "
+    static let minus: Character = "-"
+    static let maximumLength: Int = 20
+}
+
 final class CalculatorViewController: UIViewController {
     private var allOperations: [String] = []
-    private let blank: String = ""
     
     @IBOutlet weak var calculatorStackView: UIStackView!
-    
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentNumberLabel: UILabel!
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let buttonTitle = sender.currentTitle else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let buttonTitle = sender.currentTitle.unwrapped
         var updatedNumber: String
-        if currentNumberLabelText == "0" {
+        guard isValidLength(texts: [currentNumberLabelText, buttonTitle], maximumLength: Const.maximumLength) else { return }
+        
+        if currentNumberLabelText == Const.initialNumber {
             updatedNumber = buttonTitle
         } else {
             updatedNumber = currentNumberLabelText + buttonTitle
         }
-        currentNumberLabel.text = changeDecimalFormat(updatedNumber)
+        currentNumberLabel.text = updatedNumber.numberFomatter()
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let currentOperatorLabelText = currentOperatorLabel.text else { return }
-        guard let buttonTitle = sender.currentTitle else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
+        let buttonTitle = sender.currentTitle.unwrapped
+        guard currentNumberLabelText != Const.initialNumber else {
+            setLabels(operatorText: buttonTitle)
+            return
+        }
+        
         addInputStack()
         
         if allOperations.isEmpty == false {
             allOperations.append(currentOperatorLabelText)
         }
-        
         allOperations.append(currentNumberLabelText)
-        currentNumberLabel.text = "0"
-        currentOperatorLabel.text = buttonTitle
+        setLabels(operatorText: buttonTitle)
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard (currentNumberLabel.text?.contains(".")) == true else {
-            currentNumberLabel.text = currentNumberLabelText + "."
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        guard currentNumberLabel.text?.contains(Const.dot) == true else {
+            currentNumberLabel.text = currentNumberLabelText + Const.dot
             return
         }
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let buttonTitle = sender.currentTitle else { return }
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let buttonTitle = sender.currentTitle.unwrapped
+        let updatedText = currentNumberLabelText + buttonTitle
+        guard isValidLength(
+            texts: [currentNumberLabelText, buttonTitle],
+            maximumLength: Const.maximumLength
+        ) else { return }
         
-        if currentNumberLabelText.contains(".") == true {
-            currentNumberLabel.text = currentNumberLabelText + buttonTitle
+        if currentNumberLabelText.contains(Const.dot) == true {
+            currentNumberLabel.text = updatedText
         } else {
-            currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText + buttonTitle)
+            currentNumberLabel.text = updatedText.numberFomatter()
         }
     }
     
     @IBAction func touchUpPlusMinusSignButton(_ sender: UIButton) {
-        guard var currentNumberLabelText = currentNumberLabel.text else { return }
-        
-        switch currentNumberLabelText.first {
-        case "0":
-            break
-        case "-":
-            _ = currentNumberLabelText.removeFirst()
-        default:
-            currentNumberLabelText.insert("-", at: currentNumberLabelText.startIndex)
+        var currentNumberLabelText = currentNumberLabel.text.unwrapped
+        guard currentNumberLabelText.first != Character(Const.whiteSpace),
+              currentNumberLabelText.first != "0" else {
+            return
         }
         
-        currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText)
+        switch currentNumberLabelText.first {
+        case Const.minus:
+            currentNumberLabelText.removeFirst()
+        default:
+            currentNumberLabelText.insert(Const.minus,
+                                          at: currentNumberLabelText.startIndex)
+        }
+        currentNumberLabel.text = currentNumberLabelText.numberFomatter()
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
@@ -85,59 +105,55 @@ final class CalculatorViewController: UIViewController {
         if allOperations.isEmpty {
             clearAllHistory()
         } else {
-            currentNumberLabel.text = "0"
+            currentNumberLabel.text = Const.initialNumber
         }
     }
 
     @IBAction func touchUpCalculateButton(_ sender: UIButton) {
-        guard let currentNumberLabelText = currentNumberLabel.text else { return }
-        guard let currentOperatorLabelText = currentOperatorLabel.text else { return }
+        guard allOperations.count >= 1 else {
+            return
+        }
+        
+        let currentNumberLabelText = currentNumberLabel.text.unwrapped
+        let currentOperatorLabelText = currentOperatorLabel.text.unwrapped
         
         allOperations.append(currentOperatorLabelText)
         allOperations.append(currentNumberLabelText)
         
-        if allOperations.isEmpty != true {
-            addInputStack()
-            let mergedAllOperation = allOperations.joined(separator: " ")
-            let validOperation = removeComma(from: mergedAllOperation)
-            let formula = ExpressionParser.parse(from: validOperation)
-            let result = formula.result()
-            
-            currentOperatorLabel.text = ""
-            currentNumberLabel.text = changeDecimalFormat("\(result)")
-            allOperations = []
+        addInputStack()
+        
+        let mergedAllOperation = allOperations.joined(
+            separator: Const.whiteSpace
+        )
+        let validOperation = mergedAllOperation.withoutComma
+        let formula = ExpressionParser.parse(from: validOperation)
+        let result = formula.result()
+        
+        if result.isNaN {
+            setLabels(numberText: "NaN")
+        } else {
+            setLabels(numberText: String(result).numberFomatter())
         }
+        allOperations = []
     }
     
-    private func removeComma(from input: String) -> String {
-        return input.replacingOccurrences(of: ",", with: "")
+    override func viewDidLoad() {
+        setLabels(numberText: Const.initialNumber)
+    }
+    
+    private func isValidLength(texts: [String], maximumLength: Int) -> Bool {
+        let textCount = texts.reduce(0) { $0 + $1.withoutComma.count }
+        
+        return textCount <= maximumLength
     }
     
     private func clearAllHistory() {
         calculatorStackView.subviews.forEach { $0.removeFromSuperview() }
-        currentNumberLabel.text = "0"
-        currentOperatorLabel.text = ""
-    }
-    
-    private func changeDecimalFormat(_ text: String) -> String {
-        let zero: NSNumber = 0
-        
-        guard text != "nan" else { return "NaN" }
-        let noCommaText = removeComma(from: text)
-        
-        let numberFomatter = NumberFormatter()
-        numberFomatter.numberStyle = .decimal
-        
-        let number = numberFomatter.number(from: noCommaText) ?? zero
-        
-        let changedNumber = numberFomatter.string(from: number) ?? blank
-        return changedNumber
+        setLabels()
     }
     
     private func addInputStack() {
-        guard let stack = generateStack() else {
-            return
-        }
+        guard let stack = generateStack() else { return }
         
         calculatorStackView.addArrangedSubview(stack)
         setScrollViewLayout()
@@ -161,32 +177,48 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        guard let `operator` = currentOperatorLabel.text,
-              let number = currentNumberLabel.text else {
-            return nil
-        }
+        var `operator` = currentOperatorLabel.text.unwrapped
+        let number = currentNumberLabel.text.unwrapped
         let operatorStackLabel = UILabel()
         let numberStackLabel = UILabel()
         
         operatorStackLabel.textColor = .white
+        operatorStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        
+        if calculatorStackView.subviews.isEmpty {
+            `operator` = Const.blank
+        }
         operatorStackLabel.text = `operator`
         
         numberStackLabel.textColor = .white
+        numberStackLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        
         numberStackLabel.text = number
         
         return (operatorStackLabel, numberStackLabel)
+    }
+    
+    private func setLabels(numberText: String = Const.initialNumber,
+                           operatorText: String = Const.blank) {
+        currentNumberLabel.text = numberText
+        currentOperatorLabel.text = operatorText
     }
     
     private func setScrollViewLayout() {
         guard let scrollView = calculatorStackView.superview as? UIScrollView else {
             return
         }
+        let hiddenHeight = scrollView.contentSize.height - scrollView.bounds.height
         
-        scrollView
-            .setContentOffset(
-                CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
-                animated: true
-            )
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: .zero, y: hiddenHeight), animated: true)
     }
 }
 
+fileprivate extension Optional where Wrapped == String {
+    var unwrapped: String {
+        guard let result = self else { return Const.blank }
+        
+        return result
+    }
+}
