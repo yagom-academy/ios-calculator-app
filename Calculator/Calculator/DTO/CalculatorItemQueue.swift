@@ -8,9 +8,17 @@
 import Foundation
 
 class CalculatorItemQueue {
-    var queue: [String]
+    var enqueue: [String]
+    var dequeue: [String]
+    
+    var count: Int {
+        return enqueue.count + dequeue.count
+    }
     
     init() {
-        self.queue = []
+        self.enqueue = []
+        self.dequeue = []
     }
+    
+    
 }

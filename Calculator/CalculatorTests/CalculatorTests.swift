@@ -20,5 +20,23 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     //MARK: - CalculatorItemQueue
-
+    func test_enqueue에1개_dequeue에2개_일때_큐의길이는3반환() {
+        //given
+        sut.enqueue = ["1"]
+        sut.dequeue = ["2","3"]
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_queue에요소가없으면_0반환() {
+        //given
+        //when
+        let result = sut.count
+        //then
+        XCTAssertEqual(result, 0)
+    }
 }
