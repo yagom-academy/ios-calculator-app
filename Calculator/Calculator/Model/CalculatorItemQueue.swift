@@ -1,12 +1,12 @@
 struct CalculatorItemQueue {
-    var queue: [Int] = []
+    var queue: [CalculatorItem] = []
     var head = 0
     
-    mutating func enqueue(element: Int) {
+    mutating func enqueue(element: CalculatorItem) {
         queue.append(element)
     }
     
-    mutating func dequeue() -> Int? {
+    mutating func dequeue() -> CalculatorItem? {
         if queue.isEmpty {
             return nil
         }
@@ -16,4 +16,8 @@ struct CalculatorItemQueue {
         
         return element
     }
+}
+
+extension Double: CalculatorItem {
+    
 }

@@ -16,12 +16,12 @@ class CalculatorTest: XCTestCase {
 
     func test_enqueue_0을추가하면_배열에0이들어가는지() {
         // Given
-        let input = 0
-        let expectation = [0]
+        let input: Double = 0
+        let expectation: [Double] = [0]
         
         // When
         sut.enqueue(element: input)
-        let result = sut.queue
+        let result = sut.queue as? [Double]
         
         // Then
         XCTAssertEqual(expectation, result)
@@ -29,14 +29,14 @@ class CalculatorTest: XCTestCase {
     
     func test_enqueue_0과1을추가하면_0과1이들어간배열로변경하는지() {
         // Given
-        let firstInput = 0
-        let secondInput = 1
-        let expectation = [0, 1]
+        let firstInput: Double = 0
+        let secondInput: Double = 1
+        let expectation: [Double] = [0, 1]
         
         // When
         sut.enqueue(element: firstInput)
         sut.enqueue(element: secondInput)
-        let result = sut.queue
+        let result = sut.queue as? [Double]
         
         // Then
         XCTAssertEqual(expectation, result)
@@ -44,12 +44,12 @@ class CalculatorTest: XCTestCase {
     
     func test_dequeue_첫번째요소가3일때_3을반환하는지() {
         // Given
-        let currentQueue = [3, 5, 7]
-        let expectation = 3
+        let currentQueue: [Double] = [3, 5, 7]
+        let expectation: Double = 3
         
         // When
         sut.queue = currentQueue
-        let result = sut.dequeue()
+        let result = sut.dequeue() as? Double
         
         // Then
         XCTAssertEqual(expectation, result)
@@ -57,7 +57,7 @@ class CalculatorTest: XCTestCase {
     
     func test_dequeue_빈배열일때_nil을반환하는지() {
         // Given
-        let currentQueue: [Int] = []
+        let currentQueue: [Double] = []
         
         // When
         sut.queue = currentQueue
@@ -67,15 +67,28 @@ class CalculatorTest: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_dequeue_연속으로dequeue하면_다음요소가반환되는지() {
+    func test_dequeue_연속으로dequeue하면_두번째요소가반환되는지() {
         // Given
-        let currentQueue = [3, 5, 7]
-        let expectation = 5
+        let currentQueue: [Double] = [3, 5, 7]
+        let expectation: Double = 5
         
         // When
         sut.queue = currentQueue
-        var result = sut.dequeue()
-        result = sut.dequeue()
+        var result = sut.dequeue() as? Double
+        result = sut.dequeue() as? Double
+        
+        // Then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_dequeue_연산자타입을반환하는지() {
+        // Given
+        let input: Operator = .plus
+        let expectation: [Operator] = [.plus]
+        
+        // When
+        sut.enqueue(element: input)
+        let result = sut.queue as? [Operator]
         
         // Then
         XCTAssertEqual(expectation, result)
