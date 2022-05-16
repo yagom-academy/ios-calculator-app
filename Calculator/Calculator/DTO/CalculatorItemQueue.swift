@@ -8,5 +8,9 @@
 import Foundation
 
 class CalculatorItemQueue {
+    var queue: [String]
     
+    init() {
+        self.queue = []
+    }
 }
