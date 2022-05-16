@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculatorItemQueue {
+class CalculatorItemQueue: CalculatorItem {
     var enqueue: [String]
     var dequeue: [String]
     
