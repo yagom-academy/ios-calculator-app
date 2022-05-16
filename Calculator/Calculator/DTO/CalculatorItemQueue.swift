@@ -24,7 +24,11 @@ class CalculatorItemQueue {
         self.enqueue.append(input)
     }
     
-    func deQueue() {
-        
+    func deQueue() -> String? {
+        if dequeue.isEmpty {
+            dequeue = enqueue.reversed()
+            enqueue.removeAll()
+        }
+        return dequeue.popLast()
     }
 }

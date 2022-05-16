@@ -68,7 +68,26 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, ["3","6","9"])
     }
+    
 //MARK: - Calculator.deQueue
+    func test_아무것도없을때_deQueue하면_nil(){
+        //when
+        let result = sut.deQueue()
+        
+        //then
+        XCTAssertEqual(result, nil)
+    }
     
-    
+    func test_값이_있을때_deQueue시_값반환(){
+        //given
+        sut.enQueue("3")
+        sut.enQueue("4")
+        sut.enQueue("6")
+        
+        //when
+        let result = sut.deQueue()
+        
+        //then
+        XCTAssertEqual(result, "3")
+    }
 }
