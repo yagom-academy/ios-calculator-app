@@ -53,6 +53,30 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_enqueue_enqueueStack에_중복된_실수가_제대로_들어가는지_테스트() throws {
+        let input1 = 1.0
+        let input2 = 1.0
+        let expectation = [1.0, 1.0]
+        
+        var result = sut.enqueue(element: input1)
+        result = sut.enqueue(element: input2)
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueue_enqueueStack에_100개의_실수가_순서대로_들어가는지_테스트() throws {
+        var expectation: [Double] = []
+        
+        for input in 0...99 {
+            expectation.append(Double(input))
+            _ = sut.enqueue(element: Double(input))
+        }
+
+        let result = sut.enqueueStack
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
     func test_isEmpty_enqueueStack에_값이_없을때_빈_배열로_인지하는지_테스트() throws {
         let result = sut.isEmpty
         
@@ -65,5 +89,23 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = enqueStack.isEmpty
         
         XCTAssertFalse(result)
+    }
+    
+    func test_dequeue_dequeueStack에_실수가_순서대로_제거되는지_테스트() throws {
+        _ = sut.enqueue(element: 1.0)
+        _ = sut.enqueue(element: 2.0)
+        _ = sut.enqueue(element: 3.0)
+        let expectation = 1.0
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeue_dequeueStack이_빈_배열일_때_dequeue가_되는_값이_없는지_테스트() throws {
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, nil)
     }
 }

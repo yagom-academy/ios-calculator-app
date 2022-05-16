@@ -9,6 +9,7 @@ import Foundation
 
 struct CalculatorItemQueue<Element> {
     var enqueueStack: [Element] = []
+    var dequeueStack: [Element] = []
     var isEmpty: Bool {
         return enqueueStack.isEmpty
     }
@@ -16,5 +17,13 @@ struct CalculatorItemQueue<Element> {
     mutating func enqueue(element: Element) -> [Element] {
         enqueueStack.append(element)
         return enqueueStack
+    }
+    
+    mutating func dequeue() -> Element? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
+        }
+        return dequeueStack.popLast()
     }
 }
