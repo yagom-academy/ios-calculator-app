@@ -9,14 +9,18 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<CalculateItemTester>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = CalculatorItemQueue<Int>(array: [1, 2, 3, 4])
+        sut = CalculatorItemQueue<CalculateItemTester>(
+            array: [CalculateItemTester(value: 1),
+                    CalculateItemTester(value: 2),
+                    CalculateItemTester(value: 3)]
+        )
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         
@@ -30,24 +34,24 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_peek가_첫번째원소를_보여주는지() {
-        let result = sut.peek
+        let result = sut.peek?.value
         
         XCTAssertEqual(result, 1)
     }
     
     func test_dequeue로_큐의첫번째원소를_뺄수있는지() {
-        let result = sut.dequeue()
+        let result = sut.dequeue()?.value
         
         XCTAssertEqual(result, 1)
     }
     
     func test_enqueue로_큐에_원소를_더할수있는지() {
-        sut.enqueue(5)
-        for _ in 0...3 {
+        sut.enqueue(CalculateItemTester(value: 5))
+        for _ in 0...2 {
             sut.dequeue()
         }
         
-        let result = sut.peek
+        let result = sut.peek?.value
         
         XCTAssertEqual(result, 5)
     }
