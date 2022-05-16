@@ -95,6 +95,10 @@
 
 # [STEP 1]
 
+## UML
+![calculator_UML](https://user-images.githubusercontent.com/99063327/168565413-a98d1400-f9e4-45bc-946b-7edfa04e803a.jpg)
+
+
 ## 고민한점 
 
 
