@@ -22,4 +22,10 @@ class CalculatorItemQueueTests: XCTestCase {
         
         sut = nil
     }
+    
+    func test_isEmpty가_제대로_작동하는지() {
+        let result = sut.isEmpty
+        
+        XCTAssertFalse(result)
+    }
 }
