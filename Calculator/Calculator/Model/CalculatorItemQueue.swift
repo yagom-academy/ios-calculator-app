@@ -1,5 +1,7 @@
 struct CalculatorItemQueue {
-    func enqueue(element: Int) -> [Int] {
-        return [element]
+    var queue: [Int] = []
+    
+    mutating func enqueue(element: Int) {
+        queue.append(element)
     }
 }

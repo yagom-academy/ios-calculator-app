@@ -20,7 +20,22 @@ class CalculatorTest: XCTestCase {
         let expectation = [0]
         
         // when
-        let result = sut.enqueue(element: input)
+        sut.enqueue(element: input)
+        let result = sut.queue
+        // Then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_enqueue_0과1을추가하면_0과1이들어간배열로변경하는지(){
+        //given
+        let firstTnput = 0
+        let secondTnput = 1
+        let expectation = [0, 1]
+        
+        // when
+        sut.enqueue(element: firstTnput)
+        sut.enqueue(element: secondTnput)
+        let result = sut.queue
         
         // Then
         XCTAssertEqual(expectation, result)
