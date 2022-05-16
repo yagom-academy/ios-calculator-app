@@ -106,6 +106,7 @@
 		4FAB83D62832F6310023B8E8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4FAB83DC2832F94C0023B8E8 /* Protocols */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -113,8 +114,15 @@
 		4FAB83D72832F6FF0023B8E8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4FAB83D82832F7200023B8E8 /* Queue.swift */,
 				4FAB83DA2832F8C90023B8E8 /* CalculateItem.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4FAB83DC2832F94C0023B8E8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4FAB83D82832F7200023B8E8 /* Queue.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
