@@ -20,36 +20,50 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
-    func test_enqueue_enqueStack에_자연수가_순서대로_들어가는지_테스트() throws {
+    func test_enqueue_enqueueStack에_자연수가_순서대로_들어가는지_테스트() throws {
         let input1: Double = 1
         let input2: Double = 9999
         let expectation: [Double] = [1, 9999]
         
-        var result = sut.enque(element: input1)
-        result = sut.enque(element: input2)
+        var result = sut.enqueue(element: input1)
+        result = sut.enqueue(element: input2)
         
         XCTAssertEqual(result, expectation)
     }
     
-    func test_enqueue_enqueStack에_0과_음의정수가_순서대로_들어가는지_테스트() throws {
+    func test_enqueue_enqueueStack에_0과_음의정수가_순서대로_들어가는지_테스트() throws {
         let input1: Double = 0
         let input2: Double = -9999
         let expectation: [Double] = [0, -9999]
 
-        var result = sut.enque(element: input1)
-        result = sut.enque(element: input2)
+        var result = sut.enqueue(element: input1)
+        result = sut.enqueue(element: input2)
 
         XCTAssertEqual(result, expectation)
     }
     
-    func test_enqueue_enqueStack에_실수가_순서대로_들어가는지_테스트() throws {
+    func test_enqueue_enqueueStack에_실수가_순서대로_들어가는지_테스트() throws {
         let input1 = 1.0
         let input2 = 2.0
         let expectation = [1.0, 2.0]
         
-        var result = sut.enque(element: input1)
-        result = sut.enque(element: input2)
+        var result = sut.enqueue(element: input1)
+        result = sut.enqueue(element: input2)
         
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_isEmpty_enqueueStack에_값이_없을때_빈_배열로_인지하는지_테스트() throws {
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty_enqueueStack에_값이_있을때_비어있지_않은_배열로_인지하는지_테스트() throws {
+        let enqueStack = sut.enqueue(element: 1.0)
+        
+        let result = enqueStack.isEmpty
+        
+        XCTAssertFalse(result)
     }
 }

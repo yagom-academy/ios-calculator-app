@@ -8,10 +8,13 @@
 import Foundation
 
 struct CalculatorItemQueue<Element> {
-    var enqueStack: [Element] = []
+    var enqueueStack: [Element] = []
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty
+    }
     
-    mutating func enque(element: Element) -> [Element] {
-        enqueStack.append(element)
-        return enqueStack
+    mutating func enqueue(element: Element) -> [Element] {
+        enqueueStack.append(element)
+        return enqueueStack
     }
 }
