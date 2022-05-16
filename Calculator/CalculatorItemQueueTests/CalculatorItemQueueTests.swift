@@ -34,4 +34,10 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 1)
     }
+    
+    func test_dequeue로_큐의첫번째원소를_뺄수있는지() {
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, 1)
+    }
 }
