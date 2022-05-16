@@ -108,4 +108,23 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, nil)
     }
+    
+    func test_clearQueue_enqueueStack이_빈_배열이_아닐때_clearQueue를_통해_빈_배열이_되는지_테스트() throws {
+        _ = sut.enqueueStack = [1.0, 2.0, 3.0]
+        sut.clearQueue()
+        
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_clearQueue_dequeueStack이_빈_배열이_아닐때_clearQueue를_통해_빈_배열이_되는지_테스트() throws {
+        _ = sut.enqueueStack = [1.0, 2.0, 3.0]
+        _ = sut.dequeue()
+        sut.clearQueue()
+        
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
+    }
 }

@@ -11,7 +11,7 @@ struct CalculatorItemQueue<Element> {
     var enqueueStack: [Element] = []
     var dequeueStack: [Element] = []
     var isEmpty: Bool {
-        return enqueueStack.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
     mutating func enqueue(element: Element) -> [Element] {
@@ -25,5 +25,10 @@ struct CalculatorItemQueue<Element> {
             enqueueStack.removeAll()
         }
         return dequeueStack.popLast()
+    }
+    
+    mutating func clearQueue() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
