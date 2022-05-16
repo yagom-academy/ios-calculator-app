@@ -20,9 +20,11 @@ class CalculatorItemQueue {
         self.dequeue = []
     }
     
-    func enqueue(_ input: String) {
+    func enQueue(_ input: String) {
         self.enqueue.append(input)
     }
     
-    
+    func deQueue() {
+        
+    }
 }

@@ -40,13 +40,13 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
-// MARK: - CalculatorItemQueue.enqueue
+// MARK: - CalculatorItemQueue.enQueue
     func test_queue에_값_한개_삽입() {
         //given
         let input = "3"
         
         //when
-        sut.enqueue(input)
+        sut.enQueue(input)
         let result = sut.enqueue
         
         //then
@@ -60,13 +60,15 @@ class CalculatorTests: XCTestCase {
         let input3 = "9"
         
         //when
-        sut.enqueue(input1)
-        sut.enqueue(input2)
-        sut.enqueue(input3)
+        sut.enQueue(input1)
+        sut.enQueue(input2)
+        sut.enQueue(input3)
         let result = sut.enqueue
         
         //then
         XCTAssertEqual(result, ["3","6","9"])
     }
+//MARK: - Calculator.deQueue
+    
     
 }
