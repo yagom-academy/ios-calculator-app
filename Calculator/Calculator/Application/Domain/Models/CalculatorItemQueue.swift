@@ -21,6 +21,7 @@ struct CalculatorItemQueue<T>: Queue {
     }
     
     mutating func enqueue(_ element: T) -> Bool {
+        array.append(element)
         return true
     }
     
