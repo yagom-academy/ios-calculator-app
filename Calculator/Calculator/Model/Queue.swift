@@ -10,7 +10,7 @@ protocol Queue {
     associatedtype T
     var isEmpty: Bool { get }
     var peek: T? { get }
-    
-    func enQueue()
-    func deQueue()
+
+    mutating func enQueue(_ T: T) -> Bool
+    mutating func deQueue() -> T?
 }

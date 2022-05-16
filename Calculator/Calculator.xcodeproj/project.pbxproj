@@ -18,6 +18,13 @@
 		D76E38CD2832349800636867 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CC2832349800636867 /* CalculatorItemQueue.swift */; };
 		D76E38D5283234BD00636867 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38D4283234BD00636867 /* CalculatorTests.swift */; };
 		D7C8DF9C2832911E00B2374F /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
+		D7C8DF9E2832A40D00B2374F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
+		D7C8DF9F2832A41300B2374F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
+		D7C8DFA02832A41700B2374F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
+		D7C8DFA12832A41A00B2374F /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38C72832253F00636867 /* Calculator.swift */; };
+		D7C8DFA22832A41D00B2374F /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CC2832349800636867 /* CalculatorItemQueue.swift */; };
+		D7C8DFA32832A42100B2374F /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
+		D7C8DFA42832A42400B2374F /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CA2832256300636867 /* CalculateItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,7 +262,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C8DFA22832A41D00B2374F /* CalculatorItemQueue.swift in Sources */,
+				D7C8DFA32832A42100B2374F /* Queue.swift in Sources */,
+				D7C8DF9E2832A40D00B2374F /* AppDelegate.swift in Sources */,
+				D7C8DFA42832A42400B2374F /* CalculateItem.swift in Sources */,
 				D76E38D5283234BD00636867 /* CalculatorTests.swift in Sources */,
+				D7C8DFA02832A41700B2374F /* ViewController.swift in Sources */,
+				D7C8DFA12832A41A00B2374F /* Calculator.swift in Sources */,
+				D7C8DF9F2832A41300B2374F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
