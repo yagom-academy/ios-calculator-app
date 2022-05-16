@@ -8,7 +8,9 @@
 struct CalculatorItemQueue<T>: Queue {
     private var array: [T] = []
     
-    init() {}
+    init(array: [T]) {
+        self.array = array
+    }
     
     var isEmpty: Bool {
         return true
