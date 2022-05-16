@@ -28,4 +28,10 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertFalse(result)
     }
+    
+    func test_peek가_첫번째원소를_보여주는지() {
+        let result = sut.peek
+        
+        XCTAssertEqual(result, 1)
+    }
 }
