@@ -1,17 +1,17 @@
-struct CalculatorItemQueue {
-    var queue: [CalculatorItem] = []
+struct CalculatorItemQueue<Item> {
+    var calulatorItems: [Item] = []
     var head = 0
     
-    mutating func enqueue(element: CalculatorItem) {
-        queue.append(element)
+    mutating func enqueue(element: Item) {
+        calulatorItems.append(element)
     }
     
-    mutating func dequeue() -> CalculatorItem? {
-        if queue.isEmpty {
+    mutating func dequeue() -> Item? {
+        if calulatorItems.isEmpty {
             return nil
         }
         
-        let element = queue[head]
+        let element = calulatorItems[head]
         head += 1
         
         return element
