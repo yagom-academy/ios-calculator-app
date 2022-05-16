@@ -55,5 +55,29 @@ class CalculatorTest: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-
+    func test_dequeue_빈배열일때_nil을반환하는지() {
+        // Given
+        let currentQueue: [Int] = []
+        
+        // When
+        sut.queue = currentQueue
+        let result = sut.dequeue()
+        
+        // Then
+        XCTAssertNil(result)
+    }
+    
+    func test_dequeue_연속으로dequeue하면_다음요소가반환되는지() {
+        // Given
+        let currentQueue = [3, 5, 7]
+        let expectation = 5
+        
+        // When
+        sut.queue = currentQueue
+        var result = sut.dequeue()
+        result = sut.dequeue()
+        
+        // Then
+        XCTAssertEqual(expectation, result)
+    }
 }
