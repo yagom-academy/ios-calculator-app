@@ -5,7 +5,7 @@
 //  Created by Gordon Choi on 2022/05/17.
 //
 
-struct CalculatorItemQueue<T>: Queue {
+struct CalculatorItemQueue<T>: Queue where T: CalculateItem {
     private var array: [T] = []
     
     init(array: [T] = []) {
