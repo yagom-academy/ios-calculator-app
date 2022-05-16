@@ -42,9 +42,9 @@ class CalculatorTest: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_dequeue_queue가3일때_3을반환하는지() {
+    func test_dequeue_첫번째요소가3일때_3을반환하는지() {
         // Given
-        let currentQueue = [3]
+        let currentQueue = [3, 5, 7]
         let expectation = 3
         
         // When
@@ -55,16 +55,5 @@ class CalculatorTest: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_dequeue_마지막요소가3일때_3을반환하는지() {
-        // Given
-        let currentQueue = [1, 2, 3, 4, 5]
-        let expectation = 5
-        
-        // When
-        sut.queue = currentQueue
-        let result = sut.dequeue()
-        
-        // Then
-        XCTAssertEqual(expectation, result)
-    }
+
 }
