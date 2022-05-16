@@ -17,6 +17,7 @@
 		D76E38CB2832256300636867 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CA2832256300636867 /* CalculateItem.swift */; };
 		D76E38CD2832349800636867 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CC2832349800636867 /* CalculatorItemQueue.swift */; };
 		D76E38D5283234BD00636867 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38D4283234BD00636867 /* CalculatorTests.swift */; };
+		D7C8DF9C2832911E00B2374F /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		D76E38CC2832349800636867 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		D76E38D2283234BD00636867 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76E38D4283234BD00636867 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		D7C8DF9B2832911E00B2374F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				D76E38C72832253F00636867 /* Calculator.swift */,
 				D76E38CC2832349800636867 /* CalculatorItemQueue.swift */,
+				D7C8DF9B2832911E00B2374F /* Queue.swift */,
 				D76E38C92832254F00636867 /* Protocol */,
 			);
 			path = Model;
@@ -239,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76E38CD2832349800636867 /* CalculatorItemQueue.swift in Sources */,
+				D7C8DF9C2832911E00B2374F /* Queue.swift in Sources */,
 				D76E38CB2832256300636867 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				D76E38C82832254000636867 /* Calculator.swift in Sources */,
