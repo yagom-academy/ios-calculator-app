@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		20ABBDAA283255B7003675B9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDA9283255B7003675B9 /* CalculatorItemQueue.swift */; };
 		20ABBDAE2832563F003675B9 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDAD2832563F003675B9 /* CalculateItem.swift */; };
-		20ABBDB628325A18003675B9 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDB528325A18003675B9 /* CalculatorItemQueueTests.swift */; };
+		20ABBDBE28325EB8003675B9 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDB528325A18003675B9 /* CalculatorItemQueueTests.swift */; };
+		20ABBDBF28325FC6003675B9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDA9283255B7003675B9 /* CalculatorItemQueue.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -120,8 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				20ABBDA728325543003675B9 /* Controller */,
-				20ABBDAC283255CD003675B9 /* Model */,
 				20ABBDA82832557C003675B9 /* View */,
+				20ABBDAC283255CD003675B9 /* Model */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
@@ -227,7 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20ABBDB628325A18003675B9 /* CalculatorItemQueueTests.swift in Sources */,
+				20ABBDBF28325FC6003675B9 /* CalculatorItemQueue.swift in Sources */,
+				20ABBDBE28325EB8003675B9 /* CalculatorItemQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

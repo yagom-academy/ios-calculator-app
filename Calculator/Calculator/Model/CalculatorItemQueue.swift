@@ -7,6 +7,11 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
+struct CalculatorItemQueue<Element> {
+    var enqueStack: [Element] = []
     
+    mutating func enque(element: Element) -> [Element] {
+        enqueStack.append(element)
+        return enqueStack
+    }
 }
