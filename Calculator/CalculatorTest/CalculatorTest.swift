@@ -47,11 +47,12 @@ class CalculatorTest: XCTestCase {
     
     func test_dequeue_첫번째요소가3일때_3을반환하는지() {
         // Given
-        let currentQueue: [Double] = [3, 5, 7]
+        let currentQueue: [Double] = [3, 5]
         let expectation: Double = 3
         
         // When
-        doubleQueue.calulatorItems = currentQueue
+        doubleQueue.enqueue(element: currentQueue[0])
+        doubleQueue.enqueue(element: currentQueue[1])
         let result = doubleQueue.dequeue()
         
         // Then
@@ -59,11 +60,7 @@ class CalculatorTest: XCTestCase {
     }
     
     func test_dequeue_빈배열일때_nil을반환하는지() {
-        // Given
-        let currentQueue: [Double] = []
-        
         // When
-        doubleQueue.calulatorItems = currentQueue
         let result = doubleQueue.dequeue()
         
         // Then
@@ -72,11 +69,12 @@ class CalculatorTest: XCTestCase {
     
     func test_dequeue_연속으로dequeue하면_두번째요소가반환되는지() {
         // Given
-        let currentQueue: [Double] = [3, 5, 7]
+        let currentQueue: [Double] = [3, 5]
         let expectation: Double = 5
         
         // When
-        doubleQueue.calulatorItems = currentQueue
+        doubleQueue.enqueue(element: currentQueue[0])
+        doubleQueue.enqueue(element: currentQueue[1])
         var result = doubleQueue.dequeue()
         result = doubleQueue.dequeue()
         
@@ -90,7 +88,8 @@ class CalculatorTest: XCTestCase {
         let expectation: Operator = .plus
         
         // When
-        operatorQueue.calulatorItems = currentQueue
+        operatorQueue.enqueue(element: currentQueue[0])
+        operatorQueue.enqueue(element: currentQueue[1])
         let result = operatorQueue.dequeue()
         
         // Then

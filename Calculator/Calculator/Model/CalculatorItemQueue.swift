@@ -1,6 +1,6 @@
 struct CalculatorItemQueue<Item> {
-    var calulatorItems: [Item] = []
-    var head = 0
+    private(set) var calulatorItems: [Item] = []
+    private var head = 0
     
     mutating func enqueue(element: Item) {
         calulatorItems.append(element)
