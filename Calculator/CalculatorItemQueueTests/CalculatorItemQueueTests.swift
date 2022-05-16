@@ -40,4 +40,15 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 1)
     }
+    
+    func test_enqueue로_큐에_원소를_더할수있는지() {
+        sut.enqueue(5)
+        for _ in 0...3 {
+            sut.dequeue()
+        }
+        
+        let result = sut.peek
+        
+        XCTAssertEqual(result, 5)
+    }
 }
