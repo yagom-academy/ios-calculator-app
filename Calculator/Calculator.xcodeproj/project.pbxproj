@@ -25,6 +25,7 @@
 		D7C8DFA22832A41D00B2374F /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CC2832349800636867 /* CalculatorItemQueue.swift */; };
 		D7C8DFA32832A42100B2374F /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
 		D7C8DFA42832A42400B2374F /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E38CA2832256300636867 /* CalculateItem.swift */; };
+		D7C8DFA62832EDC000B2374F /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DFA52832EDC000B2374F /* CalculateItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		D76E38D2283234BD00636867 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76E38D4283234BD00636867 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		D7C8DF9B2832911E00B2374F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		D7C8DFA52832EDC000B2374F /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				D76E38C72832253F00636867 /* Calculator.swift */,
 				D76E38CC2832349800636867 /* CalculatorItemQueue.swift */,
 				D7C8DF9B2832911E00B2374F /* Queue.swift */,
+				D7C8DFA52832EDC000B2374F /* CalculateItem.swift */,
 				D76E38C92832254F00636867 /* Protocol */,
 			);
 			path = Model;
@@ -248,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C8DFA62832EDC000B2374F /* CalculateItem.swift in Sources */,
 				D76E38CD2832349800636867 /* CalculatorItemQueue.swift in Sources */,
 				D7C8DF9C2832911E00B2374F /* Queue.swift in Sources */,
 				D76E38CB2832256300636867 /* CalculateItem.swift in Sources */,

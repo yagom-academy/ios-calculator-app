@@ -6,7 +6,7 @@
 //
 
 //MARK: - CalculatorItemQueue
-struct CalculatorItemQueue<Double>: Queue {  //double?
+struct CalculatorItemQueue<Double>: Queue, CalculateItem {  //double?
     var leftStack: Array<Double> = []
     var rightStack: Array<Double> = []
     
