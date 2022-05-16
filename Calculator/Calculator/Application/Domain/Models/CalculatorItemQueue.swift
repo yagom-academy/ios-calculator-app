@@ -17,7 +17,7 @@ struct CalculatorItemQueue<T>: Queue {
     }
     
     var peek: Element? {
-        return nil
+        array.first
     }
     
     mutating func enqueue(_ element: T) -> Bool {
