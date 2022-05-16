@@ -16,3 +16,6 @@ class ViewController: UIViewController {
 
 }
 
+protocol CalculateItem {
+    
+}
