@@ -127,4 +127,22 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    func test_peek_enqueueStack이_빈_배열일때_peek를_정상적으로_반환하는지_테스트() throws {
+        _ = sut.dequeueStack = [3.0, 2.0, 1.0]
+        let expectaion = 1.0
+        
+        let result = sut.peek
+        
+        XCTAssertEqual(result, expectaion)
+    }
+    
+    func test_peek_enqueueStack이_빈_배열이_아닐때_peek를_정상적으로_반환하는지_테스트() throws {
+        _ = sut.enqueueStack = [1.0, 2.0, 3.0]
+        let expectaion = 1.0
+        
+        let result = sut.peek
+        
+        XCTAssertEqual(result, expectaion)
+    }
 }
