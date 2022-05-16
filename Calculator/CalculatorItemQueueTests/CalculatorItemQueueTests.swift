@@ -110,7 +110,8 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_clearQueue_enqueueStack이_빈_배열이_아닐때_clearQueue를_통해_빈_배열이_되는지_테스트() throws {
-        _ = sut.enqueueStack = [1.0, 2.0, 3.0]
+        _ = sut.enqueue(element: 1.0)
+        _ = sut.enqueue(element: 2.0)
         sut.clearQueue()
         
         let result = sut.isEmpty
@@ -119,7 +120,8 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_clearQueue_dequeueStack이_빈_배열이_아닐때_clearQueue를_통해_빈_배열이_되는지_테스트() throws {
-        _ = sut.enqueueStack = [1.0, 2.0, 3.0]
+        _ = sut.enqueue(element: 1.0)
+        _ = sut.enqueue(element: 2.0)
         _ = sut.dequeue()
         sut.clearQueue()
         
@@ -129,7 +131,8 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_peek_enqueueStack이_빈_배열일때_peek를_정상적으로_반환하는지_테스트() throws {
-        _ = sut.dequeueStack = [3.0, 2.0, 1.0]
+        _ = sut.enqueue(element: 1.0)
+        _ = sut.enqueue(element: 2.0)
         let expectaion = 1.0
         
         let result = sut.peek
@@ -138,7 +141,8 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_peek_enqueueStack이_빈_배열이_아닐때_peek를_정상적으로_반환하는지_테스트() throws {
-        _ = sut.enqueueStack = [1.0, 2.0, 3.0]
+        _ = sut.enqueue(element: 1.0)
+        _ = sut.enqueue(element: 2.0)
         let expectaion = 1.0
         
         let result = sut.peek
