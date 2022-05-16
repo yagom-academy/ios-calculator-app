@@ -13,7 +13,7 @@ struct CalculatorItemQueue<T>: Queue {
     }
     
     var isEmpty: Bool {
-        return true
+        array.isEmpty
     }
     
     var peek: Element? {
