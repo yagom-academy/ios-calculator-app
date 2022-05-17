@@ -72,5 +72,19 @@ class LinkedListTTD: XCTestCase {
         // then
         XCTAssertEqual(linkedList.peekHead(), expectation)
     }
+    
+    func test_값이없을경우_true를반환() throws {
+        // given
+        // what
+        // then
+        XCTAssertTrue(linkedList.isEmpty())
+    }
+    
+    func test_값이있을경우_false를반환() throws {
+        // given
+        // what
+        // then
+        XCTAssertTrue(linkedList.isEmpty())
+    }
 
 }

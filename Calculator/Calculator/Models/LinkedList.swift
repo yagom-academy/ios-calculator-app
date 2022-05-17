@@ -43,4 +43,7 @@ struct LinkedList<T> {
         return head?.data
     }
     
+    func isEmpty() -> Bool {
+        return _count == 0 ? true : false
+    }
 }
