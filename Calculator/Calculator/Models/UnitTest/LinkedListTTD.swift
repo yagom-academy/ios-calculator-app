@@ -18,7 +18,6 @@ class LinkedListTTD: XCTestCase {
 
     func test_값을2개넣으면_count는_2를반환() throws {
         // given
-        var linkedList = LinkedList<Int>()
         let inputValue1: Int = 3
         let inputValue2: Int = 3
         let expectation: Int = 2
@@ -33,7 +32,6 @@ class LinkedListTTD: XCTestCase {
     
     func test_head_쪽에_추가하면_popHead는_추가한값을반환() throws {
         // given
-        var linkedList = LinkedList<Int>()
         let inputValue: Int = 7
         let expectation: Int = inputValue
         
@@ -42,6 +40,37 @@ class LinkedListTTD: XCTestCase {
         
         // then
         XCTAssertEqual(linkedList.popHead(), expectation)
+    }
+    
+    func test_popHead하면_count가_줄어든다() throws {
+        // given
+        let inputValue: Int = 7
+        let expectation1: Int = 1
+        let expectation2: Int = 0
+        
+        // what
+        linkedList.pushBeforeHead(element: inputValue)
+        
+        // then
+        XCTAssertEqual(linkedList.count, expectation1)
+        
+        // what
+        linkedList.popHead()
+        
+        // then
+        XCTAssertEqual(linkedList.count, expectation2)
+    }
+    
+    func test_peekHead할경우_head의데이터를보여준다() throws {
+        // given
+        let inputValue: Int = 8
+        let expectation: Int = inputValue
+        
+        // what
+        linkedList.pushBeforeHead(element: inputValue)
+        
+        // then
+        XCTAssertEqual(linkedList.peekHead(), expectation)
     }
 
 }

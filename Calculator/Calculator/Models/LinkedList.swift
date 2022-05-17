@@ -39,4 +39,8 @@ struct LinkedList<T> {
         return returnElement
     }
     
+    func peekHead() -> T? {
+        return head?.data
+    }
+    
 }
