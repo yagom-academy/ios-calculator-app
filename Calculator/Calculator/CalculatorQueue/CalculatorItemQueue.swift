@@ -8,27 +8,34 @@
 import Foundation
 
 class CalculatorItemQueue: CalculatorItem {
-    var enqueue: [String]
-    var dequeue: [String]
+    private var queue: CalculatorList<String>
+
     
     var count: Int {
-        return enqueue.count + dequeue.count
+        return queue.size()
     }
     
     init() {
-        self.enqueue = []
-        self.dequeue = []
+        self.queue = CalculatorList()
     }
     
     func enQueue(_ input: String) {
-        self.enqueue.append(input)
+        let newNode: Node<String> = Node(value: input, next: nil)
+        self.queue.append(newNode)
     }
     
-    func deQueue() -> String? {
-        if dequeue.isEmpty {
-            dequeue = enqueue.reversed()
-            enqueue.removeAll()
+    func deQueue() -> Node<String>? {
+        if queue.isEmpty() {
+            return nil
         }
-        return dequeue.popLast()
+        return queue.pop()
+    }
+    
+    func removeAllQueue() {
+        queue.removeAll()
+    }
+    
+    func showHeadNode() -> Node<String>? {
+        return queue.head
     }
 }
