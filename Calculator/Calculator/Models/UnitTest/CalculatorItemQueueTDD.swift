@@ -52,5 +52,38 @@ class CalculatorItemQueueTDD: XCTestCase {
         XCTAssertEqual(intQueue.peek(), expectation)
     }
     
-
+    func test_값이있으면_false() throws {
+        // given
+        let inputValue1: Int = 1
+        let inputValue2: Int = 2
+        
+        // what
+        intQueue.push(element: inputValue1)
+        intQueue.push(element: inputValue2)
+        
+        // then
+        XCTAssertFalse(intQueue.isEmpty())
+    }
+    
+    func test_값이없으면_true() throws {
+        // given
+        // what
+        
+        // then
+        XCTAssertTrue(intQueue.isEmpty())
+    }
+    
+    func test_값을2개넣으면_count는_2를반환() throws {
+        // given
+        let inputValue1: Int = 1
+        let inputValue2: Int = 2
+        let expectation: Int = 2
+        
+        // what
+        intQueue.push(element: inputValue1)
+        intQueue.push(element: inputValue2)
+        
+        // then
+        XCTAssertEqual(intQueue.count, expectation)
+    }
 }
