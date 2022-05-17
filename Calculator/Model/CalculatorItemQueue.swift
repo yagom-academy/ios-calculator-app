@@ -20,7 +20,7 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return list.isEmpty()
     }
     
-    func removeAll() {
-        
+    mutating func removeAll() {
+        list.removeAll()
     }
 }
