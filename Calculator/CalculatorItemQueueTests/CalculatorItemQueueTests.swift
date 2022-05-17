@@ -30,4 +30,18 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_enQueue_큐에값이여러개추가되는지() {
+        // given
+        sut.enQueue(data: 1)
+        sut.enQueue(data: 2)
+        
+        // when
+        let result1 = sut.List?.takeOutFirst()
+        let result2 = sut.List?.takeOutFirst()
+        
+        // then
+        XCTAssertEqual(result1, 1)
+        XCTAssertEqual(result2, 2)
+    }
 }
