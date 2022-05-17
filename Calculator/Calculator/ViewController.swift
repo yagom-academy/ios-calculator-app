@@ -23,6 +23,18 @@ protocol CalculateItem {
 struct CalculatorItemQueue<D>: CalculateItem {
     var head: List<D>?
     var tail: List<D>?
+    
+    mutating func enQueue(data: D?) {
+        if head == nil || tail == nil {
+            head = List.init(data: data)
+            tail = head
+            return
+        }
+        let newList = List.init(data: data)
+        tail?.next = newList
+        newList.prev = tail
+        tail = newList
+    }
 }
 
 class List<D> {
