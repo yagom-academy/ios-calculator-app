@@ -12,7 +12,10 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         List?.append(data: data)
     }
     
-    func deQueue() -> T? {
+    mutating func deQueue() -> T? {
+        if List != nil {
+            return List?.takeOutFirst()
+        }
         return nil
     }
     
