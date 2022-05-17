@@ -4,7 +4,7 @@
 
 ### 1. UML 
 - step2 공개 전, 계산기 동작설명을 보고 작성한 UML입니다. 
-![스크린샷 2022-05-16 오후 11 49 43](https://user-images.githubusercontent.com/50102522/168741159-e6cc5a4d-d8a9-4d94-89ee-6236fceff832.png)
+![스크린샷 2022-05-17 오후 3 05 22](https://user-images.githubusercontent.com/50102522/168760465-3b2bba38-739a-4216-85bf-577fdafd0122.png)
 
 ### 2. 고민한 점
 - dequeue 메서드의 구현 방식을 고민했습니다.
