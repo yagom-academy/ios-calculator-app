@@ -27,7 +27,7 @@ class CalculatorTests: XCTestCase {
         //when
         sut.enQueue("1")
         //then
-        XCTAssertEqual(expectation, sut.array)
+        XCTAssertEqual(expectation, sut.enQueueStack)
     }
     
     func test_enQueue를이용해_배열에1_2_3을추가했을때_1_2_3이_순서대로_들어가는지() {
@@ -38,21 +38,23 @@ class CalculatorTests: XCTestCase {
         sut.enQueue("2")
         sut.enQueue("3")
         //then
-        XCTAssertEqual(expectation, sut.array)
+        XCTAssertEqual(expectation, sut.enQueueStack)
     }
     
     func test_빈배열일때_isEmpty계산프로퍼티가_true인지() {
         //given
-        sut.array = []
+        sut.enQueueStack = []
+        sut.deQueueStack = []
         //when
         let result = sut.isEmpty
         //then
         XCTAssertTrue(result)
     }
     
-    func test_빈배열이_아닐때_isEmpty계산프로퍼티가_false인지() {
+    func test_둘중_하나라도_빈배열이_아닐때_isEmpty계산프로퍼티가_false인지() {
         //given
-        sut.array = ["1","2","3"]
+        sut.enQueueStack = ["1","2","3"]
+        sut.deQueueStack = []
         //when
         let result = sut.isEmpty
         //then
@@ -61,7 +63,7 @@ class CalculatorTests: XCTestCase {
     
     func test_1_2_3배열에서_deQueue를이용했을때_첫번째값인_1을얻을수있는지() {
         //given
-        sut.array = ["1", "2", "3"]
+        sut.enQueueStack = ["1", "2", "3"]
         let expectation = "1"
         //when
         let result = sut.deQueue()
@@ -71,7 +73,7 @@ class CalculatorTests: XCTestCase {
     
     func test_빈배열에서_deQueue를이용했을때_nil을출력하는지() {
         //given
-        sut.array = []
+        sut.enQueueStack = []
         //when
         let result = sut.deQueue()
         //then
@@ -81,17 +83,17 @@ class CalculatorTests: XCTestCase {
     
     func test_1_2_3배열에서_deQueue를수행하면_기존배열이_2_3_으로변하는지() {
         //given
-        sut.array = ["1", "2", "3"]
+        sut.enQueueStack = ["1", "2", "3"]
         let expectation = ["2","3"]
         //when
         sut.deQueue()
         //then
-        XCTAssertEqual(expectation, sut.array)
+        XCTAssertEqual(expectation, sut.currentArray)
     }
     
     func test_1_2_3배열에서_peek계산프로퍼티에_1이들어가는지() {
         //given
-        sut.array = ["1", "2", "3"]
+        sut.enQueueStack = ["1", "2", "3"]
         let expectation = "1"
         //when
         let result = sut.peek
@@ -101,7 +103,8 @@ class CalculatorTests: XCTestCase {
     
     func test_빈배열에서_peek계산프로퍼티에_nil이들어가는지() {
         //given
-        sut.array = []
+        sut.enQueueStack = []
+        sut.deQueueStack = []
         //when
         let result = sut.peek
         //then
