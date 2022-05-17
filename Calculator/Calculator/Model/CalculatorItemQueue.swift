@@ -6,8 +6,8 @@
 //
 
 struct CalculatorItemQueue<T>: Queue, CalculateItem {
-    var enQueueStack: Array<T> = []
-    var deQueueStack: Array<T> = []
+    private(set) var enQueueStack: Array<T> = []
+    private(set) var deQueueStack: Array<T> = []
     
     var isEmpty: Bool {
         return (enQueueStack.isEmpty && deQueueStack.isEmpty)
@@ -21,11 +21,11 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
         }
     }
     
-    mutating func enQueue(_ input: T) {
+    public mutating func enQueue(_ input: T) {
         enQueueStack.append(input)
     }
     
-    mutating func deQueue() throws -> T? {
+    public mutating func deQueue() throws -> T? {
         if enQueueStack.isEmpty {
             throw QueueError.empty
         }
