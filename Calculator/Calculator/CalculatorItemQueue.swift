@@ -8,20 +8,28 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var array = Array<T>()
+    var deQueueStack = Array<T>()
+    var enQueueStack = Array<T>()
     var isEmpty: Bool {
-        return array.isEmpty
+        return deQueueStack.isEmpty && enQueueStack.isEmpty
     }
     var peek: T? {
-        return array.first
+        return !deQueueStack.isEmpty ? deQueueStack.last : enQueueStack.first
+    }
+    var currentArray: [T] {
+        return deQueueStack.reversed() + enQueueStack
     }
     
     mutating func enQueue(_ element: T) {
-        array.append(element)
+        enQueueStack.append(element)
     }
     
     mutating func deQueue() -> T? {
-        return isEmpty ? nil : array.removeFirst()
+        if deQueueStack.isEmpty {
+            deQueueStack = enQueueStack.reversed()
+            enQueueStack.removeAll()
+        }
+        return deQueueStack.popLast()
     }
 }
 
