@@ -47,4 +47,8 @@ struct LinkedList<T> {
         }
         return false
     }
+    
+    func removeAll() {
+        
+    }
 }

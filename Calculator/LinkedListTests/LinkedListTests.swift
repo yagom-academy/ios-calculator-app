@@ -66,4 +66,16 @@ class LinkedListTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
+    
+    func test_removeAll_값이있을때_모든값을제거하는지() {
+        // given
+        sut.append(data: 1)
+        
+        // when
+        sut.removeAll()
+        let result = sut.isEmpty()
+        
+        //then
+        XCTAssertTrue(result)
+    }
 }
