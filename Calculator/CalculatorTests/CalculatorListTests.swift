@@ -30,7 +30,7 @@ class CalculatorListTests: XCTestCase {
     
     func test_1개있을때_1반환() {
         //given
-        sut.head = Node<String>(value: "123", next: nil)
+        sut.head = Node<String>(value: "123")
         sut.tail = sut.head
         
         //when
@@ -45,10 +45,9 @@ class CalculatorListTests: XCTestCase {
         let node1 = Node<String>(value: "123")
         let node2 = Node<String>(value: "456")
         let node3 = Node<String>(value: "789")
-        node1.next = node2
-        node2.next = node3
-        sut.head = node1
-        sut.tail = node3
+        sut.append(node1)
+        sut.append(node2)
+        sut.append(node3)
         
         //when
         let result = sut.size()

@@ -46,7 +46,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         //when
         sut.enQueue(input)
-        guard let result = sut.showHeadNode() else {
+        guard let result = sut.deQueue() else {
             return
         }
         
