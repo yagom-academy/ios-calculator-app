@@ -44,4 +44,9 @@ class LinkedList<T: CalculateItem> {
         
         return removedNode?.data
     }
+    
+    func removeAll() {
+        head = nil
+        count = 0
+    }
 }

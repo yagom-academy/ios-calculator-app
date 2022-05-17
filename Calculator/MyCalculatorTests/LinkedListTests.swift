@@ -58,4 +58,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
+    func test_removeAll했을때_head가nil이되는지() {
+        // give
+        sut?.append(data: 3)
+        sut?.append(data: 13)
+        
+        // when
+        sut?.removeAll()
+        
+        // then
+        XCTAssertEqual(sut?.self.head?.data, nil)
+    }
 }
