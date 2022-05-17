@@ -32,10 +32,10 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_peek_프로퍼티가_왼쪽스택이_비어있지않으면_왼쪽스택의마지막배열을_오른쪽스택의첫번째배열로_반환하는가() {
+    func test_peek_프로퍼티가_enQueue스택이_비어있지않으면_enQueue스택의첫번째배열을_반환하는가() {
         //given
         sut.enQueueStack = [1.0, 2.0, 3.0]
-        sut.deQueueStack = [3.0, 2.0]
+        sut.deQueueStack = [3.0, 2.0, 1.0]
         //when
         func isReturnWhichStack() -> Double {
             if !sut.enQueueStack.isEmpty {
@@ -47,7 +47,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = isReturnWhichStack()
         
         //then
-        XCTAssertEqual(result, 1.0)
+        XCTAssertEqual(result, sut.enQueueStack.first)
     }
     
     func test_enQueue함수를_호출했을때_왼쪽스택에_값을더하는가() {
