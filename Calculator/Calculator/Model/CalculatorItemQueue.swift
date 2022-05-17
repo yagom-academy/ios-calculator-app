@@ -6,7 +6,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() -> T? {
-        
+
         if calculateItems.isEmpty {
             return nil
         }

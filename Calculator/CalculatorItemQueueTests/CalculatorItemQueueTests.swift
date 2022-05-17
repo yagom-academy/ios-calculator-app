@@ -9,6 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
+    // MARK: Setting
     var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
@@ -21,6 +22,7 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
+    // MARK: Test_enqueue()
     func testCalculateItems에_요소가_잘_추가되는지() {
         // given
         sut.enqueue(3.0)
@@ -30,6 +32,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3.0)
     }
     
+    // MARK: Test_dequeue()
     func testCalculateItems의_요소가_잘_빠지는지() {
         // given
         sut.enqueue(3.0)
@@ -50,13 +53,14 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3.0)
     }
     
-    func testCalculateItem이_비어있을_때_nil이_반환되는지() {
+    func testCalculateItem이_비어있을_때_요소를_빼려하면_nil이_반환되는지() {
         // given when
         let result = sut.dequeue()
         // then
         XCTAssertEqual(result, nil)
     }
     
+    // MARK: Test_resetQueue()
     func testCalculateItem이_잘_초기화가_되는지() {
         // given
         sut.enqueue(3.0)
@@ -69,6 +73,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
+    // MARK: Test_peak()
     func testCalculateItem의_첫번째_요소가_그대로_들어있고_값만_반환되는지() {
         // given
         sut.enqueue(1.0)
