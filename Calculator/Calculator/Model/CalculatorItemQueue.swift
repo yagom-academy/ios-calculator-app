@@ -7,4 +7,9 @@
 
 class CalculatorItemQueue: CalculatorItem {
     private var item = [String]()
+    
+    func convertToDouble(from data: String) -> Double? {
+        guard let number = Double(data) else { return nil }
+        return number
+    }
 }
