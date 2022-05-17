@@ -20,12 +20,12 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<D>: CalculateItem {
-    var head: List<D>?
+struct CalculatorItemQueue<T>: CalculateItem {
+    var head: Node<T>?
     
-    mutating func enQueue(data: D?) {
+    mutating func enQueue(data: T?) {
         if head == nil {
-            head = List(data: data)
+            head = Node(data: data)
             return
         }
         var node = head
@@ -33,14 +33,19 @@ struct CalculatorItemQueue<D>: CalculateItem {
             node = node?.next
         }
     }
-}
-
-class List<D> {
-    var data: D?
-    var next: List?
     
-    init (data: D?, next: List? = nil) {
+    mutating func deQueue() {
+        if head == nil { return }
+        head = head?.next
+    }
+
+class Node<T> {
+    var data: T?
+    var next: Node?
+    
+    init (data: T?, next: Node? = nil) {
         self.data = data
         self.next = next
     }
+}
 }
