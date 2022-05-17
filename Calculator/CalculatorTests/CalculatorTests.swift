@@ -79,4 +79,25 @@ class CalculatorTests: XCTestCase {
         let result = sut.isEmpty
         XCTAssertTrue(result)
     }
+    
+    func test_dequeue후append메서드사용할할경우() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        var result = sut.firstValue
+        XCTAssertEqual(result, 1)
+        sut.dequeue()
+        result = sut.firstValue
+        XCTAssertEqual(result, 2)
+        sut.dequeue()
+        result = sut.firstValue
+        XCTAssertEqual(result, nil)
+        sut.enqueue(5)
+        result = sut.firstValue
+        XCTAssertEqual(result, 5)
+        sut.dequeue()
+        result = sut.firstValue
+        XCTAssertEqual(result, nil)
+        result = sut.count
+        XCTAssertEqual(result, 0)
+    }
 }

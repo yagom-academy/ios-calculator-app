@@ -5,8 +5,6 @@
 //  Created by 이은찬 on 2022/05/17.
 //
 
-import Foundation
-
 class Node<T> {
     let value: T
     var next: Node?
@@ -27,15 +25,18 @@ struct LinkedList<T> {
     }
     
     func returnFirst() -> Node<T>? {
-        return head
+        if let node = head {
+            return node
+        }
+        return nil
     }
     
     mutating func append(_ value: T) {
         let newNode = Node<T>(value)
         
         if let tailNode = tail {
-            tailNode.next = nil
             tail = newNode
+            tailNode.next = tail
         } else {
             head = newNode
             tail = newNode
@@ -45,11 +46,17 @@ struct LinkedList<T> {
     
     mutating func removeHead() -> Node<T>? {
         if let node = head {
-            head = head?.next
+            self.head = head?.next
             count -= 1
+            if count == 0 {
+                tail = nil
+            }
             return node
+        } else {
+            self.head = nil
+            self.tail = nil
+            return self.head
         }
-        return nil
     }
     
     mutating func removeAll() {
