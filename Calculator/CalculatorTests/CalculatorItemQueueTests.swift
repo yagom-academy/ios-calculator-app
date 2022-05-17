@@ -36,6 +36,7 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = [3.0, 2.0, 1.0]
+        
         //when
         func isReturnWhichStack() -> Double {
             if !sut.enQueueStack.isEmpty {
@@ -55,12 +56,14 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.enQueueStack = [3.0, 2.0]
         let input = 4.0
+        
         //when
         func test_enQueue() {
             sut.enQueueStack.append(input)
         }
         test_enQueue()
         let result = 4.0
+        
         //then
         XCTAssertEqual(result, sut.enQueueStack.last)
     }
@@ -69,6 +72,7 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = []
+        
         //when
         func test_deQueue() {
             if sut.deQueueStack.isEmpty {
@@ -76,8 +80,8 @@ class CalculatorItemQueueTests: XCTestCase {
             }
         }
         test_deQueue()
-        
         let result = [3.0, 2.0, 1.0]
+        
         //then
         XCTAssertEqual(result, sut.deQueueStack)
     }
@@ -86,16 +90,16 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = [3.0, 2.0, 1.0]
+        
         //when
         func test_deQueue() {
             if sut.enQueueStack.reversed() == sut.deQueueStack {
                 sut.enQueueStack.removeAll()
             }
         }
-       
         test_deQueue()
-        
         let result = sut.enQueueStack
+        
         //then
         XCTAssertEqual(result, [])
     }
@@ -103,12 +107,13 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_deQueue함수를_호출했을때_오른쪽스택의배열에서_마지막값을반환하는가() {
         //given
         sut.deQueueStack = [3.0, 2.0, 1.0]
+        
         //when
         func test_deQueue() -> Double {
             return sut.deQueueStack.last ?? -10000.0
         }
-        
         let result = test_deQueue()
+        
         //then
         XCTAssertEqual(result, 1.0)
     }
@@ -118,8 +123,10 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = []
         sut.enQueue(4.0)
+        
         //when
         let result = try? sut.deQueue()
+        
         //then
         XCTAssertEqual(result, 1.0)
     }
