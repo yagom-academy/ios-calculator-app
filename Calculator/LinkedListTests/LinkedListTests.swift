@@ -20,7 +20,8 @@ class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-    
+
+    //MARK: - append test
     func test_append_값1개_추가하기() {
         // given
         sut.append(data: 1)
@@ -31,7 +32,8 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
-    
+
+    //MARK: - takeOutFirst test
     func test_takeOutFirst_값이있을때_값을반환하는지() {
         // given
         sut.append(data: 1)
@@ -56,6 +58,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result2, 2)
     }
     
+    //MARK: - isEmpty test
     func test_isEmpty_값이있을때_false를_리턴하는지() {
         // given
         sut.append(data: 1)
@@ -67,6 +70,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    //MARK: - removeAll test
     func test_removeAll_값이있을때_모든값을제거하는지() {
         // given
         sut.append(data: 1)

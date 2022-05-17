@@ -20,6 +20,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
+    //MARK: - enQueue test
     func test_enQueue_큐에값이추가되는지() {
         // given
         sut.enQueue(data: 1)
@@ -31,6 +32,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
+    //MARK: - deQueue test
     func test_deQueue_큐에서첫번째값을반환하는지() {
         // given
         sut.enQueue(data: 1)
@@ -42,7 +44,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_enQueue_큐에값을여러개추가하고_삭제했을때_순서대로가져오는지() {
+    func test_deQueue_큐에값을여러개추가하고_삭제했을때_순서대로가져오는지() {
         // given
         sut.enQueue(data: 1)
         sut.enQueue(data: 2)
@@ -56,6 +58,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result2, 2)
     }
     
+    //MARK: - isEmpty test
     func test_isEmpty_큐에값이있을때_false를반환하는지() {
         // given
         sut.enQueue(data: 1)
@@ -67,6 +70,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
+    //MARK: - removeAll test
     func test_removeAll_값이있을때_모든값을제거하는지() {
         // given
         sut.enQueue(data: 1)
