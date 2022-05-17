@@ -122,7 +122,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = []
         sut.enQueue(4.0)
-        sut.deQueue()
+        try? sut.deQueue()
         //when
         let result = [4.0, 3.0, 2.0]
         //then
@@ -134,7 +134,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = []
         //when
-        sut.deQueue()
+        try? sut.deQueue()
         let result = [3.0, 2.0]
         //then
         XCTAssertEqual(result, sut.deQueueStack)

@@ -10,6 +10,6 @@ protocol Queue {
     var isEmpty: Bool { get }
     var peek: T? { get }
 
-    mutating func enQueue(_ T: T) -> Bool
-    mutating func deQueue() -> T?
+    mutating func enQueue(_ T: T) 
+    mutating func deQueue() throws -> T?
 }
