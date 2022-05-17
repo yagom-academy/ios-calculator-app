@@ -4,9 +4,22 @@
 //
 //  Created by NAMU on 2022/05/17.
 //
+ class Node<T> {
+     fileprivate var data: T?
+     fileprivate var next: Node?
+    
+    init(data: T?, next: Node? = nil) {
+        self.data = data
+        self.next = next
+    }
+}
 
 struct LinkedList<T> {
-    var head: Node<T>?
+    private var head: Node<T>?
+    
+    func confirmFirst() -> T? {
+        return head?.data
+    }
     
     mutating func append(data: T) {
         if head == nil {
