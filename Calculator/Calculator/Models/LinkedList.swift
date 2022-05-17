@@ -121,3 +121,17 @@ extension LinkedList: Sequence, IteratorProtocol {
         return currentNodeForSequence?.data
     }
 }
+
+extension LinkedList: CustomStringConvertible, CustomDebugStringConvertible {
+    var description: String {
+        let stringArray = self.map { "\($0)" }
+        let returnString = stringArray.joined(separator: ", ")
+        return "[" + returnString + "]"
+    }
+    
+    var debugDescription: String {
+        let stringArray = self.map { "\($0)" }
+        let returnString = stringArray.joined(separator: ", ")
+        return "[" + returnString + "]"
+    }
+}
