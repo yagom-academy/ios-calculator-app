@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Any>!
+    var sut: CalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Any>()
+        sut = CalculatorItemQueue<Int>()
     }
     
     override func tearDownWithError() throws {
@@ -49,12 +49,26 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_removeAll하는지확인() {
+    func test_isEmpty에서dequeue가되는지확인() {
+        let a = sut.dequeue()?.value
+        XCTAssertEqual(nil, a)
+    }
+    
+    func test_removeAll하는지확인1() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         sut.removeAll()
         let result = sut.count
         XCTAssertEqual(result, 0)
+    }
+    
+    func test_removeAll하는지확인2() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.removeAll()
+        let result = sut.isEmpty
+        XCTAssertTrue(result)
     }
 }
