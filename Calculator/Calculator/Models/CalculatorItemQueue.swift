@@ -1,0 +1,3 @@
+struct CalculatorItemQueue<T>: CalculateItem {
+    
+}
