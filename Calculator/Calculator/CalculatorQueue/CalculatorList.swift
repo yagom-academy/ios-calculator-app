@@ -14,7 +14,7 @@ class CalculatorList<T> {
     }
     
     func size() -> Int {
-        guard var counterNode: Node = head else {
+        guard var counterNode = head else {
             return 0
         }
         var count: Int = 1
