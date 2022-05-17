@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T> {
     private let doublyLinkedList = DoublyLinkedList<T>()
     init() {}
 }
@@ -23,12 +23,12 @@ extension CalculatorItemQueue: CalculateItemProtocol {
         return doublyLinkedList.isEmpty
     }
     
-    func enQueue(_ element: T) -> Bool {
+    mutating func enQueue(_ element: T) -> Bool {
         doublyLinkedList.append(element)
         return true
     }
     
-    func deQueue() -> T? {
+    mutating func deQueue() -> T? {
         guard !doublyLinkedList.isEmpty,
               let element = doublyLinkedList.first else {
             return nil
@@ -36,7 +36,7 @@ extension CalculatorItemQueue: CalculateItemProtocol {
         return doublyLinkedList.remove(element)
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         guard !doublyLinkedList.isEmpty else {
             return
         }
