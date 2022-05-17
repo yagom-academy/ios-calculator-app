@@ -6,8 +6,6 @@
 //
 class CalculatorItemQueue: CalculatorItem {
     private var queue: CalculatorList<String>
-
-    
     var count: Int {
         return queue.size()
     }
