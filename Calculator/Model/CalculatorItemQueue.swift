@@ -8,7 +8,9 @@
 struct CalculatorItemQueue<T>: CalculatorItem {
     var List: LinkedList<T>?
     
-    func enQueue(data: T) {
+    mutating func enQueue(data: T) {
+        List = LinkedList()
+        List?.append(data: data)
     }
     
     func deQueue() -> T? {

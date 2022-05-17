@@ -25,7 +25,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueue(data: 1)
         
         // when
-        let result = sut.List?.head?.data
+        let result = sut.List?.takeOutFirst()
         
         // then
         XCTAssertEqual(result, 1)
