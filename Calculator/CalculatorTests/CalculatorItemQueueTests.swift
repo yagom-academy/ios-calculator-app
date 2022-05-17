@@ -62,7 +62,7 @@ class CalculatorItemQueueTests: XCTestCase {
         test_enQueue()
         let result = 4.0
         //then
-        XCTAssertEqual(sut.enQueueStack.last, result)
+        XCTAssertEqual(result, sut.enQueueStack.last)
     }
     
     func test_deQueue함수를_호출했을때_오른쪽스택이_비어있으면_왼쪽스택의순서를뒤집어_오른쪽스택에집어넣는가() {
@@ -75,15 +75,11 @@ class CalculatorItemQueueTests: XCTestCase {
                 sut.deQueueStack = sut.enQueueStack.reversed()
             }
         }
-        
         test_deQueue()
-        if sut.deQueueStack.isEmpty {
-            sut.deQueueStack = sut.enQueueStack.reversed()
-        }
         
-        let result = sut.deQueueStack
+        let result = [3.0, 2.0, 1.0]
         //then
-        XCTAssertEqual(result, [3.0, 2.0, 1.0])
+        XCTAssertEqual(result, sut.deQueueStack)
     }
     
     func test_deQueue함수를_호출했을때_왼쪽스택의순서를뒤집어_오른쪽스택에집어넣었으면_왼쪽스택의요소를_모두없애는가() {
@@ -122,21 +118,9 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueueStack = [1.0, 2.0, 3.0]
         sut.deQueueStack = []
         sut.enQueue(4.0)
-        try? sut.deQueue()
         //when
-        let result = [4.0, 3.0, 2.0]
+        let result = try? sut.deQueue()
         //then
-        XCTAssertEqual(result, sut.deQueueStack)
-    }
-    
-    func test_오른쪽스택이_비어있을때_deQueue를호출하면_값이제대로_넘어가는가() {
-        //given
-        sut.enQueueStack = [1.0, 2.0, 3.0]
-        sut.deQueueStack = []
-        //when
-        try? sut.deQueue()
-        let result = [3.0, 2.0]
-        //then
-        XCTAssertEqual(result, sut.deQueueStack)
+        XCTAssertEqual(result, 1.0)
     }
 }
