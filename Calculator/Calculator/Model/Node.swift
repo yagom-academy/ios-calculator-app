@@ -8,7 +8,7 @@
 import Foundation
 
 class Node<T: CalculateItem> {
-    var data: T
+    private(set) var data: T
     var next: Node<T>?
     
     init(_ data: T) {
