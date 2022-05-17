@@ -24,5 +24,13 @@ class LinkedListTest: XCTestCase {
         //when,then
         XCTAssertTrue(sut.isEmpty)
     }
-
+   
+    func test_정수를_넣었을때_head의_값이_1이여야한다() {
+        //given
+        sut?.append(data: 1)
+        //when
+        let head = sut?.head?.data
+        //then
+        XCTAssertEqual(1, head)
+    }
 }
