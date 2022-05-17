@@ -56,6 +56,3 @@ struct CalculatorItemQueue<T>: CalculateItem{
         queue.removeAll()
     }
 }
-
-
-
