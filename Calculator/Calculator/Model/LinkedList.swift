@@ -32,4 +32,16 @@ class LinkedList<T: CalculateItem> {
         node?.next = Node(data)
         count += 1
     }
+    
+    func removeFirst() -> T? {
+        if head == nil {
+            return nil
+        }
+        
+        let removedNode = head
+        head = head?.next
+        count -= 1
+        
+        return removedNode?.data
+    }
 }

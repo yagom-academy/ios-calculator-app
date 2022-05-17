@@ -44,4 +44,18 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(headData, 3)
     }
+    
+    func test_linkedList에서_여러data를append를했을때_removeFirst를하면_첫번째로넣은값이반환되는지() {
+        // give
+        sut?.append(data: 3)
+        sut?.append(data: 13)
+        sut?.append(data: 24)
+        
+        // when
+        let result = sut?.removeFirst()
+        
+        // then
+        XCTAssertEqual(result, 3)
+    }
+    
 }
