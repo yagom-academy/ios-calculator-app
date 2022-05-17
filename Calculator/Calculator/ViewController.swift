@@ -20,7 +20,7 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue {
+struct CalculatorItemQueue: CalculateItem {
     
 }
 
