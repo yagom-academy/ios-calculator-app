@@ -43,5 +43,19 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, 3.0)
     }
+    
+    func test_enqueue로_여러값을넣고_dequeue를한번했을때_linkedList의count가올바르게나오는지() {
+        // give
+        sut?.enqueue(data: 3.0)
+        sut?.enqueue(data: 4.0)
+        sut?.enqueue(data: 5.0)
+        
+        // when
+        sut?.dequeue()
+        let count = sut?.queue.count
+        
+        // then
+        XCTAssertEqual(count, 2)
+    }
 }
 
