@@ -2,11 +2,11 @@ import XCTest
 
 class LinkedListTTD: XCTestCase {
     // TODO: 다양한 데이터를 담을 수 있는 Linked List 만들기
-    var linkedList = LinkedListTTD!
+    var linkedList: LinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        linkedList = LinkedListTTD()
+        linkedList = LinkedList<Int>()
     }
 
     override func tearDownWithError() throws {
@@ -16,7 +16,7 @@ class LinkedListTTD: XCTestCase {
     
     // MARK: - Add values into linked list.
 
-    func test_값을2개넣으면_count_2두개반환() throws {
+    func test_값을2개넣으면_count는_2를반환() throws {
         // given
         var linkedList = LinkedList<Int>()
         let inputValue1: Int = 3
