@@ -35,4 +35,17 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(length, calculator.item.count)
     }
+    
+    func test_item리스트의_첫번째_요소를_반환() {
+        let number1 = "123+"
+        let number2 = "456-"
+        let returnNumber = "123+"
+        
+        calculator.enqueue(number1)
+        calculator.enqueue(number2)
+        
+        let result = calculator.dequeue()
+        
+        XCTAssertEqual(returnNumber, result)
+    }
 }
