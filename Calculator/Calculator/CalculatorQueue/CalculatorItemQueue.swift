@@ -17,7 +17,7 @@ class CalculatorItemQueue: CalculatorItem {
     }
     
     func enQueue(_ input: String) {
-        let newNode: Node<String> = Node(value: input, next: nil)
+        let newNode: Node<String> = Node(value: input)
         self.queue.append(newNode)
     }
     
