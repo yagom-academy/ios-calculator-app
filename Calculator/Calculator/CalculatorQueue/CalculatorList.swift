@@ -35,7 +35,7 @@ class CalculatorList<T> {
         tail = tail?.next
     }
     
-    func isEmpty() -> Bool{
+    func isEmpty() -> Bool {
         if head == nil {
             return true
         } else {
