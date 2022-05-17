@@ -43,8 +43,6 @@ class CalculatorTest: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    
-    
     func test_peek함수가_첫번째배열을가져오는지() {
         //given
         sut.formulaQueue = ["1", "2", "3"]
@@ -92,7 +90,4 @@ class CalculatorTest: XCTestCase {
         //then
         XCTAssertEqual(testNumber, sut.formulaQueue)
     }
-    
-    
-
 }
