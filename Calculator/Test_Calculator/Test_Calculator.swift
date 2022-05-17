@@ -31,5 +31,19 @@ class Test_Calculator: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
+    func test_입력이제대로들어가는지() throws {
+        let test = [5, 6, 8, 9] as [Int]
+        
+        var testqueue = CalculatorItemQueue<Any>()
+        
+        testqueue.enqueue(test)
+        var testList: [Any]
+    
+        if testqueue.linkedList.head?.next != nil {
+            testList.append(<#T##newElement: Any##Any#>)
+        }
+        
+        XCTAssertEqual(testqueue.linkedList.head?.data as! [Int] , [5, 6, 8, 10])
+    }
 }
