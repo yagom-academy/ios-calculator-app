@@ -6,8 +6,8 @@
 //
 
 struct CalculatorItemQueue<T>: Queue, CalculateItem {
-    private(set) var enQueueStack: Array<T> = []
-    private(set) var deQueueStack: Array<T> = []
+    var enQueueStack: Array<T> = []
+    var deQueueStack: Array<T> = []
     
     public mutating func enQueue(_ input: T) {
         enQueueStack.append(input)
