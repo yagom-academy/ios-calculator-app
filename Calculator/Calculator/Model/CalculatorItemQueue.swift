@@ -4,9 +4,6 @@
 //
 //  Created by 전민수 on 2022/05/16.
 //
-
-import Foundation
-
 struct CalculatorItemQueue<Element> {
     private(set) var enqueueStack: [Element] = []
     private(set) var dequeueStack: [Element] = []
