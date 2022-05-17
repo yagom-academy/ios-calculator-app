@@ -5,10 +5,10 @@
 //  Created by NAMU on 2022/05/17.
 //
 
-class LinkedList<T> {
+struct LinkedList<T> {
     var head: Node<T>?
     
-    func append(data: T) {
+    mutating func append(data: T) {
         if head == nil {
             head = Node(data: data)
             return
@@ -22,7 +22,7 @@ class LinkedList<T> {
         node?.next = Node(data: data)
     }
     
-    func removeAndReturnFirst() -> T? {
+    mutating func takeOutFirst() -> T? {
         if head != nil {
             return head?.data
         }
