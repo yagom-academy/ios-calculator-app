@@ -62,7 +62,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result2, 2)
     }
     
-    func test_isEmpty_값이있을때_true를_리턴하는지() {
+    func test_isEmpty_값이있을때_false를_리턴하는지() {
         // given
         sut.append(data: 1)
         
@@ -70,6 +70,6 @@ class LinkedListTests: XCTestCase {
         let result = sut.isEmpty()
         
         //then
-        XCTAssertTrue(result)
+        XCTAssertFalse(result)
     }
 }

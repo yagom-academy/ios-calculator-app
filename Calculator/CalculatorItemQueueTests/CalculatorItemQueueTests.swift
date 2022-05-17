@@ -56,7 +56,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_isEmpty_큐에값이있을때_true를반환하는지() {
+    func test_isEmpty_큐에값이있을때_false를반환하는지() {
         // given
         sut.enQueue(data: 1)
         
@@ -64,6 +64,6 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = sut.isEmpty()
         
         // then
-        XCTAssertTrue(result)
+        XCTAssertFalse(result)
     }
 }
