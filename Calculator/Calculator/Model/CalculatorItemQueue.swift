@@ -16,6 +16,10 @@ struct CalculatorItemQueue<Item> {
         
         return element
     }
+    
+    func isEmpty() -> Bool {
+        return calulatorItems.isEmpty
+    }
 }
 
 extension Double: CalculatorItem {
