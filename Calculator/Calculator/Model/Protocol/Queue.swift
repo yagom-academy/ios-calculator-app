@@ -7,9 +7,8 @@
 
 protocol Queue {
     associatedtype T
-    var isEmpty: Bool { get }
-    var peek: T? { get }
 
     mutating func enQueue(_ T: T) 
     mutating func deQueue() throws -> T?
+    mutating func clearAllStacks()
 }
