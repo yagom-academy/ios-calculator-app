@@ -18,7 +18,7 @@ class LinkedListTest: XCTestCase {
        sut = nil
     }
 
-    func test_리스트_초기의_isEmpty값이_true여야한다() {
+    func test_리스트_초기화_후_isEmpty값이_true여야한다() {
         //given
         let sut = Linkedlist<Int>()
         //when,then
@@ -32,5 +32,15 @@ class LinkedListTest: XCTestCase {
         let head = sut?.head?.data
         //then
         XCTAssertEqual(1, head)
+    }
+    
+    func test_1과2를_넣었을때_리스트의_마지막_값이_2여야한다() {
+        //given
+        sut?.append(data: 1)
+        sut?.append(data: 2)
+        //when
+        let lastData = sut?.head?.next?.data
+        //then
+        XCTAssertEqual(lastData, 2)
     }
 }
