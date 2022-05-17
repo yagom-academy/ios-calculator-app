@@ -8,7 +8,7 @@
 import XCTest
 
 class CalculatorListTests: XCTestCase {
-    var sut: CalculatorList!
+    var sut: CalculatorList<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -19,4 +19,5 @@ class CalculatorListTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+// MARK: - 
 }
