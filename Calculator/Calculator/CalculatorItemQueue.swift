@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculatorItemQueue {
+struct CalculatorItemQueue<T>: CalculateItem {
     var formulaQueue = Array<T>()
     
     var isEmpty: Bool {
