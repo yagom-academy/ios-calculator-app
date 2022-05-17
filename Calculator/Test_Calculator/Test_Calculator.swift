@@ -39,6 +39,17 @@ class Test_Calculator: XCTestCase {
         
         testqueue.enqueue(test)
         
-        XCTAssertEqual(testqueue.linkedList.head?.data as! [Int] , [5, 6, 8, 10])
+        XCTAssertEqual(testqueue.linkedList.head?.data as! [Int] , [5, 6, 8, 9])
+    }
+    
+    func test_첫번째값이제거되는지() throws {
+        
+        let testqueue = CalculatorItemQueue<Any>()
+        testqueue.enqueue(5)
+        testqueue.enqueue(6)
+
+        testqueue.dequeue()
+        
+        XCTAssertEqual(testqueue.linkedList.head?.data as! Int, 6)
     }
 }
