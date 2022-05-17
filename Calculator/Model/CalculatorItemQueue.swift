@@ -19,4 +19,8 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     func isEmpty() -> Bool {
         return list.isEmpty()
     }
+    
+    func removeAll() {
+        
+    }
 }

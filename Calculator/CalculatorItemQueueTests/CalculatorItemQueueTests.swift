@@ -66,4 +66,17 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertFalse(result)
     }
+    
+    func test_removeAll_값이있을때_모든값을제거하는지() {
+        // given
+        sut.enQueue(data: 1)
+        sut.enQueue(data: 2)
+        
+        // when
+        sut.removeAll()
+        let result = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(result)
+    }
 }
