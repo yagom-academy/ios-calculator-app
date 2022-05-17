@@ -31,5 +31,17 @@ class LinkedListTTD: XCTestCase {
         XCTAssertEqual(linkedList.count, expectation)
     }
     
+    func test_head_쪽에_추가하면_popHead는_추가한값을반환() throws {
+        // given
+        var linkedList = LinkedList<Int>()
+        let inputValue: Int = 7
+        let expectation: Int = inputValue
+        
+        // what
+        linkedList.pushBeforeHead(element: inputValue)
+        
+        // then
+        XCTAssertEqual(linkedList.popHead(), expectation)
+    }
 
 }

@@ -29,4 +29,14 @@ struct LinkedList<T> {
         _count += 1
     }
     
+    mutating func popHead() -> T? {
+        let returnElement = head?.data
+        
+        head = head?.next
+        head?.previous = nil
+        
+        _count -= 1
+        return returnElement
+    }
+    
 }
