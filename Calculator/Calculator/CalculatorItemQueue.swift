@@ -18,7 +18,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return formulaQueue.first
     }
     
-    mutating func enQueue(_ element: T) -> Bool {
+    mutating func enQueue(_ element: T){
         formulaQueue.append(element)
     }
     
