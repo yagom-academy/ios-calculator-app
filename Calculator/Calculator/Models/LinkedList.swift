@@ -93,4 +93,16 @@ struct LinkedList<T> {
         
         _count -= 1
     }
+    
+    subscript(index: Int) -> T {
+        guard let head = head else { fatalError("Index out of range") }
+        
+        var currentNode: Node = head
+        for _ in 0..<index {
+            guard let nextCurrentNode = currentNode.next else { fatalError("Index out of range") }
+            currentNode = nextCurrentNode
+        }
+
+        return currentNode.data
+    }
 }
