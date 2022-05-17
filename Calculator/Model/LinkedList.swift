@@ -30,6 +30,9 @@ class LinkedList<T> {
     }
     
     func isEmpty() -> Bool {
+        if head != nil {
+            return true
+        }
         return false
     }
 }
