@@ -38,11 +38,6 @@ class Test_Calculator: XCTestCase {
         var testqueue = CalculatorItemQueue<Any>()
         
         testqueue.enqueue(test)
-        var testList: [Any]
-    
-        if testqueue.linkedList.head?.next != nil {
-            testList.append(<#T##newElement: Any##Any#>)
-        }
         
         XCTAssertEqual(testqueue.linkedList.head?.data as! [Int] , [5, 6, 8, 10])
     }

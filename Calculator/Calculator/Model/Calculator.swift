@@ -20,7 +20,6 @@ class Node<T> {
 struct LinkedList<T> {
     var head: Node<T>?
     var count = 0
-    var emList: [Any] = []
     
     mutating func append(data: T?) {
         if head == nil {
@@ -36,6 +35,19 @@ struct LinkedList<T> {
         self.count += 1
     }
     
+    mutating func removeFirst() {
+        if head == nil { return }
+        // head를 삭제하는 경우
+        if head?.next == nil {
+            head = nil
+            return
+        }
+        let node = head
+
+        node?.data = node?.next?.data
+        node?.next = node?.next?.next
+    }
+    
     mutating func removeAll() {
         head = nil
     }
@@ -48,14 +60,17 @@ class CalculatorItemQueue<T>: CalculatorItem {
     var count : Int {
         return linkedList.count
     }
-
+    
     public func enqueue(_ element: T) {
         linkedList.append(data: element)
     }
     
+    public func dequeue() {
+        linkedList.removeFirst()
+    }
     public func clear(_ element: T) {
         linkedList.removeAll()
     }
-    // 조회하는 함수
+
 }
 
