@@ -23,6 +23,9 @@ class LinkedList<T> {
     }
     
     func removeAndReturnFirst() -> T? {
+        if head != nil {
+            return head?.data
+        }
         return nil
     }
     
