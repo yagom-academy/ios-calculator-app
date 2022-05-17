@@ -6,23 +6,17 @@
 //
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    var List: LinkedList<T>? = LinkedList<T>()
+    var list = LinkedList<T>()
     
     mutating func enQueue(data: T) {
-        List?.append(data: data)
+        list.append(data: data)
     }
     
     mutating func deQueue() -> T? {
-        return List?.takeOutFirst()
+        return list.takeOutFirst()
     }
     
     func isEmpty() -> Bool {
-        if ((List?.isEmpty()) != nil) {
-            return true
-        } else {
-            return false
-        }
+        return list.isEmpty()
     }
 }
-
-
