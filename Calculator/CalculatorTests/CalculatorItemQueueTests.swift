@@ -46,7 +46,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         //when
         sut.enQueue(input)
-        guard let result = sut.deQueue() else {
+        guard let result = sut.deQueue3() else {
             return
         }
         

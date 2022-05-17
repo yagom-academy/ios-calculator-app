@@ -30,8 +30,8 @@ class CalculatorListTests: XCTestCase {
     
     func test_1개있을때_1반환() {
         //given
-        sut.head = Node<String>(value: "123")
-        sut.tail = sut.head
+        let insertNode = Node<String>(value: "123")
+        sut.append(insertNode)
         
         //when
         let result = sut.size()
@@ -65,7 +65,7 @@ class CalculatorListTests: XCTestCase {
         sut.append(inputNode)
         
         //then
-        XCTAssertEqual(sut.tail?.value, sut.head?.value)
+        XCTAssertEqual(sut.size(), 1)
     }
     
     func test_리스트에_값_삽입() {
@@ -79,9 +79,6 @@ class CalculatorListTests: XCTestCase {
         
         //then
         XCTAssertEqual(sut.size(), 2)
-        XCTAssertEqual(sut.head?.value, firstNode.value)
-        XCTAssertEqual(sut.tail?.value, secondNode.value)
-                                      
     }
     
 // MARK: - CalculatorList.isEmpty
@@ -115,8 +112,7 @@ class CalculatorListTests: XCTestCase {
         sut.removeAll()
         
         //then
-        XCTAssertNil(sut.head)
-        XCTAssertNil(sut.tail)
+        XCTAssertEqual(sut.size(), 0)
     }
     
 // MARK: - CalculatorList.pop()
@@ -135,9 +131,8 @@ class CalculatorListTests: XCTestCase {
         let result = sut.pop()
         
         //then
+        XCTAssertEqual(sut.size(),3)
         XCTAssertEqual(result?.value, insertNode1.value)
-        XCTAssertEqual(sut.head?.value, insertNode2.value)
-
     }
     
     func test_노드가한개일때_pop하면_Node반환후_head및tail_nil() {
@@ -150,8 +145,7 @@ class CalculatorListTests: XCTestCase {
         
         //then
         XCTAssertEqual(result?.value, insertNode.value)
-        XCTAssertNil(sut.head)
-        XCTAssertNil(sut.tail)
+        XCTAssertEqual(sut.size(), 0)
     }
     
     func test_노드가없을때_popLast하면_nil() {

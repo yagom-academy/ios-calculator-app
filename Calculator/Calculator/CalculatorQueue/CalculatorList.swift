@@ -5,8 +5,8 @@
 //  Created by 유한석 on 2022/05/17.
 //
 class CalculatorList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     init(head: Node<T>? = nil) {
         self.head = head
