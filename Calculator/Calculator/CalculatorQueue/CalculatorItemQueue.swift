@@ -5,13 +5,9 @@
 //  Created by 유한석 on 2022/05/16.
 //
 class CalculatorItemQueue: CalculatorItem {
-    private var queue: CalculatorList<String>
+    private var queue: CalculatorList<String> = CalculatorList()
     var count: Int {
         return queue.size()
-    }
-    
-    init() {
-        self.queue = CalculatorList()
     }
     
     func enQueue(_ input: String) {
