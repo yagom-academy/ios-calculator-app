@@ -49,6 +49,19 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
+    func test_takeOutFirst_두번실행할때_첫번째값을지우고_두번째값을반환하는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        
+        // when
+        let result1 = sut.takeOutFirst()
+        let result2 = sut.takeOutFirst()
+        
+        XCTAssertEqual(result1, 1)
+        XCTAssertEqual(result2, 2)
+    }
+    
     func test_isEmpty_값이있을때_true를_리턴하는지() {
         // given
         sut.append(data: 1)
