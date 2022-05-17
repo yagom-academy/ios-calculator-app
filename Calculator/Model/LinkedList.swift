@@ -8,7 +8,7 @@
      fileprivate var data: T?
      fileprivate var next: Node?
     
-    init(data: T?, next: Node? = nil) {
+     fileprivate init(data: T?, next: Node? = nil) {
         self.data = data
         self.next = next
     }
