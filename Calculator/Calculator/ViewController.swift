@@ -20,8 +20,9 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue: CalculateItem {
-    
+struct CalculatorItemQueue<D>: CalculateItem {
+    var head: List<D>?
+    var tail: List<D>?
 }
 
 class List<D> {
