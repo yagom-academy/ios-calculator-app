@@ -1,6 +1,6 @@
 //
 //  Calculator - AppDelegate.swift
-//  Created by Kiwi. 
+//  Created by Kiwi.
 //  Copyright © yagom. All rights reserved.
 // 
 
