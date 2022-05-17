@@ -6,10 +6,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() -> T? {
-
-        if calculateItems.isEmpty {
+        if isEmpty() {
             return nil
         }
+        
         return calculateItems.removeFirst()
     }
     
@@ -18,9 +18,14 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func peak() -> T? {
-        if calculateItems.isEmpty {
+        if isEmpty() {
             return nil
         }
+        
         return calculateItems[0]
+    }
+    
+    func isEmpty() -> Bool {
+        return calculateItems.isEmpty
     }
 }

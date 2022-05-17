@@ -93,4 +93,12 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, nil)
     }
+    
+    // MARK: Test_isEmpty()
+    func testCalculateItem이_비어있을_때_true가_반환되는지() {
+        // given when
+        let result = sut.isEmpty()
+        // then
+        XCTAssertEqual(result, true)
+    }
 }
