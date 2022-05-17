@@ -13,10 +13,7 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     }
     
     mutating func deQueue() -> T? {
-        if List != nil {
-            return List?.takeOutFirst()
-        }
-        return nil
+        return List?.takeOutFirst()
     }
     
     func isEmpty() -> Bool {
