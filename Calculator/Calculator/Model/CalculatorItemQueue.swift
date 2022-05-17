@@ -6,31 +6,31 @@
 //
 
 struct CalculatorItemQueue<T>: Queue {
-    var leftStack: Array<T> = []
-    var rightStack: Array<T> = []
+    var enQueueStack: Array<T> = []
+    var deQueueStack: Array<T> = []
     
     var isEmpty: Bool {
-        return (leftStack.isEmpty && rightStack.isEmpty)
+        return (enQueueStack.isEmpty && deQueueStack.isEmpty)
     }
     
     var peek: T? {
-        if !leftStack.isEmpty {
-            return leftStack.first
+        if !enQueueStack.isEmpty {
+            return enQueueStack.first
         } else {
-            return rightStack.last
+            return deQueueStack.last
         }
     }
     
-    mutating func enQueue(_ T: T) -> Bool {
-        leftStack.append(T)
+    mutating func enQueue(_ input: T) -> Bool {
+        enQueueStack.append(input)
         return true
     }
     
     mutating func deQueue() -> T? {
-        if rightStack.isEmpty {
-            rightStack = leftStack.reversed()
-            leftStack.removeAll()
+        if deQueueStack.isEmpty {
+            deQueueStack = enQueueStack.reversed()
+            enQueueStack.removeAll()
         }
-        return rightStack.popLast()
+        return deQueueStack.popLast()
     }
 }
