@@ -189,4 +189,16 @@ class LinkedListTTD: XCTestCase {
         }
     }
     
+    func test_배열리터럴로초기화하기() throws {
+        // what
+        let expectation: [Int] = [1, 2, 3, 4]
+        
+        // given
+        linkedList = [1, 2, 3, 4]
+        
+        // then
+        for (i, j) in zip(linkedList, expectation) {
+            XCTAssertEqual(i, j)
+        }
+    }
 }

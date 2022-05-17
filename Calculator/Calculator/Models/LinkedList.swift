@@ -108,6 +108,13 @@ struct LinkedList<T> {
     }
 }
 
+extension LinkedList: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: T...) {
+        self.init()
+        elements.forEach { self.pushAfterTail(element: $0) }
+    }
+}
+
 extension LinkedList: Sequence, IteratorProtocol {
     mutating func next() -> T? {
         defer { currentNodeForSequence = currentNodeForSequence?.next }
