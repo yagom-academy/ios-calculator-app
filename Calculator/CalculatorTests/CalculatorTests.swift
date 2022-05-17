@@ -40,13 +40,21 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_dequeue가되는지확인() {
+    func test_dequeue가되는지확인1() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         sut.dequeue()
         let result = sut.count
         XCTAssertEqual(result, 2)
+    }
+    
+    func test_dequeue가되는지확인2() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let result = sut.dequeue()?.value
+        XCTAssertEqual(result, 1)
     }
     
     func test_isEmpty에서dequeue가되는지확인() {
