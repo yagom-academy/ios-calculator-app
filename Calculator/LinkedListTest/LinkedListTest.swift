@@ -13,18 +13,18 @@ class LinkedListTest: XCTestCase {
     override func setUpWithError() throws {
         sut = Linkedlist<Int>()
     }
-
+    
     override func tearDownWithError() throws {
-       sut = nil
+        sut = nil
     }
-
+    
     func test_리스트_초기화_후_isEmpty값이_true여야한다() {
         //given
         let sut = Linkedlist<Int>()
         //when,then
         XCTAssertTrue(sut.isEmpty)
     }
-   
+    
     func test_정수를_넣었을때_head의_값이_1이여야한다() {
         //given
         sut?.append(data: 1)
@@ -45,15 +45,26 @@ class LinkedListTest: XCTestCase {
     }
     
     func test_1을_입력_후_removeFirst를_하면_1이_나와야한다() {
-            //given
-            sut?.append(data: 1)
-            //when
-            let firstElement = sut?.removeFirst()
-            //then
-            XCTAssertEqual(firstElement, 1)
-        }
-        
-        func test_리스트_초기화_후_removeFirst를_하면_nil이_나와야한다() {
-            XCTAssertNil(sut?.removeFirst())
-        }
+        //given
+        sut?.append(data: 1)
+        //when
+        let firstElement = sut?.removeFirst()
+        //then
+        XCTAssertEqual(firstElement, 1)
+    }
+    
+    func test_리스트_초기화_후_removeFirst를_하면_nil이_나와야한다() {
+        XCTAssertNil(sut?.removeFirst())
+    }
+    
+    func test_1_2_3을_입력_후_removeAll을_하면_isEmpty값이_true여야한다() {
+        //given
+        sut?.append(data: 1)
+        sut?.append(data: 2)
+        sut?.append(data: 3)
+        //when
+        sut?.removeAll()
+        //then
+        XCTAssertTrue(sut!.isEmpty)
+    }
 }

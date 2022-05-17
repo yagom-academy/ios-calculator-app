@@ -34,4 +34,8 @@ struct Linkedlist<T> : CalculateItem {
            head = head?.next
            return firstElement
        }
+    
+    mutating func removeAll() {
+           head = nil
+       }
 }
