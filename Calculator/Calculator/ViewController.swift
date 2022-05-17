@@ -23,3 +23,7 @@ protocol CalculateItem {
 struct CalculatorItemQueue {
     
 }
+
+class List<D> {
+    
+}
