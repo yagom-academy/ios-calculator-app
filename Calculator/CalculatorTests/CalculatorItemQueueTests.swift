@@ -29,7 +29,6 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = isEmpty
         
         //then
-        
         XCTAssertTrue(result)
     }
     
