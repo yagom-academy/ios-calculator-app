@@ -14,3 +14,9 @@ class Node<T> : CalculateItem {
         self.next = next
     }
 }
+
+extension Node: Equatable {
+    static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
+        lhs === rhs
+    }
+}
