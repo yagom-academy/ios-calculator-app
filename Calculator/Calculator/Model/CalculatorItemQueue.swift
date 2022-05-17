@@ -9,18 +9,6 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
     private(set) var enQueueStack: Array<T> = []
     private(set) var deQueueStack: Array<T> = []
     
-    var isEmpty: Bool {
-        return (enQueueStack.isEmpty && deQueueStack.isEmpty)
-    }
-    
-    var peek: T? {
-        if !enQueueStack.isEmpty {
-            return enQueueStack.first
-        } else {
-            return deQueueStack.last
-        }
-    }
-    
     public mutating func enQueue(_ input: T) {
         enQueueStack.append(input)
     }
@@ -34,5 +22,10 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
             enQueueStack.removeAll()
         }
         return deQueueStack.popLast()
+    }
+    
+    public mutating func clearAllStacks() {
+        enQueueStack = []
+        deQueueStack = []
     }
 }
