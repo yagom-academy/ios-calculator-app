@@ -23,10 +23,9 @@ struct LinkedList<T> {
     }
     
     mutating func takeOutFirst() -> T? {
-        if head != nil {
-            return head?.data
-        }
-        return nil
+        let result = head
+        head = head?.next
+        return result?.data
     }
     
     func isEmpty() -> Bool {
