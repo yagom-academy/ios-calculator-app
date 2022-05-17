@@ -25,5 +25,36 @@ struct LinkedList<T> {
     var isEmpty: Bool {
         return self.head == nil
     }
-
+    
+    func returnFirst() -> Node<T>? {
+        return head
+    }
+    
+    mutating func append(_ value: T) {
+        let newNode = Node<T>(value)
+        
+        if let tailNode = tail {
+            tailNode.next = nil
+            tail = newNode
+        } else {
+            head = newNode
+            tail = newNode
+        }
+        count += 1
+    }
+    
+    mutating func removeHead() -> Node<T>? {
+        if let node = head {
+            head = head?.next
+            count -= 1
+            return node
+        }
+        return nil
+    }
+    
+    mutating func removeAll() {
+        self.head = nil
+        self.tail = nil
+        self.count = 0
+    }
 }

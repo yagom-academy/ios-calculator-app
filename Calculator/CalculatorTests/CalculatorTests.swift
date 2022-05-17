@@ -25,4 +25,36 @@ class CalculatorTests: XCTestCase {
         let result = sut.isEmpty
         XCTAssertTrue(result)
     }
+    
+    func test_들어있을때isEmpty가거짓인지확인() {
+        sut.enqueue(1)
+        let result = sut.isEmpty
+        XCTAssertFalse(result)
+    }
+    
+    func test_들어있을때count값확인() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(5)
+        let result = sut.count
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_dequeue가되는지확인() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.dequeue()
+        let result = sut.count
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_removeAll하는지확인() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.removeAll()
+        let result = sut.count
+        XCTAssertEqual(result, 0)
+    }
 }

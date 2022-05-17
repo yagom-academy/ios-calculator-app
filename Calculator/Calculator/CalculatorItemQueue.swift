@@ -18,4 +18,20 @@ struct CalculatorItemQueue<T> : CalculateItem {
     public var isEmpty: Bool {
         return calculatorItemQueue.isEmpty
     }
+    
+    public var firstValue: T? {
+        return calculatorItemQueue.returnFirst()?.value
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        calculatorItemQueue.append(element)
+    }
+    
+    public mutating func dequeue() -> Node<T>? {
+        return isEmpty ? nil : calculatorItemQueue.removeHead()
+    }
+    
+    public mutating func removeAll() {
+        calculatorItemQueue.removeAll()
+    }
 }
