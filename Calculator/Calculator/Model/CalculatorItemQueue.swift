@@ -6,3 +6,52 @@
 //
 
 import Foundation
+
+struct CalculatorItemQueue<T> {
+    private var queue: [T?] = []
+    private var head: Int = 0
+    
+    public var count: Int {
+        return queue.count
+    }
+    
+    public var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    public var front: T? {
+        if queue.count == 0 {
+            return nil
+        } else {
+            guard let element = queue[head] else { return nil}
+            return element
+        }
+    }
+    
+    public var rear: T? {
+        if queue.count == 0 {
+            return nil
+        } else {
+            guard let element = queue[queue.count - 1] else { return nil}
+            return element
+        }
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        queue.append(element)
+    }
+    
+    public mutating func dequeue() -> T? {
+        if queue.count == 0 {
+            return nil
+        } else {
+            guard let element = queue[head] else { return nil }
+            head += 1
+            queue.removeFirst(head)
+            return element
+        }
+    }
+}
+
+
+
