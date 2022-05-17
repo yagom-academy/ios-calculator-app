@@ -60,9 +60,9 @@ class CalculatorItemQueueTests: XCTestCase {
             sut.enQueueStack.append(input)
         }
         test_enQueue()
-        let result = sut.enQueueStack.last
+        let result = 4.0
         //then
-        XCTAssertEqual(result, 4.0)
+        XCTAssertEqual(sut.enQueueStack.last, result)
     }
     
     func test_deQueue함수를_호출했을때_오른쪽스택이_비어있으면_왼쪽스택의순서를뒤집어_오른쪽스택에집어넣는가() {
