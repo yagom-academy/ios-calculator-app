@@ -44,4 +44,15 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result1, 1)
         XCTAssertEqual(result2, 2)
     }
+    
+    func test_deQueue_큐에서첫번째값을반환하는지() {
+        // given
+        sut.enQueue(data: 1)
+        
+        // when
+        let result = sut.deQueue()
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
 }
