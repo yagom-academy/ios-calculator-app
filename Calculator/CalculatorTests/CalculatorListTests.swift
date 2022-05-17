@@ -120,7 +120,7 @@ class CalculatorListTests: XCTestCase {
         XCTAssertNil(sut.tail)
     }
     
-// MARK: - CalculatorList.popLast()
+// MARK: - CalculatorList.pop()
     func test_노드가3개이상일때_popLast하면_tail의value() {
         //given
         let insertNode1 = Node<String>(value: "asd")
@@ -133,21 +133,21 @@ class CalculatorListTests: XCTestCase {
         sut.append(insertNode4)
 
         //when
-        let result = sut.popLast()
+        let result = sut.pop()
         
         //then
-        XCTAssertEqual(result?.value, insertNode4.value)
-        XCTAssertEqual(sut.tail?.value, insertNode3.value)
+        XCTAssertEqual(result?.value, insertNode1.value)
+        XCTAssertEqual(sut.head?.value, insertNode2.value)
 
     }
     
-    func test_노드가한개일때_popLast하면_Node반환() {
+    func test_노드가한개일때_pop하면_Node반환후_head및tail_nil() {
         //given
         let insertNode = Node<String>(value: "asd")
         sut.append(insertNode)
         
         //when
-        let result = sut.popLast()
+        let result = sut.pop()
         
         //then
         XCTAssertEqual(result?.value, insertNode.value)
@@ -157,7 +157,7 @@ class CalculatorListTests: XCTestCase {
     
     func test_노드가없을때_popLast하면_nil() {
         //when
-        let result = sut.popLast()
+        let result = sut.pop()
         
         //then
         XCTAssertNil(result)
