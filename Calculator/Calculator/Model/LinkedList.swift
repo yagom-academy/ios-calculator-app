@@ -17,4 +17,19 @@ class LinkedList<T: CalculateItem> {
         }
         return true
     }
+    
+    func append(data: T) {
+        if head == nil {
+            head = Node(data)
+            count += 1
+            return
+        }
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data)
+        count += 1
+    }
 }

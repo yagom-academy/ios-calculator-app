@@ -31,4 +31,17 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertTrue(result!)
     }
+    
+    func test_linkedList에서_여러data를append를했을때_append한값의head가_일치하는지() {
+        // give
+        sut?.append(data: 3)
+        sut?.append(data: 13)
+        sut?.append(data: 24)
+        
+        // when
+        let headData = sut?.self.head?.data
+        
+        // then
+        XCTAssertEqual(headData, 3)
+    }
 }
