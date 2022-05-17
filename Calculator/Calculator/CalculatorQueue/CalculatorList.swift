@@ -57,4 +57,28 @@ class CalculatorList<T> {
         tail = nil
         head = nil
     }
+    
+    func popLast() -> Node<T>? {
+        let size = size()
+        guard var node = self.head else {
+            return nil
+        }
+        guard size > 1 else {
+            let resultNode = head
+            head = nil
+            tail = nil
+            return resultNode
+        }
+        var tailNode : Node<T>? = head ?? nil
+        for _ in 1...size - 1 {
+            guard let nextNode = node.next else {
+                return nil
+            }
+            tailNode = node
+            node = nextNode
+        }
+        tailNode?.next = nil
+        tail = tailNode
+        return node
+    }
 }
