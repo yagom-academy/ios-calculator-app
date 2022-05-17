@@ -22,4 +22,16 @@ class CalculatorList<T> {
         self.head = head
         self.tail = head
     }
+    
+    func size() -> Int {
+        guard var counterNode: Node = head else {
+            return 0
+        }
+        var count: Int = 1
+        while counterNode.next != nil {
+            count += 1
+            counterNode = counterNode.next!
+        }
+        return count
+    }
 }
