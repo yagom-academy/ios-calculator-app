@@ -56,4 +56,33 @@ class CalculatorListTests: XCTestCase {
         //then
         XCTAssertEqual(result, 3)
     }
+    
+// MARK: - CalculatorList.append
+    func test_리스트에_값이없을경우_삽입값은_tail() {
+        //given
+        let inputNode = Node<String>(value: "123")
+        
+        //when
+        sut.append(inputNode)
+        
+        //then
+        XCTAssertEqual(sut.tail?.value, sut.head?.value)
+    }
+    
+    func test_리스트에_값_삽입() {
+        //given
+        let firstNode = Node<String>(value: "node1 Value")
+        let secondNode = Node<String>(value: "node2 Value")
+        
+        //when
+        sut.append(firstNode)
+        sut.append(secondNode)
+        
+        //then
+        XCTAssertEqual(sut.size(), 2)
+        XCTAssertEqual(sut.head?.value, firstNode.value)
+        XCTAssertEqual(sut.tail?.value, secondNode.value3)
+                                      
+    }
+
 }

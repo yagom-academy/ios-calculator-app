@@ -34,4 +34,14 @@ class CalculatorList<T> {
         }
         return count
     }
+    
+    func append(_ newNode: Node<T>) {
+        guard tail != nil else {
+            tail = newNode
+            head = newNode
+            return
+        }
+        tail?.next = newNode
+        tail = tail?.next
+    }
 }
