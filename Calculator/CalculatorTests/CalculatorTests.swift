@@ -26,4 +26,13 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(correctNumber, resultNumber)
     }
+    
+    func test_문자열의_마지막_문자가_연산기호일경우_item에_추가() {
+        let number = "123/"
+        let length = 1
+        
+        calculator.enqueue(number)
+        
+        XCTAssertEqual(length, calculator.item.count)
+    }
 }
