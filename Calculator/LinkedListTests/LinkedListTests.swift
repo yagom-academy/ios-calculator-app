@@ -13,6 +13,7 @@ class LinkedListTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        sut = LinkedList()
     }
     
     override func tearDownWithError() throws {
