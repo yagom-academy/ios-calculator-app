@@ -97,12 +97,26 @@ class CalculatorListTests: XCTestCase {
     func test_요소가있으면_false() {
         //given
         let insertNode = Node<String>(value: "asd")
+        sut.append(insertNode)
         
         //when
-        sut.append(insertNode)
         let result = sut.isEmpty()
         
         //then
         XCTAssertEqual(result, false)
+    }
+
+// MARK: - CalculatorList.removeAll()
+    func test_removeAll시_head및tail은_nil() {
+        //given
+        let insertNode = Node<String>(value: "asd")
+        sut.append(insertNode)
+        
+        //when
+        sut.removeAll()
+        
+        //then
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
 }

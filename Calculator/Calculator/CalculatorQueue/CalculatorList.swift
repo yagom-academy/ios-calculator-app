@@ -52,4 +52,9 @@ class CalculatorList<T> {
             return false
         }
     }
+    
+    func removeAll() {
+        tail = nil
+        head = nil
+    }
 }
