@@ -22,7 +22,7 @@ class CalculatorItemQueue: CalculatorItem {
         return queue.pop()
     }
     
-    func removeAllQueue() {
+    func removeAll() {
         queue.removeAll()
     }
     
