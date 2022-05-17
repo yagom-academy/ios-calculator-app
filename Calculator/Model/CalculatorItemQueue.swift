@@ -6,7 +6,11 @@
 //
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    var list = LinkedList<T>()
+    private var list = LinkedList<T>()
+    
+    func confirmFirst() -> T? {
+        return list.confirmFirst()
+    }
     
     mutating func enQueue(data: T) {
         list.append(data: data)
