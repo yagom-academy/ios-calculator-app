@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class Node<T: CalculateItem> {
+    var data: T
+    var next: Node<T>?
+    
+    init(_ data: T) {
+        self.data = data
+        self.next = nil
+    }
+}
