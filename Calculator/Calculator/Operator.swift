@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum Operator: Character, CalculateItem {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
+    case devide = "/"
+}
