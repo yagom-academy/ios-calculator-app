@@ -130,4 +130,28 @@ class LinkedListTTD: XCTestCase {
         XCTAssertEqual(linkedList.peekTail(), expectation)
     }
     
+    func test_1번인덱스의값을제거하면_count의값이1줄어든다() throws {
+        // given
+        let index: Int = 1
+        let inputValue1: Int = 1
+        let inputValue2: Int = 2
+        let inputValue3: Int = 3
+        let expectation1: Int = 3
+        let expectation2: Int = 2
+        
+        // what
+        linkedList.pushAfterTail(element: inputValue1)
+        linkedList.pushAfterTail(element: inputValue2)
+        linkedList.pushAfterTail(element: inputValue3)
+        
+        // then
+        XCTAssertEqual(linkedList.count, expectation1)
+        
+        // what
+        linkedList.remove(ofIndex: index)
+        
+        // then
+        XCTAssertEqual(linkedList.count, expectation2)
+    }
+    
 }
