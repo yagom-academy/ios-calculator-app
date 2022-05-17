@@ -21,21 +21,15 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_append_값3개_추가하기() {
+    func test_append_값1개_추가하기() {
         // given
         sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
         
         // when
-        let result1 = sut.head?.data
-        let result2 = sut.head?.next?.data
-        let result3 = sut.head?.next?.next?.data
+        let result = sut.confirmFirst()
         
         // then
-        XCTAssertEqual(result1, 1)
-        XCTAssertEqual(result2, 2)
-        XCTAssertEqual(result3, 3)
+        XCTAssertEqual(result, 1)
     }
     
     func test_takeOutFirst_값이있을때_값을반환하는지() {
