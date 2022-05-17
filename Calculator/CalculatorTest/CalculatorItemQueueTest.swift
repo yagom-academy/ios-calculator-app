@@ -1,7 +1,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTest: XCTestCase {
+class CalculatorItemQueueTest: XCTestCase {
     var doubleQueue: CalculatorItemQueue<Double>!
     var operatorQueue: CalculatorItemQueue<Operator>!
     
@@ -23,7 +23,7 @@ class CalculatorTest: XCTestCase {
         let expectation: [Double] = [0]
         
         // When
-        doubleQueue.enqueue(element: input)
+        doubleQueue.enqueue(input)
         let result = doubleQueue.calulatorItems
         
         // Then
@@ -37,8 +37,8 @@ class CalculatorTest: XCTestCase {
         let expectation: [Double] = [0, 1]
         
         // When
-        doubleQueue.enqueue(element: firstInput)
-        doubleQueue.enqueue(element: secondInput)
+        doubleQueue.enqueue(firstInput)
+        doubleQueue.enqueue(secondInput)
         let result = doubleQueue.calulatorItems
         
         // Then
@@ -51,8 +51,8 @@ class CalculatorTest: XCTestCase {
         let expectation: Double = 3
         
         // When
-        doubleQueue.enqueue(element: currentQueue[0])
-        doubleQueue.enqueue(element: currentQueue[1])
+        doubleQueue.enqueue(currentQueue[0])
+        doubleQueue.enqueue(currentQueue[1])
         let result = doubleQueue.dequeue()
         
         // Then
@@ -73,8 +73,8 @@ class CalculatorTest: XCTestCase {
         let expectation: Double = 5
         
         // When
-        doubleQueue.enqueue(element: currentQueue[0])
-        doubleQueue.enqueue(element: currentQueue[1])
+        doubleQueue.enqueue(currentQueue[0])
+        doubleQueue.enqueue(currentQueue[1])
         var result = doubleQueue.dequeue()
         result = doubleQueue.dequeue()
         
@@ -88,8 +88,8 @@ class CalculatorTest: XCTestCase {
         let expectation: Operator = .plus
         
         // When
-        operatorQueue.enqueue(element: currentQueue[0])
-        operatorQueue.enqueue(element: currentQueue[1])
+        operatorQueue.enqueue(currentQueue[0])
+        operatorQueue.enqueue(currentQueue[1])
         let result = operatorQueue.dequeue()
         
         // Then
