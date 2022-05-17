@@ -19,3 +19,7 @@ class ViewController: UIViewController {
 protocol CalculateItem {
     
 }
+
+struct CalculatorItemQueue {
+    
+}
