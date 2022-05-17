@@ -10,4 +10,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return linkedList.popHead()
     }
 
+    func peek() -> T? {
+        return linkedList.peekHead()
+    }
 }
