@@ -46,8 +46,8 @@ struct CalculatorItemQueue<T>: CalculateItem{
             return nil
         } else {
             guard let element = queue[head] else { return nil }
-            head += 1
             queue.removeFirst(head)
+            head += 1
             return element
         }
     }
