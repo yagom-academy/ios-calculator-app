@@ -14,6 +14,7 @@ struct LinkedList<T> {
     private var tail: Node<T>?
     private var _count: Int
     var count: Int { return _count }
+    private lazy var currentNodeForSequence: Node<T>? = head
 
     init () {
         self.head = nil
@@ -104,5 +105,12 @@ struct LinkedList<T> {
         }
 
         return currentNode.data
+    }
+}
+
+extension LinkedList: Sequence, IteratorProtocol {
+    mutating func next() -> T? {
+        defer { currentNodeForSequence = currentNodeForSequence?.next }
+        return currentNodeForSequence?.data
     }
 }

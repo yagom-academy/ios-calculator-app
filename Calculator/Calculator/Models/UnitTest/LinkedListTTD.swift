@@ -171,4 +171,22 @@ class LinkedListTTD: XCTestCase {
         XCTAssertEqual(linkedList[index], expectation)
     }
     
+    func test_반복문사용() throws {
+        // given
+        let inputValue1: Int = 1
+        let inputValue2: Int = 2
+        let inputValue3: Int = 3
+        let expectation: [Int] = [1, 2, 3]
+        
+        // what
+        linkedList.pushAfterTail(element: inputValue1)
+        linkedList.pushAfterTail(element: inputValue2)
+        linkedList.pushAfterTail(element: inputValue3)
+        
+        // then
+        for (i, j) in zip(linkedList, expectation) {
+            XCTAssertEqual(i, j)
+        }
+    }
+    
 }
