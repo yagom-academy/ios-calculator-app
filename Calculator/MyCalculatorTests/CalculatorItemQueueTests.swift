@@ -31,5 +31,17 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(sut?.queue.head?.data, 3.0)
     }
+    
+    func test_enqueue로_값을넣고_dequeue를하면_dequeue의반환값이_잘나오는지() {
+        // give
+        sut?.enqueue(data: 3.0)
+        sut?.enqueue(data: 4.0)
+        
+        // when
+        let result = sut?.dequeue()!
+        
+        // then
+        XCTAssertEqual(result, 3.0)
+    }
 }
 
