@@ -44,4 +44,12 @@ class CalculatorList<T> {
         tail?.next = newNode
         tail = tail?.next
     }
+    
+    func isEmpty() -> Bool{
+        if head == nil {
+            return true
+        } else {
+            return false
+        }
+    }
 }

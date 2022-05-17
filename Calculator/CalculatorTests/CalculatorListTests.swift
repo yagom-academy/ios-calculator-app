@@ -81,8 +81,28 @@ class CalculatorListTests: XCTestCase {
         //then
         XCTAssertEqual(sut.size(), 2)
         XCTAssertEqual(sut.head?.value, firstNode.value)
-        XCTAssertEqual(sut.tail?.value, secondNode.value3)
+        XCTAssertEqual(sut.tail?.value, secondNode.value)
                                       
     }
-
+    
+// MARK: - CalculatorList.isEmpty
+    func test_요소가없으면_true() {
+        //when
+        let result = sut.isEmpty()
+        
+        //then
+        XCTAssertEqual(result, true)
+    }
+    
+    func test_요소가있으면_false() {
+        //given
+        let insertNode = Node<String>(value: "asd")
+        
+        //when
+        sut.append(insertNode)
+        let result = sut.isEmpty()
+        
+        //then
+        XCTAssertEqual(result, false)
+    }
 }
