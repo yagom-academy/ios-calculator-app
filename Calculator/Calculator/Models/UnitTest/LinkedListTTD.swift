@@ -87,4 +87,47 @@ class LinkedListTTD: XCTestCase {
         XCTAssertTrue(linkedList.isEmpty())
     }
 
+    func test_tail_쪽에_추가하면_popTail는_추가한값을반환() throws {
+        // given
+        let inputValue: Int = 7
+        let expectation: Int = inputValue
+        
+        // what
+        linkedList.pushAfterTail(element: inputValue)
+        
+        // then
+        XCTAssertEqual(linkedList.popTail(), expectation)
+    }
+    
+    func test_popTail하면_count가_줄어든다() throws {
+        // given
+        let inputValue: Int = 7
+        let expectation1: Int = 1
+        let expectation2: Int = 0
+        
+        // what
+        linkedList.pushAfterTail(element: inputValue)
+        
+        // then
+        XCTAssertEqual(linkedList.count, expectation1)
+        
+        // what
+        linkedList.popTail()
+        
+        // then
+        XCTAssertEqual(linkedList.count, expectation2)
+    }
+    
+    func test_peekTail할경우_Tail의데이터를보여준다() throws {
+        // given
+        let inputValue: Int = 8
+        let expectation: Int = inputValue
+        
+        // what
+        linkedList.pushAfterTail(element: inputValue)
+        
+        // then
+        XCTAssertEqual(linkedList.peekTail(), expectation)
+    }
+    
 }
