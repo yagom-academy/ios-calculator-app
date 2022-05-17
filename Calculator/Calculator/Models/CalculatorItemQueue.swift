@@ -26,6 +26,13 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
 }
 
+extension CalculatorItemQueue: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: T...) {
+        self.init()
+        elements.forEach { self.push(element: $0) }
+    }
+}
+
 extension CalculatorItemQueue: Sequence, IteratorProtocol {
     mutating func next() -> T? {
         linkedList.next()
