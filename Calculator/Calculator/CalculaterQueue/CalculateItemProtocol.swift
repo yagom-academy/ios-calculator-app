@@ -11,10 +11,10 @@ protocol CalculateItemProtocol {
     associatedtype Element
     
     /// 큐 끝에 새로운 큐를 추가하고 성공여부 반환
-    mutating func enQueue(_ element: Element) -> Bool
+    func enQueue(_ element: Element) -> Bool
 
     /// 가장 먼저 들어온 앞의 큐 제거하고 제거한 큐 반환
-    mutating func deQueue() -> Element?
+    func deQueue() -> Element?
     
     func removeAll()
     
