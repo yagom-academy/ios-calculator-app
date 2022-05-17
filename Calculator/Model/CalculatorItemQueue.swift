@@ -6,10 +6,9 @@
 //
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    var List: LinkedList<T>?
+    var List: LinkedList<T>? = LinkedList<T>()
     
     mutating func enQueue(data: T) {
-        List = LinkedList()
         List?.append(data: data)
     }
     
@@ -21,3 +20,5 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return false
     }
 }
+
+
