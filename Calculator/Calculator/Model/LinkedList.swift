@@ -24,4 +24,14 @@ struct Linkedlist<T> : CalculateItem {
             }
             node?.next = Node(data: data)
         }
+    
+    mutating func removeFirst() -> T? {
+           if head == nil {
+               return nil
+           }
+           
+           let firstElement = head?.data
+           head = head?.next
+           return firstElement
+       }
 }

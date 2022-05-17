@@ -43,4 +43,17 @@ class LinkedListTest: XCTestCase {
         //then
         XCTAssertEqual(lastData, 2)
     }
+    
+    func test_1을_입력_후_removeFirst를_하면_1이_나와야한다() {
+            //given
+            sut?.append(data: 1)
+            //when
+            let firstElement = sut?.removeFirst()
+            //then
+            XCTAssertEqual(firstElement, 1)
+        }
+        
+        func test_리스트_초기화_후_removeFirst를_하면_nil이_나와야한다() {
+            XCTAssertNil(sut?.removeFirst())
+        }
 }
