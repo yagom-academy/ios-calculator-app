@@ -17,7 +17,11 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     }
     
     func isEmpty() -> Bool {
-        return false
+        if ((List?.isEmpty()) != nil) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
