@@ -12,4 +12,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
         return calculateItems.removeFirst()
     }
+    
+    mutating func resetQueue(){
+        calculateItems.removeAll()
+    }
 }

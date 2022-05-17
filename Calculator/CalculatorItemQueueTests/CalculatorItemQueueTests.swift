@@ -56,4 +56,16 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, nil)
     }
+    
+    func testCalculateItem이_잘_초기화가_되는지() {
+        // given
+        sut.enqueue(3.0)
+        sut.enqueue(4.0)
+        sut.enqueue(5.0)
+        // when
+        sut.resetQueue()
+        let result = sut.calculateItems.count
+        // then
+        XCTAssertEqual(result, 0)
+    }
 }
