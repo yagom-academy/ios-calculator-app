@@ -20,4 +20,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
     func isEmpty() -> Bool {
         return linkedList.isEmpty()
     }
+    
+    subscript (index: Int) -> T? {
+        return linkedList[index]
+    }
 }

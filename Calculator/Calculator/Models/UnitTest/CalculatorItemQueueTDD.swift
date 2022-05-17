@@ -86,4 +86,21 @@ class CalculatorItemQueueTDD: XCTestCase {
         // then
         XCTAssertEqual(intQueue.count, expectation)
     }
+    
+    func test_서브스크립트로_해당값에_접근() throws {
+        // given
+        let index: Int = 1
+        let inputValue1: Int = 1
+        let inputValue2: Int = 2
+        let inputValue3: Int = 3
+        let expectation: Int = 2
+        
+        // what
+        intQueue.push(element: inputValue1)
+        intQueue.push(element: inputValue2)
+        intQueue.push(element: inputValue3)
+        
+        // then
+        XCTAssertEqual(intQueue[index], expectation)
+    }
 }
