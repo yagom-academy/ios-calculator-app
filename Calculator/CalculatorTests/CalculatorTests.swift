@@ -54,4 +54,12 @@ class CalculatorTests: XCTestCase {
         let result = sut.rear
         XCTAssertEqual(result, "3")
     }
+    
+    func test_isClearMethodWorksAsExpected() throws {
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        sut.clear()
+        XCTAssertEqual(sut.count, 0)
+    }
 }

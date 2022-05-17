@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T>: CalculateItem{
     private var queue: [T?] = []
     private var head: Int = 0
     
@@ -50,6 +50,10 @@ struct CalculatorItemQueue<T> {
             queue.removeFirst(head)
             return element
         }
+    }
+    
+    public mutating func clear() {
+        queue.removeAll()
     }
 }
 
