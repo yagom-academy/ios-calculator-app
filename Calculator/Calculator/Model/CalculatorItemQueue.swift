@@ -1,5 +1,6 @@
 struct CalculatorItemQueue<T>: CalculateItem {
     var calculateItems = [T]()
+    private(set) var head = -1
     
     mutating func enqueue(_ element: T) {
         calculateItems.append(element)
@@ -15,6 +16,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     
     mutating func resetQueue(){
         calculateItems.removeAll()
+        head = -1
     }
     
     mutating func peak() -> T? {
@@ -22,10 +24,17 @@ struct CalculatorItemQueue<T>: CalculateItem {
             return nil
         }
         
-        return calculateItems[0]
+        if head >= calculateItems.count-1 {
+            head = calculateItems.count-1
+        } else {
+            head += 1
+        }
+        
+        return calculateItems[head]
     }
     
-    func isEmpty() -> Bool {
+    mutating func isEmpty() -> Bool {
+        head = -1
         return calculateItems.isEmpty
     }
 }

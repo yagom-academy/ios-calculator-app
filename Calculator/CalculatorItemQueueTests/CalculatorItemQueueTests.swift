@@ -101,4 +101,58 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, true)
     }
+    
+    // MARK: Test_head
+    func testCalculateItem이_비어있을_때_head가_마이너스1이_되는지1() {
+        // given
+        sut.enqueue(1.0)
+        sut.resetQueue()
+        // when
+        let result = sut.head
+        // then
+        XCTAssertEqual(result, -1)
+    }
+    
+    func testCalculateItem이_비어있을_때_head가_마이너스1이_되는지2() {
+        // given
+        sut.enqueue(1.0)
+        _ = sut.dequeue()
+        // when
+        let result = sut.head
+        // then
+        XCTAssertEqual(result, -1)
+    }
+    
+    func testCalculateItem이_비어있을_때_head가_마이너스1이_되는지3() {
+        // given
+        _ = sut.peak()
+        // when
+        let result = sut.head
+        // then
+        XCTAssertEqual(result, -1)
+    }
+    
+    func testCalculateItem이_안비어있고_calculateItem의_인덱스가_head보다_클때_head가_플러스1이_되는지() {
+        // given
+        sut.enqueue(1.0)
+        _ = sut.peak()
+        // when
+        let result = sut.head
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func testCalculateItem의_인덱스보다_head_값이_클_때_head가_인덱스마지막을_가리키는지() {
+        // given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        _ = sut.peak()
+        _ = sut.peak()
+        _ = sut.dequeue()
+        _ = sut.peak()
+        // when
+        let result = sut.head
+        // then
+        XCTAssertEqual(result, sut.calculateItems.count-1)
+    }
 }
