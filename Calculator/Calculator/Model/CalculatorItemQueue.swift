@@ -11,4 +11,9 @@ struct CalculatorItemQueue<T> : CalculateItem{
     var isEmpty: Bool {
                return list.isEmpty
            }
+    
+    mutating func enqueue(data: T) {
+           list.append(data: data)
+       }
+
 }

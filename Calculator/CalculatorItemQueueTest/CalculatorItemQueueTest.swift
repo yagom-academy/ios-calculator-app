@@ -25,4 +25,11 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
 
+    func test_1을_넣어주고_enqueue를_실행하면_isEmpty값이_false여야한다() {
+        //given
+        sut?.enqueue(data: 1)
+        //when,then
+        XCTAssertFalse(sut!.isEmpty)
+    }
+
 }
