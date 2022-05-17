@@ -5,8 +5,7 @@
 //  Created by 김동용 on 2022/05/16.
 //
 
-//MARK: - CalculatorItemQueue
-struct CalculatorItemQueue<Double>: Queue, CalculateItem {  //double?
+struct CalculatorItemQueue<Double>: Queue {
     var leftStack: Array<Double> = []
     var rightStack: Array<Double> = []
     
