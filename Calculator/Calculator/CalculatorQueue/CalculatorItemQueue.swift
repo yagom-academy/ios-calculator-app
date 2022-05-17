@@ -25,8 +25,4 @@ class CalculatorItemQueue: CalculatorItem {
     func removeAll() {
         queue.removeAll()
     }
-    
-    func showHeadNode() -> Node<String>? {
-        return queue.head
-    }
 }
