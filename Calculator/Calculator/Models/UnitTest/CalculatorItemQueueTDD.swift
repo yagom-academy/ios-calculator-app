@@ -103,4 +103,23 @@ class CalculatorItemQueueTDD: XCTestCase {
         // then
         XCTAssertEqual(intQueue[index], expectation)
     }
+    
+    func test_반복문사용() throws {
+        // given
+        let inputValue1: Int = 1
+        let inputValue2: Int = 2
+        let inputValue3: Int = 3
+        let expectation: [Int] = [1, 2, 3]
+        
+        // what
+        intQueue.push(element: inputValue1)
+        intQueue.push(element: inputValue2)
+        intQueue.push(element: inputValue3)
+
+        
+        // then
+        for (i, j) in zip(intQueue, expectation) {
+            XCTAssertEqual(i, j)
+        }
+    }
 }

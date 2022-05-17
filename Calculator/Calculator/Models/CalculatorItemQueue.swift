@@ -25,3 +25,9 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return linkedList[index]
     }
 }
+
+extension CalculatorItemQueue: Sequence, IteratorProtocol {
+    mutating func next() -> T? {
+        linkedList.next()
+    }
+}
