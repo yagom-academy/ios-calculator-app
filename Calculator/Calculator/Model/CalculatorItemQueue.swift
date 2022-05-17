@@ -16,4 +16,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func resetQueue(){
         calculateItems.removeAll()
     }
+    
+    mutating func peak() -> T? {
+        if calculateItems.isEmpty {
+            return nil
+        }
+        return calculateItems[0]
+    }
 }

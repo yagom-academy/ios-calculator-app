@@ -68,4 +68,24 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, 0)
     }
+    
+    func testCalculateItem의_첫번째_요소가_그대로_들어있고_값만_반환되는지() {
+        // given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        sut.enqueue(3.0)
+        // when
+        let firstElement = sut.peak()
+        let result = sut.calculateItems.count
+        // then
+        XCTAssertEqual(firstElement, 1)
+        XCTAssertEqual(result, 3)
+    }
+    
+    func testCalculateItem이_비어있을_때_peak를_하면_nil이_반환되는지() {
+        // given when
+        let result = sut.peak()
+        // then
+        XCTAssertEqual(result, nil)
+    }
 }
