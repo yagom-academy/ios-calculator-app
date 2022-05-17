@@ -5,9 +5,7 @@
 //  Created by dhoney96 on 2022/05/17.
 //
 
-import CoreGraphics
-
-Enum Operator: CaseIterable {
+enum Operator: CaseIterable {
     case plus
     case minus
     case division
@@ -23,5 +21,6 @@ Enum Operator: CaseIterable {
             return "/"
         case .multiply:
             return "*"
+        }
     }
 }
