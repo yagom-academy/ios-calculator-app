@@ -10,7 +10,7 @@ class LinkedList<T> {
     
     func append(data: T) {
         if head == nil {
-            head = Node(data: data, next: nil)
+            head = Node(data: data)
             return
         }
         
@@ -19,7 +19,7 @@ class LinkedList<T> {
         while node?.next != nil {
             node = head?.next
         }
-        node?.next = Node(data: data, next: nil)
+        node?.next = Node(data: data)
     }
     
     func removeAndReturnFirst() -> T? {
