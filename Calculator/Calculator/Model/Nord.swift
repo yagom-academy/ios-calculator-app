@@ -5,7 +5,7 @@
 //  Created by Kiwi on 2022/05/17.
 //
 
-class Node<T: CalculateItem> {
+class Node<T> : CalculateItem {
     private(set) var data: T?
     var next: Node<T>?
     
