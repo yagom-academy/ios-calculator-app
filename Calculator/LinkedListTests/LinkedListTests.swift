@@ -10,11 +10,30 @@ import XCTest
 
 class LinkedListTests: XCTestCase {
     var sut: LinkedList<Int>!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_append_값3개_추가하기() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        
+        // when
+        let result1 = sut.head?.data
+        let result2 = sut.head?.next?.data
+        let result3 = sut.head?.next?.next?.data
+        
+        // then
+        XCTAssertEqual(result1, 1)
+        XCTAssertEqual(result2, 2)
+        XCTAssertEqual(result3, 3)
     }
 }
