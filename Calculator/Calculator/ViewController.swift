@@ -22,7 +22,17 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<D>: CalculateItem {
     var head: List<D>?
- 
+    
+    mutating func enQueue(data: D?) {
+        if head == nil {
+            head = List(data: data)
+            return
+        }
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+    }
 }
 
 class List<D> {
