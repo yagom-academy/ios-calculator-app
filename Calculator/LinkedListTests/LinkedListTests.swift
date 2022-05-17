@@ -37,4 +37,15 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result2, 2)
         XCTAssertEqual(result3, 3)
     }
+    
+    func test_removeAndReturnFirst_값이있을때_반환하는지() {
+        // given
+        sut.append(data: 1)
+        
+        // when
+        let result1 = sut.removeAndReturnFirst()
+        
+        //then
+        XCTAssertEqual(result1, 1)
+    }
 }
