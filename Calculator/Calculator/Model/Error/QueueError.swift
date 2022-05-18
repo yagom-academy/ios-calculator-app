@@ -9,7 +9,7 @@ import Foundation
 
 enum QueueError: LocalizedError {
     case empty
-    case unknownError
+    case unknown
 }
 
 extension QueueError {
@@ -17,7 +17,7 @@ extension QueueError {
         switch self {
         case .empty:
             return NSLocalizedString("empty", comment: "deQueue stack is empty")
-        case .unknownError:
+        case .unknown:
             return NSLocalizedString("unknown error", comment: "unknown error")
         }
     }
