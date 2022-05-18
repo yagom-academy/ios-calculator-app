@@ -57,4 +57,14 @@ class CalculatorItemQueueTest: XCTestCase {
         
         XCTAssertEqual(sut.linkedList.head?.data, nil)
     }
+    
+    func test_모든값을_없앴는지_카운트로확인() {
+        sut.linkedList.append(data: 1)
+        sut.linkedList.append(data: 2)
+        sut.linkedList.append(data: 3)
+        
+        sut.linkedList.removeAll()
+        
+        XCTAssertEqual(sut.linkedList.count, 0)
+    }
 }
