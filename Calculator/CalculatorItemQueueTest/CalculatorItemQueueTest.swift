@@ -34,4 +34,12 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(sut.linkedList.head?.data, 5)
         XCTAssertEqual(sut.linkedList.head?.next?.data, 6)
     }
+    
+    func test_3개의데이터를넣으면카운트가3인지() {
+        sut.linkedList.append(data: 6)
+        sut.linkedList.append(data: 6)
+        sut.linkedList.append(data: 6)
+
+        XCTAssertEqual(sut.linkedList.count, 3)
+    }
 }
