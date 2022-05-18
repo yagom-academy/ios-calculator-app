@@ -40,10 +40,10 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enqueue(1.0)
         sut.enqueue(2.0)
-        sut.dequeue()
+        _ = sut.dequeue()
         //when
-        let result = sut.showHead().next?.data
+        let result = sut.showTail().data
         //then
-        XCTAssertEqual(result, nil)
+        XCTAssertEqual(result, 1.0)
     }
 }

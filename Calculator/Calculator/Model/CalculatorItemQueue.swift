@@ -11,6 +11,12 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return (headData, headNext)
     }
     
+    mutating func showTail() -> (data: T?, next: Node<T>?) {
+        let tailData = calculateItems.tail?.data
+        let tailNext = calculateItems.tail?.next
+        return (tailData, tailNext)
+    }
+    
     mutating func dequeue() -> T? {
         if isEmpty() {
             return nil

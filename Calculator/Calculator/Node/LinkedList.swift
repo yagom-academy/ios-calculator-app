@@ -25,8 +25,9 @@ class LinkedList<T> {
         tail = previousness
         
         if count == 0 {
+            head = nil
+            tail = nil
             previousness = nil
-            
         } else if count > 1 {
             moveToPreviousness()
         }
