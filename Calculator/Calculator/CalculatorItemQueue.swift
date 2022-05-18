@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var deQueueStack = Array<T>()
-    var enQueueStack = Array<T>()
+    private var dequeueStack = Array<T>()
+    private var enqueueStack = Array<T>()
     var isEmpty: Bool {
         return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
