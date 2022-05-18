@@ -20,38 +20,38 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    //MARK: - enQueue test
-    func test_enQueue_큐에값이추가되는지() {
+    //MARK: - enqueue test
+    func test_enqueue_큐에값이추가되는지() {
         // given
-        sut.enQueue(data: 1)
+        sut.enqueue(data: 1)
         
         // when
-        let result = sut.confirmFirst()
+        let result = sut.peek()
         
         // then
         XCTAssertEqual(result, 1)
     }
     
-    //MARK: - deQueue test
-    func test_deQueue_큐에서첫번째값을반환하는지() {
+    //MARK: - dequeue test
+    func test_dequeue_큐에서첫번째값을반환하는지() {
         // given
-        sut.enQueue(data: 1)
+        sut.enqueue(data: 1)
         
         // when
-        let result = sut.deQueue()
+        let result = sut.dequeue()
         
         // then
         XCTAssertEqual(result, 1)
     }
     
-    func test_deQueue_큐에값을여러개추가하고_삭제했을때_순서대로가져오는지() {
+    func test_dequeue_큐에값을여러개추가하고_삭제했을때_순서대로가져오는지() {
         // given
-        sut.enQueue(data: 1)
-        sut.enQueue(data: 2)
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
         
         // when
-        let result1 = sut.deQueue()
-        let result2 = sut.deQueue()
+        let result1 = sut.dequeue()
+        let result2 = sut.dequeue()
         
         // then
         XCTAssertEqual(result1, 1)
@@ -61,7 +61,7 @@ class CalculatorItemQueueTests: XCTestCase {
     //MARK: - isEmpty test
     func test_isEmpty_큐에값이있을때_false를반환하는지() {
         // given
-        sut.enQueue(data: 1)
+        sut.enqueue(data: 1)
         
         // when
         let result = sut.isEmpty()
@@ -73,8 +73,8 @@ class CalculatorItemQueueTests: XCTestCase {
     //MARK: - removeAll test
     func test_removeAll_값이있을때_모든값을제거하는지() {
         // given
-        sut.enQueue(data: 1)
-        sut.enQueue(data: 2)
+        sut.enqueue(data: 1)
+        sut.enqueue(data: 2)
         
         // when
         sut.removeAll()

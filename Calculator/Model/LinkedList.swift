@@ -18,12 +18,12 @@ class Node<T> {
 struct LinkedList<T> {
     private var head: Node<T>?
     
-    func confirmFirst() -> T? {
+    func peek() -> T? {
         return head?.data
     }
     
     mutating func append(data: T) {
-        if head == nil {
+        guard head != nil else {
             head = Node(data: data)
             return
         }
@@ -36,17 +36,14 @@ struct LinkedList<T> {
         node?.next = Node(data: data)
     }
     
-    mutating func takeOutFirst() -> T? {
+    mutating func removeFirst() -> T? {
         let result = head
         head = head?.next
         return result?.data
     }
     
     func isEmpty() -> Bool {
-        if head == nil {
-            return true
-        }
-        return false
+        head == nil ? true : false
     }
     
     mutating func removeAll() {

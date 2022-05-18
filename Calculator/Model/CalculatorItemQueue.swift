@@ -8,16 +8,16 @@
 struct CalculatorItemQueue<T>: CalculatorItem {
     private var list = LinkedList<T>()
     
-    func confirmFirst() -> T? {
-        return list.confirmFirst()
+    func peek() -> T? {
+        return list.peek()
     }
     
-    mutating func enQueue(data: T) {
+    mutating func enqueue(data: T) {
         list.append(data: data)
     }
     
-    mutating func deQueue() -> T? {
-        return list.takeOutFirst()
+    mutating func dequeue() -> T? {
+        return list.removeFirst()
     }
     
     func isEmpty() -> Bool {
