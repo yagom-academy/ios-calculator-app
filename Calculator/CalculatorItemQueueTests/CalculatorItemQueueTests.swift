@@ -22,24 +22,24 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_isQueueEmpty() throws {
+    func test_isQueueEmpty() {
         let result = sut.isEmpty
         XCTAssertEqual(result, true)
     }
     
-    func test_isQueueNil() throws {
+    func test_isQueueNil() {
         let result = sut.dequeue()
         XCTAssertEqual(result, nil)
     }
     
-    func test_isCountMethodWorksProperly() throws {
+    func test_isCountMethodWorksProperly() {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
         XCTAssertEqual(sut.count, 3)
     }
     
-    func test_isFrontMethodWorksAsExpected() throws {
+    func test_isFrontMethodWorksAsExpected() {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
@@ -47,7 +47,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, "1")
     }
     
-    func test_isRearMethodWorksAsExpected() throws {
+    func test_isRearMethodWorksAsExpected() {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
@@ -55,7 +55,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, "3")
     }
     
-    func test_isClearMethodWorksAsExpected() throws {
+    func test_isClearMethodWorksAsExpected() {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
