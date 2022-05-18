@@ -1,28 +1,28 @@
 struct CalculatorItemQueue<Item: CalculatorItem> {
-    private(set) var enqueueStack = Stack<Item>()
-    private(set) var dequeueStack = Stack<Item>()
+    private var enqueueItems: [Item] = []
+    private var dequeueItems: [Item] = []
     var calculatorItems: [Item] {
         get {
-            return dequeueStack.stack.reversed() + enqueueStack.stack
+            return dequeueItems.reversed() + enqueueItems
         }
     }
     
     func isEmpty() -> Bool {
-        return enqueueStack.isEmpty() && dequeueStack.isEmpty()
+        return enqueueItems.isEmpty && dequeueItems.isEmpty
     }
     
     mutating func enqueue(_ element: Item) {
-        enqueueStack.push(element)
+        enqueueItems.append(element)
     }
     
     mutating func dequeue() -> Item? {
         guard !isEmpty() else { return nil }
         
-        if dequeueStack.isEmpty() {
-            dequeueStack.stack = enqueueStack.stack.reversed()
-            enqueueStack.stack.removeAll()
+        if dequeueItems.isEmpty {
+            dequeueItems = enqueueItems.reversed()
+            enqueueItems.removeAll()
         }
 
-        return dequeueStack.pop()
+        return dequeueItems.popLast()
     }
 }
