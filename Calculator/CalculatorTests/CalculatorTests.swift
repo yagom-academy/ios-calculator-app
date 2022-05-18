@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: Queue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = Queue<Double>()
     }
     
     override func tearDownWithError() throws {
@@ -53,12 +53,12 @@ class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        let result = sut.dequeue()?.value
+        let result = sut.dequeue()
         XCTAssertEqual(result, 1)
     }
     
     func test_isEmpty에서dequeue가되는지확인() {
-        let a = sut.dequeue()?.value
+        let a = sut.dequeue()
         XCTAssertEqual(nil, a)
     }
     
@@ -86,18 +86,18 @@ class CalculatorTests: XCTestCase {
         var result = sut.firstValue
         XCTAssertEqual(result, 1)
         sut.dequeue()
-        result = sut.firstValue
-        XCTAssertEqual(result, 2)
+        let result1 = sut.firstValue
+        XCTAssertEqual(result1, 2)
         sut.dequeue()
-        result = sut.firstValue
-        XCTAssertEqual(result, nil)
+        let result2 = sut.firstValue
+        XCTAssertEqual(result2, nil)
         sut.enqueue(5)
-        result = sut.firstValue
-        XCTAssertEqual(result, 5)
+        let result3 = sut.firstValue
+        XCTAssertEqual(result3, 5)
         sut.dequeue()
-        result = sut.firstValue
-        XCTAssertEqual(result, nil)
-        result = sut.count
-        XCTAssertEqual(result, 0)
+        let result4 = sut.firstValue
+        XCTAssertEqual(result4, nil)
+        let result5 = sut.count
+        XCTAssertEqual(result5, 0)
     }
 }

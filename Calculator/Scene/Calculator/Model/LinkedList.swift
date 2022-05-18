@@ -4,7 +4,6 @@
 //
 //  Created by 이은찬 on 2022/05/17.
 //
-
 class Node<T> {
     let value: T
     var next: Node?
@@ -14,7 +13,7 @@ class Node<T> {
     }
 }
 
-struct LinkedList<T> {
+class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
@@ -31,7 +30,7 @@ struct LinkedList<T> {
         return nil
     }
     
-    mutating func append(_ value: T) {
+    func append(_ value: T) {
         let newNode = Node<T>(value)
         
         if let tailNode = tail {
@@ -44,7 +43,7 @@ struct LinkedList<T> {
         count += 1
     }
     
-    mutating func removeHead() -> Node<T>? {
+    func removeHead() -> Node<T>? {
         if let node = head {
             self.head = head?.next
             count -= 1
@@ -59,9 +58,13 @@ struct LinkedList<T> {
         }
     }
     
-    mutating func removeAll() {
-        self.head = nil
+    func removeAll() {
+        while count > 0 {
+            let next = self.head?.next
+            self.head = nil
+            self.head = next
+            count -= 1
+        }
         self.tail = nil
-        self.count = 0
     }
 }
