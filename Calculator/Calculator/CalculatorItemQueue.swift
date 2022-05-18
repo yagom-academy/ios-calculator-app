@@ -11,25 +11,25 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var deQueueStack = Array<T>()
     var enQueueStack = Array<T>()
     var isEmpty: Bool {
-        return deQueueStack.isEmpty && enQueueStack.isEmpty
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
     var peek: T? {
-        return !deQueueStack.isEmpty ? deQueueStack.last : enQueueStack.first
+        return !dequeueStack.isEmpty ? dequeueStack.last : enqueueStack.first
     }
-    var currentArray: [T] {
-        return deQueueStack.reversed() + enQueueStack
-    }
-    
-    mutating func enQueue(_ element: T) {
-        enQueueStack.append(element)
+    var currentStack: [T] {
+        return dequeueStack.reversed() + enqueueStack
     }
     
-    mutating func deQueue() -> T? {
-        if deQueueStack.isEmpty {
-            deQueueStack = enQueueStack.reversed()
-            enQueueStack.removeAll()
+    mutating func enqueue(_ element: T) {
+        enqueueStack.append(element)
+    }
+    
+    mutating func dequeue() -> T? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return deQueueStack.popLast()
+        return dequeueStack.popLast()
     }
 }
 

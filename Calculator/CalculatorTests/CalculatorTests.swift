@@ -21,16 +21,16 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enQueue를이용해_배열에1을추가했을때_1이들어갔는지() {
+    func test_enqueue를이용해_배열에1을추가했을때_1이들어갔는지() {
         //given
         let expectation = ["1"]
         //when
-        sut.enQueue("1")
+        sut.enqueue("1")
         //then
         XCTAssertEqual(expectation, sut.enQueueStack)
     }
     
-    func test_enQueue를이용해_배열에1_2_3을추가했을때_1_2_3이_순서대로_들어가는지() {
+    func test_enqueue를이용해_배열에1_2_3을추가했을때_1_2_3이_순서대로_들어가는지() {
         //given
         let expectation = ["1","2","3"]
         //when
@@ -61,7 +61,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_1_2_3배열에서_deQueue를이용했을때_첫번째값인_1을얻을수있는지() {
+    func test_1_2_3배열에서_dequeue를이용했을때_첫번째값인_1을얻을수있는지() {
         //given
         sut.enQueueStack = ["1", "2", "3"]
         let expectation = "1"
@@ -71,7 +71,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_빈배열에서_deQueue를이용했을때_nil을출력하는지() {
+    func test_빈배열에서_dequeue를이용했을때_nil을출력하는지() {
         //given
         sut.enQueueStack = []
         //when
@@ -81,7 +81,7 @@ class CalculatorTests: XCTestCase {
         
     }
     
-    func test_1_2_3배열에서_deQueue를수행하면_기존배열이_2_3_으로변하는지() {
+    func test_1_2_3배열에서_dequeue를수행하면_기존배열이_2_3_으로변하는지() {
         //given
         sut.enQueueStack = ["1", "2", "3"]
         let expectation = ["2","3"]
@@ -91,7 +91,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(expectation, sut.currentArray)
     }
     
-    func test_1_2_3배열에서_peek계산프로퍼티에_1이들어가는지() {
+    func test_1_2_3배열에서_peek계산프로퍼티에_1이반환되는지() {
         //given
         sut.enQueueStack = ["1", "2", "3"]
         let expectation = "1"
@@ -101,7 +101,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_빈배열에서_peek계산프로퍼티에_nil이들어가는지() {
+    func test_빈배열에서_peek계산프로퍼티에_nil이반환되는지() {
         //given
         sut.enQueueStack = []
         sut.deQueueStack = []
