@@ -59,7 +59,9 @@ class LinkedList<T> {
     }
     
     func remove() {
-        if head == nil { return }
+        if head == nil {
+            return
+        }
         head = head?.next
     }
     func removeAll() {
