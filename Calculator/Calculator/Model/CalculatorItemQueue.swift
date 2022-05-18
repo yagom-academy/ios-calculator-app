@@ -16,11 +16,15 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     var isEmpty: Bool {
-        return queue.isEmpty
+        if count == 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     var front: T? {
-        if queue.count == 0 {
+        if count == 0 {
             return nil
         } else {
             guard let element = queue[head] else { return nil}
@@ -29,7 +33,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     var rear: T? {
-        if queue.count == 0 {
+        if count == 0 {
             return nil
         } else {
             guard let element = queue[queue.count - 1] else { return nil}
@@ -42,7 +46,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() -> T? {
-        if queue.count == 0 {
+        if count == 0 {
             return nil
         } else {
             guard let element = queue[head] else { return nil }
