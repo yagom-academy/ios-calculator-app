@@ -27,7 +27,7 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(sut.linkedList.head?.data, 5)
     }
     
-    func test_숫자5_6을_넣었을때_5_6이들어있는지확인() {
+    func test_숫자5와6을_넣었을때_5와6이들어있는지확인() {
         sut.linkedList.append(data: 5)
         sut.linkedList.append(data: 6)
         
