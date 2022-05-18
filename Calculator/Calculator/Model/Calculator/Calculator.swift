@@ -19,7 +19,7 @@ class Node<T> {
 
 struct LinkedList<T> {
     var head: Node<T>?
-    var count = 0
+    var count = 1
     
     mutating func append(data: T?) {
         if head == nil {
@@ -43,6 +43,7 @@ struct LinkedList<T> {
         }
 
         head = head?.next
+        self.count -= 1
     }
     
     mutating func printLinkedList() {
