@@ -64,4 +64,35 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(expectation, result)
     }
+    
+    func test_remove_firstNode의value를꺼내는지() {
+        // given
+        let currenNodeValue: [Double] = [1, 2, 3]
+        let expectation: Double = 1
+        
+        // when
+        doubleList.add(value: currenNodeValue[0])
+        doubleList.add(value: currenNodeValue[1])
+        doubleList.add(value: currenNodeValue[2])
+        let result = doubleList.remove()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_add_remove_반복해도맞는value를꺼내는지() {
+        // given
+        let currenNodeValue: [Double] = [1, 2, 3]
+        let expectation: Double = 2
+        
+        // when
+        doubleList.add(value: currenNodeValue[0])
+        doubleList.add(value: currenNodeValue[1])
+        var result = doubleList.remove()
+        doubleList.add(value: currenNodeValue[2])
+        result = doubleList.remove()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }

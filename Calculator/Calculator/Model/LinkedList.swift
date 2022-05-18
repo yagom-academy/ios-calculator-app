@@ -17,4 +17,14 @@ struct LinkedList<Item: CalculatorItem> {
             lastNode = newNode
         }
     }
+    
+    mutating func remove() -> Item? {
+        guard !isEmpty else { return nil }
+        
+        let node = firstNode
+        firstNode = firstNode?.next
+        firstNode?.previous = nil
+        
+        return node?.value
+    }
 }
