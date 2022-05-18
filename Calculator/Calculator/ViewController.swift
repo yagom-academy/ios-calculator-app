@@ -60,6 +60,11 @@ struct LinkedList<T> {
         if head == nil { return }
         head = head?.next
     }
+    mutating func removeAll() {
+        while head != nil {
+            head = head?.next
+        }
+    }
 }
 
 class Node<T> {
