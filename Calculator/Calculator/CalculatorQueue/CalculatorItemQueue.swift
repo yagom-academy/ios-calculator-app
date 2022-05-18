@@ -4,7 +4,7 @@
 //
 //  Created by 유한석 on 2022/05/16.
 //
-class CalculatorItemQueue: CalculatorItem {
+class CalculatorItemQueue {
     private var queue: CalculatorList<CalculatorItem> = CalculatorList()
     var count: Int {
         return queue.size()
