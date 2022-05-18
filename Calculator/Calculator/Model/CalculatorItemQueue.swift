@@ -49,9 +49,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         if count == 0 {
             return nil
         } else {
-            guard let element = queue[head] else { return nil }
-            head += 1
-            return element
+            defer {
+                head += 1
+            }
+            return queue[head]
         }
     }
     
