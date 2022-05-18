@@ -12,7 +12,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     private var head: Int = 0
     
     var count: Int {
-        return queue.count
+        return queue.count - head
     }
     
     var isEmpty: Bool {
