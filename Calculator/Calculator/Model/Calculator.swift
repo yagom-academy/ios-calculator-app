@@ -81,7 +81,7 @@ class CalculatorItemQueue<T>: CalculatorItem {
         linkedList.printLinkedList()
     }
     
-    public func clear(_ element: T) {
+    public func clear() {
         linkedList.removeAll()
     }
 }
