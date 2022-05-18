@@ -22,30 +22,30 @@ class StackTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_enqueue_0과1을추가하면_stack에0과1이들어가는지() {
+    func test_push_0과1을추가하면_stack에0과1이들어가는지() {
         // Given
         let firstInput: Double = 0
         let secondInput: Double = 1
         let expectation: [Double] = [0, 1]
         
         // When
-        sut.enqueue(firstInput)
-        sut.enqueue(secondInput)
+        sut.push(firstInput)
+        sut.push(secondInput)
         let result = sut.stack
         
         // Then
         XCTAssertEqual(expectation, result)
     }
     
-    func test_dequeue_연속으로dequeue하면_뒤에서두번째요소가반환되는지() {
+    func test_pop_연속으로pop하면_뒤에서두번째요소가반환되는지() {
         // Given
         let currentStack: [Double] = [1, 2]
         let expectation: Double = 1
         
         // When
         sut.stack = currentStack
-        var result = sut.dequeue()
-        result = sut.dequeue()
+        var result = sut.pop()
+        result = sut.pop()
         
         // Then
         XCTAssertEqual(expectation, result)

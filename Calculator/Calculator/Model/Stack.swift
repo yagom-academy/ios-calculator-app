@@ -5,11 +5,11 @@ struct Stack<T: CalculatorItem> {
         return stack.isEmpty
     }
     
-    mutating func enqueue(_ element: T) {
+    mutating func push(_ element: T) {
         stack.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func pop() -> T? {
         guard !isEmpty() else { return nil }
 
         return stack.popLast()
