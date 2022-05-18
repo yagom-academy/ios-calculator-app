@@ -18,7 +18,7 @@ struct LinkedList<Item: CalculatorItem> {
         }
     }
     
-    mutating func remove() -> Item? {
+    mutating func takeOut() -> Item? {
         guard !isEmpty else { return nil }
         
         let node = firstNode
@@ -27,4 +27,5 @@ struct LinkedList<Item: CalculatorItem> {
         
         return node?.value
     }
+    
 }

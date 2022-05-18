@@ -74,7 +74,7 @@ class LinkedListTests: XCTestCase {
         doubleList.add(value: currenNodeValue[0])
         doubleList.add(value: currenNodeValue[1])
         doubleList.add(value: currenNodeValue[2])
-        let result = doubleList.remove()
+        let result = doubleList.takeOut()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -88,9 +88,9 @@ class LinkedListTests: XCTestCase {
         // when
         doubleList.add(value: currenNodeValue[0])
         doubleList.add(value: currenNodeValue[1])
-        var result = doubleList.remove()
+        var result = doubleList.takeOut()
         doubleList.add(value: currenNodeValue[2])
-        result = doubleList.remove()
+        result = doubleList.takeOut()
         
         // then
         XCTAssertEqual(result, expectation)

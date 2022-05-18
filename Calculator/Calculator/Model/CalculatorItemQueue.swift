@@ -1,31 +1,19 @@
 struct CalculatorItemQueue<Item: CalculatorItem> {
-    private var enqueueItems: [Item]
-    private var dequeueItems: [Item] = []
-    var calculatorItems: [Item] {
-        get {
-            return dequeueItems.reversed() + enqueueItems
-        }
+    private var calculatorList = LinkedList<Item>()
+    var lastValue: Item? {
+        return calculatorList.lastNode?.value
     }
     var isEmpty: Bool {
-        return enqueueItems.isEmpty && dequeueItems.isEmpty
-    }
-    
-    init(_ items: [Item] = []) {
-        self.enqueueItems = items
+        return calculatorList.isEmpty
     }
     
     mutating func enqueue(_ element: Item) {
-        enqueueItems.append(element)
+        calculatorList.add(value: element)
     }
     
     mutating func dequeue() -> Item? {
         guard !isEmpty else { return nil }
-        
-        if dequeueItems.isEmpty {
-            dequeueItems = enqueueItems.reversed()
-            enqueueItems.removeAll()
-        }
-
-        return dequeueItems.popLast()
+    
+        return calculatorList.takeOut()
     }
 }

@@ -17,14 +17,14 @@ class CalculatorItemQueueTest: XCTestCase {
         operatorQueue = nil
     }
 
-    func test_enqueue_0을추가하면_배열에0이들어가는지() {
+    func test_enqueue_0을추가하면_0이들어가는지() {
         // Given
         let input: Double = 0
-        let expectation: [Double] = [0]
+        let expectation: Double = 0
         
         // When
         doubleQueue.enqueue(input)
-        let result = doubleQueue.calculatorItems
+        let result = doubleQueue.lastValue
         
         // Then
         XCTAssertEqual(expectation, result)
@@ -34,33 +34,18 @@ class CalculatorItemQueueTest: XCTestCase {
         // Given
         let firstInput: Double = 0
         let secondInput: Double = 1
-        let expectation: [Double] = [0, 1]
+        let expectation: Double = 1
         
         // When
         doubleQueue.enqueue(firstInput)
         doubleQueue.enqueue(secondInput)
-        let result = doubleQueue.calculatorItems
-        
-        // Then
-        XCTAssertEqual(expectation, result)
-    }
-    
-    func test_dequeue_1을반환하는지() {
-        // Given
-        let currentQueue: [Double] = [1, 2, 3]
-        let expectation: Double = 1
-        
-        // When
-        doubleQueue = CalculatorItemQueue.init(currentQueue)
-        let result = doubleQueue.dequeue()
+        let result = doubleQueue.lastValue
         
         // Then
         XCTAssertEqual(expectation, result)
     }
     
     func test_dequeue_빈배열일때_nil을반환하는지() {
-        // Given
-        doubleQueue = CalculatorItemQueue.init([])
         // When
         let result = doubleQueue.dequeue()
         
@@ -74,7 +59,8 @@ class CalculatorItemQueueTest: XCTestCase {
         let expectation: Double = 5
         
         // When
-        doubleQueue = CalculatorItemQueue.init(currentQueue)
+        doubleQueue.enqueue(currentQueue[0])
+        doubleQueue.enqueue(currentQueue[1])
         var result = doubleQueue.dequeue()
         result = doubleQueue.dequeue()
         
@@ -88,7 +74,8 @@ class CalculatorItemQueueTest: XCTestCase {
         let expectation: Operator = .plus
         
         // When
-        operatorQueue = CalculatorItemQueue.init(currentQueue)
+        operatorQueue.enqueue(currentQueue[0])
+        operatorQueue.enqueue(currentQueue[1])
         let result = operatorQueue.dequeue()
         
         // Then
@@ -106,14 +93,14 @@ class CalculatorItemQueueTest: XCTestCase {
     func test_enqueue_dequeue_넣고빼는것을반복했을경우() {
         // Given
         let input: [Double] = [3, 5, 1]
-        let expectation: [Double] = [5, 1]
+        let expectation: Double = 5
         
         // When
         doubleQueue.enqueue(input[0])
         doubleQueue.enqueue(input[1])
         _ = doubleQueue.dequeue()
         doubleQueue.enqueue(input[2])
-        let result = doubleQueue.calculatorItems
+        let result = doubleQueue.dequeue()
         
         // Then
         XCTAssertEqual(expectation, result)
