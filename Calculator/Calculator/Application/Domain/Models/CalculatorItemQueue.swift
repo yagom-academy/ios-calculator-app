@@ -13,19 +13,20 @@ struct CalculatorItemQueue<T>: Queue where T: CalculateItem {
     }
     
     var isEmpty: Bool {
-        array.isEmpty
+        return array.isEmpty
     }
     
     var peek: Element? {
-        array.first
+        return array.first
     }
     
+    @discardableResult
     mutating func enqueue(_ element: T) -> Bool {
         array.append(element)
         return true
     }
     
     mutating func dequeue() -> T? {
-        isEmpty ? nil : array.removeFirst()
+        return isEmpty ? nil : array.removeFirst()
     }
 }
