@@ -12,8 +12,6 @@ struct CalculatorItemQueue<T> {
     init() {}
 }
 
-//MARK: - Queue protocol
-
 extension CalculatorItemQueue: CalculateItemProtocol {
     var peek: T? {
         return doublyLinkedList.first?.value
@@ -28,17 +26,17 @@ extension CalculatorItemQueue: CalculateItemProtocol {
         return true
     }
     
-    mutating func deQueue() -> T? {
+    mutating func deQueue() throws -> T? {
         guard !doublyLinkedList.isEmpty,
               let element = doublyLinkedList.first else {
-            return nil
+            throw QueueError.emptyData
         }
         return doublyLinkedList.remove(element)
     }
     
-    mutating func removeAll() {
+    mutating func removeAll() throws {
         guard !doublyLinkedList.isEmpty else {
-            return
+            throw QueueError.emptyData
         }
         doublyLinkedList.removeAll()
     }

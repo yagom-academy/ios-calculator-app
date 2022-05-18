@@ -14,10 +14,10 @@ protocol CalculateItemProtocol {
     mutating func enQueue(_ element: Element) -> Bool
 
     /// 가장 먼저 들어온 앞의 큐 제거하고 제거한 큐 반환
-    mutating func deQueue() -> Element?
+    mutating func deQueue() throws -> Element?
     
     /// 큐가 비우는 함수
-    mutating func removeAll()
+    mutating func removeAll() throws
     
     /// 큐가 비어있는지 알려주는 읽기전용 프로퍼티
     var isEmpty: Bool { get }
