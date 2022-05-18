@@ -1,21 +1,9 @@
 //
-//  Calculator.swift
+//  LinkedList.swift
 //  Calculator
 //
-//  Created by 허건 on 2022/05/17.
+//  Created by 허건 on 2022/05/18.
 //
-
-import Foundation
-
-class Node<T> {
-    var data: T?
-    var next: Node<T>?
-    
-    init(data: T?, next: Node? = nil) {
-        self.data = data
-        self.next = next
-    }
-}
 
 struct LinkedList<T> {
     var head: Node<T>?
@@ -61,29 +49,3 @@ struct LinkedList<T> {
         head = nil
     }
 }
-
-class CalculatorItemQueue<T>: CalculatorItem {
-
-    var linkedList = LinkedList<T>()
-    
-    var count : Int {
-        return linkedList.count
-    }
-    
-    public func enqueue(_ element: T) {
-        linkedList.append(data: element)
-    }
-    
-    public func dequeue() {
-        linkedList.removeFirst()
-    }
-    
-    public func printLists() {
-        linkedList.printLinkedList()
-    }
-    
-    public func clear() {
-        linkedList.removeAll()
-    }
-}
-
