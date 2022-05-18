@@ -23,4 +23,16 @@ struct CalculatorItemQueue<T: CalculateItem> {
     var peek: T? {
         return firstQueue.isEmpty ? secondQueue.last : firstQueue.first
     }
+    
+    mutating func enqueue(_ element: T) {
+        firstQueue.append(element)
+    }
+    
+    mutating func dequeue() -> T? {
+        if secondQueue.isEmpty {
+            secondQueue = firstQueue.reversed()
+            firstQueue.removeAll()
+        }
+        return secondQueue.popLast()
+    }
 }
