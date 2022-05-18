@@ -5,13 +5,13 @@
 //  Created by 유한석 on 2022/05/18.
 //
 enum Operator: Character, CaseIterable {
-    case add
-    case substractk
-    case divide
-    case multiply
+    case add = "+"
+    case substractk = "-"
+    case divide = "/"
+    case multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
-        return Double()
+        return lhs + rhs
     }
     private func add(lhs: Double, rhs: Double) -> Double {
         return Double()
