@@ -7,7 +7,6 @@
 
 struct LinkedList<T> {
     var head: Node<T>?
-    var count = 1
     
     mutating func append(data: T?) {
         if head == nil {
@@ -20,7 +19,6 @@ struct LinkedList<T> {
             node = node?.next
         }
         node?.next = Node(data: data)
-        self.count += 1
     }
     
     mutating func removeFirst() {
@@ -31,18 +29,6 @@ struct LinkedList<T> {
         }
 
         head = head?.next
-        self.count -= 1
-    }
-    
-    mutating func printLinkedList() {
-        var linkedLists: [Any] = [] // 배열? 리스트?
-        var node = head
-        
-        while node != nil {
-            linkedLists.append(node?.data as Any)
-            node = node?.next
-        }
-        print(linkedLists)
     }
     
     mutating func removeAll() {
