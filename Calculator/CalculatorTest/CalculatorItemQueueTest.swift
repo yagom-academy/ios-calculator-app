@@ -98,7 +98,7 @@ class CalculatorItemQueueTest: XCTestCase {
     
     func test_isEmpty_calulatorItems이비었을때_True를반환하는지() {
         // When
-        let result = doubleQueue.isEmpty()
+        let result = doubleQueue.isEmpty
         
         // Then
         XCTAssertTrue(result)

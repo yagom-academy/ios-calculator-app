@@ -6,8 +6,7 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
             return dequeueItems.reversed() + enqueueItems
         }
     }
-    
-    func isEmpty() -> Bool {
+    var isEmpty: Bool {
         return enqueueItems.isEmpty && dequeueItems.isEmpty
     }
     
@@ -16,7 +15,7 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
     }
     
     mutating func dequeue() -> Item? {
-        guard !isEmpty() else { return nil }
+        guard !isEmpty else { return nil }
         
         if dequeueItems.isEmpty {
             dequeueItems = enqueueItems.reversed()
