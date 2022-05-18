@@ -4,11 +4,12 @@
 //
 //  Created by NAMU on 2022/05/17.
 //
- class Node<T> {
-     fileprivate var data: T?
-     fileprivate var next: Node?
+
+class Node<T> {
+    fileprivate var data: T?
+    fileprivate var next: Node?
     
-     fileprivate init(data: T?, next: Node? = nil) {
+    fileprivate init(data: T?, next: Node? = nil) {
         self.data = data
         self.next = next
     }
