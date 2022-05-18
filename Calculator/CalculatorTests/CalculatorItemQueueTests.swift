@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Double>!
+    var sut: CalculatorItemQueue<Double>?
     
     override func setUpWithError() throws {
         try super.setUpWithError()
