@@ -8,6 +8,10 @@
 import XCTest
 @testable import Calculator
 
+struct CalculateItemTester: CalculateItem {
+    let value: Int
+}
+
 class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<CalculateItemTester>!
     
