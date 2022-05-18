@@ -21,18 +21,18 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_비어있을때isEmpty가트루인지확인() {
+    func test_enqueue를안했을때_isEmpty가_참인지확인() {
         let result = sut.isEmpty
         XCTAssertTrue(result)
     }
     
-    func test_들어있을때isEmpty가거짓인지확인() {
+    func test_enqueue했을때_isEmpty가_거짓인지확인() {
         sut.enqueue(1)
         let result = sut.isEmpty
         XCTAssertFalse(result)
     }
     
-    func test_들어있을때count값확인() {
+    func test_Enqueue를여러번했을때_count값이_같은지확인() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(5)
@@ -40,7 +40,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_dequeue가되는지확인1() {
+    func test_enqueue를여러번했을때_dequeue를하면_count가맞는지확인() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
@@ -49,7 +49,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_dequeue가되는지확인2() {
+    func test_enqueue를여러번했을때_dequeue를하면_반환값이같은지확인() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
@@ -57,12 +57,12 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_isEmpty에서dequeue가되는지확인() {
+    func test_enqueue를하지않았을때_dequeue를하면_nil이나오는지확인() {
         let a = sut.dequeue()
         XCTAssertEqual(nil, a)
     }
     
-    func test_removeAll하는지확인1() {
+    func test_값이들어있을때_removeAll을하면_count가0인지확인() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
@@ -71,7 +71,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
-    func test_removeAll하는지확인2() {
+    func test_값이들어있을때_removeAll을하면_isEmpty가참인지확인() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
@@ -80,7 +80,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_dequeue후append메서드사용할할경우() {
+    func test_값이들어있을때_dequeue로queue를비웠을때_count값과nil값이나오는지확인() {
         sut.enqueue(1)
         sut.enqueue(2)
         var result = sut.firstValue
