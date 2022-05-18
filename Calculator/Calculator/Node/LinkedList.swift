@@ -1,8 +1,8 @@
 class LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    var previousness: Node<T>?
-    var count = 0
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
+    private(set) var previousness: Node<T>?
+    private(set) var count = 0
 
     func insert(data: T) {
         count += 1
