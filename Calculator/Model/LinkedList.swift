@@ -17,6 +17,7 @@ class Node<T> {
 
 struct LinkedList<T> {
     private var head: Node<T>?
+    private var tail: Node<T>?
     
     func peek() -> T? {
         return head?.data
@@ -25,15 +26,12 @@ struct LinkedList<T> {
     mutating func append(data: T) {
         guard head != nil else {
             head = Node(data: data)
+            tail = head
             return
         }
-        
-        var node = head
-        
-        while node?.next != nil {
-            node = head?.next
-        }
-        node?.next = Node(data: data)
+        let node = Node(data: data)
+        tail?.next = node
+        tail = node
     }
     
     mutating func removeFirst() -> T? {
