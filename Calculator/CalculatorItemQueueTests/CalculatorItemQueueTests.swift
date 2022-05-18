@@ -1,14 +1,7 @@
-//
-//  CalculatorItemQueueTests.swift
-//  CalculatorItemQueueTests
-//
-//  Created by seohyeon park on 2022/05/17.
-//
-
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalculatorItemQueueTests: XCTestCase {
     // MARK: Setting
     var sut: CalculatorItemQueue<Double>!
     
@@ -20,67 +13,5 @@ class CalculatorTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
-    }
-    
-    // MARK: Test_insert(data: T)
-    func testLinkedList에_값이_data에_저장_되는지() {
-        // given
-        sut.calculateItems.insert(data: 1)
-        // when
-        let result = sut.calculateItems.head?.data
-        // then
-        XCTAssertEqual(result, 1)
-    }
-    
-    func testLinkedList에_값을_추가했을_때_다음_데이터를_가리키는지() {
-        // given
-        sut.calculateItems.insert(data: 1)
-        sut.calculateItems.insert(data: 2)
-        sut.calculateItems.insert(data: 3)
-        // when
-        let result = sut.calculateItems.tail?.data
-        // then
-        XCTAssertEqual(result, 3)
-    }
-    
-    // MARK: Test_delets()
-    func testLinkedList의_마지막_값이_삭제_되는지() {
-        // given
-        sut.calculateItems.insert(data: 1)
-        sut.calculateItems.insert(data: 2)
-        sut.calculateItems.insert(data: 3)
-        sut.calculateItems.delete()
-        // when
-        let result = sut.calculateItems.tail?.data
-        // then
-        XCTAssertEqual(result, 2)
-    }
-    
-    // MARK: Test_moveToPreviousness()
-    func testLinkedList의_delets시_previousness가_잘_옮겨지는지() {
-        // given
-        sut.calculateItems.insert(data: 1)
-        sut.calculateItems.insert(data: 2)
-        sut.calculateItems.insert(data: 3)
-        sut.calculateItems.delete()
-        // when
-        let result = sut.calculateItems.previousness?.data
-        // then
-        XCTAssertEqual(result, 1)
-    }
-    
-    
-    func testLinkedList의_마지막_값이_연속으로_삭제_되는지() {
-        // given
-        sut.calculateItems.insert(data: 1)
-        sut.calculateItems.insert(data: 2)
-        sut.calculateItems.insert(data: 3)
-        sut.calculateItems.insert(data: 4)
-        sut.calculateItems.delete()
-        sut.calculateItems.delete()
-        // when
-        let result = sut.calculateItems.tail?.data
-        // then
-        XCTAssertEqual(result, 2)
     }
 }
