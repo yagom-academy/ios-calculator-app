@@ -18,11 +18,20 @@ class LinkedList<T> {
         tail = tail?.next
     }
     
-    func delete() {
+    func delete() -> T? {
+        let data = tail?.data
         count -= 1
         previousness?.next = nil
         tail = previousness
-        moveToPreviousness()
+        
+        if count == 0 {
+            previousness = nil
+            
+        } else if count > 1 {
+            moveToPreviousness()
+        }
+        
+        return data ?? nil
     }
     
     func moveToPreviousness() {

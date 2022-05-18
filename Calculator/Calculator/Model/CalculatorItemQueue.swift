@@ -11,9 +11,9 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return (headData, headNext)
     }
     
-    mutating func dequeue() {
+    mutating func dequeue() -> T? {
         if isEmpty() {
-            return
+            return nil
         }
         return calculateItems.delete()
     }
