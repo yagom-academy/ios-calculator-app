@@ -23,15 +23,13 @@ class LinkedList<T> {
     }
     
     func append(data: T?) {
-        if head == nil {
-            head = Node(data: data)
+        let newNode = Node(data: data)
+        
+        guard let node = head else {
+            head = newNode
             return
         }
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: data)
+        node.next = newNode
     }
     
     func remove() {
