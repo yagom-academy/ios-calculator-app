@@ -12,18 +12,23 @@
 class LinkedList<T> {
     var head: Node<T>?
     var tail: Node<T>?
-    var previous: Node<T>?
+    var previousness: Node<T>?
 
     func insert(data: T) {
         if head == nil {
             head = Node(data: data, next: nil)
-            previous = head
+            previousness = head
             tail = head
             return
         }
         
         tail?.next = Node(data: data, next: nil)
-        previous = tail
+        previousness = tail
         tail = tail?.next
+    }
+    
+    func delete() {
+        previousness?.next = nil
+        tail = previousness
     }
 }

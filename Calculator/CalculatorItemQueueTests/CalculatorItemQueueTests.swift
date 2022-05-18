@@ -42,4 +42,17 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, 3)
     }
+    
+    // MARK: Test_delets()
+    func testLinkedList의_마지막_값이_삭제_되는지() {
+        // given
+        sut.calculateItems.insert(data: 1)
+        sut.calculateItems.insert(data: 2)
+        sut.calculateItems.insert(data: 3)
+        sut.calculateItems.delete()
+        // when
+        let result = sut.calculateItems.tail?.data
+        // then
+        XCTAssertEqual(result, 2)
+    }
 }
