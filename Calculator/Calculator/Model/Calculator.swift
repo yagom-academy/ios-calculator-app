@@ -37,15 +37,23 @@ struct LinkedList<T> {
     
     mutating func removeFirst() {
         if head == nil { return }
-        // head를 삭제하는 경우
         if head?.next == nil {
             head = nil
             return
         }
-        let node = head
 
-        node?.data = node?.next?.data
-        node?.next = node?.next?.next
+        head = head?.next
+    }
+    
+    mutating func printLinkedList() {
+        var linkedLists: [Any] = [] // 배열? 리스트?
+        var node = head
+        
+        while node != nil {
+            linkedLists.append(node?.data as Any)
+            node = node?.next
+        }
+        print(linkedLists)
     }
     
     mutating func removeAll() {
@@ -68,9 +76,13 @@ class CalculatorItemQueue<T>: CalculatorItem {
     public func dequeue() {
         linkedList.removeFirst()
     }
+    
+    public func printLists() {
+        linkedList.printLinkedList()
+    }
+    
     public func clear(_ element: T) {
         linkedList.removeAll()
     }
-
 }
 
