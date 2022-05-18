@@ -14,22 +14,6 @@ class ViewController: UIViewController {
     }
 }
 
-protocol CalculateItem {
-    
-}
-
-class CalculatorItemQueue<T>: CalculateItem {
-    var linkedList = LinkedList<T>()
-    
-    func enQueue(_ data: T) {
-        linkedList.append(data: data)
-    }
-    
-    func deQueue() {
-        linkedList.remove()
-    }
-}
-
 class LinkedList<T> {
     var head: Node<T>?
     
