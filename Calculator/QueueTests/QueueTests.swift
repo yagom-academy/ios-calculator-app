@@ -94,7 +94,7 @@ class QueueTests: XCTestCase {
 
     func test_isEmpty_빈_큐임을_정상적으로_인지하는지_테스트() throws {
         // given
-        sut.clearQueue()
+        sut.clear()
         
         // when
         let result = sut.isEmpty
@@ -131,24 +131,30 @@ class QueueTests: XCTestCase {
     }
 
     func test_peek_peek를_정상적으로_반환하는지_테스트() throws {
+        // given
         sut.enqueue(element: 1.0)
         sut.enqueue(element: 2.0)
         let expectaion = 1.0
 
+        // when
         let result = sut.peek
 
+        // then
         XCTAssertEqual(result, expectaion)
     }
 
 
     func test_peek_dequeue_메서드_호출시_peek를_정상적으로_반환하는지_테스트() throws {
+        // given
         sut.enqueue(element: 1.0)
         sut.enqueue(element: 2.0)
         _ = sut.dequeue()
         let expectaion = 2.0
 
+        // when
         let result = sut.peek
 
+        // then
         XCTAssertEqual(result, expectaion)
     }
 }
