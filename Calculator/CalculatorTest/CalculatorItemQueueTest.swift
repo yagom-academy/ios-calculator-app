@@ -24,7 +24,7 @@ class CalculatorItemQueueTest: XCTestCase {
         
         // When
         doubleQueue.enqueue(input)
-        let result = doubleQueue.calulatorItems
+        let result = doubleQueue.calculatorItems
         
         // Then
         XCTAssertEqual(expectation, result)
@@ -39,7 +39,7 @@ class CalculatorItemQueueTest: XCTestCase {
         // When
         doubleQueue.enqueue(firstInput)
         doubleQueue.enqueue(secondInput)
-        let result = doubleQueue.calulatorItems
+        let result = doubleQueue.calculatorItems
         
         // Then
         XCTAssertEqual(expectation, result)
