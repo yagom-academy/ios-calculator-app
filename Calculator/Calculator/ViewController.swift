@@ -1,19 +1,17 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
+//  Created by unchain123
+//
 // 
 
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
 }
 
 protocol CalculateItem {
@@ -62,14 +60,14 @@ struct LinkedList<T> {
         if head == nil { return }
         head = head?.next
     }
-
-class Node<T> {
-    var data: T?
-    var next: Node?
     
-    init (data: T?, next: Node? = nil) {
-        self.data = data
-        self.next = next
+    class Node<T> {
+        var data: T?
+        var next: Node?
+        
+        init (data: T?, next: Node? = nil) {
+            self.data = data
+            self.next = next
+        }
     }
-}
 }

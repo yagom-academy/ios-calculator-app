@@ -2,7 +2,7 @@
 //  CalculatorItemQueueTest.swift
 //  CalculatorItemQueueTest
 //
-//  Created by 오경식 on 2022/05/17.
+//  Created by unchain123 on 2022/05/17.
 //
 
 import XCTest
