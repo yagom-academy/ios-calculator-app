@@ -1,7 +1,7 @@
 #  계산기 프로젝트
 > 프로젝트 기간 2022.05. 16~2022.05. 
 > 팀원: @yeton(https://github.com/yeeton37)
-> 리뷰어: @Cory
+> 리뷰어: @Cory(https://github.com/corykim0829)
 
 ## uml
 ![calculator_UML](https://user-images.githubusercontent.com/98514397/168799116-c6036001-9b0f-4851-969a-3ce5628bb456.jpg)

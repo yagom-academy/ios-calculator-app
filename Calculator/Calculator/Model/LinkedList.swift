@@ -9,7 +9,23 @@ import Foundation
 
 class LinkedList<T: CalculateItem> {
     private(set) var head: Node<T>?
-    private var count: Int = 0
+    var count: Int {
+        calculateCount()
+    }
+    
+    func calculateCount() -> Int {
+        if head == nil {
+            return 0
+        }
+        
+        var node = head
+        var count = 1
+        while node?.next != nil {
+            count += 1
+            node = node?.next
+        }
+        return count
+    }
     
     func isEmpty() -> Bool {
         if head != nil {
@@ -21,7 +37,6 @@ class LinkedList<T: CalculateItem> {
     func append(data: T) {
         if head == nil {
             head = Node(data)
-            count += 1
             return
         }
         
@@ -30,7 +45,6 @@ class LinkedList<T: CalculateItem> {
             node = node?.next
         }
         node?.next = Node(data)
-        count += 1
     }
     
     func removeFirst() -> T? {
@@ -40,13 +54,11 @@ class LinkedList<T: CalculateItem> {
         
         let removedNode = head
         head = head?.next
-        count -= 1
         
         return removedNode?.data
     }
     
     func removeAll() {
         head = nil
-        count = 0
     }
 }

@@ -64,7 +64,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut?.enqueue(data: 4.0)
         
         // when
-        sut?.dequeueAll()
+        sut?.removeAll()
         let result = sut?.queue.count
         
         // then
