@@ -15,4 +15,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
     var count: Int {
         return firstQueue.count + secondQueue.count
     }
+    
+    var isEmpty: Bool {
+        return firstQueue.isEmpty && secondQueue.isEmpty
+    }
+    
+    var peek: T? {
+        return firstQueue.isEmpty ? secondQueue.last : firstQueue.first
+    }
 }
