@@ -31,4 +31,16 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertFalse(result)
     }
+    
+    func test_enqueue의아규먼트로_0을_넣었을때_queue에_0이있으면_True() {
+        // given
+        let number = 0.0
+        
+        // when
+        sut.enqueue(number)
+        let result = sut.queue.first
+        
+        // then
+        XCTAssertEqual(result, number)
+    }
 }
