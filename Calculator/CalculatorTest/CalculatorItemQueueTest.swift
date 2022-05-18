@@ -45,14 +45,13 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_dequeue_첫번째요소가3일때_3을반환하는지() {
+    func test_dequeue_1을반환하는지() {
         // Given
-        let currentQueue: [Double] = [3, 5]
-        let expectation: Double = 3
+        let currentQueue: [Double] = [1, 2, 3]
+        let expectation: Double = 1
         
         // When
-        doubleQueue.enqueue(currentQueue[0])
-        doubleQueue.enqueue(currentQueue[1])
+        doubleQueue = CalculatorItemQueue.init(currentQueue)
         let result = doubleQueue.dequeue()
         
         // Then
@@ -60,6 +59,8 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_dequeue_빈배열일때_nil을반환하는지() {
+        // Given
+        doubleQueue = CalculatorItemQueue.init([])
         // When
         let result = doubleQueue.dequeue()
         
@@ -73,8 +74,7 @@ class CalculatorItemQueueTest: XCTestCase {
         let expectation: Double = 5
         
         // When
-        doubleQueue.enqueue(currentQueue[0])
-        doubleQueue.enqueue(currentQueue[1])
+        doubleQueue = CalculatorItemQueue.init(currentQueue)
         var result = doubleQueue.dequeue()
         result = doubleQueue.dequeue()
         
@@ -88,8 +88,7 @@ class CalculatorItemQueueTest: XCTestCase {
         let expectation: Operator = .plus
         
         // When
-        operatorQueue.enqueue(currentQueue[0])
-        operatorQueue.enqueue(currentQueue[1])
+        operatorQueue = CalculatorItemQueue.init(currentQueue)
         let result = operatorQueue.dequeue()
         
         // Then

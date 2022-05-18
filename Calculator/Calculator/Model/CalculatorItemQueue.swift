@@ -1,5 +1,5 @@
 struct CalculatorItemQueue<Item: CalculatorItem> {
-    private var enqueueItems: [Item] = []
+    private var enqueueItems: [Item]
     private var dequeueItems: [Item] = []
     var calculatorItems: [Item] {
         get {
@@ -8,6 +8,10 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
     }
     var isEmpty: Bool {
         return enqueueItems.isEmpty && dequeueItems.isEmpty
+    }
+    
+    init(_ items: [Item] = []) {
+        self.enqueueItems = items
     }
     
     mutating func enqueue(_ element: Item) {
