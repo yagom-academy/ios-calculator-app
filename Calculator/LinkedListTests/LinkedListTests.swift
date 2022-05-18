@@ -22,14 +22,44 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_add_1을넣으면_head의value에1이들어가는지() {
+    func test_add_1을넣으면_lastNode의value기1인지() {
         // given
         let input: Double = 1
         let expectation: Double = 1
         
         // when
         doubleList.add(value: input)
-        let result = doubleList.firstNode?.value
+        let result = doubleList.lastNode?.value
+        
+        // then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_add_1과2를넣으면_lastNode의value가2인지() {
+        // given
+        let firstInput: Double = 1
+        let secondInput: Double = 2
+        let expectation: Double = 2
+        
+        // when
+        doubleList.add(value: firstInput)
+        doubleList.add(value: secondInput)
+        let result = doubleList.lastNode?.value
+        
+        // then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_add_1과2를넣으면_2의previous노드의value가1인지() {
+        // given
+        let firstInput: Double = 1
+        let secondInput: Double = 2
+        let expectation: Double = 1
+        
+        // when
+        doubleList.add(value: firstInput)
+        doubleList.add(value: secondInput)
+        let result = doubleList.lastNode?.previous?.value
         
         // then
         XCTAssertEqual(expectation, result)

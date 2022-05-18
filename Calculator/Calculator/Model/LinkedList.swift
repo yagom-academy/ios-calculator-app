@@ -1,6 +1,6 @@
 struct LinkedList<Item: CalculatorItem> {
-    private(set) var firstNode: Node<Item>?
-    private var lastNode: Node<Item>?
+    private var firstNode: Node<Item>?
+    private(set) var lastNode: Node<Item>?
     var isEmpty: Bool {
         return firstNode == nil
     }
@@ -12,7 +12,8 @@ struct LinkedList<Item: CalculatorItem> {
             firstNode = newNode
             lastNode = newNode
         }else {
-            firstNode?.next = newNode
+            lastNode?.next = newNode
+            newNode.previous = lastNode
             lastNode = newNode
         }
     }
