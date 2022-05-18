@@ -13,4 +13,8 @@ struct CalculatorItemQueue {
     mutating func enqueue(_ number: Double) {
         queue.append(number)
     }
+    
+    mutating func dequeue() -> Double? {
+        return queue.removeFirst()
+    }
 }

@@ -19,7 +19,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    // MARK: - enque
+    // MARK: - enqueue
     func test_enqueue의아규먼트로_0을_넣었을때_queue가빈배열이면_False() {
         // given
         let number = 0.0
@@ -59,5 +59,18 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    // MARK: - dequeue
+    func test_dequeue호출시_queue의_첫번째요소를_리턴하는지() {
+        // given
+        let number: Double = 1.0
+        sut.enqueue(number)
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, number)
     }
 }
