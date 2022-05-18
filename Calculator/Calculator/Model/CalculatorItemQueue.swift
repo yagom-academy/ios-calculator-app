@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem{
+struct CalculatorItemQueue<T>: CalculateItem {
     private var queue: [T?] = []
     private var head: Int = 0
     
@@ -46,7 +46,6 @@ struct CalculatorItemQueue<T>: CalculateItem{
             return nil
         } else {
             guard let element = queue[head] else { return nil }
-            queue.removeFirst(head)
             head += 1
             return element
         }
