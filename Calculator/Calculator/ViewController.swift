@@ -20,10 +20,10 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct LinkedList<T> {
     var head: Node<T>?
     
-    mutating func enQueue(data: T?) {
+    mutating func append(data: T?) {
         if head == nil {
             head = Node(data: data)
             return
@@ -32,9 +32,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         while node?.next != nil {
             node = node?.next
         }
+        node?.next = Node(data: data)
     }
     
-    mutating func deQueue() {
+    mutating func remove() {
         if head == nil { return }
         head = head?.next
     }
