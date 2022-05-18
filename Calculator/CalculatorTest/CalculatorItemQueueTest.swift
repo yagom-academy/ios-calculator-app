@@ -103,4 +103,20 @@ class CalculatorItemQueueTest: XCTestCase {
         // Then
         XCTAssertTrue(result)
     }
+    
+    func test_enqueue_dequeue_넣고빼는것을반복했을경우() {
+        // Given
+        let input: [Double] = [3, 5, 1]
+        let expectation: [Double] = [5, 1]
+        
+        // When
+        doubleQueue.enqueue(input[0])
+        doubleQueue.enqueue(input[1])
+        _ = doubleQueue.dequeue()
+        doubleQueue.enqueue(input[2])
+        let result = doubleQueue.calculatorItems
+        
+        // Then
+        XCTAssertEqual(expectation, result)
+    }
 }

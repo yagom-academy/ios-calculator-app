@@ -3,7 +3,7 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
     private(set) var dequeueStack = Stack<Item>()
     var calculatorItems: [Item] {
         get {
-           return enqueueStack.stack
+            return dequeueStack.stack.reversed() + enqueueStack.stack 
         }
     }
     
