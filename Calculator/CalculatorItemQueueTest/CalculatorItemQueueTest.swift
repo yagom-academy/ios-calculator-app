@@ -52,7 +52,7 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(sut.linkedList.head?.data, 3)
     }
     
-    func test_값이없을때_remove하면_nil을_반환하는지() {
+    func test_리스트내에_값이없을때_remove하면_nil을_반환하는지() {
         sut.linkedList.remove()
         
         XCTAssertEqual(sut.linkedList.head?.data, nil)
