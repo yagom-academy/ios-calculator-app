@@ -36,8 +36,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         if count == 0 {
             return nil
         } else {
-            guard let element = queue[queue.count - 1] else { return nil}
-            return element
+            guard let lastElement = queue.last else { return nil}
+            return lastElement
         }
     }
     
