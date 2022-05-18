@@ -9,18 +9,16 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
     var enQueueStack: Array<T> = []
     var deQueueStack: Array<T> = []
     
-    public mutating func enQueue(_ input: T) {
+    mutating func enQueue(_ input: T) {
         enQueueStack.append(input)
     }
     
-    public mutating func deQueue() throws -> T? {
+    mutating func deQueue() throws -> T? {
         if enQueueStack.isEmpty {
             throw QueueError.empty
         }
-        else {
-            deQueueStack = enQueueStack.reversed()
-            enQueueStack.removeAll()
-        }
+        deQueueStack = enQueueStack.reversed()
+        enQueueStack.removeAll()
         return deQueueStack.popLast()
     }
     

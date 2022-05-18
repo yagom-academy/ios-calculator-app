@@ -23,7 +23,9 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_enQueue함수를_호출했을때_enQueueStack에_값을더하는가() {
         //given
-        sut?.enQueueStack = [1.0, 2.0, 3.0]
+        sut?.enQueue(1.0)
+        sut?.enQueue(2.0)
+        sut?.enQueue(3.0)
         let input = 4.0
         
         //when
@@ -34,37 +36,54 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, sut?.enQueueStack.last)
     }
     
-    func test_deQueue함수를_호출했을때_deQueueStack이_비어있으면_enQueueStack의순서를뒤집어_deQueueStack에집어넣는가() {
-        //given
-        sut?.enQueueStack = [1.0, 2.0, 3.0]
-        sut?.deQueueStack = []
-        
-        //when
-        if sut?.deQueueStack.isEmpty {
-            sut?.deQueueStack = sut?.enQueueStack.reversed()
-        }
-        
-        let result = [3.0, 2.0, 1.0]
-        
-        //then
-        XCTAssertEqual(result, sut?.deQueueStack)
-    }
-    
     func test_enQueueStack에_값이없다면_deQueue함수를_호출하면_nil을반환하는가() {
-        sut?.enQueueStack = []
-        sut?.deQueueStack = [1.0, 2.0, 3.0]
-        
+        //given
+        let result = sut?.enQueueStack
         //when
-        let result =  try? sut.deQueue()
-        
+
+        do {
+            try sut?.deQueue()
+        } catch  {
+            print("nil 값을 반환하지 않음!")
+        }
         //then
         XCTAssertNil(result)
     }
     
+    func test_deQueue함수를_호출했을때_deQueueStack이_비어있으면_enQueueStack의순서를뒤집어_deQueueStack에집어넣는가() {
+        //given
+        sut?.enQueue(1.0)
+        sut?.enQueue(2.0)
+        sut?.enQueue(3.0)
+        var result: Double?
+        
+        //when
+        for elements in 1...3 {
+            do {
+                result = try sut?.deQueue()
+            } catch  {
+                print("실패!")
+            }
+        }
+        
+        //then
+        XCTAssertEqual(sut?.deQueueStack, [3.0, 2.0, 1.0])
+    }
+    
+   
+    
     func test_deQueue함수를_호출했을때_enQueueStack의순서를뒤집어_deQueueStack에집어넣었으면_enQueueStack의요소를_모두없애는가() {
         //given
-        sut?.enQueueStack = [1.0, 2.0, 3.0]
-        sut?.deQueueStack = [3.0, 2.0, 1.0]
+        sut?.enQueue(1.0)
+        sut?.enQueue(2.0)
+        sut?.enQueue(3.0)
+        var input: Double?
+        
+        do {
+            input = try sut?.deQueue()
+        } catch  {
+            print("nil 값을 반환하지 않음!")
+        }
         
         //when
         if sut?.enQueueStack.reversed() == sut?.deQueueStack {
@@ -81,9 +100,14 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut?.enQueueStack = [1.0, 2.0, 3.0]
         sut?.deQueueStack = [3.0, 2.0, 1.0]
+        var result: Double?
         
         //when
-        let result = try? sut?.deQueue()
+        do {
+            result = try sut?.deQueue()
+        } catch  {
+            print("nil 값을 반환하지 않음!")
+        }
         
         //then
         XCTAssertEqual(result, 1.0)
@@ -94,15 +118,16 @@ class CalculatorItemQueueTests: XCTestCase {
         sut?.enQueueStack = [1.0, 2.0, 3.0]
         sut?.deQueueStack = []
         sut?.enQueue(4.0)
+        var result: Double?
         
         //when
-        let result = try? sut?.deQueue()
+        do {
+            result = try sut?.deQueue()
+        } catch  {
+            print("nil 값을 반환하지 않음!")
+        }
         
         //then
         XCTAssertEqual(result, 1.0)
-    }
-    
-    func test_() {
-        
     }
 }
