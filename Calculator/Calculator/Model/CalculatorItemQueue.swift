@@ -8,5 +8,9 @@
 import Foundation
 
 struct CalculatorItemQueue {
+    private(set) var queue: [Double] = []
     
+    mutating func enqueue(_ number: Double) {
+        queue.append(number)
+    }
 }
