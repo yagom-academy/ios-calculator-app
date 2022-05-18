@@ -84,8 +84,6 @@
 		A301D2BD283340B900A025E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A301D2E32834BEC100A025E3 /* Node */,
-				A301D2E02834BE8000A025E3 /* LinkedList */,
 				A301D2DB2834BAF600A025E3 /* Calculator */,
 				A301D2AD28323F2E00A025E3 /* Protocol */,
 				A301D2AE283240A500A025E3 /* Enum */,
@@ -96,6 +94,8 @@
 		A301D2DB2834BAF600A025E3 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				A301D2E12834BE9500A025E3 /* Node.swift */,
+				A301D2DC2834BD1F00A025E3 /* LinkedList.swift */,
 				A301D2BE283340CD00A025E3 /* CalculatorItemQueue.swift */,
 			);
 			path = Calculator;
@@ -119,22 +119,6 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		A301D2E02834BE8000A025E3 /* LinkedList */ = {
-			isa = PBXGroup;
-			children = (
-				A301D2DC2834BD1F00A025E3 /* LinkedList.swift */,
-			);
-			path = LinkedList;
-			sourceTree = "<group>";
-		};
-		A301D2E32834BEC100A025E3 /* Node */ = {
-			isa = PBXGroup;
-			children = (
-				A301D2E12834BE9500A025E3 /* Node.swift */,
-			);
-			path = Node;
 			sourceTree = "<group>";
 		};
 		C713D9352570E5EB001C3AFC = {

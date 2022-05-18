@@ -24,6 +24,7 @@ struct LinkedList<T> {
             head = nil
             return
         }
+        
         head = head?.next
     }
     
