@@ -42,4 +42,13 @@ class CalculatorItemQueueTest: XCTestCase {
 
         XCTAssertEqual(sut.linkedList.count, 3)
     }
+    
+    func test_remove함수를_사용하면_head값이바뀌는지() {
+        sut.linkedList.append(data: 1)
+        sut.linkedList.append(data: 3)
+        sut.linkedList.append(data: 5)
+        sut.linkedList.remove()
+        
+        XCTAssertEqual(sut.linkedList.head?.data, 3)
+    }
 }
