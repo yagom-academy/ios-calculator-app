@@ -10,4 +10,19 @@ struct CalculatorItemQueue<T>: CalculateItem {
         let headNext = calculateItems.head?.next
         return (headData, headNext)
     }
+    
+    mutating func dequeue() {
+        if isEmpty() {
+            return
+        }
+        return calculateItems.delete()
+    }
+    
+    mutating func isEmpty() -> Bool {
+        if calculateItems.count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
 }
