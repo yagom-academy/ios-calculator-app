@@ -43,4 +43,21 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, number)
     }
+    
+    func test_enqueue의아규먼트로_1과_10과_500을_넣을시_queue에_1_10_500이_있으면_True() {
+        // given
+        let firstNumber = 1.0
+        let secondNumber = 10.0
+        let thirdNumber = 500.0
+        let expectation: [Double] = [firstNumber, secondNumber, thirdNumber]
+        
+        // when
+        sut.enqueue(firstNumber)
+        sut.enqueue(secondNumber)
+        sut.enqueue(thirdNumber)
+        let result = sut.queue
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
