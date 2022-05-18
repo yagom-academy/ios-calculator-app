@@ -31,7 +31,7 @@ class CalculatorItemQueue<T>: CalculateItem {
     }
 }
 
-struct LinkedList<T> {
+class LinkedList<T> {
     var head: Node<T>?
     
     var count: Int {
@@ -44,7 +44,7 @@ struct LinkedList<T> {
         return count
     }
     
-    mutating func append(data: T?) {
+    func append(data: T?) {
         if head == nil {
             head = Node(data: data)
             return
@@ -56,11 +56,11 @@ struct LinkedList<T> {
         node?.next = Node(data: data)
     }
     
-    mutating func remove() {
+    func remove() {
         if head == nil { return }
         head = head?.next
     }
-    mutating func removeAll() {
+    func removeAll() {
         while head != nil {
             head = head?.next
         }
