@@ -14,7 +14,7 @@ protocol CalculateItemProtocol {
     mutating func enQueue(_ element: Element) -> Bool
 
     /// 가장 먼저 들어온 앞의 큐 제거하고 제거한 큐 반환
-    mutating func deQueue() throws -> Element?
+    mutating func deQueue() throws -> Element
     
     /// 큐가 비우는 함수
     mutating func removeAll() throws

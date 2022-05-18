@@ -26,7 +26,7 @@ extension CalculatorItemQueue: CalculateItemProtocol {
         return true
     }
     
-    mutating func deQueue() throws -> T? {
+    mutating func deQueue() throws -> T {
         guard !doublyLinkedList.isEmpty,
               let element = doublyLinkedList.first else {
             throw QueueError.emptyData
