@@ -55,4 +55,32 @@ class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, 2)
     }
+    
+    // MARK: Test_moveToPreviousness()
+    func testLinkedList의_delets시_previousness가_잘_옮겨지는지() {
+        // given
+        sut.calculateItems.insert(data: 1)
+        sut.calculateItems.insert(data: 2)
+        sut.calculateItems.insert(data: 3)
+        sut.calculateItems.delete()
+        // when
+        let result = sut.calculateItems.previousness?.data
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    
+    func testLinkedList의_마지막_값이_연속으로_삭제_되는지() {
+        // given
+        sut.calculateItems.insert(data: 1)
+        sut.calculateItems.insert(data: 2)
+        sut.calculateItems.insert(data: 3)
+        sut.calculateItems.insert(data: 4)
+        sut.calculateItems.delete()
+        sut.calculateItems.delete()
+        // when
+        let result = sut.calculateItems.tail?.data
+        // then
+        XCTAssertEqual(result, 2)
+    }
 }

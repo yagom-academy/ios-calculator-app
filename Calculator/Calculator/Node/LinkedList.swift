@@ -30,5 +30,16 @@ class LinkedList<T> {
     func delete() {
         previousness?.next = nil
         tail = previousness
+        moveToPreviousness()
+    }
+    
+    func moveToPreviousness() {
+        var current = head
+        var before:Node<T>?
+        while current?.next != nil {
+            before = current
+            current = current?.next
+        }
+        previousness = before
     }
 }
