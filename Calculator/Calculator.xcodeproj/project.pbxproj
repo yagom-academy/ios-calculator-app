@@ -61,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6ACDA4012834D7AC0078A8ED /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		6AE8C0F428335CEE006805EF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -119,6 +126,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				6ACDA4012834D7AC0078A8ED /* Resource */,
 				6AE8C0F428335CEE006805EF /* Model */,
 				6AE8C0F628335CFC006805EF /* View */,
 				6AE8C0F728335D02006805EF /* Controller */,
