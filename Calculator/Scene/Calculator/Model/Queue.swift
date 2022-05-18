@@ -5,29 +5,29 @@
 //  Created by 이은찬 on 2022/05/16.
 //
 class Queue<T: CalculateItem> {
-    private var Queue = LinkedList<T>()
+    private var list = LinkedList<T>()
     
     public var count: Int {
-        return Queue.count
+        return list.count
     }
     
     public var isEmpty: Bool {
-        return Queue.isEmpty
+        return list.isEmpty
     }
     
     public var firstValue: T? {
-        return Queue.returnFirst()?.value
+        return list.returnFirst()?.value
     }
     
     public func enqueue(_ element: T) {
-        Queue.append(element)
+        list.append(element)
     }
     
     public func dequeue() -> T? {
-        return isEmpty ? nil : Queue.removeHead()?.value
+        return isEmpty ? nil : list.removeHead()?.value
     }
     
     public func removeAll() {
-        Queue.removeAll()
+        list.removeAll()
     }
 }
