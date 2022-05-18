@@ -9,7 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
+    // MARK: - Properties
+    
     var sut: CalculatorItemQueue!
+    
+    // MARK: - Action
     
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -19,7 +23,8 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    // MARK: - enqueue
+    // MARK: - enqueue(_:)
+    
     func test_enqueue의아규먼트로_0을_넣었을때_queue가빈배열이면_False() {
         // given
         let number = 0.0
@@ -61,7 +66,8 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    // MARK: - dequeue
+    // MARK: - dequeue()
+    
     func test_dequeue호출시_queue의_요소를_리턴하는지() {
         // given
         let number: Double = 1.0
