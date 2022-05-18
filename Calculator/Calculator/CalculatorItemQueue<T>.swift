@@ -11,7 +11,7 @@ protocol CalculateItem {
     
 }
 
-class CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T>: CalculateItem {
     var linkedList = LinkedList<T>()
     
     func enQueue(_ data: T) {
