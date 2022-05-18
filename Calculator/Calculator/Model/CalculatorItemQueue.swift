@@ -15,6 +15,10 @@ struct CalculatorItemQueue {
     }
     
     mutating func dequeue() -> Double? {
-        return queue.removeFirst()
+        if queue.isEmpty {
+            return nil
+        } else {
+            return queue.removeFirst()
+        }
     }
 }

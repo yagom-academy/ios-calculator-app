@@ -62,7 +62,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     // MARK: - dequeue
-    func test_dequeue호출시_queue의_첫번째요소를_리턴하는지() {
+    func test_dequeue호출시_queue의_요소를_리턴하는지() {
         // given
         let number: Double = 1.0
         sut.enqueue(number)
@@ -72,5 +72,30 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, number)
+    }
+    
+    func test_queue가_빈배열일때_dequeue호출시_nil을_반환하는지() {
+        // given
+        // sut의 초기화시 queue는 빈 배열이 되므로 생략
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_queue의_요소가_여러개일때_dequeue호출시_첫번째요소를_리턴하는지() {
+        // given
+        let firstNumber = 1.0
+        sut.enqueue(firstNumber)
+        sut.enqueue(2.0)
+        sut.enqueue(3.0)
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(firstNumber, result)
     }
 }
