@@ -35,7 +35,9 @@ class LinkedList<T> {
     var head: Node<T>?
     
     var count: Int {
-        guard var node = head else { return 0 }
+        guard var node = head else {
+            return 0
+        }
         var count = 1
         while let next = node.next {
             node = next
