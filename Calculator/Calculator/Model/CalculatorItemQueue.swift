@@ -31,4 +31,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
             return false
         }
     }
+    
+    mutating func resetQueue(){
+        calculateItems.resetLinkedList()
+    }
 }
