@@ -1,5 +1,8 @@
 struct CalculatorItemQueue<T>: CalculateItem {
     private var calculateItems = LinkedList<T>()
+    private var isEmpty: Bool {
+        return (calculateItems.count == 0) ? true : false
+    }
     
     mutating func enqueue(_ element: T) {
         calculateItems.insert(data: element)
@@ -18,18 +21,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() -> T? {
-        if isEmpty() {
+        if isEmpty {
             return nil
         }
         return calculateItems.delete()
-    }
-    
-    mutating func isEmpty() -> Bool {
-        if calculateItems.count == 0 {
-            return true
-        } else {
-            return false
-        }
     }
     
     mutating func reset() {
