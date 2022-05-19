@@ -28,8 +28,6 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_큐에_원소가있을때_isEmpty가_false를_반환() {
-        // given
-        
         // when
         let result = sut.isEmpty
         
@@ -38,8 +36,6 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_peek은_첫번째원소인_5를_보여줌() {
-        // given
-        
         // when
         let result = sut.peek?.value
         
@@ -59,8 +55,6 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue로_큐의첫번째원소인_5를_제거하고_그값을반환() {
-        // given
-        
         // when
         let result = sut.dequeue()?.value
         
