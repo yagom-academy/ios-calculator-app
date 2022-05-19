@@ -4,31 +4,23 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return (calculateItems.count == 0) ? true : false
     }
     
-    mutating func enqueue(_ element: T) {
+    func enqueue(_ element: T) {
         calculateItems.append(data: element)
     }
     
     @discardableResult
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         if isEmpty {
             return nil
         }
         return calculateItems.removeLast()
     }
     
-    mutating func displayItems() -> Array<T?> {
-        var items:Array<T?> = []
-        var current = calculateItems.head
-        if isEmpty == false {
-            (0...calculateItems.count-1).forEach { _ in
-                items.append(current?.data ?? nil)
-                current = current?.next
-            }
-        }
-        return items
+    func displayItems() -> Array<T?> {
+        return calculateItems.showData()
     }
     
-    mutating func reset() {
+    func reset() {
         calculateItems.removeAll()
     }
 }
