@@ -22,3 +22,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         linkedList.peekRemove()
     }
 }
+
+extension Double: CalculateItem {
+    
+}
