@@ -8,21 +8,25 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var formulaQueue = Array<T>()
+    var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {
-        return formulaQueue.isEmpty
+        return linkedList.headIsEmpty
     }
     
-    var peek: T? {
-        return formulaQueue.first
+    var peek: Node<T>? {
+        return linkedList.firstPeek
     }
     
-    mutating func enQueue(_ element: T){
-        formulaQueue.append(element)
+    mutating func enqueue(_ element: T){
+        linkedList.append(data: element)
     }
     
-    mutating func deQueue() -> T? {
-        return isEmpty ? nil : formulaQueue.removeFirst()
+    mutating func dequeue() -> T? {
+        return linkedList.removeFirst()
+    }
+    
+    mutating func removeAll() {
+        linkedList.removeAll()
     }
 }
