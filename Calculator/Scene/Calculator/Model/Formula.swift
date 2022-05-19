@@ -2,8 +2,9 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 이은찬 on 2022/05/19.
+//  Created by 이은찬 on 2022/05/20.
 //
+
 struct Formula {
     var operands = Queue<Double>()
     var operators = Queue<Operator>()
