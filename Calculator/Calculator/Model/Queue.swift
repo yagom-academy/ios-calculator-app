@@ -5,7 +5,7 @@
 //  Created by 전민수 on 2022/05/18.
 //
 struct Queue<Element> {
-    private var enqueueStack: [Element] = []
+    var enqueueStack: [Element] = []
     private var dequeueStack: [Element] = []
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
