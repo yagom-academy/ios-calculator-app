@@ -18,7 +18,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         linkedList.append(data: data)
     }
     
-    func deQueue() {
-        linkedList.remove()
+    func deQueue() -> T? {
+        linkedList.peekRemove()
     }
 }
