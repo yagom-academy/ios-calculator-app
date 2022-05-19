@@ -36,17 +36,15 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     // MARK: Test_dequeue()
-    func testCalculateItems의_마지막_요소가_삭제되는지() {
+    func testCalculateItems의_첫번째_요소가_삭제되는지() {
         //given
         sut.enqueue(1.0)
         sut.enqueue(2.0)
         sut.dequeue()
-        let endIndex = sut.displayItems().endIndex-1
-        print(endIndex)
         //when
-        let result = sut.displayItems()[endIndex]
+        let result = sut.displayItems()
         //then
-        XCTAssertEqual(result, 1.0)
+        XCTAssertEqual(result, [2.0])
     }
     
     // MARK: Test_reset()

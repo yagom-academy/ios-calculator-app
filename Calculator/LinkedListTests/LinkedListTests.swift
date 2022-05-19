@@ -58,23 +58,22 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    // MARK: Test_removeLast()
-    func testLinkedList의_마지막_값이_삭제_되는지() {
+    // MARK: Test_removeFirst()
+    func testLinkedList의_첫번째_값이_삭제_되는지() {
         // given
         sut.append(data: 1)
         sut.append(data: 2)
         sut.append(data: 3)
-        sut.removeLast()
         // when
-        let result = sut.tail?.data
+        let result = sut.removeFirst()
         // then
-        XCTAssertEqual(result, 2)
+        XCTAssertEqual(result, 1)
     }
     
     func testLinkedList가_비어있을_때_삭제해도_count값이_0인지() {
         // given
-        sut.removeLast()
-        sut.removeLast()
+        sut.removeFirst()
+        sut.removeFirst()
         // when
         let result = sut.count
         // then
@@ -83,7 +82,7 @@ class LinkedListTests: XCTestCase {
     
     func testLinkedList가_비어있을_때_nil값을_반환하는지() {
         // given when
-        let result = sut.removeLast()
+        let result = sut.removeFirst()
         // then
         XCTAssertEqual(result, nil)
     }
@@ -91,7 +90,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedList에_값이_1개_있을_때_head가_잘_삭제되는지() {
         // given
         sut.append(data: 1)
-        sut.removeLast()
+        sut.removeFirst()
         // when
         let result = sut.head?.data
         // then
