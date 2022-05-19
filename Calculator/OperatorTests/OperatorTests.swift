@@ -37,7 +37,7 @@ class OperatorTests: XCTestCase {
        
         
         // when
-        sut = .substract
+        sut = .subtract
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
