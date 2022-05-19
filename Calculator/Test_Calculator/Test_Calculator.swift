@@ -33,18 +33,20 @@ class Test_Calculator: XCTestCase {
     }
     
     func test_5689배열이제대로들어가는지() throws {
-        let test = [5, 6, 8, 9] as [Int]
+        let test = 5 as Int
         
         var testqueue = CalculatorItemQueue<Any>()
         
         testqueue.enqueue(test)
-        
-        XCTAssertEqual(testqueue.linkedList.head?.data as! [Int] , [5, 6, 8, 9])
+        testqueue.enqueue(test)
+        testqueue.enqueue(test)
+
+        XCTAssertEqual(testqueue.linkedList.head?.data as! Int , 5)
     }
     
     func test_첫번째값이제거되는지() throws {
         
-        let testqueue = CalculatorItemQueue<Any>()
+        var testqueue = CalculatorItemQueue<Any>()
         testqueue.enqueue(5)
         testqueue.enqueue(6)
 
@@ -55,7 +57,7 @@ class Test_Calculator: XCTestCase {
     
     func test_값들이전체삭제가되는지() throws {
         
-        let testqueue = CalculatorItemQueue<Any>()
+        var testqueue = CalculatorItemQueue<Any>()
         testqueue.enqueue(5)
         testqueue.enqueue(6)
 

@@ -9,14 +9,16 @@ struct LinkedList<T> {
     var head: Node<T>?
     
     mutating func append(data: T?) {
-        let newNode = Node(data: data)
-        
-        guard let node = head else {
-            head = newNode
+        if head == nil {
+            head = Node(data: data)
             return
         }
-
-        node.next = newNode
+        
+        var node = head
+        while let newNode = node?.next {
+            node = newNode
+        }
+        node?.next = Node(data: data)
     }
     
     mutating func removeFirst() {
