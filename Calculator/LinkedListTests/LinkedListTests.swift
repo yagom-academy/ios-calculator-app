@@ -50,21 +50,6 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_add_1과2를넣으면_2의previous노드의value가1인지() {
-        // given
-        let firstInput: Double = 1
-        let secondInput: Double = 2
-        let expectation: Double = 1
-        
-        // when
-        doubleList.add(value: firstInput)
-        doubleList.add(value: secondInput)
-        let result = doubleList.lastNode?.previous?.value
-        
-        // then
-        XCTAssertEqual(expectation, result)
-    }
-    
     func test_remove_firstNode의value를꺼내는지() {
         // given
         let currenNodeValue: [Double] = [1, 2, 3]

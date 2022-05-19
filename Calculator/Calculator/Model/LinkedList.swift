@@ -13,7 +13,7 @@ struct LinkedList<Item: CalculatorItem> {
             lastNode = newNode
         } else {
             lastNode?.next = newNode
-            newNode.previous = lastNode
+            newNode.next = firstNode
             lastNode = newNode
         }
     }
@@ -23,9 +23,9 @@ struct LinkedList<Item: CalculatorItem> {
         
         let node = firstNode
         firstNode = firstNode?.next
-        firstNode?.previous = nil
+        lastNode?.next = firstNode
         
         return node?.value
     }
-    
+
 }
