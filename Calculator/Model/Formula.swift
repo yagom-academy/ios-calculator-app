@@ -5,19 +5,17 @@
 //  Created by NAMU on 2022/05/19.
 //
 
-import UIKit
-
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
-    var operators =  CalculatorItemQueue<Character>()
-    private let defaultOperandsValue = 0.0
+    var operators =  CalculatorItemQueue<Operator>()
     
-    mutating func result() -> Double {
-        var result = operands.dequeue() ?? defaultOperandsValue
-        while !operators.isEmpty() {
-            result = Operator
-                .init(rawValue: operators.dequeue() ?? " ")?
-                .calculate(lhs: result, rhs: operands.dequeue() ?? defaultOperandsValue) ?? defaultOperandsValue
+    mutating func result() throws -> Double {
+        var result = try operands.dequeue()
+        while !operands.isEmpty() {
+            result = try operators.dequeue().calculate(lhs: result, rhs: operands.dequeue())
+        }
+        guard result != Double.infinity else {
+            throw CalculateError.infinityError
         }
         return result
     }

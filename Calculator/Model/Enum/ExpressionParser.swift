@@ -10,10 +10,12 @@ enum ExpressionParser {
         var formula = Formula()
         var removeOperator = input
         
-        componentsByOperators(from: removeOperator).forEach {
+        try? componentsByOperators(from: removeOperator).forEach {
             removeOperator = removeOperator.replacingOccurrences(of: $0, with: " ")
-            let operatorCharacter = Character($0)
-            formula.operators.enqueue(data: operatorCharacter)
+            guard let operators = Operator.init(rawValue: Character($0)) else {
+                throw CalculateError.nilError
+            }
+            formula.operators.enqueue(data: operators )
         }
         
         removeOperator.split(with: " ").forEach {
@@ -21,6 +23,7 @@ enum ExpressionParser {
                 return
             }
             formula.operands.enqueue(data: operand)
+            print(operand)
         }
         
         return formula
