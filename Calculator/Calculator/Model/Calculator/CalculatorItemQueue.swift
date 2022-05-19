@@ -22,6 +22,7 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     mutating func clear() {
         linkedList.removeAll()
     }
+    
     mutating func peek() {
         linkedList.peekFrist()
     }
