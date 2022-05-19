@@ -16,7 +16,7 @@ class CalculatorItemQueueTests: XCTestCase {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
@@ -25,11 +25,11 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_queue에_값을_추가한다() throws {
         // given
         let array = [3.2, 2.0, 3.0, 4.0]
-
+        
         let expectation = 2.0
         // when
         array.forEach { value in
-            sut.enQueue(value)
+            sut.enqueue(value)
         }
         // then
         let result = sut.isEmpty
@@ -42,8 +42,8 @@ class CalculatorItemQueueTests: XCTestCase {
         let secondValue = 2.0
         let expectation = 3.2
         // when
-        sut.enQueue(firstValue)
-        sut.enQueue(secondValue)
+        sut.enqueue(firstValue)
+        sut.enqueue(secondValue)
         // then
         let result = sut.peek
         
@@ -51,30 +51,33 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_queue의_첫_번째_값이_out_되서_반환된다() {
-        // given
-        let array = [3.2, 2.0, 3.0, 4.0]
-
-        let expectation = 3.2
-        // when
-        array.forEach { value in
-            sut.enQueue(value)
-        }
-        
-        // then
-        let result = sut.deQueue()
-        
-        XCTAssertEqual(result, expectation)
+        do {
+            // given
+            let array = [3.2, 2.0, 3.0, 4.0]
+            
+            let expectation = 3.2
+            // when
+            try array.forEach { value in
+                try sut.enqueue(value)
+            }
+            let result = try sut.dequeue()
+            // then
+            XCTAssertEqual(result, expectation)
+            
+        } catch {}
     }
     
     func test_queue의_모든_값을_제거할_수_있다() {
-        // given
-        let array = [3.2, 2.0, 3.0, 4.0]
-
-        // when
-        array.forEach { value in
-            sut.enQueue(value)
-        }
-        sut.removeAll()
+        do {
+            // given
+            let array = [3.2, 2.0, 3.0, 4.0]
+            
+            // when
+            try array.forEach { value in
+                try sut.enqueue(value)
+            }
+            try sut.removeAll()
+        } catch {}
         let result = sut.isEmpty
         
         // then

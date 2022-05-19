@@ -21,12 +21,12 @@ extension CalculatorItemQueue: CalculateItemProtocol {
         return doublyLinkedList.isEmpty
     }
     
-    mutating func enQueue(_ element: T) -> Bool {
+    func enqueue(_ element: T) -> Bool {
         doublyLinkedList.append(element)
         return true
     }
     
-    mutating func deQueue() throws -> T {
+    func dequeue() throws -> T {
         guard !doublyLinkedList.isEmpty,
               let element = doublyLinkedList.first else {
             throw QueueError.emptyData
@@ -34,7 +34,7 @@ extension CalculatorItemQueue: CalculateItemProtocol {
         return doublyLinkedList.remove(element)
     }
     
-    mutating func removeAll() throws {
+    func removeAll() throws {
         guard !doublyLinkedList.isEmpty else {
             throw QueueError.emptyData
         }
