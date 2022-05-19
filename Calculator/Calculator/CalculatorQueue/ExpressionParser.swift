@@ -8,7 +8,7 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let formula = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
         let operators: [String] = componentsByOperators(from: input)
-        let operands: [Double] = input.split{
+        let operands: [Double] = input.split {
             operators.contains(String($0))
         }.map {
             Double($0) ?? 0.0
@@ -27,7 +27,7 @@ enum ExpressionParser {
                 break
             }
         }
-        operands.forEach{
+        operands.forEach {
             formula.operands.enQueue($0)
         }
         return formula

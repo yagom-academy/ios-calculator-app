@@ -14,7 +14,7 @@ struct Formula {
         }
         while true {
             guard operators.count > 0 , operands.count > 0 else {
-                return lhs
+                break
             }
             guard let calcOperators = operators.deQueue()?.value as? Operator else {
                 return lhs
