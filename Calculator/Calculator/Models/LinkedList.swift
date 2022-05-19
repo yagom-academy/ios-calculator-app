@@ -78,33 +78,39 @@ struct LinkedList<T> {
         return _count == 0 ? true : false
     }
     
-    mutating func remove(ofIndex index: Int) {
-        guard !isEmpty() else { fatalError("Index out of range") }
+    mutating func remove(at index: Int) -> Result<T?, LinkedListError> {
+        guard !isEmpty() else { return .failure(LinkedListError.IndexOutOfRange) }
         
         var currentNode: Node? = head
         for _ in (0..<index) {
-            guard let nextCurrentNode = currentNode?.next else { fatalError("Index out of range") }
+            guard let nextCurrentNode = currentNode?.next else {
+                return .failure(LinkedListError.IndexOutOfRange)
+            }
             currentNode = nextCurrentNode
         }
         
+        let removedElement = currentNode?.data
         currentNode?.previous?.next = currentNode?.next
         currentNode?.next?.previous = currentNode?.previous
         currentNode?.previous = nil
         currentNode?.next = nil
         
         _count -= 1
+        return Result.success(removedElement)
     }
     
-    subscript(index: Int) -> T {
-        guard let head = head else { fatalError("Index out of range") }
+    subscript(index: Int) -> Result<T, LinkedListError> {
+        guard let head = head else { return .failure(LinkedListError.IndexOutOfRange) }
         
         var currentNode: Node = head
         for _ in 0..<index {
-            guard let nextCurrentNode = currentNode.next else { fatalError("Index out of range") }
+            guard let nextCurrentNode = currentNode.next else {
+                return .failure(LinkedListError.IndexOutOfRange)
+            }
             currentNode = nextCurrentNode
         }
-
-        return currentNode.data
+        
+        return .success(currentNode.data)
     }
 }
 

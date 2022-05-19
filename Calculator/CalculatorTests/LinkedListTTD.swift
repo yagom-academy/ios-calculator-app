@@ -148,7 +148,7 @@ class LinkedListTTD: XCTestCase {
         XCTAssertEqual(linkedList.count, expectation1)
         
         // what
-        linkedList.remove(ofIndex: index)
+        linkedList.remove(at: index)
         
         // then
         XCTAssertEqual(linkedList.count, expectation2)
@@ -168,7 +168,12 @@ class LinkedListTTD: XCTestCase {
         linkedList.pushAfterTail(element: inputValue3)
         
         // then
-        XCTAssertEqual(linkedList[index], expectation)
+        switch linkedList[index] {
+        case .success(let data):
+            XCTAssertEqual(data, expectation)
+        case .failure(_):
+            break
+        }
     }
     
     func test_반복문사용() throws {
@@ -199,6 +204,40 @@ class LinkedListTTD: XCTestCase {
         // then
         for (i, j) in zip(linkedList, expectation) {
             XCTAssertEqual(i, j)
+        }
+    }
+    
+    func test_서브스크립트_인덱스를벗어나면_에러던지기() throws {
+        // what
+        let inputValues: [Int] = [1, 2, 3, 4]
+        let index: Int = 7
+        
+        // given
+        inputValues.forEach { linkedList.pushAfterTail(element: $0) }
+        
+        // then
+        switch linkedList[index] {
+        case .success(_):
+            break
+        case .failure(let error):
+            XCTAssertEqual(error, LinkedListError.IndexOutOfRange)
+        }
+    }
+    
+    func test_remove메서드_인덱스를벗어나면_에러던지기() throws {
+        // what
+        let inputValues: [Int] = [1, 2, 3, 4]
+        let index: Int = 8
+        
+        // given
+        inputValues.forEach { linkedList.pushAfterTail(element: $0) }
+        
+        // then
+        switch linkedList.remove(at: index) {
+        case .success(_):
+            break
+        case .failure(let error):
+            XCTAssertEqual(error, LinkedListError.IndexOutOfRange)
         }
     }
 }
