@@ -99,7 +99,25 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(secondExpectation, secondResult)
     }
     
-    //TODO: Dequeue -> nil
-    //TODO: enqueue -> dequeue -> isEmpty
+    func test_아무것도_없는상태에서_dequeue를_하면_nil이_나온다() {
+        //given
+        let expectation: Int? = nil
+        //when
+        let result = sut?.dequeue()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_5를_enqueue하고_dequeue하면_queue가_비어있다() {
+        //given
+        let input = 5
+        let expectation: Bool = true
+        //when
+        sut?.enqueue(input)
+        sut?.dequeue()
+        let result = sut?.isEmpty
+        //then
+        XCTAssertEqual(expectation, result)
+    }
 }
 
