@@ -6,7 +6,7 @@
 //
 
 class CalculatorItemQueue: CalculatorItem {
-    private(set) var item = [String?]()
+    private(set) var items = [String?]()
     private var head = 0
     
     func convertToDouble(from data: String) -> Double? {
@@ -17,20 +17,20 @@ class CalculatorItemQueue: CalculatorItem {
     func enqueue(_ data: String) {
         for element in Operator.allCases {
             if element.symbol == data.suffix(1) {
-                item.append(data)
+                items.append(data)
             }
         }
     }
     
     func dequeue() -> String? {
-        guard head < item.count, let element = item[head] else {
+        guard head < items.count, let element = items[head] else {
             return nil
         }
-        item[head] = nil
+        items[head] = nil
         head += 1
         
-        if head > item.count / 2 {
-            item.removeFirst(head)
+        if head > items.count / 2 {
+            items.removeFirst(head)
             head = 0
         }
         return element
