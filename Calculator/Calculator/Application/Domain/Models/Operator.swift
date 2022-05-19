@@ -15,6 +15,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
+        case .subtract:
+            return subtract(lhs: lhs, rhs: rhs)
         default:
             return 0
         }
@@ -22,5 +24,9 @@ enum Operator: Character, CalculateItem, CaseIterable {
     
     private func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
+    }
+    
+    private func subtract(lhs: Double, rhs: Double) -> Double {
+        return lhs - rhs
     }
 }

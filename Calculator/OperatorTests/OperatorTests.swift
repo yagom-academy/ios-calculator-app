@@ -30,4 +30,15 @@ class OperatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, 3.0)
     }
+    
+    func test_calculate에_2와1을_넣고_빼줬을때_1반환() {
+        // given
+        sut = .subtract
+        
+        // when
+        let result = sut.calculate(lhs: 2.0, rhs: 1.0)
+        
+        // then
+        XCTAssertEqual(result, 1.0)
+    }
 }
