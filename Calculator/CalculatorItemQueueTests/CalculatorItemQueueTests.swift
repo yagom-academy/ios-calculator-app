@@ -47,7 +47,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
-    // MARK: Test_resetQueue()
+    // MARK: Test_reset()
     func testCalculateItems_요소가_다_삭제되는지() {
         //given
         sut.enqueue(1.0)
@@ -59,4 +59,24 @@ class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertEqual(result, nil)
     }
+    
+    // MARK: Test_displayItems()
+    func testCalculateItems에_추가한_요소가_다_보여지는지() {
+        //given
+        sut.enqueue(1.0)
+        sut.enqueue(2.0)
+        sut.enqueue(3.0)
+        //when
+        let result = sut.displayItems()
+        //then
+        XCTAssertEqual(result, [1.0,2.0,3.0])
+    }
+
+    func testCalculateItems에_요소가_없을_때_빈배열을_반환하는지() {
+        //given when
+        let result = sut.displayItems()
+        //then
+        XCTAssertEqual(result, [])
+    }
+
 }

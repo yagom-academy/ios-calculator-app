@@ -27,6 +27,18 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return calculateItems.delete()
     }
     
+    mutating func displayItems() -> Array<T?> {
+        var items:Array<T?> = []
+        var current = calculateItems.head
+        if isEmpty == false {
+            (0...calculateItems.count-1).forEach { _ in
+                items.append(current?.data ?? nil)
+                current = current?.next
+            }
+        }
+        return items
+    }
+    
     mutating func reset() {
         calculateItems.reset()
     }
