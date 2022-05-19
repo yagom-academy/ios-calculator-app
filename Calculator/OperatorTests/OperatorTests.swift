@@ -23,5 +23,11 @@ class OperatorTests: XCTestCase {
         sut = nil
     }
     
-    
+    func test_calculate에_1과2를_넣고_더해줬을때_3반환() {
+        // when
+        let result = sut.calculate(lhs: 1.0, rhs: 2.0)
+        
+        // then
+        XCTAssertEqual(result, 3.0)
+    }
 }
