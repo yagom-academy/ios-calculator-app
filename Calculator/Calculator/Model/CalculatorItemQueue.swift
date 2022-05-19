@@ -18,7 +18,7 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
             deQueueStack = enQueueStack.reversed()
             enQueueStack.removeAll()
         }
-        guard let deQueue = deQueueStack.popLast() else { throw QueueError.empty}
+        guard let deQueue = deQueueStack.popLast() else { throw QueueError.unknown }
         return deQueue
     }
     
