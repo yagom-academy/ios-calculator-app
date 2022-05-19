@@ -28,4 +28,19 @@ struct LinkedList<Item: CalculatorItem> {
         return node?.value
     }
 
+    func returnList() -> [Item]? {
+        guard !isEmpty else { return nil }
+        
+        var allNodes: [Item] = []
+        var node: Node? = firstNode
+        
+        repeat {
+            if let nextNode = node {
+                allNodes.append(nextNode.value)
+            }
+            node = node?.next
+        } while node != firstNode
+    
+        return allNodes
+    }
 }

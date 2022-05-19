@@ -80,4 +80,36 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_returnList_전체리스트의첫번째요소가맞는지() {
+        // given
+        let currenNodeValue: [Double] = [1, 2, 3]
+        let expectation: Double = 1
+        
+        // when
+        doubleList.add(value: currenNodeValue[0])
+        doubleList.add(value: currenNodeValue[1])
+        doubleList.add(value: currenNodeValue[2])
+        let list = doubleList.returnList()
+        let result = list?[0]
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_returnList_전체리스트의마지막요소가맞는지() {
+        // given
+        let currenNodeValue: [Double] = [1, 2, 3]
+        let expectation: Double = 3
+        
+        // when
+        doubleList.add(value: currenNodeValue[0])
+        doubleList.add(value: currenNodeValue[1])
+        doubleList.add(value: currenNodeValue[2])
+        let list = doubleList.returnList()
+        let result = list?[2]
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
