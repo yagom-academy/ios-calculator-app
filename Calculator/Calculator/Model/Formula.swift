@@ -7,9 +7,17 @@
 
 struct Formula {
     var operands =  CalculatorItemQueue<Double>()
-    var operators =  CalculatorItemQueue<Double>()
+    var operators =  CalculatorItemQueue<Operator>()
     
-    func result() -> Double {
-        return 0.0
+    mutating func result() throws -> Double {
+        guard var lastResult = try? operands.deQueue() else { throw QueueError.operands }
+        
+        while operands.joinedQueue.isEmpty != true {
+            guard let inputNumber = try? operands.deQueue() else { throw QueueError.operands }
+            guard let inputOperator = try? operators.deQueue() else { throw QueueError.operators }
+            
+            lastResult = inputOperator.calculate(lhs: lastResult, rhs: inputNumber)
+        }
+        return lastResult
     }
 }

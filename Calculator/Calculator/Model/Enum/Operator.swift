@@ -18,7 +18,12 @@ enum Operator: Character, CaseIterable {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
+            do {
+                let divide = try divide(lhs: lhs, rhs: rhs)
+                return divide
+            } catch {
+                return 999999999999999999999.9
+            }
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -32,7 +37,8 @@ enum Operator: Character, CaseIterable {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) -> Double {
+    private func divide(lhs: Double, rhs: Double) throws -> Double {
+        guard rhs != 0 else { throw QueueError.unknown}
         return lhs / rhs
     }
     
