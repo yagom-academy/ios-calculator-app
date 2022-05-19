@@ -78,14 +78,34 @@ struct LinkedList<T> {
         return _count == 0 ? true : false
     }
     
-    mutating func remove(at index: Int) -> Result<T, LinkedListError> {
+    mutating func insert(_ newElement: T, at index: Int) -> Result<T, LinkedListError> {
         guard let head = head else { return .failure(LinkedListError.listIsEmpty) }
         
-        var currentNode: Node = head
+        var oldNode: Node<T> = head
+        let newNode = Node<T>(data: newElement)
+        
         for _ in (0..<index) {
-            guard let nextCurrentNode = currentNode.next else {
-                return .failure(LinkedListError.indexOutOfRange)
-            }
+            guard let nextCurrentNode = oldNode.next else { return .failure(LinkedListError.indexOutOfRange) }
+            oldNode = nextCurrentNode
+        }
+        
+        newNode.next = oldNode
+        newNode.previous = oldNode.previous
+        newNode.previous?.next = newNode
+        oldNode.previous = newNode
+        
+        if index == 0 { self.head = newNode }
+        _count += 1
+    
+        return .success(oldNode.data)
+    }
+    
+    mutating func remove(at index: Int) -> Result<T, LinkedListError> {
+        guard let head = head else { return .failure(LinkedListError.listIsEmpty) }
+        var currentNode: Node = head
+        
+        for _ in (0..<index) {
+            guard let nextCurrentNode = currentNode.next else { return .failure(LinkedListError.indexOutOfRange) }
             currentNode = nextCurrentNode
         }
         
@@ -101,12 +121,10 @@ struct LinkedList<T> {
     
     subscript(index: Int) -> Result<T, LinkedListError> {
         guard let head = head else { return .failure(LinkedListError.listIsEmpty) }
-        
         var currentNode: Node = head
+        
         for _ in 0..<index {
-            guard let nextCurrentNode = currentNode.next else {
-                return .failure(LinkedListError.indexOutOfRange)
-            }
+            guard let nextCurrentNode = currentNode.next else { return .failure(LinkedListError.indexOutOfRange) }
             currentNode = nextCurrentNode
         }
         

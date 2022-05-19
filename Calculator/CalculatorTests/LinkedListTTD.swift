@@ -240,4 +240,56 @@ class LinkedListTTD: XCTestCase {
             XCTAssertEqual(error, LinkedListError.indexOutOfRange)
         }
     }
+    
+    func test_insert메서드로값넣기() throws {
+        // what
+        let defaultValues: [Int] = [1, 2, 3, 4]
+        let inputValue: Int = 7
+        let inputIndex: Int = 2
+        let expectation1: [Int] = defaultValues
+        var expectation2: [Int] = defaultValues
+        expectation2.insert(inputValue, at: inputIndex)
+        
+        // given
+        defaultValues.forEach { linkedList.pushAfterTail(element: $0) }
+        
+        // then
+        for (i, j) in zip(linkedList, expectation1) {
+            XCTAssertEqual(i, j)
+        }
+        
+        // given
+        linkedList.insert(inputValue, at: inputIndex)
+        
+        // then
+        for (i, j) in zip(linkedList, expectation2) {
+            XCTAssertEqual(i, j)
+        }
+    }
+    
+    func test_맨앞에insert() throws {
+        // what
+        let defaultValues: [Int] = [1]
+        let inputValue: Int = 7
+        let inputIndex: Int = 0
+        let expectation1: [Int] = defaultValues
+        var expectation2: [Int] = defaultValues
+        expectation2.insert(inputValue, at: inputIndex)
+        
+        // given
+        defaultValues.forEach { linkedList.pushAfterTail(element: $0) }
+        
+        // then
+        for (i, j) in zip(linkedList, expectation1) {
+            XCTAssertEqual(i, j)
+        }
+        
+        // given
+        linkedList.insert(inputValue, at: inputIndex)
+        
+        // then
+        for (i, j) in zip(linkedList, expectation2) {
+            XCTAssertEqual(i, j)
+        }
+    }
 }
