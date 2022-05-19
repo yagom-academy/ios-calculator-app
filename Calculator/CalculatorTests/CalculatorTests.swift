@@ -23,7 +23,6 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_1을_enqueue하면_1이_있다() {
         //given
-        
         let expectation: Int = 1
         //when
         sut?.enqueue(1)
@@ -103,3 +102,4 @@ class CalculatorItemQueueTests: XCTestCase {
     //TODO: Dequeue -> nil
     //TODO: enqueue -> dequeue -> isEmpty
 }
+
