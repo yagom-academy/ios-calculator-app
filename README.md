@@ -42,6 +42,10 @@
 - `enqueue`, `dequeue`, `peek`, `isEmpty`
 - `clear`, `isFull`, `count`
 - `generics`
+- `split`, `whereSeparator`
+- `enum`, `CaseIterable`, `caseless enum`
+- `closure`, `map`, `filter`, `forEach`, `reduce`, `reduce(into:)`
+- `class diagram`, `static`
 
 # 그라운드 룰
 
