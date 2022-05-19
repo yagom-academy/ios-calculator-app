@@ -40,4 +40,15 @@ class OperatorTest: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
+    func test_두수를_multiply로_연산했을때_곱하기_되어야한다() {
+            //given
+            sut = .multiply
+            
+            //when
+            let result = sut.calculate(lhs: 2, rhs: 3)
+            
+            //then
+            XCTAssertEqual(result, 6)
+        }
+    
 }
