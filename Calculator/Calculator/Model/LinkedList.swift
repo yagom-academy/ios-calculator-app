@@ -11,7 +11,7 @@ struct LinkedList<Item: CalculatorItem> {
         if isEmpty {
             firstNode = newNode
             lastNode = newNode
-        }else {
+        } else {
             lastNode?.next = newNode
             newNode.previous = lastNode
             lastNode = newNode

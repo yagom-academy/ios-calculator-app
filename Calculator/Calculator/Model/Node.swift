@@ -3,7 +3,7 @@ class Node<Item: CalculatorItem> {
     var next: Node?
     var previous: Node?
     
-    init(_ value: Item){
+    init(_ value: Item) {
         self.value = value
     }
 }
