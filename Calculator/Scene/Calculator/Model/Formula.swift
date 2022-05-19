@@ -16,8 +16,10 @@ struct Formula {
                 lhs = operands.dequeue() ?? 0.0
             }
             let rhs = operands.dequeue() ?? 0.0
-            let `operator` = operators.dequeue()
-            lhs = (`operator`?.calculate(lhs: lhs, rhs: rhs)) ?? 0.0
+            if operators.isEmpty == false {
+                let `operator` = operators.dequeue()
+                lhs = (`operator`?.calculate(lhs: lhs, rhs: rhs)) ?? 0.0
+            }            
         }
         return lhs
     }
