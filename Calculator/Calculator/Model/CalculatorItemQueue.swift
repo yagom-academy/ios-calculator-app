@@ -13,7 +13,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         if isEmpty {
             return nil
         }
-        return calculateItems.remove()
+        return calculateItems.removeLast()
     }
     
     mutating func displayItems() -> Array<T?> {

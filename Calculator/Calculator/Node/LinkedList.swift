@@ -17,7 +17,7 @@ class LinkedList<T> {
     }
     
     @discardableResult
-    func remove() -> T? {
+    func removeLast() -> T? {
         let data = tail?.data
         let prevNode = tail?.prev
         
@@ -29,7 +29,6 @@ class LinkedList<T> {
             tail = prevNode
             count -= 1
         }
-        
         return data ?? nil
     }
     
