@@ -1,0 +1,56 @@
+//
+//  ExpressionParserTests.swift
+//  ExpressionParserTests
+//
+//  Created by NAMU on 2022/05/19.
+//
+
+import XCTest
+@testable import Calculator
+
+class ExpressionParserTests: XCTestCase {
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+    }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+    }
+    
+    func test_parse_string변환해서_정상적으로_Formula를반환하는지() {
+        // given
+        let formula = ExpressionParser.parse(from: "123-123+123")
+        
+        // when
+        let resultOperand = Int(formula.operands.peek()!)
+        let resultOperator = formula.operators.peek()
+        
+        //then
+        XCTAssertEqual(resultOperand, 123)
+        XCTAssertEqual(resultOperator, "-")
+    }
+    
+    func test_parse_string변환해서_정상적으로_연산값을_반환하는지() {
+        // given
+        var formula = ExpressionParser.parse(from: "123×123÷123")
+        
+        // when
+        let result = formula.result()
+
+        //then
+        XCTAssertEqual(result, (123.0 * 123.0 / 123.0))
+    }
+    
+    func test_parse_string변환해서_비정상입력에서_연산값을_반환하는지() {
+        
+        // given
+        var formula = ExpressionParser.parse(from: "123×123-")
+        
+        // when
+        let result = formula.result()
+        
+        //then
+        XCTAssertEqual(result, (123.0 * 123.0))
+    }
+}
