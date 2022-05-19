@@ -5,7 +5,7 @@
 //  Created by 전민수 on 2022/05/19.
 //
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         let operators = componentsByOperators(from: input)
         let operands = input.split { operators.contains(String($0))}.map {String($0)}
         var operatorsQueue = CalculatorItemQueue<String>()
@@ -19,7 +19,7 @@ enum ExpressionParser {
         return Formula(operands: operandsQueue, operators: operatorsQueue)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         let operators = input.filter { $0.isNumber == false }.map { String($0) }
         return operators
     }
