@@ -41,4 +41,26 @@ class OperatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1.0)
     }
+    
+    func test_calculate에_4와2를_넣고_나누어줬을때_2반환() {
+        // given
+        sut = .divide
+        
+        // when
+        let result = sut.calculate(lhs: 4.0, rhs: 2.0)
+        
+        // then
+        XCTAssertEqual(result, 2.0)
+    }
+    
+    func test_calculate에_4와2를_넣고_곱해줬을때_8반환() {
+        // given
+        sut = .multiply
+        
+        // when
+        let result = sut.calculate(lhs: 4.0, rhs: 2.0)
+        
+        // then
+        XCTAssertEqual(result, 8.0)
+    }
 }
