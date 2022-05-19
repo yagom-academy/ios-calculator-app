@@ -13,13 +13,16 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
         enQueueStack.append(input)
     }
     
-    mutating func deQueue() throws -> T? {
+    mutating func deQueue() throws -> T {
         if enQueueStack.isEmpty {
             throw QueueError.empty
         }
         deQueueStack = enQueueStack.reversed()
         enQueueStack.removeAll()
-        return deQueueStack.popLast()
+
+        guard let deQueue = deQueueStack.popLast() else { throw QueueError.empty }
+        
+        return deQueue
     }
     
     public mutating func clearAllStacks() {
