@@ -8,18 +8,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
         calculateItems.insert(data: element)
     }
     
-    mutating func showHead() -> (data: T?, next: Node<T>?) {
-        let headData = calculateItems.head?.data
-        let headNext = calculateItems.head?.next
-        return (headData, headNext)
-    }
-    
-    mutating func showTail() -> (data: T?, next: Node<T>?) {
-        let tailData = calculateItems.tail?.data
-        let tailNext = calculateItems.tail?.next
-        return (tailData, tailNext)
-    }
-    
     mutating func dequeue() -> T? {
         if isEmpty {
             return nil

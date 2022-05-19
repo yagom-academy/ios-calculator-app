@@ -20,7 +20,7 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enqueue(1.0)
         //when
-        let result = sut.showHead().data
+        let result = sut.displayItems()[0]
         //then
         XCTAssertEqual(result, 1.0)
     }
@@ -30,9 +30,9 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(1.0)
         sut.enqueue(2.0)
         //when
-        let result = sut.showHead().next?.data
+        let result = sut.displayItems()
         //then
-        XCTAssertEqual(result, 2.0)
+        XCTAssertEqual(result, [1.0, 2.0])
     }
     
     // MARK: Test_dequeue()
@@ -41,8 +41,10 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(1.0)
         sut.enqueue(2.0)
         _ = sut.dequeue()
+        let endIndex = sut.displayItems().endIndex-1
+        print(endIndex)
         //when
-        let result = sut.showTail().data
+        let result = sut.displayItems()[endIndex]
         //then
         XCTAssertEqual(result, 1.0)
     }
@@ -55,9 +57,9 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(3.0)
         sut.reset()
         //when
-        let result = sut.showHead().data
+        let result = sut.displayItems().isEmpty
         //then
-        XCTAssertEqual(result, nil)
+        XCTAssertEqual(result, true)
     }
     
     // MARK: Test_displayItems()
