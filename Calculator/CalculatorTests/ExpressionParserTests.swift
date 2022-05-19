@@ -18,59 +18,75 @@ class ExpressionParserTests: XCTestCase {
     }
     
 // MARK: - ExpressionParser.parse
-    func test_숫자만입력한경우_숫자그대로출력(){
+    func test_숫자만입력한경우_숫자그대로출력() {
         //given
         let input = "15"
+        
         //when
         var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
+        
         //then
         XCTAssertEqual(result, 15.0)
     }
     
-    func test_숫자_연산자_입력한경우_숫자그대로출력(){
+    func test_숫자_연산자_입력한경우_숫자그대로출력() {
         //given
         let input = "15+"
+        
         //when
         var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
+        
         //then
         XCTAssertEqual(result, 15.0)
     }
     
-    func test_숫자_연산자_숫자_입력한경우_연산결과출력(){
+    func test_숫자_연산자_숫자_입력한경우_연산결과출력() {
         //given
         let input = "15+9"
+        
         //when
         var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
+        
         //then
         XCTAssertEqual(result, 24.0)
     }
     
-    func test_숫자_연산자_숫자_연산자_입력한경우_연산결과출력(){
+    func test_숫자_연산자_숫자_연산자_입력한경우_연산결과출력() {
         //given
         let input = "15+9-"
+        
         //when
         var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
+        
         //then
         XCTAssertEqual(result, 24.0)
     }
     
-    func test_숫자_연산자_숫자_연산자_숫자_입력한경우_연산결과출력(){
+    func test_숫자_연산자_숫자_연산자_숫자_입력한경우_연산결과출력() {
         //given
         let input = "15+9/2"
-        //when
         var formula = ExpressionParser.parse(from: input)
+        
+        //when
         let result = formula.result()
+        
         //then
         XCTAssertEqual(result, 12.0)
     }
     
-    func test_0으로나누면_에러처리(){
+    func test_0으로나누면_에러처리() {
         //given
+        let input = "15/0"
+        var formula = ExpressionParser.parse(from: input)
+
         //when
+        let result = formula.result()
+        
         //then
+        XCTAssertEqual(result, 15)
     }
 }
