@@ -10,11 +10,14 @@ import UIKit
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators =  CalculatorItemQueue<Character>()
+    private let defaultOperandsValue = 0.0
     
-    mutating func result() throws -> Double {
-        var result = operands.dequeue() ?? 0.0
+    mutating func result() -> Double {
+        var result = operands.dequeue() ?? defaultOperandsValue
         while !operators.isEmpty() {
-                result = Operator.init(rawValue: operators.dequeue()!)?.calculate(lhs: result, rhs: operands.dequeue() ?? 0.0) ?? 0.0
+            result = Operator
+                .init(rawValue: operators.dequeue() ?? " ")?
+                .calculate(lhs: result, rhs: operands.dequeue() ?? defaultOperandsValue) ?? defaultOperandsValue
         }
         return result
     }

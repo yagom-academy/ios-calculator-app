@@ -6,25 +6,28 @@
 //
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    private var arrayList = [T]()
+    private var linkedList = LinkedList<T>()
     
     func peek() -> T? {
-        arrayList.first
+        linkedList.peek()
     }
     
     mutating func enqueue(data: T) {
-        arrayList.append(data)
+        linkedList.append(data: data)
     }
     
     mutating func dequeue() -> T? {
-        arrayList.removeFirst()
+        guard let number = linkedList.removeFirst() else{
+            return nil
+        }
+        return number
     }
     
     func isEmpty() -> Bool {
-        arrayList.isEmpty
+        linkedList.isEmpty()
     }
     
     mutating func removeAll() {
-        arrayList.removeAll()
+        linkedList.removeAll()
     }
 }
