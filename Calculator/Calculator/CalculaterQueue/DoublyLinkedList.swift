@@ -11,8 +11,6 @@ final class DoublyLinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
-    init() {}
-    
     var isEmpty: Bool {
         return head == nil
     }

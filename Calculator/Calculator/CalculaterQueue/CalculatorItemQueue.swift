@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+final class CalculatorItemQueue<T> {
     private let doublyLinkedList = DoublyLinkedList<T>()
     init() {}
 }
