@@ -22,7 +22,13 @@ struct Formula {
             guard let rhs = operands.deQueue()?.value as? Double else {
                 return lhs
             }
-            lhs = calcOperators.calculate(lhs: lhs, rhs: rhs)
+            do {
+                try lhs = calcOperators.calculate(lhs: lhs, rhs: rhs)
+            } catch CalculatorError.divideByZero {
+                debugPrint("CalculatorError.divideByZero")
+            } catch {
+                debugPrint("Unknown Error")
+            }
         }
         return lhs
     }

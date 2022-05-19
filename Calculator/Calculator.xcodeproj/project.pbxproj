@@ -30,6 +30,8 @@
 		4520B20F2836943800652886 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4520B20E2836943800652886 /* ExpressionParser.swift */; };
 		4520B2102836943800652886 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4520B20E2836943800652886 /* ExpressionParser.swift */; };
 		4520B2132836959000652886 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4520B2112836959000652886 /* ExpressionParserTests.swift */; };
+		4520B2162836C50E00652886 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4520B2152836C50E00652886 /* CalculatorError.swift */; };
+		4520B2172836C50E00652886 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4520B2152836C50E00652886 /* CalculatorError.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -64,6 +66,7 @@
 		4520B20B283651FD00652886 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4520B20E2836943800652886 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		4520B2112836959000652886 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		4520B2152836C50E00652886 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 				4520B1F52834121900652886 /* Node.swift */,
 				4520B20128362F6800652886 /* Formula.swift */,
 				4520B20E2836943800652886 /* ExpressionParser.swift */,
+				4520B2152836C50E00652886 /* CalculatorError.swift */,
 			);
 			path = CalculatorQueue;
 			sourceTree = "<group>";
@@ -283,6 +287,7 @@
 				4520B20A283651DB00652886 /* Double.swift in Sources */,
 				4520B2132836959000652886 /* ExpressionParserTests.swift in Sources */,
 				4520B20328362F6800652886 /* Formula.swift in Sources */,
+				4520B2172836C50E00652886 /* CalculatorError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +300,7 @@
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				4520B1F92834126100652886 /* CalculatorItemProtocol.swift in Sources */,
 				4520B1FA2834126300652886 /* CalculatorItemQueue.swift in Sources */,
+				4520B2162836C50E00652886 /* CalculatorError.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				4520B1FC2835116200652886 /* Operator.swift in Sources */,
 				4520B1F82834125E00652886 /* CalculatorList.swift in Sources */,
