@@ -2,7 +2,7 @@ class LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     private(set) var count = 0
-
+    
     func append(data: T) {
         count += 1
         if head == nil {
@@ -36,5 +36,19 @@ class LinkedList<T> {
         head = nil
         tail = nil
         count = 0
+    }
+    
+    func showData() -> Array<T?> {
+        if count == 0 {
+            return []
+        }
+        
+        var data:Array<T?> = []
+        var current = head
+        (0...count-1).forEach { _ in
+            data.append(current?.data ?? nil)
+            current = current?.next
+        }
+        return data
     }
 }
