@@ -6,6 +6,6 @@
 //
 extension String: CalculatorItem {
     func split(with target: Character) -> [String] {
-        return [String()]
+        return self.components(separatedBy: String(target))
     }
 }
