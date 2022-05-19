@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F54F1D6283628B80095171B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54F1D5283628B80095171B /* Double+Extensions.swift */; };
+		4F54F1D8283636E00095171B /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54F1D7283636E00095171B /* Operator.swift */; };
 		4FAB83D92832F7200023B8E8 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB83D82832F7200023B8E8 /* Queue.swift */; };
 		4FAB83DB2832F8C90023B8E8 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB83DA2832F8C90023B8E8 /* CalculateItem.swift */; };
 		4FAB83ED2832FBB40023B8E8 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB83EC2832FBB40023B8E8 /* CalculatorItemQueue.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		4F54F1D5283628B80095171B /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		4F54F1D7283636E00095171B /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4FAB83D82832F7200023B8E8 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		4FAB83DA2832F8C90023B8E8 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		4FAB83EC2832FBB40023B8E8 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				4FAB83EC2832FBB40023B8E8 /* CalculatorItemQueue.swift */,
+				4F54F1D7283636E00095171B /* Operator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				4F54F1D6283628B80095171B /* Double+Extensions.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				4F54F1D8283636E00095171B /* Operator.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				4FAB83D92832F7200023B8E8 /* Queue.swift in Sources */,
 			);
