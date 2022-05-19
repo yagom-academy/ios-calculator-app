@@ -20,12 +20,15 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() {
-        if head == nil && head?.next == nil {
+        if head?.next == nil {
             head = nil
             return
         }
-        
         head = head?.next
+    }
+    
+    mutating func peekFrist() -> T? {
+        return head?.data
     }
     
     mutating func removeAll() {
