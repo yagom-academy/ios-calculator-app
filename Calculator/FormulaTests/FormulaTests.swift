@@ -16,9 +16,25 @@ class LinkedListTests: XCTestCase {
     }
     
     // MARK: Test_result()
-    func test_operands와_operators의_값을_하나씩_가져올_있는지() {
+    func test_operands의_더한_값이_반환되는지() {
         // given
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue("+")
         // when
+        let result = sut.result()
         // then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_operators에_이상한_연산자가_올_때_0이_반환되는지() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue("")
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, 0)
     }
 }
