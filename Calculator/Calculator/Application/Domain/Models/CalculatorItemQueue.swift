@@ -16,7 +16,7 @@ struct CalculatorItemQueue<T>: Queue where T: CalculateItem {
         return array.isEmpty
     }
     
-    var peek: Element? {
+    var peek: T? {
         return array.first
     }
     
