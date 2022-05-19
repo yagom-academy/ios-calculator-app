@@ -3,7 +3,7 @@ class LinkedList<T> {
     private(set) var tail: Node<T>?
     private(set) var count = 0
 
-    func insert(data: T) {
+    func append(data: T) {
         count += 1
         if head == nil {
             head = Node(data: data, next: nil, prev: nil)
@@ -17,12 +17,12 @@ class LinkedList<T> {
     }
     
     @discardableResult
-    func delete() -> T? {
+    func remove() -> T? {
         let data = tail?.data
         let prevNode = tail?.prev
         
         if count  == 1 {
-            reset()
+            removeAll()
         } else if count > 1 {
             prevNode?.next = nil
             tail?.prev = nil
@@ -33,7 +33,7 @@ class LinkedList<T> {
         return data ?? nil
     }
     
-    func reset() {
+    func removeAll() {
         head = nil
         tail = nil
         count = 0

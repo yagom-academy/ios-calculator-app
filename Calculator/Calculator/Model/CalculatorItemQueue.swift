@@ -5,7 +5,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func enqueue(_ element: T) {
-        calculateItems.insert(data: element)
+        calculateItems.append(data: element)
     }
     
     @discardableResult
@@ -13,7 +13,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         if isEmpty {
             return nil
         }
-        return calculateItems.delete()
+        return calculateItems.remove()
     }
     
     mutating func displayItems() -> Array<T?> {
@@ -29,6 +29,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func reset() {
-        calculateItems.reset()
+        calculateItems.removeAll()
     }
 }
