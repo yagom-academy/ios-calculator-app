@@ -98,14 +98,14 @@
 		20ABBDAC283255CD003675B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20EB974828360F5400FD5E0D /* ExpressionParser.swift */,
+				20EB974628360D9300FD5E0D /* Formula.swift */,
 				20ABBDA9283255B7003675B9 /* CalculatorItemQueue.swift */,
 				20F263082834B671009AD595 /* Queue.swift */,
-				20ABBDAD2832563F003675B9 /* CalculateItem.swift */,
 				20EB974028360B2E00FD5E0D /* Operator.swift */,
+				20ABBDAD2832563F003675B9 /* CalculateItem.swift */,
 				20EB974228360BEF00FD5E0D /* Double.swift */,
 				20EB974428360C4C00FD5E0D /* String.swift */,
-				20EB974628360D9300FD5E0D /* Formula.swift */,
-				20EB974828360F5400FD5E0D /* ExpressionParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

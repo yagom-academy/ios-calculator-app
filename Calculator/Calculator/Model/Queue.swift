@@ -6,7 +6,7 @@
 //
 struct Queue<Element> {
     var enqueueStack: [Element] = []
-    private var dequeueStack: [Element] = []
+    var dequeueStack: [Element] = []
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }

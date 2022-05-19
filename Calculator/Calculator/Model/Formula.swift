@@ -5,18 +5,19 @@
 //  Created by 전민수 on 2022/05/19.
 //
 struct Formula {
-    let operands: CalculatorItemQueue<Double>
-    let operators: CalculatorItemQueue<String>
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<String>
     
-    func result() -> Double {
-        let `operator` = operators.queue.enqueueStack[0]
-        let operatorIntoEnumCase = Operator(rawValue: Character(`operator`))
-        let leftOperand = operands.queue.enqueueStack[0]
-        let rightOperand = operands.queue.enqueueStack[1]
-        
-        let result = operatorIntoEnumCase?.calculate(lhs: leftOperand, rhs: rightOperand)
-        
-        return result ?? 0
+    mutating func result() -> Double {
+        var result = operands.queue.dequeue() ?? 0.0
+       
+        while operators.queue.isEmpty == false {
+            let `operator` = operators.queue.dequeue() ?? ""
+            let operatorCase = Operator(rawValue: Character(`operator`))
+            
+            result = operatorCase?.calculate(lhs: result, rhs: operands.queue.dequeue() ?? 0.0) ?? 0.0
+            }
+        return result
     }
 }
 
