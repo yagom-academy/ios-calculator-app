@@ -12,12 +12,12 @@ class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>?
     
     override func setUpWithError() throws {
-        super.try setUpWithError()
+        try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
     
     override func tearDownWithError() throws {
-        super.try tearDownWithError()
+        try super.tearDownWithError()
         sut = nil
     }
     
