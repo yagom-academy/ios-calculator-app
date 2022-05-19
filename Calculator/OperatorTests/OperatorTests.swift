@@ -53,6 +53,17 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 2.0)
     }
     
+    func test_calculate에서_0으로나눌경우_오류와함께_나누기이전수를_반환() {
+        // given
+        sut = .divide
+        
+        // when
+        let result = sut.calculate(lhs: 4.0, rhs: 0.0)
+        
+        // then
+        XCTAssertEqual(result, 4.0)
+    }
+    
     func test_calculate에_4와2를_넣고_곱해줬을때_8반환() {
         // given
         sut = .multiply

@@ -33,6 +33,11 @@ enum Operator: Character, CalculateItem, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
+        guard rhs != 0 else {
+            // TODO: 구체적인 작동방식이 정해진 이후 적절한 에러 핸들링
+            print("0으로 나눌 수 없습니다.")
+            return lhs
+        }
         return lhs / rhs
     }
     
