@@ -7,19 +7,19 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: CalculatorItem {
+struct CalculatorItemQueue<T>: CalculatorItem {
 
     var linkedList = LinkedList<T>()
     
-    public func enqueue(_ element: T) {
+    mutating func enqueue(_ element: T) {
         linkedList.append(data: element)
     }
     
-    public func dequeue() {
+    mutating func dequeue() {
         linkedList.removeFirst()
     }
     
-    public func clear() {
+    mutating func clear() {
         linkedList.removeAll()
     }
 }
