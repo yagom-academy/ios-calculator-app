@@ -6,16 +6,27 @@
 //
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
-        let inputData = componentsByOperators(from: input)
-        // TODO: 오퍼레이터와 숫자가 분리된 배열이 넘어오면 알맞은 큐에 넣어주는 작업을 수행한다
+        let operators = componentsByOperators(from: input)
+        let operands = input.split { operators.contains(String($0)) }.map { String($0) }
+        
+        operators.forEach {
+            if let `operator` = Operator(rawValue: Character($0)) {
+                formula.operators.enqueue(`operator`)
+            }
+        }
+        operands.forEach {
+            if let operand = Double($0) {
+                formula.operands.enqueue(operand)
+            }
+        }
         
         return formula
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
-        // TODO: 오퍼레이터와 숫자를 분리해준다
-        return []
+    private static func componentsByOperators(from input: String) -> [String] {
+        let operators = input.filter { !$0.isNumber }.map { String($0) }
+        return operators
     }
 }
