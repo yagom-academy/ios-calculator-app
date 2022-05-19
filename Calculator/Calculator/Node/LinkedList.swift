@@ -1,52 +1,41 @@
 class LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
-    private(set) var previousness: Node<T>?
     private(set) var count = 0
 
     func insert(data: T) {
         count += 1
         if head == nil {
-            head = Node(data: data, next: nil)
-            previousness = head
+            head = Node(data: data, next: nil, prev: nil)
             tail = head
             return
         }
         
-        tail?.next = Node(data: data, next: nil)
-        previousness = tail
-        tail = tail?.next
+        let newNode = Node(data: data, next: nil, prev: tail)
+        tail?.next = newNode
+        tail = newNode
     }
     
+    @discardableResult
     func delete() -> T? {
         let data = tail?.data
-        count -= 1
-        previousness?.next = nil
-        tail = previousness
+        let prevNode = tail?.prev
         
-        if count == 0 {
+        if count  == 1 {
             reset()
         } else if count > 1 {
-            moveToPreviousness()
+            prevNode?.next = nil
+            tail?.prev = nil
+            tail = prevNode
+            count -= 1
         }
         
         return data ?? nil
     }
     
-    func moveToPreviousness() {
-        var current = head
-        var before:Node<T>?
-        (0...count-2).forEach { _ in
-            before = current
-            current = current?.next
-        }
-        previousness = before
-    }
-    
     func reset() {
         head = nil
         tail = nil
-        previousness = nil
         count = 0
     }
 }
