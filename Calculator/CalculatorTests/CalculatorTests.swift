@@ -33,7 +33,7 @@ class CalculatorTests: XCTestCase {
         
         calculator.enqueue(number)
         
-        XCTAssertEqual(length, calculator.item.count)
+        XCTAssertEqual(length, calculator.items.count)
     }
     
     func test_item리스트의_첫번째_요소를_반환() {
@@ -47,5 +47,19 @@ class CalculatorTests: XCTestCase {
         let result = calculator.dequeue()
         
         XCTAssertEqual(returnNumber, result)
+    }
+    
+    func test_items의_item을_전부제거() {
+        let number1 = "123+"
+        let number2 = "456-"
+        let number3 = "789*"
+        
+        calculator.enqueue(number1)
+        calculator.enqueue(number2)
+        calculator.enqueue(number3)
+        
+        calculator.clearAllItem()
+        
+        XCTAssertTrue(calculator.items.isEmpty)
     }
 }
