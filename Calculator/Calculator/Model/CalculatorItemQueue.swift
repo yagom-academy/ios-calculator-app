@@ -35,4 +35,9 @@ class CalculatorItemQueue: CalculatorItem {
         }
         return element
     }
+    
+    func clearAllItem() {
+        guard !items.isEmpty else { return }
+        items.removeAll()
+    }
 }
