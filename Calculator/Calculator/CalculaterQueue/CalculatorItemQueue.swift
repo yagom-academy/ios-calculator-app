@@ -7,14 +7,17 @@
 
 import Foundation
 
-final class CalculatorItemQueue<T> {
+final class CalculatorItemQueue<T: Equatable> {
     private let doublyLinkedList = DoublyLinkedList<T>()
-    init() {}
 }
 
 extension CalculatorItemQueue: CalculateItemProtocol {
-    var peek: T? {
+    var peekFirst: T? {
         return doublyLinkedList.first?.value
+    }
+    
+    var peekLast: T? {
+        return doublyLinkedList.last?.value
     }
     
     var isEmpty: Bool {
@@ -42,3 +45,9 @@ extension CalculatorItemQueue: CalculateItemProtocol {
     }
 }
 
+
+extension CalculatorItemQueue {
+    subscript (index: Int) -> T? {
+         return doublyLinkedList[index]
+     }
+}

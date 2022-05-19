@@ -7,9 +7,10 @@
 
 import Foundation
 
-final class DoublyLinkedList<T> {
+final class DoublyLinkedList<T: Equatable> {
     private var head: Node<T>?
-    private var tail: Node<T>?
+    private weak var tail: Node<T>?
+    
     
     var isEmpty: Bool {
         return head == nil
@@ -17,6 +18,48 @@ final class DoublyLinkedList<T> {
     
     var first: Node<T>? {
         return head
+    }
+    
+    var last: Node<T>? {
+        return tail
+    }
+}
+
+extension DoublyLinkedList {
+    subscript(index: Int) -> T? {
+        guard var node = self.head else {
+            return nil
+        }
+        
+        for _ in 1...index {
+            allocate(to: &node)
+        }
+        return node.value
+    }
+}
+
+private extension DoublyLinkedList {
+    func allocate(to currentNode: inout Node<T>) {
+        if let nextCurrentNode = currentNode.next {
+            currentNode = nextCurrentNode
+        }
+    }
+    
+    @discardableResult
+    func compare(node: Node<T>, and value: T) -> Bool {
+        guard node.value == value else {
+            return false
+        }
+        return true
+    }
+    
+    @discardableResult
+    func allocate(_ value: T, to node: inout Node<T>) -> Bool {
+        guard let next = node.next else {
+            return false
+        }
+        node = next
+        return false
     }
 }
 
@@ -33,6 +76,30 @@ extension DoublyLinkedList {
         newNode.previous = tailNode
         tailNode.next = newNode
         tail = newNode
+    }
+    
+    func size() -> Int {
+        guard var node = self.head else {
+            return 0
+        }
+        
+        var count = 1
+        while let nextNode = node.next {
+            count += 1
+            node = nextNode
+        }
+        return count
+    }
+    
+    func contains(_ value: T) -> Bool {
+        guard var node = self.head else {
+            return false
+        }
+        
+        while true {
+            compare(node: node, and: value)
+            allocate(value, to: &node)
+        }
     }
     
     func remove(_ node: Node<T>) -> T {

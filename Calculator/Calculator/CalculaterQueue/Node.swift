@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Node<T> {
+final class Node<T: Equatable> {
     var value: T
     var previous: Node<T>?
     var next: Node<T>?

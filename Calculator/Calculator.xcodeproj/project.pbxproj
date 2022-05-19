@@ -141,7 +141,6 @@
 				903BD0622833706500324F07 /* Node.swift */,
 				9006758F28337A1F00CC8D74 /* DoublyLinkedList.swift */,
 				90067591283398A000CC8D74 /* CalculatorItemQueue.swift */,
-				90067593283398F500CC8D74 /* CalculateItemProtocol.swift */,
 			);
 			path = CalculaterQueue;
 			sourceTree = "<group>";
@@ -184,6 +183,7 @@
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				90067593283398F500CC8D74 /* CalculateItemProtocol.swift */,
 				903BD0612833704100324F07 /* CalculaterQueue */,
 				90224FB1283228AA00B57294 /* View */,
 			);
