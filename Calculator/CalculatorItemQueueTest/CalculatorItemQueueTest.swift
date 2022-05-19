@@ -67,4 +67,12 @@ class CalculatorItemQueueTest: XCTestCase {
         
         XCTAssertEqual(sut.linkedList.count, 0)
     }
+    func test_리스트에서_빠진_헤드값을_그대로_반환하는지() {
+        sut.linkedList.append(data: 1)
+        sut.linkedList.append(data: 2)
+        sut.linkedList.append(data: 3)
+        let test = sut.linkedList.peekRemove()
+        
+        XCTAssertEqual(test, 1)
+}
 }
