@@ -35,6 +35,10 @@ class LinkedList<T> {
         node?.next = Node(data: data)
     }
     
+    func peek() -> T? {
+        return head?.data
+    }
+    
     func remove() {
         if head == nil {
             return
