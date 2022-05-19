@@ -10,13 +10,18 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() -> Double {
-        guard let lhs = operands.dequeue(),
-              let rhs = operands.dequeue(),
-              let operation = operators.dequeue() else {
-            // TODO: 적절한 에러 핸들링
+        guard var result = operands.dequeue() else {
+            // TODO: 값이 없을 때 적절한 에러 핸들링
+            print("주어진 값이 없습니다.")
             return 0
         }
         
-        return operation.calculate(lhs: lhs, rhs: rhs)
+        while !operators.isEmpty && !operands.isEmpty {
+            let nextOperator = operators.dequeue()
+            let nextOperand = operands.dequeue()
+            result = nextOperator?.calculate(lhs: result, rhs: nextOperand ?? 0) ?? result
+        }
+        
+        return result
     }
 }
