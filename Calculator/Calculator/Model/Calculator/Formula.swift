@@ -6,12 +6,12 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Any>
-    var operators: CalculatorItemQueue<Any>
+    var operands: CalculatorItemQueue = CalculatorItemQueue<Double>()
+    var operators: CalculatorItemQueue = CalculatorItemQueue<Any>()
     
-    func result() -> Double {
-        var resultValue: Double?
+    mutating func result() -> Double {
+        let resultValue = operands.doFristPeekAndremove()
         
-        return resultValue!
+        return resultValue
     }
 }

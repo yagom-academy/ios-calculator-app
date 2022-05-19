@@ -23,9 +23,12 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         linkedList.removeAll()
     }
     
-    mutating func peek() {
-        linkedList.peekFrist()
+    mutating func peek() -> Double {
+        return linkedList.peekFrist() as! Double
     }
     
+    mutating func doFristPeekAndremove() -> Double {
+        return linkedList.peekAndRemove() as! Double
+    }
 }
 

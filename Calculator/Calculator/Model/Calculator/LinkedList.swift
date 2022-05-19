@@ -33,6 +33,11 @@ struct LinkedList<T> {
         return head?.data
     }
     
+    mutating func peekAndRemove() -> T? {
+        removeFirst()
+        return head?.data
+    }
+    
     mutating func removeAll() {
         head = nil
     }
