@@ -32,6 +32,3 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return dequeueStack.popLast()
     }
 }
-
-
-
