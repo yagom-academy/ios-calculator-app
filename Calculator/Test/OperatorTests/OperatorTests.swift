@@ -16,7 +16,7 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.add
         // when
-        let result = operatorSymbols.calculate(lhs: 1, rhs: 2)
+        let result = try? operatorSymbols.calculate(lhs: 1, rhs: 2)
         // then
         XCTAssertEqual(result,3)
     }
@@ -26,8 +26,26 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.subtract
         // when
-        let result = operatorSymbols.calculate(lhs: 4, rhs: 2)
+        let result = try? operatorSymbols.calculate(lhs: 4, rhs: 2)
         // then
         XCTAssertEqual(result,2)
+    }
+    
+    // MARK: Test_divide(lhs: Double, rhs: Double)
+    func testOperator의_divide함수_실행시_나눈_값이_잘_반환되는지() {
+        // given
+        let operatorSymbols = Operator.divide
+        // when
+        let result = try? operatorSymbols.calculate(lhs: 4, rhs: 2)
+        // then
+        XCTAssertEqual(result,2)
+    }
+    
+    func test_0으로_나눴을_때_에러가_반환되는지() {
+        // given
+        let operatorSymbols = Operator.divide
+        // when
+        // then
+        XCTAssertThrowsError(try operatorSymbols.calculate(lhs: 0, rhs: 2))
     }
 }
