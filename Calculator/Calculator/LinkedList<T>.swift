@@ -45,6 +45,13 @@ class LinkedList<T> {
         }
         head = head?.next
     }
+    
+    func peekRemove() -> T? {
+        let firstValue = peek()
+        remove()
+        return firstValue
+    }
+    
     func removeAll() {
         while head != nil {
             head = head?.next
