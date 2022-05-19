@@ -16,8 +16,18 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.add
         // when
-        let result = operatorSymbols.add(lhs: 1, rhs: 2)
+        let result = operatorSymbols.calculate(lhs: 1, rhs: 2)
         // then
         XCTAssertEqual(result,3)
+    }
+    
+    // MARK: Test_subtract(lhs: Double, rhs: Double)
+    func testOperator의_subtract함수_실행시_뺀_값이_잘_반환되는지() {
+        // given
+        let operatorSymbols = Operator.subtract
+        // when
+        let result = operatorSymbols.calculate(lhs: 4, rhs: 2)
+        // then
+        XCTAssertEqual(result,2)
     }
 }
