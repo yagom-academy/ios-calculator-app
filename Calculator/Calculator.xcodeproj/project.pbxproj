@@ -73,18 +73,11 @@
 		B45F0D1C28336339007C2CD8 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				B4F29051283209A400B92038 /* LinkedListTTD.swift */,
+				B45F0D2D28337493007C2CD8 /* CalculatorItemQueueTDD.swift */,
 				B45F0D1D28336339007C2CD8 /* CalculatorTests.swift */,
 			);
 			path = CalculatorTests;
-			sourceTree = "<group>";
-		};
-		B45F0D2628336348007C2CD8 /* UnitTest */ = {
-			isa = PBXGroup;
-			children = (
-				B4F29051283209A400B92038 /* LinkedListTTD.swift */,
-				B45F0D2D28337493007C2CD8 /* CalculatorItemQueueTDD.swift */,
-			);
-			path = UnitTest;
 			sourceTree = "<group>";
 		};
 		B4F2904A2832072200B92038 /* Views */ = {
@@ -101,7 +94,6 @@
 				B4F2904D2832090A00B92038 /* LinkedList.swift */,
 				B45F0D2728337406007C2CD8 /* CalculateItem.swift */,
 				B45F0D2A28337422007C2CD8 /* CalculatorItemQueue.swift */,
-				B45F0D2628336348007C2CD8 /* UnitTest */,
 			);
 			path = Models;
 			sourceTree = "<group>";
