@@ -42,10 +42,27 @@ class LinkedListTests: XCTestCase {
         sut.insert(data: 1)
         sut.insert(data: 2)
         sut.insert(data: 3)
-        _ = sut.delete()
+        sut.delete()
         // when
         let result = sut.tail?.data
         // then
         XCTAssertEqual(result, 2)
+    }
+    
+    func testLinkedList가_비어있을_때_삭제해도_count값이_0인지() {
+        // given
+        sut.delete()
+        sut.delete()
+        // when
+        let result = sut.count
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func testLinkedList가_비어있을_때_nil값을_반환하는지() {
+        // given when
+        let result = sut.delete()
+        // then
+        XCTAssertEqual(result, nil)
     }
 }
