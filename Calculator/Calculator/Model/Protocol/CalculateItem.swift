@@ -6,13 +6,3 @@
 //
 
 protocol CalculateItem { }
-
-extension CalculateItem {
-
-}
-
-extension CalculateItem {
-    func split(with target: Character) -> [String] {
-        return [""]
-    }
-}
