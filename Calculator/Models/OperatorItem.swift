@@ -9,17 +9,17 @@ import Foundation
 
 enum OperatorItem {
     case add
-    case substract
-    case multiple
+    case subtract
+    case multiply
     case devide
     
-    var name: String {
+    var symbol: String {
         switch self {
         case .add:
             return "+"
-        case .substract:
+        case .subtract:
             return "-"
-        case .multiple:
+        case .multiply:
             return "*"
         case .devide:
             return "/"

@@ -12,10 +12,12 @@ class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>?
     
     override func setUpWithError() throws {
+        super.try setUpWithError()
         sut = CalculatorItemQueue()
     }
     
     override func tearDownWithError() throws {
+        super.try tearDownWithError()
         sut = nil
     }
     
@@ -50,7 +52,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut?.enqueue(input)
         let result = sut?.isEmpty
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(expectation, result)
     }
     
     func test_1과3을_넣으면_count가_2다() {
@@ -96,7 +98,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let firstResult = sut?.dequeue()
         let secondResult = sut?.dequeue()
         //then
-        XCTAssertEqual(firstExpectation, firstResult!)
-        XCTAssertEqual(secondResult, secondExpectation)
+        XCTAssertEqual(firstExpectation, firstResult)
+        XCTAssertEqual(secondExpectation, secondResult)
     }
 }

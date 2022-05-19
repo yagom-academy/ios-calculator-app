@@ -9,34 +9,30 @@ import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
     
-    private var firstQueue: [T] = []
-    private var secondQueue: [T] = []
+    private var inStackItems: [T] = []
+    private var outStackItems: [T] = []
     
     var count: Int {
-        return firstQueue.count + secondQueue.count
+        return inStackItems.count + outStackItems.count
     }
     
     var isEmpty: Bool {
-        return firstQueue.isEmpty && secondQueue.isEmpty
+        return inStackItems.isEmpty && outStackItems.isEmpty
     }
     
     var peek: T? {
-        return firstQueue.isEmpty ? secondQueue.last : firstQueue.first
+        return inStackItems.isEmpty ? outStackItems.last : inStackItems.first
     }
     
     mutating func enqueue(_ element: T) {
-        firstQueue.append(element)
+        inStackItems.append(element)
     }
     
     mutating func dequeue() -> T? {
-        if secondQueue.isEmpty {
-            secondQueue = firstQueue.reversed()
-            firstQueue.removeAll()
+        if outStackItems.isEmpty {
+            outStackItems = inStackItems.reversed()
+            inStackItems.removeAll()
         }
-        return secondQueue.popLast()
+        return outStackItems.popLast()
     }
-}
-
-extension Int: CalculateItem {
-    
 }
