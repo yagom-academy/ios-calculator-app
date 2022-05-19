@@ -5,16 +5,16 @@
 //  Created by Kiwi on 2022/05/17.
 //
 
-struct CalculatorItemQueue<T> : CalculateItem{
+struct CalculatorItemQueue<T>: CalculateItem{
     private var list = Linkedlist<T>()
-
+    
     var isEmpty: Bool {
-               return list.isEmpty
-           }
+        return list.isEmpty
+    }
     
     mutating func enqueue(data: T) {
-           list.append(data: data)
-       }
+        list.append(data: data)
+    }
     
     mutating func dequeue() -> T? {
         list.removeFirst()
