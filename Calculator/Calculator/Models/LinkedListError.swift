@@ -1,3 +1,4 @@
 enum LinkedListError: Error {
-    case IndexOutOfRange
+    case listIsEmpty
+    case indexOutOfRange
 }

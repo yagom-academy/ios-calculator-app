@@ -23,10 +23,17 @@ struct CalculatorItemQueue<T>: CalculateItem {
     
     subscript (index: Int) -> T? {
         switch linkedList[index] {
+            
         case .success(let data):
             return data
-        case .failure(_):
-            print("Fatal error: Array index is out of range")
+            
+        case .failure(let error):
+            switch error {
+            case .listIsEmpty:
+                print("Fatal error: Array is empty")
+            case .indexOutOfRange:
+                print("Fatal error: Array index is out of range")
+            }
             return nil
         }
     }

@@ -220,7 +220,7 @@ class LinkedListTTD: XCTestCase {
         case .success(_):
             break
         case .failure(let error):
-            XCTAssertEqual(error, LinkedListError.IndexOutOfRange)
+            XCTAssertEqual(error, LinkedListError.indexOutOfRange)
         }
     }
     
@@ -237,7 +237,7 @@ class LinkedListTTD: XCTestCase {
         case .success(_):
             break
         case .failure(let error):
-            XCTAssertEqual(error, LinkedListError.IndexOutOfRange)
+            XCTAssertEqual(error, LinkedListError.indexOutOfRange)
         }
     }
 }
