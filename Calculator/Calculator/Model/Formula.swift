@@ -17,6 +17,7 @@ struct Formula {
             
             result = operatorCase?.calculate(lhs: result, rhs: operands.queue.dequeue() ?? 0.0) ?? 0.0
         }
+        
         return result
     }
 }

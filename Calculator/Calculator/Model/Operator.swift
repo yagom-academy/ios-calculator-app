@@ -40,6 +40,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         guard rhs != 0 else {
             throw DivideError.divideByZero
         }
+        
         return lhs / rhs
     }
     
