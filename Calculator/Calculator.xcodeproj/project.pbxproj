@@ -81,6 +81,10 @@
 		7E77826328362D69000342DF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C713D94F2570E5ED001C3AFC /* Info.plist */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -120,10 +124,6 @@
 			children = (
 				7E77826428362D77000342DF /* Sources */,
 				7E77826328362D69000342DF /* Resources */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
-				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
