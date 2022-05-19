@@ -40,7 +40,7 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enqueue(1.0)
         sut.enqueue(2.0)
-        _ = sut.dequeue()
+        sut.dequeue()
         let endIndex = sut.displayItems().endIndex-1
         print(endIndex)
         //when

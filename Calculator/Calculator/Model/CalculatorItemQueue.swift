@@ -8,6 +8,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         calculateItems.insert(data: element)
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         if isEmpty {
             return nil
