@@ -32,7 +32,7 @@ class Test_Calculator: XCTestCase {
         }
     }
     
-    func test_입력이제대로들어가는지() throws {
+    func test_5689배열이제대로들어가는지() throws {
         let test = [5, 6, 8, 9] as [Int]
         
         var testqueue = CalculatorItemQueue<Any>()
