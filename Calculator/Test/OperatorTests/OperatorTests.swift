@@ -48,4 +48,14 @@ class OperatorTests: XCTestCase {
         // then
         XCTAssertThrowsError(try operatorSymbols.calculate(lhs: 0, rhs: 2))
     }
+    
+    // MARK: multiply(lhs: Double, rhs: Double)
+    func testOperator의_multiply함수_실행시_곱한_값이_잘_반환되는지() {
+        // given
+        let operatorSymbols = Operator.multiply
+        // when
+        let result = try? operatorSymbols.calculate(lhs: 4, rhs: 2)
+        // then
+        XCTAssertEqual(result,8)
+    }
 }
