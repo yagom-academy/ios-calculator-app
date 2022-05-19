@@ -51,4 +51,14 @@ class OperatorTest: XCTestCase {
             XCTAssertEqual(result, 6)
         }
     
+    func test_두수를_divide로_연산했을때_나누기가_되어야한다() {
+            //given
+            sut = .divide
+            
+            //when
+            let result =  sut.calculate(lhs: 4, rhs: 2)
+            
+            //then
+            XCTAssertEqual(result, 2)
+        }
 }
