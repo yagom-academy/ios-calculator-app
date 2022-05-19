@@ -25,7 +25,7 @@ class LinkedList<T> {
         tail = previousness
         
         if count == 0 {
-            resetLinkedList()
+            reset()
         } else if count > 1 {
             moveToPreviousness()
         }
@@ -43,7 +43,7 @@ class LinkedList<T> {
         previousness = before
     }
     
-    func resetLinkedList() {
+    func reset() {
         head = nil
         tail = nil
         previousness = nil

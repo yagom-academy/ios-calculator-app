@@ -42,7 +42,7 @@ class LinkedListTests: XCTestCase {
         sut.insert(data: 1)
         sut.insert(data: 2)
         sut.insert(data: 3)
-        sut.delete()
+        _ = sut.delete()
         // when
         let result = sut.tail?.data
         // then
@@ -55,7 +55,7 @@ class LinkedListTests: XCTestCase {
         sut.insert(data: 1)
         sut.insert(data: 2)
         sut.insert(data: 3)
-        sut.delete()
+        _ = sut.delete()
         // when
         let result = sut.previousness?.data
         // then
@@ -69,8 +69,8 @@ class LinkedListTests: XCTestCase {
         sut.insert(data: 2)
         sut.insert(data: 3)
         sut.insert(data: 4)
-        sut.delete()
-        sut.delete()
+        _ = sut.delete()
+        _ = sut.delete()
         // when
         let result = sut.tail?.data
         // then

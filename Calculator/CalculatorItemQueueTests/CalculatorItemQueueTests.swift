@@ -47,13 +47,13 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
-    // MARK: Test_resetQueue(
+    // MARK: Test_resetQueue()
     func testCalculateItems_요소가_다_삭제되는지() {
         //given
         sut.enqueue(1.0)
         sut.enqueue(2.0)
         sut.enqueue(3.0)
-        sut.resetQueue()
+        sut.reset()
         //when
         let result = sut.showHead().data
         //then
