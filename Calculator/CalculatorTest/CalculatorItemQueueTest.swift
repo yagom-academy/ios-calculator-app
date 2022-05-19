@@ -70,8 +70,8 @@ class CalculatorItemQueueTest: XCTestCase {
     
     func test_dequeue_연산자타입을반환하는지() {
         // Given
-        let currentQueue: [Operator] = [.plus, .multiply]
-        let expectation: Operator = .plus
+        let currentQueue: [Operator] = [.add, .multiply]
+        let expectation: Operator = .add
         
         // When
         operatorQueue.enqueue(currentQueue[0])
