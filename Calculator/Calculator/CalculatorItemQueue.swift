@@ -19,6 +19,13 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var currentStack: [T] {
         return dequeueStack.reversed() + enqueueStack
     }
+    var count: Int {
+        return (dequeueStack + enqueueStack).count
+    }
+    
+    init(stack: Array<T>) {
+        self.enqueueStack = stack
+    }
     
     mutating func enqueue(_ element: T) {
         enqueueStack.append(element)
