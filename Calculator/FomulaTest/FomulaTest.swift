@@ -38,4 +38,22 @@ class FomulaTest: XCTestCase {
        
         XCTAssertEqual(result, expeted)
     }
+    
+    func test_2빼기1은_1을반환하는지확인() {
+        //given
+        let input: Double = 2
+        let secondInput: Double = 1
+        let inputOperator: Character = "-"
+        let expeted: Double = 1
+        
+        //when
+        sut?.operands.enQueue(input)
+        sut?.operands.enQueue(secondInput)
+        sut?.operators.enQueue(inputOperator)
+        let result = sut?.result()
+        
+        //then
+        
+        XCTAssertEqual(result, expeted)
+    }
 }
