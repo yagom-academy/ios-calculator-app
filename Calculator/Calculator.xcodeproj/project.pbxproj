@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4474423283748B70049C702 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4474422283748B70049C702 /* DoubleExtension.swift */; };
+		B4474424283748B70049C702 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4474422283748B70049C702 /* DoubleExtension.swift */; };
 		B45F0D1E28336339007C2CD8 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45F0D1D28336339007C2CD8 /* CalculatorTests.swift */; };
 		B45F0D2428336340007C2CD8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F2904D2832090A00B92038 /* LinkedList.swift */; };
 		B45F0D2528336341007C2CD8 /* LinkedListTTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F29051283209A400B92038 /* LinkedListTTD.swift */; };
@@ -37,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B4474422283748B70049C702 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		B45F0D1B28336339007C2CD8 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45F0D1D28336339007C2CD8 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		B45F0D2728337406007C2CD8 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
@@ -94,9 +97,10 @@
 		B4F2904B2832072900B92038 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B4F2904D2832090A00B92038 /* LinkedList.swift */,
+				B4474422283748B70049C702 /* DoubleExtension.swift */,
 				B45F0D2728337406007C2CD8 /* CalculateItem.swift */,
 				B45F0D2A28337422007C2CD8 /* CalculatorItemQueue.swift */,
+				B4F2904D2832090A00B92038 /* LinkedList.swift */,
 				B463477B2835F17F0030FCDD /* LinkedListError.swift */,
 			);
 			path = Models;
@@ -243,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4474424283748B70049C702 /* DoubleExtension.swift in Sources */,
 				B45F0D2428336340007C2CD8 /* LinkedList.swift in Sources */,
 				B45F0D2C28337422007C2CD8 /* CalculatorItemQueue.swift in Sources */,
 				B45F0D1E28336339007C2CD8 /* CalculatorTests.swift in Sources */,
@@ -257,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4474423283748B70049C702 /* DoubleExtension.swift in Sources */,
 				B45F0D2B28337422007C2CD8 /* CalculatorItemQueue.swift in Sources */,
 				B45F0D2828337406007C2CD8 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
