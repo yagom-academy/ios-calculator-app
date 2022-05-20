@@ -13,10 +13,14 @@ struct Formula {
         guard var lastResult = try? operands.deQueue() else { throw QueueError.operands }
         
         while operands.joinedQueue.isEmpty != true {
-            guard let inputNumber = try? operands.deQueue() else { throw QueueError.operands }
-            guard let inputOperator = try? operators.deQueue() else { throw QueueError.operators }
+            guard let inputNumber = try? operands.deQueue() else
+            { throw QueueError.operands }
             
-            lastResult = inputOperator.calculate(lhs: lastResult, rhs: inputNumber)
+            guard let inputOperator = try? operators.deQueue() else
+            { throw QueueError.operators }
+            
+            lastResult = try inputOperator.calculate(lhs: lastResult,
+                                                     rhs: inputNumber)
         }
         return lastResult
     }

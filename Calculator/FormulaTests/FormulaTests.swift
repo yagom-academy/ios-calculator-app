@@ -14,12 +14,12 @@ class FormulaTests: XCTestCase {
         try super.setUpWithError()
         sut = Formula()
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
     func test_두숫자를_operands에넣어주고_operators_에더하기연산자를넣어주고_result함수를_호출하면_4를반환하는가() {
         sut?.operands.enQueue(1.0)
         sut?.operators.enQueue(.add)
@@ -67,24 +67,26 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, input)
     }
     
-    func test_두번째숫자가0이면_에러숫자를반환하는가() {
+    func test_두번째숫자가0이면_에러숫자를반환하는가() throws {
         //given
         sut?.operands.enQueue(1.0)
         sut?.operators.enQueue(.divide)
         sut?.operands.enQueue(0)
         
-        var result: Double? = 0
+        var input: Double? = 1.0
         
         //when
-        do {
-            result = try sut?.result()
-        } catch {
-            print(QueueError.unknown.errorDescription ?? "")
+        let result = QueueError.unknown
+        func test() throws {
+            do {
+                input = try sut?.result()
+            } catch {
+                throw QueueError.unknown
+                print(QueueError.unknown.errorDescription ?? "")
+            }
         }
         
         //then
-        XCTAssertEqual(result, 999999999999999999999.9)
-        
-    }
-    
+        XCTAssertThrowsError(try test())
+    } 
 }
