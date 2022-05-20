@@ -93,7 +93,7 @@ class parseTests: XCTestCase {
         let input = "1 + 2 - 3 + 4 / 2"
         var operatorQueue = CalculatorItemQueue<Operator>()
         let operators = ExpressionParser.componentsByOperators(from: input)
-                        .filter{$0.count == 1}
+                        .filter{ $0.count == 1 }
                         .compactMap{ Operator(rawValue: Character($0))}
         
         operators.forEach{ operatorQueue.enQueue($0) }
