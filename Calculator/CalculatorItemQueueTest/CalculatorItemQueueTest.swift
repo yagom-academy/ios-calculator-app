@@ -88,14 +88,21 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_모든값을_없앴는지_카운트로확인() {
-        sut.linkedList.append(data: 1)
-        sut.linkedList.append(data: 2)
-        sut.linkedList.append(data: 3)
+        //given
+        let inputArray:[Double] = [1, 3, 5]
+        let expeted = 0
         
+        //when
+        for input in inputArray {
+            sut.linkedList.append(data: input)
+        }
         sut.linkedList.removeAll()
+        let result = sut.linkedList.count
         
-        XCTAssertEqual(sut.linkedList.count, 0)
+        //then
+        XCTAssertEqual(result, expeted)
     }
+    
     func test_리스트에서_빠진_헤드값을_그대로_반환하는지() {
         sut.linkedList.append(data: 1)
         sut.linkedList.append(data: 2)
