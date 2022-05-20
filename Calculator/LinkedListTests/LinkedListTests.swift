@@ -112,4 +112,21 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_isEmpty_add한만큼takeOut하면_isEmpty가True인지() {
+        // given
+        let currenNodeValue: Double = 1
+        
+        // when
+        doubleList.add(value: currenNodeValue)
+        doubleList.add(value: currenNodeValue)
+        doubleList.add(value: currenNodeValue)
+        _ = doubleList.takeOut()
+        _ = doubleList.takeOut()
+        _ = doubleList.takeOut()
+        let result = doubleList.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
 }

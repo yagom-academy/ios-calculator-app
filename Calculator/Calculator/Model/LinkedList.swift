@@ -20,8 +20,14 @@ struct LinkedList<Item: CalculatorItem> {
     
     mutating func takeOut() -> Item? {
         guard !isEmpty else { return nil }
-        
+
         let node = firstNode
+        
+        guard firstNode != lastNode else {
+            firstNode = nil
+            return node?.value
+        }
+        
         firstNode = firstNode?.next
         lastNode?.next = firstNode
         

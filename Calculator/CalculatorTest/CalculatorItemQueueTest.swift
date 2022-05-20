@@ -105,4 +105,21 @@ class CalculatorItemQueueTest: XCTestCase {
         // Then
         XCTAssertEqual(expectation, result)
     }
+    
+    func test_isEmpty_enqueue한만큼dequeue하면_isEmpty가True인지() {
+        // Given
+        let input: Double = 3
+        
+        // When
+        doubleQueue.enqueue(input)
+        doubleQueue.enqueue(input)
+        doubleQueue.enqueue(input)
+        _ = doubleQueue.dequeue()
+        _ = doubleQueue.dequeue()
+        _ = doubleQueue.dequeue()
+        let result = doubleQueue.isEmpty
+        
+        // Then
+        XCTAssertTrue(result)
+    }
 }
