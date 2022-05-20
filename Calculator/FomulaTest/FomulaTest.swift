@@ -27,11 +27,11 @@ class FomulaTest: XCTestCase {
         let input: Double = 1
         let inputOperator: Character = "+"
         let expeted: Double = 2
-        let result = sut?.result()
-        
+
         //when
         sut?.operands.enQueue(input)
         sut?.operators.enQueue(inputOperator)
+        let result = sut?.result()
         
         //then
        
