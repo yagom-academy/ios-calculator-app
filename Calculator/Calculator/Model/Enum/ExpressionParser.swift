@@ -7,13 +7,20 @@
 
 enum ExpressionParser {
     
-    func parse(from input: String) -> Formula {
-        var input: String
-        
-        return .
-    }
+    /// 파서해서 Formular에 데이터 보내는 함수 변환?? 파싱한다..
+//    func parse(from input: String) -> Formula {
+//        let input: String
+//        
+//        return 
+//    }
     
-    private func componentsByOperators(from input: String) -> [String] {
-        return
-    }
+    /// 입력받은 요소들을 저장하는 함수
+//    private func componentsByOperators(from input: String) -> [String] {
+//        var arrays: [String] = []
+//        let input: String
+//        
+//        arrays.append(input)
+//        
+//        return arrays
+//    }
 }

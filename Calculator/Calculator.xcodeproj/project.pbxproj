@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A301D2A728322E3A00A025E3 /* Test_Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A301D2A628322E3A00A025E3 /* Test_Calculator.swift */; };
 		A301D2D12833CAA200A025E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
-		A3D6F684283629EF008A8FEB /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A301D2AF283240BA00A025E3 /* Operator.swift */; };
+		A3BE772F2836749100794D49 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A301D2AF283240BA00A025E3 /* Operator.swift */; };
 		A3D6F68528362A97008A8FEB /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A301D2AB28323E8000A025E3 /* CalculatorItem.swift */; };
 		A3D6F68628362A9C008A8FEB /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A301D2BE283340CD00A025E3 /* CalculatorItemQueue.swift */; };
 		A3D6F68728362A9E008A8FEB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = A301D2E12834BE9500A025E3 /* Node.swift */; };
@@ -120,8 +120,6 @@
 		A301D2DF2834BE4E00A025E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = View;
@@ -148,6 +146,8 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				A301D2DE2834BE3100A025E3 /* Controller */,
 				A301D2BD283340B900A025E3 /* Model */,
 				A301D2DF2834BE4E00A025E3 /* View */,
@@ -254,7 +254,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3D6F684283629EF008A8FEB /* Operator.swift in Sources */,
 				A301D2A728322E3A00A025E3 /* Test_Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +269,7 @@
 				A3D6F68728362A9E008A8FEB /* Node.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				A3BE772F2836749100794D49 /* Operator.swift in Sources */,
 				A3D6F68A28364638008A8FEB /* Formula.swift in Sources */,
 				A3D6F68828362AA1008A8FEB /* LinkedList.swift in Sources */,
 			);

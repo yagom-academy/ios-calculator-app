@@ -55,7 +55,7 @@ class Test_Calculator: XCTestCase {
         XCTAssertEqual(testqueue.linkedList.head?.data as! Int, 6)
     }
     
-    func test_값들이전체삭제가되는지() throws {
+    func test_요소들이전체삭제가되는지() throws {
         
         var testqueue = CalculatorItemQueue<Any>()
         testqueue.enqueue(5)

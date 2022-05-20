@@ -38,6 +38,17 @@ struct LinkedList<T> {
         return head?.data
     }
     
+    mutating func printAll() -> [Any] {
+        var elements: [Any] = []
+        
+        while head != nil {
+
+            elements.append(head?.data as Any)
+            head = head?.next
+        }
+        return elements
+    }
+    
     mutating func removeAll() {
         head = nil
     }
