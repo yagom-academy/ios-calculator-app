@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    
     var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
@@ -94,5 +93,28 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // then
         XCTAssertTrue(result)
+    }
+    
+    func test_queue는_숫자값만_분리할_수_있다() {
+        do {
+            // given
+            let array: [Any] = [3.2, Operator.add,
+                         2.0, 3.0, 4.0]
+            let operands = CalculatorItemQueue<Double>()
+            
+            let expectation = 3.2
+            // when
+            try array.forEach { value in
+                guard let number = value as? Double else {
+                    return
+                }
+                try sut.enqueue(number)
+            }
+            
+            let result = sut.peekFirst
+            // then
+            XCTAssertEqual(result, expectation)
+            
+        } catch {}
     }
 }
