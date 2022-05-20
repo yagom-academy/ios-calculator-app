@@ -36,7 +36,8 @@ class splitTests: XCTestCase {
         sut = "1-2+3+4"
         
         //given
-        let result = sut.split(separator: "+").map { String($0) } 
+        let result = sut.split(separator: "+")
+                        .map { String($0) } 
         
         //then
         XCTAssertEqual(result, ["1-2", "3", "4"])
