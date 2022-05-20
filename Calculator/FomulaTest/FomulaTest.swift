@@ -30,6 +30,7 @@ class FomulaTest: XCTestCase {
 
         //when
         sut?.operands.enQueue(input)
+        sut?.operands.enQueue(input)
         sut?.operators.enQueue(inputOperator)
         let result = sut?.result()
         
