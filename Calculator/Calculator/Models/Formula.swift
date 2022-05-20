@@ -15,4 +15,16 @@ struct Formula {
             }
         }
     }
+    
+    mutating func result() -> Double {
+        guard var addedLhs = operands.pop() else { return 0.0 }
+        
+        while operators.count > 0 {
+            guard let rhs = operands.pop() else { return 0.0 }
+            guard let `operator` = operators.pop() else { return 0.0 }
+            addedLhs = `operator`.calculate(lhs: addedLhs, rhs: rhs)
+        }
+        
+        return addedLhs
+    }
 }

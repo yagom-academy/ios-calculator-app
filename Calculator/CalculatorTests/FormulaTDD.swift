@@ -30,12 +30,26 @@ class FormulaTDD: XCTestCase {
         formula = Formula(by: expression)
         
         // then
+        print("DEBUG: \(formula.operands)")
         for (formulaOperand, expectationOperand) in zip(formula.operands, expectationOperands) {
             XCTAssertEqual(formulaOperand, expectationOperand)
         }
         
+        print("DEBUG: \(formula.operators)")
         for (formulaOperator, expectationOperator) in zip(formula.operators, expectationOperators) {
             XCTAssertEqual(formulaOperator, expectationOperator)
         }
+    }
+    
+    func test_큐에들어있는값들로_계산한결과값_리턴() throws {
+        // given
+        let expression: String = "5 + 4 / 3 * 5"
+        let expectation: Double = 15.0
+        
+        // what
+        formula = Formula(by: expression)
+
+        // then
+        XCTAssertEqual(formula.result(), expectation)
     }
 }

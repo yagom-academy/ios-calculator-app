@@ -124,15 +124,29 @@ class CalculatorItemQueueTDD: XCTestCase {
     }
     
     func test_배열리터럴로초기화하기() throws {
-        // what
+        // given
         let expectation: [Int] = [1, 2, 3, 4]
         
-        // given
+        // what
         intQueue = [1, 2, 3, 4]
         
         // then
         for (i, j) in zip(intQueue, expectation) {
             XCTAssertEqual(i, j)
+        }
+    }
+    
+    func test_값이_빌때까지_pop() throws {
+        // give
+        let inputValues: [Int] = [1, 2, 3, 4, 5]
+        
+        // what
+        intQueue = [1, 2, 3, 4, 5]
+        
+        // then
+        while intQueue.count > 0 {
+            print(intQueue.count)
+            print(intQueue.pop())
         }
     }
 }
