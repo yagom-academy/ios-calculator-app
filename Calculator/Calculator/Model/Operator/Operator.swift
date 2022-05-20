@@ -28,6 +28,13 @@ extension Operator {
             return multiply(lhs, rhs)
         }
     }
+    
+    static func contains(_ value: Character) -> Bool {
+        if let operatorValue = Operator(rawValue: value) {
+            return Operator.allCases.contains(operatorValue)
+        }
+        return false
+    }
 }
 
 private extension Operator {
