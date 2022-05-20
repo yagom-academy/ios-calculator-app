@@ -35,4 +35,20 @@ class Test_CalculatorItemQueue: XCTestCase {
         // then
         XCTAssertEqual(result, output)
     }
+    
+    func test_dequeue_실행시_123456_를넣었을때_2_를반환하는지() {
+        // given
+        let input: [Int] = [1, 2, 3, 4, 5, 6]
+        let output: [Int] = [2]
+        
+        // when
+        input.forEach {
+            sut.enqueue([$0])
+        }
+        sut.dequeue()
+        let result = sut.linkedList.head?.data
+        
+        // then
+        XCTAssertEqual(result, output)
+    }
 }
