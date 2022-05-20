@@ -115,4 +115,33 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, 123.0)
     }
+    
+    func test_입력이들어왔을떄_공백으로나눠주면_배열이잘나오는지확인() {
+        //given
+        let input = "123 + 321"
+        //when
+        let result = ExpressionParser.componentByOperators(from: input)
+        //then
+        XCTAssertEqual(["123", "+", "321"], result)
+    }
+    
+    func test_입력이들어왔을때_함수를실행하면_연산자와더블로잘나뉘는지확인() {
+        //given
+        let input = "123 + 321 / 12"
+        let formula = Formula()
+        formula.operands.enqueue(123)
+        formula.operands.enqueue(321)
+        formula.operands.enqueue(12)
+        formula.operators.enqueue(.add)
+        formula.operators.enqueue(.devide)
+        //when
+        let result = ExpressionParser.parse(from: input)
+        //then
+        XCTAssertEqual(result.operators.dequeue(), .add)
+        XCTAssertEqual(result.operators.dequeue(), .devide)
+        
+        XCTAssertEqual(result.operands.dequeue(), 123)
+        XCTAssertEqual(result.operands.dequeue(), 321)
+        XCTAssertEqual(result.operands.dequeue(), 12)
+    }
 }
