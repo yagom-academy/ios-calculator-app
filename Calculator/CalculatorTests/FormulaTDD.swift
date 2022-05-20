@@ -58,6 +58,23 @@ class FormulaTDD: XCTestCase {
         case .failure(_):
             break
         }
+    }
+    
+    func test_0으로나누면_에러리턴() throws {
+        // given
+        let expectation: FormulaError = .notANumber
         
+        // what
+        formula = Formula()
+        formula.operands = [5, 4, 0, 5]
+        formula.operators = [.add, .divide, .multiply]
+
+        // then
+        switch formula.result() {
+        case .success(_):
+            break
+        case .failure(let error):
+            XCTAssertEqual(error as! FormulaError, expectation)
+        }
     }
 }
