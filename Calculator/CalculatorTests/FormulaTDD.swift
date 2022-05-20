@@ -22,12 +22,13 @@ class FormulaTDD: XCTestCase {
     
     func test_연산자와_수를_큐에_나눠서_저장() throws {
         // given
-        let expression: String = "1 + 2 - 3 / 4 * 5"
         let expectationOperands: [Double] = [1, 2, 3, 4, 5]
         let expectationOperators: [Operator] = [.add, .subtract, .divide, .multiply]
         
         // what
-        formula = Formula(by: expression)
+        formula = Formula()
+        formula.operands = [1, 2, 3, 4, 5]
+        formula.operators = [.add, .subtract, .divide, .multiply]
         
         // then
         print("DEBUG: \(formula.operands)")
@@ -43,13 +44,20 @@ class FormulaTDD: XCTestCase {
     
     func test_큐에들어있는값들로_계산한결과값_리턴() throws {
         // given
-        let expression: String = "5 + 4 / 3 * 5"
         let expectation: Double = 15.0
         
         // what
-        formula = Formula(by: expression)
+        formula = Formula()
+        formula.operands = [5, 4, 3, 5]
+        formula.operators = [.add, .divide, .multiply]
 
         // then
-        XCTAssertEqual(formula.result(), expectation)
+        switch formula.result() {
+        case .success(let data):
+            XCTAssertEqual(data, expectation)
+        case .failure(_):
+            break
+        }
+        
     }
 }
