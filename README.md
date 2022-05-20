@@ -39,6 +39,7 @@
 -> `peekTail` : tail 위치의 데이터를 꺼내지 않고, 보여주기만 하는 메서드
 -> `isEmpty` : 리스트가 비어있는지 확인하는 메서드
 -> `remove(ofIndex:)` : 원하는 위치의 데이터를 제거하는 메서드
+
 - `CalculatorItemQueue` : 선입선출 방식의 일반적인 큐 구조체
 -> `push` : 큐에 데이터를 추가하는 메서드
 -> `pop` : 선입선출 형태로 데이터를 꺼내는 메서드
@@ -70,20 +71,25 @@ TDD 방식을 이번에 처음 경험해봐서, 테스트 케이스를 어느 �
 -> `operands` : 수를 저장할 큐
 -> `operators` : 연산자를 저장할 큐
 -> `result()` : `operands` 큐와 `operators` 큐에 있는 값들로 결과를 계산해 리턴하는 메서드
+
 - `ExpressionParser` : `String` 형태의 식을 `Formula` 형태로 바꿔주는 열거형
 -> `parse(from:)` : `String` 타입의 값을 파라미터로 받아 `Formula` 형태로 반환해주는 타입 메서드
 -> `componentsByOperators(from:)` : `String` 형태의 식을 연산자와 숫자로 분리해서 `[String]` 타입으로 반환해주는 메서드
+
 - `Operator` : 연산자의 역할을 하는 열거형
 -> `calculate(lhs:rhs:)` : 현재 열거형 case를 기준으로 결과를 계산해준다.
 -> `add(lhs:rhs:)` : 두 값을 더하는 메서드
 -> `substract(lhs:rhs:)` : 두 값을 빼는 메서드
 -> `divide(lhs:rhs:)` : 두 값을 나누는 메서드
 -> `multiply(lhs:rhs:)` : 두 값을 곱하는 메서드
+
 - `String` : 스트링 타입을 확장하여 기능 추가
 -> `split(with:)` : 현재 열거형 `case`를 기준으로 결과를 계산해준다.
+
 - `LinkedListError` : `LinkedList` 타입에서 발생할 수 있는 에러
 -> `listIsEmpty` : 값에 접근할 때 리스트가 비었을 경우 발생시킬 수 있다.
 -> `indexOutOfRange` : 값에 접근할 때 인덱스가 범위를 초과할 경우 발생시킬 수 있다.
+
 - `FormulaError` : `Formula` 타입에서 발생할 수 있는 에러
 -> `notANumber` : 숫자를 0으로 나누려고 시도할 경우 발생시킬 수 있다.
 
