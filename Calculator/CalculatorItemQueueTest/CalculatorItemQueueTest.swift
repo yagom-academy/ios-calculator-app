@@ -66,12 +66,19 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_remove함수를_사용하면_head값이바뀌는지() {
-        sut.linkedList.append(data: 1)
-        sut.linkedList.append(data: 3)
-        sut.linkedList.append(data: 5)
-        sut.linkedList.remove()
+        //given
+        let inputArray:[Double] = [1, 3, 5]
+        let expeted:Double = 3
         
-        XCTAssertEqual(sut.linkedList.head?.data, 3)
+        //when
+        for input in inputArray {
+            sut.linkedList.append(data: input)
+        }
+        sut.linkedList.remove()
+        let result:Double? = sut.linkedList.head?.data
+        
+        //then
+        XCTAssertEqual(result, expeted)
     }
     
     func test_리스트내에_값이없을때_remove하면_nil을_반환하는지() {
