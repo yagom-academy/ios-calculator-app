@@ -9,12 +9,13 @@ import Foundation
 
 struct LinkedList<T> {
     private var head: Node<T>?
+    private var tail: Node<T>?
     
-    var headIsEmpty: Bool {
+    var isEmpty: Bool {
         return head == nil
     }
     
-    var firstPeek: Node<T>? {
+    var peek: Node<T>? {
         return head
     }
     
@@ -24,16 +25,12 @@ struct LinkedList<T> {
             return
         }
         
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        
-        node?.next = Node(data: data)
+        let node = head
+        tail?.next = node
+        tail = node
     }
     
     mutating func removeFirst() -> T? {
-        if head == nil { return nil }
         
         let removeElement = head?.data
         head = head?.next
