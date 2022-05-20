@@ -104,11 +104,16 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_리스트에서_빠진_헤드값을_그대로_반환하는지() {
-        sut.linkedList.append(data: 1)
-        sut.linkedList.append(data: 2)
-        sut.linkedList.append(data: 3)
+        //given
+        let inputArray:[Double] = [1, 3, 5]
+        let expeted:Double = 1
+        //when
+        for input in inputArray {
+            sut.linkedList.append(data: input)
+        }
         let test = sut.linkedList.peekRemove()
         
-        XCTAssertEqual(test, 1)
+        //then
+        XCTAssertEqual(test, expeted)
 }
 }
