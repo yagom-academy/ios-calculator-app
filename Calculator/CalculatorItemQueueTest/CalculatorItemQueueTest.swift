@@ -34,11 +34,19 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_숫자5와6을_넣었을때_5와6이들어있는지확인() {
-        sut.linkedList.append(data: 5)
-        sut.linkedList.append(data: 6)
+        //given
+        let input:Double = 5
+        let secondInput:Double = 6
         
-        XCTAssertEqual(sut.linkedList.head?.data, 5)
-        XCTAssertEqual(sut.linkedList.head?.next?.data, 6)
+        //when
+        sut.linkedList.append(data: input)
+        sut.linkedList.append(data: secondInput)
+        let firstValue:Double? = sut.linkedList.head?.data
+        let secondValue:Double? = sut.linkedList.head?.next?.data
+        //then
+        
+        XCTAssertEqual(firstValue, input)
+        XCTAssertEqual(secondValue, secondInput)
     }
     
     func test_3개의데이터를넣으면카운트가3인지() {
