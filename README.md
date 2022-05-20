@@ -33,3 +33,30 @@
         
 - 본 프로젝트에서는 **FIFO**방식이 필요하고, 큐 중간에 삽입하거나 삭제하는 과정은 필요하지 않기 때문에, 처음엔 배열을 선택하게 되었는데, deQueue() 수행 시 이루어지는 재정렬 문제를 해결하기 위해 더블stack으로 바꾸어 주었다.
 
+# STEP2
+
+## UML Diagram
+![](https://i.imgur.com/xfjdHte.png)
+
+## 구현사항
+- **CalculatorItemQueue**
+    - Fomula 에서 사용되기 위해 `count` 읽기전용 연산프로퍼티와 `init()` 구문을 추가 해주었다.
+- **Fomula**
+    - Fomula = 공식 이라는 해석이 되었다. 이 공식이라는 구조체 안에서 연산자 큐 ( oprators ) 와 피연산자 큐 ( operands ) 안의 값들을 이용하여 result 라는 함수에서 전체 계산을 하도록 구현 해주었다.
+- **ExpressionParser**
+    - string으로 들어온 값을 분리하여 연산자큐 와 피연산자큐 에 나눠 담아주는 작업이 이루어 졌다.
+- **Operator**
+    - 각 케이스 별로 이루어지는 계산로직을 다르게 실행해줄 수 있도록 `switch - case` 를 이용했다.
+- **Extension Double**
+    - 이 부분의 역할을 파악하지 못했다.
+- **Extension String**
+    - 기존의 split 함수는 ``[SubString]`` 을 반환하지만, ``[String]`` 을 반환할 수 있도록 새롭게 만들어 주었다.
+
+## 고민한 점 & 궁금한 점
+- force unwrapping
+   확실한 경우에 ! 를 사용하는 점에 대해서 고민
+- enum 타입의 테스트
+    - expressionParser enum 에 대한 테스트를 진행할 때, 초기화구문이 없어 각 테스트케이스 마다의 초기화와 메모리 해제를 해줄 수 없어 어떻게 테스트할지 고민했다. 
+        static으로 타입메서드로 만들어 주니 test에서 사용할 수 있었다. 
+- 테스트만을 위한 코드
+    - 함수를 구현하다 보니, "CalculatorItemQueue" 에서 currenStack 이라는 프로퍼티와 enqueue() 함수는 테스트 코드에서만 사용된다는 것을 깨달았다. 
