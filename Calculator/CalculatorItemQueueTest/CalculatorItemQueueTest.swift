@@ -22,9 +22,15 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_숫자5를_넣었을때_head에_5가_들어있는지확인() {
-        sut.linkedList.append(data: 5)
+        //given
+        let input:Double = 5
         
-        XCTAssertEqual(sut.linkedList.head?.data, 5)
+        //when
+        sut.linkedList.append(data: input)
+        let result:Double? = sut.linkedList.head?.data
+        
+        //then
+        XCTAssertEqual(result, input)
     }
     
     func test_숫자5와6을_넣었을때_5와6이들어있는지확인() {
