@@ -2,7 +2,9 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
+        guard !operators.isEmpty || !operators.isEmpty else { throw CalculatorError.emptyFormula}
+            
         var calculateResult = operands.dequeue() ?? 0
         
         while true {

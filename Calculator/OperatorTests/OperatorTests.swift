@@ -78,7 +78,7 @@ class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 5
         let rhs: Double = 0
-        let expectition: Double = 0
+        let expectition: Double = .nan
        
         // when
         sut = .divide

@@ -26,9 +26,17 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         sut.operators.enqueue(.subtract)
         sut.operands.enqueue(4)
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_비어있는formula면에러를보내는지() {
+        // when
+        let result = try? sut.result()
+        
+        // then
+        XCTAssertNil(result)
     }
 }

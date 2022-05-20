@@ -13,9 +13,12 @@ enum Operator: Character, CaseIterable, CalculatorItem {
         case .divide:
             do {
                 return try divide(lhs: lhs, rhs: rhs)
-            } catch {
+            } catch CalculatorError.devideByZero {
                 print("오류")
-                return 0
+                return .nan
+            } catch {
+                print(error)
+                return .nan
             }
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
