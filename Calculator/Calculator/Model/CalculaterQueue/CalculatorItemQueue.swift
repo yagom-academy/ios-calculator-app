@@ -11,7 +11,7 @@ final class CalculatorItemQueue<T: Equatable> {
     private let doublyLinkedList = DoublyLinkedList<T>()
 }
 
-extension CalculatorItemQueue: CalculateItemProtocol {
+extension CalculatorItemQueue {
     var peekFirst: T? {
         return doublyLinkedList.first?.value
     }

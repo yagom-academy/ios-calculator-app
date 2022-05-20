@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CalculateItemProtocol {
+protocol CalculateItem {
     
 }

@@ -11,7 +11,6 @@ final class DoublyLinkedList<T: Equatable> {
     private var head: Node<T>?
     private weak var tail: Node<T>?
     
-    
     var isEmpty: Bool {
         return head == nil
     }
@@ -29,6 +28,10 @@ extension DoublyLinkedList {
     subscript(index: Int) -> T? {
         guard var node = self.head else {
             return nil
+        }
+        
+        if index == 0 {
+            return node.value
         }
         
         for _ in 1...index {
