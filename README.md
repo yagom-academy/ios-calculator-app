@@ -15,7 +15,7 @@
 
 # UML 📊
 ### [STEP 1]
-<img width="80%" src="https://user-images.githubusercontent.com/87175392/168752068-44c4ee85-e427-4444-ba51-5603cb869289.jpg"/>
+<img width="90%" src="https://user-images.githubusercontent.com/87175392/168752068-44c4ee85-e427-4444-ba51-5603cb869289.jpg"/>
 
 <br/>
 <br/>
