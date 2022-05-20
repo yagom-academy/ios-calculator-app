@@ -10,6 +10,7 @@ extension String {
                 element += String($0)
             } else {
                 result.append(element)
+                result.append(String($0))
                 element = ""
             }
         }

@@ -14,29 +14,27 @@ class StringSplitTests: XCTestCase {
         sut = nil
     }
     
-    func test_split_x로구분하면첫번째요소가맞게나오는지() {
+    func test_split_x로구분이되는지() {
         // given
         let target: Character = "x"
         let string = "abcxdef"
-        let expectation = "abc"
+        let expectation = ["abc", "x", "def"]
         
         // when
-        let stringArray = string.split(with: target)
-        let result = stringArray[0]
+        let result = string.split(with: target)
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_split_y로구분했을때_배열의count일치하는지() {
+    func test_split_더하기로구분했을때_배열이일치하는지() {
         // given
-        let target: Character = "y"
-        let string = "aybycxdeyf"
-        let expectation = 4
+        let target: Character = "+"
+        let string = "1+242+43+2"
+        let expectation = ["1", "+", "242", "+", "43", "+", "2"]
         
         // when
-        let stringArray = string.split(with: target)
-        let result = stringArray.count
+        let result = string.split(with: target)
         
         // then
         XCTAssertEqual(result, expectation)
@@ -46,7 +44,7 @@ class StringSplitTests: XCTestCase {
         // given
         let target: Character = "y"
         let string = "aybycdy"
-        let expectation = ["a", "b", "cd"]
+        let expectation = ["a", "y", "b", "y", "cd", "y"]
         
         // when
         let result = string.split(with: target)
