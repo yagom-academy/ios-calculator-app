@@ -50,11 +50,19 @@ class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_3개의데이터를넣으면카운트가3인지() {
-        sut.linkedList.append(data: 6)
-        sut.linkedList.append(data: 6)
-        sut.linkedList.append(data: 6)
-
-        XCTAssertEqual(sut.linkedList.count, 3)
+        //given
+        let input:Double = 5
+        let expeted = 3
+        
+        //when
+        for _ in 1...3 {
+            sut.linkedList.append(data: input)
+        }
+        let result = sut.linkedList.count
+        
+        //then
+        
+        XCTAssertEqual(result, expeted)
     }
     
     func test_remove함수를_사용하면_head값이바뀌는지() {
