@@ -1,7 +1,9 @@
 struct CalculatorItemQueue<Item: CalculatorItem> {
     private var calculatorList = LinkedList<Item>()
-    var lastValue: Item? {
-        return calculatorList.lastNode?.value
+    var calculatorItems: [Item]? {
+        get {
+            return calculatorList.returnList()
+        }
     }
     var isEmpty: Bool {
         return calculatorList.isEmpty

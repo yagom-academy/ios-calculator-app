@@ -1,6 +1,6 @@
 struct LinkedList<Item: CalculatorItem> {
     private var firstNode: Node<Item>?
-    private(set) var lastNode: Node<Item>?
+    private var lastNode: Node<Item>?
     var isEmpty: Bool {
         return firstNode == nil
     }
@@ -39,8 +39,8 @@ struct LinkedList<Item: CalculatorItem> {
                 allNodes.append(nextNode.value)
             }
             node = node?.next
-        } while node != firstNode
-    
+        } while node != firstNode && node != nil
+        
         return allNodes
     }
 }

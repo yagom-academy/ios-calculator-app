@@ -17,29 +17,29 @@ class CalculatorItemQueueTest: XCTestCase {
         operatorQueue = nil
     }
 
-    func test_enqueue_0을추가하면_0이들어가는지() {
+    func test_enqueue_0을추가하면_calculatorItems에0이들어가는지() {
         // Given
         let input: Double = 0
-        let expectation: Double = 0
+        let expectation: [Double] = [0]
         
         // When
         doubleQueue.enqueue(input)
-        let result = doubleQueue.lastValue
+        let result = doubleQueue.calculatorItems
         
         // Then
         XCTAssertEqual(expectation, result)
     }
     
-    func test_enqueue_0과1을추가하면_0과1이들어간배열로변경하는지() {
+    func test_enqueue_0과1을추가하면_0과1이들어간calculatorItems가되는지() {
         // Given
         let firstInput: Double = 0
         let secondInput: Double = 1
-        let expectation: Double = 1
+        let expectation: [Double] = [0, 1]
         
         // When
         doubleQueue.enqueue(firstInput)
         doubleQueue.enqueue(secondInput)
-        let result = doubleQueue.lastValue
+        let result = doubleQueue.calculatorItems
         
         // Then
         XCTAssertEqual(expectation, result)
