@@ -10,16 +10,22 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
+    var sut2: Fomula!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<String>()
+        sut = CalculatorItemQueue(stack: [])
+        sut2 = Fomula(operands: CalculatorItemQueue<Double>(stack: []),
+                      operators: CalculatorItemQueue<Character>(stack: []))
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
+        sut2 = nil
     }
+
+//MARK: - CalculatorItemQueue Test
     
     func test_enqueue를이용해_배열에1을추가했을때_1이들어갔는지() {
         //given
@@ -116,4 +122,137 @@ class CalculatorTests: XCTestCase {
         XCTAssertNil(result)
     }
     
+//MARK: - Fomula Test
+    
+    func test_operands와operator가_빈배열일때_result가_nil을출력하는지() {
+        //given
+        //when
+        let result = sut2.result()
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_operands에_2가들어가고_operator는_비었을때_result가_nil을출력하는지() {
+        //given
+        sut2.operands.enqueue(2)
+        //when
+        let result = sut2.result()
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_operands에_2가들어가고_operator에_더하기가들어갔을때_result가_nil을출력하는지() {
+        //given
+        sut2.operands.enqueue(2)
+        sut2.operators.enqueue("+")
+        //when
+        let result = sut2.result()
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_operands에_1_2가들어가고_operator에더하기가들어갔을때_result가_3을출력하는지() {
+        //given
+        sut2.operands.enqueue(1)
+        sut2.operands.enqueue(2)
+        sut2.operators.enqueue("+")
+        let expectation = Double(3)
+        //when
+        let result = sut2.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_operands에_1_2_3가들어가고_operator에_더하기_빼기_가들어갔을때_result가_0_을출력하는지() {
+        //given
+        sut2.operands.enqueue(1)
+        sut2.operands.enqueue(2)
+        sut2.operands.enqueue(3)
+        
+        sut2.operators.enqueue("+")
+        sut2.operators.enqueue("-")
+        
+        let expectation = Double(0)
+        //when
+        let result = sut2.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_operands에_1_2_3_9_27_2가들어가고_operator에_더하기_빼기_더하기_더하기_나누기가들어갔을때_result가_18_을출력하는지() {
+        //given
+        sut2.operands.enqueue(1)
+        sut2.operands.enqueue(2)
+        sut2.operands.enqueue(3)
+        sut2.operands.enqueue(9)
+        sut2.operands.enqueue(27)
+        sut2.operands.enqueue(2)
+        
+        sut2.operators.enqueue("+")
+        sut2.operators.enqueue("-")
+        sut2.operators.enqueue("+")
+        sut2.operators.enqueue("+")
+        sut2.operators.enqueue("÷")
+        
+        let expectation = Double(18)
+        //when
+        let result = sut2.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+//MARK: - ExpressionParser Test
+    
+    func test_빈문자열이주어졌을때_Fomula의result로_nil출력되는지() {
+        //given
+        let str = ""
+        //when
+        var fomula = ExpressionParser.parse(from: str)
+        let result = fomula.result()
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_문자열_3_주어졌을때_Fomula의result로_nil출력되는지() {
+        //given
+        let str = "3"
+        //when
+        var fomula = ExpressionParser.parse(from: str)
+        let result = fomula.result()
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_문자열_3더하기_주어졌을때_Fomula의result로_nil출력되는지() {
+        //given
+        let str = "3+"
+        //when
+        var fomula = ExpressionParser.parse(from: str)
+        let result = fomula.result()
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_문자열_3더하기9곱하기2_가주어졌을때_Fomula의operands에3_9_2가들어가고_opeartors에더하기_곱하기가들어가는지() {
+        //given
+        let str = "3+9×2"
+        let operandsExpectation: [Double] = [3,9,2]
+        let operatorsExpectation: [Character] = ["+", "×"]
+        //when
+        let fomula = ExpressionParser.parse(from: str)
+        //then
+        XCTAssertEqual(operandsExpectation, fomula.operands.currentStack)
+        XCTAssertEqual(operatorsExpectation, fomula.operators.currentStack)
+    }
+    
+    func test_문자열_3더하기9곱하기2_가주어졌을때_Fomula의result로_24가출력되는지() {
+        //given
+        let str = "3+9×2"
+        let expectation = Double(24)
+        //when
+        var fomula = ExpressionParser.parse(from: str)
+        let result = fomula.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
 }
