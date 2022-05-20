@@ -2,5 +2,6 @@
 
 ### 계산기 프로젝트 저장소
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
+### UML
+![Untitled (1)](https://user-images.githubusercontent.com/102569735/168732743-61f452f1-0bf0-44c1-9311-90c59a8d754a.jpg)
 
