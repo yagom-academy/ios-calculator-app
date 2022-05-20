@@ -23,7 +23,7 @@ class OperatorTest: XCTestCase {
         sut = .add
         
         //when
-        let result = sut.calculate(lhs: 1, rhs: 2)
+        let result = try? sut.calculate(lhs: 1, rhs: 2)
         
         //then
         XCTAssertEqual(result, 3)
@@ -34,7 +34,7 @@ class OperatorTest: XCTestCase {
         sut = .substract
         
         //when
-        let result = sut.calculate(lhs: 2, rhs: 1)
+        let result = try? sut.calculate(lhs: 2, rhs: 1)
         
         //then
         XCTAssertEqual(result, 1)
@@ -45,7 +45,7 @@ class OperatorTest: XCTestCase {
             sut = .multiply
             
             //when
-            let result = sut.calculate(lhs: 2, rhs: 3)
+            let result = try? sut.calculate(lhs: 2, rhs: 3)
             
             //then
             XCTAssertEqual(result, 6)
@@ -56,7 +56,7 @@ class OperatorTest: XCTestCase {
             sut = .divide
             
             //when
-            let result =  sut.calculate(lhs: 4, rhs: 2)
+            let result = try? sut.calculate(lhs: 4, rhs: 2)
             
             //then
             XCTAssertEqual(result, 2)
