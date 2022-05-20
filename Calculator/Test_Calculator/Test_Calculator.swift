@@ -6,9 +6,10 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class Test_Calculator: XCTestCase {
-
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -16,32 +17,22 @@ class Test_Calculator: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
     func test_5689배열이제대로들어가는지() throws {
+        // given
         let test = 5 as Int
         
-        var testqueue = CalculatorItemQueue<Any>()
+        var testqueue = CalculatorItemQueue<Int>()
         
+        // when
         testqueue.enqueue(test)
         testqueue.enqueue(test)
         testqueue.enqueue(test)
-
-        XCTAssertEqual(testqueue.linkedList.head?.data as! Int , 5)
+        
+        // then
+        let result = testqueue.linkedList.head?.data
+        
+        XCTAssertEqual(result, 5)
     }
     
     func test_첫번째값이제거되는지() throws {
@@ -64,6 +55,18 @@ class Test_Calculator: XCTestCase {
         testqueue.clear()
         
         XCTAssertEqual(testqueue.linkedList.head?.data as? String, nil)
+        
+    }
+    
+    func test_Split이되는지() throws {
+        
+        let test: Character = "+" // Operator.rawvalue
+        let test2: String = "3+3+3"
+        test2.filter(<#T##isIncluded: (Character) throws -> Bool##(Character) throws -> Bool#>)
+        let test3 = test2.split(with: test)  // [String]
+        //let test4 = test3.map{&0}
+        
+        XCTAssertEqual(test3, ["3", "3"])
         
     }
 }
