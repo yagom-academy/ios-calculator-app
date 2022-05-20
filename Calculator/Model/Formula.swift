@@ -11,12 +11,15 @@ struct Formula {
     
     mutating func result() throws -> Double {
         var result = try operands.dequeue()
-        while !operands.isEmpty() {
+        
+        while !operands.isEmpty() || !operators.isEmpty() {
             result = try operators.dequeue().calculate(lhs: result, rhs: operands.dequeue())
         }
+        
         guard result != Double.infinity else {
             throw CalculateError.infinityError
         }
+        
         return result
     }
 }

@@ -21,6 +21,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
+    //MARK: - result test
     func test_result_값이_정상일때_더하기_연산결과를_출력하는지() {
         // given
         sut.operands.enqueue(data: 1.0)
@@ -85,7 +86,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_result_0으로나눴을때_무한대를_출력하는지() throws {
+    func test_result_0으로나눴을때_에러를_출력하는지() throws {
         // given
         sut.operands.enqueue(data: 1.0)
         sut.operands.enqueue(data: 2.0)
@@ -98,7 +99,7 @@ class FormulaTests: XCTestCase {
         XCTAssertThrowsError(try sut.result())
     }
     
-    func test_result_숫자가_1개들어오면_제대로반환하는지() {
+    func test_result_숫자가_1개들어오면_그대로반환하는지() {
         // given
         sut.operands.enqueue(data: 1.0)
         
@@ -109,7 +110,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_result_숫자보다_연산자의수가_많으면_가능값들을연산해서_정상적인_결과를반환하는지() {
+    func test_result_숫자보다_연산자의수가_많으면_에러를발생시키는지() {
         // given
         sut.operands.enqueue(data: 1.0)
         sut.operands.enqueue(data: 2.0)
@@ -118,10 +119,7 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(data: .add)
         sut.operators.enqueue(data: .multiply)
         
-        // when
-        let result = 3.0
-        
         // then
-        XCTAssertEqual(result, try sut.result())
+        XCTAssertThrowsError(try sut.result())
     }
 }

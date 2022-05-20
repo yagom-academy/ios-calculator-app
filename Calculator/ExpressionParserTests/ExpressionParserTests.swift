@@ -18,39 +18,47 @@ class ExpressionParserTests: XCTestCase {
         try super.tearDownWithError()
     }
     
+    //MARK: - parse test
     func test_parse_string변환해서_정상적으로_Formula를반환하는지() {
         // given
-        let formula = ExpressionParser.parse(from: "123-123+123")
+        let formula = ExpressionParser.parse(from: "123 - 123 + -123")
         
         // when
         let resultOperand = Int(formula.operands.peek()!)
         let resultOperator = formula.operators.peek()
         
-        //then
+        // then
         XCTAssertEqual(resultOperand, 123)
         XCTAssertEqual(resultOperator, .subtract)
     }
     
     func test_parse_string변환해서_정상적으로_연산값을_반환하는지() {
         // given
-        var formula = ExpressionParser.parse(from: "123×123÷123")
+        var formula = ExpressionParser.parse(from: "123 × 123 ÷ -123")
         
         // when
-        let result = 123.0 * 123.0 / 123.0
-
-        //then
+        let result = 123.0 * 123.0 / -123.0
+        
+        // then
         XCTAssertEqual(result, try formula.result())
     }
     
-    func test_parse_string변환해서_비정상입력에서_연산값을_반환하는지() {
-        
+    func test_parse_string변환해서_비정상입력에서_에러를_반환하는지() {
         // given
-        var formula = ExpressionParser.parse(from: "123×123-")
+        var formula = ExpressionParser.parse(from: "123 × 123 ×")
+        
+        // then
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func test_parse_숫자하나의_연산값을_반환하는지() {
+        // given
+        var formula = ExpressionParser.parse(from: "123")
         
         // when
-        let result = 123.0 * 123.0
+        let result = 123.0
         
-        //then
+        // then
         XCTAssertEqual(result, try formula.result())
     }
 }
