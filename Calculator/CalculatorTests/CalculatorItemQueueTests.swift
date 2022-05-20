@@ -47,7 +47,6 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_enQueueStack에_값이없다면_deQueue함수를_호출하면_nil을반환하는가() {
         //given
         
-        
         //when
         var result: Double?
         func result() throws {
@@ -91,7 +90,6 @@ class CalculatorItemQueueTests: XCTestCase {
         sut?.enQueue(1.0)
         sut?.enQueue(2.0)
         sut?.enQueue(3.0)
-        
         
         //when
         var result1: Double?
