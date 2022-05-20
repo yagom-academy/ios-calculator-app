@@ -21,7 +21,6 @@ enum ExpressionParser {
         Operator.allCases.forEach { opr in
             result.forEach {
                 doubledString.append($0.split(with: opr.rawValue))
-                
             }
            result = doubledString.flatMap { $0 }
            doubledString.removeAll()

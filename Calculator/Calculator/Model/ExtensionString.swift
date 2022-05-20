@@ -1,9 +1,9 @@
 extension String {
     func split(with target: Character) -> [String] {
+        guard !self.isEmpty else { return [""] }
+        
         var element = ""
         var result: [String] = []
-              
-        guard self != "" else { return [""] }
         
         self.forEach {
             if $0 != target {
@@ -11,11 +11,11 @@ extension String {
             } else {
                 result.append(element)
                 result.append(String($0))
-                element = ""
+                element.removeAll()
             }
         }
-            
-        if element != "" {
+
+        if !element.isEmpty {
             result.append(element)
         }
         
