@@ -73,4 +73,18 @@ class OperatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectition)
     }
+    
+    func test_divide_0으로나눴을때_0이나오고오류가출력되는지() {
+        // given
+        let lhs: Double = 5
+        let rhs: Double = 0
+        let expectition: Double = 0
+       
+        // when
+        sut = .divide
+        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
+        // then
+        XCTAssertEqual(result, expectition)
+    }
 }
