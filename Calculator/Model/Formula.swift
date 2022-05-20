@@ -13,7 +13,27 @@ struct Formula {
     var operators: CalculatorItemQueue = CalculatorItemQueue<Character>()
     
     func result() -> Double {
-        return 0.0
+        var result: Double
         
+        guard let firstValue = operands.deQueue() else {
+            return 0.0
+        }
+        result = firstValue
+        
+        while operands.linkedList.head != nil {
+            guard let operateValue = operands.deQueue() else {
+                return 0.0
+            }
+            
+            guard let operateItem = operators.deQueue() else {
+                return 0.0
+            }
+            
+            guard let choiceOpertaion: Operator = Operator.init(rawValue: operateItem) else {
+                return 0.0
+            }
+            result = choiceOpertaion.calculate(lhs: result, rhs: operateValue)
+        }
+        return result
     }
 }
