@@ -2,7 +2,7 @@
 //  FormulaTest.swift
 //  FormulaTest
 //
-//  Created by Kiwon Song on 2022/05/20.
+//  Created by Kiwi on 2022/05/20.
 //
 
 import XCTest

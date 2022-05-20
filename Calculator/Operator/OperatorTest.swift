@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Operator
 //
-//  Created by Kiwon Song on 2022/05/19.
+//  Created by Kiwi on 2022/05/19.
 //
 
 import XCTest
