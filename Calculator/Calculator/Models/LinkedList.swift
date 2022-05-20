@@ -1,6 +1,6 @@
-struct LinkedList<T> {
+struct LinkedList<T: Equatable> {
     
-    private class Node<T> {
+    private class Node<T: Equatable> {
         var previous: Node<T>?
         var next: Node<T>?
         var data: T

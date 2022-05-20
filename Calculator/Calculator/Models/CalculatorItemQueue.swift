@@ -1,4 +1,4 @@
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T: Equatable>: CalculateItem {
     
     private var linkedList = LinkedList<T>()
     var count: Int {
