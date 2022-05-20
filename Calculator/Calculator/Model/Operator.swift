@@ -5,22 +5,25 @@
 //  Created by dhoney96 on 2022/05/17.
 //
 
-enum Operator: CaseIterable {
-    case plus
-    case minus
-    case division
-    case multiply
+enum Operator: Character, CaseIterable, CalculatorItem {
+    case add = "+"
+    case subtract = "-"
+    case divide = "/"
+    case multiply = "*"
     
-    var symbol: String {
-        switch self {
-        case .plus:
-            return "+"
-        case .minus:
-            return "-"
-        case .division:
-            return "/"
-        case .multiply:
-            return "*"
-        }
+    private func add(lhs: Double, rhs: Double) -> Double {
+        return lhs + rhs
+    }
+    
+    private func subtract(lhs: Double, rhs: Double) -> Double {
+        return lhs - rhs
+    }
+    
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        return lhs / rhs
+    }
+    
+    private func multiply(lhs: Double, rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
