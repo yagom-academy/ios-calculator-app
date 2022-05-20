@@ -78,13 +78,13 @@ class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 5
         let rhs: Double = 0
-        let expectition: Double = .nan
        
         // when
         sut = .divide
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let nanError = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = nanError.isNaN
         
         // then
-        XCTAssertEqual(result, expectition)
+        XCTAssertTrue(result)
     }
 }
