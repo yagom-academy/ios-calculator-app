@@ -8,10 +8,10 @@
 import XCTest
 
 class CalculatorTests: XCTestCase {
-    var calculator: CalculatorItemQueue!
+    var calculator: CalculatorItemQueue<Any>!
 
     override func setUpWithError() throws {
-        calculator = CalculatorItemQueue()
+        calculator = CalculatorItemQueue<Any>()
     }
 
     override func tearDownWithError() throws {
@@ -46,7 +46,7 @@ class CalculatorTests: XCTestCase {
         
         let result = calculator.dequeue()
         
-        XCTAssertEqual(returnNumber, result)
+        XCTAssertEqual(returnNumber, result as! String)
     }
     
     func test_items의_item을_전부제거() {

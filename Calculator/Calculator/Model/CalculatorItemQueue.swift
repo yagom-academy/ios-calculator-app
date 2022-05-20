@@ -5,8 +5,8 @@
 //  Created by dhoney96 on 2022/05/17.
 //
 
-class CalculatorItemQueue: CalculatorItem {
-    private(set) var items = [String?]()
+struct CalculatorItemQueue<T>: CalculatorItem {
+    private(set) var items = [T?]()
     private var head = 0
     
     func convertToDouble(from data: String) -> Double? {
@@ -14,29 +14,21 @@ class CalculatorItemQueue: CalculatorItem {
         return number
     }
     
-    func enqueue(_ data: String) {
-        for element in Operator.allCases {
-            if element.symbol == data.suffix(1) {
-                items.append(data)
-            }
-        }
+    mutating func enqueue(_ data: T) {
+        items.append(data)
     }
     
-    func dequeue() -> String? {
+    mutating func dequeue() -> T? {
         guard head < items.count, let element = items[head] else {
             return nil
         }
         items[head] = nil
         head += 1
         
-        if head > items.count / 2 {
-            items.removeFirst(head)
-            head = 0
-        }
         return element
     }
     
-    func clearAllItem() {
+    mutating func clearAllItem() {
         guard !items.isEmpty else { return }
         items.removeAll()
     }
