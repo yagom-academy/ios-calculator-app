@@ -2,8 +2,6 @@
 
 ### 계산기 프로젝트 저장소
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
-
 # [Step 01] 
 
 # 공부한 내용
@@ -96,10 +94,11 @@
 
 #### flatMap
 > 플랫맵은 체인 형식으로 사용 가능하나 맵은 불가능하다는 차이가 있지만 기본으로 map과 유사합니다.
+> 2차원 배열을 1차원 배열로 flatten하게 만들때 flatMap을 사용.
 
 > (optionals.flatMap{ $0 }.flatMap{ $0 })
 
-```swift
+ ```swift
 let optionals: [Int?] = [0, 1, 2, nil, 4]
 
 let map = optionals.map { $0 }
@@ -125,24 +124,37 @@ print(flatMap) //[0, 1, 2, 4]
 --- 
 
 # 기능 구현
-### ExpressionParser
-```swift
-static func parse(from input: String) -> Formula 
-```
 
-- 들어오는 String 값을 operator & operand 로 나눠서 Formula 타입으로 반환될 수 있도록 하였습니다. 
- 
-#### componentsByOperators
+### Operator
 ```swift
-static func componentsByOperators(from input: String) ->[Character]
+func calculate(lhs: Double, rhs: Double) -> Double 
 ```
-- Operator만을 분류하여 반환할 수 있도록한 함수입니다. 반환 타입을 조금더 편리하게 사용하기 위해 Character로 변경하였습니다.
+- 사칙연산 계산을 위한 함수 입니다.
 
-#### componentsByOperands
 ```swift
-static func componentsByOperands(from input: String) ->[String] 
+static func contains(_ value: Character) -> Bool
 ```
-- - Operand만을 분류하여 반환할 수 있도록한 함수입니다. Operator처럼 반환타입을 변경하지는 않았습니다.
+- enum case를 포함 하고 있는지 확인을 위한 함수입니다.
+
+```swift
+func add(_ lhs: Double, _ rhs: Double) -> Double
+```
+- 더하기 함수
+
+```swift
+func substract(_ lhs: Double, _ rhs: Double) -> Double
+```
+- 빼기 함수
+
+```swift
+func multiply (_ lhs: Double, _ rhs: Double) -> Double
+```
+- 곱하기 함수
+
+```swift
+func divide(_ lhs: Double, _ rhs: Double) -> Double
+```
+- 나누기 함수
 
 ### Formula
 ```swift
@@ -157,7 +169,24 @@ func result() -> Double {}
 ```swift
 private var isCalculatedValue: Double {}
 ```
-
 - 계산을 위한 로직을 처리하는 computed property입니다.
+
+### ExpressionParser
+```swift
+static func parse(from input: String) -> Formula 
+```
+- 들어오는 String 값을 operator & operand 로 나눠서 Formula 타입으로 반환될 수 있도록 하였습니다. 
+ 
+#### componentsByOperators
+```swift
+static func componentsByOperators(from input: String) ->[Character]
+```
+- Operator만을 분류하여 반환할 수 있도록한 함수입니다. 반환 타입을 조금더 편리하게 사용하기 위해 Character로 변경하였습니다.
+
+#### componentsByOperands
+```swift
+static func componentsByOperands(from input: String) ->[String] 
+```
+- - Operand만을 분류하여 반환할 수 있도록한 함수입니다. Operator처럼 반환타입을 변경하지는 않았습니다.
 
 ---
