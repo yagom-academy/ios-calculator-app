@@ -9,7 +9,7 @@ struct Formula {
     var operands = Queue<Double>()
     var operators = Queue<Operator>()
     
-    func result() -> Double {
+    func result() throws -> Double {
         var lhs: Double = 0.0
         while operands.isEmpty == false {
             if lhs == 0.0 {
@@ -18,7 +18,7 @@ struct Formula {
             let rhs = operands.dequeue() ?? 0.0
             if operators.isEmpty == false {
                 let `operator` = operators.dequeue()
-                lhs = (`operator`?.calculate(lhs: lhs, rhs: rhs)) ?? 0.0
+                lhs = ( try `operator`?.calculate(lhs: lhs, rhs: rhs)) ?? 0.0
             }            
         }
         return lhs
