@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct Formula {
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
+    
+    mutating func result() throws -> Double {
+        guard var previousResult = operands.dequeue() else {
+            return 0.0
+        }
+    }
+}
