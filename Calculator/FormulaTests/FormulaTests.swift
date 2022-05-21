@@ -85,8 +85,37 @@ class FormulaTests: XCTestCase {
             
             var headOperand = try sut.operands.dequeue()
             
-            let arithmeticOperator = try sut.operators.dequeue()
+            while !sut.operands.isEmpty {
+                let operandValue = try sut.operands.dequeue()
+                let operatorValue = try sut.operators.dequeue()
+                print(operatorValue)
+                headOperand = try operatorValue.calculate(lhs: headOperand, rhs: operandValue)
+            }
             
+            XCTAssertEqual(headOperand, expectation)
+        } catch {}
+    }
+    
+    func test_result값_5을_반환하다() {
+        do {
+            // given
+            let array1: [Any] = [4.0, Operator.multiply,
+                                 5.0, Operator.divide, 4.0]
+            let expectation = 5.0
+            // when
+            try array1
+                .map{
+                    if let value = $0 as? Operator {
+                        operators.enqueue(value)
+                    }
+                    
+                    if let value = $0 as? Double {
+                        operands.enqueue(value)
+                    }
+                }
+            
+            var headOperand = try sut.operands.dequeue()
+                        
             while !sut.operands.isEmpty {
                 let operandValue = try sut.operands.dequeue()
                 let operatorValue = try sut.operators.dequeue()

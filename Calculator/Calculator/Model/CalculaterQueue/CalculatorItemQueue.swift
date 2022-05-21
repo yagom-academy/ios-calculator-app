@@ -51,3 +51,15 @@ extension CalculatorItemQueue {
          return doublyLinkedList[index]
      }
 }
+
+extension CalculatorItemQueue: CustomStringConvertible {
+    public var description: String {
+        var string = ""
+        var current = doublyLinkedList.first
+        while let node = current {
+            string.append("\(node.value) -> ")
+            current = node.next
+        }
+        return string + "end"
+    }
+}
