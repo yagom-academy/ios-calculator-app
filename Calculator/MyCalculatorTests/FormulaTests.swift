@@ -30,4 +30,29 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 0.0)
     }
+    
+    func test_Formula의_operands에_3과4가담겨있고_operators에_add가담겨있고_result를호출했을때_반환값이7이다() {
+        // given
+        sut.operands.enqueue(data: 3.0)
+        sut.operators.enqueue(data: .add)
+        sut.operands.enqueue(data: 4.0)
+        
+        // when
+        let result = try? sut.result()
+        
+        // then
+        XCTAssertEqual(result, 7.0)
+    }
+    
+    func test_Formula의_operands에3과0이담겨있고_operators에_divide가담겨있고_result를호출했을때_오류를던진다() {
+        // given
+        sut.operands.enqueue(data: 3.0)
+        sut.operators.enqueue(data: .divide)
+        sut.operands.enqueue(data: 0.0)
+        
+        // when
+        
+        // then
+        XCTAssertThrowsError(try sut.result())
+    }
 }

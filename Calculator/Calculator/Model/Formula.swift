@@ -15,5 +15,13 @@ struct Formula {
         guard var previousResult = operands.dequeue() else {
             return 0.0
         }
+        
+        while operators.queue.count != 0 {
+            if let operand = operands.dequeue(),
+               let `operator` = operators.dequeue() {
+                previousResult = try `operator`.calculate(lhs: previousResult, rhs: operand)
+            }
+        }
+        return previousResult
     }
 }
