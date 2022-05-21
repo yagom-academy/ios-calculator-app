@@ -31,17 +31,10 @@ class CalculatorItemQueueTests: XCTestCase {
         //when
         sut?.enQueue(input)
         let result = 4.0
-        var result1: Double?
-        func result() throws {
-            do {
-                result1 = try sut?.deQueue()
-            } catch  {
-                throw QueueError.empty
-            }
-        }
+
         
         //then
-        XCTAssertEqual(result, result1)
+        XCTAssertEqual(result, sut?.enQueueStack.last)
     }
     
     func test_enQueueStack에_값이없다면_deQueue함수를_호출하면_nil을반환하는가() {

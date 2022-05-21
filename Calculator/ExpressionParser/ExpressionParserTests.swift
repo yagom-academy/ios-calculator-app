@@ -21,7 +21,7 @@ class parseTests: XCTestCase {
         sut = nil
     }
     
-    func test_문자열에서_componentsByOperators메소드를사용하면_연산자를순서대로반환하는가() {
+    func test_문자열에서_componentsByOperators메소드를사용하면_공백을기준으로나누어서순서대로반환하는가() {
         //given
         let input = "1 + 2 - 3 + 4 / 2"
         
@@ -29,7 +29,7 @@ class parseTests: XCTestCase {
         let result = sut?.componentsByOperators(from: input)
         
         //then
-        XCTAssertEqual(result, ["+", "-", "+", "/"])
+        XCTAssertEqual(result, ["1", "+", "2", "-", "3", "+", "4", "/", "2"])
     }
     
     func test_문자열에서_componentsByOperators를사용하여_operands를_character로_형변환을하여집어넣는가() {
