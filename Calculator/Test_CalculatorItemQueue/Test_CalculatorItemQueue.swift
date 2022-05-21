@@ -24,31 +24,51 @@ class Test_CalculatorItemQueue: XCTestCase {
     func test_enqueue_실행시_123456_를넣었을때_123456_를반환하는지() {
         // given
         let input: [Int] = [1, 2, 3, 4, 5, 6]
-        let output: [Int] = [1]
-        
+        let output: [Int] = [1, 2, 3, 4, 5, 6]
+        var result: [Int] = []
+
         // when
         input.forEach {
             sut.enqueue([$0])
         }
-        let result = sut.linkedList.head?.data
+        
+        guard let linkedListQueue = sut.linkedList.head?.data else {
+            return
+        }
+        
+        while sut.linkedList.head != nil {
+            result.append(linkedListQueue[0])
+        }
         
         // then
         XCTAssertEqual(result, output)
     }
     
-    func test_dequeue_실행시_123456_를넣었을때_2_를반환하는지() {
+    func test_dequeue_실행시_123456_를넣었을때_23456_를반환하는지() {
         // given
         let input: [Int] = [1, 2, 3, 4, 5, 6]
-        let output: [Int] = [2]
-        
+        let output: [Int] = [2, 3, 4, 5, 6]
+        var result: [Int] = []
+        var node = sut.linkedList.head
+
         // when
         input.forEach {
             sut.enqueue([$0])
         }
         sut.dequeue()
-        let result = sut.linkedList.head?.data
-        
+
+        while node != nil {
+            guard let nodeData = node?.data else {
+                return
+            }
+            nodeData.forEach {
+                result.append($0)
+            }
+            node = node?.next
+        }
+
         // then
         XCTAssertEqual(result, output)
     }
+    
 }
