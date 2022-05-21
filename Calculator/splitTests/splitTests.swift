@@ -23,7 +23,7 @@ class splitTests: XCTestCase {
         //when
         sut = "1-2+3+4"
         
-        //given
+        //given 
         let result = sut.split(separator: "+")
         
         //then
