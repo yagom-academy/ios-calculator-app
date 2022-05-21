@@ -21,7 +21,7 @@ class NodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_Node에_data를입력하면_값이_초기화가_잘되는지() {
+    func test_Node에_data를입력하면_값이_초기화가_잘된다() {
         let number = 3.0
         
         sut?.data = number

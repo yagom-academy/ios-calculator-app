@@ -11,10 +11,3 @@ protocol CalculateItem {
     
 }
 
-extension Double: CalculateItem {
-    
-}
-
-extension String: CalculateItem {
-    
-}
