@@ -2,7 +2,7 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 이예은 on 2022/05/19.
+//  Created by yeton on 2022/05/19.
 //
 
 import Foundation
@@ -19,7 +19,10 @@ struct Formula {
         while operators.queue.count != 0 {
             if let operand = operands.dequeue(),
                let `operator` = operators.dequeue() {
-                previousResult = try `operator`.calculate(lhs: previousResult, rhs: operand)
+                previousResult = try `operator`.calculate(
+                    lhs: previousResult,
+                    rhs: operand
+                )
             }
         }
         return previousResult

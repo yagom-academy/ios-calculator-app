@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by 이예은 on 2022/05/19.
+//  Created by yeton on 2022/05/19.
 //
 
 import Foundation

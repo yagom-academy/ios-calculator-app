@@ -2,7 +2,7 @@
 //  OperatorError.swift
 //  Calculator
 //
-//  Created by 이예은 on 2022/05/20.
+//  Created by yeton on 2022/05/20.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 enum OperatorError: Error {
     case divideError
     
-    var errorPrint: String {
+    var print: String {
         switch self {
         case .divideError:
             return "NAN"
