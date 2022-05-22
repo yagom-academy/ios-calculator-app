@@ -19,7 +19,7 @@ class LinkedListTests: XCTestCase {
     override func setUpWithError() throws {
         sut = LinkedList()
     }
-
+    
     override func tearDownWithError() throws {
         sut = nil
     }
@@ -46,5 +46,20 @@ class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertTrue(result)
+    }
+    
+    // MARK: - removeFirstNode()
+    
+    func test_removeFirstNode메서드_실행시_List의_첫번째_값이_반환된다() {
+        // given
+        let firstData = 1.0, secondData = 2.0
+        sut.append(Node(firstData))
+        sut.append(Node(secondData))
+        
+        // when
+        let result = sut.removeFirstNode()
+        
+        // then
+        XCTAssertEqual(result?.data, firstData)
     }
 }

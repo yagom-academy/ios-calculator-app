@@ -47,4 +47,14 @@ final class LinkedList<Element> {
     func isEmpty() -> Bool {
         return head == nil ? true : false
     }
+    
+    func removeFirstNode() -> Node<Element>? {
+        if !isEmpty() {
+            let removedNode = head ?? nil
+            head = head?.nextNode
+            return removedNode ?? nil
+        }
+        
+        return nil
+    }
 }
