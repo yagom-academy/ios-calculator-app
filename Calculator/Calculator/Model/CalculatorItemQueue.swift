@@ -12,6 +12,10 @@ struct CalculatorItemQueue<Element> {
     
     private(set) var queue = LinkedList<Element>()
     
+    var peek: Element? {
+        return queue.head?.data ?? nil
+    }
+    
     // MARK: - Action
     
     mutating func enqueue(_ data: Element) {

@@ -23,6 +23,23 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
+    // MARK: - peek 연산프로퍼티
+    
+    func test_peek연산프로퍼티_1과2를넣으면_먼저넣은_1을_반환한다() {
+        // given
+        let firstNumber = 1.0, secondNumber = 2.0
+        sut.enqueue(firstNumber)
+        sut.enqueue(secondNumber)
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result, firstNumber)
+    }
+    
+    
+    
     // MARK: - enqueue(_:)
     
     func test_enqueue의아규먼트로_0을_넣었을때_queue가빈배열이면_False() {
