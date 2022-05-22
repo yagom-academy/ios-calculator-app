@@ -9,12 +9,12 @@ struct Formula {
         let operatorSymbol = Character(operators.dequeue() ?? "")
         var result = 0.0
         
-        let choice = Operator.allCases.filter {
+        let `operator` = Operator.allCases.filter {
             $0.rawValue == operatorSymbol
         }
         
         do {
-            result = try choice[0].calculate(lhs: lhs, rhs: rhs)
+            result = try `operator`[0].calculate(lhs: lhs, rhs: rhs)
         } catch CalculatorError.dividedByZero {
             throw CalculatorError.dividedByZero
         }
