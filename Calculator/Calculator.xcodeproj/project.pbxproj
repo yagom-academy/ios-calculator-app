@@ -14,7 +14,7 @@
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		FD7979B128355155006E81C6 /* Double+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7979B028355155006E81C6 /* Double+CalculateItem.swift */; };
-		FDF780412834DE4100A91171 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF780402834DE4000A91171 /* CalculatorItemQueue.swift */; };
+		FDF780412834DE4100A91171 /* Queue+CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF780402834DE4000A91171 /* Queue+CalculatorItemQueue.swift */; };
 		FDF780592834EFBB00A91171 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF780582834EFBB00A91171 /* CalculatorItemQueueTests.swift */; };
 		FDFB0CEF283A4F4D0017E844 /* Node+LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB0CEE283A4F4D0017E844 /* Node+LinkedList.swift */; };
 		FDFB0CF7283A4F5D0017E844 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB0CF6283A4F5D0017E844 /* NodeTests.swift */; };
@@ -55,7 +55,7 @@
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD7979B028355155006E81C6 /* Double+CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CalculateItem.swift"; sourceTree = "<group>"; };
-		FDF780402834DE4000A91171 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
+		FDF780402834DE4000A91171 /* Queue+CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Queue+CalculatorItemQueue.swift"; sourceTree = "<group>"; };
 		FDF780562834EFBB00A91171 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF780582834EFBB00A91171 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		FDFB0CEE283A4F4D0017E844 /* Node+LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Node+LinkedList.swift"; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		FDF780422834DEE400A91171 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FDF780402834DE4000A91171 /* CalculatorItemQueue.swift */,
+				FDF780402834DE4000A91171 /* Queue+CalculatorItemQueue.swift */,
 				FD7979B028355155006E81C6 /* Double+CalculateItem.swift */,
 				FDFB0CEE283A4F4D0017E844 /* Node+LinkedList.swift */,
 			);
@@ -348,7 +348,7 @@
 				FD7979B128355155006E81C6 /* Double+CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
-				FDF780412834DE4100A91171 /* CalculatorItemQueue.swift in Sources */,
+				FDF780412834DE4100A91171 /* Queue+CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
