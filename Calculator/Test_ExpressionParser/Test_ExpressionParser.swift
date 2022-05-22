@@ -20,7 +20,7 @@ class Test_ExpressionParser: XCTestCase {
     
     func test_componentsByOperators_실행했을때_₩Split이되는지() {
         // ginven
-        let input: String = "1₩+₩2₩-₩3₩*₩4₩/₩5"
+        let input: String = "1 + 2 - 3 * 4 / 5"
         let output: [String] = ["1", "+", "2", "-", "3", "*", "4", "/", "5"]
         
         // when
