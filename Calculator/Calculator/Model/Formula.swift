@@ -9,29 +9,29 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<String>
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         guard !operands.items.isEmpty,
               !operators.items.isEmpty,
               operands.items.count > operators.items.count,
               var total = operands.dequeue() else
         {
-            return 0.0
+            throw CalculatorError.emptyError
         }
         
         for _ in 1...operators.items.count {
-            guard let number = operands.dequeue() else { return 0.0 }
+            guard let number = operands.dequeue() else { throw CalculatorError.emptyError }
             
             let symbol = operators.dequeue()
             
             switch symbol {
             case "+":
-                total = Operator.add.calculate(lhs: total, rhs: number)
+                total = try Operator.add.calculate(lhs: total, rhs: number)
             case "-":
-                total = Operator.subtract.calculate(lhs: total, rhs: number)
+                total = try Operator.subtract.calculate(lhs: total, rhs: number)
             case "/":
-                total = Operator.divide.calculate(lhs: total, rhs: number)
+                total = try Operator.divide.calculate(lhs: total, rhs: number)
             case "*":
-                total = Operator.multiply.calculate(lhs: total, rhs: number)
+                total = try Operator.multiply.calculate(lhs: total, rhs: number)
             default:
                 break
             }

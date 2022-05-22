@@ -24,21 +24,14 @@ class FormulaTests: XCTestCase {
         operators = nil
         formula = nil
     }
-    
-    func test_CalculatorItemQueue가_비어있을때_0을_반환() {
-        let returnValue = 0.0
-        let result = formula.result()
-        
-        XCTAssertEqual(result, returnValue)
-    }
-    
+
     func test_operators의_연산자가_더하기일경우_양변의합을_반환() {
         formula.operands.enqueue(123.0)
         formula.operands.enqueue(123.0)
         formula.operators.enqueue("+")
 
         let returnValue = 246.0
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(returnValue, result)
     }
@@ -52,7 +45,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue("-")
         
         let returnValue = 123.0
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(returnValue, result)
     }
@@ -70,7 +63,7 @@ class FormulaTests: XCTestCase {
         formula.operators.enqueue("/")
         
         let returnValue = 2.0
-        let result = formula.result()
+        let result = try? formula.result()
         
         XCTAssertEqual(returnValue, result)
     }
