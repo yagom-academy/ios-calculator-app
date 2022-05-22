@@ -32,6 +32,7 @@ final class LinkedList<Element> {
     func append(_ newNode: Node<Element>) {
         if head == nil {
             head = newNode
+            return
         }
         
         var currentNode = head
