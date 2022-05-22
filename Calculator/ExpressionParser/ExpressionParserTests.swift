@@ -26,7 +26,7 @@ class parseTests: XCTestCase {
         let input = "1 + 2 - 3 + 4 / 2"
         
         //when
-        let result = sut?.componentsByOperators(from: input)
+        let result = input.split(with: " ")
         
         //then
         XCTAssertEqual(result, ["1", "+", "2", "-", "3", "+", "4", "/", "2"])
@@ -52,7 +52,7 @@ class parseTests: XCTestCase {
         let input = "1 + 2 - 3 + 4 / 2"
         
         //given
-        let result = sut?.componentsByOperators(from: input)
+        let result = input.split(with: " ")
                     .compactMap { Operator(rawValue: Character($0)) }
         
         //then
@@ -92,7 +92,7 @@ class parseTests: XCTestCase {
         //given
         let input = "1 + 2 - 3 + 4 / 2"
         var operatorQueue = CalculatorItemQueue<Operator>()
-        let operators = ExpressionParser.componentsByOperators(from: input)
+        let operators = input.split(with: " ")
                         .filter{ $0.count == 1 }
                         .compactMap{ Operator(rawValue: Character($0))}
         

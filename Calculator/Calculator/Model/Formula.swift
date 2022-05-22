@@ -12,7 +12,7 @@ struct Formula {
     mutating func result() throws -> Double {
         guard var lastResult = try? operands.deQueue() else { throw QueueError.wrongOperands }
         
-        while operands.joinedQueue.isEmpty != true {
+        while !operands.joinedQueue.isEmpty {
             guard let inputNumber = try? operands.deQueue() else {
                 throw QueueError.wrongOperands
             }
