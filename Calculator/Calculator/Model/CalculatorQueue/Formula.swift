@@ -8,15 +8,19 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double> // 숫자
-    var operators: CalculatorItemQueue<Operator> // 연산자
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
-//    mutating func result() -> Double {
-//        var resuit = operands.dequeue()
-//        
-//        var oper = operators.dequeue()
-//        
-//        resuit = Operator.calculate(Ihs: resuit, rhs: oper)
-//        return resuit
-//    }
+    mutating func result() -> Double {
+        guard let rhs = operands.dequeue(),
+              let lhs = operands.dequeue(),
+              let result = operators.dequeue() else {
+            return 0.0
+        }
+        
+        let answer = result.calculate(Ihs: lhs, rhs: rhs)
+        
+        return answer
+        
+    }
 }
