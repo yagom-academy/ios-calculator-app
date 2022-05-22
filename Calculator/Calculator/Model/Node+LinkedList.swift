@@ -27,6 +27,18 @@ final class LinkedList<Element> {
     
     private(set) var head: Node<Element>?
     
+    var length: Int {
+        var currentNode = head
+        var count = 0
+        
+        while currentNode != nil {
+            currentNode = currentNode?.nextNode
+            count += 1
+        }
+        
+        return count
+    }
+    
     // MARK: - Action
     
     func append(_ newNode: Node<Element>) {

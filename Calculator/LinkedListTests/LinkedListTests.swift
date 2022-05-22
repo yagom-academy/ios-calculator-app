@@ -62,4 +62,18 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result?.data, firstData)
     }
+    
+    func test_length연산프로퍼티_호출시_Node의_개수와_length는_같다() {
+        // given
+        let firstData = 1.0, secondData = 2.0
+        sut.append(Node(firstData))
+        sut.append(Node(secondData))
+        
+        // when
+        let result = sut.length
+        
+        // then
+        XCTAssertEqual(result, sut.length)
+        
+    }
 }
