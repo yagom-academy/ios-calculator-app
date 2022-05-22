@@ -22,7 +22,7 @@ enum Operator: Character, CaseIterable {
                 let divide = try divide(lhs: lhs, rhs: rhs)
                 return divide
             } catch {
-                throw QueueError.wrongOperators
+                throw OperatorError.devideFail
             }
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
@@ -38,7 +38,7 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
-        guard rhs != 0 else { throw QueueError.unknown }
+        guard rhs != 0 else { throw OperatorError.devideFail }
         return lhs / rhs
     }
     
