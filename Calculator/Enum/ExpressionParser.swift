@@ -15,3 +15,11 @@ extension String {
         return  result
     }
 }
+
+enum ExpressionPaser {
+    static private func componentsByoperator(from input: String) -> [String] {
+        let result = input.split(with: " ")
+        
+        return result
+    }
+}
