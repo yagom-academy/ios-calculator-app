@@ -36,8 +36,9 @@ class ExpressionParserTests: XCTestCase {
         // when
         let result = ExpressionParser.parse(from: input).operands.displayItems()
         // then
-        XCTAssertEqual(result, [12,3,4,5])
+        XCTAssertEqual(result, [12,-3,4,5])
     }
+    
     func test연산자가_연속으로_들어와도_나눌_수_있는지2() {
         // given
         let input = "12+-3-4+5"

@@ -1,9 +1,9 @@
 extension String {
     func split(with target: Character) -> [String] {
-        let endindex = self.firstIndex(of: target) ?? self.startIndex
-        let numbers = String(self[self.startIndex..<endindex])
+        let endIndex = self.lastIndex(of: target) ?? self.startIndex
+        let numbers = String(self[self.startIndex..<endIndex])
         
-        return [numbers] + [String(target)]
+        return [numbers]
     }
 }
 
