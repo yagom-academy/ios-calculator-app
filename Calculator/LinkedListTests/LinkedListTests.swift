@@ -74,6 +74,5 @@ class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, sut.length)
-        
     }
 }

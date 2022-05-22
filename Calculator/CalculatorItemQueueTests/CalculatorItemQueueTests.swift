@@ -38,8 +38,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, firstNumber)
     }
     
-    
-    
     // MARK: - enqueue(_:)
     
     func test_enqueue의아규먼트로_0을_넣었을때_queue가빈배열이면_False() {

@@ -25,7 +25,6 @@ class NodeTests: XCTestCase {
     }
     
     func test_data에_값_할당_가능하면_True() {
-      
         // given
         let value = 1.0
         
