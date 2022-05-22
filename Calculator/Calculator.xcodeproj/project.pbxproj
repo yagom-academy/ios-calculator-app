@@ -100,21 +100,21 @@
 			path = SubModel;
 			sourceTree = "<group>";
 		};
-		6ACDA4012834D7AC0078A8ED /* Resource */ = {
+		6ACDA4012834D7AC0078A8ED /* Asset */ = {
 			isa = PBXGroup;
 			children = (
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 			);
-			path = Resource;
+			path = Asset;
 			sourceTree = "<group>";
 		};
-		6ACDA4022834DB980078A8ED /* Delegates */ = {
+		6ACDA4022834DB980078A8ED /* Entries */ = {
 			isa = PBXGroup;
 			children = (
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 			);
-			path = Delegates;
+			path = Entries;
 			sourceTree = "<group>";
 		};
 		6AE8C0F428335CEE006805EF /* Model */ = {
@@ -175,8 +175,8 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				6ACDA4022834DB980078A8ED /* Delegates */,
-				6ACDA4012834D7AC0078A8ED /* Resource */,
+				6ACDA4022834DB980078A8ED /* Entries */,
+				6ACDA4012834D7AC0078A8ED /* Asset */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
