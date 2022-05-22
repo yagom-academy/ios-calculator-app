@@ -22,4 +22,25 @@ enum ExpressionPaser {
         
         return result
     }
+    
+    static func parse(from input: String) -> Formula {
+        var operandsQueue = CalculatorItemQueue<Double>()
+        var operatorsQueue = CalculatorItemQueue<Character>()
+        
+        let paser = componentsByoperator(from: input)
+        let allOperator = Operator.allCases.map { String($0.rawValue) }
+        
+        let operands = paser.compactMap{ Double($0) }
+        let operators = paser.filter {
+            allOperator.contains($0)
+        }
+        
+        operators.forEach {
+            operatorsQueue.enQueue(Character($0))
+        }
+        
+        operands.forEach(operandsQueue.enQueue(_:))
+        
+        return Formula(operands: operandsQueue, operators: operatorsQueue)
+    }
 }
