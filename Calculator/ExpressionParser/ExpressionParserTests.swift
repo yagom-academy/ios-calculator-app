@@ -38,7 +38,7 @@ class parseTests: XCTestCase {
         
         //when
         let result = input.filter { $0.isNumber == false }
-                            .filter{ $0 != " " }
+                            .filter { $0 != " " }
                             .map { Character(extendedGraphemeClusterLiteral: $0) }
         
         //then
@@ -94,7 +94,7 @@ class parseTests: XCTestCase {
                         .filter { $0.count == 1 }
                         .compactMap{ Operator(rawValue: Character($0))}
         
-        operators.forEach{ operatorQueue.enQueue($0) }
+        operators.forEach { operatorQueue.enQueue($0) }
         
         //when
         let result = operatorQueue.enQueueStack

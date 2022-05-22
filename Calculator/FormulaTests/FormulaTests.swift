@@ -60,7 +60,7 @@ class FormulaTests: XCTestCase {
         do {
             result = try sut?.result()
         } catch {
-            print(QueueError.unknown.errorDescription ?? "")
+            print(QueueError.unknown.errorDescription)
         }
         let input = 2.0
         
