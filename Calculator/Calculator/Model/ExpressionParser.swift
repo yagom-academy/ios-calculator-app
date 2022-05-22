@@ -6,5 +6,9 @@
 //
 
 enum ExpressionParser {
-
+    static func componentsByOperators(from input: String) -> [String] {
+        var data = input
+        let lastCharacter = data.removeLast()
+        return input.split(with: lastCharacter)
+    }
 }
