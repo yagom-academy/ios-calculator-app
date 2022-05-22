@@ -8,14 +8,14 @@
 import Foundation
 
 enum OperatorError: LocalizedError {
-    case devide
+    case devideFail
     case unknown
 }
 
 extension OperatorError {
-    public var errorDescription: String? {
+    var errorDescription: String {
         switch self {
-        case .devide:
+        case .devideFail:
             return NSLocalizedString("devide error",
                                      comment: "devide error")
         case .unknown:
