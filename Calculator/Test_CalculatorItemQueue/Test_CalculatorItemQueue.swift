@@ -32,12 +32,15 @@ class Test_CalculatorItemQueue: XCTestCase {
             sut.enqueue([$0])
         }
         
-        guard let linkedListQueue = sut.linkedList.head?.data else {
-            return
-        }
-        
-        while sut.linkedList.head != nil {
-            result.append(linkedListQueue[0])
+        var node = sut.linkedList.head
+        while node != nil {
+            guard let nodeData = node?.data else {
+                return
+            }
+            nodeData.forEach {
+                result.append($0)
+            }
+            node = node?.next
         }
         
         // then
@@ -64,13 +67,13 @@ class Test_CalculatorItemQueue: XCTestCase {
         let input: [Int] = [1, 2, 3, 4, 5, 6]
         let output: [Int] = []
         var result: [Int] = []
-        var node = sut.linkedList.head
 
         //when
         input.forEach {
             sut.enqueue([$0])
         }
         sut.clear()
+        var node = sut.linkedList.head
 
         while node != nil {
             guard let nodeData = node?.data else {
