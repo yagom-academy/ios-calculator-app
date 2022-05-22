@@ -38,15 +38,13 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_enQueueStack에_값이없다면_deQueue함수를_호출하면_nil을반환하는가() {
         //given
+        var result: Double?
         
         //when
-        var result: Double?
-        func result() throws {
-            do {
-                result = try sut?.deQueue()
-            } catch  {
-                throw QueueError.empty
-            }
+        do {
+            result = try sut?.deQueue()
+        } catch  {
+            print(QueueError.empty.errorDescription)
         }
         
         //then
@@ -113,8 +111,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result1, 1.0)
         XCTAssertEqual(result2, 2.0)
         XCTAssertEqual(result3, 3.0)
-
-       
     }
     
     func test_deQueue함수를_호출했을때_deQueueStack의배열에서_마지막값을반환하는가() {
@@ -138,7 +134,6 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_deQueueStack이_비어있을때_enQueue함수를_호출하고_deQueue를호출하면_값이제대로_넘어가는가() {
         //given
-
         sut?.enQueue(1.0)
         sut?.enQueue(2.0)
         sut?.enQueue(3.0)
