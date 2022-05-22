@@ -2,32 +2,23 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let formula = Formula()
         let operators = componentsByOperators(from: input)
-        var count = 0
-        let operands = input.reduce("") { (result, element) -> String in
-            if operators.contains(String(element)) && count > 0 {
-                let joinedResult = result + String(element)
-                let operand = Double(joinedResult.split(with: element)[0]) ?? 0
-                print(operand)
-                formula.operands.enqueue(operand)
-                count = 0
-                return ""
+        var inputs = input
+        
+        operators.enumerated().forEach { (index,operatorSymbol) in
+            formula.operators.enqueue(operatorSymbol)
+            
+            let sliceOfInput = inputs.split(with: Character(operatorSymbol))
+            if sliceOfInput[0] != "" {
+                formula.operands.enqueue(Double(sliceOfInput[0]) ?? 0)
             }
             
-            if element.isNumber {
-                count += 1
-            } else {
-                count = 0
-            }
+            inputs = sliceOfInput[1]
             
-            return result + String(element)
+            if index == operators.count-1 {
+                formula.operands.enqueue(Double(inputs) ?? 0)
+            }
         }
-        
-        formula.operands.enqueue(Double(operands) ?? 0)
-        
-        operators.forEach {
-            formula.operators.enqueue($0)
-        }
-        
+
         return formula
     }
     
