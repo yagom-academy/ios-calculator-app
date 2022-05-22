@@ -18,6 +18,8 @@
 		8FB0DE08283661C60088D52F /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE07283661C60088D52F /* Operator.swift */; };
 		8FB0DE09283661C60088D52F /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE07283661C60088D52F /* Operator.swift */; };
 		8FB0DE5C2837ABC60088D52F /* FomulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE5B2837ABC60088D52F /* FomulaTest.swift */; };
+		8FB0DE662839D49C0088D52F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE652839D49C0088D52F /* ExpressionParser.swift */; };
+		8FB0DE672839D4AC0088D52F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE652839D49C0088D52F /* ExpressionParser.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -53,6 +55,7 @@
 		8FB0DE07283661C60088D52F /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		8FB0DE592837ABC60088D52F /* FomulaTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FomulaTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB0DE5B2837ABC60088D52F /* FomulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FomulaTest.swift; sourceTree = "<group>"; };
+		8FB0DE652839D49C0088D52F /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpressionParser.swift; path = Enum/ExpressionParser.swift; sourceTree = SOURCE_ROOT; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				8FB0DE07283661C60088D52F /* Operator.swift */,
+				8FB0DE652839D49C0088D52F /* ExpressionParser.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -293,6 +297,7 @@
 				8FB0DE09283661C60088D52F /* Operator.swift in Sources */,
 				8F7860B12833343A00A6FF87 /* CalculatorItemQueueTest.swift in Sources */,
 				8FB0DE0028353CD50088D52F /* LinkedList.swift in Sources */,
+				8FB0DE672839D4AC0088D52F /* ExpressionParser.swift in Sources */,
 				8FB0DDFD28353C150088D52F /* CalculatorItemQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FB0DE0228353D3C0088D52F /* Node.swift in Sources */,
+				8FB0DE662839D49C0088D52F /* ExpressionParser.swift in Sources */,
 				8FB0DE05283607270088D52F /* Formula.swift in Sources */,
 				8FB0DDFF28353CD50088D52F /* LinkedList.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
