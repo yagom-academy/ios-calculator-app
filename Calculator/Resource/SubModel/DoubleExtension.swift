@@ -5,6 +5,6 @@
 //  Created by Kay on 2022/05/20.
 //
 
-extension Double {
+extension Double: CalculateItem {
     
 }
