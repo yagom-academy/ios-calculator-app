@@ -16,7 +16,7 @@ extension OperatorError {
     var errorDescription: String {
         switch self {
         case .devideFail:
-            return NSLocalizedString("devide error",
+            return NSLocalizedString("NaN",
                                      comment: "devide error")
         case .unknown:
             return NSLocalizedString("unknown error",
