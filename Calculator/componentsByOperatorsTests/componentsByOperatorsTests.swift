@@ -45,7 +45,6 @@ class componentsByOperatorsTests: XCTestCase {
     func test_filter고차함수를이용해_숫자가아닌것을_필터링을하는가() {
         //given
         sut = "1 + 2 - 3"
-        let test = sut.components(separatedBy:" ")
         
         //when
         let result = sut.filter { $0.isNumber == false }
