@@ -32,7 +32,7 @@ class FormulaTests: XCTestCase {
         do {
             result = try sut?.result()
         } catch {
-            QueueError.unknown
+            print(QueueError.unknown.errorDescription)
         }
         let input = 4.0
         
@@ -68,7 +68,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, input)
     }
     
-    func test_두번째숫자가0이면_에러숫자를반환하는가() throws {
+    func test_두번째숫자가0이면_에러숫자를반환하는가() {
         //given
         sut?.operands.enQueue(1.0)
         sut?.operators.enQueue(.divide)
@@ -81,7 +81,6 @@ class FormulaTests: XCTestCase {
             do {
                 input = try sut?.result()
             } catch {
-                print(QueueError.unknown.errorDescription ?? "")
                 throw QueueError.unknown
             }
         }
