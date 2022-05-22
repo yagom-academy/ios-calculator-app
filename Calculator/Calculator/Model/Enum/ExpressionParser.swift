@@ -22,7 +22,7 @@ enum ExpressionParser {
                        operators: operatorQueue)
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
 }
