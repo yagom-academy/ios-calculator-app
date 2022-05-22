@@ -12,7 +12,7 @@ class NodeTests: XCTestCase {
     
     // MARK: - Properties
     
-    var sut: Node<Any>!
+    var sut: Node<Double>!
 
     // MARK: - Action
     
@@ -27,12 +27,12 @@ class NodeTests: XCTestCase {
     func test_data에_값_할당_가능하면_True() {
       
         // given
-        let value = 1
+        let value = 1.0
         
         // when
         sut.data = value
         
         // then
-        XCTAssertEqual(sut.data as! Int, value)
+        XCTAssertEqual(sut.data, value)
     }
 }
