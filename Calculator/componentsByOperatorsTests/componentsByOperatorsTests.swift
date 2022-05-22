@@ -7,7 +7,6 @@
 
 import XCTest
 
-
 class componentsByOperatorsTests: XCTestCase {
     var sut = "+-*/"
     override func setUpWithError() throws {

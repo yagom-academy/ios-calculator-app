@@ -31,7 +31,6 @@ class CalculatorItemQueueTests: XCTestCase {
         //when
         sut?.enQueue(input)
         let result = 4.0
-
         
         //then
         XCTAssertEqual(result, sut?.enQueueStack.last)
@@ -55,10 +54,12 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enQueue를세번호출하고_deQueue를_2번호출해도_값이잘넘어가는가() {
+        //given
         sut?.enQueue(1.0)
         sut?.enQueue(2.0)
         sut?.enQueue(3.0)
         
+        //when
         var result1: Double?
         var result2: Double?
         
@@ -74,6 +75,7 @@ class CalculatorItemQueueTests: XCTestCase {
             print("nil 값을 반환하지 않음!")
         }
         
+        //then
         XCTAssertEqual(result1, 1.0)
         XCTAssertEqual(result2, 2.0)
     }
@@ -149,7 +151,6 @@ class CalculatorItemQueueTests: XCTestCase {
         } catch  {
             print("nil 값을 반환하지 않음!")
         }
-
         
         //then
         XCTAssertEqual(result, 1.0)

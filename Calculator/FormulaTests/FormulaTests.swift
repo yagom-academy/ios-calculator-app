@@ -6,10 +6,11 @@
 //
 
 import XCTest
-
 @testable import Calculator
+
 class FormulaTests: XCTestCase {
     var sut: Formula?
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Formula()
@@ -21,10 +22,10 @@ class FormulaTests: XCTestCase {
     }
     
     func test_두숫자를_operands에넣어주고_operators_에더하기연산자를넣어주고_result함수를_호출하면_4를반환하는가() {
+        //given
         sut?.operands.enQueue(1.0)
         sut?.operators.enQueue(.add)
         sut?.operands.enQueue(3.0)
-        //given
         var result: Double? = 0
         
         //when
@@ -76,13 +77,12 @@ class FormulaTests: XCTestCase {
         var input: Double? = 1.0
         
         //when
-        let result = QueueError.unknown
         func test() throws {
             do {
                 input = try sut?.result()
             } catch {
-                throw QueueError.unknown
                 print(QueueError.unknown.errorDescription ?? "")
+                throw QueueError.unknown
             }
         }
         
