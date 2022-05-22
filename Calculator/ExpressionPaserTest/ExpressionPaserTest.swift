@@ -23,6 +23,7 @@ class ExpressionPaserTest: XCTestCase {
         //given
         let inputExpresion = "1 + 2 * -3"
         let expected = -9.0
+        
         // when
         let result = ExpressionPaser.parse(from: inputExpresion).result()
         
@@ -30,4 +31,16 @@ class ExpressionPaserTest: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
+    func test_연산자가_먼저_입력된_식도_올바르게_계산하는지() {
+        //given
+        let inputExpresion = "+3 + 5 - 1"
+        let expected = 7.0
+        
+        // when
+        let result = ExpressionPaser.parse(from: inputExpresion).result()
+        
+        // then
+        XCTAssertEqual(result, expected)
+        
+    }
 }
