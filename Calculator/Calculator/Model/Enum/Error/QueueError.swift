@@ -10,12 +10,12 @@ import Foundation
 enum QueueError: LocalizedError {
     case empty
     case unknown
-    case operators
-    case operands
+    case wrongOperators
+    case wrongOperands
 }
 
 extension QueueError {
-    public var errorDescription: String? {
+    var errorDescription: String {
         switch self {
         case .empty:
             return NSLocalizedString("empty",
@@ -23,10 +23,10 @@ extension QueueError {
         case .unknown:
             return NSLocalizedString("unknown error",
                                      comment: "unknown error")
-        case .operators:
+        case .wrongOperators:
             return NSLocalizedString("operators error",
                                      comment: "operators got error")
-        case .operands:
+        case .wrongOperands:
             return NSLocalizedString("operands error",
                                      comment: "operands got error")
         }

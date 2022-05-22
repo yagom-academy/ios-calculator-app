@@ -22,7 +22,7 @@ enum Operator: Character, CaseIterable {
                 let divide = try divide(lhs: lhs, rhs: rhs)
                 return divide
             } catch {
-                throw QueueError.operators
+                throw QueueError.wrongOperators
             }
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
