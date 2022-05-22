@@ -15,20 +15,16 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         linkedList.append(data: element)
     }
     
-    mutating func dequeue() {
-        linkedList.removeFirst()
+    mutating func dequeue() -> T? {
+        return linkedList.pop()
     }
     
     mutating func clear() {
         linkedList.removeAll()
     }
     
-    mutating func peek() -> Double {
-        return linkedList.peekFrist() as! Double
-    }
-    
-    mutating func doFristPeekAndremove() -> Double {
-        return linkedList.peekAndRemove() as! Double
+    mutating func peek() -> T? {
+        return linkedList.peek()
     }
 }
 

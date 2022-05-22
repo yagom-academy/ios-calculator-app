@@ -21,20 +21,18 @@ struct LinkedList<T> {
         node?.next = Node(data: data)
     }
     
-    mutating func removeFirst() {
-        if head?.next == nil {
+    mutating func pop() -> T? {
+        if head == nil {
             head = nil
-            return
+            return nil
         }
+        
+        let item = head?.data
         head = head?.next
+        return item
     }
     
-    mutating func peekFrist() -> T? {
-        return head?.data
-    }
-    
-    mutating func peekAndRemove() -> T? {
-        removeFirst()
+    mutating func peek() -> T? {
         return head?.data
     }
     
