@@ -8,21 +8,16 @@
 enum ExpressionParser {
     
     /// 파서해서 Formular에 데이터 보내는 함수 변환?? 파싱한다..
-//    static func parse(from input: String) -> Formula {
-//        componentsByOperators(from: input)
-//        let input: String = "3+3-3"
-//
-//
-//        return
-//    }
-//
-//    /// Operators의 구성요소
-//    static private func componentsByOperators(from input: String) -> [String] {
-//        var arrays: [String] = []
-//        let input: String
-//        input.split(with: Operator.add.rawValue)
-//        arrays.append(input)
-//
-//        return arrays
-//    }
+    static func parse(from input: String) -> Formula {
+        let splitElements = componentsByOperators(from: input)
+        let operandQueue = CalculatorItemQueue<Double>()
+        let operatorQueue = CalculatorItemQueue<Operator>()
+        
+        return Formula(operands: operandQueue, operators: operatorQueue)
+    }
+
+    /// Operators의 구성요소
+    static func componentsByOperators(from input: String) -> [String] {
+        return input.split(with: "₩")
+    }
 }
