@@ -11,7 +11,12 @@ enum Operator: Character, CaseIterable {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return try divide(lhs: lhs, rhs: rhs)
+            do {
+                let result = try divide(lhs: lhs, rhs: rhs)
+                return result
+            } catch CalculatorError.dividedByZero {
+                throw CalculatorError.dividedByZero
+            }
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }

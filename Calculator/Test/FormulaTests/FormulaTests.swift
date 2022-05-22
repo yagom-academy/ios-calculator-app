@@ -22,7 +22,12 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(2)
         sut.operators.enqueue("+")
         // when
-        let result = sut.result()
+        var result = 0.0
+        do {
+            result = try sut.result()
+        } catch {
+            print(CalculatorError.unknownError.errorMessage)
+        }
         // then
         XCTAssertEqual(result, 3)
     }
@@ -33,8 +38,13 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(2)
         sut.operators.enqueue("/")
         // when
-        let result = sut.result()
+        var result = ""
+        do {
+            try sut.result()
+        } catch {
+            result = CalculatorError.dividedByZero.errorMessage
+        }
         // then
-        XCTAssertEqual(result, 0)
+        XCTAssertEqual(result, "NaN")
     }
 }
