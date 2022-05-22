@@ -24,7 +24,7 @@ class ExpressionPaserTest: XCTestCase {
         let inputExpresion = "1 + 2 * -3"
         
         // when
-        let result = ExpressionParser.parse(from: inputExpresion).result()
+        let result = ExpressionPaser.parse(from: inputExpresion).result()
         
         // then
         XCTAssertEqual(result, -9.0)

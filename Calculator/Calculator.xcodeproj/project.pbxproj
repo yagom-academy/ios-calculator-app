@@ -19,7 +19,6 @@
 		8FB0DE09283661C60088D52F /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE07283661C60088D52F /* Operator.swift */; };
 		8FB0DE5C2837ABC60088D52F /* FomulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE5B2837ABC60088D52F /* FomulaTest.swift */; };
 		8FB0DE662839D49C0088D52F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE652839D49C0088D52F /* ExpressionParser.swift */; };
-		8FB0DE672839D4AC0088D52F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE652839D49C0088D52F /* ExpressionParser.swift */; };
 		8FD47AB0283A86F100ED0CD5 /* ExpressionPaserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD47AAF283A86F100ED0CD5 /* ExpressionPaserTest.swift */; };
 		8FD47AB7283A871300ED0CD5 /* ExpressionPaserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD47AB6283A871300ED0CD5 /* ExpressionPaserTest.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
@@ -358,7 +357,6 @@
 				8F7860B12833343A00A6FF87 /* CalculatorItemQueueTest.swift in Sources */,
 				8FD47AB7283A871300ED0CD5 /* ExpressionPaserTest.swift in Sources */,
 				8FB0DE0028353CD50088D52F /* LinkedList.swift in Sources */,
-				8FB0DE672839D4AC0088D52F /* ExpressionParser.swift in Sources */,
 				8FB0DDFD28353C150088D52F /* CalculatorItemQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
