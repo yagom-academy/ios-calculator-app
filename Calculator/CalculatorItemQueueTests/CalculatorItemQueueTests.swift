@@ -11,7 +11,7 @@ import XCTest
 class CalculatorItemQueueTests: XCTestCase {
     // MARK: - Properties
     
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<Double>!
     
     // MARK: - Action
     
@@ -31,7 +31,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(number)
-        let result = sut.queue.isEmpty
+        let result = sut.queue.isEmpty()
         
         // then
         XCTAssertFalse(result)
@@ -43,43 +43,14 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(number)
-        let result = sut.queue.first
+        let result = sut.queue.head
         
         // then
-        XCTAssertEqual(result, number)
-    }
-    
-    func test_enqueue의아규먼트로_1과_10과_500을_넣을시_queue에_1_10_500이_있으면_True() {
-        // given
-        let firstNumber = 1.0
-        let secondNumber = 10.0
-        let thirdNumber = 500.0
-        let expectation: [Double] = [firstNumber, secondNumber, thirdNumber]
-        
-        // when
-        sut.enqueue(firstNumber)
-        sut.enqueue(secondNumber)
-        sut.enqueue(thirdNumber)
-        let result = sut.queue
-        
-        // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result?.data, number)
     }
     
     // MARK: - dequeue()
-    
-    func test_dequeue호출시_queue의_요소를_리턴하는지() {
-        // given
-        let number: Double = 1.0
-        sut.enqueue(number)
         
-        // when
-        let result = sut.dequeue()
-        
-        // then
-        XCTAssertEqual(result, number)
-    }
-    
     func test_queue가_빈배열일때_dequeue호출시_nil을_반환하는지() {
         // given
         // sut의 초기화시 queue는 빈 배열이 되므로 생략
@@ -102,6 +73,6 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = sut.dequeue()
         
         // then
-        XCTAssertEqual(firstNumber, result)
+        XCTAssertEqual(firstNumber, result?.data)
     }
 }

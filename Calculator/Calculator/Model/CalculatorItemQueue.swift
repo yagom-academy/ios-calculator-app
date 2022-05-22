@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
+struct CalculatorItemQueue<Element> {
     // MARK: - Properties
     
-    private(set) var queue: [Double] = []
+    private(set) var queue = LinkedList<Element>()
     
     // MARK: - Action
     
-    mutating func enqueue(_ number: Double) {
-        queue.append(number)
+    mutating func enqueue(_ data: Element) {
+        queue.append(Node(data))
     }
     
-    mutating func dequeue() -> Double? {
-        return queue.isEmpty ? nil : queue.removeFirst()
+    mutating func dequeue() -> Node<Element>? {
+        return queue.isEmpty() == true ? nil : queue.removeFirstNode()
     }
 }
