@@ -48,7 +48,7 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(number)
-        let result = sut.queue.isEmpty()
+        let result = sut.isEmpty()
         
         // then
         XCTAssertFalse(result)
@@ -60,10 +60,10 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(number)
-        let result = sut.queue.head
+        let result = sut.peek
         
         // then
-        XCTAssertEqual(result?.data, number)
+        XCTAssertEqual(result, number)
     }
     
     // MARK: - dequeue()

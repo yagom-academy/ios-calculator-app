@@ -10,7 +10,7 @@ import Foundation
 struct CalculatorItemQueue<Element> {
     // MARK: - Properties
     
-    private(set) var queue = LinkedList<Element>()
+    private var queue = LinkedList<Element>()
     
     var peek: Element? {
         return queue.head?.data ?? nil
