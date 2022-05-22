@@ -18,14 +18,13 @@ enum ExpressionParser {
                 formula.operands.enqueue(Double(inputs) ?? 0)
             }
         }
-
         return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-            let operatorSybols = Operator.allCases.map { $0.rawValue
+            let operatorSymbols = Operator.allCases.map { $0.rawValue
             }
-            let operators = input.filter { operatorSybols.contains($0) }.map { String($0) }
+            let operators = input.filter { operatorSymbols.contains($0) }.map { String($0) }
             return operators
     }
 }
