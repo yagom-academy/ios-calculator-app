@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<String>
-    var operators: CalculatorItemQueue<String>
+    private var operands: CalculatorItemQueue<String>
+    private var operators: CalculatorItemQueue<String>
 
     mutating func result() -> Double {
         var operandsNumberInDoubleFormat = Double(operands.dequeue() ?? "Wrong") ?? 0.0
