@@ -105,4 +105,19 @@ class parseTests: XCTestCase {
                                 Operator.add,
                                 Operator.divide])
     }
+    
+    func test_ExpressionParser에서_input을집어넣어_parse를호출하고_result함수를_호출하면_계산이잘되는가() {
+        //given
+        let input = "1 + 2 - 3 + 4 / 2"
+        
+        //when
+        var test: Formula
+        
+        test = ExpressionParser.parse(from: input)
+
+        let result = try? test.result()
+        
+        //then
+        XCTAssertEqual(result, 2.0)
+    }
 }
