@@ -16,8 +16,8 @@ class ExpressionParserTests: XCTestCase {
         // given
         let input = "12+3-4"
         // when
-        let result = ExpressionParser.componentsByOperators(from: input)
+        let result = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(result,["12","+","3","-","4"])
+        XCTAssertEqual(result.operands.displayItems(),[12, 3, 4])
     }
 }
