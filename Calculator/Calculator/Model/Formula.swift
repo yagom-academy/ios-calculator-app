@@ -23,10 +23,11 @@ struct Formula {
                 throw QueueError.wrongOperators
             }
             
-            lastResult = try inputOperator.calculate(
-                lhs: lastResult,
-                rhs: inputNumber
-            )
+            do {
+                lastResult = try  inputOperator.calculate(lhs: lastResult, rhs: inputNumber)
+            } catch {
+                OperatorError.devideFail
+            }
         }
         return lastResult
     }
