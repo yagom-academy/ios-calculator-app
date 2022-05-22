@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element> {
+protocol Queue {
+    associatedtype Element
+    
+    // MARK: - Properties
+    
+    var peek: Element? { get }
+    
+    // MARK: - Action
+    
+    mutating func enqueue(_ data: Element)
+    mutating func dequeue() -> Node<Element>?
+    func isEmpty() -> Bool
+}
+
+struct CalculatorItemQueue<Element>: Queue {
+    
     // MARK: - Properties
     
     private var queue = LinkedList<Element>()
