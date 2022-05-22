@@ -41,13 +41,11 @@ class parseTests: XCTestCase {
                             .filter{ $0 != " " }
                             .map { Character(extendedGraphemeClusterLiteral: $0) }
         
-        print(result)
-        
         //then
         XCTAssertEqual(result, ["+", "-", "+", "/"])
     }
     
-    func test_문자열에서_componentsByOperators를사용하여_operaters를_character로_형변환을하여집어넣는가2() throws {
+    func test_문자열에서_componentsByOperators를사용하여_operaters를_character로_형변환을하여집어넣는가2() {
         //when
         let input = "1 + 2 - 3 + 4 / 2"
         
@@ -62,7 +60,7 @@ class parseTests: XCTestCase {
                                 Operator.divide])
     }
     
-    func test_문자열에서_componentsByOperators메소드를사용하면_숫자를순서대로반환하는가() throws {
+    func test_문자열에서_componentsByOperators메소드를사용하면_숫자를순서대로반환하는가() {
         //given
         let input = "1 + 2 - 3 + 4 / 2"
         
@@ -77,9 +75,9 @@ class parseTests: XCTestCase {
         //given
         let input = "1 + 2 - 3 + 4 / 2"
         var operandsQueue = CalculatorItemQueue<Double>()
-        let operands = input.compactMap{ Double(String($0)) }
+        let operands = input.compactMap { Double(String($0)) }
         
-        operands.forEach{ operandsQueue.enQueue($0) }
+        operands.forEach { operandsQueue.enQueue($0) }
         
         //when
         let result = operandsQueue.enQueueStack
@@ -93,7 +91,7 @@ class parseTests: XCTestCase {
         let input = "1 + 2 - 3 + 4 / 2"
         var operatorQueue = CalculatorItemQueue<Operator>()
         let operators = input.split(with: " ")
-                        .filter{ $0.count == 1 }
+                        .filter { $0.count == 1 }
                         .compactMap{ Operator(rawValue: Character($0))}
         
         operators.forEach{ operatorQueue.enQueue($0) }
