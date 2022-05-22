@@ -9,12 +9,30 @@ import XCTest
 @testable import Calculator
 
 class NodeTests: XCTestCase {
+    
+    // MARK: - Properties
+    
+    var sut: Node<Any>!
 
+    // MARK: - Action
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = Node(1)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+    }
+    
+    func test_data에_값_할당_가능하면_True() {
+      
+        // given
+        let value = 1
+        
+        // when
+        sut.data = value
+        
+        // then
+        XCTAssertEqual(sut.data as! Int, value)
     }
 }
