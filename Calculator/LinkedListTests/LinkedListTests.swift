@@ -25,7 +25,8 @@ class LinkedListTests: XCTestCase {
     }
     
     // MARK: - append(_:)
-    func test_head가_nil일때_append하면_head에_값이할당된다() {
+    
+    func test_append메서드_head가_nil일때_append하면_head에_값이할당된다() {
         // given
         let data = 1.0
         let newNode = Node(data)
@@ -35,5 +36,15 @@ class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertEqual(newNode.data, sut.head?.data)
+    }
+    
+    // MARK: - isEmpty()
+    
+    func test_isEmpty메서드_head가_nil이면_True() {
+        // when
+        let result = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(result)
     }
 }

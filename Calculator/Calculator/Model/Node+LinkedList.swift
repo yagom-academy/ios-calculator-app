@@ -42,4 +42,8 @@ final class LinkedList<Element> {
         
         currentNode?.nextNode = newNode
     }
+    
+    func isEmpty() -> Bool {
+        return head == nil ? true : false
+    }
 }
