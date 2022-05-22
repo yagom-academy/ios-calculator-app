@@ -21,7 +21,7 @@ protocol Queue {
     func isEmpty() -> Bool
 }
 
-struct CalculatorItemQueue<Element>: Queue {
+struct CalculatorItemQueue<Element: CalculateItem>: Queue {
     
     // MARK: - Properties
     
