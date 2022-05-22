@@ -15,3 +15,7 @@ final class Node<T> {
         self.data = data
     }
 }
+
+final class LinkedList<Element> {
+    
+}
