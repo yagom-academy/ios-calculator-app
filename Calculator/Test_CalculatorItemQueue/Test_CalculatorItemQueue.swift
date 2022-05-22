@@ -71,4 +71,30 @@ class Test_CalculatorItemQueue: XCTestCase {
         XCTAssertEqual(result, output)
     }
     
+    func test_clear_실행시_123456_를넣었을때_nil_을반환하는지() {
+        //given
+        let input: [Int] = [1, 2, 3, 4, 5, 6]
+        let output: [Int] = []
+        var result: [Int] = []
+        var node = sut.linkedList.head
+
+        //when
+        input.forEach {
+            sut.enqueue([$0])
+        }
+        sut.clear()
+
+        while node != nil {
+            guard let nodeData = node?.data else {
+                return
+            }
+            nodeData.forEach {
+                result.append($0)
+            }
+            node = node?.next
+        }
+        
+        //then
+        XCTAssertEqual(result, output)
+    }
 }
