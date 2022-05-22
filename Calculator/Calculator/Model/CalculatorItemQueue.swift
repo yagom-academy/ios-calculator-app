@@ -25,4 +25,8 @@ struct CalculatorItemQueue<Element> {
     mutating func dequeue() -> Node<Element>? {
         return queue.isEmpty() == true ? nil : queue.removeFirstNode()
     }
+    
+    func isEmpty() -> Bool {
+        return queue.length == 0 ? true : false
+    }
 }

@@ -92,4 +92,26 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(firstNumber, result?.data)
     }
+    
+    // MARK: - isEmpty()
+    
+    func test_isEmpty메서드_Queue에_요소가_없을때_true를_반환한다() {
+        // when
+        let result = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty메서드_Queue에_요소가_있으면_false를_반환한다() {
+        // given
+        let number = 1.0
+        sut.enqueue(number)
+        
+        // when
+        let result = sut.isEmpty()
+        
+        // then
+        XCTAssertFalse(result)
+    }
 }
