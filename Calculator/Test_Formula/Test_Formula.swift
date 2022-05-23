@@ -10,30 +10,30 @@ import XCTest
 
 class Test_Formula: XCTestCase {
     var sut: Formula!
-
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
     func test_result_가_OperatorCacluater_를반환하는지() {
         //given
-        let array: [String] = ["10.0", "-", "10.0", "+", "5"]
+        let array: [String] = ["4.0", "+", "1"]
         let output = 5.0
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
         
-        let numberArray = array.compactMap { value in
-            if let element = Double(value) {
-                operandsQueue.enqueue(element)
+        array.compactMap {Double($0)}
+            .forEach {
+                operandsQueue.enqueue($0)
             }
-        }
-
-        let operArray = array.filter { value in
+        
+        
+        array.filter { value in
             return Double(value) == nil
         }.forEach { oper in
             let opert = Character(oper)
@@ -42,7 +42,7 @@ class Test_Formula: XCTestCase {
         
         //when
         sut = Formula(operands: operandsQueue, operators: operatorQueue)
-
+        
         //then
         XCTAssertEqual(try sut.result(), output)
     }
