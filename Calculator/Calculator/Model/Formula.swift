@@ -14,7 +14,7 @@ struct Formula {
             throw QueueError.wrongOperands
         }
         
-        while !operands.joinedQueue.isEmpty {
+        while !operands.deQueueStack.isEmpty {
             guard let inputNumber = try? operands.deQueue() else {
                 throw QueueError.wrongOperands
             }
