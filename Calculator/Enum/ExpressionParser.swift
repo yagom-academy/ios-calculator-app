@@ -17,7 +17,7 @@ extension String {
 }
 
 enum ExpressionPaser {
-    static private func componentsByoperator(from input: String) -> [String] {
+    static private func componentsByOperator(from input: String) -> [String] {
         let result = input.split(with: " ")
         
         return result
@@ -27,7 +27,7 @@ enum ExpressionPaser {
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Character>()
         
-        let paser = componentsByoperator(from: input)
+        let paser = componentsByOperator(from: input)
         let allOperator = Operator.allCases.map { String($0.rawValue) }
         
         let operands = paser.compactMap{ Double($0) }
