@@ -9,15 +9,36 @@ struct Formula {
     private var operators: CalculatorItemQueue<String>
     
     mutating func result() throws -> Double {
-        var result = operands.queue.dequeue() ?? 0.0
+        guard operands.queue.isEmpty == false || operators.queue.isEmpty == false else {
+            throw CalculatorError.emptyQueues
+        }
+        
+        guard operands.queue.isEmpty == false else {
+            throw CalculatorError.notEnoughOperands
+        }
+        
+        guard operators.queue.isEmpty == false else {
+            throw CalculatorError.notEnoughOperators
+        }
+        
+        guard var result = operands.queue.dequeue() else {
+            throw CalculatorError.notEnoughOperands
+        }
         
         while operators.queue.isEmpty == false {
-            let `operator` = operators.queue.dequeue() ?? ""
-            let operatorCase = Operator(rawValue: Character(`operator`))
+            guard let operand = operands.queue.dequeue() else {
+                throw CalculatorError.notEnoughOperands
+            }
             
+            guard let `operator` = operators.queue.dequeue() else {
+                throw CalculatorError.notEnoughOperators
+            }
             
-            result = try operatorCase?.calculate(lhs: result, rhs: operands.queue.dequeue() ?? 0.0) ?? 0.0
+            guard let operatorCase = Operator(rawValue: Character(`operator`)) else {
+                throw CalculatorError.invalidOperator
+            }
             
+            result = try operatorCase.calculate(lhs: result, rhs: operand)
         }
         
         return result

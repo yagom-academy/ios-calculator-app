@@ -6,4 +6,8 @@
 //
 enum CalculatorError: Error {
     case dividedByZero
+    case emptyQueues
+    case notEnoughOperators
+    case notEnoughOperands
+    case invalidOperator
 }
