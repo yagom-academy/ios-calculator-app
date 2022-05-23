@@ -16,14 +16,14 @@ struct Formula {
             guard operators.count > 0 , operands.count > 0 else {
                 break
             }
-            guard let calcOperators = operators.deQueue()?.value as? Operator else {
+            guard let calcOperator = operators.deQueue()?.value as? Operator else {
                 return lhs
             }
             guard let rhs = operands.deQueue()?.value as? Double else {
                 return lhs
             }
             do {
-                try lhs = calcOperators.calculate(lhs: lhs, rhs: rhs)
+                try lhs = calcOperator.calculate(lhs: lhs, rhs: rhs)
             } catch CalculatorError.divideByZero {
                 debugPrint("CalculatorError.divideByZero")
             } catch {

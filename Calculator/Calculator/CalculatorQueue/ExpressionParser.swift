@@ -18,10 +18,10 @@ enum ExpressionParser {
             Double($0) ?? 0.0
         }
         operators.forEach {
-            guard let operators = Operator.init(rawValue: $0) else {
+            guard let calcOperator = Operator.init(rawValue: $0) else {
                 return
             }
-            formula.operators.enQueue(operators)
+            formula.operators.enQueue(calcOperator)
         }
         operands.forEach {
             formula.operands.enQueue($0)
