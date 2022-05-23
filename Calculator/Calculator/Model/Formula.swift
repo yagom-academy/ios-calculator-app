@@ -1,6 +1,6 @@
 struct Formula {
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
+    private(set) var operands: CalculatorItemQueue<Double>
+    private(set) var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
         guard !operators.isEmpty || !operators.isEmpty else { throw CalculatorError.emptyFormula }
@@ -14,5 +14,10 @@ struct Formula {
         }
         
         return calculateResult
+    }
+    
+    init( operands: CalculatorItemQueue<Double>,  operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
     }
 }
