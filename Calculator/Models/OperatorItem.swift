@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum OperatorItem {
+enum OperatorItem: Character, CaseIterable, CalculateItem {
     case add
     case subtract
     case multiply
-    case devide
+    case divide
     
     var symbol: String {
         switch self {
@@ -21,8 +21,7 @@ enum OperatorItem {
             return "-"
         case .multiply:
             return "*"
-        case .devide:
+        case .divide:
             return "/"
         }
     }
-}

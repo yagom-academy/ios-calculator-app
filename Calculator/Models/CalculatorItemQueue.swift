@@ -36,3 +36,4 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return outStackItems.popLast()
     }
 }
+
