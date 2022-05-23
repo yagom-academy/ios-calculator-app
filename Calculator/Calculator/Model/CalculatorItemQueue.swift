@@ -8,7 +8,6 @@
 struct CalculatorItemQueue<T>: Queue, CalculateItem {
     private(set) var enQueueStack: Array<T> = []
     private(set) var deQueueStack: Array<T> = []
-    private(set) var joinedQueue: Array<T> = []
     
     mutating func enQueue(_ input: T) {
         enQueueStack.append(input)
@@ -23,7 +22,6 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
             throw QueueError.unknown
         }
         
-        joinedQueue = enQueueStack + deQueueStack
         return deQueue
     }
     
