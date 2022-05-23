@@ -41,7 +41,7 @@ struct LinkedList<T> {
     }
     
     func isEmpty() -> Bool {
-        head == nil ? true : false
+        head == nil
     }
     
     mutating func removeAll() {

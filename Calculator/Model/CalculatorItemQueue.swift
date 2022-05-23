@@ -5,26 +5,29 @@
 //  Created by NAMU on 2022/05/17.
 //
 
-struct CalculatorItemQueue<T>: CalculatorItem {
-    private var list = LinkedList<T>()
+struct CalculatorItemQueue<T>: CalculateItem {
+    private var linkedList = LinkedList<T>()
     
     func peek() -> T? {
-        return list.peek()
+        linkedList.peek()
     }
     
     mutating func enqueue(data: T) {
-        list.append(data: data)
+        linkedList.append(data: data)
     }
     
-    mutating func dequeue() -> T? {
-        return list.removeFirst()
+    mutating func dequeue() throws -> T {
+        guard let number = linkedList.removeFirst() else {
+            throw CalculateError.nilError
+        }
+        return number
     }
     
     func isEmpty() -> Bool {
-        return list.isEmpty()
+        linkedList.isEmpty()
     }
     
     mutating func removeAll() {
-        list.removeAll()
+        linkedList.removeAll()
     }
 }
