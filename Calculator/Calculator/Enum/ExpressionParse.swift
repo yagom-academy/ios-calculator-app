@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum ExpressParser {
     func parse(form input: String) -> Formula {

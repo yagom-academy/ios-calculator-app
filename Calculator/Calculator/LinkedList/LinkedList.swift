@@ -31,7 +31,6 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() -> T? {
-        
         let removeElement = head?.data
         head = head?.next
         return removeElement
