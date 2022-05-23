@@ -12,82 +12,38 @@ class Test_Formula: XCTestCase {
     var sut: Formula!
 
     override func setUpWithError() throws {
-
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
 
-    func test_result_가_add_를반환하는지() {
-        //ginven
-        let output = 30.0
+    func test_result_가_OperatorCacluater_를반환하는지() {
+        //given
+        let array: [String] = ["10.0", "+", "20.0", "+", "30"]
+        let output = 60.0
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
+        
+        let numberArray = array.compactMap { value in
+            if let element = Double(value) {
+                operandsQueue.enqueue(element)
+            }
+        }
 
-        operandsQueue.enqueue(10)
-        operandsQueue.enqueue(20)
+        let operArray = array.filter { value in
+            return Double(value) == nil
+        }.forEach { oper in
+            let opert = Character(oper)
+            operatorQueue.enqueue(Operator(rawValue: opert)!)
+        }
         
         //when
-        operatorQueue.enqueue(Operator.add)
         sut = Formula(operands: operandsQueue, operators: operatorQueue)
 
-        let result = sut.result()
         //then
-        XCTAssertEqual(result, output)
-    }
-    
-    func test_result_가_subtract_를반환하는지() {
-        //ginven
-        let output = -10.0
-        var operandsQueue = CalculatorItemQueue<Double>()
-        var operatorQueue = CalculatorItemQueue<Operator>()
-
-        operandsQueue.enqueue(20)
-        operandsQueue.enqueue(10)
-        
-        //when
-        operatorQueue.enqueue(Operator.subtract)
-        sut = Formula(operands: operandsQueue, operators: operatorQueue)
-
-        let result = sut.result()
-        //then
-        XCTAssertEqual(result, output)
-    }
-    
-    func test_result_가_divide_를반환하는지() {
-        //ginven
-        let output = 2.0
-        var operandsQueue = CalculatorItemQueue<Double>()
-        var operatorQueue = CalculatorItemQueue<Operator>()
-
-        operandsQueue.enqueue(10)
-        operandsQueue.enqueue(20)
-        
-        //when
-        operatorQueue.enqueue(Operator.divide)
-        sut = Formula(operands: operandsQueue, operators: operatorQueue)
-
-        let result = sut.result()
-        //then
-        XCTAssertEqual(result, output)
-    }
-    
-    func test_result_가_multiply_를반환하는지() {
-        //ginven
-        let output = 200.0
-        var operandsQueue = CalculatorItemQueue<Double>()
-        var operatorQueue = CalculatorItemQueue<Operator>()
-
-        operandsQueue.enqueue(20)
-        operandsQueue.enqueue(10)
-        
-        //when
-        operatorQueue.enqueue(Operator.multiply)
-        sut = Formula(operands: operandsQueue, operators: operatorQueue)
-
-        let result = sut.result()
-        //then
-        XCTAssertEqual(result, output)
+        XCTAssertEqual(sut.result(), output)
     }
 }

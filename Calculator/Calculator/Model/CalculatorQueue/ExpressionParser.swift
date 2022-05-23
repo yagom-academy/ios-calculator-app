@@ -11,8 +11,20 @@ enum ExpressionParser {
     /// 파서해서 Formular에 데이터 보내는 함수 변환?? 파싱한다..
     static func parse(from input: String) -> Formula {
         let splitElements = componentsByOperators(from: input)
-        let operandQueue = CalculatorItemQueue<Double>()
-        let operatorQueue = CalculatorItemQueue<Operator>()
+        var operandQueue = CalculatorItemQueue<Double>()
+        var operatorQueue = CalculatorItemQueue<Operator>()
+        
+        for element in splitElements {
+            if let doubleElements = Double(element) {
+                operandQueue.enqueue(doubleElements)
+                continue
+            }
+            
+            if let operatorElements = Operator(rawValue: Character(element)) {
+                operatorQueue.enqueue(operatorElements)
+                continue
+            }
+        }
         
         return Formula(operands: operandQueue, operators: operatorQueue)
     }

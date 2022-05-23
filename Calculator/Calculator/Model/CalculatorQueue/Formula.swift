@@ -12,15 +12,19 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() -> Double {
-        guard let rhs = operands.dequeue(),
-              let lhs = operands.dequeue(),
-              let result = operators.dequeue() else {
+        guard var lhs = operands.dequeue() else {
             return 0.0
         }
         
-        let answer = result.calculate(Ihs: lhs, rhs: rhs)
-        
-        return answer
-        
+        while operands.linkedList.head != nil {
+            guard let number = operands.dequeue(),
+                  let result = operators.dequeue() else {
+                return 0.0
+            }
+            
+            lhs = result.calculate(Ihs: lhs, rhs: number)
+        }
+            
+        return lhs
     }
 }

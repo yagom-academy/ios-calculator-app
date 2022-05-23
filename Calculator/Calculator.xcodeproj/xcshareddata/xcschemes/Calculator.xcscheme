@@ -47,6 +47,11 @@
                BlueprintName = "Test_Formula"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Test_Formula/test_result_&#xac00;_oper_&#xb97c;&#xbc18;&#xd658;&#xd558;&#xb294;&#xc9c0;()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
