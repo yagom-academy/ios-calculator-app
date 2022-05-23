@@ -10,12 +10,12 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
-    var sut2: Fomula!
+    var sut2: Formula!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue(stack: [])
-        sut2 = Fomula(operands: CalculatorItemQueue<Double>(stack: []),
+        sut2 = Formula(operands: CalculatorItemQueue<Double>(stack: []),
                       operators: CalculatorItemQueue<Character>(stack: []))
     }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Fomula {
+struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Character>
     
