@@ -7,18 +7,21 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let data = self.map { String($0) }
-        let target = String(target)
+        let data = self.map { $0 }
         var result = [String]()
         var storage = ""
         
         data.forEach {
             if $0 == target {
                 result.append(storage)
-                result.append(String($0))
+                
+                let operatorValue = String($0)
+                result.append(operatorValue)
+                
                 storage = ""
             } else {
-                storage += $0
+                let letter = String($0)
+                storage += letter
             }
         }
         
