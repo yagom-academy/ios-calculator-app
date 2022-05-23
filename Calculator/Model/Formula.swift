@@ -13,11 +13,10 @@ struct Formula {
         var result = try operands.dequeue()
         
         while !operands.isEmpty() || !operators.isEmpty() {
+            guard operands.peek() != 0 || operators.peek() != .divide else {
+                throw CalculateError.infinityError
+            }
             result = try operators.dequeue().calculate(lhs: result, rhs: operands.dequeue())
-        }
-        
-        guard result != Double.infinity else {
-            throw CalculateError.infinityError
         }
         
         return result
