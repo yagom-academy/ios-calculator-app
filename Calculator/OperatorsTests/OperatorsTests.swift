@@ -55,6 +55,18 @@ class OperatorsTests: XCTestCase {
         XCTAssertEqual(result, 0.5)
     }
     
+    func test_calculate_case가_didvide일때_0으로나누면_무한대가나오는지() {
+        // given
+        let one = 1.0
+        let zero = 0.0
+        
+        // when
+        let result = Operator.divide.calculate(lhs: one, rhs: zero)
+        
+        // then
+        XCTAssertEqual(result, Double.infinity)
+    }
+    
     func test_calculate_case가_multiply일때_곱하기를하는지() {
         // given
         let one = 1.0
