@@ -30,7 +30,3 @@ struct Formula {
         return lhs
     }
 }
-
-
-
-

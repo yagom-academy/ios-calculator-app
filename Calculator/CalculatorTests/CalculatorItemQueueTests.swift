@@ -84,9 +84,9 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enQueue(6.0)
         
         //when
-        guard let result = sut.deQueue() as? Node<Double> else { return }
+        guard let result = sut.deQueue() else { return }
         
         //then
-        XCTAssertEqual(result.value, 3.0)
+        XCTAssertEqual(result.value as! Double, 3.0)
     }
 }

@@ -19,6 +19,7 @@ class CalculatorListTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
 // MARK: - CalculatorList.size
     func test_아무것도없으면_0반환() {
         //when
