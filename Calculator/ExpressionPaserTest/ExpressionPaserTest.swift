@@ -21,7 +21,7 @@ class ExpressionPaserTest: XCTestCase {
     
     func test_parse에_정상적인_식이_들어왔을_때_계산을_해주는지() {
         //given
-        let inputExpresion = "1 + 2 * -3"
+        let inputExpresion = "1 + 2 × -3"
         let expected = -9.0
         
         // when
