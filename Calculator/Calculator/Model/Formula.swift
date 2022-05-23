@@ -3,7 +3,7 @@ struct Formula {
     var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() throws -> Double {
-        guard !operators.isEmpty || !operators.isEmpty else { throw CalculatorError.emptyFormula}
+        guard !operators.isEmpty || !operators.isEmpty else { throw CalculatorError.emptyFormula }
             
         var calculateResult = operands.dequeue() ?? 0
         
