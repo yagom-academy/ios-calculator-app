@@ -17,12 +17,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            do {
-                let result = try divide(lhs: lhs, rhs: rhs)
-                return result
-            } catch {
-                return Double(Int.max)
-            }
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -36,9 +31,9 @@ enum Operator: Character, CaseIterable, CalculateItem {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) throws -> Double {
+    private func divide(lhs: Double, rhs: Double) -> Double {
         guard rhs != 0 else {
-            throw CalculatorError.dividedByZero
+            return Double.nan
         }
         
         return lhs / rhs
