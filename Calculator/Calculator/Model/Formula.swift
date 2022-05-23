@@ -5,8 +5,8 @@
 //  Created by 전민수 on 2022/05/19.
 //
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<String>
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<String>
     
     mutating func result() -> Double {
         var result = operands.queue.dequeue() ?? 0.0
@@ -19,6 +19,11 @@ struct Formula {
         }
         
         return result
+    }
+    
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<String>) {
+        self.operands = operands
+        self.operators = operators
     }
 }
 
