@@ -16,17 +16,24 @@ struct Formula {
             throw ErrorCase.operandsDequeue
         }
         
-        while operands.linkedList.head != nil {
-            guard let number = operands.dequeue() else {
-                throw ErrorCase.operatorDequeue
+        do {
+            while operands.linkedList.head != nil {
+                guard let number = operands.dequeue() else {
+                    throw ErrorCase.operandsDequeue
+                }
+                
+                guard  let result = operators.dequeue() else {
+                    throw ErrorCase.operatorDequeue
+                }
+                
+                if result == Operator.divide && number == 0.0 {
+                    throw ErrorCase.operatorDequeue
+                }
+                
+                lhs = result.calculate(Ihs: lhs, rhs: number)
             }
-            guard  let result = operators.dequeue() else {
-                throw ErrorCase.operatorDequeue
-            }
-            if lhs == 0.0 && result == Operator.divide {
-                throw ErrorCase.operatorDequeue
-            }
-            lhs = result.calculate(Ihs: lhs, rhs: number)
+        } catch ErrorCase.operatorDequeue {
+            return .nan
         }
         
         return lhs

@@ -22,8 +22,8 @@ class Test_Formula: XCTestCase {
     
     func test_result_가_OperatorCacluater_를반환하는지() {
         //given
-        let array: [String] = ["4.0", "+", "1"]
-        let output = 5.0
+        let array: [String] = ["4.0", "+", "1.0", "-", "3", "*", "3", "/", "3"]
+        let output = 2.0
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
         
@@ -31,7 +31,6 @@ class Test_Formula: XCTestCase {
             .forEach {
                 operandsQueue.enqueue($0)
             }
-        
         
         array.filter { value in
             return Double(value) == nil
@@ -43,6 +42,31 @@ class Test_Formula: XCTestCase {
         //when
         sut = Formula(operands: operandsQueue, operators: operatorQueue)
         
+        //then
+        XCTAssertEqual(try sut.result(), output)
+    }
+    
+    func test_result_가_OperatorCacluater_nan_를반환하는지() {
+        //given
+        let array: [String] = ["4.0", "*", "1", "/", "0", "+", "10"]
+        let output: Double = .nan
+        var operandsQueue = CalculatorItemQueue<Double>()
+        var operatorQueue = CalculatorItemQueue<Operator>()
+        
+        array.compactMap {Double($0)}
+            .forEach {
+                operandsQueue.enqueue($0)
+            }
+        
+        array.filter { value in
+            return Double(value) == nil
+        }.forEach { oper in
+            let opert = Character(oper)
+            operatorQueue.enqueue(Operator(rawValue: opert)!)
+        }
+        
+        //when
+        sut = Formula(operands: operandsQueue, operators: operatorQueue)
         //then
         XCTAssertEqual(try sut.result(), output)
     }
