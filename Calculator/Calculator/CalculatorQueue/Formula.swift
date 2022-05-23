@@ -12,10 +12,7 @@ struct Formula {
         guard var lhs: Double = operands.deQueue()?.value as? Double else {
             return 0.0
         }
-        while true {
-            guard operators.count > 0 , operands.count > 0 else {
-                break
-            }
+        while operators.count > 0, operands.count > 0 {
             guard let calcOperator = operators.deQueue()?.value as? Operator else {
                 return lhs
             }
