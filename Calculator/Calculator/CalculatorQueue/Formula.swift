@@ -9,7 +9,7 @@ struct Formula {
     var operators: CalculatorItemQueue
     
     mutating func result() -> Double {
-        guard var lhs: Double = operands.deQueue()?.value as? Double else {
+        guard var lhs = operands.deQueue()?.value as? Double else {
             return 0.0
         }
         while operators.count > 0, operands.count > 0 {
