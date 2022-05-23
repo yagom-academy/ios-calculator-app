@@ -11,9 +11,7 @@ struct Formula {
     
     mutating func result() -> Double {
         guard var result = operands.dequeue() else {
-            // TODO: 값이 없을 때 적절한 에러 핸들링
-            print("주어진 값이 없습니다.")
-            return 0
+            return Double.nan
         }
         
         while !operators.isEmpty && !operands.isEmpty {
