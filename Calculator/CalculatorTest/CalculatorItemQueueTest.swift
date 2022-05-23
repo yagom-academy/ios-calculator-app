@@ -17,29 +17,29 @@ class CalculatorItemQueueTest: XCTestCase {
         operatorQueue = nil
     }
 
-    func test_enqueue_0을추가하면_0이들어가는지() {
+    func test_enqueue_0을추가하면_calculatorItems에0이들어가는지() {
         // Given
         let input: Double = 0
-        let expectation: Double = 0
+        let expectation: [Double] = [0]
         
         // When
         doubleQueue.enqueue(input)
-        let result = doubleQueue.lastValue
+        let result = doubleQueue.calculatorItems
         
         // Then
         XCTAssertEqual(expectation, result)
     }
     
-    func test_enqueue_0과1을추가하면_0과1이들어간배열로변경하는지() {
+    func test_enqueue_0과1을추가하면_0과1이들어간calculatorItems가되는지() {
         // Given
         let firstInput: Double = 0
         let secondInput: Double = 1
-        let expectation: Double = 1
+        let expectation: [Double] = [0, 1]
         
         // When
         doubleQueue.enqueue(firstInput)
         doubleQueue.enqueue(secondInput)
-        let result = doubleQueue.lastValue
+        let result = doubleQueue.calculatorItems
         
         // Then
         XCTAssertEqual(expectation, result)
@@ -70,8 +70,8 @@ class CalculatorItemQueueTest: XCTestCase {
     
     func test_dequeue_연산자타입을반환하는지() {
         // Given
-        let currentQueue: [Operator] = [.plus, .multiply]
-        let expectation: Operator = .plus
+        let currentQueue: [Operator] = [.add, .multiply]
+        let expectation: Operator = .add
         
         // When
         operatorQueue.enqueue(currentQueue[0])
@@ -104,5 +104,22 @@ class CalculatorItemQueueTest: XCTestCase {
         
         // Then
         XCTAssertEqual(expectation, result)
+    }
+    
+    func test_isEmpty_enqueue한만큼dequeue하면_isEmpty가True인지() {
+        // Given
+        let input: Double = 3
+        
+        // When
+        doubleQueue.enqueue(input)
+        doubleQueue.enqueue(input)
+        doubleQueue.enqueue(input)
+        _ = doubleQueue.dequeue()
+        _ = doubleQueue.dequeue()
+        _ = doubleQueue.dequeue()
+        let result = doubleQueue.isEmpty
+        
+        // Then
+        XCTAssertTrue(result)
     }
 }

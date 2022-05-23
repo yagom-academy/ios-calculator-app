@@ -22,44 +22,29 @@ class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_add_1을넣으면_lastNode의value기1인지() {
+    func test_add_1을넣으면_1이들어간리스트가이되는지() {
         // given
         let input: Double = 1
-        let expectation: Double = 1
+        let expectation: [Double] = [1]
         
         // when
         doubleList.add(value: input)
-        let result = doubleList.lastNode?.value
-        
+        let result = doubleList.returnList()
+       
         // then
         XCTAssertEqual(expectation, result)
     }
     
-    func test_add_1과2를넣으면_lastNode의value가2인지() {
+    func test_add_1과2를넣으면_1과2가들어간리스트가되는지() {
         // given
         let firstInput: Double = 1
         let secondInput: Double = 2
-        let expectation: Double = 2
+        let expectation: [Double] = [1, 2]
         
         // when
         doubleList.add(value: firstInput)
         doubleList.add(value: secondInput)
-        let result = doubleList.lastNode?.value
-        
-        // then
-        XCTAssertEqual(expectation, result)
-    }
-    
-    func test_add_1과2를넣으면_2의previous노드의value가1인지() {
-        // given
-        let firstInput: Double = 1
-        let secondInput: Double = 2
-        let expectation: Double = 1
-        
-        // when
-        doubleList.add(value: firstInput)
-        doubleList.add(value: secondInput)
-        let result = doubleList.lastNode?.previous?.value
+        let result = doubleList.returnList()
         
         // then
         XCTAssertEqual(expectation, result)
@@ -94,5 +79,54 @@ class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_returnList_전체리스트의첫번째요소가맞는지() {
+        // given
+        let currenNodeValue: [Double] = [1, 2, 3]
+        let expectation: Double = 1
+        
+        // when
+        doubleList.add(value: currenNodeValue[0])
+        doubleList.add(value: currenNodeValue[1])
+        doubleList.add(value: currenNodeValue[2])
+        let list = doubleList.returnList()
+        let result = list?[0]
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_returnList_전체리스트의마지막요소가맞는지() {
+        // given
+        let currenNodeValue: [Double] = [1, 2, 3]
+        let expectation: Double = 3
+        
+        // when
+        doubleList.add(value: currenNodeValue[0])
+        doubleList.add(value: currenNodeValue[1])
+        doubleList.add(value: currenNodeValue[2])
+        let list = doubleList.returnList()
+        let result = list?[2]
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_isEmpty_add한만큼takeOut하면_isEmpty가True인지() {
+        // given
+        let currenNodeValue: Double = 1
+        
+        // when
+        doubleList.add(value: currenNodeValue)
+        doubleList.add(value: currenNodeValue)
+        doubleList.add(value: currenNodeValue)
+        _ = doubleList.takeOut()
+        _ = doubleList.takeOut()
+        _ = doubleList.takeOut()
+        let result = doubleList.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
     }
 }

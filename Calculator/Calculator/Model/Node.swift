@@ -1,9 +1,14 @@
-class Node<Item: CalculatorItem> {
+class Node<Item: CalculatorItem>: Equatable {
     var value: Item    
     var next: Node?
-    var previous: Node?
     
-    init(_ value: Item){
+    init(_ value: Item) {
         self.value = value
+    }
+}
+
+extension Node {
+    static func == (lhs: Node<Item>, rhs: Node<Item>) -> Bool {
+        return lhs.self === rhs.self
     }
 }
