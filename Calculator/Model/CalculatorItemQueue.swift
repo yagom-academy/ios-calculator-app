@@ -17,7 +17,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() throws -> T {
-        guard let number = linkedList.removeFirst() else{
+        guard let number = linkedList.removeFirst() else {
             throw CalculateError.nilError
         }
         return number

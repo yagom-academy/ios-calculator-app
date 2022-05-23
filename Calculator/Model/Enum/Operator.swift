@@ -17,7 +17,7 @@ enum Operator: Character, CaseIterable {
         }
         self.init(rawValue: Character(rawValue))
     }
-
+    
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
