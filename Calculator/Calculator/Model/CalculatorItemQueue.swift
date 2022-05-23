@@ -8,20 +8,23 @@
 struct CalculatorItemQueue<T>: Queue, CalculateItem {
     private(set) var enQueueStack: Array<T> = []
     private(set) var deQueueStack: Array<T> = []
+    private(set) var joinedQueue: Array<T> = []
     
-    public mutating func enQueue(_ input: T) {
+    mutating func enQueue(_ input: T) {
         enQueueStack.append(input)
     }
     
-    public mutating func deQueue() throws -> T? {
-        if enQueueStack.isEmpty {
-            throw QueueError.empty
-        }
-        else {
+    mutating func deQueue() throws -> T {
+        if deQueueStack.isEmpty {
             deQueueStack = enQueueStack.reversed()
             enQueueStack.removeAll()
         }
-        return deQueueStack.popLast()
+        guard let deQueue = deQueueStack.popLast() else {
+            throw QueueError.unknown
+        }
+        
+        joinedQueue = enQueueStack + deQueueStack
+        return deQueue
     }
     
     public mutating func clearAllStacks() {

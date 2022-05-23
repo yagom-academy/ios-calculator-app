@@ -9,6 +9,6 @@ protocol Queue {
     associatedtype T
 
     mutating func enQueue(_ T: T) 
-    mutating func deQueue() throws -> T?
+    mutating func deQueue() throws -> T
     mutating func clearAllStacks()
 }

@@ -30,10 +30,11 @@
     - [배운개념](##배운개념)
 
 ## `UML`
-![Screen Shot 2022-05-17 at 9 38 58 PM](https://user-images.githubusercontent.com/92622931/168812781-53bf0514-8fd4-429d-afc3-f4cc1fc9d0d0.png)  
-
+![Screen Shot 2022-05-21 at 3 38 59 AM](https://user-images.githubusercontent.com/92622931/169591921-3fdbfa72-1031-4410-986e-3c6f6d192090.png)  
 # 프로젝트 소개
-- 계산기의 동작 원리를 이해하고 UML과 TDD, Queue 자료구조에 대한 이해와 구현
+- STEP1: 계산기의 동작 원리를 이해하고 UML과 TDD, Queue 자료구조에 대한 이해와 구현
+- STEP2: UML을 기반으로 한 코드구현
+- STEP3: UI에 대한 이해 및 활용
 
 # 개발환경 및 라이브러리
 [![swift](https://img.shields.io/badge/swift-5.6-orange)]()
@@ -45,6 +46,8 @@
 - `Queue`, `Stack`
 - `Array Queue`, `DoubliyLinkedList Queue`, `DoubleStack Queue, RingBuffer Queue`
 - `시간복잡도`
+- `로직에 대한 이해`, `고차함수 활용`
+- `forEach`, `CaseIterable`
 # 그라운드 룰
 
 ### 시간
@@ -92,11 +95,22 @@
 
 
 # 핵심경험
+STEP1
 - [x] TDD 시작하기
 	- [x] 기존의 프로젝트에 Test Target 추가
 - [x] Queue 자료구조의 이해와 구현
 - [x] List 자료구조 직접 구현해보기(선택)
-	- [x] 리스트를 활용하여 Queue 구현(선택)
+	- [x] 리스트를 활용하여 Queue 구현(선택)  
+
+STEP2
+- [x] UML을 기반으로 한 코드구현
+- [x] 숫자와 연산자 입력에 큐 활용
+- [x] TDD를 기반으로 코드 작성하기(선택)
+
+STEP3
+- [ ] IBOutlet / IBAction의 활용
+- [ ] 스택뷰의 활용
+- [ ] 스크롤뷰의 활용
 
 # [STEP 0]
 
@@ -156,16 +170,60 @@ struct CalculatorItemQueue<Double>: Queue, CalculateItem {
 
 
 ## 배운개념
+- `브랜치 분리`
+- `UML`, `TDD`
+- `Queue`, `Stack`
+- `Array Queue`, `DoubliyLinkedList Queue`, `DoubleStack Queue, RingBuffer Queue`
+- `시간복잡도`
+- `popLast`, `Generic Type`
 
 # [STEP 2]
 
 ## 고민한점
 
+### `initializer`
+- 처음 아래와 같은 오류가 나왔을 때 왜 오류가 나는지 이해가 안됬는데 생각해보니 class 내 프로퍼티가 저장이 되어있지 않아서 이니셜라이저를 해줘야 되었는데, 안해줘서 오류가 남
+![Screen Shot 2022-05-21 at 3 49 51 AM](https://user-images.githubusercontent.com/92622931/169593682-51cd7d27-c2e0-462d-b1db-adc8ed0f2233.png)  
+- 아래와 같이 프로퍼티에 기본값을 넣어주어 해결
+- ![Screen Shot 2022-05-21 at 3 49 58 AM](https://user-images.githubusercontent.com/92622931/169594537-4ebf6353-f427-467c-bf29-6c0f26df32be.png)
+
+### `Generic`
+- 제네릭타입으로 반환 값을 주면 아래와 같이 에러가 나기에  강제로 다운캐스팅
+![mutating func deQueue() throws](https://user-images.githubusercontent.com/92622931/169594839-2e12f8aa-29e4-4660-9e30-07401dcfae54.png)
+- 그린의 조언을 듣고 만들어놓은 에러를 이용해서 처리
+ 강제 언래핑은 앱크래쉬의 주 원인이 될 수 있기에 지양하도록 노력하겠습니다.
+![mutating func deQueue() throws - T {](https://user-images.githubusercontent.com/92622931/169595391-1cefa5a4-e49f-4f6d-afde-40d12336dc0d.png)
+
+
+### `componentsByOperators `
+- 처음 componentsByOperators 함수를 구현할 때 `input`값을 받아 숫자가 포함이 안되어있는지 확인(`filter()`)하고 확인한 숫자들을 다시 `String`값으로 새로운 컨테이너를 생성  
+![static func componentsByOperators(from input String) -  String](https://user-images.githubusercontent.com/92622931/169598542-7b4144d2-7eb4-46b8-a47a-2d07e36b0e25.png)  
+- 로직에 문제가 없을 줄 알았지만 해당 함수에서 음수가 들어가게 된다면 함수는 음수를 연산자와 양수로 분리하게 될 것이란 걸 깨닫고 다시 한번 리팩토링
+
+- 결국 다시 `componentsByOperators`함수를 리팩토링을 해주게 되었고, 입력받을 때 공백을 기준으로 나누어준 다음 `parse` 함수 내부에서 두개의 프로퍼티를 만들어 연산자와 피연산자를 분리
+![static func parse(from input String) throws - Formula](https://user-images.githubusercontent.com/92622931/169598995-ce266e46-0876-4079-b28d-01e289a21237.png)  
+- TDD를 꼼꼼하게 하였다면 이러한 문제가 발생하지 않았을 텐데, 다음에는 좀 더 꼼꼼하게 테스트 해보도록 노력해볼 것
+
+### `연산자 처리`
+- 연산자 처리를 위해 여러가지 방법들을 시도
+![Screen Shot 2022-05-21 at 4 52 29 AM](https://user-images.githubusercontent.com/92622931/169602803-0df49dc5-48d6-4830-81cf-f67d290e0e8f.png)
+![Screen Shot 2022-05-21 at 4 55 45 AM](https://user-images.githubusercontent.com/92622931/169602832-5ade82a6-e82e-41d7-a55b-575017e74da4.png)
+- 여러 방법을 시도한 결과 제일 아래에 있는 방법으로 채택하였고, 채택한 이유 중 가장 큰 이유는 연산자는 `Character`는 하나의 문자로 이루어져 있기 때문에 하나로 카운트 되는지가 제일 중요하다고 생각
 
 
 
 ## 배운개념
+- `forEach`
+- `로직에 대한 이해`, `고차함수 활용`
+- `forEach`, `CaseIterable`
+- `UML을 통한 코드 구현`
 
+
+## 보완할부분
+* 우선 전체 리뷰를 조금 많이 남기긴 했지만..😭 UML 명세와 조금 다른 부분들 혹은 놓친 부분들이 있어 한번 UML 명세와 다시 비교해보면 좋을것 같습니다..!
+* 테스트 코드가 너무너무 상세하고 디테일한데 실패 케이스도 있으면 어떨까해요..!🙋🏻 성공과 실패에 대한 케이스 모두 고려되어 작성되는게 TDD에서 지향하는 방향이라고 생각듭니다😁
+* 리드미도 이번 스텝에서 작성되면 좋겠네요👍 시간이 좀 걸리겠지만.. 나중에 하려면 분명 힘드실거에요😭
+- [기존에 존재하는 타입 extension네이밍 관련](https://stackoverflow.com/questions/26319660/whats-the-best-practice-for-naming-swift-files-that-add-extensions-to-existing)
 
 # [STEP 3]
 
