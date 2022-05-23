@@ -7,20 +7,18 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var retrievedOperators = CalculatorItemQueue<String>()
-        var retrievedOperands = CalculatorItemQueue<String>()
+        let operators = componentsByOperators(from: input)
+        let operands = input.split { Operator.allCases.map({ String($0.rawValue) }).contains(String($0)) }.map(String.init)
+        
+        let compactOperaotrs = operators.compactMap({ $0 })
+        let compactOperands = operands.compactMap({ $0 })
+        
+        let optionalOperators = compactOperaotrs.map { Operator(rawValue: Character($0))}
+        let optionalOperands = compactOperands.map { Double($0) }
+        
+        let retrievedOperators = CalculatorItemQueue<Operator>(queue: optionalOperators, head: 0)
+        let retrievedOperands = CalculatorItemQueue<Double>(queue: optionalOperands, head: 0)
 
-        var operators = componentsByOperators(from: input)
-        var operands = input.split { ["+", "-", "*", "/"].contains(String($0)) }
-
-        while !(operators.isEmpty && operands.isEmpty) {
-            if !operators.isEmpty {
-                retrievedOperators.enqueue(operators.removeFirst())
-            }
-            if !operands.isEmpty {
-                retrievedOperands.enqueue(String(operands.removeFirst()))
-            }
-        }
         return Formula(operands: retrievedOperands, operators: retrievedOperators)
     }
     

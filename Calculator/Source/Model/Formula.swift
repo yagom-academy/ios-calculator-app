@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    private var operands: CalculatorItemQueue<Double>
-    private var operators: CalculatorItemQueue<Operator>
+    private(set) var operands: CalculatorItemQueue<Double>
+    private(set) var operators: CalculatorItemQueue<Operator>
 
     mutating func result() throws -> Double {
         var calculationResult: Double
