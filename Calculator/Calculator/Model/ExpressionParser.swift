@@ -12,19 +12,13 @@ enum ExpressionParser {
         
         let components = componentsByOperators(from: input)
         
-        let _ = components.filter { element in
-            Double(element) != nil
-        }.map {
-            Double($0)
-        }.forEach { number in
-            guard let data = number else { return }
-            operands.enqueue(data)
-        }
-        
-        let _ = components.filter { element in
-            Double(element) == nil
-        }.forEach { sign in
-            operators.enqueue(sign)
+        components.forEach { item in
+            if Double(item) == nil {
+                operators.enqueue(item)
+            } else {
+                guard let number = Double(item) else { return }
+                operands.enqueue(number)
+            }
         }
         
         return Formula(operands: operands, operators: operators)
