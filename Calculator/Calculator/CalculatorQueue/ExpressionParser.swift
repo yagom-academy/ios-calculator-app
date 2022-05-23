@@ -9,25 +9,19 @@ enum ExpressionParser {
         let operandsQueue = CalculatorItemQueue()
         let operatorQueue = CalculatorItemQueue()
         let formula = Formula(operands: operandsQueue, operators: operatorQueue)
-        let operators: [String] = componentsByOperators(from: input)
+        let operators: [Character] = componentsByOperators(from: input).map { op in
+            Character(op)
+        }
         let operands: [Double] = input.split {
-            operators.contains(String($0))
+            operators.contains($0)
         }.map {
             Double($0) ?? 0.0
         }
         operators.forEach {
-            switch $0 {
-            case "+":
-                formula.operators.enQueue(Operator.add)
-            case "-":
-                formula.operators.enQueue(Operator.substract)
-            case "*":
-                formula.operators.enQueue(Operator.multiply)
-            case "/":
-                formula.operators.enQueue(Operator.divide)
-            default:
-                break
+            guard let operators = Operator.init(rawValue: $0) else {
+                return
             }
+            formula.operators.enQueue(operators)
         }
         operands.forEach {
             formula.operands.enQueue($0)
