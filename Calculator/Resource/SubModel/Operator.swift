@@ -7,24 +7,11 @@
 
 import Foundation
 
-enum Operator: CalculateItem, CaseIterable {
-    case add
-    case subtract
-    case divide
-    case multiply
-    
-    var ownValue: Character {
-        switch self {
-        case .add:
-            return "+"
-        case .subtract:
-            return "-"
-        case .divide:
-            return "/"
-        case .multiply:
-            return "*"
-        }
-    }
+enum Operator: Character, CalculateItem, CaseIterable {
+    case add = "+"
+    case subtract = "-"
+    case divide = "/"
+    case multiply = "*"
 
     public func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
