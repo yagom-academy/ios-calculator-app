@@ -66,3 +66,24 @@ Swift 코드 스타일 : [스위프트 API 가이드라인](https://www.swift.or
 
 - target 설정
     * 테스트 파일과 파일간의 타겟 설정을 하지않으면 오류가 발생합니다.
+
+# [STEP 2] 기능 및 코드 설명 🙂
+- result: 피연산자와 연산기호를 while문으로 연산후 리턴 
+- parse: 피연산자와 연산기호를 빈칸 기준으로 split 후 숫자면 opernds 에 enqueue 기호면 operators 에 enqueue 후 Formula 타입으로 리턴
+- componetsByOperators: 매개변수를 빈칸기준으로 split 후 [String] 으로 반환
+- split: 매개변수로 들어온 것을 조건값으로 문자열을 나누어 [String] 형으로 반환
+- add: lhs 와 rhs 를 값을 더해서 반환
+- substract: lhs 와 rhs 를 값을 빼서 반환
+- divide: lhs 와 rhs 를 값을 나누어서 반환
+- multiply: lhs 와 rhs 를 값을 곱해서 반환
+
+# [STEP 2] 고민한점 및 해결방안 🤔
+### 고민한점
+### UML 분석:
+- 만들어 본것이 아닌 만들어진 UML을 보고 분석을 하고 내용을 생각하는게 참으로 어려운거 같습니다 
+
+### 배운개념 💡
+
+- Extension
+    * String 에 원하는 기능을 추가헸습니다 extension 이란 어떤 기능이라는걸 알고 처음 사용하는 거라 앞으로 유용하게 사용할거 같습니다
+
