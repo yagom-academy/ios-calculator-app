@@ -39,7 +39,7 @@ class Test_ExpressionParser: XCTestCase {
         var result = ExpressionParser.parse(from: input)
         
         // then
-        XCTAssertEqual(result.result(), output)
+        XCTAssertEqual(try result.result(), output)
     }
 
 }

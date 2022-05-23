@@ -11,20 +11,24 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         guard var lhs = operands.dequeue() else {
-            return 0.0
+            throw ErrorCase.operandsDequeue
         }
         
         while operands.linkedList.head != nil {
-            guard let number = operands.dequeue(),
-                  let result = operators.dequeue() else {
-                return 0.0
+            guard let number = operands.dequeue() else {
+                throw ErrorCase.operatorDequeue
             }
-            
+            guard  let result = operators.dequeue() else {
+                throw ErrorCase.operatorDequeue
+            }
+            if lhs == 0.0 && result == Operator.divide {
+                throw ErrorCase.operatorDequeue
+            }
             lhs = result.calculate(Ihs: lhs, rhs: number)
         }
-            
+        
         return lhs
     }
 }

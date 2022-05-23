@@ -22,8 +22,8 @@ class Test_Formula: XCTestCase {
 
     func test_result_가_OperatorCacluater_를반환하는지() {
         //given
-        let array: [String] = ["10.0", "+", "20.0", "+", "30"]
-        let output = 60.0
+        let array: [String] = ["10.0", "-", "10.0", "+", "5"]
+        let output = 5.0
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
         
@@ -44,6 +44,6 @@ class Test_Formula: XCTestCase {
         sut = Formula(operands: operandsQueue, operators: operatorQueue)
 
         //then
-        XCTAssertEqual(sut.result(), output)
+        XCTAssertEqual(try sut.result(), output)
     }
 }
