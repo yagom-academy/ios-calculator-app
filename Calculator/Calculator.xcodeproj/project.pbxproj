@@ -68,11 +68,11 @@
 		D7FFE5BA283932950097C8AD /* String+extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3AE28375C6F004767E3 /* String+extensions .swift */; };
 		D7FFE5BB283932950097C8AD /* String+extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3AE28375C6F004767E3 /* String+extensions .swift */; };
 		D7FFE5BC283932960097C8AD /* String+extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3AE28375C6F004767E3 /* String+extensions .swift */; };
-		D7FFE5BD2839329A0097C8AD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double.swift */; };
-		D7FFE5BE2839329A0097C8AD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double.swift */; };
-		D7FFE5BF2839329B0097C8AD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double.swift */; };
-		D7FFE5C02839329C0097C8AD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double.swift */; };
-		D7FFE5C12839329C0097C8AD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double.swift */; };
+		D7FFE5BD2839329A0097C8AD /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double+extension.swift */; };
+		D7FFE5BE2839329A0097C8AD /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double+extension.swift */; };
+		D7FFE5BF2839329B0097C8AD /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double+extension.swift */; };
+		D7FFE5C02839329C0097C8AD /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double+extension.swift */; };
+		D7FFE5C12839329C0097C8AD /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double+extension.swift */; };
 		D7FFE5C2283932A00097C8AD /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
 		D7FFE5C3283932A10097C8AD /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
 		D7FFE5C4283932A20097C8AD /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
@@ -93,7 +93,7 @@
 		D7FFE5D3283933220097C8AD /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5CA62283395E9002FC65C /* QueueError.swift */; };
 		D7FFE5D4283933250097C8AD /* OperatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C728380993004767E3 /* OperatorError.swift */; };
 		D7FFE5D5283933270097C8AD /* String+extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3AE28375C6F004767E3 /* String+extensions .swift */; };
-		D7FFE5D62839332A0097C8AD /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double.swift */; };
+		D7FFE5D62839332A0097C8AD /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1C3C12837952C004767E3 /* Double+extension.swift */; };
 		D7FFE5D72839332C0097C8AD /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DF9B2832911E00B2374F /* Queue.swift */; };
 		D7FFE5D82839332F0097C8AD /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8DFA52832EDC000B2374F /* CalculateItem.swift */; };
 		D7FFE5D92839334D0097C8AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
@@ -179,7 +179,7 @@
 		D7A1C3AE28375C6F004767E3 /* String+extensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions .swift"; sourceTree = "<group>"; };
 		D7A1C3B828375EB2004767E3 /* splitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = splitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A1C3BA28375EB2004767E3 /* splitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = splitTests.swift; sourceTree = "<group>"; };
-		D7A1C3C12837952C004767E3 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		D7A1C3C12837952C004767E3 /* Double+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extension.swift"; sourceTree = "<group>"; };
 		D7A1C3C728380993004767E3 /* OperatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorError.swift; sourceTree = "<group>"; };
 		D7C8DF9B2832911E00B2374F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		D7C8DFA52832EDC000B2374F /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				D7A1C3AE28375C6F004767E3 /* String+extensions .swift */,
-				D7A1C3C12837952C004767E3 /* Double.swift */,
+				D7A1C3C12837952C004767E3 /* Double+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -627,7 +627,7 @@
 				D7FFE5D2283933200097C8AD /* Operator.swift in Sources */,
 				D7FFE5D12839331D0097C8AD /* ExpressionParser.swift in Sources */,
 				D7FFE5D82839332F0097C8AD /* CalculateItem.swift in Sources */,
-				D7FFE5D62839332A0097C8AD /* Double.swift in Sources */,
+				D7FFE5D62839332A0097C8AD /* Double+extension.swift in Sources */,
 				D7FFE5CC283933100097C8AD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,7 +641,7 @@
 				D7C8DFA22832A41D00B2374F /* CalculatorItemQueue.swift in Sources */,
 				D7C8DF9E2832A40D00B2374F /* AppDelegate.swift in Sources */,
 				D7FFE58F283931550097C8AD /* Formula.swift in Sources */,
-				D7FFE5BD2839329A0097C8AD /* Double.swift in Sources */,
+				D7FFE5BD2839329A0097C8AD /* Double+extension.swift in Sources */,
 				D7C8DFA02832A41700B2374F /* ViewController.swift in Sources */,
 				D7C8DFA12832A41A00B2374F /* Calculator.swift in Sources */,
 				D7FFE5B8283932930097C8AD /* String+extensions .swift in Sources */,
@@ -671,7 +671,7 @@
 				D7FFE5C7283932A70097C8AD /* CalculateItem.swift in Sources */,
 				D7FFE590283931550097C8AD /* Formula.swift in Sources */,
 				D7FFE5A62839327C0097C8AD /* ExpressionParser.swift in Sources */,
-				D7FFE5BE2839329A0097C8AD /* Double.swift in Sources */,
+				D7FFE5BE2839329A0097C8AD /* Double+extension.swift in Sources */,
 				D7A1C3732836C91C004767E3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,7 +685,7 @@
 				D7FFE59E283932560097C8AD /* ViewController.swift in Sources */,
 				D7FFE59B283932530097C8AD /* SceneDelegate.swift in Sources */,
 				D7FFE5A12839325A0097C8AD /* Calculator.swift in Sources */,
-				D7FFE5BF2839329B0097C8AD /* Double.swift in Sources */,
+				D7FFE5BF2839329B0097C8AD /* Double+extension.swift in Sources */,
 				D7FFE5982839324E0097C8AD /* AppDelegate.swift in Sources */,
 				D7FFE595283932470097C8AD /* CalculatorItemQueue.swift in Sources */,
 				D7FFE5BA283932950097C8AD /* String+extensions .swift in Sources */,
@@ -707,7 +707,7 @@
 				D7FFE59F283932570097C8AD /* ViewController.swift in Sources */,
 				D7FFE59C283932530097C8AD /* SceneDelegate.swift in Sources */,
 				D7FFE5A22839325A0097C8AD /* Calculator.swift in Sources */,
-				D7FFE5C02839329C0097C8AD /* Double.swift in Sources */,
+				D7FFE5C02839329C0097C8AD /* Double+extension.swift in Sources */,
 				D7FFE5992839324F0097C8AD /* AppDelegate.swift in Sources */,
 				D7FFE596283932470097C8AD /* CalculatorItemQueue.swift in Sources */,
 				D7FFE5BB283932950097C8AD /* String+extensions .swift in Sources */,
@@ -729,7 +729,7 @@
 				D7FFE5A0283932570097C8AD /* ViewController.swift in Sources */,
 				D7FFE59D283932530097C8AD /* SceneDelegate.swift in Sources */,
 				D7FFE5A32839325B0097C8AD /* Calculator.swift in Sources */,
-				D7FFE5C12839329C0097C8AD /* Double.swift in Sources */,
+				D7FFE5C12839329C0097C8AD /* Double+extension.swift in Sources */,
 				D7FFE59A2839324F0097C8AD /* AppDelegate.swift in Sources */,
 				D7FFE597283932480097C8AD /* CalculatorItemQueue.swift in Sources */,
 				D7FFE5BC283932960097C8AD /* String+extensions .swift in Sources */,
