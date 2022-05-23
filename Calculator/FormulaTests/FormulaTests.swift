@@ -218,4 +218,43 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_result_소수점_아래_자리수가_큰_피연산수를_입력받았을때_정상적으로_값이_출력되는지_테스트() throws {
+        // given
+        let input = "0.000001*0.000002"
+        let expectation = 0.000001 * 0.000002
+       
+        //when
+        var parser = ExpressionParser.parse(from: input)
+        let result = try parser.result()
+
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_실수인_수가_있는_피연산수를_입력받았을때_정상적으로_값이_출력되는지_테스트() throws {
+        // given
+        let input = "4.3+1/5*10.2"
+        let expectation = ((4.3 + 1) / 5) * 10.2
+       
+        //when
+        var parser = ExpressionParser.parse(from: input)
+        let result = try parser.result()
+
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_음수로_시작하는_피연산수를_입력받았을때_정상적으로_값이_출력되는지_테스트() throws {
+        // given
+        let input = "-4.3+1/5*10.2"
+        let expectation = ((-4.3 + 1) / 5) * 10.2
+       
+        //when
+        var parser = ExpressionParser.parse(from: input)
+        let result = try parser.result()
+
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
