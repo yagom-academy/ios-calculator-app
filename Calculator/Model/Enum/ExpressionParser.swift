@@ -13,7 +13,7 @@ enum ExpressionParser {
             formula.operands.enqueue(data: $0)
         }
         
-        componentsByOperators(from: input).filter { Double($0) == nil }.compactMap { Operator.init(rawValue: Character($0)) }.forEach {
+        componentsByOperators(from: input).compactMap { Operator.init(rawValue: $0) }.forEach {
             formula.operators.enqueue(data: $0)
         }
         
