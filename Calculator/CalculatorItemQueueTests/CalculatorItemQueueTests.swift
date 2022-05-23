@@ -18,7 +18,7 @@ class CalculatorTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        try super.setUpWithError()
+        try super.tearDownWithError()
         sut = nil
     }
 
