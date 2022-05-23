@@ -23,7 +23,7 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queue {
     
     // MARK: - Properties
     
-    private var queue = LinkedList<Element>()
+    private let queue = LinkedList<Element>()
     
     var peek: Element? {
         return queue.head?.data ?? nil
