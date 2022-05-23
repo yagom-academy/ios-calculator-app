@@ -25,7 +25,7 @@ class FormulaTests: XCTestCase {
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
+        let result = try parser.result()
 
         // then
         XCTAssertEqual(result, expectation)
@@ -38,7 +38,7 @@ class FormulaTests: XCTestCase {
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
+        let result = try parser.result()
 
         // then
         XCTAssertEqual(result, expectation)
@@ -51,7 +51,7 @@ class FormulaTests: XCTestCase {
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
+        let result = try parser.result()
 
         // then
         XCTAssertEqual(result, expectation)
@@ -64,7 +64,7 @@ class FormulaTests: XCTestCase {
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
+        let result = try parser.result()
 
         // then
         XCTAssertEqual(result, expectation)
@@ -77,7 +77,7 @@ class FormulaTests: XCTestCase {
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
+        let result = try parser.result()
 
         // then
         XCTAssertEqual(result, expectation)
@@ -90,7 +90,7 @@ class FormulaTests: XCTestCase {
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
+        let result = try parser.result()
 
         // then
         XCTAssertEqual(result, expectation)
@@ -99,12 +99,19 @@ class FormulaTests: XCTestCase {
     func test_result_0으로_나눌때_오류처리가_정상적으로_이루어져_NaN의_값을_반환하는지_테스트() throws {
         // given
         let input = "100/0"
+        let expectation = "NaN"
+        var result = "NaN이 아닙니다"
         
         //when
         var parser = ExpressionParser.parse(from: input)
-        let result = parser.result()
-
+        
+        do {
+            _ = try parser.result()
+        } catch CalculatorError.dividedByZero {
+            result = "NaN"
+        }
+        
         // then
-        XCTAssertTrue(result.isNaN)
+        XCTAssertEqual(result, expectation)
     }
 }
