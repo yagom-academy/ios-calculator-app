@@ -27,7 +27,7 @@ struct Formula {
                 lastResult = try  inputOperator.calculate(lhs: lastResult,
                                                           rhs: inputNumber)
             } catch {
-                OperatorError.devideFail
+                throw OperatorError.devideFail
             }
         }
         return lastResult

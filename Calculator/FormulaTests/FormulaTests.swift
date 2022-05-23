@@ -70,22 +70,13 @@ class FormulaTests: XCTestCase {
     
     func test_두번째숫자가0이면_에러숫자를반환하는가() {
         //given
-        sut?.operands.enQueue(1.0)
+        sut?.operands.enQueue(3.0)
         sut?.operators.enQueue(.divide)
-        sut?.operands.enQueue(0)
-        
-        var input: Double? = 1.0
-        
+        sut?.operands.enQueue(0.0)
+
         //when
-        func test() throws {
-            do {
-                input = try sut?.result()
-            } catch {
-                throw QueueError.unknown
-            }
-        }
         
         //then
-        XCTAssertThrowsError(try test())
+        XCTAssertThrowsError(try sut?.result())
     } 
 }
