@@ -48,6 +48,19 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
+    func test_음수더하기() {
+        //given
+        sut.operands.enqueue(-1)
+        sut.operands.enqueue(-2)
+        sut.operators.enqueue("+")
+        
+        let expectation = Double(-3)
+        //when
+        let result = try! sut.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
     func test_빼기() {
         //given
         sut.operands.enqueue(1)
