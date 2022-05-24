@@ -2,7 +2,6 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    // MARK: Setting
     var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {

@@ -16,7 +16,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return calculateItems.removeFirst()
     }
     
-    func displayItems() -> Array<T?> {
+    func displayItems() -> Array<T> {
         return calculateItems.getValues()
     }
     

@@ -2,7 +2,6 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTests: XCTestCase {
-    // MARK: Setting
     var sut: Formula!
     
     override func setUpWithError() throws {
