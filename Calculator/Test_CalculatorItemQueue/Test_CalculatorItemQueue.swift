@@ -53,8 +53,8 @@ class Test_CalculatorItemQueue: XCTestCase {
         let output: [Int] = [1]
 
         // when
-        input.forEach {
-            sut.enqueue([$0])
+        input.forEach { (number: Int) in
+            sut.enqueue([number])
         }
         let dequeue = sut.dequeue()
 
@@ -69,8 +69,9 @@ class Test_CalculatorItemQueue: XCTestCase {
         var result: [Int] = []
 
         //when
-        input.forEach {
-            sut.enqueue([$0])
+        input.forEach { (number: Int) in
+            let enqueueNumber: () = sut.enqueue([number])
+            return enqueueNumber
         }
         sut.clear()
         var node = sut.linkedList.head
@@ -79,8 +80,8 @@ class Test_CalculatorItemQueue: XCTestCase {
             guard let nodeData = node?.data else {
                 return
             }
-            nodeData.forEach {
-                result.append($0)
+            nodeData.forEach { (number: Int) in
+                result.append(number)
             }
             node = node?.next
         }

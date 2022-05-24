@@ -32,8 +32,8 @@ class Test_ExpressionParser: XCTestCase {
 
     func test_parse_result_실행했을때_result_반환되는지() {
         // ginven
-        let input: String = "2 - 10 + 15"
-        let output = 7.0
+        let input: String = "2 - 1 + 1"
+        let output = 2.0
         
         // when
         var result = ExpressionParser.parse(from: input)
