@@ -7,150 +7,133 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var isOperandValueEmpty = false
-    var isCalculateCompleted = false
-    var mathematicalExpression = ""
+    private var isOperandinputed = false
+    private var isCalculateCompleted = false
+    private var mathematicalExpression = ""
     
-    @IBOutlet weak var mathematicalExpressionStackView: UIStackView!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet private weak var mathematicalExpressionStackView: UIStackView!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func acButtonAction(_ sender: UIButton) {
-        mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-        mathematicalExpression = ""
-        isOperandValueEmpty = false
-        isCalculateCompleted = false
+    @IBAction private func acButtonAction(_ sender: UIButton) {
+        reset()
     }
     
-    @IBAction func ceButtonAction(_ sender: UIButton) {
+    @IBAction private func ceButtonAction(_ sender: UIButton) {
         if isCalculateCompleted {
-            mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
-            mathematicalExpression = ""
-            isCalculateCompleted = false
+            reset()
         }
+        
         operandLabel.text = "0"
-        isOperandValueEmpty = false
+        isOperandinputed = false
     }
     
-    @IBAction func switchSignButton(_ sender: UIButton) {
+    @IBAction private func switchSignButton(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
         guard let operandLabelText = operandLabel.text else {
             return
         }
-        guard let operand = Int(operandLabelText) else {
+        guard let operand = Double(operandLabelText) else {
             return
         }
-        guard operand != 0 else {
+        guard operand != 0.0 else {
             return
         }
-        operandLabel.text = String(-Int(operand))
+        
+        operandLabel.text = String(-operand)
     }
     
-    @IBAction func operatorsButtonAction(_ sender: UIButton) {
+    @IBAction private func operatorsButtonAction(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
-        guard isOperandValueEmpty else {
+        guard isOperandinputed else {
             operatorLabel.text = sender.currentTitle
             return
         }
+        let operatorOfSignLabel = createLabel(text: operatorLabel.text)
+        let operandOfSignLabel = createLabel(text: operandLabel.text)
         
-        let operatorOfSignLabel: UILabel = {
-            let label = UILabel()
-            label.text = operandLabel.text
-            label.font = UIFont.systemFont(ofSize: 25)
-            label.textColor = .white
-            return label
-        }()
-        
-        let operandOfSignLabel: UILabel = {
-            let label = UILabel()
-            label.text = operatorLabel.text
-            label.font = UIFont.systemFont(ofSize: 25)
-            label.textColor = .white
-            return label
-        }()
-        
-        let signStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operandOfSignLabel, operatorOfSignLabel])
-            stackView.axis = .horizontal
-            stackView.distribution = .fill
-            stackView.alignment = .fill
-            stackView.spacing = 8
-            return stackView
-        }()
+        if mathematicalExpressionStackView.subviews.isEmpty {
+            createStackView(operandOfSignLabel)
+            mathematicalExpression += "\(operandLabel.text ?? "") "
+        } else {
+            createStackView(operatorOfSignLabel, operandOfSignLabel)
+            mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
+        }
         
         operatorLabel.text = sender.currentTitle
-        mathematicalExpressionStackView.addArrangedSubview(signStackView)
-        mathematicalExpression += "\(operandLabel.text ?? "") \(operatorLabel.text ?? "") "
         operandLabel.text = "0"
-        isOperandValueEmpty = false
+        isOperandinputed = false
     }
     
-    @IBAction func operandsButtonAction(_ sender: UIButton) {
+    @IBAction private func operandsButtonAction(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
-        if !isOperandValueEmpty {
+        if !isOperandinputed {
             operandLabel.text = sender.currentTitle
-            isOperandValueEmpty = true
+            isOperandinputed = true
         } else {
             operandLabel.text = (operandLabel.text ?? "") + (sender.currentTitle ?? "")
-            isOperandValueEmpty = true
+            isOperandinputed = true
         }
     }
     
-    @IBAction func calculateButtonAction(_ sender: UIButton) {
-        guard let operandString = operandLabel.text else {
+    @IBAction private func calculateButtonAction(_ sender: UIButton) {
+        guard isOperandinputed else {
             return
         }
-        guard isOperandValueEmpty else {
-            return
-        }
-        guard operatorLabel.text != "" else {
+        guard !mathematicalExpressionStackView.subviews.isEmpty else {
             return
         }
         
-        let operatorOfSignLabel: UILabel = {
-            let label = UILabel()
-            label.text = operandLabel.text
-            label.font = UIFont.systemFont(ofSize: 25)
-            label.textColor = .white
-            return label
-        }()
+        let operatorOfSignLabel = createLabel(text: operatorLabel.text)
+        let operandOfSignLabel = createLabel(text: operandLabel.text)
+        createStackView(operatorOfSignLabel, operandOfSignLabel)
+        mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
         
-        let operandOfSignLabel: UILabel = {
-            let label = UILabel()
-            label.text = operatorLabel.text
-            label.font = UIFont.systemFont(ofSize: 25)
-            label.textColor = .white
-            return label
-        }()
-        
-        let signStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operandOfSignLabel, operatorOfSignLabel])
-            stackView.axis = .horizontal
-            stackView.distribution = .fill
-            stackView.alignment = .fill
-            stackView.spacing = 8
-            return stackView
-        }()
-        
-        mathematicalExpressionStackView.addArrangedSubview(signStackView)
-        print(mathematicalExpression + operandString)
-        mathematicalExpression = ""
+        operandLabel.text = mathematicalExpression
         operatorLabel.text = ""
-        operandLabel.text = ""
-        isOperandValueEmpty = false
+        mathematicalExpression = ""
+        
+        isOperandinputed = false
         isCalculateCompleted = true
+    }
+    
+    private func reset() {
+        mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+        mathematicalExpression = ""
+        isOperandinputed = false
+        isCalculateCompleted = false
+    }
+    
+    private func createLabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = UIFont.systemFont(ofSize: 25)
+        label.textColor = .white
+        return label
+    }
+    
+    private func createStackView(_ labels: UIView...) {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        for label in labels {
+            stackView.addArrangedSubview(label)
+        }
+        mathematicalExpressionStackView.addArrangedSubview(stackView)
     }
 }
 
