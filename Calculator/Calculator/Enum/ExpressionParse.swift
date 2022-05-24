@@ -17,9 +17,7 @@ enum ExpressParser {
             
             if let parseNumber = Double(parseString) {
                 operands.enqueue(parseNumber)
-            }
-            
-            if let parseArithmetic = Operator(rawValue: Character(parseString)) {
+            } else if let parseArithmetic = Operator(rawValue: Character(parseString)) {
                 operators.enqueue(parseArithmetic)
             }
         }
