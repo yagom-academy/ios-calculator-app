@@ -24,7 +24,6 @@ class CalculatorList<T> {
         }
         return count
     }
-    
     func append(_ newNode: Node<T>) {
         guard tail != nil else {
             tail = newNode
@@ -34,7 +33,6 @@ class CalculatorList<T> {
         tail?.next = newNode
         tail = tail?.next
     }
-    
     func isEmpty() -> Bool {
         if head == nil {
             return true
@@ -42,12 +40,10 @@ class CalculatorList<T> {
             return false
         }
     }
-    
     func removeAll() {
         tail = nil
         head = nil
     }
-    
     func pop() -> Node<T>? {
         guard let firstNode = head else {
             return nil

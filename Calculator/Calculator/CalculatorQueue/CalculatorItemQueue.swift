@@ -14,14 +14,12 @@ class CalculatorItemQueue {
         let newNode = Node(value: input)
         self.queue.append(newNode)
     }
-    
     func deQueue() -> Node<CalculatorItem>? {
         if queue.isEmpty() {
             return nil
         }
         return queue.pop()
     }
-    
     func removeAll() {
         queue.removeAll()
     }

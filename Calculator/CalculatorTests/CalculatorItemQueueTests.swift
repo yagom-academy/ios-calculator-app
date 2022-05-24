@@ -22,7 +22,7 @@ class CalculatorItemQueueTests: XCTestCase {
 // MARK: - CalculatorItemQueue.count
     func test_queue에1개일때_큐의길이1반환() {
         //given
-        sut.enQueue("3")
+        sut.enQueue(3.0)
         
         //when
         let result = sut.count
@@ -42,23 +42,21 @@ class CalculatorItemQueueTests: XCTestCase {
 // MARK: - CalculatorItemQueue.enQueue
     func test_queue에_값_한개_삽입() {
         //given
-        let input = "3"
-        
-        //when
+        let input = 3.0
         sut.enQueue(input)
-        guard let result = sut.deQueue() else {
-            return
-        }
+        //when
+        
+        let result = sut.count
         
         //then
-        XCTAssertEqual(result.value, "3")
+        XCTAssertEqual(result, 1)
     }
     
     func test_queue에_값_3개_삽입시_크기는3() {
         //given
-        let input1 = "3"
-        let input2 = "6"
-        let input3 = "9"
+        let input1 = 3.0
+        let input2 = 6.0
+        let input3 = 9.0
         
         //when
         sut.enQueue(input1)
@@ -81,14 +79,14 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_값이_있을때_deQueue시_값반환() {
         //given
-        sut.enQueue("3")
-        sut.enQueue("4")
-        sut.enQueue("6")
+        sut.enQueue(3.0)
+        sut.enQueue(4.0)
+        sut.enQueue(6.0)
         
         //when
-        let result = sut.deQueue()
+        guard let result = sut.deQueue() else { return }
         
         //then
-        XCTAssertEqual(result?.value, "3")
+        XCTAssertEqual(result.value as! Double, 3.0)
     }
 }
