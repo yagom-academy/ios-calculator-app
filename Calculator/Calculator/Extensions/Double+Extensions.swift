@@ -7,6 +7,6 @@
 
 import Foundation
 
-extension Double {
+extension Double: CalculateItem {
     
 }
