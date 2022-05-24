@@ -1,8 +1,8 @@
 enum Operator: Character, CaseIterable, CalculatorItem {
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     var symbol: Character {
         switch self {

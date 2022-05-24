@@ -4,7 +4,7 @@ import XCTest
 class ExpressionParserTests: XCTestCase {
     func test_parse_formula의operands에123만들어가는지() {
         // givwn
-        let input = "11+244-3"
+        let input = "11+244−3"
         let expectation: [Double] = [11, 244, 3]
         
         // when
@@ -16,7 +16,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse_formula의operators에연산자만들어가는지() {
         // givwn
-        let input = "2*12/8"
+        let input = "2×12÷8"
         let expectation: [Operator] = [.multiply, .divide]
         
         // when
@@ -28,7 +28,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse_숫자와기호가무작위로들어왔을때_에러를반환하는지() {
         // givwn
-        let input = "2*+2857//24-"
+        let input = "2×+2857÷÷24−"
 
         // when
         let result = try? ExpressionParser.parse(from: input)
@@ -40,7 +40,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse_연산자만들어있을때_에러를반환하는지() {
         // givwn
-        let input = "*+//-"
+        let input = "×+÷÷−"
 
         // when
         let result = try? ExpressionParser.parse(from: input)
