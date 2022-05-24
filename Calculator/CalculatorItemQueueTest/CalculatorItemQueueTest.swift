@@ -33,7 +33,7 @@ class CalculatorItemQueueTest: XCTestCase {
         XCTAssertEqual(result, input)
     }
     
-    func test_숫자5와6을_넣었을때_5와6이들어있는지확인() {
+    func test_숫자5를_linkedList_head에넣고_6을_likedList_head_next에넣었을때_5와6이_head와_headnext에들어있는지확인() {
         //given
         let input:Double = 5
         let secondInput:Double = 6
