@@ -128,6 +128,7 @@ class parseTests: XCTestCase {
 
         let result = try? test.result()
         
+        
         //then
         XCTAssertEqual(result, 2.0)
     }
@@ -143,5 +144,21 @@ class parseTests: XCTestCase {
         
         //then
         XCTAssertThrowsError(try test.result())
+    }
+    
+    func test_ExdpressionParser에서_input을집어넣어_parse를호출하고_result함수를_호출하였을때마지막숫자가0이면_에러를던지는가() {
+        //given
+        let input = "1 + 2 - 3 + 4 - 100"
+        
+        //when
+        var test: Formula
+        
+        test = ExpressionParser.parse(from: input)
+//        test.operands = input.split(with: " ").compactMap { Double(String($0) }
+        let operands = input.compactMap { Double(String($0)) }
+        print(operands)
+        print(try? test.result())
+        //then
+//        XCTAssertThrowsError(try test.result())
     }
 }
