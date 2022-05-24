@@ -31,11 +31,19 @@ struct CalculatorItemQueue<T>: CalculateItem {
         enqueueStack.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue()throws -> T {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
-        return dequeueStack.popLast()
+        
+        guard let result = dequeueStack.popLast() else {
+            throw CalculatorItemQueueError.emptyStack
+        }
+        return result
     }
+}
+
+enum CalculatorItemQueueError: Error {
+    case emptyStack
 }
