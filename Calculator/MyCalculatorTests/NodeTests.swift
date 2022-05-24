@@ -2,7 +2,7 @@
 //  NodeTests.swift
 //  MyCalculatorTests
 //
-//  Created by 이예은 on 2022/05/17.
+//  Created by yeton on 2022/05/17.
 //
 
 import XCTest
@@ -21,7 +21,7 @@ class NodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_Node에_data를입력하면_값이_초기화가_잘되는지() {
+    func test_Node에_data를입력하면_값이_초기화가_잘된다() {
         let number = 3.0
         
         sut?.data = number
