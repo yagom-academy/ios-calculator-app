@@ -16,7 +16,7 @@ enum Operator: Character, CaseIterable {
 
 extension Operator {
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double)throws -> Double {
         var result = 0.0
         switch self {
         case .add:
@@ -24,6 +24,7 @@ extension Operator {
         case .subtract:
             result = substract(lhs: lhs, rhs: rhs)
         case .divide:
+            guard rhs != 0 else { throw OperatorError.dividedByZero }
             result = divide(lhs: lhs, rhs: rhs)
         case .multiply:
             result = multiply(lhs: lhs, rhs: rhs)
@@ -49,4 +50,8 @@ private extension Operator {
     func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
     }
+}
+
+enum OperatorError: Error {
+    case dividedByZero
 }
