@@ -19,7 +19,7 @@ enum ExpressionParser {
         return Formula(operands: operandsQueue, operators: operatorQueue)
     }
     
-    static func componentsByOperators(from input: String ) -> [String] {
+    private static func componentsByOperators(from input: String ) -> [String] {
         
         return input.split(with: " ")
         

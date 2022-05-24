@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum OperatorError: Error {
-    case devideZero
-    case emptyList
-}
-
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case substract = "-"
