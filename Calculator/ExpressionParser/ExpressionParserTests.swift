@@ -171,4 +171,17 @@ class parseTests: XCTestCase {
         //then
         XCTAssertNoThrow(try test.result())
     }
+    
+    func test_ExdpressionParser에서_input을집어넣어_parse를호출하고_result함수를_호출하였을때_input에음수가들어있어도계산을잘하는가() {
+        //given
+        let input = "1 + 2 − -3 + 4 − -100"
+        
+        //when
+        var test: Formula
+        
+        test = ExpressionParser.parse(from: input)
+
+        //then
+        XCTAssertEqual(try test.result(), 110.0)
+    }
 }
