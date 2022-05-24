@@ -77,6 +77,7 @@ class ViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
+        
         if !isOperandinputed {
             operandLabel.text = sender.currentTitle
             isOperandinputed = true
@@ -98,11 +99,9 @@ class ViewController: UIViewController {
         let operandOfSignLabel = createLabel(text: operandLabel.text)
         createStackView(operatorOfSignLabel, operandOfSignLabel)
         mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
-        
         operandLabel.text = mathematicalExpression
         operatorLabel.text = ""
         mathematicalExpression = ""
-        
         isOperandinputed = false
         isCalculateCompleted = true
     }
@@ -130,9 +129,11 @@ class ViewController: UIViewController {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 8
+        
         for label in labels {
             stackView.addArrangedSubview(label)
         }
+        
         mathematicalExpressionStackView.addArrangedSubview(stackView)
     }
 }
