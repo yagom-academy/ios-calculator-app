@@ -23,6 +23,6 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.filter {$0 == "+" || $0 == "-" || $0 == "/" || $0 == "*" }.map { String($0) }
+        return input.filter { Operator.allCases.map({ String($0.rawValue)}).contains(String($0))}.map { String($0) }
     }
 }
