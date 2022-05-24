@@ -11,24 +11,24 @@ enum Operator: Character, CalculateItem, CaseIterable {
     case divide = "/"
     case multiply = "*"
     
-    func calculate(lhs: Double, rhs: Double) -> Result<Double, CalculatorError> {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
             let value = add(lhs: lhs, rhs: rhs)
-            return .success(value)
+            return value
         case .subtract:
             let value = subtract(lhs: lhs, rhs: rhs)
-            return .success(value)
+            return value
         case .divide:
             do {
                 let value = try divide(lhs: lhs, rhs: rhs)
-                return .success(value)
+                return value
             } catch {
-                return .failure(.dividedByZero)
+                throw error
             }
         case .multiply:
             let value = multiply(lhs: lhs, rhs: rhs)
-            return .success(value)
+            return value
         }
     }
     

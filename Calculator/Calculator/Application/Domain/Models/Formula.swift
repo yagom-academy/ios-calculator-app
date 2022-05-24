@@ -16,11 +16,10 @@ struct Formula {
         
         while let nextOperator = operators.dequeue(),
               let nextOperand = operands.dequeue() {
-            let newValue = nextOperator.calculate(lhs: result, rhs: nextOperand)
-            switch newValue {
-            case .success(let value):
-                result = value
-            case .failure(let error):
+            do {
+                let newValue = try nextOperator.calculate(lhs: result, rhs: nextOperand)
+                result = newValue
+            } catch {
                 throw error
             }
         }
