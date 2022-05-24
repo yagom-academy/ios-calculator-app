@@ -23,10 +23,10 @@ class ExpressionParserTests: XCTestCase {
         let input = "1+2-3"
         
         // when
-        var formula = ExpressionParser.parse(from: input)
+        let formula = ExpressionParser.parse(from: input)
         let formulaValue = try? formula.result()
         
-        var expected = Formula(operands: CalculatorItemQueue(array: [1, 2, 3]),
+        let expected = Formula(operands: CalculatorItemQueue(array: [1, 2, 3]),
                                operators: CalculatorItemQueue(array: [Operator.add, Operator.subtract]))
         let expectedValue = try? expected.result()
         

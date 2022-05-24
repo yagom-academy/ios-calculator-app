@@ -9,7 +9,7 @@ struct Formula {
     let operands: CalculatorItemQueue<Double>
     let operators: CalculatorItemQueue<Operator>
     
-    mutating func result() throws -> Double {
+    func result() throws -> Double {
         var operands = self.operands
         var operators = self.operators
         
