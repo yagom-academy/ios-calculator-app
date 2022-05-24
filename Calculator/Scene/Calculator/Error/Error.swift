@@ -8,4 +8,5 @@
 enum DevideError: Error {
     case devideZero
     case nilOfValue
+    case insufficientOperator
 }

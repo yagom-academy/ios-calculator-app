@@ -5,6 +5,8 @@
 //  Created by 이은찬 on 2022/05/20.
 //
 
+import Darwin
+
 struct Formula {
     private var operands = Queue<Double>()
     private var operators = Queue<Operator>()
@@ -20,17 +22,20 @@ struct Formula {
     }
     
     func result() throws -> Double {
-        var lhs: Double = 0.0
+        guard operands.count == `operators`.count + 1 else { throw DevideError.insufficientOperator }
+        guard let operand = operands.dequeue() else { throw DevideError.nilOfValue }
+        var lhs: Double = operand
         while operands.isEmpty == false {
-            if lhs == 0.0 {
-                lhs = operands.dequeue() ?? 0.0
-            }
-            let rhs = operands.dequeue() ?? 0.0
+            guard let operand = operands.dequeue() else { throw DevideError.nilOfValue }
+            let rhs = operand
             if operators.isEmpty == false {
                 let `operator` = operators.dequeue()
-                lhs = ( try `operator`?.calculate(lhs: lhs, rhs: rhs)) ?? 0.0
+                guard let result = try `operator`?.calculate(lhs: lhs, rhs: rhs) else { throw DevideError.nilOfValue }
+                lhs = result
             }            
         }
-        return lhs
+        let temp = lhs * 100000000000000000000
+        let result = round(temp) / 100000000000000000000
+        return result
     }
 }

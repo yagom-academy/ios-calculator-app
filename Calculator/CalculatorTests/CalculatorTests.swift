@@ -110,36 +110,27 @@ class CalculatorTests: XCTestCase {
     func test_입력된숫자가하나일때_계산하면_입력된숫자가나오는지확인() {
         //given
         //when
-        let input = ExpressionParser.parse(from: "123")
+        let result = try? ExpressionParser.parse(from: "123")
         //then
-        XCTAssertEqual(try input.result(), 123.0)
-    }
-    
-    func test_입력이들어왔을떄_공백으로나눠주면_배열이잘나오는지확인() {
-        //given
-        let input = "123 + 321"
-        //when
-        let result = ExpressionParser.componentByOperators(from: input)
-        //then
-        XCTAssertEqual(["123", "+", "321"], result)
+        XCTAssertEqual(try result!.result(), 123.0)
     }
     
     func test_입력이들어왔을때_함수를실행하면_연산자와더블로잘나뉘는지확인() {
         //given
         let input = "123 + 321 / 12"
         //when
-        let result = ExpressionParser.parse(from: input)
+        let result = try? ExpressionParser.parse(from: input)
         //then
-        XCTAssertEqual(try result.result(), 37.0)
+        XCTAssertEqual(try result!.result(), 37.0)
     }
     
     func test_연산할때_음수가있을경우_계산이잘되는지확인() {
         //given
         let input = "-123 + -321 + 0"
         //when
-        let result = ExpressionParser.parse(from: input)
+        let result = try? ExpressionParser.parse(from: input)
         //then
-        XCTAssertEqual(try result.result(), -444.0)
+        XCTAssertEqual(try result!.result(), -444.0)
     }
     
     func test_나누기할때_나누는값이0일경우_오류처리가되는지확인() {
@@ -147,17 +138,52 @@ class CalculatorTests: XCTestCase {
         let input = "123 + 321 / 0"
         
         //when
-        let result = ExpressionParser.parse(from: input)
+        let result = try? ExpressionParser.parse(from: input)
         //then
-        XCTAssertThrowsError(try result.result())
+        XCTAssertThrowsError(try result!.result())
     }
     
     func test_나누기할때_음수0으로나눌경우경우_계산이잘되는지확인() {
         //given
         let input = "-123 + -321 / -0"
         //when
-        let result = ExpressionParser.parse(from: input)
+        let result = try? ExpressionParser.parse(from: input)
         //then
-        XCTAssertEqual(try result.result(), -444.0)
+        XCTAssertThrowsError(try result!.result())
     }
+    
+    func test_연산할때_연산자와숫자가안맞을경우_오류처리가되는지확인() {
+        //given
+        let input = "-123 + + -321 / -0"
+        //when
+        let result = try? ExpressionParser.parse(from: input)
+        //then
+        XCTAssertThrowsError(try result!.result())
+    }
+    
+    func test_연산할때_operand가0이많은경우_값이잘나오는지() {
+        //given
+        let input = "-0 + 0 * 0 - -0 + 10"
+        //when
+        let result = try? ExpressionParser.parse(from: input)
+        //then
+        XCTAssertEqual(try result!.result(), 10.0)
+    }
+    
+    func test_계산할때_결과값의소수점이많이나올경우_어떻게하나1() {
+        let input = "-20 / 19"
+        //when
+        let result = try? ExpressionParser.parse(from: input)
+        //then
+        XCTAssertEqual(try result!.result(), -1.05263157894736836262)
+    }
+    
+    func test_계산할때_결과값의소수점이많이나올경우_어떻게하나2() {
+        let input = "-1 / 3"
+        //when
+        let result = try? ExpressionParser.parse(from: input)
+        //then
+        XCTAssertEqual(try result!.result(), -0.33333333333333333332)
+    }
+
 }
