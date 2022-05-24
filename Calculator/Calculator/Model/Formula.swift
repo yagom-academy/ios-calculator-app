@@ -10,11 +10,11 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var result = operands.dequeue() else { throw OperatorError.emptyList }
+        guard var result = operands.dequeue() else { throw OperatorError.wrongFormula }
         
         while operands.isEmpty == false {
             guard let number = operands.dequeue(),
-                  let operatorSign = operators.dequeue() else { throw OperatorError.emptyList }
+                  let operatorSign = operators.dequeue() else { throw OperatorError.wrongFormula }
             result = try operatorSign.calculate(lhs: result, rhs: number)
         }
         return result

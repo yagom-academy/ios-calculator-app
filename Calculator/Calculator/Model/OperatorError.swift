@@ -7,5 +7,5 @@
 
 enum OperatorError: Error {
     case divideZero
-    case emptyList
+    case wrongFormula
 }

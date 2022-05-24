@@ -1,8 +1,8 @@
 //
-//  Extension.swift
+//  String Extension.swift
 //  Calculator
 //
-//  Created by Kiwi on 2022/05/19.
+//  Created by Kiwi on 2022/05/24.
 //
 
 extension String {
