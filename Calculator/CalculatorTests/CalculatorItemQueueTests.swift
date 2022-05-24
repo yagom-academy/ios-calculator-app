@@ -66,6 +66,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
+        
         let expectation = "1"
         //when
         let result = try! sut.dequeue()
@@ -88,6 +89,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
+        
         let expectation = ["2","3"]
         //when
         try! sut.dequeue()
@@ -100,6 +102,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
+        
         let expectation = "1"
         //when
         let result = sut.peek
@@ -116,5 +119,3 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
 }
-
-
