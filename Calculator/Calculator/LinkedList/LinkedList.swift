@@ -22,6 +22,7 @@ struct LinkedList<T> {
     mutating func append(data: T?) {
         if head == nil {
             head = Node(data: data)
+            tail = head
             return
         }
         
@@ -38,5 +39,6 @@ struct LinkedList<T> {
     
     mutating func removeAll() {
         head = nil
+        tail = nil
     }
 }
