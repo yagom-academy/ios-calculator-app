@@ -41,24 +41,32 @@ class OperatorTest: XCTestCase {
     }
     
     func test_두수를_multiply로_연산했을때_곱하기_되어야한다() {
-            //given
-            sut = .multiply
-            
-            //when
-            let result = try? sut.calculate(lhs: 2, rhs: 3)
-            
-            //then
-            XCTAssertEqual(result, 6)
-        }
+        //given
+        sut = .multiply
+        
+        //when
+        let result = try? sut.calculate(lhs: 2, rhs: 3)
+        
+        //then
+        XCTAssertEqual(result, 6)
+    }
     
     func test_두수를_divide로_연산했을때_나누기가_되어야한다() {
-            //given
-            sut = .divide
-            
-            //when
-            let result = try? sut.calculate(lhs: 4, rhs: 2)
-            
-            //then
-            XCTAssertEqual(result, 2)
+        //given
+        sut = .divide
+        
+        //when
+        let result = try? sut.calculate(lhs: 4, rhs: 2)
+        
+        //then
+        XCTAssertEqual(result, 2)
+    }
+    func test_0으로_divide_했을때_Error가_호출되어야한다() {
+        //given
+        sut = .divide
+        //when,then
+        XCTAssertThrowsError(try sut.calculate(lhs: 2, rhs: 0), "divideByZero") { error in
+            XCTAssertEqual(error as! OperatorError, OperatorError.divideZero)
         }
+    }
 }

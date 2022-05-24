@@ -6,6 +6,6 @@
 //
 
 enum OperatorError: Error {
-    case devideZero
+    case divideZero
     case emptyList
 }
