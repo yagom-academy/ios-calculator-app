@@ -23,8 +23,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
             do {
                 let value = try divide(lhs: lhs, rhs: rhs)
                 return value
-            } catch {
-                throw error
+            } catch CalculatorError.dividedByZero {
+                throw CalculatorError.dividedByZero
             }
         case .multiply:
             let value = multiply(lhs: lhs, rhs: rhs)

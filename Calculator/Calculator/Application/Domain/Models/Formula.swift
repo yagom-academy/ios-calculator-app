@@ -6,10 +6,13 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    let operands: CalculatorItemQueue<Double>
+    let operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
+        var operands = self.operands
+        var operators = self.operators
+        
         guard var result = operands.dequeue() else {
             throw CalculatorError.noRemainingValue
         }
@@ -19,8 +22,8 @@ struct Formula {
             do {
                 let newValue = try nextOperator.calculate(lhs: result, rhs: nextOperand)
                 result = newValue
-            } catch {
-                throw error
+            } catch CalculatorError.dividedByZero {
+                throw CalculatorError.dividedByZero
             }
         }
         
