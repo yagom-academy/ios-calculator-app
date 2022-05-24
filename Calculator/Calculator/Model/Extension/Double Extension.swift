@@ -1,13 +1,9 @@
 //
-//  Extension.swift
+//  Double Extension.swift
 //  Calculator
 //
-//  Created by Kiwi on 2022/05/19.
+//  Created by Kiwi Song on 2022/05/24.
 //
-
-extension Double: CalculateItem {
-    
-}
 
 extension String {
     func split(with target: Character) -> [String] {
