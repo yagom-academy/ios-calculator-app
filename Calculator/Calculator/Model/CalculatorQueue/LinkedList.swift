@@ -40,7 +40,6 @@ struct LinkedList<T> {
         var elements: [Any] = []
         
         while head != nil {
-
             elements.append(head?.data as Any)
             head = head?.next
         }

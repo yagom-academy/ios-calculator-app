@@ -8,4 +8,5 @@
 enum ErrorCase: Error {
     case operandsDequeue
     case operatorDequeue
+    case listDequeue
 }

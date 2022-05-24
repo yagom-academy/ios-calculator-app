@@ -18,14 +18,11 @@ struct Formula {
         
         do {
             while operands.linkedList.head != nil {
-                guard let number = operands.dequeue() else {
-                    throw ErrorCase.operandsDequeue
+                guard let number = operands.dequeue(),
+                      let result = operators.dequeue() else {
+                    throw ErrorCase.listDequeue
                 }
-                
-                guard  let result = operators.dequeue() else {
-                    throw ErrorCase.operatorDequeue
-                }
-                
+
                 if result == Operator.divide && number == 0.0 {
                     throw ErrorCase.operatorDequeue
                 }
@@ -35,7 +32,6 @@ struct Formula {
         } catch ErrorCase.operatorDequeue {
             return .nan
         }
-        
         return lhs
     }
 }
