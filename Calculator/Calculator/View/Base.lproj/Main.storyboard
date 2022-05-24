@@ -85,6 +85,9 @@
                                                 <state key="normal" title="AC">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="ACButtinTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tka-tX-3cf"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -93,6 +96,9 @@
                                                 <state key="normal" title="CE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="CEButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CKS-eK-ft0"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -101,6 +107,9 @@
                                                 <state key="normal" title="⁺⁄₋">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="plusMinusButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="otO-YQ-c2d"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -302,6 +311,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="equalButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mCG-Ge-woZ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -348,20 +360,6 @@
                     <connections>
                         <outlet property="numberLable" destination="Lwz-OF-XHD" id="1jA-L5-iol"/>
                         <outlet property="operatorLable" destination="HPC-iy-qdm" id="sBD-8S-rOl"/>
-                        <outletCollection property="numberPads" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="heJ-nG-5Cp"/>
-                        <outletCollection property="numberPads" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="xZU-gl-ODB"/>
-                        <outletCollection property="numberPads" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="Yqs-Lb-jcs"/>
-                        <outletCollection property="numberPads" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="ETu-5S-CzD"/>
-                        <outletCollection property="numberPads" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="ZB5-MZ-6V0"/>
-                        <outletCollection property="numberPads" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="RyS-tW-ToG"/>
-                        <outletCollection property="numberPads" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="lOY-QY-goK"/>
-                        <outletCollection property="numberPads" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="npP-Qv-MYz"/>
-                        <outletCollection property="numberPads" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="iof-g2-1q0"/>
-                        <outletCollection property="numberPads" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="wIp-I6-V6n"/>
-                        <outletCollection property="operators" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="C0k-YK-amg"/>
-                        <outletCollection property="operators" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="Vai-WN-ygT"/>
-                        <outletCollection property="operators" destination="811-Pz-An6" collectionClass="NSMutableArray" id="d26-m1-ZCR"/>
-                        <outletCollection property="operators" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="cX5-SJ-8FA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

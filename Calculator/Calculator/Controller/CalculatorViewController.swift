@@ -5,29 +5,37 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operatorLable: UILabel!
     
     private var currentFormula = ""
+    private var currentNumber: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    @IBAction private func numberPadTapped(_ sender: UIButton) {
-        if numberLable.text == "0" {
-            guard sender.tag != 0 else { return }
-            numberLable.text = ""
+
+    func convertToDecimal(_ number: Double) -> String{
+        let numberFormat = NumberFormatter()
+        numberFormat.numberStyle = .decimal
+        
+        guard let value = numberFormat.string(from: NSNumber(value: number)) else {
+            return "0"
         }
         
-        numberLable.text = (numberLable.text ?? "") + String(sender.tag)
-        currentFormula += numberLable.text ?? ""
+        return value
+    }
+    
+    @IBAction private func numberPadTapped(_ sender: UIButton) {
+        currentNumber = currentNumber * 10 + Double(sender.tag)
+        numberLable.text = convertToDecimal(currentNumber)
+        currentFormula += String(sender.tag)
     }
     
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
         operatorLable.text = sender.titleLabel?.text
         currentFormula += sender.titleLabel?.text ?? ""
-        numberLable.text = ""
+        currentNumber = 0
     }
     
     
-    @IBAction func equalButtonTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonTapped(_ sender: UIButton) {
         var formula: Formula
         var calculatedResult: Double?
         
@@ -38,12 +46,14 @@ class CalculatorViewController: UIViewController {
             print(error)
         }
         
-        numberLable.text = String(calculatedResult ?? 0)
+        numberLable.text = convertToDecimal(calculatedResult ?? 0)
+        currentNumber = 0
     }
     
-    @IBAction func ACButtinTapped(_ sender: UIButton) {
-        numberLable.text = ""
+    @IBAction private func ACButtinTapped(_ sender: UIButton) {
+        numberLable.text = "0"
         currentFormula = ""
+        currentNumber = 0
     }
     
     
