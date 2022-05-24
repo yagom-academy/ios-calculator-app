@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func acButtonAction(_ sender: UIButton) {
+        mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
     
     @IBAction func ceButtonAction(_ sender: Any) {
