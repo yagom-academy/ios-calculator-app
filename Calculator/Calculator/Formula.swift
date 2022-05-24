@@ -23,3 +23,7 @@ struct Formula {
         return result
     }
 }
+
+enum FormulaError: Error {
+    case notEnoughInput
+}
