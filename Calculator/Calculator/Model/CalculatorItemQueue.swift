@@ -18,4 +18,10 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
     
         return calculatorList.takeOut()
     }
+
+    init(list: [Item] = []) {
+        for item in list {
+            enqueue(item)
+        }
+    }
 }
