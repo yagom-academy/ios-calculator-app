@@ -9,6 +9,12 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
         return calculatorList.isEmpty
     }
     
+    init(list: [Item] = []) {
+        for item in list {
+            enqueue(item)
+        }
+    }
+    
     mutating func enqueue(_ element: Item) {
         calculatorList.add(value: element)
     }
@@ -17,11 +23,5 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
         guard !isEmpty else { return nil }
     
         return calculatorList.takeOut()
-    }
-
-    init(list: [Item] = []) {
-        for item in list {
-            enqueue(item)
-        }
     }
 }

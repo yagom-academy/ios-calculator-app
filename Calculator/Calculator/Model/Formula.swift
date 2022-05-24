@@ -2,6 +2,11 @@ struct Formula {
     private(set) var operands: CalculatorItemQueue<Double>
     private(set) var operators: CalculatorItemQueue<Operator>
     
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
+    }
+    
     mutating func result() throws -> Double {
         guard !operators.isEmpty || !operators.isEmpty else { throw CalculatorError.emptyFormula }
             
@@ -14,10 +19,5 @@ struct Formula {
         }
         
         return calculateResult
-    }
-    
-    init( operands: CalculatorItemQueue<Double>,  operators: CalculatorItemQueue<Operator>) {
-        self.operands = operands
-        self.operators = operators
     }
 }

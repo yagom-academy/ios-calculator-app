@@ -3,8 +3,8 @@ enum ExpressionParser {
     static func parse(from input: String) throws -> Formula {
         let splitedInput = componentByOperators(from: input)
 
-        for index in 0...splitedInput.count/2 {
-            guard Double(splitedInput[index*2]) != nil else {
+        for index in 0...(splitedInput.count / 2) {
+            guard Double(splitedInput[index * 2]) != nil else {
                 throw CalculatorError.wrongFormula
             }
         }
@@ -15,11 +15,8 @@ enum ExpressionParser {
         guard operands.count * operators.count != 0 else {
             throw CalculatorError.wrongFormula
         }
-                
-        let operandQueue = CalculatorItemQueue<Double>.init(list: operands)
-        let operatorQueue = CalculatorItemQueue<Operator>.init(list: operators)
-        
-        return Formula(operands: operandQueue, operators: operatorQueue)
+    
+        return Formula(operands: CalculatorItemQueue<Double>.init(list: operands), operators: CalculatorItemQueue<Operator>.init(list: operators))
     }
     
     private static func componentByOperators(from input: String) -> [String] {
