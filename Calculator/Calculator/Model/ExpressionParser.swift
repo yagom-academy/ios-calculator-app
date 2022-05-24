@@ -25,10 +25,9 @@ enum ExpressionParser {
         var result: [String] = [input]
         
         Operator.allCases.forEach { opr in
-            let doubledString = result.reduce(into: [] ) {
+            result = result.reduce(into: [] ) {
                 $0.append($1.split(with: opr.symbol))
-            }
-            result = doubledString.flatMap { $0 }
+            }.reduce([]) { $0 + $1 }
         }
         
         return result
