@@ -31,7 +31,7 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
 }
