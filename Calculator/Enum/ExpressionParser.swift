@@ -25,7 +25,7 @@ enum ExpressionPaser {
     
     static func parse(from input: String) -> Formula {
         var operandsQueue = CalculatorItemQueue<Double>()
-        var operatorsQueue = CalculatorItemQueue<Character>()
+        var operatorsQueue = CalculatorItemQueue<Operator>()
         
         let paser = componentsByOperator(from: input)
         let allOperator = Operator.allCases.map { String($0.rawValue) }
@@ -36,7 +36,7 @@ enum ExpressionPaser {
         }
         
         operators.forEach {
-            operatorsQueue.enQueue(Character($0))
+            operatorsQueue.enQueue(Operator(rawValue: Character($0)) ?? .add)
         }
         
         operands.forEach(operandsQueue.enQueue(_:))
