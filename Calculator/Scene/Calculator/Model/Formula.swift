@@ -6,8 +6,18 @@
 //
 
 struct Formula {
-    var operands = Queue<Double>()
-    var operators = Queue<Operator>()
+    private var operands = Queue<Double>()
+    private var operators = Queue<Operator>()
+    
+    init(operands: [Double], operators: [Operator]) {
+        operands.forEach { operand in
+            self.operands.enqueue(Double(operand))
+        }
+        
+        operators.forEach { `operator` in
+            self.operators.enqueue(`operator`)
+        }
+    }
     
     func result() throws -> Double {
         var lhs: Double = 0.0
