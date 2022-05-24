@@ -18,8 +18,9 @@ struct Formula {
         for _ in 1...operators.items.count {
             guard let number = operands.dequeue() else { throw CalculatorError.emptyError }
             guard let symbol = operators.dequeue() else { throw CalculatorError.emptyError }
+            guard symbol != .divide, number != 0.0 else { throw CalculatorError.divideError }
             
-            total = try symbol.calculate(lhs: total, rhs: number)
+            total = symbol.calculate(lhs: total, rhs: number)
         }
         return total
     }
