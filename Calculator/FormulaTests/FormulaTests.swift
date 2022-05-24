@@ -78,5 +78,17 @@ class FormulaTests: XCTestCase {
         
         //then
         XCTAssertThrowsError(try sut?.result())
-    } 
+    }
+    
+    func test_두번째숫자가0이아니면_에러를반환하지는않는가() {
+        //given
+        sut?.operands.enQueue(3.0)
+        sut?.operators.enQueue(.divide)
+        sut?.operands.enQueue(0.0)
+
+        //when
+        
+        //then
+        XCTAssertNoThrow(try? sut?.result())
+    }
 }

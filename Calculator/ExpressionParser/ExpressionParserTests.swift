@@ -70,6 +70,17 @@ class parseTests: XCTestCase {
         //then
         XCTAssertEqual(result, [1.0, 2.0, 3.0, 4.0, 2.0])
     }
+   
+    func test_문자열에서_componentsByOperators메소드를사용하면_숫자를뒤집어서반환하지는않는가() {
+        //given
+        let input = "1 + 2 - 3 + 4 / 2"
+        
+        //when
+        let result = input.compactMap { Double(String($0)) }
+        
+        //then
+        XCTAssertNotEqual(result, [2.0, 4.0, 3.0, 2.0, 1.0])
+    }
     
     func test_operandsQueue에_operands값이순서대로_들어가는가() {
         //given
@@ -119,5 +130,18 @@ class parseTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, 2.0)
+    }
+    
+    func test_ExpressionParser에서_input을집어넣어_parse를호출하고_result함수를_호출하였을때마지막숫자가0이면_에러를던지는가() {
+        //given
+        let input = "1 + 2 - 3 + 4 / 0"
+        
+        //when
+        var test: Formula
+        
+        test = ExpressionParser.parse(from: input)
+        
+        //then
+        XCTAssertThrowsError(try test.result())
     }
 }

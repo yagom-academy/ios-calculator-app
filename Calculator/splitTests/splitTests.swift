@@ -42,5 +42,4 @@ class splitTests: XCTestCase {
         //then
         XCTAssertEqual(result, ["1-2", "3", "4"])
     }
-
 }
