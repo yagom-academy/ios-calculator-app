@@ -43,7 +43,7 @@ class LinkedList<T> {
             return []
         }
                 
-        var values:Array<T> = []
+        var values: Array<T> = []
         var current = head
         (0...count - 1).forEach { _ in
             guard let value = current?.data else {
@@ -52,7 +52,6 @@ class LinkedList<T> {
             values.append(value)
             current = current?.next
         }
-
         return values
     }
 }
