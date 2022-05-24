@@ -7,6 +7,11 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map{String($0)}
+        let splitStringResult = split(separator: target)
+            .map{ (element: String.SubSequence) -> String in
+                let alterElement = String(element)
+                return alterElement
+            }
+        return splitStringResult
     }
 }
