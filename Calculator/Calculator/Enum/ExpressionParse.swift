@@ -14,7 +14,6 @@ enum ExpressParser {
         let divideString = componetsByOperators(from: input)
         
         for parseString in divideString {
-            
             if let parseNumber = Double(parseString) {
                 operands.enqueue(parseNumber)
             } else if let parseArithmetic = Operator(rawValue: Character(parseString)) {

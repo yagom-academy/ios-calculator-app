@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum CalculatorError:  Error {
+enum CalculatorError: Error {
     case divideError
 }
