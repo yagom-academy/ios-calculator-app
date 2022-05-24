@@ -21,12 +21,12 @@ class ExpressionParserTests: XCTestCase {
     func test_문자열에서_operands_operators의_최소갯수_불만족시_notEnoughInput에러를_던지는지() {
         //given
         let str = "3+"
-        let expectation = OperatorError.notEnoughInput
+        let expectation = FormulaError.notEnoughInput
         //when
         var fomula = ExpressionParser.parse(from: str)
         //then
         XCTAssertThrowsError(try fomula.result()) { error in
-            XCTAssertEqual(error as? OperatorError, expectation)
+            XCTAssertEqual(expectation, error as? FormulaError)
         }
     }
     
@@ -61,7 +61,7 @@ class ExpressionParserTests: XCTestCase {
         var fomula = ExpressionParser.parse(from: str)
         //then
         XCTAssertThrowsError(try fomula.result()) { error in
-            XCTAssertEqual(error as? OperatorError, expectation)
+            XCTAssertEqual(expectation, error as? OperatorError)
         }
         
     }

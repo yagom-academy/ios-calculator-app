@@ -27,11 +27,11 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         sut.operators.enqueue("+")
         
-        let expectation = OperatorError.notEnoughInput
+        let expectation = FormulaError.notEnoughInput
         //when
         //then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? OperatorError, expectation)
+            XCTAssertEqual(expectation, error as? FormulaError)
         }
     }
     
@@ -102,7 +102,7 @@ class FormulaTests: XCTestCase {
         //when
         //Then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? OperatorError, expectation)
+            XCTAssertEqual(expectation, error as? OperatorError)
         }
     }
 }
