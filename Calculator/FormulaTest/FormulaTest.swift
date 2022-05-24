@@ -22,17 +22,26 @@ class FormulaTest: XCTestCase {
         // given
         let equation = "1000+200-300*4/5"
         // when
-        var formula1 = ExpressionParser.parse(from: equation)
+        var equationTest = ExpressionParser.parse(from: equation)
         // then
-        XCTAssertEqual(try formula1.result(), 720.0)
+        XCTAssertEqual(try equationTest.result(), 720.0)
     }
     
     func test_ResultThrowsErrorWhenItHasNotProperEquation() throws {
         // given
         let equation = "1000+200-300*4/5+"
         // when
-        var formula1 = ExpressionParser.parse(from: equation)
+        var equationTest = ExpressionParser.parse(from: equation)
         // then
-        XCTAssertThrowsError(try formula1.result())
+        XCTAssertThrowsError(try equationTest.result())
+    }
+    
+    func test_ResultThrowsErrorWhenItHasDivideByZeroEquation() throws {
+        // given
+        let equation = "1000+200-300*4/0+"
+        // when
+        var equationTest = ExpressionParser.parse(from: equation)
+        // then
+        XCTAssertThrowsError(try equationTest.result())
     }
 }

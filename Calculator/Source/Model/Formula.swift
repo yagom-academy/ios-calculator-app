@@ -16,7 +16,7 @@ struct Formula {
         while operators.count != 0 {
             guard let currentOperator = operators.dequeue() else { throw valueError.operatorEmptyError }
             guard let currentOperand = operands.dequeue() else { throw valueError.operandEmptyError }
-            calculationResult = currentOperator.calculate(lhs: calculationResult, rhs: currentOperand)
+            calculationResult = try currentOperator.calculate(lhs: calculationResult, rhs: currentOperand)
         }
         return calculationResult
     }
