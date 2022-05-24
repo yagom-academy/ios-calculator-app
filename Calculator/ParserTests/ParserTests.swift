@@ -32,7 +32,7 @@ class ParserTests: XCTestCase {
         let formula = ExpressionParser.parse(from: input)
         
         let numberArray = [123.0, 456.0, 789.0]
-        let operatorArray = ["+", "-"]
+        let operatorArray: [Operator] = [.add, .subtract]
         
         XCTAssertEqual(numberArray, formula.operands.items)
         XCTAssertEqual(operatorArray, formula.operators.items)
