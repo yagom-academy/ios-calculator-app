@@ -15,7 +15,7 @@
 		729E65A128377850008F5592 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729E65A028377850008F5592 /* String+Extension.swift */; };
 		729E65A3283783FE008F5592 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729E65A2283783FE008F5592 /* Formula.swift */; };
 		729E65A528378A97008F5592 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729E65A428378A97008F5592 /* ExpressionParser.swift */; };
-		72D1F12A2839FDAA00D4F039 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1F1292839FDAA00D4F039 /* ParserTests.swift */; };
+		72B87914283CC5FD009C40CE /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1F1292839FDAA00D4F039 /* ParserTests.swift */; };
 		72D77A58283A410C001072A0 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D77A57283A410C001072A0 /* CalculatorError.swift */; };
 		72D77A5A283A418E001072A0 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D77A59283A418E001072A0 /* Double+Extension.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
@@ -367,7 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72D1F12A2839FDAA00D4F039 /* ParserTests.swift in Sources */,
+				72B87914283CC5FD009C40CE /* ParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

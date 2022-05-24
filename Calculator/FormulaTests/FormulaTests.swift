@@ -10,12 +10,12 @@ import XCTest
 
 class FormulaTests: XCTestCase {
     var operands: CalculatorItemQueue<Double>!
-    var operators: CalculatorItemQueue<String>!
+    var operators: CalculatorItemQueue<Operator>!
     var formula: Formula!
 
     override func setUpWithError() throws {
         operands = CalculatorItemQueue<Double>()
-        operators = CalculatorItemQueue<String>()
+        operators = CalculatorItemQueue<Operator>()
         formula = Formula(operands: operands, operators: operators)
     }
 
@@ -28,7 +28,7 @@ class FormulaTests: XCTestCase {
     func test_operators의_연산자가_더하기일경우_양변의합을_반환() {
         formula.operands.enqueue(123.0)
         formula.operands.enqueue(123.0)
-        formula.operators.enqueue("+")
+        formula.operators.enqueue(.add)
 
         let returnValue = 246.0
         let result = try? formula.result()
@@ -41,8 +41,8 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(123.0)
         formula.operands.enqueue(123.0)
         
-        formula.operators.enqueue("+")
-        formula.operators.enqueue("-")
+        formula.operators.enqueue(.add)
+        formula.operators.enqueue(.subtract)
         
         let returnValue = 123.0
         let result = try? formula.result()
@@ -57,10 +57,10 @@ class FormulaTests: XCTestCase {
         formula.operands.enqueue(10.0)
         formula.operands.enqueue(5.0)
         
-        formula.operators.enqueue("+")
-        formula.operators.enqueue("-")
-        formula.operators.enqueue("*")
-        formula.operators.enqueue("/")
+        formula.operators.enqueue(.add)
+        formula.operators.enqueue(.subtract)
+        formula.operators.enqueue(.multiply)
+        formula.operators.enqueue(.divide)
         
         let returnValue = 2.0
         let result = try? formula.result()
