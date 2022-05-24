@@ -1,5 +1,5 @@
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: " ").map { String($0) }
+        return self.split(separator: target).map { String($0) }
     }
 }
