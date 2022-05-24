@@ -7,6 +7,6 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        split(separator: target).map{String($0)}
+        split(separator: target).map{ String($0) }
     }
 }

@@ -40,8 +40,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
-        guard rhs == 0 else { return lhs / rhs }
-        throw OperatorError.devideZero
+        guard rhs != 0 else { throw OperatorError.devideZero }
+        return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
