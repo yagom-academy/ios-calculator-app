@@ -23,15 +23,13 @@ enum ExpressionParser {
     }
     
     private static func componentByOperators(from input: String) -> [String] {
-       var doubledString: [[String]] = []
-       var result: [String] = [input]
+        var result: [String] = [input]
         
         Operator.allCases.forEach { opr in
-           result.forEach {
-               doubledString.append($0.split(with: opr.symbol))
-           }
-           result = doubledString.flatMap { $0 }
-           doubledString.removeAll()
+            let doubledString = result.reduce(into: [] ) {
+                $0.append($1.split(with: opr.symbol))
+            }
+            result = doubledString.flatMap { $0 }
         }
         
         return result
