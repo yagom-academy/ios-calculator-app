@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         
         if mathematicalExpressionStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
-            mathematicalExpression += "\(operandLabel.text ?? "") "
+            mathematicalExpression += "\(operandLabel.text ?? "")"
         } else {
             createStackView(operatorOfSignLabel, operandOfSignLabel)
             mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
         let operandOfSignLabel = createLabel(text: operandLabel.text)
         createStackView(operatorOfSignLabel, operandOfSignLabel)
         mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
-        operandLabel.text = mathematicalExpression
+        operandLabel.text = calculate(mathematicalExpression)
         operatorLabel.text = ""
         mathematicalExpression = ""
         isOperandinputed = false
@@ -135,6 +135,21 @@ class ViewController: UIViewController {
         }
         
         mathematicalExpressionStackView.addArrangedSubview(stackView)
+    }
+    
+    private func calculate(_ input: String) -> String? {
+        var fomula = ExpressionParser.parse(from: input)
+        
+        do {
+            let result = try fomula.result()
+            return String(result)
+        } catch CalculateError.infinityError {
+            return "NaN"
+        } catch CalculateError.nilError {
+            return "NaN"
+        } catch {
+            return "NaN"
+        }
     }
 }
 
