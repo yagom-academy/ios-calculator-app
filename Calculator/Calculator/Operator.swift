@@ -16,7 +16,7 @@ enum Operator: Character, CaseIterable {
 
 extension Operator {
     
-    func calculate(lhs: Double, rhs: Double)throws -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         var result = 0.0
         switch self {
         case .add:

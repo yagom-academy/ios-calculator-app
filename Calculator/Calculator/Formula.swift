@@ -11,7 +11,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Character>
     
-    mutating func result()throws -> Double {
+    mutating func result() throws -> Double {
         guard operands.count > 1 && operators.count >= 1 else { throw FormulaError.notEnoughInput }
         var result = try Operator(rawValue: operators.dequeue())?
             .calculate(lhs: operands.dequeue(), rhs: operands.dequeue())

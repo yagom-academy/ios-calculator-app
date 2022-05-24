@@ -31,7 +31,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         enqueueStack.append(element)
     }
     
-    mutating func dequeue()throws -> T {
+    mutating func dequeue() throws -> T {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
