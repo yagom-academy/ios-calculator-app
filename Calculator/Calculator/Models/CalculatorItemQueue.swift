@@ -1,9 +1,13 @@
 struct CalculatorItemQueue<T: Equatable>: CalculateItem {
     
-    private var linkedList = LinkedList<T>()
+    private var linkedList: LinkedList<T>
     var count: Int {
         return linkedList.count
     }
+    
+    init() { linkedList = LinkedList<T>() }
+    
+    init(_ array: Array<T>) { linkedList = LinkedList(array) }
     
     mutating func push(element: T) {
         linkedList.pushAfterTail(element: element)
