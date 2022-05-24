@@ -55,8 +55,8 @@ class FormulaTDD: XCTestCase {
         switch formula.result() {
         case .success(let data):
             XCTAssertEqual(data, expectation)
-        case .failure(_):
-            break
+        case .failure(let error):
+            XCTAssert(false, "Test failed ☢️ \(error) ☢️")
         }
     }
     
@@ -71,10 +71,28 @@ class FormulaTDD: XCTestCase {
 
         // then
         switch formula.result() {
-        case .success(_):
-            break
+            case .success(let data):
+            XCTAssert(false, "Test failed ☢️ \(data) ☢️")
         case .failure(let error):
             XCTAssertEqual(error as! FormulaError, expectation)
+        }
+    }
+    
+    func test_0이_아닌값으로_나누면_정상적인_결과리턴() throws {
+        // given
+        let expectation: Double = 3.0
+        
+        // what
+        formula = Formula()
+        formula.operands = [5, 4, 3]
+        formula.operators = [.add, .divide]
+
+        // then
+        switch formula.result() {
+        case .success(let data):
+            XCTAssertEqual(data, expectation)
+        case .failure(let error):
+            XCTAssert(false, "Test failed ☢️ \(error) ☢️")
         }
     }
 }
