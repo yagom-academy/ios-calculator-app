@@ -17,7 +17,7 @@ class CalculatorTests: XCTestCase {
         try super.setUpWithError()
         sutOperand = Queue<Double>()
         sutOperator = Queue<Operator>()
-        formula = Formula()
+        formula = Formula(operands: [], operators: [])
     }
     
     override func tearDownWithError() throws {
@@ -107,14 +107,13 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result5, 0)
     }
     
-//    func test_입력된숫자가하나일때_대입연산자를누르면_입력된숫자가나오는지확인() {
-//        //given
-//        formula.operands.enqueue(123.0)
-//        //when
-//        let result = formula.result()
-//        //then
-//        XCTAssertEqual(result, 123.0)
-//    }
+    func test_입력된숫자가하나일때_계산하면_입력된숫자가나오는지확인() {
+        //given
+        //when
+        let input = ExpressionParser.parse(from: "123")
+        //then
+        XCTAssertEqual(try input.result(), 123.0)
+    }
     
     func test_입력이들어왔을떄_공백으로나눠주면_배열이잘나오는지확인() {
         //given
@@ -128,21 +127,10 @@ class CalculatorTests: XCTestCase {
     func test_입력이들어왔을때_함수를실행하면_연산자와더블로잘나뉘는지확인() {
         //given
         let input = "123 + 321 / 12"
-        let formula = Formula()
-        formula.operands.enqueue(123)
-        formula.operands.enqueue(321)
-        formula.operands.enqueue(12)
-        formula.operators.enqueue(.add)
-        formula.operators.enqueue(.devide)
         //when
         let result = ExpressionParser.parse(from: input)
         //then
-        XCTAssertEqual(result.operators.dequeue(), .add)
-        XCTAssertEqual(result.operators.dequeue(), .devide)
-        
-        XCTAssertEqual(result.operands.dequeue(), 123)
-        XCTAssertEqual(result.operands.dequeue(), 321)
-        XCTAssertEqual(result.operands.dequeue(), 12)
+        XCTAssertEqual(try result.result(), 37.0)
     }
     
     func test_연산할때_음수가있을경우_계산이잘되는지확인() {
@@ -157,15 +145,19 @@ class CalculatorTests: XCTestCase {
     func test_나누기할때_나누는값이0일경우_오류처리가되는지확인() {
         //given
         let input = "123 + 321 / 0"
-        let formula = Formula()
-        formula.operands.enqueue(123)
-        formula.operands.enqueue(321)
-        formula.operands.enqueue(0)
-        formula.operators.enqueue(.add)
-        formula.operators.enqueue(.devide)
+        
         //when
         let result = ExpressionParser.parse(from: input)
         //then
         XCTAssertThrowsError(try result.result())
+    }
+    
+    func test_나누기할때_음수0으로나눌경우경우_계산이잘되는지확인() {
+        //given
+        let input = "-123 + -321 / -0"
+        //when
+        let result = ExpressionParser.parse(from: input)
+        //then
+        XCTAssertEqual(try result.result(), -444.0)
     }
 }

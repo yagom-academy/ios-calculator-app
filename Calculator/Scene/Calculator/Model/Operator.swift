@@ -10,6 +10,13 @@ enum Operator: Character, CalculateItem, CaseIterable {
     case multiply = "*"
     case devide = "/"
     
+    init?(rawValue: String) {
+        guard Double(rawValue) == nil else {
+            return nil
+        }
+        self.init(rawValue: Character(rawValue))
+    }
+    
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
