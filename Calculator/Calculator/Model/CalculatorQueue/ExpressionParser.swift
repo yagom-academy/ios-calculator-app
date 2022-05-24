@@ -29,7 +29,8 @@ enum ExpressionParser {
             }
         }
         
-        return Formula(operands: operandQueue, operators: operatorQueue)
+        let parseDataResult = Formula(operands: operandQueue, operators: operatorQueue)
+        return parseDataResult
     }
 
     static func componentsByOperators(from input: String) -> [String] {
