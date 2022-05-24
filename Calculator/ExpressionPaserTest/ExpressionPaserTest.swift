@@ -42,4 +42,19 @@ class ExpressionPaserTest: XCTestCase {
         // then
         XCTAssertEqual(result, expected)
     }
+    
+    func test_0으로나누기를하면_NaN을_반환하는지() {
+        //given
+        let inputExpression = "3 / 0"
+        var expected = false
+        
+        //when
+        let result = try! ExpressionPaser.parse(from: inputExpression).result()
+        
+        if result.isNaN {
+           expected = true
+        }
+        //then
+        XCTAssertTrue(expected)
+    }
 }
