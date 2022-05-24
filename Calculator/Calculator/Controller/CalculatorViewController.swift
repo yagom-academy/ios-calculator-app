@@ -11,7 +11,7 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    func convertToDecimal(_ number: Double) -> String{
+    private func convertToDecimal(_ number: Double) -> String{
         let numberFormat = NumberFormatter()
         numberFormat.numberStyle = .decimal
         
@@ -34,7 +34,6 @@ class CalculatorViewController: UIViewController {
         currentNumber = 0
     }
     
-    
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
         var formula: Formula
         var calculatedResult: Double?
@@ -50,10 +49,20 @@ class CalculatorViewController: UIViewController {
         currentNumber = 0
     }
     
-    @IBAction private func ACButtinTapped(_ sender: UIButton) {
+    @IBAction private func ACButtonTapped(_ sender: UIButton) {
         numberLable.text = "0"
+        operatorLable.text = ""
         currentFormula = ""
         currentNumber = 0
+    }
+    
+    @IBAction private func CEButtonTapped(_ sender: UIButton) {
+        if let number = Double(String(currentFormula.removeLast())) {
+            currentNumber = (currentNumber - number) / 10
+            numberLable.text = convertToDecimal(currentNumber)
+        } else {
+            operatorLable.text = ""
+        }
     }
     
     
