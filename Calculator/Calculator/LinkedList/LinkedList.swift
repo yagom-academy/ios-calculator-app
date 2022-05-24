@@ -9,32 +9,29 @@ import Foundation
 
 struct LinkedList<T> {
     private var head: Node<T>?
+    private var tail: Node<T>?
     
-    var headIsEmpty: Bool {
+    var isEmpty: Bool {
         return head == nil
     }
     
-    var firstPeek: Node<T>? {
+    var peek: Node<T>? {
         return head
     }
     
     mutating func append(data: T?) {
+        let newValue = Node(data: data)
+        
         if head == nil {
-            head = Node(data: data)
-            return
+            head = newValue
+            tail = head
+        } else {
+            tail?.next = newValue
+            tail = newValue
         }
-        
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        
-        node?.next = Node(data: data)
     }
     
     mutating func removeFirst() -> T? {
-        if head == nil { return nil }
-        
         let removeElement = head?.data
         head = head?.next
         return removeElement
@@ -42,5 +39,6 @@ struct LinkedList<T> {
     
     mutating func removeAll() {
         head = nil
+        tail = nil
     }
 }

@@ -11,11 +11,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {
-        return linkedList.headIsEmpty
+        return linkedList.isEmpty
     }
     
     var peek: Node<T>? {
-        return linkedList.firstPeek
+        return linkedList.peek
     }
     
     mutating func enqueue(_ element: T){
