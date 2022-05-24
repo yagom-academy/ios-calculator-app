@@ -20,15 +20,15 @@ struct LinkedList<T> {
     }
     
     mutating func append(data: T?) {
-        if head == nil {
-            head = Node(data: data)
-            tail = head
-            return
-        }
+        let newValue = Node(data: data)
         
-        let node = head
-        tail?.next = node
-        tail = node
+        if head == nil {
+            head = newValue
+            tail = head
+        } else {
+            tail?.next = newValue
+            tail = newValue
+        }
     }
     
     mutating func removeFirst() -> T? {
