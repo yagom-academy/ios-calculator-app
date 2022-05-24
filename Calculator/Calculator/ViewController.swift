@@ -25,12 +25,22 @@ class ViewController: UIViewController {
     @IBAction func ceButtonAction(_ sender: UIButton) {
         operandLabel.text = ""
         if operatorLabel.text == "" && !mathematicalExpressionStackView.subviews.isEmpty {
-            operandLabel.text = ""
             mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
         }
     }
     
     @IBAction func switchSignButton(_ sender: UIButton) {
+        guard let operandLabelText = operandLabel.text else {
+            return
+        }
+        guard let operand = Int(operandLabelText) else {
+            return
+        }
+        guard operand != 0 else {
+            return
+        }
+        operandLabel.text = String(-Int(operand))
+    
     }
     
     @IBAction func operatorsButtonAction(_ sender: Any) {
