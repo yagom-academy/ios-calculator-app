@@ -21,11 +21,7 @@ struct Formula {
         result = firstValue
         
         while operands.linkedList.head != nil {
-            guard let operateValue = operands.deQueue() else {
-                throw CalculationError.noneValue
-            }
-            
-            guard let operateItem = operators.deQueue() else {
+            guard let operateValue = operands.deQueue(), let operateItem = operators.deQueue() else {
                 throw CalculationError.noneValue
             }
             do {
