@@ -7,6 +7,7 @@
 
 struct LinkedList<T> {
     var head: Node<T>?
+    var count = 1
     
     mutating func append(data: T?) {
         if head == nil {
@@ -19,6 +20,7 @@ struct LinkedList<T> {
             node = newNode
         }
         node?.next = Node(data: data)
+        count += 1
     }
     
     mutating func pop() -> T? {
@@ -29,11 +31,16 @@ struct LinkedList<T> {
         
         let item = head?.data
         head = head?.next
+        count -= 0
         return item
     }
     
     mutating func peek() -> T? {
         return head?.data
+    }
+    
+    mutating func checkCount() -> Int {
+        return count
     }
     
     mutating func printAll() -> [Any] {

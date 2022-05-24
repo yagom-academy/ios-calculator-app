@@ -26,5 +26,9 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     mutating func peek() -> T? {
         return linkedList.peek()
     }
+    
+    mutating func count() -> Int {
+        return linkedList.checkCount()
+    }
 }
 

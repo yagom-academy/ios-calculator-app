@@ -62,6 +62,21 @@ class Test_CalculatorItemQueue: XCTestCase {
         XCTAssertEqual(dequeue, output)
     }
     
+    func test_dequeue_실행시_123456_를넣었을때_6_를반환하는지() {
+        // given
+        let input: [Int] = [1, 2, 3, 4, 5, 6]
+        let output: Int = 6
+
+        // when
+        input.forEach { (number: Int) in
+            sut.enqueue([number])
+        }
+        let result = sut.count()
+
+        // then
+        XCTAssertEqual(result, output)
+    }
+    
     func test_clear_실행시_123456_를넣었을때_nil_을반환하는지() {
         //given
         let input: [Int] = [1, 2, 3, 4, 5, 6]

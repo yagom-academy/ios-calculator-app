@@ -10,3 +10,16 @@ enum ErrorCase: Error {
     case operatorDequeue
     case listDequeue
 }
+
+extension ErrorCase {
+    var errorDescription:String {
+        switch self {
+        case .operandsDequeue:
+            return "operandsDequeue"
+        case .operatorDequeue:
+            return "operatorDequeue"
+        case .listDequeue:
+            return "NaN"
+        }
+    }
+}
