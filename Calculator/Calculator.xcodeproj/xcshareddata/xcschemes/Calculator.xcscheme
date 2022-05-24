@@ -145,6 +145,16 @@
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3752125E283C730B00C7D051"
+               BuildableName = "ViewControllerTests.xctest"
+               BlueprintName = "ViewControllerTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func ceButtonAction(_ sender: Any) {
+        
     }
     
     @IBAction func switchSignButton(_ sender: UIButton) {
@@ -31,7 +32,12 @@ class ViewController: UIViewController {
     @IBAction func operatorsButtonAction(_ sender: Any) {
     }
     
-    @IBAction func operandsButtonAction(_ sender: Any) {
+    @IBAction func operandsButtonAction(_ sender: UIButton) {
+        if mathematicalExpressionStackView.subviews.isEmpty {
+            operandLabel.text = sender.currentTitle
+        } else {
+            operandLabel.text = (operandLabel.text ?? "") + (sender.currentTitle ?? "") 
+        }
     }
     
     @IBAction func calculateButtonAction(_ sender: Any) {
