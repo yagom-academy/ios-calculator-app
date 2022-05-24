@@ -23,6 +23,7 @@ struct Queue<Element> {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
+        
         return dequeueStack.popLast()
     }
     

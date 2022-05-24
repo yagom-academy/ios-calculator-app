@@ -42,6 +42,10 @@
 - `enqueue`, `dequeue`, `peek`, `isEmpty`
 - `clear`, `isFull`, `count`
 - `generics`
+- `split`, `whereSeparator`
+- `enum`, `CaseIterable`, `caseless enum`
+- `closure`, `map`, `filter`, `forEach`, `reduce`, `reduce(into:)`
+- `class diagram`, `static`
 
 # 그라운드 룰
 
@@ -184,26 +188,184 @@
 - 이러한 별개의 상황에서 하나의 `sut`로는 구현이 불가능한 것인지, 만약 그렇다면 기존의 `sut` 프로퍼티 아래에 “var sut2: CalculatorItemQueue<String>!”과 같이 새로운 프로퍼티를 작성하여 각각의 상황에 맞게 사용하면 되는 것인지 궁금합니다.
 <br/>
 
+## 의문점 해결
+
+### 1. TDD로 인한 접근 제어 설정 고민
+
+- 찰리의 코멘트에 따르면, 테스트 코드를 위해 인터페이스를 여는 일은 99% 확률로 대부분 불필요함을 밝혔다. 따라서, 테스트 코드를 위하여 접근 수준을 낮추는 것은 본말전도된 상황임을 확인할 수 있었다. 추가로, 본인이 작성한 테스트 `test_enqueue_enqueueStack에_100개의_실수가_순서대로_들어가는지` 와 같은 케이스는, 이미 구현된 인터페이스를 이용해서 간접적으로 테스트하면 접근 제어 수준을 원하는 수준으로 설정할 수 있었다. 그 예로, 기존의 `enqueueStack`을 호출하였던, 테스트 함수에서 1000개를 `enqueue` 하고 1000개 `dequeue` 했을 때 순서대로 반환되었는 지를 통하여 유추할 수 있었다.
+<br>
+
+### 2. TDD와 제너릭 고민
+
+
+- 결론부터 말하자면, `enqueue`는 반환 타입을 가지는 것은 좋은 선택이 아니다. 먼저, `TDD`를 의도하여 다음과 같이 반환 타입이 추가된 점 또한 옳지 않지만, 개발자들은 기본적으로 큐의 `enqueue` 메서드에 대하여 반환 타입을 요구하지 않는다. 큐의 `enqueue` 메서드는 무엇이 들어가 있는지 하나하나 확인하고 넣는 것이 아니라, 입력받는 대로 큐에 집어넣는 방식이다. 그리고 필요시 `dequeue` 메서드를 통해 먼저 입력받은 요소를 내보내는 자료 구조이다. 정리하자면, 개발자들이 공통적으로 큐에 기대하는 `enqueue` 메서드는 반환 타입 없이 입력값을 넣는 기능만을 수행하면 충분하다는 의미이다.
+<br>
+
+
 ## 배운개념
 - `queue`, `array`, `linked-list`, `double-stack`
 - `UML`, `TDD`
 - `enqueue`, `dequeue`, `peek`, `isEmpty`
 - `clear`, `isFull`, `count`
 - `generics`
+<br>
+
 
 # [STEP 2]
 
 ## 고민한점 
+### 1. Queue 생성 방법case-less enum 초기화 문제
+
+- 계산기 프로젝트 STEP2 `UML`에 따르면, `ExpressionParser`는 열거형 구조로, `parse()` 함수와 `componentsByOperators` 함수만 내부에 구현되기를 요구하였습니다. 이전까지 접한 열거형 구조는 모두 프로퍼티 혹은 메서드가 구현된 적이 있었으나, 이 경우들 모두 `case`를 가지고 있던 사례들이었습니다. 하지만, 이번에 처음으로 `case`가 내부에 구현되지 않은 `enum` 구조를 접하게 되었습니다. 이에 초기화 없이 어떻게 열거형 구조 내의 인스턴스 메서드를 호출할 수 있을지 갈피를 잡지 못하였습니다. 하지만 두 가지 사실을 통하여 위의 문제를 해결할 수 있었습니다.
+
+
+- 먼저, `case`가 구현 되지 않은 `enum`은 인스턴스로 생성이 불가능하여, 뜻하지 않는 초기화를 막을 수 있고, 순수히 `namespace` 로서만 작동할 수 있다는 장점을 알게 되었습니다. 즉, `case-less` `enum`은 의도된 구조임을 확인할 수 있었습니다. 다음으로, `UML`에서 `ExpressionParser` 내부의 함수에는 밑줄 표시(underline)가 되었다는 점을 간과하였습니다. 밑줄 표시는 해당 프로퍼티 혹은 메서드가 `static` 임을 의미합니다. 즉, `ExpressionParser` 내부 메서드인 `parse()` 함수와 `componentsByOperators`는 인스턴스 메서드가 아닌 타입 메서드로 구현되어야 함을 깨달았습니다. 타입 메서드로 이를 구현하면, 초기화 없이도 열거형 구조내 원하는 메서드를 사용할 수 있었습니다.
+
+<br>
+
+### 2. ExpressionParser 내 componentsByOperators 메서드 존재 이유
+
+
+- 코드
+
+```swift
+private static func componentsByOperators(from input: String) -> [String]
+```
+
+- `ExpressionParser` 내 `componentsByOperators` 메서드를 구현하는 이유가 처음에 납득이 가지 않았습니다. `parse()` 함수에서 충분히 입력받은 값 내에 존재하는 연산자를 추출할 수 있다고 생각이 되는데, 왜 굳이 하나의 함수를 더 생성하였고, 추출을 할 거면 피연산수인 `operand` 또한 추출이 되어야 하는데, 왜 연산자만을 추출하는 지 납득이 가지 않았습니다.
+
+
+- 이에 고민한 결과, 두 가지 근거를 발견하였습니다. 먼저, 연산자만을 추출한 이유는 피연산자를 먼저 추출한다면, 예를 들어, “10+2-3”이라는 `string` 값을 입력받았다면, 고차함수 `filter`나 `split`을 통해 추출하면 ‘10’, ‘2’, ‘3’이 추출되는 것이 아닌, ‘1023’ 혹은 ‘1’, ‘0’, ‘2’, ‘3’이 추출된다는 것을 발견하였습니다. 이는 우리가 계산기에서 원하는 결과는 후자가 아닌 전자의 상황입니다. 따라서 이를 온전하게 추출하기 위하여서는 아래의 코드에서 알 수 있듯, `filter`를 통하여 입력받은 값 내 숫자가 아닌 값, 즉 연산자만을 추출한 다음, 하나의 `string`으로 반환된 연산자를 `map`을 통하여 `[String]`으로 반환하면, 각각의 요소에 연산자를 하나씩 배분할 수 있게 됩니다.
+
+
+- 코드
+```swift
+let operators = input.filter { $0.isNumber == false }.map { String($0) }
+```
+
+- 그리고 이 연산자 배열을 `parse()`함수에 가져와 이를 바탕으로 `split`을 진행하면, 피연산수를 각각의 자리수에 맞게 온전하게 추출할 수 있었습니다. 정리하자면, 함수의 기능별 분리와 피연산수가 아닌 연산자를 먼저 추출하여 `[String]`에 넣기 위하여 프로젝트 요구사항에 기입되었던 것 같습니다.
+<br>
+
+
+### 3. for-in 구문(반복문) 지양 고민
+
+- 계산기 프로젝트 요구 사항에 따르면, 변수보다는 상수를, 반복문 조건문 보다는 고차함수를 더 활용하기를 권장하였다. 이에 `ExpressionParser` 구조체의 `parse()` 메서드 내에서 하나하나 추출한 연산자와 피연산수를 각각의 큐에 `enqueue()`하는 과정에서 사용된 `for`문을 사용하지 않고, 값이 원하는 바와 같이 들어갈 수 있기 위해서는 어떤 방법이 있을지 궁리하였습니다.
+> 
+
+- 코드
+
+```swift
+for i in 0..<operators.count {
+    operatorsQueue.queue.enqueue(element: operators[i])
+}
+for j in 0..<operands.count {
+    operandsQueue.queue.enqueue(element: Double(operands[j]) ?? 0.0)
+}
+```
+
+- 이에 고차함수 `forEach`를 이용하면 반복적으로 `enqueue()` 메서드를 실행할 수 있었습니다. `forEach`는 컬렉션 요소의 갯수만큼 반복해주는 고차함수로, `for-in` 루프와 동일한 순서로 시퀀스의 각 요소에 대해 주어진 클로저를 호출합니다. 반복할 작업을 클로저에 작성하여 파라미터로 넘겨주고, `Collection`에 저장된 요소는 클로저를 반복 실행할 때마다 클로저 상수로 넘겨받습니다. `for - in` 반복문과 `forEach`의 차이로 반복문이냐 아니냐가 있었습니다. `for-in` 구문은 반복문으로 `continue`, `break`를 사용할 수 있지만, `forEach`는 반복 기능을 하는 메서드로 다음의 기능을 사용할 수 없었습니다. 이는 클로저의 현재 호출을 종료하거나 후속 호출을 건너뛸 수 없음을 의미합니다.
+
+
+- 다음으로, `forEach` 메서드는 `return` 문을 사용하면 외부 범위가 아니라 본문에 대한 현재 호출에서만 종료되며 후속 호출을 건너뛰지 않습니다. `for-in` 구문의 경우 반복을 하다가 `return` 키워드를 발견하면 함수 자체가 종료됩니다. 하지만, `forEach`에 경우는 `return` 키워드를 발견할 시, 현재 자신이 전달한 클로저를 종료하고, 다음 반복 클로저가 실행됩니다(클로저를 요소 갯수를 초과하지 않았다는 가정 하). 즉, 반복 횟수는 절대적이기에 `return`문을 발견하여도 반복 횟수에는 영향을 주지 않음을 의미합니다.
+
+
+- 따라서, 추출한 연산자와 피연산수는 절대적으로 연산큐에 입력받아야 되기 때문에 `for-in` 구문보다는 `forEach`를 사용하여 확실하게 `enqueue` 하는 것이 더욱 적절하다 판단하여 이를 사용하였습니다.
+<br>
+
 
 ## 의문점
 
-## 배운개념
+### 1. extension String 존재 이유
 
+- 프로젝트 요구사항으로 `String`의 `extension`을 구현하고, 추가적으로 `Character` 값을 입력받으면 `[String]`으로 반환하는 `split` 함수를 구현하는 내용이 있었습니다. 저는 이 `String` `Extension` 내 `split` 함수가 `ExpressionParser` 열거형 구조 내 `parse()` 메서드의 기능 구현을 위하여 `componentsByOperators()` 메서드에서 반환받은 `[String]` 타입의 값의 요소 하나하나를 이용하여 피연산수를 연산자와 분리하기위하여 사용해야 된다고 판단하였습니다. 하지만 `string` `extension` 내 `split`을 이용해본 결과, 먼저 각 요소를 `Character`로 변환해주어야 하고, 한번에 피연산수를 추출하지 못하여 이용하는 것이 옳지 않다고 판단하였습니다. 특히, 후자의 근거 때문에 사용을 기피하였는데, 이를 예를 들어 설명해보겠습니다.
+ 
+
+- “10+2-3” 이란 `string` 값을 입력받으면, `componentsByOperators()` 메서드를 통하여 [”+”, “-”]를 추출할 수 있습니다. 그리고 다시 이 “10+2-3” 입력값에 동시에 연산자를 추출하지 않고, 반복문을 이용하여 하나하나 추출하게 된다면, [“10”, “2-3”], [”10+2”, “3”]와 같은 결과 값을 얻게 됩니다. 그렇다고 한번 쪼갠 결과값을 다시 한번 받아, `split` 함수를 구현할 수 없었습니다. 이는 `split` 메서드의 반환값이 `string`이 아닌 `[String]`이기 때문에 `string` 메서드를 사용하지 못하기 때문입니다.
+> 
+
+- 코드
+
+```swift
+// 실패방법 1
+
+for number in 0..<operators.count {
+        let operands = input.split(with: Character(operators[number]))
+}
+
+// result
+// ["10", "2-3"]
+// ["10+2", "3"]
+
+
+// 실패방법 2
+
+let operands_1 = input.split(with: Character(operators[0]))
+let operands_2 = operands_1.split(with: Character(operators[1]))
+
+// result
+// operands_1은 string이 아닌 [String]이므로 split 메서드 사용 불가
+```
+
+- 저는 이를 해결하기 위하여, `string` `extension`에 구현한 `split` 함수가 아닌, 기존의 `split` 함수의 `whereSeparator` 파라미터를 통하여 클로저로 “operators.contains(String($0))”를 입력하여 연산자가 있는 위치를 기준으로 피연산수를 분리하여, [“10”, “2”, 3”]이라는 원하는 값을 반환할 수는 있었습니다. 하지만, `string`에 `extension`을 통해 `split(with:)` 함수를 만든 근거가 반드시 있다고 생각합니다. 따라서, `extension`을 통해 구현한 `split(with:)` 함수를 통해서 계산기 입력값을 원하는 값으로 반환하는 방법이 있을지 궁금합니다.
+<br>
+
+### 2. result() 함수 내 reduce 고차함수 구현 가능 여부
+
+
+- `Formula` 구조체 내 `result()` 함수는 연산큐에 들어간 모든 값을 계산한 결과를 반환하는 함수로 이해하였습니다. 이에 실수(`double`) 연산큐 내의 첫 값부터 호출하고, 다음으로 연산자(`string`) 연산큐의 첫 연산자를 호출하고, 다시 실수(`double`) 연산큐 내의 두번째 값을 호출하여 연산을 해야 한다고 판단하였습니다. 우리의 인식 속 계산기는 “10 + 2 - 3 + 4”의 값이 있으면, “10+2”를 먼저 연산하여 결과값 “12”를 반환하고, 이를 다시 좌변에 두어 “12 - 3 + 4”의 연산이 이루어진다고 생각합니다. 하지만, 코드로 이를 구현하면, 좌변과 우변을 각각 `operands.queue.dequeue()`로 설정한다면, “10 + 2”는 정상적으로 이루어지지만, 다음의 연산은 “3 - 4”가 되어버립니다. 따라서, 연산의 결과가 `calculate` 함수의 좌변에 항상 위치하게 하여 다음과 같이 계산기 기능을 구현하였습니다.
+
+
+- 코드
+
+```swift
+mutating func result() -> Double {
+    var result = operands.queue.dequeue() ?? 0.0
+    
+    while operators.queue.isEmpty == false {
+        let `operator` = operators.queue.dequeue() ?? ""
+        let operatorCase = Operator(rawValue: Character(`operator`))
+        
+        result = operatorCase?.calculate(lhs: result, rhs: operands.queue.dequeue() ?? 0.0) ?? 0.0
+    }
+    
+    return result
+}
+```
+
+- 이에 구현은 성공하였으나, 요구사항에서 반복문을 지양하라는 내용이 있기에, 이를 고차함수인 `reduce`를 이용하여 `calculate` 메서드 내 좌변은 결과값이 항상 업데이트되고, 우변은 `operands.queue.dequeue()`를 입력하면 구현이 가능하지 않을까 생각했으나, 끝내 이를 해결하지 못하였습니다. 일단 이해를 위하여 다음과 같이 `reduce()`를 이용한 코드를 구현해보았습니다.
+ 
+
+- 코드
+
+```swift
+let result = operands.queue.enqueueStack.reduce(0) { operatorCase?.calculate(lhs: result, rhs: operands.queue.dequeue()) }
+```
+
+- 첫번째 문제는, 좌변에 들어가는 `result`의 값이 계속 업데이트 되어야 합니다. 일반적인 `reduce()` 에서는 이를 구현하는 방법을 찾지 못하였지만, `reduce(into:)` 함수를 이용하면 좌변의 `result`를 값을 업데이트 할 수 있을 가능성을 발견하였습니다. 다음으로, 우변의 값을 “operands.queue.dequeue()”을 이용한다면 `dequeue()` 메서드에 구현된 `enqueueStack`의 요소를 없애는 `removeAll()` 메서드를 통하여 `enqueueStack`이 빈 배열이 되고 맙니다. 하지만, 이또한 우변의 값을 `$0`으로 설정하면 해결할 수 있을 것입니다. 그러나, 마지막 가장 큰 문제로, `operatorCase`에서 큐에 들어간 연산자의 순서대로 다양한 연산자가 때에 맞춰 입력되어야 하나, 위와 같이 코드를 작성하면 하나의 연산자로만 `calculate` 메서드가 작동하게 됩니다. 이에, 찰리에게 반복문을 사용하지 않고 `operatorCase`가 시기적절하게 들어갈 수 있는 방법이 있는지 질문드립니다.
+<br>
+
+
+### 3. 나누기 0에 대한 에러 처리 방법
+
+- `Operator` 열거형 구조 내에 `divide` 메서드에 대하여 우변의 값이 0이면, 다시 말해 나누는 값이 0이면 `CalculatorError`의 `dividedByZero` 에러 케이스에 `throw`하는 기능을 구현하였습니다. 이를 통해 `dividedByZero` 에러 발생 시, `NaN`을 반환하는 식으로 구현해보고자 하였습니다. `divide`의 에러는 `calculate` 함수 내에서 `do-catch`를 통해 처리가 되어야 한다고 판단하였으나, `calculate`함수의 반환타입은 `Double`이므로 `NaN`이라는 `String` 값을 반환할 수 없었습니다. 일단, 입력 받을 것 같지 않은 `Double(Int.max)`를 반환하여 `UI`와 연동할 시 `Double(Int.max)`의 값이 나올 때 `text`로 `NaN`이 표시될 수 있도록 하는 방식을 고려해보았습니다. 이에 대하여, `calculate`에서 에러 처리를 하는 것이 적절해 보이는지, 그리고 `String` 값을 반환하기 위한 좋은 방법이 무엇이 있을지 조언을 구하고 싶습니다.
+<br>
+
+
+## 의문점 해결
+
+
+## 배운개념
+- `split`, `whereSeparator`
+- `enum`, `CaseIterable`, `caseless enum`
+- `closure`, `map`, `filter`, `forEach`, `reduce`, `reduce(into:)`
+- `class diagram`, `static`
 
 # [STEP 3]
 
 ## 고민한점 
 
 ## 의문점
+
+## 의문점 해결
 
 ## 배운개념
