@@ -16,7 +16,6 @@
 		8FB0DE0328353D3C0088D52F /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE0128353D3C0088D52F /* Node.swift */; };
 		8FB0DE05283607270088D52F /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE04283607270088D52F /* Formula.swift */; };
 		8FB0DE08283661C60088D52F /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE07283661C60088D52F /* Operator.swift */; };
-		8FB0DE09283661C60088D52F /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE07283661C60088D52F /* Operator.swift */; };
 		8FB0DE5C2837ABC60088D52F /* FomulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE5B2837ABC60088D52F /* FomulaTest.swift */; };
 		8FB0DE662839D49C0088D52F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB0DE652839D49C0088D52F /* ExpressionParser.swift */; };
 		8FD47AB0283A86F100ED0CD5 /* ExpressionPaserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD47AAF283A86F100ED0CD5 /* ExpressionPaserTest.swift */; };
@@ -353,7 +352,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FB0DE0328353D3C0088D52F /* Node.swift in Sources */,
-				8FB0DE09283661C60088D52F /* Operator.swift in Sources */,
 				8F7860B12833343A00A6FF87 /* CalculatorItemQueueTest.swift in Sources */,
 				8FB0DE0028353CD50088D52F /* LinkedList.swift in Sources */,
 				8FB0DDFD28353C150088D52F /* CalculatorItemQueue.swift in Sources */,

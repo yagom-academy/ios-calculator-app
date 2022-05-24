@@ -25,14 +25,14 @@ class FomulaTest: XCTestCase {
     func test_1더하기1은_2를반환하는지확인() {
         //given
         let input: Double = 1
-        let inputOperator: Character = "+"
+        let inputOperator: Operator = Operator.add
         let expeted: Double = 2
 
         //when
         sut?.operands.enQueue(input)
         sut?.operands.enQueue(input)
         sut?.operators.enQueue(inputOperator)
-        let result = sut?.result()
+        let result = try! sut?.result()
         
         //then
        
@@ -43,14 +43,14 @@ class FomulaTest: XCTestCase {
         //given
         let input: Double = 2
         let secondInput: Double = 1
-        let inputOperator: Character = "-"
+        let inputOperator: Operator = Operator.subtract
         let expeted: Double = 1
         
         //when
         sut?.operands.enQueue(input)
         sut?.operands.enQueue(secondInput)
         sut?.operators.enQueue(inputOperator)
-        let result = sut?.result()
+        let result = try! sut?.result()
         
         //then
         
@@ -61,14 +61,14 @@ class FomulaTest: XCTestCase {
         //given
         let input: Double = 2
         let secondInput: Double = 2
-        let inputOperator: Character = "/"
+        let inputOperator: Operator = Operator.divide
         let expeted: Double = 1
         
         //when
         sut?.operands.enQueue(input)
         sut?.operands.enQueue(secondInput)
         sut?.operators.enQueue(inputOperator)
-        let result = sut?.result()
+        let result = try! sut?.result()
         
         //then
         
@@ -80,14 +80,14 @@ class FomulaTest: XCTestCase {
         //given
         let input: Double = 2
         let secondInput: Double = 2
-        let inputOperator: Character = "*"
+        let inputOperator: Operator = Operator.multiply
         let expeted: Double = 4
         
         //when
         sut?.operands.enQueue(input)
         sut?.operands.enQueue(secondInput)
         sut?.operators.enQueue(inputOperator)
-        let result = sut?.result()
+        let result = try! sut?.result()
         
         //then
         

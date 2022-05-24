@@ -25,7 +25,7 @@ class ExpressionPaserTest: XCTestCase {
         let expected = -9.0
         
         // when
-        let result = ExpressionPaser.parse(from: inputExpresion).result()
+        let result = try! ExpressionPaser.parse(from: inputExpresion).result()
         
         // then
         XCTAssertEqual(result, expected)
@@ -37,10 +37,9 @@ class ExpressionPaserTest: XCTestCase {
         let expected = 7.0
         
         // when
-        let result = ExpressionPaser.parse(from: inputExpresion).result()
+        let result = try! ExpressionPaser.parse(from: inputExpresion).result()
         
         // then
         XCTAssertEqual(result, expected)
-        
     }
 }
