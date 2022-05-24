@@ -23,13 +23,20 @@ class LinkedList<T> {
     }
     
     func append(data: T?) {
-        let newNode = Node(data: data)
         
-        guard let node = head else {
-            head = newNode
+        if head == nil {
+            head = Node(data: data)
             return
         }
-        node.next = newNode
+        var node = head
+        while let newNode = node?.next {
+            node = newNode
+        }
+        node?.next = Node(data: data)
+    }
+    
+    func peek() -> T? {
+        return head?.data
     }
     
     func remove() {
@@ -38,6 +45,13 @@ class LinkedList<T> {
         }
         head = head?.next
     }
+    
+    func peekRemove() -> T? {
+        let firstValue = peek()
+        remove()
+        return firstValue
+    }
+    
     func removeAll() {
         while head != nil {
             head = head?.next
