@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() throws -> Double {
         guard operands.items.count > operators.items.count,
@@ -18,7 +18,10 @@ struct Formula {
         for _ in 1...operators.items.count {
             guard let number = operands.dequeue() else { throw CalculatorError.emptyError }
             guard let symbol = operators.dequeue() else { throw CalculatorError.emptyError }
-            guard symbol != .divide, number != 0.0 else { throw CalculatorError.divideError }
+            
+            if symbol == .divide && number == 0.0 {
+                throw CalculatorError.divideError
+            }
             
             total = symbol.calculate(lhs: total, rhs: number)
         }

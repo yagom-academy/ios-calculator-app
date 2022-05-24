@@ -19,10 +19,10 @@ class ParserTests: XCTestCase {
     }
     
     func test_숫자와_연산기호_분리해서_반환() {
-        let input = "123 + 456 - 789"
+        let input = "123 + 456 − -789"
         let formula = ExpressionParser.parse(from: input)
         
-        let numberArray = [123.0, 456.0, 789.0]
+        let numberArray = [123.0, 456.0, -789.0]
         let operatorArray: [Operator] = [.add, .subtract]
         
         XCTAssertEqual(numberArray, formula.operands.items)
