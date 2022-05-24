@@ -57,4 +57,20 @@ class ExpressionPaserTest: XCTestCase {
         //then
         XCTAssertTrue(expected)
     }
+    
+    func test_계산식_중간에_나누기0을_하면_NaN오류를던지는지() {
+        //given
+        let inputExpression = "3 + 2 - 1 / 0 + 10"
+        var expected = false
+        
+        //when
+        let result = try! ExpressionPaser.parse(from: inputExpression).result()
+        
+        if result.isNaN {
+           expected = true
+        }
+        //then
+        XCTAssertTrue(expected)
+    }
+
 }
