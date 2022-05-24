@@ -8,12 +8,12 @@
 import Foundation
 
 enum OperatorError: Error {
-    case divideError
+    case divide
     
     var print: String {
         switch self {
-        case .divideError:
-            return "NAN"
+        case .divide:
+            return "NaN"
         }
     }
 }

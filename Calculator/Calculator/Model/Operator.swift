@@ -31,19 +31,19 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        return lhs - rhs
     }
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0.0 {
-            throw OperatorError.divideError
+            throw OperatorError.divide
         } else {
             return lhs / rhs
         }
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        return lhs * rhs
     }
 }
 
