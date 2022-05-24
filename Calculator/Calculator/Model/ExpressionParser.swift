@@ -2,21 +2,23 @@ import CoreGraphics
 enum ExpressionParser {
     static func parse(from input: String) throws -> Formula {
         let splitedInput = componentByOperators(from: input)
-
-        for index in 0...(splitedInput.count / 2) {
-            guard Double(splitedInput[index * 2]) != nil else {
-                throw CalculatorError.wrongFormula
-            }
-        }
-                
+        
+        try checkWrongFormulaError(for: splitedInput)
+        
         let operands = splitedInput.compactMap { Double($0) }
         let operators = splitedInput.filter { $0.count == 1 }.compactMap { Operator(rawValue: Character($0)) }
         
-        guard operands.count * operators.count != 0 else {
-            throw CalculatorError.wrongFormula
-        }
-    
         return Formula(operands: CalculatorItemQueue<Double>.init(list: operands), operators: CalculatorItemQueue<Operator>.init(list: operators))
+    }
+    
+    private static func checkWrongFormulaError(for input: [String]) throws {
+        guard input.count > 1 else { throw CalculatorError.wrongFormula }
+            
+        for index in 0...(input.count / 2) {
+            if Double(input[index * 2]) == nil {
+                throw CalculatorError.wrongFormula
+            }
+        }
     }
     
     private static func componentByOperators(from input: String) -> [String] {
