@@ -4,7 +4,7 @@ enum ExpressionParser {
         let splitedInput = componentByOperators(from: input)
 
         for index in 0...splitedInput.count/2 {
-            guard Int(splitedInput[index*2]) != nil else {
+            guard Double(splitedInput[index*2]) != nil else {
                 throw CalculatorError.wrongFormula
             }
         }
