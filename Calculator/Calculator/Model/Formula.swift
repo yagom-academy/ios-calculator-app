@@ -13,12 +13,9 @@ struct Formula {
         guard var result = operands.dequeue() else { throw OperatorError.emptyList }
         
         while operands.isEmpty == false {
-            if let number = operands.dequeue(),
-               let operatorSign = operators.dequeue() {
-                result = try operatorSign.calculate(lhs: result, rhs: number)
-            } else {
-                throw OperatorError.emptyList
-            }
+            guard let number = operands.dequeue(),
+                  let operatorSign = operators.dequeue() else { throw OperatorError.emptyList }
+            result = try operatorSign.calculate(lhs: result, rhs: number)
         }
         return result
     }
