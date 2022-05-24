@@ -38,17 +38,21 @@ class LinkedList<T> {
         count = 0
     }
     
-    func showData() -> Array<T?> {
+    func getValues() -> Array<T> {
         if count == 0 {
             return []
         }
-        
-        var data:Array<T?> = []
+                
+        var values:Array<T> = []
         var current = head
-        (0...count-1).forEach { _ in
-            data.append(current?.data ?? nil)
+        (0...count - 1).forEach { _ in
+            guard let value = current?.data else {
+                return
+            }
+            values.append(value)
             current = current?.next
         }
-        return data
+
+        return values
     }
 }

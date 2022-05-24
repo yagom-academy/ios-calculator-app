@@ -134,10 +134,10 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 0)
     }
     
-    // MARK: Test_showData()
+    // MARK: getValues()
     func testLinkedList에_값이_없을_경우_빈_배열이_반환되는지() {
         // given when
-        let result = sut.showData()
+        let result = sut.getValues()
         // then
         XCTAssertEqual(result, [])
     }
@@ -148,19 +148,19 @@ class LinkedListTests: XCTestCase {
         sut.append(data: 2)
         sut.append(data: 3)
         // when
-        let result = sut.showData()
+        let result = sut.getValues()
         // then
         XCTAssertEqual(result, [1,2,3])
     }
     
-    func testLinkedList에_값이_있을_경우_모든_값이_반환되는지2() {
+    func testLinkedList에_값을_모두_지울_경우_빈배열이_반환되는지() {
         // given
         sut.append(data: 1)
         sut.append(data: 2)
         sut.append(data: 3)
         sut.removeAll()
         // when
-        let result = sut.showData()
+        let result = sut.getValues()
         // then
         XCTAssertEqual(result, [])
     }

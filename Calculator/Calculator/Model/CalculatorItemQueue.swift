@@ -17,7 +17,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func displayItems() -> Array<T?> {
-        return calculateItems.showData()
+        return calculateItems.getValues()
     }
     
     func reset() {
