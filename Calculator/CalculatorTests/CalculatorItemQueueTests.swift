@@ -1,6 +1,6 @@
 //
-//  CalculatorTests.swift
-//  CalculatorTests
+//  CalculatorItemQueueTests.swift
+//  CalculatorItemQueueTests
 //
 //  Created by 이원빈 on 2022/05/16.
 //
@@ -8,12 +8,12 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
-
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<String>()
+        sut = CalculatorItemQueue(stack: [])
     }
 
     override func tearDownWithError() throws {
@@ -68,19 +68,19 @@ class CalculatorTests: XCTestCase {
         sut.enqueue("3")
         let expectation = "1"
         //when
-        let result = sut.dequeue()
+        let result = try! sut.dequeue()
         //then
         XCTAssertEqual(expectation, result)
     }
     
-    func test_빈배열에서_dequeue를이용했을때_nil을출력하는지() {
+    func test_빈배열에서_dequeue를이용했을때_emptyStack오류를던지는지() {
         //given
-        
+        let expectation = CalculatorItemQueueError.emptyStack
         //when
-        let result = sut.dequeue()
         //then
-        XCTAssertNil(result)
-        
+        XCTAssertThrowsError(try sut.dequeue()) { error in
+            XCTAssertEqual(expectation, error as? CalculatorItemQueueError)
+        }
     }
     
     func test_1_2_3배열에서_dequeue를수행하면_기존배열이_2_3_으로변하는지() {
@@ -90,7 +90,7 @@ class CalculatorTests: XCTestCase {
         sut.enqueue("3")
         let expectation = ["2","3"]
         //when
-        sut.dequeue()
+        try! sut.dequeue()
         //then
         XCTAssertEqual(expectation, sut.currentStack)
     }
@@ -115,5 +115,6 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertNil(result)
     }
-    
 }
+
+

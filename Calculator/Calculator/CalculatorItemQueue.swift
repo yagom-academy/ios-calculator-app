@@ -19,19 +19,31 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var currentStack: [T] {
         return dequeueStack.reversed() + enqueueStack
     }
+    var count: Int {
+        return (dequeueStack + enqueueStack).count
+    }
+    
+    init(stack: Array<T>) {
+        self.enqueueStack = stack
+    }
     
     mutating func enqueue(_ element: T) {
         enqueueStack.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue()throws -> T {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
-        return dequeueStack.popLast()
+        
+        guard let result = dequeueStack.popLast() else {
+            throw CalculatorItemQueueError.emptyStack
+        }
+        return result
     }
 }
 
-
-
+enum CalculatorItemQueueError: Error {
+    case emptyStack
+}
