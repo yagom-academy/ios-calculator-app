@@ -50,6 +50,8 @@ enum ExpressionPaser {
         
         operands.forEach(operandsQueue.enQueue(_:))
         
-        return Formula(operands: operandsQueue, operators: operatorsQueue)
+        let calculationFormula = Formula(operands: operandsQueue, operators: operatorsQueue)
+        
+        return calculationFormula
     }
 }
