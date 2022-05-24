@@ -17,58 +17,58 @@ class ExpressionParserTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func  test_componentsByOperators에서_input에_값을넣으면_연산자만추출된다() {
+    func test_ExpressionParser에서_input으로_값을넣으면_operands와operators가_올바르게나온다_1() {
         // given
-        let input = "30-4+5*6"
+        let input = "34 + 5 + 7"
         
         // when
-        let operands = ExpressionParser.componentsByOperands(from: input)
-        
+        var formula = ExpressionParser.parse(from: input)
         // then
-        XCTAssertEqual(operands, ["-","+","*"])
+        XCTAssertEqual(try formula.result(), 46)
     }
     
-    func  test_componentsByOperands에서_input에_값을넣으면_숫자만추출된다() {
+    func test_ExpressionParser에서_input으로_값을넣으면_operands와operators가_올바르게나온다_2() throws {
         // given
-        let input = "30-4+5*6"
-        
-        // when
-        let operators = ExpressionParser.componentsByOperators(from: input)
-        
-        // then
-        XCTAssertEqual(operators, ["30","4","5","6"])
-    }
-    
-    func test_ExpressionParser에서_input에_값을넣으면_결과가제대로반환된다() throws {
-        // given
-        let input = "30/3+2-7"
+        let input = "30 / 1 + 7"
         
         // when
         var formula = ExpressionParser.parse(from: input)
         
         // then
-        XCTAssertEqual(try formula.result(), 5)
+        XCTAssertEqual(try formula.result(), 37)
+    }
+    
+    func test_ExpressionParser에서_input으로_음수값을넣어도_operands와operators가_올바르게나온다() throws {
+        // given
+        let input = "30 / 1 + -7"
+        
+        // when
+        var formula = ExpressionParser.parse(from: input)
+        
+        // then
+        XCTAssertEqual(try formula.result(), 23)
     }
     
     func test_ExpressionParser에서_input에_소수점이있는값을넣으면_결과가제대로반환된다() throws {
-        // given
-        let input = "30/3+2.5-7"
-        
-        // when
-        var formula = ExpressionParser.parse(from: input)
-        
-        // then
-        XCTAssertEqual(try formula.result(), 5.5)
-    }
+           // given
+           let input = "30 / 3 + 2.5 - 7"
+           
+           // when
+           var formula = ExpressionParser.parse(from: input)
+           
+           // then
+           XCTAssertEqual(try formula.result(), 5.5)
+       }
     
     func test_ExpressionParser에서_input에_빈String을넣으면_0이반환된다() throws {
-        // given
-        let input = ""
-        
-        // when
-        var formula = ExpressionParser.parse(from: input)
-        
-        // then
-        XCTAssertEqual(try formula.result(), 0)
-    }
+           // given
+           let input = ""
+           
+           // when
+           var formula = ExpressionParser.parse(from: input)
+           
+           // then
+           XCTAssertEqual(try formula.result(), 0)
+       }
 }
+
