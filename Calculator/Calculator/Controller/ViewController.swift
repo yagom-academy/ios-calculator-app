@@ -49,6 +49,28 @@ extension ViewController {
     }
     
     @IBAction func equalButtonDidTapped(_ sender: UIButton) {
+        let stackViewElement = generateStackView()
+        
+        historyStackView?.addArrangedSubview(stackViewElement)
+        UIView.animate(withDuration: 0.2) {
+            stackViewElement.isHidden = false
+        }
+        
+        var dummytext: String = ""
+        currentOperatorLabel?.text = ""
+        historyStackView?.arrangedSubviews.forEach { $0.subviews.forEach {
+            if let label = $0 as? UILabel { dummytext += " " + label.text! }}}
+        formula = ExpressionParser.parse(from: dummytext)
+        do {
+            let result = try formula?.result()
+            screenLabel?.text = numberFormatter.string(for: result)
+        } catch {
+            if let error = error as? FormulaError {
+                print("입력값을 추가하세요.")
+            } else if let error = error as? OperatorError {
+                screenLabel?.text = "NaN"
+            }
+        }
     }
     
     @IBAction func functionButtonDidTapped(_ sender: UIButton) {
