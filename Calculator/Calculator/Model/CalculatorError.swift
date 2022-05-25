@@ -1,5 +1,5 @@
 enum CalculatorError: Error {
-    case devideByZero
+    case dividedByZero
     case emptyFormula
     case wrongFormula
     case duplicatedOperator

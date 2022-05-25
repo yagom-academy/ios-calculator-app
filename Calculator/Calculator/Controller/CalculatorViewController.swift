@@ -63,18 +63,24 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
-        var formula: Formula
-        var calculatedResult: Double?
-        
         do {
-            formula = try ExpressionParser.parse(from: currentFormula)
-            calculatedResult = try? formula.result()
+            var formula = try ExpressionParser.parse(from: currentFormula)
+            let calculatedResult = try formula.result()
+            numberLable.text = convertToDecimal(calculatedResult)
         } catch {
-            print(error)
+            switch error {
+            case CalculatorError.dividedByZero:
+                numberLable.text = "NaN"
+            case CalculatorError.wrongFormula:
+                return
+            default:
+                return
+            }
         }
         
-        numberLable.text = convertToDecimal(calculatedResult ?? 0)
+        operatorLable.text = ""
         currentNumber = 0
+        currentFormula = ""
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {

@@ -17,21 +17,14 @@ enum Operator: Character, CaseIterable, CalculatorItem {
         }
     }
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            do {
-                return try divide(lhs: lhs, rhs: rhs)
-            } catch CalculatorError.devideByZero {
-                return .nan
-            } catch {
-                print(error)
-                return .nan
-            }
+            return try divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -47,7 +40,7 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
-            throw CalculatorError.devideByZero
+            throw CalculatorError.dividedByZero
         }
             
         return lhs / rhs
