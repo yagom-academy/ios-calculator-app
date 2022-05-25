@@ -5,9 +5,9 @@
 //  Created by NAMU on 2022/05/19.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable ,CalculateItem {
     case add = "+"
-    case subtract = "-"
+    case subtract = "−"
     case divide = "÷"
     case multiply = "×"
     
