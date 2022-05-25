@@ -74,6 +74,17 @@ extension ViewController {
     }
     
     @IBAction func functionButtonDidTapped(_ sender: UIButton) {
+        
+        if sender.currentTitle == "AC" {
+            screenLabel?.text = zero
+            currentOperatorLabel?.text = ""
+            removeAllInStackView(stack: historyStackView!)
+        } else if sender.currentTitle == "⁺⁄₋" {
+            guard screenLabel?.text != zero else { return }
+            screenLabel?.text = numberFormatter.string(for: Double((screenLabel?.text!)!)! * -1)
+        } else if sender.currentTitle == "CE" {
+            screenLabel?.text = zero
+        }
     }
 }
 
