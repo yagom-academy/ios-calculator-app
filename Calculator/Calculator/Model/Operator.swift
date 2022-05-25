@@ -4,19 +4,15 @@ enum Operator: Character, CaseIterable {
     case divide = "/"
     case multiply = "*"
     
-    func calculate(lhs: Double, rhs: Double) throws -> Double {
+    func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            do {
-                let result = try divide(lhs: lhs, rhs: rhs)
-                return result
-            } catch CalculatorError.dividedByZero {
-                throw CalculatorError.dividedByZero
-            }
+            let result = (try? divide(lhs: lhs, rhs: rhs)) ?? CalculatorError.dividedByZero.errorCaseNumber
+            return result
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }

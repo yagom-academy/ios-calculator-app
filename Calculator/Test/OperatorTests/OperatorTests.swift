@@ -15,7 +15,7 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.add
         // when
-        let result = try? operatorSymbols.calculate(lhs: 1, rhs: 2)
+        let result = operatorSymbols.calculate(lhs: 1, rhs: 2)
         // then
         XCTAssertEqual(result,3)
     }
@@ -25,7 +25,7 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.subtract
         // when
-        let result = try? operatorSymbols.calculate(lhs: 4, rhs: 2)
+        let result = operatorSymbols.calculate(lhs: 4, rhs: 2)
         // then
         XCTAssertEqual(result,2)
     }
@@ -35,17 +35,31 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.divide
         // when
-        let result = try? operatorSymbols.calculate(lhs: 4, rhs: 2)
+        let result = operatorSymbols.calculate(lhs: 4, rhs: 2)
         // then
         XCTAssertEqual(result,2)
     }
     
-    func test_0으로_나눴을_때_에러가_반환되는지() {
+    func test_0으로_나눴을_때_에러번호가_반환되는지() {
         // given
         let operatorSymbols = Operator.divide
         // when
+        let result = operatorSymbols.calculate(lhs: 0, rhs: 2)
         // then
-        XCTAssertThrowsError(try operatorSymbols.calculate(lhs: 0, rhs: 2))
+        XCTAssertEqual(result,0)
+    }
+    
+    func test_0으로_나눴을_때_에러가_출력되는지() {
+        // given
+        let operatorSymbols = Operator.divide
+        let errorNumber = operatorSymbols.calculate(lhs: 0, rhs: 2)
+        // when
+        var result = ""
+        if errorNumber == CalculatorError.dividedByZero.errorCaseNumber {
+            result = CalculatorError.dividedByZero.errorMessage
+        }
+        // then
+        XCTAssertEqual(result,"NaN")
     }
     
     // MARK: multiply(lhs: Double, rhs: Double)
@@ -53,7 +67,7 @@ class OperatorTests: XCTestCase {
         // given
         let operatorSymbols = Operator.multiply
         // when
-        let result = try? operatorSymbols.calculate(lhs: 4, rhs: 2)
+        let result = operatorSymbols.calculate(lhs: 4, rhs: 2)
         // then
         XCTAssertEqual(result,8)
     }
