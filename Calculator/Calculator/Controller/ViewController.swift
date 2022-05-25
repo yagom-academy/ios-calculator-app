@@ -78,6 +78,11 @@ extension ViewController {
 }
 
 private extension ViewController {
+    
+    func removeAllInStackView(stack: UIStackView) {
+        stack.arrangedSubviews.forEach { stack.removeArrangedSubview($0) ; $0.isHidden = true}
+    }
+    
     func generateStackView() -> UIStackView {
         let stackViewElement = UIStackView()
         stackViewElement.axis = .horizontal
