@@ -65,7 +65,7 @@ class FormulaTests: XCTestCase {
         //given
         sut.operands.enqueue(1)
         sut.operands.enqueue(2)
-        sut.operators.enqueue("-")
+        sut.operators.enqueue("−")
         
         let expectation = Double(-1)
         //when
