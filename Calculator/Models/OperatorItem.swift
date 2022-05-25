@@ -8,23 +8,10 @@
 import Foundation
 
 enum OperatorItem: Character, CaseIterable, CalculateItem {
-    case add
-    case subtract
-    case multiply
-    case divide
-    
-    var symbol: String {
-        switch self {
-        case .add:
-            return "+"
-        case .subtract:
-            return "-"
-        case .multiply:
-            return "*"
-        case .divide:
-            return "/"
-        }
-    }
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
+    case divide = "/"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -51,5 +38,4 @@ enum OperatorItem: Character, CaseIterable, CalculateItem {
     private func divide(lhs: Double, rhs: Double) -> Double {
         return lhs / rhs
     }
-    
 }
