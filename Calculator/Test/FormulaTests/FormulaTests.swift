@@ -6,17 +6,16 @@ class LinkedListTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Formula()
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
     }
     
     // MARK: Test_result()
     func test_operands의_더한_값이_반환되는지() {
         // given
+        sut = Formula()
         sut.operands.enqueue(5)
         sut.operands.enqueue(4)
         sut.operands.enqueue(2)
@@ -34,15 +33,18 @@ class LinkedListTests: XCTestCase {
     
     func test_0으로_나눌_때_에러넘버가_반환되는지() {
         // given
+        sut = Formula()
         sut.operands.enqueue(0)
         sut.operands.enqueue(2)
         sut.operators.enqueue("/")
-        // when // given
+        // when
+        // given
         XCTAssertThrowsError(try sut.result())
     }
     
     func test_0으로_나눌_때_에러메세지가_출력되는지() {
         // given
+        sut = Formula()
         sut.operands.enqueue(0)
         sut.operands.enqueue(2)
         sut.operators.enqueue("/")
@@ -61,6 +63,7 @@ class LinkedListTests: XCTestCase {
     
     func test_0으로_나눌_때_에러메세지가_출력되는지2() {
         // given
+        sut = Formula()
         sut.operands.enqueue(5)
         sut.operands.enqueue(4)
         sut.operands.enqueue(0)

@@ -1,10 +1,12 @@
 struct Formula {
-    private(set) var operands: CalculatorItemQueue<Double>
-    private(set) var operators: CalculatorItemQueue<String>
+    typealias queue = CalculatorItemQueue
     
-    init(){
-        operands = CalculatorItemQueue<Double>()
-        operators = CalculatorItemQueue<String>()
+    private(set) var operands: queue<Double>
+    private(set) var operators: queue<String>
+    
+    init(operands: queue<Double> = queue<Double>(), operators: queue<String> = queue<String>()){
+        self.operands = operands
+        self.operators = operators
     }
     
     func result() throws -> Double {
