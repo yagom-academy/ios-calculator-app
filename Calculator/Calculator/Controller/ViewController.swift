@@ -36,6 +36,16 @@ extension ViewController {
     }
     
     @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
+        let stackViewElement = generateStackView()
+        
+        if screenLabel?.text != zero {
+            historyStackView?.addArrangedSubview(stackViewElement)
+            UIView.animate(withDuration: 0.2) {
+                stackViewElement.isHidden = false
+            }
+        }
+        currentOperatorLabel?.text = sender.currentTitle
+        screenLabel?.text = zero
     }
     
     @IBAction func equalButtonDidTapped(_ sender: UIButton) {
