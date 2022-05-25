@@ -23,7 +23,6 @@ enum ExpressionParser {
         var count = 0
         
         input.forEach { element in
-            var joinedResult = [""]
             let target = Character(String(element))
             
             if element.isNumber {
@@ -31,9 +30,11 @@ enum ExpressionParser {
             }
             
             if operatorSymbols.contains(element) && count > 0 {
-                joinedResult = splitedInput.split(with: target)
-                items = items + [joinedResult[0]] + [String(element)]
-                splitedInput = joinedResult[1]
+                let operand = splitedInput.split(with: target)[0]
+                let remainedFormula = splitedInput.split(with: target)[1]
+                
+                items = items + [operand] + [String(element)]
+                splitedInput = remainedFormula
                 count = 0
             }
             
