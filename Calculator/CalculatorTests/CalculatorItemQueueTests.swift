@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    
     var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
@@ -25,8 +24,6 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_queue에_값을_추가한다() throws {
         // given
         let array = [3.2, 2.0, 3.0, 4.0]
-        
-        let expectation = 2.0
         // when
         array.forEach { value in
             sut.enqueue(value)
@@ -45,7 +42,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         // then
-        let result = sut.peek
+        let result = sut.peekFirst
         
         XCTAssertEqual(result, expectation)
     }
@@ -67,6 +64,20 @@ class CalculatorItemQueueTests: XCTestCase {
         } catch {}
     }
     
+    func test_queue의_마지막_값을_반환한다() throws {
+        // given
+        let firstValue = 3.2
+        let secondValue = 2.0
+        let expectation = 2.0
+        // when
+        sut.enqueue(firstValue)
+        sut.enqueue(secondValue)
+        // then
+        let result = sut.peekLast
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
     func test_queue의_모든_값을_제거할_수_있다() {
         do {
             // given
@@ -82,5 +93,28 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // then
         XCTAssertTrue(result)
+    }
+    
+    func test_queue는_숫자값만_분리할_수_있다() {
+        do {
+            // given
+            let array: [Any] = [3.2, Operator.add,
+                         2.0, 3.0, 4.0]
+            let operands = CalculatorItemQueue<Double>()
+            
+            let expectation = 3.2
+            // when
+            try array.forEach { value in
+                guard let number = value as? Double else {
+                    return
+                }
+                try sut.enqueue(number)
+            }
+            
+            let result = sut.peekFirst
+            // then
+            XCTAssertEqual(result, expectation)
+            
+        } catch {}
     }
 }
