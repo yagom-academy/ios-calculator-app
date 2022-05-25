@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         }
         
         if !isOperandinputed {
-            operandLabel.text = sender.currentTitle
+            operandLabel.text = getText(sender.currentTitle)
             isOperandinputed = true
         } else {
             operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
@@ -136,8 +136,8 @@ class ViewController: UIViewController {
         var fomula = ExpressionParser.parse(from: input)
         
         do {
-            let result = try fomula.result()
-            return String(result)
+            let result = try fomula.result().parse()
+            return result
         } catch CalculateError.infinityError {
             return "NaN"
         } catch CalculateError.nilError {
