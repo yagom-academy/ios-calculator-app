@@ -7,8 +7,12 @@
 
 import Foundation
 
-extension String {
+extension String: CalculateItem {
     func split(with target: Character) -> [String] {
-        self.split(separator: target).map { String($0) }
+        let converted = String(target)
+        let replaced = self.replacingOccurrences(of: converted, with: " \(converted) ")
+        let splited = replaced.split(separator: " ").map { String($0) }
+    
+        return splited
     }
 }
