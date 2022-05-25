@@ -11,7 +11,7 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    private func convertToDecimal(_ number: Double) -> String{
+    private func convertToDecimal(_ number: Double) -> String {
         let numberFormat = NumberFormatter()
         numberFormat.numberStyle = .decimal
         
@@ -20,6 +20,16 @@ class CalculatorViewController: UIViewController {
         }
         
         return value
+    }
+    
+    private func checkOperatorError() throws {
+        guard currentFormula != "" else {
+            throw CalculatorError.invalidOperatorInput
+        }
+        
+        guard let lastInput = currentFormula.last, Operator(rawValue: lastInput) == nil else {
+            throw CalculatorError.duplicatedOperator
+        }
     }
     
     @IBAction private func numberPadTapped(_ sender: UIButton) {
@@ -34,6 +44,19 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
+        do {
+            try checkOperatorError()
+        } catch {
+            switch error {
+            case CalculatorError.duplicatedOperator:
+                currentFormula = String(currentFormula.dropLast())
+            case CalculatorError.invalidOperatorInput:
+                return
+            default:
+                return
+            }
+        }
+        
         operatorLable.text = sender.titleLabel?.text
         currentFormula += sender.titleLabel?.text ?? ""
         currentNumber = 0
