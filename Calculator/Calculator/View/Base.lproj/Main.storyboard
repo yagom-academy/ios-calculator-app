@@ -108,7 +108,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="plusMinusButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="otO-YQ-c2d"/>
+                                                    <action selector="changeSignButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V5b-JV-iKr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">

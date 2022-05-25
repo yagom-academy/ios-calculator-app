@@ -99,6 +99,19 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
+        let numberCount = numberLable.text?.count ?? 0
     
+        if let number = Double(currentFormula.suffix(numberCount)) {
+            currentNumber *= -1
+            numberLable.text = convertToDecimal(currentNumber)
+            currentFormula = String(currentFormula.dropLast(numberCount)) + String(-number)
+        }
+    }
+    
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        currentNumber /= 10
+        numberLable.text = convertToDecimal(currentNumber)
+    }
 }
 
