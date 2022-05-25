@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var mathematicalExpressionScrollView: UIScrollView!
     @IBOutlet private weak var mathematicalExpressionStackView: UIStackView!
-    
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
@@ -54,6 +53,7 @@ class ViewController: UIViewController {
             operatorLabel.text = sender.currentTitle
             return
         }
+        
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         

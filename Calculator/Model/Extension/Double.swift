@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+extension Double: CalculateItem {
     func parse() -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
