@@ -2,9 +2,9 @@ struct Formula {
     typealias queue = CalculatorItemQueue
     
     private(set) var operands: queue<Double>
-    private(set) var operators: queue<String>
+    private(set) var operators: queue<Operator.RawValue>
     
-    init(operands: queue<Double> = queue<Double>(), operators: queue<String> = queue<String>()){
+    init(operands: queue<Double> = queue<Double>(), operators: queue<Operator.RawValue> = queue<Operator.RawValue>()){
         self.operands = operands
         self.operators = operators
     }
@@ -20,9 +20,9 @@ struct Formula {
 
         let errorNumber = CalculatorError.dividedByZero.errorCaseNumber
         let result = try operandItems.reduce(start) { reuslt, partialResult in
-            let operatorSymbol = operators.dequeue() ?? ""
+            let operatorSymbol = operators.dequeue() ?? " "
             let `operator` = Operator.allCases.filter {
-                $0.symbol == Character(operatorSymbol)
+                $0.symbol == operatorSymbol
             }
             let calculatedValue = `operator`[0].calculate(lhs: reuslt, rhs: partialResult)
             
