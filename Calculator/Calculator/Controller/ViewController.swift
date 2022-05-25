@@ -46,6 +46,7 @@ extension ViewController {
         }
         currentOperatorLabel?.text = sender.currentTitle
         screenLabel?.text = zero
+        goToBottomOfScrollView()
     }
     
     @IBAction func equalButtonDidTapped(_ sender: UIButton) {
@@ -71,6 +72,7 @@ extension ViewController {
                 screenLabel?.text = "NaN"
             }
         }
+        goToBottomOfScrollView()
     }
     
     @IBAction func functionButtonDidTapped(_ sender: UIButton) {
@@ -113,5 +115,13 @@ private extension ViewController {
         stackViewElement.addArrangedSubview(operandLabel)
         
         return stackViewElement
+    }
+    
+    func goToBottomOfScrollView() {
+        scrollView?.scrollRectToVisible(CGRect(x: 0,
+                                               y: (scrollView?.contentSize.height)! - (scrollView?.bounds.height)!,
+                                               width: (scrollView?.bounds.size.width)!,
+                                               height: (scrollView?.bounds.size.height)!),
+                                        animated: true)
     }
 }
