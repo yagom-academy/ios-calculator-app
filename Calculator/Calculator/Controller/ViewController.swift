@@ -12,8 +12,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel?
     @IBOutlet weak var historyStackView: UIStackView?
     @IBOutlet weak var scrollView: UIScrollView?
+    private let numberFormatter = NumberFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
     }
 }
 
