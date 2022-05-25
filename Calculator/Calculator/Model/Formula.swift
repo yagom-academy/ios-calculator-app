@@ -22,7 +22,7 @@ struct Formula {
         let result = try operandItems.reduce(start) { reuslt, partialResult in
             let operatorSymbol = operators.dequeue() ?? ""
             let `operator` = Operator.allCases.filter {
-                $0.rawValue == Character(operatorSymbol)
+                $0.symbol == Character(operatorSymbol)
             }
             let calculatedValue = `operator`[0].calculate(lhs: reuslt, rhs: partialResult)
             

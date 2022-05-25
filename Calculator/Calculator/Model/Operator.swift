@@ -1,8 +1,21 @@
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "/"
     case multiply = "*"
+    
+    var symbol: Character {
+        switch self {
+        case .add:
+            return Operator.add.rawValue
+        case .subtract:
+            return Operator.subtract.rawValue
+        case .divide:
+            return Operator.divide.rawValue
+        case .multiply:
+            return Operator.multiply.rawValue
+        }
+    }
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
