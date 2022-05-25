@@ -23,9 +23,14 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberPadTapped(_ sender: UIButton) {
-        currentNumber = currentNumber * 10 + Double(sender.tag)
+        if sender.tag != 10 {
+            currentNumber = currentNumber * 10 + Double(sender.tag)
+        } else {
+            currentNumber = currentNumber * 100
+        }
+       
         numberLable.text = convertToDecimal(currentNumber)
-        currentFormula += String(sender.tag)
+        currentFormula += sender.titleLabel?.text ?? ""
     }
     
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
