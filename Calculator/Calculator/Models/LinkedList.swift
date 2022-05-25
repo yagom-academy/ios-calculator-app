@@ -1,6 +1,6 @@
-struct LinkedList<T> {
+struct LinkedList<T: Equatable> {
     
-    private class Node<T> {
+    private class Node<T: Equatable> {
         var previous: Node<T>?
         var next: Node<T>?
         var data: T
@@ -16,10 +16,15 @@ struct LinkedList<T> {
     var count: Int { return _count }
     private lazy var currentNodeForSequence: Node<T>? = head
 
-    init () {
+    init() {
         self.head = nil
         self.tail = nil
         self._count = 0
+    }
+    
+    init(_ array: Array<T>) {
+        self.init()
+        array.forEach { pushAfterTail(element: $0) }
     }
     
     mutating func pushBeforeHead(element: T) {
@@ -157,5 +162,14 @@ extension LinkedList: CustomStringConvertible, CustomDebugStringConvertible {
         let stringArray = self.map { "\($0)" }
         let returnString = stringArray.joined(separator: ", ")
         return "[" + returnString + "]"
+    }
+}
+
+extension LinkedList: Equatable {
+    static func == (lhs: LinkedList<T>, rhs: LinkedList<T>) -> Bool {
+        for (leftElement, rightElement) in zip(lhs, rhs) {
+            guard leftElement == rightElement else { return false }
+        }
+        return true
     }
 }

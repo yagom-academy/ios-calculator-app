@@ -3,6 +3,7 @@ import XCTest
 class LinkedListTTD: XCTestCase {
     // TODO: 다양한 데이터를 담을 수 있는 Linked List 만들기
     var linkedList: LinkedList<Int>!
+    var linkedList2: LinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -242,7 +243,7 @@ class LinkedListTTD: XCTestCase {
     }
     
     func test_insert메서드로값넣기() throws {
-        // what
+        // given
         let defaultValues: [Int] = [1, 2, 3, 4]
         let inputValue: Int = 7
         let inputIndex: Int = 2
@@ -250,7 +251,7 @@ class LinkedListTTD: XCTestCase {
         var expectation2: [Int] = defaultValues
         expectation2.insert(inputValue, at: inputIndex)
         
-        // given
+        // what
         defaultValues.forEach { linkedList.pushAfterTail(element: $0) }
         
         // then
@@ -258,7 +259,7 @@ class LinkedListTTD: XCTestCase {
             XCTAssertEqual(i, j)
         }
         
-        // given
+        // what
         linkedList.insert(inputValue, at: inputIndex)
         
         // then
@@ -268,7 +269,7 @@ class LinkedListTTD: XCTestCase {
     }
     
     func test_맨앞에insert() throws {
-        // what
+        // given
         let defaultValues: [Int] = [1]
         let inputValue: Int = 7
         let inputIndex: Int = 0
@@ -276,7 +277,7 @@ class LinkedListTTD: XCTestCase {
         var expectation2: [Int] = defaultValues
         expectation2.insert(inputValue, at: inputIndex)
         
-        // given
+        // what
         defaultValues.forEach { linkedList.pushAfterTail(element: $0) }
         
         // then
@@ -284,12 +285,45 @@ class LinkedListTTD: XCTestCase {
             XCTAssertEqual(i, j)
         }
         
-        // given
+        // what
         linkedList.insert(inputValue, at: inputIndex)
         
         // then
         for (i, j) in zip(linkedList, expectation2) {
             XCTAssertEqual(i, j)
+        }
+    }
+    
+    func test_꺼낸값이동등한면_true() throws {
+        // given
+        // what
+        linkedList = [1, 2, 3]
+        linkedList2 = [1, 2, 3]
+        
+        // then
+        XCTAssertTrue(linkedList.popHead() == linkedList2.popHead())
+    }
+    
+    func test_내부값이_모두동등한면_true() throws {
+        // given
+        // what
+        linkedList = [1, 2, 3]
+        linkedList2 = [1, 2, 3]
+        
+        // then
+        XCTAssertTrue(linkedList == linkedList2)
+    }
+    
+    func test_배열인스턴스를_LinkedList타입으로_변환() throws {
+        // given
+        let array = [1, 2, 3]
+        
+        // what
+        linkedList = LinkedList(array)
+        
+        // then
+        for (linkedListElement, arrayElement) in zip(linkedList, array) {
+            XCTAssertEqual(linkedListElement, arrayElement)
         }
     }
 }
