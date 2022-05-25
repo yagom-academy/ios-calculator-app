@@ -1,5 +1,9 @@
 extension String {
     func split(with target: Character) -> [String] {
+        if !self.contains(target) {
+            return [self]
+        }
+        
         var standardIndex = firstIndex(of: target) ?? startIndex
         let front = String(self[startIndex..<standardIndex])
         
