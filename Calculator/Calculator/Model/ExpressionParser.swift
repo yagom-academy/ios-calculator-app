@@ -9,18 +9,18 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let separatedInputValue = componentsByOperators(from: input)
+        let inputValues = componentsByOperators(from: input)
         var operandQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
         
-        separatedInputValue.forEach {
-            if let doubleTypeValue = Double($0) {
-                operandQueue.enqueue(data: doubleTypeValue)
+        inputValues.forEach {
+            if let operand = Double($0) {
+                operandQueue.enqueue(data: operand)
                 return
             }
             
-            if let operaterTypeValue = Operator(rawValue: Character($0)) {
-                operatorQueue.enqueue(data: operaterTypeValue)
+            if let `operator` = Operator(rawValue: Character($0)) {
+                operatorQueue.enqueue(data: `operator`)
             }
         }
         return Formula(operands: operandQueue, operators: operatorQueue)
@@ -30,4 +30,5 @@ enum ExpressionParser {
         return input.split(with: " ")
     }
 }
+
 

@@ -8,23 +8,20 @@
 import Foundation
 
 struct Formula {
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var previousResult = operands.dequeue() else {
+        guard var formulaResult = operands.dequeue() else {
             return 0.0
         }
         
         while operators.queue.count != 0 {
             if let operand = operands.dequeue(),
-               let `operator` = operators.dequeue() {
-                previousResult = try `operator`.calculate(
-                    lhs: previousResult,
-                    rhs: operand
-                )
+                let `operator` = operators.dequeue() {
+                formulaResult = try `operator`.calculate(lhs: formulaResult, rhs: operand)
             }
         }
-        return previousResult
+        return formulaResult
     }
 }

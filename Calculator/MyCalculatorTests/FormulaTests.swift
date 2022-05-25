@@ -13,7 +13,6 @@ class FormulaTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Formula()
     }
     
     override func tearDownWithError() throws {
@@ -33,9 +32,13 @@ class FormulaTests: XCTestCase {
     
     func test_Formula의_operands에_3과4가담겨있고_operators에_add가담겨있고_result를호출했을때_반환값이7이다() {
         // given
-        sut.operands.enqueue(data: 3.0)
-        sut.operators.enqueue(data: .add)
-        sut.operands.enqueue(data: 4.0)
+        var operandQueue = CalculatorItemQueue<Double>()
+        var operatorQueue = CalculatorItemQueue<Operator>()
+        sut = Formula(operands: operandQueue, operators: operatorQueue)
+        
+        operandQueue.enqueue(data: 3.0)
+        operatorQueue.enqueue(data: .add)
+        operandQueue.enqueue(data: 4.0)
         
         // when
         let result = try? sut.result()
@@ -46,9 +49,13 @@ class FormulaTests: XCTestCase {
     
     func test_Formula의_operands에3과0이담겨있고_operators에_divide가담겨있고_result를호출했을때_오류를던진다() {
         // given
-        sut.operands.enqueue(data: 3.0)
-        sut.operators.enqueue(data: .divide)
-        sut.operands.enqueue(data: 0.0)
+        var operandQueue = CalculatorItemQueue<Double>()
+        var operatorQueue = CalculatorItemQueue<Operator>()
+        sut = Formula(operands: operandQueue, operators: operatorQueue)
+        
+        operandQueue.enqueue(data: 3.0)
+        operatorQueue.enqueue(data: .divide)
+        operandQueue.enqueue(data: 0.0)
         
         // when
         
