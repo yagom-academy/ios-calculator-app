@@ -55,7 +55,3 @@ private extension Operator {
 extension Operator: CalculateItem {
     
 }
-
-enum OperatorError: Error {
-    case dividedByZero
-}

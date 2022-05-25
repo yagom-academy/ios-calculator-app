@@ -43,7 +43,3 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return result
     }
 }
-
-enum CalculatorItemQueueError: Error {
-    case emptyStack
-}
