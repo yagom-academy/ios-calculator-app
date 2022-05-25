@@ -1,30 +1,45 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let formula = Formula()
-        let operators = componentsByOperators(from: input)
-        var inputs = input
+        let compoents = componentsByOperators(from: input)
         
-        operators.enumerated().forEach { (index,operatorSymbol) in
-            formula.operators.enqueue(operatorSymbol)
-            
-            let sliceOfInput = inputs.split(with: Character(operatorSymbol))
-            if sliceOfInput[0] != "" {
-                formula.operands.enqueue(Double(sliceOfInput[0]) ?? 0)
-            }
-            
-            inputs = sliceOfInput[1]
-            
-            if index == operators.count-1 {
-                formula.operands.enqueue(Double(inputs) ?? 0)
+        compoents.forEach { item in
+            if item.allSatisfy({ $0.isNumber }) {
+                formula.operands.enqueue(Double(item) ?? 0)
+            } else {
+                formula.operators.enqueue(item)
             }
         }
         return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operatorSymbols = Operator.allCases.map { $0.symbol
+        let operatorSymbols = Operator.allCases.map { $0.symbol }
+        var items = [String]()
+        var splitedInput = input
+        var count = 0
+        
+        input.forEach { element in
+            var joinedResult = [""]
+            let target = Character(String(element))
+            
+            if element.isNumber {
+                count += 1
             }
-            let operators = input.filter { operatorSymbols.contains($0) }.map { String($0) }
-            return operators
+            
+            if operatorSymbols.contains(element) && count > 0 {
+                joinedResult = splitedInput.split(with: target)
+                items = items + [joinedResult[0]] + [String(element)]
+                splitedInput = joinedResult[1]
+                count = 0
+            }
+            
+            if element == input.last {
+                items += [splitedInput]
+            }
+        }
+        
+        print(items)
+        return items
     }
 }
