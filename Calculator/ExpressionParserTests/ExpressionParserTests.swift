@@ -50,7 +50,7 @@ class ExpressionParserTests: XCTestCase {
         let result = str.split(with: " ")
             .compactMap { Double($0) }
             .map{ $0 }[0]
-                
+        
         // then
         XCTAssertEqual(result, expectation)
     }
@@ -61,9 +61,9 @@ class ExpressionParserTests: XCTestCase {
         let expectation = Operator.subtract
         
         // when
-        let char = ExpressionParser.componentsByOperators(from: str)
+        let char = ExpressionParser.componentsByOperators(from: str).filter{ Double($0) == nil }
         
-        let result = Operator(rawValue: char[0])
+        let result = Operator(rawValue: Character(char[0]))
         
         // then
         XCTAssertEqual(result, expectation)
@@ -75,8 +75,8 @@ class ExpressionParserTests: XCTestCase {
         let expectation = 3.2
         
         // when
-        let result = ExpressionParser.componentsByOperands(from: str).map{ Double($0) }[0]
-                
+        let result = ExpressionParser.componentsByOperators(from: str).map{ Double($0) }[0]
+        
         // then
         XCTAssertEqual(result, expectation)
     }
@@ -86,39 +86,23 @@ class ExpressionParserTests: XCTestCase {
         let str = "3.2 4.5 5 - 1 +"
         let expectation = Operator.subtract
         
-        ExpressionParser.componentsByOperands(from: str).map{
-            operands?.enqueue(Double($0) ?? 0.0)
-        }
-        
-        ExpressionParser.componentsByOperators(from: str).map{
-            operators?.enqueue(Operator(rawValue: $0)!)
-        }
         // when
-        let formula = Formula(operands: operands!, operators: operators!)
+        let formula = ExpressionParser.parse(from: str)
         
         let result = formula.operators.peekFirst
-                
+        
         // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_문자열로_들어온_값을_분리하여_operand_를_fomular에_넣어서_첫째값을_반환하다() {
         // given
-        let str = "3.2 4.5 5 - 1 + "
+        let str = "3.2 - 4.5 + 5 - 1"
         let expectation = 3.2
         
-        ExpressionParser.componentsByOperands(from: str).map{
-            operands?.enqueue(Double($0) ?? 0.0)
-        }
-        
-        ExpressionParser.componentsByOperators(from: str).map{
-            operators?.enqueue(Operator(rawValue: $0)!)
-        }
-        // when
-        let formula = Formula(operands: operands!, operators: operators!)
-        
+        let formula = ExpressionParser.parse(from: str)
         let result = formula.operands.peekFirst
-                
+        
         // then
         XCTAssertEqual(result, expectation)
     }
@@ -127,19 +111,12 @@ class ExpressionParserTests: XCTestCase {
         // given
         let str = "3.0 - 4.0 - 5 - 1 + -5 "
         let expectation: Double = -12.0
-    
-        ExpressionParser.componentsByOperands(from: str).map{
-            operands?.enqueue(Double($0) ?? 0.0)
-        }
         
-        ExpressionParser.componentsByOperators(from: str).map{
-            operators?.enqueue(Operator(rawValue: $0)!)
-        }
         // when
-        let formula = Formula(operands: operands!, operators: operators!)
-        
+        let formula = ExpressionParser.parse(from: str)
+
         let result = formula.result()
-        print(result)
+        
         // then
         XCTAssertEqual(result, expectation)
     }
@@ -149,19 +126,11 @@ class ExpressionParserTests: XCTestCase {
         let str = "3.0 × 4.3 - 5 - 1 ÷ -5 "
         let expectation: Double = -1.3799999999999997
     
-        ExpressionParser.componentsByOperands(from: str).map{
-            operands?.enqueue(Double($0) ?? 0.0)
-        }
-        
-        ExpressionParser.componentsByOperators(from: str).map{
-            operators?.enqueue(Operator(rawValue: $0)!)
-        }
-   
         // when
-        let formula = Formula(operands: operands!, operators: operators!)
+        let formula = ExpressionParser.parse(from: str)
         
         let result = formula.result()
-        
+
         // then
         XCTAssertEqual(result, expectation)
     }

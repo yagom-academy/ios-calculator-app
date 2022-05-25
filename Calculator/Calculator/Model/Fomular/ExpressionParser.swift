@@ -10,38 +10,34 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-        
-        componentsByOperands(from: input).map{
-            operands.enqueue(Double($0) ?? 0.0)
-        }
-        
         let operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
         
-        componentsByOperators(from: input).map{
-            operators.enqueue(Operator(rawValue: $0) ?? .add)
-        }
+        input.split(with: " ")
+            .compactMap{ Double($0) }
+            .forEach{ value in
+                operands.enqueue(value)
+            }
+            
+        componentsByOperators(from: input)
+            .compactMap{ Character($0) }
+            .forEach{ value in
+                guard let operatorValue = Operator(rawValue: value),
+                      Operator.allCases.contains(operatorValue) else {
+                    return
+                }
+                operators.enqueue(operatorValue)
+            }
         
         return Formula(operands: operands, operators: operators)
     }
 }
 
 extension ExpressionParser {
-    static func componentsByOperators(from input: String) ->[Character] {
+    static func componentsByOperators(from input: String) ->[String] {
         let data = input
             .split(with: " ")
             .filter{ Double($0) == nil }
-            .compactMap{ Character($0) }
-            .filter{ Operator.contains($0) }
-
-        return data
-    }
-
-    static func componentsByOperands(from input: String) ->[String] {
-        let data = input
-            .split(with: " ")
-            .compactMap { Double($0) }
-            .map{ String($0) }
-        
+            
         return data
     }
 }

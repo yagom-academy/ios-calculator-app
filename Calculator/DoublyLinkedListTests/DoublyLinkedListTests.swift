@@ -21,13 +21,13 @@ class DoublyLinkedListTests: XCTestCase {
         sut = nil
     }
 
-    func test_양방향_연결리스트의_head가_nil값을_가질경우_true다() throws {
+    func test_양방향_연결리스트의_head가_nil값을_가질경우_false다() throws {
         // given
         // when
         let result = sut.isEmpty
         
         // then
-        XCTAssertTrue(result)
+        XCTAssertFalse(result)
     }
     
     func test_양방향_연결리스트에_값을_추가할_수_있다() {

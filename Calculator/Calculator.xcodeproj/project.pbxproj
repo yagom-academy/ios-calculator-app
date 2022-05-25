@@ -208,7 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				90067593283398F500CC8D74 /* CalculateItem.swift */,
-				90F83AF82836705E008D769E /* Operator */,
+				90C1DE2F2834C0BB00655DEF /* Operator.swift */,
 				90F83AEC283660E2008D769E /* CalculaterQueue */,
 				90C1DE2C2834BF7F00655DEF /* Fomular */,
 			);
@@ -241,14 +241,6 @@
 				90F83AF0283660E2008D769E /* QueueError.swift */,
 			);
 			path = Error;
-			sourceTree = "<group>";
-		};
-		90F83AF82836705E008D769E /* Operator */ = {
-			isa = PBXGroup;
-			children = (
-				90C1DE2F2834C0BB00655DEF /* Operator.swift */,
-			);
-			path = Operator;
 			sourceTree = "<group>";
 		};
 		90F83AFE283679AA008D769E /* OperatorTests */ = {
