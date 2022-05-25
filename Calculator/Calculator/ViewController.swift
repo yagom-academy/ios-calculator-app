@@ -11,12 +11,15 @@ class ViewController: UIViewController {
     private var isCalculateCompleted = false
     private var mathematicalExpression = ""
     
+    @IBOutlet private weak var mathematicalExpressionScrollView: UIScrollView!
     @IBOutlet private weak var mathematicalExpressionStackView: UIStackView!
+    
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func acButtonAction(_ sender: UIButton) {
@@ -65,6 +68,9 @@ class ViewController: UIViewController {
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isOperandinputed = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            self.downScroll()
+        }
     }
     
     @IBAction private func operandsButtonAction(_ sender: UIButton) {
@@ -113,7 +119,7 @@ class ViewController: UIViewController {
     private func createLabel(text: String?) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = UIFont.systemFont(ofSize: 25)
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         return label
     }
@@ -161,5 +167,8 @@ class ViewController: UIViewController {
         }
         mathematicalExpression += getText(operandLabel.text)
     }
+    
+    private func downScroll() {
+        mathematicalExpressionScrollView.setContentOffset(CGPoint(x: 0, y: mathematicalExpressionScrollView.contentSize.height - mathematicalExpressionScrollView.bounds.height), animated: false)
+    }
 }
-
