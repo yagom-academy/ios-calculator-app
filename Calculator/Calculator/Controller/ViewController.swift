@@ -12,7 +12,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel?
     @IBOutlet weak var historyStackView: UIStackView?
     @IBOutlet weak var scrollView: UIScrollView?
+    
+    private var formula: Formula?
     private let numberFormatter = NumberFormatter()
+    private let zero = "0"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +28,11 @@ class ViewController: UIViewController {
 extension ViewController {
     
     @IBAction func operandButtonDidTapped(_ sender: UIButton) {
+        
+        if screenLabel?.text == zero {
+            screenLabel?.text = ""
+        }
+        screenLabel?.text! += sender.currentTitle!
     }
     
     @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
