@@ -36,17 +36,11 @@ class ViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
-        guard let operandLabelText = operandLabel.text else {
-            return
-        }
-        guard let operand = Double(operandLabelText) else {
-            return
-        }
-        guard operand != 0.0 else {
+        guard let operand = Double(getText(operandLabel.text)) , operand != 0.0 else {
             return
         }
         
-        operandLabel.text = String(-operand)
+        operandLabel.text = String(-Int(operand))
     }
     
     @IBAction private func operatorsButtonAction(_ sender: UIButton) {
@@ -57,15 +51,15 @@ class ViewController: UIViewController {
             operatorLabel.text = sender.currentTitle
             return
         }
-        let operatorOfSignLabel = createLabel(text: operatorLabel.text)
-        let operandOfSignLabel = createLabel(text: operandLabel.text)
+        let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
+        let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         
         if mathematicalExpressionStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
-            mathematicalExpression += "\(operandLabel.text ?? "")"
+            addMathematicalExpression(isFirstInput: true)
         } else {
             createStackView(operatorOfSignLabel, operandOfSignLabel)
-            mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
+            addMathematicalExpression(isFirstInput: false)
         }
         
         operatorLabel.text = sender.currentTitle
@@ -82,7 +76,7 @@ class ViewController: UIViewController {
             operandLabel.text = sender.currentTitle
             isOperandinputed = true
         } else {
-            operandLabel.text = (operandLabel.text ?? "") + (sender.currentTitle ?? "")
+            operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
             isOperandinputed = true
         }
     }
@@ -95,11 +89,12 @@ class ViewController: UIViewController {
             return
         }
         
-        let operatorOfSignLabel = createLabel(text: operatorLabel.text)
-        let operandOfSignLabel = createLabel(text: operandLabel.text)
+        let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
+        let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         createStackView(operatorOfSignLabel, operandOfSignLabel)
-        mathematicalExpression += " \(operatorLabel.text ?? "") \(operandLabel.text ?? "")"
+        addMathematicalExpression(isFirstInput: false)
         operandLabel.text = calculate(mathematicalExpression)
+        
         operatorLabel.text = ""
         mathematicalExpression = ""
         isOperandinputed = false
@@ -150,6 +145,21 @@ class ViewController: UIViewController {
         } catch {
             return "NaN"
         }
+    }
+    
+    private func getText(_ string: String?) -> String {
+        guard let text = string else {
+            return ""
+        }
+        return text
+    }
+    
+    private func addMathematicalExpression(isFirstInput: Bool) {
+        guard isFirstInput else {
+            mathematicalExpression += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
+            return
+        }
+        mathematicalExpression += getText(operandLabel.text)
     }
 }
 
