@@ -29,7 +29,6 @@ struct Formula {
     }
 }
 
-
 enum FormulaError: Error {
     case emptyError
     case noOperandsInQueue
