@@ -24,6 +24,7 @@ extension CalculatorItemQueue {
         return doublyLinkedList.isEmpty
     }
     
+    @discardableResult
     func enqueue(_ element: T) -> Bool {
         doublyLinkedList.append(element)
         return true

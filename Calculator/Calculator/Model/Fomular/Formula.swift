@@ -14,12 +14,6 @@ struct Formula {
 
 extension Formula {
     func result() -> Double {
-        return calculatedValue
-    }
-}
-
-extension Formula {
-    private var calculatedValue: Double {
         do {
             var headOperand = try operands.dequeue()
             

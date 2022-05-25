@@ -26,14 +26,13 @@ class ExpressionParserTests: XCTestCase {
     
     func test_문자열로_들어온_값을_분리하여_연산자를_반환하다() {
         // given
-        let str = "3.2 4.5 5 - 1 +"
+        let str = "3.2 - 4.5 + 5 − 1 +"
         let expectation = Operator.subtract
         
         // when
         let char = str.split(with: " ")
             .filter{ Double($0) == nil }
             .compactMap{ Character($0) }
-            .filter{ Operator.contains($0) }
         
         let result = Operator(rawValue: char[0])
         
@@ -57,13 +56,13 @@ class ExpressionParserTests: XCTestCase {
     
     func test_문자열로_들어온_값을_분리하여_연산자를_반환하다_Version2() {
         // given
-        let str = "3.2 4.5 5 - 1 +"
+        let str = "3.2 - 4.5 - 5 - 1 +"
         let expectation = Operator.subtract
         
         // when
-        let char = ExpressionParser.componentsByOperators(from: str).filter{ Double($0) == nil }
+        let formula = ExpressionParser.parse(from: str)
         
-        let result = Operator(rawValue: Character(char[0]))
+        let result = formula.operators.peekFirst
         
         // then
         XCTAssertEqual(result, expectation)
@@ -71,11 +70,18 @@ class ExpressionParserTests: XCTestCase {
     
     func test_문자열로_들어온_값을_분리하여_Double_숫자를_반환하다_Version2() {
         // given
-        let str = "3.2 4.5 5 - 1 +"
+        let str = "3.2 4.5 5 - 1 + -5"
         let expectation = 3.2
         
         // when
-        let result = ExpressionParser.componentsByOperators(from: str).map{ Double($0) }[0]
+        str.split(with: " ")
+            .compactMap{ Double($0) }
+            .forEach{ value in
+            
+                operands!.enqueue(value)
+            }
+        
+        let result = try! operands!.peekFirst
         
         // then
         XCTAssertEqual(result, expectation)
@@ -134,4 +140,23 @@ class ExpressionParserTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_문자열로_들어온_값을_나누기_연산자를_사용하여_NAN_반환하다() {
+        // given
+        let str = "3.0 × 4.3 - 5 - 1 ÷ 0 "
+        var expectation = true
+    
+        // when
+        let formula = ExpressionParser.parse(from: str)
+        
+        let result = formula.result()
+        
+        if (result.isNaN) {
+            expectation = false
+        }
+        
+        // then
+        XCTAssertFalse(expectation)
+    }
 }
+ 
