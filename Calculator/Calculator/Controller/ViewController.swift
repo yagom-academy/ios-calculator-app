@@ -46,4 +46,24 @@ extension ViewController {
 }
 
 private extension ViewController {
+    func generateStackView() -> UIStackView {
+        let stackViewElement = UIStackView()
+        stackViewElement.axis = .horizontal
+        stackViewElement.isHidden = true
+        stackViewElement.spacing = 8
+        
+        let operatorLabel = UILabel()
+        operatorLabel.text = currentOperatorLabel?.text
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.textColor = UIColor(white: 1, alpha: 1)
+        stackViewElement.addArrangedSubview(operatorLabel)
+        
+        let operandLabel = UILabel()
+        operandLabel.text = screenLabel?.text
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandLabel.textColor = UIColor(white: 1, alpha: 1)
+        stackViewElement.addArrangedSubview(operandLabel)
+        
+        return stackViewElement
+    }
 }
