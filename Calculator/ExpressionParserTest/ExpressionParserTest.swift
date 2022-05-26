@@ -23,5 +23,15 @@ class ExpressionParserTest: XCTestCase {
         //then
         XCTAssertEqual(try result.result(), -20)
     }
-
+    func test_나누기_연산했을때_나누는수가_0이라면_에러가_발생해야한다() {
+            //given
+            let expression = "2 ÷ 0"
+            
+            //when
+            var result = ExpressionParser.parse(from: expression)
+            //then
+            XCTAssertThrowsError(try result.result(), "divideZero") { error in
+                XCTAssertEqual(error as? OperatorError, OperatorError.divideZero)
+            }
+        }
 }
