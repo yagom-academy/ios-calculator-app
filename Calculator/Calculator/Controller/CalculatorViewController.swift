@@ -3,6 +3,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     @IBOutlet weak var numberLable: UILabel!
     @IBOutlet weak var operatorLable: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
     
     private var currentFormula = ""
     
@@ -13,6 +14,7 @@ class CalculatorViewController: UIViewController {
     private func convertToDecimal(_ number: Double) -> String {
         let numberFormat = NumberFormatter()
         numberFormat.numberStyle = .decimal
+        numberFormat.maximumFractionDigits = 20
         
         guard let value = numberFormat.string(from: NSNumber(value: number)) else {
             return "0"
@@ -31,6 +33,27 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private func addFormulaLable(content: String) {
+        let lable = UILabel()
+        lable.text = content
+        lable.textColor = .white
+        stackView.addArrangedSubview(lable)
+    }
+    
+    private func printFormula() {
+        if Double(currentFormula) != nil {
+            addFormulaLable(content: currentFormula)
+            return
+        }
+        
+        let numberCount = (numberLable.text ?? "0").filter { $0 != "," }.count
+        let number = currentFormula.suffix(numberCount)
+        var formula = currentFormula.dropLast(numberCount)
+        let `operator` = formula.removeLast()
+        
+        addFormulaLable(content: String(`operator`) + " " + number)
+    }
+    
     @IBAction private func numberPadTapped(_ sender: UIButton) {
         if let lastInput = currentFormula.last, Operator(rawValue: lastInput) != nil {
             numberLable.text = "0"
@@ -47,6 +70,8 @@ class CalculatorViewController: UIViewController {
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
         do {
             try checkOperatorError()
+            printFormula()
+            numberLable.text = "0"
         } catch {
             switch error {
             case CalculatorError.duplicatedOperator:
@@ -66,6 +91,7 @@ class CalculatorViewController: UIViewController {
         do {
             var formula = try ExpressionParser.parse(from: currentFormula)
             let calculatedResult = try formula.result()
+            printFormula()
             numberLable.text = convertToDecimal(calculatedResult)
         } catch {
             switch error {
