@@ -5,9 +5,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operatorLable: UILabel!
     
     private var currentFormula = ""
-    private var currentNumber: Double = 0
-    private var digit: Double = 0
-    private var decimal = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,22 +32,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberPadTapped(_ sender: UIButton) {
-        let multiplier: Double
-        
-        decimal ? (multiplier = 1) : (multiplier = 10)
-        
-        if sender.tag != 10 {
-            currentNumber = currentNumber * multiplier + pow(0.1, digit) * Double(sender.tag)
-        } else {
-            currentNumber = currentNumber * 100
-        }
-       
-        if decimal {
-            digit += 1
+        if let lastInput = currentFormula.last, Operator(rawValue: lastInput) != nil {
+            numberLable.text = "0"
         }
         
-        numberLable.text = convertToDecimal(currentNumber)
-        currentFormula += sender.titleLabel?.text ?? ""
+        let numberText = (numberLable.text ?? "0").filter { $0 != "," }
+        
+        if let buttonText = sender.titleLabel?.text, let number = Double(numberText + buttonText) {
+            numberLable.text = convertToDecimal(number)
+            currentFormula += buttonText
+        }
     }
     
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
@@ -69,9 +60,6 @@ class CalculatorViewController: UIViewController {
         
         operatorLable.text = sender.titleLabel?.text
         currentFormula += sender.titleLabel?.text ?? ""
-        currentNumber = 0
-        digit = 0
-        decimal = false
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
@@ -91,46 +79,48 @@ class CalculatorViewController: UIViewController {
         }
         
         operatorLable.text = ""
-        currentNumber = 0
         currentFormula = ""
-        digit = 0
-        decimal = false
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {
         numberLable.text = "0"
         operatorLable.text = ""
         currentFormula = ""
-        currentNumber = 0
-        digit = 0
-        decimal = false
     }
     
     @IBAction private func CEButtonTapped(_ sender: UIButton) {
-        if let number = Double(String(currentFormula.removeLast())) {
-            currentNumber = (currentNumber - number) / 10
-            numberLable.text = convertToDecimal(currentNumber)
+        if let lastIndex = currentFormula.last, Double(String(lastIndex)) != nil {
+            numberLable.text = String((numberLable.text ?? "0").dropLast())
         } else {
             operatorLable.text = ""
         }
+        
+        currentFormula += String(currentFormula.dropLast())
     }
     
     @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
-        let numberCount = numberLable.text?.count ?? 0
-    
-        if let number = Double(currentFormula.suffix(numberCount)) {
-            currentNumber *= -1
-            numberLable.text = convertToDecimal(currentNumber)
-            currentFormula = String(currentFormula.dropLast(numberCount)) + String(-number)
+        let numberText = numberLable.text ?? "0"
+        let pureNumber = numberText.filter { $0 != "," }
+        
+        if numberText.contains("-") {
+            let plusNumber = numberText.dropFirst()
+            let purePlusNumber = plusNumber.filter { $0 != "," }
+            numberLable.text = String(plusNumber)
+            currentFormula = String(currentFormula.dropLast(pureNumber.count)) + purePlusNumber
+        } else {
+            let minusNumber = "-" + numberText
+            let pureMinusNumber = minusNumber.filter { $0 != "," }
+            numberLable.text = minusNumber
+            currentFormula = String(currentFormula.dropLast(pureNumber.count)) + pureMinusNumber
         }
     }
     
     @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
-        if !decimal {
-            numberLable.text = convertToDecimal(currentNumber) + "."
+        let numberText = numberLable.text ?? "0"
+        
+        if !numberText.contains(".") {
+            numberLable.text = numberText + "."
             currentFormula += "."
-            digit += 1
-            decimal = true
         }
     }
 }
