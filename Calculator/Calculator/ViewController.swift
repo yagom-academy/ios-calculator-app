@@ -8,6 +8,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var scrollViewContents: UIStackView!
+    @IBOutlet weak var currendOperand: UILabel!
+    @IBOutlet weak var currentOperator: UILabel!
     
     
     override func viewDidLoad() {
