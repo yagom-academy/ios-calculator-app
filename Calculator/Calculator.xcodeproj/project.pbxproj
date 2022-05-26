@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1808646B2837427B00EC58BC /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808646A2837427B00EC58BC /* Error.swift */; };
+		180E6BE22836A4350092F3B1 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE12836A4350092F3B1 /* ExpressionParser.swift */; };
+		180E6BE42836A45B0092F3B1 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE32836A45B0092F3B1 /* Double.swift */; };
+		180E6BE62836A4720092F3B1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE52836A4720092F3B1 /* String.swift */; };
+		180E6BE82836A4A60092F3B1 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE72836A4A60092F3B1 /* Formula.swift */; };
 		18783AF92833384000D86554 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18783AF82833383F00D86554 /* LinkedList.swift */; };
 		18783AFB283350E700D86554 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18783AFA283350E700D86554 /* Operator.swift */; };
 		18EDDB732832196400753774 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDB722832196400753774 /* CalculatorTests.swift */; };
@@ -31,6 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1808646A2837427B00EC58BC /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		180E6BE12836A4350092F3B1 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		180E6BE32836A45B0092F3B1 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		180E6BE52836A4720092F3B1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		180E6BE72836A4A60092F3B1 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		18783AF82833383F00D86554 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		18783AFA283350E700D86554 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		18EDDB702832196400753774 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		180864692837420F00EC58BC /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				1808646A2837427B00EC58BC /* Error.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		18663B752834E18F0083C844 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,10 +111,14 @@
 		18783AFD2833986C00D86554 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				180E6BE32836A45B0092F3B1 /* Double.swift */,
+				180E6BE52836A4720092F3B1 /* String.swift */,
 				18EDDB7F283245E700753774 /* Queue.swift */,
 				18783AF82833383F00D86554 /* LinkedList.swift */,
 				18EDDB7D283245CD00753774 /* CalculateItem.swift */,
 				18783AFA283350E700D86554 /* Operator.swift */,
+				180E6BE12836A4350092F3B1 /* ExpressionParser.swift */,
+				180E6BE72836A4A60092F3B1 /* Formula.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -141,6 +163,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				180864692837420F00EC58BC /* Error */,
 				18783AFE2833987100D86554 /* Controller */,
 				18783AFD2833986C00D86554 /* Model */,
 				18783AFC2833986600D86554 /* View */,
@@ -194,7 +217,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					18EDDB6F2832196400753774 = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -258,11 +281,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				18783AF92833384000D86554 /* LinkedList.swift in Sources */,
+				180E6BE22836A4350092F3B1 /* ExpressionParser.swift in Sources */,
+				180E6BE62836A4720092F3B1 /* String.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
+				1808646B2837427B00EC58BC /* Error.swift in Sources */,
 				18EDDB7E283245CD00753774 /* CalculateItem.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				18783AFB283350E700D86554 /* Operator.swift in Sources */,
+				180E6BE82836A4A60092F3B1 /* Formula.swift in Sources */,
 				18EDDB80283245E700753774 /* Queue.swift in Sources */,
+				180E6BE42836A45B0092F3B1 /* Double.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +418,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
