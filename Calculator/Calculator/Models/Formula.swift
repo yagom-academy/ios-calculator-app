@@ -10,13 +10,13 @@ struct Formula {
         }
         
         while operators.count > .zero {
-            guard let `operator` = operators.pop(), let rhs = operands.pop() else {
+            guard let popedOperator = operators.pop(), let rhs = operands.pop() else {
                 return .failure(LinkedListError.indexOutOfRange)
             }
-            if (`operator` == .divide) && (rhs == .zero) {
+            if (popedOperator == .divide) && (rhs == .zero) {
                 return .failure(FormulaError.notANumber)
             }
-            addedLhs = `operator`.calculate(lhs: addedLhs, rhs: rhs)
+            addedLhs = popedOperator.calculate(lhs: addedLhs, rhs: rhs)
         }
         
         return .success(addedLhs)

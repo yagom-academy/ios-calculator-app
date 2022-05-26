@@ -121,22 +121,25 @@ class ViewController: UIViewController {
         
         addCalculatingLabelStack(to: calculatingStackView, operatorText: operatorLabelText, operandText: operandLabelText)
         
-        if operandLabel.text != "0" {
-            let inputString = operatorLabelText + " " + operandLabelText
-            formula? += ExpressionParser.parse(from: inputString)
-        }
+        let inputString = operatorLabelText + " " + operandLabelText
+        formula? += ExpressionParser.parse(from: inputString)
         
         switch formula?.result() {
         case .success(let data):
             operatorLabel.text = ""
             operandLabel.text = String(data)
+            
         case .failure(let error):
-            print("Error occurred: ☢️\(error)☢️")
-            return
+            if error as? FormulaError == FormulaError.notANumber {
+                operatorLabel.text = ""
+                operandLabel.text = "NaN"
+            } else {
+                print("Error occurred: ☢️\(error)☢️")
+            }
+
         case .none:
             break
         }
-        
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
