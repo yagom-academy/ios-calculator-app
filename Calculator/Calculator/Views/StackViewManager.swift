@@ -1,7 +1,7 @@
 import UIKit
 
 struct StackViewManager {
-    static func makeNewCalculateLabels(of operatorText: String, operandText: String) -> UIStackView {
+    private static func makeNewCalculateLabels(of operatorText: String, operandText: String) -> UIStackView {
         let operatorLabel: UILabel = {
             let ol = UILabel()
             ol.text = operatorText
