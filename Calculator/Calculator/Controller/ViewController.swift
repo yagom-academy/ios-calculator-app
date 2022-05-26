@@ -111,10 +111,11 @@ private extension ViewController {
     }
     
     func goToBottomOfScrollView() {
-        scrollView?.scrollRectToVisible(CGRect(x: 0,
-                                               y: (scrollView?.contentSize.height)! - (scrollView?.bounds.height)!,
-                                               width: (scrollView?.bounds.size.width)!,
-                                               height: (scrollView?.bounds.size.height)!),
+        guard let scrollView = scrollView else { return }
+        scrollView.scrollRectToVisible(CGRect(x: 0,
+                                               y: scrollView.contentSize.height - scrollView.bounds.height,
+                                               width: scrollView.bounds.size.width,
+                                               height: scrollView.bounds.size.height),
                                         animated: true)
     }
 }
