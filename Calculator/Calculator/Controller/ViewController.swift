@@ -16,10 +16,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        clearLastInput()
         resetNumberInput()
         resetOperatorInput()
         resetTotalInput()
-        clearLastInput()
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
             return
         }
         
-        applyNumberFormatter(number: convertedNumberInput)
+        applyNumberFormatter(convertedNumberInput)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         }
         
         guard Double(text) != 0.0 else {
+            operatorInput.text = sender.currentTitle
             return
         }
         
@@ -93,7 +94,7 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult = try formula.result()
-            applyNumberFormatter(number: calculationResult)
+            applyNumberFormatter(calculationResult)
         } catch (let error) {
             switch error {
             case CalculatorError.dividedByZero:
@@ -112,8 +113,8 @@ class ViewController: UIViewController {
         }
         
         resetOperatorInput()
-        goToBottomOfScrollView()
         resetTotalInput()
+        goToBottomOfScrollView()
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
@@ -136,19 +137,17 @@ class ViewController: UIViewController {
             return
         }
         
-        applyNumberFormatter(number: convertedNumberInput)
-        
         guard convertedNumberInput != 0 else {
             return
         }
         
         numberInput.text = String(-convertedNumberInput)
         
-        guard let calculationResult = convertNumberInput() else {
+        guard let newConvertedNumberInput = convertNumberInput() else {
             return
         }
         
-        applyNumberFormatter(number: calculationResult)
+        applyNumberFormatter(newConvertedNumberInput)
     }
     
     func resetNumberInput() {
@@ -197,7 +196,7 @@ class ViewController: UIViewController {
         return trimmedInput
     }
     
-    func applyNumberFormatter(number: Double) {
+    func applyNumberFormatter(_ number : Double) {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumIntegerDigits = 1
@@ -213,18 +212,11 @@ class ViewController: UIViewController {
     }
     
     func addCalculatorItems() {
-        guard let result = convertNumberInput() else {
+        guard let convertedNumberInput = convertNumberInput() else {
             return
         }
-        applyNumberFormatter(number: result)
         
-        let label = UILabel()
-        label.isHidden = true
-        label.text = numberInput.text
-        label.numberOfLines = 0
-        label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.adjustsFontForContentSizeCategory = true
+        applyNumberFormatter(convertedNumberInput)
         
         guard let `operator` = operatorInput.text else {
             return
@@ -234,12 +226,16 @@ class ViewController: UIViewController {
             return
         }
         
+        let label = UILabel()
+        label.isHidden = true
         label.text = `operator` + " " + number
-        
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
         let newInput = UIStackView(arrangedSubviews: [label])
         
         lastInput.addArrangedSubview(newInput)
-        
         UIView.animate(withDuration: 0.0000001) {
             label.isHidden = false
         }
@@ -248,10 +244,9 @@ class ViewController: UIViewController {
             return
         }
         
-        let whitespacesRemovedInput = labelText.replacingOccurrences(of: " ", with: "")
-        let commaRemovedInput = whitespacesRemovedInput.replacingOccurrences(of: ",", with: "")
-        
-        totalInput += commaRemovedInput
+        let firstTrimmedInput = labelText.replacingOccurrences(of: " ", with: "")
+        let secondTrimmedInput = firstTrimmedInput.replacingOccurrences(of: ",", with: "")
+        totalInput += secondTrimmedInput
     }
     
     func goToBottomOfScrollView() {
