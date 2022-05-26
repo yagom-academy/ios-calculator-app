@@ -106,11 +106,10 @@ class ViewController: UIViewController {
         
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
-        
         addCalculatingLabelStack(to: calculatingStackView, operatorText: operatorLabelText, operandText: operandLabelText)
         
-        let inputString = operatorLabelText + " " + operandLabelText
-        formula? += ExpressionParser.parse(from: inputString)
+        let parsingString = operatorLabelText + " " + operandLabelText
+        formula? += ExpressionParser.parse(from: parsingString)
     }
 
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
@@ -121,14 +120,14 @@ class ViewController: UIViewController {
         
         addCalculatingLabelStack(to: calculatingStackView, operatorText: operatorLabelText, operandText: operandLabelText)
         
-        let inputString = operatorLabelText + " " + operandLabelText
-        formula? += ExpressionParser.parse(from: inputString)
+        let parsingString = operatorLabelText + " " + operandLabelText
+        formula? += ExpressionParser.parse(from: parsingString)
+        
         
         switch formula?.result() {
         case .success(let data):
             operatorLabel.text = ""
-            operandLabel.text = String(data)
-            
+            operandLabel.text = data.removeTrailingZero()
         case .failure(let error):
             if error as? FormulaError == FormulaError.notANumber {
                 operatorLabel.text = ""
@@ -136,7 +135,6 @@ class ViewController: UIViewController {
             } else {
                 print("Error occurred: ☢️\(error)☢️")
             }
-
         case .none:
             break
         }
