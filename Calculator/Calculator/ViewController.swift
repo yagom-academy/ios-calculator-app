@@ -20,7 +20,10 @@ class ViewController: UIViewController {
     }
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        
+        guard currendOperand.text != "0" else {
+            return
+        }
+        currendOperand?.text = currendOperand?.text ?? "" + (sender.currentTitle ?? "")
     }
     
     @IBAction func pressOperatorButton(_ sender: UIButton) {
