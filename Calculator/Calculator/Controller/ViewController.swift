@@ -130,4 +130,17 @@ private extension ViewController {
                                                height: scrollView.bounds.size.height),
                                         animated: true)
     }
+    
+    func generateTextData(from stackView: UIStackView, start: Int) -> String {
+        var textData: String = ""
+        for subStackView in stackView.arrangedSubviews[start...] {
+            subStackView.subviews.forEach {
+                if let label = $0 as? UILabel {
+                    textData += " " + (label.text ?? "")
+                    textData = textData.removeEntire(character: ",")
+                }
+            }
+        }
+        return textData
+    }
 }
