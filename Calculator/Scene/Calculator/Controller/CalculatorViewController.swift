@@ -10,24 +10,29 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet var currentValue: [UILabel]!
     
-    @IBOutlet var inputedValue: [UILabel]!
+    var inputedStack: [UIStackView]!
     
-    @IBOutlet weak var expressionOpers: UIScrollView!
+    @IBOutlet weak var expressionView: UIStackView!
     
+    var NumberOfFormula = 1
+    
+    var totalFormula: String = ""
+    
+    @IBOutlet var defaultStackView: [UIStackView]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         currentValue[0].text = ""
         currentValue[1].text = "0"
-        inputedValue.forEach { value in
-            value.text = ""
+        inputedStack = []
+        defaultStackView.forEach { view in
+            view.removeFromSuperview()
         }
     }
     
     @IBAction func tappedNumbers(_ sender: UIButton) {
-        // 숫자 텍스트 += 해주기
-        // currentValue가 0일 때 , 0또는00을 누를 경우 무반응 다른거 누를경우 0지움
         guard let number = sender.currentTitle,
-        var value = currentValue[1].text else {
+              var value = currentValue[1].text else {
             return
         }
         
@@ -59,10 +64,14 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedOperators(_ sender: UIButton) {
-        // 뒤에 숫자 0 지워주기
-        // 초기 연산자 비워두고 연산자가 다르면 현재 수량 연산자 넣어주기
-        // 연산자가 같으면 액션 없을 무
         guard var value = currentValue[1].text else { return }
+        guard value != "0" else {
+            if NumberOfFormula == 1 {
+                return
+            }
+            currentValue[0].text = sender.currentTitle
+            return
+        }
         var isDot: Bool {
             if value.contains(".") {
                 return true
@@ -70,6 +79,7 @@ class CalculatorViewController: UIViewController {
                 return false
             }
         }
+        
         if isDot {
             while value.last == "0" {
                 value.removeLast()
@@ -79,50 +89,100 @@ class CalculatorViewController: UIViewController {
             }
             currentValue[1].text = value
         }
-        inputedValue[0].text = currentValue[0].text
-        inputedValue[1].text = currentValue[1].text
+        
+        let operatorLabel = createLabel()
+        operatorLabel.text = currentValue[0].text
+        let operandLabel = createLabel()
+        operandLabel.text = value
+        let stack = createStackView([operatorLabel, operandLabel])
+        expressionView.addArrangedSubview(stack)
+        inputedStack.append(stack)
+        if NumberOfFormula > 1 {
+            totalFormula += " \(currentValue[0].text!) \(currentValue[1].text!)"
+        } else {
+            totalFormula += "\(currentValue[1].text!)"
+        }
         currentValue[0].text = sender.currentTitle
         currentValue[1].text = "0"
+        NumberOfFormula += 1
     }
     
     @IBAction func tappedResult(_ sender: UIButton) {
         // 넣어준 값 다 지워주고 current값에 결과 넣어주기
+        guard NumberOfFormula > 1 else {
+            totalFormula += "\(currentValue[1].text!)"
+            return
+        }
+        totalFormula += " \(currentValue[0].text!) \(currentValue[1].text!)"
+        do {
+            let operatorLabel = createLabel()
+            operatorLabel.text = currentValue[0].text
+            let operandLabel = createLabel()
+            operandLabel.text = currentValue[1].text
+            let stack = createStackView([operatorLabel, operandLabel])
+            expressionView.addArrangedSubview(stack)
+            inputedStack.append(stack)
+            
+            let result = try ExpressionParser.parse(from: totalFormula).result()
+            currentValue[0].text = ""
+            currentValue[1].text = "\(result)"
+            totalFormula = ""
+        } catch DevideError.nilOfValue {
+            currentValue[0].text = ""
+            currentValue[1].text = "NAN"
+        } catch DevideError.insufficientOperator {
+            currentValue[0].text = ""
+            currentValue[1].text = "NAN"
+        } catch {
+            print(Error.self)
+        }
     }
     
     @IBAction func tappedChangeValue(_ sender: UIButton) {
-        // +/-일 경우 int로 변환하여 -를 곱해주고 다시 String으로 변환-> 소수점이 사라질 수 있음 double로 변환 경우 소수점이 생길 수 있음
-        // CE일 경우 현재 레이블의 연산자, 숫자 지우고 이전의 연산자와 숫자 가져오기.
-        // AC일 경우 모두 삭제
         let changeValue = sender.tag
         if changeValue == 0 {
+            inputedStack.forEach { stackView in
+                stackView.removeFromSuperview()
+            }
+            inputedStack = []
             currentValue[0].text = ""
             currentValue[1].text = "0"
-            inputedValue.removeAll()
+            totalFormula = ""
+            NumberOfFormula = 1
         } else if changeValue == 1 {
-                currentValue[1].text = "0"
+            currentValue[1].text = "0"
         } else {
             guard let value = currentValue[1].text else {
                 return
             }
+            
+            guard value != "0" else { return }
+            
             guard value.first == "-" else {
                 currentValue[1].text = "-\(value)"
                 return
             }
+            
             currentValue[1].text = value.filter { $0 != "-" }
         }
     }
     
-    func createLabel(_ input: String) -> UILabel {
+    func createLabel() -> UILabel {
         let label = UILabel()
-        label.text = input
         label.textAlignment = .right
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         return label
     }
     
-    func createStackView(_ UILabel: [UILabel]) {
-
+    func createStackView(_ UILabel: [UILabel]) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        stackView.addArrangedSubview(UILabel[0])
+        stackView.addArrangedSubview(UILabel[1])
+        return stackView
     }
 }
-

@@ -20,7 +20,9 @@ struct Formula {
     }
     
     func result() throws -> Double {
-        guard operands.count == `operators`.count else { throw DevideError.insufficientOperator }
+        print(operands.count)
+        print(`operators`.count)
+        guard operands.count - 1 == `operators`.count else { throw DevideError.insufficientOperator }
         guard let operand = operands.dequeue() else { throw DevideError.nilOfValue }
         var lhs: Double = operand
         while operands.isEmpty == false {
