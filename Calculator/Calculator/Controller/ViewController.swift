@@ -162,14 +162,7 @@ class ViewController: UIViewController {
     }
     
     func clearLastInput() {
-        while lastInput.arrangedSubviews.count > 0 {
-            guard let lastView = lastInput.arrangedSubviews.last else {
-                return
-            }
-
-            lastInput.removeArrangedSubview(lastView)
-            lastView.removeFromSuperview()
-        }
+        lastInput.subviews.forEach { $0.removeFromSuperview() }
     }
     
     func convertNumberInput() -> Double? {
