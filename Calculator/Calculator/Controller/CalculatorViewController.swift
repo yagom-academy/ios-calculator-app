@@ -41,6 +41,16 @@ class CalculatorViewController: UIViewController {
         }
         userNumberTapped = true
     }
+    
+    @IBAction func didTapDot(_ sender: UIButton) {
+        let dot = sender.currentTitle!
+        let textCurrentlyInDisply = operandLabel.text!
+        
+        if textCurrentlyInDisply.contains(Character(dot)) {
+            return
+        } else {
+            operandLabel.text! = textCurrentlyInDisply + dot
+        }
+    }
 }
-
 
