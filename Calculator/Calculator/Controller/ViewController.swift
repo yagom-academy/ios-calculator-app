@@ -48,17 +48,15 @@ class ViewController: UIViewController {
         numberInput.text = text
 
         
-//        guard text.contains(".") == false else {
-//            return
-//        }
-        
-        let trimmedResultLabel = text.replacingOccurrences(of: ",", with: "")
-        
-        guard let trimmedResultLabelToDouble = Double(trimmedResultLabel) else {
+        guard text.contains(".") == false else {
             return
         }
         
-        numberInput.text = String(trimmedResultLabelToDouble)
+        guard let convertedNumberInput = convertNumberInput() else {
+            return
+        }
+        
+        formatCalculatorItems(number: convertedNumberInput)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -97,5 +95,34 @@ class ViewController: UIViewController {
             lastInput.removeArrangedSubview(lastView)
             lastView.removeFromSuperview()
         }
+    }
+    
+    func convertNumberInput() -> Double? {
+        guard let text = numberInput.text else {
+            return nil
+        }
+        
+        let trimmedNumberInput = text.replacingOccurrences(of: ",", with: "")
+        
+        guard let trimmedNumberInputToDouble = Double(trimmedNumberInput) else {
+            return nil
+        }
+        
+        return trimmedNumberInputToDouble
+    }
+    
+    func formatCalculatorItems(number: Double) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumIntegerDigits = 1
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
+        
+        guard let formattedResult = numberFormatter.string(from: number as NSNumber) else {
+            return
+        }
+        
+        numberInput.text = formattedResult
     }
 }
