@@ -29,4 +29,20 @@ class ViewController: UIViewController {
     func updateLable(text: String) {
         inputNumberLabel.text = numbers
     }
+    
+    func checkInputNumbers(text: String) {
+        if numbers.contains(".") && text == "." {
+            return
+        }
+        
+        if (numbers == "" || numbers == "0") && (text == "0" || text == "00") {
+            numbers = "0"
+        } else if numbers == "" && text == "." {
+            numbers = "0."
+        } else if numbers == "0" && text != "."{
+            numbers = text
+        } else {
+            numbers += text
+        }
+    }
 }
