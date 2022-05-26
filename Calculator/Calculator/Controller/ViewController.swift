@@ -16,4 +16,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    @IBAction func touchNumberButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func touchOperatorButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func touchResultButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func touchAllClearButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func touchClearEntryButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func touchSignChangerButton(_ sender: UIButton) {
+    }
+    
 }
