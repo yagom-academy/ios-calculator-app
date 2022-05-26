@@ -18,7 +18,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func setToDefault(_ sender: UIButton) {
