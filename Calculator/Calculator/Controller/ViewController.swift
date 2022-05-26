@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var lastInput: UIStackView!
     
+    private var totalInput: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
