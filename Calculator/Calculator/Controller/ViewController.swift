@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandsTextLabel: UILabel!
     @IBOutlet weak var operatorTextLabel: UILabel!
     
+    //MARK: - addStackView()
     func addStackView() {
         let addedStackView = UIStackView()
         let addedOperatorsLabel = UILabel()
@@ -57,10 +58,11 @@ class ViewController: UIViewController {
         
         largeStackView.addArrangedSubview(addedStackView)
     }
-    
+    //MARK: - deleteStackViewAll()
     func deleteStackViewAll() {
     }
     
+    //MARK: - changeOperandSignButtonTapped
     @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
         if operandsTextLabel.text?.first == "-" {
             operandsTextLabel.text?.removeFirst()
@@ -75,30 +77,36 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - allClearButtonTapped
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         deleteStackViewAll()
         operatorTextLabel.text = ""
         operandsTextLabel.text = "0"
     }
     
+    //MARK: - clearEntryButtonTapped
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         operatorTextLabel.text = ""
         operandsTextLabel.text = "0"
     }
     
+    //MARK: - operandButtonsTapped
     @IBAction func operandButtonsTapped(_ sender: UIButton) {
         eraseZero()
         operandsTextLabel.text! += sender.titleLabel?.text ?? ""
     }
     
+    //MARK: - calculateButtonTapped
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
         addStackView()
     }
     
+    //MARK: - operatorButtonsTapped
     @IBAction func operatorButtonsTapped(_ sender: UIButton) {
         operatorTextLabel.text = sender.titleLabel?.text
     }
     
+    //MARK: - zeroButtonTapped
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
         if operandsTextLabel.text == "0" {
             operandsTextLabel.text = operandsTextLabel.text
@@ -107,6 +115,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - doubleZeroButtonTapped
     @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
         if operandsTextLabel.text?.count == 1,
            operandsTextLabel.text == "0" {
@@ -116,12 +125,14 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - decimalPointButtonTapped
     @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
         if !(operandsTextLabel.text?.count == 0) {
             operandsTextLabel.text! += sender.titleLabel?.text ?? ""
         }
     }
     
+    //MARK: - eraseZero
     func eraseZero() {
         if operandsTextLabel.text == "0" {
             operandsTextLabel.text = ""
