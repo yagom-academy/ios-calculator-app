@@ -104,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				6A888EB428376669007E419C /* SubModel */,
+				6ACDA4012834D7AC0078A8ED /* Asset */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -206,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				6ACDA4022834DB980078A8ED /* Entries */,
-				6ACDA4012834D7AC0078A8ED /* Asset */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
