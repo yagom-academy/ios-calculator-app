@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         operatorTextLabel.text = ""
@@ -127,7 +127,9 @@ class ViewController: UIViewController {
     
     //MARK: - decimalPointButtonTapped
     @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
-        if !(operandsTextLabel.text?.count == 0) {
+        if operandsTextLabel.text?.contains(sender.titleLabel?.text ?? "") == true {
+            operandsTextLabel.text = operandsTextLabel.text
+        } else if operandsTextLabel.text?.count != 0 {
             operandsTextLabel.text! += sender.titleLabel?.text ?? ""
         }
     }
