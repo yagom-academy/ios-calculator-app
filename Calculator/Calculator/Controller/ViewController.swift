@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private var formula: Formula?
     private let numberFormatter = NumberFormatter()
     private let zero = "0"
+    private var calculateStackCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
