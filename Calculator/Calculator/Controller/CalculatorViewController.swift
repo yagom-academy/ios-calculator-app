@@ -54,6 +54,12 @@ class CalculatorViewController: UIViewController {
         addFormulaLable(content: String(`operator`) + " " + number)
     }
     
+    private func deleteFormulaLable() {
+        stackView.arrangedSubviews.forEach {
+            stackView.removeArrangedSubview($0)
+        }
+    }
+    
     @IBAction private func numberPadTapped(_ sender: UIButton) {
         if let lastInput = currentFormula.last, Operator(rawValue: lastInput) != nil {
             numberLable.text = "0"
@@ -93,11 +99,14 @@ class CalculatorViewController: UIViewController {
             let calculatedResult = try formula.result()
             printFormula()
             numberLable.text = convertToDecimal(calculatedResult)
+            currentFormula = convertToDecimal(calculatedResult).filter { $0 != ","}
         } catch {
             switch error {
             case CalculatorError.dividedByZero:
                 numberLable.text = "NaN"
+                currentFormula = ""
             case CalculatorError.wrongFormula:
+                currentFormula = ""
                 return
             default:
                 return
@@ -105,10 +114,10 @@ class CalculatorViewController: UIViewController {
         }
         
         operatorLable.text = ""
-        currentFormula = ""
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {
+        deleteFormulaLable()
         numberLable.text = "0"
         operatorLable.text = ""
         currentFormula = ""
