@@ -36,13 +36,9 @@ extension ViewController {
     }
     
     @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
-        let stackViewElement = generateStackView()
         
         if screenLabel?.text != zero {
-            historyStackView?.addArrangedSubview(stackViewElement)
-            UIView.animate(withDuration: 0.2) {
-                stackViewElement.isHidden = false
-            }
+            add(generateStackView(), to: historyStackView)
         }
         currentOperatorLabel?.text = sender.currentTitle
         screenLabel?.text = zero
@@ -50,17 +46,10 @@ extension ViewController {
     }
     
     @IBAction func equalButtonDidTapped(_ sender: UIButton) {
-        let stackViewElement = generateStackView()
         
-        historyStackView?.addArrangedSubview(stackViewElement)
-        UIView.animate(withDuration: 0.2) {
-            stackViewElement.isHidden = false
         }
-        var dummytext: String = ""
+        add(generateStackView(), to: historyStackView)
         currentOperatorLabel?.text = ""
-        historyStackView?.arrangedSubviews.forEach { $0.subviews.forEach {
-            if let label = $0 as? UILabel { dummytext += " " + label.text! }}}
-        formula = ExpressionParser.parse(from: dummytext)
         do {
             let result = try formula?.result()
             screenLabel?.text = numberFormatter.string(for: result)
@@ -93,6 +82,11 @@ private extension ViewController {
     
     func removeAllInStackView(stack: UIStackView) {
         stack.arrangedSubviews.forEach { stack.removeArrangedSubview($0) ; $0.isHidden = true}
+    func add(_ subStack: UIStackView, to parentStack: UIStackView?) {
+        parentStack?.addArrangedSubview(subStack)
+        UIView.animate(withDuration: 0.2) {
+            subStack.isHidden = false
+        }
     }
     
     func generateStackView() -> UIStackView {
