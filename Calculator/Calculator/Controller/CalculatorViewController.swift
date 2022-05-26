@@ -6,6 +6,8 @@ class CalculatorViewController: UIViewController {
     
     private var currentFormula = ""
     private var currentNumber: Double = 0
+    private var digit: Double = 0
+    private var decimal = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +35,20 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberPadTapped(_ sender: UIButton) {
+        let multiplier: Double
+        
+        decimal ? (multiplier = 1) : (multiplier = 10)
+        
         if sender.tag != 10 {
-            currentNumber = currentNumber * 10 + Double(sender.tag)
+            currentNumber = currentNumber * multiplier + pow(0.1, digit) * Double(sender.tag)
         } else {
             currentNumber = currentNumber * 100
         }
        
+        if decimal {
+            digit += 1
+        }
+        
         numberLable.text = convertToDecimal(currentNumber)
         currentFormula += sender.titleLabel?.text ?? ""
     }
@@ -60,6 +70,8 @@ class CalculatorViewController: UIViewController {
         operatorLable.text = sender.titleLabel?.text
         currentFormula += sender.titleLabel?.text ?? ""
         currentNumber = 0
+        digit = 0
+        decimal = false
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
@@ -81,6 +93,8 @@ class CalculatorViewController: UIViewController {
         operatorLable.text = ""
         currentNumber = 0
         currentFormula = ""
+        digit = 0
+        decimal = false
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {
@@ -88,6 +102,8 @@ class CalculatorViewController: UIViewController {
         operatorLable.text = ""
         currentFormula = ""
         currentNumber = 0
+        digit = 0
+        decimal = false
     }
     
     @IBAction private func CEButtonTapped(_ sender: UIButton) {
@@ -109,9 +125,13 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
-        currentNumber /= 10
-        numberLable.text = convertToDecimal(currentNumber)
+    @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
+        if !decimal {
+            numberLable.text = convertToDecimal(currentNumber) + "."
+            currentFormula += "."
+            digit += 1
+            decimal = true
+        }
     }
 }
 
