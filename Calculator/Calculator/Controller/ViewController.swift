@@ -48,16 +48,25 @@ extension ViewController {
     
     @IBAction func equalButtonDidTapped(_ sender: UIButton) {
         
+        if currentOperatorLabel?.text == "" {
+            return
         }
         add(generateStackView(), to: historyStackView)
         currentOperatorLabel?.text = ""
+        
+        guard let historyStackView = historyStackView else { return }
+        formula = ExpressionParser.parse(from: generateTextData(from: historyStackView, start: calculateStackCount))
+        
+        guard let existFormula = formula else { return }
+        calculateStackCount += existFormula.operands.count
+        
         do {
             let result = try formula?.result()
             screenLabel?.text = numberFormatter.string(for: result)
         } catch {
-            if let error = error as? FormulaError {
+            if ((error as? FormulaError) != nil) {
                 print("입력값을 추가하세요.")
-            } else if let error = error as? OperatorError {
+            } else if ((error as? OperatorError) != nil) {
                 screenLabel?.text = "NaN"
             }
         }
