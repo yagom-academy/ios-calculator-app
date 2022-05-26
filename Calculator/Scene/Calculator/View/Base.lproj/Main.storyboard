@@ -24,10 +24,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-Ld-ZGi">
-                                                <rect key="frame" x="283" y="0.0" width="99" height="20.5"/>
+                                                <rect key="frame" x="267" y="0.0" width="115" height="20.5"/>
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alw-Zd-2pT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGo-LN-bKL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="99" height="20.5"/>
+                                                        <rect key="frame" x="16" y="0.0" width="99" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -37,7 +43,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-iL-eIa">
                                                 <rect key="frame" x="267" y="24.5" width="115" height="20.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alw-Zd-2pT">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ou-tB-bBC">
                                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -79,22 +85,31 @@
                                                 <state key="normal" title="AC">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedChangeValue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jeb-dC-6HW"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="CE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedChangeValue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="maS-LV-9Ax"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <state key="normal" title="⁺⁄₋">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedChangeValue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DTY-fJ-5IR"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -103,6 +118,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperators:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4kp-6K-auv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -149,6 +167,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperators:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M1Y-VS-4Gg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -195,6 +216,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperators:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X6f-lg-F74"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -241,6 +265,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedOperators:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QcU-lH-krM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -334,8 +361,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outletCollection property="currentValue" destination="Lwz-OF-XHD" collectionClass="NSMutableArray" id="xiJ-PB-sUl"/>
-                        <outletCollection property="currentValue" destination="HPC-iy-qdm" collectionClass="NSMutableArray" id="mdl-EK-eoA"/>
+                        <outlet property="expressionOpers" destination="BOT-7g-vxv" id="J16-kM-24F"/>
+                        <outletCollection property="currentValue" destination="HPC-iy-qdm" collectionClass="NSMutableArray" id="iX2-H8-CH4"/>
+                        <outletCollection property="currentValue" destination="Lwz-OF-XHD" collectionClass="NSMutableArray" id="QMQ-TG-htQ"/>
+                        <outletCollection property="inputedValue" destination="alw-Zd-2pT" collectionClass="NSMutableArray" id="Q0e-Um-ygE"/>
+                        <outletCollection property="inputedValue" destination="oGo-LN-bKL" collectionClass="NSMutableArray" id="uxQ-fT-RCy"/>
+                        <outletCollection property="inputedValue" destination="0ou-tB-bBC" collectionClass="NSMutableArray" id="Cu5-yT-q1Q"/>
+                        <outletCollection property="inputedValue" destination="Hcb-r0-27f" collectionClass="NSMutableArray" id="vP9-pf-DVJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
