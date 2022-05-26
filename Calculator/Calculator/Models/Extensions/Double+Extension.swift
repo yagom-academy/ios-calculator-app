@@ -1,5 +1,11 @@
+import Foundation
+
 extension Double: CalculateItem {
     func removeTrailingZero() -> String {
-        return String(format: "%.20g", self)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: self)) ?? ""
     }
 }
