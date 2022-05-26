@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     private var isOperandInputed = false
     private var isCalculateCompleted = false
-    private var inputedFomula = ""
+    private var inputedFomula = "0"
     
     @IBOutlet private weak var fomulaScrollView: UIScrollView!
     @IBOutlet private weak var fomulaStackView: UIStackView!
@@ -54,18 +54,18 @@ class ViewController: UIViewController {
             return
         }
         
+        operatorLabel.text = sender.currentTitle
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         
         if fomulaStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
-            addFomula(isFirstInput: true)
+            addFomula()
         } else {
             createStackView(operatorOfSignLabel, operandOfSignLabel)
-            addFomula(isFirstInput: false)
+            addFomula()
         }
         
-        operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isOperandInputed = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
@@ -98,11 +98,11 @@ class ViewController: UIViewController {
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         createStackView(operatorOfSignLabel, operandOfSignLabel)
-        addFomula(isFirstInput: false)
+        addFomula()
         operandLabel.text = calculate(inputedFomula)
         
         operatorLabel.text = ""
-        inputedFomula = ""
+        inputedFomula = "0"
         isOperandInputed = false
         isCalculateCompleted = true
     }
@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = "0"
         operatorLabel.text = ""
-        inputedFomula = ""
+        inputedFomula = "0"
         isOperandInputed = false
         isCalculateCompleted = false
     }
@@ -160,12 +160,8 @@ class ViewController: UIViewController {
         return text
     }
     
-    private func addFomula(isFirstInput: Bool) {
-        guard isFirstInput else {
-            inputedFomula += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
-            return
-        }
-        inputedFomula += getText(operandLabel.text)
+    private func addFomula() {
+        inputedFomula += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
     }
     
     private func downScroll() {
