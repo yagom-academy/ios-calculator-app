@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
+        removeAllIn(stack: historyStackView!)
     }
 }
 
@@ -80,8 +81,10 @@ extension ViewController {
 
 private extension ViewController {
     
-    func removeAllInStackView(stack: UIStackView) {
-        stack.arrangedSubviews.forEach { stack.removeArrangedSubview($0) ; $0.isHidden = true}
+    func removeAllIn(stack: UIStackView) {
+        stack.arrangedSubviews.forEach { stack.removeArrangedSubview($0) ; $0.isHidden = true }
+    }
+    
     func add(_ subStack: UIStackView, to parentStack: UIStackView?) {
         parentStack?.addArrangedSubview(subStack)
         UIView.animate(withDuration: 0.2) {
