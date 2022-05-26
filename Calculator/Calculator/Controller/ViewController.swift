@@ -18,8 +18,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         resetNumberInput()
         resetOperatorInput()
-        
+        resetTotalInput()
     }
+    
     @IBAction func touchNumberButton(_ sender: UIButton) {
     }
     
@@ -44,5 +45,9 @@ class ViewController: UIViewController {
     
     func resetOperatorInput() {
         operatorInput.text = ""
+    }
+    
+    func resetTotalInput() {
+        totalInput = ""
     }
 }
