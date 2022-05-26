@@ -22,7 +22,7 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_EmptyWhenQueueDoesNotHaveElement() {
+    func test_emptyWhenQueueDoesNotHaveElement() {
         // given
         // (큐에 요소 "1","2","3"이 있을때)
         
@@ -33,7 +33,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_CountReturnsTotalNumberOfElement() {
+    func test_countReturnsTotalNumberOfElement() {
         // given
         // (큐에 요소 "1","2","3"이 있을때)
         
@@ -44,7 +44,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(count, 3)
     }
     
-    func test_FrontReturnsFirstElement() {
+    func test_frontReturnsFirstElement() {
         // given
         // (큐에 요소 "1","2","3"이 있을때)
         
@@ -55,7 +55,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, "1")
     }
     
-    func test_RearReturnsLastElement() {
+    func test_rearReturnsLastElement() {
         // given
         // (큐에 요소 "1","2","3"이 있을때)
         
@@ -66,7 +66,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, "3")
     }
     
-    func test_ClearRemovesAllElementsInQueue() {
+    func test_clearRemovesAllElementsInQueue() {
         // given
         // (큐에 요소 "1","2","3"이 있을때)
         

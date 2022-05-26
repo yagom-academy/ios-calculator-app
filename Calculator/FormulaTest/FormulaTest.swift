@@ -18,7 +18,7 @@ class FormulaTest: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_ResultReturnsEqualWhenItHasProperEquation() throws {
+    func test_resultReturnsEqualWhenItHasProperEquation() throws {
         // given
         let equation = "1000+200-300*4/5"
         // when
@@ -27,7 +27,7 @@ class FormulaTest: XCTestCase {
         XCTAssertEqual(try equationTest.result(), 720.0)
     }
     
-    func test_ResultThrowsErrorWhenItHasNotProperEquation() throws {
+    func test_resultThrowsErrorWhenItHasNotProperEquation() throws {
         // given
         let equation = "1000+200-300*4/5+"
         // when
@@ -36,7 +36,7 @@ class FormulaTest: XCTestCase {
         XCTAssertThrowsError(try equationTest.result())
     }
     
-    func test_ResultThrowsErrorWhenItHasDivideByZeroEquation() throws {
+    func test_resultThrowsErrorWhenItHasDivideByZeroEquation() throws {
         // given
         let equation = "1000+200-300*4/0+"
         // when
