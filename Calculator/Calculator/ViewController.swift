@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewContents: UIStackView!
     @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
         operationQueue += "\(currentOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
         //create Scrollview Content
         clearCurrentOperand()
+        scrolling()
     }
     
     @IBAction func pressAllClearButton(_ sender: UIButton) {
@@ -79,6 +81,7 @@ class ViewController: UIViewController {
         }
         clearCurrentOperator()
         operationQueue = ""
+        scrolling()
     }
     
     //MARK: - ViewController Method
@@ -113,5 +116,9 @@ extension ViewController {
     private func addScrollViewContent() {
         let currentContent = createScrollViewContent(currentOperator.text ?? "", currentOperand.text ?? "")
         scrollViewContents.addArrangedSubview(currentContent)
+    }
+    private func scrolling() {
+        scrollView.setContentOffset(CGPoint(x: 0,
+                                            y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
 }

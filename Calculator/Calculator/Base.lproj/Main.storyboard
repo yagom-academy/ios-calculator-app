@@ -366,6 +366,7 @@
                     <connections>
                         <outlet property="currentOperand" destination="Lwz-OF-XHD" id="Coc-4P-04U"/>
                         <outlet property="currentOperator" destination="HPC-iy-qdm" id="CMv-ea-iWO"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="I4F-WI-IPQ"/>
                         <outlet property="scrollViewContents" destination="XRe-QE-UJf" id="NJI-Ha-PCe"/>
                     </connections>
                 </viewController>
