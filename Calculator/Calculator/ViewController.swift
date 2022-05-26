@@ -30,7 +30,7 @@ class ViewController: UIViewController {
            sender.currentTitle == "." {
             return
         }
-        currentOperand?.text = (currentOperand?.text ?? "") + (sender.currentTitle ?? "")
+        currentOperand?.text = stringToDecimal((currentOperand?.text ?? "") + (sender.currentTitle ?? ""))
     }
     
     @IBAction func pressOperatorButton(_ sender: UIButton) {
@@ -67,13 +67,14 @@ class ViewController: UIViewController {
     }
     @IBAction func pressEqualButton(_ sender: UIButton) {
         addScrollViewContent()
-        operationQueue += currentOperand.text ?? "0"
-        print("EQUAL BUTTON, CURRENT OPERATIONQUEUE : \(operationQueue)")
+        operationQueue += currentOperand.text ?? ZERO
+        operationQueue = operationQueue.filter {
+            $0 != ","
+        }
         var formula = ExpressionParser.parse(from: operationQueue)
         do {
             let operationResult = try formula.result()
-            print("OperationResult : \(operationResult)")
-            currentOperand.text = String(operationResult)
+            currentOperand.text = stringToDecimal(String(operationResult))
         } catch CalculatorError.divideByZero {
             currentOperand.text = "NaN"
         } catch {
@@ -120,5 +121,14 @@ extension ViewController {
     private func scrolling() {
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+    }
+    private func stringToDecimal(_ input: String?) -> String {
+        let filteredInput = input?.filter {
+            $0 != ","
+        }
+        let numberFormmater = NumberFormatter()
+        numberFormmater.numberStyle = .decimal
+        numberFormmater.maximumSignificantDigits = 20
+        return numberFormmater.string(for: Double(filteredInput ?? "")) ?? ""
     }
 }
