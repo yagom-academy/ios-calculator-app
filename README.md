@@ -109,11 +109,7 @@
 
 ----< **간단한 사칙연산** >--------------<**긴 사칙연산**>-------------<**쉼표와 소수점 처리**>  
 
-<img src="https://i.imgur.com/hug9Vkw.gif" width="200" height="400"/>
-<img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/>
-<img src="https://i.imgur.com/tbweDEl.gif" width="200" height="400"/>
-<img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/>
-<img src="https://i.imgur.com/7gkHoq4.gif" width="200" height="400"/>  
+<img src="https://i.imgur.com/hug9Vkw.gif" width="200" height="400"/><img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/><img src="https://i.imgur.com/tbweDEl.gif" width="200" height="400"/><img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/><img src="https://i.imgur.com/7gkHoq4.gif" width="200" height="400"/>  
   
     
     
