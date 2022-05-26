@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     var formula: Formula?
-    var calculatingStackView: UIStackView {
+    var mainStackInScrollView: UIStackView {
         calculatingScrollView.subviews.compactMap { $0 as? UIStackView }[0]
     }
     
@@ -27,10 +27,10 @@ class ViewController: UIViewController {
         formula = Formula()
         operatorLabel.text = ""
         operandLabel.text = "0"
-        calculatingStackView.subviews.forEach { $0.removeFromSuperview() }
+        mainStackInScrollView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func makeStackView(of operatorText: String, operandText: String) -> UIStackView {
+    func makeNewCalculateLabelStackView(of operatorText: String, operandText: String) -> UIStackView {
         let operatorLabel: UILabel = {
             let ol = UILabel()
             ol.text = operatorText
@@ -61,9 +61,14 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    func addCalculatingLabelStack(to stackView: UIStackView, operatorText: String, operandText: String) {
-        let newStackView = makeStackView(of: operatorText, operandText: operandText)
+    func addCalculateLabelStackView(to stackView: UIStackView, operatorText: String, operandText: String) {
+        let newStackView = makeNewCalculateLabelStackView(of: operatorText, operandText: operandText)
         stackView.addArrangedSubview(newStackView)
+    }
+    
+    func scrollToBottom(of scrollView: UIScrollView) {
+        let scrollViewBottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
+        scrollView.setContentOffset(scrollViewBottomOffset, animated: true)
     }
     
     @IBAction func operandButtonTapped(_ sender: UIButton) {
@@ -99,14 +104,15 @@ class ViewController: UIViewController {
               let operandLabelText = operandLabel.text else { return }
         
         if operandLabel.text == "0" {
-            guard calculatingStackView.subviews.count != 0 else { return }
+            guard mainStackInScrollView.subviews.count != 0 else { return }
             operatorLabel.text = tappedOperatorText
             return
         }
         
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
-        addCalculatingLabelStack(to: calculatingStackView, operatorText: operatorLabelText, operandText: operandLabelText)
+        addCalculateLabelStackView(to: mainStackInScrollView, operatorText: operatorLabelText, operandText: operandLabelText)
+        scrollToBottom(of: calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
         formula? += ExpressionParser.parse(from: parsingString)
@@ -118,7 +124,8 @@ class ViewController: UIViewController {
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
-        addCalculatingLabelStack(to: calculatingStackView, operatorText: operatorLabelText, operandText: operandLabelText)
+        addCalculateLabelStackView(to: mainStackInScrollView, operatorText: operatorLabelText, operandText: operandLabelText)
+        scrollToBottom(of: calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
         formula? += ExpressionParser.parse(from: parsingString)
