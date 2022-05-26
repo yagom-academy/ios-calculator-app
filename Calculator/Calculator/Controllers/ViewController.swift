@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
+    var inputString: String = ""
+    var formula: Formula = Formula()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,6 +23,9 @@ class ViewController: UIViewController {
     // 숫자 버튼이 눌리면?
     // 1. 연산자 버튼이 눌리기 전까지 쌓아놔야 함.
     @IBAction func operandButtonTapped(_ sender: UIButton) {
+        // 눌린 버튼의 글자를 inputString에 추가하기
+        guard let tappedNumberString = sender.titleLabel?.text else { return }
+        inputString.append(tappedNumberString)
     }
     
     
@@ -29,12 +35,19 @@ class ViewController: UIViewController {
     // 2-2. 숫자가 없으면 parse를 실행하지 말아야 함.
     // 3. 스크롤뷰에 스택으로 쌓아야 함.
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let tappedOperatorString = sender.titleLabel?.text else { return }
+        inputString.append(tappedOperatorString)
+        formula += ExpressionParser.parse(from: inputString)
+        inputString = ""
     }
     
     // 계산 버튼이 눌리면?
-    // 1. 큐에 있는 값들을 result() 결과를 돌려줘야 함.
-    // 2. 숫자 레이블 업데이트
+    // 1. 마지막으로 받은 숫자 하나를 큐에 넣어야 함.
+    // 2. 큐에 있는 값들을 result() 결과를 돌려줘야 함.
+    // 3. 숫자 레이블 업데이트
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        formula += ExpressionParser.parse(from: inputString)
+        inputString = ""
     }
     
     // 부호 버튼이 눌리면?

@@ -22,3 +22,10 @@ struct Formula {
         return .success(addedLhs)
     }
 }
+
+extension Formula {
+    static func += (lhs: inout Formula, rhs: Formula) {
+        rhs.operands.forEach { lhs.operands.push(element: $0) }
+        rhs.operators.forEach { lhs.operators.push(element: $0) }
+    }
+}
