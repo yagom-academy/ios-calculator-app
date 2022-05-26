@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    //MARK: - Button Action
     @IBAction private func setToDefault(_ sender: UIButton) {
         resetCalculateOption()
     }
@@ -44,6 +45,19 @@ class ViewController: UIViewController {
         operandLabel.text = checkTheSign(getText(operandLabel.text))
     }
     
+    @IBAction private func appendOperand(_ sender: UIButton) {
+        guard !isCalculateCompleted else {
+            return
+        }
+        
+        if !isOperandInputted {
+            operandLabel.text = getText(sender.currentTitle)
+        } else {
+            operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
+        }
+        isOperandInputted = true
+    }
+    
     @IBAction private func appendOperator(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
@@ -59,35 +73,21 @@ class ViewController: UIViewController {
         }
         
         let operatorOfSignLabel = createLabel(text: getText(sender.currentTitle))
-        let operandOfSignLabel = createLabel(text: checkType(getText(operandLabel.text)))
+        let operandOfSignLabel = createLabel(text: changeFormat(getText(operandLabel.text)))
         operatorLabel.text = sender.currentTitle
         
         if fomulaStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
-            addFomula()
         } else {
             createStackView(operatorOfSignLabel, operandOfSignLabel)
-            addFomula()
         }
         
+        addInputtedFomula()
         operandLabel.text = "0"
         isOperandInputted = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
             self.downScroll()
         }
-    }
-    
-    @IBAction private func appendOperand(_ sender: UIButton) {
-        guard !isCalculateCompleted else {
-            return
-        }
-        
-        if !isOperandInputted {
-            operandLabel.text = getText(sender.currentTitle)
-        } else {
-            operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
-        }
-        isOperandInputted = true
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         createStackView(operatorOfSignLabel, operandOfSignLabel)
-        addFomula()
+        addInputtedFomula()
         operandLabel.text = calculate(inputtedFomula)
         operatorLabel.text = ""
         inputtedFomula = ""
@@ -109,6 +109,7 @@ class ViewController: UIViewController {
         isCalculateCompleted = true
     }
     
+    //MARK: - Internal Logic
     private func resetCalculateOption() {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = "0"
@@ -158,7 +159,7 @@ class ViewController: UIViewController {
         return text
     }
     
-    private func addFomula() {
+    private func addInputtedFomula() {
         if inputtedFomula.isEmpty {
             inputtedFomula = "\(getText(operandLabel.text))"
         } else {
@@ -181,7 +182,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private func checkType(_ input: String) -> String {
+    private func changeFormat(_ input: String) -> String {
         return (Double(input) ?? 0).parse()
     }
 }
