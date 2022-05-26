@@ -127,9 +127,8 @@ class ViewController: UIViewController {
     @IBAction private func touchClearEntryButton(_ sender: UIButton) {
         resetNumberInput()
         
-        if totalInput == "" {
-            clearLastInput()
-        }
+        totalInput == "" ? clearLastInput() : ()
+        
     }
     
     @IBAction private func touchSignChangerButton(_ sender: UIButton) {
