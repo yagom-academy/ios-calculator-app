@@ -11,14 +11,14 @@ class ViewController: UIViewController {
     private var isCalculateCompleted = false
     private var inputedFomula = ""
     
-    @IBOutlet private weak var mathematicalExpressionScrollView: UIScrollView!
-    @IBOutlet private weak var mathematicalExpressionStackView: UIStackView!
+    @IBOutlet private weak var fomulaScrollView: UIScrollView!
+    @IBOutlet private weak var fomulaStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
+        fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func setToDefault(_ sender: UIButton) {
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operandLabel.text = String(-Int(operand))
+        operandLabel.text = checkTheSign(getText(operandLabel.text))
     }
     
     @IBAction private func appendOperator(_ sender: UIButton) {
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         
-        if mathematicalExpressionStackView.subviews.isEmpty {
+        if fomulaStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
             addFomula(isFirstInput: true)
         } else {
@@ -80,10 +80,10 @@ class ViewController: UIViewController {
         
         if !isOperandInputed {
             operandLabel.text = getText(sender.currentTitle)
-            isOperandinputed = true
+            isOperandInputed = true
         } else {
             operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
-            isOperandinputed = true
+            isOperandInputed = true
         }
     }
     
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         guard isOperandInputed else {
             return
         }
-        guard !mathematicalExpressionStackView.subviews.isEmpty else {
+        guard !fomulaStackView.subviews.isEmpty else {
             return
         }
         
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
     }
     
     private func resetCalculateOption() {
-        mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
+        fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = "0"
         operatorLabel.text = ""
         inputedFomula = ""
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
             stackView.addArrangedSubview(label)
         }
         
-        mathematicalExpressionStackView.addArrangedSubview(stackView)
+        fomulaStackView.addArrangedSubview(stackView)
     }
     
     private func calculate(_ input: String) -> String? {
@@ -169,6 +169,17 @@ class ViewController: UIViewController {
     }
     
     private func downScroll() {
-        mathematicalExpressionScrollView.setContentOffset(CGPoint(x: 0, y: mathematicalExpressionScrollView.contentSize.height - mathematicalExpressionScrollView.bounds.height), animated: false)
+        fomulaScrollView.setContentOffset(CGPoint(x: 0, y: fomulaScrollView.contentSize.height - fomulaScrollView.bounds.height), animated: false)
+    }
+    
+    private func checkTheSign(_ input: String) -> String {
+        var result = ""
+        if input.contains("-") {
+            result = input.filter{ $0 != "-" }
+            return result
+        } else {
+            result = "-" + input
+            return result
+        }
     }
 }

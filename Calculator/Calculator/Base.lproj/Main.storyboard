@@ -341,8 +341,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mathematicalExpressionScrollView" destination="BOT-7g-vxv" id="fSc-c2-3hq"/>
-                        <outlet property="mathematicalExpressionStackView" destination="XRe-QE-UJf" id="Cvj-Se-CYh"/>
+                        <outlet property="fomulaScrollView" destination="BOT-7g-vxv" id="ZQN-Sg-XbZ"/>
+                        <outlet property="fomulaStackView" destination="XRe-QE-UJf" id="cVe-ud-MKf"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="wgU-CW-HFi"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="6QP-Br-9wi"/>
                     </connections>
