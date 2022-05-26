@@ -53,10 +53,14 @@ class ViewController: UIViewController {
             operatorLabel.text = sender.currentTitle
             return
         }
+        guard Double(getText(operandLabel.text)) != nil else {
+            operandLabel.text = "NaN"
+            return
+        }
         
         operatorLabel.text = sender.currentTitle
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
-        let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
+        let operandOfSignLabel = createLabel(text: checkType(getText(operandLabel.text)))
         
         if fomulaStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
@@ -181,5 +185,9 @@ class ViewController: UIViewController {
             result = "-" + input
             return result
         }
+    }
+    
+    private func checkType(_ input: String) -> String {
+       return (Double(input) ?? 0).parse()
     }
 }
