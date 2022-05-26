@@ -45,6 +45,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pressAllClearButton(_ sender: UIButton) {
+        operationQueue = ""
         clearScrollviewContent()
         clearCurrentOperand()
         clearCurrentOperator()
@@ -62,6 +63,23 @@ class ViewController: UIViewController {
             currendOperand.text = "-" + (currendOperand.text ?? "")
         }
     }
+    @IBAction func pressEqualButton(_ sender: UIButton) {
+        operationQueue += currendOperand.text ?? "0"
+        print("EQUAL BUTTON, CURRENT OPERATIONQUEUE : \(operationQueue)")
+        var formula = ExpressionParser.parse(from: operationQueue)
+        do {
+            let operationResult = try formula.result()
+            print("OperationResult : \(operationResult)")
+            currendOperand.text = String(operationResult)
+            operationQueue = ""
+            clearCurrentOperator()
+        } catch CalculatorError.divideByZero {
+            
+        } catch {
+            debugPrint("UNKNOWN ERROR")
+        }
+    }
+    
     //MARK: - ViewController Method
     private func clearCurrentOperand() {
         currendOperand.text = ZERO
