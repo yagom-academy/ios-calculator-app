@@ -23,6 +23,42 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
+        guard lastInput.arrangedSubviews.count <= 0 || operatorInput.text != "" else {
+            clearLastInput()
+            
+            numberInput.text = sender.currentTitle
+            return
+        }
+        
+        let digit = sender.currentTitle
+        
+        guard var text = numberInput.text else {
+            return
+        }
+        
+        guard digit != "." || text.filter({ $0 == "." }).count < 1 else {
+            return
+        }
+        
+        guard let unwrappedDigit: String = digit else {
+            return
+        }
+            
+        text += unwrappedDigit
+        numberInput.text = text
+
+        
+//        guard text.contains(".") == false else {
+//            return
+//        }
+        
+        let trimmedResultLabel = text.replacingOccurrences(of: ",", with: "")
+        
+        guard let trimmedResultLabelToDouble = Double(trimmedResultLabel) else {
+            return
+        }
+        
+        numberInput.text = String(trimmedResultLabelToDouble)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
