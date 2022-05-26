@@ -60,6 +60,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
+        guard numberInput.text != "0" || lastInput.arrangedSubviews.count > 0 else {
+            return
+        }
+        
+        guard let text = numberInput.text else {
+            return
+        }
+        
+        guard Double(text) != 0.0 else {
+            return
+        }
+        
+        if operatorInput.text == "" && lastInput.arrangedSubviews.count > 0 {
+            clearLastInput()
+        }
+        
+        operatorInput.text = sender.currentTitle
+        resetNumberInput()
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
