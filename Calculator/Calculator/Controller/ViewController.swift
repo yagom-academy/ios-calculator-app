@@ -132,6 +132,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchSignChangerButton(_ sender: UIButton) {
+        guard let convertedNumberInput = convertNumberInput() else {
+            return
+        }
+        
+        guard convertedNumberInput != 0 else {
+            return
+        }
+        
+        numberInput.text = String(-convertedNumberInput)
+        
+        guard let calculationResult = convertNumberInput() else {
+            return
+        }
+        
+        formatCalculatorItems(number: calculationResult)
     }
     
     func resetNumberInput() {
