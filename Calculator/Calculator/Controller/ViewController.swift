@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resetNumberInput()
+        resetOperatorInput()
         
     }
     @IBAction func touchNumberButton(_ sender: UIButton) {
@@ -39,5 +40,9 @@ class ViewController: UIViewController {
     
     func resetNumberInput() {
         numberInput.text = "0"
+    }
+    
+    func resetOperatorInput() {
+        operatorInput.text = ""
     }
 }
