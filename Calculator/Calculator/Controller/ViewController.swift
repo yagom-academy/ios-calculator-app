@@ -117,6 +117,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
+        clearLastInput()
+        resetNumberInput()
+        resetOperatorInput()
+        resetTotalInput()
     }
     
     @IBAction func touchClearEntryButton(_ sender: UIButton) {
