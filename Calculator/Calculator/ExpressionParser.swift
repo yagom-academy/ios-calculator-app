@@ -18,7 +18,7 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let splitedInput = input.split(with: " ")
-        let onlyOperands = splitedInput.filter{ Double($0) != nil }
+        let onlyOperands = splitedInput.filter { Double($0) != nil }
         return onlyOperands
     }
 }

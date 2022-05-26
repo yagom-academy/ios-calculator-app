@@ -28,11 +28,11 @@ class ViewController: UIViewController {
 extension ViewController {
     
     @IBAction func operandButtonDidTapped(_ sender: UIButton) {
-        
+
         if screenLabel?.text == zero {
             screenLabel?.text = ""
         }
-        screenLabel?.text! += sender.currentTitle!
+        screenLabel?.text = (screenLabel?.text ?? "") + (sender.currentTitle ?? "")
     }
     
     @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
@@ -56,7 +56,6 @@ extension ViewController {
         UIView.animate(withDuration: 0.2) {
             stackViewElement.isHidden = false
         }
-        
         var dummytext: String = ""
         currentOperatorLabel?.text = ""
         historyStackView?.arrangedSubviews.forEach { $0.subviews.forEach {
