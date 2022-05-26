@@ -4,6 +4,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var numberLable: UILabel!
     @IBOutlet weak var operatorLable: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var currentFormula = ""
     
@@ -52,6 +53,8 @@ class CalculatorViewController: UIViewController {
         let `operator` = formula.removeLast()
         
         addFormulaLable(content: String(`operator`) + " " + number)
+        
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: false)
     }
     
     private func deleteFormulaLable() {
@@ -94,6 +97,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
+        if let lastNumber = currentFormula.last, Operator(rawValue: lastNumber) != nil {
+            currentFormula += "0"
+        }
+        
         do {
             var formula = try ExpressionParser.parse(from: currentFormula)
             let calculatedResult = try formula.result()
@@ -104,9 +111,9 @@ class CalculatorViewController: UIViewController {
             switch error {
             case CalculatorError.dividedByZero:
                 numberLable.text = "NaN"
-                currentFormula = ""
+                currentFormula.removeAll()
             case CalculatorError.wrongFormula:
-                currentFormula = ""
+                currentFormula.removeAll()
                 return
             default:
                 return
@@ -120,7 +127,7 @@ class CalculatorViewController: UIViewController {
         deleteFormulaLable()
         numberLable.text = "0"
         operatorLable.text = ""
-        currentFormula = ""
+        currentFormula.removeAll()
     }
     
     @IBAction private func CEButtonTapped(_ sender: UIButton) {

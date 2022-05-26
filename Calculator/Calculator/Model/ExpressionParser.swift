@@ -14,7 +14,7 @@ enum ExpressionParser {
     private static func checkWrongFormulaError(for input: [String]) throws {
         guard input.count > 1 else { throw CalculatorError.wrongFormula }
             
-        for index in 0...input.count where index % 2 == 0 {
+        for index in 0..<input.count where index % 2 == 0 {
             if Double(input[index]) == nil {
                 throw CalculatorError.wrongFormula
             }
