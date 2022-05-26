@@ -42,10 +42,15 @@
 - `enqueue`, `dequeue`, `peek`, `isEmpty`
 - `clear`, `isFull`, `count`
 - `generics`
-- `split`, `whereSeparator`
+- `split`, `whereSeparator`, `Components`
 - `enum`, `CaseIterable`, `caseless enum`
-- `closure`, `map`, `filter`, `forEach`, `reduce`, `reduce(into:)`
 - `class diagram`, `static`
+- `for-in`, `forEach`
+- `Parsing`, `Parser`
+- `Context`, `Container`
+- `고차함수`, `closure`, `Map`, `Filter`, `Reduce`, `Reduce(into:)`
+- `??`, `NaN`, `Error Handling`, `XCTAssertThrowsError`
+- `의존관계 Property Private 설정`
 
 # 그라운드 룰
 
@@ -353,12 +358,97 @@ let result = operands.queue.enqueueStack.reduce(0) { operatorCase?.calculate(lhs
 
 ## 의문점 해결
 
+### 1. extension String 존재 이유
+
+- 피드백을 통하여 현재 본인의 구현 방법이 좋다고 생각한다는 피드백을 받았다. 이에, 꼭 `split(_ char: Char) -> [String]` 을 이용해서 구현한다면, 특정 메서드를 재귀(`for Loop`) 로 호출해서 구현할 수 있을 것 같다는 의견을 받았다. 즉, "-", "+", "*", "/" 이 포함 되지 않을 때 까지 쪼개는 식이다.
+- 예를 들자면, "10+1-2" (+ 로 쪼갬) -> "10", "1-2" (- 로 쪼갬)-> "10", "1", "2" -> Operator 없으니 탈출하는 방식이다. 이보단 앞서 구현한 `wheresperator`를 이용한 `split`이 더욱 유용해보인다.
+<br>
+
+### 2. result() 함수 내 reduce 고차함수 구현 가능 여부
+
+- 직접 만든 `Queue`가 `iteration`을 지원하지 않으니, `queue`에 직접 `reduce`를 붙이기는 어려울 것 같다는 의견을 받았다. (+, 10), (+, 3), (-, 4)의 `Tuple Array` 로 한번 변환해서 `reduce`를 하는 방법이 있을텐데 그럴거면 성능이 아쉽다는 우려가 들었다. 해당 문제는 첫번째 의문점과 마찬가지로, 너무 요구사항에 몰입하여 좀 더 좋은 코드를 구현하자는 가치를 위배한 사례로, `while`문이 정답이라고 생각하지만 억지로 고차함수를 써본다면 `(0..<queue.count).reduce(0) { queue.dequeue() ... }` 와 같은 식으로 쓸 수 있을 것 같단 의견을 받았다.
+<br>
+
+### 3. 나누기 0에 대한 에러 처리 방법
+
+- 찰리의 코멘트에 따르면, " `Double(Int.max)`를 `Error`로 처리한다" 와 같은 구현은 좋지 않다는 피드백을 받았다. 누군가 보기엔 `Int.max` 또한 정상 값일 수 있고, `Int.max`가 `Error`라는 사실을 별도로 관리해야하는 번거로움이 있기 때문이다. 오류가 난다면 차라리 `Optional`로 두어 `nil`을 반환하는 것이 나을 것 같다. 조금 더 정석으로 접근하자면 `Result`타입을 이용한다던지, `calculate` 또한 `throwable`하게 구현하면 된다는 수정사항을 받게 되었다.
+
+- 처음에는 에러 코드를 통해 코드가 복잡해지는 것을 기피하고자, 새로운 방안으로 타입은 `Double`이면서 값은 `nan`을 부여할 수 있는, `Double.nan`이라는 코드를 알게 되었다. 이를 사용하면 `nan`이라는 사실이 명확하기 때문에 사용자 및 개발자에게 혼란을 주지 않을 수 있고, 별도로 에러를 처리하지 않을 수 있어 더욱 좋은 방법이라고 생각하였다. 그러나, 계산기에서 사용자가 기대하는 값은 `nan`이 섞여있을지도 모르는 `Double`의 값을 사용하는 것은 바람직하지 못하였다. 따라서, 코드가 복잡해지지만 에러 핸들링을 하는 것이 더욱 알맞은 방법이었다. 이에 에러 핸들링 부분으로 수정하여 코드를 완성해보았다.
+
+- 코드(CalculatorError)
+    
+    ```swift
+    enum CalculatorError: Error {
+        case dividedByZero
+        case emptyQueues
+        case notEnoughOperators
+        case notEnoughOperands
+        case invalidOperator
+    }
+    ```
+    
+
+- 코드(Operator)
+    
+    ```swift
+    //  Operator.swift
+    
+    enum Operator: Character, CaseIterable, CalculateItem {
+        ...
+        case divide = "/"
+        ...
+        
+        func calculate(lhs: Double, rhs: Double) throws -> Double {
+            ...
+            case .divide:
+                return try divide(lhs: lhs, rhs: rhs)
+                    ...
+            }
+        }
+        
+        ...
+        
+        private func divide(lhs: Double, rhs: Double) throws -> Double {
+            guard rhs != 0 else {
+                throw CalculatorError.dividedByZero
+            }
+            
+            return lhs / rhs
+        }
+        ...
+    }
+    ```
+    
+
+- 코드(Formula)
+    
+    ```swift
+    //  Formula.swift
+    
+    struct Formula {
+        ...
+        mutating func result() throws -> Double {
+            ...
+                result = try operatorCase.calculate(lhs: result, rhs: operand)
+            }
+            ...
+        }
+        ...
+    }
+    ```
+<br>
 
 ## 배운개념
-- `split`, `whereSeparator`
+- `split`, `whereSeparator`, `Components`
 - `enum`, `CaseIterable`, `caseless enum`
-- `closure`, `map`, `filter`, `forEach`, `reduce`, `reduce(into:)`
 - `class diagram`, `static`
+- `for-in`, `forEach`
+- `Parsing`, `Parser`
+- `Context`, `Container`
+- `고차함수`, `closure`, `Map`, `Filter`, `Reduce`, `Reduce(into:)`
+- `??`, `NaN`, `Error Handling`, `XCTAssertThrowsError`
+- `의존관계 Property Private 설정`
+<br>
 
 # [STEP 3]
 
