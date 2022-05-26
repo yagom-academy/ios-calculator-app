@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class ExpressionParserTest: XCTestCase {
 
@@ -17,7 +18,19 @@ class ExpressionParserTest: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testExample() throws {
+    func test_returnsTrueWhenBothCountsOfOperandsAndOperatorsMatchesWithWhatEquationActuallyHas() throws {
+        // given
+        let equation = "1000+200-300*4/5"
+        let expectedOperandsCount = 5
+        let expectedOperatorCount = 4
         
+        // when
+        let parseTest = ExpressionParser.parse(from: equation)
+        let operandsCount = parseTest.operands.count
+        let operatorCount = parseTest.operators.count
+        
+        //then
+        XCTAssertEqual(operandsCount, expectedOperandsCount)
+        XCTAssertEqual(operatorCount, expectedOperatorCount)
     }
 }
