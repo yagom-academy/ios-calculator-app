@@ -12,13 +12,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var signLabel: UILabel!
     @IBOutlet var numberButtons: [UIButton]!
     
+    private var numbers = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
     @IBAction func tapKeypadButton(_ sender: UIButton) {
-       let number = numberButtons.firstIndex(of: sender)
+        guard let number = numberButtons.firstIndex(of: sender) else { return }
+        let newInputNumbers = Keypad.convertNumber(number)
+        numbers += newInputNumbers
+        inputNumberLabel.text = numbers
+    }
+    
+    func updateLable(text: String) {
+        inputNumberLabel.text = numbers
     }
 }
-
