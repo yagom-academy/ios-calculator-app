@@ -30,7 +30,11 @@ class ViewController: UIViewController {
            sender.currentTitle == "." {
             return
         }
-        currentOperand?.text = stringToDecimal((currentOperand?.text ?? "") + (sender.currentTitle ?? ""))
+        if currentOperand.text?.first == "0",
+           sender.currentTitle == "." {
+            currentOperand.text = "0.0"
+        }
+        currentOperand?.text = (currentOperand?.text ?? "") + (sender.currentTitle ?? "")
     }
     
     @IBAction func pressOperatorButton(_ sender: UIButton) {
