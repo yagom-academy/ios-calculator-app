@@ -79,6 +79,7 @@ class ViewController: UIViewController {
         addCalculatorItems()
         operatorInput.text = sender.currentTitle
         resetNumberInput()
+        goToBottomOfScrollView()
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -111,6 +112,7 @@ class ViewController: UIViewController {
         }
         
         resetOperatorInput()
+        goToBottomOfScrollView()
         resetNumberInput()
     }
     
@@ -210,5 +212,11 @@ class ViewController: UIViewController {
         let commaRemovedInput = whitespacesRemovedInput.replacingOccurrences(of: ",", with: "")
         
         totalInput += commaRemovedInput
+    }
+    
+    func goToBottomOfScrollView() {
+        scrollView.setContentOffset(CGPoint(x: 0,
+                                            y: scrollView.contentSize.height - scrollView.bounds.height),
+                                    animated: true)
     }
 }
