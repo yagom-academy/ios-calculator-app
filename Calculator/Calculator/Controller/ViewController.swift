@@ -66,15 +66,24 @@ extension ViewController {
     
     @IBAction func functionButtonDidTapped(_ sender: UIButton) {
         
-        if sender.currentTitle == "AC" {
+        guard let historyStackView = historyStackView else { return }
+        
+        switch sender.currentTitle {
+        case "AC":
+            calculateStackCount = 0
             screenLabel?.text = zero
             currentOperatorLabel?.text = ""
-            removeAllInStackView(stack: historyStackView!)
-        } else if sender.currentTitle == "⁺⁄₋" {
+            removeAllIn(stack: historyStackView)
+        case "⁺⁄₋":
+            guard let operand = screenLabel?.text else { return }
             guard screenLabel?.text != zero else { return }
-            screenLabel?.text = numberFormatter.string(for: Double((screenLabel?.text!)!)! * -1)
-        } else if sender.currentTitle == "CE" {
+            var operandText = operand
+            operandText = operandText.removeEntire(character: ",")
+            screenLabel?.text = numberFormatter.string(for: (Double(operandText) ?? 0) * -1)
+        case "CE":
             screenLabel?.text = zero
+        default:
+            return
         }
     }
 }
