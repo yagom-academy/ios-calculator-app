@@ -56,7 +56,7 @@ class ViewController: UIViewController {
             return
         }
         
-        formatCalculatorItems(number: convertedNumberInput)
+        applyNumberFormatter(number: convertedNumberInput)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult = try formula.result()
-            formatCalculatorItems(number: calculationResult)
+            applyNumberFormatter(number: calculationResult)
         } catch (let error) {
             switch error {
             case CalculatorError.dividedByZero:
@@ -136,6 +136,8 @@ class ViewController: UIViewController {
             return
         }
         
+        applyNumberFormatter(number: convertedNumberInput)
+        
         guard convertedNumberInput != 0 else {
             return
         }
@@ -146,7 +148,7 @@ class ViewController: UIViewController {
             return
         }
         
-        formatCalculatorItems(number: calculationResult)
+        applyNumberFormatter(number: calculationResult)
     }
     
     func resetNumberInput() {
@@ -166,20 +168,36 @@ class ViewController: UIViewController {
     }
     
     func convertNumberInput() -> Double? {
+        guard let onceTrimmmedInput = removeComma() else {
+            return nil
+        }
+        
+        guard let twiceTrimmedInput = convertStringToDouble(onceTrimmmedInput) else {
+            return nil
+        }
+        
+        return twiceTrimmedInput
+    }
+    
+    func removeComma() -> String? {
         guard let text = numberInput.text else {
             return nil
         }
         
-        let trimmedNumberInput = text.replacingOccurrences(of: ",", with: "")
+        let trimmedInput = text.replacingOccurrences(of: ",", with: "")
         
-        guard let trimmedNumberInputToDouble = Double(trimmedNumberInput) else {
+        return trimmedInput
+    }
+    
+    func convertStringToDouble(_ input: String) -> Double? {
+        guard let trimmedInput = Double(input) else {
             return nil
         }
         
-        return trimmedNumberInputToDouble
+        return trimmedInput
     }
     
-    func formatCalculatorItems(number: Double) {
+    func applyNumberFormatter(number: Double) {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumIntegerDigits = 1
@@ -198,7 +216,7 @@ class ViewController: UIViewController {
         guard let result = convertNumberInput() else {
             return
         }
-        formatCalculatorItems(number: result)
+        applyNumberFormatter(number: result)
         
         let label = UILabel()
         label.isHidden = true
