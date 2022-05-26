@@ -7,10 +7,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var numberInput: UILabel!
-    @IBOutlet weak var operatorInput: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var lastInput: UIStackView!
+    @IBOutlet private weak var numberInput: UILabel!
+    @IBOutlet private weak var operatorInput: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var lastInput: UIStackView!
     
     private var totalInput: String = ""
     
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         resetTotalInput()
     }
     
-    @IBAction func touchNumberButton(_ sender: UIButton) {
+    @IBAction private func touchNumberButton(_ sender: UIButton) {
         guard lastInput.arrangedSubviews.count <= 0 || operatorInput.text != "" else {
             clearLastInput()
             
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         applyNumberFormatter(convertedNumberInput)
     }
     
-    @IBAction func touchOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard numberInput.text != "0" || lastInput.arrangedSubviews.count > 0 else {
             return
         }
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         goToBottomOfScrollView()
     }
     
-    @IBAction func touchResultButton(_ sender: UIButton) {
+    @IBAction private func touchResultButton(_ sender: UIButton) {
         guard operatorInput.text != "" else {
             return
         }
@@ -117,14 +117,14 @@ class ViewController: UIViewController {
         goToBottomOfScrollView()
     }
     
-    @IBAction func touchAllClearButton(_ sender: UIButton) {
+    @IBAction private func touchAllClearButton(_ sender: UIButton) {
         clearLastInput()
         resetNumberInput()
         resetOperatorInput()
         resetTotalInput()
     }
     
-    @IBAction func touchClearEntryButton(_ sender: UIButton) {
+    @IBAction private func touchClearEntryButton(_ sender: UIButton) {
         resetNumberInput()
         
         if totalInput == "" {
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchSignChangerButton(_ sender: UIButton) {
+    @IBAction private func touchSignChangerButton(_ sender: UIButton) {
         guard let convertedNumberInput = convertNumberInput() else {
             return
         }
@@ -150,23 +150,23 @@ class ViewController: UIViewController {
         applyNumberFormatter(newConvertedNumberInput)
     }
     
-    func resetNumberInput() {
+    private func resetNumberInput() {
         numberInput.text = "0"
     }
     
-    func resetOperatorInput() {
+    private func resetOperatorInput() {
         operatorInput.text = ""
     }
     
-    func resetTotalInput() {
+    private func resetTotalInput() {
         totalInput = ""
     }
     
-    func clearLastInput() {
+    private func clearLastInput() {
         lastInput.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func convertNumberInput() -> Double? {
+    private func convertNumberInput() -> Double? {
         guard let onceTrimmmedInput = removeComma() else {
             return nil
         }
@@ -178,7 +178,7 @@ class ViewController: UIViewController {
         return twiceTrimmedInput
     }
     
-    func removeComma() -> String? {
+    private func removeComma() -> String? {
         guard let text = numberInput.text else {
             return nil
         }
@@ -188,7 +188,7 @@ class ViewController: UIViewController {
         return trimmedInput
     }
     
-    func convertStringToDouble(_ input: String) -> Double? {
+    private func convertStringToDouble(_ input: String) -> Double? {
         guard let trimmedInput = Double(input) else {
             return nil
         }
@@ -196,7 +196,7 @@ class ViewController: UIViewController {
         return trimmedInput
     }
     
-    func applyNumberFormatter(_ number : Double) {
+    private func applyNumberFormatter(_ number : Double) {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumIntegerDigits = 1
@@ -211,7 +211,7 @@ class ViewController: UIViewController {
         numberInput.text = formattedResult
     }
     
-    func addCalculatorItems() {
+    private func addCalculatorItems() {
         guard let convertedNumberInput = convertNumberInput() else {
             return
         }
@@ -249,7 +249,7 @@ class ViewController: UIViewController {
         totalInput += secondTrimmedInput
     }
     
-    func goToBottomOfScrollView() {
+    private func goToBottomOfScrollView() {
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height),
                                     animated: true)
