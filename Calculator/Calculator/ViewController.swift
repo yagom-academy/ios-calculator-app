@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperator: UILabel!
     private var operationQueue: String = ""
     private let ZERO = "0"
+    private var isEndOperation = false
     override func viewDidLoad() {
         super.viewDidLoad()
         clearScrollviewContent()
@@ -23,7 +24,8 @@ class ViewController: UIViewController {
     }
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        if currentOperand.text?.first == "0" || currentOperand.text == "NaN" {
+        isEndOperation = false
+        if currentOperand.text?.first == "0" || currentOperand.text == "NaN"{
             currentOperand.text = ""
         }
         if currentOperand.text?.contains(".") == true,
@@ -70,6 +72,9 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func pressEqualButton(_ sender: UIButton) {
+        if isEndOperation {
+            return
+        }
         addScrollViewContent()
         operationQueue += currentOperand.text ?? ZERO
         operationQueue = operationQueue.filter {
@@ -87,6 +92,7 @@ class ViewController: UIViewController {
         clearCurrentOperator()
         operationQueue = ""
         scrolling()
+        isEndOperation = true
     }
     
     //MARK: - ViewController Method
