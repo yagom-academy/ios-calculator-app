@@ -37,7 +37,7 @@ class ViewController: UIViewController {
             return
         }
         currentOperator.text = sender.currentTitle
-        operationQueue += "\(currendOperand?.text) \(sender.currentTitle) "
+        operationQueue += "\(currendOperand?.text ?? ZERO) \(sender.currentTitle) "
         //create Scrollview Content
         print(operationQueue)
         clearCurrentOperand()
@@ -51,7 +51,13 @@ class ViewController: UIViewController {
     @IBAction func pressClearEntryButton(_ sender: UIButton) {
         clearCurrentOperand()
     }
-    
+    @IBAction func pressReverseSignButton(_ sender: UIButton) {
+        if currendOperand.text?.first == "-" {
+            currendOperand.text?.removeFirst()
+        } else {
+            currendOperand.text = "-" + (currendOperand.text ?? "")
+        }
+    }
     //MARK: - ViewController Method
     private func clearCurrentOperand() {
         currendOperand.text = ZERO
