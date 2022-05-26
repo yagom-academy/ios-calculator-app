@@ -76,6 +76,7 @@ class ViewController: UIViewController {
             clearLastInput()
         }
         
+        addCalculatorItems()
         operatorInput.text = sender.currentTitle
         resetNumberInput()
     }
@@ -142,5 +143,42 @@ class ViewController: UIViewController {
         }
         
         numberInput.text = formattedResult
+    }
+    
+    func addCalculatorItems() {
+        guard let result = convertNumberInput() else {
+            return
+        }
+        formatCalculatorItems(number: result)
+        
+        let label = UILabel()
+        label.text = numberInput.text
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
+        
+        guard let `operator` = operatorInput.text else {
+            return
+        }
+        
+        guard let number = numberInput.text else {
+            return
+        }
+        
+        label.text = `operator` + " " + number
+        
+        let newInput = UIStackView(arrangedSubviews: [label])
+        
+        lastInput.addArrangedSubview(newInput)
+        
+        guard let labelText = label.text else {
+            return
+        }
+        
+        let whitespacesRemovedInput = labelText.replacingOccurrences(of: " ", with: "")
+        let commaRemovedInput = whitespacesRemovedInput.replacingOccurrences(of: ",", with: "")
+        
+        totalInput += commaRemovedInput
     }
 }
