@@ -84,11 +84,10 @@ class ViewController: UIViewController {
         
         if !isOperandInputted {
             operandLabel.text = getText(sender.currentTitle)
-            isOperandInputted = true
         } else {
             operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
-            isOperandInputted = true
         }
+        isOperandInputted = true
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
@@ -148,10 +147,6 @@ class ViewController: UIViewController {
         do {
             let result = try fomula.result().parse()
             return result
-        } catch CalculateError.infinityError {
-            return "NaN"
-        } catch CalculateError.nilError {
-            return "NaN"
         } catch {
             return "NaN"
         }
