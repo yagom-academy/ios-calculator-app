@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var scrollViewContents: UIStackView!
-    @IBOutlet weak var currendOperand: UILabel!
+    @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
     private var operationQueue: String = ""
     private let ZERO = "0"
@@ -22,25 +22,25 @@ class ViewController: UIViewController {
     }
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        if currendOperand.text == "0" || currendOperand.text == "NaN" {
-            currendOperand.text = ""
+        if currentOperand.text?.first == "0" || currentOperand.text == "NaN" {
+            currentOperand.text = ""
         }
-        if currendOperand.text?.contains(".") == true,
+        if currentOperand.text?.contains(".") == true,
            sender.currentTitle == "." {
             return
         }
-        currendOperand?.text = (currendOperand?.text ?? "") + (sender.currentTitle ?? "")
+        currentOperand?.text = (currentOperand?.text ?? "") + (sender.currentTitle ?? "")
     }
     
     @IBAction func pressOperatorButton(_ sender: UIButton) {
-        guard currendOperand.text != ZERO else {
+        guard currentOperand.text != ZERO else {
             currentOperator.text = (sender.currentTitle ?? "")
             return
         }
+        addScrollViewContent()
         currentOperator.text = sender.currentTitle
-        operationQueue += "\(currendOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
+        operationQueue += "\(currentOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
         //create Scrollview Content
-        print(operationQueue)
         clearCurrentOperand()
     }
     
@@ -54,25 +54,26 @@ class ViewController: UIViewController {
         clearCurrentOperand()
     }
     @IBAction func pressReverseSignButton(_ sender: UIButton) {
-        guard currendOperand.text != ZERO else {
+        guard currentOperand.text != ZERO else {
             return
         }
-        if currendOperand.text?.first == "-" {
-            currendOperand.text?.removeFirst()
+        if currentOperand.text?.first == "-" {
+            currentOperand.text?.removeFirst()
         } else {
-            currendOperand.text = "-" + (currendOperand.text ?? "")
+            currentOperand.text = "-" + (currentOperand.text ?? "")
         }
     }
     @IBAction func pressEqualButton(_ sender: UIButton) {
-        operationQueue += currendOperand.text ?? "0"
+        addScrollViewContent()
+        operationQueue += currentOperand.text ?? "0"
         print("EQUAL BUTTON, CURRENT OPERATIONQUEUE : \(operationQueue)")
         var formula = ExpressionParser.parse(from: operationQueue)
         do {
             let operationResult = try formula.result()
             print("OperationResult : \(operationResult)")
-            currendOperand.text = String(operationResult)
+            currentOperand.text = String(operationResult)
         } catch CalculatorError.divideByZero {
-            currendOperand.text = "NaN"
+            currentOperand.text = "NaN"
         } catch {
             debugPrint("UNKNOWN ERROR")
         }
@@ -82,7 +83,7 @@ class ViewController: UIViewController {
     
     //MARK: - ViewController Method
     private func clearCurrentOperand() {
-        currendOperand.text = ZERO
+        currentOperand.text = ZERO
     }
     private func clearCurrentOperator() {
         currentOperator.text = ""
@@ -93,4 +94,24 @@ class ViewController: UIViewController {
         }
     }
 }
-
+//MARK: - UI Components
+extension ViewController {
+    private func createScrollViewContent(_ inputOperator: String, _ inputOperand: String) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.addArrangedSubview(createUILabel(inputOperator))
+        stackView.addArrangedSubview(createUILabel(inputOperand))
+        return stackView
+    }
+    private func createUILabel(_ text: String) -> UILabel {
+        let uiLabel = UILabel()
+        uiLabel.textColor = .white
+        uiLabel.font = .preferredFont(forTextStyle: .title3, compatibleWith: nil)
+        uiLabel.text = text
+        return uiLabel
+    }
+    private func addScrollViewContent() {
+        let currentContent = createScrollViewContent(currentOperator.text ?? "", currentOperand.text ?? "")
+        scrollViewContents.addArrangedSubview(currentContent)
+    }
+}
