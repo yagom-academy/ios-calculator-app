@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultButton: UIButton!
     
     private var numbers = ""
+    private var isEdit = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapKeypadButton(_ sender: UIButton) {
+        if !isEdit {
+            numbers = ""
+            isEdit = true
+        }
+        
         guard let number = numberButtons.firstIndex(of: sender) else { return }
         let newInputNumbers = Keypad.convertNumber(number)
         checkInputNumbers(text: newInputNumbers)
@@ -45,17 +51,16 @@ class ViewController: UIViewController {
             return
         }
         
-        
+        isEdit = false
     }
     
     @IBAction func tapResultButton() {
         let formula = ExpressionParser.parse(from: numbers)
         var result = 0.0
-        
         do {
             result = try formula.result()
         } catch CalculatorError.dividedByZero {
-                CalculatorError.dividedByZero.errorMessage
+            CalculatorError.dividedByZero.errorMessage
         } catch {
             CalculatorError.unknownError.errorMessage
         }
