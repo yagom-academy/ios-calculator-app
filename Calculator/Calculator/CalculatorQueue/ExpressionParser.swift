@@ -9,16 +9,17 @@ enum ExpressionParser {
         let operandsQueue = CalculatorItemQueue()
         let operatorQueue = CalculatorItemQueue()
         let formula = Formula(operands: operandsQueue, operators: operatorQueue)
-        let operators: [Character] = componentsByOperators(from: input).map { op in
-            Character(op)
-        }
-        let operands: [Double] = input.split {
-            operators.contains($0)
+        let operators: [String] = componentsByOperators(from: input)
+        let operands: [Double] = input.split(with: " ").filter {
+            !operators.contains($0)
         }.map {
-            Double($0) ?? 0.0
+            Double($0) ?? 0
         }
-        operators.forEach {
-            guard let calcOperator = Operator.init(rawValue: $0) else {
+        
+        operators.map{
+            Character($0)
+        }.forEach {
+            guard let calcOperator = Operator(rawValue: $0) else {
                 return
             }
             formula.operators.enQueue(calcOperator)
@@ -26,14 +27,16 @@ enum ExpressionParser {
         operands.forEach {
             formula.operands.enQueue($0)
         }
+        
         return formula
     }
     static private func componentsByOperators(from input: String) -> [String] {
         let operatorList = Operator.allCases.map {
-            "\(String($0.rawValue))"
+            String($0.rawValue)
         }
-        return input.filter {
-            operatorList.contains(String($0)) == true
+        let components = input.components(separatedBy: " ")
+        return components.filter {
+            operatorList.contains(String($0))
         }.map {
             String($0)
         }

@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     }
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        if currendOperand.text == "0" {
+        if currendOperand.text == "0" || currendOperand.text == "NaN" {
             currendOperand.text = ""
         }
         if currendOperand.text?.contains(".") == true,
@@ -71,13 +71,13 @@ class ViewController: UIViewController {
             let operationResult = try formula.result()
             print("OperationResult : \(operationResult)")
             currendOperand.text = String(operationResult)
-            operationQueue = ""
-            clearCurrentOperator()
         } catch CalculatorError.divideByZero {
-            
+            currendOperand.text = "NaN"
         } catch {
             debugPrint("UNKNOWN ERROR")
         }
+        clearCurrentOperator()
+        operationQueue = ""
     }
     
     //MARK: - ViewController Method
