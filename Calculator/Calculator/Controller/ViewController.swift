@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         
         resetOperatorInput()
         goToBottomOfScrollView()
-        resetNumberInput()
+        resetTotalInput()
     }
     
     @IBAction func touchAllClearButton(_ sender: UIButton) {
@@ -188,6 +188,7 @@ class ViewController: UIViewController {
         formatCalculatorItems(number: result)
         
         let label = UILabel()
+        label.isHidden = true
         label.text = numberInput.text
         label.numberOfLines = 0
         label.textColor = .white
@@ -207,6 +208,10 @@ class ViewController: UIViewController {
         let newInput = UIStackView(arrangedSubviews: [label])
         
         lastInput.addArrangedSubview(newInput)
+        
+        UIView.animate(withDuration: 0.0000001) {
+            label.isHidden = false
+        }
         
         guard let labelText = label.text else {
             return
