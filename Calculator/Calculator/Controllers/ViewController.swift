@@ -1,74 +1,49 @@
-//
-//  Calculator - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
-
 import UIKit
 
 class ViewController: UIViewController {
+    // MARK: - Properties
     
     @IBOutlet weak var calculatingScrollView: UIScrollView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
     var formula: Formula?
-    var mainStackInScrollView: UIStackView {
+    var mainStackViewInCalculatingScrollView: UIStackView {
         calculatingScrollView.subviews.compactMap { $0 as? UIStackView }[0]
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         resetUI()
     }
+    
+    // MARK: - Helpers
     
     func resetUI() {
         formula = Formula()
         operatorLabel.text = ""
         operandLabel.text = "0"
-        mainStackInScrollView.subviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    func makeNewCalculateLabelStackView(of operatorText: String, operandText: String) -> UIStackView {
-        let operatorLabel: UILabel = {
-            let ol = UILabel()
-            ol.text = operatorText
-            ol.font = UIFont.preferredFont(forTextStyle: .title3)
-            ol.textColor = UIColor.white
-            ol.textAlignment = .right
-            return ol
-        }()
-        
-        let operandLabel: UILabel = {
-            let ol = UILabel()
-            ol.text = operandText
-            ol.font = UIFont.preferredFont(forTextStyle: .title3)
-            ol.textColor = UIColor.white
-            ol.textAlignment = .right
-            return ol
-        }()
-        
-        let stackView: UIStackView = {
-            let sv = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
-            sv.spacing = 8
-            sv.alignment = .fill
-            sv.distribution = .fill
-            sv.axis = .horizontal
-            return sv
-        }()
-        
-        return stackView
-    }
-    
-    func addCalculateLabelStackView(to stackView: UIStackView, operatorText: String, operandText: String) {
-        let newStackView = makeNewCalculateLabelStackView(of: operatorText, operandText: operandText)
-        stackView.addArrangedSubview(newStackView)
+        mainStackViewInCalculatingScrollView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     func scrollToBottom(of scrollView: UIScrollView) {
-        let scrollViewBottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
+        let scrollViewBottomOffset = CGPoint(x: 0,
+                                             y: scrollView.contentSize.height -
+                                             scrollView.bounds.size.height +
+                                             scrollView.contentInset.bottom)
         scrollView.setContentOffset(scrollViewBottomOffset, animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        resetUI()
+    }
+    
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+        operandLabel.text = "0"
     }
     
     @IBAction func operandButtonTapped(_ sender: UIButton) {
@@ -97,21 +72,23 @@ class ViewController: UIViewController {
             operandLabel.text?.insert("-", at: operandLabel.text!.startIndex)
         }
     }
-    
+
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let tappedOperatorText = sender.titleLabel?.text,
               let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
         if operandLabel.text == "0" {
-            guard mainStackInScrollView.subviews.count != 0 else { return }
+            guard mainStackViewInCalculatingScrollView.subviews.count != 0 else { return }
             operatorLabel.text = tappedOperatorText
             return
         }
         
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
-        addCalculateLabelStackView(to: mainStackInScrollView, operatorText: operatorLabelText, operandText: operandLabelText)
+        StackViewManager.addCalculateLabels(to: mainStackViewInCalculatingScrollView,
+                                            operatorText: operatorLabelText,
+                                            operandText: operandLabelText)
         scrollToBottom(of: calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
@@ -124,7 +101,9 @@ class ViewController: UIViewController {
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
-        addCalculateLabelStackView(to: mainStackInScrollView, operatorText: operatorLabelText, operandText: operandLabelText)
+        StackViewManager.addCalculateLabels(to: mainStackViewInCalculatingScrollView,
+                                            operatorText: operatorLabelText,
+                                            operandText: operandLabelText)
         scrollToBottom(of: calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
@@ -146,14 +125,4 @@ class ViewController: UIViewController {
             break
         }
     }
-    
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        operandLabel.text = "0"
-    }
-    
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        resetUI()
-    }
 }
-
- 

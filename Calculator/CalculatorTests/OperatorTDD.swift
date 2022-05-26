@@ -1,10 +1,3 @@
-//
-//  OperatorTDD.swift
-//  CalculatorTests
-//
-//  Created by LeeChiheon on 2022/05/20.
-//
-
 import XCTest
 
 class OperatorTDD: XCTestCase {

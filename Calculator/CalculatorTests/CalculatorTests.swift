@@ -1,10 +1,3 @@
-//
-//  CalculatorTests.swift
-//  CalculatorTests
-//
-//  Created by LeeChiheon on 2022/05/17.
-//
-
 import XCTest
 
 class CalculatorTests: XCTestCase {
