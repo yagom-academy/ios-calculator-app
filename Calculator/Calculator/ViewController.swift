@@ -34,10 +34,11 @@ class ViewController: UIViewController {
     
     @IBAction func pressOperatorButton(_ sender: UIButton) {
         guard currendOperand.text != ZERO else {
+            currentOperator.text = (sender.currentTitle ?? "")
             return
         }
         currentOperator.text = sender.currentTitle
-        operationQueue += "\(currendOperand?.text ?? ZERO) \(sender.currentTitle) "
+        operationQueue += "\(currendOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
         //create Scrollview Content
         print(operationQueue)
         clearCurrentOperand()
@@ -52,6 +53,9 @@ class ViewController: UIViewController {
         clearCurrentOperand()
     }
     @IBAction func pressReverseSignButton(_ sender: UIButton) {
+        guard currendOperand.text != ZERO else {
+            return
+        }
         if currendOperand.text?.first == "-" {
             currendOperand.text?.removeFirst()
         } else {
