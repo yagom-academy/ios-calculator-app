@@ -7,9 +7,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var isOperandInputed = false
+    private var isOperandInputted = false
     private var isCalculateCompleted = false
-    private var inputedFomula = "0"
+    private var inputtedFomula = ""
     
     @IBOutlet private weak var fomulaScrollView: UIScrollView!
     @IBOutlet private weak var fomulaStackView: UIStackView!
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = "0"
-        isOperandInputed = false
+        isOperandInputted = false
     }
     
     @IBAction private func changeTheSign(_ sender: UIButton) {
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
-        guard isOperandInputed else {
+        guard isOperandInputted else {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = "0"
-        isOperandInputed = false
+        isOperandInputted = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
             self.downScroll()
         }
@@ -78,17 +78,17 @@ class ViewController: UIViewController {
             return
         }
         
-        if !isOperandInputed {
+        if !isOperandInputted {
             operandLabel.text = getText(sender.currentTitle)
-            isOperandInputed = true
+            isOperandInputted = true
         } else {
             operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
-            isOperandInputed = true
+            isOperandInputted = true
         }
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
-        guard isOperandInputed else {
+        guard isOperandInputted else {
             return
         }
         guard !fomulaStackView.subviews.isEmpty else {
@@ -99,11 +99,11 @@ class ViewController: UIViewController {
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         createStackView(operatorOfSignLabel, operandOfSignLabel)
         addFomula()
-        operandLabel.text = calculate(inputedFomula)
+        operandLabel.text = calculate(inputtedFomula)
         
         operatorLabel.text = ""
-        inputedFomula = "0"
-        isOperandInputed = false
+        inputtedFomula = ""
+        isOperandInputted = false
         isCalculateCompleted = true
     }
     
@@ -111,8 +111,8 @@ class ViewController: UIViewController {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = "0"
         operatorLabel.text = ""
-        inputedFomula = "0"
-        isOperandInputed = false
+        inputtedFomula = ""
+        isOperandInputted = false
         isCalculateCompleted = false
     }
     
@@ -161,7 +161,11 @@ class ViewController: UIViewController {
     }
     
     private func addFomula() {
-        inputedFomula += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
+        if inputtedFomula.isEmpty {
+            inputtedFomula = "\(getText(operandLabel.text))"
+        } else {
+            inputtedFomula += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
+        }
     }
     
     private func downScroll() {
