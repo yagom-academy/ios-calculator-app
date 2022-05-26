@@ -26,7 +26,7 @@ class FormulaTest: XCTestCase {
         var equationTest = ExpressionParser.parse(from: equation)
         let calculated = try equationTest.result()
         // then
-        XCTAssertEqual(calculated, 720.0)
+        XCTAssertEqual(calculated, expected)
     }
     
     func test_resultThrowsErrorWhenEquationEndsWithOperator() throws {
