@@ -18,16 +18,18 @@ class FormulaTest: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_resultReturnsEqualWhenItHasProperEquation() throws {
+    func test_resultReturnsEqualWhenEquationEndsWithOperands() throws {
         // given
         let equation = "1000+200-300*4/5"
+        let expected = 720.0
         // when
         var equationTest = ExpressionParser.parse(from: equation)
+        let calculated = try equationTest.result()
         // then
-        XCTAssertEqual(try equationTest.result(), 720.0)
+        XCTAssertEqual(calculated, 720.0)
     }
     
-    func test_resultThrowsErrorWhenItHasNotProperEquation() throws {
+    func test_resultThrowsErrorWhenEquationEndsWithOperator() throws {
         // given
         let equation = "1000+200-300*4/5+"
         // when
@@ -42,6 +44,9 @@ class FormulaTest: XCTestCase {
         // when
         var equationTest = ExpressionParser.parse(from: equation)
         // then
-        XCTAssertThrowsError(try equationTest.result())
+        XCTAssertThrowsError(try equationTest.result()) { error in
+            XCTAssertEqual(error as? valueError, valueError.divideByZeroError)
+        }
+
     }
 }
