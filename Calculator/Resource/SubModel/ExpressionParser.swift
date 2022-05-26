@@ -10,10 +10,10 @@ enum ExpressionParser {
         let operators = componentsByOperators(from: input)
         let operands = input.split { Operator.allCases.map({ String($0.rawValue) }).contains(String($0)) }.map(String.init)
         
-        let compactOperaotrs = operators.compactMap({ $0 })
+        let compactOperators = operators.compactMap({ $0 })
         let compactOperands = operands.compactMap({ $0 })
         
-        let optionalOperators = compactOperaotrs.map { Operator(rawValue: Character($0))}
+        let optionalOperators = compactOperators.map { Operator(rawValue: Character($0))}
         let optionalOperands = compactOperands.map { Double($0) }
         
         let retrievedOperators = CalculatorItemQueue<Operator>(queue: optionalOperators, head: 0)
