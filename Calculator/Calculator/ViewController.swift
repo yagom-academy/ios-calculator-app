@@ -25,6 +25,10 @@ class ViewController: UIViewController {
         if currendOperand.text == "0" {
             currendOperand.text = ""
         }
+        if currendOperand.text?.contains(".") == true,
+           sender.currentTitle == "." {
+            return
+        }
         currendOperand?.text = (currendOperand?.text ?? "") + (sender.currentTitle ?? "")
     }
     
@@ -47,6 +51,7 @@ class ViewController: UIViewController {
     @IBAction func pressClearEntryButton(_ sender: UIButton) {
         clearCurrentOperand()
     }
+    
     //MARK: - ViewController Method
     private func clearCurrentOperand() {
         currendOperand.text = ZERO
