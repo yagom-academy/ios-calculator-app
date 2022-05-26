@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         resetNumberInput()
         resetOperatorInput()
         resetTotalInput()
+        clearLastInput()
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
@@ -49,5 +50,16 @@ class ViewController: UIViewController {
     
     func resetTotalInput() {
         totalInput = ""
+    }
+    
+    func clearLastInput() {
+        while lastInput.arrangedSubviews.count > 0 {
+            guard let lastView = lastInput.arrangedSubviews.last else {
+                return
+            }
+
+            lastInput.removeArrangedSubview(lastView)
+            lastView.removeFromSuperview()
+        }
     }
 }
