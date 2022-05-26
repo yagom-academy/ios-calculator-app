@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     
     func resetUI() {
         formula = Formula()
-        operatorLabel.text = " "
+        operatorLabel.text = ""
         operandLabel.text = "0"
         calculatingStackView.subviews.forEach { $0.removeFromSuperview() }
     }
@@ -66,11 +66,7 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(newStackView)
     }
     
-    // 숫자 버튼이 눌리면?
-    // 1. 연산자 버튼이 눌리기 전까지 쌓아놔야 함.
-    // 2. 누른 숫자들로 레이블을 변경
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        // 눌린 버튼의 글자를 inputString에 추가하기
         guard let tappedNumberText = sender.titleLabel?.text else { return }
         if operandLabel.text == "0" { operandLabel.text = "" }
         operandLabel.text?.append(tappedNumberText)
@@ -88,9 +84,6 @@ class ViewController: UIViewController {
         operandLabel.text?.append(tappedDoubleZeroText)
     }
     
-    // 부호 버튼이 눌리면?
-    // 1. 현재 숫자 큐에 있는 값을 반대의 부호로 바꿔주어야 함.
-    // 2. 숫자 레이블을 업데이트 해야함.
     @IBAction func signButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
         if operandLabel.text?.first == "-" {
@@ -100,11 +93,6 @@ class ViewController: UIViewController {
         }
     }
     
-    // 연산자 버튼이 눌리면?
-    // 1. 숫자 레이블을 0으로 바꿔야 함.
-    // 2. parse를 실행해서 큐에 넣어야 함.
-    // 2-2. 숫자가 없으면 parse를 실행하지 말아야 함.
-    // 3. 스크롤뷰에 스택으로 쌓아야 함.
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let tappedOperatorText = sender.titleLabel?.text,
               let operatorLabelText = operatorLabel.text,
@@ -124,12 +112,10 @@ class ViewController: UIViewController {
         let inputString = operatorLabelText + " " + operandLabelText
         formula? += ExpressionParser.parse(from: inputString)
     }
-    
-    // 계산 버튼이 눌리면?
-    // 1. 마지막으로 받은 숫자 하나를 큐에 넣어야 함.
-    // 2. 큐에 있는 값들을 result() 결과를 돌려줘야 함.
-    // 3. 숫자 레이블 업데이트
+
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        guard operatorLabel.text != "" else { return }
+        
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
@@ -140,13 +126,12 @@ class ViewController: UIViewController {
             formula? += ExpressionParser.parse(from: inputString)
         }
         
-        
         switch formula?.result() {
         case .success(let data):
             operatorLabel.text = ""
             operandLabel.text = String(data)
         case .failure(let error):
-            print("Error occurred: \(error)")
+            print("Error occurred: ☢️\(error)☢️")
             return
         case .none:
             break
@@ -154,15 +139,10 @@ class ViewController: UIViewController {
         
     }
     
-    // CE 버튼이 눌리면?
-    // 1. 마지막으로 입력했었던 숫자를 없애야 함
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         operandLabel.text = "0"
     }
     
-    // AC 버튼이 눌리면?
-    // 1. 큐를 다 없애고, 0으로 초기화해야 함.
-    // 2. 부호 레이블 및 숫자 레이블 업데이트
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         resetUI()
     }
