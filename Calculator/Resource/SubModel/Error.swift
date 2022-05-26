@@ -8,17 +8,17 @@
 import Foundation
 
 enum valueError: Error {
-    case operandEmptyError
-    case operatorEmptyError
-    case divideByZeroError
+    case operandEmpty
+    case operatorEmpty
+    case divideByZero
     
     var message: String {
         switch self {
-        case .operandEmptyError:
+        case .operandEmpty:
             return "숫자가 없습니다!"
-        case .operatorEmptyError:
+        case .operatorEmpty:
             return "연산자가 없습니다!"
-        case .divideByZeroError:
+        case .divideByZero:
             return "0으로 나눌수 없습니다!"
         }
     }
