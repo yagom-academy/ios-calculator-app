@@ -34,25 +34,23 @@ class ViewController: UIViewController {
         
         addedStackView.axis = .horizontal
         addedStackView.alignment = .fill
-        addedStackView.spacing = exampleStackView1.spacing
-        addedStackView.distribution = exampleStackView1.distribution
-        addedStackView.isHidden = false
+        addedStackView.spacing = 8
+        addedStackView.distribution = .fill
         addedStackView.translatesAutoresizingMaskIntoConstraints = false
+        addedStackView.isHidden = false
         
-        addedOperatorsLabel.textAlignment = .right
         addedOperatorsLabel.text = "+"
-        addedOperatorsLabel.font = operatorLabel.font
-        addedOperatorsLabel.textColor = operatorLabel.textColor
+        addedOperatorsLabel.textAlignment = .right
+        addedOperatorsLabel.textColor = UIColor.white
         addedOperatorsLabel.translatesAutoresizingMaskIntoConstraints = false
         addedOperatorsLabel.isHidden = false
         
         addedOperandsLabel.text = "0000000"
-        addedOperandsLabel.textColor = operandLabel.textColor
-        addedOperandsLabel.font = operandLabel.font
         addedOperandsLabel.textAlignment = .right
+        addedOperandsLabel.textColor = UIColor.white
         addedOperandsLabel.translatesAutoresizingMaskIntoConstraints = false
         addedOperandsLabel.isHidden = false
-        
+
         addedStackView.addArrangedSubview(addedOperatorsLabel)
         addedStackView.addArrangedSubview(addedOperandsLabel)
         
@@ -60,6 +58,7 @@ class ViewController: UIViewController {
     }
     //MARK: - deleteStackViewAll()
     func deleteStackViewAll() {
+        largeStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     //MARK: - changeOperandSignButtonTapped
