@@ -33,6 +33,8 @@ class ViewController: UIViewController {
     @IBAction func pressAllClearButton(_ sender: UIButton) {
         clearScrollviewContent()
         clearCurrentOperand()
+        clearCurrentOperator()
+        
     }
     @IBAction func pressClearEntryButton(_ sender: UIButton) {
         clearCurrentOperand()
@@ -40,6 +42,9 @@ class ViewController: UIViewController {
     //MARK: - ViewController Method
     private func clearCurrentOperand() {
         currendOperand.text = "0"
+    }
+    private func clearCurrentOperator() {
+        currentOperator.text = ""
     }
     private func clearScrollviewContent() {
         scrollViewContents.subviews.forEach { UIView in
