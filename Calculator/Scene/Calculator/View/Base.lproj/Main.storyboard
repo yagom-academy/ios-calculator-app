@@ -365,6 +365,7 @@
                     </view>
                     <connections>
                         <outlet property="expressionView" destination="XRe-QE-UJf" id="p2v-4m-fxk"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="7Kh-eb-mf2"/>
                         <outletCollection property="currentValue" destination="HPC-iy-qdm" collectionClass="NSMutableArray" id="iX2-H8-CH4"/>
                         <outletCollection property="currentValue" destination="Lwz-OF-XHD" collectionClass="NSMutableArray" id="QMQ-TG-htQ"/>
                         <outletCollection property="defaultStackView" destination="2Pu-Ld-ZGi" collectionClass="NSMutableArray" id="Fk9-zK-PcC"/>

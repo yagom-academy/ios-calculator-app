@@ -20,6 +20,7 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet var defaultStackView: [UIStackView]!
 
+    @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
         currentValue[0].text = ""
@@ -50,6 +51,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedDot(_ sender: UIButton) {
         guard var value = currentValue[1].text else { return }
+        
         var isDot: Bool {
             if value.contains(".") {
                 return false
@@ -57,6 +59,7 @@ class CalculatorViewController: UIViewController {
                 return true
             }
         }
+        
         if isDot {
             value += "."
             currentValue[1].text = value
@@ -65,6 +68,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tappedOperators(_ sender: UIButton) {
         guard var value = currentValue[1].text else { return }
+        
         guard value != "0" else {
             if NumberOfFormula == 1 {
                 return
@@ -72,6 +76,7 @@ class CalculatorViewController: UIViewController {
             currentValue[0].text = sender.currentTitle
             return
         }
+        
         var isDot: Bool {
             if value.contains(".") {
                 return true
@@ -98,22 +103,24 @@ class CalculatorViewController: UIViewController {
         expressionView.addArrangedSubview(stack)
         inputedStack.append(stack)
         if NumberOfFormula > 1 {
-            totalFormula += " \(currentValue[0].text!) \(currentValue[1].text!)"
+            totalFormula += " \(currentValue[0].text!) \(value)"
         } else {
-            totalFormula += "\(currentValue[1].text!)"
+            totalFormula += "\(value)"
         }
         currentValue[0].text = sender.currentTitle
         currentValue[1].text = "0"
         NumberOfFormula += 1
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     @IBAction func tappedResult(_ sender: UIButton) {
-        // 넣어준 값 다 지워주고 current값에 결과 넣어주기
         guard NumberOfFormula > 1 else {
             totalFormula += "\(currentValue[1].text!)"
             return
         }
         totalFormula += " \(currentValue[0].text!) \(currentValue[1].text!)"
+        
         do {
             let operatorLabel = createLabel()
             operatorLabel.text = currentValue[0].text
@@ -127,6 +134,8 @@ class CalculatorViewController: UIViewController {
             currentValue[0].text = ""
             currentValue[1].text = "\(result)"
             totalFormula = ""
+            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
+            scrollView.setContentOffset(bottomOffset, animated: true)
         } catch DevideError.nilOfValue {
             currentValue[0].text = ""
             currentValue[1].text = "NAN"
@@ -152,9 +161,7 @@ class CalculatorViewController: UIViewController {
         } else if changeValue == 1 {
             currentValue[1].text = "0"
         } else {
-            guard let value = currentValue[1].text else {
-                return
-            }
+            guard let value = currentValue[1].text else { return }
             
             guard value != "0" else { return }
             
