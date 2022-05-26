@@ -76,4 +76,17 @@ class CalculatorTests: XCTestCase {
         // then (큐의 모든 요소가 제거된다)
         XCTAssertEqual(sut.count, 0)
     }
+    
+    func test_popRemovesAndReturnsLastElement() {
+        // given
+        // (큐에 요소 "1","2","3"이 있을때)
+        
+        // when
+        let lastElementBeforePop = sut.pop()
+        let expected = "3"
+        
+        //then
+        XCTAssertEqual(lastElementBeforePop, expected)
+        XCTAssertEqual(sut.count, 2)
+    }
 }

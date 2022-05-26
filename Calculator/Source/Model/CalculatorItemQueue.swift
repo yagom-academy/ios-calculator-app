@@ -57,6 +57,16 @@ struct CalculatorItemQueue<T> {
         }
     }
     
+    mutating func pop() -> T? {
+        if count == 0 {
+            return nil
+        } else {
+            guard let lastElement = queue.last else { return nil }
+            queue.removeLast()
+            return lastElement
+        }
+    }
+    
     mutating func clear() {
         queue.removeAll()
     }
