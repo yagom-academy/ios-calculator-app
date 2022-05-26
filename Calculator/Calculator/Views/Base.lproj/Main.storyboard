@@ -293,7 +293,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operandButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6SM-yw-s5c"/>
+                                                    <action selector="doubleZeroButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TD1-M3-3z6"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -304,7 +304,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operandButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IGe-3L-nCu"/>
+                                                    <action selector="demicalPointButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hDS-Ay-ms5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">

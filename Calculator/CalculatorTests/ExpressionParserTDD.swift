@@ -19,8 +19,8 @@ class ExpressionParserTDD: XCTestCase {
     
     func test_스트링을받아서_Formula타입으로_반환() throws {
         // given
-        let inputExpression: String = "4 + 4 * 5 / 10"
-        let expectationOperands: [Double] = [4.0, 4.0, 5.0, 10.0]
+        let inputExpression: String = "  -4 +  4 ×  5 ÷ -10  "
+        let expectationOperands: [Double] = [-4.0, 4.0, 5.0, -10.0]
         let expectationOperators: [Operator] = [.add, .multiply, .divide]
         
         // what
