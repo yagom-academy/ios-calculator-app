@@ -7,9 +7,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var isOperandinputed = false
+    private var isOperandInputed = false
     private var isCalculateCompleted = false
-    private var mathematicalExpression = ""
+    private var inputedFomula = ""
     
     @IBOutlet private weak var mathematicalExpressionScrollView: UIScrollView!
     @IBOutlet private weak var mathematicalExpressionStackView: UIStackView!
@@ -21,35 +21,35 @@ class ViewController: UIViewController {
         mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    @IBAction private func acButtonAction(_ sender: UIButton) {
-        reset()
+    @IBAction private func setToDefault(_ sender: UIButton) {
+        resetCalculateOption()
     }
     
-    @IBAction private func ceButtonAction(_ sender: UIButton) {
+    @IBAction private func deleteCurrentInputed(_ sender: UIButton) {
         if isCalculateCompleted {
-            reset()
+            resetCalculateOption()
         }
         
         operandLabel.text = "0"
-        isOperandinputed = false
+        isOperandInputed = false
     }
     
-    @IBAction private func switchSignButton(_ sender: UIButton) {
+    @IBAction private func changeTheSign(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
-        guard let operand = Double(getText(operandLabel.text)) , operand != 0.0 else {
+        guard let operand = Double(getText(operandLabel.text)), operand != 0.0 else {
             return
         }
         
         operandLabel.text = String(-Int(operand))
     }
     
-    @IBAction private func operatorsButtonAction(_ sender: UIButton) {
+    @IBAction private func appendOperator(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
-        guard isOperandinputed else {
+        guard isOperandInputed else {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -59,26 +59,26 @@ class ViewController: UIViewController {
         
         if mathematicalExpressionStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
-            addMathematicalExpression(isFirstInput: true)
+            addFomula(isFirstInput: true)
         } else {
             createStackView(operatorOfSignLabel, operandOfSignLabel)
-            addMathematicalExpression(isFirstInput: false)
+            addFomula(isFirstInput: false)
         }
         
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
-        isOperandinputed = false
+        isOperandInputed = false
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
             self.downScroll()
         }
     }
     
-    @IBAction private func operandsButtonAction(_ sender: UIButton) {
+    @IBAction private func appendOperand(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
         
-        if !isOperandinputed {
+        if !isOperandInputed {
             operandLabel.text = getText(sender.currentTitle)
             isOperandinputed = true
         } else {
@@ -87,8 +87,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func calculateButtonAction(_ sender: UIButton) {
-        guard isOperandinputed else {
+    @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
+        guard isOperandInputed else {
             return
         }
         guard !mathematicalExpressionStackView.subviews.isEmpty else {
@@ -98,21 +98,21 @@ class ViewController: UIViewController {
         let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
         let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
         createStackView(operatorOfSignLabel, operandOfSignLabel)
-        addMathematicalExpression(isFirstInput: false)
-        operandLabel.text = calculate(mathematicalExpression)
+        addFomula(isFirstInput: false)
+        operandLabel.text = calculate(inputedFomula)
         
         operatorLabel.text = ""
-        mathematicalExpression = ""
-        isOperandinputed = false
+        inputedFomula = ""
+        isOperandInputed = false
         isCalculateCompleted = true
     }
     
-    private func reset() {
+    private func resetCalculateOption() {
         mathematicalExpressionStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = "0"
         operatorLabel.text = ""
-        mathematicalExpression = ""
-        isOperandinputed = false
+        inputedFomula = ""
+        isOperandInputed = false
         isCalculateCompleted = false
     }
     
@@ -160,12 +160,12 @@ class ViewController: UIViewController {
         return text
     }
     
-    private func addMathematicalExpression(isFirstInput: Bool) {
+    private func addFomula(isFirstInput: Bool) {
         guard isFirstInput else {
-            mathematicalExpression += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
+            inputedFomula += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
             return
         }
-        mathematicalExpression += getText(operandLabel.text)
+        inputedFomula += getText(operandLabel.text)
     }
     
     private func downScroll() {
