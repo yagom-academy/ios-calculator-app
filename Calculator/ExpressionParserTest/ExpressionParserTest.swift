@@ -10,11 +10,13 @@ import XCTest
 class ExpressionParserTest: XCTestCase {
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
     }
-
+    
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
     }
-
+    
     func test_하나의_식을_문자열값으로_받은_경우_연산이_올바르게_되어야한다() {
         //given
         let expression = "2 + 6 × 5 ÷ -2"
@@ -24,14 +26,14 @@ class ExpressionParserTest: XCTestCase {
         XCTAssertEqual(try result.result(), -20)
     }
     func test_나누기_연산했을때_나누는수가_0이라면_에러가_발생해야한다() {
-            //given
-            let expression = "2 ÷ 0"
-            
-            //when
-            var result = ExpressionParser.parse(from: expression)
-            //then
-            XCTAssertThrowsError(try result.result(), "divideZero") { error in
-                XCTAssertEqual(error as? OperatorError, OperatorError.divideZero)
-            }
+        //given
+        let expression = "2 ÷ 0"
+        
+        //when
+        var result = ExpressionParser.parse(from: expression)
+        //then
+        XCTAssertThrowsError(try result.result(), "divideZero") { error in
+            XCTAssertEqual(error as? OperatorError, OperatorError.divideZero)
         }
+    }
 }

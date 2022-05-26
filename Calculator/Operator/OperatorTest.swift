@@ -11,7 +11,7 @@ class OperatorTest: XCTestCase {
     var sut: Operator!
     
     override func setUpWithError() throws {
-        
+        try super.setUpWithError()
     }
     
     override func tearDownWithError() throws {
