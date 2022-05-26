@@ -44,6 +44,21 @@ class ViewController: UIViewController {
         default:
             return
         }
+        
+        
+    }
+    
+    @IBAction func tapResultButton() {
+        let formula = ExpressionParser.parse(from: numbers)
+        var result = 0.0
+        
+        do {
+            result = try formula.result()
+        } catch CalculatorError.dividedByZero {
+                CalculatorError.dividedByZero.errorMessage
+        } catch {
+            CalculatorError.unknownError.errorMessage
+        }
     }
     
     
