@@ -9,6 +9,9 @@ import UIKit
 class CalculatorViewController: UIViewController {
     private var userNumberTapped = false
     
+    @IBOutlet weak var inputStackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     
@@ -36,7 +39,11 @@ class CalculatorViewController: UIViewController {
         if userNumberTapped {
             let textCurrentlyInDisply = operandLabel.text!
             operandLabel.text! = textCurrentlyInDisply + digit
-        } else {
+        }
+        else if operandLabel.text!.contains(".") {
+            userNumberTapped = true
+        }
+        else {
             operandLabel.text! = digit
         }
         userNumberTapped = true
@@ -51,6 +58,11 @@ class CalculatorViewController: UIViewController {
         } else {
             operandLabel.text! = textCurrentlyInDisply + dot
         }
+    }
+    
+    @IBAction func didTapOperatorButton(_ sender: UIButton) {
+        let operators = sender.currentTitle!
+        operatorLabel.text = operators
     }
 }
 
