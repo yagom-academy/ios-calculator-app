@@ -101,6 +101,14 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func removeAllButton(_ sender: UIButton) {
+        userInput = ""
+        userInputNumber = ""
+        setupViews()
+        removeStack()
+    }
+    
+    
     private func generateStackLabels() -> (UILabel, UILabel)? {
         guard let `operator` = operatorLabel.text,
               let number = operandLabel.text else {
@@ -148,5 +156,11 @@ final class CalculatorViewController: UIViewController {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
+    
+    private func removeStack() {
+            inputStackView.subviews.forEach {
+                $0.removeFromSuperview()
+            }
+        }
 }
 
