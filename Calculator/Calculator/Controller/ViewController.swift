@@ -154,11 +154,11 @@ class CalculateViewController: UIViewController {
     
     private func addInputtedFomula() {
         guard inputtedFomula.isEmpty else {
-            inputtedFomula += " \(getText(operatorLabel)) \(getText(operandLabel).filter { $0.isNumber })"
+            inputtedFomula += " \(getText(operatorLabel)) \(getText(operandLabel).filter { $0 != "," })"
             return
         }
         
-        inputtedFomula = "\(getText(operandLabel).filter { $0.isNumber })"
+        inputtedFomula = "\(getText(operandLabel).filter { $0 != "," })"
     }
     
     private func downScroll() {
