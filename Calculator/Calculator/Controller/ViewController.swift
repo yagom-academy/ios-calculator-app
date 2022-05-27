@@ -11,7 +11,6 @@ final class ViewController: UIViewController {
     
     @IBOutlet weak var inputNumberLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
-    @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet weak var divisionButton: UIButton!
     @IBOutlet weak var multiplicationButton: UIButton!
     @IBOutlet weak var subtractionButton: UIButton!
@@ -79,9 +78,8 @@ extension ViewController {
 
 extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
-        guard let tappedNumber = numberButtons.firstIndex(of: sender) else { return }
-        let newInputNumbers = Keypad.convertNumber(tappedNumber)
-        checkInputNumber(number: newInputNumbers)
+        let tappedNumber = sender.titleLabel?.text ?? "0"
+        checkInputNumber(number: tappedNumber)
         inputNumberLabel.text = inputNumber
     }
     
