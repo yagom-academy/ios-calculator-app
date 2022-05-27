@@ -14,20 +14,20 @@ class ViewController: UIViewController {
         exampleStackView2.isHidden = true
     }
     
-    var expressionParserInput: String = "0"
-    var isCalculated = false
+    private var expressionParserInput: String = "0"
+    private var isCalculated = false
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var exampleStackView1: UIStackView!
-    @IBOutlet weak var exampleStackView2: UIStackView!
-    @IBOutlet weak var largeStackView: UIStackView!
-    @IBOutlet weak var operatorStackLabel: UILabel!
-    @IBOutlet weak var operandStackLabel: UILabel!
-    @IBOutlet weak var operandsTextLabel: UILabel!
-    @IBOutlet weak var operatorTextLabel: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var exampleStackView1: UIStackView!
+    @IBOutlet private weak var exampleStackView2: UIStackView!
+    @IBOutlet private weak var largeStackView: UIStackView!
+    @IBOutlet private weak var operatorStackLabel: UILabel!
+    @IBOutlet private weak var operandStackLabel: UILabel!
+    @IBOutlet private weak var operandsTextLabel: UILabel!
+    @IBOutlet private weak var operatorTextLabel: UILabel!
     
     //MARK: - addStackView()
-    func addStackView() {
+    private func addStackView() {
         let addedStackView = UIStackView()
         let addedOperatorsLabel = UILabel()
         let addedOperandsLabel = UILabel()
@@ -63,12 +63,12 @@ class ViewController: UIViewController {
     }
     
     //MARK: - deleteStackViewAll()
-    func deleteStackViewAll() {
+    private func deleteStackViewAll() {
         largeStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     //MARK: - operandButtonsTapped()
-    @IBAction func operandButtonsTapped(_ sender: UIButton) {
+    @IBAction private func operandButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         let formattedText = formatNumber(senderLabelText)
         
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: - operatorButtonsTapped()
-    @IBAction func operatorButtonsTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         guard let operandLabelText = operandsTextLabel.text else { return }
         let formattedNumber = formatNumber(operandLabelText)
@@ -116,7 +116,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: - calculateButtonTapped
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+    @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         isCalculated = true
         var result: Double?
         var calculator = ExpressionParser.parse(from: expressionParserInput)
@@ -211,7 +211,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: - doubleZeroButtonTapped
-    @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
+    @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
         if operandsTextLabel.text?.count == 1,
@@ -224,7 +224,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: - decimalPointButtonTapped
-    @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
+    @IBAction private func decimalPointButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
         if operandsTextLabel.text?.contains(senderLabelText) == true {
@@ -235,12 +235,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func deleteTextLabelText() {
+    private func deleteTextLabelText() {
         operatorTextLabel.text = ""
         operandsTextLabel.text = "0"
     }
     
-    func formatNumber(_ input: String) -> String {
+    private func formatNumber(_ input: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
