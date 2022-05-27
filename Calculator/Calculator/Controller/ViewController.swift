@@ -103,3 +103,34 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func ACButtonDidTapped(_ sender: UIButton) {
+        calculateItems = emptyString
+        recentInputStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        displayOperator.text = emptyString
+        displayNumber.text = zeroString
+    }
+
+    
+    @IBAction func CEButtonDidTapped(_ sender: UIButton) {
+        displayNumber.text = zeroString
+    }
+    
+    @IBAction func changeOperatorSignButtonDidTapped(_ sender: UIButton) {
+        guard displayNumber.text != "0" else {
+            return
+        }
+        
+        guard var text = displayNumber?.text else {
+            return
+        }
+        
+        if displayNumber.text!.prefix(1) == "-" {
+            text.remove(at: text.startIndex)
+            displayNumber.text = text
+        } else {
+            text.insert("-", at: text.startIndex)
+            displayNumber.text = text
+        }
+    }
