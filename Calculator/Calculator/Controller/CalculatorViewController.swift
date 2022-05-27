@@ -54,7 +54,7 @@ class CalculatorViewController: UIViewController {
         
         addFormulaLable(content: String(`operator`) + " " + number)
         
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: false)
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + 20), animated: false)
     }
     
     private func deleteFormulaLable() {
