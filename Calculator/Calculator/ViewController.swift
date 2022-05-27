@@ -25,6 +25,9 @@ class ViewController: UIViewController {
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
         isEndOperation = false
+        guard currentOperand.text?.count ?? 0 < 20 else {
+            return
+        }
         if currentOperand.text?.first == "0" || currentOperand.text == "NaN"{
             currentOperand.text = ""
         }
