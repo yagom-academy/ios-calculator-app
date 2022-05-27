@@ -34,11 +34,7 @@ final class CalculatorViewController: UIViewController {
         if operandLabel.text == "0", digit == "0" || digit == "00" {
             return
         }
-        
-        if countNumberString() {
-            return
-        }
-        
+
         if userNumberTapped {
             operandLabel.text! += digit
         }
@@ -48,6 +44,15 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text! = digit
         }
         
+        if operandLabel.text!.contains(",") {
+            operandLabel.text! = operandLabel.text!.replacingOccurrences(of: ",", with: "")
+        }
+        
+        let validNumber = makeDouble(number: operandLabel.text!)
+        print(validNumber)
+        
+        let number = doNumberFormatter(number: validNumber)
+        operandLabel.text = number
         userNumberTapped = true
         userInputNumber.append(digit)
     }
@@ -105,6 +110,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber = ""
         setupViews()
         removeStack()
+        userNumberTapped = false
     }
     
     @IBAction func removeCurrentNumberButton(_ sender: UIButton) {
@@ -171,14 +177,21 @@ final class CalculatorViewController: UIViewController {
         guard let validNumber = Double(number) else { return 0 }
         return validNumber
     }
-    
-    func countNumberString() -> Bool {
-        if operandLabel.text!.count >= 20 {
-            return true
-        } else if operatorLabel.text!.contains("-"), operatorLabel.text!.count >= 21 {
-            return true
+ 
+    func doNumberFormatter(number:Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumIntegerDigits = 1
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
+        
+        guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
+            return "NaN"
         }
-        return false
+        
+        return formattedNumber
+        
     }
 }
 
