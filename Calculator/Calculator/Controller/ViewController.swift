@@ -168,11 +168,9 @@ class ViewController: UIViewController {
         expressionParserInput = ""
     }
     
-    //MARK: - clearEntryButtonTapped :operandsTextLabel 에서 마지막으로 입력된 숫자만 지움, 연산이 된상태라면 모든 스택을 지움
+    //MARK: - clearEntryButtonTapped
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         if isCalculated == true {
-            deleteStackViewAll()
-            deleteTextLabelText()
             operandsTextLabel.text = "0"
             isCalculated = false
         }
