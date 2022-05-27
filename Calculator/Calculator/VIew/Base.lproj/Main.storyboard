@@ -361,6 +361,7 @@
                         <outlet property="multiplicationButton" destination="811-Pz-An6" id="EQk-Sn-Muj"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="teK-8U-3a7"/>
                         <outlet property="resultButton" destination="Daw-iX-Owl" id="jUj-IJ-FqB"/>
+                        <outlet property="stackView" destination="XRe-QE-UJf" id="XlY-wQ-3Se"/>
                         <outlet property="subtractionButton" destination="nTe-Sn-Pvd" id="UKi-PE-aGh"/>
                         <outletCollection property="numberButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="m2a-Qs-J3W"/>
                         <outletCollection property="numberButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="o7b-fE-1S7"/>

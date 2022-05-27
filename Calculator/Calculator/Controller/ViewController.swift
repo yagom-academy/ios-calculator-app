@@ -16,9 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var subtractionButton: UIButton!
     @IBOutlet weak var additionButton: UIButton!
     @IBOutlet weak var resultButton: UIButton!
+    @IBOutlet weak var stackView: UIStackView!
     
     private var numbers = ""
-    private var isEdit = true
+    private var formula = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapKeypadButton(_ sender: UIButton) {
-        if !isEdit {
-            numbers = ""
-            isEdit = true
-        }
-        
         guard let number = numberButtons.firstIndex(of: sender) else { return }
         let newInputNumbers = Keypad.convertNumber(number)
         checkInputNumbers(text: newInputNumbers)
@@ -51,7 +47,7 @@ class ViewController: UIViewController {
             return
         }
         
-        isEdit = false
+        updateStackView()
     }
     
     @IBAction func tapResultButton() {
@@ -66,9 +62,19 @@ class ViewController: UIViewController {
         }
     }
     
-    
     func updateLable(text: String) {
         inputNumberLabel.text = numbers
+    }
+    
+    func updateStackView() {
+        let label = UILabel()
+        label.text = numbers
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        stackView.addArrangedSubview(label)
+        formula += numbers
+        numbers = ""
+        // label.adjustsFontForContentSizeCategory = true
     }
     
     func checkInputNumbers(text: String) {
