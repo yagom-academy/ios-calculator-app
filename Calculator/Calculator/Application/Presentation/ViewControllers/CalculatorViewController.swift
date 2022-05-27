@@ -55,6 +55,8 @@ class CalculatorViewController: UIViewController {
         }
         
         switch currentNumber {
+        case "NaN", "Err":
+            return
         case "0":
             currentNumber = number
         default:
@@ -87,6 +89,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func pressEqualButton(_ sender: UIButton) {
+        guard currentNumber != "NaN",
+              currentNumber != "Err",
+              currentOperator.isNotEmpty else {
+            return
+        }
+        
         let operatorNow = translateOperator(currentOperator)
         snippets.append((operatorNow, currentNumber))
         
@@ -114,6 +122,11 @@ class CalculatorViewController: UIViewController {
     
     
     @IBAction func pressCEButton(_ sender: UIButton) {
+        guard currentNumber != "NaN",
+              currentNumber != "Err" else {
+            return
+        }
+        
         currentNumber = "0"
 
         refreshNumberLabel()
