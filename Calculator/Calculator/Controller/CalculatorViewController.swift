@@ -60,6 +60,7 @@ class CalculatorViewController: UIViewController {
     private func deleteFormulaLable() {
         stackView.arrangedSubviews.forEach {
             stackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
         }
     }
     
