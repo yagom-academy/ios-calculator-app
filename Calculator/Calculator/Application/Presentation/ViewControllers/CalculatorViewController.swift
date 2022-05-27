@@ -59,5 +59,12 @@ class CalculatorViewController: UIViewController {
         
         refreshOperatorLabel()
     }
+    
+    
+    @IBAction func pressCEButton(_ sender: UIButton) {
+        currentNumber = ""
+        
+        refreshNumberLabel()
+    }
 }
 
