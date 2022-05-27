@@ -69,12 +69,11 @@ class CalculatorViewController: UIViewController {
         guard let `operator` = sender.titleLabel?.text else {
             return
         }
-        // TODO: 현재 계산기 위의 수가 무엇이냐에 따라 오퍼레이터에 따른 액션 조절
         
         switch currentNumber {
         case "0":
             currentOperator = `operator`
-        case "NaN":
+        case "NaN", "Err":
             return
         default:
             let operatorNow = translateOperator(currentOperator)
@@ -116,9 +115,18 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func pressCEButton(_ sender: UIButton) {
         currentNumber = "0"
+
+        refreshNumberLabel()
+    }
+    
+    
+    @IBAction func pressACButton(_ sender: UIButton) {
+        snippets = []
+        currentNumber = "0"
         currentOperator = ""
         
         refreshNumberLabel()
+        refreshOperatorLabel()
     }
 }
 
