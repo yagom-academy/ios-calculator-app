@@ -112,9 +112,45 @@ class ViewController: UIViewController {
         addStackView()
     }
     
-    //MARK: - operatorButtonsTapped
+    //MARK: - operandButtonsTapped()
+    @IBAction func operandButtonsTapped(_ sender: UIButton) {
+        guard let senderLabelText = sender.titleLabel?.text else { return }
+        
+        if operandsTextLabel.text == "NaN" {
+            operandsTextLabel.text = ""
+            return
+        }
+        
+        if operandsTextLabel.text == "0" {
+            operandsTextLabel.text = ""
+        } else if isCalculated == true {
+            operandsTextLabel.text = ""
+            operatorTextLabel.text = ""
+            deleteStackViewAll()
+            isCalculated = false
+        }
+        
+        operandsTextLabel.text?.append(senderLabelText)
+        expressionParserInput.append(senderLabelText)
+    }
+    
+    //MARK: - operatorButtonsTapped()
     @IBAction func operatorButtonsTapped(_ sender: UIButton) {
-        operatorTextLabel.text = sender.titleLabel?.text
+        guard let senderLabelText = sender.titleLabel?.text else { return }
+        guard let operandLabelText = operandsTextLabel.text else { return }
+        guard let operandLabelText = operandsTextLabel.text else { return }
+        if operandsTextLabel.text == "NaN" {
+            return
+        } else if operandLabelText == "0" {
+            operatorTextLabel.text = senderLabelText
+            return
+        }
+        
+        addStackView()
+        expressionParserInput.append(" \(senderLabelText) ")
+        operatorTextLabel.text = senderLabelText
+        operandsTextLabel.text = operandLabelText
+        operandsTextLabel.text = "0"
     }
     
     //MARK: - zeroButtonTapped
@@ -142,13 +178,6 @@ class ViewController: UIViewController {
             operandsTextLabel.text = operandsTextLabel.text
         } else if operandsTextLabel.text?.count != 0 {
             operandsTextLabel.text! += sender.titleLabel?.text ?? ""
-        }
-    }
-    
-    //MARK: - eraseZero
-    func eraseZero() {
-        if operandsTextLabel.text == "0" {
-            operandsTextLabel.text = ""
         }
     }
 }
