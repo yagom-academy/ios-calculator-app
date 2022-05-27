@@ -85,6 +85,9 @@
                                                 <state key="normal" title="AC">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="removeAll" destination="BYZ-38-t0r" eventType="touchUpInside" id="FtU-QB-cNs"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -93,6 +96,9 @@
                                                 <state key="normal" title="CE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clearEntity" destination="BYZ-38-t0r" eventType="touchUpInside" id="GSE-3v-CED"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -101,6 +107,9 @@
                                                 <state key="normal" title="⁺⁄₋">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="changeSign" destination="BYZ-38-t0r" eventType="touchUpInside" id="atk-iL-Lko"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -110,7 +119,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="InputSignWithButtonSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pu4-4c-YcI"/>
+                                                    <action selector="InputSignWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9fu-cS-97V"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -122,7 +131,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="8">
+                                                <state key="normal" title="7">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -133,7 +142,7 @@
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="9">
+                                                <state key="normal" title="8">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -144,7 +153,7 @@
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="7">
+                                                <state key="normal" title="9">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -159,7 +168,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="InputSignWithButtonSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3lu-PF-B2Y"/>
+                                                    <action selector="InputSignWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xhx-AM-fLl"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -208,7 +217,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="InputSignWithButtonSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZFL-K9-1Nr"/>
+                                                    <action selector="InputSignWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rPY-Tz-Bvx"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -257,7 +266,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="InputSignWithButtonSign:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ao1-gJ-rak"/>
+                                                    <action selector="InputSignWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RSR-xC-M5a"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -294,6 +303,9 @@
                                                 <state key="normal" title=".">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="InputDeciamlPointWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6HQ-3s-1qq"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -305,6 +317,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="calculateFormula" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZtQ-Zj-Qnn"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -351,6 +366,8 @@
                     <connections>
                         <outlet property="mathFomula" destination="Lwz-OF-XHD" id="W2L-yL-lcc"/>
                         <outlet property="mathSign" destination="HPC-iy-qdm" id="8gE-cI-XbB"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="VAR-Mx-HYD"/>
+                        <outlet property="stackView" destination="XRe-QE-UJf" id="Gke-4P-dpZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
