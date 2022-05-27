@@ -11,6 +11,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentNumberLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     
+    @IBOutlet private weak var inputStackView: UIStackView!
+    
     private var currentNumber: String = "0"
     private var currentOperator: String = ""
     private var snippets: [(`operator`: String, operand: String)] = []
@@ -31,6 +33,21 @@ class CalculatorViewController: UIViewController {
     func refreshOperatorLabel() {
         DispatchQueue.main.async {
             self.currentOperatorLabel.text = self.currentOperator
+        }
+    }
+    
+    func addIndividualInput(_ operatorData: String, _ operandData: String) {
+        let individualInputStackView = IndividualInputStackView(operatorData: operatorData, operandData: operandData)
+        DispatchQueue.main.async {
+            self.inputStackView.addArrangedSubview(individualInputStackView)
+        }
+    }
+    
+    func clearStackView() {
+        DispatchQueue.main.async {
+            self.inputStackView.subviews.forEach {
+                $0.removeFromSuperview()
+            }
         }
     }
     
@@ -66,7 +83,6 @@ class CalculatorViewController: UIViewController {
         refreshNumberLabel()
     }
     
-    
     @IBAction func pressOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.titleLabel?.text else {
             return
@@ -80,6 +96,7 @@ class CalculatorViewController: UIViewController {
         default:
             let operatorNow = translateOperator(currentOperator)
             snippets.append((operatorNow, currentNumber))
+            addIndividualInput(currentOperator, currentNumber)
             currentOperator = `operator`
             currentNumber = "0"
         }
@@ -97,6 +114,7 @@ class CalculatorViewController: UIViewController {
         
         let operatorNow = translateOperator(currentOperator)
         snippets.append((operatorNow, currentNumber))
+        addIndividualInput(currentOperator, currentNumber)
         
         var totalString = ""
         snippets.forEach {
@@ -120,7 +138,6 @@ class CalculatorViewController: UIViewController {
         refreshOperatorLabel()
     }
     
-    
     @IBAction func pressCEButton(_ sender: UIButton) {
         guard currentNumber != "NaN",
               currentNumber != "Err" else {
@@ -130,11 +147,11 @@ class CalculatorViewController: UIViewController {
         currentNumber = "0"
         if currentOperator == "" {
             snippets.removeAll()
+            clearStackView()
         }
         
         refreshNumberLabel()
     }
-    
     
     @IBAction func pressACButton(_ sender: UIButton) {
         snippets.removeAll()
@@ -143,8 +160,8 @@ class CalculatorViewController: UIViewController {
         
         refreshNumberLabel()
         refreshOperatorLabel()
+        clearStackView()
     }
-    
     
     @IBAction func pressInvertButton(_ sender: UIButton) {
         guard currentNumber != "0" else {

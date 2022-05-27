@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F339DB1284136F200130E5E /* IndividualInputStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F339DB0284136F200130E5E /* IndividualInputStackView.swift */; };
 		4F54F1D6283628B80095171B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54F1D5283628B80095171B /* Double+Extensions.swift */; };
 		4F54F1D8283636E00095171B /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54F1D7283636E00095171B /* Operator.swift */; };
 		4F54F1E0283637980095171B /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54F1DF283637980095171B /* OperatorTests.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F339DB0284136F200130E5E /* IndividualInputStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualInputStackView.swift; sourceTree = "<group>"; };
 		4F54F1D5283628B80095171B /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		4F54F1D7283636E00095171B /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4F54F1DD283637980095171B /* OperatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				4F339DB0284136F200130E5E /* IndividualInputStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				4FDE6480283BA5E100D9554E /* CalculatorError.swift in Sources */,
 				4F54F1E928367CA70095171B /* Formula.swift in Sources */,
+				4F339DB1284136F200130E5E /* IndividualInputStackView.swift in Sources */,
 				4F54F1ED283692C90095171B /* ExpressionParser.swift in Sources */,
 				4FAB83D92832F7200023B8E8 /* Queue.swift in Sources */,
 			);
