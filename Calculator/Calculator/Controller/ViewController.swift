@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private var formula: Formula?
     private let numberFormatter = NumberFormatter()
     private let zero = "0"
+    private let emptyText = ""
     private var calculateStackCount = 0
     
     override func viewDidLoad() {
@@ -30,9 +31,9 @@ class ViewController: UIViewController {
     @IBAction private func operandButtonDidTapped(_ sender: UIButton) {
         
         if screenLabel?.text == zero {
-            screenLabel?.text = ""
+            screenLabel?.text = emptyText
         }
-        screenLabel?.text = (screenLabel?.text ?? "") + (sender.currentTitle ?? "")
+        screenLabel?.text = (screenLabel?.text ?? emptyText) + (sender.currentTitle ?? emptyText)
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
@@ -50,8 +51,9 @@ class ViewController: UIViewController {
         if currentOperatorLabel?.text == "" {
             return
         }
+        guard currentOperatorLabel?.text != emptyText else { return }
         add(generateStackView(), to: historyStackView)
-        currentOperatorLabel?.text = ""
+        currentOperatorLabel?.text = emptyText
         
         guard let historyStackView = historyStackView else { return }
         formula = ExpressionParser.parse(from: generateTextData(from: historyStackView, start: calculateStackCount))
@@ -80,7 +82,7 @@ class ViewController: UIViewController {
         case "AC":
             calculateStackCount = 0
             screenLabel?.text = zero
-            currentOperatorLabel?.text = ""
+            currentOperatorLabel?.text = emptyText
             removeAllIn(stack: historyStackView)
         case "⁺⁄₋":
             guard let operand = screenLabel?.text else { return }
@@ -138,13 +140,13 @@ class ViewController: UIViewController {
                                        animated: true)
     }
     
-        var textData: String = ""
     private func generateTextData(from stackView: UIStackView, start: Int) -> String {
+        var textData = emptyText
         for subStackView in stackView.arrangedSubviews[start...] {
             subStackView.subviews.forEach {
                 if let label = $0 as? UILabel {
-                    textData += " " + (label.text ?? "")
                     textData = textData.removeEntire(character: ",")
+                    textData += " " + (label.text ?? emptyText)
                 }
             }
         }
