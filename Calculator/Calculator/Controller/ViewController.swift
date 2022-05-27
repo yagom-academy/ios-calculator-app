@@ -134,3 +134,29 @@ class ViewController: UIViewController {
             displayNumber.text = text
         }
     }
+    func generateStackView() -> UIStackView {
+        let stackView = UIStackView()
+        let operandLabel = UILabel()
+        let operatorLabel = UILabel()
+
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.isHidden = true
+        stackView.spacing = 8
+        
+        operandLabel.text = displayNumber.text
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandLabel.textColor = .white
+        operatorLabel.textAlignment = .center
+
+        operatorLabel.text = displayOperator.text
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.textColor = .white
+        operatorLabel.textAlignment = .center
+        
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        
+        return stackView
+    }
