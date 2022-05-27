@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             return
         }
         
-        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
+        guard let formattedNumber = formatNumber(number) else {
             return
         }
         
@@ -107,6 +107,18 @@ class ViewController: UIViewController {
         return numberInput.text
     }
     
+    private func formatNumber(_ number: String) -> String? {
+        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
+            return nil
+        }
+        
+        guard let reFormattedNumber = formatNumberForExposure(formattedNumber) else {
+            return nil
+        }
+        
+        return reFormattedNumber
+    }
+    
     private func formatNumberForBeingRecognizedAsNumber(_ number: String) -> Double? {
         let onceTrimmmedInput = removeComma(number)
         
@@ -131,12 +143,8 @@ class ViewController: UIViewController {
         return trimmedInput
     }
     
-    private func setNumber(_ number : Double) {
-        guard let formattedNumber = formatNumberForExposure(number) else {
-            return
-        }
-        
-        numberInput.text = formattedNumber
+    private func setNumber(_ number : String) {
+        numberInput.text = number
     }
     
     private func formatNumberForExposure(_ number: Double) -> String? {
@@ -196,7 +204,11 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult = try formula.result()
-            setNumber(calculationResult)
+            guard let result = formatNumberForExposure(calculationResult) else {
+                return
+            }
+            
+            setNumber(result)
         } catch (let calculationError) {
             handleError(calculationError)
         }
@@ -253,15 +265,15 @@ class ViewController: UIViewController {
         }
         
         // 부호 바꾸기
-        let text = String(-formattedNumber)
+        let singChangedNumber = String(-formattedNumber)
         
         // 변환 과정
-        guard let formattedText = formatNumberForBeingRecognizedAsNumber(text) else {
+        
+        guard let reformattedNumber = formatNumber(singChangedNumber) else {
             return
         }
-        
         // update
-        setNumber(formattedText)
+        setNumber(reformattedNumber)
     }
     
     private func resetNumberInput() {
@@ -287,7 +299,7 @@ class ViewController: UIViewController {
             return
         }
         
-        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
+        guard let formattedNumber = formatNumber(number) else {
             return
         }
         
