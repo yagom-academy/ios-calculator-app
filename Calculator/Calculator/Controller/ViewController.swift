@@ -82,6 +82,7 @@ class ViewController: UIViewController {
         displayOperator.text = sender.currentTitle!
         displayNumber.text = zeroString
     }
+    
     @IBAction func equalButtonDidTapped(_ sender: UIButton) {
         guard displayOperator.text != emptyString else {
             return
@@ -134,6 +135,7 @@ class ViewController: UIViewController {
             displayNumber.text = text
         }
     }
+
     func generateStackView() -> UIStackView {
         let stackView = UIStackView()
         let operandLabel = UILabel()
@@ -160,3 +162,10 @@ class ViewController: UIViewController {
         
         return stackView
     }
+    
+    func scrollToBottom() {
+        historyScrollView.setContentOffset(CGPoint(x: 0,
+                                                   y: historyScrollView.contentSize.height - historyScrollView.bounds.height),
+                                           animated: true)
+    }
+}
