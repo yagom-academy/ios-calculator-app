@@ -11,7 +11,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var currentNumberLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     
-    @IBOutlet private weak var inputStackView: UIStackView!
+    @IBOutlet private weak var receivedInputsScrollView: UIScrollView!
+    @IBOutlet private weak var receivedInputsStackView: UIStackView!
     
     private var currentNumber: String = "0"
     private var currentOperator: String = ""
@@ -25,10 +26,10 @@ class CalculatorViewController: UIViewController {
     }
     
     private func refreshNumberLabel() {
-        let newString = currentNumber.formatAsNumber()
+        let newNumber = currentNumber.formatAsNumber()
         
         DispatchQueue.main.async {
-            self.currentNumberLabel.text = newString
+            self.currentNumberLabel.text = newNumber
         }
     }
     
@@ -38,19 +39,25 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func addIndividualInput(_ operatorData: String, _ operandData: String) {
+    private func addIndividualInput(operation operatorData: String, with operandData: String) {
         let individualInputStackView = IndividualInputStackView(operatorData: operatorData, operandData: operandData)
         DispatchQueue.main.async {
-            self.inputStackView.addArrangedSubview(individualInputStackView)
+            self.receivedInputsStackView.addArrangedSubview(individualInputStackView)
         }
     }
     
     private func clearStackView() {
         DispatchQueue.main.async {
-            self.inputStackView.subviews.forEach {
+            self.receivedInputsStackView.subviews.forEach {
                 $0.removeFromSuperview()
             }
         }
+    }
+    
+    private func scrollDownScrollView() {
+        let bottomOffset = CGPoint(x: 0, y: receivedInputsScrollView.contentSize.height - receivedInputsScrollView.bounds.height)
+        
+        receivedInputsScrollView.setContentOffset(bottomOffset, animated: false)
     }
     
     private func translateOperator(_ symbol: String) -> String {
@@ -92,19 +99,22 @@ class CalculatorViewController: UIViewController {
         
         switch currentNumber {
         case "0":
-            currentOperator = `operator`
+            if snippets.isNotEmpty {
+                currentOperator = `operator`
+            }
         case "NaN", "Err":
             return
         default:
             let operatorNow = translateOperator(currentOperator)
             snippets.append((operatorNow, currentNumber))
-            addIndividualInput(currentOperator, currentNumber)
+            addIndividualInput(operation: currentOperator, with: currentNumber)
             currentOperator = `operator`
             currentNumber = "0"
         }
         
         refreshNumberLabel()
         refreshOperatorLabel()
+        scrollDownScrollView()
     }
     
     @IBAction private func pressEqualButton(_ sender: UIButton) {
@@ -116,7 +126,7 @@ class CalculatorViewController: UIViewController {
         
         let operatorNow = translateOperator(currentOperator)
         snippets.append((operatorNow, currentNumber))
-        addIndividualInput(currentOperator, currentNumber)
+        addIndividualInput(operation: currentOperator, with: currentNumber)
         
         var totalString = ""
         snippets.forEach {
@@ -138,6 +148,7 @@ class CalculatorViewController: UIViewController {
         
         refreshNumberLabel()
         refreshOperatorLabel()
+        scrollDownScrollView()
     }
     
     @IBAction private func pressCEButton(_ sender: UIButton) {

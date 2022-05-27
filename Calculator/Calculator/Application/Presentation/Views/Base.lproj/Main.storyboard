@@ -331,7 +331,8 @@
                     <connections>
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="rai-CK-ocs"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="2hr-hs-eKu"/>
-                        <outlet property="inputStackView" destination="XRe-QE-UJf" id="fWk-YM-UMS"/>
+                        <outlet property="receivedInputsScrollView" destination="BOT-7g-vxv" id="Wez-JU-4YN"/>
+                        <outlet property="receivedInputsStackView" destination="XRe-QE-UJf" id="fWk-YM-UMS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
