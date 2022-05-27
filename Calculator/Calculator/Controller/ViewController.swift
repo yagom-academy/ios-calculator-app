@@ -48,9 +48,6 @@ class ViewController: UIViewController {
     
     @IBAction private func equalButtonDidTapped(_ sender: UIButton) {
         
-        if currentOperatorLabel?.text == "" {
-            return
-        }
         guard currentOperatorLabel?.text != emptyText else { return }
         add(generateStackView(), to: historyStackView)
         currentOperatorLabel?.text = emptyText
@@ -98,8 +95,11 @@ class ViewController: UIViewController {
     }
     //MARK: - methods
     
-        stack.arrangedSubviews.forEach { stack.removeArrangedSubview($0) ; $0.isHidden = true }
     private func removeAllIn(stack: UIStackView) {
+        stack.arrangedSubviews.forEach {
+            stack.removeArrangedSubview($0)
+            $0.isHidden = true
+        }
     }
     
     private func add(_ subStack: UIStackView, to parentStack: UIStackView?) {
@@ -128,13 +128,13 @@ class ViewController: UIViewController {
         return stackViewElement
     }
     
-        guard let scrollView = scrollView else { return }
     private func setAttribute(to label: UILabel) {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = UIColor(white: 1, alpha: 1)
     }
     
     private func goToBottomOfScrollView() {
+        guard let scrollView = historyScrollView else { return }
         scrollView.scrollRectToVisible(CGRect(x: 0,
                                               y: scrollView.contentSize.height - scrollView.bounds.height,
                                               width: scrollView.bounds.size.width,

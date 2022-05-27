@@ -348,9 +348,9 @@
                     </view>
                     <connections>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="c2x-am-yqP"/>
+                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="j8B-AM-9XZ"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="Vup-Yd-wgi"/>
                         <outlet property="screenLabel" destination="Lwz-OF-XHD" id="dE0-aQ-e3D"/>
-                        <outlet property="scrollView" destination="BOT-7g-vxv" id="sl8-qa-V2C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
