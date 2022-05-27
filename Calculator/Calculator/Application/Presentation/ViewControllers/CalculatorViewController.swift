@@ -128,13 +128,16 @@ class CalculatorViewController: UIViewController {
         }
         
         currentNumber = "0"
-
+        if currentOperator == "" {
+            snippets.removeAll()
+        }
+        
         refreshNumberLabel()
     }
     
     
     @IBAction func pressACButton(_ sender: UIButton) {
-        snippets = []
+        snippets.removeAll()
         currentNumber = "0"
         currentOperator = ""
         
