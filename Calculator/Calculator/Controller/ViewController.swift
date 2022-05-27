@@ -95,26 +95,30 @@ class ViewController: UIViewController {
         do {
             let calculationResult = try formula.result()
             applyNumberFormatter(calculationResult)
-        } catch (let error) {
-            switch error {
-            case CalculatorError.dividedByZero:
-                numberInput.text = CalculatorError.dividedByZero.localizedDescription
-            case CalculatorError.notEnoughOperands:
-                numberInput.text = CalculatorError.notEnoughOperands.localizedDescription
-            case CalculatorError.notEnoughOperators:
-                numberInput.text = CalculatorError.notEnoughOperators.localizedDescription
-            case CalculatorError.emptyQueues:
-                numberInput.text = CalculatorError.emptyQueues.localizedDescription
-            case CalculatorError.invalidOperator:
-                numberInput.text = CalculatorError.invalidOperator.localizedDescription
-            default:
-                numberInput.text = "unknown error"
-            }
+        } catch (let calculationError) {
+            handleError(calculationError)
         }
         
         resetOperatorInput()
         resetTotalInput()
         goToBottomOfScrollView()
+    }
+    
+    func handleError(_ error: Error) {
+        switch error {
+        case CalculatorError.dividedByZero:
+            numberInput.text = CalculatorError.dividedByZero.localizedDescription
+        case CalculatorError.notEnoughOperands:
+            numberInput.text = CalculatorError.notEnoughOperands.localizedDescription
+        case CalculatorError.notEnoughOperators:
+            numberInput.text = CalculatorError.notEnoughOperators.localizedDescription
+        case CalculatorError.emptyQueues:
+            numberInput.text = CalculatorError.emptyQueues.localizedDescription
+        case CalculatorError.invalidOperator:
+            numberInput.text = CalculatorError.invalidOperator.localizedDescription
+        default:
+            numberInput.text = "unknown error"
+        }
     }
     
     @IBAction private func allClearButtonDidTapped(_ sender: UIButton) {
