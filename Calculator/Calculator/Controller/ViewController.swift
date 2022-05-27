@@ -82,4 +82,24 @@ class ViewController: UIViewController {
         displayOperator.text = sender.currentTitle!
         displayNumber.text = zeroString
     }
+    @IBAction func equalButtonDidTapped(_ sender: UIButton) {
+        guard displayOperator.text != emptyString else {
+            return
+        }
+        
+        addSubView()
+        
+        calculateItems += " " + displayOperator.text!
+        calculateItems += " " + displayNumber.text!
+        
+        var separatedInput = ExpressionParser.parse(from: calculateItems)
+        do {
+            let calculateResult = try separatedInput.result()
+            displayNumber.text = numberFormatter.string(from: NSNumber(value: calculateResult))
+            displayOperator.text = emptyString
+            calculateItems = emptyString
+        } catch {
+            displayNumber.text = OperatorError.divide.print
+        }
+    }
 
