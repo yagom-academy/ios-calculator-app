@@ -25,8 +25,10 @@ class CalculatorViewController: UIViewController {
     }
     
     func refreshNumberLabel() {
+        let newString = currentNumber.formatAsNumber()
+        
         DispatchQueue.main.async {
-            self.currentNumberLabel.text = self.currentNumber
+            self.currentNumberLabel.text = newString
         }
     }
     

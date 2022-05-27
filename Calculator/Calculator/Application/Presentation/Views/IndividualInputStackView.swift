@@ -13,7 +13,7 @@ class IndividualInputStackView: UIStackView {
     
     init(operatorData: String, operandData: String) {
         operatorLabel.text = operatorData
-        operandLabel.text = operandData
+        operandLabel.text = operandData.formatAsNumber()
         
         super.init(frame: CGRect(x: 267, y: 0, width: 115, height: 20.5))
         
