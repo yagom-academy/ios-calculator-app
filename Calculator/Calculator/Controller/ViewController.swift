@@ -8,10 +8,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var screenLabel: UILabel?
-    @IBOutlet weak var currentOperatorLabel: UILabel?
-    @IBOutlet weak var historyStackView: UIStackView?
-    @IBOutlet weak var scrollView: UIScrollView?
+    @IBOutlet private weak var screenLabel: UILabel?
+    @IBOutlet private weak var currentOperatorLabel: UILabel?
+    @IBOutlet private weak var historyStackView: UIStackView?
+    @IBOutlet private weak var historyScrollView: UIScrollView?
     
     private var formula: Formula?
     private let numberFormatter = NumberFormatter()
@@ -25,19 +25,17 @@ class ViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 20
         removeAllIn(stack: historyStackView!)
     }
-}
-
-extension ViewController {
+    //MARK: - buttons
     
-    @IBAction func operandButtonDidTapped(_ sender: UIButton) {
-
+    @IBAction private func operandButtonDidTapped(_ sender: UIButton) {
+        
         if screenLabel?.text == zero {
             screenLabel?.text = ""
         }
         screenLabel?.text = (screenLabel?.text ?? "") + (sender.currentTitle ?? "")
     }
     
-    @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
         
         if screenLabel?.text != zero {
             add(generateStackView(), to: historyStackView)
@@ -47,7 +45,7 @@ extension ViewController {
         goToBottomOfScrollView()
     }
     
-    @IBAction func equalButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonDidTapped(_ sender: UIButton) {
         
         if currentOperatorLabel?.text == "" {
             return
@@ -74,7 +72,7 @@ extension ViewController {
         goToBottomOfScrollView()
     }
     
-    @IBAction func functionButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func functionButtonDidTapped(_ sender: UIButton) {
         
         guard let historyStackView = historyStackView else { return }
         
@@ -96,22 +94,20 @@ extension ViewController {
             return
         }
     }
-}
-
-private extension ViewController {
+    //MARK: - methods
     
-    func removeAllIn(stack: UIStackView) {
         stack.arrangedSubviews.forEach { stack.removeArrangedSubview($0) ; $0.isHidden = true }
+    private func removeAllIn(stack: UIStackView) {
     }
     
-    func add(_ subStack: UIStackView, to parentStack: UIStackView?) {
+    private func add(_ subStack: UIStackView, to parentStack: UIStackView?) {
         parentStack?.addArrangedSubview(subStack)
         UIView.animate(withDuration: 0.2) {
             subStack.isHidden = false
         }
     }
     
-    func generateStackView() -> UIStackView {
+    private func generateStackView() -> UIStackView {
         let stackViewElement = UIStackView()
         stackViewElement.axis = .horizontal
         stackViewElement.isHidden = true
@@ -132,17 +128,18 @@ private extension ViewController {
         return stackViewElement
     }
     
-    func goToBottomOfScrollView() {
         guard let scrollView = scrollView else { return }
+    private func setAttribute(to label: UILabel) {
+    private func goToBottomOfScrollView() {
         scrollView.scrollRectToVisible(CGRect(x: 0,
-                                               y: scrollView.contentSize.height - scrollView.bounds.height,
-                                               width: scrollView.bounds.size.width,
-                                               height: scrollView.bounds.size.height),
-                                        animated: true)
+                                              y: scrollView.contentSize.height - scrollView.bounds.height,
+                                              width: scrollView.bounds.size.width,
+                                              height: scrollView.bounds.size.height),
+                                       animated: true)
     }
     
-    func generateTextData(from stackView: UIStackView, start: Int) -> String {
         var textData: String = ""
+    private func generateTextData(from stackView: UIStackView, start: Int) -> String {
         for subStackView in stackView.arrangedSubviews[start...] {
             subStackView.subviews.forEach {
                 if let label = $0 as? UILabel {
