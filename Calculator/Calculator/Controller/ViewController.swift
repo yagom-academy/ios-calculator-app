@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         resetTotalInput()
     }
     
-    @IBAction private func touchNumberButton(_ sender: UIButton) {
+    @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
         guard lastInput.arrangedSubviews.count <= 0 || operatorInput.text != "" else {
             clearLastInput()
             
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         applyNumberFormatter(convertedNumberInput)
     }
     
-    @IBAction private func touchOperatorButton(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
         guard numberInput.text != "0" || lastInput.arrangedSubviews.count > 0 else {
             return
         }
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         goToBottomOfScrollView()
     }
     
-    @IBAction private func touchResultButton(_ sender: UIButton) {
+    @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
         guard operatorInput.text != "" else {
             return
         }
@@ -117,21 +117,21 @@ class ViewController: UIViewController {
         goToBottomOfScrollView()
     }
     
-    @IBAction private func touchAllClearButton(_ sender: UIButton) {
+    @IBAction private func allClearButtonDidTapped(_ sender: UIButton) {
         clearLastInput()
         resetNumberInput()
         resetOperatorInput()
         resetTotalInput()
     }
     
-    @IBAction private func touchClearEntryButton(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonDidTapped(_ sender: UIButton) {
         resetNumberInput()
         
         totalInput == "" ? clearLastInput() : ()
         
     }
     
-    @IBAction private func touchSignChangerButton(_ sender: UIButton) {
+    @IBAction private func signChangerButtonDidTapped(_ sender: UIButton) {
         guard let convertedNumberInput = convertNumberInput() else {
             return
         }
