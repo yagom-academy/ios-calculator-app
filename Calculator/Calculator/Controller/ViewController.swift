@@ -8,15 +8,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var displayNumber: UILabel!
-    @IBOutlet weak var displayOperator: UILabel!
-    @IBOutlet weak var recentInputStackView: UIStackView!
-    @IBOutlet weak var historyScrollView: UIScrollView!
+    @IBOutlet private weak var displayNumber: UILabel!
+    @IBOutlet private weak var displayOperator: UILabel!
+    @IBOutlet private weak var recentInputStackView: UIStackView!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
     private let zeroString = "0"
     private let emptyString = ""
-    var calculateItems = ""
+    private var calculateItems = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +31,14 @@ class ViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 20
     }
     
-    func removeAllStackView(_ stack: UIStackView) {
+    private func removeAllStackView(_ stack: UIStackView) {
         stack.arrangedSubviews.forEach {
             stack.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
     }
     
-    @IBAction func operandButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func operandButtonDidTapped(_ sender: UIButton) {
         guard displayNumber.text != zeroString else {
             displayNumber.text = emptyString
             displayNumber.text = sender.currentTitle ?? emptyString
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         lastInputStackView.isHidden = false
     }
     
-    @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
         guard displayNumber.text != zeroString else {
             return
         }
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         displayNumber.text = zeroString
     }
     
-    @IBAction func equalButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonDidTapped(_ sender: UIButton) {
         guard displayOperator.text != emptyString else {
             return
         }
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func ACButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func ACButtonDidTapped(_ sender: UIButton) {
         calculateItems = emptyString
         recentInputStackView.subviews.forEach {
             $0.removeFromSuperview()
@@ -114,11 +114,11 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func CEButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func CEButtonDidTapped(_ sender: UIButton) {
         displayNumber.text = zeroString
     }
     
-    @IBAction func changeOperatorSignButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func changeOperatorSignButtonDidTapped(_ sender: UIButton) {
         guard displayNumber.text != "0" else {
             return
         }
@@ -136,7 +136,7 @@ class ViewController: UIViewController {
         }
     }
 
-    func generateStackView() -> UIStackView {
+    private func generateStackView() -> UIStackView {
         let stackView = UIStackView()
         let operandLabel = UILabel()
         let operatorLabel = UILabel()
@@ -163,7 +163,7 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         historyScrollView.setContentOffset(CGPoint(x: 0,
                                                    y: historyScrollView.contentSize.height - historyScrollView.bounds.height),
                                            animated: true)
