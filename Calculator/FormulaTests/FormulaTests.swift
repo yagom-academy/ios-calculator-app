@@ -25,19 +25,32 @@ class FormulaTests: XCTestCase {
     }
 
     // MARK: - result()
-        
-    func test_result메서드_operands에_1과2가있고_operator가_덧셈일때_3이_나온다() {
+
+    func test_result메서드_2더하기3빼기1곱하기4나누기4는_4가나온다() {
         // given
-        let num1 = 1.0, num2 = 2.0
-        sut.operands.enqueue(1.0)
-        sut.operands.enqueue(2.0)
+        let numbersArray = [2.0, 3.0, 1.0, 4.0, 4.0]
+        let operatorsArray: [Operator] = [.add, .subtract, .multiply, .divide]
+        numbersArray.forEach { sut.operands.enqueue($0) }
+        operatorsArray.forEach { sut.operators.enqueue($0) }
         
         // when
         let result = sut.result()
         
         // then
-        XCTAssertEqual(result, num1 + num2)
-        
+        XCTAssertEqual(result, 2+3-1*4/4)
     }
-
+    
+    func test_result메서드_0으로_나누는_연산시_infinity가_리턴된다() {
+        // given
+        let numbersArray = [1.0, 2.0, 3.0, 4.0, 0.0]
+        let operatorsArray: [Operator] = [.add, .subtract, .add, .divide]
+        numbersArray.forEach { sut.operands.enqueue($0) }
+        operatorsArray.forEach { sut.operators.enqueue($0) }
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, Double.infinity)
+    }
 }
