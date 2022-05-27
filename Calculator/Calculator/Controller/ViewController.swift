@@ -21,11 +21,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let digit = sender.currentTitle!
-        
-        presentNumberString += "\(digit)"
-        
-        print(presentNumberString)
-        
+
         if opperArray.count > 0 {
             opperString += opperArray.removeLast()
             inputString += presentNumberString
@@ -40,6 +36,11 @@ class ViewController: UIViewController {
             opperArray = []
             
             presentNumberString += "\(digit)"
+            
+        } else {
+            presentNumberString += "\(digit)"
+            
+            print(presentNumberString)
         }
     }
     
