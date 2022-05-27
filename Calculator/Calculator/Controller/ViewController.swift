@@ -9,9 +9,12 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var inputNumberButtons: [UIButton]!
     
-    var inputString: String = ""
+    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     
-    var presentNumberString: String = "0"
+    var inputString: String = "0"
+    
+    var presentNumberString: String = ""
     var opperArray: [String] = []
     var opperString: String = ""
     
@@ -21,7 +24,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let digit = sender.currentTitle!
-
+        
         if opperArray.count > 0 {
             opperString += opperArray.removeLast()
             inputString += presentNumberString
@@ -39,7 +42,8 @@ class ViewController: UIViewController {
             
         } else {
             presentNumberString += "\(digit)"
-            
+            numberLabel.text = "\(presentNumberString)"
+
             print(presentNumberString)
         }
     }
@@ -49,6 +53,7 @@ class ViewController: UIViewController {
         
         if ["+", "−", "÷", "×"].contains(digit) {
             opperArray.append(" \(digit) ")
+            operatorLabel.text = "\(digit)"
             
             print(opperArray)
             
@@ -57,9 +62,11 @@ class ViewController: UIViewController {
             
             print(inputString)
             
-            var result = ExpressionParser.parse(from: (inputString))
-            
-            print(try! result.result())
+            var parse = ExpressionParser.parse(from: (inputString))
+            let result = try! parse.result()
+            numberLabel.text = "\(result)"
+
+            print(result)
             print("----")
             
             inputString = "0"

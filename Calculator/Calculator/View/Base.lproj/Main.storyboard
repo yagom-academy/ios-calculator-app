@@ -364,6 +364,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="numberLabel" destination="Lwz-OF-XHD" id="DRH-nY-l2X"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="41j-Dr-DiQ"/>
                         <outletCollection property="inputNumberButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="fjh-47-MXR"/>
                         <outletCollection property="inputNumberButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="Kta-OU-XUQ"/>
                         <outletCollection property="inputNumberButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="lga-8Z-Oop"/>
