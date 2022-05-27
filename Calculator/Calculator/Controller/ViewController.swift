@@ -10,8 +10,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        operatorTextLabel.text = ""
-        operandsTextLabel.text = "0"
+        deleteTextLabelText()
         exampleStackView1.isHidden = true
         exampleStackView2.isHidden = true
     }
@@ -160,22 +159,29 @@ class ViewController: UIViewController {
     //MARK: - allClearButtonTapped
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         deleteStackViewAll()
-        operatorTextLabel.text = ""
-        operandsTextLabel.text = "0"
-        expressionParserInput = "0"
+        deleteTextLabelText()
+        expressionParserInput = ""
         
     }
     
-    //MARK: - clearEntryButtonTapped
+    //MARK: - clearEntryButtonTapped :operandsTextLabel 에서 마지막으로 입력된 숫자만 지움, 연산이 된상태라면 모든 스택을 지움
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        isCalculated = false
         if isCalculated == true {
             deleteStackViewAll()
-        } else if expressionParserInput.last?.isNumber == true {
-            operatorTextLabel.text = ""
-        } else {
-            operandsTextLabel.text = "0"
+            deleteTextLabelText()
+            isCalculated = false
+            return
         }
+        
+        if operandsTextLabel.text?.last?.isNumber == true {
+            operandsTextLabel.text?.removeLast()
+            isCalculated = false
+        } else if operandsTextLabel.text?.last?.isNumber == false {
+            isCalculated = false
+            return
+        }
+        
+       
     }
     
     //MARK: - zeroButtonTapped
@@ -222,5 +228,10 @@ class ViewController: UIViewController {
             operandsTextLabel.text! += senderLabelText
             expressionParserInput += senderLabelText
         }
+    }
+    
+    func deleteTextLabelText() {
+        operatorTextLabel.text = ""
+        operandsTextLabel.text = "0"
     }
 }
