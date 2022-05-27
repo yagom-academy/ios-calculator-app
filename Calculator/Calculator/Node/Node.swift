@@ -1,4 +1,4 @@
-class Node<T> {
+final class Node<T> {
     var data: T
     var next: Node?
     var prev: Node<T>?

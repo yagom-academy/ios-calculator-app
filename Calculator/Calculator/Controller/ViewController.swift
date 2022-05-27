@@ -28,14 +28,14 @@ class ViewController: UIViewController {
         resetCalculator()
     }
     
-    @IBAction func tapKeypadButton(_ sender: UIButton) {
+    @IBAction private func tapKeypadButton(_ sender: UIButton) {
         guard let tappedNumber = numberButtons.firstIndex(of: sender) else { return }
         let newInputNumbers = Keypad.convertNumber(tappedNumber)
         checkInputNumber(number: newInputNumbers)
         inputNumberLabel.text = inputNumber
     }
     
-    @IBAction func tapOperatorsButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorsButton(_ sender: UIButton) {
         var currentOperator:Character = " "
         switch sender {
         case additionButton:
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         inputOperator = String(currentOperator)
     }
     
-    @IBAction func tapResultButton() {
+    @IBAction private func tapResultButton() {
         if arithmetic.isEmpty {
             return
         }
@@ -84,17 +84,17 @@ class ViewController: UIViewController {
         arithmetic = ""
     }
     
-    @IBAction func tapAllClearButton(_ sender: UIButton) {
+    @IBAction private func tapAllClearButton(_ sender: UIButton) {
         resetCalculator()
     }
     
-    @IBAction func tapClearEntryButton(_ sender: UIButton) {
+    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
         inputNumber = ""
         inputNumberLabel.text = "0"
     }
     
     
-    @IBAction func tapToChangeSignButton(_ sender: UIButton) {
+    @IBAction private func tapToChangeSignButton(_ sender: UIButton) {
         if inputNumber == "0" || inputNumber == "" {
             return
         }
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         inputNumberLabel.text = inputNumber
     }
     
-    func updateStackView() {
+    private func updateStackView() {
         if inputNumber == "" {
             return
         }
@@ -128,10 +128,9 @@ class ViewController: UIViewController {
         inputNumber = ""
         inputOperator = ""
         inputNumberLabel.text = "0"
-        print("a: \(arithmetic)")
     }
     
-    func checkInputNumber(number: String) {
+    private func checkInputNumber(number: String) {
         if inputNumber.contains(".") && number == "." {
             return
         }
@@ -147,7 +146,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func resetCalculator() {
+    private func resetCalculator() {
         stackView.removeAllArrangedSubview()
         inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
