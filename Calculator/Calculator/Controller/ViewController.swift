@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
     private var isOperandInputted = false
     private var isCalculateCompleted = false
     private var inputtedFomula = ""
