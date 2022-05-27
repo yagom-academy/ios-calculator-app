@@ -137,7 +137,11 @@ class CalculatorViewController: UIViewController {
             operatorLable.text = ""
         }
         
-        currentFormula += String(currentFormula.dropLast())
+        if numberLable.text == "" {
+            numberLable.text = "0"
+        }
+        
+        currentFormula = String(currentFormula.dropLast())
     }
     
     @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
