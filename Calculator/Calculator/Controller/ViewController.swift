@@ -23,40 +23,142 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
+        updateNumberInput(sender)
+    }
+    
+    private func updateNumberInput(_ sender: UIButton) {
+        guard let number = checkNumber(sender) else {
+            return
+        }
+        
+        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
+            return
+        }
+        
+        setNumber(formattedNumber)
+    }
+    
+    private func checkNumber(_ sender: UIButton) -> String? {
+        guard let firstConditionPassedText = isAdditionalNumberInput(sender) else {
+            return nil
+        }
+        
+        guard let secondConditionPassedText = isUsingComma(sender, firstConditionPassedText) else {
+            return nil
+        }
+        
+        return secondConditionPassedText
+    }
+    
+    private func isAdditionalNumberInput(_ sender: UIButton) -> String? {
+        guard let text = numberInput.text else {
+            return nil
+        }
+        
+        guard isNotAdditionalNumberInputAfterResultHasBeenShown(sender) else {
+            return nil
+        }
+        return text
+    }
+    
+    private func isNotAdditionalNumberInputAfterResultHasBeenShown(_ sender: UIButton) -> Bool {
         guard lastInput.arrangedSubviews.count <= 0 || operatorInput.text != "" else {
             clearLastInput()
             
             numberInput.text = sender.currentTitle
+            return false
+        }
+        return true
+    }
+    
+    private func isUsingComma(_ sender: UIButton, _ text: String) -> String? {
+        guard isCommaButtonNotTappedTwice(sender: sender, number: text) else {
+            return nil
+        }
+        
+        guard let newText = addNewNumber(sender, text) else {
+            return nil
+        }
+        
+        guard newText.contains(".") == false else {
+            return nil
+        }
+        
+        return newText
+    }
+    
+    private func isCommaButtonNotTappedTwice(sender: UIButton, number: String) -> Bool {
+        guard sender.currentTitle != "." || number.filter({ $0 == "." }).count < 1 else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func addNewNumber(_ sender: UIButton, _ number: String) -> String? {
+        guard let currentDigit: String = sender.currentTitle else {
+            return nil
+        }
+        
+        let newNumber: String
+        newNumber = number + currentDigit
+        numberInput.text = newNumber
+        
+        return numberInput.text
+    }
+    
+    private func formatNumberForBeingRecognizedAsNumber(_ number: String) -> Double? {
+        let onceTrimmmedInput = removeComma(number)
+        
+        guard let twiceTrimmedInput = convertStringToDouble(onceTrimmmedInput) else {
+            return nil
+        }
+        
+        return twiceTrimmedInput
+    }
+    
+    private func removeComma(_ input: String) -> String {
+        let trimmedInput = input.replacingOccurrences(of: ",", with: "")
+        
+        return trimmedInput
+    }
+    
+    private func convertStringToDouble(_ input: String) -> Double? {
+        guard let trimmedInput = Double(input) else {
+            return nil
+        }
+        
+        return trimmedInput
+    }
+    
+    private func setNumber(_ number : Double) {
+        guard let formattedNumber = formatNumberForExposure(number) else {
             return
         }
         
-        let digit = sender.currentTitle
+        numberInput.text = formattedNumber
+    }
+    
+    private func formatNumberForExposure(_ number: Double) -> String? {
+        let numberFormatter = setNumberFormatter()
         
-        guard var text = numberInput.text else {
-            return
+        guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
+            return nil
         }
         
-        guard digit != "." || text.filter({ $0 == "." }).count < 1 else {
-            return
-        }
+        return formattedNumber
+    }
+    
+    private func setNumberFormatter() -> NumberFormatter {
+        let numberFormatter = NumberFormatter()
         
-        guard let unwrappedDigit: String = digit else {
-            return
-        }
-            
-        text += unwrappedDigit
-        numberInput.text = text
-
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumIntegerDigits = 1
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
         
-        guard text.contains(".") == false else {
-            return
-        }
-        
-        guard let convertedNumberInput = convertNumberInput() else {
-            return
-        }
-        
-        applyNumberFormatter(convertedNumberInput)
+        return numberFormatter
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
@@ -94,7 +196,7 @@ class ViewController: UIViewController {
         
         do {
             let calculationResult = try formula.result()
-            applyNumberFormatter(calculationResult)
+            setNumber(calculationResult)
         } catch (let calculationError) {
             handleError(calculationError)
         }
@@ -136,21 +238,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func signChangerButtonDidTapped(_ sender: UIButton) {
-        guard let convertedNumberInput = convertNumberInput() else {
+        // 변환 과정
+        guard let number = numberInput.text else {
             return
         }
         
-        guard convertedNumberInput != 0 else {
+        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
             return
         }
         
-        numberInput.text = String(-convertedNumberInput)
-        
-        guard let newConvertedNumberInput = convertNumberInput() else {
+        // 조건 체크
+        guard formattedNumber != 0 else {
             return
         }
         
-        applyNumberFormatter(newConvertedNumberInput)
+        // 부호 바꾸기
+        let text = String(-formattedNumber)
+        
+        // 변환 과정
+        guard let formattedText = formatNumberForBeingRecognizedAsNumber(text) else {
+            return
+        }
+        
+        // update
+        setNumber(formattedText)
     }
     
     private func resetNumberInput() {
@@ -169,94 +280,44 @@ class ViewController: UIViewController {
         lastInput.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func convertNumberInput() -> Double? {
-        guard let text = numberInput.text else {
-            return nil
-        }
-        
-        let onceTrimmmedInput = removeComma(text)
-
-        guard let twiceTrimmedInput = convertStringToDouble(onceTrimmmedInput) else {
-            return nil
-        }
-        
-        return twiceTrimmedInput
-    }
     
-    private func removeComma(_ input: String) -> String {
-        let trimmedInput = input.replacingOccurrences(of: ",", with: "")
-        
-        return trimmedInput
-    }
-    
-    private func convertStringToDouble(_ input: String) -> Double? {
-        guard let trimmedInput = Double(input) else {
-            return nil
-        }
-        
-        return trimmedInput
-    }
-    
-    private func applyNumberFormatter(_ number : Double) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumIntegerDigits = 1
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.maximumIntegerDigits = 20
-        
-        guard let formattedResult = numberFormatter.string(from: number as NSNumber) else {
-            return
-        }
-        
-        numberInput.text = formattedResult
-    }
     
     private func addCalculatorItems() {
-        guard let convertedNumberInput = convertNumberInput() else {
+        guard let number = numberInput.text else {
             return
         }
         
-        applyNumberFormatter(convertedNumberInput)
+        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
+            return
+        }
         
-        let label = makeUILabel()
+        setNumber(formattedNumber)
+        
+        guard let label = makeUILabel() else {
+            return
+        }
         let newInput = UIStackView(arrangedSubviews: [label])
 
         lastInput.addArrangedSubview(newInput)
         
-        let labelText = unwrapLabelText(label)
+        guard let labelText = label.text else {
+            return
+        }
+        
         let firstTrimmedInput = removeWhitespaces(labelText)
         let secondTrimmedInput = removeComma(firstTrimmedInput)
         totalInput += secondTrimmedInput
     }
     
-    private func unwrapLabelText(_ label: UILabel) -> String {
-        guard let labelText = label.text else {
-            return "비어있음"
-        }
-        
-        return labelText
-    }
-    
-    private func unwrapOperatorInput() -> String {
+    private func makeUILabel() -> UILabel? {
         guard let `operator` = operatorInput.text else {
-            return "비어있음"
+            return nil
         }
         
-        return `operator`
-    }
-    
-    private func unwrapNumberInput() -> String {
         guard let number = numberInput.text else {
-            return "비어있음"
+            return nil
         }
-        
-        return number
-    }
     
-    private func makeUILabel() -> UILabel {
-        let `operator` = unwrapOperatorInput()
-        let number = unwrapNumberInput()
         let label = UILabel()
         
         label.isHidden = false
@@ -268,13 +329,6 @@ class ViewController: UIViewController {
         
         return label
     }
-    
-//    private func addTrimmedInputToTotalInput(_ input: String) {
-//        let firstTrimmedInput = removeWhitespaces(input)
-//        let secondTrimmedInput = removeComma(firstTrimmedInput)
-//
-//        totalInput += secondTrimmedInput
-//    }
     
     private func removeWhitespaces(_ input: String) -> String {
         let trimmedInput = input.replacingOccurrences(of: " ", with: "")
@@ -288,3 +342,5 @@ class ViewController: UIViewController {
                                     animated: true)
     }
 }
+
+
