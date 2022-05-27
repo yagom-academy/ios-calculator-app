@@ -79,16 +79,20 @@ class ViewController: UIViewController {
         
         if operandsTextLabel.text == "0" {
             operandsTextLabel.text = ""
+            operandsTextLabel.text?.append(senderLabelText)
+            expressionParserInput.append(senderLabelText)
+            return
         }
+        
         if isCalculated == true {
             operandsTextLabel.text = ""
             operatorTextLabel.text = ""
             deleteStackViewAll()
             isCalculated = false
         }
-        
         operandsTextLabel.text?.append(senderLabelText)
-        expressionParserInput.append(senderLabelText)
+//        expressionParserInput.append(senderLabelText)
+        print(expressionParserInput)
     }
     
     //MARK: - operatorButtonsTapped()
@@ -102,12 +106,15 @@ class ViewController: UIViewController {
             operatorTextLabel.text = senderLabelText
             return
         }
-        
-        addStackView()
+//        expressionParserInput.append(operandLabelText)
         expressionParserInput.append(" \(senderLabelText) ")
+        addStackView()
+        
+//        expressionParserInput.append(" \(senderLabelText) ")
         operatorTextLabel.text = senderLabelText
         operandsTextLabel.text = operandLabelText
         operandsTextLabel.text = "0"
+        print(expressionParserInput)
     }
     
     //MARK: - calculateButtonTapped
@@ -142,22 +149,25 @@ class ViewController: UIViewController {
     //MARK: - changeOperandSignButtonTapped
     @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
         guard let operandsLabelText = operandsTextLabel.text else { return }
-        
-        if operandsTextLabel.text?.first == "-" {
-            operandsTextLabel.text?.removeFirst()
-            operandsTextLabel.text = "+" + operandsLabelText
-        } else if operandsTextLabel.text?.first == "+" {
-            operandsTextLabel.text?.removeFirst()
-            operandsTextLabel.text = "-" + operandsLabelText
-        } else if operandsTextLabel.text == "0"  {
-            operandsTextLabel.text = operandsTextLabel.text
-        } else {
-            operandsTextLabel.text = "-" + operandsLabelText
+        while isCalculated == false {
+            if operandsTextLabel.text?.first == "-" {
+                operandsTextLabel.text?.removeFirst()
+                operandsTextLabel.text = "+" + operandsLabelText
+            } else if operandsTextLabel.text?.first == "+" {
+                operandsTextLabel.text?.removeFirst()
+                operandsTextLabel.text = "-" + operandsLabelText
+            } else if operandsTextLabel.text == "0"  {
+                operandsTextLabel.text = operandsTextLabel.text
+            } else {
+                operandsTextLabel.text = "-" + operandsLabelText
+            }
+            isCalculated = true
         }
     }
     
     //MARK: - allClearButtonTapped
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        isCalculated = false
         deleteStackViewAll()
         deleteTextLabelText()
         expressionParserInput = ""
@@ -169,19 +179,21 @@ class ViewController: UIViewController {
         if isCalculated == true {
             deleteStackViewAll()
             deleteTextLabelText()
+            operandsTextLabel.text = "0"
             isCalculated = false
-            return
         }
         
-        if operandsTextLabel.text?.last?.isNumber == true {
-            operandsTextLabel.text?.removeLast()
-            isCalculated = false
-        } else if operandsTextLabel.text?.last?.isNumber == false {
-            isCalculated = false
+        if operandsTextLabel.text == "0" {
+            print(expressionParserInput)
             return
         }
-        
-       
+            
+        if operandsTextLabel.text?.isEmpty == false { //2+3-4+5 -> 2+3-4+ 텍스트 레이블에서만 제거를 해주면됨
+            operandsTextLabel.text? = "0"
+            expressionParserInput.removeLast()
+        } else {
+            return
+        }
     }
     
     //MARK: - zeroButtonTapped
