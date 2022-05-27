@@ -22,8 +22,8 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(3)
         sut.operands.enqueue(1)
         sut.operators.enqueue("*")
-        sut.operators.enqueue("/")
-        sut.operators.enqueue("-")
+        sut.operators.enqueue("÷")
+        sut.operators.enqueue("−")
         sut.operators.enqueue("+")
         // when
         let result = try? sut.result()
@@ -36,7 +36,7 @@ class LinkedListTests: XCTestCase {
         sut = Formula()
         sut.operands.enqueue(0)
         sut.operands.enqueue(2)
-        sut.operators.enqueue("/")
+        sut.operators.enqueue("÷")
         // when
         // given
         XCTAssertThrowsError(try sut.result())
@@ -47,7 +47,7 @@ class LinkedListTests: XCTestCase {
         sut = Formula()
         sut.operands.enqueue(0)
         sut.operands.enqueue(2)
-        sut.operators.enqueue("/")
+        sut.operators.enqueue("÷")
         // when
         var result = ""
         do {
@@ -70,7 +70,7 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(3)
         sut.operands.enqueue(1)
         sut.operators.enqueue("*")
-        sut.operators.enqueue("/")
+        sut.operators.enqueue("÷")
         sut.operators.enqueue("-")
         sut.operators.enqueue("+")
         // when

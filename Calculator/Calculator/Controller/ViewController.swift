@@ -120,7 +120,7 @@ class ViewController: UIViewController {
         }
         
         let label = UILabel()
-        label.text = inputOperator + inputNumber
+        label.text = inputOperator + " " + inputNumber
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         stackView.addArrangedSubview(label)

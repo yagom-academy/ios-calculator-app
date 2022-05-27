@@ -1,7 +1,7 @@
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
-    case divide = "/"
+    case divide = "÷"
     case multiply = "*"
     
     var symbol: Character {
