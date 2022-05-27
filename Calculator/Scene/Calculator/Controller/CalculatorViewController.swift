@@ -109,23 +109,29 @@ class CalculatorViewController: UIViewController {
             let result = try ExpressionParser.parse(from: totalFormula).result()
             changeFormat("\(result)")
             totalFormula = ""
-            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
+            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
             scrollView.setContentOffset(bottomOffset, animated: true)
         } catch DevideError.nilOfValue {
             currentValue[0].text = ""
             currentValue[1].text = "0"
             AlertErrorEvent()
             totalFormula = ""
+            NumberOfFormula = 1
+            inputedStack = []
         } catch DevideError.insufficientOperator {
             currentValue[0].text = ""
             currentValue[1].text = "0"
             AlertErrorEvent()
             totalFormula = ""
+            NumberOfFormula = 1
+            inputedStack = []
         } catch DevideError.devideZero {
             currentValue[0].text = ""
             currentValue[1].text = "NAN"
             AlertErrorEvent()
             totalFormula = ""
+            NumberOfFormula = 1
+            inputedStack = []
         } catch {
             print(Error.self)
         }
