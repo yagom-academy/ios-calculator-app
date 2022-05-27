@@ -211,7 +211,7 @@
 - 이 연산을 while을 통해 구현했었다. 이 방법은 무조건 반복문을 통해서 끝을 찾아야 하기 때문에 불필요한 연산을 줄여주기 위해서 tail이라는 새로운 노드를 만들어서 끝을 지정해줬다.
 
     - 변경 전
-    ```swift=
+    ```swift
     mutating func append(data: T) {
             guard head != nil else {
                 head = Node(data: data)
@@ -227,7 +227,7 @@
         }
     ```
     - 변경 후
-    ```swift=
+    ```swift
     struct LinkedList<T> {
         private var head: Node<T>?
         private var tail: Node<T>?
@@ -244,7 +244,7 @@
     ```
 ### 가독성이 떨어지지 않다면, 삼항 연산자를 이용해서 코드를 줄이기
 - 처음에 삼항 연산자를 사용해서 구현하려고 했으나, return을 하는 부분에서 오류가 났었다.
-    ```swift=
+    ```swift
     head == nil ? return true : return false
     ```
 - 그래서 단순하게 삼항연산자에서 return을 할 수 없구나 라고 생각하고 리팩토링 하지 않았다.
@@ -252,7 +252,7 @@
 - 리뷰를 보고 다시 생각했을때 삼항연산자는 기본적으로 return을 하기 때문에 써주면 중복으로 return을 하게되서 오류가 났다는 생각이 들었다.
 
 - 변경 전
-    ```swift=
+    ```swift
     func isEmpty() -> Bool {
             if head == nil {
                 return true
@@ -261,7 +261,7 @@
         }
     ```
 - 변경 후
-    ```swift=
+    ```swift
     func isEmpty() -> Bool {
             head == nil ? true : false
     }
@@ -296,7 +296,7 @@
 - `parse에서 0으로 나눗셈에 대한 오류를 던져준다면 어떨까 라는 생각을 하게되었다.`
 
     - 변경 전
-    ```swift=
+    ```swift
     while !operands.isEmpty() || !operators.isEmpty() {
                 result = try operators.dequeue().calculate(lhs: result, rhs: operands.dequeue())
             }
@@ -306,7 +306,7 @@
             }
     ```
     - 변경 후
-    ```swift=
+    ```swift
     while !operands.isEmpty() || !operators.isEmpty() {
                 guard operands.peek() != 0 || operators.peek() != .divide else {
                     throw CalculateError.infinityError
@@ -317,7 +317,7 @@
     
 - filter를 사용하지 않고 Operator에서 미리 처리해주는 방식으로 수정
     - 변경 전
-    ```swift=
+    ```swift
     componentsByOperators(from: input).compactMap { Double($0) }.forEach {
                 formula.operands.enqueue(data: $0)
             }
@@ -327,7 +327,7 @@
             }
     ```
     - 변경 후
-    ```swift=
+    ```swift
     init?(rawValue: String) {
             guard Double(rawValue) == nil else {
                 return nil
@@ -386,7 +386,7 @@
 ## STEP 3 Update
 ### 현재 코드에서 일어나지 않는 동작이지만, 코드를 보는 다른 사람의 행동을 고려해서 String 값이 없는 경우는 에러로 처리
 - 수정 전
-    ```swift=
+    ```swift
     private func getText(_ text: String) -> String {
             guard let text = text.text else {
                 return ""
@@ -399,7 +399,7 @@
 
 - 확실하게 nil이 아닌 sender.currentTitle과 같은 값을 사용해야 하는 경우 guard문을 이용해서 미리 sender.currentTitle 의 옵셔널을 벗겨주고 사용하는 방향으로 수정
 - 수정 후
-    ```swift=
+    ```swift
             guard let senderTitle = sender.currentTitle else{
                 return
             }
@@ -407,7 +407,7 @@
     ```
 ### downScroll 수정
 - 기존에 있던 스크롤뷰가 1칸 덜 내려가는 문제를 해결하기 위해 사용한 DispatchQueue에서 layoutIfNeeded을 사용하는 방법으로 수정
-    ```swift=
+    ```swift
      private func downScroll() {
             fomulaScrollView.layoutIfNeeded()
             fomulaScrollView.setContentOffset(CGPoint(x: 0, y: fomulaScrollView.contentSize.height - fomulaScrollView.bounds.height), animated: false)
