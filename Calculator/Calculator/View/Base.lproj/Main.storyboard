@@ -366,9 +366,9 @@
                         <outlet property="exampleStackView1" destination="2Pu-Ld-ZGi" id="ee5-ct-jNJ"/>
                         <outlet property="exampleStackView2" destination="6I9-iL-eIa" id="UhI-sx-Xrz"/>
                         <outlet property="largeStackView" destination="XRe-QE-UJf" id="Seb-X6-TCu"/>
-                        <outlet property="operandLabel" destination="Hcb-r0-27f" id="v8w-9U-rVT"/>
+                        <outlet property="operandStackLabel" destination="Hcb-r0-27f" id="v8w-9U-rVT"/>
                         <outlet property="operandsTextLabel" destination="Lwz-OF-XHD" id="EwT-bb-iUJ"/>
-                        <outlet property="operatorLabel" destination="alw-Zd-2pT" id="54b-1b-nA0"/>
+                        <outlet property="operatorStackLabel" destination="alw-Zd-2pT" id="54b-1b-nA0"/>
                         <outlet property="operatorTextLabel" destination="HPC-iy-qdm" id="zUt-eC-eDe"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="b64-ko-sUw"/>
                     </connections>
