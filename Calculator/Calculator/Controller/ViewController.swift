@@ -88,7 +88,7 @@ class ViewController: UIViewController {
             guard let operand = screenLabel?.text else { return }
             guard screenLabel?.text != zero else { return }
             var operandText = operand
-            operandText = operandText.removeEntire(character: ",")
+            operandText.removeEntire(character: ",")
             screenLabel?.text = numberFormatter.string(for: (Double(operandText) ?? 0) * -1)
         case "CE":
             screenLabel?.text = zero
@@ -147,8 +147,8 @@ class ViewController: UIViewController {
         for subStackView in stackView.arrangedSubviews[start...] {
             subStackView.subviews.forEach {
                 if let label = $0 as? UILabel {
-                    textData = textData.removeEntire(character: ",")
                     textData += " " + (label.text ?? emptyText)
+                    textData.removeEntire(character: ",")
                 }
             }
         }

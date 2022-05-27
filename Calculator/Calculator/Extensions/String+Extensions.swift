@@ -13,11 +13,11 @@ extension String {
         return self.split(separator: target).map { String($0) }
     }
     
-    mutating func removeEntire(character: Character) -> String {
+    mutating func removeEntire(character: Character) {
         
         while self.contains(character) {
-            self.remove(at: firstIndex(of: character) ?? self.endIndex)
+            guard let indexOfCharacter = firstIndex(of: character) else { return }
+            self.remove(at: indexOfCharacter)
         }
-        return self
     }
 }
