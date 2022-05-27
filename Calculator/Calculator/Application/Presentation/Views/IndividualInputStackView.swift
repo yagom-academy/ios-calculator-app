@@ -24,7 +24,7 @@ class IndividualInputStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupStackView() {
+    private func setupStackView() {
         operatorLabel.textColor = .white
         operandLabel.textColor = .white
         self.addArrangedSubview(operatorLabel)
