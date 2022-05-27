@@ -24,9 +24,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentValue[0].text = ""
-        currentValue[1].text = "0"
-        inputedStack = []
+        setCalculator("0")
         defaultStackView.forEach { view in
             view.removeFromSuperview()
         }
@@ -112,26 +110,14 @@ class CalculatorViewController: UIViewController {
             let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
             scrollView.setContentOffset(bottomOffset, animated: true)
         } catch DevideError.nilOfValue {
-            currentValue[0].text = ""
-            currentValue[1].text = "0"
+            setCalculator("0")
             AlertErrorEvent()
-            totalFormula = ""
-            NumberOfFormula = 1
-            inputedStack = []
         } catch DevideError.insufficientOperator {
-            currentValue[0].text = ""
-            currentValue[1].text = "0"
+            setCalculator("0")
             AlertErrorEvent()
-            totalFormula = ""
-            NumberOfFormula = 1
-            inputedStack = []
         } catch DevideError.devideZero {
-            currentValue[0].text = ""
-            currentValue[1].text = "NAN"
+            setCalculator("NAN")
             AlertErrorEvent()
-            totalFormula = ""
-            NumberOfFormula = 1
-            inputedStack = []
         } catch {
             print(Error.self)
         }
@@ -160,6 +146,14 @@ class CalculatorViewController: UIViewController {
             }
             currentValue[1].text = value.filter { $0 != "-" }
         }
+    }
+    
+    private func setCalculator(_ inputValue: String) {
+        currentValue[0].text = ""
+        currentValue[1].text = inputValue
+        totalFormula = ""
+        NumberOfFormula = 1
+        inputedStack = []
     }
     
     private func removeZeroOfDouble(_ input: String) -> String {
