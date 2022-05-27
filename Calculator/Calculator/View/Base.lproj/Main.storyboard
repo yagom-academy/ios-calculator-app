@@ -317,6 +317,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapCalculateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BHU-16-fxL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

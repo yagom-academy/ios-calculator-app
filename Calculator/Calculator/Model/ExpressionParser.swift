@@ -20,8 +20,8 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String ) -> [String] {
-        let userInput = input.split(with: " ").compactMap{ Double($0) }
-        return userInput.map { String($0) }
+        let userInput = input.split(with: " ")
+        return userInput
     }
 }
 
