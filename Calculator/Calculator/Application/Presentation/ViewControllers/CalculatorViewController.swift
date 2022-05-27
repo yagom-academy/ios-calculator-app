@@ -13,6 +13,7 @@ class CalculatorViewController: UIViewController {
     
     private var currentNumber: String = "0"
     private var currentOperator: String = ""
+    private var snippets: [(`operator`: String, operand: String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,21 @@ class CalculatorViewController: UIViewController {
     func refreshOperatorLabel() {
         DispatchQueue.main.async {
             self.currentOperatorLabel.text = self.currentOperator
+        }
+    }
+    
+    func translateOperator(_ symbol: String) -> String {
+        switch symbol {
+        case "+":
+            return "+"
+        case "–":
+            return "–"
+        case "×":
+            return "*"
+        case "÷":
+            return "/"
+        default:
+            return ""
         }
     }
     
@@ -53,16 +69,54 @@ class CalculatorViewController: UIViewController {
         guard let `operator` = sender.titleLabel?.text else {
             return
         }
-        // TODO: 오퍼레이터가 없는 초기 상태일 경우 숫자를 입력하고 오퍼레이터를 입력하면 숫자가 올라가게끔
+        // TODO: 현재 계산기 위의 수가 무엇이냐에 따라 오퍼레이터에 따른 액션 조절
         
-        currentOperator = `operator`
+        switch currentNumber {
+        case "0":
+            currentOperator = `operator`
+        case "NaN":
+            return
+        default:
+            let operatorNow = translateOperator(currentOperator)
+            snippets.append((operatorNow, currentNumber))
+            currentOperator = `operator`
+            currentNumber = "0"
+        }
         
+        refreshNumberLabel()
+        refreshOperatorLabel()
+    }
+    
+    @IBAction func pressEqualButton(_ sender: UIButton) {
+        let operatorNow = translateOperator(currentOperator)
+        snippets.append((operatorNow, currentNumber))
+        
+        var totalString = ""
+        snippets.forEach {
+            totalString += $0.`operator`
+            totalString += $0.operand
+        }
+        
+        let formula = ExpressionParser.parse(from: totalString)
+        
+        do {
+            let result = try formula.result()
+            currentNumber = String(result)
+        } catch CalculatorError.dividedByZero {
+            currentNumber = "NaN"
+        } catch {
+            currentNumber = "Err"
+        }
+        currentOperator = ""
+        
+        refreshNumberLabel()
         refreshOperatorLabel()
     }
     
     
     @IBAction func pressCEButton(_ sender: UIButton) {
-        currentNumber = ""
+        currentNumber = "0"
+        currentOperator = ""
         
         refreshNumberLabel()
     }
