@@ -117,14 +117,12 @@ class ViewController: UIViewController {
         
         let operatorLabel = UILabel()
         operatorLabel.text = currentOperatorLabel?.text
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorLabel.textColor = UIColor(white: 1, alpha: 1)
+        setAttribute(to: operatorLabel)
         stackViewElement.addArrangedSubview(operatorLabel)
         
         let operandLabel = UILabel()
         operandLabel.text = screenLabel?.text
-        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operandLabel.textColor = UIColor(white: 1, alpha: 1)
+        setAttribute(to: operandLabel)
         stackViewElement.addArrangedSubview(operandLabel)
         
         return stackViewElement
@@ -132,6 +130,10 @@ class ViewController: UIViewController {
     
         guard let scrollView = scrollView else { return }
     private func setAttribute(to label: UILabel) {
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = UIColor(white: 1, alpha: 1)
+    }
+    
     private func goToBottomOfScrollView() {
         scrollView.scrollRectToVisible(CGRect(x: 0,
                                               y: scrollView.contentSize.height - scrollView.bounds.height,
