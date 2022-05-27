@@ -108,6 +108,11 @@ final class CalculatorViewController: UIViewController {
         removeStack()
     }
     
+    @IBAction func removeCurrentNumberButton(_ sender: UIButton) {
+        operandLabel.text = "0"
+        userInputNumber = ""
+        userNumberTapped = false
+    }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
         guard let `operator` = operatorLabel.text,
@@ -158,9 +163,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func removeStack() {
-            inputStackView.subviews.forEach {
-                $0.removeFromSuperview()
-            }
+        inputStackView.subviews.forEach {
+            $0.removeFromSuperview()
         }
+    }
 }
 
