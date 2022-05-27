@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumFractionDigits = -2
         numberFormatter.maximumIntegerDigits = 20
         removeAllIn(stack: historyStackView!)
     }
