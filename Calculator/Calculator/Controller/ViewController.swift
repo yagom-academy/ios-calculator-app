@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
         removeAllIn(stack: historyStackView!)
     }
     //MARK: - buttons
