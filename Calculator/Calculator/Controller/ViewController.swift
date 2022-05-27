@@ -56,6 +56,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapResultButton() {
+        if totalFormula.isEmpty {
+            return
+        }
+        
         updateStackView()
 
         let formula = ExpressionParser.parse(from: totalFormula)
@@ -78,6 +82,10 @@ class ViewController: UIViewController {
     }
     
     func updateStackView() {
+        if totalFormula.isEmpty {
+            stackView.removeAllArrangedSubview()
+        }
+        
         let label = UILabel()
         label.text = numbers
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -103,5 +111,14 @@ class ViewController: UIViewController {
         } else {
             numbers += text
         }
+    }
+}
+
+extension UIStackView {
+    func removeAllArrangedSubview() {
+        self.arrangedSubviews.forEach({ child in
+            self.removeArrangedSubview(child)
+            child.removeFromSuperview()
+        })
     }
 }
