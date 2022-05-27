@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     
     private var numbers = ""
     private var totalFormula = ""
+    private var isPositiveNumber = true
+    private var selectedperator = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +52,7 @@ class ViewController: UIViewController {
             return
         }
         operatorLabel.text = String(currentoOperator)
-        
-        numbers += String(currentoOperator)
-
+        selectedperator = String(currentoOperator)
     }
     
     @IBAction func tapResultButton() {
@@ -68,23 +68,40 @@ class ViewController: UIViewController {
             result = try formula.result()
             numbers = String(result)
             inputNumberLabel.text = numbers
-            numbers = ""
-            totalFormula = ""
         } catch CalculatorError.dividedByZero {
             inputNumberLabel.text = CalculatorError.dividedByZero.errorMessage
         } catch {
             inputNumberLabel.text = CalculatorError.unknownError.errorMessage
         }
+        
+        numbers = ""
+        totalFormula = ""
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
         resetCalculation()
     }
     
-    
     @IBAction func tapClearEntryButton(_ sender: UIButton) {
         numbers = ""
         inputNumberLabel.text = "0"
+    }
+    
+    
+    @IBAction func tapToChangeSignButton(_ sender: UIButton) {
+        if numbers == "0" || numbers == "" {
+            return
+        }
+        
+        if isPositiveNumber {
+            numbers = "-" + numbers
+            isPositiveNumber = false
+        } else {
+            numbers = numbers.replacingOccurrences(of: "-", with: "")
+            isPositiveNumber = true
+        }
+        
+        inputNumberLabel.text = numbers
     }
     
     func updateLable(text: String) {
@@ -97,13 +114,13 @@ class ViewController: UIViewController {
         }
         
         let label = UILabel()
-        label.text = numbers
+        label.text = selectedperator + numbers
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         stackView.addArrangedSubview(label)
-        totalFormula += numbers
+        totalFormula = totalFormula + selectedperator + numbers
         numbers = ""
-        // label.adjustsFontForContentSizeCategory = true
+        selectedperator = ""
         print(totalFormula)
     }
     
