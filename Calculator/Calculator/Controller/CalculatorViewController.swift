@@ -7,10 +7,6 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    private var userInput: String = ""
-    private var userInputNumber: String = ""
-    
-    private var userNumberTapped = false
     
     @IBOutlet weak var inputStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -18,16 +14,15 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     
+    private var userInput: String = ""
+    private var userInputNumber: String = ""
+    private var userNumberTapped = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
-    
-    private func setupViews() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-    }
-    
+ 
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
         let digit = sender.currentTitle!
 
@@ -129,6 +124,41 @@ final class CalculatorViewController: UIViewController {
         userNumberTapped = false
     }
     
+    @IBAction private func didTapCalculateButton(_ sender: UIButton) {
+        if operatorLabel.text == "" {
+            return
+        }
+       
+        addInputStack()
+        operatorLabel.text! = ""
+        userInput.append(userInputNumber)
+        do {
+            var result = ExpressionParser.parse(from: userInput)
+            var number = doNumberFormatter(number: try result.result())
+            
+            if number == "-0" {
+                number = "0"
+            }
+            
+            operandLabel.text = number
+            userInput = ""
+            userInputNumber = number.replacingOccurrences(of: ",", with: "")
+        } catch OperatorError.divideZero {
+            operandLabel.text = "NaN"
+            userInput = ""
+        } catch OperatorError.wrongFormula {
+            operandLabel.text = "NaN"
+            userInput = ""
+        } catch {
+            return
+        }
+    }
+    
+    private func setupViews() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+    }
+    
     private func generateStackLabels() -> (UILabel, UILabel)? {
         guard let validNumber = Double(operandLabel.text!) else { return nil }
         let number = doNumberFormatter(number: validNumber)
@@ -204,36 +234,5 @@ final class CalculatorViewController: UIViewController {
         }
         return formattedNumber
     }
-    
-    @IBAction private func didTapCalculateButton(_ sender: UIButton) {
-        if operatorLabel.text == "" {
-            return
-        }
-       
-        addInputStack()
-        operatorLabel.text! = ""
-        userInput.append(userInputNumber)
-        do {
-            var result = ExpressionParser.parse(from: userInput)
-            var number = doNumberFormatter(number: try result.result())
-            
-            if number == "-0" {
-                number = "0"
-            }
-            
-            operandLabel.text = number
-            userInput = ""
-            userInputNumber = number.replacingOccurrences(of: ",", with: "")
-        } catch OperatorError.divideZero {
-            operandLabel.text = "NaN"
-            userInput = ""
-        } catch OperatorError.wrongFormula {
-            operandLabel.text = "NaN"
-            userInput = ""
-        } catch {
-            return
-        }
-    }
-    
 }
 
