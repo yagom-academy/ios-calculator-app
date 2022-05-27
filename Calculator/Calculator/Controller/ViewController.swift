@@ -109,7 +109,31 @@ class ViewController: UIViewController {
     
     //MARK: - calculateButtonTapped
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        isCalculated = true
+        var result: Double?
+        var calculator = ExpressionParser.parse(from: expressionParserInput)
+        guard operatorTextLabel.text != "" else { return }
+        
+        print("expressionParserInput : \(expressionParserInput)")
+        do {
+            result = try calculator.result()
+        } catch {
+            print(OperatorError.devideFail.errorDescription)
+            operandsTextLabel.text? = OperatorError.devideFail.errorDescription
+            return
+        }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        guard let formattedResult = numberFormatter.string(for: result) else { return }
+        
         addStackView()
+        operatorTextLabel.text = ""
+        operandsTextLabel.text = formattedResult
+        expressionParserInput.removeAll()
+        print("expressionParserInput : \(expressionParserInput)")
+        print(formattedResult)
     }
     
     //MARK: - operandButtonsTapped()
