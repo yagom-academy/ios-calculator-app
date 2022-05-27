@@ -2,7 +2,7 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 김동용 on 2022/05/18.
+//  Created by bard on 2022/05/18.
 //
 
 struct Formula {
