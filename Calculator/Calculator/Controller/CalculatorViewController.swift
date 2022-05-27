@@ -8,6 +8,7 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     var userInput: String = ""
+    var userInputNumber: String = ""
     
     private var userNumberTapped = false
     
@@ -47,9 +48,9 @@ final class CalculatorViewController: UIViewController {
         } else {
             operandLabel.text! = digit
         }
+        
         userNumberTapped = true
-        userInput.append(digit)
-        print(userInput)
+        userInputNumber.append(digit)
     }
     
     @IBAction func didTapDot(_ sender: UIButton) {
@@ -60,29 +61,44 @@ final class CalculatorViewController: UIViewController {
             return
         } else if operandLabel.text == "0" {
             operandLabel.text = "0."
-            userInput.append(contentsOf: "0")
+            userInputNumber.append(contentsOf: "0")
             userNumberTapped = true
         } else {
             operandLabel.text! = textCurrentlyInDisply + dot
         }
-        userInput.append(dot)
+        
+        userInputNumber.append(dot)
     }
     
     @IBAction func didTapOperatorButton(_ sender: UIButton) {
         let operators = sender.currentTitle!
-        addInputStack()
         
-        guard let lastCharacter = userInput.last else { return }
+        guard operandLabel.text != "0" else { return }
+        guard let lastCharacter = userInputNumber.last else { return }
         guard let _ = Double(String(lastCharacter)) else { return }
         
+        addInputStack()
         operatorLabel.text = operators
         operandLabel.text = "0"
         userNumberTapped = false
+        userInput.append(contentsOf: userInputNumber)
         userInput.append(operators)
+        userInputNumber = ""
+        print(userInput)
     }
     
     @IBAction func didTapPlusMinusSignButton(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            return
+        }
         
+        if operandLabel.text!.hasPrefix("-") {
+            operandLabel.text = String(operandLabel.text!.dropFirst())
+            userInputNumber = String(userInputNumber.dropFirst())
+        } else {
+            operandLabel.text = "-" + operandLabel.text!
+            userInputNumber = "-" + userInputNumber
+        }
     }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
