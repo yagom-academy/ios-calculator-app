@@ -144,5 +144,16 @@ class CalculatorViewController: UIViewController {
         refreshNumberLabel()
         refreshOperatorLabel()
     }
+    
+    
+    @IBAction func pressInvertButton(_ sender: UIButton) {
+        guard currentNumber != "0" else {
+            return
+        }
+        
+        currentNumber = "-" + currentNumber
+    
+        refreshNumberLabel()
+    }
 }
 
