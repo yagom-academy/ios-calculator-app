@@ -30,24 +30,29 @@ class ViewController: UIViewController {
         guard let number = numberButtons.firstIndex(of: sender) else { return }
         let newInputNumbers = Keypad.convertNumber(number)
         checkInputNumbers(text: newInputNumbers)
-        inputNumberLabel.text = numbers
+        inputNumberLabel.text = numbers.filter {$0.isNumber}
     }
     
     @IBAction func tapOperatorsButton(_ sender: UIButton) {
+        updateStackView()
+        
+        var currentoOperator:Character = " "
         switch sender {
         case additionButton:
-            operatorLabel.text = String(Operator.add.symbol)
+            currentoOperator = Operator.add.symbol
         case subtractionButton:
-            operatorLabel.text = String(Operator.subtract.symbol)
+            currentoOperator = Operator.subtract.symbol
         case multiplicationButton:
-            operatorLabel.text = String(Operator.multiply.symbol)
+            currentoOperator = Operator.multiply.symbol
         case divisionButton:
-            operatorLabel.text = String(Operator.divide.symbol)
+            currentoOperator = Operator.divide.symbol
         default:
             return
         }
+        operatorLabel.text = String(currentoOperator)
         
-        updateStackView()
+        numbers += String(currentoOperator)
+
     }
     
     @IBAction func tapResultButton() {
