@@ -10,11 +10,11 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
 
-    var sut: CalculatorItemQueue<String>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<String>(queue: ["1","2","3"], head: 0)
+        sut = CalculatorItemQueue<Double>(queue: [1.0,2.0,3.0], head: 0)
     }
 
     override func tearDownWithError() throws {
@@ -39,9 +39,9 @@ class CalculatorTests: XCTestCase {
         
         // when (count를 수행하면)
         let count = sut.count
-        
+        let expected = 3
         // then (카운트가 실제 요소의 총 갯수와 맞는지 확인한다)
-        XCTAssertEqual(count, 3)
+        XCTAssertEqual(count, expected)
     }
     
     func test_frontReturnsFirstElement() {
@@ -50,9 +50,9 @@ class CalculatorTests: XCTestCase {
         
         // when (front를 수행하면)
         let result = sut.front
-        
+        let expected = 1.0
         // then (첫번째 요소를 표시한다)
-        XCTAssertEqual(result, "1")
+        XCTAssertEqual(result, expected)
     }
     
     func test_rearReturnsLastElement() {
@@ -61,9 +61,9 @@ class CalculatorTests: XCTestCase {
         
         // when (rear를 수행하면)
         let result = sut.rear
-        
+        let expected = 3.0
         // then (마지막 요소를 표시한다)
-        XCTAssertEqual(result, "3")
+        XCTAssertEqual(result, expected)
     }
     
     func test_clearRemovesAllElementsInQueue() {
@@ -72,9 +72,9 @@ class CalculatorTests: XCTestCase {
         
         // when (rear를 수행하면)
         sut.clear()
-        
+        let expected = 0
         // then (큐의 모든 요소가 제거된다)
-        XCTAssertEqual(sut.count, 0)
+        XCTAssertEqual(sut.count, expected)
     }
     
     func test_popRemovesAndReturnsLastElement() {
@@ -83,7 +83,7 @@ class CalculatorTests: XCTestCase {
         
         // when
         let lastElementBeforePop = sut.pop()
-        let expected = "3"
+        let expected = 3.0
         
         //then
         XCTAssertEqual(lastElementBeforePop, expected)
