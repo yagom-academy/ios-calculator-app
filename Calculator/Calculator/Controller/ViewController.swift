@@ -59,6 +59,27 @@ class ViewController: UIViewController {
         recentInputStackView.addArrangedSubview(lastInputStackView)
         lastInputStackView.isHidden = false
     }
+    
+    @IBAction func operatorButtonDidTapped(_ sender: UIButton) {
+        guard displayNumber.text != zeroString else {
+            return
+        }
+        
+        if displayOperator.text == emptyString {
+            addSubView()
 
-}
+            calculateItems +=  displayNumber.text!
+            displayOperator.text = sender.currentTitle!
+            displayNumber.text = zeroString
+            return
+        }
+        
+        addSubView()
+        scrollToBottom()
+    
+        calculateItems += " " + displayOperator.text!
+        calculateItems += " " + displayNumber.text!
+        displayOperator.text = sender.currentTitle!
+        displayNumber.text = zeroString
+    }
 
