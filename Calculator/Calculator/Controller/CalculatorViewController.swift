@@ -144,6 +144,10 @@ class CalculatorViewController: UIViewController {
         let numberText = numberLable.text ?? "0"
         let pureNumber = numberText.filter { $0 != "," }
         
+        guard numberText != "0" else {
+            return
+        }
+      
         if numberText.contains("-") {
             let plusNumber = numberText.dropFirst()
             let purePlusNumber = plusNumber.filter { $0 != "," }
