@@ -144,6 +144,10 @@ class ViewController: UIViewController {
         stackView.removeAllArrangedSubview()
         inputNumberLabel.text = ""
         operatorLabel.text = ""
+        totalFormula = ""
+        numbers = ""
+        isPositiveNumber = true
+        selectedperator = ""
     }
 }
 

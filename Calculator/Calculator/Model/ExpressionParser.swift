@@ -6,12 +6,10 @@ enum ExpressionParser {
         
         compoents.compactMap {Double($0)}.forEach { operands.enqueue($0) }
         
-        
         let operatorSymbols = Operator.allCases.map { String($0.symbol) }
         compoents.filter { operatorSymbols.contains($0) }.forEach {
             operators.enqueue(Character($0))
         }
-
         
         let formula = Formula(operands: operands, operators: operators)
         return formula
@@ -46,11 +44,8 @@ enum ExpressionParser {
             } else if operatorSymbols.contains(element) && count == 0 {
                 sign = element
             }
-            
-            if element == input.last {
-                items += [splitedInput]
-            }
         }
+        items += [splitedInput]
         return items
     }
 }

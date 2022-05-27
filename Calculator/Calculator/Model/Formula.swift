@@ -15,7 +15,7 @@ struct Formula {
         }
         
         let operandItems = operands.displayItems().filter {
-            $0 != operands.displayItems().first
+            $0 != start
         }
 
         let errorNumber = CalculatorError.dividedByZero.errorCaseNumber
