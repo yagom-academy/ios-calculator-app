@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var inputNumberLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet weak var divisionButton: UIButton!
     @IBOutlet weak var multiplicationButton: UIButton!
@@ -18,21 +18,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
     
-    private var numbers = ""
-    private var totalFormula = ""
+    private var inputNumber = ""
+    private var inputOperator = ""
+    private var arithmetic = ""
     private var isPositiveNumber = true
-    private var selectedperator = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetCalculation()
+        resetCalculator()
     }
     
     @IBAction func tapKeypadButton(_ sender: UIButton) {
-        guard let number = numberButtons.firstIndex(of: sender) else { return }
-        let newInputNumbers = Keypad.convertNumber(number)
-        checkInputNumbers(text: newInputNumbers)
-        inputNumberLabel.text = numbers.filter {$0.isNumber}
+        guard let tappedNumber = numberButtons.firstIndex(of: sender) else { return }
+        let newInputNumbers = Keypad.convertNumber(tappedNumber)
+        checkInputNumber(number: newInputNumbers)
+        inputNumberLabel.text = inputNumber
     }
     
     @IBAction func tapOperatorsButton(_ sender: UIButton) {
@@ -51,103 +51,99 @@ class ViewController: UIViewController {
         default:
             return
         }
-        operatorLabel.text = String(currentoOperator)
-        selectedperator = String(currentoOperator)
+        inputOperatorLabel.text = String(currentoOperator)
+        inputOperator = String(currentoOperator)
     }
     
     @IBAction func tapResultButton() {
-        if totalFormula.isEmpty {
+        if arithmetic.isEmpty {
             return
         }
         
         updateStackView()
 
-        let formula = ExpressionParser.parse(from: totalFormula)
+        let formula = ExpressionParser.parse(from: arithmetic)
         var result = 0.0
         do {
             result = try formula.result()
-            numbers = String(result)
-            inputNumberLabel.text = numbers
+            inputNumber = String(result)
+            inputNumberLabel.text = inputNumber
         } catch CalculatorError.dividedByZero {
             inputNumberLabel.text = CalculatorError.dividedByZero.errorMessage
         } catch {
             inputNumberLabel.text = CalculatorError.unknownError.errorMessage
         }
         
-        numbers = ""
-        totalFormula = ""
+        inputNumber = ""
+        arithmetic = ""
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
-        resetCalculation()
+        resetCalculator()
     }
     
     @IBAction func tapClearEntryButton(_ sender: UIButton) {
-        numbers = ""
+        inputNumber = ""
         inputNumberLabel.text = "0"
     }
     
     
     @IBAction func tapToChangeSignButton(_ sender: UIButton) {
-        if numbers == "0" || numbers == "" {
+        if inputNumber == "0" || inputNumber == "" {
             return
         }
         
         if isPositiveNumber {
-            numbers = "-" + numbers
+            inputNumber = "-" + inputNumber
             isPositiveNumber = false
         } else {
-            numbers = numbers.replacingOccurrences(of: "-", with: "")
+            inputNumber = inputNumber.replacingOccurrences(of: "-", with: "")
             isPositiveNumber = true
         }
         
-        inputNumberLabel.text = numbers
+        inputNumberLabel.text = inputNumber
     }
     
     func updateLable(text: String) {
-        inputNumberLabel.text = numbers
+        inputNumberLabel.text = inputNumber
     }
     
     func updateStackView() {
-        if totalFormula.isEmpty {
-            stackView.removeAllArrangedSubview()
-        }
-        
         let label = UILabel()
-        label.text = selectedperator + numbers
+        label.text = inputOperator + inputNumber
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         stackView.addArrangedSubview(label)
-        totalFormula = totalFormula + selectedperator + numbers
-        numbers = ""
-        selectedperator = ""
-        print(totalFormula)
+        arithmetic = arithmetic + inputOperator + inputNumber
+        inputNumber = ""
+        inputOperator = ""
+        print(arithmetic)
     }
     
-    func checkInputNumbers(text: String) {
-        if numbers.contains(".") && text == "." {
+    func checkInputNumber(number: String) {
+        if inputNumber.contains(".") && number == "." {
             return
         }
         
-        if (numbers == "" || numbers == "0") && (text == "0" || text == "00") {
-            numbers = "0"
-        } else if numbers == "" && text == "." {
-            numbers = "0."
-        } else if numbers == "0" && text != "."{
-            numbers = text
+        if (inputNumber == "" || inputNumber == "0") && (number == "0" || number == "00") {
+            inputNumber = "0"
+        } else if inputNumber == "" && number == "." {
+            inputNumber = "0."
+        } else if inputNumber == "0" && number != "."{
+            inputNumber = number
         } else {
-            numbers += text
+            inputNumber += number
         }
     }
     
-    func resetCalculation() {
+    func resetCalculator() {
         stackView.removeAllArrangedSubview()
         inputNumberLabel.text = ""
-        operatorLabel.text = ""
-        totalFormula = ""
-        numbers = ""
+        inputOperatorLabel.text = ""
+        arithmetic = ""
+        inputNumber = ""
         isPositiveNumber = true
-        selectedperator = ""
+        inputOperator = ""
     }
 }
 
