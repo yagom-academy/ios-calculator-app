@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        resetCalculation()
     }
     
     @IBAction func tapKeypadButton(_ sender: UIButton) {
@@ -111,6 +111,12 @@ class ViewController: UIViewController {
         } else {
             numbers += text
         }
+    }
+    
+    func resetCalculation() {
+        stackView.removeAllArrangedSubview()
+        inputNumberLabel.text = ""
+        operatorLabel.text = ""
     }
 }
 
