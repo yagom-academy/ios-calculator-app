@@ -145,11 +145,11 @@
 		6A888EB428376669007E419C /* SubModel */ = {
 			isa = PBXGroup;
 			children = (
+				6A888EB9283766A4007E419C /* DoubleExtension.swift */,
+				6A7C4AAE283AB03E00A58D9F /* Error.swift */,
+				6A888EBB283766B2007E419C /* ExpressionParser.swift */,
 				6A888EB528376687007E419C /* Operator.swift */,
 				6A888EB72837669A007E419C /* SplitExtension.swift */,
-				6A888EB9283766A4007E419C /* DoubleExtension.swift */,
-				6A888EBB283766B2007E419C /* ExpressionParser.swift */,
-				6A7C4AAE283AB03E00A58D9F /* Error.swift */,
 			);
 			path = SubModel;
 			sourceTree = "<group>";
@@ -174,8 +174,8 @@
 		6AE8C0F428335CEE006805EF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6AE8C1052833672B006805EF /* CalculatorItemQueue.swift */,
 				6AE8C10728336791006805EF /* CalculateItem.swift */,
+				6AE8C1052833672B006805EF /* CalculatorItemQueue.swift */,
 				6A888EBD28376810007E419C /* Formula.swift */,
 			);
 			path = Model;
@@ -184,8 +184,8 @@
 		6AE8C0F628335CFC006805EF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
