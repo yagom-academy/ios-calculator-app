@@ -35,13 +35,12 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if operandLabel.text!.count >= 20 {
+        if countNumberString() {
             return
         }
         
         if userNumberTapped {
-            let textCurrentlyInDisply = operandLabel.text!
-            operandLabel.text! = textCurrentlyInDisply + digit
+            operandLabel.text! += digit
         }
         else if operandLabel.text!.contains(".") {
             userNumberTapped = true
@@ -166,6 +165,20 @@ final class CalculatorViewController: UIViewController {
         inputStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
+    }
+    
+    func makeDouble(number: String) -> Double {
+        guard let validNumber = Double(number) else { return 0 }
+        return validNumber
+    }
+    
+    func countNumberString() -> Bool {
+        if operandLabel.text!.count >= 20 {
+            return true
+        } else if operatorLabel.text!.contains("-"), operatorLabel.text!.count >= 21 {
+            return true
+        }
+        return false
     }
 }
 
