@@ -149,19 +149,16 @@ class ViewController: UIViewController {
     //MARK: - changeOperandSignButtonTapped
     @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
         guard let operandsLabelText = operandsTextLabel.text else { return }
-        while isCalculated == false {
-            if operandsTextLabel.text?.first == "-" {
-                operandsTextLabel.text?.removeFirst()
-                operandsTextLabel.text = "+" + operandsLabelText
-            } else if operandsTextLabel.text?.first == "+" {
-                operandsTextLabel.text?.removeFirst()
-                operandsTextLabel.text = "-" + operandsLabelText
-            } else if operandsTextLabel.text == "0"  {
-                operandsTextLabel.text = operandsTextLabel.text
-            } else {
-                operandsTextLabel.text = "-" + operandsLabelText
-            }
-            isCalculated = true
+        
+        if operandsLabelText == "0" {
+            return
+        } else if operandsTextLabel.text?.first == "-" {
+            operandsTextLabel.text?.removeFirst()
+            return
+        } else if operandsTextLabel.text?.first?.isNumber == true {
+            operandsTextLabel.text = "-" + operandsLabelText
+        } else {
+            print(OperatorError.unknown)
         }
     }
     
