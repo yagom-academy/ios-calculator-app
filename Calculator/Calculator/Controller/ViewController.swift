@@ -81,6 +81,12 @@ class ViewController: UIViewController {
         resetCalculation()
     }
     
+    
+    @IBAction func tapClearEntryButton(_ sender: UIButton) {
+        numbers = ""
+        inputNumberLabel.text = "0"
+    }
+    
     func updateLable(text: String) {
         inputNumberLabel.text = numbers
     }
