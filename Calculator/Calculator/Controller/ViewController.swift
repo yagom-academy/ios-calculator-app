@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
     private var isOperandInputted = false
     private var isCalculateCompleted = false
     private var inputtedFomula = ""
@@ -49,14 +49,14 @@ class ViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
-        guard let sederTitle = sender.currentTitle else{
+        guard let senderTitle = sender.currentTitle else{
             return
         }
         
         if !isOperandInputted {
-            operandLabel.text = sederTitle
+            operandLabel.text = senderTitle
         } else {
-            operandLabel.text = checkOperand(getText(operandLabel), with: sederTitle)
+            operandLabel.text = checkOperand(getText(operandLabel), with: senderTitle)
         }
         
         isOperandInputted = true
@@ -75,14 +75,14 @@ class ViewController: UIViewController {
             isOperandInputted = false
             return
         }
-        guard let sederTitle = sender.currentTitle else{
+        guard let senderTitle = sender.currentTitle else{
             return
         }
-        operatorLabel.text = sederTitle
+        operatorLabel.text = senderTitle
         if fomulaStackView.subviews.isEmpty {
             createStackView(changeFormat(getText(operandLabel)))
         } else {
-            createStackView(sederTitle, changeFormat(getText(operandLabel)))
+            createStackView(senderTitle, changeFormat(getText(operandLabel)))
         }
         addInputtedFomula()
         downScroll()

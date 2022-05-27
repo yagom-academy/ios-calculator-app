@@ -7,7 +7,7 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
@@ -21,7 +21,7 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -35,21 +35,7 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B29C28333F280019700C"
-               BuildableName = "CalculatorTests.xctest"
-               BlueprintName = "CalculatorTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -63,7 +49,7 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
@@ -73,6 +59,20 @@
                BlueprintIdentifier = "3743B2EA28363E5F0019700C"
                BuildableName = "OperatorsTests.xctest"
                BlueprintName = "OperatorsTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3752125E283C730B00C7D051"
+               BuildableName = "ViewControllerTests.xctest"
+               BlueprintName = "ViewControllerTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -85,76 +85,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B29C28333F280019700C"
-               BuildableName = "CalculatorTests.xctest"
-               BlueprintName = "CalculatorTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B2A928333F470019700C"
-               BuildableName = "LinkedListTests.xctest"
-               BlueprintName = "LinkedListTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B2BF28335E7A0019700C"
-               BuildableName = "CalculatorItemQueueTests.xctest"
-               BlueprintName = "CalculatorItemQueueTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B2EA28363E5F0019700C"
-               BuildableName = "OperatorsTests.xctest"
-               BlueprintName = "OperatorsTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B2F72836529D0019700C"
-               BuildableName = "FormulaTests.xctest"
-               BlueprintName = "FormulaTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3743B304283667640019700C"
-               BuildableName = "ExpressionParserTests.xctest"
-               BlueprintName = "ExpressionParserTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3752125E283C730B00C7D051"
-               BuildableName = "ViewControllerTests.xctest"
-               BlueprintName = "ViewControllerTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
