@@ -170,36 +170,134 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
-        guard numberInput.text != "0" || lastInput.arrangedSubviews.count > 0 else {
-            return
-        }
-        
-        guard let text = numberInput.text else {
-            return
-        }
-        
-        guard Double(text) != 0.0 else {
-            operatorInput.text = sender.currentTitle
-            return
-        }
-        
-        if operatorInput.text == "" && lastInput.arrangedSubviews.count > 0 {
-            clearLastInput()
-        }
-        
-        addCalculatorItems()
-        operatorInput.text = sender.currentTitle
+        updateOperatorInput(sender)
         resetNumberInput()
         goToBottomOfScrollView()
     }
     
-    @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
-        guard operatorInput.text != "" else {
+    private func updateOperatorInput(_ sender: UIButton) {
+        guard checkOperator(sender) == true else {
             return
         }
         
         addCalculatorItems()
+        setOperator(sender)
+    }
+    
+    private func checkOperator(_ sender: UIButton) -> Bool {
+        guard operatorButtonDidTappedWhileFirstOperandIsZero(sender) else {
+            return false
+        }
         
+        if isAdditionalOperatorAfterResultHasBeenShown() {
+            return true
+        }
+        
+        guard isCurrentNumberEqualToZero(sender) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func operatorButtonDidTappedWhileFirstOperandIsZero(_ sender: UIButton) -> Bool {
+        guard numberInput.text != "0" || lastInput.arrangedSubviews.count > 0 else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func isAdditionalOperatorAfterResultHasBeenShown() -> Bool {
+        if operatorInput.text == "" && lastInput.arrangedSubviews.count > 0 {
+            clearLastInput()
+            return true
+        }
+        
+        return false
+    }
+    
+    private func isCurrentNumberEqualToZero(_ sender: UIButton) -> Bool {
+        guard let text = numberInput.text else {
+            return false
+        }
+        
+        guard Double(text) != 0.0 || lastInput.arrangedSubviews.count <= 0 else {
+            operatorInput.text = sender.currentTitle
+            return false
+        }
+        
+        return true
+    }
+    
+    private func setOperator(_ sender: UIButton) {
+        operatorInput.text = sender.currentTitle
+    }
+    
+    private func addCalculatorItems() {
+        guard let newCalculationItemsInput = makeUIStackView() else {
+            return
+        }
+
+        addStackView(newCalculationItemsInput)
+    }
+    
+    private func makeUIStackView() -> UIStackView? {
+        guard let label = makeUILabel() else {
+            return nil
+        }
+        
+        updateTotalInput(by: label)
+        
+        let stackView = UIStackView(arrangedSubviews: [label])
+        
+        return stackView
+    }
+    
+    private func makeUILabel() -> UILabel? {
+        let label = UILabel()
+        
+        setLabelProperty(label)
+        
+        return label
+    }
+    
+    private func setLabelProperty(_ label: UILabel) {
+        guard let `operator` = operatorInput.text, let number = numberInput.text  else {
+            return
+        }
+        
+        label.isHidden = false
+        label.text = `operator` + " " + number
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
+    }
+    
+    private func updateTotalInput(by label: UILabel) {
+        guard let labelText = label.text else {
+            return
+        }
+        
+        let firstTrimmedInput = removeWhitespaces(labelText)
+        let secondTrimmedInput = removeComma(firstTrimmedInput)
+        totalInput += secondTrimmedInput
+    }
+    
+    private func addStackView(_ stackView: UIStackView) {
+        lastInput.addArrangedSubview(stackView)
+    }
+    
+    @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
+        addLastCalculationItems()
+        calculate()
+        resetOperatorInput()
+        resetTotalInput()
+        goToBottomOfScrollView()
+    }
+    
+    private func calculate() {
         var formula = ExpressionParser.parse(from: totalInput)
         
         do {
@@ -212,13 +310,17 @@ class ViewController: UIViewController {
         } catch (let calculationError) {
             handleError(calculationError)
         }
-        
-        resetOperatorInput()
-        resetTotalInput()
-        goToBottomOfScrollView()
     }
     
-    func handleError(_ error: Error) {
+    private func addLastCalculationItems() {
+        guard operatorInput.text != "" else {
+            return
+        }
+        
+        addCalculatorItems()
+    }
+    
+    private func handleError(_ error: Error) {
         switch error {
         case CalculatorError.dividedByZero:
             numberInput.text = CalculatorError.dividedByZero.localizedDescription
@@ -250,30 +352,33 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func signChangerButtonDidTapped(_ sender: UIButton) {
-        // 변환 과정
-        guard let number = numberInput.text else {
+        guard let signChangedNumber = changeSign() else {
             return
+        }
+        
+        guard let formattedNumber = formatNumber(signChangedNumber) else {
+            return
+        }
+
+        setNumber(formattedNumber)
+    }
+    
+    private func changeSign() -> String? {
+        guard let number = numberInput.text else {
+            return nil
         }
         
         guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
-            return
+            return nil
         }
-        
-        // 조건 체크
+
         guard formattedNumber != 0 else {
-            return
+            return nil
         }
-        
-        // 부호 바꾸기
+
         let singChangedNumber = String(-formattedNumber)
         
-        // 변환 과정
-        
-        guard let reformattedNumber = formatNumber(singChangedNumber) else {
-            return
-        }
-        // update
-        setNumber(reformattedNumber)
+        return singChangedNumber
     }
     
     private func resetNumberInput() {
@@ -292,55 +397,6 @@ class ViewController: UIViewController {
         lastInput.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    
-    
-    private func addCalculatorItems() {
-        guard let number = numberInput.text else {
-            return
-        }
-        
-        guard let formattedNumber = formatNumber(number) else {
-            return
-        }
-        
-        setNumber(formattedNumber)
-        
-        guard let label = makeUILabel() else {
-            return
-        }
-        let newInput = UIStackView(arrangedSubviews: [label])
-
-        lastInput.addArrangedSubview(newInput)
-        
-        guard let labelText = label.text else {
-            return
-        }
-        
-        let firstTrimmedInput = removeWhitespaces(labelText)
-        let secondTrimmedInput = removeComma(firstTrimmedInput)
-        totalInput += secondTrimmedInput
-    }
-    
-    private func makeUILabel() -> UILabel? {
-        guard let `operator` = operatorInput.text else {
-            return nil
-        }
-        
-        guard let number = numberInput.text else {
-            return nil
-        }
-    
-        let label = UILabel()
-        
-        label.isHidden = false
-        label.text = `operator` + " " + number
-        label.numberOfLines = 0
-        label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.adjustsFontForContentSizeCategory = true
-        
-        return label
-    }
     
     private func removeWhitespaces(_ input: String) -> String {
         let trimmedInput = input.replacingOccurrences(of: " ", with: "")
