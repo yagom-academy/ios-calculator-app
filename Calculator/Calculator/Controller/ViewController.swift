@@ -54,6 +54,11 @@ class ViewController: UIViewController {
         displayNumber.text = currentDisplay! + sender.currentTitle!
     }
 
+    private func addSubView() {
+        let lastInputStackView = generateStackView()
+        recentInputStackView.addArrangedSubview(lastInputStackView)
+        lastInputStackView.isHidden = false
+    }
 
 }
 
