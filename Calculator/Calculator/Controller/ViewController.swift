@@ -77,6 +77,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapAllClearButton(_ sender: UIButton) {
+        resetCalculation()
+    }
+    
     func updateLable(text: String) {
         inputNumberLabel.text = numbers
     }
