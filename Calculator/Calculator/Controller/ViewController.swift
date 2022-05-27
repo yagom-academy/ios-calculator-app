@@ -62,10 +62,15 @@ class ViewController: UIViewController {
             let result = try formula?.result()
             screenLabel?.text = numberFormatter.string(for: result)
         } catch {
-            if ((error as? FormulaError) != nil) {
-                print("입력값을 추가하세요.")
-            } else if ((error as? OperatorError) != nil) {
+            switch error as? CalculatorError {
+            case .dividedByZero:
                 screenLabel?.text = "NaN"
+            case .notEnoughInput:
+                print("입력값을 추가하세요.")
+            case .emptyStack:
+                print("Stack이 비었습니다")
+            default:
+                return
             }
         }
         goToBottomOfScrollView()

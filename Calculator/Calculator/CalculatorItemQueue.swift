@@ -38,7 +38,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
         
         guard let result = dequeueStack.popLast() else {
-            throw CalculatorItemQueueError.emptyStack
+            throw CalculatorError.emptyStack
         }
         return result
     }

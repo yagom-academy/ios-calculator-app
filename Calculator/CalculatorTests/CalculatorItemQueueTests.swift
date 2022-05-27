@@ -76,11 +76,11 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_빈배열에서_dequeue를이용했을때_emptyStack오류를던지는지() {
         //given
-        let expectation = CalculatorItemQueueError.emptyStack
+        let expectation = CalculatorError.emptyStack
         //when
         //then
         XCTAssertThrowsError(try sut.dequeue()) { error in
-            XCTAssertEqual(expectation, error as? CalculatorItemQueueError)
+            XCTAssertEqual(expectation, error as? CalculatorError)
         }
     }
     
