@@ -170,10 +170,12 @@ class ViewController: UIViewController {
     }
     
     private func convertNumberInput() -> Double? {
-        guard let onceTrimmmedInput = removeComma() else {
+        guard let text = numberInput.text else {
             return nil
         }
         
+        let onceTrimmmedInput = removeComma(text)
+
         guard let twiceTrimmedInput = convertStringToDouble(onceTrimmmedInput) else {
             return nil
         }
@@ -181,12 +183,12 @@ class ViewController: UIViewController {
         return twiceTrimmedInput
     }
     
-    private func removeComma() -> String? {
-        guard let text = numberInput.text else {
-            return nil
-        }
-        
-        let trimmedInput = text.replacingOccurrences(of: ",", with: "")
+    private func removeComma(_ input: String) -> String {
+//        guard let text = numberInput.text else {
+//            return nil
+//        }
+//
+        let trimmedInput = input.replacingOccurrences(of: ",", with: "")
         
         return trimmedInput
     }
@@ -247,9 +249,20 @@ class ViewController: UIViewController {
             return
         }
         
-        let firstTrimmedInput = labelText.replacingOccurrences(of: " ", with: "")
-        let secondTrimmedInput = firstTrimmedInput.replacingOccurrences(of: ",", with: "")
+        addTrimmedInputToTotalInput(labelText)
+    }
+    
+    private func addTrimmedInputToTotalInput(_ input: String) {
+        let firstTrimmedInput = removeWhitespaces(input)
+        let secondTrimmedInput = removeComma(firstTrimmedInput)
+        
         totalInput += secondTrimmedInput
+    }
+    
+    private func removeWhitespaces(_ input: String) -> String {
+        let trimmedInput = input.replacingOccurrences(of: " ", with: "")
+        
+        return trimmedInput
     }
     
     private func goToBottomOfScrollView() {
