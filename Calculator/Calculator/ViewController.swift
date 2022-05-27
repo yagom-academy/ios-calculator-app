@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         } else {
             operandLabel.text = checkOperand(getText(operandLabel), with: sederTitle)
         }
+        
         isOperandInputted = true
     }
     
@@ -77,21 +78,16 @@ class ViewController: UIViewController {
         guard let sederTitle = sender.currentTitle else{
             return
         }
-        
-        let operatorOfSignLabel = createLabel(text: sederTitle)
-        let operandOfSignLabel = createLabel(text: changeFormat(getText(operandLabel)))
         operatorLabel.text = sederTitle
-        
         if fomulaStackView.subviews.isEmpty {
-            createStackView(operandOfSignLabel)
+            createStackView(changeFormat(getText(operandLabel)))
         } else {
-            createStackView(operatorOfSignLabel, operandOfSignLabel)
+            createStackView(sederTitle, changeFormat(getText(operandLabel)))
         }
-        
         addInputtedFomula()
+        downScroll()
         operandLabel.text = "0"
         isOperandInputted = false
-        downScroll()
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
@@ -107,9 +103,7 @@ class ViewController: UIViewController {
             return
         }
         
-        let operatorOfSignLabel = createLabel(text: getText(operatorLabel))
-        let operandOfSignLabel = createLabel(text: changeFormat(getText(operandLabel)))
-        createStackView(operatorOfSignLabel, operandOfSignLabel)
+        createStackView(getText(operatorLabel), changeFormat(getText(operandLabel)))
         addInputtedFomula()
         operandLabel.text = calculate(inputtedFomula)
         operatorLabel.text = ""
@@ -119,32 +113,21 @@ class ViewController: UIViewController {
     }
     
     //MARK: - Internal Logic
-    private func resetCalculateOption() {
-        fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-        inputtedFomula = ""
-        isOperandInputted = false
-        isCalculateCompleted = false
-    }
-    
     private func createLabel(text: String?) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
+        
         return label
     }
     
-    private func createStackView(_ labels: UIView...) {
+    private func createStackView(_ labels: String...) {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.alignment = .fill
         stackView.spacing = 8
         
         for label in labels {
-            stackView.addArrangedSubview(label)
+            stackView.addArrangedSubview(createLabel(text: label))
         }
         
         fomulaStackView.addArrangedSubview(stackView)
@@ -165,15 +148,17 @@ class ViewController: UIViewController {
         guard let text = label.text else {
             return ""
         }
+        
         return text
     }
     
     private func addInputtedFomula() {
-        if inputtedFomula.isEmpty {
-            inputtedFomula = "\(getText(operandLabel).filter { $0.isNumber })"
-        } else {
+        guard inputtedFomula.isEmpty else {
             inputtedFomula += " \(getText(operatorLabel)) \(getText(operandLabel).filter { $0.isNumber })"
+            return
         }
+        
+        inputtedFomula = "\(getText(operandLabel).filter { $0.isNumber })"
     }
     
     private func downScroll() {
@@ -181,20 +166,18 @@ class ViewController: UIViewController {
         fomulaScrollView.setContentOffset(CGPoint(x: 0, y: fomulaScrollView.contentSize.height - fomulaScrollView.bounds.height), animated: false)
     }
     
-    private func checkTheSign(_ input: String) -> String {
-        var result = ""
-        if input.contains("-") {
-            result = input.filter{ $0 != "-" }
-            return result
-        } else {
-            result = "-" + input
-            return result
-        }
-    }
-    
     private func changeFormat(_ input: String) -> String {
         let result = input.filter { $0 != ","  }
+        
         return (Double(result) ?? 0).parse()
+    }
+    
+    private func checkTheSign(_ input: String) -> String {
+        guard input.contains("-") else {
+            return "-" + input
+        }
+        
+        return input.filter{ $0 != "-" }
     }
     
     private func checkOperand(_ currentlabel: String, with currentInput: String) -> String {
@@ -205,5 +188,14 @@ class ViewController: UIViewController {
         } else {
             return changeFormat(currentlabel + currentInput)
         }
+    }
+    
+    private func resetCalculateOption() {
+        fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+        inputtedFomula = ""
+        isOperandInputted = false
+        isCalculateCompleted = false
     }
 }
