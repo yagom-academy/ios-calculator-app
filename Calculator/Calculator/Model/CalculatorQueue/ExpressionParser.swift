@@ -19,20 +19,26 @@ enum ExpressionParser {
         }.forEach { (number: Double) in
             operandQueue.enqueue(number)
         }
-
-        splitElements.compactMap { (element: String) -> Character in
-            let alterElement: Character = Character(element)
-            return alterElement
-        }.forEach {
-            if let operatorElements = Operator(rawValue: $0) {
-                operatorQueue.enqueue(operatorElements)
-            }
+        
+//        splitElements.compactMap { (element: String) -> Character in
+//            let alterElement: Character = Character(element)
+//            return alterElement
+//        }.forEach {
+//            if let operatorElements = Operator(rawValue: $0) {
+//                operatorQueue.enqueue(operatorElements)
+//            }
+//        }
+        splitElements.filter { value in
+            return Double(value) == nil
+        }.forEach { oper in
+            let opert = Character(oper)
+            operatorQueue.enqueue(Operator(rawValue: opert)!)
         }
         
         let parseDataResult = Formula(operands: operandQueue, operators: operatorQueue)
         return parseDataResult
     }
-
+    
     static func componentsByOperators(from input: String) -> [String] {
         let splitInput = input.split(with: " ")
         return splitInput

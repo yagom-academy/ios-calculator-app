@@ -36,7 +36,12 @@ struct LinkedList<T> {
     }
     
     mutating func peek() -> T? {
-        return head?.data
+        
+        var node = head
+        while let newNode = node?.next {
+            node = newNode
+        }
+        return node!.data
     }
     
     mutating func checkCount() -> Int {

@@ -22,8 +22,8 @@ class Test_Formula: XCTestCase {
     
     func test_result_가_OperatorCacluater_를반환하는지() {
         //given
-        let array: [String] = ["-1", "-", "2"] 
-        let output = -3.0
+        let array: [String] = ["456", "-", "6", "+", "-", "+", "6"]
+        let output = 456.0
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
         
