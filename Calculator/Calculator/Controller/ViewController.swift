@@ -69,73 +69,6 @@ class ViewController: UIViewController {
         largeStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    //MARK: - changeOperandSignButtonTapped
-    @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
-        guard let operandsLabelText = operandsTextLabel.text else { return }
-        
-        if operandsTextLabel.text?.first == "-" {
-            operandsTextLabel.text?.removeFirst()
-            operandsTextLabel.text = "+" + operandsLabelText
-        } else if operandsTextLabel.text?.first == "+" {
-            operandsTextLabel.text?.removeFirst()
-            operandsTextLabel.text = "-" + operandsLabelText
-        } else if operandsTextLabel.text == "0"  {
-            operandsTextLabel.text = operandsTextLabel.text
-        } else {
-            operandsTextLabel.text = "-" + operandsLabelText
-        }
-    }
-    
-    //MARK: - allClearButtonTapped
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        deleteStackViewAll()
-        operatorTextLabel.text = ""
-        operandsTextLabel.text = "0"
-        expressionParserInput = "0"
-        
-    }
-    
-    //MARK: - clearEntryButtonTapped
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        isCalculated = false
-        if isCalculated == true {
-            deleteStackViewAll()
-        } else if expressionParserInput.last?.isNumber == true {
-            operatorTextLabel.text = ""
-        } else {
-            operandsTextLabel.text = "0"
-        }
-    }
-    
-    //MARK: - calculateButtonTapped
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        isCalculated = true
-        var result: Double?
-        var calculator = ExpressionParser.parse(from: expressionParserInput)
-        guard operatorTextLabel.text != "" else { return }
-        
-        print("expressionParserInput : \(expressionParserInput)")
-        do {
-            result = try calculator.result()
-        } catch {
-            print(OperatorError.devideFail.errorDescription)
-            operandsTextLabel.text? = OperatorError.devideFail.errorDescription
-            return
-        }
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        guard let formattedResult = numberFormatter.string(for: result) else { return }
-        
-        addStackView()
-        operatorTextLabel.text = ""
-        operandsTextLabel.text = formattedResult
-        expressionParserInput.removeAll()
-        print("expressionParserInput : \(expressionParserInput)")
-        print(formattedResult)
-    }
-    
     //MARK: - operandButtonsTapped()
     @IBAction func operandButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
@@ -176,6 +109,73 @@ class ViewController: UIViewController {
         operatorTextLabel.text = senderLabelText
         operandsTextLabel.text = operandLabelText
         operandsTextLabel.text = "0"
+    }
+    
+    //MARK: - calculateButtonTapped
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        isCalculated = true
+        var result: Double?
+        var calculator = ExpressionParser.parse(from: expressionParserInput)
+        guard operatorTextLabel.text != "" else { return }
+        
+        print("expressionParserInput : \(expressionParserInput)")
+        do {
+            result = try calculator.result()
+        } catch {
+            print(OperatorError.devideFail.errorDescription)
+            operandsTextLabel.text? = OperatorError.devideFail.errorDescription
+            return
+        }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        guard let formattedResult = numberFormatter.string(for: result) else { return }
+        
+        addStackView()
+        operatorTextLabel.text = ""
+        operandsTextLabel.text = formattedResult
+        expressionParserInput.removeAll()
+        print("expressionParserInput : \(expressionParserInput)")
+        print(formattedResult)
+    }
+    
+    //MARK: - changeOperandSignButtonTapped
+    @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
+        guard let operandsLabelText = operandsTextLabel.text else { return }
+        
+        if operandsTextLabel.text?.first == "-" {
+            operandsTextLabel.text?.removeFirst()
+            operandsTextLabel.text = "+" + operandsLabelText
+        } else if operandsTextLabel.text?.first == "+" {
+            operandsTextLabel.text?.removeFirst()
+            operandsTextLabel.text = "-" + operandsLabelText
+        } else if operandsTextLabel.text == "0"  {
+            operandsTextLabel.text = operandsTextLabel.text
+        } else {
+            operandsTextLabel.text = "-" + operandsLabelText
+        }
+    }
+    
+    //MARK: - allClearButtonTapped
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        deleteStackViewAll()
+        operatorTextLabel.text = ""
+        operandsTextLabel.text = "0"
+        expressionParserInput = "0"
+        
+    }
+    
+    //MARK: - clearEntryButtonTapped
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+        isCalculated = false
+        if isCalculated == true {
+            deleteStackViewAll()
+        } else if expressionParserInput.last?.isNumber == true {
+            operatorTextLabel.text = ""
+        } else {
+            operandsTextLabel.text = "0"
+        }
     }
     
     //MARK: - zeroButtonTapped
