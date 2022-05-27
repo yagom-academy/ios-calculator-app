@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         exampleStackView2.isHidden = true
     }
     
-    var expressionParserInput: String = ""
+    var expressionParserInput: String = "0"
     var isCalculated = false
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         addedOperatorsLabel.isHidden = false
         
         // addedOperandsLabel Constraints
-        addedOperandsLabel.text = operandsTextLabel.text
+        addedOperandsLabel.text = formatNumber(operandsTextLabel.text!)
         addedOperandsLabel.textAlignment = .right
         addedOperandsLabel.textColor = UIColor.white
         addedOperandsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -71,6 +71,7 @@ class ViewController: UIViewController {
     //MARK: - operandButtonsTapped()
     @IBAction func operandButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
+        let formattedText = formatNumber(senderLabelText)
         
         if operandsTextLabel.text == "NaN" {
             operandsTextLabel.text = ""
@@ -79,42 +80,40 @@ class ViewController: UIViewController {
         
         if operandsTextLabel.text == "0" {
             operandsTextLabel.text = ""
-            operandsTextLabel.text?.append(senderLabelText)
-            expressionParserInput.append(senderLabelText)
+            operandsTextLabel.text?.append(formattedText)
+            expressionParserInput.append(formattedText)
             return
         }
         
         if isCalculated == true {
-            operandsTextLabel.text = ""
+            operandsTextLabel.text?.append(formattedText)
             operatorTextLabel.text = ""
-            deleteStackViewAll()
+            operandsTextLabel.text = senderLabelText
             isCalculated = false
+            return
         }
-        operandsTextLabel.text?.append(senderLabelText)
-//        expressionParserInput.append(senderLabelText)
-        print(expressionParserInput)
+        operandsTextLabel.text?.append(formattedText)
+        expressionParserInput.append(formattedText)
     }
     
     //MARK: - operatorButtonsTapped()
     @IBAction func operatorButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         guard let operandLabelText = operandsTextLabel.text else { return }
-        guard let operandLabelText = operandsTextLabel.text else { return }
+        let formattedNumber = formatNumber(operandLabelText)
+
         if operandsTextLabel.text == "NaN" {
             return
         } else if operandLabelText == "0" {
             operatorTextLabel.text = senderLabelText
             return
         }
-//        expressionParserInput.append(operandLabelText)
+        
         expressionParserInput.append(" \(senderLabelText) ")
         addStackView()
-        
-//        expressionParserInput.append(" \(senderLabelText) ")
         operatorTextLabel.text = senderLabelText
-        operandsTextLabel.text = operandLabelText
+        operandsTextLabel.text = formattedNumber
         operandsTextLabel.text = "0"
-        print(expressionParserInput)
     }
     
     //MARK: - calculateButtonTapped
@@ -124,11 +123,13 @@ class ViewController: UIViewController {
         var calculator = ExpressionParser.parse(from: expressionParserInput)
         guard operatorTextLabel.text != "" else { return }
         
-        print("expressionParserInput : \(expressionParserInput)")
         do {
             result = try calculator.result()
         } catch {
             print(OperatorError.devideFail.errorDescription)
+            addStackView()
+            expressionParserInput = ""
+            operatorTextLabel.text = ""
             operandsTextLabel.text? = OperatorError.devideFail.errorDescription
             return
         }
@@ -141,9 +142,7 @@ class ViewController: UIViewController {
         addStackView()
         operatorTextLabel.text = ""
         operandsTextLabel.text = formattedResult
-        expressionParserInput.removeAll()
-        print("expressionParserInput : \(expressionParserInput)")
-        print(formattedResult)
+        expressionParserInput = formattedResult
     }
     
     //MARK: - changeOperandSignButtonTapped
@@ -168,7 +167,6 @@ class ViewController: UIViewController {
         deleteStackViewAll()
         deleteTextLabelText()
         expressionParserInput = ""
-        
     }
     
     //MARK: - clearEntryButtonTapped :operandsTextLabel 에서 마지막으로 입력된 숫자만 지움, 연산이 된상태라면 모든 스택을 지움
@@ -181,11 +179,10 @@ class ViewController: UIViewController {
         }
         
         if operandsTextLabel.text == "0" {
-            print(expressionParserInput)
             return
         }
             
-        if operandsTextLabel.text?.isEmpty == false { //2+3-4+5 -> 2+3-4+ 텍스트 레이블에서만 제거를 해주면됨
+        if operandsTextLabel.text?.isEmpty == false {
             operandsTextLabel.text? = "0"
             expressionParserInput.removeLast()
         } else {
@@ -196,17 +193,19 @@ class ViewController: UIViewController {
     //MARK: - zeroButtonTapped
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
-        guard let operandLabelText = operandsTextLabel.text else { return }
         
         if isCalculated == true {
-            deleteStackViewAll()
             operatorTextLabel.text = ""
-            operandsTextLabel.text = ""
+            operandsTextLabel.text = senderLabelText
             isCalculated = false
-        } else if operandsTextLabel.text == "0" {
-            operandsTextLabel.text = ""
+            return
+        }
+        
+        if operandsTextLabel.text == "0" {
+            operandsTextLabel.text = senderLabelText
+            expressionParserInput += "0"
         } else if operandsTextLabel.text?.count == 1,
-           operandsTextLabel.text == "0" {
+                  operandsTextLabel.text == "0" {
             operandsTextLabel.text = "0"
         } else {
             operandsTextLabel.text! += senderLabelText
@@ -242,5 +241,19 @@ class ViewController: UIViewController {
     func deleteTextLabelText() {
         operatorTextLabel.text = ""
         operandsTextLabel.text = "0"
+    }
+    
+    func formatNumber(_ input: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        guard let numberFormattedResult = numberFormatter.number(from: input) else {
+            return OperatorError.unknown.errorDescription
+        }
+        guard let formattedResult = numberFormatter.string(from: numberFormattedResult) else {
+            return OperatorError.unknown.errorDescription
+        }
+        return formattedResult
     }
 }
