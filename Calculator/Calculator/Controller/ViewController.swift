@@ -36,23 +36,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorsButton(_ sender: UIButton) {
-        updateStackView()
-        
-        var currentoOperator:Character = " "
+        var currentOperator:Character = " "
         switch sender {
         case additionButton:
-            currentoOperator = Operator.add.symbol
+            currentOperator = Operator.add.symbol
         case subtractionButton:
-            currentoOperator = Operator.subtract.symbol
+            currentOperator = Operator.subtract.symbol
         case multiplicationButton:
-            currentoOperator = Operator.multiply.symbol
+            currentOperator = Operator.multiply.symbol
         case divisionButton:
-            currentoOperator = Operator.divide.symbol
+            currentOperator = Operator.divide.symbol
         default:
             return
         }
-        inputOperatorLabel.text = String(currentoOperator)
-        inputOperator = String(currentoOperator)
+        
+        updateStackView()
+        
+        inputOperatorLabel.text = String(currentOperator)
+        inputOperator = String(currentOperator)
     }
     
     @IBAction func tapResultButton() {
@@ -61,12 +62,16 @@ class ViewController: UIViewController {
         }
         
         updateStackView()
-
+        
         let formula = ExpressionParser.parse(from: arithmetic)
         var result = 0.0
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        
         do {
             result = try formula.result()
-            inputNumber = String(result)
+            inputNumber = numberFormatter.string(from: NSNumber(value: result)) ?? "0"
             inputNumberLabel.text = inputNumber
         } catch CalculatorError.dividedByZero {
             inputNumberLabel.text = CalculatorError.dividedByZero.errorMessage
@@ -74,6 +79,7 @@ class ViewController: UIViewController {
             inputNumberLabel.text = CalculatorError.unknownError.errorMessage
         }
         
+        inputOperatorLabel.text = ""
         inputNumber = ""
         arithmetic = ""
     }
@@ -104,11 +110,15 @@ class ViewController: UIViewController {
         inputNumberLabel.text = inputNumber
     }
     
-    func updateLable(text: String) {
-        inputNumberLabel.text = inputNumber
-    }
-    
     func updateStackView() {
+        if inputNumber == "" {
+            return
+        }
+        
+        if inputNumber.last == "." {
+            inputNumber.removeLast()
+        }
+        
         let label = UILabel()
         label.text = inputOperator + inputNumber
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -117,7 +127,8 @@ class ViewController: UIViewController {
         arithmetic = arithmetic + inputOperator + inputNumber
         inputNumber = ""
         inputOperator = ""
-        print(arithmetic)
+        inputNumberLabel.text = "0"
+        print("a: \(arithmetic)")
     }
     
     func checkInputNumber(number: String) {
@@ -138,7 +149,7 @@ class ViewController: UIViewController {
     
     func resetCalculator() {
         stackView.removeAllArrangedSubview()
-        inputNumberLabel.text = ""
+        inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
         arithmetic = ""
         inputNumber = ""
