@@ -68,11 +68,13 @@ final class CalculatorViewController: UIViewController {
         let operators = sender.currentTitle!
         addInputStack()
         
+        guard let lastCharacter = userInput.last else { return }
+        guard let _ = Double(String(lastCharacter)) else { return }
+        
         operatorLabel.text = operators
         operandLabel.text = "0"
         userNumberTapped = false
         userInput.append(operators)
-        
     }
     
     @IBAction func didTapPlusMinusSignButton(_ sender: UIButton) {
