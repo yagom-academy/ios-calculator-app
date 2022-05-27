@@ -32,9 +32,8 @@ class ViewController: UIViewController {
            sender.currentTitle == "." {
             return
         }
-        if currentOperand.text?.first == "0",
-           sender.currentTitle == "." {
-            currentOperand.text = "0.0"
+        if currentOperand.text == "." {
+            currentOperand.text = "0."
         }
         currentOperand?.text = (currentOperand?.text ?? "") + (sender.currentTitle ?? "")
     }
