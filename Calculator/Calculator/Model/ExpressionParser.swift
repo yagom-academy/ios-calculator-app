@@ -4,13 +4,14 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator.RawValue>()
         let compoents = componentsByOperators(from: input)
         
-        compoents.forEach { item in
-            if item.allSatisfy({ $0.isNumber }) {
-                operands.enqueue(Double(item) ?? 0)
-            } else {
-                operators.enqueue(Character(item))
-            }
+        compoents.compactMap {Double($0)}.forEach { operands.enqueue($0) }
+        
+        
+        let operatorSymbols = Operator.allCases.map { String($0.symbol) }
+        compoents.filter { operatorSymbols.contains($0) }.forEach {
+            operators.enqueue(Character($0))
         }
+
         
         let formula = Formula(operands: operands, operators: operators)
         return formula
@@ -21,6 +22,7 @@ enum ExpressionParser {
         var items = [String]()
         var splitedInput = input
         var count = 0
+        var sign:Character = " "
         
         input.forEach { element in
             let target = Character(String(element))
@@ -30,12 +32,19 @@ enum ExpressionParser {
             }
             
             if operatorSymbols.contains(element) && count > 0 {
-                let operand = splitedInput.split(with: target)[0]
+                var operand = splitedInput.split(with: target)[0]
                 let remainedFormula = splitedInput.split(with: target)[1]
+                
+                if sign != " " {
+                    operand = String(sign) + operand
+                    sign = " "
+                }
                 
                 items = items + [operand] + [String(element)]
                 splitedInput = remainedFormula
                 count = 0
+            } else if operatorSymbols.contains(element) && count == 0 {
+                sign = element
             }
             
             if element == input.last {
