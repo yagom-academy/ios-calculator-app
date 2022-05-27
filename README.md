@@ -173,9 +173,10 @@
 - resetCalculateOption() : 모든 옵션을 초기화
 ---
 # 동작화면
-![](https://i.imgur.com/oMpa6rx.gif) ![](https://i.imgur.com/j4rIy1p.gif)
----
-![](https://i.imgur.com/3wRctdR.gif) ![](https://i.imgur.com/ZA4tDlO.gif)
+![](https://i.imgur.com/oMpa6rx.gif) 
+![](https://i.imgur.com/j4rIy1p.gif)
+![](https://i.imgur.com/3wRctdR.gif) 
+![](https://i.imgur.com/ZA4tDlO.gif)
 
 ---
 # [STEP 1]
