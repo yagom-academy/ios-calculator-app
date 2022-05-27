@@ -8,116 +8,103 @@ import Foundation
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet private var currentValue: [UILabel]!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
     
-    private var inputedStack: [UIStackView]!
+    @IBOutlet private weak var expressionStackView: UIStackView!
     
-    @IBOutlet private weak var expressionView: UIStackView!
+    @IBOutlet private var defaultStackViews: [UIStackView]!
     
-    private var NumberOfFormula = 1
+    @IBOutlet private var valueLabels: [UILabel]!
     
-    private var totalFormula: String = ""
+    private var createdStackViews: [UIStackView]!
     
-    @IBOutlet private var defaultStackView: [UIStackView]!
-
-    @IBOutlet private weak var scrollView: UIScrollView!
+    private var numberOfCalculation = 1
+    
+    private var totalCalculation: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCalculator("0")
-        defaultStackView.forEach { view in
+        setLabelText("0")
+        defaultStackViews.forEach { view in
             view.removeFromSuperview()
         }
     }
     
-    @IBAction private func tappedNumbers(_ sender: UIButton) {
+    @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle,
-              var value = currentValue[1].text else {
+              var inputedNumberLabel = valueLabels[1].text else {
             return
         }
         
-        guard value == "0" || value == "NAN" || value == "-0" else {
-            value += number
-            currentValue[1].text = value
+        guard checkInvalidValue(inputedNumberLabel) else {
+            inputedNumberLabel += number
+            valueLabels[1].text = inputedNumberLabel
             return
         }
         
         guard number == "0" || number == "00" else {
-            currentValue[1].text = number
+            valueLabels[1].text = number
             return
         }
     }
     
-    @IBAction private func tappedDot(_ sender: UIButton) {
-        guard var value = currentValue[1].text else { return }
+    @IBAction private func DotButtonDidTapped(_ sender: UIButton) {
+        guard var inputedNumberLabel = valueLabels[1].text else { return }
         
-        let isDot = isDouble(value)
-        
-        if isDot {
-            value += "."
-            currentValue[1].text = value
+        if hasDot(inputedNumberLabel) {
+            inputedNumberLabel += "."
+            valueLabels[1].text = inputedNumberLabel
         }
     }
     
     @IBAction private func tappedOperators(_ sender: UIButton) {
-        guard currentValue[1].text != "NAN" else { return }
-        guard let formattableValue = currentValue[1].text else { return }
-        let value = formattableValue.filter { $0 != ","}
-    
-        guard value != "0" else {
-            if NumberOfFormula == 1 {
+        guard valueLabels[1].text != "NAN" else { return }
+        guard let formattableValue = valueLabels[1].text else { return }
+        let numericalValue = formattableValue.filter { $0 != ","}
+        
+        guard numericalValue != "0" else {
+            if numberOfCalculation == 1 {
                 return
             }
-            currentValue[0].text = sender.currentTitle
+            valueLabels[0].text = sender.currentTitle
             return
         }
         
-        let isDot = isDouble(value)
-        
-        if isDot {
-            currentValue[1].text = removeZeroOfDouble(value)
+        if hasDot(numericalValue) {
+            valueLabels[1].text = removeZeroOfDouble(numericalValue)
         }
         
-       addStackView()
-        
-        if NumberOfFormula > 1 {
-            totalFormula += " \(currentValue[0].text!) \(value)"
-        } else {
-            totalFormula += "\(value)"
-        }
-        
-        currentValue[0].text = sender.currentTitle
-        currentValue[1].text = "0"
-        NumberOfFormula += 1
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
-        scrollView.setContentOffset(bottomOffset, animated: true)
+        addStackView()
+        inputToCalculation(numericalValue)
+        valueLabels[0].text = sender.currentTitle
+        valueLabels[1].text = "0"
+        numberOfCalculation += 1
+        holdScrollDown()
     }
     
     @IBAction private func tappedResult(_ sender: UIButton) {
-        guard currentValue[1].text != "NAN" else { return }
-        guard currentValue[0].text != "" else { return }
-        guard NumberOfFormula > 1 else {
-            totalFormula += "\(currentValue[1].text!)"
+        guard valueLabels[1].text != "NAN" else { return }
+        guard valueLabels[0].text != "" else { return }
+        
+        guard numberOfCalculation > 1 else {
+            totalCalculation += "\(valueLabels[1].text!)"
             return
         }
-        totalFormula += " \(currentValue[0].text!) \(currentValue[1].text!)"
+        
+        totalCalculation += " \(valueLabels[0].text!) \(valueLabels[1].text!)"
         
         do {
             addStackView()
-            let result = try ExpressionParser.parse(from: totalFormula).result()
+            let result = try ExpressionParser.parse(from: totalCalculation).result()
             changeFormat("\(result)")
-            totalFormula = ""
-            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
-            scrollView.setContentOffset(bottomOffset, animated: true)
+            totalCalculation = ""
+            holdScrollDown()
         } catch DevideError.nilOfValue {
-            setCalculator("0")
-            AlertErrorEvent()
+            setLabelText("0")
         } catch DevideError.insufficientOperator {
-            setCalculator("0")
-            AlertErrorEvent()
+            setLabelText("0")
         } catch DevideError.devideZero {
-            setCalculator("NAN")
-            AlertErrorEvent()
+            setLabelText("NAN")
         } catch {
             print(Error.self)
         }
@@ -126,38 +113,53 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tappedChangeValue(_ sender: UIButton) {
         let changeValue = sender.tag
         if changeValue == 0 {
-            inputedStack.forEach { stackView in
+            createdStackViews.forEach { stackView in
                 stackView.removeFromSuperview()
             }
-            inputedStack = []
-            currentValue[0].text = ""
-            currentValue[1].text = "0"
-            totalFormula = ""
-            NumberOfFormula = 1
+            createdStackViews = []
+            valueLabels[0].text = ""
+            valueLabels[1].text = "0"
+            totalCalculation = ""
+            numberOfCalculation = 1
         } else if changeValue == 1 {
-            currentValue[1].text = "0"
+            valueLabels[1].text = "0"
         } else {
-            guard let value = currentValue[1].text else { return }
+            guard let value = valueLabels[1].text else { return }
             guard value != "0" else { return }
             guard value != "NAN" else { return }
             guard value.first == "-" else {
-                currentValue[1].text = "-\(value)"
+                valueLabels[1].text = "-\(value)"
                 return
             }
-            currentValue[1].text = value.filter { $0 != "-" }
+            valueLabels[1].text = value.filter { $0 != "-" }
         }
     }
     
-    private func setCalculator(_ inputValue: String) {
-        currentValue[0].text = ""
-        currentValue[1].text = inputValue
-        totalFormula = ""
-        NumberOfFormula = 1
-        inputedStack = []
+    private func checkInvalidValue(_ text: String) -> Bool {
+        if text == "0" || text == "NAN" || text == "-0" {
+            return true
+        }
+        return false
     }
     
-    private func removeZeroOfDouble(_ input: String) -> String {
-        var value = input
+    private func setLabelText(_ text: String) {
+        valueLabels[0].text = ""
+        valueLabels[1].text = text
+        totalCalculation = ""
+        numberOfCalculation = 1
+        createdStackViews = []
+    }
+    
+    private func inputToCalculation(_ text: String) {
+        if numberOfCalculation > 1 {
+            totalCalculation += " \(valueLabels[0].text!) \(text)"
+        } else {
+            totalCalculation += "\(text)"
+        }
+    }
+    
+    private func removeZeroOfDouble(_ text: String) -> String {
+        var value = text
         while value.last == "0" {
             value.removeLast()
         }
@@ -167,14 +169,13 @@ class CalculatorViewController: UIViewController {
         return value
     }
     
-    private func AlertErrorEvent() {
-        expressionView.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            self.expressionView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        }
+    private func holdScrollDown() {
+        let bottomOffset = CGPoint(x: 0, y: historyScrollView.contentSize.height -
+                                   historyScrollView.bounds.size.height + 27)
+        historyScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    private func isDouble(_ value: String) -> Bool {
+    private func hasDot(_ value: String) -> Bool {
         if value.contains(".") {
             return false
         } else {
@@ -187,18 +188,18 @@ class CalculatorViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         let result = numberFormatter.string(for: Double(format))!
-        currentValue[0].text = ""
-        currentValue[1].text = "\(result)"
+        valueLabels[0].text = ""
+        valueLabels[1].text = "\(result)"
     }
     
     private func addStackView() {
         let operatorLabel = createLabel()
-        operatorLabel.text = currentValue[0].text
+        operatorLabel.text = valueLabels[0].text
         let operandLabel = createLabel()
-        operandLabel.text = currentValue[1].text
+        operandLabel.text = valueLabels[1].text
         let stack = createStackView([operatorLabel, operandLabel])
-        expressionView.addArrangedSubview(stack)
-        inputedStack.append(stack)
+        expressionStackView.addArrangedSubview(stack)
+        createdStackViews.append(stack)
     }
     
     private func createLabel() -> UILabel {
@@ -209,14 +210,14 @@ class CalculatorViewController: UIViewController {
         return label
     }
     
-    private func createStackView(_ UILabel: [UILabel]) -> UIStackView {
+    private func createStackView(_ labels: [UILabel]) -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 8
-        stackView.addArrangedSubview(UILabel[0])
-        stackView.addArrangedSubview(UILabel[1])
+        stackView.addArrangedSubview(labels[0])
+        stackView.addArrangedSubview(labels[1])
         return stackView
     }
 }
