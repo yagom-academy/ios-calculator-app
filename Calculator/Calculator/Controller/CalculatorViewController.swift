@@ -58,6 +58,10 @@ final class CalculatorViewController: UIViewController {
         
         if textCurrentlyInDisply.contains(Character(dot)) {
             return
+        } else if operandLabel.text == "0" {
+            operandLabel.text = "0."
+            userInput.append(contentsOf: "0")
+            userNumberTapped = true
         } else {
             operandLabel.text! = textCurrentlyInDisply + dot
         }
