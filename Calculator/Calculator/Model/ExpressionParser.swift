@@ -18,8 +18,28 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators = input.filter { $0.isNumber == false && $0 != "." && $0 != "-" }.map { String($0) }
+        let operators = input.filter { self.isOperator($0) }.map { String($0) }
         
         return operators
     }
+    
+    private static func isOperator(_ input: Character) -> Bool {
+        guard !self.isNumber(input) && !self.isNumberSymbol(input) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private static func isNumber(_ input: Character) -> Bool {
+        return input.isNumber
+    }
+    
+    private static func isNumberSymbol(_ input: Character) -> Bool {
+        let numberSymbolArray: [Character] = [".", "-"]
+        
+        return numberSymbolArray.contains(input)
+    }
+    
+    
 }
