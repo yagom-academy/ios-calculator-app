@@ -42,8 +42,6 @@ enum ExpressionParser {
                 items += [splitedInput]
             }
         }
-        
-        print(items)
         return items
     }
 }

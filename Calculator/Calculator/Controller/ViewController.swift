@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     
     private var numbers = ""
-    private var formula = ""
+    private var totalFormula = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +56,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapResultButton() {
-        let formula = ExpressionParser.parse(from: numbers)
+        updateStackView()
+
+        let formula = ExpressionParser.parse(from: totalFormula)
         var result = 0.0
         do {
             result = try formula.result()
+            numbers = String(result)
+            inputNumberLabel.text = numbers
+            numbers = ""
+            totalFormula = ""
         } catch CalculatorError.dividedByZero {
-            CalculatorError.dividedByZero.errorMessage
+            inputNumberLabel.text = CalculatorError.dividedByZero.errorMessage
         } catch {
-            CalculatorError.unknownError.errorMessage
+            inputNumberLabel.text = CalculatorError.unknownError.errorMessage
         }
     }
     
@@ -77,9 +83,10 @@ class ViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         stackView.addArrangedSubview(label)
-        formula += numbers
+        totalFormula += numbers
         numbers = ""
         // label.adjustsFontForContentSizeCategory = true
+        print(totalFormula)
     }
     
     func checkInputNumbers(text: String) {
