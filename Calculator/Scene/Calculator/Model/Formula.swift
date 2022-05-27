@@ -20,6 +20,8 @@ struct Formula {
     }
     
     func result() throws -> Double {
+        print(operands.count)
+        print(operators.count)
         guard operands.count - 1 == `operators`.count else { throw DevideError.insufficientOperator }
         guard let operand = operands.dequeue() else { throw DevideError.nilOfValue }
         var lhs: Double = operand

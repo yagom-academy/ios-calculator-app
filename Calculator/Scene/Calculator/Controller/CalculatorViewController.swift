@@ -8,19 +8,20 @@ import Foundation
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet var currentValue: [UILabel]!
+    @IBOutlet private var currentValue: [UILabel]!
     
-    var inputedStack: [UIStackView]!
+    private var inputedStack: [UIStackView]!
     
-    @IBOutlet weak var expressionView: UIStackView!
+    @IBOutlet private weak var expressionView: UIStackView!
     
-    var NumberOfFormula = 1
+    private var NumberOfFormula = 1
     
-    var totalFormula: String = ""
+    private var totalFormula: String = ""
     
-    @IBOutlet var defaultStackView: [UIStackView]!
+    @IBOutlet private var defaultStackView: [UIStackView]!
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         currentValue[0].text = ""
@@ -31,7 +32,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tappedNumbers(_ sender: UIButton) {
+    @IBAction private func tappedNumbers(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               var value = currentValue[1].text else {
             return
@@ -49,7 +50,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tappedDot(_ sender: UIButton) {
+    @IBAction private func tappedDot(_ sender: UIButton) {
         guard var value = currentValue[1].text else { return }
         
         let isDot = isDouble(value)
@@ -60,11 +61,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tappedOperators(_ sender: UIButton) {
+    @IBAction private func tappedOperators(_ sender: UIButton) {
+        guard currentValue[1].text != "NAN" else { return }
         guard let formattableValue = currentValue[1].text else { return }
-        
-        var value = formattableValue.filter { $0 != ","}
-        
+        let value = formattableValue.filter { $0 != ","}
+    
         guard value != "0" else {
             if NumberOfFormula == 1 {
                 return
@@ -76,13 +77,7 @@ class CalculatorViewController: UIViewController {
         let isDot = isDouble(value)
         
         if isDot {
-            while value.last == "0" {
-                value.removeLast()
-            }
-            if value.last == "."{
-                value.removeLast()
-            }
-            currentValue[1].text = value
+            currentValue[1].text = removeZeroOfDouble(value)
         }
         
        addStackView()
@@ -92,17 +87,17 @@ class CalculatorViewController: UIViewController {
         } else {
             totalFormula += "\(value)"
         }
+        
         currentValue[0].text = sender.currentTitle
         currentValue[1].text = "0"
         NumberOfFormula += 1
-        
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
         scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    @IBAction func tappedResult(_ sender: UIButton) {
-        guard currentValue[1].text != "0" || currentValue[0].text != "" || currentValue[1].text != "NAN" else { return }
-        
+    @IBAction private func tappedResult(_ sender: UIButton) {
+        guard currentValue[1].text != "NAN" else { return }
+        guard currentValue[0].text != "" else { return }
         guard NumberOfFormula > 1 else {
             totalFormula += "\(currentValue[1].text!)"
             return
@@ -111,28 +106,71 @@ class CalculatorViewController: UIViewController {
         
         do {
             addStackView()
-            
             let result = try ExpressionParser.parse(from: totalFormula).result()
-            
             changeFormat("\(result)")
-            
             totalFormula = ""
-            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + 27)
+            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
             scrollView.setContentOffset(bottomOffset, animated: true)
         } catch DevideError.nilOfValue {
             currentValue[0].text = ""
-            currentValue[1].text = "NAN"
+            currentValue[1].text = "0"
+            AlertErrorEvent()
             totalFormula = ""
         } catch DevideError.insufficientOperator {
             currentValue[0].text = ""
-            currentValue[1].text = "NAN"
+            currentValue[1].text = "0"
+            AlertErrorEvent()
             totalFormula = ""
         } catch DevideError.devideZero {
             currentValue[0].text = ""
             currentValue[1].text = "NAN"
+            AlertErrorEvent()
             totalFormula = ""
         } catch {
             print(Error.self)
+        }
+    }
+    
+    @IBAction private func tappedChangeValue(_ sender: UIButton) {
+        let changeValue = sender.tag
+        if changeValue == 0 {
+            inputedStack.forEach { stackView in
+                stackView.removeFromSuperview()
+            }
+            inputedStack = []
+            currentValue[0].text = ""
+            currentValue[1].text = "0"
+            totalFormula = ""
+            NumberOfFormula = 1
+        } else if changeValue == 1 {
+            currentValue[1].text = "0"
+        } else {
+            guard let value = currentValue[1].text else { return }
+            guard value != "0" else { return }
+            guard value != "NAN" else { return }
+            guard value.first == "-" else {
+                currentValue[1].text = "-\(value)"
+                return
+            }
+            currentValue[1].text = value.filter { $0 != "-" }
+        }
+    }
+    
+    private func removeZeroOfDouble(_ input: String) -> String {
+        var value = input
+        while value.last == "0" {
+            value.removeLast()
+        }
+        if value.last == "."{
+            value.removeLast()
+        }
+        return value
+    }
+    
+    private func AlertErrorEvent() {
+        expressionView.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            self.expressionView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         }
     }
     
@@ -163,34 +201,7 @@ class CalculatorViewController: UIViewController {
         inputedStack.append(stack)
     }
     
-    @IBAction func tappedChangeValue(_ sender: UIButton) {
-        let changeValue = sender.tag
-        if changeValue == 0 {
-            inputedStack.forEach { stackView in
-                stackView.removeFromSuperview()
-            }
-            inputedStack = []
-            currentValue[0].text = ""
-            currentValue[1].text = "0"
-            totalFormula = ""
-            NumberOfFormula = 1
-        } else if changeValue == 1 {
-            currentValue[1].text = "0"
-        } else {
-            guard let value = currentValue[1].text else { return }
-            
-            guard value != "0" else { return }
-            
-            guard value.first == "-" else {
-                currentValue[1].text = "-\(value)"
-                return
-            }
-            
-            currentValue[1].text = value.filter { $0 != "-" }
-        }
-    }
-    
-    func createLabel() -> UILabel {
+    private func createLabel() -> UILabel {
         let label = UILabel()
         label.textAlignment = .right
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -198,7 +209,7 @@ class CalculatorViewController: UIViewController {
         return label
     }
     
-    func createStackView(_ UILabel: [UILabel]) -> UIStackView {
+    private func createStackView(_ UILabel: [UILabel]) -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
