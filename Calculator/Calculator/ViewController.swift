@@ -38,22 +38,25 @@ class ViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
-        guard let operand = Double(getText(operandLabel.text)), operand != 0.0 else {
+        guard let operand = Double(operandLabel.text?.filter { $0 != ","  } ?? ""), operand != 0.0 else {
             return
         }
         
-        operandLabel.text = checkTheSign(getText(operandLabel.text))
+        operandLabel.text = checkTheSign(getText(operandLabel))
     }
     
     @IBAction private func appendOperand(_ sender: UIButton) {
         guard !isCalculateCompleted else {
             return
         }
+        guard let sederTitle = sender.currentTitle else{
+            return
+        }
         
         if !isOperandInputted {
-            operandLabel.text = getText(sender.currentTitle)
+            operandLabel.text = sederTitle
         } else {
-            operandLabel.text = getText(operandLabel.text) + getText(sender.currentTitle)
+            operandLabel.text = checkOperand(getText(operandLabel), with: sederTitle)
         }
         isOperandInputted = true
     }
@@ -66,15 +69,18 @@ class ViewController: UIViewController {
             operatorLabel.text = sender.currentTitle
             return
         }
-        guard Double(getText(operandLabel.text)) != nil else {
+        guard Double(getText(operandLabel).filter { $0 != "," }) != nil else {
             operandLabel.text = "NaN"
             isOperandInputted = false
             return
         }
+        guard let sederTitle = sender.currentTitle else{
+            return
+        }
         
-        let operatorOfSignLabel = createLabel(text: getText(sender.currentTitle))
-        let operandOfSignLabel = createLabel(text: changeFormat(getText(operandLabel.text)))
-        operatorLabel.text = sender.currentTitle
+        let operatorOfSignLabel = createLabel(text: sederTitle)
+        let operandOfSignLabel = createLabel(text: changeFormat(getText(operandLabel)))
+        operatorLabel.text = sederTitle
         
         if fomulaStackView.subviews.isEmpty {
             createStackView(operandOfSignLabel)
@@ -85,21 +91,24 @@ class ViewController: UIViewController {
         addInputtedFomula()
         operandLabel.text = "0"
         isOperandInputted = false
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
-            self.downScroll()
-        }
+        downScroll()
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
         guard isOperandInputted else {
             return
         }
+        guard Double(getText(operandLabel).filter { $0 != "," }) != nil else {
+            operandLabel.text = "NaN"
+            isOperandInputted = false
+            return
+        }
         guard !fomulaStackView.subviews.isEmpty else {
             return
         }
         
-        let operatorOfSignLabel = createLabel(text: getText(operatorLabel.text))
-        let operandOfSignLabel = createLabel(text: getText(operandLabel.text))
+        let operatorOfSignLabel = createLabel(text: getText(operatorLabel))
+        let operandOfSignLabel = createLabel(text: changeFormat(getText(operandLabel)))
         createStackView(operatorOfSignLabel, operandOfSignLabel)
         addInputtedFomula()
         operandLabel.text = calculate(inputtedFomula)
@@ -152,8 +161,8 @@ class ViewController: UIViewController {
         }
     }
     
-    private func getText(_ string: String?) -> String {
-        guard let text = string else {
+    private func getText(_ label: UILabel) -> String {
+        guard let text = label.text else {
             return ""
         }
         return text
@@ -161,13 +170,14 @@ class ViewController: UIViewController {
     
     private func addInputtedFomula() {
         if inputtedFomula.isEmpty {
-            inputtedFomula = "\(getText(operandLabel.text))"
+            inputtedFomula = "\(getText(operandLabel).filter { $0.isNumber })"
         } else {
-            inputtedFomula += " \(getText(operatorLabel.text)) \(getText(operandLabel.text))"
+            inputtedFomula += " \(getText(operatorLabel)) \(getText(operandLabel).filter { $0.isNumber })"
         }
     }
     
     private func downScroll() {
+        fomulaScrollView.layoutIfNeeded()
         fomulaScrollView.setContentOffset(CGPoint(x: 0, y: fomulaScrollView.contentSize.height - fomulaScrollView.bounds.height), animated: false)
     }
     
@@ -183,6 +193,17 @@ class ViewController: UIViewController {
     }
     
     private func changeFormat(_ input: String) -> String {
-        return (Double(input) ?? 0).parse()
+        let result = input.filter { $0 != ","  }
+        return (Double(result) ?? 0).parse()
+    }
+    
+    private func checkOperand(_ currentlabel: String, with currentInput: String) -> String {
+        if !currentlabel.contains(".") && currentInput == "." {
+            return currentlabel + currentInput
+        } else if currentlabel.contains(".") && currentInput.contains("0") {
+            return currentlabel + currentInput
+        } else {
+            return changeFormat(currentlabel + currentInput)
+        }
     }
 }

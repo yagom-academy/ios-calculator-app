@@ -10,8 +10,12 @@ import Foundation
 extension Double: CalculateItem {
     func parse() -> String {
         let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
+        if self > 100000000000000000000.0 {
+            numberFormatter.numberStyle = .scientific
+        } else {
+            numberFormatter.numberStyle = .decimal
+        }
+        numberFormatter.roundingMode = .up
         numberFormatter.maximumSignificantDigits = 20
         let result = numberFormatter.string(for: self) ?? ""
         return result
