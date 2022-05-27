@@ -184,10 +184,6 @@ class ViewController: UIViewController {
     }
     
     private func removeComma(_ input: String) -> String {
-//        guard let text = numberInput.text else {
-//            return nil
-//        }
-//
         let trimmedInput = input.replacingOccurrences(of: ",", with: "")
         
         return trimmedInput
@@ -223,38 +219,62 @@ class ViewController: UIViewController {
         
         applyNumberFormatter(convertedNumberInput)
         
+        let label = makeUILabel()
+        let newInput = UIStackView(arrangedSubviews: [label])
+
+        lastInput.addArrangedSubview(newInput)
+        
+        let labelText = unwrapLabelText(label)
+        let firstTrimmedInput = removeWhitespaces(labelText)
+        let secondTrimmedInput = removeComma(firstTrimmedInput)
+        totalInput += secondTrimmedInput
+    }
+    
+    private func unwrapLabelText(_ label: UILabel) -> String {
+        guard let labelText = label.text else {
+            return "비어있음"
+        }
+        
+        return labelText
+    }
+    
+    private func unwrapOperatorInput() -> String {
         guard let `operator` = operatorInput.text else {
-            return
+            return "비어있음"
         }
         
+        return `operator`
+    }
+    
+    private func unwrapNumberInput() -> String {
         guard let number = numberInput.text else {
-            return
+            return "비어있음"
         }
         
+        return number
+    }
+    
+    private func makeUILabel() -> UILabel {
+        let `operator` = unwrapOperatorInput()
+        let number = unwrapNumberInput()
         let label = UILabel()
-        label.isHidden = true
+        
+        label.isHidden = false
         label.text = `operator` + " " + number
         label.numberOfLines = 0
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
-        let newInput = UIStackView(arrangedSubviews: [label])
         
-        lastInput.addArrangedSubview(newInput)
-        
-        guard let labelText = label.text else {
-            return
-        }
-        
-        addTrimmedInputToTotalInput(labelText)
+        return label
     }
     
-    private func addTrimmedInputToTotalInput(_ input: String) {
-        let firstTrimmedInput = removeWhitespaces(input)
-        let secondTrimmedInput = removeComma(firstTrimmedInput)
-        
-        totalInput += secondTrimmedInput
-    }
+//    private func addTrimmedInputToTotalInput(_ input: String) {
+//        let firstTrimmedInput = removeWhitespaces(input)
+//        let secondTrimmedInput = removeComma(firstTrimmedInput)
+//
+//        totalInput += secondTrimmedInput
+//    }
     
     private func removeWhitespaces(_ input: String) -> String {
         let trimmedInput = input.replacingOccurrences(of: " ", with: "")
