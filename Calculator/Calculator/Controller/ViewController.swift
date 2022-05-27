@@ -38,6 +38,20 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func operandButtonDidTapped(_ sender: UIButton) {
+        guard displayNumber.text != zeroString else {
+            displayNumber.text = emptyString
+            displayNumber.text = sender.currentTitle ?? emptyString
+            return
+        }
+        
+        guard displayOperator.text != emptyString || recentInputStackView.arrangedSubviews.count == 0
+        else {
+            return
+        }
+        
+        let currentDisplay = displayNumber.text
+        displayNumber.text = currentDisplay! + sender.currentTitle!
     }
 
 
