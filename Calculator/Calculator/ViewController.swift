@@ -70,12 +70,19 @@ class ViewController: UIViewController {
         guard let signLabel = mathSign?.text else { return }
         guard let formulaLabel = mathFomula?.text else { return }
         
-        if formulaLabel == "0" { return }
         if signLabel.isEmpty { return }
         
         let freshStackView = createStackView(sign: signLabel, formula: formulaLabel)
         stackView.addArrangedSubview(freshStackView)
         scrollView.scrollSetting()
+        
+        if formulaLabel == "0" && signLabel == "÷" {
+            mathSign.text = ""
+            mathFomula.text = "NaN"
+            return
+        }
+        
+        if formulaLabel == "0" { return }
         
         let setCalculteFormula = inputMathFormula.joined(separator: " ") + " " + inputFormula
         var completionOfCalculation = ExpressParser.parse(from: setCalculteFormula)
@@ -94,7 +101,10 @@ class ViewController: UIViewController {
         guard let signLabel = mathSign.text else { return }
         guard let formulaLabel = mathFomula.text else { return }
         
-        if inputFormula == "0" { return }
+        if inputFormula == "0" {
+            mathSign.text = buttonSign
+            return
+        }
         
         let inputStackView = createStackView(sign: signLabel, formula: formulaLabel)
         stackView.addArrangedSubview(inputStackView)
