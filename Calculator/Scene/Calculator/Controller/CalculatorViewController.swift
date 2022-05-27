@@ -36,7 +36,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        guard value == "0" || value == "NAN" else {
+        guard value == "0" || value == "NAN" || value == "-0" else {
             value += number
             currentValue[1].text = value
             return
