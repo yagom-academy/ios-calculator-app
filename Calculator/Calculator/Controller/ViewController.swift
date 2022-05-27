@@ -238,7 +238,7 @@ class ViewController: UIViewController {
         guard let newCalculationItemsInput = makeUIStackView() else {
             return
         }
-
+        
         addStackView(newCalculationItemsInput)
     }
     
@@ -359,7 +359,7 @@ class ViewController: UIViewController {
         guard let formattedNumber = formatNumber(signChangedNumber) else {
             return
         }
-
+        
         setNumber(formattedNumber)
     }
     
@@ -371,11 +371,11 @@ class ViewController: UIViewController {
         guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
             return nil
         }
-
+        
         guard formattedNumber != 0 else {
             return nil
         }
-
+        
         let singChangedNumber = String(-formattedNumber)
         
         return singChangedNumber
@@ -397,7 +397,6 @@ class ViewController: UIViewController {
         lastInput.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    
     private func removeWhitespaces(_ input: String) -> String {
         let trimmedInput = input.replacingOccurrences(of: " ", with: "")
         
@@ -405,6 +404,7 @@ class ViewController: UIViewController {
     }
     
     private func goToBottomOfScrollView() {
+        scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height),
                                     animated: true)
