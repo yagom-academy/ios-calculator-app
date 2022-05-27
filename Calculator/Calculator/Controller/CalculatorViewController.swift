@@ -7,8 +7,8 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    var userInput: String = ""
-    var userInputNumber: String = ""
+    private var userInput: String = ""
+    private var userInputNumber: String = ""
     
     private var userNumberTapped = false
     
@@ -23,12 +23,12 @@ final class CalculatorViewController: UIViewController {
         setupViews()
     }
     
-    func setupViews() {
+    private func setupViews() {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
     
-    @IBAction func didTapNumberButton(_ sender: UIButton) {
+    @IBAction private func didTapNumberButton(_ sender: UIButton) {
         let digit = sender.currentTitle!
 
         if inputStackView.subviews.isEmpty == false, operatorLabel.text!.isEmpty {
@@ -67,7 +67,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber.append(digit)
     }
     
-    @IBAction func didTapDot(_ sender: UIButton) {
+    @IBAction private func didTapDot(_ sender: UIButton) {
         let dot = sender.currentTitle!
         let textCurrentlyInDisply = operandLabel.text!
         
@@ -84,7 +84,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber.append(dot)
     }
     
-    @IBAction func didTapOperatorButton(_ sender: UIButton) {
+    @IBAction private func didTapOperatorButton(_ sender: UIButton) {
         let operators = sender.currentTitle!
         
         guard let lastCharacter = userInputNumber.last else { return }
@@ -101,7 +101,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber = ""
     }
     
-    @IBAction func didTapPlusMinusSignButton(_ sender: UIButton) {
+    @IBAction private func didTapPlusMinusSignButton(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
         }
@@ -115,7 +115,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func removeAllButton(_ sender: UIButton) {
+    @IBAction private func removeAllButton(_ sender: UIButton) {
         userInput = ""
         userInputNumber = ""
         setupViews()
@@ -123,7 +123,7 @@ final class CalculatorViewController: UIViewController {
         userNumberTapped = false
     }
     
-    @IBAction func removeCurrentNumberButton(_ sender: UIButton) {
+    @IBAction private func removeCurrentNumberButton(_ sender: UIButton) {
         operandLabel.text = "0"
         userInputNumber = ""
         userNumberTapped = false
@@ -186,12 +186,12 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    func makeDouble(number: String) -> Double {
+    private func makeDouble(number: String) -> Double {
         guard let validNumber = Double(number) else { return 0 }
         return validNumber
     }
     
-    func doNumberFormatter(number:Double) -> String {
+    private func doNumberFormatter(number:Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumIntegerDigits = 1
@@ -205,7 +205,7 @@ final class CalculatorViewController: UIViewController {
         return formattedNumber
     }
     
-    @IBAction func didTapCalculateButton(_ sender: UIButton) {
+    @IBAction private func didTapCalculateButton(_ sender: UIButton) {
         if operatorLabel.text == "" {
             return
         }
