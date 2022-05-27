@@ -6,7 +6,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    // MARK: - Properties
     
     @IBOutlet weak var inputNumberLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
@@ -23,11 +24,60 @@ class ViewController: UIViewController {
     private var arithmetic = ""
     private var isPositiveNumber = true
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCalculator()
     }
+}
+
+// MARK: - UI
+
+extension ViewController {
+    @IBAction private func tapAllClearButton(_ sender: UIButton) {
+        resetCalculator()
+    }
     
+    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
+        inputNumber = ""
+        inputNumberLabel.text = "0"
+    }
+    
+    private func resetCalculator() {
+        stackView.removeAllArrangedSubview()
+        inputNumberLabel.text = "0"
+        inputOperatorLabel.text = ""
+        arithmetic = ""
+        inputNumber = ""
+        isPositiveNumber = true
+        inputOperator = ""
+    }
+    
+    private func updateStackView() {
+        if inputNumber == "" {
+            return
+        }
+        
+        if inputNumber.last == "." {
+            inputNumber.removeLast()
+        }
+        
+        let label = UILabel()
+        label.text = inputOperator + " " + inputNumber
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        stackView.addArrangedSubview(label)
+        arithmetic = arithmetic + inputOperator + inputNumber
+        inputNumber = ""
+        inputOperator = ""
+        inputNumberLabel.text = "0"
+    }
+}
+
+// MARK: - Action
+
+extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         guard let tappedNumber = numberButtons.firstIndex(of: sender) else { return }
         let newInputNumbers = Keypad.convertNumber(tappedNumber)
@@ -84,16 +134,6 @@ class ViewController: UIViewController {
         arithmetic = ""
     }
     
-    @IBAction private func tapAllClearButton(_ sender: UIButton) {
-        resetCalculator()
-    }
-    
-    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        inputNumber = ""
-        inputNumberLabel.text = "0"
-    }
-    
-    
     @IBAction private func tapToChangeSignButton(_ sender: UIButton) {
         if inputNumber == "0" || inputNumber == "" {
             return
@@ -108,26 +148,6 @@ class ViewController: UIViewController {
         }
         
         inputNumberLabel.text = inputNumber
-    }
-    
-    private func updateStackView() {
-        if inputNumber == "" {
-            return
-        }
-        
-        if inputNumber.last == "." {
-            inputNumber.removeLast()
-        }
-        
-        let label = UILabel()
-        label.text = inputOperator + " " + inputNumber
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        stackView.addArrangedSubview(label)
-        arithmetic = arithmetic + inputOperator + inputNumber
-        inputNumber = ""
-        inputOperator = ""
-        inputNumberLabel.text = "0"
     }
     
     private func checkInputNumber(number: String) {
@@ -146,16 +166,9 @@ class ViewController: UIViewController {
         }
     }
     
-    private func resetCalculator() {
-        stackView.removeAllArrangedSubview()
-        inputNumberLabel.text = "0"
-        inputOperatorLabel.text = ""
-        arithmetic = ""
-        inputNumber = ""
-        isPositiveNumber = true
-        inputOperator = ""
-    }
 }
+
+// MARK: - Extension
 
 extension UIStackView {
     func removeAllArrangedSubview() {
