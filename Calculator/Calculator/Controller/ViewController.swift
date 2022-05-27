@@ -147,7 +147,8 @@ class ViewController: UIViewController {
         
         if operandsTextLabel.text == "0" {
             operandsTextLabel.text = ""
-        } else if isCalculated == true {
+        }
+        if isCalculated == true {
             operandsTextLabel.text = ""
             operatorTextLabel.text = ""
             deleteStackViewAll()
@@ -179,29 +180,47 @@ class ViewController: UIViewController {
     
     //MARK: - zeroButtonTapped
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
-        if operandsTextLabel.text == "0" {
-            operandsTextLabel.text = operandsTextLabel.text
+        guard let senderLabelText = sender.titleLabel?.text else { return }
+        guard let operandLabelText = operandsTextLabel.text else { return }
+        
+        if isCalculated == true {
+            deleteStackViewAll()
+            operatorTextLabel.text = ""
+            operandsTextLabel.text = ""
+            isCalculated = false
+        } else if operandsTextLabel.text == "0" {
+            operandsTextLabel.text = ""
+        } else if operandsTextLabel.text?.count == 1,
+           operandsTextLabel.text == "0" {
+            operandsTextLabel.text = "0"
         } else {
-            operandsTextLabel.text! += sender.titleLabel?.text ?? ""
+            operandsTextLabel.text! += senderLabelText
+            expressionParserInput.append(senderLabelText)
         }
     }
     
     //MARK: - doubleZeroButtonTapped
     @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
+        guard let senderLabelText = sender.titleLabel?.text else { return }
+        
         if operandsTextLabel.text?.count == 1,
            operandsTextLabel.text == "0" {
             operandsTextLabel.text = "0"
         } else {
-            operandsTextLabel.text! += sender.titleLabel?.text ?? ""
+            operandsTextLabel.text! += senderLabelText
+            expressionParserInput.append(senderLabelText)
         }
     }
     
     //MARK: - decimalPointButtonTapped
     @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
-        if operandsTextLabel.text?.contains(sender.titleLabel?.text ?? "") == true {
+        guard let senderLabelText = sender.titleLabel?.text else { return }
+        
+        if operandsTextLabel.text?.contains(senderLabelText) == true {
             operandsTextLabel.text = operandsTextLabel.text
         } else if operandsTextLabel.text?.count != 0 {
-            operandsTextLabel.text! += sender.titleLabel?.text ?? ""
+            operandsTextLabel.text! += senderLabelText
+            expressionParserInput += senderLabelText
         }
     }
 }
