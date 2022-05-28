@@ -17,17 +17,14 @@ struct Formula {
     // MARK: - Action
     
     func result() -> Double {
-        var method: Operator?
-        var rhs: Double?
-       
-        var temp = operands.dequeue()?.data
-        while operators.isEmpty() == false {
-            method = operators.dequeue()?.data
-            rhs = operands.dequeue()?.data
-            temp = method?.calculate(lhs: temp!, rhs: rhs!)
+        guard var lhs = operands.dequeue()?.data else { return 0.000000000999 }
+        
+        while let method = operators.dequeue()?.data,
+              let rhs = operands.dequeue()?.data {
+            lhs = method.calculate(lhs: lhs, rhs: rhs)
         }
         
-        let result = temp!
+        let result = lhs
         return result
     }
 }
