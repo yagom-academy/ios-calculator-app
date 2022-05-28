@@ -7,6 +7,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var operandStorage = CalculatorItemQueue<Double>()
+    var operatorStorage = CalculatorItemQueue<Operator>()
+    var currentString: String = ""
     
     // Buttons - Numbers
     @IBOutlet weak var zeroButton: UIButton!
@@ -48,8 +51,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearCurrentCalculation(_ sender: UIButton) {
+        currentString = ""
+        signLabel.text = ""
         resultLabel.text = "0"
+        operandStorage.clear()
+        operatorStorage.clear()
     }
     
+    @IBAction func addOperatorIntoEquation(_ sender: UIButton) {
+        if currentString.isEmpty {
+            print("Hello")
+        } else {
+            switch sender {
+            case plusButton:
+                signLabel.text = "+"
+            case minusButton:
+                signLabel.text = "-"
+            case multiplyButton:
+                signLabel.text = "*"
+            case divideButton:
+                signLabel.text = "/"
+            default:
+                signLabel.text = ""
+            }
+        }
+    }
 }
 
