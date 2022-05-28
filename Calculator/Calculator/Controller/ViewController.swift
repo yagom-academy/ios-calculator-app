@@ -26,12 +26,12 @@ class ViewController: UIViewController {
     var operatorChoice: String = ""
     
     let numberFormatter = NumberFormatter()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         numberLabel.text = "0"
         operatorLabel.text = ""
-        numberStackLabel.removeFromSuperview()   
+        numberStackLabel.removeFromSuperview()
         numberStackLabel2.removeFromSuperview()
         operatorStackLabel.removeFromSuperview()
         operatorStackLabel2.removeFromSuperview()
@@ -74,9 +74,9 @@ class ViewController: UIViewController {
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
-
+        
         operatorLabel.text = "\(ButtonTitle)"
-
+        
         if ["+", "−", "÷", "×"].contains(ButtonTitle) && !presentNumbers.isEmpty {
             let stackView = UIStackView()
             let stackNumberLabel = UILabel()
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
             operatorStorage.append(" \(ButtonTitle) ")
             
             print(operatorStorage)
-
+            
             stackNumberLabel.text = "\(presentNumbers)"
             stackOperatorLabel.text = "\(ButtonTitle) "
             
@@ -112,13 +112,15 @@ class ViewController: UIViewController {
             if !inputValue.isEmpty {
                 var parse = ExpressionParser.parse(from: (inputValue))
                 let result = try! parse.result()
-                guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
-                    return
+                if result.description.count < 20 {
+                    guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                        return
+                    }
+                    numberLabel.text = "\(NSNresult)"
+                    
+                    print(result)
+                    print("----")
                 }
-                numberLabel.text = "\(NSNresult)"
-                
-                print(result)
-                print("----")
             }
             inputValue = ""
             presentNumbers = ""
@@ -144,7 +146,7 @@ class ViewController: UIViewController {
             
         } else if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
             if presentNumbers.contains("-") {
-               presentNumbers = presentNumbers.filter { word in
+                presentNumbers = presentNumbers.filter { word in
                     if word == "-"{
                         return false
                     }
