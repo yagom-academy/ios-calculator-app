@@ -9,7 +9,6 @@ import UIKit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        deleteTextLabelText()
         exampleStackView1.isHidden = true
         exampleStackView2.isHidden = true
     }
