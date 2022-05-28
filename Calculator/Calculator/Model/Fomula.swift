@@ -17,9 +17,9 @@ struct Formula {
     func result() throws -> Double {
         guard var lhs = operands.dequeue()?.data else { return 0.000000000999 }
         
-        while let method = operators.dequeue()?.data,
+        while let mathOperator = operators.dequeue()?.data,
               let rhs = operands.dequeue()?.data {
-            lhs = try method.calculate(lhs: lhs, rhs: rhs)
+            lhs = try mathOperator.calculate(lhs: lhs, rhs: rhs)
         }
         
         let result = lhs
