@@ -16,8 +16,8 @@ enum ExpressionParser {
         let numbersToEnqueue: [Double] = numbersParsedFromInput.compactMap( { Double($0) } )
         numbersToEnqueue.forEach( { resultOperands.enqueue($0) } )
         
-        for char in input {
-            if let eachOperator = Operator(rawValue: char) {
+        for character in input {
+            if let eachOperator = Operator(rawValue: character) {
                 resultOperators.enqueue(eachOperator)
             }
         }
