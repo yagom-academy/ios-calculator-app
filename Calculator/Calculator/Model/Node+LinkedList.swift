@@ -24,6 +24,7 @@ final class LinkedList<Element> {
     // MARK: - Properties
     
     private(set) var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var length: Int {
         var currentNode = head
@@ -42,16 +43,12 @@ final class LinkedList<Element> {
     func append(_ newNode: Node<Element>) {
         if head == nil {
             head = newNode
+            tail = head
             return
         }
         
-        var currentNode = head
-        
-        while currentNode?.nextNode != nil {
-            currentNode = currentNode?.nextNode
-        }
-        
-        currentNode?.nextNode = newNode
+        tail?.nextNode = newNode
+        tail = newNode
     }
     
     func isEmpty() -> Bool {
