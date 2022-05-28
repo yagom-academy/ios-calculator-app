@@ -19,119 +19,119 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
-
-    var inputString: String = "0"
+    
+    var inputValue: String = ""
     
     var presentNumberString: String = ""
     var opperArray: [String] = []
     var opperString: String = ""
-    var flag: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         numberStackLabel.isHidden = true
         numberStackLabel2.isHidden = true
         opperLabel.isHidden = true
         opperLabel2.isHidden = true
-    }
-    
-    override func viewWillLayoutSubviews() {
-        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height - previousValues.bounds.height + numberStackLabel.font.lineHeight)
-        previousValues.setContentOffset(bottomOffset, animated: true)
+        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight)
+        previousValues.setContentOffset(bottomOffset, animated: false)
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
-        let digit = sender.currentTitle!
-
+        let ButtonTitle = sender.currentTitle!
+        
         if opperArray.isEmpty != true {
             opperString += opperArray.removeLast()
-            inputString += presentNumberString
-            inputString += " \(opperString) "
+            inputValue += presentNumberString
+            inputValue += " \(opperString) "
             
             print("presentNumberArray: ", presentNumberString)
-            print("inputStirng: ", inputString)
+            print("inputValue: ",  inputValue)
             print( "\(opperString) ")
             
             presentNumberString = ""
-
+            
             opperString = ""
             opperArray = []
             
-            presentNumberString += "\(digit)"
-            numberLabel.text = "\(digit)"
-
+            presentNumberString += "\(ButtonTitle)"
+            numberLabel.text = "\(ButtonTitle)"
+            
         } else {
-            presentNumberString += "\(digit)"
+            presentNumberString += "\(ButtonTitle)"
             numberLabel.text = "\(presentNumberString)"
-
+            
             print(presentNumberString)
+            
         }
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
-        let digit = sender.currentTitle!
+        let ButtonTitle = sender.currentTitle!
         
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumSignificantDigits = 3
         
-        let label2 = UILabel()
-        label2.font = UIFont.preferredFont(forTextStyle: .title3)
-        label2.textColor = .white
+        let stackNumberLabel = UILabel()
+        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackNumberLabel.textColor = .white
         
-        
-        if ["+", "−", "÷", "×"].contains(digit) {
-            opperArray.append(" \(digit) ")
-            operatorLabel.text = "\(digit)"
+        let stackOperatorLabel = UILabel()
+        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackOperatorLabel.textColor = .white
+        let stackView = UIStackView()
+
+        if ["+", "−", "÷", "×"].contains(ButtonTitle) {
+            opperArray.append(" \(ButtonTitle) ")
+            operatorLabel.text = "\(ButtonTitle)"
             
             print(opperArray)
+                    
+            stackNumberLabel.text = "\(presentNumberString)"
+            stackOperatorLabel.text = "\(ButtonTitle) "
             
-            let stackView = UIStackView()
+            stackNumberLabel.adjustsFontForContentSizeCategory = true
+            stackOperatorLabel.adjustsFontForContentSizeCategory = true
+            
             valuesStackView.addArrangedSubview(stackView)
-            
-            label.text = "\(presentNumberString)"
-            label.adjustsFontForContentSizeCategory = true
+            stackView.addArrangedSubview(stackOperatorLabel)
+            stackView.addArrangedSubview(stackNumberLabel)
 
-            label2.text = "\(digit) "
-            label2.adjustsFontForContentSizeCategory = true
-            stackView.axis = .horizontal
-            stackView.addArrangedSubview(label2)
-            stackView.addArrangedSubview(label)
+        } else if ["="].contains(ButtonTitle) {
+            inputValue += presentNumberString
             
-        } else if ["="].contains(digit) {
-            inputString += presentNumberString
+            print(inputValue)
             
-            print(inputString)
-            
-            var parse = ExpressionParser.parse(from: (inputString))
+            var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
-            numberLabel.text = "\(result)"
-
+            guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                return
+            }
+            numberLabel.text = "\(NSNresult)"
+            
             print(result)
             print("----")
             
-            inputString = "\(result)"
+            inputValue = ""
             presentNumberString = ""
-            flag = 1
         }
     }
     
     @IBAction func touchOptionButton(_ sender: UIButton) {
-        let digit = sender.currentTitle!
+        let ButtonTitle = sender.currentTitle!
         
-        if ["AC"].contains(digit) {
-            inputString = "0"
+        if ["AC"].contains(ButtonTitle) {
+            inputValue = ""
             presentNumberString = ""
-    
-        } else if ["CE"].contains(digit) {
+            
+        } else if ["CE"].contains(ButtonTitle) {
             presentNumberString = ""
-
+            
             print(presentNumberString)
-
-        } else if ["⁺⁄₋"].contains(digit) {
+            
+        } else if ["⁺⁄₋"].contains(ButtonTitle) {
             presentNumberString = String((Int(presentNumberString) ?? 0) * -1)
-            numberLabel.text = presentNumberString
+            numberLabel.text = "\(presentNumberString)"
             print(presentNumberString)
             
         }
