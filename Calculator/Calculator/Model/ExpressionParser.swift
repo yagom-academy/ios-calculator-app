@@ -19,11 +19,8 @@ enum ExpressionParser {
         calculatorOperands.forEach( { resultOperands.enqueue($0) } )
         
         for char in input {
-            switch char {
-            case "+", "-", "*", "/":
-                resultOperators.enqueue(Operator(rawValue: char)!)
-            default:
-                continue
+            if let eachOperator = Operator(rawValue: char) {
+                resultOperators.enqueue(eachOperator)
             }
         }
  
