@@ -24,7 +24,7 @@ class ExpressionParserTests: XCTestCase {
 
     // MARK: - parse(from:)
     
-    func test_parse메서드_input계산식을_계산한_결과가_정확하다() {
+    func test_parse메서드_input계산식을_계산한_결과가_정확하다() throws {
         // given
         let input = "100+200-150*3/2"
         
@@ -32,6 +32,6 @@ class ExpressionParserTests: XCTestCase {
         let parsedFormula = ExpressionParser.parse(from: input)
         
         // then
-        XCTAssertEqual(parsedFormula.result(), Double(225.0))
+        XCTAssertEqual(try parsedFormula.result(), Double(225.0))
     }
 }
