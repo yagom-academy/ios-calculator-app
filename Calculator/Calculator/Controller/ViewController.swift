@@ -11,8 +11,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         exampleStackView1.isHidden = true
         exampleStackView2.isHidden = true
+        
     }
-    
+    let addedStackView = UIStackView()
+    let addedOperatorsLabel = UILabel()
+    let addedOperandsLabel = UILabel()
     private var expressionParserInput: String = "0"
     private var isCalculated = false
     
@@ -27,35 +30,41 @@ class ViewController: UIViewController {
     
     //MARK: - addStackView()
     private func addStackView() {
-        let addedStackView = UIStackView()
-        let addedOperatorsLabel = UILabel()
-        let addedOperandsLabel = UILabel()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height + 22),
                                     animated: false)
-        
-        // addedStackView Constraints
+        setAddedStackViewConstraints()
+        setAddedOperatorsLabelConstraints()
+        setAddedOperandsLabelConstraints()
+        addSubviews()
+    }
+    
+    private func setAddedStackViewConstraints() {
         addedStackView.axis = .horizontal
         addedStackView.alignment = .fill
         addedStackView.spacing = 8
         addedStackView.distribution = .fill
         addedStackView.translatesAutoresizingMaskIntoConstraints = false
         addedStackView.isHidden = false
-        
-        // addedOperatorsLabel Constraints
+    }
+    
+    private func setAddedOperatorsLabelConstraints() {
         addedOperatorsLabel.text = operatorTextLabel.text
         addedOperatorsLabel.textAlignment = .right
         addedOperatorsLabel.textColor = UIColor.white
         addedOperatorsLabel.translatesAutoresizingMaskIntoConstraints = false
         addedOperatorsLabel.isHidden = false
-        
-        // addedOperandsLabel Constraints
+    }
+    
+    private func setAddedOperandsLabelConstraints() {
         addedOperandsLabel.text = formatNumber(operandsTextLabel.text!)
         addedOperandsLabel.textAlignment = .right
         addedOperandsLabel.textColor = UIColor.white
         addedOperandsLabel.translatesAutoresizingMaskIntoConstraints = false
         addedOperandsLabel.isHidden = false
-
+    }
+    
+    private func addSubviews() {
         addedStackView.addArrangedSubview(addedOperatorsLabel)
         addedStackView.addArrangedSubview(addedOperandsLabel)
         arrangedStackView.addArrangedSubview(addedStackView)
