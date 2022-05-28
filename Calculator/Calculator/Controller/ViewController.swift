@@ -26,6 +26,10 @@ class ViewController: UIViewController {
     var opperArray: [String] = []
     var opperString: String = ""
     
+    let numberFormatter = NumberFormatter()
+    let stackNumberLabel = UILabel()
+    let stackOperatorLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,15 +72,13 @@ class ViewController: UIViewController {
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
-        
-        let numberFormatter = NumberFormatter()
+
+
         numberFormatter.maximumSignificantDigits = 3
         
-        let stackNumberLabel = UILabel()
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackNumberLabel.textColor = .white
         
-        let stackOperatorLabel = UILabel()
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
         let stackView = UIStackView()
@@ -102,16 +104,18 @@ class ViewController: UIViewController {
             
             print(inputValue)
             
-            var parse = ExpressionParser.parse(from: (inputValue))
-            let result = try! parse.result()
-            guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
-                return
+            if !inputValue.isEmpty {
+                var parse = ExpressionParser.parse(from: (inputValue))
+                let result = try! parse.result()
+                guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                    return
+                }
+                numberLabel.text = "\(NSNresult)"
+                
+                print(result)
+                print("----")
             }
-            numberLabel.text = "\(NSNresult)"
-            
-            print(result)
-            print("----")
-            
+
             inputValue = ""
             presentNumberString = ""
         }
