@@ -65,8 +65,7 @@ class FormulaTests: XCTestCase {
         //given
         sut.operands.enqueue(1)
         sut.operands.enqueue(2)
-        
-        sut.operators.enqueue("-")
+        sut.operators.enqueue("−")
         
         let expectation = Double(-1)
         //when
@@ -79,7 +78,6 @@ class FormulaTests: XCTestCase {
         //given
         sut.operands.enqueue(27)
         sut.operands.enqueue(3)
-        
         sut.operators.enqueue("÷")
         
         let expectation = Double(9)
@@ -93,7 +91,6 @@ class FormulaTests: XCTestCase {
         //given
         sut.operands.enqueue(3)
         sut.operands.enqueue(9)
-        
         sut.operators.enqueue("×")
         
         let expectation = Double(27)
@@ -108,9 +105,9 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(27)
         sut.operands.enqueue(13)
         sut.operands.enqueue(0)
-        
         sut.operators.enqueue("+")
         sut.operators.enqueue("÷")
+        
         let expectation = OperatorError.dividedByZero
         //when
         //Then

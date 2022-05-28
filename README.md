@@ -60,3 +60,66 @@
         static으로 타입메서드로 만들어 주니 test에서 사용할 수 있었다. 
 - 테스트만을 위한 코드
     - 함수를 구현하다 보니, "CalculatorItemQueue" 에서 currenStack 이라는 프로퍼티와 enqueue() 함수는 테스트 코드에서만 사용된다는 것을 깨달았다. 
+
+
+# STEP3
+
+## UML Diagram
+
+![](https://i.imgur.com/t5KwBzo.png)
+
+## 구현사항
+- 기존의 "String+Extensions" 에 문자열에서 특정 Character 를 모두 지워주는 함수를 추가 했다.
+```swift=
+    removeEntire(character: Character) -> String
+```  
+- 화면의 모든 UI를 연결 해주었다. 
+- `NumberFormatter`를 이용하여 숫자의 소숫점 제한과, 세자리 마다 쉼표 설정을 추가했다
+- 각 연산자 버튼에 대한 계산을 수행하도록 구현했다 
+    - "+","-","×","÷"
+        - 버튼 터치시, 입력하던 숫자를 스택으로 올리고 다음 숫자를 받을 수 있도록 구현했다.
+        - 만약 현재 `screenLabel`이 0이라면 부호만 바뀌도록 구현했다.
+    - "="
+        - 버튼 터치시, 스택에 쌓여있는 숫자들을 읽어와 `ExpressionParser()`에 넣어줬다.
+        - 계산 결과값이 `screenLabel`에 표시되도록 했다. 
+        - 만약 현재 `screenLabel`이 "0" 이거나 "결과값"이어서 `currentOperatorLabel` 이 비어있다면 return 하도록 구현했다.
+- 기능버튼("AC","CE","+/-") 에 대한 수행을 구현했다.
+    - "AC"
+        - `historyStackView` 에 쌓여있는 스택들을 `removeAllIn()`함수를 이용해 모두 제거 해주었다.
+    - "CE"
+        - 현재 `screenLabel` 에 올려져 있는 text를 0으로 변경 해주었다.
+    - "+/-"
+        - 현재 `screenLabel` 에 올려져 있는 text에 -1을 곱해주었다
+        - 현재값이 0이라면 수행되지 않도록 구현했다.
+- historyStackView
+    - `goToBottomOfScrollView()`
+        - 스택이 추가될 때 마다 최하단으로 자동 스크롤 되도록 구현했다.
+
+## 수행 중 버그 기록
+- 빼기 연산 오류
+    - 스토리보드상 "-" 버튼과 `Operator` 에 subtract 케이스의 rawValue "-" 와 서로 다른 문자였다.. 
+- "=" 버튼 터치 이후 결과값으로 새로운 계산수행 불가
+    - `generateTextData()` 로직에서 기존에는 `historyStackView` 의 모든 값을 읽어오는 역할을 했어서 이전 값들과의 결합상의 오류가 있었는데, 값을 읽어오기 시작하는 index를 설정하기 위해 `calculateStackCount` 라는 프로퍼티를 만들어 이전에 계산했던 스택들의 개수를 세어 그 다음 계산에서는 이후부터 계산하도록 구현했다.
+- 스토리보드에 기본으로 존재하는 Stack
+    - scrollView 안에 존재하는 stack을 제거하니 constraint 오류가 발생, 이를 스토리보드 상에서 제거할 수 없으므로 코드로 viewDidLoad에서 제거 해주었다. 
+    - 이유는 위의 연속적인 계산을 위한 index설정을 해주었는데, 이 기본 스택 때문에 생길 오류를 방지하기 위해서이다
+    - numberFormatter를 이용해 세자리마다 쉼표 표시를 하니, 스택에서 숫자값을 읽어오는 로직에서 오류가 발생, 쉼표가 포함되어 있어 Double로 형변환이 되지 않았다. 또한 기능버튼 "+/-" 에서도 Double로 형변환에 오류를 뿜었다. 이를 해결하기 위해 "String+Extensions" 에서 `removeEntire()` 를 하나 만들어주어 문자열에서 특정문자를 모두 제거해주는 로직을 작성했다. 
+
+## 구현 화면
+
+----< **간단한 사칙연산** >--------------<**긴 사칙연산**>-------------<**쉼표와 소수점 처리**>  
+
+<img src="https://i.imgur.com/hug9Vkw.gif" width="200" height="400"/><img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/><img src="https://i.imgur.com/tbweDEl.gif" width="200" height="400"/><img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/><img src="https://i.imgur.com/7gkHoq4.gif" width="200" height="400"/>  
+  
+    
+    
+# 
+
+---< **기능버튼 "CE", "+/-"** >-------<**오류처리 NaN**>-------------<**계산내역 스크롤**>
+
+<img src="https://i.imgur.com/c7G71QF.gif" width="200" height="400"/><img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/><img src="https://i.imgur.com/JirfoPe.gif" width="200" height="400"/><img src="https://i.imgur.com/xBp50Dd.png" width="25" height="400"/><img src="https://i.imgur.com/iXxQRBa.gif" width="200" height="400"/>
+
+
+## 고민한 점 & 궁금한 점
+
+

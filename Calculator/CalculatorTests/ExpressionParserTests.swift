@@ -55,7 +55,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_문자열이주어졌을때_나누기0이있다면_dividedByZero에러를던지는지() {
         //given
-        let str = "3 ÷ 0 + 9 × 2"
+        let str = "3 ÷ 0"
         let expectation = OperatorError.dividedByZero
         //when
         var formula = ExpressionParser.parse(from: str)
@@ -76,4 +76,3 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
 }
-
