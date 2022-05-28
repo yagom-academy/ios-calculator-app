@@ -163,7 +163,7 @@ class CalculateViewController: UIViewController {
         } else if operandsTextLabel.text?.first?.isNumber == true {
             operandsTextLabel.text = "-" + operandsLabelText
         } else {
-            print(OperatorError.unknown)
+            operandsTextLabel.text = OperatorError.unknown.errorDescription
         }
     }
     
