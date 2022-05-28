@@ -168,7 +168,7 @@ class CalculateViewController: UIViewController {
     }
     
     //MARK: - allClearButtonTapped
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         isCalculated = false
         deleteStackViewAll()
         deleteTextLabelText()
@@ -176,7 +176,7 @@ class CalculateViewController: UIViewController {
     }
     
     //MARK: - clearEntryButtonTapped
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         if isCalculated == true {
             operandsTextLabel.text = "0"
             isCalculated = false
@@ -195,7 +195,7 @@ class CalculateViewController: UIViewController {
     }
     
     //MARK: - zeroButtonTapped
-    @IBAction func zeroButtonTapped(_ sender: UIButton) {
+    @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
         if isCalculated == true {
