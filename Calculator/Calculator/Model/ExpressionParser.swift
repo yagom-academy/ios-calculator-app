@@ -9,14 +9,12 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        
         var resultOperands = CalculatorItemQueue<Double>()
         var resultOperators = CalculatorItemQueue<Operator>()
-        
-        let numbers: [String] = componentsByOperators(from: input)
-        let calculatorOperands = numbers.compactMap( { Double($0) } )
 
-        calculatorOperands.forEach( { resultOperands.enqueue($0) } )
+        let numbersParsedFromInput: [String] = componentsByOperators(from: input)
+        let numbersToEnqueue: [Double] = numbersParsedFromInput.compactMap( { Double($0) } )
+        numbersToEnqueue.forEach( { resultOperands.enqueue($0) } )
         
         for char in input {
             if let eachOperator = Operator(rawValue: char) {
