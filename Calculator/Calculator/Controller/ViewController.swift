@@ -21,86 +21,95 @@ class ViewController: UIViewController {
     @IBOutlet weak var valuesStackView: UIStackView!
     
     var inputValue: String = ""
-    
-    var presentNumberString: String = ""
-    var opperArray: [String] = []
-    var opperString: String = ""
+    var presentNumbers: String = ""
+    var operatorStorage: [String] = []
+    var operatorChoice: String = ""
     
     let numberFormatter = NumberFormatter()
-    let stackNumberLabel = UILabel()
-    let stackOperatorLabel = UILabel()
-    
+
+    var flag = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        numberLabel.text = "0"
+        numberStackLabel.removeFromSuperview()
+        numberStackLabel2.removeFromSuperview()
+        opperLabel.removeFromSuperview()
+        opperLabel2.removeFromSuperview()
         
-        numberStackLabel.isHidden = true
-        numberStackLabel2.isHidden = true
-        opperLabel.isHidden = true
-        opperLabel2.isHidden = true
-        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight)
-        previousValues.setContentOffset(bottomOffset, animated: false)
+        numberFormatter.roundingMode = .floor
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 3
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
         
-        if opperArray.isEmpty != true {
-            opperString += opperArray.removeLast()
-            inputValue += presentNumberString
-            inputValue += " \(opperString) "
+        if operatorStorage.isEmpty != true {
+            operatorChoice += operatorStorage.removeLast()
+            inputValue += presentNumbers
+            inputValue += " \(operatorChoice) "
             
-            print("presentNumberArray: ", presentNumberString)
+            print("presentNumberArray: ", presentNumbers)
             print("inputValue: ",  inputValue)
-            print( "\(opperString) ")
+            print( "\(operatorChoice) ")
             
-            presentNumberString = ""
+            presentNumbers = ""
+            operatorChoice = ""
+            operatorStorage = []
             
-            opperString = ""
-            opperArray = []
-            
-            presentNumberString += "\(ButtonTitle)"
-            numberLabel.text = "\(ButtonTitle)"
+            presentNumbers += "\(ButtonTitle)"
+            guard let numberFormatterValue = numberFormatter.string(from: Int(ButtonTitle)! as NSNumber) else { return }
+            numberLabel.text = "\(numberFormatterValue)"
             
         } else {
-            presentNumberString += "\(ButtonTitle)"
-            numberLabel.text = "\(presentNumberString)"
+            presentNumbers += "\(ButtonTitle)"
+            guard let numberFormatterValue = numberFormatter.string(from: Int(presentNumbers)! as NSNumber) else { return }
+
+            numberLabel.text = "\(numberFormatterValue)"
             
-            print(presentNumberString)
+            print(presentNumbers)
             
         }
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
-
-
-        numberFormatter.maximumSignificantDigits = 3
+        
+        let stackView = UIStackView()
+        let stackNumberLabel = UILabel()
+        let stackOperatorLabel = UILabel()
+        
+        let bottomOffset = CGPoint(x: 0,
+                                   y: previousValues.contentSize.height
+                                   - previousValues.bounds.height
+                                   + numberLabel.font.lineHeight)
+        previousValues.setContentOffset(bottomOffset, animated: false)
         
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackNumberLabel.textColor = .white
         
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
-        let stackView = UIStackView()
 
         if ["+", "−", "÷", "×"].contains(ButtonTitle) {
-            opperArray.append(" \(ButtonTitle) ")
+            operatorStorage.append(" \(ButtonTitle) ")
             operatorLabel.text = "\(ButtonTitle)"
             
-            print(opperArray)
-                    
-            stackNumberLabel.text = "\(presentNumberString)"
+            print(operatorStorage)
+            guard let numberFormatterValue = numberFormatter.string(from: Int(presentNumbers)! as NSNumber) else { return }
+
+            stackNumberLabel.text = "\(numberFormatterValue)"
             stackOperatorLabel.text = "\(ButtonTitle) "
             
             stackNumberLabel.adjustsFontForContentSizeCategory = true
             stackOperatorLabel.adjustsFontForContentSizeCategory = true
             
-            valuesStackView.addArrangedSubview(stackView)
             stackView.addArrangedSubview(stackOperatorLabel)
             stackView.addArrangedSubview(stackNumberLabel)
+            valuesStackView.addArrangedSubview(stackView)
 
         } else if ["="].contains(ButtonTitle) {
-            inputValue += presentNumberString
+            inputValue += presentNumbers
             
             print(inputValue)
             
@@ -117,7 +126,7 @@ class ViewController: UIViewController {
             }
 
             inputValue = ""
-            presentNumberString = ""
+            presentNumbers = ""
         }
     }
     
@@ -126,17 +135,18 @@ class ViewController: UIViewController {
         
         if ["AC"].contains(ButtonTitle) {
             inputValue = ""
-            presentNumberString = ""
-            
+            presentNumbers = ""
+            numberLabel.text = "0"
+
         } else if ["CE"].contains(ButtonTitle) {
-            presentNumberString = ""
-            
-            print(presentNumberString)
+            presentNumbers = ""
+            numberLabel.text = "0"
+            print(presentNumbers)
             
         } else if ["⁺⁄₋"].contains(ButtonTitle) {
-            presentNumberString = String((Int(presentNumberString) ?? 0) * -1)
-            numberLabel.text = "\(presentNumberString)"
-            print(presentNumberString)
+            presentNumbers = String((Int(presentNumbers) ?? 0) * -1)
+            numberLabel.text = "\(presentNumbers)"
+            print(presentNumbers)
             
         }
     }
