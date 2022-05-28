@@ -5,8 +5,6 @@
 //  Created by Minseong Kang on 2022/05/27.
 //
 
-import Foundation
-
 struct Formula {
     
     // MARK: - Properties

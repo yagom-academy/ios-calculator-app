@@ -5,13 +5,13 @@
 //  Created by Minseong Kang on 2022/05/27.
 //
 
-import Foundation
-
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "/"
     case multiply = "*"
+    
+    // MARK: - Action
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self.rawValue {
