@@ -13,9 +13,7 @@ class CalculateViewController: UIViewController {
         exampleStackView2.isHidden = true
         
     }
-    let addedStackView = UIStackView()
-    let addedOperatorsLabel = UILabel()
-    let addedOperandsLabel = UILabel()
+  
     private var expressionParserInput: String = "0"
     private var isCalculated = false
     
@@ -30,44 +28,51 @@ class CalculateViewController: UIViewController {
     
     //MARK: - addStackView()
     private func addStackView() {
+        let addedStackView = UIStackView()
+        let addedOperatorsLabel = UILabel()
+        let addedOperandsLabel = UILabel()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height + 22),
                                     animated: true)
-        setAddedStackViewConstraints()
-        setAddedOperatorsLabelConstraints()
-        setAddedOperandsLabelConstraints()
-        addSubviews()
+        setAddedStackViewConstraints(addedStackView)
+        setAddedOperatorsLabelConstraints(addedOperatorsLabel)
+        setAddedOperandsLabelConstraints(operandsTextLabel)
+        addLabelSubviews(addedOperandsLabel, superView: addedStackView)
+        addLabelSubviews(addedOperatorsLabel, superView: addedStackView)
+        addStackSubviews(addedStackView)
     }
     
-    private func setAddedStackViewConstraints() {
-        addedStackView.axis = .horizontal
-        addedStackView.alignment = .fill
-        addedStackView.spacing = 8
-        addedStackView.distribution = .fill
-        addedStackView.translatesAutoresizingMaskIntoConstraints = false
-        addedStackView.isHidden = false
+    private func setAddedStackViewConstraints(_ stackView: UIStackView) {
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isHidden = false
     }
     
-    private func setAddedOperatorsLabelConstraints() {
-        addedOperatorsLabel.text = operatorTextLabel.text
-        addedOperatorsLabel.textAlignment = .right
-        addedOperatorsLabel.textColor = UIColor.white
-        addedOperatorsLabel.translatesAutoresizingMaskIntoConstraints = false
-        addedOperatorsLabel.isHidden = false
+    private func setAddedOperatorsLabelConstraints(_ label: UILabel) {
+        label.text = operatorTextLabel.text
+        label.textAlignment = .right
+        label.textColor = UIColor.white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = false
     }
     
-    private func setAddedOperandsLabelConstraints() {
-        addedOperandsLabel.text = operandsTextLabel.text!.formatNumber()
-        addedOperandsLabel.textAlignment = .right
-        addedOperandsLabel.textColor = UIColor.white
-        addedOperandsLabel.translatesAutoresizingMaskIntoConstraints = false
-        addedOperandsLabel.isHidden = false
+    private func setAddedOperandsLabelConstraints(_ label: UILabel) {
+        label.text = operandsTextLabel.text!.formatNumber()
+        label.textAlignment = .right
+        label.textColor = UIColor.white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = false
     }
     
-    private func addSubviews() {
-        addedStackView.addArrangedSubview(addedOperatorsLabel)
-        addedStackView.addArrangedSubview(addedOperandsLabel)
-        arrangedStackView.addArrangedSubview(addedStackView)
+    private func addLabelSubviews(_ label: UILabel, superView: UIStackView) {
+        superView.addArrangedSubview(label)
+    }
+    
+    private func addStackSubviews(_ stackView: UIStackView) {
+        arrangedStackView.addArrangedSubview(stackView)
     }
     
     //MARK: - deleteStackViewAll()
