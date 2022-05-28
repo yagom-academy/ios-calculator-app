@@ -1,13 +1,19 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    @IBOutlet weak var numberLable: UILabel!
-    @IBOutlet weak var operatorLable: UILabel!
+    @IBOutlet weak var numberlable: UILabel!
+    @IBOutlet weak var operatorlable: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var userFormula = UserFormula()
-    
+    private var numberText: String {
+        return numberlable.text ?? "0"
+    }
+    private var pureNumberText: String {
+        return numberText.filter { $0 != "," }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -16,6 +22,7 @@ class CalculatorViewController: UIViewController {
         let numberFormat = NumberFormatter()
         numberFormat.numberStyle = .decimal
         numberFormat.maximumFractionDigits = 20
+        numberFormat.maximumSignificantDigits = 20
         
         guard let value = numberFormat.string(from: NSNumber(value: number)) else {
             return "0"
@@ -47,7 +54,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        let numberCount = (numberLable.text ?? "0").filter { $0 != "," }.count
+        let numberCount = pureNumberText.count
         let number = userFormula.fullFormula.suffix(numberCount)
         
         if let `operator` = userFormula.fullFormula.dropLast(numberCount).last {
@@ -66,13 +73,11 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func numberPadTapped(_ sender: UIButton) {
         if userFormula.isLastOperator {
-            numberLable.text = "0"
+            numberlable.text = "0"
         }
-        
-        let numberText = (numberLable.text ?? "0").filter { $0 != "," }
-        
-        if let buttonText = sender.titleLabel?.text, let number = Double(numberText + buttonText) {
-            numberLable.text = convertToDecimal(number)
+
+        if let buttonText = sender.titleLabel?.text, let number = Double(pureNumberText + buttonText) {
+            numberlable.text = convertToDecimal(number)
             userFormula.append(content: buttonText)
         }
     }
@@ -81,7 +86,7 @@ class CalculatorViewController: UIViewController {
         do {
             try checkOperatorError()
             printFormula()
-            numberLable.text = "0"
+            numberlable.text = "0"
         } catch {
             switch error {
             case CalculatorError.duplicatedOperator:
@@ -94,7 +99,7 @@ class CalculatorViewController: UIViewController {
         }
         
         if let operatorText = sender.titleLabel?.text {
-            operatorLable.text = operatorText
+            operatorlable.text = operatorText
             userFormula.append(content: operatorText)
         }
     }
@@ -108,13 +113,13 @@ class CalculatorViewController: UIViewController {
             var formula = try ExpressionParser.parse(from: userFormula.fullFormula)
             let calculatedResult = try formula.result()
             printFormula()
-            numberLable.text = convertToDecimal(calculatedResult)
+            numberlable.text = convertToDecimal(calculatedResult)
             userFormula.removeAll()
             userFormula.append(content: convertToDecimal(calculatedResult).filter { $0 != ","})
         } catch {
             switch error {
             case CalculatorError.dividedByZero:
-                numberLable.text = "NaN"
+                numberlable.text = "NaN"
                 userFormula.removeAll()
             case CalculatorError.wrongFormula:
                 userFormula.removeAll()
@@ -124,58 +129,52 @@ class CalculatorViewController: UIViewController {
             }
         }
         
-        operatorLable.text = ""
+        operatorlable.text = ""
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {
         deleteFormulaLable()
-        numberLable.text = "0"
-        operatorLable.text = ""
+        numberlable.text = "0"
+        operatorlable.text = ""
         userFormula.removeAll()
     }
     
     @IBAction private func CEButtonTapped(_ sender: UIButton) {
         if userFormula.isLastOperator {
-            operatorLable.text = ""
+            operatorlable.text = ""
         } else {
-            numberLable.text = String((numberLable.text ?? "0").dropLast())
+            numberlable.text = String(numberText.dropLast())
         }
         
-        if numberLable.text == "" {
-            numberLable.text = "0"
+        if numberlable.text == "" {
+            numberlable.text = "0"
         }
         
         userFormula.dropLast()
     }
     
     @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
-        let numberText = numberLable.text ?? "0"
-        let pureNumber = numberText.filter { $0 != "," }
-        
         guard numberText != "0" else {
             return
         }
       
+        var changeNumber: String
+        
         if numberText.contains("-") {
-            let plusNumber = numberText.dropFirst()
-            let purePlusNumber = plusNumber.filter { $0 != "," }
-            numberLable.text = String(plusNumber)
-            userFormula.dropLast(count: pureNumber.count)
-            userFormula.append(content: purePlusNumber)
+            changeNumber = String(numberText.dropFirst())
         } else {
-            let minusNumber = "-" + numberText
-            let pureMinusNumber = minusNumber.filter { $0 != "," }
-            numberLable.text = minusNumber
-            userFormula.dropLast(count: pureNumber.count)
-            userFormula.append(content: pureMinusNumber)
+            changeNumber = "-" + numberText
         }
+        
+        let pureNumber = changeNumber.filter { $0 != "," }
+        userFormula.dropLast(count: pureNumberText.count)
+        userFormula.append(content: pureNumber)
+        numberlable.text = changeNumber
     }
     
     @IBAction func decimalPointButtonTapped(_ sender: UIButton) {
-        let numberText = numberLable.text ?? "0"
-        
         if !numberText.contains(".") {
-            numberLable.text = numberText + "."
+            numberlable.text = numberText + "."
             userFormula.append(content: ".")
         }
     }

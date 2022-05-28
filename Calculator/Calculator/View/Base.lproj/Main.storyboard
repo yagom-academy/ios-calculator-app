@@ -332,8 +332,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="numberLable" destination="Lwz-OF-XHD" id="1jA-L5-iol"/>
-                        <outlet property="operatorLable" destination="HPC-iy-qdm" id="sBD-8S-rOl"/>
+                        <outlet property="numberlable" destination="Lwz-OF-XHD" id="1jA-L5-iol"/>
+                        <outlet property="operatorlable" destination="HPC-iy-qdm" id="sBD-8S-rOl"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="M6t-FI-R0p"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="fkg-Zx-2H2"/>
                     </connections>
