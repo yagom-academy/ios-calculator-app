@@ -1,12 +1,12 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculateViewController.swift
 //  Created by bard.
 //  Copyright © yagom. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         exampleStackView1.isHidden = true
