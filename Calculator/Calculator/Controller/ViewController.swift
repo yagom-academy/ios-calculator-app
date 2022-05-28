@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var exampleStackView1: UIStackView!
     @IBOutlet private weak var exampleStackView2: UIStackView!
-    @IBOutlet private weak var largeStackView: UIStackView!
+    @IBOutlet private weak var arrangedStackView: UIStackView!
     @IBOutlet private weak var operatorStackLabel: UILabel!
     @IBOutlet private weak var operandStackLabel: UILabel!
     @IBOutlet private weak var operandsTextLabel: UILabel!
