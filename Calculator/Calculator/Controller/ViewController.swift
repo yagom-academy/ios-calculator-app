@@ -58,12 +58,12 @@ class ViewController: UIViewController {
 
         addedStackView.addArrangedSubview(addedOperatorsLabel)
         addedStackView.addArrangedSubview(addedOperandsLabel)
-        largeStackView.addArrangedSubview(addedStackView)
+        arrangedStackView.addArrangedSubview(addedStackView)
     }
     
     //MARK: - deleteStackViewAll()
     private func deleteStackViewAll() {
-        largeStackView.subviews.forEach { $0.removeFromSuperview() }
+        arrangedStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     //MARK: - operandButtonsTapped()
