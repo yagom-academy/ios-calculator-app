@@ -16,7 +16,7 @@ struct Formula {
             throw FormulaError.noOperandsInQueue }
         while operators.isEmpty == false {
             guard let eachOperator = operators.dequeue() else {
-                throw FormulaError.emptyError
+                throw FormulaError.noOperatorsInQueue
             }
             guard let operandsItem = operands.dequeue() else {
                 throw FormulaError.noOperandsInQueue
@@ -29,6 +29,6 @@ struct Formula {
 }
 
 enum FormulaError: Error {
-    case emptyError
+    case noOperatorsInQueue
     case noOperandsInQueue
 }
