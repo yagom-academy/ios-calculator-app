@@ -32,7 +32,7 @@ class CalculateViewController: UIViewController {
     private func addStackView() {
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height + 22),
-                                    animated: false)
+                                    animated: true)
         setAddedStackViewConstraints()
         setAddedOperatorsLabelConstraints()
         setAddedOperandsLabelConstraints()
@@ -57,7 +57,7 @@ class CalculateViewController: UIViewController {
     }
     
     private func setAddedOperandsLabelConstraints() {
-        addedOperandsLabel.text = formatNumber(operandsTextLabel.text!)
+        addedOperandsLabel.text = operandsTextLabel.text!.formatNumber()
         addedOperandsLabel.textAlignment = .right
         addedOperandsLabel.textColor = UIColor.white
         addedOperandsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +78,7 @@ class CalculateViewController: UIViewController {
     //MARK: - operandButtonsTapped()
     @IBAction private func operandButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
-        let formattedText = formatNumber(senderLabelText)
+        let formattedText = senderLabelText.formatNumber()
         
         if operandsTextLabel.text == "NaN" {
             operandsTextLabel.text = ""
@@ -107,7 +107,7 @@ class CalculateViewController: UIViewController {
     @IBAction private func operatorButtonsTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         guard let operandLabelText = operandsTextLabel.text else { return }
-        let formattedNumber = formatNumber(operandLabelText)
+        let formattedNumber = operandLabelText.formatNumber()
 
         if operandsTextLabel.text == "NaN" {
             return
@@ -244,19 +244,5 @@ class CalculateViewController: UIViewController {
     private func deleteTextLabelText() {
         operatorTextLabel.text = ""
         operandsTextLabel.text = "0"
-    }
-    
-    private func formatNumber(_ input: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
-        guard let numberFormattedResult = numberFormatter.number(from: input) else {
-            return OperatorError.unknown.errorDescription
-        }
-        guard let formattedResult = numberFormatter.string(from: numberFormattedResult) else {
-            return OperatorError.unknown.errorDescription
-        }
-        return formattedResult
     }
 }
