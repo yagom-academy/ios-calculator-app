@@ -14,17 +14,15 @@ enum Operator: Character, CaseIterable, CalculateItem {
     // MARK: - Action
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
-        switch self.rawValue {
-        case "+":
+        switch self {
+        case .add:
             return add(lhs: lhs, rhs: rhs)
-        case "-":
+        case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
-        case "/":
+        case .divide:
             return try divide(lhs: lhs, rhs: rhs)
-        case "*":
+        case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
-        default:
-            return 0.000000000999
         }
     }
     
