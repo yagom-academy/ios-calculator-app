@@ -189,7 +189,6 @@ class CalculateViewController: UIViewController {
         if operandsTextLabel.text?.isEmpty == false {
             operandsTextLabel.text? = "0"
             expressionParserInput.removeLast()
-        } else {
             return
         }
     }
@@ -210,7 +209,7 @@ class CalculateViewController: UIViewController {
             expressionParserInput += "0"
         } else if operandsTextLabel.text?.count == 1,
                   operandsTextLabel.text == "0" {
-            operandsTextLabel.text = "0"
+            return
         } else {
             operandsTextLabel.text! += senderLabelText
             expressionParserInput.append(senderLabelText)
