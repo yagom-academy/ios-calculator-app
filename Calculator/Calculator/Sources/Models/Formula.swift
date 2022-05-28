@@ -12,15 +12,14 @@ struct Formula {
     var operators: CalculatorItemQueue<Character>
     
     mutating func result() throws -> Double {
-        guard var result: Double = operands.dequeue() else { throw FormulaError.noOperandsInQueue }
+        guard var result: Double = operands.dequeue() else {
+            throw FormulaError.noOperandsInQueue }
         while operators.isEmpty == false {
-            guard let eachOperator = operators.dequeue()
-            else {
+            guard let eachOperator = operators.dequeue() else {
                 throw FormulaError.emptyError
             }
-            guard let operandsItem = operands.dequeue()
-            else {
-                throw FormulaError.emptyError
+            guard let operandsItem = operands.dequeue() else {
+                throw FormulaError.noOperandsInQueue
             }
             let operatorsItem = OperatorItem(rawValue: eachOperator)
             result = (operatorsItem?.calculate(lhs: result, rhs: operandsItem))!
