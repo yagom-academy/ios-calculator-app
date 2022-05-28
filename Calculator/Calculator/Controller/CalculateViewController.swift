@@ -133,7 +133,6 @@ class CalculateViewController: UIViewController {
         do {
             result = try calculator.result()
         } catch {
-            print(OperatorError.devideFail.errorDescription)
             addStackView()
             expressionParserInput = ""
             operatorTextLabel.text = ""
