@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var numberStackLabel: UILabel!
     @IBOutlet weak var numberStackLabel2: UILabel!
-    @IBOutlet weak var opperLabel: UILabel!
-    @IBOutlet weak var opperLabel2: UILabel!
+    @IBOutlet weak var operatorStackLabel: UILabel!
+    @IBOutlet weak var operatorStackLabel2: UILabel!
     
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
@@ -27,15 +27,14 @@ class ViewController: UIViewController {
     
     let numberFormatter = NumberFormatter()
 
-    var flag = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         numberLabel.text = "0"
         operatorLabel.text = ""
-        numberStackLabel.removeFromSuperview()
+        numberStackLabel.removeFromSuperview()   
         numberStackLabel2.removeFromSuperview()
-        opperLabel.removeFromSuperview()
-        opperLabel2.removeFromSuperview()
+        operatorStackLabel.removeFromSuperview()
+        operatorStackLabel2.removeFromSuperview()
         
         numberFormatter.roundingMode = .floor
         numberFormatter.numberStyle = .decimal
@@ -63,6 +62,7 @@ class ViewController: UIViewController {
             
         } else if presentNumbers.contains(".") && ButtonTitle == "." {
             return
+            
         } else {
             presentNumbers += "\(ButtonTitle)"
             numberLabel.text = "\(presentNumbers)"
@@ -78,7 +78,6 @@ class ViewController: UIViewController {
         operatorLabel.text = "\(ButtonTitle)"
 
         if ["+", "−", "÷", "×"].contains(ButtonTitle) && !presentNumbers.isEmpty {
-    
             let stackView = UIStackView()
             let stackNumberLabel = UILabel()
             let stackOperatorLabel = UILabel()
@@ -104,6 +103,7 @@ class ViewController: UIViewController {
             stackView.addArrangedSubview(stackNumberLabel)
             valuesStackView.addArrangedSubview(stackView)
             numberLabel.text = "0"
+            
         } else if ["="].contains(ButtonTitle) {
             inputValue += presentNumbers
             
@@ -120,9 +120,9 @@ class ViewController: UIViewController {
                 print(result)
                 print("----")
             }
-
             inputValue = ""
             presentNumbers = ""
+            
         }
     }
     
@@ -130,20 +130,31 @@ class ViewController: UIViewController {
         let ButtonTitle = sender.currentTitle!
         
         if ["AC"].contains(ButtonTitle) {
-            inputValue = ""
             presentNumbers = ""
+            inputValue = ""
             numberLabel.text = "0"
-
+            operatorLabel.text = ""
+            valuesStackView.subviews.forEach { views in
+                views.removeFromSuperview()
+            }
         } else if ["CE"].contains(ButtonTitle) {
             presentNumbers = ""
             numberLabel.text = "0"
             print(presentNumbers)
             
-        } else if ["⁺⁄₋"].contains(ButtonTitle) {
-            presentNumbers = String((Int(presentNumbers) ?? 0) * -1)
+        } else if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
+            if presentNumbers.contains("-") {
+               presentNumbers = presentNumbers.filter { word in
+                    if word == "-"{
+                        return false
+                    }
+                    return true
+                }
+            } else {
+                presentNumbers = "-" + presentNumbers
+            }
             numberLabel.text = "\(presentNumbers)"
             print(presentNumbers)
-            
         }
     }
     

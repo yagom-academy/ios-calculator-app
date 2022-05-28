@@ -369,8 +369,8 @@
                         <outlet property="numberStackLabel" destination="Hcb-r0-27f" id="nG4-us-lVY"/>
                         <outlet property="numberStackLabel2" destination="oGo-LN-bKL" id="W5i-Y0-GJA"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="41j-Dr-DiQ"/>
-                        <outlet property="opperLabel" destination="alw-Zd-2pT" id="pK5-zu-Cig"/>
-                        <outlet property="opperLabel2" destination="c7v-6K-W40" id="1C6-R7-773"/>
+                        <outlet property="operatorStackLabel" destination="alw-Zd-2pT" id="pK5-zu-Cig"/>
+                        <outlet property="operatorStackLabel2" destination="c7v-6K-W40" id="eKO-sI-Ju7"/>
                         <outlet property="previousValues" destination="BOT-7g-vxv" id="Buo-SR-Zk6"/>
                         <outlet property="valuesStackView" destination="XRe-QE-UJf" id="wLL-OS-skH"/>
                         <outletCollection property="inputNumberButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="fjh-47-MXR"/>
