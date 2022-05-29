@@ -32,13 +32,12 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(resultOperator, .subtract)
     }
     
-    func test_parse_string변환해서_정상적으로_연산값을_반환하는지() {
+    func test_parse_string변환해서_정상적으로_연산값을_반환하는지() throws {
         // given
-        var formula = ExpressionParser.parse(from: "123 × 123 ÷ -123")
+        var formula = ExpressionParser.parse(from: "12 ÷ 130 - 3")
         
         // when
-        let result = 123.0 * 123.0 / -123.0
-        
+        let result = 12.0 / 130.0 - 3.0
         // then
         XCTAssertEqual(result, try formula.result())
     }
