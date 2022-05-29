@@ -8,8 +8,16 @@
 import UIKit
 
 class IndividualInputStackView: UIStackView {
-    private let operatorLabel = UILabel()
-    private let operandLabel = UILabel()
+    private let operatorLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        return label
+    }()
+    private let operandLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        return label
+    }()
     
     init(operatorData: String, operandData: String) {
         operatorLabel.text = operatorData
@@ -25,8 +33,6 @@ class IndividualInputStackView: UIStackView {
     }
     
     private func setupStackView() {
-        operatorLabel.textColor = .white
-        operandLabel.textColor = .white
         self.addArrangedSubview(operatorLabel)
         self.addArrangedSubview(operandLabel)
         
