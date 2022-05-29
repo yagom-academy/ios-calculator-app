@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     
     var inputValue: String = ""
     var presentNumbers: String = ""
+    var presentOperator: String = ""
     var operatorStorage: [String] = []
     var operatorChoice: String = ""
     
@@ -74,34 +75,16 @@ class ViewController: UIViewController {
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
-        
+        presentOperator = ButtonTitle
         operatorLabel.text = "\(ButtonTitle)"
         
         if ["+", "−", "÷", "×"].contains(ButtonTitle) && !presentNumbers.isEmpty {
-            let stackView = UIStackView()
-            let stackNumberLabel = UILabel()
-            let stackOperatorLabel = UILabel()
-            
-            let bottomOffset = CGPoint(x: 0,
-                                       y: previousValues.contentSize.height
-                                       - previousValues.bounds.height
-                                       + numberLabel.font.lineHeight)
-            previousValues.setContentOffset(bottomOffset, animated: false)
-            stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-            stackNumberLabel.textColor = .white
-            stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-            stackOperatorLabel.textColor = .white
-            
+
             operatorStorage.append(" \(ButtonTitle) ")
             
             print(operatorStorage)
             
-            stackNumberLabel.text = "\(presentNumbers)"
-            stackOperatorLabel.text = "\(ButtonTitle) "
-            
-            stackView.addArrangedSubview(stackOperatorLabel)
-            stackView.addArrangedSubview(stackNumberLabel)
-            valuesStackView.addArrangedSubview(stackView)
+            makeStackLabel()
             numberLabel.text = "0"
             
         } else if ["="].contains(ButtonTitle) {
@@ -160,5 +143,27 @@ class ViewController: UIViewController {
         }
     }
     
+    func makeStackLabel() {
+        let stackView = UIStackView()
+        let stackNumberLabel = UILabel()
+        let stackOperatorLabel = UILabel()
+        
+        let bottomOffset = CGPoint(x: 0,
+                                   y: previousValues.contentSize.height
+                                   - previousValues.bounds.height
+                                   + numberLabel.font.lineHeight)
+        previousValues.setContentOffset(bottomOffset, animated: false)
+        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackNumberLabel.textColor = .white
+        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackOperatorLabel.textColor = .white
+        
+        stackNumberLabel.text = "\(presentNumbers)"
+        stackOperatorLabel.text = "\(presentOperator) "
+        
+        stackView.addArrangedSubview(stackOperatorLabel)
+        stackView.addArrangedSubview(stackNumberLabel)
+        valuesStackView.addArrangedSubview(stackView)
+    }
 }
 
