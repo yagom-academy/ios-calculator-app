@@ -9,20 +9,13 @@ import UIKit
 class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        exampleStackView1.isHidden = true
-        exampleStackView2.isHidden = true
-        
     }
   
     private var expressionParserInput: String = "0"
     private var isCalculated = false
     
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var exampleStackView1: UIStackView! // 지워줘야 할 것
-    @IBOutlet private weak var exampleStackView2: UIStackView!// 애도 지우고
     @IBOutlet private weak var arrangedStackView: UIStackView!
-    @IBOutlet private weak var operatorStackLabel: UILabel! // 애네도
-    @IBOutlet private weak var operandStackLabel: UILabel!  // 따로 설정해줘야할 듯
     @IBOutlet private weak var operandsTextLabel: UILabel!
     @IBOutlet private weak var operatorTextLabel: UILabel!
     
@@ -208,7 +201,7 @@ class CalculateViewController: UIViewController {
         addStackSubviews(addedStackView)
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0,
-                                            y: scrollView.contentSize.height - scrollView.bounds.height + 22),
+                                            y: scrollView.contentSize.height - scrollView.bounds.height),
                                     animated: false)
     }
     
