@@ -16,7 +16,8 @@ final class CalculatorViewController: UIViewController {
     
     private let zero: String = "0"
     private let emptyString: String = ""
-    private let failedResult = "NaN"
+    private let failedResult: String = "NaN"
+    private let whiteSpace: String = " "
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
@@ -28,12 +29,12 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func setupViews() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        operandLabel.text = zero
+        operatorLabel.text = emptyString
     }
-
+    
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-
+        
         guard let digit = sender.currentTitle else{ return }
         guard let validLabel = operandLabel.text else { return }
         
@@ -79,9 +80,9 @@ final class CalculatorViewController: UIViewController {
         
         if validLabel.contains(Character(dot)) {
             return
-        } else if operandLabel.text == "0" {
+        } else if operandLabel.text == zero {
             operandLabel.text = "0."
-            userInputNumber.append(contentsOf: "0")
+            userInputNumber.append(contentsOf: zero)
             userNumberTapped = true
         } else {
             operandLabel.text = (operandLabel.text ?? emptyString) + dot
@@ -98,19 +99,19 @@ final class CalculatorViewController: UIViewController {
         
         addInputStack()
         operatorLabel.text = operators
-        operandLabel.text = "0"
+        operandLabel.text = zero
         userNumberTapped = false
         userInput.append(contentsOf: userInputNumber)
-        userInput.append(contentsOf: " ")
+        userInput.append(contentsOf: whiteSpace)
         userInput.append(operators)
-        userInput.append(contentsOf: " ")
-        userInputNumber = ""
+        userInput.append(contentsOf: whiteSpace)
+        userInputNumber = emptyString
     }
     
     @IBAction private func didTapPlusMinusSignButton(_ sender: UIButton) {
         guard let validLabel = operandLabel.text else { return }
         
-        if operandLabel.text == "0" {
+        if operandLabel.text == zero {
             return
         }
         
@@ -124,44 +125,44 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func removeAllButton(_ sender: UIButton) {
-        userInput = ""
-        userInputNumber = ""
+        userInput = emptyString
+        userInputNumber = emptyString
         setupViews()
         removeStack()
         userNumberTapped = false
     }
     
     @IBAction private func removeCurrentNumberButton(_ sender: UIButton) {
-        operandLabel.text = "0"
-        userInputNumber = ""
+        operandLabel.text = zero
+        userInputNumber = emptyString
         userNumberTapped = false
     }
     
     @IBAction private func didTapCalculateButton(_ sender: UIButton) {
-        if operatorLabel.text == "" {
+        if operatorLabel.text == emptyString {
             return
         }
         
         addInputStack()
-        operatorLabel.text = ""
+        operatorLabel.text = emptyString
         userInput.append(userInputNumber)
         do {
             var result = ExpressionParser.parse(from: userInput)
             var number = doNumberFormatter(number: try result.result())
             
             if number == "-0" {
-                number = "0"
+                number = zero
             }
             
             operandLabel.text = number
-            userInput = ""
+            userInput = emptyString
             userInputNumber = number.replacingOccurrences(of: ",", with: "")
         } catch OperatorError.divideZero {
-            operandLabel.text = "NaN"
-            userInput = ""
+            operandLabel.text = failedResult
+            userInput = emptyString
         } catch OperatorError.wrongFormula {
-            operandLabel.text = "NaN"
-            userInput = ""
+            operandLabel.text = failedResult
+            userInput = emptyString
         } catch {
             return
         }
@@ -169,6 +170,7 @@ final class CalculatorViewController: UIViewController {
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
         let validNumber = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
+        
         guard let doubleNumber = Double(validNumber) else { return nil }
         let number = doNumberFormatter(number: doubleNumber)
         
@@ -239,7 +241,7 @@ final class CalculatorViewController: UIViewController {
         numberFormatter.maximumIntegerDigits = 20
         
         guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
-            return "NaN"
+            return failedResult
         }
         return formattedNumber
     }
