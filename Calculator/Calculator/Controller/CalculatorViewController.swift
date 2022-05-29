@@ -188,20 +188,20 @@ final class CalculatorViewController: UIViewController {
         guard let doubleNumber = Double(validNumber) else { return nil }
         let number = doNumberFormatter(number: doubleNumber)
         
-        guard let `operator` = operatorLabel.text else {
-            return nil
-        }
+        guard let `operator` = operatorLabel.text else { return nil }
         
-        let operatorStackLabel = UILabel()
-        let numberStackLabel = UILabel()
-        
-        operatorStackLabel.textColor = .white
-        operatorStackLabel.text = `operator`
-        
-        numberStackLabel.textColor = .white
-        numberStackLabel.text = number
+        let operatorStackLabel = setLabel(`operator`)
+        let numberStackLabel = setLabel(number)
         
         return (operatorStackLabel, numberStackLabel)
+    }
+    
+    func setLabel(_ label: String) -> UILabel {
+        let newLabel = UILabel()
+        newLabel.textColor = .white
+        newLabel.text = label
+        
+        return newLabel
     }
     
     private func generateStack() -> UIStackView? {
@@ -212,8 +212,6 @@ final class CalculatorViewController: UIViewController {
         
         stack.axis = .horizontal
         stack.spacing = 8
-        stack.distribution = .fill
-        stack.alignment = .fill
         
         stack.addArrangedSubview(operatorStackLabel)
         stack.addArrangedSubview(numberStackLabel)
