@@ -51,6 +51,16 @@
 - `고차함수`, `closure`, `Map`, `Filter`, `Reduce`, `Reduce(into:)`
 - `??`, `NaN`, `Error Handling`, `XCTAssertThrowsError`
 - `의존관계 Property Private 설정`
+- `고차함수`, `map`, `filter`, `reduce`, `flatMap`, `compactMap`
+- `where`, `element`, 
+- `Auto Layout`, `overhead`, `@inlinable`
+- `subviews`, `arrangedSubviews`, `UIStackView`
+- `addSubview`, `addArrangedSubview`
+- `removeArrangedSubview`, `removeFromSuperview`, `isHidden`, `Alpha`
+- `Offset`, `SetContentOffset`, `ContentSize`, `Frame`, `Bounds`
+- `Main Run Loop`, `Update Cycle`
+- `LayoutSubviews`, `SetNeedsLayout`, `LayoutIfNeeded`
+
 
 # 그라운드 룰
 
@@ -453,9 +463,317 @@ let result = operands.queue.enqueueStack.reduce(0) { operatorCase?.calculate(lhs
 # [STEP 3]
 
 ## 고민한점 
+### 1. 음수 계산
+
+- 일반적인 계산기는 음수의 값이 입력받았을 때도, 이를 음수로 인식하여 문제없이 계산을 해나갑니다. 하지만, 계산기 프로젝트에서의 계산은 `Operator`열거형 구조의 `calculate` 메서드를 통해 진행됩니다. 여기서 `subtract` 케이스의 `rawValue`를 키보드에 있는 `-`로 입력하면, "1-(-1)"이라는 `input`에 대하여 `subtract` 케이스가 두 번 언급한 것으로 받아들여, 계산을 두 번 실행하고자 하고, 이는 곧 피연산수 부족으로 인하여 오류를 발생시킵니다.
+- 이를 해결하기 위하여 처음에는 음수로 입력된 값이면, 일반적인 경우 피연산수의 개수보다 연산자의 개수가 크거나 같을 것이므로, 피연산수의 수가 연산자의 수보다 1개 더 많아질 때까지, 반복문을 실행시켜, 각각의 "+-", "/-", "*-", "--"의 경우에 맞는 동작을 구현해야할까 고민하였습니다.
+- 하지만, 더욱 근본적인 측면에 집중한 결과, 빼기의 "-"와, 음수를 의미하는 "-"부호에 대하여 일반적으로는 같다고 생각하나, 컴퓨터에서는 이를 서로 다른 것으로 인식하게 한다면 위의 문제를 해결할 수 있었습니다. 스토리보드에 접근하여 마이너스 연산 버튼의 `currentTitle`을 확인한 결과, 키보드에 있는 "-" 부호와 서로 다르다는 것을 발견하였습니다. 이에 `Operator`열거형 구조의 `subtract` 케이스의 `rawValue`를 `currentTitle`과 같은 부호로 설정하고, 부호전환에 관하여서는 키보드에 있는 "-" 부호를 이용한 결과, 빼기와 음수를 컴퓨터에서 구분하여 인식이 가능해져 음수 연산이 정상적으로 작동하였습니다.
+
+<br>
+
+### 2. stackView 내 subview 삭제
+
+- 메인 스토리 보드에 구현되어 있는 `stackView` 내 두 개의 `subView`를 코드를 통해 제거하고자 하였습니다. 이에 `removeArrangedSubview` 메서드를 통해 해당 뷰들을 제거하였습니다. 최초하면에는 이 서브뷰들이 보이지 않아 제거된 줄 알았으나, 사용자 입력값을 뷰에 올리게 될 때, 계산기 화면의 구석에서 다시 등장하는 것을 확인할 수 있었습니다. 이를 통해 해당 메서드로는 없어진 것처럼 보이나 사실은 없어진게 아닐까 의심을 하게 되었습니다. 이를 바탕으로 뷰 계층구조와 자료들을 검색해본 결과, `removeArrangedSubview` 메서드를 통해서는 배열에서 해당 뷰를 제거할 수는 있지만, 여전히 뷰의 `hierarchy`에는 남아있고, 심지어는 제거된 뷰들의 위치와 크기가 더 이상 스택 뷰에서 관리되지 않는다는 사실을 알 수 있었습니다.
+- 그래서 해당 뷰들을 뷰의 `hierarchy`에도 남지 못하도록, 확실하게 제거하고자 `removeFromSuperview` 메서드를 실행하였고, 이를 해결할 수 있었습니다. 추가로, 애플 개발자 문서를 찾아보니 `removeFromSuperview` 메서드 이외에도 뷰의 `isHidden`속성을 `true`로 설정하면 같은 결과를 도출할 수 있음을 알게 되었습니다.
+<br>
 
 ## 의문점
 
+### 1. 함수 내 guard 문을 별도의 함수로 기능 분리
+
+- `touchNumberButton` 메서드만 살펴보아도 `guard`문이 6개나 쓰였습니다. 물론 옵셔널 바인딩을 위하여 사용한 경우도 있지만, 조건을 설정해주기 위하여 guard문을 사용한 경우도 적지 않았습니다. 이에, 함수의 기능 분리를 위하여, 각각의 guard문을 `touchNumberButton` 내에서 분리하여 별도의 함수 내에 구현하고, 이를 호출만 하는 방식으로 `touchNumberButton` 메서드를 수정해보았습니다. 하지만, 이는 정상적으로 작동하지 않았습니다. 
+- 이러한 실패 결과가 나타난 이유를 예를 들어 설명드리자면, 3개의 조건을 만족하였을 때 프로퍼티를 변경하는 `method`라는 함수를 구현해보았습니다. 아래와 같이 하나의 함수 내 3개의 guard문이 있고 값을 변경하는 코드가 존재할 때는 `condition1`을 충족한 이후, 이를 충족하는 상태에서 `condition2`에 접근하고, 또 이를 충족하면 `condition3`에 접근하여, 모두 충족할 시, 값을 변경하는 코드에 접근할 수 있게 됩니다.
+
+```swift
+func method() {
+    guard condition1 else { return }
+    guard condition2 else { return }
+    guard condition3 else { return }
+    
+    someProperty = changedProperty
+}
+```
+<br>
+
+- 하지만 아래와 같이 각각의 `guard`문을 함수로 빼내어 이를 호출하는 방식으로 진행할 시, `firstGuard`문의 조건을 충족한다면, 첫번쨔 조건을 충족했다는 상태에서 `secondGuard()` 함수에 접근하는 것이 아니라, 조건을 충족한 상태가 만료된 채 두번째 `guard`문 함수에 접근하는 것으로 인식하였습니다. 즉, 3가지 조건을 충족한다 하여도, 값을 변경하는 코드에 접근하였을 때의 상태는 그 3가지 조건을 동시에 만족한 상태가 아닌 것입니다. 
+```swift
+func method() {
+    firstGuard()
+    secondGuard()
+    thirdGuard()
+    someProperty = changedProperty
+}
+
+func firstGuard() {
+    guard condition1 else { return }
+}
+
+func secondGuard() {
+    guard condition2 else { return }
+}
+
+func thirdGuard() {
+    guard condition3 else { return }
+}
+
+```
+<br>
+
+- 이를 바탕으로, 저는 `guard`문을 함수 외부로 빼내기에는 어렵다고 판단이 되는데, 제가 이해한 작동 방식이 옳은 것인지, 그리고 이를 해결할 수 있는 방법이 무엇이 있을지 여쭈어보고 싶습니다.
+
+
+
+<br>
+
+### 2. stackView 내 subview로 Label 추가 시 애니메이션
+
+![May-26-2022 20-51-04](https://user-images.githubusercontent.com/99063327/170482942-b1586a97-f5fb-4675-9003-28df8e00cbe7.gif)
+
+- 계산기에서 입력한 지난 연산자와 피연산수는 입력 이후, 스크롤뷰 내 스택뷰에 쌓이는 방식으로 진행하고자 하였습니다. 이에 `Label`의 속성을 생략하면 다음과 같은 코드를 작성할 수 있었습니다.
+
+```swift
+private func clearLastInput() {
+    lastInput.subviews.forEach { $0.removeFromSuperview() }
+}
+
+private func addCalculatorItems() {
+    ...
+    let label = UILabel()
+    label.isHidden = true
+    lastInput.addArrangedSubview(label)
+    UIView.animate(withDuration: 1) {
+        label.isHidden = false
+    }
+    ...
+}
+```
+<br>
+
+- 먼저, 스토리보드에서 확인할 수 있는 초기에 설정된 스택뷰를 `clearLastInput` 함수를 통하여 제거하고, 연산자 버튼이 터치될 때마다, 이전까지 입력된 피연산수와 연산자를 스택뷰에 추가하기 위하여, `addCalculatorItems` 함수 내 `addArrangedSubview` 함수를 사용하였습니다. 하지만 이를 작동한 결과는 위의 동적 이미지에서 확인하실 수 있듯이, 처음의 입력값은 왼쪽에서 오른쪽으로 이동하는 것에 비해, 나머지 입력값은 아래에서 위로 이동함을 알 수 있었습니다.
+- 지금까지 고민해본 결과, `clearLastInput` 함수로 인하여 스택뷰가 아무것도 없을 때는 왼쪽에서 오른쪽으로 이동하지만, 스택뷰가 하나라도 존재한다면 아래에서 위로 애니메이션이 작동하는 것 같습니다. 현재는 `Label`을 스택뷰 안에 넣어 뷰를 추가하는 방식으로 진행하였는데, 이렇게 진행할 시에는 모든 입력값들이 왼쪽에서 오른쪽으로 이동함을 발견할 수 있었습니다.
+- 왜 이러한 문제가 일어나는지 오랜 시간 고민해봐도 마땅한 근거를 발견하지는 못했습니다. 이에 찰리는 위의 문제가 어떤 이유로 일어나는지 알고 계신지 질문드리고 싶습니다.
+
+<br>
+
+### 3. UILabel.text 옵셔널 처리
+
+- Step2의 피드백을 통하여 ??의 사용을 지양하고, 옵셔널 바인딩 방법을 사용해야 함을 배울 수 있었습니다. 이를 바탕으로 Step3를 진행해보았는데, `touchNumberButton` 메서드와 관련하여 `guard` 구문을 통하여 "text = numberInput.text"으로 옵셔널 바인딩을 하여, 여러 조건을 충족하는지 `text`를 통해 확인해보고, 최종적으로 `numberInput.text`의 값을 최신화해주기 위해선 "numberInput.text = text"와 같이 `text`를 다시 넣어주어야 했습니다.
+- 이에, 옵셔널 바인딩을 다음의 방법으로 진행하는 것이 옳은지 확신이 들지 않고, 해당 프로퍼티를 계속 이용하고자 하는데, 그 프로퍼티 자체의 네이밍을 사용하면서 옵셔널 추출을 하는 또다른 방식이 있을지 궁금합니다.
+<br>
+
+### 4. stackView 화면 하단 자동 이동
+
+```swift
+private func goToBottomOfScrollView() {
+    scrollView.setContentOffset(CGPoint(x: 0,
+                                        y: scrollView.contentSize.height - scrollView.bounds.height),
+                                animated: true)
+}
+```
+<br>
+
+- 저는 위의 코드를 `touchOperatorButton` 함수 내에 구현하여 연산자 버튼이 클릭되어, 입력값들이 스택뷰에 올라간 이후, `goToBottomOfScrollView` 함수를 통하여 화면이 아래로 스크롤 되도록 구현해보았습니다. 그러던 중, 문제점을 발견하였는데, `addCalculatorItems` 함수 내에서 "UIView.animate(withDuration: 1) { label.isHidden = false }" 코드가 없으면, 새로운 입력값이 스택뷰에 오를때마다 실시간으로 화면이 아래로 스크롤 되는 것이 아닌, 한박자 늦게 이동되고 있음을 발견하였습니다. 
+- `animation`의 유무가 화면 자동 이동에 영향을 미친 것인지, 혹은 화면 자동 이동 코드는 모두 한박자 늦게 이동되고 있었는데, `animation`을 통해 화면이 자동적으로 이동된 것인지 혼란스러워 질문드리고자 합니다.
+
+- <animation 적용시>
+
+    ![May-26-2022 21-25-41](https://user-images.githubusercontent.com/99063327/170487742-ba7a66f9-402e-4a2f-81b8-fed06ec1948d.gif)
+
+
+- <animation 미적용시>
+
+    ![May-26-2022 21-27-13](https://user-images.githubusercontent.com/99063327/170487905-10dc6b9e-29e4-4303-a19c-86adac5e5d9c.gif)
+
 ## 의문점 해결
+### 1. 함수 내 guard 문을 별도의 함수로 기능 분리
+
+```swift
+func check1() -> Bool {} 
+func check2() -> Bool {} 
+func check3() -> Bool {} 
+
+func doSomething() { 
+        guard check1(), check2(), check3() else { return } 
+        
+        // do something 
+}
+```
+
+- 위와 같이 기능 분리 가능하다는 사실을 깨달았고, 외부에 조건문을 생성하여도 충분히 조건문에 해당하는 값을 이용할 수 있다는 사실을 알게 되었습니다. 이를 바탕으로, `guard` 구문을 포함하여 함수 내 기능을 최대한 분리하여 하나의 함수가 하나의 기능만을 수행하도록 수정해보았습니다.
+- 코드(`numberButtonDidTapped`)
+    
+    ```swift
+    @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
+            updateNumberInput(sender)
+        }
+        
+        private func updateNumberInput(_ sender: UIButton) {
+            guard let number = checkNumber(sender) else {
+                return
+            }
+            
+            guard let formattedNumber = formatNumber(number) else {
+                return
+            }
+            
+            setNumber(formattedNumber)
+        }
+        
+        private func checkNumber(_ sender: UIButton) -> String? {
+            guard let firstConditionPassedText = isAdditionalNumberInput(sender) else {
+                return nil
+            }
+            
+            guard let secondConditionPassedText = isUsingComma(sender, firstConditionPassedText) else {
+                return nil
+            }
+            
+            return secondConditionPassedText
+        }
+        
+        private func isAdditionalNumberInput(_ sender: UIButton) -> String? {
+            guard let text = numberInput.text else {
+                return nil
+            }
+            
+            guard isNotAdditionalNumberInputAfterResultHasBeenShown(sender) else {
+                return nil
+            }
+            return text
+        }
+        
+        private func isNotAdditionalNumberInputAfterResultHasBeenShown(_ sender: UIButton) -> Bool {
+            guard lastInput.arrangedSubviews.count <= 0 || operatorInput.text != "" else {
+                clearLastInput()
+                
+                numberInput.text = sender.currentTitle
+                return false
+            }
+            return true
+        }
+        
+        private func isUsingComma(_ sender: UIButton, _ text: String) -> String? {
+            guard isCommaButtonNotTappedTwice(sender: sender, number: text) else {
+                return nil
+            }
+            
+            guard let newText = addNewNumber(sender, text) else {
+                return nil
+            }
+            
+            guard newText.contains(".") == false else {
+                return nil
+            }
+            
+            return newText
+        }
+            ...
+    }
+    ```
+    
+- 먼저, `numberButtonDidTapped` 함수의 기능은 `updateNumberInput` 함수 만을 호출합니다. 즉, 숫자 버튼이 눌릴 때는 숫자 입력값을 업데이트 한다는 하나의 기능만을 수행합니다. 이는 은닉화와도 연결이 되는데, 사람들은 숫자 버튼이 눌릴 때 어떻게 작동하는 지 궁금해하지도 않고, 만약 같은 개발자가 봤을때, 이 버튼은 숫자 입력을 업데이트 하는지만 확인하고 넘어가고 싶을 때 이와 같이 코드를 작성하면 매우 유용합니다. 뿐만 아니라, 코드 내부를 더 알고 싶다면, `updateNumberInput` 함수도 찾아 그 내부 구현을 보면 되는 것입니다.
+- `numberButtonDidTapped` 함수에서 설명하고 싶은 부분은 조건문을 외부 함수로 분리할 때, 각 조건의 결과값을 이용하고 싶을 때의 경우를 보여주고 싶습니다. `updateNumberInput` 함수 내에서는 `guard` 문으로 `checkNumber`, `fomatNumber`를 한 이후, `setNumber`를 수행합니다. 만약 여기서 `guard`문을 하지 않고, 그냥 `checkNumber`, `formatNumber`를 사용하면, 이전 함수에서 조건에 이어서 진행되지 않습니다. 즉, `checkNumber`에서 기준에 부합하지 않은 숫자임을 인식했다면 이 숫자를 `format`할 필요가 없음에도 불과하고, 그냥 하나의 함수가 끝났기 때문에, 저절로 `formatNumber` 함수로 순서가 이어집니다. 그리고 `checkNumber`의 결과값을 변수에 넣어주지 않으면, `formatNumber`는 `updateNumberInput` 함수 초기 실행 때 받은 `sender`를 통한 숫자를 이용하여 연산을 진행하기 때문에 연속적인 작업이라 할 수 없습니다.
+- 그러므로, `guard`문을 이용하여 조건에 부합하지 않을 시 바로 함수가 종료되게 설정을 하고, 또 결과값을 변수에 넣어주어, 이를 연속적으로 다음 함수의 입력값으로 사용하면, 하나의 함수 내에서 연속적인 `guard`문을 사용했을 때와 동일한 수행 과정을 보여줍니다.
+- 코드(operatorButtonDidTapped)
+    
+    ```swift
+    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
+            updateOperatorInput(sender)
+            resetNumberInput()
+            goToBottomOfScrollView()
+        }
+        
+        private func updateOperatorInput(_ sender: UIButton) {
+            guard checkOperator(sender) == true else {
+                return
+            }
+            
+            addCalculatorItems()
+            setOperator(sender)
+        }
+        
+        private func checkOperator(_ sender: UIButton) -> Bool {
+            guard operatorButtonDidTappedWhileFirstOperandIsZero(sender) else {
+                return false
+            }
+            
+            if isAdditionalOperatorAfterResultHasBeenShown() {
+                return true
+            }
+            
+            guard isCurrentNumberEqualToZero(sender) else {
+                return false
+            }
+            
+            return true
+        }
+            ...
+    }
+    ```
+    
+- 다음으로, `operatorButtonDidTapped` 함수의 경우에는 함수의 분리에 있어 반환값을 필요로 하지 않았습니다. `checkOperator`는 `numberInput`, `isAdditionalOperatorAfterResultHasBeenShown`도 `numberInput`를, 그리고 마지막으로 `isCurrentNumberEqualToZero`은 `operatorInput`을 가지고 조건에 부합하는지 판단하였습니다. 처음에는 숫자 버튼 함수와 같이 반환값을 자꾸 이어서 주면 되지 않을까 생각했지만, 조건마다 사용하는 조건 대상이 차이가 있었고, 같은 조건 대상을 사용한다고 하더라도, 연속적인 조건이 아니었습니다. 그래서 이를 고민하다보니, 이는 `Bool` 값을 이용하여 해당 값을 반환하고 모두 만족하였을 경우 `true` 값을 반환한다면 3가지의 조건을 모두 만족하는 경우를 설정할 수 있었습니다.
+- 이러한 방법을 자꾸 연습해보아 본인이 쓴 코드가 적절한 수준의 로직만 드러내고 있는지를 항상 의심하여야 합니다. 함수의 역할에 맞는 작업만 하고 있는지, 아니면 본 기능 이외의 추가적인 기능도 수행하고 있는지 살펴보아야 합니다. 이는 단일 책임 원칙을 지키는 첫 걸음이 될 것입니다. 이 원칙을 지키지 못할 경우 결국 함수의 직관성, 가독성 등을 상실하게 될 것이므로 귀찮다고 눈을 돌리지 말고, 지금부터라도 함수를 간결하게 만드는 연습을 시작할 때임을 알게 되는 주제였습니다.
+<br>
+
+### 2. stackView 내 subview로 Label 추가 시 애니메이션
+
+- 아무것도 입력하지 않았을 때 (왼쪽에 있었을 때), 하나 입력했을 때 (오른쪽으로 이동 완료했을 때) 각 상태에 대해 `view debugging`으로 `frame` 확인 해보고, 의심가는 부분은 `label`이 추가되었을 때 `stackView` 의 `Frame`이 변해서 그렇게 될 것 같고, 맞다면 `autolayout`을 다시 설정해야할 것이라는 피드백을 받았습니다. 이에 대하여 뷰 디버깅을 해보니 아무것도 입력이 되지 않을 때는 `scrollView`가 삭제가 되어있었고, 레이블을 추가하고 나서야 비로서 스크롤뷰가 생성되어 `autolayout`이 풀려 다음과 같은 에러 결과가 나타난 것 같습니다. 이에 대한 해결책은 4번 문제에서 해결하고자 합니다.
+<br>
+
+### 3. UILabel.text 옵셔널 처리
+
+- `numberInput.text` 로 분기를 태우기 위해 `optional-binding`을 하고, `numberInput.text` 를 갱신하기 위해 `numberInput.text = text`로 할당하는 건 당연한 행동입니다. 이에 대해 고민한 것은, 1번 `guard`문과 연관되어 있는데, 그저 옵셔널 체이닝 하는 부분만을 외부 함수로 빼내면 이를 호출하기 위해서는 또 옵셔널 추출을 해야 합니다. 따라서, 외부 함수로 빼낼 때, 옵셔널 체이닝을 진행하면서 확인하고 싶은 조건을 이 함수 내부에서 확인한 후 결과값을 반환한다면 옵셔널 체이닝을 의미없고 무한하게 반복하는 작업을 피할 수 있습니다.
+<br>
+
+### 4. stackView 화면 하단 자동 이동
+
+- 스크롤뷰에 `setContentOffset` 메서드를 이용하여 새롭게 추가되는 스택뷰만큼 오프셋이 적용되면 입력을 받을때마다 자동으로 입력된 스택뷰의 크기만큼 하단으로 자동 이동하는 부분을 구현할 수 있었습니다. 화면은 좌우의 움직임 없이 상하의 움직임만을 구현하면 되므로 `setContentOffset` 내 파라미터로 `x` 값은 0으로 설정하고 `y` 값은 `scrollView`의 `contentSize` 높이에서 `bounds` 높이를 빼주면 되었습니다.
+- `Scroll` 되기 전 화면 기준으로 `scrollview.frame.size.height`가 `contentOffset`의 시작 기준점입니다. 즉, `contentOffset = 0`임을 의미합니다. 최초에 `scrollView` 화면이 스크롤이 전혀 안된 상태에서, 스크롤이 위로 올라가기 시작하면 `contentOffset` 값이 증가합니다.
+- `y` 값에 대하여 자세히 풀어 설명하자면, 스택뷰가 입력될 때 `contentSize`는 `scrollView`의 `contentLayoutGuide`의 크기로, 스크롤뷰의 전체 크기로 이해하면 편합니다. 즉, 화면 밑으로 추가적으로 입력하여 화면 안에 안 보이게 되어도, 그 부분까지 모두 포괄하는, 콘텐츠가 모두 들어있는 만큼의 크기입니다. 반면, `bounds`의 크기는 현재 프로젝트 내에서는 스크롤뷰 내 삽입한 스택뷰의 크기로, 고정된 크기입니다. 따라서, 스택뷰를 초과하여 입력하면 `contentsize`는 이에 맞게 자꾸 증가하지만, `bounds`의 크기는 화면에 보이는 크기에 도달하면 더 이상 증가하지 않습니다. 따라서, 그 차이만큼 `Offset`을 설정해주면, 화면이 추가될 때마다 자연스럽게 추가되는 동작을 구현할 수 있습니다.
+- 코드
+    
+    ```swift
+    private func goToBottomOfScrollView() {
+        scrollView.setContentOffset(CGPoint(x: 0,
+                                            y: scrollView.contentSize.height - scrollView.bounds.height),
+                                    animated: true)
+    }
+    ```
+    
+- 사진 (`contentSize`)
+
+    <img width="301" alt="ContentSize" src="https://user-images.githubusercontent.com/99063327/170857085-ca0316fe-11b1-4245-879a-88b88fac2b5c.png">
+
+- 사진 (`bounds`)
+
+    <img width="345" alt="bounds" src="https://user-images.githubusercontent.com/99063327/170857117-c5be8ac7-5e69-4a83-a460-f83e703c8a5b.png">
+
+- 영상 (`contentSize`와 `bounds`간 높이 비교)
+
+    ![May-29-2022 13-34-32](https://user-images.githubusercontent.com/99063327/170857144-d3205d08-6780-471d-975d-dcba3f6f2bb8.gif)
+
+- 그리고 애니메이션 기능을 원하지 않는 상태에서 화면의 하단 이동이 동기적으로 진행되기 위하여  `addCalculatorItems` 내에 `animation`을 추가하는 건 무의미한 행위임을 알게 되었습니다. 따라서, `animation`에 집중하는 것이 아닌 `goToBottomOfScrollView` 내 `layout` 변경사항에 집중할 필요가 있었습니다. `setContentOffset` 함수는 값이 변경될 때마다 호출이 되고는 있지만, 동기적으로 레이아웃 변경이 이루어지지 않고, 다음 `update cycle`에서 변경이 이루어지고 있습니다. 따라서 이를 즉각적으로, 다시 말해, 동기적으로 `layout` 변경 사항을 적용하기 위하여 `layoutIfNeeded` 메서드를 호출하여 해결할 수 있었습니다.
+- 코드
+    
+    ```swift
+    private func goToBottomOfScrollView() {
+            scrollView.layoutIfNeeded()
+            scrollView.setContentOffset(CGPoint(x: 0,
+                                                y: scrollView.contentSize.height - scrollView.bounds.height),
+                                        animated: true)
+        }
+    ```
+<br>
+
 
 ## 배운개념
+- `고차함수`, `map`, `filter`, `reduce`, `flatMap`, `compactMap`
+- `where`, `element`, 
+- `Auto Layout`, `overhead`, `@inlinable`
+- `subviews`, `arrangedSubviews`, `UIStackView`
+- `addSubview`, `addArrangedSubview`
+- `removeArrangedSubview`, `removeFromSuperview`, `isHidden`, `Alpha`
+- `Offset`, `SetContentOffset`, `ContentSize`, `Frame`, `Bounds`
+- `Main Run Loop`, `Update Cycle`
+- `LayoutSubviews`, `SetNeedsLayout`, `LayoutIfNeeded`
+
