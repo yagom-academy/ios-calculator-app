@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         var formula = ExpressionParser.parse(from: operationStack)
         do {
             let operationResult = try formula.result()
-            currentOperand.text = stringToDecimal(String(operationResult))
+            currentOperand.text = changeDecimalStyle(String(operationResult))
         } catch CalculatorError.divideByZero {
             currentOperand.text = "NaN"
         } catch {
@@ -131,7 +131,7 @@ extension ViewController {
         operationScrollView.setContentOffset(CGPoint(x: 0,
                                             y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
-    private func stringToDecimal(_ input: String?) -> String {
+    private func changeDecimalStyle(_ input: String?) -> String {
         let filteredInput = input?.filter {
             $0 != ","
         }
