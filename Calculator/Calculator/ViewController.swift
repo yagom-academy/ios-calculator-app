@@ -111,12 +111,14 @@ class ViewController: UIViewController {
 }
 //MARK: - UI Components
 extension ViewController {
-    private func createScrollViewContent(_ inputOperator: String, _ inputOperand: String) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.addArrangedSubview(createUILabel(inputOperator))
-        stackView.addArrangedSubview(createUILabel(inputOperand))
-        return stackView
+    private func addScrollViewContent() {
+        let currentContent = createOpearionStackViewContent(currentOperator.text ?? "", currentOperand.text ?? "")
+        operationStackView.addArrangedSubview(currentContent)
+    }
+    private func createOpearionStackViewContent(_ inputOperator: String, _ inputOperand: String) -> UILabel {
+        let currentOperation = "\(inputOperator) \(inputOperand)"
+        let currentOperationUILabel = createUILabel(currentOperation)
+        return currentOperationUILabel
     }
     private func createUILabel(_ text: String) -> UILabel {
         let uiLabel = UILabel()
@@ -124,10 +126,6 @@ extension ViewController {
         uiLabel.font = .preferredFont(forTextStyle: .title3, compatibleWith: nil)
         uiLabel.text = text
         return uiLabel
-    }
-    private func addScrollViewContent() {
-        let currentContent = createScrollViewContent(currentOperator.text ?? "", currentOperand.text ?? "")
-        operationStackView.addArrangedSubview(currentContent)
     }
     private func scrolling() {
         operationScrollView.setContentOffset(CGPoint(x: 0,
