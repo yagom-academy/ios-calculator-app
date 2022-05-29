@@ -34,7 +34,7 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = emptyString
     }
     //MARK: - 숫자 버튼
-   
+    
     @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
         guard let digit = sender.currentTitle else{ return }
         guard let currentOperandText = operandLabel.text else { return }
@@ -59,7 +59,7 @@ final class CalculatorViewController: UIViewController {
         isNumberTapped  = true
         userInputNumber.append(digit)
     }
-
+    
     //MARK: - 소수점 버튼
     
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
@@ -172,7 +172,7 @@ final class CalculatorViewController: UIViewController {
         return (operatorStackLabel, numberStackLabel)
     }
     
-    func setLabel(_ label: String) -> UILabel {
+    private func setLabel(_ label: String) -> UILabel {
         let newLabel = UILabel()
         newLabel.textColor = .white
         newLabel.text = label
@@ -210,9 +210,9 @@ final class CalculatorViewController: UIViewController {
     }
     //MARK: - 기타 메서드
     
-    func makeValidNumber() {
+    private func makeValidNumber() {
         guard let currentOperandText = operandLabel.text else { return }
- 
+        
         if currentOperandText.contains(",") {
             operandLabel.text = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
         }
@@ -228,7 +228,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    func initiateCaculator() {
+    private func initiateCaculator() {
         guard let currentOperandText = operandLabel.text else { return }
         
         if inputStackView.subviews.isEmpty == false, currentOperandText.isEmpty {
