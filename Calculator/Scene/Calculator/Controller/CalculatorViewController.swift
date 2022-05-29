@@ -37,10 +37,6 @@ class CalculatorViewController: UIViewController {
         }
         
         guard checkInvalidValue(inputedNumberLabel) else {
-            if valueLabels[0].text == "" {
-                valueLabels[1].text = number
-                return
-            }
             inputedNumberLabel += number
             valueLabels[1].text = inputedNumberLabel
             return
@@ -97,10 +93,13 @@ class CalculatorViewController: UIViewController {
             totalCalculation = ""
             holdScrollDown()
         } catch DevideError.nilOfValue {
+            clearStackView()
             setLabelText("0")
         } catch DevideError.insufficientOperator {
+            clearStackView()
             setLabelText("0")
         } catch DevideError.devideZero {
+            clearStackView()
             setLabelText("NAN")
         } catch {
             print(Error.self)
@@ -120,9 +119,32 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private func setLabelText(_ text: String) {
+        valueLabels[0].text = ""
+        valueLabels[1].text = text
+        totalCalculation = ""
+        numberOfCalculation = 1
+        createdStackViews = []
+    }
+    
+    private func checkInvalidValue(_ text: String) -> Bool {
+        if text == "0" || text == "NAN" || text == "-0" {
+            return true
+        }
+        return false
+    }
+    
+    private func hasDot(_ value: String) -> Bool {
+        if value.contains(".") {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     private func removeZeroHasDot(_ text: String) {
         var numericalValue = text
-        if hasDot(numericalValue) {
+        if !hasDot(numericalValue) {
             while numericalValue.last == "0" {
                 numericalValue.removeLast()
             }
@@ -130,6 +152,14 @@ class CalculatorViewController: UIViewController {
                 numericalValue.removeLast()
             }
             valueLabels[1].text = numericalValue
+        }
+    }
+    
+    private func inputToCalculation(_ text: String) {
+        if numberOfCalculation > 1 {
+            totalCalculation += " \(valueLabels[0].text!) \(text)"
+        } else {
+            totalCalculation += "\(text)"
         }
     }
     
@@ -143,30 +173,7 @@ class CalculatorViewController: UIViewController {
         valueLabels[1].text = text.filter { $0 != "-" }
         return
     }
-    
-    private func checkInvalidValue(_ text: String) -> Bool {
-        if text == "0" || text == "NAN" || text == "-0" {
-            return true
-        }
-        return false
-    }
-    
-    private func setLabelText(_ text: String) {
-        valueLabels[0].text = ""
-        valueLabels[1].text = text
-        totalCalculation = ""
-        numberOfCalculation = 1
-        createdStackViews = []
-    }
-    
-    private func inputToCalculation(_ text: String) {
-        if numberOfCalculation > 1 {
-            totalCalculation += " \(valueLabels[0].text!) \(text)"
-        } else {
-            totalCalculation += "\(text)"
-        }
-    }
-    
+
     private func removeZeroOfDouble(_ text: String) -> String {
         var value = text
         while value.last == "0" {
@@ -185,20 +192,6 @@ class CalculatorViewController: UIViewController {
         historyScrollView.layoutSubviews()
     }
     
-    private func hasDot(_ value: String) -> Bool {
-        if value.contains(".") {
-            return false
-        } else {
-            return true
-        }
-    }
-    
-    private func clearStackView() {
-        createdStackViews.forEach { stackView in
-            stackView.removeFromSuperview()
-        }
-    }
-    
     private func changeFormat(_ format: String) {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 20
@@ -208,6 +201,12 @@ class CalculatorViewController: UIViewController {
         valueLabels[1].text = "\(result)"
     }
     
+    private func clearStackView() {
+        createdStackViews.forEach { stackView in
+            stackView.removeFromSuperview()
+        }
+    }
+
     private func addStackView() {
         let operatorLabel = createLabel()
         operatorLabel.text = valueLabels[0].text
