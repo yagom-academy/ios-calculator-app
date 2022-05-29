@@ -63,7 +63,10 @@ final class CalculatorViewController: UIViewController {
         }
         
         if currentOperandText.contains(".") == false {
-            let validNumber = makeDouble(number: (operandLabel.text ?? emptyString))
+            let userInputNumber = makeDouble(number: (operandLabel.text ?? emptyString))
+            
+            guard let validNumber = userInputNumber else { return }
+            
             let number = doNumberFormatter(number: validNumber)
             
             operandLabel.text = number
@@ -238,8 +241,8 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeDouble(number: String) -> Double {
-        guard let validNumber = Double(number) else { return 0 }
+    private func makeDouble(number: String) -> Double? {
+        guard let validNumber = Double(number) else { return nil }
         return validNumber
     }
     
