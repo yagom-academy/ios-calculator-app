@@ -8,23 +8,30 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet private weak var displayNumber: UILabel!
-    @IBOutlet private weak var displayOperator: UILabel!
+    @IBOutlet private weak var displayNumberLabel: UILabel!
+    @IBOutlet private weak var displayOperatorLabel: UILabel!
     @IBOutlet private weak var recentInputStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
-    private let zeroString = "0"
-    private let emptyString = ""
+    private let zero = "0"
+    private let empty = ""
     private var calculateItems = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        settingInitialView()
+        applyNumberFormatter()
+    }
+    
+    func settingInitialView() {
         removeAllStackView(recentInputStackView)
-        displayNumber.text = zeroString
-        displayOperator.text = emptyString
-        
+        displayNumberLabel.text = zero
+        displayOperatorLabel.text = empty
+    }
+    
+    private func applyNumberFormatter() {
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumIntegerDigits = 1
         numberFormatter.maximumIntegerDigits = 20
@@ -39,24 +46,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operandButtonDidTapped(_ sender: UIButton) {
-        guard displayNumber.text != zeroString else {
-            displayNumber.text = emptyString
-            displayNumber.text = sender.currentTitle ?? emptyString
+        guard displayNumberLabel.text != zero else {
+            displayNumberLabel.text = empty
+            displayNumberLabel.text = sender.currentTitle ?? empty
             return
         }
         
-        guard displayOperator.text != emptyString || recentInputStackView.arrangedSubviews.count == 0
+        guard displayOperatorLabel.text != empty || recentInputStackView.arrangedSubviews.count == 0
         else {
             return
         }
         
-        guard sender.currentTitle != "." || displayNumber.text?.contains(".") == false
+        guard sender.currentTitle != "." || displayNumberLabel.text?.contains(".") == false
         else {
             return
         }
         
-        let currentDisplay = displayNumber.text
-        displayNumber.text = currentDisplay! + sender.currentTitle!
+        let currentDisplay = displayNumberLabel.text
+        displayNumberLabel.text = currentDisplay! + sender.currentTitle!
     }
 
     private func addSubView() {
@@ -66,78 +73,78 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
-        guard displayNumber.text != zeroString else {
+        guard displayNumberLabel.text != zero else {
             return
         }
         
-        if displayOperator.text == emptyString {
+        if displayOperatorLabel.text == empty {
             addSubView()
 
-            calculateItems +=  displayNumber.text!
-            displayOperator.text = sender.currentTitle!
-            displayNumber.text = zeroString
+            calculateItems +=  displayNumberLabel.text!
+            displayOperatorLabel.text = sender.currentTitle!
+            displayNumberLabel.text = zero
             return
         }
         
         addSubView()
         scrollToBottom()
     
-        calculateItems += " " + displayOperator.text!
-        calculateItems += " " + displayNumber.text!
-        displayOperator.text = sender.currentTitle!
-        displayNumber.text = zeroString
+        calculateItems += " " + displayOperatorLabel.text!
+        calculateItems += " " + displayNumberLabel.text!
+        displayOperatorLabel.text = sender.currentTitle!
+        displayNumberLabel.text = zero
     }
     
     @IBAction private func equalButtonDidTapped(_ sender: UIButton) {
-        guard displayOperator.text != emptyString else {
+        guard displayOperatorLabel.text != empty else {
             return
         }
         
         addSubView()
         
-        calculateItems += " " + displayOperator.text!
-        calculateItems += " " + displayNumber.text!
+        calculateItems += " " + displayOperatorLabel.text!
+        calculateItems += " " + displayNumberLabel.text!
         
         var separatedInput = ExpressionParser.parse(from: calculateItems)
         do {
             let calculateResult = try separatedInput.result()
-            displayNumber.text = numberFormatter.string(from: NSNumber(value: calculateResult))
-            displayOperator.text = emptyString
-            calculateItems = emptyString
+            displayNumberLabel.text = numberFormatter.string(from: NSNumber(value: calculateResult))
+            displayOperatorLabel.text = empty
+            calculateItems = empty
         } catch {
-            displayNumber.text = OperatorError.divide.print
+            displayNumberLabel.text = OperatorError.divide.print
         }
     }
 
     @IBAction private func ACButtonDidTapped(_ sender: UIButton) {
-        calculateItems = emptyString
+        calculateItems = empty
         recentInputStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-        displayOperator.text = emptyString
-        displayNumber.text = zeroString
+        displayOperatorLabel.text = empty
+        displayNumberLabel.text = zero
     }
 
     
     @IBAction private func CEButtonDidTapped(_ sender: UIButton) {
-        displayNumber.text = zeroString
+        displayNumberLabel.text = zero
     }
     
     @IBAction private func changeOperatorSignButtonDidTapped(_ sender: UIButton) {
-        guard displayNumber.text != "0" else {
+        guard displayNumberLabel.text != zero else {
             return
         }
         
-        guard var text = displayNumber?.text else {
+        guard var text = displayNumberLabel?.text else {
             return
         }
         
-        if displayNumber.text!.prefix(1) == "-" {
+        if displayNumberLabel.text!.prefix(1) == "-" {
             text.remove(at: text.startIndex)
-            displayNumber.text = text
+            displayNumberLabel.text = text
         } else {
             text.insert("-", at: text.startIndex)
-            displayNumber.text = text
+            displayNumberLabel.text = text
         }
     }
 
@@ -152,12 +159,12 @@ class ViewController: UIViewController {
         stackView.isHidden = true
         stackView.spacing = 8
         
-        operandLabel.text = displayNumber.text
+        operandLabel.text = displayNumberLabel.text
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operandLabel.textColor = .white
         operatorLabel.textAlignment = .center
 
-        operatorLabel.text = displayOperator.text
+        operatorLabel.text = displayOperatorLabel.text
         operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operatorLabel.textColor = .white
         operatorLabel.textAlignment = .center

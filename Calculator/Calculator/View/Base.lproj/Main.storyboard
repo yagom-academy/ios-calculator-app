@@ -364,8 +364,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="displayNumber" destination="Lwz-OF-XHD" id="OY0-La-B65"/>
-                        <outlet property="displayOperator" destination="HPC-iy-qdm" id="le2-3o-A4j"/>
+                        <outlet property="displayNumberLabel" destination="Lwz-OF-XHD" id="OY0-La-B65"/>
+                        <outlet property="displayOperatorLabel" destination="HPC-iy-qdm" id="le2-3o-A4j"/>
                         <outlet property="historyScrollView" destination="BOT-7g-vxv" id="Idk-mo-Lee"/>
                         <outlet property="recentInputStackView" destination="XRe-QE-UJf" id="AsJ-pV-YmV"/>
                     </connections>
