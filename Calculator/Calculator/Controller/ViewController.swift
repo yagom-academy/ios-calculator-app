@@ -46,10 +46,6 @@ class ViewController: UIViewController {
             inputValue += presentNumbers
             inputValue += " \(operatorChoice) "
             
-            print("presentNumberArray: ", presentNumbers)
-            print("inputValue: ",  inputValue)
-            print( "\(operatorChoice) ")
-            
             presentNumbers = ""
             operatorChoice = ""
             operatorStorage = []
@@ -63,31 +59,23 @@ class ViewController: UIViewController {
         } else {
             presentNumbers += "\(ButtonTitle)"
             numberLabel.text = "\(presentNumbers)"
-            
-            print(presentNumbers)
-            
         }
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
+        
         presentOperator = ButtonTitle
         operatorLabel.text = "\(ButtonTitle)"
         
         if ["+", "−", "÷", "×"].contains(ButtonTitle) {
-            
             operatorStorage.append(" \(ButtonTitle) ")
-            
-            print(operatorStorage)
-            
+                        
             makeStackLabel()
             numberLabel.text = "0"
             
         } else if ["="].contains(ButtonTitle) {
             didTapAnswerButton()
-            print(inputValue)
-            
- 
             
         }
     }
@@ -97,10 +85,13 @@ class ViewController: UIViewController {
         
         if ["AC"].contains(ButtonTitle) {
             didTapACButton()
+            
         } else if ["CE"].contains(ButtonTitle) {
             didTapCEButton()
+            
         } else if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
             didTapSignButton()
+            
         }
     }
     
@@ -114,6 +105,7 @@ class ViewController: UIViewController {
                                    - previousValues.bounds.height
                                    + numberLabel.font.lineHeight)
         previousValues.setContentOffset(bottomOffset, animated: false)
+        
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackNumberLabel.textColor = .white
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -140,14 +132,12 @@ class ViewController: UIViewController {
         if !inputValue.isEmpty && !presentNumbers.isEmpty {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
+            
             if result.description.count < 20 {
                 guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
                     return
                 }
                 numberLabel.text = "\(NSNresult)"
-                
-                print(result)
-                print("----")
             }
         }
         inputValue = ""
@@ -159,6 +149,7 @@ class ViewController: UIViewController {
         inputValue = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
+        
         valuesStackView.subviews.forEach { views in
             views.removeFromSuperview()
         }
@@ -167,7 +158,6 @@ class ViewController: UIViewController {
     func didTapCEButton() {
         presentNumbers = ""
         numberLabel.text = "0"
-        print(presentNumbers)
     }
     
     func didTapSignButton() {
@@ -182,7 +172,6 @@ class ViewController: UIViewController {
             presentNumbers = "-" + presentNumbers
         }
         numberLabel.text = "\(presentNumbers)"
-        print(presentNumbers)
     }
 }
 
