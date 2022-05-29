@@ -1,6 +1,26 @@
-## iOS 커리어 스타터 캠프
+## 계산기 프로젝트 저장소
 
-### 계산기 프로젝트 저장소
+#### 프로젝트 핵심경험
+- [X]  TDD 시작하기
+- [X]  기존의 프로젝트에 Test Target 추가
+- [X]  Queue 자료구조의 이해와 구현
+- [X]  List 자료구조 직접 구현해보기(선택)
+- [X]  리스트를 활용하여 Queue 구현(선택)
+- [X]  UML을 기반으로 한 코드구현
+- [X]  숫자와 연산자 입력에 큐 활용
+- [X]  TDD를 기반으로 코드 작성하기(선택)
+- [X]  IBOutlet / IBAction의 활용
+- [X]  스택뷰의 활용
+- [X]  스크롤뷰의 활용
+
+#### 프로젝트를 수행함에 있어 읽고 참고한 문서
+야곰의 재미난 컴퓨터 이야기 PART II : 캠핑사이트 Course - Common
+- [X]  [Swift Language Guide - Protocols](https://quick-face-098.notion.site/Protocols-85a55d35639046e4a015e92bc187be84)
+- [X]  [Swift Language Guide - Extentions](https://quick-face-098.notion.site/Extension-adbb6b346d5e4839ad358d64dfdaa49f)
+- [X]  [Swift Language Guide - Error Handling](https://quick-face-098.notion.site/Error-Handling-61708e145ddd449485b8ba188a59380f)
+- [X]  [Swift Language Guide - Closures ](https://quick-face-098.notion.site/Closures-d041ee09871446adae42516d70fe9a5c)
+- [X]  [Swift Language Guide - Advanced Operators ](https://quick-face-098.notion.site/Advanced-Operators-24a9576ba94142fe8f3aeece4528b96a)
+- [X]  [Swift Language Guide - ARC ](https://quick-face-098.notion.site/ARC-Automatic-Reference-Counting-dde282829d5847cd91ec6595a22977d1)
 
 # [Step 01] 
 
@@ -190,3 +210,59 @@ static func componentsByOperands(from input: String) ->[String]
 - - Operand만을 분류하여 반환할 수 있도록한 함수입니다. Operator처럼 반환타입을 변경하지는 않았습니다.
 
 ---
+# [Step 03]
+
+# 공부한 내용
+> ARC, Advanced Operators, Closures, LLDB, 고차함수, 오토레이아웃, StackView, ScrollView, NumberFomatter
+
+### ARC
+> 문서위주로 참조 카운팅에 대해서 공부해 보았고 아직 진행중에 있습니다. 
+
+### Advanced Operators
+> 문서에서 우선순위를 가지는 연산자, post, prefix, infix 등이 가지는 우선순위 혹은 사용자 정의 연산자와의 차이점에 대해서 공부하였지만 현재 프로젝트에서 어떠한 적용을 하진 못하였습니다. 
+
+### Closures
+> 클로저의 기본적인 개념에 대해서 공부하였습니다.
+
+### LLDB & 오토레이아웃
+> 에러가 발생한 부분, 혹은 '-' 텍스트가 제가 작성한 것과 출력되서 들어오는 결과값이 다른 경우를 비교하기 위해 유용하게 사용하였습니다.
+> UI 상의 에러 부분을 주소값을 통해서 확인하였습니다.
+> LLDB를 활용하면 autolayout의 현 설정에 대해서 상세하게 파악해 볼 수 있고 어디서 문제가 발생하는지에 대해서도 찾아볼 수 있었습니다.
+
+### 고차함수
+> map, filter, reduce를 만들기 위해서 상상력을 발휘 해봤으나 rethrows, throws, closure 에 대해서 조금더 공부가 필요할 것 같습니다. 
+
+### StackView
+> MainStoryboard 에서 StackView를 코드로 작성하여 만들어 보았습니다.
+
+### NumberFomatter
+> 출력값에 , 를 3자리수 마다 주기 위해, 소수점 자리 설정을 위해 사용하였습니다.
+
+### ScrollView
+> 포커스를 아래로 주기 위해서 설정을 하였습니다.
+
+# ⚒️ 기능 소개
+
+<br>
+
+> - 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다
+> - 버튼을 누르면 입력된 연산을 한 번에 수행합니다
+> - = 버튼을 누르기 전에는 실제 연산을 수행하지 않습니다
+> - 연산은 연산자 우선순위를 무시하고 앞에서부터 순서대로 계산합니다
+> -  프로젝트에서는 연산자 우선순위를 무시합니다
+> - 2+3*3-1 의 연산결과는 14입니다
+> - 3/3+2-1 의 연산결과는 2입니다
+> - 1+2-3*2-3/6 의 연산결과는 -0.5입니다
+> - = 버튼을 눌러 연산을 마친 후 다시 =을 눌러도 이전 연산을 다시 연산하지 않습니다
+
+
+|AC|CE|⁺⁄₋|
+|:-:|:-:|:-:|
+|<img src="https://im3.ezgif.com/tmp/ezgif-3-40d8e4dec8.gif">|<img src="https://im3.ezgif.com/tmp/ezgif-3-fa2b339c27.gif">|<img src="https://im3.ezgif.com/tmp/ezgif-3-ef3852613e.gif">|
+|AC는 모든 연산내역을 <br> 초기화합니다.| 현재 입력하던 숫자 혹은 <br>연산결과만 삭제합니다.|현재 입력한 숫자의 <br> 부호를 변환합니다.<br>입력된 숫자가 0인경우 부호를 표시하지 않고 변경하지도 않습니다|
+
+|(÷, ×, -, +)|NaN|
+|:-:|:-:|
+|<img src="https://im3.ezgif.com/tmp/ezgif-3-40d8e4dec8.gif">|<img src="https://im3.ezgif.com/tmp/ezgif-3-6f4a70a0b8.gif">|
+|숫자입력 중에 연산자를 누르게 <br>되면 숫자입력을 중지하고 다음 숫자를 입력받습니다.|푸시 알림을 통해 승차 알람을<br> 받을 수 있습니다.|현재 숫자입력이 없는 상태인 0에서는 <br> 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다.|
+
