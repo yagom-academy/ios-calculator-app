@@ -24,7 +24,10 @@ class CalculatorViewController: UIViewController {
         refreshNumberLabel()
         refreshOperatorLabel()
     }
-    
+}
+
+// MARK: - UI 갱신을 위한 메서드
+extension CalculatorViewController {
     private func refreshNumberLabel() {
         let newNumber = currentNumber.formatAsNumber()
         
@@ -36,14 +39,6 @@ class CalculatorViewController: UIViewController {
     private func refreshOperatorLabel() {
         DispatchQueue.main.async {
             self.currentOperatorLabel.text = self.currentOperator
-        }
-    }
-    
-    private func clearStackView() {
-        DispatchQueue.main.async {
-            self.receivedInputsStackView.subviews.forEach {
-                $0.removeFromSuperview()
-            }
         }
     }
     
@@ -76,6 +71,17 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private func clearStackView() {
+        DispatchQueue.main.async {
+            self.receivedInputsStackView.subviews.forEach {
+                $0.removeFromSuperview()
+            }
+        }
+    }
+}
+
+// MARK: - 내부 기능 구현을 위한 메서드
+extension CalculatorViewController {
     private func translateOperator(_ symbol: String) -> String {
         switch symbol {
         case "+":
@@ -90,7 +96,10 @@ class CalculatorViewController: UIViewController {
             return ""
         }
     }
-    
+}
+
+// MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
+extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else {
             return
