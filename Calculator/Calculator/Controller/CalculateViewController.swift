@@ -59,7 +59,7 @@ class CalculateViewController: UIViewController {
         } else if operandLabelText == "0" {
             operatorTextLabel.text = senderLabelText
             return
-        } else if arrangedStackView.subviews.isEmpty {
+        } else if arrangedStackView.subviews.isEmpty || isCalculated == true {
             operandsTextLabel.text = formattedNumber
             addStackView()
             expressionParserInput.append(" \(senderLabelText) ")
@@ -73,7 +73,6 @@ class CalculateViewController: UIViewController {
         operandsTextLabel.text = formattedNumber
         addStackView()
         operandsTextLabel.text = "0"
-        print(expressionParserInput)
     }
     
     //MARK: - calculateButtonTapped
@@ -116,6 +115,8 @@ class CalculateViewController: UIViewController {
             return
         } else if operandsTextLabel.text?.first?.isNumber == true {
             operandsTextLabel.text = "-" + operandsLabelText
+            expressionParserInput.removeLast()
+            expressionParserInput += operandsTextLabel.text!
         } else {
             operandsTextLabel.text = OperatorError.unknown.errorDescription
         }
