@@ -13,6 +13,10 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
+   
+    private let zero: String = "0"
+    private let emptyString: String = ""
+    private let failedResult = "NaN"
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
@@ -27,19 +31,24 @@ final class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
-    
+//    
+//    func updateOperandLabel() -> String {
+//        guard let validLabel = operandLabel.text else { return }
+//        return validLabel
+//    }
+//    
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
         guard let digit = sender.currentTitle else{ return }
         
         if inputStackView.subviews.isEmpty == false, operatorLabel.text!.isEmpty {
             removeStack()
-            operandLabel.text! = ""
+            operandLabel.text = ""
             userInputNumber = ""
         }
         
-        if operandLabel.text! == "NaN" {
+        if operandLabel.text == "NaN" {
             removeStack()
-            operandLabel.text! = ""
+            operandLabel.text = ""
             userInputNumber = ""
         }
         
