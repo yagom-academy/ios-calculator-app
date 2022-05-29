@@ -92,5 +92,23 @@ private extension CalculatorViewController {
         }
     }
     
+    func check(_ data: String) -> Bool {
+        if (isContainedDot) {
+            let integer = data.split(with: Character(CalculatorOtherSigns.dot.rawValue))[0]
+            return integer.count < 20
+        } else {
+            return data.count < 20
+        }
+    }
+    
+    func setToggle(for minus: String) {
+        guard let oldValue = operandsLabel?.text,
+              !oldValue.elementsEqual(CalculatorState.zero.value) else {
+            return
+        }
+        
+        let removeCommaValue = oldValue.replacingOccurrences(of: ",", with: CalculatorState.empty.value)
+        operandsLabel?.text = numberFormatter.string(for: removeCommaValue.doubleValue() * -1)
+    }
     }
 }
