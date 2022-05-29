@@ -7,14 +7,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var scrollViewContents: UIStackView!
+    @IBOutlet weak var operationStackView: UIStackView!
     @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
     private var operationQueue: String = ""
     private let ZERO = "0"
     private var isEndOperation = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         clearScrollviewContent()
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         currentOperator.text = ""
     }
     private func clearScrollviewContent() {
-        scrollViewContents.subviews.forEach { UIView in
+        operationStackView.subviews.forEach { UIView in
             UIView.removeFromSuperview()
         }
     }
@@ -127,7 +127,7 @@ extension ViewController {
     }
     private func addScrollViewContent() {
         let currentContent = createScrollViewContent(currentOperator.text ?? "", currentOperand.text ?? "")
-        scrollViewContents.addArrangedSubview(currentContent)
+        operationStackView.addArrangedSubview(currentContent)
     }
     private func scrolling() {
         scrollView.setContentOffset(CGPoint(x: 0,
