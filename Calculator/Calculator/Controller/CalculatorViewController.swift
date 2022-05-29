@@ -36,33 +36,33 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
         guard let digit = sender.currentTitle else{ return }
-        guard let validLabel = operandLabel.text else { return }
+        guard let currentOperandText = operandLabel.text else { return }
         
-        makeValidNumber()
         initiateCaculator()
         
         if isNumberTapped  {
             operandLabel.text = (operandLabel.text ?? emptyString) + digit
         }
-        else if validLabel.contains(".") {
+        else if currentOperandText.contains(".") {
             operandLabel.text = (operandLabel.text ?? emptyString) + digit
             isNumberTapped  = true
         } else {
             operandLabel.text = digit
         }
         
+        makeValidNumber()
         isNumberTapped  = true
         userInputNumber.append(digit)
     }
     
     func makeValidNumber() {
-        guard let validLabel = operandLabel.text else { return }
+        guard let currentOperandText = operandLabel.text else { return }
  
-        if validLabel.contains(",") {
+        if currentOperandText.contains(",") {
             operandLabel.text = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
         }
         
-        if validLabel.contains(".") == false {
+        if currentOperandText.contains(".") == false {
             let validNumber = makeDouble(number: (operandLabel.text ?? emptyString))
             let number = doNumberFormatter(number: validNumber)
             
@@ -71,9 +71,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     func initiateCaculator() {
-        guard let validLabel = operandLabel.text else { return }
+        guard let currentOperandText = operandLabel.text else { return }
         
-        if inputStackView.subviews.isEmpty == false, validLabel.isEmpty {
+        if inputStackView.subviews.isEmpty == false, currentOperandText.isEmpty {
             removeStack()
             operandLabel.text = emptyString
             userInputNumber = emptyString
@@ -88,9 +88,9 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
-        guard let validLabel = operandLabel.text else { return }
+        guard let currentOperandText = operandLabel.text else { return }
         
-        if validLabel.contains(Character(dot)) {
+        if currentOperandText.contains(Character(dot)) {
             return
         } else if operandLabel.text == zero {
             operandLabel.text = "0."
@@ -121,17 +121,17 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didPlusMinusSignButtonTapped(_ sender: UIButton) {
-        guard let validLabel = operandLabel.text else { return }
+        guard let currentOperandText = operandLabel.text else { return }
         
         if operandLabel.text == zero {
             return
         }
         
-        if validLabel.hasPrefix("-") {
+        if currentOperandText.hasPrefix("-") {
             operandLabel.text = String((operandLabel.text ?? emptyString).dropFirst())
             userInputNumber = String(userInputNumber.dropFirst())
         } else {
-            operandLabel.text = "-" + validLabel
+            operandLabel.text = "-" + currentOperandText
             userInputNumber = "-" + userInputNumber
         }
     }
