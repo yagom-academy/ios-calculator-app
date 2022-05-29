@@ -372,18 +372,6 @@
                         <outlet property="operatorStackLabel2" destination="c7v-6K-W40" id="eKO-sI-Ju7"/>
                         <outlet property="previousValues" destination="BOT-7g-vxv" id="Buo-SR-Zk6"/>
                         <outlet property="valuesStackView" destination="XRe-QE-UJf" id="wLL-OS-skH"/>
-                        <outletCollection property="inputNumberButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="fjh-47-MXR"/>
-                        <outletCollection property="inputNumberButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="Kta-OU-XUQ"/>
-                        <outletCollection property="inputNumberButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="lga-8Z-Oop"/>
-                        <outletCollection property="inputNumberButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="tPv-me-eRd"/>
-                        <outletCollection property="inputNumberButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="j2z-KG-p1E"/>
-                        <outletCollection property="inputNumberButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="NyB-2o-TTj"/>
-                        <outletCollection property="inputNumberButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="dfy-Cj-wKe"/>
-                        <outletCollection property="inputNumberButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="ugm-Z1-Tgg"/>
-                        <outletCollection property="inputNumberButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="2c1-TG-am9"/>
-                        <outletCollection property="inputNumberButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="L9x-Bv-Nfu"/>
-                        <outletCollection property="inputNumberButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="iqM-FY-kbJ"/>
-                        <outletCollection property="inputNumberButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="mNH-9a-YiK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

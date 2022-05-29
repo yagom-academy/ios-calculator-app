@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet var inputNumberButtons: [UIButton]!
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -32,10 +31,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         numberLabel.text = "0"
         operatorLabel.text = ""
-        numberStackLabel.removeFromSuperview()
-        numberStackLabel2.removeFromSuperview()
-        operatorStackLabel.removeFromSuperview()
-        operatorStackLabel2.removeFromSuperview()
+        removeOldLabls()
         
         numberFormatter.roundingMode = .floor
         numberFormatter.numberStyle = .decimal
@@ -78,8 +74,8 @@ class ViewController: UIViewController {
         presentOperator = ButtonTitle
         operatorLabel.text = "\(ButtonTitle)"
         
-        if ["+", "−", "÷", "×"].contains(ButtonTitle) && !presentNumbers.isEmpty {
-
+        if ["+", "−", "÷", "×"].contains(ButtonTitle) {
+            
             operatorStorage.append(" \(ButtonTitle) ")
             
             print(operatorStorage)
@@ -88,25 +84,10 @@ class ViewController: UIViewController {
             numberLabel.text = "0"
             
         } else if ["="].contains(ButtonTitle) {
-            inputValue += presentNumbers
-            
+            didTapAnswerButton()
             print(inputValue)
             
-            if !inputValue.isEmpty {
-                var parse = ExpressionParser.parse(from: (inputValue))
-                let result = try! parse.result()
-                if result.description.count < 20 {
-                    guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
-                        return
-                    }
-                    numberLabel.text = "\(NSNresult)"
-                    
-                    print(result)
-                    print("----")
-                }
-            }
-            inputValue = ""
-            presentNumbers = ""
+ 
             
         }
     }
@@ -115,31 +96,11 @@ class ViewController: UIViewController {
         let ButtonTitle = sender.currentTitle!
         
         if ["AC"].contains(ButtonTitle) {
-            presentNumbers = ""
-            inputValue = ""
-            numberLabel.text = "0"
-            operatorLabel.text = ""
-            valuesStackView.subviews.forEach { views in
-                views.removeFromSuperview()
-            }
+            didTapACButton()
         } else if ["CE"].contains(ButtonTitle) {
-            presentNumbers = ""
-            numberLabel.text = "0"
-            print(presentNumbers)
-            
+            didTapCEButton()
         } else if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
-            if presentNumbers.contains("-") {
-                presentNumbers = presentNumbers.filter { word in
-                    if word == "-"{
-                        return false
-                    }
-                    return true
-                }
-            } else {
-                presentNumbers = "-" + presentNumbers
-            }
-            numberLabel.text = "\(presentNumbers)"
-            print(presentNumbers)
+            didTapSignButton()
         }
     }
     
@@ -164,6 +125,64 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(stackOperatorLabel)
         stackView.addArrangedSubview(stackNumberLabel)
         valuesStackView.addArrangedSubview(stackView)
+    }
+    
+    func removeOldLabls() {
+        numberStackLabel.removeFromSuperview()
+        numberStackLabel2.removeFromSuperview()
+        operatorStackLabel.removeFromSuperview()
+        operatorStackLabel2.removeFromSuperview()
+    }
+    
+    func didTapAnswerButton() {
+        inputValue += presentNumbers
+
+        if !inputValue.isEmpty && !presentNumbers.isEmpty {
+            var parse = ExpressionParser.parse(from: (inputValue))
+            let result = try! parse.result()
+            if result.description.count < 20 {
+                guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                    return
+                }
+                numberLabel.text = "\(NSNresult)"
+                
+                print(result)
+                print("----")
+            }
+        }
+        inputValue = ""
+        presentNumbers = ""
+    }
+    
+    func didTapACButton() {
+        presentNumbers = ""
+        inputValue = ""
+        numberLabel.text = "0"
+        operatorLabel.text = ""
+        valuesStackView.subviews.forEach { views in
+            views.removeFromSuperview()
+        }
+    }
+    
+    func didTapCEButton() {
+        presentNumbers = ""
+        numberLabel.text = "0"
+        print(presentNumbers)
+    }
+    
+    func didTapSignButton() {
+        if presentNumbers.contains("-") {
+            presentNumbers = presentNumbers.filter { word in
+                if word == "-" {
+                    return false
+                }
+                return true
+            }
+        } else {
+            presentNumbers = "-" + presentNumbers
+        }
+        numberLabel.text = "\(presentNumbers)"
+        print(presentNumbers)
     }
 }
 
