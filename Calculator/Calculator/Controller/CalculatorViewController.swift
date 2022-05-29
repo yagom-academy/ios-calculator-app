@@ -33,7 +33,7 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = emptyString
     }
     
-    @IBAction private func didTapNumberButton(_ sender: UIButton) {
+    @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
         
         guard let digit = sender.currentTitle else{ return }
         guard let validLabel = operandLabel.text else { return }
@@ -74,7 +74,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber.append(digit)
     }
     
-    @IBAction private func didTapDot(_ sender: UIButton) {
+    @IBAction private func didDotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
         guard let validLabel = operandLabel.text else { return }
         
@@ -91,7 +91,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber.append(dot)
     }
     
-    @IBAction private func didTapOperatorButton(_ sender: UIButton) {
+    @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
         
         guard let lastCharacter = userInputNumber.last else { return }
@@ -108,7 +108,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber = emptyString
     }
     
-    @IBAction private func didTapPlusMinusSignButton(_ sender: UIButton) {
+    @IBAction private func didPlusMinusSignButtonTapped(_ sender: UIButton) {
         guard let validLabel = operandLabel.text else { return }
         
         if operandLabel.text == zero {
@@ -124,7 +124,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func removeAllButton(_ sender: UIButton) {
+    @IBAction private func didremoveAllButtonTapped(_ sender: UIButton) {
         userInput = emptyString
         userInputNumber = emptyString
         setupViews()
@@ -132,13 +132,13 @@ final class CalculatorViewController: UIViewController {
         userNumberTapped = false
     }
     
-    @IBAction private func removeCurrentNumberButton(_ sender: UIButton) {
+    @IBAction private func didremoveCurrentNumberButtonTapped(_ sender: UIButton) {
         operandLabel.text = zero
         userInputNumber = emptyString
         userNumberTapped = false
     }
     
-    @IBAction private func didTapCalculateButton(_ sender: UIButton) {
+    @IBAction private func didCalculateButtonTapped(_ sender: UIButton) {
         if operatorLabel.text == emptyString {
             return
         }
