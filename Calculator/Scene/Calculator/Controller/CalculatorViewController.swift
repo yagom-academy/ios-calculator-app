@@ -37,6 +37,10 @@ class CalculatorViewController: UIViewController {
         }
         
         guard checkInvalidValue(inputedNumberLabel) else {
+            if valueLabels[0].text == "" {
+                valueLabels[1].text = number
+                return
+            }
             inputedNumberLabel += number
             valueLabels[1].text = inputedNumberLabel
             return
@@ -48,7 +52,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func DotButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
         guard var inputedNumberLabel = valueLabels[1].text else { return }
         
         if hasDot(inputedNumberLabel) {
@@ -57,7 +61,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func tappedOperators(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
         guard valueLabels[1].text != "NAN" else { return }
         guard let formattableValue = valueLabels[1].text else { return }
         let numericalValue = formattableValue.filter { $0 != ","}
@@ -70,9 +74,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if hasDot(numericalValue) {
-            valueLabels[1].text = removeZeroOfDouble(numericalValue)
-        }
+        removeZeroHasDot(numericalValue)
         
         addStackView()
         inputToCalculation(numericalValue)
@@ -82,16 +84,11 @@ class CalculatorViewController: UIViewController {
         holdScrollDown()
     }
     
-    @IBAction private func tappedResult(_ sender: UIButton) {
+    @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
         guard valueLabels[1].text != "NAN" else { return }
         guard valueLabels[0].text != "" else { return }
         
-        guard numberOfCalculation > 1 else {
-            totalCalculation += "\(valueLabels[1].text!)"
-            return
-        }
-        
-        totalCalculation += " \(valueLabels[0].text!) \(valueLabels[1].text!)"
+        inputToCalculation(valueLabels[1].text!)
         
         do {
             addStackView()
@@ -110,29 +107,41 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func tappedChangeValue(_ sender: UIButton) {
-        let changeValue = sender.tag
-        if changeValue == 0 {
-            createdStackViews.forEach { stackView in
-                stackView.removeFromSuperview()
-            }
-            createdStackViews = []
-            valueLabels[0].text = ""
-            valueLabels[1].text = "0"
-            totalCalculation = ""
-            numberOfCalculation = 1
-        } else if changeValue == 1 {
+    @IBAction private func changeValueButtonDidTapped(_ sender: UIButton) {
+        let changeValue = sender.currentTitle
+        if changeValue == "AC" {
+            clearStackView()
+            setLabelText("0")
+        } else if changeValue == "CE" {
             valueLabels[1].text = "0"
         } else {
             guard let value = valueLabels[1].text else { return }
-            guard value != "0" else { return }
-            guard value != "NAN" else { return }
-            guard value.first == "-" else {
-                valueLabels[1].text = "-\(value)"
-                return
-            }
-            valueLabels[1].text = value.filter { $0 != "-" }
+            checkNegativeNumber(value)
         }
+    }
+    
+    private func removeZeroHasDot(_ text: String) {
+        var numericalValue = text
+        if hasDot(numericalValue) {
+            while numericalValue.last == "0" {
+                numericalValue.removeLast()
+            }
+            if numericalValue.last == "."{
+                numericalValue.removeLast()
+            }
+            valueLabels[1].text = numericalValue
+        }
+    }
+    
+    private func checkNegativeNumber(_ text: String) {
+        guard text != "0" else { return }
+        guard text != "NAN" else { return }
+        guard text.first == "-" else {
+            valueLabels[1].text = "-\(text)"
+            return
+        }
+        valueLabels[1].text = text.filter { $0 != "-" }
+        return
     }
     
     private func checkInvalidValue(_ text: String) -> Bool {
@@ -171,8 +180,9 @@ class CalculatorViewController: UIViewController {
     
     private func holdScrollDown() {
         let bottomOffset = CGPoint(x: 0, y: historyScrollView.contentSize.height -
-                                   historyScrollView.bounds.size.height + 27)
+                                   historyScrollView.bounds.size.height)
         historyScrollView.setContentOffset(bottomOffset, animated: true)
+        historyScrollView.layoutSubviews()
     }
     
     private func hasDot(_ value: String) -> Bool {
@@ -180,6 +190,12 @@ class CalculatorViewController: UIViewController {
             return false
         } else {
             return true
+        }
+    }
+    
+    private func clearStackView() {
+        createdStackViews.forEach { stackView in
+            stackView.removeFromSuperview()
         }
     }
     
