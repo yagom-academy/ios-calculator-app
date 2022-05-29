@@ -258,11 +258,16 @@ static func componentsByOperands(from input: String) ->[String]
 
 |AC|CE|⁺⁄₋|
 |:-:|:-:|:-:|
-|<img src="https://im3.ezgif.com/tmp/ezgif-3-40d8e4dec8.gif">|<img src="https://im3.ezgif.com/tmp/ezgif-3-fa2b339c27.gif">|<img src="https://im3.ezgif.com/tmp/ezgif-3-ef3852613e.gif">|
+|![operators](https://user-images.githubusercontent.com/59466342/170876184-54a617d9-5d20-4405-a98f-f21c489ab052.gif)|![ceGif](https://user-images.githubusercontent.com/59466342/170876181-dbe765ad-829e-49db-a210-7592a06f4a29.gif)|![+-gif](https://user-images.githubusercontent.com/59466342/170876188-46967e21-da6f-4c86-8918-9698a4989d0d.gif)|
 |AC는 모든 연산내역을 <br> 초기화합니다.| 현재 입력하던 숫자 혹은 <br>연산결과만 삭제합니다.|현재 입력한 숫자의 <br> 부호를 변환합니다.<br>입력된 숫자가 0인경우 부호를 표시하지 않고 변경하지도 않습니다|
+
+
+
+
+
 
 |(÷, ×, -, +)|NaN|
 |:-:|:-:|
-|<img src="https://im3.ezgif.com/tmp/ezgif-3-40d8e4dec8.gif">|<img src="https://im3.ezgif.com/tmp/ezgif-3-6f4a70a0b8.gif">|
+|![operators](https://user-images.githubusercontent.com/59466342/170876184-54a617d9-5d20-4405-a98f-f21c489ab052.gif)|![nanGif](https://user-images.githubusercontent.com/59466342/170876159-298e57fb-3057-42ef-a3d9-27ecc13dde30.gif)|
 |숫자입력 중에 연산자를 누르게 <br>되면 숫자입력을 중지하고 다음 숫자를 입력받습니다.|푸시 알림을 통해 승차 알람을<br> 받을 수 있습니다.|현재 숫자입력이 없는 상태인 0에서는 <br> 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다.|
 
