@@ -31,15 +31,9 @@ final class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
-    //
-    //    func updateOperandLabel() -> String {
-    //        guard let validLabel = operandLabel.text else { return }
-    //        return validLabel
-    //    }
-    //
+
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        //        var userNumberTapped: Bool = false
-        
+
         guard let digit = sender.currentTitle else{ return }
         guard let validLabel = operandLabel.text else { return }
         
@@ -174,8 +168,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        guard let validNumber = Double((operandLabel.text ?? emptyString)) else { return nil }
-        let number = doNumberFormatter(number: validNumber)
+        let validNumber = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
+        guard let doubleNumber = Double(validNumber) else { return nil }
+        let number = doNumberFormatter(number: doubleNumber)
         
         guard let `operator` = operatorLabel.text else {
             return nil
