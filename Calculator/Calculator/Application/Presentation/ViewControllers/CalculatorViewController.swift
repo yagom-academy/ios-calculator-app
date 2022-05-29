@@ -47,27 +47,6 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func scrollDownScrollView() {
-        let bottomOffset = CGPoint(x: 0, y: receivedInputsScrollView.contentSize.height - receivedInputsScrollView.bounds.height)
-        
-        receivedInputsScrollView.setContentOffset(bottomOffset, animated: false)
-    }
-    
-    private func translateOperator(_ symbol: String) -> String {
-        switch symbol {
-        case "+":
-            return "+"
-        case "–":
-            return "–"
-        case "×":
-            return "*"
-        case "÷":
-            return "/"
-        default:
-            return ""
-        }
-    }
-    
     private func insertIndividualStackView(with operatorData: String, and operandData: String) {
         let operatorLabel: UILabel = {
             let label = UILabel()
@@ -94,6 +73,21 @@ class CalculatorViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.receivedInputsStackView.addArrangedSubview(individualStackView)
+        }
+    }
+    
+    private func translateOperator(_ symbol: String) -> String {
+        switch symbol {
+        case "+":
+            return "+"
+        case "–":
+            return "–"
+        case "×":
+            return "*"
+        case "÷":
+            return "/"
+        default:
+            return ""
         }
     }
     
@@ -137,7 +131,7 @@ class CalculatorViewController: UIViewController {
         
         refreshNumberLabel()
         refreshOperatorLabel()
-        scrollDownScrollView()
+        receivedInputsScrollView.scrollDownToBottom()
     }
     
     @IBAction private func pressEqualButton(_ sender: UIButton) {
@@ -171,7 +165,7 @@ class CalculatorViewController: UIViewController {
         
         refreshNumberLabel()
         refreshOperatorLabel()
-        scrollDownScrollView()
+        receivedInputsScrollView.scrollDownToBottom()
     }
     
     @IBAction private func pressCEButton(_ sender: UIButton) {
