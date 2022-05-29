@@ -14,6 +14,28 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var formulaStackView: UIStackView?
     @IBOutlet private weak var savedValueScrollView: UIScrollView?
     
+    private var isCalculated: Bool {
+        formulaStackView?.isNotEmpty == true && operatorsLabel?.text?.isEmpty == true
+    }
+    
+    private var isContainedDot: Bool {
+        operandsLabel?.text?.contains(CalculatorOtherSigns.dot.rawValue) == true
+    }
+    
+    private var isDefaultState: Bool {
+        (operandsLabel?.text == CalculatorState.zero.value && formulaStackView?.isEmpty == true)
+    }
+    
+    private var isTapped: Bool = true
+    
+    private var numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = -2
+        formatter.maximumIntegerDigits = 20
+        return formatter
+    }()
+}
 
 //- MARK: View LifeCycle
 
@@ -47,6 +69,39 @@ private extension CalculatorViewController {
     }
     
     @IBAction func calculatorSignTapped(_ signs: UIButton) {
+        guard let sign = CalculatorOtherSigns(rawValue: signs.currentTitle ?? "") else {
+            return
+        }
+        
+        switch sign {
+        case .dot:
+            guard let oldValue = operandsLabel?.text,
+                  !oldValue.contains(CalculatorOtherSigns.dot.rawValue) else {
+                return
+            }
+            operandsLabel?.text = oldValue + CalculatorOtherSigns.dot.rawValue
+            
+        case .doubleZero:
+            guard let oldValue = operandsLabel?.text,
+                  !oldValue.elementsEqual(CalculatorState.zero.value),
+                  check(oldValue) else {
+                return
+            }
+            operandsLabel?.text = oldValue + CalculatorOtherSigns.doubleZero.rawValue
+            
+        case .clearEntry:
+            operandsLabel?.text = CalculatorState.zero.value
+            
+        case .allClear:
+            setDefalut()
+            
+        case .plusMinus:
+            setToggle(for: CalculatorState.minus.value)
+            
+        case .result:
+            result()
+        }
+    }
     }
 }
 
