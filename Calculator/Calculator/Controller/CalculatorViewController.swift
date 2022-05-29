@@ -1,12 +1,12 @@
 //
-//  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Calculator - CalculatorViewController.swift
+//  Created by Brad.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
         
-        if operatorStorage.isEmpty != true {
+        if !operatorStorage.isEmpty {
             operatorChoice += operatorStorage.removeLast()
             inputValue += presentNumbers
             inputValue += " \(operatorChoice) "
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func makeStackLabel() {
+    private func makeStackLabel() {
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
@@ -119,17 +119,17 @@ class ViewController: UIViewController {
         valuesStackView.addArrangedSubview(stackView)
     }
     
-    func removeOldLabls() {
+    private func removeOldLabls() {
         numberStackLabel.removeFromSuperview()
         numberStackLabel2.removeFromSuperview()
         operatorStackLabel.removeFromSuperview()
         operatorStackLabel2.removeFromSuperview()
     }
     
-    func didTapAnswerButton() {
+    private func didTapAnswerButton() {
         inputValue += presentNumbers
 
-        if !inputValue.isEmpty && !presentNumbers.isEmpty {
+        if !presentNumbers.isEmpty && !inputValue.isEmpty {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
             
@@ -144,7 +144,7 @@ class ViewController: UIViewController {
         presentNumbers = ""
     }
     
-    func didTapACButton() {
+    private func didTapACButton() {
         presentNumbers = ""
         inputValue = ""
         numberLabel.text = "0"
@@ -155,12 +155,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func didTapCEButton() {
+    private func didTapCEButton() {
         presentNumbers = ""
         numberLabel.text = "0"
     }
     
-    func didTapSignButton() {
+    private func didTapSignButton() {
         if presentNumbers.contains("-") {
             presentNumbers = presentNumbers.filter { word in
                 if word == "-" {
