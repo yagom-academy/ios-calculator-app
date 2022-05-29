@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func operandButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func operandButtonDidTap(_ sender: UIButton) {
         guard displayNumberLabel.text != zero else {
             displayNumberLabel.text = empty
             displayNumberLabel.text = sender.currentTitle ?? empty
@@ -62,17 +62,17 @@ class ViewController: UIViewController {
             return
         }
         
-        let currentDisplay = displayNumberLabel.text
-        displayNumberLabel.text = currentDisplay! + sender.currentTitle!
+        let currentDisplay = displayNumberLabel.text ?? empty
+        displayNumberLabel.text = currentDisplay + (sender.currentTitle ?? empty)
     }
 
     private func addSubView() {
-        let lastInputStackView = generateStackView()
-        recentInputStackView.addArrangedSubview(lastInputStackView)
-        lastInputStackView.isHidden = false
+        let inputStackView = generateStackView()
+        recentInputStackView.addArrangedSubview(inputStackView)
+        inputStackView.isHidden = false
     }
     
-    @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
         guard displayNumberLabel.text != zero else {
             return
         }
@@ -80,8 +80,8 @@ class ViewController: UIViewController {
         if displayOperatorLabel.text == empty {
             addSubView()
 
-            calculateItems +=  displayNumberLabel.text!
-            displayOperatorLabel.text = sender.currentTitle!
+            calculateItems +=  displayNumberLabel.text ?? empty
+            displayOperatorLabel.text = sender.currentTitle ?? empty
             displayNumberLabel.text = zero
             return
         }
@@ -89,21 +89,21 @@ class ViewController: UIViewController {
         addSubView()
         scrollToBottom()
     
-        calculateItems += " " + displayOperatorLabel.text!
-        calculateItems += " " + displayNumberLabel.text!
-        displayOperatorLabel.text = sender.currentTitle!
+        calculateItems += " " + (displayOperatorLabel.text ?? empty)
+        calculateItems += " " + (displayNumberLabel.text ?? empty)
+        displayOperatorLabel.text = sender.currentTitle ?? empty
         displayNumberLabel.text = zero
     }
     
-    @IBAction private func equalButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonDidTap(_ sender: UIButton) {
         guard displayOperatorLabel.text != empty else {
             return
         }
         
         addSubView()
         
-        calculateItems += " " + displayOperatorLabel.text!
-        calculateItems += " " + displayNumberLabel.text!
+        calculateItems += " " + (displayOperatorLabel.text ?? empty)
+        calculateItems += " " + (displayNumberLabel.text ?? empty)
         
         var separatedInput = ExpressionParser.parse(from: calculateItems)
         do {
@@ -116,30 +116,28 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction private func ACButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func ACButtonDidTap(_ sender: UIButton) {
         calculateItems = empty
-        recentInputStackView.subviews.forEach {
-            $0.removeFromSuperview()
-        }
+        removeAllSubViews()
         displayOperatorLabel.text = empty
         displayNumberLabel.text = zero
     }
 
     
-    @IBAction private func CEButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func CEButtonDidTap(_ sender: UIButton) {
         displayNumberLabel.text = zero
     }
     
-    @IBAction private func changeOperatorSignButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func changeOperatorSignButtonDidTap(_ sender: UIButton) {
         guard displayNumberLabel.text != zero else {
             return
         }
         
-        guard var text = displayNumberLabel?.text else {
+        guard var text = displayNumberLabel.text else {
             return
         }
         
-        if displayNumberLabel.text!.prefix(1) == "-" {
+        if text.prefix(1) == "-" {
             text.remove(at: text.startIndex)
             displayNumberLabel.text = text
         } else {
