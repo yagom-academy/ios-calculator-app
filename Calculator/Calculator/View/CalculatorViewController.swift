@@ -225,5 +225,6 @@ private extension CalculatorViewController {
         let formula = expressionParser.result()
         
         operandsLabel?.text = numberFormatter.string(for: formula)
+        formulaStackView?.clearSubView()
     }
 }
