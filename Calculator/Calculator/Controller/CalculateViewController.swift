@@ -59,6 +59,11 @@ class CalculateViewController: UIViewController {
         } else if operandLabelText == "0" {
             operatorTextLabel.text = senderLabelText
             return
+        } else if arrangedStackView.subviews.isEmpty {
+            operandsTextLabel.text = formattedNumber
+            addStackView()
+            operandsTextLabel.text = "0"
+            return
         }
         
         expressionParserInput.append(" \(senderLabelText) ")
@@ -192,13 +197,15 @@ class CalculateViewController: UIViewController {
         let addedStackView = UIStackView()
         let addedOperatorsLabel = UILabel()
         let addedOperandsLabel = UILabel()
-       
+        
+        addStackSubviews(addedStackView)
+        addLabelSubviews(addedOperatorsLabel,
+                         superView: addedStackView)
+        addLabelSubviews(addedOperandsLabel,
+                         superView: addedStackView)
         setStackViewConstraints(addedStackView)
         setOperatorsLabelConstraints(addedOperatorsLabel)
-        setOperandsLabelConstraints(operandsTextLabel)
-        addLabelSubviews(addedOperandsLabel, superView: addedStackView)
-        addLabelSubviews(addedOperatorsLabel, superView: addedStackView)
-        addStackSubviews(addedStackView)
+        setOperandsLabelConstraints(addedOperandsLabel)
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height),
@@ -236,7 +243,7 @@ class CalculateViewController: UIViewController {
     
     //MARK: - setAddedOperandsLabelConstraints(_ label: UILabel)
     private func setOperandsLabelConstraints(_ label: UILabel) {
-        label.text = operandsTextLabel.text!.formatNumber()
+        label.text = operandsTextLabel.text?.formatNumber()
         label.textAlignment = .right
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
