@@ -101,6 +101,10 @@ extension CalculatorViewController {
 // MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
 extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
+        if snippets.isNotEmpty && currentOperator.isEmpty {
+            return
+        }
+        
         guard let number = sender.titleLabel?.text else {
             return
         }
