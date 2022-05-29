@@ -80,7 +80,7 @@ class CalculateViewController: UIViewController {
         isCalculated = true
         var result: Double?
         var calculator = ExpressionParser.parse(from: expressionParserInput)
-        guard operatorTextLabel.text != "" else { return }
+        guard operatorTextLabel.text?.isEmpty != true else { return }
         
         do {
             result = try calculator.result()
