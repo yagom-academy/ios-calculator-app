@@ -8,6 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
+    @discardableResult
     static func parse(from input: String) -> Formula {
         let operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
         let operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
