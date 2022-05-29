@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var operationScrollView: UIScrollView!
     @IBOutlet weak var operationStackView: UIStackView!
     @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
@@ -130,8 +130,8 @@ extension ViewController {
         operationStackView.addArrangedSubview(currentContent)
     }
     private func scrolling() {
-        scrollView.setContentOffset(CGPoint(x: 0,
-                                            y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+        operationScrollView.setContentOffset(CGPoint(x: 0,
+                                            y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
     private func stringToDecimal(_ input: String?) -> String {
         let filteredInput = input?.filter {
