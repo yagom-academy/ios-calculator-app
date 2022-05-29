@@ -11,7 +11,7 @@ class CalculateViewController: UIViewController {
         super.viewDidLoad()
     }
   
-    private var expressionParserInput: String = "0"
+    private var expressionParserInput: String = ""
     private var isCalculated = false
     
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -62,6 +62,8 @@ class CalculateViewController: UIViewController {
         } else if arrangedStackView.subviews.isEmpty {
             operandsTextLabel.text = formattedNumber
             addStackView()
+            expressionParserInput.append(" \(senderLabelText) ")
+            operatorTextLabel.text = senderLabelText
             operandsTextLabel.text = "0"
             return
         }
@@ -71,6 +73,7 @@ class CalculateViewController: UIViewController {
         operandsTextLabel.text = formattedNumber
         addStackView()
         operandsTextLabel.text = "0"
+        print(expressionParserInput)
     }
     
     //MARK: - calculateButtonTapped
@@ -109,6 +112,7 @@ class CalculateViewController: UIViewController {
             return
         } else if operandsTextLabel.text?.first == "-" {
             operandsTextLabel.text?.removeFirst()
+            expressionParserInput.removeFirst()
             return
         } else if operandsTextLabel.text?.first?.isNumber == true {
             operandsTextLabel.text = "-" + operandsLabelText
