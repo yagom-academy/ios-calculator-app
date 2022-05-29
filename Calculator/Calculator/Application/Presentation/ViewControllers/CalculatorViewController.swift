@@ -81,9 +81,10 @@ class CalculatorViewController: UIViewController {
         }
         
         switch currentNumber {
-        case "NaN", "Err":
+        case CalculatorExceptionCase.nan.rawValue,
+            CalculatorExceptionCase.error.rawValue:
             return
-        case "0":
+        case CalculatorExceptionCase.zero.rawValue:
             currentNumber = number
         default:
             currentNumber += number
@@ -182,7 +183,7 @@ class CalculatorViewController: UIViewController {
         }
         
         currentNumber = "-" + currentNumber
-    
+        
         refreshNumberLabel()
     }
 }
