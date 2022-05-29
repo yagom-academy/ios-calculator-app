@@ -39,13 +39,6 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func addIndividualInput(operation operatorData: String, with operandData: String) {
-        let individualInputStackView = IndividualInputStackView(operatorData: operatorData, operandData: operandData)
-        DispatchQueue.main.async {
-            self.receivedInputsStackView.addArrangedSubview(individualInputStackView)
-        }
-    }
-    
     private func clearStackView() {
         DispatchQueue.main.async {
             self.receivedInputsStackView.subviews.forEach {
@@ -72,6 +65,35 @@ class CalculatorViewController: UIViewController {
             return "/"
         default:
             return ""
+        }
+    }
+    
+    private func insertIndividualStackView(with operatorData: String, and operandData: String) {
+        let operatorLabel: UILabel = {
+            let label = UILabel()
+            label.textColor = .white
+            label.text = operatorData
+            return label
+        }()
+        let operandLabel: UILabel = {
+            let label = UILabel()
+            label.textColor = .white
+            label.text = operandData
+            return label
+        }()
+        
+        let individualStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.addArrangedSubview(operatorLabel)
+            stackView.addArrangedSubview(operandLabel)
+            stackView.axis = .horizontal
+            stackView.alignment = .fill
+            stackView.spacing = 8
+            return stackView
+        }()
+        
+        DispatchQueue.main.async {
+            self.receivedInputsStackView.addArrangedSubview(individualStackView)
         }
     }
     
@@ -108,7 +130,7 @@ class CalculatorViewController: UIViewController {
         default:
             let operatorNow = translateOperator(currentOperator)
             snippets.append((operatorNow, currentNumber))
-            addIndividualInput(operation: currentOperator, with: currentNumber)
+            insertIndividualStackView(with: currentOperator, and: currentNumber)
             currentOperator = `operator`
             currentNumber = "0"
         }
@@ -127,7 +149,7 @@ class CalculatorViewController: UIViewController {
         
         let operatorNow = translateOperator(currentOperator)
         snippets.append((operatorNow, currentNumber))
-        addIndividualInput(operation: currentOperator, with: currentNumber)
+        insertIndividualStackView(with: currentOperator, and: currentNumber)
         
         var totalString = ""
         snippets.forEach {
