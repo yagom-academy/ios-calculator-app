@@ -33,12 +33,17 @@ final class CalculatorViewController: UIViewController {
         operandLabel.text = zero
         operatorLabel.text = emptyString
     }
-    
+    //MARK: - 숫자 버튼
+   
     @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
         guard let digit = sender.currentTitle else{ return }
         guard let currentOperandText = operandLabel.text else { return }
         
         initiateCaculator()
+        
+        if currentOperandText.count >= 20 {
+            return
+        }
         
         if isNumberTapped  {
             operandLabel.text = (operandLabel.text ?? emptyString) + digit
@@ -54,40 +59,8 @@ final class CalculatorViewController: UIViewController {
         isNumberTapped  = true
         userInputNumber.append(digit)
     }
-    
-    func makeValidNumber() {
-        guard let currentOperandText = operandLabel.text else { return }
- 
-        if currentOperandText.contains(",") {
-            operandLabel.text = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
-        }
-        
-        if currentOperandText.contains(".") == false {
-            let userInputNumber = makeDouble(number: (operandLabel.text ?? emptyString))
-            
-            guard let validNumber = userInputNumber else { return }
-            
-            let number = doNumberFormatter(number: validNumber)
-            
-            operandLabel.text = number
-        }
-    }
-    
-    func initiateCaculator() {
-        guard let currentOperandText = operandLabel.text else { return }
-        
-        if inputStackView.subviews.isEmpty == false, currentOperandText.isEmpty {
-            removeStack()
-            operandLabel.text = emptyString
-            userInputNumber = emptyString
-        }
-        
-        if operandLabel.text == failedResult {
-            removeStack()
-            operandLabel.text = emptyString
-            userInputNumber = emptyString
-        }
-    }
+
+    //MARK: - 소수점 버튼
     
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
@@ -104,6 +77,7 @@ final class CalculatorViewController: UIViewController {
         
         userInputNumber.append(dot)
     }
+    //MARK: - 연산자 버튼
     
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
@@ -121,6 +95,7 @@ final class CalculatorViewController: UIViewController {
         userInput.append(contentsOf: whiteSpace)
         userInputNumber = emptyString
     }
+    //MARK: - 특수 버튼
     
     @IBAction private func didPlusMinusSignButtonTapped(_ sender: UIButton) {
         guard let currentOperandText = operandLabel.text else { return }
@@ -151,6 +126,7 @@ final class CalculatorViewController: UIViewController {
         userInputNumber = emptyString
         isNumberTapped  = false
     }
+    //MARK: - 결과 확인 버튼
     
     @IBAction private func didCalculateButtonTapped(_ sender: UIButton) {
         if operatorLabel.text == emptyString {
@@ -175,12 +151,12 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text = failedResult
             userInput = emptyString
         } catch OperatorError.wrongFormula {
-            operandLabel.text = failedResult
             userInput = emptyString
         } catch {
             return
         }
     }
+    //MARK: - 스크롤 관련 메서드
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
         let validNumber = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
@@ -231,6 +207,41 @@ final class CalculatorViewController: UIViewController {
     private func scrollToBottom(_ scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
+    }
+    //MARK: - 기타 메서드
+    
+    func makeValidNumber() {
+        guard let currentOperandText = operandLabel.text else { return }
+ 
+        if currentOperandText.contains(",") {
+            operandLabel.text = (operandLabel.text ?? emptyString).replacingOccurrences(of: ",", with: emptyString)
+        }
+        
+        if currentOperandText.contains(".") == false {
+            let userInputNumber = makeDouble(number: (operandLabel.text ?? emptyString))
+            
+            guard let validNumber = userInputNumber else { return }
+            
+            let number = doNumberFormatter(number: validNumber)
+            
+            operandLabel.text = number
+        }
+    }
+    
+    func initiateCaculator() {
+        guard let currentOperandText = operandLabel.text else { return }
+        
+        if inputStackView.subviews.isEmpty == false, currentOperandText.isEmpty {
+            removeStack()
+            operandLabel.text = emptyString
+            userInputNumber = emptyString
+        }
+        
+        if operandLabel.text == failedResult {
+            removeStack()
+            operandLabel.text = emptyString
+            userInputNumber = emptyString
+        }
     }
     
     private func removeStack() {
