@@ -50,6 +50,11 @@ class ViewController: UIViewController {
             return
         }
         
+        guard sender.currentTitle != "." || displayNumber.text?.contains(".") == false
+        else {
+            return
+        }
+        
         let currentDisplay = displayNumber.text
         displayNumber.text = currentDisplay! + sender.currentTitle!
     }
