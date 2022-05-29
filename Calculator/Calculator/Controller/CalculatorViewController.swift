@@ -89,10 +89,9 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
         guard let currentOperandText = operandLabel.text else { return }
+        guard currentOperandText.contains(Character(dot)) == false else { return }
         
-        if currentOperandText.contains(Character(dot)) {
-            return
-        } else if operandLabel.text == zero {
+        if operandLabel.text == zero {
             operandLabel.text = "0."
             userInputNumber.append(contentsOf: zero)
             isNumberTapped  = true
