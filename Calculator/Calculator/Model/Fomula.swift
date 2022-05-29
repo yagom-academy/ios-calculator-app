@@ -15,14 +15,13 @@ struct Formula {
     // MARK: - Action
     
     func result() throws -> Double {
-        guard var lhs = operands.dequeue()?.data else { return 0.000000000999 }
+        guard var result = operands.dequeue()?.data else { return 0.000000000999 }
         
         while let mathOperator = operators.dequeue()?.data,
-              let rhs = operands.dequeue()?.data {
-            lhs = try mathOperator.calculate(lhs: lhs, rhs: rhs)
+              let currentNumber = operands.dequeue()?.data {
+            result = try mathOperator.calculate(lhs: result, rhs: currentNumber)
         }
-        
-        let result = lhs
+
         return result
     }
 }

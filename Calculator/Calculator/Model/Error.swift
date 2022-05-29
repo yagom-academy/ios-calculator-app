@@ -6,11 +6,11 @@
 //
 
 enum CalculatorError: Error {
-    case divisionByZero
+    case dividedByZero
     
     var description: String {
         switch self {
-        case .divisionByZero:
+        case .dividedByZero:
             return "NaN"
         }
     }

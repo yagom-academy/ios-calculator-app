@@ -53,8 +53,8 @@ class FormulaTests: XCTestCase {
             XCTAssertThrowsError(result)
             XCTAssertEqual(String(result), "NaN")
             return String(result)
-        } catch CalculatorError.divisionByZero {
-            return CalculatorError.divisionByZero.description
+        } catch CalculatorError.dividedByZero {
+            return CalculatorError.dividedByZero.description
         }
     }
 }
