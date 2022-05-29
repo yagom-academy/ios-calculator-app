@@ -102,6 +102,48 @@ private extension CalculatorViewController {
             result()
         }
     }
+}
+
+//- MARK: ScrollView & StackView
+
+extension CalculatorViewController {
+    func make(from parentLabel: UILabel?) -> UILabel {
+        let operandLabel = UILabel()
+        operandLabel.text = parentLabel == operandsLabel ? operandsLabel?.text : operatorsLabel?.text
+        operandLabel.textColor = .white
+        operandLabel.translatesAutoresizingMaskIntoConstraints = false
+        return operandLabel
+    }
+   
+    func addStackView() {
+        let calculationStackView = UIStackView()
+        calculationStackView.spacing = 8
+        calculationStackView.addArrangedSubview(make(from: operatorsLabel))
+        calculationStackView.addArrangedSubview(make(from: operandsLabel))
+        
+        formulaStackView?.addArrangedSubview(calculationStackView)
+    }
+    
+    func makeExpression() -> String {
+        var expression: String = CalculatorState.empty.value
+        
+        formulaStackView?
+            .arrangedSubviews
+            .compactMap { $0 as? UIStackView }
+            .forEach { subStackView in
+                guard let operatorLabel = subStackView.arrangedSubviews[0] as? UILabel,
+                      let operandLabel = subStackView.arrangedSubviews[1] as? UILabel,
+                      let operatorText = operatorLabel.text,
+                      let operandText = operandLabel.text else {
+                    expression = CalculatorState.empty.value
+                    return
+                }
+                
+                expression += " \(operatorText) "
+                expression += operandText.replacingOccurrences(of: ",", with: CalculatorState.empty.value)
+            }
+
+        return expression
     }
 }
 
@@ -111,10 +153,12 @@ private extension CalculatorViewController {
     func setDefalut() {
         operandsLabel?.text = CalculatorState.zero.value
         operatorsLabel?.text = CalculatorState.empty.value
+        formulaStackView?.clearSubView()
     }
     
     func fetchOperand(_ newValue: String) {
         if isCalculated {
+            formulaStackView?.clearSubView()
             operandsLabel?.text = CalculatorState.empty.value
         }
     
@@ -141,6 +185,9 @@ private extension CalculatorViewController {
     
     func fetchOperator(_ value: String) {
         if (!isTapped) {
+            addStackView()
+            savedValueScrollView?.focusBottom()
+            
             operatorsLabel?.text = value
             operandsLabel?.text = CalculatorState.zero.value
             isTapped = true
@@ -165,5 +212,18 @@ private extension CalculatorViewController {
         let removeCommaValue = oldValue.replacingOccurrences(of: ",", with: CalculatorState.empty.value)
         operandsLabel?.text = numberFormatter.string(for: removeCommaValue.doubleValue() * -1)
     }
+    
+    func result() {
+        if operatorsLabel?.text == CalculatorState.empty.value {
+            return
+        }
+        
+        addStackView()
+        savedValueScrollView?.focusBottom()
+        
+        let expressionParser = ExpressionParser.parse(from: makeExpression())
+        let formula = expressionParser.result()
+        
+        operandsLabel?.text = numberFormatter.string(for: formula)
     }
 }
