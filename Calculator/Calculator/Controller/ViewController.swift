@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     func settingInitialView() {
-        removeAllStackView(recentInputStackView)
+        removeAllSubViews()
         displayNumberLabel.text = zero
         displayOperatorLabel.text = empty
     }
@@ -38,9 +38,9 @@ class ViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 20
     }
     
-    private func removeAllStackView(_ stack: UIStackView) {
-        stack.arrangedSubviews.forEach {
-            stack.removeArrangedSubview($0)
+    private func removeAllSubViews() {
+        recentInputStackView.arrangedSubviews.forEach {
+            recentInputStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
     }
