@@ -16,16 +16,21 @@ final class CalculatorViewController: UIViewController {
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
-    private var userNumberTapped = false
+    private var userNumberTapped: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
- 
+    
+    private func setupViews() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+    }
+    
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        let digit = sender.currentTitle!
-
+        guard let digit = sender.currentTitle else{ return }
+        
         if inputStackView.subviews.isEmpty == false, operatorLabel.text!.isEmpty {
             removeStack()
             operandLabel.text! = ""
@@ -53,17 +58,17 @@ final class CalculatorViewController: UIViewController {
         }
         
         if operandLabel.text!.contains(".") == false {
-        let validNumber = makeDouble(number: operandLabel.text!)
-        let number = doNumberFormatter(number: validNumber)
-        
-        operandLabel.text = number
+            let validNumber = makeDouble(number: operandLabel.text!)
+            let number = doNumberFormatter(number: validNumber)
+            
+            operandLabel.text = number
         }
         userNumberTapped = true
         userInputNumber.append(digit)
     }
     
     @IBAction private func didTapDot(_ sender: UIButton) {
-        let dot = sender.currentTitle!
+        guard let dot = sender.currentTitle else { return }
         let textCurrentlyInDisply = operandLabel.text!
         
         if textCurrentlyInDisply.contains(Character(dot)) {
@@ -80,7 +85,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
-        let operators = sender.currentTitle!
+        guard let operators = sender.currentTitle else { return }
         
         guard let lastCharacter = userInputNumber.last else { return }
         guard let _ = Double(String(lastCharacter)) else { return }
@@ -128,7 +133,7 @@ final class CalculatorViewController: UIViewController {
         if operatorLabel.text == "" {
             return
         }
-       
+        
         addInputStack()
         operatorLabel.text! = ""
         userInput.append(userInputNumber)
@@ -152,11 +157,6 @@ final class CalculatorViewController: UIViewController {
         } catch {
             return
         }
-    }
-    
-    private func setupViews() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
     }
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
