@@ -97,7 +97,6 @@ class ViewController: UIViewController {
         isEndOperation = true
     }
     
-    //MARK: - ViewController Method
     private func clearCurrentOperand() {
         currentOperand.text = ZERO
     }
