@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operationStackView: UIStackView!
     @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
-    private var operationQueue: String = ""
+    private var operationStack: String = ""
     private let ZERO = "0"
     private var isEndOperation = false
     
@@ -48,14 +48,14 @@ class ViewController: UIViewController {
         }
         addScrollViewContent()
         currentOperator.text = sender.currentTitle
-        operationQueue += "\(currentOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
+        operationStack += "\(currentOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
         //create Scrollview Content
         clearCurrentOperand()
         scrolling()
     }
     
     @IBAction func pressAllClearButton(_ sender: UIButton) {
-        operationQueue = ""
+        operationStack = ""
         clearScrollviewContent()
         clearCurrentOperand()
         clearCurrentOperator()
@@ -78,11 +78,11 @@ class ViewController: UIViewController {
             return
         }
         addScrollViewContent()
-        operationQueue += currentOperand.text ?? ZERO
-        operationQueue = operationQueue.filter {
+        operationStack += currentOperand.text ?? ZERO
+        operationStack = operationStack.filter {
             $0 != ","
         }
-        var formula = ExpressionParser.parse(from: operationQueue)
+        var formula = ExpressionParser.parse(from: operationStack)
         do {
             let operationResult = try formula.result()
             currentOperand.text = stringToDecimal(String(operationResult))
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
             debugPrint("UNKNOWN ERROR")
         }
         clearCurrentOperator()
-        operationQueue = ""
+        operationStack = ""
         scrolling()
         isEndOperation = true
     }
