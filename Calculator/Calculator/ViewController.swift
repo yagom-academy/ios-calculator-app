@@ -112,10 +112,13 @@ class ViewController: UIViewController {
 //MARK: - UI Components
 extension ViewController {
     private func addScrollViewContent() {
-        let currentContent = createOpearionStackViewContent(currentOperator.text ?? "", currentOperand.text ?? "")
+        let currentContent = createOpearionStackViewContent(
+            inputOperator: currentOperator.text ?? "",
+            inputOperand: currentOperand.text ?? ""
+        )
         operationStackView.addArrangedSubview(currentContent)
     }
-    private func createOpearionStackViewContent(_ inputOperator: String, _ inputOperand: String) -> UILabel {
+    private func createOpearionStackViewContent(inputOperator: String, inputOperand: String) -> UILabel {
         let currentOperation = "\(inputOperator) \(inputOperand)"
         let currentOperationUILabel = createUILabel(currentOperation)
         return currentOperationUILabel
