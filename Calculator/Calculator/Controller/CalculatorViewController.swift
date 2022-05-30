@@ -18,11 +18,10 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
     
-    var inputValue: String = ""
-    var presentNumbers: String = ""
-    var presentOperator: String = ""
-    var operatorStorage: [String] = []
-    var operatorChoice: String = ""
+    var inputValue = ""
+    var presentNumbers = ""
+    var presentOperator = ""
+    var operatorStorage = [""]
     
     let numberFormatter = NumberFormatter()
     
@@ -39,14 +38,12 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
-        
+
         if !operatorStorage.isEmpty {
-            operatorChoice += operatorStorage.removeLast()
             inputValue += presentNumbers
-            inputValue += " \(operatorChoice) "
+            inputValue += " \(operatorStorage.removeLast()) "
             
             presentNumbers = ""
-            operatorChoice = ""
             operatorStorage = []
             
             presentNumbers += "\(ButtonTitle)"
