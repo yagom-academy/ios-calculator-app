@@ -18,9 +18,5 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return linkedList.pop()
     }
     
-    mutating func peek() -> T? {
-        return linkedList.peek()
-    }
-    
 }
 

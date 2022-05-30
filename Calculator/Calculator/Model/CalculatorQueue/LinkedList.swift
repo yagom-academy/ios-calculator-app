@@ -32,12 +32,4 @@ struct LinkedList<T> {
         return item
     }
     
-    mutating func peek() -> T? {
-        
-        var node = head
-        while let newNode = node?.next {
-            node = newNode
-        }
-        return node!.data
-    }
 }
