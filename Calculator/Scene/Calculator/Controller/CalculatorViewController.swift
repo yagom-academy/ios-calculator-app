@@ -17,8 +17,10 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLabelText("0")
         clearStackView()
+        resetNumberInput()
+        resetOperatorInput()
+        resetTotalInput()
     }
     
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
@@ -298,6 +300,12 @@ class CalculatorViewController: UIViewController {
         totalCalculation += secondTrimmedOperator + secondTrimmedOperand
     }
     
+    private func removeWhitespaces(_ input: String) -> String {
+        let trimmedInput = input.replacingOccurrences(of: " ", with: "")
+        
+        return trimmedInput
+    }
+    
     private func addStackView(_ stackView: UIStackView) {
         expressionStackView.addArrangedSubview(stackView)
     }
@@ -378,48 +386,44 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func changeValueButtonDidTapped(_ sender: UIButton) {
-        let changeValue = sender.currentTitle
-        if changeValue == "AC" {
-            clearStackView()
-            setLabelText("0")
-        } else if changeValue == "CE" {
-            numberInput.text = "0"
-        } else {
-            guard let value = numberInput.text else { return }
-            checkNegativeNumber(value)
-        }
-    }
-    
-    private func setLabelText(_ text: String) {
-        operatorInput.text = ""
-        numberInput.text = text
-        totalCalculation = ""
-    }
-
-    private func checkNegativeNumber(_ text: String) {
-        guard text != "0" else { return }
-        guard text != "NAN" else { return }
-        guard text.first == "-" else {
-            numberInput.text = "-\(text)"
+        guard let changeValue = sender.currentTitle else {
             return
         }
-        numberInput.text = text.filter { $0 != "-" }
-        return
-    }
-    
-    private func removeWhitespaces(_ input: String) -> String {
-        let trimmedInput = input.replacingOccurrences(of: " ", with: "")
+        let constant = Constant(rawValue: changeValue)
         
-        return trimmedInput
+        switch constant {
+        case .ac:
+            clearStackView()
+            resetNumberInput()
+            resetOperatorInput()
+            resetTotalInput()
+        case .ce:
+            resetNumberInput()
+            totalCalculation == "" ? clearStackView() : ()
+        case .signChange:
+            guard let value = numberInput.text else { return }
+            guard checkNegativeNumber(value) else {
+                return
+            }
+            changeSign(text: value)
+        default:
+            return
+        }
+    }
+
+    private func checkNegativeNumber(_ text: String) -> Bool {
+        guard text != Constant.zero.rawValue else { return false }
+        guard text != CalculatorError.dividedByZero.localizedDescription else { return false }
+        guard text.first == "-" else {
+            numberInput.text = "-\(text)"
+            return false
+        }
+        
+        return true
     }
     
-    private func changeFormat(_ format: String) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.numberStyle = .decimal
-        let result = numberFormatter.string(for: Double(format))!
-        operatorInput.text = ""
-        numberInput.text = "\(result)"
+    private func changeSign(text: String) {
+        numberInput.text = text.filter { $0 != "-" }
     }
     
     private func clearStackView() {
