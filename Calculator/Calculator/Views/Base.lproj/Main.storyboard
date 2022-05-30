@@ -365,6 +365,7 @@
                     </view>
                     <connections>
                         <outlet property="calculatingScrollView" destination="BOT-7g-vxv" id="SYT-8Z-9ZI"/>
+                        <outlet property="mainStackView" destination="XRe-QE-UJf" id="AEJ-QO-I5E"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="5dO-hE-P8E"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="hnQ-h5-hrn"/>
                     </connections>

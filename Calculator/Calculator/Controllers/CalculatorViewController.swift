@@ -6,11 +6,9 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var calculatingScrollView: UIScrollView!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var mainStackView: UIStackView!
     
     private var formula: Formula?
-    private var mainStackViewInCalculatingScrollView: UIStackView {
-        calculatingScrollView.subviews.compactMap { $0 as? UIStackView }[0]
-    }
     
     // MARK: - Lifecycle
     
@@ -25,7 +23,7 @@ final class CalculatorViewController: UIViewController {
         formula = Formula()
         operatorLabel.text = ""
         operandLabel.text = "0"
-        mainStackViewInCalculatingScrollView.subviews.forEach { $0.removeFromSuperview() }
+        mainStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func scrollToBottom(of scrollView: UIScrollView) {
@@ -78,7 +76,7 @@ final class CalculatorViewController: UIViewController {
               let operandLabelText = operandLabel.text else { return }
         
         if operandLabel.text == "0" {
-            guard mainStackViewInCalculatingScrollView.subviews.count != 0 else { return }
+            guard mainStackView.subviews.count != 0 else { return }
             operatorLabel.text = tappedOperatorText
             return
         }
@@ -86,7 +84,7 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
         
-        StackViewManager.addCalculateLabels(to: self.mainStackViewInCalculatingScrollView,
+        StackViewManager.addCalculateLabels(to: self.mainStackView,
                                                 operatorText: operatorLabelText,
                                                 operandText: operandLabelText)
         self.scrollToBottom(of: self.calculatingScrollView)
@@ -101,7 +99,7 @@ final class CalculatorViewController: UIViewController {
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
-        StackViewManager.addCalculateLabels(to: self.mainStackViewInCalculatingScrollView,
+        StackViewManager.addCalculateLabels(to: self.mainStackView,
                                                 operatorText: operatorLabelText,
                                                 operandText: operandLabelText)
         self.scrollToBottom(of: self.calculatingScrollView)
