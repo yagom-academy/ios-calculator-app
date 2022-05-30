@@ -23,7 +23,7 @@ struct Formula {
             let `operator` = Operator.allCases.filter {
                 $0.symbol == operatorSymbol
             }
-            let calculatedValue = `operator`[0].calculate(lhs: reuslt, rhs: partialResult)
+            let calculatedValue = operators.first?.calculate(lhs: reuslt, rhs: partialResult)
             
             if operatorSymbol == "÷" && (partialResult == errorNumber || reuslt == errorNumber) {
                 throw CalculatorError.dividedByZero
