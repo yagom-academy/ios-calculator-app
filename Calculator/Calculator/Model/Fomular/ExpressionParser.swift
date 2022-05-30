@@ -13,13 +13,14 @@ enum ExpressionParser {
         let operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
         let operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
         
-        input.split(with: " ")
+        componentsByOperators(from: input)
             .compactMap{ Double($0) }
             .forEach{ value in
                 operands.enqueue(value)
             }
             
-        componentsByOperators(from: input)
+        input.split(with: " ")
+            .filter { Double($0) == nil }
             .compactMap{ Character($0) }
             .forEach{ value in
                 guard let operatorValue = Operator(rawValue: value),
@@ -35,10 +36,10 @@ enum ExpressionParser {
 
 extension ExpressionParser {
     static func componentsByOperators(from input: String) ->[String] {
-        let data = input
-            .split(with: " ")
-            .filter{ Double($0) == nil }
-            
+        let operatorList: [String] = Operator.allCases.map { String($0.rawValue) }
+        var data = input.split(with: " ")
+        data.removeAll { operatorList.contains($0) }
+        
         return data
     }
 }
