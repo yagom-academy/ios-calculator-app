@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction private func clearCurrentCalculation(_ sender: UIButton) {
+    @IBAction private func tappedAllClear(_ sender: UIButton) {
         currentString = ""
         totalString = ""
         signLabel.text = ""
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     }
     
     // 연산자 입력
-    @IBAction private func addOperatorIntoEquation(_ sender: UIButton) {
+    @IBAction private func tappedOperatorIntoEquation(_ sender: UIButton) {
         if currentString.count == 0 && signLabel.text == "" {
             return
         } else if totalString.isEmpty {
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
     }
     
     // 숫자 입력
-    @IBAction func addOperandIntoEquation(_ sender: UIButton) {
+    @IBAction func tappedOperandIntoEquation(_ sender: UIButton) {
         switch sender {
         case oneButton:
             currentString += "1"
@@ -152,7 +152,7 @@ class ViewController: UIViewController {
     }
     
     // 실제 계산
-    @IBAction private func calculateFormula(_ sender: UIButton) {
+    @IBAction private func tappedCalculateFormula(_ sender: UIButton) {
         if totalString.isEmpty {
             return
         }else {
@@ -186,7 +186,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func ceExecution(sender: UIButton) {
+    @IBAction private func tappedCeExecution(sender: UIButton) {
         if currentString.isEmpty && totalString.isEmpty {
             valueLabel.text = "0"
             currentString = ""
@@ -196,7 +196,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func plusminusSwap(sender: UIButton) {
+    @IBAction private func tappedPlusMinusSwap(sender: UIButton) {
         guard let value = valueLabel.text else { return }
         if value.contains("-") {
             valueLabel.text = String(value.dropFirst())
