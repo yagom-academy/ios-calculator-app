@@ -20,7 +20,7 @@ enum ExpressionParser {
         var items = [String]()
         var splitedInput = input
         var count = 0
-        var sign:Character = " "
+        var sign: Character = " "
         
         input.forEach { element in
             let target = Character(String(element))
