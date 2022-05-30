@@ -10,10 +10,10 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    @IBOutlet weak var numberStackLabel: UILabel!
-    @IBOutlet weak var numberStackLabel2: UILabel!
-    @IBOutlet weak var operatorStackLabel: UILabel!
-    @IBOutlet weak var operatorStackLabel2: UILabel!
+    @IBOutlet weak var firstNumberLable: UILabel!
+    @IBOutlet weak var secondNumberLable: UILabel!
+    @IBOutlet weak var firstOperatorLabel: UILabel!
+    @IBOutlet weak var secondOperatorLabel: UILabel!
     
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
@@ -119,10 +119,10 @@ class CalculatorViewController: UIViewController {
     }
     
     private func removeOldLabls() {
-        numberStackLabel.removeFromSuperview()
-        numberStackLabel2.removeFromSuperview()
-        operatorStackLabel.removeFromSuperview()
-        operatorStackLabel2.removeFromSuperview()
+        firstNumberLable.removeFromSuperview()
+        secondNumberLable.removeFromSuperview()
+        firstOperatorLabel.removeFromSuperview()
+        secondOperatorLabel.removeFromSuperview()
     }
     
     private func didTapAnswerButton() {
