@@ -6,32 +6,51 @@
 //
 
 struct Formula {
-    private var operands = Queue<Double>()
-    private var operators = Queue<Operator>()
-    
-    init(operands: [Double], operators: [Operator]) {
-        operands.forEach { operand in
-            self.operands.enqueue(Double(operand))
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<String>
+
+    mutating func result() throws -> Double {
+        guard operands.queue.isEmpty == false || operators.queue.isEmpty == false else {
+            throw CalculatorError.emptyQueues
+        }
+
+        guard operands.queue.isEmpty == false else {
+            throw CalculatorError.notEnoughOperands
+        }
+
+        guard operators.queue.isEmpty == false else {
+            throw CalculatorError.notEnoughOperators
         }
         
-        operators.forEach { `operator` in
-            self.operators.enqueue(`operator`)
+        guard operands.queue.count - 1 == operators.queue.count else {
+            throw CalculatorError.notEnoughOperatorsAndOperands
         }
+
+        guard var result = operands.queue.dequeue() else {
+            throw CalculatorError.notEnoughOperands
+        }
+
+        while operators.queue.isEmpty == false {
+            guard let operand = operands.queue.dequeue() else {
+                throw CalculatorError.notEnoughOperands
+            }
+
+            guard let `operator` = operators.queue.dequeue() else {
+                throw CalculatorError.notEnoughOperators
+            }
+
+            guard let operatorCase = Operator(rawValue: Character(`operator`)) else {
+                throw CalculatorError.invalidOperator
+            }
+
+            result = try operatorCase.calculate(lhs: result, rhs: operand)
+        }
+
+        return result
     }
-    
-    func result() throws -> Double {
-        guard operands.count - 1 == `operators`.count else { throw DevideError.insufficientOperator }
-        guard let operand = operands.dequeue() else { throw DevideError.nilOfValue }
-        var lhs: Double = operand
-        while operands.isEmpty == false {
-            guard let operand = operands.dequeue() else { throw DevideError.nilOfValue }
-            let rhs = operand
-            if operators.isEmpty == false {
-                let `operator` = operators.dequeue()
-                guard let result = try `operator`?.calculate(lhs: lhs, rhs: rhs) else { throw DevideError.nilOfValue }
-                lhs = result
-            }            
-        }
-        return lhs
+
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<String>) {
+        self.operands = operands
+        self.operators = operators
     }
 }

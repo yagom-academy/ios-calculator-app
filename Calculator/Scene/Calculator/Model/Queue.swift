@@ -4,30 +4,36 @@
 //
 //  Created by 이은찬 on 2022/05/16.
 //
-class Queue<T: CalculateItem> {
-    private var list = LinkedList<T>()
-    
-    public var count: Int {
-        return list.count
+struct Queue<Element> {
+    private var enqueueStack: [Element] = []
+    private var dequeueStack: [Element] = []
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    public var isEmpty: Bool {
-        return list.isEmpty
+    var count: Int {
+        return enqueueStack.count
     }
     
-    public var firstValue: T? {
-        return list.returnFirst()?.value
+    var peek: Element? {
+        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
-    
-    public func enqueue(_ element: T) {
-        list.append(element)
+
+    mutating func enqueue(element: Element) {
+        enqueueStack.append(element)
     }
-    
-    public func dequeue() -> T? {
-        return isEmpty ? nil : list.removeHead()?.value
+
+    mutating func dequeue() -> Element? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
+        }
+
+        return dequeueStack.popLast()
     }
-    
-    public func removeAll() {
-        list.removeAll()
+
+    mutating func clear() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
