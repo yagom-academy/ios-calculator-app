@@ -6,39 +6,32 @@
 //
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operandsQueue = CalculatorItemQueue()
-        let operatorQueue = CalculatorItemQueue()
-        let formula = Formula(operands: operandsQueue, operators: operatorQueue)
-        let operators: [String] = componentsByOperators(from: input)
-        let operands: [Double] = input.split(with: " ").filter {
-            !operators.contains($0)
-        }.map {
-            Double($0) ?? 0
+        let operandsQueue = CalculatorItemQueue<Double>()
+        let operatorQueue = CalculatorItemQueue<Operator>()
+        var formula = Formula(operands: operandsQueue, operators: operatorQueue)
+        let operands: [String] = componentsByOperators(from: input)
+        let inputSpacesRemoved = input.split(with: Character(" ")).joined()
+        let operators = inputSpacesRemoved.filter { !$0.isNumber }.map { String($0) }
+    
+        operators.forEach {
+            if let `operator` = Operator(rawValue: Character($0)) {
+                formula.operators.enqueue(`operator`)
+            }
         }
         
-        operators.map{
-            Character($0)
-        }.forEach {
-            guard let calcOperator = Operator(rawValue: $0) else {
-                return
-            }
-            formula.operators.enQueue(calcOperator)
-        }
         operands.forEach {
-            formula.operands.enQueue($0)
+            if let operand = Double($0) {
+                formula.operands.enqueue(operand)
+            }
         }
         
         return formula
     }
+    
     static private func componentsByOperators(from input: String) -> [String] {
-        let operatorList = Operator.allCases.map {
-            String($0.rawValue)
-        }
-        let components = input.components(separatedBy: " ")
-        return components.filter {
-            operatorList.contains(String($0))
-        }.map {
-            String($0)
-        }
+        let inputSpacesRemoved = input.split(with: Character(" ")).joined()
+        let operands = inputSpacesRemoved.components(separatedBy:["+","−","÷","×"])
+        
+        return operands
     }
 }
