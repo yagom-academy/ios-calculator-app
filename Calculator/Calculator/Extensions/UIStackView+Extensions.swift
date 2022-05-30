@@ -9,9 +9,8 @@ import UIKit
 
 extension UIStackView {
     var isEmpty: Bool { self.arrangedSubviews.isEmpty }
-    var isNotEmpty: Bool { !self.arrangedSubviews.isEmpty }
     
-    func clearSubView() {
+    func removeSubView() {
         self.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }

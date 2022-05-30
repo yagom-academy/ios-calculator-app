@@ -14,8 +14,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var formulaStackView: UIStackView?
     @IBOutlet private weak var savedValueScrollView: UIScrollView?
     
-    private var isCalculated: Bool {
-        formulaStackView?.isNotEmpty == true && operatorsLabel?.text?.isEmpty == true
+    private var isInputedValue: Bool {
+        formulaStackView?.isEmpty == false && operatorsLabel?.text?.isEmpty == true
     }
     
     private var isContainedDot: Bool {
@@ -25,16 +25,6 @@ final class CalculatorViewController: UIViewController {
     private var isDefaultState: Bool {
         (operandsLabel?.text == CalculatorState.zero.value && formulaStackView?.isEmpty == true)
     }
-    
-    private var isTapped: Bool = true
-    
-    private var numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = -2
-        formatter.maximumIntegerDigits = 20
-        return formatter
-    }()
 }
 
 //- MARK: View LifeCycle
@@ -55,7 +45,7 @@ private extension CalculatorViewController {
             return
         }
         
-        self.fetchOperand(value)
+        self.inputOperand(value)
     }
     
     @IBAction func operatorsDidTapped(_ operators: UIButton) {
@@ -65,7 +55,7 @@ private extension CalculatorViewController {
             return
         }
         
-        self.fetchOperator(value)
+        self.inputOperator(value)
     }
     
     @IBAction func calculatorSignTapped(_ signs: UIButton) {
@@ -84,7 +74,7 @@ private extension CalculatorViewController {
         case .doubleZero:
             guard let oldValue = operandsLabel?.text,
                   !oldValue.elementsEqual(CalculatorState.zero.value),
-                  check(oldValue) else {
+                  checkLimitedDigits(oldValue) else {
                 return
             }
             operandsLabel?.text = oldValue + CalculatorOtherSigns.doubleZero.rawValue
@@ -153,17 +143,17 @@ private extension CalculatorViewController {
     func setDefalut() {
         operandsLabel?.text = CalculatorState.zero.value
         operatorsLabel?.text = CalculatorState.empty.value
-        formulaStackView?.clearSubView()
+        formulaStackView?.removeSubView()
     }
     
-    func fetchOperand(_ newValue: String) {
-        if isCalculated {
-            formulaStackView?.clearSubView()
+    func inputOperand(_ newValue: String) {
+        if isInputedValue {
+            formulaStackView?.removeSubView()
             operandsLabel?.text = CalculatorState.empty.value
         }
     
         guard let oldValue = operandsLabel?.text,
-              check(oldValue) else {
+              checkLimitedDigits(oldValue) else {
             
             operandsLabel?.text = newValue
             return
@@ -171,30 +161,26 @@ private extension CalculatorViewController {
         
         let result = oldValue + newValue
         
-        if(isContainedDot) {
+        if isContainedDot {
             operandsLabel?.text = result
             return
         }
-        
-        if let number = numberFormatter.number(from: result.replacingOccurrences(of: ",", with: CalculatorState.empty.value)) {
-            operandsLabel?.text = numberFormatter.string(from: number)
-        }
-        
-        isTapped = false
+    
+        operandsLabel?.text = result
+            .replacingOccurrences(of: ",", with: CalculatorState.empty.value)
+            .doubleValue()
+            .setDoubleFormatter()
     }
     
-    func fetchOperator(_ value: String) {
-        if (!isTapped) {
-            addStackView()
-            savedValueScrollView?.focusBottom()
-            
-            operatorsLabel?.text = value
-            operandsLabel?.text = CalculatorState.zero.value
-            isTapped = true
-        }
+    func inputOperator(_ value: String) {
+        addStackView()
+        savedValueScrollView?.focusBottom()
+        
+        operatorsLabel?.text = value
+        operandsLabel?.text = CalculatorState.zero.value
     }
     
-    func check(_ data: String) -> Bool {
+    func checkLimitedDigits(_ data: String) -> Bool {
         if (isContainedDot) {
             let integer = data.split(with: Character(CalculatorOtherSigns.dot.rawValue))[0]
             return integer.count < 20
@@ -210,7 +196,7 @@ private extension CalculatorViewController {
         }
         
         let removeCommaValue = oldValue.replacingOccurrences(of: ",", with: CalculatorState.empty.value)
-        operandsLabel?.text = numberFormatter.string(for: removeCommaValue.doubleValue() * -1)
+        operandsLabel?.text = (removeCommaValue.doubleValue() * -1).setDoubleFormatter()
     }
     
     func result() {
@@ -224,7 +210,7 @@ private extension CalculatorViewController {
         let expressionParser = ExpressionParser.parse(from: makeExpression())
         let formula = expressionParser.result()
         
-        operandsLabel?.text = numberFormatter.string(for: formula)
-        formulaStackView?.clearSubView()
+        operandsLabel?.text = formula.setDoubleFormatter()
+        formulaStackView?.removeSubView()
     }
 }
