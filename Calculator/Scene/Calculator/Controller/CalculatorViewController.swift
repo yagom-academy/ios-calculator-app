@@ -320,12 +320,21 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
+        addLastCalculationItems()
+        calculate()
+        resetTotalInput()
+        resetOperatorInput()
+        holdScrollDown()
+    }
+    
+    private func addLastCalculationItems() {
         guard operatorInput.text != "" else {
             return
         }
-        
         addCalculatorItems()
-       
+    }
+    
+    private func calculate() {
         var formula = ExpressionParser.parse(from: totalCalculation)
         
         do {
@@ -334,8 +343,37 @@ class CalculatorViewController: UIViewController {
                 return
             }
             setNumber(result)
-        } catch {
-            print(Error.self)
+        } catch (let calculationError) {
+            handleError(calculationError)
+        }
+    }
+    
+    private func resetTotalInput() {
+        totalCalculation = ""
+    }
+    
+    private func resetOperatorInput() {
+        operatorInput.text = ""
+    }
+    
+    private func handleError(_ error: Error) {
+        switch error {
+        case CalculatorError.dividedByZero:
+            numberInput.text = CalculatorError.dividedByZero.localizedDescription
+        case CalculatorError.notEnoughOperands:
+            numberInput.text = CalculatorError.notEnoughOperands.localizedDescription
+        case CalculatorError.notEnoughOperators:
+            numberInput.text = CalculatorError.notEnoughOperators.localizedDescription
+        case CalculatorError.emptyQueues:
+            numberInput.text = CalculatorError.emptyQueues.localizedDescription
+        case CalculatorError.invalidOperator:
+            numberInput.text = CalculatorError.invalidOperator.localizedDescription
+        case CalculatorError.notEnoughOperatorsAndOperands:
+            numberInput.text = CalculatorError.notEnoughOperatorsAndOperands.localizedDescription
+        case CalculatorError.lackOfInput:
+            numberInput.text = CalculatorError.lackOfInput.localizedDescription
+        default:
+            numberInput.text = "unknown error"
         }
     }
     
