@@ -7,10 +7,6 @@
 import UIKit
 
 class CalculateViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-  
     private var expressionParserInput: String = ""
     private var isCalculated = false
     
@@ -18,6 +14,41 @@ class CalculateViewController: UIViewController {
     @IBOutlet private weak var arrangedStackView: UIStackView!
     @IBOutlet private weak var operandsTextLabel: UILabel!
     @IBOutlet private weak var operatorTextLabel: UILabel!
+    
+    var subStackView: UIStackView {
+       let stackView = UIStackView()
+       stackView.axis = .horizontal
+       stackView.alignment = .fill
+       stackView.spacing = 8
+       stackView.distribution = .fill
+       stackView.translatesAutoresizingMaskIntoConstraints = false
+       stackView.isHidden = false
+       return stackView
+    }
+    
+    var operatorLabel: UILabel {
+        let signLabel = UILabel()
+        signLabel.text = operatorTextLabel.text
+        signLabel.textAlignment = .right
+        signLabel.textColor = UIColor.white
+        signLabel.translatesAutoresizingMaskIntoConstraints = false
+        signLabel.isHidden = false
+        return signLabel
+    }
+    
+    var operandLabel: UILabel {
+        let numberLabel = UILabel()
+        numberLabel.text = operandsTextLabel.text?.formatNumber()
+        numberLabel.textAlignment = .right
+        numberLabel.textColor = UIColor.white
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel.isHidden = false
+        return numberLabel
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     //MARK: - Action
     //MARK: - operandButtonsTapped()
@@ -200,18 +231,16 @@ class CalculateViewController: UIViewController {
     //MARK: - Method
     //MARK: - addStackView()
     private func addStackView() {
-        let addedStackView = UIStackView()
-        let addedOperatorsLabel = UILabel()
-        let addedOperandsLabel = UILabel()
+        let addedStackView = subStackView
+        let addedOperatorsLabel = operatorLabel
+        let addedOperandsLabel = operandLabel
         
         addStackSubviews(addedStackView)
         addLabelSubviews(addedOperatorsLabel,
                          superView: addedStackView)
         addLabelSubviews(addedOperandsLabel,
                          superView: addedStackView)
-        setStackViewConstraints(addedStackView)
-        setOperatorsLabelConstraints(addedOperatorsLabel)
-        setOperandsLabelConstraints(addedOperandsLabel)
+        
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height),
@@ -226,34 +255,6 @@ class CalculateViewController: UIViewController {
     //MARK: - addStackSubviews(_ stackView: UIStackView)
     private func addStackSubviews(_ stackView: UIStackView) {
         arrangedStackView.addArrangedSubview(stackView)
-    }
-    
-    //MARK: - setStackViewConstraints(_ stackView: UIStackView)
-    private func setStackViewConstraints(_ stackView: UIStackView) {
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.spacing = 8
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.isHidden = false
-    }
-    
-    //MARK: - setOperatorsLabelConstraints(_ label: UILabel)
-    private func setOperatorsLabelConstraints(_ label: UILabel) {
-        label.text = operatorTextLabel.text
-        label.textAlignment = .right
-        label.textColor = UIColor.white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = false
-    }
-    
-    //MARK: - setAddedOperandsLabelConstraints(_ label: UILabel)
-    private func setOperandsLabelConstraints(_ label: UILabel) {
-        label.text = operandsTextLabel.text?.formatNumber()
-        label.textAlignment = .right
-        label.textColor = UIColor.white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = false
     }
     
     //MARK: - deleteStackViewAll()
