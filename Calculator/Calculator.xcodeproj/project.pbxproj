@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05013DE0284496010088B743 /* CalculatorVaule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05013DDF284496010088B743 /* CalculatorVaule.swift */; };
 		05271E932834A9AB00379CC5 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05271E922834A9AB00379CC5 /* Node.swift */; };
 		05271E952834B9FA00379CC5 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05271E942834B9FA00379CC5 /* LinkedList.swift */; };
 		053AC6EE283E27D700C8C360 /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053AC6ED283E27D700C8C360 /* ExtensionTests.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05013DDF284496010088B743 /* CalculatorVaule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorVaule.swift; sourceTree = "<group>"; };
 		05271E922834A9AB00379CC5 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		05271E942834B9FA00379CC5 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		053AC6EB283E27D700C8C360 /* EtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +276,7 @@
 				0598DC902836821800F30E6B /* Operator.swift */,
 				05597863283779940019A1D4 /* Extension.swift */,
 				20A147B328446A4E0046212C /* Keypad.swift */,
+				05013DDF284496010088B743 /* CalculatorVaule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				0598DCBB2836AD9C00F30E6B /* CalculatorError.swift in Sources */,
 				05271E932834A9AB00379CC5 /* Node.swift in Sources */,
+				05013DE0284496010088B743 /* CalculatorVaule.swift in Sources */,
 				20A147B428446A4E0046212C /* Keypad.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				05C9DF9E2832A648006BA908 /* CalculateItem.swift in Sources */,

@@ -18,6 +18,12 @@ final class ViewController: UIViewController {
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
     
+    // TODO : calculatorValue로 바꾸기
+    var calculatorValue = CalculatorValue()
+    
+    
+    // 4개가 감지되어야 함
+    // - 값 변경은 CV 메서드로 처리
     private var inputNumber = ""
     private var inputOperator = ""
     private var arithmetic = ""
@@ -27,7 +33,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetCalculator()
+        // resetCalculator()
     }
 }
 
@@ -35,26 +41,25 @@ final class ViewController: UIViewController {
 
 extension ViewController {
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
-        resetCalculator()
-    }
-    
-    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        inputNumber = ""
-        inputNumberLabel.text = "0"
-    }
-    
-    private func resetCalculator() {
+        // TODO : View
         stackView.removeAllArrangedSubview()
         inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
-        arithmetic = ""
-        inputNumber = ""
-        isPositiveNumber = true
-        inputOperator = ""
+        
+        // resetCalculator()
     }
     
+    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
+        // TODO : View + value
+        // inputNumber = ""
+        calculatorValue.resetInput(inputNumber: true, inputOperator: false)
+        inputNumberLabel.text = "0"
+    }
+    
+    
+    // TODO : View + value
     private func updateStackView() {
-        if inputNumber == "" {
+        if calculatorValue.isNumberEmpty {
             return
         }
         
@@ -64,21 +69,23 @@ extension ViewController {
         
         stackView.addLable(operator: inputOperator, operand: inputNumber)
         arithmetic = arithmetic + inputOperator + inputNumber
-        inputNumber = ""
-        inputOperator = ""
+//        inputNumber = ""
+//        inputOperator = ""
+        calculatorValue.resetInput(inputNumber: true, inputOperator: true)
         inputNumberLabel.text = "0"
     }
 }
 
-// MARK: - Action
-
+// TODO : View + value
 extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         let tappedNumber = sender.titleLabel?.text ?? "0"
-        updateInputNumber(with: tappedNumber)
+        //updateInputNumber(with: tappedNumber)
+        calculatorValue.updateInputNumber(with: tappedNumber)
         inputNumberLabel.text = inputNumber
     }
     
+    // TODO : View + value
     @IBAction private func tapOperatorsButton(_ sender: UIButton) {
         var currentOperator: Character = " "
         switch sender {
@@ -100,8 +107,9 @@ extension ViewController {
         inputOperator = String(currentOperator)
     }
     
+    // TODO : View + value
     @IBAction private func tapResultButton() {
-        if arithmetic.isEmpty {
+        if calculatorValue.isArithmeticEmpty {
             return
         }
         
@@ -124,39 +132,12 @@ extension ViewController {
         }
         
         inputOperatorLabel.text = ""
-        inputNumber = ""
-        arithmetic = ""
+        calculatorValue.resetCalculator()
     }
     
+    // TODO : View + value
     @IBAction private func tapToChangeSignButton(_ sender: UIButton) {
-        if inputNumber == "0" || inputNumber == "" {
-            return
-        }
-        
-        if isPositiveNumber {
-            inputNumber = "-" + inputNumber
-            isPositiveNumber = false
-        } else {
-            inputNumber = inputNumber.replacingOccurrences(of: "-", with: "")
-            isPositiveNumber = true
-        }
-        
+        calculatorValue.convertSign()
         inputNumberLabel.text = inputNumber
-    }
-    
-    private func updateInputNumber(with number: String) {
-        if inputNumber.contains(".") && number == "." {
-            return
-        }
-        
-        if (inputNumber == "" || inputNumber == "0") && (number == "0" || number == "00") {
-            inputNumber = "0"
-        } else if inputNumber == "" && number == "." {
-            inputNumber = "0."
-        } else if inputNumber == "0" && number != "."{
-            inputNumber = number
-        } else {
-            inputNumber += number
-        }
     }
 }
