@@ -7,10 +7,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var mathSign: UILabel!
-    @IBOutlet weak var mathFomula: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet private weak var mathSignLabel: UILabel!
+    @IBOutlet private weak var mathFomulaLabel: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var stackView: UIStackView!
     
     private var inputFormula: String = ""
     private var inputMathFormula: [String] = []
@@ -21,15 +21,15 @@ class ViewController: UIViewController {
     }
     
     func clearFormulaAndSign() {
-        mathFomula.text = "0"
-        mathSign.text = ""
-        stackView.subviews.forEach{ (view) in view.removeFromSuperview() }
+        mathFomulaLabel.text = "0"
+        mathSignLabel.text = ""
+        stackView.subviews.forEach{ $0.removeFromSuperview() }
         inputFormula = "0"
         inputMathFormula.removeAll()
     }
     
-    @IBAction func InputNumber(buttonNumber: UIButton) {
-        guard let formulaNumber = buttonNumber.currentTitle else { return }
+    @IBAction private func inputNumber(sender: UIButton) {
+        guard let formulaNumber = sender.currentTitle else { return }
         if inputFormula == "0" && formulaNumber == "0" {
             return
         }
@@ -40,35 +40,37 @@ class ViewController: UIViewController {
         
         if inputFormula == "0" {
             inputFormula = formulaNumber
-            mathFomula.text = inputFormula
+            mathFomulaLabel.text = inputFormula
             return
         }
         
         if inputFormula.last == "0" || inputFormula.last == "." {
             inputFormula += formulaNumber
-            mathFomula.text = inputFormula
+            mathFomulaLabel.text = inputFormula
             return
         }
         
         inputFormula += formulaNumber
-        mathFomula.text = numberFormatter(number: inputFormula)
+        mathFomulaLabel.text = numberFormatter(number: inputFormula)
     }
     
     @IBAction func InputDeciamlPoint(sender: UIButton) {
-        guard let buttonDecimalPoint = sender.currentTitle else { return }
-        guard let currentFormula = mathFomula.text else { return }
+        guard let buttonDecimalPoint = sender.currentTitle,
+                   let currentFormula = mathFomulaLabel.text else {
+                       return
+        }
         
         if inputFormula.last == "." || inputFormula.contains(".") {
             return
         }
         
         inputFormula += buttonDecimalPoint
-        mathFomula.text = currentFormula + buttonDecimalPoint
+        mathFomulaLabel.text = currentFormula + buttonDecimalPoint
     }
     
     @IBAction func calculateFormula() {
-        guard let signLabel = mathSign?.text else { return }
-        guard let formulaLabel = mathFomula?.text else { return }
+        guard let signLabel = mathSignLabel?.text else { return }
+        guard let formulaLabel = mathFomulaLabel?.text else { return }
         
         if signLabel.isEmpty { return }
         
@@ -77,8 +79,8 @@ class ViewController: UIViewController {
         scrollView.scrollSetting()
         
         if formulaLabel == "0" && signLabel == "÷" {
-            mathSign.text = ""
-            mathFomula.text = "NaN"
+            mathSignLabel.text = ""
+            mathFomulaLabel.text = "NaN"
             return
         }
         
@@ -88,21 +90,21 @@ class ViewController: UIViewController {
         var completionOfCalculation = ExpressParser.parse(from: setCalculteFormula)
         do {
             let resultOfCalculation = try String(completionOfCalculation.result())
-            mathFomula.text = numberFormatter(number: resultOfCalculation)
-            mathSign.text = ""
+            mathFomulaLabel.text = numberFormatter(number: resultOfCalculation)
+            mathSignLabel.text = ""
         } catch {
-            mathFomula.text = "NaN"
+            mathFomulaLabel.text = "NaN"
         }
     }
 
     
     @IBAction func InputSign(sender: UIButton) {
         guard let buttonSign = sender.currentTitle else { return }
-        guard let signLabel = mathSign.text else { return }
-        guard let formulaLabel = mathFomula.text else { return }
+        guard let signLabel = mathSignLabel.text else { return }
+        guard let formulaLabel = mathFomulaLabel.text else { return }
         
         if inputFormula == "0" {
-            mathSign.text = buttonSign
+            mathSignLabel.text = buttonSign
             return
         }
         
@@ -113,8 +115,8 @@ class ViewController: UIViewController {
         inputMathFormula.append(buttonSign)
         inputFormula = "0"
         
-        mathFomula.text = inputFormula
-        mathSign.text = buttonSign
+        mathFomulaLabel.text = inputFormula
+        mathSignLabel.text = buttonSign
     }
     
     @IBAction func removeAll() {
@@ -123,7 +125,7 @@ class ViewController: UIViewController {
     
     @IBAction func clearEntity() {
         inputFormula = "0"
-        mathFomula.text = inputFormula
+        mathFomulaLabel.text = inputFormula
     }
     
     @IBAction func changeSign() {
@@ -132,7 +134,7 @@ class ViewController: UIViewController {
         if InputMathFomula == 0 { return }
         
         inputFormula = String(InputMathFomula * -1)
-        mathFomula.text = numberFormatter(number: inputFormula)
+        mathFomulaLabel.text = numberFormatter(number: inputFormula)
     }
     
     private func numberFormatter(number: String) -> String {
