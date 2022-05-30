@@ -10,20 +10,20 @@ struct Formula {
     var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() throws -> Double {
-        guard operands.items.count > operators.items.count,
-              var total = operands.dequeue() else {
-            throw CalculatorError.emptyError
+        guard operands.enQueueStack.count > operators.enQueueStack.count else {
+            throw QueueError.unknown
         }
+        var total = try operands.deQueue()
         
-        for _ in 1...operators.items.count {
-            guard let number = operands.dequeue() else { throw CalculatorError.emptyError }
-            guard let symbol = operators.dequeue() else { throw CalculatorError.emptyError }
+        for _ in 1...operators.enQueueStack.count {
+            let number = try operands.deQueue()
+            let symbol = try operators.deQueue()
             
             if symbol == .divide && number == 0.0 {
-                throw CalculatorError.divideError
+                throw OperatorError.devideFail
             }
             
-            total = symbol.calculate(lhs: total, rhs: number)
+            total = try symbol.calculate(lhs: total, rhs: number)
         }
         return total
     }

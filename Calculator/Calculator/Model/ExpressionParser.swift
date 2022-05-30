@@ -13,13 +13,13 @@ enum ExpressionParser {
             Double(String($0)) == nil
         }.forEach {
             guard let sign = Operator(rawValue: $0) else { return }
-            formula.operators.enqueue(sign)
+            formula.operators.enQueue(sign)
         }
         
         componentsByOperators(from: input).compactMap {
             Double($0)
         }.forEach {
-            formula.operands.enqueue($0)
+            formula.operands.enQueue($0)
         }
         
         return formula
