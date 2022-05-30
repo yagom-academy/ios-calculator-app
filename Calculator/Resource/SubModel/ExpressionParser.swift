@@ -9,9 +9,18 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operators = componentsByOperators(from: input)
         let operands = input.split { Operator.allCases.map({ String($0.rawValue) }).contains(String($0)) }.map { String($0) }
+
+        var newOperands: [Double] = []
+        operands.forEach {
+            if $0.contains("&") {
+                newOperands.append(Double(String($0.dropFirst()))! * -1)
+            } else {
+                newOperands.append(Double($0)!)
+            }
+        }
         
         let compactOperators = operators.compactMap({ $0 })
-        let compactOperands = operands.compactMap({ $0 })
+        let compactOperands = newOperands.compactMap({ $0 })
         
         let optionalOperators = compactOperators.map { Operator(rawValue: Character($0))}
         let optionalOperands = compactOperands.map { Double($0) }
@@ -23,6 +32,6 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.filter { Operator.allCases.map({ String($0.rawValue)}).contains(String($0))}.map { String($0) }
+        return input.filter { Operator.allCases.map({ String($0.rawValue) }).contains(String($0))}.map { String($0) }
     }
 }
