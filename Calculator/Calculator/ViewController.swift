@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         return !judgeInputNumber
     }
     
-    @IBAction func InputDeciamlPoint(sender: UIButton) {
+    @IBAction private func inputDeciamlPoint(sender: UIButton) {
         guard let buttonDecimalPoint = sender.currentTitle,
                    let currentFormula = mathFomulaLabel.text else {
                        return
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         mathFomulaLabel.text = currentFormula + buttonDecimalPoint
     }
     
-    @IBAction func calculateFormula() {
+    @IBAction private func calculateFormula() {
         guard let signLabel = mathSignLabel?.text else { return }
         guard let formulaLabel = mathFomulaLabel?.text else { return }
         
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func InputSign(sender: UIButton) {
+    @IBAction private func inputSign(sender: UIButton) {
         guard let buttonSign = sender.currentTitle else { return }
         guard let signLabel = mathSignLabel.text else { return }
         guard let formulaLabel = mathFomulaLabel.text else { return }
@@ -127,16 +127,16 @@ class ViewController: UIViewController {
         mathSignLabel.text = buttonSign
     }
     
-    @IBAction func removeAll() {
+    @IBAction private func removeAll() {
         clearFormulaAndSign()
     }
     
-    @IBAction func clearEntity() {
+    @IBAction private func clearEntity() {
         inputFormula = "0"
         mathFomulaLabel.text = inputFormula
     }
     
-    @IBAction func changeSign() {
+    @IBAction private func changeSign() {
         let InputMathFomula = Double(inputFormula) ?? 0
         
         if InputMathFomula == 0 { return }
