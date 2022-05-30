@@ -18,16 +18,9 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return linkedList.pop()
     }
     
-    mutating func clear() {
-        linkedList.removeAll()
-    }
-    
     mutating func peek() -> T? {
         return linkedList.peek()
     }
     
-    mutating func count() -> Int {
-        return linkedList.checkCount()
-    }
 }
 
