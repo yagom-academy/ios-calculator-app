@@ -20,7 +20,7 @@ class ExpressionParserTests: XCTestCase {
 
     func test_parse메서드에_1더하기2빼기3을_넣었을때_알맞은Formula_반환() {
         // given
-        let input = "1+2-3"
+        let input = "1+2–3"
         
         // when
         let formula = ExpressionParser.parse(from: input)
