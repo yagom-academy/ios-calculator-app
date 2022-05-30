@@ -150,8 +150,6 @@ private extension CalculatorViewController {
     
         guard let oldValue = operandsLabel?.text,
               check(oldValue) else {
-            
-            operandsLabel?.text = newValue
             return
         }
         
