@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         clearCurrentOperatorUILabel()
         // Do any additional setup after loading the view.
     }
+    
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
         let operandLabel = currentOperand.text ?? CalcAccessory.Empty
@@ -59,13 +60,18 @@ class ViewController: UIViewController {
             currentOperator.text = (sender.currentTitle ?? CalcAccessory.Empty)
             return
         }
+        
+        if currentOperand.text?.last == "." {
+            currentOperand.text?.removeLast()
+        }
+        
         addCurrentOperationToScrollViewContent()
+        operationStack += "\(currentOperand?.text ?? CalcAccessory.Zero) \(sender.currentTitle ?? CalcAccessory.Empty) "
         currentOperator.text = sender.currentTitle
-        operationStack += "\(currentOperand?.text ?? CalcAccessory.Zero) \(sender.currentTitle ?? CalcAccessory.Empty)"
-        //create Scrollview Content
         clearCurrentOperandUILabel()
         scrollingUnder()
     }
+    
     @IBAction func pressAllClearButton(_ sender: UIButton) {
         operationStack = CalcAccessory.Empty
         clearOperationScrollviewContent()
