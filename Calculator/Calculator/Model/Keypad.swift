@@ -41,11 +41,11 @@ enum Keypad: CaseIterable {
         }
     }
 
-    static func convertNumber(_ index: Int) -> String {
+    func convertNumber(_ index: Int) -> String {
         switch index {
-        case doubleZero.number:
+        case Keypad.doubleZero.number:
             return "00"
-        case decimalPoint.number:
+        case Keypad.decimalPoint.number:
             return "."
         default:
             let result = Keypad.allCases.filter {
