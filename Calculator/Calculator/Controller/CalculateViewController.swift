@@ -33,8 +33,7 @@ class CalculateViewController: UIViewController {
         guard let operandText = operandLabel.text,Double(operandText) != 0.0 else {
             return
         }
-        
-        guard let operand = Double(operandText.filter {$0 != ","}) else {
+        guard let operand = Double(filterSign(operandText, ",")) else {
             return
         }
         
@@ -45,7 +44,7 @@ class CalculateViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
-        guard let sederTitle = sender.currentTitle else{
+        guard let sederTitle = sender.currentTitle else {
             return
         }
         
@@ -66,20 +65,23 @@ class CalculateViewController: UIViewController {
             operatorLabel.text = sender.currentTitle
             return
         }
-        guard Double(getText(operandLabel).filter { $0 != "," }) != nil else {
+        guard Double(filterSign(getText(operandLabel), ",")) != nil else {
             operandLabel.text = "NaN"
             isOperandInputted = false
             return
         }
-        guard let sederTitle = sender.currentTitle else{
+        guard let sederTitle = sender.currentTitle else {
             return
         }
+        
         operatorLabel.text = sederTitle
+        
         if fomulaStackView.subviews.isEmpty {
             createStackView(changeFormat(getText(operandLabel)))
         } else {
             createStackView(sederTitle, changeFormat(getText(operandLabel)))
         }
+        
         addInputtedFomula()
         downScroll()
         operandLabel.text = "0"
@@ -90,7 +92,7 @@ class CalculateViewController: UIViewController {
         guard isOperandInputted else {
             return
         }
-        guard Double(getText(operandLabel).filter { $0 != "," }) != nil else {
+        guard Double(filterSign(getText(operandLabel), ",")) != nil else {
             operandLabel.text = "NaN"
             isOperandInputted = false
             return
@@ -150,11 +152,11 @@ class CalculateViewController: UIViewController {
     
     private func addInputtedFomula() {
         guard inputtedFomula.isEmpty else {
-            inputtedFomula += " \(getText(operatorLabel)) \(getText(operandLabel).filter { $0 != "," })"
+            inputtedFomula += " \(getText(operatorLabel)) \(filterSign(getText(operandLabel), ","))"
             return
         }
         
-        inputtedFomula = "\(getText(operandLabel).filter { $0 != "," })"
+        inputtedFomula = "\(filterSign(getText(operandLabel), ","))"
     }
     
     private func downScroll() {
@@ -163,7 +165,7 @@ class CalculateViewController: UIViewController {
     }
     
     private func changeFormat(_ input: String) -> String {
-        let result = input.filter { $0 != ","  }
+        let result = filterSign(input, ",")
         
         return (Double(result) ?? 0).parse()
     }
@@ -173,7 +175,7 @@ class CalculateViewController: UIViewController {
             return "-" + input
         }
         
-        return input.filter{ $0 != "-" }
+        return filterSign(input, "-")
     }
     
     private func checkOperand(_ currentlabel: String, with currentInput: String) -> String {
@@ -193,5 +195,9 @@ class CalculateViewController: UIViewController {
         inputtedFomula = ""
         isOperandInputted = false
         isCalculateCompleted = false
+    }
+    
+    private func filterSign(_ input: String, _ sign: String.Element) -> String {
+        return input.filter{$0 != sign}
     }
 }
