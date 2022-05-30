@@ -133,6 +133,10 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
+        if operandLabel.text == zero {
+            userInput.append(zero)
+        }
+        
         addInputStack()
         operatorLabel.text = emptyString
         userInput.append(userInputNumber)
