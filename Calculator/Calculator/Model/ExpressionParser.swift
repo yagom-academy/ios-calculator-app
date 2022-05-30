@@ -2,8 +2,9 @@
 //  ExpressionParser.swift
 //  Calculator
 //
+
 //  Created by bard, hugh on 2022/05/30.
-//
+
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
@@ -20,8 +21,6 @@ enum ExpressionParser {
             Double($0)
         }.forEach {
             formula.operands.enQueue($0)
-        }
-        
         return formula
     }
     

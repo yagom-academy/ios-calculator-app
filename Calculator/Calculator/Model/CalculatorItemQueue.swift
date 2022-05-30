@@ -2,8 +2,6 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by bard,hugh on 2022/05/30.
-//
 
 struct CalculatorItemQueue<T>: Queue, CalculateItem {
     private(set) var enQueueStack: Array<T> = []
