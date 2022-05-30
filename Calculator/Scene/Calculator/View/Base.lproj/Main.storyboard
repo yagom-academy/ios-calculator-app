@@ -304,7 +304,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="dotButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ce3-LY-ire"/>
+                                                    <action selector="numberButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lO2-46-xRi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -365,11 +365,9 @@
                     </view>
                     <connections>
                         <outlet property="expressionStackView" destination="XRe-QE-UJf" id="wTC-yM-KIU"/>
-                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="JVl-BB-7jC"/>
-                        <outletCollection property="valueLabels" destination="HPC-iy-qdm" collectionClass="NSMutableArray" id="zha-Fp-Kvm"/>
-                        <outletCollection property="valueLabels" destination="Lwz-OF-XHD" collectionClass="NSMutableArray" id="jIb-zj-Qlz"/>
-                        <outletCollection property="defaultStackViews" destination="2Pu-Ld-ZGi" collectionClass="NSMutableArray" id="EaP-Z0-gAg"/>
-                        <outletCollection property="defaultStackViews" destination="6I9-iL-eIa" collectionClass="NSMutableArray" id="srC-mS-ssj"/>
+                        <outlet property="numberInput" destination="Lwz-OF-XHD" id="c6N-bv-ePe"/>
+                        <outlet property="operatorInput" destination="HPC-iy-qdm" id="PrC-8E-ieZ"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="JVl-BB-7jC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
