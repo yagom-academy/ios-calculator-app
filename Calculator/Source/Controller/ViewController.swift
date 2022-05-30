@@ -77,8 +77,13 @@ class ViewController: UIViewController {
         if currentString.count == 0 && signLabel.text == "" {
             return
         } else if totalString.isEmpty {
-            totalString += currentString
-            addNewLabel(message: currentString, stackView: stackView)
+            guard let value = valueLabel.text else { return }
+            if value.contains("-") {
+                totalString += "&\(value.dropFirst())"
+            } else {
+                totalString += value
+            }
+            addNewLabel(message: value, stackView: stackView)
             valueLabel.text = "0"
             signLabel.text = senderToSign(sender: sender)
             currentString = ""
