@@ -32,7 +32,7 @@ struct Formula {
                 
                 lhs = result.calculate(lhs: lhs, rhs: number)
             }
-        } catch ErrorCase.operatorDequeue {
+        } catch ErrorCase.divideByZero {
             return .nan
         }
         
