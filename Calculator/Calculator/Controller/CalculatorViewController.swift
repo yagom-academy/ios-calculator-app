@@ -59,7 +59,7 @@ class CalculatorViewController: UIViewController {
             presentNumbers += "\(buttonTitle)"
             numberLabel.text = "\(presentNumbers)"
         }
-        userIsInTheMiddleOfTyping = true
+        userIsInTheMiddleOfTyping = false
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -67,13 +67,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        presentOperator = buttonTitle
-        operatorLabel.text = "\(buttonTitle)"
-        
         if ["+", "−", "÷", "×"].contains(buttonTitle) {
-            operatorStorage.append(" \(buttonTitle) ")
-            
             makeStackLabel()
+            
+            presentOperator = buttonTitle
+            operatorLabel.text = "\(buttonTitle)"
+            
+            operatorStorage.append(" \(buttonTitle) ")
             numberLabel.text = "0"
             userIsInTheMiddleOfTyping = true
         }
@@ -118,6 +118,34 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
         
+        if presentOperator.isEmpty {
+            stackNumberLabel.text = "\(presentNumbers)"
+        } else {
+            stackNumberLabel.text = "\(presentNumbers)"
+            stackOperatorLabel.text = "\(presentOperator) "
+        }
+        
+        stackView.addArrangedSubview(stackOperatorLabel)
+        stackView.addArrangedSubview(stackNumberLabel)
+        valuesStackView.addArrangedSubview(stackView)
+    }
+    
+    private func makeResultLabel() {
+        let stackView = UIStackView()
+        let stackNumberLabel = UILabel()
+        let stackOperatorLabel = UILabel()
+        
+        let bottomOffset = CGPoint(x: 0,
+                                   y: previousValues.contentSize.height
+                                   - previousValues.bounds.height
+                                   + numberLabel.font.lineHeight)
+        previousValues.setContentOffset(bottomOffset, animated: false)
+        
+        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackNumberLabel.textColor = .white
+        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackOperatorLabel.textColor = .white
+        
         stackNumberLabel.text = "\(presentNumbers)"
         stackOperatorLabel.text = "\(presentOperator) "
         
@@ -135,16 +163,17 @@ class CalculatorViewController: UIViewController {
     
     private func didTapAnswerButton() {
         inputValue += presentNumbers
-
+        
         if !presentNumbers.isEmpty && !inputValue.isEmpty {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
             
             if result.description.count < 20 {
-                guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
                     return
                 }
-                numberLabel.text = "\(NSNresult)"
+                numberLabel.text = "\(trimmedResult)"
+                makeResultLabel()
             }
         }
         presentNumbers = ""
@@ -152,6 +181,7 @@ class CalculatorViewController: UIViewController {
     
     private func didTapACButton() {
         presentNumbers = ""
+        presentOperator = ""
         inputValue = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
@@ -159,6 +189,7 @@ class CalculatorViewController: UIViewController {
         valuesStackView.subviews.forEach { views in
             views.removeFromSuperview()
         }
+        userIsInTheMiddleOfTyping = false
     }
     
     private func didTapCEButton() {
