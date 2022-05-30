@@ -5,22 +5,26 @@
 //  Created by 유한석 on 2022/05/19.
 //
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var lhs = operands.deQueue()?.value as? Double else {
+        guard var formulaResult = operands.dequeue()?.value else {
             return 0.0
         }
+        
         while operators.count > 0, operands.count > 0 {
-            guard let calcOperator = operators.deQueue()?.value as? Operator else {
-                return lhs
+            guard let `operator` = operators.dequeue()?.value else {
+                return formulaResult
             }
-            guard let rhs = operands.deQueue()?.value as? Double else {
-                return lhs
+            
+            guard let operand = operands.dequeue()?.value else {
+                return formulaResult
             }
-            try lhs = calcOperator.calculate(lhs: lhs, rhs: rhs)            
+            
+            try formulaResult = `operator`.calculate(lhs: formulaResult, rhs: operand)            
         }
-        return lhs
+        
+        return formulaResult
     }
 }
