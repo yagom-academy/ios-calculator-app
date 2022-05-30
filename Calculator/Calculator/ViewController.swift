@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func pressEqualButton(_ sender: UIButton) {
-        if isEndOperation {
+        guard !isEndOperation else {
             return
         }
         addScrollViewContent()
