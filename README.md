@@ -1,82 +1,90 @@
-  
+## 🤟 Step 3
 
-## ☝️ Step 1
+### 고민한 점 🤔
 
-### 1. UML 
-- step2 공개 전, 계산기 동작설명을 보고 작성한 UML입니다. 
-![스크린샷 2022-05-17 오후 3 05 22](https://user-images.githubusercontent.com/50102522/168760465-3b2bba38-739a-4216-85bf-577fdafd0122.png)
+#### 1. 키패드 버튼에 대한 고민
+계산기의 키패드에서 어떤 버튼이 눌렸는지 확인하기 위해 총 3개가지 방식을 생각해 보았습니다.
 
-### 2. 고민한 점
-- dequeue 메서드의 구현 방식을 고민했습니다.
-`removeFirst()`메서드를 사용하여 인덱스까지 없애는 쪽으로 구현할 지, 
-값 반환 후 반환한 인덱스의 값을 nil로 처리하여 인덱스를 남겨둘지 고민했습니다.
-물론 후자의 경우 시간복잡도가 O(1)인 큰 장점이 있지만, liked list로 구현할 때 시간복잡도를 줄여보려고 전자를 선택했습니다.
-또한 전자의 경우 dequeu안에 head를 사용하지 않아 더 간결한 코드를 만들 수 있어 메서드를 사용하는 방식으로 구현했습니다.
+      1️⃣ 모든 키패드버튼을 아울렛으로 가져와서, switch-case를 사용한다.
+      2️⃣ 키패드 버튼을 아울렛 컬렉션으로 가져와서, 아울렛 컬렉션의 인덱스를 활용한다.
+      3️⃣ UIButton.titleLabel.text를 사용한다.
 
+- **첫번째 방법**은 다른 두가지 방법에 비해 안전하지만, 총 11개의 키패드를 switch case로 만들어줘야해서 하드코딩같은 느낌을 받았습니다.
+- **두번째 방법**은 아울렛 컬렉션에 0부터 순서대로 넣어서 숫자와 동일하게 인덱스 값을 가지게 한 다음, enum의 연관값을 활용하여 각 인데스가 어떤 의미를 가지는지 확인해주는 방식입니다. 이 방식은 enum 파일을 만들어줌으로써 한 파일의 코드가 길어지는 것을 방지할 수 있었습니다.
+(자세한 코드는 commit **9b0e883**에서 확인하실 수 있습니다.)
+- **세번째 방법** 위에 두 방법보다 에러 발생 확률이 높다고 생각했지만, 최종적으로 이 방법을 사용하였습니다.
 
-### 3. 조언받고 싶은 점
-- 테스트 파일에도 MARK 주석을 사용하는지 궁금합니다.
-MARK 주석을 사용하면 테스트 파일의 코드가 길어져도 같은 메서드에 대한 테스트를 `Jump bar menu`에서 모아서 확인할 수 있어 좋겠다라고 생각했습니다.
-그래서 이번 스텝에서 테스트 파일에 MARK 주석을 사용해봤는데, 
-테스트 파일에 MARK 주석을 사용하는 경우가 많은지 궁금합니다!
-
-- 배열에 대한 isEmpty 메서드를 또 만들어 처리해도 괜찮은지 궁금합니다.
-`dequeue()`와 `peak()`에서 배열이 비어있으면 `head`변수의 값을 -1로 초기화하는 부분이 중복되길래 `isEmpty()` 메서드를 따로 구현해주었습니다.
-나중에 유지보수할 경우까지 생각하면 빼는게 맞는 것 같으면서도, 
-메서드를 만드는 것보다 내장 메서드를 이용하는게 더 코드가 짧으니 이 방법이 맞나라는 생각이 듭니다.
-`isEmpty()`를 직접 구현하는 것과 내장 메서드 사용 중에 어떤게 더 괜찮은 방법인지 궁금합니다! 
+두번째에서 세번째 방법으로 바꾼 가장 큰 이유는 가독성이었습니다.
+title값이 변경되어 에러가 발생하는 것과 인덱스 순서가 잘못되어 에러가 발생하는 것 중에 뭐가 더 큰 문제를 발생시키는 에러인지 모르겠습니다🥲
+둘 다 에러가 발생할 수 있는 환경이라면, 가독성이 더 나은 걸 선택하는게 좋지 않을까 생각했습니다..!
+그래서 최종적으로 PR을 보낼 땐 titleLabel을 사용하는 걸로 구현했습니다.
 
 <br>
 
-## 🖥 코드 설명 
+### 조언받고 싶은 점 😯
+1. 키패드 버튼 처리에 대한 부분
+- 제가 생각한 세 가지 방식보다 더 좋은 방향이 있을 것 같은데, 어떤 걸 사용하여 구현해야되는지 감이 안옵니다..😥
+어떤 개념을 활용 해야 유지보수도 용이한 좋은 코드가 될 수 있는지 궁금합니다😯
 
-### CalculatorItemQueue 파일 
-#### [속성]
-`var calculateItems:Array<T>`
-- 연산자와 피연자의 큐를 각각 만들 때, 서로 다른 타입으로 선언하려고 제네릭 타입으로 만들었습니다.
-- 테스트코드에서 사용되는 변수라 public으로 선언해주었습니다.
+<br>
+<br>
 
-`private(set) var head`
-- `peak()` 메서드에서 인덱스를 가리키는데 사용할 변수입니다.
-- 이 변수는 내부 파일에서만 변경되므로 읽기 전용으로 선언해주었습니다.
+## 코드 설명 🥸
+
+### ViewController 파일
+#### [프로퍼티]
+    
+ `private var inputNumber = ""`
+ - 사용자가 누른 피연산자를 담아두는 변수 입니다.
+
+ `private var inputOperator = ""`
+ - 사용자가 누른 연산자를 담아두는 변수 입니다.
+ 
+ `private var arithmetic = ""`
+ - 피연산자와 연산자를 담고 있는 변수 입니다.
+ 
+ `private var isPositiveNumber = true`
+ - 양수인지 음수인지 판별해주는 변수 입니다.
+
+<br>
+
 
 #### [메서드]
-`mutating func enqueue(_ element: T)`
-- 매개변수를 배열 맨 뒤에 추가하는 메서드입니다.
 
-`mutating func dequeue() -> T?`
-- 맨 첫 번째 요소를 제거한 뒤 반환하는 메서드입니다.
-- 요소가 없는 상태에서 메서드 호출 시, 값이 없음을 표현하는 nil을 반환하기 위해 반환값은 옵셔널로 하였습니다.
+`@IBAction private func tapAllClearButton(_ sender: UIButton)`
+ - AC 버튼을 눌렀을 때 발생하는 메서드 입니다.
+  
+`@IBAction private func tapClearEntryButton(_ sender: UIButton)`
+- CE 버튼을 눌렀을 때 발생하는 메서드 입니다.
 
-`mutating func resetQueue()`
-- 배열의 모든 요소를 제거하는 메서드 입니다.
+`private func resetCalculator()` 
+- 모든 레이블과 변수값을 초기화 시켜주고, 서브뷰를 없애주는 메서드 입니다.
+ 
+ `private func updateStackView()`
+ - 피연산자와 연산자의 값을 스택뷰에 반영시켜주는 메서드 입니다.
+  
+`@IBAction private func tapKeypadButton(_ sender: UIButton)`
+- 키패드 버튼을 눌렀을 때 발생하는 메서드 입니다.
+  
+    
+`@IBAction private func tapOperatorsButton(_ sender: UIButton)`
+- 연산자 버튼을 눌렀을 때 발생하는 메서드 입니다.
 
-`mutating func peak() -> T?`
-- 배열의 첫 번째 요소를 반환하되, 제거는 하지 않는 메서드입니다.
-- 요소가 없는 상태에서 메서드 호출 시, 값이 없음을 표현하는 nil을 반환하기 위해 반환값은 옵셔널로 하였습니다.
+`@IBAction private func tapResultButton()`
+- arithmetic에 담겨있던 연산을 구해주는 메서드입니다.
+    
+`@IBAction private func tapToChangeSignButton(_ sender: UIButton)`
+- 부호를 바꿔주는 버튼을 눌렀을 때 발생하는 메서드 입니다.
+    
 
-`mutating func isEmpty() -> Bool`
-- 배열이 비어있는지 결과를 반환해주는 메서드입니다.
-
+`private func checkInputNumber(number: String)`
+- inputNumber로 올 수 없는 경우를 확인하고 값을 넣어주는 메서드 입니다.
 
 <br>
 
-## ⏰ Timeline 
+#### [extension]
 
-### 1주차
-- 월 Step 1 : 프로젝트 포크, UML 작성
-- 화 Step 1 : test코드 작성 및 README 수정
+`func removeAllArrangedSubview` 
+- UIStackView에 모든 서브뷰를 지워주는 메서드 입니다. 
 
 <br>
-
-## 📐 GroundRule 
-
-#### 규칙      
-- feat: 기능추가      
-- fix: 버그 수정      
-- refactor: 리팩토링 (변수 네이밍 수정 등)    
-- style: 스타일 (세미콜론 등, 형식적인 스타일 수정)    
-- docs: 문서 변경    
-- test: 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)    
-- chore: 별로 중요하지 않는 것들 (빌드 스크립트 수정 등)       
-

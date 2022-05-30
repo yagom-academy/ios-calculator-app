@@ -14,9 +14,8 @@ struct Formula {
             return 0.0
         }
         
-        let operandItems = operands.displayItems().filter {
-            $0 != operands.displayItems().first
-        }
+        var operandItems = operands.displayItems()
+        operandItems.removeFirst()
 
         let errorNumber = CalculatorError.dividedByZero.errorCaseNumber
         let result = try operandItems.reduce(start) { reuslt, partialResult in
@@ -24,9 +23,9 @@ struct Formula {
             let `operator` = Operator.allCases.filter {
                 $0.symbol == operatorSymbol
             }
-            let calculatedValue = `operator`[0].calculate(lhs: reuslt, rhs: partialResult)
+            let calculatedValue = operators.first?.calculate(lhs: reuslt, rhs: partialResult)
             
-            if operatorSymbol == "/" && (partialResult == errorNumber || reuslt == errorNumber) {
+            if operatorSymbol == "÷" && (partialResult == errorNumber || reuslt == errorNumber) {
                 throw CalculatorError.dividedByZero
             }
             return calculatedValue

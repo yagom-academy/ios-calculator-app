@@ -2,7 +2,6 @@ enum CalculatorError: Error {
     case dividedByZero
     case unknownError
     
-    
     var errorCaseNumber: Double {
         switch self {
         case .dividedByZero:

@@ -1,4 +1,4 @@
-class LinkedList<T> {
+final class LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     private(set) var count = 0
