@@ -19,10 +19,11 @@ final class CalculatorViewController: UIViewController {
     private let emptyString: String = ""
     private let failedResult: String = "NaN"
     private let whiteSpace: String = " "
+    private let maximumNumber: Int = 20
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
-    private var isNumberTapped : Bool = false
+    private var userIsInTheMiddleOfTyping : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,27 +36,24 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
-        guard let digit = sender.currentTitle else{ return }
+        guard let digit = sender.currentTitle else { return }
         guard let currentOperandText = operandLabel.text else { return }
         
         initiateCaculator()
         
-        if currentOperandText.count >= 20 {
-            return
-        }
+        guard currentOperandText.count <= maximumNumber else { return }
         
-        if isNumberTapped  {
+        if userIsInTheMiddleOfTyping  {
             operandLabel.text = (operandLabel.text ?? emptyString) + digit
-        }
-        else if currentOperandText.contains(".") {
+        } else if currentOperandText.contains(".") {
             operandLabel.text = (operandLabel.text ?? emptyString) + digit
-            isNumberTapped  = true
+            userIsInTheMiddleOfTyping  = true
         } else {
             operandLabel.text = digit
         }
         
         makeValidNumber()
-        isNumberTapped  = true
+        userIsInTheMiddleOfTyping = true
         userInputNumber.append(digit)
     }
     
@@ -94,14 +92,14 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
-        guard let currentOperandText = operandLabel.text else { return }
-        guard currentOperandText.contains(Character(dot)) == false else { return }
+        guard let dot = sender.currentTitle,
+              let currentOperandText = operandLabel.text,
+              currentOperandText.contains(Character(dot)) == false else { return }
         
         if operandLabel.text == zero {
             operandLabel.text = "0."
             userInputNumber.append(contentsOf: zero)
-            isNumberTapped  = true
+            userIsInTheMiddleOfTyping = true
         } else {
             operandLabel.text = (operandLabel.text ?? emptyString) + dot
         }
@@ -112,18 +110,18 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
         if operandLabel.text == zero && inputStackView.subviews.isEmpty == false && userInput.count >= 2 {
-           operatorLabel.text = operators
-           userInput.removeLast()
-           userInput.removeLast()
-           userInput.append(operators + whiteSpace)
-       }
+            operatorLabel.text = operators
+            userInput.removeLast()
+            userInput.removeLast()
+            userInput.append(operators + whiteSpace)
+        }
         guard let lastCharacter = userInputNumber.last else { return }
         guard let _ = Double(String(lastCharacter)) else { return }
         
         addInputStack()
         operatorLabel.text = operators
         operandLabel.text = zero
-        isNumberTapped  = false
+        userIsInTheMiddleOfTyping  = false
         userInput.append(contentsOf: userInputNumber + whiteSpace + operators + whiteSpace)
         userInputNumber = emptyString
     }
@@ -149,13 +147,13 @@ final class CalculatorViewController: UIViewController {
         userInputNumber = emptyString
         setupViews()
         removeStack()
-        isNumberTapped  = false
+        userIsInTheMiddleOfTyping  = false
     }
     
     @IBAction private func didremoveCurrentNumberButtonTapped(_ sender: UIButton) {
         operandLabel.text = zero
         userInputNumber = emptyString
-        isNumberTapped  = false
+        userIsInTheMiddleOfTyping  = false
     }
     
     @IBAction private func didCalculateButtonTapped(_ sender: UIButton) {
@@ -241,7 +239,7 @@ final class CalculatorViewController: UIViewController {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
-
+    
     private func removeStack() {
         inputStackView.subviews.forEach {
             $0.removeFromSuperview()
@@ -257,8 +255,8 @@ final class CalculatorViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumIntegerDigits = 1
         numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = maximumNumber
+        numberFormatter.maximumIntegerDigits = maximumNumber
         
         guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
             return failedResult
