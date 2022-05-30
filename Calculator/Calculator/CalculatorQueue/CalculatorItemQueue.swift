@@ -4,23 +4,22 @@
 //
 //  Created by 유한석 on 2022/05/16.
 //
-class CalculatorItemQueue {
-    private var queue: CalculatorList<CalculatorItem> = CalculatorList()
+struct CalculatorItemQueue<T: CalculatorItem> {
+    private var queue = CalculatorList<T>()
     var count: Int {
         return queue.size()
     }
-    
-    func enQueue(_ input: CalculatorItem) {
+
+    mutating func enqueue(_ input: T) {
         let newNode = Node(value: input)
         self.queue.append(newNode)
     }
-    func deQueue() -> Node<CalculatorItem>? {
+
+    mutating func dequeue() -> Node<T>? {
         if queue.isEmpty() {
             return nil
         }
+
         return queue.pop()
-    }
-    func removeAll() {
-        queue.removeAll()
     }
 }
