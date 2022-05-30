@@ -38,11 +38,11 @@ class CalculateViewController: UIViewController {
         guard !isCalculateCompleted else {
             return
         }
-        guard let operand = Double(operandLabel.text?.filter { $0 != ","  } ?? ""), operand != 0.0 else {
+        guard let operand = operandLabel.text, Double(operand) != 0.0 else {
             return
         }
         
-        operandLabel.text = checkTheSign(getText(operandLabel))
+        operandLabel.text = checkTheSign(operand)
     }
     
     @IBAction private func appendOperand(_ sender: UIButton) {

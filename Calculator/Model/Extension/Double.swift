@@ -15,7 +15,7 @@ extension Double: CalculateItem {
         } else {
             numberFormatter.numberStyle = .decimal
         }
-        numberFormatter.roundingMode = .up
+        
         numberFormatter.maximumSignificantDigits = 20
         let result = numberFormatter.string(for: self) ?? ""
         return result
