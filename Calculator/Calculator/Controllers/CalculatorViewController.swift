@@ -1,6 +1,6 @@
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var calculatingScrollView: UIScrollView!
