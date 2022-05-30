@@ -10,6 +10,46 @@ class ExpressionParserTDD: XCTestCase {
         
     }
     
+    func test_양수_스트링을받아서_Formula타입으로_반환() throws {
+        // given
+        let inputExpression: String = "  4 +  4 ×  5 ÷ 10  "
+        let expectationOperands: [Double] = [4.0, 4.0, 5.0, 10.0]
+        let expectationOperators: [Operator] = [.add, .multiply, .divide]
+        
+        // what
+        let resultFormula = ExpressionParser.parse(from: inputExpression)
+        
+        // then
+        for (formulaOperand, expectationOperand) in zip(resultFormula.operands, expectationOperands) {
+            XCTAssertEqual(formulaOperand, expectationOperand)
+        }
+        
+        // then
+        for (formulaOperator, expectationOperator) in zip(resultFormula.operators, expectationOperators) {
+            XCTAssertEqual(formulaOperator, expectationOperator)
+        }
+    }
+    
+    func test_음수_스트링을받아서_Formula타입으로_반환() throws {
+        // given
+        let inputExpression: String = "  -4 +  -4 ×  -5 ÷ -10  "
+        let expectationOperands: [Double] = [-4.0, -4.0, -5.0, -10.0]
+        let expectationOperators: [Operator] = [.add, .multiply, .divide]
+        
+        // what
+        let resultFormula = ExpressionParser.parse(from: inputExpression)
+        
+        // then
+        for (formulaOperand, expectationOperand) in zip(resultFormula.operands, expectationOperands) {
+            XCTAssertEqual(formulaOperand, expectationOperand)
+        }
+        
+        // then
+        for (formulaOperator, expectationOperator) in zip(resultFormula.operators, expectationOperators) {
+            XCTAssertEqual(formulaOperator, expectationOperator)
+        }
+    }
+    
     func test_스트링을받아서_Formula타입으로_반환() throws {
         // given
         let inputExpression: String = "  -4 +  4 ×  5 ÷ -10  "

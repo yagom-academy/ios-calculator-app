@@ -60,7 +60,6 @@ final class CalculatorViewController: UIViewController {
         guard let tappedNumberText = sender.titleLabel?.text else { return }
         
         if operandLabel.text == "0" { operandLabel.text = "" }
-        
         appendText(to: operandLabel, with: tappedNumberText)
     }
     
