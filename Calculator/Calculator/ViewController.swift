@@ -21,54 +21,39 @@ class ViewController: UIViewController {
     }
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        guard currentOperand.text?.count ?? 0 < 20 else {
-            return
-        } //20 자 제한
+        let operandLabel = currentOperand.text ?? CalcAccessory.Empty
         
-        guard currentOperand.text != "NaN" else {
-            currentOperand.text = sender.currentTitle
+        guard sender.currentTitle != "." || currentOperand.text?.contains(".") == false
+        else {
             return
-        } // Nan일때 입력한 operand로 교체
-        guard ((currentOperand.text?.contains(CalcAccessory.Dot)) != nil),
-              sender.currentTitle == CalcAccessory.Dot else {
-            return
-        } // dot 중복 제한
-        guard currentOperand.text != CalcAccessory.Zero,
-              sender.currentTitle != CalcAccessory.DoubleZero else {
-            currentOperand.text = CalcAccessory.Zero
-            return
-        } // 0일 때 00이면 0
-        
-        // 0 9 > 9
-        // 0 . > 0.
-        // 0 . 9 > 0.9
-        // 0 . 0 9 > 0.09
-        // 00 . > 0.
-        // 00 00 > 0
-        // 00 0 > 0
-        // 00 9 > 9
-        // 00
-        // 9 0 > 90
-        // 9 . > 9.
-        // 9 9 > 99
-        // 9 00 > 900
-        
-        if (currentOperand.text?.first == Character(CalcAccessory.Zero)),
-           (sender.currentTitle == CalcAccessory.DoubleZero)
-        {
-            return //  앞이 0일때 00이면 0냅두고 리턴
-        } else if (currentOperand.text?.first == Character(CalcAccessory.Zero)),
-                  (sender.currentTitle == CalcAccessory.Zero)
-        {
-            return // 앞이 0인데 0들어오면 0냅두고 리턴
         }
         
-        if sender.currentTitle == CalcAccessory.Dot {
-            currentOperand.text = "0"
-        } // 현재 입력이 . 이면 0. 으로 변경
+        if operandLabel == CalcAccessory.Zero,
+            (sender.currentTitle == CalcAccessory.Zero || sender.currentTitle == CalcAccessory.DoubleZero) {
+            return
+        } else if operandLabel == CalcAccessory.Zero, sender.currentTitle != CalcAccessory.Dot {
+            currentOperand.text = CalcAccessory.Empty
+        }
+        
+        if operandLabel == "NaN" {
+            switch sender.currentTitle {
+            case CalcAccessory.DoubleZero:
+                currentOperand.text = CalcAccessory.Zero
+                return
+            case CalcAccessory.Dot:
+                currentOperand.text = CalcAccessory.Zero + CalcAccessory.Dot
+                return
+            case CalcAccessory.Zero:
+                currentOperand.text = CalcAccessory.Zero
+                return
+            default:
+                currentOperand.text = CalcAccessory.Empty
+            }
+        }
         
         currentOperand?.text = (currentOperand?.text ?? CalcAccessory.Empty) + (sender.currentTitle ?? CalcAccessory.Empty)
     }
+
     @IBAction func pressOperatorButton(_ sender: UIButton) {
         guard currentOperand.text != CalcAccessory.Zero else {
             currentOperator.text = (sender.currentTitle ?? CalcAccessory.Empty)
@@ -76,7 +61,7 @@ class ViewController: UIViewController {
         }
         addCurrentOperationToScrollViewContent()
         currentOperator.text = sender.currentTitle
-        operationStack += "\(currentOperand?.text ?? CalcAccessory.Zero) \(sender.currentTitle ?? CalcAccessory.Empty) "
+        operationStack += "\(currentOperand?.text ?? CalcAccessory.Zero) \(sender.currentTitle ?? CalcAccessory.Empty)"
         //create Scrollview Content
         clearCurrentOperandUILabel()
         scrollingUnder()
