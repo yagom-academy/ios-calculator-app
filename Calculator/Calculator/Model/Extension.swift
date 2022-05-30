@@ -46,7 +46,6 @@ extension UIStackView {
         
         let label = UILabel()
         label.text = arithmeticText
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         self.addArrangedSubview(label)
     }

@@ -48,12 +48,12 @@ struct CalculatorValue {
     mutating func resetCalculator() {
         arithmetic = ""
         isPositiveNumber = true
-        resetInput(inputNumber: true, inputOperator: true)
+
     }
     
     mutating func resetInput(inputNumber: Bool, inputOperator: Bool) {
         if inputNumber {
-            self.inputNumber = ""
+            self.inputNumber = "0"
         }
         
         if inputOperator {
