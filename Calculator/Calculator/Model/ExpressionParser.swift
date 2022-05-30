@@ -6,7 +6,7 @@ enum ExpressionParser {
         
         compoents.compactMap {Double($0)}.forEach { operands.enqueue($0) }
         
-        compoents.compactMap {
+        compoents.filter { $0.count == 1 }.compactMap {
             Operator(rawValue: Character($0))
         }.forEach { operators.enqueue($0)
         }
@@ -16,36 +16,14 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operatorSymbols = Operator.allCases.map { $0.symbol }
-        var items = [String]()
-        var splitedInput = input
-        var count = 0
-        var sign: Character = " "
+        var result: [String] = [input]
         
-        input.forEach { element in
-            let target = Character(String(element))
-            
-            if element.isNumber {
-                count += 1
-            }
-            
-            if operatorSymbols.contains(element) && count > 0 {
-                var operand = splitedInput.split(with: target)[0]
-                let remainedFormula = splitedInput.split(with: target)[1]
-                
-                if sign != " " {
-                    operand = String(sign) + operand
-                    sign = " "
-                }
-                
-                items = items + [operand] + [String(element)]
-                splitedInput = remainedFormula
-                count = 0
-            } else if operatorSymbols.contains(element) && count == 0 {
-                sign = element
-            }
+        Operator.allCases.forEach { opr in
+            result = result.reduce(into: [] ) {
+                $0.append($1.split(with: opr.symbol))
+            }.flatMap { $0 }
         }
-        items += [splitedInput]
-        return items
+        
+        return result
     }
 }

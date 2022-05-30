@@ -15,9 +15,9 @@ class ExpressionParserTests: XCTestCase {
         // given
         let input = "12+3÷4"
         // when
-        _ = ExpressionParser.parse(from: input).operators.displayItems()
+        let result = ExpressionParser.parse(from: input).operators.displayItems()
         // then
-        // XCTAssertEqual(result, ["+","÷"])
+        XCTAssertEqual(result, [Operator.add, Operator.divide])
     }
     
     func test피연산자와_연산자를_나눌_수_있는지2() {
