@@ -16,10 +16,6 @@ extension CalculatorItemQueue {
         return doublyLinkedList.first?.value
     }
     
-    var peekLast: T? {
-        return doublyLinkedList.last?.value
-    }
-    
     var isEmpty: Bool {
         return doublyLinkedList.isEmpty
     }
@@ -36,13 +32,6 @@ extension CalculatorItemQueue {
             throw QueueError.emptyData
         }
         return doublyLinkedList.remove(element)
-    }
-    
-    func removeAll() throws {
-        guard !doublyLinkedList.isEmpty else {
-            throw QueueError.emptyData
-        }
-        doublyLinkedList.removeAll()
     }
 }
 

@@ -18,10 +18,6 @@ final class DoublyLinkedList<T: Equatable> {
     var first: Node<T>? {
         return head
     }
-    
-    var last: Node<T>? {
-        return tail
-    }
 }
 
 extension DoublyLinkedList {
@@ -81,30 +77,6 @@ extension DoublyLinkedList {
         tail = newNode
     }
     
-    func size() -> Int {
-        guard var node = self.head else {
-            return 0
-        }
-        
-        var count = 1
-        while let nextNode = node.next {
-            count += 1
-            node = nextNode
-        }
-        return count
-    }
-    
-    func contains(_ value: T) -> Bool {
-        guard var node = self.head else {
-            return false
-        }
-        
-        while true {
-            compare(node: node, and: value)
-            allocate(value, to: &node)
-        }
-    }
-    
     func remove(_ node: Node<T>) -> T {
         let prev = node.previous
         let next = node.next
@@ -125,10 +97,5 @@ extension DoublyLinkedList {
         node.next = nil
         
         return node.value
-    }
-    
-    func removeAll() {
-        head = nil
-        tail = nil
     }
 }
