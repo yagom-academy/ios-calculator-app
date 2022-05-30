@@ -21,7 +21,7 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(2)
         sut.operands.enqueue(3)
         sut.operands.enqueue(1)
-        sut.operators.enqueue(Operator.add)
+        sut.operators.enqueue(Operator.multiply)
         sut.operators.enqueue(Operator.divide)
         sut.operators.enqueue(Operator.subtract)
         sut.operators.enqueue(Operator.add)
