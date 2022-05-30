@@ -10,13 +10,12 @@ import Foundation
 enum ExpressionParser {
     @discardableResult
     static func parse(from input: String) -> Formula {
-        let operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-        let operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
+        let formula = Formula()
         
         componentsByOperators(from: input)
             .compactMap{ Double($0) }
             .forEach{ value in
-                operands.enqueue(value)
+                formula.operands.enqueue(value)
             }
             
         input.split(with: " ")
@@ -27,10 +26,10 @@ enum ExpressionParser {
                       Operator.allCases.contains(operatorValue) else {
                     return
                 }
-                operators.enqueue(operatorValue)
+                formula.operators.enqueue(operatorValue)
             }
         
-        return Formula(operands: operands, operators: operators)
+        return Formula(operands: formula.operands, operators: formula.operators)
     }
 }
 

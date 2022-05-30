@@ -35,7 +35,6 @@ extension CalculatorItemQueue {
     }
 }
 
-
 extension CalculatorItemQueue {
     subscript (index: Int) -> T? {
          return doublyLinkedList[index]
@@ -43,7 +42,7 @@ extension CalculatorItemQueue {
 }
 
 extension CalculatorItemQueue: CustomStringConvertible {
-    public var description: String {
+    var description: String {
         var string = ""
         var current = doublyLinkedList.first
         while let node = current {
@@ -51,5 +50,15 @@ extension CalculatorItemQueue: CustomStringConvertible {
             current = node.next
         }
         return string + "end"
+    }
+}
+
+extension CalculatorItemQueue: ExpressibleByArrayLiteral {
+    convenience init(arrayLiteral elements: T...) {
+        self.init()
+        
+        elements.forEach {
+            self.enqueue($0)
+        }
     }
 }
