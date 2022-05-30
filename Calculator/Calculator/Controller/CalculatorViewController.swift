@@ -109,6 +109,10 @@ class CalculatorViewController: UIViewController {
     }
     
     private func makeStackLabel() {
+        guard let numberLabelValue = numberLabel.text else {
+            return
+        }
+        
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
@@ -125,9 +129,9 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.textColor = .white
         
         if userIsInTheMiddleOfTyping {
-            stackNumberLabel.text = "\(presentNumbers)"
+            stackNumberLabel.text = "\(numberLabelValue)"
         } else {
-            stackNumberLabel.text = "\(presentNumbers)"
+            stackNumberLabel.text = "\(numberLabelValue)"
             stackOperatorLabel.text = "\(presentOperator) "
         }
         
