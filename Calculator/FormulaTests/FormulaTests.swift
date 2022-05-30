@@ -16,9 +16,9 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_result_비어있는formula면에러를보내는지() {
+    func test_result_0으로나누면_에러를보내는지() {
         // given
-        var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+        var formula = Formula(operands: CalculatorItemQueue<Double>.init(list: [1, 0]), operators: CalculatorItemQueue<Operator>.init(list: [Operator.divide]))
         
         // when
         let result = try? formula.result()

@@ -2,34 +2,32 @@ import CoreGraphics
 enum ExpressionParser {
     static func parse(from input: String) throws -> Formula {
         let splitedInput = componentByOperators(from: input)
-
-        for index in 0...splitedInput.count/2 {
-            guard Double(splitedInput[index*2]) != nil else {
-                throw CalculatorError.wrongFormula
-            }
-        }
-                
+        
+        try checkWrongFormulaError(for: splitedInput)
+        
         let operands = splitedInput.compactMap { Double($0) }
         let operators = splitedInput.filter { $0.count == 1 }.compactMap { Operator(rawValue: Character($0)) }
         
-        guard operands.count * operators.count != 0 else {
-            throw CalculatorError.wrongFormula
+        return Formula(operands: CalculatorItemQueue<Double>.init(list: operands), operators: CalculatorItemQueue<Operator>.init(list: operators))
+    }
+    
+    private static func checkWrongFormulaError(for input: [String]) throws {
+        guard input.count > 1 else { throw CalculatorError.wrongFormula }
+            
+        for index in 0..<input.count where index % 2 == 0 {
+            if Double(input[index]) == nil {
+                throw CalculatorError.wrongFormula
+            }
         }
-                
-        let operandQueue = CalculatorItemQueue<Double>.init(list: operands)
-        let operatorQueue = CalculatorItemQueue<Operator>.init(list: operators)
-        
-        return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
     private static func componentByOperators(from input: String) -> [String] {
         var result: [String] = [input]
         
         Operator.allCases.forEach { opr in
-            let doubledString = result.reduce(into: [] ) {
+            result = result.reduce(into: [] ) {
                 $0.append($1.split(with: opr.symbol))
-            }
-            result = doubledString.flatMap { $0 }
+            }.reduce([]) { $0 + $1 }
         }
         
         return result

@@ -23,7 +23,7 @@ class OperatorTests: XCTestCase {
         
         // when
         sut = .add
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertEqual(result, expectition)
@@ -38,7 +38,7 @@ class OperatorTests: XCTestCase {
         
         // when
         sut = .subtract
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertEqual(result, expectition)
@@ -53,7 +53,7 @@ class OperatorTests: XCTestCase {
         
         // when
         sut = .divide
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertEqual(result, expectition)
@@ -68,23 +68,22 @@ class OperatorTests: XCTestCase {
         
         // when
         sut = .multiply
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertEqual(result, expectition)
     }
     
-    func test_divide_0으로나눴을때_0이나오고오류가출력되는지() {
+    func test_divide_0으로나눴을때_오류를던지는지() {
         // given
         let lhs: Double = 5
         let rhs: Double = 0
        
         // when
         sut = .divide
-        let nanError = sut.calculate(lhs: lhs, rhs: rhs)
-        let result = nanError.isNaN
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         
         // then
-        XCTAssertTrue(result)
+        XCTAssertNil(result)
     }
 }
