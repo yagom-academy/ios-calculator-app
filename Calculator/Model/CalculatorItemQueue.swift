@@ -16,11 +16,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         linkedList.append(data: data)
     }
     
-    mutating func dequeue() throws -> T {
-        guard let number = linkedList.removeFirst() else {
-            throw CalculateError.nilError
-        }
-        return number
+    mutating func dequeue() -> T? {
+        return linkedList.removeFirst()
     }
     
     func isEmpty() -> Bool {

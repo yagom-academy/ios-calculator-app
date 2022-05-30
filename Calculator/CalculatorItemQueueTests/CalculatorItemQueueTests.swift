@@ -41,7 +41,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let result = 1
         
         // then
-        XCTAssertEqual(result, try sut.dequeue())
+        XCTAssertEqual(result, sut.dequeue())
     }
     
     func test_dequeue_큐에값을여러개추가하고_삭제했을때_순서대로가져오는지() {
@@ -54,8 +54,8 @@ class CalculatorItemQueueTests: XCTestCase {
         let result2 = 2
         
         // then
-        XCTAssertEqual(result1, try sut.dequeue())
-        XCTAssertEqual(result2, try sut.dequeue())
+        XCTAssertEqual(result1, sut.dequeue())
+        XCTAssertEqual(result2, sut.dequeue())
     }
     
     //MARK: - isEmpty test
