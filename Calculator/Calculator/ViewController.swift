@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearScrollviewContent()
-        clearCurrentOperand()
-        clearCurrentOperator()
+        clearOperationScrollviewContent()
+        clearCurrentOperandUILabel()
+        clearCurrentOperatorUILabel()
         // Do any additional setup after loading the view.
     }
     // MARK: - IBAction
@@ -40,28 +40,26 @@ class ViewController: UIViewController {
         }
         currentOperand?.text = (currentOperand?.text ?? "") + (sender.currentTitle ?? "")
     }
-    
     @IBAction func pressOperatorButton(_ sender: UIButton) {
         guard currentOperand.text != ZERO else {
             currentOperator.text = (sender.currentTitle ?? "")
             return
         }
-        addScrollViewContent()
+        addCurrentOperationToScrollViewContent()
         currentOperator.text = sender.currentTitle
         operationStack += "\(currentOperand?.text ?? ZERO) \(sender.currentTitle ?? "") "
         //create Scrollview Content
-        clearCurrentOperand()
-        scrolling()
+        clearCurrentOperandUILabel()
+        scrollingUnder()
     }
-    
     @IBAction func pressAllClearButton(_ sender: UIButton) {
         operationStack = ""
-        clearScrollviewContent()
-        clearCurrentOperand()
-        clearCurrentOperator()
+        clearOperationScrollviewContent()
+        clearCurrentOperandUILabel()
+        clearCurrentOperatorUILabel()
     }
     @IBAction func pressClearEntryButton(_ sender: UIButton) {
-        clearCurrentOperand()
+        clearCurrentOperandUILabel()
     }
     @IBAction func pressReverseSignButton(_ sender: UIButton) {
         guard currentOperand.text != ZERO else {
@@ -77,7 +75,7 @@ class ViewController: UIViewController {
         guard !isEndOperation else {
             return
         }
-        addScrollViewContent()
+        addCurrentOperationToScrollViewContent()
         operationStack += currentOperand.text ?? ZERO
         operationStack = operationStack.filter {
             $0 != ","
@@ -91,19 +89,19 @@ class ViewController: UIViewController {
         } catch {
             debugPrint("UNKNOWN ERROR")
         }
-        clearCurrentOperator()
+        clearCurrentOperatorUILabel()
         operationStack = ""
-        scrolling()
+        scrollingUnder()
         isEndOperation = true
     }
     
-    private func clearCurrentOperand() {
+    private func clearCurrentOperandUILabel() {
         currentOperand.text = ZERO
     }
-    private func clearCurrentOperator() {
+    private func clearCurrentOperatorUILabel() {
         currentOperator.text = ""
     }
-    private func clearScrollviewContent() {
+    private func clearOperationScrollviewContent() {
         operationStackView.subviews.forEach { UIView in
             UIView.removeFromSuperview()
         }
@@ -111,7 +109,7 @@ class ViewController: UIViewController {
 }
 //MARK: - UI Components
 extension ViewController {
-    private func addScrollViewContent() {
+    private func addCurrentOperationToScrollViewContent() {
         let currentContent = createOpearionStackViewContent(
             inputOperator: currentOperator.text ?? "",
             inputOperand: currentOperand.text ?? ""
@@ -130,7 +128,7 @@ extension ViewController {
         uiLabel.text = text
         return uiLabel
     }
-    private func scrolling() {
+    private func scrollingUnder() {
         operationScrollView.setContentOffset(CGPoint(x: 0,
                                             y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
