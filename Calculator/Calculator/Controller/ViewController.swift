@@ -19,6 +19,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet var keypad: [UIButton]!
     
     var calculatorValue = CalculatorValue()
     
@@ -85,8 +86,11 @@ extension ViewController {
 // TODO : View + value
 extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
-        let tappedNumber = sender.titleLabel?.text ?? "0"
-        calculatorValue.updateInputNumber(with: tappedNumber)
+        guard let buttonIndex = keypad.firstIndex(of: sender) else { return }
+        
+        let numberTapped = Keypad.convertNumber(buttonIndex)
+        
+        calculatorValue.updateInputNumber(with: numberTapped)
     }
     
     @IBAction private func tapOperatorsButton(_ sender: UIButton) {
@@ -117,13 +121,10 @@ extension ViewController {
         
         let formula = ExpressionParser.parse(from: calculatorValue.arithmetic)
         var result = 0.0
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        
+
         do {
             result = try formula.result()
-            calculatorValue.updateInputNumber(with: numberFormatter.string(from: NSNumber(value: result)) ?? "0")
+            calculatorValue.updateInputNumber(with: String(result))
         } catch CalculatorError.dividedByZero {
             calculatorValue.updateInputNumber(with: CalculatorError.dividedByZero.errorMessage)
         } catch {

@@ -41,7 +41,7 @@ enum Keypad: CaseIterable {
         }
     }
 
-    func convertNumber(_ index: Int) -> String {
+    static func convertNumber(_ index: Int) -> String {
         switch index {
         case Keypad.doubleZero.number:
             return "00"

@@ -2,7 +2,7 @@ import UIKit
 struct CalculatorValue {
     private var inputNumber = "" {
         willSet(inputNumber) {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "operand"), object: inputNumber)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "operand"), object: convertFormat(inputNumber))
         }
     }
     private var inputOperator = "" {
@@ -23,6 +23,18 @@ struct CalculatorValue {
     }
     var isArithmeticEmpty: Bool {
         return arithmetic.isEmpty
+    }
+    
+    private func convertFormat(_ number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+
+        guard let double = Double(number) else {
+            return ""
+        }
+        
+        return numberFormatter.string(from: NSNumber(value: double)) ?? "0"
     }
     
     mutating func updateInputNumber(with number: String) {

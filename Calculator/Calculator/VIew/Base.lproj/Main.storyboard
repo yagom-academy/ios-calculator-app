@@ -350,6 +350,18 @@
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="3oo-kx-lhq"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="XlY-wQ-3Se"/>
                         <outlet property="subtractionButton" destination="nTe-Sn-Pvd" id="UKi-PE-aGh"/>
+                        <outletCollection property="keypad" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="kp5-dI-qfH"/>
+                        <outletCollection property="keypad" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="jYX-Rn-lw0"/>
+                        <outletCollection property="keypad" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="az3-0x-lPI"/>
+                        <outletCollection property="keypad" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="Jgo-QL-U5c"/>
+                        <outletCollection property="keypad" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="yDB-uq-LEx"/>
+                        <outletCollection property="keypad" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="pj2-99-H5U"/>
+                        <outletCollection property="keypad" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="XVm-5V-kpq"/>
+                        <outletCollection property="keypad" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="SGy-J5-9Ph"/>
+                        <outletCollection property="keypad" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="wcv-Uf-snj"/>
+                        <outletCollection property="keypad" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="8iz-Iw-Gv3"/>
+                        <outletCollection property="keypad" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="Ehr-Dg-S43"/>
+                        <outletCollection property="keypad" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="gjm-Nz-omS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
