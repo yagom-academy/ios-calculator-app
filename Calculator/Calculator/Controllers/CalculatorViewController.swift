@@ -45,24 +45,30 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func operandButtonTapped(_ sender: UIButton) {
         guard let tappedNumberText = sender.titleLabel?.text else { return }
+        
         if operandLabel.text == "0" { operandLabel.text = "" }
         operandLabel.text?.append(tappedNumberText)
     }
     
     @IBAction private func demicalPointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false else { return }
+        
         guard let tappedDemicalPointText = sender.titleLabel?.text else { return }
+        
         operandLabel.text?.append(tappedDemicalPointText)
     }
     
     @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
+        
         guard let tappedDoubleZeroText = sender.titleLabel?.text else { return }
+        
         operandLabel.text?.append(tappedDoubleZeroText)
     }
     
     @IBAction private func signButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
+        
         if operandLabel.text?.first == "-" {
             operandLabel.text?.removeFirst()
         } else {
