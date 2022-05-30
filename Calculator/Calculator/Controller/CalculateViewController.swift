@@ -26,12 +26,7 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func deleteCurrentInputed(_ sender: UIButton) {
-        if isCalculateCompleted {
-            resetCalculateOption()
-        }
-        
         operandLabel.text = "0"
-        isOperandInputted = false
     }
     
     @IBAction private func changeTheSign(_ sender: UIButton) {
