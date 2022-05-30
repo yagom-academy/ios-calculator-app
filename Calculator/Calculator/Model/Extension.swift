@@ -1,3 +1,5 @@
+import UIKit
+
 extension String {
     func split(with target: Character) -> [String] {
         guard !self.isEmpty else { return [""] }
@@ -25,4 +27,21 @@ extension String {
 
 extension Double: CalculateItem {
     
+}
+
+extension UIStackView {
+    func removeAllArrangedSubview() {
+        self.arrangedSubviews.forEach({ child in
+            self.removeArrangedSubview(child)
+            child.removeFromSuperview()
+        })
+    }
+    
+    func addLable(`operator`: String, operand: String) {
+        let label = UILabel()
+        label.text = `operator` + " " + operand
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        self.addArrangedSubview(label)
+    }
 }

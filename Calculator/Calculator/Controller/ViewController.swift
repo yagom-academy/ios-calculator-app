@@ -62,11 +62,7 @@ extension ViewController {
             inputNumber.removeLast()
         }
         
-        let label = UILabel()
-        label.text = inputOperator + " " + inputNumber
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        stackView.addArrangedSubview(label)
+        stackView.addLable(operator: inputOperator, operand: inputNumber)
         arithmetic = arithmetic + inputOperator + inputNumber
         inputNumber = ""
         inputOperator = ""
@@ -162,17 +158,5 @@ extension ViewController {
         } else {
             inputNumber += number
         }
-    }
-    
-}
-
-// MARK: - Extension
-
-extension UIStackView {
-    func removeAllArrangedSubview() {
-        self.arrangedSubviews.forEach({ child in
-            self.removeArrangedSubview(child)
-            child.removeFromSuperview()
-        })
     }
 }
