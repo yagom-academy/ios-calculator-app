@@ -44,7 +44,7 @@ enum Operator: Character, CalculateItem, CaseIterable {
     
     private func devide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
-            throw DevideError.devideZero
+            throw CalculatorError.dividedByZero
         }
         return lhs / rhs
     }

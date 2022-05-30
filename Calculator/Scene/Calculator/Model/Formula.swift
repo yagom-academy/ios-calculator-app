@@ -6,10 +6,20 @@
 //
 
 struct Formula {
-    private var operands: CalculatorItemQueue<Double>
-    private var operators: CalculatorItemQueue<String>
+    private var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
+    private var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
 
     mutating func result() throws -> Double {
+        guard try checkCalculatorItems() else {
+            throw CalculatorError.lackOfInput
+        }
+        
+        let result = try calculateResult()
+        
+        return result
+    }
+    
+    private func checkCalculatorItems() throws -> Bool {
         guard operands.queue.isEmpty == false || operators.queue.isEmpty == false else {
             throw CalculatorError.emptyQueues
         }
@@ -25,7 +35,11 @@ struct Formula {
         guard operands.queue.count - 1 == operators.queue.count else {
             throw CalculatorError.notEnoughOperatorsAndOperands
         }
-
+        
+        return true
+    }
+    
+    private mutating func calculateResult() throws -> Double {
         guard var result = operands.queue.dequeue() else {
             throw CalculatorError.notEnoughOperands
         }
@@ -39,18 +53,13 @@ struct Formula {
                 throw CalculatorError.notEnoughOperators
             }
 
-            guard let operatorCase = Operator(rawValue: Character(`operator`)) else {
-                throw CalculatorError.invalidOperator
-            }
-
-            result = try operatorCase.calculate(lhs: result, rhs: operand)
+            result = try `operator`.calculate(lhs: result, rhs: operand)
         }
-
         return result
     }
 
-    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<String>) {
-        self.operands = operands
-        self.operators = operators
+    init(operand: [Double], `operator`: [Operator]) {
+        operand.forEach { self.operands.queue.enqueue(element: $0) }
+        `operator`.forEach { self.operators.queue.enqueue(element: $0) }
     }
 }

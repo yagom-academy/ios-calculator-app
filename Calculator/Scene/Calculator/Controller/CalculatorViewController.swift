@@ -88,19 +88,20 @@ class CalculatorViewController: UIViewController {
         
         do {
             addStackView()
-            let result = try ExpressionParser.parse(from: totalCalculation).result()
+            var a = ExpressionParser.parse(from: totalCalculation)
+            let result = try a.result()
             changeFormat("\(result)")
             totalCalculation = ""
             holdScrollDown()
-        } catch DevideError.nilOfValue {
-            clearStackView()
-            setLabelText("0")
-        } catch DevideError.insufficientOperator {
-            clearStackView()
-            setLabelText("0")
-        } catch DevideError.devideZero {
-            clearStackView()
-            setLabelText("NAN")
+//        } catch CalculatorError.lackOfInput {
+//            clearStackView()
+//            setLabelText("0")
+//        } catch DevideError.insufficientOperator {
+//            clearStackView()
+//            setLabelText("0")
+//        } catch DevideError.devideZero {
+//            clearStackView()
+//            setLabelText("NAN")
         } catch {
             print(Error.self)
         }
