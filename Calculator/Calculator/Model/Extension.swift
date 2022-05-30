@@ -38,8 +38,14 @@ extension UIStackView {
     }
     
     func addLable(`operator`: String, operand: String) {
+        var number = operand
+    
+        if number.last == "." {
+            number.removeLast()
+        }
+        
         let label = UILabel()
-        label.text = `operator` + " " + operand
+        label.text = `operator` + " " + number
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         self.addArrangedSubview(label)

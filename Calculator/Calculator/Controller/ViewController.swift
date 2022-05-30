@@ -26,14 +26,12 @@ final class ViewController: UIViewController {
     // - 값 변경은 CV 메서드로 처리
     private var inputNumber = ""
     private var inputOperator = ""
-    private var arithmetic = ""
-    private var isPositiveNumber = true
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // resetCalculator()
+        calculatorValue.resetCalculator()
     }
 }
 
@@ -46,12 +44,11 @@ extension ViewController {
         inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
         
-        // resetCalculator()
+        calculatorValue.resetCalculator()
     }
     
     @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        // TODO : View + value
-        // inputNumber = ""
+        // TODO : View
         calculatorValue.resetInput(inputNumber: true, inputOperator: false)
         inputNumberLabel.text = "0"
     }
@@ -63,14 +60,8 @@ extension ViewController {
             return
         }
         
-        if inputNumber.last == "." {
-            inputNumber.removeLast()
-        }
-        
         stackView.addLable(operator: inputOperator, operand: inputNumber)
-        arithmetic = arithmetic + inputOperator + inputNumber
-//        inputNumber = ""
-//        inputOperator = ""
+        calculatorValue.appendArithmetic()
         calculatorValue.resetInput(inputNumber: true, inputOperator: true)
         inputNumberLabel.text = "0"
     }
@@ -80,7 +71,6 @@ extension ViewController {
 extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         let tappedNumber = sender.titleLabel?.text ?? "0"
-        //updateInputNumber(with: tappedNumber)
         calculatorValue.updateInputNumber(with: tappedNumber)
         inputNumberLabel.text = inputNumber
     }
@@ -104,10 +94,10 @@ extension ViewController {
         updateStackView()
         
         inputOperatorLabel.text = String(currentOperator)
-        inputOperator = String(currentOperator)
+        calculatorValue.updateOperatorInput(operator: String(currentOperator))
     }
     
-    // TODO : View + value
+    // TODO : View
     @IBAction private func tapResultButton() {
         if calculatorValue.isArithmeticEmpty {
             return
@@ -115,7 +105,7 @@ extension ViewController {
         
         updateStackView()
         
-        let formula = ExpressionParser.parse(from: arithmetic)
+        let formula = ExpressionParser.parse(from: calculatorValue.arithmetic)
         var result = 0.0
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -123,8 +113,7 @@ extension ViewController {
         
         do {
             result = try formula.result()
-            inputNumber = numberFormatter.string(from: NSNumber(value: result)) ?? "0"
-            inputNumberLabel.text = inputNumber
+            inputNumberLabel.text = numberFormatter.string(from: NSNumber(value: result)) ?? "0"
         } catch CalculatorError.dividedByZero {
             inputNumberLabel.text = CalculatorError.dividedByZero.errorMessage
         } catch {
@@ -135,7 +124,7 @@ extension ViewController {
         calculatorValue.resetCalculator()
     }
     
-    // TODO : View + value
+    // TODO : View
     @IBAction private func tapToChangeSignButton(_ sender: UIButton) {
         calculatorValue.convertSign()
         inputNumberLabel.text = inputNumber

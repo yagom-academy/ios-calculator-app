@@ -1,7 +1,7 @@
 struct CalculatorValue {
     private var inputNumber = ""
     private var inputOperator = ""
-    private var arithmetic = ""
+    private(set) var arithmetic = ""
     private var isPositiveNumber = true
     
     var isNumberEmpty: Bool {
@@ -25,6 +25,10 @@ struct CalculatorValue {
         } else {
             inputNumber += number
         }
+    }
+    
+    mutating func updateOperatorInput(`operator`: String) {
+        inputOperator = `operator`
     }
     
     mutating func resetCalculator() {
@@ -55,5 +59,9 @@ struct CalculatorValue {
             inputNumber = inputNumber.replacingOccurrences(of: "-", with: "")
             isPositiveNumber = true
         }
+    }
+    
+    mutating func appendArithmetic() {
+        arithmetic = arithmetic + inputOperator + inputNumber
     }
 }
