@@ -2,7 +2,7 @@
 //  Calculator - ViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -12,9 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
     private var operationStack: String = ""
-    private let ZERO = "0"
-    private var isEndOperation = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         clearOperationScrollviewContent()
@@ -62,21 +59,22 @@ class ViewController: UIViewController {
         clearCurrentOperandUILabel()
     }
     @IBAction func pressReverseSignButton(_ sender: UIButton) {
-        guard currentOperand.text != ZERO else {
+        guard currentOperand.text != CalcAccessory.Zero else {
             return
         }
         if currentOperand.text?.first == "-" {
             currentOperand.text?.removeFirst()
         } else {
-            currentOperand.text = "-" + (currentOperand.text ?? "")
+            currentOperand.text = "-" + (currentOperand.text ?? CalcAccessory.Empty)
         }
     }
     @IBAction func pressEqualButton(_ sender: UIButton) {
-        guard !isEndOperation else {
+        guard currentOperator.text != CalcAccessory.Empty else {
             return
         }
+        
         addCurrentOperationToScrollViewContent()
-        operationStack += currentOperand.text ?? ZERO
+        operationStack += currentOperand.text ?? CalcAccessory.Zero
         operationStack = operationStack.filter {
             $0 != ","
         }
@@ -90,16 +88,15 @@ class ViewController: UIViewController {
             debugPrint("UNKNOWN ERROR")
         }
         clearCurrentOperatorUILabel()
-        operationStack = ""
+        operationStack = CalcAccessory.Empty
         scrollingUnder()
-        isEndOperation = true
     }
     
     private func clearCurrentOperandUILabel() {
-        currentOperand.text = ZERO
+        currentOperand.text = CalcAccessory.Zero
     }
     private func clearCurrentOperatorUILabel() {
-        currentOperator.text = ""
+        currentOperator.text = CalcAccessory.Empty
     }
     private func clearOperationScrollviewContent() {
         operationStackView.subviews.forEach { UIView in
@@ -111,8 +108,8 @@ class ViewController: UIViewController {
 extension ViewController {
     private func addCurrentOperationToScrollViewContent() {
         let currentContent = createOpearionStackViewContent(
-            inputOperator: currentOperator.text ?? "",
-            inputOperand: currentOperand.text ?? ""
+            inputOperator: currentOperator.text ?? CalcAccessory.Empty,
+            inputOperand: currentOperand.text ?? CalcAccessory.Empty
         )
         operationStackView.addArrangedSubview(currentContent)
     }
@@ -130,7 +127,7 @@ extension ViewController {
     }
     private func scrollingUnder() {
         operationScrollView.setContentOffset(CGPoint(x: 0,
-                                            y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
+                                                     y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
     private func changeDecimalStyle(_ input: String?) -> String {
         let filteredInput = input?.filter {
@@ -139,6 +136,6 @@ extension ViewController {
         let numberFormmater = NumberFormatter()
         numberFormmater.numberStyle = .decimal
         numberFormmater.maximumSignificantDigits = 20
-        return numberFormmater.string(for: Double(filteredInput ?? "")) ?? ""
+        return numberFormmater.string(for: Double(filteredInput ?? CalcAccessory.Empty)) ?? CalcAccessory.Empty
     }
 }
