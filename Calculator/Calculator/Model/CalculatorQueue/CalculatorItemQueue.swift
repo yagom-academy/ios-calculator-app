@@ -8,7 +8,6 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-
     var linkedList = LinkedList<T>()
     
     mutating func enqueue(_ element: T) {

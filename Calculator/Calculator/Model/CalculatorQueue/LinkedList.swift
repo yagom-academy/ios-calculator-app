@@ -8,7 +8,7 @@
 struct LinkedList<T> {
     var head: Node<T>?
     var count = 1
-    
+        
     mutating func append(data: T?) {
         if head == nil {
             head = Node(data: data)

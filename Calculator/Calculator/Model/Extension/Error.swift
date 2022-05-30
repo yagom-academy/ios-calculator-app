@@ -12,7 +12,7 @@ enum ErrorCase: Error {
 }
 
 extension ErrorCase {
-    var errorDescription:String {
+    var errorDescription: String {
         switch self {
         case .operandsDequeue:
             return "operandsDequeue"

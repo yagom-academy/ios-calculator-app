@@ -7,7 +7,6 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
