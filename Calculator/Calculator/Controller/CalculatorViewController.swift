@@ -81,7 +81,12 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
-        
+        if operandLabel.text == zero && inputStackView.subviews.isEmpty == false && userInput.count >= 2 {
+           operatorLabel.text = operators
+           userInput.removeLast()
+           userInput.removeLast()
+           userInput.append(operators + whiteSpace)
+       }
         guard let lastCharacter = userInputNumber.last else { return }
         guard let _ = Double(String(lastCharacter)) else { return }
         
@@ -89,10 +94,7 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = operators
         operandLabel.text = zero
         isNumberTapped  = false
-        userInput.append(contentsOf: userInputNumber)
-        userInput.append(contentsOf: whiteSpace)
-        userInput.append(operators)
-        userInput.append(contentsOf: whiteSpace)
+        userInput.append(contentsOf: userInputNumber + whiteSpace + operators + whiteSpace)
         userInputNumber = emptyString
     }
     //MARK: - 특수 버튼
