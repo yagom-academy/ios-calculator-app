@@ -8,7 +8,7 @@
 enum ErrorCase: Error {
     case operandsDequeue
     case operatorDequeue
-    case listDequeue
+    case divideByZero
 }
 
 extension ErrorCase {
@@ -18,7 +18,7 @@ extension ErrorCase {
             return "operandsDequeue"
         case .operatorDequeue:
             return "operatorDequeue"
-        case .listDequeue:
+        case .divideByZero:
             return "NaN"
         }
     }

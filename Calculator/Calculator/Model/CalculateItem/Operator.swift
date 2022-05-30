@@ -11,32 +11,32 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     case divide = "÷"
     case multiply = "×"
     
-    func calculate(Ihs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
-            return add(Ihs: Ihs, rhs: rhs)
+            return add(lhs: lhs, rhs: rhs)
         case .subtract:
-            return subtract(Ihs: Ihs, rhs: rhs)
+            return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(Ihs: Ihs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
-            return multiply(Ihs: Ihs, rhs: rhs)
+            return multiply(lhs: lhs, rhs: rhs)
         }
     }
     
-    private func add(Ihs: Double, rhs: Double) -> Double {
-        return Ihs + rhs
+    private func add(lhs: Double, rhs: Double) -> Double {
+        return lhs + rhs
     }
     
-    private func subtract(Ihs: Double, rhs: Double) -> Double {
-        return Ihs - rhs
+    private func subtract(lhs: Double, rhs: Double) -> Double {
+        return lhs - rhs
     }
     
-    private func divide(Ihs: Double, rhs: Double) -> Double {
-        return Ihs / rhs
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        return lhs / rhs
     }
     
-    private func multiply(Ihs: Double, rhs: Double) -> Double {
-        return Ihs * rhs
+    private func multiply(lhs: Double, rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
