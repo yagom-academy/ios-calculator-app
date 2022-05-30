@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		05271E932834A9AB00379CC5 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05271E922834A9AB00379CC5 /* Node.swift */; };
 		05271E952834B9FA00379CC5 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05271E942834B9FA00379CC5 /* LinkedList.swift */; };
-		053AC6EE283E27D700C8C360 /* EtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053AC6ED283E27D700C8C360 /* EtensionTests.swift */; };
+		053AC6EE283E27D700C8C360 /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053AC6ED283E27D700C8C360 /* ExtensionTests.swift */; };
 		0540CC24283523ED00000240 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0540CC23283523ED00000240 /* LinkedListTests.swift */; };
 		05597864283779940019A1D4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05597863283779940019A1D4 /* Extension.swift */; };
 		0559786C28377A410019A1D4 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559786B28377A410019A1D4 /* ExpressionParserTests.swift */; };
@@ -95,7 +95,7 @@
 		05271E922834A9AB00379CC5 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		05271E942834B9FA00379CC5 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		053AC6EB283E27D700C8C360 /* EtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		053AC6ED283E27D700C8C360 /* EtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtensionTests.swift; sourceTree = "<group>"; };
+		053AC6ED283E27D700C8C360 /* ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTests.swift; sourceTree = "<group>"; };
 		0540CC21283523ED00000240 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0540CC23283523ED00000240 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		05597863283779940019A1D4 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		053AC6EC283E27D700C8C360 /* EtensionTests */ = {
 			isa = PBXGroup;
 			children = (
-				053AC6ED283E27D700C8C360 /* EtensionTests.swift */,
+				053AC6ED283E27D700C8C360 /* ExtensionTests.swift */,
 			);
 			path = EtensionTests;
 			sourceTree = "<group>";
@@ -663,7 +663,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053AC6EE283E27D700C8C360 /* EtensionTests.swift in Sources */,
+				053AC6EE283E27D700C8C360 /* ExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
