@@ -10,7 +10,7 @@ struct Formula {
     var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() throws -> Double {
-        guard operands.enQueueStack.count > operators.enQueueStack.count else {
+        guard operands.enQueueStack.count == operators.enQueueStack.count + 1 else {
             throw QueueError.unknown
         }
         var total = try operands.deQueue()
