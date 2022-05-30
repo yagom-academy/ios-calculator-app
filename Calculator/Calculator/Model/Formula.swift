@@ -2,7 +2,7 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 김동용 on 2022/05/18.
+//  Created by bard on 2022/05/18.
 //
 
 struct Formula {
@@ -14,7 +14,7 @@ struct Formula {
             throw QueueError.wrongOperands
         }
         
-        while !operands.joinedQueue.isEmpty {
+        while !operands.deQueueStack.isEmpty {
             guard let inputNumber = try? operands.deQueue() else {
                 throw QueueError.wrongOperands
             }
@@ -27,7 +27,7 @@ struct Formula {
                 lastResult = try  inputOperator.calculate(lhs: lastResult,
                                                           rhs: inputNumber)
             } catch {
-                OperatorError.devideFail
+                throw OperatorError.devideFail
             }
         }
         return lastResult

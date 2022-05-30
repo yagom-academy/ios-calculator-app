@@ -2,7 +2,7 @@
 //  componentsByOperatorsTests.swift
 //  componentsByOperatorsTests
 //
-//  Created by 김동용 on 2022/05/20.
+//  Created by bard on 2022/05/20.
 //
 
 import XCTest
@@ -30,6 +30,17 @@ class componentsByOperatorsTests: XCTestCase {
         XCTAssertEqual(result, ["1", "2-3"])
     }
     
+    func test_더하기연산자를_기준으로_components를호출하면_다른연산자를기준으로_분리하지않는가() {
+        //given
+        let sut = "1+2-3"
+        
+        //when
+        let result = sut.components(separatedBy: "+")
+        
+        //then
+        XCTAssertNotEqual(result, ["1+2", "3"])
+    }
+    
     // 리팩토링으로 인해 유효한 테스트 코드가 하나밖에 없음
     func test_공백을_기준으로_components를호출하면_공백을기준으로_분리하는가() {
         //given
@@ -40,6 +51,17 @@ class componentsByOperatorsTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, ["1", "+", "2", "-", "3"])
+    }
+    
+    func test_공백을_기준으로_components를호출하면_다른것을기준으로_분리하지는않는가() {
+        //given
+        let sut = "1 + 2 - 3"
+        
+        //when
+        let result = sut.components(separatedBy: " ")
+        
+        //then
+        XCTAssertNotEqual(result, ["1+2", "3"])
     }
     
     func test_filter고차함수를이용해_숫자가아닌것을_필터링을하는가() {

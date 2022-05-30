@@ -228,10 +228,33 @@ struct CalculatorItemQueue<Double>: Queue, CalculateItem {
 # [STEP 3]
 
 ## 고민한점
+### 연산자
+- 코드의 연산기호와 연산자 버튼의 기호가 다르다는 것을 알게 됨
+- 처음 설정할 때 애먹음
+### 스택뷰를 쌓는 법
+
+  exampleStackView1.removeArrangedSubview(<#T##view: UIView##UIView#>) -> 포지션과 사이즈만 없애주지 뷰에서 제거해주는 것이 아님  
+대체 방법
+1. isHidden -> 해당 스택을 뷰에서 내려줌
+2. removeFromSuperView() -> 해당 스택을 아에 없애줌
+
+- 스크롤뷰 최하단으로 이동하는 방법  
+처음 `setContentOffset`를 사용하여 아래와 같이 설정을 해주었음
+```swift
+scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: false)
+```
+마지막 숫자가 스크롤뷰 하단에 있음
+
+```swift
+scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + 22), animated: false)
+```
+아래와 같이 설정해 주었더니 숫자가 잘 보임
 
 
 ## 배운개념
-
+- `scrollView`, `stackView`, `autoLayout`
+- `계산기 로직 구현`
+- `NumberFormatter`
 
 
 

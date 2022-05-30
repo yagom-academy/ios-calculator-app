@@ -2,7 +2,7 @@
 //  splitTests.swift
 //  splitTests
 //
-//  Created by 김동용 on 2022/05/20.
+//  Created by bard on 2022/05/20.
 //
 
 import XCTest
@@ -42,5 +42,4 @@ class splitTests: XCTestCase {
         //then
         XCTAssertEqual(result, ["1-2", "3", "4"])
     }
-
 }
