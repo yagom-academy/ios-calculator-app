@@ -14,6 +14,8 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var formulaStackView: UIStackView?
     @IBOutlet private weak var savedValueScrollView: UIScrollView?
     
+    private var viewModel = CalculatorViewModel()
+    
     private var isCalculated: Bool {
         formulaStackView?.isNotEmpty == true && operatorsLabel?.text?.isEmpty == true
     }
@@ -107,25 +109,9 @@ private extension CalculatorViewController {
 //- MARK: ScrollView & StackView
 
 extension CalculatorViewController {
-    func make(from parentLabel: UILabel?) -> UILabel {
-        let operandLabel = UILabel()
-        operandLabel.text = parentLabel == operandsLabel ? operandsLabel?.text : operatorsLabel?.text
-        operandLabel.textColor = .white
-        operandLabel.translatesAutoresizingMaskIntoConstraints = false
-        return operandLabel
-    }
-   
-    func addStackView() {
-        let calculationStackView = UIStackView()
-        calculationStackView.spacing = 8
-        calculationStackView.addArrangedSubview(make(from: operatorsLabel))
-        calculationStackView.addArrangedSubview(make(from: operandsLabel))
-        
-        formulaStackView?.addArrangedSubview(calculationStackView)
-    }
-    
     func makeExpression() -> String {
         var expression: String = CalculatorState.empty.value
+        
         
         formulaStackView?
             .arrangedSubviews
@@ -185,7 +171,10 @@ private extension CalculatorViewController {
     
     func fetchOperator(_ value: String) {
         if (!isTapped) {
-            addStackView()
+            viewModel.addStackView(formulaStackView,
+                                   operatorText: operatorsLabel?.text,
+                                   operandText: operandsLabel?.text)
+            
             savedValueScrollView?.focusBottom()
             
             operatorsLabel?.text = value
@@ -218,7 +207,7 @@ private extension CalculatorViewController {
             return
         }
         
-        addStackView()
+        viewModel.addStackView(formulaStackView, operatorText: operatorsLabel?.text, operandText: operandsLabel?.text)
         savedValueScrollView?.focusBottom()
         
         let expressionParser = ExpressionParser.parse(from: makeExpression())
