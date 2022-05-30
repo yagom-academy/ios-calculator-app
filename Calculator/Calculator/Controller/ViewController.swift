@@ -5,6 +5,7 @@
 // 
 
 import UIKit
+import Foundation
 
 final class ViewController: UIViewController {
     // MARK: - Properties
@@ -17,53 +18,60 @@ final class ViewController: UIViewController {
     @IBOutlet weak var additionButton: UIButton!
     @IBOutlet weak var resultButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
-    
-    // TODO : calculatorValue로 바꾸기
+
     var calculatorValue = CalculatorValue()
     
+    // MARK: - NotificationCenter
+    let center = NotificationCenter.default
     
-    // 4개가 감지되어야 함
-    // - 값 변경은 CV 메서드로 처리
-    private var inputNumber = ""
-    private var inputOperator = ""
+    @objc
+    func updateView(notification: NSNotification) {
+        switch notification.name {
+        case NSNotification.Name(rawValue: "operand"):
+            inputNumberLabel.text = notification.object as? String
+        case NSNotification.Name(rawValue: "operator"):
+            inputOperatorLabel.text = notification.object as? String
+        case NSNotification.Name(rawValue: "arithmetic"):
+            if notification.object as! String == "" {
+                stackView.removeAllArrangedSubview()
+            } else {
+                stackView.addLable(arithmetic: notification.object as? String ?? "")
+            }
+        default:
+            inputNumberLabel.text = ""
+        }
+    }
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         calculatorValue.resetCalculator()
+        center.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "operand"), object: nil)
+        
+        center.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "operator"), object: nil)
+        
+        center.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "arithmetic"), object: nil)
     }
 }
 
-// MARK: - UI
-
 extension ViewController {
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
-        // TODO : View
         stackView.removeAllArrangedSubview()
-        inputNumberLabel.text = "0"
-        inputOperatorLabel.text = ""
-        
         calculatorValue.resetCalculator()
     }
     
     @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        // TODO : View
         calculatorValue.resetInput(inputNumber: true, inputOperator: false)
-        inputNumberLabel.text = "0"
     }
     
-    
-    // TODO : View + value
     private func updateStackView() {
         if calculatorValue.isNumberEmpty {
             return
         }
         
-        stackView.addLable(operator: inputOperator, operand: inputNumber)
         calculatorValue.appendArithmetic()
         calculatorValue.resetInput(inputNumber: true, inputOperator: true)
-        inputNumberLabel.text = "0"
     }
 }
 
@@ -72,10 +80,8 @@ extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         let tappedNumber = sender.titleLabel?.text ?? "0"
         calculatorValue.updateInputNumber(with: tappedNumber)
-        inputNumberLabel.text = inputNumber
     }
     
-    // TODO : View + value
     @IBAction private func tapOperatorsButton(_ sender: UIButton) {
         var currentOperator: Character = " "
         switch sender {
@@ -93,11 +99,9 @@ extension ViewController {
         
         updateStackView()
         
-        inputOperatorLabel.text = String(currentOperator)
         calculatorValue.updateOperatorInput(operator: String(currentOperator))
     }
     
-    // TODO : View
     @IBAction private func tapResultButton() {
         if calculatorValue.isArithmeticEmpty {
             return
@@ -120,13 +124,10 @@ extension ViewController {
             inputNumberLabel.text = CalculatorError.unknownError.errorMessage
         }
         
-        inputOperatorLabel.text = ""
         calculatorValue.resetCalculator()
     }
     
-    // TODO : View
     @IBAction private func tapToChangeSignButton(_ sender: UIButton) {
         calculatorValue.convertSign()
-        inputNumberLabel.text = inputNumber
     }
 }

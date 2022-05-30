@@ -37,15 +37,15 @@ extension UIStackView {
         })
     }
     
-    func addLable(`operator`: String, operand: String) {
-        var number = operand
+    func addLable(arithmetic: String) {
+        var arithmeticText = arithmetic
     
-        if number.last == "." {
-            number.removeLast()
+        if arithmetic.last == "." {
+            arithmeticText.removeLast()
         }
         
         let label = UILabel()
-        label.text = `operator` + " " + number
+        label.text = arithmeticText
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         self.addArrangedSubview(label)

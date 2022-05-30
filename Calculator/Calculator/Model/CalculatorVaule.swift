@@ -1,7 +1,21 @@
+import UIKit
 struct CalculatorValue {
-    private var inputNumber = ""
-    private var inputOperator = ""
-    private(set) var arithmetic = ""
+    private var inputNumber = "" {
+        willSet(inputNumber) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "operand"), object: inputNumber)
+        }
+    }
+    private var inputOperator = "" {
+        willSet(inputOperator) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "operator"), object: inputOperator)
+        }
+    }
+    private(set) var arithmetic = "" {
+        willSet(arithmetic) {
+            let sendValue = inputOperator + " " + inputNumber
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "arithmetic"), object: sendValue)
+        }
+    }
     private var isPositiveNumber = true
     
     var isNumberEmpty: Bool {
