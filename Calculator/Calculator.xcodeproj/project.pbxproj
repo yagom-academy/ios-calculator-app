@@ -160,8 +160,8 @@
 				A301D2E12834BE9500A025E3 /* Node.swift */,
 				A301D2DC2834BD1F00A025E3 /* LinkedList.swift */,
 				A301D2BE283340CD00A025E3 /* CalculatorItemQueue.swift */,
-				A3D6F68928364638008A8FEB /* Formula.swift */,
 				A3D6F68B28365ECC008A8FEB /* ExpressionParser.swift */,
+				A3D6F68928364638008A8FEB /* Formula.swift */,
 			);
 			path = CalculatorQueue;
 			sourceTree = "<group>";
