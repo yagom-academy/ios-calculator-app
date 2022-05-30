@@ -8,7 +8,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var mainStackView: UIStackView!
     
-    private var formula: Formula?
+    private var formula = Formula()
     
     // MARK: - Lifecycle
     
@@ -20,7 +20,6 @@ final class CalculatorViewController: UIViewController {
     // MARK: - Helpers
     
     private func resetUI() {
-        formula = Formula()
         operatorLabel.text = ""
         operandLabel.text = "0"
         mainStackView.subviews.forEach { $0.removeFromSuperview() }
@@ -31,6 +30,20 @@ final class CalculatorViewController: UIViewController {
         let scrollHeight: CGFloat = scrollView.contentSize.height - scrollView.bounds.height
         let scrollViewBottomOffset = CGPoint(x: 0, y: scrollHeight)
         scrollView.setContentOffset(scrollViewBottomOffset, animated: true)
+    }
+    
+    private func appendText(to Label: UILabel, with text: String) {
+        Label.text?.append(text)
+    }
+    
+    private func setLabelsText(`operator`: String, operand: String) {
+        operatorLabel.text = `operator`
+        operandLabel.text = operand
+    }
+    
+    private func isNotANumber(of error: Error) -> Bool {
+        if error as? FormulaError == .notANumber { return true }
+        else { return false }
     }
     
     // MARK: - Actions
@@ -47,21 +60,22 @@ final class CalculatorViewController: UIViewController {
         guard let tappedNumberText = sender.titleLabel?.text else { return }
         
         if operandLabel.text == "0" { operandLabel.text = "" }
-        operandLabel.text?.append(tappedNumberText)
+        
+        appendText(to: operandLabel, with: tappedNumberText)
     }
     
     @IBAction private func demicalPointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false else { return }
         guard let tappedDemicalPointText = sender.titleLabel?.text else { return }
         
-        operandLabel.text?.append(tappedDemicalPointText)
+        appendText(to: operandLabel, with: tappedDemicalPointText)
     }
     
     @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
         guard let tappedDoubleZeroText = sender.titleLabel?.text else { return }
         
-        operandLabel.text?.append(tappedDoubleZeroText)
+        appendText(to: operandLabel, with: tappedDoubleZeroText)
     }
     
     @IBAction private func signButtonTapped(_ sender: UIButton) {
@@ -84,20 +98,18 @@ final class CalculatorViewController: UIViewController {
             guard mainStackView.subviews.count != 0 else { return }
             
             operatorLabel.text = tappedOperatorText
-            
             return
         }
         
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
         
-        let newSubview = CalculateStackView(operator: operatorLabelText,
-                                            operand: operandLabelText)
+        let newSubview = CalculateStackView(operator: operatorLabelText, operand: operandLabelText)
         mainStackView.addArrangedSubview(newSubview)
-        self.scrollToBottom(of: self.calculatingScrollView)
+        scrollToBottom(of: calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
-        formula? += ExpressionParser.parse(from: parsingString)
+        formula += ExpressionParser.parse(from: parsingString)
     }
 
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
@@ -105,27 +117,18 @@ final class CalculatorViewController: UIViewController {
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
-        let newSubview = CalculateStackView(operator: operatorLabelText,
-                                            operand: operandLabelText)
+        let newSubview = CalculateStackView(operator: operatorLabelText, operand: operandLabelText)
         mainStackView.addArrangedSubview(newSubview)
-        self.scrollToBottom(of: self.calculatingScrollView)
+        scrollToBottom(of: calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
-        formula? += ExpressionParser.parse(from: parsingString)
+        formula += ExpressionParser.parse(from: parsingString)
         
-        switch formula?.result() {
+        switch formula.result() {
         case .success(let data):
-            operatorLabel.text = ""
-            operandLabel.text = data.removeTrailingZero()
+            setLabelsText(operator: "", operand: data.removeTrailingZero())
         case .failure(let error):
-            if error as? FormulaError == FormulaError.notANumber {
-                operatorLabel.text = ""
-                operandLabel.text = "NaN"
-            } else {
-                print("Error occurred: ☢️\(error)☢️")
-            }
-        case .none:
-            break
+            if isNotANumber(of: error) { setLabelsText(operator: "", operand: "NaN") }
         }
     }
 }

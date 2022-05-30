@@ -15,7 +15,10 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         let splittedInput = input.split(with: " ")
-        let returnComponents = splittedInput.filter { $0.count == 1 && Operator(rawValue: Character($0)) != nil ? false : true }
+        let returnComponents = splittedInput.filter {
+            $0.count == 1 && Operator(rawValue: Character($0)) != nil ? false : true
+        }
+        
         return returnComponents
     }
 }
