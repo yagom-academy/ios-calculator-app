@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     private var inputFormula: String = ""
     private var inputMathFormula: [String] = []
+    private var judgeInputNumber = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,28 +31,35 @@ class ViewController: UIViewController {
     
     @IBAction private func inputNumber(sender: UIButton) {
         guard let formulaNumber = sender.currentTitle else { return }
-        if inputFormula == "0" && formulaNumber == "0" {
-            return
-        }
         
-        if inputFormula == "0" && formulaNumber == "00" {
-            return
-        }
-        
-        if inputFormula == "0" {
-            inputFormula = formulaNumber
-            mathFomulaLabel.text = inputFormula
-            return
-        }
-        
-        if inputFormula.last == "0" || inputFormula.last == "." {
-            inputFormula += formulaNumber
-            mathFomulaLabel.text = inputFormula
-            return
-        }
+        if checkInputNumber(inputNumber: formulaNumber) { return }
         
         inputFormula += formulaNumber
         mathFomulaLabel.text = numberFormatter(number: inputFormula)
+    }
+    
+    private func checkInputNumber(inputNumber: String) -> Bool {
+        if inputFormula == "0" && inputNumber == "0" {
+            return judgeInputNumber
+        }
+        
+        if inputFormula == "0" && inputNumber == "00" {
+            return judgeInputNumber
+        }
+        
+        if inputFormula == "0" {
+            inputFormula = inputNumber
+            mathFomulaLabel.text = inputFormula
+            return judgeInputNumber
+        }
+        
+        if inputFormula.last == "0" || inputFormula.last == "." {
+            inputFormula += inputNumber
+            mathFomulaLabel.text = inputFormula
+            return judgeInputNumber
+        }
+        
+        return !judgeInputNumber
     }
     
     @IBAction func InputDeciamlPoint(sender: UIButton) {
