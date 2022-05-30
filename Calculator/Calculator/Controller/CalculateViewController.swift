@@ -30,23 +30,15 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func changeTheSign(_ sender: UIButton) {
-        guard let operandText = operandLabel.text,Double(operandText) != 0.0 else {
-            return
-        }
-        guard let operand = Double(filterSign(operandText, ",")) else {
-            return
-        }
+        guard let operandText = operandLabel.text, Double(operandText) != 0.0 else { return }
+        guard let operand = Double(filterSign(operandText, ",")) else { return }
         
         operandLabel.text = String((operand * -1).parse())
     }
     
     @IBAction private func appendOperand(_ sender: UIButton) {
-        guard !isCalculateCompleted else {
-            return
-        }
-        guard let sederTitle = sender.currentTitle else {
-            return
-        }
+        guard !isCalculateCompleted else { return }
+        guard let sederTitle = sender.currentTitle else { return }
         
         if !isOperandInputted {
             operandLabel.text = sederTitle
@@ -58,9 +50,8 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func appendOperator(_ sender: UIButton) {
-        guard !isCalculateCompleted else {
-            return
-        }
+        guard !isCalculateCompleted else { return }
+        guard let sederTitle = sender.currentTitle else { return }
         guard isOperandInputted else {
             operatorLabel.text = sender.currentTitle
             return
@@ -68,9 +59,6 @@ class CalculateViewController: UIViewController {
         guard Double(filterSign(getText(operandLabel), ",")) != nil else {
             operandLabel.text = "NaN"
             isOperandInputted = false
-            return
-        }
-        guard let sederTitle = sender.currentTitle else {
             return
         }
         
@@ -89,15 +77,11 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
-        guard isOperandInputted else {
-            return
-        }
+        guard isOperandInputted else { return }
+        guard !fomulaStackView.subviews.isEmpty else { return }
         guard Double(filterSign(getText(operandLabel), ",")) != nil else {
             operandLabel.text = "NaN"
             isOperandInputted = false
-            return
-        }
-        guard !fomulaStackView.subviews.isEmpty else {
             return
         }
         
@@ -143,9 +127,7 @@ class CalculateViewController: UIViewController {
     }
     
     private func getText(_ label: UILabel) -> String {
-        guard let text = label.text else {
-            return ""
-        }
+        guard let text = label.text else { return "" }
         
         return text
     }
@@ -171,9 +153,7 @@ class CalculateViewController: UIViewController {
     }
     
     private func checkTheSign(_ input: String) -> String {
-        guard input.contains("-") else {
-            return "-" + input
-        }
+        guard input.contains("-") else { return "-" + input }
         
         return filterSign(input, "-")
     }
