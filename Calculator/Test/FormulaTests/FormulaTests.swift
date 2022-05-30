@@ -21,10 +21,10 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(2)
         sut.operands.enqueue(3)
         sut.operands.enqueue(1)
-        sut.operators.enqueue("*")
-        sut.operators.enqueue("÷")
-        sut.operators.enqueue("−")
-        sut.operators.enqueue("+")
+        sut.operators.enqueue(Operator.add)
+        sut.operators.enqueue(Operator.divide)
+        sut.operators.enqueue(Operator.subtract)
+        sut.operators.enqueue(Operator.add)
         // when
         let result = try? sut.result()
         // then
@@ -36,7 +36,7 @@ class LinkedListTests: XCTestCase {
         sut = Formula()
         sut.operands.enqueue(0)
         sut.operands.enqueue(2)
-        sut.operators.enqueue("÷")
+        sut.operators.enqueue(Operator.divide)
         // when
         // given
         XCTAssertThrowsError(try sut.result())
@@ -47,7 +47,7 @@ class LinkedListTests: XCTestCase {
         sut = Formula()
         sut.operands.enqueue(0)
         sut.operands.enqueue(2)
-        sut.operators.enqueue("÷")
+        sut.operators.enqueue(Operator.divide)
         // when
         var result = ""
         do {
@@ -69,10 +69,10 @@ class LinkedListTests: XCTestCase {
         sut.operands.enqueue(0)
         sut.operands.enqueue(3)
         sut.operands.enqueue(1)
-        sut.operators.enqueue("*")
-        sut.operators.enqueue("÷")
-        sut.operators.enqueue("-")
-        sut.operators.enqueue("+")
+        sut.operators.enqueue(Operator.multiply)
+        sut.operators.enqueue(Operator.divide)
+        sut.operators.enqueue(Operator.subtract)
+        sut.operators.enqueue(Operator.add)
         // when
         var result = 0.0
         

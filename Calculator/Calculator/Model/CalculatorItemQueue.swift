@@ -1,22 +1,22 @@
-struct CalculatorItemQueue<T> {
-    private var calculateItems = LinkedList<T>()
+struct CalculatorItemQueue<Item: CalculateItem> {
+    private var calculateItems = LinkedList<Item>()
     private var isEmpty: Bool {
         return (calculateItems.count == 0) ? true : false
     }
     
-    func enqueue(_ element: T) {
+    func enqueue(_ element: Item) {
         calculateItems.append(data: element)
     }
     
     @discardableResult
-    func dequeue() -> T? {
+    func dequeue() -> Item? {
         if isEmpty {
             return nil
         }
         return calculateItems.removeFirst()
     }
     
-    func displayItems() -> Array<T> {
+    func displayItems() -> Array<Item> {
         return calculateItems.getValues()
     }
     

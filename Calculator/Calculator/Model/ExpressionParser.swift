@@ -1,14 +1,14 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<Operator.RawValue>()
+        let operators = CalculatorItemQueue<Operator>()
         let compoents = componentsByOperators(from: input)
         
         compoents.compactMap {Double($0)}.forEach { operands.enqueue($0) }
         
-        let operatorSymbols = Operator.allCases.map { String($0.symbol) }
-        compoents.filter { operatorSymbols.contains($0) }.forEach {
-            operators.enqueue(Character($0))
+        compoents.compactMap {
+            Operator(rawValue: Character($0))
+        }.forEach { operators.enqueue($0)
         }
         
         let formula = Formula(operands: operands, operators: operators)
