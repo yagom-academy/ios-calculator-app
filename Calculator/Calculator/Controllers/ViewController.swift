@@ -29,9 +29,9 @@ class ViewController: UIViewController {
     }
     
     func scrollToBottom(of scrollView: UIScrollView) {
-        let scrollViewBottomOffset = CGPoint(x: 0,
-                                             y: scrollView.contentSize.height -
-                                             scrollView.bounds.height)
+        scrollView.layoutIfNeeded()
+        let scrollHeight: CGFloat = scrollView.contentSize.height - scrollView.bounds.height
+        let scrollViewBottomOffset = CGPoint(x: 0, y: scrollHeight)
         scrollView.setContentOffset(scrollViewBottomOffset, animated: true)
     }
     
@@ -86,13 +86,10 @@ class ViewController: UIViewController {
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
         
-        UIView.animate(withDuration: 0.0) {
-            StackViewManager.addCalculateLabels(to: self.mainStackViewInCalculatingScrollView,
+        StackViewManager.addCalculateLabels(to: self.mainStackViewInCalculatingScrollView,
                                                 operatorText: operatorLabelText,
                                                 operandText: operandLabelText)
-        } completion: { _ in
-            self.scrollToBottom(of: self.calculatingScrollView)
-        }
+        self.scrollToBottom(of: self.calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
         formula? += ExpressionParser.parse(from: parsingString)
@@ -104,13 +101,10 @@ class ViewController: UIViewController {
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
-        UIView.animate(withDuration: 0.0) {
-            StackViewManager.addCalculateLabels(to: self.mainStackViewInCalculatingScrollView,
+        StackViewManager.addCalculateLabels(to: self.mainStackViewInCalculatingScrollView,
                                                 operatorText: operatorLabelText,
                                                 operandText: operandLabelText)
-        } completion: { _ in
-            self.scrollToBottom(of: self.calculatingScrollView)
-        }
+        self.scrollToBottom(of: self.calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
         formula? += ExpressionParser.parse(from: parsingString)
