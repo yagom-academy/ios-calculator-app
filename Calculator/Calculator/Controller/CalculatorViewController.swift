@@ -37,7 +37,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
-        let ButtonTitle = sender.currentTitle!
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
 
         if !operatorStorage.isEmpty {
             inputValue += presentNumbers
@@ -46,46 +48,50 @@ class CalculatorViewController: UIViewController {
             presentNumbers = ""
             operatorStorage = []
             
-            presentNumbers += "\(ButtonTitle)"
-            numberLabel.text = "\(ButtonTitle)"
+            presentNumbers += "\(buttonTitle)"
+            numberLabel.text = "\(buttonTitle)"
             
-        } else if presentNumbers.contains(".") && ButtonTitle == "." {
+        } else if presentNumbers.contains(".") && buttonTitle == "." {
             return
             
         } else {
-            presentNumbers += "\(ButtonTitle)"
+            presentNumbers += "\(buttonTitle)"
             numberLabel.text = "\(presentNumbers)"
         }
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
-        let ButtonTitle = sender.currentTitle!
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
         
-        presentOperator = ButtonTitle
-        operatorLabel.text = "\(ButtonTitle)"
+        presentOperator = buttonTitle
+        operatorLabel.text = "\(buttonTitle)"
         
-        if ["+", "−", "÷", "×"].contains(ButtonTitle) {
-            operatorStorage.append(" \(ButtonTitle) ")
+        if ["+", "−", "÷", "×"].contains(buttonTitle) {
+            operatorStorage.append(" \(buttonTitle) ")
                         
             makeStackLabel()
             numberLabel.text = "0"
             
-        } else if ["="].contains(ButtonTitle) {
+        } else if ["="].contains(buttonTitle) {
             didTapAnswerButton()
             
         }
     }
     
     @IBAction func touchOptionButton(_ sender: UIButton) {
-        let ButtonTitle = sender.currentTitle!
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
         
-        if ["AC"].contains(ButtonTitle) {
+        if ["AC"].contains(buttonTitle) {
             didTapACButton()
             
-        } else if ["CE"].contains(ButtonTitle) {
+        } else if ["CE"].contains(buttonTitle) {
             didTapCEButton()
             
-        } else if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
+        } else if ["⁺⁄₋"].contains(buttonTitle) && presentNumbers != "0" {
             didTapSignButton()
             
         }
