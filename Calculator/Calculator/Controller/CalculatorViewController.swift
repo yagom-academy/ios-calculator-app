@@ -67,7 +67,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if ["+", "−", "÷", "×"].contains(buttonTitle) {
+        if userIsInTheMiddleOfTyping {
+            presentOperator = buttonTitle
+            operatorLabel.text = "\(buttonTitle)"
+            
+            operatorStorage.append(" \(buttonTitle) ")
+            numberLabel.text = "0"
+        } else {
             makeStackLabel()
             
             presentOperator = buttonTitle
@@ -77,11 +83,11 @@ class CalculatorViewController: UIViewController {
             numberLabel.text = "0"
             userIsInTheMiddleOfTyping = true
         }
-        
-        if ["="].contains(buttonTitle) {
-            didTapAnswerButton()
-            userIsInTheMiddleOfTyping = false
-        }
+    }
+    
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        didTapAnswerButton()
+        userIsInTheMiddleOfTyping = false
     }
     
     @IBAction func touchOptionButton(_ sender: UIButton) {
@@ -118,7 +124,7 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
         
-        if presentOperator.isEmpty {
+        if userIsInTheMiddleOfTyping {
             stackNumberLabel.text = "\(presentNumbers)"
         } else {
             stackNumberLabel.text = "\(presentNumbers)"
