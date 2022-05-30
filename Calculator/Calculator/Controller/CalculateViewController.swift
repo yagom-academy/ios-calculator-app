@@ -30,14 +30,15 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func changeTheSign(_ sender: UIButton) {
-        guard !isCalculateCompleted else {
-            return
-        }
-        guard let operand = operandLabel.text, Double(operand) != 0.0 else {
+        guard let operandText = operandLabel.text,Double(operandText) != 0.0 else {
             return
         }
         
-        operandLabel.text = checkTheSign(operand)
+        guard let operand = Double(operandText.filter {$0 != ","}) else {
+            return
+        }
+        
+        operandLabel.text = String((operand * -1).parse())
     }
     
     @IBAction private func appendOperand(_ sender: UIButton) {
