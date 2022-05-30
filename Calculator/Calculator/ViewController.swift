@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     @IBAction func pressOperandButton(_ sender: UIButton) {
         let operandLabel = currentOperand.text ?? CalcAccessory.Empty
         
-        guard sender.currentTitle != "." || currentOperand.text?.contains(".") == false
+        guard sender.currentTitle != CalcAccessory.Dot || currentOperand.text?.contains(CalcAccessory.Dot) == false
         else {
             return
         }
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if currentOperand.text?.last == "." {
+        if currentOperand.text?.last == Character(CalcAccessory.Dot) {
             currentOperand.text?.removeLast()
         }
         
@@ -72,26 +72,52 @@ class ViewController: UIViewController {
         scrollingUnder()
     }
     
-    @IBAction func pressAllClearButton(_ sender: UIButton) {
+    @IBAction func allClearButtonDidTap(_ sender: UIButton) {
         operationStack = CalcAccessory.Empty
         clearOperationScrollviewContent()
         clearCurrentOperandUILabel()
         clearCurrentOperatorUILabel()
     }
-    @IBAction func pressClearEntryButton(_ sender: UIButton) {
+    
+    @IBAction func clearEntryButtonDidTap(_ sender: UIButton) {
         clearCurrentOperandUILabel()
     }
-    @IBAction func pressReverseSignButton(_ sender: UIButton) {
-        guard currentOperand.text != CalcAccessory.Zero else {
+    
+    @IBAction func reverseSignButtonDidTap(_ sender: UIButton) {
+        guard let operandDisplayed = currentOperand.text, operandDisplayed != "NaN" else {
             return
         }
+        
+        guard canAttachMinus(to: operandDisplayed) == true else {
+            return
+        }
+        
         if currentOperand.text?.first == "-" {
             currentOperand.text?.removeFirst()
         } else {
             currentOperand.text = "-" + (currentOperand.text ?? CalcAccessory.Empty)
         }
     }
-    @IBAction func pressEqualButton(_ sender: UIButton) {
+    
+    func canAttachMinus(to operand: String) -> Bool {
+        var result = CalcAccessory.Empty
+        
+        if operand.contains(CalcAccessory.Dot) {
+            result = operand.replacingOccurrences(of: CalcAccessory.Dot, with: CalcAccessory.Empty)
+        } else {
+            result = operand
+        }
+        
+        result = result.replacingOccurrences(of: CalcAccessory.Zero, with: CalcAccessory.Empty)
+        
+        if result == CalcAccessory.Empty {
+            return false
+        }
+        
+        return true
+    }
+    
+    @IBAction func equalButtonDidTap(_ sender: UIButton) {
         guard currentOperator.text != CalcAccessory.Empty else {
             return
         }
