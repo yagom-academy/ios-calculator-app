@@ -15,7 +15,7 @@ class CalculateViewController: UIViewController {
     @IBOutlet private weak var operandsTextLabel: UILabel!
     @IBOutlet private weak var operatorTextLabel: UILabel!
     
-    var subStackView: UIStackView {
+    private var subStackView: UIStackView {
        let stackView = UIStackView()
        stackView.axis = .horizontal
        stackView.alignment = .fill
@@ -26,7 +26,7 @@ class CalculateViewController: UIViewController {
        return stackView
     }
     
-    var operatorLabel: UILabel {
+    private var operatorLabel: UILabel {
         let signLabel = UILabel()
         signLabel.text = operatorTextLabel.text
         signLabel.textAlignment = .right
@@ -36,7 +36,7 @@ class CalculateViewController: UIViewController {
         return signLabel
     }
     
-    var operandLabel: UILabel {
+    private var operandLabel: UILabel {
         let numberLabel = UILabel()
         numberLabel.text = operandsTextLabel.text?.formatNumber()
         numberLabel.textAlignment = .right
