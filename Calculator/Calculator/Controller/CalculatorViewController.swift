@@ -18,6 +18,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
     
+    var userIsInTheMiddleOfTyping = false
     var inputValue = ""
     var presentNumbers = ""
     var presentOperator = ""
@@ -40,8 +41,8 @@ class CalculatorViewController: UIViewController {
         guard let buttonTitle = sender.currentTitle else {
             return
         }
-
-        if !operatorStorage.isEmpty {
+        
+        if userIsInTheMiddleOfTyping {
             inputValue += presentNumbers
             inputValue += " \(operatorStorage.removeLast()) "
             
@@ -58,6 +59,7 @@ class CalculatorViewController: UIViewController {
             presentNumbers += "\(buttonTitle)"
             numberLabel.text = "\(presentNumbers)"
         }
+        userIsInTheMiddleOfTyping = true
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -70,13 +72,15 @@ class CalculatorViewController: UIViewController {
         
         if ["+", "−", "÷", "×"].contains(buttonTitle) {
             operatorStorage.append(" \(buttonTitle) ")
-                        
+            
             makeStackLabel()
             numberLabel.text = "0"
-            
-        } else if ["="].contains(buttonTitle) {
+            userIsInTheMiddleOfTyping = true
+        }
+        
+        if ["="].contains(buttonTitle) {
             didTapAnswerButton()
-            
+            userIsInTheMiddleOfTyping = false
         }
     }
     
@@ -87,13 +91,14 @@ class CalculatorViewController: UIViewController {
         
         if ["AC"].contains(buttonTitle) {
             didTapACButton()
-            
-        } else if ["CE"].contains(buttonTitle) {
+        }
+        
+        if ["CE"].contains(buttonTitle) {
             didTapCEButton()
-            
-        } else if ["⁺⁄₋"].contains(buttonTitle) && presentNumbers != "0" {
+        }
+        
+        if ["⁺⁄₋"].contains(buttonTitle) && presentNumbers != "0" {
             didTapSignButton()
-            
         }
     }
     
@@ -142,7 +147,6 @@ class CalculatorViewController: UIViewController {
                 numberLabel.text = "\(NSNresult)"
             }
         }
-        inputValue = ""
         presentNumbers = ""
     }
     
