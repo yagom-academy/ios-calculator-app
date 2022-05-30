@@ -79,12 +79,12 @@ extension ViewController {
 extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         let tappedNumber = sender.titleLabel?.text ?? "0"
-        checkInputNumber(number: tappedNumber)
+        updateInputNumber(with: tappedNumber)
         inputNumberLabel.text = inputNumber
     }
     
     @IBAction private func tapOperatorsButton(_ sender: UIButton) {
-        var currentOperator:Character = " "
+        var currentOperator: Character = " "
         switch sender {
         case additionButton:
             currentOperator = Operator.add.symbol
@@ -148,7 +148,7 @@ extension ViewController {
         inputNumberLabel.text = inputNumber
     }
     
-    private func checkInputNumber(number: String) {
+    private func updateInputNumber(with number: String) {
         if inputNumber.contains(".") && number == "." {
             return
         }
