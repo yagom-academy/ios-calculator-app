@@ -70,19 +70,75 @@
 			children = (
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				D73FE6712844BC42009EE808 /* Controller */,
+				D73FE6722844BC51009EE808 /* Model */,
+				D73FE6732844BC5D009EE808 /* View */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		D73FE6712844BC42009EE808 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				D7E681BB2844B89D00B61E3C /* QueueError.swift */,
-				D7E681B92844B89300B61E3C /* Queue.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D73FE6722844BC51009EE808 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				D7E681B72844B88100B61E3C /* CalculatorItemQueue.swift */,
-				D7E681BD2844B8B600B61E3C /* CalculateItem.swift */,
-				D73FE66F2844BBDF009EE808 /* OperatorError.swift */,
-				D73FE66D2844BBC0009EE808 /* Operator.swift */,
+				D73FE6772844BCC0009EE808 /* Extension */,
+				D73FE6742844BCA8009EE808 /* Enum */,
+				D73FE6752844BCB0009EE808 /* Error */,
+				D73FE6762844BCB7009EE808 /* Protocol */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D73FE6732844BC5D009EE808 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
-			path = Calculator;
+			name = View;
+			sourceTree = "<group>";
+		};
+		D73FE6742844BCA8009EE808 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				D73FE66D2844BBC0009EE808 /* Operator.swift */,
+			);
+			name = Enum;
+			sourceTree = "<group>";
+		};
+		D73FE6752844BCB0009EE808 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				D73FE66F2844BBDF009EE808 /* OperatorError.swift */,
+				D7E681BB2844B89D00B61E3C /* QueueError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		D73FE6762844BCB7009EE808 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D7E681B92844B89300B61E3C /* Queue.swift */,
+				D7E681BD2844B8B600B61E3C /* CalculateItem.swift */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		D73FE6772844BCC0009EE808 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
