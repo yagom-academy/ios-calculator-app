@@ -68,11 +68,12 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func signButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
+        guard let operandLabelText = operandLabel.text else { return }
         
-        if operandLabel.text?.first == "-" {
+        if operandLabelText.first == "-" {
             operandLabel.text?.removeFirst()
         } else {
-            operandLabel.text?.insert("-", at: operandLabel.text!.startIndex)
+            operandLabel.text?.insert("-", at: operandLabelText.startIndex)
         }
     }
 
