@@ -90,9 +90,9 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = tappedOperatorText
         operandLabel.text = "0"
         
-        StackViewManager.addCalculateLabels(to: self.mainStackView,
-                                                operatorText: operatorLabelText,
-                                                operandText: operandLabelText)
+        let newSubview = CalculateStackView(operator: operatorLabelText,
+                                            operand: operandLabelText)
+        mainStackView.addArrangedSubview(newSubview)
         self.scrollToBottom(of: self.calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
@@ -105,9 +105,9 @@ final class CalculatorViewController: UIViewController {
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
-        StackViewManager.addCalculateLabels(to: self.mainStackView,
-                                                operatorText: operatorLabelText,
-                                                operandText: operandLabelText)
+        let newSubview = CalculateStackView(operator: operatorLabelText,
+                                            operand: operandLabelText)
+        mainStackView.addArrangedSubview(newSubview)
         self.scrollToBottom(of: self.calculatingScrollView)
         
         let parsingString = operatorLabelText + " " + operandLabelText
