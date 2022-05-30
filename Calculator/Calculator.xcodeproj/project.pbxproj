@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		20ABBDAE2832563F003675B9 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDAD2832563F003675B9 /* CalculateItem.swift */; };
 		20ABBDBE28325EB8003675B9 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABBDB528325A18003675B9 /* QueueTests.swift */; };
+		20B60AF92840787E00FA0D4F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
 		20EB974128360B2E00FD5E0D /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB974028360B2E00FD5E0D /* Operator.swift */; };
 		20EB974328360BEF00FD5E0D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB974228360BEF00FD5E0D /* Double.swift */; };
 		20EB974528360C4C00FD5E0D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB974428360C4C00FD5E0D /* String.swift */; };
@@ -29,7 +30,6 @@
 		20F2630A2834B719009AD595 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F263082834B671009AD595 /* Queue.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
-		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
@@ -344,8 +344,8 @@
 				20EB974328360BEF00FD5E0D /* Double.swift in Sources */,
 				20EB974528360C4C00FD5E0D /* String.swift in Sources */,
 				20F263072834B63E009AD595 /* CalculatorItemQueue.swift in Sources */,
-				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				20EB974128360B2E00FD5E0D /* Operator.swift in Sources */,
+				20B60AF92840787E00FA0D4F /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				20EB974B2836526100FD5E0D /* CalculatorError.swift in Sources */,
 				20EB974728360D9300FD5E0D /* Formula.swift in Sources */,
