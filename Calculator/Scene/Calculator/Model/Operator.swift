@@ -6,9 +6,9 @@
 //
 enum Operator: Character, CalculateItem, CaseIterable {
     case add = "+"
-    case subtract = "-"
-    case multiply = "*"
-    case devide = "/"
+    case subtract = "−"
+    case multiply = "×"
+    case devide = "÷"
     
     init?(rawValue: String) {
         guard Double(rawValue) == nil else {

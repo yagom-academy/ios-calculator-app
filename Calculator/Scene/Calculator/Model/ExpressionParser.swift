@@ -6,7 +6,7 @@
 //
 
 enum ExpressionParser {
-    static func parse(from input: String) throws -> Formula {
+    static func parse(from input: String) -> Formula {
         let componentedInput = componentByOperators(from: input)
         let operands: [Double] = componentedInput.compactMap { Double($0) }
         let `operators`: [Operator] = componentedInput.compactMap { Operator.init(rawValue: $0) }
