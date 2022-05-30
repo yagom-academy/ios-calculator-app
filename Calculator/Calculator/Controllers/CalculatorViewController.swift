@@ -3,12 +3,12 @@ import UIKit
 final class CalculatorViewController: UIViewController {
     // MARK: - Properties
     
-    @IBOutlet weak var calculatingScrollView: UIScrollView!
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet private weak var calculatingScrollView: UIScrollView!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
-    var formula: Formula?
-    var mainStackViewInCalculatingScrollView: UIStackView {
+    private var formula: Formula?
+    private var mainStackViewInCalculatingScrollView: UIStackView {
         calculatingScrollView.subviews.compactMap { $0 as? UIStackView }[0]
     }
     
@@ -21,14 +21,14 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Helpers
     
-    func resetUI() {
+    private func resetUI() {
         formula = Formula()
         operatorLabel.text = ""
         operandLabel.text = "0"
         mainStackViewInCalculatingScrollView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func scrollToBottom(of scrollView: UIScrollView) {
+    private func scrollToBottom(of scrollView: UIScrollView) {
         scrollView.layoutIfNeeded()
         let scrollHeight: CGFloat = scrollView.contentSize.height - scrollView.bounds.height
         let scrollViewBottomOffset = CGPoint(x: 0, y: scrollHeight)
@@ -37,33 +37,33 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         resetUI()
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         operandLabel.text = "0"
     }
     
-    @IBAction func operandButtonTapped(_ sender: UIButton) {
+    @IBAction private func operandButtonTapped(_ sender: UIButton) {
         guard let tappedNumberText = sender.titleLabel?.text else { return }
         if operandLabel.text == "0" { operandLabel.text = "" }
         operandLabel.text?.append(tappedNumberText)
     }
     
-    @IBAction func demicalPointButtonTapped(_ sender: UIButton) {
+    @IBAction private func demicalPointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false else { return }
         guard let tappedDemicalPointText = sender.titleLabel?.text else { return }
         operandLabel.text?.append(tappedDemicalPointText)
     }
     
-    @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
+    @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
         guard let tappedDoubleZeroText = sender.titleLabel?.text else { return }
         operandLabel.text?.append(tappedDoubleZeroText)
     }
     
-    @IBAction func signButtonTapped(_ sender: UIButton) {
+    @IBAction private func signButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
         if operandLabel.text?.first == "-" {
             operandLabel.text?.removeFirst()
@@ -72,7 +72,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
 
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let tappedOperatorText = sender.titleLabel?.text,
               let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
@@ -95,7 +95,7 @@ final class CalculatorViewController: UIViewController {
         formula? += ExpressionParser.parse(from: parsingString)
     }
 
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+    @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard operatorLabel.text != "" else { return }
         
         guard let operatorLabelText = operatorLabel.text,
