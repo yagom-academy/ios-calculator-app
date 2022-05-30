@@ -52,7 +52,6 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func demicalPointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false else { return }
-        
         guard let tappedDemicalPointText = sender.titleLabel?.text else { return }
         
         operandLabel.text?.append(tappedDemicalPointText)
@@ -60,7 +59,6 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard operandLabel.text != "0" else { return }
-        
         guard let tappedDoubleZeroText = sender.titleLabel?.text else { return }
         
         operandLabel.text?.append(tappedDoubleZeroText)
@@ -84,7 +82,9 @@ final class CalculatorViewController: UIViewController {
         
         if operandLabel.text == "0" {
             guard mainStackView.subviews.count != 0 else { return }
+            
             operatorLabel.text = tappedOperatorText
+            
             return
         }
         
@@ -102,7 +102,6 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard operatorLabel.text != "" else { return }
-        
         guard let operatorLabelText = operatorLabel.text,
               let operandLabelText = operandLabel.text else { return }
         
@@ -113,7 +112,6 @@ final class CalculatorViewController: UIViewController {
         
         let parsingString = operatorLabelText + " " + operandLabelText
         formula? += ExpressionParser.parse(from: parsingString)
-        
         
         switch formula?.result() {
         case .success(let data):
