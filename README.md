@@ -6,6 +6,9 @@
 팀원: [@hugh](https://github.com/Hugh-github) [@bard](https://github.com/bar-d)/ 리뷰어: [@GREENOVER](https://github.com/GREENOVER)
 > 
 
+
+## UML
+![Untitled](https://user-images.githubusercontent.com/102569735/171013972-f0c57142-b68c-4cd1-882f-5332266278bb.jpg)
 # 목차
 
 - [프로젝트 소개](#프로젝트-소개)
