@@ -10,28 +10,7 @@ struct Formula {
     }
     
     func result() throws -> Double {
-        guard let start = operands.displayItems().first else {
-            return 0.0
-        }
         
-        var operandItems = operands.displayItems()
-        operandItems.removeFirst()
-
-        let errorNumber = CalculatorError.dividedByZero.errorCaseNumber
-        let result = try operandItems.reduce(start) { reuslt, partialResult in
-            let operatorSymbol = operators.dequeue() ?? " "
-            let `operator` = Operator.allCases.filter {
-                $0.symbol == operatorSymbol
-            }
-            let calculatedValue = operators.first?.calculate(lhs: reuslt, rhs: partialResult)
-            
-            if operatorSymbol == "÷" && (partialResult == errorNumber || reuslt == errorNumber) {
-                throw CalculatorError.dividedByZero
-            }
-            return calculatedValue
-        }
-        
-        operands.reset()
-        return result
+        return 0.0
     }
 }
