@@ -111,6 +111,27 @@ class ViewController: UIViewController {
         valueStack = String(valueStack.dropLast())
         userIsInTheMiddleOfTyping = true
     }
+    
+    @IBAction func didTapToggleButton(_ sender: UIButton) {
+        guard let presentNumber = operandsLable.text else {
+            return
+        }
+        guard presentNumber != "0" else {
+            return
+        }
+        if presentNumber.contains("−") {
+            operandsLable.text = presentNumber.filter { element -> Bool in
+                if element == "-" {
+                    return false
+                }
+                return true
+            }
+        } else {
+            operandsLable.text = "-" + presentNumber
+            }
+        let valueStackArray = valueStack.split(with: " ").dropLast().reduce("", +)
+        valueStack = valueStackArray + (operandsLable.text ?? "")
+    }
 }
 
 
