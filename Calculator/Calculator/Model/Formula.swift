@@ -12,17 +12,39 @@ struct Formula {
         guard operands.enQueueStack.count == operators.enQueueStack.count + 1 else {
             throw QueueError.unknown
         }
-        var total = try operands.deQueue()
+        var optionalTotal: Double?
+        
+        do {
+            optionalTotal = try operands.deQueue()
+        } catch {
+            throw QueueError.wrongOperands
+        }
+        
+        guard var total = optionalTotal else { throw QueueError.unknown }
         
         for _ in 1...operators.enQueueStack.count {
-            let number = try operands.deQueue()
-            let symbol = try operators.deQueue()
+            var number: Double?
+            var symbol: Operator?
+            
+            do {
+                number = try operands.deQueue()
+            } catch {
+                throw QueueError.wrongOperands
+            }
+            
+            do {
+                symbol = try operators.deQueue()
+            } catch {
+                throw QueueError.wrongOperators
+            }
             
             if symbol == .divide && number == 0.0 {
                 throw OperatorError.devideFail
             }
             
-            total = try symbol.calculate(lhs: total, rhs: number)
+            guard let unwrappedNumber = number else { throw QueueError.wrongOperands }
+            guard let unwrappedSymbol = symbol else { throw QueueError.wrongOperators }
+            total = try unwrappedSymbol.calculate(lhs: total, rhs: unwrappedNumber)
         }
         return total
     }
