@@ -22,7 +22,7 @@ struct Formula {
                 throw FormulaError.noOperandsInQueue
             }
             let operatorsItem = eachOperator
-            result = operatorsItem.calculate(lhs: result, rhs: operandsItem)
+            result = try operatorsItem.calculate(lhs: result, rhs: operandsItem)
         }
         return result
     }

@@ -37,6 +37,10 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operatorCount, expectedOperatorCount)
     }
 
-    
-
+    func test_resultReturnsEqualWhenEquationEndsWithOperands() throws {
+        let equation = "1000+200-300*4/5"
+        var parseTest = ExpressionParser.parse(from: equation)
+        let calculate = try parseTest.result()
+        XCTAssertEqual(calculate, 720.0)
+    }
 }
