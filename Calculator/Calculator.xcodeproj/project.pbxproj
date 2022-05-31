@@ -294,8 +294,6 @@
 		05C9DF9C2832A5A4006BA908 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
 			);
 			path = Controller;
@@ -315,6 +313,16 @@
 				05F14D52283FD17800891926 /* KeypadTests.swift */,
 			);
 			path = KeypadTests;
+			sourceTree = "<group>";
+		};
+		205845262845C43E0067D1D4 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+			);
+			name = Delegate;
+			path = VIew;
 			sourceTree = "<group>";
 		};
 		C713D9352570E5EB001C3AFC = {
@@ -349,6 +357,7 @@
 				0598DCB92836ACFB00F30E6B /* Error */,
 				05271E912834A98D00379CC5 /* Node */,
 				05C9DF9A2832A598006BA908 /* Model */,
+				205845262845C43E0067D1D4 /* Delegate */,
 				05C9DF9B2832A59F006BA908 /* VIew */,
 				05C9DF9C2832A5A4006BA908 /* Controller */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
