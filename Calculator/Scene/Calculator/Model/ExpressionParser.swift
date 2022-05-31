@@ -43,11 +43,11 @@ enum ExpressionParser {
     }
 
     private static func isOperator(_ input: Character) -> Bool {
-        guard !self.isNumber(input) && !self.isNumberSymbol(input) else {
+        if isNumber(input) || isNumberSymbol(input) {
             return false
+        } else {
+            return true
         }
-        
-        return true
     }
     
     private static func isNumber(_ input: Character) -> Bool {
