@@ -95,6 +95,22 @@ class ViewController: UIViewController {
         valueStack = ""
         userIsInTheMiddleOfTyping = false
     }
+    
+    @IBAction func didTabclearEntryButton(_ sender: UIButton) {
+        
+        if let lastIndex = valueStack.last, Double(String(lastIndex)) != nil {
+            operandsLable.text = String((operandsLable.text ?? "0").dropLast())
+        } else {
+            return
+        }
+        
+        if operandsLable.text == "" {
+            operandsLable.text = "0"
+        }
+        
+        valueStack = String(valueStack.dropLast())
+        userIsInTheMiddleOfTyping = true
+    }
 }
 
 
