@@ -125,10 +125,7 @@ class CalculateViewController: UIViewController {
             return
         }
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        guard let formattedResult = numberFormatter.string(for: result) else { return }
+        guard let formattedResult = result?.formatText() else { return }
         
         addStackView()
         operatorTextLabel.text = ""
