@@ -2,7 +2,7 @@
 //  ExpressionParserTest.swift
 //  ExpressionParserTest
 //
-//  Created by Kiwi on 2022/05/20.
+//  Created by Kiwi, Wongbing on 2022/05/20.
 //
 
 import XCTest
@@ -33,7 +33,7 @@ class ExpressionParserTest: XCTestCase {
         var result = ExpressionParser.parse(from: expression)
         //then
         XCTAssertThrowsError(try result.result(), "divideZero") { error in
-            XCTAssertEqual(error as? OperatorError, OperatorError.divideZero)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideZero)
         }
     }
 }

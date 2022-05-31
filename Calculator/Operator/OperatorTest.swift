@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Operator
 //
-//  Created by Kiwi on 2022/05/19.
+//  Created by Kiwi, Wongbing on 2022/05/19.
 //
 
 import XCTest
@@ -66,7 +66,7 @@ class OperatorTest: XCTestCase {
         sut = .divide
         //when,then
         XCTAssertThrowsError(try sut.calculate(lhs: 2, rhs: 0), "divideByZero") { error in
-            XCTAssertEqual(error as! OperatorError, OperatorError.divideZero)
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.divideZero)
         }
     }
 }

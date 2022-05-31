@@ -2,57 +2,117 @@
 //  FormulaTest.swift
 //  FormulaTest
 //
-//  Created by Kiwi on 2022/05/20.
+//  Created by Kiwi, Wongbing on 2022/05/20.
 //
 
 import XCTest
 @testable import Calculator
-class FormulaTest: XCTestCase {
+
+class FormulaTests: XCTestCase {
     var sut: Formula!
+    
     override func setUpWithError() throws {
-        sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+        try super.setUpWithError()
+        sut = Formula(operands: CalculatorItemQueue<Double>(stack: []),
+                      operators: CalculatorItemQueue<Character>(stack: []))
     }
     
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
-    func test_숫자를_집어넣었을때_연산이_정상적으로_작동하는지() {
+    func test_operands_operators에_최소갯수가_만족되지않을때_notEnoughInput에러를던지는지() {
         //given
-        sut.operands.enqueue(data: 1.0)
-        sut.operands.enqueue(data: 2.0)
-        sut.operands.enqueue(data: 3.0)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue("+")
         
-        sut.operators.enqueue(data: .add)
-        sut.operators.enqueue(data: .substract)
+        let expectation = CalculatorError.notEnoughInput
         //when
-        let result = try? sut.result()
         //then
-        XCTAssertEqual(result, 0)
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(expectation, error as? CalculatorError)
+        }
     }
     
-    func test_정수값하나와_하나의_연산자를_집어넣었을때_정수값의_변화가_없어야한다() {
+    func test_더하기() {
         //given
-        sut.operands.enqueue(data: 2.0)
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue("+")
         
-        sut.operators.enqueue(data: .multiply)
+        let expectation = Double(3)
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         //then
-        XCTAssertEqual(result, 2.0)
+        XCTAssertEqual(expectation, result)
     }
     
-    func test_정수값의_갯수가_연산자의수보다_2개이상_많으면_에러를_반환해야한다() {
-        // given
-        sut.operands.enqueue(data: 4.0)
-        sut.operands.enqueue(data: 3.0)
-        sut.operands.enqueue(data: 5.0)
+    func test_음수더하기() {
+        //given
+        sut.operands.enqueue(-1)
+        sut.operands.enqueue(-2)
+        sut.operators.enqueue("+")
         
-        sut.operators.enqueue(data: .add)
+        let expectation = Double(-3)
+        //when
+        let result = try! sut.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_빼기() {
+        //given
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue("-")
         
-        // when,then
-        XCTAssertThrowsError(try sut?.result(), "wrongFormula") { error in
-                   XCTAssertEqual(error as? OperatorError, .wrongFormula)
-               }
+        let expectation = Double(-1)
+        //when
+        let result = try! sut.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_나누기() {
+        //given
+        sut.operands.enqueue(27)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue("÷")
+        
+        let expectation = Double(9)
+        //when
+        let result = try! sut.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_곱하기() {
+        //given
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(9)
+        sut.operators.enqueue("×")
+        
+        let expectation = Double(27)
+        //when
+        let result = try! sut.result()
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_나누기0이들어갔을때_dividedZeroError를던지는지() {
+        //given
+        sut.operands.enqueue(27)
+        sut.operands.enqueue(13)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue("+")
+        sut.operators.enqueue("÷")
+        
+        let expectation = CalculatorError.divideZero
+        //when
+        //Then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(expectation, error as? CalculatorError)
+        }
     }
 }
