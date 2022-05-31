@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    private var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
-    private var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
 
     mutating func result() throws -> Double {
         guard try checkCalculatorItems() else {
@@ -58,8 +58,8 @@ struct Formula {
         return result
     }
 
-    init(operand: [Double], `operator`: [Operator]) {
-        operand.forEach { self.operands.queue.enqueue($0) }
-        `operator`.forEach { self.operators.queue.enqueue($0) }
+    init(operand: CalculatorItemQueue<Double>, `operator`: CalculatorItemQueue<Operator>) {
+        self.operands = operand
+        self.operators = `operator`
     }
 }
