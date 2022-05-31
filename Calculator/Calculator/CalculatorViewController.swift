@@ -114,12 +114,16 @@ class CalculateViewController: UIViewController {
         
         do {
             result = try calculator.result()
-        } catch {
+        } catch OperatorError.devideFail {
             addStackView()
             expressionParserInput = ""
             operatorTextLabel.text = ""
             operandsTextLabel.text? = OperatorError.devideFail.errorDescription
             return
+        } catch {
+            expressionParserInput = ""
+            operatorTextLabel.text = ""
+            operandsTextLabel.text? = QueueError.unknown.errorDescription
         }
         
         let numberFormatter = NumberFormatter()
