@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperand: UILabel!
     @IBOutlet weak var currentOperator: UILabel!
     private var operationStack: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         clearOperationScrollviewContent()
@@ -134,6 +135,7 @@ class ViewController: UIViewController {
         } catch {
             debugPrint("UNKNOWN ERROR")
         }
+        
         clearCurrentOperatorUILabel()
         operationStack = CalcAccessory.Empty
         scrollingUnder()
@@ -142,15 +144,18 @@ class ViewController: UIViewController {
     private func clearCurrentOperandUILabel() {
         currentOperand.text = CalcAccessory.Zero
     }
+    
     private func clearCurrentOperatorUILabel() {
         currentOperator.text = CalcAccessory.Empty
     }
+    
     private func clearOperationScrollviewContent() {
         operationStackView.subviews.forEach { UIView in
             UIView.removeFromSuperview()
         }
     }
 }
+
 //MARK: - UI Components
 extension ViewController {
     private func addCurrentOperationToScrollViewContent() {
@@ -160,29 +165,34 @@ extension ViewController {
         )
         operationStackView.addArrangedSubview(currentContent)
     }
+    
     private func createOpearionStackViewContent(inputOperator: String, inputOperand: String) -> UILabel {
         let currentOperation = "\(inputOperator) \(inputOperand)"
         let currentOperationUILabel = createUILabel(currentOperation)
+        
         return currentOperationUILabel
     }
+    
     private func createUILabel(_ text: String) -> UILabel {
         let uiLabel = UILabel()
         uiLabel.textColor = .white
         uiLabel.font = .preferredFont(forTextStyle: .title3, compatibleWith: nil)
         uiLabel.text = text
+        uiLabel.textAlignment = .center
+        
         return uiLabel
     }
+    
     private func scrollingUnder() {
         operationScrollView.setContentOffset(CGPoint(x: 0,
                                                      y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
+    
     private func changeDecimalStyle(_ input: String?) -> String {
-        let filteredInput = input?.filter {
-            $0 != ","
-        }
         let numberFormmater = NumberFormatter()
         numberFormmater.numberStyle = .decimal
         numberFormmater.maximumSignificantDigits = 20
-        return numberFormmater.string(for: Double(filteredInput ?? CalcAccessory.Empty)) ?? CalcAccessory.Empty
+        
+        return numberFormmater.string(for: Double(input ?? CalcAccessory.Empty)) ?? CalcAccessory.Empty
     }
 }
