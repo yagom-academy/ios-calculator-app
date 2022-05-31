@@ -2,7 +2,7 @@
 //  ExpressionParserTests.swift
 //  ExpressionParserTests
 //
-//  Created by Kay on 2022/05/31.
+//  Created by 재재, Kay on 2022/05/31.
 //
 
 import XCTest

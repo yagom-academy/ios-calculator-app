@@ -2,7 +2,7 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 재재 on 2022/05/25.
+//  Created by 재재, Kay on 2022/05/25.
 //
 
 import Foundation
