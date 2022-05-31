@@ -12,7 +12,6 @@ extension String: CalculateItem {
         let converted = String(target)
         let replaced = self.replacingOccurrences(of: converted, with: " \(converted) ")
         let splited = replaced.split(separator: " ").map { String($0) }
-    
         return splited
     }
 }
