@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressParser {
-    func parse(form input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators =  CalculatorItemQueue<Operator>()
         let divideString = componetsByOperators(from: input)
@@ -23,7 +23,7 @@ enum ExpressParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    private func componetsByOperators(from input: String) ->[String] {
+    private static func componetsByOperators(from input: String) ->[String] {
         return input.split(with: " ")
     }
 }
