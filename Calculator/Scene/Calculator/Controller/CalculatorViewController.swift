@@ -56,23 +56,24 @@ class CalculatorViewController: UIViewController {
             return nil
         }
         
-        guard isNotAdditionalNumberInputAfterResultHasBeenShown(sender) else {
+        guard isAdditionalNumberInputAfterResultHasBeenShown(sender) else {
             return nil
         }
         return text
     }
     
-    private func isNotAdditionalNumberInputAfterResultHasBeenShown(_ sender: UIButton) -> Bool {
-        guard expressionStackView.arrangedSubviews.count <= 0 || operatorInput.text != "" else {
-            clearStackView()
-            numberInput.text = sender.currentTitle
-            return false
+    private func isAdditionalNumberInputAfterResultHasBeenShown(_ sender: UIButton) -> Bool {
+        guard expressionStackView.arrangedSubviews.count > 0 && operatorInput.text == "" else {
+            return true
         }
-        return true
+        
+        clearStackView()
+        numberInput.text = sender.currentTitle
+        return false
     }
     
     private func isUsingComma(_ sender: UIButton, _ text: String) -> String? {
-        guard isCommaButtonNotTappedTwice(sender: sender, number: text) else {
+        guard isCommaButtonTappedTwice(sender: sender, number: text) else {
             return nil
         }
         
@@ -87,12 +88,12 @@ class CalculatorViewController: UIViewController {
         return newText
     }
     
-    private func isCommaButtonNotTappedTwice(sender: UIButton, number: String) -> Bool {
-        guard sender.currentTitle != "." || number.filter({ $0 == "." }).count < 1 else {
-            return false
+    private func isCommaButtonTappedTwice(sender: UIButton, number: String) -> Bool {
+        guard sender.currentTitle == "." && number.filter({ $0 == "." }).count >= 1 else {
+            return true
         }
         
-        return true
+        return false
     }
     
     private func addNewNumber(_ sender: UIButton, _ number: String) -> String? {
