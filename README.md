@@ -9,6 +9,9 @@
 * [[STEP 2] 기능구현 및 코드설명](#[STEP-2]-기능구현-및-코드설명-🧑‍🏫)
     * [[STEP 2] 고민한점 및 해결방안](#[STEP-2]-고민한점-및-해결방안-🤔)
     * [[STEP 2] 배운개념](#[STEP-2]-배운개념-💡)
+* [[STEP 3] 기능구현 및 코드설명](#[STEP-3]-기능구현-및-코드설명-🧑‍🏫)
+    * [[STEP 3] 고민한점 및 해결방안](#[STEP-3]-고민한점-및-해결방안-🤔)
+    * [[STEP 3] 배운개념](#[STEP-3]-배운개념-💡)
 <br/>
 
 # 프로젝트 소개 📝
@@ -110,5 +113,53 @@ TDD 방식을 이번에 처음 경험해봐서, 테스트 케이스를 어느 �
 
 <br/><br/>
 
----
+<br/><br/>
 
+# [STEP 3] 기능구현 및 코드설명 🧑‍🏫
+### ViewController
+> **Properties**
+> - operandLabel : 
+> 피연산자(숫자)가 표시될 `Label`입니다.
+> - operandLabel : 
+> 연산자가 표시될 `Label`입니다.
+> - calculatingScrollView :
+> 연산들이 쌓일 `ScrollView` 입니다.
+> - formula :
+> 식을 저장할 변수입니다.
+> - mainStackViewInCalculatingScrollView :
+> 연산들이 쌓일 `ScrollView` 를 보니 안에 `StackView`가 하나 있고, 그 안에 또 `StackView`를 만들어서 연산자와 피연산자 `Label`을 넣어둔 형식이었습니다. 이 때문에 `ScrollView` 바로 안에 있는 `StackView`에 빠르게 접근하기 위해서 변수로 따로 만들어서 할당해 두었습니다.
+
+> **Helpers**
+> - resetUI() :
+> `viewDidLoad()` 메서드에서 호출되어 UI를 세팅할 때 사용할 메서드입니다. All-Clear 버튼을 눌러도 호출이 되도록 해놓았습니다.
+> - scrollToBottom(of:) :
+> `calculatingScrollView` 에 연산 결과가 많이 쌓일 경우, 가장 아래로 스크롤 해주기 위한 메서드입니다.
+
+### StackViewManager
+> - makeNewCalculateLabels(of:operandText:) : 
+> `calculatingScrollView` 안에 쌓을 `Label` `StackView`를 만들어주는 메서드입니다.
+> - addCalculateLabels(to:operatorText:operandText:) : 
+> `makeNewCalculateLabels(of:operandText:)` 에서 만들어진 `StackView`를 `ScrollView` 에 넣어주는 역할을 하는 메서드입니다.
+
+### Double+Extension
+> - removeTrailingZero() : 
+> `Double` 타입 인스턴스 값에서 뒤에 0을 제거한 후, `String` 타입으로 반환해주는 메서드입니다.
+
+
+<br/>
+
+# [STEP 3] 고민한점 및 해결방안 🤔
+### 1. parse 메서드를 호출하는 시점...
+프로젝트 요구사항에 대한 이해도가 부족하여 `ExpressionParser` 열거형 안에 있는 `parse` 메서드를 언제 호출할지 많은 시간을 고민했습니다. 처음에는 눌린 버튼들을 `String` 형태로 `append` 해서 계산버튼(`=`) 이 눌렸을 때 한번에 전달해주는 방식으로 고민했었습니다. 하지만 이렇게 구현했을 때 부호버튼(`+/-`) 및 버튼이 눌릴때 마다 `ScrollView에` 값들을 쌓아주는 과정에서 어려움을 겪어, 연산자 버튼이 눌릴때마다 `parse` 메서드를 호출하는 방식으로 바꾸어보았습니다 ☺️
+<br/>
+
+### 2. Double Extension 을 어디에 활용하면 좋을지...
+프로젝트의 요구사항에 보면 UML에 `Double` 타입을 확장하라고 적혀있었지만, 구현 내용에 대해서는 자세히 적혀있지 않아서 이 부분을 어떻게 활용하면 좋을지 고민했었습니다. 고민 끝에 계산 결과를 출력해줄 때 `Double` 타입의 값을 `formatting` 해주는 메서드를 확장으로 구현해서 활용해보았습니다 😊
+
+<br/>
+
+# [STEP 3] 배운개념 💡
+
+- `setContentOffset(_:animated:)` : 콘텐츠를 위치를 원하는 `Offset`으로 세팅할 수 있다. `ScrollView` 에서 사용하면 스크롤이 되는 느낌으로 사용할 수 있다고 함.
+
+<br/><br/>

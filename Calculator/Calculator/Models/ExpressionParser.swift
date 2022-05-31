@@ -14,9 +14,10 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let inputNoWhitespace = input.replacingOccurrences(of: " ", with: "")
-        let operatorCharacters = Operator.allCases.map { $0.rawValue }
-        let returnComponents = inputNoWhitespace.components(separatedBy: CharacterSet(charactersIn: String(operatorCharacters)))
+        let splittedInput = input.split(with: " ")
+        let returnComponents = splittedInput.filter {
+            $0.count == 1 && Operator(rawValue: Character($0)) != nil ? false : true
+        }
         
         return returnComponents
     }
