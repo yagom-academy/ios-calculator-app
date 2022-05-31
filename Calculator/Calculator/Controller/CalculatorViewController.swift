@@ -83,6 +83,7 @@ class CalculatorViewController: UIViewController {
             
             operatorStorage.append(" \(buttonTitle) ")
             numberLabel.text = "0"
+            
         } else {
             makeStackLabel()
             
@@ -129,9 +130,9 @@ class CalculatorViewController: UIViewController {
         let stackOperatorLabel = UILabel()
         
         let bottomOffset = CGPoint(x: 0,
-                                   y: previousValues.contentSize.height
-                                   - previousValues.bounds.height
-                                   + numberLabel.font.lineHeight)
+                                   y: previousValues.contentSize.height -
+                                   previousValues.bounds.height +
+                                   numberLabel.font.lineHeight)
         previousValues.setContentOffset(bottomOffset, animated: false)
         
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -141,6 +142,7 @@ class CalculatorViewController: UIViewController {
         
         if userIsInTheMiddleOfTyping {
             stackNumberLabel.text = "\(numberLabelValue)"
+            
         } else {
             stackNumberLabel.text = "\(numberLabelValue)"
             stackOperatorLabel.text = "\(presentOperator) "
@@ -157,9 +159,10 @@ class CalculatorViewController: UIViewController {
         let stackOperatorLabel = UILabel()
         
         let bottomOffset = CGPoint(x: 0,
-                                   y: previousValues.contentSize.height
-                                   - previousValues.bounds.height
-                                   + numberLabel.font.lineHeight)
+                                   y: previousValues.contentSize.height -
+                                   previousValues.bounds.height +
+                                   numberLabel.font.lineHeight)
+        
         previousValues.setContentOffset(bottomOffset, animated: false)
         
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -221,6 +224,7 @@ class CalculatorViewController: UIViewController {
                 }
                 return true
             }
+            
         } else {
             presentNumbers = "-" + presentNumbers
         }
