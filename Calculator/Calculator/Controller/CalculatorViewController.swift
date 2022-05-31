@@ -119,6 +119,7 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
+        guard operatorLabel.text != CalculatorString.failedResult else { return }
         if operandLabel.text == CalculatorString.zero && inputStackView.subviews.isEmpty == false && userInput.count >= 2 {
             operatorLabel.text = operators
             userInput.removeLast()
