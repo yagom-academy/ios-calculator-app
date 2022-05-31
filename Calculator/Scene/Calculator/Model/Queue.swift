@@ -12,14 +12,14 @@ struct Queue<Element> {
     }
     
     var count: Int {
-        return enqueueStack.count
+        return enqueueStack.isEmpty ? dequeueStack.count : enqueueStack.count
     }
     
     var peek: Element? {
         return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
 
-    mutating func enqueue(element: Element) {
+    mutating func enqueue(_ element: Element) {
         enqueueStack.append(element)
     }
 

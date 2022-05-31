@@ -17,6 +17,16 @@
 		18EDDB732832196400753774 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDB722832196400753774 /* CalculatorTests.swift */; };
 		18EDDB7E283245CD00753774 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDB7D283245CD00753774 /* CalculateItem.swift */; };
 		18EDDB80283245E700753774 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDB7F283245E700753774 /* Queue.swift */; };
+		209CA2322845AD240041F15D /* FomrulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CA2312845AD240041F15D /* FomrulaTests.swift */; };
+		209CA2382845AD5B0041F15D /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE12836A4350092F3B1 /* ExpressionParser.swift */; };
+		209CA2392845AD640041F15D /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDA44C2844C881001EF90C /* Constant.swift */; };
+		209CA23A2845AD660041F15D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE52836A4720092F3B1 /* String.swift */; };
+		209CA23B2845AD680041F15D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDB7F283245E700753774 /* Queue.swift */; };
+		209CA23C2845AD6C0041F15D /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EDDB7D283245CD00753774 /* CalculateItem.swift */; };
+		209CA23D2845AD6E0041F15D /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18783AFA283350E700D86554 /* Operator.swift */; };
+		209CA23F2845AD730041F15D /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848E4FD2844698600637BCD /* CalculatorItemQueue.swift */; };
+		209CA2402845AD990041F15D /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E6BE72836A4A60092F3B1 /* Formula.swift */; };
+		209CA2412845AD9F0041F15D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1808646A2837427B00EC58BC /* Error.swift */; };
 		20EDA44D2844C881001EF90C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDA44C2844C881001EF90C /* Constant.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
@@ -28,6 +38,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		18EDDB742832196400753774 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C713D9362570E5EB001C3AFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C713D93D2570E5EB001C3AFC;
+			remoteInfo = Calculator;
+		};
+		209CA2332845AD240041F15D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C713D9362570E5EB001C3AFC /* Project object */;
 			proxyType = 1;
@@ -48,6 +65,8 @@
 		18EDDB722832196400753774 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		18EDDB7D283245CD00753774 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		18EDDB7F283245E700753774 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		209CA22F2845AD240041F15D /* FomrulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FomrulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		209CA2312845AD240041F15D /* FomrulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FomrulaTests.swift; sourceTree = "<group>"; };
 		20EDA44C2844C881001EF90C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +80,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		18EDDB6D2832196400753774 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		209CA22C2845AD240041F15D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -142,6 +168,14 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
+		209CA2302845AD240041F15D /* FomrulaTests */ = {
+			isa = PBXGroup;
+			children = (
+				209CA2312845AD240041F15D /* FomrulaTests.swift */,
+			);
+			path = FomrulaTests;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +184,7 @@
 				18663B762834E1960083C844 /* Resource */,
 				18663B752834E18F0083C844 /* Scene */,
 				18EDDB712832196400753774 /* CalculatorTests */,
+				209CA2302845AD240041F15D /* FomrulaTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -159,6 +194,7 @@
 			children = (
 				C713D93E2570E5EB001C3AFC /* Calculator.app */,
 				18EDDB702832196400753774 /* CalculatorTests.xctest */,
+				209CA22F2845AD240041F15D /* FomrulaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +232,24 @@
 			productReference = 18EDDB702832196400753774 /* CalculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		209CA22E2845AD240041F15D /* FomrulaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 209CA2352845AD240041F15D /* Build configuration list for PBXNativeTarget "FomrulaTests" */;
+			buildPhases = (
+				209CA22B2845AD240041F15D /* Sources */,
+				209CA22C2845AD240041F15D /* Frameworks */,
+				209CA22D2845AD240041F15D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				209CA2342845AD240041F15D /* PBXTargetDependency */,
+			);
+			name = FomrulaTests;
+			productName = FomrulaTests;
+			productReference = 209CA22F2845AD240041F15D /* FomrulaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C713D93D2570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C713D9522570E5ED001C3AFC /* Build configuration list for PBXNativeTarget "Calculator" */;
@@ -226,6 +280,10 @@
 						CreatedOnToolsVersion = 13.3.1;
 						TestTargetID = C713D93D2570E5EB001C3AFC;
 					};
+					209CA22E2845AD240041F15D = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = C713D93D2570E5EB001C3AFC;
+					};
 					C713D93D2570E5EB001C3AFC = {
 						CreatedOnToolsVersion = 12.1;
 					};
@@ -246,12 +304,20 @@
 			targets = (
 				C713D93D2570E5EB001C3AFC /* Calculator */,
 				18EDDB6F2832196400753774 /* CalculatorTests */,
+				209CA22E2845AD240041F15D /* FomrulaTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		18EDDB6E2832196400753774 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		209CA22D2845AD240041F15D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -276,6 +342,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				18EDDB732832196400753774 /* CalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		209CA22B2845AD240041F15D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				209CA23B2845AD680041F15D /* Queue.swift in Sources */,
+				209CA23C2845AD6C0041F15D /* CalculateItem.swift in Sources */,
+				209CA2382845AD5B0041F15D /* ExpressionParser.swift in Sources */,
+				209CA2322845AD240041F15D /* FomrulaTests.swift in Sources */,
+				209CA23D2845AD6E0041F15D /* Operator.swift in Sources */,
+				209CA23A2845AD660041F15D /* String.swift in Sources */,
+				209CA23F2845AD730041F15D /* CalculatorItemQueue.swift in Sources */,
+				209CA2392845AD640041F15D /* Constant.swift in Sources */,
+				209CA2412845AD9F0041F15D /* Error.swift in Sources */,
+				209CA2402845AD990041F15D /* Formula.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +389,11 @@
 			isa = PBXTargetDependency;
 			target = C713D93D2570E5EB001C3AFC /* Calculator */;
 			targetProxy = 18EDDB742832196400753774 /* PBXContainerItemProxy */;
+		};
+		209CA2342845AD240041F15D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C713D93D2570E5EB001C3AFC /* Calculator */;
+			targetProxy = 209CA2332845AD240041F15D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -360,6 +448,44 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bonf.CalculatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/Calculator";
+			};
+			name = Release;
+		};
+		209CA2362845AD240041F15D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.minsu.FomrulaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/Calculator";
+			};
+			name = Debug;
+		};
+		209CA2372845AD240041F15D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.minsu.FomrulaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -535,6 +661,15 @@
 			buildConfigurations = (
 				18EDDB772832196400753774 /* Debug */,
 				18EDDB782832196400753774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		209CA2352845AD240041F15D /* Build configuration list for PBXNativeTarget "FomrulaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				209CA2362845AD240041F15D /* Debug */,
+				209CA2372845AD240041F15D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

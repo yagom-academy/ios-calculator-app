@@ -59,7 +59,7 @@ struct Formula {
     }
 
     init(operand: [Double], `operator`: [Operator]) {
-        operand.forEach { self.operands.queue.enqueue(element: $0) }
-        `operator`.forEach { self.operators.queue.enqueue(element: $0) }
+        operand.forEach { self.operands.queue.enqueue($0) }
+        `operator`.forEach { self.operators.queue.enqueue($0) }
     }
 }
