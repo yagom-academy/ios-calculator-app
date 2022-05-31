@@ -19,6 +19,30 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func makeNewStackView() {
+        
+        let newStackView = UIStackView()
+        let newOperandsLabel = UILabel()
+        let newOperatorLabel = UILabel()
+        
+        newStackView.axis = .horizontal
+        newOperandsLabel.textColor = .white
+        newOperatorLabel.textColor = .white
+        
+        if operatorLable == nil {
+            newOperandsLabel.text = operandsLable.text
+            operandsLable.text = "0"
+        } else {
+            newOperandsLabel.text = operandsLable.text
+            newOperatorLabel.text = operatorLable.text
+            operandsLable.text = "0"
+        }
+        
+        newStackView.addArrangedSubview(newOperatorLabel)
+        newStackView.addArrangedSubview(newOperandsLabel)
+        expressionView.addArrangedSubview(newStackView)
+    }
 }
 
 
