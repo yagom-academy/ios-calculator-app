@@ -6,7 +6,7 @@
 //
 
 
-enum Operator: Character, CaseIterable, CalculatorItem {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
     case divide = "÷"

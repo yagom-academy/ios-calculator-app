@@ -21,12 +21,13 @@ enum ExpressionParser {
             Double($0)
         }.forEach {
             formula.operands.enQueue($0)
+        }
         return formula
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
         var newInput = input
-            
+        
         let sign = Operator.allCases.map {
             $0.rawValue
         }
@@ -36,3 +37,4 @@ enum ExpressionParser {
         return newInput.split(with: " ")
     }
 }
+
