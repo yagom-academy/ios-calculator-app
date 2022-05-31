@@ -7,16 +7,17 @@
 
 struct Formula {
     var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    var operators: CalculatorItemQueue<Character>
     
     mutating func result() throws -> Double {
-        guard var result = operands.dequeue() else { throw OperatorError.wrongFormula }
+        guard operands.count > 1 && operators.count >= 1 else { throw CalculatorError.notEnoughInput }
+        var result = try Operator(rawValue: operators.dequeue())?
+            .calculate(lhs: operands.dequeue(), rhs: operands.dequeue())
         
-        while operands.isEmpty == false {
-            guard let number = operands.dequeue(),
-                  let operatorSign = operators.dequeue() else { throw OperatorError.wrongFormula }
-            result = try operatorSign.calculate(lhs: result, rhs: number)
+        while operands.isEmpty == false && operators.isEmpty == false {
+            result = try Operator(rawValue: operators.dequeue())?
+                .calculate(lhs: result ?? 0.0, rhs: operands.dequeue())
         }
-        return result
+        return result ?? 0.0
     }
 }
