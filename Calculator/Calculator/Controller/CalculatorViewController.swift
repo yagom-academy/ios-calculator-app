@@ -18,16 +18,19 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
     
-    var userIsInTheMiddleOfTyping = false
     var inputValue = ""
     var presentNumbers = ""
     var presentOperator = ""
-    var operatorStorage = [""]
-    
+    var operatorStorage: [String] = []
+    var beforePresentNumberStore: [String] = []
+    var userIsInTheAfterTabEqualButton = false
+    var userIsInTheMiddleOfTyping = false
     let numberFormatter = NumberFormatter()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         numberLabel.text = "0"
         operatorLabel.text = ""
         removeOldLabls()
@@ -59,6 +62,13 @@ class CalculatorViewController: UIViewController {
             presentNumbers += "\(buttonTitle)"
             numberLabel.text = "\(presentNumbers)"
         }
+        
+        if userIsInTheAfterTabEqualButton {
+            userIsInTheAfterTabEqualButton = true
+        } else {
+            beforePresentNumberStore.append(presentNumbers)
+        }
+        
         userIsInTheMiddleOfTyping = false
     }
     
@@ -82,6 +92,7 @@ class CalculatorViewController: UIViewController {
             operatorStorage.append(" \(buttonTitle) ")
             numberLabel.text = "0"
             userIsInTheMiddleOfTyping = true
+            userIsInTheAfterTabEqualButton = false
         }
     }
     
@@ -172,19 +183,14 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapAnswerButton() {
-        inputValue += presentNumbers
+        guard let previousValue = beforePresentNumberStore.last else {
+            return
+        }
         
-        if !presentNumbers.isEmpty && !inputValue.isEmpty {
-            var parse = ExpressionParser.parse(from: (inputValue))
-            let result = try! parse.result()
-            
-            if result.description.count < 20 {
-                guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
-                    return
-                }
-                numberLabel.text = "\(trimmedResult)"
-                makeResultLabel()
-            }
+        if userIsInTheAfterTabEqualButton {
+            caculatorAfterResult(to: previousValue)
+        } else {
+            calculatorResult()
         }
         presentNumbers = ""
     }
@@ -219,6 +225,38 @@ class CalculatorViewController: UIViewController {
             presentNumbers = "-" + presentNumbers
         }
         numberLabel.text = "\(presentNumbers)"
+    }
+    
+    private func caculatorAfterResult(to value: String) {
+        inputValue = "\(presentNumbers) \( presentOperator ) \(value)"
+        
+        if !value.isEmpty && !inputValue.isEmpty {
+            var parse = ExpressionParser.parse(from: (inputValue))
+            let result = try! parse.result()
+            
+            guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
+                return
+            }
+            numberLabel.text = "\(trimmedResult)"
+            makeResultLabel()
+        }
+    }
+    
+    private func calculatorResult() {
+        inputValue += presentNumbers
+        
+        if !presentNumbers.isEmpty && !inputValue.isEmpty {
+            var parse = ExpressionParser.parse(from: (inputValue))
+            let result = try! parse.result()
+            
+            guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
+                return
+            }
+            numberLabel.text = "\(trimmedResult)"
+            makeResultLabel()
+            userIsInTheAfterTabEqualButton = true
+            
+        }
     }
 }
 
