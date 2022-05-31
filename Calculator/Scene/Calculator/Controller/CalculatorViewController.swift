@@ -329,18 +329,27 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
-        addLastCalculationItems()
-        calculate()
-        resetTotalInput()
+        updateResult()
         resetOperatorInput()
         holdScrollDown()
     }
     
-    private func addLastCalculationItems() {
-        guard operatorInput.text != "" else {
+    private func updateResult() {
+        guard addLastCalculationItems() else {
             return
         }
+        
+        calculate()
+        resetTotalInput()
+    }
+    
+    private func addLastCalculationItems() -> Bool {
+        guard operatorInput.text != "" else {
+            return false
+        }
+        
         addCalculatorItems()
+        return true
     }
     
     private func calculate() {
@@ -415,6 +424,7 @@ class CalculatorViewController: UIViewController {
     private func checkNegativeNumber(_ text: String) -> Bool {
         guard text != Constant.zero.rawValue else { return false }
         guard text != CalculatorError.dividedByZero.localizedDescription else { return false }
+        guard Double(text) != 0.0 else { return false }
         guard text.first == "-" else {
             numberInput.text = "-\(text)"
             return false
