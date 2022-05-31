@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by Kiwi. 
+//  Created by Kiwi, Wongbing
 //  Copyright © yagom. All rights reserved.
 // 
 
