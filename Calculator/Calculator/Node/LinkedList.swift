@@ -6,30 +6,27 @@ final class LinkedList<T> {
     func append(data: T) {
         count += 1
         if head == nil {
-            head = Node(data: data, next: nil, prev: nil)
+            head = Node(data: data, next: nil)
             tail = head
             return
         }
         
-        let newNode = Node(data: data, next: nil, prev: tail)
+        let newNode = Node(data: data, next: nil)
         tail?.next = newNode
         tail = newNode
     }
     
     @discardableResult
     func removeFirst() -> T? {
-        let data = head?.data
-        let nextNode = head?.next
+        let headNode = head
         
         if count  == 1 {
             removeAll()
         } else if count > 1 {
-            nextNode?.prev = nil
-            head?.next = nil
-            head = nextNode
+            head = headNode?.next
             count -= 1
         }
-        return data ?? nil
+        return headNode?.data ?? nil
     }
     
     func removeAll() {

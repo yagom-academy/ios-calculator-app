@@ -23,29 +23,7 @@ class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
-    
-    func testLinkedList에_값을_추가했을_때_tail의_prev가_이전_노드를_가리키는지() {
-        // given
-        sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
-        // when
-        let result = sut.tail?.prev?.data
-        // then
-        XCTAssertEqual(result, 2)
-    }
-    
-    func testLinkedList에_값을_추가했을_때_이전_노드의_next가_tail을_가리키는지() {
-        // given
-        sut.append(data: 1)
-        sut.append(data: 2)
-        sut.append(data: 3)
-        // when
-        let result = sut.tail?.prev?.next?.data
-        // then
-        XCTAssertEqual(result, 3)
-    }
-    
+
     func testLinkedList에_값을_추가했을_때_count가_잘_늘어나는지() {
         // given
         sut.append(data: 1)
@@ -67,6 +45,18 @@ class LinkedListTests: XCTestCase {
         let result = sut.removeFirst()
         // then
         XCTAssertEqual(result, 1)
+    }
+    
+    func testLinkedList의_첫번째_값이_삭제_되는지2() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // when
+        sut.removeFirst()
+        let result = sut.head?.data
+        // then
+        XCTAssertEqual(result, 2)
     }
     
     func testLinkedList가_비어있을_때_삭제해도_count값이_0인지() {

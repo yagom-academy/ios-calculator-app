@@ -2,36 +2,33 @@ struct Formula {
     typealias queue = CalculatorItemQueue
     
     private(set) var operands: queue<Double>
-    private(set) var operators: queue<Operator.RawValue>
+    private(set) var operators: queue<Operator>
     
-    init(operands: queue<Double> = queue<Double>(), operators: queue<Operator.RawValue> = queue<Operator.RawValue>()){
+    init(operands: queue<Double> = queue<Double>(), operators: queue<Operator> = queue<Operator>()){
         self.operands = operands
         self.operators = operators
     }
     
     func result() throws -> Double {
-        guard let start = operands.displayItems().first else {
+        guard let start = operands.dequeue() else {
             return 0.0
         }
         
-        var operandItems = operands.displayItems()
-        operandItems.removeFirst()
-
         let errorNumber = CalculatorError.dividedByZero.errorCaseNumber
-        let result = try operandItems.reduce(start) { reuslt, partialResult in
-            let operatorSymbol = operators.dequeue() ?? " "
-            let `operator` = Operator.allCases.filter {
-                $0.symbol == operatorSymbol
+        let result = try operands.displayItems().reduce(start) { partialResult, operand in
+            guard let operatorSymbol = operators.dequeue() else {
+                return 0.0
             }
-            let calculatedValue = operators.first?.calculate(lhs: reuslt, rhs: partialResult)
             
-            if operatorSymbol == "÷" && (partialResult == errorNumber || reuslt == errorNumber) {
+            if operatorSymbol == Operator.divide && (operand == errorNumber || partialResult == errorNumber) {
                 throw CalculatorError.dividedByZero
             }
-            return calculatedValue
+            
+            return operatorSymbol.calculate(lhs: partialResult, rhs: operand)
         }
         
         operands.reset()
+        
         return result
     }
 }
