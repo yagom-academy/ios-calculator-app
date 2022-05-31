@@ -15,7 +15,7 @@ struct Formula {
     // MARK: - Action
     
     func result() throws -> Double {
-        guard var result = operands.dequeue()?.data else { return 0.000000000999 }
+        guard var result = operands.dequeue()?.data else { throw CalculatorError.emptyCalculatorItemQueue }
         
         while let mathOperator = operators.dequeue()?.data,
               let currentNumber = operands.dequeue()?.data {

@@ -7,11 +7,15 @@
 
 enum CalculatorError: Error {
     case dividedByZero
+    case emptyCalculatorItemQueue
     
     var description: String {
         switch self {
         case .dividedByZero:
             return "NaN"
+        case .emptyCalculatorItemQueue:
+            return "CalculatorItemQueue is empty"
         }
+        
     }
 }
