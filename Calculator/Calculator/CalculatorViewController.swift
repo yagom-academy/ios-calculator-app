@@ -97,9 +97,9 @@ class CalculateViewController: UIViewController {
             return
         }
         expressionParserInput.append(senderLabelText)
-        operatorTextLabel.text = senderLabelText
         operandsTextLabel.text = formattedNumber
         addStackView()
+        operatorTextLabel.text = senderLabelText
         operandsTextLabel.text = "0"
     }
     
