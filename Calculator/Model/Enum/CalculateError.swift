@@ -7,5 +7,4 @@
 
 enum CalculateError: Error {
     case infinityError
-    case nilError
 }
