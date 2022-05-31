@@ -7,9 +7,32 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let stringTypeOperators = componentByOperators(from: input)
-        let operands = input.split { stringTypeOperators.contains(String($0)) }.compactMap { Double($0) }
-        let operators = stringTypeOperators.compactMap { Operator(rawValue: $0) }
+        let operands = filterOperands(input)
+        let operators = filterOperators(input)
+        
+        return makeFormula(operands, operators)
+    }
+    
+    private static func componentByOperators(from input: String) -> [String] {
+        let operators = input.filter { self.isOperator($0) }.map { String($0) }
+        
+        return operators
+    }
+    
+    private static func filterOperands(_ input: String) -> [Double] {
+        let operatorsForSplit = componentByOperators(from: input)
+        let operands = input.split { operatorsForSplit.contains(String($0)) }.compactMap { Double($0) }
+        
+        return operands
+    }
+    
+    private static func filterOperators(_ input: String) -> [Operator] {
+        let operators = componentByOperators(from: input).compactMap { Operator(rawValue: $0) }
+        
+        return operators
+    }
+    
+    private static func makeFormula(_ operands: [Double], _ operators: [Operator]) -> Formula {
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
         
@@ -17,12 +40,6 @@ enum ExpressionParser {
         operands.forEach { operandsQueue.queue.enqueue($0) }
         
         return Formula(operand: operandsQueue, operator: operatorsQueue)
-    }
-    
-    static private func componentByOperators(from input: String) -> [String] {
-        let operators = input.filter { self.isOperator($0) }.map { String($0) }
-        
-        return operators
     }
 
     private static func isOperator(_ input: Character) -> Bool {
