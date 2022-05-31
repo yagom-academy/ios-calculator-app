@@ -140,6 +140,18 @@ class ViewController: UIViewController {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(bottomOffSet, animated: true)
     }
+    
+    private func convertToDecimal(_ number: Double) -> String {
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        format.maximumSignificantDigits = 20
+        format.roundingMode = .up
+        guard let value = format.string(for: number) else {
+            return "0"
+        }
+        
+        return value
+    }
 }
 
 
