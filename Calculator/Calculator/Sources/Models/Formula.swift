@@ -9,7 +9,7 @@ import Foundation
 
 struct Formula {
     var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Character>
+    var operators: CalculatorItemQueue<OperatorItem>
     
     mutating func result() throws -> Double {
         guard var result: Double = operands.dequeue() else {
@@ -21,8 +21,8 @@ struct Formula {
             guard let operandsItem = operands.dequeue() else {
                 throw FormulaError.noOperandsInQueue
             }
-            let operatorsItem = OperatorItem(rawValue: eachOperator)
-            result = (operatorsItem?.calculate(lhs: result, rhs: operandsItem))!
+            let operatorsItem = eachOperator
+            result = operatorsItem.calculate(lhs: result, rhs: operandsItem)
         }
         return result
     }

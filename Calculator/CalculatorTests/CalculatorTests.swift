@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>?
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Double>()
     }
     
     override func tearDownWithError() throws {
@@ -23,28 +23,30 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_1을_enqueue하면_1이_있다() {
         //given
-        let expectation: Int = 1
+        let expectation: Double = 1.0
         //when
-        sut?.enqueue(1)
+        sut?.enqueue(1.0)
         //then
-        XCTAssertEqual(expectation, 1)
+        XCTAssertEqual(expectation, 1.0)
     }
     
     func test_1이_queue에_있고_추가로_7을_enqueue하면_count가_2다() {
         //given
-        sut?.enqueue(1)
-        let secondInput = 7
+        sut?.enqueue(1.0)
+        let secondInput = 7.0
         let expectation: Int = 2
+        
         //When
         sut?.enqueue(secondInput)
         let result = sut?.count
+        
         //Then
         XCTAssertEqual(expectation, result)
     }
     
     func test_5를_넣으면_queue가_비어있지_않다() {
         //given
-        let input = 5
+        let input = 5.0
         let expectation: Bool = false
         //when
         sut?.enqueue(input)
@@ -55,8 +57,8 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_1과3을_넣으면_count가_2다() {
         //given
-        let firstInput = 1
-        let secondInput = 2
+        let firstInput = 1.0
+        let secondInput = 2.0
         let expectation: Int = 2
         //when
         sut?.enqueue(firstInput)
@@ -68,10 +70,10 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_5와_3_4_를_큐에넣고_peek를_한_값은_5다() {
         //given
-        let firstInput = 5
-        let secondInput = 3
-        let thirdInput = 4
-        let expectation: Int = 5
+        let firstInput = 5.0
+        let secondInput = 3.0
+        let thirdInput = 4.0
+        let expectation: Double = 5.0
         //when
         sut?.enqueue(firstInput)
         sut?.enqueue(secondInput)
@@ -83,11 +85,11 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_2와_7_9_를_넣고_dequeue를_1번한_값은_2이고_2번한_값은_7다() {
         //given
-        let firstInput = 2
-        let secondInput = 7
-        let thirdInput = 9
-        let firstExpectation: Int = 2
-        let secondExpectation: Int = 7
+        let firstInput = 2.0
+        let secondInput = 7.0
+        let thirdInput = 9.0
+        let firstExpectation: Double = 2.0
+        let secondExpectation: Double = 7.0
         //when
         sut?.enqueue(firstInput)
         sut?.enqueue(secondInput)
@@ -101,7 +103,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_아무것도_없는상태에서_dequeue를_하면_nil이_나온다() {
         //given
-        let expectation: Int? = nil
+        let expectation: Double? = nil
         //when
         let result = sut?.dequeue()
         //then
@@ -110,7 +112,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_5를_enqueue하고_dequeue하면_queue가_비어있다() {
         //given
-        let input = 5
+        let input = 5.0
         let expectation: Bool = true
         //when
         sut?.enqueue(input)

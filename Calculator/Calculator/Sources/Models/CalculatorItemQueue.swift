@@ -12,6 +12,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     private var inStackItems: [T] = []
     private var outStackItems: [T] = []
     
+    init(inStackItems: [T] = [], outStackItems: [T] = []) {
+        self.inStackItems = inStackItems
+        self.outStackItems = outStackItems
+    }
+    
     var count: Int {
         return inStackItems.count + outStackItems.count
     }
