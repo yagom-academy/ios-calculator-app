@@ -86,6 +86,15 @@ class ViewController: UIViewController {
         }
         userIsInTheMiddleOfTyping = true
     }
+    
+    @IBAction func didTapAllClearButton(_ sender: UIButton) {
+        expressionView.subviews.forEach { $0.removeFromSuperview()
+        }
+        operandsLable.text = "0"
+        operatorLable.text?.removeAll()
+        valueStack = ""
+        userIsInTheMiddleOfTyping = false
+    }
 }
 
 
