@@ -59,9 +59,7 @@ class CalculateViewController: UIViewController {
         if operandsTextLabel.text == "NaN" {
             operandsTextLabel.text = ""
             return
-        }
-        
-        if operandsTextLabel.text == "0" {
+        } else if operandsTextLabel.text == "0" {
             operandsTextLabel.text = ""
             operandsTextLabel.text?.append(formattedText)
             expressionParserInput.append(formattedText)
