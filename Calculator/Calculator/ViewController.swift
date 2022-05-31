@@ -78,6 +78,14 @@ class ViewController: UIViewController {
         
         userIsInTheMiddleOfTyping = false
     }
+    
+    @IBAction func didTapEqualButton(_ sender: UIButton) {
+        if let result = try? ExpressionPaser.parse(from: valueStack).result() {
+            operandsLable.text = convertToDecimal(result)
+            
+        }
+        userIsInTheMiddleOfTyping = true
+    }
 }
 
 
