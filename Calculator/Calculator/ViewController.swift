@@ -11,8 +11,8 @@ class ViewController: UIViewController {
     var userIsInTheMiddleOfTyping = false
     var valueStack: String = ""
     
-    @IBOutlet weak var operandsLable: UILabel!
-    @IBOutlet weak var operatorLable: UILabel!
+    @IBOutlet weak var operandsLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var expressionView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -30,13 +30,13 @@ class ViewController: UIViewController {
         newOperandsLabel.textColor = .white
         newOperatorLabel.textColor = .white
         
-        if operatorLable == nil {
-            newOperandsLabel.text = operandsLable.text
-            operandsLable.text = "0"
+        if operatorLabel == nil {
+            newOperandsLabel.text = operandsLabel.text
+            operandsLabel.text = "0"
         } else {
-            newOperandsLabel.text = operandsLable.text
-            newOperatorLabel.text = operatorLable.text
-            operandsLable.text = "0"
+            newOperandsLabel.text = operandsLabel.text
+            newOperatorLabel.text = operatorLabel.text
+            operandsLabel.text = "0"
         }
         
         newStackView.addArrangedSubview(newOperatorLabel)
@@ -45,17 +45,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapNumberButton(_ sender: UIButton) {
-        guard let buttonTitle = sender.currentTitle, let currentLable = operandsLable.text else {
+        guard let buttonTitle = sender.currentTitle, let currentLabel = operandsLabel.text else {
             return
         }
         
-        if currentLable.contains(".") && buttonTitle == "." {
+        if currentLabel.contains(".") && buttonTitle == "." {
             return
         } else if userIsInTheMiddleOfTyping {
-            operandsLable.text? += buttonTitle
+            operandsLabel.text? += buttonTitle
             valueStack += buttonTitle
         } else {
-            operandsLable.text = buttonTitle
+            operandsLabel.text = buttonTitle
             valueStack += buttonTitle
         }
         userIsInTheMiddleOfTyping = true
@@ -67,10 +67,10 @@ class ViewController: UIViewController {
         }
         if userIsInTheMiddleOfTyping {
             makeNewStackView()
-            operatorLable.text = operatorButtonTitle
+            operatorLabel.text = operatorButtonTitle
             valueStack += " \(operatorButtonTitle) "
         } else {
-            operatorLable.text = operatorButtonTitle
+            operatorLabel.text = operatorButtonTitle
             valueStack = String(valueStack.dropLast(3))
             valueStack += " \(operatorButtonTitle) "
             return
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     
     @IBAction func didTapEqualButton(_ sender: UIButton) {
         if let result = try? ExpressionPaser.parse(from: valueStack).result() {
-            operandsLable.text = convertToDecimal(result)
+            operandsLabel.text = convertToDecimal(result)
             
         }
         userIsInTheMiddleOfTyping = true
@@ -90,8 +90,8 @@ class ViewController: UIViewController {
     @IBAction func didTapAllClearButton(_ sender: UIButton) {
         expressionView.subviews.forEach { $0.removeFromSuperview()
         }
-        operandsLable.text = "0"
-        operatorLable.text?.removeAll()
+        operandsLabel.text = "0"
+        operatorLabel.text?.removeAll()
         valueStack = ""
         userIsInTheMiddleOfTyping = false
     }
@@ -99,13 +99,13 @@ class ViewController: UIViewController {
     @IBAction func didTabclearEntryButton(_ sender: UIButton) {
         
         if let lastIndex = valueStack.last, Double(String(lastIndex)) != nil {
-            operandsLable.text = String((operandsLable.text ?? "0").dropLast())
+            operandsLabel.text = String((operandsLabel.text ?? "0").dropLast())
         } else {
             return
         }
         
-        if operandsLable.text == "" {
-            operandsLable.text = "0"
+        if operandsLabel.text == "" {
+            operandsLabel.text = "0"
         }
         
         valueStack = String(valueStack.dropLast())
@@ -113,24 +113,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapToggleButton(_ sender: UIButton) {
-        guard let presentNumber = operandsLable.text else {
+        guard let presentNumber = operandsLabel.text else {
             return
         }
         guard presentNumber != "0" else {
             return
         }
         if presentNumber.contains("−") {
-            operandsLable.text = presentNumber.filter { element -> Bool in
+            operandsLabel.text = presentNumber.filter { element -> Bool in
                 if element == "-" {
                     return false
                 }
                 return true
             }
         } else {
-            operandsLable.text = "-" + presentNumber
+            operandsLabel.text = "-" + presentNumber
             }
         let valueStackArray = valueStack.split(with: " ").dropLast().reduce("", +)
-        valueStack = valueStackArray + (operandsLable.text ?? "")
+        valueStack = valueStackArray + (operandsLabel.text ?? "")
     }
     
     override func viewWillLayoutSubviews() {

@@ -365,8 +365,8 @@
                     </view>
                     <connections>
                         <outlet property="expressionView" destination="XRe-QE-UJf" id="7WR-5L-wJZ"/>
-                        <outlet property="operandsLable" destination="Lwz-OF-XHD" id="vwu-y5-3ph"/>
-                        <outlet property="operatorLable" destination="HPC-iy-qdm" id="XUy-YT-e1s"/>
+                        <outlet property="operandsLabel" destination="Lwz-OF-XHD" id="vwu-y5-3ph"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="XUy-YT-e1s"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="b1a-GH-cx6"/>
                     </connections>
                 </viewController>
