@@ -18,6 +18,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
     
+    let numberFormatter = NumberFormatter()
+
     var inputValue = ""
     var presentNumbers = ""
     var presentOperator = ""
@@ -25,19 +27,13 @@ class CalculatorViewController: UIViewController {
     var beforePresentNumberStore: [String] = []
     var userIsInTheAfterTabEqualButton = false
     var userIsInTheMiddleOfTyping = false
-    let numberFormatter = NumberFormatter()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        numberLabel.text = "0"
-        operatorLabel.text = ""
-        removeOldLabls()
-        
-        numberFormatter.roundingMode = .floor
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 3
+
+        settingLabls()
+        settingNumberFormaatter()
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
@@ -178,11 +174,19 @@ class CalculatorViewController: UIViewController {
         valuesStackView.addArrangedSubview(stackView)
     }
     
-    private func removeOldLabls() {
+    private func settingLabls() {
+        numberLabel.text = "0"
+        operatorLabel.text = ""
         firstNumberLable.removeFromSuperview()
         secondNumberLable.removeFromSuperview()
         firstOperatorLabel.removeFromSuperview()
         secondOperatorLabel.removeFromSuperview()
+    }
+    
+    private func settingNumberFormaatter() {
+        numberFormatter.roundingMode = .floor
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 3
     }
     
     private func didTapAnswerButton() {
@@ -259,7 +263,6 @@ class CalculatorViewController: UIViewController {
             numberLabel.text = "\(trimmedResult)"
             makeResultLabel()
             userIsInTheAfterTabEqualButton = true
-            
         }
     }
 }
