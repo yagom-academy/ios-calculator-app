@@ -37,7 +37,7 @@ extension UIStackView {
         })
     }
     
-    func addLable(arithmetic: String) {
+    func addLabel(arithmetic: String) {
         var arithmeticText = arithmetic
     
         if arithmetic.last == "." {

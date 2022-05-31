@@ -21,11 +21,9 @@ final class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var keypad: [UIButton]!
     
-    var calculatorValue = CalculatorValue()
+    var calculatorManager = CalculatorManager()
     
     // MARK: - NotificationCenter
-    let center = NotificationCenter.default
-    
     @objc
     func updateView(notification: NSNotification) {
         guard let object = notification.object as? String else {
@@ -37,11 +35,11 @@ final class ViewController: UIViewController {
             inputNumberLabel.text = object
         case NSNotification.Name(rawValue: "operator"):
             inputOperatorLabel.text = object
+        case NSNotification.Name(rawValue: "remove"):
+            stackView.removeAllArrangedSubview()
         case NSNotification.Name(rawValue: "arithmetic"):
-            if object == "" {
-                stackView.removeAllArrangedSubview()
-            } else {
-                stackView.addLable(arithmetic: object)
+            if !object.isEmpty {
+                stackView.addLabel(arithmetic: object)
                 scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + 20), animated: false)
             }
         default:
@@ -53,44 +51,41 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calculatorValue.resetCalculator()
-        calculatorValue.resetInput(inputNumber: true, inputOperator: true)
+        calculatorManager.resetCalculator()
+        calculatorManager.resetInput(inputNumber: true, inputOperator: true)
         
-        center.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "operand"), object: nil)
-        center.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "operator"), object: nil)
-        center.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "arithmetic"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "operand"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "operator"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "arithmetic"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateView), name: NSNotification.Name(rawValue: "remove"), object: nil)
     }
 }
 
 extension ViewController {
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
-        stackView.removeAllArrangedSubview()
-        calculatorValue.resetCalculator()
-        calculatorValue.resetInput(inputNumber: true, inputOperator: true)
+        calculatorManager.removeAll()
     }
     
     @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        calculatorValue.resetInput(inputNumber: true, inputOperator: false)
+        calculatorManager.resetInput(inputNumber: true, inputOperator: false)
     }
     
-    private func updateStackView() {
-        if calculatorValue.isNumberEmpty {
+    private func updateArithmetic() {
+        if calculatorManager.isNumberEmpty {
             return
         }
         
-        calculatorValue.appendArithmetic()
-        calculatorValue.resetInput(inputNumber: true, inputOperator: true)
+        calculatorManager.appendArithmetic()
+        calculatorManager.resetInput(inputNumber: true, inputOperator: true)
     }
 }
 
-// TODO : View + value
 extension ViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         guard let buttonIndex = keypad.firstIndex(of: sender) else { return }
         
         let numberTapped = Keypad.convertNumber(buttonIndex)
-        
-        calculatorValue.updateInputNumber(with: numberTapped)
+        calculatorManager.updateInputNumber(with: numberTapped)
     }
     
     @IBAction private func tapOperatorsButton(_ sender: UIButton) {
@@ -108,34 +103,33 @@ extension ViewController {
             return
         }
         
-        updateStackView()
-        calculatorValue.updateOperatorInput(operator: String(currentOperator))
+        updateArithmetic()
+        calculatorManager.updateOperatorInput(operator: String(currentOperator))
     }
     
     @IBAction private func tapResultButton() {
-        if calculatorValue.isArithmeticEmpty {
+        if calculatorManager.isArithmeticEmpty {
             return
         }
         
-        updateStackView()
+        updateArithmetic()
         
-        let formula = ExpressionParser.parse(from: calculatorValue.arithmetic)
+        let formula = ExpressionParser.parse(from: calculatorManager.arithmetic)
         var result = 0.0
 
         do {
             result = try formula.result()
-            calculatorValue.updateInputNumber(with: String(result))
+            calculatorManager.updateInputNumber(with: String(result))
         } catch CalculatorError.dividedByZero {
-            calculatorValue.updateInputNumber(with: CalculatorError.dividedByZero.errorMessage)
+            calculatorManager.updateInputNumber(with: CalculatorError.dividedByZero.errorMessage)
         } catch {
-            calculatorValue.updateInputNumber(with: CalculatorError.unknownError.errorMessage)
+            calculatorManager.updateInputNumber(with: CalculatorError.unknownError.errorMessage)
         }
         
-        calculatorValue.resetCalculator()
-        calculatorValue.resetInput(inputNumber: false, inputOperator: true)
+        calculatorManager.resetCalculator()
     }
     
     @IBAction private func tapToChangeSignButton(_ sender: UIButton) {
-        calculatorValue.convertSign()
+        calculatorManager.convertSign()
     }
 }

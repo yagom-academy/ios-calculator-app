@@ -1,25 +1,28 @@
 import UIKit
-struct CalculatorValue {
+struct CalculatorManager {
     private var inputNumber = "" {
-        willSet(inputNumber) {
+        didSet {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "operand"), object: convertFormat(inputNumber))
         }
     }
     private var inputOperator = "" {
-        willSet(inputOperator) {
+        didSet {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "operator"), object: inputOperator)
         }
     }
     private(set) var arithmetic = "" {
-        willSet(arithmetic) {
-            let sendValue = inputOperator + " " + inputNumber
+        didSet {
+            var sendValue = inputOperator + " " + inputNumber
+            if arithmetic == "" {
+                sendValue = ""
+            }
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "arithmetic"), object: sendValue)
         }
     }
     private var isPositiveNumber = true
     
     var isNumberEmpty: Bool {
-       return inputNumber.isEmpty
+       return inputNumber.isEmpty || inputNumber == "0"
     }
     var isArithmeticEmpty: Bool {
         return arithmetic.isEmpty
@@ -60,7 +63,12 @@ struct CalculatorValue {
     mutating func resetCalculator() {
         arithmetic = ""
         isPositiveNumber = true
-
+    }
+    
+    mutating func removeAll() {
+        resetCalculator()
+        resetInput(inputNumber: true, inputOperator: true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remove"), object: "")
     }
     
     mutating func resetInput(inputNumber: Bool, inputOperator: Bool) {
