@@ -124,10 +124,8 @@ class ViewController: UIViewController {
         
         addCurrentOperationToScrollViewContent()
         operationStack += currentOperand.text ?? CalcAccessory.Zero
-        operationStack = operationStack.filter {
-            $0 != ","
-        }
         var formula = ExpressionParser.parse(from: operationStack)
+        
         do {
             let operationResult = try formula.result()
             currentOperand.text = changeDecimalStyle(String(operationResult))
