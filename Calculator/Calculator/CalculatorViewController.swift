@@ -98,7 +98,6 @@ class CalculateViewController: UIViewController {
             operandsTextLabel.text = "0"
             return
         }
-        
         expressionParserInput.append(senderLabelText)
         operatorTextLabel.text = senderLabelText
         operandsTextLabel.text = formattedNumber
