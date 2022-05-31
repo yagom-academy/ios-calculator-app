@@ -124,6 +124,7 @@ class CalculateViewController: UIViewController {
             expressionParserInput = ""
             operatorTextLabel.text = ""
             operandsTextLabel.text? = QueueError.unknown.errorDescription
+            return
         }
         
         let numberFormatter = NumberFormatter()
