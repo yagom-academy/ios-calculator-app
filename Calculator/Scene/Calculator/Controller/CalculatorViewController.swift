@@ -279,7 +279,7 @@ class CalculatorViewController: UIViewController {
     
     private func setLabelProperty(_ label: UILabel) {
         label.isHidden = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
