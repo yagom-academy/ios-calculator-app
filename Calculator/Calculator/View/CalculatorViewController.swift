@@ -14,8 +14,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var formulaStackView: UIStackView?
     @IBOutlet private weak var savedValueScrollView: UIScrollView?
     
-    private var viewModel = CalculatorViewModel()
-    
     private var isCalculated: Bool {
         formulaStackView?.isNotEmpty == true && operatorsLabel?.text?.isEmpty == true
     }
@@ -112,7 +110,6 @@ extension CalculatorViewController {
     func makeExpression() -> String {
         var expression: String = CalculatorState.empty.value
         
-        
         formulaStackView?
             .arrangedSubviews
             .compactMap { $0 as? UIStackView }
@@ -169,11 +166,7 @@ private extension CalculatorViewController {
     
     func fetchOperator(_ value: String) {
         if (!isTapped) {
-            viewModel.addStackView(formulaStackView,
-                                   operatorText: operatorsLabel?.text,
-                                   operandText: operandsLabel?.text)
-            
-            savedValueScrollView?.focusBottom()
+            addStackView()
             
             operatorsLabel?.text = value
             operandsLabel?.text = CalculatorState.zero.value
@@ -204,14 +197,18 @@ private extension CalculatorViewController {
         if operatorsLabel?.text == CalculatorState.empty.value {
             return
         }
-        
-        viewModel.addStackView(formulaStackView, operatorText: operatorsLabel?.text, operandText: operandsLabel?.text)
-        savedValueScrollView?.focusBottom()
+        addStackView()
         
         let expressionParser = ExpressionParser.parse(from: makeExpression())
         let formula = expressionParser.result()
         
         operandsLabel?.text = numberFormatter.string(for: formula)
         formulaStackView?.clearSubView()
+    }
+    
+    func addStackView() {
+        let newSubview = CalculatorStackView(operator: operatorsLabel?.text, operand: operandsLabel?.text)
+        formulaStackView?.addArrangedSubview(newSubview)
+        savedValueScrollView?.focusBottom()
     }
 }
