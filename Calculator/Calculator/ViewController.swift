@@ -43,6 +43,23 @@ class ViewController: UIViewController {
         newStackView.addArrangedSubview(newOperandsLabel)
         expressionView.addArrangedSubview(newStackView)
     }
+    
+    @IBAction func didTapNumberButton(_ sender: UIButton) {
+        guard let buttonTitle = sender.currentTitle, let currentLable = operandsLable.text else {
+            return
+        }
+        
+        if currentLable.contains(".") && buttonTitle == "." {
+            return
+        } else if userIsInTheMiddleOfTyping {
+            operandsLable.text? += buttonTitle
+            valueStack += buttonTitle
+        } else {
+            operandsLable.text = buttonTitle
+            valueStack += buttonTitle
+        }
+        userIsInTheMiddleOfTyping = true
+        }
 }
 
 
