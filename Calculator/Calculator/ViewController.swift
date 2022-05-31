@@ -60,6 +60,24 @@ class ViewController: UIViewController {
         }
         userIsInTheMiddleOfTyping = true
         }
+    
+    @IBAction func didTapOperatorButton(_ sender: UIButton) {
+        guard let operatorButtonTitle = sender.currentTitle else {
+            return
+        }
+        if userIsInTheMiddleOfTyping {
+            makeNewStackView()
+            operatorLable.text = operatorButtonTitle
+            valueStack += " \(operatorButtonTitle) "
+        } else {
+            operatorLable.text = operatorButtonTitle
+            valueStack = String(valueStack.dropLast(3))
+            valueStack += " \(operatorButtonTitle) "
+            return
+        }
+        
+        userIsInTheMiddleOfTyping = false
+    }
 }
 
 
