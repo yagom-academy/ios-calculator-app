@@ -197,7 +197,7 @@ class CalculateViewController: UIViewController {
                   operandsTextLabel.text == "0" {
             return
         } else {
-            operandsTextLabel.text! += senderLabelText
+            operandsTextLabel.text? += senderLabelText
             expressionParserInput.append(senderLabelText)
         }
     }
@@ -210,7 +210,7 @@ class CalculateViewController: UIViewController {
            operandsTextLabel.text == "0" {
             operandsTextLabel.text = "0"
         } else {
-            operandsTextLabel.text! += senderLabelText
+            operandsTextLabel.text? += senderLabelText
             expressionParserInput.append(senderLabelText)
         }
     }
@@ -222,7 +222,7 @@ class CalculateViewController: UIViewController {
         if operandsTextLabel.text?.contains(senderLabelText) == true {
             operandsTextLabel.text = operandsTextLabel.text
         } else if operandsTextLabel.text?.count != 0 {
-            operandsTextLabel.text! += senderLabelText
+            operandsTextLabel.text? += senderLabelText
             expressionParserInput += senderLabelText
         }
     }
