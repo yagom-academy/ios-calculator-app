@@ -388,8 +388,6 @@ class CalculatorViewController: UIViewController {
             numberInput.text = CalculatorError.invalidOperator.localizedDescription
         case CalculatorError.notEnoughOperatorsAndOperands:
             numberInput.text = CalculatorError.notEnoughOperatorsAndOperands.localizedDescription
-        case CalculatorError.lackOfInput:
-            numberInput.text = CalculatorError.lackOfInput.localizedDescription
         default:
             numberInput.text = "unknown error"
         }

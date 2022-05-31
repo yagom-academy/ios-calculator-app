@@ -10,16 +10,14 @@ struct Formula {
     private var operators: CalculatorItemQueue<Operator>
 
     mutating func result() throws -> Double {
-        guard try checkCalculatorItems() else {
-            throw CalculatorError.lackOfInput
-        }
+        try checkLackOfItems()
         
         let result = try calculateResult()
         
         return result
     }
     
-    private func checkCalculatorItems() throws -> Bool {
+    private func checkLackOfItems() throws {
         guard operands.queue.isEmpty == false || operators.queue.isEmpty == false else {
             throw CalculatorError.emptyQueues
         }
@@ -35,8 +33,6 @@ struct Formula {
         guard operands.queue.count - 1 == operators.queue.count else {
             throw CalculatorError.notEnoughOperatorsAndOperands
         }
-        
-        return true
     }
     
     private mutating func calculateResult() throws -> Double {

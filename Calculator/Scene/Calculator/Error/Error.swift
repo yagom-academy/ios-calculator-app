@@ -13,7 +13,6 @@ enum CalculatorError: Error {
     case notEnoughOperands
     case notEnoughOperatorsAndOperands
     case invalidOperator
-    case lackOfInput
 }
 
 extension CalculatorError: LocalizedError {
@@ -31,8 +30,6 @@ extension CalculatorError: LocalizedError {
             return NSLocalizedString("not enough operators and operands", comment: "Error: The number of Operators must be one less than the number of Operands")
         case .invalidOperator:
             return NSLocalizedString("invalid operator", comment: "Error: Invalid Operator")
-        case .lackOfInput:
-            return NSLocalizedString("lack of input", comment: "Error: At least one error occured")
         }
     }
 }
