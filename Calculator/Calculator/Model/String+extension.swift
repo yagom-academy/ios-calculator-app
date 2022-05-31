@@ -16,8 +16,8 @@ extension String {
 extension String {
     func formatNumber() -> String {
         let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal  // 세자리
-        numberFormatter.maximumFractionDigits = 20  // 최대 20
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20  
         
         guard let numberFormattedResult = numberFormatter.number(from: self) else {
             return OperatorError.unknown.errorDescription

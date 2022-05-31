@@ -5,7 +5,6 @@
 //  Created by bard, hugh on 2022/05/30.
 //
 
-
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
