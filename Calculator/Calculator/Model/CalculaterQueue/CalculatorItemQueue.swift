@@ -16,14 +16,11 @@ extension CalculatorItemQueue {
         return doublyLinkedList.first?.value
     }
     
-    var peekLast: T? {
-        return doublyLinkedList.last?.value
-    }
-    
     var isEmpty: Bool {
         return doublyLinkedList.isEmpty
     }
     
+    @discardableResult
     func enqueue(_ element: T) -> Bool {
         doublyLinkedList.append(element)
         return true
@@ -36,15 +33,7 @@ extension CalculatorItemQueue {
         }
         return doublyLinkedList.remove(element)
     }
-    
-    func removeAll() throws {
-        guard !doublyLinkedList.isEmpty else {
-            throw QueueError.emptyData
-        }
-        doublyLinkedList.removeAll()
-    }
 }
-
 
 extension CalculatorItemQueue {
     subscript (index: Int) -> T? {
@@ -53,7 +42,7 @@ extension CalculatorItemQueue {
 }
 
 extension CalculatorItemQueue: CustomStringConvertible {
-    public var description: String {
+    var description: String {
         var string = ""
         var current = doublyLinkedList.first
         while let node = current {
@@ -61,5 +50,15 @@ extension CalculatorItemQueue: CustomStringConvertible {
             current = node.next
         }
         return string + "end"
+    }
+}
+
+extension CalculatorItemQueue: ExpressibleByArrayLiteral {
+    convenience init(arrayLiteral elements: T...) {
+        self.init()
+        
+        elements.forEach {
+            self.enqueue($0)
+        }
     }
 }

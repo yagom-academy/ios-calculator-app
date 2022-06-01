@@ -10,7 +10,7 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
+    case subtract = "−"
     case multiply = "×"
     case divide = "÷"
 }
@@ -27,13 +27,6 @@ extension Operator {
         case .multiply:
             return multiply(lhs, rhs)
         }
-    }
-    
-    static func contains(_ value: Character) -> Bool {
-        if let operatorValue = Operator(rawValue: value) {
-            return Operator.allCases.contains(operatorValue)
-        }
-        return false
     }
 }
 

@@ -63,38 +63,7 @@ class CalculatorItemQueueTests: XCTestCase {
             
         } catch {}
     }
-    
-    func test_queue의_마지막_값을_반환한다() throws {
-        // given
-        let firstValue = 3.2
-        let secondValue = 2.0
-        let expectation = 2.0
-        // when
-        sut.enqueue(firstValue)
-        sut.enqueue(secondValue)
-        // then
-        let result = sut.peekLast
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_queue의_모든_값을_제거할_수_있다() {
-        do {
-            // given
-            let array = [3.2, 2.0, 3.0, 4.0]
-            
-            // when
-            try array.forEach { value in
-                try sut.enqueue(value)
-            }
-            try sut.removeAll()
-        } catch {}
-        let result = sut.isEmpty
-        
-        // then
-        XCTAssertTrue(result)
-    }
-    
+
     func test_queue는_숫자값만_분리할_수_있다() {
         do {
             // given
