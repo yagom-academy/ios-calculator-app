@@ -49,15 +49,15 @@ class CalculatorViewController: UIViewController {
             operatorChoice = ""
             operatorStorage = []
             
-            presentNumbers += "\(buttonTitle)"
-            numberLabel.text = "\(buttonTitle)"
+            presentNumbers += buttonTitle
+            numberLabel.text = buttonTitle
             
         } else if presentNumbers.contains(".") && buttonTitle == "." {
             return
             
         } else {
-            presentNumbers += "\(buttonTitle)"
-            numberLabel.text = "\(presentNumbers)"
+            presentNumbers += buttonTitle
+            numberLabel.text = presentNumbers
         }
     }
     
@@ -65,7 +65,7 @@ class CalculatorViewController: UIViewController {
         let buttonTitle = sender.currentTitle!
         
         presentOperator = buttonTitle
-        operatorLabel.text = "\(buttonTitle)"
+        operatorLabel.text = buttonTitle    
         
         if ["+", "−", "÷", "×"].contains(buttonTitle) {
             operatorStorage.append(" \(buttonTitle) ")
@@ -115,8 +115,8 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
         
-        stackNumberLabel.text = "\(presentNumbers)"
-        stackOperatorLabel.text = "\(presentOperator) "
+        stackNumberLabel.text = presentNumbers
+        stackOperatorLabel.text = presentOperator
         
         stackView.addArrangedSubview(stackOperatorLabel)
         stackView.addArrangedSubview(stackNumberLabel)
@@ -141,7 +141,7 @@ class CalculatorViewController: UIViewController {
                 guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
                     return
                 }
-                numberLabel.text = "\(NSNresult)"
+                numberLabel.text = NSNresult
             }
         }
         inputValue = ""
