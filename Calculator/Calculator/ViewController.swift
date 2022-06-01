@@ -9,83 +9,78 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operationScrollView: UIScrollView!
     @IBOutlet weak var operationStackView: UIStackView!
-    @IBOutlet weak var currentOperand: UILabel!
-    @IBOutlet weak var currentOperator: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
     private var operationStack: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         clearOperationScrollviewContent()
-        clearCurrentOperandUILabel()
-        clearCurrentOperatorUILabel()
-        // Do any additional setup after loading the view.
+        clearCurrentOperandLabel()
+        clearCurrentOperatorLabel()
     }
     
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        let operandLabel = currentOperand.text ?? CalcAccessory.Empty
+        let operandLabel = currentOperandLabel.text ?? CalcAccessory.empty
         
-        guard sender.currentTitle != CalcAccessory.Dot || currentOperand.text?.contains(CalcAccessory.Dot) == false
-        else {
+        if sender.currentTitle == CalcAccessory.dot, currentOperandLabel.text?.contains(CalcAccessory.dot) == true {
             return
         }
         
-        if operandLabel == CalcAccessory.Zero,
-            (sender.currentTitle == CalcAccessory.Zero || sender.currentTitle == CalcAccessory.DoubleZero) {
+        if operandLabel == CalcAccessory.zero,
+            (sender.currentTitle == CalcAccessory.zero || sender.currentTitle == CalcAccessory.doubleZero) {
             return
-        } else if operandLabel == CalcAccessory.Zero, sender.currentTitle != CalcAccessory.Dot {
-            currentOperand.text = CalcAccessory.Empty
+        } else if operandLabel == CalcAccessory.zero, sender.currentTitle != CalcAccessory.dot {
+            currentOperandLabel.text = CalcAccessory.empty
         }
         
-        if operandLabel == "NaN" {
+        if operandLabel == CalcAccessory.nan {
             switch sender.currentTitle {
-            case CalcAccessory.DoubleZero:
-                currentOperand.text = CalcAccessory.Zero
+            case CalcAccessory.doubleZero, CalcAccessory.zero:
+                currentOperandLabel.text = CalcAccessory.zero
                 return
-            case CalcAccessory.Dot:
-                currentOperand.text = CalcAccessory.Zero + CalcAccessory.Dot
-                return
-            case CalcAccessory.Zero:
-                currentOperand.text = CalcAccessory.Zero
+            case CalcAccessory.dot:
+                currentOperandLabel.text = CalcAccessory.zero + CalcAccessory.dot
                 return
             default:
-                currentOperand.text = CalcAccessory.Empty
+                currentOperandLabel.text = CalcAccessory.empty
             }
         }
         
-        currentOperand?.text = (currentOperand?.text ?? CalcAccessory.Empty) + (sender.currentTitle ?? CalcAccessory.Empty)
+        currentOperandLabel?.text = (currentOperandLabel?.text ?? CalcAccessory.empty) + (sender.currentTitle ?? CalcAccessory.empty)
     }
 
     @IBAction func pressOperatorButton(_ sender: UIButton) {
-        guard currentOperand.text != CalcAccessory.Zero else {
-            currentOperator.text = (sender.currentTitle ?? CalcAccessory.Empty)
+        guard currentOperandLabel.text != CalcAccessory.zero else {
+            currentOperatorLabel.text = (sender.currentTitle ?? CalcAccessory.empty)
             return
         }
         
-        if currentOperand.text?.last == Character(CalcAccessory.Dot) {
-            currentOperand.text?.removeLast()
+        if currentOperandLabel.text?.last == Character(CalcAccessory.dot) {
+            currentOperandLabel.text?.removeLast()
         }
         
         addCurrentOperationToScrollViewContent()
-        operationStack += "\(currentOperand?.text ?? CalcAccessory.Zero) \(sender.currentTitle ?? CalcAccessory.Empty) "
-        currentOperator.text = sender.currentTitle
-        clearCurrentOperandUILabel()
-        scrollingUnder()
+        operationStack += "\(currentOperandLabel?.text ?? CalcAccessory.zero) \(sender.currentTitle ?? CalcAccessory.empty) "
+        currentOperatorLabel.text = sender.currentTitle
+        clearCurrentOperandLabel()
+        scrollToBottom()
     }
     
     @IBAction func allClearButtonDidTap(_ sender: UIButton) {
-        operationStack = CalcAccessory.Empty
+        operationStack = CalcAccessory.empty
         clearOperationScrollviewContent()
-        clearCurrentOperandUILabel()
-        clearCurrentOperatorUILabel()
+        clearCurrentOperandLabel()
+        clearCurrentOperatorLabel()
     }
     
     @IBAction func clearEntryButtonDidTap(_ sender: UIButton) {
-        clearCurrentOperandUILabel()
+        clearCurrentOperandLabel()
     }
     
     @IBAction func reverseSignButtonDidTap(_ sender: UIButton) {
-        guard let operandDisplayed = currentOperand.text, operandDisplayed != "NaN" else {
+        guard let operandDisplayed = currentOperandLabel.text, operandDisplayed != CalcAccessory.nan else {
             return
         }
         
@@ -93,25 +88,25 @@ class ViewController: UIViewController {
             return
         }
         
-        if currentOperand.text?.first == "-" {
-            currentOperand.text?.removeFirst()
+        if currentOperandLabel.text?.first == "-" {
+            currentOperandLabel.text?.removeFirst()
         } else {
-            currentOperand.text = "-" + (currentOperand.text ?? CalcAccessory.Empty)
+            currentOperandLabel.text = "-" + (currentOperandLabel.text ?? CalcAccessory.empty)
         }
     }
     
     func canAttachMinus(to operand: String) -> Bool {
-        var result = CalcAccessory.Empty
+        var result = CalcAccessory.empty
         
-        if operand.contains(CalcAccessory.Dot) {
-            result = operand.replacingOccurrences(of: CalcAccessory.Dot, with: CalcAccessory.Empty)
+        if operand.contains(CalcAccessory.dot) {
+            result = operand.replacingOccurrences(of: CalcAccessory.dot, with: CalcAccessory.empty)
         } else {
             result = operand
         }
         
-        result = result.replacingOccurrences(of: CalcAccessory.Zero, with: CalcAccessory.Empty)
+        result = result.replacingOccurrences(of: CalcAccessory.zero, with: CalcAccessory.empty)
         
-        if result == CalcAccessory.Empty {
+        if result == CalcAccessory.empty {
             return false
         }
         
@@ -119,34 +114,34 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equalButtonDidTap(_ sender: UIButton) {
-        guard currentOperator.text != CalcAccessory.Empty else {
+        guard currentOperatorLabel.text != CalcAccessory.empty else {
             return
         }
         
         addCurrentOperationToScrollViewContent()
-        operationStack += currentOperand.text ?? CalcAccessory.Zero
+        operationStack += currentOperandLabel.text ?? CalcAccessory.zero
         var formula = ExpressionParser.parse(from: operationStack)
         
         do {
             let operationResult = try formula.result()
-            currentOperand.text = changeDecimalStyle(String(operationResult))
+            currentOperandLabel.text = changeDecimalStyle(String(operationResult))
         } catch CalculatorError.divideByZero {
-            currentOperand.text = "NaN"
+            currentOperandLabel.text = CalcAccessory.nan
         } catch {
             debugPrint("UNKNOWN ERROR")
         }
         
-        clearCurrentOperatorUILabel()
-        operationStack = CalcAccessory.Empty
-        scrollingUnder()
+        clearCurrentOperatorLabel()
+        operationStack = CalcAccessory.empty
+        scrollToBottom()
     }
     
-    private func clearCurrentOperandUILabel() {
-        currentOperand.text = CalcAccessory.Zero
+    private func clearCurrentOperandLabel() {
+        currentOperandLabel.text = CalcAccessory.zero
     }
     
-    private func clearCurrentOperatorUILabel() {
-        currentOperator.text = CalcAccessory.Empty
+    private func clearCurrentOperatorLabel() {
+        currentOperatorLabel.text = CalcAccessory.empty
     }
     
     private func clearOperationScrollviewContent() {
@@ -160,8 +155,8 @@ class ViewController: UIViewController {
 extension ViewController {
     private func addCurrentOperationToScrollViewContent() {
         let currentContent = createOpearionStackViewContent(
-            inputOperator: currentOperator.text ?? CalcAccessory.Empty,
-            inputOperand: currentOperand.text ?? CalcAccessory.Empty
+            inputOperator: currentOperatorLabel.text ?? CalcAccessory.empty,
+            inputOperand: currentOperandLabel.text ?? CalcAccessory.empty
         )
         operationStackView.addArrangedSubview(currentContent)
     }
@@ -174,16 +169,16 @@ extension ViewController {
     }
     
     private func createUILabel(_ text: String) -> UILabel {
-        let uiLabel = UILabel()
-        uiLabel.textColor = .white
-        uiLabel.font = .preferredFont(forTextStyle: .title3, compatibleWith: nil)
-        uiLabel.text = text
-        uiLabel.textAlignment = .center
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3, compatibleWith: nil)
+        label.text = text
+        label.textAlignment = .center
         
-        return uiLabel
+        return label
     }
     
-    private func scrollingUnder() {
+    private func scrollToBottom() {
         operationScrollView.setContentOffset(CGPoint(x: 0,
                                                      y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
@@ -193,6 +188,6 @@ extension ViewController {
         numberFormmater.numberStyle = .decimal
         numberFormmater.maximumSignificantDigits = 20
         
-        return numberFormmater.string(for: Double(input ?? CalcAccessory.Empty)) ?? CalcAccessory.Empty
+        return numberFormmater.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
     }
 }
