@@ -9,7 +9,7 @@ import Foundation
 
 struct CalculatorInternalAction {
     private var isOperandInputted = false
-    private var isCalculateCompleted = false
+    var isCalculateCompleted = false
     private var inputtedFomula = CalculatorDefaultValue.fomula
     
     mutating func setDefaultValue() {
@@ -25,7 +25,43 @@ struct CalculatorInternalAction {
         return String((operand * -1).parse())
     }
     
+    mutating func appendOperand(_ currentOperland: String?, _ title: String?) -> String {
+        guard let tabNumber = title else { return CalculatorDefaultValue.operandLabel }
+        var result = ""
+        
+        if !isOperandInputted {
+            result = tabNumber
+        } else {
+            result = checkOperand(getText(currentOperland), with: tabNumber)
+        }
+        isOperandInputted = true
+        
+        return result
+    }
+    
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
         return input.filter{$0 != sign}
+    }
+    
+    private func getText(_ optionalText: String?) -> String {
+        guard let text = optionalText else { return "" }
+        
+        return text
+    }
+    
+    private func checkOperand(_ currentlabel: String, with currentInput: String) -> String {
+        if !currentlabel.contains(".") && currentInput == "." {
+            return currentlabel + currentInput
+        } else if currentlabel.contains(".") && currentInput.contains("0") {
+            return currentlabel + currentInput
+        } else {
+            return changeFormat(currentlabel + currentInput)
+        }
+    }
+    
+    private func changeFormat(_ input: String) -> String {
+        let result = filterSign(input, ",")
+        
+        return (Double(result) ?? 0).parse()
     }
 }

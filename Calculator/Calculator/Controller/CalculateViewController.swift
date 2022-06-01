@@ -36,17 +36,8 @@ class CalculateViewController: UIViewController {
         changeTheSignOperandLabel()
     }
     
-    @IBAction private func appendOperand(_ sender: UIButton) {
-        guard !isCalculateCompleted else { return }
-        guard let sederTitle = sender.currentTitle else { return }
-        
-        if !isOperandInputted {
-            operandLabel.text = sederTitle
-        } else {
-            operandLabel.text = checkOperand(getText(operandLabel), with: sederTitle)
-        }
-        
-        isOperandInputted = true
+    @IBAction private func tabOperandButton(_ sender: UIButton) {
+        setOperandLabel(with: sender.currentTitle)
     }
     
     @IBAction private func appendOperator(_ sender: UIButton) {
@@ -180,6 +171,11 @@ class CalculateViewController: UIViewController {
     
     private func changeTheSignOperandLabel() {
         operandLabel.text = calcultorInternalAction.changeTheSign(operandLabel.text)
+    }
+    
+    private func setOperandLabel(with currentTitle: String?) {
+        guard !calcultorInternalAction.isCalculateCompleted else { return }
+        operandLabel.text = calcultorInternalAction.appendOperand(operandLabel.text, currentTitle)
     }
     
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
