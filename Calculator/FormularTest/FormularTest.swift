@@ -68,7 +68,6 @@ class FormularTest: XCTestCase {
         
         //when
         
-        
         //then
         XCTAssertThrowsError(try sut?.result())
     }
