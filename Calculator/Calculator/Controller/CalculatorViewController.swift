@@ -133,12 +133,11 @@ class CalculatorViewController: UIViewController {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
             
-            if result.description.count < 20 {
-                guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
-                    return
-                }
-                numberLabel.text = NSNresult
+            guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                return
             }
+            numberLabel.text = NSNresult
+            
         }
         inputValue = ""
         presentNumbers = ""
