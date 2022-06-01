@@ -140,8 +140,9 @@ class CalculateViewController: UIViewController {
     //MARK: - changeOperandSignButtonTapped
     @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
         guard let operandsLabelText = operandsTextLabel.text else { return }
+        guard let formattedNumber = operandsTextLabel.text?.formatNumber() else { return }
         
-        if operandsLabelText == "0" {
+        if  formattedNumber == "0" {
             return
         } else if operandsTextLabel.text?.first == "-" {
             operandsTextLabel.text?.removeFirst()
