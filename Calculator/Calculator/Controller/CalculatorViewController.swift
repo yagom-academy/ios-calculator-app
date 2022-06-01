@@ -69,7 +69,7 @@ class CalculatorViewController: UIViewController {
         
         if ["+", "−", "÷", "×"].contains(buttonTitle) {
             operatorStorage.append(" \(buttonTitle) ")
-            makeStackLabel()
+            makePreviousLabels()
             numberLabel.text = "0"
             
         }
@@ -99,7 +99,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeStackLabel() {
+    private func makePreviousLabels() {
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
