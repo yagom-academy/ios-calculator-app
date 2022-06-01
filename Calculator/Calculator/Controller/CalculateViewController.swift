@@ -9,7 +9,7 @@ import UIKit
 class CalculateViewController: UIViewController {
     private var isOperandInputted = false
     private var isCalculateCompleted = false
-    private var inputtedFomula = ""
+    private var inputtedFomula = CalculatorDefaultValue.fomula
     
     @IBOutlet private weak var fomulaScrollView: UIScrollView!
     @IBOutlet private weak var fomulaStackView: UIStackView!
@@ -26,7 +26,7 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func deleteCurrentInputed(_ sender: UIButton) {
-        operandLabel.text = "0"
+        operandLabel.text = CalculatorDefaultValue.operandLabel
     }
     
     @IBAction private func changeTheSign(_ sender: UIButton) {
@@ -57,7 +57,7 @@ class CalculateViewController: UIViewController {
             return
         }
         guard Double(filterSign(getText(operandLabel), ",")) != nil else {
-            operandLabel.text = "NaN"
+            operandLabel.text = CalculatorDefaultValue.error
             isOperandInputted = false
             return
         }
@@ -72,7 +72,7 @@ class CalculateViewController: UIViewController {
         
         addInputtedFomula()
         downScroll()
-        operandLabel.text = "0"
+        operandLabel.text = CalculatorDefaultValue.operandLabel
         isOperandInputted = false
     }
     
@@ -80,7 +80,7 @@ class CalculateViewController: UIViewController {
         guard isOperandInputted else { return }
         guard !fomulaStackView.subviews.isEmpty else { return }
         guard Double(filterSign(getText(operandLabel), ",")) != nil else {
-            operandLabel.text = "NaN"
+            operandLabel.text = CalculatorDefaultValue.error
             isOperandInputted = false
             return
         }
@@ -88,8 +88,8 @@ class CalculateViewController: UIViewController {
         createStackView(getText(operatorLabel), changeFormat(getText(operandLabel)))
         addInputtedFomula()
         operandLabel.text = calculate(inputtedFomula)
-        operatorLabel.text = ""
-        inputtedFomula = ""
+        operatorLabel.text = CalculatorDefaultValue.operatorLabel
+        inputtedFomula = CalculatorDefaultValue.fomula
         isOperandInputted = false
         isCalculateCompleted = true
     }
@@ -122,7 +122,7 @@ class CalculateViewController: UIViewController {
             let result = try fomula.result().parse()
             return result
         } catch {
-            return "NaN"
+            return CalculatorDefaultValue.error
         }
     }
     
@@ -170,9 +170,9 @@ class CalculateViewController: UIViewController {
     
     private func resetCalculateOption() {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-        inputtedFomula = ""
+        operandLabel.text = CalculatorDefaultValue.operandLabel
+        operatorLabel.text = CalculatorDefaultValue.operatorLabel
+        inputtedFomula = CalculatorDefaultValue.fomula
         isOperandInputted = false
         isCalculateCompleted = false
     }
