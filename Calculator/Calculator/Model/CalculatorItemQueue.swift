@@ -2,34 +2,29 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by dhoney96 on 2022/05/17.
-//
 
-struct CalculatorItemQueue<T>: CalculatorItem {
-    private(set) var items = [T?]()
-    private var head = 0
+struct CalculatorItemQueue<T>: Queue, CalculateItem {
+    private(set) var enQueueStack: Array<T> = []
+    private(set) var deQueueStack: Array<T> = []
     
-    func convertToDouble(from data: String) -> Double? {
-        guard let number = Double(data) else { return nil }
-        return number
+    mutating func enQueue(_ input: T) {
+        enQueueStack.append(input)
     }
     
-    mutating func enqueue(_ data: T) {
-        items.append(data)
-    }
-    
-    mutating func dequeue() -> T? {
-        guard head < items.count, let element = items[head] else {
-            return nil
+    mutating func deQueue() throws -> T {
+        if deQueueStack.isEmpty {
+            deQueueStack = enQueueStack.reversed()
+            enQueueStack.removeAll()
         }
-        items[head] = nil
-        head += 1
+        guard let deQueue = deQueueStack.popLast() else {
+            throw QueueError.unknown
+        }
         
-        return element
+        return deQueue
     }
     
-    mutating func clearAllItem() {
-        guard !items.isEmpty else { return }
-        items.removeAll()
+    public mutating func clearAllStacks() {
+        enQueueStack = []
+        deQueueStack = []
     }
 }

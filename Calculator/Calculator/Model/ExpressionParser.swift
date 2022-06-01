@@ -2,33 +2,36 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by dhoney96 on 2022/05/20.
-//
+//  Created by bard, hugh on 2022/05/30.
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula = Formula()
         
-        input.split(with: " ").filter {
-            Double($0) == nil
+        input.filter {
+            Double(String($0)) == nil
         }.forEach {
-            guard let sign = Operator(rawValue: Character($0)) else { return }
-            formula.operators.enqueue(sign)
+            guard let sign = Operator(rawValue: $0) else { return }
+            formula.operators.enQueue(sign)
         }
         
         componentsByOperators(from: input).compactMap {
             Double($0)
         }.forEach {
-            formula.operands.enqueue($0)
+            formula.operands.enQueue($0)
         }
-        
         return formula
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let abc = input.split(with: " ").filter {
-            Double($0) != nil
+        var newInput = input
+        
+        let sign = Operator.allCases.map {
+            $0.rawValue
         }
-        return abc
+        sign.forEach {
+            newInput = newInput.replacingOccurrences(of: String($0), with: " ")
+        }
+        return newInput.split(with: " ")
     }
 }
