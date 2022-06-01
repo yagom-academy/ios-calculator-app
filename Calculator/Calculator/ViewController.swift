@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
 //
 
@@ -22,6 +22,10 @@ class ViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
+        if let tmp = currentOperandLabel.text?.replacingOccurrences(of: ".", with: ""), tmp.count >= 20 {
+            return
+        }
+        
         let operandLabel = currentOperandLabel.text ?? CalcAccessory.empty
         
         if sender.currentTitle == CalcAccessory.dot, currentOperandLabel.text?.contains(CalcAccessory.dot) == true {
@@ -186,8 +190,11 @@ extension ViewController {
     private func changeDecimalStyle(_ input: String?) -> String {
         let numberFormmater = NumberFormatter()
         numberFormmater.numberStyle = .decimal
+        numberFormmater.roundingMode = .floor
+        numberFormmater.minimumSignificantDigits = 0
         numberFormmater.maximumSignificantDigits = 20
-        
+        numberFormmater.minimumIntegerDigits = 1
+        numberFormmater.maximumIntegerDigits = 20
         return numberFormmater.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
     }
 }
