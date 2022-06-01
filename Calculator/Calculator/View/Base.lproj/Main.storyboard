@@ -64,7 +64,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="deleteCurrentInputed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FvR-1C-Q8Y"/>
+                                                    <action selector="tabCeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oCx-Ee-jPp"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">

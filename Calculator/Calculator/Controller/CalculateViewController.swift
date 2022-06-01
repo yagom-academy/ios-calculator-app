@@ -28,8 +28,8 @@ class CalculateViewController: UIViewController {
         calcultorInternalAction.setDefaultValue()
     }
     
-    @IBAction private func deleteCurrentInputed(_ sender: UIButton) {
-        operandLabel.text = CalculatorDefaultValue.operandLabel
+    @IBAction private func tabCeButton(_ sender: UIButton) {
+        setCalculatorDefaultOperlandLabel()
     }
     
     @IBAction private func changeTheSign(_ sender: UIButton) {
@@ -175,6 +175,10 @@ class CalculateViewController: UIViewController {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = CalculatorDefaultValue.operandLabel
         operatorLabel.text = CalculatorDefaultValue.operatorLabel
+    }
+    
+    private func setCalculatorDefaultOperlandLabel() {
+        operandLabel.text = CalculatorDefaultValue.operandLabel
     }
     
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
