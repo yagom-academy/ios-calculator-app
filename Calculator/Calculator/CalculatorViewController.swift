@@ -178,8 +178,10 @@ class CalculateViewController: UIViewController {
             
         if operandsTextLabel.text?.isEmpty == false {
             operandsTextLabel.text? = "0"
-            expressionParserInput.removeLast()  // 숫자가 하나의 숫자일 때만 가능
-            // 연산자가 나오기 전까지 제거 하던가 반복문 돌려서
+            
+            while expressionParserInput.last?.isNumber == true {
+                expressionParserInput.removeLast()
+            }
             return
         }
     }

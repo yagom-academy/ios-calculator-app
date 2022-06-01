@@ -22,7 +22,7 @@ struct Formula {
         
         guard var total = optionalTotal else { throw QueueError.unknown }
         
-        for _ in 1...operators.enQueueStack.count {
+        for _ in 0..<operators.enQueueStack.count {
             var number: Double?
             var symbol: Operator?
             
