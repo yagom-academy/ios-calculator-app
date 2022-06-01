@@ -65,37 +65,33 @@ class CalculatorViewController: UIViewController {
         let buttonTitle = sender.currentTitle!
         
         presentOperator = buttonTitle
-        operatorLabel.text = buttonTitle    
+        operatorLabel.text = buttonTitle
         
-        if ["+", "−", "÷", "×"].contains(buttonTitle) {
-            operatorStorage.append(" \(buttonTitle) ")
-            makePreviousLabels()
-            numberLabel.text = "0"
-            
-        }
-        
-        if ["="].contains(buttonTitle) {
-            didTapAnswerButton()
-            
-        }
+        operatorStorage.append(" \(buttonTitle) ")
+        makePreviousLabels()
+        numberLabel.text = "0"
+    }
+    
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        didTapAnswerButton()
     }
     
     @IBAction func touchOptionButton(_ sender: UIButton) {
         let buttonTitle = sender.currentTitle!
         
-        if ["AC"].contains(buttonTitle) {
+        if buttonTitle == OptionButton.allClear.rawValue  {
             didTapACButton()
             
         }
         
-        if ["CE"].contains(buttonTitle) {
+        if buttonTitle == OptionButton.clearEntry.rawValue {
             didTapCEButton()
             
         }
         
-        if ["⁺⁄₋"].contains(buttonTitle) && presentNumbers != "0" {
+        if buttonTitle == OptionButton.changeSign.rawValue && presentNumbers != "0" {
             didTapSignButton()
-    
+            
         }
     }
     
@@ -132,7 +128,7 @@ class CalculatorViewController: UIViewController {
     
     private func didTapAnswerButton() {
         inputValue += presentNumbers
-
+        
         if presentNumbers.isEmpty == false && inputValue.isEmpty == false {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
