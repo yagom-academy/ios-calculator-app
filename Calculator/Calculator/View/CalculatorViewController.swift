@@ -96,7 +96,7 @@ private extension CalculatorViewController {
 
 //- MARK: ScrollView & StackView
 
-extension CalculatorViewController {
+private extension CalculatorViewController {
     func makeExpression() -> String {
         var expression: String = CalculatorState.empty.value
         
@@ -181,7 +181,7 @@ private extension CalculatorViewController {
     }
     
     func result() {
-        if operatorsLabel?.text == CalculatorState.empty.value {
+        guard operatorsLabel?.text != CalculatorState.empty.value else {
             return
         }
         addStackView()
@@ -190,11 +190,10 @@ private extension CalculatorViewController {
         let formula = expressionParser.result()
         
         operandsLabel?.text = formula.setDoubleFormatter()
-        formulaStackView?.removeSubView()
     }
     
     func addStackView() {
-        let newSubview = CalculatorStackView(operator: operatorsLabel?.text, operand: operandsLabel?.text)
+        let newSubview = CalculatorStackView(operatorText: operatorsLabel?.text, operandText: operandsLabel?.text)
         formulaStackView?.addArrangedSubview(newSubview)
         savedValueScrollView?.focusBottom()
     }

@@ -8,16 +8,18 @@
 import UIKit
 
 final class CalculatorStackView: UIStackView {
-    init(`operator`: String?, operand: String?) {
+    init(operatorText: String?, operandText: String?) {
         super.init(frame: .null)
-        setLabels(with: `operator`, and: operand)
+        setLabels(with: operatorText, and: operandText)
         setDefaultAttribute()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+private extension CalculatorStackView {
     func setLabels(with operatorText: String?, and operandText: String?) {
         let operatorLabel = createDefaultLabel(with: operatorText)
         let operandLabel = createDefaultLabel(with: operandText)
