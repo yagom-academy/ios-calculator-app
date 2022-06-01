@@ -44,6 +44,23 @@ class ViewController: UIViewController {
         expressionView.addArrangedSubview(newStackView)
     }
     
+    func makeResultLabel() {
+        let newStackView = UIStackView()
+        let newOperandsLabel = UILabel()
+        let newOperatorLabel = UILabel()
+        
+        newStackView.axis = .horizontal
+        newOperandsLabel.textColor = .white
+        newOperatorLabel.textColor = .white
+        
+        newOperandsLabel.text = operandsLabel.text
+        newOperatorLabel.text = operatorLabel.text
+        
+        newStackView.addArrangedSubview(newOperatorLabel)
+        newStackView.addArrangedSubview(newOperandsLabel)
+        expressionView.addArrangedSubview(newStackView)
+    }
+    
     @IBAction func didTapNumberButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle, let currentLabel = operandsLabel.text else {
             return
@@ -82,7 +99,7 @@ class ViewController: UIViewController {
     @IBAction func didTapEqualButton(_ sender: UIButton) {
         if let result = try? ExpressionPaser.parse(from: valueStack).result() {
             operandsLabel.text = convertToDecimal(result)
-            
+            makeResultLabel()
         }
         userIsInTheMiddleOfTyping = true
     }
