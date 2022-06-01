@@ -175,12 +175,13 @@ private extension CalculatorViewController {
     
     func setToggle(for minus: String) {
         guard let oldValue = operandsLabel?.text,
-              !oldValue.elementsEqual(CalculatorState.zero.value) else {
+              let removeCommaValue = oldValue.replacingOccurrences(of: ",", with: CalculatorState.empty.value) as? String,
+              let operand = (removeCommaValue.doubleValue() * -1).setDoubleFormatter() as? String,
+              !operand.elementsEqual(CalculatorState.zero.value.minusValue()) else {
             return
         }
         
-        let removeCommaValue = oldValue.replacingOccurrences(of: ",", with: CalculatorState.empty.value)
-        operandsLabel?.text = (removeCommaValue.doubleValue() * -1).setDoubleFormatter()
+        operandsLabel?.text = operand
     }
     
     func result() {
