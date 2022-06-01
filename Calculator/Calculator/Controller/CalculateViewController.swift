@@ -32,11 +32,8 @@ class CalculateViewController: UIViewController {
         setCalculatorDefaultOperlandLabel()
     }
     
-    @IBAction private func changeTheSign(_ sender: UIButton) {
-        guard let operandText = operandLabel.text, Double(operandText) != 0.0 else { return }
-        guard let operand = Double(filterSign(operandText, ",")) else { return }
-        
-        operandLabel.text = String((operand * -1).parse())
+    @IBAction private func tabChangeTheSignButton(_ sender: UIButton) {
+        changeTheSignOperandLabel()
     }
     
     @IBAction private func appendOperand(_ sender: UIButton) {
@@ -179,6 +176,10 @@ class CalculateViewController: UIViewController {
     
     private func setCalculatorDefaultOperlandLabel() {
         operandLabel.text = CalculatorDefaultValue.operandLabel
+    }
+    
+    private func changeTheSignOperandLabel() {
+        operandLabel.text = calcultorInternalAction.changeTheSign(operandLabel.text)
     }
     
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
