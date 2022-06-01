@@ -40,7 +40,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let ButtonTitle = sender.currentTitle!
         
-        if !operatorStorage.isEmpty {
+        if operatorStorage.isEmpty == false {
             operatorChoice += operatorStorage.removeLast()
             inputValue += presentNumbers
             inputValue += " \(operatorChoice) "
@@ -69,11 +69,12 @@ class CalculatorViewController: UIViewController {
         
         if ["+", "−", "÷", "×"].contains(ButtonTitle) {
             operatorStorage.append(" \(ButtonTitle) ")
-                        
             makeStackLabel()
             numberLabel.text = "0"
             
-        } else if ["="].contains(ButtonTitle) {
+        }
+        
+        if ["="].contains(ButtonTitle) {
             didTapAnswerButton()
             
         }
@@ -85,12 +86,16 @@ class CalculatorViewController: UIViewController {
         if ["AC"].contains(ButtonTitle) {
             didTapACButton()
             
-        } else if ["CE"].contains(ButtonTitle) {
+        }
+        
+        if ["CE"].contains(ButtonTitle) {
             didTapCEButton()
             
-        } else if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
+        }
+        
+        if ["⁺⁄₋"].contains(ButtonTitle) && presentNumbers != "0" {
             didTapSignButton()
-            
+    
         }
     }
     
@@ -100,9 +105,9 @@ class CalculatorViewController: UIViewController {
         let stackOperatorLabel = UILabel()
         
         let bottomOffset = CGPoint(x: 0,
-                                   y: previousValues.contentSize.height
-                                   - previousValues.bounds.height
-                                   + numberLabel.font.lineHeight)
+                                   y: previousValues.contentSize.height -
+                                   previousValues.bounds.height +
+                                   numberLabel.font.lineHeight)
         previousValues.setContentOffset(bottomOffset, animated: false)
         
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
