@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorInternalAction {
-    private var isOperandInputted = false
-    var isCalculateCompleted = false
+    private (set) var isOperandInputted = false
+    private (set) var isCalculateCompleted = false
     private var inputtedFomula = CalculatorDefaultValue.fomula
     
     mutating func setDefaultValue() {
@@ -19,14 +19,21 @@ struct CalculatorInternalAction {
     }
     
     func changeTheSign(_ text: String?) -> String {
-        guard let operandText = text, Double(operandText) != 0.0 else { return CalculatorDefaultValue.operandLabel }
-        guard let operand = Double(filterSign(operandText, ",")) else { return CalculatorDefaultValue.operandLabel }
+        guard let operandText = text, Double(operandText) != 0.0 else {
+            return CalculatorDefaultValue.operandLabel
+        }
+        guard let operand = Double(filterSign(operandText, ",")) else {
+            return CalculatorDefaultValue.operandLabel
+        }
         
         return String((operand * -1).parse())
     }
     
     mutating func appendOperand(_ currentOperland: String?, _ title: String?) -> String {
-        guard let tabNumber = title else { return CalculatorDefaultValue.operandLabel }
+        guard let tabNumber = title else {
+            return CalculatorDefaultValue.operandLabel
+        }
+        
         var result = ""
         
         if !isOperandInputted {
@@ -34,13 +41,25 @@ struct CalculatorInternalAction {
         } else {
             result = checkOperand(getText(currentOperland), with: tabNumber)
         }
+        
         isOperandInputted = true
         
         return result
     }
     
+    mutating func appendFormula(_ currentOperand: String?, _ currentOperator: String?) -> (currentOperand: String, currentOperator: String) {
+        guard let `operator` = currentOperator else {
+            return (getText(currentOperand), CalculatorDefaultValue.operatorLabel)
+        }
+        
+        addInputtedFomula(currentOperand, currentOperator)
+        isOperandInputted = false
+        
+        return (getText(currentOperand), `operator`)
+    }
+    
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
-        return input.filter{$0 != sign}
+        return input.filter { $0 != sign }
     }
     
     private func getText(_ optionalText: String?) -> String {
@@ -63,5 +82,14 @@ struct CalculatorInternalAction {
         let result = filterSign(input, ",")
         
         return (Double(result) ?? 0).parse()
+    }
+    
+    private mutating func addInputtedFomula(_ currentOperand: String?, _ currentOperator: String?) {
+        guard inputtedFomula.isEmpty else {
+            inputtedFomula += " \(getText(currentOperator)) \(filterSign(getText(currentOperand), ","))"
+            return
+        }
+        
+        inputtedFomula = "\(filterSign(getText(currentOperand), ","))"
     }
 }

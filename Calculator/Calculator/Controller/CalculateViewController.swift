@@ -40,31 +40,8 @@ class CalculateViewController: UIViewController {
         setOperandLabel(with: sender.currentTitle)
     }
     
-    @IBAction private func appendOperator(_ sender: UIButton) {
-        guard !isCalculateCompleted else { return }
-        guard let sederTitle = sender.currentTitle else { return }
-        guard isOperandInputted else {
-            operatorLabel.text = sender.currentTitle
-            return
-        }
-        guard Double(filterSign(getText(operandLabel), ",")) != nil else {
-            operandLabel.text = CalculatorDefaultValue.error
-            isOperandInputted = false
-            return
-        }
-        
-        operatorLabel.text = sederTitle
-        
-        if fomulaStackView.subviews.isEmpty {
-            createStackView(changeFormat(getText(operandLabel)))
-        } else {
-            createStackView(sederTitle, changeFormat(getText(operandLabel)))
-        }
-        
-        addInputtedFomula()
-        downScroll()
-        operandLabel.text = CalculatorDefaultValue.operandLabel
-        isOperandInputted = false
+    @IBAction private func tabOperatorButton(_ sender: UIButton) {
+        setOperatorLabel(with: sender.currentTitle)
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
@@ -179,6 +156,28 @@ class CalculateViewController: UIViewController {
     }
     
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
-        return input.filter{$0 != sign}
+        return input.filter { $0 != sign }
+    }
+    
+    private func setOperatorLabel(with currentTitle: String?) {
+        guard !calcultorInternalAction.isCalculateCompleted else {
+            return
+        }
+        guard calcultorInternalAction.isOperandInputted else {
+            operatorLabel.text = currentTitle
+            return
+        }
+        
+        let formula = calcultorInternalAction.appendFormula(operandLabel.text, currentTitle)
+        operatorLabel.text = formula.currentOperator
+        
+        if fomulaStackView.subviews.isEmpty {
+            createStackView(formula.currentOperand)
+        } else {
+            createStackView(formula.currentOperator, formula.currentOperand)
+        }
+        
+        downScroll()
+        operandLabel.text = CalculatorDefaultValue.operandLabel
     }
 }
