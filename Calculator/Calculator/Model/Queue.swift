@@ -10,6 +10,4 @@ protocol Queue {
 
     mutating func enQueue(_ T: T)
     mutating func deQueue() throws -> T
-    mutating func clearAllStacks()
 }
-

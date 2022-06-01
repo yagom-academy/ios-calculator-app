@@ -8,7 +8,6 @@
 import Foundation
 
 enum QueueError: LocalizedError {
-    case empty
     case unknown
     case wrongOperators
     case wrongOperands
@@ -17,9 +16,6 @@ enum QueueError: LocalizedError {
 extension QueueError {
     var errorDescription: String {
         switch self {
-        case .empty:
-            return NSLocalizedString("empty",
-                                     comment: "deQueue stack is empty")
         case .unknown:
             return NSLocalizedString("0",
                                      comment: "unknown error")

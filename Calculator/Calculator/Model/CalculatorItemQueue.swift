@@ -1,6 +1,7 @@
 //
 //  CalculatorItemQueue.swift
 //  Calculator
+//  Created by hugh,bard on 2022/05/30.
 //
 
 struct CalculatorItemQueue<T>: Queue, CalculateItem {
@@ -16,15 +17,11 @@ struct CalculatorItemQueue<T>: Queue, CalculateItem {
             deQueueStack = enQueueStack.reversed()
             enQueueStack.removeAll()
         }
+        
         guard let deQueue = deQueueStack.popLast() else {
             throw QueueError.unknown
         }
         
         return deQueue
-    }
-    
-    public mutating func clearAllStacks() {
-        enQueueStack = []
-        deQueueStack = []
     }
 }
