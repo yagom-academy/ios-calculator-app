@@ -3,6 +3,7 @@
 //  Calculator
 //
 //  Created by bard, hugh on 2022/05/30.
+//
 
 struct Formula {
     var operands = CalculatorItemQueue<Double>()

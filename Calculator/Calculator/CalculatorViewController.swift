@@ -190,7 +190,6 @@ class CalculateViewController: UIViewController {
     //MARK: - zeroButtonTapped
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
-        // IBOutlet을 꺼내서 써야 하나?
         if isCalculated == true {
             operatorTextLabel.text = ""
             operandsTextLabel.text = senderLabelText
