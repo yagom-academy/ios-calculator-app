@@ -1,6 +1,6 @@
 //
 //  Calculator - CalculatorViewController.swift
-//  Created by bonf. 
+//  Created by 본프, 수꿍. 
 //  Copyright © yagom. All rights reserved.
 // 
 import UIKit
@@ -8,231 +8,434 @@ import Foundation
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet private weak var historyScrollView: UIScrollView!
-    
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var expressionStackView: UIStackView!
-    
-    @IBOutlet private var defaultStackViews: [UIStackView]!
-    
-    @IBOutlet private var valueLabels: [UILabel]!
-    
-    private var createdStackViews: [UIStackView]!
-    
-    private var numberOfCalculation = 1
+    @IBOutlet weak var operatorInput: UILabel!
+    @IBOutlet weak var numberInput: UILabel!
     
     private var totalCalculation: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLabelText("0")
-        defaultStackViews.forEach { view in
-            view.removeFromSuperview()
-        }
+        clearStackView()
+        resetNumberInput()
+        resetOperatorInput()
+        resetTotalInput()
     }
     
     @IBAction private func numberButtonDidTapped(_ sender: UIButton) {
-        guard let number = sender.currentTitle,
-              var inputedNumberLabel = valueLabels[1].text else {
-            return
-        }
-        
-        guard checkInvalidValue(inputedNumberLabel) else {
-            inputedNumberLabel += number
-            valueLabels[1].text = inputedNumberLabel
-            return
-        }
-        
-        guard number == "0" || number == "00" else {
-            valueLabels[1].text = number
-            return
-        }
+        updateNumberInput(sender)
     }
     
-    @IBAction private func dotButtonDidTapped(_ sender: UIButton) {
-        guard var inputedNumberLabel = valueLabels[1].text else { return }
-        
-        if hasDot(inputedNumberLabel) {
-            inputedNumberLabel += "."
-            valueLabels[1].text = inputedNumberLabel
+    private func updateNumberInput(_ sender: UIButton) {
+        guard let number = checkNumber(sender) else {
+            return
         }
+        
+        guard let formattedNumber = formatNumber(number) else {
+            return
+        }
+        
+        setNumber(formattedNumber)
+    }
+    
+    private func checkNumber(_ sender: UIButton) -> String? {
+        guard let firstConditionPassedText = isAdditionalNumberInput(sender) else {
+            return nil
+        }
+        
+        guard let secondConditionPassedText = isUsingComma(sender, firstConditionPassedText) else {
+            return nil
+        }
+        
+        return secondConditionPassedText
+    }
+    
+    private func isAdditionalNumberInput(_ sender: UIButton) -> String? {
+        guard let text = numberInput.text else {
+            return nil
+        }
+        
+        guard isAdditionalNumberInputAfterResultHasBeenShown(sender) else {
+            return nil
+        }
+        return text
+    }
+    
+    private func isAdditionalNumberInputAfterResultHasBeenShown(_ sender: UIButton) -> Bool {
+        guard expressionStackView.arrangedSubviews.count > 0 && operatorInput.text == "" else {
+            return true
+        }
+        
+        clearStackView()
+        numberInput.text = sender.currentTitle
+        return false
+    }
+    
+    private func isUsingComma(_ sender: UIButton, _ text: String) -> String? {
+        guard isCommaButtonTappedTwice(sender: sender, number: text) else {
+            return nil
+        }
+        
+        guard let newText = addNewNumber(sender, text) else {
+            return nil
+        }
+        
+        guard newText.contains(".") == false else {
+            return nil
+        }
+        
+        return newText
+    }
+    
+    private func isCommaButtonTappedTwice(sender: UIButton, number: String) -> Bool {
+        guard sender.currentTitle == "." && number.filter({ $0 == "." }).count >= 1 else {
+            return true
+        }
+        
+        return false
+    }
+    
+    private func addNewNumber(_ sender: UIButton, _ number: String) -> String? {
+        guard let currentDigit: String = sender.currentTitle else {
+            return nil
+        }
+        
+        let newNumber: String
+        newNumber = number + currentDigit
+        numberInput.text = newNumber
+        
+        return numberInput.text
+    }
+    
+    private func formatNumber(_ number: String) -> String? {
+        guard let formattedNumber = formatNumberForBeingRecognizedAsNumber(number) else {
+            return nil
+        }
+        
+        guard let reFormattedNumber = formatNumberForExposure(formattedNumber) else {
+            return nil
+        }
+        
+        return reFormattedNumber
+    }
+    
+    private func formatNumberForBeingRecognizedAsNumber(_ number: String) -> Double? {
+        let onceTrimmmedInput = removeComma(number)
+        
+        guard let twiceTrimmedInput = convertStringToDouble(onceTrimmmedInput) else {
+            return nil
+        }
+        
+        return twiceTrimmedInput
+    }
+    
+    private func removeComma(_ input: String) -> String {
+        let trimmedInput = input.replacingOccurrences(of: ",", with: "")
+        
+        return trimmedInput
+    }
+    
+    private func convertStringToDouble(_ input: String) -> Double? {
+        guard let trimmedInput = Double(input) else {
+            return nil
+        }
+        
+        return trimmedInput
+    }
+    
+    private func setNumber(_ number : String) {
+        numberInput.text = number
+    }
+    
+    private func formatNumberForExposure(_ number: Double) -> String? {
+        let numberFormatter = setNumberFormatter()
+        
+        guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
+            return nil
+        }
+        
+        return formattedNumber
+    }
+    
+    private func setNumberFormatter() -> NumberFormatter {
+        let numberFormatter = NumberFormatter()
+            
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumIntegerDigits = 1
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
+        
+        return numberFormatter
     }
     
     @IBAction private func operatorButtonDidTapped(_ sender: UIButton) {
-        guard valueLabels[1].text != "NAN" else { return }
-        guard let formattableValue = valueLabels[1].text else { return }
-        let numericalValue = formattableValue.filter { $0 != ","}
-        
-        guard numericalValue != "0" else {
-            if numberOfCalculation == 1 {
-                return
-            }
-            valueLabels[0].text = sender.currentTitle
-            return
-        }
-        
-        removeZeroHasDot(numericalValue)
-        
-        addStackView()
-        inputToCalculation(numericalValue)
-        valueLabels[0].text = sender.currentTitle
-        valueLabels[1].text = "0"
-        numberOfCalculation += 1
+        updateOperatorInput(sender)
+        resetNumberInput()
         holdScrollDown()
     }
     
-    @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
-        guard valueLabels[1].text != "NAN" else { return }
-        guard valueLabels[0].text != "" else { return }
+    private func updateOperatorInput(_ sender: UIButton) {
+        guard checkOperator(sender) == true else {
+            return
+        }
         
-        inputToCalculation(valueLabels[1].text!)
+        addCalculatorItems()
+        setOperator(sender)
+    }
+    
+    private func checkOperator(_ sender: UIButton) -> Bool {
+        guard isNumberEqualToNaN() else {
+            return false
+        }
+        
+        guard operatorButtonDidTappedWhileFirstOperandIsZero(sender) else {
+            return false
+        }
+        
+        if isAdditionalOperatorAfterResultHasBeenShown() {
+            return true
+        }
+        
+        guard isCurrentNumberEqualToZero(sender) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func isNumberEqualToNaN() -> Bool {
+        guard let number = numberInput.text else {
+            return false
+        }
+
+        guard number.contains(CalculatorError.dividedByZero.localizedDescription) != true else {
+            clearStackView()
+            return false
+        }
+
+        return true
+    }
+    
+    private func operatorButtonDidTappedWhileFirstOperandIsZero(_ sender: UIButton) -> Bool {
+        guard numberInput.text != "0" || expressionStackView.arrangedSubviews.count > 0 else {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func isAdditionalOperatorAfterResultHasBeenShown() -> Bool {
+        if operatorInput.text == "" && expressionStackView.arrangedSubviews.count > 0 {
+            clearStackView()
+            return true
+        }
+        
+        return false
+    }
+    
+    private func isCurrentNumberEqualToZero(_ sender: UIButton) -> Bool {
+        guard let text = numberInput.text else {
+            return false
+        }
+        
+        guard Double(text) != 0.0 || expressionStackView.arrangedSubviews.count <= 0 else {
+            operatorInput.text = sender.currentTitle
+            return false
+        }
+        
+        return true
+    }
+    
+    private func addCalculatorItems() {
+        guard let newCalculationItemsInput = makeUIStackView() else {
+            return
+        }
+        
+        addStackView(newCalculationItemsInput)
+    }
+    
+    private func makeUIStackView() -> UIStackView? {
+        guard let operandLabel = makeUILabel(), let operatorLabel = makeUILabel() else {
+            return nil
+        }
+        
+        updateTotalInput(operands: operandLabel, operators: operatorLabel)
+        
+        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        stackView.spacing = 10
+        
+        return stackView
+    }
+    
+    private func makeUILabel() -> UILabel? {
+        let label = UILabel()
+        
+        setLabelProperty(label)
+        
+        return label
+    }
+    
+    private func setLabelProperty(_ label: UILabel) {
+        label.isHidden = false
+        label.numberOfLines = 1
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
+    }
+    
+    private func updateTotalInput(operands: UILabel, operators: UILabel) {
+        guard let operandLabel = numberInput.text, let operatorLabel = operatorInput.text else {
+            return
+        }
+        
+        operands.text = numberInput.text
+        operators.text = operatorInput.text
+        
+        let firstTrimmedOperand = removeWhitespaces(operandLabel)
+        let secondTrimmedOperand = removeComma(firstTrimmedOperand)
+        let firstTrimmedOperator = removeWhitespaces(operatorLabel)
+        let secondTrimmedOperator = removeComma(firstTrimmedOperator)
+        
+        totalCalculation += secondTrimmedOperator + secondTrimmedOperand
+    }
+    
+    private func removeWhitespaces(_ input: String) -> String {
+        let trimmedInput = input.replacingOccurrences(of: " ", with: "")
+        
+        return trimmedInput
+    }
+    
+    private func addStackView(_ stackView: UIStackView) {
+        expressionStackView.addArrangedSubview(stackView)
+    }
+    
+    private func setOperator(_ sender: UIButton) {
+        operatorInput.text = sender.currentTitle
+    }
+    
+    private func resetNumberInput() {
+        numberInput.text = "0"
+    }
+    
+    private func holdScrollDown() {
+        scrollView.layoutIfNeeded()
+        
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height -
+                                   scrollView.bounds.size.height)
+        
+        scrollView.setContentOffset(bottomOffset, animated: true)
+    }
+    
+    @IBAction private func resultButtonDidTapped(_ sender: UIButton) {
+        updateResult()
+        resetOperatorInput()
+        holdScrollDown()
+    }
+    
+    private func updateResult() {
+        guard addLastCalculationItems() else {
+            return
+        }
+        
+        calculate()
+        resetTotalInput()
+    }
+    
+    private func addLastCalculationItems() -> Bool {
+        guard operatorInput.text != "" else {
+            return false
+        }
+        
+        addCalculatorItems()
+        return true
+    }
+    
+    private func calculate() {
+        var formula = ExpressionParser.parse(from: totalCalculation)
         
         do {
-            addStackView()
-            let result = try ExpressionParser.parse(from: totalCalculation).result()
-            changeFormat("\(result)")
-            totalCalculation = ""
-            holdScrollDown()
-        } catch DevideError.nilOfValue {
-            clearStackView()
-            setLabelText("0")
-        } catch DevideError.insufficientOperator {
-            clearStackView()
-            setLabelText("0")
-        } catch DevideError.devideZero {
-            clearStackView()
-            setLabelText("NAN")
-        } catch {
-            print(Error.self)
+            let calculationResult = try formula.result()
+            guard let result = formatNumberForExposure(calculationResult) else {
+                return
+            }
+            setNumber(result)
+        } catch (let calculationError) {
+            handleError(calculationError)
+        }
+    }
+    
+    private func resetTotalInput() {
+        totalCalculation = ""
+    }
+    
+    private func resetOperatorInput() {
+        operatorInput.text = ""
+    }
+    
+    private func handleError(_ error: Error) {
+        switch error {
+        case CalculatorError.dividedByZero:
+            numberInput.text = CalculatorError.dividedByZero.localizedDescription
+        case CalculatorError.notEnoughOperands:
+            numberInput.text = CalculatorError.notEnoughOperands.localizedDescription
+        case CalculatorError.notEnoughOperators:
+            numberInput.text = CalculatorError.notEnoughOperators.localizedDescription
+        case CalculatorError.emptyQueues:
+            numberInput.text = CalculatorError.emptyQueues.localizedDescription
+        case CalculatorError.invalidOperator:
+            numberInput.text = CalculatorError.invalidOperator.localizedDescription
+        case CalculatorError.notEnoughOperatorsAndOperands:
+            numberInput.text = CalculatorError.notEnoughOperatorsAndOperands.localizedDescription
+        default:
+            numberInput.text = "unknown error"
         }
     }
     
     @IBAction private func changeValueButtonDidTapped(_ sender: UIButton) {
-        let changeValue = sender.currentTitle
-        if changeValue == "AC" {
-            clearStackView()
-            setLabelText("0")
-        } else if changeValue == "CE" {
-            valueLabels[1].text = "0"
-        } else {
-            guard let value = valueLabels[1].text else { return }
-            checkNegativeNumber(value)
-        }
-    }
-    
-    private func setLabelText(_ text: String) {
-        valueLabels[0].text = ""
-        valueLabels[1].text = text
-        totalCalculation = ""
-        numberOfCalculation = 1
-        createdStackViews = []
-    }
-    
-    private func checkInvalidValue(_ text: String) -> Bool {
-        if text == "0" || text == "NAN" || text == "-0" {
-            return true
-        }
-        return false
-    }
-    
-    private func hasDot(_ value: String) -> Bool {
-        if value.contains(".") {
-            return false
-        } else {
-            return true
-        }
-    }
-    
-    private func removeZeroHasDot(_ text: String) {
-        var numericalValue = text
-        if !hasDot(numericalValue) {
-            while numericalValue.last == "0" {
-                numericalValue.removeLast()
-            }
-            if numericalValue.last == "."{
-                numericalValue.removeLast()
-            }
-            valueLabels[1].text = numericalValue
-        }
-    }
-    
-    private func inputToCalculation(_ text: String) {
-        if numberOfCalculation > 1 {
-            totalCalculation += " \(valueLabels[0].text!) \(text)"
-        } else {
-            totalCalculation += "\(text)"
-        }
-    }
-    
-    private func checkNegativeNumber(_ text: String) {
-        guard text != "0" else { return }
-        guard text != "NAN" else { return }
-        guard text.first == "-" else {
-            valueLabels[1].text = "-\(text)"
+        guard let changeValue = sender.currentTitle else {
             return
         }
-        valueLabels[1].text = text.filter { $0 != "-" }
-        return
+        let constant = Constant(rawValue: changeValue)
+        
+        switch constant {
+        case .ac:
+            clearStackView()
+            resetNumberInput()
+            resetOperatorInput()
+            resetTotalInput()
+        case .ce:
+            resetNumberInput()
+            totalCalculation == "" ? clearStackView() : ()
+        case .signChange:
+            guard let value = numberInput.text else { return }
+            guard checkNegativeNumber(value) else {
+                return
+            }
+            changeSign(text: value)
+        default:
+            return
+        }
     }
 
-    private func removeZeroOfDouble(_ text: String) -> String {
-        var value = text
-        while value.last == "0" {
-            value.removeLast()
+    private func checkNegativeNumber(_ text: String) -> Bool {
+        guard text != Constant.zero.rawValue else { return false }
+        guard text != CalculatorError.dividedByZero.localizedDescription else { return false }
+        guard Double(text) != 0.0 else { return false }
+        guard text.first == "-" else {
+            numberInput.text = "-\(text)"
+            return false
         }
-        if value.last == "."{
-            value.removeLast()
-        }
-        return value
+        
+        return true
     }
     
-    private func holdScrollDown() {
-        let bottomOffset = CGPoint(x: 0, y: historyScrollView.contentSize.height -
-                                   historyScrollView.bounds.size.height)
-        historyScrollView.setContentOffset(bottomOffset, animated: true)
-        historyScrollView.layoutSubviews()
-    }
-    
-    private func changeFormat(_ format: String) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.numberStyle = .decimal
-        let result = numberFormatter.string(for: Double(format))!
-        valueLabels[0].text = ""
-        valueLabels[1].text = "\(result)"
+    private func changeSign(text: String) {
+        numberInput.text = text.filter { $0 != "-" }
     }
     
     private func clearStackView() {
-        createdStackViews.forEach { stackView in
-            stackView.removeFromSuperview()
-        }
-    }
-
-    private func addStackView() {
-        let operatorLabel = createLabel()
-        operatorLabel.text = valueLabels[0].text
-        let operandLabel = createLabel()
-        operandLabel.text = valueLabels[1].text
-        let stack = createStackView([operatorLabel, operandLabel])
-        expressionStackView.addArrangedSubview(stack)
-        createdStackViews.append(stack)
-    }
-    
-    private func createLabel() -> UILabel {
-        let label = UILabel()
-        label.textAlignment = .right
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        return label
-    }
-    
-    private func createStackView(_ labels: [UILabel]) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.spacing = 8
-        stackView.addArrangedSubview(labels[0])
-        stackView.addArrangedSubview(labels[1])
-        return stackView
+        expressionStackView.subviews.forEach { $0.removeFromSuperview() }
     }
 }

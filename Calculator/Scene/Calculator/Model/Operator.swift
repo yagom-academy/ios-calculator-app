@@ -2,13 +2,13 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by 이은찬 on 2022/05/17.
+//  Created by 본프, 수꿍 on 2022/05/17.
 //
 enum Operator: Character, CalculateItem, CaseIterable {
     case add = "+"
     case subtract = "−"
     case multiply = "×"
-    case devide = "÷"
+    case divide = "÷"
     
     init?(rawValue: String) {
         guard Double(rawValue) == nil else {
@@ -25,8 +25,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
             return subtract(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
-        case .devide:
-            return try devide(lhs: lhs, rhs: rhs)
+        case .divide:
+            return try divide(lhs: lhs, rhs: rhs)
         }
     }
     
@@ -42,9 +42,9 @@ enum Operator: Character, CalculateItem, CaseIterable {
         return lhs * rhs
     }
     
-    private func devide(lhs: Double, rhs: Double) throws -> Double {
+    private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
-            throw DevideError.devideZero
+            throw CalculatorError.dividedByZero
         }
         return lhs / rhs
     }
