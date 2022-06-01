@@ -82,7 +82,11 @@ class CalculateViewController: UIViewController {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         guard let operandLabelText = operandsTextLabel.text else { return }
         let formattedNumber = operandLabelText.formatNumber()
-
+        
+        if expressionParserInput.isEmpty {
+            return
+        }
+        
         if operandsTextLabel.text == "NaN" {
             return
         } else if operandLabelText == "0" {
@@ -164,6 +168,7 @@ class CalculateViewController: UIViewController {
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         if isCalculated == true {
             operandsTextLabel.text = "0"
+            deleteStackViewAll()
             isCalculated = false
         }
         
@@ -267,4 +272,3 @@ class CalculateViewController: UIViewController {
         operandsTextLabel.text = "0"
     }
 }
-

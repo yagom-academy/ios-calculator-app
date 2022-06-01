@@ -21,7 +21,7 @@ extension QueueError {
             return NSLocalizedString("empty",
                                      comment: "deQueue stack is empty")
         case .unknown:
-            return NSLocalizedString("unknown error",
+            return NSLocalizedString("0",
                                      comment: "unknown error")
         case .wrongOperators:
             return NSLocalizedString("operators error",
