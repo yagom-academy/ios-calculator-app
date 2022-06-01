@@ -133,7 +133,7 @@ class CalculatorViewController: UIViewController {
     private func didTapAnswerButton() {
         inputValue += presentNumbers
 
-        if !presentNumbers.isEmpty && !inputValue.isEmpty {
+        if presentNumbers.isEmpty == false && inputValue.isEmpty == false {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
             
