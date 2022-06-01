@@ -16,13 +16,16 @@ class CalculateViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
+    var calcultorInternalAction = CalculatorInternalAction()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     //MARK: - Button Action
-    @IBAction private func setToDefault(_ sender: UIButton) {
-        resetCalculateOption()
+    @IBAction private func tabAcButton(_ sender: UIButton) {
+        setCalculatorDefaultView()
+        calcultorInternalAction.setDefaultValue()
     }
     
     @IBAction private func deleteCurrentInputed(_ sender: UIButton) {
@@ -168,13 +171,10 @@ class CalculateViewController: UIViewController {
         }
     }
     
-    private func resetCalculateOption() {
+    private func setCalculatorDefaultView() {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = CalculatorDefaultValue.operandLabel
         operatorLabel.text = CalculatorDefaultValue.operatorLabel
-        inputtedFomula = CalculatorDefaultValue.fomula
-        isOperandInputted = false
-        isCalculateCompleted = false
     }
     
     private func filterSign(_ input: String, _ sign: String.Element) -> String {

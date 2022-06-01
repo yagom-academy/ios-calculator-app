@@ -53,7 +53,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="setToDefault:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sUN-v5-j7F"/>
+                                                    <action selector="tabAcButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYi-yD-BnB"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
