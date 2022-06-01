@@ -154,6 +154,9 @@ private extension CalculatorViewController {
     }
     
     func inputOperator(_ value: String) {
+        if operandsLabel?.text == CalculatorState.zero.value || operandsLabel?.text == CalculatorState.nan.value {
+            return
+        }
         addStackView()
         savedValueScrollView?.focusBottom()
         

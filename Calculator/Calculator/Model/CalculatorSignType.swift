@@ -20,6 +20,7 @@ enum CalculatorState {
     case empty
     case zero
     case minus
+    case nan
     
     var value: String {
         switch self {
@@ -29,6 +30,8 @@ enum CalculatorState {
             return "0"
         case .minus:
             return "-"
+        case .nan:
+            return "NaN"
         }
     }
 }
