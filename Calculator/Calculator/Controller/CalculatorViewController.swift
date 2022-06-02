@@ -188,7 +188,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapSignButton() {
-        filterHyphen()
+        checkHyphen()
         numberLabel.text = "\(presentValue)"
     }
     
@@ -223,16 +223,20 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func filterHyphen() {
+    private func checkHyphen() {
         if presentValue.contains("-") {
-            presentValue = presentValue.filter { word in
-                if word == "-" {
-                    return false
-                }
-                return true
+            filterHypen()
+            return
+        }
+        presentValue = "-" + presentValue
+    }
+    
+    private func filterHypen() {
+        presentValue = presentValue.filter { (word: Character) in
+            if word == "-" {
+                return false
             }
-        } else {
-            presentValue = "-" + presentValue
+            return true
         }
     }
     
