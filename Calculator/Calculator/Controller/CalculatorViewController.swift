@@ -24,8 +24,8 @@ class CalculatorViewController: UIViewController {
     var presentValue = ""
     var presentOperator = ""
     var operatorStorage: [String] = []
-    var beforePresentNumberStore: [String] = []
-    var userIsInTheAfterTabEqualButton = false
+    var beforePresentValueStore: [String] = []
+    var userIsInTheAfterTabAnswerButton = false
     var userIsInTheMiddleOfTyping = false
     
     
@@ -44,11 +44,8 @@ class CalculatorViewController: UIViewController {
         if presentValue.contains(".") && buttonTitle == "." {
             return
         }
-        
         addOperator(to: buttonTitle)
-        
         isTabAnswerButton()
-        
         userIsInTheMiddleOfTyping = false
     }
     
@@ -76,9 +73,9 @@ class CalculatorViewController: UIViewController {
         
         switch buttonTitle {
         case "AC":
-            return didTapACButton()
+            return didTapAllClearButton()
         case "CE":
-            return didTapCEButton()
+            return didTapClearEntryButton()
         case "⁺⁄₋":
             guard presentValue != "0" else {
                 return
@@ -93,7 +90,6 @@ class CalculatorViewController: UIViewController {
         guard let numberLabelValue = numberLabel.text else {
             return
         }
-        
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
@@ -161,7 +157,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func isCheckAnswerButtonSendOtherResult(to previousValue: String) {
-        if userIsInTheAfterTabEqualButton {
+        if userIsInTheAfterTabAnswerButton {
             caculatorAfterResult(to: previousValue)
             return
         }
@@ -169,7 +165,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapAnswerButton() {
-        guard let previousValue = beforePresentNumberStore.last else {
+        guard let previousValue = beforePresentValueStore.last else {
             return
         }
         
@@ -177,7 +173,7 @@ class CalculatorViewController: UIViewController {
         presentValue = ""
     }
     
-    private func didTapACButton() {
+    private func didTapAllClearButton() {
         presentValue = ""
         presentOperator = ""
         inputValue = ""
@@ -190,7 +186,7 @@ class CalculatorViewController: UIViewController {
         userIsInTheMiddleOfTyping = false
     }
     
-    private func didTapCEButton() {
+    private func didTapClearEntryButton() {
         presentValue = ""
         numberLabel.text = "0"
     }
@@ -224,7 +220,7 @@ class CalculatorViewController: UIViewController {
         
         numberLabel.text = trimmedResult
         makeResultLabel()
-        userIsInTheAfterTabEqualButton = true
+        userIsInTheAfterTabAnswerButton = true
     }
     
     private func checkHyphen() {
@@ -261,11 +257,11 @@ class CalculatorViewController: UIViewController {
     }
     
     private func isTabAnswerButton() {
-        if userIsInTheAfterTabEqualButton {
-            userIsInTheAfterTabEqualButton = true
+        if userIsInTheAfterTabAnswerButton {
+            userIsInTheAfterTabAnswerButton = true
             return
         }
-        beforePresentNumberStore.append(presentValue)
+        beforePresentValueStore.append(presentValue)
     }
     
     private func addOperatorStorage(to buttonTitle: String) {
@@ -278,14 +274,12 @@ class CalculatorViewController: UIViewController {
             return
         }
         makeStackLabel()
-        
         presentOperator = buttonTitle
         operatorLabel.text = buttonTitle
-        
         operatorStorage.append(" \(buttonTitle) ")
         numberLabel.text = "0"
         userIsInTheMiddleOfTyping = true
-        userIsInTheAfterTabEqualButton = false
+        userIsInTheAfterTabAnswerButton = false
     }
 }
 
