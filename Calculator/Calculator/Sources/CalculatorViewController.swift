@@ -162,12 +162,12 @@ class CalculatorViewController: UIViewController {
             }
             currentString += NumberNamespace.zero
         case doubleZeroButton:
-            if currentString.isEmpty {
+            guard currentString.isNotEmpty() else {
                 return
             }
             currentString += NumberNamespace.doubleZero
         case dotButton:
-            if currentString.isEmpty || currentString.contains(NumberNamespace.dot) {
+            guard currentString.isNotEmpty(), currentString.notContains(NumberNamespace.dot) else {
                 return
             }
             currentString += NumberNamespace.dot

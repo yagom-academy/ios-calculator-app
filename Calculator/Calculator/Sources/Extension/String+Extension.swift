@@ -14,4 +14,18 @@ extension String: CalculateItem {
         let splited = replaced.split(separator: " ").map { String($0) }
         return splited
     }
+    func isNotEmpty() -> Bool {
+        if self.isEmpty {
+            return false
+        } else {
+            return true
+        }
+    }
+    func notContains(_ string: String) -> Bool {
+        if self.contains(string) {
+            return false
+        } else {
+            return true
+        }
+    }
 }
