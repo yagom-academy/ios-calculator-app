@@ -57,25 +57,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if userIsInTheMiddleOfTyping {
-            presentOperator = buttonTitle
-            operatorLabel.text = buttonTitle
-            
-            operatorStorage.append(" \(buttonTitle) ")
-            numberLabel.text = "0"
-        }
-        
-        if userIsInTheMiddleOfTyping == false {
-            makeStackLabel()
-            
-            presentOperator = buttonTitle
-            operatorLabel.text = buttonTitle
-            
-            operatorStorage.append(" \(buttonTitle) ")
-            numberLabel.text = "0"
-            userIsInTheMiddleOfTyping = true
-            userIsInTheAfterTabEqualButton = false
-        }
+        addOperatorStorage(buttonTitle)
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -277,6 +259,26 @@ class CalculatorViewController: UIViewController {
             return
         }
         beforePresentNumberStore.append(presentValue)
+    }
+    
+    private func addOperatorStorage(_ buttonTitle: String) {
+        if userIsInTheMiddleOfTyping {
+            presentOperator = buttonTitle
+            operatorLabel.text = buttonTitle
+            
+            operatorStorage.append(" \(buttonTitle) ")
+            numberLabel.text = "0"
+            return
+        }
+        makeStackLabel()
+        
+        presentOperator = buttonTitle
+        operatorLabel.text = buttonTitle
+        
+        operatorStorage.append(" \(buttonTitle) ")
+        numberLabel.text = "0"
+        userIsInTheMiddleOfTyping = true
+        userIsInTheAfterTabEqualButton = false
     }
 }
 
