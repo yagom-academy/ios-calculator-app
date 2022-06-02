@@ -32,7 +32,7 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        settingLabls()
+        defaultLabels()
         settingNumberFormaatter()
     }
     
@@ -174,7 +174,7 @@ class CalculatorViewController: UIViewController {
         valuesStackView.addArrangedSubview(stackView)
     }
     
-    private func settingLabls() {
+    private func defaultLabels() {
         numberLabel.text = "0"
         operatorLabel.text = ""
         firstNumberLable.removeFromSuperview()
