@@ -20,8 +20,8 @@ class Test_ExpressionParser: XCTestCase {
     
     func test_componentsByOperators_실행했을때_₩Split이되는지() {
         // ginven
-        let input: String = "1 + 2 - 3 * 4 / 5"
-        let output: [String] = ["1", "+", "2", "-", "3", "*", "4", "/", "5"]
+        let input: String = "1123 + 2 - 3 * 4 / 5"
+        let output: [String] = ["1123", "+", "2", "-", "3", "*", "4", "/", "5"]
         
         // when
         let result = ExpressionParser.componentsByOperators(from: input)
@@ -32,8 +32,8 @@ class Test_ExpressionParser: XCTestCase {
 
     func test_parse_result_실행했을때_result_반환되는지() {
         // ginven
-        let input: String = "2 - 1 + 1"
-        let output = 2.0
+        let input: String = "211 - 1 + 1"
+        let output = 211.0
         
         // when
         var result = ExpressionParser.parse(from: input)

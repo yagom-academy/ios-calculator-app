@@ -8,7 +8,6 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-
     var linkedList = LinkedList<T>()
     
     mutating func enqueue(_ element: T) {
@@ -19,12 +18,5 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return linkedList.pop()
     }
     
-    mutating func clear() {
-        linkedList.removeAll()
-    }
-    
-    mutating func peek() -> T? {
-        return linkedList.peek()
-    }
 }
 

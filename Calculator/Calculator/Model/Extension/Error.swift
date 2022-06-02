@@ -8,5 +8,18 @@
 enum ErrorCase: Error {
     case operandsDequeue
     case operatorDequeue
-    case listDequeue
+    case divideByZero
+}
+
+extension ErrorCase {
+    var errorDescription: String {
+        switch self {
+        case .operandsDequeue:
+            return "operandsDequeue"
+        case .operatorDequeue:
+            return "operatorDequeue"
+        case .divideByZero:
+            return "NaN"
+        }
+    }
 }

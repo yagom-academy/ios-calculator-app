@@ -7,7 +7,7 @@
 
 struct LinkedList<T> {
     var head: Node<T>?
-    
+        
     mutating func append(data: T?) {
         if head == nil {
             head = Node(data: data)
@@ -32,21 +32,4 @@ struct LinkedList<T> {
         return item
     }
     
-    mutating func peek() -> T? {
-        return head?.data
-    }
-    
-    mutating func printAll() -> [Any] {
-        var elements: [Any] = []
-        
-        while head != nil {
-            elements.append(head?.data as Any)
-            head = head?.next
-        }
-        return elements
-    }
-    
-    mutating func removeAll() {
-        head = nil
-    }
 }
