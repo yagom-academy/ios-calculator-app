@@ -10,6 +10,10 @@
 		7232699E2847953F00788CE5 /* MagicLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7232699D2847953F00788CE5 /* MagicLiteral.swift */; };
 		72A92A6C2844D47000B9EA11 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A92A6B2844D47000B9EA11 /* Formula.swift */; };
 		72A92A6E2844D54B00B9EA11 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A92A6D2844D54B00B9EA11 /* ExpressionParser.swift */; };
+		72D056C22848B18B0089473A /* CalculatorItemQueueTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D056C12848B18B0089473A /* CalculatorItemQueueTest.swift */; };
+		72D056C42848B3190089473A /* ComponentsByOperatorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D056C32848B3190089473A /* ComponentsByOperatorsTest.swift */; };
+		72D056C62848B3710089473A /* SplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D056C52848B3710089473A /* SplitTest.swift */; };
+		72D056C82848B3BC0089473A /* ParseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D056C72848B3BC0089473A /* ParseTest.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
@@ -41,6 +45,10 @@
 		7232699D2847953F00788CE5 /* MagicLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLiteral.swift; sourceTree = "<group>"; };
 		72A92A6B2844D47000B9EA11 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		72A92A6D2844D54B00B9EA11 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		72D056C12848B18B0089473A /* CalculatorItemQueueTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTest.swift; sourceTree = "<group>"; };
+		72D056C32848B3190089473A /* ComponentsByOperatorsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsByOperatorsTest.swift; sourceTree = "<group>"; };
+		72D056C52848B3710089473A /* SplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTest.swift; sourceTree = "<group>"; };
+		72D056C72848B3BC0089473A /* ParseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseTest.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +61,7 @@
 		D73FE66F2844BBDF009EE808 /* OperatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorError.swift; sourceTree = "<group>"; };
 		D73FE6782844D65C009EE808 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		D73FE67A2844D681009EE808 /* Double+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extension.swift"; sourceTree = "<group>"; };
-		D73FE6802844DA8F009EE808 /* FormularTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormularTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D73FE6802844DA8F009EE808 /* CalculatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D73FE6822844DA8F009EE808 /* FormularTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularTest.swift; sourceTree = "<group>"; };
 		D7E681B72844B88100B61E3C /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		D7E681B92844B89300B61E3C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -83,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9402570E5EB001C3AFC /* Calculator */,
-				D73FE6812844DA8F009EE808 /* FormularTest */,
+				D73FE6812844DA8F009EE808 /* CalculatorTest */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D93E2570E5EB001C3AFC /* Calculator.app */,
-				D73FE6802844DA8F009EE808 /* FormularTest.xctest */,
+				D73FE6802844DA8F009EE808 /* CalculatorTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,12 +186,16 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
-		D73FE6812844DA8F009EE808 /* FormularTest */ = {
+		D73FE6812844DA8F009EE808 /* CalculatorTest */ = {
 			isa = PBXGroup;
 			children = (
+				72D056C72848B3BC0089473A /* ParseTest.swift */,
+				72D056C52848B3710089473A /* SplitTest.swift */,
+				72D056C32848B3190089473A /* ComponentsByOperatorsTest.swift */,
+				72D056C12848B18B0089473A /* CalculatorItemQueueTest.swift */,
 				D73FE6822844DA8F009EE808 /* FormularTest.swift */,
 			);
-			path = FormularTest;
+			path = CalculatorTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,9 +218,9 @@
 			productReference = C713D93E2570E5EB001C3AFC /* Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D73FE67F2844DA8F009EE808 /* FormularTest */ = {
+		D73FE67F2844DA8F009EE808 /* CalculatorTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D73FE6862844DA8F009EE808 /* Build configuration list for PBXNativeTarget "FormularTest" */;
+			buildConfigurationList = D73FE6862844DA8F009EE808 /* Build configuration list for PBXNativeTarget "CalculatorTest" */;
 			buildPhases = (
 				D73FE67C2844DA8F009EE808 /* Sources */,
 				D73FE67D2844DA8F009EE808 /* Frameworks */,
@@ -219,9 +231,9 @@
 			dependencies = (
 				D73FE6852844DA8F009EE808 /* PBXTargetDependency */,
 			);
-			name = FormularTest;
+			name = CalculatorTest;
 			productName = FormularTest;
-			productReference = D73FE6802844DA8F009EE808 /* FormularTest.xctest */;
+			productReference = D73FE6802844DA8F009EE808 /* CalculatorTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -256,7 +268,7 @@
 			projectRoot = "";
 			targets = (
 				C713D93D2570E5EB001C3AFC /* Calculator */,
-				D73FE67F2844DA8F009EE808 /* FormularTest */,
+				D73FE67F2844DA8F009EE808 /* CalculatorTest */,
 			);
 		};
 /* End PBXProject section */
@@ -307,6 +319,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D056C82848B3BC0089473A /* ParseTest.swift in Sources */,
+				72D056C42848B3190089473A /* ComponentsByOperatorsTest.swift in Sources */,
+				72D056C22848B18B0089473A /* CalculatorItemQueueTest.swift in Sources */,
+				72D056C62848B3710089473A /* SplitTest.swift in Sources */,
 				D73FE6832844DA8F009EE808 /* FormularTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,7 +578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D73FE6862844DA8F009EE808 /* Build configuration list for PBXNativeTarget "FormularTest" */ = {
+		D73FE6862844DA8F009EE808 /* Build configuration list for PBXNativeTarget "CalculatorTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D73FE6872844DA8F009EE808 /* Debug */,
