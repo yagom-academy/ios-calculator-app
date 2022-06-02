@@ -75,7 +75,7 @@ class CalculatorViewController: UIViewController {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func senderToSign(sender: UIButton) -> String {
+    private func mapSign(sender: UIButton) -> String {
         var sign: String = ""
         switch sender {
         case plusButton:
@@ -105,11 +105,11 @@ class CalculatorViewController: UIViewController {
             }
             addNewLabel(message: value, stackView: stackView)
             makeValueLabelTextToZero()
-            signLabel.text = senderToSign(sender: sender)
+            signLabel.text = mapSign(sender: sender)
             makeCurrentStringToEmpty()
         } else {
             if valueLabel.text == "0" {
-                signLabel.text = senderToSign(sender: sender)
+                signLabel.text = mapSign(sender: sender)
             } else {
                 guard let retrievedSign = signLabel.text else { return }
                 guard let retrievedValue = valueLabel.text else { return }
@@ -123,7 +123,7 @@ class CalculatorViewController: UIViewController {
 
                 addNewLabel(message: retrievedSign + retrievedValue, stackView: stackView)
                 makeValueLabelTextToZero()
-                signLabel.text = senderToSign(sender: sender)
+                signLabel.text = mapSign(sender: sender)
                 makeCurrentStringToEmpty()
             }
         }
