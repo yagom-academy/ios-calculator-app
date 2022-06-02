@@ -60,7 +60,7 @@ class CalculateViewController: UIViewController {
             operandsTextLabel.text?.removeAll()
             return
         } else if operandsTextLabel.text == MagicLiteral.zero {
-            operandsTextLabel.text = MagicLiteral.empty
+            operandsTextLabel.text?.removeAll()
             operandsTextLabel.text?.append(formattedText)
             expressionParserInput.append(formattedText)
             return
