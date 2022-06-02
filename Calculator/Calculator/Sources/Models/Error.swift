@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum valueError: Error {
+enum ValueError: Error {
     case operandEmpty
     case operatorEmpty
     case divideByZero
