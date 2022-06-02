@@ -349,8 +349,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="numberInput" destination="Lwz-OF-XHD" id="aRM-5I-h3K"/>
-                        <outlet property="operatorInput" destination="HPC-iy-qdm" id="w61-Bs-e9C"/>
+                        <outlet property="numberInputLabel" destination="Lwz-OF-XHD" id="aRM-5I-h3K"/>
+                        <outlet property="operatorInputLabel" destination="HPC-iy-qdm" id="w61-Bs-e9C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
