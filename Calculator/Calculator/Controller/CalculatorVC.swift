@@ -6,9 +6,12 @@
 
 import UIKit
 
-class CalculatorVC: UIViewController {
-    @IBOutlet weak var operatorInput: UILabel!
-    @IBOutlet weak var numberInput: UILabel!
+final class CalculatorVC: UIViewController {
+    // MARK: - Properties
+    @IBOutlet private weak var operatorInput: UILabel!
+    @IBOutlet private weak var numberInput: UILabel!
+    
+    // MARK: - Life Cycle
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,7 @@ class CalculatorVC: UIViewController {
 // MARK: - Actions
 
 extension CalculatorVC {
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
+    @IBAction private func numberButtonTapped(_ sender: UIButton) {
         if numberInput.text == "0" {
             numberInput.text = ""
         }
