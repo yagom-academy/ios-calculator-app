@@ -76,20 +76,18 @@ class CalculatorViewController: UIViewController {
     }
     
     private func mapSign(sender: UIButton) -> String {
-        var sign: String = ""
         switch sender {
         case plusButton:
-            sign = "+"
+            return String(OperatorItem.add.rawValue)
         case minusButton:
-            sign = "-"
+            return String(OperatorItem.subtract.rawValue)
         case multiplyButton:
-            sign = "*"
+            return String(OperatorItem.multiply.rawValue)
         case divideButton:
-            sign = "/"
+            return String(OperatorItem.divide.rawValue)
         default:
-            sign = ""
+            return ""
         }
-        return sign
     }
 
     // 연산자 입력
