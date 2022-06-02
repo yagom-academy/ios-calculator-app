@@ -92,9 +92,10 @@ class CalculatorViewController: UIViewController {
 
     // 연산자 입력
     @IBAction private func tappedOperatorIntoEquation(_ sender: UIButton) {
-        if currentString.count == 0 && signLabel.text == "" {
+        guard currentString.count != 0 && valueLabel.text != "" else {
             return
-        } else if totalString.isEmpty {
+        }
+        if totalString.isEmpty {
             guard let value = valueLabel.text else { return }
             if value.contains("-") {
                 totalString += "&\(value.dropFirst())"
@@ -118,7 +119,7 @@ class CalculatorViewController: UIViewController {
                 } else {
                     totalString += retrievedValue
                 }
-
+                
                 addNewLabel(message: retrievedSign + retrievedValue, stackView: stackView)
                 makeValueLabelTextToZero()
                 signLabel.text = mapSign(sender: sender)
