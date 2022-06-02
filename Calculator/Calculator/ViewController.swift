@@ -22,26 +22,26 @@ class ViewController: UIViewController {
     
     func makeNewStackView() {
         
-        let newStackView = UIStackView()
-        let newOperandsLabel = UILabel()
-        let newOperatorLabel = UILabel()
+        let subExpressionStackView = UIStackView()
+        let subOperandsLabel = UILabel()
+        let subOperatorLabel = UILabel()
         
-        newStackView.axis = .horizontal
-        newOperandsLabel.textColor = .white
-        newOperatorLabel.textColor = .white
+        subExpressionStackView.axis = .horizontal
+        subOperandsLabel.textColor = .white
+        subOperatorLabel.textColor = .white
         
         if operatorLabel == nil {
-            newOperandsLabel.text = operandsLabel.text
+            subOperandsLabel.text = operandsLabel.text
             operandsLabel.text = "0"
         } else {
-            newOperandsLabel.text = operandsLabel.text
-            newOperatorLabel.text = operatorLabel.text
+            subOperandsLabel.text = operandsLabel.text
+            subOperatorLabel.text = operatorLabel.text
             operandsLabel.text = "0"
         }
         
-        newStackView.addArrangedSubview(newOperatorLabel)
-        newStackView.addArrangedSubview(newOperandsLabel)
-        expressionView.addArrangedSubview(newStackView)
+        subExpressionStackView.addArrangedSubview(subOperatorLabel)
+        subExpressionStackView.addArrangedSubview(subOperandsLabel)
+        expressionView.addArrangedSubview(subExpressionStackView)
     }
     
     func makeResultLabel() {
