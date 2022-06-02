@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import Calculator
-class OperatorTest: XCTestCase {
+final class OperatorTest: XCTestCase {
     var sut: Operator!
     
     override func setUpWithError() throws {
