@@ -129,10 +129,9 @@ class CalculatorViewController: UIViewController {
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
+        let bottomOffSetY = previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight
+        let bottomOffset = CGPoint(x: 0, y: bottomOffSetY)
         
-        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
-                                   previousValues.bounds.height +
-                                   numberLabel.font.lineHeight)
         previousValues.setContentOffset(bottomOffset, animated: false)
         
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -158,10 +157,8 @@ class CalculatorViewController: UIViewController {
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
-        
-        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
-                                   previousValues.bounds.height +
-                                   numberLabel.font.lineHeight)
+        let bottomOffSetY = previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight
+        let bottomOffset = CGPoint(x: 0, y: bottomOffSetY)
         
         previousValues.setContentOffset(bottomOffset, animated: false)
         
