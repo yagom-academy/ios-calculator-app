@@ -126,6 +126,7 @@ private extension CalculatorViewController {
     func setDefalut() {
         operandsLabel?.text = CalculatorState.zero.value
         operatorsLabel?.text = CalculatorState.empty.value
+
         formulaStackView?.removeSubView()
     }
     
