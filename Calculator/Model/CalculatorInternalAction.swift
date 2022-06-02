@@ -21,10 +21,8 @@ struct CalculatorInternalAction {
     }
     
     func changeTheSign(_ text: String?) -> String {
-        guard let operandText = text, Double(operandText) != 0.0 else {
-            return CalculatorDefaultValue.operandLabel
-        }
-        guard let operand = Double(filterSign(operandText, ",")) else {
+        guard let operandText = text, Double(operandText) != 0.0,
+              let operand = Double(filterSign(operandText, ",")) else {
             return CalculatorDefaultValue.operandLabel
         }
         
@@ -36,14 +34,7 @@ struct CalculatorInternalAction {
             return CalculatorDefaultValue.operandLabel
         }
         
-        var result = ""
-        
-        if !isOperandInputted {
-            result = tabNumber
-        } else {
-            result = checkOperand(getText(currentOperland), with: tabNumber)
-        }
-        
+        let result = !isOperandInputted ? tabNumber : checkOperand(getText(currentOperland), with: tabNumber)
         isOperandInputted = true
         
         return result
@@ -63,10 +54,10 @@ struct CalculatorInternalAction {
     mutating func calculate() -> String? {
         var fomula = ExpressionParser.parse(from: inputtedFomula)
         inputtedFomula = CalculatorDefaultValue.fomula
+        isCalculateCompleted = true
         
         do {
             let result = try fomula.result().parse()
-            isCalculateCompleted = true
             return result
         } catch {
             return CalculatorDefaultValue.error
@@ -85,9 +76,9 @@ struct CalculatorInternalAction {
     }
     
     private func checkOperand(_ currentlabel: String, with currentInput: String) -> String {
-        if !currentlabel.contains(".") && currentInput == "." {
+        if !currentlabel.contains("."), currentInput == "." {
             return currentlabel + currentInput
-        } else if currentlabel.contains(".") && currentInput.contains("0") {
+        } else if currentlabel.contains("."), currentInput.contains("0") {
             return currentlabel + currentInput
         } else {
             return changeFormat(currentlabel + currentInput)
@@ -101,11 +92,10 @@ struct CalculatorInternalAction {
     }
     
     private mutating func addInputtedFomula(_ currentOperand: String?, _ currentOperator: String?) {
-        guard inputtedFomula.isEmpty else {
+        if inputtedFomula.isEmpty {
             inputtedFomula += " \(getText(currentOperator)) \(filterSign(getText(currentOperand), ","))"
-            return
+        } else {
+            inputtedFomula = "\(filterSign(getText(currentOperand), ","))"
         }
-        
-        inputtedFomula = "\(filterSign(getText(currentOperand), ","))"
     }
 }

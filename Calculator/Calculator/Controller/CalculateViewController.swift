@@ -46,7 +46,7 @@ class CalculateViewController: UIViewController {
         setCalculationResult()
     }
     
-    //MARK: - Internal Logic
+    //MARK: - View Action
     private func setCalculatorDefaultView() {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = CalculatorDefaultValue.operandLabel
@@ -74,21 +74,21 @@ class CalculateViewController: UIViewController {
         }
         
         let formula = calcultorInternalAction.appendFormula(operandLabel.text, currentTitle)
-        operatorLabel.text = formula.currentOperator
-        
+       
         if fomulaStackView.subviews.isEmpty {
             createStackView(formula.currentOperand)
         } else {
             createStackView(formula.currentOperator, formula.currentOperand)
         }
         
-        downScroll()
+        operatorLabel.text = formula.currentOperator
         operandLabel.text = CalculatorDefaultValue.operandLabel
+        downScroll()
     }
     
     private func setCalculationResult() {
-        guard !fomulaStackView.subviews.isEmpty else { return }
-        guard !calcultorInternalAction.isCalculateCompleted else { return }
+        guard !fomulaStackView.subviews.isEmpty,
+              !calcultorInternalAction.isCalculateCompleted else { return }
         
         let fomula = calcultorInternalAction.appendFormula(operandLabel.text, operatorLabel.text)
         createStackView(fomula.currentOperator, fomula.currentOperand)
@@ -99,11 +99,7 @@ class CalculateViewController: UIViewController {
     private func createStackView(_ labels: String...) {
         let stackView = UIStackView()
         stackView.spacing = 8
-        
-        for label in labels {
-            stackView.addArrangedSubview(createLabel(text: label))
-        }
-        
+        labels.forEach { stackView.addArrangedSubview(createLabel(text: $0)) }
         fomulaStackView.addArrangedSubview(stackView)
     }
     
