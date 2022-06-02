@@ -13,7 +13,8 @@ struct Formula {
     
     mutating func result() throws -> Double {
         guard var result: Double = operands.dequeue() else {
-            throw FormulaError.noOperandsInQueue }
+            throw FormulaError.noOperandsInQueue
+        }
         while operators.isEmpty == false {
             guard let eachOperator = operators.dequeue() else {
                 throw FormulaError.noOperatorsInQueue
