@@ -48,13 +48,33 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction private func tappedAllClear(_ sender: UIButton) {
+        makeCurrentStringToEmpty()
+        makeTotalStringToEmpty()
+        makeSignLabelTextToEmpty()
+        makeValueLabelTextToZero()
+        makeStackViewToEmpty()
+    }
+    
+    private func makeCurrentStringToEmpty() {
         currentString = ""
+    }
+    
+    private func makeTotalStringToEmpty() {
         totalString = ""
+    }
+    
+    private func makeSignLabelTextToEmpty() {
         signLabel.text = ""
+    }
+    
+    private func makeValueLabelTextToZero() {
         valueLabel.text = "0"
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 
+    private func makeStackViewToEmpty() {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private func senderToSign(sender: UIButton) -> String {
         var sign: String = ""
         switch sender {
@@ -84,16 +104,16 @@ class CalculatorViewController: UIViewController {
                 totalString += value
             }
             addNewLabel(message: value, stackView: stackView)
-            valueLabel.text = "0"
+            makeValueLabelTextToZero()
             signLabel.text = senderToSign(sender: sender)
-            currentString = ""
+            makeCurrentStringToEmpty()
         } else {
             if valueLabel.text == "0" {
                 signLabel.text = senderToSign(sender: sender)
             } else {
                 guard let retrievedSign = signLabel.text else { return }
                 guard let retrievedValue = valueLabel.text else { return }
-                currentString = ""
+                makeCurrentStringToEmpty()
                 totalString += retrievedSign
                 if retrievedValue.contains("-") {
                     totalString += "&\(retrievedValue.dropFirst())"
@@ -102,9 +122,9 @@ class CalculatorViewController: UIViewController {
                 }
 
                 addNewLabel(message: retrievedSign + retrievedValue, stackView: stackView)
-                valueLabel.text = "0"
+                makeValueLabelTextToZero()
                 signLabel.text = senderToSign(sender: sender)
-                currentString = ""
+                makeCurrentStringToEmpty()
             }
         }
     }
@@ -146,7 +166,7 @@ class CalculatorViewController: UIViewController {
             }
             currentString += "."
         default:
-            currentString += ""
+            makeCurrentStringToEmpty()
         }
         valueLabel.text = currentString
     }
@@ -180,20 +200,19 @@ class CalculatorViewController: UIViewController {
             } catch {
                 displaySignAndValueLabels(signMessage: "error", valueMessage: "error")
             }
-            signLabel.text = ""
-            totalString = ""
-            currentString = ""
+            makeSignLabelTextToEmpty()
+            makeTotalStringToEmpty()
+            makeCurrentStringToEmpty()
         }
     }
 
     @IBAction private func tappedCeExecution(sender: UIButton) {
         if currentString.isEmpty && totalString.isEmpty {
-            valueLabel.text = "0"
-            currentString = ""
+            makeValueLabelTextToZero()
         } else {
             valueLabel.text = ""
-            currentString = ""
         }
+        makeCurrentStringToEmpty()
     }
 
     @IBAction private func tappedPlusMinusSwap(sender: UIButton) {
