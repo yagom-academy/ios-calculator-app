@@ -22,11 +22,11 @@ class ViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        if let tmp = currentOperandLabel.text?.replacingOccurrences(of: ".", with: ""), tmp.count >= 20 {
+        if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: ".", with: "").count, operandLabelCount >= 20 {
             return
         }
         
-        let operandLabel = currentOperandLabel.text ?? CalcAccessory.empty
+        let operandLabel = changeDoubleStyle(currentOperandLabel.text ?? "")
         
         if sender.currentTitle == CalcAccessory.dot, currentOperandLabel.text?.contains(CalcAccessory.dot) == true {
             return
@@ -52,21 +52,23 @@ class ViewController: UIViewController {
             }
         }
         
-        currentOperandLabel?.text = (currentOperandLabel?.text ?? CalcAccessory.empty) + (sender.currentTitle ?? CalcAccessory.empty)
+        let doubleStyleOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? "")
+        currentOperandLabel?.text = changeDecimalStyle(doubleStyleOperand)
     }
 
     @IBAction func pressOperatorButton(_ sender: UIButton) {
-        guard currentOperandLabel.text != CalcAccessory.zero else {
+        let doubleStyleOperandLabel = changeDoubleStyle(currentOperandLabel.text)
+        guard doubleStyleOperandLabel != CalcAccessory.zero else {
             currentOperatorLabel.text = (sender.currentTitle ?? CalcAccessory.empty)
             return
         }
         
-        if currentOperandLabel.text?.last == Character(CalcAccessory.dot) {
+        if doubleStyleOperandLabel.last == Character(CalcAccessory.dot) {
             currentOperandLabel.text?.removeLast()
         }
         
         addCurrentOperationToScrollViewContent()
-        operationStack += "\(currentOperandLabel?.text ?? CalcAccessory.zero) \(sender.currentTitle ?? CalcAccessory.empty) "
+        operationStack += "\(doubleStyleOperandLabel) \(sender.currentTitle ?? CalcAccessory.empty) "
         currentOperatorLabel.text = sender.currentTitle
         clearCurrentOperandLabel()
         scrollToBottom()
@@ -123,7 +125,7 @@ class ViewController: UIViewController {
         }
         
         addCurrentOperationToScrollViewContent()
-        operationStack += currentOperandLabel.text ?? CalcAccessory.zero
+        operationStack += changeDoubleStyle(currentOperandLabel.text)
         var formula = ExpressionParser.parse(from: operationStack)
         
         do {
@@ -196,5 +198,9 @@ extension ViewController {
         numberFormmater.minimumIntegerDigits = 1
         numberFormmater.maximumIntegerDigits = 20
         return numberFormmater.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
+    }
+    
+    private func changeDoubleStyle(_ input: String?) -> String {
+        return input?.replacingOccurrences(of: ",", with: "") ?? ""
     }
 }
