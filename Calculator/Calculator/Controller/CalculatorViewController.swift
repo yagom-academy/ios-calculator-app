@@ -24,7 +24,7 @@ final class CalculatorViewController: UIViewController {
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
-    private var isNumberTapped : Bool = false
+    private var userIsInTheMiddleOfTyping : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,18 +46,18 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if isNumberTapped  {
+        if userIsInTheMiddleOfTyping {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
         }
         else if currentOperandText.contains(".") {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
-            isNumberTapped  = true
+            userIsInTheMiddleOfTyping = true
         } else {
             operandLabel.text = digit
         }
        
         makeValidNumber()
-        isNumberTapped  = true
+        userIsInTheMiddleOfTyping = true
         userInputNumber.append(digit)
     }
     
@@ -69,7 +69,7 @@ final class CalculatorViewController: UIViewController {
         if operandLabel.text == CalculatorString.zero {
             operandLabel.text = "0."
             userInputNumber.append(contentsOf: CalculatorString.zero)
-            isNumberTapped  = true
+            userIsInTheMiddleOfTyping = true
         } else {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + dot
         }
@@ -93,7 +93,7 @@ final class CalculatorViewController: UIViewController {
         addInputStack()
         operatorLabel.text = operators
         operandLabel.text = CalculatorString.zero
-        isNumberTapped  = false
+        userIsInTheMiddleOfTyping = false
         userInput.append(userInputNumber + CalculatorString.whiteSpace + operators + CalculatorString.whiteSpace)
         userInputNumber = CalculatorString.emptyString
     }
@@ -120,13 +120,13 @@ final class CalculatorViewController: UIViewController {
         userInputNumber = CalculatorString.emptyString
         setupViews()
         removeStack()
-        isNumberTapped  = false
+        userIsInTheMiddleOfTyping = false
     }
     
     @IBAction private func didRemoveCurrentNumberButtonTapped(_ sender: UIButton) {
         operandLabel.text = CalculatorString.zero
         userInputNumber = CalculatorString.emptyString
-        isNumberTapped  = false
+        userIsInTheMiddleOfTyping = false
     }
     
     @IBAction private func didCalculateButtonTapped(_ sender: UIButton) {
@@ -185,9 +185,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func generateStack() -> UIStackView? {
-        guard let (operatorStackLabel, numberStackLabel) = generateStackLabels() else {
-            return nil
-        }
+        guard let (operatorStackLabel, numberStackLabel) = generateStackLabels() else { return nil }
         let stack = UIStackView()
         
         stack.axis = .horizontal
@@ -200,9 +198,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addInputStack() {
-        guard let stack = generateStack() else {
-            return
-        }
+        guard let stack = generateStack() else { return }
         
         inputStackView.addArrangedSubview(stack)
         scrollToBottom(scrollView)
