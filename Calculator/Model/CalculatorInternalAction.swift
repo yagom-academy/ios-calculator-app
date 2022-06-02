@@ -58,6 +58,18 @@ struct CalculatorInternalAction {
         return (getText(currentOperand), `operator`)
     }
     
+    mutating func calculate() -> String? {
+        var fomula = ExpressionParser.parse(from: inputtedFomula)
+        
+        do {
+            let result = try fomula.result().parse()
+            isCalculateCompleted = true
+            return result
+        } catch {
+            return CalculatorDefaultValue.error
+        }
+    }
+    
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
         return input.filter { $0 != sign }
     }

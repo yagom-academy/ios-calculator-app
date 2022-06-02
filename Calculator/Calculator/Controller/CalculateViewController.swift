@@ -44,22 +44,8 @@ class CalculateViewController: UIViewController {
         setOperatorLabel(with: sender.currentTitle)
     }
     
-    @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
-        guard isOperandInputted else { return }
-        guard !fomulaStackView.subviews.isEmpty else { return }
-        guard Double(filterSign(getText(operandLabel), ",")) != nil else {
-            operandLabel.text = CalculatorDefaultValue.error
-            isOperandInputted = false
-            return
-        }
-        
-        createStackView(getText(operatorLabel), changeFormat(getText(operandLabel)))
-        addInputtedFomula()
-        operandLabel.text = calculate(inputtedFomula)
-        operatorLabel.text = CalculatorDefaultValue.operatorLabel
-        inputtedFomula = CalculatorDefaultValue.fomula
-        isOperandInputted = false
-        isCalculateCompleted = true
+    @IBAction private func tabEqualButton() {
+        setCalculationResult()
     }
     
     //MARK: - Internal Logic
@@ -153,6 +139,17 @@ class CalculateViewController: UIViewController {
     private func setOperandLabel(with currentTitle: String?) {
         guard !calcultorInternalAction.isCalculateCompleted else { return }
         operandLabel.text = calcultorInternalAction.appendOperand(operandLabel.text, currentTitle)
+    }
+    
+    private func setCalculationResult() {
+        guard !fomulaStackView.subviews.isEmpty else { return }
+        guard !calcultorInternalAction.isCalculateCompleted else { return }
+        
+        let fomula = calcultorInternalAction.appendFormula(operandLabel.text, operatorLabel.text)
+        createStackView(fomula.currentOperator, fomula.currentOperand)
+        operandLabel.text = calcultorInternalAction.calculate()
+        operatorLabel.text = CalculatorDefaultValue.operatorLabel
+        inputtedFomula = CalculatorDefaultValue.fomula
     }
     
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
