@@ -172,11 +172,11 @@ class ViewController: UIViewController {
             do {
                 let result = try finalEquation.result()
                 valueLabel.text = String(result)
-            } catch valueError.operandEmpty {
+            } catch ValueError.operandEmpty {
                 displaySignAndValueLabels(signMessage: "!", valueMessage: "Need an Operand")
-            } catch valueError.operatorEmpty {
+            } catch ValueError.operatorEmpty {
                 displaySignAndValueLabels(signMessage: "!", valueMessage: "Need an Operator")
-            } catch valueError.divideByZero {
+            } catch ValueError.divideByZero {
                 displaySignAndValueLabels(signMessage: "", valueMessage: "NaN")
             } catch {
                 displaySignAndValueLabels(signMessage: "error", valueMessage: "error")
