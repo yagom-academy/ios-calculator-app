@@ -57,7 +57,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        addOperatorStorage(buttonTitle)
+        addOperatorStorage(to: buttonTitle)
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -70,16 +70,18 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if ["AC"].contains(buttonTitle) {
-            didTapACButton()
+        switch buttonTitle {
+        case "AC":
+            return didTapACButton()
+        case "CE":
+            return didTapCEButton()
+        case "⁺⁄₋":
+            guard presentValue != "0" else {
+            return
         }
-        
-        if ["CE"].contains(buttonTitle) {
-            didTapCEButton()
-        }
-        
-        if ["⁺⁄₋"].contains(buttonTitle) && presentValue != "0" {
-            didTapSignButton()
+            return didTapSignButton()
+        default:
+            return
         }
     }
     
@@ -186,14 +188,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapSignButton() {
-        if presentValue.contains("-") {
-            filterHyphen()
-        }
-        
-        if presentValue.contains("-") == false {
-            presentValue = "-" + presentValue
-        }
-        
+        filterHyphen()
         numberLabel.text = "\(presentValue)"
     }
     
@@ -229,11 +224,15 @@ class CalculatorViewController: UIViewController {
     }
     
     private func filterHyphen() {
-        presentValue = presentValue.filter { word in
-            if word == "-" {
-                return false
+        if presentValue.contains("-") {
+            presentValue = presentValue.filter { word in
+                if word == "-" {
+                    return false
+                }
+                return true
             }
-            return true
+        } else {
+            presentValue = "-" + presentValue
         }
     }
     
@@ -261,7 +260,7 @@ class CalculatorViewController: UIViewController {
         beforePresentNumberStore.append(presentValue)
     }
     
-    private func addOperatorStorage(_ buttonTitle: String) {
+    private func addOperatorStorage(to buttonTitle: String) {
         if userIsInTheMiddleOfTyping {
             presentOperator = buttonTitle
             operatorLabel.text = buttonTitle
