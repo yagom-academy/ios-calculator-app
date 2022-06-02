@@ -61,6 +61,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
+        guard presentValue.isEmpty == false else {
+            return
+        }
+        
         didTapAnswerButton()
         userIsInTheMiddleOfTyping = false
     }
