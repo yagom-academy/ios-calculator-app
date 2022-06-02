@@ -107,18 +107,20 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
         
-        if userIsInTheMiddleOfTyping {
-            stackNumberLabel.text = numberLabelValue
-        }
-        
-        if userIsInTheMiddleOfTyping == false {
-            stackNumberLabel.text = numberLabelValue
-            stackOperatorLabel.text = "\(presentOperator) "
-        }
+        isCheckMakeStackLabel(to: numberLabelValue, from: stackNumberLabel, from: stackOperatorLabel)
         
         stackView.addArrangedSubview(stackOperatorLabel)
         stackView.addArrangedSubview(stackNumberLabel)
         valuesStackView.addArrangedSubview(stackView)
+    }
+    
+    private func isCheckMakeStackLabel(to numberLabelValue: String, from stackNumberLabel: UILabel, from stackOperatorLabel: UILabel) {
+        if userIsInTheMiddleOfTyping {
+            stackNumberLabel.text = numberLabelValue
+            return
+        }
+        stackNumberLabel.text = numberLabelValue
+        stackOperatorLabel.text = "\(presentOperator) "
     }
     
     private func makeResultLabel() {
