@@ -19,7 +19,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var valuesStackView: UIStackView!
     
     let numberFormatter = NumberFormatter()
-
+    
     var inputValue = ""
     var presentValue = ""
     var presentOperator = ""
@@ -31,13 +31,17 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         defaultLabels()
         settingNumberFormaatter()
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else {
+            return
+        }
+        
+        if presentValue.contains(".") && buttonTitle == "." {
             return
         }
         
@@ -50,18 +54,18 @@ class CalculatorViewController: UIViewController {
             
             presentValue += buttonTitle
             numberLabel.text = buttonTitle
-            
-        } else if presentValue.contains(".") && buttonTitle == "." {
-            return
-            
-        } else {
+        }
+        
+        if userIsInTheMiddleOfTyping == false {
             presentValue += buttonTitle
             numberLabel.text = presentValue
         }
         
         if userIsInTheAfterTabEqualButton {
             userIsInTheAfterTabEqualButton = true
-        } else {
+        }
+        
+        if userIsInTheAfterTabEqualButton == false {
             beforePresentNumberStore.append(presentValue)
         }
         
@@ -79,8 +83,9 @@ class CalculatorViewController: UIViewController {
             
             operatorStorage.append(" \(buttonTitle) ")
             numberLabel.text = "0"
-            
-        } else {
+        }
+        
+        if userIsInTheMiddleOfTyping == false {
             makeStackLabel()
             
             presentOperator = buttonTitle
@@ -138,8 +143,9 @@ class CalculatorViewController: UIViewController {
         
         if userIsInTheMiddleOfTyping {
             stackNumberLabel.text = numberLabelValue
-            
-        } else {
+        }
+        
+        if userIsInTheMiddleOfTyping == false {
             stackNumberLabel.text = numberLabelValue
             stackOperatorLabel.text = "\(presentOperator) "
         }
@@ -196,7 +202,9 @@ class CalculatorViewController: UIViewController {
         
         if userIsInTheAfterTabEqualButton {
             caculatorAfterResult(to: previousValue)
-        } else {
+        }
+        
+        if userIsInTheAfterTabEqualButton == false {
             calculatorResult()
         }
         presentValue = ""
@@ -228,10 +236,12 @@ class CalculatorViewController: UIViewController {
                 }
                 return true
             }
-            
-        } else {
+        }
+        
+        if presentValue.contains("-") == false {
             presentValue = "-" + presentValue
         }
+        
         numberLabel.text = "\(presentValue)"
     }
     
