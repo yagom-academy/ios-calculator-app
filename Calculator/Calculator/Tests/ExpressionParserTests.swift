@@ -9,8 +9,6 @@ import XCTest
 @testable import Calculator
 
 class ExpressionParserTests: XCTestCase {
-
-    
     override func setUpWithError() throws {
         try super.setUpWithError()
     }
@@ -30,8 +28,6 @@ class ExpressionParserTests: XCTestCase {
         let operandsCount = parseTest.operands.count
         let operatorCount = parseTest.operators.count
         
-        print(operandsCount)
-        print(operatorCount)
         //then
         XCTAssertEqual(operandsCount, expectedOperandsCount)
         XCTAssertEqual(operatorCount, expectedOperatorCount)
