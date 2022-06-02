@@ -2,12 +2,12 @@
 //  ExpressionParserTest.swift
 //  ExpressionParserTest
 //
-//  Created by Kiwi on 2022/05/20.
+//  Created by Kiwi, Wongbing on 2022/05/20.
 //
 
 import XCTest
 @testable import Calculator
-class ExpressionParserTest: XCTestCase {
+final class ExpressionParserTest: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -33,7 +33,7 @@ class ExpressionParserTest: XCTestCase {
         var result = ExpressionParser.parse(from: expression)
         //then
         XCTAssertThrowsError(try result.result(), "divideZero") { error in
-            XCTAssertEqual(error as? OperatorError, OperatorError.divideZero)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideZero)
         }
     }
 }

@@ -2,25 +2,42 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by Kiwi on 2022/05/17.
+//  Created by Kiwi, Wongbing on 2022/05/17.
 //
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    private var list = Linkedlist<T>()
-    
+    private var dequeueStack = Array<T>()
+    private var enqueueStack = Array<T>()
     var isEmpty: Bool {
-        return list.isEmpty
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
+    }
+    var peek: T? {
+        return !dequeueStack.isEmpty ? dequeueStack.last : enqueueStack.first
+    }
+    var currentStack: [T] {
+        return dequeueStack.reversed() + enqueueStack
+    }
+    var count: Int {
+        return (dequeueStack + enqueueStack).count
     }
     
-    mutating func enqueue(data: T) {
-        list.append(data: data)
+    init(stack: Array<T>) {
+        self.enqueueStack = stack
     }
     
-    mutating func dequeue() -> T? {
-        list.removeFirst()
+    mutating func enqueue(_ element: T) {
+        enqueueStack.append(element)
     }
     
-    mutating func removeAll() {
-        list.removeAll()
+    mutating func dequeue() throws -> T {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
+        }
+        
+        guard let result = dequeueStack.popLast() else {
+            throw CalculatorError.emptyStack
+        }
+        return result
     }
 }
