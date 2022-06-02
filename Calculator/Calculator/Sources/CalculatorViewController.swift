@@ -10,37 +10,37 @@ class CalculatorViewController: UIViewController {
     private var currentString: String = ""
     private var totalString: String = ""
 
-    @IBOutlet var stackView: UIStackView!
+    @IBOutlet private var stackView: UIStackView!
 
     // Buttons - Numbers
-    @IBOutlet weak var zeroButton: UIButton!
-    @IBOutlet weak var doubleZeroButton: UIButton!
-    @IBOutlet weak var oneButton: UIButton!
-    @IBOutlet weak var twoButton: UIButton!
-    @IBOutlet weak var threeButton: UIButton!
-    @IBOutlet weak var fourButton: UIButton!
-    @IBOutlet weak var fiveButton: UIButton!
-    @IBOutlet weak var sixButton: UIButton!
-    @IBOutlet weak var sevenButton: UIButton!
-    @IBOutlet weak var eightButton: UIButton!
-    @IBOutlet weak var nineButton: UIButton!
+    @IBOutlet private weak var zeroButton: UIButton!
+    @IBOutlet private weak var doubleZeroButton: UIButton!
+    @IBOutlet private weak var oneButton: UIButton!
+    @IBOutlet private weak var twoButton: UIButton!
+    @IBOutlet private weak var threeButton: UIButton!
+    @IBOutlet private weak var fourButton: UIButton!
+    @IBOutlet private weak var fiveButton: UIButton!
+    @IBOutlet private weak var sixButton: UIButton!
+    @IBOutlet private weak var sevenButton: UIButton!
+    @IBOutlet private weak var eightButton: UIButton!
+    @IBOutlet private weak var nineButton: UIButton!
 
     // Buttons - Symbols
-    @IBOutlet weak var dotButton: UIButton!
-    @IBOutlet weak var equalButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var multiplyButton: UIButton!
-    @IBOutlet weak var divideButton: UIButton!
+    @IBOutlet private weak var dotButton: UIButton!
+    @IBOutlet private weak var equalButton: UIButton!
+    @IBOutlet private weak var plusButton: UIButton!
+    @IBOutlet private weak var minusButton: UIButton!
+    @IBOutlet private weak var multiplyButton: UIButton!
+    @IBOutlet private weak var divideButton: UIButton!
 
     // Buttons - Functions
-    @IBOutlet weak var acButton: UIButton!
-    @IBOutlet weak var ceButton: UIButton!
-    @IBOutlet weak var plusMinusButton: UIButton!
+    @IBOutlet private weak var acButton: UIButton!
+    @IBOutlet private weak var ceButton: UIButton!
+    @IBOutlet private weak var plusMinusButton: UIButton!
 
     // Labels - Associate with Result
-    @IBOutlet weak var signLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet private weak var signLabel: UILabel!
+    @IBOutlet private weak var valueLabel: UILabel!
 
 
     override func viewDidLoad() {
@@ -110,7 +110,7 @@ class CalculatorViewController: UIViewController {
     }
 
     // 숫자 입력
-    @IBAction func tappedOperandIntoEquation(_ sender: UIButton) {
+    @IBAction private func tappedOperandIntoEquation(_ sender: UIButton) {
         switch sender {
         case oneButton:
             currentString += "1"
