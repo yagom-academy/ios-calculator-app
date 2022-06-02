@@ -28,35 +28,33 @@ class ViewController: UIViewController {
         
         let operandLabel = changeDoubleStyle(currentOperandLabel.text ?? "")
         
-        if sender.currentTitle == CalcAccessory.dot, currentOperandLabel.text?.contains(CalcAccessory.dot) == true {
+        guard (sender.currentTitle ?? "").canInput(operandLabel) == false else {
             return
         }
         
-        if operandLabel == CalcAccessory.zero,
-            (sender.currentTitle == CalcAccessory.zero || sender.currentTitle == CalcAccessory.doubleZero) {
+        if let number = sender.currentTitle?.canReturn(operandLabel) {
+            currentOperandLabel.text = number
             return
-        } else if operandLabel == CalcAccessory.zero, sender.currentTitle != CalcAccessory.dot {
+        }
+    
+        if (operandLabel == CalcAccessory.zero && sender.currentTitle != CalcAccessory.dot) || operandLabel == CalcAccessory.nan {
             currentOperandLabel.text = CalcAccessory.empty
         }
         
-        if operandLabel == CalcAccessory.nan {
-            switch sender.currentTitle {
-            case CalcAccessory.doubleZero, CalcAccessory.zero:
-                currentOperandLabel.text = CalcAccessory.zero
-                return
-            case CalcAccessory.dot:
-                currentOperandLabel.text = CalcAccessory.zero + CalcAccessory.dot
-                return
-            default:
-                currentOperandLabel.text = CalcAccessory.empty
-            }
-        }
-        
         let doubleStyleOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? "")
+        
         currentOperandLabel?.text = changeDecimalStyle(doubleStyleOperand)
+        
+        if doubleStyleOperand.last == Character(CalcAccessory.dot) {
+            currentOperandLabel.text = (currentOperandLabel.text ?? "0") +  CalcAccessory.dot
+        }
     }
 
     @IBAction func pressOperatorButton(_ sender: UIButton) {
+        guard currentOperandLabel.text != CalcAccessory.nan else {
+            return
+        }
+        
         let doubleStyleOperandLabel = changeDoubleStyle(currentOperandLabel.text)
         guard doubleStyleOperandLabel != CalcAccessory.zero else {
             currentOperatorLabel.text = (sender.currentTitle ?? CalcAccessory.empty)
@@ -185,6 +183,7 @@ extension ViewController {
     }
     
     private func scrollToBottom() {
+        operationScrollView.layoutIfNeeded()
         operationScrollView.setContentOffset(CGPoint(x: 0,
                                                      y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
@@ -197,6 +196,8 @@ extension ViewController {
         numberFormmater.maximumSignificantDigits = 20
         numberFormmater.minimumIntegerDigits = 1
         numberFormmater.maximumIntegerDigits = 20
+        numberFormmater.maximumFractionDigits = 20
+        
         return numberFormmater.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
     }
     
