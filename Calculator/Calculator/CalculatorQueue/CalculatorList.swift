@@ -4,35 +4,40 @@
 //
 //  Created by 유한석 on 2022/05/17.
 //
-class CalculatorList<T> {
+class CalculatorList<T: CalculatorItem> {
     private var head: Node<T>?
-    private var tail: Node<T>?
     
     init(head: Node<T>? = nil) {
         self.head = head
-        self.tail = head
     }
     
     func size() -> Int {
         guard var counterNode = head else {
             return 0
         }
+        
         var count: Int = 1
         while counterNode.next != nil {
             count += 1
             counterNode = counterNode.next!
         }
+        
         return count
     }
+    
     func append(_ newNode: Node<T>) {
-        guard tail != nil else {
-            tail = newNode
+        guard head != nil else {
             head = newNode
             return
         }
-        tail?.next = newNode
-        tail = tail?.next
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = newNode
     }
+    
     func isEmpty() -> Bool {
         if head == nil {
             return true
@@ -40,18 +45,14 @@ class CalculatorList<T> {
             return false
         }
     }
-    func removeAll() {
-        tail = nil
-        head = nil
-    }
+    
     func pop() -> Node<T>? {
         guard let firstNode = head else {
             return nil
         }
+        
         head = head?.next
-        if size() == 0 {
-            tail = nil
-        }
+        
         return firstNode
     }
 }
