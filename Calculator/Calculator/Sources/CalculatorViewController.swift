@@ -75,6 +75,7 @@ class CalculatorViewController: UIViewController {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
+    //MARK: - Sign을 지정해준다.
     private func mapSign(sender: UIButton) -> String {
         switch sender {
         case plusButton:
@@ -108,7 +109,7 @@ class CalculatorViewController: UIViewController {
     }
     
     
-    // 연산자 입력
+    //MARK: - 버튼 눌렀을 때, 연산자 입력
     @IBAction private func tappedOperatorIntoEquation(_ sender: UIButton) {
         guard currentString.count != 0 && valueLabel.text != "" else {
             return
@@ -134,7 +135,7 @@ class CalculatorViewController: UIViewController {
         }
     }
 
-    // 숫자 입력
+    //MARK: - 버튼 눌렀을 때, 숫자 (피연산자) 입력
     @IBAction private func tappedOperandIntoEquation(_ sender: UIButton) {
         switch sender {
         case oneButton:
@@ -176,7 +177,7 @@ class CalculatorViewController: UIViewController {
         valueLabel.text = currentString
     }
 
-    // 실제 계산
+    //MARK: - 실제 계산 메서드
     @IBAction private func tappedCalculateFormula(_ sender: UIButton) {
         if totalString.isEmpty {
             return
