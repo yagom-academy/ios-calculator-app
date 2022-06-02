@@ -1,5 +1,5 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculatorViewController.swift
 //  Created by Kiwi, Wongbing
 //  Copyright © yagom. All rights reserved.
 // 
@@ -113,7 +113,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func didremoveAllButtonTapped(_ sender: UIButton) {
+    @IBAction private func didRemoveAllButtonTapped(_ sender: UIButton) {
         userInput = emptyString
         userInputNumber = emptyString
         setupViews()
@@ -121,7 +121,7 @@ final class CalculatorViewController: UIViewController {
         isNumberTapped  = false
     }
     
-    @IBAction private func didremoveCurrentNumberButtonTapped(_ sender: UIButton) {
+    @IBAction private func didRemoveCurrentNumberButtonTapped(_ sender: UIButton) {
         operandLabel.text = zero
         userInputNumber = emptyString
         isNumberTapped  = false
