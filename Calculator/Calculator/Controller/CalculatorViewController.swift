@@ -45,21 +45,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if userIsInTheMiddleOfTyping {
-            inputValue += presentValue
-            inputValue += " \(operatorStorage.removeLast()) "
-            
-            presentValue = ""
-            operatorStorage = []
-            
-            presentValue += buttonTitle
-            numberLabel.text = buttonTitle
-        }
-        
-        if userIsInTheMiddleOfTyping == false {
-            presentValue += buttonTitle
-            numberLabel.text = presentValue
-        }
+        addOperator(to: buttonTitle)
         
         if userIsInTheAfterTabEqualButton {
             userIsInTheAfterTabEqualButton = true
@@ -273,6 +259,22 @@ class CalculatorViewController: UIViewController {
             }
             return true
         }
+    }
+    
+    private func addOperator(to buttonTitle: String) {
+        if userIsInTheMiddleOfTyping {
+            inputValue += presentValue
+            inputValue += " \(operatorStorage.removeLast()) "
+            
+            presentValue = ""
+            operatorStorage = []
+            
+            presentValue += buttonTitle
+            numberLabel.text = buttonTitle
+            return
+        }
+        presentValue += buttonTitle
+        numberLabel.text = presentValue
     }
 }
 
