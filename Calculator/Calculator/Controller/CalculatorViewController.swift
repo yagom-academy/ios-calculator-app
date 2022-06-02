@@ -81,8 +81,8 @@ class CalculatorViewController: UIViewController {
             return didTapCEButton()
         case "⁺⁄₋":
             guard presentValue != "0" else {
-            return
-        }
+                return
+            }
             return didTapSignButton()
         default:
             return
@@ -160,18 +160,20 @@ class CalculatorViewController: UIViewController {
         numberFormatter.maximumSignificantDigits = 3
     }
     
+    private func isCheckAnswerButtonSendOtherResult(to previousValue: String) {
+        if userIsInTheAfterTabEqualButton {
+            caculatorAfterResult(to: previousValue)
+            return
+        }
+        calculatorResult()
+    }
+    
     private func didTapAnswerButton() {
         guard let previousValue = beforePresentNumberStore.last else {
             return
         }
         
-        if userIsInTheAfterTabEqualButton {
-            caculatorAfterResult(to: previousValue)
-        }
-        
-        if userIsInTheAfterTabEqualButton == false {
-            calculatorResult()
-        }
+        isCheckAnswerButtonSendOtherResult(to: previousValue)
         presentValue = ""
     }
     
@@ -201,32 +203,28 @@ class CalculatorViewController: UIViewController {
     private func caculatorAfterResult(to value: String) {
         inputValue = "\(presentValue) \( presentOperator ) \(value)"
         
-        if !value.isEmpty && !inputValue.isEmpty {
-            var parse = ExpressionParser.parse(from: (inputValue))
-            let result = try! parse.result()
-            
-            guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
-                return
-            }
-            numberLabel.text = trimmedResult
-            makeResultLabel()
+        var parse = ExpressionParser.parse(from: (inputValue))
+        let result = try! parse.result()
+        guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
+            return
         }
+        
+        numberLabel.text = trimmedResult
+        makeResultLabel()
     }
     
     private func calculatorResult() {
         inputValue += presentValue
         
-        if !presentValue.isEmpty && !inputValue.isEmpty {
-            var parse = ExpressionParser.parse(from: (inputValue))
-            let result = try! parse.result()
-            
-            guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
-                return
-            }
-            numberLabel.text = trimmedResult
-            makeResultLabel()
-            userIsInTheAfterTabEqualButton = true
+        var parse = ExpressionParser.parse(from: (inputValue))
+        let result = try! parse.result()
+        guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
+            return
         }
+        
+        numberLabel.text = trimmedResult
+        makeResultLabel()
+        userIsInTheAfterTabEqualButton = true
     }
     
     private func checkHyphen() {
