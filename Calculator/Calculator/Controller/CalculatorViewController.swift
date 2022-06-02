@@ -47,13 +47,7 @@ class CalculatorViewController: UIViewController {
         
         addOperator(to: buttonTitle)
         
-        if userIsInTheAfterTabEqualButton {
-            userIsInTheAfterTabEqualButton = true
-        }
-        
-        if userIsInTheAfterTabEqualButton == false {
-            beforePresentNumberStore.append(presentValue)
-        }
+        isTabAnswerButton()
         
         userIsInTheMiddleOfTyping = false
     }
@@ -275,6 +269,14 @@ class CalculatorViewController: UIViewController {
         }
         presentValue += buttonTitle
         numberLabel.text = presentValue
+    }
+    
+    private func isTabAnswerButton() {
+        if userIsInTheAfterTabEqualButton {
+            userIsInTheAfterTabEqualButton = true
+            return
+        }
+        beforePresentNumberStore.append(presentValue)
     }
 }
 
