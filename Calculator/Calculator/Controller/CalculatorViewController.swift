@@ -21,7 +21,7 @@ class CalculatorViewController: UIViewController {
     let numberFormatter = NumberFormatter()
 
     var inputValue = ""
-    var presentNumbers = ""
+    var presentValue = ""
     var presentOperator = ""
     var operatorStorage: [String] = []
     var beforePresentNumberStore: [String] = []
@@ -42,27 +42,27 @@ class CalculatorViewController: UIViewController {
         }
         
         if userIsInTheMiddleOfTyping {
-            inputValue += presentNumbers
+            inputValue += presentValue
             inputValue += " \(operatorStorage.removeLast()) "
             
-            presentNumbers = ""
+            presentValue = ""
             operatorStorage = []
             
-            presentNumbers += "\(buttonTitle)"
-            numberLabel.text = "\(buttonTitle)"
+            presentValue += buttonTitle
+            numberLabel.text = buttonTitle
             
-        } else if presentNumbers.contains(".") && buttonTitle == "." {
+        } else if presentValue.contains(".") && buttonTitle == "." {
             return
             
         } else {
-            presentNumbers += "\(buttonTitle)"
-            numberLabel.text = "\(presentNumbers)"
+            presentValue += buttonTitle
+            numberLabel.text = presentValue
         }
         
         if userIsInTheAfterTabEqualButton {
             userIsInTheAfterTabEqualButton = true
         } else {
-            beforePresentNumberStore.append(presentNumbers)
+            beforePresentNumberStore.append(presentValue)
         }
         
         userIsInTheMiddleOfTyping = false
@@ -75,7 +75,7 @@ class CalculatorViewController: UIViewController {
         
         if userIsInTheMiddleOfTyping {
             presentOperator = buttonTitle
-            operatorLabel.text = "\(buttonTitle)"
+            operatorLabel.text = buttonTitle
             
             operatorStorage.append(" \(buttonTitle) ")
             numberLabel.text = "0"
@@ -84,7 +84,7 @@ class CalculatorViewController: UIViewController {
             makeStackLabel()
             
             presentOperator = buttonTitle
-            operatorLabel.text = "\(buttonTitle)"
+            operatorLabel.text = buttonTitle
             
             operatorStorage.append(" \(buttonTitle) ")
             numberLabel.text = "0"
@@ -111,7 +111,7 @@ class CalculatorViewController: UIViewController {
             didTapCEButton()
         }
         
-        if ["⁺⁄₋"].contains(buttonTitle) && presentNumbers != "0" {
+        if ["⁺⁄₋"].contains(buttonTitle) && presentValue != "0" {
             didTapSignButton()
         }
     }
@@ -137,10 +137,10 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.textColor = .white
         
         if userIsInTheMiddleOfTyping {
-            stackNumberLabel.text = "\(numberLabelValue)"
+            stackNumberLabel.text = numberLabelValue
             
         } else {
-            stackNumberLabel.text = "\(numberLabelValue)"
+            stackNumberLabel.text = numberLabelValue
             stackOperatorLabel.text = "\(presentOperator) "
         }
         
@@ -166,7 +166,7 @@ class CalculatorViewController: UIViewController {
         stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackOperatorLabel.textColor = .white
         
-        stackNumberLabel.text = "\(presentNumbers)"
+        stackNumberLabel.text = presentValue
         stackOperatorLabel.text = "\(presentOperator) "
         
         stackView.addArrangedSubview(stackOperatorLabel)
@@ -199,11 +199,11 @@ class CalculatorViewController: UIViewController {
         } else {
             calculatorResult()
         }
-        presentNumbers = ""
+        presentValue = ""
     }
     
     private func didTapACButton() {
-        presentNumbers = ""
+        presentValue = ""
         presentOperator = ""
         inputValue = ""
         numberLabel.text = "0"
@@ -216,13 +216,13 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapCEButton() {
-        presentNumbers = ""
+        presentValue = ""
         numberLabel.text = "0"
     }
     
     private func didTapSignButton() {
-        if presentNumbers.contains("-") {
-            presentNumbers = presentNumbers.filter { word in
+        if presentValue.contains("-") {
+            presentValue = presentValue.filter { word in
                 if word == "-" {
                     return false
                 }
@@ -230,13 +230,13 @@ class CalculatorViewController: UIViewController {
             }
             
         } else {
-            presentNumbers = "-" + presentNumbers
+            presentValue = "-" + presentValue
         }
-        numberLabel.text = "\(presentNumbers)"
+        numberLabel.text = "\(presentValue)"
     }
     
     private func caculatorAfterResult(to value: String) {
-        inputValue = "\(presentNumbers) \( presentOperator ) \(value)"
+        inputValue = "\(presentValue) \( presentOperator ) \(value)"
         
         if !value.isEmpty && !inputValue.isEmpty {
             var parse = ExpressionParser.parse(from: (inputValue))
@@ -245,22 +245,22 @@ class CalculatorViewController: UIViewController {
             guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
                 return
             }
-            numberLabel.text = "\(trimmedResult)"
+            numberLabel.text = trimmedResult
             makeResultLabel()
         }
     }
     
     private func calculatorResult() {
-        inputValue += presentNumbers
+        inputValue += presentValue
         
-        if !presentNumbers.isEmpty && !inputValue.isEmpty {
+        if !presentValue.isEmpty && !inputValue.isEmpty {
             var parse = ExpressionParser.parse(from: (inputValue))
             let result = try! parse.result()
             
             guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
                 return
             }
-            numberLabel.text = "\(trimmedResult)"
+            numberLabel.text = trimmedResult
             makeResultLabel()
             userIsInTheAfterTabEqualButton = true
         }
