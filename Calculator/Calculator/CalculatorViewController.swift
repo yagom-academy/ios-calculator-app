@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculateViewController: UIViewController {
+final class CalculateViewController: UIViewController {
     private var expressionParserInput: String = ""
     private var isCalculated = false
     
@@ -56,25 +56,7 @@ class CalculateViewController: UIViewController {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         let formattedText = senderLabelText.formatNumber()
         
-        if operandsTextLabel.text == "NaN" {
-            operandsTextLabel.text = ""
-            return
-        } else if operandsTextLabel.text == "0" {
-            operandsTextLabel.text = ""
-            operandsTextLabel.text?.append(formattedText)
-            expressionParserInput.append(formattedText)
-            return
-        }
-        
-        if isCalculated == true {
-            operandsTextLabel.text?.append(formattedText)
-            operatorTextLabel.text = ""
-            operandsTextLabel.text = senderLabelText
-            isCalculated = false
-            return
-        }
-        operandsTextLabel.text?.append(formattedText)
-        expressionParserInput.append(formattedText)
+        setLabelAndParserByOperandButtons(senderLabelText, formattedText)
     }
     
     //MARK: - operatorButtonsTapped()
@@ -82,25 +64,8 @@ class CalculateViewController: UIViewController {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         guard let operandLabelText = operandsTextLabel.text else { return }
         let formattedNumber = operandLabelText.formatNumber()
-
-        if operandsTextLabel.text == "NaN" {
-            return
-        } else if operandLabelText == "0" {
-            operatorTextLabel.text = senderLabelText
-            return
-        } else if arrangedStackView.subviews.isEmpty || isCalculated == true {
-            operandsTextLabel.text = formattedNumber
-            addStackView()
-            expressionParserInput.append(senderLabelText)
-            operatorTextLabel.text = senderLabelText
-            operandsTextLabel.text = "0"
-            return
-        }
-        expressionParserInput.append(senderLabelText)
-        operandsTextLabel.text = formattedNumber
-        addStackView()
-        operatorTextLabel.text = senderLabelText
-        operandsTextLabel.text = "0"
+        
+        setLabelAndParserByOperatorButtons(senderLabelText, formattedNumber)
     }
     
     //MARK: - calculateButtonTapped
@@ -114,13 +79,18 @@ class CalculateViewController: UIViewController {
             result = try calculator.result()
         } catch OperatorError.devideFail {
             addStackView()
-            expressionParserInput = ""
-            operatorTextLabel.text = ""
+            expressionParserInput.removeAll()
+            operatorTextLabel.text?.removeAll()
             operandsTextLabel.text? = OperatorError.devideFail.errorDescription
             return
+        } catch QueueError.empty {
+            expressionParserInput.removeAll()
+            operatorTextLabel.text?.removeAll()
+            operandsTextLabel.text? = QueueError.empty.errorDescription
+            return
         } catch {
-            expressionParserInput = ""
-            operatorTextLabel.text = ""
+            expressionParserInput.removeAll()
+            operatorTextLabel.text?.removeAll()
             operandsTextLabel.text? = QueueError.unknown.errorDescription
             return
         }
@@ -128,7 +98,7 @@ class CalculateViewController: UIViewController {
         guard let formattedResult = result?.formatText() else { return }
         
         addStackView()
-        operatorTextLabel.text = ""
+        operatorTextLabel.text?.removeAll()
         operandsTextLabel.text = formattedResult
         expressionParserInput = formattedResult
     }
@@ -136,20 +106,9 @@ class CalculateViewController: UIViewController {
     //MARK: - changeOperandSignButtonTapped
     @IBAction func changeOperandSignButtonTapped(_ sender: UIButton) {
         guard let operandsLabelText = operandsTextLabel.text else { return }
+        guard let formattedNumber = operandsTextLabel.text?.formatNumber() else { return }
         
-        if operandsLabelText == "0" {
-            return
-        } else if operandsTextLabel.text?.first == "-" {
-            operandsTextLabel.text?.removeFirst()
-            expressionParserInput.removeFirst()
-            return
-        } else if operandsTextLabel.text?.first?.isNumber == true {
-            operandsTextLabel.text = "-" + operandsLabelText
-            expressionParserInput.removeLast()
-            expressionParserInput += operandsTextLabel.text!
-        } else {
-            operandsTextLabel.text = OperatorError.unknown.errorDescription
-        }
+        setLabelAndParserByChangeOperandSignButton(operandsLabelText, formattedNumber)
     }
     
     //MARK: - allClearButtonTapped
@@ -157,74 +116,33 @@ class CalculateViewController: UIViewController {
         isCalculated = false
         deleteStackViewAll()
         deleteTextLabelText()
-        expressionParserInput = ""
+        expressionParserInput.removeAll()
     }
     
     //MARK: - clearEntryButtonTapped
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
-        if isCalculated == true {
-            operandsTextLabel.text = "0"
-            isCalculated = false
-        }
-        
-        if operandsTextLabel.text == "0" {
-            return
-        }
-            
-        if operandsTextLabel.text?.isEmpty == false {
-            operandsTextLabel.text? = "0"
-            expressionParserInput.removeLast()  // 숫자가 하나의 숫자일 때만 가능
-            // 연산자가 나오기 전까지 제거 하던가 반복문 돌려서
-            return
-        }
+        setLabelAndParserByClearEntryButton()
     }
     
     //MARK: - zeroButtonTapped
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
-        // IBOutlet을 꺼내서 써야 하나?
-        if isCalculated == true {
-            operatorTextLabel.text = ""
-            operandsTextLabel.text = senderLabelText
-            isCalculated = false
-            return
-        }
         
-        if operandsTextLabel.text == "0" {
-            operandsTextLabel.text = senderLabelText
-            expressionParserInput += "0"
-        } else if operandsTextLabel.text?.count == 1,
-                  operandsTextLabel.text == "0" {
-            return
-        } else {
-            operandsTextLabel.text? += senderLabelText
-            expressionParserInput.append(senderLabelText)
-        }
+        setLabelAndParserByZeroButton(senderLabelText)
     }
     
     //MARK: - doubleZeroButtonTapped
     @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
-        if operandsTextLabel.text?.count == 1,
-           operandsTextLabel.text == "0" {
-            operandsTextLabel.text = "0"
-        } else {
-            operandsTextLabel.text? += senderLabelText
-            expressionParserInput.append(senderLabelText)
-        }
+        setLabelAndParserByDoubleZeroButton(senderLabelText)
     }
     
     //MARK: - decimalPointButtonTapped
     @IBAction private func decimalPointButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
-        if operandsTextLabel.text?.contains(senderLabelText) == true {
-            operandsTextLabel.text = operandsTextLabel.text
-        } else if operandsTextLabel.text?.count != 0 {
-            operandsTextLabel.text? += senderLabelText
-            expressionParserInput += senderLabelText
-        }
+        setLabelAndParserByDecimalPointButton(senderLabelText)
     }
     
     //MARK: - Method
@@ -263,8 +181,141 @@ class CalculateViewController: UIViewController {
     
     //MARK: - deleteTextLabelText()
     private func deleteTextLabelText() {
-        operatorTextLabel.text = ""
-        operandsTextLabel.text = "0"
+        operatorTextLabel.text?.removeAll()
+        operandsTextLabel.text = MagicLiteral.zero
     }
 }
 
+//MARK: - CalculateViewController+extenxion
+extension CalculateViewController {
+    private func setLabelAndParserByOperandButtons(_ senderLabelText: String, _ formattedText: String ) {
+        let formattedText = senderLabelText.formatNumber()
+        
+        if operandsTextLabel.text == MagicLiteral.nan {
+            operandsTextLabel.text?.removeAll()
+            return
+        } else if operandsTextLabel.text == MagicLiteral.zero {
+            operandsTextLabel.text?.removeAll()
+            operandsTextLabel.text?.append(formattedText)
+            expressionParserInput.append(formattedText)
+            return
+        }
+        
+        if isCalculated == true {
+            operandsTextLabel.text?.append(formattedText)
+            operatorTextLabel.text?.removeAll()
+            operandsTextLabel.text = senderLabelText
+            isCalculated = false
+            return
+        }
+        
+        operandsTextLabel.text?.append(formattedText)
+        expressionParserInput.append(formattedText)
+    }
+    
+    private func setLabelAndParserByOperatorButtons(_ senderLabelText: String,_ formattedNumber: String) {
+        guard let operandLabelText = operandsTextLabel.text else { return }
+        let formattedNumber = operandLabelText.formatNumber()
+        
+        if expressionParserInput.isEmpty {
+            return
+        }
+        
+        if operandsTextLabel.text == MagicLiteral.nan {
+            return
+        } else if operandLabelText == MagicLiteral.zero {
+            operatorTextLabel.text = senderLabelText
+            return
+        } else if arrangedStackView.subviews.isEmpty || isCalculated == true {
+            operandsTextLabel.text = formattedNumber
+            addStackView()
+            expressionParserInput.append(senderLabelText)
+            operatorTextLabel.text = senderLabelText
+            operandsTextLabel.text = MagicLiteral.zero
+            return
+        }
+        
+        expressionParserInput.append(senderLabelText)
+        operandsTextLabel.text = formattedNumber
+        addStackView()
+        operatorTextLabel.text = senderLabelText
+        operandsTextLabel.text = MagicLiteral.zero
+    }
+    
+    private func setLabelAndParserByChangeOperandSignButton(_ operandsLabelText: String, _ formattedNumber: String) {
+        if  formattedNumber == MagicLiteral.zero {
+            return
+        } else if operandsTextLabel.text?.first == "-" {
+            operandsTextLabel.text?.removeFirst()
+            expressionParserInput.removeFirst()
+            return
+        } else if operandsTextLabel.text?.first?.isNumber == true {
+            operandsTextLabel.text = MagicLiteral.minus + operandsLabelText
+            expressionParserInput.removeLast()
+            expressionParserInput += operandsTextLabel.text!
+        } else {
+            operandsTextLabel.text = OperatorError.unknown.errorDescription
+        }
+    }
+    
+    private func setLabelAndParserByClearEntryButton() {
+        if isCalculated == true {
+            operandsTextLabel.text = MagicLiteral.zero
+            deleteStackViewAll()
+            expressionParserInput.removeAll()
+            isCalculated = false
+        }
+        
+        if operandsTextLabel.text == MagicLiteral.zero {
+            return
+        }
+            
+        if operandsTextLabel.text?.isEmpty == false {
+            operandsTextLabel.text? = MagicLiteral.zero
+            
+            while expressionParserInput.last?.isNumber == true {
+                expressionParserInput.removeLast()
+            }
+            return
+        }
+    }
+    
+    private func setLabelAndParserByZeroButton(_ senderLabelText: String) {
+        if isCalculated == true {
+            operatorTextLabel.text?.removeAll()
+            operandsTextLabel.text = senderLabelText
+            isCalculated = false
+            return
+        }
+        
+        if operandsTextLabel.text == MagicLiteral.zero {
+            operandsTextLabel.text = senderLabelText
+            expressionParserInput += MagicLiteral.zero
+        } else if operandsTextLabel.text?.count == 1,
+                  operandsTextLabel.text == MagicLiteral.zero {
+            return
+        } else {
+            operandsTextLabel.text? += senderLabelText
+            expressionParserInput.append(senderLabelText)
+        }
+    }
+    
+    private func setLabelAndParserByDoubleZeroButton(_ senderLabelText: String) {
+        if operandsTextLabel.text?.count == 1,
+           operandsTextLabel.text == MagicLiteral.zero {
+            operandsTextLabel.text = MagicLiteral.zero
+        } else {
+            operandsTextLabel.text? += senderLabelText
+            expressionParserInput.append(senderLabelText)
+        }
+    }
+    
+    private func setLabelAndParserByDecimalPointButton(_ senderLabelText: String) {
+        if operandsTextLabel.text?.contains(senderLabelText) == true {
+            operandsTextLabel.text = operandsTextLabel.text
+        } else if operandsTextLabel.text?.count != 0 {
+            operandsTextLabel.text? += senderLabelText
+            expressionParserInput += senderLabelText
+        }
+    }
+}

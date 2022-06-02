@@ -8,27 +8,19 @@
 import Foundation
 
 enum QueueError: LocalizedError {
-    case empty
     case unknown
-    case wrongOperators
-    case wrongOperands
+    case empty
 }
 
 extension QueueError {
     var errorDescription: String {
         switch self {
-        case .empty:
-            return NSLocalizedString("empty",
-                                     comment: "deQueue stack is empty")
         case .unknown:
-            return NSLocalizedString("unknown error",
+            return NSLocalizedString("0",
                                      comment: "unknown error")
-        case .wrongOperators:
-            return NSLocalizedString("operators error",
-                                     comment: "operators got error")
-        case .wrongOperands:
-            return NSLocalizedString("operands error",
-                                     comment: "operands got error")
+        case .empty:
+            return NSLocalizedString("0",
+                                     comment: "Queue is empty")
         }
     }
 }

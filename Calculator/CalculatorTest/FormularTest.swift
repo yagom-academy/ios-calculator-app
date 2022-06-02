@@ -2,7 +2,7 @@
 //  FormularTest.swift
 //  FormularTest
 //
-//  Created by 김동용 on 2022/05/30.
+//  Created by bard, hugh on 2022/05/30.
 //
 
 import XCTest
@@ -68,7 +68,6 @@ class FormularTest: XCTestCase {
         
         //when
         
-        
         //then
         XCTAssertThrowsError(try sut?.result())
     }
@@ -99,5 +98,4 @@ class FormularTest: XCTestCase {
         //then
         XCTAssertEqual(result, try sut?.result())
     }
-
 }
