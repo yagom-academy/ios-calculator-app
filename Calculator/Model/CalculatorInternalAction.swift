@@ -8,10 +8,12 @@
 import Foundation
 
 struct CalculatorInternalAction {
+    //MARK: - Property
     private (set) var isOperandInputted = false
     private (set) var isCalculateCompleted = false
     private var inputtedFomula = CalculatorDefaultValue.fomula
     
+    //MARK: - Main Method
     mutating func setDefaultValue() {
         isOperandInputted = false
         isCalculateCompleted = false
@@ -60,6 +62,7 @@ struct CalculatorInternalAction {
     
     mutating func calculate() -> String? {
         var fomula = ExpressionParser.parse(from: inputtedFomula)
+        inputtedFomula = CalculatorDefaultValue.fomula
         
         do {
             let result = try fomula.result().parse()
@@ -70,6 +73,7 @@ struct CalculatorInternalAction {
         }
     }
     
+    //MARK: - Sub Method
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
         return input.filter { $0 != sign }
     }

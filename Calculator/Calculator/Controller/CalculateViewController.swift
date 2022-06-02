@@ -7,10 +7,7 @@
 import UIKit
 
 class CalculateViewController: UIViewController {
-    private var isOperandInputted = false
-    private var isCalculateCompleted = false
-    private var inputtedFomula = CalculatorDefaultValue.fomula
-    
+    //MARK: - Property
     @IBOutlet private weak var fomulaScrollView: UIScrollView!
     @IBOutlet private weak var fomulaStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
@@ -18,21 +15,22 @@ class CalculateViewController: UIViewController {
     
     var calcultorInternalAction = CalculatorInternalAction()
     
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     //MARK: - Button Action
-    @IBAction private func tabAcButton(_ sender: UIButton) {
+    @IBAction private func tabAcButton() {
         setCalculatorDefaultView()
         calcultorInternalAction.setDefaultValue()
     }
     
-    @IBAction private func tabCeButton(_ sender: UIButton) {
+    @IBAction private func tabCeButton() {
         setCalculatorDefaultOperlandLabel()
     }
     
-    @IBAction private func tabChangeTheSignButton(_ sender: UIButton) {
+    @IBAction private func tabChangeTheSignButton() {
         changeTheSignOperandLabel()
     }
     
@@ -49,79 +47,6 @@ class CalculateViewController: UIViewController {
     }
     
     //MARK: - Internal Logic
-    private func createLabel(text: String?) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        
-        return label
-    }
-    
-    private func createStackView(_ labels: String...) {
-        let stackView = UIStackView()
-        stackView.spacing = 8
-        
-        for label in labels {
-            stackView.addArrangedSubview(createLabel(text: label))
-        }
-        
-        fomulaStackView.addArrangedSubview(stackView)
-    }
-    
-    private func calculate(_ input: String) -> String? {
-        var fomula = ExpressionParser.parse(from: input)
-        
-        do {
-            let result = try fomula.result().parse()
-            return result
-        } catch {
-            return CalculatorDefaultValue.error
-        }
-    }
-    
-    private func getText(_ label: UILabel) -> String {
-        guard let text = label.text else { return "" }
-        
-        return text
-    }
-    
-    private func addInputtedFomula() {
-        guard inputtedFomula.isEmpty else {
-            inputtedFomula += " \(getText(operatorLabel)) \(filterSign(getText(operandLabel), ","))"
-            return
-        }
-        
-        inputtedFomula = "\(filterSign(getText(operandLabel), ","))"
-    }
-    
-    private func downScroll() {
-        fomulaScrollView.layoutIfNeeded()
-        fomulaScrollView.setContentOffset(CGPoint(x: 0, y: fomulaScrollView.contentSize.height - fomulaScrollView.bounds.height), animated: false)
-    }
-    
-    private func changeFormat(_ input: String) -> String {
-        let result = filterSign(input, ",")
-        
-        return (Double(result) ?? 0).parse()
-    }
-    
-    private func checkTheSign(_ input: String) -> String {
-        guard input.contains("-") else { return "-" + input }
-        
-        return filterSign(input, "-")
-    }
-    
-    private func checkOperand(_ currentlabel: String, with currentInput: String) -> String {
-        if !currentlabel.contains(".") && currentInput == "." {
-            return currentlabel + currentInput
-        } else if currentlabel.contains(".") && currentInput.contains("0") {
-            return currentlabel + currentInput
-        } else {
-            return changeFormat(currentlabel + currentInput)
-        }
-    }
-    
     private func setCalculatorDefaultView() {
         fomulaStackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = CalculatorDefaultValue.operandLabel
@@ -141,25 +66,8 @@ class CalculateViewController: UIViewController {
         operandLabel.text = calcultorInternalAction.appendOperand(operandLabel.text, currentTitle)
     }
     
-    private func setCalculationResult() {
-        guard !fomulaStackView.subviews.isEmpty else { return }
-        guard !calcultorInternalAction.isCalculateCompleted else { return }
-        
-        let fomula = calcultorInternalAction.appendFormula(operandLabel.text, operatorLabel.text)
-        createStackView(fomula.currentOperator, fomula.currentOperand)
-        operandLabel.text = calcultorInternalAction.calculate()
-        operatorLabel.text = CalculatorDefaultValue.operatorLabel
-        inputtedFomula = CalculatorDefaultValue.fomula
-    }
-    
-    private func filterSign(_ input: String, _ sign: String.Element) -> String {
-        return input.filter { $0 != sign }
-    }
-    
     private func setOperatorLabel(with currentTitle: String?) {
-        guard !calcultorInternalAction.isCalculateCompleted else {
-            return
-        }
+        guard !calcultorInternalAction.isCalculateCompleted else { return }
         guard calcultorInternalAction.isOperandInputted else {
             operatorLabel.text = currentTitle
             return
@@ -176,5 +84,40 @@ class CalculateViewController: UIViewController {
         
         downScroll()
         operandLabel.text = CalculatorDefaultValue.operandLabel
+    }
+    
+    private func setCalculationResult() {
+        guard !fomulaStackView.subviews.isEmpty else { return }
+        guard !calcultorInternalAction.isCalculateCompleted else { return }
+        
+        let fomula = calcultorInternalAction.appendFormula(operandLabel.text, operatorLabel.text)
+        createStackView(fomula.currentOperator, fomula.currentOperand)
+        operandLabel.text = calcultorInternalAction.calculate()
+        operatorLabel.text = CalculatorDefaultValue.operatorLabel
+    }
+    
+    private func createStackView(_ labels: String...) {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        
+        for label in labels {
+            stackView.addArrangedSubview(createLabel(text: label))
+        }
+        
+        fomulaStackView.addArrangedSubview(stackView)
+    }
+    
+    private func downScroll() {
+        fomulaScrollView.layoutIfNeeded()
+        fomulaScrollView.setContentOffset(CGPoint(x: 0, y: fomulaScrollView.contentSize.height - fomulaScrollView.bounds.height), animated: false)
+    }
+    
+    private func createLabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        
+        return label
     }
 }
