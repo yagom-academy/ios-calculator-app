@@ -56,7 +56,7 @@ final class CalculateViewController: UIViewController {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         let formattedText = senderLabelText.formatNumber()
         
-        setOperandButtonsCondition(senderLabelText, formattedText)
+        setLabelAndParserByOperandButtons(senderLabelText, formattedText)
     }
     
     //MARK: - operatorButtonsTapped()
@@ -65,7 +65,7 @@ final class CalculateViewController: UIViewController {
         guard let operandLabelText = operandsTextLabel.text else { return }
         let formattedNumber = operandLabelText.formatNumber()
         
-        setOperatorButtonsCondition(senderLabelText, formattedNumber)
+        setLabelAndParserByOperatorButtons(senderLabelText, formattedNumber)
     }
     
     //MARK: - calculateButtonTapped
@@ -108,7 +108,7 @@ final class CalculateViewController: UIViewController {
         guard let operandsLabelText = operandsTextLabel.text else { return }
         guard let formattedNumber = operandsTextLabel.text?.formatNumber() else { return }
         
-        setChangeOperandSignButtonCondition(operandsLabelText, formattedNumber)
+        setLabelAndParserByChangeOperandSignButton(operandsLabelText, formattedNumber)
     }
     
     //MARK: - allClearButtonTapped
@@ -121,28 +121,28 @@ final class CalculateViewController: UIViewController {
     
     //MARK: - clearEntryButtonTapped
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
-        setClearEntryButtonCondition()
+        setLabelAndParserByClearEntryButton()
     }
     
     //MARK: - zeroButtonTapped
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
-        setZeroButtonCondition(senderLabelText)
+        setLabelAndParserByZeroButton(senderLabelText)
     }
     
     //MARK: - doubleZeroButtonTapped
     @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
-        setDoubleZeroButtonCondition(senderLabelText)
+        setLabelAndParserByDoubleZeroButton(senderLabelText)
     }
     
     //MARK: - decimalPointButtonTapped
     @IBAction private func decimalPointButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         
-        setDecimalPointButtonCondition(senderLabelText)
+        setLabelAndParserByDecimalPointButton(senderLabelText)
     }
     
     //MARK: - Method
@@ -188,7 +188,7 @@ final class CalculateViewController: UIViewController {
 
 //MARK: - CalculateViewController+extenxion
 extension CalculateViewController {
-    private func setOperandButtonsCondition(_ senderLabelText: String, _ formattedText: String ) {
+    private func setLabelAndParserByOperandButtons(_ senderLabelText: String, _ formattedText: String ) {
         let formattedText = senderLabelText.formatNumber()
         
         if operandsTextLabel.text == MagicLiteral.nan {
@@ -213,7 +213,7 @@ extension CalculateViewController {
         expressionParserInput.append(formattedText)
     }
     
-    private func setOperatorButtonsCondition(_ senderLabelText: String,_ formattedNumber: String) {
+    private func setLabelAndParserByOperatorButtons(_ senderLabelText: String,_ formattedNumber: String) {
         guard let operandLabelText = operandsTextLabel.text else { return }
         let formattedNumber = operandLabelText.formatNumber()
         
@@ -242,7 +242,7 @@ extension CalculateViewController {
         operandsTextLabel.text = MagicLiteral.zero
     }
     
-    private func setChangeOperandSignButtonCondition(_ operandsLabelText: String, _ formattedNumber: String) {
+    private func setLabelAndParserByChangeOperandSignButton(_ operandsLabelText: String, _ formattedNumber: String) {
         if  formattedNumber == MagicLiteral.zero {
             return
         } else if operandsTextLabel.text?.first == "-" {
@@ -258,7 +258,7 @@ extension CalculateViewController {
         }
     }
     
-    private func setClearEntryButtonCondition() {
+    private func setLabelAndParserByClearEntryButton() {
         if isCalculated == true {
             operandsTextLabel.text = MagicLiteral.zero
             deleteStackViewAll()
@@ -280,7 +280,7 @@ extension CalculateViewController {
         }
     }
     
-    private func setZeroButtonCondition(_ senderLabelText: String) {
+    private func setLabelAndParserByZeroButton(_ senderLabelText: String) {
         if isCalculated == true {
             operatorTextLabel.text?.removeAll()
             operandsTextLabel.text = senderLabelText
@@ -300,7 +300,7 @@ extension CalculateViewController {
         }
     }
     
-    private func setDoubleZeroButtonCondition(_ senderLabelText: String) {
+    private func setLabelAndParserByDoubleZeroButton(_ senderLabelText: String) {
         if operandsTextLabel.text?.count == 1,
            operandsTextLabel.text == MagicLiteral.zero {
             operandsTextLabel.text = MagicLiteral.zero
@@ -310,7 +310,7 @@ extension CalculateViewController {
         }
     }
     
-    private func setDecimalPointButtonCondition(_ senderLabelText: String) {
+    private func setLabelAndParserByDecimalPointButton(_ senderLabelText: String) {
         if operandsTextLabel.text?.contains(senderLabelText) == true {
             operandsTextLabel.text = operandsTextLabel.text
         } else if operandsTextLabel.text?.count != 0 {
