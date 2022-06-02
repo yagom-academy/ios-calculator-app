@@ -122,6 +122,11 @@ class CalculateViewController: UIViewController {
             operatorTextLabel.text?.removeAll()
             operandsTextLabel.text? = OperatorError.devideFail.errorDescription
             return
+        } catch QueueError.empty {
+            expressionParserInput.removeAll()
+            operatorTextLabel.text?.removeAll()
+            operandsTextLabel.text? = QueueError.empty.errorDescription
+            return
         } catch {
             expressionParserInput.removeAll()
             operatorTextLabel.text?.removeAll()

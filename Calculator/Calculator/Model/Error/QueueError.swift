@@ -9,8 +9,7 @@ import Foundation
 
 enum QueueError: LocalizedError {
     case unknown
-    case wrongOperators
-    case wrongOperands
+    case empty
 }
 
 extension QueueError {
@@ -19,12 +18,9 @@ extension QueueError {
         case .unknown:
             return NSLocalizedString("0",
                                      comment: "unknown error")
-        case .wrongOperators:
-            return NSLocalizedString("operators error",
-                                     comment: "operators got error")
-        case .wrongOperands:
-            return NSLocalizedString("operands error",
-                                     comment: "operands got error")
+        case .empty:
+            return NSLocalizedString("0",
+                                     comment: "Queue is empty")
         }
     }
 }
