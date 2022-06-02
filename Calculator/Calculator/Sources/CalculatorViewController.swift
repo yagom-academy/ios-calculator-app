@@ -192,26 +192,30 @@ class CalculatorViewController: UIViewController {
             } else {
                 totalString += value
             }
-
-            var finalEquation = ExpressionParser.parse(from: totalString)
-            do {
-                let result = try finalEquation.result()
-                valueLabel.text = String(result)
-            } catch ValueError.operandEmpty {
-                displaySignAndValueLabels(signMessage: "!", valueMessage: "Need an Operand")
-            } catch ValueError.operatorEmpty {
-                displaySignAndValueLabels(signMessage: "!", valueMessage: "Need an Operator")
-            } catch ValueError.divideByZero {
-                displaySignAndValueLabels(signMessage: "", valueMessage: "NaN")
-            } catch {
-                displaySignAndValueLabels(signMessage: "error", valueMessage: "error")
-            }
+            executeEquation()
             makeSignLabelTextToEmpty()
             makeTotalStringToEmpty()
             makeCurrentStringToEmpty()
         }
     }
-
+    
+    //MARK: - 실제 계산 구현
+    private func executeEquation() {
+        var finalEquation = ExpressionParser.parse(from: totalString)
+        do {
+            let result = try finalEquation.result()
+            valueLabel.text = String(result)
+        } catch ValueError.operandEmpty {
+            displaySignAndValueLabels(signMessage: "!", valueMessage: "Need an Operand")
+        } catch ValueError.operatorEmpty {
+            displaySignAndValueLabels(signMessage: "!", valueMessage: "Need an Operator")
+        } catch ValueError.divideByZero {
+            displaySignAndValueLabels(signMessage: "", valueMessage: "NaN")
+        } catch {
+            displaySignAndValueLabels(signMessage: "error", valueMessage: "error")
+        }
+    }
+    
     @IBAction private func tappedCeExecution(sender: UIButton) {
         if currentString.isEmpty && totalString.isEmpty {
             makeValueLabelTextToZero()
