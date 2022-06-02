@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculateViewController: UIViewController {
+final class CalculateViewController: UIViewController {
     private var expressionParserInput: String = ""
     private var isCalculated = false
     
