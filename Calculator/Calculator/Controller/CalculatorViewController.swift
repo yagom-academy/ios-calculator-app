@@ -230,13 +230,7 @@ final class CalculatorViewController: UIViewController {
     private func initiateCaculator() {
         guard let currentOperatorText = operatorLabel.text else { return }
         
-        if inputStackView.subviews.isEmpty == false, currentOperatorText.isEmpty {
-            removeStack()
-            operandLabel.text = CalculatorString.emptyString
-            userInputNumber = CalculatorString.emptyString
-        }
-        
-        if operandLabel.text == CalculatorString.failedResult {
+        if inputStackView.subviews.isEmpty == false, currentOperatorText.isEmpty || operandLabel.text == CalculatorString.failedResult {
             removeStack()
             operandLabel.text = CalculatorString.emptyString
             userInputNumber = CalculatorString.emptyString
