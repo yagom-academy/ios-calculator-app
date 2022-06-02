@@ -90,6 +90,24 @@ class CalculatorViewController: UIViewController {
         }
     }
 
+    private func determineTotalStringByDashCharacterCondition(value: String) {
+        if value.contains("-") {
+            totalString += "&\(value.dropFirst())"
+        } else {
+            totalString += value
+        }
+    }
+    
+    private func initializeValueLabelandCurrentString() {
+        makeValueLabelTextToZero()
+        makeCurrentStringToEmpty()
+    }
+    private func addLabelandSign (value: String, sender: UIButton) {
+        addNewLabel(message: value, stackView: stackView)
+        signLabel.text = mapSign(sender: sender)
+    }
+    
+    
     // 연산자 입력
     @IBAction private func tappedOperatorIntoEquation(_ sender: UIButton) {
         guard currentString.count != 0 && valueLabel.text != "" else {
@@ -97,15 +115,10 @@ class CalculatorViewController: UIViewController {
         }
         if totalString.isEmpty {
             guard let value = valueLabel.text else { return }
-            if value.contains("-") {
-                totalString += "&\(value.dropFirst())"
-            } else {
-                totalString += value
-            }
-            addNewLabel(message: value, stackView: stackView)
-            makeValueLabelTextToZero()
-            signLabel.text = mapSign(sender: sender)
-            makeCurrentStringToEmpty()
+            determineTotalStringByDashCharacterCondition(value: value)
+            addLabelandSign(value: value, sender: sender)
+            initializeValueLabelandCurrentString()
+            
         } else {
             if valueLabel.text == "0" {
                 signLabel.text = mapSign(sender: sender)
@@ -114,16 +127,9 @@ class CalculatorViewController: UIViewController {
                 guard let retrievedValue = valueLabel.text else { return }
                 makeCurrentStringToEmpty()
                 totalString += retrievedSign
-                if retrievedValue.contains("-") {
-                    totalString += "&\(retrievedValue.dropFirst())"
-                } else {
-                    totalString += retrievedValue
-                }
-                
-                addNewLabel(message: retrievedSign + retrievedValue, stackView: stackView)
-                makeValueLabelTextToZero()
-                signLabel.text = mapSign(sender: sender)
-                makeCurrentStringToEmpty()
+                determineTotalStringByDashCharacterCondition(value: retrievedValue)
+                addLabelandSign(value: retrievedSign + retrievedValue, sender: sender)
+                initializeValueLabelandCurrentString()
             }
         }
     }
