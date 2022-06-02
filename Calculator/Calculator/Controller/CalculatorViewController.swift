@@ -230,12 +230,7 @@ class CalculatorViewController: UIViewController {
     
     private func didTapSignButton() {
         if presentValue.contains("-") {
-            presentValue = presentValue.filter { word in
-                if word == "-" {
-                    return false
-                }
-                return true
-            }
+            filterHyphen()
         }
         
         if presentValue.contains("-") == false {
@@ -273,6 +268,15 @@ class CalculatorViewController: UIViewController {
             numberLabel.text = trimmedResult
             makeResultLabel()
             userIsInTheAfterTabEqualButton = true
+        }
+    }
+    
+    private func filterHyphen() {
+        presentValue = presentValue.filter { word in
+            if word == "-" {
+                return false
+            }
+            return true
         }
     }
 }
