@@ -130,8 +130,7 @@ class CalculatorViewController: UIViewController {
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
         
-        let bottomOffset = CGPoint(x: 0,
-                                   y: previousValues.contentSize.height -
+        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
                                    previousValues.bounds.height +
                                    numberLabel.font.lineHeight)
         previousValues.setContentOffset(bottomOffset, animated: false)
@@ -160,8 +159,7 @@ class CalculatorViewController: UIViewController {
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
         
-        let bottomOffset = CGPoint(x: 0,
-                                   y: previousValues.contentSize.height -
+        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
                                    previousValues.bounds.height +
                                    numberLabel.font.lineHeight)
         
