@@ -7,8 +7,8 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    var currentString: String = ""
-    var totalString: String = ""
+    private var currentString: String = ""
+    private var totalString: String = ""
 
     @IBOutlet var stackView: UIStackView!
 
