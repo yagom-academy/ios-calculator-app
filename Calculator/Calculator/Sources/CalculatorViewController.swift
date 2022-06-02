@@ -68,7 +68,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func makeValueLabelTextToZero() {
-        valueLabel.text = "0"
+        valueLabel.text = NumberNamespace.zero
     }
 
     private func makeStackViewToEmpty() {
@@ -92,7 +92,7 @@ class CalculatorViewController: UIViewController {
     }
 
     private func determineTotalStringByDashCharacterCondition(value: String) {
-        if value.contains("-") {
+        if value.contains(NumberNamespace.minusSign) {
             totalString += "&\(value.dropFirst())"
         } else {
             totalString += value
@@ -121,7 +121,7 @@ class CalculatorViewController: UIViewController {
             initializeValueLabelandCurrentString()
             
         } else {
-            if valueLabel.text == "0" {
+            if valueLabel.text == NumberNamespace.zero {
                 signLabel.text = mapSign(sender: sender)
             } else {
                 guard let retrievedSign = signLabel.text else { return }
@@ -139,38 +139,38 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tappedOperandIntoEquation(_ sender: UIButton) {
         switch sender {
         case oneButton:
-            currentString += "1"
+            currentString += NumberNamespace.one
         case twoButton:
-            currentString += "2"
+            currentString += NumberNamespace.two
         case threeButton:
-            currentString += "3"
+            currentString += NumberNamespace.three
         case fourButton:
-            currentString += "4"
+            currentString += NumberNamespace.four
         case fiveButton:
-            currentString += "5"
+            currentString += NumberNamespace.five
         case sixButton:
-            currentString += "6"
+            currentString += NumberNamespace.six
         case sevenButton:
-            currentString += "7"
+            currentString += NumberNamespace.seven
         case eightButton:
-            currentString += "8"
+            currentString += NumberNamespace.eight
         case nineButton:
-            currentString += "9"
+            currentString += NumberNamespace.nine
         case zeroButton:
-            if currentString == "0" {
+            if currentString == NumberNamespace.zero {
                 return
             }
-            currentString += "0"
+            currentString += NumberNamespace.zero
         case doubleZeroButton:
             if currentString.isEmpty {
                 return
             }
-            currentString += "00"
+            currentString += NumberNamespace.doubleZero
         case dotButton:
-            if currentString.isEmpty || currentString.contains(".") {
+            if currentString.isEmpty || currentString.contains(NumberNamespace.dot) {
                 return
             }
-            currentString += "."
+            currentString += NumberNamespace.dot
         default:
             makeCurrentStringToEmpty()
         }
@@ -187,7 +187,7 @@ class CalculatorViewController: UIViewController {
             currentString = "\(sign)\(value)"
             addNewLabel(message: currentString, stackView: stackView)
             totalString += sign
-            if value.contains("-") {
+            if value.contains(NumberNamespace.minusSign) {
                 totalString += "&\(value.dropFirst())"
             } else {
                 totalString += value
@@ -223,10 +223,10 @@ class CalculatorViewController: UIViewController {
 
     @IBAction private func tappedPlusMinusSwap(sender: UIButton) {
         guard let value = valueLabel.text else { return }
-        if value.contains("-") {
+        if value.contains(NumberNamespace.minusSign) {
             valueLabel.text = String(value.dropFirst())
         } else {
-            if value == "0" {
+            if value == NumberNamespace.zero {
                 return
             }
             valueLabel.text = "-\(value)"
