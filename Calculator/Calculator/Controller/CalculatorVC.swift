@@ -31,5 +31,9 @@ extension CalculatorVC {
         
         numberInput?.text! += sender.currentTitle!
     }
+    
+    @IBAction private func operatorButtonTapped(_ sender: UIButton) {
+        operatorInput.text = sender.currentTitle
+    }
 }
 
