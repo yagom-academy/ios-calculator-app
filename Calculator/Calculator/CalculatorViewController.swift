@@ -57,7 +57,7 @@ class CalculateViewController: UIViewController {
         let formattedText = senderLabelText.formatNumber()
         
         if operandsTextLabel.text == MagicLiteral.nan {
-            operandsTextLabel.text = MagicLiteral.empty
+            operandsTextLabel.text?.removeAll()
             return
         } else if operandsTextLabel.text == MagicLiteral.zero {
             operandsTextLabel.text = MagicLiteral.empty
@@ -68,7 +68,7 @@ class CalculateViewController: UIViewController {
         
         if isCalculated == true {
             operandsTextLabel.text?.append(formattedText)
-            operatorTextLabel.text = MagicLiteral.empty
+            operatorTextLabel.text?.removeAll()
             operandsTextLabel.text = senderLabelText
             isCalculated = false
             return
@@ -118,13 +118,13 @@ class CalculateViewController: UIViewController {
             result = try calculator.result()
         } catch OperatorError.devideFail {
             addStackView()
-            expressionParserInput = MagicLiteral.empty
-            operatorTextLabel.text = MagicLiteral.empty
+            expressionParserInput.removeAll()
+            operatorTextLabel.text?.removeAll()
             operandsTextLabel.text? = OperatorError.devideFail.errorDescription
             return
         } catch {
-            expressionParserInput = MagicLiteral.empty
-            operatorTextLabel.text = MagicLiteral.empty
+            expressionParserInput.removeAll()
+            operatorTextLabel.text?.removeAll()
             operandsTextLabel.text? = QueueError.unknown.errorDescription
             return
         }
@@ -132,7 +132,7 @@ class CalculateViewController: UIViewController {
         guard let formattedResult = result?.formatText() else { return }
         
         addStackView()
-        operatorTextLabel.text = MagicLiteral.empty
+        operatorTextLabel.text?.removeAll()
         operandsTextLabel.text = formattedResult
         expressionParserInput = formattedResult
     }
@@ -162,7 +162,7 @@ class CalculateViewController: UIViewController {
         isCalculated = false
         deleteStackViewAll()
         deleteTextLabelText()
-        expressionParserInput = MagicLiteral.empty
+        expressionParserInput.removeAll()
     }
     
     //MARK: - clearEntryButtonTapped
@@ -170,6 +170,7 @@ class CalculateViewController: UIViewController {
         if isCalculated == true {
             operandsTextLabel.text = MagicLiteral.zero
             deleteStackViewAll()
+            expressionParserInput.removeAll()
             isCalculated = false
         }
         
@@ -191,7 +192,7 @@ class CalculateViewController: UIViewController {
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let senderLabelText = sender.titleLabel?.text else { return }
         if isCalculated == true {
-            operatorTextLabel.text = MagicLiteral.empty
+            operatorTextLabel.text?.removeAll()
             operandsTextLabel.text = senderLabelText
             isCalculated = false
             return
@@ -270,7 +271,7 @@ class CalculateViewController: UIViewController {
     
     //MARK: - deleteTextLabelText()
     private func deleteTextLabelText() {
-        operatorTextLabel.text = MagicLiteral.empty
+        operatorTextLabel.text?.removeAll()
         operandsTextLabel.text = MagicLiteral.zero
     }
 }
