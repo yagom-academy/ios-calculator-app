@@ -9,8 +9,14 @@ struct Formula {
     
     // MARK: - Properties
     
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
+    
+    // MARK: - Initializer
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
+    }
     
     // MARK: - Action
     
