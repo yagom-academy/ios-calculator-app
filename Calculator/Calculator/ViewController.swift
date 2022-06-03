@@ -132,25 +132,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapToggleButton(_ sender: UIButton) {
-        guard let presentNumber = operandsLabel.text else {
+        guard let presentNumber = operandsLabel.text, presentNumber != "0" else {
             return
         }
         
-        guard presentNumber != "0" else {
-            return
-        }
-        
-        if presentNumber.contains("−") {
-            operandsLabel.text = presentNumber.filter { element -> Bool in
-                if element == "-" {
-                    return false
-                }
-                return true
-            }
-            
-        } else {
-            operandsLabel.text = "-" + presentNumber
-        }
+        checkIncludeHyphen(to: presentNumber)
         
         let valueStackArray = valueStack.split(with: " ").dropLast().reduce("", +)
         valueStack = valueStackArray + (operandsLabel.text ?? "")
@@ -174,6 +160,19 @@ class ViewController: UIViewController {
         }
         
         return value
+    }
+    
+    private func checkIncludeHyphen(to presentNumber: String) {
+        if presentNumber.contains("−") {
+            operandsLabel.text = presentNumber.filter { element -> Bool in
+                if element == "−" {
+                    return false
+                }
+                return true
+            }
+            return
+        }
+        operandsLabel.text = "−" + presentNumber
     }
 }
 
