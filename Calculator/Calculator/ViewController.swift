@@ -75,8 +75,9 @@ class ViewController: UIViewController {
             operandsLabel.text = buttonTitle
             valueStack += buttonTitle
         }
+        
         userIsInTheMiddleOfTyping = true
-        }
+    }
     
     @IBAction func didTapOperatorButton(_ sender: UIButton) {
         guard let operatorButtonTitle = sender.currentTitle else {
@@ -101,6 +102,7 @@ class ViewController: UIViewController {
             operandsLabel.text = convertToDecimal(result)
             makeResultLabel()
         }
+        
         userIsInTheMiddleOfTyping = true
     }
     
@@ -114,7 +116,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTabclearEntryButton(_ sender: UIButton) {
-        
         if let lastIndex = valueStack.last, Double(String(lastIndex)) != nil {
             operandsLabel.text = String((operandsLabel.text ?? "0").dropLast())
         } else {
@@ -133,9 +134,11 @@ class ViewController: UIViewController {
         guard let presentNumber = operandsLabel.text else {
             return
         }
+        
         guard presentNumber != "0" else {
             return
         }
+        
         if presentNumber.contains("−") {
             operandsLabel.text = presentNumber.filter { element -> Bool in
                 if element == "-" {
@@ -143,9 +146,11 @@ class ViewController: UIViewController {
                 }
                 return true
             }
+            
         } else {
             operandsLabel.text = "-" + presentNumber
-            }
+        }
+        
         let valueStackArray = valueStack.split(with: " ").dropLast().reduce("", +)
         valueStack = valueStackArray + (operandsLabel.text ?? "")
     }
