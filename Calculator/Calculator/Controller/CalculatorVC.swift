@@ -13,6 +13,11 @@ final class CalculatorVC: UIViewController {
     
     @IBOutlet private weak var inputHistoryStackView: UIStackView!
     
+    private var resultExpression = ""
+    
+    private var currentNumber = ""
+    private var currentOperator = ""
+    
     // MARK: - Life Cycle
         
     override func viewDidLoad() {
@@ -38,14 +43,14 @@ extension CalculatorVC {
         operatorSignLabel.translatesAutoresizingMaskIntoConstraints = false
         operatorSignLabel.textColor = .white
         operatorSignLabel.backgroundColor = .black
-        operatorSignLabel.text = "operator"
+        operatorSignLabel.text = currentOperator
         operatorSignLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let numberLabel = UILabel()
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.textColor = .white
         numberLabel.backgroundColor = .black
-        numberLabel.text = "number"
+        numberLabel.text = currentNumber
         numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         inputItemStackView.addArrangedSubview(operatorSignLabel)
@@ -65,11 +70,30 @@ extension CalculatorVC {
         }
         
         numberInputLabel?.text! += sender.currentTitle!
+        currentNumber += sender.currentTitle!
+        printStatus()
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         operatorInputLabel.text = sender.currentTitle
-        insertCurrentItemIntoHistory()
+ 
+        if !currentNumber.isEmpty {
+            insertCurrentItemIntoHistory()
+            numberInputLabel?.text! = "0"
+            
+            resultExpression += currentOperator + currentNumber
+            
+            currentOperator = sender.currentTitle!
+            currentNumber = ""
+        }
+        
+        printStatus()
+    }
+    
+    func printStatus() {
+        print("total: \(resultExpression)")
+        print("currentOperator: \(currentOperator)")
+        print("currentNumber: \(currentNumber)")
     }
 }
 
