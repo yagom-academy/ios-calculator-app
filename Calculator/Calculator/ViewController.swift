@@ -144,8 +144,7 @@ class ViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         let bottomOffSet =
-        CGPoint(x: 0, y: scrollView.contentSize.height -
-                scrollView.bounds.height)
+        CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height)
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(bottomOffSet, animated: true)
     }
