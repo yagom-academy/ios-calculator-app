@@ -7,7 +7,7 @@
 import UIKit
 import Foundation
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var inputNumberLabel: UILabel!
@@ -61,7 +61,7 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension CalculatorViewController {
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
         calculatorManager.removeAll()
     }
@@ -80,7 +80,7 @@ extension ViewController {
     }
 }
 
-extension ViewController {
+extension CalculatorViewController {
     @IBAction private func tapKeypadButton(_ sender: UIButton) {
         guard let buttonIndex = keypad.firstIndex(of: sender) else { return }
         
