@@ -140,16 +140,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapSignButton() {
-        if presentNumbers.contains("-") {
-            presentNumbers = presentNumbers.filter { word in
-                if word == "-" {
-                    return false
-                }
-                return true
-            }
-        } else {
-            presentNumbers = "-" + presentNumbers
-        }
+        checkNumberSign()
         numberLabel.text = "\(presentNumbers)"
     }
     
@@ -169,6 +160,23 @@ class CalculatorViewController: UIViewController {
         
         presentNumbers += buttonTitle
         numberLabel.text = buttonTitle
+    }
+    
+    private func checkNumberSign() {
+        if presentNumbers.contains("-") {
+            filterNumberSign()
+            return
+        }
+        presentNumbers = "-" + presentNumbers
+    }
+    
+    private func filterNumberSign() {
+        presentNumbers = presentNumbers.filter { word in
+            if word == "-" {
+                return false
+            }
+            return true
+        }
     }
 }
 
