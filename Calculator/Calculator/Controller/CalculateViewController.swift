@@ -21,28 +21,28 @@ class CalculateViewController: UIViewController {
     }
     
     //MARK: - Button Action
-    @IBAction private func tabAcButton() {
+    @IBAction private func tapAcButton() {
         setCalculatorDefaultView()
         calcultorInternalAction.setDefaultValue()
     }
     
-    @IBAction private func tabCeButton() {
+    @IBAction private func tapCeButton() {
         setCalculatorDefaultOperlandLabel()
     }
     
-    @IBAction private func tabChangeTheSignButton() {
+    @IBAction private func tapChangeTheSignButton() {
         changeTheSignOperandLabel()
     }
     
-    @IBAction private func tabOperandButton(_ sender: UIButton) {
+    @IBAction private func tapOperandButton(_ sender: UIButton) {
         setOperandLabel(with: sender.currentTitle)
     }
     
-    @IBAction private func tabOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         setOperatorLabel(with: sender.currentTitle)
     }
     
-    @IBAction private func tabEqualButton() {
+    @IBAction private func tapEqualButton() {
         setCalculationResult()
     }
     
