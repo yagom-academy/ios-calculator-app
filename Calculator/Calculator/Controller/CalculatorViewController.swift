@@ -47,6 +47,8 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = CalculatorString.emptyString
     }
     
+    //MARK: - buttons
+    
     @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
         guard let digit = sender.currentTitle else{ return }
         guard let currentOperandText = operandLabel.text else { return }
@@ -66,7 +68,7 @@ final class CalculatorViewController: UIViewController {
         } else {
             operandLabel.text = digit
         }
-       
+        
         makeValidNumber()
         userIsInTheMiddleOfTyping = true
         userInputNumber.append(digit)
@@ -91,7 +93,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
         guard operandLabel.text != "NaN" else { return }
-       
+        
         if operandLabel.text == CalculatorString.zero && inputStackView.subviews.isEmpty == false && userInput.count >= 2 {
             operatorLabel.text = operators
             userInput.removeLast()
@@ -172,6 +174,8 @@ final class CalculatorViewController: UIViewController {
             return
         }
     }
+    
+    //MARK: - methods
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
         let validNumber = (operandLabel.text ?? CalculatorString.emptyString).replacingOccurrences(of: ",", with: CalculatorString.emptyString)
