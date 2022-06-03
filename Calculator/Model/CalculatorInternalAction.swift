@@ -9,8 +9,8 @@ import Foundation
 
 struct CalculatorInternalAction {
     //MARK: - Property
-    private (set) var isOperandInputted = false
-    private (set) var isCalculateCompleted = false
+    private(set) var isOperandInputted = false
+    private(set) var isCalculateCompleted = false
     private var inputtedFomula = CalculatorDefaultValue.fomula
     
     //MARK: - Main Method
@@ -29,7 +29,7 @@ struct CalculatorInternalAction {
         return String((operand * -1).parse())
     }
     
-    mutating func appendOperand(_ currentOperland: String?, _ title: String?) -> String {
+    mutating func appendOperland(_ currentOperland: String?, _ title: String?) -> String {
         guard let tabNumber = title else {
             return CalculatorDefaultValue.operandLabel
         }
@@ -64,7 +64,7 @@ struct CalculatorInternalAction {
         }
     }
     
-    //MARK: - Sub Method
+    //MARK: - Private Method
     private func filterSign(_ input: String, _ sign: String.Element) -> String {
         return input.filter { $0 != sign }
     }
