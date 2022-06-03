@@ -150,15 +150,16 @@ class ViewController: UIViewController {
     }
     
     private func convertToDecimal(_ number: Double) -> String {
+        var valueStorage = ""
         let format = NumberFormatter()
         format.numberStyle = .decimal
         format.maximumSignificantDigits = 20
         format.roundingMode = .up
-        guard let value = format.string(for: number) else {
-            return "0"
-        }
         
-        return value
+        if let value = format.string(for: number) {
+            valueStorage = value
+        }
+        return valueStorage
     }
     
     private func checkIncludeHyphen(to presentNumber: String) {
