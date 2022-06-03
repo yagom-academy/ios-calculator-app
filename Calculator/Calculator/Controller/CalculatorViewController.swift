@@ -11,6 +11,7 @@ enum CalculatorString {
     static let emptyString: String = ""
     static let failedResult: String = "NaN"
     static let whiteSpace: String = " "
+    static let maximumNumber: Int = 20
 }
 
 final class CalculatorViewController: UIViewController {
@@ -20,7 +21,17 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    private let numberFormatter = NumberFormatter()
+    
+    private lazy var numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumIntegerDigits = 1
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = CalculatorString.maximumNumber
+        formatter.maximumIntegerDigits = CalculatorString.maximumNumber
+        
+        return formatter
+    }()
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
@@ -42,7 +53,7 @@ final class CalculatorViewController: UIViewController {
         
         initiateCaculator()
         
-        if currentOperandText.count >= 20 {
+        if currentOperandText.count >= CalculatorString.maximumNumber {
             return
         }
         
@@ -249,12 +260,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func doNumberFormatter(number:Double) -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumIntegerDigits = 1
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.maximumIntegerDigits = 20
-        
         guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
             return CalculatorString.failedResult
         }
