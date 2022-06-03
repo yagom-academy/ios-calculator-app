@@ -13,7 +13,7 @@ extension String {
 }
 
 extension String { //self , currentoperand
-    func canInput(_ currentOperandLabel: String?) -> Bool {
+    func canInput(currentOperandLabel: String?) -> Bool {
         guard let currentOperandLabel = currentOperandLabel else {
             return false
         }
@@ -30,7 +30,7 @@ extension String { //self , currentoperand
         }
     }
     
-    func canReturn(_ currentOperandLabel: String?) -> String? {
+    func canModify(currentOperandLabel: String?) -> String? {
         guard let currentOperandLabel = currentOperandLabel else {
             return nil
         }

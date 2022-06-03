@@ -20,47 +20,46 @@ class ViewController: UIViewController {
     }
     
     // MARK: - IBAction
-    @IBAction func pressOperandButton(_ sender: UIButton) {
-        if operationStackView.canAdd(currentOperatorLabel.text ?? CalcAccessory.empty) == false {
+    @IBAction func operandButtonDidTap(_ sender: UIButton) {
+        if operationStackView.canAddOperand(currentOperatorLabel.text ?? CalcAccessory.empty) == false {
             return
-        } else if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: ".", with: "").count, operandLabelCount >= 20 {
+        } else if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: CalcAccessory.dot, with: CalcAccessory.empty).count, operandLabelCount >= 20 {
             return
         }
         
-        let operandLabel = changeDoubleStyle(currentOperandLabel.text)
-        if (sender.currentTitle ?? "").canInput(operandLabel) == false {
+        let rawOperandLabel = changeDoubleStyle(currentOperandLabel.text)
+        if (sender.currentTitle ?? CalcAccessory.empty).canInput(currentOperandLabel: rawOperandLabel) == false {
             return
-        } else if let number = sender.currentTitle?.canReturn(operandLabel) {
+        } else if let number = sender.currentTitle?.canModify(currentOperandLabel: rawOperandLabel) {
             currentOperandLabel.text = number
             return
         }
         
-        let doubleStyleOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? "")
-        if isZeroNumber(doubleStyleOperand) {
-            currentOperandLabel.text = doubleStyleOperand
+        let entireOperandLabel = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? CalcAccessory.empty)
+        if isZeroNumber(entireOperandLabel) {
+            currentOperandLabel.text = entireOperandLabel
             return
         }
         
-        currentOperandLabel?.text = applyNumberFormatterToInteger(doubleStyleOperand)
+        currentOperandLabel?.text = applyNumberFormatterToInteger(entireOperandLabel)
     }
     
-    @IBAction func pressOperatorButton(_ sender: UIButton) {
+    @IBAction func operatorButtonDidTap(_ sender: UIButton) {
         guard currentOperandLabel.text != CalcAccessory.nan else {
             return
         }
         
-        let doubleStyleOperandLabel = changeDoubleStyle(currentOperandLabel.text)
-        guard doubleStyleOperandLabel != CalcAccessory.zero else {
+        let operandLabel = changeDoubleStyle(currentOperandLabel.text)
+        guard operandLabel != CalcAccessory.zero else {
             currentOperatorLabel.text = (sender.currentTitle ?? CalcAccessory.empty)
             return
         }
         
-        if doubleStyleOperandLabel.last == Character(CalcAccessory.dot) {
+        if operandLabel.last == Character(CalcAccessory.dot) {
             currentOperandLabel.text?.removeLast()
         }
-        
         addCurrentOperationToScrollViewContent()
-        operationStack += "\(doubleStyleOperandLabel) \(sender.currentTitle ?? CalcAccessory.empty) "
+        operationStack += "\(operandLabel) \(sender.currentTitle ?? CalcAccessory.empty) "
         currentOperatorLabel.text = sender.currentTitle
         clearCurrentOperandLabel()
         scrollToBottom()
@@ -123,7 +122,7 @@ class ViewController: UIViewController {
         do {
             let operationResult = try formula.result()
             currentOperandLabel.text = applyNumberFormatter(String(operationResult))
-        } catch CalculatorError.divideByZero {
+        } catch CalculatorError.dividedByZero {
             currentOperandLabel.text = CalcAccessory.nan
         } catch {
             debugPrint("UNKNOWN ERROR")
@@ -161,12 +160,12 @@ extension ViewController {
     
     private func createOpearionStackViewContent(inputOperator: String, inputOperand: String) -> UILabel {
         let currentOperation = "\(inputOperator) \(inputOperand)"
-        let currentOperationUILabel = createUILabel(currentOperation)
+        let currentOperationUILabel = createLabel(currentOperation)
         
         return currentOperationUILabel
     }
     
-    private func createUILabel(_ text: String) -> UILabel {
+    private func createLabel(_ text: String) -> UILabel {
         let label = UILabel()
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3, compatibleWith: nil)
@@ -197,24 +196,26 @@ extension ViewController {
     
     private func applyNumberFormatterToInteger(_ input: String?) -> String {
         guard let input = input else {
-            return ""
+            return CalcAccessory.empty
         }
-        let splitedInput: [String] = input.components(separatedBy: ".")
-        let integerDigit = splitedInput[0]
-        if splitedInput.count == 1 {
+        // ["1,213", "313"]
+        let inputSplitedByDot: [String] = input.components(separatedBy: CalcAccessory.dot)
+        let integerDigit = inputSplitedByDot[0]
+        if inputSplitedByDot.count == 1 {
             return applyNumberFormatter(integerDigit)
         } else {
-            return applyNumberFormatter(integerDigit) + "." + splitedInput[1]
+            return applyNumberFormatter(integerDigit) + CalcAccessory.dot + inputSplitedByDot[1]
         }
     }
     
     private func changeDoubleStyle(_ input: String?) -> String {
-        return input?.replacingOccurrences(of: ",", with: "") ?? ""
+        return input?.replacingOccurrences(of: CalcAccessory.comma, with: CalcAccessory.empty) ?? CalcAccessory.empty
     }
     
     private func isZeroNumber(_ input: String) -> Bool {
-        let removeDotNumber = input.replacingOccurrences(of: ".", with: "")
-        let removeZero = removeDotNumber.replacingOccurrences(of: "0", with: "")
-        return removeZero == "" ? true : false
+        let removeDotNumber = input.replacingOccurrences(of: CalcAccessory.dot, with: CalcAccessory.empty)
+        let removeZero = removeDotNumber.replacingOccurrences(of: CalcAccessory.zero, with: CalcAccessory.empty)
+        
+        return removeZero == CalcAccessory.empty ? true : false
     }
 }
