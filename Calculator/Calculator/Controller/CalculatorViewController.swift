@@ -38,7 +38,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
-        let buttonTitle = sender.currentTitle!
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
         
         if presentNumbers.contains(".") && buttonTitle == "." {
             return
@@ -47,7 +49,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
-        let buttonTitle = sender.currentTitle!
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
         
         presentOperator = buttonTitle
         operatorLabel.text = buttonTitle
@@ -62,7 +66,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchOptionButton(_ sender: UIButton) {
-        let buttonTitle = sender.currentTitle!
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
         
         if buttonTitle == OptionButton.allClear.rawValue  {
             didTapAllClearButton()
@@ -117,7 +123,6 @@ class CalculatorViewController: UIViewController {
                 return
             }
             numberLabel.text = NSNresult
-            
         }
         inputValue = ""
         presentNumbers = ""
