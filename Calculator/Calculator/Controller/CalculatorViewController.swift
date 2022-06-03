@@ -62,8 +62,7 @@ final class CalculatorViewController: UIViewController {
         
         if userIsInTheMiddleOfTyping {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
-        }
-        else if currentOperandText.contains(".") {
+        } else if currentOperandText.contains(".") {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
             userIsInTheMiddleOfTyping = true
         } else {
@@ -177,15 +176,10 @@ final class CalculatorViewController: UIViewController {
     //MARK: - methods
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        let validNumber = deleteComma(in: operandLabel.text)
-        
-        guard let doubleNumber = Double(validNumber) else { return nil }
-        let number = doNumberFormatter(number: doubleNumber)
-        
-        guard let `operator` = operatorLabel.text else { return nil }
+        guard let `operator` = operatorLabel.text, let operand = operandLabel.text else { return nil }
         
         let operatorStackLabel = setLabel(`operator`)
-        let numberStackLabel = setLabel(number)
+        let numberStackLabel = setLabel(operand)
         
         return (operatorStackLabel, numberStackLabel)
     }
