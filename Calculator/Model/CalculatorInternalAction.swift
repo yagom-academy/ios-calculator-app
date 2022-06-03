@@ -29,12 +29,12 @@ struct CalculatorInternalAction {
         return String((operand * -1).parse())
     }
     
-    mutating func appendOperland(_ currentOperland: String?, _ title: String?) -> String {
+    mutating func appendOperand(_ currentOperand: String?, _ title: String?) -> String {
         guard let tabNumber = title else {
             return CalculatorDefaultValue.operandLabel
         }
         
-        let result = !isOperandInputted ? tabNumber : checkOperand(getText(currentOperland), with: tabNumber)
+        let result = !isOperandInputted ? tabNumber : checkOperand(getText(currentOperand), with: tabNumber)
         isOperandInputted = true
         
         return result
