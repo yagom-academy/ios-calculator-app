@@ -164,7 +164,7 @@ final class CalculatorViewController: UIViewController {
             
             operandLabel.text = number
             userInput = CalculatorString.emptyString
-            userInputNumber = number.replacingOccurrences(of: ",", with: CalculatorString.emptyString)
+            userInputNumber = deleteComma(in: number)
         } catch CalculatorError.divideZero {
             operandLabel.text = CalculatorString.failedResult
             userInput = CalculatorString.emptyString
@@ -178,7 +178,7 @@ final class CalculatorViewController: UIViewController {
     //MARK: - methods
     
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        let validNumber = (operandLabel.text ?? CalculatorString.emptyString).replacingOccurrences(of: ",", with: CalculatorString.emptyString)
+        let validNumber = deleteComma(in: operandLabel.text)
         
         guard let doubleNumber = Double(validNumber) else { return nil }
         let number = doNumberFormatter(number: doubleNumber)
@@ -255,5 +255,12 @@ final class CalculatorViewController: UIViewController {
         }
         return formattedNumber
     }
+    
+    private func deleteComma(in text: String?) -> String {
+        guard let nonOptionalText = text else { return CalculatorString.emptyString}
+        guard nonOptionalText.contains(",") else { return nonOptionalText }
+        return nonOptionalText.replacingOccurrences(of: ",", with: CalculatorString.emptyString)
+    }
 }
+
 
