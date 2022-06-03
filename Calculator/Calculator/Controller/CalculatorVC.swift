@@ -18,6 +18,8 @@ final class CalculatorVC: UIViewController {
     private var currentNumber = ""
     private var currentOperator = ""
     
+    private var firstInputAfterCalculation = false
+    
     // MARK: - Life Cycle
         
     override func viewDidLoad() {
@@ -65,8 +67,9 @@ extension CalculatorVC {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        if numberInputLabel.text == "0" {
+        if numberInputLabel.text == "0" || firstInputAfterCalculation == true {
             numberInputLabel.text = ""
+            firstInputAfterCalculation = false
         }
         
         numberInputLabel?.text! += sender.currentTitle!
@@ -90,6 +93,25 @@ extension CalculatorVC {
         }
         
         printStatus()
+    }
+    
+    @IBAction func equalButtonTapped(_ sender: UIButton) {
+        do {
+            if !currentOperator.isEmpty && !currentNumber.isEmpty {
+                resultExpression += currentOperator + currentNumber
+                let result = try ExpressionParser.parse(from: resultExpression).result()
+                insertCurrentItemIntoHistory()
+                operatorInputLabel.text = ""
+                currentOperator = ""
+                currentNumber = ""
+                numberInputLabel.text = String(result)
+                firstInputAfterCalculation = true
+            }
+        } catch CalculatorError.dividedByZero {
+            numberInputLabel.text = CalculatorError.dividedByZero.description
+        } catch {
+            numberInputLabel.text = "error"
+        }
     }
     
     func printStatus() {
