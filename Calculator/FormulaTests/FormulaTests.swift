@@ -17,7 +17,15 @@ class FormulaTests: XCTestCase {
     // MARK: - Actions
     
     override func setUpWithError() throws {
-        sut = Formula()
+        var operandsQueue = CalculatorItemQueue<Double>()
+        let operands: [Double] = [2.0, 3.0, 1.0, 4.0, 4.0]
+        operands.forEach( { operandsQueue.enqueue($0) } )
+        
+        var operatorsQueue = CalculatorItemQueue<Operator>()
+        let operators: [Operator] = [.add, .subtract, .multiply, .divide]
+        operators.forEach( { operatorsQueue.enqueue($0) } )
+        
+        sut = Formula(operands: operandsQueue, operators: operatorsQueue)
     }
 
     override func tearDownWithError() throws {
@@ -28,10 +36,15 @@ class FormulaTests: XCTestCase {
 
     func test_result메서드_2더하기3빼기1곱하기4나누기4는_4가나온다() throws {
         // given
-        let numbersArray = [2.0, 3.0, 1.0, 4.0, 4.0]
-        let operatorsArray: [Operator] = [.add, .subtract, .multiply, .divide]
-        numbersArray.forEach { sut.operands.enqueue($0) }
-        operatorsArray.forEach { sut.operators.enqueue($0) }
+        var operandsQueue = CalculatorItemQueue<Double>()
+        let operands: [Double] = [2.0, 3.0, 1.0, 4.0, 4.0]
+        operands.forEach( { operandsQueue.enqueue($0) } )
+        
+        var operatorsQueue = CalculatorItemQueue<Operator>()
+        let operators: [Operator] = [.add, .subtract, .multiply, .divide]
+        operators.forEach( { operatorsQueue.enqueue($0) } )
+        
+        sut = Formula(operands: operandsQueue, operators: operatorsQueue)
         
         // when
         let result = try sut.result()
@@ -42,11 +55,16 @@ class FormulaTests: XCTestCase {
     
     func test_result메서드_0으로_나누면_에러처리하고_NaN을_리턴한다() throws -> String {
         // given
-        let numbersArray = [1.0, 2.0, 3.0, 4.0, 0.0]
-        let operatorsArray: [Operator] = [.add, .subtract, .add, .divide]
-        numbersArray.forEach { sut.operands.enqueue($0) }
-        operatorsArray.forEach { sut.operators.enqueue($0) }
+        var operandsQueue = CalculatorItemQueue<Double>()
+        let operands: [Double] = [1.0, 2.0, 3.0, 4.0, 0.0]
+        operands.forEach( { operandsQueue.enqueue($0) } )
         
+        var operatorsQueue = CalculatorItemQueue<Operator>()
+        let operators: [Operator] = [.add, .subtract, .multiply, .divide]
+        operators.forEach( { operatorsQueue.enqueue($0) } )
+        
+        sut = Formula(operands: operandsQueue, operators: operatorsQueue)
+
         // then
         do {
             let result = try sut.result()
