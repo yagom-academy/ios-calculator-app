@@ -85,6 +85,8 @@ extension CalculatorVC {
             
             currentOperator = sender.currentTitle!
             currentNumber = ""
+        } else {
+            currentOperator = sender.currentTitle!
         }
         
         printStatus()
