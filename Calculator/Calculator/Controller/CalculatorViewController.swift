@@ -56,7 +56,7 @@ final class CalculatorViewController: UIViewController {
         
         initiateCaculator()
         
-        if currentOperandText.count >= CalculatorString.maximumNumber {
+        if currentOperandText.count >= 26 {
             return
         }
         
