@@ -40,25 +40,10 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchNumberButton(_ sender: UIButton) {
         let buttonTitle = sender.currentTitle!
         
-        if operatorStorage.isEmpty == false {
-            operatorChoice += operatorStorage.removeLast()
-            inputValue += presentNumbers
-            inputValue += " \(operatorChoice) "
-            
-            presentNumbers = ""
-            operatorChoice = ""
-            operatorStorage = []
-            
-            presentNumbers += buttonTitle
-            numberLabel.text = buttonTitle
-            
-        } else if presentNumbers.contains(".") && buttonTitle == "." {
+        if presentNumbers.contains(".") && buttonTitle == "." {
             return
-            
-        } else {
-            presentNumbers += buttonTitle
-            numberLabel.text = presentNumbers
         }
+        updateNumberLabel(to: buttonTitle)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -80,18 +65,15 @@ class CalculatorViewController: UIViewController {
         let buttonTitle = sender.currentTitle!
         
         if buttonTitle == OptionButton.allClear.rawValue  {
-            didTapACButton()
-            
+            didTapAallClearButton()
         }
         
         if buttonTitle == OptionButton.clearEntry.rawValue {
-            didTapCEButton()
-            
+            didTapClearEentryButton()
         }
         
         if buttonTitle == OptionButton.changeSign.rawValue && presentNumbers != "0" {
             didTapSignButton()
-            
         }
     }
     
@@ -99,11 +81,9 @@ class CalculatorViewController: UIViewController {
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
+        let bottomOffsetY = previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight
+        let bottomOffset = CGPoint(x: 0, y: bottomOffsetY)
         
-        let bottomOffset = CGPoint(x: 0,
-                                   y: previousValues.contentSize.height -
-                                   previousValues.bounds.height +
-                                   numberLabel.font.lineHeight)
         previousValues.setContentOffset(bottomOffset, animated: false)
         
         stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -143,7 +123,7 @@ class CalculatorViewController: UIViewController {
         presentNumbers = ""
     }
     
-    private func didTapACButton() {
+    private func didTapAallClearButton() {
         presentNumbers = ""
         inputValue = ""
         numberLabel.text = "0"
@@ -154,7 +134,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func didTapCEButton() {
+    private func didTapClearEentryButton() {
         presentNumbers = ""
         numberLabel.text = "0"
     }
@@ -171,6 +151,24 @@ class CalculatorViewController: UIViewController {
             presentNumbers = "-" + presentNumbers
         }
         numberLabel.text = "\(presentNumbers)"
+    }
+    
+    private func updateNumberLabel(to buttonTitle: String) {
+        if operatorStorage.isEmpty {
+            presentNumbers += buttonTitle
+            numberLabel.text = presentNumbers
+            return
+        }
+        operatorChoice += operatorStorage.removeLast()
+        inputValue += presentNumbers
+        inputValue += " \(operatorChoice) "
+        
+        presentNumbers = ""
+        operatorChoice = ""
+        operatorStorage = []
+        
+        presentNumbers += buttonTitle
+        numberLabel.text = buttonTitle
     }
 }
 
