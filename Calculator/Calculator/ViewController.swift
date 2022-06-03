@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     private var operationStack: String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         clearOperationScrollviewContent()
@@ -28,7 +27,7 @@ class ViewController: UIViewController {
         
         let operandLabel = changeDoubleStyle(currentOperandLabel.text ?? "")
         
-        guard (sender.currentTitle ?? "").canInput(operandLabel) == false else {
+        if (sender.currentTitle ?? "").canInput(operandLabel) == false {
             return
         }
         
@@ -36,20 +35,17 @@ class ViewController: UIViewController {
             currentOperandLabel.text = number
             return
         }
-    
-        if (operandLabel == CalcAccessory.zero && sender.currentTitle != CalcAccessory.dot) || operandLabel == CalcAccessory.nan {
-            currentOperandLabel.text = CalcAccessory.empty
-        }
         
         let doubleStyleOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? "")
         
-        currentOperandLabel?.text = changeDecimalStyle(doubleStyleOperand)
-        
-        if doubleStyleOperand.last == Character(CalcAccessory.dot) {
-            currentOperandLabel.text = (currentOperandLabel.text ?? "0") +  CalcAccessory.dot
+        if isZeroNumber(doubleStyleOperand) {
+            currentOperandLabel.text = doubleStyleOperand
+            return
         }
+            
+        currentOperandLabel?.text = applyNumberFormatterToInteger(doubleStyleOperand)
     }
-
+    
     @IBAction func pressOperatorButton(_ sender: UIButton) {
         guard currentOperandLabel.text != CalcAccessory.nan else {
             return
@@ -128,7 +124,7 @@ class ViewController: UIViewController {
         
         do {
             let operationResult = try formula.result()
-            currentOperandLabel.text = changeDecimalStyle(String(operationResult))
+            currentOperandLabel.text = applyNumberFormatter(String(operationResult))
         } catch CalculatorError.divideByZero {
             currentOperandLabel.text = CalcAccessory.nan
         } catch {
@@ -188,20 +184,39 @@ extension ViewController {
                                                      y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
     
-    private func changeDecimalStyle(_ input: String?) -> String {
-        let numberFormmater = NumberFormatter()
-        numberFormmater.numberStyle = .decimal
-        numberFormmater.roundingMode = .floor
-        numberFormmater.minimumSignificantDigits = 0
-        numberFormmater.maximumSignificantDigits = 20
-        numberFormmater.minimumIntegerDigits = 1
-        numberFormmater.maximumIntegerDigits = 20
-        numberFormmater.maximumFractionDigits = 20
+    private func applyNumberFormatter(_ input: String?) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .floor
+        numberFormatter.minimumSignificantDigits = 0
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.minimumIntegerDigits = 1
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 20
         
-        return numberFormmater.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
+        return numberFormatter.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
+    }
+    
+    private func applyNumberFormatterToInteger(_ input: String?) -> String {
+        guard let input = input else {
+            return ""
+        }
+        let splitedInput: [String] = input.components(separatedBy: ".")
+        let integerDigit = splitedInput[0]
+        if splitedInput.count == 1 {
+            return applyNumberFormatter(integerDigit)
+        } else {
+            return applyNumberFormatter(integerDigit) + "." + splitedInput[1]
+        }
     }
     
     private func changeDoubleStyle(_ input: String?) -> String {
         return input?.replacingOccurrences(of: ",", with: "") ?? ""
+    }
+    
+    private func isZeroNumber(_ input: String) -> Bool {
+        let removeDotNumber = input.replacingOccurrences(of: ".", with: "")
+        let removeZero = removeDotNumber.replacingOccurrences(of: "0", with: "")
+        return removeZero == "" ? true : false
     }
 }
