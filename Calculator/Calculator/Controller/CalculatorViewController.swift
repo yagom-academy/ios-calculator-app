@@ -8,6 +8,7 @@ import UIKit
 
 enum CalculatorString {
     static let zero: String = "0"
+    static let dot: Character = "."
     static let emptyString: String = ""
     static let failedResult: String = "NaN"
     static let whiteSpace: String = " "
@@ -75,19 +76,17 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
-        guard let currentOperandText = operandLabel.text else { return }
-        guard currentOperandText.contains(Character(dot)) == false else { return }
+        guard operandLabel.text?.contains(CalculatorString.dot) == false else { return }
         
         if operandLabel.text == CalculatorString.zero {
             operandLabel.text = "0."
             userInputNumber.append(contentsOf: CalculatorString.zero)
             userIsInTheMiddleOfTyping = true
         } else {
-            operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + dot
+            operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + String(CalculatorString.dot)
         }
         
-        userInputNumber.append(dot)
+        userInputNumber.append(CalculatorString.dot)
     }
     
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
