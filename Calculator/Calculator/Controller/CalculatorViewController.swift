@@ -69,7 +69,7 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text = digit
         }
         
-        makeValidNumber()
+        adaptNumberFormatter()
         userIsInTheMiddleOfTyping = true
         userInputNumber.append(digit)
     }
@@ -224,22 +224,13 @@ final class CalculatorViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
     
-    private func makeValidNumber() {
-        guard let currentOperandText = operandLabel.text else { return }
+    private func adaptNumberFormatter() {
+        guard operandLabel.text?.contains(".") == false else { return }
+  
+        let textData = deleteComma(in: operandLabel.text)
         
-        if currentOperandText.contains(",") {
-            operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString).replacingOccurrences(of: ",", with: CalculatorString.emptyString)
-        }
-        
-        if currentOperandText.contains(".") == false {
-            let userInputNumber = makeDouble(number: (operandLabel.text ?? CalculatorString.emptyString))
-            
-            guard let validNumber = userInputNumber else { return }
-            
-            let number = doNumberFormatter(number: validNumber)
-            
-            operandLabel.text = number
-        }
+        guard let validNumber = Double(textData) else { return }
+        operandLabel.text = doNumberFormatter(number: validNumber)
     }
     
     private func initiateCaculator() {
