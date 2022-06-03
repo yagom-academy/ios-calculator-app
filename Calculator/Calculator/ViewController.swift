@@ -107,7 +107,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapAllClearButton(_ sender: UIButton) {
-        expressionView.subviews.forEach { $0.removeFromSuperview()
+        expressionView.subviews.forEach { madeUIView in
+            madeUIView.removeFromSuperview()
         }
         operandsLabel.text = "0"
         operatorLabel.text?.removeAll()
