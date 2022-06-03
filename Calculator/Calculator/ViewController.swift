@@ -21,28 +21,26 @@ class ViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func pressOperandButton(_ sender: UIButton) {
-        if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: ".", with: "").count, operandLabelCount >= 20 {
+        if operationStackView.canAdd(currentOperatorLabel.text ?? CalcAccessory.empty) == false {
+            return
+        } else if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: ".", with: "").count, operandLabelCount >= 20 {
             return
         }
         
-        let operandLabel = changeDoubleStyle(currentOperandLabel.text ?? "")
-        
+        let operandLabel = changeDoubleStyle(currentOperandLabel.text)
         if (sender.currentTitle ?? "").canInput(operandLabel) == false {
             return
-        }
-        
-        if let number = sender.currentTitle?.canReturn(operandLabel) {
+        } else if let number = sender.currentTitle?.canReturn(operandLabel) {
             currentOperandLabel.text = number
             return
         }
         
         let doubleStyleOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? "")
-        
         if isZeroNumber(doubleStyleOperand) {
             currentOperandLabel.text = doubleStyleOperand
             return
         }
-            
+        
         currentOperandLabel?.text = applyNumberFormatterToInteger(doubleStyleOperand)
     }
     

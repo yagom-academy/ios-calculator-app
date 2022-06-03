@@ -4,6 +4,8 @@
 //
 //  Created by 유한석 on 2022/05/19.
 //
+
+import UIKit
 extension String {
     func split(with target: Character) -> [String] {
         return self.components(separatedBy: String(target))
@@ -16,11 +18,9 @@ extension String { //self , currentoperand
             return false
         }
         
-        if self == CalcAccessory.dot, currentOperandLabel.contains(CalcAccessory.dot) {
-            return false
-        }
-        
         switch (self, currentOperandLabel) {
+        case let (CalcAccessory.dot, operand) where operand.contains(CalcAccessory.dot):
+            return false
         case (CalcAccessory.zero, CalcAccessory.zero):
             return false
         case (CalcAccessory.doubleZero, CalcAccessory.zero) :
@@ -40,6 +40,8 @@ extension String { //self , currentoperand
             return CalcAccessory.zero + CalcAccessory.dot
         case (CalcAccessory.doubleZero, CalcAccessory.nan), (CalcAccessory.zero, CalcAccessory.nan):
             return CalcAccessory.zero
+        case ("1"..."9", CalcAccessory.nan):
+            return self
         default:
             return nil
         }
