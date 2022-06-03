@@ -131,6 +131,19 @@ extension CalculatorVC {
         printStatus()
     }
     
+    @IBAction func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
+        if currentNumber == "" {
+            return
+        } else if currentNumber.first == "-" {
+            currentNumber.remove(at: currentNumber.startIndex)
+        } else {
+            currentNumber = "-" + currentNumber
+        }
+     
+        numberInputLabel.text = currentNumber
+        printStatus()
+    }
+    
     func printStatus() {
         print("total: \(resultExpression)")
         print("currentOperator: \(currentOperator)")
