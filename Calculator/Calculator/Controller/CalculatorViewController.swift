@@ -90,7 +90,7 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
-        guard operandLabel.text != "NaN" else { return }
+        guard operandLabel.text != CalculatorString.failedResult else { return }
         
         if operandLabel.text == CalculatorString.zero && inputStackView.subviews.isEmpty == false && userInput.count >= 2 {
             operatorLabel.text = operators
@@ -110,7 +110,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didPlusMinusSignButtonTapped(_ sender: UIButton) {
-        guard operandLabel.text != "NaN" else { return }
+        guard operandLabel.text != CalculatorString.failedResult else { return }
         guard let currentOperandText = operandLabel.text else { return }
         
         if operandLabel.text == CalculatorString.zero {
@@ -141,9 +141,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didCalculateButtonTapped(_ sender: UIButton) {
-        if operatorLabel.text == CalculatorString.emptyString {
-            return
-        }
+        guard operatorLabel.text != CalculatorString.emptyString else { return }
         
         if operandLabel.text == CalculatorString.zero {
             userInput.append(CalculatorString.zero)
@@ -153,8 +151,8 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = CalculatorString.emptyString
         userInput.append(userInputNumber)
         do {
-            var result = ExpressionParser.parse(from: userInput)
-            var number = doNumberFormatter(number: try result.result())
+            var parsedFormula = ExpressionParser.parse(from: userInput)
+            var number = doNumberFormatter(number: try parsedFormula.result())
             
             if number == "-0" {
                 number = CalculatorString.zero
