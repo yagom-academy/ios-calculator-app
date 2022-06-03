@@ -258,11 +258,6 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeDouble(number: String) -> Double? {
-        guard let validNumber = Double(number) else { return nil }
-        return validNumber
-    }
-    
     private func doNumberFormatter(number:Double) -> String {
         guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
             return CalculatorString.failedResult
