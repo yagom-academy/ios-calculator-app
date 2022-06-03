@@ -10,21 +10,23 @@ extension String {
     }
 }
 
-extension String {
+extension String { //self , currentoperand
     func canInput(_ currentOperandLabel: String?) -> Bool {
         guard let currentOperandLabel = currentOperandLabel else {
             return false
         }
         
-        switch self {
-        case CalcAccessory.dot where currentOperandLabel.contains(CalcAccessory.dot):
-            return true
-        case CalcAccessory.zero where currentOperandLabel == CalcAccessory.zero:
+        if self == CalcAccessory.dot, currentOperandLabel.contains(CalcAccessory.dot) {
             return false
-        case CalcAccessory.doubleZero where currentOperandLabel == CalcAccessory.zero:
+        }
+        
+        switch (self, currentOperandLabel) {
+        case (CalcAccessory.zero, CalcAccessory.zero):
+            return false
+        case (CalcAccessory.doubleZero, CalcAccessory.zero) :
             return false
         default:
-            return false
+            return true
         }
     }
     
