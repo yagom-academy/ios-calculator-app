@@ -65,7 +65,7 @@ class CalculatorViewController: UIViewController {
         let buttonTitle = sender.currentTitle!
         
         if buttonTitle == OptionButton.allClear.rawValue  {
-            didTapAallClearButton()
+            didTapAllClearButton()
         }
         
         if buttonTitle == OptionButton.clearEntry.rawValue {
@@ -123,7 +123,7 @@ class CalculatorViewController: UIViewController {
         presentNumbers = ""
     }
     
-    private func didTapAallClearButton() {
+    private func didTapAllClearButton() {
         presentNumbers = ""
         inputValue = ""
         numberLabel.text = "0"
