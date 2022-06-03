@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by 재재 on 2022/05/18.
+//  Created by 재재, Kay on 2022/05/18.
 //
 
 import Foundation
@@ -11,6 +11,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     private var inStackItems: [T] = []
     private var outStackItems: [T] = []
+    
+    init(inStackItems: [T] = [], outStackItems: [T] = []) {
+        self.inStackItems = inStackItems
+        self.outStackItems = outStackItems
+    }
     
     var count: Int {
         return inStackItems.count + outStackItems.count
@@ -36,3 +41,4 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return outStackItems.popLast()
     }
 }
+
