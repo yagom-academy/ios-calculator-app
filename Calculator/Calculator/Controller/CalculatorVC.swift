@@ -114,6 +114,17 @@ extension CalculatorVC {
         }
     }
     
+    @IBAction func acButtonTapped(_ sender: UIButton) {
+        currentNumber = ""
+        currentOperator = ""
+        operatorInputLabel.text = ""
+        numberInputLabel.text = "0"
+        resultExpression = ""
+        printStatus()
+        
+        inputHistoryStackView.subviews.forEach( { $0.removeFromSuperview() } )
+    }
+
     func printStatus() {
         print("total: \(resultExpression)")
         print("currentOperator: \(currentOperator)")
