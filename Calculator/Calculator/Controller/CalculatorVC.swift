@@ -18,6 +18,7 @@ enum NameSpace {
 
 final class CalculatorVC: UIViewController {
     // MARK: - Properties
+    
     @IBOutlet private weak var operatorInputLabel: UILabel!
     @IBOutlet private weak var numberInputLabel: UILabel!
     
@@ -94,6 +95,7 @@ extension CalculatorVC {
         if numberInputLabel.text == NameSpace.zero ||
             firstInputAfterCalculation == true {
             numberInputLabel.text = NameSpace.emptyString
+            
             firstInputAfterCalculation = false
         }
         
