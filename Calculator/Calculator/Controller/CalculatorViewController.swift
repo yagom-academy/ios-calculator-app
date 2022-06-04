@@ -6,16 +6,6 @@
 
 import UIKit
 
-enum CalculatorString {
-    static let zero: String = "0"
-    static let dot: Character = "."
-    static let emptyString: String = ""
-    static let failedResult: String = "NaN"
-    static let whiteSpace: String = " "
-    static let maximumNumber: Int = 20
-    static let maximumDigit: Int = 26
-}
-
 final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var inputStackView: UIStackView!
@@ -29,8 +19,8 @@ final class CalculatorViewController: UIViewController {
         formatter.numberStyle = .decimal
         formatter.minimumIntegerDigits = 1
         formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = CalculatorString.maximumNumber
-        formatter.maximumIntegerDigits = CalculatorString.maximumNumber
+        formatter.maximumFractionDigits = CalculatorInt.maximumNumber
+        formatter.maximumIntegerDigits = CalculatorInt.maximumNumber
         
         return formatter
     }()
@@ -57,7 +47,7 @@ final class CalculatorViewController: UIViewController {
         
         initiateCaculator()
         
-        if currentOperandText.count >= CalculatorString.maximumDigit {
+        if currentOperandText.count >= CalculatorInt.maximumDigit {
             return
         }
         
