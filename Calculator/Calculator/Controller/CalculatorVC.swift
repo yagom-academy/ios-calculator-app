@@ -118,24 +118,30 @@ extension CalculatorVC {
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
+        guard !currentOperator.isEmpty && !currentNumber.isEmpty else {
+            return
+        }
+        
+        resultExpression += currentOperator + currentNumber
+        
         do {
-            if !currentOperator.isEmpty && !currentNumber.isEmpty {
-                resultExpression += currentOperator + currentNumber
-                let result = try ExpressionParser.parse(from: resultExpression).result()
-                insertCurrentItemIntoHistory()
-                operatorInputLabel.text = ""
-                currentOperator = ""
-                currentNumber = ""
-                numberInputLabel.text = String(result)
-                firstInputAfterCalculation = true
-                firstDecimalPointInCurrentNumber = true
-                refreshCurrentNumberLabelToBeFormatted()
-            }
+            let result = try ExpressionParser.parse(from: resultExpression).result()
+            numberInputLabel.text = String(result)
         } catch CalculatorError.dividedByZero {
             numberInputLabel.text = CalculatorError.dividedByZero.description
         } catch {
             numberInputLabel.text = "error"
         }
+        
+        insertCurrentItemIntoHistory()
+        refreshCurrentNumberLabelToBeFormatted()
+        
+        operatorInputLabel.text = ""
+        currentOperator = ""
+        currentNumber = ""
+        
+        firstInputAfterCalculation = true
+        firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
