@@ -33,7 +33,7 @@ final class CalculatorVC: UIViewController {
 // MARK: - Actions
 
 extension CalculatorVC {
-    @objc func insertCurrentItemIntoHistory() {
+    private func insertCurrentItemIntoHistory() {
         let inputItemStackView = UIStackView()
         inputItemStackView.translatesAutoresizingMaskIntoConstraints = false
         inputItemStackView.axis = .horizontal
@@ -95,7 +95,7 @@ extension CalculatorVC {
         printStatus()
     }
     
-    @IBAction func equalButtonTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonTapped(_ sender: UIButton) {
         do {
             if !currentOperator.isEmpty && !currentNumber.isEmpty {
                 resultExpression += currentOperator + currentNumber
@@ -114,7 +114,7 @@ extension CalculatorVC {
         }
     }
     
-    @IBAction func acButtonTapped(_ sender: UIButton) {
+    @IBAction private func acButtonTapped(_ sender: UIButton) {
         currentNumber = ""
         currentOperator = ""
         operatorInputLabel.text = ""
@@ -125,13 +125,13 @@ extension CalculatorVC {
         inputHistoryStackView.subviews.forEach( { $0.removeFromSuperview() } )
     }
 
-    @IBAction func ceButtonTapped(_ sender: UIButton) {
+    @IBAction private func ceButtonTapped(_ sender: UIButton) {
         currentNumber = ""
         numberInputLabel.text = "0"
         printStatus()
     }
     
-    @IBAction func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
+    @IBAction private func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
         if currentNumber == "" {
             return
         } else if currentNumber.first == "-" {
@@ -150,4 +150,3 @@ extension CalculatorVC {
         print("currentNumber: \(currentNumber)")
     }
 }
-
