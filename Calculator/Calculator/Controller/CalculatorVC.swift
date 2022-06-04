@@ -6,6 +6,16 @@
 
 import UIKit
 
+enum NameSpace {
+    static let minus: Character = "-"
+    static let maximumDigits = 20
+    
+    static let emptyString = ""
+    static let comma = ","
+    static let dot = "."
+    static let zero = "0"
+}
+
 final class CalculatorVC: UIViewController {
     // MARK: - Properties
     @IBOutlet private weak var operatorInputLabel: UILabel!
@@ -13,10 +23,10 @@ final class CalculatorVC: UIViewController {
     
     @IBOutlet private weak var inputHistoryStackView: UIStackView!
     
-    private var resultExpression = ""
+    private var resultExpression = NameSpace.emptyString
     
-    private var currentNumber = ""
-    private var currentOperator = ""
+    private var currentNumber = NameSpace.emptyString
+    private var currentOperator = NameSpace.emptyString
     
     private var firstDecimalPointInCurrentNumber = true
     private var firstInputAfterCalculation = false
@@ -24,7 +34,7 @@ final class CalculatorVC: UIViewController {
     let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumFractionDigits = NameSpace.maximumDigits
         numberFormatter.roundingMode = .up
         return numberFormatter
     }()
@@ -34,8 +44,8 @@ final class CalculatorVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        operatorInputLabel.text = ""
-        numberInputLabel.text = "0"
+        operatorInputLabel.text = NameSpace.emptyString
+        numberInputLabel.text = NameSpace.zero
     }
 }
 
@@ -62,7 +72,7 @@ extension CalculatorVC {
         numberLabel.textColor = .white
         numberLabel.backgroundColor = .black
         numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        let numbers = Double(currentNumber.replacingOccurrences(of: ",", with: ""))
+        let numbers = Double(currentNumber.replacingOccurrences(of: NameSpace.comma, with: NameSpace.emptyString))
         numberLabel.text = numberFormatter.string(for: numbers)
         
         inputItemStackView.addArrangedSubview(operatorSignLabel)
@@ -81,8 +91,8 @@ extension CalculatorVC {
             return
         }
         
-        if numberInputLabel.text == "0" || firstInputAfterCalculation == true {
-            numberInputLabel.text = ""
+        if numberInputLabel.text == NameSpace.zero || firstInputAfterCalculation == true {
+            numberInputLabel.text = NameSpace.emptyString
             firstInputAfterCalculation = false
         }
         
@@ -103,12 +113,12 @@ extension CalculatorVC {
  
         if !currentNumber.isEmpty {
             insertCurrentItemIntoHistory()
-            numberInputLabel.text = "0"
+            numberInputLabel.text = NameSpace.zero
             
             resultExpression += currentOperator + currentNumber
             
             currentOperator = senderCurrentTitle
-            currentNumber = ""
+            currentNumber = NameSpace.emptyString
         } else {
             currentOperator = senderCurrentTitle
         }
@@ -136,38 +146,38 @@ extension CalculatorVC {
         insertCurrentItemIntoHistory()
         refreshCurrentNumberLabelToBeFormatted()
         
-        operatorInputLabel.text = ""
-        currentOperator = ""
-        currentNumber = ""
+        operatorInputLabel.text = NameSpace.emptyString
+        currentOperator = NameSpace.emptyString
+        currentNumber = NameSpace.emptyString
         
         firstInputAfterCalculation = true
         firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
-        currentNumber = ""
-        currentOperator = ""
-        operatorInputLabel.text = ""
-        numberInputLabel.text = "0"
-        resultExpression = ""
+        currentNumber = NameSpace.emptyString
+        currentOperator = NameSpace.emptyString
+        operatorInputLabel.text = NameSpace.emptyString
+        numberInputLabel.text = NameSpace.zero
+        resultExpression = NameSpace.emptyString
         printStatus()
         
         inputHistoryStackView.subviews.forEach( { $0.removeFromSuperview() } )
     }
 
     @IBAction private func ceButtonTapped(_ sender: UIButton) {
-        currentNumber = ""
-        numberInputLabel.text = "0"
+        currentNumber = NameSpace.emptyString
+        numberInputLabel.text = NameSpace.zero
         printStatus()
     }
     
     @IBAction private func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
-        if currentNumber == "" {
+        if currentNumber == NameSpace.emptyString {
             return
-        } else if currentNumber.first == "-" {
+        } else if currentNumber.first == NameSpace.minus {
             currentNumber.remove(at: currentNumber.startIndex)
         } else {
-            currentNumber = "-" + currentNumber
+            currentNumber = String(NameSpace.minus) + currentNumber
         }
      
         numberInputLabel.text = currentNumber
@@ -178,8 +188,8 @@ extension CalculatorVC {
         guard firstDecimalPointInCurrentNumber else { return }
         firstDecimalPointInCurrentNumber = false
         
-        currentNumber += "."
-        numberInputLabel.text! += "."
+        currentNumber += NameSpace.dot
+        numberInputLabel.text! += NameSpace.dot
     }
     
     private func refreshCurrentNumberLabelToBeFormatted() {
@@ -187,7 +197,7 @@ extension CalculatorVC {
             return
         }
         
-        let NumbersWithoutComma = numbersString.replacingOccurrences(of: ",", with: "")
+        let NumbersWithoutComma = numbersString.replacingOccurrences(of: NameSpace.comma, with: NameSpace.emptyString)
         
         guard let numbers = Double(NumbersWithoutComma) else {
             return
