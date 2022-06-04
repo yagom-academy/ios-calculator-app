@@ -76,29 +76,37 @@ extension CalculatorVC {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
+        guard let senderCurrentTitle = sender.currentTitle else {
+            return
+        }
+        
         if numberInputLabel.text == "0" || firstInputAfterCalculation == true {
             numberInputLabel.text = ""
             firstInputAfterCalculation = false
         }
         
-        numberInputLabel?.text! += sender.currentTitle!
-        currentNumber += sender.currentTitle!
+        numberInputLabel.text! += senderCurrentTitle
+        currentNumber += senderCurrentTitle
         printStatus()
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        operatorInputLabel.text = sender.currentTitle
+        guard let senderCurrentTitle = sender.currentTitle else {
+            return
+        }
+        
+        operatorInputLabel.text = senderCurrentTitle
  
         if !currentNumber.isEmpty {
             insertCurrentItemIntoHistory()
-            numberInputLabel?.text! = "0"
+            numberInputLabel.text = "0"
             
             resultExpression += currentOperator + currentNumber
             
-            currentOperator = sender.currentTitle!
+            currentOperator = senderCurrentTitle
             currentNumber = ""
         } else {
-            currentOperator = sender.currentTitle!
+            currentOperator = senderCurrentTitle
         }
         
         printStatus()
