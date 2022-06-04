@@ -331,9 +331,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="inputHistoryStackView" destination="XRe-QE-UJf" id="JBr-GK-UiJ"/>
-                        <outlet property="numberInputLabel" destination="Lwz-OF-XHD" id="aRM-5I-h3K"/>
-                        <outlet property="operatorInputLabel" destination="HPC-iy-qdm" id="w61-Bs-e9C"/>
+                        <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="aRM-5I-h3K"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="w61-Bs-e9C"/>
+                        <outlet property="historyStackView" destination="XRe-QE-UJf" id="JBr-GK-UiJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

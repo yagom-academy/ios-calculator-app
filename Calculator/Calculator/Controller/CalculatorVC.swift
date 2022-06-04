@@ -19,10 +19,10 @@ enum NameSpace {
 final class CalculatorVC: UIViewController {
     // MARK: - Properties
     
-    @IBOutlet private weak var operatorInputLabel: UILabel!
-    @IBOutlet private weak var numberInputLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var currentNumberLabel: UILabel!
     
-    @IBOutlet private weak var inputHistoryStackView: UIStackView!
+    @IBOutlet private weak var historyStackView: UIStackView!
     
     private var resultExpression = NameSpace.emptyString
     
@@ -45,15 +45,15 @@ final class CalculatorVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        operatorInputLabel.text = NameSpace.emptyString
-        numberInputLabel.text = NameSpace.zero
+        currentOperatorLabel.text = NameSpace.emptyString
+        currentNumberLabel.text = NameSpace.zero
     }
 }
 
 // MARK: - Actions
 
 extension CalculatorVC {
-    private func insertCurrentItemIntoHistory() {
+    private func insertCurrentItemIntoHistoryStackView() {
         let inputItemStackView = UIStackView()
         inputItemStackView.translatesAutoresizingMaskIntoConstraints = false
         inputItemStackView.axis = .horizontal
@@ -80,7 +80,7 @@ extension CalculatorVC {
         inputItemStackView.addArrangedSubview(numberLabel)
         
         inputItemStackView.isHidden = true
-        inputHistoryStackView.addArrangedSubview(inputItemStackView)
+        historyStackView.addArrangedSubview(inputItemStackView)
         
         UIStackView.animate(withDuration: 0.3) {
             inputItemStackView.isHidden = false
@@ -92,17 +92,17 @@ extension CalculatorVC {
             return
         }
         
-        if numberInputLabel.text == NameSpace.zero ||
+        if currentNumberLabel.text == NameSpace.zero ||
             firstInputAfterCalculation == true {
-            numberInputLabel.text = NameSpace.emptyString
+            currentNumberLabel.text = NameSpace.emptyString
             
             firstInputAfterCalculation = false
         }
         
-        numberInputLabel.text! += senderCurrentTitle
+        currentNumberLabel.text! += senderCurrentTitle
         currentNumber += senderCurrentTitle
         
-        refreshCurrentNumberLabelToBeFormatted()
+        updateCurrentNumberLabelWithFormat()
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
@@ -110,12 +110,12 @@ extension CalculatorVC {
             return
         }
         
-        operatorInputLabel.text = senderCurrentTitle
+        currentOperatorLabel.text = senderCurrentTitle
  
         if !currentNumber.isEmpty {
-            insertCurrentItemIntoHistory()
+            insertCurrentItemIntoHistoryStackView()
             
-            numberInputLabel.text = NameSpace.zero
+            currentNumberLabel.text = NameSpace.zero
             
             resultExpression += currentOperator + currentNumber
             currentNumber = NameSpace.emptyString
@@ -134,17 +134,17 @@ extension CalculatorVC {
         
         do {
             let result = try ExpressionParser.parse(from: resultExpression).result()
-            numberInputLabel.text = String(result)
+            currentNumberLabel.text = String(result)
         } catch CalculatorError.dividedByZero {
-            numberInputLabel.text = CalculatorError.dividedByZero.description
+            currentNumberLabel.text = CalculatorError.dividedByZero.description
         } catch {
-            numberInputLabel.text = CalculatorError.emptyCalculatorItemQueue.description
+            currentNumberLabel.text = CalculatorError.emptyCalculatorItemQueue.description
         }
         
-        insertCurrentItemIntoHistory()
-        refreshCurrentNumberLabelToBeFormatted()
+        insertCurrentItemIntoHistoryStackView()
+        updateCurrentNumberLabelWithFormat()
         
-        operatorInputLabel.text = NameSpace.emptyString
+        currentOperatorLabel.text = NameSpace.emptyString
         currentOperator = NameSpace.emptyString
         currentNumber = NameSpace.emptyString
         
@@ -156,17 +156,17 @@ extension CalculatorVC {
         currentNumber = NameSpace.emptyString
         currentOperator = NameSpace.emptyString
         
-        numberInputLabel.text = NameSpace.zero
-        operatorInputLabel.text = NameSpace.emptyString
+        currentNumberLabel.text = NameSpace.zero
+        currentOperatorLabel.text = NameSpace.emptyString
         
         resultExpression = NameSpace.emptyString
         
-        inputHistoryStackView.subviews.forEach( { $0.removeFromSuperview() } )
+        historyStackView.subviews.forEach( { $0.removeFromSuperview() } )
     }
 
     @IBAction private func ceButtonTapped(_ sender: UIButton) {
         currentNumber = NameSpace.emptyString
-        numberInputLabel.text = NameSpace.zero
+        currentNumberLabel.text = NameSpace.zero
     }
     
     @IBAction private func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
@@ -178,7 +178,7 @@ extension CalculatorVC {
             currentNumber = String(NameSpace.minus) + currentNumber
         }
      
-        numberInputLabel.text = currentNumber
+        currentNumberLabel.text = currentNumber
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
@@ -186,11 +186,11 @@ extension CalculatorVC {
         firstDecimalPointInCurrentNumber = false
         
         currentNumber += NameSpace.dot
-        numberInputLabel.text! += NameSpace.dot
+        currentNumberLabel.text! += NameSpace.dot
     }
     
-    private func refreshCurrentNumberLabelToBeFormatted() {
-        guard let numbersString = numberInputLabel.text else {
+    private func updateCurrentNumberLabelWithFormat() {
+        guard let numbersString = currentNumberLabel.text else {
             return
         }
         
@@ -200,6 +200,6 @@ extension CalculatorVC {
             return
         }
         
-        numberInputLabel.text = numberFormatter.string(for: numbers)
+        currentNumberLabel.text = numberFormatter.string(for: numbers)
     }
 }
