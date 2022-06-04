@@ -18,6 +18,7 @@ final class CalculatorVC: UIViewController {
     private var currentNumber = ""
     private var currentOperator = ""
     
+    private var firstDecimalPointInCurrentNumber = true
     private var firstInputAfterCalculation = false
     
     // MARK: - Life Cycle
@@ -93,6 +94,7 @@ extension CalculatorVC {
         }
         
         printStatus()
+        firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
@@ -106,6 +108,7 @@ extension CalculatorVC {
                 currentNumber = ""
                 numberInputLabel.text = String(result)
                 firstInputAfterCalculation = true
+                firstDecimalPointInCurrentNumber = true
             }
         } catch CalculatorError.dividedByZero {
             numberInputLabel.text = CalculatorError.dividedByZero.description
@@ -142,6 +145,14 @@ extension CalculatorVC {
      
         numberInputLabel.text = currentNumber
         printStatus()
+    }
+    
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        guard firstDecimalPointInCurrentNumber else { return }
+        firstDecimalPointInCurrentNumber = false
+        
+        currentNumber += "."
+        numberInputLabel.text! += "."
     }
     
     func printStatus() {
