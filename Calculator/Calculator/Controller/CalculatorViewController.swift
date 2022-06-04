@@ -143,7 +143,7 @@ final class CalculatorViewController: UIViewController {
         userInput.append(userInputNumber)
         do {
             var parsedFormula = ExpressionParser.parse(from: userInput)
-            var number = doNumberFormatter(number: try parsedFormula.result())
+            var number = applyNumberFormatter(number: try parsedFormula.result())
             
             if number == "-0" {
                 number = CalculatorString.zero
@@ -212,7 +212,7 @@ final class CalculatorViewController: UIViewController {
         let textData = deleteComma(in: operandLabel.text)
         
         guard let validNumber = Double(textData) else { return }
-        operandLabel.text = doNumberFormatter(number: validNumber)
+        operandLabel.text = applyNumberFormatter(number: validNumber)
     }
     
     private func initiateCaculator() {
@@ -231,7 +231,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func doNumberFormatter(number:Double) -> String {
+    private func applyNumberFormatter(number: Double) -> String {
         guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
             return CalculatorString.failedResult
         }
