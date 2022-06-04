@@ -61,8 +61,9 @@ extension CalculatorVC {
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.textColor = .white
         numberLabel.backgroundColor = .black
-        numberLabel.text = currentNumber
         numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        let numbers = Double(currentNumber.replacingOccurrences(of: ",", with: ""))
+        numberLabel.text = numberFormatter.string(for: numbers)
         
         inputItemStackView.addArrangedSubview(operatorSignLabel)
         inputItemStackView.addArrangedSubview(numberLabel)
@@ -87,6 +88,9 @@ extension CalculatorVC {
         
         numberInputLabel.text! += senderCurrentTitle
         currentNumber += senderCurrentTitle
+        
+        refreshCurrentNumberLabelToBeFormatted()
+        
         printStatus()
     }
     
@@ -125,6 +129,7 @@ extension CalculatorVC {
                 numberInputLabel.text = String(result)
                 firstInputAfterCalculation = true
                 firstDecimalPointInCurrentNumber = true
+                refreshCurrentNumberLabelToBeFormatted()
             }
         } catch CalculatorError.dividedByZero {
             numberInputLabel.text = CalculatorError.dividedByZero.description
@@ -169,6 +174,20 @@ extension CalculatorVC {
         
         currentNumber += "."
         numberInputLabel.text! += "."
+    }
+    
+    private func refreshCurrentNumberLabelToBeFormatted() {
+        guard let numbersString = numberInputLabel.text else {
+            return
+        }
+        
+        let NumbersWithoutComma = numbersString.replacingOccurrences(of: ",", with: "")
+        
+        guard let numbers = Double(NumbersWithoutComma) else {
+            return
+        }
+        
+        numberInputLabel.text = numberFormatter.string(for: numbers)
     }
     
     func printStatus() {
