@@ -7,8 +7,8 @@
 import UIKit
 
 enum NameSpace {
-    static let minus: Character = "-"
     static let maximumDigits = 20
+    static let minus: Character = "-"
     
     static let emptyString = ""
     static let comma = ","
@@ -138,7 +138,7 @@ extension CalculatorVC {
         } catch CalculatorError.dividedByZero {
             numberInputLabel.text = CalculatorError.dividedByZero.description
         } catch {
-            numberInputLabel.text = "error"
+            numberInputLabel.text = CalculatorError.emptyCalculatorItemQueue.description
         }
         
         insertCurrentItemIntoHistory()
