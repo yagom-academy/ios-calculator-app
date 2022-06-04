@@ -8,9 +8,9 @@
 extension String {
     func split(with target: Character) -> [String] {
         let splitStringResult = split(separator: target)
-            .map{ (element: String.SubSequence) -> String in
-                let alterElement = String(element)
-                return alterElement
+            .map{ (word: String.SubSequence) -> String in
+                let resultWord = String(word)
+                return resultWord
             }
         return splitStringResult
     }

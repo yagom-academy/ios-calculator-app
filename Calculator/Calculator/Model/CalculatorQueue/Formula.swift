@@ -18,20 +18,24 @@ struct Formula {
         
         do {
             while operands.linkedList.head != nil {
-                guard let number = operands.dequeue(),
-                      let result = operators.dequeue() else {
-                    throw ErrorCase.listDequeue
+                guard let number = operands.dequeue() else {
+                    throw ErrorCase.operandsDequeue
                 }
-
-                if result == Operator.divide && number == 0.0 {
+                
+                guard let result = operators.dequeue() else {
                     throw ErrorCase.operatorDequeue
                 }
                 
-                lhs = result.calculate(Ihs: lhs, rhs: number)
+                if result == Operator.divide && number == 0.0 {
+                    throw ErrorCase.divideByZero
+                }
+                
+                lhs = result.calculate(lhs: lhs, rhs: number)
             }
-        } catch ErrorCase.operatorDequeue {
+        } catch ErrorCase.divideByZero {
             return .nan
         }
+        
         return lhs
     }
 }

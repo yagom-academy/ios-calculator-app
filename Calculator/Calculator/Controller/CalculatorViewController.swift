@@ -18,23 +18,22 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
     
-    var inputValue: String = ""
-    var presentNumbers: String = ""
-    var presentOperator: String = ""
-    var operatorStorage: [String] = []
-    var operatorChoice: String = ""
-    
     let numberFormatter = NumberFormatter()
+    
+    var inputValue = ""
+    var presentValue = ""
+    var presentOperator = ""
+    var operatorStorage: [String] = []
+    var beforePresentNumberStore: [String] = []
+    var userIsInTheAfterTabEqualButton = false
+    var userIsInTheMiddleOfTyping = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberLabel.text = "0"
-        operatorLabel.text = ""
-        removeOldLabls()
         
-        numberFormatter.roundingMode = .floor
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 3
+        defaultLabels()
+        settingNumberFormaatter()
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
@@ -65,6 +64,11 @@ class CalculatorViewController: UIViewController {
         didTapAnswerButton()
     }
     
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        didTapAnswerButton()
+        userIsInTheMiddleOfTyping = false
+    }
+    
     @IBAction func touchOptionButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else {
             return
@@ -90,12 +94,9 @@ class CalculatorViewController: UIViewController {
         let bottomOffsetY = previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight
         let bottomOffset = CGPoint(x: 0, y: bottomOffsetY)
         
-        previousValues.setContentOffset(bottomOffset, animated: false)
-        
-        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        stackNumberLabel.textColor = .white
-        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        stackOperatorLabel.textColor = .white
+        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
+                                   previousValues.bounds.height +
+                                   numberLabel.font.lineHeight)
         
         stackNumberLabel.text = presentNumbers
         stackOperatorLabel.text = presentOperator
@@ -105,11 +106,19 @@ class CalculatorViewController: UIViewController {
         valuesStackView.addArrangedSubview(stackView)
     }
     
-    private func removeOldLabls() {
+    private func defaultLabels() {
+        numberLabel.text = "0"
+        operatorLabel.text = ""
         firstNumberLable.removeFromSuperview()
         secondNumberLable.removeFromSuperview()
         firstOperatorLabel.removeFromSuperview()
         secondOperatorLabel.removeFromSuperview()
+    }
+    
+    private func settingNumberFormaatter() {
+        numberFormatter.roundingMode = .floor
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 3
     }
     
     private func didTapAnswerButton() {
@@ -124,12 +133,20 @@ class CalculatorViewController: UIViewController {
             }
             numberLabel.text = NSNresult
         }
-        inputValue = ""
-        presentNumbers = ""
+        
+        if userIsInTheAfterTabEqualButton {
+            caculatorAfterResult(to: previousValue)
+        }
+        
+        if userIsInTheAfterTabEqualButton == false {
+            calculatorResult()
+        }
+        presentValue = ""
     }
     
     private func didTapAllClearButton() {
         presentNumbers = ""
+
         inputValue = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
@@ -137,6 +154,7 @@ class CalculatorViewController: UIViewController {
         valuesStackView.subviews.forEach { views in
             views.removeFromSuperview()
         }
+        userIsInTheMiddleOfTyping = false
     }
     
     private func didTapClearEentryButton() {
