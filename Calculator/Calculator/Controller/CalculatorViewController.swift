@@ -13,6 +13,7 @@ enum CalculatorString {
     static let failedResult: String = "NaN"
     static let whiteSpace: String = " "
     static let maximumNumber: Int = 20
+    static let maximumDigit: Int = 26
 }
 
 final class CalculatorViewController: UIViewController {
@@ -56,13 +57,13 @@ final class CalculatorViewController: UIViewController {
         
         initiateCaculator()
         
-        if currentOperandText.count >= 26 {
+        if currentOperandText.count >= CalculatorString.maximumDigit {
             return
         }
         
         if userIsInTheMiddleOfTyping {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
-        } else if currentOperandText.contains(".") {
+        } else if currentOperandText.contains(CalculatorString.dot) {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
             userIsInTheMiddleOfTyping = true
         } else {
@@ -216,7 +217,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func adaptNumberFormatter() {
-        guard operandLabel.text?.contains(".") == false else { return }
+        guard operandLabel.text?.contains(CalculatorString.dot) == false else { return }
   
         let textData = deleteComma(in: operandLabel.text)
         
