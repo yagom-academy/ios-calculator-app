@@ -244,5 +244,3 @@ final class CalculatorViewController: UIViewController {
         return nonOptionalText.replacingOccurrences(of: ",", with: CalculatorString.emptyString)
     }
 }
-
-
