@@ -21,6 +21,14 @@ final class CalculatorVC: UIViewController {
     private var firstDecimalPointInCurrentNumber = true
     private var firstInputAfterCalculation = false
     
+    let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .up
+        return numberFormatter
+    }()
+    
     // MARK: - Life Cycle
         
     override func viewDidLoad() {
