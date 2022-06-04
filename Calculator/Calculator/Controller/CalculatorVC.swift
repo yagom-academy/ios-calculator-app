@@ -91,7 +91,8 @@ extension CalculatorVC {
             return
         }
         
-        if numberInputLabel.text == NameSpace.zero || firstInputAfterCalculation == true {
+        if numberInputLabel.text == NameSpace.zero ||
+            firstInputAfterCalculation == true {
             numberInputLabel.text = NameSpace.emptyString
             firstInputAfterCalculation = false
         }
@@ -100,8 +101,6 @@ extension CalculatorVC {
         currentNumber += senderCurrentTitle
         
         refreshCurrentNumberLabelToBeFormatted()
-        
-        printStatus()
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
@@ -113,17 +112,14 @@ extension CalculatorVC {
  
         if !currentNumber.isEmpty {
             insertCurrentItemIntoHistory()
+            
             numberInputLabel.text = NameSpace.zero
             
             resultExpression += currentOperator + currentNumber
-            
-            currentOperator = senderCurrentTitle
             currentNumber = NameSpace.emptyString
-        } else {
-            currentOperator = senderCurrentTitle
         }
         
-        printStatus()
+        currentOperator = senderCurrentTitle
         firstDecimalPointInCurrentNumber = true
     }
     
@@ -157,10 +153,11 @@ extension CalculatorVC {
     @IBAction private func acButtonTapped(_ sender: UIButton) {
         currentNumber = NameSpace.emptyString
         currentOperator = NameSpace.emptyString
-        operatorInputLabel.text = NameSpace.emptyString
+        
         numberInputLabel.text = NameSpace.zero
+        operatorInputLabel.text = NameSpace.emptyString
+        
         resultExpression = NameSpace.emptyString
-        printStatus()
         
         inputHistoryStackView.subviews.forEach( { $0.removeFromSuperview() } )
     }
@@ -168,7 +165,6 @@ extension CalculatorVC {
     @IBAction private func ceButtonTapped(_ sender: UIButton) {
         currentNumber = NameSpace.emptyString
         numberInputLabel.text = NameSpace.zero
-        printStatus()
     }
     
     @IBAction private func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
@@ -181,7 +177,6 @@ extension CalculatorVC {
         }
      
         numberInputLabel.text = currentNumber
-        printStatus()
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
@@ -204,11 +199,5 @@ extension CalculatorVC {
         }
         
         numberInputLabel.text = numberFormatter.string(for: numbers)
-    }
-    
-    func printStatus() {
-        print("total: \(resultExpression)")
-        print("currentOperator: \(currentOperator)")
-        print("currentNumber: \(currentNumber)")
     }
 }
