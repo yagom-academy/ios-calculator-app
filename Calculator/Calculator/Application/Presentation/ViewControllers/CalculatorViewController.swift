@@ -100,22 +100,22 @@ extension CalculatorViewController {
 // MARK: - 내부 동작을 위한 메서드
 extension CalculatorViewController {
     private func isNotNaNOrErr(_ currentNumber: String) -> Bool {
-        return currentNumber != CalculatorExceptionCase.nan && currentNumber != CalculatorExceptionCase.error
+        return (currentNumber != CalculatorExceptionCase.nan
+                && currentNumber != CalculatorExceptionCase.error)
     }
     
     private func gotResult() -> Bool {
-        return snippets.isEmpty && currentOperator.isEmpty && currentNumberLabel.text != CalculatorExceptionCase.zero
+        return (snippets.isEmpty
+                && currentOperator.isEmpty
+                && currentNumberLabel.text != CalculatorExceptionCase.zero)
     }
 }
 
 // MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
 extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
-        if snippets.isNotEmpty && currentOperator.isEmpty {
-            return
-        }
-        
-        if gotResult() {
+        if (snippets.isNotEmpty && currentOperator.isEmpty),
+           gotResult() {
             return
         }
         
@@ -124,7 +124,8 @@ extension CalculatorViewController {
         }
         
         switch currentNumber {
-        case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
+        case CalculatorExceptionCase.nan,
+            CalculatorExceptionCase.error:
             return
         case CalculatorExceptionCase.zero:
             currentNumber = number
@@ -152,7 +153,8 @@ extension CalculatorViewController {
         }
         
         switch currentNumber {
-        case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
+        case CalculatorExceptionCase.nan,
+            CalculatorExceptionCase.error:
             return
         case CalculatorExceptionCase.zero:
             if snippets.isNotEmpty {
