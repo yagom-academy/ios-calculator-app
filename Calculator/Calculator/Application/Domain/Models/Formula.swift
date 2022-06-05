@@ -10,14 +10,18 @@ struct Formula {
     let operators: CalculatorItemQueue<Operator>
     
     func result() throws -> Double {
-        let operands = self.operands
-        let operators = self.operators
+        var operands = self.operands
+        var operators = self.operators
         
-        guard var result = operands.dequeue()?.data else { throw CalculatorError.noRemainingValue }
+        guard var result = operands.dequeue() else {
+            throw CalculatorError.noRemainingValue
+        }
         
-        while let mathOperator = operators.dequeue()?.data,
-              let currentNumber = operands.dequeue()?.data {
-            result = try mathOperator.calculate(lhs: result, rhs: currentNumber)
+        while let nextOperator = operators.dequeue(),
+              let nextOperand = operands.dequeue() {
+            
+            let newValue = try nextOperator.calculate(lhs: result, rhs: nextOperand)
+            result = newValue
         }
         
         return result
