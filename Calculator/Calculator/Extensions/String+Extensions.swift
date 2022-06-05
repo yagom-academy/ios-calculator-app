@@ -2,7 +2,7 @@
 //  String+Extensions.swift
 //  Calculator
 //
-//  Created by Gordon Choi on 2022/05/19.
+//  Created by 나이든별, 민쏜
 //
 
 import Foundation
