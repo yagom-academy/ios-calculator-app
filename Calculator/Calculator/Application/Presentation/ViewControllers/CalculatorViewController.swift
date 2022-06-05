@@ -17,7 +17,7 @@ class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 20
+        formatter.maximumFractionDigits = CalculatorConstants.maximumDigits
         formatter.roundingMode = .halfUp
         return formatter
     }()
