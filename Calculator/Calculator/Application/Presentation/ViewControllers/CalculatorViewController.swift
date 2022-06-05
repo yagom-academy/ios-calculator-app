@@ -37,12 +37,19 @@ class CalculatorViewController: UIViewController {
 
 // MARK: - UI 갱신을 위한 메서드
 extension CalculatorViewController {
-    private func refreshNumberLabel() {
-        // TODO: formatter 적용해야 함 + 소수점 눌렀을때 표시되어야 함
-        let newNumber = currentNumber
-        
-        DispatchQueue.main.async {
-            self.currentNumberLabel.text = newNumber
+    private func refreshNumberLabel(with letter: String = CalculatorExceptionCase.emptyString) {
+        if firstDecimalPointInCurrentNumber {
+            let newNumber = Double(currentNumber)
+            let newNumberData = numberFormatter.string(for: newNumber)
+            
+            DispatchQueue.main.async {
+                self.currentNumberLabel.text = newNumberData
+            }
+        } else {
+            if let currentData = currentNumberLabel.text {
+                let newNumberData = currentData + letter
+                currentNumberLabel.text = newNumberData
+            }
         }
     }
     
@@ -111,15 +118,19 @@ extension CalculatorViewController {
             currentNumber += number
         }
         
-        refreshNumberLabel()
+        refreshNumberLabel(with: number)
     }
     
     @IBAction func pressDotButton(_ sender: UIButton) {
-        guard firstDecimalPointInCurrentNumber else { return }
+        guard firstDecimalPointInCurrentNumber else {
+            return
+            
+        }
+        
         firstDecimalPointInCurrentNumber = false
         
         currentNumber += CalculatorExceptionCase.dot
-        refreshNumberLabel()
+        refreshNumberLabel(with: CalculatorExceptionCase.dot)
     }
     
     @IBAction private func pressOperatorButton(_ sender: UIButton) {
@@ -142,10 +153,10 @@ extension CalculatorViewController {
             currentNumber = CalculatorExceptionCase.zero
         }
         
+        firstDecimalPointInCurrentNumber = true
         refreshNumberLabel()
         refreshOperatorLabel()
         receivedInputsScrollView.scrollDownToBottom()
-        firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func pressEqualButton(_ sender: UIButton) {
@@ -176,8 +187,8 @@ extension CalculatorViewController {
             currentNumber = CalculatorExceptionCase.error
         }
         currentOperator = CalculatorExceptionCase.emptyString
-        firstDecimalPointInCurrentNumber = true
         
+        firstDecimalPointInCurrentNumber = true
         refreshNumberLabel()
         refreshOperatorLabel()
         receivedInputsScrollView.scrollDownToBottom()
@@ -203,8 +214,8 @@ extension CalculatorViewController {
         snippets.removeAll()
         currentNumber = CalculatorExceptionCase.zero
         currentOperator = CalculatorExceptionCase.emptyString
-        firstDecimalPointInCurrentNumber = true
         
+        firstDecimalPointInCurrentNumber = true
         refreshNumberLabel()
         refreshOperatorLabel()
         clearStackView()
