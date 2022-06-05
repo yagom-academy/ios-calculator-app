@@ -18,12 +18,12 @@ class CalculatorViewController: UIViewController {
         guard firstDecimalPointInCurrentNumber else { return }
         firstDecimalPointInCurrentNumber = false
         
-        currentNumber += CalculatorExceptionCase.dot.rawValue
+        currentNumber += CalculatorExceptionCase.dot
         refreshNumberLabel()
     }
     
-    private var currentNumber: String = "0"
-    private var currentOperator: String = ""
+    private var currentNumber: String = CalculatorExceptionCase.zero
+    private var currentOperator: String = CalculatorExceptionCase.emptyString
     private var snippets: [(`operator`: String, operand: String)] = []
     private var firstDecimalPointInCurrentNumber = true
     
@@ -102,7 +102,7 @@ extension CalculatorViewController {
         case "÷":
             return "/"
         default:
-            return ""
+            return CalculatorExceptionCase.emptyString
         }
     }
 }
@@ -119,10 +119,10 @@ extension CalculatorViewController {
         }
         
         switch currentNumber {
-        case CalculatorExceptionCase.nan.rawValue,
-            CalculatorExceptionCase.error.rawValue:
+        case CalculatorExceptionCase.nan,
+            CalculatorExceptionCase.error:
             return
-        case CalculatorExceptionCase.zero.rawValue:
+        case CalculatorExceptionCase.zero:
             currentNumber = number
         default:
             currentNumber += number
@@ -139,18 +139,18 @@ extension CalculatorViewController {
         }
         
         switch currentNumber {
-        case "0":
+        case CalculatorExceptionCase.zero:
             if snippets.isNotEmpty {
                 currentOperator = `operator`
             }
-        case "NaN", "Err":
+        case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
             return
         default:
             let operatorNow = translateOperator(currentOperator)
             snippets.append((operatorNow, currentNumber))
             insertIndividualStackView(with: currentOperator, and: currentNumber)
             currentOperator = `operator`
-            currentNumber = "0"
+            currentNumber = CalculatorExceptionCase.zero
         }
         
         refreshNumberLabel()
@@ -160,8 +160,8 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressEqualButton(_ sender: UIButton) {
-        guard currentNumber != "NaN",
-              currentNumber != "Err",
+        guard currentNumber != CalculatorExceptionCase.nan,
+              currentNumber != CalculatorExceptionCase.error,
               currentOperator.isNotEmpty else {
             return
         }
@@ -170,7 +170,7 @@ extension CalculatorViewController {
         snippets.append((operatorNow, currentNumber))
         insertIndividualStackView(with: currentOperator, and: currentNumber)
         
-        var totalString = ""
+        var totalString = CalculatorExceptionCase.emptyString
         snippets.forEach {
             totalString += $0.`operator`
             totalString += $0.operand
@@ -182,11 +182,11 @@ extension CalculatorViewController {
             let result = try formula.result()
             currentNumber = String(result)
         } catch CalculatorError.dividedByZero {
-            currentNumber = "NaN"
+            currentNumber = CalculatorExceptionCase.nan
         } catch {
-            currentNumber = "Err"
+            currentNumber = CalculatorExceptionCase.error
         }
-        currentOperator = ""
+        currentOperator = CalculatorExceptionCase.emptyString
         firstDecimalPointInCurrentNumber = true
         
         refreshNumberLabel()
@@ -195,13 +195,13 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressCEButton(_ sender: UIButton) {
-        guard currentNumber != "NaN",
-              currentNumber != "Err" else {
+        guard currentNumber != CalculatorExceptionCase.nan,
+              currentNumber != CalculatorExceptionCase.error else {
             return
         }
         
-        currentNumber = "0"
-        if currentOperator == "" {
+        currentNumber = CalculatorExceptionCase.zero
+        if currentOperator == CalculatorExceptionCase.emptyString {
             snippets.removeAll()
             clearStackView()
         }
@@ -212,8 +212,8 @@ extension CalculatorViewController {
     
     @IBAction private func pressACButton(_ sender: UIButton) {
         snippets.removeAll()
-        currentNumber = "0"
-        currentOperator = ""
+        currentNumber = CalculatorExceptionCase.zero
+        currentOperator = CalculatorExceptionCase.emptyString
         firstDecimalPointInCurrentNumber = true
         
         refreshNumberLabel()
@@ -222,11 +222,11 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressInvertButton(_ sender: UIButton) {
-        guard currentNumber != "0" else {
+        guard currentNumber != CalculatorExceptionCase.zero else {
             return
         }
         
-        currentNumber = "-" + currentNumber
+        currentNumber = CalculatorExceptionCase.minus + currentNumber
         
         refreshNumberLabel()
     }

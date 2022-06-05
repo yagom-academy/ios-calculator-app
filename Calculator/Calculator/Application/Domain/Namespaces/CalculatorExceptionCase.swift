@@ -5,10 +5,11 @@
 //  Created by Gordon Choi on 2022/05/29.
 //
 
-enum CalculatorExceptionCase: String {
-    case zero = "0"
-    case nan = "NaN"
-    case error = "Err"
-    case dot = "."
-    case emptyString = ""
+enum CalculatorExceptionCase {
+    static let zero = "0"
+    static let dot = "."
+    static let emptyString = ""
+    static let minus = "-"
+    static let nan = "NaN"
+    static let error = "Err"
 }
