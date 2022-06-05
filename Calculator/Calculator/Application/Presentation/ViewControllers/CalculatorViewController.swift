@@ -102,12 +102,20 @@ extension CalculatorViewController {
     private func isNotNaNOrErr(_ currentNumber: String) -> Bool {
         return currentNumber != CalculatorExceptionCase.nan && currentNumber != CalculatorExceptionCase.error
     }
+    
+    private func gotResult() -> Bool {
+        return snippets.isEmpty && currentOperator.isEmpty && currentNumberLabel.text != CalculatorExceptionCase.zero
+    }
 }
 
 // MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
 extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
         if snippets.isNotEmpty && currentOperator.isEmpty {
+            return
+        }
+        
+        if gotResult() {
             return
         }
         
@@ -128,9 +136,8 @@ extension CalculatorViewController {
     }
     
     @IBAction func pressDotButton(_ sender: UIButton) {
-        guard firstDecimalPointInCurrentNumber else {
+        guard firstDecimalPointInCurrentNumber, !gotResult() else {
             return
-            
         }
         
         firstDecimalPointInCurrentNumber = false
@@ -193,6 +200,7 @@ extension CalculatorViewController {
         }
         currentOperator = CalculatorExceptionCase.emptyString
         
+        snippets.removeAll()
         firstDecimalPointInCurrentNumber = true
         refreshNumberLabel()
         refreshOperatorLabel()
@@ -205,11 +213,6 @@ extension CalculatorViewController {
         }
         
         currentNumber = CalculatorExceptionCase.zero
-        if currentOperator == CalculatorExceptionCase.emptyString {
-            snippets.removeAll()
-            clearStackView()
-        }
-        
         firstDecimalPointInCurrentNumber = true
         refreshNumberLabel()
     }
@@ -226,7 +229,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressInvertButton(_ sender: UIButton) {
-        guard currentNumber != CalculatorExceptionCase.zero else {
+        guard !gotResult() else {
             return
         }
         
