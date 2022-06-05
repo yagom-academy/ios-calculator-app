@@ -23,7 +23,7 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queue {
     
     // MARK: - Properties
     
-    private var queue = LinkedList<Element>()
+    private let queue = LinkedList<Element>()
     
     var peek: Element? {
         return queue.head?.data ?? nil
@@ -35,7 +35,7 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queue {
         queue.append(Node(data))
     }
     
-    mutating func dequeue() -> Node<Element>? {
+    func dequeue() -> Node<Element>? {
         return queue.isEmpty() == true ? nil : queue.removeFirstNode()
     }
     
