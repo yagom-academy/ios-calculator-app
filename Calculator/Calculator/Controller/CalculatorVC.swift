@@ -145,6 +145,7 @@ extension CalculatorVC {
         updateCurrentNumberLabelWithFormat()
         
         currentOperatorLabel.text = NameSpace.emptyString
+        
         currentOperator = NameSpace.emptyString
         currentNumber = NameSpace.emptyString
         
@@ -194,9 +195,9 @@ extension CalculatorVC {
             return
         }
         
-        let NumbersWithoutComma = numbersString.replacingOccurrences(of: NameSpace.comma, with: NameSpace.emptyString)
+        let numbersWithoutComma = numbersString.replacingOccurrences(of: NameSpace.comma, with: NameSpace.emptyString)
         
-        guard let numbers = Double(NumbersWithoutComma) else {
+        guard let numbers = Double(numbersWithoutComma) else {
             return
         }
         
