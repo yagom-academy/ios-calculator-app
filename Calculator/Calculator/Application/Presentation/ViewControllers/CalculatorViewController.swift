@@ -90,24 +90,6 @@ extension CalculatorViewController {
     }
 }
 
-// MARK: - 내부 기능 구현을 위한 메서드
-extension CalculatorViewController {
-    private func translateOperator(_ symbol: String) -> String {
-        switch symbol {
-        case "+":
-            return "+"
-        case "–":
-            return "–"
-        case "×":
-            return "*"
-        case "÷":
-            return "/"
-        default:
-            return CalculatorExceptionCase.emptyString
-        }
-    }
-}
-
 // MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
 extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
@@ -153,7 +135,7 @@ extension CalculatorViewController {
         case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
             return
         default:
-            let operatorNow = translateOperator(currentOperator)
+            let operatorNow = currentOperator
             snippets.append((operatorNow, currentNumber))
             insertIndividualStackView(with: currentOperator, and: currentNumber)
             currentOperator = `operator`
@@ -173,7 +155,7 @@ extension CalculatorViewController {
             return
         }
         
-        let operatorNow = translateOperator(currentOperator)
+        let operatorNow = currentOperator
         snippets.append((operatorNow, currentNumber))
         insertIndividualStackView(with: currentOperator, and: currentNumber)
         
