@@ -14,9 +14,18 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var receivedInputsScrollView: UIScrollView!
     @IBOutlet private weak var receivedInputsStackView: UIStackView!
     
+    @IBAction func pressDotButton(_ sender: UIButton) {
+        guard firstDecimalPointInCurrentNumber else { return }
+        firstDecimalPointInCurrentNumber = false
+        
+        currentNumber += CalculatorExceptionCase.dot.rawValue
+        refreshNumberLabel()
+    }
+    
     private var currentNumber: String = "0"
     private var currentOperator: String = ""
     private var snippets: [(`operator`: String, operand: String)] = []
+    private var firstDecimalPointInCurrentNumber = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +131,8 @@ extension CalculatorViewController {
         refreshNumberLabel()
     }
     
+    
+    
     @IBAction private func pressOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.titleLabel?.text else {
             return
@@ -145,6 +156,7 @@ extension CalculatorViewController {
         refreshNumberLabel()
         refreshOperatorLabel()
         receivedInputsScrollView.scrollDownToBottom()
+        firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func pressEqualButton(_ sender: UIButton) {
@@ -175,6 +187,7 @@ extension CalculatorViewController {
             currentNumber = "Err"
         }
         currentOperator = ""
+        firstDecimalPointInCurrentNumber = true
         
         refreshNumberLabel()
         refreshOperatorLabel()
@@ -193,6 +206,7 @@ extension CalculatorViewController {
             clearStackView()
         }
         
+        firstDecimalPointInCurrentNumber = true
         refreshNumberLabel()
     }
     
@@ -200,6 +214,7 @@ extension CalculatorViewController {
         snippets.removeAll()
         currentNumber = "0"
         currentOperator = ""
+        firstDecimalPointInCurrentNumber = true
         
         refreshNumberLabel()
         refreshOperatorLabel()

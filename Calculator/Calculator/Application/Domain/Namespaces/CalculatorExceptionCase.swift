@@ -9,4 +9,6 @@ enum CalculatorExceptionCase: String {
     case zero = "0"
     case nan = "NaN"
     case error = "Err"
+    case dot = "."
+    case emptyString = ""
 }
