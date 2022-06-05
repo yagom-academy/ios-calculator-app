@@ -19,12 +19,9 @@ struct Formula {
         
         while let nextOperator = operators.dequeue(),
               let nextOperand = operands.dequeue() {
-            do {
-                let newValue = try nextOperator.calculate(lhs: result, rhs: nextOperand)
-                result = newValue
-            } catch CalculatorError.dividedByZero {
-                throw CalculatorError.dividedByZero
-            }
+            
+            let newValue = try nextOperator.calculate(lhs: result, rhs: nextOperand)
+            result = newValue
         }
         
         return result

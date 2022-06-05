@@ -20,12 +20,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
             let value = subtract(lhs: lhs, rhs: rhs)
             return value
         case .divide:
-            do {
-                let value = try divide(lhs: lhs, rhs: rhs)
-                return value
-            } catch CalculatorError.dividedByZero {
-                throw CalculatorError.dividedByZero
-            }
+            let value = try divide(lhs: lhs, rhs: rhs)
+            return value
         case .multiply:
             let value = multiply(lhs: lhs, rhs: rhs)
             return value
