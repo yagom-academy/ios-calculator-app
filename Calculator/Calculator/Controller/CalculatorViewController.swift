@@ -41,35 +41,10 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if presentValue.contains(".") && buttonTitle == "." {
+        if presentNumbers.contains(".") && buttonTitle == "." {
             return
         }
-        
-        if userIsInTheMiddleOfTyping {
-            inputValue += presentValue
-            inputValue += " \(operatorStorage.removeLast()) "
-            
-            presentValue = ""
-            operatorStorage = []
-            
-            presentValue += buttonTitle
-            numberLabel.text = buttonTitle
-        }
-        
-        if userIsInTheMiddleOfTyping == false {
-            presentValue += buttonTitle
-            numberLabel.text = presentValue
-        }
-        
-        if userIsInTheAfterTabEqualButton {
-            userIsInTheAfterTabEqualButton = true
-        }
-        
-        if userIsInTheAfterTabEqualButton == false {
-            beforePresentNumberStore.append(presentValue)
-        }
-        
-        userIsInTheMiddleOfTyping = false
+        updateNumberLabel(to: buttonTitle)
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
@@ -77,25 +52,16 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if userIsInTheMiddleOfTyping {
-            presentOperator = buttonTitle
-            operatorLabel.text = buttonTitle
-            
-            operatorStorage.append(" \(buttonTitle) ")
-            numberLabel.text = "0"
-        }
+        presentOperator = buttonTitle
+        operatorLabel.text = buttonTitle
         
-        if userIsInTheMiddleOfTyping == false {
-            makeStackLabel()
-            
-            presentOperator = buttonTitle
-            operatorLabel.text = buttonTitle
-            
-            operatorStorage.append(" \(buttonTitle) ")
-            numberLabel.text = "0"
-            userIsInTheMiddleOfTyping = true
-            userIsInTheAfterTabEqualButton = false
-        }
+        operatorStorage.append(" \(buttonTitle) ")
+        makePreviousLabels()
+        numberLabel.text = "0"
+    }
+    
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        didTapAnswerButton()
     }
     
     @IBAction func touchResultButton(_ sender: UIButton) {
@@ -108,70 +74,32 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if ["AC"].contains(buttonTitle) {
-            didTapACButton()
+        if buttonTitle == OptionButton.allClear.rawValue  {
+            didTapAllClearButton()
         }
         
-        if ["CE"].contains(buttonTitle) {
-            didTapCEButton()
+        if buttonTitle == OptionButton.clearEntry.rawValue {
+            didTapClearEentryButton()
         }
         
-        if ["⁺⁄₋"].contains(buttonTitle) && presentValue != "0" {
+        if buttonTitle == OptionButton.changeSign.rawValue && presentNumbers != "0" {
             didTapSignButton()
         }
     }
     
-    private func makeStackLabel() {
-        guard let numberLabelValue = numberLabel.text else {
-            return
-        }
-        
+    private func makePreviousLabels() {
         let stackView = UIStackView()
         let stackNumberLabel = UILabel()
         let stackOperatorLabel = UILabel()
-        
-        let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
-                                   previousValues.bounds.height +
-                                   numberLabel.font.lineHeight)
-        previousValues.setContentOffset(bottomOffset, animated: false)
-        
-        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        stackNumberLabel.textColor = .white
-        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        stackOperatorLabel.textColor = .white
-        
-        if userIsInTheMiddleOfTyping {
-            stackNumberLabel.text = numberLabelValue
-        }
-        
-        if userIsInTheMiddleOfTyping == false {
-            stackNumberLabel.text = numberLabelValue
-            stackOperatorLabel.text = "\(presentOperator) "
-        }
-        
-        stackView.addArrangedSubview(stackOperatorLabel)
-        stackView.addArrangedSubview(stackNumberLabel)
-        valuesStackView.addArrangedSubview(stackView)
-    }
-    
-    private func makeResultLabel() {
-        let stackView = UIStackView()
-        let stackNumberLabel = UILabel()
-        let stackOperatorLabel = UILabel()
+        let bottomOffsetY = previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight
+        let bottomOffset = CGPoint(x: 0, y: bottomOffsetY)
         
         let bottomOffset = CGPoint(x: 0, y: previousValues.contentSize.height -
                                    previousValues.bounds.height +
                                    numberLabel.font.lineHeight)
         
-        previousValues.setContentOffset(bottomOffset, animated: false)
-        
-        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        stackNumberLabel.textColor = .white
-        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        stackOperatorLabel.textColor = .white
-        
-        stackNumberLabel.text = presentValue
-        stackOperatorLabel.text = "\(presentOperator) "
+        stackNumberLabel.text = presentNumbers
+        stackOperatorLabel.text = presentOperator
         
         stackView.addArrangedSubview(stackOperatorLabel)
         stackView.addArrangedSubview(stackNumberLabel)
@@ -194,8 +122,16 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapAnswerButton() {
-        guard let previousValue = beforePresentNumberStore.last else {
-            return
+        inputValue += presentNumbers
+        
+        if presentNumbers.isEmpty == false && inputValue.isEmpty == false {
+            var parse = ExpressionParser.parse(from: (inputValue))
+            let result = try! parse.result()
+            
+            guard let NSNresult = numberFormatter.string(from: result as NSNumber) else {
+                return
+            }
+            numberLabel.text = NSNresult
         }
         
         if userIsInTheAfterTabEqualButton {
@@ -208,9 +144,9 @@ class CalculatorViewController: UIViewController {
         presentValue = ""
     }
     
-    private func didTapACButton() {
-        presentValue = ""
-        presentOperator = ""
+    private func didTapAllClearButton() {
+        presentNumbers = ""
+
         inputValue = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
@@ -221,56 +157,44 @@ class CalculatorViewController: UIViewController {
         userIsInTheMiddleOfTyping = false
     }
     
-    private func didTapCEButton() {
-        presentValue = ""
+    private func didTapClearEentryButton() {
+        presentNumbers = ""
         numberLabel.text = "0"
     }
     
     private func didTapSignButton() {
-        if presentValue.contains("-") {
-            filterHyphen()
-        }
-        
-        if presentValue.contains("-") == false {
-            presentValue = "-" + presentValue
-        }
-        
-        numberLabel.text = "\(presentValue)"
+        checkNumberSign()
+        numberLabel.text = "\(presentNumbers)"
     }
     
-    private func caculatorAfterResult(to value: String) {
-        inputValue = "\(presentValue) \( presentOperator ) \(value)"
-        
-        if !value.isEmpty && !inputValue.isEmpty {
-            var parse = ExpressionParser.parse(from: (inputValue))
-            let result = try! parse.result()
-            
-            guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
-                return
-            }
-            numberLabel.text = trimmedResult
-            makeResultLabel()
+    private func updateNumberLabel(to buttonTitle: String) {
+        if operatorStorage.isEmpty {
+            presentNumbers += buttonTitle
+            numberLabel.text = presentNumbers
+            return
         }
+        operatorChoice += operatorStorage.removeLast()
+        inputValue += presentNumbers
+        inputValue += " \(operatorChoice) "
+        
+        presentNumbers = ""
+        operatorChoice = ""
+        operatorStorage = []
+        
+        presentNumbers += buttonTitle
+        numberLabel.text = buttonTitle
     }
     
-    private func calculatorResult() {
-        inputValue += presentValue
-        
-        if !presentValue.isEmpty && !inputValue.isEmpty {
-            var parse = ExpressionParser.parse(from: (inputValue))
-            let result = try! parse.result()
-            
-            guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
-                return
-            }
-            numberLabel.text = trimmedResult
-            makeResultLabel()
-            userIsInTheAfterTabEqualButton = true
+    private func checkNumberSign() {
+        if presentNumbers.contains("-") {
+            filterNumberSign()
+            return
         }
+        presentNumbers = "-" + presentNumbers
     }
     
-    private func filterHyphen() {
-        presentValue = presentValue.filter { word in
+    private func filterNumberSign() {
+        presentNumbers = presentNumbers.filter { word in
             if word == "-" {
                 return false
             }
