@@ -97,6 +97,13 @@ extension CalculatorViewController {
     }
 }
 
+// MARK: - 내부 동작을 위한 메서드
+extension CalculatorViewController {
+    private func isNotNaNOrErr(_ currentNumber: String) -> Bool {
+        return currentNumber != CalculatorExceptionCase.nan && currentNumber != CalculatorExceptionCase.error
+    }
+}
+
 // MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
 extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
@@ -109,8 +116,7 @@ extension CalculatorViewController {
         }
         
         switch currentNumber {
-        case CalculatorExceptionCase.nan,
-            CalculatorExceptionCase.error:
+        case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
             return
         case CalculatorExceptionCase.zero:
             currentNumber = number
@@ -139,12 +145,12 @@ extension CalculatorViewController {
         }
         
         switch currentNumber {
+        case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
+            return
         case CalculatorExceptionCase.zero:
             if snippets.isNotEmpty {
                 currentOperator = `operator`
             }
-        case CalculatorExceptionCase.nan, CalculatorExceptionCase.error:
-            return
         default:
             let operatorNow = currentOperator
             snippets.append((operatorNow, currentNumber))
@@ -160,8 +166,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressEqualButton(_ sender: UIButton) {
-        guard currentNumber != CalculatorExceptionCase.nan,
-              currentNumber != CalculatorExceptionCase.error,
+        guard isNotNaNOrErr(currentNumber),
               currentOperator.isNotEmpty else {
             return
         }
@@ -195,8 +200,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressCEButton(_ sender: UIButton) {
-        guard currentNumber != CalculatorExceptionCase.nan,
-              currentNumber != CalculatorExceptionCase.error else {
+        guard isNotNaNOrErr(currentNumber) else {
             return
         }
         
