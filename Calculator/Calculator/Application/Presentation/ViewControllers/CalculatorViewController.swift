@@ -14,13 +14,13 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var receivedInputsScrollView: UIScrollView!
     @IBOutlet private weak var receivedInputsStackView: UIStackView!
     
-    @IBAction func pressDotButton(_ sender: UIButton) {
-        guard firstDecimalPointInCurrentNumber else { return }
-        firstDecimalPointInCurrentNumber = false
-        
-        currentNumber += CalculatorExceptionCase.dot
-        refreshNumberLabel()
-    }
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 20
+        formatter.roundingMode = .halfUp
+        return formatter
+    }()
     
     private var currentNumber: String = CalculatorExceptionCase.zero
     private var currentOperator: String = CalculatorExceptionCase.emptyString
@@ -38,7 +38,8 @@ class CalculatorViewController: UIViewController {
 // MARK: - UI 갱신을 위한 메서드
 extension CalculatorViewController {
     private func refreshNumberLabel() {
-        let newNumber = currentNumber.formatAsNumber()
+        // TODO: formatter 적용해야 함 + 소수점 눌렀을때 표시되어야 함
+        let newNumber = currentNumber
         
         DispatchQueue.main.async {
             self.currentNumberLabel.text = newNumber
@@ -131,7 +132,13 @@ extension CalculatorViewController {
         refreshNumberLabel()
     }
     
-    
+    @IBAction func pressDotButton(_ sender: UIButton) {
+        guard firstDecimalPointInCurrentNumber else { return }
+        firstDecimalPointInCurrentNumber = false
+        
+        currentNumber += CalculatorExceptionCase.dot
+        refreshNumberLabel()
+    }
     
     @IBAction private func pressOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.titleLabel?.text else {

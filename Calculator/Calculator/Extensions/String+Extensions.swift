@@ -8,17 +8,6 @@
 import Foundation
 
 extension String {
-    func formatAsNumber() -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 20
-        formatter.roundingMode = .halfUp
-        
-        let number = Double(self) ?? 0
-        let result = formatter.string(for: number) ?? ""
-        return result
-    }
-    
     func split(with target: Character) -> [String] {
         let data = self.map { $0 }
         var result = [String]()
