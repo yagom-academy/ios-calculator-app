@@ -162,8 +162,10 @@ extension CalculatorViewController {
             }
         default:
             let operatorNow = currentOperator
+            let operandData = Double(currentNumber)
+            let operandNow = numberFormatter.string(for: operandData) ?? CalculatorConstants.zero
             snippets.append((operatorNow, currentNumber))
-            insertIndividualStackView(with: currentOperator, and: currentNumber)
+            insertIndividualStackView(with: currentOperator, and: operandNow)
             currentOperator = `operator`
             currentNumber = CalculatorConstants.zero
         }
@@ -181,8 +183,10 @@ extension CalculatorViewController {
         }
         
         let operatorNow = currentOperator
+        let operandData = Double(currentNumber)
+        let operandNow = numberFormatter.string(for: operandData) ?? CalculatorConstants.zero
         snippets.append((operatorNow, currentNumber))
-        insertIndividualStackView(with: currentOperator, and: currentNumber)
+        insertIndividualStackView(with: currentOperator, and: operandNow)
         
         var totalString = CalculatorConstants.emptyString
         snippets.forEach {
