@@ -7,8 +7,11 @@
 
 protocol Queue {
     associatedtype Element
-    var isEmpty: Bool { get }
+    
     var peek: Element? { get }
-    mutating func enqueue(_ element: Element) -> Bool
-    mutating func dequeue() -> Element?
+    
+    
+    mutating func enqueue(_ data: Element)
+    mutating func dequeue() -> Node<Element>?
+    func isEmpty() -> Bool
 }
