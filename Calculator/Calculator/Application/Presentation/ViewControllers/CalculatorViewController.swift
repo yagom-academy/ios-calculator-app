@@ -233,7 +233,11 @@ extension CalculatorViewController {
             return
         }
         
-        currentNumber = CalculatorExceptionCase.minus + currentNumber
+        if currentNumber.first == CalculatorExceptionCase.minus {
+            currentNumber.remove(at: currentNumber.startIndex)
+        } else {
+            currentNumber = String(CalculatorExceptionCase.minus) + currentNumber
+        }
         
         refreshNumberLabel()
     }
