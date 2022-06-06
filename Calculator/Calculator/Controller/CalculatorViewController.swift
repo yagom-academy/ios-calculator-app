@@ -6,13 +6,6 @@
 
 import UIKit
 
-enum CalculatorString {
-    static let zero: String = "0"
-    static let emptyString: String = ""
-    static let failedResult: String = "NaN"
-    static let whiteSpace: String = " "
-}
-
 final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var inputStackView: UIStackView!
@@ -20,7 +13,17 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    private let numberFormatter = NumberFormatter()
+    
+    private lazy var numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumIntegerDigits = 1
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = CalculatorInt.maximumNumber
+        formatter.maximumIntegerDigits = CalculatorInt.maximumNumber
+        
+        return formatter
+    }()
     
     private var userInput: String = ""
     private var userInputNumber: String = ""
@@ -36,51 +39,50 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = CalculatorString.emptyString
     }
     
+    //MARK: - buttons
+    
     @IBAction private func didNumberButtonTapped(_ sender: UIButton) {
         guard let digit = sender.currentTitle else{ return }
         guard let currentOperandText = operandLabel.text else { return }
         
         initiateCaculator()
         
-        if currentOperandText.count >= 20 {
+        if currentOperandText.count >= CalculatorInt.maximumDigit {
             return
         }
         
         if userIsInTheMiddleOfTyping {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
-        }
-        else if currentOperandText.contains(".") {
+        } else if currentOperandText.contains(CalculatorString.dot) {
             operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + digit
             userIsInTheMiddleOfTyping = true
         } else {
             operandLabel.text = digit
         }
-       
-        makeValidNumber()
+        
+        adaptNumberFormatter()
         userIsInTheMiddleOfTyping = true
         userInputNumber.append(digit)
     }
     
     @IBAction private func didDotButtonTapped(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
-        guard let currentOperandText = operandLabel.text else { return }
-        guard currentOperandText.contains(Character(dot)) == false else { return }
+        guard operandLabel.text?.contains(CalculatorString.dot) == false else { return }
         
         if operandLabel.text == CalculatorString.zero {
             operandLabel.text = "0."
             userInputNumber.append(contentsOf: CalculatorString.zero)
             userIsInTheMiddleOfTyping = true
         } else {
-            operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + dot
+            operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString) + String(CalculatorString.dot)
         }
         
-        userInputNumber.append(dot)
+        userInputNumber.append(CalculatorString.dot)
     }
     
     @IBAction private func didOperatorButtonTapped(_ sender: UIButton) {
         guard let operators = sender.currentTitle else { return }
-        guard operandLabel.text != "NaN" else { return }
-       
+        guard operandLabel.text != CalculatorString.failedResult else { return }
+        
         if operandLabel.text == CalculatorString.zero && inputStackView.subviews.isEmpty == false && userInput.count >= 2 {
             operatorLabel.text = operators
             userInput.removeLast()
@@ -99,7 +101,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didPlusMinusSignButtonTapped(_ sender: UIButton) {
-        guard operandLabel.text != "NaN" else { return }
+        guard operandLabel.text != CalculatorString.failedResult else { return }
         guard let currentOperandText = operandLabel.text else { return }
         
         if operandLabel.text == CalculatorString.zero {
@@ -130,9 +132,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didCalculateButtonTapped(_ sender: UIButton) {
-        if operatorLabel.text == CalculatorString.emptyString {
-            return
-        }
+        guard operatorLabel.text != CalculatorString.emptyString else { return }
         
         if operandLabel.text == CalculatorString.zero {
             userInput.append(CalculatorString.zero)
@@ -142,8 +142,8 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = CalculatorString.emptyString
         userInput.append(userInputNumber)
         do {
-            var result = ExpressionParser.parse(from: userInput)
-            var number = doNumberFormatter(number: try result.result())
+            var parsedFormula = ExpressionParser.parse(from: userInput)
+            var number = applyNumberFormatter(number: try parsedFormula.result())
             
             if number == "-0" {
                 number = CalculatorString.zero
@@ -151,7 +151,7 @@ final class CalculatorViewController: UIViewController {
             
             operandLabel.text = number
             userInput = CalculatorString.emptyString
-            userInputNumber = number.replacingOccurrences(of: ",", with: CalculatorString.emptyString)
+            userInputNumber = deleteComma(in: number)
         } catch CalculatorError.divideZero {
             operandLabel.text = CalculatorString.failedResult
             userInput = CalculatorString.emptyString
@@ -162,16 +162,13 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
+    //MARK: - methods
+    
     private func generateStackLabels() -> (UILabel, UILabel)? {
-        let validNumber = (operandLabel.text ?? CalculatorString.emptyString).replacingOccurrences(of: ",", with: CalculatorString.emptyString)
-        
-        guard let doubleNumber = Double(validNumber) else { return nil }
-        let number = doNumberFormatter(number: doubleNumber)
-        
-        guard let `operator` = operatorLabel.text else { return nil }
+        guard let `operator` = operatorLabel.text, let operand = operandLabel.text else { return nil }
         
         let operatorStackLabel = setLabel(`operator`)
-        let numberStackLabel = setLabel(number)
+        let numberStackLabel = setLabel(operand)
         
         return (operatorStackLabel, numberStackLabel)
     }
@@ -209,22 +206,13 @@ final class CalculatorViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.height), animated: false)
     }
     
-    private func makeValidNumber() {
-        guard let currentOperandText = operandLabel.text else { return }
+    private func adaptNumberFormatter() {
+        guard operandLabel.text?.contains(CalculatorString.dot) == false else { return }
+  
+        let textData = deleteComma(in: operandLabel.text)
         
-        if currentOperandText.contains(",") {
-            operandLabel.text = (operandLabel.text ?? CalculatorString.emptyString).replacingOccurrences(of: ",", with: CalculatorString.emptyString)
-        }
-        
-        if currentOperandText.contains(".") == false {
-            let userInputNumber = makeDouble(number: (operandLabel.text ?? CalculatorString.emptyString))
-            
-            guard let validNumber = userInputNumber else { return }
-            
-            let number = doNumberFormatter(number: validNumber)
-            
-            operandLabel.text = number
-        }
+        guard let validNumber = Double(textData) else { return }
+        operandLabel.text = applyNumberFormatter(number: validNumber)
     }
     
     private func initiateCaculator() {
@@ -243,22 +231,16 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeDouble(number: String) -> Double? {
-        guard let validNumber = Double(number) else { return nil }
-        return validNumber
-    }
-    
-    private func doNumberFormatter(number:Double) -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumIntegerDigits = 1
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.maximumIntegerDigits = 20
-        
+    private func applyNumberFormatter(number: Double) -> String {
         guard let formattedNumber = numberFormatter.string(from: number as NSNumber) else {
             return CalculatorString.failedResult
         }
         return formattedNumber
     }
+    
+    private func deleteComma(in text: String?) -> String {
+        guard let nonOptionalText = text else { return CalculatorString.emptyString}
+        guard nonOptionalText.contains(",") else { return nonOptionalText }
+        return nonOptionalText.replacingOccurrences(of: ",", with: CalculatorString.emptyString)
+    }
 }
-
