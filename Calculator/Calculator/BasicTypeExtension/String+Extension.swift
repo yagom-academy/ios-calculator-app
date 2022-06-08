@@ -12,13 +12,13 @@ extension String {
     }
 }
 
-extension String { //self , currentoperand
-    func canInput(currentOperandLabel: String?) -> Bool {
-        guard let currentOperandLabel = currentOperandLabel else {
+extension String {
+    func canInput(_ sender: String?) -> Bool {
+        guard let sender = sender else {
             return false
         }
         
-        switch (self, currentOperandLabel) {
+        switch (sender, self) {
         case let (CalcAccessory.dot, operand) where operand.contains(CalcAccessory.dot):
             return false
         case (CalcAccessory.zero, CalcAccessory.zero):
@@ -27,23 +27,6 @@ extension String { //self , currentoperand
             return false
         default:
             return true
-        }
-    }
-    
-    func canModify(currentOperandLabel: String?) -> String? {
-        guard let currentOperandLabel = currentOperandLabel else {
-            return nil
-        }
-        
-        switch (self, currentOperandLabel) {
-        case (CalcAccessory.dot, CalcAccessory.zero), (CalcAccessory.dot, CalcAccessory.nan):
-            return CalcAccessory.zero + CalcAccessory.dot
-        case (CalcAccessory.doubleZero, CalcAccessory.nan), (CalcAccessory.zero, CalcAccessory.nan):
-            return CalcAccessory.zero
-        case ("1"..."9", CalcAccessory.nan):
-            return self
-        default:
-            return nil
         }
     }
 }

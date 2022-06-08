@@ -28,21 +28,40 @@ class ViewController: UIViewController {
         }
         
         let rawOperandLabel = changeDoubleStyle(currentOperandLabel.text)
-        if (sender.currentTitle ?? CalcAccessory.empty).canInput(currentOperandLabel: rawOperandLabel) == false {
+        if rawOperandLabel.canInput(sender.currentTitle) == false {
             return
-        } else if let number = sender.currentTitle?.canModify(currentOperandLabel: rawOperandLabel) {
+        } else if let number = processSpecificCase(about: sender.currentTitle) {
             currentOperandLabel.text = number
             return
         }
         
-        let entireOperandLabel = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? CalcAccessory.empty)
-        if isZeroNumber(entireOperandLabel) {
-            currentOperandLabel.text = entireOperandLabel
+        let entireOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? CalcAccessory.empty)
+        if isZeroNumber(entireOperand) {
+            currentOperandLabel.text = entireOperand
             return
         }
         
-        currentOperandLabel?.text = applyNumberFormatterToInteger(entireOperandLabel)
+        currentOperandLabel?.text = applyNumberFormatterToInteger(entireOperand)
     }
+    
+    func processSpecificCase(about sender: String?) -> String? {
+        guard let currentOperandLabel = currentOperandLabel.text,
+              let sender = sender else {
+            return nil
+        }
+        
+        switch (sender, currentOperandLabel) {
+        case (CalcAccessory.dot, CalcAccessory.zero), (CalcAccessory.dot, CalcAccessory.nan):
+            return CalcAccessory.zero + CalcAccessory.dot
+        case (CalcAccessory.doubleZero, CalcAccessory.nan), (CalcAccessory.zero, CalcAccessory.nan):
+            return CalcAccessory.zero
+        case ("1"..."9", CalcAccessory.nan):
+            return sender
+        default:
+            return nil
+        }
+    }
+    
     
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
         guard currentOperandLabel.text != CalcAccessory.nan else {
@@ -198,7 +217,7 @@ extension ViewController {
         guard let input = input else {
             return CalcAccessory.empty
         }
-        // ["1,213", "313"]
+        
         let inputSplitedByDot: [String] = input.components(separatedBy: CalcAccessory.dot)
         let integerDigit = inputSplitedByDot[0]
         if inputSplitedByDot.count == 1 {
