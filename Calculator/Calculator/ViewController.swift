@@ -200,18 +200,7 @@ extension ViewController {
                                                      y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
     
-    private func applyNumberFormatter(_ input: String?) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .floor
-        numberFormatter.minimumSignificantDigits = 0
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.minimumIntegerDigits = 1
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumFractionDigits = 20
         
-        return numberFormatter.string(for: Double(input ?? CalcAccessory.empty)) ?? CalcAccessory.empty
-    }
     
     private func applyNumberFormatterToInteger(_ input: String?) -> String {
         guard let input = input else {
@@ -221,14 +210,10 @@ extension ViewController {
         let inputSplitedByDot: [String] = input.components(separatedBy: CalcAccessory.dot)
         let integerDigit = inputSplitedByDot[0]
         if inputSplitedByDot.count == 1 {
-            return applyNumberFormatter(integerDigit)
+            return integerDigit.applyNumberFormatter()
         } else {
-            return applyNumberFormatter(integerDigit) + CalcAccessory.dot + inputSplitedByDot[1]
-        }
+            return integerDigit.applyNumberFormatter() + CalcAccessory.dot + inputSplitedByDot[1]
     }
-    
-    private func changeDoubleStyle(_ input: String?) -> String {
-        return input?.replacingOccurrences(of: CalcAccessory.comma, with: CalcAccessory.empty) ?? CalcAccessory.empty
     }
     
     private func isZeroNumber(_ input: String) -> Bool {
