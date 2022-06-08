@@ -2,7 +2,7 @@
 //  String.swift
 //  Calculator
 //
-//  Created by 유한석 on 2022/05/19.
+//  Created by Borysarang, Yeton on 2022/05/19.
 //
 
 import UIKit

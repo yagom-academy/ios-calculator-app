@@ -2,7 +2,7 @@
 //  NameSpace.swift
 //  Calculator
 //
-//  Created by 유한석 on 2022/05/30.
+//  Created by Borysarang, Yeton on 2022/05/30.
 //
 enum CalcAccessory {
     static let zero: String = "0"

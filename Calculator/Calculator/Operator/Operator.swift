@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by 유한석 on 2022/05/18.
+//  Created by Borysarang, Yeton on 2022/05/18.
 //
 enum Operator: Character, CaseIterable, CalculatorItem {
     case add = "+"

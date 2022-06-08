@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by 유한석 on 2022/05/16.
+//  Created by Borysarang, Yeton on 2022/05/16.
 //
 struct CalculatorItemQueue<T: CalculatorItem> {
     private var queue = CalculatorList<T>()
