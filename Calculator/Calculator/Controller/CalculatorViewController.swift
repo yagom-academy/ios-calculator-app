@@ -19,6 +19,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var valuesStackView: UIStackView!
     
     let numberFormatter = NumberFormatter()
+    var calculatorModel = CalculatorModel()
     
     var inputValue = ""
     var presentValue = ""
@@ -192,8 +193,9 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapSignButton() {
-        checkHyphen()
-        numberLabel.text = "\(presentValue)"
+        let checkHypen = calculatorModel.checkHyphen(to: presentValue)
+        numberLabel.text = "\(checkHypen)"
+        presentValue = checkHypen
     }
     
     private func caculatorAfterResult(to value: String) {
@@ -222,24 +224,7 @@ class CalculatorViewController: UIViewController {
         makeResultLabel()
         userIsInTheAfterTabAnswerButton = true
     }
-    
-    private func checkHyphen() {
-        if presentValue.contains("-") {
-            filterHypen()
-            return
-        }
-        presentValue = "-" + presentValue
-    }
-    
-    private func filterHypen() {
-        presentValue = presentValue.filter { (word: Character) in
-            if word == "-" {
-                return false
-            }
-            return true
-        }
-    }
-    
+
     private func addOperator(to buttonTitle: String) {
         if userIsInTheMiddleOfTyping {
             inputValue += presentValue
