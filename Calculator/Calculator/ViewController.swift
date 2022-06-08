@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func operandButtonDidTap(_ sender: UIButton) {
-        if operationStackView.canAddOperand(currentOperatorLabel.text ?? CalcAccessory.empty) == false {
+        if canAddOperand(to: operationStackView) == false {
             return
         } else if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: CalcAccessory.dot, with: CalcAccessory.empty).count, operandLabelCount >= 20 {
             return
@@ -217,5 +217,13 @@ extension ViewController {
         let removeZero = removeDotNumber.replacingOccurrences(of: CalcAccessory.zero, with: CalcAccessory.empty)
         
         return removeZero == CalcAccessory.empty ? true : false
+    }
+    
+    private func canAddOperand(to stackView: UIStackView) -> Bool {
+        if stackView.arrangedSubviews.count > 0 && currentOperatorLabel.text == CalcAccessory.empty {
+            return false
+        }
+        
+        return true
     }
 }

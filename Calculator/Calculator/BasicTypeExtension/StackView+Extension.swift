@@ -8,11 +8,5 @@
 import UIKit
 
 extension UIStackView {
-    func canAddOperand(_ label: String) -> Bool {
-        if self.arrangedSubviews.count > 0 && label == CalcAccessory.empty {
-            return false
-        }
-        
-        return true
-    }
+    
 }
