@@ -65,6 +65,7 @@ class CalculatorViewController: UIViewController {
         
         didTapAnswerButton()
         userIsInTheMiddleOfTyping = false
+        userIsInTheAfterTabAnswerButton = true
     }
     
     @IBAction func touchOptionButton(_ sender: UIButton) {
@@ -172,6 +173,8 @@ class CalculatorViewController: UIViewController {
         
         isCheckAnswerButtonSendOtherResult(to: previousValue)
         presentValue = ""
+        operatorLabel.text = ""
+        
     }
     
     private func didTapAllClearButton() {
@@ -193,6 +196,12 @@ class CalculatorViewController: UIViewController {
     }
     
     private func didTapSignButton() {
+        if userIsInTheAfterTabAnswerButton {
+            let checkHypen = calculatorModel.checkHyphen(to: inputValue)
+            numberLabel.text = "\(checkHypen)"
+            inputValue = checkHypen
+            return
+        }
         let checkHypen = calculatorModel.checkHyphen(to: presentValue)
         numberLabel.text = "\(checkHypen)"
         presentValue = checkHypen
@@ -222,9 +231,10 @@ class CalculatorViewController: UIViewController {
         
         numberLabel.text = trimmedResult
         makeResultLabel()
+        inputValue = trimmedResult
         userIsInTheAfterTabAnswerButton = true
     }
-
+    
     private func addOperator(to buttonTitle: String) {
         if userIsInTheMiddleOfTyping {
             inputValue += presentValue
