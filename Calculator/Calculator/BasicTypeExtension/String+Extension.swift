@@ -13,11 +13,7 @@ extension String {
 }
 
 extension String {
-    func canInput(_ sender: String?) -> Bool {
-        guard let sender = sender else {
-            return false
-        }
-        
+    func canInput(_ sender: String) -> Bool {
         switch (sender, self) {
         case let (CalcAccessory.dot, operand) where operand.contains(CalcAccessory.dot):
             return false

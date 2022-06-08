@@ -23,19 +23,24 @@ class ViewController: UIViewController {
     @IBAction func operandButtonDidTap(_ sender: UIButton) {
         if canAddOperand(to: operationStackView) == false {
             return
-        } else if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: CalcAccessory.dot, with: CalcAccessory.empty).count, operandLabelCount >= 20 {
+        } else if let operandLabelCount = currentOperandLabel.text?.replacingOccurrences(of: CalcAccessory.dot, with: CalcAccessory.empty).count,
+                  operandLabelCount >= 20 {
             return
         }
         
-        let rawOperandLabel = changeDoubleStyle(currentOperandLabel.text)
-        if rawOperandLabel.canInput(sender.currentTitle) == false {
+        guard let rawOperandLabel = currentOperandLabel.text?.removeComma(),
+               let inputOperand = sender.currentTitle else {
             return
-        } else if let number = processSpecificCase(about: sender.currentTitle) {
+        }
+        
+        if rawOperandLabel.canInput(inputOperand) == false {
+            return
+        } else if let number = processSpecificCase(about: inputOperand) {
             currentOperandLabel.text = number
             return
         }
         
-        let entireOperand = changeDoubleStyle(currentOperandLabel.text) + (sender.currentTitle ?? CalcAccessory.empty)
+        let entireOperand = rawOperandLabel + inputOperand
         if isZeroNumber(entireOperand) {
             currentOperandLabel.text = entireOperand
             return
@@ -44,9 +49,8 @@ class ViewController: UIViewController {
         currentOperandLabel?.text = applyNumberFormatterToInteger(entireOperand)
     }
     
-    func processSpecificCase(about sender: String?) -> String? {
-        guard let currentOperandLabel = currentOperandLabel.text,
-              let sender = sender else {
+    func processSpecificCase(about sender: String) -> String? {
+        guard let currentOperandLabel = currentOperandLabel.text else {
             return nil
         }
         
@@ -62,24 +66,25 @@ class ViewController: UIViewController {
         }
     }
     
-    
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
-        guard currentOperandLabel.text != CalcAccessory.nan else {
+        guard currentOperandLabel.text != CalcAccessory.nan,
+         let operandLabel = currentOperandLabel.text?.removeComma(),
+          let inputOperator = sender.currentTitle else {
             return
         }
         
-        let operandLabel = changeDoubleStyle(currentOperandLabel.text)
         guard operandLabel != CalcAccessory.zero else {
-            currentOperatorLabel.text = (sender.currentTitle ?? CalcAccessory.empty)
+            currentOperatorLabel.text = inputOperator
             return
         }
         
         if operandLabel.last == Character(CalcAccessory.dot) {
             currentOperandLabel.text?.removeLast()
         }
+        
         addCurrentOperationToScrollViewContent()
-        operationStack += "\(operandLabel) \(sender.currentTitle ?? CalcAccessory.empty) "
-        currentOperatorLabel.text = sender.currentTitle
+        operationStack += "\(operandLabel) \(inputOperator) "
+        currentOperatorLabel.text = inputOperator
         clearCurrentOperandLabel()
         scrollToBottom()
     }
@@ -135,12 +140,12 @@ class ViewController: UIViewController {
         }
         
         addCurrentOperationToScrollViewContent()
-        operationStack += changeDoubleStyle(currentOperandLabel.text)
+        operationStack += currentOperandLabel.text?.removeComma() ?? CalcAccessory.empty
         var formula = ExpressionParser.parse(from: operationStack)
         
         do {
             let operationResult = try formula.result()
-            currentOperandLabel.text = applyNumberFormatter(String(operationResult))
+            currentOperandLabel.text = String(operationResult).applyNumberFormatter()
         } catch CalculatorError.dividedByZero {
             currentOperandLabel.text = CalcAccessory.nan
         } catch {
@@ -200,7 +205,7 @@ extension ViewController {
                                                      y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
     
-        
+    
     
     private func applyNumberFormatterToInteger(_ input: String?) -> String {
         guard let input = input else {
@@ -213,7 +218,7 @@ extension ViewController {
             return integerDigit.applyNumberFormatter()
         } else {
             return integerDigit.applyNumberFormatter() + CalcAccessory.dot + inputSplitedByDot[1]
-    }
+        }
     }
     
     private func isZeroNumber(_ input: String) -> Bool {
