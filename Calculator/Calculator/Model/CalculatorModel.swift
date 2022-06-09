@@ -9,7 +9,7 @@ import Foundation
 
 struct CalculatorModel {
     
-    mutating func checkHyphen(to presentValue: String) -> String {
+    private mutating func checkHyphen(to presentValue: String) -> String {
         var checkHypenWord = presentValue
         if checkHypenWord.contains("-") {
             let filterHypenWord = filterHypen(to: checkHypenWord)
@@ -19,7 +19,7 @@ struct CalculatorModel {
         return checkHypenWord
     }
     
-    private mutating func filterHypen(to checkHypenWord: String) -> String{
+    private mutating func filterHypen(to checkHypenWord: String) -> String {
         var filterHypenWord = checkHypenWord
         filterHypenWord = filterHypenWord.filter { (word: Character) in
             if word == "-" {
