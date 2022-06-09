@@ -103,7 +103,7 @@ class CalculatorUITests: XCTestCase {
         let one = app.buttons["One"]
         let substract = app.buttons["Substract"]
         let allClear = app.buttons["AllClear"]
-        let expectationOperandText = app.staticTexts["Operand"].label
+        let expectationOperandText = app.staticTexts["OperandLabel"].label
         let expectationOperatorText = app.staticTexts["OperatorLabel"].label
       
         // when
