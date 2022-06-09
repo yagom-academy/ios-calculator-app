@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 struct CalculatorModel {
-    
+
+    let numberFormatter = NumberFormatter()
+
     var inputValue = ""
     var presentValue = ""
     var presentOperator = ""
@@ -17,6 +19,12 @@ struct CalculatorModel {
     var beforePresentValueStore: [String] = []
     var userIsInTheAfterTabAnswerButton = false
     var userIsInTheMiddleOfTyping = false
+    
+    func settingNumberFormaatter() {
+        numberFormatter.roundingMode = .floor
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 3
+    }
     
     mutating func addOperand(to buttonTitle: String) -> String {
         if presentValue.contains(".") && buttonTitle == "." {
@@ -45,13 +53,58 @@ struct CalculatorModel {
             operatorStorage.append(" \(buttonTitle) ")
             return presentOperator
         }
-        
         presentOperator = buttonTitle
         operatorStorage.append(" \(buttonTitle) ")
         
         userIsInTheMiddleOfTyping = true
         userIsInTheAfterTabAnswerButton = false
         return presentOperator
+    }
+    
+    mutating func isTabAnswerButton() {
+        if userIsInTheAfterTabAnswerButton {
+            userIsInTheAfterTabAnswerButton = true
+            return
+        }
+        beforePresentValueStore.append(presentValue)
+    }
+    
+    mutating func didTapAnswerButton() -> String {
+        guard let previousValue = beforePresentValueStore.last else {
+            return ""
+        }
+        return isCheckAnswerButtonSendOtherResult(to: previousValue)
+    }
+    
+    mutating func isCheckAnswerButtonSendOtherResult(to previousValue: String) -> String {
+        if userIsInTheAfterTabAnswerButton {
+            return caculatorAfterResult(to: previousValue)
+        }
+        return calculatorResult()
+    }
+    
+    mutating func calculatorResult() -> String {
+        inputValue += presentValue
+
+        var parse = ExpressionParser.parse(from: (inputValue))
+        let result = try! parse.result()
+        guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
+            return ""
+        }
+        inputValue = trimmedResult
+        userIsInTheAfterTabAnswerButton = true
+        return inputValue
+    }
+    
+    mutating func caculatorAfterResult(to value: String) -> String {
+        inputValue = "\(presentValue) \( presentOperator ) \(value)"
+
+        var parse = ExpressionParser.parse(from: (inputValue))
+        let result = try! parse.result()
+        guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
+            return ""
+        }
+        return trimmedResult
     }
     
     mutating func checkHyphen(to presentValue: String) -> String {

@@ -18,7 +18,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousValues: UIScrollView!
     @IBOutlet weak var valuesStackView: UIStackView!
     
-    let numberFormatter = NumberFormatter()
     var calculatorModel = CalculatorModel()
     
     
@@ -26,27 +25,40 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         
         defaultLabels()
-        settingNumberFormaatter()
+        calculatorModel.settingNumberFormaatter()
     }
     
     @IBAction func touchNumberButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else {
             return
         }
-        
         let operand: String = calculatorModel.addOperand(to: buttonTitle)
         numberLabel.text = operand
+        calculatorModel.isTabAnswerButton()
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else {
             return
         }
-        
         let operatorSign = calculatorModel.addOperatorStorage(to: buttonTitle)
         operatorLabel.text = operatorSign
         makeStackLabel(test: operatorSign)
         numberLabel.text = "0"
+    }
+    
+    @IBAction func touchResultButton(_ sender: UIButton) {
+        guard calculatorModel.presentValue.isEmpty == false else {
+            return
+        }
+        let result = calculatorModel.didTapAnswerButton()
+        
+        numberLabel.text = result
+        makeResultLabel()
+        calculatorModel.userIsInTheMiddleOfTyping = false
+        calculatorModel.userIsInTheAfterTabAnswerButton = true
+        operatorLabel.text = ""
+        calculatorModel.presentValue = ""
     }
 
     private func defaultLabels() {
@@ -56,12 +68,6 @@ class CalculatorViewController: UIViewController {
         secondNumberLable.removeFromSuperview()
         firstOperatorLabel.removeFromSuperview()
         secondOperatorLabel.removeFromSuperview()
-    }
-
-    private func settingNumberFormaatter() {
-        numberFormatter.roundingMode = .floor
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 3
     }
     
     private func makeStackLabel(test: String) {
@@ -93,11 +99,30 @@ class CalculatorViewController: UIViewController {
         if calculatorModel.userIsInTheMiddleOfTyping {
             stackNumberLabel.text = numberLabelValue
             stackOperatorLabel.text = " \(calculatorModel.presentOperator) "
-       
-            
             return
         }
         stackNumberLabel.text = numberLabelValue
-       
+    }
+    
+    private func makeResultLabel() {
+        let stackView = UIStackView()
+        let stackNumberLabel = UILabel()
+        let stackOperatorLabel = UILabel()
+        let bottomOffSetY = previousValues.contentSize.height - previousValues.bounds.height + numberLabel.font.lineHeight
+        let bottomOffset = CGPoint(x: 0, y: bottomOffSetY)
+
+        previousValues.setContentOffset(bottomOffset, animated: false)
+
+        stackNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackNumberLabel.textColor = .white
+        stackOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackOperatorLabel.textColor = .white
+
+        stackNumberLabel.text = calculatorModel.presentValue
+        stackOperatorLabel.text = "\(calculatorModel.presentOperator) "
+
+        stackView.addArrangedSubview(stackOperatorLabel)
+        stackView.addArrangedSubview(stackNumberLabel)
+        valuesStackView.addArrangedSubview(stackView)
     }
 }
