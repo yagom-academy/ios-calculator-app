@@ -16,7 +16,7 @@ enum CalculatorState {
     var value: String {
         switch self {
         case .empty:
-            return  " "
+            return  ""
         case .zero:
             return "0"
         case .minus:
