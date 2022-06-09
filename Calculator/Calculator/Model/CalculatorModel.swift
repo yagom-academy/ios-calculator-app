@@ -38,6 +38,22 @@ struct CalculatorModel {
         return presentValue
     }
     
+    mutating func addOperatorStorage(to buttonTitle: String) -> String {
+        if userIsInTheMiddleOfTyping {
+            presentOperator = buttonTitle
+            
+            operatorStorage.append(" \(buttonTitle) ")
+            return presentOperator
+        }
+        
+        presentOperator = buttonTitle
+        operatorStorage.append(" \(buttonTitle) ")
+        
+        userIsInTheMiddleOfTyping = true
+        userIsInTheAfterTabAnswerButton = false
+        return presentOperator
+    }
+    
     mutating func checkHyphen(to presentValue: String) -> String {
         var checkHypenWord = presentValue
         
