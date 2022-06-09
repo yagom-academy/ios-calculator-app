@@ -16,7 +16,7 @@ enum NameSpace {
     static let zero = "0"
 }
 
-final class CalculatorVC: UIViewController {
+final class CalculatorViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet private weak var currentOperatorLabel: UILabel!
@@ -52,7 +52,7 @@ final class CalculatorVC: UIViewController {
 
 // MARK: - Actions
 
-extension CalculatorVC {
+extension CalculatorViewController {
     private func insertCurrentItemIntoHistoryStackView() {
         let inputItemStackView = UIStackView()
         inputItemStackView.translatesAutoresizingMaskIntoConstraints = false
