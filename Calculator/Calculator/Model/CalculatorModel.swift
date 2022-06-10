@@ -15,6 +15,7 @@ struct CalculatorModel {
     var inputValue = ""
     var presentValue = ""
     var presentOperator = ""
+    var resultValue = ""
     var operatorStorage: [String] = []
     var beforePresentValueStore: [String] = []
     var userIsInTheAfterTabAnswerButton = false
@@ -91,7 +92,8 @@ struct CalculatorModel {
         guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
             return ""
         }
-        inputValue = String(result)
+        inputValue = result.description
+        resultValue = trimmedResult
         userIsInTheAfterTabAnswerButton = true
         return trimmedResult
     }
@@ -128,5 +130,15 @@ struct CalculatorModel {
             return true
         }
         return filterHypenWord
+    }
+    
+    mutating func didTapAllClearButton() {
+        presentValue = ""
+        presentOperator = ""
+        inputValue = ""
+    }
+
+    mutating func didTapClearEntryButton() {
+        presentValue = ""
     }
 }

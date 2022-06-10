@@ -60,7 +60,47 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
         calculatorModel.presentValue = ""
     }
+    
+    @IBAction func touchOptionButton(_ sender: UIButton) {
+        guard let buttonTitle = sender.currentTitle else {
+            return
+        }
+    
+        switch buttonTitle {
+        case "AC":
+            numberLabel.text = "0"
+            operatorLabel.text = ""
 
+            valuesStackView.subviews.forEach { views in
+                views.removeFromSuperview()
+            }
+            return calculatorModel.didTapAllClearButton()
+        case "CE":
+            numberLabel.text = "0"
+            operatorLabel.text = ""
+            return calculatorModel.didTapClearEntryButton()
+        case "⁺⁄₋":
+            guard calculatorModel.presentValue != "0" else {
+                return
+            }
+            return didTapSignButton()
+        default:
+            return
+        }
+    }
+    
+    func didTapSignButton() {
+        if calculatorModel.userIsInTheAfterTabAnswerButton {
+            let checkHypen = calculatorModel.checkHyphen(to: calculatorModel.resultValue)
+            numberLabel.text = "\(checkHypen)"
+            calculatorModel.resultValue = checkHypen
+            return
+        }
+        let checkHypen = calculatorModel.checkHyphen(to: calculatorModel.presentValue)
+        numberLabel.text = "\(checkHypen)"
+        calculatorModel.presentValue = checkHypen
+    }
+    
     private func defaultLabels() {
         numberLabel.text = "0"
         operatorLabel.text = ""
