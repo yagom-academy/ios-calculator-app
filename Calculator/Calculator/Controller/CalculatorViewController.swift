@@ -32,7 +32,7 @@ final class CalculatorViewController: UIViewController {
     private var firstDecimalPointInCurrentNumber = true
     private var firstInputAfterCalculation = false
     
-    let numberFormatter: NumberFormatter = {
+    private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = NameSpace.maximumDigits
@@ -182,7 +182,7 @@ extension CalculatorViewController {
         currentNumberLabel.text = currentNumber
     }
     
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
+    @IBAction private func dotButtonTapped(_ sender: UIButton) {
         guard firstDecimalPointInCurrentNumber else { return }
         firstDecimalPointInCurrentNumber = false
         
