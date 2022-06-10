@@ -51,8 +51,7 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentOperatorLabel.text = UIConstants.emptyString
-        currentNumberLabel.text = UIConstants.zero
+        resetCurrentMainLabel()
     }
 }
 
@@ -152,19 +151,15 @@ extension CalculatorViewController {
         
         currentOperatorLabel.text = UIConstants.emptyString
         
-        currentOperator = LogicConstants.emptyString
-        currentNumber = LogicConstants.emptyString
+        resetCurrentOperatorAndNumber()
         
         firstInputAfterCalculation = true
         firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
-        currentNumber = LogicConstants.emptyString
-        currentOperator = LogicConstants.emptyString
-        
-        currentNumberLabel.text = UIConstants.zero
-        currentOperatorLabel.text = UIConstants.emptyString
+        resetCurrentOperatorAndNumber()
+        resetCurrentMainLabel()
         
         resultExpression = LogicConstants.emptyString
         
@@ -212,5 +207,15 @@ extension CalculatorViewController {
         }
         
         currentNumberLabel.text = numberFormatter.string(for: numbers)
+    }
+    
+    private func resetCurrentMainLabel() {
+        currentOperatorLabel.text = UIConstants.emptyString
+        currentNumberLabel.text = UIConstants.zero
+    }
+    
+    private func resetCurrentOperatorAndNumber() {
+        currentOperator = LogicConstants.emptyString
+        currentNumber = LogicConstants.emptyString
     }
 }
