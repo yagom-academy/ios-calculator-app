@@ -23,7 +23,6 @@ struct CalculatorModel {
     func settingNumberFormaatter() {
         numberFormatter.roundingMode = .floor
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 3
     }
     
     mutating func addOperand(to buttonTitle: String) -> String {
@@ -39,6 +38,7 @@ struct CalculatorModel {
             operatorStorage = []
             
             presentValue += buttonTitle
+            userIsInTheMiddleOfTyping = false
             return buttonTitle
         }
         presentValue += buttonTitle
@@ -91,9 +91,9 @@ struct CalculatorModel {
         guard let trimmedResult = numberFormatter.string(from: result as NSNumber) else {
             return ""
         }
-        inputValue = trimmedResult
+        inputValue = String(result)
         userIsInTheAfterTabAnswerButton = true
-        return inputValue
+        return trimmedResult
     }
     
     mutating func caculatorAfterResult(to value: String) -> String {
