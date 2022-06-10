@@ -6,17 +6,23 @@
 
 import UIKit
 
-enum NameSpace {
-    static let maximumDigits = 20
-    static let minus: Character = "-"
-    
-    static let emptyString = ""
-    static let comma = ","
-    static let dot = "."
-    static let zero = "0"
-}
-
 final class CalculatorViewController: UIViewController {
+    // MARK: - Name Space
+    private enum LogicConstraintConstants {
+        static let maximumDigits = 20
+    }
+    
+    private enum LogicConstants {
+        static let emptyString = ""
+        static let comma = ","
+        static let minus: Character = "-"
+    }
+    
+    private enum UIConstants {
+        static let emptyString = ""
+        static let zero = "0"
+    }
+    
     // MARK: - Properties
     
     @IBOutlet private weak var currentOperatorLabel: UILabel!
@@ -24,10 +30,10 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var historyStackView: UIStackView!
     
-    private var resultExpression = NameSpace.emptyString
+    private var resultExpression = LogicConstants.emptyString
     
-    private var currentNumber = NameSpace.emptyString
-    private var currentOperator = NameSpace.emptyString
+    private var currentNumber = LogicConstants.emptyString
+    private var currentOperator = LogicConstants.emptyString
     
     private var firstDecimalPointInCurrentNumber = true
     private var firstInputAfterCalculation = false
@@ -35,7 +41,7 @@ final class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = NameSpace.maximumDigits
+        numberFormatter.maximumFractionDigits = LogicConstraintConstants.maximumDigits
         numberFormatter.roundingMode = .up
         return numberFormatter
     }()
@@ -45,8 +51,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentOperatorLabel.text = NameSpace.emptyString
-        currentNumberLabel.text = NameSpace.zero
+        currentOperatorLabel.text = UIConstants.emptyString
+        currentNumberLabel.text = UIConstants.zero
     }
 }
 
@@ -73,7 +79,7 @@ extension CalculatorViewController {
         numberLabel.textColor = .white
         numberLabel.backgroundColor = .black
         numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        let numbers = Double(currentNumber.replacingOccurrences(of: NameSpace.comma, with: NameSpace.emptyString))
+        let numbers = Double(currentNumber.replacingOccurrences(of: LogicConstants.comma, with: LogicConstants.emptyString))
         numberLabel.text = numberFormatter.string(for: numbers)
         
         inputItemStackView.addArrangedSubview(operatorSignLabel)
@@ -92,9 +98,9 @@ extension CalculatorViewController {
             return
         }
         
-        if currentNumberLabel.text == NameSpace.zero ||
+        if currentNumberLabel.text == UIConstants.zero ||
             firstInputAfterCalculation == true {
-            currentNumberLabel.text = NameSpace.emptyString
+            currentNumberLabel.text = UIConstants.emptyString
             
             firstInputAfterCalculation = false
         }
@@ -115,10 +121,10 @@ extension CalculatorViewController {
         if !currentNumber.isEmpty {
             insertCurrentItemIntoHistoryStackView()
             
-            currentNumberLabel.text = NameSpace.zero
+            currentNumberLabel.text = UIConstants.zero
             
             resultExpression += currentOperator + currentNumber
-            currentNumber = NameSpace.emptyString
+            currentNumber = LogicConstants.emptyString
         }
         
         currentOperator = senderCurrentTitle
@@ -144,39 +150,39 @@ extension CalculatorViewController {
         insertCurrentItemIntoHistoryStackView()
         updateCurrentNumberLabelWithFormat()
         
-        currentOperatorLabel.text = NameSpace.emptyString
+        currentOperatorLabel.text = UIConstants.emptyString
         
-        currentOperator = NameSpace.emptyString
-        currentNumber = NameSpace.emptyString
+        currentOperator = LogicConstants.emptyString
+        currentNumber = LogicConstants.emptyString
         
         firstInputAfterCalculation = true
         firstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
-        currentNumber = NameSpace.emptyString
-        currentOperator = NameSpace.emptyString
+        currentNumber = LogicConstants.emptyString
+        currentOperator = LogicConstants.emptyString
         
-        currentNumberLabel.text = NameSpace.zero
-        currentOperatorLabel.text = NameSpace.emptyString
+        currentNumberLabel.text = UIConstants.zero
+        currentOperatorLabel.text = UIConstants.emptyString
         
-        resultExpression = NameSpace.emptyString
+        resultExpression = LogicConstants.emptyString
         
         historyStackView.subviews.forEach( { $0.removeFromSuperview() } )
     }
 
     @IBAction private func ceButtonTapped(_ sender: UIButton) {
-        currentNumber = NameSpace.emptyString
-        currentNumberLabel.text = NameSpace.zero
+        currentNumber = LogicConstants.emptyString
+        currentNumberLabel.text = UIConstants.zero
     }
     
     @IBAction private func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
-        if currentNumber == NameSpace.emptyString {
+        if currentNumber == LogicConstants.emptyString {
             return
-        } else if currentNumber.first == NameSpace.minus {
+        } else if currentNumber.first == LogicConstants.minus {
             currentNumber.remove(at: currentNumber.startIndex)
         } else {
-            currentNumber = String(NameSpace.minus) + currentNumber
+            currentNumber = String(LogicConstants.minus) + currentNumber
         }
      
         currentNumberLabel.text = currentNumber
@@ -186,8 +192,12 @@ extension CalculatorViewController {
         guard firstDecimalPointInCurrentNumber else { return }
         firstDecimalPointInCurrentNumber = false
         
-        currentNumber += NameSpace.dot
-        currentNumberLabel.text! += NameSpace.dot
+        guard let dot = sender.currentTitle else {
+            return
+        }
+        
+        currentNumber += dot
+        currentNumberLabel.text! += dot
     }
     
     private func updateCurrentNumberLabelWithFormat() {
@@ -195,7 +205,7 @@ extension CalculatorViewController {
             return
         }
         
-        let numbersWithoutComma = numbersString.replacingOccurrences(of: NameSpace.comma, with: NameSpace.emptyString)
+        let numbersWithoutComma = numbersString.replacingOccurrences(of: LogicConstants.comma, with: LogicConstants.emptyString)
         
         guard let numbers = Double(numbersWithoutComma) else {
             return
