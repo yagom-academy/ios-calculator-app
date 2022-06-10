@@ -67,7 +67,7 @@ class CalculatorViewController: UIViewController {
         }
     
         switch buttonTitle {
-        case "AC":
+        case OptionButton.allClear.rawValue:
             numberLabel.text = "0"
             operatorLabel.text = ""
 
@@ -75,11 +75,11 @@ class CalculatorViewController: UIViewController {
                 views.removeFromSuperview()
             }
             return calculatorModel.didTapAllClearButton()
-        case "CE":
+        case OptionButton.clearEntry.rawValue:
             numberLabel.text = "0"
             operatorLabel.text = ""
             return calculatorModel.didTapClearEntryButton()
-        case "⁺⁄₋":
+        case OptionButton.changeSign.rawValue:
             guard calculatorModel.presentValue != "0" else {
                 return
             }
