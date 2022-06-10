@@ -94,6 +94,7 @@ class CalculatorViewController: UIViewController {
             let checkHypen = calculatorModel.checkHyphen(to: calculatorModel.resultValue)
             numberLabel.text = "\(checkHypen)"
             calculatorModel.resultValue = checkHypen
+            calculatorModel.inputValue = calculatorModel.resultValue
             return
         }
         let checkHypen = calculatorModel.checkHyphen(to: calculatorModel.presentValue)
