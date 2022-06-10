@@ -525,6 +525,7 @@
 				A3BE77592837A15200794D49 /* Formula.swift in Sources */,
 				A301D2D12833CAA200A025E3 /* CalculatorViewController.swift in Sources */,
 				A3BE77572837A14E00794D49 /* CalculatorItemQueue.swift in Sources */,
+				A3315FA02847048A0069607C /* OptionButton.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				A3BE775E2837A2B000794D49 /* Double+Extension.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,

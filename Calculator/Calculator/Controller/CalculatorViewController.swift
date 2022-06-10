@@ -161,7 +161,6 @@ class CalculatorViewController: UIViewController {
 
         stackNumberLabel.text = calculatorModel.presentValue
         stackOperatorLabel.text = "\(calculatorModel.presentOperator) "
-
         stackView.addArrangedSubview(stackOperatorLabel)
         stackView.addArrangedSubview(stackNumberLabel)
         valuesStackView.addArrangedSubview(stackView)
