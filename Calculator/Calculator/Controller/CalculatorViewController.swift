@@ -58,7 +58,7 @@ final class CalculatorViewController: UIViewController {
 // MARK: - Actions
 
 extension CalculatorViewController {
-    private func insertCurrentItemIntoHistoryStackView() {
+    private func insertItemIntoHistoryStackView(`operator`: String, number: String) {
         let inputItemStackView = UIStackView()
         inputItemStackView.translatesAutoresizingMaskIntoConstraints = false
         inputItemStackView.axis = .horizontal
@@ -70,7 +70,7 @@ extension CalculatorViewController {
         operatorSignLabel.translatesAutoresizingMaskIntoConstraints = false
         operatorSignLabel.textColor = .white
         operatorSignLabel.backgroundColor = .black
-        operatorSignLabel.text = currentOperator
+        operatorSignLabel.text = `operator`
         operatorSignLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let numberLabel = UILabel()
@@ -78,8 +78,8 @@ extension CalculatorViewController {
         numberLabel.textColor = .white
         numberLabel.backgroundColor = .black
         numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        let numbers = Double(currentNumber.replacingOccurrences(of: LogicConstants.comma, with: LogicConstants.emptyString))
-        numberLabel.text = numberFormatter.string(for: numbers)
+        let numberForFormatting = Double(number.replacingOccurrences(of: LogicConstants.comma, with: LogicConstants.emptyString))
+        numberLabel.text = numberFormatter.string(for: numberForFormatting)
         
         inputItemStackView.addArrangedSubview(operatorSignLabel)
         inputItemStackView.addArrangedSubview(numberLabel)
@@ -118,7 +118,7 @@ extension CalculatorViewController {
         currentOperatorLabel.text = senderCurrentTitle
  
         if !currentNumber.isEmpty {
-            insertCurrentItemIntoHistoryStackView()
+            insertItemIntoHistoryStackView(`operator`: currentOperator, number: currentNumber)
             
             currentNumberLabel.text = UIConstants.zero
             
@@ -146,7 +146,7 @@ extension CalculatorViewController {
             currentNumberLabel.text = CalculatorError.emptyCalculatorItemQueue.description
         }
         
-        insertCurrentItemIntoHistoryStackView()
+        insertItemIntoHistoryStackView(`operator`: currentOperator, number: currentNumber)
         updateCurrentNumberLabelWithFormat()
         
         currentOperatorLabel.text = UIConstants.emptyString
