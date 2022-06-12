@@ -140,10 +140,9 @@ extension CalculatorViewController {
         do {
             let result = try ExpressionParser.parse(from: resultExpression).result()
             currentNumberLabel.text = String(result)
-        } catch CalculatorError.dividedByZero {
-            currentNumberLabel.text = CalculatorError.dividedByZero.description
+        } catch let error as CalculatorError {
+            currentNumberLabel.text = error.description
         } catch {
-            currentNumberLabel.text = CalculatorError.emptyCalculatorItemQueue.description
         }
         
         insertItemIntoHistoryStackView(operator: currentOperator, number: currentNumber)
