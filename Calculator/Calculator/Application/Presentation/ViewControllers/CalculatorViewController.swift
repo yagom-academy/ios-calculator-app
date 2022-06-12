@@ -47,19 +47,16 @@ class CalculatorViewController: UIViewController {
 
 // MARK: - UI 갱신을 위한 메서드
 extension CalculatorViewController {
-    private func refreshNumberLabel(with letter: String = CalculatorConstants.emptyString) {
-        if firstDecimalPointInCurrentNumber {
-            let newNumber = Double(currentNumber)
-            let newNumberData = numberFormatter.string(for: newNumber)
-            
-            DispatchQueue.main.async {
-                self.currentNumberLabel.text = newNumberData
-            }
-        } else {
-            if let currentData = currentNumberLabel.text {
-                let newNumberData = currentData + letter
-                currentNumberLabel.text = newNumberData
-            }
+    private func refreshNumberLabel() {
+        let newNumber = Double(currentNumber)
+        var newNumberData = numberFormatter.string(for: newNumber) ?? CalculatorConstants.zero
+        
+        if currentNumber.hasSuffix(".") {
+            newNumberData += "."
+        }
+        
+        DispatchQueue.main.async {
+            self.currentNumberLabel.text = newNumberData
         }
     }
     
@@ -143,7 +140,7 @@ extension CalculatorViewController {
             currentNumber += number
         }
         
-        refreshNumberLabel(with: number)
+        refreshNumberLabel()
     }
     
     @IBAction func pressDotButton(_ sender: UIButton) {
@@ -151,10 +148,10 @@ extension CalculatorViewController {
             return
         }
         
-        firstDecimalPointInCurrentNumber = false
-        
         currentNumber += CalculatorConstants.dot
-        refreshNumberLabel(with: CalculatorConstants.dot)
+        firstDecimalPointInCurrentNumber = false
+
+        refreshNumberLabel()
     }
     
     @IBAction private func pressOperatorButton(_ sender: UIButton) {
