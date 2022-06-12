@@ -77,6 +77,7 @@ private extension CalculatorViewController {
                   checkLimitedDigits(oldValue) else {
                 return
             }
+            
             operandsLabel?.text = oldValue + CalculatorOtherSigns.doubleZero.rawValue
             
         case .clearEntry:
@@ -126,6 +127,7 @@ private extension CalculatorViewController {
     func setDefalut() {
         operandsLabel?.text = CalculatorState.zero.value
         operatorsLabel?.text = CalculatorState.empty.value
+
         formulaStackView?.removeSubView()
     }
     
@@ -154,6 +156,10 @@ private extension CalculatorViewController {
     }
     
     func inputOperator(_ value: String) {
+        guard operandsLabel?.text != CalculatorState.zero.value
+                || operandsLabel?.text != CalculatorState.nan.value else {
+            return
+        }
         addStackView()
         savedValueScrollView?.focusBottom()
         
@@ -163,21 +169,28 @@ private extension CalculatorViewController {
     
     func checkLimitedDigits(_ data: String) -> Bool {
         if (isContainedDot) {
-            let integer = data.split(with: Character(CalculatorOtherSigns.dot.rawValue))[0]
-            return integer.count < 20
+            let realNumber: [String] = data.split(with: Character(CalculatorOtherSigns.dot.rawValue))
+            let integer: String = realNumber[0]
+            let decimal: String = realNumber.count > 1 ? realNumber[1] : ""
+            
+           return integer.count < 20 && decimal.count < 20
         } else {
             return data.count < 20
         }
     }
     
     func setToggle(for minus: String) {
-        guard let oldValue = operandsLabel?.text,
-              !oldValue.elementsEqual(CalculatorState.zero.value) else {
+        guard let oldValue = operandsLabel?.text else {
             return
         }
         
         let removeCommaValue = oldValue.replacingOccurrences(of: ",", with: CalculatorState.empty.value)
-        operandsLabel?.text = (removeCommaValue.doubleValue() * -1).setDoubleFormatter()
+        let operand = ((removeCommaValue.doubleValue()) * -1).setDoubleFormatter()
+        
+        guard !operand.elementsEqual(CalculatorState.zero.value.minusValue()) else {
+            return
+        }
+        operandsLabel?.text = operand
     }
     
     func result() {

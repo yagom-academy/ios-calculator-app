@@ -15,4 +15,8 @@ extension String {
     func doubleValue() -> Double {
         return Double(self) ?? 0.0
     }
+    
+    func minusValue() -> String {
+        return "-" + self
+    }
 }

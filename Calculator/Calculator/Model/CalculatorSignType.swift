@@ -15,20 +15,3 @@ enum CalculatorOtherSigns: String {
     case plusMinus = "⁺⁄₋"
     case result = "="
 }
-
-enum CalculatorState {
-    case empty
-    case zero
-    case minus
-    
-    var value: String {
-        switch self {
-        case .empty:
-            return  ""
-        case .zero:
-            return "0"
-        case .minus:
-            return "-"
-        }
-    }
-}
