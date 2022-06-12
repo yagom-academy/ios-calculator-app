@@ -51,8 +51,8 @@ extension CalculatorViewController {
         let newNumber = Double(currentNumber)
         var newNumberData = numberFormatter.string(for: newNumber) ?? CalculatorConstants.zero
         
-        if currentNumber.hasSuffix(".") {
-            newNumberData += "."
+        if currentNumber.hasSuffix(CalculatorConstants.dot) {
+            newNumberData += CalculatorConstants.dot
         }
         
         DispatchQueue.main.async {
