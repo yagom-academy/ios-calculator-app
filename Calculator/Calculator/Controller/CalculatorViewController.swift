@@ -152,7 +152,6 @@ extension CalculatorViewController {
         currentOperatorLabel.text = UIConstants.emptyString
         
         resetCurrentOperatorAndNumber()
-        
         isFirstInputAfterCalculation = true
         isFirstDecimalPointInCurrentNumber = true
     }
