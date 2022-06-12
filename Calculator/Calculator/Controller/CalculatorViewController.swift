@@ -118,7 +118,7 @@ extension CalculatorViewController {
         currentOperatorLabel.text = senderCurrentTitle
  
         if !currentNumber.isEmpty {
-            insertItemIntoHistoryStackView(`operator`: currentOperator, number: currentNumber)
+            insertItemIntoHistoryStackView(operator: currentOperator, number: currentNumber)
             
             currentNumberLabel.text = UIConstants.zero
             
@@ -146,7 +146,7 @@ extension CalculatorViewController {
             currentNumberLabel.text = CalculatorError.emptyCalculatorItemQueue.description
         }
         
-        insertItemIntoHistoryStackView(`operator`: currentOperator, number: currentNumber)
+        insertItemIntoHistoryStackView(operator: currentOperator, number: currentNumber)
         updateCurrentNumberLabelWithFormat()
         
         currentOperatorLabel.text = UIConstants.emptyString
