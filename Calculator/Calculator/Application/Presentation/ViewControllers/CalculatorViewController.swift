@@ -8,6 +8,16 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    private enum CalculatorConstants {
+        static let minus: Character = "-"
+        static let maximumDigits = 20
+        static let zero = "0"
+        static let dot = "."
+        static let emptyString = ""
+        static let nan = "NaN"
+        static let error = "Err"
+    }
+    
     @IBOutlet private weak var currentNumberLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     
@@ -104,7 +114,7 @@ extension CalculatorViewController {
                 && currentNumber != CalculatorConstants.error)
     }
     
-    private func gotResult() -> Bool {
+    private func hasResult() -> Bool {
         return (snippets.isEmpty
                 && currentOperator.isEmpty
                 && currentNumberLabel.text != CalculatorConstants.zero)
@@ -114,7 +124,7 @@ extension CalculatorViewController {
 // MARK: - 각 버튼을 눌렀을 때의 동작을 위한 메서드
 extension CalculatorViewController {
     @IBAction private func pressNumberButton(_ sender: UIButton) {
-        if (snippets.isNotEmpty && currentOperator.isEmpty) || gotResult() {
+        if (snippets.isNotEmpty && currentOperator.isEmpty) || hasResult() {
             return
         }
         
@@ -136,7 +146,7 @@ extension CalculatorViewController {
     }
     
     @IBAction func pressDotButton(_ sender: UIButton) {
-        guard firstDecimalPointInCurrentNumber, !gotResult() else {
+        guard firstDecimalPointInCurrentNumber, !hasResult() else {
             return
         }
         
@@ -160,11 +170,10 @@ extension CalculatorViewController {
                 currentOperator = `operator`
             }
         default:
-            let operatorNow = currentOperator
             let operandData = Double(currentNumber)
-            let operandNow = numberFormatter.string(for: operandData) ?? CalculatorConstants.zero
-            snippets.append((operatorNow, currentNumber))
-            insertIndividualStackView(with: currentOperator, and: operandNow)
+            let formattedNumber = numberFormatter.string(for: operandData) ?? CalculatorConstants.zero
+            snippets.append((currentOperator, currentNumber))
+            insertIndividualStackView(with: currentOperator, and: formattedNumber)
             currentOperator = `operator`
             currentNumber = CalculatorConstants.zero
         }
@@ -234,7 +243,7 @@ extension CalculatorViewController {
     }
     
     @IBAction private func pressInvertButton(_ sender: UIButton) {
-        guard !gotResult() else {
+        guard !hasResult() else {
             return
         }
         
