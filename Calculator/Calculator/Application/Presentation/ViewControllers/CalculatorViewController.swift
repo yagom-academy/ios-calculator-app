@@ -117,7 +117,8 @@ extension CalculatorViewController {
     private func hasResult() -> Bool {
         return (snippets.isEmpty
                 && currentOperator.isEmpty
-                && currentNumberLabel.text != CalculatorConstants.zero)
+                && currentNumberLabel.text != CalculatorConstants.zero
+                && receivedInputsStackView.arrangedSubviews.isNotEmpty)
     }
 }
 
