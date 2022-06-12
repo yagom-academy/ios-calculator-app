@@ -35,8 +35,8 @@ final class CalculatorViewController: UIViewController {
     private var currentNumber = LogicConstants.emptyString
     private var currentOperator = LogicConstants.emptyString
     
-    private var firstDecimalPointInCurrentNumber = true
-    private var firstInputAfterCalculation = false
+    private var isFirstDecimalPointInCurrentNumber = true
+    private var isFirstInputAfterCalculation = false
     
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -98,10 +98,10 @@ extension CalculatorViewController {
         }
         
         if currentNumberLabel.text == UIConstants.zero ||
-            firstInputAfterCalculation == true {
+            isFirstInputAfterCalculation == true {
             currentNumberLabel.text = UIConstants.emptyString
             
-            firstInputAfterCalculation = false
+            isFirstInputAfterCalculation = false
         }
         
         currentNumberLabel.text! += senderCurrentTitle
@@ -127,7 +127,7 @@ extension CalculatorViewController {
         }
         
         currentOperator = senderCurrentTitle
-        firstDecimalPointInCurrentNumber = true
+        isFirstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
@@ -153,8 +153,8 @@ extension CalculatorViewController {
         
         resetCurrentOperatorAndNumber()
         
-        firstInputAfterCalculation = true
-        firstDecimalPointInCurrentNumber = true
+        isFirstInputAfterCalculation = true
+        isFirstDecimalPointInCurrentNumber = true
     }
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
@@ -184,8 +184,8 @@ extension CalculatorViewController {
     }
     
     @IBAction private func dotButtonTapped(_ sender: UIButton) {
-        guard firstDecimalPointInCurrentNumber else { return }
-        firstDecimalPointInCurrentNumber = false
+        guard isFirstDecimalPointInCurrentNumber else { return }
+        isFirstDecimalPointInCurrentNumber = false
         
         guard let dot = sender.currentTitle else {
             return
