@@ -55,15 +55,11 @@ extension CalculatorViewController {
             newNumberData += CalculatorConstants.dot
         }
         
-        DispatchQueue.main.async {
-            self.currentNumberLabel.text = newNumberData
-        }
+        self.currentNumberLabel.text = newNumberData
     }
     
     private func refreshOperatorLabel() {
-        DispatchQueue.main.async {
-            self.currentOperatorLabel.text = self.currentOperator
-        }
+        self.currentOperatorLabel.text = self.currentOperator
     }
     
     private func insertIndividualStackView(with operatorData: String, and operandData: String) {
@@ -90,16 +86,12 @@ extension CalculatorViewController {
             return stackView
         }()
         
-        DispatchQueue.main.async {
-            self.receivedInputsStackView.addArrangedSubview(individualStackView)
-        }
+        self.receivedInputsStackView.addArrangedSubview(individualStackView)
     }
     
     private func clearStackView() {
-        DispatchQueue.main.async {
-            self.receivedInputsStackView.subviews.forEach {
-                $0.removeFromSuperview()
-            }
+        self.receivedInputsStackView.subviews.forEach {
+            $0.removeFromSuperview()
         }
     }
 }
