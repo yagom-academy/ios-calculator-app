@@ -2,14 +2,14 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by Gordon Choi on 2022/05/19.
+//  Created by 나이든별, 민쏜
 //
 
 enum Operator: Character, CalculateItem, CaseIterable {
     case add = "+"
     case subtract = "–"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
@@ -20,12 +20,8 @@ enum Operator: Character, CalculateItem, CaseIterable {
             let value = subtract(lhs: lhs, rhs: rhs)
             return value
         case .divide:
-            do {
-                let value = try divide(lhs: lhs, rhs: rhs)
-                return value
-            } catch CalculatorError.dividedByZero {
-                throw CalculatorError.dividedByZero
-            }
+            let value = try divide(lhs: lhs, rhs: rhs)
+            return value
         case .multiply:
             let value = multiply(lhs: lhs, rhs: rhs)
             return value

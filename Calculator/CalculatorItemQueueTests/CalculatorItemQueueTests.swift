@@ -2,7 +2,7 @@
 //  CalculatorItemQueueTests.swift
 //  CalculatorItemQueueTests
 //
-//  Created by Gordon Choi on 2022/05/17.
+//  Created by 나이든별, 민쏜
 //
 
 import XCTest
