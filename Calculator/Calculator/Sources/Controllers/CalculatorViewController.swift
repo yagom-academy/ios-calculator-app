@@ -55,43 +55,9 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
-// MARK: - Actions
+// MARK: - IBAction Functions
 
 extension CalculatorViewController {
-    private func insertItemIntoHistoryStackView(`operator`: String, number: String) {
-        let inputItemStackView = UIStackView()
-        inputItemStackView.translatesAutoresizingMaskIntoConstraints = false
-        inputItemStackView.axis = .horizontal
-        inputItemStackView.alignment = .fill
-        inputItemStackView.distribution = .fill
-        inputItemStackView.spacing = 8
-        
-        let operatorSignLabel = UILabel()
-        operatorSignLabel.translatesAutoresizingMaskIntoConstraints = false
-        operatorSignLabel.textColor = .white
-        operatorSignLabel.backgroundColor = .black
-        operatorSignLabel.text = `operator`
-        operatorSignLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        let numberLabel = UILabel()
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.textColor = .white
-        numberLabel.backgroundColor = .black
-        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        let numberForFormatting = Double(number.replacingOccurrences(of: LogicConstants.comma, with: LogicConstants.emptyString))
-        numberLabel.text = numberFormatter.string(for: numberForFormatting)
-        
-        inputItemStackView.addArrangedSubview(operatorSignLabel)
-        inputItemStackView.addArrangedSubview(numberLabel)
-        
-        inputItemStackView.isHidden = true
-        historyStackView.addArrangedSubview(inputItemStackView)
-        
-        UIStackView.animate(withDuration: 0.3) {
-            inputItemStackView.isHidden = false
-        }
-    }
-    
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
         guard let senderCurrentTitle = sender.currentTitle else {
             return
@@ -192,6 +158,15 @@ extension CalculatorViewController {
         currentNumber += dot
         currentNumberLabel.text! += dot
     }
+}
+
+// MARK: - Functions for UI
+
+extension CalculatorViewController {
+    private func resetLabels() {
+        currentOperatorLabel.text = UIConstants.emptyString
+        currentNumberLabel.text = UIConstants.zero
+    }
     
     private func updateCurrentNumberLabelWithFormat() {
         guard let numbersString = currentNumberLabel.text else {
@@ -207,13 +182,47 @@ extension CalculatorViewController {
         currentNumberLabel.text = numberFormatter.string(for: numbers)
     }
     
-    private func resetLabels() {
-        currentOperatorLabel.text = UIConstants.emptyString
-        currentNumberLabel.text = UIConstants.zero
+    private func insertItemIntoHistoryStackView(`operator`: String, number: String) {
+        let inputItemStackView = UIStackView()
+        inputItemStackView.translatesAutoresizingMaskIntoConstraints = false
+        inputItemStackView.axis = .horizontal
+        inputItemStackView.alignment = .fill
+        inputItemStackView.distribution = .fill
+        inputItemStackView.spacing = 8
+        
+        let operatorSignLabel = UILabel()
+        operatorSignLabel.translatesAutoresizingMaskIntoConstraints = false
+        operatorSignLabel.textColor = .white
+        operatorSignLabel.backgroundColor = .black
+        operatorSignLabel.text = `operator`
+        operatorSignLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        let numberLabel = UILabel()
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberLabel.textColor = .white
+        numberLabel.backgroundColor = .black
+        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        let numberForFormatting = Double(number.replacingOccurrences(of: LogicConstants.comma, with: LogicConstants.emptyString))
+        numberLabel.text = numberFormatter.string(for: numberForFormatting)
+        
+        inputItemStackView.addArrangedSubview(operatorSignLabel)
+        inputItemStackView.addArrangedSubview(numberLabel)
+        
+        inputItemStackView.isHidden = true
+        historyStackView.addArrangedSubview(inputItemStackView)
+        
+        UIStackView.animate(withDuration: 0.3) {
+            inputItemStackView.isHidden = false
+        }
     }
-    
+}
+
+// MARK: - Functions for Logic
+
+extension CalculatorViewController {
     private func resetCurrentOperatorAndNumber() {
         currentOperator = LogicConstants.emptyString
         currentNumber = LogicConstants.emptyString
     }
 }
+
