@@ -51,7 +51,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetLabels()
+        eraseCurrentOperatorLabel()
+        resetCurrentNumberLabel()
     }
 }
 
@@ -86,10 +87,10 @@ extension CalculatorViewController {
         if !currentNumber.isEmpty {
             insertItemIntoHistoryStackView(operator: currentOperator, number: currentNumber)
             
-            currentNumberLabel.text = UIConstants.zero
+            resetCurrentNumberLabel()
             
             resultExpression += currentOperator + currentNumber
-            currentNumber = LogicConstants.emptyString
+            resetCurrentNumber()
         }
         
         currentOperator = senderCurrentTitle
@@ -114,25 +115,29 @@ extension CalculatorViewController {
         insertItemIntoHistoryStackView(operator: currentOperator, number: currentNumber)
         updateCurrentNumberLabelWithFormat()
         
-        currentOperatorLabel.text = UIConstants.emptyString
+        eraseCurrentOperatorLabel()
         
-        resetCurrentOperatorAndNumber()
-        isFirstInputAfterCalculation = true
-        isFirstDecimalPointInCurrentNumber = true
+        resetCurrentOperator()
+        resetCurrentNumber()
+        
+        allowNumberInput()
+        allowDecimalPointInput()
     }
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
-        resetCurrentOperatorAndNumber()
-        resetLabels()
+        resetResultExpression()
+        resetCurrentOperator()
+        resetCurrentNumber()
         
-        resultExpression = LogicConstants.emptyString
+        eraseCurrentOperatorLabel()
+        resetCurrentNumberLabel()
         
         historyStackView.subviews.forEach( { $0.removeFromSuperview() } )
     }
 
     @IBAction private func ceButtonTapped(_ sender: UIButton) {
-        currentNumber = LogicConstants.emptyString
-        currentNumberLabel.text = UIConstants.zero
+        resetCurrentNumber()
+        resetCurrentNumberLabel()
     }
     
     @IBAction private func switchPositiveNegativeButtonTapped(_ sender: UIButton) {
@@ -163,9 +168,17 @@ extension CalculatorViewController {
 // MARK: - Functions for UI
 
 extension CalculatorViewController {
-    private func resetLabels() {
+    private func eraseCurrentOperatorLabel() {
         currentOperatorLabel.text = UIConstants.emptyString
+    }
+    
+    private func resetCurrentNumberLabel() {
         currentNumberLabel.text = UIConstants.zero
+    }
+    
+    private func resetLabels() {
+        eraseCurrentOperatorLabel()
+        resetCurrentNumberLabel()
     }
     
     private func updateCurrentNumberLabelWithFormat() {
@@ -221,8 +234,27 @@ extension CalculatorViewController {
 
 extension CalculatorViewController {
     private func resetCurrentOperatorAndNumber() {
-        currentOperator = LogicConstants.emptyString
+        resetCurrentOperator()
+        resetCurrentNumber()
+    }
+    
+    private func allowNumberInput() {
+        isFirstInputAfterCalculation = true
+    }
+    
+    private func allowDecimalPointInput() {
+        isFirstDecimalPointInCurrentNumber = true
+    }
+    
+    private func resetCurrentNumber() {
         currentNumber = LogicConstants.emptyString
     }
+    
+    private func resetCurrentOperator() {
+        currentOperator = LogicConstants.emptyString
+    }
+    
+    private func resetResultExpression() {
+        resultExpression = LogicConstants.emptyString
+    }
 }
-
