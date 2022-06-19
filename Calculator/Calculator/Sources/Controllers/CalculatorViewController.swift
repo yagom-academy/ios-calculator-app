@@ -51,7 +51,7 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetCurrentMainLabel()
+        resetLabels()
     }
 }
 
@@ -157,7 +157,7 @@ extension CalculatorViewController {
     
     @IBAction private func acButtonTapped(_ sender: UIButton) {
         resetCurrentOperatorAndNumber()
-        resetCurrentMainLabel()
+        resetLabels()
         
         resultExpression = LogicConstants.emptyString
         
@@ -207,7 +207,7 @@ extension CalculatorViewController {
         currentNumberLabel.text = numberFormatter.string(for: numbers)
     }
     
-    private func resetCurrentMainLabel() {
+    private func resetLabels() {
         currentOperatorLabel.text = UIConstants.emptyString
         currentNumberLabel.text = UIConstants.zero
     }
