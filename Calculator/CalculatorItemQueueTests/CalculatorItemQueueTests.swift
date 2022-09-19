@@ -136,4 +136,12 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 1)
     }
+    
+    func test_data의요소가1개일때_count호출시_true를반환하는지() {
+        sut.enqueue(String(Int.random(in: 0...9)))
+        
+        let result = sut.isEmpty()
+        
+        XCTAssert(result)
+    }
 }

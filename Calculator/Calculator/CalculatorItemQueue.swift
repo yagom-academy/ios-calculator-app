@@ -37,4 +37,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func clear() {
         data = []
     }
+    
+    func isEmpty() -> Bool {
+        return false
+    }
 }
