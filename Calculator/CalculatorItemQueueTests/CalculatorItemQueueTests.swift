@@ -20,4 +20,14 @@ class CalculatorItemQueueTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_enQueue_메서드가_실행되었을_때_inputStack에_값이_들어가는가() {
+        let input = 7.0
+        
+        sut.enQueue(element: input)
+        
+        let result = 7.0
+        
+        XCTAssertEqual(result, sut.inputStack.last)
+    }
 }
