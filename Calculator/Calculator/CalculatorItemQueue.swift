@@ -17,7 +17,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
             return data.capacity
         }
         set {
-            
+            data.reserveCapacity(newValue)
         }
     }
     
