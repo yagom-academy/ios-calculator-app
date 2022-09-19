@@ -30,6 +30,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func clear() {
-        
+        data = []
     }
 }
