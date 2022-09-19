@@ -1,7 +1,5 @@
 //
 //  CalculateItem.swift
-//  Calculator
-//
 //  Created by Wonbi on 2022/09/20.
 //
 

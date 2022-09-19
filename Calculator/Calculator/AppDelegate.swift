@@ -1,8 +1,8 @@
 //
-//  Calculator - AppDelegate.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
+//  AppDelegate.swift
+//  Created by Wonbi on 2022/09/19.
+//
+
 
 import UIKit
 

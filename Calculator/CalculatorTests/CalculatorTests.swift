@@ -1,9 +1,8 @@
 //
 //  CalculatorTests.swift
-//  CalculatorTests
-//
 //  Created by Wonbi on 2022/09/19.
 //
+
 
 import XCTest
 @testable import Calculator
