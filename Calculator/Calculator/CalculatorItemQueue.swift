@@ -55,6 +55,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func insert(_ element: T, at index: Int) {
-        
+        data.insert(element, at: index)
     }
 }
