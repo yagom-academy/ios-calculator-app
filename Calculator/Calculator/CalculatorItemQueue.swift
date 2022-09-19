@@ -23,6 +23,9 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func peek() -> T? {
-        return nil
+        guard let element = data.first else {
+            return nil
+        }
+        return element
     }
 }
