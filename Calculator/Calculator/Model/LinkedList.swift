@@ -17,11 +17,21 @@ class Node <T> {
     }
 }
 
-struct LinkedList <Value>{
-    var head: Node<Value>?
+struct LinkedList<Int>{
+    var head: Node<Int>?
     
-    func append(_ data: Node<Int>) {
+    mutating func append(_ data: Int) {
+        guard self.head != nil else {
+            self.head = Node(data: data)
+            return
+        }
         
+        var currentNode = head
+        while currentNode?.next != nil {
+            currentNode = currentNode?.next
+        }
+        
+        currentNode?.next = Node(data: data)
     }
 }
 
