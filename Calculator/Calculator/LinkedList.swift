@@ -37,7 +37,15 @@ public struct LinkedList {
     }
     
     public mutating func append(_ value: String) {
+        
+        guard !isEmpty else {
+            push(value)
+            return
+        }
+        
         tail?.next = Node(value: value)
         tail = tail?.next
     }
+    
+    
 }

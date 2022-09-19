@@ -33,4 +33,13 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(sut.tail?.value, "4")
     }
+    
+    func test_linkedlist_append_4_when_there_is_no_head() {
+        
+        sut.append("4")
+        
+        XCTAssertEqual(sut.tail?.value, "4")
+        XCTAssertEqual(sut.head?.value, "4")
+
+    }
 }
