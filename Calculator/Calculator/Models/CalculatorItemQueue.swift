@@ -8,15 +8,15 @@
 class CalculatorItemQueue<T>: CalculateItem {
     private var enqueue: [T] = []
     private var dequeue: [T] = []
-    private var isEmpty: Bool {
+    var isEmpty: Bool {
         return enqueue.isEmpty && dequeue.isEmpty
     }
     
-    private func push(_ element: T) {
+    func push(_ element: T) {
         enqueue.append(element)
     }
     
-    private func pop() -> T? {
+    func pop() -> T? {
         if dequeue.isEmpty {
             dequeue = enqueue.reversed()
             enqueue.removeAll()
