@@ -99,4 +99,28 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(input[1], queue.dequeue())
         XCTAssertEqual(input[2], queue.dequeue())
     }
+    
+    func test_빈_queue의_peak의_값이_nil인가() {
+        //given
+        
+        //when
+        var queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
+
+        //then
+        XCTAssertEqual(nil, queue.peak())
+    }
+    
+    func test_여러개의_입력값중_가장_첫번째_입력된_값을_출력하는_peak이_첫번째_입력된_값과_같은가() {
+        //given
+        let input = [1,2,3,4,5]
+        
+        //when
+        var queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
+        input.forEach {
+            queue.enqueue($0)
+        }
+        
+        //then
+        XCTAssertEqual(input[0], queue.peak())
+    }
 }
