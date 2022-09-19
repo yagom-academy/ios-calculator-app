@@ -24,3 +24,12 @@ struct CalculatorItemQueue<T>: CalculateItem {
         
     }
 }
+
+private class Node<T> {
+    var next: Node<T>?
+    var data: T
+    
+    init(data: T) {
+        
+    }
+}
