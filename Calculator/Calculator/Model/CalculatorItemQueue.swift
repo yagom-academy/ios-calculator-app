@@ -6,5 +6,13 @@
 //
 
 struct CalculatorItemQueue: CalculateItem {
-    var queue: ItemList
+    private var queue: ItemList
+    
+    func push() {
+        
+    }
+    
+    func pop() {
+        
+    }
 }
