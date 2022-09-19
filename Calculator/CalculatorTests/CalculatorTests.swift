@@ -23,7 +23,7 @@ class CalculatorTests: XCTestCase {
     
     func test_Queue가빈값일때_true를반환하는지() {
         // given
-        let input: [Double] = []
+        let input: [CalculateItem] = []
         
         // when
         sut.data = input
