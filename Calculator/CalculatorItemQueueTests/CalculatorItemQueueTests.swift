@@ -22,13 +22,13 @@ class CalculatorItemQueueTests: XCTestCase {
     }
 
     
-    func test_인큐에_3을_넣었을때_큐에_3이_들어가는지() {
+    func test_when_enqueue_3_then_linkedlist_has_3() {
         // given
         let input = "3"
         // when
         sut.enqueue(item: input)
         // then
-        XCTAssertEqual(["3"], sut.queue)
+        XCTAssertEqual(sut.queue.head?.value, "3")
     }
 
 }
