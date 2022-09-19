@@ -6,5 +6,7 @@
 //
 
 struct CalculatorItemQueue<T>: CalculateItem {
+    var data: [T] = []
     
+    init() {}
 }
