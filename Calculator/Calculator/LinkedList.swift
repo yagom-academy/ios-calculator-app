@@ -49,12 +49,35 @@ public struct LinkedList {
     
     public mutating func pop() -> String? {
         
-        let returnNode = head?.next
+        let returnValue = head?.value
         head = head?.next
         if isEmpty {
             tail = nil
         }
         
-        return returnNode?.value
+        return returnValue
+    }
+    
+    public mutating func removeLast() -> String? {
+        
+        guard let head = head else {
+            return nil
+        }
+        
+        guard head.next != nil else {
+            return pop()
+        }
+        
+        var prev = head
+        var current = head
+        
+        while let next = current.next {
+            prev = current
+            current = next
+        }
+
+        prev.next = nil
+        tail = prev
+        return current.value
     }
 }
