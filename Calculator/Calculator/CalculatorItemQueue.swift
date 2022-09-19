@@ -12,6 +12,14 @@ struct CalculatorItemQueue<T>: CalculateItem {
             return data.count
         }
     }
+    var capacity: Int? {
+        get {
+            return nil
+        }
+        set {
+            
+        }
+    }
     
     init() {}
     

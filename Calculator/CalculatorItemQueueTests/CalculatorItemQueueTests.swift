@@ -154,7 +154,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_capacity와count가같을때_isFull호출시_capacity와count의비교와같은지() {
-        sut.data = []
+        sut.data.reserveCapacity(sut.data.count)
         
         let result = sut.isFull()
         
@@ -162,11 +162,16 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_capacity와count가다를때_isFull호출시_capacity와count의비교와같은지() {
-        sut.data = ["1"]
-        sut.data.removeFirst()
+        sut.data.reserveCapacity(sut.data.count + 1)
         
         let result = sut.isFull()
         
         XCTAssertEqual(result, sut.data.capacity == sut.data.count)
+    }
+    
+    func test_capasity호출시_현재용량과같은지() {
+        let result = sut.capacity
+        
+        XCTAssertEqual(result, sut.data.capacity)
     }
 }
