@@ -8,6 +8,7 @@
 struct ItemList {
     private var head: Node?
     private var tail: Node?
+    private(set) var count: Int = 0
     
     mutating func enqueue(_ data: String) {
         let newNode = Node(data: data)
@@ -16,6 +17,7 @@ struct ItemList {
             self.head = newNode
         }
         
+        count += 1
         self.tail = newNode
     }
     
@@ -25,6 +27,7 @@ struct ItemList {
         }
         
         let data = head.data
+        count -= 1
         
         return data
     }
@@ -32,6 +35,7 @@ struct ItemList {
     mutating func clearQueue() {
         self.head = nil
         self.tail = nil
+        count = 0
     }
     
     func isEmpty() -> Bool {

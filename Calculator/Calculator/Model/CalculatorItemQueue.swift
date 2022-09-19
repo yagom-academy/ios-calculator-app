@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue: CalculateItem {
-    private var queue: ItemList = ItemList()
+    var queue: ItemList = ItemList()
     
     mutating func push(_ data: String) {
         queue.enqueue(data)

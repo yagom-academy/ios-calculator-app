@@ -10,6 +10,7 @@ import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
@@ -19,5 +20,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
+    func test_push50개_잘_들어가는지() {
+        for _ in 1...50 {
+            sut.push("test")
+        }
+        
+        XCTAssertEqual(sut.queue.count, 50)
+    }
+    
 }
