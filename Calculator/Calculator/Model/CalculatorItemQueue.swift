@@ -7,27 +7,19 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
-    var itemQueue: [(arithmetics: String, number: Int)?] = []
+struct CalculatorItemQueue: CalculateItem {
+    var itemQueue: LinkedList = LinkedList<Int>()
     var index:Int = 0
     
-    mutating func enqueue(_ data: (String, Int)) {
+    mutating func enqueue(_ data: Int) {
         itemQueue.append(data)
     }
     
-    mutating func dequeue() -> (String, Int)? {
-        guard let data = itemQueue[index] else {
-            return nil
-        }
-        
-        itemQueue[index] = nil
-        index += 1
-        
-        return data
+    mutating func dequeue() {
+        itemQueue.removeFirst()
     }
     
     mutating func clear() {
-        itemQueue.removeAll()
-        index = 0
+        itemQueue.head = nil
     }
 }
