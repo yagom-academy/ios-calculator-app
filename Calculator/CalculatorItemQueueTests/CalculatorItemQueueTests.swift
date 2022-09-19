@@ -51,7 +51,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue호출시_반환값이있는지() {
-        sut.enqueue(String(Int.random(in: 0...9)))
+        sut.data = [String(Int.random(in: 0...9))]
         
         let result = sut.dequeue()
         
