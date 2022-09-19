@@ -29,4 +29,11 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.queue.head?.value, "3")
     }
 
+    func test_when_dequeue_3_when_linkedlist_has_3_4_5() {
+        sut.enqueue(item: "3")
+        sut.enqueue(item: "4")
+        sut.enqueue(item: "5")
+
+        XCTAssertEqual(sut.dequeue(), "3")
+    }
 }

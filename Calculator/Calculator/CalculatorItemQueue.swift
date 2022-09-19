@@ -13,4 +13,8 @@ class CalculatorItemQueue {
     func enqueue(item: String) {
         queue.append(item)
     }
+    
+    func dequeue() -> String? {
+        return queue.pop()
+    }
 }
