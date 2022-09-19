@@ -26,8 +26,8 @@ struct CalculatorItemQueue {
         return data
     }
     
-    
-    
-    
-    
+    mutating func clear() {
+        itemQueue.removeAll()
+        index = 0
+    }
 }
