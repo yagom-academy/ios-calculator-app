@@ -50,11 +50,19 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, "7")
     }
     
-    func test_dequeue호출시_반환값이있는지() {
+    func test_data가있을때_dequeue호출시_반환값이있는지() {
         sut.data = [String(Int.random(in: 0...9))]
         
         let result = sut.dequeue()
         
         XCTAssertNotNil(result)
+    }
+    
+    func test_data가없을때_dequeue호출시_nil을반환하는지() {
+        sut.data = []
+        
+        let result = sut.dequeue()
+        
+        XCTAssertNil(result)
     }
 }
