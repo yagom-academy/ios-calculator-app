@@ -15,6 +15,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() -> T? {
-        return nil
+        guard let element = data.first else {
+            return nil
+        }
+        data.removeFirst()
+        return element
     }
 }
