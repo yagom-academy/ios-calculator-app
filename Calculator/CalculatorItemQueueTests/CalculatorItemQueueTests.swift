@@ -57,4 +57,13 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, [])
     }
+    
+    func test_deQueue_메서드가_호출되었을_때_outputStack의_마지막_요소를_반환하는가() {
+        sut.inputStack = [1.0, 2.0, 3.0]
+        sut.outputStack = sut.inputStack.reversed()
+        
+        let result = try? sut.deQueue()
+        
+        XCTAssertEqual(result, 1.0)
+    }
 }
