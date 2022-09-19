@@ -9,7 +9,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var data: [T] = []
     var count: Int {
         get {
-            return 0
+            return 5
         }
     }
     
