@@ -41,7 +41,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(Double.random(in: 0...10))
         sut.enqueue(Double.random(in: 0...10))
         
-        XCTAssertEqual(firstValue, sut.dequeue())
+        XCTAssertEqual(firstValue, sut.dequeue() as! Double)
     }
     func test_큐에10개의값이들어가고_3개의값이빠졌을때_값이7인지(){
         for _ in 1...10 {

@@ -5,9 +5,12 @@
 //  Created by leewonseok on 2022/09/19.
 //
 
+extension Double: CalculateItem {
+    
+}
 
-struct CalculatorItemQueue : CalculateItem {
-    private var queue: [Double?] = []
+struct CalculatorItemQueue {
+    private var queue: [CalculateItem?] = []
     private var head: Int = 0
     
     var count: Int {
@@ -23,7 +26,7 @@ struct CalculatorItemQueue : CalculateItem {
     }
     
     @discardableResult
-    mutating func dequeue() -> Double? {
+    mutating func dequeue() -> CalculateItem? {
         guard queue.count != 0, head <= queue.count, let element = queue[head] else { return nil }
         
         queue[head] = nil
