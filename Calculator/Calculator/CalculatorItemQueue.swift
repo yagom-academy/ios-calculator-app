@@ -41,4 +41,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
     func isEmpty() -> Bool {
         return data.isEmpty
     }
+    
+    func isFull() -> Bool {
+        return true
+    }
 }

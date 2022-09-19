@@ -152,4 +152,12 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    func test_data의요소가없을때_isFull호출시_false를반환하는지() {
+        sut.data = []
+        
+        let result = sut.isFull()
+        
+        XCTAssertFalse(result)
+    }
 }
