@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct LinkedList {
-    var head: Node?
-    var tail: Node?
+struct LinkedList<T> {
+    var head: Node<T>?
+    var tail: Node<T>?
     var count: Int = 0
     
-    mutating func append(data: String) {
-        let node: Node = Node(data)
+    mutating func append(data: T) {
+        let node: Node<T> = Node(data)
         
         if count == 0 {
             head = node
@@ -25,8 +25,8 @@ struct LinkedList {
         tail = node
     }
     
-    mutating func removeFirst() -> String? {
-        let removeItem: Node? = head
+    mutating func removeFirst() -> T? {
+        let removeItem: Node<T>? = head
         self.head = head?.getNextNode()
         count -= 1
         

@@ -7,19 +7,19 @@
 
 import Foundation
 
-final class Node {
-    var data: String
-    private var next: Node?
+final class Node<T> {
+    var data: T
+    private var next: Node<T>?
     
-    init(_ data: String) {
+    init(_ data: T) {
         self.data = data
     }
     
-    func getNextNode() -> Node? {
+    func getNextNode() -> Node<T>? {
         return next
     }
     
-    func setNextNode(node: Node) {
+    func setNextNode(node: Node<T>) {
         self.next = node
     }
 }

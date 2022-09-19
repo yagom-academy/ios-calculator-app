@@ -10,16 +10,16 @@ import XCTest
 @testable import Calculator
 class LinkedListTests: XCTestCase {
 
-    var sut: LinkedList!
+    var sut: LinkedList<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList()
+        sut = LinkedList<String>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = LinkedList()
+        sut = nil
     }
     
     func test_append_5번_후_count_확인() {
