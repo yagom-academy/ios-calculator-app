@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Any>!
+    var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -21,36 +21,28 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_count메서드에_숫자를넣었을때() {
+    func test_큐가비어있을때_enqueue메서드를통해입력되는지확인() {
         // given
-        let input = [1, 2]
+        let input = "1"
         
         // when
-        let result = sut.count(of: input)
+        sut.enqueue(input)
         
         // then
-        XCTAssertEqual(result, 2)
+        XCTAssertEqual(sut.queue, ["1"])
     }
     
-    func test_count메서드에_String이들어왔을때() {
+    func test_큐가이미들어있을때_enqueue로새로추가한엘리먼트가뒤로추가되는지확인() {
         // given
-        let input = ["+"]
-
+        sut.queue = ["1"]
+        let input = "2"
+        
         // when
-        let result = sut.count(of: input)
-
+        let _ = sut.enqueue(input)
+        
         // then
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(sut.queue[1], "2")
     }
     
-    func test_입력값이없을때_count메서드결과가0인지확인() {
-        // given
-        let input: [Int] = []
-        
-        // when
-        let result = sut.count(of: input)
-        
-        // then
-        XCTAssertEqual(result, 0)
-    }
+    
 }

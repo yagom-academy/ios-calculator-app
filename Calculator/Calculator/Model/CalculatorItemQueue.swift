@@ -9,8 +9,9 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var queue: [T?] = []
     var head: Int = 0
     
-    mutating func count(of numbers: [T?]) -> Int {
-        queue += numbers
-        return queue.count
+    mutating func enqueue(_ element: T) {
+        queue.append(element)
     }
+    
+    
 }
