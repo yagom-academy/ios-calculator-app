@@ -14,4 +14,12 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     mutating func enQueue(element: T) {
         input.append(element)
     }
+    
+    mutating func deQueue() throws -> T {
+        if output.isEmpty {
+            output = input.reversed()
+            input.removeAll()
+        }
+        return output.removeLast()
+    }
 }
