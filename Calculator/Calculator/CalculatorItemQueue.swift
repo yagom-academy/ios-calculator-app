@@ -59,6 +59,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func removeAtIndex(_ index: Int) {
-        
+        data.remove(at: index)
     }
 }
