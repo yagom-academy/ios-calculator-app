@@ -31,13 +31,23 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_Queue의남은데이터갯수를세는메서드가_정상작동하는지() {
-        let input: [CalculateItem] = .init(repeating: Double.random(in: 1...30), count: Int.random(in: 1...30))
+        let input: [CalculateItem] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...100))
         
         sut.input = input
         let result = sut.count
         let inputCount = input.count
         
         XCTAssertEqual(result, inputCount)
+    }
+    
+    func test_Queue에데이터를enqueue했을때_count가enqueue횟수와일치하는지() {
+        let input: [CalculateItem] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...100))
+        
+        for data in input {
+            sut.enqueue(data)
+        }
+        
+        XCTAssertEqual(input.count, sut.count)
     }
 }
 
