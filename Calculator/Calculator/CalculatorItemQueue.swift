@@ -6,6 +6,23 @@
 //
 
 
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue : CalculateItem {
     
+    private var queue: [Double] = []
+    
+    var count: Int {
+        return queue.count
+    }
+    
+    var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    mutating func enqueue(_ element: Double) {
+        queue.append(element)
+    }
+    
+    mutating func dequeue() -> Double? {
+        return isEmpty ? nil : queue.removeFirst()
+    }
 }
