@@ -142,6 +142,14 @@ class CalculatorItemQueueTests: XCTestCase {
         
         let result = sut.isEmpty()
         
-        XCTAssert(result)
+        XCTAssertTrue(result)
+    }
+    
+    func test_data의요소가없을때_count호출시_false를반환하는지() {
+        sut.data = []
+        
+        let result = sut.isEmpty()
+        
+        XCTAssertFalse(result)
     }
 }
