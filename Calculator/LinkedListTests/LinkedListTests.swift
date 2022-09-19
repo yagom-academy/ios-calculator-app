@@ -40,6 +40,13 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(sut.tail?.value, "4")
         XCTAssertEqual(sut.head?.value, "4")
-
+    }
+    
+    func test_linkedlist_pop_4_after_appending_4_5_6() {
+        sut.append("4")
+        sut.append("5")
+        sut.append("6")
+        
+        XCTAssertEqual(sut.pop(), "4")
     }
 }

@@ -47,5 +47,14 @@ public struct LinkedList {
         tail = tail?.next
     }
     
-    
+    public mutating func pop() -> String? {
+        
+        let returnNode = head?.next
+        head = head?.next
+        if isEmpty {
+            tail = nil
+        }
+        
+        return returnNode?.value
+    }
 }
