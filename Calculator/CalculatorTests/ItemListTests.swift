@@ -27,6 +27,19 @@ final class ItemListTests: XCTestCase {
         XCTAssertFalse(sut.isEmpty())
     }
     
+    func test_dequeue_값이_있는데_실행하면_data값을_반환() {
+        sut.enqueue("test")
+        let data = sut.dequeue()
+        
+        XCTAssertEqual(data, "test")
+    }
+    
+    func test_dequeue_값이_없는데_실행하면_nil() {
+        let data = sut.dequeue()
+        
+        XCTAssertNil(data)
+    }
+    
     func test_clearQueue_실행_시_head_tail_가_nil() {
         test_enqueue_값을_넣었을_때_head가_nil이_아님()
         sut.clearQueue()
