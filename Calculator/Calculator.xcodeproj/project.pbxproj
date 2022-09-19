@@ -82,8 +82,8 @@
 			children = (
 				AC94A1BA28D888E400256CE8 /* Node.swift */,
 				AC94A1BC28D888F100256CE8 /* ItemList.swift */,
-				AC94A1BE28D888FC00256CE8 /* CalculatorItemQueue.swift */,
 				AC94A1C028D889AB00256CE8 /* CalculateItem.swift */,
+				AC94A1BE28D888FC00256CE8 /* CalculatorItemQueue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
