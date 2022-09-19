@@ -40,7 +40,7 @@ final class ItemListTests: XCTestCase {
         XCTAssertNil(data)
     }
     
-    func test_clearQueue_실행_시_head_tail_가_nil() {
+    func test_값을_넣고_clearQueue_실행_시_head_tail_이_nil() {
         test_enqueue_값을_넣었을_때_head가_nil이_아님()
         sut.clearQueue()
         
