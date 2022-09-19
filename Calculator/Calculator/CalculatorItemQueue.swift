@@ -8,23 +8,23 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    private(set) var input: [T] = []
-    private(set) var output: [T] = []
+    private(set) var inputStack: [T] = []
+    private(set) var outputStack: [T] = []
     
     mutating func enQueue(element: T) {
-        input.append(element)
+        inputStack.append(element)
     }
     
     mutating func deQueue() throws -> T {
-        if output.isEmpty {
-            output = input.reversed()
-            input.removeAll()
+        if outputStack.isEmpty {
+            outputStack = inputStack.reversed()
+            inputStack.removeAll()
         }
-        return output.removeLast()
+        return outputStack.removeLast()
     }
     
     mutating func clear() {
-        input.removeAll()
-        output.removeAll()
+        inputStack.removeAll()
+        outputStack.removeAll()
     }
 }
