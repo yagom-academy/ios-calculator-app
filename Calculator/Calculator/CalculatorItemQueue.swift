@@ -22,4 +22,9 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         }
         return output.removeLast()
     }
+    
+    mutating func clear() {
+        input.removeAll()
+        output.removeAll()
+    }
 }
