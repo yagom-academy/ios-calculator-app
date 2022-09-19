@@ -63,7 +63,7 @@ class LinkedListTests: XCTestCase {
         //when 1을 지워주면
         sut.removeLast()
         
-        //then Linked된 노드 세번째는 nil이다
+        //then head는 nil이다
         XCTAssertEqual(nil, sut.head?.data)
     }
     
@@ -81,5 +81,44 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(2, sut.head?.next?.data)
         XCTAssertEqual(nil, sut.head?.next?.next?.data)
     }
+    
+    func test_removeFirst메서드_head가nil일때_그대로nil확인() throws {
+        //given head가 nil일 때
+        sut.head = nil
+        
+        //when 메서드를 작동하면
+        sut.removeFirst()
+        
+        //then head는 여전히 nil이다
+        XCTAssertNil(sut.head)
+    }
+    
+    func test_removeFirst메서드_head가nil이아니고_head만있을때_head제거확인() throws {
+        //given 1이 담겨있을 때
+        sut.append(1)
+        
+        //when 1을 지워주면
+        sut.removeFirst()
+        
+        //then head는 nil이다
+        XCTAssertEqual(nil, sut.head?.data)
+    }
+    
+    func test_removeFirst메서드_head가nil이아니고_1_2_3이담겨있을때_첫번째수제거확인() throws {
+        //given 1,2,3이 담겨있을 때
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        
+        //when 1을 지워주면
+        sut.removeFirst()
+        
+        //then head가2가되고, head.next는 3이되고, 세번째는 nil이된다.
+        XCTAssertEqual(2, sut.head?.data)
+        XCTAssertEqual(3, sut.head?.next?.data)
+        XCTAssertEqual(nil, sut.head?.next?.next?.data)
+    }
+    
+    
 }
 
