@@ -29,4 +29,20 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.queue.count, 50)
     }
     
+    func test_push50개_이후_pop50개() {
+        test_push50개_잘_들어가는지()
+        
+        for _ in 1...50 {
+            let data = sut.pop()
+            XCTAssertNotNil(data)
+        }
+        
+        XCTAssertEqual(sut.queue.count, 0)
+    }
+    
+    func test_비어있는상태에서_pop_하면_nil() {
+        let data = sut.pop()
+        
+        XCTAssertNil(data)
+    }
 }

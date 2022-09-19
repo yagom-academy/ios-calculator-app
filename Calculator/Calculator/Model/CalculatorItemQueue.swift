@@ -12,6 +12,7 @@ struct CalculatorItemQueue: CalculateItem {
         queue.enqueue(data)
     }
     
+    @discardableResult
     mutating func pop() -> String? {
         queue.dequeue()
     }
