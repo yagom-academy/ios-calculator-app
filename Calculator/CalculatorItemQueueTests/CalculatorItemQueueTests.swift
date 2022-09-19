@@ -121,7 +121,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_data의요소가5개일때_count호출시_5를반환하는지() {
         for _ in 1...5 {
-            sut.enqueue(String(Int.random(in: 0...9)))
+            sut.data += [String(Int.random(in: 0...9))]
         }
         
         let result = sut.count
@@ -130,7 +130,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_data의요소가1개일때_count호출시_1를반환하는지() {
-        sut.enqueue(String(Int.random(in: 0...9)))
+        sut.data = [String(Int.random(in: 0...9))]
         
         let result = sut.count
         
@@ -138,7 +138,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_data의요소가1개일때_isEmpty호출시_false를반환하는지() {
-        sut.enqueue(String(Int.random(in: 0...9)))
+        sut.data = [String(Int.random(in: 0...9))]
         
         let result = sut.isEmpty()
         
@@ -153,11 +153,11 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_data의요소가없을때_isFull호출시_false를반환하는지() {
+    func test_isFull호출시_capacity와count의비교와같은지() {
         sut.data = []
         
         let result = sut.isFull()
         
-        XCTAssertFalse(result)
+        XCTAssertEqual(result, sut.data.capacity == sut.data.count)
     }
 }
