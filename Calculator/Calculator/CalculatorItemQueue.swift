@@ -7,9 +7,9 @@
 
 struct CalculatorItemQueue<T>: CalculateItem {
     var data: [T] = []
-    var count: Int? {
+    var count: Int {
         get {
-            return nil
+            return 0
         }
     }
     
