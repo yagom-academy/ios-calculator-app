@@ -53,4 +53,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
     func isFull() -> Bool {
         return data.capacity == data.count
     }
+    
+    mutating func insert(_ element: T, at index: Int) {
+        
+    }
 }

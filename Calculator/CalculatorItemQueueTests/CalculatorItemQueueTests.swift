@@ -183,4 +183,16 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssert(result > originCapacity)
     }
+    
+    func test_인덱스범위내에서_insert호출시_인덱스2에_입력값9이_위치하는지() {
+        let input = 9
+        for _ in 1...5 {
+            sut.data += [String(Int.random(in: 0...8))]
+        }
+        sut.insert(String(input), at: 2)
+        
+        let result = sut.data[2]
+        
+        XCTAssertEqual(Int(result), 9)
+    }
 }
