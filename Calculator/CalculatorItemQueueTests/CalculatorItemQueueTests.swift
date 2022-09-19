@@ -195,4 +195,16 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(Int(result), 9)
     }
+    
+    func test_인덱스범위내에서_removeAtIndex호출시_인덱스2의_값이변하는지() {
+        sut.data = ["1", "2", "3", "4", "5"]
+        let input = 2
+        let originValue = sut.data[input]
+        
+        sut.removeAtIndex(input)
+        
+        let result = sut.data[input]
+        
+        XCTAssertNotEqual(result, originValue)
+    }
 }
