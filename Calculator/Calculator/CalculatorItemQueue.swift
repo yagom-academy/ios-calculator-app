@@ -22,7 +22,12 @@ struct CalculatorItemQueue : CalculateItem {
         queue.append(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> Double? {
         return isEmpty ? nil : queue.removeFirst()
+    }
+    
+    mutating func clear() {
+        queue.removeAll()
     }
 }
