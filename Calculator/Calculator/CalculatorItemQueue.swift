@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    private(set) var inputStack: [T] = []
-    private(set) var outputStack: [T] = []
+    var inputStack: [T] = []
+    var outputStack: [T] = []
     
     mutating func enQueue(element: T) {
         inputStack.append(element)
