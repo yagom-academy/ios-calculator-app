@@ -30,6 +30,7 @@ public struct LinkedList {
     }
     
     public mutating func push(_ value: String) {
+        
         head = Node(value: value, next: head)
         if tail == nil {
             tail = head
@@ -70,14 +71,14 @@ public struct LinkedList {
         
         var prev = head
         var current = head
-        
         while let next = current.next {
             prev = current
             current = next
         }
-
+        
         prev.next = nil
         tail = prev
+        
         return current.value
     }
 }

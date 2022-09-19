@@ -8,19 +8,23 @@
 import XCTest
 @testable import Calculator
 class LinkedListTests: XCTestCase {
+    
     var sut: LinkedList!
 
     override func setUpWithError() throws {
+        
         try super.setUpWithError()
         sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
+        
         try super.tearDownWithError()
         sut = nil
     }
 
     func test_linkedList_push_3_then_head_and_tail_is_3() {
+        
         sut.push("3")
         
         XCTAssertEqual(sut.head?.value, sut.tail?.value)
@@ -28,6 +32,7 @@ class LinkedListTests: XCTestCase {
     }
 
     func test_linkedlist_append_4_then_tail_is_4() {
+        
         sut.push("3")
         sut.append("4")
         
@@ -43,6 +48,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_linkedlist_pop_4_after_appending_4_5_6() {
+        
         sut.append("4")
         sut.append("5")
         sut.append("6")
@@ -62,6 +68,7 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_linkedlist_removeLast_when_appending_only_4() {
+        
         sut.append("6")
         
         XCTAssertEqual(sut.removeLast(), "6")
