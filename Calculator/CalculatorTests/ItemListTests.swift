@@ -21,12 +21,17 @@ final class ItemListTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue() {
+    func test_enqueue_값을_넣었을_때_head가_nil이_아님() {
+        sut.enqueue("test")
         
+        XCTAssertFalse(sut.isEmpty())
     }
     
-    func test_isEmpty() {
+    func test_clearQueue_실행_시_head_tail_가_nil() {
+        test_enqueue_값을_넣었을_때_head가_nil이_아님()
+        sut.clearQueue()
         
+        XCTAssertTrue(sut.isEmpty())
     }
 
 }
