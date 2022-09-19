@@ -68,7 +68,7 @@ class LinkedListTests: XCTestCase {
         //then Linked된 노드 세번째는 nil이다
         XCTAssertEqual(1, sut.head?.data)
         XCTAssertEqual(2, sut.head?.next?.data)
-        XCTAssertNil(sut.head?.next?.next?.data)
+        XCTAssertEqual(nil, sut.head?.next?.next?.data)
     }
 }
 

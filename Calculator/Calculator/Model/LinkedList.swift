@@ -36,7 +36,17 @@ struct LinkedList<Int>{
     }
     
     func removeLast() {
+        guard self.head != nil else {
+            return
+        }
         
+        var currentNode = head
+        
+        while currentNode?.next?.next != nil {
+            currentNode = currentNode?.next
+        }
+        
+        currentNode?.next = nil
     }
 }
 
