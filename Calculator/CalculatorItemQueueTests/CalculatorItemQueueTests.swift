@@ -66,4 +66,14 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 1.0)
     }
+    
+    func test_outputStack이_nil일_때_enQueue_메서드를_호출하고_deQueue_메서드를_호출하면_값을_잘_반환하는가() {
+        sut.inputStack = [1.0, 2.0, 3.0]
+        sut.outputStack = []
+        sut.enQueue(element: 4.0)
+        
+        let result = try? sut.deQueue()
+        
+        XCTAssertEqual(result, 1.0)
+    }
 }
