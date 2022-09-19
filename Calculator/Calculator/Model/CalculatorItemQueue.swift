@@ -8,9 +8,14 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    var data: [CalculateItem] = []
+    var input: [CalculateItem] = []
+    var output: [CalculateItem] = []
     
     var isEmpty: Bool {
-        data.isEmpty
+        input.isEmpty && output.isEmpty
+    }
+    
+    var count: Int {
+        input.count + output.count
     }
 }
