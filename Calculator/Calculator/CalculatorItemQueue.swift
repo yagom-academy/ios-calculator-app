@@ -43,6 +43,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func isFull() -> Bool {
-        return true
+        return data.capacity == data.count
     }
 }
