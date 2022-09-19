@@ -52,7 +52,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_빈_queue의_dequeue의_값이_nil인가() {
         //when
-        let queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
+        var queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
         
         //then
         XCTAssertEqual(nil, queue.dequeue())
