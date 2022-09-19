@@ -41,7 +41,7 @@ struct ItemList {
         count = 0
     }
     
-    func isEmpty() -> Bool {
+    private func isEmpty() -> Bool {
         self.head == nil ? true : false
     }
 }
