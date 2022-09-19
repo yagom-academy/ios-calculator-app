@@ -30,7 +30,11 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_push50개_이후_pop50개() {
-        test_push50개_잘_들어가는지()
+        for _ in 1...50 {
+            sut.push("test")
+        }
+        
+        XCTAssertEqual(sut.queue.count, 50)
         
         for _ in 1...50 {
             let data = sut.pop()
