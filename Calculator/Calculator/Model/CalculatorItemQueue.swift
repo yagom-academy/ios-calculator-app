@@ -33,7 +33,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func peak() -> T? {
-        return nil
+        return head?.data
     }
     
     func clear() {
