@@ -83,4 +83,31 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNotNil(result)
     }
+    
+    func test_data가없을때_peek호출시_nil을반환하는지() {
+        sut.data = []
+        
+        let result = sut.dequeue()
+        
+        XCTAssertNil(result)
+    }
+    
+    func test_data가있을때_peek호출시_data의카운트가감소하는지() {
+        sut.data = [String(Int.random(in: 0...9))]
+        let originCount: Int = sut.data.count
+        
+        sut.dequeue()
+        let result = sut.data.count
+        
+        XCTAssert(result < originCount)
+    }
+    
+    func test_data가있을때_clear호출시_값이비어있는지() {
+        sut.data = [String(Int.random(in: 0...9))]
+        sut.clear()
+        
+        let result = sut.data
+        
+        XCTAssert(result.isEmpty)
+    }
 }

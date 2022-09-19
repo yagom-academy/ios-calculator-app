@@ -28,4 +28,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
         return element
     }
+    
+    mutating func clear() {
+        
+    }
 }
