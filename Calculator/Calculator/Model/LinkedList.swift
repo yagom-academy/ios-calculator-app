@@ -17,6 +17,13 @@ class Node <T> {
     }
 }
 
+struct LinkedList <Value>{
+    var head: Node<Value>?
+    
+    func append(_ data: Node<Int>) {
+        
+    }
+}
 
 
 
