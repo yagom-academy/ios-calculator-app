@@ -154,8 +154,6 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_isFull호출시_capacity와count의비교와같은지() {
-        sut.data = []
-        
         let result = sut.isFull()
         
         XCTAssertEqual(result, sut.data.capacity == sut.data.count)
