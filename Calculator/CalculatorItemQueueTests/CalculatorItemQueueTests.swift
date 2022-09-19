@@ -118,4 +118,14 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNotNil(result)
     }
+    
+    func test_data의요소가5개일때_count호출시_5를반환하는지() {
+        for _ in 1...5 {
+            sut.enqueue(String(Int.random(in: 0...9)))
+        }
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, 5)
+    }
 }
