@@ -12,7 +12,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
             return data.count
         }
     }
-    var capacity: Int? {
+    var capacity: Int {
         get {
             return data.capacity
         }

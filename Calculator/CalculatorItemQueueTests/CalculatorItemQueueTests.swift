@@ -174,4 +174,13 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, sut.data.capacity)
     }
+    
+    func test_capasity_setter호출시_기존용량보다큰지() {
+        let originCapacity = sut.capacity
+        
+        sut.capacity += 1
+        let result = sut.capacity
+        
+        XCTAssert(result > originCapacity)
+    }
 }
