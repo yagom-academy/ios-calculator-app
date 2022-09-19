@@ -9,4 +9,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var data: [T] = []
     
     init() {}
+    
+    mutating func enqueue(_ element: T) {
+        
+    }
 }

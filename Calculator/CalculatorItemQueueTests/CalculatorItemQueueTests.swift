@@ -20,4 +20,12 @@ class CalculatorItemQueueTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_enqueue호출시_data가비어있는지() {
+        let input = Int.random(in: 1...9)
+        
+        sut.enqueue(String(input))
+        
+        XCTAssertFalse(sut.data.isEmpty)
+    }
 }
