@@ -36,4 +36,14 @@ class CalculatorItemQueueTests: XCTestCase {
 
         XCTAssertEqual(sut.dequeue(), "3")
     }
+    
+    func test_when_linkedlist_has_3_4_5_removeAll() {
+        sut.enqueue(item: "4")
+        sut.enqueue(item: "5")
+        sut.enqueue(item: "6")
+        
+        sut.removeAll()
+        
+        XCTAssertEqual(sut.queue.isEmpty, true)
+    }
 }

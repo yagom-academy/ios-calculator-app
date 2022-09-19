@@ -17,4 +17,8 @@ class CalculatorItemQueue {
     func dequeue() -> String? {
         return queue.pop()
     }
+    
+    func removeAll() {
+        queue.removeAll()
+    }
 }
