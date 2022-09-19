@@ -21,8 +21,15 @@ struct CalculatorItemQueue<T>: CalculateItem {
         self.count += 1
     }
     
-    func dequeue() -> T? {
-        return head?.data
+    mutating func dequeue() -> T? {
+        guard let nowHead = self.head else {
+            return nil
+        }
+        let nextHead = nowHead.next
+        self.head = nil
+        self.head = nextHead
+        self.count -= 1
+        return nowHead.data
     }
     
     func peak() -> T? {
