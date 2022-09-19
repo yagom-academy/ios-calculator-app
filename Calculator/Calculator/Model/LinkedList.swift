@@ -27,11 +27,16 @@ struct LinkedList<Int>{
         }
         
         var currentNode = head
+        
         while currentNode?.next != nil {
             currentNode = currentNode?.next
         }
         
         currentNode?.next = Node(data: data)
+    }
+    
+    func removeLast() {
+        
     }
 }
 
