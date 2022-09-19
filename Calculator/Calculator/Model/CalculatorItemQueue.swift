@@ -3,7 +3,7 @@ protocol CalculateItem { }
 struct CalculatorItemQueue<T>: CalculateItem {
     private var head: Node<T>? = nil
     private var tail: Node<T>? = nil
-    private(set) count: Int = 0
+    private(set) var count: Int = 0
     var isEmpty: Bool {
         return count == 0
     }
@@ -13,11 +13,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func dequeue() -> T? {
-        
+        return nil
     }
     
-    func peak() -> T {
-        
+    func peak() -> T? {
+        return nil
     }
     
     func clear() {
