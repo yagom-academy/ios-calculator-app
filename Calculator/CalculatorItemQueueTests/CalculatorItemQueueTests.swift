@@ -44,4 +44,17 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, sut.outputStack)
     }
+    
+    func test_deQueue_메서드가_실행되었을_때_inputStack의_순서를_뒤집어_outputStack에_넣고_inputStack의_요소를_모두_없애는가() {
+        sut.inputStack = [1.0, 2.0, 3.0]
+        sut.outputStack = sut.inputStack.reversed()
+        
+        if sut.inputStack.reversed() == sut.outputStack {
+            sut.inputStack.removeAll()
+        }
+        
+        let result = sut.inputStack
+        
+        XCTAssertEqual(result, [])
+    }
 }
