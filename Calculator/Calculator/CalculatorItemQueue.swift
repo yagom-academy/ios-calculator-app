@@ -14,7 +14,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     var capacity: Int? {
         get {
-            return nil
+            return data.capacity
         }
         set {
             

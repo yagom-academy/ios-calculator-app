@@ -169,7 +169,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, sut.data.capacity == sut.data.count)
     }
     
-    func test_capasity호출시_현재용량과같은지() {
+    func test_capasity_getter호출시_현재용량과같은지() {
         let result = sut.capacity
         
         XCTAssertEqual(result, sut.data.capacity)
