@@ -6,8 +6,8 @@
 //
 
 struct ItemList {
-    private var head: Node?
-    private var tail: Node?
+    private(set) var head: Node?
+    private(set) var tail: Node?
     private(set) var count: Int = 0
     
     mutating func enqueue(_ data: String) {
@@ -15,10 +15,12 @@ struct ItemList {
 
         if isEmpty() {
             self.head = newNode
+        } else {
+            self.tail?.next = newNode
         }
         
-        count += 1
         self.tail = newNode
+        count += 1
     }
     
     mutating func dequeue() -> String? {
