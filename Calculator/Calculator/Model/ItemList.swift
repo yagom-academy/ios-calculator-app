@@ -29,6 +29,7 @@ struct ItemList {
         }
         
         let data = head.data
+        self.head = self.head?.next
         count -= 1
         
         return data

@@ -53,6 +53,28 @@ final class ItemListTests: XCTestCase {
         XCTAssertNil(data)
     }
     
+    func test_dequeue_값이_잘빠지는지_확인() {
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        sut.enqueue("4")
+        
+        XCTAssertEqual(sut.dequeue(), "1")
+        XCTAssertEqual(sut.count, 3)
+        
+        XCTAssertEqual(sut.dequeue(), "2")
+        XCTAssertEqual(sut.count, 2)
+        
+        XCTAssertEqual(sut.dequeue(), "3")
+        XCTAssertEqual(sut.count, 1)
+        
+        XCTAssertEqual(sut.dequeue(), "4")
+        XCTAssertEqual(sut.count, 0)
+        
+        XCTAssertNil(sut.dequeue())
+        XCTAssertEqual(sut.count, 0)
+    }
+    
     func test_값을_넣고_clearQueue_실행_시_head_tail_이_nil() {
         test_enqueue_값을_넣었을_때_head가_nil이_아님()
         sut.clearQueue()
