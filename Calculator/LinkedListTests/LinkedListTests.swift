@@ -118,7 +118,5 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(3, sut.head?.next?.data)
         XCTAssertEqual(nil, sut.head?.next?.next?.data)
     }
-    
-    
 }
 
