@@ -5,4 +5,8 @@
 //  Created by smfc on 19/9/2022.
 //
 
-import Foundation
+struct CalculatorItemQueue<T>: CalculateItem {
+    var queue: [T?] = []
+    var head: Int = 0
+    
+}
