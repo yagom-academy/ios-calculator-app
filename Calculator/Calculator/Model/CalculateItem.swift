@@ -2,7 +2,7 @@
 //  CalculateItem.swift
 //  Calculator
 //
-//  Created by 이태영 on 2022/09/20.
+//  Created by Hamo on 2022/09/20.
 //
 
 protocol CalculateItem {
