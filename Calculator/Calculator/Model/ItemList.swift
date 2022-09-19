@@ -6,8 +6,8 @@
 //
 
 struct ItemList {
-    var head: Node?
-    var tail: Node?
+    private var head: Node?
+    private var tail: Node?
     
     func enqueue() {
         

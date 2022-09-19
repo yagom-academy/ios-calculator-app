@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC94A1B328D8876100256CE8 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94A1B228D8876100256CE8 /* CalculatorTests.swift */; };
+		AC94A1B328D8876100256CE8 /* ItemListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94A1B228D8876100256CE8 /* ItemListTests.swift */; };
 		AC94A1BB28D888E400256CE8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94A1BA28D888E400256CE8 /* Node.swift */; };
 		AC94A1BD28D888F100256CE8 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94A1BC28D888F100256CE8 /* ItemList.swift */; };
 		AC94A1BF28D888FC00256CE8 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94A1BE28D888FC00256CE8 /* CalculatorItemQueue.swift */; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		AC94A1B028D8876100256CE8 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC94A1B228D8876100256CE8 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		AC94A1B228D8876100256CE8 /* ItemListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListTests.swift; sourceTree = "<group>"; };
 		AC94A1BA28D888E400256CE8 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		AC94A1BC28D888F100256CE8 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		AC94A1BE28D888FC00256CE8 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		AC94A1B128D8876100256CE8 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				AC94A1B228D8876100256CE8 /* CalculatorTests.swift */,
+				AC94A1B228D8876100256CE8 /* ItemListTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -230,7 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC94A1C628D88C2F00256CE8 /* CalculateItem.swift in Sources */,
-				AC94A1B328D8876100256CE8 /* CalculatorTests.swift in Sources */,
+				AC94A1B328D8876100256CE8 /* ItemListTests.swift in Sources */,
 				AC94A1C428D88C2C00256CE8 /* ItemList.swift in Sources */,
 				AC94A1C528D88C2D00256CE8 /* CalculatorItemQueue.swift in Sources */,
 				AC94A1C328D88C2A00256CE8 /* Node.swift in Sources */,
