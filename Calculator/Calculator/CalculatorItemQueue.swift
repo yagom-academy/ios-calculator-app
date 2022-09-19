@@ -11,6 +11,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
     init() {}
     
     mutating func enqueue(_ element: T) {
-        
+        data.append(element)
     }
 }
