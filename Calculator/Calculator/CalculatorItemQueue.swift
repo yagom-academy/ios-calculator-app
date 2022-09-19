@@ -10,4 +10,8 @@ import Foundation
 struct CalculatorItemQueue<T>: CalculatorItem {
     private(set) var input: [T] = []
     private(set) var output: [T] = []
+    
+    mutating func enQueue(element: T) {
+        input.append(element)
+    }
 }
