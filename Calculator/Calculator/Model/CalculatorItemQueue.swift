@@ -1,15 +1,15 @@
 protocol CalculateItem { }
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    private var head: Node<T>? = nil
-    private var tail: Node<T>? = nil
+    private(set) var head: Node<T>? = nil
+    private(set) var tail: Node<T>? = nil
     private(set) var count: Int = 0
     var isEmpty: Bool {
         return count == 0
     }
     
-    func enqueue(_ element: T) {
-        
+    mutating func enqueue(_ element: T) {
+        self.head = Node<T>(data: element)
     }
     
     func dequeue() -> T? {

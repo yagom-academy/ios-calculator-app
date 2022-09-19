@@ -14,7 +14,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = 1
         
         //when
-        let queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
+        var queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
         queue.enqueue(input)
         
         //then
@@ -26,7 +26,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         //when
-        let queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
+        var queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
         queue.enqueue(input[0])
         queue.enqueue(input[1])
         
@@ -40,7 +40,7 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2,3]
         
         //when
-        let queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
+        var queue: CalculatorItemQueue<Int> = CalculatorItemQueue<Int>()
         queue.enqueue(input[0])
         queue.enqueue(input[1])
         queue.enqueue(input[2])
