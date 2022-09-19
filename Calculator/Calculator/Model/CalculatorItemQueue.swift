@@ -42,7 +42,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
 }
 
-class Node<T> {
+final class Node<T> {
     var next: Node<T>?
     var data: T
     
