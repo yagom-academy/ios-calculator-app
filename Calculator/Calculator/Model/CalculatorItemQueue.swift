@@ -22,7 +22,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     func dequeue() -> T? {
-        return nil
+        return head?.data
     }
     
     func peak() -> T? {
