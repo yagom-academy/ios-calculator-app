@@ -73,4 +73,16 @@ class LinkedListTests: XCTestCase {
         
         XCTAssertEqual(sut.removeLast(), "6")
     }
+    
+    func test_removeAll_when_linkedlist_has_4_5_6() {
+        
+        sut.append("4")
+        sut.append("5")
+        sut.append("6")
+        
+        sut.removeAll()
+        
+        XCTAssertEqual(sut.head?.value, nil)
+        XCTAssertEqual(sut.tail?.value, nil)
+    }
 }

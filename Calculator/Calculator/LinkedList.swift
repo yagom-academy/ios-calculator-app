@@ -81,4 +81,9 @@ public struct LinkedList {
         
         return current.value
     }
+    
+    public mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
