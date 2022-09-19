@@ -56,6 +56,17 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
     }
     
+    func test_removeLast메서드_head가nil이아니고_head만있을때_head제거확인() throws {
+        //given 1이 담겨있을 때
+        sut.append(1)
+        
+        //when 1을 지워주면
+        sut.removeLast()
+        
+        //then Linked된 노드 세번째는 nil이다
+        XCTAssertEqual(nil, sut.head?.data)
+    }
+    
     func test_removeLast메서드_head가nil이아니고_1_2_3이담겨있을때_마지막수제거확인() throws {
         //given 1,2,3이 담겨있을 때
         sut.append(1)
