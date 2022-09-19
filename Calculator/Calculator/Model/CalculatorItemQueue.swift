@@ -9,7 +9,13 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func enqueue(_ element: T) {
-        self.head = Node<T>(data: element)
+        let node = Node<T>(data: element)
+        if isEmpty {
+            head = node
+        } else {
+            tail = node
+        }
+        self.count += 1
     }
     
     func dequeue() -> T? {
