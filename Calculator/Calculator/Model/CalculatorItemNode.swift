@@ -20,4 +20,8 @@ class CalculatorItemNode {
     func bringNextNode() -> CalculatorItemNode? {
         return next
     }
+    
+    func setNextNode(destination: CalculatorItemNode) {
+        next = destination
+    }
 }
