@@ -1,11 +1,11 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculatorViewController.swift
 //  Created by 미니.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
