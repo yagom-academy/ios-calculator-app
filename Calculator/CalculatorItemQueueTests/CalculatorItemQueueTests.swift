@@ -70,7 +70,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.data = [String(Int.random(in: 0...9))]
         let originCount: Int = sut.data.count
         
-        sut.dequeue()
+        let _ = sut.dequeue()
         let result = sut.data.count
         
         XCTAssert(result < originCount)
@@ -96,18 +96,26 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.data = [String(Int.random(in: 0...9))]
         let originCount: Int = sut.data.count
         
-        sut.dequeue()
+        let _ = sut.dequeue()
         let result = sut.data.count
         
         XCTAssert(result < originCount)
     }
     
-    func test_data가있을때_clear호출시_값이비어있는지() {
+    func test_data가있을때_clear호출시_data가빈배열인지() {
         sut.data = [String(Int.random(in: 0...9))]
         sut.clear()
         
         let result = sut.data
         
         XCTAssert(result.isEmpty)
+    }
+    
+    func test_data가있을때_count호출시_nil이아닌지() {
+        sut.data = [String(Int.random(in: 0...9))]
+        
+        let result = sut.count
+        
+        XCTAssertNotNil(result)
     }
 }
