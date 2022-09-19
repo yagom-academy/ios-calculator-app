@@ -16,4 +16,8 @@ class CalculatorItemNode {
     func bringData() -> CalculateItem {
         return data
     }
+    
+    func bringNextNode() -> CalculatorItemNode? {
+        return next
+    }
 }
