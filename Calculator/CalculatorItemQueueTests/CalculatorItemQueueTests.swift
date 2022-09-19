@@ -65,4 +65,22 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNil(result)
     }
+    
+    func test_data가있을때_dequeue호출시_data의카운트가감소하는지() {
+        sut.data = [String(Int.random(in: 0...9))]
+        let originCount: Int = sut.data.count
+        
+        sut.dequeue()
+        let result = sut.data.count
+        
+        XCTAssert(result < originCount)
+    }
+    
+    func test_data가있을때_peek호출시_반환값이있는지() {
+        sut.data = [String(Int.random(in: 0...9))]
+        
+        let result = sut.peek()
+        
+        XCTAssertNotNil(result)
+    }
 }

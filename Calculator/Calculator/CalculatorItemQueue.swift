@@ -21,4 +21,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         data.removeFirst()
         return element
     }
+    
+    func peek() -> T? {
+        return nil
+    }
 }
