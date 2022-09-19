@@ -43,25 +43,46 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(firstValue, sut.dequeue())
     }
-    
-    
-    func test_큐에서_정상적으로_dequeue가됐는지() {
-        let value = Double.random(in: 0...10)
-        let preQueueCount = sut.count
+    func test_큐에10개의값이들어가고_3개의값이빠졌을때_값이7인지(){
+        for _ in 1...10 {
+            sut.enqueue(Double.random(in: 0...10))
+        }
+        for _ in 1...3 {
+            sut.dequeue()
+        }
         
-        sut.enqueue(value)
-        sut.dequeue()
-        
-        XCTAssertEqual(preQueueCount, sut.count)
+        XCTAssertEqual(sut.count, 7)
     }
     
-    func test_큐에서_값이없는데_뺄경우_Nil() {
+    func test_큐에1개의값을넣고_dequeue했을때_값이Nil이아닌지() {
+        let value = Double.random(in: 0...10)
+        
+        sut.enqueue(value)
+        
+        XCTAssertNotNil(sut.dequeue())
+    }
+    
+    func test_큐가비어있을때_isEmpty의값이_true인지(){
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_큐에300개의값을넣고_300개의값을뺏을때_isEmpty의값이_true인지(){
+        for _ in 1...300{
+            sut.enqueue(Double.random(in: 0...10))
+        }
+        for _ in 1...300{
+            sut.dequeue()
+        }
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_큐에값이없을때_dequeue했을시_Nil이반환되는지() {
         let dequeue = sut.dequeue()
         
         XCTAssertNil(dequeue)
     }
     
-    func test_큐가_정상적으로_비워지는지() {
+    func test_큐에5개의값을넣고_clear했을때_정상적으로_count가_0이_되는지() {
         sut.enqueue(Double.random(in: 0...10))
         sut.enqueue(Double.random(in: 0...10))
         sut.enqueue(Double.random(in: 0...10))
