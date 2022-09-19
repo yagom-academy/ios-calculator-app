@@ -14,7 +14,7 @@ class NodeTests: XCTestCase {
         let input = "test"
         
         //when
-        let node = Node(data: input)
+        let node: Node<String> = Node<String>(data: input)
         
         //then
         XCTAssertEqual(input, node.data)
@@ -25,8 +25,8 @@ class NodeTests: XCTestCase {
         let input = ["first", "second"]
         
         //when
-        let firstNode = Node(data: input[0])
-        let secondNode = Node(data: input[1])
+        let firstNode: Node<String> = Node<String>(data: input[0])
+        let secondNode: Node<String> = Node<String>(data: input[1])
         firstNode.next = secondNode
         
         //then
