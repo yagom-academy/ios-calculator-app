@@ -7,29 +7,29 @@
 
 import Foundation
 
-public class Node {
+class Node {
     
-    public var value: String
-    public var next: Node?
+    var value: String
+    var next: Node?
     
-    public init(value: String, next: Node? = nil) {
+    init(value: String, next: Node? = nil) {
         self.value = value
         self.next = next
     }
 }
 
-public struct LinkedList {
+struct LinkedList {
     
-    public var head: Node?
-    public var tail: Node?
+    var head: Node?
+    var tail: Node?
     
-    public init() {}
+    init() {}
     
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         head == nil
     }
     
-    public mutating func push(_ value: String) {
+    mutating func push(_ value: String) {
         
         head = Node(value: value, next: head)
         if tail == nil {
@@ -37,7 +37,7 @@ public struct LinkedList {
         }
     }
     
-    public mutating func append(_ value: String) {
+    mutating func append(_ value: String) {
         
         guard !isEmpty else {
             push(value)
@@ -48,7 +48,7 @@ public struct LinkedList {
         tail = tail?.next
     }
     
-    public mutating func pop() -> String? {
+    mutating func pop() -> String? {
         
         let returnValue = head?.value
         head = head?.next
@@ -59,7 +59,7 @@ public struct LinkedList {
         return returnValue
     }
     
-    public mutating func removeLast() -> String? {
+    mutating func removeLast() -> String? {
         
         guard let head = head else {
             return nil
@@ -82,7 +82,7 @@ public struct LinkedList {
         return current.value
     }
     
-    public mutating func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }

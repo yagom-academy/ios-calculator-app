@@ -8,6 +8,7 @@
 import Foundation
 
 class CalculatorItemQueue {
+    
     var queue: LinkedList = LinkedList()
     
     func enqueue(item: String) {
