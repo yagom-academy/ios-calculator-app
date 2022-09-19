@@ -23,11 +23,9 @@ class CalculatorItemQueueTests: XCTestCase {
 
     
     func test_when_enqueue_3_then_linkedlist_has_3() {
-        // given
+
         let input = "3"
-        // when
         sut.enqueue(item: input)
-        // then
         XCTAssertEqual(sut.queue.head?.value, "3")
     }
 
