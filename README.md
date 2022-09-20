@@ -31,7 +31,8 @@ Step - 1 :
 
 ## 🗺 UML
 
-![제목 없는 다이어그램](https://user-images.githubusercontent.com/85005933/191185827-ca4a8061-be89-47be-b729-27b151c0a53d.jpg)
+
+![제목 없는 다이어그램 (1)](https://user-images.githubusercontent.com/85005933/191208106-a6c61fca-9184-4db0-8525-20ee4a382677.jpg)
 
 
 
