@@ -62,6 +62,12 @@
 		264D747028D8CDB6001993A4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -114,12 +120,6 @@
 				264D747228D8CDCD001993A4 /* Controller */,
 				264D747128D8CDBD001993A4 /* Model */,
 				264D747028D8CDB6001993A4 /* View */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
-				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
