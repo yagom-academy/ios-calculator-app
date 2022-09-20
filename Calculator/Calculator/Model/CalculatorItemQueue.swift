@@ -32,14 +32,12 @@ class CalculatorItemQueue<T>: CalculateItem {
     }
     
     func removeAll() {
-        guard let currentHead = head else {
+        guard head != nil else {
             return
         }
         
         while head != nil {
-            head = nil
-            let nextHead = currentHead.next
-            head = nextHead
+            head = head?.next
         }
     }
 }

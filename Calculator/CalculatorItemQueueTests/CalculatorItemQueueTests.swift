@@ -75,4 +75,29 @@ class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertEqual(7, result)
     }
+    
+    func test_removeAll실행시_큐가_비워지는지() {
+        //given
+        let queue = CalculatorItemQueue<Int>()
+        queue.enqueue(element: 3)
+        queue.enqueue(element: 7)
+        queue.enqueue(element: 4)
+        
+        //when
+        queue.removeAll()
+        
+        //then
+        XCTAssert(queue.head == nil)
+    }
+    
+    func test_removeAll실행시_큐에요소가없다면_종료되는지() {
+        //given
+        let queue = CalculatorItemQueue<Int>()
+        
+        //when
+        queue.removeAll()
+        
+        //then
+        XCTAssert(queue.head == nil)
+    }
 }
