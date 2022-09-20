@@ -28,7 +28,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         } else {
             rear?.link = newNode
             rear = newNode
-        }
+        } 
     }
     
     mutating func deQueue() -> T? {
