@@ -11,7 +11,7 @@ protocol CalculateItem {
 }
 
 class CalculatorItemQueue<T>: CalculateItem {
-    private var head: Node<T>? = nil
+    private(set) var head: Node<T>? = nil
     
     func enqueue(element: T?) {
         if head == nil {
