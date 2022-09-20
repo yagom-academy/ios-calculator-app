@@ -5,18 +5,18 @@
 //  Created by 노유빈 on 2022/09/19.
 //
 
-class CalculatorItemQueue<T>: CalculateItem {
-    private var enqueue: [T] = []
-    private var dequeue: [T] = []
+class CalculatorItemQueue {
+    private var enqueue: [CalculateItem] = []
+    private var dequeue: [CalculateItem] = []
     var isEmpty: Bool {
         return enqueue.isEmpty && dequeue.isEmpty
     }
     
-    func push(_ element: T) {
+    func push(_ element: CalculateItem) {
         enqueue.append(element)
     }
     
-    func pop() -> T? {
+    func pop() -> CalculateItem? {
         if dequeue.isEmpty {
             dequeue = enqueue.reversed()
             enqueue.removeAll()
