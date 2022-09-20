@@ -5,7 +5,7 @@
 
 protocol CalculateItem { }
 
-class LinkedList<T> {
+private class LinkedList<T> {
     class Node<T>: CalculateItem {
         var value: T
         var next: Node?
@@ -59,7 +59,7 @@ class LinkedList<T> {
 }
 
 struct CalculatorItemQueue<T> {
-    var list: LinkedList<T> = LinkedList<T>()
+    private var list: LinkedList<T> = LinkedList<T>()
     
     var count: Int {
         return list.nodeCount

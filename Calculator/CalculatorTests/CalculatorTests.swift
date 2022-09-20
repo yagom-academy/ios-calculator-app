@@ -52,15 +52,38 @@ class CalculatorTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_CalculatorItemQueue에서_enqueue메서드가정상작동하는지() {
+    func test_CalculatorItemQueue의_list에값이없을때_enqueue메서드가정상작동하는지() {
         // given
-        sut.enqueue(1)
+        sut.removeAll()
+        
+        // when
+        let result = sut.list.nodeCount
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_CalculatorItemQueue의_list에값이1개일때_enqueue메서드가정상작동하는지() {
+        // given
+        sut.list.append(1)
         
         // when
         let result = sut.list.nodeCount
         
         // then
         XCTAssertEqual(result, 1)
+    }
+    
+    func test_CalculatorItemQueue의_list에값2개이상일때_enqueue메서드가정상작동하는지() {
+        // given
+        sut.list.append(1)
+        sut.list.append(2)
+        
+        // when
+        let result = sut.list.nodeCount
+        
+        // then
+        XCTAssertEqual(result, 2)
     }
     
     func test_CalculatorItemQueue에서_dequeue메서드가정상작동하는지() {
