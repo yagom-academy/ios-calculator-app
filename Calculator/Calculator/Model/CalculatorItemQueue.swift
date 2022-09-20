@@ -1,6 +1,6 @@
 protocol CalculateItem { }
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T> {
     private(set) var head: Node<T>? = nil
     private(set) var tail: Node<T>? = nil
     private(set) var count: Int = 0
@@ -43,7 +43,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
 }
 
-final class Node<T> {
+class Node<T> {
     var next: Node<T>?
     var data: T
     
@@ -51,3 +51,5 @@ final class Node<T> {
         self.data = data
     }
 }
+
+extension Node where T: CalculateItem { }
