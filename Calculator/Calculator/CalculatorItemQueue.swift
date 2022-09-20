@@ -18,8 +18,9 @@ struct CalculatorItemQueue<T> {
     mutating func isEmpty() -> Bool {
         return queue.isEmpty
     }
+    
+    mutating func clear() {
+        queue.removeAll()
+    }
 }
 
-
-// 포문돌려서 안에잇는 녀석들이 Int인지...하나씩 담아주자
-// 근데 그것을 위해서는 본래 메서드에서 해주는것인가!

@@ -1,6 +1,4 @@
-
 //  Created by hy on 2022/09/19.
-//
 
 import XCTest
 @testable import Calculator
@@ -20,7 +18,7 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue호출시값이잘들어가는지() {
+    func test_큐값을넣었을때_enqueue호출시값이잘들어가는지() {
         //given
         let input = 2
         //when
@@ -29,7 +27,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.queue, ["2"])
     }
     
-    func test_enqueue호출시값을넣었을때입력값과첫번째인덱스가일치하는지() {
+    func test_큐값을넣었을때_enqueue호출하면값이잘들어가는지() {
         //given
         let input:String = "2"
         //when
@@ -38,7 +36,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.queue, ["2"])
     }
     
-    func test_count호출시값이잘세지는지() {
+    func test_큐값이있을때_count호출하면값이잘세지는지() {
         //given
         sut.queue = ["1","2"]
         //when
@@ -63,5 +61,14 @@ class CalculatorTests: XCTestCase {
         let result = sut.isEmpty()
         //then
         XCTAssertTrue(result)
+    }
+    
+    func test_큐값이있을때_clear함수를호출하면값이모두지워지는지() {
+        //given
+        sut.queue = ["2","+","4"]
+        //when
+        sut.clear()
+        //then
+        XCTAssertEqual(sut.queue, [])
     }
 }
