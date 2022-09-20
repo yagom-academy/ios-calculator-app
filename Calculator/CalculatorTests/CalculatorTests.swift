@@ -57,4 +57,33 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertFalse(sutQueue.isEmpty)
     }
+    
+    func test_queue에3_6_9를push하고pop을한번했을때() {
+        let elementArray: [String] = ["3", "6", "9"]
+        
+        for element in elementArray {
+            sutQueue.push(element)
+        }
+        
+        XCTAssertEqual(sutQueue.pop(), "3")
+    }
+    
+    func test_queue에pop할요소가없을때() {
+        XCTAssertEqual(sutQueue.pop(), nil)
+    }
+    
+    func test_queue에3_6_9를push하고pop을네번했을때() {
+        let elementArray: [String] = ["3", "6", "9"]
+        
+        for element in elementArray {
+            sutQueue.push(element)
+        }
+        
+        var result: String?
+        for _ in 0...elementArray.count {
+            result = sutQueue.pop()
+        }
+        
+        XCTAssertEqual(result, nil)
+    }
 }

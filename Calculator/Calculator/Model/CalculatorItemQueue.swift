@@ -11,4 +11,8 @@ struct CalculatorItemQueue<T> {
     mutating func push(_ element: T) {
         queue.append(element)
     }
+    
+    mutating func pop() -> T? {
+        return isEmpty ? nil : queue.removeFirst()
+    }
 }
