@@ -14,13 +14,16 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T: CalculateItem> {
     var inputStack: [T] = []
     var outputStack: [T] = []
+    var isEmpty: Bool {
+        return inputStack.isEmpty && outputStack.isEmpty
+    }
     
     mutating func enqueue(item: T) {
         inputStack.append(item)
     }
     
     mutating func dequeue() -> T? {
-        if inputStack.isEmpty, outputStack.isEmpty { return nil }
+        if isEmpty { return nil }
         
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
