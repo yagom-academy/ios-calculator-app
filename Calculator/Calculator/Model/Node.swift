@@ -5,9 +5,9 @@
 //  Created by Hamo on 2022/09/20.
 //
 
-class CalculatorItemNode {
+class Node {
     private var data: CalculateItem
-    private var next: CalculatorItemNode?
+    private var next: Node?
     
     init(data: CalculateItem) {
         self.data = data
@@ -17,11 +17,11 @@ class CalculatorItemNode {
         return data
     }
     
-    func bringNextNode() -> CalculatorItemNode? {
+    func bringNextNode() -> Node? {
         return next
     }
     
-    func setNextNode(destination: CalculatorItemNode) {
+    func setNextNode(destination: Node) {
         next = destination
     }
 }
