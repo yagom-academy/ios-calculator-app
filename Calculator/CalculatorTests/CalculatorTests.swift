@@ -62,8 +62,3 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut?.queue, ["abcd", "C"])
     }
 }
-
-
-// 호출 했을 때..
-// 1. 아무것도 없을때
-// 2. n번 빼면
