@@ -30,6 +30,23 @@ struct CalculatorItemQueue<T>: CalculateItem {
             rear = newNode
         }
     }
+    
+    mutating func deQueue() -> T? {
+        if !isCheckEmpty() {
+//            let old = front
+            guard let item = front?.data else { return nil }
+            front = front?.link
+            if isCheckEmpty() {
+                rear = nil
+            }
+            // 여기서 old가 가리키는 노드를 메모리에서 삭제하고싶은데 어떻게 해야할지 잘 모르겠습니다.
+            
+            return item
+        } else {
+            print("비어있습니다")
+            return nil
+        }
+    }
 }
 
 //계산기가 입력받은 숫자와 연산자는 연산큐에 쌓입니다.
