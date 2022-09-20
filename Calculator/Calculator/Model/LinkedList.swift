@@ -31,6 +31,10 @@ struct LinkedList {
             self.head = head?.bringNextNode()
             return result
         }
-        
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
 }
 
