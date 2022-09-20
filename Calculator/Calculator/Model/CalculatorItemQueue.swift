@@ -6,10 +6,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
 class CalculatorItemQueue<T>: CalculateItem {
     private(set) var head: Node<T>? = nil
     
