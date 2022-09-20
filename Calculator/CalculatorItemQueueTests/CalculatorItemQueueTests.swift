@@ -44,6 +44,6 @@ class CalculatorItemQueueTests: XCTestCase {
         
         sut.removeAll()
         
-        XCTAssertEqual(sut.queue.isEmpty, true)
+        XCTAssertEqual(sut.isEmpty(), true)
     }
 }

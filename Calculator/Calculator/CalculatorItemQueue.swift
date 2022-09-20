@@ -22,4 +22,8 @@ class CalculatorItemQueue {
     func removeAll() {
         queue.removeAll()
     }
+    
+    func isEmpty() -> Bool {
+        return queue.isEmpty
+    }
 }
