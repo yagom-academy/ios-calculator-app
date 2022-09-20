@@ -5,8 +5,8 @@
 //  Created by Gundy on 2022/09/19.
 //
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    var data: [T] = []
+struct CalculatorItemQueue {
+    var data: [CalculateItem] = []
     var count: Int {
         get {
             return data.count
@@ -20,45 +20,48 @@ struct CalculatorItemQueue<T>: CalculateItem {
             data.reserveCapacity(newValue)
         }
     }
+    var peek: CalculateItem? {
+        get {
+            guard data.first != nil else {
+                return nil
+            }
+            return data.first
+        }
+    }
+    var isEmpty: Bool {
+        get {
+            return data.isEmpty
+        }
+    }
+    var isFull: Bool {
+        get {
+            return data.capacity == data.count
+        }
+    }
     
     init() {}
     
-    mutating func enqueue(_ element: T) {
+    mutating func enqueue(_ element: CalculateItem) {
         data.append(element)
     }
     
-    mutating func dequeue() -> T? {
-        guard let element = data.first else {
+    @discardableResult
+    mutating func dequeue() -> CalculateItem? {
+        guard data.first != nil else {
             return nil
         }
-        data.removeFirst()
-        return element
-    }
-    
-    func peek() -> T? {
-        guard let element = data.first else {
-            return nil
-        }
-        return element
+        return data.removeFirst()
     }
     
     mutating func clear() {
         data = []
     }
     
-    func isEmpty() -> Bool {
-        return data.isEmpty
-    }
-    
-    func isFull() -> Bool {
-        return data.capacity == data.count
-    }
-    
-    mutating func insert(_ element: T, at index: Int) {
+    mutating func insert(_ element: CalculateItem, at index: Int) {
         data.insert(element, at: index)
     }
     
-    mutating func removeAtIndex(_ index: Int) {
+    mutating func remove(at index: Int) {
         data.remove(at: index)
     }
 }
