@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Created by Wonbi on 2022/09/19.
+//  Created by Wonbi
 //
 
 

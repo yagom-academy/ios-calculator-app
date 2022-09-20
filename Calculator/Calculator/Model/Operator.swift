@@ -1,6 +1,6 @@
 //
 //  Operator.swift
-//  Created by Wonbi on 2022/09/20.
+//  Created by Wonbi
 //
 
 enum Operator: String, CalculateItem {

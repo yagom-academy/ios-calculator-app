@@ -1,6 +1,6 @@
 //
 //  CalculateItem.swift
-//  Created by Wonbi on 2022/09/20.
+//  Created by Wonbi
 //
 
 protocol CalculateItem { }
