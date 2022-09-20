@@ -18,7 +18,6 @@ class CalculatorTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
-        
     }
     
     func test_enqueue호출시값이잘들어가는지() {
@@ -46,5 +45,23 @@ class CalculatorTests: XCTestCase {
         let result = sut.count()
         //then
         XCTAssertEqual(result, 2)
+    }
+
+    func test_큐값이있을때_isEmpty호출하면false가나오는지() {
+        //given
+        sut.queue = ["2"]
+        //when
+        let result = sut.isEmpty()
+        //then
+        XCTAssertFalse(result)
+    }
+    
+    func test_큐값이없을때_isEmpty호출하면true가나오는지() {
+        //given
+        sut.queue = []
+        //when
+        let result = sut.isEmpty()
+        //then
+        XCTAssertTrue(result)
     }
 }

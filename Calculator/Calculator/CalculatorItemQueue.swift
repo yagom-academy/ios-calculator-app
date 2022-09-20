@@ -14,6 +14,10 @@ struct CalculatorItemQueue<T> {
     mutating func count() -> Int {
         return queue.count
     }
+    
+    mutating func isEmpty() -> Bool {
+        return queue.isEmpty
+    }
 }
 
 
