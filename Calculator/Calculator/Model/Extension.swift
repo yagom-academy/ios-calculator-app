@@ -10,7 +10,7 @@ extension Double: CalculateItem {
 }
 
 extension String {
-    func split(with target: Character) -> [String]{
-        return [String(target)]
+    func split(with target: Character) -> [String] {
+        return split(separator: target).map { String($0) }
     }
 }
