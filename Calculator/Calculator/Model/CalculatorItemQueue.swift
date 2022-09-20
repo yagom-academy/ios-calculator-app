@@ -34,6 +34,18 @@ class CalculatorItemQueue<T>: CalculateItem {
         head = currentHead.next
         return currentHead.data
     }
+    
+    func removeAll() {
+        guard let currentHead = head else {
+            return
+        }
+        
+        while head != nil {
+            head = nil
+            let nextHead = currentHead.next
+            head = nextHead
+        }
+    }
 }
 
 class Node<T> {
