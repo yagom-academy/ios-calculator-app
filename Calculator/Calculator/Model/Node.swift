@@ -5,11 +5,11 @@
 //  Created by 이정민 on 2022/09/19.
 //
 
-class Node {
-    let data: String
-    var next: Node?
+class Node<Item> {
+    let data: Item
+    var next: Node<Item>?
     
-    init(data: String) {
+    init(data: Item) {
         self.data = data
     }
 }
