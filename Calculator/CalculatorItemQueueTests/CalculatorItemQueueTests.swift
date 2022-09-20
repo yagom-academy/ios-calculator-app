@@ -74,4 +74,39 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(input, result as! String)
         XCTAssertEqual(input2, result2 as! String)
     }
+    
+    func test_deQueue_노드가1개일때_deQueue를2번호출하면_마지막리턴을nil로받는지() {
+        let input = "A"
+        
+        sut?.enQueue(input)
+        let result = sut?.deQueue()
+        let result2 = sut?.deQueue()
+        
+        XCTAssertEqual(input, result as! String)
+        XCTAssertNil(result2)
+    }
+    
+    func test_peek_노드가아무것도없을때_nil이잘반환되는가() {
+        let result = sut?.peek()
+        
+        XCTAssertNil(result)
+    }
+    
+    func test_peek_노드가1개있을때_data가잘나오는가() {
+        let input = "A"
+        sut?.enQueue(input)
+        let result = sut?.peek()
+        
+        XCTAssertEqual(input, result as! String)
+    }
+    
+    func test_peek_노드가2개있을때_data가잘나오는가() {
+        let input = "A"
+        let input2 = "B"
+        sut?.enQueue(input)
+        sut?.enQueue(input2)
+        let result = sut?.peek()
+        
+        XCTAssertEqual(input, result as! String)
+    }
 }
