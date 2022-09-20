@@ -8,11 +8,15 @@
 import Foundation
 
 final class Node<T> {
-    var data: T
+    private var data: T
     private var next: Node<T>?
     
     init(_ data: T) {
         self.data = data
+    }
+    
+    func bringNodeData() -> T {
+        return self.data
     }
     
     func getNextNode() -> Node<T>? {

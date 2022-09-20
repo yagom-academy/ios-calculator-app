@@ -8,9 +8,19 @@
 import Foundation
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     var count: Int = 0
+    
+    func bringHead() -> T? {
+        guard let head = head else { return nil }
+        return head.bringNodeData()
+    }
+    
+    func bringTail() -> T? {
+        guard let tail = tail else { return nil }
+        return tail.bringNodeData()
+    }
     
     mutating func append(data: T) {
         let node: Node<T> = Node(data)
@@ -33,7 +43,7 @@ struct LinkedList<T> {
             self.head = head?.getNextNode()
             count -= 1
             
-            return removeItem?.data
+            return removeItem?.bringNodeData()
         }
     }
     

@@ -12,18 +12,18 @@ protocol CalculateItem {
 }
 
 extension String: CalculateItem {
-    
+
 }
 
 final class CalculatorItemQueue<T: CalculateItem> {
-    var queue: LinkedList<T>! = LinkedList()
+    private var queue: LinkedList<T>! = LinkedList()
     
     func front() -> T? {
-        return queue.head?.data
+        return queue.bringHead()
     }
     
     func last() -> T? {
-        return queue.tail?.data
+        return queue.bringTail()
     }
     
     func enqueue(_ data: T) {
