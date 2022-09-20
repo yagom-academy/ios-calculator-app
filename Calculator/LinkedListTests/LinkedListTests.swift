@@ -27,8 +27,7 @@ class LinkedListTests: XCTestCase {
         
         sut.push("3")
         
-        XCTAssertEqual(sut.head?.value, sut.tail?.value)
-        XCTAssertEqual(sut.head?.value, "3")
+        XCTAssertEqual(sut.pop(), "3")
     }
 
     func test_linkedlist_append_4_then_tail_is_4() {
@@ -36,15 +35,14 @@ class LinkedListTests: XCTestCase {
         sut.push("3")
         sut.append("4")
         
-        XCTAssertEqual(sut.tail?.value, "4")
+        XCTAssertEqual(sut.removeLast(), "4")
     }
     
     func test_linkedlist_append_4_when_there_is_no_head() {
         
         sut.append("4")
         
-        XCTAssertEqual(sut.tail?.value, "4")
-        XCTAssertEqual(sut.head?.value, "4")
+        XCTAssertEqual(sut.pop(), "4")
     }
     
     func test_linkedlist_pop_4_after_appending_4_5_6() {
@@ -63,8 +61,8 @@ class LinkedListTests: XCTestCase {
         sut.append("6")
         
         XCTAssertEqual(sut.removeLast(), "6")
-        XCTAssertEqual(sut.head?.value, "4")
-        XCTAssertEqual(sut.head?.next?.value, "5")
+        XCTAssertEqual(sut.pop(), "4")
+        XCTAssertEqual(sut.pop(), "5")
     }
     
     func test_linkedlist_removeLast_when_appending_only_4() {
@@ -82,7 +80,7 @@ class LinkedListTests: XCTestCase {
         
         sut.removeAll()
         
-        XCTAssertEqual(sut.head?.value, nil)
-        XCTAssertEqual(sut.tail?.value, nil)
+        XCTAssertEqual(sut.pop(), nil)
+        XCTAssertEqual(sut.removeLast(), nil)
     }
 }
