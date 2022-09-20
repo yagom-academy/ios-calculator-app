@@ -20,4 +20,12 @@ struct CalculatorItemQueue {
     mutating func enqueue(_ element: CalculateItem) {
         input.append(element)
     }
+    
+    mutating func dequeue() -> CalculateItem? {
+        if output.isEmpty {
+            output = input.reversed()
+            input.removeAll()
+        }
+        return output.popLast()
+    }
 }

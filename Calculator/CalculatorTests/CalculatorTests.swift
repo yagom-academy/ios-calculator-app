@@ -3,7 +3,6 @@
 //  Created by Wonbi on 2022/09/19.
 //
 
-
 import XCTest
 @testable import Calculator
 
@@ -48,8 +47,20 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(input.count, sut.count)
     }
-}
+    
+    func test_Queue의데이터를dequeue했을때_FIFO가정상적으로일어나는지() {
+        var input = [Int]()
+        for data in 1...Int.random(in: 1...100) {
+            sut.enqueue(data)
+            input.append(data)
+        }
+        
+        var result = [Int]()
+        for _ in input {
+            guard let data = sut.dequeue() as? Int else { return }
+            result.append(data)
+        }
 
-// FIFO가 제대로 동작하는지
-// enqueue메서드를 실행했을 때 제대로 값이 들어가는지
-// dequeue메서드를 실행했을 때 제대로 값이 나오는지
+        XCTAssertEqual(input, result)
+    }
+}
