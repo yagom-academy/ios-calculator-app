@@ -27,13 +27,15 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.queue, ["2"])
     }
     
-    func test_큐값을넣었을때_enqueue호출하면값이잘들어가는지() {
+    func test_큐값을여러개넣었을때_enqueue호출하면첫번째넣은값과0번째인덱스가일칠하는지() {
         //given
-        let input:String = "2"
+        sut.queue = []
         //when
-        sut.enqueue(element: input)
+        sut.enqueue(element: "2")
+        sut.enqueue(element: "3")
+        sut.enqueue(element: "+")
         //then
-        XCTAssertEqual(sut.queue, ["2"])
+        XCTAssertEqual(sut.queue[0], "2")
     }
     
     func test_큐값이있을때_count호출하면값이잘세지는지() {
