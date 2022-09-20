@@ -21,7 +21,7 @@ class LinkedListTests: XCTestCase {
         sut = nil
     }
 
-    func test_append메서드_head가nil일때_1추가시_head가같은수인지확인() throws {
+    func test_append메서드_head가nil일때_1추가시_head가같은수인지확인() {
         //given head가 nil일 때
         sut.head = nil
         
@@ -32,7 +32,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual("1", sut.head?.data)
     }
     
-    func test_append메서드_head가nil이아니_1_2가담겨있을때_3추가시_추가되었는지확인() throws {
+    func test_append메서드_head가nil이아니_1_2가담겨있을때_3추가시_추가되었는지확인() {
         //given 1,2가 담겨있을 때
         sut.append("1")
         sut.append("2")
@@ -44,7 +44,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual("3", sut.head?.next?.next?.data)
     }
     
-    func test_last프로퍼티_head가nil일때_nil반환() throws {
+    func test_last프로퍼티_head가nil일때_nil반환() {
         //given head가 nil일때
         sut.head = nil
         
@@ -55,7 +55,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(last)
     }
     
-    func test_last프로퍼티_1_2_3이담겨있을때_3반환() throws {
+    func test_last프로퍼티_1_2_3이담겨있을때_3반환() {
         //given 1,2,3이 담겨있을 때
         sut.append("1")
         sut.append("2")
@@ -68,7 +68,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual("3", last?.data)
     }
     
-    func test_removeLast메서드_head가nil일때_그대로nil확인() throws {
+    func test_removeLast메서드_head가nil일때_그대로nil확인() {
         //given head가 nil일 때
         sut.head = nil
         
@@ -79,7 +79,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
     }
     
-    func test_removeLast메서드_head가nil이아니고_head만있을때_head제거확인() throws {
+    func test_removeLast메서드_head가nil이아니고_head만있을때_head제거확인() {
         //given 1이 담겨있을 때
         sut.append("1")
         
@@ -90,7 +90,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(nil, sut.head?.data)
     }
     
-    func test_removeLast메서드_head가nil이아니고_1_2_3이담겨있을때_마지막수제거확인() throws {
+    func test_removeLast메서드_head가nil이아니고_1_2_3이담겨있을때_마지막수제거확인() {
         //given 1,2,3이 담겨있을 때
         sut.append("1")
         sut.append("2")
@@ -105,7 +105,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(nil, sut.head?.next?.next?.data)
     }
     
-    func test_removeFirst메서드_head가nil일때_그대로nil확인() throws {
+    func test_removeFirst메서드_head가nil일때_그대로nil확인() {
         //given head가 nil일 때
         sut.head = nil
         
@@ -116,7 +116,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
     }
     
-    func test_removeFirst메서드_head가nil이아니고_head만있을때_head제거확인() throws {
+    func test_removeFirst메서드_head가nil이아니고_head만있을때_head제거확인() {
         //given 1이 담겨있을 때
         sut.append("1")
         
@@ -127,7 +127,7 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(nil, sut.head?.data)
     }
     
-    func test_removeFirst메서드_head가nil이아니고_1_2_3이담겨있을때_첫번째수제거확인() throws {
+    func test_removeFirst메서드_head가nil이아니고_1_2_3이담겨있을때_첫번째수제거확인() {
         //given 1,2,3이 담겨있을 때
         sut.append("1")
         sut.append("2")

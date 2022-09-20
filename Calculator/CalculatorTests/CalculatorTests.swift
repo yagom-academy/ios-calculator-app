@@ -27,7 +27,7 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_enqueue메서드_itemQueue가비어있을때_10을추가해주면_haed가10이다() throws {
+    func test_enqueue메서드_itemQueue가비어있을때_10을추가해주면_haed가10이다() {
         //given ItemQueue가 비어있을 때
         sut.itemQueue.head = nil
         
@@ -38,7 +38,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual("10", sut.itemQueue.head?.data)
     }
     
-    func test_enqueue메서드_itemQueue가비어있지않을때_10을추가해주면_마지막노드가10이다() throws {
+    func test_enqueue메서드_itemQueue가비어있지않을때_10을추가해주면_마지막노드가10이다() {
         //given ItemQueue에 Node 1을 갖고있을 때
         sut.enqueue("1")
         
@@ -49,7 +49,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual("2", sut.itemQueue.head?.next?.data)
     }
     
-    func test_dequeue메서드_itemQueue가비어있을때사용하면_여전히head가nil이다() throws {
+    func test_dequeue메서드_itemQueue가비어있을때사용하면_여전히head가nil이다() {
         //given ItemQueue가 비어있을 때
         sut.itemQueue.head = nil
         
@@ -60,7 +60,7 @@ class CalculatorTests: XCTestCase {
         XCTAssertNil(sut.itemQueue.head)
     }
     
-    func test_dequeue메서드_itemQueue가비어있지않을때_제일앞Node를지워준다() throws {
+    func test_dequeue메서드_itemQueue가비어있지않을때_제일앞Node를지워준다() {
         //given ItemQueue가 1,2,3을 갖고있을때
         sut.enqueue("1")
         sut.enqueue("2")
@@ -73,6 +73,30 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual("2", sut.itemQueue.head?.data)
         XCTAssertEqual("3", sut.itemQueue.head?.next?.data)
         XCTAssertEqual(nil, sut.itemQueue.head?.next?.next?.data)
+    }
+    
+    func test_confirmFirst_itemQueue가비어있을때_nil반환한다() {
+        //given itemQueue가 비어있을 때
+        sut.itemQueue.head = nil
+        
+        //when itemQuene의 first는
+        let first = sut.confirmFirst()
+        
+        //then nil이다
+        XCTAssertNil(first)
+    }
+    
+    func test_confirmFirst_itemQueue가비어있지않을때_제일앞Node를반환한다() {
+        //given itemQueue에 1, 2, 3이 있을 때
+        sut.itemQueue.append("1")
+        sut.itemQueue.append("2")
+        sut.itemQueue.append("3")
+        
+        //when itemQuene의 first는
+        let first = sut.confirmFirst()
+        
+        //then 1이다
+        XCTAssertEqual("1", first)
     }
     
     func test_clear메서드_itemQueue를전부지워준다() {
