@@ -90,4 +90,28 @@ class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertFalse(result)
     }
+    
+    func test_큐가비어있는경우_clear메서드호출시isEmpty로확인하면true인지확인() {
+        // given
+        sut.queue = []
+        
+        // when
+        sut.clear()
+        let result = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_큐가비어있지않은경우_clear메서드호출시isEmpty로확인하면true인지확인() {
+        // given
+        sut.queue = ["1", "2", "3", "4" , "5"]
+        
+        // when
+        sut.clear()
+        let result = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(result)
+    }
 }

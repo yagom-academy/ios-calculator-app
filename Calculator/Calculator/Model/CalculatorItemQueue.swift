@@ -21,4 +21,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
             return queue.isEmpty
         }
     
+    mutating func clear() {
+            return queue.removeAll()
+        }
 }
