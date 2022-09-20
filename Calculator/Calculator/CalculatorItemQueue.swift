@@ -23,5 +23,3 @@ class CalculatorItemQueue {
         queue.removeAll()
     }
 }
-
-extension String : CalculateItem {}
