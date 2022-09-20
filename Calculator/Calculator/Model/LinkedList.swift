@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LinkedList{
+struct LinkedList {
     var head: Node<String>?
     var last: Node<String>? {
         var currentNode = head
@@ -55,6 +55,7 @@ struct LinkedList{
     
     mutating func removeFirst() {
         var currentNode = head
+        
         head = currentNode?.next
         currentNode = nil
     }
