@@ -12,6 +12,19 @@ protocol CalculateItem {
 
 class CalculatorItemQueue<T>: CalculateItem {
     private var head: Node<T>? = nil
+    
+    func enqueue(element: T?) {
+        if head == nil {
+            head = Node(data: element)
+            return
+        }
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data: element)
+    }
 }
 
 class Node<T> {
