@@ -1,35 +1,33 @@
 //  Created by bella on 2022/09/19.
 
 struct CalculatorItemQueue<T: CalculateItemProtocol> {
-    var queue: [T?] = []
-    var head: Int = 0
+    private var leftStack: [T] = []
+    private var rightStack: [T] = []
     
-    mutating func enqueue(element: T) {
-        queue.append(element)
-    }
-
-    mutating func count() -> Int {
-        return queue.count-head
-    }
-    
-    func isEmpty() -> Bool {
-        return queue.isEmpty
-    }
-    
-    mutating func clear() {
-        queue.removeAll()
+    mutating func enqueue(element: T) -> [T] {
+        rightStack.append(element)
+        return rightStack
     }
     
     mutating func dequeue() -> T? {
-        guard head < queue.count, let element = queue[head] else { return nil }
-        queue[head] = nil
-        head += 1
-        
-        if head > queue.count/2 {
-            queue.removeFirst(head)
-            head = 0
+        if leftStack.isEmpty {
+            leftStack = rightStack.reversed()
+            rightStack.removeAll()
         }
-        return element
+        return leftStack.popLast()
+    }
+    
+    mutating func count() -> Int {
+        return leftStack.count + rightStack.count
+    }
+    
+    func isEmpty() -> Bool {
+        return leftStack.isEmpty && rightStack.isEmpty
+    }
+    
+    mutating func clear() {
+        leftStack.removeAll()
+        rightStack.removeAll()
     }
 }
 
