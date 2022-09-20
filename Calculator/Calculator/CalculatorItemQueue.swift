@@ -7,6 +7,17 @@
 
 import Foundation
 
-class CalculatorItemQueue {
-    
+struct CalculatorItemQueue<T> {
+    var queue: [T] = []
+    var resultQueue: [T] = []
+
+    mutating func enqueue(element: T) {
+        return queue.append(element)
+    }
+    mutating func dequeue() -> [T] {
+        queue.removeFirst()
+        return queue
+    }
 }
+
+

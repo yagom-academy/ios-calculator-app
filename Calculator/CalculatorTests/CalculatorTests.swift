@@ -2,35 +2,65 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by 임지연 on 2022/09/19.
+//  Created by LJ on 2022/09/19.
 //
 
 import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<Double>!
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = CalculatorItemQueue()
     }
-
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
-
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
-
     func testPerformanceExample() throws {
-        // This is an example of a performance test case.
         measure {
-            // Put the code you want to measure the time of here.
         }
     }
-
+    func test_더하기연산_성공하는지() {
+        let queue: [Double] = [1,2]
+        let compute: Operator = .plus
+        let result: Double = compute.operate(lhs: queue[0], rhs: queue[1])
+        XCTAssertEqual(result, 3.0)
+    }
+    func test_빼기연산_성공하는지() {
+        let queue: [Double] = [1,-1]
+        let compute: Operator = .minus
+        let result: Double = compute.operate(lhs: queue[0], rhs: queue[1])
+        print(result)
+        XCTAssertEqual(result, 2.0)
+    }
+    func test_곱하기연산_성공하는지() {
+        let queue: [Double] = [1500,3000]
+        let compute: Operator = .multiplication
+        let value: Double = compute.operate(lhs: queue[0], rhs: queue[1])
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
+        guard let result = numberFormatter.string(for: value) else {
+            return
+        }
+        print(result)
+        XCTAssertEqual(result, "4,500,000")
+    }
+    func test_나누기연산_성공하는지() {
+        let queue: [Double] = [10000,3]
+        let compute: Operator = .division
+        let value: Double = compute.operate(lhs: queue[0], rhs: queue[1])
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
+        guard let result = numberFormatter.string(for: value) else {
+            return
+        }
+        print(result)
+        XCTAssertEqual(result, "3,333.33333")
+    }
 }
