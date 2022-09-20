@@ -29,5 +29,14 @@ struct CalculatorItemQueue<T: CalculateItemProtocol> {
         leftStack.removeAll()
         rightStack.removeAll()
     }
+    
+    mutating func peek() -> T? {
+        if leftStack.isEmpty {
+            leftStack = rightStack.reversed()
+            rightStack.removeAll()
+        }
+        guard leftStack.count != 0 else { return nil }
+        return leftStack[leftStack.count - 1]
+    }
 }
 
