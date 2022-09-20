@@ -52,4 +52,16 @@ class CalculatorTesting: XCTestCase {
         //then
         XCTAssertEqual(myItem, sut.getLast())
     }
+    
+    func test_removeAll_메소드가_작동하는지_확인() {
+        //given
+        let myItem = Item(number: 123)
+        sut.add(item: myItem)
+        
+        //when
+        sut.removeAll()
+        
+        //then
+        XCTAssertEqual(sut.queue["queue"], [:])
+    }
 }
