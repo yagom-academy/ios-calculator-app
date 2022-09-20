@@ -5,35 +5,31 @@
 //  Created by leewonseok on 2022/09/19.
 //
 
-extension Double: CalculateItem {
-    
-}
-
 struct CalculatorItemQueue {
     private var queue: [CalculateItem?] = []
-    private var head: Int = 0
+    private var headIndex: Int = 0
     
     var count: Int {
-        return queue.filter { $0 != nil }.count
+        return queue.compactMap { $0 }.count
     }
     
     var isEmpty: Bool {
         return queue.isEmpty
     }
     
-    mutating func enqueue(_ element: Double) {
+    mutating func enqueue(_ element: CalculateItem) {
         queue.append(element)
     }
     
     @discardableResult
     mutating func dequeue() -> CalculateItem? {
-        guard queue.count != 0, head <= queue.count, let element = queue[head] else { return nil }
+        guard queue.count != 0, headIndex <= queue.count, let element = queue[headIndex] else { return nil }
         
-        queue[head] = nil
-        head += 1
-        if head > (queue.count / 4) {
-            queue.removeFirst(head)
-            head = 0
+        queue[headIndex] = nil
+        headIndex += 1
+        if headIndex > (queue.count / 4) {
+            queue.removeFirst(headIndex)
+            headIndex = 0
         }
         return element
     }
