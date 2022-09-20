@@ -47,7 +47,7 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, expected)
     }
-    
+
     func test_dequeue_원소가2개이상일때_1개디큐() {
         // given
         let firstItem: Item = Item(data: "first item")
@@ -65,6 +65,27 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(dequeued, expectedDequeuedItem)
         XCTAssertEqual(expectedOutputStack, sut.outputStack)
         XCTAssertEqual(expectedInputStack, expectedInputStack)
+    }
+    
+    func test_enqueue_dequeue_enqueue() {
+        // given
+        let firstItem: Item = Item(data: "first")
+        let secondItem: Item = Item(data: "second")
+        let thirdItem: Item = Item(data: "third")
+        
+        let expectedInputStack: [Item] = [thirdItem]
+        let expectedOutputStack: [Item] = [secondItem]
+        
+        // when
+        sut.enqueue(item: firstItem)
+        sut.enqueue(item: secondItem)
+        let dequeued = sut.dequeue()
+        sut.enqueue(item: thirdItem)
+        
+        // then
+        XCTAssertEqual(dequeued, firstItem)
+        XCTAssertEqual(sut.inputStack, expectedInputStack)
+        XCTAssertEqual(sut.outputStack, expectedOutputStack)
     }
 }
 
