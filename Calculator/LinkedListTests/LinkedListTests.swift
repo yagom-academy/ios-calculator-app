@@ -52,7 +52,7 @@ class LinkedListTests: XCTestCase {
         sut.append(data: "HU")
         sut.removeAll()
         
-        XCTAssertEqual(sut.bringHead() == nil && sut.bringtail() == nil, true)
+        XCTAssertEqual(sut.bringHead() == nil && sut.bringTail() == nil, true)
     }
     
     func test_HI랑HO랑HU를_append한후_제일마지막요소가HI인지() {
@@ -60,14 +60,14 @@ class LinkedListTests: XCTestCase {
         sut.append(data: "HO")
         sut.append(data: "HU")
         
-        guard let result = sut.bringtail()?.bringData() as? String else {
+        guard let result = sut.bringTail()?.bringData() as? String else {
             return
         }
         
         XCTAssertEqual(result, "HU")
     }
     
-    func test_HI랑HO를append하고HI를removeAll하고_HU를다시append했을때_head가HO인지() {
+    func test_HI랑HO를append하고HI를remove하고_HU를다시append했을때_head가HO인지() {
         sut.append(data: "HI")
         sut.append(data: "HO")
         

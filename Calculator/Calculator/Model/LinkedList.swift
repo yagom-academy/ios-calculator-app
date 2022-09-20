@@ -37,11 +37,11 @@ struct LinkedList {
         tail = nil
     }
     
-    mutating func bringHead() -> Node? {
+    func bringHead() -> Node? {
         return head
     }
     
-    mutating func bringtail() -> Node? {
+    func bringTail() -> Node? {
         return tail
     }
 }
