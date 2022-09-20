@@ -13,5 +13,12 @@ struct CalculatorItemQueue<T>: CalculateItem {
         queue.append(element)
     }
     
+    mutating func count() -> Int {
+        return queue.count
+    }
+    
+    func isEmpty() -> Bool {
+            return queue.isEmpty
+        }
     
 }
