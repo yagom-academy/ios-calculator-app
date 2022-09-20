@@ -3,12 +3,12 @@
 //  Created by 미니.
 //
 
-protocol CaculatorItem { }
+protocol CalculateItem { }
 
-extension Int: CaculatorItem { }
-extension Double: CaculatorItem { }
+extension Int: CalculateItem { }
+extension Double: CalculateItem { }
 
-struct CalculatorItemQueue<Element: CaculatorItem> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     var inputStack: [Element] = []
     var outputStack: [Element] = []
     
@@ -37,11 +37,11 @@ struct CalculatorItemQueue<Element: CaculatorItem> {
             inputStack.removeAll()
         }
         
-        return outputStack.removeFirst()
+        return outputStack.removeLast()
     }
     
     func peek(_ index: Int) -> Element? {
         let values = outputStack + inputStack.reversed()
-        return values[index]
+        return values.reversed()[index]
     }
 }
