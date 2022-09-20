@@ -5,7 +5,7 @@
 
 protocol CalculateItem { }
 
-private class LinkedList<T> {
+private struct LinkedList<T> {
     class Node<T>: CalculateItem {
         var value: T
         var next: Node?
@@ -27,13 +27,13 @@ private class LinkedList<T> {
         }
     }
     
-    func append(_ element: T) {
+    mutating func append(_ element: T) {
         let newNode: Node = Node(element)
         
         guard isEmpty == false else {
-            head = newNode
-            tail = newNode
-            nodeCount += 1
+            self.head = newNode
+            self.tail = newNode
+            self.nodeCount += 1
             return
         }
         if nodeCount == 1 {
@@ -46,12 +46,12 @@ private class LinkedList<T> {
         nodeCount += 1
     }
     
-    func removeLast() {
+    mutating func removeLast() {
         tail = nil
         nodeCount -= 1
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
         nodeCount = 0
@@ -69,15 +69,15 @@ struct CalculatorItemQueue<T> {
         return list.isEmpty
     }
     
-    func enqueue(_ element: T) {
-        list.append(element)
+    mutating func enqueue(_ element: T) {
+        self.list.append(element)
     }
     
-    func dequeue() {
-        list.removeLast()
+    mutating func dequeue() {
+        self.list.removeLast()
     }
     
-    func removeAll() {
-        list.removeAll()
+    mutating func removeAll() {
+        self.list.removeAll()
     }
 }
