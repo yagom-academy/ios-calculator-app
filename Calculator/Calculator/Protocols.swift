@@ -2,7 +2,7 @@
 //  Protocols.swift
 //  Calculator
 //
-//  Created by 유제민 on 2022/09/20.
+//  Created by Jeremy on 2022/09/20.
 //
 
 protocol CalculatorItem { }
