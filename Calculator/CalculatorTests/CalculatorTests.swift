@@ -5,8 +5,6 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
-    //var sup: CalculatorItemQueue<String>! 예시처럼 하려고 했으나!
-    //처음에 몽땅 스트링으로 받아와서, 인트 필요시 인트로 변환해서 비교
     
     override func setUpWithError() throws {
         try super.setUpWithError()
