@@ -120,14 +120,16 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_last프로퍼티접근시_큐의마지막요소를반환하는지() {
         //given
         sut.enqueue(element: 4)
-        sut.enqueue(element: 8)
+        sut.enqueue(element: 5)
         sut.enqueue(element: 6)
         
         //when
-        let result = sut.last?.data
+        let firstResult = sut.last?.data
+        sut.enqueue(element: 7)
+        let secondResult = sut.last?.data
         
         //then
-        XCTAssertEqual(6, result)
+        XCTAssertNotEqual(firstResult, secondResult)
     }
     
     func test_isEmpty프로퍼티접근시_큐에요소가없다면_True를반환하는가() {
