@@ -32,4 +32,13 @@ class CalculatorTesting: XCTestCase {
         //then
         XCTAssertEqual(expected, sut.queue["queue"])
     }
+    
+    func test_getFirst_메소드가_작동하는지_확인() {
+        //given
+        let myItem = Item(number: 10)
+        sut.add(item: myItem)
+        
+        //then
+        XCTAssertEqual(myItem, sut.getFirst())
+    }
 }
