@@ -22,15 +22,15 @@ struct LinkedList {
     }
     
     mutating func removeFirst() -> CalculateItem? {
-            let result = head?.bringData()
-            
-            if head?.bringNextNode() == nil {
-                tail = nil
-            }
-            
-            self.head = head?.bringNextNode()
-            return result
+        let result = head?.bringData()
+        
+        if head?.bringNextNode() == nil {
+            tail = nil
         }
+        
+        self.head = head?.bringNextNode()
+        return result
+    }
     
     mutating func removeAll() {
         head = nil
