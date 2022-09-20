@@ -44,6 +44,30 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual("3", sut.head?.next?.next?.data)
     }
     
+    func test_last프로퍼티_head가nil일때_nil반환() throws {
+        //given head가 nil일때
+        sut.head = nil
+        
+        //when last는
+        let last: Node? = sut.last
+        
+        //then nil이다
+        XCTAssertNil(last)
+    }
+    
+    func test_last프로퍼티_1_2_3이담겨있을때_3반환() throws {
+        //given 1,2,3이 담겨있을 때
+        sut.append("1")
+        sut.append("2")
+        sut.append("3")
+        
+        //when last는
+        let last: Node? = sut.last
+        
+        //then 3이다
+        XCTAssertEqual("3", last?.data)
+    }
+    
     func test_removeLast메서드_head가nil일때_그대로nil확인() throws {
         //given head가 nil일 때
         sut.head = nil

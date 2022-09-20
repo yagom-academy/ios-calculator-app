@@ -19,6 +19,15 @@ class Node <T> {
 
 struct LinkedList{
     var head: Node<String>?
+    var last: Node<String>? {
+        var currentNode = head
+        
+        while currentNode?.next != nil {
+            currentNode = currentNode?.next
+        }
+        
+        return currentNode
+    }
     
     mutating func append(_ data: String) {
         guard self.head != nil else {
