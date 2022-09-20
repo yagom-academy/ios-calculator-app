@@ -73,4 +73,22 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(sut.queue, [])
     }
+    
+    func test_큐값이있을때_dequeue호출하면제일먼저들어간값이nil값이되는지() {
+        //given
+        sut.queue = ["2","+","4"]
+        //when
+        let _ = sut.dequeue()
+        //then
+        XCTAssertEqual(sut.queue[0], nil)
+    }
+    
+    func test_큐값이있을때_dequeue호출하면먼저들어간값이잘빠져나오는지() {
+        //given
+        sut.queue = ["3","+","5"]
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, "3")
+    }
 }
