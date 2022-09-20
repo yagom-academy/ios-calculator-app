@@ -35,4 +35,44 @@ class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertEqual(input, queue.head?.next?.next?.data)
     }
+    
+    func test_dequeue실행시_큐가비어있으면_nil이_반환되는가() {
+        //given
+        let queue = CalculatorItemQueue<Int>()
+        
+        //when
+        let result = queue.dequeue()
+        
+        //then
+        XCTAssertEqual(nil, result)
+    }
+    
+    func test_dequeue실행시_큐의_첫번째데이터가_반환되는가() {
+        //given
+        let queue = CalculatorItemQueue<Int>()
+        queue.enqueue(element: 3)
+        queue.enqueue(element: 7)
+        queue.enqueue(element: 4)
+        
+        //when
+        let result = queue.dequeue()
+        
+        //then
+        XCTAssertEqual(3, result)
+    }
+    
+    func test_dequeue실행시_큐의_헤드가_다음노드로_이동하는가() {
+        //given
+        let queue = CalculatorItemQueue<Int>()
+        queue.enqueue(element: 3)
+        queue.enqueue(element: 7)
+        queue.enqueue(element: 4)
+        
+        //when
+        let _ = queue.dequeue()
+        let result = queue.head?.data
+        
+        //then
+        XCTAssertEqual(7, result)
+    }
 }
