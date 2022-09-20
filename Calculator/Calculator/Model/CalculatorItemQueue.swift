@@ -14,14 +14,35 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func count() -> Int {
-        return queue.count
+        return queue.count - head
     }
     
     func isEmpty() -> Bool {
-            return queue.isEmpty
-        }
+        return queue.isEmpty
+    }
     
     mutating func clear() {
-            return queue.removeAll()
+        queue.removeAll()
+    }
+    
+    mutating func dequeue() -> T? {
+        guard head < queue.count, let element = queue[head] else {
+            return nil
         }
+        queue[head] = nil
+        head += 1
+        
+        if head > (queue.count / 4) {
+            queue.removeFirst(head)
+            head = 0
+        }
+        return element
+    }
+    
+    func peek() -> T? {
+        guard queue.count != head else {
+            return nil
+        }
+        return queue[head]
+    }
 }
