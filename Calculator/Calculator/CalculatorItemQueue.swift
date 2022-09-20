@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculatorItemQueue: CalculateItem {
+class CalculatorItemQueue {
     
     var queue: LinkedList = LinkedList()
     
@@ -23,3 +23,5 @@ class CalculatorItemQueue: CalculateItem {
         queue.removeAll()
     }
 }
+
+extension String : CalculateItem {}
