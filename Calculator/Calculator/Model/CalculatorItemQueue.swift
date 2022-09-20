@@ -1,7 +1,7 @@
 //  CalculatorItemQueue.swift
 //  Created by zhilly on 2022/09/20.
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     private var queue: [T] = []
     
     var count: Int {
@@ -19,8 +19,4 @@ struct CalculatorItemQueue<T> {
     mutating func pop() -> T? {
         return isEmpty ? nil : queue.removeFirst()
     }
-}
-
-extension CalculatorItemQueue: CalculateItem {
-    
 }
