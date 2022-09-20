@@ -9,7 +9,7 @@ struct LinkedList {
     private var head: Node?
     private var tail: Node?
     
-    mutating func append(data: CalculateItem) {
+    mutating func append(_ data: CalculateItem) {
         guard head != nil else {
             self.head = Node(data: data)
             self.tail = head

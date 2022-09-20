@@ -10,16 +10,16 @@ import CoreText
 struct CalculatorItemQueue {
     private var queue = LinkedList()
     
-    func enqueue(_ data: CalculateItem) {
-        
+    mutating func enqueue(_ data: CalculateItem) {
+        queue.append(data)
     }
     
-    func dequeue() -> CalculateItem {
-        return ""
+    mutating func dequeue() -> CalculateItem? {
+        return queue.removeFirst()
     }
     
-    func removeAll() {
-        
+    mutating func removeAll() {
+        queue.removeAll()
     }
     
     func bringQueue() -> LinkedList {
