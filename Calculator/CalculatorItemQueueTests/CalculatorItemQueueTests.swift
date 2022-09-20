@@ -106,4 +106,27 @@ class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssert(sut.head == nil)
     }
+    
+    func test_last프로퍼티접근시_큐에요소가없다면_nil이반환되는지() {
+        //given
+        
+        //when
+        let result = sut.last
+        
+        //then
+        XCTAssertNil(result)
+    }
+    
+    func test_last프로퍼티접근시_큐의마지막요소를반환하는지() {
+        //given
+        sut.enqueue(element: 4)
+        sut.enqueue(element: 8)
+        sut.enqueue(element: 6)
+        
+        //when
+        let result = sut.last?.data
+        
+        //then
+        XCTAssertEqual(6, result)
+    }
 }
