@@ -22,9 +22,7 @@ struct LinkedList<T> {
     
     var head: Node<T>?
     var tail: Node<T>?
-    
-    init() {}
-    
+        
     var isEmpty: Bool {
         head == nil
     }
