@@ -21,16 +21,12 @@ class CalculatorItemQueue<T>: CalculateItem {
     }
     
     func enqueue(element: T) {
-        if head == nil {
+        guard let lastNode = last else {
             head = Node(data: element)
             return
         }
         
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: element)
+        lastNode.next = Node(data: element)
     }
     
     @discardableResult
