@@ -11,7 +11,7 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue: CalculateItem {
-    private var queue: [String] = []
+    var queue: [String] = []
     
     public var count: Int {
         return queue.count
@@ -27,7 +27,7 @@ struct CalculatorItemQueue: CalculateItem {
     }
     
     // queue의 첫번째 요소를 반환하고 제거하는 메서드
-    public mutating func dequeue() -> String {
+    public mutating func dequeue() -> String? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
