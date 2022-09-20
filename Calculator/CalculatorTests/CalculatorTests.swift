@@ -36,6 +36,17 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.inputStack, expected)
     }
+    
+    func test_dequeue_빈배열에서디큐() {
+        // given
+        let expected: String? = nil
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expected)
+    }
 }
 
 
