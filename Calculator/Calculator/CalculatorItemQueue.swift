@@ -1,9 +1,8 @@
 //  Created by bella on 2022/09/19.
 
-struct CalculatorItemQueue<T> :  CalculateItemProtocol {
+struct CalculatorItemQueue<T: CalculateItemProtocol> {
     var queue: [T?] = []
-    
-    private var head: Int = 0
+    var head: Int = 0
     
     mutating func enqueue(element: T) {
         queue.append(element)
@@ -13,7 +12,7 @@ struct CalculatorItemQueue<T> :  CalculateItemProtocol {
         return queue.count-head
     }
     
-    mutating func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return queue.isEmpty
     }
     
