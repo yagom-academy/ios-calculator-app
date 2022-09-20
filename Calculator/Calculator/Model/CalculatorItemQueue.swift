@@ -19,6 +19,13 @@ class CalculatorItemQueue<T>: CalculateItem {
             return node
         }
     }
+    var isEmpty: Bool {
+        if head == nil && last == nil {
+            return true
+        } else {
+            return false
+        }
+    }
     
     func enqueue(element: T) {
         guard let lastNode = last else {
