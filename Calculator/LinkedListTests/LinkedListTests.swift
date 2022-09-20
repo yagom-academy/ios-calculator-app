@@ -43,7 +43,7 @@ class LinkedListTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(result, "HI")
+        XCTAssertEqual(result, "HO")
     }
     
     func test_HI랑HO랑HU를_append한후removeAll을이용하여전부삭제가가능한지() {

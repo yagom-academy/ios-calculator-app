@@ -9,16 +9,17 @@ struct LinkedList {
     var head: Node?
     var tail: Node?
     
-    func append(data: CalculateItem) {
+    mutating func append(data: CalculateItem) {
+        guard head != nil else {
+            self.head = Node(data: data)
+            self.tail = head
+            return
+        }
         
+        let newElement = Node(data: data)
+        self.tail?.setNextNode(destination: newElement)
+        self.tail = newElement
     }
     
-    func removeFirst() -> CalculateItem {
-        return head!.bringData()
-    }
-    
-    func removeAll() {
-        
-    }
 }
 
