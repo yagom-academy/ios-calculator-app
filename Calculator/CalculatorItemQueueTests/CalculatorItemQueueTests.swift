@@ -9,17 +9,29 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
+    var sut: CalculatorItemQueue<Int>!
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = CalculatorItemQueue<Int>()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
     
     func test_enqueue실행시_큐가비어있으면_입력값이_첫번째노드로_생성되는가() {
         //given
         let input = 3
         
         //when
-        let queue = CalculatorItemQueue<Int>()
-        queue.enqueue(element: input)
+        sut.enqueue(element: input)
         
         //then
-        XCTAssertEqual(input, queue.head?.data)
+        XCTAssertEqual(input, sut.head?.data)
     }
     
     func test_enqueue실행시_마지막노드_뒤에_입력한노드가_추가되는가() {
@@ -27,21 +39,19 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = 3
         
         //when
-        let queue = CalculatorItemQueue<Int>()
-        queue.enqueue(element: 4)
-        queue.enqueue(element: 6)
-        queue.enqueue(element: input)
+        sut.enqueue(element: 4)
+        sut.enqueue(element: 6)
+        sut.enqueue(element: input)
         
         //then
-        XCTAssertEqual(input, queue.head?.next?.next?.data)
+        XCTAssertEqual(input, sut.head?.next?.next?.data)
     }
     
     func test_dequeue실행시_큐가비어있으면_nil이_반환되는가() {
         //given
-        let queue = CalculatorItemQueue<Int>()
         
         //when
-        let result = queue.dequeue()
+        let result = sut.dequeue()
         
         //then
         XCTAssertEqual(nil, result)
@@ -49,13 +59,12 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue실행시_큐의_첫번째데이터가_반환되는가() {
         //given
-        let queue = CalculatorItemQueue<Int>()
-        queue.enqueue(element: 3)
-        queue.enqueue(element: 7)
-        queue.enqueue(element: 4)
+        sut.enqueue(element: 3)
+        sut.enqueue(element: 7)
+        sut.enqueue(element: 4)
         
         //when
-        let result = queue.dequeue()
+        let result = sut.dequeue()
         
         //then
         XCTAssertEqual(3, result)
@@ -63,14 +72,13 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue실행시_큐의_헤드가_다음노드로_이동하는가() {
         //given
-        let queue = CalculatorItemQueue<Int>()
-        queue.enqueue(element: 3)
-        queue.enqueue(element: 7)
-        queue.enqueue(element: 4)
+        sut.enqueue(element: 3)
+        sut.enqueue(element: 7)
+        sut.enqueue(element: 4)
         
         //when
-        queue.dequeue()
-        let result = queue.head?.data
+        sut.dequeue()
+        let result = sut.head?.data
         
         //then
         XCTAssertEqual(7, result)
@@ -78,26 +86,24 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_removeAll실행시_큐가_비워지는지() {
         //given
-        let queue = CalculatorItemQueue<Int>()
-        queue.enqueue(element: 3)
-        queue.enqueue(element: 7)
-        queue.enqueue(element: 4)
+        sut.enqueue(element: 3)
+        sut.enqueue(element: 7)
+        sut.enqueue(element: 4)
         
         //when
-        queue.removeAll()
+        sut.removeAll()
         
         //then
-        XCTAssert(queue.head == nil)
+        XCTAssert(sut.head == nil)
     }
     
     func test_removeAll실행시_큐에요소가없다면_종료되는지() {
         //given
-        let queue = CalculatorItemQueue<Int>()
         
         //when
-        queue.removeAll()
+        sut.removeAll()
         
         //then
-        XCTAssert(queue.head == nil)
+        XCTAssert(sut.head == nil)
     }
 }
