@@ -25,6 +25,15 @@ class CalculatorItemQueue<T>: CalculateItem {
         }
         node?.next = Node(data: element)
     }
+    
+    func dequeue(element: T?) -> T? {
+        guard let currentHead = head else {
+            return nil
+        }
+        
+        head = currentHead.next
+        return currentHead.data
+    }
 }
 
 class Node<T> {
