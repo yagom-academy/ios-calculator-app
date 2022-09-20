@@ -12,4 +12,12 @@ struct CalculatorItemQueue: CalculatorItem {
         queue.append(element)
     }
     
+    mutating func subtractQueue() -> String? {
+        if queue.isEmpty {
+            return nil
+        }
+        queue.removeFirst()
+        
+        return queue.first
+    }
 }
