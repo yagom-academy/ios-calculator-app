@@ -5,10 +5,10 @@
 //  Created by Baem on 2022/09/20.
 //
 
-struct CalculatorItemQueue<T>: CalculatorItem {
-    var queue: [T] = []
+struct CalculatorItemQueue: CalculatorItem {
+    var queue: [String] = [String]()
     
-    mutating func addQueue(_ element: T) {
+    mutating func addQueue(_ element: String) {
         queue.append(element)
     }
     
