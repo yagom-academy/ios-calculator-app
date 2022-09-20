@@ -7,6 +7,7 @@
 
 struct CalculatorItemQueue {
     private var elementCount: Int = 0
+    private var firstElementIndex: Int = 0
     var queue:[String: [Int: Item]] = [
         "queue": [: ]
     ]
@@ -14,18 +15,18 @@ struct CalculatorItemQueue {
 
 extension CalculatorItemQueue: QueueManager {
     mutating func add(item: Item) {
-        var myQue = queue["queue"]
-        myQue?[self.elementCount] = item
+        self.queue["queue"]?[self.elementCount] = item
         elementCount += 1
     }
     
     mutating func getFirst() -> Item? {
-        return queue["queue"]?.first?.value ?? nil
+        let firstItem = queue["queue"]?[self.firstElementIndex]
+        return firstItem
     }
     
     mutating func getLast() -> Item? {
-        let lastItem = queue["queue"]?.removeValue(forKey: elementCount)
         elementCount -= 1
+        let lastItem = queue["queue"]?.removeValue(forKey: elementCount)
         return lastItem ?? nil
     }
 
