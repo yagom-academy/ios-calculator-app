@@ -27,10 +27,10 @@ struct LinkedList<T> {
         }
     }
     
-    func append(node: Node<T>) {
+    func append(_ element: T) {
     }
     
-    func removeLast(node: Node<T>) {
+    func removeLast() {
     }
     
     func removeAll() {
@@ -38,7 +38,7 @@ struct LinkedList<T> {
 }
 
 struct CalculatorItemQueue<T> {
-    private var list: LinkedList<T> = LinkedList<T>()
+    var list: LinkedList<T> = LinkedList<T>()
     
     var count: Int {
         return list.nodeCount
@@ -52,5 +52,10 @@ struct CalculatorItemQueue<T> {
     }
     
     func dequeue() {
+        list.removeLast()
+    }
+    
+    func removeAll() {
+        list.removeAll()
     }
 }

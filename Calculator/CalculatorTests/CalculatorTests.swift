@@ -2,35 +2,90 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by 유연수 on 2022/09/20.
-//
 
 import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-
+    private var sut: CalculatorItemQueue<Any>!
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
+        sut = CalculatorItemQueue<Any>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_CalculatorItemQueue에서_count값이올바르게반환되는지() {
+        // given
+        sut.enqueue(1)
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, 1)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func test_CalculatorItemQueue에서_list에값이있을때_isEmpty값이올바르게반환되는지() {
+        // given
+        sut.enqueue(1)
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_CalculatorItemQueue에서_list에값이없을때_isEmpty값이올바르게반환되는지() {
+        // given
+        sut.removeAll()
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
     }
-
+    
+    func test_CalculatorItemQueue에서_enqueue메서드가정상작동하는지() {
+        // given
+        sut.enqueue(1)
+        
+        // when
+        let result = sut.list.nodeCount
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_CalculatorItemQueue에서_dequeue메서드가정상작동하는지() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.dequeue()
+        
+        // when
+        let result = sut.list.nodeCount
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_CalculatorItemQueue에서_removeAll메서드가정상작동하는지() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.removeAll()
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
 }
