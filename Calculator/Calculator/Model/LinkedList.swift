@@ -6,8 +6,8 @@
 //
 
 struct LinkedList {
-    var head: Node?
-    var tail: Node?
+    private var head: Node?
+    private var tail: Node?
     
     mutating func append(data: CalculateItem) {
         guard head != nil else {
@@ -35,6 +35,14 @@ struct LinkedList {
     mutating func removeAll() {
         head = nil
         tail = nil
+    }
+    
+    mutating func bringHead() -> Node? {
+        return head
+    }
+    
+    mutating func bringtail() -> Node? {
+        return tail
     }
 }
 

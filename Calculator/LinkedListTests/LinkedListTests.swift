@@ -52,7 +52,7 @@ class LinkedListTests: XCTestCase {
         sut.append(data: "HU")
         sut.removeAll()
         
-        XCTAssertEqual(sut.head == nil && sut.tail == nil, true)
+        XCTAssertEqual(sut.bringHead() == nil && sut.bringtail() == nil, true)
     }
     
     func test_HI랑HO랑HU를_append한후_제일마지막요소가HI인지() {
@@ -60,7 +60,7 @@ class LinkedListTests: XCTestCase {
         sut.append(data: "HO")
         sut.append(data: "HU")
         
-        guard let result = sut.tail?.bringData() as? String else {
+        guard let result = sut.bringtail()?.bringData() as? String else {
             return
         }
         
@@ -75,7 +75,7 @@ class LinkedListTests: XCTestCase {
         
         sut.append(data: "HU")
         
-        guard let result = sut.head?.bringData() as? String else {
+        guard let result = sut.bringHead()?.bringData() as? String else {
             return
         }
         
