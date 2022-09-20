@@ -26,14 +26,19 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() -> T? {
-        let removeItem: Node<T>? = head
-        self.head = head?.getNextNode()
-        count -= 1
-        
-        return removeItem?.data
+        if count == 0 {
+            return nil
+        } else {
+            let removeItem: Node<T>? = head
+            self.head = head?.getNextNode()
+            count -= 1
+            
+            return removeItem?.data
+        }
     }
     
     mutating func removeAll() {
+        count = 0
         head = nil
         tail = nil
     }
