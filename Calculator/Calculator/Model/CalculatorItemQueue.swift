@@ -4,6 +4,10 @@
 struct CalculatorItemQueue<T> {
     var queue: [T] = []
     
+    var count: Int {
+        return queue.count
+    }
+    
     var isEmpty: Bool {
         return queue.isEmpty ? true : false
     }

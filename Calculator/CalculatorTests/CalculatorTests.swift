@@ -69,7 +69,7 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_queue에pop할요소가없을때() {
-        XCTAssertEqual(sutQueue.pop(), nil)
+        XCTAssertNil(sutQueue.pop())
     }
     
     func test_queue에3_6_9를push하고pop을네번했을때() {
@@ -85,5 +85,22 @@ final class CalculatorTests: XCTestCase {
         }
         
         XCTAssertEqual(result, nil)
+    }
+    
+    func test_queue에1_2_3_4_5를push했을때count값이5인지() {
+        let elementArray: [String] = ["1", "2", "3", "4", "5"]
+        
+        for element in elementArray {
+            sutQueue.push(element)
+        }
+        let result = sutQueue.count
+    
+        XCTAssertEqual(result, 5)
+    }
+    
+    func test_queue가비어있을때count가0인지() {
+        let result = sutQueue.count
+        
+        XCTAssertEqual(result, 0)
     }
 }
