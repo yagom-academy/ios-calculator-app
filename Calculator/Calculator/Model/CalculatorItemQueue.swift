@@ -2,7 +2,7 @@
 //  Created by zhilly on 2022/09/20.
 
 struct CalculatorItemQueue<T> {
-    var queue: [T] = []
+    private var queue: [T] = []
     
     var count: Int {
         return queue.count
