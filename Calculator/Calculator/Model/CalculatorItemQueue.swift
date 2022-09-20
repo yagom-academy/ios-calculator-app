@@ -9,7 +9,7 @@ import Foundation
 class CalculatorItemQueue<T>: CalculateItem {
     private(set) var head: Node<T>? = nil
     
-    func enqueue(element: T?) {
+    func enqueue(element: T) {
         if head == nil {
             head = Node(data: element)
             return
