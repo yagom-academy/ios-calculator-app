@@ -30,8 +30,8 @@ class LinkedListTests: XCTestCase {
     }
     
     func test_HI랑HO를_append했을때잘들어가는지() {
-        sut.append(data: "HI")
-        sut.append(data: "HO")
+        sut.append("HI")
+        sut.append("HO")
         
         guard let result = sut.removeFirst() as? String else {
             return
