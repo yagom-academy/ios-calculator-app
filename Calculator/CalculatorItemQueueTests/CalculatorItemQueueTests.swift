@@ -69,7 +69,7 @@ class CalculatorItemQueueTests: XCTestCase {
         queue.enqueue(element: 4)
         
         //when
-        let _ = queue.dequeue()
+        queue.dequeue()
         let result = queue.head?.data
         
         //then

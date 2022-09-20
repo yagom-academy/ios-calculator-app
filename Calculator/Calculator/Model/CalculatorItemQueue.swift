@@ -22,6 +22,7 @@ class CalculatorItemQueue<T>: CalculateItem {
         node?.next = Node(data: element)
     }
     
+    @discardableResult
     func dequeue() -> T? {
         guard let currentHead = head else {
             return nil
