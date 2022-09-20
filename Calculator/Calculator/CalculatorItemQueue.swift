@@ -4,7 +4,7 @@ struct CalculatorItemQueue<T: CalculateItemProtocol> {
     private var leftStack: [T] = []
     private var rightStack: [T] = []
     
-    mutating func enqueue(element: T) -> [T] {
+    @discardableResult mutating func enqueue(element: T) -> [T] {
         rightStack.append(element)
         return rightStack
     }

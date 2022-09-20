@@ -1,9 +1,9 @@
-//  Created by bella on 2022/09/19.
+//  Created by bella on 2022/09/20.
 
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
@@ -107,3 +107,4 @@ class CalculatorTests: XCTestCase {
 //        XCTAssertEqual(sut.count(), 2)
 //    }
 }
+
