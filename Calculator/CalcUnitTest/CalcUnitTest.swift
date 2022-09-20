@@ -31,13 +31,22 @@ class CalcUnitTest: XCTestCase {
         XCTAssertEqual(sut.queue, ["가나다"])
     }
     
-    func test_큐가비어있을때_dequeue함수_제거여부체크() {
+    func test_큐에값이있을때_dequeue함수_제거여부체크() {
         //given
         sut.queue = ["1","2","3"]
         //when
         sut.dequeue()
         //then
         XCTAssertEqual(sut.queue, ["2","3"])
+    }
+    
+    func test_큐에값이있을때_clear함수_제거여부체크() {
+        //given
+        sut.queue = ["1","2","3"]
+        //when
+        sut.clear()
+        //then
+        XCTAssertEqual(sut.queue, [])
     }
     
 }
