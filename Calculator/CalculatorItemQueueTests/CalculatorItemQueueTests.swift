@@ -53,7 +53,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_n번의_enqueue와_n_minus_1_dequeue를_수행후_front값이_예상값과동일한가() {
+    func test_n번의_enqueue와_n_minus_1_dequeue를_수행후_front값이_마지막에_넣은값과동일한가() {
         let count: Int = Int.random(in: 1...9)
         let removeCount = count - 1
 
@@ -67,8 +67,8 @@ class CalculatorItemQueueTests: XCTestCase {
         }
         
         let result = sut.front
-        
-        XCTAssertEqual(result, 11)
+        let targetValue = Double((2 * count) + 1)
+        XCTAssertEqual(result, targetValue)
     }
     
     func test_n번의_enqueue와_m번의_dequeue를_수행후_front값이_예상값과동일한가() {
@@ -114,8 +114,8 @@ class CalculatorItemQueueTests: XCTestCase {
         }
         
         let result = sut.peek(count - 1)
-        
-        XCTAssertEqual(result, 3)
+        let targetNumber = Double(count)
+        XCTAssertEqual(result, targetNumber)
     }
     
     func test_값을_넣는_횟수와_추출하는_횟수가_같으면_배열이_비어있는가() {
@@ -130,5 +130,43 @@ class CalculatorItemQueueTests: XCTestCase {
         }
         
         XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_초기화로_값을_할당하였을때_초기배열의_수와_큐에_count변수의값이_동일한가() {
+        let initArr: [Double] = Array(repeating: 1, count: Int.random(in: 1...9))
+        let queue = CalculatorItemQueue<Double>(initArr)
+        
+        let result = queue.count
+        
+        XCTAssertEqual(result, initArr.count)
+    }
+    
+    func test_enque를_한횟수와_한후_큐에_남은_요소의_개수가_동일한가() {
+        let count: Int = Int.random(in: 1...9)
+        
+        for value in 0..<count {
+            sut.enqueue(Double(value))
+        }
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, count)
+    }
+    
+    func test_n번의_enque와_m번의_deque를_한후_큐에_남아있는_요소의_개수가_n빼기m과_동일한가() {
+        let count: Int = Int.random(in: 1...9)
+        let removeCount: Int = Int.random(in: 1...count)
+        
+        for value in 0..<count {
+            sut.enqueue(Double(value))
+        }
+        
+        for _ in 0..<removeCount {
+            sut.dequeue()
+        }
+        
+        let result = sut.count
+        let targetNumber = count - removeCount
+        XCTAssertEqual(result, targetNumber)
     }
 }
