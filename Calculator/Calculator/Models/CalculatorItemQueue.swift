@@ -11,8 +11,20 @@ protocol CalculateItem {
     
 }
 
-class CalculatorItemQueue<T> {
+extension String: CalculateItem {
+    
+}
+
+final class CalculatorItemQueue<T: CalculateItem> {
     var queue: LinkedList<T>! = LinkedList()
+    
+    func front() -> T? {
+        return queue.head?.data
+    }
+    
+    func last() -> T? {
+        return queue.tail?.data
+    }
     
     func enqueue(_ data: T) {
         queue.append(data: data)
@@ -20,6 +32,10 @@ class CalculatorItemQueue<T> {
     
     func dequeue() -> T? {
         return queue.removeFirst()
+    }
+    
+    func count() -> Int {
+        return queue.count
     }
     
     func removeAll() {
