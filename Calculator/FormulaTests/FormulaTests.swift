@@ -21,13 +21,22 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func test_1더하기_1을했을때_2이_되는지(){
-        let result:Double = 2
+    func test_1더하기_1을했을때_2이_되는지() {
+        let result: Double = 2
         
         sut.operands.enqueue(1)
         sut.operands.enqueue(1)
         sut.operators.enqueue(Operator.add)
         
-        XCTAssertEqual(result, sut.result())
+        XCTAssertEqual(result, try sut.result())
     }
+    
+    func test_0으로_나누었을때_에러를던지는지() {
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue(Operator.divide)
+        
+        XCTAssertThrowsError(try sut.result())
+    }
+    
 }
