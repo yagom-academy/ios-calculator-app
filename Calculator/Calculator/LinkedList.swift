@@ -9,7 +9,7 @@ import Foundation
 
 class Node {
     
-    var value: String
+    let value: String
     var next: Node?
     
     init(value: String, next: Node? = nil) {
