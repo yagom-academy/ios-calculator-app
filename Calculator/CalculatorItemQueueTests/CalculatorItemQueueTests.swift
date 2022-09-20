@@ -25,22 +25,34 @@ class CalculatorItemQueueTests: XCTestCase {
     func test_when_enqueue_3_then_linkedlist_has_3() {
 
         let input = "3"
+        
         sut.enqueue(item: input)
-        XCTAssertEqual(sut.queue.head?.value, "3")
+        
+        XCTAssertEqual(sut.dequeue(), "3")
     }
 
     func test_when_dequeue_3_when_linkedlist_has_3_4_5() {
-        sut.enqueue(item: "3")
-        sut.enqueue(item: "4")
-        sut.enqueue(item: "5")
+        
+        let input = "3"
+        let input2 = "4"
+        let input3 = "5"
+        
+        sut.enqueue(item: input)
+        sut.enqueue(item: input2)
+        sut.enqueue(item: input3)
 
         XCTAssertEqual(sut.dequeue(), "3")
     }
     
     func test_when_linkedlist_has_3_4_5_removeAll() {
-        sut.enqueue(item: "4")
-        sut.enqueue(item: "5")
-        sut.enqueue(item: "6")
+        
+        let input = "3"
+        let input2 = "4"
+        let input3 = "5"
+        
+        sut.enqueue(item: input)
+        sut.enqueue(item: input2)
+        sut.enqueue(item: input3)
         
         sut.removeAll()
         
