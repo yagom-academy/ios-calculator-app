@@ -91,4 +91,22 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, "3")
     }
+    
+    func test_큐값이없을때_dequeue호출하면nil이나오는지() {
+        //given
+        sut.queue = []
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(result, nil)
+    }
+    
+    func test_큐값이있을때_dequeue호출하면큐의카운트가줄어드는지() {
+        //given
+        sut.queue = ["3","+","5"]
+        //when
+        let _ = sut.dequeue()
+        //then
+        XCTAssertEqual(sut.count(), 2)
+    }
 }
