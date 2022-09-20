@@ -20,6 +20,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return outputStack.first ?? inputStack.first
     }
     
+    var count: Int {
+        return outputStack.count + inputStack.count
+    }
+    
     init() { }
     
     init(_ elements: [Element]) {
