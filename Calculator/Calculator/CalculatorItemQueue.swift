@@ -7,15 +7,15 @@
 
 import Foundation
 
-final class CalculatorItemQueue {
+final class CalculatorItemQueue<T:CalculateItem> {
     
-    private var queue: LinkedList = LinkedList()
+    private var queue: LinkedList = LinkedList<T>()
     
-    func enqueue(item: String) {
+    func enqueue(item: T) {
         queue.append(item)
     }
     
-    func dequeue() -> String? {
+    func dequeue() -> T? {
         return queue.pop()
     }
     

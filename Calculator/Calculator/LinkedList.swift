@@ -7,21 +7,21 @@
 
 import Foundation
 
-class Node {
+class Node<T> {
     
-    let value: String
+    let value: T
     var next: Node?
     
-    init(value: String, next: Node? = nil) {
+    init(value: T, next: Node? = nil) {
         self.value = value
         self.next = next
     }
 }
 
-struct LinkedList {
+struct LinkedList<T> {
     
-    var head: Node?
-    var tail: Node?
+    var head: Node<T>?
+    var tail: Node<T>?
     
     init() {}
     
@@ -29,7 +29,7 @@ struct LinkedList {
         head == nil
     }
     
-    mutating func push(_ value: String) {
+    mutating func push(_ value: T) {
         
         head = Node(value: value, next: head)
         if tail == nil {
@@ -37,7 +37,7 @@ struct LinkedList {
         }
     }
     
-    mutating func append(_ value: String) {
+    mutating func append(_ value: T) {
         
         guard !isEmpty else {
             push(value)
@@ -48,7 +48,7 @@ struct LinkedList {
         tail = tail?.next
     }
     
-    mutating func pop() -> String? {
+    mutating func pop() -> T? {
         
         let returnValue = head?.value
         head = head?.next
@@ -59,7 +59,7 @@ struct LinkedList {
         return returnValue
     }
     
-    mutating func removeLast() -> String? {
+    mutating func removeLast() -> T? {
         
         guard let head = head else {
             return nil
