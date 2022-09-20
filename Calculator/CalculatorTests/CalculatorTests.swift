@@ -5,6 +5,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
+    
     var sutQueue: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
@@ -31,5 +32,29 @@ final class CalculatorTests: XCTestCase {
         let queue = CalculatorItemQueue<Int>()
         
         XCTAssertTrue(queue.isEmpty)
+    }
+    
+    func test_queue에3을push했을때() {
+        let element: String = "3"
+        
+        XCTAssertNoThrow(sutQueue.push(element))
+    }
+    
+    func test_queue에3을push했을때queue의isEmpty가false인지() {
+        let element: String = "3"
+        
+        sutQueue.push(element)
+        
+        XCTAssertFalse(sutQueue.isEmpty)
+    }
+    
+    func test_queue에3_6_9를push했을때() {
+        let elementArray: [String] = ["3", "6", "9"]
+        
+        for element in elementArray {
+            sutQueue.push(element)
+        }
+        
+        XCTAssertFalse(sutQueue.isEmpty)
     }
 }
