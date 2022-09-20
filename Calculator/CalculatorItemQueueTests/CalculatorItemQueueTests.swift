@@ -44,7 +44,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(element: input)
         
         //then
-        XCTAssertEqual(input, sut.head?.next?.next?.data)
+        XCTAssertEqual(input, sut.last?.data)
     }
     
     func test_dequeue실행시_큐가비어있으면_nil이_반환되는가() {
