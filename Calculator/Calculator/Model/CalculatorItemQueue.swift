@@ -20,3 +20,7 @@ struct CalculatorItemQueue<T> {
         return isEmpty ? nil : queue.removeFirst()
     }
 }
+
+extension CalculatorItemQueue: CalculateItem {
+    
+}
