@@ -41,4 +41,15 @@ class CalculatorTesting: XCTestCase {
         //then
         XCTAssertEqual(myItem, sut.getFirst())
     }
+    
+    func test_getLast_메소드가_작동하는지_확인() {
+        
+        //given
+        let myItem = Item(operation: .multiply, sign: .positive, number: 10)
+        sut.add(item: myItem)
+        
+        
+        //then
+        XCTAssertEqual(myItem, sut.getLast())
+    }
 }
