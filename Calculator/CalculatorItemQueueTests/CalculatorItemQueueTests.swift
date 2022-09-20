@@ -129,4 +129,26 @@ class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertEqual(6, result)
     }
+    
+    func test_isEmpty프로퍼티접근시_큐에요소가없다면_True를반환하는가() {
+        //given
+
+        //when
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty프로퍼티접근시_큐에요소가있다면_False를반환하는가() {
+        //given
+        sut.enqueue(element: 8)
+        sut.enqueue(element: 9)
+
+        //when
+        let result = sut.isEmpty
+        
+        //then
+        XCTAssertFalse(result)
+    }
 }
