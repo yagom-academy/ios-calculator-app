@@ -11,11 +11,11 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue {
-    var inItems: [CalculateItem] = []
-    var outItems: [CalculateItem] = []
+struct CalculatorItemQueue<T: CalculateItem> {
+    var inputStack: [T] = []
+    var outputStack: [T] = []
     
-    mutating func enqueue(item: CalculateItem) {
-        inItems.append(item)
+    mutating func enqueue(item: T) {
+        inputStack.append(item)
     }
 }

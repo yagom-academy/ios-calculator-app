@@ -8,8 +8,12 @@
 import XCTest
 @testable import Calculator
 
+extension String: CalculateItem {
+    
+}
+
 final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<String>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -24,20 +28,14 @@ final class CalculatorTests: XCTestCase {
     func test_enqueue_1개삽입() {
         // given
         let input = "1"
-        let expected: [CalculateItem] = ["1"]
+        let expected: [String] = ["1"]
         
         // when
         sut.enqueue(item: input)
         
         // then
-        XCTAssertEqual(sut.inItems, expected)
+        XCTAssertEqual(sut.inputStack, expected)
     }
 }
 
-extension String: CalculateItem {
-    
-}
 
-extension CalculateItem: Equatable {
-    
-}
