@@ -6,7 +6,11 @@
 
 import Foundation
 
-class CalculatorItemQueue<T> {
+protocol CalculateItem {
+    
+}
+
+class CalculatorItemQueue<T>: CalculateItem {
     private var head: Node<T>? = nil
 }
 
