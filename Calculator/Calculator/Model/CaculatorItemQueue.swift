@@ -5,6 +5,6 @@
 
 protocol CaculatorItem { }
 
-struct CalculatorItemQueue: CaculatorItem {
+struct CaculatorItemQueue: CaculatorItem {
     
 }
