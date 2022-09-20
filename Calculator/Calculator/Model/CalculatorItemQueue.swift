@@ -6,8 +6,8 @@
 import Foundation
 
 struct CalculatorItemQueue {
-    var input: [CalculateItem] = []
-    var output: [CalculateItem] = []
+    private var input: [CalculateItem] = []
+    private var output: [CalculateItem] = []
     
     var isEmpty: Bool {
         input.isEmpty && output.isEmpty
