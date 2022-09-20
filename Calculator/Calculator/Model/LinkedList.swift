@@ -17,10 +17,10 @@ class Node <T> {
     }
 }
 
-struct LinkedList<Int>{
-    var head: Node<Int>?
+struct LinkedList{
+    var head: Node<String>?
     
-    mutating func append(_ data: Int) {
+    mutating func append(_ data: String) {
         guard self.head != nil else {
             self.head = Node(data: data)
             return

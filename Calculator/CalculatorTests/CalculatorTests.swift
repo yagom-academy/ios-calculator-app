@@ -32,21 +32,21 @@ class CalculatorTests: XCTestCase {
         sut.itemQueue.head = nil
         
         //when 10을추가해주면
-        sut.enqueue(10)
+        sut.enqueue("10")
         
         //then ItemQueue의 head가10입니다.
-        XCTAssertEqual(10, sut.itemQueue.head?.data)
+        XCTAssertEqual("10", sut.itemQueue.head?.data)
     }
     
     func test_enqueue메서드_itemQueue가비어있지않을때_10을추가해주면_마지막노드가10이다() throws {
         //given ItemQueue에 Node 1을 갖고있을 때
-        sut.enqueue(1)
+        sut.enqueue("1")
         
         //when 2를 추가해주면
-        sut.enqueue(2)
+        sut.enqueue("2")
         
         //then ItemQueue의 마지막 Node가 2이다.
-        XCTAssertEqual(2, sut.itemQueue.head?.next?.data)
+        XCTAssertEqual("2", sut.itemQueue.head?.next?.data)
     }
     
     func test_dequeue메서드_itemQueue가비어있을때사용하면_여전히head가nil이다() throws {
@@ -62,24 +62,24 @@ class CalculatorTests: XCTestCase {
     
     func test_dequeue메서드_itemQueue가비어있지않을때_제일앞Node를지워준다() throws {
         //given ItemQueue가 1,2,3을 갖고있을때
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.enqueue(3)
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
         
         //when dequeue메서드를 호출하면
         sut.dequeue()
         
         //then ItemQueue는 1이지워진 2,3을 갖고있다.
-        XCTAssertEqual(2, sut.itemQueue.head?.data)
-        XCTAssertEqual(3, sut.itemQueue.head?.next?.data)
+        XCTAssertEqual("2", sut.itemQueue.head?.data)
+        XCTAssertEqual("3", sut.itemQueue.head?.next?.data)
         XCTAssertEqual(nil, sut.itemQueue.head?.next?.next?.data)
     }
     
     func test_clear메서드_itemQueue를전부지워준다() {
         //given ItemQueue가 1,2,3을 갖고있을때
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.enqueue(3)
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
         
         //when clear메서드를 호출하면
         sut.clear()
