@@ -17,11 +17,7 @@ struct CalculatorItemQueue: CalculateItem {
     mutating func dequeue() {
         self.itemQueue.removeFirst()
     }
-    
-    func confirmFirst() -> String? {
-        return self.itemQueue.head?.data
-    }
-    
+
     mutating func clear() {
         self.itemQueue.head = nil
     }
