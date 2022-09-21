@@ -42,4 +42,17 @@ class CalculatorModelTests: XCTestCase {
         // then
         XCTAssertEqual(result, true)
     }
+    
+    func test_enqueue() {
+        // given
+        let input = ["1", "+", "3"]
+        
+        // when
+        for element in input {
+            sut.enqueue(element)
+        }
+        
+        // then
+        XCTAssertEqual(sut.queue, ["1", "+", "3"])
+    }
 }
