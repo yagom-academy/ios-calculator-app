@@ -15,8 +15,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return front == nil
     }
     
-    mutating func enQueue(_ item: T) {
-        let newNode: Node<T>? = Node(data: item)
+    mutating func enqueue(_ item: T) {
+        let newNode = Node(data: item)
         
         if isEmpty() {
             front = newNode
@@ -27,7 +27,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         } 
     }
     
-    mutating func deQueue() -> T? {
+    mutating func dequeue() -> T? {
         if !isEmpty() {
             guard let data = front?.data else { return nil }
             front = front?.next
