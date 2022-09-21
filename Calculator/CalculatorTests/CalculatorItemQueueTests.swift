@@ -15,11 +15,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
     
     func test_큐가_비어있는_상태에서_pop_하면_nil() {
         // given
