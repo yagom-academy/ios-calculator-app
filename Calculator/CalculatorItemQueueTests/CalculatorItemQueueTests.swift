@@ -8,8 +8,8 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests <T>: XCTestCase {
-    var sut: CalculatorItemQueue<String >! = CalculatorItemQueue()
+class CalculatorTests: XCTestCase {
+    var sut: CalculatorItemQueue<String>! = CalculatorItemQueue()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -59,9 +59,12 @@ class CalculatorTests <T>: XCTestCase {
         sut.enqueue("2")
         sut.enqueue("3")
         
-        //when then 제거되고 반환되는 값은 1이다
+        //when: dequeue메서드 사용시
+        let firstNode = sut.dequeue()
+        
+        //then: 제거되고 반환되는 값은 1이다
         XCTAssertNotEqual("1", sut.itemQueue?.head?.data)
-        XCTAssertEqual("1", sut.dequeue()?.data)
+        XCTAssertEqual("1", firstNode?.data)
     }
 
     func test_clear_큐에담긴값들을지워준다() {
