@@ -5,9 +5,6 @@
 
 protocol CalculateItem { }
 
-extension Int: CalculateItem { }
-extension Double: CalculateItem { }
-
 struct CalculatorItemQueue<Element: CalculateItem> {
     var inputStack: [Element] = []
     var outputStack: [Element] = []
