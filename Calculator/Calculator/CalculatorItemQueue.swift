@@ -47,10 +47,7 @@ struct CalculatorItemQueue {
     
     @discardableResult
     mutating func dequeue() -> CalculateItem? {
-        guard data.first != nil else {
-            return nil
-        }
-        return data.removeFirst()
+        return data.popFirst()
     }
     
     mutating func clear() {
