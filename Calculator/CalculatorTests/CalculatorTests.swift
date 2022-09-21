@@ -1,12 +1,6 @@
 //
-//  CalculatorTests2.swift
-//  CalculatorTests2
-//
-//  Created by 맹선아 on 2022/09/20.
-//
-//
-//  CalculatorTests.swift
-//  CalculatorTests
+//  CalculatorItemQueueTests.swift
+//  CalculatorItemQueueTests
 //
 //  Created by 맹선아 on 2022/09/20.
 //
