@@ -98,29 +98,4 @@ class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(sut.count, 0)
     }
-    
-    func test_큐에4개의값을넣고_4개의_값을_빼냈을때_4번째로_빼낸값이_존재하는지(){
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        
-        XCTAssertNotNil(sut.dequeue())
-    }
-    
-    func test_큐에4개의값을넣고_5개의_값을_빼냈을때_5번째로빼낸값이_Nil인지(){
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        sut.dequeue()
-        
-        XCTAssertNil(sut.dequeue())
-    }
 }
