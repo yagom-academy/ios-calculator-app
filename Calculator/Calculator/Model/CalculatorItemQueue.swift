@@ -12,12 +12,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
         let node = Node<T>(data: element)
         if isEmpty {
             head = node
-            tail = node
-            head?.next = tail
+        } else if count == 1 {
+            head?.next = node
         } else {
             tail?.next = node
-            tail = node
         }
+        tail = node
         self.count += 1
     }
     
