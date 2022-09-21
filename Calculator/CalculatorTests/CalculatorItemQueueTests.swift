@@ -21,96 +21,108 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_push50개_잘_들어가는지() {
-        for _ in 1...50 {
-            sut.enqueue("test")
-        }
+    func test_큐가_비어있는_상태에서_pop_하면_nil() {
+        // given
+        XCTAssertEqual(sut.isEmpty(), true)
+        
+        // when
+        let data = sut.dequeue()
 
+        // then
+        XCTAssertNil(data)
+    }
+    
+    func test_testWord를_50개_넣었을_때_count가_50() {
+        // given
+        let testWord = "test"
+        
+        // when
+        for _ in 1...50 {
+            sut.enqueue(testWord)
+        }
+        
+        // then
         XCTAssertEqual(sut.count, 50)
     }
-
-    func test_push50개_이후_pop50개() {
-        for _ in 1...50 {
-            sut.enqueue("test")
+    
+    func test_queue에_값을_넣었을_때_head가_nil이_아님() {
+        // given
+        let testWord = "test"
+        
+        // when
+        sut.enqueue(testWord)
+        
+        // then
+        XCTAssertNotNil(sut.head)
+    }
+    
+    func test_큐에_1_2_3_4_값을_넣으면_순서대로_1_2_3_4_들어있는지_확인() {
+        // given
+        let elements = ["1", "2", "3", "4"]
+        var popedElement: [String?] = []
+        
+        // when
+        elements.forEach { element in
+            sut.enqueue(element)
         }
+        
+        while sut.head != nil {
+            let element = sut.dequeue()
+            popedElement.append(element)
+        }
+        
+        // then
+        XCTAssertEqual(popedElement, elements)
+    }
+    
+    func test_값이_있는데_dequeue를_실행하면_data값을_반환() {
+        // given
+        sut.enqueue("test")
+        
+        // when
+        let data = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(data, "test")
+    }
+    
+    func test_큐가_비어있는데_dequeue를_실행하면_nil() {
+        // given
+        
+        // when
+        let data = sut.dequeue()
+        
+        // then
+        XCTAssertNil(data)
+    }
+    
+    func test_testWord를_50개_넣은_후_50개를_제거했을_때_count가_0() {
+        // given
+        let testWord = "test"
 
-        XCTAssertEqual(sut.count, 50)
-
+        // when
+        for _ in 1...50 {
+            sut.enqueue(testWord)
+        }
+        
         for _ in 1...50 {
             let data = sut.dequeue()
             XCTAssertNotNil(data)
         }
 
-        XCTAssertEqual(sut.count, 0)
-    }
-
-    func test_비어있는상태에서_pop_하면_nil() {
-        let data = sut.dequeue()
-
-        XCTAssertNil(data)
-    }
-    
-    func test_enqueue_값을_넣었을_때_head가_nil이_아님() {
-        sut.enqueue("test")
-        
-        XCTAssertFalse(sut.isEmpty())
-    }
-    
-    func test_enqueue_값이_잘_연결되어있는지_확인() {
-        sut.enqueue("1")
-        sut.enqueue("2")
-        sut.enqueue("3")
-        sut.enqueue("4")
-        
-        XCTAssertEqual(sut.head?.data, "1")
-        XCTAssertEqual(sut.head?.next?.data, "2")
-        XCTAssertEqual(sut.head?.next?.next?.data, "3")
-        XCTAssertEqual(sut.head?.next?.next?.next?.data, "4")
-        XCTAssertEqual(sut.tail?.data, "4")
-    }
-    
-    func test_dequeue_값이_있는데_실행하면_data값을_반환() {
-        sut.enqueue("test")
-        let data = sut.dequeue()
-        
-        XCTAssertEqual(data, "test")
-    }
-    
-    func test_dequeue_값이_없는데_실행하면_nil() {
-        let data = sut.dequeue()
-        
-        XCTAssertNil(data)
-    }
-    
-    func test_dequeue_값이_잘빠지는지_확인() {
-        sut.enqueue("1")
-        sut.enqueue("2")
-        sut.enqueue("3")
-        sut.enqueue("4")
-        
-        XCTAssertEqual(sut.dequeue(), "1")
-        XCTAssertEqual(sut.count, 3)
-        
-        XCTAssertEqual(sut.dequeue(), "2")
-        XCTAssertEqual(sut.count, 2)
-        
-        XCTAssertEqual(sut.dequeue(), "3")
-        XCTAssertEqual(sut.count, 1)
-        
-        XCTAssertEqual(sut.dequeue(), "4")
-        XCTAssertEqual(sut.count, 0)
-        
-        XCTAssertNil(sut.dequeue())
+        // then
         XCTAssertEqual(sut.count, 0)
     }
     
-    func test_값을_넣고_clearQueue_실행_시_head_tail_이_nil() {
-        sut.enqueue("test")
+    func test_값을_넣고_clearQueue_실행_시_head와_tail_이_nil() {
+        // given
+        let testWord = "test"
         
-        XCTAssertFalse(sut.isEmpty())
-        
+        // when
+        sut.enqueue(testWord)
         sut.clearQueue()
         
+        // then
         XCTAssertTrue(sut.isEmpty())
     }
 
