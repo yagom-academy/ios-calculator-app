@@ -17,7 +17,7 @@ class ExpressionParserTests: XCTestCase {
         
     }
     
-    func test_정상적으로_parse되는지() {
+    func test_string값의_식의_결과값이_356일때_string내부의값을_parse하여_연산한_결과값이_356와일치하는지() {
         let result: Double = 356
         var parse = try? ExpressionParser.parse(from: "123+233")
         
