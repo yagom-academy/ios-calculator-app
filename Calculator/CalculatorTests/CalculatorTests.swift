@@ -22,9 +22,9 @@ class CalculatorTests: XCTestCase {
         }
     }
     func test_3개의값이_큐에_정상적으로_추가되는지() {
-        sut.enqueue(element: 10)
-        sut.enqueue(element: 100)
-        sut.enqueue(element: 200)
+        sut.enqueue(element: 10.0)
+        sut.enqueue(element: 100.0)
+        sut.enqueue(element: 200.0)
         let result: [Double] = sut.queue
         XCTAssertEqual(result, [10, 100, 200])
     }
