@@ -20,126 +20,88 @@ class LinkedListTests: XCTestCase {
         try super .tearDownWithError()
         sut = nil
     }
+    
+    func test_초기화후에_리스트는비어있다() {
+        //given: setUpWithError메서드에서 초기화로 리스트가 비어있을 때
+        //when, then: 리스트는 비어있다.
+        XCTAssertTrue(sut.isEmpty())
+    }
 
-    func test_append메서드_head가nil일때_1추가시_head가같은수인지확인() {
-        //given head가 nil일 때
-        sut.head = nil
-        
-        //when append메서드로 1추가시
+    func test_append_리스트가비어있을때_1추가시_마지막값_1() {
+        //given: setUpWithError메서드에서 초기화로 리스트가 비어있을 때
+        //when: 1 추가시
         sut.append("1")
-        
-        //then 추가해준 1과 sut의 head프로퍼티값이 같다.
-        XCTAssertEqual("1", sut.head?.data)
+
+        //then: 1이 마지막값으로 추가된다.
+        XCTAssertEqual("1", sut.removeLast()?.data)
     }
-    
-    func test_append메서드_head가nil이아니_1_2가담겨있을때_3추가시_추가되었는지확인() {
-        //given 1,2가 담겨있을 때
+
+    func test_append_리스트가비어있지않을때_3추가시_마지막값_3() {
+        //given: 1,2가 담겨있을 때
         sut.append("1")
         sut.append("2")
-        
-        //when append메서드로 3을 추가해주면
+
+        //when: 3 추가 시
         sut.append("3")
-        
-        //then 추가해준 3이 Linked된 노드 세번째에 담겨있다.
-        XCTAssertEqual("3", sut.head?.next?.next?.data)
+
+        //then: 3이 마지막값으로 추가된다.
+        XCTAssertEqual("3", sut.removeLast()?.data)
     }
     
-    func test_last프로퍼티_head가nil일때_nil반환() {
-        //given head가 nil일때
-        sut.head = nil
-        
-        //when last는
-        let last: Node? = sut.last
-        
-        //then nil이다
-        XCTAssertNil(last)
+    func test_last_리스트가비어있을때_nil() {
+        //given: setUpWithError메서드에서 초기화로 리스트가 비어있을 때
+        //when,then: last는 nil이다
+        XCTAssertNil(sut.last)
     }
-    
-    func test_last프로퍼티_1_2_3이담겨있을때_3반환() {
+
+    func test_last_리스트에1_2_3이담겨있을때_3() {
+        //given: 1,2,3이 담겨있을 때
+        sut.append("1")
+        sut.append("2")
+        sut.append("3")
+
+        //when, then: last는 3이다
+        XCTAssertEqual("3", sut.last?.data)
+    }
+
+    func test_removeLast_리스트가비어있을때_반환값nil() {
+        //given: setUpWithError메서드에서 초기화로 리스트가 비어있을 때
+        //when, then: nil을 반환한다.
+        XCTAssertNil(sut.removeLast())
+    }
+
+    func test_removeLast_리스트에_1_2_3이담겨있을때_제거되고_반환되는값_3() {
+        //given: 1,2,3이 담겨있을 때
+        sut.append("1")
+        sut.append("2")
+        sut.append("3")
+
+        //when: 마지막을 지워줄 시
+        let lastNode = sut.removeLast()
+
+        //then: 제거되고 반환되는 값은 3이다
+        XCTAssertNotEqual("3", sut.last?.data)
+        XCTAssertEqual("3", lastNode?.data)
+    }
+
+    func test_removeFirst_리스트가비어있을때_반환값nil() {
+        //given setUpWithError메서드에서 초기화로 리스트가 비어있을 때
+        //when, then nil을 반환한다.
+        XCTAssertNil(sut.removeFirst())
+    }
+
+    func test_removeFirst_리스트에_1_2_3이담겨있을때_제거되고_반환되는값_1() {
         //given 1,2,3이 담겨있을 때
         sut.append("1")
         sut.append("2")
         sut.append("3")
-        
-        //when last는
-        let last: Node? = sut.last
-        
-        //then 3이다
-        XCTAssertEqual("3", last?.data)
-    }
-    
-    func test_removeLast메서드_head가nil일때_그대로nil확인() {
-        //given head가 nil일 때
-        sut.head = nil
-        
-        //when 메서드를 작동하면
-        sut.removeLast()
-        
-        //then head는 여전히 nil이다
-        XCTAssertNil(sut.head)
-    }
-    
-    func test_removeLast메서드_head가nil이아니고_head만있을때_head제거확인() {
-        //given 1이 담겨있을 때
-        sut.append("1")
-        
-        //when 1을 지워주면
-        sut.removeLast()
-        
-        //then head는 nil이다
-        XCTAssertEqual(nil, sut.head?.data)
-    }
-    
-    func test_removeLast메서드_head가nil이아니고_1_2_3이담겨있을때_마지막수제거확인() {
-        //given 1,2,3이 담겨있을 때
-        sut.append("1")
-        sut.append("2")
-        sut.append("3")
-        
-        //when 3을 지워주면
-        sut.removeLast()
-        
-        //then Linked된 노드 세번째는 nil이다
-        XCTAssertEqual("1", sut.head?.data)
-        XCTAssertEqual("2", sut.head?.next?.data)
-        XCTAssertEqual(nil, sut.head?.next?.next?.data)
-    }
-    
-    func test_removeFirst메서드_head가nil일때_그대로nil확인() {
-        //given head가 nil일 때
-        sut.head = nil
-        
-        //when 메서드를 작동하면
-        sut.removeFirst()
-        
-        //then head는 여전히 nil이다
-        XCTAssertNil(sut.head)
-    }
-    
-    func test_removeFirst메서드_head가nil이아니고_head만있을때_head제거확인() {
-        //given 1이 담겨있을 때
-        sut.append("1")
-        
-        //when 1을 지워주면
-        sut.removeFirst()
-        
-        //then head는 nil이다
-        XCTAssertEqual(nil, sut.head?.data)
-    }
-    
-    func test_removeFirst메서드_head가nil이아니고_1_2_3이담겨있을때_첫번째수제거확인() {
-        //given 1,2,3이 담겨있을 때
-        sut.append("1")
-        sut.append("2")
-        sut.append("3")
-        
-        //when 1을 지워주면
-        sut.removeFirst()
-        
-        //then head가2가되고, head.next는 3이되고, 세번째는 nil이된다.
-        XCTAssertEqual("2", sut.head?.data)
-        XCTAssertEqual("3", sut.head?.next?.data)
-        XCTAssertEqual(nil, sut.head?.next?.next?.data)
+
+        //when 1을 지우면
+        let firstNode = sut.removeFirst()
+
+        //then: 제거되고 반환되는 값은 1이다
+        XCTAssertNotEqual("1", sut.head?.data)
+        XCTAssertEqual("1", firstNode?.data)
     }
 }
 
