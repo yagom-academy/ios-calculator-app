@@ -23,7 +23,7 @@ class CalculatorItemQueueTests: XCTestCase {
 
     func test_isCheckEmpty_를호출하면_true가나오는지() {
         let isTrue: Bool = true
-        let result = sut?.isCheckEmpty()
+        let result = sut?.isEmpty()
         
         XCTAssertEqual(isTrue, result)
     }

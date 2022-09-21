@@ -11,30 +11,26 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var front: Node<T>?
     var rear: Node<T>?
     
-    func isCheckEmpty() -> Bool {
-        if front == nil {
-            return true
-        } else {
-            return false
-        }
+    func isEmpty() -> Bool {
+        return front == nil
     }
     
     mutating func enQueue(_ item: T) {
         let newNode: Node<T>? = Node(data: item)
         
-        if isCheckEmpty() {
+        if isEmpty() {
             front = newNode
             rear = newNode
         } else {
-            rear?.link = newNode
+            rear?.next = newNode
             rear = newNode
         } 
     }
     
     mutating func deQueue() -> T? {
-        if !isCheckEmpty() {
+        if !isEmpty() {
             guard let data = front?.data else { return nil }
-            front = front?.link
+            front = front?.next
             changeRear()
             
             return data
@@ -45,13 +41,13 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func changeRear() {
-        if isCheckEmpty() {
+        if isEmpty() {
             rear = nil
         }
     }
     
     func peek() -> T? {
-        if !isCheckEmpty() {
+        if !isEmpty() {
             let data = front?.data
             return data
         } else {
