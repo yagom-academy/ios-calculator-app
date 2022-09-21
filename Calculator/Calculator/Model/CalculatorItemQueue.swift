@@ -11,18 +11,18 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    var inputStack: [T] = []
-    var outputStack: [T] = []
+struct CalculatorItemQueue<Item: CalculateItem> {
+    var inputStack: [Item] = []
+    var outputStack: [Item] = []
     var isEmpty: Bool {
         return inputStack.isEmpty && outputStack.isEmpty
     }
     
-    mutating func enqueue(item: T) {
+    mutating func enqueue(item: Item) {
         inputStack.append(item)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Item? {
         if isEmpty { return nil }
         
         if outputStack.isEmpty {
