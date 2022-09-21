@@ -22,7 +22,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_큐에_정상적인_값이_들어가는지() {
+    func test_크기가0인_큐에_값을넣었을때_크기가1이되는지() {
         let value = Double.random(in: 0...10)
         let preQueueCount = sut.count
         
@@ -32,26 +32,24 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_큐에서_정상적으로_첫번째_값이_빠지는지() {
-        var numArray: Set<Double> = []
+        var numbers: Set<Double> = []
         var firstValue: Double?
         var loopCount: Int = 0
         
         for _ in 1...10 {
-            numArray.update(with: Double.random(in: 0...10))
+            numbers.update(with: Double.random(in: 0...10))
         }
         
-        numArray.forEach {
+        numbers.forEach {
             if loopCount == 0 { firstValue = $0 }
             sut.enqueue($0)
             loopCount += 1
         }
         
-        
         XCTAssertEqual(firstValue, sut.dequeue() as? Double)
-        
     }
     
-    func test_큐에10개의값이들어가고_3개의값이빠졌을때_값이7인지() {
+    func test_큐에10개의값이들어가고_3개의값이빠졌을때_7개의값이존재하는지() {
         for _ in 1...10 {
             sut.enqueue(Double.random(in: 0...10))
         }
