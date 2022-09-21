@@ -8,8 +8,13 @@
 class CalculatorItemQueue {
     private var enqueue: [CalculateItem] = []
     private var dequeue: [CalculateItem] = []
+    
     var isEmpty: Bool {
         return enqueue.isEmpty && dequeue.isEmpty
+    }
+    
+    var count: Int {
+        return enqueue.count + dequeue.count
     }
     
     func push(_ element: CalculateItem) {
