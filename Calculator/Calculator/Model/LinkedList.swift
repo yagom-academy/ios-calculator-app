@@ -69,6 +69,3 @@ struct LinkedList {
         return firstNode
     }
 }
-
-
-
