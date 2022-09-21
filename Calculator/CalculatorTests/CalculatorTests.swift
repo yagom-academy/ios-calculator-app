@@ -21,7 +21,7 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue개수와_count개수가_동일한지_확인() {
+    func test_enqueue와_count가_정상적으로_동작하는지_확인() {
         // Given
         sut.enqueue(element: 1)
         sut.enqueue(element: "+")
