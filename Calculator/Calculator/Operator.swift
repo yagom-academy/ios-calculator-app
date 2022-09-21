@@ -1,9 +1,6 @@
-//
 //  Operator.swift
 //  Calculator
-//
 //  Created by LJ on 2022/09/20.
-//
 
 import Foundation
 

@@ -1,9 +1,6 @@
-//
 //  CalculatorTests.swift
 //  CalculatorTests
-//
 //  Created by LJ on 2022/09/19.
-//
 
 import XCTest
 @testable import Calculator
