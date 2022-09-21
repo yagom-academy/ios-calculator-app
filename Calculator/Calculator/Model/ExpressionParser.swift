@@ -12,6 +12,7 @@ enum ExpressionParser {
         componentsByOperator(from: input).compactMap{ Double($0) }.forEach {
             formula.operands.enqueue($0)
         }
+    
         try input.compactMap { Double(String($0)) == nil ? $0 : nil }.forEach {
             guard let operatorSymbol = Operator(rawValue: $0) else { throw CalculatorError.operatorError }
             formula.operators.enqueue(operatorSymbol)
@@ -21,6 +22,6 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperator(from input: String) -> [String] {
-        return input.compactMap { Double(String($0)) != nil ? String($0) : " " }.joined().components(separatedBy: " ")
+        return input.components(separatedBy: ["+","-","*","/"])
     }
 }
