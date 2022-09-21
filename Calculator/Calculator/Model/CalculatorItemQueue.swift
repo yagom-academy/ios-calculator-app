@@ -23,7 +23,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     init() { }
     
-    init(_ elements: [Element]) {
+    init(elements: [Element]) {
         self.inputStack = elements
     }
     
