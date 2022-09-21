@@ -64,7 +64,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(count, 3)
     }
     
-    func test_queue에서_clear가_정상적으로_동작하는지_확인() {
+    func test_queue에서_clear와_isEmpty가_정상적으로_동작하는지_확인() {
         // Given
         sut.enqueue(element: 1)
         sut.enqueue(element: "+")
@@ -72,9 +72,11 @@ final class CalculatorTests: XCTestCase {
         
         // When
         sut.clear()
+        let result = sut.isEmpty()
         let count = sut.count
         
         // Then
+        XCTAssertEqual(result, true)
         XCTAssertEqual(count, 0)
     }
 }
