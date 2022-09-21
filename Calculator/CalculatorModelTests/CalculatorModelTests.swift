@@ -29,6 +29,17 @@ class CalculatorModelTests: XCTestCase {
         let result: Int = sut.count
         
         // then
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_returnIsQueueEmpty() {
+        // given
+        
+        
+        // when
+        let result: Bool = sut.isEmpty
+        
+        // then
+        XCTAssertEqual(result, true)
     }
 }

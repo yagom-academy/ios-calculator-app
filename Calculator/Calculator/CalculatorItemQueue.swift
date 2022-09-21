@@ -8,4 +8,8 @@ struct CalculatorItemQueue: CalculateItem {
         return queue.count
     }
     
+    var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
 }
