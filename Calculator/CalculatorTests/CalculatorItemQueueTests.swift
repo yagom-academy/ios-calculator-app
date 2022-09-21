@@ -6,7 +6,7 @@
 import XCTest
 @testable import Calculator
 
-final class CalculatorTests: XCTestCase {
+final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue!
     
     override func setUpWithError() throws {
