@@ -28,22 +28,12 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() -> T? {
-        if !isEmpty() {
-            guard let data = front?.data else { return nil }
-            front = front?.next
-            return data
-        } else {
-            print("비어있습니다")
-            return nil
-        }
+        let data = front?.data
+        front = front?.next
+        return data
     }
     
     func peek() -> T? {
-        if !isEmpty() {
-            let data = front?.data
-            return data
-        } else {
-            return nil
-        }
+        front?.data
     }
 }
