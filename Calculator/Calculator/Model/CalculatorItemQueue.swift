@@ -6,7 +6,8 @@
 //
 
 public struct CalculatorItemQueue<T> {
-    private var data = [T] ()
+    private var data = [T]()
+    
     public init() {}
     
     public mutating func dequeue() -> T? {
