@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTests: XCTestCase {
-    var sut: LinkedList<String> = LinkedList()
+    var sut: LinkedList<String>! = LinkedList()
 
     override func setUpWithError() throws {
         try super .setUpWithError()

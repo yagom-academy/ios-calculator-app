@@ -8,8 +8,8 @@
 import Foundation
 
 struct LinkedList <T> {
-    private var head: Node<T>?
-    private var last: Node<T>? {
+    private(set) var head: Node<T>?
+    var last: Node<T>? {
         var currentNode = self.head
         
         while currentNode?.next != nil {
