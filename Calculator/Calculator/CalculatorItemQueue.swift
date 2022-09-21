@@ -2,15 +2,10 @@
 
 struct CalculatorItemQueue: CalculateItem {
     
-//    var linkedList
+    var queue: [String] = []
     
-    var isEmpty: Bool = false
-    
-    mutating func enqueue() {
-        
+    var count: Int {
+        return queue.count
     }
     
-    mutating func dequeue() {
-        
-    }
 }
