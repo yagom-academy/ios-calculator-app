@@ -37,4 +37,17 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, input)
     }
+    
+    func test_queue에_enqueue한거보다_더dequeue하면_nil을반환하는지() {
+        // given
+        let input: String = "1"
+        
+        // when
+        sut.enqueue(input)
+        sut.dequeue()
+        let result: String? = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
 }
