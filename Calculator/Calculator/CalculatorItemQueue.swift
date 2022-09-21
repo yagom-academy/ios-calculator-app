@@ -31,18 +31,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         if !isEmpty() {
             guard let data = front?.data else { return nil }
             front = front?.next
-            changeRear()
-            
             return data
         } else {
             print("비어있습니다")
             return nil
-        }
-    }
-    
-    mutating func changeRear() {
-        if isEmpty() {
-            rear = nil
         }
     }
     
