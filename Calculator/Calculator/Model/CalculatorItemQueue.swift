@@ -51,8 +51,8 @@ class CalculatorItemQueue<T>: CalculateItem {
             return
         }
         
-        while head != nil {
-            head = head?.next
+        while !isEmpty {
+           dequeue()
         }
     }
 }
