@@ -2,9 +2,9 @@
 
 struct CalculatorItemQueue: CalculateItem {
     
-    var linkedList
+//    var linkedList
     
-    var isEmpty: Bool
+    var isEmpty: Bool = false
     
     mutating func enqueue() {
         
