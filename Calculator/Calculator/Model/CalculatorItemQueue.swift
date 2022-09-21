@@ -29,19 +29,6 @@ public struct CalculatorItemQueue<T> {
         return data.count
     }
     
-    public var capacity: Int {
-        get {
-            return data.capacity
-        }
-        set {
-            return data.reserveCapacity(newValue)
-        }
-    }
-    
-    public func isFull() -> Bool? {
-        return count == data.capacity
-    }
-    
     public func isEmpty() -> Bool? {
         return data.isEmpty
     }
