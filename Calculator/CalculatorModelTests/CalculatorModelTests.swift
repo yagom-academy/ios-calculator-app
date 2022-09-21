@@ -55,4 +55,16 @@ class CalculatorModelTests: XCTestCase {
         // then
         XCTAssertEqual(sut.queue, ["1", "+", "3"])
     }
+    
+    func test_dequeue() {
+        // given
+        sut.queue = ["1", "+", "3"]
+        
+        // when
+        let result: String? = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, "1")
+        XCTAssertEqual(sut.queue, ["+", "3"])
+    }
 }
