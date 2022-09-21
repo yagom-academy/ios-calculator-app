@@ -8,7 +8,7 @@
 import Foundation
 
 class Node <T> {
-    var data: T?
+    private var data: T?
     var next: Node?
     
     init (data: T?, next: Node? = nil) {

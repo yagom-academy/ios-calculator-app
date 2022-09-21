@@ -8,8 +8,8 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue! = CalculatorItemQueue()
+class CalculatorTests <T>: XCTestCase {
+    var sut: CalculatorItemQueue<String >! = CalculatorItemQueue()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
