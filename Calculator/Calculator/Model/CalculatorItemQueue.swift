@@ -13,6 +13,7 @@ final class CalculatorItemQueue<T: CalculateItem> {
         enqueueStack.append(element)
     }
     
+    @discardableResult
     func dequeue() -> T? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
