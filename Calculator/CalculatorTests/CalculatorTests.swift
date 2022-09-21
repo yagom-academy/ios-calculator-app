@@ -48,4 +48,19 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result as! Int, 1)
         XCTAssertEqual(count, 2)
     }
+    
+    func test_queue에서_peek가_정상적으로_동작하는지_확인() {
+        // Given
+        sut.enqueue(element: 1)
+        sut.enqueue(element: "+")
+        sut.enqueue(element: 2)
+        
+        // When
+        let result = sut.peek()
+        let count = sut.count
+        
+        // Then
+        XCTAssertEqual(result as! Int, 1)
+        XCTAssertEqual(count, 3)
+    }
 }
