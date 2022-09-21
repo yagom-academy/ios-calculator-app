@@ -38,8 +38,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2]
         
         //when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
+        input.forEach {
+            sut.enqueue($0)
+        }
         
         //then
         XCTAssertEqual(input[0], sut.head?.data)
@@ -51,9 +52,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2,3]
         
         //when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
-        sut.enqueue(input[2])
+        input.forEach {
+            sut.enqueue($0)
+        }
         
         //then
         XCTAssertEqual(input[0], sut.head?.data)
@@ -84,9 +85,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2,3]
         
         //when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
-        sut.enqueue(input[2])
+        input.forEach {
+            sut.enqueue($0)
+        }
         
         //then
         XCTAssertEqual(input[0], sut.dequeue())
@@ -97,9 +98,9 @@ class CalculatorItemQueueTests: XCTestCase {
         let input = [1,2,3]
         
         //when
-        sut.enqueue(input[0])
-        sut.enqueue(input[1])
-        sut.enqueue(input[2])
+        input.forEach {
+            sut.enqueue($0)
+        }
         
         //then
         XCTAssertEqual(input[0], sut.dequeue())
