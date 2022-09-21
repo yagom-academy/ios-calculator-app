@@ -11,18 +11,18 @@ struct CalculatorItemQueue: CalculateItem {
     var itemQueue: LinkedList = LinkedList()
     
     mutating func enqueue(_ data: String) {
-        itemQueue.append(data)
+        self.itemQueue.append(data)
     }
     
     mutating func dequeue() {
-        itemQueue.removeFirst()
+        self.itemQueue.removeFirst()
     }
     
     func confirmFirst() -> String? {
-        return itemQueue.head?.data
+        return self.itemQueue.head?.data
     }
     
     mutating func clear() {
-        itemQueue.head = nil
+        self.itemQueue.head = nil
     }
 }

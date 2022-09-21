@@ -10,7 +10,7 @@ import Foundation
 struct LinkedList {
     var head: Node<String>?
     var last: Node<String>? {
-        var currentNode = head
+        var currentNode = self.head
         
         while currentNode?.next != nil {
             currentNode = currentNode?.next
@@ -25,7 +25,7 @@ struct LinkedList {
             return
         }
         
-        var currentNode = head
+        var currentNode = self.head
         
         while currentNode?.next != nil {
             currentNode = currentNode?.next
@@ -44,7 +44,7 @@ struct LinkedList {
             return 
         }
         
-        var currentNode = head
+        var currentNode = self.head
         
         while currentNode?.next?.next != nil {
             currentNode = currentNode?.next
@@ -54,9 +54,9 @@ struct LinkedList {
     }
     
     mutating func removeFirst() {
-        var currentNode = head
+        var currentNode = self.head
         
-        head = currentNode?.next
+        self.head = currentNode?.next
         currentNode = nil
     }
 }
