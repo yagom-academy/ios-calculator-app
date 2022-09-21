@@ -24,16 +24,17 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_1더하기2를_enqueue하고_dequeue하면_1더하기2가_그대로나오는지() {
+        // given
         let input: Array<String> = ["1", "+", "2"]
         
+        // when
         input.forEach { sut.enqueue($0) }
         var result: Array<String> = []
         for _ in 0...2 {
-            if let returnValue = sut.dequeue() {
-                result.append(returnValue)
-            }
+            result.append(sut.dequeue()!)
         }
         
+        // then
         XCTAssertEqual(result, input)
     }
 }
