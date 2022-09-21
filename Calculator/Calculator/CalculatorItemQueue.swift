@@ -1,42 +1,44 @@
 //  Created by bella on 2022/09/19.
 
 struct CalculatorItemQueue<T: CalculateItemProtocol> {
-    private var leftStack: [T] = []
-    private var rightStack: [T] = []
+    private(set) var dequeueStack: [T] = []
+    private(set) var enqueueStack: [T] = []
     
-    @discardableResult mutating func enqueue(element: T) -> [T] {
-        rightStack.append(element)
-        return rightStack
+    @discardableResult
+    mutating func enqueue(element: T) -> [T] {
+        enqueueStack.append(element)
+        return enqueueStack
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
-        if leftStack.isEmpty {
-            leftStack = rightStack.reversed()
-            rightStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return leftStack.popLast()
+        return dequeueStack.popLast()
     }
     
     mutating func count() -> Int {
-        return leftStack.count + rightStack.count
+        return dequeueStack.count + enqueueStack.count
     }
     
     func isEmpty() -> Bool {
-        return leftStack.isEmpty && rightStack.isEmpty
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
     
     mutating func clear() {
-        leftStack.removeAll()
-        rightStack.removeAll()
+        dequeueStack.removeAll()
+        enqueueStack.removeAll()
     }
     
+    
     mutating func peek() -> T? {
-        if leftStack.isEmpty {
-            leftStack = rightStack.reversed()
-            rightStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        guard leftStack.count != 0 else { return nil }
-        return leftStack[leftStack.count - 1]
+          return dequeueStack.last
     }
 }
 
