@@ -22,8 +22,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func clear() {
-        dequeueStack = []
-        enqueueStack = []
+        dequeueStack.removeAll()
+        enqueueStack.removeAll()
     }
     
     @discardableResult
@@ -45,3 +45,4 @@ struct CalculatorItemQueue<T: CalculateItem> {
         }
     }
 }
+
