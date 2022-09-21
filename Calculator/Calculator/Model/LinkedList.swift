@@ -68,4 +68,8 @@ struct LinkedList <T> {
         self.head = firstNode?.next
         return firstNode
     }
+    
+    mutating func isEmpty() -> Bool {
+        self.head == nil ? true : false
+    }
 }
