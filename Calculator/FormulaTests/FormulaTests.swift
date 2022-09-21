@@ -21,7 +21,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func test_1더하기_1을했을때_2이_되는지() {
+    func test_1더하기_1을했을때_2의_결과값을갖는지() {
         let result: Double = 2
         
         sut.operands.enqueue(1)
@@ -31,7 +31,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_마이너스연산을_두번했을시_정상적으로_마이너스값이나오는지() {
+    func test_0에서_마이너스1을_두번시도했을때_마이너스2의_결과값을갖는지() {
         let result: Double = -2
         
         sut.operands.enqueue(0)
@@ -43,7 +43,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_더하기연산을_100번할시_성공하는지(){
+    func test_랜덤값의_더하기연산을_100번할시_선언한_결과값의_합과_일치하는지(){
         var numbers: [Double] = []
         
         for _ in 0..<100 {
@@ -61,7 +61,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(numbers.reduce(0, +), try sut.result())
     }
     
-    func test_0을곱했을떄_결과값이_0인지(){
+    func test_곱하기_연산_중간에_0의_값이존재할때_결과값이_0인지(){
         let result: Double = 0
         
         sut.operands.enqueue(Double.random(in: 0...100))
@@ -75,7 +75,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_3을_3으로_곱했을때_결과값이9인지() {
+    func test_3을_3으로_곱했을때_결과값이_9인지() {
         let result: Double = 9
         
         sut.operands.enqueue(3)
@@ -85,7 +85,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_3을_3으로_나누었을때_결과값이1인지() {
+    func test_3을_3으로_나누었을때_결과값이_1인지() {
         let result: Double = 1
         
         sut.operands.enqueue(3)
@@ -95,7 +95,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_0으로_나누었을때_에러를던지는지() {
+    func test_3을_0으로_나누었을때_에러를던지는지() {
         sut.operands.enqueue(3)
         sut.operands.enqueue(0)
         sut.operators.enqueue(Operator.divide)
