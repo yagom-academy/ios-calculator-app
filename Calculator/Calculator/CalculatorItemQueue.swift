@@ -11,7 +11,14 @@ struct CalculatorItemQueue<T: CalculateItem> {
     mutating func enqueue(element: T) {
         return rightStack.append(element)
     }
-    mutating func dequeue() {
+
+    mutating func dequeue() -> T? {
+        reverseQueue()
+        let value: T? = leftStack.popLast()
+        return value
+    }
+    
+    mutating func reverseQueue() {
         if leftStack.isEmpty {
             leftStack = rightStack.reversed()
             rightStack.removeAll()
