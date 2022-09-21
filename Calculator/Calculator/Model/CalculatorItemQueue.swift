@@ -5,8 +5,6 @@
 //  Created by Hamo on 2022/09/20.
 //
 
-import CoreText
-
 struct CalculatorItemQueue {
     private var queue = LinkedList()
     
