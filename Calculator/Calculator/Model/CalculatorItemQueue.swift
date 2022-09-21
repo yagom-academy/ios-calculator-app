@@ -35,7 +35,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     @discardableResult
-    mutating func dequeue() -> Element {
+    mutating func dequeue() -> Element? {
+        
+        if isEmpty { return nil }
+        
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
             inputStack.removeAll()
