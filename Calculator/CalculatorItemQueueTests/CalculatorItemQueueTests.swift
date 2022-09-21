@@ -33,7 +33,9 @@ class CalculatorTests: XCTestCase {
         sut.enqueue("10")
         
         //then: 10이 마지막값으로 추가된다.
-        XCTAssertEqual("10", sut.itemQueue?.removeLast()?.data)
+        let lastData = sut.itemQueue?.last?.data
+        XCTAssertEqual("10", lastData)
+        XCTAssertNotEqual("2", lastData)
     }
     
     func test_enqueue_큐가비어있지않을때_2추가시_마지막값_2() {
@@ -44,7 +46,9 @@ class CalculatorTests: XCTestCase {
         sut.enqueue("2")
         
         //then: 2가 마지막값으로 추가된다.
-        XCTAssertEqual("2", sut.itemQueue?.removeLast()?.data)
+        let lastData = sut.itemQueue?.last?.data
+        XCTAssertEqual("2", lastData)
+        XCTAssertNotEqual("1", lastData)
     }
     
     func test_dequeue_큐가비어있을때_반환값nil() {
@@ -60,11 +64,12 @@ class CalculatorTests: XCTestCase {
         sut.enqueue("3")
         
         //when: dequeue메서드 사용시
-        let firstNode = sut.dequeue()
+        let firstData = sut.dequeue()?.data
         
         //then: 제거되고 반환되는 값은 1이다
         XCTAssertNotEqual("1", sut.itemQueue?.head?.data)
-        XCTAssertEqual("1", firstNode?.data)
+        XCTAssertEqual("1", firstData)
+        XCTAssertNotEqual("2", firstData)
     }
 
     func test_clear_큐에담긴값들을지워준다() {
