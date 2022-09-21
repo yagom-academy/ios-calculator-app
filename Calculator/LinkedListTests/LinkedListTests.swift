@@ -33,7 +33,9 @@ class LinkedListTests: XCTestCase {
         sut.append("1")
 
         //then: 1이 마지막값으로 추가된다.
-        XCTAssertEqual("1", sut.removeLast()?.data)
+        let lastDate = sut.last?.data
+        XCTAssertEqual("1", lastDate)
+        XCTAssertNotEqual("2", lastDate)
     }
 
     func test_append_리스트가비어있지않을때_3추가시_마지막값_3() {
@@ -45,7 +47,9 @@ class LinkedListTests: XCTestCase {
         sut.append("3")
 
         //then: 3이 마지막값으로 추가된다.
-        XCTAssertEqual("3", sut.removeLast()?.data)
+        let lastDate = sut.last?.data
+        XCTAssertEqual("3", lastDate)
+        XCTAssertNotEqual("2", lastDate)
     }
     
     func test_last_리스트가비어있을때_nil() {
@@ -61,7 +65,9 @@ class LinkedListTests: XCTestCase {
         sut.append("3")
 
         //when, then: last는 3이다
-        XCTAssertEqual("3", sut.last?.data)
+        let lastDate = sut.last?.data
+        XCTAssertEqual("3", lastDate)
+        XCTAssertNotEqual("2", lastDate)
     }
 
     func test_removeLast_리스트가비어있을때_반환값nil() {
@@ -82,6 +88,7 @@ class LinkedListTests: XCTestCase {
         //then: 제거되고 반환되는 값은 3이다
         XCTAssertNotEqual("3", sut.last?.data)
         XCTAssertEqual("3", lastNode?.data)
+        XCTAssertNotEqual("2", lastNode?.data)
     }
 
     func test_removeFirst_리스트가비어있을때_반환값nil() {
@@ -102,5 +109,6 @@ class LinkedListTests: XCTestCase {
         //then: 제거되고 반환되는 값은 1이다
         XCTAssertNotEqual("1", sut.head?.data)
         XCTAssertEqual("1", firstNode?.data)
+        XCTAssertNotEqual("2", firstNode?.data)
     }
 }
