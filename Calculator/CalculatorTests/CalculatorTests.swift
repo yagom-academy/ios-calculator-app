@@ -15,10 +15,22 @@ final class CalculatorTests: XCTestCase {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
+    func test_enqueue개수와_count개수가_동일한지_확인() {
+        // Given
+        sut.enqueue(element: 1)
+        sut.enqueue(element: "+")
+        sut.enqueue(element: 2)
+        
+        // When
+        let count = sut.count
+        
+        // Then
+        XCTAssertEqual(count, 3)
+    }
 }
