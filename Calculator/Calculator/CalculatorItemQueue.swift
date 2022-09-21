@@ -5,16 +5,16 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var queue: [T] = []
-    var resultQueue: [T] = []
+    var rightStack: [T] = []
+    var leftStack: [T] = []
 
     mutating func enqueue(element: T) {
-        return queue.append(element)
+        return rightStack.append(element)
     }
-    mutating func dequeue() -> [T] {
-        queue.removeFirst()
-        return queue
+    mutating func dequeue() {
+        if leftStack.isEmpty {
+            leftStack = rightStack.reversed()
+            rightStack.removeAll()
+        }
     }
 }
-
-
