@@ -7,4 +7,8 @@ protocol CalculateItem { }
 
 extension Double: CalculateItem { }
 
-extension Int: CalculateItem { }
+extension String {
+    func split(wiht target: Character) -> [String] {
+        return []
+    }
+}
