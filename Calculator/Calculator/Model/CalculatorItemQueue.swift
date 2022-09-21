@@ -24,6 +24,6 @@ struct CalculatorItemQueue <T>: CalculateItem {
     }
     
     mutating func isEmpty() -> Bool {
-        self.itemQueue == nil ? true : false
+        self.itemQueue?.head == nil ? true : false
     }
 }
