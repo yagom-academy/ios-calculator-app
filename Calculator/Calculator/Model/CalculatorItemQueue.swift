@@ -14,7 +14,7 @@ public struct CalculatorItemQueue<T> {
     }
     
     public mutating func peek() -> T? {
-        return data.first()
+        return data.first
     }
     
     public mutating func enqueue(element: T) {
@@ -26,7 +26,7 @@ public struct CalculatorItemQueue<T> {
     }
     
     public var count: Int {
-        return data.count()
+        return data.count
     }
     
     public var capacity: Int {
