@@ -5,7 +5,7 @@
 //  Created by junho lee on 2022/09/20.
 //
 
-class CalculatorItemQueue<T: CalculateItem> {
+final class CalculatorItemQueue<T: CalculateItem> {
     private var enqueueStack: Array<T> = []
     private var dequeueStack: Array<T> = []
     
