@@ -5,44 +5,42 @@
 //  Created by smfc on 19/9/2022.
 //
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    var queue: [T?] = []
-    var head: Int = 0
+struct CalculatorItemQueue<T: CalculateItem>  {
+    var leftStack: [CalculateItem] = []
+    var rightStack: [CalculateItem] = []
     
     mutating func enqueue(_ element: T) {
-        queue.append(element)
+        rightStack.append(element)
     }
     
     mutating func count() -> Int {
-        return queue.count - head
+        return leftStack.count + rightStack.count
     }
     
     func isEmpty() -> Bool {
-        return queue.isEmpty
+        return leftStack.isEmpty && rightStack.isEmpty
     }
     
     mutating func clear() {
-        queue.removeAll()
+        leftStack.removeAll()
+        rightStack.removeAll()
     }
     
     mutating func dequeue() -> T? {
-        guard head < queue.count, let element = queue[head] else {
-            return nil
+        if leftStack.isEmpty {
+            leftStack = rightStack.reversed()
+            rightStack.removeAll()
         }
-        queue[head] = nil
-        head += 1
-        
-        if head > (queue.count / 4) {
-            queue.removeFirst(head)
-            head = 0
-        }
-        return element
+        return leftStack.popLast() as? T
     }
     
     func peek() -> T? {
-        guard queue.count != head else {
+        if leftStack.isEmpty && rightStack.isEmpty {
             return nil
+        } else if leftStack.isEmpty {
+            return rightStack.first as? T
+        } else {
+            return leftStack.last as? T
         }
-        return queue[head]
     }
 }
