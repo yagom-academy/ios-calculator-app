@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     var queue: [T] = []
     var resultQueue: [T] = []
 
