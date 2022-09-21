@@ -9,7 +9,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func enqueue(_ element: T) {
-        let node = Node<T>(data: element)
+        let node: Node<T> = Node<T>(data: element)
         if isEmpty {
             head = node
         } else if count == 1 {
@@ -22,10 +22,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func dequeue() -> T? {
-        guard let currentHead = self.head else {
+        guard let currentHead: Node<T> = self.head else {
             return nil
         }
-        let nextHead = currentHead.next
+        let nextHead: Node<T> = currentHead.next
         self.head = nil
         self.head = nextHead
         self.count -= 1
