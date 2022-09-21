@@ -12,4 +12,7 @@ enum Operator: Character, CaseIterable {
     public case divide = "÷"
     public case multiply = "×"
     
+    private add(lhs: Double, rhs: Double) -> Double {
+        return lhs + rhs
+    }
 }
