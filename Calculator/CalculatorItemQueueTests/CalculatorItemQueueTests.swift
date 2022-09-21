@@ -32,20 +32,26 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_큐에서_정상적으로_첫번째_값이_빠지는지() {
-        let firstValue = Double.random(in: 0...10)
+        var numArray: Set<Double> = []
+        var firstValue: Double?
+        var loopCount: Int = 0
         
-        sut.enqueue(firstValue)
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
-        sut.enqueue(Double.random(in: 0...10))
+        for _ in 1...10 {
+            numArray.update(with: Double.random(in: 0...10))
+        }
+        
+        numArray.forEach {
+            if loopCount == 0 { firstValue = $0 }
+            sut.enqueue($0)
+            loopCount += 1
+        }
+        
         
         XCTAssertEqual(firstValue, sut.dequeue() as? Double)
         
     }
     
-    func test_큐에10개의값이들어가고_3개의값이빠졌을때_값이7인지(){
+    func test_큐에10개의값이들어가고_3개의값이빠졌을때_값이7인지() {
         for _ in 1...10 {
             sut.enqueue(Double.random(in: 0...10))
         }
@@ -64,11 +70,11 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotNil(sut.dequeue())
     }
     
-    func test_큐가비어있을때_isEmpty의값이_true인지(){
+    func test_큐가비어있을때_isEmpty의값이_true인지() {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_큐에300개의값을넣고_300개의값을뺏을때_isEmpty의값이_true인지(){
+    func test_큐에300개의값을넣고_300개의값을뺏을때_isEmpty의값이_true인지() {
         for _ in 1...300{
             sut.enqueue(Double.random(in: 0...10))
         }
