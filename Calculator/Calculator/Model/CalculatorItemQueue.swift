@@ -7,8 +7,15 @@
 
 public struct CalculatorItemQueue<T> {
     private var data = [T]()
+    public var count: Int {
+        return data.count
+    }
     
     public init() {}
+    
+    public mutating func enqueue(element: T) {
+        return data.append(element)
+    }
     
     public mutating func dequeue() -> T? {
         return data.removeFirst()
@@ -18,16 +25,8 @@ public struct CalculatorItemQueue<T> {
         return data.first
     }
     
-    public mutating func enqueue(element: T) {
-        return data.append(element)
-    }
-    
     public mutating func clear() {
         return data.removeAll()
-    }
-    
-    public var count: Int {
-        return data.count
     }
     
     public func isEmpty() -> Bool? {
