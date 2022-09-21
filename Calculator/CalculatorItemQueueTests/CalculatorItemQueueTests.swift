@@ -94,7 +94,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.removeAll()
         
         //then
-        XCTAssert(sut.head == nil)
+        XCTAssert(sut.isEmpty)
     }
     
     func test_removeAll실행시_큐에요소가없다면_종료되는지() {
@@ -104,7 +104,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.removeAll()
         
         //then
-        XCTAssert(sut.head == nil)
+        XCTAssert(sut.isEmpty)
     }
     
     func test_last프로퍼티접근시_큐에요소가없다면_nil이반환되는지() {
