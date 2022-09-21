@@ -30,7 +30,7 @@ class CalculatorTesting: XCTestCase {
         let expected = Optional([0 : Item(number: 10)])
         
         //then
-        XCTAssertEqual(expected, sut.queue["queue"])
+        XCTAssertEqual(expected, sut.queue)
     }
     
     func test_getFirst_메소드가_작동하는지_확인() {
@@ -62,6 +62,6 @@ class CalculatorTesting: XCTestCase {
         sut.removeAll()
         
         //then
-        XCTAssertEqual(sut.queue["queue"], [:])
+        XCTAssertEqual(sut.queue, [:])
     }
 }
