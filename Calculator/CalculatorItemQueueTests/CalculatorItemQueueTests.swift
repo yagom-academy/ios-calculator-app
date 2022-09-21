@@ -114,45 +114,52 @@ class CalculatorItemQueueTests: XCTestCase {
             XCTAssertEqual(sut.enqueueStack.last, input2)
         }
     
-//        func test_큐가비어있지않을때_dequeue메서드호출시_처음인덱스값이리턴되는지확인() {
-//            // given
-//            let input1 = "1"
-//            sut.enqueue(input1)
-//            let input2 = "2"
-//            sut.enqueue(input2)
-//
-//            // when
-//            let result = sut.dequeue()
-//
-//            // then
-//            XCTAssertEqual(result, input1)
-//        }
-//
-//        func test_큐가비어있는경우_dequeue메서드호출시_nil을반환하는지확인() {
-//            // given
-//            let input1 = "1"
-//            sut.enqueue(input1)
-//            sut.dequeue()
-//
-//            // when
-//            let result = sut.dequeue()
-//
-//            // then
-//            XCTAssertNil(result)
-//        }
-//
-//        func test_큐가들어있는경우_dequeue를여러번했을때해당되는요소를반환하는지확인() {
-//            // given
-//            sut.queue = ["0", "1", "2", "3"]
-//
-//            // when
-//            let _ = sut.dequeue()
-//            let _ = sut.dequeue()
-//            let result = sut.dequeue()
-//
-//            // then
-//            XCTAssertEqual(result, "2")
-//        }
+        func test_큐가비어있지않을때_dequeue메서드호출시_처음인덱스값이리턴되는지확인() {
+            // given
+            let input1 = "1"
+            sut.enqueue(input1)
+            let input2 = "2"
+            sut.enqueue(input2)
+    
+            // when
+            let result = sut.dequeue()
+    
+            // then
+            XCTAssertEqual(result, input1)
+        }
+    
+        func test_큐가비어있는경우_dequeue메서드호출시_nil을반환하는지확인() {
+            // given
+            let input1 = "1"
+            sut.enqueue(input1)
+            sut.dequeue()
+    
+            // when
+            let result = sut.dequeue()
+    
+            // then
+            XCTAssertNil(result)
+        }
+    
+        func test_큐가들어있는경우_dequeue를여러번했을때_해당되는요소를반환하는지확인() {
+            // given
+            let input1 = "1"
+            let input2 = "2"
+            let input3 = "3"
+            let input4 = "4"
+            sut.enqueue(input1)
+            sut.enqueue(input2)
+            sut.enqueue(input3)
+            sut.enqueue(input4)
+    
+            // when
+            let _ = sut.dequeue()
+            let _ = sut.dequeue()
+            let result = sut.dequeue()
+    
+            // then
+            XCTAssertEqual(result, input3)
+        }
     
     //    func test_큐가비어있을때_peek메서드호출시nil을반환하는지확인() {
     //        // given

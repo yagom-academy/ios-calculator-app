@@ -26,6 +26,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         enqueueStack = []
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
