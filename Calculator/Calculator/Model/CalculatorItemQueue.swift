@@ -5,42 +5,42 @@
 //  Created by smfc on 19/9/2022.
 //
 
-struct CalculatorItemQueue<T: CalculateItem>  {
-    var leftStack: [CalculateItem] = []
-    var rightStack: [CalculateItem] = []
+struct CalculatorItemQueue<T: CalculateItem> {
+    private(set) var dequeueStack: [T] = []
+    private(set) var enqueueStack: [T] = []
+    
+    var count: Int {
+        return dequeueStack.count + enqueueStack.count
+    }
+    
+    var isEmpty: Bool {
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
+    }
     
     mutating func enqueue(_ element: T) {
-        rightStack.append(element)
-    }
-    
-    mutating func count() -> Int {
-        return leftStack.count + rightStack.count
-    }
-    
-    func isEmpty() -> Bool {
-        return leftStack.isEmpty && rightStack.isEmpty
+        enqueueStack.append(element)
     }
     
     mutating func clear() {
-        leftStack.removeAll()
-        rightStack.removeAll()
+        dequeueStack = []
+        enqueueStack = []
     }
     
     mutating func dequeue() -> T? {
-        if leftStack.isEmpty {
-            leftStack = rightStack.reversed()
-            rightStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return leftStack.popLast() as? T
+        return dequeueStack.popLast()
     }
     
     func peek() -> T? {
-        if leftStack.isEmpty && rightStack.isEmpty {
+        if dequeueStack.isEmpty && enqueueStack.isEmpty {
             return nil
-        } else if leftStack.isEmpty {
-            return rightStack.first as? T
+        } else if dequeueStack.isEmpty {
+            return enqueueStack.first
         } else {
-            return leftStack.last as? T
+            return dequeueStack.last
         }
     }
 }
