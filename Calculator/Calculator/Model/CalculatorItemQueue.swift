@@ -5,7 +5,7 @@
 //  Created by dragon on 2022/09/21.
 //
 
-public struct Queue<T> {
+public struct CalculatorItemQueue<T> {
     private var data = [T] ()
     public init() {}
     
