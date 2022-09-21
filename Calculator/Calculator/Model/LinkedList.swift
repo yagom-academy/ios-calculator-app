@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct LinkedList {
-    var head: Node<String>?
-    var last: Node<String>? {
+struct LinkedList <T> {
+    var head: Node<T>?
+    var last: Node<T>? {
         var currentNode = self.head
         
         while currentNode?.next != nil {
@@ -19,7 +19,7 @@ struct LinkedList {
         return currentNode
     }
     
-    mutating func append(_ data: String) {
+    mutating func append(_ data: T) {
         guard self.head != nil else {
             self.head = Node(data: data)
             return
@@ -34,7 +34,7 @@ struct LinkedList {
         currentNode?.next = Node(data: data)
     }
     
-    mutating func removeLast() -> Node<String>? {
+    mutating func removeLast() -> Node<T>? {
         var  lastNode = self.head
         
         guard self.head != nil else {
@@ -58,7 +58,7 @@ struct LinkedList {
         return lastNode
     }
     
-    mutating func removeFirst() -> Node<String>? {
+    mutating func removeFirst() -> Node<T>? {
         let firstNode = self.head
         
         guard firstNode != nil else {
