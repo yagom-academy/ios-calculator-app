@@ -34,14 +34,16 @@ struct LinkedList {
         currentNode?.next = Node(data: data)
     }
     
-    mutating func removeLast() {
+    mutating func removeLast() -> Node<String>? {
+        var  lastNode = self.head
+        
         guard self.head != nil else {
-            return
+            return nil
         }
         
         guard self.head?.next != nil else {
             self.head = nil
-            return 
+            return lastNode
         }
         
         var currentNode = self.head
@@ -50,14 +52,21 @@ struct LinkedList {
             currentNode = currentNode?.next
         }
         
+        lastNode = currentNode?.next
         currentNode?.next = nil
+        
+        return lastNode
     }
     
-    mutating func removeFirst() {
-        var currentNode = self.head
+    mutating func removeFirst() -> Node<String>? {
+        let firstNode = self.head
         
-        self.head = currentNode?.next
-        currentNode = nil
+        guard firstNode != nil else {
+            return nil
+        }
+        
+        self.head = firstNode?.next
+        return firstNode
     }
 }
 

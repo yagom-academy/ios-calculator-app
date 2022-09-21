@@ -14,8 +14,9 @@ struct CalculatorItemQueue: CalculateItem {
         self.itemQueue.append(data)
     }
     
-    mutating func dequeue() {
-        self.itemQueue.removeFirst()
+    mutating func dequeue() -> Node<String>? {
+        let firstItem = self.itemQueue.removeFirst()
+        return firstItem
     }
 
     mutating func clear() {
