@@ -2,7 +2,7 @@
 //  CalculateItem.swift
 //  Calculator
 //
-//  Created by smfc on 19/9/2022.
+//  Created by meme on 19/9/2022.
 //
 
 protocol CalculateItem {
