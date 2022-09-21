@@ -19,4 +19,8 @@ enum Operator: Character, CaseIterable {
     private subtract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
     }
+    
+    private divide(lhs: Double, rhs: Double) -> Double {
+        return lhs / rhs
+    }
 }
