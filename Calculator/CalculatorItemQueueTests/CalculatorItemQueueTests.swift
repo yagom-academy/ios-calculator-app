@@ -61,7 +61,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_큐가비어있지않은경우_isEmpty메서드가_false를반환하는지확인() {
+    func test_큐가비어있지않은경우_isEmpty가_false를반환하는지확인() {
         // given
         let input1 = "1"
         let input2 = "2"
@@ -75,30 +75,21 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    //    func test_큐가비어있는경우_clear메서드호출시isEmpty로확인하면true인지확인() {
-    //        // given
-    //        sut.queue = []
-    //
-    //        // when
-    //        sut.clear()
-    //        let result = sut.isEmpty()
-    //
-    //        // then
-    //        XCTAssertTrue(result)
-    //    }
-    //
-    //    func test_큐가비어있지않은경우_clear메서드호출시isEmpty로확인하면true인지확인() {
-    //        // given
-    //        sut.queue = ["1", "2", "3", "4" , "5"]
-    //
-    //        // when
-    //        sut.clear()
-    //        let result = sut.isEmpty()
-    //
-    //        // then
-    //        XCTAssertTrue(result)
-    //    }
-    //
+    func test_큐가비어있지않은경우_clear메서드호출시_isEmpty로확인하면_true인지확인() {
+        // given
+        let input1 = "1"
+        let input2 = "2"
+        sut.enqueue(input1)
+        sut.enqueue(input2)
+        
+        // when
+        sut.clear()
+        let result = sut.enqueueStack.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
     //    func test_큐가비어있을때_enqueue메서드를통해입력되는지확인() {
     //        // given
     //        let input = "1"
