@@ -6,8 +6,8 @@
 protocol CalculateItem { }
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var inputStack: [Element] = []
-    var outputStack: [Element] = []
+    private var inputStack: [Element] = []
+    private var outputStack: [Element] = []
     
     var isEmpty: Bool {
         return inputStack.isEmpty && outputStack.isEmpty
@@ -27,8 +27,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         self.inputStack = elements
     }
     
-    mutating func enqueue(_ n: Element) {
-        inputStack.append(n)
+    mutating func enqueue(_ element: Element) {
+        inputStack.append(element)
     }
     
     @discardableResult
