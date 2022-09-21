@@ -51,52 +51,30 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, beforeCount + addCount)
     }
     
-    //    func test_큐가비어있을때_enqueue메서드를통해입력되는지확인() {
-    //        // given
-    //        let input = "1"
-    //
-    //        // when
-    //        sut.enqueue(input)
-    //
-    //        // then
-    //        XCTAssertEqual(sut.enqueueStack, [input])
-    //    }
-    //
-    //    func test_큐가이미들어있을때_enqueue로새로추가한엘리먼트가_뒤쪽으로추가되는지확인() {
-    //        // given
-    //        let input1 = "1"
-    //        sut.enqueue(input1)
-    //        let input2 = "2"
-    //
-    //        // when
-    //        sut.enqueue(input2)
-    //
-    //        // then
-    //        XCTAssertEqual(sut.enqueueStack.last, input2)
-    //    }
-    //
-    //    func test_큐가비어있는경우_isEmpty메서드가true를반환하는지확인() {
-    //        // given
-    //        sut.queue = []
-    //
-    //        // when
-    //        let result = sut.isEmpty()
-    //
-    //        // then
-    //        XCTAssertTrue(result)
-    //    }
-    //
-    //    func test_큐가비어있지않은경우_isEmpty메서드가false를반환하는지확인() {
-    //        // given
-    //        sut.queue = ["1", "2"]
-    //
-    //        // when
-    //        let result = sut.isEmpty()
-    //
-    //        // then
-    //        XCTAssertFalse(result)
-    //    }
-    //
+    func test_큐가비어있는경우_isEmpty가_true를반환하는지확인() {
+        // given
+        
+        // when
+        let result = sut.enqueueStack.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_큐가비어있지않은경우_isEmpty메서드가_false를반환하는지확인() {
+        // given
+        let input1 = "1"
+        let input2 = "2"
+        sut.enqueue(input1)
+        sut.enqueue(input2)
+        
+        // when
+        let result = sut.enqueueStack.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+    
     //    func test_큐가비어있는경우_clear메서드호출시isEmpty로확인하면true인지확인() {
     //        // given
     //        sut.queue = []
@@ -121,6 +99,32 @@ class CalculatorItemQueueTests: XCTestCase {
     //        XCTAssertTrue(result)
     //    }
     //
+    //    func test_큐가비어있을때_enqueue메서드를통해입력되는지확인() {
+    //        // given
+    //        let input = "1"
+    //
+    //        // when
+    //        sut.enqueue(input)
+    //
+    //        // then
+    //        XCTAssertEqual(sut.enqueueStack, [input])
+    //    }
+    //
+    //    func test_큐가이미들어있을때_enqueue로새로추가한엘리먼트가_뒤쪽으로추가되는지확인() {
+    //        // given
+    //        let input1 = "1"
+    //        sut.enqueue(input1)
+    //        let input2 = "2"
+    //
+    //        // when
+    //        sut.enqueue(input2)
+    //
+    //        // then
+    //        XCTAssertEqual(sut.enqueueStack.last, input2)
+    //    }
+    //
+    
+    
     //    func test_큐가비어있지않을때_dequeue메서드호출시처음인덱스값이리턴되는지확인() {
     //        // given
     //        sut.queue = ["0", "1", "2"]
