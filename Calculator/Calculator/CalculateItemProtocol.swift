@@ -4,6 +4,18 @@ protocol CalculateItemProtocol {
     
 }
 
-extension String: CalculateItemProtocol {
+extension String {
+    func split(with target: Character) -> [String] {
+        let substringArray = self.split(separator: target)
+        var stringArray:[String] = []
+        
+        substringArray.forEach{
+            stringArray.append(String($0))
+        }
+        return stringArray
+    }
+}
+
+extension Double: CalculateItemProtocol {
     
 }
