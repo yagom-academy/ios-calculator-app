@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalculatoralculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
 
     override func setUpWithError() throws {
@@ -35,6 +35,8 @@ class CalculatorTests: XCTestCase {
         //then: 10이 마지막값으로 추가된다.
         let lastData = sut.itemQueue?.last?.data
         XCTAssertEqual("10", lastData)
+        
+        //의도한 fail test
         XCTAssertNotEqual("2", lastData)
     }
     
@@ -48,6 +50,8 @@ class CalculatorTests: XCTestCase {
         //then: 2가 마지막값으로 추가된다.
         let lastData = sut.itemQueue?.last?.data
         XCTAssertEqual("2", lastData)
+        
+        //의도한 fail test
         XCTAssertNotEqual("1", lastData)
     }
     
@@ -69,6 +73,8 @@ class CalculatorTests: XCTestCase {
         //then: 제거되고 반환되는 값은 1이다
         XCTAssertNotEqual("1", sut.itemQueue?.head?.data)
         XCTAssertEqual("1", firstData)
+       
+        //의도한 fail test
         XCTAssertNotEqual("2", firstData)
     }
 

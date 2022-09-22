@@ -35,6 +35,8 @@ class LinkedListTests: XCTestCase {
         //then: 1이 마지막값으로 추가된다.
         let lastDate = sut.last?.data
         XCTAssertEqual("1", lastDate)
+        
+        //의도한 fail test
         XCTAssertNotEqual("2", lastDate)
     }
 
@@ -49,6 +51,8 @@ class LinkedListTests: XCTestCase {
         //then: 3이 마지막값으로 추가된다.
         let lastDate = sut.last?.data
         XCTAssertEqual("3", lastDate)
+        
+        //의도한 fail test
         XCTAssertNotEqual("2", lastDate)
     }
     
@@ -67,6 +71,8 @@ class LinkedListTests: XCTestCase {
         //when, then: last는 3이다
         let lastDate = sut.last?.data
         XCTAssertEqual("3", lastDate)
+        
+        //의도한 fail test
         XCTAssertNotEqual("2", lastDate)
     }
 
@@ -88,6 +94,8 @@ class LinkedListTests: XCTestCase {
         //then: 제거되고 반환되는 값은 3이다
         XCTAssertNotEqual("3", sut.last?.data)
         XCTAssertEqual("3", lastNode?.data)
+        
+        //의도한 fail test
         XCTAssertNotEqual("2", lastNode?.data)
     }
 
@@ -109,6 +117,8 @@ class LinkedListTests: XCTestCase {
         //then: 제거되고 반환되는 값은 1이다
         XCTAssertNotEqual("1", sut.head?.data)
         XCTAssertEqual("1", firstNode?.data)
+        
+        //의도한 fail test
         XCTAssertNotEqual("2", firstNode?.data)
     }
 }
