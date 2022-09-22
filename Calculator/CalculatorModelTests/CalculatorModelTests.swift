@@ -6,15 +6,18 @@ import XCTest
 
 class CalculatorModelTests: XCTestCase {
     var sut: CalculatorItemQueue!
+    var sutByLinkedList: CalculatorItemQueueByLinkedList<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
+        sutByLinkedList = CalculatorItemQueueByLinkedList<String>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
+        sutByLinkedList = nil
     }
     
     func test_enqueue가없었을때_count가0을반환하는지() {
@@ -75,5 +78,31 @@ class CalculatorModelTests: XCTestCase {
         // then
         XCTAssertEqual(result, "1")
         XCTAssertEqual(sut.queue, ["+", "3"])
+    }
+    
+//    ---
+    func test_queue에아무것도없을때isEmpty_TRUE반환하는지() {
+        // given
+        print(sutByLinkedList.front)
+        
+        // when
+        let result: Bool = sutByLinkedList.isEmpty
+        
+        // then
+        XCTAssertEqual(result, true)
+    }
+    
+    func test_linkedList에_append되는지() {
+        // given
+        let input = ["1", "+", "3"]
+        
+        // when
+        for element in input {
+            sutByLinkedList.enqueue(element)
+        }
+        
+        // then
+        XCTAssertEqual(sutByLinkedList.linkedList.head?.value, "1")
+        XCTAssertEqual(sutByLinkedList.linkedList.tail?.value, "3")
     }
 }
