@@ -17,16 +17,25 @@ struct CalculatorItemQueue {
         return enqueue.count + dequeue.count
     }
     
-    func push(_ element: CalculateItem) {
+    mutating func push(_ element: CalculateItem) {
         enqueue.append(element)
     }
     
-    func pop() -> CalculateItem? {
+    mutating func pop() -> CalculateItem? {
         if dequeue.isEmpty {
             dequeue = enqueue.reversed()
             enqueue.removeAll()
         }
         
         return dequeue.popLast()
+    }
+    
+    mutating func peek() -> CalculateItem? {
+        if dequeue.isEmpty {
+            dequeue = enqueue.reversed()
+            enqueue.removeAll()
+        }
+        
+        return dequeue.first
     }
 }

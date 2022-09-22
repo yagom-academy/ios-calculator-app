@@ -16,6 +16,7 @@
 		1AFBACE228DB123500D7E26D /* Double+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFBACE128DB123500D7E26D /* Double+CalculateItem.swift */; };
 		1AFBACEB28DB2BC200D7E26D /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFBACEA28DB2BC200D7E26D /* CalculatorItemQueueTests.swift */; };
 		1AFBACF928DBFA5500D7E26D /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFBACF828DBFA5500D7E26D /* FormulaTests.swift */; };
+		1AFBAD0028DBFB0500D7E26D /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFBACFF28DBFB0500D7E26D /* Formula.swift */; };
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
@@ -48,6 +49,7 @@
 		1AFBACEA28DB2BC200D7E26D /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		1AFBACF628DBFA5500D7E26D /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AFBACF828DBFA5500D7E26D /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
+		1AFBACFF28DBFB0500D7E26D /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				1A8681B628D874F000BE2837 /* CalculateItem.swift */,
 				1AFBACDE28DB11EA00D7E26D /* Operator+CalculateItem.swift */,
 				1AFBACE128DB123500D7E26D /* Double+CalculateItem.swift */,
+				1AFBACFF28DBFB0500D7E26D /* Formula.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9402570E5EB001C3AFC /* Calculator */,
+				1AFBACE928DB2BC200D7E26D /* CalculatorItemQueueTests */,
 				1AFBACF728DBFA5500D7E26D /* FormulaTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
@@ -147,15 +151,14 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				1A8681B328D8747B00BE2837 /* Models */,
-				1A8681B428D8748B00BE2837 /* Views */,
-				1A8681B528D8749300BE2837 /* Controllers */,
-				1AFBACE928DB2BC200D7E26D /* CalculatorItemQueueTests */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				1A8681B328D8747B00BE2837 /* Models */,
+				1A8681B428D8748B00BE2837 /* Views */,
+				1A8681B528D8749300BE2837 /* Controllers */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				1AFBACE228DB123500D7E26D /* Double+CalculateItem.swift in Sources */,
 				1AFBACDF28DB11EA00D7E26D /* Operator+CalculateItem.swift in Sources */,
 				1A8681B128D8747200BE2837 /* CalculatorItemQueue.swift in Sources */,
+				1AFBAD0028DBFB0500D7E26D /* Formula.swift in Sources */,
 				1AFBACDD28DB11CC00D7E26D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
