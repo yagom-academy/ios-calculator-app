@@ -1,8 +1,6 @@
-//
 //  Calculator - AppDelegate.swift
-//  Created by yagom. 
+//  Created by LJ. 
 //  Copyright © yagom. All rights reserved.
-// 
 
 import UIKit
 
