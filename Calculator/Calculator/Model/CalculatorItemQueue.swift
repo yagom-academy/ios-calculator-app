@@ -5,17 +5,17 @@
 //  Created by Baem on 2022/09/20.
 //
 
-struct CalculatorItemQueue: CalculatorItem {
-    private var queue: [String] = [String]()
+struct CalculatorItemQueue {
+    private var queue: [CalculatorItem] = [CalculatorItem]()
     var isEmpty: Bool {
         return queue.isEmpty ? false : true
     }
     
-    mutating func enqueue(_ element: String) {
+    mutating func enqueue(_ element: CalculatorItem) {
         queue.append(element)
     }
     
-    mutating func dequeue() -> String? {
+    mutating func dequeue() -> CalculatorItem? {
         if queue.isEmpty {
             return nil
         }
@@ -24,3 +24,4 @@ struct CalculatorItemQueue: CalculatorItem {
         return queue.first
     }
 }
+
