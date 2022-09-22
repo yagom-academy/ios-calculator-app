@@ -8,7 +8,7 @@
 struct CalculatorItemQueue {
     private var queue: [CalculatorItem] = []
     var isEmpty: Bool {
-        return queue.isEmpty ? false : true
+        return queue.isEmpty ? true : false
     }
     var count: Int {
         return queue.count
