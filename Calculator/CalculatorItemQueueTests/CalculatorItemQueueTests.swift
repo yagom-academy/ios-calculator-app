@@ -22,7 +22,6 @@ class CalculatorItemQueueTests: XCTestCase {
         testNumber = nil
     }
     
-    // MARK: - init no array
     func test_초기화를통해서_빈큐를_초기화할수있는가() {
         // given
         let queue = CalculatorItemQueue<Double>()
@@ -34,7 +33,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    // MARK: - init with array
     func test_초기화와_배열을_통해서_채워져_있는_큐를_생성할_수_있는가() {
         // given
         let initArr: [Double] = [1,2,3,4]
@@ -47,7 +45,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    // MARK: - enqeue + front
     func test_enqueue로_요소을_추가하면_제일_처음에_나올_값이_추가한_요소와_동일한가() {
         // given
         sut.enqueue(testNumber)
@@ -74,7 +71,6 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, count)
     }
     
-    // MARK: - enqeue + deqeue
     func test_enqueue로_요소를_추가하고_dequeue실행으로_나오는값이_추가한요소와_동일한가() {
         // given
         sut.enqueue(testNumber)
