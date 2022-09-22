@@ -6,7 +6,6 @@ import XCTest
 class FormulaTests: XCTestCase {
     var sut: Formula!
     
-    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())

@@ -14,6 +14,7 @@
 		04DB87A128DBFB3400E0DB78 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB87A028DBFB3400E0DB78 /* ExpressionParser.swift */; };
 		04DB87A328DBFE4E00E0DB78 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB87A228DBFE4E00E0DB78 /* Formula.swift */; };
 		04DB87C128DC50A800E0DB78 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB87BA28DC508B00E0DB78 /* FormulaTests.swift */; };
+		04DB87C328DC787000E0DB78 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB87C228DC787000E0DB78 /* Extension.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		04DB87A228DBFE4E00E0DB78 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		04DB87B828DC508B00E0DB78 /* FormularTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormularTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DB87BA28DC508B00E0DB78 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
+		04DB87C228DC787000E0DB78 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,8 +120,9 @@
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				040C91D328D8AC7C00BE833F /* CalculatorItemQueue.swift */,
 				040C91D528D95B0F00BE833F /* CalculateItemProtocol.swift */,
+				04DB87C228DC787000E0DB78 /* Extension.swift */,
+				040C91D328D8AC7C00BE833F /* CalculatorItemQueue.swift */,
 				040C91FB28DB34D700BE833F /* Operator.swift */,
 				04DB87A028DBFB3400E0DB78 /* ExpressionParser.swift */,
 				04DB87A228DBFE4E00E0DB78 /* Formula.swift */,
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04DB87C328DC787000E0DB78 /* Extension.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				040C91FC28DB34D700BE833F /* Operator.swift in Sources */,
 				040C91D628D95B0F00BE833F /* CalculateItemProtocol.swift in Sources */,
