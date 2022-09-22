@@ -57,4 +57,48 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertNil(sut)
     }
+    
+    func test_Character타입_입력값_더하기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_add인가() {
+        //given
+        let input: Character = "+"
+        
+        //when
+        sut = Operator.init(rawValue: input)
+        
+        //then
+        XCTAssertEqual(Operator.add, sut)
+    }
+    
+    func test_Character타입_입력값_빼기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_subtract인가() {
+        //given
+        let input: Character = "-"
+        
+        //when
+        sut = Operator.init(rawValue: input)
+        
+        //then
+        XCTAssertEqual(Operator.subtract, sut)
+    }
+    
+    func test_Character타입_입력값_나누기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_divide인가() {
+        //given
+        let input: Character = "/"
+        
+        //when
+        sut = Operator.init(rawValue: input)
+        
+        //then
+        XCTAssertEqual(Operator.divide, sut)
+    }
+    
+    func test_Character타입_입력값_곱하기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_multiply인가() {
+        //given
+        let input: Character = "*"
+        
+        //when
+        sut = Operator.init(rawValue: input)
+        
+        //then
+        XCTAssertEqual(Operator.multiply, sut)
+    }
 }
