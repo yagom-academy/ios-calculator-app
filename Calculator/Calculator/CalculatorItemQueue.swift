@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalculatorItemQueue: {
-    private var queue: [String] = []
+    private(set) var queue: [String] = []
     
     var count: Int {
         return queue.count
