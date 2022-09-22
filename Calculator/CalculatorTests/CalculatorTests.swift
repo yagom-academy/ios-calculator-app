@@ -32,7 +32,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(sut?.isEmpty != nil)
     }
     
-    func test_subtractQueue실행시_queue가_비어있을_때_nil을_리턴하는지() {
+    func test_dequeue실행시_queue가_비어있을_때_nil을_리턴하는지() {
         // when
         let result = sut?.dequeue()
         
@@ -40,7 +40,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_subtractQueue실행시_queue가_값을_가질때_그_다음값을_반환하는지() {
+    func test_dequeue실행시_queue가_값을_가질때_그_다음값을_반환하는지() {
         // given
         sut?.queue = ["14512","abcd"]
         
@@ -51,7 +51,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut?.queue.first, "abcd")
     }
     
-    func test_subtractQueue실행시_queue가_제거_되었을때_0인덱스가_제거되는지() {
+    func test_dequeue실행시_queue가_제거_되었을때_0인덱스가_제거되는지() {
         // given
         sut?.queue = ["14512","abcd", "C"]
         
