@@ -6,20 +6,20 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     
-    var sutQueue: CalculatorItemQueue<String>!
+    var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sutQueue = CalculatorItemQueue<String>()
+        sut = CalculatorItemQueue<String>()
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sutQueue = nil
+        sut = nil
     }
     
     func test_비어있는_String타입queue생성이가능할때() {
-        XCTAssertTrue(sutQueue.isEmpty)
+        XCTAssertTrue(sut.isEmpty)
     }
     
     func test_비어있는_Double타입queue생성이가능할때() {
@@ -37,51 +37,51 @@ final class CalculatorTests: XCTestCase {
     func test_queue에3을push했을때() {
         let element: String = "3"
         
-        XCTAssertNoThrow(sutQueue.push(element))
+        XCTAssertNoThrow(sut.push(element))
     }
     
     func test_queue에3을push했을때queue의isEmpty가false인지() {
         let element: String = "3"
         
-        sutQueue.push(element)
+        sut.push(element)
         
-        XCTAssertFalse(sutQueue.isEmpty)
+        XCTAssertFalse(sut.isEmpty)
     }
     
     func test_queue에3_6_9를push했을때() {
         let elementArray: [String] = ["3", "6", "9"]
         
         for element in elementArray {
-            sutQueue.push(element)
+            sut.push(element)
         }
         
-        XCTAssertFalse(sutQueue.isEmpty)
+        XCTAssertFalse(sut.isEmpty)
     }
     
     func test_queue에3_6_9를push하고pop을한번했을때() {
         let elementArray: [String] = ["3", "6", "9"]
         
         for element in elementArray {
-            sutQueue.push(element)
+            sut.push(element)
         }
         
-        XCTAssertEqual(sutQueue.pop(), "3")
+        XCTAssertEqual(sut.pop(), "3")
     }
     
     func test_queue에pop할요소가없을때() {
-        XCTAssertNil(sutQueue.pop())
+        XCTAssertNil(sut.pop())
     }
     
     func test_queue에3_6_9를push하고pop을네번했을때() {
         let elementArray: [String] = ["3", "6", "9"]
         
         for element in elementArray {
-            sutQueue.push(element)
+            sut.push(element)
         }
         
         var result: String?
         for _ in 0...elementArray.count {
-            result = sutQueue.pop()
+            result = sut.pop()
         }
         
         XCTAssertEqual(result, nil)
@@ -91,15 +91,15 @@ final class CalculatorTests: XCTestCase {
         let elementArray: [String] = ["1", "2", "3", "4", "5"]
         
         for element in elementArray {
-            sutQueue.push(element)
+            sut.push(element)
         }
-        let result = sutQueue.count
+        let result = sut.count
     
         XCTAssertEqual(result, 5)
     }
     
     func test_queue가비어있을때count가0인지() {
-        let result = sutQueue.count
+        let result = sut.count
         
         XCTAssertEqual(result, 0)
     }
