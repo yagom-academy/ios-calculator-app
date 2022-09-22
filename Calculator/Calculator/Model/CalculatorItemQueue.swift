@@ -12,8 +12,8 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<Item: CalculateItem> {
-    var inputStack: [Item] = []
-    var outputStack: [Item] = []
+    private(set) var inputStack: [Item] = []
+    private(set) var outputStack: [Item] = []
     var isEmpty: Bool {
         return inputStack.isEmpty && outputStack.isEmpty
     }
