@@ -9,8 +9,10 @@ enum Operator: Character {
             return rhs + lhs
         } else if self == .subtract {
             return rhs - lhs
-        } else {
+        } else if self == .divide {
             return rhs / lhs
+        } else {
+            return rhs * lhs
         }
     }
 }
