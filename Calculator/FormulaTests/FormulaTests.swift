@@ -103,4 +103,7 @@ class FormulaTests: XCTestCase {
         XCTAssertThrowsError(try sut.result())
     }
     
+    func test_값이_없을때_result함수를호출하면_에러를던지는지(){
+        XCTAssertThrowsError(try sut.result())
+    }
 }
