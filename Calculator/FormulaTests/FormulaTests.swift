@@ -8,14 +8,15 @@
 import XCTest
 
 @testable import Calculator
-@testable import CalculatorItemQueueTests
 final class FormulaTests: XCTestCase {
     var sut: Formula!
-    var operands = CalculatorItemQueue()
-    var operators = CalculatorItemQueue()
+    var operands: CalculatorItemQueue<Double>!
+    var operators: CalculatorItemQueue<Operator>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        operands = CalculatorItemQueue<Double>()
+        operators = CalculatorItemQueue<Operator>()
         
         sut = Formula(operands: operands, operators: operators)
     }
@@ -25,8 +26,8 @@ final class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func generateCalculatorItemQueue(_ calculatorItems: [CalculateItem]) -> CalculatorItemQueue {
-        var calculatorItemQueue = CalculatorItemQueue()
+    func generateCalculatorItemQueue<Type: CalculateItem> (_ calculatorItems: [Type]) -> CalculatorItemQueue<Type> {
+        var calculatorItemQueue = CalculatorItemQueue<Type>()
         
         for calculatorItem in calculatorItems {
             calculatorItemQueue.push(calculatorItem)
