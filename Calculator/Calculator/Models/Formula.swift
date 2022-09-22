@@ -6,14 +6,10 @@
 //
 
 struct Formula {
-    let operands: CalculatorItemQueue
-    let operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue
+    var operators: CalculatorItemQueue
     
-    func result() -> Double {
-        var result = 0.0
+    mutating func result() -> Double {
         
-        
-        
-        return result
     }
 }
