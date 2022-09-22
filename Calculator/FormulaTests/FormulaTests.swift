@@ -36,20 +36,44 @@ final class FormulaTests: XCTestCase {
         return calculatorItemQueue
     }
     
-    func test_oprands_operators가_주어졌을때_결과가_6인지_확인() {
-        operands = generateCalculatorItemQueue([1.0, 2.0, 3.0])
-        operators = generateCalculatorItemQueue([Operator.add, Operator.add])
+    func test_oprands_operators가_주어졌을때_결과가_14인지_확인() {
+        operands = generateCalculatorItemQueue([2, 3, 3, 1])
+        operators = generateCalculatorItemQueue([Operator.add, Operator.multiply, Operator.subtract])
         
         sut = Formula(operands: operands, operators: operators)
         
         let result = try? sut.result()
         
         
-        XCTAssertEqual(result, 6.0)
+        XCTAssertEqual(result, 14.0)
+    }
+    
+    func test_oprands_operators가_주어졌을때_결과가_2인지_확인() {
+        operands = generateCalculatorItemQueue([3, 3, 2, 1])
+        operators = generateCalculatorItemQueue([Operator.divide, Operator.add, Operator.subtract])
+        
+        sut = Formula(operands: operands, operators: operators)
+        
+        let result = try? sut.result()
+        
+        
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_oprands_operators가_주어졌을때_결과가_minus_0_5_인지_확인() {
+        operands = generateCalculatorItemQueue([1, 2, 3, 2, 3, 6])
+        operators = generateCalculatorItemQueue([Operator.add, Operator.subtract, Operator.multiply, Operator.subtract, Operator.divide])
+        
+        sut = Formula(operands: operands, operators: operators)
+        
+        let result = try? sut.result()
+        
+        
+        XCTAssertEqual(result, -0.5)
     }
     
     func test_oprands_operators가_주어졌을때_에러를_던지는지_확인() {
-        operands = generateCalculatorItemQueue([1.0, 0.0])
+        operands = generateCalculatorItemQueue([1, 0])
         operators = generateCalculatorItemQueue([Operator.divide])
         
         sut = Formula(operands: operands, operators: operators)
