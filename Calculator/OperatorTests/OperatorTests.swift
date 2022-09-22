@@ -101,4 +101,16 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(Operator.multiply, sut)
     }
+    
+    func test_입력값_실수2와_실수4를_Operator타입의_add_case를_통해_calculate메소드를_호출하여서_rhs로_실수2를_lhs로_실수4를_입력하면_그_결과가_두개를_더한_실수6과_같은가() {
+        //given
+        let input: [Double] = [2.0, 4.0]
+        
+        //when
+        sut = Operator.add
+        let result: Double = sut.calculate(rhs: input[0], lhs: input[1])
+        
+        //then
+        XCTAssertEqual(6.0, result)
+    }
 }
