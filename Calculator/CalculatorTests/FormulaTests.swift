@@ -73,7 +73,63 @@ class FormulaTests: XCTestCase {
         let result = sut.result()
         
         // then
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, 2)
     }
+    
+    func test_2와3을곱하면_6을반환하는지확인() {
+        // given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [2, 3]), operators: CalculatorItemQueue(enqueueStack: [.multiply]))
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 6)
+    }
+    
+    func test_3과5와10을곱하면_150을반환하는지확인() {
+        // given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [3, 5, 10]), operators: CalculatorItemQueue(enqueueStack: [.multiply, .multiply]))
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 150)
+    }
+    
+    func test_10을2로나누면_5가반환되는지확인() {
+        // given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [10, 2]), operators: CalculatorItemQueue(enqueueStack: [.divide]))
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 5)
+    }
+    
+    func test_100을5로나누고4로나누면_5가반환되는지확인() {
+        // given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [100, 5, 4]), operators: CalculatorItemQueue(enqueueStack: [.divide, .divide]))
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 5)
+    }
+    
+    func test_10에20을더하고5를빼고_3을곱하고2로나누면_37쩜오가반환되는지확인() {
+        // given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [10, 20, 5, 3, 2]), operators: CalculatorItemQueue(enqueueStack: [.add, .subtract, .multiply, .divide]))
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 37.5)
+    }
+    
     
 }
