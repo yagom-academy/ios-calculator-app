@@ -15,7 +15,7 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>()
         let components = componentsByOperators(from: input)
         
-        for element in components {
+        components.forEach { element in
             if let operand = Double(element) {
                 operands.enqueue(item: operand)
             } else {
