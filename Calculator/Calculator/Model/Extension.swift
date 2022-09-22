@@ -14,3 +14,9 @@ extension String {
         return split(separator: target).map { String($0) }
     }
 }
+
+extension Array {
+    public subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+}
