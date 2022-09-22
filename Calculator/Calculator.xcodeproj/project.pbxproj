@@ -12,6 +12,7 @@
 		3C3EF12D28DBF1C9003F6900 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3EF12C28DBF1C9003F6900 /* CalculateItem.swift */; };
 		3C3F95C928DC683C00F63109 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F95C828DC683C00F63109 /* Double+.swift */; };
 		3C3F95CB28DC68B800F63109 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F95CA28DC68B800F63109 /* Operator.swift */; };
+		3C3F95D328DC7E0000F63109 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F95D228DC7E0000F63109 /* OperatorTest.swift */; };
 		3CF6379828D8B51B00611FE6 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6379728D8B51B00611FE6 /* Node.swift */; };
 		3CF637C628D9474700611FE6 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6379928D8B5D500611FE6 /* LinkedList.swift */; };
 		3CF637C728D9475600611FE6 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6379B28D8BA1800611FE6 /* CalculatorItemQueue.swift */; };
@@ -25,6 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3C3F95D428DC7E0000F63109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C713D9362570E5EB001C3AFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C713D93D2570E5EB001C3AFC;
+			remoteInfo = Calculator;
+		};
 		3CF637A528D8BB8500611FE6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C713D9362570E5EB001C3AFC /* Project object */;
@@ -46,6 +54,8 @@
 		3C3EF12C28DBF1C9003F6900 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		3C3F95C828DC683C00F63109 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		3C3F95CA28DC68B800F63109 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		3C3F95D028DC7E0000F63109 /* OperatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C3F95D228DC7E0000F63109 /* OperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTest.swift; sourceTree = "<group>"; };
 		3CF6379728D8B51B00611FE6 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		3CF6379928D8B5D500611FE6 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		3CF6379B28D8BA1800611FE6 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -64,6 +74,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C3F95CD28DC7E0000F63109 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CF6379E28D8BB8500611FE6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -112,6 +129,14 @@
 				3C3F95C828DC683C00F63109 /* Double+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		3C3F95D128DC7E0000F63109 /* OperatorTest */ = {
+			isa = PBXGroup;
+			children = (
+				3C3F95D228DC7E0000F63109 /* OperatorTest.swift */,
+			);
+			path = OperatorTest;
 			sourceTree = "<group>";
 		};
 		3CF6379628D8B50F00611FE6 /* Models */ = {
@@ -163,6 +188,7 @@
 				C713D9402570E5EB001C3AFC /* Calculator */,
 				3CF637A228D8BB8500611FE6 /* CalculatorItemQueueTests */,
 				3CF637AF28D8BB9A00611FE6 /* LinkedListTests */,
+				3C3F95D128DC7E0000F63109 /* OperatorTest */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -173,6 +199,7 @@
 				C713D93E2570E5EB001C3AFC /* Calculator.app */,
 				3CF637A128D8BB8500611FE6 /* CalculatorItemQueueTests.xctest */,
 				3CF637AE28D8BB9A00611FE6 /* LinkedListTests.xctest */,
+				3C3F95D028DC7E0000F63109 /* OperatorTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +223,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3C3F95CF28DC7E0000F63109 /* OperatorTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C3F95D628DC7E0000F63109 /* Build configuration list for PBXNativeTarget "OperatorTest" */;
+			buildPhases = (
+				3C3F95CC28DC7E0000F63109 /* Sources */,
+				3C3F95CD28DC7E0000F63109 /* Frameworks */,
+				3C3F95CE28DC7E0000F63109 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C3F95D528DC7E0000F63109 /* PBXTargetDependency */,
+			);
+			name = OperatorTest;
+			productName = OperatorTest;
+			productReference = 3C3F95D028DC7E0000F63109 /* OperatorTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3CF637A028D8BB8500611FE6 /* CalculatorItemQueueTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CF637A728D8BB8500611FE6 /* Build configuration list for PBXNativeTarget "CalculatorItemQueueTests" */;
@@ -258,6 +303,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
+					3C3F95CF28DC7E0000F63109 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = C713D93D2570E5EB001C3AFC;
+					};
 					3CF637A028D8BB8500611FE6 = {
 						CreatedOnToolsVersion = 13.4.1;
 						TestTargetID = C713D93D2570E5EB001C3AFC;
@@ -287,11 +336,19 @@
 				C713D93D2570E5EB001C3AFC /* Calculator */,
 				3CF637A028D8BB8500611FE6 /* CalculatorItemQueueTests */,
 				3CF637AD28D8BB9A00611FE6 /* LinkedListTests */,
+				3C3F95CF28DC7E0000F63109 /* OperatorTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C3F95CE28DC7E0000F63109 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CF6379F28D8BB8500611FE6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -319,6 +376,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C3F95CC28DC7E0000F63109 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C3F95D328DC7E0000F63109 /* OperatorTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CF6379D28D8BB8500611FE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +420,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3C3F95D528DC7E0000F63109 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C713D93D2570E5EB001C3AFC /* Calculator */;
+			targetProxy = 3C3F95D428DC7E0000F63109 /* PBXContainerItemProxy */;
+		};
 		3CF637A628D8BB8500611FE6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C713D93D2570E5EB001C3AFC /* Calculator */;
@@ -387,6 +457,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3C3F95D728DC7E0000F63109 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PakHyo.OperatorTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/Calculator";
+			};
+			name = Debug;
+		};
+		3C3F95D828DC7E0000F63109 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PakHyo.OperatorTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/Calculator";
+			};
+			name = Release;
+		};
 		3CF637A828D8BB8500611FE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -627,6 +736,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C3F95D628DC7E0000F63109 /* Build configuration list for PBXNativeTarget "OperatorTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C3F95D728DC7E0000F63109 /* Debug */,
+				3C3F95D828DC7E0000F63109 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3CF637A728D8BB8500611FE6 /* Build configuration list for PBXNativeTarget "CalculatorItemQueueTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
