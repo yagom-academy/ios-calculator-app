@@ -9,7 +9,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     var leftStack: [T] = []
 
     mutating func enqueue(element: T) {
-        return rightStack.append(element)
+        rightStack.append(element)
     }
 
     mutating func dequeue() -> T? {
@@ -17,7 +17,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         let value: T? = leftStack.popLast()
         return value
     }
-    
+
     mutating func reverseQueue() {
         if leftStack.isEmpty {
             leftStack = rightStack.reversed()
