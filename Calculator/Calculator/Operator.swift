@@ -12,21 +12,22 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multifly = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
+        var result: Double = lhs
         switch self {
         case .add:
-            return add(lhs: lhs, rhs: rhs)
+            result = add(lhs: lhs, rhs: rhs)
         case .subtract:
-            return subtract(lhs: lhs, rhs: rhs)
+            result = subtract(lhs: lhs, rhs: rhs)
         case .divide:
             do {
-                return  try divide(lhs: lhs, rhs: rhs)
+                result =  try divide(lhs: lhs, rhs: rhs)
             } catch {
                 print(error.localizedDescription)
             }
-            
         case .multifly:
-            return multifly(lhs: lhs, rhs: rhs)
+            result = multifly(lhs: lhs, rhs: rhs)
         }
+        return result
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
