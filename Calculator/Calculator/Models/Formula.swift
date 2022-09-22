@@ -9,8 +9,11 @@ struct Formula {
     var operands: CalculatorItemQueue
     var operators: CalculatorItemQueue
     
-    mutating func result() -> Double {
-        guard var result = operands.pop() as? Double else { return }
+    mutating func result() throws -> Double {
+        guard var result = operands.pop() as? Double else {
+            throw CalculatorError.queueIsEmpty
+            
+        }
         
         while !operands.isEmpty {
             
