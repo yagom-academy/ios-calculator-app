@@ -7,8 +7,10 @@ enum Operator: Character {
     func calculate(rhs: Double, lhs: Double) -> Double {
         if self == .add {
             return rhs + lhs
-        } else {
+        } else if self == .subtract {
             return rhs - lhs
+        } else {
+            return rhs / lhs
         }
     }
 }
