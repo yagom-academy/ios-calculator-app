@@ -8,10 +8,11 @@
 import Foundation
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         return Formula(operands: CalculatorItemQueue(queue: ["0"]), operators: CalculatorItemQueue(queue: ["+"]))
     }
-    func componentsByOperators(from input: String) -> [String] {
+    
+    static func componentsByOperators(from input: String) -> [String] {
         return [""]
     }
 }

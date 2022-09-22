@@ -11,7 +11,6 @@ struct Formula {
     let operands: CalculatorItemQueue
     let operators: CalculatorItemQueue
     
-    // 여기서 parse를 실행?
     func result() -> Double {
         return 0
     }
