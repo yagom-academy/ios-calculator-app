@@ -17,7 +17,7 @@ enum Operator: Character, CaseIterable, CalculateItemProtocol {
         case .divide:
             return divide(lhs:lhs, rhs:rhs)
         case .multiply:
-            return divide(lhs:lhs, rhs:rhs)
+            return multiply(lhs: lhs, rhs: rhs)
         }
     }
     

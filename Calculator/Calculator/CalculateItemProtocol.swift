@@ -4,7 +4,7 @@ protocol CalculateItemProtocol {
     
 }
 
-extension String {
+extension String: CalculateItemProtocol {
     func split(with target: Character) -> [String] {
         let substringArray = self.split(separator: target)
         var stringArray:[String] = []
