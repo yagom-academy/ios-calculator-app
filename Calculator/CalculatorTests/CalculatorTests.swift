@@ -112,4 +112,11 @@ class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, "3,333.33333")
     }
+    
+    func test_Formula_result메서드_값반환_정상작동하는지() {
+        var formulaExample: Formula = Formula()
+        let result = formulaExample.result()
+        
+        XCTAssertEqual(result, 0)
+    }
 }
