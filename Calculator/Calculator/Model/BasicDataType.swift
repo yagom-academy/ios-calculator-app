@@ -12,6 +12,9 @@ extension String {
                 temporaryString.removeAll()
             }
         }
+        if !temporaryString.isEmpty {
+            splitResult.append(temporaryString)
+        }
         return splitResult.filter({!$0.isEmpty})
     }
 }
