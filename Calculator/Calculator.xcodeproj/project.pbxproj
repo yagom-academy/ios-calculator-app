@@ -19,6 +19,7 @@
 		D29CF79A28DC3BB800F704DF /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CF79928DC3BB800F704DF /* CalculateItem.swift */; };
 		D29CF79C28DC7D0E00F704DF /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CF79928DC3BB800F704DF /* CalculateItem.swift */; };
 		D29CF79E28DC7D3700F704DF /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CF79D28DC7D3700F704DF /* Formula.swift */; };
+		D29CF7A028DC7DB200F704DF /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CF79F28DC7DB200F704DF /* ExpressionParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		D271B43828D99807006AD983 /* CalcUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcUnitTest.swift; sourceTree = "<group>"; };
 		D29CF79928DC3BB800F704DF /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		D29CF79D28DC7D3700F704DF /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		D29CF79F28DC7DB200F704DF /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				D271B43028D99657006AD983 /* CalculatorItemQueue.swift */,
 				D29CF79928DC3BB800F704DF /* CalculateItem.swift */,
 				D29CF79D28DC7D3700F704DF /* Formula.swift */,
+				D29CF79F28DC7DB200F704DF /* ExpressionParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				D29CF79E28DC7D3700F704DF /* Formula.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				D271B43128D99657006AD983 /* CalculatorItemQueue.swift in Sources */,
+				D29CF7A028DC7DB200F704DF /* ExpressionParser.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
