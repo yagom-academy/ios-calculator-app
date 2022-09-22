@@ -21,15 +21,15 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_CalculatorItemQueue의_addQueue실행시_queue_에_추가가되는지() {
+    func test_CalculatorItemQueue의_enqueue실행시_queue_에_추가가되는지() {
         // given
-        let number: String = "50"
+        let number: CalculatorItem = "50"
         
         // when
         sut?.enqueue(number)
         
         // then
-        XCTAssertEqual(sut?.queue, ["50"])
+        XCTAssertTrue(sut?.isEmpty != nil)
     }
     
     func test_subtractQueue실행시_queue가_비어있을_때_nil을_리턴하는지() {
