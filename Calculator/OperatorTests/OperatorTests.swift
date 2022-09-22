@@ -5,49 +5,48 @@
 //  Created by 이경민 on 2022/09/22.
 //
 
-/*
- 테스트 목적 : Operator의 Calculate 메서드가 잘 동작하는가
- 
- 1. add 타입일 경우에 계산이 잘되는가?
- 2. subtract 타입일 경우에 계산이 잘되는가?
- 3. multiply 타입일 경우에 계산이 잘되는가?
- 4. divide 타입일 경웨 계산이 잘되는가?
- 
- */
-
 import XCTest
 @testable import Calculator
 
 final class OperatorTests: XCTestCase {
-    func test_add타입일경우에_더하기를_잘수행하는가() {
+
+    override func setUpWithError() throws {
+    }
+
+    override func tearDownWithError() throws {
+    }
+
+    func test_연산자가add일때연산을잘수행하는지() {
         // driven
-        
+        let targetOperator = Operator.add
         // when
-        
+        let result = targetOperator.calculate(lhs: 1, rhs: 2)
         // then
+        XCTAssertEqual(result, 3)
+    }
+
+    func test_연산자가subtract일때연산을잘수행하는지() {
+        let targetOperator = Operator.subtract
+        
+        let result = targetOperator.calculate(lhs: 2, rhs: 1)
+        
+        XCTAssertEqual(result, 1)
     }
     
-    func test_subtract타입일경우에_빼기를_잘수행하는가() {
-        // driven
+    func test_연산자가multiply일때연산을잘수행하는지() {
+        let targetOperator = Operator.multiply
         
-        // when
+        let result = targetOperator.calculate(lhs: 2, rhs: 3)
         
-        // then
+        XCTAssertEqual(result, 6)
     }
     
-    func test_multiply타입일경우에_곱하기를_잘수행하는가() {
-        // driven
+    func test_연산자가divide일때연산을잘수행하는지() {
+        let targetOperator = Operator.divide
         
-        // when
+        let result = targetOperator.calculate(lhs: 10, rhs: 2)
         
-        // then
+        XCTAssertEqual(result, 5)
     }
     
-    func test_divide타입일경우에_나누기를_잘수행하는가() {
-        // driven
-        
-        // when
-        
-        // then
-    }
 }
