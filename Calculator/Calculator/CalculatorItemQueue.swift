@@ -36,6 +36,10 @@ struct CalculatorItemQueueByLinkedList<T> {
     mutating func enqueue(_ item: T) {
         self.linkedList.appendValue(item)
     }
+    
+    mutating func dequeue() -> T? {
+        return self.linkedList.removeHead()
+    }
 }
 
 class LinkedListNode<T> {
@@ -45,6 +49,10 @@ class LinkedListNode<T> {
     
     init(value: T) {
         self.value = value
+    }
+    
+    deinit {
+        print("\(self.value)가 메모리에서 해제됩니다")
     }
 }
 
@@ -73,6 +81,25 @@ struct LinkedList<T> {
         print("새로 추가된 값은 \(new.value)")
         print("추가되기 직전의 값 previous.value는 \(new.previous?.value)")
     }
+    
+    mutating func removeHead() -> T? {
+        if self.isEmpty {
+            return nil
+        } else {
+            if self.head === self.tail {
+                self.tail = nil
+            }
+            let removedValue = self.head?.value
+            
+            
+            self.head = self.head?.next
+//            self.head?.previous = nil
+            
+            print(self.head?.value)
+            return removedValue
+        }
+    }
+    
     
     
 }

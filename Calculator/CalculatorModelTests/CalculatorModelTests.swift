@@ -105,4 +105,32 @@ class CalculatorModelTests: XCTestCase {
         XCTAssertEqual(sutByLinkedList.linkedList.head?.value, "1")
         XCTAssertEqual(sutByLinkedList.linkedList.tail?.value, "3")
     }
+    
+    func test_1을enqueue한후_dequeue가1을반환하는지() {
+        // given
+        let input = ["1"]
+        for element in input {
+            sutByLinkedList.enqueue(element)
+        }
+        
+        // when
+        let result = sutByLinkedList.dequeue()
+        
+        // then
+        XCTAssertEqual(result, "1")
+    }
+    
+    func test_1_2_3_을enqueue한후_dequeue가1을반환하는지() {
+        // given
+        let input = ["1", "+", "3"]
+        for element in input {
+            sutByLinkedList.enqueue(element)
+        }
+        
+        // when
+        let result = sutByLinkedList.dequeue()
+        
+        // then
+        XCTAssertEqual(result, "1")
+    }
 }
