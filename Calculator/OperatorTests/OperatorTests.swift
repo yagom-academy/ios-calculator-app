@@ -52,7 +52,7 @@ class OperatorTests: XCTestCase {
         let input: Character = "a"
         
         //when
-        sut = Operator.init(rawValue: input))
+        sut = Operator.init(rawValue: input)
         
         //then
         XCTAssertNil(sut)
