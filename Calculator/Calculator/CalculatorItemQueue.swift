@@ -28,6 +28,14 @@ struct CalculatorItemQueue<DataType: CalculateItem> {
             return data.first
         }
     }
+    var last: DataType? {
+        get {
+            guard data.last != nil else {
+                return nil
+            }
+            return data.last
+        }
+    }
     var isEmpty: Bool {
         get {
             return data.isEmpty
