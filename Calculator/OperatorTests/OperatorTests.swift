@@ -113,4 +113,17 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(6.0, result)
     }
+    
+    func test_입력값_실수4와_실수2를_Operator타입의_subtract_case를_통해_calculate메소드를_호출하여서_rhs로_실수4를_lhs로_실수2를_입력하면_그_결과가_두개를_뺀_실수2와_같은가() {
+        //given
+        let input: [Double] = [4.0, 2.0]
+        
+        //when
+        sut = Operator.subtract
+        let result: Double = sut.calculate(rhs: input[0], lhs: input[1])
+        
+        //then
+        XCTAssertEqual(2.0, result)
+    }
+    
 }
