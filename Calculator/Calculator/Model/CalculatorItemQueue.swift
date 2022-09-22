@@ -27,7 +27,7 @@ struct CalculatorItemQueue {
     }
     
     func peek() -> CalculatorItem? {
-        return nil
+        return queue.first ?? nil
     }
 }
 
