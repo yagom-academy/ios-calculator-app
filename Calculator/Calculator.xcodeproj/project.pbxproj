@@ -16,6 +16,8 @@
 		D3738AFF28DCAC76001B561F /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FCA4A328D89C810001E47B /* CalculatorItemQueue.swift */; };
 		D3738B1228DCAE50001B561F /* BasicDataTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3738B1128DCAE50001B561F /* BasicDataTypeTests.swift */; };
 		D3738B1628DCAEE3001B561F /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FCA4A328D89C810001E47B /* CalculatorItemQueue.swift */; };
+		D3738B1828DCAF45001B561F /* BasicDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3738B1728DCAF45001B561F /* BasicDataType.swift */; };
+		D3738B1928DCAF5B001B561F /* BasicDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3738B1728DCAF45001B561F /* BasicDataType.swift */; };
 		D3A27BC128DC472800685ED0 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC028DC472800685ED0 /* Operator.swift */; };
 		D3A27BC928DC475500685ED0 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC828DC475500685ED0 /* OperatorTests.swift */; };
 		D3A27BCD28DC475B00685ED0 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC028DC472800685ED0 /* Operator.swift */; };
@@ -37,6 +39,7 @@
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3738B0F28DCAE50001B561F /* BasicDataTypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicDataTypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3738B1128DCAE50001B561F /* BasicDataTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataTypeTests.swift; sourceTree = "<group>"; };
+		D3738B1728DCAF45001B561F /* BasicDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataType.swift; sourceTree = "<group>"; };
 		D3A27BC028DC472800685ED0 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		D3A27BC628DC475500685ED0 /* OperatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A27BC828DC475500685ED0 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 			children = (
 				D3FCA4A328D89C810001E47B /* CalculatorItemQueue.swift */,
 				D3A27BC028DC472800685ED0 /* Operator.swift */,
+				D3738B1728DCAF45001B561F /* BasicDataType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -366,6 +370,7 @@
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				D3738B1828DCAF45001B561F /* BasicDataType.swift in Sources */,
 				D3A27BC128DC472800685ED0 /* Operator.swift in Sources */,
 				D3FCA4A428D89C810001E47B /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
@@ -378,6 +383,7 @@
 			files = (
 				D3738B1628DCAEE3001B561F /* CalculatorItemQueue.swift in Sources */,
 				D3738B1228DCAE50001B561F /* BasicDataTypeTests.swift in Sources */,
+				D3738B1928DCAF5B001B561F /* BasicDataType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
