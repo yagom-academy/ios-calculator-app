@@ -28,7 +28,7 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         
         var result: [String] = []
         var operand = ""
