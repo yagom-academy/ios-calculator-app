@@ -40,7 +40,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("1")
         sut.enqueue("2")
         sut.enqueue("3")
-        guard let front = sut.front() else { return }
+        guard let front = sut.first() else { return }
         XCTAssertEqual(front, "1")
     }
     
@@ -49,7 +49,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("2")
         sut.enqueue("3")
         sut.dequeue()
-        guard let front = sut.front() else { return }
+        guard let front = sut.first() else { return }
         XCTAssertEqual(front, "2")
     }
     

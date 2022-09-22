@@ -5,12 +5,10 @@
 //  Created by Kyo on 2022/09/19.
 //
 
-import Foundation
-
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    var count: Int = 0
+    private var count: Int = 0
     
     func bringHead() -> T? {
         guard let head = head else { return nil }
@@ -20,6 +18,10 @@ struct LinkedList<T> {
     func bringTail() -> T? {
         guard let tail = tail else { return nil }
         return tail.bringNodeData()
+    }
+    
+    func bringListCount() -> Int {
+        return count
     }
     
     mutating func append(data: T) {
@@ -40,7 +42,7 @@ struct LinkedList<T> {
             return nil
         } else {
             let removeItem: Node<T>? = head
-            self.head = head?.getNextNode()
+            self.head = head?.bringNextNode()
             count -= 1
             
             return removeItem?.bringNodeData()

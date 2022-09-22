@@ -5,8 +5,6 @@
 //  Created by Kyo on 2022/09/19.
 //
 
-import Foundation
-
 final class Node<T> {
     private var data: T
     private var next: Node<T>?
@@ -19,7 +17,7 @@ final class Node<T> {
         return self.data
     }
     
-    func getNextNode() -> Node<T>? {
+    func bringNextNode() -> Node<T>? {
         return next
     }
     

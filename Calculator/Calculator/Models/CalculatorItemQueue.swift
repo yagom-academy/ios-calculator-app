@@ -5,20 +5,10 @@
 //  Created by Kyo on 2022/09/19.
 //
 
-import Foundation
-
-protocol CalculateItem {
-    
-}
-
-extension String: CalculateItem {
-
-}
-
 final class CalculatorItemQueue<T: CalculateItem> {
     private var queue: LinkedList<T>! = LinkedList()
     
-    func front() -> T? {
+    func first() -> T? {
         return queue.bringHead()
     }
     
@@ -35,7 +25,7 @@ final class CalculatorItemQueue<T: CalculateItem> {
     }
     
     func count() -> Int {
-        return queue.count
+        return queue.bringListCount()
     }
     
     func removeAll() {
