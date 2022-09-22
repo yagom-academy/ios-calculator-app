@@ -20,3 +20,23 @@ struct CalculatorItemQueue {
         return isEmpty ? nil : queue.removeFirst()
     }
 }
+
+class LinkedListNode<T> {
+    let value: T
+    weak var previous: LinkedListNode?
+    var next: LinkedListNode?
+    
+    init(value: T) {
+        self.value = value
+    }
+}
+
+struct LinkedList<T> {
+    
+    private(set) var head: LinkedListNode<T>?
+    private var tail: LinkedListNode<T>?
+    
+    var isEmpty: Bool {
+        return self.head == nil
+    }
+}
