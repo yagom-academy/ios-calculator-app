@@ -5,8 +5,8 @@
 //  Created by Gundy on 2022/09/19.
 //
 
-struct CalculatorItemQueue {
-    var data: [CalculateItem] = []
+struct CalculatorItemQueue<DataType: CalculateItem> {
+    var data: [DataType] = []
     var count: Int {
         get {
             return data.count
@@ -20,7 +20,7 @@ struct CalculatorItemQueue {
             data.reserveCapacity(newValue)
         }
     }
-    var peek: CalculateItem? {
+    var peek: DataType? {
         get {
             guard data.first != nil else {
                 return nil
@@ -41,12 +41,12 @@ struct CalculatorItemQueue {
     
     init() {}
     
-    mutating func enqueue(_ element: CalculateItem) {
+    mutating func enqueue(_ element: DataType) {
         data.append(element)
     }
     
     @discardableResult
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> DataType? {
         return data.popFirst()
     }
     
@@ -54,7 +54,7 @@ struct CalculatorItemQueue {
         data = []
     }
     
-    mutating func insert(_ element: CalculateItem, at index: Int) {
+    mutating func insert(_ element: DataType, at index: Int) {
         data.insert(element, at: index)
     }
     
