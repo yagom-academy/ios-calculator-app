@@ -10,12 +10,9 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
     
-    override func setUpWithError() throws {
-    }
+    override func setUpWithError() throws { }
 
-    override func tearDownWithError() throws {
-        
-    }
+    override func tearDownWithError() throws { }
     
     func test_string값의_식의_결과값이_356일때_string내부의값을_parse하여_연산한_결과값이_356와일치하는지() {
         let result: Double = 356
