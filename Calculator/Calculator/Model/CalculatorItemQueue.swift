@@ -10,6 +10,9 @@ struct CalculatorItemQueue {
     var isEmpty: Bool {
         return queue.isEmpty ? false : true
     }
+    var count: Int {
+        return queue.count
+    }
     
     mutating func enqueue(_ element: CalculatorItem) {
         queue.append(element)
