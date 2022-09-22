@@ -9,7 +9,7 @@ protocol CalculateItem {
     
 }
 
-extension String {
+extension String: CalculateItem {
     
 //    func split(with target: Character) -> [String] {
 //

@@ -30,4 +30,3 @@ struct Formula {
         return result
     }
 }
-
