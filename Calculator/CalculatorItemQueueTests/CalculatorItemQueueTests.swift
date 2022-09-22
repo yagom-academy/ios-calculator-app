@@ -5,7 +5,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorTests: XCTestCase {
+class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
@@ -18,13 +18,8 @@ class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func testExample() throws {
-    }
-    
-    func testPerformanceExample() throws {
-        measure {
-        }
-    }
+    func testExample() throws {}
+    func testPerformanceExample() throws { measure {} }
     
     func test_enqueueStack에_값이_정상적으로_추가되는지() {
         //given
@@ -111,12 +106,5 @@ class CalculatorTests: XCTestCase {
 
         //then
         XCTAssertEqual(result, "3,333.33333")
-    }
-    
-    func test_Formula_result메서드_값반환_정상작동하는지() {
-        var formulaExample: Formula = Formula()
-        let result = formulaExample.result()
-        
-        XCTAssertEqual(result, 0)
     }
 }
