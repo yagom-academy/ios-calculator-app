@@ -18,36 +18,42 @@ final class OperatorTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_연산자가add일때연산을잘수행하는지() {
+    func test_연산자가add일때에러없이연산을수행하는지() {
         // driven
         let targetOperator = Operator.add
+
         // when
-        let result = targetOperator.calculate(lhs: 1, rhs: 2)
+        let result = try? targetOperator.calculate(lhs: 1, rhs: 2)
+
         // then
+        XCTAssertNoThrow(result)
         XCTAssertEqual(result, 3)
     }
     
     func test_연산자가subtract일때연산을잘수행하는지() {
         let targetOperator = Operator.subtract
         
-        let result = targetOperator.calculate(lhs: 2, rhs: 1)
+        let result = try? targetOperator.calculate(lhs: 2, rhs: 1)
         
+        XCTAssertNoThrow(result)
         XCTAssertEqual(result, 1)
     }
     
     func test_연산자가multiply일때연산을잘수행하는지() {
         let targetOperator = Operator.multiply
         
-        let result = targetOperator.calculate(lhs: 2, rhs: 3)
+        let result = try? targetOperator.calculate(lhs: 2, rhs: 3)
         
+        XCTAssertNoThrow(result)
         XCTAssertEqual(result, 6)
     }
     
     func test_연산자가divide일때연산을잘수행하는지() {
         let targetOperator = Operator.divide
         
-        let result = targetOperator.calculate(lhs: 10, rhs: 2)
+        let result = try? targetOperator.calculate(lhs: 10, rhs: 2)
         
+        XCTAssertNoThrow(result)
         XCTAssertEqual(result, 5)
     }
     
