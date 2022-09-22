@@ -4,22 +4,44 @@
 
 import Foundation
 
-enum Operator: String {
-    case plus
-    case minus
-    case multiplication
-    case division
+enum Operator: CaseIterable, CalculateItem {
+    case add
+    case subtract
+    case multiply
+    case divide
     
-    func operate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) -> Double {
+        let result: Double
         switch self {
-        case .plus:
-            return lhs + rhs
-        case .minus:
-            return lhs - rhs
-        case .multiplication:
-            return lhs * rhs
-        case .division:
-            return lhs / rhs
+        case .add:
+            result = add(lhs: lhs, rhs: rhs)
+        case .subtract:
+            result = subtract(lhs: lhs, rhs: rhs)
+        case .multiply:
+            result = multiply(lhs: lhs, rhs: rhs)
+        case .divide:
+            result = divide(lhs: lhs, rhs: rhs)
         }
+        return result
+    }
+    
+    func add(lhs: Double, rhs: Double) -> Double {
+        let addResult: Double = lhs + rhs
+        return addResult
+    }
+    
+    func subtract(lhs: Double, rhs: Double) -> Double {
+        let subtractResult: Double = lhs - rhs
+        return subtractResult
+    }
+    
+    func multiply(lhs: Double, rhs: Double) -> Double {
+        let multiplyResult: Double = lhs * rhs
+        return multiplyResult
+    }
+    
+    func divide(lhs: Double, rhs: Double) -> Double {
+        let divideResult: Double = lhs / rhs
+        return divideResult
     }
 }

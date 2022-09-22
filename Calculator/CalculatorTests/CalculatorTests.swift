@@ -56,10 +56,10 @@ class CalculatorTests: XCTestCase {
     func test_더하기연산_성공하는지() {
         //given
         let enqueueStack: [Double] = [1,2]
-        let compute: Operator = .plus
+        let compute: Operator = .add
         
         //when
-        let result: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
+        let result: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
         
         //then
         XCTAssertEqual(result, 3.0)
@@ -68,10 +68,10 @@ class CalculatorTests: XCTestCase {
     func test_빼기연산_성공하는지() {
         //given
         let enqueueStack: [Double] = [1,-1]
-        let compute: Operator = .minus
+        let compute: Operator = .subtract
         
         //when
-        let result: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
+        let result: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
 
         //then
         XCTAssertEqual(result, 2.0)
@@ -80,13 +80,13 @@ class CalculatorTests: XCTestCase {
     func test_곱하기연산_성공하는지() {
         //given
         let enqueueStack: [Double] = [1500, 3000]
-        let compute: Operator = .multiplication
+        let compute: Operator = .multiply
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         
         //when
-        let value: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
+        let value: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
         guard let result = numberFormatter.string(for: value) else {
             return
         }
@@ -98,13 +98,13 @@ class CalculatorTests: XCTestCase {
     func test_나누기연산_성공하는지() {
         //given
         let enqueueStack: [Double] = [10000, 3]
-        let compute: Operator = .division
+        let compute: Operator = .divide
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 5
         numberFormatter.numberStyle = .decimal
         
         //when
-        let value: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
+        let value: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
         guard let result = numberFormatter.string(for: value) else {
             return
         }
