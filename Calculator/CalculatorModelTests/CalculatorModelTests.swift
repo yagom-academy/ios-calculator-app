@@ -45,9 +45,9 @@ class CalculatorModelTests: XCTestCase {
     }
     
     
-    func test_returnIsQueueEmpty() {
+    func test_queue에아무요소도없을때_isEmpty변수가true를반환하는지() {
         // given
-        
+        sut.queue = []
         
         // when
         let result: Bool = sut.isEmpty
@@ -56,7 +56,7 @@ class CalculatorModelTests: XCTestCase {
         XCTAssertEqual(result, true)
     }
     
-    func test_enqueue() {
+    func test_배열의요소_1_더하기연산자_3들을_enqueue해줬을때_순서에맞게queue에append되는지() {
         // given
         let input = ["1", "+", "3"]
         
@@ -69,7 +69,7 @@ class CalculatorModelTests: XCTestCase {
         XCTAssertEqual(sut.queue, ["1", "+", "3"])
     }
     
-    func test_dequeue() {
+    func test_queue에_1_더하기연산자_3이주어지고_dequeue해줬을때_queue에서1이사라지는지() {
         // given
         sut.queue = ["1", "+", "3"]
         
