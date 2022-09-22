@@ -21,9 +21,9 @@ class CalculatorModelTests: XCTestCase {
         sut = nil
     }
     
-    func test_printQueueCount() {
+    func test_enqueue가없었을때_count가0을반환하는지() {
         // given
-        
+        sut.queue = []
         
         // when
         let result: Int = sut.count
@@ -31,6 +31,19 @@ class CalculatorModelTests: XCTestCase {
         // then
         XCTAssertEqual(result, 0)
     }
+    
+    func test_queue의요소가하나만주어지고_dequeue했을때_count가0을반환하는지() {
+        // given
+        sut.queue = ["1"]
+        
+        // when
+        sut.queue.removeFirst()
+        let result: Int = sut.count
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
     
     func test_returnIsQueueEmpty() {
         // given
