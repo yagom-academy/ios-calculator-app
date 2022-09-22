@@ -9,6 +9,25 @@ import Darwin
 
 enum ExpressionParser {
     
+    static func parse(from input: String) -> Formula {
+        
+        let operands = CalculatorItemQueue<Double>()
+        let operators = CalculatorItemQueue<Operator>()
+        let components = componentsByOperators(from: input)
+        
+        for element in components {
+            if let operand = Double(element) {
+                operands.enqueue(item: operand)
+            } else {
+                if let `operator` = Operator(rawValue: Character(element)) {
+                    operators.enqueue(item: `operator`)
+                }
+            }
+        }
+        
+        return Formula(operands: operands, operators: operators)
+    }
+    
     static func componentsByOperators(from input: String) -> [String] {
         
         var result: [String] = []
