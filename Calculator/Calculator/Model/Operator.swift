@@ -16,11 +16,11 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
-            return add(lhs: lhs, rhs: rhs)
+            return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return add(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
-            return add(lhs: lhs, rhs: rhs)
+            return multiply(lhs: lhs, rhs: rhs)
         }
     }
 
