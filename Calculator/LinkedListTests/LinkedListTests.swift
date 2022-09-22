@@ -58,6 +58,23 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.bringListCount(), 2)
     }
     
+    func test_append_2번_removeFirst_2번_후_확인() {
+        sut.append(data: "1")
+        sut.append(data: "2")
+        sut.removeFirst()
+        sut.removeFirst()
+        XCTAssertEqual(sut.bringListCount(), 0)
+    }
+
+    func test_append_2번_removeFirst_3번_후_확인() {
+        sut.append(data: "1")
+        sut.append(data: "2")
+        sut.removeFirst()
+        sut.removeFirst()
+        sut.removeFirst()
+        XCTAssertEqual(sut.bringListCount(), 0)
+    }
+    
     func test_append_3번_후_removeAll실행_count확인() {
         sut.append(data: "1")
         sut.append(data: "2")
@@ -108,6 +125,24 @@ class LinkedListTests: XCTestCase {
         sut.append(data: "1")
         sut.append(data: "2")
         sut.append(data: "3")
+        sut.removeFirst()
+        sut.removeFirst()
+        sut.removeFirst()
+        XCTAssertTrue(sut.bringHead() == nil)
+    }
+    
+    func test_append_2번_removeFirst_3번후_head확인() {
+        sut.append(data: "1")
+        sut.append(data: "2")
+        sut.removeFirst()
+        sut.removeFirst()
+        sut.removeFirst()
+        XCTAssertTrue(sut.bringHead() == nil)
+    }
+    
+    func test_append_2번_removeFirst_3번후_tail확인() {
+        sut.append(data: "1")
+        sut.append(data: "2")
         sut.removeFirst()
         sut.removeFirst()
         sut.removeFirst()
