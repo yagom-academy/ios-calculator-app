@@ -18,14 +18,14 @@ struct Formula {
               let operatorSymbol = operators.dequeue() else {
             return 0
         }
-        result = result + operatorSymbol.calculate(lhs: firstNumber, rhs: secondNumber)
+        result =  operatorSymbol.calculate(lhs: firstNumber, rhs: secondNumber)
         
         while operands.count >= 1 {
             guard let nextNumber = operands.dequeue(),
                   let nextOperatorSymbol = operators.dequeue() else {
                 return 0
             }
-            result = result + nextOperatorSymbol.calculate(lhs: result, rhs: nextNumber)
+            result = nextOperatorSymbol.calculate(lhs: result, rhs: nextNumber)
         }
         return result
     }
