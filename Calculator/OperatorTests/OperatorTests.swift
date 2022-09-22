@@ -41,7 +41,7 @@ class OperatorTests: XCTestCase {
     
     func test_Operator타입의_multiply_case가_생성되는가() {
         //when
-        sut = Operator.multiyply
+        sut = Operator.multiply
         
         //then
         XCTAssertNotNil(sut)
