@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
-
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue: {
     private var queue: [String] = []
     
     var count: Int {
