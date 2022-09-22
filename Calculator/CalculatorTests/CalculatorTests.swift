@@ -26,7 +26,7 @@ final class CalculatorTests: XCTestCase {
         let number: String = "50"
         
         // when
-        sut?.addQueue(number)
+        sut?.enqueue(number)
         
         // then
         XCTAssertEqual(sut?.queue, ["50"])
@@ -34,7 +34,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_subtractQueue실행시_queue가_비어있을_때_nil을_리턴하는지() {
         // when
-        let result = sut?.subtractQueue()
+        let result = sut?.dequeue()
         
         // then
         XCTAssertNil(result)
@@ -45,7 +45,7 @@ final class CalculatorTests: XCTestCase {
         sut?.queue = ["14512","abcd"]
         
         // when
-        let _ = sut?.subtractQueue()
+        let _ = sut?.dequeue()
         
         // then
         XCTAssertEqual(sut?.queue.first, "abcd")
@@ -56,7 +56,7 @@ final class CalculatorTests: XCTestCase {
         sut?.queue = ["14512","abcd", "C"]
         
         // when
-        let _ = sut?.subtractQueue()
+        let _ = sut?.dequeue()
         
         // then
         XCTAssertEqual(sut?.queue, ["abcd", "C"])
