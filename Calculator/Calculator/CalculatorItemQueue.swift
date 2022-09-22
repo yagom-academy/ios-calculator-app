@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T: CalculateItem> {
     var front: Node<T>?
     var rear: Node<T>?
     
