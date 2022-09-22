@@ -14,16 +14,14 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     var front: Element? {
-        return outputStack.first ?? inputStack.first
+        return outputStack.last ?? inputStack.first
     }
     
     var count: Int {
         return outputStack.count + inputStack.count
     }
     
-    init() { }
-    
-    init(elements: [Element]) {
+    init(elements: [Element] = []) {
         self.inputStack = elements
     }
     
@@ -42,10 +40,5 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         }
         
         return outputStack.removeLast()
-    }
-    
-    func peek(_ index: Int) -> Element? {
-        let values = outputStack + inputStack.reversed()
-        return values.reversed()[index]
     }
 }
