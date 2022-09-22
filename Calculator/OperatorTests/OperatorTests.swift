@@ -8,19 +8,46 @@
 /*
  테스트 목적 : Operator의 Calculate 메서드가 잘 동작하는가
  
- 1. calculate 메서드를 통해서 연산을 잘 수행하는가?
+ 1. add 타입일 경우에 계산이 잘되는가?
+ 2. subtract 타입일 경우에 계산이 잘되는가?
+ 3. multiply 타입일 경우에 계산이 잘되는가?
+ 4. divide 타입일 경웨 계산이 잘되는가?
+ 
  */
 
 import XCTest
 @testable import Calculator
 
 final class OperatorTests: XCTestCase {
-    var sut: Operator!
-    override func setUpWithError() throws {
-        sut = Operator.allCases.randomElement()
+    func test_add타입일경우에_더하기를_잘수행하는가() {
+        // driven
+        
+        // when
+        
+        // then
     }
-
-    override func tearDownWithError() throws {
-        sut = nil
+    
+    func test_subtract타입일경우에_빼기를_잘수행하는가() {
+        // driven
+        
+        // when
+        
+        // then
+    }
+    
+    func test_multiply타입일경우에_곱하기를_잘수행하는가() {
+        // driven
+        
+        // when
+        
+        // then
+    }
+    
+    func test_divide타입일경우에_나누기를_잘수행하는가() {
+        // driven
+        
+        // when
+        
+        // then
     }
 }
