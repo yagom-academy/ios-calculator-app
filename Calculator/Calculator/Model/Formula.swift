@@ -5,14 +5,22 @@
 //  Created by 써니쿠키 on 2022/09/22.
 //
 
-import Foundation
-
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() throws -> Double {
-        // 코드 구현 예정
-        return 0.0
+        var result: Double = 0.0
+        
+        while operands.isEmpty() == false {
+            guard let operatorCase: Operator = self.operators.dequeue()?.data,
+                  let operand: Double = self.operands.dequeue()?.data else {
+                throw CalculatorError.otherError
+            }
+            
+            result = try Operator.calculate(operatorCase)(lhs: result, rhs: operand)
+        }
+        
+        return result
     }
 }
