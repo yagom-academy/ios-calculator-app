@@ -5,7 +5,7 @@
 //  Created by 노유빈 on 2022/09/19.
 //
 
-struct CalculatorItemQueue {
+struct CalculatorItemQueue<CalculateItem> {
     private var enqueue: [CalculateItem] = []
     private var dequeue: [CalculateItem] = []
     

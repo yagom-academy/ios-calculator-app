@@ -6,20 +6,20 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var result = operands.pop() as? Double else {
+        guard var result = operands.pop() else {
             throw CalculatorError.queueIsEmpty
         }
         
         while !operands.isEmpty {
-            guard let currentOperator = operators.pop() as? Operator else {
+            guard let currentOperator = operators.pop() else {
                 throw CalculatorError.queueIsEmpty
             }
             
-            guard let operand = operands.pop() as? Double else {
+            guard let operand = operands.pop() else {
                 throw CalculatorError.queueIsEmpty
             }
             
