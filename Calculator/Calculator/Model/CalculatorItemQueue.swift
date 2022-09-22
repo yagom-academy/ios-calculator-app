@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue {
-    private var queue: [CalculatorItem] = [CalculatorItem]()
+    private var queue: [CalculatorItem] = []
     var isEmpty: Bool {
         return queue.isEmpty ? false : true
     }
@@ -22,9 +22,8 @@ struct CalculatorItemQueue {
         if queue.isEmpty {
             return nil
         }
-        queue.removeFirst()
         
-        return queue.first
+        return queue.removeFirst()
     }
 }
 
