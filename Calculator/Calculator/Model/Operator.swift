@@ -35,3 +35,5 @@ enum Operator: Character {
         return rhs * lhs
     }
 }
+
+extension Operator: CaseIterable {}

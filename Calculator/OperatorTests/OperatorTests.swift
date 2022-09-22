@@ -152,7 +152,7 @@ class OperatorTests: XCTestCase {
     
     func test_입력값_Operator타입_allCases프로퍼티를_forEach통해_순회하면_전달되는_요소들의_type은_Operator타입과_같은가() {
         //given
-        let input: [Operator] = sut.allCases
+        let input: [Operator] = Operator.allCases
         
         //when
         input.forEach {
