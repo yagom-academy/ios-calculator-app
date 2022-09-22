@@ -11,4 +11,9 @@ extension Double: CalculateItem {
 }
 
 extension String {
+    func split(with target: Character) -> [String] {
+        let result = split(separator: target).map { (value) -> String in
+            return String(value) }
+        return result
+    }
 }

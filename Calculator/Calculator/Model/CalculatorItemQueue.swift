@@ -22,7 +22,8 @@ struct CalculatorItemQueue {
         queue.append(element)
     }
     
-    @discardableResult mutating func dequeue() -> String? {
+    @discardableResult
+    mutating func dequeue() -> String? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
