@@ -40,25 +40,16 @@ final class CalculatorTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_dequeue실행시_queue가_값을_가질때_그_다음값을_반환하는지() {
+    func test_dequeue실행시_queue가_값을_가질때_dequeue의_값이_반환되고_삭제되는지() {
         // given
-        sut?.queue = ["14512","abcd"]
+        let queue1: Int = 10
         
         // when
-        let _ = sut?.dequeue()
-        
+        sut?.enqueue(queue1)
+        let result = sut?.dequeue()
+
         // then
-        XCTAssertEqual(sut?.queue.first, "abcd")
-    }
-    
-    func test_dequeue실행시_queue가_제거_되었을때_0인덱스가_제거되는지() {
-        // given
-        sut?.queue = ["14512","abcd", "C"]
-        
-        // when
-        let _ = sut?.dequeue()
-        
-        // then
-        XCTAssertEqual(sut?.queue, ["abcd", "C"])
+        XCTAssertEqual(sut?.count, 0)
+        XCTAssertEqual(result as! Int, queue1)
     }
 }
