@@ -20,6 +20,9 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
+            if rhs == 0 {
+                fatalError("0으로 나눌 수 없습니다!")
+            }
             return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
