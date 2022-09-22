@@ -26,22 +26,22 @@ class CalculatorTests: XCTestCase {
         }
     }
     
-    func test_rightStack에_값이_정상적으로_추가되는지() {
+    func test_enqueueStack에_값이_정상적으로_추가되는지() {
         //given
         sut.enqueue(element: 10.0)
         sut.enqueue(element: 100.0)
         sut.enqueue(element: 200.0)
         
         //when
-        let result: [Double] = sut.rightStack
+        let result: [Double] = sut.enqueueStack
 
         //then
         XCTAssertEqual(result, [10, 100, 200])
     }
     
-    func test_leftStack이_비어있지않은경우_값을_넣지않는지() {
+    func test_dequeueStack이_비어있지않은경우_값을_넣지않는지() {
         //given
-        sut.rightStack = [100.0, 200.0]
+        sut.enqueueStack = [100.0, 200.0]
         var result = sut.dequeue()
         sut.enqueue(element: 300.0)
         sut.enqueue(element: 400.0)
@@ -55,11 +55,11 @@ class CalculatorTests: XCTestCase {
     
     func test_더하기연산_성공하는지() {
         //given
-        let rightStack: [Double] = [1,2]
+        let enqueueStack: [Double] = [1,2]
         let compute: Operator = .plus
         
         //when
-        let result: Double = compute.operate(lhs: rightStack[0], rhs: rightStack[1])
+        let result: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
         
         //then
         XCTAssertEqual(result, 3.0)
@@ -67,11 +67,11 @@ class CalculatorTests: XCTestCase {
     
     func test_빼기연산_성공하는지() {
         //given
-        let rightStack: [Double] = [1,-1]
+        let enqueueStack: [Double] = [1,-1]
         let compute: Operator = .minus
         
         //when
-        let result: Double = compute.operate(lhs: rightStack[0], rhs: rightStack[1])
+        let result: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
 
         //then
         XCTAssertEqual(result, 2.0)
@@ -79,14 +79,14 @@ class CalculatorTests: XCTestCase {
     
     func test_곱하기연산_성공하는지() {
         //given
-        let rightStack: [Double] = [1500, 3000]
+        let enqueueStack: [Double] = [1500, 3000]
         let compute: Operator = .multiplication
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
         
         //when
-        let value: Double = compute.operate(lhs: rightStack[0], rhs: rightStack[1])
+        let value: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
         guard let result = numberFormatter.string(for: value) else {
             return
         }
@@ -97,14 +97,14 @@ class CalculatorTests: XCTestCase {
     
     func test_나누기연산_성공하는지() {
         //given
-        let rightStack: [Double] = [10000, 3]
+        let enqueueStack: [Double] = [10000, 3]
         let compute: Operator = .division
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 5
         numberFormatter.numberStyle = .decimal
         
         //when
-        let value: Double = compute.operate(lhs: rightStack[0], rhs: rightStack[1])
+        let value: Double = compute.operate(lhs: enqueueStack[0], rhs: enqueueStack[1])
         guard let result = numberFormatter.string(for: value) else {
             return
         }

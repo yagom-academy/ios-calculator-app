@@ -5,23 +5,23 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var rightStack: [T] = []
-    var leftStack: [T] = []
+    var enqueueStack: [T] = []
+    var dequeueStack: [T] = []
 
     mutating func enqueue(element: T) {
-        rightStack.append(element)
+        enqueueStack.append(element)
     }
 
     mutating func dequeue() -> T? {
         reverseQueue()
-        let value: T? = leftStack.popLast()
+        let value: T? = dequeueStack.popLast()
         return value
     }
 
     mutating func reverseQueue() {
-        if leftStack.isEmpty {
-            leftStack = rightStack.reversed()
-            rightStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
     }
 }

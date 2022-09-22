@@ -4,8 +4,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
+protocol CalculateItem {}
 
-extension Double: CalculateItem {
-}
+extension Double: CalculateItem {}
