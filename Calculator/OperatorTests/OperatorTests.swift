@@ -161,4 +161,11 @@ class OperatorTests: XCTestCase {
         }
     }
     
+    func test_입력값_Operator타입의_add_case를_is로_Type을_확인하면_CalculateItem과_같은_Type인가() {
+        //given
+        sut = Operator.add
+        
+        //when, then
+        XCTAssertTrue(sut is CalculateItem)
+    }
 }
