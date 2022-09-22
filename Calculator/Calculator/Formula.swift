@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double> = .init()
-    var operators: CalculatorItemQueue<Operator> = .init()
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
         guard var leftNumber = operands.dequeue() else {
