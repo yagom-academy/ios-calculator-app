@@ -11,13 +11,14 @@ struct Formula {
     
     func result() -> Double {
         
-        guard var lhsNum = operands.dequeue() else { return 0 }
+        guard let initialValue = operands.dequeue() else { return 0 }
+        var result = initialValue
         
         while !operands.isEmpty() {
-            guard let rhsNum = operands.dequeue() else { return 0 }
-            lhsNum = operators.dequeue()?.calculate(lhs: lhsNum, rhs: rhsNum) ?? 0
+            guard let newValue = operands.dequeue() else { return 0 }
+            result = operators.dequeue()?.calculate(lhs: result, rhs: newValue) ?? 0
         }
         
-        return lhsNum
+        return result
     }
 }
