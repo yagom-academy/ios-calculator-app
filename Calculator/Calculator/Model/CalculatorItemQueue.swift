@@ -25,5 +25,9 @@ struct CalculatorItemQueue {
         
         return queue.removeFirst()
     }
+    
+    func peek() -> CalculatorItem? {
+        return nil
+    }
 }
 

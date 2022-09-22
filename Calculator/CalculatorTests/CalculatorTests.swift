@@ -52,4 +52,17 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut?.count, 0)
         XCTAssertEqual(result as! Int, queue1)
     }
+    
+    func test_peek실행시_큐의_첫_번째_요소를_반환하는지() {
+        // given
+        let queue1: Int = 1
+        
+        // when
+        sut?.enqueue(queue1)
+        let result = sut?.peek()
+        
+        // then
+        XCTAssertEqual(result as! Int, 1)
+        
+    }
 }
