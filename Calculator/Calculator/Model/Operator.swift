@@ -5,6 +5,10 @@ enum Operator: Character {
     case multiply = "*"
     
     func calculate(rhs: Double, lhs: Double) -> Double {
-        return rhs + lhs
+        if self == .add {
+            return rhs + lhs
+        } else {
+            return rhs - lhs
+        }
     }
 }
