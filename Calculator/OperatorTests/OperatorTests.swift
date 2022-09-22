@@ -46,4 +46,15 @@ class OperatorTests: XCTestCase {
         //then
         XCTAssertNotNil(sut)
     }
+    
+    func test_Character타입_입력값_a를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator가_nil인가() {
+        //given
+        let input: Character = "a"
+        
+        //when
+        sut = Operator.init(rawValue: input))
+        
+        //then
+        XCTAssertNil(sut)
+    }
 }
