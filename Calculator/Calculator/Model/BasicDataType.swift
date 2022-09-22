@@ -2,6 +2,16 @@ extension Double: CalculateItem { }
 
 extension String {
     func split(with target: Character) -> [String] {
-        return []
+        var temporaryString: String = ""
+        var splitResult: [String] = []
+        self.forEach {
+            if $0 != target {
+                temporaryString.append($0)
+            } else {
+                splitResult.append(temporaryString)
+                temporaryString.removeAll()
+            }
+        }
+        return splitResult.filter({!$0.isEmpty})
     }
 }
