@@ -108,7 +108,7 @@ class OperatorTests: XCTestCase {
         
         //when
         sut = Operator.add
-        let result: Double = sut.calculate(rhs: input[0], lhs: input[1])
+        let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(6.0, result)
@@ -120,7 +120,7 @@ class OperatorTests: XCTestCase {
         
         //when
         sut = Operator.subtract
-        let result: Double = sut.calculate(rhs: input[0], lhs: input[1])
+        let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(2.0, result)
@@ -132,7 +132,7 @@ class OperatorTests: XCTestCase {
         
         //when
         sut = Operator.divide
-        let result: Double = sut.calculate(rhs: input[0], lhs: input[1])
+        let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(3.0, result)
@@ -144,7 +144,7 @@ class OperatorTests: XCTestCase {
         
         //when
         sut = Operator.multiply
-        let result: Double = sut.calculate(rhs: input[0], lhs: input[1])
+        let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(45.0, result)
