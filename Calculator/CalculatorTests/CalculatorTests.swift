@@ -63,6 +63,17 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(result as! Int, 1)
+    }
+    
+    func test_clear실행시_queue의_모든_요소들이_삭제되는지() {
+        // given
+        let queue1: Int = 2
         
+        // when
+        sut?.enqueue(queue1)
+        sut?.clear()
+        
+        // then
+        XCTAssertTrue(sut!.isEmpty)
     }
 }

@@ -29,5 +29,9 @@ struct CalculatorItemQueue {
     func peek() -> CalculatorItem? {
         return queue.first ?? nil
     }
+    
+    mutating func clear() {
+        
+    }
 }
 
