@@ -1,6 +1,6 @@
 enum Operator: Character {
-    case add = "b"
-    case subtract = "c"
-    case divide = "d"
-    case multiply = "f"
+    case add = "+"
+    case subtract = "-"
+    case divide = "/"
+    case multiply = "*"
 }
