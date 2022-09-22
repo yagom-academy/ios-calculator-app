@@ -14,7 +14,18 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+        let result: Double
+        switch self {
+        case .add:
+            result = add(lhs: lhs, rhs: rhs)
+        case .subtract:
+            result = subtract(lhs: lhs, rhs: rhs)
+        case .divide:
+            result = divide(lhs: lhs, rhs: rhs)
+        case .multiply:
+            result = multiply(lhs: lhs, rhs: rhs)
+        }
+        return result
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
@@ -28,9 +39,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        let quotient = lhs / rhs
-        let remainder = lhs.truncatingRemainder(dividingBy: rhs)
-        let result = quotient + remainder
+        let result = lhs / rhs
         return result
     }
     
