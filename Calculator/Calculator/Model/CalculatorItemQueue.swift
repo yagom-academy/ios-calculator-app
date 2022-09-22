@@ -7,6 +7,9 @@
 
 struct CalculatorItemQueue: CalculatorItem {
     private var queue: [String] = [String]()
+    var isEmpty: Bool {
+        return queue.isEmpty ? false : true
+    }
     
     mutating func enqueue(_ element: String) {
         queue.append(element)
