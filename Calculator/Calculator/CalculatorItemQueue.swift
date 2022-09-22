@@ -1,6 +1,6 @@
 //  Created by Aejong on 2022/09/21.
 
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue {
     
     var queue: [String] = []
     
