@@ -40,12 +40,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         return calculateItems
     }
     
-    func pushCalculateItems(_ calculateItems: [CalculateItem]) {
-        for calculateItem in calculateItems {
-            sut.push(calculateItem)
-        }
-    }
-    
     func isEqualCalculateItem(_ item1: CalculateItem, _ item2: CalculateItem) -> Bool {
         if let item1 = item1 as? Double {
             if item1 == item2 as? Double { return true }
@@ -60,7 +54,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let calculateItems = generateRandomCalculateItems()
         var result = true
         
-        pushCalculateItems(calculateItems)
+        sut.push(calculateItems)
         
         for calculateItem in calculateItems {
             guard let poppedItem = sut.pop() else { return }

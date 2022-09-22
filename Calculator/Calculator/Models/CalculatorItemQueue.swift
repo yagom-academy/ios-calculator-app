@@ -21,6 +21,10 @@ struct CalculatorItemQueue<CalculateItem> {
         enqueue.append(element)
     }
     
+    mutating func push(_ elements: [CalculateItem]) {
+        elements.forEach { push($0) }
+    }
+    
     mutating func pop() -> CalculateItem? {
         if dequeue.isEmpty {
             dequeue = enqueue.reversed()
