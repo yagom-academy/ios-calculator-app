@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue<DataType: CalculateItem> {
-    var data: [DataType] = []
+    private var data: [DataType] = []
     var count: Int {
         get {
             return data.count
@@ -38,8 +38,6 @@ struct CalculatorItemQueue<DataType: CalculateItem> {
             return data.capacity == data.count
         }
     }
-    
-    init() {}
     
     mutating func enqueue(_ element: DataType) {
         data.append(element)
