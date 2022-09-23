@@ -6,7 +6,7 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: CalculateItem {
+class CalculatorItemQueue<T> {
     private(set) var head: Node<T>? = nil
     var last: Node<T>? {
         guard head != nil else {
