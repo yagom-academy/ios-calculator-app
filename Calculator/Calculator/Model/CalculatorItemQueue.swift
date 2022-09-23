@@ -5,23 +5,23 @@
 //  Created by dragon on 2022/09/21.
 //
 
-public struct CalculatorItemQueue<T> {
-    private var data = [T]()
+public struct CalculatorItemQueue {
+    private var data = [String]()
     public var count: Int {
         return data.count
     }
     
     public init() {}
     
-    public mutating func enqueue(element: T) {
+    public mutating func enqueue(element: String) {
         return data.append(element)
     }
     
-    public mutating func dequeue() -> T? {
+    public mutating func dequeue() -> String? {
         return data.removeFirst()
     }
     
-    public mutating func peek() -> T? {
+    public mutating func peek() -> String? {
         return data.first
     }
     
