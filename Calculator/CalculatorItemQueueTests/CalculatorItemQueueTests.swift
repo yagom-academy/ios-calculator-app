@@ -21,7 +21,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue호출시_data가비어있는지() {
+    func test_enqueue호출시_data가_비어있지않은지() {
         // given
         let input = 0.0
         
@@ -38,10 +38,12 @@ class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(input)
-        if let result = sut.peek {
-            // then
-            XCTAssertEqual(result, 3.0)
+        guard let result = sut.peek else {
+            return XCTFail()
         }
+        
+        // then
+        XCTAssertEqual(result, input)
     }
 
     func test_enqueue반복호출시_data의마지막값과_전달값의마지막값이_같은지() {

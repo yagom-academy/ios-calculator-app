@@ -6,8 +6,13 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
+    
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
+    }
     
     mutating func result() throws -> Double {
         guard var leftNumber = operands.dequeue() else {
@@ -17,7 +22,11 @@ struct Formula {
             guard let operatorSign = operators.dequeue() else {
                 throw FormulaError.invalidInput
             }
-            leftNumber = operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
+            do {
+                leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
+            } catch {
+                throw FormulaError.divideByZero
+            }
         }
         return leftNumber
     }

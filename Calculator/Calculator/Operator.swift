@@ -11,7 +11,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multifly = "*"
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         var result: Double = lhs
         switch self {
         case .add:
@@ -22,7 +22,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
             do {
                 result =  try divide(lhs: lhs, rhs: rhs)
             } catch {
-                print(error.localizedDescription)
+                throw error
             }
         case .multifly:
             result = multifly(lhs: lhs, rhs: rhs)
@@ -40,7 +40,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         guard rhs != Double.zero else {
-            throw FormulaError.invalidOperand
+            throw FormulaError.divideByZero
         }
         return lhs / rhs
     }
