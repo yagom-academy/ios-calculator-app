@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var queue = LinkedList<Element>()
+    private(set) var queue = LinkedList<Element>()
     
     mutating func enqueue(_ data: Element) {
         queue.append(data)
@@ -20,7 +20,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         queue.removeAll()
     }
     
-    func bringQueue() -> LinkedList<Element> {
-        return queue
+    mutating func isEmpty() -> Bool {
+        queue.isEmpty()
     }
 }

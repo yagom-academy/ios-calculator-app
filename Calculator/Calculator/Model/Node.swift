@@ -6,19 +6,11 @@
 //
 
 class Node<Element: CalculateItem> {
-    private var data: Element
-    private var next: Node?
+    private(set) var data: Element
+    private(set) var next: Node?
     
     init(data: Element) {
         self.data = data
-    }
-    
-    func bringData() -> Element {
-        return data
-    }
-    
-    func bringNextNode() -> Node? {
-        return next
     }
     
     func setNextNode(destination: Node) {

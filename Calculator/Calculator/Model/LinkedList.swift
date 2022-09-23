@@ -6,8 +6,8 @@
 //
 
 struct LinkedList<Element: CalculateItem> {
-    private var head: Node<Element>?
-    private var tail: Node<Element>?
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     
     mutating func append(_ data: Element) {
         guard head != nil else {
@@ -22,13 +22,13 @@ struct LinkedList<Element: CalculateItem> {
     }
     
     mutating func removeFirst() -> Element? {
-        let result = head?.bringData()
+        let result = head?.data
         
-        if head?.bringNextNode() == nil {
+        if head?.next == nil {
             tail = nil
         }
         
-        self.head = head?.bringNextNode()
+        self.head = head?.next
         return result
     }
     
@@ -37,12 +37,12 @@ struct LinkedList<Element: CalculateItem> {
         tail = nil
     }
     
-    func bringHead() -> Node<Element>? {
-        return head
-    }
-    
-    func bringTail() -> Node<Element>? {
-        return tail
+    mutating func isEmpty() -> Bool {
+        if (head == nil) && (tail == nil) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

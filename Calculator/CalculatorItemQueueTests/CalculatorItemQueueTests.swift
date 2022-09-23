@@ -24,7 +24,7 @@ class CalculatorItemQueueTests: XCTestCase {
     func testCalculatorItemQueue_문자열을_enqueue했을때해당문자열이잘들어가야한다() {
         sut.enqueue("HI")
         
-        let result = sut.dequeue()
+        let result = sut.queue.head?.data
 
         XCTAssertEqual(result, "HI")
     }
@@ -35,16 +35,22 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("HU")
         sut.removeAll()
         
-        let result = sut.bringQueue().bringHead()
+        let result = sut.isEmpty()
         
-        XCTAssertEqual(result == nil, true)
+        XCTAssertTrue(result)
     }
     
-    func testCalculatorItemQueue_Queue_가비었을때_removeFirst를하면_nil이나와야한다() {
+    func testCalculatorItemQueue_Queue_가비었을때_dequeue를하면_nil이나와야한다() {
+        let result = sut.dequeue()
         
+        XCTAssertNil(result)
     }
     
-    func testCalculatorItemQueue_removeFirst를했을때_제일앞에요소가나와야한다() {
+    func testCalculatorItemQueue_dequeue를했을때_해당문자열이나와야한다() {
+        sut.enqueue("HI")
         
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, "HI")
     }
 }

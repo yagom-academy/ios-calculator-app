@@ -22,7 +22,7 @@ class LinkedListTests: XCTestCase {
     func testLinkedList_문자열을_append했을때_해당문자열이잘들어가야한다() {
         sut.append("HI")
         
-        let result = sut.removeFirst()
+        let result = sut.head?.data
 
         XCTAssertEqual(result, "HI")
     }
@@ -33,15 +33,23 @@ class LinkedListTests: XCTestCase {
         sut.append("HU")
         sut.removeAll()
         
-        XCTAssertEqual(sut.bringHead() == nil && sut.bringTail() == nil, true)
+        let result = sut.isEmpty()
+        
+        XCTAssertTrue(result)
     }
     
     func testLinkedList_LinkedList_가비었을때_removeFirst를하면_nil이나와야한다() {
+        let result = sut.removeFirst()
         
+        XCTAssertNil(result)
     }
     
     func testLinkedList_removeFirst를했을때_제일앞에요소가나와야한다() {
+        sut.append("HI")
         
+        let result = sut.removeFirst()
+        
+        XCTAssertEqual(result, "HI")
     }
 }
 
