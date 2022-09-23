@@ -32,4 +32,18 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(0, result)
     }
+    
+    func test_result실행시_두번째연산자가없으면_첫번째연산자를리턴하는가() {
+        //given
+        operandsQueue.enqueue(element: 3)
+        operatorsQueue.enqueue(element: Operator.add)
+        operandsQueue.enqueue(element: 6)
+        operatorsQueue.enqueue(element: Operator.divide)
+        
+        //when
+        let result = sut.result()
+        
+        //then
+        XCTAssertEqual(9, result)
+    }
 }
