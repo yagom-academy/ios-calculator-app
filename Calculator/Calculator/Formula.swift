@@ -10,4 +10,9 @@ import Foundation
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Character>
+    
+    enum FormulaError: Error {
+        case emptyOperandsQueue
+        case emptyOperatorsQueue
+    }
 }
