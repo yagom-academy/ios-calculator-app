@@ -27,6 +27,13 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return outputStack.removeLast()
     }
     
+    mutating func isEmpty() -> Bool {
+        if inputStack.isEmpty && outputStack.isEmpty {
+            return true
+        }
+        return false
+    }
+    
     mutating func clear() {
         inputStack.removeAll()
         outputStack.removeAll()
