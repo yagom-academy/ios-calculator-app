@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C21766028D94CB9006FE263 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF637A328D8BB8500611FE6 /* CalculatorItemQueueTests.swift */; };
+		3C3C0BA528DD52C7005A9883 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C0BA428DD52C7005A9883 /* CalculatorError.swift */; };
 		3C3EF12B28DBF18E003F6900 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3EF12A28DBF18E003F6900 /* String+.swift */; };
 		3C3EF12D28DBF1C9003F6900 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3EF12C28DBF1C9003F6900 /* CalculateItem.swift */; };
 		3C3F95C928DC683C00F63109 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F95C828DC683C00F63109 /* Double+.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C3C0BA428DD52C7005A9883 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		3C3EF12A28DBF18E003F6900 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		3C3EF12C28DBF1C9003F6900 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		3C3F95C828DC683C00F63109 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
@@ -145,9 +147,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C3C0BA628DD54BE005A9883 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				3C3C0BA428DD52C7005A9883 /* CalculatorError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		3C3EF12728DBF149003F6900 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3C3C0BA628DD54BE005A9883 /* Error */,
 				3C3F95DD28DCB92D00F63109 /* Constant */,
 				3C3EF12928DBF177003F6900 /* Extension */,
 				3C3EF12828DBF16F003F6900 /* Utils */,
@@ -565,6 +576,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				3C3EF12D28DBF1C9003F6900 /* CalculateItem.swift in Sources */,
+				3C3C0BA528DD52C7005A9883 /* CalculatorError.swift in Sources */,
 				3CF637C628D9474700611FE6 /* LinkedList.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				3C3F95CB28DC68B800F63109 /* Operator.swift in Sources */,
