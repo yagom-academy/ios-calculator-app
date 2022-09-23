@@ -5,12 +5,13 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) -> [Double] {
+    static func parse(from input: String) -> Formula {
+        var fomulaTest: Formula = Formula()
         let separatedInputOperands: Array<String> = input.components(separatedBy: ["+","-","*","/"])
         let doubleNumbersOperands = separatedInputOperands.map({ (number: String) -> Double in
             return Double(number) ?? 99.999
         })
-        return doubleNumbersOperands
+        return fomulaTest
     }
     
     static func componentsByOperators(from input: String) -> [String] {
