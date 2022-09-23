@@ -5,19 +5,18 @@
 //  Created by 이경민 on 2022/09/22.
 //
 
+import Foundation
+
 struct Formula {
     private var operands = CalculatorItemQueue<Double>()
     private var operators = CalculatorItemQueue<Operator>()
     
-    mutating func setUpOperands(operands: [Double]) {
+    init(operands: [Double], operators: [Operator]) {
         self.operands = CalculatorItemQueue(elements: operands)
-    }
-    
-    mutating func setUpOperators(operators: [Operator]) {
         self.operators = CalculatorItemQueue(elements: operators)
     }
     
-    func result() throws -> Double {
+    func result() -> Double {
         var operands = operands, operators = operators
         
         guard var calResult: Double = operands.dequeue() else {
@@ -35,7 +34,7 @@ struct Formula {
             do {
                 calResult = try firstOperator.calculate(lhs: calResult, rhs: firstOperand)
             } catch {
-                throw error
+                return 0
             }
         }
         
