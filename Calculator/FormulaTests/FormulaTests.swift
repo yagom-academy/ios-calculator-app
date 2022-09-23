@@ -36,4 +36,17 @@ class FormulaTests: XCTestCase {
         
         XCTAssertEqual(result, try sut.result())
     }
+    
+    func test_1_더하기_3_빼기_2은_2로_나오는가() {
+        let result = 2.0
+        
+        sut.operands.enQueue(element: 1.0)
+        sut.operands.enQueue(element: 3.0)
+        sut.operands.enQueue(element: 2.0)
+        
+        sut.operators.enQueue(element: Operator.add.rawValue)
+        sut.operators.enQueue(element: Operator.subtract.rawValue)
+        
+        XCTAssertEqual(result, try sut.result())
+    }
 }
