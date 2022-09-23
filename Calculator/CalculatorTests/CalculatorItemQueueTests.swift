@@ -13,7 +13,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Double>()
     }
     
     func test_큐가_비어있는_상태에서_pop_하면_nil() {

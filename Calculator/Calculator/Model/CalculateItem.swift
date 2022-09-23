@@ -8,5 +8,3 @@
 protocol CalculateItem {
     
 }
-
-extension Double: CalculateItem { }

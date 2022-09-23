@@ -12,7 +12,7 @@ enum ExpressionParser {
         return Formula()
     }
     
-    private static func componentsByOperators(from int: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         return []
     }
 }
