@@ -6,8 +6,13 @@
 //
 
 struct Formula {
-    let operands: CalculatorItemQueue<Double>()
-    let operators: CalculatorItemQueue<Operator>()
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
+    
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
+    }
     
     func result() -> Double {
         return 0
