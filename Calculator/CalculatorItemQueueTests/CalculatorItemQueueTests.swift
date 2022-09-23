@@ -29,6 +29,12 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, "HI")
     }
     
+    func testCalculatorItemQueue_비어있는CalculatorItemQueue에_isEmpty를_호출했을때_정확한Bool값이나와야한다() {
+        let result = sut.isEmpty()
+        
+        XCTAssertTrue(result)
+    }
+    
     func testCalculatorItemQueue_Queue가비어있을때_removeAll을하면_nil이나와야한다() {
         sut.enqueue("HI")
         sut.enqueue("HO")

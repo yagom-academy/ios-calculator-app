@@ -27,6 +27,12 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, "HI")
     }
     
+    func testLinkedList_비어있는LinkedList에_isEmpty를_호출했을때_정확한Bool값이나와야한다() {
+        let result = sut.isEmpty()
+        
+        XCTAssertTrue(result)
+    }
+    
     func testLinkedList_문자열3개를_append한후_removeAll을이용하여전부삭제돼야한다() {
         sut.append("HI")
         sut.append("HO")
