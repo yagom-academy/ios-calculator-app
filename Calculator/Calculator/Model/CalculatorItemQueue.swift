@@ -8,7 +8,7 @@
 struct CalculatorItemQueue {
     private var queue: [CalculatorItem] = []
     var isEmpty: Bool {
-        return queue.isEmpty ? true : false
+        return queue.isEmpty
     }
     var count: Int {
         return queue.count
@@ -27,7 +27,7 @@ struct CalculatorItemQueue {
     }
     
     func peek() -> CalculatorItem? {
-        return queue.first ?? nil
+        return queue.first
     }
     
     mutating func clear() {
