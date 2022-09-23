@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
-    private(set) var queue: [String] = []
+struct CalculatorItemQueue<T> {
+    private(set) var queue: [T] = []
     
     var count: Int {
         return queue.count
@@ -18,12 +18,12 @@ struct CalculatorItemQueue {
         return queue.isEmpty
     }
     
-    mutating func enqueue(_ element: String) {
+    mutating func enqueue(_ element: T) {
         queue.append(element)
     }
     
     @discardableResult
-    mutating func dequeue() -> String? {
+    mutating func dequeue() -> T? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
