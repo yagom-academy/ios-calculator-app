@@ -20,4 +20,8 @@ class FormulaTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_값이_없을_때_result_메서드를_실행하면_오류가_나는가() {
+        XCTAssertThrowsError(try sut.result())
+    }
 }
