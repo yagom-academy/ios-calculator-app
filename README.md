@@ -6,17 +6,17 @@
 
 ---
 ### 목차
-1. [STEP 1](#1.STEP-1)
+1. STEP 1
     - 고민한점
     - 배운개념
-2. [STEP 2](#2.STEP-2)
+2. STEP 2
     - 고민한점
     - 배운개념
-3. [타임라인](#3.타임라인)
-4. [참고](#4.참고)
+3. 타임라인
+4. 참고
 
 ---
-# 1.STEP 1
+# 1. STEP 1
 
 ## 고민한점
 - ### 배열과 리스트 중 어떤 방법으로 구현해야 하는지
@@ -55,7 +55,7 @@ extension 확장할타입이름: 프로토콜1이름, 프로토콜2이름 {
 queue(선형,원형), List(노드,단방향,양방향), TDD, enum, UML, extension, Generic, 빈프로토콜의 역할
 
 
-# 2.STEP 2
+# 2. STEP 2
 
 ## 고민한점
 - ### TDD 기반으로 수행할 때 실패테스트 작성
@@ -70,7 +70,7 @@ queue(선형,원형), List(노드,단방향,양방향), TDD, enum, UML, extensio
 ## 배운개념
 UML표기규칙(관계화살표,접근제어자+/-,static밑줄 등), 연산프로퍼티와 연산타입프로퍼티의 차이  
 
-# 3.타임라인
+# 3. 타임라인
 220919    
 - 프로젝트에 필요한 개념 익히기(공식문서, 야곰닷넷UnitTest강의)
 
@@ -91,7 +91,7 @@ UML표기규칙(관계화살표,접근제어자+/-,static밑줄 등), 연산프�
 - 숫자와 연산자를 적절히 분리, 저장하는 ExpressionParser 구현
 
 ---
-# 4.참고
+# 4. 참고
 [Generic Functions](https://docs.swift.org/swift-book/LanguageGuide/Generics.html)
 [Extension Syntax](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html)
 [UML참고1](https://www.nextree.co.kr/p6753/)
