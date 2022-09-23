@@ -7,7 +7,7 @@ extension Int: CalculateItem {}
 extension Double: CalculateItem {}
 extension operatorItem: CalculateItem {}
 
-enum operatorItem: Character {
+enum operatorItem: Character, CaseIterable {
     case add = "+"
     case sub = "-"
     case mul = "*"
