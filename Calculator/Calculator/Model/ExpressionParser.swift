@@ -20,7 +20,7 @@ enum ExpressionParser {
         return formula
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+   private static func componentsByOperators(from input: String) -> [String] {
         var separators: CharacterSet = CharacterSet()
         
         Operator.allCases.forEach {
