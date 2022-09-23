@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 class ExpressionParserTests: XCTestCase {
-    var sut: ExpressionParser!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -17,7 +16,6 @@ class ExpressionParserTests: XCTestCase {
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
     }
 
     func test_1더하기2를입력했을때_숫자배열이순서대로반환되는지확인() {
@@ -85,5 +83,18 @@ class ExpressionParserTests: XCTestCase {
         // then
        XCTAssertEqual(result, ["1", "10", "5", "2"])
     }
+    
+    func test_더블타입의숫자가입력되었을때_배열이더블로반환되는지확인() {
+        // given
+        let input = "0.1✕0.5+3.1"
+        
+        // when
+        let result = ExpressionParser.componentsByOperators(from: input)
+        
+        // then
+       XCTAssertEqual(result, ["0.1", "0.5", "3.1"])
+    }
 
+    
+    
 }

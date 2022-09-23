@@ -73,7 +73,7 @@ class FormulaTests: XCTestCase {
         let result = sut.result()
         
         // then
-        XCTAssertEqual(result, 2)
+        XCTAssertEqual(result, 3)
     }
     
     func test_2와3을곱하면_6을반환하는지확인() {
