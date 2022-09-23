@@ -6,10 +6,23 @@
 import Foundation
 
 struct Formula {
-    let operands: CalculatorItemQueue = CalculatorItemQueue()
-    let operators: CalculatorItemQueue = CalculatorItemQueue()
+    var operands: CalculatorItemQueue = CalculatorItemQueue()
+    var operators: CalculatorItemQueue = CalculatorItemQueue()
     
-    func result() -> Double {
-        return 0.0
+    mutating func result() -> Double {
+        guard var result = operands.dequeue() as? Double else { return 0.0 }
+
+        while !operators.isEmpty || !operands.isEmpty {
+            let firstOperand = result
+            let secondOperand = operands.dequeue()
+            let currentOperator = operators.dequeue()
+            
+            if let secondOperend = secondOperand as? Double,
+               let currentOperator = currentOperator as? Operator {
+                result = currentOperator.calculate(lhs: firstOperand, rhs: secondOperend)
+            }
+        }
+
+        return result
     }
 }
