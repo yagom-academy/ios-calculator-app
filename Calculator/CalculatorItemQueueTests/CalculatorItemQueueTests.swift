@@ -21,7 +21,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_HI를_enqueue했을때잘들어가는지() {
+    func testCalculatorItemQueue_문자열을_enqueue했을때해당문자열이잘들어가야한다() {
         sut.enqueue("HI")
         
         guard let result = sut.dequeue() as? String else {
@@ -31,40 +31,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, "HI")
     }
     
-    func test_HI랑HO를_enqueue했을때잘들어가는지() {
-        sut.enqueue("HI")
-        sut.enqueue("HO")
-        
-        guard let result = sut.dequeue() as? String else {
-            return
-        }
-        
-        XCTAssertEqual(result, "HI")
-        
-        guard let result = sut.dequeue() as? String else {
-            return
-        }
-        
-        XCTAssertEqual(result, "HO")
-    }
-    
-    func test_HI랑HO랑HU를_enqueue한후_제일마지막요소가HI인지() {
-        sut.enqueue("HI")
-        sut.enqueue("HO")
-        sut.enqueue("HU")
-        
-        guard let tail = sut.bringQueue().bringTail() else {
-            return
-        }
-        
-        guard let result = tail.bringData() as? String else {
-            return
-        }
-        
-        XCTAssertEqual(result, "HU")
-    }
-    
-    func test_HI랑HO랑HU를_enqueue한후removeAll을이용하여전부삭제가가능한지() {
+    func testCalculatorItemQueue_Queue가비어있을때_removeAll을하면_nil이나와야한다() {
         sut.enqueue("HI")
         sut.enqueue("HO")
         sut.enqueue("HU")
@@ -75,22 +42,11 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result == nil, true)
     }
     
-    func test_HI랑HO를enqueue하고HI를dequeue하고_HU를다시enqueue했을때_head가HO인지() {
-        sut.enqueue("HI")
-        sut.enqueue("HO")
+    func testCalculatorItemQueue_Queue_가비었을때_removeFirst를하면_nil이나와야한다() {
         
-        let _ = sut.dequeue()
+    }
+    
+    func testCalculatorItemQueue_removeFirst를했을때_제일앞에요소가나와야한다() {
         
-        sut.enqueue("HU")
-        
-        guard let head = sut.bringQueue().bringHead() else {
-            return
-        }
-        
-        guard let result = head.bringData() as? String else {
-            return
-        }
-        
-        XCTAssertEqual(result, "HO")
     }
 }
