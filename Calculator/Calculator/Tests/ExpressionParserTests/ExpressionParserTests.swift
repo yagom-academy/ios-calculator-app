@@ -12,7 +12,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_parse_test() {
         let input = "123+234-2*8"
-        let result = ExpressionParser.parse(from: input).result()
+        let result = try? ExpressionParser.parse(from: input).result()
         XCTAssertEqual(result, (123+234-2)*8)
     }
     
@@ -50,11 +50,11 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(testResult)
     }
     
-    func test_empty_operands_check() {
+    func test_operands_비어있을때_check() {
         let input = ""
         let result = ExpressionParser.parse(from: input).operands
         
-        let inputOperands: [String] = []
+        let inputOperands: [String] = ["1","2","3"]
         var testResult = true
         for item in inputOperands {
             if Double(item) == result.dequeue() {
@@ -63,14 +63,14 @@ class ExpressionParserTests: XCTestCase {
                 testResult = false
             }
         }
-        XCTAssertTrue(testResult)
+        XCTAssertFalse(testResult)
     }
     
-    func test_empty_operators_check() {
+    func test_operators_비어있을때_check() {
         let input = ""
         let result = ExpressionParser.parse(from: input).operators
         
-        let inputOperators: [String] = []
+        let inputOperators: [String] = ["+","-"]
         var testResult = true
         for item in inputOperators {
             if Operator(rawValue: Character(item)) == result.dequeue() {
@@ -79,7 +79,7 @@ class ExpressionParserTests: XCTestCase {
                 testResult = false
             }
         }
-        XCTAssertTrue(testResult)
+        XCTAssertFalse(testResult)
     }
     
 }

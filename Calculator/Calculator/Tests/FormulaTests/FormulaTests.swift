@@ -36,13 +36,13 @@ class FormulaTests: XCTestCase {
         operands.enqueue(50.0)
         let operatorComponents = ["+", "*", "-", "/"]
         operatorComponents.compactMap { Operator(rawValue: Character($0)) }.forEach { operators.enqueue($0) }
-        XCTAssertEqual(sut.result(), 17.2)
+        XCTAssertEqual(try sut.result(), 17.2)
     }
     
     func test_result_Operands비어있을때_결과값확인() {
         let operatorComponents = ["+", "*", "-", "/"]
         operatorComponents.compactMap { Operator(rawValue: Character($0)) }.forEach { operators.enqueue($0) }
-        XCTAssertEqual(sut.result(), Constant.zero)
+        XCTAssertThrowsError(try sut.result())
     }
     
     func test_result_Operators비어있을때_결과값확인() {
@@ -51,7 +51,7 @@ class FormulaTests: XCTestCase {
         operands.enqueue(30.0)
         operands.enqueue(40.0)
         operands.enqueue(50.0)
-        XCTAssertEqual(sut.result(), 10.0)
+        XCTAssertEqual(try sut.result(), 10.0)
     }
  
     
@@ -63,7 +63,7 @@ class FormulaTests: XCTestCase {
         operands.enqueue(50.0)
         let operatorComponents = ["+", "*"]
         operatorComponents.compactMap { Operator(rawValue: Character($0)) }.forEach { operators.enqueue($0) }
-        XCTAssertEqual(sut.result(), 900.0)
+        XCTAssertEqual(try sut.result(), 900.0)
     }
     
     func test_result_Operands가_비정상적으로_적을때_결과값확인() {
@@ -72,6 +72,6 @@ class FormulaTests: XCTestCase {
         operands.enqueue(30.0)
         let operatorComponents = ["+", "*", "-", "/"]
         operatorComponents.compactMap { Operator(rawValue: Character($0)) }.forEach { operators.enqueue($0) }
-        XCTAssertEqual(sut.result(), 0.0)
+        XCTAssertThrowsError(try sut.result())
     }
 }
