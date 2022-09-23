@@ -35,17 +35,15 @@ final class CalculatorTests: XCTestCase {
     
     func test_queue에서_dequeue가_정상적으로_동작하는지_확인() {
         // Given
-//        sut.enqueue(element: "1")
-//        sut.enqueue(element: "+")
-//        sut.enqueue(element: "2")
+        sut.enqueue(element: "1")
+        sut.enqueue(element: "+")
+        sut.enqueue(element: "2")
         
         // When
         let result = sut.dequeue()
-        let count = sut.count
         
         // Then
-        XCTAssertEqual(result, nil)
-        XCTAssertEqual(count, 0)
+        XCTAssertEqual(result, "1")
     }
     
     func test_queue에서_peek가_정상적으로_동작하는지_확인() {
@@ -56,11 +54,9 @@ final class CalculatorTests: XCTestCase {
         
         // When
         let result = sut.peek()
-        let count = sut.count
         
         // Then
         XCTAssertEqual(result, "1")
-        XCTAssertEqual(count, 3)
     }
     
     func test_queue에서_clear와_isEmpty가_정상적으로_동작하는지_확인() {
@@ -71,11 +67,10 @@ final class CalculatorTests: XCTestCase {
         
         // When
         sut.clear()
-        let result = sut.isEmpty()
-        let count = sut.count
+        guard let result = sut.isEmpty() else { return }
         
         // Then
-        XCTAssertEqual(result, true)
-        XCTAssertEqual(count, 0)
+        XCTAssertTrue(result)
+//        XCTAssertFalse(result)
     }
 }
