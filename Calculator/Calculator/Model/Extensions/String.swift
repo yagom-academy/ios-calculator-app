@@ -27,7 +27,9 @@ extension String {
             }
         }
         
-        result.append(component)
+        if component != "" {
+            result.append(component)
+        }
         
         return result
     }
