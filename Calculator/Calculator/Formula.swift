@@ -8,8 +8,8 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Character>
+    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
+    var operators: CalculatorItemQueue<Character> = CalculatorItemQueue()
     
     enum FormulaError: Error {
         case emptyOperandsQueue
