@@ -13,6 +13,18 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return []
+        var components: [String] = [input]
+        
+        Operator.allCases.forEach { operant in
+            let progressSplit = components
+            components = []
+            
+            progressSplit.forEach { string in
+                components += string.split(with: operant.rawValue)
+            }
+        }
+        
+        return components
+    }
     }
 }
