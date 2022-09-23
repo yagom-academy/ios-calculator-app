@@ -9,4 +9,4 @@ protocol CalculateItem {
     
 }
 
-extension String: CalculateItem { }
+extension Double: CalculateItem { }

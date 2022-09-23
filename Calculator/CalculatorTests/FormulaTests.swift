@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 final class FormulaTests: XCTestCase {
-    var sut: Formula!
+    var sut: Formula<Double>!
     
     override func setUpWithError() throws {
-        sut = Formula()
+        sut = Formula<Double>()
     }
     
     func test_When_generate_result_Then_expects_Not_nil() {
@@ -23,6 +23,17 @@ final class FormulaTests: XCTestCase {
         
         // then
         XCTAssertNotNil(result)
+        
+    }
+    
+    func test_When_generate_operands_Then_expects_Not_nil() {
+        // given
+        
+        // when
+        let operands = sut.operands
+        
+        // then
+        XCTAssertNotNil(operands)
         
     }
 }
