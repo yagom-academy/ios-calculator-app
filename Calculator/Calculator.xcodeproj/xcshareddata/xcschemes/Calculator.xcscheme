@@ -33,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "099A641C28DDDF1F009FCA6B"
-               BuildableName = "FormulaTests.xctest"
-               BlueprintName = "FormulaTests"
+               BlueprintIdentifier = "099A63FC28DD9BBB009FCA6B"
+               BuildableName = "ExpressionParserTests.xctest"
+               BlueprintName = "ExpressionParserTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>

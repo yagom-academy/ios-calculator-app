@@ -8,10 +8,10 @@
 import Foundation
 
 enum ExpressionParser {
-    //파서(문장의 구조 분석·오류 점검 프로그램).
     static func parse(from input: String) -> Formula {
         let numberArray = componentsByOperators(from: input).map {  Double($0) }
-        var formula = Formula()
+        let operands = CalculatorItemQueue<Double>()
+        var formula = Formula(operands: operands)
         
         for num in numberArray {
             formula.operands?.enqueue(num ?? 0)
