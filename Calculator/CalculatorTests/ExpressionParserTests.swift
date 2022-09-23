@@ -20,4 +20,28 @@ final class ExpressionParserTests: XCTestCase {
         // then
         XCTAssertNotNil(result)
     }
+    
+    func test_When_given_testString_Then_return_Formula_Instance() {
+        // given
+        let testString = "1+23-4*567/8+9+010"
+        let resultOperands: [Double] = [1, 23, 4, 567, 8, 9, 10]
+        let resultOperators: [Operator] = [.add, .subtract, .multiply, .divide, .add, .add]
+            
+        // when
+        var result = ExpressionParser.parse(from: testString)
+        var operands: [Double?] = []
+        var operators: [Operator?] = []
+        
+        while !result.operands.isEmpty() {
+            operands.append(result.operands.dequeue())
+        }
+        
+        while !result.operators.isEmpty() {
+            operators.append(result.operators.dequeue())
+        }
+        
+        // then
+        XCTAssertEqual(operands, resultOperands)
+        XCTAssertEqual(operators, resultOperators)
+    }
 }

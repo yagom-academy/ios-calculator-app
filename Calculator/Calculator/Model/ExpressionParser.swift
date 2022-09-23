@@ -9,7 +9,14 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        return Formula()
+        var formula = Formula()
+        let components = self.componentsByOperators(from: input)
+        
+        components.forEach { string in
+            enqueue(string, in: &formula)
+        }
+        
+        return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
@@ -26,5 +33,14 @@ enum ExpressionParser {
         
         return components
     }
+    
+    private static func enqueue(_ component: String, in formula: inout Formula) {
+        if let number = Double(component) {
+            formula.operands.enqueue(number)
+        } else {
+            if let operant = Operator(rawValue: Character(component)) {
+                formula.operators.enqueue(operant)
+            }
+        }
     }
 }
