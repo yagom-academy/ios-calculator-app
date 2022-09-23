@@ -24,6 +24,7 @@
 		EB81D12A28DD6BCB00C2D3C1 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12928DD6BCB00C2D3C1 /* Formula.swift */; };
 		EB81D12C28DD6CF400C2D3C1 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12B28DD6CF400C2D3C1 /* FormulaTests.swift */; };
 		EB81D12E28DD7D0A00C2D3C1 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */; };
+		EB81D13028DD802600C2D3C1 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12F28DD802600C2D3C1 /* ExpressionParserTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		EB81D12928DD6BCB00C2D3C1 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		EB81D12B28DD6CF400C2D3C1 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		EB81D12F28DD802600C2D3C1 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		EB14FE4628D9663D00D64FB3 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				EB81D12F28DD802600C2D3C1 /* ExpressionParserTests.swift */,
 				EB14FE4728D9663D00D64FB3 /* CalculatorItemQueueTests.swift */,
 				EB81D12328DD3EF500C2D3C1 /* OperatorTests.swift */,
 				EB81D12728DD586000C2D3C1 /* StringTests.swift */,
@@ -263,6 +266,7 @@
 				EB14FE4828D9663D00D64FB3 /* CalculatorItemQueueTests.swift in Sources */,
 				EB81D12828DD586000C2D3C1 /* StringTests.swift in Sources */,
 				EB81D12C28DD6CF400C2D3C1 /* FormulaTests.swift in Sources */,
+				EB81D13028DD802600C2D3C1 /* ExpressionParserTests.swift in Sources */,
 				EB81D12428DD3EF500C2D3C1 /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
