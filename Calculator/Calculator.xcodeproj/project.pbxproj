@@ -19,6 +19,7 @@
 		EB81D12028DB1DFC00C2D3C1 /* String+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D11F28DB1DFC00C2D3C1 /* String+CalculateItem.swift */; };
 		EB81D12228DD3B8700C2D3C1 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12128DD3B8700C2D3C1 /* Operator.swift */; };
 		EB81D12428DD3EF500C2D3C1 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12328DD3EF500C2D3C1 /* OperatorTests.swift */; };
+		EB81D12628DD555A00C2D3C1 /* Double+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12528DD555A00C2D3C1 /* Double+CalculateItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		EB81D11F28DB1DFC00C2D3C1 /* String+CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CalculateItem.swift"; sourceTree = "<group>"; };
 		EB81D12128DD3B8700C2D3C1 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		EB81D12328DD3EF500C2D3C1 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
+		EB81D12528DD555A00C2D3C1 /* Double+CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CalculateItem.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				EB81D11F28DB1DFC00C2D3C1 /* String+CalculateItem.swift */,
+				EB81D12528DD555A00C2D3C1 /* Double+CalculateItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB81D12628DD555A00C2D3C1 /* Double+CalculateItem.swift in Sources */,
 				EB14FE5228D966AA00D64FB3 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
