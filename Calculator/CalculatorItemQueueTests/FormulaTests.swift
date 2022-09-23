@@ -12,11 +12,7 @@ final class FormulaTests: XCTestCase {
     var sut: Formula!
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
-        let operandQueue = CalculatorItemQueue<Double>(elements: [1,2,3,4,5])
-        let operatorQueue = CalculatorItemQueue<Operator>(elements: [.add,.multiply,.subtract,.multiply])
-        
-        sut = Formula(operands: operandQueue, operators: operatorQueue)
+        sut = Formula()
     }
 
     override func tearDownWithError() throws {
@@ -24,9 +20,17 @@ final class FormulaTests: XCTestCase {
         sut = nil
     }
 
-    func testExample() {
+    func test_피연산자의개수가연산자의수보다1만큼큰경우결과가잘나오는가() {
+        sut.setUpOperands(operands: [1,2,3,4,5])
+        sut.setUpOperators(operators: [.multiply,.add,.subtract,.add])
         let result = sut.result()
         
         XCTAssertEqual(result, 25)
+    }
+    
+    func test_피연산자의개수가연산자의수보다작은경우결과가잘나오는가() {
+        let result = sut.result()
+        
+        XCTAssertEqual(result, 20)
     }
 }
