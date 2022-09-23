@@ -36,4 +36,16 @@ final class FormulaTests: XCTestCase {
         XCTAssertNotNil(operands)
         
     }
+    
+    func test_When_generate_operators_Then_expects_Not_nil() {
+        // given
+        
+        
+        // when
+        let operators = sut.operators
+        
+        // then
+        XCTAssertNotNil(operators)
+        
+    }
 }
