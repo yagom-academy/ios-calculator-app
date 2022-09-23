@@ -100,16 +100,48 @@
 			path = Calculator;
 			sourceTree = "<group>";
 		};
-		D0AB4A6228DB4FC400528890 /* Model */ = {
+		D035E9E528DDB4B3009B8B32 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				D035E9D828DDA484009B8B32 /* Operator.swift */,
+				D035E9E328DDB1BF009B8B32 /* ExpressionParser.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		D035E9E628DDB4DC009B8B32 /* Struct */ = {
 			isa = PBXGroup;
 			children = (
 				D0AB4A6528DB503000528890 /* CalculatorItemQueue.swift */,
-				D0AB4A6728DB512600528890 /* CalculateItem.swift */,
-				D035E9D828DDA484009B8B32 /* Operator.swift */,
-				D035E9DA28DDA6AC009B8B32 /* Double.swift */,
-				D035E9DE28DDAAC0009B8B32 /* String.swift */,
 				D035E9E028DDAFBB009B8B32 /* Formula.swift */,
-				D035E9E328DDB1BF009B8B32 /* ExpressionParser.swift */,
+			);
+			path = Struct;
+			sourceTree = "<group>";
+		};
+		D035E9E728DDB4EB009B8B32 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D0AB4A6728DB512600528890 /* CalculateItem.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		D035E9E828DDB4F4009B8B32 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D035E9DE28DDAAC0009B8B32 /* String.swift */,
+				D035E9DA28DDA6AC009B8B32 /* Double.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D0AB4A6228DB4FC400528890 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D035E9E728DDB4EB009B8B32 /* Protocol */,
+				D035E9E828DDB4F4009B8B32 /* Extension */,
+				D035E9E628DDB4DC009B8B32 /* Struct */,
+				D035E9E528DDB4B3009B8B32 /* Enum */,
 			);
 			path = Model;
 			sourceTree = "<group>";
