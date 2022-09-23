@@ -5,12 +5,12 @@
 
 extension Int: CalculateItem {}
 extension Double: CalculateItem {}
-extension operatorItem: CalculateItem {}
+extension OperatorItem: CalculateItem {}
 
-enum operatorItem: Character, CaseIterable {
+enum OperatorItem: Character, CaseIterable {
     case add = "+"
     case sub = "-"
     case mul = "*"
     case div = "/"
-    case eql = "="
+    case calculate = "="
 }

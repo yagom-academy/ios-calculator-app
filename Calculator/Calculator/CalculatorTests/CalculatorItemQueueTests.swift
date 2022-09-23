@@ -9,7 +9,7 @@ class CalculatorItemQueueTests: XCTestCase {
     var testCase2: Double = Double.random(in: (0...100))
     var testCase3: Double = Double.random(in: (0...100))
     var testCase4: Int = Int.random(in: (0...100))
-    var testCase5: operatorItem = operatorItem.allCases.randomElement() ?? .add
+    var testCase5: OperatorItem = OperatorItem.allCases.randomElement() ?? .add
 
     override func setUpWithError() throws {
         sut = CalculatorItemQueue([])
