@@ -8,11 +8,15 @@
 import Foundation
 
 enum ExpressionParser {
-//    static func parse(from input: String) -> Formula {
-//        
-//    }
-//    
-//    static private func componentsByOperators(from input: String) -> [String] {
-//        
-//    }
+    //파서(문장의 구조 분석·오류 점검 프로그램).
+    static func parse(from input: String) -> Formula {
+        let formula = Formula()
+        formula.operators.
+        return Formula()
+    }
+    
+    static private func componentsByOperators(from input: String) -> [String] {
+        let operandsArray = input.components(separatedBy: ["+", "-", "*", "/"])
+        return operandsArray
+    }
 }
