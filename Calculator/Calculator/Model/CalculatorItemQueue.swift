@@ -6,23 +6,23 @@
 protocol CalculateItem {
 }
 
-struct CalculatorItemQueue<Item: CalculateItem> {
-    var enqueue: [Item]
-    var dequeue: [Item] = []
+struct CalculatorItemQueue {
+    var enqueue: [CalculateItem]
+    var dequeue: [CalculateItem] = []
     
     var isEmpty: Bool {
         return enqueue.isEmpty && dequeue.isEmpty
     }
     
-    init(_ queue: [Item]) {
+    init(_ queue: [CalculateItem]) {
         enqueue = queue
     }
     
-    mutating func pushLast(_ n: Item) {
+    mutating func pushLast(_ n: CalculateItem) {
         enqueue.append(n)
     }
     
-    mutating func popFirst() -> Item? {
+    mutating func popFirst() -> CalculateItem? {
         if dequeue.isEmpty {
             dequeue = enqueue.reversed()
             enqueue.removeAll()
@@ -30,8 +30,8 @@ struct CalculatorItemQueue<Item: CalculateItem> {
         return dequeue.popLast()
     }
     
-    mutating func popLast() -> Item? {
-        var returnValue: Item?
+    mutating func popLast() -> CalculateItem? {
+        var returnValue: CalculateItem?
         if enqueue.isEmpty {
             dequeue.reverse()
             returnValue = dequeue.popLast()
