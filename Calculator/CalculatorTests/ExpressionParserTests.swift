@@ -28,13 +28,12 @@ final class ExpressionParserTests: XCTestCase {
         // then
         let expectedOperands: Array<Double> = [11, 2, 3]
         let expectedOperators: Array<Operator> = [.add, .multiply]
-        
         XCTAssertTrue(resultOpernads == expectedOperands && resultOperators == expectedOperators)
     }
     
-    func test_parse에_문자열12빼기마이너스1더하기마이너스3을전달했을때_operands에12와마이너스1와마이너스3을_operators에빼기와더하기를담은_Formula를반환하는가() {
+    func test_parse에_문자열마이너스12빼기마이너스1더하기마이너스3을전달했을때_operands에마이너스12와마이너스1와마이너스3을_operators에빼기와더하기를담은_Formula를반환하는가() {
         // given
-        let input: String = "12--1+-3"
+        let input: String = "-12--1+-3"
         
         // when
         var result: Formula = ExpressionParser.parse(from: input)
@@ -48,9 +47,8 @@ final class ExpressionParserTests: XCTestCase {
         }
         
         // then
-        let expectedOperands: Array<Double> = [12, -1, -3]
+        let expectedOperands: Array<Double> = [-12, -1, -3]
         let expectedOperators: Array<Operator> = [.subtract, .add]
-        
         XCTAssertTrue(resultOpernads == expectedOperands && resultOperators == expectedOperators)
     }
 }
