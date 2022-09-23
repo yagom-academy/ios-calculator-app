@@ -11,29 +11,28 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var result: Formula = Formula()
         
-        var filteredInput: String
-        filteredInput = input.replacingOccurrences(of: "+-", with: "+")
-        filteredInput = filteredInput.replacingOccurrences(of: "--", with: "-")
-        filteredInput = filteredInput.replacingOccurrences(of: "*-", with: "×")
-        filteredInput = filteredInput.replacingOccurrences(of: "÷-", with: "÷")
-        filteredInput = filteredInput.filter("+-×÷".contains)
-        for operatorRawValue in filteredInput {
-            if let operatorToEnqueue: Operator = Operator.init(rawValue: operatorRawValue) {
-                result.operators.enqueue(operatorToEnqueue)
+        var isNegative: Bool = false
+        componentsByOperators(from: input).forEach {
+            if let operand: Double = Double($0) {
+                result.operands.enqueue(isNegative ? -operand : operand)
+                isNegative = false
+            } else if $0 == "-" {
+                isNegative = true
             }
         }
         
-        let operands = componentsByOperators(from: input)
-        var nextOperandisMinus: Bool = false
-        for operand in operands {
-            if let operand: Double = Double(operand) {
-                let operandToEnqueue: Double = nextOperandisMinus ? -operand : operand
-                result.operands.enqueue(operandToEnqueue)
-                nextOperandisMinus = false
-            } else if operand == "" {
-                nextOperandisMinus = true
-            }
+        var inputRemovedNegativeSignal: String = input
+        if input.hasPrefix("-") {
+            inputRemovedNegativeSignal.removeFirst()
         }
+        Operator.allCases.forEach {
+            inputRemovedNegativeSignal = inputRemovedNegativeSignal.replacingOccurrences(of: "\($0.rawValue)-", with: "\($0.rawValue)")
+        }
+        let filteredOperators: String = inputRemovedNegativeSignal.filter("+-×÷".contains)
+        filteredOperators.compactMap { Operator.init(rawValue: $0) }.forEach {
+            result.operators.enqueue($0)
+        }
+        
         return result
     }
     
@@ -42,6 +41,6 @@ enum ExpressionParser {
         for operatorCase in Operator.allCases {
             result = result.flatMap { $0.split(with: operatorCase.rawValue) }
         }
-        return result
+        return result.map { $0 == "" ? "-" : $0 }
     }
 }
