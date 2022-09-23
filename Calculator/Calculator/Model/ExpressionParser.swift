@@ -6,7 +6,7 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var fomulaTest: Formula = Formula()
+        var formula: Formula = Formula()
         let separatedInputOperands: Array<String> = input.components(separatedBy: ["+","-","*","/"])
         let doubleNumbersOperands = separatedInputOperands.map({ (number: String) -> Double in
             return Double(number) ?? 99.999
@@ -15,13 +15,13 @@ enum ExpressionParser {
         convertArray = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0+11.0-2.0*9.0")
         
         for i in doubleNumbersOperands {
-            fomulaTest.operands.enqueue(element: i)
+            formula.operands.enqueue(element: i)
         }
         for j in convertArray {
             let value: Operator = Operator.init(rawValue: j)
-            fomulaTest.operators.enqueue(element: value)
+            formula.operators.enqueue(element: value)
         }
-        return fomulaTest
+        return formula
     }
     
     static func componentsByOperators(from input: String) -> [String] {
