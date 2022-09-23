@@ -16,8 +16,6 @@ class CalculatorModelTests: XCTestCase {
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
-        sutByLinkedList = nil
     }
     
     func test_enqueue가없었을때_count가0을반환하는지() {
