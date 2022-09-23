@@ -7,6 +7,6 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        return []
+        return self.components(separatedBy: "\(target)")
     }
 }
