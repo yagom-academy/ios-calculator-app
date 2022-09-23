@@ -8,8 +8,8 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-    var operators: CalculatorItemQueue<Character> = CalculatorItemQueue()
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Character>()
     
     enum FormulaError: Error {
         case emptyOperandsQueue
@@ -21,7 +21,8 @@ struct Formula {
             throw FormulaError.emptyOperandsQueue
         }
         
-        while operators.isEmpty() == false {
+        while !operands.isEmpty {
+            print(operands, operators)
             guard let inputOperator = operators.deQueue() else {
                 throw FormulaError.emptyOperatorsQueue
             }
