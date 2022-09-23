@@ -89,4 +89,15 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertThrowsError(try sut.result())
     }
+    
+    func test_When_formula_is_wrong_Then_throw_wrongFormulaError() {
+        // given
+        let testString = "1+2/"
+        
+        // when
+        sut = ExpressionParser.parse(from: testString)
+        
+        // then
+        XCTAssertThrowsError(try sut.result())
+    }
 }

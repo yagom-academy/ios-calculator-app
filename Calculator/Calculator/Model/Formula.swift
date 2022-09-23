@@ -16,10 +16,10 @@ struct Formula {
             return 0
         }
         
-        while !operands.isEmpty() {
+        while !operands.isEmpty() || !operators.isEmpty() {
             guard let operant = operators.dequeue(),
                   let number = operands.dequeue() else {
-                break
+                throw CalculatorError.wrongFormulaError
             }
             
             result = try operant.calculate(lhs: result, rhs: number)
