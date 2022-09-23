@@ -6,15 +6,23 @@
 //
 
 import XCTest
+@testable import Calculator
 
 class ExpressionParserTests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+       try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
-
+    
+    func test_10_더하기_20_곱하기_30_나누기_3은_300인가() throws {
+        let string = "10+20*30/3"
+        var parseTest = ExpressionParser.parse(from: string)
+        let result = try parseTest.result()
+        
+        XCTAssertEqual(result, 300.0)
+    }
 }
