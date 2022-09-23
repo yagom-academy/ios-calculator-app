@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<String>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -21,14 +21,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_1더하기2를_enqueue하고_dequeue하면_1더하기2가_그대로나오는지() {
+    func test_1_2를_enqueue하고_dequeue하면_1더하기2가_그대로나오는지() {
         // given
-        let input: Array<String> = ["1", "+", "2"]
+        let input: Array<Double> = [1, 2]
         
         // when
         input.forEach { sut.enqueue($0) }
-        var result: Array<String> = []
-        for _ in 0...2 {
+        var result: Array<Double> = []
+        for _ in 0...1 {
             result.append(sut.dequeue()!)
         }
         
@@ -38,12 +38,12 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에_enqueue한거보다_더dequeue하면_nil을반환하는지() {
         // given
-        let input: String = "1"
+        let input: Double = 1
         
         // when
         sut.enqueue(input)
         sut.dequeue()
-        let result: String? = sut.dequeue()
+        let result: Double? = sut.dequeue()
         
         // then
         XCTAssertNil(result)
