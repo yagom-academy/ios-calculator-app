@@ -72,19 +72,6 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, -2)
     }
     
-    func test_0으로나누는연산_성공하는지() {
-        //given
-        formulaObject.operands.enqueue(element: 5.0)
-        formulaObject.operands.enqueue(element: 0)
-        formulaObject.operators.enqueue(element: .divide)
-        
-        //when
-        let result = formulaObject.result()
-
-        //then
-        XCTAssertEqual(result, 0)
-    }
-    
     func test_빼기연산_성공하는지() {
         //given
         formulaObject.operands.enqueue(element: 5.0)
