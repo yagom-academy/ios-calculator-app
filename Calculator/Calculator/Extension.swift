@@ -8,5 +8,11 @@
 import Foundation
 
 extension String {
-    
+    func split(with target: Character) -> [String] {
+        let splited = String(target)
+        let replaced = self.replacingOccurrences(of: splited, with: " \(splited) ")
+        let separator = replaced.split(separator: " ").map { String($0) }
+        
+        return separator
+    }
 }
