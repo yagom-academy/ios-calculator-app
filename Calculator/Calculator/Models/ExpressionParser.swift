@@ -30,5 +30,4 @@ enum ExpressionParser {
 
         return components
     }
-    
 }
