@@ -13,6 +13,8 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        return [""]
+        let separatedToArray = input.components(separatedBy: ["+", "-", "*", "/"])
+        let trimmingSpaceArray = separatedToArray.filter({$0 != ""})
+        return trimmingSpaceArray
     }
 }
