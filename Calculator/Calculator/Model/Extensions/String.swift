@@ -15,13 +15,13 @@ extension String {
         self.forEach { character in
             let string = String(character)
             
-            if Int(string) == nil {
+            if character == target {
                 if component != "" {
                     result.append(component)
                     component = ""
                 }
-                
                 result.append(string)
+                
             } else {
                 component += string
             }
