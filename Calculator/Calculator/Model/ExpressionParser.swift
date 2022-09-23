@@ -10,12 +10,27 @@ enum ExpressionParser {
         let doubleNumbersOperands = separatedInputOperands.map({ (number: String) -> Double in
             return Double(number) ?? 99.999
         })
-        print("1 doubleNumbersOperands 숫자뽑은거 : \(doubleNumbersOperands)")
         return doubleNumbersOperands
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        return [""]
+        var separatedInputOperator: Array<Character> = []
+        var separatedRawInput: Array<Character> = []
+        
+        for i in input.indices {
+            separatedRawInput.append(input[i])
+        }
+        separatedInputOperator = input.filter{ (separatedRawInput: Character ) -> Bool in
+            return (separatedRawInput == "+")
+                || (separatedRawInput == "-")
+                || (separatedRawInput == "*")
+                || (separatedRawInput == "/")
+        }
+        let convertedStringOperator = separatedInputOperator.map({
+            (characterOperator: Character) -> String in
+            return String(characterOperator)
+        })
+        return convertedStringOperator
     }
 }
 
