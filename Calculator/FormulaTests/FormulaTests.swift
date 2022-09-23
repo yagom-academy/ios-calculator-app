@@ -20,8 +20,6 @@ class FormulaTests: XCTestCase {
     func testExample() throws {}
     func testPerformanceExample() throws { measure {} }
 
-    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     var formulaObject: Formula = Formula()
     func test_숫자3개_혼합연산하는_경우() {
         //given
@@ -30,7 +28,7 @@ class FormulaTests: XCTestCase {
         formulaObject.operands.enqueue(element: 3.0)
         formulaObject.operators.enqueue(element: .add)
         formulaObject.operators.enqueue(element: .multiply)
-        //연산자갯수가 피연산자갯수보다 하나 적어야 정상적인 계산식인데, 동일한 경우에도 에러없이 계산결과 나옴
+        
         //when
         let result = formulaObject.result()
         
@@ -74,6 +72,19 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, -2)
     }
     
+    func test_0으로나누는연산_성공하는지() {
+        //given
+        formulaObject.operands.enqueue(element: 5.0)
+        formulaObject.operands.enqueue(element: 0)
+        formulaObject.operators.enqueue(element: .divide)
+        
+        //when
+        let result = formulaObject.result()
+
+        //then
+        XCTAssertEqual(result, 0)
+    }
+    
     func test_빼기연산_성공하는지() {
         //given
         formulaObject.operands.enqueue(element: 5.0)
@@ -108,7 +119,6 @@ class FormulaTests: XCTestCase {
         
         //when
         let result = formulaObject.result()
-
         
         //then
         XCTAssertEqual(result, -5)
