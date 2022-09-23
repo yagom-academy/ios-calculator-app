@@ -40,8 +40,11 @@ class CalculatorTesting: XCTestCase {
         XCTAssertEqual(sut.getFirst()?.value, 10)
     }
     
-    func test_queue_removeAll_returns_nil() {
+    func test_queue_after_removeAll_head_and_tail_returns_nil() {
+        
         sut.removeAll()
+        
         XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
 }

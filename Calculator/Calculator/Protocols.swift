@@ -6,9 +6,4 @@
 //
 
 protocol CalculatorItem { }
-protocol QueueManager {
-    mutating func add(item: Item)
-    mutating func getFirst() -> Item?
-    mutating func getLast() -> Item?
-    mutating func removeAll()
-}
+
