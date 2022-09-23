@@ -2,7 +2,7 @@
 //  FormulaTests.swift
 //  FormulaTests
 //
-//  Created by smfc on 22/9/2022.
+//  Created by mene on 22/9/2022.
 //
 
 import XCTest
@@ -130,6 +130,4 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 37.5)
     }
-    
-    
 }
