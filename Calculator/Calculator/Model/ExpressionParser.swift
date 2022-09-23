@@ -6,11 +6,16 @@
 import Foundation
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         return Formula()
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
-        return []
+    static func componentsByOperators(from input: String) -> [String] {
+        var operators = CharacterSet()
+        Operator.allCases.forEach { component in
+            operators.insert(charactersIn: String(component.identifier))
+        }
+        
+        return input.components(separatedBy: operators)
     }
 }
