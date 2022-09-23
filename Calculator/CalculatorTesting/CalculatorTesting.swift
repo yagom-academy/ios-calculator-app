@@ -8,11 +8,15 @@
 import XCTest
 @testable import Calculator
 class CalculatorTesting: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
+        sut.append(newNode: Node(value: 10))
+        sut.append(newNode: Node(value: 20))
+        sut.append(newNode: Node(value: 30))
+        sut.append(newNode: Node(value: 40))
     }
     
     override func tearDownWithError() throws {
@@ -20,48 +24,24 @@ class CalculatorTesting: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func test_queueu_첫번쨰_add_아이템_key_0인지_확인() {
-        
-        //given
-        let myItem = Item(number: 10)
-        sut.add(item: myItem)
-        
-        //when
-        let expected = Optional([0 : Item(number: 10)])
-        
-        //then
-        XCTAssertEqual(expected, sut.queue)
+    func test_queue_append_firstElement_isSucessfull() {
+
+        XCTAssertEqual(sut.head?.value, 10)
+        XCTAssertNil(sut.head?.next)
     }
     
-    func test_getFirst_메소드가_작동하는지_확인() {
-        //given
-        let myItem = Item(number: 10)
-        sut.add(item: myItem)
-        
-        //then
-        XCTAssertEqual(myItem, sut.getFirst())
+    func test_queue_after_appending_secondElement_FirstNode_next_equal_to_nextNode() {
+
+        XCTAssertNotNil(sut.head?.next)
     }
     
-    func test_getLast_메소드가_작동하는지_확인() {
+    func test_queue_getFirst_returns_head_sucessfully() {
         
-        //given
-        let myItem = Item(operation: .multiply, sign: .positive, number: 10)
-        sut.add(item: myItem)
-        
-        
-        //then
-        XCTAssertEqual(myItem, sut.getLast())
+        XCTAssertEqual(sut.getFirst()?.value, 10)
     }
     
-    func test_removeAll_메소드가_작동하는지_확인() {
-        //given
-        let myItem = Item(number: 123)
-        sut.add(item: myItem)
-        
-        //when
+    func test_queue_removeAll_returns_nil() {
         sut.removeAll()
-        
-        //then
-        XCTAssertEqual(sut.queue, [:])
+        XCTAssertNil(sut.head)
     }
 }

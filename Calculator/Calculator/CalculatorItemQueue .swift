@@ -5,33 +5,43 @@
 //  Created by Jeremy on 2022/09/20.
 //
 
-struct CalculatorItemQueue {
-    private var elementCount: Int = 0
-    private var firstElementIndex: Int = 0
-    var queue: [Int: Item] = [:]
+class Node<Element> {
+    var value: Element
+    var next: Node?
+    
+    init(value: Element, next: Node? = nil) {
+        self.value = value
+        self.next = next
+    }
 }
 
-extension CalculatorItemQueue: QueueManager {
+class CalculatorItemQueue<Element> {
+    var head: Node<Element>?
+    var tail: Node<Element>?
     
-    mutating func add(item: Item) {
-        self.queue[self.elementCount] = item
-        elementCount += 1
+    init(head: Node<Element>? = nil) {
+        self.head = head
+        self.tail = head
     }
     
-    mutating func getFirst() -> Item? {
-        let firstItem = queue.removeValue(forKey: firstElementIndex)
-        firstElementIndex += 1
-        return firstItem
+    func append(newNode: Node<Element>) {
+        if let tail = self.tail {
+            tail.next = newNode
+            self.tail = tail.next
+        } else {
+            self.head = newNode
+            self.tail = newNode
+        }
     }
     
-    mutating func getLast() -> Item? {
-        elementCount -= 1
-        let lastItem = queue.removeValue(forKey: elementCount)
-        return lastItem ?? nil
+    func getFirst() -> Node<Element>? {
+        let result: Node? = head
+        head = head?.next
+        return result
     }
-
-    mutating func removeAll() {
-        queue = [:]
-        elementCount = 0
+    
+    func removeAll() {
+        self.head = nil
+        self.tail = nil
     }
 }
