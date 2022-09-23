@@ -9,7 +9,7 @@ enum Operator: Character, CalculateItem {
     case divide = "÷"
     case multiply = "×"
     
-    var identifier: String {
+    var identifier: Character {
         self.rawValue
     }
     

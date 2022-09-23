@@ -48,15 +48,16 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_Queue의데이터를dequeue했을때_FIFO가정상적으로일어나는지() {
-        var input = [Int]()
+        var input = [Double]()
         for data in 1...Int.random(in: 1...100) {
-            sut.enqueue(data)
-            input.append(data)
+            
+            sut.enqueue(Double(data))
+            input.append(Double(data))
         }
         
-        var result = [Int]()
+        var result = [Double]()
         for _ in input {
-            guard let data = sut.dequeue() as? Int else { return }
+            guard let data = sut.dequeue() as? Double else { return }
             result.append(data)
         }
 
@@ -81,7 +82,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let randomNumber = Int.random(in: 1...50)
 
         for _ in 1...randomNumber {
-            sut.enqueue(Int.random(in: 1...50))
+            sut.enqueue(Double.random(in: 1...100))
         }
 
         for _ in 1...randomNumber {
