@@ -23,12 +23,13 @@ enum ExpressionParser {
         var components: [String] = [input]
         
         Operator.allCases.forEach { operant in
-            let progressSplit = components
-            components = []
+            var progressSplit: [String] = []
             
-            progressSplit.forEach { string in
-                components += string.split(with: operant.rawValue)
+            components.forEach { string in
+                progressSplit += string.split(with: operant.rawValue)
             }
+            
+            components = progressSplit
         }
         
         return components
