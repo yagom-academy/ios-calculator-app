@@ -17,7 +17,7 @@ struct Formula {
             return 0
         }
         
-        while operators?.dequeue() != nil {
+        while operators?.front != nil {
             let someOperator: Operator? = operators?.dequeue()
             
             switch someOperator {

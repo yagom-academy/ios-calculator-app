@@ -33,29 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09D7FBD028D95A6B00A09904"
-               BuildableName = "CalculatorItemQueueTests.xctest"
-               BlueprintName = "CalculatorItemQueueTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09D29D9328DCBA7C00180E5D"
-               BuildableName = "OperatorTests.xctest"
-               BlueprintName = "OperatorTests"
-               ReferencedContainer = "container:Calculator.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "099A63FC28DD9BBB009FCA6B"
-               BuildableName = "ExpressionParserTests.xctest"
-               BlueprintName = "ExpressionParserTests"
+               BlueprintIdentifier = "099A641C28DDDF1F009FCA6B"
+               BuildableName = "FormulaTests.xctest"
+               BlueprintName = "FormulaTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
