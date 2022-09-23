@@ -14,9 +14,9 @@ enum ExpressionParser {
         var filteredInput: String
         filteredInput = input.replacingOccurrences(of: "+-", with: "+")
         filteredInput = filteredInput.replacingOccurrences(of: "--", with: "-")
-        filteredInput = filteredInput.replacingOccurrences(of: "*-", with: "*")
-        filteredInput = filteredInput.replacingOccurrences(of: "/-", with: "/")
-        filteredInput = filteredInput.filter("+-*/".contains)
+        filteredInput = filteredInput.replacingOccurrences(of: "*-", with: "×")
+        filteredInput = filteredInput.replacingOccurrences(of: "÷-", with: "÷")
+        filteredInput = filteredInput.filter("+-×÷".contains)
         for operatorRawValue in filteredInput {
             if let operatorToEnqueue: Operator = Operator.init(rawValue: operatorRawValue) {
                 result.operators.enqueue(operatorToEnqueue)
