@@ -9,7 +9,8 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        
+        let result = self.components(separatedBy: String(target))
+        return result
     }
 }
 
