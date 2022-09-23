@@ -60,4 +60,22 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, testOperator)
     }
+    
+    func test_When_testString_calculate_Then_return_right_answer() {
+        // given
+        let testString_1 = "1+2-3+4"
+        let testString_2 = "12+4/4*5-10"
+        let answer_1: Double = 4
+        let answer_2: Double = 10
+        
+        // when
+        sut = ExpressionParser.parse(from: testString_1)
+        let result_1 = sut.result()
+        sut = ExpressionParser.parse(from: testString_2)
+        let result_2 = sut.result()
+        
+        // then
+        XCTAssertEqual(result_1, answer_1)
+        XCTAssertEqual(result_2, answer_2)
+    }
 }
