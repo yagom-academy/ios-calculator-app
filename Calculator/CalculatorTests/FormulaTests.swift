@@ -130,4 +130,16 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 37.5)
     }
+    
+    func test_10을0으로나누는경우_0이나오는지확인() {
+        // given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [10, 0]), operators: CalculatorItemQueue(enqueueStack: [.divide]))
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
 }
