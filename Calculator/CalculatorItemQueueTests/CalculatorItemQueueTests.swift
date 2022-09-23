@@ -21,7 +21,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue호출시_data가_비어있지않은지() {
+    func test_enqueue로_요소를_넣어주면_data는_비어있지않다() {
         // given
         let input = 0.0
         
@@ -29,11 +29,12 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(input)
         
         // then
-        XCTAssertFalse(sut.isEmpty)
+        XCTAssertTrue(!sut.isEmpty)
     }
     
-    func test_enqueue를_1회호출시_3을전달하면_data의첫값과_같은지() {
+    func test_빈큐에_enqueue로_3을_넣어주면_data의_첫값과_같다() {
         // given
+        sut.clear()
         let input = 3.0
         
         // when
@@ -46,19 +47,22 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, input)
     }
 
-    func test_enqueue반복호출시_data의마지막값과_전달값의마지막값이_같은지() {
+    func test_enqueue를_반복호출하면_data의_마지막요소와_전달값의_마지막요소가_같다() {
         // given
         let input = [1.0, 3.0, 5.0, 7.0]
         
         // when
         input.forEach{ sut.enqueue($0) }
-        if let result = sut.last {
-            // then
-            XCTAssertEqual(result, 7.0)
+        guard let result = sut.last,
+        let last = input.last else {
+            return XCTFail()
         }
+        
+        // then
+        XCTAssertEqual(result, last)
     }
 
-    func test_data가있을때_dequeue호출시_반환값이있는지() {
+    func test_data에_요소가_있을때_dequeue를_호출하면_반환값이_있다() {
         // given
         sut.enqueue(1.0)
         
@@ -69,7 +73,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotNil(result)
     }
 
-    func test_data가없을때_dequeue호출시_nil을반환하는지() {
+    func test_data에_요소가_없을때_dequeue를_호출하면_nil을_반환한다() {
         // given
         sut.clear()
         
@@ -80,22 +84,23 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
 
-    func test_data가있을때_dequeue호출시_data의카운트가_감소하는지() {
+    func test_data에_요소가_있을때_dequeue를_호출하면_data의_카운트가_감소한다() {
         // given
         let input = [1.0, 3.0, 5.0, 7.0]
         input.forEach{
             sut.enqueue($0)
         }
+        let originCount = sut.count
         
         // when
         sut.dequeue()
         let result = sut.count
         
         // then
-        XCTAssert(result < input.count)
+        XCTAssert(result < originCount)
     }
 
-    func test_data가있을때_peek호출시_반환값이있는지() {
+    func test_data에_요소가_있을때_peek을_호출하면_반환값이_있다() {
         // given
         sut.enqueue(1.0)
         
@@ -106,7 +111,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotNil(result)
     }
 
-    func test_data가없을때_peek호출시_nil을반환하는지() {
+    func test_data에_요소가_없을때_peek를_호출하면_nil을_반환한다() {
         // given
         sut.clear()
         
@@ -117,22 +122,23 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
 
-    func test_data가있을때_peek호출시_data의카운트가_그대로인지() {
+    func test_data에_요소가_있을때_peek를_호출하면_data의_카운트가_변하지않는다() {
         // given
         let input = [1.0, 3.0, 5.0, 7.0]
         input.forEach{
             sut.enqueue($0)
         }
+        let originCount = sut.count
         
         // when
         let _ = sut.peek
         let result = sut.count
         
         // then
-        XCTAssertEqual(result, input.count)
+        XCTAssertEqual(result, originCount)
     }
 
-    func test_data가있을때_clear호출시_data가_빈배열인지() {
+    func test_data에_요소가_있을때_clear를_호출하면_data가_빈다() {
         // given
         let input = [1.0, 3.0, 5.0, 7.0]
         input.forEach{
@@ -147,7 +153,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssert(result)
     }
 
-    func test_data가있을때_count호출시_0이아닌지() {
+    func test_data에_요소가_있을때_count를_호출하면_0이아니다() {
         // given
         sut.enqueue(1.0)
         
@@ -158,8 +164,9 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotEqual(result, Int.zero)
     }
 
-    func test_data의요소가4개일때_count호출시_4를반환하는지() {
+    func test_data의_요소가_4개일때_count를_호출하면_4를_반환한다() {
         // given
+        sut.clear()
         let input = [1.0, 3.0, 5.0, 7.0]
         input.forEach{
             sut.enqueue($0)
@@ -172,7 +179,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, input.count)
     }
 
-    func test_data의요소가있을때_isEmpty호출시_false를반환하는지() {
+    func test_data에_요소가_있을때_isEmpty를_호출하면_false를_반환한다() {
         // given
         sut.enqueue(1.0)
         
@@ -183,7 +190,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
 
-    func test_data의요소가없을때_isEmpty호출시_true를반환하는지() {
+    func test_data에_요소가_없을때_isEmpty를_호출하면_true를_반환한다() {
         // given
         sut.clear()
         
@@ -194,7 +201,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_capacity와count가_같을때_isFull호출시_true를반환하는지() {
+    func test_capacity와_count가_같을때_isFull을_호출하면_true를_반환한다() {
         // given
         sut.capacity = sut.count
         
@@ -205,7 +212,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_capacity와count가_다를때_isFull호출시_false를반환하는지() {
+    func test_capacity와_count가_다를때_isFull을_호출하면_false를_반환한다() {
         // given
         sut.capacity = sut.count + 1
         
@@ -216,8 +223,9 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
 
-    func test_data의요소가_4개일때_capasity_getter호출시_입력배열의용량과_같은지() {
+    func test_data의_요소가_4개일때_capasity의_getter를_호출하면_입력배열의_용량과_같다() {
         // given
+        sut.clear()
         let input = [1.0, 3.0, 5.0, 7.0]
         input.forEach{
             sut.enqueue($0)
@@ -230,7 +238,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, input.capacity)
     }
 
-    func test_capasity_setter호출시_기존용량과다른지() {
+    func test_capasity의_setter를_호출하면_기존용량과_달라진다() {
         // given
         let originCapacity = sut.capacity
         
@@ -242,7 +250,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotEqual(result, originCapacity)
     }
 
-    func test_인덱스범위내에서_insert호출시_인덱스2에_마지막입력값9가_위치하는지() {
+    func test_인덱스의_범위내에서_insert를_호출하면_인덱스에_입력값이_위치한다() {
         // given
         let data = [1.0, 3.0, 5.0, 7.0]
         data.forEach{
@@ -261,7 +269,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, input)
     }
 
-    func test_인덱스범위내에서_remove호출시_인덱스의_값이변하는지() {
+    func test_인덱스의_범위내에서_remove를_호출하면_인덱스의_값이_변한다() {
         // given
         let data = [1.0, 3.0, 5.0, 7.0]
         data.forEach{

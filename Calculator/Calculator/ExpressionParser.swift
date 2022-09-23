@@ -14,8 +14,8 @@ enum ExpressionParser {
         componentsByOperators(from: input)
             .compactMap(Double.init)
             .forEach { operands.enqueue($0) }
-        let calculateSigns: [Operator] = input.compactMap { Operator(rawValue: $0) }
-        calculateSigns.forEach { operators.enqueue($0) }
+        input.compactMap { Operator(rawValue: $0) }
+        .forEach { operators.enqueue($0) }
         return Formula(operands: operands, operators: operators)
     }
     
