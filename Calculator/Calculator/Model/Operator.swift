@@ -44,4 +44,20 @@ enum Operator: CaseIterable, CalculateItem {
         let divideResult: Double = lhs / rhs
         return divideResult
     }
+    
+    init(rawValue: String) {
+        switch rawValue {
+        case "+":
+            self = .add
+        case "-":
+            self = .subtract
+        case "*":
+            self = .multiply
+        case "/":
+            self = .divide
+        default:
+            self.init(rawValue: "")
+            return
+        }
+    }
 }
