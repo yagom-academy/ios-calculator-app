@@ -17,6 +17,10 @@ enum ExpressionParser {
         for i in doubleNumbersOperands {
             fomulaTest.operands.enqueue(element: i)
         }
+        for j in convertArray {
+            let value: Operator = Operator.init(rawValue: j)
+            fomulaTest.operators.enqueue(element: value)
+        }
         return fomulaTest
     }
     
