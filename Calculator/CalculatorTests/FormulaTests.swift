@@ -19,7 +19,7 @@ final class FormulaTests: XCTestCase {
         // given
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertNotNil(result)
@@ -70,12 +70,23 @@ final class FormulaTests: XCTestCase {
         
         // when
         sut = ExpressionParser.parse(from: testString_1)
-        let result_1 = sut.result()
+        let result_1 = try? sut.result()
         sut = ExpressionParser.parse(from: testString_2)
-        let result_2 = sut.result()
+        let result_2 = try? sut.result()
         
         // then
         XCTAssertEqual(result_1, answer_1)
         XCTAssertEqual(result_2, answer_2)
+    }
+    
+    func test_When_divide_0_Then_throw_Error() {
+        // given
+        let testString = "1/0"
+        
+        // when
+        sut = ExpressionParser.parse(from: testString)
+        
+        // then
+        XCTAssertThrowsError(try sut.result())
     }
 }

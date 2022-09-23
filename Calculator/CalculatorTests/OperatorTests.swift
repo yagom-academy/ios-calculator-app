@@ -18,7 +18,7 @@ final class OperatorTests: XCTestCase {
         let number_2 = 2.0
         
         // when
-        let result = sut.calculate(lhs: number_1, rhs: number_2)
+        let result = try? sut.calculate(lhs: number_1, rhs: number_2)
         
         // then
         XCTAssertEqual(result, number_1 + number_2)
@@ -32,7 +32,7 @@ final class OperatorTests: XCTestCase {
         let number_2 = 2.0
         
         // when
-        let result = sut.calculate(lhs: number_1, rhs: number_2)
+        let result = try? sut.calculate(lhs: number_1, rhs: number_2)
         
         // then
         XCTAssertEqual(result, number_1 - number_2)
@@ -46,7 +46,7 @@ final class OperatorTests: XCTestCase {
         let number_2 = 2.0
         
         // when
-        let result = sut.calculate(lhs: number_1, rhs: number_2)
+        let result = try? sut.calculate(lhs: number_1, rhs: number_2)
         
         // then
         XCTAssertEqual(result, number_1 / number_2)
@@ -59,7 +59,7 @@ final class OperatorTests: XCTestCase {
         let number_2 = 6.0
         
         // when
-        let result = sut.calculate(lhs: number_1, rhs: number_2)
+        let result = try? sut.calculate(lhs: number_1, rhs: number_2)
         
         // then
         XCTAssertEqual(result, number_1 * number_2)
