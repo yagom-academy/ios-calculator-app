@@ -1,6 +1,6 @@
 //
 //  CalculatorItemQueueTests.swift
-//  CalculatorItemQueueTests
+//  CalculatorTests
 //
 //  Created by junho lee on 2022/09/20.
 //
