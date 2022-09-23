@@ -6,30 +6,34 @@
 //
 
 public struct CalculatorItemQueue {
-    private var data = [String]()
+    private var calculatorItem = [String]()
     public var count: Int {
-        return data.count
+        return calculatorItem.count
     }
     
     public init() {}
     
     public mutating func enqueue(element: String) {
-        return data.append(element)
+        return calculatorItem.append(element)
     }
     
     public mutating func dequeue() -> String? {
-        return data.removeFirst()
+        if calculatorItem.count > 0 {
+            return calculatorItem.removeFirst()
+        } else {
+            return nil
+        }
     }
     
     public mutating func peek() -> String? {
-        return data.first
+        return calculatorItem.first
     }
     
     public mutating func clear() {
-        return data.removeAll()
+        return calculatorItem.removeAll()
     }
     
     public func isEmpty() -> Bool? {
-        return data.isEmpty
+        return calculatorItem.isEmpty
     }
 }
