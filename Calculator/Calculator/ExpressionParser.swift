@@ -4,30 +4,24 @@ import Foundation
 
 enum ExpressionParser {
     
-//    static func parse(from input: String) -> Formula {
-//        let components = componentsByOperators(from: input)
-//        let operands : CalculatorItemQueue<Double>
-//        let operators : CalculatorItemQueue<Operator>
-        
-        //        var filtered = components.filter{ $0 == Operator.RawValue }
-        
-        
-        // ["1", "+", "2", "*", "4"]
-        //        for component in components {
-        
-        //            if let b = Operator.self.RawValue {
-        //                operators.enqueue(element: b)
-        //            } else {
-        //                if let a = Double(component) {
-        //                    operands.enqueue(element: a)
-        //                }
-        //        }
-        //    return Formula(operands: operands, operators: operators)
-        //}
-//    }
+    static func parse(from input: String) -> Formula {
+        let components = componentsByOperators(from: input)
+        var operands = components.compactMap{Double($0)}
+        var operators = components.filter{$0.count == 1}.compactMap{Operator(rawValue: Character($0))?.rawValue}
+        return Formula(operands: operands, operators: operators)
+        // 뭔가 담는게 잘못됐나봐...
+    }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let components = input.map{String($0)}
-        return components
+        let inputArray = [input]
+        Operator.allCases.forEach{
+            
+        }
+        
+        let numbers = input.split(with: Operator.allCases.)
+//        let components = input.map{String($0)}
+        
+        return numbers
     }
 }
+
