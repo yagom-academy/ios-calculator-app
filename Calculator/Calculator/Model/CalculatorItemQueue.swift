@@ -5,7 +5,7 @@
 //  Created by 써니쿠키 on 2022/09/19.
 //
 
-struct CalculatorItemQueue <T>: CalculateItem {
+struct CalculatorItemQueue <T: CalculateItem> {
     var itemQueue: LinkedList<T>? = LinkedList()
     
     mutating func enqueue(_ data: T) {

@@ -5,7 +5,7 @@
 //  Created by 써니쿠키 on 2022/09/19.
 //
 
-struct LinkedList <T> {
+struct LinkedList <T: CalculateItem> {
     private(set) var head: Node<T>?
     var last: Node<T>? {
         var currentNode = self.head
