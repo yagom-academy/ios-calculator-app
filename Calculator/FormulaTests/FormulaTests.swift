@@ -28,11 +28,10 @@ class FormulaTests: XCTestCase {
     
     func test_1_더하기_1은_2로_나오는가() {
         let result = 2.0
-        let operators: Character = "+"
         
         sut.operands.enQueue(element: 1.0)
         sut.operands.enQueue(element: 1.0)
-        sut.operators.enQueue(element: operators)
+        sut.operators.enQueue(element: Operator.add)
         
         XCTAssertEqual(result, try sut.result())
     }
@@ -44,8 +43,8 @@ class FormulaTests: XCTestCase {
         sut.operands.enQueue(element: 3.0)
         sut.operands.enQueue(element: 2.0)
         
-        sut.operators.enQueue(element: Operator.add.rawValue)
-        sut.operators.enQueue(element: Operator.subtract.rawValue)
+        sut.operators.enQueue(element: Operator.add)
+        sut.operators.enQueue(element: Operator.subtract)
         
         XCTAssertEqual(result, try sut.result())
     }
@@ -58,9 +57,9 @@ class FormulaTests: XCTestCase {
         sut.operands.enQueue(element: 2.0)
         sut.operands.enQueue(element: 10.0)
         
-        sut.operators.enQueue(element: Operator.add.rawValue)
-        sut.operators.enQueue(element: Operator.subtract.rawValue)
-        sut.operators.enQueue(element: Operator.multiply.rawValue)
+        sut.operators.enQueue(element: Operator.add)
+        sut.operators.enQueue(element: Operator.subtract)
+        sut.operators.enQueue(element: Operator.multiply)
         
         XCTAssertEqual(result, try sut.result())
     }
@@ -74,10 +73,10 @@ class FormulaTests: XCTestCase {
         sut.operands.enQueue(element: 10.0)
         sut.operands.enQueue(element: 2.0)
         
-        sut.operators.enQueue(element: Operator.add.rawValue)
-        sut.operators.enQueue(element: Operator.subtract.rawValue)
-        sut.operators.enQueue(element: Operator.multiply.rawValue)
-        sut.operators.enQueue(element: Operator.divide.rawValue)
+        sut.operators.enQueue(element: Operator.add)
+        sut.operators.enQueue(element: Operator.subtract)
+        sut.operators.enQueue(element: Operator.multiply)
+        sut.operators.enQueue(element: Operator.divide)
         
         XCTAssertEqual(result, try sut.result())
     }

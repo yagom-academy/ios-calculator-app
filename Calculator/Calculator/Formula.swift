@@ -9,7 +9,7 @@ import Foundation
 
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Character>()
+    var operators = CalculatorItemQueue<Operator>()
     
     enum FormulaError: Error {
         case emptyOperandsQueue
@@ -31,8 +31,7 @@ struct Formula {
                 throw FormulaError.emptyOperandsQueue
             }
             
-            let eachOperator = Operator(rawValue: inputOperator)
-            result = (eachOperator?.calculate(lhs: result, rhs: inputOperands)) ?? 0
+            result = inputOperator.calculate(lhs: result, rhs: inputOperands)
         }
         
         return result
