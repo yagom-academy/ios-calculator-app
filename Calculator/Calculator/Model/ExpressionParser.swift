@@ -26,11 +26,9 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators = CharacterSet(charactersIn: Operator.allCases.map {
-            String($0.rawValue)
-        }.joined())
-        let result = input.components(separatedBy: operators)
+        let separatedInput = input.split(with: " ")
+        let components = separatedInput.filter({ $0.filter({ $0.isNumber }).count != 0 })
         
-        return result
+        return components
     }
 }
