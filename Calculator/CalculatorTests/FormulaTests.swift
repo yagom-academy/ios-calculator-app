@@ -53,5 +53,14 @@ final class FormulaTests: XCTestCase {
             let expectedValue = ((50.0+40.0-30.0)*20.0)
             XCTAssertEqual(expectedValue, result)
         }
+    
+    func test_operands가비어있을때_0이제대로반환되는지() {
+        sut.operators.enqueue(Operator.add)
+        sut.operators.enqueue(Operator.add)
+        
+        let result = sut.result()
+        
+        XCTAssertEqual(0.0, result)
+    }
 }
 
