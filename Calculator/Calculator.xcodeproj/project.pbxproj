@@ -17,6 +17,7 @@
 		EB14FE5028D9669100D64FB3 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14FE4F28D9669100D64FB3 /* CalculatorItemQueue.swift */; };
 		EB14FE5228D966AA00D64FB3 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14FE5128D966AA00D64FB3 /* CalculateItem.swift */; };
 		EB81D12028DB1DFC00C2D3C1 /* String+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D11F28DB1DFC00C2D3C1 /* String+CalculateItem.swift */; };
+		EB81D12228DD3B8700C2D3C1 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12128DD3B8700C2D3C1 /* Operator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		EB14FE4F28D9669100D64FB3 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		EB14FE5128D966AA00D64FB3 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		EB81D11F28DB1DFC00C2D3C1 /* String+CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CalculateItem.swift"; sourceTree = "<group>"; };
+		EB81D12128DD3B8700C2D3C1 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			children = (
 				EB14FE4F28D9669100D64FB3 /* CalculatorItemQueue.swift */,
 				EB14FE5128D966AA00D64FB3 /* CalculateItem.swift */,
+				EB81D12128DD3B8700C2D3C1 /* Operator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				EB14FE5028D9669100D64FB3 /* CalculatorItemQueue.swift in Sources */,
+				EB81D12228DD3B8700C2D3C1 /* Operator.swift in Sources */,
 				EB81D12028DB1DFC00C2D3C1 /* String+CalculateItem.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
