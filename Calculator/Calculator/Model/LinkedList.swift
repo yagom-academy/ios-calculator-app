@@ -5,11 +5,11 @@
 //  Created by Hamo on 2022/09/20.
 //
 
-struct LinkedList {
-    private var head: Node?
-    private var tail: Node?
+struct LinkedList<Element: CalculateItem> {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
-    mutating func append(_ data: CalculateItem) {
+    mutating func append(_ data: Element) {
         guard head != nil else {
             self.head = Node(data: data)
             self.tail = head
@@ -21,7 +21,7 @@ struct LinkedList {
         self.tail = newElement
     }
     
-    mutating func removeFirst() -> CalculateItem? {
+    mutating func removeFirst() -> Element? {
         let result = head?.bringData()
         
         if head?.bringNextNode() == nil {
@@ -37,11 +37,11 @@ struct LinkedList {
         tail = nil
     }
     
-    func bringHead() -> Node? {
+    func bringHead() -> Node<Element>? {
         return head
     }
     
-    func bringTail() -> Node? {
+    func bringTail() -> Node<Element>? {
         return tail
     }
 }

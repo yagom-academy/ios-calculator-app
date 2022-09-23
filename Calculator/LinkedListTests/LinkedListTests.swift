@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class LinkedListTests: XCTestCase {
-    var sut: LinkedList!
+    var sut: LinkedList<String>!
 
     override func setUpWithError() throws {
         sut = LinkedList()
@@ -22,10 +22,8 @@ class LinkedListTests: XCTestCase {
     func testLinkedList_문자열을_append했을때_해당문자열이잘들어가야한다() {
         sut.append("HI")
         
-        guard let result = sut.removeFirst() as? String else {
-            return
-        }
-        
+        let result = sut.removeFirst()
+
         XCTAssertEqual(result, "HI")
     }
     

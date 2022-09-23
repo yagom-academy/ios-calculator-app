@@ -5,15 +5,15 @@
 //  Created by Hamo on 2022/09/20.
 //
 
-class Node {
-    private var data: CalculateItem
+class Node<Element: CalculateItem> {
+    private var data: Element
     private var next: Node?
     
-    init(data: CalculateItem) {
+    init(data: Element) {
         self.data = data
     }
     
-    func bringData() -> CalculateItem {
+    func bringData() -> Element {
         return data
     }
     

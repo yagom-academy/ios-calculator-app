@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<String>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -24,10 +24,8 @@ class CalculatorItemQueueTests: XCTestCase {
     func testCalculatorItemQueue_문자열을_enqueue했을때해당문자열이잘들어가야한다() {
         sut.enqueue("HI")
         
-        guard let result = sut.dequeue() as? String else {
-            return
-        }
-        
+        let result = sut.dequeue()
+
         XCTAssertEqual(result, "HI")
     }
     

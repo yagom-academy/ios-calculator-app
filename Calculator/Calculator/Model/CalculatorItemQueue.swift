@@ -5,14 +5,14 @@
 //  Created by Hamo on 2022/09/20.
 //
 
-struct CalculatorItemQueue {
-    private var queue = LinkedList()
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var queue = LinkedList<Element>()
     
-    mutating func enqueue(_ data: CalculateItem) {
+    mutating func enqueue(_ data: Element) {
         queue.append(data)
     }
     
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> Element? {
         return queue.removeFirst()
     }
     
@@ -20,7 +20,7 @@ struct CalculatorItemQueue {
         queue.removeAll()
     }
     
-    func bringQueue() -> LinkedList {
+    func bringQueue() -> LinkedList<Element> {
         return queue
     }
 }
