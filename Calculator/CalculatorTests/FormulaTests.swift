@@ -48,4 +48,16 @@ final class FormulaTests: XCTestCase {
         XCTAssertNotNil(operators)
         
     }
+    
+    func test_When_enqueue_add_in_operators_Then_enqueue_success() {
+        // given
+        let testOperator: Operator = .add
+        
+        // when
+        sut.operators.enqueue(testOperator)
+        let result = sut.operators.dequeue()
+        
+        // then
+        XCTAssertEqual(result, testOperator)
+    }
 }
