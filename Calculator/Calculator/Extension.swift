@@ -16,3 +16,7 @@ extension String {
         return separator
     }
 }
+
+extension Double {
+    
+}
