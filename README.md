@@ -40,6 +40,7 @@
 ## 💻 4. 실행 화면(기능 설명)
 ### 📌 STEP 1
 - Queue 자료 구조에 대한 테스트 코드 작성 및 테스트 결과
+
     ![TestResult](https://i.imgur.com/qraEuJF.png)
     
     Queue 타입 내 구현된 프로퍼티 및 메서드에 대한 테스트를 수행하였습니다.
