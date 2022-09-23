@@ -8,6 +8,9 @@
 struct CalculatorItemQueue<T: CalculateItem> {
     private var enqueueStack: Array<T> = []
     private var dequeueStack: Array<T> = []
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
     
     mutating func enqueue(_ element: T) {
         enqueueStack.append(element)
