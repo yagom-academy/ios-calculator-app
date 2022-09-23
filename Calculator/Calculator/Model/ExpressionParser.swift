@@ -11,6 +11,12 @@ enum ExpressionParser {
         let doubleNumbersOperands = separatedInputOperands.map({ (number: String) -> Double in
             return Double(number) ?? 99.999
         })
+        var convertArray: Array<String> = []
+        convertArray = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0+11.0-2.0*9.0")
+        
+        for i in doubleNumbersOperands {
+            fomulaTest.operands.enqueue(element: i)
+        }
         return fomulaTest
     }
     
