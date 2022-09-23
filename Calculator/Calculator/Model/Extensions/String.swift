@@ -9,6 +9,26 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map({ String($0) })
+        var result: [String] = []
+        var component = ""
+        
+        self.forEach { character in
+            let string = String(character)
+            
+            if Int(string) == nil {
+                if component != "" {
+                    result.append(component)
+                    component = ""
+                }
+                
+                result.append(string)
+            } else {
+                component += string
+            }
+        }
+        
+        result.append(component)
+        
+        return result
     }
 }

@@ -12,8 +12,8 @@ final class StringExtensionTests: XCTestCase {
 
     func test_When_testString_split_Then_return_String_that_except_specific_character() {
         // given
-        let testString = "1+23"
-        let resultString = ["1", "23"]
+        let testString = "1+23-4*5/678"
+        let resultString = ["1", "+", "23", "-", "4", "*", "5", "/", "678"]
         
         // when
         let result = testString.split(with: "+")
