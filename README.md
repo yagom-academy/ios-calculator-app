@@ -17,8 +17,11 @@
 - KeyWords
 
   - Queue
-
   - UnitTest
+
+- Class Diagram
+
+![계산기1_Step1_클래스다이어그램](https://user-images.githubusercontent.com/102534252/191909633-6a9af418-3408-4409-94eb-2466461f0b02.png)
 
 ## 🌲 Tree
 
@@ -82,7 +85,7 @@ JuiceMaker
 
 #### > 동작화면 구현시 추가 예정
 
-## ❓ 트러블 슈팅
+## ❓ 트러블 슈팅 & 고민한 것
 
 ### Step 1
 
@@ -96,3 +99,5 @@ JuiceMaker
     - ex. enqueue가 되면 count가 enqueue된 데이터 갯수만큼 변경되어야한다!
 
 ---
+
+[🔝 맨 위로 이동하기](
