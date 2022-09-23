@@ -101,7 +101,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         }
         
         for _ in 1...50 {
-            let data = sut.dequeue()
+            sut.dequeue()
         }
 
         // then

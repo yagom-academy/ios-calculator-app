@@ -23,6 +23,7 @@ struct CalculatorItemQueue<Item: CalculateItem> {
         count += 1
     }
     
+    @discardableResult
     mutating func dequeue() -> Item? {
         guard let head = self.head else {
             return nil
