@@ -9,17 +9,21 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() -> Double {
-        operands.enqueue(element: 100.0)
-        operands.enqueue(element: 200.0)
-        operands.enqueue(element: 300.0)
-        operators.enqueue(element: .add)
-        operators.enqueue(element: .add)
+        var operatorsValue = operators.dequeue()
+        var lhs = operands.dequeue() ?? 99.999
+        var rhs = operands.dequeue() ?? 99.999
+        var result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
         
-        let operatorsValue = operators.dequeue()
-        let lhs = operands.dequeue() ?? 99.999
-        let rhs = operands.dequeue() ?? 99.999
-        let result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
-        print(result)
+        while !operands.dequeueStack.isEmpty {
+            lhs = result
+            rhs = operands.dequeue() ?? 99.999
+            operatorsValue = operators.dequeue()
+            result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+        }
+        if operators.dequeueStack.isEmpty == false {
+            operators.dequeueStack.removeAll()
+        }
+        print("lhs: \(lhs),   rhs: \(rhs)\n")
         return result
     }
 }

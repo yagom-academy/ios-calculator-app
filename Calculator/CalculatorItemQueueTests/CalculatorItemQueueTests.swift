@@ -1,5 +1,5 @@
-//  CalculatorTests.swift
-//  CalculatorTests
+//  CalculatorItemQueueTests.swift
+//  CalculatorItemQueueTests
 //  Created by LJ on 2022/09/19.
 
 import XCTest
@@ -46,65 +46,5 @@ class CalculatorItemQueueTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, 200.0)
-    }
-    
-    func test_더하기연산_성공하는지() {
-        //given
-        let enqueueStack: [Double] = [1,2]
-        let compute: Operator = .add
-        
-        //when
-        let result: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
-        
-        //then
-        XCTAssertEqual(result, 3.0)
-    }
-    
-    func test_빼기연산_성공하는지() {
-        //given
-        let enqueueStack: [Double] = [1,-1]
-        let compute: Operator = .subtract
-        
-        //when
-        let result: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
-
-        //then
-        XCTAssertEqual(result, 2.0)
-    }
-    
-    func test_곱하기연산_성공하는지() {
-        //given
-        let enqueueStack: [Double] = [1500, 3000]
-        let compute: Operator = .multiply
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.numberStyle = .decimal
-        
-        //when
-        let value: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
-        guard let result = numberFormatter.string(for: value) else {
-            return
-        }
-
-        //then
-        XCTAssertEqual(result, "4,500,000")
-    }
-    
-    func test_나누기연산_성공하는지() {
-        //given
-        let enqueueStack: [Double] = [10000, 3]
-        let compute: Operator = .divide
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 5
-        numberFormatter.numberStyle = .decimal
-        
-        //when
-        let value: Double = compute.calculate(lhs: enqueueStack[0], rhs: enqueueStack[1])
-        guard let result = numberFormatter.string(for: value) else {
-            return
-        }
-
-        //then
-        XCTAssertEqual(result, "3,333.33333")
     }
 }

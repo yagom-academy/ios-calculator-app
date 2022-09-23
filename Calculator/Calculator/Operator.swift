@@ -26,8 +26,8 @@ enum Operator: CaseIterable, CalculateItem {
     }
     
     func add(lhs: Double, rhs: Double) -> Double {
-        let addResult: Double = lhs + rhs
-        return addResult
+        //let addResult: Double = lhs + rhs
+        return lhs + rhs
     }
     
     func subtract(lhs: Double, rhs: Double) -> Double {
