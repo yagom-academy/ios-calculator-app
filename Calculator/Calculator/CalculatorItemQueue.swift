@@ -15,7 +15,11 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         inputStack.append(element)
     }
     
-    mutating func deQueue() throws -> T {
+    mutating func deQueue() -> T? {
+        if inputStack.isEmpty {
+            return nil
+        }
+        
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
             inputStack.removeAll()
