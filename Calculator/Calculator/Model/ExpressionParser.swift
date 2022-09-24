@@ -11,8 +11,7 @@ enum ExpressionParser {
         let doubleNumbersOperands = separatedInputOperands.map({ (number: String) -> Double in
             return Double(number) ?? 99.999
         })
-        var convertArray: Array<String> = []
-        convertArray = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0+11.0-2.0*9.0")
+        var convertArray: [String] = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0-2.0*9.0")
         
         for i in doubleNumbersOperands {
             formula.operands.enqueue(element: i)
@@ -21,27 +20,16 @@ enum ExpressionParser {
             let value: Operator = Operator.init(rawValue: j)
             formula.operators.enqueue(element: value)
         }
+        print("convertArray : \(convertArray)")
+        print(formula.operators.enqueueStack)
         return formula
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        var separatedInputOperator: Array<Character> = []
-        var separatedRawInput: Array<Character> = []
-        
-        for i in input.indices {
-            separatedRawInput.append(input[i])
-        }
-        separatedInputOperator = input.filter{ (separatedRawInput: Character ) -> Bool in
-            return (separatedRawInput == "+")
-                || (separatedRawInput == "-")
-                || (separatedRawInput == "*")
-                || (separatedRawInput == "/")
-        }
-        let convertedStringOperator = separatedInputOperator.map({
-            (characterOperator: Character) -> String in
-            return String(characterOperator)
-        })
-        return convertedStringOperator
+        let separatedInputOperator =
+        input.filter{ ($0 == "+") || ($0 == "-") || ($0 == "*") || ($0 == "/") }
+        let convertedToStringArrayOperator = separatedInputOperator.map{String($0)}
+        return convertedToStringArrayOperator
     }
 }
 
