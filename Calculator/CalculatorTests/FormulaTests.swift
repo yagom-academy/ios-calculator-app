@@ -35,4 +35,23 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 2)
     }
+    
+    func test_result_1더하기5빼기3곱하기5나누기3_5반환() {
+        // given
+        sut.operands.enqueue(item: 1)
+        sut.operators.enqueue(item: Operator.add)
+        sut.operands.enqueue(item: 5)
+        sut.operators.enqueue(item: Operator.subtract)
+        sut.operands.enqueue(item: 3)
+        sut.operators.enqueue(item: Operator.multiply)
+        sut.operands.enqueue(item: 5)
+        sut.operators.enqueue(item: Operator.divide)
+        sut.operands.enqueue(item: 3)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 5)
+    }
 }
