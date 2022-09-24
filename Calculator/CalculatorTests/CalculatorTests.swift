@@ -39,13 +39,16 @@ final class CalculatorTests: XCTestCase {
     
     func test_dequeue_빈배열에서디큐_nil반환하는지() {
         // given
-        let expected: Item? = nil
+        let isEmtpyQueue = sut.isEmpty
+        var result: Item?
         
         // when
-        let result = sut.dequeue()
+        if isEmtpyQueue {
+            result = sut.dequeue()
+        }
         
         // then
-        XCTAssertEqual(result, expected)
+        XCTAssertNil(result)
     }
 
     func test_dequeue_원소가2개이상일때_1개디큐() {
