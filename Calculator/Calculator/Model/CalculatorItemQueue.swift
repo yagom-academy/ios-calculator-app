@@ -5,35 +5,35 @@
 //  Created by dragon on 2022/09/21.
 //
 
-public struct CalculatorItemQueue<T: StringProtocol> {
-    private var calculatorItemList = [String]()
+struct CalculatorItemQueue<Item: CalculateItem> {
+    private var calculateItemList = [Item]()
     public var count: Int {
-        return calculatorItemList.count
+        return calculateItemList.count
     }
     
     public init() {}
     
-    public mutating func enqueue(element: String) {
-        return calculatorItemList.append(element)
+    public mutating func enqueue(element: Item) {
+        return calculateItemList.append(element)
     }
     
-    public mutating func dequeue() -> String? {
-        if calculatorItemList.count > 0 {
-            return calculatorItemList.removeFirst()
+    public mutating func dequeue() -> Item? {
+        if calculateItemList.count > 0 {
+            return calculateItemList.removeFirst()
         } else {
             return nil
         }
     }
     
-    public mutating func peek() -> String? {
-        return calculatorItemList.first
+    public mutating func peek() -> Item? {
+        return calculateItemList.first
     }
     
     public mutating func clear() {
-        return calculatorItemList.removeAll()
+        return calculateItemList.removeAll()
     }
     
     public func isEmpty() -> Bool? {
-        return calculatorItemList.isEmpty
+        return calculateItemList.isEmpty
     }
 }
