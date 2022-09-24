@@ -13,9 +13,11 @@ struct Formula {
                   let number: Double = operands.dequeue() else {
                 throw FormulaError.impossibleFormula
             }
+            
             if currentOperator == .divide && number == Double(0) {
                 throw FormulaError.indivisibleByZero
             }
+            
             calculateResult = currentOperator.calculate(calculateResult, number)
         }
         

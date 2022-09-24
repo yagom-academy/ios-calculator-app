@@ -102,7 +102,9 @@ class CalculatorItemQueueTests: XCTestCase {
         input.forEach {
             sut.enqueue($0)
         }
+        
         var result: Int?
+        
         for _ in 1...input.count {
             result = sut.dequeue()
         }

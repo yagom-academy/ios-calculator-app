@@ -6,6 +6,7 @@ enum Operator: Character {
     
     func calculate(_ rhs: Double, _ lhs: Double) -> Double {
         let calculateResult: Double
+        
         switch self {
         case .add:
             calculateResult = add(rhs, lhs)
@@ -16,6 +17,7 @@ enum Operator: Character {
         case .multiply:
             calculateResult = multiply(rhs, lhs)
         }
+        
         return calculateResult
     }
     

@@ -27,6 +27,7 @@ class NodeTests: XCTestCase {
         //when
         let firstNode: Node<String> = Node<String>(data: input[0])
         let secondNode: Node<String> = Node<String>(data: input[1])
+        
         firstNode.next = secondNode
         
         //then
