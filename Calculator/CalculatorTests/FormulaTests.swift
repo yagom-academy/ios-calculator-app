@@ -2,7 +2,7 @@
 //  FormulaTests.swift
 //  CalculatorTests
 //
-//  Created by Jiyoung Lee on 2022/09/24.
+//  Created by SummerCat on 2022/09/24.
 //
 
 import XCTest
@@ -30,7 +30,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(item: 1)
         
         // when
-        let result = sut.result()
+        let result = try sut.result()
         
         // then
         XCTAssertEqual(result, 2)
@@ -49,7 +49,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(item: 3)
         
         // when
-        let result = sut.result()
+        let result = try sut.result()
         
         // then
         XCTAssertEqual(result, 5)
@@ -62,7 +62,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(item: 0)
         
         // when
-        let result = sut.result()
+        let result = try sut.result()
         
         // then
         XCTAssertThrowsError(result)
