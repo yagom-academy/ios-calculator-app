@@ -16,25 +16,26 @@ struct Formula {
         self.operators = CalculatorItemQueue(elements: operators)
     }
     
-    func result() -> Double {
+    func result() -> Double? {
         var operands = operands, operators = operators
         
         guard var calResult: Double = operands.dequeue() else {
-            return 0
+            return nil
         }
         
-        while !(operators.isEmpty && operands.isEmpty) {
-            let firstOperand = operands.dequeue() ?? calResult
+        while !operands.isEmpty {
+            let rhs = operands.dequeue()
             let firstOperator = operators.dequeue()
             
-            guard let firstOperator = firstOperator else {
+            guard let firstOperator = firstOperator,
+                  let rhs = rhs else {
                 break
             }
             
             do {
-                calResult = try firstOperator.calculate(lhs: calResult, rhs: firstOperand)
+                calResult = try firstOperator.calculate(lhs: calResult, rhs: rhs)
             } catch {
-                return 0
+                return nil
             }
         }
         
