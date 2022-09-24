@@ -286,7 +286,6 @@ buildActionMask = 2147483647;
 files = (
 C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
-<<<<<<< HEAD
 18CFA3E828DC5CBE004747CE /* String+.swift in Sources */,
 18DDB22328D857DF006568AD /* CalculatorItemQueue.swift in Sources */,
 18558A1E28DB3C8500D11803 /* Double+.swift in Sources */,
@@ -294,12 +293,8 @@ C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 18CFA3E628DC5999004747CE /* OperatorError.swift in Sources */,
 C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 18CFA3EA28DC5F98004747CE /* Formula.swift in Sources */,
-18558A2028DB3DA100D11803 /* Array+.swift in Sources */,
-=======
-18DDB22328D857DF006568AD /* CalculatorItemQueue.swift in Sources */,
 18558A1E28DB3C8500D11803 /* Double+CalculateItem.swift in Sources */,
 C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
->>>>>>> step1
 );
 runOnlyForDeploymentPostprocessing = 0;
 };
