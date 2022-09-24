@@ -7,18 +7,19 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula: Formula = Formula()
-        let separatedOperands: Array<String> = input.components(separatedBy: ["+","-","*","/"])
-        var convertArray: [String] = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0-2.0*9.0")
         
-        let doubleNumbersOperands = separatedOperands.map{
+        let separatedOperands: [String] = input.components(separatedBy: ["+","-","*","/"])
+        let convertedToDoubleOperands = separatedOperands.map{
             Double($0) ?? 99.999
         }
-        for i in doubleNumbersOperands {
-            formula.operands.enqueue(element: i)
+        for operand in convertedToDoubleOperands {
+            formula.operands.enqueue(element: operand)
         }
-        for j in convertArray {
-            let value: Operator = Operator.init(rawValue: j)
-            formula.operators.enqueue(element: value)
+        
+        let separatedOperators: [String] = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0-2.0*9.0")
+        for stringOperator in separatedOperators {
+            let convertedToCaseOperators: Operator = Operator.init(rawValue: stringOperator)
+            formula.operators.enqueue(element: convertedToCaseOperators)
         }
         return formula
     }
