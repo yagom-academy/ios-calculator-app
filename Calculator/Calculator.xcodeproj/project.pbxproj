@@ -24,6 +24,9 @@
 		D3A27BC128DC472800685ED0 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC028DC472800685ED0 /* Operator.swift */; };
 		D3A27BC928DC475500685ED0 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC828DC475500685ED0 /* OperatorTests.swift */; };
 		D3A27BCD28DC475B00685ED0 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC028DC472800685ED0 /* Operator.swift */; };
+		D3DEB9AA28DF03750072C83C /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FCA4A328D89C810001E47B /* CalculatorItemQueue.swift */; };
+		D3DEB9AC28DF03FF0072C83C /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A27BC028DC472800685ED0 /* Operator.swift */; };
+		D3DEB9AD28DF04020072C83C /* BasicDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3738B1728DCAF45001B561F /* BasicDataType.swift */; };
 		D3FCA4A428D89C810001E47B /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FCA4A328D89C810001E47B /* CalculatorItemQueue.swift */; };
 		D3FCA4AC28D8A1080001E47B /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FCA4AB28D8A1080001E47B /* NodeTests.swift */; };
 		D3FCA4B028D8A1ED0001E47B /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FCA4A328D89C810001E47B /* CalculatorItemQueue.swift */; };
@@ -434,8 +437,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3DEB9AA28DF03750072C83C /* CalculatorItemQueue.swift in Sources */,
+				D3DEB9AC28DF03FF0072C83C /* Operator.swift in Sources */,
 				D359BBCB28DD69EA00D015C2 /* Formula.swift in Sources */,
 				D359BBC828DD671F00D015C2 /* FormulaTests.swift in Sources */,
+				D3DEB9AD28DF04020072C83C /* BasicDataType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

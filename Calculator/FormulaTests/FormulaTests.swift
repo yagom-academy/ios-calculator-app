@@ -19,7 +19,7 @@ class FormulaTests: XCTestCase {
     func testFormula_주어진_Double_Array를_operands에_순서대로_enqeueu한_경우_operands의_head의_data는_주어진_Double_Array의_첫번째값과_같습니다() {
             //given
             let input: [Double] = [1.0, 2.0, 3.0, 4.0, 5.0]
-            let formula: Formula = Formula()
+            var formula: Formula = Formula()
             
             //when
             input.forEach {
