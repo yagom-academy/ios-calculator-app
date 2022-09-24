@@ -43,4 +43,21 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(input.first, formula.operators.head?.data)
     }
+    
+    func testFormula_주어진_실수2와_실수1로_이루어진_Double_Array와_Operator의_add_Case를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수3입니다() {
+        //given
+        let inputOperands: [Double] = [2.0, 1.0]
+        let inputOperators: Operator = Operator.add
+        var formula: Formula = Formula()
+        
+        //when
+        inputOperands.forEach {
+            formula.operands.enqueue($0)
+        }
+        formula.operators.enqueue(inputOperators)
+        let result: Double = formula.result()
+        
+        //then
+        XCTAssertEqual(3.0, result)
+    }
 }
