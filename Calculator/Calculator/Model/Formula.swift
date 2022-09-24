@@ -6,11 +6,19 @@
 //
 
 struct Formula {
-    let operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-    let operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
+    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
+    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    func result() -> Double {
+    mutating func result() -> Double {
         var result: Double = 0
+        
+        // 얘는 타입이 Operator
+        guard let lhs = operands.dequeue() else { return 0 }
+        guard let operatorSign = operators.dequeue() else { return 0 }
+        guard let rhs = operands.dequeue() else { return 0 }
+        
+        
+        result = operatorSign.calculate(lhs: lhs, rhs: rhs)
         
         return result
     }
