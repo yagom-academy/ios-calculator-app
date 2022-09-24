@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+", subtract = "-", divide = "/" , multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
