@@ -17,7 +17,7 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     }
     
     mutating func dequeue() -> Item? {
-        if isEmpty { return nil }
+        guard !isEmpty else { return nil }
         
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
