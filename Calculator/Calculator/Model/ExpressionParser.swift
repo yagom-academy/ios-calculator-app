@@ -11,9 +11,8 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula = Formula()
         let components = self.componentsByOperators(from: input)
-        let foundedMinusNumberComponents = adjustMinusNumber(in: components)
         
-        foundedMinusNumberComponents.forEach { string in
+        components.forEach { string in
             enqueue(string, in: &formula)
         }
         
@@ -33,6 +32,7 @@ enum ExpressionParser {
             components = progressSplit
         }
         
+        components = adjustMinusNumber(in: components)
         return components
     }
     
@@ -58,8 +58,6 @@ enum ExpressionParser {
             result.append(preCharacter)
             preCharacter = currentCharacter
             index += 1
-            
-            print(result)
         }
         
         result.append(preCharacter)
