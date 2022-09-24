@@ -60,4 +60,18 @@ final class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, 13.2/12.2)
     }
+    
+    func test_multiply일_때_calculates실행시_두개의_값을_곱하고_반환하는지() {
+        sut = .multiply
+        
+        //given
+        let lhs = 13.2
+        let rhs = 12.2
+        
+        //when
+        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        
+        //then
+        XCTAssertEqual(result, 161.04)
+    }
 }
