@@ -130,6 +130,6 @@ class FormulaTests: XCTestCase {
         let result: Double = formula.result()
         
         //then
-        XCTAssertEqual(40.0, result)
+        XCTAssertEqual(-40.0, result)
     }
 }
