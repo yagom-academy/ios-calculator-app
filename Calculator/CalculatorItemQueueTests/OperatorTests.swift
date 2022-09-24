@@ -9,29 +9,36 @@ import XCTest
 @testable import Calculator
 
 final class OperatorTests: XCTestCase {
+    var lhs: Double!
+    var rhs: Double!
+    
+    override func setUpWithError() throws {
+        lhs = Double.random(in: -99999999...99999999)
+        rhs = Double.random(in: -99999999...99999999)
+    }
     
     func test_연산자가add일때에러없이연산을수행하는지() {
         // driven
         let targetOperator = Operator.add
 
         // when
-        let result = try? targetOperator.calculate(lhs: 1, rhs: 2)
+        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
 
         // then
         XCTAssertNoThrow(result)
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, (lhs + rhs))
     }
     
-    func test_연산자가subtract일때연산을잘수행하는지() {
+    func test_연산자가subtract일때에러없이연산을잘수행하는지() {
         // driven
         let targetOperator = Operator.subtract
         
         // when
-        let result = try? targetOperator.calculate(lhs: 2, rhs: 1)
+        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertNoThrow(result)
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(result, (lhs - rhs))
     }
     
     func test_연산자가multiply일때연산을잘수행하는지() {
@@ -39,11 +46,11 @@ final class OperatorTests: XCTestCase {
         let targetOperator = Operator.multiply
         
         // when
-        let result = try? targetOperator.calculate(lhs: 2, rhs: 3)
+        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertNoThrow(result)
-        XCTAssertEqual(result, 6)
+        XCTAssertEqual(result, (lhs * rhs))
     }
     
     func test_연산자가divide일때0이아닌수로연산하였을때에러없이연산을잘수행하는지() {
@@ -51,18 +58,23 @@ final class OperatorTests: XCTestCase {
         let targetOperator = Operator.divide
         
         // when
-        let result = try? targetOperator.calculate(lhs: 10, rhs: 2)
+        if rhs == 0 { rhs = 1 }
+        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
         
         // then
         XCTAssertNoThrow(result)
-        XCTAssertEqual(result, 5)
+        XCTAssertEqual(result, (lhs / rhs))
     }
     
     func test_연산자가divide이고0인수로연산을수행하였을때에러가발생하는지() {
         // driven
         let targetOperator = Operator.divide
         
-        // when then
-        XCTAssertThrowsError(try targetOperator.calculate(lhs: 10, rhs: 0))
+        // when
+        let lhs: Double = 10
+        let rhs: Double = 0
+        
+        // then
+        XCTAssertThrowsError(try targetOperator.calculate(lhs: lhs, rhs: rhs))
     }
 }
