@@ -111,4 +111,25 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(2.0, result)
     }
+    
+    func testFormula_주어진_5개의_실수_1_2_5_2_40와_4개의_Operator_add_subtract_divide_multiply를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수40입니다() {
+        //given
+        let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0, 40]
+        let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
+        var formula: Formula = Formula()
+        
+        //when
+        inputOperands.forEach {
+            formula.operands.enqueue($0)
+        }
+        
+        inputOperators.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        let result: Double = formula.result()
+        
+        //then
+        XCTAssertEqual(40.0, result)
+    }
 }
