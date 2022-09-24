@@ -48,7 +48,7 @@ final class OperatorTests: XCTestCase {
     }
     
     func test_divide일_때_calculates실행시_두개의_값을_나누고_반환하는지() {
-        sut = .dividetest
+        sut = .divide
         
         //given
         let lhs = 13.2
