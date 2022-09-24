@@ -132,4 +132,84 @@ class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(-40.0, result)
     }
+    
+    func testFormula_result_메소드는_피연산자와_연산자가_아무것도_없는_경우_오류를_던진다() {
+        //given
+        var formula: Formula = Formula()
+        
+        //when,then
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func testFormula_result_메소드는_주어진_피연산자와_연산자간의_갯수가_동일한_경우_오류를_던진다() {
+        //given
+        let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0]
+        let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
+        var formula: Formula = Formula()
+        
+        inputOperands.forEach {
+            formula.operands.enqueue($0)
+        }
+        
+        inputOperators.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        //when,then
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func testFormula_result_메소드는_주어진_피연산자보다_연산자의_갯수가_많은_경우_오류를_던진다() {
+        //given
+        let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0]
+        let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply, .add]
+        var formula: Formula = Formula()
+        
+        inputOperands.forEach {
+            formula.operands.enqueue($0)
+        }
+        
+        inputOperators.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        //when,then
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func testFormula_result_메소드는_주어진_피연산자의_갯수가_연산자보다_2개이상_많은_경우_오류를_던진다() {
+        //given
+        let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0, 6.0, 20.0]
+        let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
+        var formula: Formula = Formula()
+        
+        inputOperands.forEach {
+            formula.operands.enqueue($0)
+        }
+        
+        inputOperators.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        //when,then
+        XCTAssertThrowsError(try formula.result())
+    }
+    
+    func testFormula_result_메소드는_나누기를_실수0으로_계산하려고_하는_경우_오류를_던진다() {
+        //given
+        let inputOperands: [Double] = [1.0, 2.0, 0.0, 6.5]
+        let inputOperators: [Operator] = [.add, .divide, .subtract]
+        var formula: Formula = Formula()
+        
+        inputOperands.forEach {
+            formula.operands.enqueue($0)
+        }
+        
+        inputOperators.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        //when,then
+        XCTAssertThrowsError(try formula.result())
+    }
 }
