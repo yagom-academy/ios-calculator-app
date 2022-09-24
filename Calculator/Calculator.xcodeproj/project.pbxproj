@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B45C691528DDE2D600E02CD2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45C691428DDE2D600E02CD2 /* Node.swift */; };
+		B46F838128DF027C00C28767 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F838028DF027C00C28767 /* OperatorTests.swift */; };
 		B4876A5F28D95CE700D17608 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4876A5E28D95CE700D17608 /* CalculatorItemQueue.swift */; };
 		B4876A8928D96D8D00D17608 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4876A8828D96D8D00D17608 /* CalculatorItemQueueTests.swift */; };
 		B4876A9028D9956000D17608 /* CalculateItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4876A8F28D9956000D17608 /* CalculateItemProtocol.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		B45C691428DDE2D600E02CD2 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		B46F838028DF027C00C28767 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
 		B4876A5E28D95CE700D17608 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		B4876A8628D96D8D00D17608 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4876A8828D96D8D00D17608 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		B4876A8728D96D8D00D17608 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				B46F838028DF027C00C28767 /* OperatorTests.swift */,
 				B4876A8828D96D8D00D17608 /* CalculatorItemQueueTests.swift */,
 			);
 			path = CalculatorTests;
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4876A8928D96D8D00D17608 /* CalculatorItemQueueTests.swift in Sources */,
+				B46F838128DF027C00C28767 /* OperatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
