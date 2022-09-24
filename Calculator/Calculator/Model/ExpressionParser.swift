@@ -8,11 +8,9 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula: Formula = Formula()
         let separatedInputOperands: Array<String> = input.components(separatedBy: ["+","-","*","/"])
-        let doubleNumbersOperands = separatedInputOperands.map({ (number: String) -> Double in
-            return Double(number) ?? 99.999
-        })
         var convertArray: [String] = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0-2.0*9.0")
         
+        let doubleNumbersOperands = separatedInputOperands.map({Double($0) ?? 99.999})
         for i in doubleNumbersOperands {
             formula.operands.enqueue(element: i)
         }
