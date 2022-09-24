@@ -7,15 +7,23 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        return Formula()
-    }
-    
-    static func componentsByOperators(from input: String) -> [String] {
-        var operators = CharacterSet()
-        Operator.allCases.forEach { component in
-            operators.insert(charactersIn: String(component.identifier))
+        var fomula = Formula()
+        let components = componentsByOperators(from: input)
+        
+        components.forEach { component in
+            if let operand = Double(component) {
+                fomula.operands.enqueue(operand)
+            } else if let componentOperator = Operator(rawValue: Character(component)) {
+                fomula.operators.enqueue(componentOperator)
+            }
         }
         
-        return input.components(separatedBy: operators)
+        return fomula
+    }
+    
+    static private func componentsByOperators(from input: String) -> [String] {
+        let result = input.split(wiht: " ")
+        
+        return result
     }
 }

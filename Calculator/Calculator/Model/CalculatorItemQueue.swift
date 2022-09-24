@@ -17,6 +17,18 @@ struct CalculatorItemQueue {
         input.count + output.count
     }
     
+    var statusQueue: [CalculateItem] {
+        if !output.isEmpty {
+            var reversedOutput: [CalculateItem] = output.reversed()
+            
+            input.forEach { item in
+                reversedOutput.append(item)
+            }
+            return reversedOutput
+        }
+        return input
+    }
+    
     mutating func enqueue(_ element: CalculateItem) {
         input.append(element)
     }
