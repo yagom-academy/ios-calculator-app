@@ -22,12 +22,6 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperator(from input: String) -> [String] {
-        return input.split(with: " ").compactMap {
-            if Double($0) != nil {
-                return $0
-            } else {
-                return nil
-            }
-        }
+        return input.split(with: " ").compactMap { Double($0) != nil ? $0 : nil }
     }
 }
