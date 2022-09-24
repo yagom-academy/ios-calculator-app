@@ -10,16 +10,16 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() -> Double {
-        var result: Double = 0
+        guard var lhs = operands.dequeue() else { return 0 }
         
-        // 얘는 타입이 Operator
-        guard let lhs = operands.dequeue() else { return 0 }
-        guard let operatorSign = operators.dequeue() else { return 0 }
-        guard let rhs = operands.dequeue() else { return 0 }
+        while !operands.isEmpty && !operators.isEmpty {
+            guard let operatorSign = operators.dequeue() else { return 0 }
+            guard let rhs = operands.dequeue() else { return 0 }
+            
+            lhs = operatorSign.calculate(lhs: lhs, rhs: rhs)
+        }
         
         
-        result = operatorSign.calculate(lhs: lhs, rhs: rhs)
-        
-        return result
+        return lhs
     }
 }
