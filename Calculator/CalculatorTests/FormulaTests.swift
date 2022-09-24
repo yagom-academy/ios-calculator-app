@@ -54,4 +54,17 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 5)
     }
+    
+    func test_result_0으로_나눌경우_오류를던진다() {
+        //given
+        sut.operands.enqueue(item: 2)
+        sut.operators.enqueue(item: Operator.divide)
+        sut.operands.enqueue(item: 0)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertThrowsError(result)
+    }
 }
