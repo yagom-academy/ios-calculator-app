@@ -92,7 +92,7 @@ class FormulaTests: XCTestCase {
         let result: Double = formula.result()
         
         //then
-        XCTAssertEqual(1.0, result)
+        XCTAssertEqual(2.0, result)
     }
     
     func testFormula_주어진_두개의_실수_2와_1과_Operator의_multiply_Case를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수3입니다() {
