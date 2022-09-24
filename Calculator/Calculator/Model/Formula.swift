@@ -7,7 +7,7 @@
 
 struct Formula {
     let operands: CalculatorItemQueue
-    let operators: CalculateItemQueue
+    let operators: CalculatorItemQueue
     
     func result() -> Double {
         
