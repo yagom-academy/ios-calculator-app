@@ -9,4 +9,6 @@ import Foundation
 
 enum Operator: Character, CaseIterable {
     case add = "+", subtract = "-", divide = "/" , multiply = "*"
+    
+    
 }
