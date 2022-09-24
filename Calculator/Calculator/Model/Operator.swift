@@ -4,37 +4,37 @@ enum Operator: Character {
     case divide = "/"
     case multiply = "*"
     
-    func calculate(_ rhs: Double, _ lhs: Double) -> Double {
+    func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         let calculateResult: Double
         
         switch self {
         case .add:
-            calculateResult = add(rhs, lhs)
+            calculateResult = add(lhs, rhs)
         case .subtract:
-            calculateResult = subtract(rhs, lhs)
+            calculateResult = subtract(lhs, rhs)
         case .divide:
-            calculateResult = divide(rhs, lhs)
+            calculateResult = divide(lhs, rhs)
         case .multiply:
-            calculateResult = multiply(rhs, lhs)
+            calculateResult = multiply(lhs, rhs)
         }
         
         return calculateResult
     }
     
-    private func add(_ rhs: Double,_ lhs: Double) -> Double {
-        return rhs + lhs
+    private func add(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs + rhs
     }
     
-    private func subtract(_ rhs: Double,_ lhs: Double) -> Double {
-        return rhs - lhs
+    private func subtract(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs - rhs
     }
     
-    private func divide(_ rhs: Double,_ lhs: Double) -> Double {
-        return rhs / lhs
+    private func divide(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs / rhs
     }
     
-    private func multiply(_ rhs: Double,_ lhs: Double) -> Double {
-        return rhs * lhs
+    private func multiply(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
 
