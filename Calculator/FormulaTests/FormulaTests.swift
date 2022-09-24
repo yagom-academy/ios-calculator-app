@@ -17,16 +17,30 @@ class FormulaTests: XCTestCase {
     }
     
     func testFormula_주어진_Double_Array를_operands에_순서대로_enqeueu한_경우_operands의_head의_data는_주어진_Double_Array의_첫번째값과_같습니다() {
-            //given
-            let input: [Double] = [1.0, 2.0, 3.0, 4.0, 5.0]
-            var formula: Formula = Formula()
-            
-            //when
-            input.forEach {
-                formula.operands.enqueue($0)
-            }
-            
-            //then
-            XCTAssertEqual(input.first, formula.operands.head?.data)
+        //given
+        let input: [Double] = [1.0, 2.0, 3.0, 4.0, 5.0]
+        var formula: Formula = Formula()
+        
+        //when
+        input.forEach {
+            formula.operands.enqueue($0)
         }
+        
+        //then
+        XCTAssertEqual(input.first, formula.operands.head?.data)
+    }
+    
+    func testFormula_주어진_Operator_Array를_operator에_순서대로_endqueue한_경우_operator의_head의_data는_주어진_Operator_Array의_첫번째값과_같습니다() {
+        //given
+        let input: [Operator] = [.add, .add, .divide, .multiply, .subtract]
+        var formula: Formula = Formula()
+        
+        //when
+        input.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        //then
+        XCTAssertEqual(input.first, formula.operators.head?.data)
+    }
 }
