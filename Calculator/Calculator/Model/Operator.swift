@@ -15,19 +15,19 @@ enum Operator: Character, CaseIterable {
         return 1
     }
     
-    func add(lhs: Double, rhs: Double) -> Double {
+    private func add(lhs: Double, rhs: Double) -> Double {
         return 1
     }
     
-    func subtract(lhs: Double, rhs: Double) -> Double {
+    private func subtract(lhs: Double, rhs: Double) -> Double {
         return 1
     }
     
-    func divide(lhs: Double, rhs: Double) -> Double {
+    private func divide(lhs: Double, rhs: Double) -> Double {
         return 1
     }
     
-    func multiply(lhs: Double, rhs: Double) -> Double {
+    private func multiply(lhs: Double, rhs: Double) -> Double {
         return 1
     }
 }
