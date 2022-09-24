@@ -12,7 +12,16 @@ enum Operator: Character, CaseIterable {
     case multiply = "*"
     
     func calculates(lhs: Double, rhs: Double) -> Double {
-        return 1
+        switch self {
+        case .add:
+            return 1
+        case .subtract:
+            return 1
+        case .divide:
+            return 1
+        case .multiply:
+            return 1
+        }
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
