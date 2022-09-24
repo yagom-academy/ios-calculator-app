@@ -8,7 +8,7 @@
 import XCTest
 
 class BasicDataTypeTests: XCTestCase {
-    func test_Double_Type_실수_2를_is로_CalculateItem과_type_checking한_결과는_참인가() {
+    func testDouble_주어진_실수2를_CalculateItem_Type으로_Type_Checking한_경우_그_결과는_참입니다() {
         //given
         let input: Double = 2.0
         
@@ -19,7 +19,7 @@ class BasicDataTypeTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_String_Type_AaBaCaDaEaF를_Character_Type_a를_파라메터로_split메소드를_호출하면_결과값이_A_B_C_D_E_F가_순서대로_담긴_String_Array_Type_인가() {
+    func testString_주어진_AaBaCaDaEaF를_split메소드를_사용해_a를_기준으로_나눈_경우_그_결과는_A_B_C_D_E_F가_담긴_StringArray입니다() {
         //given
         let input: String = "AaBaCaDaEaF"
         

@@ -8,7 +8,7 @@
 import XCTest
 
 class FormulaTests: XCTestCase {
-    func test_Formula_Type을_인스턴스화하면_그_값이_nil이_아닌가() {
+    func testFormula_Fornula_Type을_인스턴스화한_경우_그_값은_Nil이_아닙니다() {
         //given, when
         let formula: Formula = Formula()
         

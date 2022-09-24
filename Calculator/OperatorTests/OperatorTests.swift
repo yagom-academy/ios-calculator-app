@@ -15,7 +15,7 @@ class OperatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_Operator타입의_add_case가_생성되는가() {
+    func testOperator_add_case를_생성한_경우_그_결과는_Nil이_아닙니다() {
         //when
         sut = Operator.add
         
@@ -23,7 +23,7 @@ class OperatorTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func test_Operator타입의_subtract_case가_생성되는가() {
+    func testOperator_subtract_case를_생성한_경우_그_결과는_Nil이_아닙니다() {
         //when
         sut = Operator.subtract
         
@@ -31,7 +31,7 @@ class OperatorTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func test_Operator타입의_divide_case가_생성되는가() {
+    func testOperator_divide_case를_생성한_경우_그_결과는_Nil이_아닙니다() {
         //when
         sut = Operator.divide
         
@@ -39,7 +39,7 @@ class OperatorTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func test_Operator타입의_multiply_case가_생성되는가() {
+    func testOperator_multiply_case를_생성한_경우_그_결과는_Nil이_아닙니다() {
         //when
         sut = Operator.multiply
         
@@ -47,7 +47,7 @@ class OperatorTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func test_Character타입_입력값_a를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator가_nil인가() {
+    func testOperator_주어진_Character타입_a를_이용해_Operator를_생성한_경우_그_결과는_Nil입니다() {
         //given
         let input: Character = "a"
         
@@ -58,7 +58,7 @@ class OperatorTests: XCTestCase {
         XCTAssertNil(sut)
     }
     
-    func test_Character타입_입력값_더하기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_add인가() {
+    func testOperator_주어진_Character타입_더하기기호를_이용해_Operator를_생성한_경우_그_결과는_Operator_Type의_add_case_입니다() {
         //given
         let input: Character = "+"
         
@@ -69,7 +69,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(Operator.add, sut)
     }
     
-    func test_Character타입_입력값_빼기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_subtract인가() {
+    func testOperator_주어진_Character타입_빼기기호를_이용해_Operator를_생성한_경우_그_결과는_Operator_Type의_subtract_case_입니다() {
         //given
         let input: Character = "-"
         
@@ -80,7 +80,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(Operator.subtract, sut)
     }
     
-    func test_Character타입_입력값_나누기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_divide인가() {
+    func testOperator_주어진_Character타입_곱하기기호를_이용해_Operator를_생성한_경우_그_결과는_Operator_Type의_divide_case_입니다() {
         //given
         let input: Character = "/"
         
@@ -91,7 +91,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(Operator.divide, sut)
     }
     
-    func test_Character타입_입력값_곱하기기호를_Operator타입의_원시값으로_지정하여_Operator를_생성하면_생성된_Operator의_case가_multiply인가() {
+    func testOperator_주어진_Character타입_나누기기호를_이용해_Operator를_생성한_경우_그_결과는_Operator_Type의_multiply_case_입니다() {
         //given
         let input: Character = "*"
         
@@ -102,55 +102,55 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(Operator.multiply, sut)
     }
     
-    func test_입력값_실수2와_실수4를_Operator타입의_add_case를_통해_calculate메소드를_호출하여서_rhs로_실수2를_lhs로_실수4를_입력하면_그_결과가_두수를_더한_실수6과_같은가() {
+    func testOperator_주어진_add_case가_실수2와_실수4를_이용해_calculate메소드를_호출한_경우_그_결과는_실수6입니다() {
         //given
         let input: [Double] = [2.0, 4.0]
+        sut = Operator.add
         
         //when
-        sut = Operator.add
         let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(6.0, result)
     }
     
-    func test_입력값_실수4와_실수2를_Operator타입의_subtract_case를_통해_calculate메소드를_호출하여서_rhs로_실수4를_lhs로_실수2를_입력하면_그_결과가_두수를_뺀_실수2와_같은가() {
+    func testOperator_주어진_subtract_case가_실수4와_실수2를_이용해_calculate메소드를_호출한_경우_그_결과는_실수2입니다() {
         //given
         let input: [Double] = [4.0, 2.0]
+        sut = Operator.subtract
         
         //when
-        sut = Operator.subtract
         let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(2.0, result)
     }
     
-    func test_입력값_실수6과_실수2를_Operator타입의_divide_case를_통해_calculate메소드를_호출하여서_rhs로_실수6을_lhs로_실수2를_입력하면_그_결과가_두수를_나눈_실수3과_같은가() {
+    func testOperator_주어진_divide_case가_실수6와_실수2를_이용해_calculate메소드를_호출한_경우_그_결과는_실수3입니다() {
         //given
         let input: [Double] = [6.0, 2.0]
+        sut = Operator.divide
         
         //when
-        sut = Operator.divide
         let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(3.0, result)
     }
     
-    func test_입력값_실수9와_실수5를_Operator타입의_multiply_case를_통해_calculate메소드를_호출하여서_rhs로_실수9를_lhs로_실수5를_입력하면_그_결과가_두수를_곱한_실수45과_같은가() {
+    func testOperator_주어진_multiply_case가_실수9와_실수5를_이용해_calculate메소드를_호출한_경우_그_결과는_실수45입니다() {
         //given
         let input: [Double] = [9.0, 5.0]
+        sut = Operator.multiply
         
         //when
-        sut = Operator.multiply
         let result: Double = sut.calculate(input[0], input[1])
         
         //then
         XCTAssertEqual(45.0, result)
     }
     
-    func test_입력값_Operator타입_allCases를_forEach로_순회하면_전달되는_요소들의_type은_Operator타입과_같은가() {
+    func testOperator_주어진_allCases를_forEach로_순회한_경우_각_요소의_type은_Operator타입_입니다() {
         //given
         let input: [Operator] = Operator.allCases
         
@@ -161,7 +161,7 @@ class OperatorTests: XCTestCase {
         }
     }
     
-    func test_입력값_Operator타입의_add_case를_is로_CalculateItem와_Type_Checking하면_결과가_참인가() {
+    func testOperator_주어진_add_case를_CalculateItem_Type으로_Type_Checking한_경우_그_결과는_참입니다() {
         //given
         sut = Operator.add
         
