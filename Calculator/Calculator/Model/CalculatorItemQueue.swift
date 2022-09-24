@@ -31,14 +31,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     @discardableResult
     mutating func dequeue() -> Element? {
-        
-        if isEmpty { return nil }
-        
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
             inputStack.removeAll()
         }
         
-        return outputStack.removeLast()
+        return outputStack.popLast()
     }
 }
