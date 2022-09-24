@@ -6,22 +6,36 @@ enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
         let components = componentsByOperators(from: input)
-        var operands = components.compactMap{Double($0)}
-        var operators = components.filter{$0.count == 1}.compactMap{Operator(rawValue: Character($0))?.rawValue}
+        var operands = CalculatorItemQueue<Double>.init()
+        var operators = CalculatorItemQueue<Operator>.init()
+        
+        components.forEach {
+            if let doubleComponents = Double($0) {
+                operands.enqueue(element: doubleComponents)
+            }
+            if let OperatorComponents = Operator(rawValue: Character($0)) {
+                operators.enqueue(element: OperatorComponents)
+            }
+        }
         return Formula(operands: operands, operators: operators)
-        // 뭔가 담는게 잘못됐나봐...
     }
     
+    
     private static func componentsByOperators(from input: String) -> [String] {
-        let inputArray = [input]
-        Operator.allCases.forEach{
-            
+        let operators: [Character] = Operator.allCases.map{$0.rawValue}
+        var strings: String = ""
+        var result:[String] = []
+        
+        input.forEach {
+            if operators.contains($0) == false {
+                strings.append($0)
+            } else if operators.contains($0) {
+                result.append(strings)
+                result.append("\($0)")
+                strings.removeAll()
+            }
         }
-        
-        let numbers = input.split(with: Operator.allCases.)
-//        let components = input.map{String($0)}
-        
-        return numbers
+        result.append(strings)
+        return result
     }
 }
-
