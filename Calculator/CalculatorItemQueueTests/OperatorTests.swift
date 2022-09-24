@@ -13,8 +13,17 @@ final class OperatorTests: XCTestCase {
     var rhs: Double!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
+        
         lhs = Double.random(in: -99999999...99999999)
         rhs = Double.random(in: -99999999...99999999)
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        
+        lhs = nil
+        rhs = nil
     }
     
     func test_연산자가add일때에러없이연산을수행하는지() {
