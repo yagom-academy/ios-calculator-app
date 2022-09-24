@@ -21,9 +21,16 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, try parse?.result())
     }
     
-    func test_계산하는값이_음수_부호를_가지고있을때_정상적으로_연산이_되는지(){
+    func test_양수234과_음수111_을_연산했을때_결과값으로_123이_나오는지(){
         let result: Double = 123
         var parse = try? ExpressionParser.parse(from: "234 + -111")
+        
+        XCTAssertEqual(result, try parse?.result())
+    }
+    
+    func test_양수233과_음수111을_곱하고_음수2로나누었을때_정상적인_값이_출력되는지() {
+        let result: Double = (233 * -111) / -2
+        var parse = try? ExpressionParser.parse(from: "233 * -111 / -2")
         
         XCTAssertEqual(result, try parse?.result())
     }
