@@ -55,7 +55,10 @@ class FormulaTests: XCTestCase {
             formula.operands.enqueue($0)
         }
         formula.operators.enqueue(inputOperators)
-        let result: Double = formula.result()
+        
+        guard let result: Double = try? formula.result() else {
+            return
+        }
         
         //then
         XCTAssertEqual(3.0, result)
@@ -72,7 +75,9 @@ class FormulaTests: XCTestCase {
             formula.operands.enqueue($0)
         }
         formula.operators.enqueue(inputOperators)
-        let result: Double = formula.result()
+        guard let result: Double = try? formula.result() else {
+            return
+        }
         
         //then
         XCTAssertEqual(1.0, result)
@@ -89,7 +94,9 @@ class FormulaTests: XCTestCase {
             formula.operands.enqueue($0)
         }
         formula.operators.enqueue(inputOperators)
-        let result: Double = formula.result()
+        guard let result: Double = try? formula.result() else {
+            return
+        }
         
         //then
         XCTAssertEqual(2.0, result)
@@ -106,7 +113,9 @@ class FormulaTests: XCTestCase {
             formula.operands.enqueue($0)
         }
         formula.operators.enqueue(inputOperators)
-        let result: Double = formula.result()
+        guard let result: Double = try? formula.result() else {
+            return
+        }
         
         //then
         XCTAssertEqual(2.0, result)
@@ -127,7 +136,9 @@ class FormulaTests: XCTestCase {
             formula.operators.enqueue($0)
         }
         
-        let result: Double = formula.result()
+        guard let result: Double = try? formula.result() else {
+            return
+        }
         
         //then
         XCTAssertEqual(-40.0, result)
@@ -136,6 +147,7 @@ class FormulaTests: XCTestCase {
     func testFormula_result_메소드는_피연산자와_연산자가_아무것도_없는_경우_오류를_던진다() {
         //given
         var formula: Formula = Formula()
+        formula.operands.enqueue(2.0)
         
         //when,then
         XCTAssertThrowsError(try formula.result())
