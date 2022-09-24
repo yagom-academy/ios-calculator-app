@@ -9,12 +9,22 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    mutating func result() -> Double {
-        guard let leftNumber = operands.dequeue() else { return 0.0 }
-        guard let rightNumber = operands.dequeue() else { return 0.0 }
-        guard let calculate = operators.dequeue() else { return 0.0 }
+    mutating func result() throws -> Double {
+        guard var result = operands.dequeue() else {
+            throw CalculatorError.emptyNumber
+        }
         
-        let result = calculate.calculate(lhs: leftNumber, rhs: rightNumber)
+        while operands.isEmpty() == false && operators.isEmpty() == false {
+            guard let number = operands.dequeue() else {
+                throw CalculatorError.noMoreNumber
+            }
+            guard let element = operators.dequeue() else {
+                throw CalculatorError.emptyElement
+            }
+            
+            result = element.calculate(lhs: result, rhs: number)
+        }
+            
         return result
     }
 }
