@@ -10,4 +10,8 @@ enum Operator: Character, CaseIterable {
     case subtract = "-"
     case divide = "%"
     case multiply = "*"
+    
+    func calculate(lhs: Double, rhs: Double) -> Double {
+        return 0.0
+    }
 }
