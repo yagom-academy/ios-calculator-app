@@ -8,10 +8,11 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let input = input.components(separatedBy: ["^", "!", "@", "#", "$", "%", "&"]).joined()
-        let operators: [Operator] = Array(input.compactMap { Operator(rawValue: $0) })
-        print(componenetsByOperators(from: input))
-        let operands: [Double] = componenetsByOperators(from: input).compactMap { Double($0) }
+        let removedSpecial = input.components(separatedBy: ["^", "!", "@", "#", "$", "%", "&"]).joined()
+        let removedPlain = removedSpecial.filter { Double(String($0)) != nil || Operator(rawValue: $0) != nil }
+        
+        let operators: [Operator] = Array(removedPlain.compactMap { Operator(rawValue: $0) })
+        let operands: [Double] = componenetsByOperators(from: removedPlain).compactMap { Double($0) }
         
         return Formula(operands: operands, operators: operators)
     }
@@ -21,7 +22,7 @@ enum ExpressionParser {
         var result: String = input
         
         operators.forEach { result = result.split(with: $0).joined() }
-        print(result)
+
         return result.split(separator: " ").map { $0.description }
     }
 }
