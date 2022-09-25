@@ -13,10 +13,6 @@ class Node<Element> {
         self.value = value
         self.next = next
     }
-    
-    deinit {
-        print("deinit value:\(value), next:\(next)")
-    }
 }
 
 class CalculatorItemQueue<Element> {
