@@ -91,4 +91,17 @@ final class CalculatorItemQueueTests: XCTestCase {
 
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_Queue에랜덤한값을넣었을때_stateQueue프로퍼티가정상적으로연산되는지() {
+        var expectedValue: [Double] = []
+        
+        for _ in 1...Int.random(in: 1...30) {
+            let randomNumber: Double = Double.random(in: -100.0...100.0)
+            sut.enqueue(randomNumber)
+            expectedValue.append(randomNumber)
+        }
+        guard let result = sut.statusQueue as? [Double] else { return }
+        
+        XCTAssertEqual(expectedValue, result)
+    }
 }
