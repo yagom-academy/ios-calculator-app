@@ -27,9 +27,9 @@ class OperatorTests: XCTestCase {
     
     func testOperator_Double타입의값2개가_calculator메서드의_인자로들어갔을때_두값의차가반환되어야한다() {
         // given
-        sut = Operator.add
+        sut = Operator.subtract
         let lhs = 2.0
-        let rhs = 1.0
+        let rhs =  1.0
         // when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         // then
