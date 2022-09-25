@@ -19,15 +19,28 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberZeroButtonPressed(_ sender: UIButton) {
+        if operand.text == "0" {
+            return
+        }
         updateOperandNumber(with: "0")
     }
     
     @IBAction func numberDoubleZeroButtonPressed(_ sender: UIButton) {
+        if operand.text == "0" {
+            return
+        }
         updateOperandNumber(with: "00")
     }
     
     @IBAction func decimalPointButtonPressed(_ sender: UIButton) {
-        updateOperandNumber(with: ".")
+        guard let isContainingPoint = operand.text?.contains(".") else { return }
+        if isContainingPoint {
+            return
+        } else if operand.text == "0" {
+            updateOperandNumber(with: "0.")
+        } else {
+            updateOperandNumber(with: ".")
+        }
     }
     
     @IBAction func numberOnePressed(_ sender: UIButton) {
