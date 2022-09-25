@@ -10,6 +10,7 @@ class ViewController: UIViewController {
 
     var expression: String = ""
     
+    @IBOutlet weak var operandAndOperatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -80,18 +81,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func divideButtonPressed(_ sender: UIButton) {
+        updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "÷")
     }
     
     @IBAction func multiplyButtonPressed(_ sender: UIButton) {
+        updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "×")
     }
     
     @IBAction func subtractButtonPressed(_ sender: UIButton) {
+        updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "-")
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
+        updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "+")
     }
     
@@ -99,6 +104,7 @@ class ViewController: UIViewController {
         updateExpression()
         let result = ExpressionParser.parse(from: expression).result()
         updateResult(result: result)
+        updateOperandAndOperatorStackView()
     }
     
     func updateOperandLabel(with number: String) {
@@ -118,6 +124,22 @@ class ViewController: UIViewController {
         expression += operand
         operandLabel.text = "0"
         operatorLabel.text = nextOperator
+    }
+    
+    func updateOperandAndOperatorStackView() {
+        guard let operandText = operandLabel.text,
+              let operatorText = operatorLabel.text else { return }
+        
+        let textLabel = UILabel()
+        textLabel.text = operatorText + " " + operandText
+        textLabel.textColor = .white
+        textLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+
+        let stackView = UIStackView()
+        stackView.axis  = NSLayoutConstraint.Axis.horizontal
+        stackView.addArrangedSubview(textLabel)
+        
+        operandAndOperatorStackView.addArrangedSubview(stackView)
     }
     
     func updateResult(result: Double) {
