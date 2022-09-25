@@ -1,8 +1,6 @@
 //
 //  FormulaTests.swift
-//  CalculatorItemsTests
-//
-//  Created by 이경민 on 2022/09/23.
+//  Created by 미니.
 //
 
 import XCTest

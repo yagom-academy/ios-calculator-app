@@ -1,8 +1,6 @@
 //
 //  OperatorError.swift
-//  Calculator
-//
-//  Created by 이경민 on 2022/09/22.
+//  Created by 미니.
 //
 
 enum OperatorError: Error {

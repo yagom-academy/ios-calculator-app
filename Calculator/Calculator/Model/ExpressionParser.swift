@@ -1,8 +1,6 @@
 //
 //  ExpressionParser.swift
-//  Calculator
-//
-//  Created by 이경민 on 2022/09/25.
+//  Created by 미니.
 //
 
 

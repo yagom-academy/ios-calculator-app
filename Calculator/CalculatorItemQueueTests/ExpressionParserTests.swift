@@ -1,10 +1,7 @@
 //
 //  ExpressionParserTests.swift
-//  CalculatorItemsTests
+//  Created by 미니.
 //
-//  Created by 이경민 on 2022/09/25.
-//
-
 import XCTest
 @testable import Calculator
 
