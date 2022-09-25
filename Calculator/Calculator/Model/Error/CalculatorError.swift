@@ -6,7 +6,7 @@
 //
 
 enum CalculatorError: Error {
-    case emptyElement
-    case emptyNumber
-    case noMoreNumber
+    case emptyOperators
+    case emptyOperands
+    case noMoreOperands
 }

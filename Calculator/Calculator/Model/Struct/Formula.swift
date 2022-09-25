@@ -11,18 +11,18 @@ struct Formula {
     
     mutating func result() throws -> Double {
         guard var result = operands.dequeue() else {
-            throw CalculatorError.emptyNumber
+            throw CalculatorError.emptyOperands
         }
         
         while operands.isEmpty() == false && operators.isEmpty() == false {
             guard let number = operands.dequeue() else {
-                throw CalculatorError.noMoreNumber
+                throw CalculatorError.noMoreOperands
             }
-            guard let element = operators.dequeue() else {
-                throw CalculatorError.emptyElement
+            guard let operators = operators.dequeue() else {
+                throw CalculatorError.emptyOperators
             }
             
-            result = element.calculate(lhs: result, rhs: number)
+            result = operators.calculate(lhs: result, rhs: number)
         }
             
         return result
