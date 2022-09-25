@@ -123,6 +123,7 @@ class ViewController: UIViewController {
     func updateResult(result: Double) {
         operandLabel.text = result.description
         operatorLabel.text = ""
+        expression = ""
     }
 }
 
