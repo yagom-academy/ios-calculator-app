@@ -14,10 +14,6 @@ class LinkedListTests: XCTestCase {
     override func setUpWithError() throws {
         sut = LinkedList()
     }
-
-    override func tearDownWithError() throws {
-        sut = nil
-    }
     
     func testLinkedList_문자열을_append했을때_해당문자열이잘들어가야한다() {
         sut.append("HI")
