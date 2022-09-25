@@ -5,9 +5,9 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
-    private var input: [CalculateItem] = []
-    private var output: [CalculateItem] = []
+struct CalculatorItemQueue<T: CalculateItem> {
+    private var input: [T] = []
+    private var output: [T] = []
     
     var isEmpty: Bool {
         input.isEmpty && output.isEmpty
@@ -17,9 +17,9 @@ struct CalculatorItemQueue {
         input.count + output.count
     }
     
-    var statusQueue: [CalculateItem] {
+    var statusQueue: [T] {
         if !output.isEmpty {
-            var reversedOutput: [CalculateItem] = output.reversed()
+            var reversedOutput: [T] = output.reversed()
             
             input.forEach { item in
                 reversedOutput.append(item)
@@ -29,12 +29,12 @@ struct CalculatorItemQueue {
         return input
     }
     
-    mutating func enqueue(_ element: CalculateItem) {
+    mutating func enqueue(_ element: T) {
         input.append(element)
     }
     
     @discardableResult
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> T? {
         if output.isEmpty {
             output = input.reversed()
             input.removeAll()

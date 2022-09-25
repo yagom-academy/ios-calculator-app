@@ -7,11 +7,11 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -26,7 +26,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_Queue의남은데이터갯수를세는메서드가_정상작동하는지() {
-        let input: [CalculateItem] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...100))
+        let input: [Double] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...100))
         
         for data in input {
             sut.enqueue(data)
@@ -38,7 +38,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_Queue에데이터를enqueue했을때_count가enqueue횟수와일치하는지() {
-        let input: [CalculateItem] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...100))
+        let input: [Double] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...100))
         
         for data in input {
             sut.enqueue(data)
@@ -57,7 +57,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         var result = [Double]()
         for _ in input {
-            guard let data = sut.dequeue() as? Double else { return }
+            guard let data = sut.dequeue() else { return }
             result.append(data)
         }
 
@@ -65,7 +65,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue를호출한후count에접근할때_정상적으로data의갯수를반환하는지() {
-        let input: [CalculateItem] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...50))
+        let input: [Double] = .init(repeating: Double.random(in: 1...100), count: Int.random(in: 1...50))
         for data in input {
             sut.enqueue(data)
         }
@@ -97,11 +97,11 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         for _ in 1...Int.random(in: 1...30) {
             let randomNumber: Double = Double.random(in: -100.0...100.0)
+            
             sut.enqueue(randomNumber)
             expectedValue.append(randomNumber)
         }
-        guard let result = sut.statusQueue as? [Double] else { return }
         
-        XCTAssertEqual(expectedValue, result)
+        XCTAssertEqual(expectedValue, sut.statusQueue)
     }
 }

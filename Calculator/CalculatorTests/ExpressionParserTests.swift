@@ -11,16 +11,12 @@ final class ExpressionParserTests: XCTestCase {
         let input = "1 + 2 × 3"
         
         let result = ExpressionParser.parse(from: input)
-        guard let resultOperands = result.operands.statusQueue as? [Double],
-              let resultOperators = result.operators.statusQueue as? [Operator]
-        else {
-            return
-        }
+
         let expectedOperands: [Double] = [1.0, 2.0, 3.0]
         let expectedOperators: [Operator] = [Operator.add, Operator.multiply]
         
-        XCTAssertEqual(expectedOperands, resultOperands)
-        XCTAssertEqual(expectedOperators, resultOperators)
+        XCTAssertEqual(expectedOperands, result.operands.statusQueue)
+        XCTAssertEqual(expectedOperators, result.operators.statusQueue)
     }
     
     func test_parse메서드에랜덤한피연산자와연산자를넣었을때_파싱이정상적으로이루어지는지() {
@@ -47,14 +43,9 @@ final class ExpressionParserTests: XCTestCase {
         
         // when
         let result = ExpressionParser.parse(from: input)
-        guard let resultOperands = result.operands.statusQueue as? [Double],
-              let resultOperators = result.operators.statusQueue as? [Operator]
-        else {
-            return
-        }
         
         // then
-        XCTAssertEqual(inputOperands, resultOperands)
-        XCTAssertEqual(inputOperators, resultOperators)
+        XCTAssertEqual(inputOperands, result.operands.statusQueue)
+        XCTAssertEqual(inputOperators, result.operators.statusQueue)
     }
 }

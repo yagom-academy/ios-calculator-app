@@ -3,4 +3,4 @@
 //  Created by Wonbi
 //
 
-protocol CalculateItem { }
+protocol CalculateItem: Equatable { }

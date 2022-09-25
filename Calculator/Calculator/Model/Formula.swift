@@ -6,16 +6,16 @@
 import Foundation
 
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
-    init(operands: CalculatorItemQueue, operators: CalculatorItemQueue) {
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
         self.operands = operands
         self.operators = operators
     }
     
     mutating func result() -> Double {
-        guard let firstOperand = operands.dequeue() as? Double else { return .zero }
+        guard let firstOperand = operands.dequeue() else { return .zero }
         var result = firstOperand
 
         while !operators.isEmpty || !operands.isEmpty {
@@ -23,9 +23,9 @@ struct Formula {
             let secondOperand = operands.dequeue()
             let currentOperator = operators.dequeue()
             
-            if let secondOperend = secondOperand as? Double,
-               let currentOperator = currentOperator as? Operator {
-                result = currentOperator.calculate(lhs: firstOperand, rhs: secondOperend)
+            if let secondOperand = secondOperand,
+               let currentOperator = currentOperator {
+                result = currentOperator.calculate(lhs: firstOperand, rhs: secondOperand)
             }
             
             if result.isNaN {
