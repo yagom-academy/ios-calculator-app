@@ -20,7 +20,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_1더하기11빼기3넣으면_1과11과3을가진배열반환() {
         // given
-        let input = "1+22-3"
+        let input = "1 + 22 - 3"
         var expectedOperands = CalculatorItemQueue<Double>()
         expectedOperands.enqueue(item: 1)
         expectedOperands.enqueue(item: 22)
