@@ -39,7 +39,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_입력값에음수가포함된경우() {
         // given
-        let input = "1--1"
+        let input = "1 - -1"
         var expectedOperands = CalculatorItemQueue<Double>()
         expectedOperands.enqueue(item: 1)
         expectedOperands.enqueue(item: -1)

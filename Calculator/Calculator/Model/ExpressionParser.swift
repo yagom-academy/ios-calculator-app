@@ -18,9 +18,16 @@ enum ExpressionParser {
         }
 
         let operators = Operator.allCases.map { $0.rawValue }
-        let operatorQueue = input
-            .map { $0 }
-            .filter { operators.contains($0) }
+        let inputArr = input.split(with: " ")
+        var operatorQueue: [Character] = []
+        
+        for ele in inputArr {
+            if ele.count > 1 { continue }
+            if operators.contains(Character(ele)) {
+                operatorQueue.append(Character(ele))
+            }
+        }
+        
         operatorQueue.forEach {
             guard let operatorSign = Operator(rawValue: $0) else { return }
             formula.operators.enqueue(item: operatorSign)
@@ -30,12 +37,10 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators: CharacterSet = CharacterSet(
-            charactersIn: Operator.allCases.map {
-                String($0.rawValue)
-            }.joined())
-        
-        let numbers = input.components(separatedBy: operators)
+        let operators = Operator.allCases.map { String($0.rawValue) }
+        let numbers = input
+            .split(with: " ")
+            .filter { !operators.contains($0) }
         
         return numbers
     }
