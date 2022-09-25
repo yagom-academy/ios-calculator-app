@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Calculator
+
 class OperatorTests: XCTestCase {
     var sut: Operator!
 
@@ -34,5 +35,16 @@ class OperatorTests: XCTestCase {
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         // then
         XCTAssertEqual(result, 1.0)
+    }
+    
+    func testOperator_Double타입의값2개가_calculator메서드의_인자로들어갔을때_lhs나누기rhs한값이반환되어야한다() {
+        // given
+        sut = Operator.divide
+        let lhs = 2.0
+        let rhs =  1.0
+        // when
+        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        // then
+        XCTAssertEqual(result, 2.0)
     }
 }
