@@ -21,7 +21,7 @@ class OperatorTests: XCTestCase {
         let lhs = 1.0
         let rhs = 2.0
         // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         // then
         XCTAssertEqual(result, 3.0)
     }
@@ -32,7 +32,7 @@ class OperatorTests: XCTestCase {
         let lhs = 2.0
         let rhs =  1.0
         // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         // then
         XCTAssertEqual(result, 1.0)
     }
@@ -43,7 +43,7 @@ class OperatorTests: XCTestCase {
         let lhs = 2.0
         let rhs =  1.0
         // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         // then
         XCTAssertEqual(result, 2.0)
     }
@@ -54,8 +54,19 @@ class OperatorTests: XCTestCase {
         let lhs = 2.0
         let rhs =  1.0
         // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        let result = try? sut.calculate(lhs: lhs, rhs: rhs)
         // then
         XCTAssertEqual(result, 2.0)
+    }
+    
+    func testOperator_0으로나누기를시도했을때오류가나야한다() {
+        // given
+        sut = Operator.divide
+        let lhs = 2.0
+        let rhs =  0.0
+        
+        XCTAssertThrowsError(try sut.calculate(lhs: lhs, rhs: rhs)) { error in
+            XCTAssertEqual(error as? OperatorError, OperatorError.divideWithZero)
+        }
     }
 }
