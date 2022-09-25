@@ -88,5 +88,14 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    func updateExpression(nextOperator: String) {
+        guard let operand = operandLabel.text,
+              let `operator` = operatorLabel.text else { return }
+        expression += `operator`
+        expression += operand
+        operandLabel.text = "0"
+        operatorLabel.text = nextOperator
+    }
 }
 
