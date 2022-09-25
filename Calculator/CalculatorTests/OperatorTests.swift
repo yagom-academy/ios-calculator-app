@@ -42,4 +42,13 @@ class OperatorTests: XCTestCase {
         
         XCTAssertEqual(lhs * rhs, result)
     }
+    
+    func test_divide의rhs에0을입력했을때_NaN이나오는지() {
+        let lhs = Double.random(in: -100.0...100.0)
+        let rhs: Double = 0
+        
+        let result = Operator.divide.calculate(lhs: lhs, rhs: rhs)
+        
+        XCTAssertTrue(result.isNaN)
+    }
 }
