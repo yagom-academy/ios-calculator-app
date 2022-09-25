@@ -37,7 +37,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result.operators.inputStack, expectedOperators.inputStack)
     }
     
-    func test_parse_입력값에음수가포함된경우() {
+    func test_parse_입력값에_음수가_포함된경우_제대로처리하는지() {
         // given
         let input = "1 - -1"
         var expectedOperands = CalculatorItemQueue<Double>()
@@ -45,6 +45,23 @@ final class ExpressionParserTests: XCTestCase {
         expectedOperands.enqueue(item: -1)
         var expectedOperators = CalculatorItemQueue<Operator>()
         expectedOperators.enqueue(item: .subtract)
+        
+        // when
+        let result = ExpressionParser.parse(from: input)
+        
+        // then
+        XCTAssertEqual(result.operands.inputStack, expectedOperands.inputStack)
+        XCTAssertEqual(result.operators.inputStack, expectedOperators.inputStack)
+    }
+    
+    func test_parse_입력값에_연산자가_연속으로_들어온경우_앞의연산자는제거() {
+        // given
+        let input = "1 + - + * 5"
+        var expectedOperands = CalculatorItemQueue<Double>()
+        expectedOperands.enqueue(item: 1)
+        expectedOperands.enqueue(item: 5)
+        var expectedOperators = CalculatorItemQueue<Operator>()
+        expectedOperators.enqueue(item: .multiply)
         
         // when
         let result = ExpressionParser.parse(from: input)
