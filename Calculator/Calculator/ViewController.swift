@@ -95,6 +95,12 @@ class ViewController: UIViewController {
         updateExpression(nextOperator: "+")
     }
     
+    @IBAction func resultButtonPressed(_ sender: UIButton) {
+        updateExpression()
+        let result = ExpressionParser.parse(from: expression).result()
+        updateResult(result: result)
+    }
+    
     func updateOperandLabel(with number: String) {
         if operandLabel.text == "0" {
             operandLabel.text = number
@@ -105,7 +111,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateExpression(nextOperator: String) {
+    func updateExpression(nextOperator: String = "") {
         guard let operand = operandLabel.text,
               let `operator` = operatorLabel.text else { return }
         expression += `operator`
@@ -114,9 +120,9 @@ class ViewController: UIViewController {
         operatorLabel.text = nextOperator
     }
     
-    func updateExpression() {
-        guard let operand = operandLabel.text else { return }
-        expression += operand
+    func updateResult(result: Double) {
+        operandLabel.text = result.description
+        operatorLabel.text = ""
     }
 }
 
