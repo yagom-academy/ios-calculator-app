@@ -10,7 +10,7 @@ class ViewController: UIViewController {
 
     var expression: String = ""
     
-    @IBOutlet weak var operand: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var `operator`: UILabel!
     
     override func viewDidLoad() {
@@ -19,24 +19,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberZeroButtonPressed(_ sender: UIButton) {
-        if operand.text == "0" {
+        if operandLabel.text == "0" {
             return
         }
         updateOperandNumber(with: "0")
     }
     
     @IBAction func numberDoubleZeroButtonPressed(_ sender: UIButton) {
-        if operand.text == "0" {
+        if operandLabel.text == "0" {
             return
         }
         updateOperandNumber(with: "00")
     }
     
     @IBAction func decimalPointButtonPressed(_ sender: UIButton) {
-        guard let isContainingPoint = operand.text?.contains(".") else { return }
+        guard let isContainingPoint = operandLabel.text?.contains(".") else { return }
         if isContainingPoint {
             return
-        } else if operand.text == "0" {
+        } else if operandLabel.text == "0" {
             updateOperandNumber(with: "0.")
         } else {
             updateOperandNumber(with: ".")
@@ -80,11 +80,11 @@ class ViewController: UIViewController {
     }
     
     func updateOperandNumber(with number: String) {
-        if operand.text == "0" {
-            operand.text = number
+        if operandLabel.text == "0" {
+            operandLabel.text = number
         } else {
-            if let operandText = operand.text {
-                operand.text = operandText + number
+            if let operandText = operandLabel.text {
+                operandLabel.text = operandText + number
             }
         }
     }

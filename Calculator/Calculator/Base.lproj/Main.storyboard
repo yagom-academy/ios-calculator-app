@@ -340,7 +340,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="operand" destination="Lwz-OF-XHD" id="X9l-Of-eAA"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="X9l-Of-eAA"/>
                         <outlet property="operator" destination="HPC-iy-qdm" id="cwW-q1-YVS"/>
                     </connections>
                 </viewController>
