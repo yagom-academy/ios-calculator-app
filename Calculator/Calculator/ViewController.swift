@@ -113,5 +113,10 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = nextOperator
     }
+    
+    func updateExpression() {
+        guard let operand = operandLabel.text else { return }
+        expression += operand
+    }
 }
 
