@@ -8,7 +8,9 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
+        let input = input.components(separatedBy: ["^", "!", "@", "#", "$", "%", "&"]).joined()
         let operators: [Operator] = Array(input.compactMap { Operator(rawValue: $0) })
+        print(componenetsByOperators(from: input))
         let operands: [Double] = componenetsByOperators(from: input).compactMap { Double($0) }
         
         return Formula(operands: operands, operators: operators)
@@ -19,7 +21,7 @@ enum ExpressionParser {
         var result: String = input
         
         operators.forEach { result = result.split(with: $0).joined() }
-        
+        print(result)
         return result.split(separator: " ").map { $0.description }
     }
 }
