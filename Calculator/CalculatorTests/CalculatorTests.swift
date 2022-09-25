@@ -57,7 +57,7 @@ class CalculatorTests: XCTestCase {
         sut.removeAll()
         
         // when
-        let result = sut.list.nodeCount
+        let result = sut.count
         
         // then
         XCTAssertEqual(result, 0)
@@ -65,10 +65,10 @@ class CalculatorTests: XCTestCase {
     
     func test_CalculatorItemQueue의_list에값이1개일때_enqueue메서드가정상작동하는지() {
         // given
-        sut.list.append(1)
+        sut.enqueue(1)
         
         // when
-        let result = sut.list.nodeCount
+        let result = sut.count
         
         // then
         XCTAssertEqual(result, 1)
@@ -76,11 +76,11 @@ class CalculatorTests: XCTestCase {
     
     func test_CalculatorItemQueue의_list에값2개이상일때_enqueue메서드가정상작동하는지() {
         // given
-        sut.list.append(1)
-        sut.list.append(2)
+        sut.enqueue(1)
+        sut.enqueue(2)
         
         // when
-        let result = sut.list.nodeCount
+        let result = sut.count
         
         // then
         XCTAssertEqual(result, 2)
@@ -93,7 +93,7 @@ class CalculatorTests: XCTestCase {
         sut.dequeue()
         
         // when
-        let result = sut.list.nodeCount
+        let result = sut.count
         
         // then
         XCTAssertEqual(result, 1)
