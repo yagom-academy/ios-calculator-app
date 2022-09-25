@@ -15,11 +15,8 @@ struct Formula {
         }
         
         while !operands.isEmpty {
-            guard let currentOperator = operators.pop() else {
-                throw CalculatorError.queueIsEmpty
-            }
-            
-            guard let operand = operands.pop() else {
+            guard let currentOperator = operators.pop(),
+                  let operand = operands.pop() else {
                 throw CalculatorError.queueIsEmpty
             }
             
