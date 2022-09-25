@@ -15,11 +15,6 @@ class CalculatorItemQueueTests: XCTestCase {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
     
     func testCalculatorItemQueue_문자열을_enqueue했을때해당문자열이잘들어가야한다() {
         sut.enqueue("HI")
@@ -35,7 +30,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func testCalculatorItemQueue_Queue가비어있을때_removeAll을하면_nil이나와야한다() {
+    func testCalculatorItemQueue_문자열3개를enqueue한후_removeAll을하면_전부삭제돼야한다() {
         sut.enqueue("HI")
         sut.enqueue("HO")
         sut.enqueue("HU")
