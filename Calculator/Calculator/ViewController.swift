@@ -79,6 +79,22 @@ class ViewController: UIViewController {
         updateOperandLabel(with: "9")
     }
     
+    @IBAction func divideButtonPressed(_ sender: UIButton) {
+        updateExpression(nextOperator: "÷")
+    }
+    
+    @IBAction func multiplyButtonPressed(_ sender: UIButton) {
+        updateExpression(nextOperator: "×")
+    }
+    
+    @IBAction func subtractButtonPressed(_ sender: UIButton) {
+        updateExpression(nextOperator: "-")
+    }
+    
+    @IBAction func addButtonPressed(_ sender: UIButton) {
+        updateExpression(nextOperator: "+")
+    }
+    
     func updateOperandLabel(with number: String) {
         if operandLabel.text == "0" {
             operandLabel.text = number
