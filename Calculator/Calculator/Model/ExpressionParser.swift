@@ -14,16 +14,12 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    static func componenetsByOperators(from input: String) -> [String] {
+    static private func componenetsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.map { $0.rawValue }
-        var input = input
-        var result: [String] = []
+        var result: String = input
         
-        operators.forEach { opt in
-            input = input.filter { $0 != opt }
-            result = input.split(with: opt)
-        }
+        operators.forEach { result = result.split(with: $0).joined() }
         
-        return result
+        return result.split(separator: " ").map { $0.description }
     }
 }

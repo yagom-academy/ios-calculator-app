@@ -7,6 +7,6 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.filter { $0 != target }.compactMap { String($0) }
+        return replacingOccurrences(of: String(target), with: " ").map { $0.description }
     }
 }
