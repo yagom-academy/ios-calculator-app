@@ -3,13 +3,15 @@
 //  Created by Wonbi
 //
 
-import Foundation
+//import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var fomula = Formula()
-        let components = componentsByOperators(from: input)
+        let operands = CalculatorItemQueue()
+        let operators = CalculatorItemQueue()
+        var fomula = Formula(operands: operands, operators: operators)
         
+        let components = componentsByOperators(from: input)
         components.forEach { component in
             if let operand = Double(component) {
                 fomula.operands.enqueue(operand)
