@@ -17,6 +17,8 @@ enum Operator: Character, CaseIterable {
             return lhs + rhs
         case .subtract:
             return lhs - rhs
+        case .divide:
+            return lhs / rhs
         default:
             return 0.0
         }
