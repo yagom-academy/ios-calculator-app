@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		260FAB6528E09E1900844D4B /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260FAB6428E09E1900844D4B /* CalculateItem.swift */; };
+		260FAB6928E0BD0A00844D4B /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260FAB6828E0BD0A00844D4B /* LinkedList.swift */; };
 		2645011328D9DDA100558D95 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D747328D8CDF2001993A4 /* CalculatorItemQueue.swift */; };
 		264D747C28D8D1F5001993A4 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D747B28D8D1F5001993A4 /* CalculatorTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		260FAB6428E09E1900844D4B /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
+		260FAB6828E0BD0A00844D4B /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		264D747328D8CDF2001993A4 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		264D747928D8D1F5001993A4 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		264D747B28D8D1F5001993A4 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		264D747128D8CDBD001993A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				260FAB6828E0BD0A00844D4B /* LinkedList.swift */,
 				264D747328D8CDF2001993A4 /* CalculatorItemQueue.swift */,
 				260FAB6428E09E1900844D4B /* CalculateItem.swift */,
 			);
@@ -235,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				260FAB6928E0BD0A00844D4B /* LinkedList.swift in Sources */,
 				260FAB6528E09E1900844D4B /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
