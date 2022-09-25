@@ -19,11 +19,11 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     func test_string타입_식이_주어지면_파싱하여_결과가_나오는지_확인() {
-        let stringFormula = "123+25+30"
+        let stringFormula = "123+25-78÷4×5"
         
         var structFormula = ExpressionParser.parser(from: stringFormula)
         let result = try! structFormula.result()
-        
-        XCTAssertEqual(result, 178)
+       
+        XCTAssertEqual(result, 87.5)
     }
 }
