@@ -3,23 +3,20 @@
 //  Calculator
 //
 
-protocol CalculateItem { }
-
-private struct LinkedList<T> {
+struct LinkedList<T> {
     class Node<T>: CalculateItem {
         var value: T
         var next: Node?
         
-        init(_ value: T, next: Node? = nil) {
+        fileprivate init(_ value: T, next: Node? = nil) {
             self.value = value
             self.next = next
         }
     }
     
-    var head: Node<T>?
-    var tail: Node<T>?
-    var nodeCount: Int = 0
-    var isEmpty: Bool {
+    fileprivate(set) var head: Node<T>?
+    fileprivate var nodeCount: Int = 0
+    fileprivate var isEmpty: Bool {
         if nodeCount == 0 {
             return true
         } else {
@@ -27,39 +24,49 @@ private struct LinkedList<T> {
         }
     }
     
-    mutating func append(_ element: T) {
-        let newNode: Node = Node(element)
-        
+    fileprivate mutating func append(_ element: T) {
         guard isEmpty == false else {
-            self.head = newNode
-            self.tail = newNode
-            self.nodeCount += 1
+            head = Node(element)
+            nodeCount += 1
             return
         }
-        if nodeCount == 1 {
-            tail = newNode
-            head?.next = tail
-        } else {
-            tail?.next = newNode
-            tail = newNode
+
+        var node = head
+        while node?.next != nil {
+            node = node?.next
         }
+        
+        node?.next = Node(element)
         nodeCount += 1
     }
     
-    mutating func removeLast() {
-        tail = nil
+    fileprivate mutating func removeFirst() {
+        head = head?.next
         nodeCount -= 1
     }
     
-    mutating func removeAll() {
+    fileprivate mutating func removeLast() {
+        if head == nil { return }
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        
+        node = nil
+        nodeCount -= 1
+    }
+    
+    fileprivate mutating func removeAll() {
         head = nil
-        tail = nil
         nodeCount = 0
     }
+    
+    fileprivate init() {}
 }
 
 struct CalculatorItemQueue<T> {
-    private var list: LinkedList<T> = LinkedList<T>()
+    var list: LinkedList<T> = LinkedList<T>()
     
     var count: Int {
         return list.nodeCount
@@ -70,14 +77,14 @@ struct CalculatorItemQueue<T> {
     }
     
     mutating func enqueue(_ element: T) {
-        self.list.append(element)
+        list.append(element)
     }
     
     mutating func dequeue() {
-        self.list.removeLast()
+        list.removeFirst()
     }
     
     mutating func removeAll() {
-        self.list.removeAll()
+        list.removeAll()
     }
 }
