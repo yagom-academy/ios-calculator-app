@@ -14,13 +14,29 @@ enum Operator: Character, CaseIterable {
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
-            return lhs + rhs
+            return add(lhs, rhs)
         case .subtract:
-            return lhs - rhs
+            return substract(lhs, rhs)
         case .divide:
-            return lhs / rhs
-        default:
-            return 0.0
+            return divide(lhs, rhs)
+        case .multiply:
+            return multiply(lhs, rhs)
         }
+    }
+    
+    private func add(_ lhs: Double, _ rhs: Double) -> Double {
+        return lhs + rhs
+    }
+    
+    private func substract(_ lhs: Double, _ rhs: Double) -> Double {
+        return lhs - rhs
+    }
+    
+    private func divide(_ lhs: Double, _ rhs: Double) -> Double {
+        return lhs / rhs
+    }
+    
+    private func multiply(_ lhs: Double, _ rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
