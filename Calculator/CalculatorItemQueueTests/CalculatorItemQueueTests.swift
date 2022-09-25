@@ -9,19 +9,19 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<String>!
+    var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
     
-    func testCalculatorItemQueue_문자열을_enqueue했을때해당문자열이잘들어가야한다() {
-        sut.enqueue("HI")
+    func testCalculatorItemQueue_Double타입의값을_enqueue했을때해당값이잘들어가야한다() {
+        sut.enqueue(10.0)
         
         let result = sut.queue.head?.data
 
-        XCTAssertEqual(result, "HI")
+        XCTAssertEqual(result, 10.0)
     }
     
     func testCalculatorItemQueue_비어있는CalculatorItemQueue에_isEmpty를_호출했을때_정확한Bool값이나와야한다() {
@@ -30,10 +30,10 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func testCalculatorItemQueue_문자열3개를enqueue한후_removeAll을하면_전부삭제돼야한다() {
-        sut.enqueue("HI")
-        sut.enqueue("HO")
-        sut.enqueue("HU")
+    func testCalculatorItemQueue_Double타입의값3개를enqueue한후_removeAll을하면_전부삭제돼야한다() {
+        sut.enqueue(10.0)
+        sut.enqueue(20.0)
+        sut.enqueue(30.0)
         sut.removeAll()
         
         let result = sut.isEmpty()
@@ -47,11 +47,11 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func testCalculatorItemQueue_dequeue를했을때_해당문자열이나와야한다() {
-        sut.enqueue("HI")
+    func testCalculatorItemQueue_dequeue를했을때_해당Double타입의값이나와야한다() {
+        sut.enqueue(10.0)
         
         let result = sut.dequeue()
         
-        XCTAssertEqual(result, "HI")
+        XCTAssertEqual(result, 10.0)
     }
 }
