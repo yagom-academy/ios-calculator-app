@@ -12,7 +12,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
-        let result: Double
+        var result: Double
         switch self {
         case .add:
             result = add(lhs: lhs, rhs: rhs)
