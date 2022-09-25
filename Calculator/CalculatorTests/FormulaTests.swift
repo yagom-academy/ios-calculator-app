@@ -30,7 +30,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(item: 1)
         
         // when
-        let result = try? sut.result()
+        let result = sut.result()
         
         // then
         XCTAssertEqual(result, 2)
@@ -49,19 +49,22 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(item: 3)
         
         // when
-        let result = try? sut.result()
+        let result = sut.result()
         
         // then
         XCTAssertEqual(result, 5)
     }
     
-    func test_result_0으로_나눌경우_divisorIsZero오류를던진다() {
+    func test_result_0으로_나눌경우_nan반환() {
         //given
         sut.operands.enqueue(item: 2)
         sut.operators.enqueue(item: Operator.divide)
         sut.operands.enqueue(item: 0)
+        
+        // when
+        let result = sut.result()
                
         // then
-        XCTAssertThrowsError(try sut.result())
+        XCTAssertTrue(result.isNaN)
     }
 }
