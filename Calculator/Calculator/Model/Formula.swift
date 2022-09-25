@@ -11,7 +11,7 @@ struct Formula {
     private var operands = CalculatorItemQueue<Double>()
     private var operators = CalculatorItemQueue<Operator>()
     
-    init(operands: [Double], operators: [Operator]) {
+    init(operands: [Double] = [], operators: [Operator] = []) {
         self.operands = CalculatorItemQueue(elements: operands)
         self.operators = CalculatorItemQueue(elements: operators)
     }

@@ -9,49 +9,80 @@ import XCTest
 @testable import Calculator
 
 final class FormulaTests: XCTestCase {
-    var sut: Formula!
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        sut = Formula(operands: [], operators: [])
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
-
-    func test_피연산자의개수가연산자의수보다1만큼큰경우결과가잘나오는가() {
+    func test_피연산자의수가연산자의수보다1개많은경우연산을정상수행하는지() {
         // driven
-        sut = Formula(operands: [1, 2, 3, 4, 5], operators: [.multiply, .add, .subtract, .add])
-
+        let operands: [Double] = [10, 9, 8, 7, 6]
+        let operators: [Operator] = [.add, .divide, .multiply, .subtract]
+        let sut = Formula(operands: operands, operators: operators)
+        
         // when
         let result = sut.result()
         
         // then
-        XCTAssertEqual(result, 6)
+        XCTAssertEqual(result, 10.625)
     }
     
-    func test_연산자의개수가피연산자의수보다많은경우제곱을하여서결과를반환하는가() {
+    func test_피연산자의수가연산자의수보다2개이상많은경우연산수행결과가예측값과동일한가() {
         // driven
-        sut = Formula(
-            operands: [1,2,3,4,5],
-            operators: [.multiply,.add,.add,.subtract,.multiply, .multiply]
-        )
+        let operands: [Double] = [10, 9, 8, 7, 6, 5]
+        let operators: [Operator] = [.add, .divide, .multiply, .subtract]
+        let sut = Formula(operands: operands, operators: operators)
         
         // when
         let result = sut.result()
         
         // then
-        XCTAssertEqual(result, 256)
+        XCTAssertEqual(result, 10.625)
     }
     
-    func test_연산자의개수가피연산자의수보다적은경우피연산자가있는경우까지계산하여서결과를반환하는가() {
+    func test_연산자의수가피연산자의수와동일한경우연산수행결과가예측치와동일한가() {
         // driven
-        sut = Formula(operands: [1, 2, 3, 4, 5], operators: [.multiply, .add])
+        let operands: [Double] = [10, 9, 8, 7]
+        let operators: [Operator] = [.add, .divide, .multiply, .subtract]
+        let sut = Formula(operands: operands, operators: operators)
+        
         // when
         let result = sut.result()
         
         // then
-        XCTAssertEqual(result, 5)
+        XCTAssertEqual(result, 16.625)
+    }
+    
+    func test_연산자의수가피연산자의수보다많은경우수행결과가예측치와동일한가() {
+        // driven
+        let operands: [Double] = [10, 9, 8]
+        let operators: [Operator] = [.add, .divide, .multiply, .subtract]
+        let sut = Formula(operands: operands, operators: operators)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 2.375)
+    }
+    
+    func test_연산자가나눗셈인경우피연산자가0인경우nil을반환하는가() {
+        // driven
+        let operands: [Double] = [10, 9, 0]
+        let operators: [Operator] = [.add, .divide, .multiply, .subtract]
+        let sut = Formula(operands: operands, operators: operators)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_피연산자가없는경우nil을반환하는가() {
+        // driven
+        let operators: [Operator] = [.add, .divide, .multiply, .subtract]
+        let sut = Formula(operators: operators)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertNil(result)
     }
 }
