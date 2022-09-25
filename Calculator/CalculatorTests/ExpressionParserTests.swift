@@ -36,4 +36,21 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result.operands.inputStack, expectedOperands.inputStack)
         XCTAssertEqual(result.operators.inputStack, expectedOperators.inputStack)
     }
+    
+    func test_parse_입력값에음수가포함된경우() {
+        // given
+        let input = "1--1"
+        var expectedOperands = CalculatorItemQueue<Double>()
+        expectedOperands.enqueue(item: 1)
+        expectedOperands.enqueue(item: -1)
+        var expectedOperators = CalculatorItemQueue<Operator>()
+        expectedOperators.enqueue(item: .subtract)
+        
+        // when
+        let result = ExpressionParser.parse(from: input)
+        
+        // then
+        XCTAssertEqual(result.operands.inputStack, expectedOperands.inputStack)
+        XCTAssertEqual(result.operators.inputStack, expectedOperators.inputStack)
+    }
 }

@@ -16,7 +16,7 @@ enum ExpressionParser {
             guard let number = Double($0) else { return }
             formula.operands.enqueue(item: number)
         }
-        
+
         let operators = Operator.allCases.map { $0.rawValue }
         let operatorQueue = input
             .map { $0 }
