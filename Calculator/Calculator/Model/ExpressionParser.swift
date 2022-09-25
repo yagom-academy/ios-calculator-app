@@ -9,7 +9,7 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var formula: Formula = Formula()
+        var formula = Formula()
         
         let operands = componentsByOperators(from: input)
         operands.forEach {
@@ -18,13 +18,13 @@ enum ExpressionParser {
         }
 
         let operators = Operator.allCases.map { $0.rawValue }
-        let inputArr = input.split(with: " ")
+        let splitInput = input.split(with: " ")
         var operatorQueue: [Character] = []
         
-        for ele in inputArr {
-            if ele.count > 1 { continue }
-            if operators.contains(Character(ele)) {
-                operatorQueue.append(Character(ele))
+        for element in splitInput {
+            if element.count > 1 { continue }
+            if operators.contains(Character(element)) {
+                operatorQueue.append(Character(element))
             }
         }
         
