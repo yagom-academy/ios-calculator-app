@@ -2,7 +2,7 @@
 //  String+.swift
 //  Calculator
 //
-//  Created by Jiyoung Lee on 2022/09/24.
+//  Created by SummerCat on 2022/09/24.
 //
 
 extension String {
