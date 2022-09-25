@@ -4,6 +4,7 @@
 //
 //  Created by 노유빈 on 2022/09/22.
 //
+import Foundation
 
 enum ExpressionParser {
     static func parser(from input: String) -> Formula {
@@ -19,6 +20,12 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return input.components(separatedBy: ["+", "-", "×", "÷"])
+        var operators: CharacterSet = CharacterSet()
+
+        Operator.allCases.forEach {
+            operators.insert(charactersIn: String($0.rawValue))
+        }
+
+        return input.components(separatedBy: operators)
     }
 }
