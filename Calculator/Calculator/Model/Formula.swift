@@ -7,7 +7,6 @@ import Foundation
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
-    
     mutating func result() -> Double {
         var lhs = operands.dequeue() ?? 99.999
         var rhs = operands.dequeue() ?? 99.999
@@ -24,8 +23,6 @@ struct Formula {
         if operators.dequeueStack.isEmpty == false {
             operators.dequeueStack.removeAll()
         }
-        print("lhs: \(lhs),   rhs: \(rhs)\n")
-        print(result)
         return result
     }
 }

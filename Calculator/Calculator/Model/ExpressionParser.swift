@@ -7,16 +7,22 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula: Formula = Formula()
-        
-        let separatedOperands: [String] = input.components(separatedBy: ["+","-","*","/"])
-        let convertedToDoubleOperands = separatedOperands.map{
-            Double($0) ?? 99.999
+        let separatedInputOperands: [String] = componentsByOperators(from: input)
+        let convertedToDoubleOperands: [Double] = separatedInputOperands.map {
+            (operand: String) -> Double in
+            return Double(operand) ?? 99.999
         }
         for operand in convertedToDoubleOperands {
             formula.operands.enqueue(element: operand)
         }
-        
-        let separatedOperators: [String] = componentsByOperators(from: "10.0+20.0*3.0/2.0+3.0-2.0*9.0")
+
+        let separatedOperators: [String] = input.filter {
+            (input: Character ) -> Bool in
+            return (input == "+") || (input == "-") || (input == "*") || (input == "/")
+        }.map {
+            (input: Character) -> String in
+            return String(input)
+        }
         for stringOperator in separatedOperators {
             let convertedToCaseOperators: Operator = Operator.init(rawValue: stringOperator)
             formula.operators.enqueue(element: convertedToCaseOperators)
@@ -25,11 +31,8 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        return input.filter {
-            ($0 == "+") || ($0 == "-") || ($0 == "*") || ($0 == "/")
-        }.map {
-            String($0)
-        }
+        let result: [String] =  input.components(separatedBy: ["+","-","*","/"])
+        return result
     }
 }
 

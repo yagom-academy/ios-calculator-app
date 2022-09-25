@@ -7,3 +7,5 @@ import Foundation
 protocol CalculateItem {}
 
 extension Double: CalculateItem {}
+
+extension Character: CalculateItem {}

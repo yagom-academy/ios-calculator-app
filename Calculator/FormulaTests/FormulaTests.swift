@@ -16,21 +16,17 @@ class FormulaTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-
-    func testExample() throws {}
-    func testPerformanceExample() throws { measure {} }
-
-    var formulaObject: Formula = Formula()
+    
     func test_숫자3개_혼합연산하는_경우() {
         //given
-        formulaObject.operands.enqueue(element: 5.0)
-        formulaObject.operands.enqueue(element: -10.0)
-        formulaObject.operands.enqueue(element: 3.0)
-        formulaObject.operators.enqueue(element: .add)
-        formulaObject.operators.enqueue(element: .multiply)
+        sut.operands.enqueue(element: 5.0)
+        sut.operands.enqueue(element: -10.0)
+        sut.operands.enqueue(element: 3.0)
+        sut.operators.enqueue(element: .add)
+        sut.operators.enqueue(element: .multiply)
         
         //when
-        let result = formulaObject.result()
+        let result = sut.result()
         
         //then
         print(result)
@@ -39,16 +35,16 @@ class FormulaTests: XCTestCase {
     
     func test_숫자4개_혼합연산하는_경우() {
         //given
-        formulaObject.operands.enqueue(element: 5.0)
-        formulaObject.operands.enqueue(element: -10.0)
-        formulaObject.operands.enqueue(element: 3.0)
-        formulaObject.operands.enqueue(element: -7.0)
-        formulaObject.operators.enqueue(element: .add)
-        formulaObject.operators.enqueue(element: .add)
-        formulaObject.operators.enqueue(element: .multiply)
+        sut.operands.enqueue(element: 5.0)
+        sut.operands.enqueue(element: -10.0)
+        sut.operands.enqueue(element: 3.0)
+        sut.operands.enqueue(element: -7.0)
+        sut.operators.enqueue(element: .add)
+        sut.operators.enqueue(element: .add)
+        sut.operators.enqueue(element: .multiply)
         
         //when
-        let result = formulaObject.result()
+        let result = sut.result()
         
         //then
         print(result)
@@ -57,15 +53,15 @@ class FormulaTests: XCTestCase {
     
     func test_연산자가_하나남는경우() {
         //given
-        formulaObject.operands.enqueue(element: 5.0)
-        formulaObject.operands.enqueue(element: -10.0)
-        formulaObject.operands.enqueue(element: 3.0)
-        formulaObject.operators.enqueue(element: .add)
-        formulaObject.operators.enqueue(element: .add)
-        formulaObject.operators.enqueue(element: .multiply)
+        sut.operands.enqueue(element: 5.0)
+        sut.operands.enqueue(element: -10.0)
+        sut.operands.enqueue(element: 3.0)
+        sut.operators.enqueue(element: .add)
+        sut.operators.enqueue(element: .add)
+        sut.operators.enqueue(element: .multiply)
 
         //when
-        let result = formulaObject.result()
+        let result = sut.result()
         
         //then
         print(result)
@@ -74,12 +70,12 @@ class FormulaTests: XCTestCase {
     
     func test_빼기연산_성공하는지() {
         //given
-        formulaObject.operands.enqueue(element: 5.0)
-        formulaObject.operands.enqueue(element: -10.0)
-        formulaObject.operators.enqueue(element: .subtract)
+        sut.operands.enqueue(element: 5.0)
+        sut.operands.enqueue(element: -10.0)
+        sut.operators.enqueue(element: .subtract)
         
         //when
-        let result = formulaObject.result()
+        let result = sut.result()
 
         //then
         XCTAssertEqual(result, 15.0)
@@ -87,12 +83,12 @@ class FormulaTests: XCTestCase {
     
     func test_곱하기연산_성공하는지() {
         //given
-        formulaObject.operands.enqueue(element: 5.0)
-        formulaObject.operands.enqueue(element: -10.0)
-        formulaObject.operators.enqueue(element: .multiply)
+        sut.operands.enqueue(element: 5.0)
+        sut.operands.enqueue(element: -10.0)
+        sut.operators.enqueue(element: .multiply)
         
         //when
-        let result = formulaObject.result()
+        let result = sut.result()
 
         //then
         XCTAssertEqual(result, -50)
@@ -100,15 +96,14 @@ class FormulaTests: XCTestCase {
     
     func test_나누기연산_성공하는지() {
         //given
-        formulaObject.operands.enqueue(element: 50.0)
-        formulaObject.operands.enqueue(element: -10.0)
-        formulaObject.operators.enqueue(element: .divide)
+        sut.operands.enqueue(element: 50.0)
+        sut.operands.enqueue(element: -10.0)
+        sut.operators.enqueue(element: .divide)
         
         //when
-        let result = formulaObject.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, -5)
     }
-
 }

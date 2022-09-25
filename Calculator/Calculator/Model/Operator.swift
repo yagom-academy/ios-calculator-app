@@ -4,11 +4,12 @@
 
 import Foundation
 
-enum Operator: CaseIterable, CalculateItem {
-    case add
-    case subtract
-    case multiply
-    case divide
+//enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
+    case add = "+"
+    case subtract = "-"
+    case multiply = "*"
+    case divide = "/"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         let result: Double
@@ -26,8 +27,8 @@ enum Operator: CaseIterable, CalculateItem {
     }
     
     func add(lhs: Double, rhs: Double) -> Double {
-        //let addResult: Double = lhs + rhs
-        return lhs + rhs
+        let addResult: Double = lhs + rhs
+        return addResult
     }
     
     func subtract(lhs: Double, rhs: Double) -> Double {
@@ -56,7 +57,7 @@ enum Operator: CaseIterable, CalculateItem {
         case "/":
             self = .divide
         default:
-            self.init(rawValue: "")
+            self.init(rawValue: ".")
             return
         }
     }
