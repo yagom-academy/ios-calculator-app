@@ -17,7 +17,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    @IBAction func numberOnePressed(_ sender: UIButton) {
+        updateOperandNumber(with: 1)
+    }
+    
+    func updateOperandNumber(with number:Int) {
+        if operand.text == "0" {
+            operand.text = number.description
+        } else {
+            if let operandText = operand.text {
+                operand.text = operandText + number.description
+            }
+        }
+    }
 }
 
