@@ -13,6 +13,10 @@ class Node<Element> {
         self.value = value
         self.next = next
     }
+    
+    deinit {
+        print("deinit value:\(value), next:\(next)")
+    }
 }
 
 class CalculatorItemQueue<Element> {
@@ -24,24 +28,24 @@ class CalculatorItemQueue<Element> {
         self.tail = head
     }
     
-    func append(newNode: Node<Element>) {
-        if let tail = self.tail {
-            tail.next = newNode
-            self.tail = tail.next
+    func enqueue(newNode: Node<Element>) {
+        if head != nil {
+            tail?.next = newNode
+            tail = newNode
         } else {
-            self.head = newNode
-            self.tail = newNode
+            head = newNode
+            tail = newNode
         }
     }
     
-    func getFirst() -> Node<Element>? {
+    func dequeue() -> Node<Element>? {
         let result: Node? = head
         head = head?.next
         return result
     }
     
     func removeAll() {
-        self.head = nil
-        self.tail = nil
+        head = nil
+        tail = nil
     }
 }
