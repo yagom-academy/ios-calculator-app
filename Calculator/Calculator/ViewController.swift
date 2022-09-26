@@ -21,6 +21,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setToInitialState()
+    }
+    
+    @IBAction private func setToInitialState() {
+        verticalFormulasStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+        enteredOperatorLabel.text = nil
+        enteredNumberLabel.resetToZero()
     }
     
     @IBAction private func touchUpSignSwitchButton(sender: UIButton) {
@@ -87,22 +96,16 @@ class ViewController: UIViewController {
     }
     
     private func makeOperatorLabel() -> UILabel? {
-        guard let text = enteredOperatorLabel.text else {
-            return nil
-        }
         let operatorLabel: UILabel = .init()
-        operatorLabel.text = text
+        operatorLabel.text = enteredOperatorLabel.text
         operatorLabel.textColor = .white
         operatorLabel.font = .preferredFont(forTextStyle: .title3)
         return operatorLabel
     }
     
     private func makeOperandLabel() -> UILabel? {
-        guard let number = enteredNumberLabel.text else {
-            return nil
-        }
         let operandLabel: UILabel = .init()
-        operandLabel.text = number
+        operandLabel.text = enteredNumberLabel.text
         operandLabel.textColor = .white
         operandLabel.font = .preferredFont(forTextStyle: .title3)
         return operandLabel
