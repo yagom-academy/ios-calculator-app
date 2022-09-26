@@ -14,8 +14,8 @@ enum ExpressionParser {
         }
         
         input.split(with: " ").filter { Double($0) == nil }.forEach {
-            guard let operatorSymbol = Operator(rawValue: Character($0)) else { return }
-            formula.operators.enqueue(operatorSymbol)
+            guard let `operator` = Operator(rawValue: Character($0)) else { return }
+            formula.operators.enqueue(`operator`)
         }
         
         return formula
