@@ -1,4 +1,4 @@
-//  Created by Victor on 2022/09/27.
+//  Created by Aejong on 2022/09/27.
 
 extension Double: CalculateItem {
     
