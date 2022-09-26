@@ -94,7 +94,4 @@ class ExpressionParserTests: XCTestCase {
         // then
        XCTAssertEqual(result, ["0.1", "0.5", "3.1"])
     }
-
-    
-    
 }
