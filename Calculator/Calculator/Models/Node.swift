@@ -5,23 +5,23 @@
 //  Created by Kyo on 2022/09/19.
 //
 
-final class Node<T> {
-    private var data: T
-    private var next: Node<T>?
+final class Node<Element> {
+    private var data: Element
+    private var next: Node<Element>?
     
-    init(_ data: T) {
+    init(_ data: Element) {
         self.data = data
     }
     
-    func bringNodeData() -> T {
+    func bringNodeData() -> Element {
         return self.data
     }
     
-    func bringNextNode() -> Node<T>? {
+    func bringNextNode() -> Node<Element>? {
         return next
     }
     
-    func setNextNode(node: Node<T>) {
+    func setNextNode(node: Node<Element>) {
         self.next = node
     }
 }
