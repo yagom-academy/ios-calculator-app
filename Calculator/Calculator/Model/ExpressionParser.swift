@@ -17,7 +17,7 @@ enum ExpressionParser {
         let operatorElements = removedPlain.split(separator: " ")
             .map { $0.description }
             .filter { Double($0) == nil }
-        let operators: [Operator] = Array(operatorElements.compactMap { Operator(rawValue: Character($0))})
+        let operators: [Operator] = operatorElements.compactMap { Operator(rawValue: Character($0)) }
         
         let operands: [Double] = componenetsByOperators(from: removedPlain).compactMap { Double($0) }
         
