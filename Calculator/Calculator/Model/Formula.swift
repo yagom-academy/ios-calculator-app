@@ -9,7 +9,33 @@ struct Formula {
     var operands: CalculatorItemQueue
     var operators: CalculatorItemQueue
     
-    func result() -> Double {
-        return 1
+    mutating func result() throws -> Double {
+        var calculateResult: Double
+        guard operators.count == (operands.count - 1) else {
+            throw FormulaError.notValidCountQueue
+        }
+        
+        guard let firstOperand = operands.dequeue() else {
+            throw FormulaError.hasNotOperandValue
+        }
+        
+        calculateResult = firstOperand as! Double
+        
+        while !(operators.count == 0) {
+            guard let operators = operators.dequeue() as? Operator else {
+                throw FormulaError.hasNotOperatorValue
+            }
+            
+            guard let operand = operands.dequeue() as? Double else {
+                throw FormulaError.hasNotOperandValue
+            }
+            
+            calculateResult = operators.calculates(
+                lhs: calculateResult,
+                rhs: operand
+            )
+        }
+            
+        return calculateResult
     }
 }
