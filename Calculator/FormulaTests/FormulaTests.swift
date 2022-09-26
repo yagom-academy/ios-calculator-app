@@ -31,13 +31,13 @@ final class FormulaTests: XCTestCase {
     func test_입력후_result실행시_순서대로_정상작동이_되는지() {
         // given
         let givenResult = (13+50.6)*11.1/10
-        operandsQueue.enqueue(13)
-        operatorsQueue.enqueue(Operator.add)
-        operandsQueue.enqueue(50.6)
-        operatorsQueue.enqueue(Operator.multiply)
-        operandsQueue.enqueue(11.1)
-        operatorsQueue.enqueue(Operator.divide)
-        operatorsQueue.enqueue(10)
+        sut.operands.enqueue(13)
+        sut.operators.enqueue(Operator.add)
+        sut.operands.enqueue(50.6)
+        sut.operators.enqueue(Operator.multiply)
+        sut.operands.enqueue(11.1)
+        sut.operators.enqueue(Operator.divide)
+        sut.operands.enqueue(10)
         
         // when
         let result = sut.result()
