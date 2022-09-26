@@ -5,7 +5,7 @@
 //  Created by Hamo on 2022/09/26.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "%"
@@ -36,6 +36,7 @@ enum Operator: Character, CaseIterable {
         guard rhs != 0 else {
             throw OperatorError.divideWithZero
         }
+        
         return lhs / rhs
     }
     

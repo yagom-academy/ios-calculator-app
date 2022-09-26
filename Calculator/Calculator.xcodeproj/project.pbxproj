@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C36049128E0C7700078C6D0 /* OperatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C36049028E0C7700078C6D0 /* OperatorError.swift */; };
+		0C36049328E13C930078C6D0 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C36049228E13C930078C6D0 /* Formula.swift */; };
 		0C6D11DB28D969D000FC16F8 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6D11DA28D969D000FC16F8 /* LinkedList.swift */; };
 		0C6D11E328D969F200FC16F8 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6D11E228D969F200FC16F8 /* LinkedListTests.swift */; };
 		0C6D11F028D9825000FC16F8 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6D11EF28D9825000FC16F8 /* CalculatorItemQueueTests.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		0C36049028E0C7700078C6D0 /* OperatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorError.swift; sourceTree = "<group>"; };
+		0C36049228E13C930078C6D0 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		0C6D11DA28D969D000FC16F8 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		0C6D11E028D969F200FC16F8 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6D11E228D969F200FC16F8 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				0CE504B328D8D5D500C51F68 /* Node.swift */,
 				0C6D11DA28D969D000FC16F8 /* LinkedList.swift */,
 				0C6D11F628D9830200FC16F8 /* CalculatorItemQueue.swift */,
+				0C36049228E13C930078C6D0 /* Formula.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				0CEA6E4428E0A5D500A31FC8 /* Operator.swift in Sources */,
 				0C36049128E0C7700078C6D0 /* OperatorError.swift in Sources */,
 				0CE504B128D8D50700C51F68 /* CalculateItem.swift in Sources */,
+				0C36049328E13C930078C6D0 /* Formula.swift in Sources */,
 				0CE504B428D8D5D500C51F68 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
