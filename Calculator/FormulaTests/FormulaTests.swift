@@ -61,4 +61,15 @@ class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, inputValue)
     }
+    
+    func testFormula_0으로나누려고할때_오류가발생해야힌다() {
+        // given
+        sut.operands.enqueue(5.0)
+        sut.operands.enqueue(0.0)
+        sut.operators.enqueue(.divide)
+        
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? OperatorError, OperatorError.divideWithZero)
+        }
+    }
 }
