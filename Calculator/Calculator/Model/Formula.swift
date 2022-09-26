@@ -31,7 +31,6 @@ struct Formula {
             }
             
             result = try arithmeticOperator.calculate(lhs: lhs, rhs: rhs)
-            
             guard let result = result else {
                 return nil
             }
