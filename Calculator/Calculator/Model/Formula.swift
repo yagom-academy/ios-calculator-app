@@ -6,8 +6,8 @@
 import Foundation
 
 struct Formula {
-    private let operands = CalculatorItemQueue<Double>()
-    private let operators = CalculatorItemQueue<Operator>()
+    private let operands: CalculatorItemQueue<Double>
+    private let operators: CalculatorItemQueue<Operator>
     
     init(operands: [Double] = [], operators: [Operator] = []) {
         self.operands = CalculatorItemQueue(elements: operands)
