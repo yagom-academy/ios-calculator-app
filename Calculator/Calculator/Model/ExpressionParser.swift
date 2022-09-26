@@ -16,6 +16,20 @@ enum ExpressionParser {
 
 extension String {
     func split(with target: Character) -> [String] {
-        return [""]
+        var result: [String] = []
+        var nonTargetArray: [String] = []
+
+        self.forEach { character in
+            if character == target {
+                result.append(nonTargetArray.joined(separator: ""))
+                result.append(String(character))
+                nonTargetArray = []
+            } else {
+                nonTargetArray.append(String(character))
+            }
+        }
+        
+        result.append(nonTargetArray.joined(separator: ""))
+        return result
     }
 }
