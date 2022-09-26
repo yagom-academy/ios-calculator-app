@@ -34,5 +34,21 @@ class CalculatorVC: UIViewController {
     @IBAction func acButtonTouchUp(_ sender: UIButton) {
         resetAllUI()
     }
+    
+    @IBAction func ceButtonTouchUp(_ sender: UIButton) {
+        operatorLabel.text = ""
+        operandLabel.text = ""
+    }
+    
+    @IBAction func convertPlusMinusButtonTouchUp(_ sender: UIButton) {
+        if operandLabel.text == "" {
+            return
+        } else if operatorLabel.text == "+" {
+            operatorLabel.text = "−"
+        } else {
+            operatorLabel.text = "+"
+        }
+    }
+    
 }
 
