@@ -3,14 +3,22 @@
 //  Created by 미니.
 //
 
+import Foundation
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let removedSpecial = input.components(separatedBy: ["^", "!", "@", "#", "$", "%", "&"]).joined()
+        let otherSpecial: CharacterSet = ["^", "!", "@", "#", "$", "%", "&"]
+        let removedSpecial = input.components(separatedBy: otherSpecial).joined()
+        
         let removedPlain = removedSpecial.filter {
             Double(String($0)) != nil || Operator(rawValue: $0) != nil || $0 == " "
         }
         
-        let operators: [Operator] = Array(removedPlain.compactMap { Operator(rawValue: $0) })
+        let operatorElements = removedPlain.split(separator: " ")
+            .map { $0.description }
+            .filter { Double($0) == nil }
+        let operators: [Operator] = Array(operatorElements.compactMap { Operator(rawValue: Character($0))})
+        
         let operands: [Double] = componenetsByOperators(from: removedPlain).compactMap { Double($0) }
         
         return Formula(operands: operands, operators: operators)
@@ -21,7 +29,8 @@ enum ExpressionParser {
         var result: String = input
         
         operators.forEach { result = result.split(with: $0).joined() }
-
+        result = result.replacingOccurrences(of: "  ", with: "")
+        
         return result.split(separator: " ").map { $0.description }
     }
 }
