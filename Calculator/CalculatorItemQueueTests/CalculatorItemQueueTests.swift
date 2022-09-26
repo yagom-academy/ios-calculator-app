@@ -60,12 +60,9 @@ final class CalculatorItemQueueTests: XCTestCase {
             guard let poppedItem = sut.pop() else { return }
             
             if !isEqualCalculateItem(calculateItem, poppedItem) {
-                debugPrint("\(calculateItem), \(poppedItem), \(sut.count)")
                 result = false
                 break
             }
-            
-            debugPrint("\(calculateItem), \(poppedItem), \(sut.count)")
         }
         
         XCTAssert(result)
