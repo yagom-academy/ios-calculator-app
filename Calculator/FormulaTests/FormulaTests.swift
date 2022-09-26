@@ -20,7 +20,7 @@ class FormulaTests: XCTestCase {
         sut = Formula(operands: operands, operators: operators)
     }
     
-    func testFormula_result를호출하면_operands값두개와operators값한개가입력되었을때_합한결과가반환되어야한다() {
+    func testFormula_result를호출하면_operands값2개와operators값1개가입력되었을때_합한결과가반환되어야한다() {
         // given
         sut.operands.enqueue(1.0)
         sut.operands.enqueue(2.0)
@@ -29,5 +29,19 @@ class FormulaTests: XCTestCase {
         let result = try? sut.result()
         // then
         XCTAssertEqual(result, 3.0)
+    }
+    
+    func testFormula_result를호출하면_operands값4개와operators값2개가입력되었을때_합한결과가반환되어야한다() {
+        // given
+        sut.operands.enqueue(1.0)
+        sut.operands.enqueue(2.0)
+        sut.operands.enqueue(3.0)
+        sut.operands.enqueue(4.0)
+        sut.operators.enqueue(.add)
+        sut.operators.enqueue(.add)
+        // when
+        let result = try? sut.result()
+        // then
+        XCTAssertEqual(result, 10.0)
     }
 }
