@@ -3,7 +3,6 @@
 //  Created by 미니.
 //
 
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let removedSpecial = input.components(separatedBy: ["^", "!", "@", "#", "$", "%", "&"]).joined()

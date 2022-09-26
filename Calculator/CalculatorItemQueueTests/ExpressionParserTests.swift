@@ -39,4 +39,15 @@ final class ExpressionParserTests: XCTestCase {
         // then
         XCTAssertEqual(result, 76)
     }
+    
+    func test_연산자에음수가포함될경우결과가예측치와동일한지() {
+        // driven
+        let input: String = "10+-7+10"
+        // when
+        let form: Formula = ExpressionParser.parse(from: input)
+        let result = form.result()
+        // then
+        XCTAssertEqual(result, 13)
+        
+    }
 }
