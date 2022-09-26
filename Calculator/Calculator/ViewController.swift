@@ -65,11 +65,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func touchUpEqualButton(sender: UIButton) {
-        guard enteredNumberLabel.isZero == false else {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard !enteredNumberLabel.isZero else {
+            enteredOperatorLabel.text = sender.currentTitle
             return
         }
         makeFormulaStackView()
+        enteredOperatorLabel.text = sender.currentTitle
     }
     
     private func makeFormulaStackView() {
@@ -104,6 +106,10 @@ class ViewController: UIViewController {
         operandLabel.textColor = .white
         operandLabel.font = .preferredFont(forTextStyle: .title3)
         return operandLabel
+    }
+    
+    @IBAction private func touchUpEqualButton(sender: UIButton) {
+        
     }
 }
 
