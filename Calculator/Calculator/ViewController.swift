@@ -19,10 +19,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpSignSwitchButton(sender: UIButton) {
-        guard enteredNumberLabel.text != "0" else {
+        guard enteredNumberLabel.text != CalculatorText.zero else {
             return
         }
         enteredNumberLabel.switchSign()
+    }
+    
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
+        enteredNumberLabel.resetToZero()
+        enteredNumberLabel.isResultOfFormula = false
     }
 }
 
