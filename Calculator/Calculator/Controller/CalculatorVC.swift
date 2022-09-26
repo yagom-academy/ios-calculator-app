@@ -8,6 +8,7 @@ import UIKit
 
 class CalculatorVC: UIViewController {
 
+    var calculateFormula: String = ""
     
     @IBOutlet private weak var calculationFormulaScroll: UIScrollView!
     @IBOutlet private weak var operatorLabel: UILabel!
@@ -25,6 +26,9 @@ class CalculatorVC: UIViewController {
         operandLabel.text = ""
     }
 
-
+    @IBAction func numberButtonTouchUp(_ sender: UIButton) {
+        operandLabel.text?.append(sender.titleLabel?.text ?? "")
+    }
+    
 }
 
