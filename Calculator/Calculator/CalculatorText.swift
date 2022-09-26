@@ -7,4 +7,5 @@
 
 enum CalculatorText {
     static let zero: String = "0"
+    static let dot: String = "."
 }

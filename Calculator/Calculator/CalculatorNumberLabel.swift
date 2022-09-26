@@ -9,6 +9,13 @@ import UIKit
 
 class CalculatorNumberLabel: UILabel {
     var isResultOfFormula: Bool = false
+    var isZero: Bool {
+        if self.text == CalculatorText.zero {
+            return true
+        } else {
+            return false
+        }
+    }
     
     func switchSign() {
         guard let text = self.text else {

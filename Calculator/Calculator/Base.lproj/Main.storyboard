@@ -266,6 +266,9 @@
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpNumberButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1uF-9Y-iw2"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -274,6 +277,9 @@
                                                 <state key="normal" title="00">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpNumberButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Q7-8R-K9q"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -282,6 +288,9 @@
                                                 <state key="normal" title=".">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpNumberButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FW3-bO-GCv"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -337,8 +346,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dotButton" destination="h8q-5h-bnb" id="1Th-lP-pmZ"/>
+                        <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="Fld-K7-LXc"/>
                         <outlet property="enteredNumberLabel" destination="Lwz-OF-XHD" id="ZpY-mU-Tb3"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="m4F-Gj-CQ5"/>
+                        <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="MLo-B5-02l"/>
                         <outletCollection property="operators" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="bAF-IQ-jLh"/>
                         <outletCollection property="operators" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="dM8-cl-6JY"/>
                         <outletCollection property="operators" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="NCL-6T-ij0"/>
