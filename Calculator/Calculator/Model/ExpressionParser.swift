@@ -31,7 +31,6 @@ enum ExpressionParser {
         var lastElement: String = " "
         var operatorQueue: [Character] = []
         
-        // !operators.contains(Character(splitInput[i])),
         for i in 0..<splitInput.count {
             if Double(splitInput[i]) != nil,
                operators.contains(Character(lastElement)) {
