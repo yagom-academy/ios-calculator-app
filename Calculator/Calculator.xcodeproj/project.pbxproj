@@ -110,10 +110,7 @@
 		1A8681B328D8747B00BE2837 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1ABBF5ED28DCC20400F26BC5 /* Enums */,
-				1ABBF5EC28DCC1F900F26BC5 /* Extensions */,
 				1A8681B028D8747200BE2837 /* CalculatorItemQueue.swift */,
-				1A8681B628D874F000BE2837 /* CalculateItem.swift */,
 				1AFBACFF28DBFB0500D7E26D /* Formula.swift */,
 			);
 			path = Models;
@@ -171,6 +168,14 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		1ABBF5F228E14FE100F26BC5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1A8681B628D874F000BE2837 /* CalculateItem.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		1AFBACE928DB2BC200D7E26D /* CalculatorItemQueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +221,9 @@
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				1ABBF5EE28DCC25000F26BC5 /* Resource */,
+				1ABBF5F228E14FE100F26BC5 /* Protocols */,
+				1ABBF5EC28DCC1F900F26BC5 /* Extensions */,
+				1ABBF5ED28DCC20400F26BC5 /* Enums */,
 				1A8681B328D8747B00BE2837 /* Models */,
 				1A8681B428D8748B00BE2837 /* Views */,
 				1A8681B528D8749300BE2837 /* Controllers */,
