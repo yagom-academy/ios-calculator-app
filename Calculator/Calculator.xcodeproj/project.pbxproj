@@ -126,8 +126,8 @@
 				040C91FB28DB34D700BE833F /* Operator.swift */,
 				04DB87A028DBFB3400E0DB78 /* ExpressionParser.swift */,
 				04DB87A228DBFE4E00E0DB78 /* Formula.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);

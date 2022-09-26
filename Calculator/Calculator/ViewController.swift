@@ -7,10 +7,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    var formula: Formula = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
+        var formula: Formula = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
         print(formula.result())
     }
 }
