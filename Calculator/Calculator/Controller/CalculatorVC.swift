@@ -21,7 +21,8 @@ class CalculatorVC: UIViewController {
     }
     
     private func resetAllUI() {
-        mainStackView.superview?.removeFromSuperview()
+        mainStackView.subviews.forEach { $0.removeFromSuperview()
+        }
         operatorLabel.text = ""
         operandLabel.text = ""
     }
@@ -30,5 +31,8 @@ class CalculatorVC: UIViewController {
         operandLabel.text?.append(sender.titleLabel?.text ?? "")
     }
     
+    @IBAction func acButtonTouchUp(_ sender: UIButton) {
+        resetAllUI()
+    }
 }
 
