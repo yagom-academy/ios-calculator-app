@@ -6,7 +6,9 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let removedSpecial = input.components(separatedBy: ["^", "!", "@", "#", "$", "%", "&"]).joined()
-        let removedPlain = removedSpecial.filter { Double(String($0)) != nil || Operator(rawValue: $0) != nil }
+        let removedPlain = removedSpecial.filter {
+            Double(String($0)) != nil || Operator(rawValue: $0) != nil || $0 == " "
+        }
         
         let operators: [Operator] = Array(removedPlain.compactMap { Operator(rawValue: $0) })
         let operands: [Double] = componenetsByOperators(from: removedPlain).compactMap { Double($0) }
