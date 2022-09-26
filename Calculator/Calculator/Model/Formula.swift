@@ -6,15 +6,28 @@
 //
 
 struct Formula {
-    let operands: CalculatorItemQueue<Double>
-    let operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
         self.operands = operands
         self.operators = operators
     }
     
-    func result() -> Double {
-        return 0.0
+    mutating func result() throws -> Double? {
+        guard let rhs = operands.dequeue() else {
+            return nil
+        }
+        
+        guard let lhs = operands.dequeue() else {
+            return nil
+        }
+        
+        guard let arithmeticOperator = operators.dequeue() else {
+            return nil
+        }
+        
+        let result = try arithmeticOperator.calculate(lhs: lhs, rhs: rhs)
+        return result
     }
 }
