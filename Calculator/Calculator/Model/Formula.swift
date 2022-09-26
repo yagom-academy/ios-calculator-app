@@ -15,19 +15,30 @@ struct Formula {
     }
     
     mutating func result() throws -> Double? {
-        guard let rhs = operands.dequeue() else {
+        var result: Double?
+        
+        guard var lhs = operands.dequeue() else {
             return nil
         }
         
-        guard let lhs = operands.dequeue() else {
-            return nil
+        while !operators.isEmpty() {
+            guard let rhs = operands.dequeue() else {
+                return nil
+            }
+            
+            guard let arithmeticOperator = operators.dequeue() else {
+                return nil
+            }
+            
+            result = try arithmeticOperator.calculate(lhs: lhs, rhs: rhs)
+            
+            guard let result = result else {
+                return nil
+            }
+            
+            lhs = result
         }
-        
-        guard let arithmeticOperator = operators.dequeue() else {
-            return nil
-        }
-        
-        let result = try arithmeticOperator.calculate(lhs: lhs, rhs: rhs)
+
         return result
     }
 }
