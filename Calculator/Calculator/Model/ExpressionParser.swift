@@ -13,3 +13,10 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: arithmeticOperator)
     }
 }
+
+extension String {
+    func split(with target: Character) -> String {
+        
+        return ""
+    }
+}
