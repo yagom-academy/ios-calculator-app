@@ -14,7 +14,7 @@ struct Formula {
     public mutating func result() throws -> Double {
         guard var result = operands.dequeue() as? Double else { throw CalculatorError.emptyError }
 
-        for _ in 1...operands.count {
+        while operands.isEmpty == false {
             guard let number = self.operands.dequeue() as? Double else { throw CalculatorError.emptyError }
             guard let `operator` = self.operators.dequeue() as? Operator else { throw CalculatorError.emptyError }
             
