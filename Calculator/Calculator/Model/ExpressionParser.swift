@@ -15,8 +15,7 @@ enum ExpressionParser {
 }
 
 extension String {
-    func split(with target: Character) -> String {
-        
-        return ""
+    func split(with target: Character) -> [String] {
+        return [""]
     }
 }
