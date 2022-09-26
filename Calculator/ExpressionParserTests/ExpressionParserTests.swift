@@ -42,13 +42,13 @@ class ExpressionParserTests: XCTestCase {
     }
     
     func test_양수123과_양수122를_더했을때_플러스가아닌_연산자가아닌_문자가_들어갔을때_에러를_던지는지(){
-        var parse = try? ExpressionParser.parse(from: "123 a 123")
+        var parse = try? ExpressionParser.parse(from: "123 a 122")
         
         XCTAssertThrowsError(try parse?.result())
     }
     
     func test_양수200과_양수100를_더했을때_플러스가아닌_연산자가아닌_다른특수문자가_들어갔을때_에러를_던지는지(){
-        var parse = try? ExpressionParser.parse(from: "123 # 123")
+        var parse = try? ExpressionParser.parse(from: "200 # 100")
         
         XCTAssertThrowsError(try parse?.result())
     }
