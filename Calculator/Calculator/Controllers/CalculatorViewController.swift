@@ -25,13 +25,18 @@ class CalculatorViewController: UIViewController {
     private func setOperandLabel(_ key: NumericKeypad) {
         guard var operand = operandLabel.text else { return }
         
+        if (operand.last == "." || operand.contains(".")),
+           key.rawValue == "." { return }
+
         if operand == "0",
            (key.rawValue == "0" || key.rawValue == "00") { return }
         
-        if (operand.last == "." || operand.contains(".")),
-           key.rawValue == "." { return }
+        if operand == "0" {
+            operand = key.rawValue
+        } else {
+            operand += key.rawValue
+        }
         
-        operand += key.rawValue
         operandLabel.text = operand
     }
     
