@@ -18,7 +18,7 @@ struct Formula {
             guard let rhs = operands.dequeue() else { return lhs }
             guard let `operator` = operators.dequeue() else { throw CalculatorError.emptyOperator }
             
-            lhs = `operator`.calculate(lhs: lhs, rhs: rhs)
+            lhs = try `operator`.calculate(lhs: lhs, rhs: rhs)
         }
         let result = lhs
         
