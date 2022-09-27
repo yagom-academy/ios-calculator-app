@@ -5,22 +5,22 @@
 //  Created by Kyo on 2022/09/19.
 //
 
-final class CalculatorItemQueue<T: CalculateItem> {
-    private var queue: LinkedList<T>! = LinkedList()
+final class CalculatorItemQueue<Element: CalculateItem> {
+    private var queue: LinkedList<Element>! = LinkedList()
     
-    func first() -> T? {
+    func first() -> Element? {
         return queue.bringHead()
     }
     
-    func last() -> T? {
+    func last() -> Element? {
         return queue.bringTail()
     }
     
-    func enqueue(_ data: T) {
+    func enqueue(_ data: Element) {
         queue.append(data: data)
     }
     
-    func dequeue() -> T? {
+    func dequeue() -> Element? {
         return queue.removeFirst()
     }
     
