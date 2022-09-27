@@ -18,7 +18,6 @@ class ViewController: UIViewController {
     var currentOperator: String = Constant.empty
     var calculateHistory: [String] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUILabel()
@@ -35,12 +34,12 @@ class ViewController: UIViewController {
         currentOperand = Constant.defaultZero
     }
 
-    func updateMainResultLabel() {
-        mainResultLabel.text = currentOperand
-    }
-    
     func setClearCalculateHistory() {
         historyStackView.subviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    func updateMainResultLabel() {
+        mainResultLabel.text = currentOperand
     }
     
     func makeHistoryStackViewLabel(item: String) -> UILabel {
@@ -173,4 +172,3 @@ class ViewController: UIViewController {
         mainResultLabel.text = Constant.zero
     }
 }
-
