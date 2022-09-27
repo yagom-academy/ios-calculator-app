@@ -132,13 +132,60 @@
 			path = CalculatorItemQueueTests;
 			sourceTree = "<group>";
 		};
+		AEE53CC328E292DB004476BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AEB021FF28D8ABB70023466C /* CalculatorItem.swift */,
+				AEB0220128D8ABFF0023466C /* CalculatorItemQueue.swift */,
+				AE77291328DD7D4A00542781 /* Operator.swift */,
+				AE77291528DD80EF00542781 /* Formula.swift */,
+				AE77291728DD82F000542781 /* ExpressionParser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AEE53CC428E292FD004476BC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AE77291928DD83CB00542781 /* Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AEE53CC528E2934A004476BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AEE53CC628E29355004476BC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AEE53CC728E29376004476BC /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				AEB0220A28D8AD4D0023466C /* CalculatorItemQueueTests */,
+				AE77292028DD85DC00542781 /* FormulaTests */,
+				AE77292D28DDA7AD00542781 /* ExpressionParserTests */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
 				C713D9402570E5EB001C3AFC /* Calculator */,
-				AEB0220A28D8AD4D0023466C /* CalculatorItemQueueTests */,
-				AE77292028DD85DC00542781 /* FormulaTests */,
-				AE77292D28DDA7AD00542781 /* ExpressionParserTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,19 +204,12 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				AEB021FF28D8ABB70023466C /* CalculatorItem.swift */,
-				AEB0220128D8ABFF0023466C /* CalculatorItemQueue.swift */,
-				AE77291328DD7D4A00542781 /* Operator.swift */,
-				AE77291528DD80EF00542781 /* Formula.swift */,
-				AE77291728DD82F000542781 /* ExpressionParser.swift */,
-				AE77291928DD83CB00542781 /* Extension.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				AEE53CC628E29355004476BC /* Controller */,
+				AEE53CC328E292DB004476BC /* Model */,
+				AEE53CC428E292FD004476BC /* Extension */,
+				AEE53CC528E2934A004476BC /* View */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
+				AEE53CC728E29376004476BC /* Test */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
