@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct Formula {
     var operands: CalculatorItemQueue<Double>?
@@ -17,20 +16,19 @@ struct Formula {
             return 0
         }
         
-        while operators?.front != nil {
-            let someOperator: Operator? = operators?.dequeue()
+        while operators?.front != nil,
+              let someOperator: Operator = operators?.dequeue(),
+              let someOperand: Double = operands?.dequeue() {
             
             switch someOperator {
             case .add:
-                result = Operator.add.calculate(lhs: result, rhs: operands?.dequeue() ?? 0)
+                result = Operator.add.calculate(lhs: result, rhs: someOperand)
             case .subtract:
-                result = Operator.subtract.calculate(lhs: result, rhs: operands?.dequeue() ?? 0)
+                result = Operator.subtract.calculate(lhs: result, rhs: someOperand)
             case .multiply:
-                result = Operator.multiply.calculate(lhs: result, rhs: operands?.dequeue() ?? 0)
+                result = Operator.multiply.calculate(lhs: result, rhs: someOperand)
             case .divide:
-                result = Operator.divide.calculate(lhs: result, rhs: operands?.dequeue() ?? 1)
-            case .none:
-                return result
+                result = Operator.divide.calculate(lhs: result, rhs: someOperand)
             }
         }
         
