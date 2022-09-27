@@ -4,8 +4,9 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
+    private var formula = ""
     private var numberFormatter: NumberFormatter {
-        var numberFormatter = NumberFormatter()
+        let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
         return numberFormatter
@@ -48,6 +49,19 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: operand)
     }
     
+    private func inputOperator(by key: NumericKeypad) {
+        guard let operand = operandLabel.text,
+                  operand.last != "." else { return }
+        
+        let currentOperator = key.rawValue
+        setOperatorLabel(to: currentOperator)
+
+        if operand == "0" {
+            return
+        }
+        
+        formula += operand + currentOperator
+        setOperandLabel(to: "0")
     }
     
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
@@ -56,9 +70,9 @@ class CalculatorViewController: UIViewController {
         
         switch key {
         case _ where NumericKeypad.numKeys.contains(key):
-            return
+            inputNumber(by: key)
         case _ where NumericKeypad.operatorKeys.contains(key):
-            return
+            inputOperator(by: key)
         case .equal:
             return
         case .ac:
