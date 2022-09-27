@@ -52,6 +52,20 @@ class ViewController: UIViewController {
         return label
     }
     
+    func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+        let stackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+            stackView.spacing = 8
+            stackView.axis = .horizontal
+            stackView.distribution = .fill
+            stackView.alignment = .fill
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            return stackView
+        }()
+        
+        return stackView
+    }
+    
     @IBAction func tappedNumberPads(_ sender: UIButton) {
         let tappedNumber = sender.currentTitle
         guard let number = tappedNumber else { return }
