@@ -24,7 +24,12 @@ struct CalculatorItemQueue<T> {
     
     @discardableResult
     mutating func dequeue() -> T? {
-        return isEmpty ? nil : queue.removeFirst()
+        if isEmpty {
+            return nil
+        } else {
+            queue.removeFirst()
+            return queue.first
+        }
     }
     
     mutating func clear() {
