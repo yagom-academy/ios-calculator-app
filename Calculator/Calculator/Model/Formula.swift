@@ -18,7 +18,7 @@ struct Formula {
         var operands = operands, operators = operators
         
         guard var calculatedValue: Double = operands.dequeue() else {
-            return Result.failure(FormulaError.emptyQeueue)
+            return Result.failure(FormulaError.emptyQueue)
         }
         
         while !operands.isEmpty {
@@ -33,7 +33,7 @@ struct Formula {
             do {
                 calculatedValue = try firstOperator.calculate(lhs: calculatedValue, rhs: rhs)
             } catch {
-                return Result.failure(FormulaError.dividedZero)
+                return Result.failure(FormulaError.dividedByZero)
             }
         }
         
