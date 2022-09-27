@@ -16,11 +16,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = CalculatorItemQueue()
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
-    func test_enqueue를_A번_할때_count가_A와_같아야함() {
+    func test_enqueue한_요소의_갯수만큼_증가해야함() {
         // Given
         sut.enqueue(element: 1.0)
         sut.enqueue(element: 2.0)
@@ -76,7 +72,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.peek()
         
         // Then
-        XCTAssertEqual(result, nil)
+        XCTAssertNil(result)
     }
     
     func test_clear할때_배열에있는모든값이삭제되어_isEmpty가True여야함() {
@@ -87,7 +83,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // When
         sut.clear()
-        guard let result = sut.isEmpty() else { return }
+        let result = sut.isEmpty()
         
         // Then
         XCTAssertTrue(result)
