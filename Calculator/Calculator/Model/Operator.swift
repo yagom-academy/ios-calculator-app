@@ -36,7 +36,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     
     private func divide(lhs: Double, rhs: Double) -> Double {
         if rhs == 0 {
-            fatalError("0으로 나눌 수 없습니다!")
+            return Double.nan
         }
         return lhs / rhs
     }
