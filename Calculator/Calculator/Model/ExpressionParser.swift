@@ -7,7 +7,7 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var arithmeticOperator = CalculatorItemQueue<Operator>()
+        var arithmeticOperators = CalculatorItemQueue<Operator>()
         var operands = CalculatorItemQueue<Double>()
         var operatorArray: [Character] = []
         var operandArray: [Double] = []
@@ -27,18 +27,18 @@ enum ExpressionParser {
         
         operatorArray.forEach { element in
             if let operatorCase = Operator(rawValue: element) {
-                arithmeticOperator.enqueue(operatorCase)
+                arithmeticOperators.enqueue(operatorCase)
             }
         }
         
-        return Formula(operands: operands, operators: arithmeticOperator)
+        return Formula(operands: operands, operators: arithmeticOperators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
         var result: [String] = [input]
-        let operatorArray = Operator.allCases.map { $0.rawValue }
+        let operators = Operator.allCases.map { $0.rawValue }
         
-        operatorArray.forEach { element in
+        operators.forEach { element in
             result = result.map { $0.split(with: element) }.flatMap { $0 }
             
         }
