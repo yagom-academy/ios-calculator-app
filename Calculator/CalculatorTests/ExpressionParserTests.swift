@@ -40,11 +40,11 @@ final class ExpressionParserTests: XCTestCase {
         // when
         var result: Formula = ExpressionParser.parse(from: input)
         var resultOpernads: Array<Double> = []
-        while !result.operands.isEmpty {
+        while result.operands.isEmpty == false {
             resultOpernads.append(result.operands.dequeue()!)
         }
         var resultOperators: Array<Operator> = []
-        while !result.operators.isEmpty {
+        while result.operators.isEmpty == false {
             resultOperators.append(result.operators.dequeue()!)
         }
         
