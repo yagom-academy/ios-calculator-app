@@ -19,7 +19,7 @@ struct Formula {
         while !operands.isEmpty() || !operators.isEmpty() {
             guard let operant = operators.dequeue(),
                   let number = operands.dequeue() else {
-                throw CalculatorError.wrongFormulaError
+                throw CalculatorError.wrongFormula
             }
             
             result = try operant.calculate(lhs: result, rhs: number)

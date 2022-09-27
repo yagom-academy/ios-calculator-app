@@ -8,6 +8,6 @@
 import Foundation
 
 enum CalculatorError: Error {
-    case divideZeroError
-    case wrongFormulaError
+    case divideZero
+    case wrongFormula
 }
