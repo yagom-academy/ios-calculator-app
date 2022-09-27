@@ -25,4 +25,12 @@ class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(result, 300.0)
     }
+    
+    func test_2_더하기_마이너스1은_1인가() throws {
+        let string = "2 + -1"
+        var parseTest = ExpressionParser.parse(from: string)
+        let result = try parseTest.result()
+        
+        XCTAssertEqual(result, 1.0)
+    }
 }
