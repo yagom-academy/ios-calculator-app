@@ -15,18 +15,31 @@ enum ExpressionParser {
             result.operands.enqueue($0)
         }
         
-        var inputRemovedNegativeSignal: String = input
-        if input.hasPrefix("-") {
-            inputRemovedNegativeSignal.removeFirst()
+        var inputRemovedFirstNegative: String = input
+        let isFirstLetterNegative: Bool = inputRemovedFirstNegative.hasPrefix("-")
+        if isFirstLetterNegative {
+            inputRemovedFirstNegative.removeFirst()
         }
-        Operator.allCases.forEach {
-            inputRemovedNegativeSignal = inputRemovedNegativeSignal.replacingOccurrences(of: "\($0.rawValue)-", with: "\($0.rawValue)")
-        }
-        inputRemovedNegativeSignal.compactMap { Operator.init(rawValue: $0) }.forEach {
+        let inputRemovedNegative: String = removeNegative(from: inputRemovedFirstNegative)
+        inputRemovedNegative.compactMap {
+            if let operatorToReturn = Operator.init(rawValue: $0) {
+                return operatorToReturn
+            } else {
+                return nil
+            }
+        }.forEach {
             result.operators.enqueue($0)
         }
         
         return result
+    }
+    
+    private static func removeNegative(from input: String) -> String {
+        var inputRemovedNegative: String = input
+        Operator.allCases.forEach {
+            inputRemovedNegative = inputRemovedNegative.replacingOccurrences(of: "\($0.rawValue)-", with: "\($0.rawValue)")
+        }
+        return inputRemovedNegative
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
@@ -36,13 +49,14 @@ enum ExpressionParser {
         }
         var isNegative: Bool = false
         result = result.compactMap {
-            if $0 == "" {
-                isNegative = true
-                return nil
-            } else {
+            let isNumber: Bool = $0 != ""
+            if isNumber {
                 let value: String = isNegative ? "-\($0)" : $0
                 isNegative = false
                 return value
+            } else {
+                isNegative = true
+                return nil
             }
         }
         return result
