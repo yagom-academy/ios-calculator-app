@@ -10,12 +10,13 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var inputNumberLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
+    @IBOutlet weak var formulaScrollView: UIScrollView!
+    @IBOutlet weak var enterdFormulaStackView: UIStackView!
     
     var formula: Formula?
-    
     var inputNumber: String?
     var inputOperator: String?
-    var isCalculate: Bool?
+    var isCalculated: Bool?
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +27,17 @@ class ViewController: UIViewController {
     func setup() {
         resetInputNumber()
         resetInputOperator()
-        isCalculate = false
+        resetStackViewAll()
+        isCalculated = false
     }
     
     func setupFomula() {
         formula = Formula()
     }
     
+    func resetStackViewAll() {
+        enterdFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
     
     func resetInputNumber() {
         inputNumber = "0"
@@ -45,11 +50,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signChangeButtonTapped(_ sender: UIButton) {
-        // +/- 버튼 클릭시
-        // - 부호 일 경우 삭제
+        if inputNumber?.contains("-") == true {
+            inputNumber?.removeFirst()
+            inputNumberLabel.text = inputNumber
+        } else if let value = inputNumber,
+               value != "0" {
+            inputNumber = "-" + value
+            inputNumberLabel.text = inputNumber
+        }
+        
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        resetStackViewAll()
         setup()
         setupFomula()
     }
@@ -90,12 +103,7 @@ class ViewController: UIViewController {
             
             return
         }
-        // inputNumber의 값이 0이면 연산자만 교체
-        // 연산이 이루어진 후 = inputNumber 값이 0이 아니라면
-        // inputNumber, inputNumberLabel 초기화
-        // inputOperator, inputOperatorLabel 초기화
-        inputNumber = "0"
-        inputNumberLabel.text = inputNumber
+        resetInputNumber()
         
         inputOperator = value
         inputOperatorLabel.text = inputOperator

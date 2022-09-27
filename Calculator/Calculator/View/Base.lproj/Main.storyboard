@@ -98,7 +98,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="clearEntryButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KFY-fr-pVJ"/>
-                                                    <action selector="signChangeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iwO-mr-5HI"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -108,6 +107,9 @@
                                                 <state key="normal" title="⁺⁄₋">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signChangeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RYt-Bb-897"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
                                                 <rect key="frame" x="292.5" y="0.0" width="89.5" height="89.5"/>
@@ -362,6 +364,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="enterdFormulaStackView" destination="XRe-QE-UJf" id="GZO-JW-hw8"/>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="yn3-lk-ZyQ"/>
                         <outlet property="inputNumberLabel" destination="Lwz-OF-XHD" id="Z3J-DO-xnD"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="LAc-KW-2Xw"/>
                     </connections>
