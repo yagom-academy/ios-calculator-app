@@ -14,11 +14,11 @@ struct Formula {
         self.operators = CalculatorItemQueue(elements: operators)
     }
     
-    func result() -> Result<Double, FormulaError> {
+    func result() throws -> Double {
         var operands = operands, operators = operators
         
         guard var calculatedValue: Double = operands.dequeue() else {
-            return Result.failure(FormulaError.emptyQeueue)
+            throw FormulaError.emptyQueue
         }
         
         while !operands.isEmpty {
@@ -33,10 +33,10 @@ struct Formula {
             do {
                 calculatedValue = try firstOperator.calculate(lhs: calculatedValue, rhs: rhs)
             } catch {
-                return Result.failure(FormulaError.dividedZero)
+                throw FormulaError.dividedByZero
             }
         }
         
-        return Result.success(calculatedValue)
+        return calculatedValue
     }
 }
