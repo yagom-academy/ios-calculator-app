@@ -7,30 +7,29 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let otherSpecial: CharacterSet = ["^", "!", "@", "#", "$", "%", "&"]
-        let removedSpecial = input.components(separatedBy: otherSpecial).joined()
-        
-        let removedPlain = removedSpecial.filter {
-            Double(String($0)) != nil || Operator(rawValue: $0) != nil || $0 == " "
-        }
-        
-        let operatorElements = removedPlain.split(separator: " ")
-            .map { $0.description }
-            .filter { Double($0) == nil }
-        let operators: [Operator] = operatorElements.compactMap { Operator(rawValue: Character($0)) }
-        
-        let operands: [Double] = componenetsByOperators(from: removedPlain).compactMap { Double($0) }
-        
-        return Formula(operands: operands, operators: operators)
+        componenetsByOperators(from: input)
+        return Formula()
     }
     
-    static private func componenetsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.map { $0.rawValue }
-        var result: String = input
+    private static func componenetsByOperators(from input: String) -> [String] {
+        let operators = Operator.allCases.map(\.rawValue)
+        var splitValues: [String] = [input]
+        var result: [String] = []
         
-        operators.forEach { result = result.split(with: $0).joined() }
-        result = result.replacingOccurrences(of: "  ", with: "")
+        operators.forEach { sign in
+            splitValues = splitValues.flatMap { $0.split(with: sign) }
+        }
         
-        return result.split(separator: " ").map { $0.description }
+        for index in 0..<splitValues.count {
+            var value: String = splitValues[index]
+            
+            if index > 0, splitValues[index - 1] == "" {
+                value = "-\(splitValues[index])"
+            }
+            
+            result.append(value)
+        }
+        
+        return result.filter { $0 != "" }
     }
 }

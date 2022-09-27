@@ -5,7 +5,12 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let target: String = " \(target) "
-        return replacingOccurrences(of: target, with: " ").map { $0.description }
+        return split(separator: target, omittingEmptySubsequences: false).map { $0.description }
+    }
+}
+
+extension Character {
+    var isNumber: Bool {
+        return Double(String(self)) != nil ? true: false
     }
 }
