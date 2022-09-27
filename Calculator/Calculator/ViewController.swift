@@ -10,6 +10,7 @@ class ViewController: UIViewController {
 
     var expression: String = ""
     
+    @IBOutlet weak var operandAndOperatorScrollView: UIScrollView!
     @IBOutlet weak var operandAndOperatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -136,12 +137,20 @@ class ViewController: UIViewController {
         textLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         operandAndOperatorStackView.addArrangedSubview(textLabel)
+        updateScrollViewToBottom()
     }
     
     func updateResult(result: Double) {
         operandLabel.text = result.description
         operatorLabel.text = ""
         expression = ""
+    }
+    
+    func updateScrollViewToBottom() {
+        operandAndOperatorScrollView.layoutIfNeeded()
+        operandAndOperatorScrollView.setContentOffset(CGPoint(x: 0,
+                                            y: operandAndOperatorScrollView.contentSize.height - operandAndOperatorScrollView.bounds.height),
+                                    animated: true)
     }
 }
 
