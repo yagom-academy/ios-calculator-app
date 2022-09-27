@@ -14,7 +14,7 @@ struct Formula {
             throw CalculatorError.emptyOperands
         }
         
-        while operands.isEmpty() == false && operators.isEmpty() == false {
+        while !operands.isEmpty() && !operators.isEmpty() {
             guard let number = operands.dequeue() else {
                 throw CalculatorError.noMoreOperands
             }
