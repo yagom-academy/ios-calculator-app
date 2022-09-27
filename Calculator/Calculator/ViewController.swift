@@ -134,12 +134,8 @@ class ViewController: UIViewController {
         textLabel.text = operatorText + " " + operandText
         textLabel.textColor = .white
         textLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-
-        let stackView = UIStackView()
-        stackView.axis  = NSLayoutConstraint.Axis.horizontal
-        stackView.addArrangedSubview(textLabel)
         
-        operandAndOperatorStackView.addArrangedSubview(stackView)
+        operandAndOperatorStackView.addArrangedSubview(textLabel)
     }
     
     func updateResult(result: Double) {
