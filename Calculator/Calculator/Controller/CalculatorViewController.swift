@@ -83,4 +83,19 @@ class CalculatorViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func didTappedResetButton(_ sender: UIButton) {
+        resetUserInput()
+    }
+
+    private func resetUserInput() {
+        currentOperatorLabel.text = ""
+        currentNumberLabel.text = "0"
+        
+        selectedNumbers = ""
+        selectedOperator = ""
+        
+        userInputExpression = ""
+    }
+
 }
