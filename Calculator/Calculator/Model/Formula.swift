@@ -7,22 +7,34 @@ import Foundation
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
-    mutating func result() -> Double {
+    
+    mutating func result() throws -> Double {
         var lhs = operands.dequeue() ?? 99.999
         var rhs = operands.dequeue() ?? 99.999
         var operatorsValue = operators.dequeue()
+        var result: Double
         
-        var result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
-        
+        do {
+            let tryResult = try operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+            result = tryResult
+        } catch {
+            throw OccuredError.tryDivideZero
+        }
         while !operands.dequeueStack.isEmpty {
             lhs = result
             rhs = operands.dequeue() ?? 99.999
             operatorsValue = operators.dequeue()
-            result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+            do {
+                let tryResult = try operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+                result = tryResult
+            } catch {
+                throw OccuredError.tryDivideZero
+            }
         }
         if operators.dequeueStack.isEmpty == false {
             operators.dequeueStack.removeAll()
         }
+        
         return result
     }
 }

@@ -16,7 +16,7 @@ class FormulaTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-    
+/*
     func test_숫자3개_혼합연산하는_경우() {
         //given
         sut.operands.enqueue(element: 5.0)
@@ -94,16 +94,32 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, -50)
     }
     
-    func test_나누기연산_성공하는지() {
+     func test_나누기연산_성공하는지() {
+         //given
+         sut.operands.enqueue(element: 15.0)
+         sut.operands.enqueue(element: 5.0)
+         sut.operators.enqueue(element: .divide)
+         
+         //when
+         let result = sut.result()
+
+         //then
+         XCTAssertEqual(result, 3)
+     }
+*/
+    func test_0으로나누기연산_성공하는지() {
         //given
         sut.operands.enqueue(element: 50.0)
-        sut.operands.enqueue(element: -10.0)
+        sut.operands.enqueue(element: 0)
         sut.operators.enqueue(element: .divide)
         
         //when
-        let result = sut.result()
+        var error: OccuredError?
+        XCTAssertThrowsError(try sut.result()) { errorOfDivideZero in
+            error = errorOfDivideZero as? OccuredError
+        }
         
         //then
-        XCTAssertEqual(result, -5)
+        XCTAssertEqual(error, OccuredError.tryDivideZero)
     }
 }
