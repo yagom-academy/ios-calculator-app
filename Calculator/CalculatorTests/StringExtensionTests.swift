@@ -13,8 +13,8 @@ final class StringExtensionTests: XCTestCase {
     func test_When_testString_split_Then_return_String_that_except_specific_character() {
         // given
         let testString = "1+23-4"
-        let resultString_1 = ["1", "+", "23-4"]
-        let resultString_2 = ["1+23", "-", "4"]
+        let resultString1 = ["1", "+", "23-4"]
+        let resultString2 = ["1+23", "-", "4"]
         
         // when
         let result_1 = testString.split(with: "+")
