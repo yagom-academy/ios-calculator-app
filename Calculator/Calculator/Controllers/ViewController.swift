@@ -88,7 +88,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedDotPads(_ sender: UIButton) {
-
+        if currentOperand.contains(Constant.dot) || currentOperand == Constant.defaultZero {
+            return
+        } else {
+            currentOperand += Constant.dot
+        }
     }
     
     @IBAction func tappedChangePositiveNegative(_ sender: UIButton) {
