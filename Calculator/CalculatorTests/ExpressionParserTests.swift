@@ -41,25 +41,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_입력값에_음수가_포함된경우_제대로처리하는지() {
         // given
-        let input = "1 - -1"
+        let input = "1--1"
         expectedOperands.enqueue(item: 1)
         expectedOperands.enqueue(item: -1)
         expectedOperators.enqueue(item: .subtract)
-        
-        // when
-        let result = ExpressionParser.parse(from: input)
-        
-        // then
-        XCTAssertEqual(result.operands.inputStack, expectedOperands.inputStack)
-        XCTAssertEqual(result.operators.inputStack, expectedOperators.inputStack)
-    }
-    
-    func test_parse_입력값에_연산자가_연속으로_들어온경우_앞의연산자는제거() {
-        // given
-        let input = "1 + - + * 5"
-        expectedOperands.enqueue(item: 1)
-        expectedOperands.enqueue(item: 5)
-        expectedOperators.enqueue(item: .multiply)
         
         // when
         let result = ExpressionParser.parse(from: input)

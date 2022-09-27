@@ -9,11 +9,13 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var formula = Formula()
+        var operandsQueue = CalculatorItemQueue<Double>()
+        var operatorsQueue = CalculatorItemQueue<Operator>()
+        
         var validInput = input
         
         guard let firstElement = input.first else {
-            return formula
+            return Formula(operands: operandsQueue, operators: operatorsQueue)
         }
         
         if !firstElement.isNumber {
@@ -23,7 +25,7 @@ enum ExpressionParser {
         let operands = componentsByOperators(from: validInput)
         operands.forEach {
             guard let number = Double($0) else { return }
-            formula.operands.enqueue(item: number)
+            operandsQueue.enqueue(item: number)
         }
 
         let operators = Operator.allCases.map { $0.rawValue }
@@ -31,29 +33,26 @@ enum ExpressionParser {
         var lastElement: String = " "
         var operatorQueue: [Character] = []
         
-        for i in 0..<splitInput.count {
-            if Double(splitInput[i]) != nil,
-               operators.contains(Character(lastElement)) {
-                operatorQueue.append(Character(lastElement))
-            }
-            
-            lastElement = splitInput[i]
-        }
+        
         
         operatorQueue.forEach {
             guard let operatorSign = Operator(rawValue: $0) else { return }
-            formula.operators.enqueue(item: operatorSign)
+            operatorsQueue.enqueue(item: operatorSign)
         }
 
-        return formula
+        return Formula(operands: operandsQueue, operators: operatorsQueue)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.map { String($0.rawValue) }
-        let numbers = input
-            .split(with: " ")
-            .filter { !operators.contains($0) }
+        var result: [String] = [input]
+        let operators = Operator.allCases.map { $0.rawValue }
         
-        return numbers
+        for oper in operators {
+            result = result.flatMap {$0.split(with: oper) }
+        }
+        
+        print(result)
+        
+        return result
     }
 }
