@@ -34,6 +34,10 @@ class ViewController: UIViewController {
         currentOperand = Constant.defaultZero
     }
 
+    func updateMainResultLabel() {
+        mainResultLabel.text = currentOperand
+    }
+    
     @IBAction func tappedNumberPads(_ sender: UIButton) {
         let tappedNumber = sender.currentTitle
         guard let number = tappedNumber else { return }
@@ -46,6 +50,8 @@ class ViewController: UIViewController {
         } else {
             currentOperand += number
         }
+        
+        updateMainResultLabel()
     }
     
     @IBAction func tappedOperatorPads(_ sender: UIButton) {
@@ -93,10 +99,22 @@ class ViewController: UIViewController {
         } else {
             currentOperand += Constant.dot
         }
+        
+        updateMainResultLabel()
     }
     
     @IBAction func tappedChangePositiveNegative(_ sender: UIButton) {
-
+        if currentOperand == Constant.defaultZero || currentOperand == Constant.zero {
+            return
+        }
+        
+        if currentOperand.contains(Constant.negative) {
+            currentOperand.removeFirst()
+        } else {
+            currentOperand = Constant.negative + currentOperand
+        }
+        
+        updateMainResultLabel()
     }
     
     @IBAction func tappedAllClear(_ sender: UIButton) {
