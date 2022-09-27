@@ -136,6 +136,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signChangeButtonPressed(_ sender: Any) {
+        changeOperatorSign()
+    }
+    
+    func changeOperatorSign() {
         guard let operandLabelText = operandLabel.text else { return }
         if operandLabelText.contains("-") {
             operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
