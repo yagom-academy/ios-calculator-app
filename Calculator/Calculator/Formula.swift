@@ -4,7 +4,7 @@ struct Formula {
     var operands: CalculatorItemQueueByLinkedList<Double>
     var operators: CalculatorItemQueueByLinkedList<Operator>
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         var result: Double
         
         guard let initialValue: Double = operands.dequeue() else { return 0 }
@@ -14,7 +14,7 @@ struct Formula {
             guard let rhs = operands.dequeue(),
                   let unitOperator = operators.dequeue() else { return 0 }
             
-            calculatingValue = unitOperator.calculate(lhs: calculatingValue, rhs: rhs)
+            calculatingValue = try unitOperator.calculate(lhs: calculatingValue, rhs: rhs)
         }
         result = calculatingValue
         

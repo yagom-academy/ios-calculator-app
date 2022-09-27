@@ -1,7 +1,6 @@
 //  Created by Aejong on 2022/09/23.
 
 struct LinkedList<T> {
-    
     private(set) var head: LinkedListNode<T>?
     private(set) var tail: LinkedListNode<T>?
     
