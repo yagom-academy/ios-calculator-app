@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak private var doubleZeroButton: UIButton!
     @IBOutlet weak private var dotButton: UIButton!
     @IBOutlet weak var verticalFormulasStackView: UIStackView!
+    @IBOutlet weak var formulaScrollView: UIScrollView!
     
     
     override func viewDidLoad() {
@@ -93,6 +94,12 @@ class ViewController: UIViewController {
         let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
         formulaStackView.spacing = CGFloat(CalculatorNumber.formulaStackViewSpacing)
         verticalFormulasStackView.addArrangedSubview(formulaStackView)
+        scrollToBottom()
+    }
+    
+    private func scrollToBottom() {
+        let bottomPoint: CGPoint = .init(x: 0, y: formulaScrollView.contentSize.height)
+        formulaScrollView.setContentOffset(bottomPoint, animated: false)
     }
     
     private func makeOperatorLabel() -> UILabel? {

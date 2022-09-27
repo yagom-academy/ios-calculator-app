@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
-                                <rect key="frame" x="16" y="240.5" width="382" height="45"/>
+                                <rect key="frame" x="16" y="239.5" width="382" height="45"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
@@ -326,7 +326,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DC3-Ia-6L7">
-                                <rect key="frame" x="16" y="305.5" width="382" height="37"/>
+                                <rect key="frame" x="16" y="305" width="382" height="37"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2pK-nQ-lxl">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="37"/>
@@ -354,11 +354,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DC3-Ia-6L7" secondAttribute="trailing" constant="16" id="4U4-wj-pOs"/>
                             <constraint firstItem="BOT-7g-vxv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9Pe-KB-bQo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKH-82-hZC" secondAttribute="trailing" constant="16" id="YWo-lu-Avi"/>
-                            <constraint firstItem="YKH-82-hZC" firstAttribute="top" secondItem="DC3-Ia-6L7" secondAttribute="bottom" constant="20" id="f7E-le-Da8"/>
+                            <constraint firstItem="YKH-82-hZC" firstAttribute="top" secondItem="DC3-Ia-6L7" secondAttribute="bottom" constant="20.5" id="f7E-le-Da8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BOT-7g-vxv" secondAttribute="trailing" constant="16" id="jGA-4U-1bz"/>
                             <constraint firstItem="YKH-82-hZC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jKU-BN-eas"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YKH-82-hZC" secondAttribute="bottom" constant="20" id="lPP-CN-Q7m"/>
-                            <constraint firstItem="DC3-Ia-6L7" firstAttribute="top" secondItem="BOT-7g-vxv" secondAttribute="bottom" constant="20" id="mfk-MI-h75"/>
+                            <constraint firstItem="DC3-Ia-6L7" firstAttribute="top" secondItem="BOT-7g-vxv" secondAttribute="bottom" constant="20.5" id="mfk-MI-h75"/>
                             <constraint firstItem="BOT-7g-vxv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="qyL-Qq-yAo"/>
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
@@ -368,6 +368,7 @@
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="Fld-K7-LXc"/>
                         <outlet property="enteredNumberLabel" destination="Lwz-OF-XHD" id="ZpY-mU-Tb3"/>
                         <outlet property="enteredOperatorLabel" destination="HPC-iy-qdm" id="m4F-Gj-CQ5"/>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="g3H-Lt-ipX"/>
                         <outlet property="verticalFormulasStackView" destination="XRe-QE-UJf" id="Nsg-qT-oex"/>
                         <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="MLo-B5-02l"/>
                         <outletCollection property="operatorButtons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="6Ks-Pv-uB4"/>
