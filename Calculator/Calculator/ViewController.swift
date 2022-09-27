@@ -142,12 +142,21 @@ class ViewController: UIViewController {
     func fetchCalculatedResult() -> String {
         var result = ""
         do {
-            result = try ExpressionParser.parse(from: expression).result().description
+            let unFormattedNumber = try ExpressionParser.parse(from: expression).result()
+            result = fetchformattedNumbers(number: unFormattedNumber)
         } catch CalculatorError.dividedByZero {
             result = "NaN"
         } catch {
             print("알 수 없는 에러입니다.")
         }
+        return result
+    }
+    
+    func fetchformattedNumbers(number: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
+        guard let result = numberFormatter.string(for: number) else { return "" }
         return result
     }
     
