@@ -3,8 +3,6 @@
 //  Created by Wonbi
 //
 
-import Foundation
-
 struct CalculatorItemQueue<T: CalculateItem> {
     private var input: [T] = []
     private var output: [T] = []

@@ -3,8 +3,6 @@
 //  Created by Wonbi
 //
 
-import Foundation
-
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
@@ -27,8 +25,8 @@ struct Formula {
                let currentOperator = currentOperator {
                 result = currentOperator.calculate(lhs: firstOperand, rhs: secondOperand)
             }
-            
-            if result.isNaN {
+             
+            if result.isInfinite {
                 return .nan
             }
         }
