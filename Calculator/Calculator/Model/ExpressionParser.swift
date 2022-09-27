@@ -16,10 +16,10 @@ enum ExpressionParser {
             }
         }
         
-        input.forEach { character in
-            if Operator.allCases.map({ $0.rawValue }).contains(character) {
-                operators.enqueue(String(character))
-            }
+        input.filter {
+            Operator.allCases.map { $0.rawValue }.contains($0)
+        }.forEach {
+            operators.enqueue(String($0))
         }
         
         return Formula(operands: operands, operators: operators)
