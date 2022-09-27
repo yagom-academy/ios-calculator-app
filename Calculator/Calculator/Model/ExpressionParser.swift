@@ -15,25 +15,16 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var componentsResult: [String] = []
-        var calculateData: String = ""
+        var componentsResult: [String] = [input]
         
-        input.forEach {
-            if Operator.init(rawValue: $0) != nil {
-                if calculateData == "" {
-                    calculateData.append($0)
+        Operator.allCases.forEach { (targetOperator) in
+            componentsResult = componentsResult.reduce(into: [String]()) {
+                if $1.count != 1 {
+                    $0 += $1.split(with: targetOperator)
                 } else {
-                    componentsResult.append(calculateData)
-                    componentsResult.append(String($0))
-                    calculateData = ""
+                    $0.append($1)
                 }
-            } else {
-                calculateData.append($0)
             }
-        }
-        
-        if calculateData != "" {
-            componentsResult.append(calculateData)
         }
         
         return componentsResult
