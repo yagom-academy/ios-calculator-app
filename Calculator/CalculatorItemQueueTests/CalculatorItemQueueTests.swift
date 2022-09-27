@@ -52,7 +52,7 @@ class CalculatoralculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(2.0, lastData)
         
         //의도한 fail test
-        XCTAssertNotEqual(2.0, lastData)
+        XCTAssertNotEqual(3.0, lastData)
     }
     
     func test_dequeue_큐가비어있을때_반환값nil() {

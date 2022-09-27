@@ -7,5 +7,5 @@
 
 enum CalculatorError: Error {
     case divideByZeroError
-    case otherError
+    case unknown
 }

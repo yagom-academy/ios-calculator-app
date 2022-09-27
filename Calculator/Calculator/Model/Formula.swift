@@ -15,7 +15,7 @@ struct Formula {
         while operands.isEmpty() == false {
             guard let operatorCase: Operator = self.operators.dequeue()?.data,
                   let operand: Double = self.operands.dequeue()?.data else {
-                throw CalculatorError.otherError
+                throw CalculatorError.unknown
             }
             
             result = try Operator.calculate(operatorCase)(lhs: result, rhs: operand)
