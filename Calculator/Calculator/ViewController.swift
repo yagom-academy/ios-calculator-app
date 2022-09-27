@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         changeOperatorSign()
     }
     
-    func fetchCalculatedResult() -> String {
+    private func fetchCalculatedResult() -> String {
         var result = ""
         do {
             let unFormattedNumber = try ExpressionParser.parse(from: expression).result()
@@ -152,7 +152,7 @@ class ViewController: UIViewController {
         return result
     }
     
-    func fetchformattedNumbers(number: Double) -> String {
+    private func fetchformattedNumbers(number: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
@@ -160,7 +160,7 @@ class ViewController: UIViewController {
         return result
     }
     
-    func changeOperatorSign() {
+    private func changeOperatorSign() {
         if operandLabel.text == "0" {
             return
         }
@@ -172,7 +172,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateOperandLabel(with number: String) {
+    private func updateOperandLabel(with number: String) {
         if operandLabel.text == "0" {
             operandLabel.text = number
         } else {
@@ -182,7 +182,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateExpression(nextOperator: String = "") {
+    private func updateExpression(nextOperator: String = "") {
         guard let operand = operandLabel.text,
               let `operator` = operatorLabel.text else { return }
         expression += `operator`
@@ -191,7 +191,7 @@ class ViewController: UIViewController {
         operatorLabel.text = nextOperator
     }
     
-    func updateOperandAndOperatorStackView() {
+    private func updateOperandAndOperatorStackView() {
         guard let operandText = operandLabel.text,
               let operatorText = operatorLabel.text else { return }
         
@@ -204,34 +204,34 @@ class ViewController: UIViewController {
         updateScrollViewToBottom()
     }
     
-    func updateResult(result: String) {
+    private func updateResult(result: String) {
         operandLabel.text = result
         resetOperatorLabel()
         resetExpression()
     }
     
-    func updateScrollViewToBottom() {
+    private func updateScrollViewToBottom() {
         operandAndOperatorScrollView.layoutIfNeeded()
         operandAndOperatorScrollView.setContentOffset(CGPoint(x: 0,
                                             y: operandAndOperatorScrollView.contentSize.height - operandAndOperatorScrollView.bounds.height),
                                     animated: true)
     }
     
-    func removeAlloperandAndOperatorStackViewSubviews() {
+    private func removeAlloperandAndOperatorStackViewSubviews() {
         operandAndOperatorStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
     }
     
-    func resetOperandLabel() {
+    private func resetOperandLabel() {
         operandLabel.text = "0"
     }
     
-    func resetOperatorLabel() {
+    private func resetOperatorLabel() {
         operatorLabel.text = ""
     }
     
-    func resetExpression() {
+    private func resetExpression() {
         expression = ""
     }
 }
