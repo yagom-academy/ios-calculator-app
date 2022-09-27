@@ -31,7 +31,7 @@ struct Formula {
                 throw FormulaError.emptyOperandsQueue
             }
             
-            result = inputOperator.calculate(lhs: result, rhs: inputOperands)
+            result = inputOperator.calculate(lhs: result, rhs: inputOperands) ?? 0
         }
         
         return result
