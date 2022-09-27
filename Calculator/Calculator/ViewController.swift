@@ -132,6 +132,7 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
         expression = ""
+        removeAlloperandAndOperatorStackViewSubviews()
     }
     
     func updateOperandLabel(with number: String) {
