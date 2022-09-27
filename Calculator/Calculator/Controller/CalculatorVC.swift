@@ -7,8 +7,8 @@
 import UIKit
 
 class CalculatorVC: UIViewController {
-
-    var calculateFormula: String = ""
+    
+    var currentNumber: String = ""
     
     @IBOutlet private weak var calculationFormulaScroll: UIScrollView!
     @IBOutlet private weak var operatorLabel: UILabel!
@@ -25,21 +25,24 @@ class CalculatorVC: UIViewController {
         }
         operatorLabel.text = ""
         operandLabel.text = "0"
+        currentNumber = ""
     }
-
+    
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if operandLabel.text?.first == "0" {
             operandLabel.text?.removeFirst()
         }
-        operandLabel.text?.append(sender.titleLabel?.text ?? "")
+        currentNumber.append(sender.titleLabel?.text ?? "")
+        operandLabel.text = currentNumber
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        if (operandLabel.text?.contains(".") ?? false) {
+        if currentNumber.contains(".") {
             return
         } else {
-            operandLabel.text?.append(sender.titleLabel?.text ?? "")
+            currentNumber.append(sender.titleLabel?.text ?? "")
         }
+        operandLabel.text = currentNumber
     }
     
     @IBAction func touchUpAcButton(_ sender: UIButton) {
@@ -47,19 +50,31 @@ class CalculatorVC: UIViewController {
     }
     
     @IBAction func touchUpCeButton(_ sender: UIButton) {
-        operatorLabel.text = ""
+        currentNumber = ""
         operandLabel.text = "0"
     }
     
     @IBAction func touchUpConvertPlusMinusButton(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
-        } else if operatorLabel.text == "+" {
-            operatorLabel.text = "−"
+        } else if currentNumber.first == "-" {
+            currentNumber.remove(at: currentNumber.startIndex)
         } else {
-            operatorLabel.text = "+"
+            currentNumber = "-\(currentNumber)"
+        }
+        operandLabel.text = currentNumber
+    }
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            return
+        } else {
+            operatorLabel.text = sender.titleLabel?.text
+            //makeFormulaStackView()
+            operandLabel.text = "0"
         }
     }
     
+    
+    
 }
-
