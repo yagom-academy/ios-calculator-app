@@ -18,9 +18,6 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func testExample() throws {}
-    func testPerformanceExample() throws { measure {} }
-    
     func test_enqueueStack에_값이_정상적으로_추가되는지() {
         //given
         sut.enqueue(element: 10.0)
