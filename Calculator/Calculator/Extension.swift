@@ -6,12 +6,6 @@ extension Double: CalculateItemProtocol {
 
 extension String {
     func split(with target: Character) -> [String] {
-        let subStringArray = self.split(separator: target)
-        var stringArray:[String] = []
-        
-        subStringArray.forEach{
-            stringArray.append(String($0))
-        }
-        return stringArray
+        return self.split(separator: target).map{ String($0) }
     }
 }

@@ -6,8 +6,8 @@ enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
         let components = componentsByOperators(from: input)
-        var operands = CalculatorItemQueue<Double>.init()
-        var operators = CalculatorItemQueue<Operator>.init()
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
         components.forEach {
             if let doubleComponents = Double($0) {
@@ -29,7 +29,7 @@ enum ExpressionParser {
         input.forEach {
             if operators.contains($0) == false {
                 strings.append($0)
-            } else if operators.contains($0) {
+            } else {
                 result.append(strings)
                 result.append("\($0)")
                 strings.removeAll()

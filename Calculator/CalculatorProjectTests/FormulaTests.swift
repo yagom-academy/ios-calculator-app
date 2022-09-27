@@ -33,23 +33,36 @@ class FormulaTests: XCTestCase {
         //when
         let result: Double = sut.result()
         //then
-        XCTAssertEqual(result, 0)
+        XCTAssertEqual(result, 5)
     }
     
     func test_연산기호가_숫자보다많을경우_result호출시_숫자만큼만연산결과가나오는지() {
         //given
         sut = Formula(operands: CalculatorItemQueue(enqueueStack: [5,3]),
                       operators: CalculatorItemQueue(enqueueStack:
-                                [Operator.multiply, Operator.add, Operator.multiply]))
+                                                        [Operator.multiply, Operator.add, Operator.multiply]))
         //when
         let result:Double = sut.result()
         //then
         XCTAssertEqual(result, 15)
     }
+    
     func test_연산기호만있을경우_result호출시_0이반환되는지() {
+        //given
         sut = Formula(operands: CalculatorItemQueue(enqueueStack: []),
                       operators: CalculatorItemQueue(enqueueStack:
-                                [Operator.multiply, Operator.add, Operator.multiply]))
+                                                        [Operator.multiply, Operator.add, Operator.multiply]))
+        //when
+        let result:Double = sut.result()
+        //then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_나누기기호와_남은숫자가0일때_원하는결과를반환하는지() {
+        //given
+        sut = Formula(operands: CalculatorItemQueue(enqueueStack: [1,0]),
+                      operators: CalculatorItemQueue(enqueueStack:
+                                        [Operator.divide]))
         //when
         let result:Double = sut.result()
         //then
