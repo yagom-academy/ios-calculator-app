@@ -38,6 +38,20 @@ class ViewController: UIViewController {
         mainResultLabel.text = currentOperand
     }
     
+    func makeHistoryStackViewLabel(item: String) -> UILabel {
+        let label: UILabel = {
+            let label = UILabel()
+            label.font = UIFont.preferredFont(forTextStyle: .title3)
+            label.textAlignment = .right
+            label.text = item
+            label.textColor = .white
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        return label
+    }
+    
     @IBAction func tappedNumberPads(_ sender: UIButton) {
         let tappedNumber = sender.currentTitle
         guard let number = tappedNumber else { return }
