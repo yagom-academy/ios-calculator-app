@@ -49,7 +49,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorPads(_ sender: UIButton) {
-
+        let tappedOperator = sender.currentTitle
+        guard let operators = tappedOperator else { return }
+        mainOperatorLabel.text = operators
+        
+        if currentOperand == Constant.defaultZero {
+            currentOperator = operators
+            return
+        }
+        
+        calculateHistory.append(currentOperator)
+        calculateHistory.append(currentOperand)
+        
+        currentOperator = operators
+        setDefaultOperand()
     }
     
     @IBAction func tappedCalculate(_ sender: UIButton) {
