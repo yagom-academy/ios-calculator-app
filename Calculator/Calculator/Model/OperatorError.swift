@@ -3,6 +3,7 @@
 //  Created by 미니.
 //
 
-enum OperatorError: Error {
-    case divideZero
+enum FormulaError: Error {
+    case dividedZero
+    case emptyQeueue
 }
