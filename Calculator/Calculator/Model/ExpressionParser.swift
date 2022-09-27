@@ -7,8 +7,9 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        componenetsByOperators(from: input)
-        return Formula()
+        let operands = componenetsByOperators(from: input).compactMap(Double.init)
+        let operators = componentsByOperands(from: input).compactMap { Operator(rawValue: $0) }
+        return Formula(operands: operands, operators: operators)
     }
     
     private static func componenetsByOperators(from input: String) -> [String] {
@@ -31,5 +32,20 @@ enum ExpressionParser {
         }
         
         return result.filter { $0 != "" }
+    }
+    
+    private static func componentsByOperands(from input: String) -> [Character] {
+        let operators = Operator.allCases.map(\.rawValue)
+        var input: String = input
+        
+        if input.first == Operator.subtract.rawValue {
+            input.removeFirst()
+        }
+        
+        operators.forEach { sign in
+            input = input.replacingOccurrences(of: "\(sign)-", with: "\(sign)")
+        }
+        
+        return input.filter { !$0.isNumber }.map { $0 }
     }
 }

@@ -9,12 +9,9 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let input = "1*-2/-8*2"
-        /*
-         1+2+-8*2
-         
-         */
-        print(ExpressionParser.parse(from: input))
+        let input = "10*-20*8*2"
+        let form = ExpressionParser.parse(from: input)
+        print(form.result())
     }
 }
 
