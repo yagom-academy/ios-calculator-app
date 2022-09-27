@@ -11,7 +11,7 @@ enum ExpressionParser {
             }
         }
         
-        return Formula()
+        return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
@@ -20,7 +20,7 @@ enum ExpressionParser {
         Operator.allCases.forEach { (targetOperator) in
             componentsResult = componentsResult.reduce(into: [String]()) {
                 if $1.count != 1 {
-                    $0 += $1.split(with: targetOperator)
+                    $0 += $1.split(with: targetOperator.rawValue)
                 } else {
                     $0.append($1)
                 }
