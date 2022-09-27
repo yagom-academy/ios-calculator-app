@@ -82,21 +82,37 @@ class ViewController: UIViewController {
     }
     
     @IBAction func divideButtonPressed(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            updateExpression(nextOperator: "÷")
+            return
+        }
         updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "÷")
     }
     
     @IBAction func multiplyButtonPressed(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            updateExpression(nextOperator: "×")
+            return
+        }
         updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "×")
     }
     
     @IBAction func subtractButtonPressed(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            updateExpression(nextOperator: "-")
+            return
+        }
         updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "-")
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            updateExpression(nextOperator: "+")
+            return
+        }
         updateOperandAndOperatorStackView()
         updateExpression(nextOperator: "+")
     }
