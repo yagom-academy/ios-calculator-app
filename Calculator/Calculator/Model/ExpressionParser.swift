@@ -7,6 +7,12 @@
 
 import Foundation
 
+extension String {
+    var isNumber: Bool {
+        return Double(self) != nil ? true : false
+    }
+}
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var operandsQueue = CalculatorItemQueue<Double>()
@@ -14,13 +20,11 @@ enum ExpressionParser {
         
         let operands = componentsByOperators(from: input)
         operands.forEach {
-            guard let number = Double($0) else { return }
-            operandsQueue.enqueue(item: number)
+            guard let operand = Double($0) else { return }
+            operandsQueue.enqueue(item: operand)
         }
 
         let operators = Operator.allCases.map { $0.rawValue }
-        let splitInput = input.split(with: " ")
-        var lastElement: String = " "
         var operatorQueue: [Character] = []
         
         operatorQueue.forEach {
@@ -32,15 +36,25 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var result: [String] = [input]
-        let operators = Operator.allCases.map { $0.rawValue }
+        var splitInput: [String] = [input]
         
-        for oper in operators {
-            result = result.flatMap {$0.split(with: oper) }
+        let operators = Operator.allCases.map { $0.rawValue }
+        for operatorSign in operators {
+            splitInput = splitInput.flatMap { $0.split(with: operatorSign) }
         }
         
-        print(result)
+        var numbers: [String] = []
         
-        return result
+        for i in 0..<splitInput.count {
+            if splitInput[i] == "" { continue }
+            if i > 0, splitInput[i - 1] == "", splitInput[i].isNumber {
+                let negative: String = "-" + splitInput[i]
+                numbers.append(negative)
+            } else {
+                numbers.append(splitInput[i])
+            }
+        }
+        
+        return numbers
     }
 }
