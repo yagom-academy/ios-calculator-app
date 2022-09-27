@@ -31,6 +31,16 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(0, result)
     }
     
+    func test_result_호출할때_피연산자가0일경우_NaN가반환되는가() {
+        sut?.operands?.enqueue(10)
+        sut?.operators?.enqueue(.divide)
+        sut?.operands?.enqueue(0)
+        
+        let result = sut?.result()
+        
+        XCTAssertEqual(Double.infinity, result)
+    }
+    
     func test_result_호출할때_연산자가1개일때_값이잘반환되는가() {
         sut?.operands?.enqueue(20)
         sut?.operators?.enqueue(.add)
