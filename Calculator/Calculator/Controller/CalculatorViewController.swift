@@ -58,4 +58,29 @@ class CalculatorViewController: UIViewController {
         currentOperatorLabel.text = selectedOperator
         
     }
+    
+    @IBAction func didTappedEqualButton(_ sender: UIButton) {
+        guard let lastElement = userInputExpression.last else {
+            return
+        }
+        if Operator(rawValue: lastElement) != nil {
+            userInputExpression.append(selectedNumbers)
+        }
+        
+        setUpLabelWithCalculateResult()
+    }
+
+    private func setUpLabelWithCalculateResult() {
+        
+        let formula = ExpressionParser.parse(from: userInputExpression)
+        
+        switch formula.result() {
+        case .success(let calculatedValue):
+            currentNumberLabel.text = calculatedValue.description.calNumber
+            currentOperatorLabel.text = ""
+        case .failure(let error):
+            print(error)
+        }
+        
+    }
 }
