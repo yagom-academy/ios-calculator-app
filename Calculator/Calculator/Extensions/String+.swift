@@ -9,7 +9,7 @@ extension String {
     }
 }
 
-extension Character {
+extension String.Element {
     var isNumber: Bool {
         return Double(String(self)) != nil ? true: false
     }
