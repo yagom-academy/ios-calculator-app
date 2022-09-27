@@ -118,10 +118,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonPressed(_ sender: UIButton) {
+        updateOperandAndOperatorStackView()
         updateExpression()
         let result = ExpressionParser.parse(from: expression).result()
         updateResult(result: result)
-        updateOperandAndOperatorStackView()
     }
     
     @IBAction func CEButtonPressed(_ sender: Any) {
