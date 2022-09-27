@@ -17,9 +17,13 @@ class CalculatorViewController: UIViewController {
         resetOperatorAndOperandLabel()
     }
     
+    private func resetOperandLabel() {
+        operandLabel.text = "0"
+    }
+    
     private func resetOperatorAndOperandLabel() {
         operatorLabel.text = nil
-        operandLabel.text = "0"
+        resetOperandLabel()
     }
     
     private func setOperandLabel(_ key: NumericKeypad) {
