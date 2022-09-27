@@ -41,10 +41,12 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_입력값에_음수가_포함된경우_제대로처리하는지() {
         // given
-        let input = "1--1"
-        expectedOperands.enqueue(item: 1)
+        let input = "-1--12+3"
         expectedOperands.enqueue(item: -1)
+        expectedOperands.enqueue(item: -12)
+        expectedOperands.enqueue(item: 3)
         expectedOperators.enqueue(item: .subtract)
+        expectedOperators.enqueue(item: .add)
         
         // when
         let result = ExpressionParser.parse(from: input)

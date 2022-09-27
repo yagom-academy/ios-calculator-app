@@ -12,28 +12,16 @@ enum ExpressionParser {
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
         
-        var validInput = input
-        
-        guard let firstElement = input.first else {
-            return Formula(operands: operandsQueue, operators: operatorsQueue)
-        }
-        
-        if !firstElement.isNumber {
-            validInput = "0" + validInput
-        }
-        
-        let operands = componentsByOperators(from: validInput)
+        let operands = componentsByOperators(from: input)
         operands.forEach {
             guard let number = Double($0) else { return }
             operandsQueue.enqueue(item: number)
         }
 
         let operators = Operator.allCases.map { $0.rawValue }
-        let splitInput = validInput.split(with: " ")
+        let splitInput = input.split(with: " ")
         var lastElement: String = " "
         var operatorQueue: [Character] = []
-        
-        
         
         operatorQueue.forEach {
             guard let operatorSign = Operator(rawValue: $0) else { return }
