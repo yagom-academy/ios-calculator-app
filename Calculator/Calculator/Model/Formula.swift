@@ -14,7 +14,7 @@ struct Formula {
         
         while !operands.isEmpty && !operators.isEmpty {
             guard let operatorSign = operators.dequeue(),
-                  let rhs = operands.dequeue() else { return 0 }
+                  let rhs = operands.dequeue() else { return result }
             
             result = operatorSign.calculate(lhs: result, rhs: rhs)
         }
