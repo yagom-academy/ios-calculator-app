@@ -63,20 +63,20 @@ final class FormulaTests: XCTestCase {
     
     func test_When_testString_calculate_Then_return_right_answer() {
         // given
-        let testString_1 = "1+2-3+4"
-        let testString_2 = "12+4/4*5-10"
-        let answer_1: Double = 4
-        let answer_2: Double = 10
+        let testString1 = "1+2-3+4"
+        let testString2 = "12+4/4*5-10"
+        let answer1: Double = 4
+        let answer2: Double = 10
         
         // when
-        sut = ExpressionParser.parse(from: testString_1)
-        let result_1 = try? sut.result()
-        sut = ExpressionParser.parse(from: testString_2)
-        let result_2 = try? sut.result()
+        sut = ExpressionParser.parse(from: testString1)
+        let result1 = try? sut.result()
+        sut = ExpressionParser.parse(from: testString2)
+        let result2 = try? sut.result()
         
         // then
-        XCTAssertEqual(result_1, answer_1)
-        XCTAssertEqual(result_2, answer_2)
+        XCTAssertEqual(result1, answer1)
+        XCTAssertEqual(result2, answer2)
     }
     
     func test_When_divide_0_Then_throw_Error() {

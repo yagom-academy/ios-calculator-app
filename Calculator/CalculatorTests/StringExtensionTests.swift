@@ -10,18 +10,18 @@ import XCTest
 
 final class StringExtensionTests: XCTestCase {
 
-    func test_When_testString_split_Then_return_String_that_except_specific_character() {
+    func test_When_given_testString_Then_expect_String_that_separated_specific_character() {
         // given
         let testString = "1+23-4"
         let resultString1 = ["1", "+", "23-4"]
         let resultString2 = ["1+23", "-", "4"]
         
         // when
-        let result_1 = testString.split(with: "+")
-        let result_2 = testString.split(with: "-")
+        let result1 = testString.split(with: "+")
+        let result2 = testString.split(with: "-")
         
         // then
-        XCTAssertEqual(result_1, resultString_1)
-        XCTAssertEqual(result_2, resultString_2)
+        XCTAssertEqual(result1, resultString1)
+        XCTAssertEqual(result2, resultString2)
     }
 }
