@@ -30,6 +30,7 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: "0")
     }
     
+    private func inputNumber(by key: NumericKeypad) {
         guard var operand = operandLabel.text else { return }
         
         if (operand.last == "." || operand.contains(".")),
@@ -44,7 +45,9 @@ class CalculatorViewController: UIViewController {
             operand += key.rawValue
         }
         
-        operandLabel.text = operand
+        setOperandLabel(to: operand)
+    }
+    
     }
     
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
