@@ -3,9 +3,18 @@
 //  Calculator
 //
 
-extension Int: CalculateItem {}
+
+
+extension Int: CalculateItem, Equatable {}
 extension Double: CalculateItem {}
 extension OperatorItem: CalculateItem {}
+
+extension Equatable {
+     {
+        
+    }
+}
+
 
 enum OperatorItem: Character, CaseIterable {
     case add = "+"
