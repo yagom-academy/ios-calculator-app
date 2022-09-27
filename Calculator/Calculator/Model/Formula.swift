@@ -12,7 +12,13 @@ struct Formula {
     mutating func result() -> Double? {
         var result: Double?
         while !operators.isEmpty {
-            guard let lhs: Double = result != nil ? result : operands.dequeue(),
+            let leftHandSide: Double?
+            if result != nil {
+                leftHandSide = result
+            } else {
+                leftHandSide = operands.dequeue()
+            }
+            guard let lhs: Double = leftHandSide,
                   let rhs: Double = operands.dequeue() else {
                 return result
             }
