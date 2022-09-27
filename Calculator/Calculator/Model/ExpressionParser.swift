@@ -50,19 +50,22 @@ enum ExpressionParser {
 extension String {
     func split(with target: Character) -> [String] {
         var result: [String] = []
-        var nonTargetArray: [String] = []
-
+        var nonTargets: [String] = []
+        var isNegative: Bool = true
+        
         self.forEach { character in
-            if character == target {
-                result.append(nonTargetArray.joined(separator: ""))
+            if character == target && !isNegative{
+                isNegative = true
+                result.append(nonTargets.joined(separator: ""))
                 result.append(String(character))
-                nonTargetArray = []
+                nonTargets = []
             } else {
-                nonTargetArray.append(String(character))
+                isNegative = false
+                nonTargets.append(String(character))
             }
         }
         
-        result.append(nonTargetArray.joined(separator: ""))
-        return result
+        result.append(nonTargets.joined(separator: ""))
+        return result.filter { $0 != "" }
     }
 }
