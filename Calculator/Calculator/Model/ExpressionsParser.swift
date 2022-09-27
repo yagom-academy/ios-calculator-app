@@ -1,12 +1,31 @@
 //  ExpressionsParser.swift
 //  Created by zhilly on 2022/09/26.
+import Foundation
 
 enum ExpressionParser {
-    func parse (from input: String) -> Formula {
-        return Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+    static func parse (from input: String) -> Formula {
+        var operands: CalculatorItemQueue = CalculatorItemQueue<Double>()
+        var operators: CalculatorItemQueue = CalculatorItemQueue<Operator>()
+        
+        let operandsComponentArray = componentsByOperators(from: input).compactMap { str in Double(str) }
+        operandsComponentArray.forEach {
+            operands.enqueue($0)
+        }
+        
+        let operatorCompoentArray = input.compactMap{ Operator(rawValue: $0) }
+        operatorCompoentArray.forEach {
+            operators.enqueue($0)
+        }
+        
+        return Formula(operands: operands, operators: operators)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
-        return []
+    private static func componentsByOperators(from input: String) -> [String] {
+        let operators = String(Operator.allCases.map{ $0.rawValue })
+        var operatorsCharacterSet:CharacterSet = CharacterSet()
+        
+        operatorsCharacterSet.insert(charactersIn: operators)
+
+        return input.components(separatedBy: operatorsCharacterSet)
     }
 }
