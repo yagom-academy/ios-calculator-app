@@ -1,17 +1,31 @@
 //  Created by Aejong on 2022/09/27
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
-        return Formula(operands: CalculatorItemQueueByLinkedList<Double>.init(), operators: CalculatorItemQueueByLinkedList<Operator>.init())
+    static func parse(from input: String) -> Formula {
+        var operands: CalculatorItemQueueByLinkedList<Double> = CalculatorItemQueueByLinkedList<Double>()
+        var operators: CalculatorItemQueueByLinkedList<Operator> = CalculatorItemQueueByLinkedList<Operator>()
+        let operandsArray: [Double] = componentsByOperator(from: input).compactMap { Double($0) }
+        
+        let operatorsArray: [Operator] = input.compactMap { Operator(rawValue: $0) }
+        
+        for singleOperand in operandsArray {
+            operands.enqueue(singleOperand)
+        }
+        
+        for singleOperator in operatorsArray {
+            operators.enqueue(singleOperator)
+        }
+        
+        return Formula(operands: operands, operators: operators)
     }
     
-    private func componentsByOperator(from input: String) -> [String] {
+    private static func componentsByOperator(from input: String) -> [String] {
         var inputString: String = input
         
         for caseOperator in Operator.allCases {
             inputString = inputString.replacingOccurrences(of: "\(caseOperator.rawValue)", with: " ")
         }
-
+        
         return inputString.split(with: " ")
     }
 }

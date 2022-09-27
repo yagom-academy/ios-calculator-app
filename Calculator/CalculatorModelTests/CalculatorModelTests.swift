@@ -5,20 +5,20 @@ import XCTest
 @testable import Calculator
 
 class CalculatorModelTests: XCTestCase {
-    var sutByLinkedList: CalculatorItemQueueByLinkedList<String>!
+    var sutByLinkedList: CalculatorItemQueueByLinkedList<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sutByLinkedList = CalculatorItemQueueByLinkedList<String>()
+        sutByLinkedList = CalculatorItemQueueByLinkedList<Double>()
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
     }
     
-    func test_1_더하기연산자_3요소가_순서대로linkedList에_append되어야한다() {
+    func test_1_2_3요소가_순서대로linkedList에_append되어야한다() {
         // given
-        let input = ["1", "+", "3"]
+        let input: [Double] = [1,2,3]
         
         // when
         for element in input {
@@ -26,25 +26,25 @@ class CalculatorModelTests: XCTestCase {
         }
         
         // then
-        XCTAssertEqual(sutByLinkedList.linkedList.head?.value, "1")
-        XCTAssertEqual(sutByLinkedList.linkedList.tail?.value, "3")
+        XCTAssertEqual(sutByLinkedList.linkedList.head?.value, 1)
+        XCTAssertEqual(sutByLinkedList.linkedList.tail?.value, 3)
     }
     
     func test_비어있는list에_1을enqueue한후_dequeue가1을반환해야한다() {
         // given
-        let input = "1"
+        let input: Double = 1
         sutByLinkedList.enqueue(input)
         
         // when
         let result = sutByLinkedList.dequeue()
         
         // then
-        XCTAssertEqual(result, "1")
+        XCTAssertEqual(result, 1)
     }
     
     func test_1_2_3_을enqueue한후_dequeue를호출했을때_1을반환해야한다() {
         // given
-        let input = ["1", "+", "3"]
+        let input: [Double] = [1, 2, 3]
         for element in input {
             sutByLinkedList.enqueue(element)
         }
@@ -53,6 +53,6 @@ class CalculatorModelTests: XCTestCase {
         let result = sutByLinkedList.dequeue()
         
         // then
-        XCTAssertEqual(result, "1")
+        XCTAssertEqual(result, 1)
     }
 }
