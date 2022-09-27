@@ -10,6 +10,7 @@ extension String {
                 temporaryString.append($0)
             } else {
                 splitResult.append(temporaryString)
+                splitResult.append(String($0))
                 temporaryString.removeAll()
             }
         }
@@ -18,6 +19,6 @@ extension String {
             splitResult.append(temporaryString)
         }
         
-        return splitResult.filter({!$0.isEmpty})
+        return splitResult
     }
 }
