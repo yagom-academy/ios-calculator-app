@@ -124,6 +124,10 @@ class ViewController: UIViewController {
         updateOperandAndOperatorStackView()
     }
     
+    @IBAction func CEButtonPressed(_ sender: Any) {
+        operandLabel.text = "0"
+    }
+    
     func updateOperandLabel(with number: String) {
         if operandLabel.text == "0" {
             operandLabel.text = number
