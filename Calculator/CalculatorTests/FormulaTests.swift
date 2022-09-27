@@ -11,7 +11,8 @@ class FormulaTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<String>())
+        sut = Formula(operands: CalculatorItemQueue<Double>(),
+                      operators: CalculatorItemQueue<String>())
     }
 
     override func tearDownWithError() throws {
@@ -97,6 +98,21 @@ class FormulaTests: XCTestCase {
     
     func test_0으로나누기를시도할때_오류가발생하는지() {
         // given
+        sut.operands.enqueue(1)
+        sut.operators.enqueue("/")
+        sut.operands.enqueue(0)
+        
+        // when
+        let result: Double? = try? sut.result()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_정상적인연산후에_0으로나누기를시도할때_오류가발생하는지() {
+        // given
+        sut.operands.enqueue(3)
+        sut.operators.enqueue("-")
         sut.operands.enqueue(1)
         sut.operators.enqueue("/")
         sut.operands.enqueue(0)
