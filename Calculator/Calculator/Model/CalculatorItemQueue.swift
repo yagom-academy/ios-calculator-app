@@ -18,7 +18,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     var statusQueue: [T] {
-        if !output.isEmpty {
+        guard output.isEmpty else {
             var reversedOutput: [T] = output.reversed()
             
             input.forEach { item in
