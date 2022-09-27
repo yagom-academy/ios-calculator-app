@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        removeAlloperandAndOperatorStackViewSubviews()
     }
     
     @IBAction func numberZeroButtonPressed(_ sender: UIButton) {
@@ -128,6 +128,12 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
     }
     
+    @IBAction func ACButtonPressed(_ sender: Any) {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+        expression = ""
+    }
+    
     func updateOperandLabel(with number: String) {
         if operandLabel.text == "0" {
             operandLabel.text = number
@@ -171,6 +177,12 @@ class ViewController: UIViewController {
         operandAndOperatorScrollView.setContentOffset(CGPoint(x: 0,
                                             y: operandAndOperatorScrollView.contentSize.height - operandAndOperatorScrollView.bounds.height),
                                     animated: true)
+    }
+    
+    func removeAlloperandAndOperatorStackViewSubviews() {
+        operandAndOperatorStackView.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
     }
 }
 
