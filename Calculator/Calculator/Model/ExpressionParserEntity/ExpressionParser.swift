@@ -19,9 +19,8 @@ enum ExpressionParser {
             operators.enqueue(`operator`)
             beforeDoubleValue = ""
         }
-        
-        for element in input {
-            switch element {
+        try input.forEach { char in
+            switch char {
             case "+" :
                 try enqueueOperand(and: .add)
             case "-" :
@@ -31,7 +30,7 @@ enum ExpressionParser {
             case "/" :
                 try enqueueOperand(and: .divide)
             default:
-                beforeDoubleValue += String(element)
+                beforeDoubleValue += String(char)
             }
         }
         
