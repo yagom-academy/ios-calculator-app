@@ -25,6 +25,7 @@
 		EB81D12C28DD6CF400C2D3C1 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12B28DD6CF400C2D3C1 /* FormulaTests.swift */; };
 		EB81D12E28DD7D0A00C2D3C1 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */; };
 		EB81D13028DD802600C2D3C1 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB81D12F28DD802600C2D3C1 /* ExpressionParserTests.swift */; };
+		EBA926E628E299F200E661B8 /* CalculateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA926E528E299F200E661B8 /* CalculateError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		EB81D12B28DD6CF400C2D3C1 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		EB81D12F28DD802600C2D3C1 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		EBA926E528E299F200E661B8 /* CalculateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				EB81D12128DD3B8700C2D3C1 /* Operator.swift */,
 				EB81D12928DD6BCB00C2D3C1 /* Formula.swift */,
 				EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */,
+				EBA926E528E299F200E661B8 /* CalculateError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			files = (
 				EB81D12E28DD7D0A00C2D3C1 /* ExpressionParser.swift in Sources */,
 				EB81D12628DD555A00C2D3C1 /* Double+CalculateItem.swift in Sources */,
+				EBA926E628E299F200E661B8 /* CalculateError.swift in Sources */,
 				EB14FE5228D966AA00D64FB3 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
