@@ -23,6 +23,6 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.components(separatedBy: ["+", "-", "*", "/"])
+        return input.split(with: " ")
     }
 }
