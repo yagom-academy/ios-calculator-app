@@ -20,5 +20,23 @@ class CalculatorViewController: UIViewController {
         }
         userInputs.append(input)
     }
+    
+    
+    @IBAction func didTappedOperator(_ sender: UIButton) {
+        let prevText: Character? = userInputs.popLast()
+        let input = sender.titleLabel?.text
+        
+        guard let input, let prevText = prevText else {
+            return
+        }
+        
+        if Operator(rawValue: prevText) != nil {
+            userInputs.append(input)
+        } else {
+            userInputs.append(prevText)
+            userInputs.append(input)
+        }
+        
+    }
 }
 
