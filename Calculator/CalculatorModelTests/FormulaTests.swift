@@ -13,7 +13,7 @@ class FormulaTests: XCTestCase {
         operands = CalculatorItemQueueByLinkedList()
         operators = CalculatorItemQueueByLinkedList()
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
     }

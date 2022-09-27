@@ -2,10 +2,9 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var operands: CalculatorItemQueueByLinkedList<Double> = CalculatorItemQueueByLinkedList<Double>()
-        var operators: CalculatorItemQueueByLinkedList<Operator> = CalculatorItemQueueByLinkedList<Operator>()
+        var operands = CalculatorItemQueueByLinkedList<Double>()
+        var operators = CalculatorItemQueueByLinkedList<Operator>()
         let operandsArray: [Double] = componentsByOperator(from: input).compactMap { Double($0) }
-        
         let operatorsArray: [Operator] = input.compactMap { Operator(rawValue: $0) }
         
         for singleOperand in operandsArray {
