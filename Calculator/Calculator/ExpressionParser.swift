@@ -8,6 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
+    // 연산자배열 추가하기
     static func parse(from input: String) -> Formula {
         let numberArray = componentsByOperators(from: input).compactMap { Double($0) }
         let operands = CalculatorItemQueue<Double>()
@@ -20,6 +21,7 @@ enum ExpressionParser {
         return formula
     }
     
+    //이곳 체크하기
     static private func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.reduce("") { $0 + String($1.rawValue) }
         let separators = CharacterSet(charactersIn: operators)

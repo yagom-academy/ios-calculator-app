@@ -16,20 +16,10 @@ struct Formula {
             return 0
         }
         
-        while operators?.front != nil,
-              let someOperator: Operator = operators?.dequeue(),
+        while let someOperator: Operator = operators?.dequeue(),
               let someOperand: Double = operands?.dequeue() {
             
-            switch someOperator {
-            case .add:
-                result = Operator.add.calculate(lhs: result, rhs: someOperand)
-            case .subtract:
-                result = Operator.subtract.calculate(lhs: result, rhs: someOperand)
-            case .multiply:
-                result = Operator.multiply.calculate(lhs: result, rhs: someOperand)
-            case .divide:
-                result = Operator.divide.calculate(lhs: result, rhs: someOperand)
-            }
+            result = someOperator.calculate(lhs: result, rhs: someOperand)
         }
         
         return result
