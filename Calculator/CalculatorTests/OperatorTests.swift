@@ -49,16 +49,17 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_divide일때_calculate에_2와0을전달하면_nil과오류를반환하는지() {
+    func test_divide일때_calculate에_2와0을전달하면_dividedByZero오류를반환하는지() {
         // given
         sut = .divide
         
         // when
-        let result: Double? = try? sut.calculate(lhs: 2, rhs: 0)
-        
-        // then
-        XCTAssertNil(result)
-        XCTAssertThrowsError(try sut.calculate(lhs: 2, rhs: 0))
+        do {
+            try sut.calculate(lhs: 2, rhs: 0)
+        } catch {
+            // then
+            XCTAssertEqual(CalculateError.dividedByZero, error as! CalculateError)
+        }
     }
     
     func test_multiply일때_calculate에_2와3을전달하면_6을반환하는지() {
