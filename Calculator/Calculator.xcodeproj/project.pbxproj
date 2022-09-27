@@ -28,6 +28,7 @@
 		F6C4E90D28DC6E2900AA9ECF /* String+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C4E90C28DC6E2900AA9ECF /* String+CalculateItem.swift */; };
 		F6F6D95928E2A21300E5A241 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F6D95828E2A21300E5A241 /* ExpressionParserTests.swift */; };
 		F6F6D96628E2B28800E5A241 /* StringSplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F6D96528E2B28800E5A241 /* StringSplitTests.swift */; };
+		F6F6D96D28E30FD600E5A241 /* ExpressionParserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F6D96C28E30FD600E5A241 /* ExpressionParserError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		F6F6D95828E2A21300E5A241 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		F6F6D96328E2B28800E5A241 /* StringSplitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringSplitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F6D96528E2B28800E5A241 /* StringSplitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSplitTests.swift; sourceTree = "<group>"; };
+		F6F6D96C28E30FD600E5A241 /* ExpressionParserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				F62D859A28DEFDC000082027 /* Formula.swift */,
 				F66CDF7D28E204DC00073D5B /* FormulaError.swift */,
 				F62D859C28DEFFA900082027 /* ExpressionParser.swift */,
+				F6F6D96C28E30FD600E5A241 /* ExpressionParserError.swift */,
 				F68307CD28DE0ED200E171DA /* Operator.swift */,
 				F689092128D97BBB00235227 /* CalculatorItem.swift */,
 				F62D859E28DF00DF00082027 /* String+Extension.swift */,
@@ -492,6 +495,7 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				F66CDF7E28E204DC00073D5B /* FormulaError.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				F6F6D96D28E30FD600E5A241 /* ExpressionParserError.swift in Sources */,
 				F62D859F28DF00DF00082027 /* String+Extension.swift in Sources */,
 				F6C4E90B28DC6DDE00AA9ECF /* Int+CalculateItem.swift in Sources */,
 				F6C4E90D28DC6E2900AA9ECF /* String+CalculateItem.swift in Sources */,

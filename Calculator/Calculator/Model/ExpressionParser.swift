@@ -9,47 +9,36 @@ enum ExpressionParser {
     static func parse(from input: String) throws -> Formula {
         var operands = CalculatorItemQueue()
         var operators = CalculatorItemQueue()
-        var temp = ""
- 
+        var beforeDoubleValue = ""
+        
+        func enqueueOperand(and `operator`: Operator) throws {
+            guard let changingDouble = Double(beforeDoubleValue) else {
+                throw ExpressionParserError.doNotChangeDouble
+            }
+            operands.enqueue(changingDouble)
+            operators.enqueue(`operator`)
+            beforeDoubleValue = ""
+        }
+        
         for element in input {
             switch element {
             case "+" :
-                guard let doubleTemp = Double(temp) else {
-                    throw FormulaError.notValidCountQueue
-                }
-                operands.enqueue(doubleTemp)
-                operators.enqueue(Operator.add)
-                temp = ""
+                try enqueueOperand(and: .add)
             case "-" :
-                guard let doubleTemp = Double(temp) else {
-                    throw FormulaError.notValidCountQueue
-                }
-                operands.enqueue(doubleTemp)
-                operators.enqueue(Operator.subtract)
-                temp = ""
+                try enqueueOperand(and: .subtract)
             case "*" :
-                guard let doubleTemp = Double(temp) else {
-                    throw FormulaError.notValidCountQueue
-                }
-                operands.enqueue(doubleTemp)
-                operators.enqueue(Operator.multiply)
-                temp = ""
+                try enqueueOperand(and: .multiply)
             case "/" :
-                guard let doubleTemp = Double(temp) else {
-                    throw FormulaError.notValidCountQueue
-                }
-                operands.enqueue(doubleTemp)
-                operators.enqueue(Operator.divide)
-                temp = ""
+                try enqueueOperand(and: .divide)
             default:
-                temp += String(element)
+                beforeDoubleValue += String(element)
             }
         }
         
-        guard let doubleTemp = Double(temp) else {
-            throw FormulaError.notValidCountQueue
+        guard let changingDouble = Double(beforeDoubleValue) else {
+            throw ExpressionParserError.doNotChangeDouble
         }
-        operands.enqueue(doubleTemp)
+        operands.enqueue(changingDouble)
         
         return Formula(operands: operands, operators: operators)
     }
