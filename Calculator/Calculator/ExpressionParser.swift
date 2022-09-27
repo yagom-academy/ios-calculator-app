@@ -6,6 +6,12 @@ enum ExpressionParser {
     }
     
     private func componentsByOperator(from input: String) -> [String] {
-        return [""]
+        var inputString: String = input
+        
+        for caseOperator in Operator.allCases {
+            inputString = inputString.replacingOccurrences(of: "\(caseOperator.rawValue)", with: " ")
+        }
+
+        return inputString.split(with: " ")
     }
 }

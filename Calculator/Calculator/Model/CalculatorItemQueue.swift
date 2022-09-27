@@ -1,6 +1,6 @@
 //  Created by Aejong on 2022/09/21.
 
-struct CalculatorItemQueueByLinkedList<T> {
+struct CalculatorItemQueueByLinkedList<T: CalculateItem> {
     var linkedList = LinkedList<T>()
     
     var isEmpty: Bool {
