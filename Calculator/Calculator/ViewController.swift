@@ -118,6 +118,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonPressed(_ sender: UIButton) {
+        if expression == "" {
+            return 
+        }
         updateOperandAndOperatorStackView()
         updateExpression()
         let result = fetchCalculatedResult()
