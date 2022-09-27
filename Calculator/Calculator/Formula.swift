@@ -20,7 +20,7 @@ struct Formula {
         }
         while let rightNumber = operands.dequeue() {
             guard let operatorSign = operators.dequeue() else {
-                throw FormulaError.invalidInput
+                throw FormulaError.unexpectedError
             }
             do {
                 leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)

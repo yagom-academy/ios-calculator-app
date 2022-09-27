@@ -7,9 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    var formula: Formula?
-    
     @IBOutlet weak private var enteredOperatorLabel: UILabel!
     @IBOutlet weak private var enteredNumberLabel: CalculatorNumberLabel!
     @IBOutlet private var operatorButtons: [UIButton]!
@@ -18,7 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet weak private var dotButton: UIButton!
     @IBOutlet weak var verticalFormulasStackView: UIStackView!
     @IBOutlet weak var formulaScrollView: UIScrollView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +54,11 @@ class ViewController: UIViewController {
     private func enterNumber(sender: UIButton, current text: String, entered operand: String) {
         if enteredNumberLabel.isZero {
             switch sender {
-            case zeroButton, doubleZeroButton:
+            case zeroButton:
+                if enteredNumberLabel.isInputtedZero == false {
+                    enteredNumberLabel.isInputtedZero = true
+                }
+            case doubleZeroButton:
                 return
             case dotButton:
                 enteredNumberLabel.text = text + operand
@@ -76,7 +76,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard !enteredNumberLabel.isZero else {
+        guard !enteredNumberLabel.isZero ||
+                enteredNumberLabel.isInputtedZero else {
             enteredOperatorLabel.text = sender.currentTitle
             return
         }
@@ -97,11 +98,6 @@ class ViewController: UIViewController {
         scrollToBottom()
     }
     
-    private func scrollToBottom() {
-        let bottomPoint: CGPoint = .init(x: 0, y: formulaScrollView.contentSize.height)
-        formulaScrollView.setContentOffset(bottomPoint, animated: false)
-    }
-    
     private func makeOperatorLabel() -> UILabel? {
         let operatorLabel: UILabel = .init()
         operatorLabel.text = enteredOperatorLabel.text
@@ -118,8 +114,60 @@ class ViewController: UIViewController {
         return operandLabel
     }
     
+    private func scrollToBottom() {
+        let bottomPoint: CGPoint = .init(x: .zero, y: formulaScrollView.contentSize.height)
+        formulaScrollView.setContentOffset(bottomPoint, animated: false)
+    }
+    
     @IBAction private func touchUpEqualButton(sender: UIButton) {
-        
+        guard !enteredNumberLabel.isResultOfFormula else {
+            return
+        }
+        if enteredNumberLabel.isZero {
+            enteredOperatorLabel.text = nil
+        } else {
+            makeFormulaStackView()
+        }
+        var formula: Formula = ExpressionParser.parse(from: makeExpression())
+        var result: String = .init()
+        do {
+            result = try String(formula.result())
+        } catch FormulaError.divideByZero {
+            result = CalculatorText.nan
+        } catch {
+            showErrorAlert(message: error.localizedDescription + CalculatorText.resetSuggestion)
+        }
+        enteredNumberLabel.text = result
+        enteredNumberLabel.isResultOfFormula = true
+    }
+    
+    private func makeExpression() -> String {
+        let subviews: [UIView] = verticalFormulasStackView.arrangedSubviews
+        var expression: [String?] = []
+        subviews.forEach {
+            let labels = $0.subviews as? [UILabel]
+            labels?.forEach {
+                expression.append($0.text)
+            }
+        }
+        return expression.compactMap { $0 }.joined()
+    }
+    
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: nil,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let resetAction = UIAlertAction(title: CalculatorText.reset,
+                                        style: .default) { (action) in
+            self.setToInitialState()
+        }
+        let cancelAction = UIAlertAction(title: CalculatorText.cancel,
+                                         style: .default)
+        alert.addAction(resetAction)
+        alert.addAction(cancelAction)
+        present(alert,
+                animated: true,
+                completion: nil)
     }
 }
 
