@@ -349,13 +349,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculateScrollView" destination="BOT-7g-vxv" id="ar9-ba-k3P"/>
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="v74-p7-UFe"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="7Nv-qI-7G9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.57971014492756" y="138.61607142857142"/>
+            <point key="canvasLocation" x="-439" y="135"/>
         </scene>
     </scenes>
     <resources>

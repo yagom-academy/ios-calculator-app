@@ -8,6 +8,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentNumberLabel: UILabel!
+    @IBOutlet weak var calculateScrollView: UIScrollView!
     
     var prevNumber: String = ""
     var operatorValue: String = ""
@@ -15,9 +16,11 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        calculateScrollView.delegate = self
+        
         changeNumberLabel(value: "0")
     }
-    
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
         let input = sender.titleLabel?.text
@@ -27,7 +30,6 @@ class CalculatorViewController: UIViewController {
         setUserInputNumber(value: input)
         
     }
-    
     
     @IBAction func didTappedOperator(_ sender: UIButton) {
         let input = sender.titleLabel?.text
@@ -39,8 +41,10 @@ class CalculatorViewController: UIViewController {
         operatorValue = input
         changeOperatorLabel(value: input)
         
+        let label = UILabel()
+        label.text = input
+        calculateScrollView.addSubview(label)
     }
-    
     
     private func setUserInputNumber(value: String) {
         if operatorValue.isEmpty {
@@ -61,3 +65,6 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+extension CalculatorViewController: UIScrollViewDelegate {
+    
+}
