@@ -6,10 +6,16 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    var userInputs: String = ""
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentNumberLabel: UILabel!
+    
+    var prevNumber: String = ""
+    var operatorValue: String = ""
+    var nextNumber: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeNumberLabel(value: "0")
     }
     
     
@@ -18,25 +24,40 @@ class CalculatorViewController: UIViewController {
         guard let input else {
             return
         }
-        userInputs.append(input)
+        setUserInputNumber(value: input)
+        
     }
     
     
     @IBAction func didTappedOperator(_ sender: UIButton) {
-        let prevText: Character? = userInputs.popLast()
         let input = sender.titleLabel?.text
         
-        guard let input, let prevText = prevText else {
+        guard let input else {
             return
         }
         
-        if Operator(rawValue: prevText) != nil {
-            userInputs.append(input)
-        } else {
-            userInputs.append(prevText)
-            userInputs.append(input)
-        }
+        operatorValue = input
+        changeOperatorLabel(value: input)
         
+    }
+    
+    
+    private func setUserInputNumber(value: String) {
+        if operatorValue.isEmpty {
+            prevNumber.append(value)
+            changeNumberLabel(value: prevNumber)
+        } else {
+            nextNumber.append(value)
+            changeNumberLabel(value: nextNumber)
+        }
+    }
+    
+    private func changeNumberLabel(value: String) {
+        currentNumberLabel.text = value
+    }
+    
+    private func changeOperatorLabel(value: String) {
+        currentOperatorLabel.text = value
     }
 }
 
