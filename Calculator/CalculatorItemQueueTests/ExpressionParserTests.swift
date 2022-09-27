@@ -14,7 +14,7 @@ final class ExpressionParserTests: XCTestCase {
         let result = form.result()
         
         // then
-        XCTAssertEqual(result, 24.166666666666667)
+        XCTAssertEqual(try result.get(), 24.166666666666667)
     }
     
     func test_다른연산자와마이너스연산자가붙어서나올때결과가예측치와동일한가() {
@@ -26,7 +26,7 @@ final class ExpressionParserTests: XCTestCase {
         let result = form.result()
         
         // then
-        XCTAssertEqual(result, 139)
+        XCTAssertEqual(try result.get(), -870)
     }
     
     func test_첫번째피연산자에마이너스가붙은경우결과가예측치와동일한가() {
@@ -37,7 +37,7 @@ final class ExpressionParserTests: XCTestCase {
         let result = form.result()
         
         // then
-        XCTAssertEqual(result, -84)
+        XCTAssertEqual(try result.get(), -84)
     }
 }
 
