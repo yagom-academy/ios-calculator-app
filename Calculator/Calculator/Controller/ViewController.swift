@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var enterdFormulaStackView: UIStackView!
     
-    private var formula: Formula?
     private var inputNumber: String?
     private var inputOperator: String?
     private var isCalculated: Bool?
@@ -33,8 +32,8 @@ class ViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
 //        label.text = inputNumberLabel.text
         label.text = "123"
+        label.textColor = .white
         label.textAlignment = .right
-        
         return label
     }
     
@@ -42,6 +41,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.text = "+"
+        label.textColor = .white
 //        label.text = inputOperatorLabel.text
         label.textAlignment = .right
         return label
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupFomula()
     }
     
     func setup() {
@@ -59,11 +58,7 @@ class ViewController: UIViewController {
         resetStackViewAll()
         isCalculated = false
     }
-    
-    func setupFomula() {
-        formula = Formula()
-    }
-    
+
     func resetStackViewAll() {
         enterdFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
@@ -79,15 +74,15 @@ class ViewController: UIViewController {
     }
     
     func addScrollSubView(){
-        print("asd")
-        formulaStackView.addSubview(operandLabel)
-        formulaStackView.addSubview(operatorLabel)
-        print(formulaStackView.subviews)
-        print(operandLabel)
-        print(operatorLabel)
+        let a = formulaStackView
+        let b = operandLabel
+        let c = operatorLabel
         
+        a.addArrangedSubview(c)
+        a.addArrangedSubview(b)
+        enterdFormulaStackView.addArrangedSubview(a)
+                                
         
-        formulaScrollView.addSubview(formulaStackView)
     }
     
     @IBAction func signChangeButtonTapped(_ sender: UIButton) {
@@ -105,7 +100,6 @@ class ViewController: UIViewController {
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         resetStackViewAll()
         setup()
-        setupFomula()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
