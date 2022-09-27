@@ -24,10 +24,17 @@ enum ExpressionParser {
             operandsQueue.enqueue(item: operand)
         }
 
-        let operators = Operator.allCases.map { $0.rawValue }
-        var operatorQueue: [Character] = []
+        var inputCopy = input
+        if input.first == "-" {
+            inputCopy.removeFirst()
+        }
         
-        operatorQueue.forEach {
+        let operators = Operator.allCases.map { $0.rawValue }
+        for operatorSign in operators {
+            inputCopy = inputCopy.replacingOccurrences(of: "\(operatorSign)-", with: "\(operatorSign)")
+        }
+        
+        inputCopy.forEach {
             guard let operatorSign = Operator(rawValue: $0) else { return }
             operatorsQueue.enqueue(item: operatorSign)
         }
