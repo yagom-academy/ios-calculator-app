@@ -8,7 +8,7 @@ import XCTest
 final class ExpressionParserTests: XCTestCase {
     func test_연산자와피연산자의문자가모드정상적인경우결과가예측치와동일한지() {
         // driven
-        let input: String = "10 + 9 * 8 - 7 / 6"
+        let input: String = "10+9*8-7/6"
         // when
         let form: Formula = ExpressionParser.parse(from: input)
         let result = form.result()
@@ -17,39 +17,27 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, 24.166666666666667)
     }
     
-    func test_연산자가될수없는연산자가포함되어있는경우결과가예측치와동일한지() {
+    func test_다른연산자와마이너스연산자가붙어서나올때결과가예측치와동일한가() {
         // driven
-        let input: String = "10 + 9 * 8 - 7 ^ 6"
+        let input: String = "10+9*8-7*-6"
         
         // when
         let form: Formula = ExpressionParser.parse(from: input)
         let result = form.result()
         
         // then
-        XCTAssertEqual(result, 76)
+        XCTAssertEqual(result, 139)
     }
     
-    func test_피연산자가될수없는문자열이포함되어있는경우결과가예측치와동일한지() {
+    func test_첫번째피연산자에마이너스가붙은경우결과가예측치와동일한가() {
         // driven
-        let input: String = "10d + 9 * 8 - 76"
+        let input: String = "-10+9*8-76"
         // when
         let form: Formula = ExpressionParser.parse(from: input)
         let result = form.result()
         
         // then
-        XCTAssertEqual(result, 76)
-    }
-    
-    func test_연산자에음수가포함될경우결과가예측치와동일한지() {
-        // driven
-        let input: String = "10 + -7 + 10"
-        
-        // when
-        let form: Formula = ExpressionParser.parse(from: input)
-        let result = form.result()
-        
-        // then
-        XCTAssertEqual(result, 13)
+        XCTAssertEqual(result, -84)
     }
 }
 
