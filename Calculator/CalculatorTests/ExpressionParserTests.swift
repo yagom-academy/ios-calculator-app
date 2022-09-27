@@ -32,20 +32,14 @@ final class ExpressionParserTests: XCTestCase {
         var operands: [Double?] = []
         var operators: [Operator?] = []
         
-        while !result.operands.isEmpty() {
-            operands.append(result.operands.dequeue())
-        }
-        
-        while !result.operators.isEmpty() {
-            operators.append(result.operators.dequeue())
-        }
+        dequeueAllAndPushIn(&operands, &operators, at: &result)
         
         // then
         XCTAssertEqual(operands, resultOperands)
         XCTAssertEqual(operators, resultOperators)
     }
     
-    func test_When_given_minus_Number_Then_return_right_Formual() {
+    func test_When_given_minus_Number_Then_return_right_Formula() {
         // given
         let testString1 = "-1+-3"
         let resultOperands1: [Double] = [-1, -3]
@@ -60,25 +54,13 @@ final class ExpressionParserTests: XCTestCase {
         var operands1: [Double?] = []
         var operators1: [Operator?] = []
         
-        while !result1.operands.isEmpty() {
-            operands1.append(result1.operands.dequeue())
-        }
-        
-        while !result1.operators.isEmpty() {
-            operators1.append(result1.operators.dequeue())
-        }
+        dequeueAllAndPushIn(&operands1, &operators1, at: &result1)
         
         var result2 = ExpressionParser.parse(from: testString2)
         var operands2: [Double?] = []
         var operators2: [Operator?] = []
         
-        while !result2.operands.isEmpty() {
-            operands2.append(result2.operands.dequeue())
-        }
-        
-        while !result2.operators.isEmpty() {
-            operators2.append(result2.operators.dequeue())
-        }
+        dequeueAllAndPushIn(&operands2, &operators2, at: &result2)
         
         // then
         XCTAssertEqual(operands1, resultOperands1)
@@ -87,5 +69,14 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operands2, resultOperands2)
         XCTAssertEqual(operators2, resultOperators2)
     }
-
+    
+    func dequeueAllAndPushIn(_ operands: inout [Double?], _ operators: inout [Operator?], at queue: inout Formula) {
+        while queue.operands.isEmpty() == false {
+            operands.append(queue.operands.dequeue())
+        }
+        
+        while queue.operators.isEmpty() == false {
+            operators.append(queue.operators.dequeue())
+        }
+    }
 }
