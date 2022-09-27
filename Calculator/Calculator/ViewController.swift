@@ -129,9 +129,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func ACButtonPressed(_ sender: Any) {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-        expression = ""
+        resetOperandLabel()
+        resetOperatorLabel()
+        resetExpression()
         removeAlloperandAndOperatorStackViewSubviews()
     }
     
@@ -159,7 +159,7 @@ class ViewController: UIViewController {
               let `operator` = operatorLabel.text else { return }
         expression += `operator`
         expression += operand
-        operandLabel.text = "0"
+        resetOperandLabel()
         operatorLabel.text = nextOperator
     }
     
@@ -178,8 +178,8 @@ class ViewController: UIViewController {
     
     func updateResult(result: Double) {
         operandLabel.text = result.description
-        operatorLabel.text = ""
-        expression = ""
+        resetOperatorLabel()
+        resetExpression()
     }
     
     func updateScrollViewToBottom() {
@@ -193,6 +193,18 @@ class ViewController: UIViewController {
         operandAndOperatorStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
+    }
+    
+    func resetOperandLabel() {
+        operandLabel.text = "0"
+    }
+    
+    func resetOperatorLabel() {
+        operatorLabel.text = ""
+    }
+    
+    func resetExpression() {
+        expression = ""
     }
 }
 
