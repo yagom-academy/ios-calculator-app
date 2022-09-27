@@ -23,20 +23,6 @@ class ExpressionParserTests: XCTestCase {
         result2 = nil
     }
     
-    func test_componentsByOperators_문자열을_연산자기호기준으로_쪼개기확인() {
-        //given 연산자기호가 섞인 문자열을
-        let a = "1+23-456/7890*12345"
-        
-        //when 연산자기호기준으로 쪼개줄 시
-        result1 = ExpressionParser.componentsByOperators(from: a)
-    
-        //then 쪼개서 Array로 리턴해준다.
-        XCTAssertEqual(["1","23","456","7890","12345"], result1)
-        
-        //의도한 fail test
-        XCTAssertNotEqual(["000","0000"], result1)
-    }
-    
     func test_parse_문자열을_연산자기호와숫자로나누어_Formula로반환확인() throws {
         //given 연산자기호가 섞인 문자열을
         let a = "1+23*456"

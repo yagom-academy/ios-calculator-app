@@ -19,7 +19,7 @@ enum ExpressionParser {
         return formula
     }
 
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         let operators = CharacterSet(charactersIn: Operator.allCases.map { String($0.rawValue) }.joined())
         return input.components(separatedBy: operators)
     }
