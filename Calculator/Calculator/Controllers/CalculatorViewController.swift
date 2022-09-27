@@ -21,6 +21,20 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = nil
         operandLabel.text = "0"
     }
+    
+    private func setOperandLabel(_ key: NumericKeypad) {
+        guard var operand = operandLabel.text else { return }
+        
+        if operand == "0",
+           (key.rawValue == "0" || key.rawValue == "00") { return }
+        
+        if (operand.last == "." || operand.contains(".")),
+           key.rawValue == "." { return }
+        
+        operand += key.rawValue
+        operandLabel.text = operand
+    }
+    
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle,
               let key = NumericKeypad(rawValue: buttonTitle) else { return }
