@@ -26,7 +26,7 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue("-")
         
         // when
-        let result = sut.result()
+        let result: Double? = try? sut.result()
         
         // then
         XCTAssertEqual(result, 7)
@@ -39,7 +39,7 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(5)
         
         // when
-        let result = sut.result()
+        let result: Double? = try? sut.result()
         
         // then
         XCTAssertEqual(result, -2)
@@ -52,9 +52,8 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         sut.operands.enqueue(2)
         
-        
         // when
-        let result = sut.result()
+        let result: Double? = try? sut.result()
         
         // then
         XCTAssertEqual(result, 7)
@@ -69,7 +68,7 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         // when
-        let result = sut.result()
+        let result: Double? = try? sut.result()
         
         // then
         XCTAssertEqual(result, 14)
@@ -90,9 +89,22 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(6)
         
         // when
-        let result = sut.result()
+        let result: Double? = try? sut.result()
         
         // then
         XCTAssertEqual(result, -0.5)
+    }
+    
+    func test_0으로나누기를시도할때_오류가발생하는지() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operators.enqueue("/")
+        sut.operands.enqueue(0)
+        
+        // when
+        let result: Double? = try? sut.result()
+        
+        // then
+        XCTAssertNil(result)
     }
 }

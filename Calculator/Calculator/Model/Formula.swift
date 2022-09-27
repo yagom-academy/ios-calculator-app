@@ -7,19 +7,17 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<String>
     
-    func result() -> Double {
+    func result() throws -> Double {
         var result: Double = operands.list.head?.value ?? 0
         var currentOperand = operands.list.head
         var currentOperator = operators.list.head
-        var count: Int = 0
+        var calculationCount: Int = 0
         
-        while count != operators.count {
+        while calculationCount != operators.count {
             guard let nextOperand = currentOperand?.next,
                   let calculatedOperator = currentOperator else {
                 return result
             }
-            
-            count += 1
             
             switch Character(calculatedOperator.value) {
             case Operator.add.rawValue:
@@ -27,6 +25,9 @@ struct Formula {
             case Operator.subtract.rawValue:
                 result = Operator.subtract.calculate(lhs: result, rhs: nextOperand.value)
             case Operator.divide.rawValue:
+                guard nextOperand.value != 0 else {
+                    throw CalculationError.dividedZero
+                }
                 result = Operator.divide.calculate(lhs: result, rhs: nextOperand.value)
             case Operator.multiply.rawValue:
                 result = Operator.multiply.calculate(lhs: result, rhs: nextOperand.value)
@@ -34,6 +35,7 @@ struct Formula {
                 print("잘못된 연산자")
             }
             
+            calculationCount += 1
             currentOperand = currentOperand?.next
             currentOperator = currentOperator?.next
         }
