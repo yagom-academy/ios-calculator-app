@@ -5,11 +5,19 @@ struct Formula {
     var operators: CalculatorItemQueueByLinkedList<Operator>
     
     mutating func result() -> Double {
-        guard let lhs = operands.dequeue(),
-              let rhs = operands.dequeue(),
-              let unitOperator = operators.dequeue() else { return 0 }
+        var result: Double
         
+        guard let initialValue: Double = operands.dequeue() else { return 0 }
+        var calculatingValue: Double = initialValue
         
-        return unitOperator.calculatee(lhs: lhs, rhs: rhs)
+        while operands.isEmpty != true {
+            guard let rhs = operands.dequeue(),
+                  let unitOperator = operators.dequeue() else { return 0 }
+            
+            calculatingValue = unitOperator.calculate(lhs: calculatingValue, rhs: rhs)
+        }
+        result = calculatingValue
+        
+        return result
     }
 }
