@@ -151,11 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9402570E5EB001C3AFC /* Calculator */,
-				F689092828D9809E00235227 /* CalculatorTests */,
-				F62D85A528DF07D200082027 /* OperatorTests */,
-				F65F3AE828E0AD4100188FCE /* FormulaTests */,
-				F6F6D95728E2A21300E5A241 /* ExpressionParserTests */,
-				F6F6D96428E2B28800E5A241 /* StringSplitTests */,
+				F6F6D96E28E3183400E5A241 /* UnitTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -188,14 +184,11 @@
 			isa = PBXGroup;
 			children = (
 				F689091F28D97B7500235227 /* CalculatorItemQueue.swift */,
-				F62D859A28DEFDC000082027 /* Formula.swift */,
-				F66CDF7D28E204DC00073D5B /* FormulaError.swift */,
-				F62D859C28DEFFA900082027 /* ExpressionParser.swift */,
-				F6F6D96C28E30FD600E5A241 /* ExpressionParserError.swift */,
+				F6F6D96F28E3185800E5A241 /* FormulaEntity */,
+				F6F6D97028E3186900E5A241 /* ExpressionParserEntity */,
 				F68307CD28DE0ED200E171DA /* Operator.swift */,
-				F689092128D97BBB00235227 /* CalculatorItem.swift */,
 				F62D859E28DF00DF00082027 /* String+Extension.swift */,
-				F6C4E90E28DC6E3400AA9ECF /* CalculatorItemExtention */,
+				F6F6D97128E3194200E5A241 /* CalculatorItemEntity */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +261,45 @@
 				F6F6D96528E2B28800E5A241 /* StringSplitTests.swift */,
 			);
 			path = StringSplitTests;
+			sourceTree = "<group>";
+		};
+		F6F6D96E28E3183400E5A241 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				F689092828D9809E00235227 /* CalculatorTests */,
+				F62D85A528DF07D200082027 /* OperatorTests */,
+				F65F3AE828E0AD4100188FCE /* FormulaTests */,
+				F6F6D95728E2A21300E5A241 /* ExpressionParserTests */,
+				F6F6D96428E2B28800E5A241 /* StringSplitTests */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		F6F6D96F28E3185800E5A241 /* FormulaEntity */ = {
+			isa = PBXGroup;
+			children = (
+				F62D859A28DEFDC000082027 /* Formula.swift */,
+				F66CDF7D28E204DC00073D5B /* FormulaError.swift */,
+			);
+			path = FormulaEntity;
+			sourceTree = "<group>";
+		};
+		F6F6D97028E3186900E5A241 /* ExpressionParserEntity */ = {
+			isa = PBXGroup;
+			children = (
+				F62D859C28DEFFA900082027 /* ExpressionParser.swift */,
+				F6F6D96C28E30FD600E5A241 /* ExpressionParserError.swift */,
+			);
+			path = ExpressionParserEntity;
+			sourceTree = "<group>";
+		};
+		F6F6D97128E3194200E5A241 /* CalculatorItemEntity */ = {
+			isa = PBXGroup;
+			children = (
+				F689092128D97BBB00235227 /* CalculatorItem.swift */,
+				F6C4E90E28DC6E3400AA9ECF /* CalculatorItemExtention */,
+			);
+			path = CalculatorItemEntity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
