@@ -46,6 +46,6 @@ enum ExpressionParser {
             input = input.replacingOccurrences(of: "\(sign)-", with: "\(sign)")
         }
         
-        return input.filter { !$0.isNumber }.map { $0 }
+        return input.filter { !$0.isNumber }
     }
 }
