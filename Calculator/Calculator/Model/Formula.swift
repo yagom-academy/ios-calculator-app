@@ -31,7 +31,7 @@ struct Formula {
             }
             
             do {
-                calculatedValue = try firstOperator.calculate(lhs: calResult, rhs: rhs)
+                calculatedValue = try firstOperator.calculate(lhs: calculatedValue, rhs: rhs)
             } catch {
                 return Result.failure(FormulaError.dividedZero)
             }
