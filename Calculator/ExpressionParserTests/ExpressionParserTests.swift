@@ -24,24 +24,11 @@ final class ExpressionParserTests: XCTestCase {
         // given
         let given = "132+14.5/112.3*13"
         let expression2Result = (132.0+14.5)/10.0*13.0
-        var operands: CalculatorItemQueue!
-        var operators: CalculatorItemQueue!
-        
-        operands.enqueue(132.0)
-        operands.enqueue(14.5)
-        operands.enqueue(10.0)
-        operands.enqueue(13.0)
-        
-        operators.enqueue(Operator.add)
-        operators.enqueue(Operator.divide)
-        operators.enqueue(Operator.multiply)
         
         // when
         var result = ExpressionParser.parse(from: given)
         
         // then
-        XCTAssertEqual(result.operators.count, operands.count)
-        XCTAssertEqual(result.operators.count, operators.count)
         XCTAssertEqual(try result.result(), expression2Result)
     }
 }
