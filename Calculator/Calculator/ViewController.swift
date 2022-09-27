@@ -120,7 +120,7 @@ class ViewController: UIViewController {
     @IBAction func resultButtonPressed(_ sender: UIButton) {
         updateOperandAndOperatorStackView()
         updateExpression()
-        let result = ExpressionParser.parse(from: expression).result()
+        let result = fetchCalculatedResult()
         updateResult(result: result)
     }
     
@@ -137,6 +137,18 @@ class ViewController: UIViewController {
     
     @IBAction func signChangeButtonPressed(_ sender: Any) {
         changeOperatorSign()
+    }
+    
+    func fetchCalculatedResult() -> String {
+        var result = ""
+        do {
+            result = try ExpressionParser.parse(from: expression).result().description
+        } catch CalculatorError.dividedByZero {
+            result = "NaN"
+        } catch {
+            print("알 수 없는 에러입니다.")
+        }
+        return result
     }
     
     func changeOperatorSign() {
@@ -183,8 +195,8 @@ class ViewController: UIViewController {
         updateScrollViewToBottom()
     }
     
-    func updateResult(result: Double) {
-        operandLabel.text = result.description
+    func updateResult(result: String) {
+        operandLabel.text = result
         resetOperatorLabel()
         resetExpression()
     }
