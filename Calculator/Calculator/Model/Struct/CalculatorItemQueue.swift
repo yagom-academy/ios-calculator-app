@@ -7,17 +7,17 @@
 
 struct CalculatorItemQueue<Item: CalculateItem> {
     private var calculateItemList = [Item]()
-    public var count: Int {
+    var count: Int {
         return calculateItemList.count
     }
     
-    public init() {}
+    init() {}
     
-    public mutating func enqueue(element: Item) {
+    mutating func enqueue(element: Item) {
         return calculateItemList.append(element)
     }
     
-    public mutating func dequeue() -> Item? {
+    mutating func dequeue() -> Item? {
         if calculateItemList.count > 0 {
             return calculateItemList.removeFirst()
         } else {
@@ -25,15 +25,15 @@ struct CalculatorItemQueue<Item: CalculateItem> {
         }
     }
     
-    public mutating func peek() -> Item? {
+    mutating func peek() -> Item? {
         return calculateItemList.first
     }
     
-    public mutating func clear() {
+    mutating func clear() {
         return calculateItemList.removeAll()
     }
     
-    public func isEmpty() -> Bool? {
+    func isEmpty() -> Bool {
         return calculateItemList.isEmpty
     }
 }
