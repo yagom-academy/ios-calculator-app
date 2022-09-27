@@ -6,6 +6,11 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        resetOperatorAndOperandLabel()
+    }
+    
+    private func resetOperatorAndOperandLabel() {
+        operatorLabel.text = nil
+        operandLabel.text = "0"
     }
 }
