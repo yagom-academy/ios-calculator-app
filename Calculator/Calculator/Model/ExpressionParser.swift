@@ -15,29 +15,8 @@ extension String {
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var operandsQueue = CalculatorItemQueue<Double>()
-        var operatorsQueue = CalculatorItemQueue<Operator>()
-        
-        let operands = componentsByOperators(from: input)
-        operands.forEach {
-            guard let operand = Double($0) else { return }
-            operandsQueue.enqueue(item: operand)
-        }
-
-        var inputCopy = input
-        if input.first == "-" {
-            inputCopy.removeFirst()
-        }
-        
-        let operators = Operator.allCases.map { $0.rawValue }
-        for operatorSign in operators {
-            inputCopy = inputCopy.replacingOccurrences(of: "\(operatorSign)-", with: "\(operatorSign)")
-        }
-        
-        inputCopy.forEach {
-            guard let operatorSign = Operator(rawValue: $0) else { return }
-            operatorsQueue.enqueue(item: operatorSign)
-        }
+        let operandsQueue = parseOperands(from: input)
+        let operatorsQueue = parseOperators(from: input)
 
         return Formula(operands: operandsQueue, operators: operatorsQueue)
     }
@@ -63,5 +42,38 @@ enum ExpressionParser {
         }
         
         return numbers
+    }
+    
+    private static func parseOperands(from input: String) -> CalculatorItemQueue<Double> {
+        var operandsQueue = CalculatorItemQueue<Double>()
+        
+        let operands = componentsByOperators(from: input)
+        operands.forEach {
+            guard let operand = Double($0) else { return }
+            operandsQueue.enqueue(item: operand)
+        }
+        
+        return operandsQueue
+    }
+    
+    private static func parseOperators(from input: String) -> CalculatorItemQueue<Operator> {
+        var operatorsQueue = CalculatorItemQueue<Operator>()
+
+        var inputCopy = input
+        if input.first == "-" {
+            inputCopy.removeFirst()
+        }
+        
+        let operators = Operator.allCases.map { $0.rawValue }
+        for operatorSign in operators {
+            inputCopy = inputCopy.replacingOccurrences(of: "\(operatorSign)-", with: "\(operatorSign)")
+        }
+        
+        inputCopy.forEach {
+            guard let operatorSign = Operator(rawValue: $0) else { return }
+            operatorsQueue.enqueue(item: operatorSign)
+        }
+        
+        return operatorsQueue
     }
 }
