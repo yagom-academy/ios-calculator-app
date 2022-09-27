@@ -57,7 +57,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeNumberLabel(value: String) {
-        currentNumberLabel.text = value
+        currentNumberLabel.text = value.calNumber
     }
     
     private func changeOperatorLabel(value: String) {
