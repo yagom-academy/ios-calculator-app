@@ -14,19 +14,22 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetOperatorAndOperandLabel()
+        initOperatorAndOperandLabel()
     }
     
-    private func resetOperandLabel() {
-        operandLabel.text = "0"
+    private func setOperandLabel(to string: String?) {
+        operandLabel.text = string
     }
     
-    private func resetOperatorAndOperandLabel() {
-        operatorLabel.text = nil
-        resetOperandLabel()
+    private func setOperatorLabel(to string: String?) {
+        operatorLabel.text = string
     }
     
-    private func setOperandLabel(_ key: NumericKeypad) {
+    private func initOperatorAndOperandLabel() {
+        setOperatorLabel(to: nil)
+        setOperandLabel(to: "0")
+    }
+    
         guard var operand = operandLabel.text else { return }
         
         if (operand.last == "." || operand.contains(".")),
