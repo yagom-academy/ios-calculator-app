@@ -22,13 +22,13 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse실행시_정상적인값을_입력했을_때_입력개수와_result_값이_같은지() {
         // given
-        let given = "132+14.5/112.3*13"
-        let expression2Result = (132.0+14.5)/10.0*13.0
+        let given = "132.0+14.5/112.3*13.0"
+        let expression2Result = (132.0+14.5)/112.3*13.0
         
         // when
-        var result = ExpressionParser.parse(from: given)
+        var result = try? ExpressionParser.parse(from: given)
         
         // then
-        XCTAssertEqual(try result.result(), expression2Result)
+        XCTAssertEqual(try? result?.result(), expression2Result)
     }
 }
