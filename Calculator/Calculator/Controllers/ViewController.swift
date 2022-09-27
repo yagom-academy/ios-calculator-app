@@ -66,7 +66,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedCalculate(_ sender: UIButton) {
+        if currentOperand == Constant.defaultZero || calculateHistory.isEmpty {
+            return
+        }
         
+        calculateHistory.append(currentOperator)
+        calculateHistory.append(currentOperand)
+        calculateHistory.removeFirst()
+        
+        let formula = ExpressionParser.parse(from: calculateHistory.joined())
+        
+        do {
+            mainResultLabel.text = try String(formula.result())
+        } catch CalculatorError.noneOperand {
+            
+        } catch CalculatorError.noneOperator {
+            
+        } catch {
+            
+        }
     }
     
     @IBAction func tappedDotPads(_ sender: UIButton) {
