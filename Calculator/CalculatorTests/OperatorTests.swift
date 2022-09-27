@@ -21,7 +21,7 @@ final class OperatorTests: XCTestCase {
         sut = .add
         
         // when
-        let result: Double = sut.calculate(lhs: 1, rhs: 2)!
+        let result: Double = try! sut.calculate(lhs: 1, rhs: 2)
         
         // then
         XCTAssertEqual(result, 3)
@@ -32,7 +32,7 @@ final class OperatorTests: XCTestCase {
         sut = .subtract
         
         // when
-        let result: Double = sut.calculate(lhs: 2, rhs: 1)!
+        let result: Double = try! sut.calculate(lhs: 2, rhs: 1)
                 
         // then
         XCTAssertEqual(result, 1)
@@ -43,21 +43,22 @@ final class OperatorTests: XCTestCase {
         sut = .divide
         
         // when
-        let result: Double = sut.calculate(lhs: 4, rhs: 2)!
+        let result: Double = try! sut.calculate(lhs: 4, rhs: 2)
         
         // then
         XCTAssertEqual(result, 2)
     }
     
-    func test_divide일때_calculate에_2와0을전달하면_nil을반환하는지() {
+    func test_divide일때_calculate에_2와0을전달하면_nil과오류를반환하는지() {
         // given
         sut = .divide
         
         // when
-        let result: Double? = sut.calculate(lhs: 2, rhs: 0)
+        let result: Double? = try? sut.calculate(lhs: 2, rhs: 0)
         
         // then
         XCTAssertNil(result)
+        XCTAssertThrowsError(try sut.calculate(lhs: 2, rhs: 0))
     }
     
     func test_multiply일때_calculate에_2와3을전달하면_6을반환하는지() {
@@ -65,7 +66,7 @@ final class OperatorTests: XCTestCase {
         sut = .multiply
         
         // when
-        let result: Double = sut.calculate(lhs: 2, rhs: 3)!
+        let result: Double = try! sut.calculate(lhs: 2, rhs: 3)
         
         // then
         XCTAssertEqual(result, 6)

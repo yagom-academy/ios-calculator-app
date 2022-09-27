@@ -22,7 +22,15 @@ struct Formula {
                   let rhs: Double = operands.dequeue() else {
                 return result
             }
-            result = operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
+            do {
+                result = try operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
+            } catch CalculateError.dividedByZero {
+                result = nil
+                print(CalculateError.dividedByZero.localizedDescription)
+            } catch {
+                result = nil
+                print(error.localizedDescription)
+            }
         }
         return result
     }
