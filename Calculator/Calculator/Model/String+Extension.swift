@@ -7,19 +7,19 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let string = self.map { $0 }
+        let separatedWord = self.map { $0 }
         var result: [String] = []
-        var temp = ""
+        var bundledWord = ""
         
-        for element in string {
+        for element in separatedWord {
             if element != target {
-                temp += String(element)
+                bundledWord += String(element)
             } else {
-                result.append(temp)
-                temp = ""
+                result.append(bundledWord)
+                bundledWord = ""
             }
         }
-        result.append(temp)
+        result.append(bundledWord)
         
         return result
     }
