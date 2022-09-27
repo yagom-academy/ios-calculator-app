@@ -17,7 +17,7 @@ struct Formula {
     func result() -> Result<Double, FormulaError> {
         var operands = operands, operators = operators
         
-        guard var calResult: Double = operands.dequeue() else {
+        guard var calculatedValue: Double = operands.dequeue() else {
             return Result.failure(FormulaError.emptyQeueue)
         }
         
@@ -31,12 +31,12 @@ struct Formula {
             }
             
             do {
-                calResult = try firstOperator.calculate(lhs: calResult, rhs: rhs)
+                calculatedValue = try firstOperator.calculate(lhs: calResult, rhs: rhs)
             } catch {
                 return Result.failure(FormulaError.dividedZero)
             }
         }
         
-        return Result.success(calResult)
+        return Result.success(calculatedValue)
     }
 }
