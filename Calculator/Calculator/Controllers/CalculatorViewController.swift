@@ -4,8 +4,16 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
+    private var numberFormatter: NumberFormatter {
+        var numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         resetOperatorAndOperandLabel()
     }
     
