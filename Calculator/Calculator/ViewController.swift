@@ -140,6 +140,9 @@ class ViewController: UIViewController {
     }
     
     func changeOperatorSign() {
+        if operandLabel.text == "0" {
+            return
+        }
         guard let operandLabelText = operandLabel.text else { return }
         if operandLabelText.contains("-") {
             operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
