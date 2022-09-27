@@ -5,16 +5,9 @@
 
 
 
-extension Int: CalculateItem, Equatable {}
+extension Int: CalculateItem {}
 extension Double: CalculateItem {}
 extension OperatorItem: CalculateItem {}
-
-extension Equatable {
-     {
-        
-    }
-}
-
 
 enum OperatorItem: Character, CaseIterable {
     case add = "+"
