@@ -118,7 +118,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedAllClear(_ sender: UIButton) {
-        
+        setUILabel()
+        currentOperand = Constant.defaultZero
+        currentOperator = Constant.empty
+        calculateHistory.removeAll()
     }
     
     @IBAction func tappedClearEntry(_ sender: UIButton) {
