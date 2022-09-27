@@ -7,12 +7,6 @@
 
 import Foundation
 
-extension String {
-    var isNumber: Bool {
-        return Double(self) != nil ? true : false
-    }
-}
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandsQueue = parseOperands(from: input)
