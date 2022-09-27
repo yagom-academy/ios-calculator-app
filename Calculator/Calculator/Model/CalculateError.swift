@@ -11,7 +11,7 @@ enum CalculateError: Error {
     var localizedDescription: String {
         switch self {
         case .dividedByZero:
-            return "0으로 나눌 수 없습니다."
+            return "NaN"
         }
     }
 }
