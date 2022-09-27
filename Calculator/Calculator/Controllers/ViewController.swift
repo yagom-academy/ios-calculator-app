@@ -125,7 +125,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedClearEntry(_ sender: UIButton) {
-
+        currentOperand = Constant.defaultZero
+        mainResultLabel.text = Constant.zero
     }
 }
 
