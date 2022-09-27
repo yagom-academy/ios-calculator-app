@@ -54,7 +54,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_큐에_1_2_3_4_값을_넣으면_순서대로_1_2_3_4_들어있는지_확인() {
         // given
         let elements: [Double] = [1, 2, 3, 4]
-        var popedElement: [Double?] = []
+        var poppedElements: [Double?] = []
         
         // when
         elements.forEach { element in
@@ -63,11 +63,11 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         while sut.head != nil {
             let element = sut.dequeue()
-            popedElement.append(element)
+            poppedElements.append(element)
         }
         
         // then
-        XCTAssertEqual(popedElement, elements)
+        XCTAssertEqual(poppedElements, elements)
     }
     
     func test_값이_있는데_dequeue를_실행하면_data값을_반환() {
