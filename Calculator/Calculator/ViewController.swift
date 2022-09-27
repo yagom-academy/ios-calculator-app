@@ -135,6 +135,15 @@ class ViewController: UIViewController {
         removeAlloperandAndOperatorStackViewSubviews()
     }
     
+    @IBAction func signChangeButtonPressed(_ sender: Any) {
+        guard let operandLabelText = operandLabel.text else { return }
+        if operandLabelText.contains("-") {
+            operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
+        } else {
+            operandLabel.text = "-" + operandLabelText
+        }
+    }
+    
     func updateOperandLabel(with number: String) {
         if operandLabel.text == "0" {
             operandLabel.text = number
