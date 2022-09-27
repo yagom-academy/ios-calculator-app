@@ -15,7 +15,8 @@ class ViewController: UIViewController {
     
     var inputNumber: String?
     var inputOperator: String?
-    
+    var isCalculate: Bool?
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -23,14 +24,24 @@ class ViewController: UIViewController {
     }
     
     func setup() {
-        inputNumberLabel.text = "0"
-        inputOperatorLabel.text = ""
-        inputNumber = "0"
-        inputOperator = ""
+        resetInputNumber()
+        resetInputOperator()
+        isCalculate = false
     }
     
     func setupFomula() {
         formula = Formula()
+    }
+    
+    
+    func resetInputNumber() {
+        inputNumber = "0"
+        inputNumberLabel.text = inputNumber
+    }
+    
+    func resetInputOperator() {
+        inputOperator = ""
+        inputOperatorLabel.text = inputOperator
     }
     
     @IBAction func signChangeButtonTapped(_ sender: UIButton) {
@@ -39,14 +50,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        // inputNumber,inputNumberLabel
-        // inputOperator, inputOperatorLabel
-        // 스택뷰,,~~ 삭제,,
+        setup()
+        setupFomula()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        // inputNumber,inputNumberLabel
-        // inputOperator, inputOperatorLabel
+        resetInputNumber()
+        resetInputOperator()
     }
     
     @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
