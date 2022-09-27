@@ -17,6 +17,8 @@ struct LinkedList <T: CalculateItem> {
         return currentNode
     }
     
+    var isEmpty: Bool { self.head == nil ? true : false }
+    
     mutating func append(_ data: T) {
         guard self.head != nil else {
             self.head = Node(data: data)
@@ -65,9 +67,5 @@ struct LinkedList <T: CalculateItem> {
         
         self.head = firstNode?.next
         return firstNode
-    }
-    
-    mutating func isEmpty() -> Bool {
-        self.head == nil ? true : false
     }
 }

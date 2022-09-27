@@ -12,7 +12,7 @@ struct Formula {
     mutating func result() throws -> Double {
         var result: Double = 0.0
         
-        while operands.isEmpty() == false {
+        while operands.isEmpty == false {
             guard let operatorCase: Operator = self.operators.dequeue()?.data,
                   let operand: Double = self.operands.dequeue()?.data else {
                 throw CalculatorError.unknown

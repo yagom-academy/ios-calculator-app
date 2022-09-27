@@ -24,7 +24,7 @@ class LinkedListTests: XCTestCase {
     func test_초기화후에_리스트는비어있다() {
         //given: setUpWithError메서드에서 초기화로 리스트가 비어있을 때
         //when, then: 리스트는 비어있다.
-        XCTAssertTrue(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty)
     }
 
     func test_append_리스트가비어있을때_1추가시_마지막값_1() {

@@ -7,6 +7,7 @@
 
 struct CalculatorItemQueue <T: CalculateItem> {
     var itemQueue: LinkedList<T>? = LinkedList()
+    var isEmpty: Bool { self.itemQueue?.head == nil ? true : false }
     
     mutating func enqueue(_ data: T) {
         self.itemQueue?.append(data)
@@ -19,9 +20,5 @@ struct CalculatorItemQueue <T: CalculateItem> {
 
     mutating func clear() {
         self.itemQueue = nil
-    }
-    
-    mutating func isEmpty() -> Bool {
-        self.itemQueue?.head == nil ? true : false
     }
 }

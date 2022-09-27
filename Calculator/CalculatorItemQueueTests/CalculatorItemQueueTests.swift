@@ -24,7 +24,7 @@ class CalculatoralculatorItemQueueTests: XCTestCase {
     func test_초기화후에큐는비어있다() {
         //given: setUp메서드에서 초기화로 리스트가 비어있을 때
         //when, then: 큐는 비어있다.
-        XCTAssertTrue(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty)
     }
 
     func test_enqueue_큐가비어있을때_10추가시_마지막값_10() {
@@ -88,6 +88,6 @@ class CalculatoralculatorItemQueueTests: XCTestCase {
         sut.clear()
         
         //then 비어있는큐가된다.
-        XCTAssertTrue(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty)
     }
 }
