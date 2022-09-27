@@ -20,6 +20,18 @@ enum ExpressionParser {
 
         return Formula(operands: operandsQueue, operators: operatorsQueue)
     }
+ 
+    private static func parseOperands(from input: String) -> CalculatorItemQueue<Double> {
+        var operandsQueue = CalculatorItemQueue<Double>()
+        
+        let operands = componentsByOperators(from: input)
+        operands.forEach {
+            guard let operand = Double($0) else { return }
+            operandsQueue.enqueue(item: operand)
+        }
+        
+        return operandsQueue
+    }
     
     private static func componentsByOperators(from input: String) -> [String] {
         var splitInput: [String] = [input]
@@ -44,32 +56,21 @@ enum ExpressionParser {
         return numbers
     }
     
-    private static func parseOperands(from input: String) -> CalculatorItemQueue<Double> {
-        var operandsQueue = CalculatorItemQueue<Double>()
-        
-        let operands = componentsByOperators(from: input)
-        operands.forEach {
-            guard let operand = Double($0) else { return }
-            operandsQueue.enqueue(item: operand)
-        }
-        
-        return operandsQueue
-    }
-    
     private static func parseOperators(from input: String) -> CalculatorItemQueue<Operator> {
         var operatorsQueue = CalculatorItemQueue<Operator>()
 
-        var inputCopy = input
+        var removedNegativeSignAtFront = input
         if input.first == "-" {
-            inputCopy.removeFirst()
+            removedNegativeSignAtFront.removeFirst()
         }
         
         let operators = Operator.allCases.map { $0.rawValue }
         for operatorSign in operators {
-            inputCopy = inputCopy.replacingOccurrences(of: "\(operatorSign)-", with: "\(operatorSign)")
+            removedNegativeSignAtFront = removedNegativeSignAtFront
+                .replacingOccurrences(of: "\(operatorSign)-", with: "\(operatorSign)")
         }
         
-        inputCopy.forEach {
+        removedNegativeSignAtFront.forEach {
             guard let operatorSign = Operator(rawValue: $0) else { return }
             operatorsQueue.enqueue(item: operatorSign)
         }
