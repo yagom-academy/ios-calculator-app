@@ -22,9 +22,7 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let operators = String(Operator.allCases.map{ $0.rawValue })
-        var operatorsCharacterSet:CharacterSet = CharacterSet()
-        
-        operatorsCharacterSet.insert(charactersIn: operators)
+        let operatorsCharacterSet:CharacterSet = CharacterSet(charactersIn: operators)
 
         return input.components(separatedBy: operatorsCharacterSet)
     }
