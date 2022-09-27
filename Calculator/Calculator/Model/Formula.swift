@@ -8,33 +8,22 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() throws -> Double {
+    mutating func result() -> Double {
         var lhs = operands.dequeue() ?? 99.999
         var rhs = operands.dequeue() ?? 99.999
         var operatorsValue = operators.dequeue()
-        var result: Double
         
-        do {
-            let tryResult = try operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
-            result = tryResult
-        } catch {
-            throw OccuredError.tryDivideZero
-        }
+        var result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+        
         while !operands.dequeueStack.isEmpty {
             lhs = result
             rhs = operands.dequeue() ?? 99.999
             operatorsValue = operators.dequeue()
-            do {
-                let tryResult = try operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
-                result = tryResult
-            } catch {
-                throw OccuredError.tryDivideZero
-            }
+            result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
         }
         if operators.dequeueStack.isEmpty == false {
             operators.dequeueStack.removeAll()
         }
-        
         return result
     }
 }

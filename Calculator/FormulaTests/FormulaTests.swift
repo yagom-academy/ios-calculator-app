@@ -16,7 +16,7 @@ class FormulaTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-/*
+
     func test_숫자3개_혼합연산하는_경우() {
         //given
         sut.operands.enqueue(element: 5.0)
@@ -106,7 +106,7 @@ class FormulaTests: XCTestCase {
          //then
          XCTAssertEqual(result, 3)
      }
-*/
+
     func test_0으로나누기연산_성공하는지() {
         //given
         sut.operands.enqueue(element: 50.0)
@@ -114,12 +114,12 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .divide)
         
         //when
-        var error: OccuredError?
-        XCTAssertThrowsError(try sut.result()) { errorOfDivideZero in
-            error = errorOfDivideZero as? OccuredError
+        let result = sut.result()
+        if result == Double.infinity {
+            print("\(Double.nan)")
         }
         
         //then
-        XCTAssertEqual(error, OccuredError.tryDivideZero)
+        XCTAssertEqual(result,Double.infinity)
     }
 }
