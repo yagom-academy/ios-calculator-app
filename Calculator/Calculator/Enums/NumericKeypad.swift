@@ -28,4 +28,7 @@ enum NumericKeypad: String {
     case ac = "AC"
     case ce = "CE"
     case plusMinus = "⁺⁄₋"
+    
+    static let numKeys = [num1, num2, num3, num4, num5, num6, num7, num8, num9, num0, num00, decimalPoint]
+    static let operatorKeys = [plus, minus, division, multiplication]
 }
