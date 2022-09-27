@@ -188,7 +188,7 @@ class ViewController: UIViewController {
         let numberFormatter: NumberFormatter = .init()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumSignificantDigits = CalculatorNumber.maximumDigits
         guard let text = enteredNumberLabel.text,
               let number = Double(text),
               let formattedNumber: String = numberFormatter.string(from: NSNumber(value: number)) else {

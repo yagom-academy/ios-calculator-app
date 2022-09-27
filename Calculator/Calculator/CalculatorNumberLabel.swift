@@ -22,10 +22,10 @@ class CalculatorNumberLabel: UILabel {
         guard let text = self.text else {
             return
         }
-        if text.first == "-" {
+        if text.first == CalculatorText.negativeSign {
             self.text?.removeFirst()
         } else {
-            self.text = "-" + text
+            self.text = String(CalculatorText.negativeSign) + text
         }
     }
     
