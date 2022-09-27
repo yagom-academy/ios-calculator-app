@@ -13,12 +13,8 @@ struct Formula {
         guard var result = operands.dequeue() else { return 0 }
         
         while !operands.isEmpty && !operators.isEmpty {
-            guard let operatorSign = operators.dequeue() else { return 0 }
-            guard let rhs = operands.dequeue() else { return 0 }
-            
-            if operatorSign == .divide, rhs == 0 {
-                return .nan
-            }
+            guard let operatorSign = operators.dequeue(),
+                  let rhs = operands.dequeue() else { return 0 }
             
             result = operatorSign.calculate(lhs: result, rhs: rhs)
         }
