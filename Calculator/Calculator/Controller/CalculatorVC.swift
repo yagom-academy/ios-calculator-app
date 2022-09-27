@@ -17,7 +17,7 @@ class CalculatorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetAllUI()
+        //resetAllUI()
     }
     
     private func resetAllUI() {
@@ -27,20 +27,29 @@ class CalculatorVC: UIViewController {
         operandLabel.text = ""
     }
 
-    @IBAction func numberButtonTouchUp(_ sender: UIButton) {
+    @IBAction func touchUpNumberButton(_ sender: UIButton) {
         operandLabel.text?.append(sender.titleLabel?.text ?? "")
     }
     
-    @IBAction func acButtonTouchUp(_ sender: UIButton) {
+    @IBAction func touchUpdotButton(_ sender: UIButton) {
+        if (operandLabel.text?.contains(".") ?? false) {
+            return
+        } else {
+            operandLabel.text?.append(sender.titleLabel?.text ?? "")
+        }
+    }
+    
+    
+    @IBAction func touchUpAcButton(_ sender: UIButton) {
         resetAllUI()
     }
     
-    @IBAction func ceButtonTouchUp(_ sender: UIButton) {
+    @IBAction func touchUpCeButton(_ sender: UIButton) {
         operatorLabel.text = ""
         operandLabel.text = ""
     }
     
-    @IBAction func convertPlusMinusButtonTouchUp(_ sender: UIButton) {
+    @IBAction func touchUpConvertPlusMinusButton(_ sender: UIButton) {
         if operandLabel.text == "" {
             return
         } else if operatorLabel.text == "+" {
