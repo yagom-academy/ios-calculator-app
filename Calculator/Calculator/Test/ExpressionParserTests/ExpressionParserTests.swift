@@ -19,7 +19,7 @@ class ExpressionParserTests: XCTestCase {
     }
     
     func test_10_더하기_20_곱하기_30_나누기_3은_300인가() throws {
-        let string = "10+20*30/3"
+        let string = "10 + 20 * 30 / 3"
         var parseTest = ExpressionParser.parse(from: string)
         let result = try parseTest.result()
         
