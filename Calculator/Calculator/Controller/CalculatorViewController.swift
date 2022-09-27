@@ -40,4 +40,22 @@ class CalculatorViewController: UIViewController {
         
     }
     
+    @IBAction func didTappedOperator(_ sender: UIButton) {
+        
+        guard let inputedOperator = sender.titleLabel?.text else {
+            return
+        }
+        
+        userInputExpression.append(selectedNumbers)
+        selectedNumbers = ""
+        currentNumberLabel.text = "0"
+        
+        guard isNotEmptyExpression else {
+            return
+        }
+        
+        selectedOperator = inputedOperator
+        currentOperatorLabel.text = selectedOperator
+        
+    }
 }
