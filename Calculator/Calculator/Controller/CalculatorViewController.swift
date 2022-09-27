@@ -25,5 +25,19 @@ class CalculatorViewController: UIViewController {
         currentNumberLabel.text = "0"
     }
     
+    @IBAction func didTappedNumberButton(_ sender: UIButton) {
+        
+        if selectedNumbers.isEmpty {
+            userInputExpression.append(selectedOperator)
+        }
+        
+        guard let inputNumber: String = sender.titleLabel?.text else {
+            return
+        }
+        
+        selectedNumbers.append(inputNumber)
+        currentNumberLabel.text = selectedNumbers
+        
+    }
     
 }
