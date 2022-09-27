@@ -66,6 +66,14 @@ class ViewController: UIViewController {
         return stackView
     }
     
+    func updateCalculateHistory(currentOperator: String, currentOperand: String) {
+        let operatorLabel = makeHistoryStackViewLabel(item: currentOperator)
+        let operandLabel = makeHistoryStackViewLabel(item: currentOperand)
+        let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        
+        historyStackView.addArrangedSubview(stackView)
+    }
+    
     @IBAction func tappedNumberPads(_ sender: UIButton) {
         let tappedNumber = sender.currentTitle
         guard let number = tappedNumber else { return }
@@ -95,6 +103,7 @@ class ViewController: UIViewController {
         calculateHistory.append(currentOperator)
         calculateHistory.append(currentOperand)
         
+        updateCalculateHistory(currentOperator: currentOperator, currentOperand: currentOperand)
         currentOperator = operators
         setDefaultOperand()
     }
@@ -103,6 +112,8 @@ class ViewController: UIViewController {
         if currentOperand == Constant.defaultZero || calculateHistory.isEmpty {
             return
         }
+        
+        updateCalculateHistory(currentOperator: currentOperator, currentOperand: currentOperand)
         
         calculateHistory.append(currentOperator)
         calculateHistory.append(currentOperand)
