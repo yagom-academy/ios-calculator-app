@@ -24,7 +24,7 @@ struct Formula {
             }
             do {
                 leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
-            } catch {
+            } catch FormulaError.divideByZero {
                 throw FormulaError.divideByZero
             }
         }

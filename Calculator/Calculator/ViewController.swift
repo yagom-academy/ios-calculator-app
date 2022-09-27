@@ -27,9 +27,13 @@ class ViewController: UIViewController {
         }
         enteredOperatorLabel.text = nil
         enteredNumberLabel.resetToZero()
+        enteredNumberLabel.isResultOfFormula = false
     }
     
     @IBAction private func touchUpSignSwitchButton(sender: UIButton) {
+        guard !enteredNumberLabel.isResultOfFormula else {
+            return
+        }
         guard enteredNumberLabel.text != CalculatorText.zero else {
             return
         }
@@ -43,9 +47,10 @@ class ViewController: UIViewController {
     
     @IBAction private func touchUpNumberButton(sender: UIButton) {
         guard let text = enteredNumberLabel.text,
-              let number = sender.currentTitle else {
-                  return
-              }
+              let number = sender.currentTitle,
+        !enteredNumberLabel.isResultOfFormula else {
+            return
+        }
         enterNumber(sender: sender,
                     current: text,
                     entered: number)
@@ -55,9 +60,7 @@ class ViewController: UIViewController {
         if enteredNumberLabel.isZero {
             switch sender {
             case zeroButton:
-                if enteredNumberLabel.isInputtedZero == false {
-                    enteredNumberLabel.isInputtedZero = true
-                }
+                enteredNumberLabel.isInputtedZero = true
             case doubleZeroButton:
                 return
             case dotButton:
@@ -76,10 +79,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard !enteredNumberLabel.isZero ||
-                enteredNumberLabel.isInputtedZero else {
-            enteredOperatorLabel.text = sender.currentTitle
+        guard !enteredNumberLabel.isResultOfFormula else {
             return
+        }
+        if enteredNumberLabel.isZero {
+            if !enteredNumberLabel.isInputtedZero {
+                enteredOperatorLabel.text = sender.currentTitle
+                return
+            }
         }
         makeFormulaStackView()
         enteredOperatorLabel.text = sender.currentTitle
@@ -123,7 +130,8 @@ class ViewController: UIViewController {
         guard !enteredNumberLabel.isResultOfFormula else {
             return
         }
-        if enteredNumberLabel.isZero {
+        if enteredNumberLabel.isZero,
+           !enteredNumberLabel.isInputtedZero {
             enteredOperatorLabel.text = nil
         } else {
             makeFormulaStackView()
@@ -133,12 +141,18 @@ class ViewController: UIViewController {
         do {
             result = try String(formula.result())
         } catch FormulaError.divideByZero {
-            result = CalculatorText.nan
+            enteredNumberLabel.text = CalculatorText.nan
+            return
         } catch {
             showErrorAlert(message: error.localizedDescription + CalculatorText.resetSuggestion)
         }
-        enteredNumberLabel.text = result
+        makeResultOfFormula(text: result)
+    }
+    
+    private func makeResultOfFormula(text: String) {
+        enteredNumberLabel.text = text
         enteredNumberLabel.isResultOfFormula = true
+        formatNumber()
     }
     
     private func makeExpression() -> String {
@@ -168,6 +182,19 @@ class ViewController: UIViewController {
         present(alert,
                 animated: true,
                 completion: nil)
+    }
+    
+    private func formatNumber() {
+        let numberFormatter: NumberFormatter = .init()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
+        guard let text = enteredNumberLabel.text,
+              let number = Double(text),
+              let formattedNumber: String = numberFormatter.string(from: NSNumber(value: number)) else {
+                  return
+              }
+        enteredNumberLabel.text = formattedNumber
     }
 }
 

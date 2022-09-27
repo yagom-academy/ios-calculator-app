@@ -7,9 +7,9 @@
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multifly = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multifly = "×"
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         var result: Double = lhs
@@ -21,8 +21,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .divide:
             do {
                 result =  try divide(lhs: lhs, rhs: rhs)
-            } catch {
-                throw error
+            } catch FormulaError.divideByZero {
+                throw FormulaError.divideByZero
             }
         case .multifly:
             result = multifly(lhs: lhs, rhs: rhs)
