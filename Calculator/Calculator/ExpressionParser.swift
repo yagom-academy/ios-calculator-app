@@ -2,7 +2,7 @@
 
 enum ExpressionParser {
     func parse(from input: String) -> Formula {
-        return Formula(operands: CalculatorItemQueueByLinkedList<Any>.init(), operators: CalculatorItemQueueByLinkedList<Any>.init())
+        return Formula(operands: CalculatorItemQueueByLinkedList<Double>.init(), operators: CalculatorItemQueueByLinkedList<Operator>.init())
     }
     
     private func componentsByOperator(from input: String) -> [String] {
