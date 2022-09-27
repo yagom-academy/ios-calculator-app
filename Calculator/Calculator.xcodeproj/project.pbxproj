@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A64E0A128E2EF5300368B17 /* NumericKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A64E0A028E2EF5300368B17 /* NumericKeypad.swift */; };
 		1A86816C28D805CD00BE2837 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A86816B28D805CD00BE2837 /* CalculatorViewController.swift */; };
 		1A8681B128D8747200BE2837 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8681B028D8747200BE2837 /* CalculatorItemQueue.swift */; };
 		1A8681B728D874F000BE2837 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8681B628D874F000BE2837 /* CalculateItem.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A64E0A028E2EF5300368B17 /* NumericKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericKeypad.swift; sourceTree = "<group>"; };
 		1A86816B28D805CD00BE2837 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		1A8681B028D8747200BE2837 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		1A8681B628D874F000BE2837 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				1ABBF5D728DC7E9C00F26BC5 /* CalculatorError.swift */,
 				1ABBF5DD28DCACF300F26BC5 /* ExpressionParser.swift */,
 				1AFBACDE28DB11EA00D7E26D /* Operator+CalculateItem.swift */,
+				1A64E0A028E2EF5300368B17 /* NumericKeypad.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				1A8681B728D874F000BE2837 /* CalculateItem.swift in Sources */,
 				1A86816C28D805CD00BE2837 /* CalculatorViewController.swift in Sources */,
 				1ABBF5D828DC7E9C00F26BC5 /* CalculatorError.swift in Sources */,
+				1A64E0A128E2EF5300368B17 /* NumericKeypad.swift in Sources */,
 				1A8681BD28D88DB300BE2837 /* AppDelegate.swift in Sources */,
 				1AFBACE228DB123500D7E26D /* Double+CalculateItem.swift in Sources */,
 				1AFBACDF28DB11EA00D7E26D /* Operator+CalculateItem.swift in Sources */,

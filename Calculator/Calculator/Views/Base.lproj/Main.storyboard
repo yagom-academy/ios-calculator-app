@@ -303,6 +303,10 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="yOx-hh-8j4"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Xs0-JW-tHz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
