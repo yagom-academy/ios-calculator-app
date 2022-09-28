@@ -41,12 +41,13 @@ class ViewController: UIViewController {
             return
         }
         
-        let operand: UILabel = makeExpressionLabel(currentOperand)
-        let `operator`: UILabel = makeExpressionLabel(operatorLabel.text)
         let stackView: UIStackView = makeExpressionStackView()
-
+        let operand: UILabel = makeExpressionLabel(currentOperand)
+        if !expressionQueue.arrangedSubviews.isEmpty {
+            let `operator`: UILabel = makeExpressionLabel(operatorLabel.text)
+            stackView.addArrangedSubview(`operator`)
+        }
         
-        stackView.addArrangedSubview(`operator`)
         stackView.addArrangedSubview(operand)
         expressionQueue.addArrangedSubview(stackView)
         
