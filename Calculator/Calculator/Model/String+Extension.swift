@@ -21,6 +21,13 @@ extension String {
         
         result.append(bundledWord)
         
+        if result.first == "" {
+            result.removeFirst()
+        }
+        if result.last == "" {
+            result.removeLast()
+        }
+        
         return result
     }
 }
