@@ -70,7 +70,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        // 이전 라벨 텍스트들까지 지우는 방식으로 변경
+        overallOperationLabelStackView.subviews.forEach { $0.removeFromSuperview() }
+        overallOperation = ""
+        operand = ""
+        modifiableOperatorLabel.text = " "
     }
     
     @IBAction func touchUpEqualSignButton(_ sender: UIButton) {
