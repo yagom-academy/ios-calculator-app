@@ -8,6 +8,7 @@ import UIKit
 
 class CalculatorVC: UIViewController {
     
+    var finalFormula: String = ""
     var currentNumber: String = ""
     
     @IBOutlet private weak var calculationFormulaScroll: UIScrollView!
@@ -39,6 +40,8 @@ class CalculatorVC: UIViewController {
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         if currentNumber.contains(".") {
             return
+        } else if operandLabel.text == "0" {
+            currentNumber = "0."
         } else {
             currentNumber.append(sender.titleLabel?.text ?? "")
         }
@@ -71,6 +74,12 @@ class CalculatorVC: UIViewController {
         } else {
             operatorLabel.text = sender.titleLabel?.text
             //makeFormulaStackView()
+            if finalFormula.isEmpty {
+                finalFormula.append(currentNumber)
+            } else {
+                finalFormula.append(operatorLabel.text ?? "")
+                finalFormula.append(currentNumber)
+            }
             operandLabel.text = "0"
         }
     }
