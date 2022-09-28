@@ -52,7 +52,6 @@ class ViewController: UIViewController {
         resetInputNumber()
         resetInputOperator()
         resetStackViewAll()
-        isCalculated = false
     }
     
     func resetStackViewAll() {
@@ -60,7 +59,7 @@ class ViewController: UIViewController {
     }
     
     func resetInputNumber() {
-        inputNumberLabel.text = "0"
+        inputNumberLabel.text = CalculatorNameSpace.zero
     }
     
     func resetInputOperator() {
@@ -85,17 +84,26 @@ class ViewController: UIViewController {
     }
     
     func addCalculationRecord(_ operatorAndOperands: [String?]) {
-        operatorAndOperands.forEach { calculationRecord.append($0) }
+        operatorAndOperands.forEach {
+            calculationRecord.append($0?.components(separatedBy: [","]).joined())
+        }
+    }
+    
+    func numberFomatter(_ str: Double) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        return numberFormatter.string(for: str)
     }
     
     @IBAction func signChangeButtonTapped(_ sender: UIButton) {
-        if inputNumberLabel.text?.contains("-") == true {
+        if inputNumberLabel.text?.contains(CalculatorNameSpace.negative) == true {
             inputNumberLabel.text?.removeFirst()
             return
         }
         
         if let value = inputNumberLabel.text, value != "0" {
-            inputNumberLabel.text = "-" + value
+            inputNumberLabel.text = CalculatorNameSpace.negative + value
             return
         }
     }
@@ -110,7 +118,7 @@ class ViewController: UIViewController {
     
     @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
         guard let value = sender.currentTitle else { return }
-        // 가독성 너무 문제인데..
+        
         if inputNumberLabel.text == "0", value == "0" {
             return
         } else if inputNumberLabel.text == "0", value == "00" {
@@ -129,17 +137,18 @@ class ViewController: UIViewController {
     
     @IBAction func operatorsInputButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
+        isCalculated = false
         
-        if inputOperatorLabel.text == ""{
-            addSubStackView()
-            addCalculationRecord([inputNumberLabel.text])
-            resetInputNumber()
+        if inputNumberLabel.text == CalculatorNameSpace.zero {
             inputOperatorLabel.text = `operator`
             return
         }
         
-        if inputNumberLabel.text == "0" {
+        if inputOperatorLabel.text == "" {
+            addSubStackView()
+            addCalculationRecord([inputNumberLabel.text])
             inputOperatorLabel.text = `operator`
+            resetInputNumber()
             return
         }
         
@@ -154,7 +163,20 @@ class ViewController: UIViewController {
         guard !isCalculated else { return }
         addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
         
-        print(calculationRecord.compactMap { $0 }.joined(separator: " "))
+        var parseData = ExpressionParser.parse(from: calculationRecord.compactMap { $0 }.joined(separator: " "))
+        
+        do {
+            addSubStackView()
+            inputNumberLabel.text = numberFomatter(try parseData.result())
+            inputOperatorLabel.text = ""
+            calculationRecord = []
+            isCalculated = true
+        } catch {
+            inputNumberLabel.text = CalculatorNameSpace.nan
+            isCalculated = true
+        }
+        
     }
 }
+
 

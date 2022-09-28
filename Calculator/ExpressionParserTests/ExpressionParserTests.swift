@@ -30,13 +30,15 @@ class ExpressionParserTests: XCTestCase {
     
     func test_양수233과_음수111을_곱하고_음수2로나누었을때_정상적인_값이_출력되는지() {
         let result: Double = (233 * -111) / -2
-        var parse = try? ExpressionParser.parse(from: "233 * -111 / -2")
+        var parse = try? ExpressionParser.parse(from: "233 × -111 ÷ -2")
+        
         
         XCTAssertEqual(result, try parse?.result())
+        
     }
     
     func test_양수123을_0으로_나누었을때_에러를_던지는지(){
-        var parse = try? ExpressionParser.parse(from: "123 / 0")
+        var parse = try? ExpressionParser.parse(from: "123 ÷ 0")
         
         XCTAssertThrowsError(try parse?.result())
     }
