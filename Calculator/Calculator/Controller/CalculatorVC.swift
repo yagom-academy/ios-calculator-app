@@ -135,10 +135,18 @@ class CalculatorVC: UIViewController {
             if result == Double.infinity {
                 operandLabel.text = "NaN"
             } else {
-            operandLabel.text = String(result)
+                operandLabel.text = String(result)
             }
         }
     }
     
+    private func numberFormatter(number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        guard let decimalNumber = Double(number) else {
+            return number
+        }
+        return numberFormatter.string(from: NSNumber(value: decimalNumber))!
+    }
     
 }
