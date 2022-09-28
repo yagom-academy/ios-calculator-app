@@ -10,7 +10,7 @@ import XCTest
 
 final class StringExtensionTests: XCTestCase {
 
-    func test_When_given_testString_Then_expect_String_that_separated_specific_character() {
+    func test_when_given_testString_then_expect_String_separated_by_specific_character() {
         // given
         let testString = "1+23-4"
         let resultString1 = ["1", "+", "23-4"]

@@ -11,7 +11,7 @@ import XCTest
 final class OperatorTests: XCTestCase {
     var sut: Operator!
 
-    func test_Given_1_2_add_Then_return_3() {
+    func test_when_given_1_2_add_then_return_3() {
         // given
         sut = .add
         let number1 = 1.0
@@ -25,7 +25,7 @@ final class OperatorTests: XCTestCase {
 
     }
     
-    func test_Given_1_2_subtract_Then_return_minus_1() {
+    func test_when_given_1_2_subtract_then_return_minus_1() {
         // given
         sut = .subtract
         let number1 = 1.0
@@ -39,7 +39,7 @@ final class OperatorTests: XCTestCase {
         
     }
     
-    func test_Given_4_2_divide_Then_return_2() {
+    func test_when_given_4_2_divide_then_return_2() {
         // given
         sut = .divide
         let number1 = 4.0
@@ -52,7 +52,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, number1 / number2)
     }
     
-    func test_Given_3_6_multiply_Then_return_18() {
+    func test_when_given_3_6_multiply_then_return_18() {
         // given
         sut = .multiply
         let number1 = 3.0

@@ -15,7 +15,7 @@ final class FormulaTests: XCTestCase {
         sut = Formula()
     }
     
-    func test_When_generate_result_Then_expects_Not_nil() {
+    func test_then_generate_result_then_expects_Not_nil() {
         // given
         
         // when
@@ -26,7 +26,7 @@ final class FormulaTests: XCTestCase {
         
     }
     
-    func test_When_generate_operands_Then_expects_Not_nil() {
+    func test_when_generate_operands_then_expects_Not_nil() {
         // given
         
         // when
@@ -37,7 +37,7 @@ final class FormulaTests: XCTestCase {
         
     }
     
-    func test_When_generate_operators_Then_expects_Not_nil() {
+    func test_when_generate_operators_then_expects_Not_nil() {
         // given
         
         
@@ -49,7 +49,7 @@ final class FormulaTests: XCTestCase {
         
     }
     
-    func test_When_enqueue_add_in_operators_Then_enqueue_success() {
+    func test_when_enqueue_add_in_operators_then_enqueue_success() {
         // given
         let testOperator: Operator = .add
         
@@ -61,7 +61,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, testOperator)
     }
     
-    func test_When_testString_calculate_Then_return_right_answer() {
+    func test_when_testString_calculate_then_return_right_answer() {
         // given
         let testString1 = "1+2-3+4"
         let testString2 = "12+4/4*5-10"
@@ -79,7 +79,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result2, answer2)
     }
     
-    func test_When_divide_0_Then_throw_Error() {
+    func test_when_divide_0_then_throw_Error() {
         // given
         let testString = "1/0"
         
@@ -90,7 +90,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertThrowsError(try sut.result())
     }
     
-    func test_When_formula_is_wrong_Then_throw_wrongFormulaError() {
+    func test_when_formula_is_wrong_then_throw_wrongFormulaError() {
         // given
         let testString = "1+2/"
         
