@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CalculatorNumberLabel: UILabel {
+final class CalculatorNumberLabel: UILabel {
     var isZero: Bool {
-        if self.text == CalculatorText.zero {
+        if self.text == CalculatorConstants.Text.zero {
             return true
         } else {
             return false
@@ -20,14 +20,14 @@ class CalculatorNumberLabel: UILabel {
         guard let text = self.text else {
             return
         }
-        if text.first == CalculatorText.negativeSign {
+        if text.first == CalculatorConstants.Text.negativeSign {
             self.text?.removeFirst()
         } else {
-            self.text = String(CalculatorText.negativeSign) + text
+            self.text = String(CalculatorConstants.Text.negativeSign) + text
         }
     }
     
     func resetToZero() {
-        self.text = CalculatorText.zero
+        self.text = CalculatorConstants.Text.zero
     }
 }

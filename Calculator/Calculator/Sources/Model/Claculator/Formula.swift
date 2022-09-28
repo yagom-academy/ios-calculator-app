@@ -15,9 +15,7 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        guard var leftNumber = operands.dequeue() else {
-            return Double.zero
-        }
+        guard var leftNumber = operands.dequeue() else { return Double.zero }
         while let rightNumber = operands.dequeue() {
             guard let operatorSign = operators.dequeue() else {
                 throw FormulaError.unexpectedError
