@@ -30,7 +30,7 @@ struct Formula {
                 throw FormulaError.hasNotOperandValue
             }
             
-            calculateResult = operators.calculates(
+            calculateResult = try operators.calculates(
                 lhs: calculateResult,
                 rhs: operand
             )
