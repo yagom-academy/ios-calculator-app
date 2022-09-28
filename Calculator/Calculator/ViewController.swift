@@ -44,6 +44,11 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
+        stringOperators = sender.titleLabel?.text ?? ""
+        operatorLabel.text = stringOperators
+    }
+    
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if operandsLabel.text == zero {
             stringNumbers = sender.titleLabel?.text ?? ""
