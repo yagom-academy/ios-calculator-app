@@ -3,6 +3,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var historyStackView: UIStackView!
     
     private var formula = ""
     private var numberFormatter: NumberFormatter {
@@ -15,7 +16,7 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initOperatorAndOperandLabel()
+        clearAll()
     }
     
     private func setOperandLabel(to string: String?) {
@@ -87,6 +88,11 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: "0")
     }
     
+    private func clearAll() {
+        historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        initOperatorAndOperandLabel()
+    }
+    
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle,
               let key = NumericKeypad(rawValue: buttonTitle) else { return }
@@ -99,7 +105,7 @@ class CalculatorViewController: UIViewController {
         case .equal:
             return
         case .ac:
-            return
+            clearAll()
         case .ce:
             clearEntry()
         case .plusMinus:
