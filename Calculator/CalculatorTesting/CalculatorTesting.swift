@@ -78,7 +78,7 @@ class CalculatorTesting: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
-    func test_100_enqueue_100dequeu_are_equeal() {
+    func test_enqueue101_deque_until_nil_count_100() {
         var dequeueResult: [Double] = []
         
         for i in 0...100 {
