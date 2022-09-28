@@ -14,12 +14,15 @@ struct Formula {
     }
     
     mutating func result() -> Double {
+        //UI에서 입력받을 시 처음 값이 양수면 operator 앞에 "+"알아서 추가
         let result = operands.mergedQueue.reduce(0.0) {
             guard let nowOperator = operators.popFirst() as? Operator else {
-                return 0
+                print("nowOperator error")
+                return -100000
             }
             guard let operands = $1 as? Double else {
-                return 0
+                print("nowOperrands error")
+                return -100000
             }
             
             return nowOperator.calculate(lhs: $0, rhs: operands)
