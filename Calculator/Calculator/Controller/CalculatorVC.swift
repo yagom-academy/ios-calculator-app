@@ -18,7 +18,7 @@ class CalculatorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //resetAllUI()
+        resetAllUI()
     }
     
     private func resetAllUI() {
@@ -27,6 +27,7 @@ class CalculatorVC: UIViewController {
         operatorLabel.text = ""
         operandLabel.text = "0"
         currentNumber = ""
+        finalFormula = ""
     }
     
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
@@ -81,6 +82,7 @@ class CalculatorVC: UIViewController {
                 finalFormula.append(operatorLabel.text ?? "")
                 finalFormula.append(currentNumber)
             }
+            currentNumber = ""
             operandLabel.text = "0"
         }
     }
@@ -90,12 +92,15 @@ class CalculatorVC: UIViewController {
               let operandLabel = makeOperandLabel() else {
             return
         }
+        let formulaStackView: UIStackView
         
-        let formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
-        
+        if finalFormula.isEmpty {
+            formulaStackView = UIStackView(arrangedSubviews: [operandLabel])
+        } else {
+            formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        }
         formulaStackView.spacing = 8
         mainStackView.addArrangedSubview(formulaStackView)
-        currentNumber = ""
     }
     
     private func makeOperatorLabel() -> UILabel? {
@@ -113,10 +118,18 @@ class CalculatorVC: UIViewController {
     }
     
     private func scrollToBottom() {
+        view.layoutIfNeeded()
         calculationFormulaScroll.setContentOffset(
             CGPoint(x: 0,
                     y: calculationFormulaScroll.contentSize.height - calculationFormulaScroll.bounds.height),
             animated: true)
     }
+    
+    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        finalFormula += operatorLabel.text ?? ""
+        finalFormula += operandLabel.text ?? ""
+        operandLabel.text = finalFormula
+    }
+    
     
 }
