@@ -6,11 +6,27 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) -> [String] {
-        return [""]
+    static func parse(from input: String) -> Formula {
+        let operators = input.filter {
+            !"0123456789".contains($0) }.compactMap {
+                Operator(rawValue: $0) }
+        
+        let operrands = componentsByOperators(from: input).compactMap {
+            Double($0)
+        }
+        
+        return Formula(operrands: CalculatorItemQueue(operrands),
+                       operators: CalculatorItemQueue(operators))
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return [""]
+        var result: [String]
+        
+        result = input.split(with: " ")
+        Operator.allCases.forEach { operators in
+            result = result.flatMap {
+                $0.split(with: operators.rawValue)}
+        }
+        return result
     }
 }
