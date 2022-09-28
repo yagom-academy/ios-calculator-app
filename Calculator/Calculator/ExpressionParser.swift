@@ -31,7 +31,7 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.reduce("") { $0 + String($1.rawValue) }
+        let operators = Operator.allCases.map { String($0.rawValue) }.joined()
         let separators = CharacterSet(charactersIn: operators)
         let operandsArray = input.components(separatedBy: separators)
         return operandsArray
