@@ -20,6 +20,14 @@ enum Literal {
     case numberSeven
     case numberEight
     case numberNine
+    case AC
+    case CE
+    case numberInvertion
+    case division
+    case multiplication
+    case subtraction
+    case addition
+    case result
     
     var buttonID: String {
         switch self {
@@ -47,6 +55,22 @@ enum Literal {
             return "number_8"
         case .numberNine:
             return "number_9"
+        case .AC:
+            return "button_AC"
+        case .CE:
+            return "button_CE"
+        case .numberInvertion:
+            return "number_Invertion"
+        case .division:
+            return "button_Division"
+        case .multiplication:
+            return "button_Multiplication"
+        case .subtraction:
+            return "button_Subtraction"
+        case .addition:
+            return "button_Addition"
+        case .result:
+            return "button_Result"
         }
     }
     
@@ -76,6 +100,22 @@ enum Literal {
             return "8"
         case .numberNine:
             return "9"
+        case .AC:
+            return "0"
+        case .CE:
+            return "0"
+        case .numberInvertion:
+            return "0"
+        case .division:
+            return "/"
+        case .multiplication:
+            return "*"
+        case .subtraction:
+            return "-"
+        case .addition:
+            return "+"
+        case .result:
+            return "="
         }
     }
 }

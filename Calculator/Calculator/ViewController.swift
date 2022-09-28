@@ -9,6 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak private var inputNumberLabel: UILabel!
     @IBOutlet weak private var inputOperatorLabel: UILabel!
+    @IBOutlet weak private var historyInputOperatorLabel: UILabel!
+    @IBOutlet weak private var historyInputNumberLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,42 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction private func touchUpCalculateButton(sender: UIButton) {
+    private func addOperator(inputText: String, operatorValue: String) {
+        historyInputOperatorLabel.text = inputOperatorLabel.text
+        historyInputNumberLabel.text = inputText
+        inputNumberLabel.text = Literal.numberZero.value
+        inputOperatorLabel.text = operatorValue
+    }
+    
+    @IBAction private func touchUpCalculatorButton(sender: UIButton) {
+        guard let id = sender.restorationIdentifier,
+              let inputText = inputNumberLabel.text else {
+            return
+        }
+        
+        switch id {
+        case Literal.AC.buttonID:
+            return
+        case Literal.CE.buttonID:
+            inputNumberLabel.text = Literal.numberZero.value
+        case Literal.numberInvertion.buttonID:
+            return
+        case Literal.division.buttonID:
+            addOperator(inputText: inputText, operatorValue: Literal.division.value)
+        case Literal.multiplication.buttonID:
+            addOperator(inputText: inputText, operatorValue: Literal.multiplication.value)
+        case Literal.subtraction.buttonID:
+            addOperator(inputText: inputText, operatorValue: Literal.subtraction.value)
+        case Literal.addition.buttonID:
+            addOperator(inputText: inputText, operatorValue: Literal.addition.value)
+        case Literal.result.buttonID:
+            return
+        default:
+            return
+        }
+    }
+    
+    @IBAction private func touchUpNumberButton(sender: UIButton) {
         guard let id = sender.restorationIdentifier,
               let inputText = inputNumberLabel.text else {
             return
