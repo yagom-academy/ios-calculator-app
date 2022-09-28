@@ -15,11 +15,8 @@ struct Formula {
         
         while calculationCount != operators.count {
             guard let nextOperand = currentOperand?.next,
-                  let operatorToCalculate = currentOperator else {
-                return result
-            }
-            
-            guard let operatorCase = Operator(rawValue: Character(operatorToCalculate.value)) else {
+                  let operatorToCalculate = currentOperator,
+                  let operatorCase = Operator(rawValue: Character(operatorToCalculate.value)) else {
                 return result
             }
             
