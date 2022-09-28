@@ -9,6 +9,7 @@ import XCTest
 
 final class CalculatorUITests: XCTestCase {
     private var app: XCUIApplication!
+    
     private var calculatorArchive: XCUIElement!
         
     private var numberDisplayLabel: XCUIElement!
@@ -96,5 +97,23 @@ final class CalculatorUITests: XCTestCase {
         
         // then
         XCTAssertEqual(numberDisplayLabel.label, "12345678.0009")
+    }
+    
+    func test_when_1_add_2_subtract_3_multiply_4_divide_5_add_tapped_then_return_1_add_2_sub_3_mul_4_div_5_in_formula() {
+        // given
+        
+        // when
+        numberButton1.tap()
+        addButton.tap()
+        numberButton2.tap()
+        subtractButton.tap()
+        numberButton3.tap()
+        multiplyButton.tap()
+        numberButton4.tap()
+        divideButton.tap()
+        addButton.tap()
+        
+        // then
+//        XCTAssertEqual(app., <#T##expression2: Equatable##Equatable#>)
     }
 }

@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorDisplayLabel: UILabel!
     @IBOutlet weak var calculatorArchive: UIStackView!
     
+    private(set) var formula: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setAccessibilityIndentifier()
@@ -61,5 +63,25 @@ class ViewController: UIViewController {
         calculatorDisplayLabel.text = displayText + title
     }
     
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let title = sender.currentTitle,
+              let displayText = calculatorDisplayLabel.text,
+              let operatorText = operatorDisplayLabel.text else {
+            return
+        }
+        
+        if displayText != nameSpace.zero {
+            if formula.isEmpty {
+                formula += displayText
+            } else {
+                formula += operatorText + displayText
+            }
+        }
+        
+        if formula.isEmpty == false {
+            operatorDisplayLabel.text = title
+        }
+        calculatorDisplayLabel.text = nameSpace.zero
+    }
 }
 
