@@ -24,6 +24,10 @@ class ViewController: UIViewController {
         resetCurrentEntry()
     }
     
+    @IBAction func clearEntryButtonPressed(_ sender: UIButton) {
+        resetCurrentEntry()
+    }
+    
     @IBAction func operandButtonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 0...9:
