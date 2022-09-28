@@ -10,6 +10,10 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue()
         var operators = CalculatorItemQueue()
         
+        if componentsByOperator(from: input).first == "-" {
+            operands.enqueue(0.0)
+        }
+        
         try componentsByOperator(from: input).forEach {
             switch $0 {
             case "+":
