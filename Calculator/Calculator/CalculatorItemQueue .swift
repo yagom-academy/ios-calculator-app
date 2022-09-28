@@ -34,9 +34,10 @@ struct  CalculatorItemQueue<Element: CalculateItem> {
         }
     }
     
-    mutating func dequeue() -> CalculateItem? {
+    mutating func dequeue() -> Element? {
         let result: Node? = head
         head = head?.next
+        
         return result?.value
     }
     
