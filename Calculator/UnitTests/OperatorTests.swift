@@ -74,4 +74,18 @@ final class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, 161.04)
     }
+    
+    func test_divide일_때_calculates실행_시_오류를_던져주는가() {
+        //given
+        sut = .divide
+        let lhs: Double = 10
+        let rhs: Double = 0
+        
+        //when
+        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        
+        //then
+        XCTAssertThrowsError(result)
+        
+    }
 }
