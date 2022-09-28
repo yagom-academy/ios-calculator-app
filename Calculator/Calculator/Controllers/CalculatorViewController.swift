@@ -4,6 +4,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
     
     private var formula = ""
     private let numberFormatter: NumberFormatter = {
@@ -62,7 +63,7 @@ class CalculatorViewController: UIViewController {
         return label
     }
     
-    private func addHistory() {
+    private func addHistoryStackView() {
         let historyLabels: [UIView] = [
             makeHistoryLabel(text: operatorLabel.text),
             makeHistoryLabel(text: operandLabel.text)
@@ -80,6 +81,7 @@ class CalculatorViewController: UIViewController {
         }
         
         historyStackView.addArrangedSubview(stackView)
+        historyScrollView.moveToBottom()
     }
     
     private func inputOperator(by key: NumericKeypad) {
@@ -93,8 +95,8 @@ class CalculatorViewController: UIViewController {
             return
         }
         
+        addHistoryStackView()
         formula += operand + currentOperator
-        addHistory()
         setOperandLabel()
     }
     
