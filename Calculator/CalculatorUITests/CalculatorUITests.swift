@@ -112,6 +112,17 @@ final class CalculatorUITests: XCTestCase {
         XCTAssertEqual(numberDisplayLabel.label, "-123")
         changeSignButton.tap()
         XCTAssertEqual(numberDisplayLabel.label, "123")
+    }
+    
+    func test_when_1_add_tapped_then_show_1_on_calculatorArchive() {
+        // given
+        
+        // when
+        numberButton1.tap()
+        addButton.tap()
+        
+        // then
+        XCTAssertNotNil(calculatorArchive.staticTexts["1"])
 
     }
 }
