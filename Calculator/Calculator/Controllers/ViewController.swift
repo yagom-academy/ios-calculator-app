@@ -111,12 +111,15 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorPads(_ sender: UIButton) {
+        if calculateHistory.isEmpty && currentOperand == Constant.defaultZero {
+            return
+        }
         
         let tappedOperator = sender.currentTitle
         guard let operators = tappedOperator else { return }
         mainOperatorLabel.text = operators
         if currentOperator == Constant.calculate {
-            currentOperand = Constant.zero
+            currentOperand = Constant.defaultZero
             currentOperator = operators
             mainResultLabel.text = Constant.zero
             
