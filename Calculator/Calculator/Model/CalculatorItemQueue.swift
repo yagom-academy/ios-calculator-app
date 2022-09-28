@@ -5,12 +5,6 @@
 //  Created by SummerCat on 2022/09/20.
 //
 
-import Foundation
-
-protocol CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<Item: CalculateItem> {
     private(set) var inputStack: [Item] = []
     private(set) var outputStack: [Item] = []
