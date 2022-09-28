@@ -20,7 +20,18 @@ enum ExpressionParser {
     }
 
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators = CharacterSet(charactersIn: Operator.allCases.map { String($0.rawValue) }.joined())
-        return input.components(separatedBy: operators)
+        var input = [input]
+        var result: [String] = []
+        
+        Operator.allCases.forEach {
+            result = []
+            while !input.isEmpty {
+                result.append(contentsOf: input.removeFirst().split(with: $0.rawValue))
+            }
+            
+            input = result
+        }
+        
+        return result
     }
 }
