@@ -132,7 +132,11 @@ class CalculatorVC: UIViewController {
             scrollToBottom()
             var formula = ExpressionParser.parse(from: totalFormulaString)
             let result = formula.result()
+            if result == Double.infinity {
+                operandLabel.text = "NaN"
+            } else {
             operandLabel.text = String(result)
+            }
         }
     }
     
