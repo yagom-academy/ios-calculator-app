@@ -102,10 +102,8 @@ class CalculatorItemQueueTests: XCTestCase {
         input.forEach {
             sut.enqueue($0)
         }
-        
         var result: Int?
-        
-        for _ in 1...input.count {
+        while !sut.isEmpty {
             result = sut.dequeue()
         }
         
@@ -123,7 +121,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(nil, sut.peek())
     }
     
-    func testCalculatorItemQueue_주어진_input_Array의_요소를_순서대로_enqueue한후_peek한_경우_그_결과는_input_Array의_첫번째_요소와_같다() {
+    func testCalculatorItemQueue_주어진_int_Array인_1_2_3_4_5를_순서대로_enqueue한후_peek한_경우_그_결과는_주어진_int_Array의_첫번째_요소와_같다() {
         //given
         let input = [1,2,3,4,5]
         
@@ -134,5 +132,21 @@ class CalculatorItemQueueTests: XCTestCase {
         
         //then
         XCTAssertEqual(input.first, sut.peek())
+    }
+    
+    func testCalculatorItemQueue_주어진_int_Array인_1_2_3_4_5를_순서대로_enqueue한후_clear한_경우_head_와_tail_그리고_head_next는_Nil이다() {
+        //given
+        let input = [1,2,3,4,5]
+        
+        //when
+        input.forEach {
+            sut.enqueue($0)
+        }
+        sut.clear()
+        
+        //then
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.head?.next)
+        XCTAssertNil(sut.tail)
     }
 }
