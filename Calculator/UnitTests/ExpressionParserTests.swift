@@ -50,4 +50,19 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertThrowsError(try ExpressionParser.parse(from: given2))
         XCTAssertThrowsError(try ExpressionParser.parse(from: given3))
     }
+    
+    func test_parse실행시_맨_앞의_피연산자가_음수값을_가지게_되어도_올바르게_처리가_되는지() {
+        // given
+        let given1 = " -132.0 + 14.5 / 112.3 * 13.0"
+        let given2 = "- 132.0 + 14.5 / 112.3 * 13.0 "
+        let expression2Result = (-132.0+14.5)/112.3*13.0
+        
+        // when
+        var result1 = try? ExpressionParser.parse(from: given1)
+        var result2 = try? ExpressionParser.parse(from: given2)
+        
+        // then
+        XCTAssertEqual(try? result1?.result(), expression2Result)
+        XCTAssertEqual(try? result2?.result(), expression2Result)
+    }
 }
