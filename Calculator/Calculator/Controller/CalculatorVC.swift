@@ -8,8 +8,8 @@ import UIKit
 
 class CalculatorVC: UIViewController {
     
-    var finalFormula: String = ""
-    var currentNumber: String = ""
+    private var totalFormulaString: String = ""
+    private var currentNumber: String = ""
     
     @IBOutlet private weak var calculationFormulaScroll: UIScrollView!
     @IBOutlet private weak var operatorLabel: UILabel!
@@ -27,7 +27,7 @@ class CalculatorVC: UIViewController {
         operatorLabel.text = ""
         operandLabel.text = "0"
         currentNumber = ""
-        finalFormula = ""
+        totalFormulaString = ""
     }
     
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
@@ -71,16 +71,17 @@ class CalculatorVC: UIViewController {
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         if operandLabel.text == "0" {
-            return
+            operatorLabel.text = sender.titleLabel?.text
         } else {
             makeFormulaStackView()
             scrollToBottom()
-            if finalFormula.isEmpty {
-                finalFormula.append(currentNumber)
+            if totalFormulaString.isEmpty {
+                totalFormulaString.append(currentNumber)
             } else {
-                finalFormula.append(operatorLabel.text ?? "")
-                finalFormula.append(currentNumber)
+                totalFormulaString.append(operatorLabel.text ?? "")
+                totalFormulaString.append(currentNumber)
             }
+            
             operatorLabel.text = sender.titleLabel?.text
             currentNumber = ""
             operandLabel.text = "0"
@@ -92,7 +93,7 @@ class CalculatorVC: UIViewController {
         let operandLabel = makeOperandLabel()
         let formulaStackView: UIStackView
         
-        if finalFormula.isEmpty {
+        if totalFormulaString.isEmpty {
             formulaStackView = UIStackView(arrangedSubviews: [operandLabel])
         } else {
             formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
@@ -123,10 +124,16 @@ class CalculatorVC: UIViewController {
             animated: true)
     }
     
-    @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        finalFormula += operatorLabel.text ?? ""
-        finalFormula += operandLabel.text ?? ""
-        operandLabel.text = finalFormula
+    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
+        if !totalFormulaString.isEmpty {
+            totalFormulaString += operatorLabel.text ?? ""
+            totalFormulaString += operandLabel.text ?? ""
+            makeFormulaStackView()
+            scrollToBottom()
+            var formula = ExpressionParser.parse(from: totalFormulaString)
+            let result = formula.result()
+            operandLabel.text = String(result)
+        }
     }
     
     
