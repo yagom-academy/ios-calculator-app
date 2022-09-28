@@ -25,8 +25,8 @@ struct Formula {
                let currentOperator = currentOperator {
                 result = currentOperator.calculate(lhs: firstOperand, rhs: secondOperand)
             }
-             
-            if result.isInfinite {
+            
+            if result.isInfinite || result.isNaN {
                 return .nan
             }
         }
