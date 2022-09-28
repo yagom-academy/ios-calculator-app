@@ -137,7 +137,7 @@ extension ViewController {
         resetInputNumber()
         resetInputOperator()
         resetStackViewAll()
-        resetCalculationRecod()
+        resetCalculationRecord()
     }
     
     func resetStackViewAll() {
@@ -152,7 +152,7 @@ extension ViewController {
         inputOperatorLabel.text = ""
     }
     
-    func resetCalculationRecod() {
+    func resetCalculationRecord() {
         calculationRecord = []
     }
     
