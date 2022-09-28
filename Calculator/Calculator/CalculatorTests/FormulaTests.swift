@@ -2,8 +2,7 @@
 //  FormulaTests.swift
 //  CalculatorTests
 //
-//  Created by 서수영 on 2022/09/28.
-//
+
 
 import XCTest
 @testable import Calculator
@@ -13,8 +12,8 @@ class FormulaTests: XCTestCase {
     var sut: Formula!
 
     override func setUpWithError() throws {
-        sut = Formula(operrands: CalculatorItemQueue([2, 4, 8]),
-                      operators: CalculatorItemQueue([Operator.substract, Operator.add, Operator.substract]))
+        sut = Formula(operrands: CalculatorItemQueue([1, "1123", 3]),
+                      operators: CalculatorItemQueue([Operator.substract, Operator.multiply, Operator.add]))
     }
     
     override func tearDownWithError() throws {
@@ -22,8 +21,17 @@ class FormulaTests: XCTestCase {
     }
 
     func test_sdf() {
-        let result = sut.result()
-        
-        XCTAssertEqual(result, -6)
+        do {
+            let result = try sut.result()
+            XCTAssertEqual(result, 1)
+        } catch CalculateError.invalidOperator {
+            print(CalculateError.invalidOperator)
+            XCTAssert(false)
+        } catch CalculateError.invalidOperand {
+            print(CalculateError.invalidOperand)
+            XCTAssert(false)
+        } catch {
+            XCTAssert(false)
+        }
     }
 }
