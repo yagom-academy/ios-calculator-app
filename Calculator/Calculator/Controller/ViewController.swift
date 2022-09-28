@@ -56,7 +56,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if let value = inputNumberLabel.text, value != "0" {
+        if let value = inputNumberLabel.text, value != CalculatorNameSpace.zero {
             inputNumberLabel.text = CalculatorNameSpace.negative + value
             return
         }
@@ -78,10 +78,10 @@ class ViewController: UIViewController {
             inputOperatorLabel.text = ""
         }
         
-        if inputNumberLabel.text == "0" {
-            guard value != "00" else { return }
+        if inputNumberLabel.text == CalculatorNameSpace.zero {
+            guard value != CalculatorNameSpace.doubleZero else { return }
             
-            if value == "." {
+            if value == CalculatorNameSpace.dot {
                 inputNumberLabel.text?.append(value)
                 return
             }
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if inputNumberLabel.text?.contains(".") == true, value == "." { return }
+        if inputNumberLabel.text?.contains(CalculatorNameSpace.dot) == true, value == CalculatorNameSpace.dot { return }
         
         inputNumberLabel.text?.append(value)
         
