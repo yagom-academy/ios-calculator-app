@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var modifiableOperatorLabel: UILabel!
     @IBOutlet weak var operationsStackView: UIStackView!    
     @IBOutlet weak var operationsScrollView: UIScrollView!
+    
     var overallOperation: String = ""
     var result: Double = 0.0
     var operand: String = "" {
@@ -19,7 +20,7 @@ class ViewController: UIViewController {
                 modifiableOperandLabel.text = "0"
                 return
             }
-            
+        
             modifiableOperandLabel.text = newValue
         }
     }
@@ -77,6 +78,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpEqualSignButton(_ sender: UIButton) {
         guard modifiableOperandLabel.text != String(result) else { return }
+        
         collecOperation()
         MakeOperationStackView()
         operand = ""
@@ -84,7 +86,7 @@ class ViewController: UIViewController {
         do {
             var formula = ExpressionParser.parse(from: overallOperation)
             result = try formula.result()
-            modifiableOperandLabel.text = String(result)
+            modifiableOperandLabel.text = String(changeStyle(result))
         } catch CalculatorError.divideByZeroError {
             modifiableOperandLabel.text = "NaN"
         } catch {
@@ -147,5 +149,16 @@ class ViewController: UIViewController {
         return label
     }
     
+    func changeStyle(_ operationResult: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        
+        let result = numberFormatter.string(from: operationResult as NSNumber) ?? "0"
+        
+        return result
+    }
 }
 
