@@ -15,8 +15,8 @@ struct Formula {
         guard var result = operands.dequeue() as? Double else { throw CalculatorError.emptyError }
 
         for _ in 1...operands.count {
-            guard let number = self.operands.dequeue() as? Double else { throw CalculatorError.emptyError }
-            guard let `operator` = self.operators.dequeue() as? Operator else { throw CalculatorError.emptyError }
+            guard let number = self.operands.dequeue() as? Double,
+                  let `operator` = self.operators.dequeue() as? Operator else { throw CalculatorError.emptyError }
             
             if `operator` == Operator.divide && number == .zero { throw CalculatorError.divideError }
             

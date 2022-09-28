@@ -13,7 +13,7 @@ enum ExpressionParser {
             formula.operands.enqueue($0)
         }
         
-        input.split(with: " ").filter { Double($0) == nil }.forEach {
+        input.split(with: " ").filter { !$0.isDouble }.forEach {
             guard let `operator` = Operator(rawValue: Character($0)) else { return }
             formula.operators.enqueue(`operator`)
         }
@@ -22,6 +22,6 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperator(from input: String) -> [String] {
-        return input.split(with: " ").compactMap { Double($0) != nil ? $0 : nil }
+        return input.split(with: " ").compactMap { $0.isDouble ? $0 : nil }
     }
 }

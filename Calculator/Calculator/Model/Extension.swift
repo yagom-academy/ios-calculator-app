@@ -10,6 +10,10 @@ extension Double: CalculateItem {
 }
 
 extension String {
+    var isDouble: Bool {
+        return Double(self) != nil ? true : false
+    }
+    
     func split(with target: Character) -> [String] {
         return split(separator: target).map { String($0) }
     }
