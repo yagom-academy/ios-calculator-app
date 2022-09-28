@@ -15,31 +15,23 @@ struct Formula {
         
         while calculationCount != operators.count {
             guard let nextOperand = currentOperand?.next,
-                  let calculatedOperator = currentOperator else {
+                  let operatorToCalculate = currentOperator else {
                 return result
             }
             
-            switch Character(calculatedOperator.value) {
-            case Operator.add.rawValue:
-                result = Operator.add.calculate(lhs: result, rhs: nextOperand.value)
-            case Operator.subtract.rawValue:
-                result = Operator.subtract.calculate(lhs: result, rhs: nextOperand.value)
-            case Operator.divide.rawValue:
-                guard nextOperand.value != 0 else {
-                    throw CalculationError.dividedZero
-                }
-                result = Operator.divide.calculate(lhs: result, rhs: nextOperand.value)
-            case Operator.multiply.rawValue:
-                result = Operator.multiply.calculate(lhs: result, rhs: nextOperand.value)
-            default:
-                print("잘못된 연산자")
+            guard let operatorCase = Operator(rawValue: Character(operatorToCalculate.value)) else {
+                return result
             }
             
-            calculationCount += 1
-            currentOperand = currentOperand?.next
-            currentOperator = currentOperator?.next
+            if operatorCase == Operator.divide, nextOperand.value == 0 {
+                throw CalculationError.dividedZero
+            } else {
+                result = operatorCase.calculate(lhs: result, rhs: nextOperand.value)
+                calculationCount += 1
+                currentOperand = currentOperand?.next
+                currentOperator = currentOperator?.next
+            }
         }
-        
         return result
     }
 }
