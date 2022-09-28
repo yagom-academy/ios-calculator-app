@@ -15,7 +15,7 @@ class CalculatorModelTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_1_2_3요소가_순서대로linkedList에_append되어야한다() {
+    func test_배열의요소가_순서대로linkedList에_append되어야한다() {
         // given
         let input: [Double] = [1,2,3]
         
@@ -29,7 +29,7 @@ class CalculatorModelTests: XCTestCase {
         XCTAssertEqual(sutByLinkedList.linkedList.tail?.value, 3)
     }
     
-    func test_비어있는list에_1을enqueue한후_dequeue가1을반환해야한다() {
+    func test_큐에하나의요소를enqueue한후_dequeue가그값을반환해야한다() {
         // given
         let input: Double = 1
         sutByLinkedList.enqueue(input)
@@ -41,7 +41,7 @@ class CalculatorModelTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_1_2_3_을enqueue한후_dequeue를호출했을때_1을반환해야한다() {
+    func test_배열의요소들을enqueue한후_dequeue를호출했을때_가장먼저enqueue된값을반환해야한다() {
         // given
         let input: [Double] = [1, 2, 3]
         for element in input {

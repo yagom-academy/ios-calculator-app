@@ -18,7 +18,7 @@ class FormulaTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_formula인스턴스생성해준상태로_1_add_2의결과가_3이반환되야한다() {
+    func test_피연산자2개_연산자1개로_이루어진Formula에서_result함수호출시_연산결과가반환되어야한다() {
         // given
         operands.enqueue(1)
         operands.enqueue(2)
@@ -31,8 +31,6 @@ class FormulaTests: XCTestCase {
         var result:Double = 0
         do {
             result = try sut.result()
-        } catch CalculateError.divideByZero {
-            print("0으로 나눌 수 없습니다")
         } catch {
             
         }
@@ -41,7 +39,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 3.0)
     }
     
-    func test_1_2_3의피연산자와2개의add연산자를enqueue하고_result에서6이반환되어야한다() {
+    func test_피연산자3개_같은연산자2개로이루어진Formula에서_result함수호출시_연산결과가반환되어야한다() {
         // given
         operands.enqueue(1)
         operands.enqueue(2)
@@ -56,8 +54,6 @@ class FormulaTests: XCTestCase {
         var result:Double = 0
         do {
             result = try sut.result()
-        } catch CalculateError.divideByZero {
-            print("0으로 나눌 수 없습니다")
         } catch {
             
         }
@@ -66,7 +62,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 6.0)
     }
     
-    func test_5개의피연산자와4개의각각다른연산자를통해_구현되어야한다() {
+    func test_5개의피연산자와4개의각각다른연산자를통해_순서대로연산완료후결과를반환해야한다() {
         // given
         operands.enqueue(1)
         operands.enqueue(2)
@@ -85,8 +81,6 @@ class FormulaTests: XCTestCase {
         var result:Double = 0
         do {
             result = try sut.result()
-        } catch CalculateError.divideByZero {
-            print("0으로 나눌 수 없습니다")
         } catch {
             
         }
