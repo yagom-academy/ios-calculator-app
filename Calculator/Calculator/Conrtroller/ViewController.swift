@@ -7,17 +7,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var modifiableOperandLabel: UILabel!
+    @IBOutlet weak var modifiableOperatorLabel: UILabel!
+    @IBOutlet weak var overallOperationLabelStackView: UIStackView!
     
-    var operandItem: String = "" {
+    var operand: String = "" {
         willSet {
             guard newValue != "" && newValue != "-" else {
-                operandLabel.text = "0"
+                modifiableOperandLabel.text = "0"
                 return
             }
             
-            operandLabel.text = newValue
+            modifiableOperandLabel.text = newValue
         }
     }
     
@@ -31,36 +32,85 @@ class ViewController: UIViewController {
         
         switch number {
         case "0", "00":
-            guard operandItem != "0" else { return }
+            guard operand != "0" else { return }
         default:
-            if operandItem == "0" {
-                operandItem.removeFirst()
+            if operand == "0" {
+                operand.removeFirst()
             }
         }
         
-        operandItem += number
+        operand += number
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        operatorLabel.text = sender.titleLabel?.text
+        guard operand != "" else {
+            modifiableOperatorLabel.text = sender.titleLabel?.text
+            return
+        }
+        
+        MakeOperationStackView()
+        operand = ""
+        modifiableOperatorLabel.text = sender.titleLabel?.text
     }
     
     @IBAction func touchUpPositiveNegativeNumberButton() {
-        guard operandItem != "" else { return }
+        guard operand != "" else { return }
         
-        if operandItem.prefix(1) == "-" {
-            operandItem.removeFirst()
+        if operand.prefix(1) == "-" {
+            operand.removeFirst()
         } else {
-            operandItem.insert("-", at: operandItem.startIndex)
+            operand.insert("-", at: operand.startIndex)
         }
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        operandItem = ""
+        operand = ""
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         // 이전 라벨 텍스트들까지 지우는 방식으로 변경
     }
+    
+    func MakeOperationStackView() {
+        let operationStackView = makeOperationStackVie()
+        operationStackView.addArrangedSubview(makeOperatorLabel())
+        operationStackView.addArrangedSubview(makeOperandLabel())
+
+        overallOperationLabelStackView.insertArrangedSubview(operationStackView,at: overallOperationLabelStackView.arrangedSubviews.count)
+    }
+    
+    func makeOperationStackVie() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        
+        return stackView
+    }
+    
+    func makeOperandLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = modifiableOperandLabel.text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh , for: .horizontal)
+        
+        return label
+    }
+    
+    func makeOperatorLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = modifiableOperatorLabel.text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        return label
+    }
+    
 }
 

@@ -361,8 +361,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="Mgv-KS-xUJ"/>
-                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="lXY-4E-0s5"/>
+                        <outlet property="modifiableOperandLabel" destination="Lwz-OF-XHD" id="Mgv-KS-xUJ"/>
+                        <outlet property="modifiableOperatorLabel" destination="HPC-iy-qdm" id="lXY-4E-0s5"/>
+                        <outlet property="overallOperationLabelStackView" destination="XRe-QE-UJf" id="NJN-Q8-Ioi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
