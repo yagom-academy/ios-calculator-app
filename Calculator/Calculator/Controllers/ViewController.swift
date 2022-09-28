@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         guard let number = tappedNumber else { return }
         
         if currentOperand == Constant.defaultZero || currentOperand == Constant.zero {
-            if number == Constant.doubleZero {
+            if number == Constant.doubleZero || currentOperator == Constant.calculate {
                 return
             }
             currentOperand = number
@@ -95,9 +95,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorPads(_ sender: UIButton) {
+        
         let tappedOperator = sender.currentTitle
         guard let operators = tappedOperator else { return }
         mainOperatorLabel.text = operators
+        if currentOperator == Constant.calculate {
+            currentOperand = Constant.zero
+            currentOperator = operators
+            mainResultLabel.text = Constant.zero
+            return
+        }
         
         if currentOperand == Constant.defaultZero {
             currentOperator = operators
@@ -113,7 +120,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedCalculate(_ sender: UIButton) {
-        if currentOperand == Constant.defaultZero || calculateHistory.isEmpty {
+        if currentOperand == Constant.defaultZero || calculateHistory.isEmpty || currentOperator == Constant.calculate {
             return
         }
         
@@ -121,12 +128,18 @@ class ViewController: UIViewController {
         
         calculateHistory.append(currentOperator)
         calculateHistory.append(currentOperand)
-        calculateHistory.removeFirst()
         
-        let formula = ExpressionParser.parse(from: calculateHistory.joined())
+        var removeFirstHistory = calculateHistory
+        removeFirstHistory.removeFirst()
+        
+        currentOperator = Constant.calculate
+        mainOperatorLabel.text = Constant.empty
+        
+        let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
         
         do {
             mainResultLabel.text = try String(formula.result())
+            currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
             
         } catch CalculatorError.noneOperator {
@@ -137,7 +150,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedDotPads(_ sender: UIButton) {
-        if currentOperand.contains(Constant.dot) || currentOperand == Constant.defaultZero {
+        if currentOperand.contains(Constant.dot) || currentOperand == Constant.defaultZero || currentOperator == Constant.calculate {
             return
         } else {
             currentOperand += Constant.dot

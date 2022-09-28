@@ -13,5 +13,6 @@ struct Constant {
     static let doubleZero = "00"
     static let negative = "-"
     static let empty = ""
+    static let calculate = "="
     static let dot = "."
 }
