@@ -131,23 +131,20 @@ class CalculatorVC: UIViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        //        if !totalFormulaString.isEmpty {
-        //            totalFormulaString += operatorLabel.text ?? ""
-        //            totalFormulaString += operandLabel.text ?? ""
-        //            makeFormulaStackView()
-        //            scrollToBottom()
-        //            var formula = ExpressionParser.parse(from: totalFormulaString)
-        //            let result = formula.result()
-        //            if result == Double.infinity {
-        //                operandLabel.text = "NaN"
-        //            } else {
-        //                operandLabel.text = String(result)
-        //            }
-        
-        makeFormulaStackView()
-        scrollToBottom()
-        operandLabel.text = currentNumber
-        //}
+                if !totalFormulaString.isEmpty {
+                    totalFormulaString += operatorLabel.text ?? ""
+                    totalFormulaString += operandLabel.text ?? ""
+                    makeFormulaStackView()
+                    scrollToBottom()
+                    var formula = ExpressionParser.parse(from: totalFormulaString)
+                    let result = formula.result()
+                    if result == Double.infinity {
+                        operandLabel.text = "NaN"
+                    } else {
+                        operandLabel.text = String(result)
+                    }
+                    totalFormulaString = ""
+        }
     }
     
     private func numberFormatter(number: String) -> String {
