@@ -58,9 +58,7 @@ class FormulaTests: XCTestCase {
         
         sut.operators.enqueue(inputOperators)
         
-        guard let result: Double = try? sut.result() else {
-            return
-        }
+        let result: Double = sut.result()
         
         //then
         XCTAssertEqual(3.0, result)
@@ -78,9 +76,7 @@ class FormulaTests: XCTestCase {
         
         sut.operators.enqueue(inputOperators)
         
-        guard let result: Double = try? sut.result() else {
-            return
-        }
+        let result: Double = sut.result()
         
         //then
         XCTAssertEqual(1.0, result)
@@ -98,9 +94,7 @@ class FormulaTests: XCTestCase {
         
         sut.operators.enqueue(inputOperators)
         
-        guard let result: Double = try? sut.result() else {
-            return
-        }
+        let result: Double = sut.result()
         
         //then
         XCTAssertEqual(2.0, result)
@@ -118,15 +112,13 @@ class FormulaTests: XCTestCase {
         
         sut.operators.enqueue(inputOperators)
         
-        guard let result: Double = try? sut.result() else {
-            return
-        }
+        let result: Double = sut.result()
         
         //then
         XCTAssertEqual(2.0, result)
     }
     
-    func testFormula_주어진_5개의_실수_1_2_5_2_40와_4개의_Operator_add_subtract_divide_multiply를_operands와_operators에_순서대로_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수40이다() {
+    func testFormula_주어진_5개의_실수_1_2_5_2_40과_4개의_Operator_add_subtract_divide_multiply를_operands와_operators에_순서대로_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수40이다() {
         //given
         let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0, 40]
         let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
@@ -140,23 +132,64 @@ class FormulaTests: XCTestCase {
             sut.operators.enqueue($0)
         }
         
-        guard let result: Double = try? sut.result() else {
-            return
-        }
+        let result: Double = sut.result()
         
         //then
         XCTAssertEqual(-40.0, result)
     }
     
-    func testFormula_result_메소드는_피연산자와_연산자가_아무것도_없는_경우_오류를_던진다() {
+    func testFormula_result_메소드는_피연산자와_연산자가_아무것도_없는_경우_그_결과는_zero이다() {
         //given
         sut = Formula()
         
-        //when,then
-        XCTAssertThrowsError(try sut.result())
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.zero, result)
     }
     
-    func testFormula_result_메소드는_주어진_피연산자와_연산자간의_갯수가_동일한_경우_오류를_던진다() {
+    func testFormula_주어진_1개의_실수10_operands에_enqueue한_후_result_메소드를_호출하면_그_결과는_주어진_실수_10과_같다() {
+        //given
+        let inputOperands: Double = 10.0
+        sut.operands.enqueue(inputOperands)
+
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(inputOperands, result)
+    }
+    
+    func testFormula_주어진_피연산자_실수_10_20을_operands에_순서대로_enqueue한_후_result_메소드를_호출하면_결과는_zero이다() {
+        //given
+        let inputOperands: [Double] = [10.0, 20.0]
+        
+        inputOperands.forEach {
+            sut.operands.enqueue($0)
+        }
+        
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.zero, result)
+    }
+    
+    func testFormula_주어진_연산자_Operator_add를_operators에_enqueue한_후_result_메소드를_호출하면_결과는_zero이다() {
+        //given
+        let inputOperators: Operator = .add
+
+        sut.operators.enqueue(inputOperators)
+        
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.zero, result)
+    }
+    
+    func testFormula_result_메소드는_주어진_피연산자와_연산자간의_갯수가_동일한_경우_그_결과는_zero이다() {
         //given
         let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0]
         let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
@@ -169,11 +202,14 @@ class FormulaTests: XCTestCase {
             sut.operators.enqueue($0)
         }
         
-        //when,then
-        XCTAssertThrowsError(try sut.result())
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.zero, result)
     }
     
-    func testFormula_result_메소드는_주어진_피연산자보다_연산자의_갯수가_많은_경우_오류를_던진다() {
+    func testFormula_result_메소드는_주어진_피연산자보다_연산자의_갯수가_많은_경우_그_결과는_zero이다() {
         //given
         let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0]
         let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply, .add]
@@ -186,11 +222,14 @@ class FormulaTests: XCTestCase {
             sut.operators.enqueue($0)
         }
         
-        //when,then
-        XCTAssertThrowsError(try sut.result())
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.zero, result)
     }
     
-    func testFormula_result_메소드는_주어진_피연산자의_갯수가_연산자보다_2개이상_많은_경우_오류를_던진다() {
+    func testFormula_result_메소드는_주어진_피연산자의_갯수가_연산자보다_2개이상_많은_경우_그_결과는_zero이다() {
         //given
         let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0, 6.0, 20.0]
         let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
@@ -203,15 +242,18 @@ class FormulaTests: XCTestCase {
             sut.operators.enqueue($0)
         }
         
-        //when,then
-        XCTAssertThrowsError(try sut.result())
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.zero, result)
     }
     
-    func testFormula_result_메소드는_나누기를_실수0으로_계산하려고_하는_경우_오류를_던진다() {
+    func testFormula_result_메소드는_나누기를_실수0으로_계산하려고_하는_경우_그_결과는_infinity이다() {
         //given
         let inputOperands: [Double] = [1.0, 2.0, 0.0, 6.5]
         let inputOperators: [Operator] = [.add, .divide, .subtract]
-        
+
         inputOperands.forEach {
             sut.operands.enqueue($0)
         }
@@ -220,7 +262,10 @@ class FormulaTests: XCTestCase {
             sut.operators.enqueue($0)
         }
         
-        //when,then
-        XCTAssertThrowsError(try sut.result())
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertEqual(Double.infinity, result)
     }
 }
