@@ -4,6 +4,4 @@ protocol CalculateItemProtocol {
     
 }
 
-extension String: CalculateItemProtocol {
-    
-}
+
