@@ -32,10 +32,10 @@ class ViewController: UIViewController {
         guard var currentEntry = currentEntryLabel.text,
                   currentEntry != "0" else { return }
         
-        if let firstLetter = currentEntry.first, firstLetter.isNumber {
-            currentEntry.insert("-", at: currentEntry.startIndex)
-        } else {
+        if currentEntry.starts(with: "-") {
             currentEntry.removeFirst()
+        } else {
+            currentEntry.insert("-", at: currentEntry.startIndex)
         }
         
         currentEntryLabel.text = currentEntry
