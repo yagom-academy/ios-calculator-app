@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorVC: UIViewController {
+final class CalculatorVC: UIViewController {
     
     private var totalFormulaString: String = ""
     private var currentNumber: String = ""
@@ -87,7 +87,6 @@ class CalculatorVC: UIViewController {
                 totalFormulaString.append(operatorLabel.text ?? "")
                 totalFormulaString.append(currentNumber)
             }
-            
             operatorLabel.text = sender.titleLabel?.text
             currentNumber = ""
             operandLabel.text = "0"
@@ -126,24 +125,25 @@ class CalculatorVC: UIViewController {
         view.layoutIfNeeded()
         calculationFormulaScroll.setContentOffset(
             CGPoint(x: 0,
-                    y: calculationFormulaScroll.contentSize.height - calculationFormulaScroll.bounds.height),
+                    y: calculationFormulaScroll.contentSize.height
+                    - calculationFormulaScroll.bounds.height),
             animated: true)
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-                if !totalFormulaString.isEmpty {
-                    totalFormulaString += operatorLabel.text ?? ""
-                    totalFormulaString += operandLabel.text ?? ""
-                    makeFormulaStackView()
-                    scrollToBottom()
-                    var formula = ExpressionParser.parse(from: totalFormulaString)
-                    let result = formula.result()
-                    if result == Double.infinity {
-                        operandLabel.text = "NaN"
-                    } else {
-                        operandLabel.text = String(result)
-                    }
-                    totalFormulaString = ""
+        if !totalFormulaString.isEmpty {
+            totalFormulaString += operatorLabel.text ?? ""
+            totalFormulaString += operandLabel.text ?? ""
+            makeFormulaStackView()
+            scrollToBottom()
+            var formula = ExpressionParser.parse(from: totalFormulaString)
+            let result = formula.result()
+            if result == Double.infinity {
+                operandLabel.text = "NaN"
+            } else {
+                operandLabel.text = String(result)
+            }
+            totalFormulaString = ""
         }
     }
     
@@ -156,5 +156,4 @@ class CalculatorVC: UIViewController {
         }
         return numberFormatter.string(from: NSNumber(value: decimalNumber))!
     }
-    
 }
