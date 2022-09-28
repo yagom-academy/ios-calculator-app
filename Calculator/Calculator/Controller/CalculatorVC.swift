@@ -74,6 +74,7 @@ class CalculatorVC: UIViewController {
         } else {
             operatorLabel.text = sender.titleLabel?.text
             makeFormulaStackView()
+            scrollToBottom()
             if finalFormula.isEmpty {
                 finalFormula.append(currentNumber)
             } else {
@@ -89,7 +90,7 @@ class CalculatorVC: UIViewController {
               let operandLabel = makeOperandLabel() else {
             return
         }
-
+        
         let formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         
         formulaStackView.spacing = 8
@@ -109,6 +110,13 @@ class CalculatorVC: UIViewController {
         operandLabelForStack.text = operandLabel.text
         operandLabelForStack.textColor = .white
         return operandLabelForStack
+    }
+    
+    private func scrollToBottom() {
+        calculationFormulaScroll.setContentOffset(
+            CGPoint(x: 0,
+                    y: calculationFormulaScroll.contentSize.height - calculationFormulaScroll.bounds.height),
+            animated: true)
     }
     
 }
