@@ -2,9 +2,6 @@
 //  CalculatorItems.swift
 //  Calculator
 //
-
-
-
 extension Int: CalculateItem {}
 extension Double: CalculateItem {}
 extension OperatorItem: CalculateItem {}
