@@ -12,19 +12,20 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>.init()
     
     mutating func result() -> Double {
-        var result: Double = 0.0
-        let lhs = operands.dequeue()
-        let rhs = operands.dequeue()
-        let opt = operators.dequeue()
+        var result: Double
         
-        guard let checkLhs = lhs else { return 9999.9999 }
-        guard let checkRhs = rhs else { return 9999.9999 }
-        guard let checkOpt = opt else { return 9999.9999 }
+        guard let firstNumber = operands.dequeue() else { return 0.0 }
         
-        while !operands.isEmpty && !operators.isEmpty {
-            result = checkOpt.calculate(lhs: checkLhs, rhs: checkRhs)
+        result = firstNumber
+        
+        while operators.isEmpty != true {
+            guard let operators = operators.dequeue() else { return 0.0 }
+            guard let operand = operands.dequeue() else { return 0.0 }
+            
+            result = operators.calculate(lhs: result, rhs: operand)
         }
         return result
     }
 }
+
 
