@@ -133,16 +133,31 @@ class ViewController: UIViewController {
     }
     
     func changeSign(_ text: String) -> String {
-        if text.first == "-" {
+        if text.first == Character(nameSpace.negative) {
             let secondIndex = text.index(after: text.startIndex)
             return String(text[secondIndex...])
         } else {
-            return "-\(text)"
+            return nameSpace.negative + text
         }
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         calculatorDisplayLabel.text = nameSpace.zero
     }
+    
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        calculatorDisplayLabel.text = nameSpace.zero
+        operatorDisplayLabel.text = nameSpace.empty
+        formula = nameSpace.empty
+        
+        allClearArchive()
+    }
+    
+    func allClearArchive() {
+        calculatorArchive.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+    }
+    
 }
 

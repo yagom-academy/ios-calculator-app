@@ -7,4 +7,6 @@
 
 enum nameSpace {
     static let zero = "0"
+    static let negative = "-"
+    static let empty = ""
 }
