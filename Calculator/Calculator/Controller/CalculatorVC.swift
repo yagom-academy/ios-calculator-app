@@ -18,7 +18,7 @@ class CalculatorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetAllUI()
+        //resetAllUI()
     }
     
     private func resetAllUI() {
@@ -29,7 +29,7 @@ class CalculatorVC: UIViewController {
         currentNumber = ""
     }
     
-    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+    @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         if operandLabel.text?.first == "0" {
             operandLabel.text?.removeFirst()
         }
@@ -37,7 +37,7 @@ class CalculatorVC: UIViewController {
         operandLabel.text = currentNumber
     }
     
-    @IBAction func touchUpDotButton(_ sender: UIButton) {
+    @IBAction private func touchUpDotButton(_ sender: UIButton) {
         if currentNumber.contains(".") {
             return
         } else if operandLabel.text == "0" {
@@ -48,16 +48,16 @@ class CalculatorVC: UIViewController {
         operandLabel.text = currentNumber
     }
     
-    @IBAction func touchUpAcButton(_ sender: UIButton) {
+    @IBAction private func touchUpAcButton(_ sender: UIButton) {
         resetAllUI()
     }
     
-    @IBAction func touchUpCeButton(_ sender: UIButton) {
+    @IBAction private func touchUpCeButton(_ sender: UIButton) {
         currentNumber = ""
         operandLabel.text = "0"
     }
     
-    @IBAction func touchUpConvertPlusMinusButton(_ sender: UIButton) {
+    @IBAction private func touchUpConvertPlusMinusButton(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
         } else if currentNumber.first == "-" {
@@ -68,12 +68,12 @@ class CalculatorVC: UIViewController {
         operandLabel.text = currentNumber
     }
     
-    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         if operandLabel.text == "0" {
             return
         } else {
             operatorLabel.text = sender.titleLabel?.text
-            //makeFormulaStackView()
+            makeFormulaStackView()
             if finalFormula.isEmpty {
                 finalFormula.append(currentNumber)
             } else {
@@ -84,6 +84,18 @@ class CalculatorVC: UIViewController {
         }
     }
     
+    private func makeOperatorLabel() -> UILabel? {
+        let operatorLabelForStack: UILabel = UILabel()
+        operatorLabelForStack.text = operatorLabel.text
+        operatorLabelForStack.textColor = .white
+        return operatorLabelForStack
+    }
     
+    private func makeOperandLabel() -> UILabel? {
+        let operandLabelForStack: UILabel = UILabel()
+        operandLabelForStack.text = operandLabel.text
+        operandLabelForStack.textColor = .white
+        return operandLabelForStack
+    }
     
 }
