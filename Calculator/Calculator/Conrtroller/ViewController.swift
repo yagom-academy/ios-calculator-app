@@ -9,14 +9,14 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-
+    
     var operandItem: String = "" {
         willSet {
-            guard newValue != "" else {
+            guard newValue != "" && newValue != "-" else {
                 operandLabel.text = "0"
                 return
             }
-
+            
             operandLabel.text = newValue
         }
     }
@@ -43,6 +43,25 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
         operatorLabel.text = sender.titleLabel?.text
+    }
+    
+    @IBAction func touchUpPositiveNegativeNumberButton() {
+        guard operandItem != "" else { return }
+        
+        if operandItem.prefix(1) == "-" {
+            operandItem.removeFirst()
+        } else {
+            operandItem.insert("-", at: operandItem.startIndex)
+        }
+    }
+    
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        guard operandItem != "" else { return }
+        operandItem.removeLast()
+    }
+    
+    @IBAction func touchUpACButton(_ sender: UIButton) {
+        operandItem = ""
     }
 }
 
