@@ -47,7 +47,7 @@ class CalculatorViewController: UIViewController {
         guard var operand = operandLabel.text else { return }
         let keyNumber = key.rawValue
         
-        if (operand.last == "." || operand.contains(".")) && (keyNumber == ".") ||
+        if (operand.last == "." || operand.contains(".") || formula == "") && (keyNumber == ".") ||
             isOperandLabelZero() && (keyNumber == "0" || keyNumber == "00") { return }
         
         if (isOperandLabelZero() && keyNumber != ".") || formula == "" {
