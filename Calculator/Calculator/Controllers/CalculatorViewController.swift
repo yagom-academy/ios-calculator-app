@@ -40,13 +40,10 @@ class CalculatorViewController: UIViewController {
     private func inputNumber(by key: NumericKeypad) {
         guard var operand = operandLabel.text else { return }
         
-        if (operand.last == "." || operand.contains(".")),
-           key.rawValue == "." { return }
-
-        if isOperandZero(),
-           (key.rawValue == "0" || key.rawValue == "00") { return }
+        if (operand.last == "." || operand.contains(".")) && (key.rawValue == ".") ||
+            isOperandZero() && (key.rawValue == "0" || key.rawValue == "00") { return }
         
-        if isOperandZero() {
+        if isOperandZero(), key.rawValue != "." {
             operand = key.rawValue
         } else {
             operand += key.rawValue
