@@ -28,6 +28,19 @@ class ViewController: UIViewController {
         resetCurrentEntry()
     }
     
+    @IBAction func signChangeButtonPressed(_ sender: UIButton) {
+        guard var currentEntry = currentEntryLabel.text,
+                  currentEntry != "0" else { return }
+        
+        if let firstLetter = currentEntry.first, firstLetter.isNumber {
+            currentEntry.insert("-", at: currentEntry.startIndex)
+        } else {
+            currentEntry.removeFirst()
+        }
+        
+        currentEntryLabel.text = currentEntry
+    }
+    
     @IBAction func operandButtonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 0...9:
