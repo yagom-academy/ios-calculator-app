@@ -2,7 +2,7 @@
 //  FormulaError.swift
 //  Calculator
 //
-//  Created by Dylan_Y on 2022/09/27.
+//  Created by Baem on 2022/09/27.
 //
 
 enum FormulaError: Error {
