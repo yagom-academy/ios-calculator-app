@@ -64,6 +64,20 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: "0")
     }
     
+    private func changeOperandSign() {
+        guard var operand = operandLabel.text else { return }
+        
+        if operand == "0" { return }
+        
+        if operand.first != "−" {
+            operand = "−" + operand
+        } else {
+            operand = String(operand.dropFirst())
+        }
+        
+        setOperandLabel(to: operand)
+    }
+    
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle,
               let key = NumericKeypad(rawValue: buttonTitle) else { return }
@@ -80,7 +94,7 @@ class CalculatorViewController: UIViewController {
         case .ce:
             return
         case .plusMinus:
-            return
+            changeOperandSign()
         default:
             return
         }

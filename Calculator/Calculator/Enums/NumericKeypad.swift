@@ -20,7 +20,7 @@ enum NumericKeypad: String {
     case decimalPoint = "."
     
     case plus = "+"
-    case minus = "−"
+    case minus = "-"
     case division = "÷"
     case multiplication = "×"
     
