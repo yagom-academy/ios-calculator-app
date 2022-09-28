@@ -9,8 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var modifiableOperandLabel: UILabel!
     @IBOutlet weak var modifiableOperatorLabel: UILabel!
-    @IBOutlet weak var overallOperationLabelStackView: UIStackView!
-    
+    @IBOutlet weak var operationsStackView: UIStackView!    
+    @IBOutlet weak var operationsScrollView: UIScrollView!
     var overallOperation: String = ""
     var result: Double = 0.0
     var operand: String = "" {
@@ -51,6 +51,7 @@ class ViewController: UIViewController {
         }
         collecOperation()
         MakeOperationStackView()
+        scrollTobottom()
         operand = ""
         modifiableOperatorLabel.text = sender.titleLabel?.text
     }
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        overallOperationLabelStackView.subviews.forEach { $0.removeFromSuperview() }
+        operationsStackView.subviews.forEach { $0.removeFromSuperview() }
         overallOperation = ""
         operand = ""
         modifiableOperatorLabel.text = " "
@@ -111,10 +112,17 @@ class ViewController: UIViewController {
         operationStackView.alignment = .fill
         operationStackView.spacing = 8
         
-        operationStackView.addArrangedSubview(makeOperatorLabel())
+        let operatorLabel = makeOperatorLabel()
+        
+        operationStackView.addArrangedSubview(operatorLabel)
         operationStackView.addArrangedSubview(makeOperandLabel())
         
-        overallOperationLabelStackView.insertArrangedSubview(operationStackView,at: overallOperationLabelStackView.arrangedSubviews.count)
+        operationsStackView.insertArrangedSubview(operationStackView,at: operationsStackView.arrangedSubviews.count)
+    }
+    
+    func scrollTobottom() {
+        operationsScrollView.layoutIfNeeded()
+        operationsScrollView.setContentOffset(CGPoint(x: 0, y: operationsScrollView.contentSize.height - operationsScrollView.bounds.height), animated: false)
     }
     
     func makeOperandLabel() -> UILabel {
