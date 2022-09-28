@@ -40,7 +40,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(10.0)
         
         // when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         // then
         XCTAssertEqual(result, givenResult)

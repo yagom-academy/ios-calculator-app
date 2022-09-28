@@ -27,7 +27,7 @@ final class OperatorTests: XCTestCase {
         let rhs = 13.4
         
         //when
-        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        let result = try! sut?.calculates(lhs: lhs, rhs: rhs)
         
         //then
         XCTAssertEqual(result, 24.5)
@@ -41,7 +41,7 @@ final class OperatorTests: XCTestCase {
         let rhs = 12.2
         
         //when
-        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        let result = try! sut?.calculates(lhs: lhs, rhs: rhs)
         
         //then
         XCTAssertEqual(result, 1.0)
@@ -55,7 +55,7 @@ final class OperatorTests: XCTestCase {
         let rhs = 12.2
         
         //when
-        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        let result = try! sut?.calculates(lhs: lhs, rhs: rhs)
         
         //then
         XCTAssertEqual(result, 13.2/12.2)
@@ -69,7 +69,7 @@ final class OperatorTests: XCTestCase {
         let rhs = 12.2
         
         //when
-        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        let result = try! sut?.calculates(lhs: lhs, rhs: rhs)
         
         //then
         XCTAssertEqual(result, 161.04)
@@ -82,7 +82,7 @@ final class OperatorTests: XCTestCase {
         let rhs: Double = 0
         
         //when
-        let result = sut?.calculates(lhs: lhs, rhs: rhs)
+        let result = try sut?.calculates(lhs: lhs, rhs: rhs)
         
         //then
         XCTAssertThrowsError(result)
