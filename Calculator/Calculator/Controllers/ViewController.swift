@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet weak var mainOperatorLabel: UILabel!
     @IBOutlet weak var mainResultLabel: UILabel!
@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     var currentOperand: String = Constant.defaultZero
     var currentOperator: String = Constant.empty
-    var calculateHistory: [String] = []
+    private var calculateHistory: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,25 +24,25 @@ class ViewController: UIViewController {
         setClearCalculateHistory()
     }
     
-    func setUILabel() {
+    private func setUILabel() {
         mainOperatorLabel.text = Constant.empty
         mainResultLabel.text = Constant.zero
     }
     
-    func setDefaultOperand() {
+    private func setDefaultOperand() {
         mainResultLabel.text = Constant.zero
         currentOperand = Constant.defaultZero
     }
 
-    func setClearCalculateHistory() {
+    private func setClearCalculateHistory() {
         historyStackView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
-    func updateMainResultLabel() {
+    private func updateMainResultLabel() {
         mainResultLabel.text = currentOperand
     }
     
-    func makeHistoryStackViewLabel(item: String) -> UILabel {
+    private func makeHistoryStackViewLabel(item: String) -> UILabel {
         let label: UILabel = {
             let label = UILabel()
             label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         return label
     }
     
-    func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+    private func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
         let stackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
             stackView.spacing = 8
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    func updateCalculateHistory(currentOperator: String, currentOperand: String) {
+    private func updateCalculateHistory(currentOperator: String, currentOperand: String) {
         let operatorLabel = makeHistoryStackViewLabel(item: currentOperator)
         let operandLabel = makeHistoryStackViewLabel(item: currentOperand)
         let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
