@@ -6,25 +6,25 @@
 
 import Foundation
 
-class CalculatorItemQueue<T>: CalculateItem {
+class CalculatorItemQueue<T> {
     private(set) var head: Node<T>? = nil
     var last: Node<T>? {
-        if head == nil {
+        guard head != nil else {
             return nil
-        } else {
-            var node = head
-            while node?.next != nil {
-                node = node?.next
-            }
-            return node
         }
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        return node
     }
     var isEmpty: Bool {
-        if head == nil && last == nil {
+        guard head != nil else {
             return true
-        } else {
-            return false
         }
+        
+        return false
     }
     
     func enqueue(element: T) {
