@@ -60,16 +60,16 @@ class CalculatorTesting: XCTestCase {
         XCTAssertEqual(myInput.split(separator: "/"),["1.1","+","1.2","-","123.41"])
     }
     
-    func test_Operator_function_add_works() {
+    func test_Operator_function_add_works() throws {
         let myCase  = Operator(rawValue: "+")
-        let result = myCase?.calculate(lhs: lhs, rhs: rhs)
+        let result = try myCase?.calculate(lhs: lhs, rhs: rhs)
         
         XCTAssertEqual(result, 2.0)
     }
     
-    func test_Operator_function_divide_works() {
+    func test_Operator_function_divide_works() throws {
         let myCase  = Operator(rawValue: "/")
-        let result = myCase?.calculate(lhs: lhs, rhs: rhs)
+        let result = try myCase?.calculate(lhs: lhs, rhs: rhs)
         
         XCTAssertEqual(result, 1.0)
     }
@@ -89,11 +89,13 @@ class CalculatorTesting: XCTestCase {
         XCTAssertEqual(dequeueResult.count, 100)
     }
     
-    func test_divide_zero_returns_zero() {
-        let test1 = Operator.divide.calculate(lhs: 12.3, rhs: 0)
-        let test2 = Operator.divide.calculate(lhs: 0, rhs: 12.3)
+    func test_divide_zero_returns_zero() throws {
+        let test1 = try Operator.divide.calculate(lhs: 12.3, rhs: 0)
         
         XCTAssertEqual(test1, 0)
-        XCTAssertEqual(test2, 0)
+    }
+    
+    func test_zero_division_error_thrown_when_lhs_is_zero() {
+        XCTAssertThrowsError(try Operator.divide.calculate(lhs: 0, rhs: 12.3))
     }
 }
