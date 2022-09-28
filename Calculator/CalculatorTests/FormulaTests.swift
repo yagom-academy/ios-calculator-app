@@ -75,5 +75,15 @@ final class FormulaTests: XCTestCase {
         
         XCTAssertTrue(result.isNaN)
     }
+    
+    func test_0나누기0을진행하면_NaN을반환하는지() {
+        sut.operands.enqueue(0.0)
+        sut.operators.enqueue(Operator.divide)
+        sut.operands.enqueue(0.0)
+        
+        let result = sut.result()
+        
+        XCTAssertTrue(result.isNaN)
+    }
 }
 
