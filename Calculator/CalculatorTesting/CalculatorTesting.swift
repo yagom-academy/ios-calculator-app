@@ -9,6 +9,8 @@ import XCTest
 @testable import Calculator
 class CalculatorTesting: XCTestCase {
     var sut: CalculatorItemQueue<Double>!
+    let rhs: Double = 1.0
+    let lhs: Double = 1.0
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
@@ -60,5 +62,12 @@ class CalculatorTesting: XCTestCase {
     func test_String_split_works_nice() {
         let myInput = "1.1/+/1.2/-/123.41"
         XCTAssertEqual(myInput.split(separator: "/"),["1.1","+","1.2","-","123.41"])
+    }
+    
+    func test_Operator_function_add_works() {
+        let myCase  = Operator(rawValue: "+")
+        let result = myCase?.calculate(lhs: lhs, rhs: rhs)
+        
+        XCTAssertEqual(result, 2.0)
     }
 }
