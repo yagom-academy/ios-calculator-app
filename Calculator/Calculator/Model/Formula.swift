@@ -5,7 +5,7 @@
 
 struct Formula {
     var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<String>
+    var operators: CalculatorItemQueue<Operator>
     
     func result() throws -> Double {
         var result: Double = operands.list.head?.value ?? 0
@@ -15,15 +15,15 @@ struct Formula {
         
         while calculationCount != operators.count {
             guard let nextOperand = currentOperand?.next,
-                  let operatorToCalculate = currentOperator,
-                  let operatorCase = Operator(rawValue: Character(operatorToCalculate.value)) else {
+                  let operatorToCalculate = currentOperator else {
                 return result
             }
             
-            if operatorCase == Operator.divide, nextOperand.value == 0 {
+            if operatorToCalculate.value.rawValue == Operator.divide.rawValue,
+                nextOperand.value == 0 {
                 throw CalculationError.dividedZero
             } else {
-                result = operatorCase.calculate(lhs: result, rhs: nextOperand.value)
+                result = operatorToCalculate.value.calculate(lhs: result, rhs: nextOperand.value)
                 calculationCount += 1
                 currentOperand = currentOperand?.next
                 currentOperator = currentOperator?.next

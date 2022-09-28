@@ -7,11 +7,11 @@ import XCTest
 @testable import Calculator
 
 class CalculatorTests: XCTestCase {
-    private var sut: CalculatorItemQueue<Any>!
+    private var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Any>()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {

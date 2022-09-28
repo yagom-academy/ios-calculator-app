@@ -12,7 +12,7 @@ class ExpressionParserTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Formula(operands: CalculatorItemQueue<Double>(),
-                      operators: CalculatorItemQueue<String>())
+                      operators: CalculatorItemQueue<Operator>())
     }
 
     override func tearDownWithError() throws {
@@ -23,11 +23,11 @@ class ExpressionParserTests: XCTestCase {
     func test_parse메서드에의해_Formula가올바르게초기화되고있는지() {
         // given
         sut.operands.enqueue(1)
-        sut.operators.enqueue("-")
+        sut.operators.enqueue(.subtract)
         sut.operands.enqueue(3)
-        sut.operators.enqueue("+")
+        sut.operators.enqueue(.add)
         sut.operands.enqueue(2)
-        sut.operators.enqueue("-")
+        sut.operators.enqueue(.subtract)
         sut.operands.enqueue(3)
         
         // when
