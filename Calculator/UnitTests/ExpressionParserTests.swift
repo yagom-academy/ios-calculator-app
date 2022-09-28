@@ -37,4 +37,17 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(try? result2?.result(), expression2Result)
         XCTAssertEqual(try? result3?.result(), expression2Result)
     }
+    
+    func test_parse실행시_비정상적인값을_입력했을_때_오류를_제대로_던지는지() {
+        // given
+        let given1 = " agg + 14.5 / 112.3 * 13.0 "
+        let given2 = " 132. + 14.5 / 112.3 * 13.0a"
+        let given3 = "132.0 + 14.5 / 11s2.3 * 13.0"
+        
+        // when
+        // then
+        XCTAssertThrowsError(try ExpressionParser.parse(from: given1))
+        XCTAssertThrowsError(try ExpressionParser.parse(from: given2))
+        XCTAssertThrowsError(try ExpressionParser.parse(from: given3))
+    }
 }
