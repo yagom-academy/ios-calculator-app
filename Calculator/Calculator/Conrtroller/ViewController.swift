@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     var result: Double = 0.0
     var operand: String = "" {
         willSet {
-            guard newValue != "" && newValue != "-" else {
+            guard newValue != "" else {
                 modifiableOperandLabel.text = "0"
                 return
             }
@@ -56,8 +56,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpPositiveNegativeNumberButton() {
-        guard operand != "" else { return }
-        
         if operand.prefix(1) == "-" {
             operand.removeFirst()
         } else {
