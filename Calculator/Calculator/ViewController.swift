@@ -18,8 +18,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var formula: Formula = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
-        print(formula.result())
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
@@ -32,7 +30,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        operandsLabel.text = zero
+        stringOperators = sender.titleLabel?.text ?? ""
+        operatorLabel.text = stringNumbers
     }
     
     @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
