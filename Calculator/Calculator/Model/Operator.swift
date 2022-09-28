@@ -33,7 +33,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         let result = lhs / rhs
         
         if result == Double.infinity {
-            return 0
+            return Double.nan
         } else {
             return result
         }
