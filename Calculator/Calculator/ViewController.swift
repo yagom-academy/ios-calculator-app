@@ -14,72 +14,61 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    private func addZero(zero: String) {
-        guard let num = inputNumberLabel.text else {
-            return
-        }
-        
-        if num == "0" {
+    private func addZero(inputText: String, zero: String) {
+        if inputText == "0" {
             return
         } else {
-            inputNumberLabel.text = num + "\(zero)"
+            inputNumberLabel.text = inputText + "\(zero)"
         }
     }
     
-    private func addPoint(point: Character) {
-        guard let num = inputNumberLabel.text else {
-            return
-        }
-        
-        if num.filter({ $0 == point }).count >= 1 {
+    private func addPoint(inputText: String, point: Character) {
+        if inputText.filter({ $0 == point }).count >= 1 {
             return
         } else {
-            inputNumberLabel.text = num + String(point)
+            inputNumberLabel.text = inputText + String(point)
         }
     }
     
-    private func addNumber(number: String) {
-        guard let num = inputNumberLabel.text else {
-            return
-        }
-        
-        if num == "0" {
+    private func addNumber(inputText: String, number: String) {
+        if inputText == "0" {
             inputNumberLabel.text = "\(number)"
         } else {
-            inputNumberLabel.text = num + "\(number)"
+            inputNumberLabel.text = inputText + "\(number)"
         }
     }
     
     @IBAction private func touchUpNumberButton(sender: UIButton) {
-        guard let id = sender.restorationIdentifier else {
+        guard let id = sender.restorationIdentifier,
+        let inputText = inputNumberLabel.text else {
             return
         }
         
         switch id {
         case "number_00":
-            addZero(zero: "00")
+            addZero(inputText: inputText , zero: "00")
         case "number_0":
-            addZero(zero: "0")
+            addZero(inputText: inputText, zero: "0")
         case "number_point":
-            addPoint(point: ".")
+            addPoint(inputText: inputText, point: ".")
         case "number_1":
-            addNumber(number: "1")
+            addNumber(inputText: inputText, number: "1")
         case "number_2":
-            addNumber(number: "2")
+            addNumber(inputText: inputText, number: "2")
         case "number_3":
-            addNumber(number: "3")
+            addNumber(inputText: inputText, number: "3")
         case "number_4":
-            addNumber(number: "4")
+            addNumber(inputText: inputText, number: "4")
         case "number_5":
-            addNumber(number: "5")
+            addNumber(inputText: inputText, number: "5")
         case "number_6":
-            addNumber(number: "6")
+            addNumber(inputText: inputText, number: "6")
         case "number_7":
-            addNumber(number: "7")
+            addNumber(inputText: inputText, number: "7")
         case "number_8":
-            addNumber(number: "8")
+            addNumber(inputText: inputText, number: "8")
         case "number_9":
-            addNumber(number: "9")
+            addNumber(inputText: inputText, number: "9")
         default:
             return
         }
