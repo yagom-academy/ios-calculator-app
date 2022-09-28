@@ -11,6 +11,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculatorDisplayLabel: UILabel!
     @IBOutlet weak var operatorDisplayLabel: UILabel!
     @IBOutlet weak var calculatorArchive: UIStackView!
+
+    private var displayLabelText: String = nameSpace.zero {
+        didSet{
+            calculatorDisplayLabel.text = displayLabelText
+        }
+    }
     
     private(set) var formula: String = nameSpace.empty
     
@@ -31,55 +37,51 @@ class ViewController: UIViewController {
     }
 
     @IBAction func numberButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
-            let displayText = calculatorDisplayLabel.text else {
+        guard let title = sender.currentTitle else {
             return
         }
         
-        if displayText == nameSpace.zero {
-            calculatorDisplayLabel.text = title
+        if displayLabelText == nameSpace.zero {
+            displayLabelText = title
         } else {
-            calculatorDisplayLabel.text = displayText + title
+            displayLabelText = displayLabelText + title
         }
     }
     
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
-            let displayText = calculatorDisplayLabel.text else {
+        guard let title = sender.currentTitle else {
             return
         }
         
-        if displayText != nameSpace.zero {
-            calculatorDisplayLabel.text = displayText + title
+        if displayLabelText != nameSpace.zero {
+            displayLabelText = displayLabelText + title
         }
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
-            let displayText = calculatorDisplayLabel.text else {
+        guard let title = sender.currentTitle else {
             return
         }
         
-        calculatorDisplayLabel.text = displayText + title
+        displayLabelText = displayLabelText + title
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let title = sender.currentTitle,
-              let displayText = calculatorDisplayLabel.text,
               let operatorText = operatorDisplayLabel.text else {
             return
         }
         
-        if displayText != nameSpace.zero {
-            pushInFormula(operand: displayText, operator: operatorText)
-            pushInArchive(operand: displayText, operator: operatorText)
+        if displayLabelText != nameSpace.zero {
+            pushInFormula(operand: displayLabelText, operator: operatorText)
+            pushInArchive(operand: displayLabelText, operator: operatorText)
         }
         
         if formula.isEmpty == false {
             operatorDisplayLabel.text = title
         }
         
-        calculatorDisplayLabel.text = nameSpace.zero
+        displayLabelText = nameSpace.zero
     }
     
     func pushInFormula(operand: String, `operator`: String) {
@@ -123,12 +125,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeSignButtonTapped(_ sender: UIButton) {
-        guard let displayText = calculatorDisplayLabel.text else {
-            return
-        }
-        
-        if displayText != nameSpace.zero {
-            calculatorDisplayLabel.text = changeSign(displayText)
+        if displayLabelText != nameSpace.zero {
+            displayLabelText = changeSign(displayLabelText)
         }
     }
     
@@ -142,11 +140,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        calculatorDisplayLabel.text = nameSpace.zero
+        displayLabelText = nameSpace.zero
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        calculatorDisplayLabel.text = nameSpace.zero
+        displayLabelText = nameSpace.zero
         operatorDisplayLabel.text = nameSpace.empty
         formula = nameSpace.empty
         
@@ -160,28 +158,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        guard let displayText = calculatorDisplayLabel.text,
-              let operatorText = operatorDisplayLabel.text else {
+        guard let operatorText = operatorDisplayLabel.text else {
             return
         }
         
-        pushInFormula(operand: displayText, operator: operatorText)
-        pushInArchive(operand: displayText, operator: operatorText)
+        pushInFormula(operand: displayLabelText, operator: operatorText)
+        pushInArchive(operand: displayLabelText, operator: operatorText)
         
         var parsedFormula = ExpressionParser.parse(from: formula)
         
         do {
             let result = try parsedFormula.result()
-            calculatorDisplayLabel.text = String(result)
+            displayLabelText = String(result)
         } catch CalculatorError.divideZero {
-            calculatorDisplayLabel.text = nameSpace.nan
+            displayLabelText = nameSpace.nan
         } catch {
             print(error.localizedDescription)
         }
         
-        formula = displayText + "\(Operator.add.rawValue)"
+        formula = nameSpace.empty
         operatorDisplayLabel.text = nameSpace.empty
+        
+        trimmingDoubleToInt(string: displayLabelText)
     }
     
+    func trimmingDoubleToInt(string: String) {
+        guard let textToDouble = Double(displayLabelText) else {
+            return
+        }
+        
+        if Double(Int(textToDouble)) == textToDouble {
+            displayLabelText = String(Int(textToDouble))
+        }
+    }
 }
 
