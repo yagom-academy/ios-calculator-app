@@ -59,14 +59,18 @@ class ViewController: UIViewController {
     }
     
     func updateEntry(using input: String) {
-        guard var currentEntry = currentEntryLabel.text else { return }
-        guard input != "." || !currentEntry.contains(input) else  { return }
-        
-        if let firstLetter = currentEntry.first, firstLetter == "0"{
-            currentEntry.removeFirst()
-        }
+        guard var currentEntry = currentEntryLabel.text,
+                  currentEntry != "0" || input != "00" else { return }
+        guard input != "." || !currentEntry.contains(input) else { return }
         
         currentEntry += input
+        
+        if currentEntry.starts(with: "0") {
+            if !currentEntry.starts(with: "0.") {
+                currentEntry.removeFirst()
+            }
+        }
+        
         currentEntryLabel.text = currentEntry
     }
 }
