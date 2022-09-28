@@ -76,6 +76,10 @@ class ViewController: UIViewController {
         let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         
         historyStackView.addArrangedSubview(stackView)
+        
+        view.layoutIfNeeded()
+        let contentOffsetValue: CGFloat = historyScrollView.contentSize.height - historyScrollView.frame.height
+        historyScrollView.setContentOffset(CGPoint(x: 0, y: contentOffsetValue), animated: true)
     }
     
     @IBAction func tappedNumberPads(_ sender: UIButton) {
