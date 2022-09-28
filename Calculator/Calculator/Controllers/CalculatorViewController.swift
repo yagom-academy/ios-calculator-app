@@ -6,12 +6,12 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     
     private var formula = ""
-    private var numberFormatter: NumberFormatter {
+    private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
         return numberFormatter
-    }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,35 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: operand)
     }
     
+    private func makeHistoryLabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        return label
+    }
+    
+    private func addHistory() {
+        let historyLabels: [UIView] = [
+            makeHistoryLabel(text: operatorLabel.text),
+            makeHistoryLabel(text: operandLabel.text)
+        ]
+        
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        historyLabels.forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        historyStackView.addArrangedSubview(stackView)
+    }
+    
     private func inputOperator(by key: NumericKeypad) {
         guard let operand = operandLabel.text,
                   operand.last != "." else { return }
@@ -65,6 +94,7 @@ class CalculatorViewController: UIViewController {
         }
         
         formula += operand + currentOperator
+        addHistory()
         setOperandLabel()
     }
     
