@@ -19,7 +19,10 @@ struct Formula {
             throw FormulaError.hasNotOperandValue
         }
         
-        calculateResult = firstOperand as! Double
+        guard let firstOperand = firstOperand as? Double else {
+            throw FormulaError.isNotDouble
+        }
+        calculateResult = firstOperand
         
         while !(operators.count == 0) {
             guard let operators = operators.dequeue() as? Operator else {

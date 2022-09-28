@@ -9,4 +9,5 @@ enum FormulaError: Error {
     case notValidCountQueue
     case hasNotOperandValue
     case hasNotOperatorValue
+    case isNotDouble
 }
