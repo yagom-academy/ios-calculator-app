@@ -19,10 +19,8 @@ enum ExpressionParser {
         var operandsQueue = CalculatorItemQueue<Double>()
         
         let operands = componentsByOperators(from: input)
-        operands.forEach {
-            guard let operand = Double($0) else { return }
-            operandsQueue.enqueue(item: operand)
-        }
+            .compactMap(Double.init)
+        operands.forEach { operandsQueue.enqueue(item: $0) }
         
         return operandsQueue
     }
