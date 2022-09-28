@@ -10,10 +10,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var expressionQueue: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        operandLabel.text = "0"
+        clearOperand()
         operatorLabel.text = ""
     }
     
@@ -34,6 +35,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
+        guard Double(currentOperand) != .zero else {
+            operatorLabel.text = sender.currentTitle
+            return
+        }
+        
+        let operand: UILabel = makeExpressionLabel(currentOperand)
+        let `operator`: UILabel = makeExpressionLabel(operatorLabel.text)
+        let stackView: UIStackView = makeExpressionStackView()
+
+        
+        stackView.addArrangedSubview(`operator`)
+        stackView.addArrangedSubview(operand)
+        expressionQueue.addArrangedSubview(stackView)
+        
+        clearOperand()
+        operatorLabel.text = sender.currentTitle
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
@@ -67,12 +84,43 @@ extension ViewController {
     }
     
     private func appendOperands(from operand: String) {
-        if currentOperand == "0"{
+        if currentOperand == "0" {
             currentOperand = operand
         } else if currentOperand == "-0" {
             currentOperand = "-" + operand
         } else {
             currentOperand.append(operand)
         }
+    }
+    
+    private func clearOperand() {
+        currentOperand = "0"
+        operandLabel.text = "0"
+    }
+}
+
+// making stackView
+extension ViewController {
+    private func makeExpressionLabel(_ expr: String?) -> UILabel {
+        let label: UILabel = UILabel()
+        
+        label.text = expr
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }
+    
+    private func makeExpressionStackView() -> UIStackView {
+        let stackView: UIStackView = UIStackView()
+        
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
     }
 }
