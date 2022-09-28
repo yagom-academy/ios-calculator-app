@@ -77,7 +77,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
-        guard operandLabel.text != String(result) else { return }
+        guard operandLabel.text != changeStyle(result) else { return }
         
         addFormula()
         MakeOperationStackView()
