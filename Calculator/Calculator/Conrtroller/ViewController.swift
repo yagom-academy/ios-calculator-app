@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var modifiableOperatorLabel: UILabel!
     @IBOutlet weak var overallOperationLabelStackView: UIStackView!
     
+    var overallOperation: String = ""
+    var result: Double = 0.0
     var operand: String = "" {
         willSet {
             guard newValue != "" && newValue != "-" else {
@@ -47,7 +49,7 @@ class ViewController: UIViewController {
             modifiableOperatorLabel.text = sender.titleLabel?.text
             return
         }
-        
+        collecOperation()
         MakeOperationStackView()
         operand = ""
         modifiableOperatorLabel.text = sender.titleLabel?.text
@@ -69,6 +71,35 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         // 이전 라벨 텍스트들까지 지우는 방식으로 변경
+    }
+    
+    @IBAction func touchUpEqualSignButton(_ sender: UIButton) {
+        guard modifiableOperandLabel.text != String(result) else { return }
+        collecOperation()
+        MakeOperationStackView()
+        operand = ""
+        
+        do {
+            var formula = ExpressionParser.parse(from: overallOperation)
+            result = try formula.result()
+            modifiableOperandLabel.text = String(result)
+        } catch CalculatorError.divideByZeroError {
+            modifiableOperandLabel.text = "NaN"
+        } catch {
+            modifiableOperandLabel.text = "Error: Please retry"
+        }
+    }
+    
+    func collecOperation() {
+        guard let`operator` = modifiableOperatorLabel.text,
+              let operand = modifiableOperandLabel.text else {
+            return
+        }
+        if `operator` == " " {
+            overallOperation += ("+" + operand)
+        } else {
+            overallOperation += (`operator` + operand)
+        }
     }
     
     func MakeOperationStackView() {

@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) throws -> Formula {
+    static func parse(from input: String) -> Formula {
         var formula = Formula()
         let operands = componentsByOperators(from: input)
         let operators = input.compactMap { Operator.init(rawValue: $0) }
