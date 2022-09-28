@@ -20,9 +20,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        resetCurrentEntry()
     }
 
+    func resetCurrentEntry() {
+        currentEntryLabel.text = "0"
+    }
 
 }
 
