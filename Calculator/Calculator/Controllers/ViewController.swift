@@ -145,11 +145,11 @@ class ViewController: UIViewController {
             mainResultLabel.text = try String(formula.result())
             currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
-            
+            print("None Operand Error")
         } catch CalculatorError.noneOperator {
-            
+            print("None Operator Error")
         } catch {
-            
+            print("Some Error")
         }
     }
     
