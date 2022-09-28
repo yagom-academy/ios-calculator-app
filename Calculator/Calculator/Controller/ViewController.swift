@@ -27,6 +27,17 @@ class ViewController: UIViewController {
     func resetCurrentEntry() {
         currentEntryLabel.text = "0"
     }
-
+    
+    func updateEntry(using input: String) {
+        guard var currentEntry = currentEntryLabel.text else { return }
+        guard input != "." || !currentEntry.contains(input) else  { return }
+        
+        if let firstLetter = currentEntry.first, firstLetter == "0"{
+            currentEntry.removeFirst()
+        }
+        
+        currentEntry += input
+        currentEntryLabel.text = currentEntry
+    }
 }
 
