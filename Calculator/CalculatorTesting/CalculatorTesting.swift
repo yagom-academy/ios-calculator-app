@@ -18,10 +18,6 @@ class CalculatorTesting: XCTestCase {
         sut = CalculatorItemQueue()
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
     func test_queue_append_firstElement_isSucessfull() {
         sut.enqueue(data: 10)
         
@@ -30,7 +26,6 @@ class CalculatorTesting: XCTestCase {
     }
     
     func test_queue_after_appending_secondElement_FirstNode_next_equal_to_nextNode() {
-        
         sut.enqueue(data: 20)
         sut.enqueue(data: 30)
         sut.enqueue(data: 40)
@@ -49,7 +44,6 @@ class CalculatorTesting: XCTestCase {
 //    }
     
     func test_queue_after_removeAll_head_and_tail_returns_nil() {
-        
         sut.enqueue(data: 20)
         sut.enqueue(data: 30)
         sut.enqueue(data: 40)
@@ -62,6 +56,7 @@ class CalculatorTesting: XCTestCase {
     
     func test_String_split_works_nice() {
         let myInput = "1.1/+/1.2/-/123.41"
+        
         XCTAssertEqual(myInput.split(separator: "/"),["1.1","+","1.2","-","123.41"])
     }
     
@@ -87,10 +82,18 @@ class CalculatorTesting: XCTestCase {
         }
         
         while sut.head?.next != nil {
-            let deq = sut.dequeue()
-            dequeueResult.append(deq as! Double)
+            guard let deq = sut.dequeue() else { return }
+            dequeueResult.append(deq as Double)
         }
         
         XCTAssertEqual(dequeueResult.count, 100)
+    }
+    
+    func test_divide_zero_returns_zero() {
+        let test1 = Operator.divide.calculate(lhs: 12.3, rhs: 0)
+        let test2 = Operator.divide.calculate(lhs: 0, rhs: 12.3)
+        
+        XCTAssertEqual(test1, 0)
+        XCTAssertEqual(test2, 0)
     }
 }
