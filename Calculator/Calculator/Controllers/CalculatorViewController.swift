@@ -91,6 +91,7 @@ class CalculatorViewController: UIViewController {
     private func clearAll() {
         historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         initOperatorAndOperandLabel()
+        formula = ""
     }
     
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
