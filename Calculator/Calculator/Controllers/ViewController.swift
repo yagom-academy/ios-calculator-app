@@ -46,7 +46,6 @@ final class ViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
-        
         guard let result = numberFormatter.string(for: number) else { return Constant.empty }
         
         return result
@@ -117,7 +116,9 @@ final class ViewController: UIViewController {
         
         let tappedOperator = sender.currentTitle
         guard let operators = tappedOperator else { return }
+        
         mainOperatorLabel.text = operators
+        
         if currentOperator == Constant.calculate {
             currentOperand = Constant.defaultZero
             currentOperator = operators
@@ -157,7 +158,6 @@ final class ViewController: UIViewController {
         mainOperatorLabel.text = Constant.empty
         
         let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
-        
         
         do {
             mainResultLabel.text = applyNumberFormatter(number: try formula.result())
