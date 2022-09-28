@@ -14,16 +14,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setAccessibilityIndentifier()
+    }
+    
+    func setAccessibilityIndentifier() {
         calculatorDisplayLabel.isAccessibilityElement = true
-        calculatorDisplayLabel.accessibilityIdentifier = "calculatorDisplayLabel"
+        calculatorDisplayLabel.accessibilityIdentifier = accessibilityIdentifier.calculatorDisplayLabel
         
         operatorDisplayLabel.isAccessibilityElement = true
-        operatorDisplayLabel.accessibilityIdentifier = "operatorDisplayLabel"
+        operatorDisplayLabel.accessibilityIdentifier = accessibilityIdentifier.operatorDisplayLabel
         
         calculatorArchive.isAccessibilityElement = true
-        calculatorArchive.accessibilityIdentifier = "calculatorArchive"
-        
+        calculatorArchive.accessibilityIdentifier = accessibilityIdentifier.calculatorArchive
     }
 
     @IBAction func numberButtonTapped(_ sender: UIButton) {
@@ -32,7 +34,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if displayText == "0" {
+        if displayText == nameSpace.zero {
             calculatorDisplayLabel.text = title
         } else {
             calculatorDisplayLabel.text = displayText + title
@@ -45,7 +47,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if displayText != "0" {
+        if displayText != nameSpace.zero {
             calculatorDisplayLabel.text = displayText + title
         }
     }
