@@ -84,6 +84,10 @@ class ViewController: UIViewController {
         formulaScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
+    func addCalculationRecord(_ operatorAndOperands: [String?]) {
+        operatorAndOperands.forEach { calculationRecord.append($0) }
+    }
+    
     @IBAction func signChangeButtonTapped(_ sender: UIButton) {
         if inputNumberLabel.text?.contains("-") == true {
             inputNumberLabel.text?.removeFirst()
@@ -102,7 +106,6 @@ class ViewController: UIViewController {
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         resetInputNumber()
-        resetInputOperator()
     }
     
     @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
@@ -123,14 +126,13 @@ class ViewController: UIViewController {
         }
 
     }
-    // 연산자 입력
+    
     @IBAction func operatorsInputButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         
         if inputOperatorLabel.text == ""{
-            // 아무 연산자도 없을 때
             addSubStackView()
-            calculationRecord.append(inputNumberLabel.text)
+            addCalculationRecord([inputNumberLabel.text])
             resetInputNumber()
             inputOperatorLabel.text = `operator`
             return
@@ -142,19 +144,17 @@ class ViewController: UIViewController {
         }
         
         addSubStackView()
-        calculationRecord.append(inputOperatorLabel.text)
-        calculationRecord.append(inputNumberLabel.text)
+        addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
+        
         inputOperatorLabel.text = `operator`
         resetInputNumber()
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
-        print("123")
         guard !isCalculated else { return }
+        addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
+        
         print(calculationRecord.compactMap { $0 }.joined(separator: " "))
-    
-        
-        
     }
 }
 
