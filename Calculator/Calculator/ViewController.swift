@@ -8,8 +8,10 @@ import UIKit
 
 class ViewController: UIViewController {
     var stringNumbers: String = ""
+    var stringOperators: String = ""
     
     @IBOutlet weak var operandsLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,16 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
         operandsLabel.text = "0"
+    }
+    
+    @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
+        if !stringNumbers.contains("-") {
+            stringNumbers = "-\(stringNumbers)"
+            operandsLabel.text = stringNumbers
+        } else {
+            stringNumbers.removeFirst()
+            operandsLabel.text = stringNumbers
+        }
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
