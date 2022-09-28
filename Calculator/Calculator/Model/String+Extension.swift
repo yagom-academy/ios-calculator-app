@@ -7,18 +7,18 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let separatedWord = self.map { $0 }
         var result: [String] = []
         var bundledWord = ""
         
-        for element in separatedWord {
-            if element != target {
-                bundledWord += String(element)
+        self.forEach {
+            if $0 != target {
+                bundledWord += String($0)
             } else {
                 result.append(bundledWord)
                 bundledWord = ""
             }
         }
+        
         result.append(bundledWord)
         
         return result
