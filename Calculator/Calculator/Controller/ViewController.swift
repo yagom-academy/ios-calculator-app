@@ -83,5 +83,24 @@ class ViewController: UIViewController {
         }
         calculatorDisplayLabel.text = nameSpace.zero
     }
+    
+    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
+        guard let displayText = calculatorDisplayLabel.text else {
+            return
+        }
+        
+        if displayText != nameSpace.zero {
+            calculatorDisplayLabel.text = changeSign(displayText)
+        }
+    }
+    
+    func changeSign(_ text: String) -> String {
+        if text.first == "-" {
+            let secondIndex = text.index(after: text.startIndex)
+            return String(text[secondIndex...])
+        } else {
+            return "-\(text)"
+        }
+    }
 }
 

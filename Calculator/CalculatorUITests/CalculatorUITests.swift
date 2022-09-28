@@ -68,7 +68,7 @@ final class CalculatorUITests: XCTestCase {
         continueAfterFailure = false
     }
     
-    func test_when_1_button_tapped_then_show_on_label() {
+    func test_when_numberButton1_tapped_then_show_on_label() {
         // given
         
         // when
@@ -99,21 +99,19 @@ final class CalculatorUITests: XCTestCase {
         XCTAssertEqual(numberDisplayLabel.label, "12345678.0009")
     }
     
-    func test_when_1_add_2_subtract_3_multiply_4_divide_5_add_tapped_then_return_1_add_2_sub_3_mul_4_div_5_in_formula() {
+    func test_when_123_and_changeSign_tapped_then_changeSign_on_label() {
         // given
         
         // when
         numberButton1.tap()
-        addButton.tap()
         numberButton2.tap()
-        subtractButton.tap()
         numberButton3.tap()
-        multiplyButton.tap()
-        numberButton4.tap()
-        divideButton.tap()
-        addButton.tap()
+        changeSignButton.tap()
         
         // then
-//        XCTAssertEqual(app., <#T##expression2: Equatable##Equatable#>)
+        XCTAssertEqual(numberDisplayLabel.label, "-123")
+        changeSignButton.tap()
+        XCTAssertEqual(numberDisplayLabel.label, "123")
+
     }
 }
