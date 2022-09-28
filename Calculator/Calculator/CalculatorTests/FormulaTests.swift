@@ -20,7 +20,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
 
-    func test_sdf() {
+    func testFormula연산시_Double과Operator가아닌_다른타입이면_false리턴() {
         do {
             let result = try sut.result()
             XCTAssertEqual(result, 1)
