@@ -20,7 +20,7 @@ class CalculatorViewController: UIViewController {
         clearAll()
     }
     
-    private func setOperandLabel(to string: String? = "0") {
+    private func setOperandLabel(to string: String?) {
         operandLabel.text = string
     }
     
@@ -28,9 +28,13 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = string
     }
     
+    private func initFormula() {
+        formula = ""
+    }
+    
     private func initOperatorAndOperandLabel() {
         setOperatorLabel(to: nil)
-        setOperandLabel()
+        setOperandLabel(to: "0")
     }
     
     private func isOperandLabelZero() -> Bool {
@@ -41,14 +45,15 @@ class CalculatorViewController: UIViewController {
     
     private func inputNumber(by key: NumericKeypad) {
         guard var operand = operandLabel.text else { return }
+        let keyNumber = key.rawValue
         
-        if (operand.last == "." || operand.contains(".")) && (key.rawValue == ".") ||
-            isOperandLabelZero() && (key.rawValue == "0" || key.rawValue == "00") { return }
+        if (operand.last == "." || operand.contains(".")) && (keyNumber == ".") ||
+            isOperandLabelZero() && (keyNumber == "0" || keyNumber == "00") { return }
         
-        if isOperandLabelZero(), key.rawValue != "." {
-            operand = key.rawValue
+        if (isOperandLabelZero() && keyNumber != ".") || formula == "" {
+            operand = keyNumber
         } else {
-            operand += key.rawValue
+            operand += keyNumber
         }
         
         setOperandLabel(to: operand)
@@ -63,10 +68,10 @@ class CalculatorViewController: UIViewController {
         return label
     }
     
-    private func addHistoryStackView() {
+    private func addHistoryStackView(operatorText: String?, operandText: String?) {
         let historyLabels: [UIView] = [
-            makeHistoryLabel(text: operatorLabel.text),
-            makeHistoryLabel(text: operandLabel.text)
+            makeHistoryLabel(text: operatorText),
+            makeHistoryLabel(text: operandText)
         ]
         
         let stackView = UIStackView()
@@ -85,19 +90,26 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputOperator(by key: NumericKeypad) {
-        guard let operand = operandLabel.text,
-                  operand.last != "." else { return }
-        
         let currentOperator = key.rawValue
-        setOperatorLabel(to: currentOperator)
-
+        
         if isOperandLabelZero() {
+            setOperatorLabel(to: currentOperator)
             return
         }
         
-        addHistoryStackView()
-        formula += operand + currentOperator
-        setOperandLabel()
+        guard let operand = operandLabel.text,
+              operand.last != "." else { return }
+        
+        if formula == "" {
+            addHistoryStackView(operatorText: nil, operandText: operand)
+            formula += operand
+        } else {
+            addHistoryStackView(operatorText: currentOperator, operandText: operand)
+            formula += currentOperator + operand
+        }
+        
+        setOperatorLabel(to: currentOperator)
+        setOperandLabel(to: "0")
     }
     
     private func changeOperandSign() {
@@ -117,13 +129,42 @@ class CalculatorViewController: UIViewController {
     private func clearEntry() {
         if isOperandLabelZero() { return }
         
-        setOperandLabel()
+        setOperandLabel(to: "0")
     }
     
     private func clearAll() {
         historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         initOperatorAndOperandLabel()
-        formula = ""
+        initFormula()
+    }
+    
+    private func calculate() throws -> Double {
+        guard let operand = operandLabel.text,
+              let currentOperator = operatorLabel.text,
+              formula != "" else {
+            throw CalculatorError.wrongFormula
+        }
+        
+        formula += currentOperator + operand
+        addHistoryStackView(operatorText: currentOperator, operandText: operand)
+        
+        var formulaStruct = ExpressionParser.parser(from: formula)
+        
+        return try formulaStruct.result()
+    }
+    
+    private func showCalculationResult() {
+        do {
+            let result = try calculate()
+            setOperandLabel(to: String(result))
+        } catch CalculatorError.divisionByZero {
+            setOperandLabel(to: numberFormatter.notANumberSymbol)
+        } catch {
+            return
+        }
+        
+        setOperatorLabel(to: nil)
+        initFormula()
     }
     
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
@@ -136,7 +177,7 @@ class CalculatorViewController: UIViewController {
         case _ where NumericKeypad.operatorKeys.contains(key):
             inputOperator(by: key)
         case .equal:
-            return
+            showCalculationResult()
         case .ac:
             clearAll()
         case .ce:

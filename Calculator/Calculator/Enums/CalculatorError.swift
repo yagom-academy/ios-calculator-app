@@ -8,6 +8,7 @@
 enum CalculatorError: Error {
     case queueIsEmpty
     case divisionByZero
+    case wrongFormula
 }
 
 extension CalculatorError: CustomDebugStringConvertible {
@@ -17,6 +18,8 @@ extension CalculatorError: CustomDebugStringConvertible {
             return "큐가 비어있습니다."
         case .divisionByZero:
             return "0으로 나눌 수 없습니다."
+        case .wrongFormula:
+            return "잘못된 수식입니다."
         }
     }
 }
