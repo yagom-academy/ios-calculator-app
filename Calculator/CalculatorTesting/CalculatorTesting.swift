@@ -33,15 +33,15 @@ class CalculatorTesting: XCTestCase {
         XCTAssertNotNil(sut.head?.next)
     }
     
-//    func test_queue_getFirst_returns_head_sucessfully() {
-//
-//
-//        sut.enqueue(data: 20)
-//        sut.enqueue(data: 30)
-//        sut.enqueue(data: 40)
-//
-//        XCTAssertEqual(sut.dequeue(), 20)
-//    }
+    //    func test_queue_getFirst_returns_head_sucessfully() {
+    //
+    //
+    //        sut.enqueue(data: 20)
+    //        sut.enqueue(data: 30)
+    //        sut.enqueue(data: 40)
+    //
+    //        XCTAssertEqual(sut.dequeue(), 20)
+    //    }
     
     func test_queue_after_removeAll_head_and_tail_returns_nil() {
         sut.enqueue(data: 20)
