@@ -102,6 +102,7 @@ class ViewController: UIViewController {
         let operatorLabel = {
             let label = UILabel()
             label.text = `operator`
+            label.textColor = .white
             label.font = UIFont.preferredFont(forTextStyle: .title3)
             
             return label
@@ -110,6 +111,7 @@ class ViewController: UIViewController {
         let operandLabel = {
             let label = UILabel()
             label.text = operand
+            label.textColor = .white
             label.font = UIFont.preferredFont(forTextStyle: .title3)
             
             return label
