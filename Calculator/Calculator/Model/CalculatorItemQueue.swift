@@ -10,6 +10,10 @@ struct CalculatorItemQueue {
     var enqueue: [CalculateItem]
     var dequeue: [CalculateItem] = []
     
+    var mergedQueue: [CalculateItem] {
+        return enqueue + dequeue.reversed()
+    }
+    
     var isEmpty: Bool {
         return enqueue.isEmpty && dequeue.isEmpty
     }
