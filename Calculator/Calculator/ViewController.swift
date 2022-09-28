@@ -59,8 +59,6 @@ class ViewController: UIViewController {
         if operandsLabel.text != zero {
             stringNumbers += "00"
             operandsLabel.text = stringNumbers
-        } else if operandsLabel.text == zero {
-            operandsLabel.text = zero
         }
     }
 }
