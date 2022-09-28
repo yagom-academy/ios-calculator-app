@@ -266,6 +266,25 @@ class FormulaTests: XCTestCase {
         let result: Double = sut.result()
         
         //then
-        XCTAssertEqual(Double.infinity, result)
+        XCTAssertTrue(result.isInfinite)
+    }
+    
+    func testFormula_result_메소드는_실수0을_실수0으로_나누려고_하는_경우_그_결과는_nan이다() {
+        //given
+        let inputOperands: [Double] = [0.0, 0.0]
+        let inputOperators: Operator = .divide
+
+        inputOperands.forEach {
+            sut.operands.enqueue($0)
+        }
+
+        sut.operators.enqueue(inputOperators)
+        
+        
+        //when
+        let result: Double = sut.result()
+        
+        //then
+        XCTAssertTrue(result.isNaN)
     }
 }
