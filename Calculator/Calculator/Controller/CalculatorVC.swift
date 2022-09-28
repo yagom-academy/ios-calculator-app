@@ -84,6 +84,19 @@ class CalculatorVC: UIViewController {
         }
     }
     
+    private func makeFormulaStackView() {
+        guard let operatorLabel = makeOperatorLabel(),
+              let operandLabel = makeOperandLabel() else {
+            return
+        }
+
+        let formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        
+        formulaStackView.spacing = 8
+        mainStackView.addArrangedSubview(formulaStackView)
+        currentNumber = ""
+    }
+    
     private func makeOperatorLabel() -> UILabel? {
         let operatorLabelForStack: UILabel = UILabel()
         operatorLabelForStack.text = operatorLabel.text
