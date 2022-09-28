@@ -23,7 +23,20 @@ class ViewController: UIViewController {
         
         resetCurrentEntry()
     }
-
+    
+    @IBAction func operandButtonPressed(_ sender: UIButton) {
+        switch sender.tag {
+        case 0...9:
+            updateEntry(using: sender.tag.description)
+        case 10:
+            updateEntry(using: "00")
+        case 11:
+            updateEntry(using: ".")
+        default:
+            return
+        }
+    }
+    
     func resetCurrentEntry() {
         currentEntryLabel.text = "0"
     }
