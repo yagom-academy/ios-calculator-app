@@ -56,4 +56,9 @@ class CalculatorTesting: XCTestCase {
         XCTAssertNil(sut.head)
         XCTAssertNil(sut.tail)
     }
+    
+    func test_String_split_works_nice() {
+        let myInput = "1.1/+/1.2/-/123.41"
+        XCTAssertEqual(myInput.split(separator: "/"),["1.1","+","1.2","-","123.41"])
+    }
 }
