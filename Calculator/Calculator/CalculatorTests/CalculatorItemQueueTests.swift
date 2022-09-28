@@ -2,7 +2,7 @@
 import XCTest
 @testable import Calculator
 
-class CalculatorItemQueueTests: XCTestCase {
+private class CalculatorItemQueueTests: XCTestCase {
 
     var sut: CalculatorItemQueue!
     var testCase1: Double = Double.random(in: (0...100))
