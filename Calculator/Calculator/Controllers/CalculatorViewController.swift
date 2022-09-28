@@ -19,7 +19,7 @@ class CalculatorViewController: UIViewController {
         clearAll()
     }
     
-    private func setOperandLabel(to string: String?) {
+    private func setOperandLabel(to string: String? = "0") {
         operandLabel.text = string
     }
     
@@ -29,7 +29,7 @@ class CalculatorViewController: UIViewController {
     
     private func initOperatorAndOperandLabel() {
         setOperatorLabel(to: nil)
-        setOperandLabel(to: "0")
+        setOperandLabel()
     }
     
     private func isOperandZero() -> Bool {
@@ -65,7 +65,7 @@ class CalculatorViewController: UIViewController {
         }
         
         formula += operand + currentOperator
-        setOperandLabel(to: "0")
+        setOperandLabel()
     }
     
     private func changeOperandSign() {
@@ -85,7 +85,7 @@ class CalculatorViewController: UIViewController {
     private func clearEntry() {
         if isOperandZero() { return }
         
-        setOperandLabel(to: "0")
+        setOperandLabel()
     }
     
     private func clearAll() {
