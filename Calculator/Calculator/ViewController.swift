@@ -61,5 +61,11 @@ class ViewController: UIViewController {
             operandsLabel.text = stringNumbers
         }
     }
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        if stringNumbers.last != "." && !stringNumbers.contains(".") && stringNumbers == zero {
+            stringNumbers += "."
+            operandsLabel.text = stringNumbers
+        }
+    }
 }
 
