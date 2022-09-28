@@ -31,16 +31,22 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: "0")
     }
     
+    private func isOperandZero() -> Bool {
+        if operandLabel.text == "0" { return true }
+        
+        return false
+    }
+    
     private func inputNumber(by key: NumericKeypad) {
         guard var operand = operandLabel.text else { return }
         
         if (operand.last == "." || operand.contains(".")),
            key.rawValue == "." { return }
 
-        if operand == "0",
+        if isOperandZero(),
            (key.rawValue == "0" || key.rawValue == "00") { return }
         
-        if operand == "0" {
+        if isOperandZero() {
             operand = key.rawValue
         } else {
             operand += key.rawValue
@@ -56,7 +62,7 @@ class CalculatorViewController: UIViewController {
         let currentOperator = key.rawValue
         setOperatorLabel(to: currentOperator)
 
-        if operand == "0" {
+        if isOperandZero() {
             return
         }
         
@@ -67,7 +73,7 @@ class CalculatorViewController: UIViewController {
     private func changeOperandSign() {
         guard var operand = operandLabel.text else { return }
         
-        if operand == "0" { return }
+        if isOperandZero() { return }
         
         if operand.first != "−" {
             operand = "−" + operand
