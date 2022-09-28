@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorDisplayLabel: UILabel!
     @IBOutlet weak var calculatorArchive: UIStackView!
     
-    private(set) var formula: String = ""
+    private(set) var formula: String = nameSpace.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,6 +157,30 @@ class ViewController: UIViewController {
         calculatorArchive.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
+    }
+    
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        guard let displayText = calculatorDisplayLabel.text,
+              let operatorText = operatorDisplayLabel.text else {
+            return
+        }
+        
+        pushInFormula(operand: displayText, operator: operatorText)
+        pushInArchive(operand: displayText, operator: operatorText)
+        
+        var parsedFormula = ExpressionParser.parse(from: formula)
+        
+        do {
+            let result = try parsedFormula.result()
+            calculatorDisplayLabel.text = String(result)
+        } catch CalculatorError.divideZero {
+            calculatorDisplayLabel.text = nameSpace.nan
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        formula = displayText + "\(Operator.add.rawValue)"
+        operatorDisplayLabel.text = nameSpace.empty
     }
     
 }
