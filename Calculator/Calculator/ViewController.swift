@@ -7,8 +7,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let zero = "0"
+    let empty = ""
     var stringNumbers: String = ""
     var stringOperators: String = ""
+    @IBOutlet weak var recentNumbersStackView: UIStackView!
     
     @IBOutlet weak var operandsLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -19,8 +22,17 @@ class ViewController: UIViewController {
         print(formula.result())
     }
     
+    @IBAction func touchUpACButton(_ sender: UIButton) {
+        stringOperators = empty
+        operatorLabel.text = stringOperators
+        operandsLabel.text = zero
+        recentNumbersStackView.arrangedSubviews.forEach{
+            recentNumbersStackView.removeArrangedSubview($0)
+        }
+    }
+    
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        operandsLabel.text = "0"
+        operandsLabel.text = zero
     }
     
     @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
@@ -34,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        if operandsLabel.text == "0" {
+        if operandsLabel.text == zero {
             stringNumbers += "\(String(sender.tag))"
             operandsLabel.text = "\(String(sender.tag))"
         } else {
@@ -44,11 +56,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-        if operandsLabel.text != "0" {
+        if operandsLabel.text != zero {
             stringNumbers += "00"
             operandsLabel.text = stringNumbers
-        } else if operandsLabel.text == "0" {
-            operandsLabel.text = "0"
+        } else if operandsLabel.text == zero {
+            operandsLabel.text = zero
         }
     }
 }
