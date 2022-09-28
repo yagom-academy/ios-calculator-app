@@ -48,10 +48,96 @@ class ViewController: UIViewController {
         setup()
     }
     
+    @IBAction func signChangeButtonTapped(_ sender: UIButton) {
+        guard inputNumberLabel.text != CalculatorNameSpace.nan else { return }
+        
+        if inputNumberLabel.text?.contains(CalculatorNameSpace.negative) == true {
+            inputNumberLabel.text?.removeFirst()
+            return
+        }
+        
+        if let value = inputNumberLabel.text, value != "0" {
+            inputNumberLabel.text = CalculatorNameSpace.negative + value
+            return
+        }
+    }
+    
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        setup()
+    }
+    
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+        if inputNumberLabel.text == CalculatorNameSpace.nan { return }
+        resetInputNumber()
+    }
+    
+    @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
+        guard let value = sender.currentTitle, inputNumberLabel.text != CalculatorNameSpace.nan  else { return }
+        
+        if calculationRecord == [] {
+            inputOperatorLabel.text = ""
+        }
+        
+        if inputNumberLabel.text == "0" {
+            guard value != "00" else { return }
+            
+            if value == "." {
+                inputNumberLabel.text?.append(value)
+                return
+            }
+            
+            inputNumberLabel.text = value
+            return
+        }
+        
+        if inputNumberLabel.text?.contains(".") == true, value == "." { return }
+        
+        inputNumberLabel.text?.append(value)
+        
+    }
+    
+    @IBAction func operatorsInputButtonTapped(_ sender: UIButton) {
+        guard let `operator` = sender.currentTitle, inputNumberLabel.text != CalculatorNameSpace.nan else { return }
+        
+        isCalculated = false
+        if inputNumberLabel.text == CalculatorNameSpace.zero {
+            inputOperatorLabel.text = `operator`
+            return
+        }
+        
+        addSubStackView()
+        addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
+        resetInputNumber()
+        inputOperatorLabel.text = `operator`
+    }
+    
+    @IBAction func equalButtonTapped(_ sender: UIButton) {
+        guard !isCalculated else { return }
+        
+        addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
+        
+        var parse = ExpressionParser.parse(from: calculationRecord.compactMap { $0 }.joined(separator: " "))
+        
+        do {
+            addSubStackView()
+            resetInputOperator()
+            inputNumberLabel.text = numberFomatter(try parse.result())
+            calculationRecord = []
+            isCalculated = true
+        } catch {
+            resetInputOperator()
+            inputNumberLabel.text = CalculatorNameSpace.nan
+            isCalculated = true
+        }
+    }
+}
+
+extension ViewController {
     func setup() {
         resetInputNumber()
         resetInputOperator()
         resetStackViewAll()
+        resetCalculationRecod()
     }
     
     func resetStackViewAll() {
@@ -64,6 +150,10 @@ class ViewController: UIViewController {
     
     func resetInputOperator() {
         inputOperatorLabel.text = ""
+    }
+    
+    func resetCalculationRecod() {
+        calculationRecord = []
     }
     
     func addSubStackView(){
@@ -89,94 +179,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func numberFomatter(_ str: Double) -> String? {
+    func numberFomatter(_ numberString: Double) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
-        return numberFormatter.string(for: str)
+        return numberFormatter.string(for: numberString)
     }
     
-    @IBAction func signChangeButtonTapped(_ sender: UIButton) {
-        if inputNumberLabel.text?.contains(CalculatorNameSpace.negative) == true {
-            inputNumberLabel.text?.removeFirst()
-            return
-        }
-        
-        if let value = inputNumberLabel.text, value != "0" {
-            inputNumberLabel.text = CalculatorNameSpace.negative + value
-            return
-        }
-    }
-    
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        setup()
-    }
-    
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        resetInputNumber()
-    }
-    
-    @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
-        guard let value = sender.currentTitle else { return }
-        
-        if inputNumberLabel.text == "0", value == "0" {
-            return
-        } else if inputNumberLabel.text == "0", value == "00" {
-            return
-        } else if inputNumberLabel.text == "0", value == "." {
-            inputNumberLabel.text?.append(value)
-        } else if inputNumberLabel.text == "0" {
-            inputNumberLabel.text = value
-        } else if inputNumberLabel.text?.contains(".") == true, value == "."{
-            return
-        } else {
-            inputNumberLabel.text?.append(value)
-        }
-
-    }
-    
-    @IBAction func operatorsInputButtonTapped(_ sender: UIButton) {
-        guard let `operator` = sender.currentTitle else { return }
-        isCalculated = false
-        
-        if inputNumberLabel.text == CalculatorNameSpace.zero {
-            inputOperatorLabel.text = `operator`
-            return
-        }
-        
-        if inputOperatorLabel.text == "" {
-            addSubStackView()
-            addCalculationRecord([inputNumberLabel.text])
-            inputOperatorLabel.text = `operator`
-            resetInputNumber()
-            return
-        }
-        
-        addSubStackView()
-        addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
-        
-        inputOperatorLabel.text = `operator`
-        resetInputNumber()
-    }
-    
-    @IBAction func equalButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else { return }
-        addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
-        
-        var parseData = ExpressionParser.parse(from: calculationRecord.compactMap { $0 }.joined(separator: " "))
-        
-        do {
-            addSubStackView()
-            inputNumberLabel.text = numberFomatter(try parseData.result())
-            inputOperatorLabel.text = ""
-            calculationRecord = []
-            isCalculated = true
-        } catch {
-            inputNumberLabel.text = CalculatorNameSpace.nan
-            isCalculated = true
-        }
-        
-    }
 }
-
-
