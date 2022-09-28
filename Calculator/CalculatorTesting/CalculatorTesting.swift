@@ -8,9 +8,11 @@
 import XCTest
 @testable import Calculator
 class CalculatorTesting: XCTestCase {
+    
     var sut: CalculatorItemQueue<Double>!
     let rhs: Double = 1.0
     let lhs: Double = 1.0
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
@@ -18,7 +20,6 @@ class CalculatorTesting: XCTestCase {
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
     func test_queue_append_firstElement_isSucessfull() {
