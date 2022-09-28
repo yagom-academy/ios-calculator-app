@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         clearOperand()
         operatorLabel.text = ""
+        expressionQueue.arrangedSubviews.first?.removeFromSuperview()
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
@@ -57,9 +58,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
+        clearOperand()
     }
 
     @IBAction func tapACButton(_ sender: UIButton) {
+        expressionQueue.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        clearOperand()
+        operatorLabel.text = ""
     }
 }
 
