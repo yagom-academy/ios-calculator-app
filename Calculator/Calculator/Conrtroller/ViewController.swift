@@ -104,22 +104,17 @@ class ViewController: UIViewController {
     }
     
     func MakeOperationStackView() {
-        let operationStackView = makeOperationStackVie()
+        let operationStackView = UIStackView()
+        operationStackView.axis = .horizontal
+        operationStackView.translatesAutoresizingMaskIntoConstraints = false
+        operationStackView.distribution = .fill
+        operationStackView.alignment = .fill
+        operationStackView.spacing = 8
+        
         operationStackView.addArrangedSubview(makeOperatorLabel())
         operationStackView.addArrangedSubview(makeOperandLabel())
-
-        overallOperationLabelStackView.insertArrangedSubview(operationStackView,at: overallOperationLabelStackView.arrangedSubviews.count)
-    }
-    
-    func makeOperationStackVie() -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.spacing = 8
         
-        return stackView
+        overallOperationLabelStackView.insertArrangedSubview(operationStackView,at: overallOperationLabelStackView.arrangedSubviews.count)
     }
     
     func makeOperandLabel() -> UILabel {
