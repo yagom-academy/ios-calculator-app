@@ -82,10 +82,7 @@ final class OperatorTests: XCTestCase {
         let rhs: Double = 0
         
         //when
-        let result = try sut?.calculates(lhs: lhs, rhs: rhs)
-        
         //then
-        XCTAssertThrowsError(result)
-        
+        XCTAssertThrowsError(try sut?.calculates(lhs: lhs, rhs: rhs))
     }
 }
