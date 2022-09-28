@@ -36,6 +36,7 @@ class CalculatorVC: UIViewController {
         }
         currentNumber.append(sender.titleLabel?.text ?? "")
         operandLabel.text = currentNumber
+        operandLabel.text = numberFormatter(number: currentNumber)
     }
     
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
@@ -46,7 +47,12 @@ class CalculatorVC: UIViewController {
         } else {
             currentNumber.append(sender.titleLabel?.text ?? "")
         }
-        operandLabel.text = currentNumber
+        
+        if currentNumber.last == "." {
+            operandLabel.text = "\(numberFormatter(number: currentNumber))."
+        } else {
+            operandLabel.text = numberFormatter(number: currentNumber)
+        }
     }
     
     @IBAction private func touchUpAcButton(_ sender: UIButton) {
@@ -125,24 +131,29 @@ class CalculatorVC: UIViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        if !totalFormulaString.isEmpty {
-            totalFormulaString += operatorLabel.text ?? ""
-            totalFormulaString += operandLabel.text ?? ""
-            makeFormulaStackView()
-            scrollToBottom()
-            var formula = ExpressionParser.parse(from: totalFormulaString)
-            let result = formula.result()
-            if result == Double.infinity {
-                operandLabel.text = "NaN"
-            } else {
-                operandLabel.text = String(result)
-            }
-        }
+        //        if !totalFormulaString.isEmpty {
+        //            totalFormulaString += operatorLabel.text ?? ""
+        //            totalFormulaString += operandLabel.text ?? ""
+        //            makeFormulaStackView()
+        //            scrollToBottom()
+        //            var formula = ExpressionParser.parse(from: totalFormulaString)
+        //            let result = formula.result()
+        //            if result == Double.infinity {
+        //                operandLabel.text = "NaN"
+        //            } else {
+        //                operandLabel.text = String(result)
+        //            }
+        
+        makeFormulaStackView()
+        scrollToBottom()
+        operandLabel.text = currentNumber
+        //}
     }
     
     private func numberFormatter(number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 10
         guard let decimalNumber = Double(number) else {
             return number
         }
