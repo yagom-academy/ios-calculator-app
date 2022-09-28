@@ -47,10 +47,10 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if operandsLabel.text == zero {
-            stringNumbers += "\(String(sender.tag))"
-            operandsLabel.text = "\(String(sender.tag))"
+            stringNumbers = sender.titleLabel?.text ?? ""
+            operandsLabel.text = stringNumbers
         } else {
-            stringNumbers += "\(String(sender.tag))"
+            stringNumbers += sender.titleLabel?.text ?? ""
             operandsLabel.text = stringNumbers
         }
     }
