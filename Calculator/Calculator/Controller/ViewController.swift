@@ -140,5 +140,9 @@ class ViewController: UIViewController {
             return "-\(text)"
         }
     }
+    
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+        calculatorDisplayLabel.text = nameSpace.zero
+    }
 }
 

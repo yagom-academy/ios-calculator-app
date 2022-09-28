@@ -123,6 +123,5 @@ final class CalculatorUITests: XCTestCase {
         
         // then
         XCTAssertNotNil(calculatorArchive.staticTexts["1"])
-
     }
 }
