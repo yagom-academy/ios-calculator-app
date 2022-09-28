@@ -8,5 +8,3 @@
 protocol CalculateItem {
     
 }
-
-extension String: CalculateItem { }
