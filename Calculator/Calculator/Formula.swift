@@ -10,7 +10,7 @@ struct Formula {
         guard let initialValue: Double = operands.dequeue() else { return 0 }
         var calculatingValue: Double = initialValue
         
-        while operands.isEmpty != true {
+        while !operands.isEmpty {
             guard let rhs = operands.dequeue(),
                   let unitOperator = operators.dequeue() else { return 0 }
             

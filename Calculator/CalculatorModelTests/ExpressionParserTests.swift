@@ -5,14 +5,6 @@ import XCTest
 
 class ExpressionParserTests: XCTestCase {
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-    
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
     func test_문자열로수식을입력받았을때_parse호출및result호출시_피연산자와연산자가분리돼계산되어야한다() {
         // given
         let input = "1+2-3*0"

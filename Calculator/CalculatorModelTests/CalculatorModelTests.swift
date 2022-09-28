@@ -11,10 +11,6 @@ class CalculatorModelTests: XCTestCase {
         sutByLinkedList = CalculatorItemQueueByLinkedList<Double>()
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
     func test_배열의요소가_순서대로linkedList에_append되어야한다() {
         // given
         let input: [Double] = [1,2,3]

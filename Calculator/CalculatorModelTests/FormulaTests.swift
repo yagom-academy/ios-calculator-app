@@ -14,10 +14,6 @@ class FormulaTests: XCTestCase {
         operators = CalculatorItemQueueByLinkedList()
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
     func test_피연산자2개_연산자1개로_이루어진Formula에서_result함수호출시_연산결과가반환되어야한다() {
         // given
         operands.enqueue(1)
