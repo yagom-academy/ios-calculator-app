@@ -18,33 +18,25 @@ enum ExpressionParser {
     private static func parseOperands(from input: String) -> CalculatorItemQueue<Double> {
         var operandsQueue = CalculatorItemQueue<Double>()
         
-        let operands = componentsByOperators(from: input)
+        componentsByOperators(from: input)
             .compactMap(Double.init)
-        operands.forEach { operandsQueue.enqueue(item: $0) }
+            .forEach { operands in
+                operandsQueue.enqueue(item: operands)
+            }
         
         return operandsQueue
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var splitInput: [String] = [input]
+        var inputCopy = input
         
-        for operatorSign in Operator.allCases {
-            splitInput = splitInput.flatMap { $0.split(with: operatorSign.rawValue) }
-        }
-        
-        var numbers: [String] = []
-        
-        for i in 0..<splitInput.count {
-            if splitInput[i] == "" { continue }
-            if i > 0, splitInput[i - 1] == "", splitInput[i].isNumber {
-                let negative: String = "-" + splitInput[i]
-                numbers.append(negative)
-            } else {
-                numbers.append(splitInput[i])
+        Operator.allCases
+            .map(\.rawValue)
+            .forEach { operatorSign in
+                inputCopy = inputCopy.replacingOccurrences(of: "\(operatorSign)-", with: "\(operatorSign)")
             }
-        }
         
-        return numbers
+        return inputCopy.components(separatedBy: "")
     }
     
     private static func parseOperators(from input: String) -> CalculatorItemQueue<Operator> {
