@@ -115,11 +115,21 @@ class ViewController: UIViewController {
         operationStackView.alignment = .fill
         operationStackView.spacing = 8
         
-        operationStackView.addArrangedSubview(operatorLabel)
+        operationStackView.addArrangedSubview(makeOperatorLabel())
         operationStackView.addArrangedSubview(makeOperandLabel())
         
         showingOperationsStackView.insertArrangedSubview(operationStackView,
                                                          at: showingOperationsStackView.arrangedSubviews.count)
+    }
+    
+    private func makeOperatorLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = operatorLabel.text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        return label
     }
     
     private func makeOperandLabel() -> UILabel {
@@ -130,16 +140,6 @@ class ViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.setContentCompressionResistancePriority(.defaultHigh , for: .horizontal)
-        
-        return label
-    }
-    
-    private func makeOperatorLabel() -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = operatorLabel.text
-        label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
         
         return label
     }
