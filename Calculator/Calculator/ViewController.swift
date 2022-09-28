@@ -14,6 +14,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    private func addZero(zero: String) {
+        guard let num = inputNumberLabel.text else {
+            return
+        }
+        
+        if num == "0" {
+            return
+        } else {
+            inputNumberLabel.text = num + "\(zero)"
+        }
+    }
+    
+    private func addPoint(point: Character) {
+        guard let num = inputNumberLabel.text else {
+            return
+        }
+        
+        if num.filter({ $0 == point }).count >= 1 {
+            return
+        } else {
+            inputNumberLabel.text = num + String(point)
+        }
+    }
+    
     private func addNumber(number: String) {
         guard let num = inputNumberLabel.text else {
             return
@@ -27,33 +51,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpNumberButton(sender: UIButton) {
-        
         guard let id = sender.restorationIdentifier else {
             return
         }
         
         switch id {
         case "number_00":
-            guard let num = inputNumberLabel.text,
-                  num != "" else {
-                return
-            }
-            
-            inputNumberLabel.text = num + "00"
+            addZero(zero: "00")
         case "number_0":
-            guard let num = inputNumberLabel.text,
-                  num != "" else {
-                return
-            }
-            
-            inputNumberLabel.text = num + "0"
+            addZero(zero: "0")
         case "number_point":
-            guard let num = inputNumberLabel.text,
-                  num != "" else {
-                return
-            }
-            
-            inputNumberLabel.text = num + "."
+            addPoint(point: ".")
         case "number_1":
             addNumber(number: "1")
         case "number_2":
