@@ -11,8 +11,8 @@ enum ExpressionParser {
         var operators = CalculatorItemQueue<String>()
         
         componentsByOperators(from: input).forEach {
-            if let doubleOperand = Double($0) {
-                operands.enqueue(doubleOperand)
+            if let operand: Double = Double($0) {
+                operands.enqueue(operand)
             }
         }
         
@@ -26,7 +26,7 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let stringOperators = Operator.allCases.map{ String($0.rawValue) }.joined()
-        return input.components(separatedBy: CharacterSet(charactersIn: stringOperators))
+        let operators: String = Operator.allCases.map{ String($0.rawValue) }.joined()
+        return input.components(separatedBy: CharacterSet(charactersIn: operators))
     }
 }
