@@ -81,6 +81,12 @@ class CalculatorViewController: UIViewController {
         setOperandLabel(to: operand)
     }
     
+    private func clearEntry() {
+        if isOperandZero() { return }
+        
+        setOperandLabel(to: "0")
+    }
+    
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle,
               let key = NumericKeypad(rawValue: buttonTitle) else { return }
@@ -95,7 +101,7 @@ class CalculatorViewController: UIViewController {
         case .ac:
             return
         case .ce:
-            return
+            clearEntry()
         case .plusMinus:
             changeOperandSign()
         default:
