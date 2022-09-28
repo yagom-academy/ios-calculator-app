@@ -27,10 +27,10 @@ struct  CalculatorItemQueue<Element: CalculateItem> {
     mutating func enqueue(data: Element) {
         if head != nil {
             tail?.next = Node(value: data)
-            tail = Node(value: data)
+            tail = tail?.next
         } else {
             head = Node(value: data)
-            tail = Node(value: data)
+            tail = head
         }
     }
     

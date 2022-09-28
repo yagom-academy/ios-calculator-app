@@ -70,4 +70,26 @@ class CalculatorTesting: XCTestCase {
         
         XCTAssertEqual(result, 2.0)
     }
+    
+    func test_Operator_function_divide_works() {
+        let myCase  = Operator(rawValue: "/")
+        let result = myCase?.calculate(lhs: lhs, rhs: rhs)
+        
+        XCTAssertEqual(result, 1.0)
+    }
+    
+    func test_100_enqueue_100dequeu_are_equeal() {
+        var dequeueResult: [Double] = []
+        
+        for i in 0...100 {
+            sut.enqueue(data: Double(i))
+        }
+        
+        while sut.head?.next != nil {
+            let deq = sut.dequeue()
+            dequeueResult.append(deq as! Double)
+        }
+        
+        XCTAssertEqual(dequeueResult.count, 100)
+    }
 }
