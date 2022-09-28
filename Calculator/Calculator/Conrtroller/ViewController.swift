@@ -36,9 +36,9 @@ class ViewController: UIViewController {
             if operandItem == "0" {
                 operandItem.removeFirst()
             }
-            
-            operandItem += number
         }
+        
+        operandItem += number
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -56,12 +56,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        guard operandItem != "" else { return }
-        operandItem.removeLast()
+        operandItem = ""
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        operandItem = ""
+        // 이전 라벨 텍스트들까지 지우는 방식으로 변경
     }
 }
 
