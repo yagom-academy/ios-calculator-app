@@ -17,6 +17,10 @@ class ViewController: UIViewController {
         print(formula.result())
     }
     
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        operandsLabel.text = "0"
+    }
+    
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         if operandsLabel.text == "0" {
             stringNumbers += "\(String(sender.tag))"
