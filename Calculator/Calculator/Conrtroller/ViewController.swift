@@ -115,8 +115,6 @@ class ViewController: UIViewController {
         operationStackView.alignment = .fill
         operationStackView.spacing = 8
         
-        let operatorLabel = makeOperatorLabel()
-        
         operationStackView.addArrangedSubview(operatorLabel)
         operationStackView.addArrangedSubview(makeOperandLabel())
         
