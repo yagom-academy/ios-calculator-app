@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     private var result: Double = 0.0
     private var inputNumber: String = "" {
         willSet {
-            guard newValue != noValue else {
+            guard newValue != noValue, newValue != "-" else {
                 operandLabel.text = zero
                 return
             }
@@ -58,6 +58,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpConvertingPositiveNegativeButton() {
+        guard inputNumber != zero else { return }
+    
         if inputNumber.prefix(1) == "-" {
             inputNumber.removeFirst()
         } else {
