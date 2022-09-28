@@ -14,7 +14,6 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        //UI에서 입력받을 시 처음 값이 양수면 operator 앞에 "+"알아서 추가
         let result = try operands.mergedQueue.reduce(0.0) {
             guard let nowOperator = operators.popFirst() as? Operator else {
                 throw CalculateError.invalidOperator
