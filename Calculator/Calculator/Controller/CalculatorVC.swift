@@ -73,7 +73,6 @@ class CalculatorVC: UIViewController {
         if operandLabel.text == "0" {
             return
         } else {
-            operatorLabel.text = sender.titleLabel?.text
             makeFormulaStackView()
             scrollToBottom()
             if finalFormula.isEmpty {
@@ -82,16 +81,15 @@ class CalculatorVC: UIViewController {
                 finalFormula.append(operatorLabel.text ?? "")
                 finalFormula.append(currentNumber)
             }
+            operatorLabel.text = sender.titleLabel?.text
             currentNumber = ""
             operandLabel.text = "0"
         }
     }
     
     private func makeFormulaStackView() {
-        guard let operatorLabel = makeOperatorLabel(),
-              let operandLabel = makeOperandLabel() else {
-            return
-        }
+        let operatorLabel = makeOperatorLabel()
+        let operandLabel = makeOperandLabel()
         let formulaStackView: UIStackView
         
         if finalFormula.isEmpty {
@@ -103,14 +101,14 @@ class CalculatorVC: UIViewController {
         mainStackView.addArrangedSubview(formulaStackView)
     }
     
-    private func makeOperatorLabel() -> UILabel? {
+    private func makeOperatorLabel() -> UILabel {
         let operatorLabelForStack: UILabel = UILabel()
         operatorLabelForStack.text = operatorLabel.text
         operatorLabelForStack.textColor = .white
         return operatorLabelForStack
     }
     
-    private func makeOperandLabel() -> UILabel? {
+    private func makeOperandLabel() -> UILabel {
         let operandLabelForStack: UILabel = UILabel()
         operandLabelForStack.text = operandLabel.text
         operandLabelForStack.textColor = .white
