@@ -6,5 +6,5 @@
 //
 
 enum ExpressionParserError: Error {
-    case doNotChangeDouble
+    case canNotChangeDouble
 }

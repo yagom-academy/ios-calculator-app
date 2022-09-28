@@ -13,7 +13,7 @@ enum ExpressionParser {
         
         func enqueueOperand(and `operator`: Operator) throws {
             guard let changingDouble = Double(beforeDoubleValue) else {
-                throw ExpressionParserError.doNotChangeDouble
+                throw ExpressionParserError.canNotChangeDouble
             }
             operands.enqueue(changingDouble)
             operators.enqueue(`operator`)
@@ -35,7 +35,7 @@ enum ExpressionParser {
         }
         
         guard let changingDouble = Double(beforeDoubleValue) else {
-            throw ExpressionParserError.doNotChangeDouble
+            throw ExpressionParserError.canNotChangeDouble
         }
         operands.enqueue(changingDouble)
         
