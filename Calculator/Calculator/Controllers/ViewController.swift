@@ -42,6 +42,16 @@ final class ViewController: UIViewController {
         mainResultLabel.text = currentOperand
     }
     
+    private func applyNumberFormatter(number: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        guard let result = numberFormatter.string(for: number) else { return Constant.empty }
+        
+        return result
+    }
+    
     private func makeHistoryStackViewLabel(item: String) -> UILabel {
         let label: UILabel = {
             let label = UILabel()
@@ -71,8 +81,10 @@ final class ViewController: UIViewController {
     }
     
     private func updateCalculateHistory(currentOperator: String, currentOperand: String) {
+        guard let operand = Double(currentOperand) else { return }
+        
         let operatorLabel = makeHistoryStackViewLabel(item: currentOperator)
-        let operandLabel = makeHistoryStackViewLabel(item: currentOperand)
+        let operandLabel = makeHistoryStackViewLabel(item: applyNumberFormatter(number: operand) )
         let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         
         historyStackView.addArrangedSubview(stackView)
@@ -107,11 +119,13 @@ final class ViewController: UIViewController {
             currentOperand = Constant.zero
             currentOperator = operators
             mainResultLabel.text = Constant.zero
+            
             return
         }
         
         if currentOperand == Constant.defaultZero {
             currentOperator = operators
+            
             return
         }
         
@@ -141,8 +155,9 @@ final class ViewController: UIViewController {
         
         let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
         
+        
         do {
-            mainResultLabel.text = try String(formula.result())
+            mainResultLabel.text = applyNumberFormatter(number: try formula.result())
             currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
             print("None Operand Error")
