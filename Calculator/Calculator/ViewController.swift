@@ -7,31 +7,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private enum CalculatorNumber {
+        static let formulaStackViewSpacing: Int = 8
+        static let maximumDigits: Int = 20
+    }
+    
+    var formulaLog: [String?] = []
+    var isResultOfFormula: Bool = false
+    var isInputtedZero: Bool = false
+    var isFirstNumberOfCalculator: Bool = true
+    
     @IBOutlet weak private var enteredOperatorLabel: UILabel!
     @IBOutlet weak private var enteredNumberLabel: CalculatorNumberLabel!
     @IBOutlet private var operatorButtons: [UIButton]!
     @IBOutlet weak private var zeroButton: UIButton!
     @IBOutlet weak private var doubleZeroButton: UIButton!
     @IBOutlet weak private var dotButton: UIButton!
-    @IBOutlet weak var verticalFormulasStackView: UIStackView!
-    @IBOutlet weak var formulaScrollView: UIScrollView!
+    @IBOutlet weak private var verticalFormulasStackView: UIStackView!
+    @IBOutlet weak private var formulaScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setToInitialState()
+        configToInitialState()
     }
     
-    @IBAction private func setToInitialState() {
+    @IBAction private func configToInitialState() {
         verticalFormulasStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
         enteredOperatorLabel.text = nil
         enteredNumberLabel.resetToZero()
-        enteredNumberLabel.isResultOfFormula = false
+        self.isResultOfFormula = false
+        formulaLog = []
     }
     
     @IBAction private func touchUpSignSwitchButton(sender: UIButton) {
-        guard !enteredNumberLabel.isResultOfFormula else {
+        guard !self.isResultOfFormula else {
             return
         }
         guard enteredNumberLabel.text != CalculatorText.zero else {
@@ -42,13 +53,13 @@ class ViewController: UIViewController {
     
     @IBAction private func touchUpCEButton(sender: UIButton) {
         enteredNumberLabel.resetToZero()
-        enteredNumberLabel.isResultOfFormula = false
+        self.isResultOfFormula = false
     }
     
     @IBAction private func touchUpNumberButton(sender: UIButton) {
         guard let text = enteredNumberLabel.text,
               let number = sender.currentTitle,
-        !enteredNumberLabel.isResultOfFormula else {
+        !self.isResultOfFormula else {
             return
         }
         enterNumber(sender: sender,
@@ -60,7 +71,7 @@ class ViewController: UIViewController {
         if enteredNumberLabel.isZero {
             switch sender {
             case zeroButton:
-                enteredNumberLabel.isInputtedZero = true
+                self.isInputtedZero = true
             case doubleZeroButton:
                 return
             case dotButton:
@@ -79,11 +90,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard !enteredNumberLabel.isResultOfFormula else {
+        guard !self.isResultOfFormula else {
             return
         }
         if enteredNumberLabel.isZero {
-            if !enteredNumberLabel.isInputtedZero {
+            if !self.isInputtedZero {
                 enteredOperatorLabel.text = sender.currentTitle
                 return
             }
@@ -97,6 +108,10 @@ class ViewController: UIViewController {
               let operandLabel = makeOperandLabel() else {
                   return
               }
+        if isFirstNumberOfCalculator {
+            isFirstNumberOfCalculator = false
+        }
+        formulaLog.append(contentsOf: [operatorLabel.text, operandLabel.text])
         enteredOperatorLabel.text = nil
         enteredNumberLabel.resetToZero()
         let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
@@ -106,6 +121,11 @@ class ViewController: UIViewController {
     }
     
     private func makeOperatorLabel() -> UILabel? {
+        if enteredOperatorLabel.text == nil {
+            if !isFirstNumberOfCalculator {
+                return nil
+            }
+        }
         let operatorLabel: UILabel = .init()
         operatorLabel.text = enteredOperatorLabel.text
         operatorLabel.textColor = .white
@@ -127,16 +147,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpEqualButton(sender: UIButton) {
-        guard !enteredNumberLabel.isResultOfFormula else {
+        guard !self.isResultOfFormula else {
             return
         }
         if enteredNumberLabel.isZero,
-           !enteredNumberLabel.isInputtedZero {
+           !self.isInputtedZero {
             enteredOperatorLabel.text = nil
         } else {
             makeFormulaStackView()
         }
-        var formula: Formula = ExpressionParser.parse(from: makeExpression())
+        var formula: Formula = ExpressionParser.parse(from: formulaLog.compactMap({ $0 }).joined())
         var result: String = .init()
         do {
             result = try String(formula.result())
@@ -151,20 +171,8 @@ class ViewController: UIViewController {
     
     private func makeResultOfFormula(text: String) {
         enteredNumberLabel.text = text
-        enteredNumberLabel.isResultOfFormula = true
-        formatNumber()
-    }
-    
-    private func makeExpression() -> String {
-        let subviews: [UIView] = verticalFormulasStackView.arrangedSubviews
-        var expression: [String?] = []
-        subviews.forEach {
-            let labels = $0.subviews as? [UILabel]
-            labels?.forEach {
-                expression.append($0.text)
-            }
-        }
-        return expression.compactMap { $0 }.joined()
+        self.isResultOfFormula = true
+        enteredNumberLabel.text = formatNumber()
     }
     
     private func showErrorAlert(message: String) {
@@ -173,7 +181,7 @@ class ViewController: UIViewController {
                                       preferredStyle: .alert)
         let resetAction = UIAlertAction(title: CalculatorText.reset,
                                         style: .default) { (action) in
-            self.setToInitialState()
+            self.configToInitialState()
         }
         let cancelAction = UIAlertAction(title: CalculatorText.cancel,
                                          style: .default)
@@ -184,17 +192,22 @@ class ViewController: UIViewController {
                 completion: nil)
     }
     
-    private func formatNumber() {
+    private func formatNumber() -> String? {
+        let numberFormatter: NumberFormatter = numberFormatter()
+        guard let text = enteredNumberLabel.text,
+              let number = Double(text),
+              let formattedNumber: String = numberFormatter.string(from: NSNumber(value: number)) else {
+                  return nil
+              }
+        return formattedNumber
+    }
+    
+    private func numberFormatter() -> NumberFormatter {
         let numberFormatter: NumberFormatter = .init()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = CalculatorNumber.maximumDigits
-        guard let text = enteredNumberLabel.text,
-              let number = Double(text),
-              let formattedNumber: String = numberFormatter.string(from: NSNumber(value: number)) else {
-                  return
-              }
-        enteredNumberLabel.text = formattedNumber
+        return numberFormatter
     }
 }
 

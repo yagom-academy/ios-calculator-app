@@ -8,8 +8,6 @@
 import UIKit
 
 class CalculatorNumberLabel: UILabel {
-    var isResultOfFormula: Bool = false
-    var isInputtedZero: Bool = false
     var isZero: Bool {
         if self.text == CalculatorText.zero {
             return true
@@ -31,7 +29,5 @@ class CalculatorNumberLabel: UILabel {
     
     func resetToZero() {
         self.text = CalculatorText.zero
-        self.isInputtedZero = false
-        self.isResultOfFormula = false
     }
 }

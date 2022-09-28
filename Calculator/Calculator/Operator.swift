@@ -19,11 +19,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         case .subtract:
             result = subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            do {
-                result =  try divide(lhs: lhs, rhs: rhs)
-            } catch FormulaError.divideByZero {
-                throw FormulaError.divideByZero
-            }
+            result =  try divide(lhs: lhs, rhs: rhs)
         case .multifly:
             result = multifly(lhs: lhs, rhs: rhs)
         }

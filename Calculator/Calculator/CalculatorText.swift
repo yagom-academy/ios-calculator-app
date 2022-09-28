@@ -13,5 +13,4 @@ enum CalculatorText {
     static let cancel: String = "취소"
     static let resetSuggestion: String = " 리셋하시겠습니까?"
     static let negativeSign: String.Element = "-"
-    static let emptyValue: String = ""
 }

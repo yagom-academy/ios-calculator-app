@@ -22,11 +22,7 @@ struct Formula {
             guard let operatorSign = operators.dequeue() else {
                 throw FormulaError.unexpectedError
             }
-            do {
-                leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
-            } catch FormulaError.divideByZero {
-                throw FormulaError.divideByZero
-            }
+            leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
         }
         return leftNumber
     }
