@@ -8,9 +8,7 @@ class CalculatorItemQueueTests: XCTestCase {
     var testCase1: Double = Double.random(in: (0...100))
     var testCase2: Double = Double.random(in: (0...100))
     var testCase3: Double = Double.random(in: (0...100))
-    var testCase4: Int = Int.random(in: (0...100))
-    var testCase5: OperatorItem = OperatorItem.allCases.randomElement() ?? .add
-
+    
     override func setUpWithError() throws {
         sut = CalculatorItemQueue([])
     }
@@ -68,7 +66,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_CalculatorItemQueue에서_enque와deque에_아이템이_모두있을때_popFirst시_첫번째아이템추출() {
-        sut.enqueue = [testCase1, testCase3, testCase5]
+        sut.enqueue = [testCase1, testCase3]
         sut.dequeue = [testCase2]
         
         let result = sut.popFirst()
@@ -82,7 +80,7 @@ class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_CalculatorItemQueue에서_enque에만_아이템이있을때_popFirst시_첫번째아이템추출() {
-        sut.enqueue = [testCase1, testCase3, testCase5]
+        sut.enqueue = [testCase1, testCase3]
         
         let result = sut.popFirst()
         
@@ -95,21 +93,21 @@ class CalculatorItemQueueTests: XCTestCase {
     }
 
     func test_CalculatorItemQueue에서_deque에만_아이템이있을때_popFirst시_첫번째아이템추출() {
-        sut.dequeue = [testCase1, testCase3, testCase4]
+        sut.dequeue = [testCase1, testCase3]
         
         let result = sut.popFirst()
         
-        guard let result = result as? Int else{
+        guard let result = result as? Double else{
             XCTAssert(false)
             return
         }
         
-        XCTAssertEqual(testCase4, result)
+        XCTAssertEqual(testCase3, result)
     }
 
     func test_CalculatorItemQueue에서_pushLast시_마지막아이템할당() {
         sut.enqueue = [testCase3]
-        sut.dequeue = [testCase4, testCase5]
+        sut.dequeue = [testCase1]
 
         sut.pushLast(testCase1)
         

@@ -6,10 +6,13 @@
 //
 
 import XCTest
-@testable import Formula
+@testable import Calculator
 
 class FormulaTests: XCTestCase {
-
+    
+    var sut: Formula!
+    
+    
     override func setUpWithError() throws {
         sut = Formula()
     }
