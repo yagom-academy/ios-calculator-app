@@ -20,15 +20,7 @@ class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func testFormula_Fornula_Type을_인스턴스화한_경우_그_값은_Nil이_아닙니다() {
-        //given, when
-        sut = Formula()
-        
-        //then
-        XCTAssertNotNil(sut)
-    }
-    
-    func testFormula_주어진_Double_Array를_operands에_순서대로_enqeueu한_경우_operands의_head의_data는_주어진_Double_Array의_첫번째값과_같습니다() {
+    func testFormula_주어진_Double_Array인_실수_1_2_3_4_5를_operands에_순서대로_enqeueu한_경우_operands의_head의_data는_주어진_Double_Array의_첫번째값과_같다() {
         //given
         let input: [Double] = [1.0, 2.0, 3.0, 4.0, 5.0]
         
@@ -41,7 +33,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(input.first, sut.operands.head?.data)
     }
     
-    func testFormula_주어진_Operator_Array를_operator에_순서대로_endqueue한_경우_operator의_head의_data는_주어진_Operator_Array의_첫번째값과_같습니다() {
+    func testFormula_주어진_Operator_Array인_add_add_divide_multiply_subtract를_operator에_순서대로_endqueue한_경우_operator의_head의_data는_주어진_Operator_Array의_첫번째값과_같다() {
         //given
         let input: [Operator] = [.add, .add, .divide, .multiply, .subtract]
         
@@ -54,7 +46,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(input.first, sut.operators.head?.data)
     }
     
-    func testFormula_주어진_두개의_실수_2와_1과_Operator의_add_Case를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수3입니다() {
+    func testFormula_주어진_두개의_실수_2와_1그리고_Operator_add_Case를_operands와_operators에_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수3과_같다() {
         //given
         let inputOperands: [Double] = [2.0, 1.0]
         let inputOperators: Operator = Operator.add
@@ -74,7 +66,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(3.0, result)
     }
     
-    func testFormula_주어진_두개의_실수_2와_1과_Operator의_subtract_Case를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수1입니다() {
+    func testFormula_주어진_두개의_실수_2와_1그리고_Operator_subtract_Case를_operands와_operators에_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수1과_같다() {
         //given
         let inputOperands: [Double] = [2.0, 1.0]
         let inputOperators: Operator = Operator.subtract
@@ -94,7 +86,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(1.0, result)
     }
     
-    func testFormula_주어진_두개의_실수_2와_1과_Operator의_divide_Case를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수1입니다() {
+    func testFormula_주어진_두개의_실수_2와_1그리고_Operator_divide_Case를_operands와_operators에_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수1과_같다() {
         //given
         let inputOperands: [Double] = [2.0, 1.0]
         let inputOperators: Operator = Operator.divide
@@ -114,7 +106,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(2.0, result)
     }
     
-    func testFormula_주어진_두개의_실수_2와_1과_Operator의_multiply_Case를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수3입니다() {
+    func testFormula_주어진_두개의_실수_2와_1그리고_Operator_multiply_Case를_operands와_operators에_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수3과_같다() {
         //given
         let inputOperands: [Double] = [2.0, 1.0]
         let inputOperators: Operator = Operator.multiply
@@ -134,7 +126,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(2.0, result)
     }
     
-    func testFormula_주어진_5개의_실수_1_2_5_2_40와_4개의_Operator_add_subtract_divide_multiply를_operands와_operators에_전부_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수40입니다() {
+    func testFormula_주어진_5개의_실수_1_2_5_2_40와_4개의_Operator_add_subtract_divide_multiply를_operands와_operators에_순서대로_enqueue한_후_result_메소드를_호출한_경우_그_결과는_실수40이다() {
         //given
         let inputOperands: [Double] = [1.0, 2.0, 5.0, 2.0, 40]
         let inputOperators: [Operator] = [.add, .subtract, .divide, .multiply]
