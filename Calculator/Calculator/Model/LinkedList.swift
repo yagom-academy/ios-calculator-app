@@ -5,9 +5,7 @@
 //  Created by 써니쿠키 on 2022/09/19.
 //
 
-import Foundation
-
-struct LinkedList <T> {
+struct LinkedList <T: CalculateItem> {
     private(set) var head: Node<T>?
     var last: Node<T>? {
         var currentNode = self.head
@@ -18,6 +16,8 @@ struct LinkedList <T> {
         
         return currentNode
     }
+    
+    var isEmpty: Bool { self.head == nil ? true : false }
     
     mutating func append(_ data: T) {
         guard self.head != nil else {
@@ -67,9 +67,5 @@ struct LinkedList <T> {
         
         self.head = firstNode?.next
         return firstNode
-    }
-    
-    mutating func isEmpty() -> Bool {
-        self.head == nil ? true : false
     }
 }

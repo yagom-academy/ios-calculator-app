@@ -5,9 +5,7 @@
 //  Created by 써니쿠키 on 2022/09/20.
 //
 
-import Foundation
-
-class Node <T> {
+class Node <T: CalculateItem> {
     private(set) var data: T?
     var next: Node?
     

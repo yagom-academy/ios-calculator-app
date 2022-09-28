@@ -5,10 +5,9 @@
 //  Created by 써니쿠키 on 2022/09/19.
 //
 
-import Foundation
-
-struct CalculatorItemQueue <T>: CalculateItem {
+struct CalculatorItemQueue <T: CalculateItem> {
     var itemQueue: LinkedList<T>? = LinkedList()
+    var isEmpty: Bool { self.itemQueue?.head == nil ? true : false }
     
     mutating func enqueue(_ data: T) {
         self.itemQueue?.append(data)
@@ -21,9 +20,5 @@ struct CalculatorItemQueue <T>: CalculateItem {
 
     mutating func clear() {
         self.itemQueue = nil
-    }
-    
-    mutating func isEmpty() -> Bool {
-        self.itemQueue?.head == nil ? true : false
     }
 }
