@@ -18,22 +18,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
-                                <rect key="frame" x="16" y="220.5" width="382" height="45"/>
+                                <rect key="frame" x="16" y="161.5" width="382" height="104"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="104"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nd6-Zr-Y6e">
-                                                <rect key="frame" x="298" y="0.0" width="84" height="20.5"/>
+                                                <rect key="frame" x="256" y="0.0" width="126" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vs2-Cn-oDq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vs2-Cn-oDq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlG-ma-uLP">
-                                                        <rect key="frame" x="16" y="0.0" width="68" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlG-ma-uLP">
+                                                        <rect key="frame" x="58" y="0.0" width="68" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -41,16 +41,16 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="bottomRight" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iC9-OM-dL7">
-                                                <rect key="frame" x="288" y="24.5" width="94" height="20.5"/>
+                                                <rect key="frame" x="246" y="54" width="136" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beM-R2-Wwe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beM-R2-Wwe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345678" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6a-gR-hWj">
-                                                        <rect key="frame" x="16" y="0.0" width="78" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6a-gR-hWj">
+                                                        <rect key="frame" x="58" y="0.0" width="78" height="50"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpPositiveNegativeNumberButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="4aR-mz-J8N"/>
+                                                    <action selector="touchUpConvertingPositiveNegativeButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="4aR-mz-J8N"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -318,7 +318,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="touchUpEqualSignButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wQc-0x-kq9"/>
+                                                    <action selector="touchUpResultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bO4-Wc-6jd"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -364,10 +364,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="modifiableOperandLabel" destination="Lwz-OF-XHD" id="Mgv-KS-xUJ"/>
-                        <outlet property="modifiableOperatorLabel" destination="HPC-iy-qdm" id="lXY-4E-0s5"/>
-                        <outlet property="operationsScrollView" destination="BOT-7g-vxv" id="Lp0-rO-aXO"/>
-                        <outlet property="operationsStackView" destination="XRe-QE-UJf" id="NJN-Q8-Ioi"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="Mgv-KS-xUJ"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="lXY-4E-0s5"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="Lp0-rO-aXO"/>
+                        <outlet property="showingOperationsStackView" destination="XRe-QE-UJf" id="NJN-Q8-Ioi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -7,27 +7,26 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var modifiableOperandLabel: UILabel!
-    @IBOutlet weak var modifiableOperatorLabel: UILabel!
-    @IBOutlet weak var operationsStackView: UIStackView!    
-    @IBOutlet weak var operationsScrollView: UIScrollView!
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var showingOperationsStackView: UIStackView!    
+    @IBOutlet weak var scrollView: UIScrollView!
     
-    var overallOperation: String = ""
-    var result: Double = 0.0
-    var operand: String = "" {
+    private let numberFormatter = NumberFormatter()
+    private let zero = "0"
+    private let noValue = ""
+    private let blank = " "
+    private var formula: String = ""
+    private var result: Double = 0.0
+    private var inputNumber: String = "" {
         willSet {
-            guard newValue != "" else {
-                modifiableOperandLabel.text = "0"
+            guard newValue != noValue else {
+                operandLabel.text = zero
                 return
             }
-        
-            modifiableOperandLabel.text = newValue
+            
+            operandLabel.text = newValue
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
@@ -35,78 +34,80 @@ class ViewController: UIViewController {
         
         switch number {
         case "0", "00":
-            guard operand != "0" else { return }
+            guard inputNumber != zero else { return }
         default:
-            if operand == "0" {
-                operand.removeFirst()
+            if inputNumber == zero {
+                inputNumber.removeFirst()
             }
         }
         
-        operand += number
+        inputNumber += number
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard operand != "" else {
-            modifiableOperatorLabel.text = sender.titleLabel?.text
+        guard inputNumber != noValue else {
+            operatorLabel.text = sender.titleLabel?.text
             return
         }
-        collecOperation()
+        
+        addFormula()
         MakeOperationStackView()
         scrollTobottom()
-        operand = ""
-        modifiableOperatorLabel.text = sender.titleLabel?.text
+        inputNumber = noValue
+        operatorLabel.text = sender.titleLabel?.text
     }
     
-    @IBAction func touchUpPositiveNegativeNumberButton() {
-        if operand.prefix(1) == "-" {
-            operand.removeFirst()
+    @IBAction func touchUpConvertingPositiveNegativeButton() {
+        if inputNumber.prefix(1) == "-" {
+            inputNumber.removeFirst()
         } else {
-            operand.insert("-", at: operand.startIndex)
+            inputNumber.insert("-", at: inputNumber.startIndex)
         }
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        operand = ""
+        inputNumber = noValue
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        operationsStackView.subviews.forEach { $0.removeFromSuperview() }
-        overallOperation = ""
-        operand = ""
-        modifiableOperatorLabel.text = " "
+        showingOperationsStackView.subviews.forEach { $0.removeFromSuperview() }
+        formula = noValue
+        inputNumber = noValue
+        operatorLabel.text = blank
     }
     
-    @IBAction func touchUpEqualSignButton(_ sender: UIButton) {
-        guard modifiableOperandLabel.text != String(result) else { return }
+    @IBAction func touchUpResultButton(_ sender: UIButton) {
+        guard operandLabel.text != String(result) else { return }
         
-        collecOperation()
+        addFormula()
         MakeOperationStackView()
-        operand = ""
+        inputNumber = noValue
         
         do {
-            var formula = ExpressionParser.parse(from: overallOperation)
-            result = try formula.result()
-            modifiableOperandLabel.text = String(changeStyle(result))
+            var formulaQueue = ExpressionParser.parse(from: formula)
+            result = try formulaQueue.result()
+            operandLabel.text = String(changeStyle(result))
         } catch CalculatorError.divideByZeroError {
-            modifiableOperandLabel.text = "NaN"
+            operandLabel.text = numberFormatter.notANumberSymbol
         } catch {
-            modifiableOperandLabel.text = "Error: Please retry"
+            operandLabel.text = "Error: Please retry"
         }
     }
     
-    func collecOperation() {
-        guard let`operator` = modifiableOperatorLabel.text,
-              let operand = modifiableOperandLabel.text else {
+    private func addFormula() {
+        guard let`operator` = operatorLabel.text,
+              let operand = operandLabel.text else {
             return
         }
-        if `operator` == " " {
-            overallOperation += ("+" + operand)
+        
+        if `operator` == blank {
+            formula += ("+" + operand)
         } else {
-            overallOperation += (`operator` + operand)
+            formula += (`operator` + operand)
         }
     }
     
-    func MakeOperationStackView() {
+    private func MakeOperationStackView() {
         let operationStackView = UIStackView()
         operationStackView.axis = .horizontal
         operationStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,18 +120,14 @@ class ViewController: UIViewController {
         operationStackView.addArrangedSubview(operatorLabel)
         operationStackView.addArrangedSubview(makeOperandLabel())
         
-        operationsStackView.insertArrangedSubview(operationStackView,at: operationsStackView.arrangedSubviews.count)
+        showingOperationsStackView.insertArrangedSubview(operationStackView,
+                                                         at: showingOperationsStackView.arrangedSubviews.count)
     }
     
-    func scrollTobottom() {
-        operationsScrollView.layoutIfNeeded()
-        operationsScrollView.setContentOffset(CGPoint(x: 0, y: operationsScrollView.contentSize.height - operationsScrollView.bounds.height), animated: false)
-    }
-    
-    func makeOperandLabel() -> UILabel {
+    private func makeOperandLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = modifiableOperandLabel.text
+        label.text = operandLabel.text
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -139,26 +136,29 @@ class ViewController: UIViewController {
         return label
     }
     
-    func makeOperatorLabel() -> UILabel {
+    private func makeOperatorLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = modifiableOperatorLabel.text
+        label.text = operatorLabel.text
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         
         return label
     }
     
-    func changeStyle(_ operationResult: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        
+    private func scrollTobottom() {
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
+                                    animated: false)
+    }
+    
+    private func changeStyle(_ operationResult: Double) -> String {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .up
         
-        let result = numberFormatter.string(from: operationResult as NSNumber) ?? "0"
+        let result = numberFormatter.string(from: operationResult as NSNumber) ?? zero
         
         return result
     }
 }
-
