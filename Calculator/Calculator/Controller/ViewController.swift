@@ -68,7 +68,13 @@ class ViewController: UIViewController {
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         if inputNumberLabel.text == CalculatorNameSpace.nan { return }
-        resetInputNumber()
+        
+        if isCalculated {
+            setup()
+        } else {
+            resetInputNumber()
+            resetInputOperator()
+        }
     }
     
     @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
