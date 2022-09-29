@@ -23,9 +23,10 @@ class ViewController: UIViewController {
     @IBAction func touchUpACButton(_ sender: UIButton) {
         stringOperators = empty
         operatorLabel.text = stringOperators
+        stringNumbers = empty
         operandsLabel.text = zero
-        recentNumbersStackView.arrangedSubviews.forEach{
-            recentNumbersStackView.removeArrangedSubview($0)
+        recentNumbersStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
         }
     }
     
@@ -45,8 +46,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
+        let recentOperatorLabel = UILabel()
+        recentOperatorLabel.text = stringOperators
+        recentOperatorLabel.textColor = .white
         stringOperators = sender.titleLabel?.text ?? ""
         operatorLabel.text = stringOperators
+        let recentOperandsLabel = UILabel()
+        recentOperandsLabel.text = stringNumbers
+        recentOperandsLabel.textColor = .white
+        stringNumbers = zero
+        operandsLabel.text = stringNumbers
+        
+        let stackView: UIStackView = .init(arrangedSubviews: [recentOperatorLabel, recentOperandsLabel])
+        
+        recentNumbersStackView.addArrangedSubview(stackView)
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
