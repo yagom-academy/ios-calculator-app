@@ -57,6 +57,11 @@ class ViewController: UIViewController {
             return ""
         }
     }
+    
+    func addLabelAndSign(vaule: String, sender: UIButton) {
+        addNewLableToStackView(message: vaule, stackView: stackView)
+        signLabel.text = signOfOperator(sender: sender)
+    }
 
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
