@@ -13,7 +13,7 @@ struct Formula {
         var result: Double?
         while !operators.isEmpty {
             let leftHandSide: Double?
-            if result != nil {
+            if let result {
                 leftHandSide = result
             } else {
                 leftHandSide = operands.dequeue()
