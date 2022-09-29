@@ -48,6 +48,20 @@ class ViewController: UIViewController {
         }
     }
     
+    func switchPositiveNegativeOfOperandLabelText() {
+        var labelText: String = operandLabel.text ?? ""
+        if labelText == "0" {
+            return
+        }
+        let isNegative: Bool = labelText.hasPrefix("-")
+        if isNegative {
+            labelText.removeFirst()
+            operandLabel.text = labelText
+        } else {
+            operandLabel.text = "-\(labelText)"
+        }
+    }
+    
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         resetOperandLabel()
     }
@@ -62,6 +76,9 @@ class ViewController: UIViewController {
         if let labelText = sender.titleLabel?.text {
             addOperandToOperandLabel(labelText)
         }
+    }
+    @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
+        switchPositiveNegativeOfOperandLabelText()
     }
 }
 
