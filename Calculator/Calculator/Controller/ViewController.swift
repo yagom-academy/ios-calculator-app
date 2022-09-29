@@ -12,10 +12,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        numberLabel.clearAll()
     }
     
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
-        
+        guard let number = sender.number else {
+            return
+        }
+        numberLabel.append(number)
     }
     
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
