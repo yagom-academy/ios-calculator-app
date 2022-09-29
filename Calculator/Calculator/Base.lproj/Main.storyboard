@@ -336,11 +336,11 @@
                     </view>
                     <connections>
                         <outlet property="acButton" destination="ped-N8-JbY" id="Jnk-Uw-Vbu"/>
+                        <outlet property="calculateButton" destination="Daw-iX-Owl" id="K9Q-08-gOz"/>
                         <outlet property="ceButton" destination="RLD-dY-LOA" id="OgG-Ld-aYB"/>
                         <outlet property="displayNumberLabel" destination="Lwz-OF-XHD" id="O6F-T1-skR"/>
                         <outlet property="displaySignLabel" destination="HPC-iy-qdm" id="zWO-Ta-y6g"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="oMF-px-7ni"/>
-                        <outlet property="equalButton" destination="Daw-iX-Owl" id="K9Q-08-gOz"/>
                         <outlet property="formulaHorizontalStackView" destination="2Pu-Ld-ZGi" id="sfd-Fj-GUs"/>
                         <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="EtH-gC-eeK"/>
                         <outlet property="formulaVerticalStackView" destination="XRe-QE-UJf" id="91E-vw-ytN"/>

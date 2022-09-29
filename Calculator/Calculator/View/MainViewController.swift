@@ -9,7 +9,7 @@ class MainViewController: UIViewController {
     @IBOutlet var operatorButton: [UIButton]!
     
     @IBOutlet weak var dotButton: UIButton!
-    @IBOutlet weak var equalButton: UIButton!
+    @IBOutlet weak var calculateButton: UIButton!
 
     @IBOutlet weak var ceButton: UIButton!
     @IBOutlet weak var acButton: UIButton!
@@ -75,5 +75,7 @@ class MainViewController: UIViewController {
     @IBAction func tapCEButton(_ sender: UIButton) {
         calculatorController.tappedCEButton()
     }
+    
+    
 }
 
