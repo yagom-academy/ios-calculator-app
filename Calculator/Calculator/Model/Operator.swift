@@ -1,11 +1,11 @@
 //MARK: - Operator
 enum Operator: Character {
-//MARK: - Operator Case
+    //MARK: - Operator Case
     case add = "+"
     case subtract = "−"
     case divide = "÷"
     case multiply = "×"
-//MARK: - Operator Method
+    //MARK: - Operator Method
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         let calculateResult: Double
         

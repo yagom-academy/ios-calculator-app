@@ -1,14 +1,14 @@
 protocol CalculateItem { }
 //MARK: - CalculatorItemQueue
 struct CalculatorItemQueue<T: CalculateItem> {
-//MARK: - CalculatorItemQueue Properties
+    //MARK: - CalculatorItemQueue Properties
     private(set) var head: Node<T>? = nil
     private(set) var tail: Node<T>? = nil
     private(set) var count: Int = 0
     var isEmpty: Bool {
         return count == 0
     }
-//MARK: - CalculatorItemQueue Method
+    //MARK: - CalculatorItemQueue Method
     mutating func enqueue(_ element: T) {
         let node: Node<T> = Node<T>(data: element)
         

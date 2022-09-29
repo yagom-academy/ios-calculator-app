@@ -7,12 +7,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-//MARK: - IBOutlet
+    //MARK: - IBOutlet
     @IBOutlet weak var numberLabel: NumberLabel!
     @IBOutlet weak var operatorLabel: OperatorLabel!
     @IBOutlet weak var formulaStackView: FormulaStackView!
     @IBOutlet weak var scrollView: UIScrollView!
-//MARK: - Properties
+    //MARK: - Properties
     private var initializationList: [InitializationProtocol] = []
     private var isCalculated: Bool = false
     
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         initializationList = [numberLabel, operatorLabel, formulaStackView]
         Initialization()
     }
-//MARK: - IBAction
+    //MARK: - IBAction
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
         checkCalculated()
         
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
             }
         }
     }
-//MARK: - Method
+    //MARK: - Method
     private func Initialization() {
         initializationList.forEach {
             $0.Initialization()
