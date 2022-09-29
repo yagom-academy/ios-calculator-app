@@ -10,7 +10,7 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue()
         var operators = CalculatorItemQueue()
         
-        if componentsByOperator(from: input).first == "-" {
+        if isFirstIndexMinus(of: input) {
             operands.enqueue(0.0)
         }
         
@@ -37,5 +37,13 @@ enum ExpressionParser {
     
     private static func componentsByOperator(from input: String) -> [String] {
         return input.split(with: " ")
+    }
+    
+    private static func isFirstIndexMinus(of input: String) -> Bool {
+        if componentsByOperator(from: input).first == "-" {
+            return true
+        }
+        
+        return false
     }
 }
