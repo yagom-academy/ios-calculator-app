@@ -1,0 +1,3 @@
+protocol Clearable {
+    func clearAll()
+}

@@ -43,7 +43,10 @@ class NumberLabel: UILabel {
             isPositiveNumber = true
         }
     }
-    
+}
+
+//MARK: - extension Clearable
+extension NumberLabel: Clearable {
     func clearAll() {
         self.text = initialValue
         self.isPositiveNumber = true
