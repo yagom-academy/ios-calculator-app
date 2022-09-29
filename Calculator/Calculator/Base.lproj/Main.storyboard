@@ -92,6 +92,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ii8-2R-vNS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -129,6 +132,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GjQ-ms-Raq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -166,6 +172,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Sn-6P-CAl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -203,6 +212,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2p5-KK-NRA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -295,7 +307,6 @@
                         <outlet property="equalButton" destination="Daw-iX-Owl" id="K9Q-08-gOz"/>
                         <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="EtH-gC-eeK"/>
                         <outlet property="formulaStackView" destination="2Pu-Ld-ZGi" id="sfd-Fj-GUs"/>
-                        <outlet property="operatorButton" destination="sbh-wC-koF" id="14Y-GQ-kqL"/>
                         <outlet property="reverseSignButton" destination="ows-U7-mNc" id="jFF-zW-8la"/>
                         <outletCollection property="numberButton" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="tKq-xZ-0Bj"/>
                         <outletCollection property="numberButton" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="rS3-F9-htX"/>
@@ -308,10 +319,10 @@
                         <outletCollection property="numberButton" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="PFS-dg-hC8"/>
                         <outletCollection property="numberButton" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="M1U-FF-uju"/>
                         <outletCollection property="numberButton" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="Dpy-Bd-aTP"/>
-                        <outletCollection property="operatorButton" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="Wxs-ld-TY6"/>
                         <outletCollection property="operatorButton" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="mpz-xi-G14"/>
                         <outletCollection property="operatorButton" destination="811-Pz-An6" collectionClass="NSMutableArray" id="0Lu-Jk-Yd0"/>
                         <outletCollection property="operatorButton" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="iv9-qB-Nc0"/>
+                        <outletCollection property="operatorButton" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="e2b-mx-Cmr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

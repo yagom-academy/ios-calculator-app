@@ -37,5 +37,25 @@ class MainViewController: UIViewController {
             $0.removeFromSuperview()
         }
     }
+    
+    func determineOperator(stringOperator: String?) {
+        switch stringOperator {
+        case "+":
+            displaySign = Operator.add.rawValue
+        case "−":
+            displaySign = Operator.subtract.rawValue
+        case "×":
+            displaySign = Operator.multiply.rawValue
+        case "÷":
+            displaySign = Operator.divide.rawValue
+        default:
+            displaySign = Operator.add.rawValue
+        }
+    }
+    
+    @IBAction func tapOperatorButton(_ sender: UIButton) {
+        displaySignLabel.text = sender.titleLabel?.text
+        determineOperator(stringOperator: sender.titleLabel?.text)
+    }
 }
 
