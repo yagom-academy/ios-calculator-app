@@ -27,7 +27,7 @@ enum ExpressionParser {
         return formula
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         let separatedToArray = input.components(separatedBy: ["+", "-", "*", "/"])
         let trimmingSpaceArray = separatedToArray.filter({$0 != ""})
         return trimmingSpaceArray
