@@ -1,8 +1,8 @@
 import UIKit
 
 class OperatorButton: UIButton {
-    private let operatorSignListByIdentifier: [String: String] = ["add": "+", "subtract": "−", "divide": "÷", "multiply": "×"]
-
+    private let operatorSignListByIdentifier: [String: String] = ["add": "+", "subtract": "−",
+                                                                  "divide": "÷", "multiply": "×"]
     var operatorSign: String? {
         return makeOperatorSign(outof: self.restorationIdentifier)
     }

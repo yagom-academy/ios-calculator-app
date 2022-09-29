@@ -1,9 +1,11 @@
+//MARK: - Operator
 enum Operator: Character {
+//MARK: - Operator Case
     case add = "+"
     case subtract = "−"
     case divide = "÷"
     case multiply = "×"
-    
+//MARK: - Operator Method
     func calculate(_ lhs: Double, _ rhs: Double) -> Double {
         let calculateResult: Double
         
@@ -37,7 +39,7 @@ enum Operator: Character {
         return lhs * rhs
     }
 }
-
+//MARK: - Extension
 extension Operator: CaseIterable {}
 
 extension Operator: CalculateItem {}

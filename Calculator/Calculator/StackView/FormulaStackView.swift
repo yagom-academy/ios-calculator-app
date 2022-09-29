@@ -1,8 +1,9 @@
 import UIKit
-
+//MARK: - FormulaStackView
 class FormulaStackView: UIStackView {
+//MARK: - FormulaStackView Properties
     private(set) var formula: String = ""
-    
+//MARK: - FormulaStackView Method
     func appendFormula(combining operatorLabel: OperatorLabel, to numberLabel: NumberLabel) {
         guard let number = numberLabel.text else {
             return
@@ -45,7 +46,7 @@ class FormulaStackView: UIStackView {
         return subStackView
     }
 }
-
+//MARK: - Extension
 extension FormulaStackView: InitializationProtocol {
     func Initialization() {
         formula = ""

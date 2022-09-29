@@ -13,7 +13,7 @@ class NumberLabel: UILabel {
     var isReceiving: Bool {
         return self.text != initialValue ? true : false
     }
-//MARK: - NumberLabel Func
+//MARK: - NumberLabel Method
     func append(_ number: String) {
         if self.text == initialValue {
             if number == zero || number == doublyZero {
@@ -48,7 +48,7 @@ class NumberLabel: UILabel {
     }
 }
 
-//MARK: - extension Clearable
+//MARK: - extension
 extension NumberLabel: InitializationProtocol {
     func Initialization() {
         self.text = initialValue
