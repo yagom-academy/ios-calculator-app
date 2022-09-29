@@ -5,7 +5,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var recordedCalculatedStackView: UIStackView!
     @IBOutlet weak var currentNumbersLabel: UILabel!
@@ -76,8 +76,6 @@ class CalculatorViewController: UIViewController {
         guard let lastElement = mathExpression.last else {
             return
         }
-        
-        print(lastElement)
         
         if lastElement.shouldConvertOperator {
             appendExpressionFromNumbers()
