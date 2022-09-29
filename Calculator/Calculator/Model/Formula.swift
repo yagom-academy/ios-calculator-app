@@ -22,7 +22,6 @@ struct Formula {
         }
         
         while !operands.isEmpty {
-            print(operands, operators)
             guard let inputOperator = operators.deQueue() else {
                 throw FormulaError.emptyOperatorsQueue
             }
