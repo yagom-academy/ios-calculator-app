@@ -66,6 +66,11 @@ class ViewController: UIViewController {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
+    func initializeExpression() {
+        resetVauleToZero()
+        resetStackView()
+    }
+    
     func addLabelAndSign(vaule: String, sender: UIButton) {
         addNewLableToStackView(message: vaule, stackView: stackView)
         signLabel.text = signOfOperator(sender: sender)
