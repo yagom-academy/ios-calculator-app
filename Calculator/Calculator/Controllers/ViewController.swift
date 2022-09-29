@@ -160,7 +160,12 @@ final class ViewController: UIViewController {
         let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
         
         do {
-            mainResultLabel.text = applyNumberFormatter(number: try formula.result())
+            let result = try formula.result()
+            if result.isNaN {
+                mainResultLabel.text = "NaN"
+            } else {
+                mainResultLabel.text = applyNumberFormatter(number: result)
+            }
             currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
             print("None Operand Error")
