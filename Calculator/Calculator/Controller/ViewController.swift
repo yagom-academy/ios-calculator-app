@@ -13,12 +13,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var expressionQueue: UIStackView!
+    @IBOutlet weak var expressionScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         clearOperand()
         operatorLabel.text = ""
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
+        expressionScrollView.showsVerticalScrollIndicator = false
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
@@ -46,11 +48,13 @@ class ViewController: UIViewController {
         
         clearOperand()
         operatorLabel.text = tappedOperator
+        updateScroll()
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
         guard !expression.isEmpty else { return }
         appendExpressionQueue()
+        updateScroll()
         
         var components = ExpressionParser.parse(from: expression)
         let result = components.result()
@@ -161,5 +165,15 @@ extension ViewController {
         expression.append(" \(currentOperand)")
         
         expressionQueue.addArrangedSubview(stackView)
+    }
+}
+
+// handle scrollView
+extension ViewController {
+    func updateScroll() {
+        expressionScrollView.layoutIfNeeded()
+        expressionScrollView.setContentOffset(CGPoint(x: 0,
+                                                      y: expressionScrollView.contentSize.height - expressionScrollView.bounds.height),
+                                              animated: false)
     }
 }

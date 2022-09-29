@@ -348,6 +348,7 @@
                     </view>
                     <connections>
                         <outlet property="expressionQueue" destination="XRe-QE-UJf" id="VoP-cN-Bw8"/>
+                        <outlet property="expressionScrollView" destination="BOT-7g-vxv" id="TBM-zm-ZsY"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="b8o-dr-Gca"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="uaX-7q-98z"/>
                     </connections>
