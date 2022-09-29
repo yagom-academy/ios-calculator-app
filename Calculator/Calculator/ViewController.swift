@@ -113,7 +113,13 @@ class ViewController: UIViewController {
         if inputText == Literal.numberZero.value {
             return
         }
-    
+//        if inputText == Literal.numberZero.value && inputOperatorLabel.text == "" {
+//            return
+//        } else if inputText == Literal.numberZero.value && inputOperatorLabel.text != "" {
+//            inputOperatorLabel.text = operatorValue
+//            return
+//        }
+        
         guard let operatorText = inputOperatorLabel.text else {
             return
         }
@@ -155,6 +161,16 @@ class ViewController: UIViewController {
         }
     }
     
+    private func deleteAllHistory() {
+        formula.operands?.allDelete()
+        formula.operators?.allDelete()
+        inputNumberLabel.text = Literal.numberZero.value
+        
+        for view in historyInputStackView.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
     @IBAction private func touchUpCalculatorButton(sender: UIButton) {
         guard let id = sender.restorationIdentifier,
               let inputText = inputNumberLabel.text else {
@@ -163,7 +179,7 @@ class ViewController: UIViewController {
         
         switch id {
         case Literal.AC.buttonID:
-            return
+            deleteAllHistory()
         case Literal.CE.buttonID:
             inputNumberLabel.text = Literal.numberZero.value
         case Literal.numberInvertion.buttonID:

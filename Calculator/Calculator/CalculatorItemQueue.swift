@@ -33,7 +33,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return data
     }
     
-    func peek() -> T? {
-        front?.data
+    mutating func allDelete() {
+        var data: T?
+        
+        repeat {
+            data = dequeue()
+        } while data != nil
     }
 }
