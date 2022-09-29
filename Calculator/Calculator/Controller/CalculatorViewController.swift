@@ -34,7 +34,6 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        
         appendNumbers(inputNumber)
         changeNumberLabel(selectedNumbers)
     }
@@ -82,6 +81,29 @@ class CalculatorViewController: UIViewController {
         if !didNotCalculate {
             convertDidCalculate()
         }
+    }
+    
+    @IBAction func didTappedCEButton(_ sender: UIButton) {
+        print(mathExpression, selectedOperator)
+        guard didNotCalculate else {
+            resetLabels()
+            resetExpression()
+            resetMathExpression()
+            
+            return
+        }
+
+        guard let lastElement = mathExpression.last else {
+            return
+        }
+
+        guard lastElement.shouldConvertOperator else {
+            return
+        }
+        
+        changeNumbers("")
+        changeNumberLabel("0")
+        changeOperator("")
     }
     
     @IBAction func didTappedConvertSign(_ sender: UIButton) {
