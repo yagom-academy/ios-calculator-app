@@ -60,6 +60,7 @@ class ViewController: UIViewController {
         } else {
             operandLabel.text = String(result)
         }
+        
         operatorLabel.text = ""
         currentOperand = "0"
         expression = ""
@@ -90,12 +91,12 @@ extension ViewController {
     }
     
     private func handleDotButton() {
-        if currentOperand.contains(".") { return }
+        guard !currentOperand.contains(".") else { return }
         currentOperand.append(".")
     }
     
     private func handleZeroButtons(from operand: String) {
-        if Double(currentOperand) == .zero { return }
+        guard Double(currentOperand) != .zero else { return }
         currentOperand.append(operand)
     }
     
