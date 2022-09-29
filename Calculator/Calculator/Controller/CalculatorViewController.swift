@@ -12,6 +12,7 @@ class CalculatorViewController: UIViewController {
     private var mathExpression: String = ""
     private var selectedNumbers: String = ""
     private var selectedOperator: String = ""
+    private var didNotCalculate: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
+        guard didNotCalculate else {
+            return
+        }
+        
         if selectedNumbers.isEmpty {
             mathExpression.append(selectedOperator)
         }
@@ -36,6 +41,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedOperatorButton(_ sender: UIButton) {
+        
+        guard didNotCalculate else {
+            return
+        }
+        
         mathExpression.append(selectedNumbers)
         selectedNumbers = ""
         
@@ -47,6 +57,9 @@ class CalculatorViewController: UIViewController {
         currentOperatorLabel.text = inputedOperator
     }
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
+        guard didNotCalculate else {
+            return
+        }
         
         guard let lastElement = mathExpression.last else {
             return
@@ -57,6 +70,8 @@ class CalculatorViewController: UIViewController {
         }
         
         calculateExpression()
+        
+        didNotCalculate = false
     }
     
     
@@ -67,6 +82,9 @@ class CalculatorViewController: UIViewController {
             let calculatedValue = try formula.result()
             currentNumbersLabel.text = calculatedValue.description
             currentOperatorLabel.text = ""
+            
+            selectedNumbers = "0"
+            selectedOperator = ""
         } catch {
             // TODO: -에러처리하기
             print(error)
