@@ -10,17 +10,20 @@ import Foundation
 struct CalculatorItemQueue<T>: CalculatorItem {
     var inputStack: [T] = []
     var outputStack: [T] = []
+    var isEmpty: Bool {
+        return inputStack.isEmpty && outputStack.isEmpty
+    }
     
     mutating func enQueue(element: T) {
         inputStack.append(element)
     }
     
-    mutating func deQueue() throws -> T {
+    mutating func deQueue() -> T? {
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
             inputStack.removeAll()
         }
-        return outputStack.removeLast()
+        return outputStack.popLast()
     }
     
     mutating func clear() {
