@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    var front: Node<T>?
-    var rear: Node<T>?
+struct CalculatorItemQueue<T: CalculateItem> {
+    private var front: Node<T>?
+    private var rear: Node<T>?
     
     func isEmpty() -> Bool {
         return front == nil
