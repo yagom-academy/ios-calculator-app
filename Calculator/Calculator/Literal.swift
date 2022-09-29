@@ -28,6 +28,8 @@ enum Literal {
     case subtraction
     case addition
     case result
+    case NaN
+    case infinity
     
     var buttonID: String {
         switch self {
@@ -71,6 +73,10 @@ enum Literal {
             return "button_Addition"
         case .result:
             return "button_Result"
+        case .NaN:
+            return "NaN"
+        case .infinity:
+            return "infinity"
         }
     }
     
@@ -116,6 +122,10 @@ enum Literal {
             return "+"
         case .result:
             return "="
+        case .NaN:
+            return "NaN"
+        case .infinity:
+            return "+∞"
         }
     }
 }

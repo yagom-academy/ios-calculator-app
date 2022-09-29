@@ -157,9 +157,7 @@ class ViewController: UIViewController {
             formula.operators?.enqueue(getOperator)
             return
         } else {
-            guard let operatorText = inputOperatorLabel.text else {
-                return
-            }
+            guard let operatorText = inputOperatorLabel.text else { return }
             
             addStackView(operatorText: operatorText, inputText: inputText)
             insertIntoQueue(operatorValue: operatorValue, inputText: numberWithOutComma)
@@ -170,9 +168,7 @@ class ViewController: UIViewController {
     }
     
     private func showResult(inputText: String) {
-        if ((formula.operators?.isEmpty()) == true) {
-            return
-        }
+        if ((formula.operators?.isEmpty()) == true) { return }
         
         let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
         
@@ -182,8 +178,12 @@ class ViewController: UIViewController {
             addStackView(operatorText: operatorText, inputText: inputText)
         }
         
-        if let result = numberFormatter.string(for: formula.result()) {
+        if let result = numberFormatter.string(for: formula.result()),
+           result != Literal.infinity.value {
             inputNumberLabel.text = String(result)
+            inputOperatorLabel.text = ""
+        } else {
+            inputNumberLabel.text = Literal.NaN.value
             inputOperatorLabel.text = ""
         }
     }
