@@ -16,16 +16,17 @@ enum ExpressionParser {
             formula.operands.enqueue(element: operand)
         }
 
-        let separatedOperators: [String] = input.filter {
+        let separatedOperators: [Character] = input.filter {
             (input: Character ) -> Bool in
             return (input == "+") || (input == "-") || (input == "*") || (input == "/")
-        }.map {
-            (input: Character) -> String in
-            return String(input)
         }
-        for stringOperator in separatedOperators {
-            let convertedToCaseOperators: Operator = Operator.init(rawValue: stringOperator)
-            formula.operators.enqueue(element: convertedToCaseOperators)
+        separatedOperators.forEach { separatedCharactorOperator in
+            Operator.allCases.forEach { equalOperator in
+                if equalOperator.rawValue == separatedCharactorOperator {
+                    let convertedToCaseOperators: Operator = equalOperator
+                    formula.operators.enqueue(element: convertedToCaseOperators)
+                }
+            }
         }
         return formula
     }
@@ -35,5 +36,3 @@ enum ExpressionParser {
         return result
     }
 }
-
-
