@@ -6,6 +6,9 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    @IBOutlet weak var currentNumbersLabel: UILabel!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    
     private var mathExpression: String = ""
     private var selectedNumbers: String = ""
     private var selectedOperator: String = ""
@@ -24,6 +27,7 @@ class CalculatorViewController: UIViewController {
         }
         
         selectedNumbers.append(inputNumber)
+        currentNumbersLabel.text = selectedNumbers
         
     }
     
@@ -36,6 +40,7 @@ class CalculatorViewController: UIViewController {
         }
         
         selectedOperator = inputedOperator
+        currentOperatorLabel.text = inputedOperator
     }
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
         
