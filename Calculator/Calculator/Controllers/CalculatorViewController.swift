@@ -76,7 +76,7 @@ class CalculatorViewController: UIViewController {
     
     private func addHistoryStackView(operatorText: String?, operandText: String?) {
         guard let operand = operandText,
-              let convertedOperand = Double(operand) else { return }
+              let convertedOperand = Double(operand.replacingOccurrences(of: "−", with: "-")) else { return }
         
         let historyLabels: [UIView] = [
             makeHistoryLabel(text: operatorText),
