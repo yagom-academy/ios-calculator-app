@@ -55,6 +55,7 @@ class CalculatorViewController: UIViewController {
         changeOperator(inputedOperator)
         changeOperatorLabel(selectedOperator)
     }
+    
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
         guard didNotCalculate else {
             return
@@ -70,10 +71,17 @@ class CalculatorViewController: UIViewController {
         
         calculateExpression()
         
-        didNotCalculate = false
+        convertDidCalculate()
     }
     
     @IBAction func didTappedACButton(_ sender: UIButton) {
+        resetLabels()
+        resetExpression()
+        resetMathExpression()
+        
+        if !didNotCalculate {
+            convertDidCalculate()
+        }
     }
     
     private func calculateExpression() {
@@ -89,12 +97,16 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private func convertDidCalculate() {
+        didNotCalculate = !didNotCalculate
+    }
+    
     private func resetLabels() {
         changeLabels("0", "")
     }
     
     private func resetExpression() {
-        changeExpression("0", "")
+        changeExpression("", "")
     }
     
     private func changeLabels(_ numbers: String, _ operators: String) {
@@ -103,7 +115,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeExpression(_ numbers: String, _ operators: String) {
-        appendNumbers(numbers)
+        changeNumbers(numbers)
         changeOperator(operators)
     }
     
@@ -128,6 +140,10 @@ class CalculatorViewController: UIViewController {
     }
     
     private func appendExpressionFromNumbers() {
-        self.mathExpression.append(selectedNumbers)
+        mathExpression.append(selectedNumbers)
+    }
+    
+    private func resetMathExpression() {
+        mathExpression = ""
     }
 }
