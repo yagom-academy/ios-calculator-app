@@ -55,16 +55,29 @@ class MainViewController: UIViewController {
     
     func isStartZero(stringNumber: String) -> Bool {
         if stringNumber.first == "0" {
-            print("Is Start Zero!")
             return true
         } else {
             return false
         }
     }
     
+    func updateDisplayNumberLabel() {
+        displayNumberLabel.text = displayNumber
+    }
+    
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         displaySignLabel.text = sender.titleLabel?.text
         determineOperator(stringOperator: sender.titleLabel?.text)
+    }
+    
+    @IBAction func tapNumberButton(_ sender: UIButton) {
+        if isStartZero(stringNumber: displayNumber) == true {
+            displayNumber = sender.titleLabel?.text ?? ""
+            updateDisplayNumberLabel()
+        } else {
+            displayNumber += sender.titleLabel?.text ?? ""
+            updateDisplayNumberLabel()
+        }
     }
 }
 
