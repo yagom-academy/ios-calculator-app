@@ -33,6 +33,21 @@ class ViewController: UIViewController {
         }
     }
     
+    func addOperandToOperandLabel(_ operand: String) {
+        let currentLabelText: String = operandLabel.text ?? ""
+        let isPointDuplication: Bool = operand == "." && currentLabelText.contains(".")
+        let isZeroDuplication: Bool = currentLabelText == "0" && ["0", "00"].contains(operand)
+        if isZeroDuplication || isPointDuplication {
+            return
+        }
+        let isInitialState: Bool = currentLabelText == "0" && operand != "."
+        if isInitialState {
+            operandLabel.text = operand
+        } else {
+            operandLabel.text = "\(currentLabelText)\(operand)"
+        }
+    }
+    
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         resetOperandLabel()
     }
@@ -41,6 +56,12 @@ class ViewController: UIViewController {
         resetOperatorLabel()
         resetOperandLabel()
         removeAllsubviewsInHistoryStackView()
+    }
+    
+    @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
+        if let labelText = sender.titleLabel?.text {
+            addOperandToOperandLabel(labelText)
+        }
     }
 }
 
