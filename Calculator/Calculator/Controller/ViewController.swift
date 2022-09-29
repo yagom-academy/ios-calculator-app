@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     private var isCalculated: Bool = false
     private var expression: String = ""
     private var currentOperand: String = "0"
+    private let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -35,7 +36,8 @@ class ViewController: UIViewController {
         default:
             appendOperands(from: tappedOperand)
         }
-        operandLabel.text = currentOperand
+        
+        operandLabel.text = formattingToDecimal(operand: currentOperand)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
@@ -62,7 +64,7 @@ class ViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = "\(result)"
+            operandLabel.text = "\(formattingToDecimal(operand: String(result)))"
         }
         
         operatorLabel.text = ""
@@ -86,6 +88,25 @@ class ViewController: UIViewController {
         
         clearOperand()
         operatorLabel.text = ""
+    }
+}
+
+// handling number
+extension ViewController {
+    private func formattingToDecimal(operand: String) -> String {
+        let integerPart: String = operand.components(separatedBy: ".")[0]
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
+        guard let naturalNumber = numberFormatter.string(for: Int(integerPart)) else { return operand }
+       
+        if operand.contains(".") {
+            let decimalPart: String = operand.components(separatedBy: ".")[1]
+            return naturalNumber + "." + decimalPart
+        } else {
+            return naturalNumber
+        }
     }
 }
 
@@ -160,7 +181,7 @@ extension ViewController {
             stackView.addArrangedSubview(operatorLabel)
             expression.append(" \(currentOperator)")
         }
-        let operandLabel: UILabel = makeExpressionLabel(currentOperand)
+        let operandLabel: UILabel = makeExpressionLabel(formattingToDecimal(operand: currentOperand))
         stackView.addArrangedSubview(operandLabel)
         expression.append(" \(currentOperand)")
         
