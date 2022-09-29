@@ -15,18 +15,12 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        guard var leftNumber = operands.dequeue() else {
-            return Double.zero
-        }
+        guard var leftNumber = operands.dequeue() else { return Double.zero }
         while let rightNumber = operands.dequeue() {
             guard let operatorSign = operators.dequeue() else {
-                throw FormulaError.invalidInput
+                throw FormulaError.unexpectedError
             }
-            do {
-                leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
-            } catch {
-                throw FormulaError.divideByZero
-            }
+            leftNumber = try operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
         }
         return leftNumber
     }
