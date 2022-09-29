@@ -64,6 +64,7 @@ class CalculatorViewController: UIViewController {
     
     private func addChildStackView() {
         let operatorValue = selectedOperator.isEmpty ? "" : selectedOperator
+        
         let childView = CalculatedRecordStackView(operatorValue, selectedNumbers)
         
         recordedCalculatedStackView.addArrangedSubview(childView)
@@ -78,7 +79,17 @@ class CalculatorViewController: UIViewController {
         guard didNotCalculate else {
             return
         }
+        
+        if selectedNumbers.isEmpty {
+            changeNumbers("0")
+            appendExpressionFromOperator()
+            appendExpressionFromNumbers()
+            
+            print(mathExpression)
+        }
+        
         addChildStackView()
+
         guard let lastElement = mathExpression.last else {
             return
         }
