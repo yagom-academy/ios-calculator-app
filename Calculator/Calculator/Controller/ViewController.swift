@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         operatorLabel.text = ""
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
         expressionScrollView.showsVerticalScrollIndicator = false
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
@@ -37,7 +41,7 @@ class ViewController: UIViewController {
             appendOperands(from: tappedOperand)
         }
         
-        operandLabel.text = formattingToDecimal(operand: currentOperand)
+        displayOperand()
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
@@ -64,7 +68,7 @@ class ViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = "\(formattingToDecimal(operand: String(result)))"
+            operandLabel.text = "\(addComma(number: String(result)))"
         }
         
         operatorLabel.text = ""
@@ -93,20 +97,9 @@ class ViewController: UIViewController {
 
 // handling number
 extension ViewController {
-    private func formattingToDecimal(operand: String) -> String {
-        let integerPart: String = operand.components(separatedBy: ".")[0]
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
-        guard let naturalNumber = numberFormatter.string(for: Int(integerPart)) else { return operand }
-       
-        if operand.contains(".") {
-            let decimalPart: String = operand.components(separatedBy: ".")[1]
-            return naturalNumber + "." + decimalPart
-        } else {
-            return naturalNumber
-        }
+    private func addComma(number: String) -> String {
+        guard let result = numberFormatter.string(for: Double(number)) else { return number }
+        return result
     }
 }
 
@@ -128,7 +121,7 @@ extension ViewController {
     }
     
     private func handleZeroButtons(from operand: String) {
-        guard Double(currentOperand) != .zero else { return }
+        guard currentOperand != "0" else { return }
         currentOperand.append(operand)
     }
     
@@ -144,6 +137,19 @@ extension ViewController {
         isCalculated = false
         currentOperand = "0"
         operandLabel.text = "0"
+    }
+    
+    private func displayOperand() {
+        let integerPart: String = currentOperand.components(separatedBy: ".")[0]
+        
+        if currentOperand.last == "." {
+            operandLabel.text = addComma(number: integerPart) + "."
+        } else if currentOperand.contains("."), currentOperand.last != "." {
+            let decimalPart: String = currentOperand.components(separatedBy: ".")[1]
+            operandLabel.text = addComma(number: integerPart) + "." + decimalPart
+        } else {
+            operandLabel.text = addComma(number: currentOperand)
+        }
     }
 }
 
@@ -181,7 +187,7 @@ extension ViewController {
             stackView.addArrangedSubview(operatorLabel)
             expression.append(" \(currentOperator)")
         }
-        let operandLabel: UILabel = makeExpressionLabel(formattingToDecimal(operand: currentOperand))
+        let operandLabel: UILabel = makeExpressionLabel(addComma(number: currentOperand))
         stackView.addArrangedSubview(operandLabel)
         expression.append(" \(currentOperand)")
         
@@ -189,7 +195,7 @@ extension ViewController {
     }
 }
 
-// handle scrollView
+// handling scrollView
 extension ViewController {
     func updateScroll() {
         expressionScrollView.layoutIfNeeded()
