@@ -24,7 +24,7 @@ struct Formula {
         }
         calculateResult = firstOperand
         
-        while !(operators.count == 0) {
+        while operators.count != 0 {
             guard let operators = operators.dequeue() as? Operator else {
                 throw FormulaError.hasNotOperatorValue
             }
