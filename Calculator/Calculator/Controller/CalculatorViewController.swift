@@ -45,9 +45,9 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        mathExpression.append(selectedNumbers)
-        selectedNumbers = ""
-        
+        appendExpressionFromNumbers()
+        changeNumbers("")
+
         guard let inputedOperator = sender.titleLabel?.text else {
             return
         }
@@ -113,6 +113,10 @@ class CalculatorViewController: UIViewController {
     
     private func changeOperatorLabel(_ input: String) {
         currentOperatorLabel.text = input
+    }
+    
+    private func changeNumbers(_ input: String) {
+        selectedNumbers = ""
     }
     
     private func appendNumbers(_ input: String) {
