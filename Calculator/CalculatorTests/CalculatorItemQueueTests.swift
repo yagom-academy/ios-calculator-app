@@ -6,11 +6,11 @@ import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
     
-    var sut: CalculatorItemQueue<String>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<String>()
+        sut = CalculatorItemQueue<Double>()
     }
     
     override func tearDownWithError() throws {
@@ -30,7 +30,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에_3을enqueue했을때_isEmpty가False인지() {
         //given
-        let element: String = "3"
+        let element: Double = 3
         
         //when
         sut.enqueue(element)
@@ -41,7 +41,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에_3을enqueue했을때_isEmpty가false인지() {
         //given
-        let element: String = "3"
+        let element: Double = 3
         
         //when
         sut.enqueue(element)
@@ -52,7 +52,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에_3_6_9를enqueue했을때_isEmpty가False인지() {
         //given
-        let elementArray: [String] = ["3", "6", "9"]
+        let elementArray: [Double] = [3, 6, 9]
         
         //when
         for element in elementArray {
@@ -65,7 +65,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에_3_6_9를enqueue하고dequeue을한번했을때_dequeue된요소가맨앞의값_3과같은값인지() {
         //given
-        let elementArray: [String] = ["3", "6", "9"]
+        let elementArray: [Double] = [3, 6, 9]
         
         //when
         for element in elementArray {
@@ -74,7 +74,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result, "3")
+        XCTAssertEqual(result, 3)
     }
     
     func test_queue에dequeue할요소가없을때_nil값을반환하는지() {
@@ -89,14 +89,14 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에3_6_9를enqueue하고queue의count보다많은dequeue을했을때_결과가nil이나오는지() {
         //given
-        let elementArray: [String] = ["3", "6", "9"]
+        let elementArray: [Double] = [3, 6, 9]
         
         //when
         for element in elementArray {
             sut.enqueue(element)
         }
         
-        var result: String?
+        var result: Double?
         for _ in 1...sut.count + 1 {
             result = sut.dequeue()
         }
@@ -107,7 +107,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_queue에1_2_3_4_5를enqueue했을때count값이5인지() {
         //given
-        let elementArray: [String] = ["1", "2", "3", "4", "5"]
+        let elementArray: [Double] = [1, 2, 3, 4, 5]
         
         //when
         for element in elementArray {
