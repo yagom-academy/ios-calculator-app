@@ -80,6 +80,14 @@ class ViewController: UIViewController {
         addNewLableToStackView(message: vaule, stackView: stackView)
         signLabel.text = signOfOperator(sender: sender)
     }
+    
+    func assignTotalString(value: String) {
+        if value.contains("-") {
+            totalString += "\(value.dropFirst())"
+        } else {
+            totalString += value
+        }
+    }
 
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
@@ -121,13 +129,17 @@ class ViewController: UIViewController {
         if totalString.isEmpty {
             guard let vaule = expressionLabel.text else { return }
             addLabelAndSign(vaule: vaule, sender: sender)
-            initializeExpression()
+//            initializeExpression()
         } else {
             if expressionLabel.text == "0" {
                 signLabel.text = signOfOperator(sender: sender)
             } else {
                 guard let sign = signLabel.text else { return }
                 guard let value = expressionLabel.text else { return }
+                resetExpressionString()
+                totalString += sign
+                addLabelAndSign(vaule: sign + value, sender: sender)
+                initializeExpression()
             }
         }
         
