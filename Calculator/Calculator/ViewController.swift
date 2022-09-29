@@ -12,9 +12,17 @@ class ViewController: UIViewController {
     @IBOutlet weak private var historyInputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputNumberLabel: UILabel!
     @IBOutlet weak private var historyInputStackView: UIStackView!
+    @IBOutlet weak private var historyInputScrollView: UIScrollView!
+    
+    private var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    private func autoSlideScrollView() {
+        let bottomOffset = CGPoint(x: 0, y: historyInputScrollView.contentSize.height - self.historyInputScrollView.bounds.size.height + self.historyInputScrollView.contentInset.bottom)
+        historyInputScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func addZero(inputText: String, zero: String) {
@@ -77,19 +85,33 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    private func showResult() {
+    private func insertIntoQueue(operatorValue: String, inputText: String) {
+        let someOperator: Operator
         
+        switch operatorValue {
+        case "+":
+            someOperator = .add
+        case "-":
+            someOperator = .subtract
+        case "ⅹ":
+            someOperator = .multiply
+        case "÷":
+            someOperator = .divide
+        default:
+            return
+        }
+        
+        if let doubleValue = Double(inputText) {
+            formula.operands?.enqueue(doubleValue)
+            formula.operators?.enqueue(someOperator)
+        }
     }
     
     private func addOperator(inputText: String, operatorValue: String) {
         if inputText == Literal.numberZero.value {
             return
         }
-        //old
-//        historyInputOperatorLabel.text = inputOperatorLabel.text
-//        historyInputNumberLabel.text = inputText
-        
-        //new
+    
         guard let operatorText = inputOperatorLabel.text else {
             return
         }
@@ -98,9 +120,20 @@ class ViewController: UIViewController {
         let operandLabel = makeHistoryInputLabel(inputText: inputText)
         let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         historyInputStackView.addArrangedSubview(stackView)
+        autoSlideScrollView()
+        insertIntoQueue(operatorValue: operatorValue, inputText: inputText)
         
         inputNumberLabel.text = Literal.numberZero.value
         inputOperatorLabel.text = operatorValue
+    }
+    
+    private func showResult() {
+        if let inputNumber = inputNumberLabel.text,
+           let operandValue = Double(inputNumber) {
+            formula.operands?.enqueue(operandValue)
+        }
+        
+        inputNumberLabel.text = String(formula.result())
     }
     
     @IBAction private func touchUpCalculatorButton(sender: UIButton) {
@@ -129,7 +162,7 @@ class ViewController: UIViewController {
         case Literal.addition.buttonID:
             addOperator(inputText: inputText, operatorValue: Literal.addition.value)
         case Literal.result.buttonID:
-            return
+            showResult()
         default:
             return
         }

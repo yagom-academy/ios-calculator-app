@@ -107,9 +107,9 @@ enum Literal {
         case .numberInvertion:
             return "0"
         case .division:
-            return "/"
+            return "÷"
         case .multiplication:
-            return "*"
+            return "ⅹ"
         case .subtraction:
             return "-"
         case .addition:

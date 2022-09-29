@@ -349,6 +349,7 @@
                     <connections>
                         <outlet property="historyInputNumberLabel" destination="Hcb-r0-27f" id="hWN-yb-h6E"/>
                         <outlet property="historyInputOperatorLabel" destination="alw-Zd-2pT" id="Raq-MT-buX"/>
+                        <outlet property="historyInputScrollView" destination="BOT-7g-vxv" id="aX9-V4-OHz"/>
                         <outlet property="historyInputStackView" destination="XRe-QE-UJf" id="Tdw-6j-We5"/>
                         <outlet property="inputNumberLabel" destination="Lwz-OF-XHD" id="cUT-a2-agD"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="L6e-J2-OZ3"/>
