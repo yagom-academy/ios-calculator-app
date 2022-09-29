@@ -6,6 +6,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var isCalculated: Bool = false
     private var expression: String = ""
     private var currentOperand: String = "0"
     
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
-        guard let tappedOperand = sender.currentTitle else { return }
+        guard let tappedOperand = sender.currentTitle, !isCalculated else { return }
         
         switch tappedOperand {
         case "⁺⁄₋":
@@ -58,11 +59,12 @@ class ViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = String(result)
+            operandLabel.text = "\(result)"
         }
         
         operatorLabel.text = ""
-        currentOperand = "0"
+        isCalculated = true
+        currentOperand = "\(result)"
         expression = ""
     }
     
@@ -109,6 +111,7 @@ extension ViewController {
     }
     
     private func clearOperand() {
+        isCalculated = false
         currentOperand = "0"
         operandLabel.text = "0"
     }
