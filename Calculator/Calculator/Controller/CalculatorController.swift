@@ -3,7 +3,7 @@
 
 class CalculatorController {
     let view: MainViewController
-    let formula: Formula?
+    var formula: Formula?
     var Expression: String = ""
     var viewDisplayNumber: String = "0"
     var displaySign: Operator.RawValue = Operator.unknown.rawValue
@@ -91,5 +91,16 @@ class CalculatorController {
     func tappedCEButton() {
         viewDisplayNumber = "0"
         view.displayNumberLabel.text = "0"
+    }
+    
+    func tappedCalculateButton() -> String {
+        Expression += String(displaySign) + viewDisplayNumber
+        Expression = Expression.trimmingCharacters(in: .whitespaces)
+        view.makeStakView()
+        view.resetDisplayNumberLabel()
+        self.formula = ExpressionParser.parse(from: Expression)
+        let result = self.formula?.result() ?? .nan
+        
+        return String(result)
     }
 }
