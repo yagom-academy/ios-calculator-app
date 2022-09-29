@@ -15,6 +15,10 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentNumbersLabel.text = "0"
+        currentOperatorLabel.text = ""
+        
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
@@ -52,5 +56,20 @@ class CalculatorViewController: UIViewController {
             mathExpression.append(selectedNumbers)
         }
         
+        calculateExpression()
+    }
+    
+    
+    private func calculateExpression() {
+        let formula = ExpressionParser.parse(from: mathExpression)
+        
+        do {
+            let calculatedValue = try formula.result()
+            currentNumbersLabel.text = calculatedValue.description
+            currentOperatorLabel.text = ""
+        } catch {
+            // TODO: -에러처리하기
+            print(error)
+        }
     }
 }
