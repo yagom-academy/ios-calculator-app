@@ -64,6 +64,7 @@ class CalculatorController {
             determineOperator(stringOperator: input)
             return String(displaySign)
         } else {
+            Expression += String(displaySign) + viewDisplayNumber
             viewDisplayNumber = "0"
             view.makeStakView()
             view.resetDisplayNumberLabel()
