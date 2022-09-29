@@ -17,4 +17,10 @@ extension String {
     func split(with target: Character) -> [String] {
         return split(separator: target, omittingEmptySubsequences: false).map { $0.description }
     }
+    
+    var isNotEmpty: Bool {
+        return !self.isEmpty
+    }
+    
+
 }
