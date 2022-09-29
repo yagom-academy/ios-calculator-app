@@ -43,6 +43,20 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    func signOfOperator(sender: UIButton) -> String {
+        switch sender {
+        case plusButton:
+            return String(Operator.add.rawValue)
+        case minusButton:
+            return String(Operator.subtract.rawValue)
+        case multiplyButton:
+            return String(Operator.multiply.rawValue)
+        case divideButton:
+            return String(Operator.divide.rawValue)
+        default:
+            return ""
+        }
+    }
 
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
