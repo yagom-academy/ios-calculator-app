@@ -8,14 +8,14 @@
 import UIKit
 
 class CalculatedRecordStackView: UIStackView {
-    let operatorLabel: UILabel = {
+    private let operatorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
     
-    let operandLabel: UILabel = {
+    private let operandLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3)
