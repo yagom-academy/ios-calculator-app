@@ -1,27 +1,34 @@
 import UIKit
 //MARK: - NumberLabel
 class NumberLabel: UILabel {
-//MARK: - NumberLabel NameSpace
+    //MARK: - NumberLabel NameSpace
     private let initialValue: String = "0"
     private let zero: String = "0"
     private let doublyZero: String = "00"
     private let negativeNumberSign: String = "-"
     private let decimalPoints: Character = "."
-//MARK: - NumberLabel Properties
+    //MARK: - NumberLabel Properties
+    private var numberOfString: String = ""
     private var isPositiveNumber: Bool = true
     private var hasDecimalPoints: Bool = false
     var isReceiving: Bool {
         return self.text != initialValue ? true : false
     }
-//MARK: - NumberLabel Method
+    //MARK: - NumberLabel Method
     func append(_ number: String) {
-        if self.text == initialValue {
+        guard var text = self.text,
+              text.count <= 20 else {
+            return
+        }
+        if text == initialValue {
             if number == zero || number == doublyZero {
                 return
             }
             self.text = number
         } else {
-            self.text?.append(number)
+            text.append(number)
+            let number = CalculatorNumberFormatter.shared.number(from: text)
+            self.text = CalculatorNumberFormatter.shared.string(for: number)
         }
     }
     

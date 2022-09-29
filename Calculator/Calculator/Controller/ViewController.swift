@@ -55,7 +55,9 @@ class ViewController: UIViewController {
         case .ClearElement:
             numberLabel.Initialization()
         case .SwapNumberSign:
-            numberLabel.swapNumberSign()
+            if isCalculated == false{
+                numberLabel.swapNumberSign()
+            }
         case .EnterDecimalPoints:
             numberLabel.appendDecimalPoints()
         case .calculation:
@@ -78,13 +80,13 @@ class ViewController: UIViewController {
     }
     
     private func calculateFormula() {
-        var formula: Formula = ExpressionParser.parse(from: formulaStackView.formula)
+        var formula: Formula = ExpressionParser.parse(from: formulaStackView.formula.filter({ $0 != ","}))
         let result: Double = formula.result()
         
         if result.isInfinite || result.isNaN {
             numberLabel.text = "NaN"
         } else {
-            numberLabel.text = "\(result)"
+            numberLabel.text = CalculatorNumberFormatter.shared.string(for: result)
         }
         
         operatorLabel.Initialization()
