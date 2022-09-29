@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
-                                <rect key="frame" x="16" y="229.5" width="382" height="52"/>
+                                <rect key="frame" x="16" y="257.5" width="382" height="24"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="24"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-Ld-ZGi">
                                                 <rect key="frame" x="249.5" y="0.0" width="132.5" height="24"/>
@@ -33,23 +33,6 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGo-LN-bKL">
-                                                        <rect key="frame" x="17" y="0.0" width="115.5" height="24"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-iL-eIa">
-                                                <rect key="frame" x="249.5" y="28" width="132.5" height="24"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alw-Zd-2pT">
-                                                        <rect key="frame" x="0.0" y="0.0" width="9" height="24"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcb-r0-27f">
                                                         <rect key="frame" x="17" y="0.0" width="115.5" height="24"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -307,14 +290,16 @@
                         <outlet property="acButton" destination="ped-N8-JbY" id="Jnk-Uw-Vbu"/>
                         <outlet property="addButton" destination="sbh-wC-koF" id="C4u-e1-wUl"/>
                         <outlet property="ceButton" destination="RLD-dY-LOA" id="OgG-Ld-aYB"/>
-                        <outlet property="deplayNumberLabel" destination="Lwz-OF-XHD" id="O6F-T1-skR"/>
                         <outlet property="devideButton" destination="Tfz-eM-jll" id="LFY-aJ-mzJ"/>
+                        <outlet property="displayNumberLabel" destination="Lwz-OF-XHD" id="O6F-T1-skR"/>
                         <outlet property="displaySignLabel" destination="HPC-iy-qdm" id="zWO-Ta-y6g"/>
                         <outlet property="dotButton" destination="Daw-iX-Owl" id="Ywi-qi-Ipd"/>
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="LU4-fR-76t"/>
                         <outlet property="eightButton" destination="xgT-2D-A49" id="1hx-gt-OsS"/>
                         <outlet property="equalButton" destination="Daw-iX-Owl" id="K9Q-08-gOz"/>
                         <outlet property="fiveButton" destination="vpW-df-OLm" id="h3B-Pp-EfM"/>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="EtH-gC-eeK"/>
+                        <outlet property="formulaStackView" destination="2Pu-Ld-ZGi" id="sfd-Fj-GUs"/>
                         <outlet property="fourButton" destination="hQm-yz-XvG" id="1tk-vx-nnX"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="LQK-Fh-plz"/>
                         <outlet property="nineButton" destination="zcj-xJ-ruw" id="mTQ-CU-qll"/>

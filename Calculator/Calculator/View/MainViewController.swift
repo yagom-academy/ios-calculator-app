@@ -30,10 +30,26 @@ class MainViewController: UIViewController {
     @IBOutlet weak var reverseSignButton: UIButton!
     
     @IBOutlet weak var displaySignLabel: UILabel!
-    @IBOutlet weak var deplayNumberLabel: UILabel!
+    @IBOutlet weak var displayNumberLabel: UILabel!
+    
+    @IBOutlet weak var formulaScrollView: UIScrollView!
+    @IBOutlet weak var formulaStackView: UIStackView!
+    
+    var displayNumber: String = ""
+    var displaySign: Operator.RawValue = Operator.add.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureDisplayLabels()
+    }
+    
+    func configureDisplayLabels() {
+        displaySignLabel.text = ""
+        displayNumberLabel.text = displayNumber
+        formulaStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 }
 
