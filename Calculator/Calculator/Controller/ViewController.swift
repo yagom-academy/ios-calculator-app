@@ -185,11 +185,11 @@ extension ViewController {
         }
     }
     
-    func numberFomatter(_ numberString: Double) -> String? {
+    func numberFomatter(_ number: Double) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
-        return numberFormatter.string(for: numberString)
+        return numberFormatter.string(for: number)
     }
     
 }
