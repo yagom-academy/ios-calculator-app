@@ -61,6 +61,15 @@ class MainViewController: UIViewController {
         }
     }
     
+    func isOverCount20(stringNumber: String, input: String?) -> Bool {
+        if input != "00" && stringNumber.count >= 20 {
+            return true
+        } else if input == "00" && stringNumber.count >= 19 {
+            return true
+        }
+        return false
+    }
+    
     func updateDisplayNumberLabel() {
         displayNumberLabel.text = displayNumber
     }
@@ -71,13 +80,17 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
+        if isOverCount20(stringNumber: displayNumber, input: sender.titleLabel?.text) {
+            return
+        }
+        
         if isStartZero(stringNumber: displayNumber) == true {
             displayNumber = sender.titleLabel?.text ?? ""
-            updateDisplayNumberLabel()
         } else {
             displayNumber += sender.titleLabel?.text ?? ""
-            updateDisplayNumberLabel()
         }
+        
+        updateDisplayNumberLabel()
     }
 }
 
