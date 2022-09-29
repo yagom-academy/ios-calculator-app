@@ -3,9 +3,9 @@
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     case unknown = " "
     
     func calculate(lhs: Double, rhs: Double) -> Double {
