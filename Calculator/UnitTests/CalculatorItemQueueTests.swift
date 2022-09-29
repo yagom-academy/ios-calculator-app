@@ -33,6 +33,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue실행시_queue가_비어있을_때_nil을_리턴하는지() {
+        // given
+        
         // when
         let result = sut?.dequeue()
         
